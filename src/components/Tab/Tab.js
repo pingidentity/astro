@@ -7,6 +7,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useTab } from '@react-aria/tabs';
 import { useFocusRing } from '@react-aria/focus';
+import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { Item as Tab } from '@react-stately/collections';
 
@@ -42,11 +43,13 @@ export const CollectionTab = forwardRef((props, ref) => {
   const state = useContext(TabsContext);
   const isSelected = state.selectedKey === key;
   const { isFocusVisible, focusProps } = useFocusRing();
+  const { hoverProps, isHovered } = useHover({});
   const { classNames } = useStatusClasses(className, {
     'is-focused': isFocusVisible,
     'is-vertical': orientation === ORIENTATION.VERTICAL,
     'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
     isDisabled,
+    isHovered,
     isSelected,
   });
 
@@ -59,7 +62,7 @@ export const CollectionTab = forwardRef((props, ref) => {
     <Box
       className={classNames}
       variant="tab"
-      {...mergeProps(focusProps, tabProps)}
+      {...mergeProps(focusProps, hoverProps, tabProps)}
       {...otherItemProps}
       ref={tabRef}
     >

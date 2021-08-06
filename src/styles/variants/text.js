@@ -17,7 +17,7 @@ const tabLabel = {
   fontWeight: 1,
   mb: 8,
   color: 'neutral.40',
-  '.is-selected &': {
+  '.is-selected &, .is-hovered &': {
     color: 'active',
   },
   '.is-disabled &': {
