@@ -26,6 +26,7 @@ const RadioGroupField = forwardRef((props, ref) => {
     helperText,
     isDisabled,
     isRequired,
+    hintText,
     label,
     orientation,
     status,
@@ -42,7 +43,7 @@ const RadioGroupField = forwardRef((props, ref) => {
       className={classNames}
       {...radioGroupProps}
     >
-      <Label isDisabled={isDisabled} isRequired={isRequired} {...labelProps}>
+      <Label isDisabled={isDisabled} hintText={hintText} isRequired={isRequired} {...labelProps}>
         {label}
       </Label>
       {
@@ -72,6 +73,8 @@ RadioGroupField.propTypes = {
   defaultValue: PropTypes.string,
   /** Text to display after the radio group label. Useful for errors or other info. */
   helperText: PropTypes.node,
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText: PropTypes.string,
   /** Determines the arrangement of the radios. */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   /** Determines the helper text styling. */

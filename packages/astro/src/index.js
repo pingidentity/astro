@@ -43,6 +43,9 @@ export * from './components/DropdownField';
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 
+export { default as HelpHint } from './components/HelpHint';
+export * from './components/HelpHint';
+
 export { default as Icon } from './components/Icon';
 export * from './components/Icon';
 
