@@ -31,6 +31,7 @@ const useField = (props = {}) => {
     hasAutoFocus,
     hasNoStatusIndicator,
     helperText,
+    hintText,
     id,
     isDefaultSelected,
     isDisabled,
@@ -149,6 +150,7 @@ const useField = (props = {}) => {
   const fieldLabelProps = {
     children: label,
     className: classNames,
+    hintText,
     isRequired,
     mode: labelMode,
     ...raLabelProps,

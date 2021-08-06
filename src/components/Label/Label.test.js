@@ -43,3 +43,10 @@ test('label with an input', () => {
   const label = screen.getByLabelText(labelText);
   expect(label).toBeInTheDocument();
 });
+
+test('label with helpHint', () => {
+  const hintText = 'Hint Text';
+  getComponent({ hintText });
+  const button = screen.getByRole('button');
+  expect(button).toBeInTheDocument();
+});

@@ -174,6 +174,35 @@ const inverted = {
   },
 };
 
+const helpHint = {
+  ...iconButton,
+  bg: 'neutral.90',
+  borderColor: 'active',
+  mt: 'auto',
+  mb: 'auto',
+  ml: '5px',
+  'path': {
+    fill: 'neutral.20',
+  },
+  '&.is-hovered': {
+    bg: 'accent.20',
+    borderColor: 'accent.20',
+    'path': {
+      fill: 'white',
+    },
+    color: 'white',
+    boxShadow: 'standard',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-pressed': {
+    bg: 'accent.20',
+    borderColor: 'accent.20',
+    color: 'white',
+  },
+};
+
 const inline = {
   ...base,
   bg: 'white',
@@ -294,4 +323,5 @@ export default {
   rocker,
   success,
   text,
+  helpHint,
 };

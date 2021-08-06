@@ -30,6 +30,11 @@ export default {
         type: 'text',
       },
     },
+    hintText: {
+      control: {
+        type: 'text',
+      },
+    },
     rows: {},
     status: {
       control: {

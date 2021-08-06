@@ -60,6 +60,8 @@ TextAreaField.propTypes = {
   label: PropTypes.node,
   /** Text rendered below the textarea. */
   helperText: PropTypes.node,
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText: PropTypes.string,
   /** The unique identifier for the textarea element. */
   id: PropTypes.string,
   /** A string designating whether or not the label is a float label. */

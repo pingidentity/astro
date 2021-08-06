@@ -91,6 +91,8 @@ DropdownField.propTypes = {
   hasNoStatusIndicator: PropTypes.bool,
   /** Text to display after the radio group label. Useful for errors or other info. */
   helperText: PropTypes.node,
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText: PropTypes.string,
   /** Determines the helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
   /** Handler that is called when the element receives focus. */
