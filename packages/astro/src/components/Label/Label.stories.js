@@ -25,3 +25,7 @@ export const Default = args => (
 export const Float = () => (
   <Label mode="float">This is a float label</Label>
 );
+
+export const WithHelpHint = args => (
+  <Label hintText="Example Hint" {...args}>This is a label</Label>
+);

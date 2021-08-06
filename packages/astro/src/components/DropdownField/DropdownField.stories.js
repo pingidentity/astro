@@ -13,6 +13,11 @@ export default {
         type: 'text',
       },
     },
+    hintText: {
+      control: {
+        type: 'text',
+      },
+    },
     firstLabel: {},
     noneLabel: {},
     status: {

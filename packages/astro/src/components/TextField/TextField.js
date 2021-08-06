@@ -68,6 +68,8 @@ TextField.propTypes = {
   defaultValue: PropTypes.string,
   /** Whether the input element is automatically focused when loaded onto the page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautofocus). */
   hasAutoFocus: PropTypes.bool,
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText: PropTypes.string,
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator: PropTypes.bool,
   /** Whether the field is disabled. */

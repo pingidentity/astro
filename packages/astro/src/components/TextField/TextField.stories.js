@@ -139,6 +139,15 @@ export const Warning = () => (
   />
 );
 
+export const WithHelpHint = () => (
+  <TextField
+    id="custom-id"
+    name="custom-name"
+    hintText="Example Hint"
+    label="Example Label"
+  />
+);
+
 export const WithoutStatusIndicator = () => (
   <TextField
     label="Example Label"

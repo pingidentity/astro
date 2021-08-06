@@ -19,6 +19,11 @@ export default {
         type: 'text',
       },
     },
+    hintText: {
+      control: {
+        type: 'text',
+      },
+    },
     status: {
       control: {
         type: 'select',

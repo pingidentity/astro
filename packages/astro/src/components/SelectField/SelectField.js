@@ -267,6 +267,8 @@ SelectField.propTypes = {
   hasNoStatusIndicator: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText: PropTypes.string,
   /** Sets the default open state of the menu. */
   isDefaultOpen: PropTypes.bool,
   /** Whether the input is disabled. */

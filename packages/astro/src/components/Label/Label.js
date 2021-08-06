@@ -6,6 +6,7 @@ import { Label as ThemeUILabel } from 'theme-ui';
 import { useStatusClasses } from '../../hooks';
 import { modes } from './constants';
 import Box from '../Box';
+import HelpHint from '../HelpHint';
 
 const ExtendedLabel = styled(ThemeUILabel)(layout, flexbox);
 
@@ -33,6 +34,7 @@ const Label = forwardRef((props, ref) => {
     isRequired,
     mode,
     requiredIndicator,
+    hintText,
     ...others
   } = props;
   const { classNames } = useStatusClasses(className, {
@@ -54,6 +56,10 @@ const Label = forwardRef((props, ref) => {
         isRequired
         && requiredIndicator
       }
+      {
+        hintText
+        && <HelpHint>{hintText}</HelpHint>
+      }
     </ExtendedLabel>
   );
 });
@@ -67,6 +73,8 @@ Label.propTypes = {
   mode: PropTypes.oneOf(Object.values(modes)),
   /** The visual component used to mark an input as required within the label. */
   requiredIndicator: PropTypes.node,
+  /** If present this prop will cause a help hint to render in the label. */
+  hintText: PropTypes.string,
 };
 
 Label.defaultProps = {
