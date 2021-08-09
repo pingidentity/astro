@@ -78,6 +78,9 @@ export { default as Menu } from './components/Menu';
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
 
+export { default as OverlayPanel } from './components/OverlayPanel';
+export * from './components/OverlayPanel';
+
 export { default as PageHeader } from './components/PageHeader';
 export * from './components/PageHeader';
 
