@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.19.2...@pingux/flow-diagram@0.20.0) (2021-08-09)
+
+
+### Features
+
+* [UIP-4670] Outlet node border color ([faa5a34](https://gitlab.corp.pingidentity.com/ux/pingux/commit/faa5a341050b6d0af011a98758fce833fd02574c))
+
+
+
+
+
 ## [0.19.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.19.1...@pingux/flow-diagram@0.19.2) (2021-07-28)
 
 **Note:** Version bump only for package @pingux/flow-diagram

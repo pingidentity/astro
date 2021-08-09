@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.16.2...@pingux/schema-form@1.17.0) (2021-08-09)
+
+
+### Features
+
+* [UIP-4569] Replace Rebass.js package with Theme UI ([18017c8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/18017c8bab8f856a1c8c1b289cee538a723b5062))
+
+
+
+
+
 ## [1.16.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.16.1...@pingux/schema-form@1.16.2) (2021-07-20)
 
 **Note:** Version bump only for package @pingux/schema-form
