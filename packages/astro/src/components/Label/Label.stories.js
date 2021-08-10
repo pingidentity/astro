@@ -15,6 +15,9 @@ export default {
     },
     isDisabled: {},
     isRequired: {},
+    requiredIndicator: {
+      control: 'none',
+    },
   },
 };
 
