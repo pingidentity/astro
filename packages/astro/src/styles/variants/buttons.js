@@ -294,6 +294,17 @@ const danger = {
   },
 };
 
+const imageUpload = {
+  ...base,
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 0,
+  backgroundColor: 'accent.99',
+  border: '2px solid',
+  borderColor: 'neutral.95',
+};
+
 export default {
   accordionHeader,
   comboBox,
@@ -316,6 +327,7 @@ export default {
   },
   iconButton,
   icon,
+  imageUpload,
   inline,
   inverted,
   primary,

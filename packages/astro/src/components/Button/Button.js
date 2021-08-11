@@ -16,6 +16,9 @@ const Button = forwardRef((props, ref) => {
     className,
     isDisabled,
     isLoading,
+    onHoverStart,
+    onHoverChange,
+    onHoverEnd,
     onPress,
     onPressStart,
     onPressEnd,
@@ -71,6 +74,21 @@ Button.propTypes = {
   isDisabled: PropTypes.bool,
   /** Shows loader instead of children */
   isLoading: PropTypes.bool,
+  /**
+   * Handler that is called when a hover interaction starts.
+   * (e: HoverEvent) => void
+   */
+  onHoverStart: PropTypes.func,
+  /**
+   * Handler that is called when a hover interaction ends.
+   * (e: HoverEvent) => void
+   */
+  onHoverEnd: PropTypes.func,
+  /**
+   * Handler that is called when the hover state changes.
+   * (isHovering: boolean) => void
+   */
+  onHoverChange: PropTypes.func,
   /**
    * Handler that is called when the press is released over the target.
    * (e: PressEvent) => void
