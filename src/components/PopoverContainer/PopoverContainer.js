@@ -20,7 +20,7 @@ const PopoverContainer = forwardRef((props, ref) => {
     hasNoArrow,
     isKeyboardDismissDisabled,
     isNonModal,
-    isDismissable = true,
+    isDismissable,
     ...others
   } = props;
 
