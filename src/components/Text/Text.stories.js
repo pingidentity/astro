@@ -38,7 +38,7 @@ export default {
         },
       },
       description: 'Text color.',
-      defaultValue: 'black',
+      defaultValue: undefined,
     },
     bg: {
       control: {
