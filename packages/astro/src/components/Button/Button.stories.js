@@ -21,7 +21,7 @@ export default {
         type: 'select',
         options: Object.values(variants),
       },
-      defaultValue: Object.values(variants)[0],
+      defaultValue: Object.values(variants).find(value => value === 'default'),
     },
     children: {
       description: 'Button text.',
