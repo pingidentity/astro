@@ -7,6 +7,7 @@ import listBox from './listBox';
 import modal from './modal';
 import menu from './menu';
 import menuItem from './menuItem';
+import messages from './messages';
 import popover from './popover';
 import overlayPanel from './overlayPanel';
 import popoverMenu from './popoverMenu';
@@ -28,6 +29,7 @@ export default {
   listBox,
   menu,
   menuItem,
+  messages,
   modal,
   popover,
   popoverMenu,
