@@ -51,11 +51,11 @@ const iconButton = {
   width: 'inherit',
   height: 'inherit',
   path: {
-    fill: 'active',
+    fill: 'neutral.20',
   },
   outline: 'none',
   '&.is-hovered': {
-    bg: 'accent.90',
+    bg: 'accent.95',
   },
   '&.is-pressed': {
     'path': {
