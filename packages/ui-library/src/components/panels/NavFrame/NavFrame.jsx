@@ -175,7 +175,8 @@ export default function NavFrame({
     isFullscreen,
     navTree,
     onSelectItem,
-    selectedNode
+    selectedNode,
+    navHomeButtonProps,
 }) {
     // Memoize because this is an expensive operation that really only needs to run if the navTree changes. JSON.stringify
     // suggested by Dan Abramov - https://github.com/facebook/react/issues/14476
@@ -214,6 +215,7 @@ export default function NavFrame({
                 }}
                 right={headerRight}
                 selectedHeader={selectedHeader}
+                navHomeButtonProps={navHomeButtonProps}
             />
             <div className="nav-frame__bottom">
                 {!isFullscreen &&

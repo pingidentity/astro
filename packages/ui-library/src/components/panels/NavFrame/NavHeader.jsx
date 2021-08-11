@@ -8,6 +8,7 @@ import HeaderNav from "../header-bar/HeaderNav";
 import Icon, { iconTypes } from "../../general/Icon";
 import Link from "../../general/Link";
 import PopoverNavMenu from "../../tooltips/PopoverNavMenu";
+import NavHomeButton from "./NavHomeButton";
 
 export { default as EnvironmentSelector } from "../header-bar/EnvironmentSelector";
 export { default as MarketSelector } from "../header-bar/MarketSelector";
@@ -99,7 +100,8 @@ export default function NavHeader({
     left,
     navTree,
     onSelectItem,
-    right
+    right,
+    navHomeButtonProps
 }) {
     return (
         <FlexRow
@@ -108,6 +110,12 @@ export default function NavHeader({
             justify={justifyOptions.SPACEBETWEEN}
         >
             <FlexRow alignment={alignments.CENTER}>
+                <NavHomeButton
+                    anchorStyleProps={{
+                        marginRight: "15px"
+                    }}
+                    {...navHomeButtonProps}
+                />
                 {left}
             </FlexRow>
             <HeaderNav

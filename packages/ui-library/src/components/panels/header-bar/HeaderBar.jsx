@@ -10,6 +10,7 @@ import FlexRow, { alignments, spacingOptions } from "../../layout/FlexRow";
 import MarketSelector from "./MarketSelector";
 import Logo from "./logos/Logo";
 import { getIconClassName } from "../../../util/PropUtils";
+import NavHomeButton from "../NavFrame/NavHomeButton";
 
 /**
  *  @typedef {function} HeaderBar~MenuRenderer
@@ -523,7 +524,13 @@ class HeaderBar extends React.Component {
                             data-id="header-logo"
                         />
                     )}
-
+                    {
+                        this.props.homeButtonProps
+                            ? <NavHomeButton
+                                {...this.props.homeButtonProps}
+                            />
+                            : null
+                    }
                     <FlexRow
                         alignment={alignments.BOTTOM}
                         spacing={spacingOptions.SM}
