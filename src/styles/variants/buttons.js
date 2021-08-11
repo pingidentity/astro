@@ -65,6 +65,63 @@ const iconButton = {
   },
 };
 
+const close = {
+  ...iconButton,
+  p: 0,
+  ml: 'auto',
+  outline: 'none',
+  path: {
+    fill: 'neutral.10',
+  },
+  '&.is-hovered': {
+    bg: 'white',
+    boxShadow: 'standard',
+  },
+  '&.is-pressed': {
+    boxShadow: 'standard',
+    bg: 'neutral.10',
+    path: {
+      fill: 'white',
+    },
+  },
+  '&.is-success': {
+    path: {
+      fill: 'success.dark',
+    },
+    '&.is-pressed': {
+      boxShadow: 'standard',
+      bg: 'success.dark',
+      path: {
+        fill: 'white',
+      },
+    },
+  },
+  '&.is-warning': {
+    path: {
+      fill: 'warning.dark',
+    },
+    '&.is-pressed': {
+      boxShadow: 'standard',
+      bg: 'warning.dark',
+      path: {
+        fill: 'white',
+      },
+    },
+  },
+  '&.is-error': {
+    path: {
+      fill: 'critical.dark',
+    },
+    '&.is-pressed': {
+      boxShadow: 'standard',
+      bg: 'critical.dark',
+      path: {
+        fill: 'white',
+      },
+    },
+  },
+};
+
 const accordionHeader = {
   ...base,
   bg: 'white',
@@ -307,6 +364,7 @@ const imageUpload = {
 
 export default {
   accordionHeader,
+  close,
   comboBox,
   critical,
   danger,
