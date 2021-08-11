@@ -83,6 +83,7 @@ const PopoverMenu = forwardRef((props, ref) => {
           placement={placement}
           onClose={state.close}
           hasNoArrow={hasNoArrow}
+          isDismissable
           {...positionProps}
           {...menuProps}
         >

@@ -193,7 +193,6 @@ const ComboBoxField = forwardRef((props, ref) => {
         hasNoArrow
         style={style}
         isNonModal
-        isDismissable={false}
       >
         {listbox}
       </PopoverContainer>
