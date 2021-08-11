@@ -1,6 +1,7 @@
 import React from 'react';
 import { Earth } from '@pingux/icons';
 import { Button, Icon, Tooltip, TooltipTrigger } from '../../index';
+import IconButton from '../IconButton';
 
 export default {
   title: 'TooltipTrigger',
@@ -43,13 +44,20 @@ export const isOpen = () => (
   </TooltipTrigger>
 );
 
-export const WithIcon = () => (
-  <TooltipTrigger delay={0}>
-    <Button variant="icon" ml="100px">
+export const Disabled = () => (
+  <TooltipTrigger delay={0} isDisabled>
+    <IconButton>
       <Icon icon={Earth} />
-    </Button>
+    </IconButton>
     <Tooltip>
       Hello World
     </Tooltip>
   </TooltipTrigger>
 );
+Disabled.parameters = {
+  docs: {
+    description: {
+      story: 'The tooltip can be disabled without disabling the button press events.',
+    },
+  },
+};

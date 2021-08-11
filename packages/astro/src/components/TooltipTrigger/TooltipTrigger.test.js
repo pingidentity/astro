@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import theme from '../../styles/theme';
 import {
   Button,
@@ -9,12 +9,10 @@ import {
 } from '../../index';
 
 const getComponent = (props = {}) => render((
-  <>
-    <TooltipTrigger {...props}>
-      <Button>Mock Button</Button>
-      <Tooltip>Tooltip Content</Tooltip>
-    </TooltipTrigger>
-  </>
+  <TooltipTrigger {...props}>
+    <Button {...props.buttonProps}>Mock Button</Button>
+    <Tooltip>Tooltip Content</Tooltip>
+  </TooltipTrigger>
 ));
 
 test('tooltip doesnt show by default and is rendered when trigger is hovered', () => {
@@ -27,7 +25,7 @@ test('tooltip doesnt show by default and is rendered when trigger is hovered', (
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
-test('renders a tooltip when trigger is focused with keyboard', async () => {
+test('renders a tooltip when trigger is focused with keyboard', () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
@@ -39,8 +37,40 @@ test('renders a tooltip when trigger is focused with keyboard', async () => {
   expect(button).toHaveFocus();
 });
 
-test('renders tooltip by default with isOpen prop', async () => {
+test('renders tooltip by default with isOpen prop', () => {
   getComponent({ isOpen: true });
   const tooltip = screen.getByRole('tooltip');
   expect(tooltip).toBeInTheDocument();
+});
+
+test('trigger press events work when a tooltip is displayed', () => {
+  const onPress = jest.fn();
+  getComponent({ buttonProps: { onPress } });
+  const button = screen.getByRole('button');
+
+  expect(onPress).not.toHaveBeenCalled();
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+
+  userEvent.click(button);
+  expect(onPress).toHaveBeenCalledTimes(1);
+  // Tooltip is dismissed when a click event happens
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+});
+
+test('trigger press events work when a tooltip is disabled', () => {
+  const onPress = jest.fn();
+  getComponent({ isDisabled: true, buttonProps: { onPress } });
+  const button = screen.getByRole('button');
+
+  expect(onPress).not.toHaveBeenCalled();
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+  userEvent.click(button);
+  expect(onPress).toHaveBeenCalledTimes(1);
 });
