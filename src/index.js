@@ -55,6 +55,9 @@ export * from './components/IconButton';
 export { default as Image } from './components/Image';
 export * from './components/Image';
 
+export { default as ImageUploadField } from './components/ImageUploadField';
+export * from './components/ImageUploadField';
+
 export { default as Input } from './components/Input';
 export * from './components/Input';
 
