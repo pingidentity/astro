@@ -54,7 +54,7 @@ const Label = forwardRef((props, ref) => {
       {children}
       {
         isRequired
-        && requiredIndicator
+        && (requiredIndicator || defaultIndicator)
       }
       {
         hintText
@@ -79,7 +79,6 @@ Label.propTypes = {
 
 Label.defaultProps = {
   mode: modes.DEFAULT,
-  requiredIndicator: defaultIndicator,
 };
 
 Label.displayName = 'Label';
