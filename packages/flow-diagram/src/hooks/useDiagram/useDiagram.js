@@ -295,7 +295,7 @@ export default function useDiagram({
             ),
         );
 
-        const curveSize = 160;
+        const curveSize = 60;
         diagramObject.linkTemplateMap.add('io',
             $(go.Link, go.Link.Bezier,
                 {
