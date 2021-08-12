@@ -109,6 +109,7 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
                 width: 20,
                 height: 20,
                 mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
+                mouseLeave: (e, node) => node.part.removeAdornment('mouseHover'),
             }),
         ),
         $(go.Panel, 'Position', { position: new go.Point(0, 0) },
