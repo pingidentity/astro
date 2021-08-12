@@ -30,7 +30,7 @@ test('default password field', () => {
 
 test('renders view icon', async () => {
   getComponent();
-  const viewIcon = await screen.findByTestId(defaultProps.viewIconTestId);
+  const viewIcon = await screen.findByTestId(defaultProps.viewHiddenIconTestId);
   expect(viewIcon).toBeInTheDocument();
 });
 
@@ -39,12 +39,12 @@ test('renders view-hidden icon', async () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
 
-  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewHiddenIconTestId);
+  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewIconTestId);
   expect(viewHiddenIcon).toBeInTheDocument();
 
   userEvent.click(button);
 
-  const viewIcon = await screen.findByTestId(defaultProps.viewIconTestId);
+  const viewIcon = await screen.findByTestId(defaultProps.viewHiddenIconTestId);
   expect(viewIcon).toBeInTheDocument();
 });
 
@@ -53,7 +53,7 @@ test('renders view icon', async () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
 
-  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewHiddenIconTestId);
+  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewIconTestId);
   expect(viewHiddenIcon).toBeInTheDocument();
 });
 
@@ -73,4 +73,19 @@ test('clicking icon changes input type', () => {
   getComponent({ isVisible: true });
   const input = screen.getByLabelText(testLabel);
   expect(input.type).toBe('text');
+});
+
+test('clicking the icon calls the callback, if provided', () => {
+  const onPress = jest.fn();
+  getComponent({ onVisibleChange: onPress });
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(onPress).toHaveBeenCalled();
+});
+
+test('renders view hidden icon if state prop is provided', async () => {
+  getComponent({ isVisible: true });
+
+  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewIconTestId);
+  expect(viewHiddenIcon).toBeInTheDocument();
 });
