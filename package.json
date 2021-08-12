@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
@@ -81,8 +81,8 @@
     "@react-aria/interactions": "^3.5.0",
     "@react-aria/label": "^3.1.0",
     "@react-aria/link": "^3.1.1",
-    "@react-aria/live-announcer": "^3.0.0",
     "@react-aria/listbox": "^3.3.0",
+    "@react-aria/live-announcer": "^3.0.0",
     "@react-aria/menu": "^3.1.4",
     "@react-aria/overlays": "^3.7.0",
     "@react-aria/progress": "^3.1.1",

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.20.0...@pingux/astro@0.21.0) (2021-08-12)
+
+
+### Bug Fixes
+
+* [UIP-4672] Press events not firing for tooltip trigger buttons ([aba1b95](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aba1b958c0dd316789f98f6a2f936fd8439d7230))
+* [UIP-4684] Fix password field ([bcb78ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bcb78ae38cc868d7044b5df2b1fddb86c82d3b1a))
+
+
+### Features
+
+* [UIP-4264] Astro Message ([4d1f711](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d1f711727c07e3ab8b235d6c5465a61fd147c0c))
+* [UIP-4467] Image upload component ([873a2e5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/873a2e54f0bc484ff4c70dc5442603e65f2a86fa))
+* [UIP-4481] add color input component ([5687a1e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5687a1ed990fda0e40baa64639569d22d1e326ed))
+
+
+
+
+
 # [0.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.19.1...@pingux/astro@0.20.0) (2021-08-09)
 
 
