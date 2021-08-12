@@ -22,12 +22,13 @@ const PasswordField = forwardRef((props, ref) => {
     onVisibleChange: onVisibleChangeProp,
     viewHiddenIconTestId,
     viewIconTestId,
+    ...others
   } = props;
   const {
     fieldContainerProps,
     fieldControlProps,
     fieldLabelProps,
-  } = useField(props);
+  } = useField(others);
 
   const inputRef = useRef();
   /* istanbul ignore next */
@@ -39,7 +40,7 @@ const PasswordField = forwardRef((props, ref) => {
   const onVisibleChange = (...args) => {
     setIsShown(!isVisible);
     if (onVisibleChangeProp) {
-      onVisibleChange(!isVisible, ...args);
+      onVisibleChangeProp(!isVisible, ...args);
     }
   };
 
@@ -51,7 +52,7 @@ const PasswordField = forwardRef((props, ref) => {
         <Box variant="forms.input.containedIcon">
           <IconButton isDisabled={fieldControlProps.disabled} size={28} onPress={onVisibleChange} >
             <Icon
-              data-testid={isVisible ? viewHiddenIconTestId : viewIconTestId}
+              data-testid={isVisible ? viewIconTestId : viewHiddenIconTestId}
               icon={isVisible ? EyeIcon : EyeOffIcon}
             />
           </IconButton>
