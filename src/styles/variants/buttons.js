@@ -1,4 +1,5 @@
 import { text as textVariants } from './text';
+import { neutral } from '../colors';
 
 const base = {
   cursor: 'pointer',
@@ -351,6 +352,13 @@ const danger = {
   },
 };
 
+const colorField = {
+  border: `1px solid ${neutral['80']}`,
+  '&:focus-visible': {
+    outline: 'none',
+  },
+};
+
 const imageUpload = {
   ...base,
   display: 'inline-flex',
@@ -365,6 +373,7 @@ const imageUpload = {
 export default {
   accordionHeader,
   close,
+  colorField,
   comboBox,
   critical,
   danger,
