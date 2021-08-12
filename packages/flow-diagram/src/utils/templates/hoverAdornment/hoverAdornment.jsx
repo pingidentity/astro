@@ -3,11 +3,6 @@ import { COLORS } from '../../constants';
 
 const $ = go.GraphObject.make;
 
-export const adornmentMouseLeave = (e, obj) => {
-    const ad = obj.part;
-    ad.adornedPart.removeAdornment('mouseHover');
-};
-
 export const selectFromAdornment = (e, obj) => {
     const node = obj.part;
     node.diagram.select(node);
@@ -27,7 +22,6 @@ export const getNodeHoverAdornment = () => {
         {
             height: 38,
             background: 'transparent',
-            mouseLeave: adornmentMouseLeave,
             click: selectFromAdornment,
         },
         $(go.Placeholder,

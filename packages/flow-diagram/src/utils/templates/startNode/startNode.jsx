@@ -76,6 +76,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
                 $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20, margin: new go.Margin(0, 0, 0, 0) }),
                 {
                     mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
+                    mouseLeave: (e, node) => node.part.removeAdornment('mouseHover'),
                 },
             ),
             new go.Binding('location', 'loc', go.Point.parse),

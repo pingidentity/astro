@@ -1,6 +1,5 @@
 
 import {
-    adornmentMouseLeave,
     selectFromAdornment,
     getAdornmentOnHover,
 } from './hoverAdornment';
@@ -17,22 +16,6 @@ jest.mock('gojs', () => {
 });
 
 describe('Hover Adornment', () => {
-    test('adornmentMouseLeave called with correct arguments', () => {
-        const removeAdornment = jest.fn();
-        const e = {
-            anything: 'anything',
-        };
-        const obj = {
-            part: {
-                adornedPart: {
-                    removeAdornment,
-                },
-            },
-        };
-        adornmentMouseLeave(e, obj);
-        expect(removeAdornment).toHaveBeenCalledWith('mouseHover');
-    });
-
     test('selectFromAdornment called with correct arguments', () => {
         const select = jest.fn();
         const e = {

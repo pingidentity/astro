@@ -42,6 +42,7 @@ export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height} = {})
             $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20, margin: new go.Margin(0, 0, 0, 6) }),
             {
                 mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
+                mouseLeave: (e, node) => node.part.removeAdornment('mouseHover'),
             },
         ),
         new go.Binding('location', 'loc', go.Point.parse),
