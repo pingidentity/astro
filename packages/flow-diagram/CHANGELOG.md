@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.20.0...@pingux/flow-diagram@0.20.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* [UIP-4646] Persistent error message ([e25c96f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e25c96f008bfb46d9b1f7710378cb5d32b4e5c91))
+
+
+
+
+
 # [0.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.19.2...@pingux/flow-diagram@0.20.0) (2021-08-09)
 
 
