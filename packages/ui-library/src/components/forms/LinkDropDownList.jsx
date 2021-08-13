@@ -250,6 +250,7 @@ class LinkDropDownListOption extends React.Component {
                 data-value={this.props.option.value}
                 className={classnames(classNames)}
                 onClick={this._handleClick}
+                tabIndex="0"
             >
                 {this.props.option.label}
             </li>

@@ -13,6 +13,7 @@ describe("LinkDropDownList", function () {
     var React = require("react"),
         ReactTestUtils = require("react-dom/test-utils"),
         TestUtils = require("../../../testutil/TestUtils"),
+        KeyBoardUtils = require("../../../util/KeyboardUtils.js"),
         LinkDropDownList = require("../LinkDropDownList");
 
     var componentId = "link-dropdown-list",
@@ -109,6 +110,17 @@ describe("LinkDropDownList", function () {
         var component = getComponent();
 
         ReactTestUtils.Simulate.click(getLabel(component));
+        expect(component.props.children.props.onToggle).toBeCalled();
+    });
+
+    it("Opens list on space when focused", function () {
+        const component = getComponent();
+        const button = TestUtils.findRenderedDOMNodeWithDataId(component, "action-btn");
+        button.focus();
+        expect(document.activeElement).toEqual(button);
+
+        ReactTestUtils.Simulate.keyDown(button, { keyCode: KeyBoardUtils.KeyCodes.SPACE });
+
         expect(component.props.children.props.onToggle).toBeCalled();
     });
 
