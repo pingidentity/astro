@@ -4,8 +4,8 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import ListItem from './ListItem';
 import Box from '../Box';
 import Icon from '../Icon';
+import IconButton from '../IconButton';
 import Text from '../Text';
-import Button from '../Button';
 import Separator from '../Separator';
 
 export default {
@@ -28,9 +28,9 @@ export const Default = args => (
         <Text variant="itemTitle" alignSelf="center">Fons Vernall</Text>
       </Box>
       <Box isRow alignSelf="center">
-        <Button variant="icon">
+        <IconButton variant="icon" size={26}>
           <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
-        </Button>
+        </IconButton>
       </Box>
     </ListItem>
     <Separator margin={0} />
@@ -55,9 +55,9 @@ export const WithSubtitle = args => (
         </Box>
       </Box>
       <Box isRow alignSelf="center">
-        <Button variant="icon">
+        <IconButton variant="icon" size={26}>
           <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
-        </Button>
+        </IconButton>
       </Box>
     </ListItem>
     <Separator margin={0} />
