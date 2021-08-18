@@ -56,7 +56,7 @@ export const CollectionTab = forwardRef((props, ref) => {
   const tabRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabRef.current);
-  const { tabProps } = useTab({ item, isDisabled }, state, tabRef);
+  const { tabProps } = useTab({ key, isDisabled }, state, tabRef);
 
   const tab = (
     <Box
