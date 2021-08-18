@@ -4594,7 +4594,7 @@
     "@react-stately/toggle" "^3.2.1"
     "@react-types/switch" "^3.1.1"
 
-"@react-aria/tabs@3.0.0-alpha.1", "@react-aria/tabs@^3.0.0-alpha.1":
+"@react-aria/tabs@^3.0.0-alpha.1":
   version "3.0.0-alpha.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/tabs/-/tabs-3.0.0-alpha.1.tgz#67bbab2799dec9a4d95ddaafd3e1885125786ba9"
   integrity sha1-Z7urJ5neyaTZXdqv0+GIUSV4a6k=
@@ -4607,6 +4607,22 @@
     "@react-stately/list" "^3.2.1"
     "@react-types/shared" "^3.2.1"
     "@react-types/tabs" "3.0.0-alpha.1"
+
+"@react-aria/tabs@^3.0.1":
+  version "3.0.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/tabs/-/tabs-3.0.1.tgz#b646c10b621706b080f88e51e9eece0ca9751f7c"
+  integrity sha1-tkbBC2IXBrCA+I5R6e7ODKl1H3w=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/focus" "^3.4.1"
+    "@react-aria/i18n" "^3.3.2"
+    "@react-aria/interactions" "^3.5.1"
+    "@react-aria/selection" "^3.5.1"
+    "@react-aria/utils" "^3.8.2"
+    "@react-stately/list" "^3.3.0"
+    "@react-stately/tabs" "^3.0.1"
+    "@react-types/shared" "^3.8.0"
+    "@react-types/tabs" "^3.0.1"
 
 "@react-aria/textfield@^3.2.1":
   version "3.2.2"
@@ -4983,6 +4999,16 @@
     "@react-stately/utils" "^3.2.1"
     "@react-types/slider" "^3.0.1"
 
+"@react-stately/tabs@^3.0.1":
+  version "3.0.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/tabs/-/tabs-3.0.1.tgz#7df000f8c5c14b3bf973348c491e12bcfcafe49d"
+  integrity sha1-ffAA+MXBSzv5czSMSR4SvPyv5J0=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/list" "^3.3.0"
+    "@react-stately/utils" "^3.2.2"
+    "@react-types/tabs" "^3.0.1"
+
 "@react-stately/toggle@^3.2.0", "@react-stately/toggle@^3.2.1", "@react-stately/toggle@^3.2.2":
   version "3.2.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/toggle/-/toggle-3.2.2.tgz#d5ee9494eb23a937dee3399af007d7d058585cb0"
@@ -5065,6 +5091,13 @@
   dependencies:
     "@react-types/shared" "^3.5.0"
     "@react-types/slider" "^3.0.1"
+
+"@react-types/combobox@3.0.0-rc.0":
+  version "3.0.0-rc.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/combobox/-/combobox-3.0.0-rc.0.tgz#418a968be8e605480a656614d33b9ed8d7a99786"
+  integrity sha1-QYqWi+jmBUgKZWYU0zue2Nepl4Y=
+  dependencies:
+    "@react-types/shared" "^3.7.0"
 
 "@react-types/combobox@^3.0.0", "@react-types/combobox@^3.0.1":
   version "3.0.1"
@@ -5243,6 +5276,13 @@
   integrity sha1-KtVOMIl34+fGItLJyrKkCAXgFi8=
   dependencies:
     "@react-types/shared" "^3.2.1"
+
+"@react-types/tabs@^3.0.1":
+  version "3.0.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/tabs/-/tabs-3.0.1.tgz#a32931e95303d4442e51d4c687d4e154654014f6"
+  integrity sha1-oykx6VMD1EQuUdTGh9ThVGVAFPY=
+  dependencies:
+    "@react-types/shared" "^3.8.0"
 
 "@react-types/textfield@^3.2.1", "@react-types/textfield@^3.2.2":
   version "3.2.2"
