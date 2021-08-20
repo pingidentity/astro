@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.41.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.1...ui-library@4.41.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* [UIP-4443] Dropdown list without link gets error by keyboard navigation ([1863a87](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/1863a875b6ff16b4fe328e315bba2221a193fea2))
+
+
+
+
+
 ## [4.41.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.0...ui-library@4.41.1) (2021-07-28)
 
 **Note:** Version bump only for package ui-library

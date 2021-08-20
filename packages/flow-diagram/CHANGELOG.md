@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.20.1...@pingux/flow-diagram@0.20.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* [UIP-4732] Resolve Emotion 11 conflicts ([4d35e21](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d35e21d4261648b4121ed160623c5f719ddf86e))
+
+
+
+
+
 ## [0.20.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.20.0...@pingux/flow-diagram@0.20.1) (2021-08-12)
 
 

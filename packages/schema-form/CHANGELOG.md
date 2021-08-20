@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.17.1...@pingux/schema-form@1.17.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* [UIP-4732] Resolve Emotion 11 conflicts ([4d35e21](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d35e21d4261648b4121ed160623c5f719ddf86e))
+
+
+
+
+
 ## [1.17.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.17.0...@pingux/schema-form@1.17.1) (2021-08-12)
 
 **Note:** Version bump only for package @pingux/schema-form
