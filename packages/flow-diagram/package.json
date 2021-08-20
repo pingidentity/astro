@@ -54,6 +54,7 @@
         "uuid": "^7.0.3"
     },
     "devDependencies": {
+        "@emotion/styled": "11.3.0",
         "@storybook/addon-actions": "^6.1.9",
         "@storybook/addon-docs": "^6.1.9",
         "@storybook/addon-links": "^6.1.9",

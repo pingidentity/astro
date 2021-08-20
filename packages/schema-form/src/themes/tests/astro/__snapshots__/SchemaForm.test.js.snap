@@ -2,17 +2,32 @@
 
 exports[`form elements form success message 1`] = `
 <DocumentFragment>
-  .emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
+  .emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 body {
+  margin: 0;
 }
 
 .emotion-0 main {
@@ -104,15 +119,17 @@ exports[`form elements form success message 1`] = `
   text-transform: none;
 }
 
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
 }
 
 .emotion-0 button:-moz-focusring,
@@ -194,7 +211,7 @@ exports[`form elements form success message 1`] = `
   pointer-events: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -211,7 +228,7 @@ exports[`form elements form success message 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -221,16 +238,16 @@ exports[`form elements form success message 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <div
-        class="emotion-1"
+        class="emotion-2"
       >
         <div
-          class="emotion-4"
+          class="emotion-3"
         >
           test
         </div>
@@ -250,9 +267,25 @@ exports[`form elements form success title 1`] = `
   padding: 0;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 body {
+  margin: 0;
 }
 
 .emotion-0 main {
@@ -351,8 +384,9 @@ exports[`form elements form success title 1`] = `
   -webkit-appearance: button;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
 .emotion-0 button:-moz-focusring,
@@ -434,7 +468,7 @@ exports[`form elements form success title 1`] = `
   pointer-events: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -451,7 +485,7 @@ exports[`form elements form success title 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -472,7 +506,7 @@ exports[`form elements form success title 1`] = `
   justify-content: space-between;
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -487,21 +521,21 @@ exports[`form elements form success title 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <div
-        class="emotion-1"
+        class="emotion-2"
       >
         <div
           aria-level="1"
-          class="emotion-4"
+          class="emotion-3"
           role="heading"
         >
           <div
-            class="emotion-5"
+            class="emotion-4"
           >
             hi
           </div>
@@ -514,14 +548,29 @@ exports[`form elements form success title 1`] = `
 
 exports[`single fields checkbox field 1`] = `
 <DocumentFragment>
-  .emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
+  .emotion-0 [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 body {
+  margin: 0;
 }
 
 .emotion-0 main {
@@ -672,12 +721,14 @@ exports[`single fields checkbox field 1`] = `
   outline-offset: -2px;
 }
 
-.emotion-0 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
 }
 
 .emotion-0 details {
@@ -706,7 +757,7 @@ exports[`single fields checkbox field 1`] = `
   pointer-events: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -723,7 +774,7 @@ exports[`single fields checkbox field 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -741,7 +792,7 @@ exports[`single fields checkbox field 1`] = `
   flex-direction: column;
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -764,13 +815,13 @@ exports[`single fields checkbox field 1`] = `
   display: flex;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -784,12 +835,56 @@ exports[`single fields checkbox field 1`] = `
   overflow: hidden;
 }
 
-input:checked~.emotion-8 {
+input:checked~.emotion-7 {
+  display: block;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: none;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  margin-right: 2px;
+  border-radius: 4px;
+  color: gray;
+  color: #4462ED;
+  margin-right: 10px;
+}
+
+input:checked~.emotion-7 {
   color: primary;
 }
 
+input:focus~.emotion-7 {
+  color: primary;
+  background-color: highlight;
+}
+
+input:focus~.emotion-7 {
+  background-color: transparent;
+}
+
+input~.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
 input:checked~.emotion-8 {
-  display: block;
+  display: none;
+}
+
+input:focus~.emotion-8 {
+  color: primary;
+  background-color: highlight;
+}
+
+input:checked~.emotion-8 {
+  color: primary;
 }
 
 input~.emotion-8.is-focused {
@@ -801,29 +896,7 @@ input:focus~.emotion-8 {
   background-color: transparent;
 }
 
-input:focus~.emotion-8 {
-  color: primary;
-  background-color: highlight;
-}
-
 .emotion-8 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: none;
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  margin-right: 2px;
-  border-radius: 4px;
-  color: gray;
-  color: #4462ED;
-  margin-right: 10px;
-}
-
-.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -840,34 +913,7 @@ input:focus~.emotion-8 {
   margin-right: 10px;
 }
 
-input~.emotion-9.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
-}
-
-input:focus~.emotion-9 {
-  background-color: transparent;
-}
-
-input:focus~.emotion-9 {
-  color: primary;
-  background-color: highlight;
-}
-
-input:checked~.emotion-9 {
-  color: primary;
-}
-
-input:checked~.emotion-9 {
-  display: none;
-}
-
-.emotion-10.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
-}
-
-.emotion-10.is-hovered {
+.emotion-9.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -875,18 +921,23 @@ input:checked~.emotion-9 {
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-10.is-pressed {
+.emotion-9.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-9.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-9.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-10.is-pressed path {
-  fill: #fff;
-}
-
-.emotion-10 {
+.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -939,10 +990,10 @@ input:checked~.emotion-9 {
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -950,26 +1001,26 @@ input:checked~.emotion-9 {
         novalidate=""
       >
         <div
-          class="emotion-1"
+          class="emotion-2"
         >
           <div
-            class="field-container emotion-4"
+            class="field-container emotion-3"
           >
             <label
-              class="is-default emotion-5"
+              class="is-default emotion-4"
             >
               <div
-                class="emotion-6"
+                class="emotion-5"
               >
                 <input
                   aria-checked="false"
-                  class="emotion-7"
+                  class="emotion-6"
                   type="checkbox"
                   value=""
                 />
                 <svg
                   aria-hidden="true"
-                  class="is-default emotion-8"
+                  class="is-default emotion-7"
                   fill="currentcolor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -980,7 +1031,7 @@ input:checked~.emotion-9 {
                 </svg>
                 <svg
                   aria-hidden="true"
-                  class="is-default emotion-9"
+                  class="is-default emotion-8"
                   fill="currentcolor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -995,7 +1046,7 @@ input:checked~.emotion-9 {
           </div>
         </div>
         <button
-          class=" emotion-10"
+          class=" emotion-9"
           type="primary"
         >
           Submit
@@ -1008,14 +1059,29 @@ input:checked~.emotion-9 {
 
 exports[`single fields checkboxes field 1`] = `
 <DocumentFragment>
-  .emotion-0::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
+  .emotion-0 [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 body {
+  margin: 0;
 }
 
 .emotion-0 main {
@@ -1166,12 +1232,14 @@ exports[`single fields checkboxes field 1`] = `
   outline-offset: -2px;
 }
 
-.emotion-0 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
 }
 
 .emotion-0 details {
@@ -1200,7 +1268,7 @@ exports[`single fields checkboxes field 1`] = `
   pointer-events: none;
 }
 
-.emotion-1 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1217,7 +1285,7 @@ exports[`single fields checkboxes field 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1235,7 +1303,7 @@ exports[`single fields checkboxes field 1`] = `
   flex-direction: column;
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1258,13 +1326,13 @@ exports[`single fields checkboxes field 1`] = `
   display: flex;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1278,12 +1346,56 @@ exports[`single fields checkboxes field 1`] = `
   overflow: hidden;
 }
 
-input:checked~.emotion-8 {
+input:checked~.emotion-7 {
+  display: block;
+}
+
+.emotion-7 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: none;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  margin-right: 2px;
+  border-radius: 4px;
+  color: gray;
+  color: #4462ED;
+  margin-right: 10px;
+}
+
+input:checked~.emotion-7 {
   color: primary;
 }
 
+input:focus~.emotion-7 {
+  color: primary;
+  background-color: highlight;
+}
+
+input:focus~.emotion-7 {
+  background-color: transparent;
+}
+
+input~.emotion-7.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
 input:checked~.emotion-8 {
-  display: block;
+  display: none;
+}
+
+input:focus~.emotion-8 {
+  color: primary;
+  background-color: highlight;
+}
+
+input:checked~.emotion-8 {
+  color: primary;
 }
 
 input~.emotion-8.is-focused {
@@ -1295,29 +1407,7 @@ input:focus~.emotion-8 {
   background-color: transparent;
 }
 
-input:focus~.emotion-8 {
-  color: primary;
-  background-color: highlight;
-}
-
 .emotion-8 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: none;
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  margin-right: 2px;
-  border-radius: 4px;
-  color: gray;
-  color: #4462ED;
-  margin-right: 10px;
-}
-
-.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1334,34 +1424,7 @@ input:focus~.emotion-8 {
   margin-right: 10px;
 }
 
-input~.emotion-9.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
-}
-
-input:focus~.emotion-9 {
-  background-color: transparent;
-}
-
-input:focus~.emotion-9 {
-  color: primary;
-  background-color: highlight;
-}
-
-input:checked~.emotion-9 {
-  color: primary;
-}
-
-input:checked~.emotion-9 {
-  display: none;
-}
-
-.emotion-31.is-focused {
-  outline: none;
-  box-shadow: 0 0 5px #5873bdbf;
-}
-
-.emotion-31.is-hovered {
+.emotion-30.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -1369,18 +1432,23 @@ input:checked~.emotion-9 {
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-31.is-pressed {
+.emotion-30.is-focused {
+  outline: none;
+  box-shadow: 0 0 5px #5873bdbf;
+}
+
+.emotion-30.is-pressed path {
+  fill: #fff;
+}
+
+.emotion-30.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-31.is-pressed path {
-  fill: #fff;
-}
-
-.emotion-31 {
+.emotion-30 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1433,10 +1501,10 @@ input:checked~.emotion-9 {
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -1445,26 +1513,26 @@ input:checked~.emotion-9 {
       >
         <div>
           <div
-            class="emotion-1"
+            class="emotion-2"
           >
             <div
-              class="field-container emotion-4"
+              class="field-container emotion-3"
             >
               <label
-                class="is-default emotion-5"
+                class="is-default emotion-4"
               >
                 <div
-                  class="emotion-6"
+                  class="emotion-5"
                 >
                   <input
                     aria-checked="false"
-                    class="emotion-7"
+                    class="emotion-6"
                     type="checkbox"
                     value=""
                   />
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-8"
+                    class="is-default emotion-7"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1475,7 +1543,7 @@ input:checked~.emotion-9 {
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-9"
+                    class="is-default emotion-8"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1490,26 +1558,26 @@ input:checked~.emotion-9 {
             </div>
           </div>
           <div
-            class="emotion-1"
+            class="emotion-2"
           >
             <div
-              class="field-container emotion-4"
+              class="field-container emotion-3"
             >
               <label
-                class="is-default emotion-5"
+                class="is-default emotion-4"
               >
                 <div
-                  class="emotion-6"
+                  class="emotion-5"
                 >
                   <input
                     aria-checked="false"
-                    class="emotion-7"
+                    class="emotion-6"
                     type="checkbox"
                     value=""
                   />
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-8"
+                    class="is-default emotion-7"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1520,7 +1588,7 @@ input:checked~.emotion-9 {
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-9"
+                    class="is-default emotion-8"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1535,26 +1603,26 @@ input:checked~.emotion-9 {
             </div>
           </div>
           <div
-            class="emotion-1"
+            class="emotion-2"
           >
             <div
-              class="field-container emotion-4"
+              class="field-container emotion-3"
             >
               <label
-                class="is-default emotion-5"
+                class="is-default emotion-4"
               >
                 <div
-                  class="emotion-6"
+                  class="emotion-5"
                 >
                   <input
                     aria-checked="false"
-                    class="emotion-7"
+                    class="emotion-6"
                     type="checkbox"
                     value=""
                   />
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-8"
+                    class="is-default emotion-7"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1565,7 +1633,7 @@ input:checked~.emotion-9 {
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-9"
+                    class="is-default emotion-8"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1580,26 +1648,26 @@ input:checked~.emotion-9 {
             </div>
           </div>
           <div
-            class="emotion-1"
+            class="emotion-2"
           >
             <div
-              class="field-container emotion-4"
+              class="field-container emotion-3"
             >
               <label
-                class="is-default emotion-5"
+                class="is-default emotion-4"
               >
                 <div
-                  class="emotion-6"
+                  class="emotion-5"
                 >
                   <input
                     aria-checked="false"
-                    class="emotion-7"
+                    class="emotion-6"
                     type="checkbox"
                     value=""
                   />
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-8"
+                    class="is-default emotion-7"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1610,7 +1678,7 @@ input:checked~.emotion-9 {
                   </svg>
                   <svg
                     aria-hidden="true"
-                    class="is-default emotion-9"
+                    class="is-default emotion-8"
                     fill="currentcolor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1626,7 +1694,7 @@ input:checked~.emotion-9 {
           </div>
         </div>
         <button
-          class=" emotion-31"
+          class=" emotion-30"
           type="primary"
         >
           Submit
@@ -1639,13 +1707,29 @@ input:checked~.emotion-9 {
 
 exports[`single fields password field 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -1768,12 +1852,12 @@ exports[`single fields password field 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -1827,38 +1911,12 @@ exports[`single fields password field 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1872,7 +1930,38 @@ exports[`single fields password field 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1895,39 +1984,18 @@ exports[`single fields password field 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -1938,7 +2006,7 @@ exports[`single fields password field 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -1953,14 +2021,14 @@ exports[`single fields password field 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -1974,15 +2042,15 @@ exports[`single fields password field 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -1995,27 +2063,27 @@ exports[`single fields password field 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -2038,7 +2106,7 @@ exports[`single fields password field 1`] = `
   height: 4em;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2075,36 +2143,36 @@ exports[`single fields password field 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -2127,41 +2195,41 @@ exports[`single fields password field 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -2184,102 +2252,102 @@ exports[`single fields password field 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -2292,27 +2360,27 @@ exports[`single fields password field 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2364,7 +2432,7 @@ exports[`single fields password field 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -2372,27 +2440,27 @@ exports[`single fields password field 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -2400,25 +2468,25 @@ exports[`single fields password field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               type="password"
               value=""
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit
@@ -2431,17 +2499,32 @@ exports[`single fields password field 1`] = `
 
 exports[`single fields select field 1`] = `
 <DocumentFragment>
-  .emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
+  .emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -2529,15 +2612,16 @@ exports[`single fields select field 1`] = `
   text-transform: none;
 }
 
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
 }
 
 .emotion-0 button:-moz-focusring,
@@ -2619,28 +2703,12 @@ exports[`single fields select field 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2658,7 +2726,7 @@ exports[`single fields select field 1`] = `
   flex-direction: column;
 }
 
-.emotion-4.is-float-label {
+.emotion-3.is-float-label {
   text-overflow: ellipsis;
   display: block;
   overflow: hidden;
@@ -2679,19 +2747,19 @@ exports[`single fields select field 1`] = `
   padding-right: 25px;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -2702,7 +2770,7 @@ exports[`single fields select field 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -2717,7 +2785,7 @@ exports[`single fields select field 1`] = `
   cursor: pointer;
 }
 
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2740,41 +2808,41 @@ exports[`single fields select field 1`] = `
   display: flex;
 }
 
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2788,7 +2856,7 @@ exports[`single fields select field 1`] = `
   flex-direction: column;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -2801,29 +2869,29 @@ exports[`single fields select field 1`] = `
   bottom: 0;
 }
 
-.emotion-6 arrow {
+.emotion-5 arrow {
   margin-left: auto;
 }
 
-.emotion-6 transparent>div:after {
+.emotion-5 transparent>div:after {
   background-color: transparent;
 }
 
-.emotion-6 transparent select {
+.emotion-5 transparent select {
   background-color: transparent;
 }
 
-.emotion-6 option.is-focused {
+.emotion-5 option.is-focused {
   color: #fff;
   background-color: #4462ED;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -2874,40 +2942,40 @@ exports[`single fields select field 1`] = `
   align-items: center;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -2930,41 +2998,41 @@ exports[`single fields select field 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -2987,40 +3055,40 @@ exports[`single fields select field 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label .emotion-6 arrow {
+.is-float-label .emotion-5 arrow {
   margin-top: -10px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -3043,63 +3111,63 @@ exports[`single fields select field 1`] = `
   height: 4em;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -3112,32 +3180,32 @@ exports[`single fields select field 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.is-float-label .emotion-6 {
+.is-float-label .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 currentValue {
+.emotion-5 currentValue {
   text-align: left;
   -webkit-flex: 1 1 0;
   -ms-flex: 1 1 0;
@@ -3149,7 +3217,7 @@ exports[`single fields select field 1`] = `
   display: inline!important;
 }
 
-.emotion-6 listBoxPopup {
+.emotion-5 listBoxPopup {
   position: absolute;
   width: 100%;
   padding: 0;
@@ -3162,7 +3230,7 @@ exports[`single fields select field 1`] = `
   overflow: hidden;
 }
 
-.emotion-6 option {
+.emotion-5 option {
   font-size: 15px;
   color: #253746;
   padding-left: 15px;
@@ -3178,13 +3246,13 @@ exports[`single fields select field 1`] = `
   cursor: pointer;
 }
 
-.emotion-6 option.is-selected {
+.emotion-5 option.is-selected {
   font-weight: 500;
   color: #253746;
   padding-left: 0;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3206,7 +3274,7 @@ exports[`single fields select field 1`] = `
   flex-direction: column;
 }
 
-.emotion-8 {
+.emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3214,7 +3282,7 @@ exports[`single fields select field 1`] = `
   color: #68747f;
 }
 
-.emotion-9 {
+.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3228,11 +3296,11 @@ exports[`single fields select field 1`] = `
   flex-direction: column;
 }
 
-.is-float-label .emotion-9 {
+.is-float-label .emotion-8 {
   margin-top: -10px;
 }
 
-.emotion-10 {
+.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3254,23 +3322,23 @@ exports[`single fields select field 1`] = `
   height: 22;
 }
 
-.emotion-11.is-focused {
+.emotion-10.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-11.is-pressed path {
+.emotion-10.is-pressed path {
   fill: #fff;
 }
 
-.emotion-11.is-pressed {
+.emotion-10.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-11.is-hovered {
+.emotion-10.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -3278,7 +3346,7 @@ exports[`single fields select field 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-11 {
+.emotion-10 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3331,10 +3399,10 @@ exports[`single fields select field 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -3342,10 +3410,10 @@ exports[`single fields select field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
@@ -3378,29 +3446,29 @@ exports[`single fields select field 1`] = `
             </label>
           </div>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <button
               aria-expanded="false"
               aria-haspopup="listbox"
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               type="button"
             >
               <span
-                class="emotion-7"
+                class="emotion-6"
               >
                 <div
-                  class="emotion-8"
+                  class="emotion-7"
                 >
                   Select
                 </div>
               </span>
               <span
                 aria-hidden="true"
-                class="emotion-9"
+                class="emotion-8"
               >
                 <svg
-                  class="mdi-icon emotion-10"
+                  class="mdi-icon emotion-9"
                   fill="currentColor"
                   height="24"
                   viewBox="0 0 24 24"
@@ -3415,7 +3483,7 @@ exports[`single fields select field 1`] = `
           </div>
         </div>
         <button
-          class=" emotion-11"
+          class=" emotion-10"
           type="primary"
         >
           Submit
@@ -3428,17 +3496,32 @@ exports[`single fields select field 1`] = `
 
 exports[`single fields select field with default 1`] = `
 <DocumentFragment>
-  .emotion-0 button::-moz-focus-inner,
-.emotion-0 [type="button"]::-moz-focus-inner,
-.emotion-0 [type="reset"]::-moz-focus-inner,
-.emotion-0 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
+  .emotion-0 button,
+.emotion-0 [type="button"],
+.emotion-0 [type="reset"],
+.emotion-0 [type="submit"] {
+  -webkit-appearance: button;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -3526,15 +3609,16 @@ exports[`single fields select field with default 1`] = `
   text-transform: none;
 }
 
-.emotion-0 button,
-.emotion-0 [type="button"],
-.emotion-0 [type="reset"],
-.emotion-0 [type="submit"] {
-  -webkit-appearance: button;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 button::-moz-focus-inner,
+.emotion-0 [type="button"]::-moz-focus-inner,
+.emotion-0 [type="reset"]::-moz-focus-inner,
+.emotion-0 [type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
 }
 
 .emotion-0 button:-moz-focusring,
@@ -3616,28 +3700,12 @@ exports[`single fields select field with default 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3655,7 +3723,7 @@ exports[`single fields select field with default 1`] = `
   flex-direction: column;
 }
 
-.emotion-4.is-float-label {
+.emotion-3.is-float-label {
   text-overflow: ellipsis;
   display: block;
   overflow: hidden;
@@ -3676,19 +3744,19 @@ exports[`single fields select field with default 1`] = `
   padding-right: 25px;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -3699,7 +3767,7 @@ exports[`single fields select field with default 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -3714,7 +3782,7 @@ exports[`single fields select field with default 1`] = `
   cursor: pointer;
 }
 
-.emotion-4 {
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3737,41 +3805,41 @@ exports[`single fields select field with default 1`] = `
   display: flex;
 }
 
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3785,7 +3853,7 @@ exports[`single fields select field with default 1`] = `
   flex-direction: column;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -3798,29 +3866,29 @@ exports[`single fields select field with default 1`] = `
   bottom: 0;
 }
 
-.emotion-6 arrow {
+.emotion-5 arrow {
   margin-left: auto;
 }
 
-.emotion-6 transparent>div:after {
+.emotion-5 transparent>div:after {
   background-color: transparent;
 }
 
-.emotion-6 transparent select {
+.emotion-5 transparent select {
   background-color: transparent;
 }
 
-.emotion-6 option.is-focused {
+.emotion-5 option.is-focused {
   color: #fff;
   background-color: #4462ED;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -3871,40 +3939,40 @@ exports[`single fields select field with default 1`] = `
   align-items: center;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -3927,41 +3995,41 @@ exports[`single fields select field with default 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -3984,40 +4052,40 @@ exports[`single fields select field with default 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label .emotion-6 arrow {
+.is-float-label .emotion-5 arrow {
   margin-top: -10px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -4040,63 +4108,63 @@ exports[`single fields select field with default 1`] = `
   height: 4em;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -4109,32 +4177,32 @@ exports[`single fields select field with default 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.is-float-label .emotion-6 {
+.is-float-label .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 currentValue {
+.emotion-5 currentValue {
   text-align: left;
   -webkit-flex: 1 1 0;
   -ms-flex: 1 1 0;
@@ -4146,7 +4214,7 @@ exports[`single fields select field with default 1`] = `
   display: inline!important;
 }
 
-.emotion-6 listBoxPopup {
+.emotion-5 listBoxPopup {
   position: absolute;
   width: 100%;
   padding: 0;
@@ -4159,7 +4227,7 @@ exports[`single fields select field with default 1`] = `
   overflow: hidden;
 }
 
-.emotion-6 option {
+.emotion-5 option {
   font-size: 15px;
   color: #253746;
   padding-left: 15px;
@@ -4175,13 +4243,13 @@ exports[`single fields select field with default 1`] = `
   cursor: pointer;
 }
 
-.emotion-6 option.is-selected {
+.emotion-5 option.is-selected {
   font-weight: 500;
   color: #253746;
   padding-left: 0;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4203,7 +4271,7 @@ exports[`single fields select field with default 1`] = `
   flex-direction: column;
 }
 
-.emotion-8 {
+.emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4211,7 +4279,7 @@ exports[`single fields select field with default 1`] = `
   color: #68747f;
 }
 
-.emotion-9 {
+.emotion-8 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4225,11 +4293,11 @@ exports[`single fields select field with default 1`] = `
   flex-direction: column;
 }
 
-.is-float-label .emotion-9 {
+.is-float-label .emotion-8 {
   margin-top: -10px;
 }
 
-.emotion-10 {
+.emotion-9 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4251,23 +4319,23 @@ exports[`single fields select field with default 1`] = `
   height: 22;
 }
 
-.emotion-11.is-focused {
+.emotion-10.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-11.is-pressed path {
+.emotion-10.is-pressed path {
   fill: #fff;
 }
 
-.emotion-11.is-pressed {
+.emotion-10.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-11.is-hovered {
+.emotion-10.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -4275,7 +4343,7 @@ exports[`single fields select field with default 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-11 {
+.emotion-10 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4328,10 +4396,10 @@ exports[`single fields select field with default 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -4339,10 +4407,10 @@ exports[`single fields select field with default 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
@@ -4375,29 +4443,29 @@ exports[`single fields select field with default 1`] = `
             </label>
           </div>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <button
               aria-expanded="false"
               aria-haspopup="listbox"
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               type="button"
             >
               <span
-                class="emotion-7"
+                class="emotion-6"
               >
                 <div
-                  class="emotion-8"
+                  class="emotion-7"
                 >
                   Select
                 </div>
               </span>
               <span
                 aria-hidden="true"
-                class="emotion-9"
+                class="emotion-8"
               >
                 <svg
-                  class="mdi-icon emotion-10"
+                  class="mdi-icon emotion-9"
                   fill="currentColor"
                   height="24"
                   viewBox="0 0 24 24"
@@ -4412,7 +4480,7 @@ exports[`single fields select field with default 1`] = `
           </div>
         </div>
         <button
-          class=" emotion-11"
+          class=" emotion-10"
           type="primary"
         >
           Submit
@@ -4425,13 +4493,29 @@ exports[`single fields select field with default 1`] = `
 
 exports[`single fields string field format email 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -4554,12 +4638,12 @@ exports[`single fields string field format email 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -4613,38 +4697,12 @@ exports[`single fields string field format email 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4658,7 +4716,38 @@ exports[`single fields string field format email 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4681,39 +4770,18 @@ exports[`single fields string field format email 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -4724,7 +4792,7 @@ exports[`single fields string field format email 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -4739,14 +4807,14 @@ exports[`single fields string field format email 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4760,15 +4828,15 @@ exports[`single fields string field format email 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -4781,27 +4849,27 @@ exports[`single fields string field format email 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -4824,7 +4892,7 @@ exports[`single fields string field format email 1`] = `
   height: 4em;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -4861,36 +4929,36 @@ exports[`single fields string field format email 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -4913,41 +4981,41 @@ exports[`single fields string field format email 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -4970,102 +5038,102 @@ exports[`single fields string field format email 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -5078,27 +5146,27 @@ exports[`single fields string field format email 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -5150,7 +5218,7 @@ exports[`single fields string field format email 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -5158,27 +5226,27 @@ exports[`single fields string field format email 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -5186,24 +5254,24 @@ exports[`single fields string field format email 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               value=""
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit
@@ -5216,13 +5284,29 @@ exports[`single fields string field format email 1`] = `
 
 exports[`single fields string field format uri 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -5345,12 +5429,12 @@ exports[`single fields string field format uri 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -5404,38 +5488,12 @@ exports[`single fields string field format uri 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -5449,7 +5507,38 @@ exports[`single fields string field format uri 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -5472,39 +5561,18 @@ exports[`single fields string field format uri 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -5515,7 +5583,7 @@ exports[`single fields string field format uri 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -5530,14 +5598,14 @@ exports[`single fields string field format uri 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -5551,15 +5619,15 @@ exports[`single fields string field format uri 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -5572,27 +5640,27 @@ exports[`single fields string field format uri 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -5615,7 +5683,7 @@ exports[`single fields string field format uri 1`] = `
   height: 4em;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -5652,36 +5720,36 @@ exports[`single fields string field format uri 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -5704,41 +5772,41 @@ exports[`single fields string field format uri 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -5761,102 +5829,102 @@ exports[`single fields string field format uri 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -5869,27 +5937,27 @@ exports[`single fields string field format uri 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -5941,7 +6009,7 @@ exports[`single fields string field format uri 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -5949,27 +6017,27 @@ exports[`single fields string field format uri 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -5977,24 +6045,24 @@ exports[`single fields string field format uri 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               value=""
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit
@@ -6007,13 +6075,29 @@ exports[`single fields string field format uri 1`] = `
 
 exports[`single fields string field regular 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -6136,12 +6220,12 @@ exports[`single fields string field regular 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -6195,38 +6279,12 @@ exports[`single fields string field regular 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -6240,7 +6298,38 @@ exports[`single fields string field regular 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -6263,39 +6352,18 @@ exports[`single fields string field regular 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -6306,7 +6374,7 @@ exports[`single fields string field regular 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -6321,14 +6389,14 @@ exports[`single fields string field regular 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -6342,15 +6410,15 @@ exports[`single fields string field regular 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -6363,27 +6431,27 @@ exports[`single fields string field regular 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -6406,7 +6474,7 @@ exports[`single fields string field regular 1`] = `
   height: 4em;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -6443,36 +6511,36 @@ exports[`single fields string field regular 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -6495,41 +6563,41 @@ exports[`single fields string field regular 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -6552,102 +6620,102 @@ exports[`single fields string field regular 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -6660,27 +6728,27 @@ exports[`single fields string field regular 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -6732,7 +6800,7 @@ exports[`single fields string field regular 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -6740,27 +6808,27 @@ exports[`single fields string field regular 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -6768,24 +6836,24 @@ exports[`single fields string field regular 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               value=""
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit
@@ -6798,13 +6866,29 @@ exports[`single fields string field regular 1`] = `
 
 exports[`single fields string field with custom errors as sentence 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -6927,12 +7011,12 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -6986,38 +7070,12 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7031,7 +7089,38 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7054,39 +7143,18 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -7097,7 +7165,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -7112,14 +7180,14 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7133,15 +7201,15 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -7154,32 +7222,32 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7216,36 +7284,36 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -7268,41 +7336,41 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -7325,41 +7393,41 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -7382,63 +7450,63 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   height: 4em;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -7451,27 +7519,27 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7485,28 +7553,28 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   padding-top: 10px;
 }
 
-.is-left-label>.emotion-7 {
+.is-left-label>.emotion-6 {
   grid-row-end: 3;
   grid-column-end: 3;
 }
 
-.emotion-7.is-warning {
+.emotion-6.is-warning {
   color: #8a690a;
 }
 
-.emotion-7.is-success {
+.emotion-6.is-success {
   color: #008512;
 }
 
-.emotion-7.is-error {
+.emotion-6.is-error {
   color: #a31300;
 }
 
-.emotion-7.is-default {
+.emotion-6.is-default {
   color: #68747f;
 }
 
-.emotion-8.is-hovered {
+.emotion-7.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -7514,23 +7582,23 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-8.is-focused {
+.emotion-7.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-8.is-pressed path {
+.emotion-7.is-pressed path {
   fill: #fff;
 }
 
-.emotion-8.is-pressed {
+.emotion-7.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-8 {
+.emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7583,10 +7651,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -7594,30 +7662,30 @@ exports[`single fields string field with custom errors as sentence 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-error emotion-4"
+            class="is-error emotion-3"
           >
             Label
           </label>
           <div
-            class="is-error emotion-5"
+            class="is-error emotion-4"
           >
             <input
-              class="is-error emotion-6"
+              class="is-error emotion-5"
               value=""
             />
           </div>
           <div
-            class="is-error emotion-7"
+            class="is-error emotion-6"
             role="status"
           >
             Should be string, Blah
           </div>
         </div>
         <button
-          class="is-focused emotion-8"
+          class="is-focused emotion-7"
           type="primary"
         >
           Submit
@@ -7630,13 +7698,29 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 
 exports[`single fields string field with help text 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -7759,12 +7843,12 @@ exports[`single fields string field with help text 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -7818,38 +7902,12 @@ exports[`single fields string field with help text 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7863,7 +7921,38 @@ exports[`single fields string field with help text 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7886,39 +7975,18 @@ exports[`single fields string field with help text 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -7929,7 +7997,7 @@ exports[`single fields string field with help text 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -7944,14 +8012,14 @@ exports[`single fields string field with help text 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -7965,15 +8033,15 @@ exports[`single fields string field with help text 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -7986,32 +8054,32 @@ exports[`single fields string field with help text 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8048,36 +8116,36 @@ exports[`single fields string field with help text 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -8100,41 +8168,41 @@ exports[`single fields string field with help text 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -8157,41 +8225,41 @@ exports[`single fields string field with help text 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -8214,63 +8282,63 @@ exports[`single fields string field with help text 1`] = `
   height: 4em;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -8283,27 +8351,27 @@ exports[`single fields string field with help text 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8317,28 +8385,28 @@ exports[`single fields string field with help text 1`] = `
   padding-top: 10px;
 }
 
-.is-left-label>.emotion-7 {
+.is-left-label>.emotion-6 {
   grid-row-end: 3;
   grid-column-end: 3;
 }
 
-.emotion-7.is-warning {
+.emotion-6.is-warning {
   color: #8a690a;
 }
 
-.emotion-7.is-success {
+.emotion-6.is-success {
   color: #008512;
 }
 
-.emotion-7.is-error {
+.emotion-6.is-error {
   color: #a31300;
 }
 
-.emotion-7.is-default {
+.emotion-6.is-default {
   color: #68747f;
 }
 
-.emotion-8.is-hovered {
+.emotion-7.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -8346,23 +8414,23 @@ exports[`single fields string field with help text 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-8.is-focused {
+.emotion-7.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-8.is-pressed path {
+.emotion-7.is-pressed path {
   fill: #fff;
 }
 
-.emotion-8.is-pressed {
+.emotion-7.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-8 {
+.emotion-7 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8415,10 +8483,10 @@ exports[`single fields string field with help text 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -8426,30 +8494,30 @@ exports[`single fields string field with help text 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               value=""
             />
           </div>
           <div
-            class="is-default emotion-7"
+            class="is-default emotion-6"
             role="status"
           >
             help text
           </div>
         </div>
         <button
-          class=" emotion-8"
+          class=" emotion-7"
           type="primary"
         >
           Submit
@@ -8462,13 +8530,29 @@ exports[`single fields string field with help text 1`] = `
 
 exports[`single fields string field with markdown errors 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -8591,12 +8675,12 @@ exports[`single fields string field with markdown errors 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -8650,38 +8734,12 @@ exports[`single fields string field with markdown errors 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8695,7 +8753,38 @@ exports[`single fields string field with markdown errors 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8718,39 +8807,18 @@ exports[`single fields string field with markdown errors 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -8761,7 +8829,7 @@ exports[`single fields string field with markdown errors 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -8776,14 +8844,14 @@ exports[`single fields string field with markdown errors 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8797,15 +8865,15 @@ exports[`single fields string field with markdown errors 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -8818,27 +8886,27 @@ exports[`single fields string field with markdown errors 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -8861,7 +8929,7 @@ exports[`single fields string field with markdown errors 1`] = `
   height: 4em;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -8898,36 +8966,36 @@ exports[`single fields string field with markdown errors 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -8950,41 +9018,41 @@ exports[`single fields string field with markdown errors 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -9007,102 +9075,102 @@ exports[`single fields string field with markdown errors 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -9115,27 +9183,27 @@ exports[`single fields string field with markdown errors 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -9187,7 +9255,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -9195,27 +9263,27 @@ exports[`single fields string field with markdown errors 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -9223,24 +9291,24 @@ exports[`single fields string field with markdown errors 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Test
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               value=""
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit
@@ -9253,13 +9321,29 @@ exports[`single fields string field with markdown errors 1`] = `
 
 exports[`single fields string field with placeholder 1`] = `
 <DocumentFragment>
-  .emotion-0 textarea {
-  overflow: auto;
+  .emotion-0 progress {
+  vertical-align: baseline;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -9382,12 +9466,12 @@ exports[`single fields string field with placeholder 1`] = `
   white-space: normal;
 }
 
-.emotion-0 progress {
-  vertical-align: baseline;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 textarea {
+  overflow: auto;
 }
 
 .emotion-0 [type="checkbox"],
@@ -9441,38 +9525,12 @@ exports[`single fields string field with placeholder 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3.is-left-label {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
-}
-
-.emotion-3>.is-default {
-  width: 100%;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -9486,7 +9544,38 @@ exports[`single fields string field with placeholder 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-2>.is-default {
+  width: 100%;
+}
+
+.emotion-2.is-left-label {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -9509,39 +9598,18 @@ exports[`single fields string field with placeholder 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.emotion-4.is-left-label {
+.emotion-3.is-left-label {
   width: auto;
   padding-right: 10px;
   margin-bottom: 0;
 }
 
-.emotion-4 indicator {
+.emotion-3 indicator {
   color: #a31300;
   margin-left: 5px;
 }
 
-.emotion-4 radio {
+.emotion-3 radio {
   font-size: 15px;
   color: #253746;
   cursor: pointer;
@@ -9552,7 +9620,7 @@ exports[`single fields string field with placeholder 1`] = `
   margin-bottom: 5px;
 }
 
-.emotion-4 checkbox {
+.emotion-3 checkbox {
   font-size: 15px;
   color: #253746;
   display: -webkit-inline-box!important;
@@ -9567,14 +9635,14 @@ exports[`single fields string field with placeholder 1`] = `
   cursor: pointer;
 }
 
-.is-float-label-active .emotion-4.is-float-label {
+.is-float-label-active .emotion-3.is-float-label {
   font-weight: 400;
   -webkit-transform: translate(0,-8px) scale(0.75);
   -ms-transform: translate(0,-8px) scale(0.75);
   transform: translate(0,-8px) scale(0.75);
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -9588,15 +9656,15 @@ exports[`single fields string field with placeholder 1`] = `
   flex-direction: column;
 }
 
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -9609,27 +9677,27 @@ exports[`single fields string field with placeholder 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -9652,7 +9720,7 @@ exports[`single fields string field with placeholder 1`] = `
   height: 4em;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -9689,36 +9757,36 @@ exports[`single fields string field with placeholder 1`] = `
   outline: none;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -9741,41 +9809,41 @@ exports[`single fields string field with placeholder 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -9798,102 +9866,102 @@ exports[`single fields string field with placeholder 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -9906,27 +9974,27 @@ exports[`single fields string field with placeholder 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -9978,7 +10046,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -9986,27 +10054,27 @@ exports[`single fields string field with placeholder 1`] = `
   box-shadow: 0 1px 3px rgba(37,55,70,0.25);
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -10014,25 +10082,25 @@ exports[`single fields string field with placeholder 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <input
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               placeholder="placeholder"
               value=""
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit
@@ -10045,13 +10113,34 @@ exports[`single fields string field with placeholder 1`] = `
 
 exports[`single fields textarea field 1`] = `
 <DocumentFragment>
-  .emotion-0 progress {
-  vertical-align: baseline;
+  .emotion-0 legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
 }
 
-.emotion-0 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+.emotion-0 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-0 main {
+  display: block;
 }
 
 .emotion-0 h1 {
@@ -10165,17 +10254,12 @@ exports[`single fields textarea field 1`] = `
   padding: 0.35em 0.75em 0.625em;
 }
 
-.emotion-0 legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
+.emotion-0 body {
+  margin: 0;
 }
 
-.emotion-0 main {
-  display: block;
+.emotion-0 progress {
+  vertical-align: baseline;
 }
 
 .emotion-0 textarea {
@@ -10233,28 +10317,12 @@ exports[`single fields textarea field 1`] = `
   pointer-events: none;
 }
 
-.emotion-0 body {
-  margin: 0;
+.emotion-0 html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
-.emotion-1 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.emotion-3 {
+.emotion-2 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -10272,7 +10340,72 @@ exports[`single fields textarea field 1`] = `
   flex-direction: column;
 }
 
-.emotion-4 {
+.emotion-3.is-float-label {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 15px;
+  margin-bottom: 0;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  pointer-events: none;
+  padding-right: 25px;
+}
+
+.is-float-label-active .emotion-3.is-float-label {
+  font-weight: 400;
+  -webkit-transform: translate(0,-8px) scale(0.75);
+  -ms-transform: translate(0,-8px) scale(0.75);
+  transform: translate(0,-8px) scale(0.75);
+}
+
+.emotion-3.is-left-label {
+  width: auto;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.emotion-3 indicator {
+  color: #a31300;
+  margin-left: 5px;
+}
+
+.emotion-3 radio {
+  font-size: 15px;
+  color: #253746;
+  cursor: pointer;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.emotion-3 checkbox {
+  font-size: 15px;
+  color: #253746;
+  display: -webkit-inline-box!important;
+  display: -webkit-inline-flex!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  width: auto;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.emotion-3 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -10295,80 +10428,15 @@ exports[`single fields textarea field 1`] = `
   display: flex;
 }
 
-.emotion-4.is-float-label {
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 13px;
-  left: 15px;
-  margin-bottom: 0;
-  -webkit-transform-origin: top left;
-  -ms-transform-origin: top left;
-  transform-origin: top left;
-  -webkit-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  pointer-events: none;
-  padding-right: 25px;
-}
-
-.is-float-label-active .emotion-4.is-float-label {
-  font-weight: 400;
-  -webkit-transform: translate(0,-8px) scale(0.75);
-  -ms-transform: translate(0,-8px) scale(0.75);
-  transform: translate(0,-8px) scale(0.75);
-}
-
-.emotion-4.is-left-label {
-  width: auto;
-  padding-right: 10px;
-  margin-bottom: 0;
-}
-
-.emotion-4 indicator {
-  color: #a31300;
-  margin-left: 5px;
-}
-
-.emotion-4 radio {
-  font-size: 15px;
-  color: #253746;
-  cursor: pointer;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.emotion-4 checkbox {
-  font-size: 15px;
-  color: #253746;
-  display: -webkit-inline-box!important;
-  display: -webkit-inline-flex!important;
-  display: -ms-inline-flexbox!important;
-  display: inline-flex!important;
-  width: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.emotion-5>input {
+.emotion-4>input {
   border-left-width: 0;
 }
 
-.emotion-5>button {
+.emotion-4>button {
   border-left-width: 0;
 }
 
-.emotion-5:after {
+.emotion-4:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -10381,27 +10449,27 @@ exports[`single fields textarea field 1`] = `
   bottom: 0;
 }
 
-.emotion-5.is-disabled {
+.emotion-4.is-disabled {
   opacity: 1;
 }
 
-.emotion-5.is-disabled:after {
+.emotion-4.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-5.is-error::after {
+.emotion-4.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-5.is-success::after {
+.emotion-4.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-5.is-warning::after {
+.emotion-4.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-5 {
+.emotion-4 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -10415,28 +10483,28 @@ exports[`single fields textarea field 1`] = `
   flex-direction: column;
 }
 
-.emotion-6 small::-webkit-input-placeholder {
+.emotion-5 small::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6.is-unresizable {
+.emotion-5.is-unresizable {
   resize: none;
 }
 
-.emotion-6 container.is-warning::after {
+.emotion-5 container.is-warning::after {
   background-color: #eeb91c;
 }
 
-.emotion-6 container.is-success::after {
+.emotion-5 container.is-success::after {
   background-color: #00af18;
 }
 
-.emotion-6 container.is-error::after {
+.emotion-5 container.is-error::after {
   background-color: #a31300;
 }
 
-.emotion-6 {
+.emotion-5 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -10473,41 +10541,41 @@ exports[`single fields textarea field 1`] = `
   outline: none;
 }
 
-.emotion-6.is-focused {
+.emotion-5.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 {
+.is-float-label-active .emotion-5 {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-5::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-5::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-5:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::placeholder {
+.emotion-5::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6::-ms-expand {
+.emotion-5::-ms-expand {
   display: none;
 }
 
-.emotion-6 large {
+.emotion-5 large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -10530,41 +10598,41 @@ exports[`single fields textarea field 1`] = `
   height: 4em;
 }
 
-.emotion-6 large.is-focused {
+.emotion-5 large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 large {
+.is-float-label-active .emotion-5 large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 large::-webkit-input-placeholder {
+.emotion-5 large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-moz-placeholder {
+.emotion-5 large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large:-ms-input-placeholder {
+.emotion-5 large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::placeholder {
+.emotion-5 large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 large::-ms-expand {
+.emotion-5 large::-ms-expand {
   display: none;
 }
 
-.emotion-6 small {
+.emotion-5 small {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -10587,40 +10655,40 @@ exports[`single fields textarea field 1`] = `
   height: 28px;
 }
 
-.emotion-6 small.is-focused {
+.emotion-5 small.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small {
+.is-float-label-active .emotion-5 small {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 container.is-disabled:after {
+.emotion-5 container.is-disabled:after {
   opacity: 0.5;
 }
 
-.emotion-6 small::-moz-placeholder {
+.emotion-5 small::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small:-ms-input-placeholder {
+.emotion-5 small:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::placeholder {
+.emotion-5 small::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small::-ms-expand {
+.emotion-5 small::-ms-expand {
   display: none;
 }
 
-.emotion-6 small large {
+.emotion-5 small large {
   font-weight: 500;
   color: #253746;
   -webkit-appearance: none;
@@ -10643,63 +10711,63 @@ exports[`single fields textarea field 1`] = `
   height: 4em;
 }
 
-.emotion-6 small large.is-focused {
+.emotion-5 small large.is-focused {
   border-color: #b3bee8;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.is-float-label-active .emotion-6 small large {
+.is-float-label-active .emotion-5 small large {
   padding-top: 15px;
   padding-bottom: 5px;
 }
 
-.emotion-6 small large::-webkit-input-placeholder {
+.emotion-5 small large::-webkit-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-moz-placeholder {
+.emotion-5 small large::-moz-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large:-ms-input-placeholder {
+.emotion-5 small large:-ms-input-placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::placeholder {
+.emotion-5 small large::placeholder {
   font-weight: 300;
   color: #68747f;
 }
 
-.emotion-6 small large::-ms-expand {
+.emotion-5 small large::-ms-expand {
   display: none;
 }
 
-.emotion-6 wrapper.is-left-label {
+.emotion-5 wrapper.is-left-label {
   display: inline-grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 }
 
-.emotion-6 wrapper>.is-default {
+.emotion-5 wrapper>.is-default {
   width: 100%;
 }
 
-.emotion-6 container {
+.emotion-5 container {
   position: relative;
 }
 
-.emotion-6 container>input {
+.emotion-5 container>input {
   border-left-width: 0;
 }
 
-.emotion-6 container>button {
+.emotion-5 container>button {
   border-left-width: 0;
 }
 
-.emotion-6 container:after {
+.emotion-5 container:after {
   border-radius: 5px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -10712,18 +10780,18 @@ exports[`single fields textarea field 1`] = `
   bottom: 0;
 }
 
-.emotion-6 container.is-disabled {
+.emotion-5 container.is-disabled {
   opacity: 1;
 }
 
-.emotion-7.is-pressed {
+.emotion-6.is-pressed {
   background-color: #4462ED;
   border: 1px solid;
   border-color: #4462ED;
   color: #fff;
 }
 
-.emotion-7 {
+.emotion-6 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -10775,16 +10843,16 @@ exports[`single fields textarea field 1`] = `
   border-color: #4462ED;
 }
 
-.emotion-7.is-focused {
+.emotion-6.is-focused {
   outline: none;
   box-shadow: 0 0 5px #5873bdbf;
 }
 
-.emotion-7.is-pressed path {
+.emotion-6.is-pressed path {
   fill: #fff;
 }
 
-.emotion-7.is-hovered {
+.emotion-6.is-hovered {
   background-color: #f7f8fd;
   border: 1px solid;
   border-color: #4660a2;
@@ -10793,10 +10861,10 @@ exports[`single fields textarea field 1`] = `
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <form
         autocomplete="off"
@@ -10804,25 +10872,25 @@ exports[`single fields textarea field 1`] = `
         novalidate=""
       >
         <div
-          class="field-container emotion-3"
+          class="field-container emotion-2"
           rows="2"
         >
           <label
-            class="is-default emotion-4"
+            class="is-default emotion-3"
           >
             Label
           </label>
           <div
-            class="is-default emotion-5"
+            class="is-default emotion-4"
           >
             <textarea
-              class="is-default emotion-6"
+              class="is-default emotion-5"
               rows="2"
             />
           </div>
         </div>
         <button
-          class=" emotion-7"
+          class=" emotion-6"
           type="primary"
         >
           Submit

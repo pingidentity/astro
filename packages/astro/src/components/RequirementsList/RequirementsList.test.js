@@ -1,6 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import RequirementsList from '.';
+
+const emotionCache = createCache({ key: 'requirements-test' });
+emotionCache.compat = true;
 
 const testId = 'test-requirements-list';
 const testRequirements = [
@@ -30,7 +35,11 @@ const defaultProps = {
   'data-testid': testId,
   requirements: testRequirements,
 };
-const getComponent = (props = {}) => render(<RequirementsList {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(
+  <CacheProvider value={emotionCache}>
+    <RequirementsList {...defaultProps} {...props} />
+  </CacheProvider>,
+);
 
 test('base case requirements list', () => {
   getComponent();

@@ -1,5 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 
 import { active, accent, neutral, white } from '../../styles/colors';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
@@ -9,6 +11,9 @@ import Text from '../Text';
 import Stepper from './Stepper';
 import Step from './Step';
 import { stepStatuses } from './Stepper.constants';
+
+const emotionCache = createCache({ key: 'stepper-test' });
+emotionCache.compat = true;
 
 const {
   ACTIVE,
@@ -39,13 +44,15 @@ const defaultProps = {
 const getComponent = (props = {}, { renderFn = render } = {}) => {
   const { children } = props;
   return renderFn(
-    <Stepper {...defaultProps} {...props}>
-      {item => (
-        <Step key={item.name} textValue={item.name}>
-          <Text>{children}</Text>
-        </Step>
+    <CacheProvider value={emotionCache}>
+      <Stepper {...defaultProps} {...props}>
+        {item => (
+          <Step key={item.name} textValue={item.name}>
+            <Text>{children}</Text>
+          </Step>
       )}
-    </Stepper>,
+      </Stepper>,
+    </CacheProvider>,
   );
 };
 

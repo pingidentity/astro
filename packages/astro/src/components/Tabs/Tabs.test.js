@@ -1,8 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Tabs from './Tabs';
 import Tab from '../Tab';
+
+const emotionCache = createCache({ key: 'tabs-test' });
+emotionCache.compat = true;
 
 const testId = 'testId';
 const defaultTabs = [
@@ -15,13 +20,15 @@ const defaultProps = {
   defaultSelectedKey: defaultTabs[0].name,
 };
 const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}) => renderFn((
-  <Tabs {...defaultProps} {...props}>
-    {tabs.map(({ name, props: tabProps, children }) => (
-      <Tab key={name} title={name} {...tabProps}>
-        {children}
-      </Tab>
+  <CacheProvider value={emotionCache}>
+    <Tabs {...defaultProps} {...props}>
+      {tabs.map(({ name, props: tabProps, children }) => (
+        <Tab key={name} title={name} {...tabProps}>
+          {children}
+        </Tab>
     ))}
-  </Tabs>
+    </Tabs>
+  </CacheProvider>
 ));
 
 const getTabs = () => {
