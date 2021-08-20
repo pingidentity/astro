@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import HelpIcon from 'mdi-react/HelpIcon';
 import IconButton from '../IconButton';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
@@ -7,28 +6,18 @@ import Icon from '../Icon';
 
 const HelpHint = forwardRef((props, ref) => {
   const {
-    tooltipTriggerProps,
     children,
+    ...others
   } = props;
 
   return (
-    <TooltipTrigger ref={ref} {...tooltipTriggerProps} >
-      <IconButton size="13px" variant="helpHint" aria-label="my-label" >
-        <Icon icon={HelpIcon} />
+    <TooltipTrigger ref={ref} {...others} >
+      <IconButton variant="helpHint" aria-label="label help hint">
+        <Icon icon={HelpIcon} size="11px" />
       </IconButton>
       <Tooltip>{children}</Tooltip>
     </TooltipTrigger>
   );
 });
-
-HelpHint.defaultProps = {
-  tooltipTriggerProps: {
-    direction: 'right',
-  },
-};
-
-HelpHint.propTypes = {
-  tooltipTriggerProps: PropTypes.shape({}),
-};
 
 export default HelpHint;
