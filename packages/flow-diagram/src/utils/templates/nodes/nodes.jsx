@@ -55,12 +55,8 @@ export const fromNode = ({ color } = COLORS.BLUE, { margin } = { margin: new go.
 export const bottomNode = ({ margin } = { margin: new go.Margin(0, 0, 0, 0) }) => $(go.Panel, 'Auto',
     { alignment: go.Spot.Center, portId: 'bottom', fromSpot: go.Spot.Bottom, toSpot: go.Spot.Bottom, fromLinkable: false, toLinkable: false, visible: true, fromMaxLinks: 1 },
     new go.Binding('margin', '', s => (s.category === 'step' ? getSize(s, 'bottomNode') : margin)),
-    new go.Binding('visible', 'hasIO'),
     // Same thing as above
     $(go.Shape, 'Circle',
-        { name: 'fromNodeOuter', width: 20, height: 20, stroke: COLORS.WHITE, strokeWidth: 0, fill: 'transparent' },
-    ),
-    $(go.Shape, 'Circle',
-        { name: 'fromNode', width: 9, height: 9, stroke: COLORS.WHITE, fill: COLORS.ORANGE, strokeWidth: 2 },
+        { width: 0, height: 0, strokeWidth: 0, fill: 'transparent' },
     ),
 );
