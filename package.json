@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "UNLICENSED",
@@ -37,8 +37,8 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^11.2.0",
-    "@emotion/eslint-plugin": "^11.2.0",
     "@emotion/cache": "^11.4.0",
+    "@emotion/eslint-plugin": "^11.2.0",
     "@storybook/addon-a11y": "^6.1.16",
     "@storybook/addon-actions": "^6.1.16",
     "@storybook/addon-docs": "^6.1.16",
