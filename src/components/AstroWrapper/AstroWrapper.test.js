@@ -13,5 +13,5 @@ test('should provide theme styling through AstroWrapper', () => {
   const box = screen.queryByTestId(testId);
   expect(box).toBeInstanceOf(HTMLDivElement);
   expect(box).toBeInTheDocument();
-  expect(box).toHaveStyleRule('background-color', 'active');
+  expect(box).toHaveStyle('background-color: active');
 });
