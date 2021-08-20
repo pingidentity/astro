@@ -129,7 +129,9 @@ export default class ColumnChart extends React.Component {
         referenceLineColor: "#57A0EA",
         renderTooltip: defaultRender,
         stacked: true,
-        width: "100%"
+        width: "100%",
+        hideX: true,
+        hideY: true
     };
 
     state = {
@@ -200,10 +202,16 @@ export default class ColumnChart extends React.Component {
         return legend.map(axis => {
             if (axis.yAxisId && !yAxes.includes(axis.yAxisId)) {
                 yAxes.push(axis.yAxisId);
-                return (<YAxis key={axis.yAxisId} yAxisId={axis.yAxisId} hide={true} />);
+                return (<YAxis key={axis.yAxisId} yAxisId={axis.yAxisId} hide={this.props.hideY} />);
             } else if (!axis.yAxisId && !yAxes.includes(this.props.baseYAxisId)) {
                 yAxes.push(this.props.baseYAxisId);
-                return (<YAxis key={this.props.baseYAxisId} yAxisId={this.props.baseYAxisId} hide={true} />);
+                return (
+                    <YAxis
+                        key={this.props.baseYAxisId}
+                        yAxisId={this.props.baseYAxisId}
+                        hide={this.props.hideY}
+                    />
+                );
             }
         });
     };
@@ -294,7 +302,7 @@ export default class ColumnChart extends React.Component {
                         data-id={dataId}
                         ref={this._barChartRef}
                     >
-                        <XAxis dataKey="name" hide={true} />
+                        <XAxis dataKey="name" hide={this.props.hideX} />
                         {this._generateYAxes(legend)}
 
                         {lines

@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import ColumnChart, { ColumnChartTitle } from "../ColumnChart";
+import { YAxis, XAxis } from "recharts";
 
 describe("ColumnChart", () => {
     const onClick = jest.fn();
@@ -56,7 +57,8 @@ describe("ColumnChart", () => {
         onClick,
         onMouseOut,
         onMouseOver,
-        title: "VERY IMPORTANT PLEASE PAY ATTENTION"
+        title: "VERY IMPORTANT PLEASE PAY ATTENTION",
+
     };
 
     it("renders the component", () => {
@@ -201,6 +203,27 @@ describe("ColumnChart", () => {
 
         component.instance()._handleMouseOut();
         expect(onMouseOut).toHaveBeenCalled();
+    });
+
+    it("renders xAxis information", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+                hideX={false}
+            />
+        );
+
+        expect(component.find(XAxis).exists()).toBeTruthy();
+    });
+
+    it("renders yAxis information", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+                hideY={false}
+            />
+        );
+        expect(component.find(YAxis).exists()).toBeTruthy();
     });
 
     describe("ColumnCardTitle", () => {
