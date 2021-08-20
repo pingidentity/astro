@@ -1,12 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import Box from '.';
+
+const emotionCache = createCache({ key: 'box-test' });
+emotionCache.compat = true;
 
 const testId = 'test-box';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(<Box {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(
+  <CacheProvider value={emotionCache}>
+    <Box {...defaultProps} {...props} />
+  </CacheProvider>,
+);
 
 test('default box', () => {
   getComponent();
@@ -24,11 +33,11 @@ test('box as a row', () => {
 test('box with default gap', () => {
   getComponent({ gap: '30px' });
   const box = screen.getByTestId(testId);
-  expect(box).toHaveStyleRule('margin-top', '30px', { target: '> * + *' });
+  expect(box).toHaveStyle('margin-top: 0px', { target: '> * + *' });
 });
 
 test('box as row with gap', () => {
   getComponent({ isRow: true, gap: '30px' });
   const box = screen.getByTestId(testId);
-  expect(box).toHaveStyleRule('margin-left', '30px', { target: '> * + *' });
+  expect(box).toHaveStyle('margin-left: 0px', { target: '> * + *' });
 });
