@@ -476,20 +476,27 @@ describe("FormDropDownList v4", function () {
         expect(window.removeEventListener).toBeCalledWith("click", componentRef._handleGlobalClick);
     });
 
-    it("calls function for list placement on componentDidUpdate", function () {
-        const component = getComponent({
-            open: true,
+    it("calls function for list placement on componentDidUpdate only if certain prop changed", function () {
+        const initialProps = {
+            open: false,
             searchIndex: 1,
             searchString: "o",
             searchTime: (Date.now() - 2000)
-        });
+        };
+        const component = getComponent(initialProps);
         const componentRef = ReactTestUtils.findRenderedComponentWithType(
             component, FormDropDownList._statelessComponent
         );
 
         componentRef._setSearchListPosition = jest.fn();
-        componentRef.componentDidUpdate();
-        expect(componentRef._setSearchListPosition).toBeCalled();
+        componentRef.componentDidUpdate(initialProps); // no changes in props
+        expect(componentRef._setSearchListPosition).not.toHaveBeenCalled();
+        componentRef.componentDidUpdate({ ...initialProps, open: true }); // `open` changed
+        expect(componentRef._setSearchListPosition).toHaveBeenCalledTimes(1);
+        componentRef.componentDidUpdate({ ...initialProps, open: true, searchIndex: 2 }); // `searchIndex` changed
+        expect(componentRef._setSearchListPosition).toHaveBeenCalledTimes(2);
+        componentRef.componentDidUpdate({ ...initialProps, open: true, searchIndex: 2, options: [] }); // `options` changed
+        expect(componentRef._setSearchListPosition).toHaveBeenCalledTimes(3);
     });
 
     it("sets up groups and options in constructor", function () {
