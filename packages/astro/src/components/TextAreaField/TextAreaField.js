@@ -6,6 +6,7 @@ import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 import TextArea from '../TextArea';
+import useColumnStyles from '../../hooks/useColumnStyles';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -31,6 +32,7 @@ const TextAreaField = forwardRef((props, ref) => {
   };
 
   const { isLabelHigher } = useLabelHeight({ labelRef, inputRef: textAreaRef });
+  const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
   useEffect(() => {
     if (!props.isUnresizable && props.labelMode === 'float') {
@@ -42,7 +44,7 @@ const TextAreaField = forwardRef((props, ref) => {
   }, []);
 
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps}>
+    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       <Label ref={labelRef} {...fieldLabelProps} sx={isLabelHigher && { gridRow: '1/5' }} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} />
