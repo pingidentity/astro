@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.20.2...@pingux/flow-diagram@0.21.0) (2021-08-23)
+
+
+### Features
+
+* [UIP-4705] Highlight dropzones ([c8ebdda](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c8ebdda8d617fecf8bcf9fac200e4978c8de0070))
+* [UIP-4709] Remove orange ports ([c64a24d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c64a24d679c6ef194cf2147306deeba4f64d6c75))
+
+
+
+
+
 ## [0.20.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.20.1...@pingux/flow-diagram@0.20.2) (2021-08-20)
 
 

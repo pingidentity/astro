@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.41.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.2...ui-library@4.41.3) (2021-08-23)
+
+
+### Bug Fixes
+
+* [UIP-4674] ColumnChart axis unit props ([6653c41](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/6653c41f02e22b76f74a100433b2c19046ad3027))
+
+
+
+
+
 ## [4.41.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.1...ui-library@4.41.2) (2021-08-20)
 
 
