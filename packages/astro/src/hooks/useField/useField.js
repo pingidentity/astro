@@ -133,6 +133,7 @@ const useField = (props = {}) => {
     defaultValue,
     disabled: isDisabled,
     id,
+    isFocused: hasFocusWithin,
     name,
     onChange: fieldOnChange,
     placeholder,

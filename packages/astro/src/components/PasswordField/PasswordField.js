@@ -1,16 +1,21 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
+import { useOverlayPosition } from '@react-aria/overlays';
+import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 
 import useField from '../../hooks/useField';
 import useProgressiveState from '../../hooks/useProgressiveState';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import Input from '../Input';
 import Label from '../Label';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
+import PopoverContainer from '../PopoverContainer';
+import RequirementsList from '../RequirementsList';
 
 /**
   * Combines a text input, label, IconButton and helper text for a complete, form-ready solution.
@@ -22,21 +27,35 @@ const PasswordField = forwardRef((props, ref) => {
     onVisibleChange: onVisibleChangeProp,
     viewHiddenIconTestId,
     viewIconTestId,
+    requirements,
     ...others
   } = props;
+
+  const checkRequirements = () => {
+    let met = true;
+    if (requirements.filter(req => req.status === 'default').length > 0) {
+      met = false;
+    }
+    return met;
+  };
+
   const {
     fieldContainerProps,
     fieldControlProps,
     fieldLabelProps,
   } = useField(others);
 
+  const { isFocused } = fieldControlProps;
+
   const inputRef = useRef();
+  const popoverRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
   const [isVisible, setIsShown] = useProgressiveState(
     isVisibleProp,
     onVisibleChangeProp);
+
   const onVisibleChange = (...args) => {
     setIsShown(!isVisible);
     if (onVisibleChangeProp) {
@@ -44,22 +63,82 @@ const PasswordField = forwardRef((props, ref) => {
     }
   };
 
+  // Measure the width of the input to inform the width of the menu (below).
+  const [menuWidth, setMenuWidth] = useState(null);
+
+  const onResize = useCallback(() => {
+    /* istanbul ignore next */
+    if (inputRef.current) {
+      setMenuWidth(inputRef.current.offsetWidth);
+    }
+  }, [inputRef, setMenuWidth]);
+
+  useResizeObserver({
+    ref: inputRef,
+    onResize,
+  });
+
+  useLayoutEffect(onResize, [onResize]);
+
+  const { overlayProps, placement, updatePosition } = useOverlayPosition({
+    targetRef: inputRef,
+    overlayRef: popoverRef,
+    placement: 'bottom end',
+    isOpen: true,
+  });
+
+  useLayoutEffect(() => {
+    if (isFocused) {
+      requestAnimationFrame(() => {
+        updatePosition();
+      });
+    }
+  }, [isFocused, updatePosition]);
+
+  const style = {
+    ...overlayProps.style,
+    width: menuWidth,
+    minWidth: menuWidth,
+  };
+
+  const { classNames } = useStatusClasses(fieldControlProps.className, {
+    'is-success': checkRequirements() && requirements.length > 1,
+  });
+
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps}>
-      <Label {...fieldLabelProps} />
-      <Box variant="forms.input.container" isRow className={fieldControlProps.className}>
-        <Input ref={inputRef} {...fieldControlProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} />
-        <Box variant="forms.input.containedIcon">
-          <IconButton isDisabled={fieldControlProps.disabled} size={28} onPress={onVisibleChange} >
-            <Icon
-              data-testid={isVisible ? viewIconTestId : viewHiddenIconTestId}
-              icon={isVisible ? EyeIcon : EyeOffIcon}
-            />
-          </IconButton>
+    <>
+      <Box variant="forms.input.wrapper" {...fieldContainerProps} >
+        <Label {...fieldLabelProps} />
+        <Box variant="forms.input.container" isRow className={classNames}>
+          <Input ref={inputRef} {...fieldControlProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="form" />
+          <Box variant="forms.input.containedIcon">
+            <IconButton
+              aria-label="visible-icon"
+              isDisabled={fieldControlProps.disabled}
+              size={28}
+              onPress={onVisibleChange}
+            >
+              <Icon
+                data-testid={isVisible ? viewIconTestId : viewHiddenIconTestId}
+                icon={isVisible ? EyeIcon : EyeOffIcon}
+              />
+            </IconButton>
+          </Box>
+          {slots?.inContainer}
         </Box>
-        {slots?.inContainer}
       </Box>
-    </Box>
+      <PopoverContainer
+        isOpen={isFocused && requirements && Array.isArray(requirements) && !checkRequirements()}
+        ref={popoverRef}
+        placement={placement}
+        style={style}
+        hasNoArrow
+        isNonModal
+        isDismissable={false}
+      >
+        <RequirementsList requirements={requirements} />
+      </PopoverContainer>
+    </>
   );
 });
 
@@ -128,6 +207,8 @@ PasswordField.propTypes = {
   viewHiddenIconTestId: PropTypes.string,
   /** Prop that allows testing of the icon button. */
   viewIconTestId: PropTypes.string,
+  /** Array of Requirements and their status. */
+  requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
 };
 
 PasswordField.defaultProps = {
@@ -137,6 +218,7 @@ PasswordField.defaultProps = {
   isRequired: false,
   type: 'password',
   status: statuses.DEFAULT,
+  requirements: [],
 };
 
 PasswordField.displayName = 'PasswordField';
