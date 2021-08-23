@@ -13,4 +13,5 @@ export const COLORS = {
     WHITE: colors.white,
     ORANGE: colors.decorative[1],
     TRANSLUCENTPURPLE: `${colors.decorative[0]}80`,
+    TRANSLUCENTRED: `${colors.decorative[8]}80`,
 };

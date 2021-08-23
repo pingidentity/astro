@@ -5,12 +5,10 @@ import useDiagram, {
     addNodes,
     dragGroupTogether,
     getBorderWidth,
-    handleHighlight,
     removeLinks,
     removeNodes,
     renderPortCursor,
 } from './useDiagram';
-import { COLORS } from '../../utils/constants';
 
 jest.mock('../../components/ZoomSlider/ZoomSlider.js');
 jest.mock('../../components/NonRealtimeDraggingTool/NonRealtimeDraggingTool.js');
@@ -336,14 +334,6 @@ describe('useDiagram', () => {
 
     it('getBorderWidth returns correct with if isSelected is false', () => {
         expect(getBorderWidth(false)).toEqual(1);
-    });
-
-    it('handleHilight returns correct with if isHighlighted is true', () => {
-        expect(handleHighlight(true)).toEqual(COLORS.PURPLE);
-    });
-
-    it('handleHilight returns correct with if isHighlighted is false', () => {
-        expect(handleHighlight(false)).toEqual(COLORS.BLUE);
     });
 
     it('dragGroupTogether adds grouped objects if there is a containing group', () => {

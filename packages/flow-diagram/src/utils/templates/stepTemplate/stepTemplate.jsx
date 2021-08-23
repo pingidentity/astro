@@ -2,7 +2,7 @@ import React from 'react';
 import * as go from 'gojs';
 import { Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
-import { encodeSvg, getSize } from '../templateUtils';
+import { encodeSvg, getSize, dragEnter, dragLeave } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode, bottomNode } from '../nodes';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
@@ -23,34 +23,10 @@ export const getIcon = iconColor => (iconSrc) => {
 };
 
 export const getIfLengthGreater = (s, ifTrue, ifFalse, target) => {
-    return s.length > target ? ifTrue : ifFalse;
-};
-
-// Would require mocking node
-/* istanbul ignore next */
-export const dragEnter = (e, obj) => {
-    const node = obj.part;
-    node.findObject('borderRectangle').stroke = COLORS.PURPLE;
-    node.findObject('fromNode').stroke = '#D033FF';
-    node.findObject('fromNode').fill = COLORS.PURPLE;
-    node.findObject('fromNodeOuter').fill = 'rgba(208, 51, 255, 0.5)';
-};
-
-// Would require mocking node
-/* istanbul ignore next */
-export const dragLeave = (selectedColor, errorColor, defaultColor) => (e, obj) => {
-    const node = obj.part;
-    if (node.isSelected || node.data.isSelected) {
-        node.findObject('borderRectangle').stroke = selectedColor;
-    } else if (node.data.errorMessage) {
-        node.findObject('borderRectangle').stroke = errorColor;
-    } else {
-        node.findObject('borderRectangle').stroke = defaultColor;
+    if (s === undefined) {
+        return false;
     }
-
-    node.findObject('fromNode').stroke = COLORS.WHITE;
-    node.findObject('fromNode').fill = node.data.color;
-    node.findObject('fromNodeOuter').fill = 'transparent';
+    return s.length > target ? ifTrue : ifFalse;
 };
 
 /* istanbul ignore next */
@@ -80,8 +56,6 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
 // Would have to mock a lot of gojs to test. May do this later.
 export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, 'Spot',
     {
-        mouseDragEnter: dragEnter,
-        mouseDragLeave: dragLeave(COLORS.BLUE, COLORS.ERROR, 'transparent'),
         click: onClick,
         selectionAdorned: false,
         textEditable: true,
@@ -94,13 +68,15 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
         selectable: false,
         deletable: false,
         resizable: true,
+        mouseDragEnter: dragEnter,
+        mouseDragLeave: dragLeave,
     },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     new go.Binding('click', 'onClick'),
     $(go.Panel, 'Auto',
         { name: 'BODY' },
         $(go.Shape, 'RoundedRectangle',
-            { fill: 'transparent', stroke: 'transparent', strokeWidth: 0 }),
+            { fill: 'transparent', strokeWidth: 0 }),
         new go.Binding('minSize', '', s => getIfLengthGreater(s.errorMessage, getSize(s, 'errorContainer'), getSize(s, ''), 0)),
         $(go.Panel, 'Vertical', { padding: 15, alignment: go.Spot.Top },
             new go.Binding('visible', '', s => getIfLengthGreater(s.errorMessage, true, false, 0)),

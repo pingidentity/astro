@@ -1,23 +1,9 @@
 import * as go from 'gojs';
 import { COLORS } from '../../constants';
-import { getSize } from '../templateUtils';
+import { dragEnter, dragLeave, getSize } from '../templateUtils';
 import { fromNode } from '../nodes';
 
 const $ = go.GraphObject.make;
-
-export const dragEnter = (e, obj) => {
-    const node = obj.part;
-    node.findObject('fromNode').stroke = COLORS.PURPLE;
-    node.findObject('fromNode').fill = COLORS.PURPLE;
-    node.findObject('fromNodeOuter').fill = 'rgba(208, 51, 255, 0.5)';
-};
-
-export const dragLeave = (e, obj) => {
-    const node = obj.part;
-    node.findObject('fromNode').stroke = COLORS.WHITE;
-    node.findObject('fromNode').fill = '#4262ed';
-    node.findObject('fromNodeOuter').fill = 'transparent';
-};
 
 export const outletTemplate = ({ color = COLORS.BLACK } = {}) => $(go.Node, 'Spot',
     {

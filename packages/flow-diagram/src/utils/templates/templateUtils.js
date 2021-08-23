@@ -19,6 +19,22 @@ export function encodeSvg(svgString) {
 
 export const svgComponentToBase64 = component => `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(component))}`;
 
+// Would require mocking node
+/* istanbul ignore next */
+export const dragEnter = (e, obj) => {
+    const node = obj.part;
+    node.findObject('fromNodeOuter').width = 30;
+    node.findObject('fromNodeOuter').height = 30;
+};
+
+// Would require mocking node
+/* istanbul ignore next */
+export const dragLeave = (e, obj) => {
+    const node = obj.part;
+    node.findObject('fromNodeOuter').width = 20;
+    node.findObject('fromNodeOuter').height = 20;
+};
+
 const textBlock =
     $(go.Part,
         $(go.TextBlock, { font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN) }));
@@ -71,18 +87,23 @@ export const getSize = (s, element) => {
         case 'shape':
             return new go.Size(60, height + 27);
         case 'transparentContainer':
-            return new go.Size(width < 181 ? width + 88 : 269, height + 27);
+            return new go.Size(width < 181 ? width + 99 : 280, height + 27);
         case 'bottomNode':
             return new go.Margin(height + 24, 0, 0, 0);
         case 'paletteContainer':
             return new go.Size(250, paletteBlockHeight + 21);
         case 'outlet':
             return new go.Size(outletBlockWidth, outletBlockHeight);
+        case 'outer':
+            return new go.Size(width < 181 ? width + 69 : 250, height + 27);
         default:
             return new go.Size(width < 181 ? width + 69 : 250, height + 27);
     }
 };
 
-export const getIfLengthGreater = (ifTrue, ifFalse, target) => (s) => {
+export const getIfLengthGreater = (s, ifTrue, ifFalse, target) => {
+    if (s === undefined) {
+        return false;
+    }
     return s.length > target ? ifTrue : ifFalse;
 };
