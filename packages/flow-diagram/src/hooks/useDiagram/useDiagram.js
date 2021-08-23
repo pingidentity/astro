@@ -89,7 +89,30 @@ export const externalObjectsDropped = (e) => {
     });
 };
 
-export const handleHighlight = isHighlighted => (isHighlighted ? COLORS.PURPLE : COLORS.BLUE);
+export const dontShowDropzones = (diagram) => {
+    diagram.links.each((n) => {
+        const selectedLink = n;
+        if (selectedLink.data.category === undefined) {
+            if (selectedLink.fromPort.findObject('fromNode')?.visible === true) {
+                selectedLink.fromPort.findObject('fromNode').fill = selectedLink.fromPort.findObject('fromNodeOuter').stroke;
+                selectedLink.fromPort.findObject('fromNode').stroke = COLORS.WHITE;
+                selectedLink.fromPort.findObject('fromNodeOuter').fill = 'transparent';
+            }
+            selectedLink.findObject('arrow').fill = COLORS.BLUE;
+            selectedLink.findObject('arrow').stroke = COLORS.BLUE;
+            selectedLink.findObject('link').stroke = COLORS.BLUE;
+            selectedLink.isHighlighted = false;
+        }
+    });
+    diagram.nodes.each((n) => {
+        const node = n;
+        if (node.data.category === 'outlet') {
+            node.findObject('fromNode').fill = node.findObject('fromNodeOuter').stroke;
+            node.findObject('fromNode').stroke = COLORS.WHITE;
+            node.findObject('fromNodeOuter').fill = 'transparent';
+        }
+    });
+};
 
 export const getBorderWidth = isSelected => (isSelected ? 2 : 1);
 
@@ -105,6 +128,7 @@ export default function useDiagram({
     const [droppedOntoLinkKey, setDroppedOntoLinkKey] = useState(undefined);
     const [droppedOntoNodeKey, setDroppedOntoNodeKey] = useState(undefined);
     const [selected, setSelected] = useState(null);
+    const [isObjectDragging, setIsObjectDragging] = useState(false);
     const first = useRef(true);
 
     useEffect(() => {
@@ -204,7 +228,10 @@ export default function useDiagram({
         nodeTemplates.forEach(([name, template]) => {
             const updatedTemplate = template;
             const templateClick = template.click;
-            updatedTemplate.mouseDrop = (e, node) => setDroppedOntoNodeKey(node.key);
+            updatedTemplate.mouseDrop = (e, node) => {
+                setDroppedOntoNodeKey(node.key);
+                dontShowDropzones(diagramObject);
+            };
             updatedTemplate.click = (e, node) => {
                 if (typeof templateClick === 'function') {
                     templateClick();
@@ -218,57 +245,79 @@ export default function useDiagram({
             diagramObject.groupTemplateMap.add(name, template);
         });
 
+        diagramObject.mouseDragOver = () => {
+            if (!isObjectDragging) {
+                setIsObjectDragging(true);
+            }
+            diagramObject.links.each((n) => {
+                const selectedLink = n;
+                if (selectedLink.data.category === undefined &&
+                    selectedLink.isHighlighted === false) {
+                    if (selectedLink.fromPort.findObject('fromNode')?.visible === true) {
+                        selectedLink.fromPort.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
+                        selectedLink.fromPort.findObject('fromNode').fill = COLORS.PURPLE;
+                        selectedLink.fromPort.findObject('fromNode').stroke = COLORS.PURPLE;
+                    }
+                    selectedLink.findObject('arrow').fill = COLORS.PURPLE;
+                    selectedLink.findObject('arrow').stroke = COLORS.PURPLE;
+                    selectedLink.findObject('link').stroke = COLORS.PURPLE;
+                    selectedLink.isHighlighted = true;
+                }
+            });
+            diagramObject.nodes.each((n) => {
+                const node = n;
+                if (node.data.category === 'outlet') {
+                    node.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
+                    node.findObject('fromNode').fill = COLORS.PURPLE;
+                    node.findObject('fromNode').stroke = COLORS.PURPLE;
+                }
+            });
+        };
+
+        diagramObject.mouseDrop = () => {
+            dontShowDropzones(diagramObject);
+        };
+
+
+        diagramObject.mouseLeave = () => {
+            dontShowDropzones(diagramObject);
+        };
+
         diagramObject.linkTemplate =
             $(go.Link,
                 {
                     routing: go.Link.AvoidsNodes,
                     curve: go.Link.JumpOver,
                     corner: 5,
-                    fromShortLength: -10,
-                    toShortLength: -10,
+                    fromShortLength: -20,
+                    toShortLength: -20,
                     selectable: true,
                     layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
                     selectionAdorned: false,
                     fromPortId: 'from',
                     toPortId: 'to',
                     layerName: 'Background',
-                    mouseDragEnter: (e, link) => {
+                    mouseDrop: (e, link) => {
                         const selectedLink = link.part;
-                        selectedLink.fromNode.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
-                        selectedLink.fromNode.findObject('fromNodeOuter').stroke = selectedLink.fromNode.findObject('fromNode').fill;
-                        selectedLink.fromNode.findObject('fromNode').fill = COLORS.PURPLE;
-                        selectedLink.fromNode.findObject('fromNode').stroke = COLORS.PURPLE;
-                        selectedLink.toNode.findObject('toNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
-                        selectedLink.toNode.findObject('toNodeOuter').stroke = selectedLink.toNode.findObject('toNode').fill;
-                        selectedLink.toNode.findObject('toNode').fill = COLORS.PURPLE;
-                        selectedLink.toNode.findObject('toNode').stroke = COLORS.PURPLE;
-                        selectedLink.findObject('arrow').fill = COLORS.PURPLE;
-                        selectedLink.findObject('arrow').stroke = COLORS.PURPLE;
+                        setDroppedOntoLinkKey(link.key);
+                        dontShowDropzones(diagramObject);
+                        selectedLink.findObject('arrow').stroke = COLORS.BLUE;
+                    },
+                    mouseDragEnter: (e, link) => {
+                        const selectedLink = link;
                         // eslint-disable-next-line
-                        link.isHighlighted = true;
+                        selectedLink.findObject('link').strokeWidth = 3;
                     },
                     mouseDragLeave: (e, link) => {
-                        const selectedLink = link.part;
-                        selectedLink.fromNode.findObject('fromNode').fill = selectedLink.fromNode.findObject('fromNodeOuter').stroke;
-                        selectedLink.fromNode.findObject('fromNode').stroke = COLORS.WHITE;
-                        selectedLink.fromNode.findObject('fromNodeOuter').fill = 'transparent';
-                        selectedLink.toNode.findObject('toNode').fill = selectedLink.toNode.findObject('toNodeOuter').stroke;
-                        selectedLink.toNode.findObject('toNode').stroke = COLORS.WHITE;
-                        selectedLink.toNode.findObject('toNodeOuter').fill = 'transparent';
-                        selectedLink.findObject('arrow').fill = COLORS.BLUE;
-                        selectedLink.findObject('arrow').stroke = COLORS.BLUE;
-                        // eslint-disable-next-line
-                        link.isHighlighted = false;
+                        const selectedLink = link;
+                        selectedLink.findObject('link').strokeWidth = 1;
                     },
-                    mouseDrop: (e, link) => setDroppedOntoLinkKey(link.key),
                 },
                 new go.Binding('click', 'onClick'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
                 $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
-                $(go.Shape, { isPanelMain: true },
-                    new go.Binding('stroke', 'isHighlighted', handleHighlight).ofObject(),
-                    new go.Binding('strokeWidth', 'isHighlighted', getBorderWidth).ofObject(''),
+                $(go.Shape, { isPanelMain: true, name: 'link', stroke: COLORS.BLUE },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
                 $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),

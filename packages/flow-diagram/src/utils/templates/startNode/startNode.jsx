@@ -6,7 +6,7 @@ import { Error } from '@pingux/icons/';
 import ReactDOMServer from 'react-dom/server';
 import { COLORS } from '../../constants';
 import { fromNode, bottomNode } from '../nodes';
-import { svgComponentToBase64, encodeSvg, getIfLengthGreater } from '../templateUtils';
+import { svgComponentToBase64, dragEnter, dragLeave, encodeSvg, getIfLengthGreater } from '../templateUtils';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
 
@@ -19,33 +19,6 @@ export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part
         return errorColor;
     }
     return defaultColor;
-};
-
-
-/* istanbul ignore next */
-export const dragEnter = (e, obj) => {
-    const node = obj.part;
-    node.findObject('borderCircle').stroke = COLORS.PURPLE;
-    node.findObject('fromNode').stroke = '#D033FF';
-    node.findObject('fromNode').fill = COLORS.PURPLE;
-    node.findObject('fromNodeOuter').fill = 'rgba(208, 51, 255, 0.5)';
-};
-
-// Would require mocking node
-/* istanbul ignore next */
-export const dragLeave = (selectedColor, errorColor, defaultColor) => (e, obj) => {
-    const node = obj.part;
-    if (node.isSelected) {
-        node.findObject('borderCircle').stroke = selectedColor;
-    } else if (node.data.errorMessage) {
-        node.findObject('borderCircle').stroke = errorColor;
-    } else {
-        node.findObject('borderCircle').stroke = defaultColor;
-    }
-
-    node.findObject('fromNode').stroke = COLORS.WHITE;
-    node.findObject('fromNode').fill = COLORS.BLUE;
-    node.findObject('fromNodeOuter').fill = 'transparent';
 };
 
 export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
@@ -62,7 +35,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
                 fromMaxLinks: 1,
                 click: onClick,
                 mouseDragEnter: dragEnter,
-                mouseDragLeave: dragLeave(COLORS.BLUE, COLORS.ERROR, 'transparent'),
+                mouseDragLeave: dragLeave,
                 isShadowed: true,
                 shadowColor: 'rgb(211, 211, 211, .75)',
                 shadowOffset: new go.Point(0, 1),
@@ -70,9 +43,9 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
             },
             $(go.Shape, 'RoundedRectangle',
                 { fill: 'transparent', strokeWidth: 0, cursor: 'normal' }),
-            new go.Binding('minSize', 'errorMessage', getIfLengthGreater(new go.Size(65, 130), new go.Size(65, 65), 0)),
+            new go.Binding('minSize', 'errorMessage', s => getIfLengthGreater(s.errorMessage, new go.Size(65, 130), new go.Size(65, 65), 0)),
             $(go.Panel, 'Vertical', { alignment: go.Spot.Top, padding: 15 },
-                new go.Binding('visible', 'errorMessage', getIfLengthGreater(true, false, 0)),
+                new go.Binding('visible', '', s => getIfLengthGreater(s.errorMessage, true, false, 0)),
                 $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20, margin: new go.Margin(0, 0, 0, 0) }),
                 {
                     mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
@@ -81,7 +54,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
             ),
             new go.Binding('location', 'loc', go.Point.parse),
             $(go.Shape, 'Circle',
-                { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(65, 65), cursor: 'normal' },
+                { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(90, 125), cursor: 'normal' },
             ),
             $(go.Shape, 'Circle',
                 { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal', shadowVisible: true },
