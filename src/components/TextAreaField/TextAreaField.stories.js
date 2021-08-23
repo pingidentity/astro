@@ -4,7 +4,6 @@ import Box from '../Box';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
 
-
 export default {
   title: 'Form/TextAreaField',
   component: TextAreaField,
@@ -83,13 +82,26 @@ export const LeftLabel = () => (
     />
 
     <TextAreaField
-      helperText="Here is some helpful text..."
-      label="Example label"
+      label="Example label that is much longer than the previous one"
       labelMode="left"
       status="error"
     />
+
+    <TextAreaField
+      label="Example label with set width"
+      labelMode="left"
+      containerProps={{ sx: { gridTemplateColumns: '120px auto' } }}
+    />
   </Box>
 );
+
+LeftLabel.parameters = {
+  docs: {
+    description: {
+      story: 'Users are able to override the default 40% column width when using left label by providing a new gridTemplatesColumn value, as shown in the example below.',
+    },
+  },
+};
 
 export const Controlled = () => {
   const [value, setValue] = useState();

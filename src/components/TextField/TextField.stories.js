@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import TextField from '.';
 import { modes as labelModes } from '../Label/constants';
 import statuses from '../../utils/devUtils/constants/statuses.js';
+import Box from '../Box';
 
 export default {
   title: 'Form/TextField',
@@ -57,12 +58,31 @@ export const FloatLabel = () => (
 );
 
 export const LeftLabel = () => (
-  <TextField
-    helperText="Here is some helpful text..."
-    label="Example Label"
-    labelMode="left"
-  />
+  <Box gap="xl" width="100%">
+    <TextField
+      helperText="Here is some helpful text..."
+      label="Example Label"
+      labelMode="left"
+    />
+    <TextField
+      label="Example Label that is much longer than the previous one"
+      labelMode="left"
+    />
+    <TextField
+      label="Example label with set width"
+      labelMode="left"
+      containerProps={{ sx: { gridTemplateColumns: '120px auto' } }}
+    />
+  </Box>
 );
+
+LeftLabel.parameters = {
+  docs: {
+    description: {
+      story: 'Users are able to override the default 40% column width when using left label by providing a new gridTemplatesColumn value, as shown in the example below.',
+    },
+  },
+};
 
 export const Controlled = () => {
   const [value, setValue] = useState('');
