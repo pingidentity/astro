@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.21.1...@pingux/astro@0.21.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* [UIP-4225] add Requirements Popover to PasswordField ([79dcf17](https://gitlab.corp.pingidentity.com/ux/pingux/commit/79dcf174174e00cacf88e7a1b431bf17cd2fb58d))
+* [UIP-4440] left label alignment issues ([055e167](https://gitlab.corp.pingidentity.com/ux/pingux/commit/055e167d468d8f48feaf654affa49d94cfd717ce))
+* [UIP-4689] Icon button isn't a circle in ListItem component ([263e114](https://gitlab.corp.pingidentity.com/ux/pingux/commit/263e1147304e3644d0cb797b71df6f70645367d5))
+
+
+
+
+
 ## [0.21.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.21.0...@pingux/astro@0.21.1) (2021-08-20)
 
 
