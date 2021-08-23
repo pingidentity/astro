@@ -19,6 +19,7 @@ import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
 import { modes } from '../Label/constants';
 import Loader from '../Loader';
+import useColumnStyles from '../../hooks/useColumnStyles/useColumnStyles';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -161,6 +162,7 @@ const SelectField = forwardRef((props, ref) => {
     minWidth: buttonWidth,
   };
 
+  const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
   const isLoadingInitial = props.isLoading && state.collection.size === 0;
   const isLoadingMore = props.isLoading && state.collection.size > 0;
 
@@ -201,7 +203,7 @@ const SelectField = forwardRef((props, ref) => {
   );
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       {/* Actual label is applied to the hidden select */}
       <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect

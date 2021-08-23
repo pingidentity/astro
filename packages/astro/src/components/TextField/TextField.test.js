@@ -50,3 +50,18 @@ test('label will receive gridRow attribute if it will be higher than input', () 
   expect(screen.getByText(defaultProps.label)).toHaveStyle('grid-row: 1/5');
   Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
 });
+
+test('form wrapper will have default max label column width when no custom width set', () => {
+  const labelMode = 'left';
+  getComponent({ labelMode });
+  const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer).toHaveStyle('grid-template-columns: 40% auto');
+});
+
+test('form wrapper will have a max label column width when custom width set', () => {
+  const labelMode = 'left';
+  const containerProps = { sx: { gridTemplateColumns: '120px auto' } };
+  getComponent({ labelMode, containerProps });
+  const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer).toHaveStyle('grid-template-columns: 120px auto');
+});
