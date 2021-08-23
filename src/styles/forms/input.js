@@ -59,9 +59,9 @@ input.small = {
 };
 
 input.wrapper = {
+  position: 'relative',
   '&.is-left-label': {
     display: 'inline-grid',
-    gridTemplateColumns: 'auto auto',
     gridTemplateRows: 'auto auto',
   },
   '> .is-default': {

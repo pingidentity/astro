@@ -6,6 +6,7 @@ import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Input from '../Input';
 import Label from '../Label';
+import useColumnStyles from '../../hooks/useColumnStyles';
 
 /**
  * Combines a text input, label, and helper text for a complete, form-ready solution.
@@ -24,9 +25,10 @@ const TextField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   const { isLabelHigher } = useLabelHeight({ labelRef, inputRef });
+  const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps}>
+    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
       <Box variant="forms.input.container" className={fieldControlProps.className}>
         <Input ref={inputRef} {...fieldControlProps} />
@@ -45,6 +47,8 @@ const TextField = forwardRef((props, ref) => {
 TextField.propTypes = {
   /** The rendered label for the field. */
   label: PropTypes.node,
+  /** A string designating whether or not the label is a float label. */
+  labelMode: PropTypes.string,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
   /** The unique identifier for the input element. */
