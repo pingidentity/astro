@@ -59,6 +59,7 @@ test('should return props objects for field components', () => {
     defaultValue: defaultProps.defaultValue,
     disabled: true,
     id: defaultProps.id,
+    isFocused: false,
     readOnly: true,
     required: true,
     onBlur: expect.any(Function),
