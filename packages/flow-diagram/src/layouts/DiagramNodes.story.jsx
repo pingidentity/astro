@@ -247,6 +247,8 @@ Branch.propTypes = {
     hasIO: PropTypes.bool,
     /** Determines whether element is node or group */
     isGroup: PropTypes.bool,
+    /** Determines what is root node for auto layout (only nodes connected to this will auto layout) */
+    isRoot: PropTypes.bool,
     /** Node/Group key */
     key: PropTypes.string,
     /** Subtitle of step node */

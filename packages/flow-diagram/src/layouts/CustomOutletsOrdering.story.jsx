@@ -52,7 +52,7 @@ export const DiagramComponent = () => {
         { 'key': 'user-login-c', 'category': 'outlet', color: '#E4E7E9', 'text': 'c', 'group': 'group', index: 3 },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished', 'group': 'isFinished', hasIO: false },
-        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false }]);
+        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false, 'isRoot': true }]);
 
     const [diagramLinks, setDiagramLinks] = React.useState([
         { 'from': 'user-login', 'to': 'user-login-a', 'key': 'user-login_user-login-a', 'category': 'outlet' },

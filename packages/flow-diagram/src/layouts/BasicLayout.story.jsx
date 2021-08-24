@@ -39,7 +39,6 @@ const Demo = () => {
         { isGroup: 'true', 'key': 'group' },
         { isGroup: 'true', 'key': 'isFinished' },
         { isGroup: 'true', 'key': 'loginGroup' },
-        { isGroup: 'true', 'key': 'executeGroup' },
         {
             'key': 'user-login',
             'category': 'step',
@@ -50,24 +49,12 @@ const Demo = () => {
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
         },
-        { isGroup: 'true', 'key': 'execute_group' },
-        {
-            'key': 'step',
-            'category': 'step',
-            'stepId': 'registration',
-            'text': 'Execute Flow',
-            'group': 'executeGroup',
-            hasIO: false,
-            getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
-            color: '#228C22',
-            errorMessage: 'Some data is invalid here',
-        },
         { 'key': 'branch', 'category': 'branch', 'group': 'group', 'text': 'Branch', hasIO: false },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', 'group': 'group' },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished', 'text': 'Complete', 'group': 'isFinished', hasIO: false },
-        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false }]);
+        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false, 'isRoot': true }]);
 
     const [diagramLinks, setDiagramLinks] = useState([
         { 'from': 'branch', 'to': 'user-login-success', 'key': 'branch_user-login-success', 'category': 'outlet' },
@@ -134,7 +121,7 @@ const Demo = () => {
                 setDiagramNodes([
                     ...diagramNodes,
                     // Remove placeholder categories from nodes
-                    ...addedNodes.flatMap(({ category, key, loc, ...node }) => {
+                    ...addedNodes.flatMap(({ category, key, ...node }) => {
                         const replacementKey = key;
                         const modifiedNode = {
                             ...node,
