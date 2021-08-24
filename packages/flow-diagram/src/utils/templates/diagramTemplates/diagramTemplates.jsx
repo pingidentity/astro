@@ -22,6 +22,8 @@ export const diagramGroupTemplate = ({ comparer } = {}) =>
                 },
             ),
         },
+        new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
+
         $(go.Shape, 'Rectangle',
             { fill: 'transparent', stroke: 'transparent', cursor: 'normal' },
             new go.Binding('strokeWidth', 'isSelected', (s) => s ? 1 : 0).ofObject(''),

@@ -34,6 +34,7 @@ export const Errors = () => {
             'id': 'START',
             'errorMessage': 'This is a start error',
             hasIO: false,
+            'isRoot': true
         },
     ];
 

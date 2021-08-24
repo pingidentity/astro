@@ -59,6 +59,7 @@ jest.mock('gojs', (replacements) => {
         })),
         Part: () => {},
         Spot: () => {},
+        LayeredDigraphLayout: () => {},
     });
 });
 
