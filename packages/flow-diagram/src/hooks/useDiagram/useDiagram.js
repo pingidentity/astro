@@ -78,6 +78,7 @@ export const dragGroupTogether = compute =>
         return compute.call(this, all, options);
     };
 
+/* istanbul ignore next */
 export const externalObjectsDropped = (e) => {
     e.subject.each((node) => {
         if (node instanceof go.Link) return;
@@ -90,6 +91,13 @@ export const externalObjectsDropped = (e) => {
     });
 };
 
+/* istanbul ignore next */
+export const layoutConnected = (e) => {
+    e.diagram.layout.isValidLayout = false;
+    e.diagram.layout.invalidateLayout(true);
+};
+
+/* istanbul ignore next */
 export const dontShowDropzones = (diagram) => {
     diagram.links.each((n) => {
         const selectedLink = n;
@@ -219,6 +227,7 @@ export default function useDiagram({
                             setSelected(null);
                         }
                     },
+                    'SelectionMoved': layoutConnected,
                     model: $(go.GraphLinksModel,
                         {
                             linkKeyProperty: 'key',

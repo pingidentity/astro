@@ -69,9 +69,6 @@ export const bottomNode = ({ margin } = { margin: new go.Margin(0, 0, 0, 0) }) =
     new go.Binding('margin', '', s => (s.category === 'step' ? getSize(s, 'bottomNode') : margin)),
     // Same thing as above
     $(go.Shape, 'Circle',
-        { width: 20, height: 20, stroke: COLORS.WHITE, strokeWidth: 0, fill: 'transparent' },
-    ),
-    $(go.Shape, 'Circle',
-        { width: 9, height: 9, stroke: COLORS.WHITE, fill: COLORS.ORANGE, strokeWidth: 2 },
+        { width: 0, height: 0, strokeWidth: 0, fill: 'transparent' },
     ),
 );

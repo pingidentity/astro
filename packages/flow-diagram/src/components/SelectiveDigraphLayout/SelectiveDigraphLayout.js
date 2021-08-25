@@ -1,5 +1,6 @@
 import * as go from 'gojs';
 
+/* istanbul ignore file */
 class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
     doLayout(coll) {
         const parts = this.collectParts(coll).filter((p) => {
