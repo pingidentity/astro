@@ -10,6 +10,7 @@ import useProgressiveState from '../../hooks/useProgressiveState';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
+import FieldHelperText from '../FieldHelperText';
 import Input from '../Input';
 import Label from '../Label';
 import Icon from '../Icon';
@@ -22,9 +23,11 @@ import RequirementsList from '../RequirementsList';
  */
 const PasswordField = forwardRef((props, ref) => {
   const {
-    slots,
+    helperText,
     isVisible: isVisibleProp,
     onVisibleChange: onVisibleChangeProp,
+    slots,
+    status,
     viewHiddenIconTestId,
     viewIconTestId,
     requirements,
@@ -43,7 +46,7 @@ const PasswordField = forwardRef((props, ref) => {
     fieldContainerProps,
     fieldControlProps,
     fieldLabelProps,
-  } = useField(others);
+  } = useField({ status, ...others });
 
   const { isFocused } = fieldControlProps;
 
@@ -102,7 +105,7 @@ const PasswordField = forwardRef((props, ref) => {
   };
 
   const { classNames } = useStatusClasses(fieldControlProps.className, {
-    'is-success': checkRequirements() && requirements.length > 1,
+    'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 1),
   });
 
   return (
@@ -126,6 +129,12 @@ const PasswordField = forwardRef((props, ref) => {
           </Box>
           {slots?.inContainer}
         </Box>
+        {
+          helperText &&
+          <FieldHelperText status={status}>
+            {helperText}
+          </FieldHelperText>
+        }
       </Box>
       <PopoverContainer
         isOpen={isFocused && requirements && Array.isArray(requirements) && !checkRequirements()}
@@ -203,9 +212,9 @@ PasswordField.propTypes = {
   controlProps: PropTypes.shape({}),
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
-  /** Prop that allows testing of the icon button. */
+  /** @ignore Prop that allows testing of the icon button. */
   viewHiddenIconTestId: PropTypes.string,
-  /** Prop that allows testing of the icon button. */
+  /** @ignore Prop that allows testing of the icon button. */
   viewIconTestId: PropTypes.string,
   /** Array of Requirements and their status. */
   requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),

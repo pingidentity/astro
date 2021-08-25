@@ -145,3 +145,10 @@ test('if all requirements are successful, do not render popover', () => {
   userEvent.click(input);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
+
+test('password field with helper text', () => {
+  const helperText = 'helper text';
+  getComponent({ helperText });
+  const helper = screen.getByText(helperText);
+  expect(helper).toBeInTheDocument();
+});
