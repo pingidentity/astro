@@ -239,6 +239,8 @@ const helpHint = {
   mt: 'auto',
   mb: 'auto',
   ml: '5px',
+  maxWidth: '13px',
+  maxHeight: '14px',
   'path': {
     fill: 'neutral.20',
   },
