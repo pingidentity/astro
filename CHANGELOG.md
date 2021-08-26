@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.21.2...@pingux/astro@0.22.0) (2021-08-26)
+
+
+### Bug Fixes
+
+* [UIP-4738] Fix help hint styles ([105b066](https://gitlab.corp.pingidentity.com/ux/pingux/commit/105b06606980c677bd8bc6eaa89ffdf45483f8fc))
+
+
+### Features
+
+* [UIP-4751] Add support for helper text to the Password Field component ([ffc1d29](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ffc1d29076c50848763af5d37d4331d89e295c23))
+
+
+
+
+
 ## [0.21.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.21.1...@pingux/astro@0.21.2) (2021-08-23)
 
 
