@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import PasswordField from '.';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/PasswordField',
   component: PasswordField,
+  argTypes: {
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+  },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <PasswordField
       label="Example Label"
+      {...args}
     />
   );
 };
