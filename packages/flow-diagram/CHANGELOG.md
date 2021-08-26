@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.21.0...@pingux/flow-diagram@0.22.0) (2021-08-26)
+
+
+### Features
+
+* [UIP-4606] Preserve location of unconnected steps on autolayout ([6bb2339](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6bb2339cf3eed7d9f671c5cd41935c25fb3aa27c))
+* [UIP-4678] Add Edit/Delete buttons to step template ([3fde65f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3fde65f6ae0a82e04fea14d559fd6033866c9785))
+* [UIP-4727] Connected steps snap back ([414ed4d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/414ed4ddcf52d95a381ab9622a98d6db9f748bea))
+* [UIP-4735] Updated link templates ([ab83e81](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab83e81d675fd20962452e6b503ee4b4d5c77497))
+
+
+
+
+
 # [0.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.20.2...@pingux/flow-diagram@0.21.0) (2021-08-23)
 
 
