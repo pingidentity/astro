@@ -24,6 +24,7 @@ export const Default = () => {
             hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
+            isRoot: true,
         },
         {
             isGroup: 'true',
@@ -78,6 +79,7 @@ export const IO = () => {
             'group': 'group',
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
+            isRoot: true,
         },
         {
             isGroup: 'true',
@@ -132,6 +134,7 @@ export const Outlet = () => {
             hasIO: false,
             getIconSrc: color => svgComponentToBase64(<Desktop fill={color} />),
             color: '#028CFF',
+            isRoot: true,
         },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', 'group': 'group' },
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },

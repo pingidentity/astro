@@ -208,6 +208,7 @@ export default function useDiagram({
                                 layerSpacing: 20,
                                 isInitial: true,
                                 isOngoing: true,
+                                packOption: go.LayeredDigraphLayout.PackStraighten,
                             }),
                     'linkingTool.insertLink': (fromnode, fromport, tonode, toport) => {
                         const linkingTool = diagramObject.toolManager.linkingTool;
@@ -300,9 +301,8 @@ export default function useDiagram({
         diagramObject.linkTemplate =
             $(go.Link,
                 {
-                    routing: go.Link.AvoidsNodes,
-                    curve: go.Link.JumpOver,
-                    corner: 5,
+                    curve: go.Link.Bezier,
+                    curviness: 0,
                     fromShortLength: -20,
                     toShortLength: -20,
                     selectable: true,
@@ -359,8 +359,8 @@ export default function useDiagram({
         diagramObject.linkTemplateMap.add('outlet',
             $(go.Link,
                 {
-                    curve: go.Link.Bezier,
-                    fromShortLength: -12,
+                    routing: go.Link.Orthogonal,
+                    fromShortLength: -20,
                     toShortLength: 0,
                     selectable: false,
                     layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
@@ -372,7 +372,7 @@ export default function useDiagram({
                 new go.Binding('click', 'onClick'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { stroke: COLORS.BLUE },
+                $(go.Shape, { stroke: COLORS.GRAY_MEDIUM },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
             ),
         );

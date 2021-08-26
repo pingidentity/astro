@@ -9,6 +9,7 @@ export const COLORS = {
     BUTTON_NORMAL: colors.neutral[40],
     BUTTON_HOVER: colors.neutral[10],
     GRAY_LIGHT: colors.neutral[80],
+    GRAY_MEDIUM: colors.neutral[60],
     GREEN: colors.success.bright,
     PURPLE: colors.decorative[0],
     RED: colors.decorative[8],
