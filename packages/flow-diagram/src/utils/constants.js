@@ -7,6 +7,7 @@ export const COLORS = {
     ERROR_LIGHT: colors.critical.light,
     GRAY: colors.neutral[90],
     GRAY_LIGHT: colors.neutral[80],
+    GRAY_MEDIUM: colors.neutral[60],
     GREEN: colors.success.bright,
     PURPLE: colors.decorative[0],
     RED: colors.decorative[8],

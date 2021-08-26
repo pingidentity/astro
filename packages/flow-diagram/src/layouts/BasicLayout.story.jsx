@@ -227,6 +227,10 @@ const Demo = () => {
             if (modifiedNodeData && !insertedNodeKeys) {
                 const sortedNodeData = modifiedNodeData.sort((a, b) => (Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1 )
                 if (droppedOntoLinkKey) {
+                    const linkData = diagramLinks.filter(link => link.key === droppedOntoLinkKey);
+                    if (linkData.from === selectedNode?.key && linkData.to === selectedNode?.key) {
+                        return;
+                    }
                     let linkTo;
                     const newLinks = diagramLinks.map((link) => {
                         if (link.key === droppedOntoLinkKey) {
@@ -240,6 +244,10 @@ const Demo = () => {
                         { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo },
                     ]);
                 } else if (droppedOntoNodeKey) {
+                    const linkData = diagramLinks.filter(link => link.from === droppedOntoNodeKey);
+                    if (linkData.from === selectedNode?.key) {
+                        return;
+                    }
                     let linkTo;
                     let linkedFrom = false;
                     const newLinks = diagramLinks.map((link) => {
