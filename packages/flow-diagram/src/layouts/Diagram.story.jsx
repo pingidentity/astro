@@ -90,7 +90,7 @@ DiagramComponent.defaultProps = {
 };
 
 DiagramComponent.propTypes = {
-    /** Disables interaction with the diagram. */
+    /** Disables interaction with the diagram.  */
     isDisabled: PropTypes.bool,
     /** Templates for groups of nodes. diagramGroupTemplate should be used. */
     groupTemplates: PropTypes.arrayOf(PropTypes.array),
@@ -101,6 +101,8 @@ DiagramComponent.propTypes = {
     /** Templates for nodes.
      * First element in the inner arrays is the category name, second is the template. */
     nodeTemplates: PropTypes.arrayOf(PropTypes.array),
+    /** Action on click of links' delete button */
+    onLinkDelete: PropTypes.func,
     /** Callback that fires every time there is a change to the diagram. */
     onModelChange: PropTypes.func,
 };

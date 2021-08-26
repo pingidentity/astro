@@ -1,8 +1,11 @@
 import React from 'react';
 import * as go from 'gojs';
+import Icon from '@mdi/react';
 import { Error } from '@pingux/icons/';
+import { mdiDelete } from '@mdi/js';
 import ReactDOMServer from 'react-dom/server';
-import { encodeSvg, getSize, dragEnter, dragLeave } from '../templateUtils';
+import { iconButton } from '../iconButton';
+import { svgComponentToBase64, encodeSvg, getSize, dragEnter, dragLeave } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode, bottomNode } from '../nodes';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
@@ -54,7 +57,7 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, 'Spot',
+export const stepTemplate = ({ color, onClick = () => {}, onDelete = () => {} } = {}) => $(go.Node, 'Spot',
     {
         click: onClick,
         selectionAdorned: false,
@@ -97,7 +100,7 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
             $(go.Shape, 'RoundedRectangle',
                 {
                     fill: COLORS.WHITE,
-                    margin: new go.Margin(0, 0, 0, 10),
+                    margin: new go.Margin(30, 0, 0, 10),
                     parameter1: 3,
                     strokeWidth: 0,
                     shadowVisible: true,
@@ -107,7 +110,7 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
             $(go.Panel, 'Horizontal', { alignment: go.Spot.Left },
                 $(go.Panel, 'Auto',
                     $(go.Shape, 'StepIconBG',
-                        { stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(0, 0, 0, 10), parameter1: 2 },
+                        { stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(30, 0, 0, 10), parameter1: 2 },
                         new go.Binding('desiredSize', '', s => getSize(s, 'shape')),
                         new go.Binding('fill', 'color')),
                     $(go.Picture,
@@ -115,7 +118,7 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
                         new go.Binding('source', 'getIconSrc', getIcon(color || COLORS.WHITE)),
                     ),
                 ),
-                $(go.Panel, 'Vertical', { margin: new go.Margin(0, 0, 0, -5) },
+                $(go.Panel, 'Vertical', { margin: new go.Margin(30, 0, 0, -5) },
                     $(go.TextBlock,
                         {
                             stroke: '#253746', font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN),
@@ -134,7 +137,7 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
                 {
                     name: 'borderRectangle',
                     fill: 'transparent',
-                    margin: new go.Margin(0, 0, 0, 10),
+                    margin: new go.Margin(30, 0, 0, 10),
                     parameter1: 1,
                     strokeWidth: 1,
                 },
@@ -144,6 +147,7 @@ export const stepTemplate = ({ color, onClick = () => {} } = {}) => $(go.Node, '
                 new go.Binding('stroke', '', getBorderColor(COLORS.BLUE, COLORS.ERROR, 'transparent')).ofObject(''),
             ),
         ),
+        iconButton({ onAction: onDelete, margin: new go.Margin(90, 20, 0, 0), source: svgComponentToBase64(<Icon path={mdiDelete} height="20px" width="20px" color={COLORS.WHITE} />) }),
         fromNode(),
         toNode(),
         bottomNode(),

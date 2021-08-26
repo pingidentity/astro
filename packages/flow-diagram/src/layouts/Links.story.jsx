@@ -42,8 +42,11 @@ export const Default = () => {
         },
     ];
 
-    const diagramLinks = [{ 'from': 'user-login', 'to': 'execute-flow', 'key': 'user-login_execute-flow', onClick: () => console.log('clicked') }];
+    const diagramLinks = [{ 'from': 'user-login', 'to': 'execute-flow', 'key': 'user-login_execute-flow', onClick: () => console.log('link clicked') }];
 
+    const onLinkDelete = (link) => {
+        console.log('deleting link', link);
+    };
     const { diagramProps } = useDiagram({
         groupTemplates: [
             ['', diagramGroupTemplate()],
@@ -53,6 +56,7 @@ export const Default = () => {
         nodeTemplates: [
             ['step', stepTemplate()],
         ],
+        onLinkDelete,
         onModelChange: () => {},
     });
 

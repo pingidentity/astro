@@ -87,7 +87,7 @@ export const getSize = (s, element) => {
         case 'shape':
             return new go.Size(60, height + 27);
         case 'transparentContainer':
-            return new go.Size(width < 181 ? width + 99 : 280, height + 27);
+            return new go.Size(width < 181 ? width + 99 : 269, height + 87);
         case 'bottomNode':
             return new go.Margin(height + 24, 0, 0, 0);
         case 'paletteContainer':

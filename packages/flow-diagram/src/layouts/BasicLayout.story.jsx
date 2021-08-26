@@ -65,6 +65,17 @@ const Demo = () => {
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
 
+    const onDelete = (node) => {
+        const filterByKey = () => array => array.filter(item => item.key !== node.key);
+        setDiagramNodes(filterByKey(diagramNodes));
+        setDiagramLinks(diagramLinks.filter(diagramLink => diagramLink.to !== node.key
+            && diagramLink.from !== node.key));
+        setSelectedNode(null);
+    };
+    const onLinkDelete = (link) => {
+        setDiagramLinks(diagramLinks.filter(diagramLink => diagramLink.key !== link.key));
+    };
+
     const { diagramProps } = useDiagram({
         isDisabled: disabled,
         groupTemplates: [
@@ -77,14 +88,15 @@ const Demo = () => {
         nodeDataArray: diagramNodes,
         nodeTemplates: [
             // onClick can also be defined per node.
-            ['step', stepTemplate()],
+            ['step', stepTemplate({ onDelete })],
             // The outletTemplate can also be defined with a color on its own.
             ['outlet', outletTemplate()],
-            ['finished', successNode()],
-            ['error', failureNode()],
-            ['branch', branchNode()],
+            ['finished', successNode({ onDelete })],
+            ['error', failureNode({ onDelete })],
+            ['branch', branchNode({ onDelete })],
             ['START', nodeTemplateStart()],
         ],
+        onLinkDelete,
         onModelChange: ({
             insertedNodeKeys,
             modifiedNodeData,
