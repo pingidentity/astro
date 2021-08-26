@@ -57,8 +57,14 @@ jest.mock('gojs', (replacements) => {
         List: jest.fn(() => ({
             add: jest.fn(),
         })),
+        Margin: () => {},
         Part: () => {},
+        Point: () => {},
+        Size: () => {},
         Spot: () => {},
+        TextBlock: {
+            OverflowClip: '',
+        },
         LayeredDigraphLayout: () => {},
     });
 });

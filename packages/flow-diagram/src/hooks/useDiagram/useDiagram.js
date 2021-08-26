@@ -1,6 +1,9 @@
 import * as go from 'gojs';
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { differenceWith } from 'lodash';
+import Icon from '@mdi/react';
+import { mdiDelete } from '@mdi/js';
+import { svgComponentToBase64 } from '../../utils/templates/templateUtils';
 import ZoomSlider from '../../components/ZoomSlider';
 import NonRealtimeDraggingTool from '../../components/NonRealtimeDraggingTool';
 import SelectiveDigraphLayout from '../../components/SelectiveDigraphLayout';
@@ -123,6 +126,7 @@ export default function useDiagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
+    onLinkDelete,
     isDisabled = false,
 }) {
     const [diagram, setDiagram] = useState();
@@ -322,6 +326,25 @@ export default function useDiagram({
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
                 $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+                $('Button', 'Spot', {
+                    'ButtonBorder.figure': 'Circle',
+                    'ButtonBorder.fill': COLORS.BUTTON_NORMAL,
+                    'ButtonBorder.strokeWidth': 0,
+                    '_buttonFillOver': COLORS.BUTTON_HOVER,
+                    '_buttonFillPressed': COLORS.BLUE,
+                    click: (e, obj) => onLinkDelete(obj.part.data),
+                    name: 'DELETE_BUTTON',
+                    height: 25,
+                    width: 25,
+                    segmentOffset: new go.Point(-5, 23),
+                },
+                new go.Binding('visible', 'isSelected', (s) => { return s === true; }).ofObject(''),
+                $(go.Picture, {
+                    source: svgComponentToBase64(<Icon path={mdiDelete} height="20px" width="20px" color={COLORS.WHITE} />),
+                    width: 20,
+                    height: 20,
+                }),
+                ),
             );
 
         diagramObject.linkTemplateMap.add('outlet',

@@ -251,6 +251,8 @@ Branch.propTypes = {
     isRoot: PropTypes.bool,
     /** Node/Group key */
     key: PropTypes.string,
+    /** Action on click of delete button */
+    onDelete: PropTypes.func,
     /** Subtitle of step node */
     stepId: PropTypes.string,
     /** Main text of node */
