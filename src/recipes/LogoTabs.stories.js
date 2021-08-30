@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ShuffleVariant from 'mdi-react/ShuffleVariantIcon';
 import Filter from 'mdi-react/FilterIcon';
 import { Tabs, Tab, Text, Icon, Box, Separator } from '../index';
-import tab from '../styles/variants/tabs';
+import { tab } from '../styles/variants/tabs';
 
 
 export default {
@@ -109,24 +109,24 @@ export const LogoTabs = () => {
         but this throws an error within Tabs, hence the repetitive logic
         for conditionally rendering tabs 2 & 3 */}
         {(showMiddleTabs || currentTab !== 'tab1') && (
-        <Tab
-          key="tab2"
-          title={<Text mt="md" variant="tabLabel">Custom Filter</Text>}
-          icon={<Icon icon={Filter} size={40} color="accent.20" p="xs" />}
-          sx={tabStyling}
-        >
-          <Text>This is content for the custom filter tab</Text>
-        </Tab>
+          <Tab
+            key="tab2"
+            title={<Text mt="md" variant="tabLabel">Custom Filter</Text>}
+            icon={<Icon icon={Filter} size={40} color="accent.20" p="xs" />}
+            sx={tabStyling}
+          >
+            <Text>This is content for the custom filter tab</Text>
+          </Tab>
         )}
         {(showMiddleTabs || currentTab !== 'tab1') && (
-        <Tab
-          key="tab3"
-          title={<Text mt="md" variant="tabLabel">Attribute Mapping</Text>}
-          icon={<Icon icon={ShuffleVariant} size={40} color="accent.20" p="xs" />}
-          sx={tabStyling}
-        >
-          <Text>This is content for attribute mapping tab</Text>
-        </Tab>
+          <Tab
+            key="tab3"
+            title={<Text mt="md" variant="tabLabel">Attribute Mapping</Text>}
+            icon={<Icon icon={ShuffleVariant} size={40} color="accent.20" p="xs" />}
+            sx={tabStyling}
+          >
+            <Text>This is content for attribute mapping tab</Text>
+          </Tab>
         )}
         <Tab
           key="tab4"
