@@ -4,8 +4,8 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useSingleSelectListState } from '@react-stately/list';
-import { useTabs } from '@react-aria/tabs';
+import { useTabList } from '@react-aria/tabs';
+import { useTabListState } from '@react-stately/tabs';
 import Box from '../Box';
 import { CollectionRockerButton } from '../RockerButton';
 
@@ -27,10 +27,10 @@ const RockerButtonGroup = forwardRef((props, ref) => {
   const buttonGroupRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonGroupRef.current);
-  const state = useSingleSelectListState({ ...props, onSelectionChange });
+  const state = useTabListState({ ...props, onSelectionChange });
   const {
     tabListProps: raTabListProps,
-  } = useTabs(props, state, buttonGroupRef);
+  } = useTabList(props, state, buttonGroupRef);
   // removed tabList role for now as this isn't really the role we are looking for
   delete raTabListProps.role;
 

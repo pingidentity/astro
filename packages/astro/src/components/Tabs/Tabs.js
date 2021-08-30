@@ -4,8 +4,8 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useTabs } from '@react-aria/tabs';
-import { useSingleSelectListState } from '@react-stately/list';
+import { useTabList, useTabPanel } from '@react-aria/tabs';
+import { useTabListState } from '@react-stately/tabs';
 
 import Box from '../Box';
 import { CollectionTab } from '../Tab';
@@ -24,14 +24,21 @@ const Tabs = forwardRef((props, ref) => {
     tabPanelProps,
     ...others
   } = props;
+
   const tabListRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabListRef.current);
-  const state = useSingleSelectListState({ ...props, onSelectionChange });
+  const tabPanelRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => tabPanelRef.current);
+
+  const state = useTabListState({ ...props, onSelectionChange });
   const {
     tabListProps: raTabListProps,
+  } = useTabList(props, state, tabListRef);
+  const {
     tabPanelProps: raTabPanelProps,
-  } = useTabs(props, state, tabListRef);
+  } = useTabPanel(props, state, tabPanelRef);
 
   const panelContent = (
     state.selectedItem
@@ -62,6 +69,7 @@ const Tabs = forwardRef((props, ref) => {
         </Box>
         <Box
           variant="tabPanel"
+          ref={tabPanelRef}
           {...tabPanelProps}
           {...raTabPanelProps}
         >
