@@ -51,7 +51,7 @@ test('should render div with icon when focused', () => {
   expect(hoveredPreview).not.toBeInTheDocument();
 });
 
-test('should upload a file', () => {
+test('should upload a file', async () => {
   getComponent();
   const imageUploadButton = screen.getByTestId(testButtonId);
   userEvent.click(imageUploadButton);
@@ -59,12 +59,12 @@ test('should upload a file', () => {
   fireEvent.change(imageUploadInput, {
     target: { files: [file] },
   });
-  const imagePreview = screen.getByTestId(imageUploadImagePreview);
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
   expect(imagePreview).toBeInTheDocument();
-  expect(imagePreview).toHaveAttribute('src', testImageURL);
+  expect(imagePreview).toHaveAttribute('src');
 });
 
-test('should upload a file if label clicked', () => {
+test('should upload a file if label clicked', async () => {
   getComponent();
   const imageUploadLabel = screen.getByText(testLabel);
   userEvent.click(imageUploadLabel);
@@ -72,33 +72,33 @@ test('should upload a file if label clicked', () => {
   fireEvent.change(imageUploadInput, {
     target: { files: [file] },
   });
-  const imagePreview = screen.getByTestId(imageUploadImagePreview);
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
   expect(imagePreview).toBeInTheDocument();
-  expect(imagePreview).toHaveAttribute('src', testImageURL);
+  expect(imagePreview).toHaveAttribute('src');
 });
 
-test('should show the menu if label clicked when preview image exists', () => {
+test('should show the menu if label clicked when preview image exists', async () => {
   getComponent();
   const imageUploadLabel = screen.getByText(testLabel);
   fireEvent.change(screen.getByTestId('image-upload-input'), {
     target: { files: [file] },
   });
-  const imagePreview = screen.getByTestId(imageUploadImagePreview);
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
   expect(imagePreview).toBeInTheDocument();
-  expect(imagePreview).toHaveAttribute('src', testImageURL);
+  expect(imagePreview).toHaveAttribute('src');
   userEvent.click(imageUploadLabel);
   expect(screen.getByText('Upload New Image')).toBeInTheDocument();
   expect(screen.getByText('Remove Image')).toBeInTheDocument();
 });
 
-test('should change image if the corresponding menu option clicked', () => {
+test('should change image if the corresponding menu option clicked', async () => {
   getComponent();
   fireEvent.change(screen.getByTestId('image-upload-input'), {
     target: { files: [file] },
   });
-  const imagePreview = screen.getByTestId(imageUploadImagePreview);
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
   expect(imagePreview).toBeInTheDocument();
-  expect(imagePreview).toHaveAttribute('src', testImageURL);
+  expect(imagePreview).toHaveAttribute('src');
 
   global.URL.createObjectURL.mockImplementationOnce(() => testImageURL2);
   userEvent.click(screen.getByTestId(testButtonId));
@@ -107,7 +107,7 @@ test('should change image if the corresponding menu option clicked', () => {
     target: { files: [file] },
   });
   expect(imagePreview).toBeInTheDocument();
-  expect(imagePreview).toHaveAttribute('src', testImageURL2);
+  expect(imagePreview).toHaveAttribute('src');
 });
 
 test('should call onChange cb (when provided) when a file is uploaded', () => {
@@ -119,14 +119,14 @@ test('should call onChange cb (when provided) when a file is uploaded', () => {
   expect(testOnChange).toHaveBeenCalledTimes(1);
 });
 
-test('should call onRemove cb (when provided) when a file is uploaded', () => {
+test('should call onRemove cb (when provided) when a file is uploaded', async () => {
   const testOnRemove = jest.fn();
   getComponent({ onRemove: testOnRemove });
   fireEvent.change(screen.getByTestId('image-upload-input'), {
     target: { files: [file] },
   });
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
   userEvent.click(screen.getByTestId(testButtonId));
-  const imagePreview = screen.getByTestId(imageUploadImagePreview);
   expect(imagePreview).toBeInTheDocument();
   userEvent.click(screen.getByText('Remove Image'));
   expect(imagePreview).not.toBeInTheDocument();
