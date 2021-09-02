@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
+import { FocusScope } from '@react-aria/focus';
 import { useVisuallyHidden } from '@react-aria/visually-hidden';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
@@ -123,11 +124,14 @@ const ColorField = forwardRef((props, ref) => {
         isOpen={popoverState.isOpen}
         onClose={popoverState.close}
         hasNoArrow
+        isDismissable
       >
-        <ChromePicker
-          color={getRgbaFromState(state)}
-          onChange={handleColorChange}
-        />
+        <FocusScope restoreFocus contain autoFocus>
+          <ChromePicker
+            color={getRgbaFromState(state)}
+            onChange={handleColorChange}
+          />
+        </FocusScope>
       </PopoverContainer>
     </Box>
   );
