@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ColorField } from '../../index';
+import { ColorField, OverlayProvider } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -68,5 +68,11 @@ export const Default = (args) => {
     setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
   }, []);
 
-  return <ColorField value={color} {...args} onChange={handleChange} />;
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <OverlayProvider>
+      <ColorField value={color} {...args} onChange={handleChange} />
+    </OverlayProvider>
+  );
 };
