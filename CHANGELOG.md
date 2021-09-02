@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.22.0...@pingux/astro@0.23.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* [UIP-4715] Avoid buttons from wrapping ([d969017](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d96901732ab49a5580dc12f82ad6f20dae865ef8))
+* [UIP-4737] Color field popover not closing via click outside or keyboard ([557672c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/557672c8bb1cda095981c510963979ac2eb7ac76))
+
+
+### Features
+
+* [UIP-4623] Conditional Filter Recipe ([6b0db79](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b0db79114d9673da84c746d38a90dafc6395497))
+
+
+
+
+
 # [0.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.21.2...@pingux/astro@0.22.0) (2021-08-26)
 
 
