@@ -4,13 +4,17 @@ import { neutral } from '../colors';
 const base = {
   cursor: 'pointer',
   height: 36,
-  inlineHeight: 30,
+  lineHeight: '30px',
+  minWidth: 'min-content',
   px: 'md',
   outline: 'none',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '2px',
+  flexShrink: 0,
+  wordBreak: 'inherit',
+  whiteSpace: 'nowrap',
   ...textVariants.buttonLabel,
 };
 
