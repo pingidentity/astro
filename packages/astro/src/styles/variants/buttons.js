@@ -359,6 +359,10 @@ const colorField = {
   '&:focus-visible': {
     outline: 'none',
   },
+  '&.is-focused': {
+    borderColor: 'accent.80',
+    boxShadow: 'focus',
+  },
 };
 
 const imageUpload = {
