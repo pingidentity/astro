@@ -23,14 +23,14 @@ build_ci_image:
     - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1 ./shared/docker
     - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   tags:
-    - platform-publish-docker
+    - eks-platform-publish-docker
 
 # Do this as a separate stage to make sure everything builds
 build:
   <<: *yarn-install-and-build
   stage: build-test-lint
   tags:
-    - platform-build-docker
+    - default-gitlab-runner
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   only:
     - merge_requests
@@ -39,7 +39,6 @@ build:
     - lerna run build
     - lerna run lint
     - lerna run coverage-ci
-
   artifacts:
     paths:
       - ./packages/**/lib
@@ -49,14 +48,13 @@ backstop:
   <<: *yarn-install-and-build
   stage: screenshot
   tags:
-    - platform-build-docker
+    - default-gitlab-runner
   image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
   only:
-      refs:
-        - merge_requests
-      changes:
-        - packages/ui-library/*
-
+    refs:
+      - merge_requests
+    changes:
+      - packages/ui-library/*
   script:
     - lerna run demo --scope ui-library
     - lerna run backstop-ci

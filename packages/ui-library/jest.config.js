@@ -15,6 +15,7 @@ module.exports = {
         "/node_modules/",
         "/tests/coverage/",
         "/build/",
+        "/demo/",
         "/dist/",
         "/src/selenium/tests",
         "commonTests.js?(x)",
@@ -34,11 +35,6 @@ module.exports = {
         "<rootDir>/src/devUtil/jestAfterEnvSetup.js"
     ],
     "coverageThreshold": {
-        "global": {
-            "lines": 92,
-            "functions": 92,
-            "branches": 80
-        },
         "./src/**/*.*": {
             "lines": 92,
             "functions": 92,
@@ -53,6 +49,6 @@ module.exports = {
         "BackgroundLoader.jsx",
         "util/ReduxTestUtils.js",
         "wizard/Progress.jsx",
-        "wizard/Choose.jsx"
+        "wizard/Choose.jsx",
     ]
 };
