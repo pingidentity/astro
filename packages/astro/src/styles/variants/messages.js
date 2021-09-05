@@ -4,6 +4,7 @@ const wrapper = {
   bottom: 'lg',
   left: 'lg',
   alignItems: 'flex-end',
+  pointerEvents: 'none',
 };
 
 const transition = {
@@ -16,6 +17,7 @@ const transition = {
 
 const item = {
   maxWidth: 400,
+  pointerEvents: 'all',
   mb: 'md',
   p: 'md',
   wordBreak: 'break-word',
