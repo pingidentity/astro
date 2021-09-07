@@ -30,7 +30,12 @@ const useImageUploadState = (props = {}, inputRef) => {
       }
       if (eventFileType === 'image') {
         setIsImageType(true);
-        setPreviewImage(URL?.createObjectURL(event.target?.files[0]));
+
+        const reader = new FileReader();
+        reader.onload = ({ target: { result } }) => {
+          setPreviewImage(result);
+        };
+        reader.readAsDataURL(event.target?.files[0]);
       } else {
         setIsImageType(false);
         setFileName(event.target?.files[0]?.name);
