@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.23.0...@pingux/astro@0.24.0) (2021-09-07)
+
+
+### Features
+
+* [UIP-4660] Tooltip recipe for SwitchField and cursor pointer ([047c134](https://gitlab.corp.pingidentity.com/ux/pingux/commit/047c1349e96526b2bd95c5e6f7750313a7b2f351))
+
+
+
+
+
 # [0.23.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.22.0...@pingux/astro@0.23.0) (2021-09-02)
 
 

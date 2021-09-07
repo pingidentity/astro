@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.42.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.3...ui-library@4.42.0) (2021-09-07)
+
+
+### Features
+
+* [UIP-4629] Add return to ping button to nav bar ([329fbd6](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/329fbd6d15faff8adad53843eb3c282ade52517e))
+
+
+
+
+
 ## [4.41.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.2...ui-library@4.41.3) (2021-08-23)
 
 
