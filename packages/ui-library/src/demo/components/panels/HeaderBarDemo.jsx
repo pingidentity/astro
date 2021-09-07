@@ -27,6 +27,7 @@ const environments = [
         id: "larry"
     }
 ];
+
 const navItems = [
     {
         label: "Main",
@@ -178,6 +179,10 @@ class HeaderBarDemo extends React.Component {
                 <HR />
                 <p>Using the provided reducer:</p>
                 <HeaderBar {...this.state}
+                    homeButtonProps={{
+                        href: "https://www.pingidentity.com",
+                        target: "_blank",
+                    }}
                     data-id="first-header-bar"
                     onItemValueChange={this._handleItemClick}
                     inline={true}

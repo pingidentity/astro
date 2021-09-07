@@ -1,0 +1,29 @@
+.pingHomeLogo,
+.pingHomeLogoNoHover {
+    height: 25px;
+    width: 25px;
+    background-color: null;
+}
+
+.pingHomeLogoNoHover {
+    cursor: default;
+}
+
+.homeLogo {
+    display: none;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+}
+
+.homeLinkParent {
+    height: 25px;
+    width: 25px;
+    margin-right: 15px;
+    &:hover .pingHomeLogo {
+        display: none;
+    }
+    &:hover .homeLogo {
+        display: inline;
+    }
+}

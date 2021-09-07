@@ -41,6 +41,11 @@ module.exports = {
             "branches": 80
         }
     },
+    "transform": {
+        "^.+\\.js$": "babel-jest",
+        "\\.jsx?$": ["babel-jest", { rootMode: "upward" }],
+        "^.+\\.svg$": "<rootDir>/svgTransform.js"
+    },
     "coveragePathIgnorePatterns": [
         "testutil/TestUtils.js",
         "tooltips/HelpHint.jsx",

@@ -150,6 +150,9 @@ export default class NavFrameDemo extends React.Component {
         return (
             <div style={{ height: "500px" }}>
                 <NavFrame
+                    navHomeButtonProps={{
+                        href: "https://www.pingidentity.com"
+                    }}
                     autoSelectFirstNode={false}
                     appMessage={
                         <GlobalMessage type={messageTypes.WARNING} buttonLabel="Solve My Problem">
