@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Pressable } from '@react-aria/interactions';
 import SwitchField from '.';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { Tooltip, TooltipTrigger } from '../../index';
 
 export default {
   title: 'Form/SwitchField',
@@ -113,9 +115,14 @@ export const NoVisibleLabel = () => (
 );
 
 export const Required = () => (
-  <SwitchField
-    isRequired
-    label="Required"
-    value="my-switch"
-  />
+  <SwitchField isRequired label="Required" value="my-switch" />
+);
+
+export const WithTooltip = () => (
+  <TooltipTrigger crossOffset={15} offset={20}>
+    <Pressable>
+      <SwitchField aria-label="my-label" value="my-switch" />
+    </Pressable>
+    <Tooltip>Tooltip Content</Tooltip>
+  </TooltipTrigger>
 );
