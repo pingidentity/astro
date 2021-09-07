@@ -4,6 +4,7 @@ export const label = {
 
 export const container = {
   mr: 5,
+  cursor: 'pointer',
 };
 
 export const thumbContainer = {
