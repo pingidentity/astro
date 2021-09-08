@@ -6,8 +6,8 @@ import Box from '../Box';
 
 /**
  * Basic Switch input wrapped in a label.
- * Built on top of the [Box from Rebass](https://rebassjs.org/box) and uses the
- * available [props from Rebass](https://rebassjs.org/props/).
+ * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box) and uses the
+ * available [props from Theme-UI](https://theme-ui.com/sx-prop).
  *
  * **Note: Requires a label. It's recommended to use `SwitchField` for a complete solution.**
  */

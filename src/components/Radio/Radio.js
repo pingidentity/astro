@@ -3,8 +3,8 @@ import { Radio as ThemeUIRadio } from 'theme-ui';
 
 /**
  * Basic radio input wrapped in a label.
- * Built on top of the [Radio from Theme-UI](https://theme-ui.com/components/radio/o) and uses the
- * available [props from Rebass](https://rebassjs.org/props/).
+ * Built on top of the [Radio from Theme-UI](https://theme-ui.com/components/radio/) and uses the
+ * available [props from Theme-UI](https://theme-ui.com/sx-prop).
  *
  * **Note: Requires a label. It's recommended to use `RadioGroupField` with `RadioField` for a**
  * **solution.**
