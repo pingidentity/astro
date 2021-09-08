@@ -9455,6 +9455,11 @@
     prettier "^2.0.5"
     react-syntax-highlighter "^12.0.0"
 
+"@wojtekmaj/date-utils@^1.0.2":
+  version "1.0.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@wojtekmaj/date-utils/-/date-utils-1.0.3.tgz#2dcfd92881425c5923e429c2aec86fb3609032a1"
+  integrity sha1-Lc/ZKIFCXFkj5CnCrshvs2CQMqE=
+
 "@wordpress/jest-puppeteer-axe@^1.5.0":
   version "1.10.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@wordpress/jest-puppeteer-axe/-/jest-puppeteer-axe-1.10.0.tgz#cf5b7802f97943eeaac89a9109c3815483454c92"
@@ -16748,6 +16753,13 @@ get-stream@^5.0.0:
   dependencies:
     pump "^3.0.0"
 
+get-user-locale@^1.2.0:
+  version "1.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/get-user-locale/-/get-user-locale-1.4.0.tgz#a2c4b5da46feec9f03c9b07d197b1620490a5370"
+  integrity sha1-osS12kb+7J8DybB9GXsWIEkKU3A=
+  dependencies:
+    lodash.once "^4.1.1"
+
 get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
@@ -21253,6 +21265,11 @@ lodash.omit@^4.5.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
   integrity sha1-brGa5aHuHdnfC5aeZs4Lf6MLXmA=
 
+lodash.once@^4.1.1:
+  version "4.1.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+  integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
+
 lodash.padend@^4.6.1:
   version "4.6.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/lodash.padend/-/lodash.padend-4.6.1.tgz#53ccba047d06e158d311f45da625f4e49e6f166e"
@@ -22009,6 +22026,11 @@ merge-anything@^2.2.4:
   dependencies:
     is-what "^3.3.1"
 
+merge-class-names@^1.1.1:
+  version "1.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/merge-class-names/-/merge-class-names-1.4.0.tgz#02edcdd5ff677fbb03b47ecd4586df89d697b81b"
+  integrity sha1-Au3N1f9nf7sDtH7NRYbfidaXuBs=
+
 merge-deep@^3.0.2:
   version "3.0.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/merge-deep/-/merge-deep-3.0.2.tgz#f39fa100a4f1bd34ff29f7d2bf4508fbb8d83ad2"
@@ -22356,6 +22378,11 @@ moment-timezone@^0.5.5:
   version "2.28.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/moment/-/moment-2.28.0.tgz#cdfe73ce01327cee6537b0fafac2e0f21a237d75"
   integrity sha1-zf5zzgEyfO5lN7D6+sLg8hojfXU=
+
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha1-sr52n6MZQL6e7qZGnAdeNQBvo9M=
 
 moo-color@^1.0.2:
   version "1.0.2"
@@ -25570,6 +25597,16 @@ react-async-script@^1.1.1:
   dependencies:
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.5.0"
+
+react-calendar@^3.4.0:
+  version "3.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/react-calendar/-/react-calendar-3.4.0.tgz#25396ca0992b3b2042abca334515f6ff4d9878bc"
+  integrity sha1-JTlsoJkrOyBCq8ozRRX2/02YeLw=
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.2"
+    get-user-locale "^1.2.0"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
 
 react-clientside-effect@^1.2.2:
   version "1.2.2"
