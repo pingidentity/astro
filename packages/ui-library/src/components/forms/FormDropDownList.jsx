@@ -459,8 +459,12 @@ class FormDropDownListStateless extends React.Component {
         });
     }
 
-    componentDidUpdate() {
-        this._setSearchListPosition(this.props.options);
+    componentDidUpdate(prevProps) {
+        if (["options", "open", "searchIndex"].some((propName) =>
+            this.props[propName] !== prevProps[propName]
+        )) {
+            this._setSearchListPosition();
+        }
     }
 
     componentDidMount() {
