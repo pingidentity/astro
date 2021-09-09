@@ -11,8 +11,8 @@ import Box from '../Box';
  * (see [SVGR docs](https://react-svgr.com/docs/options/#dimensions)).
  * Otherwise icon will not be resizable by `size` prop.
  * Icons can also be used from the [Material UI Icon Library](https://materialdesignicons.com/).
- * Built on top of the [Box from Rebass](https://rebassjs.org/box) and uses the
- * available [props from Rebass](https://rebassjs.org/props/).
+ * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the
+ * available [props from Theme-UI](https://theme-ui.com/sx-prop).
 */
 
 const Icon = forwardRef((props, ref) => {
