@@ -20,7 +20,7 @@ const defaultIndicator = (
  * Base label for an input.
  *
  * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
- * Built on top of the [Label from Rebass.js](https://rebassjs.org/forms/label).
+ * Built on top of the [Label from Theme-UI](https://theme-ui.com/components/label).
  *
  * **NOTE**: Specialized field components contain built-in support for labels. It's
  * recommended to use those instead of a standalone `Label`.
