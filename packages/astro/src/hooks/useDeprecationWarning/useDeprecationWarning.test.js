@@ -31,3 +31,19 @@ test('useDeprecationWarning with string', () => {
     expect.any(String),
   );
 });
+
+test('useDeprecationWarning by default ignores duplicated messages', () => {
+  const spy = jest.spyOn(console, 'warn');
+  const message = 'Text';
+  renderHook(() => useDeprecationWarning(message));
+  renderHook(() => useDeprecationWarning(message));
+  expect(spy).toHaveBeenCalledTimes(1);
+});
+
+test('useDeprecationWarning showns duplicated messages if explicitly allowed', () => {
+  const spy = jest.spyOn(console, 'warn');
+  const message = 'Text';
+  renderHook(() => useDeprecationWarning(message, true));
+  renderHook(() => useDeprecationWarning(message, true));
+  expect(spy).toHaveBeenCalledTimes(2);
+});
