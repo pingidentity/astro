@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.42.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.42.0...ui-library@4.42.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* [UIP-4745] in some cases user needed select option twice ([13c8b59](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/13c8b5974c28d8613621411440205c0b9570ff55))
+
+
+
+
+
 # [4.42.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.41.3...ui-library@4.42.0) (2021-09-07)
 
 
