@@ -71,7 +71,8 @@
     "ast-types": "^0.14.0",
     "minimist": "^1.2.5",
     "CodeMirror": "^5.59.4",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "ua-parser-js": "^0.7.28"
   },
   "workspaces": [
     "packages/*"

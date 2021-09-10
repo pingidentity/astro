@@ -30151,10 +30151,10 @@ typical@^6.0.1:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/typical/-/typical-6.0.1.tgz#89bd1a6aa5e5e96fa907fb6b7579223bff558a06"
   integrity sha1-ib0aaqXl6W+pB/trdXkiO/9VigY=
 
-ua-parser-js@^0.7.18:
-  version "0.7.22"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/ua-parser-js/-/ua-parser-js-0.7.22.tgz#960df60a5f911ea8f1c818f3747b99c6e177eae3"
-  integrity sha1-lg32Cl+RHqjxyBjzdHuZxuF36uM=
+ua-parser-js@^0.7.18, ua-parser-js@^0.7.28:
+  version "0.7.28"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
+  integrity sha1-i6BOZT81ziECOcZGYWhb+RId7DE=
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
