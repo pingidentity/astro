@@ -5,7 +5,7 @@ import { Error } from '@pingux/icons/';
 import { mdiDelete } from '@mdi/js';
 import ReactDOMServer from 'react-dom/server';
 import { iconButton } from '../iconButton';
-import { svgComponentToBase64, encodeSvg, getSize, dragEnter, dragLeave } from '../templateUtils';
+import { svgComponentToBase64, encodeSvg, getSize, dragEnter, dragLeave, sendToForeground } from '../templateUtils';
 import { COLORS } from '../../constants';
 import { toNode, fromNode, bottomNode } from '../nodes';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
@@ -73,6 +73,8 @@ export const stepTemplate = ({ color, onClick = () => {}, onDelete = () => {} } 
         resizable: true,
         mouseDragEnter: dragEnter,
         mouseDragLeave: dragLeave,
+        layerName: 'Foreground',
+        linkDisconnected: sendToForeground,
     },
     new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
     new go.Binding('click', 'onClick'),

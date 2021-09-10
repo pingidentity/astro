@@ -7,7 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 import { COLORS } from '../../constants';
 import { iconButton } from '../iconButton';
 import { toNode, bottomNode } from '../nodes';
-import { svgComponentToBase64, encodeSvg, getIfLengthGreater } from '../templateUtils';
+import { svgComponentToBase64, encodeSvg, getIfLengthGreater, sendToForeground } from '../templateUtils';
 import { getAdornmentOnHover, getNodeHoverAdornment } from '../hoverAdornment';
 
 export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part) => {
@@ -18,7 +18,6 @@ export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part
     }
     return defaultColor;
 };
-
 
 const $ = go.GraphObject.make;
 
@@ -32,6 +31,8 @@ export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height, onDel
             shadowColor: 'rgb(211, 211, 211, .75)',
             shadowOffset: new go.Point(0, 1),
             shadowBlur: 10,
+            layerName: 'Foreground',
+            linkDisconnected: sendToForeground,
         },
         new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
         new go.Binding('click', 'onClick'),

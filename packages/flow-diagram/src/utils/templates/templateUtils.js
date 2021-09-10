@@ -35,6 +35,11 @@ export const dragLeave = (e, obj) => {
     node.findObject('fromNodeOuter').height = 20;
 };
 
+export const sendToForeground = (node) => {
+    const currentNode = node;
+    currentNode.layerName = 'Foreground';
+};
+
 const textBlock =
     $(go.Part,
         $(go.TextBlock, { font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN) }));
