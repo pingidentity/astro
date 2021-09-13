@@ -11,6 +11,7 @@ class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
     }
 
     isConnected(node, checked = []) {
+        const currentNode = node;
         if (checked.includes(node)) {
             return false;
         }
@@ -22,9 +23,18 @@ class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
         if (node instanceof go.Node) {
             let isConnected = false;
             node.findNodesConnected().each((connectedNode) => {
-                if (this.isConnected(connectedNode, [...checked, node])) {
-                    isConnected = true;
+                const links = connectedNode.linksConnected;
+                while (links.next()) {
+                    const link = links.value;
+                    if (link.data.category === 'io') {
+                        return false;
+                    }
+                    if (this.isConnected(connectedNode, [...checked, node])) {
+                        currentNode.layerName = '';
+                        isConnected = true;
+                    }
                 }
+                return true;
             });
             if (node.memberParts) {
                 node.memberParts.each((connectedNode) => {

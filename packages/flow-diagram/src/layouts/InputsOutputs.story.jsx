@@ -302,6 +302,8 @@ export const InputsOutputs = () => {
             insertedLinkKeys,
             modifiedLinkData,
             selectedNodeData,
+            removedNodeKeys,
+            removedLinkKeys,
         }) => {
             if (insertedLinkKeys?.length > 1) {
                 return;
@@ -314,6 +316,12 @@ export const InputsOutputs = () => {
             }
             if (selectedNodeData) {
                 selectNode(selectedNodeData);
+            }
+            if (removedNodeKeys) {
+                setDiagramNodes(diagramNodes.filter(node => !removedNodeKeys.includes(node.key)));
+            }
+            if (removedLinkKeys) {
+                setDiagramLinks(diagramLinks.filter(link => !removedLinkKeys.includes(link.key)));
             }
         },
     });
