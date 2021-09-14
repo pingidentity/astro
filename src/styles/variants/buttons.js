@@ -59,6 +59,9 @@ const iconButton = {
     fill: 'neutral.20',
   },
   outline: 'none',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
   '&.is-hovered': {
     bg: 'accent.95',
   },
