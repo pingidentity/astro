@@ -34,6 +34,8 @@ export * from './components/Chip';
 
 export { default as ComboBoxField } from './components/ComboBoxField';
 
+export { default as CopyText } from './components/CopyText';
+
 export { default as ColorField } from './components/ColorField';
 
 export { default as Dropdown } from './components/Dropdown';
