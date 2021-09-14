@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.22.3...@pingux/flow-diagram@0.22.4) (2021-09-14)
+
+
+### Bug Fixes
+
+* [UIP-4784] Start node highlighting ([d962872](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d962872a0ab3f0edb60bf64e112b10328ed38fda))
+* [UIP-4786] Overlapping nodes ([eb774a2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eb774a2a8537f5267b8ecd64042f45a4849ae1f5))
+
+
+
+
+
 ## [0.22.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.22.2...@pingux/flow-diagram@0.22.3) (2021-09-09)
 
 **Note:** Version bump only for package @pingux/flow-diagram
