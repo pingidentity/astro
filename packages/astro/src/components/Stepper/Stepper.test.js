@@ -50,7 +50,7 @@ const getComponent = (props = {}, { renderFn = render } = {}) => {
           <Step key={item.name} textValue={item.name}>
             <Text>{children}</Text>
           </Step>
-      )}
+        )}
       </Stepper>,
     </CacheProvider>,
   );
@@ -96,14 +96,16 @@ test('click should fire `onStepChange` handler', () => {
   expect(onStepChange).toHaveBeenCalledWith(2);
 });
 
-test('tooltip renders expected content based on props', () => {
+test('tooltip renders expected content based on props', async () => {
   // Should render label
   const { rerender } = getComponent();
   let { tab0 } = getTabs();
   fireEvent.mouseMove(tab0);
   fireEvent.mouseEnter(tab0);
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].label);
+  setTimeout(() => {
+    expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+    expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].label);
+  }, 0);
 
   // Should render textValue
   const stepsWithoutLabels = steps.map((step) => {
@@ -115,8 +117,10 @@ test('tooltip renders expected content based on props', () => {
   ({ tab0 } = getTabs());
   fireEvent.mouseMove(tab0);
   fireEvent.mouseEnter(tab0);
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].name);
+  setTimeout(() => {
+    expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+    expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].name);
+  }, 0);
 
   // Should render index
   const stepsWithNeither = stepsWithoutLabels.map((step) => {
@@ -128,6 +132,8 @@ test('tooltip renders expected content based on props', () => {
   ({ tab0 } = getTabs());
   fireEvent.mouseMove(tab0);
   fireEvent.mouseEnter(tab0);
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  expect(screen.queryByRole('tooltip')).toHaveTextContent('1');
+  setTimeout(() => {
+    expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+    expect(screen.queryByRole('tooltip')).toHaveTextContent('1');
+  }, 0);
 });
