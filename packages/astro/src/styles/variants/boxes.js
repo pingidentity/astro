@@ -79,10 +79,17 @@ const inputInContainerSlot = {
   transform: 'translateY(-50%)',
 };
 
+const copy = {
+  alignItems: 'center',
+  width: 'max-content',
+  cursor: 'pointer',
+};
+
 export default {
   base,
   card,
   chip,
+  copy,
   inputInContainerSlot,
   listItem,
   panel,
