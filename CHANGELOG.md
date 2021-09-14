@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.25.0...@pingux/astro@0.26.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* [UIP-4707] Stepper component has incorrect keyboard navigation styles ([eb9ecc9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eb9ecc975f39a5bfe5d4f3aa5faa51510b2baa9c))
+* [UIP-4764] Update to IconButton in Modal ([865f576](https://gitlab.corp.pingidentity.com/ux/pingux/commit/865f5765afe6d7e3114f756855b9f38f50627dfb))
+
+
+### Features
+
+* [UIP-4657] CopyText Component ([8f76c16](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8f76c168617ceb03cc671ab5b8139f9d2d52f1a5))
+* [UIP-4767] Icon buttons need keyboard hover state ([84cdfe6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/84cdfe69c00af489ed94f20d1394af84e960170c))
+
+
+
+
+
 # [0.25.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.24.0...@pingux/astro@0.25.0) (2021-09-09)
 
 
