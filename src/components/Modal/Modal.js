@@ -11,7 +11,7 @@ import { FocusScope } from '@react-aria/focus';
 import CloseIcon from 'mdi-react/CloseIcon';
 
 import Box from '../Box';
-import Button from '../Button';
+import IconButton from '../IconButton';
 import Icon from '../Icon';
 import Text from '../Text';
 import { useStatusClasses } from '../../hooks';
@@ -84,17 +84,14 @@ const Modal = forwardRef((props, ref) => {
               hasCloseButton &&
               (
                 closeButton ??
-                <Button
-                  variant="icon"
-                  onPress={onClose}
-                  sx={{ position: 'absolute', top: 14, right: 10 }}
-                >
-                  <Icon
-                    icon={CloseIcon}
-                    variant="modal.closeIcon"
+                  <IconButton
+                    aria-label="my-label"
                     size={22}
-                  />
-                </Button>
+                    variant="modalCloseButton"
+                    onPress={onClose}
+                  >
+                    <Icon icon={CloseIcon} />
+                  </IconButton>
               )
             }
             {
