@@ -358,6 +358,15 @@ const danger = {
   },
 };
 
+const copy = {
+  pl: 'xs',
+  outline: 'none',
+  cursor: 'pointer',
+  path: {
+    fill: 'neutral.10',
+  },
+};
+
 const colorField = {
   border: `1px solid ${neutral['80']}`,
   '&:focus-visible': {
@@ -385,6 +394,7 @@ export default {
   close,
   colorField,
   comboBox,
+  copy,
   critical,
   danger,
   default: {
