@@ -23,7 +23,7 @@ export const tabLine = {
 };
 
 export const tabPanel = {
-  outlineColor: 'transparent',
+  outline: 'none',
 };
 
 export const tabs = {

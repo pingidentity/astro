@@ -76,7 +76,7 @@ export const CollectionTab = forwardRef((props, ref) => {
     return (
       <>
         {separator}
-        <TooltipTrigger {...tooltipTriggerProps}>
+        <TooltipTrigger {...tooltipTriggerProps} isOpen={isHovered || isFocusVisible}>
           <Button variant="quiet">
             {tab}
           </Button>
