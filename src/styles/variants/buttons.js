@@ -73,6 +73,13 @@ const iconButton = {
   },
 };
 
+const modalCloseButton = {
+  ...iconButton,
+  position: 'absolute',
+  top: 14,
+  right: 10,
+};
+
 const close = {
   ...iconButton,
   p: 0,
@@ -426,4 +433,5 @@ export default {
   success,
   text,
   helpHint,
+  modalCloseButton,
 };
