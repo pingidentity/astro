@@ -14,6 +14,10 @@ const tab = {
   mb: 0,
   mr: 0,
   outline: 'none',
+  '&.is-focused': {
+    boxShadow: 'focus',
+    borderRadius: '50%',
+  },
   '&:not(:first-of-type)': {
     flex: 1,
     maxWidth: 122,
