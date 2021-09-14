@@ -40,6 +40,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
                 shadowColor: 'rgb(211, 211, 211, .75)',
                 shadowOffset: new go.Point(0, 1),
                 shadowBlur: 10,
+                name: 'start',
             },
             $(go.Shape, 'RoundedRectangle',
                 { fill: 'transparent', strokeWidth: 0, cursor: 'normal' }),

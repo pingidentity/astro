@@ -118,7 +118,7 @@ export const dontShowDropzones = (diagram) => {
     });
     diagram.nodes.each((n) => {
         const node = n;
-        if (node.data.category === 'outlet') {
+        if (node.name === 'outlet' || node.name === 'start') {
             node.findObject('fromNode').fill = node.findObject('fromNodeOuter').stroke;
             node.findObject('fromNode').stroke = COLORS.WHITE;
             node.findObject('fromNodeOuter').fill = 'transparent';
@@ -281,7 +281,7 @@ export default function useDiagram({
             });
             diagramObject.nodes.each((n) => {
                 const node = n;
-                if (node.data.category === 'outlet') {
+                if (node.name === 'outlet' || node.name === 'start') {
                     node.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
                     node.findObject('fromNode').fill = COLORS.PURPLE;
                     node.findObject('fromNode').stroke = COLORS.PURPLE;

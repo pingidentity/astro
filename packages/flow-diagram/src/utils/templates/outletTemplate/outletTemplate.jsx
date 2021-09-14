@@ -15,6 +15,7 @@ export const outletTemplate = ({ color = COLORS.BLACK } = {}) => $(go.Node, 'Spo
         deletable: false,
         movable: false,
         selectable: false,
+        name: 'outlet',
     },
     new go.Binding('location', 'loc', go.Point.parse),
     $(go.Panel, 'Auto',
