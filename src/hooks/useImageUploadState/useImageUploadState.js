@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const useImageUploadState = (props = {}, inputRef) => {
   const {
@@ -13,6 +13,8 @@ const useImageUploadState = (props = {}, inputRef) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isImageType, setIsImageType] = useState(true);
   const [fileName, setFileName] = useState('');
+
+  useEffect(() => setPreviewImage(defaultPreviewImage), [defaultPreviewImage]);
 
   const pressPreviewButton = useCallback(() => {
     if (previewImage && previewImage !== defaultPreviewImage) {
