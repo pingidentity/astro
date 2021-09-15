@@ -10,6 +10,7 @@ const testHelperText = 'test-helper-text';
 const testImageURL = 'test-image-url';
 const testImageURL2 = 'test-image-url2';
 const imageUploadImagePreview = 'image-upload-image-preview';
+const imageUploadNoImagePreview = 'image-upload-no-image-preview';
 const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
 const notImageFileName = 'nice-song.mp3';
 const notImageFile = new File(['(⌐□_□)'], notImageFileName, {
@@ -30,8 +31,8 @@ afterAll(() => {
   global.URL.createObjectURL = originalValue;
 });
 
-const getComponent = (props = {}) =>
-  render(<ImageUploadField {...defaultProps} {...props} />);
+const getComponent = (props = {}, { renderFn = render } = {}) =>
+  renderFn(<ImageUploadField {...defaultProps} {...props} />);
 
 test('should render image upload component by default', () => {
   getComponent();
@@ -153,4 +154,14 @@ test('should render the file name when file type is not image', () => {
     target: { files: [notImageFile] },
   });
   expect(screen.getByText(notImageFileName)).toBeInTheDocument();
+});
+
+test('should render new preview image if defined later', () => {
+  const { rerender } = getComponent();
+  expect(screen.queryByTestId(imageUploadNoImagePreview)).toBeInTheDocument();
+  expect(screen.queryByTestId(imageUploadImagePreview)).not.toBeInTheDocument();
+
+  getComponent({ defaultPreviewImage: 'some-image' }, { renderFn: rerender });
+  expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
+  expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
 });
