@@ -196,5 +196,11 @@
     "append-version": "node ../../append_current_version.js",
     "cdn": "rm -rf cdn && make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
   },
-  "csrfDataSourceApiConfig": {}
+  "resolutions": {
+    "ast-types": "^0.14.0",
+    "minimist": "^1.2.5",
+    "CodeMirror": "^5.59.4",
+    "node-fetch": "^2.6.1",
+    "ua-parser-js": "^0.7.28"
+  }
 }
