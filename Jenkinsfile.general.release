@@ -308,35 +308,35 @@ pipeline {
                 "astro",
                 "${updatedPackagesMap[it]}"
               );
-              slackSend channel: '#ui-astro', message: "${astroMessage}", color: "#4aba78"
+              slackSend channel: '#ui-announcements', message: "${astroMessage}", color: "#4aba78"
             } else if (it == "@pingux/end-user") {
               def endUserMessage = generateSlackMessage(
                 "End User",
                 "end-user",
                 "${updatedPackagesMap[it]}"
               );
-              slackSend channel: '#ui-end-user', message: "${endUserMessage}", color: "#4aba78"
+              slackSend channel: '#ui-announcements', message: "${endUserMessage}", color: "#4aba78"
             } else if (it == "@pingux/flow-diagram") {
               def flowDiagramMessage = generateSlackMessage(
                 "Flow Diagram",
                 "flow-diagram",
                 "${updatedPackagesMap[it]}"
               );
-              slackSend channel: '#ui-flow-diagram', message: "${flowDiagramMessage}", color: "#4aba78"
+              slackSend channel: '#ui-announcements', message: "${flowDiagramMessage}", color: "#4aba78"
             } else if (it == "@pingux/schema-form") {
               def schemaFormMessage = generateSlackMessage(
                 "Schema Form",
                 "schema-form",
                 "${updatedPackagesMap[it]}"
               );
-              slackSend channel: '#ui-schema-forms', message: "${schemaFormMessage}", color: "#4aba78"
+              slackSend channel: '#ui-announcements', message: "${schemaFormMessage}", color: "#4aba78"
             } else if (it == "ui-library") {
               def uiLibraryMessage = generateSlackMessage(
                 "UI Library",
                 "ui-library",
                 "${updatedPackagesMap[it]}"
               );
-              slackSend channel: '#ui-library', message: "${uiLibraryMessage}", color: "#4aba78"
+              slackSend channel: '#ui-announcements', message: "${uiLibraryMessage}", color: "#4aba78"
             }
             // don't do anything with packages that don't have their own channel
           }
