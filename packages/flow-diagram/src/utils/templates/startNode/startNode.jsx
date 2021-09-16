@@ -61,7 +61,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
                 { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal', shadowVisible: true },
             ),
             $(go.Shape, 'Circle',
-                { name: 'borderCircle', fill: 'transparent', strokeWidth: 1, desiredSize: new go.Size(39, 39), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' },
+                { name: 'borderCircle', fill: 'transparent', strokeWidth: 2, desiredSize: new go.Size(38, 38), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' },
                 new go.Binding('stroke', '', getBorderColor(COLORS.BLUE, COLORS.ERROR, 'transparent')).ofObject(''),
             ),
             $(go.Picture, { source: svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />), width: 25, height: 25, margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' }),

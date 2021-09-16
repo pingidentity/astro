@@ -141,7 +141,7 @@ export const stepTemplate = ({ color, onClick = () => {}, onDelete = () => {} } 
                     fill: 'transparent',
                     margin: new go.Margin(30, 0, 0, 10),
                     parameter1: 1,
-                    strokeWidth: 1,
+                    strokeWidth: 2,
                 },
                 new go.Binding('desiredSize', '', s => getSize(s, 'innerBorder')),
                 // Have to bind this to the empty string so that it runs this check on every update,
