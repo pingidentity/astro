@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.22.4...@pingux/flow-diagram@0.22.5) (2021-09-17)
+
+
+### Bug Fixes
+
+* [UIP-4812] Performance issue ([6a170c4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6a170c43b20ce2af01884cc6aa3cb078c02afaeb))
+
+
+
+
+
 ## [0.22.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.22.3...@pingux/flow-diagram@0.22.4) (2021-09-14)
 
 

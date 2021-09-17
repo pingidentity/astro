@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.42.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.42.1...ui-library@4.42.2) (2021-09-17)
+
+
+### Bug Fixes
+
+* [UIP-4721] Upgrade ua-parser-js dependency to ^0.7.28 due to security vulnerabilities ([8e99852](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/8e9985268ac31d9cf9320163828dd60477b2c92d))
+
+
+
+
+
 ## [4.42.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.42.0...ui-library@4.42.1) (2021-09-09)
 
 

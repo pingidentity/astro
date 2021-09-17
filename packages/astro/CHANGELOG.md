@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.26.0...@pingux/astro@0.26.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* [UIP-4765] loader component size ([e343bfe](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e343bfea93f385269c4fe4d442e6f4d4d640355e))
+* [UIP-4803] Fix defaultPreviewImage being defined later ([6da4d58](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6da4d5836dfd613937d2f59dfbdce3978623571d))
+
+
+
+
+
 # [0.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.25.0...@pingux/astro@0.26.0) (2021-09-14)
 
 
