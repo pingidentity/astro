@@ -29,10 +29,10 @@ class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
                     if (link.data.category === 'io') {
                         return false;
                     }
-                    if (this.isConnected(connectedNode, [...checked, node])) {
-                        currentNode.layerName = '';
-                        isConnected = true;
-                    }
+                }
+                if (this.isConnected(connectedNode, [...checked, node])) {
+                    currentNode.layerName = '';
+                    isConnected = true;
                 }
                 return true;
             });
