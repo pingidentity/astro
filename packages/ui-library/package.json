@@ -178,7 +178,7 @@
     "stylelint": "stylelint \"src/css/**/*.scss\" --config ./.stylelintrc --syntax scss",
     "jest": "jest && node ./clean-after.js",
     "coverage": "jest --coverage && node ./clean-after.js",
-    "coverage-ci": "jest --coverage --ci --silent --i && node ./clean-after.js",
+    "coverage-ci": "jest --coverage --ci && node ./clean-after.js",
     "test": "jest",
     "verify": "yarn run jslint && yarn run stylelint && yarn run coverage",
     "integration": "wdio wdio.conf.js",
@@ -195,12 +195,5 @@
     "backstop-test": "rm -rf ./backstop.json && node ./runBackstopTests.js",
     "append-version": "node ../../append_current_version.js",
     "cdn": "rm -rf cdn && make LIB_VERSION=$(node -p -e \"require('./package.json').version\") build-cdn-assets"
-  },
-  "resolutions": {
-    "ast-types": "^0.14.0",
-    "minimist": "^1.2.5",
-    "CodeMirror": "^5.59.4",
-    "node-fetch": "^2.6.1",
-    "ua-parser-js": "^0.7.28"
   }
 }
