@@ -5,6 +5,9 @@ import createCache from '@emotion/cache';
 import userEvent from '@testing-library/user-event';
 import PasswordField from '.';
 
+// Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
+// Failure occured with ThemeUI refactor.
+// https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
 const emotionCache = createCache({ key: 'password-field-test' });
 emotionCache.compat = true;
 

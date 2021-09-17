@@ -4,6 +4,9 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import RequirementsList from '.';
 
+// Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
+// Failure occured with ThemeUI refactor.
+// https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
 const emotionCache = createCache({ key: 'requirements-test' });
 emotionCache.compat = true;
 
