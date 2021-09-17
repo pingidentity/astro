@@ -84,7 +84,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('node-builder') {
             echo "Running tests for packages"
-            sh 'yarn lerna run test'
+            sh 'yarn lerna run test --concurrency=1'
           }
         }
       }
