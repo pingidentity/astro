@@ -1,12 +1,13 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { layout, flexbox } from 'styled-system';
+import { layout, flexbox, typography } from 'styled-system';
 import { Box as ThemeUIBox } from 'theme-ui';
 import { propType as stylePropType } from '@styled-system/prop-types';
+import { toNumber } from 'lodash';
 import { useStatusClasses } from '../../hooks';
 
-const ExtendedBox = styled(ThemeUIBox)(layout, flexbox);
+const ExtendedBox = styled(ThemeUIBox)(layout, flexbox, typography);
 /**
  * Basic flexbox-based layout component for creating rows and columns,
  * while controlling sizes and spacing.
@@ -20,6 +21,7 @@ const Box = forwardRef((props, ref) => {
     isRow,
     isDisabled,
     className,
+    fontSize,
     sx, // eslint-disable-line
     ...others
   } = props;
@@ -33,6 +35,15 @@ const Box = forwardRef((props, ref) => {
       [fd === 'row' ? 'marginLeft' : 'marginTop']: gap,
     };
   }
+
+  const customFontSize = useMemo(() => {
+    const numericalFontSize = toNumber(fontSize);
+    if (Number.isNaN(numericalFontSize)) {
+      return fontSize;
+    }
+    return numericalFontSize;
+  }, [fontSize]);
+
   return (
     <ExtendedBox
       className={classNames}
@@ -40,6 +51,7 @@ const Box = forwardRef((props, ref) => {
       display="flex"
       flexDirection={fd}
       variant="boxes.base"
+      fontSize={customFontSize}
       {...others}
       sx={custom}
     />
@@ -57,6 +69,7 @@ Box.propTypes = {
   isRow: PropTypes.bool,
   /** Gap between items, whether in a row or column. */
   gap: stylePropType,
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Box.defaultProps = {
