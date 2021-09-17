@@ -6,6 +6,9 @@ import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Tabs from './Tabs';
 import Tab from '../Tab';
 
+// Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
+// Failure occured with ThemeUI refactor.
+// https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
 const emotionCache = createCache({ key: 'tabs-test' });
 emotionCache.compat = true;
 
