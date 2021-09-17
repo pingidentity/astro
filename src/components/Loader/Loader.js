@@ -41,6 +41,7 @@ Loader.propTypes = {
   color: PropTypes.string,
   /**
    * Size as number or pixel / em / rem value.
+   * Sizes can either be a string such as xs, sm, md, etc or numeric size with unit such as 15px.
    * Default size inherits the font size.
   */
   size: PropTypes.oneOfType([
