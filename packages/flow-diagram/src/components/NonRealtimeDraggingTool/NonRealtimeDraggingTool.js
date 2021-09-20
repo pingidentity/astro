@@ -10,6 +10,7 @@ export default function NonRealtimeDraggingTool() {
     go.DraggingTool.call(this);
     this._duration = 0; // duration of movement animation; <= 0 to disable
     /** @type {Part} */
+    this._setDraggedPart = () => {};
     this._imagePart = null; // a Part holding a translucent image of what would be dragged
     /** @type {Map.<Part,DraggingInfo>} */
     this._ghostDraggedParts = null; // a Map of the _imagePart and its dragging information
@@ -27,6 +28,11 @@ go.Diagram.inherit(NonRealtimeDraggingTool, go.DraggingTool);
 Object.defineProperty(NonRealtimeDraggingTool.prototype, 'duration', {
     get() { return this._duration; },
     set(val) { this._duration = val; },
+});
+
+Object.defineProperty(NonRealtimeDraggingTool.prototype, 'setDraggedPart', {
+    get() { return this._setDraggedPart; },
+    set(val) { this._setDraggedPart = val; },
 });
 
 /**
@@ -90,8 +96,14 @@ NonRealtimeDraggingTool.prototype.doDeactivate = function doDeactivate() {
 */
 NonRealtimeDraggingTool.prototype.doMouseUp = function doMouseUp() {
     const partsmap = this._originalDraggedParts;
+    const it = partsmap.iterator;
+    const key = [];
+    while (it.next()) {
+        key.push(it.key);
+    }
     if (partsmap !== null) {
         this.draggedParts = partsmap;
+        this._setDraggedPart(key);
     }
     go.DraggingTool.prototype.doMouseUp.call(this);
 };
