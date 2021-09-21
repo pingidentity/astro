@@ -77,6 +77,12 @@ export * from './components/List';
 export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 
+export { default as ListView } from './components/ListView';
+export * from './components/ListView';
+
+export { default as ListViewItem } from './components/ListViewItem';
+export * from './components/ListViewItem';
+
 export { default as Loader } from './components/Loader';
 export * from './components/Loader';
 
