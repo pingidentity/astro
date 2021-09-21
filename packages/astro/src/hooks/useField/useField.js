@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import omit from 'lodash/omit';
 import noop from 'lodash/noop';
 import { useLabel } from '@react-aria/label';
@@ -61,15 +61,21 @@ const useField = (props = {}) => {
     ...others
   } = props;
 
-  const [, setControlValue] = useState(value);
   // 0 could be a valid input for fields, but null, undefined, and '' are not
   const [hasValue, setHasValue] = useState(!!value || value === 0);
   const [hasFocusWithin, setFocusWithin] = useState(false);
 
+  useEffect(() => {
+    if (!!defaultValue || defaultValue === 0 || !!value || value === 0) {
+      setHasValue(true);
+    } else {
+      setHasValue(false);
+    }
+  }, [defaultValue, value]);
+
   // Capture value changes so we can apply the has-value class to the container
   const fieldOnChange = (e) => {
     const eventValue = e?.target?.value;
-    setControlValue(eventValue);
     if (!!eventValue || eventValue === 0) {
       setHasValue(true);
     } else {

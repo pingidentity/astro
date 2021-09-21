@@ -65,3 +65,17 @@ test('form wrapper will have a max label column width when custom width set', ()
   const textAreaContainer = screen.getByTestId(testId);
   expect(textAreaContainer).toHaveStyle('grid-template-columns: 120px auto');
 });
+
+test('text aria container have class name when value is provided', () => {
+  const labelMode = 'float';
+  getComponent({ labelMode, value: 'text' });
+  const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer.className).toMatch('has-value');
+});
+
+test('text aria container have class name when default value is provided', () => {
+  const labelMode = 'float';
+  getComponent({ labelMode, defaultValue: 'text' });
+  const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer.className).toMatch('has-value');
+});
