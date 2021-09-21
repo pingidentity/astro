@@ -140,6 +140,7 @@ export default function useDiagram({
     const [diagram, setDiagram] = useState();
     const [droppedOntoLinkKey, setDroppedOntoLinkKey] = useState(undefined);
     const [droppedOntoNodeKey, setDroppedOntoNodeKey] = useState(undefined);
+    const [draggedElementData, setDraggedElementData] = useState(undefined);
     const [selected, setSelected] = useState(null);
     const [isObjectDragging, setIsObjectDragging] = useState(false);
     const first = useRef(true);
@@ -184,9 +185,11 @@ export default function useDiagram({
         onModelChange({ ...args,
             ...(droppedOntoLinkKey ? { droppedOntoLinkKey } : {}),
             ...(droppedOntoNodeKey ? { droppedOntoNodeKey } : {}),
+            ...(draggedElementData ? { draggedElementData } : {}),
         });
         setDroppedOntoLinkKey(undefined);
         setDroppedOntoNodeKey(undefined);
+        setDraggedElementData(undefined);
     };
 
     const initDiagram = () => {
@@ -199,7 +202,12 @@ export default function useDiagram({
                     'animationManager.isInitial': false,
                     'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
                         .computeEffectiveCollection),
-                    draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }),
+                    draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }, {
+                        setDraggedPart: (draggedParts) => {
+                            const mappedDraggedParts = draggedParts.map(part => part.data);
+                            setDraggedElementData(mappedDraggedParts);
+                        },
+                    }),
                     layout:
                         $(SelectiveDigraphLayout,
                             {

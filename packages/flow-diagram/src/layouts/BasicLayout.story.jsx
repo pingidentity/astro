@@ -107,10 +107,15 @@ const Demo = () => {
             droppedOntoNodeKey,
             droppedOntoLinkKey,
             selectedNodeData,
+            draggedElementData,
         }) => {
             // onModelChange gets called once at the beginning with every node,
             // so ignore key adds that involve too many new keys to have come from
             // the palette.
+
+            if (draggedElementData) {
+                console.log(draggedElementData)
+            }
 
             if (selectedNodeData) {
                 if (Object.keys(selectedNodeData).length && selectedNodeData.category !== 'outlet') {
