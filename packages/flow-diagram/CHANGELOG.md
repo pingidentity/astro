@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.22.5...@pingux/flow-diagram@0.23.0) (2021-09-21)
+
+
+### Features
+
+* [UIP-4833] Get dragged parts onModelChange ([62d23d8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/62d23d8a3ffb63919c030e3e338328cdd3c0a9f3))
+
+
+
+
+
 ## [0.22.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.22.4...@pingux/flow-diagram@0.22.5) (2021-09-17)
 
 
