@@ -20,6 +20,13 @@ const withinListbox = {
   justifyContent: 'center',
 };
 
+const withinListView = {
+  color: 'neutral.60',
+  padding: 'md',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
 const pulse = keyframes`
   \ 0% {
         opacity: 0;
@@ -77,4 +84,5 @@ export default {
   container,
   withinInput,
   withinListbox,
+  withinListView,
 };

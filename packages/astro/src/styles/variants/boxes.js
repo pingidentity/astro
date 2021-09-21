@@ -59,6 +59,26 @@ const listItem = {
   },
 };
 
+const listViewItem = {
+  ...base,
+  padding: '0px 15px 0px 25px',
+  flex: '1 1 0px',
+  cursor: 'pointer',
+  minHeight: '80px',
+  justifyContent: 'center',
+  bg: 'accent.99',
+  outline: 'none',
+  '&.is-selected': {
+    bg: 'white',
+  },
+  '&.is-hovered': {
+    bg: 'white',
+  },
+  '&.is-focused': {
+    boxShadow: 'inset 0 0 5px #5873bdbf',
+  },
+};
+
 const chip = {
   cursor: 'pointer',
   height: '15px',
@@ -92,6 +112,7 @@ export default {
   copy,
   inputInContainerSlot,
   listItem,
+  listViewItem,
   panel,
   radioCheckedContent,
   radioContainer,

@@ -4,6 +4,7 @@ import { useFilter } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
 import { Item, OverlayProvider } from '../../index';
 import ComboBoxField from './ComboBoxField';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -50,7 +51,12 @@ export default {
     hasNoStatusIndicator: {},
     isReadOnly: {},
     isDisabled: {},
-    loadingState: {},
+    loadingState: {
+      control: {
+        type: 'select',
+        options: loadingStates,
+      },
+    },
     selectedKey: {
       control: {
         type: 'none',
