@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.26.1...@pingux/astro@0.27.0) (2021-09-21)
+
+
+### Bug Fixes
+
+* [UIP-4734] TextField float label bug when managed externally ([9f48a4a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9f48a4a8cbc76206abd0e448124818e7b4a997f2))
+* [UIP-4783] add custom styling to tooltip ([166fc97](https://gitlab.corp.pingidentity.com/ux/pingux/commit/166fc971ff6e5c1f02c062e54afe85fae4c7d5f9))
+
+
+### Features
+
+* [UIP-4537] Virtualized ListView component ([efeb4f6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/efeb4f6ad3fb4b12657af98c31bc740f23c6297f))
+* [UIP-4757] MenuButton recipe ([9a7e6c5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9a7e6c527c5d42fc61a71558912c6accf2dbeb11))
+
+
+
+
+
 ## [0.26.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.26.0...@pingux/astro@0.26.1) (2021-09-17)
 
 
