@@ -4,6 +4,7 @@ import images from './images';
 import imageUpload from './imageUpload';
 import link from './link';
 import listBox from './listBox';
+import loader from './loader';
 import modal from './modal';
 import menu from './menu';
 import menuItem from './menuItem';
@@ -14,9 +15,9 @@ import popoverMenu from './popoverMenu';
 import rockerbutton from './rockerbutton';
 import separator from './separator';
 import stepper from './stepper';
-import * as tabs from './tabs';
-import loader from './loader';
 import table from './table';
+import * as tabs from './tabs';
+import tooltip from './tooltip';
 
 
 export default {
@@ -31,12 +32,13 @@ export default {
   menuItem,
   messages,
   modal,
+  overlayPanel,
   popover,
   popoverMenu,
   rockerbutton,
   separator,
-  table,
-  overlayPanel,
   stepper,
+  table,
   ...tabs,
+  tooltip,
 };
