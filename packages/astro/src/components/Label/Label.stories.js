@@ -30,5 +30,10 @@ export const Float = () => (
 );
 
 export const WithHelpHint = args => (
-  <Label hintText="Example Hint" {...args}>This is a label</Label>
+  <Label
+    hintText="Example Hint"
+    {...args}
+  >
+    This is a label
+  </Label>
 );

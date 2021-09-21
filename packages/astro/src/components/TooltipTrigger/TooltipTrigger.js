@@ -57,6 +57,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
   });
 
   const { classNames } = useStatusClasses(className, {
+    [`is-${direction}`]: direction,
     isDarkMode,
   });
 

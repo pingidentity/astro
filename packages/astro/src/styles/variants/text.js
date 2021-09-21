@@ -51,6 +51,23 @@ const fieldHelperText = {
   },
 };
 
+const tooltipContent = {
+  maxWidth: '10em',
+  maxHeight: '15em',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  WebkitLineClamp: '10',
+  WebkitBoxOrient: 'vertical',
+  display: '-webkit-box !important',
+  wordBreak: 'break-word',
+
+  '.is-right > * > &, .is-left > * > &': {
+    maxWidth: '24em',
+    maxHeight: '6.5em',
+    WebkitLineClamp: '4',
+  },
+};
+
 export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary' },
@@ -68,4 +85,5 @@ export const text = {
   tabLabel,
   tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary' },
   title: { ...wordWrap, fontSize: 'xx', fontWeight: 1, color: 'text.primary' },
+  tooltipContent,
 };

@@ -35,6 +35,7 @@ const Label = forwardRef((props, ref) => {
     mode,
     requiredIndicator,
     hintText,
+    helpHintProps,
     ...others
   } = props;
   const { classNames } = useStatusClasses(className, {
@@ -58,7 +59,7 @@ const Label = forwardRef((props, ref) => {
       }
       {
         hintText
-        && <HelpHint>{hintText}</HelpHint>
+        && <HelpHint {...helpHintProps}>{hintText}</HelpHint>
       }
     </ExtendedLabel>
   );
@@ -75,6 +76,8 @@ Label.propTypes = {
   requiredIndicator: PropTypes.node,
   /** If present this prop will cause a help hint to render in the label. */
   hintText: PropTypes.string,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps: PropTypes.shape({}),
 };
 
 Label.defaultProps = {
