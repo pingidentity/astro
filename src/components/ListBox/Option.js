@@ -45,7 +45,6 @@ const Option = forwardRef((props, ref) => {
     isFocused: isFocused || state?.selectionManager?.focusedKey === item.key,
     isSelected,
   });
-
   return (
     <Box
       isRow
