@@ -74,6 +74,9 @@ export * from './components/Label';
 export { default as Link } from './components/Link';
 export * from './components/Link';
 
+export { default as LinkSelectField } from './components/LinkSelectField';
+export * from './components/LinkSelectField';
+
 export { default as List } from './components/List';
 export * from './components/List';
 
