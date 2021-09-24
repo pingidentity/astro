@@ -1,9 +1,15 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import MenuDown from 'mdi-react/MenuDownIcon';
 
 import { useSelectField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import Box from '../Box';
+import Button from '../Button';
+import Icon from '../Icon';
+import Loader from '../Loader';
 import SelectFieldBase from '../SelectFieldBase';
+import Text from '../Text';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -12,20 +18,59 @@ import SelectFieldBase from '../SelectFieldBase';
  * and [useSelectState](https://react-spectrum.adobe.com/react-stately/useSelectState.html) from
  * React Stately.
  */
-const SelectField = forwardRef((props, ref) => {
-  const { ...selectFieldProps } = useSelectField(props, ref);
-  return <SelectFieldBase {...props} {...selectFieldProps} />;
+const LinkSelectField = forwardRef((props, ref) => {
+  const { placeholder, status } = props;
+
+  const { ...selectFieldProps } = useSelectField({
+    listboxStyle: {
+      width: '10em',
+    },
+    ...props,
+    // Need this for not applying is-default class
+    status: status === statuses.DEFAULT ? null : status,
+  }, ref);
+  const {
+    fieldControlProps,
+    isLoadingInitial,
+    state,
+    triggerProps,
+    triggerRef,
+  } = selectFieldProps;
+
+  const trigger = (
+    <Button
+      ref={triggerRef}
+      variant="link"
+      className={fieldControlProps.className}
+      {...triggerProps}
+    >
+      <Text variant="label" color="active">{placeholder}</Text>
+      <Box isRow>
+        {isLoadingInitial && <Loader variant="loader.withinInput" />}
+        <Box as="span" aria-hidden="true" variant="forms.select.arrow">
+          <Icon
+            icon={MenuDown}
+            sx={
+              state.isOpen
+                ? { transform: 'rotate(180deg)' }
+                : null
+            }
+          />
+        </Box>
+      </Box>
+    </Button>
+  );
+
+  return <SelectFieldBase {...props} {...selectFieldProps} trigger={trigger} />;
 });
 
-SelectField.propTypes = {
+LinkSelectField.propTypes = {
   /** Alignment of the popover menu relative to the trigger. */
   align: PropTypes.oneOf(['start', 'end', 'middle']),
   /** Where the popover menu opens relative to its trigger. */
   direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey: PropTypes.string,
-  /** Default text rendered if no option is selected. Deprecated. */
-  defaultText: PropTypes.string,
   /** Array of keys to disable within the options list. */
   disabledKeys: PropTypes.arrayOf(PropTypes.string),
   /** Whether the collection allows empty selection. */
@@ -63,8 +108,6 @@ SelectField.propTypes = {
   placeholder: PropTypes.string,
   /** The currently selected key in the collection (controlled). */
   selectedKey: PropTypes.string,
-  /** Determines the textarea status indicator and helper text styling. Eg. float. */
-  labelMode: PropTypes.string,
   /** Determines the type of label applied to the component. */
   status: PropTypes.oneOf(Object.values(statuses)),
   /**
@@ -96,12 +139,12 @@ SelectField.propTypes = {
   labelProps: PropTypes.shape({}),
 };
 
-SelectField.defaultProps = {
+LinkSelectField.defaultProps = {
   placeholder: 'Select',
   status: statuses.DEFAULT,
   align: 'start',
   direction: 'bottom',
 };
 
-SelectField.displayName = 'SelectField';
-export default SelectField;
+LinkSelectField.displayName = 'LinkSelectField';
+export default LinkSelectField;
