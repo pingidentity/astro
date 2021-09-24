@@ -4129,6 +4129,19 @@
     "@react-types/button" "^3.3.1"
     "@react-types/shared" "^3.6.0"
 
+"@react-aria/breadcrumbs@^3.1.4":
+  version "3.1.5"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/breadcrumbs/-/breadcrumbs-3.1.5.tgz#d3e77a73fa31fdd504c23397c7dacb74220cd69b"
+  integrity sha1-0+d6c/ox/dUEwjOXx9rLdCIM1ps=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.3.2"
+    "@react-aria/interactions" "^3.5.1"
+    "@react-aria/link" "^3.1.4"
+    "@react-aria/utils" "^3.8.2"
+    "@react-types/breadcrumbs" "^3.2.1"
+    "@react-types/shared" "^3.8.0"
+
 "@react-aria/button@^3.2.1", "@react-aria/button@^3.3.2":
   version "3.3.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/button/-/button-3.3.2.tgz#bb62e3d06ddbe7c448895af322755b5023b6a1aa"
@@ -4325,6 +4338,17 @@
     "@react-aria/utils" "^3.2.1"
     "@react-types/link" "^3.1.0"
     "@react-types/shared" "^3.1.0"
+
+"@react-aria/link@^3.1.4":
+  version "3.1.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/link/-/link-3.1.4.tgz#bfd723dee0388240a39d88d08c860286c261bb47"
+  integrity sha1-v9cj3uA4gkCjnYjQjIYChsJhu0c=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/interactions" "^3.5.1"
+    "@react-aria/utils" "^3.8.2"
+    "@react-types/link" "^3.1.3"
+    "@react-types/shared" "^3.8.0"
 
 "@react-aria/listbox@^3.2.3":
   version "3.3.0"
@@ -5091,6 +5115,13 @@
   dependencies:
     "@react-types/shared" "^3.5.0"
 
+"@react-types/breadcrumbs@^3.2.1":
+  version "3.2.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/breadcrumbs/-/breadcrumbs-3.2.1.tgz#9dbca1b34d0e0ac5d34fdfc53691ad7379b2bec4"
+  integrity sha1-nbyhs00OCsXTT9/FNpGtc3myvsQ=
+  dependencies:
+    "@react-types/shared" "^3.8.0"
+
 "@react-types/button@^3.2.1", "@react-types/button@^3.3.1", "@react-types/button@^3.4.0":
   version "3.4.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/button/-/button-3.4.0.tgz#7457d8b7980396ccd82f5c400da5ba415d6ac0df"
@@ -5163,6 +5194,14 @@
   dependencies:
     "@react-aria/interactions" "^3.1.0"
     "@react-types/shared" "^3.1.0"
+
+"@react-types/link@^3.1.3":
+  version "3.1.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/link/-/link-3.1.3.tgz#461bc7bf0d98bc09da8b6344a3326844dd389f4d"
+  integrity sha1-RhvHvw2YvAnai2NEozJoRN04n00=
+  dependencies:
+    "@react-aria/interactions" "^3.5.1"
+    "@react-types/shared" "^3.8.0"
 
 "@react-types/listbox@^3.2.0":
   version "3.2.0"
