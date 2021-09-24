@@ -45,4 +45,7 @@ select.arrow = {
   '.is-float-label &': {
     mt: -10,
   },
+  '> svg': {
+    transition: 'all 0.2s linear',
+  },
 };

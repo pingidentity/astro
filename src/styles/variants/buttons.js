@@ -399,6 +399,13 @@ const imageUpload = {
   borderColor: 'neutral.95',
 };
 
+const link = {
+  ...text,
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: 'max-content',
+};
+
 export default {
   accordionHeader,
   close,
@@ -427,6 +434,7 @@ export default {
   imageUpload,
   inline,
   inverted,
+  link,
   primary,
   quiet,
   rocker,
