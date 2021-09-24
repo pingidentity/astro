@@ -17,6 +17,9 @@ export * from './components/Avatar';
 export { default as Box } from './components/Box';
 export * from './components/Box';
 
+export { default as Breadcrumbs } from './components/Breadcrumbs';
+export * from './components/Breadcrumbs';
+
 export { default as Button } from './components/Button';
 export * from './components/Button';
 
