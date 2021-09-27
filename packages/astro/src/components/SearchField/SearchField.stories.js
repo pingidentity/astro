@@ -23,11 +23,6 @@ export default {
         type: 'none',
       },
     },
-    hintText: {
-      control: {
-        type: 'text',
-      },
-    },
     isDisabled: {},
     hasAutoFocus: {},
     hasNoClearButton: {},
