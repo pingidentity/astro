@@ -107,9 +107,6 @@ SearchField.propTypes = {
   hasAutoFocus: PropTypes.bool,
   /** Whether to display the clear button or not. */
   hasNoClearButton: PropTypes.bool,
-  /** If present this prop will cause a help hint to render in the label of the field.
-   * Requires a label prop as well. */
-  hintText: PropTypes.string,
   /** The icon to display alongside the placeholder text. */
   icon: PropTypes.elementType,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
