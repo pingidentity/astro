@@ -309,6 +309,7 @@ export default function useDiagram({
         diagramObject.linkTemplate =
             $(go.Link,
                 {
+                    adjusting: go.Link.Stretch,
                     curve: go.Link.Bezier,
                     curviness: 0,
                     fromShortLength: -20,
