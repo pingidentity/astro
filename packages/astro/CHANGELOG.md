@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.27.0...@pingux/astro@0.28.0) (2021-09-28)
+
+
+### Features
+
+* [UIP-4149] add Breadcrumbs component ([b955ed1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b955ed1f046842665ae30b436591872a1122c665))
+* [UIP-4659] LinkSelectField ([552af20](https://gitlab.corp.pingidentity.com/ux/pingux/commit/552af20a47c02744ff3147f29d400a4b2518d81b))
+
+
+
+
+
 # [0.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.26.1...@pingux/astro@0.27.0) (2021-09-21)
 
 
