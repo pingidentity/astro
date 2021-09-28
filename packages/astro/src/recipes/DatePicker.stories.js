@@ -60,7 +60,7 @@ const calendarSx = {
 
 export const Default = () => {
   const dateFormat = 'YYYY-MM-DD';
-  const [date, setDate] = useState(moment());
+  const [date, setDate] = useState(moment('2021-01-01', 'YYYY-MM-DD'));
   const [inputValue, setInputValue] = useState(date.format(dateFormat));
   const [error, setError] = useState(false);
 
