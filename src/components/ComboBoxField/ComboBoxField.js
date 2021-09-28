@@ -123,7 +123,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     ...otherListBoxProps
   } = listBoxProps;
 
-  const { overlayProps, placement } = useOverlayPosition({
+  const { overlayProps, placement, updatePosition } = useOverlayPosition({
     targetRef: inputRef,
     overlayRef: popoverRef,
     scrollRef: listBoxRef,
@@ -132,6 +132,18 @@ const ComboBoxField = forwardRef((props, ref) => {
     isOpen: state.isOpen,
     onClose: state.close,
   });
+
+  // Update position once the ListBox has rendered. This ensures that
+  // it flips properly when it doesn't fit in the available space.
+  /* istanbul ignore next */
+  useLayoutEffect(() => {
+    if (state.isOpen) {
+      requestAnimationFrame(() => {
+        updatePosition();
+      });
+    }
+  }, [state.isOpen, updatePosition]);
+
 
   // Measure the width of the input to inform the width of the menu (below).
   const [menuWidth, setMenuWidth] = useState(null);
