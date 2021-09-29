@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import CheckboxField from '../CheckboxField';
 
@@ -10,6 +11,9 @@ const defaultProps = {
 const getComponent = (props = {}) => render((
   <CheckboxField {...defaultProps} {...props} />
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default checkbox', () => {
   getComponent();

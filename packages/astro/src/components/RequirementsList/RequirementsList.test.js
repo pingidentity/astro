@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import RequirementsList from '.';
+import axeTest from '../../utils/testUtils/testAxe';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.
@@ -43,6 +44,9 @@ const getComponent = (props = {}) => render(
     <RequirementsList {...defaultProps} {...props} />
   </CacheProvider>,
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('base case requirements list', () => {
   getComponent();

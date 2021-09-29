@@ -1,6 +1,7 @@
 import React from 'react';
 import { Item } from '@react-stately/collections';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '../Text';
 import AccordionGroup from '../AccordionGroup';
@@ -23,6 +24,14 @@ const getComponent = (props = {}) => render((
     </Item>
   </AccordionGroup>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent, {
+  // landmark-unique rule conflicts with react-aria role definition
+  rules: {
+    'landmark-unique': { enabled: false },
+  },
+});
 
 test('button press', () => {
   const onPress = jest.fn();

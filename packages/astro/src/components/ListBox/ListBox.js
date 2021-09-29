@@ -8,6 +8,7 @@ import { ListLayout } from '@react-stately/layout';
 
 import { ListBoxContext } from './ListBoxContext';
 import { Option } from './index.js';
+import { useAriaLabelWarning } from '../../hooks';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Loader from '../Loader';
 
@@ -19,7 +20,7 @@ export const collectionTypes = {
 
 export function useListBoxLayout(state) {
   const collator = useCollator({ usage: 'search', sensitivity: 'base' });
-  const layout = useMemo(() =>
+  const layout = useMemo(() => (
     new ListLayout({
       estimatedRowHeight: 41,
       estimatedHeadingHeight: 26,
@@ -28,7 +29,7 @@ export function useListBoxLayout(state) {
       placeholderHeight: 41,
       collator,
     })
-  , [collator]);
+  ), [collator]);
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
@@ -58,12 +59,15 @@ const ListBox = forwardRef((props, ref) => {
     selectedKeys,
     selectionMode,
     state,
-    'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,
     ...others
   } = props;
+
+  const ariaLabel = props['aria-label'];
+  useAriaLabelWarning('ListBox', ariaLabel);
+
   const { focusStrategy } = state;
   // Object matching React Aria API with all options
   const listBoxOptions = {
@@ -87,7 +91,7 @@ const ListBox = forwardRef((props, ref) => {
     shouldFocusWrap: hasFocusWrap,
     shouldSelectOnPressUp: isSelectedOnPressUp,
     shouldUseVirtualFocus: hasVirtualFocus,
-    'aria-label': ariaLabel,
+    'aria-label': ariaLabel || 'ListBox',
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,

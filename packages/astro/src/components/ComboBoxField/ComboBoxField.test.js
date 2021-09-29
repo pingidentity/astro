@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { axe } from 'jest-axe';
 import { useFilter } from '@react-aria/i18n';
 import userEvent from '@testing-library/user-event';
 
@@ -472,4 +473,12 @@ test('two listbox can not be open at the same time', () => {
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(2);
   expect(screen.queryByRole('option', { name: 'Tango' })).toBeInTheDocument();
+});
+
+test('should have no accessibility violations', async () => {
+  jest.useRealTimers();
+  const { container } = getComponent();
+  const results = await axe(container);
+
+  expect(results).toHaveNoViolations();
 });

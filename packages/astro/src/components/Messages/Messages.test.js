@@ -3,6 +3,7 @@ import { announce } from '@react-aria/live-announcer';
 import { Item } from '@react-stately/collections';
 import userEvent from '@testing-library/user-event';
 
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
 import Messages from '.';
@@ -66,6 +67,9 @@ const MessagesWithButton = (props) => {
 const getWithButton = (props = {}, renderFn = render) => renderFn(
   <MessagesWithButton {...defaultProps} {...props} />,
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('renders Messages component in the default state', () => {
   getComponent();

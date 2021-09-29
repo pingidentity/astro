@@ -2,6 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Tabs from './Tabs';
 import Tab from '../Tab';
@@ -59,6 +60,9 @@ const testSingleTab = (tabs, tab, thisTest, testParams = []) => {
 afterEach(() => {
   jest.restoreAllMocks();
 });
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default tabs', () => {
   getComponent();

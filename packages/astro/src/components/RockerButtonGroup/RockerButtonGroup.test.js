@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, queryByAttribute, render, screen } from '../../utils/testUtils/testWrapper';
 import RockerButtonGroup from './RockerButtonGroup';
 import RockerButton from '../RockerButton';
@@ -26,6 +27,9 @@ const getComponent = (props = {}, { buttons = testButtons, renderFn = render } =
     ))}
   </RockerButtonGroup>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('renders rocker container with buttons', () => {
   getComponent();

@@ -3,7 +3,7 @@ import { Checkbox as ThemeUICheckbox } from 'theme-ui';
 
 /**
  * Basic checkbox input.
- * Built on top of the [Checkbox from Theme-UI](hhttps://theme-ui.com/components/checkbox/).
+ * Built on top of the [Checkbox from Theme-UI](https://theme-ui.com/components/checkbox/).
  *
  * **Note: Requires a label. It's recommended to use `CheckboxField` for a complete solution.**
  */

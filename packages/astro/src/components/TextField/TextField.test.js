@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TextField from '.';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-text-field';
 const testLabel = 'Test Label';
@@ -9,6 +10,9 @@ const defaultProps = {
   label: testLabel,
 };
 const getComponent = (props = {}) => render(<TextField {...defaultProps} {...props} />);
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default text field', () => {
   getComponent();

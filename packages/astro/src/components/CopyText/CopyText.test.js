@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { Link, Text } from '../..';
 import CopyText from '.';
@@ -27,6 +28,9 @@ describe('Text mode', () => {
       <Text>{textValue}</Text>
     </CopyText>
   ));
+
+  // Need to be added to each test file to test accessibility using axe.
+  axeTest(getComponent);
 
   test('renders component in the default state', () => {
     defaultTest(getComponent);
@@ -111,6 +115,9 @@ describe('Link mode', () => {
       <Link href={linkValue}>{linkValue}</Link>
     </CopyText>
   ));
+
+  // Need to be added to each test file to test accessibility using axe.
+  axeTest(getComponent);
 
   test('renders component in the default state', () => {
     defaultTest(getComponent);
