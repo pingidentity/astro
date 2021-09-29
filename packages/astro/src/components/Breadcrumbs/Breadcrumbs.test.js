@@ -5,6 +5,7 @@ import { Item } from '@react-stately/collections';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import userEvent from '@testing-library/user-event';
 import Breadcrumbs from './Breadcrumbs';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
 const testId = 'test-breadcrumbs';
@@ -31,6 +32,9 @@ const getComponent = (props = {}, itemProps = {}) =>
       ))}
     </Breadcrumbs>,
   );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default breadcrumbs', () => {
   getComponent();

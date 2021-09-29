@@ -1,4 +1,5 @@
 import React from 'react';
+import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -146,4 +147,12 @@ test('displays a loader while loading', () => {
   getComponent({ items: [] }, { renderFn: rerender });
 
   expect(loader).not.toBeInTheDocument();
+});
+
+test('should have no accessibility violations', async () => {
+  jest.useRealTimers();
+  const { container } = getComponent();
+  const results = await axe(container);
+
+  expect(results).toHaveNoViolations();
 });

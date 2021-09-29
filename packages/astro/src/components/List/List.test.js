@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import List from './List';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const testLabel = 'Test Label';
 const defaultProps = {
@@ -10,6 +11,9 @@ const defaultProps = {
 const getComponent = (props = {}) => render(
   <List {...defaultProps} {...props} />,
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('renders List component', () => {
   getComponent();

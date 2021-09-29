@@ -3,32 +3,19 @@ import userEvent from '@testing-library/user-event';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 
-import { active, accent, neutral, white } from '../../styles/colors';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 
 import Text from '../Text';
 
 import Stepper from './Stepper';
 import Step from './Step';
-import { stepStatuses } from './Stepper.constants';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.
 // https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
 const emotionCache = createCache({ key: 'stepper-test' });
 emotionCache.compat = true;
-
-const {
-  ACTIVE,
-  INACTIVE,
-} = stepStatuses;
-
-
-// eslint-disable-next-line no-unused-vars
-const styles = {
-  [ACTIVE]: `background-color: ${accent[95]}; border-color: ${active}; color: ${active}`,
-  [INACTIVE]: `background-color: ${white}; border-color: ${neutral[80]}; color: ${neutral[40]}`,
-};
 
 const steps = [
   { label: 'Name', children: 'Step 1', name: 'step1' },
@@ -44,20 +31,27 @@ const defaultProps = {
   items: steps,
 };
 
-const getComponent = (props = {}, { renderFn = render } = {}) => {
-  const { children } = props;
-  return renderFn(
-    <CacheProvider value={emotionCache}>
-      <Stepper {...defaultProps} {...props}>
-        {item => (
-          <Step key={item.name} textValue={item.name}>
-            <Text>{children}</Text>
-          </Step>
-        )}
-      </Stepper>,
-    </CacheProvider>,
-  );
-};
+const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
+  <CacheProvider value={emotionCache}>
+    <Stepper {...defaultProps} {...props}>
+      {({ name, children }) => (
+        <Step key={name || children} textValue={name || children}>
+          <Text>{children}</Text>
+        </Step>
+      )}
+    </Stepper>
+  </CacheProvider>,
+);
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent, {
+  rules: {
+    // Need to be fixed. Occurs due to wrapping the tab with pressable wrapper
+    'aria-required-children': { enabled: false },
+    'aria-required-parent': { enabled: false },
+    'nested-interactive': { enabled: false },
+  },
+});
 
 test('renders Stepper component in the default state', () => {
   getComponent();

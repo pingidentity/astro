@@ -21,7 +21,7 @@ const useRockerButton = (props, state, ref) => {
       ...itemProps,
       isDisabled,
       id: rockerButtonId,
-      'aria-selected': isSelected,
+      'aria-pressed': isSelected,
       'aria-disabled': isDisabled || undefined,
     },
   };

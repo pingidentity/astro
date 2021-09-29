@@ -1,4 +1,5 @@
 import React from 'react';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
 import FieldHelperText from '.';
@@ -13,6 +14,9 @@ const defaultProps = {
 const getComponent = (props = {}, { renderFn = render } = {}) => (
   renderFn(<FieldHelperText {...defaultProps} {...props} />)
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('basic field message', () => {
   getComponent();

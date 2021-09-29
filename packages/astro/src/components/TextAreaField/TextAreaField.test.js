@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
+import axeTest from '../../utils/testUtils/testAxe';
 import { screen, render } from '../../utils/testUtils/testWrapper';
 import TextAreaField from '.';
 
@@ -14,6 +15,9 @@ const getComponent = (props = {}) => render(
 );
 
 const mockfunction = jest.fn();
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('disabled prop disables input', () => {
   getComponent({ isDisabled: true });

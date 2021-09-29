@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from './Card';
 import Button from '../Button';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-separator';
 
@@ -13,6 +14,9 @@ const defaultProps = {
 const getComponent = (props = {}) => render(
   <Card {...defaultProps} {...props} />,
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('renders Card component', () => {
   getComponent();

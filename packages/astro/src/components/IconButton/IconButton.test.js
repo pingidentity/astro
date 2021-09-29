@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import CreateIcon from 'mdi-react/CreateIcon';
+import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import IconButton from '.';
 
@@ -17,6 +18,9 @@ const defaultProps = {
 };
 const getComponent = (props = {}) =>
   render(<IconButton {...defaultProps} {...props} />);
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default icon button', () => {
   getComponent();

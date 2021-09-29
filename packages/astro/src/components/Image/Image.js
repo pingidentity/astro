@@ -26,6 +26,7 @@ const Image = forwardRef((props, ref) => {
     <ThemeUIImage
       className={classNames}
       ref={imgRef}
+      alt="Image"
       role="img"
       {...others}
       {...hoverProps}
