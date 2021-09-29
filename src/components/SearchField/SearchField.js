@@ -5,11 +5,7 @@ import { useSearchFieldState } from '@react-stately/searchfield';
 import SearchIcon from 'mdi-react/SearchIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import { useField } from '../../hooks';
-import Box from '../Box';
-import IconButton from '../IconButton';
-import Icon from '../Icon';
-import Input from '../Input';
-import Label from '../Label';
+import { Box, Icon, IconButton, Input, Label } from '../../index';
 
 
 /**
@@ -81,7 +77,6 @@ const SearchField = forwardRef((props, ref) => {
           !hasNoClearButton &&
           state.value !== '' &&
           <IconButton
-            icon={CloseIcon}
             sx={{
               position: 'absolute',
               top: 8,
@@ -91,7 +86,9 @@ const SearchField = forwardRef((props, ref) => {
               },
             }}
             {...clearButtonProps}
-          />
+          >
+            <Icon icon={CloseIcon} />
+          </IconButton>
         }
       </Box>
     </Box>
