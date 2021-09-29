@@ -161,3 +161,13 @@ test('check that only 1 data-testid is present', () => {
   getComponent();
   expect(screen.getAllByTestId(testId).length).toBe(1);
 });
+
+test('clear button should be present by default ', () => {
+  getComponent({ value: 'test-value' });
+  expect(screen.getByRole('button')).toBeInTheDocument();
+});
+
+test('clear button should not be present is hasNoClearButton=true ', () => {
+  getComponent({ value: 'test-value', hasNoClearButton: true });
+  expect(screen.queryByRole('button')).not.toBeInTheDocument();
+});
