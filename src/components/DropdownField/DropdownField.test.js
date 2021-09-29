@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DropdownField from './DropdownField';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-dropdown';
 const defaultProps = {
@@ -20,6 +21,9 @@ const getComponent = (props = {}) => render((
 afterEach(() => {
   jest.restoreAllMocks();
 });
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default dropdownfield', () => {
   getComponent();

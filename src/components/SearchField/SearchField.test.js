@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import SearchField from '.';
 
@@ -12,6 +13,9 @@ const defaultProps = {
 const getComponent = (props = {}) => render((
   <SearchField {...defaultProps} {...props} />
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default search field', () => {
   getComponent();

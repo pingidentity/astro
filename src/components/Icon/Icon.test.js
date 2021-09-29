@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Earth } from '@pingux/icons';
 import Icon from '../Icon';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-icon';
 const defaultProps = {
@@ -11,6 +12,9 @@ const defaultProps = {
 const getComponent = (props = {}) => render((
   <Icon {...defaultProps} {...props} />
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default icon', () => {
   getComponent();

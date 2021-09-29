@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { Input as ThemeUIInput } from 'theme-ui';
 import PropTypes from 'prop-types';
+import { useAriaLabelWarning } from '../../hooks';
 
 /**
  * Base input component.
@@ -11,17 +12,29 @@ import PropTypes from 'prop-types';
  * **Note**: It's recommended to use a more specific field component when possible.
  */
 
+const Input = forwardRef((props, ref) => {
+  const { name, placeholder } = props;
 
-const Input = forwardRef((props, ref) => (
-  <ThemeUIInput
-    ref={ref}
-    {...props}
-  />
-));
+  let ariaLabel = props['aria-label'] || name;
+  if (!ariaLabel && !placeholder) {
+    useAriaLabelWarning('Input', ariaLabel);
+    ariaLabel = 'Input';
+  }
+
+  return (
+    <ThemeUIInput
+      aria-label={ariaLabel}
+      ref={ref}
+      {...props}
+    />
+  );
+});
 
 Input.displayName = 'Input';
 
 Input.propTypes = {
+  /** Defines a string value that labels the current element. */
+  'aria-label': PropTypes.string,
   /** Id of input. */
   id: PropTypes.string,
   /** Name of input. */

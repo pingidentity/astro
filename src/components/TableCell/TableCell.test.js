@@ -6,6 +6,8 @@ import Table from '../Table';
 import TableBody from '../TableBody';
 import TableRow from '../TableRow';
 
+import axeTest from '../../utils/testUtils/testAxe';
+
 const testId = 'test-cell';
 
 const defaultProps = {
@@ -23,6 +25,9 @@ const getComponent = (props = {}) => render(
     </TableBody>
   </Table>,
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('isHeading = true', () => {
   const props = {

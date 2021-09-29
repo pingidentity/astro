@@ -1,4 +1,5 @@
 import React from 'react';
+import { axe } from 'jest-axe';
 import { useListState } from '@react-stately/list';
 import { render, screen } from '@testing-library/react';
 
@@ -53,4 +54,12 @@ test('default listbox', () => {
   getComponent();
   const listbox = screen.getByTestId(testId);
   expect(listbox).toBeInTheDocument();
+});
+
+test('should have no accessibility violations', async () => {
+  jest.useRealTimers();
+  const { container } = getComponent();
+  const results = await axe(container);
+
+  expect(results).toHaveNoViolations();
 });

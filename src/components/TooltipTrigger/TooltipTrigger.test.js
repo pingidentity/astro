@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import theme from '../../styles/theme';
 import {
@@ -14,6 +15,9 @@ const getComponent = (props = {}) => render((
     <Tooltip>Tooltip Content</Tooltip>
   </TooltipTrigger>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('tooltip doesnt show by default and is rendered when trigger is hovered', () => {
   getComponent();

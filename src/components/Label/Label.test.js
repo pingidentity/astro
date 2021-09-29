@@ -2,12 +2,17 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Label from '.';
 import Input from '../Input';
+import axeTest from '../../utils/testUtils/testAxe';
+
 
 const testId = 'test-label';
 const defaultProps = {
   'data-testid': testId,
 };
 const getComponent = (props = {}) => render(<Label {...defaultProps} {...props} />);
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default label', () => {
   getComponent();

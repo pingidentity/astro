@@ -4,6 +4,7 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import userEvent from '@testing-library/user-event';
 import PasswordField from '.';
+import axeTest from '../../utils/testUtils/testAxe';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.
@@ -74,6 +75,9 @@ const getComponent = (props = {}) => render(
   </CacheProvider>,
 );
 
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
+
 test('default password field', () => {
   getComponent();
   const field = screen.getByTestId(testId);
@@ -136,7 +140,7 @@ test('clicking icon changes input type', () => {
 
 test('passing in requirements and focusing renders the requirements popover', () => {
   getComponent({ requirements: defaultRequirements });
-  const input = screen.getByRole('form');
+  const input = screen.getByRole('textbox');
   userEvent.click(input);
   const popover = screen.getByRole('presentation');
   expect(popover).toBeInTheDocument();
@@ -144,7 +148,7 @@ test('passing in requirements and focusing renders the requirements popover', ()
 
 test('if all requirements are successful, do not render popover', () => {
   getComponent({ requirements: successfultRequirements });
-  const input = screen.getByRole('form');
+  const input = screen.getByRole('textbox');
   userEvent.click(input);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });

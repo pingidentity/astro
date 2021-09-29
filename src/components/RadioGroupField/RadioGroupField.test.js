@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import statuses from '../../utils/devUtils/constants/statuses';
 import RadioGroupField from '.';
@@ -21,6 +22,9 @@ const getComponent = (groupProps = {}, radioProps = []) => render((
     <RadioField value={testValues[2]} label={testValues[2]} {...radioProps[2]} />
   </RadioGroupField>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default radio group', () => {
   getComponent();

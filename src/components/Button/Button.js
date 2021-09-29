@@ -7,7 +7,7 @@ import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
 import { modes } from './constants';
-import { useStatusClasses, useDeprecationWarning } from '../../hooks';
+import { useAriaLabelWarning, useStatusClasses, useDeprecationWarning } from '../../hooks';
 import Loader from '../Loader';
 import Box from '../Box';
 
@@ -54,8 +54,12 @@ const Button = forwardRef((props, ref) => {
     useDeprecationWarning('The "icon" variant for `Button` will be deprecated in Astro-UI 1.0.0, use the `IconButton` component instead.');
   }
 
+  const ariaLabel = props['aria-label'];
+  useAriaLabelWarning('Button', ariaLabel);
+
   return (
     <ButtonBase
+      aria-label={ariaLabel || 'Button'}
       ref={buttonRef}
       className={classNames}
       role="button"
@@ -64,12 +68,14 @@ const Button = forwardRef((props, ref) => {
       {...mergeProps(hoverProps, focusProps, buttonProps)}
     >
       {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
-      {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} /> }
+      {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
     </ButtonBase>
   );
 });
 
 Button.propTypes = {
+  /** Defines a string value that labels the current element. */
+  'aria-label': PropTypes.string,
   /** Whether the button is disabled. */
   isDisabled: PropTypes.bool,
   /** Shows loader instead of children */

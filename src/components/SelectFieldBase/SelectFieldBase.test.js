@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
@@ -293,4 +294,12 @@ test('form wrapper will have a max label column width when custom width set', ()
   getComponent({ labelMode, containerProps });
   const textAreaContainer = screen.getByTestId(testId);
   expect(textAreaContainer).toHaveStyle('grid-template-columns: 120px auto');
+});
+
+test('should have no accessibility violations', async () => {
+  jest.useRealTimers();
+  const { container } = getComponent();
+  const results = await axe(container);
+
+  expect(results).toHaveNoViolations();
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import Dropdown from '.';
 
@@ -15,6 +15,14 @@ const getComponent = (props = {}) => {
     </Dropdown>,
   );
 };
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent, {
+  // Dropdown with label provided by DropdownField
+  rules: {
+    'select-name': { enabled: false },
+  },
+});
 
 test('dropdown renders', () => {
   getComponent();

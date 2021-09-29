@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 import { Menu, Item } from '../../index';
 
@@ -19,6 +20,9 @@ const getComponent = (props = {}) => render((
     {defaultItems.map(item => <Item key={item.key} {...item} />)}
   </Menu>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('should render basic menu with children', () => {
   getComponent();
