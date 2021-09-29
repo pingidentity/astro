@@ -49,7 +49,7 @@ const IconButton = forwardRef((props, ref) => {
       tabIndex={0}
       ref={buttonRef}
       className={classNames}
-      aria-label={ariaLabel}
+      aria-label={ariaLabel || 'Icon Button'}
       {...others}
       {...mergeProps(hoverProps, focusProps, pressProps)}
     >

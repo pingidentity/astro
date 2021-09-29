@@ -1,5 +1,6 @@
 import React from 'react';
 import faker from 'faker';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import Avatar from '.';
 
@@ -10,6 +11,9 @@ const defaultProps = {
 const getComponent = (props = {}) => render((
   <Avatar {...defaultProps} {...props} />
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('an avatar is rendered', () => {
   getComponent();

@@ -10,7 +10,7 @@ import { useButton } from '@react-aria/button';
 
 import { useFocusRing } from '@react-aria/focus';
 import { Text, Icon, Box } from '../../index';
-import { useStatusClasses } from '../../hooks';
+import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import { AccordionContext } from '../../context/AccordionContext';
 
 const AccordionItem = forwardRef((props, ref) => {
@@ -53,9 +53,13 @@ const AccordionItem = forwardRef((props, ref) => {
     isPressed,
   });
 
+  const ariaLabel = props['aria-label'] || item.props.label;
+  useAriaLabelWarning('AccordionItem', ariaLabel);
+
   return (
     <Box variant="accordion.accordion" className={itemClasses} {...others} {...containerProps}>
       <ThemeUIButton
+        aria-label={ariaLabel || 'Accordion'}
         ref={buttonRef}
         sx={{ display: 'flex' }}
         variant="accordionHeader"
@@ -77,6 +81,7 @@ const AccordionItem = forwardRef((props, ref) => {
 });
 
 AccordionItem.propTypes = {
+  'aria-label': PropTypes.string,
   item: PropTypes.shape({
     key: PropTypes.string,
     rendered: PropTypes.node,

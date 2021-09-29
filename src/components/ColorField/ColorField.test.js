@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import ColorField from './ColorField';
 
@@ -17,6 +18,9 @@ const defaultProps = {
 
 const getComponent = (props = {}) =>
   render(<ColorField {...defaultProps} {...props} />);
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('renders ColorField component', () => {
   getComponent();

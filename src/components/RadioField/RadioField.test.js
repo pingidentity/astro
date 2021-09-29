@@ -1,4 +1,5 @@
 import React from 'react';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import RadioField, { RadioContext } from './RadioField';
 
@@ -25,6 +26,9 @@ const getComponent = (props = {}, state = defaultState) => render((
 afterEach(() => {
   jest.restoreAllMocks();
 });
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default radio', () => {
   getComponent();

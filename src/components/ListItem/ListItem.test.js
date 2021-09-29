@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ListItem from './ListItem';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const testTitle = 'Test Title';
 const defaultProps = {
@@ -10,6 +11,14 @@ const defaultProps = {
 const getComponent = (props = {}) => render(
   <ListItem {...defaultProps} {...props} />,
 );
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent, {
+  // ListItem represents list's child without parent
+  rules: {
+    'aria-required-parent': { enabled: false },
+  },
+});
 
 test('renders ListItem component title', () => {
   getComponent();

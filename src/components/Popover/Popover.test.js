@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Popover from './Popover';
 import Button from '../Button/Button';
 import Link from '../Link/Link';
+import axeTest from '../../utils/testUtils/testAxe';
 
 const defaultProps = {
   content: <Link>Click Me!</Link>,
@@ -17,6 +18,9 @@ const getComponent = () => render((
     </Popover>
   </>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 // NOTE: We must use waitFor to assert the async DOM changes that occur
 test('renders a popover when target is clicked', async () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 import {
   Button,
@@ -19,6 +20,9 @@ const getComponent = (props = {}) => render((
     </PopoverMenu>
   </>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('renders a popover menu when trigger is clicked', () => {
   getComponent();

@@ -1,4 +1,5 @@
 import React from 'react';
+import axeTest from '../../utils/testUtils/testAxe';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { SelectField, Item } from '../../index';
@@ -26,6 +27,9 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
     {item => <Item key={item.name}>{item.name}</Item>}
   </SelectField>
 ));
+
+// Need to be added to each test file to test accessibility using axe.
+axeTest(getComponent);
 
 test('default select field', () => {
   getComponent();

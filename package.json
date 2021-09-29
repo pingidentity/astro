@@ -58,6 +58,7 @@
     "eslint-plugin-jest-dom": "^3.9.0",
     "eslint-plugin-testing-library": "^4.6.0",
     "faker": "5.1.0",
+    "jest-axe": "^5.0.1",
     "jest-emotion": "^11.0.0",
     "mutationobserver-shim": "^0.3.7",
     "react": "^16.8.6",
