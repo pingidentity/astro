@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.28.0...@pingux/astro@0.29.0) (2021-09-30)
+
+
+### Bug Fixes
+
+* [UIP-4760] SearchField clear button icon ([b257757](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b257757af4bfaded3047dec968af4244f89ff2d3))
+
+
+### Features
+
+* [UIP-4696] Add Jest Axe matcher and automated accessibility tests ([2437549](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2437549a28a57398791afb618a726dd1211ddce8))
+
+
+
+
+
 # [0.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.27.0...@pingux/astro@0.28.0) (2021-09-28)
 
 
