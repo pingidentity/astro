@@ -134,7 +134,7 @@ export default function useDiagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
-    onLinkDelete,
+    onLinkDelete = () => {},
     isDisabled = false,
 }) {
     const [diagram, setDiagram] = useState();
@@ -341,7 +341,7 @@ export default function useDiagram({
                 $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
                 $(go.Shape, { isPanelMain: true, name: 'link', stroke: COLORS.BLUE },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
-                $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity },
+                $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity, segmentOrientation: go.Link.OrientAlong },
                     new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
                 $('Button', 'Spot', {
                     'ButtonBorder.figure': 'Circle',

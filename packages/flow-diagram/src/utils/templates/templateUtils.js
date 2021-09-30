@@ -55,7 +55,7 @@ const paletteBlock =
 
 const outletBlock =
     $(go.Part,
-        $(go.TextBlock, { font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, minSize: new go.Size(50, NaN), maxSize: new go.Size(250, NaN) }));
+        $(go.TextBlock, { font: 'normal normal 600 12px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, minSize: new go.Size(50, NaN), maxSize: new go.Size(250, NaN) }));
 
 export const getSize = (s, element) => {
     textBlock.elt(0).text = s.text;
@@ -98,7 +98,7 @@ export const getSize = (s, element) => {
         case 'paletteContainer':
             return new go.Size(250, paletteBlockHeight + 21);
         case 'outlet':
-            return new go.Size(outletBlockWidth, outletBlockHeight);
+            return new go.Size(outletBlockWidth, outletBlockHeight + 15);
         case 'outer':
             return new go.Size(width < 181 ? width + 69 : 250, height + 27);
         default:
