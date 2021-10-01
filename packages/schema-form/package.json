@@ -1,6 +1,6 @@
 {
   "name": "@pingux/schema-form",
-  "version": "1.17.3",
+  "version": "2.0.0-alpha.0",
   "description": "Create component forms from JSON Schema",
   "author": "<uxdev@pingidentity.com>",
   "homepage": "",
@@ -38,6 +38,7 @@
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/eslint-plugin": "^11.2.0",
     "@emotion/jest": "^11.2.1",
+    "@emotion/react": "^11.1.5",
     "@emotion/styled": "11.3.0",
     "@pingux/astro": "^0.8.1",
     "@pingux/end-user": "^1.5.5",
@@ -87,8 +88,7 @@
     "webpack": "^4.42.1",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
-    "whatwg-fetch": "^3.2.0",
-    "@emotion/react": "^11.1.5"
+    "whatwg-fetch": "^3.2.0"
   },
   "peerDependencies": {
     "react": ">=16"

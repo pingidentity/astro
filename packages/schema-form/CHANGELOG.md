@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.17.3...@pingux/schema-form@2.0.0-alpha.0) (2021-10-01)
+
+
+* feat!: [UIP-4686, UIP-4687, UIP-4688] Provide end user theme astro theme ([8c229e6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8c229e696fdefdb06dc471c6f50f6b63880f53ad))
+
+
+### BREAKING CHANGES
+
+* remove end user from schema form package
+
+
+
+
+
 ## [1.17.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.17.2...@pingux/schema-form@1.17.3) (2021-09-07)
 
 **Note:** Version bump only for package @pingux/schema-form
