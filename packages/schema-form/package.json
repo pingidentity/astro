@@ -35,9 +35,10 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.10.4",
-    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/eslint-plugin": "^11.2.0",
     "@emotion/jest": "^11.2.1",
+    "@emotion/styled": "11.3.0",
     "@pingux/astro": "^0.8.1",
     "@pingux/end-user": "^1.5.5",
     "@rjsf/core": "2.0.0",
@@ -68,7 +69,7 @@
     "http-server": "^0.12.1",
     "identity-obj-proxy": "^3.0.0",
     "jest-css-modules-transform": "^4.0.1",
-    "jest-emotion": "^10.0.32",
+    "jest-emotion": "^11.0.0",
     "json-rules-engine-simplified": "^0.1.17",
     "lodash": "^4.17.15",
     "mutationobserver-shim": "^0.3.7",
@@ -86,12 +87,10 @@
     "webpack": "^4.42.1",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
-    "whatwg-fetch": "^3.2.0"
+    "whatwg-fetch": "^3.2.0",
+    "@emotion/react": "^11.1.5"
   },
   "peerDependencies": {
     "react": ">=16"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.1.5"
   }
 }

@@ -11,6 +11,7 @@ import { renderSchemaForm } from './utils';
 
 const schema = {
   type: 'object',
+  title: 'Example Title',
   properties: {
     value: {
       type: 'string',
@@ -60,14 +61,14 @@ test('it displays but does not persist async errors when validation fails', asyn
 
   // Ensure validation passes, length = 3
   fireEvent.change(input, { target: { value: '123' } });
-  user.click(submitButton);
+  await act(async () => user.click(submitButton));
 
   // Expect async error to be rendered
   await screen.findByText(error);
 
   // Ensure validation fails, length = 2
   await waitFor(() => fireEvent.change(input, { target: { value: '12' } }));
-  user.click(submitButton);
+  await act(async () => user.click(submitButton));
 
   // Expect async error to be cleared
   expect(screen.queryByText(error)).not.toBeInTheDocument();
@@ -87,7 +88,7 @@ test('it displays and clears client errors when async errors come through', asyn
 
   // Ensure validation fails, length = 2
   fireEvent.change(input, { target: { value: '12' } });
-  user.click(submitButton);
+  await act(async () => user.click(submitButton));
 
   // Expect validation error
   const validationError = await screen.findByRole('status');
@@ -95,7 +96,7 @@ test('it displays and clears client errors when async errors come through', asyn
 
   // Ensure validation succeeds, length = 3
   fireEvent.change(input, { target: { value: '123' } });
-  user.click(submitButton);
+  await act(async () => user.click(submitButton));
 
   // Expect async error to be rendered
   await screen.findByText(new RegExp(error));
@@ -129,14 +130,18 @@ test('it allows custom onSubmit and subsequent error or success handling', async
   expect(screen.queryByText(error)).not.toBeInTheDocument();
 
   fireEvent.change(input, { target: { value: errorValue } });
-  user.click(submitButton);
+  act(() => {
+    user.click(submitButton);
+  });
 
   // Expect async error to be rendered
   await screen.findByText(error);
 
   // Need to wait for all async state changes to happen
   await waitFor(() => fireEvent.change(input, { target: { value: successValue } }));
-  user.click(submitButton);
+  act(() => {
+    user.click(submitButton);
+  });
 
   // Expect async success message to be rendered
   await screen.findByText(formSuccessMessage);
@@ -167,14 +172,19 @@ test('successful submission when given an endpoint', async () => {
   expect(screen.queryByText(error)).not.toBeInTheDocument();
 
   fireEvent.change(input, { target: { value: errorValue } });
-  user.click(submitButton);
+
+  act(() => {
+    user.click(submitButton);
+  });
 
   // Expect async error to be rendered
   await screen.findByText(error);
 
   // Need to wait for all async state changes to happen
   await waitFor(() => fireEvent.change(input, { target: { value: successValue } }));
-  user.click(submitButton);
+  act(() => {
+    user.click(submitButton);
+  });
 
   // Expect async success message to be rendered
   await screen.findByText(formSuccessMessage);
@@ -199,7 +209,9 @@ test('turns on live validation after initial submit if option is given', async (
   fireEvent.change(input, { target: { value: '12' } });
   // Ensure live validation is not happening yet
   expect(screen.queryByRole('status')).not.toBeInTheDocument();
-  user.click(submitButton);
+  act(() => {
+    user.click(submitButton);
+  });
 
   // Expect validation error
   const validationError = await screen.findByRole('status');
@@ -263,7 +275,9 @@ test('it clears async errors on change when live validation is enabled post subm
 
   // Ensure validation passes, length = 3
   fireEvent.change(input, { target: { value: '123' } });
-  user.click(submitButton);
+  act(() => {
+    user.click(submitButton);
+  });
 
   // Expect async error to be rendered
   await screen.findByText(error);
@@ -286,6 +300,46 @@ test('simplified form mode renders', () => {
 
   expect(document.querySelector('form')).toBeInTheDocument();
   expect(screen.getByLabelText(uiSchema.value['ui:options'].label)).toBeInTheDocument();
+  expect(screen.getByRole('button')).toBeInTheDocument();
+});
+
+test('form with end-user theme renders', () => {
+  const theme = 'end-user';
+  renderSchemaForm({
+    theme,
+    schema,
+    uiSchema,
+  });
+
+  expect(document.querySelector('form')).toBeInTheDocument();
+  expect(screen.getByLabelText(uiSchema.value['ui:options'].label)).toBeInTheDocument();
+  expect(screen.getByRole('button')).toBeInTheDocument();
+});
+
+test('form with custom theme renders appropriately', () => {
+  const theme = {
+    name: 'Custom Theme',
+    fonts: {
+      standard: '"Comic Sans MS"',
+    },
+    text: {
+      title: {
+        color: 'neutral.20',
+        fontWeight: '400',
+        fontSize: 'lg',
+        fontFamily: 'standard',
+      },
+    },
+  };
+  renderSchemaForm({
+    theme,
+    schema,
+    uiSchema,
+  });
+
+  expect(document.querySelector('form')).toBeInTheDocument();
+  expect(screen.getByLabelText(uiSchema.value['ui:options'].label)).toBeInTheDocument();
+  expect(screen.getByText(schema.title)).toHaveStyleRule('font-family', '"Comic Sans MS"');
   expect(screen.getByRole('button')).toBeInTheDocument();
 });
 

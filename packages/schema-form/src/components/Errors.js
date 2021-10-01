@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getThemedComponent } from '../themes/utils';
+import { AstroComponents } from '../utils/astro';
 
 const Errors = (props) => {
-  const { errors, hasMarkdown, theme } = props;
-  const Error = getThemedComponent(theme, 'error');
+  const { errors, hasMarkdown } = props;
+  const Error = AstroComponents.error;
 
   if (errors && errors.length) {
     return errors.map((err) => (

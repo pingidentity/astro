@@ -4,7 +4,6 @@ import {
   act,
   waitFor,
 } from '@testing-library/react';
-import { THEMES } from '../../themes/utils';
 import { renderSchemaForm } from './utils';
 
 const name = 'password';
@@ -32,7 +31,7 @@ const uiSchema = {
 };
 
 test('it renders a password with requirements popover', async () => {
-  renderSchemaForm({ schema, uiSchema, theme: THEMES.ASTRO });
+  renderSchemaForm({ schema, uiSchema });
   const label = screen.queryByText(name);
   const input = screen.queryByLabelText(name);
 
@@ -57,7 +56,6 @@ test('it fires onchange event', async () => {
     onChange,
     schema,
     uiSchema,
-    theme: THEMES.ASTRO,
   });
   const input = screen.queryByLabelText(name);
   expect(input).toBeInTheDocument();

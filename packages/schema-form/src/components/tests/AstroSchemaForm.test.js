@@ -8,7 +8,6 @@ import {
 import user from '@testing-library/user-event';
 import { FORM_MODE } from '../../utils/constants';
 import { renderSchemaForm } from './utils';
-import { THEMES } from '../../themes/utils';
 
 const schema = {
   type: 'object',
@@ -53,7 +52,6 @@ test('it displays but does not persist async errors when validation fails', asyn
   global.fetch.mockImplementation(() => new Response(null, { status: 400 }));
 
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     endpoint: 'test',
     onServerError,
     schema,
@@ -81,7 +79,6 @@ test('it displays and clears client errors when async errors come through', asyn
   global.fetch.mockImplementation(() => new Response(null, { status: 400 }));
 
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     endpoint: 'test',
     onServerError,
     schema,
@@ -122,7 +119,6 @@ test('it allows custom onSubmit and subsequent error or success handling', async
     }
   };
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     formSuccessMessage,
     onSubmit,
     onServerError,
@@ -159,7 +155,6 @@ test('successful submission when given an endpoint', async () => {
   const errorValue = '123';
   const successValue = 'abc';
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     endpoint: 'test',
     formSuccessMessage,
     onChange,
@@ -194,7 +189,6 @@ test('turns on live validation after initial submit if option is given', async (
   const promise = Promise.resolve();
   const onChange = jest.fn(() => promise);
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     liveValidate: 'postSubmit',
     onChange,
     schema,
@@ -227,7 +221,6 @@ test('live validation happens all of the time if option is given', async () => {
   const onChange = jest.fn(() => promise);
   // Will fail initial fetch, but second one will be the default above and will succeed
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     liveValidate: true,
     onChange,
     schema,
@@ -262,7 +255,6 @@ test('it clears async errors on change when live validation is enabled post subm
   renderSchemaForm({
     endpoint: 'test',
     liveValidate: 'postSubmit',
-    theme: THEMES.ASTRO,
     onChange,
     onServerError,
     schema,
@@ -291,7 +283,6 @@ test('it clears async errors on change when live validation is enabled post subm
 
 test('simplified form mode renders', () => {
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     mode: FORM_MODE.SIMPLIFIED,
     schema,
     uiSchema,
@@ -320,7 +311,6 @@ test('custom widgets get passed through', () => {
     },
   };
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     schema: customSchema,
     uiSchema: customUiSchema,
     widgets: { myWidget: MyWidget },
@@ -341,7 +331,6 @@ test('custom widgets override existing widgets', () => {
     },
   };
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     schema: customSchema,
     uiSchema,
     widgets: { TextWidget: MyWidget },
@@ -355,7 +344,6 @@ test('clearing field does not trigger minLength validation', async () => {
   const onChange = jest.fn(() => promise);
 
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     liveValidate: true,
     onChange,
     schema,
@@ -377,7 +365,6 @@ test('providing value for required field and then clearing will trigger validati
   const onChange = jest.fn(() => promise);
 
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     liveValidate: true,
     onChange,
     schema: {
@@ -399,7 +386,6 @@ test('if options.emptyValue is provided it will be used instead of empty value',
   const onChange = jest.fn(() => promise);
 
   renderSchemaForm({
-    theme: THEMES.ASTRO,
     liveValidate: true,
     onChange,
     schema,

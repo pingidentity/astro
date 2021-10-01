@@ -1,6 +1,5 @@
 import React from 'react';
 import Form from '../src/components/SchemaForm';
-import { THEMES } from '../src/themes/utils';
 
 export const RadioGroup = () => {
   const schema = {
@@ -27,7 +26,7 @@ export const RadioGroup = () => {
     <Form
       schema={('Schema', schema)}
       uiSchema={('uiSchema', uischema)}
-      theme={THEMES.ASTRO}
+      theme="astro"
     />
   );
 };

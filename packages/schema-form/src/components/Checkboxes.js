@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
+import { Box, CheckboxField, Text } from '@pingux/astro';
 import Errors from './Errors';
 import { FIELD_TYPES } from '../utils/constants';
-import { getThemedComponent, THEMES } from '../themes/utils';
-import ThemedWidget from './ThemedWidget';
+import { AstroComponents } from '../utils/astro';
 
 const convertToValues = (options, values = []) => options.reduce((acc, cur) => ({
   ...acc,
@@ -22,7 +21,7 @@ const Checkboxes = (props) => {
     value,
   } = props;
   const { label, enumOptions, hasMarkdownErrors } = options;
-  const FieldLabel = useMemo(() => getThemedComponent(theme, 'fieldLabel'), [theme]);
+  const FieldLabel = useMemo(() => AstroComponents.fieldLabel, [theme]);
   const defaultValues = convertToValues(enumOptions, value);
   const [values, setValues] = useState(defaultValues);
 
@@ -47,37 +46,34 @@ const Checkboxes = (props) => {
   };
 
   return (
-    <div id={id}>
-      {label && <FieldLabel>{label}</FieldLabel>}
+    <Box id={id} role="group" aria-labelledby={`${id}_grouplabel`}>
+      {label && <FieldLabel id={`${id}_grouplabel`}>{label}</FieldLabel>}
       <Errors errors={rawErrors} hasMarkdown={hasMarkdownErrors} />
       {
-        enumOptions.map((option) => {
-          const ArrayCheckbox = ThemedWidget('checkbox');
-          return (
-            <ArrayCheckbox
-              key={option.value}
-              checked={values[option.value] || value.includes(option.value)}
-              label={option.label}
-              onChange={(e) => handleChange(option.value, e)}
-              options={{
-                isStacked: true,
-                isSelected: values[option.value] || value.includes(option.value),
-              }}
-              schema={{
-                type: FIELD_TYPES.BOOLEAN,
-              }}
-              formContext={props.formContext}
-            />
-          );
-        })
+        enumOptions.map((option, index) => (
+          <CheckboxField
+            pt={index === 0 ? '' : 'xs'}
+            key={option.value}
+            label={<Text>{option.label}</Text>}
+            checked={values[option.value] || value.includes(option.value)}
+            onChange={(e) => handleChange(option.value, e)}
+            options={{
+              isSelected: values[option.value] || value.includes(option.value),
+            }}
+            schema={{
+              type: FIELD_TYPES.BOOLEAN,
+            }}
+            formContext={props.formContext}
+          />
+        ))
       }
-    </div>
+    </Box>
   );
 };
 
 Checkboxes.propTypes = {
   formContext: PropTypes.shape({
-    theme: PropTypes.oneOf(Object.values(THEMES)).isRequired,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   }).isRequired,
   id: PropTypes.string.isRequired,
   label: PropTypes.string,

@@ -59,6 +59,9 @@ label.radio = {
 label.checkbox = {
   ...text.base,
   display: 'inline-flex !important',
+  div: {
+    flexShrink: 0,
+  },
   width: 'auto',
   alignItems: 'center',
   cursor: 'pointer',

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CheckboxField } from '@pingux/astro';
+import { CheckboxField, Text } from '@pingux/astro';
 
 const Checkbox = ({
   controlProps,
@@ -13,7 +13,8 @@ const Checkbox = ({
     onChange={controlProps.onChange}
     isSelected={controlProps.isSelected}
     isDisabled={isDisabled}
-    label={label}
+    label={<Text pt="3px">{label}</Text>}
+    mb="md"
   />
 );
 

@@ -2,6 +2,7 @@ const base = {
   display: 'block',
   fontSize: 'md',
   color: 'text.primary',
+  fontFamily: 'standard',
 };
 
 const wordWrap = {
@@ -70,20 +71,20 @@ const tooltipContent = {
 
 export const text = {
   base,
-  bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary' },
-  bodyWeak: { ...wordWrap, fontSize: 'sm', color: 'text.secondary' },
-  buttonLabel: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'accent.30' },
-  capsLabel: { ...wordWrap, color: 'text.secondary', textTransform: 'uppercase' },
+  bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  bodyWeak: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
+  buttonLabel: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'accent.30', fontFamily: 'standard' },
+  capsLabel: { ...wordWrap, color: 'text.secondary', textTransform: 'uppercase', fontFamily: 'standard' },
   fieldHelperText,
-  inputValue: { fontWeight: 1, color: 'text.primary' },
-  itemTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary' },
-  itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary' },
-  label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary' },
-  placeholder: { fontWeight: -1, color: 'text.secondary' },
-  sectionTitle: { ...wordWrap, fontSize: 'lg', fontWeight: 2, color: 'text.primary' },
-  subtitle: { ...wordWrap, fontWeight: 0, color: 'text.secondary' },
+  inputValue: { fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  itemTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
+  label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
+  placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
+  sectionTitle: { ...wordWrap, fontSize: 'lg', fontWeight: 2, color: 'text.primary', fontFamily: 'standard' },
+  subtitle: { ...wordWrap, fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
   tabLabel,
-  tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary' },
-  title: { ...wordWrap, fontSize: 'xx', fontWeight: 1, color: 'text.primary' },
+  tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  title: { ...wordWrap, fontSize: 'xx', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   tooltipContent,
 };

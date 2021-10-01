@@ -1,5 +1,4 @@
 import { act, fireEvent, screen } from '@testing-library/react';
-import { THEMES } from '../../themes/utils';
 import { renderSchemaForm } from './utils';
 
 const schema = {
@@ -37,7 +36,6 @@ test('it renders a radio group field', async () => {
     onChange,
     schema,
     uiSchema,
-    theme: THEMES.ASTRO,
   });
   const label = screen.getByLabelText(uiSchema.interacted['ui:options'].label);
   const radiogroup = screen.getByRole('radiogroup');
@@ -59,7 +57,6 @@ test('radios can be selected', async () => {
     onChange,
     schema,
     uiSchema,
-    theme: THEMES.ASTRO,
   });
   const radios = screen.getAllByRole('radio');
 
@@ -90,7 +87,6 @@ test('it submits the radio group properly', async () => {
     onSubmit,
     schema,
     uiSchema,
-    theme: THEMES.ASTRO,
   });
   const radios = screen.getAllByRole('radio');
   const submitBtn = screen.getByRole('button');

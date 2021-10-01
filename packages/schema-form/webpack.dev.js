@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const merge = require('webpack-merge');
-const prod = require('./webpack.config.js');
+const prod = require('./webpack.config');
 
 module.exports = merge(prod, {
   mode: 'development',

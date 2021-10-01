@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from '@pingux/astro';
 
 const FieldTemplate = (props) => {
   const {
@@ -7,9 +8,9 @@ const FieldTemplate = (props) => {
   } = props;
 
   return (
-    <>
+    <Box mt="md">
       {children}
-    </>
+    </Box>
   );
 };
 

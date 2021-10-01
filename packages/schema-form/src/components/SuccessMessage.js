@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { getThemedComponent, THEMES } from '../themes/utils';
+import { AstroComponents } from '../utils/astro';
 
 const SuccessMessage = (props) => {
   const { formSuccessMessage, formSuccessTitle, theme } = props;
-  const ThemedSuccessMessage = useMemo(() => getThemedComponent(theme, 'successMessage'), [theme]);
+  const ThemedSuccessMessage = useMemo(() => AstroComponents.successMessage, [theme]);
 
   return (
     <ThemedSuccessMessage
@@ -17,7 +17,7 @@ const SuccessMessage = (props) => {
 SuccessMessage.propTypes = {
   formSuccessMessage: PropTypes.string.isRequired,
   formSuccessTitle: PropTypes.string.isRequired,
-  theme: PropTypes.oneOf(Object.values(THEMES)).isRequired,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default SuccessMessage;

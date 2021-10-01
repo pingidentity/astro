@@ -1,4 +1,4 @@
-const config = require('../../shared/test/jest.config.js');
+const config = require('../../shared/test/jest.config');
 
 config.moduleNameMapper = {
   '\\.(css|scss)$': '<rootDir>/src/styles/__mocks__/styleMock.js',

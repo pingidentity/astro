@@ -1,23 +1,18 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { getThemedComponent, THEMES } from '../themes/utils';
 import { FORM_STATE } from '../utils/constants';
+import { AstroComponents } from '../utils/astro';
 
 const SubmitButton = (props) => {
   const { formState, submitText, theme } = props;
-  const Button = useMemo(() => getThemedComponent(theme, 'button'), [theme]);
+  const Button = useMemo(() => AstroComponents.button, [theme]);
 
   return (
     <Button
-      type="primary"
-      isSubmit
+      mt="xs"
+      type="submit"
+      variant="primary"
       disabled={formState === FORM_STATE.PENDING}
-      {
-        ...((formState === FORM_STATE.PENDING && theme === THEMES.END_USER)
-          ? { loading: true }
-          : {}
-        )
-      }
     >
       {submitText}
     </Button>
@@ -27,7 +22,7 @@ const SubmitButton = (props) => {
 SubmitButton.propTypes = {
   formState: PropTypes.oneOf(Object.values(FORM_STATE)).isRequired,
   submitText: PropTypes.string.isRequired,
-  theme: PropTypes.oneOf(Object.values(THEMES)).isRequired,
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default SubmitButton;

@@ -9,7 +9,6 @@ import tippyStyles from 'tippy.js/dist/tippy.css';
 import Requirements from '@pingux/end-user/lib/components/Requirements';
 
 // eslint-disable-next-line
-import { getThemedProps } from '../../../themes/utils';
 import PasswordInput from './PasswordInput';
 
 const PasswordWithRequirements = (props) => {
@@ -124,7 +123,6 @@ const PasswordWithRequirements = (props) => {
 
 PasswordWithRequirements.propTypes = {
   formContext: PropTypes.shape({
-    theme: PropTypes.string.isRequired,
   }).isRequired,
   controlProps: PropTypes.shape({
     requirementsTitle: PropTypes.string.isRequired,

@@ -7,7 +7,7 @@ import {
   TextAreaField,
 } from '@pingux/astro';
 
-import { getDisabledEnumOptions } from '../utils/props';
+import { getDisabledEnumOptions } from './props';
 import Checkbox from '../components/themes/astro/Checkbox';
 import PasswordInput from '../components/themes/astro/PasswordInput';
 import Dropdown from '../components/themes/astro/Dropdown';
@@ -18,7 +18,7 @@ import SuccessMessage from '../components/themes/astro/SuccessMessage';
 import SectionTitle from '../components/themes/astro/SectionTitle';
 // eslint-disable-next-line
 import PasswordWithRequirements from '../components/themes/astro/PasswordWithRequirements';
-import { FIELD_TYPES } from '../utils/constants';
+import { FIELD_TYPES } from './constants';
 
 export const AstroComponents = {
   button: Button,

@@ -2,7 +2,6 @@ import { act, fireEvent, screen } from '@testing-library/react';
 import { useMediaQuery } from 'react-responsive';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { generateSchema, renderSchemaForm } from './utils';
-import { THEMES } from '../../themes/utils';
 
 jest.mock('react-google-recaptcha');
 jest.mock('react-responsive');
@@ -43,7 +42,6 @@ test('it renders', () => {
     schema,
     uiSchema,
     sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-    theme: THEMES.ASTRO,
   });
   screen.getByTestId('recaptcha');
 });
@@ -62,7 +60,6 @@ test('it sends up data when it is interacted with', async () => {
     onSubmit,
     schema,
     uiSchema,
-    theme: THEMES.ASTRO,
     sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   });
   const recaptcha = screen.getByTestId('recaptcha');
@@ -86,7 +83,6 @@ test('it displays an error when the captcha fails validation', () => {
     schema,
     uiSchema,
     sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-    theme: THEMES.ASTRO,
     transformErrors,
   });
   const submitBtn = screen.getByRole('button');
@@ -105,7 +101,6 @@ test('displays as compact when media query allows', () => {
   renderSchemaForm({
     schema,
     uiSchema,
-    theme: THEMES.ASTRO,
     sitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   });
 

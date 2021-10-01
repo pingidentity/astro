@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
-import { getThemedComponent, getThemedProps, THEMES } from '../themes/utils';
 import { FIELD_TYPES } from '../utils/constants';
+import { AstroComponents, toAstroInputProps } from '../utils/astro';
 
 const ThemedWidget = (componentType) => {
   const Widget = (props) => {
     const {
-      formContext: { theme },
       schema: { type },
       options: { emptyValue },
     } = props;
@@ -16,12 +14,11 @@ const ThemedWidget = (componentType) => {
       schema,
       formContext,
     } = props;
-    const Component = getThemedComponent(theme, componentType);
+    const Component = AstroComponents[componentType];
     const Wrapper = type === FIELD_TYPES.BOOLEAN
-      ? getThemedComponent(theme, 'wrapper')
-      : React.Fragment;
+      ? AstroComponents.wrapper : React.Fragment;
     const inputProps = {
-      ...getThemedProps(theme, props),
+      ...toAstroInputProps(props),
       schema,
       formContext,
     };
@@ -54,7 +51,7 @@ const ThemedWidget = (componentType) => {
   Widget.propTypes = {
     id: PropTypes.string,
     formContext: PropTypes.shape({
-      theme: PropTypes.oneOf(Object.values(THEMES)),
+      theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     }),
     label: PropTypes.string,
     schema: PropTypes.shape({

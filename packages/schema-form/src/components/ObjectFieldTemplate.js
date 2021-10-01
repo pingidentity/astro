@@ -1,20 +1,32 @@
 import React, { Fragment, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { getThemedComponent, THEMES } from '../themes/utils';
+import _ from 'lodash';
+import Errors from './Errors';
+import { AstroComponents } from '../utils/astro';
 
 const ObjectFieldTemplate = (props) => {
   const {
-    formContext: { theme },
+    formContext: { extraErrors, theme },
     title,
     description,
     properties,
+    uiSchema,
   } = props;
-  const FormTitle = useMemo(() => getThemedComponent(theme, 'formTitle'), [theme]);
-  const FormDescription = useMemo(() => getThemedComponent(theme, 'formDescription'), [theme]);
+
+  const FormTitle = useMemo(() => AstroComponents.formTitle, [theme]);
+  const FormDescription = useMemo(() => AstroComponents.formDescription, [theme]);
+
+  // eslint-disable-next-line react/prop-types
+  const formLevelErrors = extraErrors?._form?.__errors; // eslint-disable-line no-underscore-dangle
 
   return (
     <>
       {title && <FormTitle>{title}</FormTitle>}
+      <Errors
+        errors={formLevelErrors}
+        hasMarkdown={_.get(uiSchema, '_form["ui:options"].hasMarkdownErrors', false)}
+        theme={theme}
+      />
       {description && <FormDescription>{description}</FormDescription>}
       {properties.map((el) => <Fragment key={el.name}>{el.content}</Fragment>)}
     </>
@@ -23,17 +35,26 @@ const ObjectFieldTemplate = (props) => {
 
 ObjectFieldTemplate.propTypes = {
   formContext: PropTypes.shape({
-    theme: PropTypes.oneOf(Object.values(THEMES)).isRequired,
+    theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    /** Apply any default errors */
+    extraErrors: PropTypes.shape({
+      _form: PropTypes.shape({
+        __errors: PropTypes.arrayOf(PropTypes.string),
+      }),
+    }),
   }).isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
   properties: PropTypes.arrayOf(PropTypes.object),
+  /** Customization options for the look and feel of the form. */
+  uiSchema: PropTypes.shape({}),
 };
 
 ObjectFieldTemplate.defaultProps = {
   title: undefined,
   description: undefined,
   properties: undefined,
+  uiSchema: {},
 };
 
 export default ObjectFieldTemplate;

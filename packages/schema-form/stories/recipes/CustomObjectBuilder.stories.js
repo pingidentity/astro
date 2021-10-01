@@ -4,10 +4,8 @@ import {
   Button, Text,
 } from '@pingux/astro';
 import SchemaForm from '../../src/components/SchemaForm';
-
 import ObjectField from './CustomObjectField';
 import FieldTemplate from './CustomFieldTemplate';
-import { THEMES } from '../../src/themes/utils';
 
 /**
  * ObjectFieldTemplate
@@ -84,7 +82,7 @@ export const CustomObjectBuilder = () => {
    */
   return (
     <SchemaForm
-      theme={THEMES.ASTRO}
+      theme="astro"
       schema={('Schema', schema)}
       uiSchema={('uiSchema', uiSchema)}
       fieldTemplate={FieldTemplate}

@@ -2,53 +2,25 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { v4 as v4uuid } from 'uuid';
-import { css } from '@emotion/react';
 import JSONSchemaV4 from 'ajv/lib/refs/json-schema-draft-04.json';
 import Form from '@rjsf/core';
-import { PageWrapper } from '@pingux/astro';
+import { GlobalStyles, ThemeProvider } from '@pingux/astro';
 import useStatefulForm from '../hooks/useStatefulForm';
-import useThemedStyles from '../hooks/useThemedStyles';
-import { THEMES } from '../themes/utils';
 import { FORM_STATE, FORM_MODE } from '../utils/constants';
 import widgets from '../utils/widgets';
 import FieldTemplate from './FieldTemplate';
 import ObjectFieldTemplate from './ObjectFieldTemplate';
-import Errors from './Errors';
 import SubmitButton from './SubmitButton';
 import SuccessMessage from './SuccessMessage';
+import endUserTheme from '../../../../shared/themes/end-user/endUserTheme';
+import astroTheme from '../../../astro/src/styles/theme';
 
-// Icons need to be globally accessible
-import styles from '../styles';
-
-const FormWrapper = (props) => {
-  const { themeStyles, children, theme } = props; // eslint-disable-line
-
-  if (theme === THEMES.ASTRO) {
-    return (
-      <PageWrapper>
-        <div
-          css={css`
-            ${themeStyles}
-            ${styles}
-          `}
-        >
-          {children}
-        </div>
-      </PageWrapper>
-    );
+function getTheme(themeName) {
+  if (themeName === 'end-user') {
+    return endUserTheme;
   }
-
-  return (
-    <div
-      css={css`
-        ${themeStyles}
-        ${styles}
-      `}
-    >
-      {children}
-    </div>
-  );
-};
+  return astroTheme;
+}
 
 const SchemaForm = (props) => {
   const {
@@ -61,7 +33,6 @@ const SchemaForm = (props) => {
     theme,
     fields,
     fieldTemplate,
-    uiSchema,
     widgets: propWidgets,
   } = props;
   const {
@@ -72,8 +43,6 @@ const SchemaForm = (props) => {
     },
   } = useStatefulForm(props);
   const { extraErrors, FormComponent, formState } = statefulProps;
-  const themeStyles = useThemedStyles(theme);
-  const formLevelErrors = extraErrors?._form?.__errors; // eslint-disable-line no-underscore-dangle
   const uuid = useMemo(() => {
     // Prefix all tests the same for DOM consistency
     if (process.env.NODE_ENV === 'test') {
@@ -82,53 +51,61 @@ const SchemaForm = (props) => {
     return v4uuid();
   }, []);
 
+  // Use provided custom theme or retrieve existing.
+  let themeObject;
+  if (theme && typeof theme !== 'string') {
+    themeObject = theme;
+  } else {
+    themeObject = getTheme(theme);
+  }
+
   if (formState === FORM_STATE.SUCCESS) {
     return (
-      <FormWrapper themeStyles={themeStyles} theme={theme}>
+      <ThemeProvider theme={themeObject}>
         <SuccessMessage
           theme={theme}
           formSuccessMessage={formSuccessMessage}
           formSuccessTitle={formSuccessTitle}
         />
-      </FormWrapper>
+      </ThemeProvider>
     );
   }
 
   return (
-    <FormWrapper themeStyles={themeStyles} theme={theme}>
-      <Errors
-        errors={formLevelErrors}
-        hasMarkdown={_.get(uiSchema, '_form["ui:options"].hasMarkdownErrors', false)}
-        theme={theme}
-      />
-      <FormComponent
-        additionalMetaSchemas={[JSONSchemaV4]}
-        autoComplete="off"
-        className="form"
-        disabled={formState === FORM_STATE.PENDING}
-        formContext={{ formState, sitekey, theme }}
-        noHtml5Validate
-        showErrorList={false}
-        FieldTemplate={fieldTemplate}
-        ObjectFieldTemplate={ObjectFieldTemplate}
-        id={`${uuid}_form`}
-        idPrefix={uuid}
-        {...props}
-        widgets={{ ...widgets, ...propWidgets }}
-        {...statefulProps}
-        fields={{ ...fields }}
-      >
-        {
-          children ?? (
-            <SubmitButton
-              formState={formState}
-              submitText={submitText}
-              theme={theme}
-            />
-          )
-        }
-      </FormComponent>
-    </FormWrapper>
+    <>
+      <GlobalStyles />
+      <ThemeProvider theme={themeObject}>
+        <FormComponent
+          additionalMetaSchemas={[JSONSchemaV4]}
+          autoComplete="off"
+          className="form"
+          disabled={formState === FORM_STATE.PENDING}
+          formContext={{
+            formState, sitekey, theme, extraErrors,
+          }}
+          noHtml5Validate
+          showErrorList={false}
+          FieldTemplate={fieldTemplate}
+          ObjectFieldTemplate={ObjectFieldTemplate}
+          id={`${uuid}_form`}
+          idPrefix={uuid}
+          {...props}
+          widgets={{ ...widgets, ...propWidgets }}
+          {...statefulProps}
+          fields={{ ...fields }}
+        >
+          {
+              children ?? (
+              <SubmitButton
+                formState={formState}
+                submitText={submitText}
+                theme={theme}
+              />
+              )
+            }
+        </FormComponent>
+      </ThemeProvider>
+    </>
   );
 };
 
@@ -200,8 +177,9 @@ SchemaForm.propTypes = {
   sitekey: PropTypes.string,
   /** Label for submit button */
   submitText: PropTypes.string,
-  /** Default is end-user, more themes to come... */
-  theme: PropTypes.oneOf(Object.values(THEMES)),
+  /** Choose between astro, end-user, or supply custom theme.
+   * Default is astro, more themes to come... */
+  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Customization options for the look and feel of the form. */
   uiSchema: PropTypes.shape({}),
   /**
@@ -231,7 +209,7 @@ SchemaForm.defaultProps = {
   rules: [],
   sitekey: undefined,
   submitText: 'Submit',
-  theme: THEMES.END_USER,
+  theme: 'astro',
   uiSchema: {},
   widgets: undefined,
 };
