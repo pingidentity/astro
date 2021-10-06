@@ -1,6 +1,8 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
 
 import { Box, Button, Tooltip, TooltipTrigger } from '../../index';
 
@@ -31,10 +33,25 @@ const CopyText = forwardRef((props, ref) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const { hoverProps, isHovered } = useHover(props);
+  const { focusProps, isFocusVisible } = useFocusRing();
 
   useEffect(() => {
     setIsCopied(false);
   }, [isHovered]);
+
+  // Hiding "Copied!" tooltip after delay
+  /* istanbul ignore next */
+  useEffect(() => {
+    if (isCopied) {
+      const timer = setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    return undefined;
+  }, [isCopied]);
 
   const copyToClipboard = async () => {
     try {
@@ -69,12 +86,15 @@ const CopyText = forwardRef((props, ref) => {
       <Button
         variant="quiet"
         onPress={copyToClipboard}
+        aria-label="copy-content"
+        {...focusProps}
       >
         {children}
       </Button>
     );
 
   const tooltip = isCopied ? 'Copied!' : tooltipText;
+  const isTooltipOpen = isFocusVisible || isHovered || isCopied;
 
   if (mode === 'link') {
     return (
@@ -85,25 +105,24 @@ const CopyText = forwardRef((props, ref) => {
         {...others}
       >
         {content}
-        <TooltipWrapper isOpen={isHovered || isCopied} tooltip={tooltip}>
-          <CopyButton onPress={copyToClipboard} {...hoverProps} />
+        <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip}>
+          <CopyButton onPress={copyToClipboard} {...mergeProps(hoverProps, focusProps)} />
         </TooltipWrapper>
       </Box>
     );
   }
 
   return (
-    <TooltipWrapper isOpen={isHovered || isCopied} tooltip={tooltip}>
+    <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip}>
       <Pressable>
         <Box
           ref={ref}
           isRow
           variant="boxes.copy"
-          {...hoverProps}
-          {...others}
+          {...mergeProps(hoverProps, others)}
         >
           {content}
-          <CopyButton onPress={copyToClipboard} />
+          <CopyButton onPress={copyToClipboard} {...focusProps} />
         </Box>
       </Pressable>
     </TooltipWrapper>

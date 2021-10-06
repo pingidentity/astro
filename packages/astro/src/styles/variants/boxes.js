@@ -103,6 +103,9 @@ const copy = {
   alignItems: 'center',
   width: 'max-content',
   cursor: 'pointer',
+  '& .is-focused': {
+    boxShadow: 'inset 0 0 5px #5873bdbf',
+  },
 };
 
 export default {
