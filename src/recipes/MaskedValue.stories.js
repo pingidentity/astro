@@ -26,16 +26,16 @@ export const Default = ({ dataTitle, secretData }) => {
 
   return (
     <Box>
-      <Text variant="bodyStrong">{dataTitle}</Text>
+      <Text variant="label">{dataTitle}</Text>
       <Box isRow alignItems="center">
-        <Text sx={{ width: 255, wordBreak: 'break-all' }}>
-          {isMasked ? '*'.repeat(secretData?.length) : secretData}
+        <Text sx={{ width: 255, wordBreak: 'break-all', ...(isMasked && { letterSpacing: 2 }) }}>
+          {isMasked ? '•'.repeat(secretData?.length) : secretData}
         </Text>
         <IconButton
           onPress={() => setIsMasked(!isMasked)}
           sx={{ width: 'fit-content', marginLeft: 10, alignSelf: 'auto' }}
         >
-          <Icon icon={isMasked ? EyeIcon : EyeOffIcon} />
+          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} />
         </IconButton>
       </Box>
     </Box>
