@@ -146,10 +146,10 @@ const accordionHeader = {
   flexGrow: 0,
   fontWeight: 700,
   '&.is-hovered': {
-    bg: 'button.hoverBackground',
+    color: 'active',
   },
   '&.is-pressed': {
-    ...defaultActive,
+    color: 'accent.20',
   },
   '&.is-focused': {
     ...defaultFocus,
