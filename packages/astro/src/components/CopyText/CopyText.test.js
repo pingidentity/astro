@@ -45,6 +45,21 @@ describe('Text mode', () => {
     expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
   });
 
+  test('content and copy buttons are focused with keyboard', () => {
+    getComponent();
+    const contentBtn = screen.getByLabelText('copy-content');
+    expect(contentBtn).not.toHaveFocus();
+    userEvent.tab();
+    expect(contentBtn).toHaveFocus();
+    expect(contentBtn).toHaveClass('is-focused');
+
+    const copyBtn = screen.getByLabelText('copy');
+    expect(copyBtn).not.toHaveFocus();
+    userEvent.tab();
+    expect(copyBtn).toHaveFocus();
+    expect(copyBtn).toHaveClass('is-focused');
+  });
+
   beforeEach(() => {
     const mockClipboard = {
       writeText: jest.fn(),
@@ -94,12 +109,40 @@ describe('Text mode', () => {
     expect(document.execCommand).toHaveBeenCalledWith('copy');
   });
 
+  test('if copying is failed, a warning shows in the console', async () => {
+    global.navigator.clipboard = undefined;
+    global.document.execCommand.mockReturnValue(false);
+    global.console.error = () => jest.mock(); // eslint-disable-line no-console
+
+    getComponent();
+
+    const spy = jest.spyOn(console, 'error');
+    expect(spy).not.toHaveBeenCalled();
+
+    const button = screen.getByLabelText('copy');
+    await act(async () => userEvent.click(button));
+    expect(document.execCommand).toBeCalledTimes(1);
+    expect(document.execCommand).toHaveBeenCalledWith('copy');
+    expect(spy).toHaveBeenCalledWith(expect.stringMatching('Failed to copy:'), expect.any(Error));
+  });
+
   test('after button click, the tooltip renders with the text "Copied!"', async () => {
     getComponent();
     const button = screen.getByLabelText('copy');
     await act(async () => userEvent.click(button));
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
     expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+  });
+
+  test('tooltip renders with the text "Copied!" hides after delay', async () => {
+    getComponent();
+    const button = screen.getByLabelText('copy');
+    await act(async () => userEvent.click(button));
+    expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+    expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+    setTimeout(() => {
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+    }, 1000);
   });
 });
 
@@ -134,6 +177,16 @@ describe('Link mode', () => {
     fireEvent.mouseMove(button);
     fireEvent.mouseEnter(button);
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  });
+
+  test('copy button is focused with keyboard', () => {
+    getComponent();
+    const copyBtn = screen.getByLabelText('copy');
+    expect(copyBtn).not.toHaveFocus();
+    userEvent.tab();
+    userEvent.tab();
+    expect(copyBtn).toHaveFocus();
+    expect(copyBtn).toHaveClass('is-focused');
   });
 
   beforeEach(() => {
