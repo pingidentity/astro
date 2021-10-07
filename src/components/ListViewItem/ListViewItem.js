@@ -7,26 +7,22 @@ import { useHover } from '@react-aria/interactions';
 import { ListViewContext } from '../ListView/ListViewContext';
 import Box from '../Box';
 import Separator from '../Separator';
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { useStatusClasses } from '../../hooks';
 
 const ListViewItem = (props) => {
   const {
     item,
     className,
-    ...others
   } = props;
 
-  const { key } = item;
+  const cellNode = [...item.childNodes][0];
 
   const { state } = useContext(ListViewContext);
 
-  const {
-    disabledKeys,
-  } = state;
+  const isDisabled = state.disabledKeys.has(item.key);
 
-  const isDisabled = disabledKeys.has(key);
-
-  const ref = useRef();
+  const rowRef = useRef();
+  const cellRef = useRef();
 
   const {
     focusProps: focusWithinProps,
@@ -39,21 +35,20 @@ const ListViewItem = (props) => {
   const { rowProps } = useGridRow({
     node: item,
     isVirtualized: true,
-  }, state, ref);
+  }, state, rowRef);
 
   const isSelected = rowProps['aria-selected'];
 
   const { gridCellProps } = useGridCell({
-    node: item,
+    node: cellNode,
     focusMode: 'cell',
-  }, state, ref);
+  }, state, cellRef);
 
   const mergedProps = mergeProps(
     gridCellProps,
     hoverProps,
     focusWithinProps,
     focusProps,
-    others,
   );
 
   const { classNames } = useStatusClasses(className, {
@@ -69,10 +64,11 @@ const ListViewItem = (props) => {
         isDisabled={isDisabled}
         isRow
         {...rowProps}
+        ref={rowRef}
       >
         <Box
           as="div"
-          ref={ref}
+          ref={cellRef}
           {...mergedProps}
           role="listitem"
           variant="boxes.listViewItem"
@@ -93,6 +89,7 @@ ListViewItem.propTypes = {
   item: PropTypes.shape({
     key: PropTypes.string,
     rendered: PropTypes.node,
+    childNodes: PropTypes.arrayOf(PropTypes.shape({})),
   }),
 };
 

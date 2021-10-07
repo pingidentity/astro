@@ -41,16 +41,10 @@ export function useListLayout(state) {
 const ListView = forwardRef((props, ref) => {
   const {
     disabledKeys,
-    id,
-    items,
     loadingState,
     selectedKeys,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledby,
-    'aria-describedby': ariaDescribedby,
-    'aria-details': ariaDetails,
+    onLoadMore,
     onSelectionChange,
-    ...others
   } = props;
 
 
@@ -73,11 +67,18 @@ const ListView = forwardRef((props, ref) => {
   const gridCollection = useMemo(() => new GridCollection({
     columnCount: 1,
     items: Array.from(collection).map(item => ({
-      type: 'item',
+      ...item,
+      hasChildNodes: true,
       childNodes: [{
-        ...item,
-        index: 0,
+        key: `cell-${item.key}`,
         type: 'cell',
+        index: 0,
+        value: null,
+        level: 0,
+        rendered: null,
+        textValue: item.textValue,
+        hasChildNodes: false,
+        childNodes: [],
       }],
     })),
   }), [collection]);
@@ -112,24 +113,31 @@ const ListView = forwardRef((props, ref) => {
   // Sync loading state into the layout.
   layout.isLoading = loadingState;
 
+  let focusedKey = state.selectionManager.focusedKey;
+  const focusedItem = gridCollection.getItem(state.selectionManager.focusedKey);
+  if (focusedItem?.parentKey != null) {
+    focusedKey = focusedItem.parentKey;
+  }
+
   return (
     <ListViewContext.Provider value={{ state, keyboardDelegate }}>
       <Virtualizer
-        {...mergeProps(gridProps, others)}
+        {...mergeProps(gridProps)}
+        onLoadMore={onLoadMore}
         ref={domRef}
-        focusedKey={state?.selectionManager?.focusedKey}
+        focusedKey={focusedKey}
         renderWrapper={renderWrapper}
         sizeToFit="height"
         scrollDirection="vertical"
         layout={layout}
-        collection={collection}
+        collection={gridCollection}
         isLoading={loadingState === loadingStates.LOADING_MORE}
         transitionDuration={0}
       >
         {(type, item) => {
           if (type === 'item') {
             return (
-              <ListViewItem state={state} item={item} />
+              <ListViewItem item={item} />
             );
           } else if (type === collectionTypes.LOADER) {
             return <Loader variant="loader.withinListView" aria-label="Loading more..." />;
