@@ -33,6 +33,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [0.28.1-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.28.0...@pingux/astro@0.28.1-alpha.0) (2021-09-28)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
 # [0.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.27.0...@pingux/astro@0.28.0) (2021-09-28)
 
 
