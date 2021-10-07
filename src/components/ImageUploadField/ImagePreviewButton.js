@@ -2,20 +2,22 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useRef,
-  useState,
 } from 'react';
 import ImageFilterHdrIcon from 'mdi-react/ImageFilterHdrIcon';
 import CameraAltIcon from 'mdi-react/CameraAltIcon';
 import PropTypes from 'prop-types';
 import { mergeProps } from '@react-aria/utils';
-import { useFocus, useHover } from '@react-aria/interactions';
+import { useHover } from '@react-aria/interactions';
+import { useFocusRing } from '@react-aria/focus';
 
 import { Box, Button, Icon, Image } from '../../index';
+import Loader from '../Loader';
 
 const ImagePreviewButton = forwardRef((props, ref) => {
   const {
     defaultPreviewImage,
     isImageType,
+    isLoading,
     isMenuOpen,
     previewImage,
     previewWidth,
@@ -27,9 +29,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  const { focusProps } = useFocus({ onFocusChange: setIsFocused });
+  const { focusProps, isFocusVisible } = useFocusRing();
   const { hoverProps, isHovered } = useHover(props);
 
   const noImagePreview = (
@@ -50,6 +50,24 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     />
   );
 
+  const loadingPreview = (
+    <Box
+      variant="imageUpload.hoveredPreview.wrapper"
+      sx={widthHeightSx}
+      data-testid="image-upload-hovered-preview"
+    >
+      <Loader
+        color={isFocusVisible || isMenuOpen ? 'active' : 'white'}
+        size="sm"
+        sx={{ zIndex: 1 }}
+      />
+
+      {(previewImage || previewImage === defaultPreviewImage || !isImageType) && (
+        <Box variant="imageUpload.hoveredPreview.shaded" />
+      )}
+    </Box>
+  );
+
   const hoveredPreview = (
     <Box
       variant="imageUpload.hoveredPreview.wrapper"
@@ -58,12 +76,12 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     >
       <Icon
         icon={CameraAltIcon}
-        color={isFocused || isMenuOpen ? 'active' : 'white'}
+        color={isFocusVisible || isMenuOpen ? 'active' : 'white'}
         size={24}
         sx={{ zIndex: 1 }}
       />
 
-      {(!previewImage || previewImage === defaultPreviewImage || !isImageType) && (
+      {(previewImage || previewImage === defaultPreviewImage || !isImageType) && (
         <Box variant="imageUpload.hoveredPreview.shaded" />
       )}
     </Box>
@@ -79,7 +97,8 @@ const ImagePreviewButton = forwardRef((props, ref) => {
         {...mergeProps(focusProps, others)}
       >
         {(previewImage && isImageType) ? imagePreview : noImagePreview}
-        {(isHovered || isFocused) && hoveredPreview}
+        {isLoading && loadingPreview}
+        {(isHovered || isFocusVisible) && !isLoading && hoveredPreview}
       </Button>
     </Box>
   );
@@ -88,6 +107,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
 ImagePreviewButton.propTypes = {
   defaultPreviewImage: PropTypes.string,
   isImageType: PropTypes.bool,
+  isLoading: PropTypes.bool,
   isMenuOpen: PropTypes.bool,
   previewImage: PropTypes.string,
   previewWidth: PropTypes.number,
