@@ -64,6 +64,7 @@ const Button = forwardRef((props, ref) => {
       className={classNames}
       role="button"
       tx="buttons"
+      sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       {...others}
       {...mergeProps(hoverProps, focusProps, buttonProps)}
     >
