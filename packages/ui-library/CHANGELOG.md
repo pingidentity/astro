@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.43.0-alpha.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.42.2...ui-library@4.43.0-alpha.0) (2021-10-07)
+
+
+### Features
+
+* [UIP-4819] Disallow copy/paste ([d7f1c39](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/d7f1c39972a1f09118aa2fcf48a83eaaa0c35284))
+
+
+
+
+
 ## [4.42.3-alpha.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.42.2...ui-library@4.42.3-alpha.0) (2021-09-28)
 
 **Note:** Version bump only for package ui-library

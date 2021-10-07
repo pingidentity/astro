@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.23.3...@pingux/flow-diagram@0.24.0) (2021-10-07)
+
+
+### Bug Fixes
+
+* [UIP-4825] Fix tooltip not appearing ([af693b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/af693b12b696cc2f6f734c33f41759f7e56f7af1))
+
+
+### Features
+
+* [UIP-4819] Disallow copy/paste ([d7f1c39](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d7f1c39972a1f09118aa2fcf48a83eaaa0c35284))
+
+
+
+
+
 ## [0.23.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.23.2...@pingux/flow-diagram@0.23.3) (2021-10-01)
 
 **Note:** Version bump only for package @pingux/flow-diagram
