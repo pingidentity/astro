@@ -15,6 +15,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
  * The Image Upload Field component gives users the ability to upload a file (image by default).
  */
 const ImageUploadField = forwardRef((props, ref) => {
+  const { isLoading, onRemove } = props;
   const inputRef = useRef();
   const state = useImageUploadState(props, inputRef);
   /* istanbul ignore next */
@@ -30,8 +31,9 @@ const ImageUploadField = forwardRef((props, ref) => {
         }
         case 'remove': {
           state.removePreview();
-          // eslint-disable-next-line no-unused-expressions
-          props?.onRemove();
+          if (onRemove && typeof onRemove === 'function') {
+            onRemove();
+          }
           break;
         }
       }
@@ -52,10 +54,12 @@ const ImageUploadField = forwardRef((props, ref) => {
       {...props}
     >
       <ImagePreviewButton
+        isLoading={isLoading}
+        previewImage={state.previewImage}
         defaultPreviewImage={props?.defaultPreviewImage}
         isImageType={state.isImageType}
         onPress={state.pressPreviewButton}
-        previewImage={state.previewImage}
+        previewHeight={props?.previewHeight}
         previewWidth={props?.previewWidth}
         widthHeightSx={state.widthHeightSx}
       />
@@ -68,7 +72,9 @@ const ImageUploadField = forwardRef((props, ref) => {
 });
 
 ImageUploadField.propTypes = {
-  /** Default image preview. */
+  /** Image preview (controlled), used to represent the current image state. */
+  previewImage: PropTypes.string,
+  /** Default image preview (uncontrolled), used when no previewImage is present. */
   defaultPreviewImage: PropTypes.string,
   /** An array of accepted file types.
    * (according to the https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#types ) */
@@ -86,6 +92,8 @@ ImageUploadField.propTypes = {
   ),
   /** Text to display after the radio group label. Useful for errors or other info. */
   helperText: PropTypes.node,
+  /** Determines whether the loading indicator is shown. */
+  isLoading: PropTypes.bool,
   /** Defines a string value that labels the current element. */
   label: PropTypes.string,
   /** The handler that is called when the input file is added.
