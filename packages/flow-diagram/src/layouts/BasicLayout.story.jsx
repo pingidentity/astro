@@ -77,6 +77,7 @@ const Demo = () => {
     };
 
     const { diagramProps } = useDiagram({
+        allowCopy: false,
         isDisabled: disabled,
         groupTemplates: [
             ['', diagramGroupTemplate()],

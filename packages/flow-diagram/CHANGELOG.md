@@ -19,6 +19,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+# [0.24.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.23.1...@pingux/flow-diagram@0.24.0-alpha.0) (2021-09-28)
+
+
+### Features
+
+* [UIP-4819] Disallow copy/paste ([e3e6b50](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e3e6b502feff0310417e51d8d838b76fbd97d55a))
+
+
+
+
+
 ## [0.23.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.23.0...@pingux/flow-diagram@0.23.1) (2021-09-28)
 
 **Note:** Version bump only for package @pingux/flow-diagram

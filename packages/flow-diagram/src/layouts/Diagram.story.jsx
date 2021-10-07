@@ -90,6 +90,8 @@ DiagramComponent.defaultProps = {
 };
 
 DiagramComponent.propTypes = {
+    /** Allow copy and paste of nodes.  */
+    allowCopy: PropTypes.bool,
     /** Disables interaction with the diagram.  */
     isDisabled: PropTypes.bool,
     /** Templates for groups of nodes. diagramGroupTemplate should be used. */

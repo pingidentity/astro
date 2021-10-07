@@ -134,6 +134,7 @@ export default function useDiagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
+    allowCopy = true,
     onLinkDelete = () => {},
     isDisabled = false,
 }) {
@@ -198,6 +199,7 @@ export default function useDiagram({
 
                 {
                     hoverDelay: 0,
+                    allowCopy,
                     'undoManager.isEnabled': true,
                     'animationManager.isInitial': false,
                     'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
