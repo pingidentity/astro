@@ -160,6 +160,12 @@ test('should render the file name when file type is not image', () => {
   expect(screen.getByText(notImageFileName)).toBeInTheDocument();
 });
 
+test('should render default preview image if defined initially', () => {
+  getComponent({ defaultPreviewImage: 'some-image' });
+  expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
+  expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
+});
+
 test('should render new preview image if defined later', () => {
   const { rerender } = getComponent();
   expect(screen.queryByTestId(imageUploadNoImagePreview)).toBeInTheDocument();
@@ -168,4 +174,30 @@ test('should render new preview image if defined later', () => {
   getComponent({ defaultPreviewImage: 'some-image' }, { renderFn: rerender });
   expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
   expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
+});
+
+test('should render loader if isLoading prop is true', () => {
+  const { rerender } = getComponent();
+  expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+
+  getComponent({ isLoading: true }, { renderFn: rerender });
+  expect(screen.queryByRole('progressbar')).toBeInTheDocument();
+});
+
+test('should render loader if isLoading prop is true', () => {
+  const { rerender } = getComponent();
+  expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+
+  getComponent({ isLoading: true }, { renderFn: rerender });
+  expect(screen.queryByRole('progressbar')).toBeInTheDocument();
+});
+
+test('should render image preview and menu when previewImage prop is supplied', () => {
+  getComponent({ previewImage: 'test' });
+  expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
+  expect(screen.queryByTestId(imageUploadImagePreview)).toHaveAttribute('src', 'test');
+  expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
+  userEvent.click(screen.getByTestId(testButtonId));
+  expect(screen.getByText('Upload New Image')).toBeInTheDocument();
+  expect(screen.getByText('Remove Image')).toBeInTheDocument();
 });
