@@ -5,6 +5,7 @@ import OverlayPanel from './OverlayPanel';
 import { OverlayProvider } from '../../index';
 import Box from '../Box';
 import Text from '../Text';
+import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 export default {
   title: 'OverlayPanel',
@@ -13,6 +14,13 @@ export default {
     children: {
       description: 'Overlay panel content.',
       control: 'none',
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: panelSizes,
+      },
+      defaultValue: 'medium',
     },
   },
   parameters: {
@@ -24,7 +32,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = ({ ...args }) => {
   const state = useOverlayPanelState();
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -40,17 +48,18 @@ export const Default = (args) => {
       </Text>
       <br />
       <Button onPress={state.open}>Open Panel</Button>
-      {
-        state.isOpen &&
-        <OverlayPanel {...args}>
-          <Box>
-            <Button onPress={state.close}>Close Panel</Button>
-            <Text pt="md">
-              Children render here.
-            </Text>
-          </Box>
-        </OverlayPanel>
-      }
+      <OverlayPanel {...args} isOpen={state.isOpen} >
+        <Box>
+          <Button
+            onPress={state.close}
+          >
+            Close Panel
+          </Button>
+          <Text pt="md" >
+            Children render here.
+          </Text>
+        </Box>
+      </OverlayPanel>
     </OverlayProvider>
   );
 };
