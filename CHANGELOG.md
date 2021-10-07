@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.30.0...@pingux/astro@0.31.0) (2021-10-07)
+
+
+### Bug Fixes
+
+* [UIP-4644] OverlayPanel Improvements ([4363472](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4363472f20b6ee16cc7d4865148acc09236236ff))
+* [UIP-4823] Button with isLoading has indicator misplaced ([21ff697](https://gitlab.corp.pingidentity.com/ux/pingux/commit/21ff697f3b9c58839b49c611e0c6f3226bd0c466))
+* [UIP-4865] CopyText Component Keyboard Accessibility ([a75e8f2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a75e8f2b50abb824a2cbc38a9621776ddc32f127))
+
+
+### Features
+
+* [UIP-4806] Add previewImage and isLoading props to ImageUploadField for more control ([394b2b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/394b2b74b1a09ead57fa8f7db6fc6352cfae472e))
+* [UIP-4815] Masked Value Recipe Improvements ([aa598e4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aa598e46f52c2160138c4b0892680e7b1e68952c))
+* [UIP-4819] Disallow copy/paste ([d7f1c39](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d7f1c39972a1f09118aa2fcf48a83eaaa0c35284))
+* [UIP-4856] Update Accordion hover and pressed states ([5bec486](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5bec486577ef976878a3900c177c1eefa1aad7cb))
+
+
+### Performance Improvements
+
+* [UIP-4768] Keyboard focus is slow on infinitely loading ListView ([3af03e3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3af03e3fcdea2ea54095f592b9c6da6d99890c72))
+
+
+
+
+
 # [0.30.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.29.0...@pingux/astro@0.30.0) (2021-10-01)
 
 
