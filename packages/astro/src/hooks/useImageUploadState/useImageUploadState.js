@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const useImageUploadState = (props = {}, inputRef) => {
   const {
+    previewImage: existingImage,
     defaultPreviewImage,
     fileTypes,
     onChange,
@@ -9,12 +10,15 @@ const useImageUploadState = (props = {}, inputRef) => {
     previewWidth,
   } = props;
 
-  const [previewImage, setPreviewImage] = useState(defaultPreviewImage);
+  const [previewImage, setPreviewImage] = useState(existingImage || defaultPreviewImage);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isImageType, setIsImageType] = useState(true);
   const [fileName, setFileName] = useState('');
 
-  useEffect(() => setPreviewImage(defaultPreviewImage), [defaultPreviewImage]);
+  useEffect(
+    () => setPreviewImage(existingImage || defaultPreviewImage),
+    [existingImage, defaultPreviewImage],
+  );
 
   const pressPreviewButton = useCallback(() => {
     if (previewImage && previewImage !== defaultPreviewImage) {
@@ -27,20 +31,24 @@ const useImageUploadState = (props = {}, inputRef) => {
   const handleInputChange = useCallback((event) => {
     const eventFileType = event.target?.files[0]?.type?.split('/')[0];
     if (fileTypes?.includes(eventFileType)) {
-      if (onChange) {
+      if (onChange && typeof onChange === 'function') {
         onChange(event);
       }
-      if (eventFileType === 'image') {
-        setIsImageType(true);
 
-        const reader = new FileReader();
-        reader.onload = ({ target: { result } }) => {
-          setPreviewImage(result);
-        };
-        reader.readAsDataURL(event.target?.files[0]);
-      } else {
-        setIsImageType(false);
-        setFileName(event.target?.files[0]?.name);
+      // If existing image is not undefined, we rely on consumers to handle this themselves.
+      if (existingImage === undefined) {
+        if (eventFileType === 'image') {
+          setIsImageType(true);
+
+          const reader = new FileReader();
+          reader.onload = ({ target: { result } }) => {
+            setPreviewImage(result);
+          };
+          reader.readAsDataURL(event.target?.files[0]);
+        } else {
+          setIsImageType(false);
+          setFileName(event.target?.files[0]?.name);
+        }
       }
     }
   }, []);
