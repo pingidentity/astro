@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
-import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '../../utils/testUtils/testWrapper';
 import { Link, Text } from '../..';
 import CopyText from '.';
 
@@ -140,9 +140,7 @@ describe('Text mode', () => {
     await act(async () => userEvent.click(button));
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
     expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
-    setTimeout(() => {
-      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-    }, 1000);
+    await waitForElementToBeRemoved(screen.queryByRole('tooltip'));
   });
 });
 
