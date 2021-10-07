@@ -96,7 +96,7 @@ export const stepTemplate = ({ color, onClick = () => {}, onDelete = () => {} } 
         $(go.Panel, 'Position', { position: new go.Point(0, 0) },
             { name: 'BODY' },
             $(go.Shape, 'RoundedRectangle',
-                { fill: 'transparent', stroke: 'transparent', parameter1: 3 },
+                { fill: 'transparent', stroke: 'transparent', parameter1: 3, margin: new go.Margin(30, 0, 0, 0) },
                 new go.Binding('desiredSize', '', s => getSize(s, 'transparentContainer')),
             ),
             $(go.Shape, 'RoundedRectangle',

@@ -45,9 +45,9 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
             $(go.Shape, 'RoundedRectangle',
                 { fill: 'transparent', strokeWidth: 0, cursor: 'normal' }),
             new go.Binding('minSize', 'errorMessage', s => getIfLengthGreater(s.errorMessage, new go.Size(65, 130), new go.Size(65, 65), 0)),
-            $(go.Panel, 'Vertical', { alignment: go.Spot.Top, padding: 15 },
+            $(go.Panel, 'Vertical', { alignment: go.Spot.Top, cursor: 'default', padding: 15 },
                 new go.Binding('visible', '', s => getIfLengthGreater(s.errorMessage, true, false, 0)),
-                $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20, margin: new go.Margin(0, 0, 0, 0) }),
+                $(go.Picture, { source: `data:image/svg+xml;utf8,${encodeSvg(ReactDOMServer.renderToStaticMarkup(<Error fill={COLORS.ERROR} />))}`, width: 20, height: 20, margin: new go.Margin(0, 0, 75, 0) }),
                 {
                     mouseHover: getAdornmentOnHover(getNodeHoverAdornment()),
                     mouseLeave: (e, node) => node.part.removeAdornment('mouseHover'),
@@ -55,7 +55,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
             ),
             new go.Binding('location', 'loc', go.Point.parse),
             $(go.Shape, 'Circle',
-                { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(90, 125), cursor: 'normal' },
+                { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(50, 75), cursor: 'normal', margin: new go.Margin(30, 0, 0, 0) },
             ),
             $(go.Shape, 'Circle',
                 { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 0), cursor: 'normal', shadowVisible: true },
@@ -65,7 +65,7 @@ export const nodeTemplateStart = ({ onClick = () => {} } = {}) => {
                 new go.Binding('stroke', '', getBorderColor(COLORS.BLUE, COLORS.ERROR, 'transparent')).ofObject(''),
             ),
             $(go.Picture, { source: svgComponentToBase64(<Icon path={mdiFlag} height="20px" width="20px" color={COLORS.GREEN} />), width: 25, height: 25, margin: new go.Margin(0, 0, 0, 0), cursor: 'normal' }),
-            fromNode({ color: COLORS.BLUE }, { margin: new go.Margin(0, 4, 0, 0) }),
+            fromNode({ color: COLORS.BLUE }, { margin: new go.Margin(0, 0, 0, 40) }),
             bottomNode({ margin: new go.Margin(38, 0, 0, 0) }),
         )
     );
