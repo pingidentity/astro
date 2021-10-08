@@ -1158,7 +1158,7 @@ exports[`single fields password field 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -1523,7 +1523,7 @@ exports[`single fields password field 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -1830,7 +1830,7 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3 {
@@ -2243,7 +2243,7 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -2609,7 +2609,7 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-4 listBoxPopup container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 listBoxPopup containedIcon {
@@ -3080,7 +3080,7 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3 {
@@ -3493,7 +3493,7 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -3859,7 +3859,7 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-4 listBoxPopup container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 listBoxPopup containedIcon {
@@ -4353,7 +4353,7 @@ exports[`single fields string field format email 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -4718,7 +4718,7 @@ exports[`single fields string field format email 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -5047,7 +5047,7 @@ exports[`single fields string field format uri 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -5412,7 +5412,7 @@ exports[`single fields string field format uri 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -5741,7 +5741,7 @@ exports[`single fields string field regular 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -6106,7 +6106,7 @@ exports[`single fields string field regular 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -6435,7 +6435,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -6800,7 +6800,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -6841,7 +6841,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-5.is-warning {
-  color: #8a690a;
+  color: #b05b00;
 }
 
 .is-left-label>.emotion-5 {
@@ -7172,7 +7172,7 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -7537,7 +7537,7 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -7578,7 +7578,7 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-5.is-warning {
-  color: #8a690a;
+  color: #b05b00;
 }
 
 .is-left-label>.emotion-5 {
@@ -7909,7 +7909,7 @@ exports[`single fields string field with markdown errors 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -8274,7 +8274,7 @@ exports[`single fields string field with markdown errors 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -8603,7 +8603,7 @@ exports[`single fields string field with placeholder 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3:after {
@@ -8968,7 +8968,7 @@ exports[`single fields string field with placeholder 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 containedIcon {
@@ -9275,7 +9275,7 @@ exports[`single fields textarea field 1`] = `
 }
 
 .emotion-3.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-3 {
@@ -9309,7 +9309,7 @@ exports[`single fields textarea field 1`] = `
 }
 
 .emotion-4 container.is-warning::after {
-  background-color: #eeb91c;
+  background-color: #ffb91c;
 }
 
 .emotion-4 container.is-success::after {

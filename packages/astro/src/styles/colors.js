@@ -13,9 +13,9 @@ export const success = {
   light: '#e6ffe9',
 };
 export const warning = {
-  bright: '#eeb91c',
-  dark: '#8a690a',
-  light: '#fbf0d0',
+  bright: '#ffb91c',
+  dark: '#b05b00',
+  light: '#fff6e6',
 };
 
 // NEUTRAL COLORS
