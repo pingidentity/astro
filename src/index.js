@@ -114,6 +114,9 @@ export * from './components/PasswordField';
 export { default as Popover } from './components/Popover';
 export * from './components/Popover';
 
+export { default as PopoverContainer } from './components/PopoverContainer';
+export * from './components/PopoverContainer';
+
 export { default as PopoverMenu } from './components/PopoverMenu';
 
 export { default as Radio } from './components/Radio';
