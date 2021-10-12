@@ -1,3 +1,7 @@
+variables:
+  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1"
+  LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.1"
+
 stages:
   - build-ci-image
   - build-test-lint
@@ -12,16 +16,31 @@ stages:
 # before_script:
 #   - lerna bootstrap
 
-build_ci_image:
+# NOTE: Make and test changes to the "latest" image _before_ merging them to the stable one. Otherwise, all
+# pipelines will be impacted because they use the stable image for running scripts.
+build_ci_stable_image:
   stage: build-ci-image
   # This was causing issues where some builds would fail to find the proper Docker hash.
   # It should be added back in at some point.
   only:
     changes:
-      - shared/Dockerfile
+      - shared/docker/stable/Dockerfile
   script:
-    - docker build --pull --tag docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1 ./shared/docker
-    - docker push docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+    - docker build --pull --tag "$STABLE_IMAGE" ./shared/docker/stable
+    - docker push "$STABLE_IMAGE"
+  tags:
+    - eks-platform-publish-docker
+
+build_ci_latest_image:
+  stage: build-ci-image
+  # This was causing issues where some builds would fail to find the proper Docker hash.
+  # It should be added back in at some point.
+  only:
+    changes:
+      - shared/docker/latest/Dockerfile
+  script:
+    - docker build --pull --tag "$LATEST_IMAGE" ./shared/docker/latest
+    - docker push "$LATEST_IMAGE"
   tags:
     - eks-platform-publish-docker
 
@@ -31,7 +50,7 @@ build:
   stage: build-test-lint
   tags:
     - default-gitlab-runner
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  image: $STABLE_IMAGE
   only:
     - merge_requests
   script:
@@ -62,7 +81,7 @@ backstop:
   stage: screenshot
   tags:
     - default-gitlab-runner
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  image: $STABLE_IMAGE
   only:
     refs:
       - merge_requests
@@ -77,7 +96,7 @@ chromatic:
   stage: screenshot
   tags:
     - platform-build-docker
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  image: $STABLE_IMAGE
   only:
       refs:
         - merge_requests
