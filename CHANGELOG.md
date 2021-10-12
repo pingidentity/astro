@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.31.0...@pingux/astro@0.32.0) (2021-10-12)
+
+
+### Features
+
+* [UIP-4834] Update warning colors in Astro ([336e4c9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/336e4c9f95442c0a1b4fce2d9584295c5a711970))
+
+
+
+
+
 # [0.31.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.30.0...@pingux/astro@0.31.0) (2021-10-07)
 
 
