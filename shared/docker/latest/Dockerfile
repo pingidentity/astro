@@ -1,3 +1,6 @@
+# NOTE: Use this Dockerfile first for testing any changes,
+# so it wouldn't affect pipelines that are using the stable image.
+
 FROM docker.corp.pingidentity.com:5400/node:10-stretch
 
 RUN apt-get update && \
