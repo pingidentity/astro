@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.6](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.5...@pingux/end-user@1.5.6) (2021-10-12)
+
+
+### Bug Fixes
+
+* [UIP-4882] center-aligned logo in end-user's UserNav to place properly rectangular-shaped logos ([fcc436d](https://gitlab.corp.pingidentity.com/ux/end-user/commit/fcc436db50c92808d7d80bbf2d66772ab2109275))
+* [UIP-4889] SocialButton with custom image should not send parent form on click ([c2f76da](https://gitlab.corp.pingidentity.com/ux/end-user/commit/c2f76da679644eb75246a0a70f850d6871d10790))
+
+
+
+
+
 ## [1.5.5](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.4...@pingux/end-user@1.5.5) (2021-09-07)
 
 **Note:** Version bump only for package @pingux/end-user

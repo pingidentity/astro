@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@2.0.0-alpha.0...@pingux/schema-form@2.0.0-alpha.1) (2021-10-12)
+
+
+### Features
+
+* [UIP-4834] Update warning colors in Astro ([336e4c9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/336e4c9f95442c0a1b4fce2d9584295c5a711970))
+
+
+
+
+
 # [2.0.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@1.17.3...@pingux/schema-form@2.0.0-alpha.0) (2021-10-01)
 
 

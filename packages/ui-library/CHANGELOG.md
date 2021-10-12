@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.43.0-alpha.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0-alpha.0...ui-library@4.43.0-alpha.1) (2021-10-12)
+
+
+### Bug Fixes
+
+* [UIP-4882] center-aligned logo in end-user's UserNav to place properly rectangular-shaped logos ([fcc436d](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/fcc436db50c92808d7d80bbf2d66772ab2109275))
+
+
+
+
+
 # [4.43.0-alpha.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.42.2...ui-library@4.43.0-alpha.0) (2021-10-07)
 
 
