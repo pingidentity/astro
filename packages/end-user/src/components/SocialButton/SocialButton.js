@@ -145,6 +145,7 @@ const UnstyledSocialButton = ({
                         className="social-button__image-button"
                         disabled={disabled}
                         data-id={dataId}
+                        type={isSubmit ? 'submit' : 'button'}
                     >
                         <img src={image} width="100%" height="auto" alt={label} />
                     </button>

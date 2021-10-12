@@ -14,17 +14,17 @@ describe('SocialButton', () => {
     it('renders the SocialButton in the default state', () => {
         const wrapper = getComponent();
         const button = wrapper.find(`button[data-id="${defaultProps['data-id']}"]`);
-
-        expect(button.exists()).toEqual(true);
+        expect(button.prop('type')).toEqual('button');
+        expect(button.find('img').exists()).toBe(false);
         expect(button.text()).toBe(defaultProps.label);
     });
     it('renders the SocialButton with a custom image', () => {
         const wrapper = getComponent({
             image: './test.png',
         });
-        const button = wrapper.find(`button[data-id="${defaultProps['data-id']}"]>img`);
-
-        expect(button.exists()).toEqual(true);
+        const button = wrapper.find(`button[data-id="${defaultProps['data-id']}"]`);
+        expect(button.prop('type')).toEqual('button');
+        expect(button.find('img').prop('src')).toBe('./test.png');
     });
     it('assigns a default onClick', () => {
         const wrapper = getComponent();
