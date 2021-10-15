@@ -11,17 +11,10 @@ stages:
   before_script:
     - yarn --frozen-lockfile
 
-# This has to be done before each script because Gitlab's caching can fail in a
-# number of circumstances.
-# before_script:
-#   - lerna bootstrap
-
 # NOTE: Make and test changes to the "latest" image _before_ merging them to the stable one. Otherwise, all
 # pipelines will be impacted because they use the stable image for running scripts.
 build_ci_stable_image:
   stage: build-ci-image
-  # This was causing issues where some builds would fail to find the proper Docker hash.
-  # It should be added back in at some point.
   only:
     changes:
       - shared/docker/stable/Dockerfile
@@ -33,8 +26,6 @@ build_ci_stable_image:
 
 build_ci_latest_image:
   stage: build-ci-image
-  # This was causing issues where some builds would fail to find the proper Docker hash.
-  # It should be added back in at some point.
   only:
     changes:
       - shared/docker/latest/Dockerfile
@@ -44,7 +35,6 @@ build_ci_latest_image:
   tags:
     - eks-platform-publish-docker
 
-# Do this as a separate stage to make sure everything builds
 build:
   <<: *yarn-install-and-build
   stage: build-test-lint
@@ -54,7 +44,7 @@ build:
   only:
     - merge_requests
   script:
-    - echo "$CI_MERGE_REQUEST_TITLE" | npx commitlint
+    - sh commit_lint.sh
     - lerna run build
     - lerna run lint
     - lerna run coverage-ci
