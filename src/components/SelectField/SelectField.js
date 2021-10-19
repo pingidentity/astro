@@ -94,6 +94,12 @@ SelectField.propTypes = {
   containerProps: PropTypes.shape({}),
   /** Props object passed along to the label as-is. */
   labelProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the ScrollBox element. */
+  // /** Props object that is spread directly into the ScrollBox element. */
+  /** @ignore */
+  scrollBoxProps: PropTypes.shape({
+    maxHeight: PropTypes.string,
+  }),
 };
 
 SelectField.defaultProps = {
@@ -101,6 +107,7 @@ SelectField.defaultProps = {
   status: statuses.DEFAULT,
   align: 'start',
   direction: 'bottom',
+  scrollBoxProps: { maxHeight: '300px' },
 };
 
 SelectField.displayName = 'SelectField';

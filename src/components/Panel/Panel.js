@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
+import ScrollBox from '../ScrollBox';
 
 const Panel = forwardRef((props, ref) => {
   const {
@@ -11,6 +12,7 @@ const Panel = forwardRef((props, ref) => {
     isVisible,
     sx, // eslint-disable-line
     width,
+    scrollBoxProps,
   } = props;
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
@@ -31,7 +33,11 @@ const Panel = forwardRef((props, ref) => {
       {...focusProps}
       sx={{ ...dynamicStyles, ...sx }}
     >
-      {isVisible && children}
+      {isVisible &&
+        <ScrollBox {...scrollBoxProps}>
+          {children}
+        </ScrollBox>
+      }
     </Box>
   );
 });
@@ -39,6 +45,8 @@ const Panel = forwardRef((props, ref) => {
 Panel.propTypes = {
   isVisible: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  /** Props object that is spread directly into the ScrollBox element. */
+  scrollBoxProps: PropTypes.shape({}),
 };
 
 Panel.defaultProps = {
