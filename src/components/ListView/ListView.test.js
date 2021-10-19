@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import userEvent from '@testing-library/user-event';
 import { FocusScope } from '@react-aria/focus';
 import { Item } from '@react-stately/collections';
@@ -101,6 +102,18 @@ test('clicking an item on the list selects the item', async () => {
   expect(updatedOption[1]).toHaveClass('is-selected');
 });
 
+test('clicking an item fires "onSelectionChange" handler and returns Set with keys of items', async () => {
+  const expectedResult = new Set();
+  expectedResult.add(items[1].key);
+  const onSelectionChange = jest.fn();
+  getComponent({ onSelectionChange });
+  const option1 = screen.getByTestId(items[1].name);
+  userEvent.click(option1);
+  expect(onSelectionChange).toHaveBeenCalled();
+  const selectedItems = onSelectionChange.mock.calls[0][0];
+  expect(_.isEqual(expectedResult, selectedItems)).toBeTruthy();
+});
+
 test('renders loader, if a loader component is passed in', () => {
   getComponent({ loadingState: 'loading' });
   const loader = screen.getByRole('progressbar');
@@ -111,4 +124,23 @@ test('renders neither loader nor item if the component is given no items nor a l
   getComponentEmpty();
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+});
+
+test('selectionMode "none" disallows to select item', async () => {
+  getComponent({ selectionMode: 'none' });
+  const option1 = screen.getByTestId(items[1].name);
+  userEvent.click(option1);
+  const updatedOption = await screen.findAllByRole('listitem');
+  expect(updatedOption[1]).not.toHaveClass('is-selected');
+});
+
+test('selectionMode "multiple" allows to select more than one item', async () => {
+  getComponent({ selectionMode: 'multiple' });
+  const option1 = screen.getByTestId(items[1].name);
+  userEvent.click(option1);
+  const option2 = screen.getByTestId(items[2].name);
+  userEvent.click(option2);
+  const updatedOption = await screen.findAllByRole('listitem');
+  expect(updatedOption[1]).toHaveClass('is-selected');
+  expect(updatedOption[2]).toHaveClass('is-selected');
 });
