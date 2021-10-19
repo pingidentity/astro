@@ -25,6 +25,8 @@ const Menu = forwardRef((props, ref) => {
   const {
     isDisabled,
     onAction,
+    onSelectionChange,
+    ...others
   } = props;
   const contextProps = useContext(MenuContext);
   const completeProps = {
@@ -47,6 +49,7 @@ const Menu = forwardRef((props, ref) => {
       as="ul"
       ref={menuRef}
       variant="menu"
+      {...others}
       {...mergeProps(focusProps, menuProps)}
     >
       {Array.from(state.collection).map(item => (
