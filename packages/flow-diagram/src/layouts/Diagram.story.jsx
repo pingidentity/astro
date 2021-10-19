@@ -50,6 +50,23 @@ export const DiagramComponent = () => {
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ];
 
+    const highlightedOnDrag = (type, element, draggingGroup) => {
+        if (type === 'node') {
+            if (element.group === draggingGroup) {
+                return false;
+            }
+            return true;
+        }
+        if (type === 'link') {
+            const fromNode = diagramNodes.find(node => element.from === node.key);
+            if (element.category === undefined && fromNode.group !== draggingGroup) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    };
+
     const { diagramProps, diagramObject } = useDiagram({
         isDisabled: disabled,
         groupTemplates: [
@@ -65,6 +82,7 @@ export const DiagramComponent = () => {
             ['branch', branchNode()],
             ['START', nodeTemplateStart()],
         ],
+        highlightedOnDrag,
         onModelChange: ({
             insertedNodeKeys,
             modifiedNodeData,
@@ -96,6 +114,8 @@ DiagramComponent.propTypes = {
     isDisabled: PropTypes.bool,
     /** Templates for groups of nodes. diagramGroupTemplate should be used. */
     groupTemplates: PropTypes.arrayOf(PropTypes.array),
+    /** Defines which nodes and links are to be highlighted on drag. */
+    highlightedOnDrag: PropTypes.func,
     /** Defines links connecting nodes. */
     linkDataArray: PropTypes.arrayOf(PropTypes.object),
     /** Defines nodes that appear on the diagram. */
