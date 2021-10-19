@@ -30,6 +30,11 @@ export default {
         type: 'none',
       },
     },
+    onSelectionChange: {
+      control: 'none',
+      // eslint-disable-next-line no-console
+      defaultValue: console.log,
+    },
   },
 };
 
@@ -50,24 +55,28 @@ const actions = {
   onLoadMore: action('onLoadMore'),
 };
 
+const ListElement = ({ item }) => (
+  <Box isRow >
+    <Box isRow mr="auto" alignSelf="center" >
+      <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
+      <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
+    </Box>
+    <Box isRow alignSelf="center">
+      <IconButton aria-label="create-icon" size={20} >
+        <CreateIcon />
+      </IconButton>
+      <IconButton aria-label="create-icon" size={20} >
+        <MoreVertIcon />
+      </IconButton>
+    </Box>
+  </Box>
+);
+
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items} >
     {item => (
-      <Item key={item.name} textValue={item.name} >
-        <Box isRow >
-          <Box isRow mr="auto" alignSelf="center" >
-            <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
-            <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
-          </Box>
-          <Box isRow alignSelf="center">
-            <IconButton aria-label="create-icon" size={20} >
-              <CreateIcon />
-            </IconButton>
-            <IconButton aria-label="create-icon" size={20} >
-              <MoreVertIcon />
-            </IconButton>
-          </Box>
-        </Box>
+      <Item key={item.name} textValue={item.name}>
+        <ListElement item={item} />
       </Item>
     )}
   </ListView>
@@ -114,24 +123,21 @@ export const InfiniteLoadingList = () => {
         onLoadMore={list.loadMore}
       >
         {item => (
-          <Item key={item.name} textValue={item.name} >
-            <Box isRow >
-              <Box isRow mr="auto" alignSelf="center" >
-                <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
-                <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
-              </Box>
-              <Box isRow alignSelf="center">
-                <IconButton aria-label="create-icon" size={20} >
-                  <CreateIcon />
-                </IconButton>
-                <IconButton aria-label="create-icon" size={20} >
-                  <MoreVertIcon />
-                </IconButton>
-              </Box>
-            </Box>
+          <Item key={item.name} textValue={item.name}>
+            <ListElement item={item} />
           </Item>
         )}
       </ListView>
     </Box>
   );
 };
+
+export const MultipleSelection = ({ ...args }) => (
+  <ListView {...props} {...args} items={items} selectionMode="multiple">
+    {item => (
+      <Item key={item.name} textValue={item.name}>
+        <ListElement item={item} />
+      </Item>
+    )}
+  </ListView>
+);
