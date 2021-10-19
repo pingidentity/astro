@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@2.0.0-alpha.1...@pingux/schema-form@2.0.0-alpha.2) (2021-10-19)
+
+
+### Bug Fixes
+
+* [UIP-4885] Update button variants to use inline-flex ([d0a0ea7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d0a0ea7757a0091169ee77fe7e20fa75c058c016))
+
+
+
+
+
 # [2.0.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@2.0.0-alpha.0...@pingux/schema-form@2.0.0-alpha.1) (2021-10-12)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.24.1...@pingux/flow-diagram@0.25.0) (2021-10-19)
+
+
+### Bug Fixes
+
+* [UIP-4852] Fix link straightening problem ([19e428c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/19e428c2571227cc8dfb89a10417376fbb3cb20f))
+
+
+### Features
+
+* [UIP-4778] Update selected border width ([54c7b2c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/54c7b2cecd17bbaf8f9244f9f27fe617ba6433a1))
+* [UIP-4854] Allow manual link/node highlighting on drag ([d80282f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d80282f3b511471aa28c1420031f72fafb86fc19))
+
+
+
+
+
 ## [0.24.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.24.0...@pingux/flow-diagram@0.24.1) (2021-10-12)
 
 **Note:** Version bump only for package @pingux/flow-diagram
