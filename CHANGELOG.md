@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.32.0...@pingux/astro@0.33.0) (2021-10-19)
+
+
+### Bug Fixes
+
+* [UIP-4857] ListView: onSelectionChange should return expected keys ([e0704f5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e0704f568283b19fd312a775c772785348f8999f))
+* [UIP-4864] Add data-id prop to Item component ([73daf5e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/73daf5eb54e45808457a0b352c2f3dd608770b6b))
+* [UIP-4877] Slimming Inline Button ([426e80d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/426e80d42ed5a4abc12c20aecca63491c9657670))
+* [UIP-4883] Add prop spreading to allow hover color on menu items ([3f3c9f2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3f3c9f2db7bd16613821b5d86c74647d458a02ac))
+* [UIP-4885] Update button variants to use inline-flex ([d0a0ea7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d0a0ea7757a0091169ee77fe7e20fa75c058c016))
+
+
+### Features
+
+* [UIP-4437] ScrollBox component ([2bf2f3d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2bf2f3d1e0ac1b27526bfd056868a3f2313b0156))
+* [UIP-4733] Add Apache 2.0 License ([8beb5c7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8beb5c764d4200c3a4ed1cd07537774825e4cc35))
+* [UIP-4841] Add NOTICE file ([718d569](https://gitlab.corp.pingidentity.com/ux/pingux/commit/718d5692a8f0577238eac128ac14b4f00b107d16))
+
+
+
+
+
 # [0.32.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.31.0...@pingux/astro@0.32.0) (2021-10-12)
 
 
