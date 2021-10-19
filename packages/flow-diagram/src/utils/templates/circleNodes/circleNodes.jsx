@@ -55,7 +55,7 @@ export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height, onDel
             { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 6), cursor: 'normal', shadowVisible: true  },
         ),
         $(go.Shape, 'Circle',
-            { fill: 'transparent', strokeWidth: 1, desiredSize: new go.Size(39, 39), margin: new go.Margin(0, 0, 0, 6), cursor: 'normal' },
+            { fill: 'transparent', strokeWidth: 2, desiredSize: new go.Size(38, 38), margin: new go.Margin(0, 0, 0, 6), cursor: 'normal' },
             new go.Binding('stroke', '', getBorderColor(COLORS.BLUE, COLORS.ERROR, 'transparent')).ofObject(''),
         ),
         $(
