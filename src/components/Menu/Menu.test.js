@@ -134,3 +134,10 @@ test('should fire onSelectionChange when selectionMode is not none', () => {
     expect.any(Set),
   );
 });
+
+test('props passed through others are passed to menu', () => {
+  getComponent({ sx: { bg: 'red' } });
+  const menu = screen.queryByRole('menu');
+  expect(menu).toBeInTheDocument();
+  expect(menu).toHaveStyle('background-color: red');
+});
