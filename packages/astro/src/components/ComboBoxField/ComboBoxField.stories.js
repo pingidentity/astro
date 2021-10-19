@@ -12,6 +12,24 @@ const items = [
   { name: 'Snake', id: '3' },
 ];
 
+const animals = [
+  { name: 'Aardvark', id: '1' },
+  { name: 'Kangaroo', id: '2' },
+  { name: 'Snake', id: '3' },
+  { name: 'Snail', id: '4' },
+  { name: 'Slug', id: '5' },
+  { name: 'Crow', id: '6' },
+  { name: 'Dog', id: '7' },
+  { name: 'Crab', id: '8' },
+  { name: 'Fish', id: '9' },
+  { name: 'Turtle', id: '10' },
+  { name: 'Mouse', id: '11' },
+  { name: 'Banana', id: '12' },
+  { name: 'Shark', id: '13' },
+  { name: 'Gorilla', id: '14' },
+  { name: 'Goat', id: '15' },
+];
+
 const actions = {
   onOpenChange: action('onOpenChange'),
   onInputChange: action('onInputChange'),
@@ -280,6 +298,14 @@ export const Required = () => (
 export const WithoutStatusIndicator = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} hasNoStatusIndicator {...actions}>
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
+);
+
+export const WithCustomHeight = () => (
+  <OverlayProvider>
+    <ComboBoxField label="Example label" defaultItems={animals} scrollBoxProps={{ maxHeight: '75px' }} {...actions}>
       {item => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>

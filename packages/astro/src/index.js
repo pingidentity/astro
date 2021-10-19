@@ -134,6 +134,9 @@ export * from './components/RockerButton';
 export { default as RockerButtonGroup } from './components/RockerButtonGroup';
 export * from './components/RockerButtonGroup';
 
+export { default as ScrollBox } from './components/ScrollBox';
+export * from './components/ScrollBox';
+
 export { default as SearchField } from './components/SearchField';
 export * from './components/SearchField';
 
