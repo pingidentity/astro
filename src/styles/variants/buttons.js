@@ -139,6 +139,7 @@ const close = {
 
 const accordionHeader = {
   ...base,
+  display: 'inline-flex',
   bg: 'white',
   color: 'neutral.10',
   paddingLeft: '5px',
@@ -185,6 +186,7 @@ const icon = {
 
 const primary = {
   ...base,
+  display: 'inline-flex',
   bg: 'active',
   border: '1px solid',
   borderColor: 'active',
@@ -209,6 +211,7 @@ const primary = {
 
 const success = {
   ...base,
+  display: 'inline-flex',
   bg: 'success.bright',
   border: '1px solid',
   borderColor: 'success.bright',
@@ -217,6 +220,7 @@ const success = {
 
 const critical = {
   ...base,
+  display: 'inline-flex',
   bg: 'critical.bright',
   border: '1px solid',
   borderColor: 'critical.bright',
@@ -279,6 +283,7 @@ const helpHint = {
 
 const inline = {
   ...base,
+  display: 'inline-flex',
   bg: 'white',
   height: '26px',
   lineHeight: '26px',
@@ -302,6 +307,7 @@ const inline = {
 
 const text = {
   ...base,
+  display: 'inline-flex',
   bg: 'transparent',
   border: '1px solid',
   borderColor: 'transparent',
@@ -323,6 +329,7 @@ const quiet = {
 
 const rocker = {
   ...base,
+  display: 'inline-flex',
   height: '26px',
   lineHeight: '26px',
   fontSize: '14px',
@@ -348,6 +355,7 @@ const comboBox = {
 
 const danger = {
   ...base,
+  display: 'inline-flex',
   bg: 'white',
   border: '1px solid',
   borderColor: 'critical.bright',
