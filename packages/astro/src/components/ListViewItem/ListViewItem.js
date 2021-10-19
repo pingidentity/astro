@@ -15,6 +15,8 @@ const ListViewItem = (props) => {
     className,
   } = props;
 
+  const dataId = item.props['data-id'];
+
   const cellNode = [...item.childNodes][0];
 
   const { state } = useContext(ListViewContext);
@@ -76,6 +78,7 @@ const ListViewItem = (props) => {
           isDisabled={isDisabled}
           isSelected={isSelected}
           className={classNames}
+          data-id={dataId}
         >
           {item.rendered}
         </Box>
@@ -90,6 +93,9 @@ ListViewItem.propTypes = {
     key: PropTypes.string,
     rendered: PropTypes.node,
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
+    props: PropTypes.shape({
+      'data-id': PropTypes.string,
+    }),
   }),
 };
 

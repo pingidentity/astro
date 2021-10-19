@@ -23,7 +23,7 @@ const ListBoxWithState = (props) => {
 
   return (
     <ListBox {...props} state={state}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
     </ListBox>
   );
 };

@@ -6,9 +6,9 @@ import { Menu, Item } from '../../index';
 
 const testId = 'testId';
 const defaultMenuItems = [
-  { key: 'MenuItem 1', children: 'MenuItem 1' },
-  { key: 'MenuItem 2', children: 'MenuItem 2' },
-  { key: 'MenuItem 3', children: 'MenuItem 3' },
+  { key: 'MenuItem 1', children: 'MenuItem 1', 'data-id': 'menuItem1' },
+  { key: 'MenuItem 2', children: 'MenuItem 2', 'data-id': 'menuItem2' },
+  { key: 'MenuItem 3', children: 'MenuItem 3', 'data-id': 'menuItem3' },
 ];
 
 const defaultProps = {
@@ -118,4 +118,11 @@ test('applies selected styling with isSelected prop, does not add class without 
   const { children: menuItemText } = defaultMenuItems[1];
   const menuItem = screen.getByText(menuItemText);
   expect(menuItem).not.toHaveClass('is-selected');
+});
+
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const menuItems = screen.queryAllByRole('menuitem');
+  expect(menuItems).toHaveLength(defaultMenuItems.length);
+  expect(menuItems[0]).toHaveAttribute('data-id', defaultMenuItems[0]['data-id']);
 });
