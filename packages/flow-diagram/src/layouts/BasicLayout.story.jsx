@@ -39,6 +39,7 @@ const Demo = () => {
         { isGroup: 'true', 'key': 'group' },
         { isGroup: 'true', 'key': 'isFinished' },
         { isGroup: 'true', 'key': 'loginGroup' },
+        { isGroup: 'true', 'key': 'startGroup' },
         {
             'key': 'user-login',
             'category': 'step',
@@ -54,7 +55,7 @@ const Demo = () => {
         { 'key': 'user-login-failure', 'category': 'outlet', color: '#E4E7E9', 'text': 'On Failure', 'group': 'group' },
         { 'key': 'user-login-not_found', 'category': 'outlet', color: '#E4E7E9', 'text': 'no such user', 'group': 'group' },
         { 'key': 'finished', 'category': 'finished', 'stepId': 'finished', 'text': 'Complete', 'group': 'isFinished', hasIO: false },
-        { 'key': 'START', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false, 'isRoot': true }]);
+        { 'key': 'START', 'group': 'startGroup', 'category': 'START', 'text': 'Start', 'loc': '0 60', 'id': 'START', hasIO: false, 'isRoot': true }]);
 
     const [diagramLinks, setDiagramLinks] = useState([
         { 'from': 'branch', 'to': 'user-login-success', 'key': 'branch_user-login-success', 'category': 'outlet' },
@@ -64,6 +65,23 @@ const Demo = () => {
         { 'from': 'user-login', 'to': 'branch', 'key': 'user-login_branch'},
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
+
+    const highlightedOnDrag = (type, element, draggingGroup) => {
+        if (type === 'node') {
+            if (element.group === draggingGroup) {
+                return false;
+            }
+            return true;
+        }
+        if (type === 'link') {
+            const fromNode = diagramNodes.find(node => element.from === node.key);
+            if (element.category === undefined && fromNode.group !== draggingGroup) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    };
 
     const onDelete = (node) => {
         const filterByKey = () => array => array.filter(item => item.key !== node.key);
@@ -97,6 +115,7 @@ const Demo = () => {
             ['branch', branchNode({ onDelete })],
             ['START', nodeTemplateStart()],
         ],
+        highlightedOnDrag,
         onLinkDelete,
         onModelChange: ({
             insertedNodeKeys,
@@ -115,7 +134,7 @@ const Demo = () => {
             // the palette.
 
             if (draggedElementData) {
-                console.log(draggedElementData)
+                console.log(draggedElementData);
             }
 
             if (selectedNodeData) {

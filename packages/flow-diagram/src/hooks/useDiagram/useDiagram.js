@@ -104,21 +104,25 @@ export const layoutConnected = (e) => {
 export const dontShowDropzones = (diagram) => {
     diagram.links.each((n) => {
         const selectedLink = n;
-        if (selectedLink.data.category === undefined) {
+        if (selectedLink.fromPort.findObject('fromNode') !== null) {
             if (selectedLink.fromPort.findObject('fromNode')?.visible === true) {
                 selectedLink.fromPort.findObject('fromNode').fill = selectedLink.fromPort.findObject('fromNodeOuter').stroke;
                 selectedLink.fromPort.findObject('fromNode').stroke = COLORS.WHITE;
                 selectedLink.fromPort.findObject('fromNodeOuter').fill = 'transparent';
             }
-            selectedLink.findObject('arrow').fill = COLORS.BLUE;
-            selectedLink.findObject('arrow').stroke = COLORS.BLUE;
-            selectedLink.findObject('link').stroke = COLORS.BLUE;
+            if (selectedLink.findObject('arrow') !== null) {
+                selectedLink.findObject('arrow').fill = COLORS.BLUE;
+                selectedLink.findObject('arrow').stroke = COLORS.BLUE;
+            }
+            if (selectedLink.findObject('link') !== null) {
+                selectedLink.findObject('link').stroke = COLORS.BLUE;
+            }
             selectedLink.isHighlighted = false;
         }
     });
     diagram.nodes.each((n) => {
         const node = n;
-        if (node.name === 'outlet' || node.name === 'start') {
+        if (node.findObject('fromNode') !== null) {
             node.findObject('fromNode').fill = node.findObject('fromNodeOuter').stroke;
             node.findObject('fromNode').stroke = COLORS.WHITE;
             node.findObject('fromNodeOuter').fill = 'transparent';
@@ -134,6 +138,7 @@ export default function useDiagram({
     nodeDataArray,
     nodeTemplates,
     onModelChange,
+    highlightedOnDrag,
     allowCopy = true,
     onLinkDelete = () => {},
     isDisabled = false,
@@ -143,7 +148,7 @@ export default function useDiagram({
     const [droppedOntoNodeKey, setDroppedOntoNodeKey] = useState(undefined);
     const [draggedElementData, setDraggedElementData] = useState(undefined);
     const [selected, setSelected] = useState(null);
-    const [isObjectDragging, setIsObjectDragging] = useState(false);
+    const [selectedGroup, setSelectedGroup] = useState(null);
     const first = useRef(true);
 
     useEffect(() => {
@@ -238,6 +243,10 @@ export default function useDiagram({
                     'LinkDrawn': renderPortCursors,
                     'SelectionDeleted': renderPortCursors,
                     'ChangedSelection': (e) => {
+                        const it = e.diagram.selection.iterator;
+                        while (it.next()) {
+                            setSelectedGroup(it.value.data);
+                        }
                         if (e.diagram.selection.count === 0) {
                             setSelected(null);
                         }
@@ -269,35 +278,6 @@ export default function useDiagram({
         groupTemplates.forEach(([name, template]) => {
             diagramObject.groupTemplateMap.add(name, template);
         });
-
-        diagramObject.mouseDragOver = () => {
-            if (!isObjectDragging) {
-                setIsObjectDragging(true);
-            }
-            diagramObject.links.each((n) => {
-                const selectedLink = n;
-                if (selectedLink.data.category === undefined &&
-                    selectedLink.isHighlighted === false) {
-                    if (selectedLink.fromPort.findObject('fromNode')?.visible === true) {
-                        selectedLink.fromPort.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
-                        selectedLink.fromPort.findObject('fromNode').fill = COLORS.PURPLE;
-                        selectedLink.fromPort.findObject('fromNode').stroke = COLORS.PURPLE;
-                    }
-                    selectedLink.findObject('arrow').fill = COLORS.PURPLE;
-                    selectedLink.findObject('arrow').stroke = COLORS.PURPLE;
-                    selectedLink.findObject('link').stroke = COLORS.PURPLE;
-                    selectedLink.isHighlighted = true;
-                }
-            });
-            diagramObject.nodes.each((n) => {
-                const node = n;
-                if (node.name === 'outlet' || node.name === 'start') {
-                    node.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
-                    node.findObject('fromNode').fill = COLORS.PURPLE;
-                    node.findObject('fromNode').stroke = COLORS.PURPLE;
-                }
-            });
-        };
 
         diagramObject.mouseDrop = () => {
             dontShowDropzones(diagramObject);
@@ -431,6 +411,37 @@ export default function useDiagram({
         setDiagram(diagramObject);
         return diagramObject;
     };
+
+    /* istanbul ignore next */
+    if (diagram instanceof go.Diagram) {
+        diagram.mouseDragOver = () => {
+            diagram.links.each((elem) => {
+                if (highlightedOnDrag('link', elem.data, selectedGroup?.key)) {
+                    const link = elem;
+                    if (link.fromPort.findObject('fromNode')?.visible === true) {
+                                link.fromPort.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
+                                link.fromPort.findObject('fromNode').fill = COLORS.PURPLE;
+                                link.fromPort.findObject('fromNode').stroke = COLORS.PURPLE;
+                            }
+                            link.findObject('arrow').fill = COLORS.PURPLE;
+                            link.findObject('arrow').stroke = COLORS.PURPLE;
+                            link.findObject('link').stroke = COLORS.PURPLE;
+                            link.isHighlighted = true;
+                }
+            })
+
+            diagram.nodes.each((elem) => {
+                if (highlightedOnDrag('node', elem.data, selectedGroup?.key)) {
+                    const node = elem;
+                    if (node.findObject('fromNode') !== null) {
+                        node.findObject('fromNodeOuter').fill = COLORS.TRANSLUCENTPURPLE;
+                        node.findObject('fromNode').fill = COLORS.PURPLE;
+                        node.findObject('fromNode').stroke = COLORS.PURPLE;
+                    }
+                }
+            });
+        };
+    }
 
     return {
         diagramObject: diagram,
