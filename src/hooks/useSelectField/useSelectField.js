@@ -7,6 +7,7 @@ import { useSelectState } from '@react-stately/select';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 import ListBox from '../../components/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
+import ScrollBox from '../../components/ScrollBox';
 
 const useSelectField = (props, ref) => {
   const {
@@ -34,6 +35,7 @@ const useSelectField = (props, ref) => {
     onOpenChange,
     onSelectionChange,
     controlProps,
+    scrollBoxProps,
   } = props;
   // We use falsy booleans as defaults, but React Aria has this as true by default so we need to
   // negate this.
@@ -178,7 +180,9 @@ const useSelectField = (props, ref) => {
       isNonModal
       isDismissable
     >
-      {listbox}
+      <ScrollBox {...scrollBoxProps}>
+        {listbox}
+      </ScrollBox>
     </PopoverContainer>
   );
 

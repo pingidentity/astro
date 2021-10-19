@@ -1,5 +1,4 @@
-import React, { useMemo, forwardRef } from 'react';
-import { useDOMRef } from '@react-spectrum/utils';
+import React, { useMemo, forwardRef, useRef, useImperativeHandle } from 'react';
 import { GridCollection, useGridState } from '@react-stately/grid';
 import { GridKeyboardDelegate, useGrid } from '@react-aria/grid';
 import { mergeProps } from '@react-aria/utils';
@@ -56,7 +55,10 @@ const ListView = forwardRef((props, ref) => {
     />
   );
 
-  const domRef = useDOMRef(ref);
+  const listViewRef = useRef();
+
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => listViewRef.current);
 
   const { collection } = useListState(props);
 
@@ -98,18 +100,18 @@ const ListView = forwardRef((props, ref) => {
   const keyboardDelegate = useMemo(() => new GridKeyboardDelegate({
     collection: state.collection,
     disabledKeys: state.disabledKeys,
-    ref: domRef,
+    ref: listViewRef,
     direction,
     collator,
     focusMode: 'cell',
-  }), [state, domRef, direction, collator]);
+  }), [state, listViewRef, direction, collator]);
 
   const { gridProps } = useGrid({
     ...props,
     isVirtualized: true,
     keyboardDelegate,
     loadingState,
-  }, state, domRef);
+  }, state, listViewRef);
   // Sync loading state into the layout.
   layout.isLoading = loadingState;
 
@@ -124,7 +126,7 @@ const ListView = forwardRef((props, ref) => {
       <Virtualizer
         {...mergeProps(gridProps)}
         onLoadMore={onLoadMore}
-        ref={domRef}
+        ref={listViewRef}
         focusedKey={focusedKey}
         renderWrapper={renderWrapper}
         sizeToFit="height"

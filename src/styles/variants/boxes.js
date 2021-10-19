@@ -108,6 +108,47 @@ const copy = {
   },
 };
 
+const topShadowScrollbox = {
+  '&.is-top-shadow-showing': {
+    position: 'relative',
+    zIndex: '10000',
+    boxShadow: '0px 4px 4px -4px #000000 inset',
+    height: '4px',
+    marginBottom: '-4px',
+    backgroundColor: '#FFFFFF',
+  },
+};
+
+const bottomShadowScrollbox = {
+  '&.is-bottom-shadow-showing': {
+    position: 'relative',
+    zIndex: '10000',
+    boxShadow: '0px -4px 4px -4px #000000 inset',
+    height: '4px',
+    marginTop: '-4px',
+    backgroundColor: '#FFFFFF',
+  },
+};
+
+const scrollbox = {
+  '&::-webkit-scrollbar': {
+    display: 'none',
+    width: '0px !important',
+  },
+  '&::-webkit-scrollbar-track': {
+    width: '0px',
+    display: 'none',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    borderRadius: '0px',
+    display: 'none',
+  },
+  '&.has-shadows': {
+    boxShadow: '0px -4px 4px -4px #000000 inset,0px 4px 4px -4px #000000 inset',
+  },
+  position: 'relative',
+};
+
 export default {
   base,
   card,
@@ -119,4 +160,7 @@ export default {
   panel,
   radioCheckedContent,
   radioContainer,
+  scrollbox,
+  topShadowScrollbox,
+  bottomShadowScrollbox,
 };
