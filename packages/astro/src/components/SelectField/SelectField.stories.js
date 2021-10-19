@@ -6,6 +6,24 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
 import Box from '../Box';
 
+const animals = [
+  { name: 'Aardvark', id: '1' },
+  { name: 'Kangaroo', id: '2' },
+  { name: 'Snake', id: '3' },
+  { name: 'Snail', id: '4' },
+  { name: 'Slug', id: '5' },
+  { name: 'Crow', id: '6' },
+  { name: 'Dog', id: '7' },
+  { name: 'Crab', id: '8' },
+  { name: 'Fish', id: '9' },
+  { name: 'Turtle', id: '10' },
+  { name: 'Mouse', id: '11' },
+  { name: 'Banana', id: '12' },
+  { name: 'Shark', id: '13' },
+  { name: 'Gorilla', id: '14' },
+  { name: 'Goat', id: '15' },
+];
+
 export default {
   title: 'Form/SelectField',
   component: SelectField,
@@ -74,6 +92,14 @@ export const Default = args => (
       <Item key="red">Red</Item>
       <Item key="blue">Blue</Item>
       <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
+);
+
+export const WithCustomHeight = args => (
+  <OverlayProvider>
+    <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args} >
+      {item => <Item key={item.name}>{item.name}</Item>}
     </SelectField>
   </OverlayProvider>
 );

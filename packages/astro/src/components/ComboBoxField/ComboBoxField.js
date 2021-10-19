@@ -18,6 +18,7 @@ import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import ComboBoxInput from '../ComboBox';
 import PopoverContainer from '../PopoverContainer';
 import ListBox from '../ListBox';
+import ScrollBox from '../ScrollBox';
 
 /**
  * Combines an input with a listbox for a filterable dropdown list.
@@ -60,6 +61,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     menuTrigger,
     isNotFlippable,
     direction,
+    scrollBoxProps,
   } = props;
   const comboBoxOptions = {
     children,
@@ -171,18 +173,20 @@ const ComboBoxField = forwardRef((props, ref) => {
   const listbox = (
     <FocusScope restoreFocus>
       <DismissButton onDismiss={state.close} />
-      <ListBox
-        ref={listBoxRef}
-        hasNoEmptySelection
-        hasAutoFocus={state.focusStrategy}
-        state={state}
-        hasVirtualFocus
-        isLoading={loadingState === loadingStates.LOADING_MORE}
-        onLoadMore={onLoadMore}
-        isFocusedOnHover={shouldFocusOnHover}
-        isSelectedOnPressUp={shouldSelectOnPressUp}
-        {...otherListBoxProps}
-      />
+      <ScrollBox {...scrollBoxProps} >
+        <ListBox
+          ref={listBoxRef}
+          hasNoEmptySelection
+          hasAutoFocus={state.focusStrategy}
+          state={state}
+          hasVirtualFocus
+          isLoading={loadingState === loadingStates.LOADING_MORE}
+          onLoadMore={onLoadMore}
+          isFocusedOnHover={shouldFocusOnHover}
+          isSelectedOnPressUp={shouldSelectOnPressUp}
+          {...otherListBoxProps}
+        />
+      </ScrollBox>
       <DismissButton onDismiss={state.close} />
     </FocusScope>
   );
@@ -310,11 +314,17 @@ ComboBoxField.propTypes = {
    * `(e: KeyboardEvent) => void`
    */
   onKeyUp: PropTypes.func,
+  // /** Props object that is spread directly into the ScrollBox element. */
+  /** @ignore */
+  scrollBoxProps: PropTypes.shape({
+    maxHeight: PropTypes.string,
+  }),
 };
 
 ComboBoxField.defaultProps = {
   menuTrigger: 'input',
   direction: 'bottom',
+  scrollBoxProps: { maxHeight: '300px' },
 };
 
 ComboBoxField.displayName = 'ComboBoxField';
