@@ -44,6 +44,7 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
         <Item
           key={item.key}
           textValue={item.name}
+          data-id={item.key}
         >
           <h1
             key={item.key}
@@ -124,6 +125,14 @@ test('renders neither loader nor item if the component is given no items nor a l
   getComponentEmpty();
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+});
+
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const options = screen.getAllByRole('listitem');
+
+  expect(options).toHaveLength(items.length);
+  expect(options[0]).toHaveAttribute('data-id', items[0].name);
 });
 
 test('selectionMode "none" disallows to select item', async () => {

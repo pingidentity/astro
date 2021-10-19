@@ -35,7 +35,7 @@ const SelectFieldWrapper = forwardRef((props, ref) => {
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <SelectFieldWrapper {...defaultProps} {...props}>
-    {item => <Item key={item.name}>{item.name}</Item>}
+    {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
   </SelectFieldWrapper>
 ));
 
@@ -243,6 +243,15 @@ test('two listbox can not be open at the same time', () => {
   expect(screen.queryByRole('option', { name: 'Whiskey' })).toBeInTheDocument();
 });
 
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const button = screen.queryByRole('button');
+  userEvent.click(button);
+  const options = screen.queryAllByRole('option');
+
+  expect(options).toHaveLength(items.length);
+  expect(options[0]).toHaveAttribute('data-id', items[0].name);
+});
 
 describe('async loading', () => {
   test('displays a loader while loading', () => {

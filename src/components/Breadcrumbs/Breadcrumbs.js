@@ -38,6 +38,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
       {children.map((child, idx) => (
         <Fragment key={`fragment-${child.key}`}>
           <BreadcrumbItem
+            data-id={child['data-id']}
             isCurrent={idx === children.length - 1}
             onAction={onAction}
             actionKey={child.key}

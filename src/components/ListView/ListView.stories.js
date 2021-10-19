@@ -75,8 +75,21 @@ const ListElement = ({ item }) => (
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items} >
     {item => (
-      <Item key={item.name} textValue={item.name}>
-        <ListElement item={item} />
+      <Item key={item.name} textValue={item.name} data-id={item.key}>
+        <Box isRow >
+          <Box isRow mr="auto" alignSelf="center" >
+            <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
+            <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
+          </Box>
+          <Box isRow alignSelf="center">
+            <IconButton aria-label="create-icon" size={20} >
+              <CreateIcon />
+            </IconButton>
+            <IconButton aria-label="create-icon" size={20} >
+              <MoreVertIcon />
+            </IconButton>
+          </Box>
+        </Box>
       </Item>
     )}
   </ListView>

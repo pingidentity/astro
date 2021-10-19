@@ -63,8 +63,8 @@ const messageText = [
 
 export const Default = args => (
   <Messages {...args} items={messages}>
-    <Item key="message1">Here is a very neutral thing</Item>
-    <Item key="message2" status="success">Form saved successfully</Item>
+    <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
+    <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
   </Messages>
 );
 

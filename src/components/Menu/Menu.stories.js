@@ -66,13 +66,13 @@ export default {
 export const Default = ({ ...args }) => {
   return (
     <Menu aria-label="Example Menu" {...args}>
-      <Item key="edit" textValue="Edit">
+      <Item key="edit" textValue="Edit" data-id="edit">
         <Text>Edit</Text>
       </Item>
-      <Item key="duplicate" textValue="Duplicate">
+      <Item key="duplicate" textValue="Duplicate" data-id="duplicate">
         <Text>Duplicate</Text>
       </Item>
-      <Item key="delete" textValue="Delete">
+      <Item key="delete" textValue="Delete" data-id="delete">
         <Text color="critical.bright">Delete</Text>
       </Item>
     </Menu>
