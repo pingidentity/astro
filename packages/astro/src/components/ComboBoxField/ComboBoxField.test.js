@@ -20,7 +20,7 @@ const defaultProps = {
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props}>
-      {item => <Item key={item.id}>{item.name}</Item>}
+      {item => <Item key={item.id} data-id={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 ));
@@ -184,6 +184,16 @@ test('should open list on focus when menuTrigger is set to use focus', () => {
   userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
+});
+
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const button = screen.queryByRole('button');
+  userEvent.click(button);
+  const options = screen.queryAllByRole('option');
+
+  expect(options).toHaveLength(items.length);
+  expect(options[0]).toHaveAttribute('data-id', items[0].name);
 });
 
 test('should invoke onInputChange', () => {
