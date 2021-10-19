@@ -280,8 +280,8 @@ const helpHint = {
 const inline = {
   ...base,
   bg: 'white',
-  height: '26px',
-  lineHeight: '26px',
+  height: '22px',
+  lineHeight: 1,
   fontSize: '14px',
   borderRadius: '15px',
   border: '1px solid',
