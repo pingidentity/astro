@@ -44,6 +44,7 @@ const ListView = forwardRef((props, ref) => {
     selectedKeys,
     onLoadMore,
     onSelectionChange,
+    selectionMode,
   } = props;
 
 
@@ -90,7 +91,7 @@ const ListView = forwardRef((props, ref) => {
     disabledKeys,
     selectedKeys,
     collection: gridCollection,
-    selectionMode: 'single',
+    selectionMode,
     onSelectionChange,
     loadingState,
   });
@@ -180,6 +181,8 @@ ListView.propTypes = {
    * `selectedKeys="all"` can be used to select every key.
    */
   selectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  /** The type of selection that is allowed in the collection. */
+  selectionMode: PropTypes.oneOf(['none', 'single', 'multiple']),
   /** Callback function that fires when the selected key changes. */
   onSelectionChange: PropTypes.func,
   /**
@@ -192,6 +195,7 @@ ListView.propTypes = {
 
 ListView.defaultProps = {
   'aria-label': 'listView',
+  'selectionMode': 'single',
 };
 
 export default ListView;
