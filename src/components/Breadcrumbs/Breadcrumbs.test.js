@@ -24,6 +24,7 @@ const getComponent = (props = {}, itemProps = {}) =>
       {testItemsArr.map((testItem, idx) => (
         <Item
           key={testItem}
+          data-id={testItem}
           {...itemProps}
           isCurrent={idx === testItemsArr.length - 1}
         >
@@ -99,4 +100,11 @@ test('breadcrumbs will use onAction if provided', () => {
   getComponent({}, { elementType: 'Button', onAction: mockOnAction });
   userEvent.click(screen.getByText(testItemsArr[0]));
   expect(mockOnAction).toHaveBeenCalled();
+});
+
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const item = screen.getByText(testItemsArr[0]);
+  expect(item).toBeInTheDocument();
+  expect(item).toHaveAttribute('data-id', testItemsArr[0]);
 });

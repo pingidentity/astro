@@ -54,7 +54,7 @@ export default {
 export const Default = (args) => {
   return (
     <AccordionGroup {...args}>
-      <Item key="accordionKey" textValue="accordionKey" label="Accordion Label">
+      <Item key="accordionKey" textValue="accordionKey" label="Accordion Label" data-id="accordionItem">
         <Text>Render me!</Text>
       </Item>
     </AccordionGroup>

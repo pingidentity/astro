@@ -13,13 +13,13 @@ const defaultProps = {
 
 const getComponent = (props = {}) => render((
   <AccordionGroup {...defaultProps} {...props} >
-    <Item key="first" textValue="Duplicate">
+    <Item key="first" textValue="Duplicate" data-id="first">
       <Text>Render me!</Text>
     </Item>
-    <Item key="second" textValue="Duplicate">
+    <Item key="second" textValue="Duplicate" data-id="second">
       <Text>Render me!</Text>
     </Item>
-    <Item key="third" textValue="Duplicate">
+    <Item key="third" textValue="Duplicate" data-id="third">
       <Text>Render me!</Text>
     </Item>
   </AccordionGroup>
@@ -149,4 +149,12 @@ test('expanded keys expands an accordion item', () => {
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+});
+
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const buttons = screen.getAllByRole('button');
+  const selectedItem = buttons[0];
+  const { parentElement } = selectedItem;
+  expect(parentElement).toHaveAttribute('data-id', 'first');
 });

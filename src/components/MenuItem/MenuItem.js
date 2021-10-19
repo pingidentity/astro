@@ -35,7 +35,7 @@ const MenuItem = forwardRef((props, ref) => {
     closeOnSelect,
   } = useMenuContext();
   const { key, rendered, props: itemProps } = item;
-  const { isSeparator, isPressed: propIsPressed } = itemProps;
+  const { isSeparator, isPressed: propIsPressed, 'data-id': dataId } = itemProps;
   const isDisabled = propIsDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectionManager.isSelected(key);
   const menuItemRef = useRef();
@@ -76,6 +76,7 @@ const MenuItem = forwardRef((props, ref) => {
       className={classNames}
       ref={menuItemRef}
       variant={isSeparator ? 'menuItem.separator' : 'menuItem.item'}
+      data-id={dataId}
       {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps)}
     >
       {rendered}
@@ -107,6 +108,7 @@ MenuItem.propTypes = {
     'aria-label': PropTypes.string,
     key: PropTypes.string,
     props: PropTypes.shape({
+      'data-id': PropTypes.string,
       isSeparator: PropTypes.bool,
     }),
     rendered: PropTypes.node,

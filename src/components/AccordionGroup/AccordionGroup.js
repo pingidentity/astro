@@ -33,7 +33,7 @@ const AccordionGroup = forwardRef((props, ref) => {
     <AccordionContext.Provider value={state} >
       <Box ref={accordionRef} {...accordionProps} {...others}>
         {Array.from(state.collection).map(item => (
-          <AccordionItem key={item.key} item={item}>
+          <AccordionItem key={item.key} item={item} data-id={item['data-id']}>
             {item.props.children}
           </AccordionItem>
         ))}

@@ -45,6 +45,7 @@ const Message = forwardRef((props, ref) => {
     color,
     icon = icons[status],
     isHidden = false,
+    'data-id': dataId,
   } = itemProps;
 
   const { classNames: statusClasses } = useStatusClasses(className, {
@@ -79,6 +80,7 @@ const Message = forwardRef((props, ref) => {
       sx={{
         maxHeight: !isHidden ? innerHeight : 0,
       }}
+      data-id={dataId}
     >
       <Box ref={innerRef}>
         <Box

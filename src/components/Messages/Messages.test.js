@@ -32,8 +32,8 @@ const items = [
 
 const getComponent = (props = {}, renderFn = render) => renderFn(
   <Messages {...defaultProps} {...props}>
-    <Item key="message1">Here is a very neutral thing</Item>
-    <Item key="message2" status="success">Form saved successfully</Item>
+    <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
+    <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
   </Messages>,
 );
 
@@ -117,6 +117,12 @@ test('click on close button removes message after delay', () => {
   setTimeout(() => {
     expect(messages.childElementCount).toBe(1);
   }, 200);
+});
+
+test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+  getComponent();
+  const { firstChild: firstMessage } = screen.getByTestId(testId);
+  expect(firstMessage).toHaveAttribute('data-id', 'message1');
 });
 
 describe('announcements', () => {

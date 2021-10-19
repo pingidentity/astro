@@ -22,7 +22,7 @@ const Option = forwardRef((props, ref) => {
   } = item;
 
   const state = useContext(ListBoxContext);
-  const { isSeparator } = itemProps;
+  const { isSeparator, 'data-id': dataId } = itemProps;
   // Get props for the option element
   const optionRef = useRef();
   /* istanbul ignore next */
@@ -50,6 +50,7 @@ const Option = forwardRef((props, ref) => {
       isRow
       ref={optionRef}
       variant="listBox.option"
+      data-id={dataId}
       className={classNames}
       {...optionProps}
       {...others}
