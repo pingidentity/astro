@@ -17,13 +17,13 @@ const RequirementsList = forwardRef((props, ref) => {
   const statusIconRender = (status) => {
     switch (status) {
       case 'success':
-        return <Icon icon={SuccessCircle} color="success.bright" mr="sm" size={18} />;
+        return <Icon icon={SuccessCircle} color="success.bright" mr="sm" size={18} data-testid={`status-icon__${status}`} />;
       case 'warning':
-        return <Icon icon={WarningCircle} color="warning.bright" mr="sm" size={18} />;
+        return <Icon icon={WarningCircle} color="warning.bright" mr="sm" size={18} data-testid={`status-icon__${status}`} />;
       case 'error':
-        return <Icon icon={ErrorCircle} color="critical.bright" mr="sm" size={18} />;
+        return <Icon icon={ErrorCircle} color="critical.bright" mr="sm" size={18} data-testid={`status-icon__${status}`} />;
       default:
-        return <Icon icon={DefaultCircle} color="neutral.40" mr="sm" size={18} />;
+        return <Icon icon={DefaultCircle} color="neutral.40" mr="sm" size={18} data-testid={`status-icon__${status}`} />;
     }
   };
 
