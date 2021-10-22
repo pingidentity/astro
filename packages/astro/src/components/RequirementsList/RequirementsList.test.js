@@ -12,6 +12,12 @@ const emotionCache = createCache({ key: 'requirements-test' });
 emotionCache.compat = true;
 
 const testId = 'test-requirements-list';
+
+const testStatusIdDefault = 'status-icon__default';
+const testStatusIdSuccess = 'status-icon__success';
+const testStatusIdWarning = 'status-icon__warning';
+const testStatusIdError = 'status-icon__error';
+
 const testRequirements = [
   {
     name: '6 characters',
@@ -60,4 +66,53 @@ test('empty variables requirements list', () => {
   const requirementsList = screen.getByTestId(testId);
   expect(requirementsList).toBeInstanceOf(HTMLDivElement);
   expect(requirementsList).toBeInTheDocument();
+});
+
+
+test('should render default status icon if such passed in props', () => {
+  getComponent({
+    requirements: [
+      {
+        name: '6 characters',
+        status: 'default',
+      },
+    ],
+  });
+  expect(screen.getByTestId(testStatusIdDefault)).toBeInTheDocument();
+});
+
+test('should render success status icon if such passed in props', () => {
+  getComponent({
+    requirements: [
+      {
+        name: '6 characters',
+        status: 'success',
+      },
+    ],
+  });
+  expect(screen.getByTestId(testStatusIdSuccess)).toBeInTheDocument();
+});
+
+test('should render warning status icon if such passed in props', () => {
+  getComponent({
+    requirements: [
+      {
+        name: '6 characters',
+        status: 'warning',
+      },
+    ],
+  });
+  expect(screen.getByTestId(testStatusIdWarning)).toBeInTheDocument();
+});
+
+test('should render error status icon if such passed in props', () => {
+  getComponent({
+    requirements: [
+      {
+        name: '6 characters',
+        status: 'error',
+      },
+    ],
+  });
+  expect(screen.getByTestId(testStatusIdError)).toBeInTheDocument();
 });
