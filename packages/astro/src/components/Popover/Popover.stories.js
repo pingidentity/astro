@@ -6,9 +6,10 @@ import Popover from '../Popover/Popover';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import Link from '../Link/Link';
+import withDeprecationWarning from '../../utils/devUtils/decorators/withDeprecationWarning';
 
 export default {
-  title: 'Popover',
+  title: 'Deprecated/Popover',
   component: Popover,
   argTypes: {
     content: {
@@ -18,6 +19,9 @@ export default {
       defaultValue: 'Hi, I\'m a popover!',
     },
   },
+  decorators: [
+    (Story, context) => withDeprecationWarning(Story, context, '`Popover` will be deprecated in Astro-UI 1.0.0, use `PopoverMenu` for menus instead. Or `Tooltip` when it is available.'),
+  ],
 };
 
 export const Default = ({ ...args }) => (
