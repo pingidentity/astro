@@ -3,6 +3,7 @@ const base = {
   fontSize: 'md',
   color: 'text.primary',
   fontFamily: 'standard',
+  overflowWrap: 'break-word',
 };
 
 const wordWrap = {
