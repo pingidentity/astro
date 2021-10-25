@@ -2,6 +2,7 @@ import React from 'react';
 import Text from './Text';
 import { textVariants } from '../../utils/devUtils/constants/variants.js';
 import { flatColorList } from '../../styles/colors.js';
+import { Box } from '../../index';
 
 export default {
   title: 'Text',
@@ -60,4 +61,12 @@ export const Default = ({ children, bg, ...args }) => (
   <Text bg={bg} {...args} p="xl">
     {children}
   </Text>
+);
+
+export const WithCustomWidth = () => (
+  <Box width={200}>
+    <Text p="xl">
+      superlongtextinonelinewithnowhitespacessoitcanbelongerthatanywidth
+    </Text>
+  </Box>
 );
