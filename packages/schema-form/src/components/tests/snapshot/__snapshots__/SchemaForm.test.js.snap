@@ -27,6 +27,7 @@ exports[`form elements form success message 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   margin: 40px;
 }
 
@@ -184,6 +185,7 @@ exports[`single fields checkbox field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -308,6 +310,7 @@ input:checked~.emotion-7 {
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   padding-top: 3px;
 }
 
@@ -527,6 +530,7 @@ exports[`single fields checkboxes field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -651,6 +655,7 @@ input:focus~.emotion-8 {
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
 }
 
 .emotion-10 {
@@ -1049,6 +1054,7 @@ exports[`single fields password field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -1065,6 +1071,7 @@ exports[`single fields password field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -1723,6 +1730,7 @@ exports[`single fields select field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -1739,6 +1747,7 @@ exports[`single fields select field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -2635,6 +2644,7 @@ exports[`single fields select field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 10px;
@@ -2976,6 +2986,7 @@ exports[`single fields select field with default 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -2992,6 +3003,7 @@ exports[`single fields select field with default 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -3888,6 +3900,7 @@ exports[`single fields select field with default 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 10px;
@@ -4253,6 +4266,7 @@ exports[`single fields string field format email 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -4269,6 +4283,7 @@ exports[`single fields string field format email 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -4950,6 +4965,7 @@ exports[`single fields string field format uri 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -4966,6 +4982,7 @@ exports[`single fields string field format uri 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -5647,6 +5664,7 @@ exports[`single fields string field regular 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -5663,6 +5681,7 @@ exports[`single fields string field regular 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -6344,6 +6363,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -6360,6 +6380,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -7084,6 +7105,7 @@ exports[`single fields string field with help text 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -7100,6 +7122,7 @@ exports[`single fields string field with help text 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -7824,6 +7847,7 @@ exports[`single fields string field with markdown errors 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -7840,6 +7864,7 @@ exports[`single fields string field with markdown errors 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -8521,6 +8546,7 @@ exports[`single fields string field with placeholder 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -8537,6 +8563,7 @@ exports[`single fields string field with placeholder 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -9195,6 +9222,7 @@ exports[`single fields textarea field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   cursor: pointer;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -9211,6 +9239,7 @@ exports[`single fields textarea field 1`] = `
   font-size: 15px;
   color: #253746;
   font-family: "Helvetica Neue",Helvetica,sans-serif;
+  overflow-wrap: break-word;
   width: auto;
   -webkit-align-items: center;
   -webkit-box-align: center;
