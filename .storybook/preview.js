@@ -46,7 +46,6 @@ export const parameters = {
           'TextAreaField',
           'TextField',
           'Base Components',
-          'DropdownField',
         ],
       ],
     },

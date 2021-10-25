@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import DropdownField from '.';
 import Box from '../Box/Box';
 import statuses from '../../utils/devUtils/constants/statuses';
+import withDeprecationWarning from '../../utils/devUtils/decorators/withDeprecationWarning';
 
 export default {
-  title: 'Form/DropdownField',
+  title: 'Deprecated/DropdownField',
   component: DropdownField,
   argTypes: {
     defaultValue: {},
@@ -59,6 +60,9 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story, context) => withDeprecationWarning(Story, context, '`DropdownField` will be deprecated in Astro-UI 1.0.0, use `SelectField` instead.'),
+  ],
 };
 
 export const Default = args => (
