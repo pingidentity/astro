@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@2.0.0-alpha.2...@pingux/schema-form@2.0.0-alpha.3) (2021-10-26)
+
+
+### Bug Fixes
+
+* [UIP-4872] Add Overflow for Text Component ([ab9742e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab9742eb6b40763f2dde787eb1dbe9d4e7920bf0))
+* [UIP-4881, UIP-4909] Upgrade Schema Form to Astro 0.19.1 (pre-ThemeUI) ([244ff8c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/244ff8c563d84295a4a53fa0f555f7fa3549f3c8))
+
+
+### Features
+
+* [UIP-4835] Number Field Component ([38e5d9b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/38e5d9bf92720d293f793b809e2500352b2efb3a))
+
+
+
+
+
 # [2.0.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@2.0.0-alpha.1...@pingux/schema-form@2.0.0-alpha.2) (2021-10-19)
 
 
