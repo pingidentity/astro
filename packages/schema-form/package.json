@@ -40,7 +40,7 @@
     "@emotion/jest": "^11.2.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "11.3.0",
-    "@pingux/astro": "^0.8.1",
+    "@pingux/astro": "^0.19.1",
     "@pingux/end-user": "^1.5.6",
     "@rjsf/core": "2.0.0",
     "@storybook/addon-actions": "^6.0.21",
