@@ -125,3 +125,8 @@ input.containedIcon = {
   top: '50%',
   transform: 'translate(-50%, -50%)',
 };
+
+input.numberField = {
+  ...input,
+  pr: '27px',
+};
