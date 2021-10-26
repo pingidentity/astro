@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.33.0...@pingux/astro@0.34.0) (2021-10-26)
+
+
+### Bug Fixes
+
+* [UIP-4872] Add Overflow for Text Component ([ab9742e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab9742eb6b40763f2dde787eb1dbe9d4e7920bf0))
+* [UIP-4884] ListView loadingState prop fix ([6668605](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6668605ea4accad1f0b6f753501036b2745a119f))
+* [UIP-4893] Size of loader for ImageUploadField ([feb5dcc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/feb5dcc8135026f1c4fb40b3c793a0a0cb0499bf))
+* [UIP-4907] PasswordField Requirements update ([b17a193](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b17a1938102c8bdb6e446f799a39bbd4408c4fb6))
+
+
+### Features
+
+* [UIP-4835] Number Field Component ([38e5d9b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/38e5d9bf92720d293f793b809e2500352b2efb3a))
+* [UIP-4897] Clarify Deprecated Components within Storybook ([fc2f78b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fc2f78b753bb18f52fbbde82e7378e3bd9a28ac3))
+
+
+
+
+
 # [0.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.32.0...@pingux/astro@0.33.0) (2021-10-19)
 
 
