@@ -18,6 +18,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     defaultPreviewImage,
     isImageType,
     isLoading,
+    loaderSize,
     isMenuOpen,
     previewImage,
     previewWidth,
@@ -58,8 +59,9 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     >
       <Loader
         color={isFocusVisible || isMenuOpen ? 'active' : 'white'}
-        size="sm"
+        size={loaderSize}
         sx={{ zIndex: 1 }}
+        data-testid="image-preview-button__loader"
       />
 
       {(previewImage || previewImage === defaultPreviewImage || !isImageType) && (
@@ -109,6 +111,7 @@ ImagePreviewButton.propTypes = {
   isImageType: PropTypes.bool,
   isLoading: PropTypes.bool,
   isMenuOpen: PropTypes.bool,
+  loaderSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   previewImage: PropTypes.string,
   previewWidth: PropTypes.number,
   widthHeightSx: PropTypes.shape({
