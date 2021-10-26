@@ -37,6 +37,7 @@ export const parameters = {
           'ColorField',
           'ComboBoxField',
           'ImageUploadField',
+          'NumberField',
           'LinkSelectField',
           'PasswordField',
           'RadioGroupField',

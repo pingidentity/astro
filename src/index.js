@@ -68,6 +68,9 @@ export * from './components/ImageUploadField';
 export { default as Input } from './components/Input';
 export * from './components/Input';
 
+export { default as NumberField } from './components/NumberField';
+export * from './components/NumberField';
+
 export { default as Label } from './components/Label';
 export * from './components/Label';
 
