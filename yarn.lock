@@ -4488,6 +4488,24 @@
     "@react-types/menu" "^3.3.0"
     "@react-types/shared" "^3.8.0"
 
+"@react-aria/numberfield@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/numberfield/-/numberfield-3.1.0.tgz#b9be9930276e8c6ccaba821e775ca67155d8784c"
+  integrity sha1-ub6ZMCdujGzKuoIed1ymcVXYeEw=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.3.2"
+    "@react-aria/interactions" "^3.6.0"
+    "@react-aria/live-announcer" "^3.0.1"
+    "@react-aria/spinbutton" "^3.0.1"
+    "@react-aria/textfield" "^3.4.0"
+    "@react-aria/utils" "^3.9.0"
+    "@react-stately/numberfield" "^3.0.2"
+    "@react-types/button" "^3.4.1"
+    "@react-types/numberfield" "^3.1.0"
+    "@react-types/shared" "^3.9.0"
+    "@react-types/textfield" "^3.3.0"
+
 "@react-aria/overlays@^3.6.0", "@react-aria/overlays@^3.7.2":
   version "3.7.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/overlays/-/overlays-3.7.2.tgz#dca7693c0ec31371b19c2f51b482f03819b8c391"
@@ -4670,6 +4688,18 @@
     "@react-aria/utils" "^3.8.0"
     "@react-types/button" "^3.3.1"
     "@react-types/shared" "^3.6.0"
+
+"@react-aria/spinbutton@^3.0.1":
+  version "3.0.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/spinbutton/-/spinbutton-3.0.1.tgz#e0d5595e1c74518ca46acdeebf7bd19022ee5d50"
+  integrity sha1-4NVZXhx0UYykas3uv3vRkCLuXVA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-aria/i18n" "^3.3.2"
+    "@react-aria/live-announcer" "^3.0.1"
+    "@react-aria/utils" "^3.8.2"
+    "@react-types/button" "^3.4.1"
+    "@react-types/shared" "^3.8.0"
 
 "@react-aria/ssr@^3.0.2":
   version "3.0.2"
@@ -5046,6 +5076,17 @@
     "@react-types/menu" "^3.3.0"
     "@react-types/shared" "^3.8.0"
 
+"@react-stately/numberfield@^3.0.2":
+  version "3.0.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/numberfield/-/numberfield-3.0.2.tgz#2e2831e60cafb7cc4b3124fe5f135a7bbd70e590"
+  integrity sha1-Ligx5gyvt8xLMST+XxNae71w5ZA=
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@internationalized/number" "^3.0.2"
+    "@react-stately/utils" "^3.2.2"
+    "@react-types/numberfield" "^3.0.1"
+    "@react-types/shared" "^3.8.0"
+
 "@react-stately/overlays@^3.1.1", "@react-stately/overlays@^3.1.2":
   version "3.1.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/overlays/-/overlays-3.1.2.tgz#6fd5c9cccbd4e6e1a8d519fd8e6c5e784e1403f0"
@@ -5388,6 +5429,13 @@
   integrity sha1-BMxXZB9PEZiZHG1LA8xTn/WcwQc=
   dependencies:
     "@react-types/shared" "^3.6.0"
+
+"@react-types/numberfield@^3.0.1", "@react-types/numberfield@^3.1.0":
+  version "3.1.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/numberfield/-/numberfield-3.1.0.tgz#30aff4352a24797a235a74e538a8dd86c5c60af3"
+  integrity sha1-MK/0NSokeXojWnTlOKjdhsXGCvM=
+  dependencies:
+    "@react-types/shared" "^3.9.0"
 
 "@react-types/overlays@^3.2.1", "@react-types/overlays@^3.4.0", "@react-types/overlays@^3.5.0":
   version "3.5.0"
