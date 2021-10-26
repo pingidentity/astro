@@ -47,6 +47,9 @@ const ListView = forwardRef((props, ref) => {
     selectionMode,
   } = props;
 
+  const isLoading = (
+    loadingState === loadingStates.LOADING_MORE || loadingState === loadingStates.LOADING
+  );
 
   const renderWrapper = (parent, reusableView) => (
     <VirtualizerItem
@@ -93,7 +96,6 @@ const ListView = forwardRef((props, ref) => {
     collection: gridCollection,
     selectionMode,
     onSelectionChange,
-    loadingState,
   });
 
   const layout = useListLayout(state);
@@ -114,7 +116,7 @@ const ListView = forwardRef((props, ref) => {
     loadingState,
   }, state, listViewRef);
   // Sync loading state into the layout.
-  layout.isLoading = loadingState;
+  layout.isLoading = isLoading;
 
   let focusedKey = state.selectionManager.focusedKey;
   const focusedItem = gridCollection.getItem(state.selectionManager.focusedKey);
@@ -133,8 +135,8 @@ const ListView = forwardRef((props, ref) => {
         sizeToFit="height"
         scrollDirection="vertical"
         layout={layout}
+        isLoading={isLoading}
         collection={gridCollection}
-        isLoading={loadingState === loadingStates.LOADING_MORE}
         transitionDuration={0}
       >
         {(type, item) => {
