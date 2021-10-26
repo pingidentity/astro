@@ -32,56 +32,59 @@ export const Default = (args) => {
 };
 
 export const WithRequirementsList = () => {
-  const [requirements, setRequirements] = useState([
-    {
-      name: '6 characters',
-      status: 'default',
-    },
-    {
-      name: '1 UPPERCASE letter',
-      status: 'default',
-    },
-    {
-      name: '1 lowercase letter',
-      status: 'default',
-    },
-    {
-      name: '1 number',
-      status: 'default',
-    },
-    {
-      name: '1 special character',
-      status: 'default',
-    },
-  ]);
+  const [charactersReq, setCharactersReq] = useState({
+    name: '6 characters',
+    status: statuses.DEFAULT,
+  });
+  const [uppercaseReq, setUppercaseReq] = useState({
+    name: '1 UPPERCASE letter',
+    status: statuses.DEFAULT,
+  });
+  const [lowercaseReq, setLowercaseReq] = useState({
+    name: '1 lowercase letter',
+    status: statuses.DEFAULT,
+  });
+  const [numberReq, setNumberReq] = useState({
+    name: '1 number',
+    status: statuses.DEFAULT,
+  });
+  const [specialReq, setSpecialReq] = useState({
+    name: '1 special character',
+    status: statuses.DEFAULT,
+  });
 
   const checkPasswordExample = (string) => {
     const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
 
-    const newRequirements = requirements;
-
     if (string.length > 5) {
-      newRequirements[0].status = 'success';
+      setCharactersReq(prev => ({ ...prev, status: statuses.SUCCESS }));
     } else {
-      newRequirements[0].status = 'default';
-    } if (string.match(/[A-Z]/) !== null && string.match(/[A-Z]/).length >= 1) {
-      newRequirements[1].status = 'success';
-    } else {
-      newRequirements[1].status = 'default';
-    } if (string.match(/[a-z]/) !== null && string.match(/[a-z]/).length >= 1) {
-      newRequirements[2].status = 'success';
-    } else {
-      newRequirements[2].status = 'default';
-    } if (string.match(/[0-9]/) !== null && string.match(/[0-9]/).length >= 1) {
-      newRequirements[3].status = 'success';
-    } else {
-      newRequirements[3].status = 'default';
-    } if (specialCharacters.test(string)) {
-      newRequirements[4].status = 'success';
-    } else {
-      newRequirements[4].status = 'default';
+      setCharactersReq(prev => ({ ...prev, status: statuses.DEFAULT }));
     }
-    setRequirements(newRequirements);
+
+    if (string.match(/[A-Z]/) !== null && string.match(/[A-Z]/).length >= 1) {
+      setUppercaseReq(prev => ({ ...prev, status: statuses.SUCCESS }));
+    } else {
+      setUppercaseReq(prev => ({ ...prev, status: statuses.DEFAULT }));
+    }
+
+    if (string.match(/[a-z]/) !== null && string.match(/[a-z]/).length >= 1) {
+      setLowercaseReq(prev => ({ ...prev, status: statuses.SUCCESS }));
+    } else {
+      setLowercaseReq(prev => ({ ...prev, status: statuses.DEFAULT }));
+    }
+
+    if (string.match(/[0-9]/) !== null && string.match(/[0-9]/).length >= 1) {
+      setNumberReq(prev => ({ ...prev, status: statuses.SUCCESS }));
+    } else {
+      setNumberReq(prev => ({ ...prev, status: statuses.DEFAULT }));
+    }
+
+    if (specialCharacters.test(string)) {
+      setSpecialReq(prev => ({ ...prev, status: statuses.SUCCESS }));
+    } else {
+      setSpecialReq(prev => ({ ...prev, status: statuses.DEFAULT }));
+    }
   };
 
   const onChange = (event) => {
@@ -92,7 +95,13 @@ export const WithRequirementsList = () => {
     <PasswordField
       label="Example Label"
       onChange={onChange}
-      requirements={requirements}
+      requirements={[
+        charactersReq,
+        uppercaseReq,
+        lowercaseReq,
+        numberReq,
+        specialReq,
+      ]}
     />
   );
 };
