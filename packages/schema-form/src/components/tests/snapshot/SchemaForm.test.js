@@ -73,7 +73,7 @@ describe('single fields', () => {
         id: 'test',
         title: 'Label',
       };
-      const { asFragment } = render(<Form theme="astro" schema={schema} />);
+      const { asFragment } = render(<Form schema={schema} />);
       expect(removeIds(asFragment())).toMatchSnapshot();
     });
 

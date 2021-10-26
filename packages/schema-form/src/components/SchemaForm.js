@@ -5,6 +5,7 @@ import { v4 as v4uuid } from 'uuid';
 import JSONSchemaV4 from 'ajv/lib/refs/json-schema-draft-04.json';
 import Form from '@rjsf/core';
 import { GlobalStyles, ThemeProvider } from '@pingux/astro';
+import useAstroTheme from '@pingux/astro/lib/cjs/styles/useAstroTheme';
 import useStatefulForm from '../hooks/useStatefulForm';
 import { FORM_STATE, FORM_MODE } from '../utils/constants';
 import widgets from '../utils/widgets';
@@ -13,14 +14,6 @@ import ObjectFieldTemplate from './ObjectFieldTemplate';
 import SubmitButton from './SubmitButton';
 import SuccessMessage from './SuccessMessage';
 import endUserTheme from '../../../../shared/themes/end-user/endUserTheme';
-import astroTheme from '../../../astro/src/styles/theme';
-
-function getTheme(themeName) {
-  if (themeName === 'end-user') {
-    return endUserTheme;
-  }
-  return astroTheme;
-}
 
 const SchemaForm = (props) => {
   const {
@@ -51,12 +44,14 @@ const SchemaForm = (props) => {
     return v4uuid();
   }, []);
 
+  const astroTheme = useAstroTheme();
+
   // Use provided custom theme or retrieve existing.
   let themeObject;
   if (theme && typeof theme !== 'string') {
     themeObject = theme;
   } else {
-    themeObject = getTheme(theme);
+    themeObject = theme === 'end-user' ? endUserTheme : astroTheme;
   }
 
   if (formState === FORM_STATE.SUCCESS) {
