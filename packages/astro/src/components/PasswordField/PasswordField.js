@@ -34,13 +34,8 @@ const PasswordField = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const checkRequirements = () => {
-    let met = true;
-    if (requirements.filter(req => req.status === 'default').length > 0) {
-      met = false;
-    }
-    return met;
-  };
+  const checkRequirements = () =>
+    !requirements.filter(req => req.status === 'default').length > 0;
 
   const {
     fieldContainerProps,
@@ -105,7 +100,7 @@ const PasswordField = forwardRef((props, ref) => {
   };
 
   const { classNames } = useStatusClasses(fieldControlProps.className, {
-    'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 1),
+    'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
 
   return (
