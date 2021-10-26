@@ -15,7 +15,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
  * The Image Upload Field component gives users the ability to upload a file (image by default).
  */
 const ImageUploadField = forwardRef((props, ref) => {
-  const { isLoading, onRemove } = props;
+  const { isLoading, loaderSize, onRemove } = props;
   const inputRef = useRef();
   const state = useImageUploadState(props, inputRef);
   /* istanbul ignore next */
@@ -55,6 +55,7 @@ const ImageUploadField = forwardRef((props, ref) => {
     >
       <ImagePreviewButton
         isLoading={isLoading}
+        loaderSize={loaderSize}
         previewImage={state.previewImage}
         defaultPreviewImage={props?.defaultPreviewImage}
         isImageType={state.isImageType}
@@ -101,6 +102,8 @@ ImageUploadField.propTypes = {
    * `(event: InputEvent) => void`
    * */
   onChange: PropTypes.func,
+  /** Loading indicator size */
+  loaderSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** The handler that is called when the file is removed.
    *
    * `(event: InputEvent) => void`
@@ -116,6 +119,7 @@ ImageUploadField.propTypes = {
 
 ImageUploadField.defaultProps = {
   fileTypes: ['image'],
+  loaderSize: 10,
   previewHeight: 50,
   previewWidth: 50,
 };

@@ -163,7 +163,9 @@ test('should render the file name when file type is not image', () => {
 test('should render default preview image if defined initially', () => {
   getComponent({ defaultPreviewImage: 'some-image' });
   expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
-  expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
+  expect(
+    screen.queryByTestId(imageUploadNoImagePreview),
+  ).not.toBeInTheDocument();
 });
 
 test('should render new preview image if defined later', () => {
@@ -173,7 +175,9 @@ test('should render new preview image if defined later', () => {
 
   getComponent({ defaultPreviewImage: 'some-image' }, { renderFn: rerender });
   expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
-  expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
+  expect(
+    screen.queryByTestId(imageUploadNoImagePreview),
+  ).not.toBeInTheDocument();
 });
 
 test('should render loader if isLoading prop is true', () => {
@@ -195,9 +199,22 @@ test('should render loader if isLoading prop is true', () => {
 test('should render image preview and menu when previewImage prop is supplied', () => {
   getComponent({ previewImage: 'test' });
   expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
-  expect(screen.queryByTestId(imageUploadImagePreview)).toHaveAttribute('src', 'test');
-  expect(screen.queryByTestId(imageUploadNoImagePreview)).not.toBeInTheDocument();
+  expect(screen.queryByTestId(imageUploadImagePreview)).toHaveAttribute(
+    'src',
+    'test',
+  );
+  expect(
+    screen.queryByTestId(imageUploadNoImagePreview),
+  ).not.toBeInTheDocument();
   userEvent.click(screen.getByTestId(testButtonId));
   expect(screen.getByText('Upload New Image')).toBeInTheDocument();
   expect(screen.getByText('Remove Image')).toBeInTheDocument();
+});
+
+test('loader size can be changed via the prop', () => {
+  const testLoaderSize = 17;
+  getComponent({ isLoading: true, loaderSize: testLoaderSize });
+  expect(screen.getByTestId('image-preview-button__loader')).toHaveStyle({
+    'font-size': `${testLoaderSize}px`,
+  });
 });
