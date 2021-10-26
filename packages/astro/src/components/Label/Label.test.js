@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Label from '.';
 import Input from '../Input';
 import axeTest from '../../utils/testUtils/testAxe';
@@ -54,4 +54,7 @@ test('label with helpHint', () => {
   getComponent({ hintText });
   const button = screen.getByRole('button');
   expect(button).toBeInTheDocument();
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+  expect(screen.getByText(hintText)).toBeInTheDocument();
 });

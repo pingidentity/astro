@@ -9,6 +9,7 @@ import modal from './modal';
 import menu from './menu';
 import menuItem from './menuItem';
 import messages from './messages';
+import numberField from './numberField';
 import popover from './popover';
 import overlayPanel from './overlayPanel';
 import popoverMenu from './popoverMenu';
@@ -32,6 +33,7 @@ export default {
   menuItem,
   messages,
   modal,
+  numberField,
   overlayPanel,
   popover,
   popoverMenu,
