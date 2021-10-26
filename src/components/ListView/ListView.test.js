@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { FocusScope } from '@react-aria/focus';
 import { Item } from '@react-stately/collections';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 import ListView from './ListView';
 
@@ -115,10 +116,21 @@ test('clicking an item fires "onSelectionChange" handler and returns Set with ke
   expect(_.isEqual(expectedResult, selectedItems)).toBeTruthy();
 });
 
-test('renders loader, if a loader component is passed in', () => {
-  getComponent({ loadingState: 'loading' });
+test('renders loader, if a loader component is passed in, and state is loading', () => {
+  getComponent({ loadingState: loadingStates.LOADING });
   const loader = screen.getByRole('progressbar');
   expect(loader).toBeInTheDocument();
+});
+
+test('renders loader, if a loader component is passed in, and state is loadingMore', () => {
+  getComponent({ loadingState: loadingStates.LOADING_MORE });
+  const loader = screen.getByRole('progressbar');
+  expect(loader).toBeInTheDocument();
+});
+
+test('does not render loader, if loadingState is not loadingMore', () => {
+  getComponent({ loadingState: loadingStates.SORTING });
+  expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
 });
 
 test('renders neither loader nor item if the component is given no items nor a loading state prop', () => {
