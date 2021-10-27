@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { OverlayProvider } from '@react-aria/overlays';
 import { useAsyncList } from '@react-stately/data';
+import { Section } from '@react-stately/collections';
 import { SelectField, Item, Separator } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
@@ -24,6 +25,21 @@ const animals = [
   { name: 'Goat', id: '15' },
 ];
 
+const withSection = [
+  { name: 'Animals',
+    children: [
+      { name: 'Aardvark' },
+      { name: 'Kangaroo' },
+      { name: 'Snake' },
+    ] },
+  { name: 'People',
+    children: [
+      { name: 'Michael' },
+      { name: 'Dwight' },
+      { name: 'Creed' },
+    ] },
+];
+
 export default {
   title: 'Form/SelectField',
   component: SelectField,
@@ -39,7 +55,7 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'What\'s your favourite color?',
+      defaultValue: 'Example Label',
     },
     placeholder: {},
     defaultText: {},
@@ -92,6 +108,18 @@ export const Default = args => (
       <Item key="red">Red</Item>
       <Item key="blue">Blue</Item>
       <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
+);
+
+export const WithSections = args => (
+  <OverlayProvider>
+    <SelectField items={withSection} {...args}>
+      {section => (
+        <Section key={section.name} items={section.children} title={section.name}>
+          {item => <Item key={item.name}>{item.name}</Item>}
+        </Section>
+      )}
     </SelectField>
   </OverlayProvider>
 );
