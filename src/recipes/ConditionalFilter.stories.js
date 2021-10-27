@@ -74,7 +74,7 @@ export const Default = () => {
         <Button onPress={setStaticOverviewVisible}>Open Panel</Button>
         {
           staticOverviewVisible &&
-          <OverlayPanel>
+          <OverlayPanel isOpen={staticOverviewVisible}>
             <Box>
               <Box bg="accent.99" p="md">
                 <Box isRow>
@@ -186,7 +186,7 @@ export const Default = () => {
         }
         {
           editOverviewVisible &&
-          <OverlayPanel>
+          <OverlayPanel isOpen={editOverviewVisible}>
             <Box bg="accent.99" p="md" >
               <Text variant="itemTitle" pb="md">Branch Condition</Text>
               <Box isRow alignItems="center" mb="md">
