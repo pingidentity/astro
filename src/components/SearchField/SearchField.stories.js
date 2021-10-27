@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users } from '@pingux/icons';
+import Users from 'mdi-react/AccountGroupIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 
 

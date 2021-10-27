@@ -1,5 +1,6 @@
 import React from 'react';
-import { Clear, Welcome } from '@pingux/icons';
+import Clear from 'mdi-react/CloseIcon';
+import Welcome from 'mdi-react/EmoticonHappyIcon';
 import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import CreateIcon from 'mdi-react/CreateIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';

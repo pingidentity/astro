@@ -23,7 +23,6 @@
     "build": "rm -rf lib && npm-run-all build:*",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs",
     "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/",
-    "build:icons": "cd ../icons && yarn build",
     "chromatic": "npx chromatic",
     "coverage": "yarn test --coverage",
     "coverage-ci": "yarn test --coverage --ci",
@@ -72,7 +71,6 @@
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
-    "@pingux/icons": "^0.5.0",
     "@react-aria/accordion": "3.0.0-alpha.1",
     "@react-aria/breadcrumbs": "^3.1.4",
     "@react-aria/button": "^3.2.1",

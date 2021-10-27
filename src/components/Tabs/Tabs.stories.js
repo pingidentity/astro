@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Earth } from '@pingux/icons';
+import Earth from 'mdi-react/GlobeModelIcon';
 import Tabs from './Tabs';
 import Tab from '../Tab';
 import Icon from '../Icon';

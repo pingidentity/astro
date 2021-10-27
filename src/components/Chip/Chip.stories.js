@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clear } from '@pingux/icons';
+import Clear from 'mdi-react/CloseIcon';
 import Chip from '../Chip/Chip';
 import Icon from '../Icon/Icon';
 import { flatColorList } from '../../styles/colors.js';
@@ -41,6 +41,6 @@ export const ChipWithCustomColors = () => (
 
 export const ChipWithIcon = () => (
   <Chip label="Chip with Icon" bg="navy">
-    <Icon icon={Clear} ml="xs" size="10px" color="white" />
+    <Icon icon={Clear} ml="xs" size="14px" color="white" />
   </Chip>
 );

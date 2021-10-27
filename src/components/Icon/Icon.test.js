@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Earth } from '@pingux/icons';
+import Earth from 'mdi-react/EarthIcon';
 import Icon from '../Icon';
 import axeTest from '../../utils/testUtils/testAxe';
 
