@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@pingux/icons';
+import Link from 'mdi-react/LinkVariantIcon';
 import Chip from '../components/Chip';
 import Text from '../components/Text';
 import Icon from '../components/Icon';
@@ -19,7 +19,7 @@ export const Default = () => (
           bg="#E5E9F8"
           label={
             <Box isRow justifyContent="center">
-              <Icon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
+              <Icon icon={Link} color="#253746" size={15} alignSelf="center" mr="xs" />
               <Text color="#253746" sx={{ textTransform: 'lowercase' }}>user</Text>
             </Box>
           }

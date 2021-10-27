@@ -1,5 +1,5 @@
 import React from 'react';
-import { Earth } from '@pingux/icons';
+import Earth from 'mdi-react/EarthIcon';
 import { Button, Icon, Tooltip, TooltipTrigger } from '../../index';
 import IconButton from '../IconButton';
 
