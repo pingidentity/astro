@@ -47,6 +47,7 @@ const Option = forwardRef((props, ref) => {
   });
   return (
     <Box
+      as="li"
       isRow
       ref={optionRef}
       variant="listBox.option"

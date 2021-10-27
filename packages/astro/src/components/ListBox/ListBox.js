@@ -11,6 +11,7 @@ import { Option } from './index.js';
 import { useAriaLabelWarning } from '../../hooks';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Loader from '../Loader';
+import ListBoxSection from './ListBoxSection';
 
 export const collectionTypes = {
   ITEM: 'item',
@@ -110,13 +111,27 @@ const ListBox = forwardRef((props, ref) => {
     isVirtualized: true,
   }, state, listBoxRef);
 
-  const renderWrapper = (parent, reusableView) => (
-    <VirtualizerItem
-      key={reusableView.key}
-      reusableView={reusableView}
-      parent={parent}
-    />
-  );
+  const renderWrapper = (parent, reusableView, children, renderChildren) => {
+    if (reusableView.viewType === 'section') {
+      return (
+        <ListBoxSection
+          key={reusableView.key}
+          reusableView={reusableView}
+          header={children.find(c => c.viewType === 'header')}
+        >
+          {renderChildren(children.filter(c => c.viewType === 'item'))}
+        </ListBoxSection>
+      );
+    }
+
+    return (
+      <VirtualizerItem
+        key={reusableView.key}
+        reusableView={reusableView}
+        parent={parent}
+      />
+    );
+  };
 
   return (
     <ListBoxContext.Provider value={state}>
@@ -151,7 +166,6 @@ const ListBox = forwardRef((props, ref) => {
               <Loader variant="loader.withinListbox" aria-label="Loading more..." />
             );
           }
-
           return null;
         }}
       </Virtualizer>
