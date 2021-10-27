@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { action } from '@storybook/addon-actions';
+import { Section } from '@react-stately/collections';
 import { useFilter } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
 import { Item, OverlayProvider } from '../../index';
@@ -28,6 +29,21 @@ const animals = [
   { name: 'Shark', id: '13' },
   { name: 'Gorilla', id: '14' },
   { name: 'Goat', id: '15' },
+];
+
+const withSection = [
+  { name: 'Animals',
+    children: [
+      { name: 'Raccoon' },
+      { name: 'Kangaroo' },
+      { name: 'Opossum' },
+    ] },
+  { name: 'People',
+    children: [
+      { name: 'Michael' },
+      { name: 'Dwight' },
+      { name: 'Creed' },
+    ] },
 ];
 
 const actions = {
@@ -102,6 +118,18 @@ export const Default = args => (
   <OverlayProvider>
     <ComboBoxField {...actions} {...args}>
       {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
+);
+
+export const WithSections = args => (
+  <OverlayProvider>
+    <ComboBoxField label="Example label" items={withSection} {...args} >
+      {section => (
+        <Section key={section.name} items={section.children} title={section.name}>
+          {item => <Item key={item.name}>{item.name}</Item>}
+        </Section>
+      )}
     </ComboBoxField>
   </OverlayProvider>
 );

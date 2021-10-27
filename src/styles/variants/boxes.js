@@ -79,6 +79,15 @@ const listViewItem = {
   },
 };
 
+const listBoxSectionTitle = {
+  fontSize: 'sm',
+  fontWeight: '3',
+  color: 'text.secondary',
+  height: '36px',
+  ml: 'sm',
+  justifyContent: 'center',
+};
+
 const chip = {
   cursor: 'pointer',
   height: '15px',
@@ -156,6 +165,7 @@ export default {
   copy,
   inputInContainerSlot,
   listItem,
+  listBoxSectionTitle,
   listViewItem,
   panel,
   radioCheckedContent,
