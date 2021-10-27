@@ -1,5 +1,6 @@
 import React from 'react';
-import { Earth, Cog } from '@pingux/icons';
+import Earth from 'mdi-react/EarthIcon';
+import Cog from 'mdi-react/CogOutlineIcon';
 import Button from '../components/Button/Button';
 import Panel from '../components/Panel/Panel';
 import Box from '../components/Box/Box';
