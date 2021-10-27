@@ -7,6 +7,7 @@ class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
             return (p instanceof go.Link || this.isConnected(p));
         });
 
+        coll.layout.diagram.updateAllTargetBindings();
         super.doLayout(parts);
     }
 
