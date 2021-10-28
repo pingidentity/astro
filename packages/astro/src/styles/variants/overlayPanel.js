@@ -1,6 +1,7 @@
 const overlayPanel = {
   position: 'fixed',
-  zIndex: 100,
+  overflowY: 'scroll',
+  zIndex: 1,
   top: 0,
   bottom: 0,
   right: '-100%',
@@ -12,6 +13,7 @@ const overlayPanel = {
   boxShadow: '-2px 0px 2px 1px rgba(37, 55, 70, 0.15)',
   p: '25px',
   transition: 'right 500ms',
+  maxWidth: '100%',
   '&.is-small': {
     width: '400px',
   },
@@ -30,6 +32,24 @@ const overlayPanel = {
   },
 };
 
+const overlayPanelInner = {
+  position: 'absolute',
+  zIndex: 2,
+  bottom: 0,
+  right: 0,
+  background: 'white',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: '0px 2px 4px 0px rgb(110 110 110 / 25%) inset',
+  minWidth: '50%',
+  maxWidth: '100%',
+  width: '100%',
+  height: '200px',
+  p: '25px',
+  backgroundColor: 'accent.99',
+};
+
 const overlayPanelBody = {
   display: 'none',
   height: '100%',
@@ -42,4 +62,5 @@ const overlayPanelBody = {
 export default {
   overlayPanel,
   overlayPanelBody,
+  overlayPanelInner,
 };
