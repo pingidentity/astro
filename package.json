@@ -63,7 +63,8 @@
     "mutationobserver-shim": "^0.3.7",
     "react": "^16.8.6",
     "react-dom": "^16.13.1",
-    "react-is": "^16.13.1"
+    "react-is": "^16.13.1",
+    "use-resize-observer": "^8.0.0"
   },
   "peerDependencies": {
     "react": "^16.8.6",
@@ -138,6 +139,7 @@
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",
     "rebass": "^4.0.7",
+    "recharts": "^2.1.4",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
     "theme-ui": "^0.10.0",
