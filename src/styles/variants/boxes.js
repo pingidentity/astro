@@ -158,11 +158,39 @@ const scrollbox = {
   position: 'relative',
 };
 
+const expandableRow = {
+  titleWrapper: {
+    maxWidth: '50%',
+  },
+  lineChart: {
+    alignCellRightWrapper: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+    },
+    chart: {
+      width: '50px',
+      height: '18px',
+    },
+    chartWrapper: {
+      '&:hover': {
+        backgroundColor: '#4462ED1A',
+      },
+    },
+    divider: {
+      backgroundColor: 'neutral.80',
+      height: '35px',
+      width: '1px',
+    },
+  },
+};
+
 export default {
   base,
   card,
   chip,
   copy,
+  expandableRow,
   inputInContainerSlot,
   listItem,
   listBoxSectionTitle,

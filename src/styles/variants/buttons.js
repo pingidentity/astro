@@ -417,6 +417,22 @@ const link = {
   width: 'max-content',
 };
 
+const expandableRow = {
+  chartWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    color: 'black',
+    background: 'none',
+    cursor: 'pointer',
+    height: 60,
+    padding: 0,
+    '&:hover': {
+      backgroundColor: '#4462ED1A',
+    },
+  },
+};
+
 export default {
   accordionHeader,
   close,
@@ -440,6 +456,7 @@ export default {
       ...defaultFocus,
     },
   },
+  expandableRow,
   iconButton,
   icon,
   imageUpload,
