@@ -70,6 +70,53 @@ const tooltipContent = {
   },
 };
 
+const expandableRowSharedStyle = {
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+};
+
+const expandableRow = {
+  title: {
+    fontSize: 'lg',
+    color: 'neutral.20',
+    ...expandableRowSharedStyle,
+  },
+  subtitle: {
+    fontSize: 'sm',
+    color: 'neutral.60',
+    ...expandableRowSharedStyle,
+  },
+  lineChart: {
+    title: {
+      fontSize: 'sm',
+      color: 'neutral.40',
+      maxWidth: '100%',
+      ...expandableRowSharedStyle,
+    },
+    count: {
+      color: 'neutral.20',
+      fontSize: 22,
+      fontWeight: 2,
+    },
+    countLabel: {
+      fontSize: 'xs',
+      color: 'neutral.50',
+    },
+    chartLabel: {
+      fontSize: 'xs',
+      color: 'neutral.50',
+      minWidth: '60px',
+    },
+    trend: {
+      color: 'neutral.20',
+      fontSize: 'sm',
+      fontWeight: 3,
+      whiteSpace: 'nowrap',
+    },
+  },
+};
+
 export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
@@ -81,6 +128,7 @@ export const text = {
   itemTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
+  expandableRow,
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
   sectionTitle: { ...wordWrap, fontSize: 'lg', fontWeight: 2, color: 'text.primary', fontFamily: 'standard' },
   subtitle: { ...wordWrap, fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
