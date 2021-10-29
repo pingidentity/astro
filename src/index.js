@@ -205,5 +205,5 @@ export * from './components/TooltipTrigger';
 
 /* eslint-enable import/export */
 
-export { Item } from '@react-stately/collections';
+export { Item, Section } from '@react-stately/collections';
 export { OverlayProvider } from '@react-aria/overlays';
