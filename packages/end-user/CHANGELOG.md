@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.6...@pingux/end-user@1.5.7) (2021-10-29)
+
+
+### Bug Fixes
+
+* [UIP-4927] long logo overrun container at login page ([70e1304](https://gitlab.corp.pingidentity.com/ux/end-user/commit/70e1304c538988c30178222e6b3191d4b322217d))
+
+
+
+
+
 ## [1.5.6](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.5...@pingux/end-user@1.5.6) (2021-10-12)
 
 

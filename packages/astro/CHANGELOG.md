@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.35.0...@pingux/astro@0.36.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* [UIP-4941] Add Sections to Index File ([f9d1f4c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f9d1f4cd0ac732d373b18e5d57ebd16eb392c262))
+
+
+### Features
+
+* [UIP-4758] Accordion Grid Component ([2b62df0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2b62df0d211128f4ceaacbd46436b4ac997d4330))
+
+
+
+
+
 # [0.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.33.0...@pingux/astro@0.34.0) (2021-10-26)
 
 
