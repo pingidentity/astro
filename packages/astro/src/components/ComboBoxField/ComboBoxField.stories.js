@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Section } from '@react-stately/collections';
 import { useFilter } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
-import { Item, OverlayProvider } from '../../index';
+import { Item, OverlayProvider, Section } from '../../index';
 import ComboBoxField from './ComboBoxField';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
