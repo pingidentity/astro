@@ -28,7 +28,52 @@ const accordionBody = {
   },
 };
 
+const accordionGridHeader = {
+  cursor: 'pointer',
+  lineHeight: '30px',
+  px: 'md',
+  outline: 'none',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  flexShrink: 0,
+  wordBreak: 'inherit',
+  whiteSpace: 'nowrap',
+  bg: 'white',
+  color: 'neutral.10',
+  flexGrow: 1,
+  fontWeight: 700,
+  '&.is-focused': {
+    outline: 'none',
+    boxShadow: 'focus',
+    WebkitBoxShadow: 'focus',
+    MozBoxShadow: 'focus',
+  },
+  padding: '0px',
+  '&.is-hovered': {
+    color: 'active',
+    '& div > div > div > span': {
+      color: 'active',
+    },
+  },
+  '&.is-pressed': {
+    color: 'accent.20',
+    '& div > div > div > span': {
+      color: 'accent.20',
+    },
+  },
+};
+
+const accordionGridBody = {
+  display: 'none !important',
+  width: '100%',
+  '&.is-selected': {
+    display: 'flex !important',
+  },
+};
+
 export default {
+  accordionGridHeader,
+  accordionGridBody,
   accordionTitle,
   accordion,
   accordionBody,

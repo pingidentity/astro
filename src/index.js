@@ -8,8 +8,14 @@ export * from './components/AstroWrapper';
 export { default as AccordionGroup } from './components/AccordionGroup';
 export * from './components/AccordionGroup';
 
+export { default as AccordionGridGroup } from './components/AccordionGridGroup';
+export * from './components/AccordionGridGroup';
+
 export { default as AccordionItem } from './components/AccordionItem';
 export * from './components/AccordionItem';
+
+export { default as AccordionGridItem } from './components/AccordionGridItem';
+export * from './components/AccordionGridItem';
 
 export { default as Avatar } from './components/Avatar';
 export * from './components/Avatar';
