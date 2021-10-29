@@ -1,3 +1,32 @@
-const config = require('../../shared/babel.config');
+const presets = [
+  [
+    '@babel/preset-env',
+    {
+      'modules': process.env.BABEL_ENV === 'esm' ? false : 'commonjs',
+    },
+  ],
+  '@babel/preset-react',
+  '@emotion/babel-preset-css-prop',
+];
 
-module.exports = config;
+const plugins = [
+  [
+    '@babel/plugin-transform-spread',
+    {
+      'loose': true,
+    },
+  ],
+];
+
+module.exports = {
+  presets,
+  plugins,
+  env: {
+    cjs: {
+      plugins: [...plugins, ['@babel/plugin-transform-runtime', { corejs: 3 }]],
+    },
+    esm: {
+      plugins: [...plugins, ['@babel/plugin-transform-runtime', { corejs: 3, useESModules: true }]],
+    },
+  },
+};

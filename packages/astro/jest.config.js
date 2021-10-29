@@ -1,7 +1,53 @@
-const config = require('../../shared/test/jest.config.js');
-
-config.coveragePathIgnorePatterns.push('/styles/', '/utils/');
-
-config.setupFilesAfterEnv.push('./src/utils/testUtils/axeSetup.js');
-
-module.exports = config;
+module.exports = {
+  rootDir: './',
+  unmockedModulePathPatterns: [
+    '<rootDir>/node_modules',
+  ],
+  testMatch: [
+    '**/**/*.test.js?(x)',
+  ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/lib/',
+    '/dist/',
+  ],
+  moduleNameMapper: {
+    '^.+\\.(css|scss)$': '<rootDir>/__mocks__/styleMock.js',
+    '^.+\\.mdx$': '<rootDir>/__mocks__/mdxMock.js',
+    '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
+  },
+  modulePathIgnorePatterns: [
+    '/lib/',
+    '/build/',
+    '/dist/',
+  ],
+  setupFiles: [
+    'jest-canvas-mock',
+  ],
+  setupFilesAfterEnv: [
+    '<rootDir>/src/utils/testUtils/setupTests.js',
+  ],
+  coverageThreshold: {
+    global: {
+      lines: 92,
+      functions: 92,
+      branches: 80,
+    },
+    './src/**/*.*': {
+      lines: 92,
+      functions: 92,
+      branches: 80,
+    },
+  },
+  coveragePathIgnorePatterns: [
+    '<rootDir>/.storybook/',
+    '.(story|stories).(js|jsx|mdx)',
+    '<rootDir>/src/styles/',
+    '.styles.js',
+    '/styles/',
+    '/utils/',
+  ],
+  transform: {
+    '\\.jsx?$': ['babel-jest', { rootMode: 'upward' }],
+  },
+};
