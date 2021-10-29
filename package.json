@@ -3,7 +3,7 @@
   "version": "0.34.0",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
   "directories": {
@@ -15,9 +15,6 @@
   "repository": {
     "type": "git",
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
-  },
-  "publishConfig": {
-    "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
     "build": "rm -rf lib && npm-run-all build:*",
@@ -70,6 +67,7 @@
     "react-dom": "^16.13.1"
   },
   "dependencies": {
+    "@emotion/jest": "^11.5.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
     "@pingux/icons": "^0.5.0",
