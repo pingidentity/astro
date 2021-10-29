@@ -49,7 +49,7 @@ pipeline {
   }
   parameters {
     string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --yes', description: 'Flags applied to the `lerna version` command.')
-    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes', description: 'Flags applied to the `lerna publish` command.')
+    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
   }
   environment {
     PING_TEAM_NAME = "ux"
@@ -125,17 +125,26 @@ pipeline {
           container('node-builder') {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
-                sh "echo 'Publishing Schema Form to NPM registry'"
+                sh "echo 'Publishing packages to npmjs.org registry'"
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
                 sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
-                echo "Publishing changed packages to Artifactory"
-                sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
+                sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
+                sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
+
                 script {
                   if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
-                    echo 'Publishing Schema Form to NPM'
+                    echo 'Publishing Schema Form to npmjs.org'
                     sh 'cd packages/schema-form/ && npm publish'
                   }
+
+                  if (updatedPackagesMap.containsKey("@pingux/astro")) {
+                    echo 'Publishing Astro to npmjs.org'
+                    sh 'cd packages/astro/ && npm publish'
+                  }
                 }
+
+                echo "Publishing changed packages to Artifactory"
+                sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
               }
             }
           }

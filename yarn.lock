@@ -2249,6 +2249,17 @@
     specificity "^0.4.1"
     stylis "^4.0.3"
 
+"@emotion/jest@^11.5.0":
+  version "11.5.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@emotion/jest/-/jest-11.5.0.tgz#db156dbb2f9b482893647cff841d7ad2b9efde80"
+  integrity sha1-2xVtuy+bSCiTZHz/hB160rnv3oA=
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@emotion/css-prettifier" "^1.0.0"
+    chalk "^4.1.0"
+    specificity "^0.4.1"
+    stylis "^4.0.10"
+
 "@emotion/memoize@0.7.4", "@emotion/memoize@^0.7.1":
   version "0.7.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
@@ -29350,6 +29361,11 @@ stylis@^3.5.0:
   version "3.5.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/stylis/-/stylis-3.5.4.tgz#f665f25f5e299cf3d64654ab949a57c768b73fbe"
   integrity sha1-9mXyX14pnPPWRlSrlJpXx2i3P74=
+
+stylis@^4.0.10:
+  version "4.0.10"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/stylis/-/stylis-4.0.10.tgz#446512d1097197ab3f02fb3c258358c3f7a14240"
+  integrity sha1-RGUS0Qlxl6s/Avs8JYNYw/ehQkA=
 
 stylis@^4.0.3:
   version "4.0.7"
