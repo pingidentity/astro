@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { OverlayProvider } from '@react-aria/overlays';
 import { useAsyncList } from '@react-stately/data';
-import { Section } from '@react-stately/collections';
-import { SelectField, Item, Separator } from '../../index';
+import { SelectField, Item, Separator, Section } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
 import Box from '../Box';
