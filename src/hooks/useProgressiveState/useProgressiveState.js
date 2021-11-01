@@ -6,8 +6,10 @@ import { useState } from 'react';
  * @param {*} initial The initial state value, used only if the given prop is undefined
  */
 const useProgressiveState = (prop, initial) => {
+  const controlledState = useState(initial);
+
   if (prop === undefined) {
-    return useState(initial);
+    return controlledState;
   }
 
   return [prop, () => {}];
