@@ -2,6 +2,14 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import useDeprecationWarning from './useDeprecationWarning';
 
+// since we cannot reset `alreadyShown` inside of module we will generate unique messages
+let uniqueIndex = 0;
+function generateUniqueMessage() {
+  const message = `Text ${uniqueIndex}`;
+  uniqueIndex += 1;
+  return message;
+}
+
 beforeEach(() => {
   process.env.NODE_ENV = 'development';
   global.console.warn = () => jest.mock(); // eslint-disable-line no-console
@@ -20,7 +28,7 @@ test('default useDeprecationWarning', () => {
 });
 
 test('useDeprecationWarning with string', () => {
-  const string = 'I\'m a warning!';
+  const string = generateUniqueMessage();
   const spy = jest.spyOn(console, 'warn');
   expect(spy).not.toHaveBeenCalled();
   renderHook(() => useDeprecationWarning(string));
@@ -34,16 +42,27 @@ test('useDeprecationWarning with string', () => {
 
 test('useDeprecationWarning by default ignores duplicated messages', () => {
   const spy = jest.spyOn(console, 'warn');
-  const message = 'Text';
+  const message = generateUniqueMessage();
   renderHook(() => useDeprecationWarning(message));
   renderHook(() => useDeprecationWarning(message));
   expect(spy).toHaveBeenCalledTimes(1);
 });
 
-test('useDeprecationWarning showns duplicated messages if explicitly allowed', () => {
+test('useDeprecationWarning shows same message for few times if explicitly allowed', () => {
   const spy = jest.spyOn(console, 'warn');
-  const message = 'Text';
-  renderHook(() => useDeprecationWarning(message, true));
-  renderHook(() => useDeprecationWarning(message, true));
+  const message = generateUniqueMessage();
+  renderHook(() => useDeprecationWarning(message, { onlyOnce: false }));
+  renderHook(() => useDeprecationWarning(message, { onlyOnce: false }));
   expect(spy).toHaveBeenCalledTimes(2);
+});
+
+test('shows message after isActive is flipped from false to true', () => {
+  const spy = jest.spyOn(console, 'warn');
+  const message = generateUniqueMessage();
+  const { rerender } = renderHook(
+    ([...args]) => useDeprecationWarning(...args),
+    { initialProps: [message, { isActive: false }] },
+  );
+  rerender([message, { isActive: true }]);
+  expect(spy).toHaveBeenCalledTimes(1);
 });

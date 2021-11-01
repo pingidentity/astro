@@ -50,9 +50,10 @@ const Button = forwardRef((props, ref) => {
     isDisabled,
   });
 
-  if (props.variant === 'icon') {
-    useDeprecationWarning('The "icon" variant for `Button` will be deprecated in Astro-UI 1.0.0, use the `IconButton` component instead.');
-  }
+  useDeprecationWarning(
+    'The "icon" variant for `Button` will be deprecated in Astro-UI 1.0.0, use the `IconButton` component instead.',
+    { isActive: props.variant === 'icon' },
+  );
 
   const ariaLabel = props['aria-label'];
   useAriaLabelWarning('Button', ariaLabel);

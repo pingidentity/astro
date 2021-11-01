@@ -16,8 +16,8 @@ const Input = forwardRef((props, ref) => {
   const { name, placeholder, maxLength, ...others } = props;
 
   let ariaLabel = props['aria-label'] || name;
+  useAriaLabelWarning('Input', ariaLabel || placeholder);
   if (!ariaLabel && !placeholder) {
-    useAriaLabelWarning('Input', ariaLabel);
     ariaLabel = 'Input';
   }
 
