@@ -268,3 +268,20 @@ export const DynamicRequired = () => {
     />
   );
 };
+
+export const MaxLength = () => {
+  const [isVisible, setPasswordShown] = useState(false);
+
+  const onVisibleChange = () => {
+    setPasswordShown(!isVisible);
+  };
+  return (
+    <PasswordField
+      onVisibleChange={onVisibleChange}
+      isVisible={isVisible}
+      label="Example Label"
+      labelMode="left"
+      maxLength={9}
+    />
+  );
+};

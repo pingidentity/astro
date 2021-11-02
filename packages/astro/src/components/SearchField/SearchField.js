@@ -217,7 +217,7 @@ SearchField.propTypes = {
    * available.
    */
   isExcludedFromTabOrder: PropTypes.bool,
-  /** @ignore The maximum number of characters supported by the input. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefmaxlength). */
+  /** The maximum number of characters supported by the input set by the user. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefmaxlength). */
   maxLength: PropTypes.number,
   /** @ignore The minimum number of characters required by the input. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefminlength). */
   minLength: PropTypes.number,

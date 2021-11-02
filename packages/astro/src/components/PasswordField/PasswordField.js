@@ -182,6 +182,8 @@ PasswordField.propTypes = {
   isReadOnly: PropTypes.bool,
   /** Whether the field is required. */
   isRequired: PropTypes.bool,
+  /** Add max Length to input value */
+  maxLength: PropTypes.number,
   /**
    * Callback fired when focus is lost on the input element.
    */

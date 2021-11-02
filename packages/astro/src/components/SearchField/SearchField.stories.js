@@ -91,3 +91,13 @@ export const NoClearButton = () => (
     onSubmit={text => alert(text)} // eslint-disable-line no-alert
   />
 );
+
+export const MaxLength = args => (
+  <SearchField
+    {...args}
+    icon={SearchIcon}
+    aria-label="Search Groups"
+    onSubmit={text => alert(text)} // eslint-disable-line no-alert
+    maxLength={9}
+  />
+);
