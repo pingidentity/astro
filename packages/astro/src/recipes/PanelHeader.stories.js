@@ -5,7 +5,7 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import Box from '../components/Box';
 import Icon from '../components/Icon';
 import Text from '../components/Text';
-import Button from '../components/Button';
+import IconButton from '../components/IconButton';
 import PopoverMenu from '../components/PopoverMenu';
 import { Item, Menu, OverlayProvider } from '../index';
 
@@ -17,21 +17,21 @@ export const Default = () => (
   <Box
     bg="accent.99"
     py="sm"
-    px="lg"
+    pl="md"
     isRow
     alignItems="center"
     sx={{ width: 'fit-content' }}
   >
-    <Icon icon={AccountIcon} size={25} />
-    <Box ml="md" mr="xl">
-      <Text variant="sectionTitle">Fons Vernall</Text>
-      <Text variant="subtitle">fvernall0@google.it</Text>
+    <Icon icon={AccountIcon} size={25} color="accent.40" />
+    <Box ml="sm" mr="xx" >
+      <Text sx={{ fontSize: 'md', lineHeight: '18px' }} variant="bodyStrong">Fons Vernall</Text>
+      <Text sx={{ fontSize: 'sm', my: '1px', lineHeight: '16px' }}variant="subtitle">fvernall0@google.it</Text>
     </Box>
     <OverlayProvider>
       <PopoverMenu>
-        <Button variant="icon">
-          <Icon icon={DotsVerticalIcon} size={24} />
-        </Button>
+        <IconButton aria-label="Menu Button" >
+          <Icon icon={DotsVerticalIcon} size={16.8} color="Neutral.40" m="0.61px" />
+        </IconButton>
         <Menu >
           <Item key="edit">Edit</Item>
           <Item key="duplicate">Duplicate</Item>
@@ -41,8 +41,10 @@ export const Default = () => (
         </Menu>
       </PopoverMenu>
     </OverlayProvider>
-    <Button variant="icon" ml="sm" alignSelf="center">
-      <Icon icon={CloseIcon} size={24} />
-    </Button>
+    <Box>
+      <IconButton aria-label="Close Button" mx="10px">
+        <Icon icon={CloseIcon} size={16.8} color="Neutral.40" m="0.61px" />
+      </IconButton>
+    </Box>
   </Box>
 );
