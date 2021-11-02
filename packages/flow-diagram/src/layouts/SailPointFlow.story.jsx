@@ -1,9 +1,20 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Clear, Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
+import { Clear, Error, Success } from '@pingux/icons';
 import { Box, Button, Image, Separator, Tabs, Tab, Text, TextField } from '@pingux/astro';
 import {
-    mdiSourceBranch, mdiFlag, mdiCheck, mdiClose, mdiScaleBalance, mdiAccountPlus, mdiFormSelect, mdiCellphoneLink, mdiEmail,
-    mdiAccountDetails, mdiCodeNotEqualVariant, mdiAccountConvert,
+    mdiSourceBranch,
+    mdiFlag,
+    mdiCheck,
+    mdiClose,
+    mdiScaleBalance,
+    mdiAccountPlus,
+    mdiFormSelect,
+    mdiCellphoneLink,
+    mdiEmail,
+    mdiAccountDetails,
+    mdiCodeNotEqualVariant,
+    mdiAccountConvert,
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import '../css/main.css';
@@ -228,7 +239,9 @@ const Demo = () => {
                 // location changes that GoJS is already tracking.
                 const addedNodes =
                     modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
-                
+
+                let groupKey;
+
                 const newNodes = addedNodes.flatMap(({ category, key, ...node }) => {
                     const replacementKey = key;
                     const modifiedNode = {
@@ -248,7 +261,7 @@ const Demo = () => {
                                 'category': 'outlet',
                                 color: '#D5DCF3',
                                 'text': outlet,
-                            })))
+                            }))),
                         ];
                     } else if (node.isGroup) {
                         groupKey = replacementKey;
@@ -264,15 +277,13 @@ const Demo = () => {
                 });
 
                 console.log(newNodes);
-
-                let groupKey;
                 setDiagramNodes([
                     ...diagramNodes,
                     // Remove placeholder categories from nodes
                     ...newNodes,
                 ]);
 
-                const linkOutlet = (outlet) => ({
+                const linkOutlet = outlet => ({
                     'from': `${outlet.group}-step`,
                     'to': outlet.key,
                     'key': `${outlet.group}-${outlet.key}`,
@@ -286,7 +297,7 @@ const Demo = () => {
                     newLinks = diagramLinks.map((link) => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
-                            return { from: link.from, to: `${groupKey}-step` }
+                            return { from: link.from, to: `${groupKey}-step` };
                         }
                         return link;
                     });
@@ -307,13 +318,13 @@ const Demo = () => {
             }
 
             if (modifiedNodeData && !insertedNodeKeys) {
-                const sortedNodeData = modifiedNodeData.sort((a, b) => (Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1 )
+                const sortedNodeData = modifiedNodeData.sort((a, b) => ((Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1));
                 if (droppedOntoLinkKey) {
                     let linkTo;
                     const newLinks = diagramLinks.map((link) => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
-                            return { from: link.from, to: sortedNodeData[0].key }
+                            return { from: link.from, to: sortedNodeData[0].key };
                         }
                         return link;
                     });
@@ -328,13 +339,15 @@ const Demo = () => {
                         if (link.from === droppedOntoNodeKey) {
                             linkedFrom = true;
                             linkTo = link.to;
-                            return { from: link.from, to: sortedNodeData[0].key }
+                            return { from: link.from, to: sortedNodeData[0].key };
                         }
                         return link;
                     });
                     setDiagramLinks([
                         ...newLinks,
-                        linkedFrom ? { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo } : { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
+                        linkedFrom ?
+                            { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo } :
+                            { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
                     ]);
                 }
             }
@@ -432,7 +445,15 @@ const Demo = () => {
     const updateStepId = (selected, id, field) => {
         const currentNode = diagramNodes.find(node => node.key === selected.key);
         setSelectedNode({ ...currentNode, [field]: id });
-        setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
+        setDiagramNodes(
+            diagramNodes.map(
+                node => (
+                    node.key === selected.key ?
+                        { ...currentNode, [field]: id } :
+                        node
+                ),
+            ),
+        );
     };
 
     const getPanelIcon = (category) => {
@@ -448,7 +469,7 @@ const Demo = () => {
             default:
                 return <Icon path={mdiSourceBranch} height="20px" width="20px" color={COLORS.ORANGE} />;
         }
-    }
+    };
 
     return (
         <OuterContainer>

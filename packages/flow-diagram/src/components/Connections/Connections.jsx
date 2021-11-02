@@ -14,7 +14,11 @@ export default function Connections({ links, panels }) {
             const elementPosition = element.getBoundingClientRect();
             const containerPosition = container.getBoundingClientRect();
 
-            if (elementPosition.top >= 0 && elementPosition.top >= headerPosition.bottom && elementPosition.bottom <= containerPosition.bottom) {
+            if (
+                elementPosition.top >= 0 &&
+                elementPosition.top >= headerPosition.bottom &&
+                elementPosition.bottom <= containerPosition.bottom
+            ) {
                 return true;
             }
         }
@@ -22,8 +26,8 @@ export default function Connections({ links, panels }) {
     };
 
     const getLinks = () => {
-        let visibleToLinks = [];
-        let visibleFromLinks = [];
+        const visibleToLinks = [];
+        const visibleFromLinks = [];
 
         panels.forEach((panel) => {
             links.forEach((link) => {

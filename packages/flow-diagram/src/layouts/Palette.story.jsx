@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close, Desktop, Success, Walkthrough } from '@pingux/icons';
@@ -61,14 +62,16 @@ export const PaletteComponent = () => {
                 'category': 'palette-group',
                 isGroup: true,
                 'text': 'Complete',
-                getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
+                getIconSrc: (color = COLORS.GREEN) =>
+                    svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'finished',
                 'category': 'finished',
                 group: 'finished-group',
                 'text': 'Complete',
-                getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
+                getIconSrc: (color = COLORS.GREEN) =>
+                    svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'error-group',

@@ -18,7 +18,9 @@ export const diagramGroupTemplate = ({ comparer } = {}) =>
                     isInitial: true,
                     isOngoing: true,
                     comparer,
-                    sorting: comparer ? go.TreeLayout.SortingAscending : go.TreeLayout.SortingForwards,
+                    sorting: comparer ?
+                        go.TreeLayout.SortingAscending :
+                        go.TreeLayout.SortingForwards,
                 },
             ),
         },
@@ -26,7 +28,7 @@ export const diagramGroupTemplate = ({ comparer } = {}) =>
 
         $(go.Shape, 'Rectangle',
             { fill: 'transparent', stroke: 'transparent', cursor: 'normal' },
-            new go.Binding('strokeWidth', 'isSelected', (s) => s ? 1 : 0).ofObject(''),
+            new go.Binding('strokeWidth', 'isSelected', s => (s ? 1 : 0)).ofObject(''),
         ),
         $(go.Placeholder,
             { padding: 5 },
