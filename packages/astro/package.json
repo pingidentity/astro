@@ -28,7 +28,7 @@
     "coverage-ci": "yarn test --coverage --ci",
     "demo": "rm -rf ./demo && build-storybook -o demo",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint --ext .js,.jsx .",
     "start": "start-storybook -p 6006",
     "storybook": "yarn start"
   },
