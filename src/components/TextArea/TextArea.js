@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { Textarea as ThemeUITextArea } from 'theme-ui';
-
 /**
  * Basic textarea input.
  * Built on top of the [TextArea from Theme-UI Forms](https://theme-ui.com/components/textarea and
@@ -10,11 +9,13 @@ import { Textarea as ThemeUITextArea } from 'theme-ui';
  */
 
 const TextArea = forwardRef((props, ref) => (
+
   <ThemeUITextArea
     ref={ref}
     {...props}
   />
 ));
+
 
 TextArea.displayName = 'TextArea';
 
