@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.36.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.36.0...@pingux/astro@0.36.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* [UIP-4824] Add max length prop to fields ([4d7cbc4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d7cbc4ef1b0b95434e0125e0953941a82554cdd))
+* [UIP-4866] Update PanelHeader Recipe ([5bae8e2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5bae8e270dbeb0cf7d9751f2fb251c2bccc47d50))
+* Storybook source code not displaying for many components ([b30ea83](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b30ea83a018ca323b08f5494d03813d41c59c213))
+
+
+
+
+
 # [0.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.35.0...@pingux/astro@0.36.0) (2021-10-29)
 
 
