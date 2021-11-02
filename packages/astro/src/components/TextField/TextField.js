@@ -36,7 +36,7 @@ const TextField = forwardRef((props, ref) => {
       </Box>
       {
         helperText &&
-        <FieldHelperText status={status}>
+        <FieldHelperText status={status} >
           {helperText}
         </FieldHelperText>
       }
@@ -82,6 +82,8 @@ TextField.propTypes = {
   isReadOnly: PropTypes.bool,
   /** Whether the field is required. */
   isRequired: PropTypes.bool,
+  /** Add max Length to input value */
+  maxLength: PropTypes.number,
   /**
    * Callback fired when focus is lost on the input element.
    */

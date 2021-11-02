@@ -174,3 +174,10 @@ export const WithoutStatusIndicator = () => (
     hasNoStatusIndicator
   />
 );
+
+export const MaxLength = () => (
+  <TextField
+    label="Example label"
+    maxLength={9}
+  />
+);

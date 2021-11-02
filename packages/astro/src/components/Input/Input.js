@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { Input as ThemeUIInput } from 'theme-ui';
 import PropTypes from 'prop-types';
 import { useAriaLabelWarning } from '../../hooks';
-
+import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 /**
  * Base input component.
  *
@@ -13,7 +13,7 @@ import { useAriaLabelWarning } from '../../hooks';
  */
 
 const Input = forwardRef((props, ref) => {
-  const { name, placeholder } = props;
+  const { name, placeholder, maxLength, ...others } = props;
 
   let ariaLabel = props['aria-label'] || name;
   if (!ariaLabel && !placeholder) {
@@ -25,7 +25,10 @@ const Input = forwardRef((props, ref) => {
     <ThemeUIInput
       aria-label={ariaLabel}
       ref={ref}
-      {...props}
+      name={name}
+      placeholder={placeholder}
+      maxLength={maxLength === 0 ? 'null' : maxLength}
+      {...others}
     />
   );
 });
@@ -39,6 +42,8 @@ Input.propTypes = {
   id: PropTypes.string,
   /** Name of input. */
   name: PropTypes.string,
+  /** Max length of input value */
+  maxLength: isValidPositiveInt,
   /** Type of input. Accepts most [HTML input types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types) */
   type: PropTypes.string,
   /** Placeholder for the input */
