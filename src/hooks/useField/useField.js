@@ -66,17 +66,29 @@ const useField = (props = {}) => {
   const [hasFocusWithin, setFocusWithin] = useState(false);
 
   useEffect(() => {
-    if (!!defaultValue || defaultValue === 0 || !!value || value === 0) {
+    if (
+      !!defaultValue ||
+      defaultValue === 0 ||
+      !!value ||
+      value === 0 ||
+      !!placeholder ||
+      placeholder === 0
+    ) {
       setHasValue(true);
     } else {
       setHasValue(false);
     }
-  }, [defaultValue, value]);
+  }, [defaultValue, value, placeholder]);
 
   // Capture value changes so we can apply the has-value class to the container
   const fieldOnChange = (e) => {
     const eventValue = e?.target?.value;
-    if (!!eventValue || eventValue === 0) {
+    if (
+      !!eventValue ||
+      eventValue === 0 ||
+      !!placeholder ||
+      placeholder === 0
+    ) {
       setHasValue(true);
     } else {
       setHasValue(false);

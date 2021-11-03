@@ -83,9 +83,12 @@ test('should return props objects for field components', () => {
 });
 
 test('should return isFloatLabelActive class for container', () => {
-  const { result, rerender } = renderHook(initialProps => useField(initialProps), {
-    initialProps: defaultProps,
-  });
+  const { result, rerender } = renderHook(
+    initialProps => useField({ ...initialProps, placeholder: null }),
+    {
+      initialProps: defaultProps,
+    },
+  );
   // Does not have the class if the label mode is not set to float
   expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
 
@@ -131,7 +134,15 @@ test('should return isLeftLabel class for container', () => {
 test('should return hasValue class for container when onChange updates internal state', () => {
   const onChange = jest.fn();
   let numCalls = 0;
-  const { result } = renderHook(() => useField({ ...defaultProps, defaultValue: null, onChange, value: '' }));
+  const { result } = renderHook(() =>
+    useField({
+      ...defaultProps,
+      defaultValue: null,
+      placeholder: null,
+      onChange,
+      value: '',
+    }),
+  );
   // Empty string is not a valid value
   expect(result.current.fieldContainerProps.className).not.toContain('has-value');
 
