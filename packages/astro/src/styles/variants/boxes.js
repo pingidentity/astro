@@ -118,10 +118,10 @@ const copy = {
 };
 
 const topShadowScrollbox = {
-  '&.is-top-shadow-showing': {
+  '&.has-shadows.is-top-shadow-showing': {
     position: 'relative',
     zIndex: '10000',
-    boxShadow: '0px 4px 4px -4px #000000 inset',
+    boxShadow: '0px 4px 2px 1px rgb(37, 55, 70, 0.15)',
     height: '4px',
     marginBottom: '-4px',
     backgroundColor: '#FFFFFF',
@@ -129,12 +129,12 @@ const topShadowScrollbox = {
 };
 
 const bottomShadowScrollbox = {
-  '&.is-bottom-shadow-showing': {
+  '&.has-shadows.is-bottom-shadow-showing': {
     position: 'relative',
     zIndex: '10000',
-    boxShadow: '0px -4px 4px -4px #000000 inset',
+    boxShadow: '0px -4px 2px 1px rgb(37, 55, 70, 0.15)',
     height: '4px',
-    marginTop: '-4px',
+    marginTop: '-2px',
     backgroundColor: '#FFFFFF',
   },
 };
@@ -152,10 +152,10 @@ const scrollbox = {
     borderRadius: '0px',
     display: 'none',
   },
-  '&.has-shadows': {
-    boxShadow: '0px -4px 4px -4px #000000 inset,0px 4px 4px -4px #000000 inset',
-  },
   position: 'relative',
+  '& > *': {
+    overflow: 'hidden auto',
+  },
 };
 
 const expandableRow = {

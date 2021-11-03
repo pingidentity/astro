@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import ScrollBox from './ScrollBox';
 
 const testId = 'scrollBoxTestId';
@@ -28,5 +28,28 @@ test('passing hasShadows renders the shadow css', () => {
   getComponent({ hasShadows: true });
   const scrollBoxComponent = screen.getByTestId(testId);
   expect(scrollBoxComponent).toBeInTheDocument();
-  expect(scrollBoxComponent).toHaveClass('has-shadows');
+  const shadows = screen.getAllByRole('separator');
+  expect(shadows[0]).toHaveClass('has-shadows');
+  expect(shadows[1]).toHaveClass('has-shadows');
+});
+
+test('with hasShadows prop only the bottom shadow is rendered first', () => {
+  getComponent({ hasShadows: true });
+  const scrollBoxComponent = screen.getByTestId(testId);
+  expect(scrollBoxComponent).toBeInTheDocument();
+  const shadows = screen.getAllByRole('separator');
+  expect(shadows[0]).not.toHaveClass('is-top-shadow-showing');
+  expect(shadows[1]).toHaveClass('is-bottom-shadow-showing');
+});
+
+test('with hasShadows prop only the top shadow is rendered after scroll to down', () => {
+  getComponent({ hasShadows: true });
+  const scrollBoxComponent = screen.getByTestId(testId);
+  expect(scrollBoxComponent).toBeInTheDocument();
+  fireEvent.scroll(scrollBoxComponent, { target: { scrollY: 100 } });
+  const shadows = screen.getAllByRole('separator');
+  setTimeout(() => {
+    expect(shadows[0]).toHaveClass('is-top-shadow-showing');
+    expect(shadows[1]).not.toHaveClass('is-bottom-shadow-showing');
+  }, 200);
 });
