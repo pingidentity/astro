@@ -1,11 +1,8 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { Item } from '@react-stately/collections';
 import CreateIcon from 'mdi-react/CreateIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
-
-import useStatusClasses from '../hooks/useStatusClasses';
-
 
 import { SearchField, ListView, Box, IconButton, ScrollBox, Text, Icon } from '../index';
 
@@ -27,11 +24,6 @@ const unfilteredItems = [
 export const Default = ({ ...args }) => {
   const [value, setValue] = useState('');
   const [items, setItems] = useState(unfilteredItems);
-  const [scrollTopPostion, setScrollTopPosition] = useState(0);
-  const [isTopShadowShowing, setIsTopShadowShowing] = useState(false);
-  const [isBottomShadowShowing, setIsBottomShadowShowing] = useState(true);
-  const innerRef = useRef();
-  const outerRef = useRef();
 
   const filterItems = (input) => {
     const filtered = unfilteredItems.filter((obj) => {
@@ -45,50 +37,17 @@ export const Default = ({ ...args }) => {
     filterItems(input);
   };
 
-  useLayoutEffect(() => {
-    if (innerRef.current
-      && innerRef.current.offsetHeight !== 0
-      && innerRef.current.offsetHeight !== 0) {
-      setIsBottomShadowShowing(
-        innerRef.current.scrollHeight - innerRef.current.offsetHeight
-        !== innerRef.current.scrollTop,
-      );
-      setIsTopShadowShowing(innerRef.current.scrollTop !== 0);
-    }
-  }, [scrollTopPostion]);
-
-  const onScroll = () => {
-    if (innerRef.current) {
-      setScrollTopPosition(innerRef.current.scrollTop);
-    }
-  };
-
-  const { classNames } = useStatusClasses('',
-    {
-      isTopShadowShowing,
-      isBottomShadowShowing,
-    },
-  );
-
   return (
     <Box>
       <SearchField
         value={value}
         onChange={onChangeInput}
       />
-      <Box
-        variant="boxes.topShadowScrollbox"
-        className={classNames}
-        role="separator"
-      />
       <ScrollBox
         maxHeight={450}
-        ref={outerRef}
-        innerRef={innerRef}
-        hasShadows={false}
-        onScroll={onScroll}
+        hasShadows
       >
-        <ListView {...args} items={items} ref={innerRef} >
+        <ListView {...args} items={items}>
           {item => (
             <Item key={item.name} textValue={item.name} >
               <Box isRow >
@@ -109,11 +68,6 @@ export const Default = ({ ...args }) => {
           )}
         </ListView>
       </ScrollBox>
-      <Box
-        variant="boxes.bottomShadowScrollbox"
-        className={classNames}
-        role="separator"
-      />
     </Box>
   );
 };
