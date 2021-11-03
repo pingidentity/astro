@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import TextField from '.';
 import axeTest from '../../utils/testUtils/testAxe';
 
@@ -81,5 +82,24 @@ test('text aria container have class name when default value is provided', () =>
   const labelMode = 'float';
   getComponent({ labelMode, defaultValue: 'text' });
   const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer.className).toMatch('has-value');
+});
+
+test('text aria container have class name when placeholder is provided', () => {
+  const labelMode = 'float';
+  getComponent({ labelMode, placeholder: 'text' });
+  const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer.className).toMatch('has-value');
+});
+
+test('text aria container have class name when placeholder is provided and value was entered and then removed', () => {
+  const labelMode = 'float';
+  getComponent({ labelMode, placeholder: 'text' });
+  const textAreaContainer = screen.getByTestId(testId);
+  const inputControl = screen.getByLabelText(testLabel);
+  expect(textAreaContainer.className).toMatch('has-value');
+  userEvent.type(inputControl, 'test text{enter}');
+  expect(textAreaContainer.className).toMatch('has-value');
+  userEvent.clear(inputControl);
   expect(textAreaContainer.className).toMatch('has-value');
 });
