@@ -128,6 +128,8 @@ export const text = {
   itemTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
+  listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
+  listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   expandableRow,
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
   sectionTitle: { ...wordWrap, fontSize: 'lg', fontWeight: 2, color: 'text.primary', fontFamily: 'standard' },
