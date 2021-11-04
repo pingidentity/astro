@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.25.1...@pingux/flow-diagram@0.25.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* [UIP-4811] Disapper delete button ([247b123](https://gitlab.corp.pingidentity.com/ux/pingux/commit/247b12346ac5ba10334d8ed1ce1d724f6464d1ec))
+
+
+
+
+
 ## [0.25.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.25.0...@pingux/flow-diagram@0.25.1) (2021-10-26)
 
 **Note:** Version bump only for package @pingux/flow-diagram

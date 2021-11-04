@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.36.1...@pingux/astro@0.37.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* [UIP-4917] Scrollbox Improvements ([c19b09d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c19b09d38cdff4b40b18a23258951504a37007f0))
+* [UIP-4934] TextField float label overlaps with placeholder ([5e9942b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5e9942b217247c1c00b7fcebeb41ef919840c2cb))
+
+
+### Features
+
+* [UIP-4743] List Layout Discrepancies ([434284f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/434284fdb10afd2eb98014fdef8155a10e0748be))
+
+
+
+
+
 ## [0.36.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.36.0...@pingux/astro@0.36.1) (2021-11-02)
 
 
