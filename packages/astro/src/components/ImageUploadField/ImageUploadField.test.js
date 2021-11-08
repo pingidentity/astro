@@ -218,3 +218,22 @@ test('loader size can be changed via the prop', () => {
     'font-size': `${testLoaderSize}px`,
   });
 });
+
+test('should show the menu if label clicked when preview image exists', async () => {
+  const customUploadProp = 'Custom Upload';
+  const customRemoveProp = 'Custom Remove';
+  getComponent({
+    uploadItemText: customUploadProp,
+    removeItemText: customRemoveProp,
+  });
+  const imageUploadLabel = screen.getByText(testLabel);
+  fireEvent.change(screen.getByTestId('image-upload-input'), {
+    target: { files: [file] },
+  });
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
+  expect(imagePreview).toBeInTheDocument();
+  expect(imagePreview).toHaveAttribute('src');
+  userEvent.click(imageUploadLabel);
+  expect(screen.getByText(customUploadProp)).toBeInTheDocument();
+  expect(screen.getByText(customRemoveProp)).toBeInTheDocument();
+});

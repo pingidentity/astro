@@ -15,7 +15,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
  * The Image Upload Field component gives users the ability to upload a file (image by default).
  */
 const ImageUploadField = forwardRef((props, ref) => {
-  const { isLoading, loaderSize, onRemove } = props;
+  const { isLoading, loaderSize, onRemove, removeItemText, uploadItemText } = props;
   const inputRef = useRef();
   const state = useImageUploadState(props, inputRef);
   /* istanbul ignore next */
@@ -65,8 +65,8 @@ const ImageUploadField = forwardRef((props, ref) => {
         widthHeightSx={state.widthHeightSx}
       />
       <Menu onAction={onAction}>
-        <Item key="upload">Upload New Image</Item>
-        <Item key="remove">Remove Image</Item>
+        <Item key="upload">{uploadItemText}</Item>
+        <Item key="remove">{removeItemText}</Item>
       </Menu>
     </ImageUploadFieldBase>
   );
@@ -75,6 +75,10 @@ const ImageUploadField = forwardRef((props, ref) => {
 ImageUploadField.propTypes = {
   /** Image preview (controlled), used to represent the current image state. */
   previewImage: PropTypes.string,
+  /** Text that renders in the upload menu item. */
+  uploadItemText: PropTypes.string,
+  /** Text that renders in the remove menu item. */
+  removeItemText: PropTypes.string,
   /** Default image preview (uncontrolled), used when no previewImage is present. */
   defaultPreviewImage: PropTypes.string,
   /** An array of accepted file types.
@@ -122,6 +126,8 @@ ImageUploadField.defaultProps = {
   loaderSize: 10,
   previewHeight: 50,
   previewWidth: 50,
+  uploadItemText: 'Upload New Image',
+  removeItemText: 'Remove Image',
 };
 
 ImageUploadField.displayName = 'ImageUploadField';
