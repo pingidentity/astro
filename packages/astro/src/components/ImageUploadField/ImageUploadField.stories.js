@@ -95,6 +95,20 @@ export const CustomDefaultImage = () => (
   </OverlayProvider>
 );
 
+export const CustomItemText = () => (
+  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+  // readers when an overlay opens.
+  <OverlayProvider>
+    <ImageUploadField
+      label="Upload Image"
+      previewHeight={150}
+      previewWidth={150}
+      uploadItemText="Custom Upload String"
+      removeItemText="Custom Remove String"
+    />
+  </OverlayProvider>
+);
+
 export const ExistingImage = () => {
   const [previewImage, setPreviewImage] = useState('https://picsum.photos/id/1025/200/300');
   const [error, setError] = useState(null);
