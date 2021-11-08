@@ -603,6 +603,7 @@ export const Default = () => {
                       minWidth="40%"
                       maxWidth="400px"
                       aria-label="Name Input"
+                      key="name-input"
                     />
                   </Box>
                   <Box pb="lg">
@@ -612,6 +613,7 @@ export const Default = () => {
                       minWidth="40%"
                       maxWidth="400px"
                       aria-label="Subtitle Input"
+                      key="subtitle-input"
                     />
                   </Box>
                   <Box>
@@ -622,6 +624,7 @@ export const Default = () => {
                       maxWidth="400px"
                       rows={5}
                       aria-label="Name Input"
+                      key="description-input"
                     />
                   </Box>
                   <Box isRow sx={buttonBarStyles}>
@@ -640,6 +643,7 @@ export const Default = () => {
                       label="Configuration Type"
                       minWidth="40%"
                       maxWidth="400px"
+                      key="configuration-type"
                     >
                       <Item key="1">Regular Configuration</Item>
                       <Item key="2">Placeholder 1</Item>
@@ -653,6 +657,7 @@ export const Default = () => {
                       minWidth="40%"
                       maxWidth="400px"
                       value="https://domain.com:9999"
+                      key="url-input-1"
                     />
                   </Box>
                   <Box pb="sm">
@@ -662,6 +667,7 @@ export const Default = () => {
                       minWidth="40%"
                       maxWidth="400px"
                       value="https://somewhere.else.com:9090"
+                      key="url-input-2"
                     />
                   </Box>
                   <Box pb="lg">
