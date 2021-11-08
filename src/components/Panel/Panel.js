@@ -1,9 +1,14 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
-import { useStatusClasses } from '../../hooks';
+import { useStatusClasses, useDeprecationWarning } from '../../hooks';
 import Box from '../Box';
 import ScrollBox from '../ScrollBox';
+
+/**
+ * **WARNING: Panel will be deprecated in Astro 1.0.0, use `OverlayPanel` instead.**
+ *
+ */
 
 const Panel = forwardRef((props, ref) => {
   const {
@@ -22,6 +27,8 @@ const Panel = forwardRef((props, ref) => {
   const dynamicStyles = {
     marginRight: isVisible ? 0 : `-${width}`,
   };
+
+  useDeprecationWarning('`Panel` will be deprecated in Astro-UI 1.0.0, use `OverflowPanel` instead.');
 
   return (
     <Box
