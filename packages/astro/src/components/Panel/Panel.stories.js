@@ -2,10 +2,10 @@ import React from 'react';
 import Box from '../Box';
 import Text from '../Text';
 import Panel from '.';
-
+import withDeprecationWarning from '../../utils/devUtils/decorators/withDeprecationWarning';
 
 export default {
-  title: 'Panel',
+  title: 'Deprecated/Panel',
   component: Panel,
   argTypes: {
     isVisible: {
@@ -19,6 +19,9 @@ export default {
       description: 'Width of panel.',
     },
   },
+  decorators: [
+    (Story, context) => withDeprecationWarning(Story, context, '`Panel` will be deprecated in Astro-UI 1.0.0, use `OverlayPanel` instead.'),
+  ],
 };
 
 export const Default = ({ ...args }) => {
