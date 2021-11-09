@@ -14,6 +14,7 @@ const Chip = React.forwardRef((props, ref) => {
   const {
     children,
     textColor,
+    textProps,
     label,
   } = props;
 
@@ -24,7 +25,7 @@ const Chip = React.forwardRef((props, ref) => {
       ref={ref}
       {...props}
     >
-      <Text variant="label" sx={{ textTransform: 'uppercase' }} color={textColor}>
+      <Text variant="label" sx={{ textTransform: 'uppercase' }} color={textColor} {...textProps}>
         {label}
       </Text>
       {children}
@@ -39,6 +40,8 @@ Chip.propTypes = {
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** The label of the chip. */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Props object that is spread directly into the textfield. */
+  textProps: PropTypes.shape({}),
 };
 
 Chip.defaultProps = {
