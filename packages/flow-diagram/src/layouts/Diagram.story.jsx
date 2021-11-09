@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars,react/boolean-prop-naming */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Desktop } from '@pingux/icons';

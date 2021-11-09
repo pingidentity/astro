@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Desktop } from '@pingux/icons';
@@ -79,6 +80,7 @@ export const DiagramComponent = () => {
                 { from: 'user-login', to: key, category: 'outlet' },
             ]);
         }, 2000);
+        // eslint-disable-next-line consistent-return
         return () => clearTimeout(timerId);
     });
 

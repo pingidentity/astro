@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Desktop } from '@pingux/icons';
 import '../css/main.css';
 
@@ -34,7 +34,7 @@ export const Errors = () => {
             'id': 'START',
             'errorMessage': 'This is a start error',
             hasIO: false,
-            'isRoot': true
+            'isRoot': true,
         },
     ];
 

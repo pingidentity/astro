@@ -22,7 +22,7 @@ export const bindStrokeIfColor = (color) => {
 
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
-export const toNode = ({ color } = {}, { margin } = { margin: new go.Margin(0, 0, 0, 0)}) => $(go.Panel, 'Auto',
+export const toNode = ({ color } = {}, { margin } = { margin: new go.Margin(0, 0, 0, 0) }) => $(go.Panel, 'Auto',
     { alignment: go.Spot.Left, portId: 'to', toLinkable: true, margin, visible: true },
     new go.Binding('toLinkable', 'canLinkTo'),
     $(go.Shape, 'Circle',

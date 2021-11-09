@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Clear, Close, Desktop, Error, Success, Walkthrough } from '@pingux/icons';
 import { Box, Button, Image, Separator, Tabs, Tab, Text, TextField } from '@pingux/astro';
@@ -62,7 +63,7 @@ const Demo = () => {
         { 'from': 'user-login-success', 'to': 'finished', 'key': 'user-login-success_finished' },
         { 'from': 'branch', 'to': 'user-login-failure', 'key': 'branch_user-login-failure', 'category': 'outlet' },
         { 'from': 'branch', 'to': 'user-login-not_found', 'key': 'branch_user-login-not_found', 'category': 'outlet' },
-        { 'from': 'user-login', 'to': 'branch', 'key': 'user-login_branch'},
+        { 'from': 'user-login', 'to': 'branch', 'key': 'user-login_branch' },
         { 'from': 'START', 'to': 'user-login', 'key': 'START_user-login' },
     ]);
 
@@ -190,7 +191,6 @@ const Demo = () => {
                         }
 
 
-
                         return modifiedNode;
                     }),
                 ]);
@@ -210,7 +210,7 @@ const Demo = () => {
                     const newLinks = diagramLinks.map((link) => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
-                            return { from: link.from, to: `${groupKey}-step` }
+                            return { from: link.from, to: `${groupKey}-step` };
                         }
                         return link;
                     });
@@ -239,7 +239,10 @@ const Demo = () => {
                         }
                         return link;
                     });
-                    // Either adding link from dropped onto node to dropped node, or from dropped node to previously linked node
+                    /*
+                    Either adding link from dropped onto node to dropped node,
+                     or from dropped node to previously linked node
+                     */
                     if (!addedNodes[0].key.startsWith('login-group')) {
                         setDiagramLinks([
                             ...newLinks,
@@ -262,7 +265,7 @@ const Demo = () => {
             }
 
             if (modifiedNodeData && !insertedNodeKeys) {
-                const sortedNodeData = modifiedNodeData.sort((a, b) => (Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1 )
+                const sortedNodeData = modifiedNodeData.sort((a, b) => ((Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1));
                 if (droppedOntoLinkKey) {
                     const linkData = diagramLinks.filter(link => link.key === droppedOntoLinkKey);
                     if (linkData.from === selectedNode?.key && linkData.to === selectedNode?.key) {
@@ -272,7 +275,7 @@ const Demo = () => {
                     const newLinks = diagramLinks.map((link) => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
-                            return { from: link.from, to: sortedNodeData[0].key }
+                            return { from: link.from, to: sortedNodeData[0].key };
                         }
                         return link;
                     });
@@ -291,13 +294,21 @@ const Demo = () => {
                         if (link.from === droppedOntoNodeKey) {
                             linkedFrom = true;
                             linkTo = link.to;
-                            return { from: link.from, to: sortedNodeData[0].key }
+                            return { from: link.from, to: sortedNodeData[0].key };
                         }
                         return link;
                     });
                     setDiagramLinks([
                         ...newLinks,
-                        linkedFrom ? { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo } : { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
+                        linkedFrom ?
+                            {
+                                from: sortedNodeData[sortedNodeData.length - 1].key,
+                                to: linkTo,
+                            } :
+                            {
+                                from: droppedOntoNodeKey,
+                                to: sortedNodeData[0].key,
+                            },
                     ]);
                 }
             }
@@ -362,14 +373,16 @@ const Demo = () => {
                 'category': 'palette-group',
                 isGroup: true,
                 'text': 'Complete',
-                getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
+                getIconSrc: (color = COLORS.GREEN) =>
+                    svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'finished',
                 'category': 'finished',
                 'text': 'Complete',
                 group: 'finished-group',
-                getIconSrc: (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
+                getIconSrc: (color = COLORS.GREEN) =>
+                    svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'error-group',
@@ -406,7 +419,14 @@ const Demo = () => {
     const updateStepId = (selected, id, field) => {
         const currentNode = diagramNodes.find(node => node.key === selected.key);
         setSelectedNode({ ...currentNode, [field]: id });
-        setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
+        setDiagramNodes(
+            diagramNodes.map(
+                node => (node.key === selected.key ?
+                    { ...currentNode, [field]: id } :
+                    node
+                ),
+            ),
+        );
     };
 
     const getPanelIcon = (category) => {
@@ -422,7 +442,7 @@ const Demo = () => {
             default:
                 return <Icon path={mdiSourceBranch} height="20px" width="20px" color={COLORS.ORANGE} />;
         }
-    }
+    };
 
     return (
         <OuterContainer>

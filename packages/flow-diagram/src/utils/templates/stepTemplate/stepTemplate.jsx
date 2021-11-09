@@ -38,7 +38,7 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
     let p1 = 5;
     if (shape !== null) {
         const param1 = shape.parameter1;
-        if (!isNaN(param1) && param1 >= 0) p1 = param1;
+        if (!Number.isNaN(param1) && param1 >= 0) p1 = param1;
     }
     p1 = Math.min(p1, 45 / 2);
     p1 = Math.min(p1, h / 2);
@@ -49,7 +49,15 @@ go.Shape.defineFigureGenerator('StepIconBG', (shape, w, h) => {
     geo.add(new go.PathFigure(0, p1)
         .add(new go.PathSegment(go.PathSegment.Arc, 180, 90, p1, p1, p1, p1))
         .add(new go.PathSegment(go.PathSegment.Line, 45, 0))
-        .add(new go.PathSegment(go.PathSegment.Arc, arcStart, arcSweep, 45 + 50, h / 2, arcRadius, arcRadius))
+        .add(new go.PathSegment(
+            go.PathSegment.Arc,
+            arcStart,
+            arcSweep,
+            45 + 50,
+            h / 2,
+            arcRadius,
+            arcRadius,
+        ))
         .add(new go.PathSegment(go.PathSegment.Line, p1, h))
         .add(new go.PathSegment(go.PathSegment.Arc, 90, 90, p1, h - p1, p1, p1).close()));
     return geo;

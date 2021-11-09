@@ -21,7 +21,13 @@ export const getBorderColor = (selectedColor, errorColor, defaultColor) => (part
 
 const $ = go.GraphObject.make;
 
-export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height, onDelete = () => {} } = {}) => {
+export const circleNode = ({
+    color = COLORS.BLACK,
+    iconSrc,
+    width,
+    height,
+    onDelete = () => {},
+} = {}) => {
     return (
         $(go.Node, 'Auto', {
             deletable: false,
@@ -52,7 +58,7 @@ export const circleNode = ({ color = COLORS.BLACK, iconSrc, width, height, onDel
             { fill: 'transparent', stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(65, 110), cursor: 'normal' },
         ),
         $(go.Shape, 'Circle',
-            { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 6), cursor: 'normal', shadowVisible: true  },
+            { fill: COLORS.WHITE, stroke: 'transparent', strokeWidth: 0, desiredSize: new go.Size(40, 40), margin: new go.Margin(0, 0, 0, 6), cursor: 'normal', shadowVisible: true },
         ),
         $(go.Shape, 'Circle',
             { fill: 'transparent', strokeWidth: 2, desiredSize: new go.Size(38, 38), margin: new go.Margin(0, 0, 0, 6), cursor: 'normal' },

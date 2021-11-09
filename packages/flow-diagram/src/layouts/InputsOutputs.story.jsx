@@ -200,7 +200,7 @@ function TextInputShort({ label, id }) {
             <Box variant="forms.input.container" width="267px" id={id}>
                 <Box variant="forms.input" height="28px" p="0" justifyContent="center">
                     <Popover content="steps.registration.formData.user" placement="bottom">
-                        <Text ml="md">"Denver"</Text>
+                        <Text ml="md">&quot;Denver&quot;</Text>
                     </Popover>
                 </Box>
             </Box>
@@ -348,7 +348,15 @@ export const InputsOutputs = () => {
     const updateStepId = (selected, id, field) => {
         const currentNode = diagramNodes.find(node => node.key === selected.key);
         setSelectedNode({ ...currentNode, [field]: id });
-        setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ? { ...currentNode, [field]: id } : node)));
+        setDiagramNodes(
+            diagramNodes.map(
+                node => (
+                    node.key === selected.key ?
+                        { ...currentNode, [field]: id } :
+                        node
+                ),
+            ),
+        );
     };
     function onScroll() {
         setIsScrolling(true);

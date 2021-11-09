@@ -30,7 +30,7 @@
         "coverage-ci": "yarn test --ci",
         "demo": "rm -rf ./demo && build-storybook -o demo",
         "verify": "yarn lint && yarn coverage",
-        "lint": "eslint .",
+        "lint": "eslint --ext .js,.jsx .",
         "start": "yarn installdeps && start-storybook -p 1339",
         "test": "jest",
         "test-watch": "jest --watch",
