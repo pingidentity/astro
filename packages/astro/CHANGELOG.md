@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.37.0...@pingux/astro@0.38.0) (2021-11-09)
+
+
+### Bug Fixes
+
+* [UIP-4851] ImagesUploadField allows custom menu option strings ([47cb884](https://gitlab.corp.pingidentity.com/ux/pingux/commit/47cb88438bdeb2d3a26dd7b301f9af90224789e5))
+* [UIP-4900] Deprecate panel ([c9a1df4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c9a1df4675c2933897e363f1d0e45301384a0334))
+* [UIP-4921] Float Label Issue in List Layout ([c166440](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c16644095d50d41a797c64f438c72c44d9f1bb4e))
+
+
+### Features
+
+* [UIP-4858] Multivalues Component ([5478414](https://gitlab.corp.pingidentity.com/ux/pingux/commit/54784145811e2e7865935bff88864b700df4be16))
+
+
+
+
+
 # [0.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.36.1...@pingux/astro@0.37.0) (2021-11-04)
 
 
