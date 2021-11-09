@@ -1,9 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { act } from 'react-dom/test-utils'
+import { shallow, mount } from 'enzyme';
 import Preview, { Frame, EndUserSandbox, ThemeStyles } from './Preview';
 
 window.__DEV__ = true;
+
+jest.useRealTimers();
+
+function sleep(timeoutMs) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, timeoutMs);
+    });
+}
 
 const defaultProps = {
     'data-id': 'test-preview',
@@ -30,7 +38,7 @@ const getPreview = props => shallow(
     </Preview>
 );
 
-const getThemeStyles = props => shallow(
+const getThemeStyles = props => mount(
     <ThemeStyles {...props} />
 );
 
@@ -48,7 +56,6 @@ describe('Frame', () => {
     });
 
     it('properly sets the height if height prop not described', () => {
-        ReactDOM.render = jest.fn();
         const wrapper = getFrame({
             children: [
                 <div height="500px"></div>
@@ -62,7 +69,6 @@ describe('Frame', () => {
     });
 
     it('properly sets the width and height if described', () => {
-        ReactDOM.render = jest.fn();
         const wrapper = getFrame({
             width: '400px',
             height: '300px',
@@ -76,7 +82,6 @@ describe('Frame', () => {
     });
 
     it('"disables" autoheight if height described', () => {
-        ReactDOM.render = jest.fn();
         const wrapper = getFrame({
             height: '300px',
             children: [
@@ -128,18 +133,6 @@ describe('Preview', () => {
         expect(link.length).toEqual(0);
     });
 
-    it('adds custom theme CSS', () => {
-        const path = 'http://example.com/example.css';
-        const wrapper = getThemeStyles({
-            stylesheet: path,
-        });
-
-        const preview = wrapper.children();
-        const link = preview.find('link');
-
-        expect(link.prop('href')).toEqual(path);
-    });
-
     it('sets opacity to 0 until theme CSS loaded', () => {
         const path = 'http://example.com/example.css';
         const wrapper = getPreview({
@@ -178,5 +171,148 @@ describe('Preview', () => {
         const preview = wrapper.children();
 
         expect(preview.props().style.pointerEvents).toEqual('none');
+    });
+});
+
+describe('ThemeStyles', () => {
+    const loadingTimeoutThreshold = 200;
+
+    const path = 'http://example.com/example.css';
+
+    it('adds custom theme CSS', () => {
+        const wrapper = getThemeStyles({
+            stylesheet: path,
+            timeout: loadingTimeoutThreshold,
+        });
+
+        expect(wrapper.find('link').prop('href')).toEqual(path);
+    });
+
+    it('does not trigger onLoad and onError on initial render', () => {
+        const onLoad = jest.fn();
+        const onError = jest.fn();
+
+        const wrapper = getThemeStyles({
+            stylesheet: path,
+            timeout: loadingTimeoutThreshold,
+            onLoad,
+            onError
+        });
+
+        expect(onLoad).not.toHaveBeenCalled();
+        expect(onError).not.toHaveBeenCalled();
+    });
+
+    describe('triggers onLoad', () => {
+        it('when resource is loaded in time', () => {
+            const onLoad = jest.fn();
+            const onError = jest.fn();
+
+            const wrapper = getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+                onError,
+            });
+
+            wrapper.find('link').invoke('onLoad')();
+            expect(onLoad).toHaveBeenCalled();
+            expect(onError).not.toHaveBeenCalled();
+        });
+
+        it('if no onError passed when resource cannot be loaded', () => {
+            const onLoad = jest.fn();
+
+            const wrapper = getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+            });
+
+            wrapper.find('link').invoke('onError')();
+            expect(onLoad).toHaveBeenCalled();
+        });
+
+        it('if no onError passed when resource cannot be loaded in time', async () => {
+            const onLoad = jest.fn();
+            getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+            });
+
+            await act(() => sleep(loadingTimeoutThreshold - 50));
+            expect(onLoad).not.toHaveBeenCalled();
+            await act(() => sleep(100));
+            expect(onLoad).toHaveBeenCalled();
+        });
+
+        it('only once even if resource is loaded later', async () => {
+            const onLoad = jest.fn();
+            const wrapper = getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+            });
+
+            await act(() => sleep(loadingTimeoutThreshold));
+            wrapper.find('link').invoke('onError')();
+            wrapper.find('link').invoke('onLoad')();
+            expect(onLoad).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    describe('triggers onError if specified', () => {
+        it('when resource cannot be loaded', () => {
+            const onLoad = jest.fn();
+            const onError = jest.fn();
+
+            const wrapper = getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+                onError
+            });
+
+            wrapper.find('link').invoke('onError')();
+            expect(onLoad).not.toHaveBeenCalled();
+            expect(onError).toHaveBeenCalled();
+        });
+
+        it('when resource cannot be loaded in time', async () => {
+            const onLoad = jest.fn();
+            const onError = jest.fn();
+            getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+                onError
+            });
+
+            await act(() => sleep(loadingTimeoutThreshold - 50));
+            expect(onError).not.toHaveBeenCalled();
+            await act(() => sleep(100));
+            expect(onError).toHaveBeenCalled();
+            expect(onLoad).not.toHaveBeenCalled();
+        });
+
+        it('only once even if resource is loaded later', async () => {
+            const onLoad = jest.fn();
+            const onError = jest.fn();
+            const wrapper = getThemeStyles({
+                stylesheet: path,
+                timeout: loadingTimeoutThreshold,
+                onLoad,
+                onError
+            });
+
+            await act(() => sleep(loadingTimeoutThreshold - 50));
+            expect(onError).not.toHaveBeenCalled();
+            await act(() => sleep(100));
+            wrapper.find('link').invoke('onError')();
+            wrapper.find('link').invoke('onLoad')();
+            expect(onError).toHaveBeenCalledTimes(1);
+            expect(onLoad).not.toHaveBeenCalled();
+        });
     });
 });

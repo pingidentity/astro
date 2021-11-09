@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { noop } from 'underscore';
@@ -125,9 +125,38 @@ export const ThemeStyles = ({
     stylesheet,
     styles,
     onLoad,
+    onError,
+    timeout,
     bgImg,
 }) => {
     const userStyleElem = React.createElement('style', null, applyStyles(styles, bgImg, stylesheet));
+    const [isSuccessful, setIsSuccessFul] = useState(undefined);
+
+    const onSuccess = () => { setIsSuccessFul((currentIsSuccessful) => {
+        return currentIsSuccessful === undefined ? true : currentIsSuccessful;
+    }); };
+
+    const onFailure = () => { setIsSuccessFul((currentIsSuccessful) => {
+        return currentIsSuccessful === undefined ? false : currentIsSuccessful;
+    }); };
+
+    useEffect(() => {
+        switch(isSuccessful) {
+            case true:
+                onLoad();
+                break;
+            case false:
+                onError ? onError() : onLoad();
+                break;
+            default: { // initial render; value is `undefined`
+                const timerId = setTimeout(onFailure, timeout);
+
+                return () => {
+                    clearTimeout(timerId);
+                }
+            }
+        }
+    }, [isSuccessful]);
 
     return (
         <>
@@ -137,7 +166,8 @@ export const ThemeStyles = ({
                     rel="stylesheet"
                     type="text/css"
                     href={stylesheet}
-                    onLoad={onLoad}
+                    onLoad={onSuccess}
+                    onError={onFailure}
                 />
             }
             { userStyleElem }
@@ -150,11 +180,16 @@ ThemeStyles.propTypes = {
     themeStyleSheet: PropTypes.string,
     userStyles: PropTypes.shape({}),
     onLoad: PropTypes.func,
+    onError: PropTypes.func,
+    timeout: PropTypes.number,
 };
 
+const themeLoadingMaxTimeMs = 5000;
 ThemeStyles.defaultProps = {
     onLoad: noop,
+    onError: undefined,
     styles: {},
+    timeout: themeLoadingMaxTimeMs,
 };
 
 export class Frame extends React.Component {
@@ -405,6 +440,7 @@ const ThemePreview = ({
     interactive,
     scale,
     themeStyleSheet,
+    themeLoadingTimeoutMs,
     userStyles,
     bgImg,
     device,
@@ -439,6 +475,7 @@ const ThemePreview = ({
                     onLoad={() => setThemeLoaded(true)}
                     styles={userStyles}
                     bgImg={bgImg}
+                    timeout={themeLoadingTimeoutMs}
                 />
                 {children}
             </EndUserSandbox>
@@ -476,7 +513,11 @@ ThemePreview.propTypes = {
      */
     themeStyleSheet: PropTypes.string,
     /**
-     * Style over-rides from user prefrences
+     * If theme is not loaded during this time range we ignore loading
+     */
+    themeLoadingTimeoutMs: PropTypes.number,
+    /**
+     * Style over-rides from user preferences
      */
     userStyles: PropTypes.shape({}),
     /**
@@ -489,6 +530,7 @@ ThemePreview.defaultProps = {
     'data-id': 'preview',
     interactive: true,
     userStyles: {},
+    themeLoadingTimeoutMs: themeLoadingMaxTimeMs,
 };
 
 export default ThemePreview;
