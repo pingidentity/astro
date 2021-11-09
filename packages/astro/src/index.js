@@ -108,6 +108,8 @@ export { default as Messages } from './components/Messages';
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
 
+export { default as MultivaluesField } from './components/MultivaluesField';
+
 export { default as OverlayPanel } from './components/OverlayPanel';
 export * from './components/OverlayPanel';
 

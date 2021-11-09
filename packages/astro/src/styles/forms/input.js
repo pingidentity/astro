@@ -126,6 +126,44 @@ input.containedIcon = {
   transform: 'translate(-50%, -50%)',
 };
 
+input.multivaluesWrapper = {
+  ...input.container,
+  bg: 'white',
+  borderColor: 'neutral.80',
+  borderStyle: 'solid',
+  borderWidth: 1,
+  flexDirection: 'row!important',
+  flexWrap: 'wrap',
+  left: 3,
+  p: 10,
+  pl: 12,
+  '&.has-no-status-indicator': {
+    left: 0,
+  },
+  '&:after': {
+    borderRadius: 5,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    content: '""',
+    position: 'absolute',
+    bg: 'active',
+    width: 3,
+    top: 0,
+    left: -3,
+    bottom: 0,
+  },
+  '> input': {
+    border: 'none',
+    flex: 1,
+    height: 30,
+    lineHeight: '100%',
+    p: 5,
+    '&.is-focused': {
+      boxShadow: 'none',
+    },
+  },
+};
+
 input.numberField = {
   ...input,
   pr: '27px',

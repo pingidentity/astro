@@ -12,7 +12,7 @@ import useColumnStyles from '../../hooks/useColumnStyles';
  * Combines a text input, label, and helper text for a complete, form-ready solution.
  */
 const TextField = forwardRef((props, ref) => {
-  const { helperText, slots, status } = props;
+  const { helperText, slots, status, wrapperProps } = props;
   const {
     fieldContainerProps,
     fieldControlProps,
@@ -30,7 +30,8 @@ const TextField = forwardRef((props, ref) => {
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
-      <Box variant="forms.input.container" className={fieldControlProps.className}>
+      <Box variant="forms.input.container" className={fieldControlProps.className} {...wrapperProps}>
+        {slots?.beforeInput}
         <Input ref={inputRef} {...fieldControlProps} />
         {slots?.inContainer}
       </Box>
@@ -96,6 +97,8 @@ TextField.propTypes = {
   placeholder: PropTypes.string,
   /** Provides a way to insert markup in specified places. */
   slots: PropTypes.shape({
+    /** The given node will be inserted before the input. */
+    beforeInput: PropTypes.node,
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
@@ -109,6 +112,8 @@ TextField.propTypes = {
   controlProps: PropTypes.shape({}),
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the input wrapper element. */
+  wrapperProps: PropTypes.shape({}),
 };
 
 TextField.defaultProps = {
