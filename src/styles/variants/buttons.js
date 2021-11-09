@@ -327,6 +327,25 @@ const quiet = {
   display: 'flex',
 };
 
+const chipDeleteButton = {
+  borderRadius: '50%',
+  cursor: 'pointer',
+  height: 14,
+  ml: 'xs',
+  p: 0,
+  width: 14,
+  '&.is-focused, &.is-hovered': {
+    bg: 'accent.40',
+    borderColor: 'accent.40',
+    boxShadow: 'standard',
+    outline: 'none',
+  },
+  '&.is-pressed': {
+    bg: 'accent.20',
+    borderColor: 'accent.20',
+  },
+};
+
 const rocker = {
   ...base,
   display: 'inline-flex',
@@ -435,6 +454,7 @@ const expandableRow = {
 
 export default {
   accordionHeader,
+  chipDeleteButton,
   close,
   colorField,
   comboBox,
