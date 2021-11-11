@@ -208,4 +208,5 @@ export * from './components/TooltipTrigger';
 /* eslint-enable import/export */
 
 export { Item, Section } from '@react-stately/collections';
-export { OverlayProvider } from '@react-aria/overlays';
+export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
+export { useOverlayTriggerState } from '@react-stately/overlays';
