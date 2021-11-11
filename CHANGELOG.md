@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.38.0...@pingux/astro@0.38.1) (2021-11-11)
+
+
+### Bug Fixes
+
+* [UIP-4966] Re-export hooks and expose styles ([5acc7a1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5acc7a1228b6a145497135fa7ed17f78f7802469))
+
+
+
+
+
 # [0.38.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.37.0...@pingux/astro@0.38.0) (2021-11-09)
 
 
