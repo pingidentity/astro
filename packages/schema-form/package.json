@@ -23,7 +23,7 @@
     "coverage": "jest --coverage",
     "coverage-ci": "jest --coverage --ci",
     "demo": "build-storybook",
-    "lint": "eslint .",
+    "lint": "eslint --ext .js,.jsx .",
     "sample": "yarn && yarn watch",
     "start": "start-storybook -p 6006",
     "test": "jest",
