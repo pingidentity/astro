@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.7...@pingux/end-user@1.6.0) (2021-11-16)
+
+
+### Features
+
+* [UIP-4245] error and timeout handling for theme styles loading for Preview component in End-User ([857d9ee](https://gitlab.corp.pingidentity.com/ux/end-user/commit/857d9ee6f333a73a73d3e4246d77476deded2cd3))
+
+
+
+
+
 ## [1.5.7](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.6...@pingux/end-user@1.5.7) (2021-10-29)
 
 
