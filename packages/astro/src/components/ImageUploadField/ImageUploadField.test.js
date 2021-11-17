@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import ImageUploadField from './ImageUploadField';
+import { Image } from '../../index';
 
 const testLabel = 'test-label';
 const testButtonId = 'image-preview-button';
@@ -236,4 +237,11 @@ test('should show the menu if label clicked when preview image exists', async ()
   userEvent.click(imageUploadLabel);
   expect(screen.getByText(customUploadProp)).toBeInTheDocument();
   expect(screen.getByText(customRemoveProp)).toBeInTheDocument();
+});
+
+test('should render node element if passed as default image', () => {
+  getComponent({ defaultPreviewImage: <Image /> });
+  const img = screen.getByRole('img');
+  expect(img).toBeInstanceOf(HTMLImageElement);
+  expect(img).toBeInTheDocument();
 });
