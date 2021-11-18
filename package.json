@@ -52,6 +52,7 @@
     "babel-plugin-transform-node-env-inline": "^0.4.3",
     "countries-list": "^2.6.1",
     "eslint-plugin-jest-dom": "^3.9.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
     "eslint-plugin-testing-library": "^4.6.0",
     "faker": "5.1.0",
     "jest-axe": "^5.0.1",

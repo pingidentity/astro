@@ -37,7 +37,9 @@
         "react/boolean-prop-naming": 2,
         "function-paren-newline": 0,
         "quote-props": 0,
-        "object-curly-newline": ["error", { "consistent": true }]
+        "object-curly-newline": ["error", { "consistent": true }],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     },
     "settings": {
         "import/resolver": {
@@ -57,5 +59,5 @@
             }
         }
     ],
-    "plugins": ["@emotion", "testing-library", "jest-dom"]
+    "plugins": ["@emotion", "testing-library", "jest-dom", "react-hooks"]
 }

@@ -73,9 +73,10 @@ const useSelectField = (props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => triggerRef.current);
 
-  if (defaultText) {
-    useDeprecationWarning('The "defaultText" prop for `SelectField` will be deprecated in Astro-UI 1.0.0, use the "placeholder" prop instead.');
-  }
+  useDeprecationWarning(
+    'The "defaultText" prop for `SelectField` will be deprecated in Astro-UI 1.0.0, use the "placeholder" prop instead.',
+    { isActive: !!defaultText },
+  );
 
   // Get props for child elements from useSelect
   const { labelProps, triggerProps, valueProps, menuProps } = useSelect(
