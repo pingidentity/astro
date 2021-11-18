@@ -8,7 +8,7 @@ import Box from '../Box';
 import Label from '../Label';
 import { RadioContext } from '../RadioField';
 import FieldHelperText from '../FieldHelperText';
-import { useStatusClasses } from '../../hooks';
+import { useStatusClasses, usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 /**
@@ -31,11 +31,13 @@ const RadioGroupField = forwardRef((props, ref) => {
     orientation,
     status,
   } = props;
+
   const state = useRadioGroupState(props);
   const { radioGroupProps, labelProps } = useRadioGroup(props, state);
   const { classNames } = useStatusClasses(className, {
     'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
   });
+  usePropWarning(props, 'disabled', 'isDisabled');
 
   return (
     <Box

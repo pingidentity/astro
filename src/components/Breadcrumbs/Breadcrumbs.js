@@ -25,7 +25,6 @@ const Breadcrumbs = forwardRef((props, ref) => {
   const breadcrumbsRef = useRef();
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => breadcrumbsRef.current);
 
