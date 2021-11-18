@@ -114,7 +114,7 @@ Message.propTypes = {
   item: PropTypes.shape({
     key: PropTypes.string,
     props: PropTypes.shape({
-      children: PropTypes.string,
+      children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
       /* status changes the background, text, and button color accordingly */
       status: PropTypes.oneOf(Object.values(statuses)),
       /* Background color */
