@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 import { useToggleState } from '@react-stately/toggle';
 import { useSwitch } from '@react-aria/switch';
 
-import { useField } from '../../hooks';
+import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
@@ -46,6 +46,7 @@ const SwitchField = forwardRef((props, ref) => {
   } = props;
 
   const switchRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => switchRef.current);
   const state = useToggleState({

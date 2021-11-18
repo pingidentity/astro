@@ -12,6 +12,7 @@ import {
 } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { usePropWarning } from '../../hooks';
 import Loader from '../Loader';
 
 const ComboBoxInput = forwardRef((props, ref) => {
@@ -85,6 +86,8 @@ const ComboBoxInput = forwardRef((props, ref) => {
     lastInputValue.current = inputValue;
   }, [isLoading, showLoading, inputValue]);
   // END - minimum delay time for loading indicator = 500ms
+
+  usePropWarning(props, 'disabled', 'isDisabled');
 
   const button = (
     <Box isRow variant="boxes.inputInContainerSlot">

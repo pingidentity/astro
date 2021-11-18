@@ -14,6 +14,7 @@ import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { FocusScope } from '@react-aria/focus';
 
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import ComboBoxInput from '../ComboBox';
 import PopoverContainer from '../PopoverContainer';
@@ -100,6 +101,8 @@ const ComboBoxField = forwardRef((props, ref) => {
   const buttonRef = useRef();
   const listBoxRef = useRef();
   const inputRef = useRef();
+
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 

@@ -7,7 +7,7 @@ import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
 import { modes } from './constants';
-import { useAriaLabelWarning, useStatusClasses, useDeprecationWarning } from '../../hooks';
+import { useAriaLabelWarning, useStatusClasses, useDeprecationWarning, usePropWarning } from '../../hooks';
 import Loader from '../Loader';
 import Box from '../Box';
 
@@ -29,6 +29,7 @@ const Button = forwardRef((props, ref) => {
     ...others
   } = props;
   const buttonRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
