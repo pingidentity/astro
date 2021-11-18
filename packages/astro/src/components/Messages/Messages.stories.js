@@ -5,6 +5,7 @@ import AccountIcon from 'mdi-react/AccountIcon';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Messages from '.';
 import Button from '../Button';
+import Text from '../Text';
 
 export default {
   title: 'Messages',
@@ -63,7 +64,9 @@ const messageText = [
 
 export const Default = args => (
   <Messages {...args} items={messages}>
-    <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
+    <Item key="message1" data-id="message1">
+      <Text sx={{ fontWeight: 'bold' }}>Here is a very neutral thing</Text>
+    </Item>
     <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
   </Messages>
 );
@@ -142,3 +145,38 @@ export const WithCustomColorsAndIcons = args => (
     <Item bg="neutral.90" color="active" icon={AccountIcon}>Oh God, what have I done?</Item>
   </Messages>
 );
+
+export const WithTextStyling = (args) => {
+  const items = [
+    {
+      key: 'message1',
+      node: <strong>Here is a very neutral thing</strong>,
+    },
+    {
+      key: 'message2',
+      text: 'Form saved successfully',
+      status: 'success',
+    },
+    {
+      key: 'message3',
+      text: 'Something unexpected happened.',
+      status: 'warning',
+    },
+    {
+      key: 'message4',
+      node: (
+        <>
+          <b>Not saved! </b>
+          We could not validate one of the fields. Please see inline message below.
+        </>
+      ),
+      status: 'error',
+    },
+  ];
+
+  return (
+    <Messages {...args} items={items}>
+      {item => <Item {...item}>{item.node || item.text}</Item>}
+    </Messages>
+  );
+};
