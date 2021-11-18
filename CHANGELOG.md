@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.38.2...@pingux/astro@0.39.0) (2021-11-18)
+
+
+### Bug Fixes
+
+* [UIP-4880] Unable to provide styling to messages ([25cd409](https://gitlab.corp.pingidentity.com/ux/pingux/commit/25cd409261a224f5f4eaf77cee9363f85d18009e))
+* [UIP-4932 ] IconButton prop isDisabled does not apply ([d9098bd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d9098bdb04824a766fea755c298dad214224da58))
+
+
+### Features
+
+* [UIP-4973] Add components/nodes support to the ImageUploadField ([baa7d56](https://gitlab.corp.pingidentity.com/ux/pingux/commit/baa7d56bd902a90113c0fe881c0c5b8129edaa3f))
+
+
+
+
+
 ## [0.38.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.38.1...@pingux/astro@0.38.2) (2021-11-16)
 
 **Note:** Version bump only for package @pingux/astro
