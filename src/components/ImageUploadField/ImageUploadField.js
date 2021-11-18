@@ -57,7 +57,8 @@ const ImageUploadField = forwardRef((props, ref) => {
         isLoading={isLoading}
         loaderSize={loaderSize}
         previewImage={state.previewImage}
-        defaultPreviewImage={props?.defaultPreviewImage}
+        defaultPreviewImage={state.defaultPreviewImage}
+        defaultPreviewNode={state.defaultPreviewNode}
         isImageType={state.isImageType}
         onPress={state.pressPreviewButton}
         previewHeight={props?.previewHeight}
@@ -80,7 +81,7 @@ ImageUploadField.propTypes = {
   /** Text that renders in the remove menu item. */
   removeItemText: PropTypes.string,
   /** Default image preview (uncontrolled), used when no previewImage is present. */
-  defaultPreviewImage: PropTypes.string,
+  defaultPreviewImage: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /** An array of accepted file types.
    * (according to the https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#types ) */
   fileTypes: PropTypes.arrayOf(

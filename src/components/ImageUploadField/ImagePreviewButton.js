@@ -16,6 +16,7 @@ import Loader from '../Loader';
 const ImagePreviewButton = forwardRef((props, ref) => {
   const {
     defaultPreviewImage,
+    defaultPreviewNode,
     isImageType,
     isLoading,
     loaderSize,
@@ -33,7 +34,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
   const { focusProps, isFocusVisible } = useFocusRing();
   const { hoverProps, isHovered } = useHover(props);
 
-  const noImagePreview = (
+  const noImagePreview = defaultPreviewNode || (
     <Icon
       icon={ImageFilterHdrIcon}
       color="neutral.60"
@@ -108,6 +109,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
 
 ImagePreviewButton.propTypes = {
   defaultPreviewImage: PropTypes.string,
+  defaultPreviewNode: PropTypes.node,
   isImageType: PropTypes.bool,
   isLoading: PropTypes.bool,
   isMenuOpen: PropTypes.bool,
