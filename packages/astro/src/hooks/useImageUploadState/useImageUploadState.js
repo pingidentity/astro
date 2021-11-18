@@ -3,12 +3,20 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 const useImageUploadState = (props = {}, inputRef) => {
   const {
     previewImage: existingImage,
-    defaultPreviewImage,
+    defaultPreviewImage: defaultPreviewNode,
     fileTypes,
     onChange,
     previewHeight,
     previewWidth,
   } = props;
+
+  const defaultPreviewImage = useMemo(
+    () =>
+      (typeof defaultPreviewNode === 'string'
+        ? defaultPreviewNode
+        : null),
+    [defaultPreviewNode],
+  );
 
   const [previewImage, setPreviewImage] = useState(existingImage || defaultPreviewImage);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,6 +102,8 @@ const useImageUploadState = (props = {}, inputRef) => {
   );
 
   return {
+    defaultPreviewImage,
+    defaultPreviewNode,
     fileName,
     handleInputChange,
     handleLabelClick,
