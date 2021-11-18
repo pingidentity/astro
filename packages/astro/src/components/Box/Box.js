@@ -5,7 +5,7 @@ import { layout, flexbox, typography } from 'styled-system';
 import { Box as ThemeUIBox } from 'theme-ui';
 import { propType as stylePropType } from '@styled-system/prop-types';
 import { toNumber } from 'lodash';
-import { useStatusClasses } from '../../hooks';
+import { useStatusClasses, usePropWarning } from '../../hooks';
 
 const ExtendedBox = styled(ThemeUIBox)(layout, flexbox, typography);
 /**
@@ -29,6 +29,7 @@ const Box = forwardRef((props, ref) => {
   const custom = { ...sx };
 
   const { classNames } = useStatusClasses(className, { isDisabled });
+  usePropWarning(props, 'disabled', 'isDisabled');
 
   if (gap) {
     custom['& > * + *:not(:first-child) /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */'] = {
