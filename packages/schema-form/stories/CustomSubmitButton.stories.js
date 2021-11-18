@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SchemaForm from '../src/components/SchemaForm';
 
-export const customSubmitButton = () => {
+export const CustomSubmitButton = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const schema = {

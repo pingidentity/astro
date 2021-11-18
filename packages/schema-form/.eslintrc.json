@@ -7,7 +7,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "airbnb/hooks"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -30,7 +31,8 @@
         "react/jsx-props-no-spreading": [0],
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "import/prefer-default-export": [0],
-        "import/no-named-as-default-member": [0]
+        "import/no-named-as-default-member": [0],
+        "react-hooks/exhaustive-deps": "warn"
     },
     "overrides": [
         {

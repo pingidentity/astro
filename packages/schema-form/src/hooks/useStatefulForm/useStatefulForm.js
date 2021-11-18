@@ -27,15 +27,10 @@ const useStatefulForm = (props = {}) => {
     onServerError,
     onServerSuccess,
     onSubmit,
-    rules,
-    schema,
+    rules = [],
+    schema = { properties: {} },
     uiSchema,
   } = props;
-
-  // In simplified mode, don't worry about all of the control happening below
-  if (mode === FORM_MODE.SIMPLIFIED) {
-    return {};
-  }
 
   const [currentData, setCurrentData] = useState(formData);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -69,7 +64,12 @@ const useStatefulForm = (props = {}) => {
     if (formState === FORM_STATE.ERROR) {
       setFormState(FORM_STATE.DEFAULT);
     }
-  });
+  }, [formState, formSubmitted]);
+
+  // In simplified mode, don't worry about all of the control happening below
+  if (mode === FORM_MODE.SIMPLIFIED) {
+    return {};
+  }
 
   const handleChange = (formInfo = {}, ...args) => {
     const { formData: newFormData } = formInfo;
