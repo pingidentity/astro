@@ -4,9 +4,7 @@ import { IconButton as ThemeUIIconButton } from 'theme-ui';
 import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
-import useStatusClasses from '../../hooks/useStatusClasses';
-
-import { useAriaLabelWarning } from '../../hooks';
+import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 /**
@@ -25,7 +23,8 @@ const IconButton = forwardRef((props, ref) => {
     onPressStart,
     onPressEnd,
     onPressChange,
-    onPressUp, ...others } = props;
+    onPressUp,
+    isDisabled, ...others } = props;
 
   const buttonRef = useRef();
   /* istanbul ignore next */
@@ -39,9 +38,11 @@ const IconButton = forwardRef((props, ref) => {
     isHovered,
     isPressed,
     isFocused: isFocusVisible,
+    isDisabled,
   });
 
   const ariaLabel = props['aria-label'] || title;
+
   useAriaLabelWarning('IconButton', ariaLabel);
 
   const button = (
@@ -103,10 +104,13 @@ IconButton.propTypes = {
    * (e: PressEvent) => void
    */
   onPressUp: PropTypes.func,
+  /** Whether the icon is disabled. */
+  isDisabled: PropTypes.bool,
 };
 
 IconButton.defaultProps = {
   variant: 'iconButton',
+  isDisabled: false,
 };
 
 IconButton.displayName = 'Icon Button';

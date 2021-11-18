@@ -31,6 +31,7 @@ export default {
         type: 'text',
       },
     },
+    isDisabled: {},
     variant: {
       control: {
         type: 'none',
@@ -39,8 +40,8 @@ export default {
   },
 };
 
-export const Default = () => (
-  <IconButton aria-label="my-label" >
+export const Default = args => (
+  <IconButton aria-label="my-label" {...args}>
     <Icon icon={CreateIcon} />
   </IconButton>
 );
@@ -52,6 +53,11 @@ export const Inverted = () => (
 
 export const WithTooltip = () => (
   <IconButton aria-label="my-label" title="Edit">
+    <Icon icon={CreateIcon} />
+  </IconButton>
+);
+export const Disabled = () => (
+  <IconButton aria-label="my-label" isDisabled>
     <Icon icon={CreateIcon} />
   </IconButton>
 );
