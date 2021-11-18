@@ -14,7 +14,7 @@ import { Item as Tab } from '@react-stately/collections';
 import Box from '../Box';
 import { TabsContext } from '../Tabs';
 import Text from '../Text';
-import { useStatusClasses } from '../../hooks';
+import { useStatusClasses, usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 import Button from '../Button';
@@ -54,6 +54,7 @@ export const CollectionTab = forwardRef((props, ref) => {
   });
 
   const tabRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabRef.current);
   const { tabProps } = useTab({ key, isDisabled }, state, tabRef);

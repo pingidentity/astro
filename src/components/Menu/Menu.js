@@ -11,6 +11,7 @@ import { useFocusRing } from '@react-aria/focus';
 import { useSyncRef, mergeProps } from '@react-aria/utils';
 
 import { MenuContext } from '../../context/MenuContext';
+import { usePropWarning } from '../../hooks';
 import MenuItem from '../MenuItem';
 import Box from '../Box';
 
@@ -36,6 +37,7 @@ const Menu = forwardRef((props, ref) => {
   const state = useTreeState(completeProps);
   const menuRef = useRef();
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => menuRef.current);
   const { menuProps } = useMenu(completeProps, state, menuRef);

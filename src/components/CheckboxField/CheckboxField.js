@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useToggleState } from '@react-stately/toggle';
 import { useCheckbox } from '@react-aria/checkbox';
 
-import { useField } from '../../hooks';
+import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Checkbox from '../Checkbox';
@@ -34,6 +34,7 @@ const CheckboxField = forwardRef((props, ref) => {
   };
   const state = useToggleState(checkboxProps);
   const checkboxRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => checkboxRef.current);
 

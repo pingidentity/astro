@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 
-import { useSelectField } from '../../hooks';
+import { usePropWarning, useSelectField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Button from '../Button';
@@ -21,6 +21,7 @@ import Text from '../Text';
 const LinkSelectField = forwardRef((props, ref) => {
   const { placeholder, status } = props;
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField({
     listboxStyle: {
       width: '10em',

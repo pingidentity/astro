@@ -10,6 +10,7 @@ import { v4 as uuid } from 'uuid';
 import { Chip, Icon, IconButton, PopoverContainer, ScrollBox, TextField } from '../..';
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { usePropWarning } from '../../hooks';
 
 /**
  * Complex control that lets you choose several tags from the dropdown list.
@@ -47,6 +48,8 @@ const MultivaluesField = forwardRef((props, ref) => {
   } = props;
 
   const hasCustomValue = mode === 'non-restrictive';
+
+  usePropWarning(props, 'disabled', 'isDisabled');
 
   const [customItems, setCustomItems] = useState([]);
   const [filterString, setFilterString] = useState('');

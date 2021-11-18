@@ -10,7 +10,7 @@ import { useMenuItem } from '@react-aria/menu';
 import { useFocus, useHover, usePress } from '@react-aria/interactions';
 
 import { useMenuContext } from '../../context/MenuContext';
-import { useStatusClasses } from '../../hooks';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
@@ -39,6 +39,7 @@ const MenuItem = forwardRef((props, ref) => {
   const isDisabled = propIsDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectionManager.isSelected(key);
   const menuItemRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => menuItemRef.current);
   const { menuItemProps } = useMenuItem(
