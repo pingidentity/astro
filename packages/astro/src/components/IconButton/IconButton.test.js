@@ -118,3 +118,11 @@ test('the button should be getting aria label attribute', () => {
   getComponent({ 'aria-label': testLabel });
   expect(screen.getByLabelText(testLabel)).toBeInTheDocument();
 });
+
+test('show button isDisabled status', () => {
+  const onPress = jest.fn();
+  getComponent({ onPress, isDisabled: true });
+  const button = screen.getByTestId(testId);
+  expect(button).toHaveClass('is-disabled');
+  expect(onPress).not.toHaveBeenCalled();
+});
