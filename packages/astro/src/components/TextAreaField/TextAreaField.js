@@ -1,12 +1,11 @@
 import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useField, useLabelHeight } from '../../hooks';
+import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 import TextArea from '../TextArea';
-import useColumnStyles from '../../hooks/useColumnStyles';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -22,6 +21,7 @@ const TextAreaField = forwardRef((props, ref) => {
   const textAreaRef = useRef();
   const labelRef = useRef();
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => textAreaRef.current);
 

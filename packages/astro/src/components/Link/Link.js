@@ -5,12 +5,13 @@ import { useLink } from '@react-aria/link';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
-import { useStatusClasses } from '../../hooks';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 
 const Link = forwardRef((props, ref) => {
   const { className, isDisabled, ...others } = props;
 
   const linkRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => linkRef.current);
   const { isFocusVisible, focusProps } = useFocusRing();
@@ -45,7 +46,6 @@ Link.propTypes = {
   /**  Specifies the window where the linked page is loaded */
   target: PropTypes.string,
 };
-
 
 Link.defaultProps = {
   isDisabled: false,

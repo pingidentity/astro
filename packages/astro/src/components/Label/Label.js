@@ -3,7 +3,7 @@ import { flexbox, layout } from 'styled-system';
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Label as ThemeUILabel } from 'theme-ui';
-import { useStatusClasses } from '../../hooks';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 import { modes } from './constants';
 import Box from '../Box';
 import HelpHint from '../HelpHint';
@@ -38,6 +38,9 @@ const Label = forwardRef((props, ref) => {
     helpHintProps,
     ...others
   } = props;
+
+  usePropWarning(props, 'disabled', 'isDisabled');
+
   const { classNames } = useStatusClasses(className, {
     isDisabled,
     isRequired,

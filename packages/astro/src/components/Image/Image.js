@@ -2,7 +2,7 @@ import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { Image as ThemeUIImage } from 'theme-ui';
 import { useHover } from '@react-aria/interactions';
-import { useStatusClasses } from '../../hooks';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 
 /**
  * Basic image component.
@@ -16,6 +16,8 @@ const Image = forwardRef((props, ref) => {
   const imgRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => imgRef.current);
+  usePropWarning(props, 'disabled', 'isDisabled');
+
   const { hoverProps, isHovered } = useHover(props);
   const { classNames } = useStatusClasses(className, {
     isDisabled,

@@ -5,7 +5,7 @@ import { useOverlayPosition } from '@react-aria/overlays';
 import { useTooltipTrigger } from '@react-aria/tooltip';
 import { useTooltipTriggerState } from '@react-stately/tooltip';
 
-import { useStatusClasses } from '../../hooks';
+import { useStatusClasses, usePropWarning } from '../../hooks';
 import { TooltipContext } from '../../context/TooltipContext/index';
 import PopoverContainer from '../PopoverContainer';
 
@@ -37,6 +37,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
   const tooltipTriggerRef = useRef();
   const overlayRef = useRef();
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tooltipTriggerRef.current);
 
