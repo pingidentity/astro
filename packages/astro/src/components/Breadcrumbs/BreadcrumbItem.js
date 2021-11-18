@@ -9,6 +9,7 @@ import { useBreadcrumbItem } from '@react-aria/breadcrumbs';
 import PropTypes from 'prop-types';
 import { mergeProps } from '@react-aria/utils';
 import { omit } from 'lodash/object';
+import { usePropWarning } from '../../hooks/';
 import { Button, IconButton, Text } from '../../index';
 
 const BreadcrumbItem = forwardRef((props, ref) => {
@@ -23,6 +24,7 @@ const BreadcrumbItem = forwardRef((props, ref) => {
 
   const itemRef = useRef();
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => itemRef.current);
 

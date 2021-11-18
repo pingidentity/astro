@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-import { useField, useLabelHeight } from '../../hooks';
+import { useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
@@ -21,6 +21,7 @@ const TextField = forwardRef((props, ref) => {
   const inputRef = useRef();
   const labelRef = useRef();
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 

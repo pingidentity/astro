@@ -10,6 +10,7 @@ import { useTabListState } from '@react-stately/tabs';
 import Box from '../Box';
 import { CollectionTab } from '../Tab';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import { usePropWarning } from '../../hooks';
 
 export const TabsContext = React.createContext({});
 
@@ -26,6 +27,7 @@ const Tabs = forwardRef((props, ref) => {
   } = props;
 
   const tabListRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabListRef.current);
   const tabPanelRef = useRef();

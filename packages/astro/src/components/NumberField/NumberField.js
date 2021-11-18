@@ -15,7 +15,7 @@ import {
   Input,
   Label,
 } from '../../index';
-import { useField } from '../../hooks';
+import { useField, usePropWarning } from '../../hooks';
 
 /**
  * Number fields allow users to enter a number, and increment or
@@ -46,6 +46,7 @@ const NumberField = forwardRef((props, ref) => {
     props,
   );
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 

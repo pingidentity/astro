@@ -4,7 +4,7 @@ import { useSearchField } from '@react-aria/searchfield';
 import { useSearchFieldState } from '@react-stately/searchfield';
 import SearchIcon from 'mdi-react/SearchIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
-import { useField } from '../../hooks';
+import { useField, usePropWarning } from '../../hooks';
 import { Box, Icon, IconButton, Input, Label } from '../../index';
 
 
@@ -30,6 +30,7 @@ const SearchField = forwardRef((props, ref) => {
     labelProps,
   } = props;
   const searchRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => searchRef.current);
   const state = useSearchFieldState(props);

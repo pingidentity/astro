@@ -6,6 +6,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useTabList } from '@react-aria/tabs';
 import { useTabListState } from '@react-stately/tabs';
+import { usePropWarning } from '../../hooks';
 import Box from '../Box';
 import { CollectionRockerButton } from '../RockerButton';
 
@@ -25,6 +26,7 @@ const RockerButtonGroup = forwardRef((props, ref) => {
     ...others
   } = props;
   const buttonGroupRef = useRef();
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonGroupRef.current);
   const state = useTabListState({ ...props, onSelectionChange });

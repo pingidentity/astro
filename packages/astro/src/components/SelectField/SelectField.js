@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { useSelectField } from '../../hooks';
+import { useSelectField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import SelectFieldBase from '../SelectFieldBase';
 
@@ -13,6 +13,7 @@ import SelectFieldBase from '../SelectFieldBase';
  * React Stately.
  */
 const SelectField = forwardRef((props, ref) => {
+  usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField(props, ref);
   return <SelectFieldBase {...props} {...selectFieldProps} />;
 });
