@@ -33,6 +33,7 @@ Messages.propTypes = {
     key: PropTypes.string,
     text: PropTypes.string,
     status: PropTypes.oneOf(Object.values(statuses)),
+    node: PropTypes.node,
   })),
   /* Callback for clicking the message's close button */
   onClose: PropTypes.func,
