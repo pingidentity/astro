@@ -104,6 +104,7 @@ export * from './components/Loader';
 export { default as Menu } from './components/Menu';
 
 export { default as Messages } from './components/Messages';
+export * from './components/Messages';
 
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
