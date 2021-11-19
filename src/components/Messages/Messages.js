@@ -39,4 +39,8 @@ Messages.propTypes = {
   onClose: PropTypes.func,
 };
 
+Messages.defaultProps = {
+  items: [],
+};
+
 export default Messages;
