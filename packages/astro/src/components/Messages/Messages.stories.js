@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Item } from '@react-stately/collections';
 import AccountIcon from 'mdi-react/AccountIcon';
 
 import statuses from '../../utils/devUtils/constants/statuses';
-import Messages from '.';
-import Button from '../Button';
-import Text from '../Text';
+import { Box, Button, Messages } from '../..';
+import messagesReducer, { multiMessagesReducer } from './Messages.reducer';
 
 export default {
   title: 'Messages',
@@ -64,9 +63,7 @@ const messageText = [
 
 export const Default = args => (
   <Messages {...args} items={messages}>
-    <Item key="message1" data-id="message1">
-      <Text sx={{ fontWeight: 'bold' }}>Here is a very neutral thing</Text>
-    </Item>
+    <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
     <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
   </Messages>
 );
@@ -145,6 +142,94 @@ export const WithCustomColorsAndIcons = args => (
     <Item bg="neutral.90" color="active" icon={AccountIcon}>Oh God, what have I done?</Item>
   </Messages>
 );
+
+export const UseReducer = () => {
+  // import { messagesReducer as messagesReducerCore } from '@pingux/astro';
+  // const messagesReducer = messagesReducerCore;
+  // const makeShowMessage = (status, timeout) => text => messagesReducer.actions.showMessage(
+  //   { text, status },
+  //   timeout,
+  // );
+  // messagesReducer.actions = {
+  //   ...messagesReducer.actions,
+  //   showSuccessMessage: makeShowMessage('success', 3000),
+  //   showErrorMessage: makeShowMessage('error', -1),
+  //   showWarningMessage: makeShowMessage('warning', -1),
+  // };
+
+  const [items, dispatch] = useReducer(messagesReducer);
+
+  const showAMessage = () => {
+    const actionFn = [
+      messagesReducer.actions.showSuccessMessage,
+      messagesReducer.actions.showErrorMessage,
+      messagesReducer.actions.showWarningMessage,
+    ][Math.floor(Math.random() * 3)];
+    const message = messageText[Math.floor(Math.random() * 6)];
+    actionFn(message)(dispatch);
+  };
+
+  return (
+    <>
+      <Button onPress={showAMessage}>Add Message</Button>
+      {
+        items?.length > 0
+        &&
+        <Button
+          mt="md"
+          onPress={() => dispatch(messagesReducer.actions.clearMessages())}
+        >
+          Clear messages
+        </Button>
+      }
+      <Messages
+        items={items}
+        onClose={key => dispatch(messagesReducer.actions.removeMessage(key))}
+      >
+        {item => <Item {...item}>{item.text}</Item>}
+      </Messages>
+    </>
+  );
+};
+
+export const UseReducerWithMultipleContainers = () => {
+  const [items, dispatch] = useReducer(multiMessagesReducer, {
+    'container-one': [], 'container-two': [],
+  });
+
+  const showAMessage = (container) => {
+    const actionFn = [
+      multiMessagesReducer.actions.showSuccessMessage,
+      multiMessagesReducer.actions.showCriticalMessage,
+      multiMessagesReducer.actions.showWarningMessage,
+    ][Math.floor(Math.random() * 3)];
+    const message = messageText[Math.floor(Math.random() * 6)];
+    actionFn(container, message)(dispatch);
+  };
+
+  return (
+    <>
+      <Box isRow>
+        <Button onPress={() => showAMessage('container-one')}>Add message to the left</Button>
+        <Button ml="md" onPress={() => showAMessage('container-two')}>Add message to the right</Button>
+      </Box>
+      <Messages
+        items={items['container-one']}
+        onClose={key => dispatch(multiMessagesReducer.actions.removeMessage('container-one', key))}
+        sx={{ width: '45%' }}
+      >
+        {item => <Item {...item}>{item.text}</Item>}
+      </Messages>
+      <Messages
+        items={items['container-two']}
+        onClose={key => dispatch(multiMessagesReducer.actions.removeMessage('container-two', key))}
+        sx={{ left: '55%' }}
+      >
+        {item => <Item {...item}>{item.text}</Item>}
+      </Messages>
+    </>
+  );
+};
 
 export const WithTextStyling = (args) => {
   const items = [
