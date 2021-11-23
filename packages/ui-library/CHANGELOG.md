@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.43.0-alpha.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0-alpha.1...ui-library@4.43.0-alpha.2) (2021-11-23)
+
+
+### Bug Fixes
+
+* [UIP-4965] Add y axis label prop ([d5fa5f2](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/d5fa5f21f1bf24d19367ad2f2d5cc7cfdeabba1b))
+
+
+
+
+
 # [4.43.0-alpha.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0-alpha.0...ui-library@4.43.0-alpha.1) (2021-10-12)
 
 

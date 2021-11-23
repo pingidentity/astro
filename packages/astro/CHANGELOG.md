@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.39.0...@pingux/astro@0.40.0) (2021-11-23)
+
+
+### Features
+
+* [UIP-4892] Port messages reducer to Astro from Compass ([670c7c7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/670c7c74ebeaa9e2fd3f8f2cbe47313c1639d393))
+
+
+
+
+
 # [0.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.38.2...@pingux/astro@0.39.0) (2021-11-18)
 
 
