@@ -221,6 +221,7 @@ describe("ColumnChart", () => {
             <ColumnChart
                 {...defaultProps}
                 hideY={false}
+                yAxisLabel="Hello There"
             />
         );
         expect(component.find(YAxis).exists()).toBeTruthy();
