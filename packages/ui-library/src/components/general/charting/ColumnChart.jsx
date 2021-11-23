@@ -4,6 +4,8 @@ import {
     BarChart,
     Bar,
     XAxis,
+    Label,
+    Text,
     Cell,
     Tooltip,
     ReferenceLine,
@@ -112,6 +114,8 @@ export default class ColumnChart extends React.Component {
         referenceLineColor: PropTypes.string,
         renderTooltip: PropTypes.func,
         stacked: PropTypes.bool,
+        yAxisLabel: PropTypes.string,
+        yAxisWidth: PropTypes.number,
         width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     };
 
@@ -131,7 +135,9 @@ export default class ColumnChart extends React.Component {
         stacked: true,
         width: "100%",
         hideX: true,
-        hideY: true
+        hideY: true,
+        yAxisLabel: "",
+        yAxisWidth: 100,
     };
 
     state = {
@@ -196,13 +202,28 @@ export default class ColumnChart extends React.Component {
         this.props.onMouseOver(data, e);
     }
 
+    _renderYAxisLabel = ({ viewBox }) => {
+        const cy = viewBox.height / 2;
+
+        return <Text x={0} y={cy} width={50} style={{ fontSize: "15px" }}>{this.props.yAxisLabel}</Text>;
+    }
+
     _generateYAxes = (legend) => {
         const yAxes = [];
 
         return legend.map(axis => {
             if (axis.yAxisId && !yAxes.includes(axis.yAxisId)) {
                 yAxes.push(axis.yAxisId);
-                return (<YAxis key={axis.yAxisId} yAxisId={axis.yAxisId} hide={this.props.hideY} />);
+                return (
+                    <YAxis
+                        key={axis.yAxisId}
+                        yAxisId={axis.yAxisId}
+                        hide={this.props.hideY}
+                        width={this.props.yAxisWidth}
+                    >
+                        <Label content={this._renderYAxisLabel} />
+                    </YAxis>
+                );
             } else if (!axis.yAxisId && !yAxes.includes(this.props.baseYAxisId)) {
                 yAxes.push(this.props.baseYAxisId);
                 return (
@@ -210,7 +231,10 @@ export default class ColumnChart extends React.Component {
                         key={this.props.baseYAxisId}
                         yAxisId={this.props.baseYAxisId}
                         hide={this.props.hideY}
-                    />
+                        width={this.props.yAxisWidth}
+                    >
+                        <Label content={this._renderYAxisLabel} />
+                    </YAxis>
                 );
             }
         });
@@ -286,11 +310,13 @@ export default class ColumnChart extends React.Component {
             ? (this.state.refLineTranslate - tooltipOverflow)
             : this.state.refLineTranslate + 5;
 
+        const responsiveContainerHeight = this.props.hideX ? this.props.height : this.props.height + 30;
+
         return (
             <>
                 <ResponsiveContainer
                     className={this.props.className}
-                    height={this.props.height}
+                    height={responsiveContainerHeight}
                     width={this.props.width}
                 >
                     <BarChart
@@ -304,7 +330,6 @@ export default class ColumnChart extends React.Component {
                     >
                         <XAxis dataKey="name" hide={this.props.hideX} />
                         {this._generateYAxes(legend)}
-
                         {lines
                             ? <CartesianGrid
                                 vertical={false}
@@ -366,6 +391,7 @@ export default class ColumnChart extends React.Component {
                                     // This is awful and I am sorry. It's the only way to find the x coordinate
                                     // of the reference line/tooltip.
                                     const ref = 0 - (viewBox.x - selectedX.location - (selectedX.width / 2));
+                                    /* istanbul ignore next */
                                     if (this.state.refLineTranslate !== ref) {
                                         this.setState({ refLineTranslate: ref });
                                     }

@@ -23,8 +23,8 @@ class ColumnCardDemo extends React.Component {
         const legend = [
             { label: "Usage", id: "usage", yAxisId: "users", color: "#2A713E" },
             { label: "Visitors", id: "visitors", yAxisId: "users", color: "#48C06A" },
-            { label: "Cost", id: "cost", yAxisId: "cost", color: "#389251" },
-            { label: "Savings", id: "savings", yAxisId: "cost", color: "#5DEB85" },
+            { label: "Cost", id: "cost", yAxisId: "users", color: "#389251" },
+            { label: "Savings", id: "savings", yAxisId: "users", color: "#5DEB85" },
         ];
 
         /**
@@ -154,6 +154,9 @@ class ColumnCardDemo extends React.Component {
                                     }
                                 />
                             )}
+                            hideY={false}
+                            hideX={false}
+                            yAxisLabel="February January December September"
                         />
                     }
                     controls={
