@@ -42,10 +42,12 @@ export const StatelessDropdown = ({
         'dropdown--with-message': fieldMessage && status === dropdownStatuses.DEFAULT,
         'dropdown--standard': !fieldMessage && status === dropdownStatuses.DEFAULT,
     });
+
     const selectClassNames = classnames('dropdown__select', selectClassName, {
         'dropdown__select--error': status === dropdownStatuses.ERROR,
         'dropdown__select--success': status === dropdownStatuses.SUCCESS,
         'dropdown__select--info': status === dropdownStatuses.DEFAULT,
+        'dropdown__select--placeholder': value === "",
     });
 
     const iconClassNames = classnames('text-input__icon', {
