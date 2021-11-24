@@ -134,8 +134,8 @@ AccordionGridGroup.propTypes = {
   /** Identifies the element (or elements) that describes the object. */
   'aria-describedby': PropTypes.string,
   /**
-   * Identifies the element (or elements) that provide a detailed, extended description for the
-   * object.
+   * Identifies the element (or elements) that provide a detailed, extended description for
+   * the object.
   */
   'aria-details': PropTypes.string,
   /**
