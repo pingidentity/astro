@@ -35,7 +35,7 @@ const MenuItem = forwardRef((props, ref) => {
     closeOnSelect,
   } = useMenuContext();
   const { key, rendered, props: itemProps } = item;
-  const { isSeparator, isPressed: propIsPressed, 'data-id': dataId } = itemProps;
+  const { isSeparator, isPressed: propIsPressed, 'data-id': dataId, ...others } = itemProps;
   const isDisabled = propIsDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectionManager.isSelected(key);
   const menuItemRef = useRef();
@@ -78,7 +78,7 @@ const MenuItem = forwardRef((props, ref) => {
       ref={menuItemRef}
       variant={isSeparator ? 'menuItem.separator' : 'menuItem.item'}
       data-id={dataId}
-      {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps)}
+      {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps, others)}
     >
       {rendered}
     </Box>
