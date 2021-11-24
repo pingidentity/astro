@@ -8,7 +8,7 @@ import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import useField from '../../hooks/useField';
 import useProgressiveState from '../../hooks/useProgressiveState';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { useStatusClasses } from '../../hooks';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Input from '../Input';
@@ -47,6 +47,8 @@ const PasswordField = forwardRef((props, ref) => {
 
   const inputRef = useRef();
   const popoverRef = useRef();
+
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 

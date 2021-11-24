@@ -8,7 +8,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useRadio } from '@react-aria/radio';
 
-import { useField } from '../../hooks';
+import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Radio from '../Radio';
@@ -35,6 +35,8 @@ const RadioField = forwardRef((props, ref) => {
   } = props;
 
   const radioFieldRef = useRef();
+
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => radioFieldRef.current);
   const state = useContext(RadioContext);

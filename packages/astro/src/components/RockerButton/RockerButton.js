@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Item } from '@react-stately/collections';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
-import { useRockerButton, useStatusClasses } from '../../hooks';
+import { useRockerButton, useStatusClasses, usePropWarning } from '../../hooks';
 import Button from '../Button';
 import { RockerContext } from '../RockerButtonGroup';
 
@@ -31,6 +31,8 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
   });
 
   const rockerButtonRef = useRef();
+
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => rockerButtonRef.current);
   const { rockerButtonProps } = useRockerButton({ item, isDisabled }, state, rockerButtonRef);
