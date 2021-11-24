@@ -21,7 +21,7 @@ const getComponent = (props = {}, {
   renderFn = render,
 } = {}) => renderFn((
   <Menu {...defaultProps} {...props}>
-    {items.map(li => <Item key={li.key} {...li} />)}
+    {items.map(li => <Item key={li.key} {...li} sx={{ backgroundColor: 'orange' }} />)}
   </Menu>
 ));
 
@@ -125,4 +125,11 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   const menuItems = screen.queryAllByRole('menuitem');
   expect(menuItems).toHaveLength(defaultMenuItems.length);
   expect(menuItems[0]).toHaveAttribute('data-id', defaultMenuItems[0]['data-id']);
+});
+
+test('custom props are passed into menuItem', () => {
+  getComponent();
+  const { children: itemText1 } = defaultMenuItems[0];
+  const menuItem1 = screen.getByText(itemText1);
+  expect(menuItem1).toHaveStyleRule('background-color', 'orange');
 });
