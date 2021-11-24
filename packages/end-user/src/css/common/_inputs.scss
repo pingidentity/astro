@@ -62,7 +62,7 @@ $input-placeholder-color: $color-neutral-40;
 @mixin placeholder-text {
     color: $input-placeholder-color;
     font-size: $input-font-size;
-    font-weight: 400;
+    font-weight: 200;
     text-transform: unset;
 }
 
