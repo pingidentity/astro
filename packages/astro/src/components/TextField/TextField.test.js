@@ -97,9 +97,15 @@ test('text aria container have class name when placeholder is provided and value
   getComponent({ labelMode, placeholder: 'text' });
   const textAreaContainer = screen.getByTestId(testId);
   const inputControl = screen.getByLabelText(testLabel);
-  expect(textAreaContainer.className).toMatch('has-value');
+  expect(textAreaContainer).toHaveClass('has-value');
   userEvent.type(inputControl, 'test text{enter}');
-  expect(textAreaContainer.className).toMatch('has-value');
+  expect(textAreaContainer).toHaveClass('has-value');
   userEvent.clear(inputControl);
-  expect(textAreaContainer.className).toMatch('has-value');
+  expect(textAreaContainer).toHaveClass('has-value');
+});
+
+test('text field container and input have is-read-only class name when isReadOnly prop provided', () => {
+  getComponent({ isReadOnly: true });
+  const control = screen.getByLabelText(testLabel);
+  expect(control).toHaveClass('is-read-only');
 });
