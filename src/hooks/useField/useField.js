@@ -108,6 +108,7 @@ const useField = (props = {}) => {
     hasNoStatusIndicator,
     isFocused: isFocusVisible,
     isDisabled,
+    isReadOnly,
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
     ...statusClasses,
   });

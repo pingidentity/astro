@@ -108,6 +108,15 @@ input.container = {
       opacity: 0.5,
     },
   },
+  '&.is-read-only': {
+    '> input': {
+      backgroundColor: 'accent.95',
+      border: 'none',
+    },
+    '&:after': {
+      display: 'none',
+    },
+  },
   [`&.is-${statuses.ERROR}::after`]: {
     bg: 'critical.bright',
   },
