@@ -112,6 +112,7 @@ export default class HeroChart extends Component {
 
     componentWillUnmount() {
         window.removeEventListener("resize", this._handleResize);
+        this._handleResize.cancel(); // stopping debounced execution if been scheduled
     }
 
     _handleResize = _.debounce(() => {
