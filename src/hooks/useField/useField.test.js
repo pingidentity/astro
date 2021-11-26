@@ -54,7 +54,7 @@ test('should return props objects for field components', () => {
   expect(fieldControlProps).toEqual({
     autocomplete: defaultProps.autocomplete,
     autoFocus: defaultProps.hasAutoFocus,
-    className: `${defaultProps.className} is-disabled is-${statuses.DEFAULT} is-tested`,
+    className: `${defaultProps.className} is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
     defaultSelected: true,
     defaultValue: defaultProps.defaultValue,
     disabled: true,
@@ -75,7 +75,7 @@ test('should return props objects for field components', () => {
   });
   expect(fieldLabelProps).toEqual({
     children: defaultProps.label,
-    className: `${defaultProps.className} is-disabled is-${statuses.DEFAULT} is-tested`,
+    className: `${defaultProps.className} is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
     id: expect.any(String),
     htmlFor: expect.any(String),
     isRequired: true,
