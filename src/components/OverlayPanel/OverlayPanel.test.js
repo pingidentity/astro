@@ -24,3 +24,10 @@ test('default overlayPanel', () => {
   expect(overlayPanel).toBeInTheDocument();
   expect(child).toBeInTheDocument();
 });
+
+test('custom overlayPanel gets custom width', () => {
+  getComponent({ children: <div>Test</div>, sx: { width: '240px' } });
+  const overlayPanel = screen.getByTestId(testId);
+  expect(overlayPanel).toBeInTheDocument();
+  expect(overlayPanel).toHaveStyleRule('width', '240px');
+});

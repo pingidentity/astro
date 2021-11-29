@@ -1,3 +1,3 @@
 export const panelSizes = [
-  'small', 'medium', 'large', 'full',
+  'small', 'medium', 'large', 'full', 'custom',
 ];
