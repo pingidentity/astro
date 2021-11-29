@@ -51,7 +51,7 @@
     "tippy.js": "^6.1.0",
     "underscore": "^1.13.1",
     "uuid": "^2.0.3",
-    "validator": "^5.2.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

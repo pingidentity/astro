@@ -31336,10 +31336,10 @@ validate.io-number@^1.0.3:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/validate.io-number/-/validate.io-number-1.0.3.tgz#f63ffeda248bf28a67a8d48e0e3b461a1665baf8"
   integrity sha1-9j/+2iSL8opnqNSODjtGGhZluvg=
 
-validator@^5.2.0:
-  version "5.7.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/validator/-/validator-5.7.0.tgz#7a87a58146b695ac486071141c0c49d67da05e5c"
-  integrity sha1-eoelgUa2laxIYHEUHAxJ1n2gXlw=
+validator@^13.7.0:
+  version "13.7.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha1-T5ZYuhO6jz2C7ogdNRZInqhcCFc=
 
 value-equal@^1.0.1:
   version "1.0.1"
