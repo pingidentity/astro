@@ -17,7 +17,7 @@ const OverlayPanel = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => overlayPanelRef.current);
 
-  const { classNames } = useStatusClasses(className, { isOpen, [`is-${size}`]: size });
+  const { classNames } = useStatusClasses(className, { isOpen, [`is-${props?.sx?.width ? 'custom' : size}`]: size });
 
   return (
     <Box variant="overlayPanel.overlayPanel" {...others} className={classNames}>
@@ -36,6 +36,10 @@ OverlayPanel.propTypes = {
   isOpen: PropTypes.bool,
   /** Sets the open state of the menu. */
   size: PropTypes.oneOf(Object.values(panelSizes)),
+  /** JSX styling that is passed into the component. */
+  sx: PropTypes.shape({
+    width: PropTypes.string,
+  }),
 };
 
 OverlayPanel.defaultProps = {
