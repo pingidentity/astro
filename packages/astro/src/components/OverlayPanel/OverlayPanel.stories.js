@@ -166,3 +166,37 @@ export const InnerPanel = ({ ...args }) => {
     </>
   );
 };
+
+export const CustomWidth = () => {
+  const state = useOverlayPanelState();
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    //
+    // For a custom width, provide the width via the 'sx' prop
+    <OverlayProvider>
+      <Text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </Text>
+      <br />
+      <Button onPress={state.open}>Open Panel</Button>
+      <OverlayPanel isOpen={state.isOpen} sx={{ width: '720px' }}>
+        <Box>
+          <Button
+            onPress={state.close}
+          >
+            Close Panel
+          </Button>
+          <Text pt="md" >
+            Children render here.
+          </Text>
+        </Box>
+      </OverlayPanel>
+    </OverlayProvider>
+  );
+};
