@@ -62,7 +62,7 @@ const messageText = [
 ];
 
 export const Default = args => (
-  <Messages {...args} items={messages}>
+  <Messages {...args}>
     <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
     <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
   </Messages>
@@ -169,6 +169,11 @@ export const UseReducer = () => {
     actionFn(message)(dispatch);
   };
 
+  const removeMessage = (key) => {
+    dispatch(messagesReducer.actions.hideMessage(key));
+    setTimeout(() => dispatch(messagesReducer.actions.removeMessage(key)), 200);
+  };
+
   return (
     <>
       <Button onPress={showAMessage}>Add Message</Button>
@@ -184,7 +189,7 @@ export const UseReducer = () => {
       }
       <Messages
         items={items}
-        onClose={key => dispatch(messagesReducer.actions.removeMessage(key))}
+        onClose={removeMessage}
       >
         {item => <Item {...item}>{item.text}</Item>}
       </Messages>
@@ -207,6 +212,11 @@ export const UseReducerWithMultipleContainers = () => {
     actionFn(container, message)(dispatch);
   };
 
+  const removeMessage = (key, container) => {
+    dispatch(multiMessagesReducer.actions.hideMessage(container, key));
+    setTimeout(() => dispatch(multiMessagesReducer.actions.removeMessage(container, key)), 200);
+  };
+
   return (
     <>
       <Box isRow>
@@ -215,14 +225,14 @@ export const UseReducerWithMultipleContainers = () => {
       </Box>
       <Messages
         items={items['container-one']}
-        onClose={key => dispatch(multiMessagesReducer.actions.removeMessage('container-one', key))}
+        onClose={key => removeMessage(key, 'container-one')}
         sx={{ width: '45%' }}
       >
         {item => <Item {...item}>{item.text}</Item>}
       </Messages>
       <Messages
         items={items['container-two']}
-        onClose={key => dispatch(multiMessagesReducer.actions.removeMessage('container-two', key))}
+        onClose={key => removeMessage(key, 'container-two')}
         sx={{ left: '55%' }}
       >
         {item => <Item {...item}>{item.text}</Item>}
