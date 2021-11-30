@@ -27,6 +27,7 @@ const Menu = forwardRef((props, ref) => {
     isDisabled,
     onAction,
     onSelectionChange,
+    isNotFocusedOnHover,
     ...others
   } = props;
   const contextProps = useContext(MenuContext);
@@ -62,6 +63,7 @@ const Menu = forwardRef((props, ref) => {
           onAction={onAction}
           isDisabled={isDisabled}
           isFocusVisible={isFocusVisible}
+          isNotFocusedOnHover={isNotFocusedOnHover}
         />
       ))}
     </Box>
@@ -92,6 +94,10 @@ Menu.propTypes = {
   isDisabled: PropTypes.bool,
   /** Whether the menu item is selected. */
   isSelected: PropTypes.bool,
+  /**
+   * Whether menu item should receive focus state on hover.
+   */
+  isNotFocusedOnHover: PropTypes.bool,
   /**
    * Handler that is called when an item is selected.
    *

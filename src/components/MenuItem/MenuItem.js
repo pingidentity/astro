@@ -25,6 +25,7 @@ const MenuItem = forwardRef((props, ref) => {
     item,
     isDisabled: propIsDisabled,
     isFocusVisible,
+    isNotFocusedOnHover,
     className,
     onAction,
     state,
@@ -71,6 +72,11 @@ const MenuItem = forwardRef((props, ref) => {
     isPressed,
   });
 
+  if (isNotFocusedOnHover) {
+    delete menuItemProps.onPointerEnter;
+    delete menuItemProps.onPointerLeave;
+  }
+
   return (
     <Box
       as="li"
@@ -99,6 +105,10 @@ MenuItem.propTypes = {
    * Used to determine when to present hover vs focus styling.
    */
   isFocusVisible: PropTypes.bool,
+  /**
+   * Whether menu item should receive focus state on hover.
+   */
+  isNotFocusedOnHover: PropTypes.bool,
   /** A screen reader only label for the menu item. */
   'aria-label': PropTypes.string,
   /** Handler that is called when the menu should close after selecting an item. */
