@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.41.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.40.0...@pingux/astro@0.41.0) (2021-11-30)
+
+
+### Bug Fixes
+
+* [UIP-4863] Modal Close Icon Button data-id and aria-labels in story ([1628f38](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1628f387de1270bffe0ec9ab8edfc42b1fb063e1))
+* [UIP-4922] OverlayPanel Custom Width Variant ([6aeffe9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6aeffe96c2b76f200b974dc0a419d94dd0130cdd))
+* [UIP-4950] Read-only style for TextField ([c53cc2f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c53cc2fe076fcfc03e8dcff865f772eba828df20))
+* [UIP-4959] ComboBox re-focus on selected item ([9ed5f83](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9ed5f83a6ff44296f7d6be35f3cbdab05970881a))
+* [UIP-4961] The menu item remains onHover state when leaving the menu area ([37f9649](https://gitlab.corp.pingidentity.com/ux/pingux/commit/37f9649e43946518c23799ead07be212201212fb))
+* [UIP-4983] Allow custom props to be spread into MenuItem ([23e9dd9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/23e9dd9a5923ae4b9037d687b07c208a25a72db9))
+
+
+### Features
+
+* [UIP-4838] Auto removing messages ([0936486](https://gitlab.corp.pingidentity.com/ux/pingux/commit/09364862f75d9e8d59fee6b4a5e651380f3a2175))
+* [UIP-4993] Add useDebounce hook ([0738f2c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0738f2cf383ae6b70b7ff88f3bef7cd2ad3ae2e6))
+
+
+
+
+
 # [0.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.39.0...@pingux/astro@0.40.0) (2021-11-23)
 
 
