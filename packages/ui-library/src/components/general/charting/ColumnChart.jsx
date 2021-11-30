@@ -140,10 +140,7 @@ export default class ColumnChart extends React.Component {
         hideX: true,
         hideY: true,
         yAxisLabel: "",
-        yAxisOptions: {
-            paddingRight: 10,
-            width: 25,
-        },
+        yAxisWidth: 25,
     };
 
     state = {
@@ -211,13 +208,22 @@ export default class ColumnChart extends React.Component {
     /* istanbul ignore next */
     _renderYAxisLabel = ({ viewBox }) => {
         const { x, y, height } = viewBox;
-        const { paddingRight } = this.props.yAxisOptions;
+        const paddingRight = 10;
         const cx = x - paddingRight;
         const cy = (height / 2) + y;
-        const rot = `rotate(270 ${cx} ${cy})`;
-        const textStyle = { fontSize: "15px" };
+        const rot = `270 ${cx} ${cy}`;
 
-        return <Text x={cx} y={cy} style={textStyle} transform={rot} textAnchor="middle">{this.props.yAxisLabel}</Text>;
+        return (
+            <text
+                x={cx}
+                y={cy}
+                style={{ fontSize: "15px" }}
+                transform={`rotate(${rot})`}
+                textAnchor="middle"
+            >
+                {this.props.yAxisLabel}
+            </text>
+        );
     }
 
     _generateYAxes = (legend) => {
@@ -231,7 +237,7 @@ export default class ColumnChart extends React.Component {
                         key={axis.yAxisId}
                         yAxisId={axis.yAxisId}
                         hide={this.props.hideY}
-                        width={this.props.yAxisOptions.width}
+                        width={this.props.yAxisWidth}
                         label={<Label content={this._renderYAxisLabel} />}
                     />
                 );
@@ -242,7 +248,7 @@ export default class ColumnChart extends React.Component {
                         key={this.props.baseYAxisId}
                         yAxisId={this.props.baseYAxisId}
                         hide={this.props.hideY}
-                        width={this.props.yAxisOptions.width}
+                        width={this.props.yAxisWidth}
                         label={<Label content={this._renderYAxisLabel} />}
                     />
                 );
