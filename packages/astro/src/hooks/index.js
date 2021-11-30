@@ -9,3 +9,4 @@ export { default as usePropWarning } from './usePropWarning';
 export { default as useRockerButton } from './useRockerButton';
 export { default as useSelectField } from './useSelectField';
 export { default as useStatusClasses } from './useStatusClasses';
+export { default as useDebounce } from './useDebounce';
