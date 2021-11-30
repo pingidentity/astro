@@ -116,7 +116,9 @@ export default class ColumnChart extends React.Component {
         stacked: PropTypes.bool,
         yAxisLabel: PropTypes.string,
         yAxisOptions: PropTypes.shape({
-            paddingRight: PropTypes.number,
+            isVertical: PropTypes.bool,
+            labelWidth: PropTypes.number,
+            paddingRight: PropTypes.string,
             width: PropTypes.number,
         }),
         width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
@@ -140,7 +142,12 @@ export default class ColumnChart extends React.Component {
         hideX: true,
         hideY: true,
         yAxisLabel: "",
-        yAxisWidth: 25,
+        yAxisOptions: {
+            isVertical: true,
+            labelWidth: 50,
+            paddingRight: 10,
+            width: 25,
+        },
     };
 
     state = {
@@ -207,22 +214,24 @@ export default class ColumnChart extends React.Component {
 
     /* istanbul ignore next */
     _renderYAxisLabel = ({ viewBox }) => {
-        const { x, y, height } = viewBox;
-        const paddingRight = 10;
-        const cx = x - paddingRight;
-        const cy = (height / 2) + y;
-        const rot = `270 ${cx} ${cy}`;
+        const { x, y, width, height } = viewBox;
+        const { isVertical, paddingRight, labelWidth } = this.props.yAxisOptions;
+
+        const cx = isVertical ? x - paddingRight: x + (width / 2);
+        const cy = isVertical ? (height / 2) + y : (height / 2) + 20;
+        const rot = isVertical ? `270 ${cx} ${cy}` : 0;
 
         return (
-            <text
+            <Text
                 x={cx}
                 y={cy}
                 style={{ fontSize: "15px" }}
                 transform={`rotate(${rot})`}
                 textAnchor="middle"
+                width={isVertical ? "" : labelWidth}
             >
                 {this.props.yAxisLabel}
-            </text>
+            </Text>
         );
     }
 
@@ -237,7 +246,7 @@ export default class ColumnChart extends React.Component {
                         key={axis.yAxisId}
                         yAxisId={axis.yAxisId}
                         hide={this.props.hideY}
-                        width={this.props.yAxisWidth}
+                        width={this.props.yAxisOptions.width}
                         label={<Label content={this._renderYAxisLabel} />}
                     />
                 );
@@ -248,7 +257,7 @@ export default class ColumnChart extends React.Component {
                         key={this.props.baseYAxisId}
                         yAxisId={this.props.baseYAxisId}
                         hide={this.props.hideY}
-                        width={this.props.yAxisWidth}
+                        width={this.props.yAxisOptions.width}
                         label={<Label content={this._renderYAxisLabel} />}
                     />
                 );

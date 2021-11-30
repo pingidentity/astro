@@ -227,6 +227,18 @@ describe("ColumnChart", () => {
         expect(component.find(YAxis).exists()).toBeTruthy();
     });
 
+    it("renders yAxis information with Options", () => {
+        const component = shallow(
+            <ColumnChart
+                {...defaultProps}
+                hideY={false}
+                yAxisLabel="Hello There"
+                yAXisOptions={{ isVertical: false, paddingRight: 15, labelWidth: 100, width: 25 }}
+            />
+        );
+        expect(component.find(YAxis).exists()).toBeTruthy();
+    });
+
     describe("ColumnCardTitle", () => {
         it("renders the component", () => {
             const component = shallow(<ColumnChartTitle title="SNAAAAAARF" />);
