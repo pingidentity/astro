@@ -68,7 +68,21 @@ test('can arrow through menuItems', () => {
   expect(menuItem2).toHaveClass('is-focused');
 });
 
-test('hovering menuItems applies focus class', () => {
+test('hovering menuItems applies focus class and removes focus style on unhover with "isNotFocusedOnHover"', () => {
+  getComponent({ isNotFocusedOnHover: true });
+
+  const { children: itemText1 } = defaultMenuItems[0];
+  const menuItem1 = screen.getByText(itemText1);
+  expect(menuItem1).not.toHaveClass('is-focused');
+
+  userEvent.hover(menuItem1);
+  expect(menuItem1).toHaveClass('is-focused');
+
+  userEvent.unhover(menuItem1);
+  expect(menuItem1).not.toHaveClass('is-focused');
+});
+
+test('hovering menuItems applies focus class and leaves focus style on unhover', () => {
   getComponent();
 
   const { children: itemText1 } = defaultMenuItems[0];
@@ -82,6 +96,9 @@ test('hovering menuItems applies focus class', () => {
   expect(menuItem1).toHaveClass('is-focused');
 
   userEvent.hover(menuItem2);
+  expect(menuItem2).toHaveClass('is-focused');
+
+  userEvent.unhover(menuItem2);
   expect(menuItem2).toHaveClass('is-focused');
 });
 

@@ -20,6 +20,7 @@ export default {
   argTypes: {
     selectionMode: {},
     isDisabled: {},
+    isNotFocusedOnHover: {},
     'aria-label': {
       control: {
         type: 'text',
