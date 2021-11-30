@@ -177,7 +177,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         <ListBox
           ref={listBoxRef}
           hasNoEmptySelection
-          hasAutoFocus={state.focusStrategy}
+          hasAutoFocus={state.focusStrategy || true}
           state={state}
           hasVirtualFocus
           isLoading={loadingState === loadingStates.LOADING_MORE}
