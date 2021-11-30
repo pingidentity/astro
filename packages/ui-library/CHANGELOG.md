@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.43.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0-alpha.2...ui-library@4.43.0) (2021-11-30)
+
+
+### Bug Fixes
+
+* [UIP-4972] Update validator.js version to >=13.7.0 for UI Library ([91798f9](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/91798f9ad88b975d00d83a66b24e444be63cc504))
+
+
+
+
+
 # [4.43.0-alpha.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0-alpha.1...ui-library@4.43.0-alpha.2) (2021-11-23)
 
 

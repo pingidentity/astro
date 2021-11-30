@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.6.0...@pingux/end-user@1.7.0) (2021-11-30)
+
+
+### Bug Fixes
+
+* [UIP-4942] Fix label placeholder font weight ([fa15750](https://gitlab.corp.pingidentity.com/ux/end-user/commit/fa15750042f23162a2a9fe4bc6ebc70ee85f4169))
+
+
+### Features
+
+* [UIP-4985] muted-text is better readable ([c2217df](https://gitlab.corp.pingidentity.com/ux/end-user/commit/c2217df014fe165a07d159df2c10fa66690fce14))
+
+
+
+
+
 # [1.6.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.5.7...@pingux/end-user@1.6.0) (2021-11-16)
 
 
