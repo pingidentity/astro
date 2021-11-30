@@ -3,7 +3,12 @@ import Users from 'mdi-react/AccountGroupIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 
 
-import SearchField from '.';
+import {
+  SearchField,
+  Box,
+  Text,
+} from '../../index';
+import { useDebounce } from '../../hooks';
 
 export default {
   title: 'Form/SearchField',
@@ -101,3 +106,20 @@ export const MaxLength = args => (
     maxLength={9}
   />
 );
+
+export const ControlledWithDebouncedInput = () => {
+  const [value, setValue] = useState('');
+  const debouncedSearchText = useDebounce({ value, delay: 500 });
+  return (
+    <Box>
+      <SearchField
+        value={value}
+        onChange={setValue}
+        aria-label="Search Groups"
+        placeholder="Search Groups"
+        onSubmit={text => alert(text)} // eslint-disable-line no-alert
+      />
+      <Text mt="xs">{`Debounced value: ${debouncedSearchText}`}</Text>
+    </Box>
+  );
+};
