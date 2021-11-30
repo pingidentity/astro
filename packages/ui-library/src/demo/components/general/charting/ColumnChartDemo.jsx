@@ -200,8 +200,6 @@ class ColumnCardDemo extends React.Component {
                     }
                     chart={
                         <ColumnChart
-                            hideX={false}
-                            hideY={false}
                             data={columnData[0].data}
                             legend={legend}
                             renderTooltip={(props, LegendItem) => (
