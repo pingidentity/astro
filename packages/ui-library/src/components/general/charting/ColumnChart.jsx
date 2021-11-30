@@ -116,9 +116,7 @@ export default class ColumnChart extends React.Component {
         stacked: PropTypes.bool,
         yAxisLabel: PropTypes.string,
         yAxisOptions: PropTypes.shape({
-            isVertical: PropTypes.bool,
-            labelWidth: PropTypes.number,
-            paddingRight: PropTypes.string,
+            paddingRight: PropTypes.number,
             width: PropTypes.number,
         }),
         width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
@@ -143,8 +141,6 @@ export default class ColumnChart extends React.Component {
         hideY: true,
         yAxisLabel: "",
         yAxisOptions: {
-            isVertical: true,
-            labelWidth: 50,
             paddingRight: 10,
             width: 25,
         },
@@ -212,26 +208,16 @@ export default class ColumnChart extends React.Component {
         this.props.onMouseOver(data, e);
     }
 
+    /* istanbul ignore next */
     _renderYAxisLabel = ({ viewBox }) => {
-        const { x, y, width, height } = viewBox;
-        const { isVertical, paddingRight, labelWidth } = this.props.yAxisOptions;
+        const { x, y, height } = viewBox;
+        const { paddingRight } = this.props.yAxisOptions;
+        const cx = x - paddingRight;
+        const cy = (height / 2) + y;
+        const rot = `rotate(270 ${cx} ${cy})`;
+        const textStyle = { fontSize: "15px" };
 
-        const cx = isVertical ? x - paddingRight: x + (width / 2);
-        const cy = isVertical ? (height / 2) + y : (height / 2) + 20;
-        const rot = isVertical ? `270 ${cx} ${cy}` : 0;
-
-        return (
-            <Text
-                x={cx}
-                y={cy}
-                style={{ fontSize: "15px" }}
-                transform={`rotate(${rot})`}
-                textAnchor="middle"
-                width={isVertical ? "" : labelWidth}
-            >
-                {this.props.yAxisLabel}
-            </Text>
-        );
+        return <Text x={cx} y={cy} style={textStyle} transform={rot} textAnchor="middle">{this.props.yAxisLabel}</Text>;
     }
 
     _generateYAxes = (legend) => {
