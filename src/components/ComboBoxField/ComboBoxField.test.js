@@ -142,6 +142,10 @@ test('should be able to open and navigate through the listbox by click', () => {
   userEvent.click(options[0]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(input).toHaveValue(items[0].name);
+
+  // Option stays focused when the overlay is re-opened
+  userEvent.click(button);
+  expect(options[0]).toHaveClass('is-focused');
 });
 
 test('should be able to open the listbox by keyboard', () => {
