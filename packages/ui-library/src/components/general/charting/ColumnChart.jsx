@@ -137,7 +137,7 @@ export default class ColumnChart extends React.Component {
         hideX: true,
         hideY: true,
         yAxisLabel: "",
-        yAxisWidth: 100,
+        yAxisWidth: 25,
     };
 
     state = {
@@ -203,9 +203,23 @@ export default class ColumnChart extends React.Component {
     }
 
     _renderYAxisLabel = ({ viewBox }) => {
-        const cy = viewBox.height / 2;
+        const { x, y, height } = viewBox;
+        const paddingRight = 10;
+        const cx = x - paddingRight;
+        const cy = (height / 2) + y;
+        const rot = `270 ${cx} ${cy}`;
 
-        return <Text x={0} y={cy} width={50} style={{ fontSize: "15px" }}>{this.props.yAxisLabel}</Text>;
+        return (
+            <text
+                x={cx}
+                y={cy}
+                style={{ fontSize: "15px" }}
+                transform={`rotate(${rot})`}
+                textAnchor="middle"
+            >
+                {this.props.yAxisLabel}
+            </text>
+        );
     }
 
     _generateYAxes = (legend) => {
@@ -220,9 +234,8 @@ export default class ColumnChart extends React.Component {
                         yAxisId={axis.yAxisId}
                         hide={this.props.hideY}
                         width={this.props.yAxisWidth}
-                    >
-                        <Label content={this._renderYAxisLabel} />
-                    </YAxis>
+                        label={<Label content={this._renderYAxisLabel} />}
+                    />
                 );
             } else if (!axis.yAxisId && !yAxes.includes(this.props.baseYAxisId)) {
                 yAxes.push(this.props.baseYAxisId);
@@ -232,9 +245,8 @@ export default class ColumnChart extends React.Component {
                         yAxisId={this.props.baseYAxisId}
                         hide={this.props.hideY}
                         width={this.props.yAxisWidth}
-                    >
-                        <Label content={this._renderYAxisLabel} />
-                    </YAxis>
+                        label={<Label content={this._renderYAxisLabel} />}
+                    />
                 );
             }
         });
