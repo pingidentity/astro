@@ -250,6 +250,45 @@ const inverted = {
   },
 };
 
+const applicationPortal = {
+  ...iconButton,
+  background: 'transparent',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    'path': {
+      fill: 'active',
+    },
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'active',
+    },
+  },
+};
+
+const applicationPortalPinned = {
+  ...iconButton,
+  'path': {
+    fill: 'success.bright',
+  },
+  background: 'transparent',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    'path': {
+      fill: 'active',
+    },
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'active',
+    },
+  },
+};
+
 const helpHint = {
   ...iconButton,
   bg: 'neutral.90',
@@ -490,4 +529,6 @@ export default {
   text,
   helpHint,
   modalCloseButton,
+  applicationPortalPinned,
+  applicationPortal,
 };

@@ -12,6 +12,13 @@ import { useStatusClasses } from '../../hooks';
 const ListViewItem = (props) => {
   const {
     item,
+    item: {
+      props: {
+        listItemProps,
+        rowProps,
+        hasSeparator = true,
+      },
+    },
     className,
   } = props;
 
@@ -34,12 +41,12 @@ const ListViewItem = (props) => {
 
   const { hoverProps, isHovered } = useHover({});
 
-  const { rowProps } = useGridRow({
+  const { rowProps: raRowProps } = useGridRow({
     node: item,
     isVirtualized: true,
   }, state, rowRef);
 
-  const isSelected = rowProps['aria-selected'];
+  const isSelected = raRowProps['aria-selected'];
 
   const { gridCellProps } = useGridCell({
     node: cellNode,
@@ -65,8 +72,9 @@ const ListViewItem = (props) => {
         as="li"
         isDisabled={isDisabled}
         isRow
-        {...rowProps}
+        {...raRowProps}
         ref={rowRef}
+        {...rowProps}
       >
         <Box
           as="div"
@@ -79,11 +87,12 @@ const ListViewItem = (props) => {
           isSelected={isSelected}
           className={classNames}
           data-id={dataId}
+          {...listItemProps}
         >
           {item.rendered}
         </Box>
       </Box>
-      <Separator m="0px" />
+      { hasSeparator && <Separator m="0px" />}
     </>
   );
 };
@@ -95,6 +104,9 @@ ListViewItem.propTypes = {
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
     props: PropTypes.shape({
       'data-id': PropTypes.string,
+      listItemProps: PropTypes.shape({}),
+      rowProps: PropTypes.shape({}),
+      hasSeparator: PropTypes.bool,
     }),
   }),
 };
