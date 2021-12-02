@@ -25,7 +25,8 @@ export function useListLayout(state) {
     new ListLayout({
       estimatedRowHeight: 81,
       estimatedHeadingHeight: 26,
-      padding: 4,
+      paddingRight: 4,
+      paddingLeft: 4,
       loaderHeight: 81,
       placeholderHeight: 81,
       collator,
