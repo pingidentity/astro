@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.41.0...@pingux/astro@0.42.0) (2021-12-02)
+
+
+### Features
+
+* [UIP-4951] Application search dropdown recipe ([dcc6fa4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dcc6fa43380354615e97e28b43070479915c8fda))
+
+
+
+
+
 # [0.41.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.40.0...@pingux/astro@0.41.0) (2021-11-30)
 
 
