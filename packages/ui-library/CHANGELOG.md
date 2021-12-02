@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.43.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0...ui-library@4.43.1) (2021-12-02)
+
+
+### Bug Fixes
+
+* [UIP-4400] fixing error shown in console on reading offsetLeft of null ([1091949](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/1091949eaf97f6578179f9fddbce305fbaac4dac))
+
+
+
+
+
 # [4.43.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0-alpha.2...ui-library@4.43.0) (2021-11-30)
 
 
