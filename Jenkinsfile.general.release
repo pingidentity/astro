@@ -42,14 +42,24 @@ def generateSlackMessage(packageName, packagePathName, packageVersion) {
 
 pipeline {
   agent {
-    kubernetes(agentDefinition(
-      name: 'ui-pipeline-shared',
-      cloud: centralCluster
-    ))
-  }
-  parameters {
-    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --yes', description: 'Flags applied to the `lerna version` command.')
-    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
+    kubernetes (
+      agentDefinition(name: 'ui-library-agent', cloud: 'test',
+        yaml: """
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: ui-library-agent
+        spec:
+          containers:
+            - name: "ui-library-admin"
+              command: # Jenkinsfile overwrites this, but k8s spec requires it
+              - cat
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.2"
+              imagePullPolicy: Always
+              workingDir: "/home/jenkins/agent"
+              tty: true"""
+      )
+    )
   }
   environment {
     PING_TEAM_NAME = "ux"
@@ -67,30 +77,75 @@ pipeline {
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
       }
     }
-
-    stage('lint') {
+    stage("Config vars") {
       steps {
-        dir("${env.WORKSPACE}") {
-          container('node-builder') {
-            echo "Linting packages"
-            sh 'yarn lerna run lint'
+        script {
+          switch(env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME) { 
+            case 'develop': 
+              parameters {
+                string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-prerelease --preid rc --yes', description: 'Flags applied to the `lerna version` command.')
+                string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --pre-dist-tag rc --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/')
+              }
+              break
+            case "master": 
+              parameters {
+                string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-graduate=@pingux/astro,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library --yes', description: 'Flags applied to the `lerna version` command.')
+                string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --pre-dist-tag rc --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/')
+              }
+              break
+            default:
+            println("Branch value error: " + branch)
+            currentBuild.getRawBuild().getExecutor().interrupt(Result.FAILURE)
           }
         }
       }
     }
 
-    stage('test') {
+    stage('build-test-lint') {
       steps {
-        dir("${env.WORKSPACE}") {
-          container('node-builder') {
-            echo "Running tests for packages"
-            sh 'yarn lerna run test --concurrency=1'
+        container('ui-library-admin') {
+          sh """
+            yarn --frozen-lockfile
+            echo "$CHANGE_TITLE" | npx commitlint
+            lerna run build
+            lerna run lint
+            lerna run coverage-ci
+          """
+        }
+      }
+    }
+
+    stage('backstop') {
+      when {
+        beforeAgent true
+        anyOf {
+          expression {  
+            sh(returnStatus: true, script: 'git diff origin/develop --name-only | grep "^packages/ui-library/.*"' ) == 0
           }
+        }
+        expression {  
+          sh(returnStatus: true, script: 'git diff origin/master --name-only | grep "^packages/ui-library/.*"' ) == 0
+        }
+        changeRequest()
+      }
+      steps {
+        container('ui-library-admin') {
+          sh """
+            yarn --frozen-lockfile
+            lerna run demo --scope ui-library
+            lerna run backstop-ci
+          """
         }
       }
     }
 
     stage('version') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'develop' || "master"
+        }
+      }
       steps {
         dir("${env.WORKSPACE}") {
           container('node-builder') {
@@ -120,6 +175,12 @@ pipeline {
     }
 
     stage('publish') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'master'
+        }
+      }
       steps {
         dir("${env.WORKSPACE}") {
           container('node-builder') {
@@ -153,6 +214,12 @@ pipeline {
     }
 
     stage('cdn build') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'master'
+        }
+      }
       steps {
         dir("${env.WORKSPACE}") {
           container('node-builder') {
@@ -165,6 +232,12 @@ pipeline {
     }
 
     stage('update demos') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'master'
+        }
+      }
       steps {
         dir("${env.WORKSPACE}") {
           container('node-builder') {
@@ -187,6 +260,12 @@ pipeline {
     }
 
     stage('cdn deploy test') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'master'
+        }
+      }
       agent {
         kubernetes(agentDefinition(
           name: 'test-cdn-deploy',
@@ -223,6 +302,12 @@ pipeline {
     }
 
     stage('cdn deploy ort') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'master'
+        }
+      }
       agent {
         kubernetes(agentDefinition(
           name: 'ort-cdn-deploy',
@@ -258,6 +343,12 @@ pipeline {
     }
 
     stage('cdn deploy prod') {
+      when {
+        expression {  
+          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
+          return branchName == 'master'
+        }
+      }
       agent {
         kubernetes(agentDefinition(
           name: 'prod-cdn-deploy',
@@ -296,58 +387,63 @@ pipeline {
   post {
     success {
       script {
-        def message = """
-          :tada: Release success!
-          
-          ```
-          ${env.RELEASE_JSON}
-          ```
+        branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
 
-          Build details: <${env.BUILD_URL}/console|See in web console>
-        """.stripIndent()
+        def message = """
+            :tada: Release success!
+            
+            ```
+            ${env.RELEASE_JSON}
+            ```
+
+            Build details: <${env.BUILD_URL}/console|See in web console>
+          """.stripIndent()
+
         slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"
 
-        def packageKeys = updatedPackagesMap.keySet() as List;
-        if (packageKeys.size() > 0) {
-          // Send a message to each updated package's channel
-          packageKeys.each() {
-            if (it == "@pingux/astro") {
-              def astroMessage = generateSlackMessage(
-                "Astro",
-                "astro",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${astroMessage}", color: "#4aba78"
-            } else if (it == "@pingux/end-user") {
-              def endUserMessage = generateSlackMessage(
-                "End User",
-                "end-user",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${endUserMessage}", color: "#4aba78"
-            } else if (it == "@pingux/flow-diagram") {
-              def flowDiagramMessage = generateSlackMessage(
-                "Flow Diagram",
-                "flow-diagram",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${flowDiagramMessage}", color: "#4aba78"
-            } else if (it == "@pingux/schema-form") {
-              def schemaFormMessage = generateSlackMessage(
-                "Schema Form",
-                "schema-form",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${schemaFormMessage}", color: "#4aba78"
-            } else if (it == "ui-library") {
-              def uiLibraryMessage = generateSlackMessage(
-                "UI Library",
-                "ui-library",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${uiLibraryMessage}", color: "#4aba78"
+        if (branchName == 'master'){
+          def packageKeys = updatedPackagesMap.keySet() as List;
+          if (packageKeys.size() > 0) {
+            // Send a message to each updated package's channel
+            packageKeys.each() {
+              if (it == "@pingux/astro") {
+                def astroMessage = generateSlackMessage(
+                  "Astro",
+                  "astro",
+                  "${updatedPackagesMap[it]}"
+                );
+                slackSend channel: '#ui-announcements', message: "${astroMessage}", color: "#4aba78"
+              } else if (it == "@pingux/end-user") {
+                def endUserMessage = generateSlackMessage(
+                  "End User",
+                  "end-user",
+                  "${updatedPackagesMap[it]}"
+                );
+                slackSend channel: '#ui-announcements', message: "${endUserMessage}", color: "#4aba78"
+              } else if (it == "@pingux/flow-diagram") {
+                def flowDiagramMessage = generateSlackMessage(
+                  "Flow Diagram",
+                  "flow-diagram",
+                  "${updatedPackagesMap[it]}"
+                );
+                slackSend channel: '#ui-announcements', message: "${flowDiagramMessage}", color: "#4aba78"
+              } else if (it == "@pingux/schema-form") {
+                def schemaFormMessage = generateSlackMessage(
+                  "Schema Form",
+                  "schema-form",
+                  "${updatedPackagesMap[it]}"
+                );
+                slackSend channel: '#ui-announcements', message: "${schemaFormMessage}", color: "#4aba78"
+              } else if (it == "ui-library") {
+                def uiLibraryMessage = generateSlackMessage(
+                  "UI Library",
+                  "ui-library",
+                  "${updatedPackagesMap[it]}"
+                );
+                slackSend channel: '#ui-announcements', message: "${uiLibraryMessage}", color: "#4aba78"
+              }
+              // don't do anything with packages that don't have their own channel
             }
-            // don't do anything with packages that don't have their own channel
           }
         }
       }

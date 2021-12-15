@@ -15,6 +15,9 @@ import {
 
 export default {
   title: 'Recipes/RowLineChart',
+  parameters: {
+    chromatic: { diffThreshold: 0.9 },
+  },
 };
 
 const chartData = [
