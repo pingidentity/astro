@@ -40,6 +40,7 @@ lerna_version.json
 #project specific
 lib
 demo
+**/*/build-storybook.log
 
 # Do not ignore
 !.husky

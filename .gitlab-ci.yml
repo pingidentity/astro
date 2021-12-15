@@ -1,6 +1,10 @@
+# NOTE: The numerical suffix in the image string refers to the version of the docker image
+# this number will need to be incremented (i.e. 1.1 to 1.2), when changes to a package
+# require a new docker image to be consistently pulled.
+
 variables:
-  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1"
-  LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.1"
+  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.2"
+  LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.2"
 
 stages:
   - build-ci-image
@@ -44,7 +48,7 @@ build:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-    - sh commit_lint.sh
+    - bash commit_lint.sh
     - lerna run build
     - lerna run lint
     - lerna run coverage-ci
@@ -74,7 +78,7 @@ backstop:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
-        - packages/ui-library/*
+        - packages/ui-library/**/*
   script:
     - lerna run demo --scope ui-library
     - lerna run backstop-ci
@@ -86,10 +90,15 @@ chromatic:
     - default-gitlab-runner
   image: $STABLE_IMAGE
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
       changes:
-        - packages/astro/*
+        - packages/astro/**/*
+      when: manual
+      allow_failure: false
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME !~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
       when: manual
       allow_failure: true
   script:
-    - lerna run chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --exit-zero-on-changes --scope astro
+    - lerna run chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro
