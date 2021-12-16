@@ -83,6 +83,7 @@ pipeline {
       steps {
         script {
           env.BRANCH_NAME = sh(returnStdout: true, script: $/git rev-parse --abbrev-ref HEAD/$).trim()
+          echo "The current branch is: ${env.BRANCH_NAME}"
           switch(env.BRANCH_NAME) {
             case 'develop': 
               parameters {
