@@ -94,8 +94,7 @@ pipeline {
               }
               break
             default:
-            println("Branch value error: " + branch)
-            currentBuild.getRawBuild().getExecutor().interrupt(Result.FAILURE)
+              currentBuild.getRawBuild().getExecutor().interrupt(Result.FAILURE)
           }
         }
       }
