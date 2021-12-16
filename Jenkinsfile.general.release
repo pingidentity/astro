@@ -106,7 +106,7 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
-            echo "$CHANGE_TITLE" | npx commitlint
+            echo '${env.CHANGE_TITLE}' | npx commitlint
             lerna run build
             lerna run lint
             lerna run coverage-ci
