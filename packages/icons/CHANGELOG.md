@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/icons@0.6.0...@pingux/icons@1.0.0-alpha.0) (2021-12-16)
+
+
+* fix!: [UIP-4912] Update Jenkins container names to match k8s config ([8edeb95](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8edeb95b25adecd8e34c20fb52c6c2f0e552bc4d))
+
+
+### BREAKING CHANGES
+
+* The actual breaking change is committed in 3ee02e86f5036ae8f32832c57e43bd31dcb4f812 but Lerna doesn't respect just the ! for major version changes
+
+
+
+
+
 # [0.6.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/icons@0.5.2...@pingux/icons@0.6.0) (2021-11-30)
 
 
