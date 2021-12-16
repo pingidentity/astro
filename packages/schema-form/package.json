@@ -1,6 +1,6 @@
 {
   "name": "@pingux/schema-form",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "Create component forms from JSON Schema",
   "author": "<uxdev@pingidentity.com>",
   "homepage": "",
@@ -41,7 +41,7 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "11.3.0",
     "@pingux/astro": "^0.19.1",
-    "@pingux/end-user": "^2.0.0-alpha.0",
+    "@pingux/end-user": "^2.0.0-alpha.1",
     "@rjsf/core": "2.0.0",
     "@storybook/addon-actions": "^6.0.21",
     "@storybook/addon-docs": "^6.0.21",
