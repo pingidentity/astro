@@ -141,17 +141,6 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Versioning packages"
-            echo "${env.LERNA_VERSION_FLAGS}"
-          }
-        }
-      }
-    }
-
-    stage('version') {
-      steps {
-        dir("${env.WORKSPACE}") {
-          container('ui-library-admin') {
-            echo "Versioning packages"
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]) {
