@@ -68,7 +68,7 @@ pipeline {
     stage('install and link') {
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
             sh "yarn lerna run build"
@@ -147,7 +147,7 @@ pipeline {
       }
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             echo "Versioning packages"
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
@@ -182,7 +182,7 @@ pipeline {
       }
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 sh "echo 'Publishing packages to npmjs.org registry'"
@@ -221,7 +221,7 @@ pipeline {
       }
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             echo "Run Lerna CDN command"
             sh "yarn lerna run cdn"
           }
@@ -239,7 +239,7 @@ pipeline {
       }
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
               script {
                 def packageKeys = updatedPackagesMap.keySet() as List;
