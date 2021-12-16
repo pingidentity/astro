@@ -72,7 +72,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Installing and linking packages"
-            echo "${env.CHANGE_TARGET} && ${env.BRANCH_NAME}"
+            env.BRANCH_NAME = sh(returnStdout: true, script: $/git branch --show-current/$).trim()
             sh "yarn --frozen-lockfile --ignore-engines"
             sh "yarn lerna run build"
           }
@@ -83,7 +83,7 @@ pipeline {
     stage("Config vars") {
       steps {
         script {
-          switch(env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME) {
+          switch(env.BRANCH_NAME) {
             case 'develop': 
               parameters {
                 string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-prerelease --preid rc --yes', description: 'Flags applied to the `lerna version` command.')
@@ -145,8 +145,7 @@ pipeline {
     stage('version') {
       when {
         expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'develop' || "master"
+          return env.BRANCH_NAME == 'develop' || "master"
         }
       }
       steps {
@@ -179,9 +178,8 @@ pipeline {
 
     stage('publish') {
       when {
-        expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'master'
+        expression {
+          return env.BRANCH_NAME == 'master'
         }
       }
       steps {
@@ -218,9 +216,8 @@ pipeline {
 
     stage('cdn build') {
       when {
-        expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'master'
+        expression {
+          return env.BRANCH_NAME == 'master'
         }
       }
       steps {
@@ -236,9 +233,8 @@ pipeline {
 
     stage('update demos') {
       when {
-        expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'master'
+        expression {
+          return env.BRANCH_NAME == 'master'
         }
       }
       steps {
@@ -264,9 +260,8 @@ pipeline {
 
     stage('cdn deploy test') {
       when {
-        expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'master'
+        expression {
+          return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
         }
       }
       agent {
@@ -306,9 +301,8 @@ pipeline {
 
     stage('cdn deploy ort') {
       when {
-        expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'master'
+        expression {
+          return env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'
         }
       }
       agent {
@@ -347,9 +341,8 @@ pipeline {
 
     stage('cdn deploy prod') {
       when {
-        expression {  
-          branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-          return branchName == 'master'
+        expression {
+          return env.BRANCH_NAME == 'master'
         }
       }
       agent {
@@ -390,8 +383,6 @@ pipeline {
   post {
     success {
       script {
-        branchName = env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME
-
         def message = """
             :tada: Release success!
             
@@ -404,7 +395,7 @@ pipeline {
 
         slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"
 
-        if (branchName == 'master'){
+        if (env.BRANCH_NAME == 'master'){
           def packageKeys = updatedPackagesMap.keySet() as List;
           if (packageKeys.size() > 0) {
             // Send a message to each updated package's channel
