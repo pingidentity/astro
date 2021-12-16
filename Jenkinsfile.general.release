@@ -82,7 +82,7 @@ pipeline {
     stage("Config vars") {
       steps {
         script {
-          env.BRANCH_NAME = sh(returnStdout: true, script: $/git branch --show-current/$).trim()
+          env.BRANCH_NAME = sh(returnStdout: true, script: $/git rev-parse --abbrev-ref HEAD/$).trim()
           switch(env.BRANCH_NAME) {
             case 'develop': 
               parameters {
