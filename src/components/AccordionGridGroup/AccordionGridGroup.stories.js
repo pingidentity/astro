@@ -112,17 +112,17 @@ export const Default = () => {
     const { item } = props;
 
     return (
-      <Box isRow sx={{ pt: '12px', pb: '12px', flexGrow: 1 }} >
+      <Box isRow sx={{ flexGrow: 1 }} >
         <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
           <Text sx={{ fontWeight: 3, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} variant="itemTitle" alignSelf="center">{item.name}</Text>
         </Box>
         <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }} >
           <Text sx={{ fontWeight: 0, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} alignSelf="center">{item.organizations.length} Organizations</Text>
           <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
-            <IconButton aria-label="create-icon" sx={{ mr: '4px', height: '26px', width: '26px', 'path': { fill: 'active' } }} >
+            <IconButton aria-label="create-icon" sx={{ mr: '4px', height: '26px', width: '26px' }} >
               <CreateIcon />
             </IconButton>
-            <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px', height: '26px', width: '26px', 'path': { fill: 'active' } }} >
+            <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px', height: '26px', width: '26px' }} >
               <MoreVertIcon />
             </IconButton>
           </Box>
@@ -135,7 +135,7 @@ export const Default = () => {
   const Body = (props) => {
     const { item } = props;
     return (
-      <Box isRow >
+      <Box isRow>
         <Box sx={{ flexGrow: 1, width: 'calc(50% - 20px)' }}>
           <Link
             aria-label="permissions"
@@ -239,7 +239,7 @@ export const Default = () => {
             from the last item */}
             {
               item.key !== 'Organization' ?
-                <Separator sx={{ m: 0 }} /> :
+                <Separator sx={{ m: 0, bg: 'neutral.90' }} /> :
                 null
             }
           </Item>
