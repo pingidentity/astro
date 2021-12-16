@@ -72,7 +72,6 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Installing and linking packages"
-            env.BRANCH_NAME = sh(returnStdout: true, script: $/git branch --show-current/$).trim()
             sh "yarn --frozen-lockfile --ignore-engines"
             sh "yarn lerna run build"
           }
@@ -83,6 +82,7 @@ pipeline {
     stage("Config vars") {
       steps {
         script {
+          env.BRANCH_NAME = sh(returnStdout: true, script: $/git branch --show-current/$).trim()
           switch(env.BRANCH_NAME) {
             case 'develop': 
               parameters {
