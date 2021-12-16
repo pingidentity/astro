@@ -94,7 +94,7 @@ pipeline {
               }
               break
             default:
-              currentBuild.getRawBuild().getExecutor().interrupt(Result.FAILURE)
+              // don't set release vars
           }
         }
       }
