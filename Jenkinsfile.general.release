@@ -72,7 +72,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Installing and linking packages"
-            echo env.CHANGE_TARGET && env.BRANCH_NAME
+            echo "${env.CHANGE_TARGET} && ${env.BRANCH_NAME}"
             sh "yarn --frozen-lockfile --ignore-engines"
             sh "yarn lerna run build"
           }
