@@ -80,7 +80,7 @@ pipeline {
     stage("Config vars") {
       steps {
         script {
-          switch(env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME) { 
+          switch(env.CHANGE_TARGET ? env.CHANGE_TARGET : env.BRANCH_NAME) {
             case 'develop': 
               parameters {
                 string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-prerelease --preid rc --yes', description: 'Flags applied to the `lerna version` command.')
@@ -95,6 +95,7 @@ pipeline {
               break
             default:
               // don't set release vars
+              break
           }
         }
       }
