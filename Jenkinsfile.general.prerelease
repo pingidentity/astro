@@ -191,7 +191,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh 'yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}'
+                sh "yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}"
               }
             }
           }
