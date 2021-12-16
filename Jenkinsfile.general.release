@@ -67,19 +67,7 @@ pipeline {
     PING_TEAM_NAME = "ux"
   }
   stages {
-    stage('install and link') {
-      steps {
-        dir("${env.WORKSPACE}") {
-          container('ui-library-admin') {
-            echo "Installing and linking packages"
-            sh "yarn --frozen-lockfile --ignore-engines"
-            sh "yarn lerna run build"
-          }
-        }
-        stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
-      }
-    }
-    stage("Config vars") {
+    stage("set pipeline parameters") {
       steps {
         script {
           env.BRANCH_NAME = sh(returnStdout: true, script: $/git rev-parse --abbrev-ref HEAD/$).trim()
@@ -102,6 +90,19 @@ pipeline {
               break
           }
         }
+      }
+    }
+
+    stage('install and link') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('ui-library-admin') {
+            echo "Installing and linking packages"
+            sh "yarn --frozen-lockfile --ignore-engines"
+            sh "yarn lerna run build"
+          }
+        }
+        stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
       }
     }
 
