@@ -4,7 +4,6 @@
 
 import groovy.json.JsonOutput
 
-def centralCluster = 'central'
 def testCluster = 'test'
 
 // Schema Form NPM publish stuff
@@ -40,12 +39,13 @@ def generateSlackMessage(packageName, packagePathName, packageVersion) {
   """.stripIndent()
 }
 
+
 pipeline {
   agent {
     kubernetes (
       agentDefinition(
         name: 'ui-library-agent',
-        cloud: centralCluster,
+        cloud: testCluster,
         yaml: """
         apiVersion: v1
         kind: Pod
@@ -63,14 +63,31 @@ pipeline {
       )
     )
   }
-  parameters {
-    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-graduate=@pingux/astro,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library --yes', description: 'Flags applied to the `lerna version` command.')
-    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
-  }
   environment {
     PING_TEAM_NAME = "ux"
   }
   stages {
+    stage("set version and release flags") {
+      steps {
+        script {
+          echo "The current branch is: ${env.BRANCH_NAME} or ${env.CHANGE_TARGET}"
+          switch(env.BRANCH_NAME) {
+            case 'develop':
+              env.LERNA_VERSION_FLAGS = '--conventional-commits --conventional-prerelease --yes'
+              env.LERNA_PUBLISH_FLAGS = 'from-git --pre-dist-tag next --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              break
+            case ~/^release\/.*/:
+              env.LERNA_VERSION_FLAGS = '--conventional-commits --conventional-prerelease --preid rc --yes'
+              env.LERNA_PUBLISH_FLAGS = 'from-git --pre-dist-tag next --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              break
+            default:
+              // don't set release vars, causing build to fail
+              break
+          }
+        }
+      }
+    }
+
     stage('install and link') {
       steps {
         dir("${env.WORKSPACE}") {
@@ -101,8 +118,10 @@ pipeline {
     stage('backstop') {
       when {
         beforeAgent true
-        expression {  
-          sh(returnStatus: true, script: 'git diff origin/master --name-only | grep "^packages/ui-library/.*"' ) == 0
+        anyOf {
+          expression {  
+            sh(returnStatus: true, script: 'git diff origin/develop --name-only | grep "^packages/ui-library/.*"' ) == 0
+          }
         }
         changeRequest()
       }
@@ -122,6 +141,17 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Versioning packages"
+            echo "${env.LERNA_VERSION_FLAGS}"
+          }
+        }
+      }
+    }
+
+    stage('version') {
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('ui-library-admin') {
+            echo "Versioning packages"
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]) {
@@ -130,7 +160,7 @@ pipeline {
                 yarn lerna changed
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
@@ -171,7 +201,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh 'yarn lerna publish ${LERNA_PUBLISH_FLAGS}'
+                sh 'yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}'
               }
             }
           }
@@ -188,28 +218,6 @@ pipeline {
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
-      }
-    }
-
-    stage('update demos') {
-      steps {
-        dir("${env.WORKSPACE}") {
-          container('ui-library-admin') {
-            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
-              script {
-                def packageKeys = updatedPackagesMap.keySet() as List;
-                if (packageKeys.size() > 0) {
-                  // Update those demos using their Makefile
-                  packageKeys.each() {
-                    def packagePath = it.replaceAll("@pingux/", "");
-                    echo "updated package ${it}: path ${packagePath}"
-                    sh "cd packages/${packagePath} && make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${updatedPackagesMap[it]} package-and-upload-for-hosting"
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     }
 
@@ -248,136 +256,23 @@ pipeline {
         }
       }
     }
-
-    stage('cdn deploy ort') {
-      agent {
-        kubernetes(agentDefinition(
-          name: 'ort-cdn-deploy',
-          cloud: centralCluster
-        ))
-      }
-      environment {
-        ENVIRONMENT = "staging"
-      }
-      steps {
-        container('cdn-deploy') {
-          checkout scm
-          unstash 'packages'
-          script {
-            def cdnKeys = globalCdnMap.keySet() as List;
-            def packageKeys = updatedPackagesMap.keySet() as List;
-            // Get list of updated packages with cdn deployments
-            def cdnDeployments = cdnKeys.intersect(packageKeys);
-            if (cdnDeployments.size() > 0) {
-              // Update each package's cdn deployment
-              cdnDeployments.each() {
-                def releaseVersion = updatedPackagesMap[it];
-                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
-                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
-                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
-                echo "ort upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
-                sh 'upload_ui'
-              }
-            }
-          }
-        }
-      }
-    }
-
-    stage('cdn deploy prod') {
-      agent {
-        kubernetes(agentDefinition(
-          name: 'prod-cdn-deploy',
-          cloud: centralCluster
-        ))
-      }
-      environment {
-        ENVIRONMENT = "production"
-      }
-      steps {
-        container('cdn-deploy') {
-          checkout scm
-          unstash 'packages'
-          script {
-            def cdnKeys = globalCdnMap.keySet() as List;
-            def packageKeys = updatedPackagesMap.keySet() as List;
-            // Get list of updated packages with cdn deployments
-            def cdnDeployments = cdnKeys.intersect(packageKeys);
-            if (cdnDeployments.size() > 0) {
-              // Update each package's cdn deployment
-              cdnDeployments.each() {
-                def releaseVersion = updatedPackagesMap[it];
-                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
-                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
-                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
-                echo "prod upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
-                sh 'upload_ui'
-              }
-            }
-          }
-        }
-      }
-    }
   }
 
   post {
     success {
       script {
         def message = """
-            :tada: Release success!
+            :praisethesun: Pre-release success!
             
             ```
             ${env.RELEASE_JSON}
             ```
 
+            Branch: ${env.BRANCH_NAME}
             Build details: <${env.BUILD_URL}/console|See in web console>
           """.stripIndent()
 
         slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"
-
-        def packageKeys = updatedPackagesMap.keySet() as List;
-        if (packageKeys.size() > 0) {
-          // Send a message to each updated package's channel
-          packageKeys.each() {
-            if (it == "@pingux/astro") {
-              def astroMessage = generateSlackMessage(
-                "Astro",
-                "astro",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${astroMessage}", color: "#4aba78"
-            } else if (it == "@pingux/end-user") {
-              def endUserMessage = generateSlackMessage(
-                "End User",
-                "end-user",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${endUserMessage}", color: "#4aba78"
-            } else if (it == "@pingux/flow-diagram") {
-              def flowDiagramMessage = generateSlackMessage(
-                "Flow Diagram",
-                "flow-diagram",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${flowDiagramMessage}", color: "#4aba78"
-            } else if (it == "@pingux/schema-form") {
-              def schemaFormMessage = generateSlackMessage(
-                "Schema Form",
-                "schema-form",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${schemaFormMessage}", color: "#4aba78"
-            } else if (it == "ui-library") {
-              def uiLibraryMessage = generateSlackMessage(
-                "UI Library",
-                "ui-library",
-                "${updatedPackagesMap[it]}"
-              );
-              slackSend channel: '#ui-announcements', message: "${uiLibraryMessage}", color: "#4aba78"
-            }
-            // don't do anything with packages that don't have their own channel
-          }
-        }
       }
     }
     unsuccessful {
