@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.1...@pingux/astro@1.0.0-alpha.2) (2021-12-17)
+
+
+### Bug Fixes
+
+* [UIP-5014] Increment and decrement buttons don't need to be focusable ([58d7b21](https://gitlab.corp.pingidentity.com/ux/pingux/commit/58d7b21f70bd47a8c381fcf557deb9b0b2da0bf7))
+
+
+
+
+
 # [1.0.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.0...@pingux/astro@1.0.0-alpha.1) (2021-12-16)
 
 **Note:** Version bump only for package @pingux/astro
