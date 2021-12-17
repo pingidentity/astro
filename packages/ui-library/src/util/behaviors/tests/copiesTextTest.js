@@ -20,7 +20,7 @@ const delayPromise = delay => (new Promise(resolve => window.setTimeout(resolve,
 
 describe("copiesText", function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
         clipboard.writeText = jest.fn();
         clipboard.writeText.mockReturnValue(new Promise(resolve => resolve()));
 
@@ -30,7 +30,7 @@ describe("copiesText", function () {
         });
     });
 
-    function getComponent (opts) {
+    function getComponent(opts) {
         opts = _.defaults(opts || {}, {
             text: "dummy text",
         });
@@ -62,7 +62,7 @@ describe("copiesText", function () {
         expect(component._hintMessage()).toBe("It didn't work");
     });
 
-    it("copies text", function() {
+    it("copies text", function () {
         let component = getComponent();
 
         let link = TestUtils.findRenderedDOMNodeWithTag(component, "a");
@@ -72,7 +72,7 @@ describe("copiesText", function () {
         expect(clipboard.writeText).lastCalledWith("dummy text");
     });
 
-    it("changes message when succeeding", function() {
+    it("changes message when succeeding", function () {
         let component = getComponent();
 
         let link = TestUtils.findRenderedDOMNodeWithTag(component, "a");
@@ -83,7 +83,7 @@ describe("copiesText", function () {
         return delayPromise(0).then(() => expect(component.state.message).toBe(1));
     });
 
-    it("changes message when failing", function() {
+    it("changes message when failing", function () {
         clipboard.writeText.mockReturnValue(new Promise((resolve, reject) => reject()));
 
         let component = getComponent();
@@ -96,7 +96,7 @@ describe("copiesText", function () {
         return delayPromise(0).then(() => expect(component.state.message).toBe(-1));
     });
 
-    it("resets message", function() {
+    it("resets message", function () {
         let component = getComponent();
 
         component.setState({ message: 1 });
@@ -106,4 +106,17 @@ describe("copiesText", function () {
         expect(component.state.message).toBe(0);
     });
 
+    it("saves current selection to state", function () {
+        let component = getComponent();
+        let element = TestUtils.findRenderedDOMNodeWithDataId(component, "enhanced-link");
+        component._saveSelection(element);
+        expect(component.state.selection).toBe(null);
+
+        element.selectionStart = 0;
+        element.selectionEnd = 5;
+
+        component._saveSelection(element);
+        expect(component.state.selection.start).toBe(0);
+        expect(component.state.selection.end).toBe(5);
+    });
 });
