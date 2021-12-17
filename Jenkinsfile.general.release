@@ -76,7 +76,8 @@ pipeline {
         container('ui-library-admin') {
           script {
             echo "Determining if the last author was the Jenkins user"
-            lastAuthor = sh([script: 'git log -1 --pretty=%an', returnStdout: true])
+            def lastAuthor = sh([script: 'git log -1 --pretty=%an', returnStdout: true])
+            echo "${lastAuthor}"
             if (lastAuthor == 'devtools-jenkins') {
               currentBuild.result = 'ABORTED'
               error('Last commit bumped the version, aborting the build early.')
