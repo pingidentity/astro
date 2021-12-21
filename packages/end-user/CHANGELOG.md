@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.0-alpha.3...@pingux/end-user@2.0.0-alpha.4) (2021-12-21)
+
+
+### Bug Fixes
+
+* [UIP-4890] PhoneInput with fieldMessage ([07167ba](https://gitlab.corp.pingidentity.com/ux/end-user/commit/07167baaf748cf6bbed490b6567ff486f160eed6))
+
+
+
+
+
 # [2.0.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.0-alpha.2...@pingux/end-user@2.0.0-alpha.3) (2021-12-20)
 
 **Note:** Version bump only for package @pingux/end-user
