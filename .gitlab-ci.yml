@@ -100,5 +100,8 @@ chromatic:
         - packages/astro/**/*
       when: manual
       allow_failure: true
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes:
+        - packages/astro/**/*
   script:
     - lerna run chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro
