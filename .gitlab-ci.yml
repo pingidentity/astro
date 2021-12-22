@@ -60,7 +60,7 @@ build-no-lockfile:
   stage: build-test-lint
   tags:
     - default-gitlab-runner
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  image: $STABLE_IMAGE
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
