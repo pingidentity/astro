@@ -178,12 +178,12 @@ pipeline {
 
                 script {
                   if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
-                    echo 'Publishing Schema Form to npmjs.org'
+                    echo 'Publishing @pingux/schema-form to npmjs.org'
                     sh 'cd packages/schema-form/ && npm publish'
                   }
 
                   if (updatedPackagesMap.containsKey("@pingux/astro")) {
-                    echo 'Publishing Astro to npmjs.org'
+                    echo 'Publishing @pingux/schema-form to npmjs.org'
                     sh 'cd packages/astro/ && npm publish'
                   }
                 }
