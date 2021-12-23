@@ -40,6 +40,17 @@ export const input = {
   '&::-ms-expand': {
     display: 'none',
   },
+  '&::-webkit-contacts-auto-fill-button, &::-webkit-credentials-auto-fill-button': {
+    visibility: 'hidden',
+    display: 'none !important',
+    pointerEvents: 'none',
+    height: 0,
+    width: 0,
+    margin: 0,
+  },
+  '&::-ms-reveal, &::-ms-clear': {
+    display: 'none',
+  },
 };
 
 // Example variant input
