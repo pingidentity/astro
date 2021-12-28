@@ -326,7 +326,7 @@ const inline = {
   bg: 'white',
   height: '22px',
   lineHeight: 1,
-  fontSize: '14px',
+  fontSize: 'sm',
   borderRadius: '15px',
   border: '1px solid',
   borderColor: 'active',
