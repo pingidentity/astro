@@ -231,6 +231,29 @@ const datePicker = {
   },
 };
 
+const fileInputFieldWrapper = {
+  display: 'flex',
+  border: '1px dashed',
+  borderColor: 'active',
+  padding: '10px 0',
+  '&.is-drag-active': {
+    backgroundColor: 'accent.95',
+  },
+  '&.is-error': {
+    borderColor: 'critical.dark',
+  },
+  '&.is-success': {
+    borderColor: 'success.dark',
+  },
+  '&.is-warning': {
+    borderColor: 'warning.dark',
+  },
+  '&.is-loading': {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};
+
 export default {
   base,
   card,
@@ -239,6 +262,7 @@ export default {
   datePicker,
   expandableRow,
   inputInContainerSlot,
+  fileInputFieldWrapper,
   listItem,
   listBoxSectionTitle,
   listViewItem,
