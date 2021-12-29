@@ -56,6 +56,8 @@ export * from './components/DropdownField';
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 
+export { default as FileInputField } from './components/FileInputField';
+
 export { default as HelpHint } from './components/HelpHint';
 export * from './components/HelpHint';
 
