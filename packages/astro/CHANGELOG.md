@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.4...@pingux/astro@1.0.0-alpha.5) (2021-12-29)
+
+
+### Features
+
+* [UIP-4918] Add File Input ([5987d40](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5987d4064f8a2a54d3e81037acba17c299bea2b0))
+
+
+
+
+
 # [1.0.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.3...@pingux/astro@1.0.0-alpha.4) (2021-12-20)
 
 **Note:** Version bump only for package @pingux/astro
