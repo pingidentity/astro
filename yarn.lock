@@ -10709,6 +10709,11 @@ atob@^2.1.2:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
+attr-accept@^2.2.1:
+  version "2.2.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/attr-accept/-/attr-accept-2.2.2.tgz#646613809660110749e92f2c10833b70968d929b"
+  integrity sha1-ZGYTgJZgEQdJ6S8sEIM7cJaNkps=
+
 autoprefixer@^6.0.0, autoprefixer@^6.3.1:
   version "6.7.7"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/autoprefixer/-/autoprefixer-6.7.7.tgz#1dbd1c835658e35ce3f9984099db00585c782014"
@@ -16511,6 +16516,13 @@ file-loader@^6.0.0:
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^2.7.1"
+
+file-selector@^0.2.2:
+  version "0.2.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/file-selector/-/file-selector-0.2.4.tgz#7b98286f9dbb9925f420130ea5ed0a69238d4d80"
+  integrity sha1-e5gob527mSX0IBMOpe0KaSONTYA=
+  dependencies:
+    tslib "^2.0.3"
 
 file-set@^4.0.1:
   version "4.0.1"
@@ -26289,6 +26301,15 @@ react-draggable@^4.0.3, react-draggable@^4.4.3:
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.0"
+
+react-dropzone@^11.4.2:
+  version "11.4.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/react-dropzone/-/react-dropzone-11.4.2.tgz#1eb99e9def4cc7520f4f58e85c853ce52c483d56"
+  integrity sha1-Hrmene9Mx1IPT1joXIU85SxIPVY=
+  dependencies:
+    attr-accept "^2.2.1"
+    file-selector "^0.2.2"
+    prop-types "^15.7.2"
 
 react-element-to-jsx-string@^14.1.0, react-element-to-jsx-string@^14.3.1:
   version "14.3.1"

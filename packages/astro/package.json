@@ -135,6 +135,7 @@
     "prop-types": "^15.7.2",
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",
+    "react-dropzone": "^11.4.2",
     "rebass": "^4.0.7",
     "recharts": "^2.1.4",
     "regenerator-runtime": "^0.13.7",

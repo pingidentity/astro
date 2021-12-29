@@ -491,6 +491,24 @@ const expandableRow = {
   },
 };
 
+const fileInputField = {
+  background: 'none',
+  cursor: 'pointer',
+  '& span': {
+    textAlign: 'initial',
+  },
+  '&:focus-visible': {
+    outline: 'none',
+  },
+  '&.is-hovered, &.is-pressed': {
+    cursor: 'pointer',
+    '& span': { textDecoration: 'underline' },
+  },
+  '&.is-focused': {
+    boxShadow: 'focus',
+  },
+};
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -516,6 +534,7 @@ export default {
     },
   },
   expandableRow,
+  fileInputField,
   iconButton,
   icon,
   imageUpload,
