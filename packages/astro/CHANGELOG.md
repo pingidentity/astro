@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.5...@pingux/astro@1.0.0-alpha.6) (2021-12-30)
+
+
+### Bug Fixes
+
+* [UIP-4928] password field-hide default safari-edge-ie icon ([1c46ce6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1c46ce6fa4cdd7fe846f3434de3e36c65df61244))
+
+
+
+
+
 # [1.0.0-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.4...@pingux/astro@1.0.0-alpha.5) (2021-12-29)
 
 
