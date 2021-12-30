@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.6...@pingux/astro@1.0.0-alpha.7) (2021-12-30)
+
+
+### Bug Fixes
+
+* [UIP-5064] Upgrade lodash version to 4.17.21 ([427286a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/427286a9b3bbb940f7193c793e70e66770ee4ae0))
+
+
+### Features
+
+* [UIP-5004] RadioButtonsWithLinks Recipe ([dd7f2e9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dd7f2e9f3b30e9790de289b71739323cb6cd1328))
+* [UIP-5037] Add slots props to Tab Component ([a7571a2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a7571a27568b63c4a0fffed1d9dd1ea21ba1f724))
+
+
+
+
+
 # [1.0.0-alpha.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.5...@pingux/astro@1.0.0-alpha.6) (2021-12-30)
 
 
