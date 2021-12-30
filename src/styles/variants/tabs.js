@@ -5,6 +5,7 @@ export const tab = {
   display: 'inline-flex',
   outline: 'none',
   transform: 'translateY(1px)',
+  width: '100%',
   '&.is-focused': {
     boxShadow: 'focus',
   },
