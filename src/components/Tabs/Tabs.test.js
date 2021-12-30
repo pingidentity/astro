@@ -227,3 +227,31 @@ test('hover tab style', () => {
   userEvent.hover(tab0);
   expect(tab0).toHaveClass('is-hovered');
 });
+
+test('will render slots.beforeTab if provided', () => {
+  const testText = 'test-text';
+  const testComponent = <div>{testText}</div>;
+  const tabs = [
+    {
+      name: 'Tab 1',
+      children: 'Tab 1 body',
+      props: { slots: { beforeTab: testComponent } },
+    },
+  ];
+  getComponent({}, { tabs });
+  expect(screen.getByText(testText)).toBeInTheDocument();
+});
+
+test('will render slots.afterTab if provided', () => {
+  const testText = 'test-text';
+  const testComponent = <div>{testText}</div>;
+  const tabs = [
+    {
+      name: 'Tab 1',
+      children: 'Tab 1 body',
+      props: { slots: { afterTab: testComponent } },
+    },
+  ];
+  getComponent({}, { tabs });
+  expect(screen.getByText(testText)).toBeInTheDocument();
+});
