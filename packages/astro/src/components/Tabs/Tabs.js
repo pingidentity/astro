@@ -66,6 +66,7 @@ const Tabs = forwardRef((props, ref) => {
               isDisabled={isDisabled}
               orientation={orientation}
               mode={mode}
+              slots={item?.props?.slots}
             />
           ))}
         </Box>
