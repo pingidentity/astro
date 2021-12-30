@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.5](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.4...ui-library@5.0.0-alpha.5) (2021-12-30)
+
+
+### Bug Fixes
+
+* [UIP-5018] Error mark is misplaced on resize ([0ca7e5c](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/0ca7e5c45fffca22fb2c130f97b307014a099be4))
+
+
+
+
+
 # [5.0.0-alpha.4](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.3...ui-library@5.0.0-alpha.4) (2021-12-20)
 
 **Note:** Version bump only for package ui-library
