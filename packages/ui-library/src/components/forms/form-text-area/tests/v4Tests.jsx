@@ -10,7 +10,7 @@ import { mount } from "enzyme";
 
 describe("FormTextArea v4", function () {
 
-    function getComponent (props) {
+    function getComponent(props) {
         props = _.defaults(props || {}, {
             stateless: true,
             onChange: jest.fn(),
@@ -21,6 +21,11 @@ describe("FormTextArea v4", function () {
 
         return TestUtils.renderInWrapper(<FormTextArea {...props} />);
     }
+
+    window.ResizeObserver = window.ResizeObserver ||
+        jest.fn().mockImplementation(() => ({
+            observe: jest.fn(),
+        }));
 
     it("data-id's don't change", () => {
         mountSnapshotDataIds(
@@ -113,7 +118,7 @@ describe("FormTextArea v4", function () {
         var component = getComponent();
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         expect(component.props.children.props.onChange).toBeCalled();
         expect(component.props.children.props.onValueChange).toBeCalled();
     });
@@ -142,7 +147,7 @@ describe("FormTextArea v4", function () {
         var component = getComponent();
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
@@ -151,7 +156,7 @@ describe("FormTextArea v4", function () {
         var component = getComponent({ showUndo: true });
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeDefined();
     });
@@ -222,7 +227,7 @@ describe("FormTextArea v4", function () {
         });
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
@@ -236,7 +241,7 @@ describe("FormTextArea v4", function () {
         });
 
         const field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         const undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
     });
@@ -251,7 +256,7 @@ describe("FormTextArea v4", function () {
         });
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         // check that the undo icon gets displayed
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
@@ -274,7 +279,7 @@ describe("FormTextArea v4", function () {
 
         // make the undo icon appear by changing the field
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         // check that the icon is actually there
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeTruthy();
