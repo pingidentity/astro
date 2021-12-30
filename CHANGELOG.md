@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.7...@pingux/astro@1.0.0-alpha.8) (2021-12-30)
+
+
+### Features
+
+* [UIP-5003] Copy to clipboard Recipe ([655aa6f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/655aa6f4083f71116f6e39bd37ad75cdc08e47ac))
+
+
+
+
+
 # [1.0.0-alpha.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.6...@pingux/astro@1.0.0-alpha.7) (2021-12-30)
 
 
