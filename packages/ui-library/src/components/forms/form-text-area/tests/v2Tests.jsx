@@ -13,7 +13,7 @@ describe("FormTextArea", function () {
         HelpHint = require("../../../tooltips/HelpHint"),
         _ = require("underscore");
 
-    function getComponent (props) {
+    function getComponent(props) {
         props = _.defaults(props || {}, {
             stateless: true,
             onChange: jest.fn(),
@@ -23,6 +23,11 @@ describe("FormTextArea", function () {
 
         return TestUtils.renderInWrapper(<FormTextArea {...props} />);
     }
+
+    window.ResizeObserver = window.ResizeObserver ||
+        jest.fn().mockImplementation(() => ({
+            observe: jest.fn(),
+        }));
 
     it("renders the component", function () {
         var component = getComponent();
@@ -105,7 +110,7 @@ describe("FormTextArea", function () {
         var component = getComponent();
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         expect(component.props.children.props.onChange).toBeCalled();
         expect(component.props.children.props.onValueChange).toBeCalled();
     });
@@ -124,7 +129,7 @@ describe("FormTextArea", function () {
         var component = getComponent();
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
@@ -133,7 +138,7 @@ describe("FormTextArea", function () {
         var component = getComponent({ showUndo: true });
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeDefined();
     });
@@ -197,7 +202,7 @@ describe("FormTextArea", function () {
         });
 
         var field = TestUtils.findRenderedDOMNodeWithTag(component, "textarea");
-        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } } );
+        ReactTestUtils.Simulate.change(field, { target: { value: "abc" } });
         var undo = TestUtils.findRenderedDOMNodeWithDataId(component, "undo");
         expect(ReactTestUtils.isDOMComponent(undo)).toBeFalsy();
     });
@@ -221,7 +226,7 @@ describe("FormTextArea", function () {
         // expect(help.getAttribute("class")).toContain("bottom right");
     });
 
-    it("does not block resizing by default", function() {
+    it("does not block resizing by default", function () {
         var component = getComponent({});
         var field = TestUtils.findRenderedDOMNodeWithClass(component, "input-textarea__input--no-resize");
         expect(ReactTestUtils.isDOMComponent(field)).toBeFalsy();
