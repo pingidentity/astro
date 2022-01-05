@@ -14329,11 +14329,6 @@ dashify@^2.0.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/dashify/-/dashify-2.0.0.tgz#fff270ca2868ca427fee571de35691d6e437a648"
   integrity sha1-//JwyihoykJ/7lcd41aR1uQ3pkg=
 
-data-uri-to-buffer@^4.0.0:
-  version "4.0.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/data-uri-to-buffer/-/data-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
-  integrity sha1-tdtGrqUPYXZCisBbc745pXcBpks=
-
 data-uri-to-u8@~1.0.0:
   version "1.0.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/data-uri-to-u8/-/data-uri-to-u8-1.0.0.tgz#225a79f2dd3b350ad8d6289e9b9c91d835fb8dbe"
@@ -16442,13 +16437,6 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-fetch-blob@^3.1.2:
-  version "3.1.3"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/fetch-blob/-/fetch-blob-3.1.3.tgz#a7dca4855e39d3e3c5a1da62d4ee335c37d26012"
-  integrity sha1-p9ykhV450+PFodpi1O4zXDfSYBI=
-  dependencies:
-    web-streams-polyfill "^3.0.3"
-
 fibers@^3.0.0, fibers@^5.0.0:
   version "5.0.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/fibers/-/fibers-5.0.0.tgz#3a60e0695b3ee5f6db94e62726716fa7a59acc41"
@@ -16913,13 +16901,6 @@ format@^0.2.0:
   version "0.2.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/format/-/format-0.2.2.tgz#d6170107e9efdc4ed30c9dc39016df942b5cb58b"
   integrity sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=
-
-formdata-polyfill@^4.0.10:
-  version "4.0.10"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
-  integrity sha1-JIB8McnUAuACqz2McgFEzriEhCM=
-  dependencies:
-    fetch-blob "^3.1.2"
 
 forwarded@~0.1.2:
   version "0.1.2"
@@ -23137,14 +23118,12 @@ node-fetch-npm@^2.0.2:
     json-parse-better-errors "^1.0.0"
     safe-buffer "^5.1.1"
 
-node-fetch@^1.0.1, node-fetch@^2.1.2, node-fetch@^2.2.0, node-fetch@^2.5.0, node-fetch@^2.6.0, node-fetch@^2.6.1, node-fetch@^3.1.0:
-  version "3.1.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/node-fetch/-/node-fetch-3.1.0.tgz#714f4922dc270239487654eaeeab86b8206cb52e"
-  integrity sha1-cU9JItwnAjlIdlTq7quGuCBstS4=
+node-fetch@^1.0.1, node-fetch@^2.1.2, node-fetch@^2.2.0, node-fetch@^2.5.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
+  version "2.6.6"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/node-fetch/-/node-fetch-2.6.6.tgz#1751a7c01834e8e1697758732e9efb6eeadfaf89"
+  integrity sha1-F1GnwBg06OFpd1hzLp77burfr4k=
   dependencies:
-    data-uri-to-buffer "^4.0.0"
-    fetch-blob "^3.1.2"
-    formdata-polyfill "^4.0.10"
+    whatwg-url "^5.0.0"
 
 node-forge@^0.10.0:
   version "0.10.0"
@@ -30428,6 +30407,11 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
+
 tree-kill@^1.2.2:
   version "1.2.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
@@ -31663,11 +31647,6 @@ web-namespaces@^1.0.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/web-namespaces/-/web-namespaces-1.1.4.tgz#bc98a3de60dadd7faefc403d1076d529f5e030ec"
   integrity sha1-vJij3mDa3X+u/EA9EHbVKfXgMOw=
 
-web-streams-polyfill@^3.0.3:
-  version "3.2.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/web-streams-polyfill/-/web-streams-polyfill-3.2.0.tgz#a6b74026b38e4885869fb5c589e90b95ccfc7965"
-  integrity sha1-prdAJrOOSIWGn7XFiekLlcz8eWU=
-
 webdriverio@^4.12.0, webdriverio@^4.14.0:
   version "4.14.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/webdriverio/-/webdriverio-4.14.4.tgz#f7a94e9a6530819796088f42b009833d83de0386"
@@ -31695,6 +31674,11 @@ webdriverio@^4.12.0, webdriverio@^4.14.0:
     url "~0.11.0"
     wdio-dot-reporter "~0.0.8"
     wgxpath "~1.0.0"
+
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
@@ -31912,6 +31896,14 @@ whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0, whatwg-mimetype@^2.3.0:
   version "2.3.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/whatwg-mimetype/-/whatwg-mimetype-2.3.0.tgz#3d4b1e0312d2079879f826aff18dbeeca5960fbf"
   integrity sha1-PUseAxLSB5h5+Cav8Y2+7KWWD78=
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha1-lmRU6HZUYuN2RNNib2dCzotwll0=
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 whatwg-url@^6.4.1:
   version "6.5.0"
