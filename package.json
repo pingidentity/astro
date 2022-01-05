@@ -71,7 +71,7 @@
     "ast-types": "^0.14.0",
     "minimist": "^1.2.5",
     "CodeMirror": "^5.59.4",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^2.6.1",
     "path-parse": "^1.0.7",
     "color-string": "^1.6.0",
     "ua-parser-js": "^0.7.30",
