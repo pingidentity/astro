@@ -30,7 +30,7 @@ const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}
         <Tab key={name} title={name} {...tabProps}>
           {children}
         </Tab>
-    ))}
+      ))}
     </Tabs>
   </CacheProvider>
 ));
@@ -148,6 +148,25 @@ test('disabled all tabs', () => {
   expect(tab0).not.toContainElement(screen.queryByRole('presentation'));
   expect(tab1).not.toContainElement(screen.queryByRole('presentation'));
   testTabPanel(0);
+});
+
+test('disabled tab is not accessible on click or focus', () => {
+  getComponent({ disabledKeys: [defaultTabs[1].name] });
+
+  testTabPanel(0);
+
+  const { tabs, tab0, tab1, tab2 } = getTabs();
+
+  // Ensure that clicking a disabled tab does nothing
+  userEvent.click(tab1);
+  testTabPanel(0);
+
+  // Ensure that disabled tab is not accessible via focus
+  userEvent.tab();
+  testSingleTab(tabs, tab0, 'toHaveFocus');
+  fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
+  testSingleTab(tabs, tab2, 'toHaveFocus');
+  testTabPanel(2);
 });
 
 test('controlled tabs', () => {
