@@ -116,9 +116,9 @@ export const Centered = () => (
 );
 
 export const DisabledSingleTab = () => (
-  <Tabs defaultSelectedKey="Tab 2" items={tabs}>
+  <Tabs items={tabs} disabledKeys={['Tab 2']}>
     {item => (
-      <Tab key={item.name} title={item.name} isDisabled={item.name === 'Tab 1'}>
+      <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
     )}

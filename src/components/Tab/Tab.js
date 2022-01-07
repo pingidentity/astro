@@ -40,8 +40,8 @@ export const CollectionTab = forwardRef((props, ref) => {
     content,
     ...otherItemProps
   } = itemProps;
-  const isDisabled = tabsDisabled || tabDisabled;
   const state = useContext(TabsContext);
+  const isDisabled = tabsDisabled || tabDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectedKey === key;
   const { isFocusVisible, focusProps } = useFocusRing();
   const { hoverProps, isHovered } = useHover({});
