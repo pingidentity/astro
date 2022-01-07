@@ -15,13 +15,13 @@ const accordionTitle = {
 const accordion = {
   display: 'flex',
   mt: '5px',
-  mb: '5px',
+  mb: '20px',
   alignItems: 'flex-start',
 };
 
 const accordionBody = {
   display: 'none !important',
-  p: 'md',
+  pt: 'md',
   width: '100%',
   '.is-open &': {
     display: 'flex !important',
