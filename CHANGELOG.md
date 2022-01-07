@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.9...@pingux/astro@1.0.0-alpha.10) (2022-01-07)
+
+
+### Bug Fixes
+
+* [UIP-5010] Disabled tabs can be displayed via keyboard ([9115f66](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9115f66c8e921a910934cb8205b29321f2d30fe8))
+
+
+
+
+
 # [1.0.0-alpha.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.8...@pingux/astro@1.0.0-alpha.9) (2022-01-07)
 
 
