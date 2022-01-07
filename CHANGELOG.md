@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.8...@pingux/astro@1.0.0-alpha.9) (2022-01-07)
+
+
+### Bug Fixes
+
+* [UIP-5013] Accordion design improvements ([436b8ef](https://gitlab.corp.pingidentity.com/ux/pingux/commit/436b8ef7d6e07c03feb7b4abf89e07eae022f809))
+
+
+
+
+
 # [1.0.0-alpha.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.7...@pingux/astro@1.0.0-alpha.8) (2021-12-30)
 
 
