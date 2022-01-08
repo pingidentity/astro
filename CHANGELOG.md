@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.10...@pingux/astro@1.0.0-alpha.11) (2022-01-08)
+
+
+### Features
+
+* [UIP-4887] ListView hides Separators on zoom ([92ca2bb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/92ca2bb40bb49ce9a69eb097cc88b5e210acce8a))
+
+
+
+
+
 # [1.0.0-alpha.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.9...@pingux/astro@1.0.0-alpha.10) (2022-01-07)
 
 
