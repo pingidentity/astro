@@ -20,21 +20,23 @@ export const collectionTypes = {
 };
 
 export function useListLayout(state) {
+  const ROW_HEIGHT = 81;
   const collator = useCollator({ usage: 'search', sensitivity: 'base' });
   const layout = useMemo(() =>
     new ListLayout({
-      estimatedRowHeight: 81,
+      estimatedRowHeight: ROW_HEIGHT,
       estimatedHeadingHeight: 26,
       paddingRight: 4,
       paddingLeft: 4,
-      loaderHeight: 81,
-      placeholderHeight: 81,
+      loaderHeight: ROW_HEIGHT,
+      placeholderHeight: ROW_HEIGHT,
       collator,
     })
   , [collator]);
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
+
   return layout;
 }
 
