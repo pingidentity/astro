@@ -79,6 +79,10 @@ const listViewItem = {
   '&.is-focused': {
     boxShadow: 'inset 0 0 5px #5873bdbf',
   },
+  '&.has-separator': {
+    borderBottom: '1px solid',
+    borderBottomColor: 'line.hairline',
+  },
 };
 
 const listBoxSectionTitle = {
