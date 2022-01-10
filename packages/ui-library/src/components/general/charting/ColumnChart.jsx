@@ -115,7 +115,10 @@ export default class ColumnChart extends React.Component {
         renderTooltip: PropTypes.func,
         stacked: PropTypes.bool,
         yAxisLabel: PropTypes.string,
-        yAxisWidth: PropTypes.number,
+        yAxisOptions: PropTypes.shape({
+            paddingRight: PropTypes.number,
+            width: PropTypes.number,
+        }),
         width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     };
 
@@ -137,7 +140,10 @@ export default class ColumnChart extends React.Component {
         hideX: true,
         hideY: true,
         yAxisLabel: "",
-        yAxisWidth: 100,
+        yAxisOptions: {
+            paddingRight: 10,
+            width: 25,
+        },
     };
 
     state = {
@@ -202,10 +208,16 @@ export default class ColumnChart extends React.Component {
         this.props.onMouseOver(data, e);
     }
 
+    /* istanbul ignore next */
     _renderYAxisLabel = ({ viewBox }) => {
-        const cy = viewBox.height / 2;
+        const { x, y, height } = viewBox;
+        const { paddingRight } = this.props.yAxisOptions;
+        const cx = x - paddingRight;
+        const cy = (height / 2) + y;
+        const rot = `rotate(270 ${cx} ${cy})`;
+        const textStyle = { fontSize: "15px" };
 
-        return <Text x={0} y={cy} width={50} style={{ fontSize: "15px" }}>{this.props.yAxisLabel}</Text>;
+        return <Text x={cx} y={cy} style={textStyle} transform={rot} textAnchor="middle">{this.props.yAxisLabel}</Text>;
     }
 
     _generateYAxes = (legend) => {
@@ -219,10 +231,9 @@ export default class ColumnChart extends React.Component {
                         key={axis.yAxisId}
                         yAxisId={axis.yAxisId}
                         hide={this.props.hideY}
-                        width={this.props.yAxisWidth}
-                    >
-                        <Label content={this._renderYAxisLabel} />
-                    </YAxis>
+                        width={this.props.yAxisOptions.width}
+                        label={<Label content={this._renderYAxisLabel} />}
+                    />
                 );
             } else if (!axis.yAxisId && !yAxes.includes(this.props.baseYAxisId)) {
                 yAxes.push(this.props.baseYAxisId);
@@ -231,10 +242,9 @@ export default class ColumnChart extends React.Component {
                         key={this.props.baseYAxisId}
                         yAxisId={this.props.baseYAxisId}
                         hide={this.props.hideY}
-                        width={this.props.yAxisWidth}
-                    >
-                        <Label content={this._renderYAxisLabel} />
-                    </YAxis>
+                        width={this.props.yAxisOptions.width}
+                        label={<Label content={this._renderYAxisLabel} />}
+                    />
                 );
             }
         });
