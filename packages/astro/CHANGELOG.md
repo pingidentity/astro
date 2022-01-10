@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.11...@pingux/astro@1.0.0-alpha.12) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5061] hide variants that aren't used for <Button> specifically ([85a494c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/85a494cc3fa656a2fc6bb37dc0e718bdcfee7829))
+
+
+
+
+
 # [1.0.0-alpha.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.10...@pingux/astro@1.0.0-alpha.11) (2022-01-08)
 
 
