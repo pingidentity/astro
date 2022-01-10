@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.14](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.13...@pingux/astro@1.0.0-alpha.14) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-4953] Chip component cleanup ([d2f10ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d2f10ece82749d723ac35b6262c1b918f81abba1))
+
+
+
+
+
 # [1.0.0-alpha.13](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.12...@pingux/astro@1.0.0-alpha.13) (2022-01-10)
 
 

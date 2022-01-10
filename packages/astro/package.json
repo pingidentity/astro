@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.14",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "Apache-2.0",
