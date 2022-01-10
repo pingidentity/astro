@@ -19,7 +19,7 @@ export const Default = () => (
           bg="#E5E9F8"
           label={
             <Box isRow justifyContent="center">
-              <Icon icon={Link} color="#253746" size={15} alignSelf="center" mr="xs" />
+              <Icon icon={Link} color="#253746" size={12} alignSelf="center" mr="xs" />
               <Text color="#253746" sx={{ textTransform: 'lowercase' }}>user</Text>
             </Box>
           }

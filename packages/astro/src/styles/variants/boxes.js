@@ -92,14 +92,30 @@ const listBoxSectionTitle = {
 
 const chip = {
   cursor: 'pointer',
-  height: '15px',
-  p: '10px',
+  p: '3px 5px 4px 5px',
   alignItems: 'center',
   justifyContent: 'center',
   minWidth: '50px',
   alignSelf: 'flex-start',
   display: 'inline-flex !important',
   borderRadius: '5px',
+  fontWeight: 1,
+
+  '& button': {
+    backgroundColor: 'transparent',
+    marginLeft: 'xs',
+    marginTop: '1px',
+    padding: '0',
+
+    '&.is-hovered': {
+      backgroundColor: 'white',
+    },
+
+    '& .mdi-icon': {
+      marginLeft: '0',
+      padding: '2px',
+    },
+  },
 };
 
 const inputInContainerSlot = {
