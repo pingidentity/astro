@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ChipContext } from './ChipContext';
 import Box from '../Box/Box';
 import Text from '../Text/Text';
 import * as colors from '../../styles/colors';
@@ -12,24 +13,34 @@ import * as colors from '../../styles/colors';
 
 const Chip = React.forwardRef((props, ref) => {
   const {
+    bg,
     children,
     textColor,
     textProps,
     label,
+    isUppercase,
   } = props;
 
   return (
-    <Box
-      isRow
-      variant="boxes.chip"
-      ref={ref}
-      {...props}
-    >
-      <Text variant="label" sx={{ textTransform: 'uppercase' }} color={textColor} {...textProps}>
-        {label}
-      </Text>
-      {children}
-    </Box>
+    <ChipContext.Provider value={{ bg }}>
+      <Box
+        isRow
+        variant="boxes.chip"
+        sx={isUppercase && { paddingBottom: '3px' }}
+        ref={ref}
+        {...props}
+      >
+        <Text
+          variant="label"
+          color={textColor}
+          sx={isUppercase && { textTransform: 'uppercase', fontSize: '11px' }}
+          {...textProps}
+        >
+          {label}
+        </Text>
+        {children}
+      </Box>
+    </ChipContext.Provider>
   );
 });
 
@@ -42,11 +53,14 @@ Chip.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Props object that is spread directly into the textfield. */
   textProps: PropTypes.shape({}),
+  /** When true, display chip label as uppercase. */
+  isUppercase: PropTypes.bool,
 };
 
 Chip.defaultProps = {
   textColor: 'white',
   bg: colors.neutral[10],
+  isUppercase: false,
 };
 
 export default Chip;
