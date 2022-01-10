@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.6](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.5...ui-library@5.0.0-alpha.6) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5001] Adjust styling of y axis label ([5952997](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/59529972f9e415d406410ff9b156feca2e1e3d89))
+* [UIP-5001] Adjust styling of y axis label ([82d2332](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/82d2332850dda16ed14ebbb21e9a207da47ddb0d))
+* [UIP-5001] y axis fixes ([970ae7a](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/970ae7aa2c67892f3133831c46826e69bc95dfea))
+* [UIP-5001] y axis fixes ([29e98ce](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/29e98cec42a6bd68e9d54288a2c91d05cd71089b))
+
+
+
+
+
 # [5.0.0-alpha.5](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.4...ui-library@5.0.0-alpha.5) (2021-12-30)
 
 
