@@ -12,6 +12,18 @@ delete variants.ICON;
 delete variants.ICON_BUTTON;
 delete variants.INVERTED;
 
+// add designer approved variants for devs to use here
+const variantOptions = [
+  'critical',
+  'danger',
+  'default',
+  'inline',
+  'link',
+  'primary',
+  'success',
+  'text',
+];
+
 export default {
   title: 'Button',
   component: Button,
@@ -19,9 +31,9 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: Object.values(variants),
+        options: variantOptions,
       },
-      defaultValue: Object.values(variants).find(value => value === 'default'),
+      defaultValue: 'default',
     },
     children: {
       description: 'Button text.',
