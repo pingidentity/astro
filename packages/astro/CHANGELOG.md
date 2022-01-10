@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.13](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.12...@pingux/astro@1.0.0-alpha.13) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5063] Inline Button Text Size ([6f03c64](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6f03c64b13dc2237d09acb565282394effd419b8))
+
+
+
+
+
 # [1.0.0-alpha.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.11...@pingux/astro@1.0.0-alpha.12) (2022-01-10)
 
 
