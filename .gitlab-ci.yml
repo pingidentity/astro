@@ -85,6 +85,7 @@ backstop:
     - lerna run backstop-ci
 
 manual_chromatic:
+  <<: *yarn-install-and-build
   stage: screenshot
   tags:
     - default-gitlab-runner
@@ -106,6 +107,7 @@ manual_chromatic:
     - lerna run chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro
 
 auto_accept_chromatic:
+  <<: *yarn-install-and-build
   stage: screenshot
   tags:
     - default-gitlab-runner
