@@ -27,7 +27,6 @@ test('default icon button', () => {
   const button = screen.getByRole('button');
   expect(button).toHaveAttribute('data-testid', testId);
   expect(button).toBeInstanceOf(HTMLButtonElement);
-  expect(button).toHaveAttribute('tabindex', '0');
   expect(button).toBeInTheDocument();
 });
 
