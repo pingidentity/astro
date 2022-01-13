@@ -71,24 +71,6 @@ pipeline {
     PING_TEAM_NAME = "ux"
   }
   stages {
-    stage("short circuit") {
-      steps {
-        container('ui-library-admin') {
-          script {
-            echo "Determining if the last author was the Jenkins user"
-            def lastAuthor = sh([script: 'git log -1 --pretty=%an', returnStdout: true])
-            echo "${lastAuthor}"
-            if (lastAuthor == 'devtools-jenkins') {
-              currentBuild.result = 'ABORTED'
-              error('Last commit bumped the version, aborting the build early.')
-            } else {
-              echo "Last commit is not a version bump, continuing normally."
-            }
-          }
-        }
-      }
-    }
-
     stage('install and link') {
       steps {
         dir("${env.WORKSPACE}") {

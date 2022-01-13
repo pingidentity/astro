@@ -67,24 +67,6 @@ pipeline {
     PING_TEAM_NAME = "ux"
   }
   stages {
-    stage("short circuit") {
-      steps {
-        container('ui-library-admin') {
-          script {
-            echo "Determining if the last commit was a version bump"
-            def lastCommit = sh([script: 'git log -1 --pretty=%B', returnStdout: true])
-            echo "${lastCommit}"
-            if (lastCommit =~ /^chore\(release\):\spublish/) {
-              currentBuild.result = 'ABORTED'
-              error('Last commit bumped the version, aborting the build early.')
-            } else {
-              echo "Last commit is not a version bump, continuing normally."
-            }
-          }
-        }
-      }
-    }
-
     stage("set version and release flags") {
       steps {
         script {
