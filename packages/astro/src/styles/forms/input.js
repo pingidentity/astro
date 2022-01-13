@@ -124,6 +124,10 @@ input.container = {
       backgroundColor: 'accent.95',
       border: 'none',
     },
+    '> textarea': {
+      backgroundColor: 'accent.95',
+      border: 'none',
+    },
     '&:after': {
       display: 'none',
     },

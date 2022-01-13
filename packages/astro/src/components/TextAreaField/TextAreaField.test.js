@@ -87,6 +87,13 @@ test('form wrapper will have default max label column width when no custom width
   expect(textAreaContainer).toHaveStyle('grid-template-columns: 40% auto');
 });
 
+test('passing read only prop applys the is-read-only class to the textarea', () => {
+  const isReadOnly = true;
+  getComponent({ isReadOnly });
+  const textArea = screen.getByLabelText(defaultProps.label);
+  expect(textArea).toHaveClass('is-read-only');
+});
+
 test('form wrapper will have a max label column width when custom width set', () => {
   const labelMode = 'left';
   const containerProps = { sx: { gridTemplateColumns: '120px auto' } };
