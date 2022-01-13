@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.18](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.17...@pingux/astro@1.0.0-alpha.18) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-5107] IconButton - no focus in disabled state ([f301f6d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f301f6d0cdc8271c992eb3384094cafbd59fa0d5))
+
+
+
+
+
 # [1.0.0-alpha.17](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.16...@pingux/astro@1.0.0-alpha.17) (2022-01-13)
 
 
