@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.19](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.18...@pingux/astro@1.0.0-alpha.19) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-4996] astro stepper redundant tooltip ([d74f102](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d74f1020163703948498436224ef3f9d6458df57))
+
+
+
+
+
 # [1.0.0-alpha.18](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.17...@pingux/astro@1.0.0-alpha.18) (2022-01-13)
 
 
