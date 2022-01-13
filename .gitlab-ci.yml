@@ -124,13 +124,12 @@ deploy_prerelease:
     - default-gitlab-runner
   image: $STABLE_IMAGE
   rules:
-    # Deploy develop and release branches via Jenkins API *UNLESS* the last commit was
-    # made from the Jenkins bot. This avoids failed builds and possible loops due to push-based
-    # webhooks.
-    - if: '$CI_COMMIT_AUTHOR !~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH =~ /^(develop|release\/.+)/'
-    # Allow manual deploy if necessary
-    - if: '$CI_COMMIT_AUTHOR =~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH =~ /^(develop|release\/.+)/'
-      when: manual
+    # Deploy develop branch via Jenkins API *UNLESS* the last commit was an alpha build.
+    # This prevents loops.
+    - if: '$CI_COMMIT_BRANCH == "develop" && $CI_COMMIT_TITLE != "chore(release): publish alpha build"'
+    # Deploy release branch via Jenkins API *UNLESS* the last commit was an rc build.
+    # This prevents loops.
+    - if: '$CI_COMMIT_BRANCH =~ /^release\/.+/ && $CI_COMMIT_TITLE != "chore(release): publish rc build"'
   script:
     - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
 
@@ -140,11 +139,8 @@ deploy_release:
     - default-gitlab-runner
   image: $STABLE_IMAGE
   rules:
-    # Deploy master branch via Jenkins API *UNLESS* the last commit was made from the Jenkins bot.
-    # This avoids failed builds and possible loops due to push-based webhooks.
-    - if: '$CI_COMMIT_AUTHOR !~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH == "master"'
-    # Allow manual deploy if necessary
-    - if: '$CI_COMMIT_AUTHOR =~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH == "master"'
-      when: manual
+    # Deploy master branch via Jenkins API *UNLESS* the last commit was a stable build.
+    # This prevents loops.
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TITLE != "chore(release): publish stable build"'
   script:
     - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/generic-release/build"
