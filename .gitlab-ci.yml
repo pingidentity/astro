@@ -84,13 +84,19 @@ backstop:
     - lerna run demo --scope ui-library
     - lerna run backstop-ci
 
-manual_chromatic:
+chromatic:
   <<: *yarn-install-and-build
   stage: screenshot
   tags:
     - default-gitlab-runner
   image: $STABLE_IMAGE
+  variables:
+    CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   rules:
+    # Run automatically for merge trains to develop and master
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
     # Required manual trigger for merge requests against master or develop
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
       changes:
@@ -103,23 +109,14 @@ manual_chromatic:
         - packages/astro/**/*
       when: manual
       allow_failure: true
-  script:
-    - lerna run chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro
-
-auto_accept_chromatic:
-  <<: *yarn-install-and-build
-  stage: screenshot
-  tags:
-    - default-gitlab-runner
-  image: $STABLE_IMAGE
-  rules:
-    # Run automatically for commits on develop and master
+    # Run automatically for all commits on develop and master, plus auto-accept any changes
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "master"'
       changes:
         - packages/astro/**/*
+      variables:
+        CHROMATIC_FLAGS: "--auto-accept-changes --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   script:
-    # Auto accept all changes for these branches
-    - lerna run chromatic -- --auto-accept-changes --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro
+    - lerna run chromatic -- $CHROMATIC_FLAGS
 
 deploy_prerelease:
   stage: deploy
@@ -130,7 +127,10 @@ deploy_prerelease:
     # Deploy develop and release branches via Jenkins API *UNLESS* the last commit was
     # made from the Jenkins bot. This avoids failed builds and possible loops due to push-based
     # webhooks.
-    - if: '$CI_COMMIT_AUTHOR !~ /^devtools-jenkins.*/ && ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH =~ /^release\/.+/ || $CI_COMMIT_BRANCH == "master")'
+    - if: '$CI_COMMIT_AUTHOR !~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH =~ /^(develop|release\/.+)/'
+    # Allow manual deploy if necessary
+    - if: '$CI_COMMIT_AUTHOR =~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH =~ /^(develop|release\/.+)/'
+      when: manual
   script:
     - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
 
@@ -143,5 +143,8 @@ deploy_release:
     # Deploy master branch via Jenkins API *UNLESS* the last commit was made from the Jenkins bot.
     # This avoids failed builds and possible loops due to push-based webhooks.
     - if: '$CI_COMMIT_AUTHOR !~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH == "master"'
+    # Allow manual deploy if necessary
+    - if: '$CI_COMMIT_AUTHOR =~ /^devtools-jenkins.*/ && $CI_COMMIT_BRANCH == "master"'
+      when: manual
   script:
     - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/generic-release/build"
