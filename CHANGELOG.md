@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.17](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.16...@pingux/astro@1.0.0-alpha.17) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-4997] Read only style TextAreaField ([a5f62bd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a5f62bd014f2d3d75c2c71625bc31ba5cefbb4df))
+
+
+
+
+
 # [1.0.0-alpha.16](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.15...@pingux/astro@1.0.0-alpha.16) (2022-01-13)
 
 
