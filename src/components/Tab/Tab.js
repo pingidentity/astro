@@ -38,6 +38,7 @@ export const CollectionTab = forwardRef((props, ref) => {
     tabLabelProps,
     tabLineProps,
     content,
+    titleAttr,
     ...otherItemProps
   } = itemProps;
   const state = useContext(TabsContext);
@@ -69,6 +70,7 @@ export const CollectionTab = forwardRef((props, ref) => {
         {...mergeProps(focusProps, hoverProps, tabProps)}
         {...otherItemProps}
         ref={tabRef}
+        title={titleAttr || undefined}
       >
         {icon}
         <Text variant="tabLabel" {...tabLabelProps}>
