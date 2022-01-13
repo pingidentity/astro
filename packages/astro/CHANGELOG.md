@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.16](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.15...@pingux/astro@1.0.0-alpha.16) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-4962] accordion grid design improvements ([dcec402](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dcec4025f945968e20386bc20ad011f48532acc7))
+
+
+
+
+
 # [1.0.0-alpha.15](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.14...@pingux/astro@1.0.0-alpha.15) (2022-01-13)
 
 **Note:** Version bump only for package @pingux/astro
