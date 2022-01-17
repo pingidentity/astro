@@ -157,33 +157,6 @@ const accordionHeader = {
   },
 };
 
-// TODO: Remove this variant in Astro-UI 1.0.0
-const icon = {
-  p: '3px',
-  alignSelf: 'flex-start',
-  flexGrow: 0,
-  borderRadius: '100%',
-  cursor: 'pointer',
-  bg: 'transparent',
-  'path': {
-    fill: 'text.secondary',
-  },
-  outline: 'none',
-  color: 'white',
-  '&.is-hovered': {
-    bg: 'accent.90',
-  },
-  '&.is-pressed': {
-    'path': {
-      fill: 'white',
-    },
-    bg: 'active',
-  },
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-};
-
 const primary = {
   ...base,
   display: 'inline-flex',
@@ -536,7 +509,6 @@ export default {
   expandableRow,
   fileInputField,
   iconButton,
-  icon,
   imageUpload,
   inline,
   inverted,

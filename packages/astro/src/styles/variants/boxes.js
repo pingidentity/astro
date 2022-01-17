@@ -4,21 +4,6 @@ const base = {
   display: 'flex',
 };
 
-const panel = {
-  outline: 'none',
-  position: 'relative',
-  bg: 'white',
-  borderLeft: 'separator',
-  transition: 'margin 0.25s ease-in',
-  visibility: 'hidden',
-  '&.is-focused': {
-    boxShadow: 'focus',
-  },
-  '&.is-visible': {
-    visibility: 'visible',
-  },
-};
-
 const card = {
   boxShadow: 'standard',
   p: 'lg',
@@ -286,7 +271,6 @@ export default {
   listItem,
   listBoxSectionTitle,
   listViewItem,
-  panel,
   radioCheckedContent,
   radioContainer,
   scrollbox,

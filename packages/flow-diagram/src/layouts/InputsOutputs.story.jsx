@@ -121,7 +121,6 @@ function CollapsibleSection({ defaultExpanded, title, children, status, onClick,
                 <Box>
                     <IconButton
                         onPress={onClick}
-                        variant="icon"
                     >
                         <Icon icon={ArrowCollapseRightIcon} color="#253746" size={25} alignSelf="center" />
                     </IconButton>
@@ -472,7 +471,6 @@ export const InputsOutputs = () => {
                                 icon={
                                     <IconButton
                                         onPress={() => setOutputsDocked(true)}
-                                        variant="icon"
                                     >
                                         <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" />
                                     </IconButton>
@@ -494,7 +492,6 @@ export const InputsOutputs = () => {
                                 icon={
                                     <IconButton
                                         onPress={() => setInputsDocked(true)}
-                                        variant="icon"
                                     >
                                         <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" />
                                     </IconButton>}

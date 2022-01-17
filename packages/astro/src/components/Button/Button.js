@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle, useMemo } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
 import { useButton } from '@react-aria/button';
@@ -6,10 +6,8 @@ import { useHover } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
-import { modes } from './constants';
-import { useAriaLabelWarning, useStatusClasses, useDeprecationWarning, usePropWarning } from '../../hooks';
+import { useAriaLabelWarning, useStatusClasses, usePropWarning } from '../../hooks';
 import Loader from '../Loader';
-import Box from '../Box';
 
 const Button = forwardRef((props, ref) => {
   const {
@@ -25,7 +23,6 @@ const Button = forwardRef((props, ref) => {
     onPressChange,
     onPressUp,
     children,
-    mode,
     ...others
   } = props;
   const buttonRef = useRef();
@@ -33,14 +30,9 @@ const Button = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
-  const ButtonBase = useMemo(() => (mode === modes.ICON ? Box : ThemeUIButton), [mode]);
-  const elementType = useMemo(() => {
-    if (mode === modes.ICON) return 'div';
-    return 'button';
-  }, [mode]);
   const { isFocusVisible, focusProps } = useFocusRing();
   const { buttonProps, isPressed } = useButton({
-    elementType,
+    elementType: 'button',
     ...props,
   }, buttonRef);
   const { hoverProps, isHovered } = useHover(props);
@@ -51,16 +43,11 @@ const Button = forwardRef((props, ref) => {
     isDisabled,
   });
 
-  useDeprecationWarning(
-    'The "icon" variant for `Button` will be deprecated in Astro-UI 1.0.0, use the `IconButton` component instead.',
-    { isActive: props.variant === 'icon' },
-  );
-
   const ariaLabel = props['aria-label'];
   useAriaLabelWarning('Button', ariaLabel);
 
   return (
-    <ButtonBase
+    <ThemeUIButton
       aria-label={ariaLabel || 'Button'}
       ref={buttonRef}
       className={classNames}
@@ -72,7 +59,7 @@ const Button = forwardRef((props, ref) => {
     >
       {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
       {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
-    </ButtonBase>
+    </ThemeUIButton>
   );
 });
 
@@ -127,14 +114,11 @@ Button.propTypes = {
   onPressUp: PropTypes.func,
   /** The styling variation of the button. */
   variant: PropTypes.string,
-  /** The behavioral pattern to apply to the button. */
-  mode: PropTypes.oneOf(['default', 'icon']),
 };
 
 Button.defaultProps = {
   isDisabled: false,
   variant: 'default',
-  mode: 'default',
 };
 
 Button.displayName = 'Button';
