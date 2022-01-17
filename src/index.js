@@ -47,12 +47,6 @@ export { default as CopyText } from './components/CopyText';
 
 export { default as ColorField } from './components/ColorField';
 
-export { default as Dropdown } from './components/Dropdown';
-export * from './components/Dropdown';
-
-export { default as DropdownField } from './components/DropdownField';
-export * from './components/DropdownField';
-
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 
@@ -119,14 +113,9 @@ export * from './components/OverlayPanel';
 export { default as PageHeader } from './components/PageHeader';
 export * from './components/PageHeader';
 
-export { default as Panel } from './components/Panel';
-export * from './components/Panel';
 
 export { default as PasswordField } from './components/PasswordField';
 export * from './components/PasswordField';
-
-export { default as Popover } from './components/Popover';
-export * from './components/Popover';
 
 export { default as PopoverContainer } from './components/PopoverContainer';
 export * from './components/PopoverContainer';
