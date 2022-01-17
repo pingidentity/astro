@@ -2,14 +2,12 @@ import React from 'react';
 import Earth from 'mdi-react/EarthIcon';
 import Cog from 'mdi-react/CogOutlineIcon';
 import Button from '../components/Button/Button';
-import Panel from '../components/Panel/Panel';
 import Box from '../components/Box/Box';
 import Icon from '../components/Icon/Icon';
 import Text from '../components/Text/Text';
 import Separator from '../components/Separator/Separator';
 import TextField from '../components/TextField/TextField';
 import TextAreaField from '../components/TextAreaField/TextAreaField';
-import DropdownField from '../components/DropdownField/DropdownField';
 import RadioGroupField from '../components/RadioGroupField/RadioGroupField';
 import RadioField from '../components/RadioField/RadioField';
 import Tabs from '../components/Tabs/Tabs';
@@ -63,27 +61,12 @@ export const Default = () => {
               mb="lg"
               label="Description"
             />
-            <DropdownField
-              label="Category"
-              mb="lg"
-            >
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-            </DropdownField>
             <RadioGroupField label="Required Fields" variant="radioGroupBasic">
               <RadioField value="A" label="Option A" />
               <RadioField value="B" label="Option B" />
             </RadioGroupField>
           </Box>
         </Box>
-        <Panel isVisible={visible} width="70%" bg="accent.99">
-          <Box p="lg" onClick={() => setVisible(!visible)}>
-            <Box p="lg" bg="white">
-              <Text>Your content here.</Text>
-            </Box>
-          </Box>
-        </Panel>
       </Box>
     </Box>
   );
