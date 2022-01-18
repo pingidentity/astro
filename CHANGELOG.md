@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.21](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.20...@pingux/astro@1.0.0-alpha.21) (2022-01-18)
+
+
+### Features
+
+* [UIP-5066] Add Icon, Chip, and Text with Tooltips ([1681083](https://gitlab.corp.pingidentity.com/ux/pingux/commit/168108386d77ef09635a177a35cb6d68cfad8bc2))
+
+
+
+
+
 # [1.0.0-alpha.20](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.19...@pingux/astro@1.0.0-alpha.20) (2022-01-17)
 
 **Note:** Version bump only for package @pingux/astro
