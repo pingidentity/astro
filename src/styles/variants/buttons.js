@@ -1,5 +1,6 @@
 import { text as textVariants } from './text';
 import { neutral } from '../colors';
+import { chip } from './boxes';
 
 const base = {
   cursor: 'pointer',
@@ -482,6 +483,38 @@ const fileInputField = {
   },
 };
 
+const tooltipChip = {
+  ...chip,
+  cursor: 'default',
+  '&.is-hovered, &.is-pressed': {
+    cursor: 'default',
+    outline: 'none',
+  },
+};
+
+const tooltipIconButton = {
+  ...iconButton,
+  cursor: 'default',
+  '&.is-hovered, &.is-pressed': {
+    backgroundColor: 'inherit',
+    cursor: 'default',
+    path: {
+      fill: 'neutral.20',
+    },
+  },
+};
+
+const tooltipInline = {
+  ...text,
+  cursor: 'default',
+  alignSelf: 'flex-start',
+  '&.is-hovered, &.is-pressed': {
+    backgroundColor: 'inherit',
+    cursor: 'default',
+    textDecoration: 'inherit',
+  },
+};
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -522,4 +555,7 @@ export default {
   modalCloseButton,
   applicationPortalPinned,
   applicationPortal,
+  tooltipChip,
+  tooltipIconButton,
+  tooltipInline,
 };
