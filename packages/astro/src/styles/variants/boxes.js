@@ -94,7 +94,7 @@ const listBoxSectionTitle = {
   justifyContent: 'center',
 };
 
-const chip = {
+export const chip = {
   cursor: 'pointer',
   p: '3px 5px 4px 5px',
   alignItems: 'center',
