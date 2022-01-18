@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.22](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.21...@pingux/astro@1.0.0-alpha.22) (2022-01-18)
+
+
+### Bug Fixes
+
+* [UIP-5122] adjust x icon to 14px ([6b4ca54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b4ca5418ddaffb6e1a4daaf28b57151a23529cb))
+
+
+
+
+
 # [1.0.0-alpha.21](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.20...@pingux/astro@1.0.0-alpha.21) (2022-01-18)
 
 
