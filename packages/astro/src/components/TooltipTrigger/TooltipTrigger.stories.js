@@ -1,7 +1,9 @@
 import React from 'react';
 import Earth from 'mdi-react/EarthIcon';
-import { Button, Icon, Tooltip, TooltipTrigger } from '../../index';
+import PersonIcon from 'mdi-react/PersonIcon';
+import { Box, Button, Icon, Tooltip, TooltipTrigger } from '../../index';
 import IconButton from '../IconButton';
+import Text from '../Text';
 
 export default {
   title: 'TooltipTrigger',
@@ -61,3 +63,36 @@ Disabled.parameters = {
     },
   },
 };
+
+export const IconWithTooltip = () => (
+  <Box pl={50}>
+    <TooltipTrigger>
+      <IconButton variant="tooltipIconButton">
+        <Icon icon={PersonIcon} />
+      </IconButton>
+      <Tooltip>Useful tooltip</Tooltip>
+    </TooltipTrigger>
+  </Box>
+);
+
+export const ChipWithTooltip = () => (
+  <Box pl={50}>
+    <TooltipTrigger>
+      <Button variant="tooltipChip" bg="neutral.10">
+        <Text variant="label" sx={{ textTransform: 'uppercase' }} color="white">
+          Some text
+        </Text>
+      </Button>
+      <Tooltip>Useful tooltip</Tooltip>
+    </TooltipTrigger>
+  </Box>
+);
+
+export const TextWithTooltip = () => (
+  <Box pl={50}>
+    <TooltipTrigger>
+      <Button variant="tooltipInline">Some text</Button>
+      <Tooltip>Useful tooltip</Tooltip>
+    </TooltipTrigger>
+  </Box>
+);
