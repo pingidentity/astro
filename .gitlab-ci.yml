@@ -129,7 +129,7 @@ deploy_prerelease:
     - if: '$CI_COMMIT_BRANCH == "develop" && $CI_COMMIT_TITLE != "chore(release): publish alpha build"'
     # Deploy release branch via Jenkins API *UNLESS* the last commit was an rc build.
     # This prevents loops.
-    - if: '$CI_COMMIT_BRANCH =~ /^release\/.+/ && $CI_COMMIT_TITLE != "chore(release): publish rc build"'
+    - if: '$CI_COMMIT_BRANCH =~ /^release-.+/ && $CI_COMMIT_TITLE != "chore(release): publish rc build"'
   script:
     - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
 
