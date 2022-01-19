@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.1...@pingux/astro@1.1.0-alpha.2) (2022-01-19)
+
+
+### Bug Fixes
+
+* [UIP-5039] IconButton Square Variant ([2fecfac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2fecfac9d39974eb5dc773d210c3a830d1bd9e2a))
+
+
+
+
+
 # [1.1.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.0...@pingux/astro@1.1.0-alpha.1) (2022-01-19)
 
 
