@@ -136,7 +136,7 @@ pipeline {
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin develop
               """
               script {
-                def json = { "@pingux/astro": "1.0.1", "@pingux/end-user": "2.0.1", "@pingux/flow-diagram": "0.25.5", "@pingux/icons": "1.0.1", "@pingux/schema-form": "3.0.1", "ui-library": "5.0.1" };
+                def json = '{ "@pingux/astro": "1.0.1", "@pingux/end-user": "2.0.1", "@pingux/flow-diagram": "0.25.5", "@pingux/icons": "1.0.1", "@pingux/schema-form": "3.0.1", "ui-library": "5.0.1" }';
                 env.RELEASE_JSON = json;
                 def lazyMap = new groovy.json.JsonSlurper().parseText(json);
                 for (prop in lazyMap) {
