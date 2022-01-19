@@ -65,7 +65,7 @@ pipeline {
   }
   parameters {
     string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-graduate=@pingux/astro,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library --yes', description: 'Flags applied to the `lerna version` command.')
-    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
+    string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-package --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
   }
   environment {
     PING_TEAM_NAME = "ux"
@@ -131,7 +131,7 @@ pipeline {
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git fetch --all && git checkout master && git checkout develop && git merge master -m "Merge branch 'master'" && git push
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git fetch --all && git checkout master && git checkout develop && git merge -X theirs master -m "Merge branch 'master'" && git push origin develop
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
