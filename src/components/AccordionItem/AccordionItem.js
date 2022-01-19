@@ -61,7 +61,7 @@ const AccordionItem = forwardRef((props, ref) => {
       <ThemeUIButton
         aria-label={ariaLabel || 'Accordion'}
         ref={buttonRef}
-        sx={{ display: 'flex' }}
+        sx={{ display: 'flex', px: '0', height: 'unset' }}
         variant="accordionHeader"
         className={buttonClasses}
         {...mergeProps(hoverProps, focusProps, accordionButtonProps, raButtonProps, buttonProps)}

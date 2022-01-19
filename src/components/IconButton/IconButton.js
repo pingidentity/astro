@@ -1,10 +1,12 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
+import { useButton } from '@react-aria/button';
 import { useFocusRing } from '@react-aria/focus';
-import { Pressable, useHover, usePress } from '@react-aria/interactions';
+import { Pressable, useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
+import { ChipContext } from '../Chip/ChipContext';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 /**
@@ -30,10 +32,10 @@ const IconButton = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
-  const { isPressed, pressProps } = usePress({ ref: buttonRef, ...props });
+  const { buttonProps, isPressed } = useButton({ ...props }, buttonRef);
+  const { bg: chipBg } = useContext(ChipContext);
   const { hoverProps, isHovered } = useHover(props);
   const { isFocusVisible, focusProps } = useFocusRing();
-
   const { classNames } = useStatusClasses(className, {
     isHovered,
     isPressed,
@@ -51,8 +53,8 @@ const IconButton = forwardRef((props, ref) => {
       ref={buttonRef}
       className={classNames}
       aria-label={ariaLabel || 'Icon Button'}
-      {...others}
-      {...mergeProps(hoverProps, focusProps, pressProps)}
+      sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
+      {...mergeProps(hoverProps, focusProps, buttonProps, others)}
     >
       {children}
     </ThemeUIIconButton>

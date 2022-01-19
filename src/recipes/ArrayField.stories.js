@@ -54,10 +54,9 @@ export const Default = () => {
     <IconButton
       onPress={() => onFieldDelete(id)}
       isDisabled={fieldValues.length === 1}
-      sx={{ position: 'absolute', right: -30, top: 5 }}
+      sx={{ position: 'absolute', right: -30, top: 5, width: 'auto' }}
       type="delete"
       title="Delete Field"
-      variant="icon"
     >
       <Icon icon={TrashIcon} size={20} color="black" />
     </IconButton>
@@ -67,19 +66,19 @@ export const Default = () => {
     <Box>
       <Text variant="label">Redirected URIs</Text>
       {(fieldValues).map(
-                ({ id, value, ...otherFieldProps }) => (
-                  <Box isRow mb="sm" alignItems="center" key={id}>
-                    <TextField
-                      value={value}
-                      onChange={e => onFieldValueChange(e, id)}
-                      mr="xs"
-                      slots={{ inContainer: <DeleteButton id={id} /> }}
-                      title="Text Field"
-                      {...otherFieldProps}
-                    />
-                  </Box>
-                ),
-            )}
+        ({ id, value, ...otherFieldProps }) => (
+          <Box isRow mb="sm" alignItems="center" key={id}>
+            <TextField
+              value={value}
+              onChange={e => onFieldValueChange(e, id)}
+              mr="xs"
+              slots={{ inContainer: <DeleteButton id={id} /> }}
+              title="Text Field"
+              {...otherFieldProps}
+            />
+          </Box>
+        ),
+      )}
       <Button
         variant="text"
         onPress={onFieldAdd}

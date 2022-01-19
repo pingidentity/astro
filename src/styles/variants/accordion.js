@@ -15,13 +15,13 @@ const accordionTitle = {
 const accordion = {
   display: 'flex',
   mt: '5px',
-  mb: '5px',
+  mb: '20px',
   alignItems: 'flex-start',
 };
 
 const accordionBody = {
   display: 'none !important',
-  p: 'md',
+  pt: 'md',
   width: '100%',
   '.is-open &': {
     display: 'flex !important',
@@ -31,10 +31,10 @@ const accordionBody = {
 const accordionGridHeader = {
   cursor: 'pointer',
   lineHeight: '30px',
-  px: 'md',
+  pl: 'sm',
   outline: 'none',
   display: 'flex',
-  justifyContent: 'flex-start',
+  justifyContent: 'center',
   flexShrink: 0,
   wordBreak: 'inherit',
   whiteSpace: 'nowrap',
@@ -48,12 +48,9 @@ const accordionGridHeader = {
     WebkitBoxShadow: 'focus',
     MozBoxShadow: 'focus',
   },
-  padding: '0px',
+  minHeight: '64px',
   '&.is-hovered': {
-    color: 'active',
-    '& div > div > div > span': {
-      color: 'active',
-    },
+    backgroundColor: 'accent.99',
   },
   '&.is-pressed': {
     color: 'accent.20',
@@ -65,6 +62,7 @@ const accordionGridHeader = {
 
 const accordionGridBody = {
   display: 'none !important',
+  pl: 'sm',
   width: '100%',
   '&.is-selected': {
     display: 'flex !important',

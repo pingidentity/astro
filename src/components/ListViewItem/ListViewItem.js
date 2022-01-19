@@ -6,7 +6,6 @@ import { useGridCell, useGridRow } from '@react-aria/grid';
 import { useHover } from '@react-aria/interactions';
 import { ListViewContext } from '../ListView/ListViewContext';
 import Box from '../Box';
-import Separator from '../Separator';
 import { useStatusClasses } from '../../hooks';
 
 const ListViewItem = (props) => {
@@ -64,6 +63,7 @@ const ListViewItem = (props) => {
     isHovered,
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible,
+    hasSeparator,
   });
 
   return (
@@ -92,7 +92,6 @@ const ListViewItem = (props) => {
           {item.rendered}
         </Box>
       </Box>
-      { hasSeparator && <Separator m="0px" />}
     </>
   );
 };

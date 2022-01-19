@@ -30,9 +30,6 @@ export default {
     row: `0 0 9px ${accent[95]}`,
     focus: `0 0 5px ${focus}`,
   },
-  transitions: {
-    panel: 'margin 0.25s',
-  },
   forms,
   text,
   images,

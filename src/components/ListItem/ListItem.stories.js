@@ -28,7 +28,7 @@ export const Default = args => (
         <Text variant="itemTitle" alignSelf="center">Fons Vernall</Text>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton variant="icon" size={26}>
+        <IconButton size={26}>
           <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
         </IconButton>
       </Box>
@@ -55,7 +55,7 @@ export const WithSubtitle = args => (
         </Box>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton variant="icon" size={26}>
+        <IconButton size={26}>
           <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
         </IconButton>
       </Box>

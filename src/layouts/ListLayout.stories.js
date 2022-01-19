@@ -214,7 +214,7 @@ export const Default = () => {
                     </Box>
                     { item.id === '6' ? (
                       <Box ml="sm">
-                        <Chip bg="success.light" textColor="success.dark" label="New" />
+                        <Chip bg="success.light" textColor="success.dark" label="New" isUppercase />
                       </Box>
                   ) : null }
                   </Box>

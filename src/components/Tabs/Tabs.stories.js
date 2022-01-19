@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Earth from 'mdi-react/GlobeModelIcon';
+import LockIcon from 'mdi-react/LockIcon';
 import Tabs from './Tabs';
 import Tab from '../Tab';
 import Icon from '../Icon';
 import Text from '../Text';
+import { Chip } from '../../index';
 
 export default {
   title: 'Tabs',
@@ -63,13 +65,13 @@ export const Uncontrolled = args => (
 export const Controlled = () => {
   const [currentTab, setCurrentTab] = useState(tabs[0].name);
   return (
-    <Tabs selectedKey={currentTab} onSelectionChange={setCurrentTab} items={tabs}>
+    <Tabs
+      selectedKey={currentTab}
+      onSelectionChange={setCurrentTab}
+      items={tabs}
+    >
       {item => (
-        <Tab
-          key={item.name}
-          title={item.name}
-          textValue={item.name}
-        >
+        <Tab key={item.name} title={item.name} textValue={item.name}>
           {item.children}
         </Tab>
       )}
@@ -95,11 +97,7 @@ export const WithTooltips = () => {
   return (
     <Tabs mode="tooltip" items={tabs}>
       {item => (
-        <Tab
-          key={item.name}
-          title={item.name}
-          textValue={item.name}
-        >
+        <Tab key={item.name} title={item.name} textValue={item.name}>
           {item.children}
         </Tab>
       )}
@@ -110,10 +108,7 @@ export const WithTooltips = () => {
 export const Centered = () => (
   <Tabs tabListProps={{ justifyContent: 'center' }} items={tabs}>
     {item => (
-      <Tab
-        key={item.name}
-        title={item.name}
-      >
+      <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
     )}
@@ -121,9 +116,9 @@ export const Centered = () => (
 );
 
 export const DisabledSingleTab = () => (
-  <Tabs defaultSelectedKey="Tab 2" items={tabs}>
+  <Tabs items={tabs} disabledKeys={['Tab 2']}>
     {item => (
-      <Tab key={item.name} title={item.name} isDisabled={item.name === 'Tab 1'}>
+      <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
     )}
@@ -169,3 +164,45 @@ export const TabPanelProps = () => (
     )}
   </Tabs>
 );
+
+
+export const ContentSlots = () => {
+  const beforeTabNode = (
+    <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} />
+  );
+  const nodeSx = {
+    alignItems: 'center',
+    backgroundColor: 'neutral.95',
+    borderRadius: '50%',
+    color: 'neutral.30',
+    fontSize: 'sm',
+    height: 20,
+    justifyContent: 'center',
+    marginLeft: 6,
+    marginTop: 10,
+    minWidth: 20,
+  };
+  const afterTabNode = <Chip sx={nodeSx}>14</Chip>;
+
+  return (
+    <>
+      <Tabs items={tabs} mb={50}>
+        <Tab key="tab1" title="Tab 1" slots={{ beforeTab: beforeTabNode }}>
+          <Text>This is content for Tab 1</Text>
+        </Tab>
+        <Tab key="tab2" title="Tab 2">
+          <Text>This is content for Tab 2</Text>
+        </Tab>
+      </Tabs>
+
+      <Tabs items={tabs}>
+        <Tab key="tab1" title="Tab 1">
+          <Text>Compose Filter</Text>
+        </Tab>
+        <Tab key="tab2" title="Tab 2" slots={{ afterTab: afterTabNode }}>
+          <Text>Users Matched</Text>
+        </Tab>
+      </Tabs>
+    </>
+  );
+};

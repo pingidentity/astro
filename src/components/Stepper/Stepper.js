@@ -70,6 +70,7 @@ const Stepper = forwardRef((props, ref) => {
         tabLabelProps={{ variant: 'stepper.tabLabel' }}
         textValue={textValue}
         title={step}
+        aria-label={textValue}
         content={item.rendered}
         separator={!isFirst && line}
       />

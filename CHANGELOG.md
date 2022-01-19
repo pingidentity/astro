@@ -3,6 +3,231 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.20](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.19...@pingux/astro@1.0.0-alpha.20) (2022-01-17)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.0.0-alpha.19](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.18...@pingux/astro@1.0.0-alpha.19) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-4996] astro stepper redundant tooltip ([d74f102](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d74f1020163703948498436224ef3f9d6458df57))
+
+
+
+
+
+# [1.0.0-alpha.18](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.17...@pingux/astro@1.0.0-alpha.18) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-5107] IconButton - no focus in disabled state ([f301f6d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f301f6d0cdc8271c992eb3384094cafbd59fa0d5))
+
+
+
+
+
+# [1.0.0-alpha.17](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.16...@pingux/astro@1.0.0-alpha.17) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-4997] Read only style TextAreaField ([a5f62bd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a5f62bd014f2d3d75c2c71625bc31ba5cefbb4df))
+
+
+
+
+
+# [1.0.0-alpha.16](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.15...@pingux/astro@1.0.0-alpha.16) (2022-01-13)
+
+
+### Bug Fixes
+
+* [UIP-4962] accordion grid design improvements ([dcec402](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dcec4025f945968e20386bc20ad011f48532acc7))
+
+
+
+
+
+# [1.0.0-alpha.15](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.14...@pingux/astro@1.0.0-alpha.15) (2022-01-13)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.0.0-alpha.14](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.13...@pingux/astro@1.0.0-alpha.14) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-4953] Chip component cleanup ([d2f10ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d2f10ece82749d723ac35b6262c1b918f81abba1))
+
+
+
+
+
+# [1.0.0-alpha.13](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.12...@pingux/astro@1.0.0-alpha.13) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5063] Inline Button Text Size ([6f03c64](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6f03c64b13dc2237d09acb565282394effd419b8))
+
+
+
+
+
+# [1.0.0-alpha.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.11...@pingux/astro@1.0.0-alpha.12) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5061] hide variants that aren't used for <Button> specifically ([85a494c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/85a494cc3fa656a2fc6bb37dc0e718bdcfee7829))
+
+
+
+
+
+# [1.0.0-alpha.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.10...@pingux/astro@1.0.0-alpha.11) (2022-01-08)
+
+
+### Features
+
+* [UIP-4887] ListView hides Separators on zoom ([92ca2bb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/92ca2bb40bb49ce9a69eb097cc88b5e210acce8a))
+
+
+
+
+
+# [1.0.0-alpha.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.9...@pingux/astro@1.0.0-alpha.10) (2022-01-07)
+
+
+### Bug Fixes
+
+* [UIP-5010] Disabled tabs can be displayed via keyboard ([9115f66](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9115f66c8e921a910934cb8205b29321f2d30fe8))
+
+
+
+
+
+# [1.0.0-alpha.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.8...@pingux/astro@1.0.0-alpha.9) (2022-01-07)
+
+
+### Bug Fixes
+
+* [UIP-5013] Accordion design improvements ([436b8ef](https://gitlab.corp.pingidentity.com/ux/pingux/commit/436b8ef7d6e07c03feb7b4abf89e07eae022f809))
+
+
+
+
+
+# [1.0.0-alpha.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.7...@pingux/astro@1.0.0-alpha.8) (2021-12-30)
+
+
+### Features
+
+* [UIP-5003] Copy to clipboard Recipe ([655aa6f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/655aa6f4083f71116f6e39bd37ad75cdc08e47ac))
+
+
+
+
+
+# [1.0.0-alpha.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.6...@pingux/astro@1.0.0-alpha.7) (2021-12-30)
+
+
+### Bug Fixes
+
+* [UIP-5064] Upgrade lodash version to 4.17.21 ([427286a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/427286a9b3bbb940f7193c793e70e66770ee4ae0))
+
+
+### Features
+
+* [UIP-5004] RadioButtonsWithLinks Recipe ([dd7f2e9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dd7f2e9f3b30e9790de289b71739323cb6cd1328))
+* [UIP-5037] Add slots props to Tab Component ([a7571a2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a7571a27568b63c4a0fffed1d9dd1ea21ba1f724))
+
+
+
+
+
+# [1.0.0-alpha.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.5...@pingux/astro@1.0.0-alpha.6) (2021-12-30)
+
+
+### Bug Fixes
+
+* [UIP-4928] password field-hide default safari-edge-ie icon ([1c46ce6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1c46ce6fa4cdd7fe846f3434de3e36c65df61244))
+
+
+
+
+
+# [1.0.0-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.4...@pingux/astro@1.0.0-alpha.5) (2021-12-29)
+
+
+### Features
+
+* [UIP-4918] Add File Input ([5987d40](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5987d4064f8a2a54d3e81037acba17c299bea2b0))
+
+
+
+
+
+# [1.0.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.3...@pingux/astro@1.0.0-alpha.4) (2021-12-20)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.0.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.2...@pingux/astro@1.0.0-alpha.3) (2021-12-17)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.0.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.1...@pingux/astro@1.0.0-alpha.2) (2021-12-17)
+
+
+### Bug Fixes
+
+* [UIP-5014] Increment and decrement buttons don't need to be focusable ([58d7b21](https://gitlab.corp.pingidentity.com/ux/pingux/commit/58d7b21f70bd47a8c381fcf557deb9b0b2da0bf7))
+
+
+
+
+
+# [1.0.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0-alpha.0...@pingux/astro@1.0.0-alpha.1) (2021-12-16)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.0.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.42.0...@pingux/astro@1.0.0-alpha.0) (2021-12-16)
+
+
+* fix!: [UIP-4912] Update Jenkins container names to match k8s config ([8edeb95](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8edeb95b25adecd8e34c20fb52c6c2f0e552bc4d))
+
+
+### BREAKING CHANGES
+
+* The actual breaking change is committed in 3ee02e86f5036ae8f32832c57e43bd31dcb4f812 but Lerna doesn't respect just the ! for major version changes
+
+
+
+
+
 # [0.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@0.41.0...@pingux/astro@0.42.0) (2021-12-02)
 
 

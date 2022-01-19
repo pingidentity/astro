@@ -24,7 +24,7 @@ export const collectionTypes = {
  * which will be control expansion of the body, and 2) a Body which renders non-interactive content.
  * The purpose of this component is to allow keyboard interaction
  * with children passed into the Body and Header
- * If a more simple implementation is desired, please consider the AccordionGroup
+ * If a more simple implementation is desired, please consider the AccordionGroup.
  */
 
 const AccordionGridGroup = forwardRef((props, ref) => {
