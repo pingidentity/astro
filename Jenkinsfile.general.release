@@ -84,38 +84,38 @@ pipeline {
       }
     }
 
-    stage('build-test-lint') {
-      steps {
-        container('ui-library-admin') {
-          sh """
-            yarn --frozen-lockfile
-            git log -1 --pretty=%B | npx commitlint
-            lerna run build
-            lerna run lint
-            lerna run coverage-ci
-          """
-        }
-      }
-    }
+    // stage('build-test-lint') {
+    //   steps {
+    //     container('ui-library-admin') {
+    //       sh """
+    //         yarn --frozen-lockfile
+    //         git log -1 --pretty=%B | npx commitlint
+    //         lerna run build
+    //         lerna run lint
+    //         lerna run coverage-ci
+    //       """
+    //     }
+    //   }
+    // }
 
-    stage('backstop') {
-      when {
-        beforeAgent true
-        expression {  
-          sh(returnStatus: true, script: 'git diff origin/master --name-only | grep "^packages/ui-library/.*"' ) == 0
-        }
-        changeRequest()
-      }
-      steps {
-        container('ui-library-admin') {
-          sh """
-            yarn --frozen-lockfile
-            lerna run demo --scope ui-library
-            lerna run backstop-ci
-          """
-        }
-      }
-    }
+    // stage('backstop') {
+    //   when {
+    //     beforeAgent true
+    //     expression {  
+    //       sh(returnStatus: true, script: 'git diff origin/master --name-only | grep "^packages/ui-library/.*"' ) == 0
+    //     }
+    //     changeRequest()
+    //   }
+    //   steps {
+    //     container('ui-library-admin') {
+    //       sh """
+    //         yarn --frozen-lockfile
+    //         lerna run demo --scope ui-library
+    //         lerna run backstop-ci
+    //       """
+    //     }
+    //   }
+    // }
 
     stage('version') {
       steps {
@@ -125,18 +125,18 @@ pipeline {
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]) {
-              // Lerna changed for debugging purposes
               sh """
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git fetch --all
                 git checkout master
                 git checkout develop
-                git merge -X theirs master -m "Merge branch 'master'"
+                git merge master
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin develop
               """
               script {
-                def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
+                def json = '{ "@pingux/astro": "1.0.1", "@pingux/end-user": "2.0.1", "@pingux/flow-diagram": "0.25.5", "@pingux/icons": "1.0.1", "@pingux/schema-form": "3.0.1", "ui-library": "5.0.1" }';
                 env.RELEASE_JSON = json;
                 def lazyMap = new groovy.json.JsonSlurper().parseText(json);
                 for (prop in lazyMap) {
