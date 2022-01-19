@@ -140,4 +140,4 @@ deploy_release:
     # This prevents loops.
     - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TITLE != "chore(release): publish stable build"'
   script:
-    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/generic-release/build"
+    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/generic-release/buildWithParameters"
