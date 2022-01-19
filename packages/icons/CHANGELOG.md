@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/icons@1.0.0-alpha.3...@pingux/icons@1.0.0) (2022-01-19)
+
+**Note:** Version bump only for package @pingux/icons
+
+
+
+
+
 # [1.0.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/icons@1.0.0-alpha.2...@pingux/icons@1.0.0-alpha.3) (2021-12-20)
 
 **Note:** Version bump only for package @pingux/icons
