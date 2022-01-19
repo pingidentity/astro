@@ -76,7 +76,7 @@ pipeline {
               env.LERNA_VERSION_FLAGS = '--conventional-commits --conventional-prerelease --yes -m "chore(release): publish alpha build"'
               env.LERNA_PUBLISH_FLAGS = 'from-git --pre-dist-tag next --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
               break
-            case ~/^release\/.*/:
+            case ~/^release-.*/:
               env.LERNA_VERSION_FLAGS = '--conventional-commits --conventional-prerelease --preid rc --yes -m "chore(release): publish rc build"'
               env.LERNA_PUBLISH_FLAGS = 'from-git --pre-dist-tag next --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
               break
