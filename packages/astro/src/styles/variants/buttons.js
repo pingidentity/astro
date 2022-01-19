@@ -74,6 +74,11 @@ const iconButton = {
   },
 };
 
+const square = {
+  ...iconButton,
+  borderRadius: '2px',
+};
+
 const modalCloseButton = {
   ...iconButton,
   position: 'absolute',
@@ -222,6 +227,11 @@ const inverted = {
     borderColor: 'accent.20',
     color: 'white',
   },
+};
+
+const invertedSquare = {
+  ...inverted,
+  borderRadius: '2px',
 };
 
 const applicationPortal = {
@@ -555,6 +565,8 @@ export default {
   modalCloseButton,
   applicationPortalPinned,
   applicationPortal,
+  square,
+  invertedSquare,
   tooltipChip,
   tooltipIconButton,
   tooltipInline,

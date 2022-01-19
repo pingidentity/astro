@@ -34,30 +34,27 @@ export default {
     isDisabled: {},
     variant: {
       control: {
-        type: 'none',
+        type: 'select',
+        options: ['iconButton', 'inverted', 'square', 'invertedSquare'],
       },
+      defaultValue: 'iconButton',
     },
   },
 };
 
 export const Default = args => (
-  <IconButton aria-label="my-label" {...args}>
-    <Icon icon={CreateIcon} />
-  </IconButton>
-);
-export const Inverted = () => (
-  <IconButton aria-label="my-label" variant="inverted" >
+  <IconButton aria-label="default icon button" {...args}>
     <Icon icon={CreateIcon} />
   </IconButton>
 );
 
 export const WithTooltip = () => (
-  <IconButton aria-label="my-label" title="Edit">
+  <IconButton aria-label="icon button with tooltip" title="Edit">
     <Icon icon={CreateIcon} />
   </IconButton>
 );
 export const Disabled = () => (
-  <IconButton aria-label="my-label" isDisabled>
+  <IconButton aria-label="disabled icon button" isDisabled>
     <Icon icon={CreateIcon} />
   </IconButton>
 );
