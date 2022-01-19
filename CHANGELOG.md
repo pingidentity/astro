@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.0...@pingux/astro@1.1.0-alpha.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* [UIP-5026] Infinite Loading List requests page 2 instantly ([e6888cf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e6888cfe91435fae0ab583b0ff22b2c169ba7bcd))
+
+
+
+
+
 # [1.1.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.1...@pingux/astro@1.1.0-alpha.0) (2022-01-19)
 
 
