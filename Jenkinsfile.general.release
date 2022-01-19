@@ -130,7 +130,7 @@ pipeline {
                 yarn lerna changed
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git fetch --all && git checkout master && git checkout develop && git merge master -m "Merge branch 'master'" && git push
               """
               script {
@@ -172,7 +172,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "yarn lerna publish ${LERNA_PUBLISH_FLAGS}"
+                sh "yarn lerna publish ${params.LERNA_PUBLISH_FLAGS}"
               }
             }
           }
