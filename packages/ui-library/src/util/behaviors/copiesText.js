@@ -28,8 +28,10 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
 
     state = {
         message: 0,
+        selection: null,
     };
 
+    /* istanbul ignore next */
     _selectText = () => {
         // FIXME: findDOMNode should be avoided, see:
         // https://reactjs.org/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components
@@ -37,11 +39,37 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
         // would be a breaking change to those components, see:
         // https://reactjs.org/docs/forwarding-refs.html#note-for-component-library-maintainers
         const component = ReactDOM.findDOMNode(this);
-        const copyField = component.querySelector("[data-id='copy-field']");
-        selectTextWithinElement(copyField);
+        if (this.state.selection) {
+            const copyField = component.querySelector("[data-id='copy-field-input']");
+            const { start, end } = this.state.selection;
+            copyField.focus();
+            copyField.setSelectionRange(start, end);
+        } else {
+            const copyField = component.querySelector("[data-id='copy-field']");
+            selectTextWithinElement(copyField);
+        }
+    }
+
+    _saveSelection = (copyField) => {
+        if (copyField) {
+            const { selectionStart, selectionEnd } = copyField;
+            if (selectionStart !== selectionEnd) {
+                this.setState({
+                    selection: {
+                        start: selectionStart,
+                        end: selectionEnd,
+                    }
+                });
+            } else {
+                this.setState({ selection: null });
+            }
+        }
     }
 
     _copyText = () => {
+        const component = ReactDOM.findDOMNode(this);
+        const copyField = component.querySelector("[data-id='copy-field-input']");
+        this._saveSelection(copyField);
         clipboard.writeText(this.props.text).then(() => {
             this.setState({ message: 1 }, () => this._selectText());
         }).catch(() => {

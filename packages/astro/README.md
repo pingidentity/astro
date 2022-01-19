@@ -12,6 +12,11 @@ NPM:
 Yarn: 
 `yarn add @pingux/astro`
 
+## Requirements
+
+- Node: 12+
+- React: 16.8+
+
 ## Usage
 
 All apps should be wrapped in an <AstroWrapper> for full functionality and styling.

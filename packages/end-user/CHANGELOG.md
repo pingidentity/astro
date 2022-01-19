@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.0-alpha.3...@pingux/end-user@2.0.0-alpha.4) (2021-12-21)
+
+
+### Bug Fixes
+
+* [UIP-4890] PhoneInput with fieldMessage ([07167ba](https://gitlab.corp.pingidentity.com/ux/end-user/commit/07167baaf748cf6bbed490b6567ff486f160eed6))
+
+
+
+
+
+# [2.0.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.0-alpha.2...@pingux/end-user@2.0.0-alpha.3) (2021-12-20)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+# [2.0.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.0-alpha.1...@pingux/end-user@2.0.0-alpha.2) (2021-12-17)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+# [2.0.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.0-alpha.0...@pingux/end-user@2.0.0-alpha.1) (2021-12-16)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+# [2.0.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.7.0...@pingux/end-user@2.0.0-alpha.0) (2021-12-16)
+
+
+* fix!: [UIP-4912] Update Jenkins container names to match k8s config ([8edeb95](https://gitlab.corp.pingidentity.com/ux/end-user/commit/8edeb95b25adecd8e34c20fb52c6c2f0e552bc4d))
+
+
+### BREAKING CHANGES
+
+* The actual breaking change is committed in 3ee02e86f5036ae8f32832c57e43bd31dcb4f812 but Lerna doesn't respect just the ! for major version changes
+
+
+
+
+
 # [1.7.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@1.6.0...@pingux/end-user@1.7.0) (2021-11-30)
 
 

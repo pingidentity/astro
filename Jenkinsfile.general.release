@@ -42,13 +42,29 @@ def generateSlackMessage(packageName, packagePathName, packageVersion) {
 
 pipeline {
   agent {
-    kubernetes(agentDefinition(
-      name: 'ui-pipeline-shared',
-      cloud: centralCluster
-    ))
+    kubernetes (
+      agentDefinition(
+        name: 'ui-library-agent',
+        cloud: centralCluster,
+        yaml: """
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: ui-library-agent
+        spec:
+          containers:
+            - name: "ui-library-admin"
+              command: # Jenkinsfile overwrites this, but k8s spec requires it
+              - cat
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.2"
+              imagePullPolicy: Always
+              workingDir: "/home/jenkins/agent"
+              tty: true"""
+      )
+    )
   }
   parameters {
-    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --yes', description: 'Flags applied to the `lerna version` command.')
+    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--conventional-commits --conventional-graduate=@pingux/astro,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library --yes', description: 'Flags applied to the `lerna version` command.')
     string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-git --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
   }
   environment {
@@ -58,7 +74,7 @@ pipeline {
     stage('install and link') {
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
             sh "yarn lerna run build"
@@ -68,24 +84,35 @@ pipeline {
       }
     }
 
-    stage('lint') {
+    stage('build-test-lint') {
       steps {
-        dir("${env.WORKSPACE}") {
-          container('node-builder') {
-            echo "Linting packages"
-            sh 'yarn lerna run lint'
-          }
+        container('ui-library-admin') {
+          sh """
+            yarn --frozen-lockfile
+            git log -1 --pretty=%B | npx commitlint
+            lerna run build
+            lerna run lint
+            lerna run coverage-ci
+          """
         }
       }
     }
 
-    stage('test') {
+    stage('backstop') {
+      when {
+        beforeAgent true
+        expression {  
+          sh(returnStatus: true, script: 'git diff origin/master --name-only | grep "^packages/ui-library/.*"' ) == 0
+        }
+        changeRequest()
+      }
       steps {
-        dir("${env.WORKSPACE}") {
-          container('node-builder') {
-            echo "Running tests for packages"
-            sh 'yarn lerna run test --concurrency=1'
-          }
+        container('ui-library-admin') {
+          sh """
+            yarn --frozen-lockfile
+            lerna run demo --scope ui-library
+            lerna run backstop-ci
+          """
         }
       }
     }
@@ -93,7 +120,7 @@ pipeline {
     stage('version') {
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             echo "Versioning packages"
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
@@ -104,6 +131,7 @@ pipeline {
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath} git checkout develop && git fetch --all && git merge origin/master && git push'
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
@@ -122,7 +150,7 @@ pipeline {
     stage('publish') {
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 sh "echo 'Publishing packages to npmjs.org registry'"
@@ -133,12 +161,12 @@ pipeline {
 
                 script {
                   if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
-                    echo 'Publishing Schema Form to npmjs.org'
+                    echo 'Publishing @pingux/schema-form to npmjs.org'
                     sh 'cd packages/schema-form/ && npm publish'
                   }
 
                   if (updatedPackagesMap.containsKey("@pingux/astro")) {
-                    echo 'Publishing Astro to npmjs.org'
+                    echo 'Publishing @pingux/schema-form to npmjs.org'
                     sh 'cd packages/astro/ && npm publish'
                   }
                 }
@@ -155,7 +183,7 @@ pipeline {
     stage('cdn build') {
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             echo "Run Lerna CDN command"
             sh "yarn lerna run cdn"
           }
@@ -167,7 +195,7 @@ pipeline {
     stage('update demos') {
       steps {
         dir("${env.WORKSPACE}") {
-          container('node-builder') {
+          container('ui-library-admin') {
             withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
               script {
                 def packageKeys = updatedPackagesMap.keySet() as List;
@@ -296,15 +324,22 @@ pipeline {
   post {
     success {
       script {
-        def message = """
-          :tada: Release success!
-          
-          ```
-          ${env.RELEASE_JSON}
-          ```
+        // Merge master back to develop and push
+        git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${LERNA_VERSION_FLAGS} > lerna_version.txt
 
-          Build details: <${env.BUILD_URL}/console|See in web console>
-        """.stripIndent()
+        // Send Slack notifications
+        def message = """
+            :tada: Release success!
+            
+            ```
+            ${env.RELEASE_JSON}
+            ```
+
+            Build details: <${env.BUILD_URL}/console|See in web console>
+          """.stripIndent()
+
         slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"
 
         def packageKeys = updatedPackagesMap.keySet() as List;

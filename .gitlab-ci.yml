@@ -1,11 +1,16 @@
+# NOTE: The numerical suffix in the image string refers to the version of the docker image
+# this number will need to be incremented (i.e. 1.1 to 1.2), when changes to a package
+# require a new docker image to be consistently pulled.
+
 variables:
-  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1"
-  LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.1"
+  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.2"
+  LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.2"
 
 stages:
   - build-ci-image
   - build-test-lint
   - screenshot
+  - deploy
 
 .yarn-install-and-build: &yarn-install-and-build
   before_script:
@@ -44,7 +49,7 @@ build:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-    - sh commit_lint.sh
+    - bash commit_lint.sh
     - lerna run build
     - lerna run lint
     - lerna run coverage-ci
@@ -56,7 +61,7 @@ build-no-lockfile:
   stage: build-test-lint
   tags:
     - default-gitlab-runner
-  image: docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.1
+  image: $STABLE_IMAGE
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
@@ -74,7 +79,7 @@ backstop:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
-        - packages/ui-library/*
+        - packages/ui-library/**/*
   script:
     - lerna run demo --scope ui-library
     - lerna run backstop-ci
@@ -85,11 +90,54 @@ chromatic:
   tags:
     - default-gitlab-runner
   image: $STABLE_IMAGE
+  variables:
+    CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    # Run automatically for merge trains to develop and master
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
       changes:
-        - packages/astro/*
+        - packages/astro/**/*
+    # Required manual trigger for merge requests against master or develop
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
+      when: manual
+      allow_failure: false
+    # Optional manual trigger for merge requests against branches other than master and develop
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME !~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
       when: manual
       allow_failure: true
+    # Run automatically for all commits on develop and master, plus auto-accept any changes
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "master"'
+      changes:
+        - packages/astro/**/*
+      variables:
+        CHROMATIC_FLAGS: "--auto-accept-changes --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   script:
-    - lerna run chromatic -- --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --exit-zero-on-changes --scope astro
+    - lerna run chromatic -- $CHROMATIC_FLAGS
+
+deploy_prerelease:
+  stage: deploy
+  tags:
+    - default-gitlab-runner
+  image: $STABLE_IMAGE
+  rules:
+    # Deploy develop branch via Jenkins API *UNLESS* the last commit was an alpha build.
+    # This prevents loops.
+    - if: '$CI_COMMIT_BRANCH == "develop" && $CI_COMMIT_TITLE != "chore(release): publish alpha build"'
+  script:
+    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
+
+deploy_release:
+  stage: deploy
+  tags:
+    - default-gitlab-runner
+  image: $STABLE_IMAGE
+  rules:
+    # Deploy master branch via Jenkins API *UNLESS* the last commit was a stable build.
+    # This prevents loops.
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TITLE != "chore(release): publish stable build"'
+  script:
+    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/generic-release/build"

@@ -211,10 +211,24 @@ class FormTextAreaStateless extends React.Component {
         value: "",
     };
 
+    state = {
+        width: this.props.width
+    };
+
     _handleChange = (e) => {
         this.props.onChange(e);
         this.props.onValueChange(e.target.value);
     };
+
+    /* istanbul ignore next  */
+    _outputsize = entries => {
+        this.setState({ width: entries[0].target.offsetWidth });
+    };
+
+    /* istanbul ignore next  */
+    componentDidMount() {
+        new ResizeObserver(this._outputsize).observe(this._textarea);
+    }
 
     render() {
         const
@@ -223,7 +237,7 @@ class FormTextAreaStateless extends React.Component {
                 "input-textarea",
                 getInputWidthClass({
                     className: this.props.className,
-                    width: this.props.width,
+                    width: this.state.width,
                 }),
                 this.props.className,
                 {
@@ -246,10 +260,10 @@ class FormTextAreaStateless extends React.Component {
                 hint={this.props.labelHelpText}
                 {...passLabelProps(this.props)}
             >
-                <span className="input-container">
+                <span className="input-container" style={{ width: this.state.width }}>
                     <textarea
                         data-id={this.props["data-id"] + "-textarea"}
-                        ref={this.props["data-id"] + "-textarea"}
+                        ref={node => this._textarea = node}
                         name={this.props.name || (this.props["data-id"] + "-textarea")}
                         className={classnames(
                             this.props.inputClassName,

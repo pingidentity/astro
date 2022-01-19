@@ -4,21 +4,6 @@ const base = {
   display: 'flex',
 };
 
-const panel = {
-  outline: 'none',
-  position: 'relative',
-  bg: 'white',
-  borderLeft: 'separator',
-  transition: 'margin 0.25s ease-in',
-  visibility: 'hidden',
-  '&.is-focused': {
-    boxShadow: 'focus',
-  },
-  '&.is-visible': {
-    visibility: 'visible',
-  },
-};
-
 const card = {
   boxShadow: 'standard',
   p: 'lg',
@@ -79,6 +64,10 @@ const listViewItem = {
   '&.is-focused': {
     boxShadow: 'inset 0 0 5px #5873bdbf',
   },
+  '&.has-separator': {
+    borderBottom: '1px solid',
+    borderBottomColor: 'line.hairline',
+  },
 };
 
 const listBoxSectionTitle = {
@@ -92,14 +81,30 @@ const listBoxSectionTitle = {
 
 const chip = {
   cursor: 'pointer',
-  height: '15px',
-  p: '10px',
+  p: '3px 5px 4px 5px',
   alignItems: 'center',
   justifyContent: 'center',
   minWidth: '50px',
   alignSelf: 'flex-start',
   display: 'inline-flex !important',
   borderRadius: '5px',
+  fontWeight: 1,
+
+  '& button': {
+    backgroundColor: 'transparent',
+    marginLeft: 'xs',
+    marginTop: '1px',
+    padding: '0',
+
+    '&.is-hovered': {
+      backgroundColor: 'white',
+    },
+
+    '& .mdi-icon': {
+      marginLeft: '0',
+      padding: '2px',
+    },
+  },
 };
 
 const inputInContainerSlot = {
@@ -231,6 +236,29 @@ const datePicker = {
   },
 };
 
+const fileInputFieldWrapper = {
+  display: 'flex',
+  border: '1px dashed',
+  borderColor: 'active',
+  padding: '10px 0',
+  '&.is-drag-active': {
+    backgroundColor: 'accent.95',
+  },
+  '&.is-error': {
+    borderColor: 'critical.dark',
+  },
+  '&.is-success': {
+    borderColor: 'success.dark',
+  },
+  '&.is-warning': {
+    borderColor: 'warning.dark',
+  },
+  '&.is-loading': {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};
+
 export default {
   base,
   card,
@@ -239,10 +267,10 @@ export default {
   datePicker,
   expandableRow,
   inputInContainerSlot,
+  fileInputFieldWrapper,
   listItem,
   listBoxSectionTitle,
   listViewItem,
-  panel,
   radioCheckedContent,
   radioContainer,
   scrollbox,

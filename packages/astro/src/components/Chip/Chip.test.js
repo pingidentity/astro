@@ -32,3 +32,11 @@ test('renders children within Chip component', () => {
   const mockedChildren = screen.getByRole('button');
   expect(mockedChildren).toBeInTheDocument();
 });
+
+test('renders Chip component with uppercase', () => {
+  const label = 'uppercase';
+  const isUppercase = true;
+
+  getComponent({ label, isUppercase });
+  expect(screen.queryByText('uppercase')).toHaveStyleRule('text-transform', 'uppercase');
+});

@@ -52,10 +52,10 @@ const NumberField = forwardRef((props, ref) => {
 
   const ControlArrows = (
     <Box variant="numberField.arrows">
-      <IconButton {...incrementButtonProps} ref={decRef}>
+      <IconButton {...incrementButtonProps} ref={decRef} tabIndex="-1">
         <Icon icon={ArrowDropUpIcon} size={12} />
       </IconButton>
-      <IconButton {...decrementButtonProps} ref={incrRef}>
+      <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="-1">
         <Icon icon={ArrowDropDownIcon} size={12} />
       </IconButton>
     </Box>

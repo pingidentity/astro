@@ -3,6 +3,96 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-alpha.8](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.7...ui-library@5.0.0-alpha.8) (2022-01-11)
+
+**Note:** Version bump only for package ui-library
+
+
+
+
+
+# [5.0.0-alpha.7](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.6...ui-library@5.0.0-alpha.7) (2022-01-11)
+
+**Note:** Version bump only for package ui-library
+
+
+
+
+
+# [5.0.0-alpha.6](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.5...ui-library@5.0.0-alpha.6) (2022-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5001] Adjust styling of y axis label ([5952997](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/59529972f9e415d406410ff9b156feca2e1e3d89))
+* [UIP-5001] Adjust styling of y axis label ([82d2332](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/82d2332850dda16ed14ebbb21e9a207da47ddb0d))
+* [UIP-5001] y axis fixes ([970ae7a](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/970ae7aa2c67892f3133831c46826e69bc95dfea))
+* [UIP-5001] y axis fixes ([29e98ce](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/29e98cec42a6bd68e9d54288a2c91d05cd71089b))
+
+
+
+
+
+# [5.0.0-alpha.5](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.4...ui-library@5.0.0-alpha.5) (2021-12-30)
+
+
+### Bug Fixes
+
+* [UIP-5018] Error mark is misplaced on resize ([0ca7e5c](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/0ca7e5c45fffca22fb2c130f97b307014a099be4))
+
+
+
+
+
+# [5.0.0-alpha.4](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.3...ui-library@5.0.0-alpha.4) (2021-12-20)
+
+**Note:** Version bump only for package ui-library
+
+
+
+
+
+# [5.0.0-alpha.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.2...ui-library@5.0.0-alpha.3) (2021-12-17)
+
+**Note:** Version bump only for package ui-library
+
+
+
+
+
+# [5.0.0-alpha.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.1...ui-library@5.0.0-alpha.2) (2021-12-17)
+
+
+### Bug Fixes
+
+* [UIP-3036] CopyField doesnt allow partial copying ([e99a40a](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/e99a40ad20bd9c3595b549541ab9fbe37fa88a85))
+
+
+
+
+
+# [5.0.0-alpha.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.0-alpha.0...ui-library@5.0.0-alpha.1) (2021-12-16)
+
+**Note:** Version bump only for package ui-library
+
+
+
+
+
+# [5.0.0-alpha.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.1...ui-library@5.0.0-alpha.0) (2021-12-16)
+
+
+* fix!: [UIP-4912] Update Jenkins container names to match k8s config ([8edeb95](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/8edeb95b25adecd8e34c20fb52c6c2f0e552bc4d))
+
+
+### BREAKING CHANGES
+
+* The actual breaking change is committed in 3ee02e86f5036ae8f32832c57e43bd31dcb4f812 but Lerna doesn't respect just the ! for major version changes
+
+
+
+
+
 ## [4.43.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@4.43.0...ui-library@4.43.1) (2021-12-02)
 
 

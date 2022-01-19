@@ -73,7 +73,6 @@ const buttonTypes = {
  *      label="Button"
  *      type="Danger">
  *  </Button>
- *
  */
 
 const iconAliases = {

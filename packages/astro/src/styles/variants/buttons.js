@@ -157,33 +157,6 @@ const accordionHeader = {
   },
 };
 
-// TODO: Remove this variant in Astro-UI 1.0.0
-const icon = {
-  p: '3px',
-  alignSelf: 'flex-start',
-  flexGrow: 0,
-  borderRadius: '100%',
-  cursor: 'pointer',
-  bg: 'transparent',
-  'path': {
-    fill: 'text.secondary',
-  },
-  outline: 'none',
-  color: 'white',
-  '&.is-hovered': {
-    bg: 'accent.90',
-  },
-  '&.is-pressed': {
-    'path': {
-      fill: 'white',
-    },
-    bg: 'active',
-  },
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-};
-
 const primary = {
   ...base,
   display: 'inline-flex',
@@ -326,7 +299,7 @@ const inline = {
   bg: 'white',
   height: '22px',
   lineHeight: 1,
-  fontSize: '14px',
+  fontSize: 'sm',
   borderRadius: '15px',
   border: '1px solid',
   borderColor: 'active',
@@ -491,6 +464,24 @@ const expandableRow = {
   },
 };
 
+const fileInputField = {
+  background: 'none',
+  cursor: 'pointer',
+  '& span': {
+    textAlign: 'initial',
+  },
+  '&:focus-visible': {
+    outline: 'none',
+  },
+  '&.is-hovered, &.is-pressed': {
+    cursor: 'pointer',
+    '& span': { textDecoration: 'underline' },
+  },
+  '&.is-focused': {
+    boxShadow: 'focus',
+  },
+};
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -516,8 +507,8 @@ export default {
     },
   },
   expandableRow,
+  fileInputField,
   iconButton,
-  icon,
   imageUpload,
   inline,
   inverted,

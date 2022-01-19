@@ -66,6 +66,7 @@ const Tabs = forwardRef((props, ref) => {
               isDisabled={isDisabled}
               orientation={orientation}
               mode={mode}
+              slots={item?.props?.slots}
             />
           ))}
         </Box>
@@ -85,6 +86,8 @@ const Tabs = forwardRef((props, ref) => {
 Tabs.propTypes = {
   /** The default tab key to be selected. (uncontrolled) */
   defaultSelectedKey: PropTypes.string,
+  /** Array of keys to disable within the tab list. */
+  disabledKeys: PropTypes.arrayOf(PropTypes.string),
   /** The tab key that is currently selected. (controlled) */
   selectedKey: PropTypes.string,
   /** Determines the arrangement of the tablist. */

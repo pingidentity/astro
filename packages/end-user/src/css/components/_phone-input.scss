@@ -1,8 +1,13 @@
 .phone-input {
     position: relative;
-    height: 48px;
     width: 100%;
     max-width: 350px;
+    display: flex;
+    justify-content: flex-end;
+
+    input {
+        margin-top: 0;
+    }
 
     &__code {
         width: calc(25% - #{$spacing-xs});
@@ -19,9 +24,6 @@
     }
 
     &__number {
-        position: absolute;
-        top: 0;
-        right: 0;
         width: 75%;
     }
     &__longDialCode {

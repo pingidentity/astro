@@ -1,10 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Button from '.';
-import Icon from '../Icon';
 
 const testId = 'test-button';
 const defaultProps = {
@@ -12,12 +10,6 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render((
   <Button {...defaultProps} {...props} />
-));
-
-const getIconButton = (props = {}) => render((
-  <Button {...defaultProps} {...props} variant="icon" >
-    <Icon icon={AddCircleIcon} />
-  </Button>
 ));
 
 // Need to be added to each test file to test accessibility using axe.
@@ -90,13 +82,4 @@ test('button renders children when not loading', () => {
   expect(childWrapper).toBeInTheDocument();
   expect(childWrapper).toBeVisible();
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-});
-
-test('passing in an icon makes the button parent a div', () => {
-  getIconButton({ mode: 'icon' });
-  const button = screen.getByRole('button');
-
-  expect(button).toBeInTheDocument();
-  expect(button).toBeVisible();
-  expect(button).toBeInstanceOf(HTMLDivElement);
 });

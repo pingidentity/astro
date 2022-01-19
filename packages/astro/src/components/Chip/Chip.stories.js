@@ -1,7 +1,10 @@
 import React from 'react';
 import Clear from 'mdi-react/CloseIcon';
-import Chip from '../Chip/Chip';
-import Icon from '../Icon/Icon';
+import ContentCopy from 'mdi-react/ContentCopyIcon';
+import Earth from 'mdi-react/EarthIcon';
+import Chip from '../Chip';
+import Icon from '../Icon';
+import IconButton from '../IconButton';
 import { flatColorList } from '../../styles/colors.js';
 
 export default {
@@ -28,6 +31,12 @@ export default {
         type: 'text',
       },
     },
+    isUppercase: {
+      defaultValue: false,
+      control: {
+        type: 'boolean',
+      },
+    },
   },
 };
 
@@ -40,7 +49,21 @@ export const ChipWithCustomColors = () => (
 );
 
 export const ChipWithIcon = () => (
-  <Chip label="Chip with Icon" bg="navy">
-    <Icon icon={Clear} ml="xs" size="14px" color="white" />
-  </Chip>
+  <>
+    <Chip label="Chip with Icon Button" bg="navy">
+      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+        <Icon icon={Clear} ml="xs" size="14px" />
+      </IconButton>
+    </Chip>
+    <div style={{ padding: '5px' }} />
+    <Chip label="Chip with Icon Button">
+      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+        <Icon icon={Earth} ml="xs" size="14px" />
+      </IconButton>
+    </Chip>
+    <div style={{ padding: '5px' }} />
+    <Chip label="Chip with Icon" bg="green">
+      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" />
+    </Chip>
+  </>
 );

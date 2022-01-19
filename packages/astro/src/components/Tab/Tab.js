@@ -26,6 +26,7 @@ export const CollectionTab = forwardRef((props, ref) => {
     isDisabled: tabsDisabled,
     orientation,
     mode,
+    slots,
     tooltipTriggerProps,
   } = props;
   const { key, rendered, props: itemProps } = item;
@@ -37,10 +38,11 @@ export const CollectionTab = forwardRef((props, ref) => {
     tabLabelProps,
     tabLineProps,
     content,
+    titleAttr,
     ...otherItemProps
   } = itemProps;
-  const isDisabled = tabsDisabled || tabDisabled;
   const state = useContext(TabsContext);
+  const isDisabled = tabsDisabled || tabDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectedKey === key;
   const { isFocusVisible, focusProps } = useFocusRing();
   const { hoverProps, isHovered } = useHover({});
@@ -60,16 +62,23 @@ export const CollectionTab = forwardRef((props, ref) => {
   const { tabProps } = useTab({ key, isDisabled }, state, tabRef);
 
   const tab = (
-    <Box
-      className={classNames}
-      variant="tab"
-      {...mergeProps(focusProps, hoverProps, tabProps)}
-      {...otherItemProps}
-      ref={tabRef}
-    >
-      {icon}
-      <Text variant="tabLabel" {...tabLabelProps}>{rendered}</Text>
-      {isSelected && !isDisabled && <TabLine {...tabLineProps} />}
+    <Box isRow>
+      {slots?.beforeTab}
+      <Box
+        className={classNames}
+        variant="tab"
+        {...mergeProps(focusProps, hoverProps, tabProps)}
+        {...otherItemProps}
+        ref={tabRef}
+        title={titleAttr || undefined}
+      >
+        {icon}
+        <Text variant="tabLabel" {...tabLabelProps}>
+          {rendered}
+        </Text>
+        {isSelected && !isDisabled && <TabLine {...tabLineProps} />}
+      </Box>
+      {slots?.afterTab}
     </Box>
   );
 
@@ -104,6 +113,10 @@ CollectionTab.propTypes = {
   mode: PropTypes.oneOf(['default', 'tooltip']),
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   tooltipTriggerProps: PropTypes.shape({}),
+  slots: PropTypes.shape({
+    beforeTab: PropTypes.node,
+    afterTab: PropTypes.node,
+  }),
 };
 
 const TabLine = props => (
