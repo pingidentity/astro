@@ -127,10 +127,8 @@ pipeline {
             ]) {
               // Lerna changed for debugging purposes
               sh """
-                yarn lerna changed
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
                 git fetch --all
                 git checkout master
                 git checkout develop
