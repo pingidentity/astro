@@ -131,7 +131,11 @@ pipeline {
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git fetch --all && git checkout master && git checkout develop && git merge -X theirs master -m "Merge branch 'master'" && git push origin develop
+                git fetch --all
+                git checkout master
+                git checkout develop
+                git merge -X theirs master -m "Merge branch 'master'"
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin develop
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
