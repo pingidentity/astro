@@ -129,7 +129,7 @@ pipeline {
               sh """
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                git fetch --all
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git fetch --all
                 git checkout master
                 git checkout develop
                 git merge -X theirs master -m "Merge branch 'master'"
