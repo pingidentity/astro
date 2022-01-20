@@ -106,9 +106,16 @@ const ComboBoxField = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
+  /* istanbul ignore next */
+  const onSelectionChangeHandler = (key) => {
+    const newVal = key || selectedKey || '';
+    if (onSelectionChange) onSelectionChange(newVal);
+  };
+
   const { contains } = useFilter({ sensitivity: 'base' });
   const state = useComboBoxState({
     ...comboBoxOptions,
+    onSelectionChange: hasCustomValue ? onSelectionChangeHandler : onSelectionChange,
     defaultFilter: contains,
   });
 
