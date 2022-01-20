@@ -258,6 +258,27 @@ export const ControlledFiltering = () => {
   );
 };
 
+export const ControlledWithCustomValue = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  return (
+    <OverlayProvider>
+      <ComboBoxField
+        label="Example label"
+        defaultItems={items}
+        {...actions}
+        inputValue={inputValue}
+        selectedKey={inputValue}
+        onInputChange={setInputValue}
+        onSelectionChange={setInputValue}
+        hasCustomValue
+      >
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </ComboBoxField>
+    </OverlayProvider>
+  );
+};
+
 export const AllowCustomValue = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} hasCustomValue {...actions}>

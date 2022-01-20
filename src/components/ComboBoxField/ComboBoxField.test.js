@@ -489,6 +489,42 @@ test('two listbox can not be open at the same time', () => {
   expect(screen.queryByRole('option', { name: 'Tango' })).toBeInTheDocument();
 });
 
+test('should handle selecting custom option', () => {
+  getComponent({ hasCustomValue: true });
+
+  const input = screen.queryByRole('combobox');
+  expect(input).toHaveValue('');
+
+  // type something
+  userEvent.type(input, 'custom');
+
+  // set input value as selected
+  userEvent.type(input, '{enter}', { skipClick: true });
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('combobox')).toHaveValue('custom');
+
+  // blur input
+  userEvent.tab();
+  expect(input).toHaveValue('custom');
+});
+
+test('onSelectionChange works properly with custom value', () => {
+  const onSelectionChange = jest.fn();
+  getComponent({ hasCustomValue: true, onSelectionChange, onInputChange: onSelectionChange });
+
+  const input = screen.queryByRole('combobox');
+  expect(input).toHaveValue('');
+  expect(onSelectionChange).not.toHaveBeenCalled();
+
+  // Should fire when input value was typed, and enter was pressed
+  userEvent.type(input, 'custom{enter}');
+  expect(onSelectionChange).toHaveBeenCalledWith('custom');
+
+  // Should fire when input is cleared
+  userEvent.type(input, '{selectall}{backspace}{enter}');
+  expect(onSelectionChange).toHaveBeenCalledWith('');
+});
+
 test('should have no accessibility violations', async () => {
   jest.useRealTimers();
   const { container } = getComponent();
