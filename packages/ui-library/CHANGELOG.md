@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2-alpha.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2-alpha.0...ui-library@5.0.2-alpha.1) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5012] truncate yaxis label ([ae8b02c](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/ae8b02c8e02938a3858642274f4bf531c514757c))
+
+
+
+
+
 ## [5.0.2-alpha.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.1...ui-library@5.0.2-alpha.0) (2022-01-19)
 
 **Note:** Version bump only for package ui-library
