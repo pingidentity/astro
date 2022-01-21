@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Item } from '@react-stately/collections';
 import { useOverlayPanelState } from '../../hooks';
-import Button from '../Button/Button';
 import OverlayPanel from './OverlayPanel';
-import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages } from '../../index';
+import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages, Button, AccordionGroup } from '../../index';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 export default {
@@ -57,9 +56,11 @@ export const Default = ({ ...args }) => {
           >
             Close Panel
           </Button>
-          <Text pt="md" >
-            Children render here.
-          </Text>
+          <AccordionGroup {...args}>
+            <Item key="accordionKey" textValue="accordionKey" label="Accordion Label" data-id="accordionItem">
+              <Text>Render me!</Text>
+            </Item>
+          </AccordionGroup>
         </Box>
       </OverlayPanel>
     </OverlayProvider>
