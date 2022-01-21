@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.5...@pingux/astro@1.1.0-alpha.6) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5070] Icons for warning and error messages are reversed ([36f0d6e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/36f0d6e1b65662b3c64aa1599012a2967b59e56d))
+
+
+
+
+
 # [1.1.0-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.4...@pingux/astro@1.1.0-alpha.5) (2022-01-21)
 
 
