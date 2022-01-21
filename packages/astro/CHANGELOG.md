@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.6...@pingux/astro@1.1.0-alpha.7) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5109] AccordionGroup OverlayPanel Compatibility Fix ([6a78b76](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6a78b76a3c3ab7b9ac78a7dcd6ca74a6449d63c2))
+
+
+
+
+
 # [1.1.0-alpha.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.5...@pingux/astro@1.1.0-alpha.6) (2022-01-21)
 
 
