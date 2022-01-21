@@ -52,7 +52,7 @@ const IconButton = forwardRef((props, ref) => {
       tabIndex={0}
       ref={buttonRef}
       className={classNames}
-      aria-label={ariaLabel || 'Icon Button'}
+      aria-label={ariaLabel}
       sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
       {...mergeProps(hoverProps, focusProps, buttonProps, others)}
     >
