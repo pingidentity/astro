@@ -13,13 +13,13 @@ const defaultProps = {
 
 const getComponent = (props = {}) => render((
   <AccordionGroup {...defaultProps} {...props} >
-    <Item key="first" textValue="Duplicate" data-id="first">
+    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
-    <Item key="second" textValue="Duplicate" data-id="second">
+    <Item key="second" textValue="Duplicate" data-id="second" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
-    <Item key="third" textValue="Duplicate" data-id="third">
+    <Item key="third" textValue="Duplicate" data-id="third" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
   </AccordionGroup>

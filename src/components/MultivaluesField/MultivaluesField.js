@@ -241,6 +241,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           hasVirtualFocus
           hasNoEmptySelection
           state={state}
+          aria-label="List of options"
         />
       </ScrollBox>
       <DismissButton onDismiss={close} />

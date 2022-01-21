@@ -26,12 +26,14 @@ const itemsWithSections = [
 
 const defaultProps = {
   'data-testid': testId,
+  'aria-label': 'listbox',
   'aria-labelledby': 'label',
   items,
 };
 
 const defaultWithSectionsProps = {
   'data-testid': testId,
+  'aria-label': 'listbox',
   'aria-labelledby': 'label',
   items: itemsWithSections,
 };

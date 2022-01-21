@@ -97,6 +97,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
         variant="imageUpload"
         sx={widthHeightSx}
         data-testid="image-preview-button"
+        aria-label="Image preview"
         {...mergeProps(focusProps, others)}
       >
         {(previewImage && isImageType) ? imagePreview : noImagePreview}
