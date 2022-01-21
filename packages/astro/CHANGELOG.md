@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.3...@pingux/astro@1.1.0-alpha.4) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-4992] Fix SelectField Warnings ([dab3f92](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dab3f9254c5d7b1b124ed24616e4ef68f53af7d0))
+
+
+
+
+
 # [1.1.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.2...@pingux/astro@1.1.0-alpha.3) (2022-01-20)
 
 
