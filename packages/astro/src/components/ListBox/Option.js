@@ -45,6 +45,13 @@ const Option = forwardRef((props, ref) => {
     isFocused: isFocused || state?.selectionManager?.focusedKey === item.key,
     isSelected,
   });
+
+  /* Related to UIP-4992
+   * Need to remove these properties to avoid errors in the console on the external app.
+   * By the way, these properties return "undefined", so it shouldn't create issues */
+  delete optionProps.onPressStart;
+  delete optionProps.onPressUp;
+
   return (
     <Box
       as="li"
