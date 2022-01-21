@@ -1,7 +1,7 @@
 import React from 'react';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { Box } from '../../index';
+import { Box, OverlayPanel } from '../../index';
 import PopoverContainer from './PopoverContainer';
 
 const getComponent = (props = {}) => render((
@@ -10,6 +10,14 @@ const getComponent = (props = {}) => render((
       <Box>I am in a popover</Box>
     </PopoverContainer>
   </>
+));
+
+const getComponentInOverlayPanel = (props = {}) => render((
+  <OverlayPanel isOpen >
+    <PopoverContainer {...props}>
+      <Box>I am in a popover</Box>
+    </PopoverContainer>
+  </OverlayPanel>
 ));
 
 // Need to be added to each test file to test accessibility using axe.
@@ -25,4 +33,9 @@ test('should render a popover with no arrow', () => {
   getComponent({ isOpen: true, hasNoArrow: true });
   const arrow = screen.queryByTestId('popover-arrow');
   expect(arrow).not.toBeInTheDocument();
+});
+
+test('popover will not open if wrapped in an overlayPanel', () => {
+  getComponentInOverlayPanel({ popoverProps: { 'data-test-id': 'popover-test' } });
+  expect(screen.queryByTestId('popover-test')).not.toBeInTheDocument();
 });

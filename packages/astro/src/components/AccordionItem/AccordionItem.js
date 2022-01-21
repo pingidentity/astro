@@ -72,9 +72,11 @@ const AccordionItem = forwardRef((props, ref) => {
           <Icon icon={isOpen ? MenuUp : MenuDown} />
         </Box>
       </ThemeUIButton>
-      <Box variant="accordion.accordionBody" {...accordionRegionProps} {...regionProps}>
-        {item.rendered}
-      </Box>
+      {isOpen &&
+        <Box variant="accordion.accordionBody" {...accordionRegionProps} {...regionProps} className={itemClasses} >
+          {item.rendered}
+        </Box>
+      }
     </Box>
   );
 });

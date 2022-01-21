@@ -20,11 +20,11 @@ const accordion = {
 };
 
 const accordionBody = {
-  display: 'none !important',
+  display: 'none',
   pt: 'md',
   width: '100%',
   '.is-open &': {
-    display: 'flex !important',
+    display: 'flex',
   },
 };
 
