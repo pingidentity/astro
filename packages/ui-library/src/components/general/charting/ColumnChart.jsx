@@ -23,6 +23,7 @@ import { LegendItem } from "./Legend";
 import { defaultRender } from "../../../util/PropUtils";
 import { getEvenLineCoords } from "../../../util/ChartingUtils";
 import Spinner from "../../general/Spinner";
+import { truncate } from "lodash";
 
 /**
  * @class ColumnChart
@@ -119,6 +120,7 @@ export default class ColumnChart extends React.Component {
             paddingRight: PropTypes.number,
             width: PropTypes.number,
         }),
+        yAxisLabelMaxLength: PropTypes.number,
         width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     };
 
@@ -140,6 +142,7 @@ export default class ColumnChart extends React.Component {
         hideX: true,
         hideY: true,
         yAxisLabel: "",
+        yAxisLabelMaxLength: 50,
         yAxisOptions: {
             paddingRight: 10,
             width: 25,
@@ -217,7 +220,11 @@ export default class ColumnChart extends React.Component {
         const rot = `rotate(270 ${cx} ${cy})`;
         const textStyle = { fontSize: "15px" };
 
-        return <Text x={cx} y={cy} style={textStyle} transform={rot} textAnchor="middle">{this.props.yAxisLabel}</Text>;
+        return (
+            <Text x={cx} y={cy} style={textStyle} transform={rot} textAnchor="middle" title={this.props.yAxisLabel}>
+                {truncate(this.props.yAxisLabel, { "length": this.props.yAxisLabelMaxLength })}
+            </Text>
+        );
     }
 
     _generateYAxes = (legend) => {
