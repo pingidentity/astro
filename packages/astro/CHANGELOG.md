@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.4...@pingux/astro@1.1.0-alpha.5) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5030] Components shouldn't have a default aria-label ([8927951](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8927951339ef49faa03f5654d9e8f357b136430a))
+
+
+
+
+
 # [1.1.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.3...@pingux/astro@1.1.0-alpha.4) (2022-01-21)
 
 
