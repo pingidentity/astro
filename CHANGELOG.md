@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.8...@pingux/astro@1.1.0-alpha.9) (2022-01-24)
+
+
+### Bug Fixes
+
+* [UIP-5111] Deprecate List Component ([3cd9b69](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3cd9b699c48ac43e34d9cfd61b07f33b4b7d4fc4))
+
+
+
+
+
 # [1.1.0-alpha.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.7...@pingux/astro@1.1.0-alpha.8) (2022-01-24)
 
 
