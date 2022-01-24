@@ -12,6 +12,8 @@ const TextArea = forwardRef((props, ref) => (
 
   <ThemeUITextArea
     ref={ref}
+    // this requires to fix safari resizing issue (UIP-4995)
+    sx={{ position: 'relative' }}
     {...props}
   />
 ));
