@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2-alpha.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2-alpha.1...ui-library@5.0.2-alpha.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* [UIP-5017] SearchBar may not fit AdditionalControls at screen width 1000px ([cc7dc44](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/cc7dc449ec8f3eedc4517582c9116e30763cdc3e))
+
+
+
+
+
 ## [5.0.2-alpha.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2-alpha.0...ui-library@5.0.2-alpha.1) (2022-01-21)
 
 
