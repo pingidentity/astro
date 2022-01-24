@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import Box from '../Box/Box';
+import { useDeprecationWarning } from '../../hooks';
 
 /**
  * The intended use of List is to hold a collection of <ListItem/> components.
@@ -11,6 +12,10 @@ const List = forwardRef((props, ref) => {
     children,
     ...others
   } = props;
+
+  useDeprecationWarning(
+    'The  List component will be deprecated in Astro-UI 2.0.0, use ListView instead.',
+  );
 
   return (
     <Box ref={ref} role="list" as="ul" pl="0" {...others}>
