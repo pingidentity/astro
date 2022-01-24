@@ -47,6 +47,7 @@ $searchbar-input-height: 38px;
         margin-left: $spacing-md;
         text-align: right;
         flex-grow: 1;
+        flex-shrink: 0;
 
         :last-child,
         .button:last-child {

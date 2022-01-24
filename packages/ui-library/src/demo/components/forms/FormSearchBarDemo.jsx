@@ -7,6 +7,8 @@ import FormCheckbox from "ui-library/lib/components/forms/FormCheckbox";
 import Button from "ui-library/lib/components/buttons/Button";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import HR from "ui-library/lib/components/general/HR";
+//eslint-disable-next-line import/no-extraneous-dependencies
+import OverflowMenu from "ui-library/lib/components/buttons/OverflowMenu";
 
 /**
 * @name SearchBarDemo
@@ -99,7 +101,7 @@ class SearchBarDemo extends React.Component {
                     showClear={true}
                     value={this.state.search3}
                     name="demo-search"
-                    centerControl={<FormCheckbox inline label="Hide disabled"/>}
+                    centerControl={<FormCheckbox inline label="Hide disabled" />}
                     rightControl={<Button label="Add" iconName="add" noSpacing />}
                 />
                 <HR />
@@ -135,6 +137,26 @@ class SearchBarDemo extends React.Component {
                         href: "http://uilibrary.ping-eng.com/3.8.0-SNAPSHOT/build-doc/ui-library/3.8.0-SNAPSHOT/index.html",
                         showWithFilters: true,
                     }}
+                >
+                    <FormCheckbox label="Filter 1" inline key="uno" />
+                    <FormCheckbox label="Filter 2" inline key="dos" />
+                    <FormCheckbox label="Filter 3" inline key="tres" />
+                </SearchBar>
+                <p>With documentation link, overflow menu and show withFilters is True</p>
+                <SearchBar
+                    onValueChange={this._handleValueChange("search6")}
+                    placeholder="Search something"
+                    showClear={true}
+                    value={this.state.search6}
+                    name="demo-search"
+                    rightControl={(<div>
+                        <Button label="Add" iconName="add" noSpacing />
+                        <OverflowMenu buttons={[{
+                            id: 1,
+                            label: <span>Option</span>,
+                            onClick: () => this.setState({ message: "Option Clicked" })
+                        }]} />
+                    </div>)}
                 >
                     <FormCheckbox label="Filter 1" inline key="uno" />
                     <FormCheckbox label="Filter 2" inline key="dos" />
