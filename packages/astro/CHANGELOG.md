@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.7...@pingux/astro@1.1.0-alpha.8) (2022-01-24)
+
+
+### Bug Fixes
+
+* [UIP-4995] TextArea Safari resize issue ([33c8af3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/33c8af35fbe82820427b87bdd9ab0744039a6c18))
+
+
+
+
+
 # [1.1.0-alpha.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.6...@pingux/astro@1.1.0-alpha.7) (2022-01-21)
 
 
