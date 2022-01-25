@@ -57,7 +57,7 @@ const iconButton = {
   width: 'inherit',
   height: 'inherit',
   path: {
-    fill: 'neutral.20',
+    fill: 'neutral.40',
   },
   outline: 'none',
   '&.is-focused': {
