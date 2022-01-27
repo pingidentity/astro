@@ -212,7 +212,7 @@ const MultivaluesField = forwardRef((props, ref) => {
                 bg="active"
                 color="white"
                 label={item.name}
-                sx={{ alignSelf: 'center', cursor: 'default', height: '100%', m: 5, mr: 10, py: 2 }}
+                sx={{ alignSelf: 'center', cursor: 'default', height: '100%', m: 5, mr: 10, ml: 0, py: 3, pr: 0 }}
                 textProps={{
                   sx: {
                     fontWeight: 500,
