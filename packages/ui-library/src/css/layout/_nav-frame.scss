@@ -467,13 +467,14 @@
 
         }
         &--selected {
+            color: #caced3;
             &:before {
                 content: '';
                 position: absolute;
                 height: 4px;
                 width: 4px;
                 border-radius: 50%;
-                background: #4462ed;
+                background: #caced3;
                 left: 15px;
                 top: 50%;
                 margin-top: -1px;
