@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.10...@pingux/astro@1.1.0-alpha.11) (2022-01-28)
+
+
+### Bug Fixes
+
+* [UIP-5177] Icon Button Color Update ([05b8a95](https://gitlab.corp.pingidentity.com/ux/pingux/commit/05b8a95e3fae60e7f655cf2812dfd2104496b1c5))
+
+
+
+
+
 # [1.1.0-alpha.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.9...@pingux/astro@1.1.0-alpha.10) (2022-01-28)
 
 
