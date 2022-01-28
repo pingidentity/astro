@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.9...@pingux/astro@1.1.0-alpha.10) (2022-01-28)
+
+
+### Bug Fixes
+
+* [UIP-5180] File Upload Field Update Document Icon Color ([debaf91](https://gitlab.corp.pingidentity.com/ux/pingux/commit/debaf9100401c822c37fdd16be1a1b1704096f10))
+
+
+
+
+
 # [1.1.0-alpha.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.8...@pingux/astro@1.1.0-alpha.9) (2022-01-24)
 
 
