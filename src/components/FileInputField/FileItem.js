@@ -35,6 +35,7 @@ const FileItem = (props) => {
       default:
         return {
           icon: InsertDriveFileIcon,
+          color: 'neutral.10',
         };
     }
   }, [status]);
