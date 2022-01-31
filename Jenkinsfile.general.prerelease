@@ -73,12 +73,14 @@ pipeline {
           echo "The current branch is: ${env.BRANCH_NAME} or ${env.CHANGE_TARGET}"
           switch(env.BRANCH_NAME) {
             case 'develop':
-              env.LERNA_VERSION_FLAGS = '--conventional-commits --conventional-prerelease --yes -m "chore(release): publish alpha build"'
-              env.LERNA_PUBLISH_FLAGS = 'from-git --pre-dist-tag next --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-git-tag-version --no-changelog --no-push'
+              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish alpha build'
               break
             case ~/^release-.*/:
-              env.LERNA_VERSION_FLAGS = '--conventional-commits --conventional-prerelease --preid rc --yes -m "chore(release): publish rc build"'
-              env.LERNA_PUBLISH_FLAGS = 'from-git --pre-dist-tag next --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-git-tag-version --no-changelog --no-push --preid rc'
+              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish rc build'
               break
             default:
               // don't set release vars, causing build to fail
@@ -136,7 +138,7 @@ pipeline {
       }
     }
 
-    stage('version') {
+    stage('version and publish') {
       steps {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
@@ -151,7 +153,11 @@ pipeline {
                 git config --global user.name 'devtools-jenkins'
                 git checkout ${env.BRANCH_NAME}
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
+                git add .
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m ${env.LERNA_COMMIT_MESSAGE}
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push
               """
+
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
                 env.RELEASE_JSON = json;
@@ -160,17 +166,7 @@ pipeline {
                   updatedPackagesMap[prop.key] = prop.value;
                 }
               }
-            }
-          }
-        }
-      }
-    }
 
-    stage('publish') {
-      steps {
-        dir("${env.WORKSPACE}") {
-          container('ui-library-admin') {
-            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 sh "echo 'Publishing packages to npmjs.org registry'"
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
