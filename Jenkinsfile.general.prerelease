@@ -146,13 +146,12 @@ pipeline {
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]) {
-              // Lerna changed and git status added for debugging purposes
+              // git status added for debugging purposes
               sh """
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 git checkout ${env.BRANCH_NAME}
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
-                lerna changed
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
                 git status
                 git add .
