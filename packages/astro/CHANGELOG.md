@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.11...@pingux/astro@1.1.0-alpha.12) (2022-01-31)
+
+
+### Features
+
+* [UIP-5067] CodeView component ([c4e104c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c4e104c3638c8f6231b5f3c14cd65a1a62bb6591))
+
+
+
+
+
 # [1.1.0-alpha.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.10...@pingux/astro@1.1.0-alpha.11) (2022-01-28)
 
 
