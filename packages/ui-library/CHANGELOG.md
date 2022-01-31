@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2-alpha.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2-alpha.2...ui-library@5.0.2-alpha.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* [UIP-4219] grey color for selected environment entry in environment selector of NavFrameAstro ([ebb66d5](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/ebb66d5f6d047b912ec4932c33d2a9fc7ba74533))
+
+
+
+
+
 ## [5.0.2-alpha.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2-alpha.1...ui-library@5.0.2-alpha.2) (2022-01-24)
 
 
