@@ -41,6 +41,8 @@ export * from './components/CheckboxField';
 export { default as Chip } from './components/Chip';
 export * from './components/Chip';
 
+export { default as CodeView } from './components/CodeView';
+
 export { default as ComboBoxField } from './components/ComboBoxField';
 
 export { default as CopyText } from './components/CopyText';
