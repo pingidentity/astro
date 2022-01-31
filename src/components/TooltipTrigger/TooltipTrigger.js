@@ -28,6 +28,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
     isNotFlippable,
     isDarkMode,
     hasNoArrow,
+    targetRef,
   } = props;
 
   const [trigger, tooltip] = React.Children.toArray(children);
@@ -37,18 +38,20 @@ const TooltipTrigger = forwardRef((props, ref) => {
   const tooltipTriggerRef = useRef();
   const overlayRef = useRef();
 
+  const tooltipRef = targetRef || tooltipTriggerRef;
+
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => tooltipTriggerRef.current);
+  useImperativeHandle(ref, () => tooltipRef.current);
 
   const { triggerProps, tooltipProps } = useTooltipTrigger({
     isDisabled,
     trigger: triggerAction,
-  }, state, tooltipTriggerRef);
+  }, state, tooltipRef);
 
   const { overlayProps: positionProps, arrowProps, placement } = useOverlayPosition({
     placement: `${direction} ${align}`,
-    targetRef: tooltipTriggerRef,
+    targetRef: tooltipRef,
     overlayRef,
     offset,
     // Our API preference is for default false so we invert this since it should be default true
@@ -122,6 +125,8 @@ TooltipTrigger.propTypes = {
   placement: PropTypes.string,
   /** By default, opens for both focus and hover. Can be made to open only for focus. */
   trigger: PropTypes.string,
+  /* The ref for the element which the overlay positions itself with respect to. */
+  targetRef: PropTypes.shape({}),
 };
 
 TooltipTrigger.defaultProps = {
