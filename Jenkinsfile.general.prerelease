@@ -96,7 +96,7 @@ pipeline {
           container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "yarn lerna run build"
+            sh "lerna run build"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -146,19 +146,19 @@ pipeline {
             withCredentials([
               sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')
             ]) {
-              // Lerna changed for debugging purposes
+              // Lerna changed and git status added for debugging purposes
               sh """
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 git checkout ${env.BRANCH_NAME}
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
-                yarn lerna changed
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
+                lerna changed
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
                 git status
                 git add .
                 git status
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m "${env.LERNA_COMMIT_MESSAGE}"
-                git push
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
