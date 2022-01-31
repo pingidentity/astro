@@ -1,5 +1,6 @@
 import accordion from './accordion';
 import boxes from './boxes';
+import codeView from './codeView';
 import images from './images';
 import imageUpload from './imageUpload';
 import link from './link';
@@ -23,6 +24,7 @@ import tooltip from './tooltip';
 export default {
   accordion,
   boxes,
+  codeView,
   images,
   imageUpload,
   loader,

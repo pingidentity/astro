@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover } from '@react-aria/interactions';
@@ -9,9 +9,9 @@ import { Box, Button, Tooltip, TooltipTrigger } from '../../index';
 import CopyButton from './CopyButton';
 import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 
-const TooltipWrapper = ({ children, isOpen, tooltip }) => {
+const TooltipWrapper = ({ children, tooltip, ...others }) => {
   return (
-    <TooltipTrigger key={tooltip} direction="top" isNotFlippable isOpen={isOpen} offset={5}>
+    <TooltipTrigger key={tooltip} direction="top" isNotFlippable offset={5} {...others}>
       {children}
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>
@@ -20,6 +20,7 @@ const TooltipWrapper = ({ children, isOpen, tooltip }) => {
 
 TooltipWrapper.propTypes = {
   isOpen: PropTypes.bool,
+  targetRef: PropTypes.shape({}),
   tooltip: PropTypes.string,
 };
 
@@ -28,7 +29,7 @@ TooltipWrapper.propTypes = {
  */
 
 const CopyText = forwardRef((props, ref) => {
-  const { children, textToCopy, tooltipText, mode, ...others } = props;
+  const { children, textToCopy, tooltipText, mode, tooltipProps, wrapperProps, ...others } = props;
   const value = textToCopy || (mode === 'link' ? children.props.href : children.props.children);
 
   const [isCopied, setIsCopied] = useState(false);
@@ -56,7 +57,7 @@ const CopyText = forwardRef((props, ref) => {
 
   const copyToClipboard = useCopyToClipboard(value, setIsCopied);
 
-  const content = mode === 'link'
+  const content = (mode === 'link' || mode === 'nonClickableContent')
     ? children
     : (
       <Button
@@ -71,6 +72,30 @@ const CopyText = forwardRef((props, ref) => {
 
   const tooltip = isCopied ? 'Copied!' : tooltipText;
   const isTooltipOpen = isFocusVisible || isHovered || isCopied;
+
+  const wrapperRef = useRef();
+
+  if (mode === 'nonClickableContent') {
+    return (
+      <TooltipWrapper
+        isOpen={isTooltipOpen}
+        tooltip={tooltip}
+        targetRef={wrapperRef}
+        {...tooltipProps}
+      >
+        <Box
+          ref={wrapperRef}
+          isRow
+          tabIndex={0}
+          {...mergeProps(hoverProps, others)}
+          {...wrapperProps}
+        >
+          {content}
+          <CopyButton onPress={copyToClipboard} {...focusProps} />
+        </Box>
+      </TooltipWrapper>
+    );
+  }
 
   if (mode === 'link') {
     return (
@@ -107,11 +132,15 @@ const CopyText = forwardRef((props, ref) => {
 
 CopyText.propTypes = {
   /** The behavioral pattern to apply to the component. */
-  mode: PropTypes.oneOf(['text', 'link']),
+  mode: PropTypes.oneOf(['text', 'link', 'nonClickableContent']),
   /** The text to be copied instead of the text inside the child component. */
   textToCopy: PropTypes.string,
   /** The text to be displayed in the tooltip. */
   tooltipText: PropTypes.string,
+  /** Props to apply to the tooltip in nonClickableContent mode. */
+  tooltipProps: PropTypes.shape({}),
+  /** Props to apply to the wrapper in nonClickableContent mode. */
+  wrapperProps: PropTypes.shape({}),
 };
 
 CopyText.defaultProps = {
