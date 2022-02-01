@@ -27,6 +27,10 @@ describe("PopoverNavMenu", function() {
         },
         {
             label: "Fourth",
+        },
+        {
+            label: "Fifth",
+            description: "Fifth item description."
         }
     ];
 
@@ -56,4 +60,22 @@ describe("PopoverNavMenu", function() {
         expect(icons.length).toBe(2);
     });
 
+    it("renders open state with item description", function() {
+        var component = ReactTestUtils.renderIntoDocument(
+            <div>
+                <PopoverNavMenu label="hello" open={true} items={itemData} />
+            </div>
+        );
+        var notification = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "nav-menu__notification"
+        );
+        var descriptionLabel = TestUtils.scryRenderedDOMNodesWithClass(
+            component,
+            "nav-menu__notification-label"
+        );
+
+        expect(notification.length).toBe(1);
+        expect(descriptionLabel.length).toBe(1);
+    });
 });
