@@ -22,7 +22,7 @@ const Separator = forwardRef((props, ref) => {
     <Box
       ref={ref}
       className={classNames}
-      variant="separator"
+      variant="separator.base"
       {...others}
       {...separatorProps}
     />

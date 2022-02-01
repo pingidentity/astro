@@ -42,6 +42,36 @@ const defaultFocus = {
   boxShadow: 'focus',
 };
 
+const navItemButton = {
+  textDecoration: 'none',
+  outline: 'none',
+  cursor: 'pointer',
+  borderRadius: 0,
+  backgroundColor: 'transparent',
+  paddingTop: '5px',
+  paddingBottom: '5px',
+  display: 'block',
+  color: 'neutral.95',
+  fontSize: 'sm',
+  fontWeight: 1,
+  flexGrow: '1',
+  width: '100%',
+  textAlign: 'left',
+  lineHeight: '16px',
+  whiteSpace: 'break-spaces',
+  overflowWrap: 'break-word',
+  maxWidth: '100%',
+  wordWrap: 'break-word',
+  wordBreak: 'break-word',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    bg: 'accent.10',
+    boxShadow: 'inset 2px 0 0 0 white',
+  },
+};
+
 const iconButton = {
   justifyContent: 'center',
   appearance: 'none',
@@ -563,6 +593,7 @@ export default {
   text,
   helpHint,
   modalCloseButton,
+  navItemButton,
   applicationPortalPinned,
   applicationPortal,
   square,

@@ -107,6 +107,12 @@ export * from './components/Messages';
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
 
+export { default as NavBar } from './components/NavBar';
+export * from './components/NavBar';
+
+export { default as NavBarSection } from './components/NavBarSection';
+export * from './components/NavBarSection';
+
 export { default as MultivaluesField } from './components/MultivaluesField';
 
 export { default as OverlayPanel } from './components/OverlayPanel';
