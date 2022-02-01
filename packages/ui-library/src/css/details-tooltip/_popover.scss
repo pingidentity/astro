@@ -246,6 +246,10 @@ $max-popover-width: 360px;
     &:active {
         color: $color-slate;
         text-decoration: none;
+
+        .nav-menu__notification-label {
+            color: $color-active;
+        }
     }
 }
 
@@ -265,7 +269,14 @@ $max-popover-width: 360px;
     left: $spacing-md;
 }
 
+.nav-menu__notification {
+    max-width: 400px;
+}
 
+.nav-menu__notification-label {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
 
 .popover-search {
     position: relative;

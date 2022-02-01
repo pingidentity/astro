@@ -171,6 +171,28 @@ export default class NavFrameDemo extends React.Component {
                             sort={({ startsWith, contains }) => [...startsWith, ...contains]}
                             title="Results"
                         />,
+                        <NavMenu
+                            iconName="account"
+                            items={[
+                                {
+                                    id: "cluster",
+                                    label: "Cluster Management",
+                                    description: "The configuration has not been replicated or it has changed since it was last replaced. Visit Cluster management page to replicate the configuration to all servers in the cluster.",
+                                },
+                                {
+                                    id: "configuration",
+                                    label: "Configuration Errors",
+                                    description: "Configuration errors have occurred. Visit the Dependency Errors page to see the component."
+                                },
+                                {
+                                    id: "PingFederateLicense",
+                                    label: "PingFederate License",
+                                    description: "Your PingFederate license is about to expire."
+                                },
+                            ]}
+                            key="nav-menu"
+                            onItemClick={(item) => console.log(item)}
+                        />,
                         <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />,
                         <NavMenu
                             iconName="account"
