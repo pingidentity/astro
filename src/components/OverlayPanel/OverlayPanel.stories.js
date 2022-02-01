@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Item } from '@react-stately/collections';
 import { useOverlayPanelState } from '../../hooks';
 import OverlayPanel from './OverlayPanel';
-import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages, Button, AccordionGroup } from '../../index';
+import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages, Button } from '../../index';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 export default {
@@ -34,11 +34,14 @@ export default {
 };
 
 export const Default = ({ ...args }) => {
-  const state = useOverlayPanelState();
+  const { state, onClose } = useOverlayPanelState();
+  const triggerRef = useRef();
+
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
-    // readers when an overlay opens.
+    // readers when an overlay is open.
     <OverlayProvider>
+
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -48,28 +51,36 @@ export const Default = ({ ...args }) => {
         voluptate velit esse cillum dolore eu fugiat nulla pariatur.
       </Text>
       <br />
-      <Button onPress={state.open}>Open Panel</Button>
-      <OverlayPanel isOpen={state.isOpen} {...args}>
-        <Box>
-          <Button
-            onPress={state.close}
-          >
-            Close Panel
-          </Button>
-          <AccordionGroup {...args}>
-            <Item key="accordionKey" textValue="accordionKey" label="Accordion Label" data-id="accordionItem">
-              <Text>Render me!</Text>
-            </Item>
-          </AccordionGroup>
-        </Box>
-      </OverlayPanel>
+      <Button ref={triggerRef} onPress={state.open} >Open Panel</Button>
+      { state.isOpen &&
+        <OverlayPanel
+          isOpen={state.isOpen}
+          state={state}
+          {...args}
+          triggerRef={triggerRef}
+        >
+          <Box>
+            <Button
+              onPress={() => { onClose(state, triggerRef); }}
+            >
+              Close Panel
+            </Button>
+            <Text pt="md" >
+              Children render here.
+            </Text>
+          </Box>
+        </OverlayPanel>
+      }
     </OverlayProvider>
   );
 };
 
 export const InnerPanel = ({ ...args }) => {
-  const state = useOverlayPanelState();
-  const innerState = useOverlayPanelState();
+  const { state, onClose } = useOverlayPanelState();
+  const { state: innerState, onClose: onCloseInner } = useOverlayPanelState();
+
+  const outerTriggerRef = useRef();
+  const innerTriggerRef = useRef();
 
   const [messagesOpen, setMessagesOpen] = useState(false);
 
@@ -81,7 +92,11 @@ export const InnerPanel = ({ ...args }) => {
     if (innerState.isOpen) {
       innerState.close();
     }
-    state.close();
+    onClose(state, outerTriggerRef);
+  };
+
+  const closeInnerPanel = () => {
+    onCloseInner(innerState, innerTriggerRef);
   };
 
   const inner = (
@@ -92,9 +107,11 @@ export const InnerPanel = ({ ...args }) => {
           variant="overlayPanel.overlayPanelInner" // applies higher z-index
           isOpen={innerState.isOpen}
           {...args}
+          state={innerState}
+          triggerRef={innerTriggerRef}
         >
           <Box>
-            <Button onPress={innerState.close}>Close Inner Panel</Button>
+            <Button onPress={closeInnerPanel}>Close Inner Panel</Button>
             <Text pt="md">
               Children render here.
             </Text>
@@ -109,7 +126,13 @@ export const InnerPanel = ({ ...args }) => {
     <>
       {
         state.isOpen &&
-        <OverlayPanel isOpen={state.isOpen} sx={{ p: '0px' }} {...args}>
+        <OverlayPanel
+          isOpen={state.isOpen}
+          sx={{ p: '0px' }}
+          {...args}
+          state={state}
+          triggerRef={outerTriggerRef}
+        >
           <Box sx={{ p: '12px' }}>
             <Button onPress={closeOuterPanel}>Close Panel</Button>
             <Text pt="md" mb="24px">
@@ -124,27 +147,12 @@ export const InnerPanel = ({ ...args }) => {
                 <Text variant="itemTitle" alignSelf="center" mr="auto">Form 2</Text>
               </ListItem>
               <Separator margin="0" />
-              <ListItem title="Form 3">
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 3</Text>
-              </ListItem>
-              <Separator margin="0" />
-              <ListItem title="Form 4">
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 4</Text>
-              </ListItem>
-              <Separator margin="0" />
-              <ListItem title="Form 5">
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 5</Text>
-              </ListItem>
-              <Separator margin="0" />
             </List>
             <br />
             <Button onPress={toggleMessagesOpen}>Toggle Messages</Button>
             <br />
-            <Button onPress={innerState.open}>Open Inner Panel</Button>
-
-
+            <Button ref={innerTriggerRef} onPress={innerState.open}>Open Inner Panel</Button>
             {inner}
-
           </Box>
         </OverlayPanel>
       }
@@ -156,7 +164,7 @@ export const InnerPanel = ({ ...args }) => {
     // readers when an overlay opens.
     <>
       <OverlayProvider>
-        <Button onPress={state.open}>Open Panel</Button>
+        <Button ref={outerTriggerRef} onPress={state.open}>Open Panel</Button>
         {outer}
       </OverlayProvider>
       { messagesOpen &&
@@ -169,13 +177,14 @@ export const InnerPanel = ({ ...args }) => {
 };
 
 export const CustomWidth = () => {
-  const state = useOverlayPanelState();
+  const { state, onClose } = useOverlayPanelState();
+  const triggerRef = useRef();
+
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
-    //
-    // For a custom width, provide the width via the 'sx' prop
     <OverlayProvider>
+
       <Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -185,19 +194,26 @@ export const CustomWidth = () => {
         voluptate velit esse cillum dolore eu fugiat nulla pariatur.
       </Text>
       <br />
-      <Button onPress={state.open}>Open Panel</Button>
-      <OverlayPanel isOpen={state.isOpen} sx={{ width: '720px' }}>
-        <Box>
-          <Button
-            onPress={state.close}
-          >
-            Close Panel
-          </Button>
-          <Text pt="md" >
-            Children render here.
-          </Text>
-        </Box>
-      </OverlayPanel>
+      <Button ref={triggerRef} onPress={state.open} >Open Panel</Button>
+      { state.isOpen &&
+        <OverlayPanel
+          isOpen={state.isOpen}
+          state={state}
+          triggerRef={triggerRef}
+          sx={{ width: '720px' }}
+        >
+          <Box>
+            <Button
+              onPress={() => { onClose(state, triggerRef); }}
+            >
+              Close Panel
+            </Button>
+            <Text pt="md" >
+              Children render here.
+            </Text>
+          </Box>
+        </OverlayPanel>
+      }
     </OverlayProvider>
   );
 };
