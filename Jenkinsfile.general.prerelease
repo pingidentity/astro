@@ -73,11 +73,11 @@ pipeline {
           echo "The current branch is: ${env.BRANCH_NAME} or ${env.CHANGE_TARGET}"
           switch(env.BRANCH_NAME) {
             case 'develop':
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog -m "chore(release): publish alpha build"'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version -m "chore(release): publish alpha build"'
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
               break
             case ~/^release-.*/:
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --preid rc -m "chore(release): publish rc build"'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version --preid rc -m "chore(release): publish rc build"'
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
               break
             default:
