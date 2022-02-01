@@ -73,12 +73,14 @@ pipeline {
           echo "The current branch is: ${env.BRANCH_NAME} or ${env.CHANGE_TARGET}"
           switch(env.BRANCH_NAME) {
             case 'develop':
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version -m "chore(release): publish alpha build"'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version'
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish alpha build'
               break
             case ~/^release-.*/:
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version --preid rc -m "chore(release): publish rc build"'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version --preid rc'
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish rc build'
               break
             default:
               // don't set release vars, causing build to fail
@@ -148,8 +150,14 @@ pipeline {
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 git checkout ${env.BRANCH_NAME}
+                lerna changed || true
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
+                git status
+                git add .
+                git status
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m "${env.LERNA_COMMIT_MESSAGE}"
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push || true
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
