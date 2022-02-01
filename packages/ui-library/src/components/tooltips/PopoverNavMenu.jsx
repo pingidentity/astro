@@ -49,17 +49,35 @@ class PopoverNavMenuBase extends PopoverMenuBase {
         } = item;
 
         return (
-            <Anchor
-                data-id={dataId}
-                href={href}
-                key={label}
-                className={classnames("nav-menu__link", { "nav-menu__link--w-icon": this._anyIcons() })}
-                onClick={handleClick}
-                target={target}
-            >
-                {this._getIcon(item)}
-                {label}
-            </Anchor>
+            <>
+                {!item.description && (
+                    <Anchor
+                        data-id={dataId}
+                        href={href}
+                        key={label}
+                        className={classnames("nav-menu__link", { "nav-menu__link--w-icon": this._anyIcons() })}
+                        onClick={handleClick}
+                        target={target}
+                    >
+                        {this._getIcon(item)}
+                        {label}
+                    </Anchor>
+                )}
+
+                {item.description && (
+                    <Anchor
+                        data-id={dataId}
+                        href={href}
+                        key={label}
+                        className={classnames("nav-menu__link nav-menu__notification")}
+                        onClick={handleClick}
+                        target={target}
+                    >
+                        <div className="nav-menu__notification-label">{label}</div>
+                        <div>{item.description}</div>
+                    </Anchor>
+                )}
+            </>
         );
     };
 }
