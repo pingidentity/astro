@@ -177,12 +177,16 @@ export default class NavFrameDemo extends React.Component {
                                 {
                                     id: "cluster",
                                     label: "Cluster Management",
-                                    description: "The configuration has not been replicated or it has changed since it was last replaced. Visit Cluster management page to replicate the configuration to all servers in the cluster.",
+                                    description: "The configuration has not been replicated or it has " +
+                                        "changed since it was last replaced. " +
+                                        "Visit Cluster management page to replicate the " +
+                                        "configuration to all servers in the cluster.",
                                 },
                                 {
                                     id: "configuration",
                                     label: "Configuration Errors",
-                                    description: "Configuration errors have occurred. Visit the Dependency Errors page to see the component."
+                                    description: "Configuration errors have occurred. " +
+                                        "Visit the Dependency Errors page to see the component."
                                 },
                                 {
                                     id: "PingFederateLicense",
