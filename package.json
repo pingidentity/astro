@@ -78,7 +78,7 @@
     "@react-aria/color": "^3.0.0-beta.2",
     "@react-aria/combobox": "^3.0.0",
     "@react-aria/dialog": "^3.1.2",
-    "@react-aria/focus": "^3.2.3",
+    "@react-aria/focus": "^3.5.0",
     "@react-aria/grid": "^3.0.0-beta.1",
     "@react-aria/i18n": "^3.3.0",
     "@react-aria/interactions": "^3.5.0",
