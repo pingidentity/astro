@@ -18,8 +18,8 @@ import Text from '../Text';
 export const icons = {
   default: AlertCircleOutlineIcon,
   success: CheckCircleIcon,
-  error: AlertCircleOutlineIcon,
-  warning: AlertCircleIcon,
+  error: AlertCircleIcon,
+  warning: AlertCircleOutlineIcon,
 };
 
 const CloseButton = ({ color, ...others }) => {

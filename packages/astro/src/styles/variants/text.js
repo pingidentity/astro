@@ -117,6 +117,20 @@ const expandableRow = {
   },
 };
 
+const navBarSubtitle = {
+  fontWeight: 3,
+  fontSize: '11px',
+  color: 'accent.80',
+};
+
+const navBarHeaderText = {
+  ...wordWrap,
+  whiteSpace: 'break-spaces',
+  lineHeight: '13px',
+  fontSize: '13px',
+  fontWeight: 1,
+};
+
 export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
@@ -131,6 +145,8 @@ export const text = {
   listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   expandableRow,
+  navBarHeaderText,
+  navBarSubtitle,
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
   sectionTitle: { ...wordWrap, fontSize: 'lg', fontWeight: 2, color: 'text.primary', fontFamily: 'standard' },
   subtitle: { ...wordWrap, fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },

@@ -6,8 +6,10 @@ import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrappe
 import {
   Link,
   Box,
+  OverlayPanel,
 } from '../../index';
 import AccordionGridGroup from '../AccordionGridGroup';
+
 
 const testId = 'test-accordion';
 const defaultProps = {
@@ -47,6 +49,43 @@ const getComponent = (props = {}) => render((
       </Box>
     </Item>
   </AccordionGridGroup>
+));
+
+const getComponentInOverlayPanel = (props = {}) => render((
+  <OverlayPanel isOpen >
+    <AccordionGridGroup {...defaultProps} {...props} >
+      <Item key="first" textValue="Duplicate">
+        <Box>
+          <Link>Header Button</Link>
+          <Link>Second Header Button</Link>
+        </Box>
+        <Box>
+          <Link>Body Button</Link>
+          <Link>Second Body Button</Link>
+        </Box>
+      </Item>
+      <Item key="second" textValue="Duplicate">
+        <Box>
+          <Link>Header Button</Link>
+          <Link>Second Header Button</Link>
+        </Box>
+        <Box>
+          <Link>Body Button</Link>
+          <Link>Second Body Button</Link>
+        </Box>
+      </Item>
+      <Item key="third" textValue="Duplicate">
+        <Box>
+          <Link>Header Button</Link>
+          <Link>Second Header Button</Link>
+        </Box>
+        <Box>
+          <Link>Body Button</Link>
+          <Link>Second Body Button</Link>
+        </Box>
+      </Item>
+    </AccordionGridGroup>
+  </OverlayPanel>
 ));
 
 axeTest(getComponent, {
@@ -163,4 +202,11 @@ test('default expanded keys expands an accordion item', () => {
   const row = screen.getAllByRole('row');
   const selectedRow = row[0];
   expect(selectedRow).toHaveAttribute('aria-selected', 'true');
+});
+
+test('items do not automatically expand if wrapped in an open OverlayPanel', () => {
+  getComponentInOverlayPanel();
+  const row = screen.getAllByRole('row');
+  const selectedRow = row[0];
+  expect(selectedRow).not.toHaveAttribute('aria-selected', 'true');
 });

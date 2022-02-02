@@ -8,7 +8,6 @@ import { ListLayout } from '@react-stately/layout';
 
 import { ListBoxContext } from './ListBoxContext';
 import { Option } from './index.js';
-import { useAriaLabelWarning } from '../../hooks';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Loader from '../Loader';
 import ListBoxSection from './ListBoxSection';
@@ -60,14 +59,12 @@ const ListBox = forwardRef((props, ref) => {
     selectedKeys,
     selectionMode,
     state,
+    'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,
     ...others
   } = props;
-
-  const ariaLabel = props['aria-label'];
-  useAriaLabelWarning('ListBox', ariaLabel);
 
   const { focusStrategy } = state;
   // Object matching React Aria API with all options
@@ -92,7 +89,7 @@ const ListBox = forwardRef((props, ref) => {
     shouldFocusWrap: hasFocusWrap,
     shouldSelectOnPressUp: isSelectedOnPressUp,
     shouldUseVirtualFocus: hasVirtualFocus,
-    'aria-label': ariaLabel || 'ListBox',
+    'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,

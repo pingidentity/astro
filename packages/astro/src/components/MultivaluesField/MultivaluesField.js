@@ -221,7 +221,7 @@ const MultivaluesField = forwardRef((props, ref) => {
                 }}
               >
                 <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="buttons.chipDeleteButton">
-                  <Icon icon={Clear} color="white" size={10} />
+                  <Icon icon={Clear} color="white" size={14} />
                 </IconButton>
               </Chip>
             );
@@ -241,6 +241,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           hasVirtualFocus
           hasNoEmptySelection
           state={state}
+          aria-label="List of options"
         />
       </ScrollBox>
       <DismissButton onDismiss={close} />

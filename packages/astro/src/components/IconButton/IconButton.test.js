@@ -15,6 +15,7 @@ const testId = 'test-button';
 const defaultProps = {
   'data-testid': testId,
   icon: Icon,
+  'aria-label': 'Create',
 };
 const getComponent = (props = {}) =>
   render(<IconButton {...defaultProps} {...props} />);
@@ -113,8 +114,8 @@ test('tooltip is not shown on hover or focus when prop is not passed', () => {
 });
 
 test('the button should be getting aria label attribute', () => {
-  const testLabel = 'test label';
-  getComponent({ 'aria-label': testLabel });
+  const testLabel = defaultProps['aria-label'];
+  getComponent();
   expect(screen.getByLabelText(testLabel)).toBeInTheDocument();
 });
 

@@ -3,6 +3,154 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.11...@pingux/astro@1.1.0-alpha.12) (2022-01-31)
+
+
+### Features
+
+* [UIP-5067] CodeView component ([c4e104c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c4e104c3638c8f6231b5f3c14cd65a1a62bb6591))
+
+
+
+
+
+# [1.1.0-alpha.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.10...@pingux/astro@1.1.0-alpha.11) (2022-01-28)
+
+
+### Bug Fixes
+
+* [UIP-5177] Icon Button Color Update ([05b8a95](https://gitlab.corp.pingidentity.com/ux/pingux/commit/05b8a95e3fae60e7f655cf2812dfd2104496b1c5))
+
+
+
+
+
+# [1.1.0-alpha.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.9...@pingux/astro@1.1.0-alpha.10) (2022-01-28)
+
+
+### Bug Fixes
+
+* [UIP-5180] File Upload Field Update Document Icon Color ([debaf91](https://gitlab.corp.pingidentity.com/ux/pingux/commit/debaf9100401c822c37fdd16be1a1b1704096f10))
+
+
+
+
+
+# [1.1.0-alpha.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.8...@pingux/astro@1.1.0-alpha.9) (2022-01-24)
+
+
+### Bug Fixes
+
+* [UIP-5111] Deprecate List Component ([3cd9b69](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3cd9b699c48ac43e34d9cfd61b07f33b4b7d4fc4))
+
+
+
+
+
+# [1.1.0-alpha.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.7...@pingux/astro@1.1.0-alpha.8) (2022-01-24)
+
+
+### Bug Fixes
+
+* [UIP-4995] TextArea Safari resize issue ([33c8af3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/33c8af35fbe82820427b87bdd9ab0744039a6c18))
+
+
+
+
+
+# [1.1.0-alpha.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.6...@pingux/astro@1.1.0-alpha.7) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5109] AccordionGroup OverlayPanel Compatibility Fix ([6a78b76](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6a78b76a3c3ab7b9ac78a7dcd6ca74a6449d63c2))
+
+
+
+
+
+# [1.1.0-alpha.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.5...@pingux/astro@1.1.0-alpha.6) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5070] Icons for warning and error messages are reversed ([36f0d6e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/36f0d6e1b65662b3c64aa1599012a2967b59e56d))
+
+
+
+
+
+# [1.1.0-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.4...@pingux/astro@1.1.0-alpha.5) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-5030] Components shouldn't have a default aria-label ([8927951](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8927951339ef49faa03f5654d9e8f357b136430a))
+
+
+
+
+
+# [1.1.0-alpha.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.3...@pingux/astro@1.1.0-alpha.4) (2022-01-21)
+
+
+### Bug Fixes
+
+* [UIP-4992] Fix SelectField Warnings ([dab3f92](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dab3f9254c5d7b1b124ed24616e4ef68f53af7d0))
+
+
+
+
+
+# [1.1.0-alpha.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.2...@pingux/astro@1.1.0-alpha.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* [UIP-5007] ComboBoxField controlled custom input throws an exception ([9651c98](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9651c98da3b3ac158c84f378303a2d331db78cce))
+
+
+
+
+
+# [1.1.0-alpha.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.1...@pingux/astro@1.1.0-alpha.2) (2022-01-19)
+
+
+### Bug Fixes
+
+* [UIP-5039] IconButton Square Variant ([2fecfac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2fecfac9d39974eb5dc773d210c3a830d1bd9e2a))
+
+
+
+
+
+# [1.1.0-alpha.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.0...@pingux/astro@1.1.0-alpha.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* [UIP-5026] Infinite Loading List requests page 2 instantly ([e6888cf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e6888cfe91435fae0ab583b0ff22b2c169ba7bcd))
+
+
+
+
+
+# [1.1.0-alpha.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.1...@pingux/astro@1.1.0-alpha.0) (2022-01-19)
+
+
+### Bug Fixes
+
+* [UIP-5122] adjust x icon to 14px ([6b4ca54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b4ca5418ddaffb6e1a4daaf28b57151a23529cb))
+
+
+### Features
+
+* [UIP-5066] Add Icon, Chip, and Text with Tooltips ([1681083](https://gitlab.corp.pingidentity.com/ux/pingux/commit/168108386d77ef09635a177a35cb6d68cfad8bc2))
+
+
+
+
+
 ## [1.0.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.0.0...@pingux/astro@1.0.1) (2022-01-19)
 
 **Note:** Version bump only for package @pingux/astro

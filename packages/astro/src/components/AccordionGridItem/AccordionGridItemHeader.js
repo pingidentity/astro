@@ -72,7 +72,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
       isSelected={isSelected}
       className={classNames}
       {...others}
-      aria-label={ariaLabel || 'Grid Cell'}
+      aria-label={ariaLabel}
     >
       <Box isRow>
         {children}

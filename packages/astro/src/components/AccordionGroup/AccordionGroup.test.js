@@ -5,6 +5,7 @@ import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '../Text';
 import AccordionGroup from '../AccordionGroup';
+import { OverlayPanel } from '../../index';
 
 const testId = 'test-accordion';
 const defaultProps = {
@@ -13,16 +14,32 @@ const defaultProps = {
 
 const getComponent = (props = {}) => render((
   <AccordionGroup {...defaultProps} {...props} >
-    <Item key="first" textValue="Duplicate" data-id="first">
+    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
-    <Item key="second" textValue="Duplicate" data-id="second">
+    <Item key="second" textValue="Duplicate" data-id="second" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
-    <Item key="third" textValue="Duplicate" data-id="third">
+    <Item key="third" textValue="Duplicate" data-id="third" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
   </AccordionGroup>
+));
+
+const getComponentInOverlayPanel = (props = {}) => render((
+  <OverlayPanel isOpen >
+    <AccordionGroup {...defaultProps} {...props} >
+      <Item key="first" textValue="Duplicate" data-id="first">
+        <Text>Render me!</Text>
+      </Item>
+      <Item key="second" textValue="Duplicate" data-id="second">
+        <Text>Render me!</Text>
+      </Item>
+      <Item key="third" textValue="Duplicate" data-id="third">
+        <Text>Render me!</Text>
+      </Item>
+    </AccordionGroup>
+  </OverlayPanel>
 ));
 
 // Need to be added to each test file to test accessibility using axe.
@@ -157,4 +174,11 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   const selectedItem = buttons[0];
   const { parentElement } = selectedItem;
   expect(parentElement).toHaveAttribute('data-id', 'first');
+});
+
+test('items do not automatically expand if wrapped in an open OverlayPanel', () => {
+  getComponentInOverlayPanel();
+  const buttons = screen.getAllByRole('button');
+  const selectedItem = buttons[0];
+  expect(selectedItem).not.toHaveAttribute('aria-expanded', 'true');
 });
