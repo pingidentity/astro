@@ -150,13 +150,13 @@ pipeline {
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 git checkout ${env.BRANCH_NAME}
-                lerna changed || true
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
+                lerna changed || true
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
                 git status
                 git add .
                 git status
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m "${env.LERNA_COMMIT_MESSAGE}"
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m "${env.LERNA_COMMIT_MESSAGE}" || true
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push || true
               """
               script {
