@@ -195,7 +195,7 @@ export default class NavFrameDemo extends React.Component {
                                 },
                             ]}
                             key="nav-menu"
-                            onItemClick={(item) => console.log(item)}
+                            onClickItem={(item) => console.log(item)}
                         />,
                         <NavLink key="nav-link" iconName="help" href="whatevertheheck" target="_blank" />,
                         <NavMenu
@@ -213,7 +213,7 @@ export default class NavFrameDemo extends React.Component {
                                 },
                             ]}
                             key="nav-menu"
-                            onItemClick={(item) => console.log(item)}
+                            onClickItem={(item) => console.log(item)}
                         />,
                     ]}
                     copyright={<Copyright copyrightYear={2003} />}

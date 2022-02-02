@@ -50,21 +50,7 @@ class PopoverNavMenuBase extends PopoverMenuBase {
 
         return (
             <>
-                {!item.description && (
-                    <Anchor
-                        data-id={dataId}
-                        href={href}
-                        key={label}
-                        className={classnames("nav-menu__link", { "nav-menu__link--w-icon": this._anyIcons() })}
-                        onClick={handleClick}
-                        target={target}
-                    >
-                        {this._getIcon(item)}
-                        {label}
-                    </Anchor>
-                )}
-
-                {item.description && (
+                {item.description ? (
                     <Anchor
                         data-id={dataId}
                         href={href}
@@ -76,7 +62,20 @@ class PopoverNavMenuBase extends PopoverMenuBase {
                         <div className="nav-menu__notification-label">{label}</div>
                         <div>{item.description}</div>
                     </Anchor>
-                )}
+                )
+                    : (
+                        <Anchor
+                            data-id={dataId}
+                            href={href}
+                            key={label}
+                            className={classnames("nav-menu__link", { "nav-menu__link--w-icon": this._anyIcons() })}
+                            onClick={handleClick}
+                            target={target}
+                        >
+                            {this._getIcon(item)}
+                            {label}
+                        </Anchor>
+                    )}
             </>
         );
     };
