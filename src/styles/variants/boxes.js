@@ -79,7 +79,7 @@ const listBoxSectionTitle = {
   justifyContent: 'center',
 };
 
-const chip = {
+export const chip = {
   cursor: 'pointer',
   p: '3px 5px 4px 5px',
   alignItems: 'center',
@@ -192,6 +192,29 @@ const expandableRow = {
   },
 };
 
+const navBar = {
+  height: '100%',
+  width: '230px',
+  position: 'absolute',
+  zIndex: '1',
+  top: '0',
+  left: '0',
+  backgroundColor: 'accent.20',
+  overflowY: 'hidden',
+};
+
+const navBarSectionContainer = {
+  height: '100%',
+  maxHeight: '100%',
+  overflowY: 'overlay !important',
+};
+
+const navBarItemHeaderContainer = {
+  flexGrow: 1,
+  alignItems: 'center',
+  maxWidth: '180px',
+};
+
 const datePicker = {
   '.react-calendar': {
     width: 280,
@@ -276,4 +299,7 @@ export default {
   scrollbox,
   topShadowScrollbox,
   bottomShadowScrollbox,
+  navBar,
+  navBarSectionContainer,
+  navBarItemHeaderContainer,
 };

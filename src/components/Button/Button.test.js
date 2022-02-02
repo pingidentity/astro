@@ -7,6 +7,7 @@ import Button from '.';
 const testId = 'test-button';
 const defaultProps = {
   'data-testid': testId,
+  'aria-label': 'Test button',
 };
 const getComponent = (props = {}) => render((
   <Button {...defaultProps} {...props} />

@@ -1,5 +1,6 @@
 import { text as textVariants } from './text';
 import { neutral } from '../colors';
+import { chip } from './boxes';
 
 const base = {
   cursor: 'pointer',
@@ -41,6 +42,36 @@ const defaultFocus = {
   boxShadow: 'focus',
 };
 
+const navItemButton = {
+  textDecoration: 'none',
+  outline: 'none',
+  cursor: 'pointer',
+  borderRadius: 0,
+  backgroundColor: 'transparent',
+  paddingTop: '5px',
+  paddingBottom: '5px',
+  display: 'block',
+  color: 'neutral.95',
+  fontSize: 'sm',
+  fontWeight: 1,
+  flexGrow: '1',
+  width: '100%',
+  textAlign: 'left',
+  lineHeight: '16px',
+  whiteSpace: 'break-spaces',
+  overflowWrap: 'break-word',
+  maxWidth: '100%',
+  wordWrap: 'break-word',
+  wordBreak: 'break-word',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    bg: 'accent.10',
+    boxShadow: 'inset 2px 0 0 0 white',
+  },
+};
+
 const iconButton = {
   justifyContent: 'center',
   appearance: 'none',
@@ -56,7 +87,7 @@ const iconButton = {
   width: 'inherit',
   height: 'inherit',
   path: {
-    fill: 'neutral.20',
+    fill: 'neutral.40',
   },
   outline: 'none',
   '&.is-focused': {
@@ -71,6 +102,11 @@ const iconButton = {
     },
     bg: 'active',
   },
+};
+
+const square = {
+  ...iconButton,
+  borderRadius: '2px',
 };
 
 const modalCloseButton = {
@@ -221,6 +257,11 @@ const inverted = {
     borderColor: 'accent.20',
     color: 'white',
   },
+};
+
+const invertedSquare = {
+  ...inverted,
+  borderRadius: '2px',
 };
 
 const applicationPortal = {
@@ -482,6 +523,38 @@ const fileInputField = {
   },
 };
 
+const tooltipChip = {
+  ...chip,
+  cursor: 'default',
+  '&.is-hovered, &.is-pressed': {
+    cursor: 'default',
+    outline: 'none',
+  },
+};
+
+const tooltipIconButton = {
+  ...iconButton,
+  cursor: 'default',
+  '&.is-hovered, &.is-pressed': {
+    backgroundColor: 'inherit',
+    cursor: 'default',
+    path: {
+      fill: 'neutral.20',
+    },
+  },
+};
+
+const tooltipInline = {
+  ...text,
+  cursor: 'default',
+  alignSelf: 'flex-start',
+  '&.is-hovered, &.is-pressed': {
+    backgroundColor: 'inherit',
+    cursor: 'default',
+    textDecoration: 'inherit',
+  },
+};
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -520,6 +593,12 @@ export default {
   text,
   helpHint,
   modalCloseButton,
+  navItemButton,
   applicationPortalPinned,
   applicationPortal,
+  square,
+  invertedSquare,
+  tooltipChip,
+  tooltipIconButton,
+  tooltipInline,
 };

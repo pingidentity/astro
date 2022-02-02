@@ -52,7 +52,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
       {...mergedProps}
       isSelected={isSelected}
       className={classNames}
-      aria-label={ariaLabel || 'Grid Cell'}
+      aria-label={ariaLabel}
     >
       {children}
     </Box>

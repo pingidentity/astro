@@ -3,10 +3,14 @@ import List from '.';
 import ListItem from '../ListItem';
 import Text from '../Text';
 import Separator from '../Separator';
+import withDeprecationWarning from '../../utils/devUtils/decorators/withDeprecationWarning';
 
 export default {
-  title: 'List',
+  title: 'Deprecated/List',
   component: [List, ListItem],
+  decorators: [
+    (Story, context) => withDeprecationWarning(Story, context, 'The `List` component will be deprecated in Astro-UI 2.0.0, use `ListView` instead.'),
+  ],
 };
 
 export const Default = () => (

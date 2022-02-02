@@ -106,6 +106,7 @@ const ColorField = forwardRef((props, ref) => {
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
       <Button
+        aria-label="Select color"
         bg={getRgbaFromState(state)}
         onPress={handleButtonPress}
         ref={triggerRef}

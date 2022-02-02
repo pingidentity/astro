@@ -41,6 +41,8 @@ export * from './components/CheckboxField';
 export { default as Chip } from './components/Chip';
 export * from './components/Chip';
 
+export { default as CodeView } from './components/CodeView';
+
 export { default as ComboBoxField } from './components/ComboBoxField';
 
 export { default as CopyText } from './components/CopyText';
@@ -104,6 +106,12 @@ export * from './components/Messages';
 
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
+
+export { default as NavBar } from './components/NavBar';
+export * from './components/NavBar';
+
+export { default as NavBarSection } from './components/NavBarSection';
+export * from './components/NavBarSection';
 
 export { default as MultivaluesField } from './components/MultivaluesField';
 

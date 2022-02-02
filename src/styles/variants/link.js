@@ -1,5 +1,5 @@
 const link = {
-  color: 'active',
+  color: 'white',
   fontFamily: 'standard',
   fontSize: 'md',
   textDecoration: 'none',

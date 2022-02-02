@@ -16,11 +16,25 @@ const useOverlayPanelState = (props = {}) => {
     onOpenChange,
   } = props;
 
-  return useOverlayTriggerState({
+  const state = useOverlayTriggerState({
     defaultOpen: isDefaultOpen,
     isOpen,
     onOpenChange,
   });
+
+  const onClose = (stateProp, triggerRef, onCloseProp) => {
+    if (stateProp) {
+      stateProp.close();
+    }
+    if (triggerRef?.current) {
+      triggerRef.current.focus();
+    }
+    if (onCloseProp) {
+      onCloseProp();
+    }
+  };
+
+  return { state, onClose };
 };
 
 export default useOverlayPanelState;
