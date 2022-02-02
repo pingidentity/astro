@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.12...@pingux/astro@1.1.0) (2022-02-02)
+
+
+### Bug Fixes
+
+* [UIP-5016] OverlayPanel focus improvements ([eabfa8f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eabfa8f1b235a07c049d4a0bbc77d49bd02a2eec))
+
+
+### Features
+
+* [UIP-4876] Astro NavBar ([8d3e7de](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8d3e7ded13aec6034fd0ff813153dc0a4dc7375a))
+
+
+
+
+
 # [1.1.0-alpha.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.11...@pingux/astro@1.1.0-alpha.12) (2022-01-31)
 
 
