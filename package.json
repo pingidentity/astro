@@ -126,7 +126,6 @@
     "@styled-system/props": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "@tippyjs/react": "4.2.0",
-    "a11y-syntax-highlighting": "0.2.0",
     "chroma-js": "^2.1.0",
     "classnames": "^2.2.6",
     "emotion-normalize": "^11.0.1",
