@@ -26,11 +26,15 @@ module.exports = {
       name: '@storybook/addon-docs',
       options: {
         configureJSX: true,
+        sourceLoaderOptions: {
+          injectStoryParameters: false,
+        },
       }
     },
     '@storybook/addon-actions',
     '@storybook/addon-knobs',
     '@storybook/addon-links',
+    '@storybook/addon-storysource'
   ],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
