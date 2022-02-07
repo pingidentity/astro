@@ -167,7 +167,10 @@ pipeline {
                   updatedPackagesMap[prop.key] = prop.value;
                 }
               }
+            }
 
+            echo "Publishing packages"
+            configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 sh "echo 'Publishing packages to npmjs.org registry'"
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
