@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link as ThemeUILink } from 'theme-ui';
 import { useLink } from '@react-aria/link';
 import { useFocusRing } from '@react-aria/focus';
-import { useHover } from '@react-aria/interactions';
+import { useHover, usePress } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 
@@ -17,10 +17,12 @@ const Link = forwardRef((props, ref) => {
   const { isFocusVisible, focusProps } = useFocusRing();
   const { linkProps } = useLink(props, linkRef);
   const { hoverProps, isHovered } = useHover(props);
+  const { pressProps, isPressed } = usePress({ ref: linkRef });
   const { classNames } = useStatusClasses(className, {
     isDisabled,
     isFocused: isFocusVisible,
     isHovered,
+    isPressed,
   });
 
   return (
@@ -29,7 +31,7 @@ const Link = forwardRef((props, ref) => {
       ref={linkRef}
       role="link"
       {...others}
-      {...mergeProps(hoverProps, focusProps, linkProps)}
+      {...mergeProps(hoverProps, focusProps, pressProps, linkProps)}
     />
   );
 });
@@ -45,11 +47,14 @@ Link.propTypes = {
   href: PropTypes.string,
   /**  Specifies the window where the linked page is loaded */
   target: PropTypes.string,
+  /** The styling variation of the link. */
+  variant: PropTypes.string,
 };
 
 Link.defaultProps = {
   isDisabled: false,
   as: 'a',
+  variant: 'app',
 };
 
 Link.displayName = 'Link';

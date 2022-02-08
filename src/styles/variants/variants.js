@@ -3,7 +3,7 @@ import boxes from './boxes';
 import codeView from './codeView';
 import images from './images';
 import imageUpload from './imageUpload';
-import link from './link';
+import links from './links';
 import listBox from './listBox';
 import loader from './loader';
 import modal from './modal';
@@ -28,7 +28,7 @@ export default {
   images,
   imageUpload,
   loader,
-  link,
+  links,
   listBox,
   menu,
   menuItem,
