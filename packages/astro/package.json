@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.1.0-alpha.16",
+  "version": "1.1.1-alpha.3",
   "description": "PingUX themeable React component library",
   "author": "uxdev@pingidentity.com",
   "license": "Apache-2.0",
@@ -126,7 +126,6 @@
     "@styled-system/props": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "@tippyjs/react": "4.2.0",
-    "a11y-syntax-highlighting": "0.2.0",
     "chroma-js": "^2.1.0",
     "classnames": "^2.2.6",
     "emotion-normalize": "^11.0.1",

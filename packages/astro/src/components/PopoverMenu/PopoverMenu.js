@@ -110,9 +110,7 @@ PopoverMenu.propTypes = {
    * available for the given `direction` placement.
    */
   isNotFlippable: PropTypes.bool,
-  /**
-   * Allows to add an arrow to popover container
-   */
+  /** Whether the PopoverMenu hides the arrow. */
   hasNoArrow: PropTypes.bool,
   /**
    * Handler that is called when the overlay's open state changes.

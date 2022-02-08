@@ -119,7 +119,7 @@ WithLineNumbers.story = {
 
 export const WithCustomSize = () => (
   <>
-    <CodeView language="javascript" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
+    <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
       {`
 export const ChipWithIcon = () => (
   <>
