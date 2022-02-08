@@ -108,3 +108,15 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   expect(item).toBeInTheDocument();
   expect(item).toHaveAttribute('data-id', testItemsArr[0]);
 });
+
+test('will render correctly with single child item', () => {
+  render(
+    <Breadcrumbs {...mergeProps(defaultProps)}>
+      <Item key={testItemsArr[0]} data-id={testItemsArr[0]} isCurrent>
+        {testItemsArr[0]}
+      </Item>
+    </Breadcrumbs>,
+  );
+  expect(screen.getByTestId(testId)).toBeInTheDocument();
+  expect(screen.getByText(testItemsArr[0])).toBeInTheDocument();
+});

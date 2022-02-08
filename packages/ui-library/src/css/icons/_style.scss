@@ -26,6 +26,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-bell {
+  &:before {
+    content: $icon-bell; 
+  }
+}
 .icon-star-outline {
   &:before {
     content: $icon-star-outline;

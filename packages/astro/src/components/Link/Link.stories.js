@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '.';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
+import variants from '../../styles/variants/links';
 
 export default {
   title: 'Link',
@@ -25,6 +26,12 @@ export default {
         type: 'none',
       },
       defaultValue: '_blank',
+    },
+    variant: {
+      control: {
+        type: 'select',
+        options: Object.keys(variants),
+      },
     },
   },
 };
