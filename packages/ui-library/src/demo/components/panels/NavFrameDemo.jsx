@@ -172,7 +172,7 @@ export default class NavFrameDemo extends React.Component {
                             title="Results"
                         />,
                         <NavMenu
-                            iconName="account"
+                            iconName="bell"
                             items={[
                                 {
                                     id: "cluster",
