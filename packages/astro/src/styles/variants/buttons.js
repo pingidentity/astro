@@ -505,6 +505,31 @@ const expandableRow = {
   },
 };
 
+const environmentBreadcrumb = {
+  current: {
+    ...text,
+    color: 'neutral.30',
+    fontSize: 'md',
+    fontWeight: 1,
+    '&.is-hovered, &.is-focused': {
+      color: 'active',
+      textDecoration: 'none',
+      boxShadow: 'none',
+    },
+    '&.is-pressed': {
+      color: 'accent.20',
+      textDecoration: 'none',
+    },
+  },
+  selectItem: {
+    ...text,
+    color: 'neutral.10',
+    fontSize: 'md',
+    fontWeight: 0,
+    justifyContent: 'start',
+  },
+};
+
 const fileInputField = {
   background: 'none',
   cursor: 'pointer',
@@ -579,6 +604,7 @@ export default {
       ...defaultFocus,
     },
   },
+  environmentBreadcrumb,
   expandableRow,
   fileInputField,
   iconButton,
