@@ -49,6 +49,8 @@ export { default as CopyText } from './components/CopyText';
 
 export { default as ColorField } from './components/ColorField';
 
+export { default as EnvironmentBreadcrumb } from './components/EnvironmentBreadcrumb';
+
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 
