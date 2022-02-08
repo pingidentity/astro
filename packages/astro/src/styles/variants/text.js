@@ -117,6 +117,14 @@ const expandableRow = {
   },
 };
 
+const environmentBreadcrumb = {
+  ...base,
+  fontSize: 'sm',
+  fontWeight: 3,
+  color: 'secondary',
+  textTransform: 'capitalize',
+};
+
 const navBarSubtitle = {
   fontWeight: 3,
   fontSize: '11px',
@@ -137,6 +145,7 @@ export const text = {
   bodyWeak: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   buttonLabel: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'accent.30', fontFamily: 'standard' },
   capsLabel: { ...wordWrap, color: 'text.secondary', textTransform: 'uppercase', fontFamily: 'standard' },
+  environmentBreadcrumb,
   fieldHelperText,
   inputValue: { fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   itemTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },

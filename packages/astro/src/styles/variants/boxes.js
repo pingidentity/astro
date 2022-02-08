@@ -259,6 +259,18 @@ const datePicker = {
   },
 };
 
+const environmentChip = {
+  ...chip,
+  alignSelf: 'center',
+  height: '17px',
+  minWidth: 'fit-content',
+  ml: 8,
+  '& span': {
+    fontSize: 'xs',
+    lineHeight: 1,
+  },
+};
+
 const fileInputFieldWrapper = {
   display: 'flex',
   border: '1px dashed',
@@ -288,6 +300,7 @@ export default {
   chip,
   copy,
   datePicker,
+  environmentChip,
   expandableRow,
   inputInContainerSlot,
   fileInputFieldWrapper,
