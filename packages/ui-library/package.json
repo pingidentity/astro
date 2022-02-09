@@ -33,7 +33,7 @@
     "focus-trap-react": "^6.0.0",
     "highlight.js": "^9.18.5",
     "libphonenumber-js": "^1.7.25",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.22.2",
     "moment-range": "^1.0.5",
     "moment-timezone": "^0.5.5",

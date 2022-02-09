@@ -13445,7 +13445,7 @@ core-js@^1.0.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
-core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.7, core-js@^2.6.10, core-js@^2.6.5:
+core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7, core-js@^2.6.10, core-js@^2.6.5:
   version "2.6.11"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha1-OIMUafmSK97Y7iHJ3EaYXgOZMIw=
@@ -16423,19 +16423,18 @@ fbjs@^0.8.1, fbjs@^0.8.9:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
 
-fbjs@^1.0.0:
-  version "1.0.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/fbjs/-/fbjs-1.0.0.tgz#52c215e0883a3c86af2a7a776ed51525ae8e0a5a"
-  integrity sha1-UsIV4Ig6PIavKnp3btUVJa6OClo=
+fbjs@^3.0.2:
+  version "3.0.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/fbjs/-/fbjs-3.0.2.tgz#dfae08a85c66a58372993ce2caf30863f569ff94"
+  integrity sha1-364IqFxmpYNymTziyvMIY/Vp/5Q=
   dependencies:
-    core-js "^2.4.1"
+    cross-fetch "^3.0.4"
     fbjs-css-vars "^1.0.0"
-    isomorphic-fetch "^2.1.1"
     loose-envify "^1.0.0"
     object-assign "^4.1.0"
     promise "^7.1.1"
     setimmediate "^1.0.5"
-    ua-parser-js "^0.7.18"
+    ua-parser-js "^0.7.30"
 
 fbjs@^3.0.2:
   version "3.0.2"
@@ -25540,7 +25539,7 @@ pretty-hrtime@^1.0.0, pretty-hrtime@^1.0.3:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
   integrity sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=
 
-prism-react-renderer@^1.2.1:
+prism-react-renderer@1.2.1:
   version "1.2.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prism-react-renderer/-/prism-react-renderer-1.2.1.tgz#392460acf63540960e5e3caa699d851264e99b89"
   integrity sha1-OSRgrPY1QJYOXjyqaZ2FEmTpm4k=
