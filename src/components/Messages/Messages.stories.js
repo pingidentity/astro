@@ -4,7 +4,7 @@ import AccountIcon from 'mdi-react/AccountIcon';
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import { Box, Button, Messages } from '../..';
-import messagesReducer, { multiMessagesReducer } from './Messages.reducer';
+import { messagesReducerStory as messagesReducer, multiMessagesReducerStory as multiMessagesReducer } from './index';
 
 export default {
   title: 'Messages',
