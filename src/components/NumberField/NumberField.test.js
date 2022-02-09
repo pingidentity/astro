@@ -127,3 +127,9 @@ test('increment and decrement buttons shouldn\'t be able to be focused via keybo
   userEvent.tab();
   expect(screen.getByLabelText('arrow-down')).not.toHaveFocus();
 });
+
+test('number field input receiving name attribute', () => {
+  const testName = 'testName';
+  getComponent({ name: testName });
+  expect(screen.getByLabelText(testLabel)).toHaveAttribute('name', testName);
+});
