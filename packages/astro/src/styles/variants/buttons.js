@@ -312,6 +312,11 @@ const helpHint = {
   ml: '5px',
   maxWidth: '13px',
   maxHeight: '14px',
+  borderRadius: '5.5px',
+  'svg': {
+    'height': '100%',
+    mb: 0.75,
+  },
   'path': {
     fill: 'neutral.20',
   },
