@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
-import Messages from '.';
+import Messages, { messagesReducerStory, multiMessagesReducerStory } from '.';
 import Button from '../Button';
 
 jest.mock('@react-aria/live-announcer');
@@ -154,4 +154,16 @@ describe('announcements', () => {
     expect(messages.childElementCount).toBe(1);
     expect(announce).toHaveBeenCalledWith('New message 1', 'polite');
   });
+});
+
+test('should render messages with messagesReducerStory', () => {
+  getComponent();
+  messagesReducerStory.actions.showSuccessMessage();
+  expect(screen.getByTestId(testId)).toBeInTheDocument();
+});
+
+test('should render messages with multiMessagesReducerStory', () => {
+  getComponent();
+  multiMessagesReducerStory.actions.showSuccessMessage();
+  expect(screen.getByTestId(testId)).toBeInTheDocument();
 });
