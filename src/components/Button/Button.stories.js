@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCircleIcon from 'mdi-react/AddCircleIcon';
+import CreateIcon from 'mdi-react/CreateIcon';
 import Box from '../Box';
 import Button from '.';
 import Icon from '../Icon';
@@ -48,6 +49,13 @@ export default {
       },
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 export const Default = args => (
@@ -80,3 +88,29 @@ export const InlineButton = () => (
     Inline
   </Button>
 );
+
+export const ColorBlockButton = (args) => {
+  // Change `isConfigured` property in storybook controls
+  const { isConfigured, ...props } = args;
+
+  return (
+    <Button {...props} variant="colorBlock" className={isConfigured ? 'is-configured' : ''}>
+      <Box>
+        <Text variant="buttonTitle">Title</Text>
+        <Text variant="buttonSubtitle">Info</Text>
+      </Box>
+      <Icon icon={CreateIcon} />
+    </Button>
+  );
+};
+
+ColorBlockButton.story = {
+  argTypes: {
+    isConfigured: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
+  },
+};
