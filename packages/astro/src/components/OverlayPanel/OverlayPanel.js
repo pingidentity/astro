@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle, useEffect, useState } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { FocusScope } from '@react-aria/focus';
 import Box from '../Box';
@@ -20,7 +20,6 @@ const OverlayPanel = forwardRef((props, ref) => {
   const { onClose } = useOverlayPanelState();
 
   const overlayPanelRef = useRef();
-  const [contain, setIsContained] = useState(true);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => overlayPanelRef.current);
 
@@ -29,18 +28,12 @@ const OverlayPanel = forwardRef((props, ref) => {
   const handleClose = (e) => {
     e.stopPropagation();
     if (e.key === 'Escape') {
-      setIsContained(false);
+      onClose(state, triggerRef, onCloseProp);
     }
   };
 
-  useEffect(() => {
-    if (!contain && onClose) {
-      onClose(state, triggerRef, onCloseProp);
-    }
-  }, [contain]);
-
   return (
-    <FocusScope autoFocus contain={contain}>
+    <FocusScope autoFocus>
       <Box variant="overlayPanel.overlayPanel" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose} >
         <Box
           variant="overlayPanel.overlayPanelBody"
