@@ -580,6 +580,62 @@ const tooltipInline = {
   },
 };
 
+const colorBlock = {
+  bg: 'neutral.95',
+  border: '1px solid',
+  borderColor: 'neutral.90',
+  borderRadius: 10,
+  outline: 'none',
+  cursor: 'pointer',
+  width: 150,
+  minHeight: 40,
+  p: '5px 15px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  '&.is-hovered': {
+    bg: 'neutral.80',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-pressed': {
+    bg: 'neutral.60',
+    borderColor: 'neutral.60',
+  },
+  '& span': {
+    color: 'text.primary',
+    textAlign: 'left',
+  },
+  '&>div': {
+    alignItems: 'baseline',
+  },
+  '&>svg': {
+    color: 'text.secondary',
+    fill: 'text.secondary',
+  },
+
+  '&.is-configured': {
+    bg: 'active',
+    borderColor: 'active',
+    '& span': {
+      color: 'white',
+    },
+    '&>svg': {
+      color: 'white',
+      fill: 'white',
+    },
+  },
+  '&.is-configured.is-hovered': {
+    bg: 'accent.40',
+    borderColor: 'accent.40',
+  },
+  '&.is-configured.is-pressed': {
+    bg: 'accent.20',
+    borderColor: 'accent.20',
+  },
+};
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -627,4 +683,5 @@ export default {
   tooltipChip,
   tooltipIconButton,
   tooltipInline,
+  colorBlock,
 };
