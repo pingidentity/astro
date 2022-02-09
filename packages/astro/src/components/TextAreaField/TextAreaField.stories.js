@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import TextAreaField from '.';
-import Box from '../Box';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
 
@@ -74,35 +73,6 @@ export const FloatLabel = () => (
   />
 );
 
-export const LeftLabel = () => (
-  <Box gap="xl" width="fit-content">
-    <TextAreaField
-      label="Example label"
-      labelMode="left"
-    />
-
-    <TextAreaField
-      label="Example label that is much longer than the previous one"
-      labelMode="left"
-      status="error"
-    />
-
-    <TextAreaField
-      label="Example label with set width"
-      labelMode="left"
-      containerProps={{ sx: { gridTemplateColumns: '120px auto' } }}
-    />
-  </Box>
-);
-
-LeftLabel.parameters = {
-  docs: {
-    description: {
-      story: 'Users are able to override the default 40% column width when using left label by providing a new gridTemplatesColumn value, as shown in the example below.',
-    },
-  },
-};
-
 export const Controlled = () => {
   const [value, setValue] = useState();
 
@@ -156,22 +126,6 @@ export const Error = () => (
     helperText="Here is some helpful text..."
     label="Example Label"
     status="error"
-  />
-);
-
-export const Success = () => (
-  <TextAreaField
-    helperText="Here is some helpful text..."
-    label="Example Label"
-    status="success"
-  />
-);
-
-export const Warning = () => (
-  <TextAreaField
-    helperText="Here is some helpful text..."
-    label="Example Label"
-    status="warning"
   />
 );
 
