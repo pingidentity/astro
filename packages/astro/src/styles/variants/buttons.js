@@ -384,7 +384,7 @@ const chipDeleteButton = {
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
-  ml: 'xs',
+  mx: '3px !important',
   p: 0,
   width: 14,
   '&.is-focused, &.is-hovered': {
