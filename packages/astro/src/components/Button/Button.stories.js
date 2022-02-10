@@ -1,11 +1,9 @@
 import React from 'react';
 import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import CreateIcon from 'mdi-react/CreateIcon';
-import Box from '../Box';
-import Button from '.';
-import Icon from '../Icon';
-import Text from '../Text';
+import FilterIcon from 'mdi-react/FilterIcon';
 import { buttonVariants } from '../../utils/devUtils/constants/variants';
+import { Box, Button, Icon, SearchField, Text } from '../../index';
 
 // removing the iconButton variants from this story.
 const variants = buttonVariants;
@@ -114,3 +112,12 @@ ColorBlockButton.story = {
     },
   },
 };
+
+export const FilterButton = () => (
+  <Box p="xx" isRow gap="md">
+    <SearchField aria-label="search items" />
+    <Button variant="filter" aria-label="filter button">
+      <Icon icon={FilterIcon} />
+    </Button>
+  </Box>
+);
