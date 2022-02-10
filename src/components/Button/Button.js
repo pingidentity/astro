@@ -5,7 +5,7 @@ import { useButton } from '@react-aria/button';
 import { useHover } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
-import { useStatusClasses, usePropWarning } from '../../hooks';
+import { useStatusClasses, usePropWarning, useAriaLabelWarning } from '../../hooks';
 import Loader from '../Loader';
 
 const Button = forwardRef((props, ref) => {
@@ -22,6 +22,7 @@ const Button = forwardRef((props, ref) => {
     onPressChange,
     onPressUp,
     children,
+    variant,
     ...others
   } = props;
   const buttonRef = useRef();
@@ -43,6 +44,7 @@ const Button = forwardRef((props, ref) => {
   });
 
   const ariaLabel = props['aria-label'];
+  useAriaLabelWarning('Button', ariaLabel, variant === 'filter');
 
   return (
     <ThemeUIButton
@@ -52,6 +54,7 @@ const Button = forwardRef((props, ref) => {
       role="button"
       tx="buttons"
       sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      variant={variant}
       {...others}
       {...mergeProps(hoverProps, focusProps, buttonProps)}
     >
