@@ -585,6 +585,31 @@ const tooltipInline = {
   },
 };
 
+const defaultVariant = {
+  ...base,
+  bg: 'white',
+  border: '1px solid',
+  borderColor: 'active',
+  '&.is-hovered': {
+    ...defaultHover,
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const filter = {
+  ...defaultVariant,
+  px: 'sm',
+  borderColor: 'neutral.80',
+  height: 40,
+  color: 'active',
+  display: 'flex',
+};
+
 const colorBlock = {
   bg: 'neutral.95',
   border: '1px solid',
@@ -641,6 +666,7 @@ const colorBlock = {
   },
 };
 
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -668,6 +694,7 @@ export default {
   environmentBreadcrumb,
   expandableRow,
   fileInputField,
+  filter,
   iconButton,
   imageUpload,
   inline,
