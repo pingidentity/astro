@@ -71,7 +71,7 @@ export const Default = () => {
   return (
     <>
       <OverlayProvider>
-        <Button onPress={setStaticOverviewVisible}>Open Panel</Button>
+        <Button onPress={() => setStaticOverviewVisible(true)}>Open Panel</Button>
         {
           staticOverviewVisible &&
           <OverlayPanel isOpen={staticOverviewVisible}>
@@ -83,7 +83,7 @@ export const Default = () => {
                     aria-label="edit"
                     variant="inverted"
                     ml="xs"
-                    onPress={setEditOverviewVisible}
+                    onPress={() => setEditOverviewVisible(true)}
                   >
                     <Icon icon={CreateIcon} size={14} />
                   </IconButton>
@@ -288,7 +288,7 @@ export const Default = () => {
               </Box>
               <Box isRow mt="lg">
                 <Button onPress={() => setEditOverviewVisible(false)} variant="primary" mr="md" aria-label="save" >Save</Button>
-                <Button onPress={() => setEditOverviewVisible(false)} variant="text" aria-label="cancel" >Cancel</Button>
+                <Button onPress={() => setEditOverviewVisible(false)} variant="link" aria-label="cancel" >Cancel</Button>
               </Box>
             </Box>
           </OverlayPanel>
