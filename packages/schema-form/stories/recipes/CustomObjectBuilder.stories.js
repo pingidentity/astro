@@ -33,7 +33,7 @@ const ObjectFieldTemplate = ({
     {schema.additionalProperties && (
     <Button
       mb="sm"
-      variant="text"
+      variant="link"
       className="object-property-expand"
       onClick={onAddClick(schema)}
     >

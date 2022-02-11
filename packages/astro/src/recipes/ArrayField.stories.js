@@ -80,7 +80,7 @@ export const Default = () => {
         ),
       )}
       <Button
-        variant="text"
+        variant="link"
         onPress={onFieldAdd}
         role="button"
         title="Add Field Button"

@@ -31,7 +31,7 @@ export const Default = () => {
             isDisabled={isDisabled}
           />
           <Button
-            variant="text"
+            variant="link"
             mb="xs"
             ml="md"
             onPress={() => setIsOpen(prev => !prev)}
