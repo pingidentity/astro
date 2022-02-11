@@ -131,7 +131,7 @@ TextAreaField.defaultProps = {
   isReadOnly: false,
   isRequired: false,
   isUnresizable: false,
-  rows: 2,
+  rows: 4,
   status: statuses.DEFAULT,
 };
 
