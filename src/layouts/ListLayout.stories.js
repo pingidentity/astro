@@ -431,7 +431,7 @@ export const Default = () => {
             </Box>
             <Box isRow sx={buttonBarStyles} pl="lg">
               <Button variant="primary" onPress={viewItem} mr="md" aria-label="Save Button">Save</Button>
-              <Button variant="text" onPress={viewItem} aria-label="Cancel Button">Cancel</Button>
+              <Button variant="link" onPress={viewItem} aria-label="Cancel Button">Cancel</Button>
             </Box>
           </OverlayPanel>
       }
@@ -546,7 +546,7 @@ export const Default = () => {
           </Box>
           <Box isRow pl="lg" sx={buttonBarStyles}>
             <Button variant="primary" onPress={viewItem} mr="md" aria-label="Save Button">Save</Button>
-            <Button variant="text" onPress={viewItem} aria-label="Cancel Button">Cancel</Button>
+            <Button variant="link" onPress={viewItem} aria-label="Cancel Button">Cancel</Button>
           </Box>
         </OverlayPanel>
       }
@@ -628,7 +628,7 @@ export const Default = () => {
                     />
                   </Box>
                   <Box isRow sx={buttonBarStyles}>
-                    <Button variant="text" onPress={resetListItem} mr="md" aria-label="Cancel Button">Cancel</Button>
+                    <Button variant="link" onPress={resetListItem} mr="md" aria-label="Cancel Button">Cancel</Button>
                     <Button variant="primary" onPress={() => setActiveStep(2)} aria-label="Next Button">Next</Button>
                   </Box>
                 </Step>
@@ -677,7 +677,7 @@ export const Default = () => {
                     />
                   </Box>
                   <Box isRow sx={buttonBarStyles}>
-                    <Button variant="text" onPress={resetListItem} mr="md">Cancel</Button>
+                    <Button variant="link" onPress={resetListItem} mr="md">Cancel</Button>
                     <Button variant="primary" onPress={saveItem}>Save</Button>
                   </Box>
                 </Step>
@@ -699,10 +699,10 @@ export const Default = () => {
               Are you sure you want to delete this item?
             </Text>
             <Box isRow pt="lg" mr="auto">
-              <Button variant="danger" mr="md" onPress={deleteItem}>
+              <Button variant="critical" mr="md" onPress={deleteItem}>
                 Delete
               </Button>
-              <Button variant="text" onPress={() => setIsDeleting(false)}>
+              <Button variant="link" onPress={() => setIsDeleting(false)}>
                 Cancel
               </Button>
             </Box>

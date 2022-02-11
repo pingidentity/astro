@@ -75,12 +75,6 @@ export const TextIconButton = () => (
   </Button>
 );
 
-export const TextButton = () => (
-  <Button mb="sm" variant="text" aria-label="Add option">
-    <Text variant="label" color="active"> + Add Option</Text>
-  </Button>
-);
-
 export const InlineButton = () => (
   <Button mb="sm" variant="inline">
     Inline
