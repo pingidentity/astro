@@ -38,13 +38,13 @@ export const Default = (args) => {
 
   return (
     <Breadcrumbs onAction={onAction} {...args}>
-      <Item key="home" variant="text" data-id="home">
+      <Item key="home" variant="link" data-id="home">
         Home
       </Item>
-      <Item key="trendy" variant="text" data-id="trendy">
+      <Item key="trendy" variant="link" data-id="trendy">
         Trendy
       </Item>
-      <Item key="march 2020 assets" variant="text" data-id="march">
+      <Item key="march 2020 assets" variant="link" data-id="march">
         March 2020 Assets
       </Item>
     </Breadcrumbs>
