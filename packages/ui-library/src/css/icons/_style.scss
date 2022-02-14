@@ -31,6 +31,17 @@
     content: $icon-bell; 
   }
 }
+.icon-bell-alert {
+  &:before {
+    content: $icon-bell-alert-path1;  
+  }
+
+  &:after {
+    content: $icon-bell-alert-path2;  
+    margin-left: -1em;  
+    color: rgb(209, 26, 2);
+  }
+}
 .icon-star-outline {
   &:before {
     content: $icon-star-outline;
