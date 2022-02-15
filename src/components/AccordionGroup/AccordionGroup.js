@@ -25,6 +25,7 @@ const AccordionGroup = forwardRef((props, ref) => {
   const state = useTreeState(props);
   const accordionRef = useRef();
   const { accordionProps } = useAccordion(props, state, accordionRef);
+  delete accordionProps.onMouseDown;
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => accordionRef.current);
