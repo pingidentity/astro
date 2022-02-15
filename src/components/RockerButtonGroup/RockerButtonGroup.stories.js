@@ -86,15 +86,7 @@ export const withCustomSelectedColors = () => (
 );
 
 export const DisabledSingleButton = () => (
-  <RockerButtonGroup defaultSelectedKey="or">
-    <RockerButton name="and" key="and" isDisabled>And</RockerButton>
-    <RockerButton name="or" key="or">Or</RockerButton>
-    <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
-  </RockerButtonGroup>
-);
-
-export const DisabledRockerButtonGroup = () => (
-  <RockerButtonGroup isDisabled defaultSelectedKey="and">
+  <RockerButtonGroup defaultSelectedKey="or" disabledKeys={['and']}>
     <RockerButton name="and" key="and">And</RockerButton>
     <RockerButton name="or" key="or">Or</RockerButton>
     <RockerButton name="maybe" key="maybe">Maybe</RockerButton>

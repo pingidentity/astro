@@ -1,9 +1,9 @@
-import React, { useContext, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 import { useGridCell } from '@react-aria/grid';
 import { useHover } from '@react-aria/interactions';
-import { AccordionGridContext } from '../AccordionGridGroup/AccordionGridContext';
+import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import Box from '../Box';
 import { useStatusClasses } from '../../hooks';
 
@@ -15,7 +15,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
     isSelected,
   } = props;
 
-  const { state } = useContext(AccordionGridContext);
+  const { state } = useAccordionGridContext();
 
   const cellNode = [...item.childNodes][1];
 
