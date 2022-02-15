@@ -348,5 +348,6 @@ button.product-nav__menu-trigger {
     &:hover,
     &.active {
         color: $color-white;
+        text-decoration: none;
     }
 }

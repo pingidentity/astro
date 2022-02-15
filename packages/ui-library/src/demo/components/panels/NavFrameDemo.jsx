@@ -172,7 +172,7 @@ export default class NavFrameDemo extends React.Component {
                             title="Results"
                         />,
                         <NavMenu
-                            iconName="bell"
+                            iconName="bell-alert"
                             items={[
                                 {
                                     id: "cluster",
@@ -180,7 +180,7 @@ export default class NavFrameDemo extends React.Component {
                                     description: "The configuration has not been replicated or it has " +
                                         "changed since it was last replaced. " +
                                         "Visit Cluster management page to replicate the " +
-                                        "configuration to all servers in the cluster.",
+                                        "configuration to all servers in the cluster. ",
                                 },
                                 {
                                     id: "configuration",

@@ -6,7 +6,9 @@ $icomoon-font-family: "iconfont"; // KEEP - designates name of font
 @function add-backslash($icon-code) {
     @return unquote('"') + unquote(str-insert($icon-code,'\\', 1)) + unquote('"');
 }
-$icon-bell: add-backslash("e903");
+$icon-bell: add-backslash("e444");
+$icon-bell-alert-path1: add-backslash("e95f");
+$icon-bell-alert-path2: add-backslash("e960");
 $icon-star-outline: add-backslash("e902");
 $icon-star: add-backslash("e901");
 $icon-kebab: add-backslash("e900");
