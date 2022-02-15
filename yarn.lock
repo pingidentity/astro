@@ -18073,10 +18073,10 @@ highlight.js@^10.1.1, highlight.js@~10.4.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/highlight.js/-/highlight.js-10.4.0.tgz#ef3ce475e5dfa7a48484260b49ea242ddab823a0"
   integrity sha1-7zzkdeXfp6SEhCYLSeokLdq4I6A=
 
-highlight.js@^9.18.5:
-  version "9.18.5"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
-  integrity sha1-0Yo1mGfzeME41oGe38KorNXymCU=
+highlight.js@^11.4.0:
+  version "11.4.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/highlight.js/-/highlight.js-11.4.0.tgz#34ceadd49e1596ee5aba3d99346cdfd4845ee05a"
+  integrity sha1-NM6t1J4Vlu5auj2ZNGzf1IRe4Fo=
 
 highlight.js@~9.13.0:
   version "9.13.1"

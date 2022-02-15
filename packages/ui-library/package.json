@@ -31,7 +31,7 @@
     "fbjs": "^3.0.2",
     "fix-orientation": "0.0.2",
     "focus-trap-react": "^6.0.0",
-    "highlight.js": "^9.18.5",
+    "highlight.js": "^11.4.0",
     "libphonenumber-js": "^1.7.25",
     "lodash": "^4.17.21",
     "moment": "^2.22.2",
