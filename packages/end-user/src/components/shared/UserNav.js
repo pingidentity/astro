@@ -80,7 +80,7 @@ class UserNav extends React.Component {
     }
 
     render() {
-        const { tabs, selectedTabIndex, logo, user } = this.props;
+        const { tabs, selectedTabIndex, logo, signOutLabel, user } = this.props;
         const { menuOpen } = this.state;
         return (
             <div className="user-nav">
@@ -131,7 +131,7 @@ class UserNav extends React.Component {
                     <hr />
                     <Link
                         className="user-nav__mobile-sign-out"
-                        title="Sign Out"
+                        title={signOutLabel}
                         type="block"
                         onClick={this._handleSignOut}
                     />
@@ -141,7 +141,7 @@ class UserNav extends React.Component {
                         label={<UserInfo className="user-nav__info" {...user} />}
                         items={[
                             {
-                                label: "Sign Out",
+                                label: signOutLabel,
                                 onClick: this._handleSignOut,
                             }
                         ]}
@@ -157,6 +157,7 @@ class UserNav extends React.Component {
 UserNav.propTypes = {
     logo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     menu: PropTypes.bool,
+    signOutLabel: PropTypes.string,
     tabs: PropTypes.arrayOf(PropTypes.string),
     user: PropTypes.shape({}),
 };
@@ -164,6 +165,7 @@ UserNav.propTypes = {
 UserNav.defaultProps = {
     logo: false,
     menu: false,
+    signOutLabel: "Sign Out",
     tabs: [],
     onSignOut: () => { },
     user: {},
