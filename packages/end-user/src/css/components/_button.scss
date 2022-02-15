@@ -1,323 +1,338 @@
+@mixin primary {
+  color: $button-primary-text-color;
+  background: $button-primary-bg-color;
+  border-color: $button-primary-bg-color;
+
+  &:hover {
+    color: $button-primary-text-color;
+    background: $button-primary-hover-bg-color;
+    border-color: $button-primary-hover-bg-color;
+  }
+
+  &:active {
+    color: $button-primary-text-color;
+    background: $button-primary-bg-color;
+    border-color: $button-primary-bg-color;
+  }
+}
+
 .button {
-    @include button;
+  @include button;
 
-    position: relative;
+  position: relative;
 
-    border-radius: $button-radius;
+  border-radius: $button-radius;
 
-    &--primary {
-        color: $button-primary-text-color;
-        background: $button-primary-bg-color;
-        border-color: $button-primary-bg-color;
+  &.is-focused {
+    border-color: $button-primary-bg-color;
+    box-shadow: inset 0 0 0 1px $button-primary-bg-color,
+      inset 0 0 0 2px $color-white;
+  }
 
-        &:hover {
-            color: $button-primary-text-color;
-            background: $button-primary-hover-bg-color;
-            border-color: $button-primary-hover-bg-color;
-        }
+  &--primary-a11y {
+    @include primary;
+    background: $color-a11y-blue;
+  }
 
-        &:active {
-            color: $button-primary-text-color;
-            background: $button-primary-bg-color;
-            border-color: $button-primary-bg-color;
-        }
+  &--primary {
+    @include primary;
+  }
+
+  &--danger {
+    color: $color-white;
+    background: $color-critical-red;
+    border: $color-critical-red;
+
+    &:hover {
+      color: $color-white;
+      background: darken($color-critical-red, 5%);
     }
+  }
 
-    &--danger {
-        color: $color-white;
-        background: $color-critical-red;
-        border: $color-critical-red;
+  &--tertiary {
+    font-size: $button-tertiary-font-size;
+    padding: $spacing-xs $spacing-md;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: initial;
+  }
 
-        &:hover {
-            color: $color-white;
-            background: darken($color-critical-red, 5%);
-        }
+  &:disabled,
+  &--disabled {
+    opacity: $button-disabled-opacity;
+    cursor: default;
+  }
+
+  &--inline {
+    width: auto;
+    display: inline-block;
+    border-radius: 30px;
+    padding: 4px $spacing-sm;
+  }
+
+  &--inline-alt {
+    background-color: $color-active-blue;
+    color: #fff;
+    border-radius: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 0;
+
+    &:hover {
+      color: white;
     }
+  }
 
-    &--tertiary {
-        font-size: $button-tertiary-font-size;
-        padding: $spacing-xs $spacing-md;
+  &--inline {
+    &.edit,
+    &.plus,
+    &.delete,
+    &.remove,
+    &.minus,
+    &.prev,
+    &.clear,
+    &.next {
+      $size: 29px;
+
+      padding: 0;
+      height: $size;
+      width: $size;
+      min-height: auto;
+      text-align: center;
+      line-height: $size;
+
+      border-radius: 50%;
+
+      &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        font-family: $icon-font;
+        text-transform: none;
+      }
+
+      // if the icon button has text then adjust the spacing accordingly
+      &:not(:empty) {
         width: auto;
-        margin-left: auto;
-        margin-right: auto;
-        min-height: initial;
+        padding: 0 25px 0 43px;
+
+        &:before {
+          width: auto;
+          left: 18px;
+        }
+      }
     }
 
-    &:disabled, &--disabled {
-        opacity: $button-disabled-opacity;
-        cursor: default;
+    &.plus {
+      &:before {
+        content: "*";
+        font-size: 12px;
+      }
+    }
+    &.remove,
+    &.minus {
+      &:before {
+        content: "-";
+        font-size: 9px;
+      }
+    }
+    &.delete {
+      &:before {
+        content: "d";
+        font-size: 15px;
+      }
+    }
+    &.edit {
+      &:before {
+        content: "e";
+        font-size: 15px;
+      }
+    }
+    &.prev {
+      &:before {
+        content: "<";
+        font-size: 11px;
+      }
+    }
+    &.next {
+      &:before {
+        content: ">";
+        font-size: 11px;
+      }
     }
 
-    &--inline {
-        width: auto;
-        display: inline-block;
-        border-radius: 30px;
-        padding: 4px $spacing-sm;
+    &.small {
+      $size: 21px;
+      height: $size;
+      width: $size;
+      font-size: 13px;
+      margin: 0;
+      vertical-align: text-bottom;
+
+      &.edit {
+        &:before {
+          top: 5px;
+          font-size: 10px;
+        }
+      }
+      &.plus {
+        &:before {
+          top: 7px;
+          font-size: 10px;
+        }
+      }
+      &.remove,
+      &.minus {
+        &:before {
+          top: 10px;
+          left: 1px;
+          right: 0;
+          font-size: 9px;
+          width: auto;
+          height: 2px;
+          line-height: 2px;
+        }
+      }
     }
-
-    &--inline-alt {
-        background-color: $color-active-blue;
-        color: #fff;
-        border-radius: 30px;
-        padding-left: 15px;
-        padding-right: 15px;
-        border: 0;
-
-        &:hover {
-            color: white;
-        }
-    }
-
-    &--inline {
-        &.edit,
-        &.plus,
-        &.delete,
-        &.remove,
-        &.minus,
-        &.prev,
-        &.clear,
-        &.next {
-            $size: 29px;
-
-            padding: 0;
-            height: $size;
-            width: $size;
-            min-height: auto;
-            text-align: center;
-            line-height: $size;
-
-            border-radius: 50%;
-
-            &:before {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                font-family: $icon-font;
-                text-transform: none;
-            }
-
-            // if the icon button has text then adjust the spacing accordingly
-            &:not(:empty) {
-                width: auto;
-                padding: 0 25px 0 43px;
-
-                &:before {
-                    width: auto;
-                    left: 18px;
-                }
-            }
-        }
-
-        &.plus {
-            &:before {
-                content: '*';
-                font-size: 12px;
-            }
-        }
-        &.remove,
-        &.minus {
-            &:before {
-                content: '-';
-                font-size: 9px;
-            }
-        }
-        &.delete {
-            &:before {
-                content: 'd';
-                font-size: 15px;
-            }
-        }
-        &.edit {
-            &:before {
-                content: 'e';
-                font-size: 15px;
-            }
-        }
-        &.prev {
-            &:before {
-                content: '<';
-                font-size: 11px;
-            }
-        }
-        &.next {
-            &:before {
-                content: '>';
-                font-size: 11px;
-            }
-        }
-
-        &.small {
-            $size: 21px;
-            height: $size;
-            width: $size;
-            font-size: 13px;
-            margin: 0;
-            vertical-align: text-bottom;
-
-            &.edit {
-                &:before {
-                    top: 5px;
-                    font-size: 10px;
-                }
-            }
-            &.plus {
-                &:before {
-                    top: 7px;
-                    font-size: 10px;
-                }
-            }
-            &.remove,
-            &.minus {
-                &:before {
-                    top: 10px;
-                    left: 1px;
-                    right: 0;
-                    font-size: 9px;
-                    width: auto;
-                    height: 2px;
-                    line-height: 2px;
-                }
-            }
-        }
-    }
+  }
 }
 
 .button--loading-ellipsis {
-    $color: $color-white;
-    $size: 8px;
-    $spacing: 6px;
-    $timing: 1s ease-out infinite;
+  $color: $color-white;
+  $size: 8px;
+  $spacing: 6px;
+  $timing: 1s ease-out infinite;
 
-    position: relative;
-    display: inline-block;
-    width: 3 * $size + 2 * $spacing;
+  position: relative;
+  display: inline-block;
+  width: 3 * $size + 2 * $spacing;
+  height: $size;
+
+  > span,
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
     height: $size;
+    width: $size;
+    background-color: $color;
+    opacity: 0;
 
-    > span,
-    &:before,
-    &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        height: $size;
-        width: $size;
-        background-color: $color;
-        opacity: 0;
+    border-radius: ceil($size/2);
+  }
 
-        border-radius: ceil($size/2);
+  @include keyframes(pulse-1) {
+    0% {
+      opacity: 0;
     }
-
-    @include keyframes(pulse-1) {
-        0% {
-            opacity: 0;
-        }
-        30% {
-            opacity: 1;
-        }
-        60% {
-            opacity: 0;
-        }
+    30% {
+      opacity: 1;
     }
-
-    @include keyframes(pulse-2) {
-        0% {
-            opacity: 0;
-        }
-        20% {
-            opacity: 0;
-        }
-        50% {
-            opacity: 1;
-        }
-        80% {
-            opacity: 0;
-        }
+    60% {
+      opacity: 0;
     }
+  }
 
-    @include keyframes(pulse-3) {
-        0% {
-            opacity: 0;
-        }
-        40% {
-            opacity: 0;
-        }
-        70% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
+  @include keyframes(pulse-2) {
+    0% {
+      opacity: 0;
     }
-
-    span {
-        left: 0;
-
-        animation: pulse-1 $timing;
+    20% {
+      opacity: 0;
     }
-    &:before {
-        left: $size + $spacing;
-
-        animation: pulse-2 $timing;
+    50% {
+      opacity: 1;
     }
-    &:after {
-        left: 2*($size + $spacing);
-
-        animation: pulse-3 $timing;
+    80% {
+      opacity: 0;
     }
+  }
+
+  @include keyframes(pulse-3) {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  span {
+    left: 0;
+
+    animation: pulse-1 $timing;
+  }
+  &:before {
+    left: $size + $spacing;
+
+    animation: pulse-2 $timing;
+  }
+  &:after {
+    left: 2 * ($size + $spacing);
+
+    animation: pulse-3 $timing;
+  }
 }
 
 .button--loading {
+  .icon-ellipsis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+  &.loading {
+    color: transparent !important;
+    cursor: default;
+
     .icon-ellipsis {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
+      display: block;
     }
-    &.loading {
-        color: transparent !important;
-        cursor: default;
+    &.primary {
+      &:hover {
+        background-color: $color-active-blue;
+      }
+    }
+    &:hover {
+      color: transparent;
+    }
+  }
 
-        .icon-ellipsis {
-            display: block;
-        }
-        &.primary {
-            &:hover {
-                background-color: $color-active-blue;
-            }
-        }
-        &:hover {
-            color: transparent;
-        }
+  &.primary,
+  &.success,
+  &.cancel {
+    .icon-ellipsis {
+      span,
+      &:before,
+      &:after {
+        background-color: $color-white;
+      }
     }
-
-    &.primary,
-    &.success,
-    &.cancel {
-        .icon-ellipsis {
-            span,
-            &:before,
-            &:after {
-                background-color: $color-white;
-            }
-        }
-    }
+  }
 }
 // Consolidates styles for centered group of buttons with optional cancel link
 .button-group {
-    text-align: center;
-    white-space: nowrap;
-    a {
-        text-transform: none;
-        &.secondary {
-            color: $color-rhino;
-        }
-        &.cancel {
-            display: inline-block;
-            font-weight: normal;
-            font-size: $font-size-md;
-        }
+  text-align: center;
+  white-space: nowrap;
+  a {
+    text-transform: none;
+    &.secondary {
+      color: $color-rhino;
     }
+    &.cancel {
+      display: inline-block;
+      font-weight: normal;
+      font-size: $font-size-md;
+    }
+  }
 }
-

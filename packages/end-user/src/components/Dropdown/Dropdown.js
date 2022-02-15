@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { FocusRing } from '@react-aria/focus';
 import FieldMessage from '../FieldMessage'
 
 import { inStateContainer } from '../../util/StateContainer';
@@ -62,6 +63,7 @@ export const StatelessDropdown = ({
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
         }
+          <FocusRing focusRingClass="is-focused">
             <select
                 id={id}
                 name={id}
@@ -80,6 +82,7 @@ export const StatelessDropdown = ({
                     </option>
                 ))}
             </select>
+          </FocusRing>
             {children}
             {fieldMessage && (
                 <FieldMessage

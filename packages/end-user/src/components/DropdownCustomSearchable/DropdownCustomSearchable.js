@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import _noop from 'lodash';
+import { FocusRing } from '@react-aria/focus';
 import TextInput from '../TextInput';
 import FieldMessage from '../FieldMessage';
 
@@ -69,16 +70,18 @@ const DropdownCustomSearchable = ({
                     ? <div className={iconClassNames} key="type-icon"></div>
                     : null
             }
-            <input
-                className={inputClassNames}
-                id={id}
-                name={id}
-                placeholder={placeholder}
-                type="text"
-                value={getLabel(value)}
-                onClick={doOpen}
-                readOnly
-            />
+            <FocusRing focusRingClass="is-focused">
+              <input
+                  className={inputClassNames}
+                  id={id}
+                  name={id}
+                  placeholder={placeholder}
+                  type="text"
+                  value={getLabel(value)}
+                  onClick={doOpen}
+                  readOnly
+              />
+            </FocusRing>
             {children}
             {open && (
                 <ul className="dropdown__list">

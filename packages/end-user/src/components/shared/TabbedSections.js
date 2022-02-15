@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-
 import React from 'react';
+import PropTypes from 'prop-types';
+import { FocusRing } from '@react-aria/focus';
 
 /**
  * @callback TabbedSections~onValueChange
@@ -102,13 +102,16 @@ const TabbedSectionChild = (props) => {
     };
 
     return (
-        <li
-            className={props.className}
-            data-id={props["data-id"]}
-            onClick={_handleClick}
-        >
-            {props.content}
-        </li>
+        <FocusRing focusRingClass="is-focused">
+          <li
+              className={props.className}
+              data-id={props["data-id"]}
+              onClick={_handleClick}
+              role="tab"
+          >
+              {props.content}
+          </li>
+        </FocusRing>
     );
 };
 
@@ -128,7 +131,7 @@ const Tabs = ({
 }) => {
     return (
         <div className="tabs">
-            <ul data-id="tabs">
+            <ul data-id="tabs" role="tablist">
                 {
                     tabs.map((tab, index) => (
                         <TabbedSectionChild

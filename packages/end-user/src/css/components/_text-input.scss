@@ -1,113 +1,123 @@
 @mixin input-icon {
-    font-family: $icon-font;
-    font-size: 16px;
-    line-height: 16px;
-    text-transform: none;
-    position: relative;
-    width: 100%;
+  font-family: $icon-font;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: none;
+  position: relative;
+  width: 100%;
 
-    &::before {
-        position: absolute;
-        right: $spacing-md;
-        top: $spacing-md;
-    }
+  &::before {
+    position: absolute;
+    right: $spacing-md;
+    top: $spacing-md;
+  }
 }
 
 .text-input {
-    @extend %input-text;
-    @extend %input-box;
+  @extend %input-text;
+  @extend %input-box;
 
-    margin: 0px;
+  margin: 0px;
 
-    &:focus {
-        border-color: $input-focus-border-color;
+  &::placeholder {
+    @extend %placeholder-text;
+  }
+
+  &.is-focused {
+    border: 1px solid $color-a11y-blue;
+    box-shadow: 0px 0px 5px rgba(88, 115, 189, 0.75);
+  }
+
+  &--error,
+  &--error:focus {
+    border-color: $color-critical-red;
+    background-color: $color-white;
+    padding-right: $spacing-xl;
+  }
+
+  &--success {
+    border-color: $color-success-green;
+    background-color: $color-white;
+    padding-right: $spacing-xl;
+  }
+
+  &--primary {
+    @include primary-input-text;
+
+    padding: $spacing-xs + 1px $spacing-sm $spacing-xs - 2px $spacing-sm;
+    text-align: center;
+
+    &.text-input--error {
+      padding-right: $spacing-sm;
+      background-image: none;
     }
 
     &::placeholder {
-        @extend %placeholder-text;
+      @include primary-input-text;
+      color: $input-placeholder-color;
     }
+  }
 
-    &--error,
-    &--error:focus {
-        border-color: $color-critical-red;
-        background-color: $color-white;
-        padding-right: $spacing-xl;
-    }
-
-    &--success {
-        border-color: $color-success-green;
-        background-color: $color-white;
-        padding-right: $spacing-xl;
-    }
-
-    &--primary {
-        @include primary-input-text;
-
-        padding: $spacing-xs + 1px $spacing-sm $spacing-xs - 2px $spacing-sm;
-        text-align: center;
-
-        &.text-input--error {
-            padding-right: $spacing-sm;
-            background-image: none;
-        }
-
-        &::placeholder {
-            @include primary-input-text;
-            color: $input-placeholder-color;
-        }
-    }
-
-    &--dropdown-search {
-        border-width: 0 0 1px 0;
-        border-color: $color-neutral-70;
-    }
-
-    &:focus {
-        border-color: $input-focus-border-color;
-    }
+  &--dropdown-search {
+    border-width: 0 0 1px 0;
+    border-color: $color-neutral-70;
+  }
 }
 
 .text-input-container {
-    &--error,
-    &--success {
-        position: relative;
-        padding-right: $spacing-xl;
-    }
+  &--error,
+  &--success {
+    position: relative;
+    padding-right: $spacing-xl;
+  }
 }
 
 .text-input__icon {
-    @include input-icon();
-    right: 0;
+  @include input-icon();
+  right: 0;
 
-    &--error {
-        &::before {
-            content: $pingicon-error-triangle;
-            color: $color-critical-red;
-        }
+  &--error {
+    &::before {
+      content: $pingicon-error-triangle;
+      color: $color-critical-red;
     }
+  }
 
-    &--success {
-        &::before {
-            content: $pingicon-success-round;
-            color: $color-success-green;
-        }
+  &--success {
+    &::before {
+      content: $pingicon-success-round;
+      color: $color-success-green;
     }
+  }
 
-    &--hidden {
-        cursor: pointer;
-        &::before {
-            content: $pingicon-view-hidden;
-        }
+  &--hidden {
+    cursor: pointer;
+    &::before {
+      content: $pingicon-view-hidden;
     }
+  }
 
-    &--view-hidden {
-        cursor: pointer;
-        &::before {
-            content: $pingicon-view;
-        }
+  &--view-hidden {
+    cursor: pointer;
+    &::before {
+      content: $pingicon-view;
     }
+  }
+
+  &--action {
+    position: absolute;
+    top: 0;
+    border: 1px solid transparent;
+    width: 44px;
+    height: 44px;
+
+    &.is-focused {
+      border: 1px solid $color-a11y-blue;
+      @include focus;
+    }
+  }
 }
 
 .text-input__icon ~ .text-input__icon::before {
-    margin-right: $spacing-lg;
+  margin-right: $spacing-lg;
 }

@@ -50,6 +50,13 @@ const [loading, setLoading] = useState(false);
         </Button>
         <br/>
         <Button
+            type={Button.ButtonTypes.PRIMARY_A11Y}
+            disabled={boolean('Disabled', false)}
+        >
+            Primary A11y Button
+        </Button>
+        <br/>
+        <Button
             type={Button.ButtonTypes.PRIMARY}
             disabled={boolean('Disabled', false)}
             loading={loading}

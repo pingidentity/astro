@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from "underscore";
+import { FocusRing } from '@react-aria/focus';
 
 import FieldMessage from '../FieldMessage';
 import Markdown from '../Markdown';
@@ -44,13 +45,15 @@ const Checkbox = ({
     return (
         <div className="checkbox-container">
             <label className={classNames} htmlFor={id} data-id={dataId}>
-                <input
-                    type="checkbox"
-                    className="checkbox__input"
-                    id={id}
-                    defaultChecked={checked}
-                    onChange={onChange}
-                />
+                <FocusRing focusRingClass="is-focused">
+                  <input
+                      type="checkbox"
+                      className="checkbox__input"
+                      id={id}
+                      defaultChecked={checked}
+                      onChange={onChange}
+                  />
+                </FocusRing>
                 <span className="checkbox__standin" />
                 <span className="checkbox__label">
                     {status !== statuses.DEFAULT && <span className={iconClassNames} />}

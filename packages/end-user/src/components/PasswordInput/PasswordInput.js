@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import { FocusRing } from '@react-aria/focus';
 import TextInput from '../TextInput';
-import FieldMessage from '../FieldMessage'
 
 /**
  * @enum {string}
@@ -37,20 +37,33 @@ const PasswordInput = ({
     onKeyDown,
     onMouseDown,
 }) => {
+    const isTriggerKey = key => [" ", "Enter"].includes(key);
     const [isHidden, setIsHidden] = useState(true);
     const classNames = classnames('text-input--pasword', className);
     const actionIconClassNames = classnames('text-input__icon', 'text-input__icon--action', {
         'text-input__icon--hidden': isHidden,
         'text-input__icon--view-hidden': !isHidden,
     });
+
+    const handleKeyPress = (event) => {
+      if (isTriggerKey(event.key)) {
+        event.preventDefault();
+        setIsHidden(!isHidden);
+      }
+    }
+
     const actionComponent = (
+      <FocusRing focusRingClass="is-focused">
         <div
             role="button"
             aria-pressed={!isHidden}
             className={actionIconClassNames}
             onClick={() => setIsHidden(!isHidden)}
+            onKeyPress={handleKeyPress}
             key="password-icon"
+            tabIndex={0}
         />
+      </FocusRing>
     );
 
     return (

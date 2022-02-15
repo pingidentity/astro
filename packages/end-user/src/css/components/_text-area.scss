@@ -1,30 +1,27 @@
 .text-area {
-    @extend %input-text;
-    @extend %input-box;
+  @extend %input-text;
+  @extend %input-box;
 
-    margin: 0px;
+  margin: 0px;
 
-    &:focus {
-        border-color: $input-focus-border-color;
-    }
+  &::placeholder {
+    @extend %placeholder-text;
+  }
 
-    &::placeholder {
-        @extend %placeholder-text;
-    }
+  &--error,
+  &--error:focus {
+    border-color: $color-critical-red;
+    background-color: $color-white;
+    padding-right: $spacing-xl;
+  }
 
-    &--error, &--error:focus {
-        border-color: $color-critical-red;
-        background-color: $color-white;
-        padding-right: $spacing-xl;
-    }
+  &--success {
+    background-color: $color-white;
+    border-color: $color-success-green;
+    padding-right: $spacing-xl;
+  }
 
-    &--success {
-        background-color: $color-white;
-        border-color: $color-success-green;
-        padding-right: $spacing-xl;
-    }
-
-    &--no-resize {
-        resize: none;
-    }
+  &--no-resize {
+    resize: none;
+  }
 }
