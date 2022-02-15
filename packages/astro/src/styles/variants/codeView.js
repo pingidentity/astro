@@ -1,5 +1,3 @@
-import 'a11y-syntax-highlighting/dist/prism/a11y-light.min.css';
-
 const wrapper = {
   bg: 'accent.99',
   border: '1px solid',

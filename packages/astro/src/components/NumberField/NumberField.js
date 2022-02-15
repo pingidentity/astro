@@ -6,6 +6,7 @@ import { useNumberField } from '@react-aria/numberfield';
 import { useNumberFieldState } from '@react-stately/numberfield';
 import { useLocale } from '@react-aria/i18n';
 import { mergeProps } from '@react-aria/utils';
+import omit from 'lodash/omit';
 import statuses from '../../utils/devUtils/constants/statuses';
 import {
   Box,
@@ -72,7 +73,7 @@ const NumberField = forwardRef((props, ref) => {
             // we don't want to merge this props, we want to
             // overwrite them like defaultValue, value, ect.
             {...fieldControlProps}
-            {...inputProps}
+            {...omit(inputProps, 'name')}
           />
           {ControlArrows}
         </Box>

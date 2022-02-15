@@ -1,6 +1,6 @@
 {
   "name": "@pingux/end-user",
-  "version": "2.0.2",
+  "version": "2.0.3-alpha.5",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
@@ -15,13 +15,14 @@
     "lib"
   ],
   "dependencies": {
+    "@react-aria/focus": "^3.5.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/runtime": "^7.4.2",
     "@babel/runtime-corejs3": "^7.4.2",
     "@popperjs/core": "^2.5.3",
     "classnames": "^2.2.6",
     "core-js": "^3.0.1",
-    "fbjs": "^1.0.0",
+    "fbjs": "^3.0.2",
     "libphonenumber-js": "^1.7.49",
     "popper.js": "^1.15.0",
     "raf": "^3.4.1",
@@ -96,8 +97,8 @@
     "pre-commit": "^1.2.2",
     "prop-types": "^15.6.0",
     "raw-loader": "^0.5.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1",
     "react-router": "^4.2.0",
     "recompose": "^0.27.1",
     "sass-loader": "^10.2.0",
@@ -118,8 +119,8 @@
     "zxcvbn": "^4.4.2"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1"
   },
   "repository": {
     "type": "git",

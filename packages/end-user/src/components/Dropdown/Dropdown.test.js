@@ -29,8 +29,7 @@ describe('Dropdown', () => {
             ],
         });
 
-        const items = wrapper.find(`div[data-id="${defaultProps['data-id']}"] > select > option`);
-
+        const items = wrapper.find(`select > option`);
         expect(items.length).toEqual(2);
     });
 

@@ -312,6 +312,11 @@ const helpHint = {
   ml: '5px',
   maxWidth: '13px',
   maxHeight: '14px',
+  borderRadius: '5.5px',
+  'svg': {
+    'height': '100%',
+    mb: 0.75,
+  },
   'path': {
     fill: 'neutral.20',
   },
@@ -384,7 +389,7 @@ const chipDeleteButton = {
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
-  ml: 'xs',
+  mx: '3px !important',
   p: 0,
   width: 14,
   '&.is-focused, &.is-hovered': {
@@ -401,6 +406,7 @@ const chipDeleteButton = {
 
 const rocker = {
   ...base,
+  border: '0',
   display: 'inline-flex',
   height: '26px',
   lineHeight: '26px',
@@ -412,6 +418,7 @@ const rocker = {
   textTransform: 'uppercase',
   bg: 'accent.95',
   '&.is-selected': {
+    bg: 'active',
     color: 'white',
   },
   '&.is-focused': {
@@ -505,6 +512,31 @@ const expandableRow = {
   },
 };
 
+const environmentBreadcrumb = {
+  current: {
+    ...text,
+    color: 'neutral.30',
+    fontSize: 'md',
+    fontWeight: 1,
+    '&.is-hovered, &.is-focused': {
+      color: 'active',
+      textDecoration: 'none',
+      boxShadow: 'none',
+    },
+    '&.is-pressed': {
+      color: 'accent.20',
+      textDecoration: 'none',
+    },
+  },
+  selectItem: {
+    ...text,
+    color: 'neutral.10',
+    fontSize: 'md',
+    fontWeight: 0,
+    justifyContent: 'start',
+  },
+};
+
 const fileInputField = {
   background: 'none',
   cursor: 'pointer',
@@ -555,6 +587,88 @@ const tooltipInline = {
   },
 };
 
+const defaultVariant = {
+  ...base,
+  bg: 'white',
+  border: '1px solid',
+  borderColor: 'active',
+  '&.is-hovered': {
+    ...defaultHover,
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const filter = {
+  ...defaultVariant,
+  px: 'sm',
+  borderColor: 'neutral.80',
+  height: 40,
+  color: 'active',
+  display: 'flex',
+};
+
+const colorBlock = {
+  bg: 'neutral.95',
+  border: '1px solid',
+  borderColor: 'neutral.90',
+  borderRadius: 10,
+  outline: 'none',
+  cursor: 'pointer',
+  width: 150,
+  minHeight: 40,
+  p: '5px 15px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  '&.is-hovered': {
+    bg: 'neutral.80',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-pressed': {
+    bg: 'neutral.60',
+    borderColor: 'neutral.60',
+  },
+  '& span': {
+    color: 'text.primary',
+    textAlign: 'left',
+  },
+  '&>div': {
+    alignItems: 'baseline',
+  },
+  '&>svg': {
+    color: 'text.secondary',
+    fill: 'text.secondary',
+  },
+
+  '&.is-configured': {
+    bg: 'active',
+    borderColor: 'active',
+    '& span': {
+      color: 'white',
+    },
+    '&>svg': {
+      color: 'white',
+      fill: 'white',
+    },
+  },
+  '&.is-configured.is-hovered': {
+    bg: 'accent.40',
+    borderColor: 'accent.40',
+  },
+  '&.is-configured.is-pressed': {
+    bg: 'accent.20',
+    borderColor: 'accent.20',
+  },
+};
+
+
 export default {
   accordionHeader,
   chipDeleteButton,
@@ -579,8 +693,10 @@ export default {
       ...defaultFocus,
     },
   },
+  environmentBreadcrumb,
   expandableRow,
   fileInputField,
+  filter,
   iconButton,
   imageUpload,
   inline,
@@ -601,4 +717,5 @@ export default {
   tooltipChip,
   tooltipIconButton,
   tooltipInline,
+  colorBlock,
 };

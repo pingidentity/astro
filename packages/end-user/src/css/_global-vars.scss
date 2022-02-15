@@ -5,13 +5,12 @@
 $use-typekit: true !default;
 
 @mixin importTypekit($should-import: true) {
-    @if $should-import {
-        @import url('https://use.typekit.net/nxh5mrb.css');
-    }
+  @if $should-import {
+    @import url("https://use.typekit.net/nxh5mrb.css");
+  }
 }
 
 @include importTypekit($use-typekit);
-
 
 // SPACING SCALE
 $spacing-base: 10px;
@@ -22,11 +21,13 @@ $spacing-lg: $spacing-base * 2.5;
 $spacing-xl: $spacing-base * 4;
 $spacing-xx: $spacing-base * 6.5;
 
-$layout-header-height: 64px;    // used in miltiple includes
-$layout-nav-width: 190px;       // used in miltiple include
+$layout-header-height: 64px; // used in miltiple includes
+$layout-nav-width: 190px; // used in miltiple include
 $line-height-default: 1.3em;
 
 // COLOR TOKENS
+$color-a11y-blue: #2066a2;
+$color-a11y-black: #253746;
 $color-astro-blue: #2996cc;
 $color-active-blue: #277ba5;
 $color-active-blue-highlighted: #3d88ae;
@@ -71,7 +72,6 @@ $color-accent-neutral-90: #f0f6f7;
 
 // SEMANTIC COLORS
 $color-active-blue: #2996cc;
-$color-active-blue-highlighted: tint($color-active-blue, 10%);
 $color-critical-red: #a31300;
 $color-critical-red-highlighted: tint($color-critical-red, 10%);
 $color-light-red: #ffe8e8;
@@ -144,30 +144,30 @@ $color-neutral-100: #fff;
 $breakpoint-mobile: 480px;
 
 // FONTS
-$font-default: 'proxima-nova', sans-serif;
+$font-default: "proxima-nova", sans-serif;
 
 @mixin font-pn-regular {
-    font-weight: 400;
-    font-style: normal;
-    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "proxima-nova", "helvetica", "arial", sans-serif;
 }
 
 @mixin font-pn-light {
-    font-weight: 300;
-    font-style: normal;
-    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-family: "proxima-nova", "helvetica", "arial", sans-serif;
 }
 
 @mixin font-pn-semibold {
-    font-weight: 600;
-    font-style: normal;
-    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-family: "proxima-nova", "helvetica", "arial", sans-serif;
 }
 
 @mixin font-pn-bold {
-    font-weight: 700;
-    font-style: normal;
-    font-family: 'proxima-nova', 'helvetica', 'arial', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-family: "proxima-nova", "helvetica", "arial", sans-serif;
 }
 
 // FONT SIZES
@@ -182,36 +182,36 @@ $font-size-xx: 36px;
 $shadow-overlay: 0 1px 4px 1px rgba($color-neutral-30, 0.35);
 
 // Z-INDEXES
-$zindex__modal:          80;
-$zindex__nav--primary:   70;
-$zindex__page-overlay:   60;
-$zindex__message:        50;
-$zindex__popover:        40;
-$zindex__menu:           30;
+$zindex__modal: 80;
+$zindex__nav--primary: 70;
+$zindex__page-overlay: 60;
+$zindex__message: 50;
+$zindex__popover: 40;
+$zindex__menu: 30;
 $zindex__fixed-controls: 20;
-$zindex__elevated:       10;
-$zindex__base:            0;
-$zindex__hidden:        -10;
+$zindex__elevated: 10;
+$zindex__base: 0;
+$zindex__hidden: -10;
 
-$img-path: '../../icons/';
+$img-path: "../../icons/";
 
 @mixin message-button-css {
-    button,
-    .button {
-        border-color: $color-white;
-        background-color: transparent;
-        color: $color-white;
-        vertical-align: baseline;
-    }
+  button,
+  .button {
+    border-color: $color-white;
+    background-color: transparent;
+    color: $color-white;
+    vertical-align: baseline;
+  }
 }
 
-@mixin message-primary-button-css ($color) {
-    .button,
-    button {
-        &.inline.primary {
-            border: 1px solid $color-white;
-            background-color: $color-white;
-            color: $color;
-        }
+@mixin message-primary-button-css($color) {
+  .button,
+  button {
+    &.inline.primary {
+      border: 1px solid $color-white;
+      background-color: $color-white;
+      color: $color;
     }
+  }
 }

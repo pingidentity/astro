@@ -1,10 +1,9 @@
 import React from 'react';
 import AddCircleIcon from 'mdi-react/AddCircleIcon';
-import Box from '../Box';
-import Button from '.';
-import Icon from '../Icon';
-import Text from '../Text';
+import CreateIcon from 'mdi-react/CreateIcon';
+import FilterIcon from 'mdi-react/FilterIcon';
 import { buttonVariants } from '../../utils/devUtils/constants/variants';
+import { Box, Button, Icon, SearchField, Text } from '../../index';
 
 // removing the iconButton variants from this story.
 const variants = buttonVariants;
@@ -48,6 +47,13 @@ export default {
       },
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 export const Default = args => (
@@ -69,14 +75,43 @@ export const TextIconButton = () => (
   </Button>
 );
 
-export const TextButton = () => (
-  <Button mb="sm" variant="text" aria-label="Add option">
-    <Text variant="label" color="active"> + Add Option</Text>
-  </Button>
-);
-
 export const InlineButton = () => (
   <Button mb="sm" variant="inline">
     Inline
   </Button>
+);
+
+export const ColorBlockButton = (args) => {
+  // Change `isConfigured` property in storybook controls
+  const { isConfigured, ...props } = args;
+
+  return (
+    <Button {...props} variant="colorBlock" className={isConfigured ? 'is-configured' : ''}>
+      <Box>
+        <Text variant="buttonTitle">Title</Text>
+        <Text variant="buttonSubtitle">Info</Text>
+      </Box>
+      <Icon icon={CreateIcon} />
+    </Button>
+  );
+};
+
+ColorBlockButton.story = {
+  argTypes: {
+    isConfigured: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
+  },
+};
+
+export const FilterButton = () => (
+  <Box p="xx" isRow gap="md">
+    <SearchField aria-label="search items" />
+    <Button variant="filter" aria-label="filter button">
+      <Icon icon={FilterIcon} />
+    </Button>
+  </Box>
 );

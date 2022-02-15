@@ -4,6 +4,8 @@ import TextField from '.';
 import { modes as labelModes } from '../Label/constants';
 import statuses from '../../utils/devUtils/constants/statuses.js';
 import Box from '../Box';
+import useCopyToClipboard from '../../hooks/useCopyToClipboard';
+import CopyButton from '../CopyText/CopyButton';
 
 export default {
   title: 'Form/TextField',
@@ -181,3 +183,58 @@ export const MaxLength = () => (
     maxLength={9}
   />
 );
+
+export const WithSlots = () => {
+  const [addressesValue, setAddressesValue] = useState(
+    "[{ 'type': 'work', 'streetAddress': 'San Antonio MI 47096' },{ 'type': 'home', 'streetAddress': 'Santa Rosa MN 98804' }]",
+  );
+  const [jsonValue, setJsonValue] = useState(
+    "[{ 'status': 'inactive', 'subject': 'example@pingidentity.com' },{ 'status': 'active', 'subject': 'john@pingidentity.com' }]",
+  );
+  const copyAddressesToClipboard = useCopyToClipboard(addressesValue);
+  const copyJsonToClipboard = useCopyToClipboard(jsonValue);
+  const buttonSx = {
+    position: 'absolute',
+    right: 0,
+    top: '5px',
+  };
+  const containerSx = { sx: { '& input': { paddingRight: '40px' } } };
+
+  return (
+    <>
+      <TextField
+        label="Multiple Addresses"
+        labelMode="float"
+        onChange={e => setAddressesValue(e.target.value)}
+        value={addressesValue}
+        containerProps={containerSx}
+        slots={{
+          inContainer: (
+            <CopyButton
+              onPress={copyAddressesToClipboard}
+              sx={buttonSx}
+              iconProps={{ sx: { path: { fill: 'active' } } }}
+            />
+          ),
+        }}
+        mb={30}
+      />
+      <TextField
+        label="Example JSON"
+        labelMode="float"
+        onChange={e => setJsonValue(e.target.value)}
+        value={jsonValue}
+        containerProps={containerSx}
+        slots={{
+          inContainer: (
+            <CopyButton
+              onPress={copyJsonToClipboard}
+              sx={buttonSx}
+              iconProps={{ sx: { path: { fill: 'active' } } }}
+            />
+          ),
+        }}
+      />
+    </>
+  );
+};

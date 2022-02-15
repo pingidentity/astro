@@ -1,12 +1,12 @@
-import React, { useContext, forwardRef } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import { mergeProps } from '@react-aria/utils';
 import { useFocusRing } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 import { useGridCell } from '@react-aria/grid';
-import { useHover, usePress } from '@react-aria/interactions';
+import { useHover } from '@react-aria/interactions';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { AccordionGridContext } from '../AccordionGridGroup/AccordionGridContext';
+import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import Box from '../Box';
 import Icon from '../Icon';
 import { useStatusClasses } from '../../hooks';
@@ -16,20 +16,22 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     item,
     className,
     children,
-    key,
     isSelected,
     ...others
   } = props;
 
-  const { state } = useContext(AccordionGridContext);
+  const { state } = useAccordionGridContext();
+  const cellRef = useRef();
 
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => cellRef.current);
 
   const cellNode = [...item.childNodes][0];
 
-  const { gridCellProps } = useGridCell({
+  const { gridCellProps, isPressed } = useGridCell({
     node: cellNode,
     focusMode: 'cell',
-  }, state, ref);
+  }, state, cellRef);
 
   const { hoverProps, isHovered } = useHover({});
 
@@ -39,17 +41,11 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
   const { focusProps, isFocusVisible } = useFocusRing();
 
-  const { pressProps, isPressed } = usePress({
-    ref,
-    isPressed: item.props.isPressed,
-  });
-
   const mergedProps = mergeProps(
     gridCellProps,
     hoverProps,
     focusWithinProps,
     focusProps,
-    pressProps,
   );
 
   const { classNames } = useStatusClasses(className, {
@@ -64,9 +60,8 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
   return (
     <Box
       as="div"
-      ref={ref}
+      ref={cellRef}
       {...mergedProps}
-      role="gridcell"
       variant="accordion.accordionGridHeader"
       isFocused={isFocusVisible}
       isSelected={isSelected}
@@ -87,8 +82,8 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 AccordionGridItemHeader.propTypes = {
   'aria-label': PropTypes.string,
   isSelected: PropTypes.bool,
-  key: PropTypes.string,
   item: PropTypes.shape({
+    key: PropTypes.string,
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
     props: PropTypes.shape({
       isPressed: PropTypes.bool,

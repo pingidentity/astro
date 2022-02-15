@@ -50,8 +50,8 @@ test('buttonGroup is not disabled by default', () => {
   });
 });
 
-test('each button is disabled when isDisabled prop is passed to RockerButtonGroup', () => {
-  getComponent({ isDisabled: true });
+test('rocker button is disabled when its key is included in disabledKeys', () => {
+  getComponent({ disabledKeys: testButtons.map(button => button.key) });
   testButtons.forEach((button) => {
     const buttonKey = screen.getByText(button.key);
     expect(buttonKey).toHaveClass('is-disabled');
@@ -66,18 +66,13 @@ test('rockerButton renders selectedStyles prop when selected', () => {
 
 test('selected button can be changed by keyboard interaction', () => {
   getComponent();
-  // FIXME: Keyboard events must fire twice tests - unsure why at this time.
-  userEvent.tab();
   userEvent.tab();
   const button0 = screen.getByText(testButtons[0].key);
   expect(button0).toHaveClass('is-selected');
   const button1 = screen.getByText(testButtons[1].key);
   expect(button1).not.toHaveClass('is-selected');
 
-  userEvent.tab();
-  userEvent.tab();
   fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
-  fireEvent.keyDown(screen.getByText(testButtons[1].key), { key: 'ArrowRight', code: 'ArrowRight' });
   expect(screen.getByText(testButtons[1].key)).toHaveClass('is-selected');
   expect(screen.getByText(testButtons[0].key)).not.toHaveClass('is-selected');
 });

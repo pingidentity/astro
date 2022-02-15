@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { noop } from 'underscore';
+import { FocusRing } from '@react-aria/focus';
 import Button from '../Button';
 import SocialLogos from '../../util/SocialLogo';
 
@@ -117,29 +118,32 @@ const UnstyledSocialButton = ({
     return (
         <div className={className}>
             {!image ? (
-                <Button
-                    data-id={dataId}
-                    disabled={disabled}
-                    render={({ children }) => (
-                        <button
-                            className="social-button__button"
-                            style={style}
-                            onClick={onClick}
-                            data-id={dataId}
-                            disabled={disabled}
-                            type={isSubmit ? 'submit' : 'button'}
-                        >
-                            {children}
-                        </button>
-                    )}
-                >
-                    <div className="social-button__container">
-                        <div className="social-button__logo">{logo}</div>
-                        <div className="social-button__label">{label}</div>
-                        <div className="social-button__spacer" />
-                    </div>
-                </Button>
+                  <Button
+                      data-id={dataId}
+                      disabled={disabled}
+                      render={({ children }) => (
+                        <FocusRing focusRingClass="is-focused">
+                          <button
+                              className="social-button__button"
+                              style={style}
+                              onClick={onClick}
+                              data-id={dataId}
+                              disabled={disabled}
+                              type={isSubmit ? 'submit' : 'button'}
+                          >
+                              {children}
+                          </button>
+                        </FocusRing>
+                      )}
+                  >
+                      <div className="social-button__container">
+                          <div className="social-button__logo">{logo}</div>
+                          <div className="social-button__label">{label}</div>
+                          <div className="social-button__spacer" />
+                      </div>
+                  </Button>
             ) : (
+                  <FocusRing focusRingClass="is-focused">
                     <button
                         onClick={onClick}
                         className="social-button__image-button"
@@ -149,6 +153,7 @@ const UnstyledSocialButton = ({
                     >
                         <img src={image} width="100%" height="auto" alt={label} />
                     </button>
+                  </FocusRing>
                 )}
         </div>
     );

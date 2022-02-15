@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { noop } from 'underscore';
+import { FocusRing } from '@react-aria/focus';
 import FieldMessage from '../FieldMessage'
 
 /**
@@ -94,29 +95,31 @@ const TextInput = ({
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
         )}
+        <FocusRing focusRingClass="is-focused">
+          <input
+              className={classNames}
+              data-id={dataId}
+              defaultValue={defaultValue}
+              id={id}
+              name={name ? name : id}
+              onChange={onChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onKeyPress={onKeyPress}
+              onKeyDown={onKeyDown}
+              onMouseDown={onMouseDown}
+              placeholder={placeholder}
+              value={value}
+              style={{ width }}
+              type="text"
+              key="textinput"
+              autoFocus={autoFocus}
+              autoComplete={useAutoComplete ? 'on' : 'off'}
+              {...inputmodeByFormats[format]}
+              {...inputProps}
+          />
+        </FocusRing>
         {actionComponent}
-        <input
-            className={classNames}
-            data-id={dataId}
-            defaultValue={defaultValue}
-            id={id}
-            name={name ? name : id}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyPress={onKeyPress}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            placeholder={placeholder}
-            value={value}
-            style={{ width }}
-            type="text"
-            key="textinput"
-            autoFocus={autoFocus}
-            autoComplete={useAutoComplete ? 'on' : 'off'}
-            {...inputmodeByFormats[format]}
-            {...inputProps}
-        />
         {fieldMessage && (
             <FieldMessage
                 status={type !== textInputTypes.PRIMARY ? type : 'default'}

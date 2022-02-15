@@ -1,265 +1,261 @@
 $caret-height: 16px;
 
 @mixin caret {
-    &:after {
-        font-family: $icon-font;
-        content: $pingicon-dropdown-arrow;
-        font-size: 13px;
-        line-height: 13px;
-        position: absolute;
-        right: $spacing-md;
-        top: $spacing-md + 3px;
-        height: 16px;
-        width: 16px;
-        pointer-events: none;
-    }
+  &:after {
+    font-family: $icon-font;
+    content: $pingicon-dropdown-arrow;
+    font-size: 13px;
+    line-height: 13px;
+    position: absolute;
+    right: $spacing-md;
+    top: $spacing-md + 3px;
+    height: 16px;
+    width: 16px;
+    pointer-events: none;
+  }
 }
 
 @mixin caret-with-icon {
-    &:after {
-        font-family: $icon-font;
-        content: $pingicon-dropdown-arrow;
-        font-size: 13px;
-        line-height: 13px;
-        position: absolute;
-        right: $spacing-md;
-        top: $spacing-md + 3px;
-        height: 16px;
-        width: 16px;
-        pointer-events: none;
-        margin-right: 25px;
-    }
+  &:after {
+    font-family: $icon-font;
+    content: $pingicon-dropdown-arrow;
+    font-size: 13px;
+    line-height: 13px;
+    position: absolute;
+    right: $spacing-md;
+    top: $spacing-md + 3px;
+    height: 16px;
+    width: 16px;
+    pointer-events: none;
+    margin-right: 25px;
+  }
 }
 
 @mixin field-message-caret {
-    &:after {
-        font-family: $icon-font;
-        content: $pingicon-dropdown-arrow;
-        font-size: 13px;
-        line-height: 13px;
-        position: absolute;
-        right: $spacing-md;
-        top: $spacing-md + 3px;
-        height: 16px;
-        width: 16px;
-        pointer-events: none;
-    }
+  &:after {
+    font-family: $icon-font;
+    content: $pingicon-dropdown-arrow;
+    font-size: 13px;
+    line-height: 13px;
+    position: absolute;
+    right: $spacing-md;
+    top: $spacing-md + 3px;
+    height: 16px;
+    width: 16px;
+    pointer-events: none;
+  }
 }
 
 @mixin field-message-caret-with-icon {
-    &:after {
-        font-family: $icon-font;
-        content: $pingicon-dropdown-arrow;
-        font-size: 13px;
-        line-height: 13px;
-        position: absolute;
-        right: $spacing-md;
-        top: $spacing-md + 3px;
-        height: 16px;
-        width: 16px;
-        pointer-events: none;
-        margin-right: 25px;
-    }
+  &:after {
+    font-family: $icon-font;
+    content: $pingicon-dropdown-arrow;
+    font-size: 13px;
+    line-height: 13px;
+    position: absolute;
+    right: $spacing-md;
+    top: $spacing-md + 3px;
+    height: 16px;
+    width: 16px;
+    pointer-events: none;
+    margin-right: 25px;
+  }
 }
 
 @mixin rotate-caret {
-    &:after {
-        transform: translateY(-50%) rotate(180deg);
-    }
+  &:after {
+    transform: translateY(-50%) rotate(180deg);
+  }
 }
 
 .dropdown {
-    background: $color-neutral-100;
+  background: $color-neutral-100;
 
-    &:focus {
-        border-color: $input-focus-border-color;
+  position: relative;
+
+  &--standard {
+    @include caret;
+  }
+
+  &--with-message {
+    @include field-message-caret;
+  }
+
+  &--with-status-icon {
+    @include caret-with-icon;
+  }
+
+  &--with-icon-and-message {
+    @include field-message-caret-with-icon;
+  }
+
+  &--open {
+    @include rotate-caret;
+  }
+
+  &__select,
+  &__input {
+    @extend %input-box;
+    @extend %input-text;
+
+    &::placeholder {
+      @extend %placeholder-text;
     }
 
-    position: relative;
-
-    &--standard {
-        @include caret;
-    }
-
-    &--with-message {
-        @include field-message-caret;
-    }
-
-    &--with-status-icon {
-        @include caret-with-icon;
-    }
-
-    &--with-icon-and-message {
-        @include field-message-caret-with-icon;
-    }
-
-    &--open {
-        @include rotate-caret;
-    }
-
-    &__select,
-    &__input {
-        @extend %input-box;
-        @extend %input-text;
-
-        &::placeholder {
-            @extend %placeholder-text;
-        }
-
-        cursor: pointer;
-        padding-right: $spacing-xl;
-
-        &--error {
-            border-color: $color-critical-red;
-        }
-
-        &--success {
-            border-color: $color-success-green;
-        }
-
-        &--error,
-        &--success {
-            background-color: $color-white;
-            padding-right: $spacing-xx;
-        }
-    }
-
-    &__select {
-        option {
-            @extend %input-text;
-        }
-
-        position: relative;
-        z-index: 1; // this ensures the dropdown is in front of the float label if there is one
-
-        width: 100%;
-        background-color: transparent;
-        background-image: none;
-        -webkit-appearance: none;
-           -moz-appearance: none;
-                appearance: none;
-
-        &.placeholder-shown {
-            color: rgba(255,255,255,0);
-        }
-
-        &.dropdown__select--placeholder {
-          font-weight: 200;
-        }
-    }
-
-    &__list {
-        @extend %input-border;
-
-        box-shadow: $shadow-overlay;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: $color-neutral-100;
-        margin: -1px 0 0;
-        padding: 0;
-        list-style: none;
-        z-index: 1;
-    }
-
-    &--cardwidth {
-        .dropdown__list {
-            width: 320px;
-        }
-    }
-
-    &__option {
-        @extend %option-text;
-
-        cursor: pointer;
-        padding: $spacing-xs $spacing-sm $spacing-xs ($spacing-sm + $spacing-sm);
-        position: relative;
-
-        &:hover {
-            color: $color-neutral-100;
-            background: $color-active-blue;
-        }
-
-        &--selected {
-            font-weight: $input-font-weight;
-
-            &:before {
-                content: '•';
-                position: absolute;
-                left: $spacing-sm;
-                top: 50%;
-                transform: translateY(-50%);
-                vertical-align: middle;
-            }
-        }
-        &--search {
-            position: relative;
-        }
-    }
-
-    &--search {
-        .dropdown__list {
-            height: 250px;
-            top: 0;
-
-            .dropdown__option--container {
-                position: absolute;
-                height: 200px;
-                overflow-y: scroll;
-                width: 100%;
-            }
-        }
-        &.dropdown--open {
-            &:after {
-                content: none;
-            }
-            .dropdown__close {
-                @include caret();
-                @include rotate-caret;
-
-                display: block;
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                right: 0;
-                width: 30px;
-                cursor: pointer;
-                background: none;
-                border: none;
-            }
-        }
-        .dropdown__close {
-            display: none;
-        }
-    }
-}
-
-.dropdown__icon {
-    font-family: $icon-font;
-    font-size: 16px;
-    line-height: 16px;
-    text-transform: none;
-    position: relative;
-    width: 100%;
-
-    &::before {
-        position: absolute;
-        right: $spacing-md;
-        top: calc(45px * 0.5 - (16px / 2));
-    }
+    cursor: pointer;
+    padding-right: $spacing-xl;
 
     &--error {
-        &::before {
-            content: $pingicon-error-triangle;
-            color: $color-critical-red;
-        }
+      border-color: $color-critical-red;
     }
 
     &--success {
-        &::before {
-            content: $pingicon-success-round;
-            color: $color-success-green;
-        }
+      border-color: $color-success-green;
     }
+
+    &--error,
+    &--success {
+      background-color: $color-white;
+      padding-right: $spacing-xx;
+    }
+  }
+
+  &__select {
+    option {
+      @extend %input-text;
+    }
+
+    position: relative;
+    z-index: 1; // this ensures the dropdown is in front of the float label if there is one
+
+    width: 100%;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &.placeholder-shown {
+      color: rgba(255, 255, 255, 0);
+    }
+
+    &.dropdown__select--placeholder {
+      font-weight: 200;
+    }
+  }
+
+  &__list {
+    @extend %input-border;
+
+    box-shadow: $shadow-overlay;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $color-neutral-100;
+    margin: -1px 0 0;
+    padding: 0;
+    list-style: none;
+    z-index: 1;
+  }
+
+  &--cardwidth {
+    .dropdown__list {
+      width: 320px;
+    }
+  }
+
+  &__option {
+    @extend %option-text;
+
+    cursor: pointer;
+    padding: $spacing-xs $spacing-sm $spacing-xs ($spacing-sm + $spacing-sm);
+    position: relative;
+
+    &:hover {
+      color: $color-neutral-100;
+      background: $color-active-blue;
+    }
+
+    &--selected {
+      font-weight: $input-font-weight;
+
+      &:before {
+        content: "•";
+        position: absolute;
+        left: $spacing-sm;
+        top: 50%;
+        transform: translateY(-50%);
+        vertical-align: middle;
+      }
+    }
+    &--search {
+      position: relative;
+    }
+  }
+
+  &--search {
+    .dropdown__list {
+      height: 250px;
+      top: 0;
+
+      .dropdown__option--container {
+        position: absolute;
+        height: 200px;
+        overflow-y: scroll;
+        width: 100%;
+      }
+    }
+    &.dropdown--open {
+      &:after {
+        content: none;
+      }
+      .dropdown__close {
+        @include caret();
+        @include rotate-caret;
+
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 30px;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+    }
+    .dropdown__close {
+      display: none;
+    }
+  }
+}
+
+.dropdown__icon {
+  font-family: $icon-font;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: none;
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    right: $spacing-md;
+    top: calc(45px * 0.5 - (16px / 2));
+  }
+
+  &--error {
+    &::before {
+      content: $pingicon-error-triangle;
+      color: $color-critical-red;
+    }
+  }
+
+  &--success {
+    &::before {
+      content: $pingicon-success-round;
+      color: $color-success-green;
+    }
+  }
 }

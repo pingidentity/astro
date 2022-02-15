@@ -101,3 +101,13 @@ test('form wrapper will have a max label column width when custom width set', ()
   const textAreaContainer = screen.getByTestId(testId);
   expect(textAreaContainer).toHaveStyle('grid-template-columns: 120px auto');
 });
+
+test('providing slot props causes slot to render', () => {
+  const slot = <p data-testid="testSlot">testText</p>;
+  const slots = {
+    inContainer: slot,
+  };
+  getComponent({ slots });
+
+  expect(screen.getByTestId('testSlot')).toBeInTheDocument();
+});

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SelectText from "./SelectText";
 import PropTypes from "prop-types";
-import hljs from "highlight.js/lib/highlight";
+import hljs from "highlight.js/lib/core";
 import bash from "highlight.js/lib/languages/bash";
 import http from "highlight.js/lib/languages/http";
 import java from "highlight.js/lib/languages/java";

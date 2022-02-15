@@ -3,111 +3,115 @@ $checkbox-label-color: $color-neutral-20;
 $checkbox-border-color: $color-neutral-40;
 
 .checkbox-container {
-    position: relative;
-    display: inline-block;
-    margin-bottom: $spacing-base;
+  position: relative;
+  display: inline-block;
+  margin-bottom: $spacing-base;
 
-    .field-message {
-        margin-left: 2px;
-        position: absolute;
-        top: $spacing-lg;
-        display: none;
-    }
+  .field-message {
+    margin-left: 2px;
+    position: absolute;
+    top: $spacing-lg;
+    display: none;
+  }
 
-    &:hover .field-message {
-        display: block;
-    }
+  &:hover .field-message {
+    display: block;
+  }
 }
 
 .checkbox {
-    cursor: pointer;
-    position: relative;
+  cursor: pointer;
+  position: relative;
 
-    font-size: $font-size-sm;
-    color: $checkbox-label-color;
+  font-size: $font-size-sm;
+  color: $checkbox-label-color;
 
-    &__icon {
-        @extend %normal-text;
-        margin-top: $spacing-xs;
-        margin-right: $spacing-sm;
-        vertical-align: middle;
+  &__icon {
+    @extend %normal-text;
+    margin-top: $spacing-xs;
+    margin-right: $spacing-sm;
+    vertical-align: middle;
+  }
+
+  &--stacked {
+    display: flex;
+
+    .checkbox__label {
+      align-self: center;
+      line-height: $spacing-lg;
     }
 
-    &--stacked {
-        display: flex;
-
-        .checkbox__label {
-            align-self: center;
-            line-height: $spacing-lg;
-        }
-
-        .checkbox__input {
-            flex-shrink: 0;
-            flex-basis: $spacing-lg;
-            min-width: $spacing-lg;
-        }
+    .checkbox__input {
+      flex-shrink: 0;
+      flex-basis: $spacing-lg;
+      min-width: $spacing-lg;
     }
+  }
 
-    &--error {
-        .checkbox__input + .checkbox__standin {
-            border: 2px solid $color-critical-red;
-        }
+  &--error {
+    .checkbox__input + .checkbox__standin {
+      border: 2px solid $color-critical-red;
     }
+  }
 }
 
 .checkbox > :first-child {
-    margin-right: $spacing-sm;
+  margin-right: $spacing-sm;
 }
 
 .checkbox__input {
-    width: $spacing-lg;
-    height: $spacing-lg;
-    display: inline-block;
-    margin: 0;
-    opacity: 0;
-    vertical-align: middle;
+  width: $spacing-lg;
+  height: $spacing-lg;
+  display: inline-block;
+  margin: 0;
+  opacity: 0;
+  vertical-align: middle;
+
+  &.is-focused {
+    @include focus;
+  }
 }
 
 .checkbox__label {
-    font-family: $font-default;
-    vertical-align: middle;
-    position: relative;
+  font-family: $font-default;
+  vertical-align: middle;
+  position: relative;
 }
 
 .checkbox__input + .checkbox__standin {
-    cursor: pointer;
+  cursor: pointer;
+  width: $spacing-lg - 6px;
+  height: $spacing-lg - 6px;
+  border: 1px solid $checkbox-border-color;
+  background-color: $color-neutral-100;
+  border-radius: 2px;
+  margin: 2px;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &:after {
+    text-transform: none;
+    font-family: $icon-font;
+    content: $pingicon-success;
     width: $spacing-lg - 6px;
     height: $spacing-lg - 6px;
-    border: 1px solid $checkbox-border-color;
-    background-color: $color-neutral-100;
-    border-radius: 2px;
-    margin: 2px;
+    line-height: $spacing-lg - 6px;
     position: absolute;
-    left: 0;
+    text-align: center;
     top: 0;
-
-    &:after {
-        text-transform: none;
-        font-family: $icon-font;
-        content: $pingicon-success;
-        width: $spacing-lg - 6px;
-        height: $spacing-lg - 6px;
-        line-height: $spacing-lg - 6px;
-        position: absolute;
-        text-align: center;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        transition: 0.1s font-size;
-        font-size: 0px;
-    }
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: 0.1s font-size;
+    font-size: 0px;
+  }
 }
 
 .checkbox__input:checked + .checkbox__standin:after {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .checkbox__input:focus + .checkbox__standin {
-    @include focus;
+  @include focus;
 }

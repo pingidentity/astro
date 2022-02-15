@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { FocusRing } from '@react-aria/focus';
 
 /**
  * Types of Button styling
@@ -8,6 +9,7 @@ import classnames from 'classnames';
  */
 const ButtonTypes = {
     PRIMARY: 'primary',
+    PRIMARY_A11Y: 'primary-a11y',
     SECONDARY: 'secondary',
     TERTIARY: 'tertiary',
     DANGER: 'danger',
@@ -35,6 +37,7 @@ const Button = React.forwardRef(({
         'button--disabled': disabled,
         'button--inline': inline,
         'button--primary': type === ButtonTypes.PRIMARY,
+        'button--primary-a11y': type === ButtonTypes.PRIMARY_A11Y,
         'button--tertiary': type === ButtonTypes.TERTIARY,
         'button--danger': type === ButtonTypes.DANGER,
         'brand-primary-bg': type === ButtonTypes.PRIMARY,
@@ -44,18 +47,20 @@ const Button = React.forwardRef(({
     return (
         <div>
             { !render ? (
-                <button
-                    className={classNames}
-                    data-id={dataId}
-                    disabled={disabled}
-                    onClick={onClick}
-                    style={style}
-                    ref={ref}
-                    type={isSubmit ? 'submit' : 'button'}
-                >
-                    {loading && <span className={"button--loading-ellipsis"}><span></span></span>}
-                    {!loading && <>{label}{children}</>}
-                </button>
+                <FocusRing focusRingClass="is-focused">
+                  <button
+                      className={classNames}
+                      data-id={dataId}
+                      disabled={disabled}
+                      onClick={onClick}
+                      style={style}
+                      ref={ref}
+                      type={isSubmit ? 'submit' : 'button'}
+                  >
+                      {loading && <span className={"button--loading-ellipsis"}><span></span></span>}
+                      {!loading && <>{label}{children}</>}
+                  </button>
+                </FocusRing>
             ) : (
                 render({ children })
             )}

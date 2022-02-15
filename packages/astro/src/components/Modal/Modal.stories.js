@@ -152,7 +152,7 @@ export const DarkVariant = () => {
             >
               Yes
             </Button>
-            <Button variant="text" onPress={state.close} aria-label="Cancel">
+            <Button variant="link" onPress={state.close} aria-label="Cancel">
               Cancel
             </Button>
           </Box>

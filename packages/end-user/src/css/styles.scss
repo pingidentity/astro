@@ -1,113 +1,121 @@
 @mixin focus {
-    outline: none;
-    box-shadow: 0 0 6px 0 $color-active-blue-highlighted;
+  outline: 0;
+  box-shadow: 0 0 6px 0 $color-active-blue-highlighted;
 }
 
 @mixin link {
-    color: $color-active-blue;
-    text-decoration: none;
-    cursor: pointer;
+  color: $color-active-blue;
+  text-decoration: none;
+  cursor: pointer;
 
-    &:hover {
-        color: $color-active-blue-highlighted;
-        text-decoration: underline;
-    }
+  &:hover {
+    color: $color-active-blue-highlighted;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: auto 1px $color-a11y-blue;
+  }
 }
 
-@import './global-vars';
-@import './fonts';
-@import './icons/variables';
-@import './icons/style';
-@import './spacing';
-@import './mixins';
-@import './text';
-@import './shared/text-styles';
+@import "./global-vars";
+@import "./fonts";
+@import "./icons/variables";
+@import "./icons/style";
+@import "./spacing";
+@import "./mixins";
+@import "./text";
+@import "./shared/text-styles";
 
-@import './common/buttons';
-@import './common/inputs';
-@import './common/icon-pairs';
+@import "./common/buttons";
+@import "./common/inputs";
+@import "./common/icon-pairs";
 
-@import './shared/modal';
-@import './shared/tabs';
-@import './shared/details-tooltip';
-@import './shared/flex-row';
-@import './shared/user-nav';
-@import './shared/layout';
-@import './shared/help';
-@import './shared/inputs';
-@import './shared/collapsible-section';
-@import './shared/padding';
-@import './shared/toggle';
-@import './shared/forms/translation-picker';
-@import './shared/messages';
-@import './shared/tables';
-@import './shared/device-table';
-@import './shared/device-icon';
-@import './shared/tile-selector';
+@import "./shared/modal";
+@import "./shared/tabs";
+@import "./shared/details-tooltip";
+@import "./shared/flex-row";
+@import "./shared/user-nav";
+@import "./shared/layout";
+@import "./shared/help";
+@import "./shared/inputs";
+@import "./shared/collapsible-section";
+@import "./shared/padding";
+@import "./shared/toggle";
+@import "./shared/forms/translation-picker";
+@import "./shared/messages";
+@import "./shared/tables";
+@import "./shared/device-table";
+@import "./shared/device-icon";
+@import "./shared/tile-selector";
 
-@import './components/account-table';
-@import './components/button';
-@import './components/button-set';
-@import './components/card';
-@import './components/checkbox';
-@import './components/container';
-@import './components/dropdown';
-@import './components/feedback';
-@import './components/field-message';
-@import './components/file-input';
-@import './components/float-label';
-@import './components/form';
-@import './components/icon-feedback';
-@import './components/markdown';
-@import './components/modal-menu';
-@import './components/org-logo';
-@import './components/page';
-@import './components/requirements';
-@import './components/serialized-data';
-@import './components/spinner';
-@import './components/step-link';
-@import './components/text-area';
-@import './components/text-block';
-@import './components/text-input';
-@import './components/tooltip';
-@import './components/two-sided';
-@import './components/profile-image';
-@import './components/column';
-@import './components/phone-input';
-@import './components/social-button';
-@import './components/device-selector';
-@import './components/saveable-textinput';
-@import './components/popover-menu';
-@import './components/password-meter';
-@import './components/multivalues';
+@import "./components/account-table";
+@import "./components/button";
+@import "./components/button-set";
+@import "./components/card";
+@import "./components/checkbox";
+@import "./components/container";
+@import "./components/dropdown";
+@import "./components/feedback";
+@import "./components/field-message";
+@import "./components/file-input";
+@import "./components/float-label";
+@import "./components/form";
+@import "./components/icon-feedback";
+@import "./components/markdown";
+@import "./components/modal-menu";
+@import "./components/org-logo";
+@import "./components/page";
+@import "./components/requirements";
+@import "./components/serialized-data";
+@import "./components/spinner";
+@import "./components/step-link";
+@import "./components/text-area";
+@import "./components/text-block";
+@import "./components/text-input";
+@import "./components/tooltip";
+@import "./components/two-sided";
+@import "./components/profile-image";
+@import "./components/column";
+@import "./components/phone-input";
+@import "./components/social-button";
+@import "./components/device-selector";
+@import "./components/saveable-textinput";
+@import "./components/popover-menu";
+@import "./components/password-meter";
+@import "./components/multivalues";
 
 // Spacing components are after so they take precedence
 
-@import './components/form-aside';
-@import './components/stack';
+@import "./components/form-aside";
+@import "./components/stack";
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 body,
 input {
-    font-family: $font-default;
-    -webkit-font-smoothing: antialiased;
+  font-family: $font-default;
+  -webkit-font-smoothing: antialiased;
 }
 
-:focus {
-    @include focus;
+.is-focused {
+  @include focus;
+}
+
+:focus-visible {
+  outline: 0;
 }
 
 a {
-    @include link;
+  @include link;
 }
 
 .app-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
