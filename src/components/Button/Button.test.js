@@ -84,3 +84,21 @@ test('button renders children when not loading', () => {
   expect(childWrapper).toBeVisible();
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
 });
+
+test('color block button renders in default state', () => {
+  getComponent({ variant: 'colorBlock' });
+  const button = screen.getByRole('button');
+  expect(button).toBeInTheDocument();
+  expect(button).not.toHaveClass('is-configured');
+
+  userEvent.tab();
+  expect(button).toHaveClass('is-focused');
+  expect(button).toHaveFocus();
+});
+
+test('color block button renders in configured state', () => {
+  getComponent({ variant: 'colorBlock', className: 'is-configured' });
+  const button = screen.getByRole('button');
+  expect(button).toBeInTheDocument();
+  expect(button).toHaveClass('is-configured');
+});

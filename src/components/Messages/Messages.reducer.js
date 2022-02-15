@@ -3,7 +3,7 @@ import {
   multiMessagesReducer as multiMessagesReducerCore,
 } from './utils';
 
-const messagesReducer = messagesReducerCore;
+export const messagesReducer = messagesReducerCore;
 export const multiMessagesReducer = multiMessagesReducerCore;
 
 const makeShowMessage = (status, timeout) => text => messagesReducer.actions.showMessage(

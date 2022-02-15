@@ -5,7 +5,7 @@ import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '../Text';
 import AccordionGroup from '../AccordionGroup';
-import { OverlayPanel } from '../../index';
+import { OverlayPanel, TextField } from '../../index';
 
 const testId = 'test-accordion';
 const defaultProps = {
@@ -21,7 +21,11 @@ const getComponent = (props = {}) => render((
       <Text>Render me!</Text>
     </Item>
     <Item key="third" textValue="Duplicate" data-id="third" label="Accordion item">
-      <Text>Render me!</Text>
+      <TextField
+        role="form"
+        label="Example Label"
+        data-testid="testField"
+      />
     </Item>
   </AccordionGroup>
 ));
@@ -166,6 +170,15 @@ test('expanded keys expands an accordion item', () => {
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+});
+
+test('able to click a textfield that is the rendered child of an accordion', () => {
+  getComponent({ expandedKeys: ['third'] });
+  const field = screen.getByTestId('testField');
+  const input = screen.getByRole('form');
+  userEvent.click(input);
+  userEvent.type(input, 'banana');
+  expect(field).toHaveClass('has-focus-within');
 });
 
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {

@@ -3,6 +3,7 @@ import React, {
   useRef,
   useImperativeHandle,
   Fragment,
+  useCallback,
 } from 'react';
 import { useBreadcrumbs } from '@react-aria/breadcrumbs';
 import PropTypes from 'prop-types';
@@ -20,6 +21,10 @@ import BreadcrumbItem from './BreadcrumbItem';
 
 const Breadcrumbs = forwardRef((props, ref) => {
   const { children, icon, iconProps, onAction, ...others } = props;
+  // the following filters undefined values passed as a child
+  const filteredChildren = Array.isArray(children)
+    ? children.filter(child => child)
+    : children;
   const { navProps: wrapperProps } = useBreadcrumbs(props);
 
   const breadcrumbsRef = useRef();
@@ -27,6 +32,27 @@ const Breadcrumbs = forwardRef((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => breadcrumbsRef.current);
+  const createBreadcrumb = useCallback((child, idx) => {
+    const isCurrentItem =
+      Array.isArray(filteredChildren) && filteredChildren.length > 1
+        ? idx === children.length - 1
+        : true;
+
+    return (
+      <Fragment key={`fragment-${child.key}`}>
+        <BreadcrumbItem
+          data-id={child['data-id']}
+          isCurrent={isCurrentItem}
+          onAction={onAction}
+          actionKey={child.key}
+          {...child.props}
+        >
+          {child.props.children}
+        </BreadcrumbItem>
+        {icon && !isCurrentItem && <Icon icon={icon} {...iconProps} />}
+      </Fragment>
+    );
+  }, [children.length, filteredChildren, icon, iconProps, onAction]);
 
   return (
     <Box
@@ -37,22 +63,9 @@ const Breadcrumbs = forwardRef((props, ref) => {
       sx={{ overflow: 'auto' }}
       {...mergeProps(wrapperProps, others)}
     >
-      {children.map((child, idx) => (
-        <Fragment key={`fragment-${child.key}`}>
-          <BreadcrumbItem
-            data-id={child['data-id']}
-            isCurrent={idx === children.length - 1}
-            onAction={onAction}
-            actionKey={child.key}
-            {...child.props}
-          >
-            {child.props.children}
-          </BreadcrumbItem>
-          {icon && idx !== children.length - 1 && (
-            <Icon icon={icon} {...iconProps} />
-          )}
-        </Fragment>
-      ))}
+      {Array.isArray(filteredChildren)
+        ? filteredChildren.map(createBreadcrumb)
+        : createBreadcrumb(children)}
     </Box>
   );
 });

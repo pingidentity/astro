@@ -97,16 +97,6 @@ export const NoClearButton = () => (
   />
 );
 
-export const MaxLength = args => (
-  <SearchField
-    {...args}
-    icon={SearchIcon}
-    aria-label="Search Groups"
-    onSubmit={text => alert(text)} // eslint-disable-line no-alert
-    maxLength={9}
-  />
-);
-
 export const ControlledWithDebouncedInput = () => {
   const [value, setValue] = useState('');
   const debouncedSearchText = useDebounce({ value, delay: 500 });

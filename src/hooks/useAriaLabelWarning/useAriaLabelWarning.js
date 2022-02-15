@@ -6,9 +6,9 @@ import { useEffect } from 'react';
  *
  * e.g. "\`Component\` requires an aria-label."
 */
-const useAriaLabelWarning = (component, ariaLabel) => {
+const useAriaLabelWarning = (component, ariaLabel, condition = true) => {
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development' && !ariaLabel) {
+    if (process.env.NODE_ENV === 'development' && condition && !ariaLabel) {
       // eslint-disable-next-line no-console
       console.warn(
         `${component} requires an aria-label`,

@@ -4,14 +4,13 @@ import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import Highlight, { defaultProps } from 'prism-react-renderer';
+import github from 'prism-react-renderer/themes/github';
 import { useStatusClasses } from '../../hooks';
 import { Box, CopyText } from '../..';
 
 /**
- * A text block that shows syntax highlighting code sample.
- * Built on top of the [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer).
- *
- * A list of all supported languages that can be passed to `language` prop is [here](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js).
+ * Component for code syntax highlighting.
+ * Built on top of [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer).
  */
 
 const CodeView = forwardRef((props, ref) => {
@@ -40,7 +39,7 @@ const CodeView = forwardRef((props, ref) => {
   const content = (
     <Highlight
       {...defaultProps}
-      theme={undefined}
+      theme={github}
       code={children?.trim() || ''}
       language={language}
     >
@@ -98,8 +97,16 @@ const CodeView = forwardRef((props, ref) => {
 });
 
 CodeView.propTypes = {
+  /** Whether the CodeView displays line numbers. */
   hasLineNumbers: PropTypes.bool,
+  /** Whether the CodeView hides the copy button.  */
   hasNoCopyButton: PropTypes.bool,
+  /**
+   * Which programming language the CodeView should use for highlighting. A list of default languages is listed [here](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js).
+   *
+   *
+   * Additional languages may be added, see [this guidance](https://github.com/FormidableLabs/prism-react-renderer#faq) for more information.
+  */
   language: PropTypes.string,
 };
 

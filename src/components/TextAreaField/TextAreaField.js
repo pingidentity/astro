@@ -1,5 +1,6 @@
-import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
@@ -11,7 +12,7 @@ import TextArea from '../TextArea';
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
  */
 const TextAreaField = forwardRef((props, ref) => {
-  const { helperText, isUnresizable, rows, status } = props;
+  const { helperText, isUnresizable, rows, status, slots } = props;
   const statusClasses = { isUnresizable };
   const {
     fieldContainerProps,
@@ -20,6 +21,10 @@ const TextAreaField = forwardRef((props, ref) => {
   } = useField({ statusClasses, ...props });
   const textAreaRef = useRef();
   const labelRef = useRef();
+
+  const containerRef = useRef();
+  const inputContainerRef = useRef();
+  const slotContainer = useRef();
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
@@ -31,23 +36,49 @@ const TextAreaField = forwardRef((props, ref) => {
     labelRef.current.style.width = textAreaRef.current.style.width;
   };
 
+  /* istanbul ignore next */
+  const resizeSlotContainer = () => {
+    inputContainerRef.current.style.width = textAreaRef.current.style.width;
+  };
+
+  const onResize = useCallback(() => {
+    /* istanbul ignore next */
+    if (slots?.inContainer) {
+      resizeSlotContainer();
+    }
+  }, [slotContainer]);
+
+  useResizeObserver({
+    ref: textAreaRef,
+    onResize,
+  });
+
+  useLayoutEffect(onResize, [onResize]);
+
   const { isLabelHigher } = useLabelHeight({ labelRef, inputRef: textAreaRef });
   const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
   useEffect(() => {
+    const thisRef = textAreaRef.current;
     if (!props.isUnresizable && props.labelMode === 'float') {
-      textAreaRef.current.addEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
+      thisRef.addEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
     }
     return () => {
-      textAreaRef.current.removeEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
+      thisRef.removeEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
     };
-  }, []);
+  }, [props.isUnresizable, props.labelMode, props.resizeCallback]);
 
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
+    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       <Label ref={labelRef} {...fieldLabelProps} sx={isLabelHigher && { gridRow: '1/5' }} />
-      <Box variant="forms.input.container" className={fieldControlProps.className}>
-        <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} />
+      <Box isRow variant="forms.input.container" className={fieldControlProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
+        <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} sx={slots?.inContainer && { paddingRight: '35px' }} />
+        {
+          slots?.inContainer &&
+            <Box variant="boxes.textFieldInContainerSlot" ref={slotContainer} >
+              {slots?.inContainer}
+            </Box>
+        }
       </Box>
       {helperText &&
         <FieldHelperText status={status}>
@@ -123,6 +154,11 @@ TextAreaField.propTypes = {
   controlProps: PropTypes.shape({}),
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted into the field container. */
+    inContainer: PropTypes.node,
+  }),
 };
 
 TextAreaField.defaultProps = {
@@ -131,7 +167,7 @@ TextAreaField.defaultProps = {
   isReadOnly: false,
   isRequired: false,
   isUnresizable: false,
-  rows: 2,
+  rows: 4,
   status: statuses.DEFAULT,
 };
 

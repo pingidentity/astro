@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  Fragment,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -38,6 +39,8 @@ const BreadcrumbItem = forwardRef((props, ref) => {
         return IconButton;
       case 'Text':
         return Text;
+      case 'Fragment':
+        return Fragment;
       default:
         return elementType;
     }

@@ -1,11 +1,10 @@
 import React, { useMemo, forwardRef, useImperativeHandle, useRef } from 'react';
 import { GridCollection, useGridState } from '@react-stately/grid';
 import { GridKeyboardDelegate, useGrid } from '@react-aria/grid';
-import { mergeProps } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 import { useCollator, useLocale } from '@react-aria/i18n';
-import { AccordionGridContext } from './AccordionGridContext';
+import { AccordionGridContext } from '../../context/AccordionGridContext';
 import AccordionGridItem from '../AccordionGridItem';
 import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -30,15 +29,12 @@ export const collectionTypes = {
 const AccordionGridGroup = forwardRef((props, ref) => {
   const {
     disabledKeys,
-    selectedKeys,
-    onSelectionChange,
   } = props;
 
   const accordionGridRef = useRef();
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => accordionGridRef.current);
-
 
   const { collection } = useListState(props);
 
@@ -50,9 +46,10 @@ const AccordionGridGroup = forwardRef((props, ref) => {
     columnCount: 1,
     items: Array.from(collection).map(item => ({
       ...item,
+      key: `row-${item.key}`,
       hasChildNodes: true,
       childNodes: [{
-        key: `cell-${item.key}`,
+        key: item.key, // use key for first cell, fixes selection after changes from UIP-5170
         type: 'cell',
         index: 0,
         value: null,
@@ -79,12 +76,12 @@ const AccordionGridGroup = forwardRef((props, ref) => {
   const state = useGridState({
     ...props,
     disabledKeys,
-    selectedKeys,
     collection: gridCollection,
     selectionMode: 'multiple',
-    onSelectionChange,
-    allowsCellSelection: true,
   });
+
+  // Required to enable header selection
+  state.selectionManager.allowsCellSelection = true;
 
   const keyboardDelegate = useMemo(() => new GridKeyboardDelegate({
     collection: state.collection,
@@ -97,14 +94,13 @@ const AccordionGridGroup = forwardRef((props, ref) => {
 
   const { gridProps } = useGrid({
     ...props,
-    isVirtualized: true,
     keyboardDelegate,
   }, state, accordionGridRef);
 
   return (
     <AccordionGridContext.Provider value={{ state, keyboardDelegate }}>
       <Box
-        {...mergeProps(gridProps)}
+        {...gridProps}
         ref={accordionGridRef}
       >
         {Array.from(state.collection).map(item => (
@@ -118,6 +114,24 @@ const AccordionGridGroup = forwardRef((props, ref) => {
 });
 
 AccordionGridGroup.propTypes = {
+  /**
+   * The currently selected keys in the collection (uncontrolled).
+   *
+   * `selectedKeys="all"` can be used to select every key.
+   */
+  defaultSelectedKeys: isIterableProp,
+  /**
+   * The currently selected keys in the collection (controlled).
+   *
+   * `selectedKeys="all"` can be used to select every key.
+   */
+  selectedKeys: isIterableProp,
+  /**
+    * Callback function that fires when the selected key changes.
+    *
+    * `(selectedKeys: Set) => void`
+   */
+  onSelectionChange: PropTypes.func,
   /**
    * The item keys that are disabled. These items cannot be selected, focused, or otherwise
    * interacted with.
@@ -138,14 +152,6 @@ AccordionGridGroup.propTypes = {
    * the object.
   */
   'aria-details': PropTypes.string,
-  /**
-   * The currently selected keys in the collection (controlled).
-   *
-   * `selectedKeys="all"` can be used to select every key.
-   */
-  selectedKeys: isIterableProp,
-  /** Callback function that fires when the selected key changes. */
-  onSelectionChange: PropTypes.func,
 };
 
 AccordionGridGroup.defaultProps = {
