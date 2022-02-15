@@ -11,14 +11,19 @@ const Message = ({
     type,
     'data-id': dataId
 }) => {
+    let ariaLiveProps;
     const classNames = classnames('feedback', className, {
         'feedback--error': type === 'error',
         'feedback--alert': type === 'alert',
         'feedback--success': type === 'success',
     });
 
+    if (type === 'error' || type === 'alert') {
+      ariaLiveProps = { role: "alert", "aria-live": "assertive" };
+    }
+
     return (
-        <div className={classNames} data-id={dataId}>
+        <div className={classNames} data-id={dataId} {...ariaLiveProps}>
             {type === 'error' && <span className="feedback__icon pingicon-error-triangle"></span>}
             {type === 'alert' && <span className="feedback__icon pingicon-alert"></span>}
             {type === 'success' && <span className="feedback__icon pingicon-success-round"></span>}
