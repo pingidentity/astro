@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0...@pingux/astro@1.2.0) (2022-02-15)
+
+
+### Bug Fixes
+
+* [UIP-5062] Deprecate danger and text button variants ([c69e7a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c69e7a4230bb986eebe5aa35f52b978f8e08f932))
+* [UIP-5112] import messages reducer from index.js ([d1d7d5b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d1d7d5bbfd38b1cea48c01185b9cbded5f563bb4))
+* [UIP-5116] Add content slots to TextAreaField ([43eecd7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/43eecd703e9bc7dc8f8b7997cccc314a38a3fe09))
+* [UIP-5170] Fix broken RockerButtonGroup and incorrect deps in yarn.lock ([89cb5ee](https://gitlab.corp.pingidentity.com/ux/pingux/commit/89cb5ee7638352e9f8781cd9449fd5edc85d74f4))
+* [UIP-5179] Multivalues Chip Spacing Improvements ([c1fc4bc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c1fc4bce4133b48e3994003f6a74fe67d934104c))
+* [UIP-5183] Link has incorrect styling ([434b144](https://gitlab.corp.pingidentity.com/ux/pingux/commit/434b1447870cfc729b71bcdfc13abc575ead9ad7))
+* [UIP-5185] NumberField doesn't seem to accept 'name' prop ([67aa25b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/67aa25bf0c055348b290709d963dad16b2b22223))
+* [UIP-5217] Input Field in Accordion Clickable ([83f13d3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/83f13d395fca2d1a19bbe877dfd62e52f37402ca))
+* [UIP-5224] Remove .css file dependency for CodeView component ([73a0a89](https://gitlab.corp.pingidentity.com/ux/pingux/commit/73a0a899c4c2891c066c1c52b164edc8cc882fa4))
+* [UIP-5230] OverlayPanel Content Jump ([67c26b5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/67c26b53a9b8f5c40b16b44cbde2ef174b1885f0))
+* [UIP-5245] TextFieldArea Default Rows and Story Update ([30b65cc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/30b65cc38eebdb8a7d0d1f00307e7a0d3518c2ee))
+* Update dependencies for fbjs, lodash, and prism-react-renderer ([fcd37bd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fcd37bd01bdabe534aec41333ea56ab383e010a5))
+
+
+### Features
+
+* [UIP-4870] Environment Breadcrumb ([e4b1af2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e4b1af226a716e97981f7ad6ba34e452b6b2fdb5))
+* [UIP-5135] Function to generate mock data ([8513974](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8513974d229642a0c945ba5de4fbd8445587a0f4))
+* [UIP-5158] Input Field - Add Story with Copy Button & Slots ([8726f94](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8726f949c5ae657c4eaafc7983735d969d93d724))
+* [UIP-5164] Color Block Button Variant ([ed3a13b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed3a13b58d5692dd90abe8b1f878a30b2ced1e3f))
+* [UIP-5187] HelpHint styling does not match spec and needs story ([6ec1cd1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6ec1cd1d99f9a371af9dbef266a5ad31fdce53f0))
+* [UIP-5210] Filter Variant for Button ([b9e2a9d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b9e2a9d2d64852bc2af2b0fea6759ac5fc4d5623))
+
+
+
+
+
 # [1.1.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.1.0-alpha.12...@pingux/astro@1.1.0) (2022-02-02)
 
 
