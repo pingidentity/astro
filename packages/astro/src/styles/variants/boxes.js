@@ -115,6 +115,15 @@ const inputInContainerSlot = {
   transform: 'translateY(-50%)',
 };
 
+const textFieldInContainerSlot = {
+  position: 'absolute',
+  bg: 'transparent',
+  width: '20px',
+  right: '10px',
+  top: '50%',
+  transform: 'translateY(-50%)',
+};
+
 const copy = {
   alignItems: 'center',
   width: 'max-content',
@@ -303,6 +312,7 @@ export default {
   environmentChip,
   expandableRow,
   inputInContainerSlot,
+  textFieldInContainerSlot,
   fileInputFieldWrapper,
   listItem,
   listBoxSectionTitle,
