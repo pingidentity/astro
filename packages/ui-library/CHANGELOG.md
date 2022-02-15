@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2...ui-library@5.1.0) (2022-02-15)
+
+
+### Bug Fixes
+
+* [UIP-4991] Upgrade node-fetch to latest version - v3.1.0 ([9a6fa50](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/9a6fa504970ba7e094418c4106ad229ee1294f77))
+* [UIP-5248] Fix PingFed Icons and Add Alert Bell ([d94875a](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/d94875af3e0204fed808728f2142a57cba7c1e7b))
+* lint errors ([167194c](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/167194cd6f35ea2b609e6766b1aab820c544c723))
+* lint errors ([2e590fc](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/2e590fcc959f79accc3dac87c7c8146ca04cdb52))
+* lint errors ([e7e880f](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/e7e880fd91abf35eee189d711e2707cd08c1c936))
+* Update dependencies for fbjs, lodash, and prism-react-renderer ([fcd37bd](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/fcd37bd01bdabe534aec41333ea56ab383e010a5))
+
+
+### Features
+
+* [UIP-5207] Update highlight.js version to >9 ([4e1b383](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/4e1b3834c11462915d94dc278e5d0f131651d8af))
+* notifications pingfed nav bar ([c6deaf5](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/c6deaf5e9a5ea53ea50d41925543032ebc61bfaa))
+* notifications pingfed nav bar ([038f504](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/038f5041a4a5d8d084b1173ccd0f5cee666e4576))
+
+
+
+
+
 ## [5.0.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.0.2-alpha.3...ui-library@5.0.2) (2022-02-02)
 
 **Note:** Version bump only for package ui-library

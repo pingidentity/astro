@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.2...@pingux/end-user@2.1.0) (2022-02-15)
+
+
+### Bug Fixes
+
+* [UIP-5133] UserNav has hard-coded label for Sign Out button ([a2f4688](https://gitlab.corp.pingidentity.com/ux/end-user/commit/a2f4688b2a8c190934a18198f7a86065973c502e))
+* Update dependencies for fbjs, lodash, and prism-react-renderer ([fcd37bd](https://gitlab.corp.pingidentity.com/ux/end-user/commit/fcd37bd01bdabe534aec41333ea56ab383e010a5))
+
+
+### Features
+
+* [UIP-5186] Update react version to 16.8.3 and improve focus for end user ([9611c88](https://gitlab.corp.pingidentity.com/ux/end-user/commit/9611c885657939199b9d99168e96b33bc2855785))
+* [UIP-5188] end user error a11y ([4ab6a51](https://gitlab.corp.pingidentity.com/ux/end-user/commit/4ab6a513c5d48039749da02de42ddfc70fc6fb9a))
+
+
+
+
+
 ## [2.0.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.0.2-alpha.0...@pingux/end-user@2.0.2) (2022-02-02)
 
 **Note:** Version bump only for package @pingux/end-user

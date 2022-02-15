@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.2...@pingux/schema-form@3.0.3) (2022-02-15)
+
+
+### Bug Fixes
+
+* [UIP-5062] Deprecate danger and text button variants ([c69e7a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c69e7a4230bb986eebe5aa35f52b978f8e08f932))
+
+
+
+
+
 ## [3.0.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.2-alpha.0...@pingux/schema-form@3.0.2) (2022-02-02)
 
 **Note:** Version bump only for package @pingux/schema-form

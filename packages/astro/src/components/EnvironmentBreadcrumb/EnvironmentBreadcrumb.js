@@ -281,9 +281,11 @@ EnvironmentBreadcrumb.propTypes = {
   onNamePress: PropTypes.func,
   /** The list of environments. */
   items: isIterableProp,
-  /** Filter function to generate a filtered list of nodes.
-   * (nodes: Iterable<Node>) => Iterable<Node>
-   * */
+  /**
+   * Filter function to generate a filtered list of nodes.
+   *
+   * `(nodes: Iterable<Node>) => Iterable<Node>`
+   */
   itemsFilter: PropTypes.func,
   /** Callback function that fires when the dropdown is opened. */
   onPopoverOpen: PropTypes.func,

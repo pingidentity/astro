@@ -8,7 +8,7 @@ import { mergeProps } from '@react-aria/utils';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 
 const Link = forwardRef((props, ref) => {
-  const { className, isDisabled, ...others } = props;
+  const { className, isDisabled, onPress, ...others } = props;
 
   const linkRef = useRef();
   usePropWarning(props, 'disabled', 'isDisabled');
