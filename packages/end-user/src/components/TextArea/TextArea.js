@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { FocusRing } from '@react-aria/focus';
 import { noop } from 'underscore';
 import FieldMessage from '../FieldMessage';
 
@@ -78,25 +79,27 @@ const TextArea = ({
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
             }
-        <textarea
-            className={classNames}
-            data-id={dataId}
-            defaultValue={defaultValue}
-            id={id}
-            key='textarea'
-            name={name ? name : id}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyPress={onKeyPress}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            placeholder={placeholder}
-            readOnly={isReadOnly}
-            resize={resize.toString()}
-            value={value}
-            style={{ width, height }}
-        />
+        <FocusRing focusRingClass="is-focused">
+          <textarea
+              className={classNames}
+              data-id={dataId}
+              defaultValue={defaultValue}
+              id={id}
+              key='textarea'
+              name={name ? name : id}
+              onChange={onChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onKeyPress={onKeyPress}
+              onKeyDown={onKeyDown}
+              onMouseDown={onMouseDown}
+              placeholder={placeholder}
+              readOnly={isReadOnly}
+              resize={resize.toString()}
+              value={value}
+              style={{ width, height }}
+          />
+        </FocusRing>
         {fieldMessage && (
             <FieldMessage
                 status={type}

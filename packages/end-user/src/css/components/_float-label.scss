@@ -3,114 +3,133 @@ $float-label-input-padding-top: $input-padding-vertical + $spacing-xs;
 $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 
 .float-label {
-    > input {
-        width: 100%;
-    }
+  > input {
+    width: 100%;
+  }
 
-    position: relative;
-    display: block;
+  position: relative;
+  display: block;
 }
 
 .float-label__label {
-    color: $input-placeholder-color;
+  color: $input-placeholder-color;
 
-    transition: 0.05s;
+  transition: 0.05s;
 
-    display: block;
-    position: absolute;
-    font-size: 10px;
-    font-family: $font-default;
-    font-weight: 200;
-    white-space: nowrap;
-    overflow: hidden;
+  display: block;
+  position: absolute;
+  font-size: 10px;
+  font-family: $font-default;
+  font-weight: 200;
+  white-space: nowrap;
+  overflow: hidden;
 
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-top: $spacing-xs + 1px;
-    margin-left: $spacing-sm;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: $spacing-xs + 1px;
+  margin-left: $spacing-sm;
 
-    pointer-events: none;
-    z-index: 0;
+  pointer-events: none;
+  z-index: 0;
 
-    cursor: text;
+  cursor: text;
 
-    &-text-area {
-        @include input-background-light;
-        top: 1px;
-        margin-top: 0;
-        padding-top: $spacing-xs + 1px;
-    }
+  &-text-area {
+    @include input-background-light;
+    top: 1px;
+    margin-top: 0;
+    padding-top: $spacing-xs + 1px;
+  }
+
+  &--a11y {
+    color: black;
+  }
 }
 
 .float-label {
-    :-ms-input-placeholder {
-        color: rgba(0, 0, 0, 0);
-        font-weight: 200;
-    }
+  :-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0);
+    font-weight: 200;
+  }
 
-    input:-webkit-autofill {
-        -webkit-text-fill-color: $input-text-color;
+  input:-webkit-autofill {
+    -webkit-text-fill-color: $input-text-color;
 
-        ~ label {
-            font-size: 10px;
-            margin-top: $spacing-xs + 1px!important;
-            margin-left: $spacing-sm!important;
-            text-transform: uppercase;
-        }
+    ~ label {
+      font-size: 10px;
+      margin-top: $spacing-xs + 1px !important;
+      margin-left: $spacing-sm !important;
+      text-transform: uppercase;
     }
+  }
 }
 
-.float-label__input, .float-label .float-label__input {
+.float-label__input,
+.float-label .float-label__input {
+  padding-top: $float-label-input-padding-top;
+  padding-bottom: $float-label-input-padding-bottom;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0);
+  }
+  &:not(:placeholder-shown),
+  &:-webkit-autofill {
     padding-top: $float-label-input-padding-top;
     padding-bottom: $float-label-input-padding-bottom;
+  }
 
+  &--a11y {
     &::placeholder {
-        color: rgba(0, 0, 0, 0);
+      color: $color-a11y-black;
     }
-    &:not(:placeholder-shown),
-    &:-webkit-autofill {
-        padding-top: $float-label-input-padding-top;
-        padding-bottom: $float-label-input-padding-bottom;
-    }
+
+    background: $color-accent-neutral-90;
+  }
 }
 
 .float-label__input:focus + .float-label__label {
-    color: $input-focus-border-color;
+  color: $input-focus-border-color;
+
+  &--a11y {
+    color: $color-a11y-black;
+  }
 }
 
 @mixin placeholderShown {
-    padding-top: $input-padding-vertical;
-    padding-bottom: $input-padding-vertical;
-    padding-left: $spacing-sm;
+  padding-top: $input-padding-vertical;
+  padding-bottom: $input-padding-vertical;
+  padding-left: $spacing-sm;
 
-    & + .float-label__label {
-        margin-top: $input-padding-vertical + 1px;
-        margin-left: $input-padding-horizontal + 1px;
-    }
+  & + .float-label__label {
+    margin-top: $input-padding-vertical + 1px;
+    margin-left: $input-padding-horizontal + 1px;
+  }
 }
 
 .placeholder-shown {
-    .float-label__input {
-        @include placeholderShown;
-    }
+  .float-label__input {
+    @include placeholderShown;
 
-    .float-label__label {
-        margin-top: $input-padding-vertical + 1px;
-        @extend %input-text;
-        font-weight: 200;
-        text-transform: none;
+    background: none;
+  }
 
-        &-text-area {
-            background-color: transparent;
-            padding-top: 0;
-        }
+  .float-label__label {
+    margin-top: $input-padding-vertical + 1px;
+    @extend %input-text;
+    font-weight: 200;
+    text-transform: none;
+
+    &-text-area {
+      background-color: transparent;
+      padding-top: 0;
     }
+  }
 }
 
 input:-webkit-autofill ~ .float-label__label,
 input:-webkit-autofill:hover ~ .float-label__label,
 input:-webkit-autofill:focus ~ .float-label__label,
 input:-webkit-autofill:active ~ .float-label__label {
-    color: $input-focus-border-color;
+  color: $input-focus-border-color;
 }

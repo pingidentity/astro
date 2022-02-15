@@ -11,98 +11,98 @@ $input-placeholder-color: $color-neutral-40;
 // TEXT STYLES
 %input-text,
 .input-text {
-    font-family: $font-default;
-    font-size: $input-font-size;
-    font-weight: $input-font-weight;
-    color: $input-text-color;
+  font-family: $font-default;
+  font-size: $input-font-size;
+  font-weight: $input-font-weight;
+  color: $input-text-color;
 }
 
 %option-text,
 .option-text {
-    font-family: $font-default;
-    font-size: $input-font-size;
-    color: $input-text-color;
-    font-weight: 400;
+  font-family: $font-default;
+  font-size: $input-font-size;
+  color: $input-text-color;
+  font-weight: 400;
 }
 
 @mixin primary-input-text {
-    font-family: $font-default;
-    font-size: $font-size-xx;
-    font-weight: 200;
-    color: $input-text-color;
+  font-family: $font-default;
+  font-size: $font-size-xx;
+  font-weight: 200;
+  color: $input-text-color;
 }
 
 %primary-input-text,
 .primary-input-text {
-    @include primary-input-text;
+  @include primary-input-text;
 }
 
 %input-border,
 .input-border {
-    background: $color-neutral-100;
-    border: 1px solid $input-border-color;
-    border-radius: 2px;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
+  background: $color-neutral-100;
+  border: 1px solid $input-border-color;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
 }
 
 %input-padding,
 .input-padding {
-    padding: $input-padding-vertical $input-padding-horizontal;
+  padding: $input-padding-vertical $input-padding-horizontal;
 }
 
 %input-box,
 .input-box {
-    @extend %input-border;
-    @extend %input-padding;
+  @extend %input-border;
+  @extend %input-padding;
 }
 
 // Must use mixin when targeting pseudo-elements (See https://stackoverflow.com/a/49192449/5983154)
 @mixin placeholder-text {
-    color: $input-placeholder-color;
-    font-size: $input-font-size;
-    font-weight: 200;
-    text-transform: unset;
+  color: $input-placeholder-color;
+  font-size: $input-font-size;
+  font-weight: 200;
+  text-transform: unset;
 }
 
 %placeholder-text,
 .placeholder-text {
-    @include placeholder-text
+  @include placeholder-text;
 }
 
 // WIDTHS
 .input {
-    $divisions: 6;
-    $margin: $spacing-xs;
+  $divisions: 6;
+  $margin: $spacing-xs;
 
-    @mixin inputwidth($factor) {
-        $perc: round(100% * $factor/$divisions);
+  @mixin inputwidth($factor) {
+    $perc: round(100% * $factor/$divisions);
 
-        display: inline-flex;
-        width: $perc;
-        &.input--margin {
-            width: calc(#{$perc} - #{$margin});
-            margin-right: $margin;
-        }
+    display: inline-flex;
+    width: $perc;
+    &.input--margin {
+      width: calc(#{$perc} - #{$margin});
+      margin-right: $margin;
     }
+  }
 
-    &--width-xs {
-        @include inputwidth(1);
-    }
-    &--width-sm {
-        @include inputwidth(2);
-    }
-    &--width-md {
-        @include inputwidth(3);
-    }
-    &--width-lg {
-        @include inputwidth(4);
-    }
-    &--width-xl {
-        @include inputwidth(5);
-    }
-    &--width-xx {
-        @include inputwidth(6);
-    }
+  &--width-xs {
+    @include inputwidth(1);
+  }
+  &--width-sm {
+    @include inputwidth(2);
+  }
+  &--width-md {
+    @include inputwidth(3);
+  }
+  &--width-lg {
+    @include inputwidth(4);
+  }
+  &--width-xl {
+    @include inputwidth(5);
+  }
+  &--width-xx {
+    @include inputwidth(6);
+  }
 }

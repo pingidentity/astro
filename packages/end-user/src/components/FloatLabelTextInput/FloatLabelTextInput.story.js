@@ -7,8 +7,17 @@ export default {
 };
 
 export const Default = () => (
-    <FloatLabelTextInput
-        label="Username"
-        onChange={(e) => console.log(e.target.value)}
-    />
+  <FloatLabelTextInput
+    label="Username"
+    onChange={(e) => console.log(e.target.value)}
+  />
+);
+
+export const Accessibility = () => (
+  <FloatLabelTextInput
+    inputClassName="float-label__input--a11y"
+    labelClassName="float-label__label--a11y"
+    label="Username"
+    onChange={(e) => console.log(e.target.value)}
+  />
 );
