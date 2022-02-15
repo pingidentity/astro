@@ -20,9 +20,9 @@ export const RockerContext = React.createContext({});
 const RockerButtonGroup = forwardRef((props, ref) => {
   const {
     children,
-    isDisabled,
     onSelectionChange,
     tabListProps, // eslint-disable-line
+    disabledKeys,
     ...others
   } = props;
   const buttonGroupRef = useRef();
@@ -50,7 +50,6 @@ const RockerButtonGroup = forwardRef((props, ref) => {
             <CollectionRockerButton
               key={item.key}
               item={item}
-              isDisabled={isDisabled}
             />
           ))}
         </Box>
@@ -64,14 +63,10 @@ RockerButtonGroup.propTypes = {
   defaultSelectedKey: PropTypes.string,
   /** The button key that is currently selected. (controlled) */
   selectedKey: PropTypes.string,
-  /** Whether the entire button group is disabled. */
-  isDisabled: PropTypes.bool,
+  /** Which keys should be disabled. */
+  disabledKeys: PropTypes.arrayOf(PropTypes.string),
   /** Handler that is called when the selected button has changed. */
   onSelectionChange: PropTypes.func,
-};
-
-RockerButtonGroup.defaultProps = {
-  isDisabled: false,
 };
 
 RockerButtonGroup.displayName = 'RockerButtonGroup';

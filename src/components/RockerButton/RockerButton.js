@@ -7,27 +7,24 @@ import React, {
 import PropTypes from 'prop-types';
 import { Item } from '@react-stately/collections';
 import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
 import { useRockerButton, useStatusClasses, usePropWarning } from '../../hooks';
-import Button from '../Button';
+import { Box } from '../../index';
 import { RockerContext } from '../RockerButtonGroup';
 
 export const CollectionRockerButton = forwardRef((props, ref) => {
   const {
     className,
     item,
-    isDisabled: buttonGroupDisabled,
   } = props;
-  const defaultSelectedStyles = { bg: 'active' };
   const { key, rendered, props: itemProps } = item;
-  const { selectedStyles = defaultSelectedStyles, isDisabled: rockerButtonDisabled } = itemProps;
-  const isDisabled = buttonGroupDisabled || rockerButtonDisabled;
   const state = useContext(RockerContext);
+  const isDisabled = state.disabledKeys.has(key);
   const { isFocusVisible, focusProps } = useFocusRing();
   const isSelected = state.selectedKey === key;
   const { classNames } = useStatusClasses(className, {
     isFocused: isFocusVisible,
     isSelected,
+    isDisabled,
   });
 
   const rockerButtonRef = useRef();
@@ -35,30 +32,34 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => rockerButtonRef.current);
-  const { rockerButtonProps } = useRockerButton({ item, isDisabled }, state, rockerButtonRef);
+  const { rockerButtonProps } = useRockerButton({
+    item,
+    isDisabled,
+    isSelected,
+  }, state, rockerButtonRef);
 
   return (
-    <Button
+    <Box
+      as="button"
       className={classNames}
-      variant="rocker"
-      {...itemProps}
-      {...mergeProps(focusProps, rockerButtonProps)}
+      variant="buttons.rocker"
+      {...rockerButtonProps}
       ref={rockerButtonRef}
+      {...focusProps}
+      {...itemProps}
       sx={{
         '&.is-selected': {
-          ...selectedStyles,
+          ...itemProps.selectedStyles,
         },
       }}
     >
       {rendered}
-    </Button>
+    </Box>
   );
 });
 
 CollectionRockerButton.displayName = 'CollectionRockerButton';
 CollectionRockerButton.propTypes = {
-  /** Whether the button is disabled. */
-  isDisabled: PropTypes.bool,
   /** Allows custom styles to be passed to button. */
   selectedStyles: PropTypes.shape({}), // adding to surface in props table
   /** @ignore */

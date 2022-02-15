@@ -35,13 +35,14 @@ const TextAreaField = forwardRef((props, ref) => {
   const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
   useEffect(() => {
+    const thisRef = textAreaRef.current;
     if (!props.isUnresizable && props.labelMode === 'float') {
-      textAreaRef.current.addEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
+      thisRef.addEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
     }
     return () => {
-      textAreaRef.current.removeEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
+      thisRef.removeEventListener('mousemove', props.resizeCallback ? props.resizeCallback : resizeFloatLabel);
     };
-  }, []);
+  }, [props.isUnresizable, props.labelMode, props.resizeCallback]);
 
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>

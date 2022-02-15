@@ -4,6 +4,7 @@ import { useFocusRing } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 import { useGridCell, useGridRow } from '@react-aria/grid';
 import { useHover } from '@react-aria/interactions';
+import { useSelectableItem } from '@react-aria/selection';
 import { ListViewContext } from '../ListView/ListViewContext';
 import Box from '../Box';
 import { useStatusClasses } from '../../hooks';
@@ -12,6 +13,7 @@ const ListViewItem = (props) => {
   const {
     item,
     item: {
+      key,
       props: {
         listItemProps,
         rowProps,
@@ -45,18 +47,26 @@ const ListViewItem = (props) => {
     isVirtualized: true,
   }, state, rowRef);
 
-  const isSelected = raRowProps['aria-selected'];
+  const isSelected = state.selectionManager.isSelected(item.key);
 
   const { gridCellProps } = useGridCell({
     node: cellNode,
     focusMode: 'cell',
   }, state, cellRef);
 
+  const { itemProps: selectableItemProps } = useSelectableItem({
+    isDisabled,
+    selectionManager: state.selectionManager,
+    key,
+    ref: cellRef,
+  });
+
   const mergedProps = mergeProps(
     gridCellProps,
     hoverProps,
     focusWithinProps,
     focusProps,
+    selectableItemProps,
   );
 
   const { classNames } = useStatusClasses(className, {
