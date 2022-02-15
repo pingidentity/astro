@@ -1,6 +1,6 @@
 {
   "name": "@pingux/end-user",
-  "version": "2.0.3-alpha.5",
+  "version": "2.1.0-alpha.0",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "uxdev@pingidentity.com",
@@ -15,11 +15,11 @@
     "lib"
   ],
   "dependencies": {
-    "@react-aria/focus": "^3.5.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/runtime": "^7.4.2",
     "@babel/runtime-corejs3": "^7.4.2",
     "@popperjs/core": "^2.5.3",
+    "@react-aria/focus": "^3.5.0",
     "classnames": "^2.2.6",
     "core-js": "^3.0.1",
     "fbjs": "^3.0.2",
