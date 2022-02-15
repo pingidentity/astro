@@ -406,6 +406,7 @@ const chipDeleteButton = {
 
 const rocker = {
   ...base,
+  border: '0',
   display: 'inline-flex',
   height: '26px',
   lineHeight: '26px',
@@ -417,6 +418,7 @@ const rocker = {
   textTransform: 'uppercase',
   bg: 'accent.95',
   '&.is-selected': {
+    bg: 'active',
     color: 'white',
   },
   '&.is-focused': {

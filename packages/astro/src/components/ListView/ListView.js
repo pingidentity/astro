@@ -1,7 +1,6 @@
 import React, { useMemo, forwardRef, useRef, useImperativeHandle } from 'react';
 import { GridCollection, useGridState } from '@react-stately/grid';
 import { GridKeyboardDelegate, useGrid } from '@react-aria/grid';
-import { mergeProps } from '@react-aria/utils';
 import { ListLayout } from '@react-stately/layout';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
@@ -42,12 +41,9 @@ export function useListLayout(state) {
 
 const ListView = forwardRef((props, ref) => {
   const {
-    disabledKeys,
     loadingState,
-    selectedKeys,
     onLoadMore,
-    onSelectionChange,
-    selectionMode,
+    selectionStyle,
   } = props;
 
   const isLoading = (
@@ -94,11 +90,9 @@ const ListView = forwardRef((props, ref) => {
 
   const state = useGridState({
     ...props,
-    disabledKeys,
-    selectedKeys,
     collection: gridCollection,
-    selectionMode,
-    onSelectionChange,
+    focusMode: 'cell',
+    selectionBehavior: selectionStyle === 'highlight' ? 'replace' : 'toggle',
   });
 
   const layout = useListLayout(state);
@@ -130,7 +124,7 @@ const ListView = forwardRef((props, ref) => {
   return (
     <ListViewContext.Provider value={{ state, keyboardDelegate }}>
       <Virtualizer
-        {...mergeProps(gridProps)}
+        {...gridProps}
         onLoadMore={onLoadMore}
         ref={listViewRef}
         focusedKey={focusedKey}
@@ -188,6 +182,8 @@ ListView.propTypes = {
   selectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   /** The type of selection that is allowed in the collection. */
   selectionMode: PropTypes.oneOf(['none', 'single', 'multiple']),
+  /** */
+  selectionStyle: PropTypes.oneOf(['highlight', undefined]),
   /** Callback function that fires when the selected key changes. */
   onSelectionChange: PropTypes.func,
   /**
@@ -200,7 +196,7 @@ ListView.propTypes = {
 
 ListView.defaultProps = {
   'aria-label': 'listView',
-  'selectionMode': 'single',
+  selectionMode: 'single',
 };
 
 export default ListView;

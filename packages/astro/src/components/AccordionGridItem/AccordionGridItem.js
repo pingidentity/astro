@@ -1,11 +1,12 @@
-import React, { useContext, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useGridRow } from '@react-aria/grid';
 import { mergeProps } from '@react-aria/utils';
-import { AccordionGridContext } from '../AccordionGridGroup/AccordionGridContext';
+import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import Box from '../Box';
 import AccordionGridItemHeader from './AccordionGridItemHeader';
 import AccordionGridItemBody from './AccordionGridItemBody';
+import { useStatusClasses } from '../../hooks';
 
 const AccordionGridItem = (props) => {
   const {
@@ -13,16 +14,25 @@ const AccordionGridItem = (props) => {
     headerProps,
     bodyProps,
     children,
+    className,
     ...others
   } = props;
 
   const [header, body, ...otherChildren] = React.Children.toArray(children);
-
   const cellNode = [...item.childNodes][0];
 
-  const { state } = useContext(AccordionGridContext);
+  const { state } = useAccordionGridContext();
 
-  const isDisabled = state.disabledKeys.has(item.key);
+  // Treat first cell as a row, fixes focus and keyboard interactions
+  const isDisabled = state.disabledKeys.has(cellNode.key);
+  const isSelected = state.selectionManager.isSelected(cellNode.key);
+
+  // Sync selection between the first cell and the row
+  useEffect(() => {
+    if (isSelected !== state.selectionManager.isSelected(item.key)) {
+      state.selectionManager.toggleSelection(item.key);
+    }
+  }, [isSelected, state.selectionManager, item.key]);
 
   const rowRef = useRef();
   const cellRef = useRef();
@@ -32,22 +42,25 @@ const AccordionGridItem = (props) => {
     node: item,
   }, state, rowRef);
 
-  const isSelected = state.selectionManager.isSelected(item.key);
+  const { classNames } = useStatusClasses(className, {
+    isSelected,
+    isDisabled,
+  });
 
   return (
     <Box
       as="div"
-      isDisabled={isDisabled}
       {...mergeProps(rowProps, others)}
+      aria-selected={isSelected}
+      className={classNames}
       ref={rowRef}
-      role="row"
     >
       <AccordionGridItemHeader
         item={item}
-        cellNode={cellNode}
         ref={cellRef}
-        {...headerProps}
+        isDisabled={isDisabled}
         isSelected={isSelected}
+        {...headerProps}
       >
         {header}
       </AccordionGridItemHeader>

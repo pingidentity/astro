@@ -2,24 +2,21 @@ import { useSelectableItem } from '@react-aria/selection';
 import { useId } from '@react-aria/utils';
 
 const useRockerButton = (props, state, ref) => {
-  const { item, isDisabled: propsDisabled } = props;
+  const { item, isDisabled, isSelected } = props;
   const { key } = item;
-  const { selectionManager: manager, selectedKey } = state;
-
-  const isSelected = key === selectedKey;
+  const { selectionManager: manager } = state;
 
   const { itemProps } = useSelectableItem({
+    isDisabled,
     selectionManager: manager,
     key,
     ref,
   });
-  const isDisabled = propsDisabled || state.disabledKeys.has(key);
   const rockerButtonId = useId();
 
   return {
     rockerButtonProps: {
       ...itemProps,
-      isDisabled,
       id: rockerButtonId,
       'aria-pressed': isSelected,
       'aria-disabled': isDisabled || undefined,
