@@ -2,7 +2,7 @@ import React from 'react';
 import { Item } from '@react-stately/collections';
 import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
-import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import {
   Link,
   Box,
@@ -95,20 +95,6 @@ axeTest(getComponent, {
   },
 });
 
-test('button press', () => {
-  const onPress = jest.fn();
-  getComponent({ onPress });
-  const buttons = screen.getAllByRole('gridcell');
-  const selectedItem = buttons[0];
-  expect(selectedItem).toBeInTheDocument();
-  expect(selectedItem).not.toHaveClass('is-pressed');
-  expect(onPress).not.toHaveBeenCalled();
-
-  // Hold down the button to see pressed styles
-  fireEvent.mouseDown(selectedItem);
-  expect(selectedItem).toHaveClass('is-pressed');
-});
-
 test('button press uses callback', () => {
   const onPress = jest.fn();
   getComponent({ onSelectionChange: onPress });
@@ -118,8 +104,7 @@ test('button press uses callback', () => {
   expect(onPress).not.toHaveBeenCalled();
 
   // Hold down the button to see pressed styles
-  fireEvent.mouseDown(selectedItem);
-  fireEvent.mouseUp(selectedItem);
+  userEvent.click(selectedItem);
   expect(onPress).toHaveBeenCalled();
 });
 
@@ -197,11 +182,11 @@ test('disabled keys prop disables an accordion item, and disables focus', () => 
   expect(selectedRow).not.toHaveClass('is-focused');
 });
 
-test('default expanded keys expands an accordion item', () => {
+test('default expanded keys expands an accordion item', async () => {
   getComponent({ selectedKeys: ['first'] });
-  const row = screen.getAllByRole('row');
-  const selectedRow = row[0];
-  expect(selectedRow).toHaveAttribute('aria-selected', 'true');
+  await waitFor(() => {
+    return expect(screen.getAllByRole('row')[0]).toHaveAttribute('aria-selected', 'true');
+  });
 });
 
 test('items do not automatically expand if wrapped in an open OverlayPanel', () => {
