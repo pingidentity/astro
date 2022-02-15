@@ -94,7 +94,10 @@ const useField = (props = {}) => {
     } else {
       setHasValue(false);
     }
-
+    // adding this function resolves the error brought up in UIP-5116
+    if (e.persist) {
+      e.persist();
+    }
     // Make sure to call the original onChange event
     return onChange(e);
   };

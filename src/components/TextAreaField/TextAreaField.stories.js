@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import SearchIcon from 'mdi-react/SearchIcon';
 import TextAreaField from '.';
+import Box from '../Box';
+import Icon from '../Icon';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
 
@@ -60,9 +63,34 @@ export default {
   },
 };
 
+const IconSlot = (
+  <Box isRow>
+    <Icon
+      icon={SearchIcon}
+    />
+  </Box>
+);
+
 export const Default = args => (
   <TextAreaField
     {...args}
+  />
+);
+
+export const WithSlots = args => (
+  // This is an example of a slot that can be passed into the component
+  // const IconSlot = (
+  //   <Box isRow>
+  //     <Icon
+  //       icon={SearchIcon}
+  //     />
+  //   </Box>
+  // );
+  <TextAreaField
+    {...args}
+    slots={{
+      inContainer: IconSlot,
+    }}
   />
 );
 
