@@ -2,7 +2,7 @@
   "name": "@pingux/astro",
   "version": "1.2.0",
   "description": "PingUX themeable React component library",
-  "author": "uxdev@pingidentity.com",
+  "author": "ux-development@pingidentity.com",
   "license": "Apache-2.0",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
