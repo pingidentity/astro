@@ -2,7 +2,7 @@
   "name": "@pingux/schema-form",
   "version": "3.0.3",
   "description": "Create component forms from JSON Schema",
-  "author": "<uxdev@pingidentity.com>",
+  "author": "ux-development@pingidentity.com",
   "homepage": "",
   "license": "UNLICENSED",
   "main": "lib/ping-schema-form.js",
