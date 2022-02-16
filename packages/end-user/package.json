@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
-  "author": "uxdev@pingidentity.com",
+  "author": "ux-development@pingidentity.com",
   "license": "UNLICENSED",
   "publishConfig": {
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
