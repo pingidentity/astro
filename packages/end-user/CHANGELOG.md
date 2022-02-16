@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.1.1...@pingux/end-user@2.1.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* [UIP-5278] Adjust placeholder and bg color for inputs ([e4b1dad](https://gitlab.corp.pingidentity.com/ux/end-user/commit/e4b1dadf05907efab25ff019c45b83ac73eed24e))
+
+
+
+
+
 ## [2.1.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.1.0...@pingux/end-user@2.1.1) (2022-02-16)
 
 
