@@ -17,7 +17,7 @@ const wordWrap = {
 const tabLabel = {
   ...base,
   ...wordWrap,
-  fontSize: 'md',
+  fontSize: 'sm',
   fontWeight: 1,
   mb: 6,
   color: 'neutral.40',
