@@ -4,8 +4,16 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-a11y",
-    "@storybook/addon-docs",
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        sourceLoaderOptions: {
+          injectStoryParameters: false,
+        },
+      },
+    },
     "@storybook/addon-links",
-    "@storybook/addon-essentials"
+    "@storybook/addon-essentials",
+    '@storybook/addon-storysource',
   ],
 }
