@@ -17,6 +17,9 @@ export * from './components/AccordionItem';
 export { default as AccordionGridItem } from './components/AccordionGridItem';
 export * from './components/AccordionGridItem';
 
+export { default as ArrayField } from './components/ArrayField';
+export * from './components/ArrayField';
+
 export { default as Avatar } from './components/Avatar';
 export * from './components/Avatar';
 

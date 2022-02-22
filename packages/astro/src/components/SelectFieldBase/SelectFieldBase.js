@@ -28,6 +28,7 @@ const SelectFieldBase = forwardRef((props, ref) => {
     name,
     placeholder,
     status,
+    slots,
     columnStyleProps,
     fieldContainerProps,
     fieldControlProps,
@@ -70,6 +71,7 @@ const SelectFieldBase = forwardRef((props, ref) => {
           />
         </Box>
       </Button>
+      {slots?.inContainer}
     </Box>
   );
 
@@ -132,6 +134,11 @@ SelectFieldBase.propTypes = {
     selectedItem: PropTypes.shape({
       rendered: PropTypes.node,
     }),
+  }),
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted into the field container. */
+    inContainer: PropTypes.node,
   }),
   /** Control for interaction with SelectField */
   trigger: PropTypes.node,

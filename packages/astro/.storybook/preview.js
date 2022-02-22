@@ -33,6 +33,7 @@ export const parameters = {
       order: [
         'Form',
         [
+          'ArrayField',
           'CheckboxField',
           'ColorField',
           'ComboBoxField',
