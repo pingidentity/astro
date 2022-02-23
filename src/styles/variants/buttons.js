@@ -68,7 +68,13 @@ const navItemButton = {
   },
   '&.is-hovered': {
     bg: 'accent.10',
+  },
+  '&.is-selected': {
+    bg: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
+  },
+  '&.is-pressed': {
+    bg: 'accent.5',
   },
 };
 
