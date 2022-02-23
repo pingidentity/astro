@@ -3,7 +3,7 @@ import { mergeProps } from '@react-aria/utils';
 import { useFocusRing } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 import { useGridCell } from '@react-aria/grid';
-import { useHover } from '@react-aria/interactions';
+import { useHover, usePress } from '@react-aria/interactions';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
@@ -28,12 +28,13 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
   const cellNode = [...item.childNodes][0];
 
-  const { gridCellProps, isPressed } = useGridCell({
+  const { gridCellProps } = useGridCell({
     node: cellNode,
     focusMode: 'cell',
   }, state, cellRef);
 
   const { hoverProps, isHovered } = useHover({});
+  const { pressProps, isPressed } = usePress({ ref: cellRef });
 
   const {
     focusProps: focusWithinProps,
@@ -42,6 +43,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
   const { focusProps, isFocusVisible } = useFocusRing();
 
   const mergedProps = mergeProps(
+    pressProps,
     gridCellProps,
     hoverProps,
     focusWithinProps,

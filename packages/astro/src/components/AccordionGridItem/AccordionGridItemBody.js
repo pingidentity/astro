@@ -13,6 +13,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
     className,
     children,
     isSelected,
+    ...others
   } = props;
 
   const { state } = useAccordionGridContext();
@@ -53,6 +54,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
       isSelected={isSelected}
       className={classNames}
       aria-label={ariaLabel}
+      {...others}
     >
       {children}
     </Box>

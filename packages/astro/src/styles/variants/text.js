@@ -126,6 +126,8 @@ const environmentBreadcrumb = {
 };
 
 const navBarSubtitle = {
+  my: 'md',
+  ml: 'md',
   fontWeight: 3,
   fontSize: '11px',
   color: 'accent.80',
