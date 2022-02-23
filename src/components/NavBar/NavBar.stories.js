@@ -7,14 +7,21 @@ import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import Earth from 'mdi-react/EarthIcon';
-import NavBarSection from '../NavBarSection';
-import NavBar from './NavBar';
-import { Separator, Box, Link, Button } from '../../index';
+import {
+  Separator,
+  Box,
+  Link,
+  NavBar,
+  NavBarSection,
+  NavBarItemButton,
+  NavBarItemLink,
+  NavBarItem,
+} from '../../index';
 
 export default {
   title: 'NavBar',
   component: 'NavBar',
-  subcomponents: { NavBarSection },
+  subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
 };
 
 const Credentials = props => (
@@ -81,61 +88,25 @@ const logo = (
 
 const data = [
   {
-    icon: GlobeIcon,
-    key: 'Overview',
-    heading: 'Overview',
-    children: [
-      <Link
-        key="Overview Link Users"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
-        href="https://pingidentity.com/"
-      >
-        Users
-      </Link>,
-      <Link
-        key="Overview Link Roles"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
-        href="https://pingidentity.com/"
-      >
-        A roles title that is really really really really long
-      </Link>,
-    ],
-  },
-  {
     icon: ViewDashboard,
     key: 'Dashboard',
     heading: 'Dashboard',
     children: [
-      <Link
+      <NavBarItemLink
         key="Dashboard Link Group"
+        id="Dashboard Link Group"
         variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
         href="https://pingidentity.com/"
       >
         Group
-      </Link>,
-      <Link
+      </NavBarItemLink>,
+      <NavBarItemLink
         key="Dashboard Link Populations"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Dashboard Link Populations"
         href="https://pingidentity.com/"
       >
         Populations
-      </Link>,
+      </NavBarItemLink>,
     ],
   },
   {
@@ -143,28 +114,20 @@ const data = [
     key: 'Identities',
     heading: 'Identities',
     children: [
-      <Link
+      <NavBarItemLink
         key="Identities Link Users"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Identities Link Users"
         href="https://pingidentity.com/"
       >
         Users
-      </Link>,
-      <Link
+      </NavBarItemLink>,
+      <NavBarItemLink
         key="Identities Link Group"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Identities Link Group"
         href="https://pingidentity.com/"
       >
         Group
-      </Link>,
+      </NavBarItemLink>,
     ],
   },
   {
@@ -172,28 +135,20 @@ const data = [
     key: 'Connections',
     heading: 'Connections',
     children: [
-      <Link
+      <NavBarItemLink
         key="Connection Link Users"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Connection Link Users"
         href="https://pingidentity.com/"
       >
         Users
-      </Link>,
-      <Link
+      </NavBarItemLink>,
+      <NavBarItemLink
         key="Connections Link Group"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Connections Link Group"
         href="https://pingidentity.com/"
       >
         Group
-      </Link>,
+      </NavBarItemLink>,
     ],
   },
   {
@@ -201,28 +156,20 @@ const data = [
     key: 'Experiences',
     heading: 'Experiences',
     children: [
-      <Link
+      <NavBarItemLink
         key="Experiences Link Attributes"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Experiences Link Attributes"
         href="https://pingidentity.com/"
       >
         Attributes
-      </Link>,
-      <Link
+      </NavBarItemLink>,
+      <NavBarItemLink
         key="Experiences Link Roles"
-        variant="buttons.navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Experiences Link Roles"
         href="https://pingidentity.com/"
       >
         Roles
-      </Link>,
+      </NavBarItemLink>,
     ],
   },
 ];
@@ -233,30 +180,22 @@ const secondData = [
     key: 'MFA',
     heading: 'MFA',
     children: [
-      <Button
+      <NavBarItemButton
+        id="MFA Button Users"
         key="MFA Button Users"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
       >
         Users
-      </Button>,
+      </NavBarItemButton>,
       {
         isSubTitle: true,
         subTitle: 'PingOne Services',
       },
-      <Button
+      <NavBarItemButton
         key="MFA Button Group"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="MFA Button Group"
       >
-        Group
-      </Button>,
+        Group Test
+      </NavBarItemButton>,
     ],
   },
   {
@@ -264,30 +203,22 @@ const secondData = [
     key: 'Risk',
     heading: 'Risk',
     children: [
-      <Button
+      <NavBarItemButton
         key="Risk Button Users"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Risk Button Users"
       >
         Users
-      </Button>,
+      </NavBarItemButton>,
       {
         isSubTitle: true,
         subTitle: 'PingOne Services',
       },
-      <Button
+      <NavBarItemButton
         key="Risk Button Group"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Risk Button Group"
       >
         Group
-      </Button>,
+      </NavBarItemButton>,
     ],
   },
   {
@@ -295,30 +226,22 @@ const secondData = [
     key: 'Verify',
     heading: 'Verify',
     children: [
-      <Button
+      <NavBarItemButton
         key="Verify Button Users"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Verify Button Users"
       >
         Users
-      </Button>,
+      </NavBarItemButton>,
       {
         isSubTitle: true,
         subTitle: 'PingOne Services',
       },
-      <Button
+      <NavBarItemButton
         key="Verify Button Group"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Verify Button Group"
       >
         Group
-      </Button>,
+      </NavBarItemButton>,
     ],
   },
   {
@@ -326,30 +249,22 @@ const secondData = [
     key: 'Credentials',
     heading: 'Credentials',
     children: [
-      <Button
+      <NavBarItemButton
         key="Credentials Button Users"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Credentials Button Users"
       >
         Users
-      </Button>,
+      </NavBarItemButton>,
       {
         isSubTitle: true,
         subTitle: 'PingOne Services',
       },
-      <Button
+      <NavBarItemButton
         key="Credentials Button Group"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Credentials Button Group"
       >
         Group
-      </Button>,
+      </NavBarItemButton>,
     ],
   },
 ];
@@ -360,341 +275,25 @@ const thirdData = [
     key: 'Environment',
     heading: 'Environment title that is so long, it wraps',
     children: [
-      <Button
+      <NavBarItemButton
         key="Earth Button Users"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Earth Button Users"
       >
         Users
-      </Button>,
-      <Button
+      </NavBarItemButton>,
+      <NavBarItemButton
         key="Earth Button Group"
-        variant="navItemButton"
-        sx={{
-          paddingLeft: '45px',
-          paddingRight: '45px',
-        }}
+        id="Earth Button Group"
       >
         Group
-      </Button>,
+      </NavBarItemButton>,
     ],
   },
 ];
 
 export const Default = () => (
-  // const data = [
-  //   {
-  //     icon: GlobeIcon,
-  //     key: 'Overview',
-  //     heading: 'Overview',
-  //     children: [
-  //       <Link
-  //         key="Overview Link Users"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Users
-  //       </Link>,
-  //       <Link
-  //         key="Overview Link Roles"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         A roles title that is really really really really long
-  //       </Link>,
-  //     ],
-  //   },
-  //   {
-  //     icon: ViewDashboard,
-  //     key: 'Dashboard',
-  //     heading: 'Dashboard',
-  //     children: [
-  //       <Link
-  //         key="Dashboard Link Group"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Group
-  //       </Link>,
-  //       <Link
-  //         key="Dashboard Link Populations"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Populations
-  //       </Link>,
-  //     ],
-  //   },
-  //   {
-  //     icon: AccountMultiple,
-  //     key: 'Identities',
-  //     heading: 'Identities',
-  //     children: [
-  //       <Link
-  //         key="Identities Link Users"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Users
-  //       </Link>,
-  //       <Link
-  //         key="Identities Link Group"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Group
-  //       </Link>,
-  //     ],
-  //   },
-  //   {
-  //     icon: TransitConnection,
-  //     key: 'Connections',
-  //     heading: 'Connections',
-  //     children: [
-  //       <Link
-  //         key="Connection Link Users"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Users
-  //       </Link>,
-  //       <Link
-  //         key="Connections Link Group"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Group
-  //       </Link>,
-  //     ],
-  //   },
-  //   {
-  //     icon: EmoticonHappy,
-  //     key: 'Experiences',
-  //     heading: 'Experiences',
-  //     children: [
-  //       <Link
-  //         key="Experiences Link Attributes"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Attributes
-  //       </Link>,
-  //       <Link
-  //         key="Experiences Link Roles"
-  //         variant="buttons.navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //         href="https://pingidentity.com/"
-  //       >
-  //         Roles
-  //       </Link>,
-  //     ],
-  //   },
-  // ];
-
-  // const secondData = [
-  //   {
-  //     icon: Fingerprint,
-  //     key: 'MFA',
-  //     heading: 'MFA',
-  //     children: [
-  //       <Button
-  //         key="MFA Button Users"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Users
-  //       </Button>,
-  //       {
-  //         isSubTitle: true,
-  //         subTitle: 'PingOne Services',
-  //       },
-  //       <Button
-  //         key="MFA Button Group"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Group
-  //       </Button>,
-  //     ],
-  //   },
-  //   {
-  //     icon: ScaleBalance,
-  //     key: 'Risk',
-  //     heading: 'Risk',
-  //     children: [
-  //       <Button
-  //         key="Risk Button Users"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Users
-  //       </Button>,
-  //       {
-  //         isSubTitle: true,
-  //         subTitle: 'PingOne Services',
-  //       },
-  //       <Button
-  //         key="Risk Button Group"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Group
-  //       </Button>,
-  //     ],
-  //   },
-  //   {
-  //     icon: Verify,
-  //     key: 'Verify',
-  //     heading: 'Verify',
-  //     children: [
-  //       <Button
-  //         key="Verify Button Users"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Users
-  //       </Button>,
-  //       {
-  //         isSubTitle: true,
-  //         subTitle: 'PingOne Services',
-  //       },
-  //       <Button
-  //         key="Verify Button Group"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Group
-  //       </Button>,
-  //     ],
-  //   },
-  //   {
-  //     icon: Verify,
-  //     key: 'Credentials',
-  //     heading: 'Credentials',
-  //     children: [
-  //       <Button
-  //         key="Credentials Button Users"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Users
-  //       </Button>,
-  //       {
-  //         isSubTitle: true,
-  //         subTitle: 'PingOne Services',
-  //       },
-  //       <Button
-  //         key="Credentials Button Group"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Group
-  //       </Button>,
-  //     ],
-  //   },
-  // ];
-
-  // const thirdData = [
-  //   {
-  //     icon: Earth,
-  //     key: 'Environment',
-  //     heading: 'Environment title that is so long, it wraps',
-  //     children: [
-  //       <Button
-  //         key="Earth Button Users"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Users
-  //       </Button>,
-  //       <Button
-  //         key="Earth Button Group"
-  //         variant="navItemButton"
-  //         sx={{
-  //           paddingLeft: '45px',
-  //           paddingRight: '45px',
-  //         }}
-  //       >
-  //         Group
-  //       </Button>,
-  //     ],
-  //   },
-  // ];
-  <NavBar>
-    <Box
-      sx={{
-        padding: '15px',
-      }}
-    >
+  <NavBar defaultSelectedKeys={['Dashboard Link Group']}>
+    <Box padding="md">
       <Link
         href="https://pingidentity.com"
         target="_blank"
@@ -703,10 +302,17 @@ export const Default = () => (
         {logo}
       </Link>
     </Box>
-    <Separator sx={{ mt: '10px', mb: '10px' }} />
+    <Separator marginTop="lg" marginBottom="sm" />
     <Box
-      variant="boxes.navBarSectionContainer"
+      variant="navBar.sectionContainer"
+      paddingBottom="xl"
     >
+      <NavBarItem
+        id="Overview"
+        key="Overview"
+        text="Overview"
+        icon={GlobeIcon}
+      />
       <NavBarSection items={data} hasSeparator />
       <NavBarSection items={secondData} hasSeparator title="PingOne Services" />
       <NavBarSection items={thirdData} />

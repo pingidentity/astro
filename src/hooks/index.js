@@ -6,6 +6,7 @@ export { default as useLabelHeight } from './useLabelHeight';
 export { default as useModalState } from './useModalState';
 export { default as useOverlayPanelState } from './useOverlayPanelState';
 export { default as usePropWarning } from './usePropWarning';
+export { default as useNavBarPress } from './useNavBarPress';
 export { default as useRockerButton } from './useRockerButton';
 export { default as useSelectField } from './useSelectField';
 export { default as useStatusClasses } from './useStatusClasses';
