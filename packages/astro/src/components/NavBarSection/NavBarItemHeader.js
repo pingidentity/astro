@@ -7,7 +7,7 @@ const NavBarItemHeader = (props) => {
   const { icon } = item;
   return (
     <Box
-      variant="boxes.navBarItemHeaderContainer"
+      variant="navBar.itemHeaderContainer"
       isRow
     >
       {icon &&
