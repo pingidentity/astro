@@ -27,6 +27,6 @@ export const Default = args => (
   <Loader {...args} />
 );
 
-export const LoaderWithMostCommonColor = () => (
+export const CustomColor = () => (
   <Loader color="neutral.60" />
 );

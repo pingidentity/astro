@@ -14,7 +14,7 @@ import Box from '../Box';
 import IconButton from '../IconButton';
 import Icon from '../Icon';
 import Text from '../Text';
-import { useStatusClasses } from '../../hooks';
+import { useStatusClasses, useDeprecationWarning } from '../../hooks';
 
 const Modal = forwardRef((props, ref) => {
   const {
@@ -67,6 +67,11 @@ const Modal = forwardRef((props, ref) => {
   const { classNames } = useStatusClasses(className, {
     isDarkMode: others.variant === 'modal.dark',
   });
+
+  useDeprecationWarning(
+    'The "dark" variant for Modal will be deprecated in Astro-UI 2.0.0.',
+    { isActive: others.variant === 'modal.dark' },
+  );
 
   return (
     <OverlayContainer>

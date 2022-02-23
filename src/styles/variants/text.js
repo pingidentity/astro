@@ -17,7 +17,7 @@ const wordWrap = {
 const tabLabel = {
   ...base,
   ...wordWrap,
-  fontSize: 'md',
+  fontSize: 'sm',
   fontWeight: 1,
   mb: 6,
   color: 'neutral.40',
@@ -126,6 +126,8 @@ const environmentBreadcrumb = {
 };
 
 const navBarSubtitle = {
+  my: 'md',
+  ml: 'md',
   fontWeight: 3,
   fontSize: '11px',
   color: 'accent.80',

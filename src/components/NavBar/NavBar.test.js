@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import GlobeIcon from 'mdi-react/GlobeIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 import AccountMultiple from 'mdi-react/AccountMultipleIcon';
@@ -10,7 +11,7 @@ import Verify from 'mdi-react/VerifiedIcon';
 import NavBar from './NavBar';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { Box, NavBarSection } from '../../index';
+import { Box, NavBarSection, NavBarItem, NavBarItemButton, NavBarItemLink } from '../../index';
 
 const data = [
   {
@@ -18,11 +19,21 @@ const data = [
     key: 'Overview',
     heading: 'Overview',
     children: [
-      'Users',
-      'Group',
-      'Populations',
-      'Attributes',
-      'A roles title that is really really really really long',
+      <NavBarItemButton
+        key="Credentials Button Users"
+        id="Credentials Button Users"
+        data-testid="navItemButton"
+      >
+        Users
+      </NavBarItemButton>,
+      <NavBarItemLink
+        key="Experiences Link Roles"
+        id="Experiences Link Roles"
+        href="https://pingidentity.com/"
+        data-testid="navItemLink"
+      >
+        Roles
+      </NavBarItemLink>,
     ],
   },
   {
@@ -128,9 +139,17 @@ const getComponent = (props = {}) => render((
     >
       <NavBarSection items={data} hasSeparator />
       <NavBarSection items={secondData} title="test_title" />
+      <NavBarItem
+        id="Overview"
+        key="Overview"
+        text="Overview"
+        icon={ViewDashboard}
+        data-testid="navItem"
+      />
     </Box>
   </NavBar>
 ));
+
 
 axeTest(getComponent);
 
@@ -150,4 +169,28 @@ test('should render title for itemBodies that have subTitles', () => {
   getComponent();
   const subTitle = screen.getByText('PingOne Services');
   expect(subTitle).toBeInTheDocument();
+});
+
+test('should select NavIemLink', () => {
+  getComponent();
+  const link = screen.getByTestId('navItemLink');
+  expect(link).toBeInTheDocument();
+  userEvent.click(link);
+  expect(link).toHaveClass('is-selected');
+});
+
+test('should select NavIem', () => {
+  getComponent();
+  const item = screen.getByTestId('navItem');
+  expect(item).toBeInTheDocument();
+  userEvent.click(item);
+  expect(item).toHaveClass('is-selected');
+});
+
+test('should select NavIemButton', () => {
+  getComponent();
+  const button = screen.getByTestId('navItemButton');
+  expect(button).toBeInTheDocument();
+  userEvent.click(button);
+  expect(button).toHaveClass('is-selected');
 });

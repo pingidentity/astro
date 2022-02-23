@@ -4,9 +4,9 @@ import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import github from 'prism-react-renderer/themes/github';
 import { useStatusClasses } from '../../hooks';
 import { Box, CopyText } from '../..';
+import codeView from '../../styles/variants/codeView';
 
 /**
  * Component for code syntax highlighting.
@@ -39,7 +39,7 @@ const CodeView = forwardRef((props, ref) => {
   const content = (
     <Highlight
       {...defaultProps}
-      theme={github}
+      theme={codeView.theme}
       code={children?.trim() || ''}
       language={language}
     >

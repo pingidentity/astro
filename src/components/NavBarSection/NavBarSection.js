@@ -20,24 +20,16 @@ const NavBarSection = (props) => {
   return (
     <>
       {title &&
-        <Text
-          variant="text.navBarSubtitle"
-          sx={{
-            mt: '25px',
-            mb: '15px',
-            ml: '15px',
-          }}
-        >
+        <Text variant="text.navBarSubtitle">
           {title}
         </Text>
       }
-      <AccordionGridGroup items={items}>
+      <AccordionGridGroup items={items.filter(i => i.children)}>
         {
           item => (
             <Item
-              headerProps={{
-                variant: 'accordion.accordionGridHeaderNav',
-              }}
+              headerProps={{ variant: 'accordion.accordionGridHeaderNav' }}
+              bodyProps={{ variant: 'navBar.sectionBody' }}
               textValue={item}
             >
               <NavBarItemHeader item={item} />
@@ -47,7 +39,7 @@ const NavBarSection = (props) => {
         }
       </AccordionGridGroup>
       {hasSeparator &&
-        <Box sx={{ pl: '15px', pr: '15px', mt: '25px' }}>
+        <Box sx={{ pl: '15px', pr: '15px', my: '10px' }}>
           <Separator variant="separator.navBarSeparator" />
         </Box>
       }

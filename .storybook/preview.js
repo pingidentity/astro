@@ -3,6 +3,7 @@ import { ThemeProvider } from 'emotion-theming';
 import theme from '../src/styles/theme';
 import { GlobalStyles } from '../src/components/AstroWrapper';
 import yourTheme from './AstroTheme';
+import { withConsole } from '@storybook/addon-console';
 
 const withThemeProvider = (Story, context) => (
   <>
@@ -15,7 +16,9 @@ const withThemeProvider = (Story, context) => (
   </>
 );
 
-export const decorators = [withThemeProvider];
+const withConsoleAddon = (storyFn, context) => withConsole()(storyFn)(context);
+
+export const decorators = [withThemeProvider, withConsoleAddon];
 
 export const parameters = {
   a11y: {
@@ -33,6 +36,7 @@ export const parameters = {
       order: [
         'Form',
         [
+          'ArrayField',
           'CheckboxField',
           'ColorField',
           'ComboBoxField',
