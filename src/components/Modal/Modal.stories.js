@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useModalState } from '../../hooks';
 import {
   OverlayProvider,
@@ -6,7 +6,6 @@ import {
   Button,
   Text,
   Modal,
-  TextField,
 } from '../../index';
 
 export default {
@@ -17,7 +16,7 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Delete Group',
+      defaultValue: 'Continue',
     },
     role: {},
     id: {
@@ -25,7 +24,9 @@ export default {
         type: 'text',
       },
     },
-    hasCloseButton: {},
+    hasCloseButton: {
+      defaultValue: true,
+    },
     isClosedOnBlur: {},
     isDismissable: {},
     isKeyboardDismissDisabled: {},
@@ -74,10 +75,6 @@ export default {
 
 export const Default = (args) => {
   const state = useModalState();
-  const [inputValue, setInputValue] = useState('');
-  const onTextFieldChange = useCallback(({ target: { value } }) => {
-    setInputValue(value.toUpperCase());
-  }, []);
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -89,70 +86,22 @@ export const Default = (args) => {
       {state.isOpen && (
         <Modal {...args} isOpen={state.isOpen} onClose={state.close}>
           <Text pt="lg">
-            Deleting a group <strong>&quot;Marketing&quot;</strong> cannot be
-            undone. Users will lose access to the applications.
-          </Text>
-          <Text pt="lg">
-            Type the word DELETE to confirm deletion of this group
-          </Text>
-          <TextField
-            value={inputValue}
-            onChange={onTextFieldChange}
-            aria-label="user input"
-          />
-          <Box isRow pt="lg" mr="auto">
-            <Button
-              variant="critical"
-              onPress={state.close}
-              mr="md"
-              isDisabled={Boolean(inputValue !== 'DELETE')}
-              aria-label="Delete"
-            >
-              Delete
-            </Button>
-            <Button onPress={state.close} aria-label="Cancel">
-              Cancel
-            </Button>
-          </Box>
-        </Modal>
-      )}
-    </OverlayProvider>
-  );
-};
-
-export const DarkVariant = () => {
-  const state = useModalState();
-
-  return (
-    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
-    // readers when a modal opens.
-    <OverlayProvider>
-      <Button onPress={state.open} aria-label="Open modal">
-        Open Modal
-      </Button>
-
-      {state.isOpen && (
-        <Modal
-          variant="modal.dark"
-          title="Question"
-          isOpen={state.isOpen}
-          onClose={state.close}
-          isDismissable
-          hasCloseButton
-        >
-          <Text variant="subtitle" color="white" pt="lg">
-            Would you ever really just click a button?
+            Do you want to continue with this action that you&lsquo;re performing?
           </Text>
           <Box isRow pt="lg" mr="auto">
             <Button
               variant="primary"
-              mr="md"
               onPress={state.close}
-              aria-label="Yes"
+              mr="md"
+              aria-label="Continue"
             >
-              Yes
+              Continue
             </Button>
-            <Button variant="link" onPress={state.close} aria-label="Cancel">
+            <Button
+              variant="link"
+              onPress={state.close}
+              aria-label="Cancel"
+            >
               Cancel
             </Button>
           </Box>
