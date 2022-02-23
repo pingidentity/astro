@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.2.1...@pingux/astro@1.3.0) (2022-02-23)
+
+
+### Bug Fixes
+
+* [UIP-4969] Update astro tab font size ([7af5410](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7af54107825154d795ecb97143fc24364c9b225c))
+* [UIP-5146] Loader Story Update - Change "Loader With Most Common Color" to "Custom Color" ([78fbdd9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/78fbdd938ce5b0a3f87f7821599caf3967c3389b))
+* [UIP-5150] Modal Storybook Improvements ([4a9bd28](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4a9bd28aa9f804cd51cc3a89fd0467ddfd3a2327))
+* [UIP-5225] Add accessible theme for CodeView using JS styles ([6659da6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6659da6743dd68886750d3c58465b36ad6b551c0))
+* [UIP-5281] NavBar improvements and design review changes ([f8bd0ac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f8bd0acd6bcedfc92ac7a6615e4b79b19d1fbe9e))
+
+
+### Features
+
+* [UIP-4607] Array field component ([8cca040](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8cca04033e330af5838b38f45e441464900db810))
+* [UIP-5228] Add Storysource and Console addons to Astro ([a96de8c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a96de8cf5c557e74b400ada232caf58974e927cb))
+
+
+
+
+
 ## [1.2.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.2.0...@pingux/astro@1.2.1) (2022-02-16)
 
 
