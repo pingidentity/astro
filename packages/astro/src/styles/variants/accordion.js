@@ -74,7 +74,6 @@ const accordionGridHeaderNav = {
   flexGrow: 1,
   fontWeight: 0,
   fontSize: '16px',
-  mt: '5px',
   '&.is-focused': {
     outline: 'none',
     boxShadow: 'focus',
@@ -83,10 +82,17 @@ const accordionGridHeaderNav = {
   },
   '&.is-hovered': {
     backgroundColor: 'accent.10',
-    boxShadow: 'inset 2px 0 0 0 white',
   },
   '&.is-pressed': {
-    backgroundColor: 'accent.10',
+    backgroundColor: 'accent.5',
+  },
+};
+
+const accordionGridNavItem = {
+  ...accordionGridHeaderNav,
+  '&.is-selected': {
+    backgroundColor: 'accent.5',
+    boxShadow: 'inset 2px 0 0 0 white',
   },
 };
 
@@ -106,4 +112,5 @@ export default {
   accordion,
   accordionBody,
   accordionGridHeaderNav,
+  accordionGridNavItem,
 };

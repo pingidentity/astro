@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { NavBarContext } from '../../context/NavBarContext';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box/Box';
 
 /**
@@ -13,15 +16,31 @@ import Box from '../Box/Box';
  */
 
 const NavBar = (props) => {
+  const {
+    defaultSelectedKeys,
+  } = props;
+
+  const [selectedKeys, setSelectedKeys] = useState(defaultSelectedKeys);
+
   return (
-    <Box
-      variant="boxes.navBar"
-      role="navigation"
-      as="nav"
-    >
-      {props.children}
-    </Box>
+    <NavBarContext.Provider value={{ selectedKeys, setSelectedKeys }}>
+      <Box
+        variant="navBar.container"
+        role="navigation"
+        as="nav"
+      >
+        {props.children}
+      </Box>
+    </NavBarContext.Provider>
   );
+};
+
+NavBar.propTypes = {
+  defaultSelectedKeys: isIterableProp,
+};
+
+NavBar.defaultProps = {
+  defaultSelectedKeys: [],
 };
 
 export default NavBar;

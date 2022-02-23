@@ -406,6 +406,7 @@ InfiniteLoadingList.parameters = {
       story: 'Note: Keep in mind the maxHeight may impact when the scroll callback is triggered. If you notice it\'s being called too often, try adjusting that value or loading more objects to prevent this behavior.',
     },
   },
+  chromatic: { delay: 5000 },
 };
 
 

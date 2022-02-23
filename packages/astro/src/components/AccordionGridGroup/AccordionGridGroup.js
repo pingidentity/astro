@@ -1,6 +1,7 @@
 import React, { useMemo, forwardRef, useImperativeHandle, useRef } from 'react';
 import { GridCollection, useGridState } from '@react-stately/grid';
 import { GridKeyboardDelegate, useGrid } from '@react-aria/grid';
+import { mergeProps } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 import { useCollator, useLocale } from '@react-aria/i18n';
@@ -29,6 +30,7 @@ export const collectionTypes = {
 const AccordionGridGroup = forwardRef((props, ref) => {
   const {
     disabledKeys,
+    containerProps,
   } = props;
 
   const accordionGridRef = useRef();
@@ -100,7 +102,7 @@ const AccordionGridGroup = forwardRef((props, ref) => {
   return (
     <AccordionGridContext.Provider value={{ state, keyboardDelegate }}>
       <Box
-        {...gridProps}
+        {...mergeProps(gridProps, containerProps)}
         ref={accordionGridRef}
       >
         {Array.from(state.collection).map(item => (
@@ -141,6 +143,8 @@ AccordionGridGroup.propTypes = {
   items: isIterableProp,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
+  /** Props object that is spread directly into the root (top-level) element. */
+  containerProps: PropTypes.shape({}),
   /** Defines a string value that labels the current element. */
   'aria-label': PropTypes.string,
   /** Identifies the element (or elements) that labels the current element. */

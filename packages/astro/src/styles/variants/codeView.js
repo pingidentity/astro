@@ -1,3 +1,112 @@
+const theme = {
+  plain: {
+    color: '#545454',
+    background: 'none',
+    lineHeight: 1.5,
+    tabSize: 4,
+  },
+  styles: [
+    {
+      types: ['prolog', 'constant', 'builtin'],
+      style: {
+        color: 'rgb(189, 147, 249)',
+      },
+    },
+    {
+      types: ['inserted', 'function'],
+      style: {
+        color: 'rgb(80, 250, 123)',
+      },
+    },
+    {
+      types: ['deleted'],
+      style: {
+        color: 'rgb(255, 85, 85)',
+      },
+    },
+    {
+      types: ['changed'],
+      style: {
+        color: 'rgb(255, 184, 108)',
+      },
+    },
+    {
+      types: ['punctuation', 'symbol'],
+      style: {
+        color: 'rgb(248, 248, 242)',
+      },
+    },
+    {
+      types: ['string', 'char', 'tag', 'selector'],
+      style: {
+        color: 'rgb(255, 121, 198)',
+      },
+    },
+    {
+      types: ['keyword', 'variable'],
+      style: {
+        color: 'rgb(189, 147, 249)',
+        fontStyle: 'italic',
+      },
+    },
+    {
+      types: ['comment'],
+      style: {
+        color: 'rgb(98, 114, 164)',
+      },
+    },
+    {
+      types: ['attr-name'],
+      style: {
+        color: 'rgb(241, 250, 140)',
+      },
+    },
+
+    {
+      types: ['comment', 'prolog', 'doctype', 'cdata'],
+      style: {
+        color: '#696969',
+      },
+    },
+    {
+      types: ['punctuation'],
+      style: {
+        color: '#545454',
+      },
+    },
+    {
+      types: ['property', 'tag', 'constant', 'symbol', 'deleted'],
+      style: {
+        color: '#007299',
+      },
+    },
+    {
+      types: ['boolean', 'number', 'operator', 'entity', 'url', 'variable'],
+      style: {
+        color: '#008000',
+      },
+    },
+    {
+      types: ['selector', 'attr-name', 'char', 'builtin', 'inserted', 'atrule', 'attr-value', 'function', 'string'],
+      style: {
+        color: '#aa5d00',
+      },
+    },
+    {
+      types: ['keyword', 'regex', 'important'],
+      style: {
+        color: '#d91e18',
+      },
+    },
+    {
+      types: ['keyword'],
+      style: {
+        fontStyle: 'normal',
+      },
+    },
+  ],
+};
+
 const wrapper = {
   bg: 'accent.99',
   border: '1px solid',
@@ -64,6 +173,7 @@ const lineNo = {
 };
 
 export default {
+  theme,
   wrapper,
   lineNo,
 };
