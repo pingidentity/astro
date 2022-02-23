@@ -34,7 +34,6 @@ const fieldHelperText = {
   ...base,
   ...wordWrap,
   fontSize: 'sm',
-  pb: 'sm',
   '&.is-default': {
     color: 'text.secondary',
   },
