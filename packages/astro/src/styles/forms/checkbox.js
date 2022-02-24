@@ -3,7 +3,6 @@
 // Default checkbox
 export const checkbox = {
   color: 'active',
-  mr: 'sm',
   'input:focus ~ &': {
     bg: 'transparent',
   },

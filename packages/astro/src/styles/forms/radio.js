@@ -5,7 +5,7 @@ export const radio = {
   width: 20,
   height: 20,
   color: 'active',
-  mr: 'sm',
+  mr: 'xs',
   // override the default focus styling
   'input:focus ~ &': {
     bg: 'transparent',
