@@ -11,12 +11,14 @@ export const Default = () => {
         {
             label: 'First item',
             onClick: () => console.log('First item clicked!'),
-            id: 'item1'
+            id: 'item1',
+            'data-id': 'first-item-id'
         },
         {
             label: 'Second item',
             onClick: () => console.log('Second item clicked!'),
-            id: 'item2'
+            id: 'item2',
+            'data-id': 'second-item-id'
         }
     ];
 
