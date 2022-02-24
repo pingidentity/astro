@@ -8,7 +8,15 @@ main.addons = [
 	'@storybook/addon-links',
 	'@storybook/addon-knobs/register',
 	'@storybook/addon-notes/register',
-	'@storybook/addon-docs',
+	{
+		name: '@storybook/addon-docs',
+		options: {
+			sourceLoaderOptions: {
+				injectStoryParameters: false,
+			},
+		},
+	},
+	'@storybook/addon-storysource',
 	'@whitespace/storybook-addon-html',
 ];
 main.webpackFinal = async (config) => {
