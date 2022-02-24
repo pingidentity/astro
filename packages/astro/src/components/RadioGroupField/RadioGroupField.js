@@ -45,15 +45,9 @@ const RadioGroupField = forwardRef((props, ref) => {
       className={classNames}
       {...radioGroupProps}
     >
-      <Label isDisabled={isDisabled} hintText={hintText} isRequired={isRequired} {...labelProps}>
+      <Label isDisabled={isDisabled} hintText={hintText} isRequired={isRequired} variant="forms.label.radioGroup" {...labelProps}>
         {label}
       </Label>
-      {
-        helperText &&
-        <FieldHelperText status={status}>
-          {helperText}
-        </FieldHelperText>
-      }
       <Box
         variant="forms.radioGroupWrapper"
         isRow={orientation === ORIENTATION.HORIZONTAL}
@@ -62,6 +56,12 @@ const RadioGroupField = forwardRef((props, ref) => {
           {children}
         </RadioContext.Provider>
       </Box>
+      {
+        helperText &&
+        <FieldHelperText status={status} sx={{ pt: 'xs' }}>
+          {helperText}
+        </FieldHelperText>
+      }
     </Box>
   );
 });
