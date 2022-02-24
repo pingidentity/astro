@@ -4,7 +4,6 @@ import { useAsyncList } from '@react-stately/data';
 import { SelectField, Item, Separator, Section } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../Label/constants';
-import Box from '../Box';
 
 const animals = [
   { name: 'Aardvark', id: '1' },
@@ -139,45 +138,6 @@ export const FloatLabel = () => (
   </SelectField>
 );
 
-export const LeftLabel = () => (
-  <Box gap="xl" width="100%">
-    <SelectField
-      helperText="Here is some helpful text..."
-      label="Example Label"
-      labelMode="left"
-    >
-      <Item key="red">Red</Item>
-      <Item key="blue">Blue</Item>
-      <Item key="yellow">Yellow</Item>
-    </SelectField>
-    <SelectField
-      label="Example Label that is much longer than the previous one"
-      labelMode="left"
-    >
-      <Item key="red">Red</Item>
-      <Item key="blue">Blue</Item>
-      <Item key="yellow">Yellow</Item>
-    </SelectField>
-    <SelectField
-      label="Example label with set width"
-      labelMode="left"
-      containerProps={{ sx: { gridTemplateColumns: '120px auto' } }}
-    >
-      <Item key="red">Red</Item>
-      <Item key="blue">Blue</Item>
-      <Item key="yellow">Yellow</Item>
-    </SelectField>
-  </Box>
-);
-
-LeftLabel.parameters = {
-  docs: {
-    description: {
-      story: 'Users are able to override the default 40% column width when using left label by providing a new gridTemplatesColumn value, as shown in the example below.',
-    },
-  },
-};
-
 export const Controlled = () => {
   const [selectedKey, setSelectedKey] = useState('yellow');
   const handleSelectionChange = key => setSelectedKey(key);
@@ -216,13 +176,13 @@ export const DisabledField = () => (
 export const DisabledOptions = () => (
   <SelectField label="What's your favorite color?" disabledKeys={['blue']}>
     <Item key="red">Red</Item>
-    <Item key="blue">Blue (disabled)</Item>
+    <Item key="blue">Blue</Item>
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
 
 export const NoOptionsAvailable = () => (
-  <SelectField label="Select an option..." isDisabled defaultText="No options available" />
+  <SelectField label="Select an option..." placeholder="No options available" />
 );
 
 export const HelperText = () => (
