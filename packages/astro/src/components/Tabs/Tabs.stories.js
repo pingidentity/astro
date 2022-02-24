@@ -145,16 +145,6 @@ export const CustomTabLine = () => (
   </Tabs>
 );
 
-export const Orientation = () => (
-  <Tabs orientation="vertical" items={tabs}>
-    {item => (
-      <Tab key={item.name} title={item.name}>
-        {item.children}
-      </Tab>
-    )}
-  </Tabs>
-);
-
 export const TabPanelProps = () => (
   <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
     {item => (
