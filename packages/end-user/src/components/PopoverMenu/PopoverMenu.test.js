@@ -69,4 +69,21 @@ describe('PopoverMenu', () => {
         popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
         expect(popovermenu.exists()).toEqual(false);
     });
+
+    it("should let pass data-id to the PopoverMenu buttons", () => {
+      const testDataId = "test-data-id";
+      const wrapper = getComponent({
+        isOpen: true,
+        buttons: [
+          {
+            id: "testButton",
+            label: "Test Button",
+            "data-id": testDataId,
+          },
+        ],
+      });
+      expect(wrapper.find(`button[data-id="${testDataId}"]`).exists()).toEqual(
+        true
+      );
+    });
 });

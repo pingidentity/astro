@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { usePopper } from 'react-popper';
 import Popover from '../shared/Popover';
 import Icon from '@mdi/react';
 import {
@@ -12,7 +11,6 @@ const PopoverMenu = ({
     'data-id': dataId,
     buttons,
     isOpen,
-    placement,
 }) => {
     const [popperOpen, setPopperOpen] = useState(isOpen);
 
@@ -39,13 +37,14 @@ const PopoverMenu = ({
                 className="popover-menu__dialog"
                 data-id={dataId}
             >
-                {buttons.map(button => (
+                {buttons.map(({ id, onClick, label, ...rest }) => (
                     <Button
                         className="popover-menu__item"
-                        onClick={e => buttonClick(e, button.onClick)}
-                        key={button.id}
+                        onClick={e => buttonClick(e, onClick)}
+                        key={id}
+                        {...rest}
                     >
-                        {button.label}
+                        {label}
                     </Button>
                 ))}
             </div>
