@@ -1,7 +1,12 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
-import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
-import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
+import MenuUp from 'mdi-react/MenuUpIcon';
+import MenuDown from 'mdi-react/MenuDownIcon';
 import { useNumberField } from '@react-aria/numberfield';
 import { useNumberFieldState } from '@react-stately/numberfield';
 import { useLocale } from '@react-aria/i18n';
@@ -53,27 +58,58 @@ const NumberField = forwardRef((props, ref) => {
 
   const ControlArrows = (
     <Box variant="numberField.arrows">
-      <IconButton {...incrementButtonProps} ref={decRef} tabIndex="-1">
-        <Icon icon={ArrowDropUpIcon} size={12} />
+      <IconButton {...incrementButtonProps} ref={decRef} tabIndex="-1" p={0}>
+        <Icon icon={MenuUp} size={18} />
       </IconButton>
-      <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="-1">
-        <Icon icon={ArrowDropDownIcon} size={12} />
+      <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="-1" p={0}>
+        <Icon icon={MenuDown} size={18} />
       </IconButton>
     </Box>
+  );
+
+  // this needed to remove console warning in React 16
+  // I believe once we update to 17 - we can remove this
+  const onInputFocus = useCallback(
+    (e) => {
+      e.persist();
+      fieldControlProps.onFocus(e);
+      inputProps.onFocus(e);
+    },
+    [fieldControlProps, inputProps],
+  );
+  const onInputBlur = useCallback(
+    (e) => {
+      e.persist();
+      fieldControlProps.onBlur(e);
+      inputProps.onBlur(e);
+    },
+    [fieldControlProps, inputProps],
+  );
+
+  const updatedFieldControlProps = useMemo(
+    () => ({
+      ...fieldControlProps,
+      onFocus: onInputFocus,
+      onBlur: onInputBlur,
+    }),
+    [fieldControlProps, onInputBlur, onInputFocus],
   );
 
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
       <Box variant="numberField.noDefaultArrows" {...groupProps}>
-        <Box variant="numberField.arrowsWrapper" className={fieldControlProps.className}>
+        <Box
+          variant="numberField.arrowsWrapper"
+          className={fieldControlProps.className}
+        >
           <Input
             variant="forms.input.numberField"
             ref={inputRef}
             // we don't want to merge this props, we want to
             // overwrite them like defaultValue, value, ect.
-            {...fieldControlProps}
-            {...omit(inputProps, 'name')}
+            {...updatedFieldControlProps}
+            {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
           />
           {ControlArrows}
         </Box>
