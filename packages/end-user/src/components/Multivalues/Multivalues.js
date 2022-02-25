@@ -4,6 +4,19 @@ import classnames from 'classnames';
 import Select from 'react-select';
 import Creatable from 'react-select/creatable';
 import { noop } from 'lodash';
+import FieldMessage from '../FieldMessage'
+
+/**
+ * @enum {string}
+ * @alias Multivalues~multivaluesInputTypes
+ * @desc Enum for the different types of multivalue input styling
+ */
+ export const multivalueInputTypes = {
+    PRIMARY: 'default',
+    ERROR: 'error',
+    SUCCESS: 'success',
+    EMPTY: '',
+};
 
 const Multivalues = ({
     autoFocus,
@@ -17,33 +30,63 @@ const Multivalues = ({
     options,
     optionsStrict,
     placeholder,
+    type,
+    fieldMessage,  
+    fieldMessageProps, 
 }) => {
+    const classNames = classnames('multivalues__control', className, {
+        'multivalues__control--error': type === multivalueInputTypes.ERROR,
+        'multivalues__control--success': type === multivalueInputTypes.SUCCESS,
+        'multivalues__control--primary': type === multivalueInputTypes.PRIMARY,
+    });
+
+    const iconClassNames = classnames('multivalues__icon', {
+        'multivalues__icon--error': type === multivalueInputTypes.ERROR,
+        'multivalues__icon--success': type === multivalueInputTypes.SUCCESS,
+    });
+
     const SelectTag = optionsStrict ? Select : Creatable;
     return (
-        <SelectTag
-            classNamePrefix="multivalues"
-            components={{
-                DropdownIndicator: () => null,
-                ClearIndicator: () => null,
-                IndicatorSeparator: () => null,
-                Control: ({ children, commonProps, innerProps }) => (
-                    <div className="multivalues__control" {...innerProps}>
-                        {label && <label>{label}</label>}
-                        {children}
-                    </div>
-                ),
-            }}
-            className={className}
-            isMulti
-            autoFocus={autoFocus}
-            defaultValue={entries}
-            options={options}
-            name={name}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            placeholder={placeholder}
-            onChange={onValueChange}
-        />
+        <>
+            {(
+                type === 'success' || type === 'error'
+                    ? <div className={iconClassNames} key="type-icon"></div>
+                    : null
+            )}
+            <SelectTag
+                classNamePrefix="multivalues"
+                components={{
+                    DropdownIndicator: () => null,
+                    ClearIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                    Control: ({ children, commonProps, innerProps }) => (
+                        <div className={classNames} {...innerProps}>
+                            {label && <label>{label}</label>}
+                            {children}
+                        </div>
+                    ),
+                }}
+                className={className}
+                isMulti
+                autoFocus={autoFocus}
+                defaultValue={entries}
+                options={options}
+                name={name}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                placeholder={placeholder}
+                onChange={onValueChange}
+            />
+        
+            {fieldMessage && (
+                <FieldMessage
+                    status={type}
+                    {...fieldMessageProps}
+                >
+                    {fieldMessage}
+                </FieldMessage>
+            )}
+        </>
     );
 };
 
@@ -98,6 +141,10 @@ Multivalues.propTypes = {
      * Placeholder text to display when there are no entries or drafts.
      */
     placeholder: PropTypes.string,
+    /**
+     * Determines the styling of the input
+     */
+    type: PropTypes.oneOf(Object.values(multivalueInputTypes)),
 };
 
 Multivalues.defaultProps = {
@@ -108,6 +155,7 @@ Multivalues.defaultProps = {
     onValueChange: noop,
     options: [],
     optionsStrict: false,
+    type: multivalueInputTypes.EMPTY,
 };
 
 export default Multivalues;
