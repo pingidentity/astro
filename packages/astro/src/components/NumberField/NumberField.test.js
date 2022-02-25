@@ -133,3 +133,9 @@ test('number field input receiving name attribute', () => {
   getComponent({ name: testName });
   expect(screen.getByLabelText(testLabel)).toHaveAttribute('name', testName);
 });
+
+test('number field can be focused', () => {
+  getComponent();
+  userEvent.tab();
+  expect(screen.getByLabelText(testLabel)).toHaveClass('is-focused');
+});

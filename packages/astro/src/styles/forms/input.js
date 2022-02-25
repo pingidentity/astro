@@ -190,5 +190,5 @@ input.multivaluesWrapper = {
 
 input.numberField = {
   ...input,
-  pr: '27px',
+  pr: '28px',
 };
