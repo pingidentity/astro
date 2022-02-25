@@ -7,6 +7,7 @@ import axeTest from '../../utils/testUtils/testAxe';
 const testId = 'test-input';
 const defaultProps = {
   'data-testid': testId,
+  'aria-label': 'My Input',
 };
 const getComponent = (props = {}) => render(<Input {...defaultProps} {...props} />);
 
@@ -33,8 +34,15 @@ test('maxlength field with a set maxlength', () => {
   expect(input.value.length).toBe(3);
 });
 
-test('maxlength field set as a negative number or zero', () => {
+test('maxlength field is not set as null', () => {
   getComponent({ maxLength: null });
+  const input = screen.getByTestId(testId);
+  userEvent.type(input, 'banana');
+  expect(input.value.length).toBe(6);
+});
+
+test('maxlength field is not set as zero', () => {
+  getComponent({ maxLength: 0 });
   const input = screen.getByTestId(testId);
   userEvent.type(input, 'banana');
   expect(input.value.length).toBe(6);
