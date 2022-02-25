@@ -1,5 +1,5 @@
 import React from 'react';
-import Multivalues from './Multivalues';
+import Multivalues, { multivalueInputTypes } from './Multivalues';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
@@ -16,12 +16,42 @@ const entries = [
 
 const options = [{ value: 'vanilla', label: 'Vanilla' }];
 
-export const Default = () => (
+export const Default = () => (<React.Fragment>
     <Multivalues
-        data-id="asdf"
+        data-id="default"
         entries={entries}
         options={options}
         optionsStrict={boolean('Strict options', false)}
         onValueChange={action('Value added or removed.')}
     />
-);
+    <br/>
+    <Multivalues
+        data-id="error"
+        entries={entries}
+        options={options}
+        optionsStrict={boolean('Strict options', false)}
+        onValueChange={action('Value added or removed.')}
+        type={multivalueInputTypes.ERROR}
+        fieldMessage='Error Example Message'
+    />
+    <br/>
+    <Multivalues
+        data-id="success"
+        entries={entries}
+        options={options}
+        optionsStrict={boolean('Strict options', false)}
+        onValueChange={action('Value added or removed.')}
+        type={multivalueInputTypes.SUCCESS}
+        fieldMessage='Success Example Message'
+    />
+    <br/>
+    <Multivalues
+        data-id="primary"
+        entries={entries}
+        options={options}
+        optionsStrict={boolean('Strict options', false)}
+        onValueChange={action('Value added or removed.')}
+        type={multivalueInputTypes.PRIMARY}
+        fieldMessage='Primary Example Message'
+    />
+</React.Fragment>);

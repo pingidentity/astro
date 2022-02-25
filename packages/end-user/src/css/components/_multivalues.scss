@@ -1,3 +1,18 @@
+@mixin input-icon {
+    font-family: $icon-font;
+    font-size: 16px;
+    line-height: 16px;
+    text-transform: none;
+    position: relative;
+    width: 100%;
+
+    &::before {
+        position: absolute;
+        right: $spacing-md;
+        top: $spacing-md;
+    }
+}
+
 .multivalues {
     &__control {
         background-color: #ffffff !important;
@@ -15,6 +30,16 @@
 
         &--is-focused {
             border-color: #2996cc !important;
+        }
+
+        &--error,
+        &--error:hover {
+            border-color: $color-critical-red !important;
+        }
+    
+        &--success,
+        &--success:hover {
+            border-color: $color-success-green !important;
         }
     }
 
@@ -36,4 +61,44 @@
             }
         }
     }
+
+    &__icon {
+        @include input-icon();
+        right: 0;
+        z-index: 1;
+    
+        &--error {
+            &::before {
+                content: $pingicon-error-triangle;
+                color: $color-critical-red;
+            }
+        }
+    
+        &--success {
+            &::before {
+                content: $pingicon-success-round;
+                color: $color-success-green;
+            }
+        }
+    
+        &--hidden {
+            cursor: pointer;
+            &::before {
+                content: $pingicon-view-hidden;
+            }
+        }
+    
+        &--view-hidden {
+            cursor: pointer;
+            &::before {
+                content: $pingicon-view;
+            }
+        }
+    }
+    
+    &__icon ~ &__icon::before {
+        margin-right: $spacing-lg;
+    }
 }
+
+
