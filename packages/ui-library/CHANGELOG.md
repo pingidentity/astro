@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.1.1...ui-library@5.1.2) (2022-03-01)
+
+
+### Bug Fixes
+
+* [UIP-4586] Multivalue pasting value with leading space creates empty string value ([8d07664](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/8d076646963b48dd6e8b7704f7998c6eb01e8645))
+* [UIP-5202] add davinci logo assets ([c6b6c8d](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/c6b6c8d91b130cfda2986c6383566498f665d982))
+
+
+
+
+
 ## [5.1.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.1.0...ui-library@5.1.1) (2022-02-16)
 
 

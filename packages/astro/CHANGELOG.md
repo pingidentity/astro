@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.3.0...@pingux/astro@1.3.1) (2022-03-01)
+
+
+### Bug Fixes
+
+* [UIP-5110] Remove ListLayout and SchemaLayout stories ([e0ac22b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e0ac22b4b0d9134edd4dd7c76e92926b33d62962))
+* [UIP-5152] Deprecate page header component ([a7cf8d6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a7cf8d6a507805e54a5c3c6bcf047102d2b3813d))
+* [UIP-5178] NumberField - Spec Update ([0e6a2b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0e6a2b79799edf4e9b52bf580ca45043c1b810dc))
+* [UIP-5212] RadioField and CheckboxField Spacing Update ([b6e8cb4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b6e8cb47e783c52caff04eb61518e5db15b4479f))
+* [UIP-5226] MultivaluesField allow props to be spread into TextField ([8806276](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8806276c62bf4ea9cf5d4454fb57a61ec313e375))
+* [UIP-5241] Switch Label Text and Spacing Updates ([d79f7a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d79f7a415b109b9d407677e15614464a34e6fdf8))
+* [UIP-5244] SelectField Storybook Updates ([a0391ea](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a0391ea2b17ed9c8d0fd7f21ab535d5305f6e233))
+
+
+
+
+
 # [1.3.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.2.1...@pingux/astro@1.3.0) (2022-02-23)
 
 

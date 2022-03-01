@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.1.2...@pingux/end-user@2.2.0) (2022-03-01)
+
+
+### Bug Fixes
+
+* [UIP-4974] PopoverMenu items don't have unique ids or data-ids ([23a3a66](https://gitlab.corp.pingidentity.com/ux/end-user/commit/23a3a6671b99a408406d0d57587ee18a69d9f1e1))
+* [UIP-5134] Multivalue doesnt show error messages ([47ab14a](https://gitlab.corp.pingidentity.com/ux/end-user/commit/47ab14a1c339502178596f89abc366e0c8b7e312))
+
+
+### Features
+
+* [UIP-5240] Add Storysource addon for end-user ([d40c12a](https://gitlab.corp.pingidentity.com/ux/end-user/commit/d40c12a620d8918fec85215fa152ac80b91afee7))
+
+
+
+
+
 ## [2.1.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.1.1...@pingux/end-user@2.1.2) (2022-02-16)
 
 

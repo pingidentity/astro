@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.5...@pingux/schema-form@3.0.6) (2022-03-01)
+
+
+### Bug Fixes
+
+* [UIP-5272] Export Astro theme as a part of Scheme Form package ([fa91fc6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fa91fc6041cb134f22b99a5abe72029d54eeb98e))
+
+
+
+
+
 ## [3.0.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.4...@pingux/schema-form@3.0.5) (2022-02-16)
 
 **Note:** Version bump only for package @pingux/schema-form

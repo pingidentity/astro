@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.25.6...@pingux/flow-diagram@0.26.0) (2022-03-01)
+
+
+### Features
+
+* [UIP-5239] Add Storysource addon for flow-diagram ([ac9ef72](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ac9ef7277345918b2eb1ec3d7d6cbf324c5c4796))
+
+
+
+
+
 ## [0.25.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.25.6-alpha.0...@pingux/flow-diagram@0.25.6) (2022-02-02)
 
 **Note:** Version bump only for package @pingux/flow-diagram
