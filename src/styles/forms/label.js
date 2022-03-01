@@ -66,3 +66,8 @@ label.checkbox = {
   alignItems: 'center',
   cursor: 'pointer',
 };
+
+label.radioGroup = {
+  ...label,
+  fontWeight: 1,
+};
