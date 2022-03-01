@@ -24,7 +24,10 @@ const radioContainer = {
 
 // Used to add spacing for content shown when a radio is checked
 const radioCheckedContent = {
-  py: 'md',
+  pb: 'sm',
+  pl: 'lg',
+  color: 'text.secondary',
+  fontSize: 'md',
 };
 
 const listItem = {

@@ -122,8 +122,8 @@ const useField = (props = {}) => {
 
   // Handle focus within and value state for the container. These are needed for float labels.
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
-  const isFloatLabel = labelMode === labelModes.FLOAT;
-  const isLeftLabel = labelMode === labelModes.LEFT;
+  const isFloatLabel = labelMode === labelModes.FLOAT || labelProps?.labelMode === labelModes.FLOAT;
+  const isLeftLabel = labelMode === labelModes.LEFT || labelProps?.labelMode === labelModes.LEFT;
   const isFloatLabelActive = isFloatLabel && (
     hasValue || hasFocusWithin || containerProps?.isFloatLabelActive
   );

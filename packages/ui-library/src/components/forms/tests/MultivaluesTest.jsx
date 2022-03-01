@@ -242,7 +242,6 @@ describe("Multivalues", function () {
     });
 
     it ("trigger onPasteValue", function () {
-
         const mockReturn = ["return"];
         const onValueChange = jest.fn();
         const onPaste = jest.fn(() => mockReturn);
@@ -256,7 +255,6 @@ describe("Multivalues", function () {
         );
         input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
 
-
         const mockEvent = {
             preventDefault: ()=>{},
             stopPropagation: ()=>{},
@@ -266,6 +264,32 @@ describe("Multivalues", function () {
         };
         ReactTestUtils.Simulate.paste(input, mockEvent);
         expect(onPaste.mock.calls[0][0]).toEqual(pasteValue);
+        expect(onValueChange).toHaveBeenCalledWith([...entryList, ...mockReturn]);
+    });
+
+    it ("trims whitespace onPasteValue", function () {
+        const mockReturn = ["return"];
+        const onValueChange = jest.fn();
+        const onPaste = jest.fn(() => mockReturn);
+        const pasteValue = "  hello";
+        const entryList = ["hello"];
+        component = ReactTestUtils.renderIntoDocument(
+            <Multivalues title="Sites" data-id="multiselect"
+                entries={entryList}
+                onValueChange={onValueChange}
+                onPasteValue={onPaste} />
+        );
+        input = TestUtils.findRenderedDOMNodeWithDataId(component,"value-entry");
+
+        const mockEvent = {
+            preventDefault: ()=>{},
+            stopPropagation: ()=>{},
+            clipboardData: {
+                getData: () => pasteValue
+            }
+        };
+        ReactTestUtils.Simulate.paste(input, mockEvent);
+        expect(onPaste.mock.calls[0][0]).toEqual("hello");
         expect(onValueChange).toHaveBeenCalledWith([...entryList, ...mockReturn]);
     });
 

@@ -28,6 +28,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     disabledKeys = [],
     hasAutoFocus,
     hasNoStatusIndicator,
+    inputProps: customInputProps,
     isDisabled,
     isNotFlippable,
     isReadOnly,
@@ -249,6 +250,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   );
 
   const inputProps = {
+    ...customInputProps,
     controlProps: {
       'aria-expanded': isOpen,
       role: 'combobox',
@@ -315,6 +317,10 @@ MultivaluesField.propTypes = {
   hasAutoFocus: PropTypes.bool,
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator: PropTypes.bool,
+  /**
+   * Props that get passed as-is to the underlying TextField element
+   */
+  inputProps: PropTypes.shape({}),
   /** Whether the input is disabled. */
   isDisabled: PropTypes.bool,
   /**

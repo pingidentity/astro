@@ -1,5 +1,7 @@
 export const label = {
   alignItems: 'center',
+  fontSize: 'md',
+  color: 'text.primary',
 };
 
 export const container = {

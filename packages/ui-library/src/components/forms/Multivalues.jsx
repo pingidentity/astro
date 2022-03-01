@@ -354,7 +354,7 @@ export class MultivaluesBase extends Component {
         if (this.props.options && this.props.optionsStrict) {
             return;
         }
-        const pastedText = e.clipboardData.getData("text");
+        const pastedText = e.clipboardData.getData("text").trim();
         const newEntries = this.props.onPasteValue(pastedText, e);
 
         this.props.onValueChange([...this.props.entries, ...newEntries]);

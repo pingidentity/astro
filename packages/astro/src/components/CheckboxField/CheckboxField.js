@@ -56,7 +56,7 @@ const CheckboxField = forwardRef((props, ref) => {
       </Label>
       {
         helperText &&
-        <FieldHelperText status={status}>
+        <FieldHelperText status={status} sx={{ pt: 7 }}>
           {helperText}
         </FieldHelperText>
       }
