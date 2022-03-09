@@ -2,7 +2,7 @@
     "default": {
         "color": {
             "button": {
-                "value": "#2996cc"
+                "value": "#007CBA"
             },
             "buttonText": {
                 "value": "#ffffff"
@@ -14,7 +14,7 @@
                 "value": "#686f77"
             },
             "link": {
-                "value": "#2996cc"
+                "value": "#007CBA"
             },
             "card": {
                 "value": "#ffffff"
