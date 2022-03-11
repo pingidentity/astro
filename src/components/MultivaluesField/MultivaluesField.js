@@ -6,7 +6,6 @@ import { FocusScope } from '@react-aria/focus';
 import { useListState } from '@react-stately/list';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import { v4 as uuid } from 'uuid';
 import { Chip, Icon, IconButton, PopoverContainer, ScrollBox, TextField } from '../..';
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -168,10 +167,12 @@ const MultivaluesField = forwardRef((props, ref) => {
             setFilterString('');
           }
         } else if (hasCustomValue) {
-          const name = e.target.value;
-          const id = uuid();
-          selectionManager.toggleSelection(id);
-          setCustomItems([...customItems, { id, key: id, name }]);
+          const key = e.target.value;
+          if (state.selectionManager.isSelected(key)) {
+            return;
+          }
+          selectionManager.toggleSelection(key);
+          setCustomItems([...customItems, { id: key, key, name: key }]);
           setFilterString('');
         }
         break;
