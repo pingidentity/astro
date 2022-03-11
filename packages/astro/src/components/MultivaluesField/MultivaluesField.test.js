@@ -211,6 +211,61 @@ test('changing the input value and hitting enter creates new value in non-restri
   expect(chipContainer).toHaveAttribute('role', 'presentation');
 });
 
+test('in non-restrictive mode "onSelectionChange" returns entered keys', () => {
+  const onSelectionChange = jest.fn();
+  getComponent({ mode: 'non-restrictive', onSelectionChange });
+  const input = screen.getByRole('combobox');
+  const value = 'custom';
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+
+  const chip = screen.queryByText(value);
+  expect(chip).toBeInTheDocument();
+
+  expect(onSelectionChange).toBeCalledTimes(1);
+  expect(onSelectionChange.mock.calls[0][0].has(value)).toBeTruthy();
+});
+
+test('in non-restrictive mode the same value cannot be applied twice', () => {
+  const onSelectionChange = jest.fn();
+  getComponent({ mode: 'non-restrictive', onSelectionChange });
+  const input = screen.getByRole('combobox');
+  const value = 'custom';
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+
+  const chip = screen.queryByText(value);
+  expect(chip).toBeInTheDocument();
+
+  expect(input).toHaveValue('');
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+  expect(input).toHaveValue(value);
+  expect(onSelectionChange).toBeCalledTimes(1);
+});
+
+test('in non-restrictive mode the value that was already selected using the list cannot be applied', () => {
+  const onSelectionChange = jest.fn();
+  getComponent({ mode: 'non-restrictive', onSelectionChange });
+
+  const input = screen.getByRole('combobox');
+  input.focus();
+
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const firstOption = options[0];
+  firstOption.click();
+
+  expect(onSelectionChange.mock.calls[0][0].has(items[0].name)).toBeTruthy();
+  onSelectionChange.mockClear();
+
+  userEvent.type(input, items[0].name);
+  userEvent.type(input, '{enter}');
+
+  expect(input).toHaveValue(items[0].name);
+  expect(onSelectionChange).not.toBeCalled();
+});
+
 test('options can be focused via keyboard', () => {
   getComponent();
   const input = screen.getByRole('combobox');
