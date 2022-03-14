@@ -20,7 +20,6 @@ const FieldHelperText = forwardRef((props, ref) => {
   return (
     <Text
       ref={ref}
-      pt="sm"
       variant="fieldHelperText"
       role="status"
       {...others}
