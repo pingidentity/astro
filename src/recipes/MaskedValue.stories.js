@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import EyeIcon from 'mdi-react/EyeIcon';
-import EyeOffIcon from 'mdi-react/EyeOffIcon';
+import EyeIcon from 'mdi-react/EyeOutlineIcon';
+import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import { Box, Icon, IconButton, Text } from '../index';
+import { useStatusClasses } from '../hooks';
 
 export default {
   title: 'Recipes/MaskedValues',
@@ -16,22 +17,26 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'very-secret-information.?1234512345',
+      defaultValue: 'A secret piece of text',
     },
   },
 };
 
 export const Default = ({ dataTitle, secretData }) => {
   const [isMasked, setIsMasked] = useState(true);
+  const { classNames } = useStatusClasses(null, {
+    isMasked,
+  });
 
   return (
     <Box>
       <Text variant="label">{dataTitle}</Text>
       <Box isRow alignItems="center">
-        <Text sx={{ width: 255, wordBreak: 'break-all', ...(isMasked && { letterSpacing: 2 }) }}>
-          {isMasked ? '•'.repeat(secretData?.length) : secretData}
+        <Text variant="maskedValue" className={classNames}>
+          {isMasked ? '•'.repeat(99) : secretData}
         </Text>
         <IconButton
+          aria-label={isMasked ? 'Show content' : 'Hide content'}
           onPress={() => setIsMasked(!isMasked)}
           sx={{ width: 'fit-content', marginLeft: 10, alignSelf: 'auto' }}
         >
