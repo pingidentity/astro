@@ -140,6 +140,16 @@ const navBarHeaderText = {
   fontWeight: 1,
 };
 
+const maskedValue = {
+  width: 252,
+  wordBreak: 'break-all',
+  '&.is-masked': {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    fontWeight: 700,
+  },
+};
+
 export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
@@ -156,6 +166,7 @@ export const text = {
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
+  maskedValue,
   expandableRow,
   navBarHeaderText,
   navBarSubtitle,
