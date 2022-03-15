@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.3.1...@pingux/astro@1.4.0) (2022-03-15)
+
+
+### Bug Fixes
+
+* [UIP-5211] Update Masked Value Recipe ([5c030f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5c030f7782ce061702a5e94c3cf065d2384dbd46))
+* [UIP-5243] SelectField Float Label Issue ([a69a569](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a69a569fc297110f46b924e6fe1f1f5fcf450c57))
+* [UIP-5306]  Unable to get custom values from MultivaluesField ([d9cb8cc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d9cb8cc63e16e700ec6b0363794215e26b217b51))
+
+
+### Features
+
+* [UIP-5038] Inline edit recipe using TextAreaField component ([b01b3cd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b01b3cd5de24ceee174a98da745d6e9d35b3f3f7))
+
+
+
+
+
 ## [1.3.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.3.0...@pingux/astro@1.3.1) (2022-03-01)
 
 
