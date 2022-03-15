@@ -7,6 +7,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import { Item } from '../../index';
 import { useSelectField } from '../../hooks';
 import SelectFieldBase from './SelectFieldBase';
+import { modes } from '../Label/constants';
 
 const items = [
   { name: 'a' },
@@ -114,6 +115,14 @@ test('select field with helper text', () => {
   const fieldHelperText = screen.getByText(helperText);
   expect(fieldHelperText).toBeInTheDocument();
   expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
+});
+
+test('label floats after user\'s interacting', () => {
+  getComponent({ labelMode: modes.FLOAT, value: '' });
+  const textAreaContainer = screen.getByTestId(testId);
+  expect(textAreaContainer).not.toHaveClass('is-float-label-active');
+  userEvent.tab();
+  expect(textAreaContainer).toHaveClass('is-float-label-active');
 });
 
 test('clicking on the visible button opens the popuplist', () => {

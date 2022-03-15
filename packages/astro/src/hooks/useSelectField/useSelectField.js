@@ -8,6 +8,7 @@ import { useColumnStyles, useDeprecationWarning, useField } from '..';
 import ListBox from '../../components/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
+import { modes } from '../../components/Label/constants';
 
 const useSelectField = (props, ref) => {
   const {
@@ -90,6 +91,7 @@ const useSelectField = (props, ref) => {
     fieldLabelProps,
   } = useField({
     ...props,
+    placeholder: props.labelMode === modes.FLOAT ? '' : placeholder,
     labelProps: {
       ...props.labelProps,
       ...labelProps,
