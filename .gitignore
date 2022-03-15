@@ -30,6 +30,7 @@ lerna_version.json
 *.code-workspace
 .vscode/*
 **/.vscode/*
+.history/*
 
 # IDEA
 .idea/*

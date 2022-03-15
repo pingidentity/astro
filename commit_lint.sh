@@ -10,9 +10,11 @@ IS_RELEASE_REGEX='^release-.+'
 
 # Skip checks for draft MRs
 if [[ $CI_MERGE_REQUEST_TITLE =~ $IS_DRAFT_REGEX ]]; then
+  echo "MR title: $CI_MERGE_REQUEST_TITLE"
   echo 'request is in draft state, skipping commitlint'
   exit 0;
 elif [[ $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ $IS_RELEASE_REGEX ]]; then
+  echo "Source branch name: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
   echo 'request is for a release branch, skipping commitlint'
   exit 0;
 fi;

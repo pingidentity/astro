@@ -44,7 +44,7 @@ build:
   <<: *yarn-install-and-build
   stage: build-test-lint
   tags:
-    - default-gitlab-runner
+    - pingux-runner
   image: $STABLE_IMAGE
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -60,7 +60,7 @@ build:
 build-no-lockfile:
   stage: build-test-lint
   tags:
-    - default-gitlab-runner
+    - pingux-runner
   image: $STABLE_IMAGE
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -74,7 +74,7 @@ backstop:
   <<: *yarn-install-and-build
   stage: screenshot
   tags:
-    - default-gitlab-runner
+    - pingux-runner
   image: $STABLE_IMAGE
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -88,7 +88,7 @@ chromatic:
   <<: *yarn-install-and-build
   stage: screenshot
   tags:
-    - default-gitlab-runner
+    - pingux-runner
   image: $STABLE_IMAGE
   variables:
     CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
@@ -121,7 +121,7 @@ chromatic:
 deploy_prerelease:
   stage: deploy
   tags:
-    - default-gitlab-runner
+    - pingux-runner
   image: $STABLE_IMAGE
   rules:
     # Deploy develop branch via Jenkins API *UNLESS* the last commit was an alpha build.
@@ -133,7 +133,7 @@ deploy_prerelease:
 deploy_release:
   stage: deploy
   tags:
-    - default-gitlab-runner
+    - pingux-runner
   image: $STABLE_IMAGE
   rules:
     # Deploy master branch via Jenkins API *UNLESS* the last commit was a stable build.
