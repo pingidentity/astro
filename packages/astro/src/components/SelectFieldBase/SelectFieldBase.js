@@ -84,6 +84,7 @@ const SelectFieldBase = forwardRef((props, ref) => {
         triggerRef={triggerRef}
         label={label}
         name={name}
+        isDisabled
       />
       {trigger || defaultTrigger}
       {overlay}
