@@ -246,6 +246,76 @@ pipeline {
         }
       }
     }
+
+    stage('cdn deploy ort') {
+      agent {
+        kubernetes(agentDefinition(
+          name: 'ort-cdn-deploy',
+          cloud: centralCluster
+        ))
+      }
+      environment {
+        ENVIRONMENT = "staging"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'packages'
+          script {
+            def cdnKeys = globalCdnMap.keySet() as List;
+            def packageKeys = updatedPackagesMap.keySet() as List;
+            // Get list of updated packages with cdn deployments
+            def cdnDeployments = cdnKeys.intersect(packageKeys);
+            if (cdnDeployments.size() > 0) {
+              // Update each package's cdn deployment
+              cdnDeployments.each() {
+                def releaseVersion = updatedPackagesMap[it];
+                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
+                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
+                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
+                echo "ort upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
+                sh 'upload_ui'
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('cdn deploy prod') {
+      agent {
+        kubernetes(agentDefinition(
+          name: 'prod-cdn-deploy',
+          cloud: centralCluster
+        ))
+      }
+      environment {
+        ENVIRONMENT = "production"
+      }
+      steps {
+        container('cdn-deploy') {
+          checkout scm
+          unstash 'packages'
+          script {
+            def cdnKeys = globalCdnMap.keySet() as List;
+            def packageKeys = updatedPackagesMap.keySet() as List;
+            // Get list of updated packages with cdn deployments
+            def cdnDeployments = cdnKeys.intersect(packageKeys);
+            if (cdnDeployments.size() > 0) {
+              // Update each package's cdn deployment
+              cdnDeployments.each() {
+                def releaseVersion = updatedPackagesMap[it];
+                env.PING_SERVICE_NAME = it.replaceAll("@pingux/", "");
+                env.CDN_SOURCE =  "${globalCdnMap[it]}/${releaseVersion}"
+                env.UNIQUE_CDN_FOLDER = "${releaseVersion}"
+                echo "prod upload CDN_SOURCE: ${CDN_SOURCE} UNIQUE_CDN_FOLDER: ${UNIQUE_CDN_FOLDER}"
+                sh 'upload_ui'
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   post {
