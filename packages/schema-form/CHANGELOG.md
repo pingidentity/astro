@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.6...@pingux/schema-form@3.0.7) (2022-03-18)
+
+
+### Bug Fixes
+
+* [UIP-5271] remove margin top when hidden ([cf315d3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cf315d39ebfed37a6a7dd5c5b5ca82673fb05c9f))
+
+
+
+
+
 ## [3.0.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.5...@pingux/schema-form@3.0.6) (2022-03-01)
 
 
