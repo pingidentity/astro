@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.4.0...@pingux/astro@1.4.1) (2022-03-18)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
 # [1.4.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.3.1...@pingux/astro@1.4.0) (2022-03-15)
 
 
