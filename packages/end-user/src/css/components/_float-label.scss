@@ -108,8 +108,6 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
 .placeholder-shown {
   .float-label__input {
     @include placeholderShown;
-
-    background: none;
   }
 
   .float-label__label {
