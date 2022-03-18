@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.0...@pingux/end-user@2.2.1) (2022-03-18)
+
+
+### Bug Fixes
+
+* [P14C-34180] Override end-user.css base hover state for links and primary button ([a6ee20c](https://gitlab.corp.pingidentity.com/ux/end-user/commit/a6ee20c9e773765819c37e547d36e9623067d352))
+
+
+
+
+
 # [2.2.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.1.2...@pingux/end-user@2.2.0) (2022-03-01)
 
 
