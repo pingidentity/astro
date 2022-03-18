@@ -64,7 +64,7 @@ pipeline {
     )
   }
   parameters {
-    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--yes --conventional-commits --conventional-graduate=@pingux/astro,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library', description: 'Flags applied to the `lerna version` command.')
+    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--yes --conventional-commits --conventional-graduate=@pingux/astro,@pingux/branding-themes,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library', description: 'Flags applied to the `lerna version` command.')
     string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-package --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
   }
   environment {
@@ -345,6 +345,13 @@ pipeline {
                 "${updatedPackagesMap[it]}"
               );
               slackSend channel: '#ui-announcements', message: "${astroMessage}", color: "#4aba78"
+            } else if (it == "@pingux/branding-themes") {
+              def brandingThemesMessage = generateSlackMessage(
+                "Branding Themes",
+                "branding-themes",
+                "${updatedPackagesMap[it]}"
+              );
+              slackSend channel: '#ui-announcements', message: "${brandingThemesMessage}", color: "#4aba78"
             } else if (it == "@pingux/end-user") {
               def endUserMessage = generateSlackMessage(
                 "End User",
@@ -374,7 +381,6 @@ pipeline {
               );
               slackSend channel: '#ui-announcements', message: "${uiLibraryMessage}", color: "#4aba78"
             }
-            // don't do anything with packages that don't have their own channel
           }
         }
       }

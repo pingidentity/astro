@@ -1,6 +1,6 @@
 {
   "name": "@pingux/branding-themes",
-  "version": "0.22.4-alpha.6",
+  "version": "0.22.4-alpha.11",
   "description": "Branding themes for end-user projects",
   "scripts": {
     "build": "rm -rf ./build && npm-run-all build:*",

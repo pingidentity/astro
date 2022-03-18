@@ -87,30 +87,21 @@ export const applyStyles = (colors, bgImg, stylesheet) => {
         ` : ''}
 
         ${(colors.buttonText || colors.button) ? `
-            .branding-template-primary-button {
+            .branding-template-primary-button, .branding-template-primary-button:hover, .branding-template-primary-button:active {
                 ${colors.buttonText ? `color: ${colors.buttonText};` : ''}
                 ${colors.button ? `background: ${colors.button};` : ''}
                 ${colors.button ? `border-color: ${colors.button};` : ''}
             }
-
-            .branding-template-primary-button:hover {
-                ${colors.buttonText ? `color: ${colors.buttonText};` : ''}
-            }
-
-            .branding-template-primary-button:active {
-                ${colors.button ? `background-color: ${colors.button};` : ''}
-            }
         ` : ''}
 
         ${colors.link ? `
-            .branding-template-link-text, a {
+            .branding-template-link-text, .branding-template-link-text:hover, a, a:hover {
                 color: ${colors.link};
             }
 
             .branding-template-user-card:hover {
                 border-color: ${colors.link} !important;
             }
-    }
 
             .branding-template-tertiary-button:hover {
                 color: ${colors.link};

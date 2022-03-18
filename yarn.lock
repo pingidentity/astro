@@ -16287,19 +16287,6 @@ fbjs@^3.0.2:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.30"
 
-fbjs@^3.0.2:
-  version "3.0.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/fbjs/-/fbjs-3.0.2.tgz#dfae08a85c66a58372993ce2caf30863f569ff94"
-  integrity sha1-364IqFxmpYNymTziyvMIY/Vp/5Q=
-  dependencies:
-    cross-fetch "^3.0.4"
-    fbjs-css-vars "^1.0.0"
-    loose-envify "^1.0.0"
-    object-assign "^4.1.0"
-    promise "^7.1.1"
-    setimmediate "^1.0.5"
-    ua-parser-js "^0.7.30"
-
 fd-slicer@~1.1.0:
   version "1.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/fd-slicer/-/fd-slicer-1.1.0.tgz#25c7c89cb1f9077f8891bbe61d8f390eae256f1e"
