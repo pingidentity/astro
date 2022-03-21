@@ -122,6 +122,27 @@ const modalCloseButton = {
   right: 10,
 };
 
+const multiselectToggle = {
+  ...square,
+  bg: 'accent.99',
+  height: '40px',
+  minWidth: 'max-content',
+  pl: '0px',
+  ml: '10px',
+  path: {
+    fill: 'active',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'accent.99',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-pressed': {
+    backgroundColor: 'accent.99',
+  },
+};
+
 const close = {
   ...iconButton,
   p: 0,
@@ -502,6 +523,11 @@ const link = {
   width: 'max-content',
 };
 
+const neutralText = {
+  ...link,
+  color: 'neutral.10',
+};
+
 const expandableRow = {
   chartWrapper: {
     display: 'flex',
@@ -724,4 +750,6 @@ export default {
   tooltipIconButton,
   tooltipInline,
   colorBlock,
+  multiselectToggle,
+  neutralText,
 };
