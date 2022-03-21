@@ -78,10 +78,10 @@ test('navigating the list using the keyboard causes the isSelected and isFocused
   // and ensure that it is focused, and then selected after enter is pressed
   userEvent.tab();
   userEvent.type(listView, '{arrowdown}', { skipClick: true });
-  const options = screen.getAllByRole('listitem');
+  const options = screen.getAllByRole('gridcell');
   expect(options[1]).toHaveClass('is-focused');
   userEvent.type(listView, '{enter}', { skipClick: true });
-  const updatedOption = await screen.findAllByRole('listitem');
+  const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).toHaveClass('is-selected');
 });
 
@@ -92,7 +92,7 @@ test('navigating to a disabled key will not apply the isFocused class', async ()
   // and ensure that it is focused, and then selected after enter is pressed
   userEvent.tab();
   userEvent.type(listView, '{arrowdown}', { skipClick: true });
-  const options = screen.getAllByRole('listitem');
+  const options = screen.getAllByRole('gridcell');
   expect(options[1]).not.toHaveClass('is-focused');
 });
 
@@ -100,7 +100,7 @@ test('clicking an item on the list selects the item', async () => {
   getComponent();
   const options = screen.getByTestId(items[1].name);
   userEvent.click(options);
-  const updatedOption = await screen.findAllByRole('listitem');
+  const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).toHaveClass('is-selected');
 });
 
@@ -136,12 +136,12 @@ test('does not render loader, if loadingState is not loadingMore', () => {
 test('renders neither loader nor item if the component is given no items nor a loading state prop', () => {
   getComponentEmpty();
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-  expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
+  expect(screen.queryByRole('gridcell')).not.toBeInTheDocument();
 });
 
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   getComponent();
-  const options = screen.getAllByRole('listitem');
+  const options = screen.getAllByRole('gridcell');
 
   expect(options).toHaveLength(items.length);
   expect(options[0]).toHaveAttribute('data-id', items[0].name);
@@ -151,7 +151,7 @@ test('selectionMode "none" disallows to select item', async () => {
   getComponent({ selectionMode: 'none' });
   const option1 = screen.getByTestId(items[1].name);
   userEvent.click(option1);
-  const updatedOption = await screen.findAllByRole('listitem');
+  const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).not.toHaveClass('is-selected');
 });
 
@@ -161,7 +161,7 @@ test('selectionMode "multiple" allows to select more than one item', async () =>
   userEvent.click(option1);
   const option2 = screen.getByTestId(items[2].name);
   userEvent.click(option2);
-  const updatedOption = await screen.findAllByRole('listitem');
+  const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).toHaveClass('is-selected');
   expect(updatedOption[2]).toHaveClass('is-selected');
 });
