@@ -7,7 +7,7 @@ HOSTING_PROJECT_BASE=/var/www/html/
 LIB_NAME=schema-form
 
 package-and-upload-schema-form:
-	@echo no directory for Schema Form demo yet :(
+	@echo no directory for Schema Form demo yet
 	# PRIVATE_SSH_KEY_PATH, LIB_VERSION variables will be passed in from the command line, see Jenkinsfile.ui-library.build for example
 	# set -eo;\
 	# yarn run demo;\
