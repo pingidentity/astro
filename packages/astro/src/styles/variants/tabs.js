@@ -15,12 +15,16 @@ export const tab = {
   '&.is-selected.is-vertical': {
     bg: 'accent.95',
   },
+  '& > svg': {
+    flexShrink: 0,
+  },
 };
 
 export const tabLine = {
   height: '2px',
   width: '100%',
   bg: 'active',
+  flexShrink: 0,
 };
 
 export const tabPanel = {

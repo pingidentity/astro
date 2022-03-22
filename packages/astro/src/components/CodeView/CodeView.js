@@ -82,7 +82,7 @@ const CodeView = forwardRef((props, ref) => {
 
   return (
     <CopyText
-      mode="nonClickableContent"
+      mode="link"
       textToCopy={children}
       tooltipProps={{ offset: 15 }}
       wrapperProps={{
