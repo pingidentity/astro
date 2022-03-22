@@ -11,13 +11,17 @@ import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { Item as Tab } from '@react-stately/collections';
 
-import Box from '../Box';
 import { TabsContext } from '../Tabs';
-import Text from '../Text';
 import { useStatusClasses, usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
-import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
-import Button from '../Button';
+import TabPicker from '../TabPicker';
+import {
+  Box,
+  Text,
+  TooltipTrigger,
+  Tooltip,
+  Button,
+} from '../..';
 
 export const CollectionTab = forwardRef((props, ref) => {
   const {
@@ -82,6 +86,20 @@ export const CollectionTab = forwardRef((props, ref) => {
     </Box>
   );
 
+  if (mode === 'list' && itemProps.list) {
+    return (
+      <TabPicker
+        ref={tabRef}
+        className={classNames}
+        items={itemProps.list}
+        state={state}
+        item={item}
+        {...mergeProps(focusProps, hoverProps, tabProps)}
+        {...otherItemProps}
+      />
+    );
+  }
+
   if (mode === 'tooltip') {
     return (
       <>
@@ -110,7 +128,7 @@ CollectionTab.propTypes = {
     rendered: PropTypes.node,
     tabLineProps: PropTypes.shape({}),
   }),
-  mode: PropTypes.oneOf(['default', 'tooltip']),
+  mode: PropTypes.oneOf(['default', 'tooltip', 'list']),
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   tooltipTriggerProps: PropTypes.shape({}),
   slots: PropTypes.shape({
@@ -119,7 +137,7 @@ CollectionTab.propTypes = {
   }),
 };
 
-const TabLine = props => (
+export const TabLine = props => (
   <Box
     role="presentation"
     variant="tabLine"

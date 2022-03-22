@@ -19,11 +19,16 @@ const tabLabel = {
   ...wordWrap,
   fontSize: 'sm',
   fontWeight: 1,
-  mb: 6,
+  mb: 'sm',
+  lineHeight: '16px',
   color: 'neutral.40',
+  height: '100%',
   '.is-selected &, .is-hovered &': {
     color: 'active',
-    mb: 5,
+  },
+  '.is-selected &': {
+    color: 'active',
+    mb: 8,
   },
   '.is-disabled &': {
     color: 'neutral.80',
@@ -140,6 +145,28 @@ const navBarHeaderText = {
   fontWeight: 1,
 };
 
+const multiselectFilterItem = {
+  ...wordWrap,
+  color: 'neutral.30',
+  fontSize: 'sm',
+  fontWeight: 500,
+  overflow: 'hidden',
+  marginRight: 'xs',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+};
+
+const multiselectFilterTitle = {
+  ...wordWrap,
+  fontSize: 'sm',
+  fontWeight: 500,
+  color: 'text.secondary',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  mr: 'xs',
+};
+
 const maskedValue = {
   width: 252,
   wordBreak: 'break-all',
@@ -168,6 +195,8 @@ export const text = {
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   maskedValue,
   expandableRow,
+  multiselectFilterItem,
+  multiselectFilterTitle,
   navBarHeaderText,
   navBarSubtitle,
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },

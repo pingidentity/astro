@@ -79,7 +79,6 @@ const ListViewItem = (props) => {
   return (
     <>
       <Box
-        as="li"
         isDisabled={isDisabled}
         isRow
         {...raRowProps}
@@ -90,7 +89,6 @@ const ListViewItem = (props) => {
           as="div"
           ref={cellRef}
           {...mergedProps}
-          role="listitem"
           variant="boxes.listViewItem"
           isFocused={isDisabled ? false : isFocusVisible}
           isDisabled={isDisabled}

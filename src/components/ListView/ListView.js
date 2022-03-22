@@ -41,9 +41,13 @@ export function useListLayout(state) {
 
 const ListView = forwardRef((props, ref) => {
   const {
+    disabledKeys,
     loadingState,
     onLoadMore,
+    onSelectionChange,
+    selectionMode,
     selectionStyle,
+    ...others
   } = props;
 
   const isLoading = (
@@ -103,7 +107,6 @@ const ListView = forwardRef((props, ref) => {
     ref: listViewRef,
     direction,
     collator,
-    focusMode: 'cell',
   }), [state, listViewRef, direction, collator]);
 
   const { gridProps } = useGrid({
@@ -115,11 +118,7 @@ const ListView = forwardRef((props, ref) => {
   // Sync loading state into the layout.
   layout.isLoading = isLoading;
 
-  let focusedKey = state.selectionManager.focusedKey;
-  const focusedItem = gridCollection.getItem(state.selectionManager.focusedKey);
-  if (focusedItem?.parentKey != null) {
-    focusedKey = focusedItem.parentKey;
-  }
+  const focusedItem = gridCollection.getFirstKey();
 
   return (
     <ListViewContext.Provider value={{ state, keyboardDelegate }}>
@@ -127,7 +126,7 @@ const ListView = forwardRef((props, ref) => {
         {...gridProps}
         onLoadMore={onLoadMore}
         ref={listViewRef}
-        focusedKey={focusedKey}
+        focusedKey={focusedItem?.parentKey}
         renderWrapper={renderWrapper}
         sizeToFit="height"
         scrollDirection="vertical"
@@ -135,6 +134,7 @@ const ListView = forwardRef((props, ref) => {
         isLoading={isLoading}
         collection={gridCollection}
         transitionDuration={0}
+        {...others}
       >
         {(type, item) => {
           if (type === 'item') {

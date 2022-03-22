@@ -29,6 +29,7 @@ const PopoverMenu = forwardRef((props, ref) => {
     isNotFlippable,
     isNotClosedOnSelect,
     hasNoArrow,
+    isContainFocus,
   } = props;
 
   const [menuTrigger, menu] = React.Children.toArray(children);
@@ -64,7 +65,7 @@ const PopoverMenu = forwardRef((props, ref) => {
   };
 
   const contents = (
-    <FocusScope restoreFocus>
+    <FocusScope restoreFocus contain={isContainFocus}>
       <DismissButton onDismiss={state.close} />
       {menu}
       <DismissButton onDismiss={state.close} />
@@ -112,6 +113,8 @@ PopoverMenu.propTypes = {
   isNotFlippable: PropTypes.bool,
   /** Whether the PopoverMenu hides the arrow. */
   hasNoArrow: PropTypes.bool,
+  /** Whether the PopoverMenu contains focus inside the scope. */
+  isContainFocus: PropTypes.bool,
   /**
    * Handler that is called when the overlay's open state changes.
    *
