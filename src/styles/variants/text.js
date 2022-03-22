@@ -19,11 +19,16 @@ const tabLabel = {
   ...wordWrap,
   fontSize: 'sm',
   fontWeight: 1,
-  mb: 6,
+  mb: 'sm',
+  lineHeight: '16px',
   color: 'neutral.40',
+  height: '100%',
   '.is-selected &, .is-hovered &': {
     color: 'active',
-    mb: 5,
+  },
+  '.is-selected &': {
+    color: 'active',
+    mb: 8,
   },
   '.is-disabled &': {
     color: 'neutral.80',

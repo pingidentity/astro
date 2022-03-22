@@ -700,6 +700,18 @@ const colorBlock = {
   },
 };
 
+const menuTab = {
+  ...quiet,
+  color: 'neutral.40',
+  alignItems: 'center',
+  '&.is-selected *, &.is-hovered *': {
+    color: 'active',
+  },
+  '& + *:not(div:first-of-type)': {
+    'ml': 'md',
+  },
+};
+
 
 export default {
   accordionHeader,
@@ -750,6 +762,7 @@ export default {
   tooltipIconButton,
   tooltipInline,
   colorBlock,
+  menuTab,
   multiselectToggle,
   neutralText,
 };
