@@ -4,6 +4,7 @@ const theme = {
     background: 'none',
     lineHeight: 1.5,
     tabSize: 4,
+    fontFamily: '"Roboto Mono", "Lucida Console", Courier, monospace',
   },
   styles: [
     {

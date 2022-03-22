@@ -103,6 +103,7 @@ const CopyText = forwardRef((props, ref) => {
         ref={ref}
         isRow
         variant="boxes.copy"
+        {...wrapperProps}
         {...others}
       >
         {content}
