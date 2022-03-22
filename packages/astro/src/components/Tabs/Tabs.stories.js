@@ -196,3 +196,26 @@ export const ContentSlots = () => {
     </>
   );
 };
+
+export const WithList = () => {
+  const allTabs = [
+    ...tabs,
+    {
+      name: 'Tab 4',
+      list: [
+        { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list' },
+        { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list' },
+      ],
+    },
+  ];
+
+  return (
+    <Tabs items={allTabs} mode="list">
+      {item => (
+        <Tab key={item.name} title={item.name} {...item}>
+          {item.children}
+        </Tab>
+      )}
+    </Tabs>
+  );
+};
