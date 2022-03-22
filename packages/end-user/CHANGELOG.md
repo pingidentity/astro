@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.1...@pingux/end-user@2.2.2) (2022-03-22)
+
+
+### Bug Fixes
+
+* [UIP-5331] revert background none ([cbb4935](https://gitlab.corp.pingidentity.com/ux/end-user/commit/cbb4935d76652bb4e296b6f2dee015c8690a5562))
+
+
+
+
+
 ## [2.2.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.0...@pingux/end-user@2.2.1) (2022-03-18)
 
 

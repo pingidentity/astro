@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.7...@pingux/schema-form@3.1.0) (2022-03-22)
+
+
+### Features
+
+* [UIP-5291] Add Makefile to SchemaForm ([6709196](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6709196bc8c7eb14635b304d9440e2523533eb61))
+
+
+
+
+
 ## [3.0.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.6...@pingux/schema-form@3.0.7) (2022-03-18)
 
 
