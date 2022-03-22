@@ -28,6 +28,21 @@ const getComponent = (props = {}) => render((
   </CodeView>
 ));
 
+beforeEach(() => {
+  const mockClipboard = {
+    writeText: jest.fn(),
+  };
+  global.navigator.clipboard = mockClipboard;
+  global.document.execCommand = jest.fn();
+  global.document.execCommand.mockReturnValue(true);
+});
+
+afterEach(() => {
+  jest.resetAllMocks();
+  global.navigator.clipboard = originalClipboard;
+  global.document.execCommand = originalExecCommand;
+});
+
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
@@ -38,27 +53,25 @@ test('renders component in the default state', () => {
   expect(container).toBeInTheDocument();
 });
 
-test('tooltip renders on hover', () => {
+test('copy button is hovered and renders tooltip via mouse', () => {
   getComponent();
-  const container = screen.getByTestId(testId);
-  fireEvent.mouseMove(container);
-  fireEvent.mouseEnter(container);
+  const copyBtn = screen.getByLabelText('copy');
+  expect(copyBtn).not.toHaveFocus();
+  userEvent.hover(copyBtn);
+  expect(copyBtn).toHaveClass('is-hovered');
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
 });
 
-test('content and copy button are focused via keyboard', () => {
+test('copy button is focused and renders tooltip via keyboard', () => {
   getComponent();
-  const container = screen.getByTestId(testId);
-  expect(container).not.toHaveFocus();
-  userEvent.tab();
-  expect(container).toHaveFocus();
-
   const copyBtn = screen.getByLabelText('copy');
   expect(copyBtn).not.toHaveFocus();
   userEvent.tab();
   expect(copyBtn).toHaveFocus();
   expect(copyBtn).toHaveClass('is-focused');
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
 });
 
 test('doesn\'t render copy button and tooltip with prop hasNoCopyButton', () => {
@@ -79,21 +92,6 @@ test('renders line numbers with prop hasLineNumbers', () => {
   getComponent({ hasLineNumbers: true });
   expect(screen.queryByText('1')).toBeInTheDocument();
   expect(screen.queryByText(linesLength)).toBeInTheDocument();
-});
-
-beforeEach(() => {
-  const mockClipboard = {
-    writeText: jest.fn(),
-  };
-  global.navigator.clipboard = mockClipboard;
-  global.document.execCommand = jest.fn();
-  global.document.execCommand.mockReturnValue(true);
-});
-
-afterEach(() => {
-  jest.resetAllMocks();
-  global.navigator.clipboard = originalClipboard;
-  global.document.execCommand = originalExecCommand;
 });
 
 test('click on copy button copies data to the clipboard', async () => {
