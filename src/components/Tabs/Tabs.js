@@ -18,6 +18,7 @@ const Tabs = forwardRef((props, ref) => {
   const {
     children,
     isDisabled,
+    items,
     onSelectionChange,
     orientation,
     mode,
@@ -34,7 +35,26 @@ const Tabs = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabPanelRef.current);
 
-  const state = useTabListState({ ...props, onSelectionChange });
+  let allItems = [];
+
+  if (mode === 'list') {
+    items.forEach((item) => {
+      allItems = [...allItems, item];
+      if (item.list) {
+        const list = item.list.map(el => ({
+          ...el,
+          isListItem: true,
+        }));
+        allItems = [...allItems, ...list];
+      }
+    });
+  }
+
+  const state = useTabListState({
+    ...props,
+    onSelectionChange,
+    items: mode === 'list' ? allItems : items,
+  });
   const {
     tabListProps: raTabListProps,
   } = useTabList(props, state, tabListRef);
@@ -59,16 +79,18 @@ const Tabs = forwardRef((props, ref) => {
           {...raTabListProps}
           ref={tabListRef}
         >
-          {Array.from(state.collection).map(item => (
-            <CollectionTab
-              key={item.key}
-              item={item}
-              isDisabled={isDisabled}
-              orientation={orientation}
-              mode={mode}
-              slots={item?.props?.slots}
-            />
-          ))}
+          {Array.from(state.collection)
+            .filter(item => !item?.value?.isListItem)
+            .map(item => (
+              <CollectionTab
+                key={item.key}
+                item={item}
+                isDisabled={isDisabled}
+                orientation={orientation}
+                mode={mode}
+                slots={item?.props?.slots}
+              />
+            ))}
         </Box>
         <Box
           variant="tabPanel"
@@ -93,7 +115,7 @@ Tabs.propTypes = {
   /** Determines the arrangement of the tablist. */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
   /** Determines the behavior model for the tabs. */
-  mode: PropTypes.oneOf(['default', 'tooltip']),
+  mode: PropTypes.oneOf(['default', 'tooltip', 'list']),
   /**
    * *For performance reasons, use this prop instead of Array.map when iteratively rendering Items*.
    * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
@@ -107,12 +129,15 @@ Tabs.propTypes = {
   tabListProps: PropTypes.shape({}),
   /** Props object that is spread directly into all of the tab panel wrapper elements. */
   tabPanelProps: PropTypes.shape({}),
+  /** Whether tabs are activated automatically on focus or manually¸ */
+  keyboardActivation: PropTypes.oneOf(['automatic', 'manual']),
 };
 
 Tabs.defaultProps = {
   isDisabled: false,
   orientation: 'horizontal',
   mode: 'default',
+  keyboardActivation: 'manual',
 };
 
 Tabs.displayName = 'Tabs';

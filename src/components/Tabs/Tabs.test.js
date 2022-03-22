@@ -19,6 +19,16 @@ const defaultTabs = [
   { name: 'Tab 2', children: 'Tab 2 body' },
   { name: 'Tab 3', children: 'Tab 3 body' },
 ];
+const tabsWithList = [
+  { name: 'Tab 1', children: 'Tab 1 body' },
+  {
+    name: 'Tab 2',
+    list: [
+      { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list' },
+      { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list' },
+    ],
+  },
+];
 const defaultProps = {
   'data-testid': testId,
   defaultSelectedKey: defaultTabs[0].name,
@@ -31,6 +41,18 @@ const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}
           {children}
         </Tab>
       ))}
+    </Tabs>
+  </CacheProvider>
+));
+
+const getComponentWithDynamicItems = props => render((
+  <CacheProvider value={emotionCache}>
+    <Tabs {...props}>
+      {({ name, children, ...tabProps }) => (
+        <Tab key={name} title={name} {...tabProps}>
+          {children}
+        </Tab>
+      )}
     </Tabs>
   </CacheProvider>
 ));
@@ -94,8 +116,26 @@ test('interacting with tabs via click', () => {
   testTabPanel(0);
 });
 
-test('interacting with tabs via focus -- horizontal', () => {
+test('interacting with tabs with manual activation', () => {
   getComponent();
+  const { tabs, tab0, tab1 } = getTabs();
+  tabs.forEach(tab => expect(tab).not.toHaveFocus());
+
+  userEvent.tab();
+  testSingleTab(tabs, tab0, 'toHaveFocus');
+  testTabPanel(0);
+
+  fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
+  testSingleTab(tabs, tab1, 'toHaveFocus');
+  testTabPanel(0);
+
+  fireEvent.keyDown(tab1, { key: 'Enter', code: 'Enter' });
+  testSingleTab(tabs, tab1, 'toHaveFocus');
+  testTabPanel(1);
+});
+
+test('interacting with tabs via focus -- horizontal', () => {
+  getComponent({ keyboardActivation: 'automatic' });
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
@@ -113,7 +153,7 @@ test('interacting with tabs via focus -- horizontal', () => {
 });
 
 test('interacting with tabs via focus -- vertical', () => {
-  getComponent({ orientation: 'vertical' });
+  getComponent({ orientation: 'vertical', keyboardActivation: 'automatic' });
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
@@ -151,7 +191,7 @@ test('disabled all tabs', () => {
 });
 
 test('disabled tab is not accessible on click or focus', () => {
-  getComponent({ disabledKeys: [defaultTabs[1].name] });
+  getComponent({ disabledKeys: [defaultTabs[1].name], keyboardActivation: 'automatic' });
 
   testTabPanel(0);
 
@@ -273,4 +313,51 @@ test('will render slots.afterTab if provided', () => {
   ];
   getComponent({}, { tabs });
   expect(screen.getByText(testText)).toBeInTheDocument();
+});
+
+test('will render tab with list if provided', async () => {
+  getComponentWithDynamicItems({ items: tabsWithList, mode: 'list' });
+
+  testTabPanel(0);
+
+  const { tab1: { parentElement: menuBtn } } = getTabs();
+
+  userEvent.click(menuBtn);
+  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  testTabPanel(0);
+
+  const menuItems = screen.queryAllByRole('menuitemradio');
+  expect(menuItems).toHaveLength(tabsWithList[1].list.length);
+  expect(menuItems[0]).not.toHaveFocus();
+
+  userEvent.click(menuItems[0]);
+  const { children: firstListItemContent } = tabsWithList[1].list[0];
+  expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+});
+
+test('tab list is accessible via keyboard', () => {
+  getComponentWithDynamicItems({ items: tabsWithList, mode: 'list' });
+
+  const { tabs, tab0, tab1 } = getTabs();
+  tabs.forEach(tab => expect(tab).not.toHaveFocus());
+
+  userEvent.tab();
+  testTabPanel(0);
+
+  fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
+  expect(tab1).toHaveFocus();
+
+  fireEvent.keyDown(tab1, { key: 'Enter', code: 'Enter' });
+  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  testTabPanel(0);
+
+  const menuItems = screen.queryAllByRole('menuitemradio');
+  expect(menuItems).toHaveLength(tabsWithList[1].list.length);
+  expect(menuItems[0]).toHaveFocus();
+
+  fireEvent.keyDown(menuItems[0], { key: 'Enter', code: 'Enter' });
+  const { children: firstListItemContent } = tabsWithList[1].list[0];
+  expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
