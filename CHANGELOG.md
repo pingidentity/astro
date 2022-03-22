@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.4.1...@pingux/astro@1.5.0) (2022-03-22)
+
+
+### Bug Fixes
+
+* [UIP-5282] Code View discrepancies ([9e483b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9e483b1078cc47a21c40fce1d256230dc6d57d65))
+
+
+### Features
+
+* [UIP-5162] Add MultiselectFilter component ([b624104](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b624104fe17352d7975498378bc605562698916a))
+* [UIP-5163] Tab with Popover menu ([2334558](https://gitlab.corp.pingidentity.com/ux/pingux/commit/23345584dfd0bcc40700cb9925fa908002388de2))
+
+
+
+
+
 ## [1.4.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.4.0...@pingux/astro@1.4.1) (2022-03-18)
 
 **Note:** Version bump only for package @pingux/astro
