@@ -283,6 +283,15 @@ const fileInputFieldWrapper = {
   },
 };
 
+const floatLabelWrapper = {
+  backgroundColor: 'white',
+  position: 'relative',
+  height: '17px',
+  bottom: '-18px',
+  left: '3px',
+  zIndex: 2,
+};
+
 export default {
   base,
   card,
@@ -302,4 +311,5 @@ export default {
   scrollbox,
   topShadowScrollbox,
   bottomShadowScrollbox,
+  floatLabelWrapper,
 };
