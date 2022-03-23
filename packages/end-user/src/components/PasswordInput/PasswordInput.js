@@ -40,7 +40,7 @@ const PasswordInput = ({
     const isTriggerKey = key => [" ", "Enter"].includes(key);
     const [isHidden, setIsHidden] = useState(true);
     const classNames = classnames('text-input--pasword', className);
-    const actionIconClassNames = classnames('text-input__icon', 'text-input__icon--action', {
+    const actionIconClassNames = classnames('text-input__icon', {
         'text-input__icon--hidden': isHidden,
         'text-input__icon--view-hidden': !isHidden,
     });
