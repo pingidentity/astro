@@ -21,6 +21,7 @@ const TextAreaField = forwardRef((props, ref) => {
   } = useField({ statusClasses, ...props });
   const textAreaRef = useRef();
   const labelRef = useRef();
+  const labelWrapperRef = useRef();
 
   const containerRef = useRef();
   const inputContainerRef = useRef();
@@ -34,6 +35,7 @@ const TextAreaField = forwardRef((props, ref) => {
   const resizeFloatLabel = () => {
     /* istanbul ignore next */
     labelRef.current.style.width = textAreaRef.current.style.width;
+    labelWrapperRef.current.style.width = `${textAreaRef.current.clientWidth - 2}px`;
   };
 
   /* istanbul ignore next */
@@ -68,9 +70,23 @@ const TextAreaField = forwardRef((props, ref) => {
     };
   }, [props.isUnresizable, props.labelMode, props.resizeCallback]);
 
+  const labelNode = (
+    <Label
+      ref={labelRef}
+      {...fieldLabelProps}
+      sx={isLabelHigher && { gridRow: '1/5' }}
+    />
+  );
+
+  const wrappedLabel = (
+    <Box variant="boxes.floatLabelWrapper" ref={labelWrapperRef}>
+      {labelNode}
+    </Box>
+  );
+
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
-      <Label ref={labelRef} {...fieldLabelProps} sx={isLabelHigher && { gridRow: '1/5' }} />
+      {props.labelMode === 'float' ? wrappedLabel : labelNode}
       <Box isRow variant="forms.input.container" className={fieldControlProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} sx={slots?.inContainer && { paddingRight: '35px' }} />
         {
