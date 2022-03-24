@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.5.0...@pingux/astro@1.6.0) (2022-03-24)
+
+
+### Bug Fixes
+
+* [UIP-5123] TextAreaField Content Will Overlap with Floating Label ([a6bfee4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a6bfee4aeef48afd921afefd17667c3c78c75bfa))
+* [UIP-5249] 'field' text variant should be medium (500) weight ([6815ce3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6815ce35d9c72b94e65d70a31eae51e5a704dbe6))
+* [UIP-5339] Replace FieldHelperText Top Padding ([6d973f8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6d973f8198f1bd86d9540974955c63a921bf2864))
+
+
+### Features
+
+* [UIP-5276] Add TimeZonePicker component ([8bb44e4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8bb44e437fd0a04c1ff3162775adb604506828af))
+
+
+
+
+
 # [1.5.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.4.1...@pingux/astro@1.5.0) (2022-03-22)
 
 
