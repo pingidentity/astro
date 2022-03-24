@@ -1,8 +1,7 @@
-# include ../../Makefile
-#This file is for shared build processes. Nothing in this file is meant to be run locally
+# This file is for shared build processes. Nothing in this file is meant to be run locally.
 HOSTING_SERVER_ADDRESS=uilibrary.ping-eng.com
 HOSTING_SERVER_USERNAME=ubuntu
-#Base for UI LIBRARY
+# Base for Schema Form lib
 HOSTING_PROJECT_BASE=/var/www/html/
 LIB_NAME=schema-form
 

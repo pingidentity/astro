@@ -95,8 +95,9 @@ const TextInput = ({
                 ? <div className={iconClassNames} key="type-icon"></div>
                 : null
         )}
+        {actionComponent}
         <FocusRing focusRingClass="is-focused">
-          <input
+            <input
               className={classNames}
               data-id={dataId}
               defaultValue={defaultValue}
@@ -119,7 +120,6 @@ const TextInput = ({
               {...inputProps}
           />
         </FocusRing>
-        {actionComponent}
         {fieldMessage && (
             <FieldMessage
                 status={type !== textInputTypes.PRIMARY ? type : 'default'}

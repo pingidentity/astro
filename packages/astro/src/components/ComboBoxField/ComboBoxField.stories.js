@@ -240,7 +240,7 @@ export const ControlledFiltering = () => {
   const [filterValue, setFilterValue] = useState('');
   const filteredItems = useMemo(
     () => items.filter(item => startsWith(item.name, filterValue)),
-    [items, filterValue],
+    [startsWith, filterValue],
   );
 
   return (
@@ -358,3 +358,15 @@ export const WithCustomHeight = () => (
     </ComboBoxField>
   </OverlayProvider>
 );
+
+export const CustomDefaultFilter = () => {
+  const { startsWith } = useFilter({ sensitivity: 'base' });
+
+  return (
+    <OverlayProvider>
+      <ComboBoxField label="Example label" defaultItems={animals} defaultFilter={startsWith} {...actions}>
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </ComboBoxField>
+    </OverlayProvider>
+  );
+};
