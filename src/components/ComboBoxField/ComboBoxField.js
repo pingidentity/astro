@@ -63,6 +63,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     isNotFlippable,
     direction,
     scrollBoxProps,
+    defaultFilter,
   } = props;
   const comboBoxOptions = {
     children,
@@ -116,7 +117,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const state = useComboBoxState({
     ...comboBoxOptions,
     onSelectionChange: hasCustomValue ? onSelectionChangeHandler : onSelectionChange,
-    defaultFilter: contains,
+    defaultFilter: (typeof defaultFilter !== 'undefined' ? defaultFilter : contains),
   });
 
   const { buttonProps, inputProps, listBoxProps, labelProps } = useComboBox(
@@ -165,7 +166,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     if (inputRef.current) {
       setMenuWidth(inputRef.current.offsetWidth);
     }
-  }, [inputRef, setMenuWidth, state.isOpen]);
+  }, [inputRef, setMenuWidth]);
 
   useResizeObserver({
     ref: inputRef,
@@ -324,6 +325,13 @@ ComboBoxField.propTypes = {
    * `(e: KeyboardEvent) => void`
    */
   onKeyUp: PropTypes.func,
+  /**
+   * Handler that determines the default filtering for items. If undefined, `contains` from
+   * [useFilter](https://react-spectrum.adobe.com/react-aria/useFilter.html) is used.
+   *
+   * `(option: string, inputValue: string) => boolean`
+   */
+  defaultFilter: PropTypes.func,
   // /** Props object that is spread directly into the ScrollBox element. */
   /** @ignore */
   scrollBoxProps: PropTypes.shape({

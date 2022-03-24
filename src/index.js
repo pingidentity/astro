@@ -216,6 +216,8 @@ export * from './components/TextArea';
 export { default as TextAreaField } from './components/TextAreaField';
 export * from './components/TextAreaField';
 
+export { default as TimeZonePicker } from './components/TimeZonePicker';
+
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
 

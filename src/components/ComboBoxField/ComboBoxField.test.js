@@ -30,7 +30,7 @@ const ComboBoxWithCustomFilter = () => {
   const [filterValue, setFilterValue] = useState('');
   const filteredItems = useMemo(
     () => items.filter(item => startsWith(item.name, filterValue)),
-    [items, filterValue],
+    [startsWith, filterValue],
   );
 
   return (
@@ -320,6 +320,23 @@ test('should be able to use controlled filtering', async () => {
 
   // Should only list the second option
   userEvent.type(input, 'k');
+  options = await screen.findAllByRole('option');
+  expect(options[0]).toHaveTextContent(items[1].name);
+});
+
+test('should be able to use custom default filtering', async () => {
+  let options;
+  const defaultFilter = (option, inputValue) => option.startsWith(inputValue);
+  getComponent({ defaultFilter });
+  const input = screen.queryByRole('combobox');
+
+  // Should list all without filterable input
+  userEvent.type(input, '{arrowdown}');
+  options = await screen.findAllByRole('option');
+  expect(options).toHaveLength(items.length);
+
+  // Should only list the second option
+  userEvent.type(input, 'K');
   options = await screen.findAllByRole('option');
   expect(options[0]).toHaveTextContent(items[1].name);
 });
