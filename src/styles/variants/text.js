@@ -177,6 +177,34 @@ const maskedValue = {
   },
 };
 
+const timeZone = {
+  title: {
+    color: 'neutral.10',
+    fontSize: 'md',
+    whiteSpace: 'nowrap',
+    lineHeight: 1,
+    '.is-focused &': {
+      color: 'white',
+    },
+  },
+  subTitle: {
+    color: 'neutral.40',
+    fontSize: 'sm',
+    ml: 10,
+    '.is-focused &': {
+      color: 'white',
+    },
+  },
+  time: {
+    color: 'neutral.10',
+    fontSize: 'sm',
+    fontWeight: 1,
+    '.is-focused &': {
+      color: 'white',
+    },
+  },
+};
+
 export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
@@ -206,4 +234,5 @@ export const text = {
   tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   title: { ...wordWrap, fontSize: 'xx', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   tooltipContent,
+  timeZone,
 };
