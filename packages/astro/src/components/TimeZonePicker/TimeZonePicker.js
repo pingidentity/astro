@@ -1,0 +1,176 @@
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import PropTypes from 'prop-types';
+import defaultTimezones, { usCities } from './timezones.js';
+import { Box, ComboBoxField, Item, Text } from '../../index';
+
+const createSearchTags = ({ gmt, gmtLabel, timeZone }) => {
+  let additionalTags = '';
+  const americaTimeZone = timeZone.includes('America') && timeZone.substring(8);
+  if (usCities.includes(americaTimeZone)) {
+    additionalTags = `US ${americaTimeZone}`;
+  }
+  return `${gmt} ${gmtLabel} ${timeZone} ${timeZone?.replace(
+    /_/g,
+    ' ',
+  )} ${additionalTags}`;
+};
+
+const getLocaleTime = ({ timeZone, locales, localeOptions }) => {
+  const date = new Date();
+  return date.toLocaleTimeString(locales, {
+    timeZone,
+    ...localeOptions,
+  });
+};
+
+/**
+ *  Component allows users to choose a timezone from the list.
+ *  You can checkout the default timezones list [here](https://github.com/yury-dymov/react-bootstrap-timezone-picker/blob/master/src/timezones.json).
+ *
+ *  Utilizes ComboBoxField component. You can use the same props as with
+ *  the ComboBoxField - they will be spread into it.
+ */
+const TimeZonePicker = forwardRef((props, ref) => {
+  const {
+    additionalTimeZones,
+    emptySearchText,
+    locales,
+    localeOptions,
+    ...otherProps
+  } = props;
+  const [search, setSearch] = useState('');
+  const [timeUpdate, setTimeUpdate] = useState(false);
+  const [timeZones, setTimeZones] = useState([]);
+  const extendedTimeZonesList = additionalTimeZones
+    ? { ...defaultTimezones, ...additionalTimeZones }
+    : defaultTimezones;
+
+  const timeZonePickerRef = useRef();
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => timeZonePickerRef.current);
+
+  useEffect(() => {
+    if (timeUpdate) {
+      const createTimeZoneTimes = () =>
+        Object.entries(extendedTimeZonesList).map((item) => {
+          const gmt = item[0].substring(1, 10);
+          const gmtLabel = item[0].substring(12);
+          const timeZone = item[1]?.replace(/_/g, ' ');
+          const time = getLocaleTime({
+            timeZone: item[1],
+            locales,
+            localeOptions,
+          });
+          const searchTags = createSearchTags({ gmt, gmtLabel, timeZone });
+          return {
+            gmt,
+            timeZone,
+            time,
+            searchTags,
+          };
+        });
+
+      setTimeZones(createTimeZoneTimes());
+      setTimeUpdate(false);
+    }
+  }, [extendedTimeZonesList, locales, localeOptions, timeUpdate]);
+
+  const filterTimezones = useCallback(
+    (timeZonesList) => {
+      return timeZonesList.filter(({ searchTags }) => {
+        return searchTags.toUpperCase().indexOf(search.toUpperCase()) > -1;
+      });
+    },
+    [search],
+  );
+
+  const filteredTimezones = useMemo(() => filterTimezones(timeZones), [
+    filterTimezones,
+    timeZones,
+  ]);
+
+  const sortByGMT = (a, b) => {
+    const aNum = parseFloat(a.gmt.split('GMT')[1].split(':')[0]);
+    const bNum = parseFloat(b.gmt.split('GMT')[1].split(')')[0]);
+
+    return aNum - bNum;
+  };
+
+  const items = useMemo(() => {
+    if (filteredTimezones.length === 0) {
+      return <Item key={emptySearchText}>{emptySearchText}</Item>;
+    }
+
+    return filteredTimezones.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
+      <Item key={timeZone} data-id={timeZone} textValue={timeZone}>
+        <Box flexDirection="row" justifyContent="space-between" width="100%">
+          <Box flexDirection="row">
+            <Text variant="timeZone.title">{timeZone}</Text>
+            <Text variant="timeZone.subTitle">{gmt}</Text>
+          </Box>
+          <Box>
+            <Text variant="timeZone.time">{time}</Text>
+          </Box>
+        </Box>
+      </Item>
+    ));
+  }, [emptySearchText, filteredTimezones]);
+
+  const comboBoxFieldProps = useMemo(
+    () => ({
+      controlProps: { sx: { width: 400, fontSize: 'md' } },
+      onInputChange: setSearch,
+      items: filteredTimezones,
+      ref: timeZonePickerRef,
+      onOpenChange: isOpen => setTimeUpdate(isOpen),
+      disabledKeys: [{ emptySearchText }],
+      ...otherProps,
+    }),
+    [emptySearchText, filteredTimezones, otherProps],
+  );
+
+  return (
+    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]}>
+      {items}
+    </ComboBoxField>
+  );
+});
+
+TimeZonePicker.propTypes = {
+  /**
+   * An object representing additional time zones to merge with the [default list](https://github.com/yury-dymov/react-bootstrap-timezone-picker/blob/master/src/timezones.json).
+   * The key may be customized, but the value should be a timezone string from the list in the [Time Zone Database](https://www.iana.org/time-zones).
+   *
+   * e.g. `{'(GMT+02:00) Africa/Juba': 'Africa/Juba'}`
+   */
+  additionalTimeZones: PropTypes.shape({}),
+  /** Text that will be shown if no search results are found. */
+  emptySearchText: PropTypes.string,
+  /** Locale(s) to use when generating the time format. See [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString#using_locales) for more info. */
+  locales: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
+  /** Custom options to use when generating the time format. See [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString#using_options) for more info. */
+  localeOptions: PropTypes.shape({}),
+};
+
+TimeZonePicker.defaultProps = {
+  emptySearchText: 'No Search Result',
+  locales: [],
+  localeOptions: {
+    hour12: true,
+    hour: '2-digit',
+    minute: '2-digit',
+  },
+};
+
+export default TimeZonePicker;
