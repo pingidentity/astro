@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.1.0...@pingux/schema-form@3.2.0) (2022-03-24)
+
+
+### Features
+
+* [UIP-5238] Add Storysource addon for schema-form ([158ce23](https://gitlab.corp.pingidentity.com/ux/pingux/commit/158ce23f95788cadafd7c36e906206d1f09effc3))
+
+
+
+
+
 # [3.1.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.0.7...@pingux/schema-form@3.1.0) (2022-03-22)
 
 

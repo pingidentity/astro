@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.2...@pingux/end-user@2.2.3) (2022-03-24)
+
+
+### Bug Fixes
+
+* [UIP-5280] - PasswordInput icon misplaced ([d568258](https://gitlab.corp.pingidentity.com/ux/end-user/commit/d568258ffec54ef1dc3732e198c44c58aaf2fb7f))
+
+
+
+
+
 ## [2.2.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.1...@pingux/end-user@2.2.2) (2022-03-22)
 
 
