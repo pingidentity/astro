@@ -38,8 +38,10 @@ const defaultHover = {
 };
 
 const defaultFocus = {
-  outline: 'none',
   boxShadow: 'focus',
+  outline: '1px solid',
+  outlineColor: 'active',
+  outlineOffset: '4px',
 };
 
 const navItemButton = {
