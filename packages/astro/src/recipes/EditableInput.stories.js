@@ -102,8 +102,8 @@ const EditablePreview = () => {
 
   return (
     <Box
-      tabIndex={0}
-      hidden={editableContext.isEditing}
+      tabIndex={editableContext.isEditing ? '-1' : '0'}
+      display={editableContext.isEditing ? 'none' : 'flex'}
       aria-hidden={editableContext.isEditing}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -196,7 +196,7 @@ const EditableInput = (props) => {
 
   return (
     <Box
-      hidden={!editableContext.isEditing}
+      display={editableContext.isEditing ? 'flex' : 'none'}
       aria-hidden={!editableContext.isEditing}
       sx={{
         marginRight: '30px',
@@ -257,7 +257,7 @@ const EditableControl = (props) => {
 
   return (
     <Box
-      hidden={!editableContext.isEditing}
+      display={editableContext.isEditing ? 'flex' : 'none'}
       aria-hidden={!editableContext.isEditing}
       isRow
       sx={{

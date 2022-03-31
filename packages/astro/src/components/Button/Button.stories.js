@@ -96,14 +96,12 @@ export const ColorBlockButton = (args) => {
   );
 };
 
-ColorBlockButton.story = {
-  argTypes: {
-    isConfigured: {
-      control: {
-        type: 'boolean',
-      },
-      defaultValue: false,
+ColorBlockButton.argTypes = {
+  isConfigured: {
+    control: {
+      type: 'boolean',
     },
+    defaultValue: false,
   },
 };
 

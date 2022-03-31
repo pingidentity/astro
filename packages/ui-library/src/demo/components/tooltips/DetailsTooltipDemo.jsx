@@ -1,8 +1,7 @@
 import React from "react";
 import _ from "underscore";
-import DetailsTooltip, { detailsWidths, DetailsTitle, tooltipPlacements }
-//eslint-disable-next-line import/no-extraneous-dependencies
-    from "ui-library/lib/components/tooltips/DetailsTooltip";
+//eslint-disable-next-line import/no-extraneous-dependencies, max-len
+import DetailsTooltip, { detailsWidths, DetailsTitle, tooltipPlacements } from "ui-library/lib/components/tooltips/DetailsTooltip";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import Button from "ui-library/lib/components/buttons/Button";
 //eslint-disable-next-line import/no-extraneous-dependencies

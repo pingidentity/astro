@@ -1,11 +1,8 @@
 import React from "react";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import { Logo, NavLink, NavMenu, NavSearch, Copyright } from "ui-library/lib/components/panels/NavFrame";
-import
-NavFrameAstro,
-{ EnvironmentSelectorAstro, FeaturedItem }
-//eslint-disable-next-line import/no-extraneous-dependencies
-    from "ui-library/lib/components/panels/NavFrame/NavFrameAstro";
+//eslint-disable-next-line import/no-extraneous-dependencies, max-len
+import NavFrameAstro, { EnvironmentSelectorAstro, FeaturedItem } from "ui-library/lib/components/panels/NavFrame/NavFrameAstro";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import GlobalMessage, { messageTypes } from "ui-library/lib/components/general/GlobalMessage";
 
