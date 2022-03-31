@@ -109,11 +109,9 @@ export const WithLineNumbers = () => (
   </>
 );
 
-WithLineNumbers.story = {
-  parameters: {
-    docs: {
-      storyDescription: 'Please note that with adding line numbers, line wrapping does not work.',
-    },
+WithLineNumbers.parameters = {
+  docs: {
+    storyDescription: 'Please note that with adding line numbers, line wrapping does not work.',
   },
 };
 

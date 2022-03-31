@@ -36,7 +36,9 @@ class FlagsProvider extends React.Component {
             return React.Children.only(children);
         }
 
+        /* istanbul ignore next  */
         return React.Fragment
+            /* istanbul ignore next  */
             ? <React.Fragment>{children}</React.Fragment>
             /* istanbul ignore next  */
             : <div>{children}</div>;

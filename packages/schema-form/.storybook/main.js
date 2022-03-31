@@ -12,7 +12,7 @@ function getPackageDir(filepath) {
     const { dir, root } = path.parse(currDir);
     if (dir === root) {
       throw new Error(
-          `Could not find package.json in the parent directories starting from ${filepath}.`
+        `Could not find package.json in the parent directories starting from ${filepath}.`
       );
     }
     currDir = dir;
@@ -36,6 +36,9 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-storysource'
   ],
+  features: {
+    emotionAlias: false,
+  },
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.

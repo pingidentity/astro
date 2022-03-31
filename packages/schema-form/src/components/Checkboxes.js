@@ -82,7 +82,7 @@ Checkboxes.propTypes = {
     label: PropTypes.string,
     enumOptions: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.value,
+      value: PropTypes.string,
     })),
     hasMarkdownErrors: PropTypes.bool,
   }),
