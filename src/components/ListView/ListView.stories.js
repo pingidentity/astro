@@ -5,6 +5,7 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
 import { useAsyncList } from '@react-stately/data';
 import { action } from '@storybook/addon-actions';
+import isChromatic from 'chromatic/isChromatic';
 import ListView from '.';
 import Box from '../Box/Box';
 import Icon from '../Icon';
@@ -321,20 +322,22 @@ export const Default = ({ ...args }) => (
   </ListView>
 );
 
-export const InfiniteLoadingList = () => {
+export const InfiniteLoadingList = (args) => {
   const getMockData = async (signal, cursor) => {
     let pageNumber = 1;
     if (cursor) {
       pageNumber = Number(cursor.substr(cursor.indexOf('-') + 1));
     }
-    // With this we will emulate load even with mocked API
-    await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+    // With this we will emulate load even with mocked API, except for Chromatic runs
+    if (!args.useMockData) await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
     return {
       items: animals.slice((pageNumber - 1) * 10, pageNumber * 10),
       cursor: `mock-${pageNumber + 1}`,
     };
   };
   const fetchApiData = async (signal, cursor, filterText) => {
+    if (args.useMockData) return getMockData();
+
     try {
       // this race will throw an error if api won't respond in 3 seconds
       const res = await Promise.race([
@@ -400,13 +403,16 @@ export const InfiniteLoadingList = () => {
   );
 };
 
+InfiniteLoadingList.args = {
+  useMockData: isChromatic(),
+};
+
 InfiniteLoadingList.parameters = {
   docs: {
     description: {
       story: 'Note: Keep in mind the maxHeight may impact when the scroll callback is triggered. If you notice it\'s being called too often, try adjusting that value or loading more objects to prevent this behavior.',
     },
   },
-  chromatic: { delay: 5000 },
 };
 
 

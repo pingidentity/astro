@@ -71,7 +71,7 @@ const BreadcrumbItem = forwardRef((props, ref) => {
       ...elementProps,
       ref,
     },
-    [...children],
+    children,
   );
 });
 

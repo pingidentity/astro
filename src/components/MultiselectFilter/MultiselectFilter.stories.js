@@ -4,7 +4,7 @@ import Clear from 'mdi-react/CloseIcon';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import FilterIcon from 'mdi-react/FilterIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
-import PersonIcon from 'mdi-react/PersonIcon';
+import AccountIcon from 'mdi-react/AccountIcon';
 import MultiselectFilter from './MultiselectFilter';
 import { useOverlayPanelState } from '../../hooks';
 import {
@@ -170,7 +170,7 @@ export const MultiselectWithBadge = (args) => {
           >
             <Box isRow>
               <Icon
-                icon={PersonIcon}
+                icon={AccountIcon}
                 alignSelf="center"
                 mr="md"
                 color="accent.40"
