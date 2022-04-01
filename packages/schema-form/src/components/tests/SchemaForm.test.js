@@ -388,3 +388,64 @@ test('custom widgets override existing widgets', () => {
 
   expect(screen.getAllByTestId('my-widget')).toHaveLength(2);
 });
+
+test('form level markdown errors', () => {
+  const customUiSchema = {
+    _form: {
+      'ui:options': {
+        hasMarkdownErrors: true,
+      },
+    },
+  };
+  const customExtraErrors = {
+    _form: {
+      __errors: ['Testing form level errors', '*This should be bold*', '[This is a link](https://pingidentity.com)'],
+    },
+  };
+  renderSchemaForm({
+    schema,
+    uiSchema: customUiSchema,
+    extraErrors: customExtraErrors,
+  });
+
+  expect(screen.getAllByTestId('react-markdown')).toHaveLength(3);
+});
+
+test('field level markdown errors', () => {
+  const customUiSchema = {
+    value: {
+      'ui:options': {
+        hasMarkdownErrors: true,
+      },
+    },
+  };
+  const customExtraErrors = {
+    value: {
+      __errors: ['Testing form level errors', '*This should be bold*', '[This is a link](https://pingidentity.com)'],
+    },
+  };
+  renderSchemaForm({
+    schema,
+    uiSchema: customUiSchema,
+    extraErrors: customExtraErrors,
+  });
+
+  expect(screen.getByTestId('react-markdown')).toBeInTheDocument();
+});
+
+test('field level markdown label', () => {
+  const customUiSchema = {
+    value: {
+      'ui:options': {
+        hasMarkdownLabel: true,
+        label: '**Label**',
+      },
+    },
+  };
+  renderSchemaForm({
+    schema,
+    uiSchema: customUiSchema,
+  });
+
+  expect(screen.getByTestId('react-markdown')).toBeInTheDocument();
+});

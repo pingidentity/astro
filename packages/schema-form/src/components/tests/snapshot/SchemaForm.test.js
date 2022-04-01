@@ -6,6 +6,7 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Form from '../../SchemaForm';
 
 const removeIds = (doc) => {
@@ -63,6 +64,33 @@ describe('form elements', () => {
     fireEvent.click(submitButton);
     expect(removeIds(asFragment())).toMatchSnapshot();
   });
+
+  test('form level markdown errors', () => {
+    const schema = {
+      type: 'object',
+      title: 'Test',
+    };
+    const uiSchema = {
+      _form: {
+        'ui:options': {
+          hasMarkdownErrors: true,
+        },
+      },
+    };
+    const extraErrors = {
+      _form: {
+        __errors: ['Testing form level errors', '*This should be bold*', '[This is a link](https://pingidentity.com)'],
+      },
+    };
+    const { asFragment } = render((
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        extraErrors={extraErrors}
+      />
+    ));
+    expect(removeIds(asFragment())).toMatchSnapshot();
+  });
 });
 
 describe('single fields', () => {
@@ -94,20 +122,36 @@ describe('single fields', () => {
       expect(removeIds(asFragment())).toMatchSnapshot();
     });
 
-    test('with markdown errors', () => {
+    test('with markdown errors', async () => {
       const schema = {
-        type: 'string',
+        type: 'object',
         title: 'Test',
-      };
-      const uiSchema = {
-        'ui:options': {
-          hasMarkdownErrors: true,
+        properties: {
+          test: {
+            type: 'string',
+          },
         },
       };
-      const { asFragment } = render(<Form
-        schema={schema}
-        uiSchema={uiSchema}
-      />);
+      const uiSchema = {
+        test: {
+          'ui:options': {
+            hasMarkdownErrors: true,
+          },
+        },
+      };
+      const validate = (_formData, errors) => {
+        errors.test.addError('*This is bold* - [this is a link](https://pingidentity.com)');
+        return errors;
+      };
+      const { asFragment } = render((
+        <Form
+          schema={schema}
+          uiSchema={uiSchema}
+          validate={validate}
+        />
+      ));
+      const submitButton = screen.getByRole('button');
+      await waitFor(() => userEvent.click(submitButton));
       expect(removeIds(asFragment())).toMatchSnapshot();
     });
 

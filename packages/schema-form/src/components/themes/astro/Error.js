@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@pingux/astro';
-import Markdown from '@pingux/end-user/lib/components/Markdown';
+import Markdown from '../../Markdown';
 
-/* istanbul ignore next */
 const Error = (props) => {
-  const { error, hasMarkdown } = props;
+  const {
+    error,
+    hasMarkdown,
+    renderers,
+    ...others
+  } = props;
 
   return (
-    <Text css={{ color: 'red' }}>
-      <Markdown source={error} hasMarkdown={hasMarkdown} />
+    <Text sx={{ color: 'critical.dark' }}>
+      <Markdown source={error} hasMarkdown={hasMarkdown} {...others} />
     </Text>
   );
 };
@@ -17,11 +21,13 @@ const Error = (props) => {
 Error.propTypes = {
   error: PropTypes.string,
   hasMarkdown: PropTypes.bool,
+  renderers: PropTypes.shape({}),
 };
 
 Error.defaultProps = {
   error: '',
   hasMarkdown: false,
+  renderers: {},
 };
 
 export default Error;

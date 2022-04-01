@@ -10,6 +10,7 @@ const presets = [
 ];
 
 const plugins = [
+    "@emotion",
     [
         '@babel/plugin-transform-spread',
         {

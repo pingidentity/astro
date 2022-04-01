@@ -1,5 +1,5 @@
+import React from 'react';
 import _ from 'lodash';
-
 import {
   Box,
   Button,
@@ -19,6 +19,7 @@ import SectionTitle from '../components/themes/astro/SectionTitle';
 // eslint-disable-next-line
 import PasswordWithRequirements from '../components/themes/astro/PasswordWithRequirements';
 import { FIELD_TYPES } from './constants';
+import Markdown from '../components/Markdown';
 
 export const AstroComponents = {
   button: Button,
@@ -48,6 +49,7 @@ const getFieldMessageData = (props) => {
     rawErrors = [],
     options: {
       help: uiHelp = false,
+      hasMarkdownErrors,
     } = {},
   } = props;
   let helperText;
@@ -65,6 +67,8 @@ const getFieldMessageData = (props) => {
     // Convert to a string if the option does not exist and it's meant to be an error
     helperText = rawErrors.map(_.capitalize).join(', ');
   }
+
+  if (hasMarkdownErrors) helperText = <Markdown source={helperText} hasMarkdown />;
 
   return { helperText, status };
 };
@@ -93,6 +97,8 @@ export const toAstroInputProps = (props) => {
       hasMarkdownErrors,
       labelMode,
       defaultText,
+      requirements,
+      validateRequirements,
       ...custom
     },
     placeholder,
@@ -132,11 +138,13 @@ export const toAstroInputProps = (props) => {
     formContext,
     isDisabled: disabled,
     isRequired: required,
-    label: inputLabel,
+    label: <Markdown source={inputLabel} hasMarkdown={hasMarkdown} />,
     helperText,
     labelMode,
     options: getDisabledEnumOptions(enumOptions, enumDisabled),
     status,
+    requirements,
+    validateRequirements,
   };
 
   return _.omitBy(inputProps, _.isUndefined);
