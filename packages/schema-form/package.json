@@ -1,6 +1,6 @@
 {
   "name": "@pingux/schema-form",
-  "version": "3.3.0-alpha.0",
+  "version": "3.3.0-alpha.1",
   "description": "Create component forms from JSON Schema",
   "author": "ux-development@pingidentity.com",
   "homepage": "",
@@ -89,8 +89,8 @@
     "to-string-loader": "^1.1.6",
     "uuid": "^8.3.0",
     "webpack": "^4.42.1",
-    "webpack-dev-server": "^3.10.3",
     "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2",
     "whatwg-fetch": "^3.2.0"
   },
