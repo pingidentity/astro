@@ -2,6 +2,20 @@ import React from 'react';
 import Form from '../src/components/SchemaForm';
 
 export const PasswordWithRequirements = () => {
+  const validateRequirements = (e, data) => {
+    const firstReq = e.target.value.length >= 13;
+    const secondReq = /[a-z]/.test(e.target.value);
+    const thirdReq = /[A-Z]/.test(e.target.value);
+
+    const newData = [
+      { ...data[0], status: firstReq ? 'success' : 'default' },
+      { ...data[1], status: secondReq ? 'success' : 'default' },
+      { ...data[2], status: thirdReq ? 'success' : 'default' },
+    ];
+
+    return newData;
+  };
+
   const schema = {
     type: 'object',
     properties: {
@@ -15,13 +29,13 @@ export const PasswordWithRequirements = () => {
     password: {
       'ui:widget': 'passwordWithRequirements',
       'ui:options': {
-        requirementsTitle: 'Password Requirements',
-        requirementsData: [
-          { name: 'Minimum of 13 characters', status: 'yes' },
-          { name: 'B', status: 'no' },
-          { name: 'C', status: 'error' },
+        requirements: [
+          { name: 'Minimum of 13 characters', status: 'default' },
+          { name: 'Has at least 1 lower case letter', status: 'default' },
+          { name: 'Has at least 1 upper case letter', status: 'default' },
         ],
-        inputProps: {
+        validateRequirements,
+        controlProps: {
           autoComplete: 'new-password',
         },
       },

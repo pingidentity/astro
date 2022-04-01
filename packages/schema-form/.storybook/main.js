@@ -1,8 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 
-const conf = require('../webpack.config');
-
 function getPackageDir(filepath) {
   let currDir = path.dirname(require.resolve(filepath));
   while (true) {
@@ -66,6 +64,14 @@ module.exports = {
 
     // Remove style-loader from the array
     cssRuleLoaders.splice(styleLoaderIndex, 1);
+
+    // Re-routing webpack to use Emotion 11 since Storybook is still on Emotion 10 which
+    // causes conflicts. Relevant ticket: UIP-4732.
+    config.resolve.alias = {
+      '@emotion/core': getPackageDir('@emotion/react'),
+      '@emotion/styled': getPackageDir('@emotion/styled'),
+      'emotion-theming': getPackageDir('@emotion/react'),
+    };
 
     // Return the altered config
     return config;
