@@ -24,9 +24,6 @@ module.exports = {
       name: '@storybook/addon-docs',
       options: {
         configureJSX: true,
-        sourceLoaderOptions: {
-          injectStoryParameters: false,
-        },
       }
     },
     '@storybook/addon-actions',
