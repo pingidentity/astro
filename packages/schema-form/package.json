@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "rm -rf lib && npm-run-all build:*",
+    "bundle-report": "webpack-bundle-analyzer --port 4200 lib/stats.json",
     "build:astro": "cd ../astro && yarn build",
     "build:end-user": "cd ../end-user && yarn build",
     "build:icons": "cd ../icons && yarn build",
@@ -89,6 +90,7 @@
     "uuid": "^8.3.0",
     "webpack": "^4.42.1",
     "webpack-dev-server": "^3.10.3",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-merge": "^4.2.2",
     "whatwg-fetch": "^3.2.0"
   },
