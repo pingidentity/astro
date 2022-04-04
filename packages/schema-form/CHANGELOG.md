@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.2.0...@pingux/schema-form@3.3.0) (2022-04-04)
+
+
+### Bug Fixes
+
+* [UIP-5328] Some stories miss code in Story tab ([0d19904](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0d199042d944f7fa1d647eafd6613ab0bbfd1b6a))
+
+
+### Features
+
+* [UIP-5292] Update Astro version in Schema Form ([077b399](https://gitlab.corp.pingidentity.com/ux/pingux/commit/077b3999c2690e8241e590ac5cd494e860ddf90e))
+* [UIP-5293] Remove end user and update password field validation ([bf405b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bf405b7de571be4e0760981f4ddbdacb4a379a0f))
+
+
+### Performance Improvements
+
+* [UIP-5294] Reduce schema forms size ([f5a024a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f5a024a24737f0f37b0b5e49cde6349713e6a659))
+
+
+
+
+
 # [3.2.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.1.0...@pingux/schema-form@3.2.0) (2022-03-24)
 
 

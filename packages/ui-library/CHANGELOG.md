@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.1.2...ui-library@5.2.0) (2022-04-04)
+
+
+### Features
+
+* [UIP-5292] Update Astro version in Schema Form ([077b399](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/077b3999c2690e8241e590ac5cd494e860ddf90e))
+* [UIP-5293] Remove end user and update password field validation ([bf405b7](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/bf405b7de571be4e0760981f4ddbdacb4a379a0f))
+
+
+
+
+
 ## [5.1.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.1.1...ui-library@5.1.2) (2022-03-01)
 
 
