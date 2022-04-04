@@ -1,6 +1,6 @@
 {
     "name": "@pingux/flow-diagram",
-    "version": "0.26.0",
+    "version": "0.27.0-alpha.2",
     "description": "Flow Diagram library",
     "author": "Ping UX Development Team",
     "homepage": "",
@@ -55,11 +55,11 @@
     },
     "devDependencies": {
         "@emotion/styled": "11.3.0",
-        "@storybook/addon-actions": "^6.1.9",
-        "@storybook/addon-docs": "^6.1.9",
-        "@storybook/addon-links": "^6.1.9",
-        "@storybook/addon-storysource": "^6.1.9",
-        "@storybook/react": "^6.1.9",
+        "@storybook/addon-actions": "^6.4.19",
+        "@storybook/addon-docs": "^6.4.19",
+        "@storybook/addon-links": "^6.4.19",
+        "@storybook/addon-storysource": "^6.4.19",
+        "@storybook/react": "^6.4.19",
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.0.4",
         "@testing-library/react-hooks": "^3.4.2"

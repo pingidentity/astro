@@ -51,9 +51,8 @@ import ButtonBar from "ui-library/lib/components/forms/ButtonBar";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import Stack from "ui-library/lib/components/layout/Stack";
 import { v4 as uuid } from "uuid";
-import Messages, { Actions as messageActions, Reducer as messageReducer }
-//eslint-disable-next-line import/no-extraneous-dependencies
-    from "ui-library/lib/components/general/messages/Messages";
+//eslint-disable-next-line import/no-extraneous-dependencies, max-len
+import Messages, { Actions as messageActions, Reducer as messageReducer } from "ui-library/lib/components/general/messages/Messages";
 
 const FormDropDownListPassValue = ({ value: selectedValue, onValueChange, ...props }) => (
     <FormDropDownList

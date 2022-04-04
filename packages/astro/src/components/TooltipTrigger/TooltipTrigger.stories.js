@@ -1,6 +1,6 @@
 import React from 'react';
 import Earth from 'mdi-react/EarthIcon';
-import PersonIcon from 'mdi-react/PersonIcon';
+import AccountIcon from 'mdi-react/AccountIcon';
 import { Box, Button, Icon, Tooltip, TooltipTrigger } from '../../index';
 import IconButton from '../IconButton';
 import Text from '../Text';
@@ -68,7 +68,7 @@ export const IconWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
       <IconButton variant="tooltipIconButton">
-        <Icon icon={PersonIcon} />
+        <Icon icon={AccountIcon} />
       </IconButton>
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>

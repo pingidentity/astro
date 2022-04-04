@@ -371,7 +371,7 @@ ObjectField.propTypes = {
   errorSchema: PropTypes.shape({}),
   idSchema: PropTypes.shape({}),
   name: PropTypes.string.isRequired,
-  required: PropTypes.oneOfType(PropTypes.bool, PropTypes.func),
+  required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   disabled: PropTypes.bool,
   readonly: PropTypes.bool,
   idPrefix: PropTypes.string.isRequired,

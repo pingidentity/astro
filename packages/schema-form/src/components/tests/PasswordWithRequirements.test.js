@@ -1,4 +1,5 @@
-import { fireEvent, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { screen, waitFor } from '@testing-library/react';
 import { renderSchemaForm } from './utils';
 
 const name = 'password';
@@ -15,43 +16,45 @@ const uiSchema = {
   [name]: {
     'ui:widget': 'passwordWithRequirements',
     'ui:options': {
-      requirementsTitle: 'Password Requirements',
-      requirementsData: [
-        { name: 'A', status: 'yes' },
-        { name: 'B', status: 'no' },
-        { name: 'C', status: 'error' },
+      requirements: [
+        { name: 'A', status: 'default' },
+        { name: 'B', status: 'success' },
+        { name: 'C', status: 'warning' },
+        { name: 'D', status: 'error' },
       ],
     },
   },
 };
 
-test('it renders a password with requirements popover', () => {
+test('it renders a password with requirements popover', async () => {
   renderSchemaForm({ schema, uiSchema });
   const label = screen.queryByText(name);
   const input = screen.queryByLabelText(name);
 
   expect(label).toBeInTheDocument();
   expect(input).toBeInTheDocument();
-  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 
   // Ensure the popover is inserted into the document and displays when the input is focused
-  fireEvent.focus(input);
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  expect(screen.queryByRole('tooltip')).toBeVisible();
+  await waitFor(() => userEvent.tab());
+  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  expect(screen.queryByRole('presentation')).toBeVisible();
 
   // Ensure the popover is hidden again when the input is blurred
-  fireEvent.blur(input);
-  expect(screen.queryByRole('tooltip')).not.toBeVisible();
+  await waitFor(() => userEvent.tab());
+  await waitFor(() => userEvent.tab());
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 
 test('it fires onchange event', async () => {
   const onChange = jest.fn();
 
   renderSchemaForm({ onChange, schema, uiSchema });
-  const input = screen.queryByLabelText(name);
+  const input = screen.getByLabelText(name);
   expect(input).toBeInTheDocument();
+  expect(input).toBeInstanceOf(HTMLInputElement);
 
-  await act(async () => fireEvent.change(input, { target: { value: 'Hello' } }));
+  await waitFor(() => userEvent.type(input, 'Hello'));
   expect(input.value).toBe('Hello');
   expect(onChange).toHaveBeenCalled();
 });
@@ -64,7 +67,7 @@ test('it fires validate requirements events', async () => {
   const input = screen.queryByLabelText(name);
   expect(input).toBeInTheDocument();
 
-  await act(async () => fireEvent.change(input, { target: { value: 'Hello' } }));
+  await waitFor(() => userEvent.type(input, 'Hello'));
   expect(input.value).toBe('Hello');
-  expect(validateRequirements).toHaveBeenCalledTimes(1);
+  expect(validateRequirements).toHaveBeenCalledTimes('Hello'.length);
 });

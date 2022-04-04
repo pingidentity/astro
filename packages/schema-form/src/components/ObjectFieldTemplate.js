@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Errors from './Errors';
@@ -13,8 +13,8 @@ const ObjectFieldTemplate = (props) => {
     uiSchema,
   } = props;
 
-  const FormTitle = useMemo(() => AstroComponents.formTitle, [theme]);
-  const FormDescription = useMemo(() => AstroComponents.formDescription, [theme]);
+  const FormTitle = AstroComponents.formTitle;
+  const FormDescription = AstroComponents.formDescription;
 
   // eslint-disable-next-line react/prop-types
   const formLevelErrors = extraErrors?._form?.__errors; // eslint-disable-line no-underscore-dangle

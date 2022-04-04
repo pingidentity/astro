@@ -1,11 +1,11 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
-  devtool: 'inline-source-map',
   externals: {
     react: {
       commonjs: 'react',
@@ -79,6 +79,11 @@ module.exports = {
       template: 'src/index.html',
       inject: 'head',
       minify: false,
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled',
+      generateStatsFile: true,
+      statsOptions: { source: false },
     }),
   ],
 };

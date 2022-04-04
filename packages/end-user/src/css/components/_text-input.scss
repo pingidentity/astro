@@ -118,6 +118,6 @@
   }
 }
 
-.text-input__icon ~ .text-input__icon::before {
+.text-input__icon ~ .text-input__icon {
   margin-right: $spacing-lg;
 }

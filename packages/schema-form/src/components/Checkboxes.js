@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Box, CheckboxField, Text } from '@pingux/astro';
@@ -13,7 +13,6 @@ const convertToValues = (options, values = []) => options.reduce((acc, cur) => (
 
 const Checkboxes = (props) => {
   const {
-    formContext: { theme },
     id,
     onChange,
     options,
@@ -21,7 +20,7 @@ const Checkboxes = (props) => {
     value,
   } = props;
   const { label, enumOptions, hasMarkdownErrors } = options;
-  const FieldLabel = useMemo(() => AstroComponents.fieldLabel, [theme]);
+  const FieldLabel = AstroComponents.fieldLabel;
   const defaultValues = convertToValues(enumOptions, value);
   const [values, setValues] = useState(defaultValues);
 
@@ -30,12 +29,12 @@ const Checkboxes = (props) => {
     if (value.length) {
       setValues(convertToValues(enumOptions, value));
     }
-  }, [value]);
+  }, [value, enumOptions]);
 
   useEffect(() => {
     const checkedValues = _.flatMap(Object.entries(values), ([key, val]) => (val ? key : []));
     onChange(checkedValues);
-  }, [values]);
+  }, [values, onChange]);
 
   const handleChange = (option, isChecked) => {
     if (isChecked) {
@@ -82,7 +81,7 @@ Checkboxes.propTypes = {
     label: PropTypes.string,
     enumOptions: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string,
-      value: PropTypes.value,
+      value: PropTypes.string,
     })),
     hasMarkdownErrors: PropTypes.bool,
   }),
