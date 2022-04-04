@@ -43,7 +43,7 @@ const NavBarItem = forwardRef((props, ref) => {
     hoverProps,
     focusWithinProps,
     focusProps,
-    ...others,
+    others,
   );
 
   const { classNames } = useStatusClasses(className, {
