@@ -1,19 +1,15 @@
 import React from 'react';
-import { ThemeProvider } from 'emotion-theming';
 import theme from '../src/styles/theme';
-import { GlobalStyles } from '../src/components/AstroWrapper';
 import yourTheme from './AstroTheme';
 import { withConsole } from '@storybook/addon-console';
+import { AstroWrapper } from '../src/index';
 
 const withThemeProvider = (Story, context) => (
-  <>
-    <GlobalStyles />
-    <ThemeProvider theme={theme}>
+    <AstroWrapper theme={theme} bg="transparent">
       <div style={{ padding: "50px" }}>
         <Story {...context} />
       </div>
-    </ThemeProvider>
-  </>
+    </AstroWrapper>
 );
 
 const withConsoleAddon = (storyFn, context) => withConsole()(storyFn)(context);
