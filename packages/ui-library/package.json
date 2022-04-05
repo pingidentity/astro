@@ -1,6 +1,6 @@
 {
   "name": "ui-library",
-  "version": "5.2.0-alpha.4",
+  "version": "5.2.0-alpha.5",
   "description": "A UI library made of reusable React components, util functions and static assets (including CSS, Fonts, and Icons).",
   "author": "ux-development@pingidentity.com",
   "license": "ISC",
