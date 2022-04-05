@@ -1,11 +1,11 @@
 # NOTE: Use "latest/Dockerfile" first for testing any changes,
 # so it wouldn't affect pipelines that are using the stable image.
 
-FROM docker.corp.pingidentity.com:5400/node:fermium
+FROM docker.corp.pingidentity.com:5400/node:fermium-bullseye
 
-RUN apt-get update && \
+RUN apt-get -y update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install curl unattended-upgrades && \
+    apt-get -y install curl git less software-properties-common unattended-upgrades && \
     apt-get -y autoremove && \
     apt-get clean && \
     unattended-upgrades -d
@@ -22,7 +22,7 @@ RUN yarn config set registry https://art01.corp.pingidentity.com/artifactory/api
 # https://hub.docker.com/r/backstopjs/backstopjs/dockerfile
 
 RUN apt-get update && \
-	apt-get install -y git sudo software-properties-common
+	apt-get install -y sudo software-properties-common
 
 RUN wget https://dl-ssl.google.com/linux/linux_signing_key.pub && sudo apt-key add linux_signing_key.pub
 RUN sudo add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
@@ -38,8 +38,10 @@ RUN apt-get -qqy update \
     fonts-liberation \
     fonts-ipafont-gothic \
     fonts-wqy-zenhei \
-    gconf-service libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxss1 libxtst6 libappindicator1 libnss3 libasound2 libatk1.0-0 libc6 ca-certificates fonts-liberation lsb-release xdg-utils wget \
+    gconf-service libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxss1 libxtst6 libnss3 libasound2 libatk1.0-0 libc6 ca-certificates fonts-liberation lsb-release xdg-utils wget \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get -qyy clean
+
+RUN apt-get upgrade -y
 
 RUN yarn global add lerna
