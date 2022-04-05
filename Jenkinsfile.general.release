@@ -39,7 +39,6 @@ def generateSlackMessage(packageName, packagePathName, packageVersion) {
     <https://gitlab.corp.pingidentity.com/ux/pingux/-/blob/master/packages/${packagePathName}/CHANGELOG.md|See the CHANGELOG for more details>
   """.stripIndent()
 }
-
 pipeline {
   agent {
     kubernetes (
@@ -56,7 +55,7 @@ pipeline {
             - name: "ui-library-admin"
               command: # Jenkinsfile overwrites this, but k8s spec requires it
               - cat
-              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.2"
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.3"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
               tty: true"""
@@ -170,6 +169,46 @@ pipeline {
 
                 echo "Publishing changed packages to Artifactory"
                 sh "yarn lerna publish ${params.LERNA_PUBLISH_FLAGS}"
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('update mirrored astro repository, and push new tags') { 
+      steps {
+        dir("${env.WORKSPACE}") {
+          container('ui-library-admin') {
+            withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
+              script {
+                sh """
+                  git config --global user.email 'devtools+jenkins@pingidentity.com'
+                  git config --global user.name 'devtools-jenkins'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone git@gitlab.corp.pingidentity.com:ux/pingux.git -b master --single-branch
+                  mkdir tempdir
+                  cd tempdir
+                  git clone https://github.com/newren/git-filter-repo.git
+                  cd git-filter-repo
+                  cp -a git-filter-repo \$(git --exec-path)
+                  cd ../..
+                  cd pingux
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git filter-repo --subdirectory-filter packages/astro
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git remote add origin git@gitlab.corp.pingidentity.com:ux/astro-mirror.git
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push --set-upstream --force origin HEAD:master
+                """
+              }
+              script {
+                try {
+                sh 'git checkout master'
+                sh """
+                  git config --global user.email 'devtools+jenkins@pingidentity.com'
+                  git config --global user.name 'devtools-jenkins'
+                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git tag | grep '^@pingux/astro@[0-9]+.[0-9]+.[0-9]+\$' | GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push --force git@gitlab.corp.pingidentity.com:ux/astro-mirror.git
+                """
+                } catch (err) {
+                  echo err.getMessage()
+                }
               }
             }
           }
