@@ -17,7 +17,7 @@
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
   },
   "scripts": {
-    "build": "rm -rf lib && npm-run-all build:*",
+    "build": "rm -rf lib && npm-run-all build:* && webpack",
     "bundle-report": "webpack-bundle-analyzer --port 4200 lib/stats.json",
     "build:astro": "cd ../astro && yarn build",
     "build:icons": "cd ../icons && yarn build",
