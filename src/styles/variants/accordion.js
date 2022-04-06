@@ -60,7 +60,6 @@ const accordionGridHeader = {
   },
 };
 const accordionGridHeaderNav = {
-  padding: '10px 15px 10px 15px',
   cursor: 'pointer',
   minHeight: '40px',
   lineHeight: '30px',
@@ -90,6 +89,7 @@ const accordionGridHeaderNav = {
 
 const accordionGridNavItem = {
   ...accordionGridHeaderNav,
+  padding: '10px 15px 10px 15px',
   '&.is-selected': {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
