@@ -47,6 +47,10 @@ const AccordionGridItem = (props) => {
     isDisabled,
   });
 
+  delete rowProps.onMouseDown;
+  delete rowProps.onPointerDown;
+  delete rowProps.onClick;
+
   return (
     <Box
       as="div"

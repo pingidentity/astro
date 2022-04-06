@@ -17,6 +17,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     className,
     children,
     isSelected,
+    hasCaret,
     ...others
   } = props;
 
@@ -31,6 +32,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
   const { gridCellProps } = useGridCell({
     node: cellNode,
     focusMode: 'cell',
+    shouldSelectOnPressUp: true,
   }, state, cellRef);
 
   const { hoverProps, isHovered } = useHover({});
@@ -48,6 +50,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     hoverProps,
     focusWithinProps,
     focusProps,
+    pressProps,
   );
 
   const { classNames } = useStatusClasses(className, {
@@ -58,6 +61,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
   });
 
   const ariaLabel = props['aria-label'];
+
 
   return (
     <Box
@@ -73,17 +77,25 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     >
       <Box isRow>
         {children}
-        <Box isRow alignItems="center" sx={{ mr: '0px' }}>
-          <Icon icon={isSelected ? MenuUp : MenuDown} size={20} />
-        </Box>
+        {
+          hasCaret &&
+          <Box isRow alignItems="center" sx={{ mr: '0px' }}>
+            <Icon icon={isSelected ? MenuUp : MenuDown} size={20} />
+          </Box>
+        }
       </Box>
     </Box>
   );
 });
 
+AccordionGridItemHeader.defaultProps = {
+  hasCaret: true,
+};
+
 AccordionGridItemHeader.propTypes = {
   'aria-label': PropTypes.string,
   isSelected: PropTypes.bool,
+  hasCaret: PropTypes.bool,
   item: PropTypes.shape({
     key: PropTypes.string,
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
