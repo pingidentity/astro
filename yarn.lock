@@ -5987,12 +5987,7 @@
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/pretty-hrtime/-/pretty-hrtime-1.0.1.tgz#72a26101dc567b0d68fd956cf42314556e42d601"
   integrity sha1-cqJhAdxWew1o/ZVs9CMUVW5C1gE=
 
-"@types/prop-types@*":
-  version "15.7.3"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
-  integrity sha1-KrDV2i5YFflLC51LldHl8kOrLKc=
-
-"@types/prop-types@^15.0.0":
+"@types/prop-types@*", "@types/prop-types@^15.0.0":
   version "15.7.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
@@ -27107,13 +27102,13 @@ vfile-location@^3.0.0, vfile-location@^3.2.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/vfile-location/-/vfile-location-3.2.0.tgz#d8e41fbcbd406063669ebf6c33d56ae8721d0f3c"
   integrity sha1-2OQfvL1AYGNmnr9sM9Vq6HIdDzw=
 
-vfile-message@*, vfile-message@^2.0.0:
-  version "2.0.4"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/vfile-message/-/vfile-message-2.0.4.tgz#5b43b88171d409eae58477d13f23dd41d52c371a"
-  integrity sha1-W0O4gXHUCerlhHfRPyPdQdUsNxo=
+vfile-message@*, vfile-message@^3.0.0:
+  version "3.1.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/vfile-message/-/vfile-message-3.1.2.tgz#a2908f64d9e557315ec9d7ea3a910f658ac05f7d"
+  integrity sha512-QjSNP6Yxzyycd4SVOtmKKyTsSvClqBPJcd00Z0zuPj3hOIjg0rUPG6DbFGPvUKRgYyaIWLPKpuEclcuvb3H8qA==
   dependencies:
     "@types/unist" "^2.0.0"
-    unist-util-stringify-position "^2.0.0"
+    unist-util-stringify-position "^3.0.0"
 
 vfile-message@^1.0.0:
   version "1.1.1"
@@ -27122,13 +27117,13 @@ vfile-message@^1.0.0:
   dependencies:
     unist-util-stringify-position "^1.1.1"
 
-vfile-message@^3.0.0:
-  version "3.1.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/vfile-message/-/vfile-message-3.1.2.tgz#a2908f64d9e557315ec9d7ea3a910f658ac05f7d"
-  integrity sha512-QjSNP6Yxzyycd4SVOtmKKyTsSvClqBPJcd00Z0zuPj3hOIjg0rUPG6DbFGPvUKRgYyaIWLPKpuEclcuvb3H8qA==
+vfile-message@^2.0.0:
+  version "2.0.4"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/vfile-message/-/vfile-message-2.0.4.tgz#5b43b88171d409eae58477d13f23dd41d52c371a"
+  integrity sha1-W0O4gXHUCerlhHfRPyPdQdUsNxo=
   dependencies:
     "@types/unist" "^2.0.0"
-    unist-util-stringify-position "^3.0.0"
+    unist-util-stringify-position "^2.0.0"
 
 vfile@^2.0.0:
   version "2.3.0"
@@ -27932,12 +27927,7 @@ ws@^6.1.0, ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7.2.3:
-  version "7.3.1"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/ws/-/ws-7.3.1.tgz#d0547bf67f7ce4f12a72dfe31262c68d7dc551c8"
-  integrity sha1-0FR79n985PEqct/jEmLGjX3FUcg=
-
-ws@^7.3.1:
+ws@^7.2.3, ws@^7.3.1:
   version "7.5.7"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/ws/-/ws-7.5.7.tgz#9e0ac77ee50af70d58326ecff7e85eb3fa375e67"
   integrity sha512-KMvVuFzpKBuiIXW3E4u3mySRO2/mCHSyZDJQM5NQ9Q9KHWHWh0NHgfbRMLLrceUK5qAL4ytALJbpRMjixFZh8A==
