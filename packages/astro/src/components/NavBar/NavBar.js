@@ -17,13 +17,15 @@ import Box from '../Box/Box';
 
 const NavBar = (props) => {
   const {
-    defaultSelectedKeys,
+    defaultSelectedKey,
+    defaultExpandedKeys,
   } = props;
 
-  const [selectedKeys, setSelectedKeys] = useState(defaultSelectedKeys);
+  const [selectedKey, setSelectedKey] = useState(defaultSelectedKey);
+  const [expandedKeys, setExpandedKeys] = useState(defaultExpandedKeys);
 
   return (
-    <NavBarContext.Provider value={{ selectedKeys, setSelectedKeys }}>
+    <NavBarContext.Provider value={{ selectedKey, setSelectedKey, expandedKeys, setExpandedKeys }}>
       <Box
         variant="navBar.container"
         role="navigation"
@@ -36,11 +38,14 @@ const NavBar = (props) => {
 };
 
 NavBar.propTypes = {
-  defaultSelectedKeys: isIterableProp,
+  /** The initial selected key in the collection (uncontrolled). */
+  defaultSelectedKey: isIterableProp,
+  /** The initial expanded keys in the collection (uncontrolled). */
+  defaultExpandedKeys: isIterableProp,
 };
 
 NavBar.defaultProps = {
-  defaultSelectedKeys: [],
+  defaultSelectedKey: [],
 };
 
 export default NavBar;

@@ -130,11 +130,12 @@ const environmentBreadcrumb = {
 };
 
 const navBarSubtitle = {
-  my: 'md',
   ml: 'md',
+  mb: '15px',
   fontWeight: 3,
   fontSize: '11px',
   color: 'accent.80',
+  zIndex: '100',
 };
 
 const navBarHeaderText = {
@@ -143,6 +144,7 @@ const navBarHeaderText = {
   lineHeight: '13px',
   fontSize: '13px',
   fontWeight: 1,
+  maxWidth: '150px',
 };
 
 const multiselectFilterItem = {
