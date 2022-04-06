@@ -14,7 +14,16 @@ const container = {
 const itemHeaderContainer = {
   flexGrow: 1,
   alignItems: 'center',
-  maxWidth: '180px',
+  maxWidth: '230px',
+  padding: '10px 15px 10px 15px',
+  cursor: 'pointer',
+  minHeight: '40px',
+  fontWeight: 0,
+  fontSize: '16px',
+  '&.is-selected': {
+    backgroundColor: 'accent.5',
+    boxShadow: 'inset 2px 0 0 0 white',
+  },
 };
 
 const sectionContainer = {
