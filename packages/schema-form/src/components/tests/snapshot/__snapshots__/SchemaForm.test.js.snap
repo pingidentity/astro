@@ -1292,7 +1292,6 @@ exports[`single fields password field 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -1395,12 +1394,12 @@ exports[`single fields password field 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -2851,7 +2850,6 @@ exports[`single fields select field 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -2954,12 +2952,12 @@ exports[`single fields select field 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -5659,7 +5657,6 @@ exports[`single fields select field with default 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -5762,12 +5759,12 @@ exports[`single fields select field with default 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -8467,7 +8464,6 @@ exports[`single fields string field format email 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -8570,12 +8566,12 @@ exports[`single fields string field format email 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -10025,7 +10021,6 @@ exports[`single fields string field format uri 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -10128,12 +10123,12 @@ exports[`single fields string field format uri 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -11583,7 +11578,6 @@ exports[`single fields string field regular 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -11686,12 +11680,12 @@ exports[`single fields string field regular 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -13141,7 +13135,6 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -13244,12 +13237,12 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -14527,7 +14520,6 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   max-width: 100%;
   word-wrap: break-word;
   word-break: break-word;
-  padding-top: 10px;
 }
 
 .emotion-10.is-default {
@@ -14741,7 +14733,6 @@ exports[`single fields string field with help text 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -14844,12 +14835,12 @@ exports[`single fields string field with help text 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -16127,7 +16118,6 @@ exports[`single fields string field with help text 1`] = `
   max-width: 100%;
   word-wrap: break-word;
   word-break: break-word;
-  padding-top: 10px;
 }
 
 .emotion-10.is-default {
@@ -16377,7 +16367,6 @@ exports[`single fields string field with markdown errors 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -16480,12 +16469,12 @@ exports[`single fields string field with markdown errors 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-11 radioGroup.is-float-label {
@@ -17763,7 +17752,6 @@ exports[`single fields string field with markdown errors 1`] = `
   max-width: 100%;
   word-wrap: break-word;
   word-break: break-word;
-  padding-top: 10px;
 }
 
 .emotion-16.is-default {
@@ -17998,7 +17986,6 @@ exports[`single fields string field with placeholder 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -18101,12 +18088,12 @@ exports[`single fields string field with placeholder 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
@@ -19558,7 +19545,6 @@ exports[`single fields textarea field 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -19661,12 +19647,12 @@ exports[`single fields textarea field 1`] = `
   font-size: 13px;
   color: var(--theme-ui-colors-text-secondary);
   font-family: "Helvetica Neue",Helvetica,sans-serif;
-  font-weight: 500;
   margin-bottom: 5px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .emotion-5 radioGroup.is-float-label {
