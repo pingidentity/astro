@@ -95,6 +95,30 @@ const NumberField = forwardRef((props, ref) => {
     [fieldControlProps, onInputBlur, onInputFocus],
   );
 
+  const onInputChange = (e) => {
+    const { minValue } = props;
+    const trimmedInputValue = e.target.value.trim();
+    const trimmedValueEvent = {
+      ...e,
+      target: {
+        ...e.target,
+        value: trimmedInputValue,
+      },
+    };
+    if (!trimmedInputValue && typeof minValue !== 'undefined') {
+      const minValueEvent = {
+        ...e,
+        target: {
+          ...e.target,
+          value: minValue.toString(),
+        },
+      };
+      inputProps.onChange(minValueEvent);
+    } else {
+      inputProps.onChange(trimmedValueEvent);
+    }
+  };
+
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
@@ -110,6 +134,7 @@ const NumberField = forwardRef((props, ref) => {
             // overwrite them like defaultValue, value, ect.
             {...updatedFieldControlProps}
             {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
+            onChange={onInputChange}
           />
           {ControlArrows}
         </Box>
