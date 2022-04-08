@@ -217,7 +217,7 @@ test('should invoke onInputChange', () => {
 
 test('should invoke onOpenChange on button click', () => {
   const onOpenChange = jest.fn();
-  getComponent({ onOpenChange });
+  getComponent({ onOpenChange, menuTrigger: 'manual' });
   const button = screen.queryByRole('button');
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
@@ -230,7 +230,7 @@ test('should invoke onOpenChange on button click', () => {
 
 test('should invoke onOpenChange on input change', () => {
   const onOpenChange = jest.fn();
-  getComponent({ onOpenChange });
+  getComponent({ onOpenChange, menuTrigger: 'input' });
   const input = screen.queryByRole('combobox');
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
@@ -243,7 +243,7 @@ test('should invoke onOpenChange on input change', () => {
 
 test('should invoke onOpenChange on keyboard arrow down', () => {
   const onOpenChange = jest.fn();
-  getComponent({ onOpenChange });
+  getComponent({ onOpenChange, menuTrigger: 'manual' });
   const input = screen.queryByRole('combobox');
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
@@ -256,7 +256,7 @@ test('should invoke onOpenChange on keyboard arrow down', () => {
 
 test('should invoke onOpenChange on keyboard arrow up', () => {
   const onOpenChange = jest.fn();
-  getComponent({ onOpenChange });
+  getComponent({ onOpenChange, menuTrigger: 'manual' });
   const input = screen.queryByRole('combobox');
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();

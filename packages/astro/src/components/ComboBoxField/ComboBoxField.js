@@ -340,7 +340,7 @@ ComboBoxField.propTypes = {
 };
 
 ComboBoxField.defaultProps = {
-  menuTrigger: 'input',
+  menuTrigger: 'focus',
   direction: 'bottom',
   scrollBoxProps: { maxHeight: '300px' },
 };

@@ -115,7 +115,7 @@ export default {
 
 export const Default = args => (
   <OverlayProvider>
-    <ComboBoxField {...actions} {...args}>
+    <ComboBoxField {...actions} {...args} >
       {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
