@@ -31,6 +31,17 @@ const getLocaleTime = ({ timeZone, locales, localeOptions }) => {
   });
 };
 
+const getTimezoneOffset = (timeZone) => {
+  const now = new Date();
+  const tzString = now.toLocaleString('en-US', { timeZone });
+  const localString = now.toLocaleString('en-US');
+  const diff = (Date.parse(localString) - Date.parse(tzString)) / 3600000;
+  const offset = -(diff + (now.getTimezoneOffset() / 60));
+  const formattedString = `${offset}:00`;
+
+  return offset > 0 ? `+${formattedString}` : formattedString;
+};
+
 /**
  *  Component allows users to choose a timezone from the list.
  *  You can checkout the default timezones list [here](https://github.com/yury-dymov/react-bootstrap-timezone-picker/blob/master/src/timezones.json).
@@ -61,7 +72,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
     if (timeUpdate) {
       const createTimeZoneTimes = () =>
         Object.entries(extendedTimeZonesList).map((item) => {
-          const gmt = item[0].substring(1, 10);
+          const gmt = `GMT${getTimezoneOffset(item[1])}`;
           const gmtLabel = item[0].substring(12);
           const timeZone = item[1]?.replace(/_/g, ' ');
           const time = getLocaleTime({
