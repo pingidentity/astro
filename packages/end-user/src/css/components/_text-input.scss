@@ -17,6 +17,8 @@
   @extend %input-text;
   @extend %input-box;
 
+  padding-right: 40px;
+
   margin: 0px;
 
   &::placeholder {
