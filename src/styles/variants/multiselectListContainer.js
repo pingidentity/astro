@@ -1,11 +1,8 @@
 const multiselectListContainer = {
-  height: '40px',
   overflowX: 'hidden',
   pr: 'sm',
   transition: 'right 500ms',
-  '&.is-open': {
-    height: '100%',
-  },
+  minHeight: '80vh',
 };
 
 const multiselectListContent = {
@@ -25,6 +22,7 @@ const multiselectListContent = {
     minHeight: '45px',
     padding: '3px',
     width: '100%',
+    justifyContent: 'space-between',
   },
 };
 
@@ -38,7 +36,7 @@ const multiselectListTitle = {
   padding: '0 10px !important',
   flexWrap: 'wrap',
   maxWidth: 'max-content !important',
-  margin: '0 auto',
+  margin: '0',
 };
 
 const multiselectListBadge = {
