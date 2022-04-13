@@ -63,7 +63,7 @@ pipeline {
     )
   }
   parameters {
-    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--yes --conventional-commits --conventional-graduate=@pingux/astro,@pingux/branding-themes,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library', description: 'Flags applied to the `lerna version` command.')
+    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--yes --conventional-commits --conventional-graduate=@pingux/astro,@pingux/branding-themes,@pingux/charting,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library', description: 'Flags applied to the `lerna version` command.')
     string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-package --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
   }
   environment {

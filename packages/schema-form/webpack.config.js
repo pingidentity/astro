@@ -80,6 +80,7 @@ module.exports = {
       inject: 'head',
       minify: false,
     }),
+
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
