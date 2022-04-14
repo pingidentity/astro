@@ -205,7 +205,7 @@ const close = {
 const accordionHeader = {
   ...base,
   display: 'inline-flex',
-  bg: 'white',
+  bg: 'transparent',
   color: 'neutral.10',
   paddingLeft: '5px',
   paddingRight: '5px',
