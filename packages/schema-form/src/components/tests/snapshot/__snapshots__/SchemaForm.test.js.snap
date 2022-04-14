@@ -1609,6 +1609,7 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1718,6 +1719,7 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1800,9 +1802,10 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -1882,6 +1885,7 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -2163,6 +2167,7 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -2245,6 +2250,7 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -2327,9 +2333,10 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -2409,6 +2416,7 @@ exports[`single fields password field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -3175,6 +3183,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -3266,6 +3275,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -3348,9 +3358,10 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -3430,6 +3441,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -3711,6 +3723,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -3793,6 +3806,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -3875,9 +3889,10 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -3957,6 +3972,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4252,6 +4268,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4340,6 +4357,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4422,9 +4440,10 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -4504,6 +4523,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4785,6 +4805,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4867,6 +4888,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -4949,9 +4971,10 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -5031,6 +5054,7 @@ exports[`single fields select field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -5985,6 +6009,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -6076,6 +6101,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -6158,9 +6184,10 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -6240,6 +6267,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -6521,6 +6549,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -6603,6 +6632,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -6685,9 +6715,10 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -6767,6 +6798,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7062,6 +7094,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7150,6 +7183,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7232,9 +7266,10 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -7314,6 +7349,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7595,6 +7631,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7677,6 +7714,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -7759,9 +7797,10 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -7841,6 +7880,7 @@ exports[`single fields select field with default 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -8790,6 +8830,7 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -8899,6 +8940,7 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -8981,9 +9023,10 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -9063,6 +9106,7 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -9344,6 +9388,7 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -9426,6 +9471,7 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -9508,9 +9554,10 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -9590,6 +9637,7 @@ exports[`single fields string field format email 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -10350,6 +10398,7 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -10459,6 +10508,7 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -10541,9 +10591,10 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -10623,6 +10674,7 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -10904,6 +10956,7 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -10986,6 +11039,7 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -11068,9 +11122,10 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -11150,6 +11205,7 @@ exports[`single fields string field format uri 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -11910,6 +11966,7 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -12019,6 +12076,7 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -12101,9 +12159,10 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -12183,6 +12242,7 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -12464,6 +12524,7 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -12546,6 +12607,7 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -12628,9 +12690,10 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -12710,6 +12773,7 @@ exports[`single fields string field regular 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -13470,6 +13534,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -13579,6 +13644,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -13661,9 +13727,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -13743,6 +13810,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -14024,6 +14092,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -14106,6 +14175,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -14188,9 +14258,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -14270,6 +14341,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15072,6 +15144,7 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15181,6 +15254,7 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15263,9 +15337,10 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -15345,6 +15420,7 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15626,6 +15702,7 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15708,6 +15785,7 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15790,9 +15868,10 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -15872,6 +15951,7 @@ exports[`single fields string field with help text 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -16710,6 +16790,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -16819,6 +16900,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -16901,9 +16983,10 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -16983,6 +17066,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -17264,6 +17348,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -17346,6 +17431,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -17428,9 +17514,10 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -17510,6 +17597,7 @@ exports[`single fields string field with markdown errors 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -18333,6 +18421,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -18442,6 +18531,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -18524,9 +18614,10 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -18606,6 +18697,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -18887,6 +18979,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -18969,6 +19062,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -19051,9 +19145,10 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -19133,6 +19228,7 @@ exports[`single fields string field with placeholder 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -19897,6 +19993,7 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -19979,6 +20076,7 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -20061,9 +20159,10 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -20143,6 +20242,7 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -20424,6 +20524,7 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -20506,6 +20607,7 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -20588,9 +20690,10 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 10px;
   padding-top: 2px;
-  padding-bottom: 2px,;
+  padding-bottom: 2px;
   width: 100%;
   outline: none;
 }
@@ -20670,6 +20773,7 @@ exports[`single fields textarea field 1`] = `
   border-style: solid;
   border-color: var(--theme-ui-colors-neutral-80);
   border-radius: 2px;
+  font-size: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
