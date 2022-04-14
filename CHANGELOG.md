@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.7.0...@pingux/astro@1.8.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* [UIP-5220] Add typography support props for Text component ([a22ad60](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a22ad6042a7600c8fd7d57a3eab13a575c1ddc41))
+* [UIP-5299] Nav bar fixes ([bacdcdb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bacdcdb0fee52cee35ee8a90a91d530ab69f0264))
+* [UIP-5335] TimezonePicker with  correct offset in GMT ([72451f2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/72451f2bb9bad80ddff00ebbc82aa927bc6cb50e))
+* [UIP-5338] ComboBox Improvements ([e6d81f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e6d81f793432bdca9c44a42eb3ad3f8d68080e6a))
+* [UIP-5340] NumberField whitespace issue ([48fad9f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/48fad9f2ad952aaec007426ab97b8ca6c934c8a8))
+* [UIP-5341] change input font size to 15 ([db80d09](https://gitlab.corp.pingidentity.com/ux/pingux/commit/db80d09c16c03e2c19ff4a43e8a913eee45506dc))
+* [UIP-5351] CodeView cannot import additional language ([5a74c5b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5a74c5b21664e8bc43ef026efeb317f1bc640275))
+* [UIP-5352] Remove tooltip from delete button ([cfc9645](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cfc9645f256ba498278c55f60e998a31e306310a))
+* [UIP-5356] Accordion button background transparency ([5cd3178](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5cd31789511846b7cc27e4c47adb200f0bfbe788))
+
+
+### Features
+
+* [UIP-5060] Breadcrumb Component Improvements ([5f204e1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5f204e1072fee77ae3a963fb2015594d6222a954))
+* [UIP-5209] Add fallback functionality to Image ([f0f1fae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f0f1faed4452a3bf69ae485c87f00716e074a655))
+* [UIP-5277] MultiSelect List Container Interactive Story ([381e9b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/381e9b7c2827518d4254c410c00fea66347d7850))
+
+
+
+
+
 # [1.7.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.6.0...@pingux/astro@1.7.0) (2022-04-04)
 
 
