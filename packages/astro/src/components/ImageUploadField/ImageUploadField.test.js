@@ -4,7 +4,12 @@ import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import ImageUploadField from './ImageUploadField';
-import { Image } from '../../index';
+
+const imageUploadNoImagePreview = 'image-upload-no-image-preview';
+
+jest.mock('../Image', () => props => (
+  <img alt="mock" {...props} />
+));
 
 const testLabel = 'test-label';
 const testButtonId = 'image-preview-button';
@@ -12,7 +17,6 @@ const testHelperText = 'test-helper-text';
 const testImageURL = 'test-image-url';
 const testImageURL2 = 'test-image-url2';
 const imageUploadImagePreview = 'image-upload-image-preview';
-const imageUploadNoImagePreview = 'image-upload-no-image-preview';
 const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
 const notImageFileName = 'nice-song.mp3';
 const notImageFile = new File(['(⌐□_□)'], notImageFileName, {
@@ -112,7 +116,9 @@ test('should change image if the corresponding menu option clicked', async () =>
   fireEvent.change(screen.getByTestId('image-upload-input'), {
     target: { files: [file] },
   });
-  expect(imagePreview).toBeInTheDocument();
+  expect(
+    await screen.findByTestId(imageUploadImagePreview),
+  ).toBeInTheDocument();
   expect(imagePreview).toHaveAttribute('src');
 });
 
@@ -133,7 +139,9 @@ test('should call onRemove cb (when provided) when a file is uploaded', async ()
   });
   const imagePreview = await screen.findByTestId(imageUploadImagePreview);
   userEvent.click(screen.getByTestId(testButtonId));
-  expect(imagePreview).toBeInTheDocument();
+  expect(
+    await screen.findByTestId(imageUploadImagePreview),
+  ).toBeInTheDocument();
   userEvent.click(screen.getByText('Remove Image'));
   expect(imagePreview).not.toBeInTheDocument();
   expect(testOnRemove).toHaveBeenCalledTimes(1);
@@ -240,7 +248,7 @@ test('should show the menu if label clicked when preview image exists', async ()
 });
 
 test('should render node element if passed as default image', () => {
-  getComponent({ defaultPreviewImage: <Image /> });
+  getComponent({ defaultPreviewImage: <img alt="mock" /> });
   const img = screen.getByRole('img');
   expect(img).toBeInstanceOf(HTMLImageElement);
   expect(img).toBeInTheDocument();

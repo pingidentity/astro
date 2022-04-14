@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.3...@pingux/end-user@2.3.0) (2022-04-04)
+
+
+### Bug Fixes
+
+* [UIP-5279] fix focus box ([896d396](https://gitlab.corp.pingidentity.com/ux/end-user/commit/896d396fbee777525dc761bbdb572df6e9c74362))
+
+
+### Features
+
+* [UIP-5292] Update Astro version in Schema Form ([077b399](https://gitlab.corp.pingidentity.com/ux/end-user/commit/077b3999c2690e8241e590ac5cd494e860ddf90e))
+
+
+
+
+
 ## [2.2.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.2...@pingux/end-user@2.2.3) (2022-03-24)
 
 

@@ -56,7 +56,7 @@ pipeline {
             - name: "ui-library-admin"
               command: # Jenkinsfile overwrites this, but k8s spec requires it
               - cat
-              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.3"
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
               tty: true"""

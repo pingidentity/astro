@@ -55,7 +55,7 @@ pipeline {
             - name: "ui-library-admin"
               command: # Jenkinsfile overwrites this, but k8s spec requires it
               - cat
-              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.3"
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
               tty: true"""
@@ -63,7 +63,7 @@ pipeline {
     )
   }
   parameters {
-    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--yes --conventional-commits --conventional-graduate=@pingux/astro,@pingux/branding-themes,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library', description: 'Flags applied to the `lerna version` command.')
+    string(name: 'LERNA_VERSION_FLAGS', defaultValue: '--yes --conventional-commits --conventional-graduate=@pingux/astro,@pingux/branding-themes,@pingux/charting,@pingux/end-user,@pingux/flow-diagram,@pingux/icons,@pingux/schema-form,ui-library', description: 'Flags applied to the `lerna version` command.')
     string(name: 'LERNA_PUBLISH_FLAGS', defaultValue: 'from-package --yes --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/', description: 'Flags applied to the `lerna publish` command.')
   }
   environment {
@@ -176,10 +176,32 @@ pipeline {
       }
     }
 
-    stage('update mirrored astro repository, and push new tags') { 
+    stage('update mirrored astro repository, and push new tags') {
+      agent {
+        kubernetes (
+          agentDefinition(
+            name: 'astro-github-agent',
+            cloud: centralCluster,
+            yaml: """
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              name: astro-github-agent
+            spec:
+              containers:
+                - name: "astro-github"
+                  command: # Jenkinsfile overwrites this, but k8s spec requires it
+                  - cat
+                  image: "docker.corp.pingidentity.com:5000/testing/astro-github:1.0.0"
+                  imagePullPolicy: Always
+                  workingDir: "/home/jenkins/agent"
+                  tty: true"""
+          )
+        )
+      }
       steps {
         dir("${env.WORKSPACE}") {
-          container('ui-library-admin') {
+          container('astro-github') {
             withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
               script {
                 sh """

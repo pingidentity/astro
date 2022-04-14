@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.26.0...@pingux/flow-diagram@0.27.0) (2022-04-04)
+
+
+### Features
+
+* [UIP-5293] Remove end user and update password field validation ([bf405b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bf405b7de571be4e0760981f4ddbdacb4a379a0f))
+
+
+
+
+
 # [0.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.25.6...@pingux/flow-diagram@0.26.0) (2022-03-01)
 
 
