@@ -405,7 +405,7 @@ const text = {
     textDecoration: 'underline',
   },
   '&.is-focused': {
-    ...defaultFocus,
+    textDecoration: 'underline',
   },
 };
 
@@ -520,9 +520,14 @@ const imageUpload = {
 
 const link = {
   ...text,
+  textDecoration: 'none',
   display: 'flex',
   justifyContent: 'space-between',
   width: 'max-content',
+  '&.is-current': {
+    cursor: 'default',
+    color: 'text.primary',
+  },
 };
 
 const neutralText = {
