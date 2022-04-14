@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.7.0",
+  "version": "1.8.0-alpha.4",
   "description": "PingUX themeable React component library",
   "author": "ux-development@pingidentity.com",
   "license": "Apache-2.0",
@@ -136,6 +136,7 @@
     "mdi-react": "^7.4.0",
     "moment": "^2.29.1",
     "prism-react-renderer": "1.2.1",
+    "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",

@@ -292,7 +292,7 @@ const thirdData = [
 ];
 
 export const Default = () => (
-  <NavBar defaultSelectedKeys={['Dashboard Link Group']}>
+  <NavBar defaultSelectedKey="Dashboard Link Group" >
     <Box padding="md">
       <Link
         href="https://pingidentity.com"
@@ -302,7 +302,7 @@ export const Default = () => (
         {logo}
       </Link>
     </Box>
-    <Separator marginTop="lg" marginBottom="sm" />
+    <Separator marginTop="lg" marginBottom="sm" backgroundColor="neutral.60" />
     <Box
       variant="navBar.sectionContainer"
       paddingBottom="xl"

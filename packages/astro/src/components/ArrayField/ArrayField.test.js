@@ -8,10 +8,12 @@ jest.mock('uuid', () => ({ v4: () => 'testid' }));
 
 const defaultData = [
   {
-    id: '1', value: 'Hello',
+    id: '1',
+    value: 'Hello',
   },
   {
-    id: '2', value: 'World',
+    id: '2',
+    value: 'World',
   },
 ];
 
@@ -19,9 +21,7 @@ const defaultProps = {
   defaultValue: defaultData,
 };
 
-const getComponent = (props = {}) => render((
-  <ArrayField {...defaultProps} {...props} />
-));
+const getComponent = (props = {}) => render(<ArrayField {...defaultProps} {...props} />);
 
 const renderField = (id, value, onFieldValueChange, onFieldDelete, otherFieldProps) => {
   return (
@@ -30,9 +30,11 @@ const renderField = (id, value, onFieldValueChange, onFieldDelete, otherFieldPro
       value={value}
       onChange={e => onFieldValueChange(e, id)}
       mr="xs"
-      slots={
-      { inContainer:
-  <ArrayFieldDeleteButton isDisabled={false} onDelete={() => onFieldDelete(id)} /> }}
+      slots={{
+        inContainer: (
+          <ArrayFieldDeleteButton isDisabled={false} onDelete={() => onFieldDelete(id)} />
+        ),
+      }}
       {...otherFieldProps}
     />
   );
@@ -93,7 +95,10 @@ test('onChange gets called when field values are changed', () => {
   getComponent({ value, onChange, renderField, defaultValue });
 
   fireEvent.change(screen.getAllByLabelText('Text field')[0], { target: { value: '123' } });
-  expect(onChange).toHaveBeenNthCalledWith(1, [{ id: '1', value: '123' }, { id: '2', value: 'World' }]);
+  expect(onChange).toHaveBeenNthCalledWith(1, [
+    { id: '1', value: '123' },
+    { id: '2', value: 'World' },
+  ]);
 });
 
 test('onComponentRender displays fields correctly', () => {
@@ -109,11 +114,14 @@ test('onComponentRender displays fields correctly', () => {
           value={value}
           onChange={e => onFieldValueChange(e, id)}
           mr="xs"
-          slots={
-      { inContainer:
-  <ArrayFieldDeleteButton isDisabled={false} onDelete={() => onFieldDelete(id)} /> }}
+          slots={{
+            inContainer: (
+              <ArrayFieldDeleteButton isDisabled={false} onDelete={() => onFieldDelete(id)} />
+            ),
+          }}
           {...otherFieldProps}
-        />),
+        />
+      ),
     },
     {
       id: '2',
@@ -124,11 +132,14 @@ test('onComponentRender displays fields correctly', () => {
           value={value}
           onChange={e => onFieldValueChange(e, id)}
           mr="xs"
-          slots={
-      { inContainer:
-  <ArrayFieldDeleteButton isDisabled={false} onDelete={() => onFieldDelete(id)} /> }}
+          slots={{
+            inContainer: (
+              <ArrayFieldDeleteButton isDisabled={false} onDelete={() => onFieldDelete(id)} />
+            ),
+          }}
           {...otherFieldProps}
-        />),
+        />
+      ),
     },
   ];
 
@@ -138,9 +149,16 @@ test('onComponentRender displays fields correctly', () => {
   expect(screen.getByLabelText('Text field 2')).toBeInTheDocument();
 });
 
-
 test('creates empty field when no data passed', () => {
   render(<ArrayField renderField={renderField} />);
 
   expect(screen.getByLabelText('Text field')).toBeInTheDocument();
+});
+
+test('check if tooltip on delete button renders on hover', () => {
+  render(<ArrayFieldDeleteButton renderField={renderField} />);
+  const button = screen.getByRole('button');
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });

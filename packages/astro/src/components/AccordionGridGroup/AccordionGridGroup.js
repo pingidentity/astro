@@ -99,6 +99,8 @@ const AccordionGridGroup = forwardRef((props, ref) => {
     keyboardDelegate,
   }, state, accordionGridRef);
 
+  delete gridProps.onMouseDown;
+
   return (
     <AccordionGridContext.Provider value={{ state, keyboardDelegate }}>
       <Box

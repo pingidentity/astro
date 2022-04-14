@@ -31,6 +31,17 @@ const getLocaleTime = ({ timeZone, locales, localeOptions }) => {
   });
 };
 
+const getTimezoneOffset = (timeZone) => {
+  const now = new Date();
+  const tzString = now.toLocaleString('en-US', { timeZone });
+  const localString = now.toLocaleString('en-US');
+  const diff = (Date.parse(localString) - Date.parse(tzString)) / 3600000;
+  const offset = -(diff + (now.getTimezoneOffset() / 60));
+  const formattedString = `${offset}:00`;
+
+  return offset > 0 ? `+${formattedString}` : formattedString;
+};
+
 /**
  *  Component allows users to choose a timezone from the list.
  *  You can checkout the default timezones list [here](https://github.com/yury-dymov/react-bootstrap-timezone-picker/blob/master/src/timezones.json).
@@ -61,7 +72,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
     if (timeUpdate) {
       const createTimeZoneTimes = () =>
         Object.entries(extendedTimeZonesList).map((item) => {
-          const gmt = item[0].substring(1, 10);
+          const gmt = `GMT${getTimezoneOffset(item[1])}`;
           const gmtLabel = item[0].substring(12);
           const timeZone = item[1]?.replace(/_/g, ' ');
           const time = getLocaleTime({
@@ -104,12 +115,12 @@ const TimeZonePicker = forwardRef((props, ref) => {
     return aNum - bNum;
   };
 
-  const items = useMemo(() => {
-    if (filteredTimezones.length === 0) {
-      return <Item key={emptySearchText}>{emptySearchText}</Item>;
-    }
+  const checkIsSelectedItem = () => {
+    return timeZones.filter(tz => tz.timeZone === search).length > 0;
+  };
 
-    return filteredTimezones.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
+  const renderTimeZones = (timeZonesToRender) => {
+    return timeZonesToRender.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
       <Item key={timeZone} data-id={timeZone} textValue={timeZone}>
         <Box flexDirection="row" justifyContent="space-between" width="100%">
           <Box flexDirection="row">
@@ -122,7 +133,14 @@ const TimeZonePicker = forwardRef((props, ref) => {
         </Box>
       </Item>
     ));
-  }, [emptySearchText, filteredTimezones]);
+  };
+
+  const items = useMemo(() => {
+    if (filteredTimezones.length === 0) {
+      return <Item key={emptySearchText}>{emptySearchText}</Item>;
+    }
+    return renderTimeZones(checkIsSelectedItem() ? timeZones : filteredTimezones);
+  }, [emptySearchText, filteredTimezones, search, timeZones]);
 
   const comboBoxFieldProps = useMemo(
     () => ({
@@ -138,7 +156,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
   );
 
   return (
-    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]}>
+    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="focus" >
       {items}
     </ComboBoxField>
   );

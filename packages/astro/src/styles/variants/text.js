@@ -121,6 +121,28 @@ const expandableRow = {
   },
 };
 
+const breadcrumbLink = {
+  color: 'active',
+  fontFamily: 'standard',
+  fontSize: '15px',
+  textDecoration: 'none',
+  outline: 'none',
+  '&.is-hovered': {
+    textDecoration: 'underline',
+  },
+  '&.is-focused': {
+    textDecoration: 'underline',
+  },
+  '&.is-disabled': {
+    pointerEvents: 'none',
+  },
+  '&.is-current': {
+    pointerEvents: 'none',
+    ...base,
+    fontWeight: 1,
+  },
+};
+
 const environmentBreadcrumb = {
   ...base,
   fontSize: 'sm',
@@ -130,11 +152,12 @@ const environmentBreadcrumb = {
 };
 
 const navBarSubtitle = {
-  my: 'md',
   ml: 'md',
+  mb: '15px',
   fontWeight: 3,
   fontSize: '11px',
   color: 'accent.80',
+  zIndex: '100',
 };
 
 const navBarHeaderText = {
@@ -143,6 +166,7 @@ const navBarHeaderText = {
   lineHeight: '13px',
   fontSize: '13px',
   fontWeight: 1,
+  maxWidth: '150px',
 };
 
 const multiselectFilterItem = {
@@ -209,6 +233,7 @@ export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   bodyWeak: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
+  breadcrumbLink,
   buttonLabel: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'accent.30', fontFamily: 'standard' },
   buttonTitle: { ...wordWrap, fontSize: 'xs', fontWeight: 0, color: 'text.primary', fontFamily: 'standard', lineHeight: '13px' },
   buttonSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard', lineHeight: '16px' },

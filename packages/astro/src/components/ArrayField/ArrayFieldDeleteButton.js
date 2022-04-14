@@ -4,10 +4,11 @@ import TrashIcon from 'mdi-react/TrashIcon';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
 
-const ArrayFieldDeleteButton = ({ label, isDisabled, id, onDelete }) => (
+const ArrayFieldDeleteButton = ({ isDisabled, id, onDelete }) => (
   <IconButton
     onPress={() => onDelete(id)}
     isDisabled={isDisabled}
+    aria-label="delete-button"
     sx={{
       position: 'absolute',
       right: -35,
@@ -16,21 +17,15 @@ const ArrayFieldDeleteButton = ({ label, isDisabled, id, onDelete }) => (
       top: 5,
       cursor: 'pointer',
     }}
-    title={label}
   >
     <Icon icon={TrashIcon} size={20} color="neutral.40" />
   </IconButton>
 );
 
 ArrayFieldDeleteButton.propTypes = {
-  label: PropTypes.string,
   id: PropTypes.number,
   isDisabled: PropTypes.bool,
   onDelete: PropTypes.func,
-};
-
-ArrayFieldDeleteButton.defaultProps = {
-  label: 'Delete field',
 };
 
 export default ArrayFieldDeleteButton;

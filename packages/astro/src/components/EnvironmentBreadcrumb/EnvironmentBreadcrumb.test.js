@@ -45,7 +45,7 @@ const getComponent = props =>
   render(
     <OverlayProvider>
       <EnvironmentBreadcrumb {...defaultProps} {...props}>
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {item => <Item key={item.name} data-testid={item.name}>{item.name}</Item>}
       </EnvironmentBreadcrumb>
     </OverlayProvider>,
   );
@@ -97,9 +97,17 @@ afterAll(() => {
 
 test('should render environment breadcrumb component by default', () => {
   getComponent();
-  const imageUploadButton = screen.getByTestId(testEnvBreadcrumb);
-  expect(imageUploadButton).toBeInstanceOf(HTMLDivElement);
-  expect(imageUploadButton).toBeInTheDocument();
+  const breadcrumbList = screen.getByTestId(testEnvBreadcrumb);
+  expect(breadcrumbList).toBeInstanceOf(HTMLOListElement);
+  expect(breadcrumbList).toBeInTheDocument();
+
+  const firstButton = screen.getByTestId('name');
+  expect(firstButton).toBeInstanceOf(HTMLButtonElement);
+  expect(firstButton).toBeInTheDocument();
+
+  const lastButton = screen.getByText('test-selected-item');
+  expect(lastButton).toBeInstanceOf(HTMLButtonElement);
+  expect(lastButton).toBeInTheDocument();
 });
 
 test('should display name', () => {
