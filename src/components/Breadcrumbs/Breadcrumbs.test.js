@@ -97,7 +97,7 @@ test('breadcrumbItem should render breadcrumbItem as a html tag when appropriate
 
 test('breadcrumbs will use onAction if provided', () => {
   const mockOnAction = jest.fn();
-  getComponent({}, { elementType: 'Button', onAction: mockOnAction });
+  getComponent({}, { elementType: 'Link', onAction: mockOnAction });
   userEvent.click(screen.getByText(testItemsArr[0]));
   expect(mockOnAction).toHaveBeenCalled();
 });

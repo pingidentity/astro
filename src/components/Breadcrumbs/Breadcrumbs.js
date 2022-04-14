@@ -2,7 +2,6 @@ import React, {
   forwardRef,
   useRef,
   useImperativeHandle,
-  Fragment,
   useCallback,
 } from 'react';
 import { useBreadcrumbs } from '@react-aria/breadcrumbs';
@@ -39,34 +38,43 @@ const Breadcrumbs = forwardRef((props, ref) => {
         : true;
 
     return (
-      <Fragment key={`fragment-${child.key}`}>
+      <Box
+        isRow
+        sx={{
+          alignItems: 'center',
+        }}
+        as="li"
+        key={`li-${child.key}`}
+      >
         <BreadcrumbItem
           data-id={child['data-id']}
           isCurrent={isCurrentItem}
           onAction={onAction}
           actionKey={child.key}
+          variant="text.breadcrumbLink"
           {...child.props}
         >
           {child.props.children}
         </BreadcrumbItem>
-        {icon && !isCurrentItem && <Icon icon={icon} {...iconProps} />}
-      </Fragment>
+        {icon && !isCurrentItem && <Icon aria-hidden="true" icon={icon} mx={5} size={16} {...iconProps} />}
+      </Box>
     );
   }, [children.length, filteredChildren, icon, iconProps, onAction]);
 
   return (
-    <Box
-      ref={breadcrumbsRef}
-      display="flex"
-      flexDirection="row"
-      alignItems="center"
-      sx={{ overflow: 'auto' }}
-      {...mergeProps(wrapperProps, others)}
-    >
-      {Array.isArray(filteredChildren)
-        ? filteredChildren.map(createBreadcrumb)
-        : createBreadcrumb(children)}
-    </Box>
+    <nav>
+      <Box
+        ref={breadcrumbsRef}
+        isRow
+        sx={{ overflow: 'auto' }}
+        as="ol"
+        {...mergeProps(wrapperProps, others)}
+      >
+        {Array.isArray(filteredChildren)
+          ? filteredChildren.map(createBreadcrumb)
+          : createBreadcrumb(children)}
+      </Box>
+    </nav>
   );
 });
 
