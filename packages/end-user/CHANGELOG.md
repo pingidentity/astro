@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.0...@pingux/end-user@2.3.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* [UIP-5336] Safari: autocomplete native icon overlaps with Reveal eye-shape button ([0aa394e](https://gitlab.corp.pingidentity.com/ux/end-user/commit/0aa394e33b0dd733447d284bd310a8e040200f75))
+
+
+
+
+
 # [2.3.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.2.3...@pingux/end-user@2.3.0) (2022-04-04)
 
 
