@@ -246,7 +246,8 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       onAction={handleOnAction}
       iconProps={{
         color: 'neutral.70',
-        mx: 10,
+        mx: 5,
+        size: 16,
       }}
       {...others}
     >
@@ -255,6 +256,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         variant="environmentBreadcrumb.current"
         data-testid="name"
         aria-label={name}
+        elementType="Button"
       >
         <Icon icon={HomeIcon} mr={7} />
         {name}

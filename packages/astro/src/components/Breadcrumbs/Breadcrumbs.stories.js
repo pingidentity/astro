@@ -31,99 +31,31 @@ export default {
   },
 };
 
-const foldersArr = ['Folder 1', 'Folder 2', 'Folder 3'];
-
 export const Default = (args) => {
   const onAction = key => action(`onPress ${key}`);
 
   return (
-    <Breadcrumbs onAction={onAction} {...args}>
-      <Item key="home" variant="link" data-id="home">
+    <Breadcrumbs onAction={onAction} {...args} >
+      <Item key="home" aria-label="home" variant="buttons.link" data-id="home" href="https://www.pingidentity.com">
         Home
       </Item>
-      <Item key="trendy" variant="link" data-id="trendy">
+      <Item key="trendy" aria-label="trendy" variant="buttons.link" data-id="trendy" href="https://www.pingidentity.com">
         Trendy
       </Item>
-      <Item key="march 2020 assets" variant="link" data-id="march">
+      <Item key="march 2020 assets" aria-label="march-2020-assets" variant="buttons.link" data-id="march" href="https://www.pingidentity.com">
         March 2020 Assets
       </Item>
-    </Breadcrumbs>
-  );
-};
-
-export const WithOnAction = () => {
-  // eslint-disable-next-line no-alert
-  const onAction = key => alert(key);
-
-  return (
-    <Breadcrumbs onAction={onAction} icon={ChevronRightIcon}>
-      <Item key="home">Home</Item>
-      <Item key="trendy">Trendy</Item>
-      <Item key="march 2020 assets">March 2020 Assets</Item>
     </Breadcrumbs>
   );
 };
 
 export const WithSpan = () => (
   <Breadcrumbs icon={ChevronRightIcon}>
-    <Item key="Parent" elementType="span">
+    <Item key="Parent" aria-label="parent" elementType="span">
       Parent
     </Item>
-    <Item key="FonsVernall" elementType="span">
+    <Item key="FonsVernall" aria-label="fons-vernall" elementType="span">
       Fons Vernall
     </Item>
-  </Breadcrumbs>
-);
-
-export const WithIsCurrentItemClass = (args) => {
-  const styles = {
-    color: 'blue',
-    '&.isCurrent': {
-      color: 'red',
-    },
-  };
-  return (
-    <Breadcrumbs {...args}>
-      <Item key="home" sx={styles}>
-        Home
-      </Item>
-      <Item key="trendy" sx={styles}>
-        Trendy
-      </Item>
-      <Item key="march 2020 assets" isCurrent sx={styles}>
-        March 2020 Assets
-      </Item>
-    </Breadcrumbs>
-  );
-};
-
-export const WithDisabledLastItem = args => (
-  <Breadcrumbs {...args}>
-    <Item key="home" elementType="Button">
-      Home
-    </Item>
-    <Item key="trendy" elementType="Button">
-      Trendy
-    </Item>
-    <Item key="march 2020 assets" elementType="Button" isDisabled>
-      March 2020 Assets
-    </Item>
-  </Breadcrumbs>
-);
-
-export const WithHrefA = args => (
-  <Breadcrumbs {...args}>
-    {foldersArr.map(folder => (
-      <Item
-        elementType="a"
-        href="#"
-        key={folder}
-        style={{
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {folder}
-      </Item>
-    ))}
   </Breadcrumbs>
 );
