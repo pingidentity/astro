@@ -136,6 +136,7 @@
     "mdi-react": "^7.4.0",
     "moment": "^2.29.1",
     "prism-react-renderer": "1.2.1",
+    "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",
