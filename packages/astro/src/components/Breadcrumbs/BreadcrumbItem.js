@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { mergeProps } from '@react-aria/utils';
 import { omit } from 'lodash/object';
 import { usePropWarning } from '../../hooks/';
-import { Button, IconButton, Text } from '../../index';
+import { Button, IconButton, Text, Link } from '../../index';
 
 const BreadcrumbItem = forwardRef((props, ref) => {
   const {
@@ -39,6 +39,11 @@ const BreadcrumbItem = forwardRef((props, ref) => {
         return IconButton;
       case 'Text':
         return Text;
+      case 'Link':
+        if (isCurrent) {
+          return Text;
+        }
+        return Link;
       case 'Fragment':
         return Fragment;
       default:
@@ -59,8 +64,8 @@ const BreadcrumbItem = forwardRef((props, ref) => {
     }
     if (isCurrent) {
       elementTypeProps.className = elementTypeProps.className
-        ? `${elementTypeProps.className} isCurrent`
-        : 'isCurrent';
+        ? `${elementTypeProps.className} is-current`
+        : 'is-current';
     }
     return omit(elementTypeProps, 'onClick', 'onKeyDown', 'onKeyUp');
   }, [elementType, itemProps, others, onPressHandler]);
@@ -90,7 +95,7 @@ BreadcrumbItem.propTypes = {
 };
 
 BreadcrumbItem.defaultProps = {
-  elementType: 'Button',
+  elementType: 'Link',
 };
 
 BreadcrumbItem.displayName = 'BreadcrumbItem';
