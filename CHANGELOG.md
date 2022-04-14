@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.8.0...@pingux/astro@1.8.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* Hotfix patch for 2022-04-14 release ([be33f54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/be33f5434620f4275df91cc5ecdc15985364666d))
+
+
+
+
+
 # [1.8.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.7.0...@pingux/astro@1.8.0) (2022-04-14)
 
 
