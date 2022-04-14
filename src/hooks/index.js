@@ -11,3 +11,4 @@ export { default as useRockerButton } from './useRockerButton';
 export { default as useSelectField } from './useSelectField';
 export { default as useStatusClasses } from './useStatusClasses';
 export { default as useDebounce } from './useDebounce';
+export { default as useFallbackImage } from './useFallbackImage';
