@@ -11,7 +11,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ3d5bmV0aHJvc2UiLCJhIjoiY2tpajZ2Y2VmMHd5bzJzb
 export const pointsToGeoJson = (points) => {
     return ({
         // Add in a default count so that the point filters just have to worry about one variable.
-        // Latitude and longitude could also be separate properties of the object.
+        // Latitude and longitude could also be separate properties of the object .
         features: points.map(({ id, longLat, properties: { count = 1, ...properties } = {} }) => ({
             'type': 'Feature',
             'geometry': {

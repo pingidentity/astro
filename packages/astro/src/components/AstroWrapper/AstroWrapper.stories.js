@@ -52,7 +52,7 @@ export const WithCustomThemeOverride = () => {
 
   return (
     <AstroWrapper themeOverrides={[myCustomBranding]} bg="transparent" alignItems="flex-start">
-      <Text variant="title" mb="sm">This is the heading variant with a custom theme applied.</Text>
+      <Text variant="title" mb="sm">This is the heading variant with a custom theme applied. </Text>
       <Text variant="body" mb="sm">The body variant is not mentioned in the custom theme, so it inherits styles from the default Astro theme.</Text>
       <Button variant="primary">
         This is a primary button with custom theme.

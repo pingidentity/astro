@@ -124,7 +124,7 @@ NonRealtimeDraggingTool.prototype.doKeyDown = function doKeyDown() {
 
 /**
 * If the user changes back to "moving" mode,
-* show the _imagePart again and go back to dragging the _ghostDraggedParts.
+* show the _imagePart again and go back to dragging the _ghostDraggedParts..
 * @this {NonRealtimeDraggingTool}
 */
 NonRealtimeDraggingTool.prototype.doKeyUp = function doKeyUp() {

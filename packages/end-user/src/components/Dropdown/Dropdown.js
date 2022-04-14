@@ -12,7 +12,7 @@ const getLabel = option => (option.label ? option.label : option);
 /**
  * @enum {string}
  * @alias Droppdown~dropdownStatuses
- * @desc Enum for the different types of text input styling
+ * @desc Enum for the different types of text input styling.
  */
 
 export const dropdownStatuses = {
