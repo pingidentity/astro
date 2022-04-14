@@ -115,12 +115,12 @@ const TimeZonePicker = forwardRef((props, ref) => {
     return aNum - bNum;
   };
 
-  const items = useMemo(() => {
-    if (filteredTimezones.length === 0) {
-      return <Item key={emptySearchText}>{emptySearchText}</Item>;
-    }
+  const checkIsSelectedItem = () => {
+    return timeZones.filter(tz => tz.timeZone === search).length > 0;
+  };
 
-    return filteredTimezones.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
+  const renderTimeZones = (timeZonesToRender) => {
+    return timeZonesToRender.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
       <Item key={timeZone} data-id={timeZone} textValue={timeZone}>
         <Box flexDirection="row" justifyContent="space-between" width="100%">
           <Box flexDirection="row">
@@ -133,7 +133,14 @@ const TimeZonePicker = forwardRef((props, ref) => {
         </Box>
       </Item>
     ));
-  }, [emptySearchText, filteredTimezones]);
+  };
+
+  const items = useMemo(() => {
+    if (filteredTimezones.length === 0) {
+      return <Item key={emptySearchText}>{emptySearchText}</Item>;
+    }
+    return renderTimeZones(checkIsSelectedItem() ? timeZones : filteredTimezones);
+  }, [emptySearchText, filteredTimezones, search, timeZones]);
 
   const comboBoxFieldProps = useMemo(
     () => ({
@@ -149,7 +156,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
   );
 
   return (
-    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]}>
+    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="focus" >
       {items}
     </ComboBoxField>
   );

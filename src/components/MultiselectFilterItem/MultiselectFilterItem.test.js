@@ -29,8 +29,16 @@ test('default multiselectFilter', () => {
   expect(multiselectFilterItem).toBeInTheDocument();
 });
 
-test('icon displays when icon prop is present', () => {
+test('icon button displays when icon prop is present', () => {
   getComponent({ icon: FilterIcon });
   const icon = screen.getByTestId(iconId);
   expect(icon).toBeInTheDocument();
+  expect(icon.parentElement).toBeInstanceOf(HTMLButtonElement);
+});
+
+test('icon displays when icon prop is present and default selected', () => {
+  getComponent({ icon: FilterIcon, isDefaultSelected: true });
+  const icon = screen.getByTestId(iconId);
+  expect(icon).toBeInTheDocument();
+  expect(icon.parentElement).not.toBeInstanceOf(HTMLButtonElement);
 });

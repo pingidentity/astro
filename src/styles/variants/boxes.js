@@ -53,7 +53,6 @@ const listViewItem = {
   ...base,
   padding: '0px 15px 0px 25px',
   flex: '1 1 0px',
-  cursor: 'pointer',
   minHeight: '80px',
   justifyContent: 'center',
   bg: 'accent.99',
@@ -63,6 +62,7 @@ const listViewItem = {
   },
   '&.is-hovered': {
     bg: 'white',
+    cursor: 'pointer',
   },
   '&.is-focused': {
     boxShadow: 'inset 0 0 5px #5873bdbf',

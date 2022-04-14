@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.6.0...@pingux/astro@1.7.0) (2022-04-04)
+
+
+### Features
+
+* [UIP-5028] UI Library Global Styles Override ([3f3ada3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3f3ada3643ab9760a7308b3b73b92b2a2cfcd8f8))
+* [UIP-5214] focus indicator buttons ([d9319d9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d9319d9ea321bfce14effa01c083b1714beb96d3))
+* [UIP-5292] Update Astro version in Schema Form ([077b399](https://gitlab.corp.pingidentity.com/ux/pingux/commit/077b3999c2690e8241e590ac5cd494e860ddf90e))
+
+
+
+
+
 # [1.6.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.5.0...@pingux/astro@1.6.0) (2022-03-24)
 
 
