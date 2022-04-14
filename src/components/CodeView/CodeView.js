@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
-import Highlight, { defaultProps } from 'prism-react-renderer';
+import Highlight, { defaultProps, Prism } from 'prism-react-renderer';
 import { useStatusClasses } from '../../hooks';
 import { Box, CopyText } from '../..';
 import codeView from '../../styles/variants/codeView';
@@ -20,6 +20,7 @@ const CodeView = forwardRef((props, ref) => {
     hasLineNumbers,
     hasNoCopyButton,
     language,
+    Prism: customPrism,
     ...others
   } = props;
 
@@ -42,6 +43,7 @@ const CodeView = forwardRef((props, ref) => {
       theme={codeView.theme}
       code={children?.trim() || ''}
       language={language}
+      Prism={customPrism || Prism}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <Box as="pre" className={className} style={style}>
@@ -105,9 +107,13 @@ CodeView.propTypes = {
    * Which programming language the CodeView should use for highlighting. A list of default languages is listed [here](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js).
    *
    *
-   * Additional languages may be added, see [this guidance](https://github.com/FormidableLabs/prism-react-renderer#faq) for more information.
+   * Additional languages may be added, see
+   * [CodeView with additional language](./?path=/docs/codeview--with-additional-language)
+   * for more information.
   */
   language: PropTypes.string,
+  /* Prism object for using instead of Prism from "react-prism-renderer" */
+  Prism: PropTypes.shape({}),
 };
 
 CodeView.defaultProps = {

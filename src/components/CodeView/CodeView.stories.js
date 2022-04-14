@@ -1,4 +1,6 @@
 import React from 'react';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-powershell';
 import CodeView from './CodeView';
 import { Text } from '../..';
 
@@ -68,6 +70,9 @@ export default {
       control: {
         type: 'text',
       },
+    },
+    Prism: {
+      control: 'none',
     },
   },
   parameters: {
@@ -146,3 +151,30 @@ export const ChipWithIcon = () => (
     </CodeView>
   </>
 );
+
+export const WithAdditionalLanguage = () => {
+  /**
+   * import { CodeView } from "@pingux/astro";
+   * import Prism from 'prismjs';
+   * import 'prismjs/components/prism-powershell';
+   */
+
+  const powershellCode = `
+   Get-WinEvent -FilterHashtable @{
+     LogName='Application'
+     ProviderName='*defrag'
+   }
+ `.trim();
+
+  return (
+    <CodeView language="powershell" Prism={Prism}>
+      {powershellCode}
+    </CodeView>
+  );
+};
+
+WithAdditionalLanguage.parameters = {
+  docs: {
+    storyDescription: 'All available languages are listed [here](https://github.com/PrismJS/prism/tree/master/components).',
+  },
+};
