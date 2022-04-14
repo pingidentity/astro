@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/charting@0.9.1-alpha.5...@pingux/charting@0.9.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* Hotfix patch for 2022-04-14 release ([be33f54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/be33f5434620f4275df91cc5ecdc15985364666d))
+
+
+
+
+
 ## [0.9.1-alpha.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/charting@0.9.0-alpha.3...@pingux/charting@0.9.1-alpha.5) (2022-04-14)
 
 **Note:** Version bump only for package @pingux/charting

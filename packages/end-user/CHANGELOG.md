@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.1...@pingux/end-user@2.3.2) (2022-04-14)
+
+
+### Bug Fixes
+
+* Hotfix patch for 2022-04-14 release ([be33f54](https://gitlab.corp.pingidentity.com/ux/end-user/commit/be33f5434620f4275df91cc5ecdc15985364666d))
+
+
+
+
+
 ## [2.3.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.0...@pingux/end-user@2.3.1) (2022-04-14)
 
 
