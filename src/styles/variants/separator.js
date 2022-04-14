@@ -18,10 +18,10 @@ const navBarSeparator = {
 
 const navBarSubtitleSeparator = {
   ...base,
-  mt: 'sm',
-  mb: '20px',
+  mt: '15px',
+  mb: '15px',
   ml: '45px',
-  width: 'calc(100% - 75px)',
+  width: 'calc(100% - 60px)',
   backgroundColor: 'neutral.60',
 };
 

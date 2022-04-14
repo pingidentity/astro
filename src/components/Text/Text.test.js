@@ -29,3 +29,27 @@ test('default text', () => {
   expect(text).toBeInstanceOf(HTMLSpanElement);
   expect(text).toBeInTheDocument();
 });
+
+test('typography props will be applied', () => {
+  const customTypographyProps = {
+    fontFamily: 'times',
+    fontSize: 'xx',
+    fontWeight: 900,
+    lineHeight: '2em',
+    letterSpacing: '5px',
+    textAlign: 'right',
+    fontStyle: 'italic',
+  };
+
+  getComponent({ ...customTypographyProps });
+  const text = screen.getByTestId(testId);
+  expect(text).toHaveStyle({
+    fontFamily: 'times',
+    fontSize: '23px',
+    fontWeight: 900,
+    lineHeight: '2em',
+    letterSpacing: '5px',
+    textAlign: 'right',
+    fontStyle: 'italic',
+  });
+});

@@ -76,7 +76,7 @@ const MultiselectFilter = forwardRef((props, ref) => {
           <ListView
             items={items}
             onSelectionChange={onSelectionChange}
-            selectionMode="multiple"
+            selectionMode="none"
             style={{ width: '100%' }}
             pl="md"
           >

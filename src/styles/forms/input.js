@@ -22,6 +22,7 @@ export const input = {
   borderStyle: 'solid',
   borderColor: 'neutral.80',
   borderRadius: 2,
+  fontSize: 'md',
   px: 'md',
   py: 'sm',
   width: '100%',
@@ -63,7 +64,7 @@ input.large = {
 input.small = {
   ...input,
   height: '28px',
-  pb: '2px,',
+  pb: '2px',
   pt: '2px',
   pl: 'sm',
   pr: 'sm',

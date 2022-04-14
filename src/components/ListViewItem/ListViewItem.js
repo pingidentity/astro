@@ -34,6 +34,8 @@ const ListViewItem = (props) => {
   const rowRef = useRef();
   const cellRef = useRef();
 
+  const isSelectable = state.selectionManager.selectionMode !== 'none';
+
   const {
     focusProps: focusWithinProps,
   } = useFocusRing({ within: true });
@@ -70,7 +72,7 @@ const ListViewItem = (props) => {
   );
 
   const { classNames } = useStatusClasses(className, {
-    isHovered,
+    isHovered: isSelectable && isHovered,
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible,
     hasSeparator,

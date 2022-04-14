@@ -44,6 +44,10 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
 
   const ariaLabel = props['aria-label'];
 
+  delete mergedProps.onMouseDown;
+  delete mergedProps.onPointerDown;
+  delete mergedProps.onClick;
+
   return (
     <Box
       as="div"
