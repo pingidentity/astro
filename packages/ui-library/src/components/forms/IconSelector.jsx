@@ -6,7 +6,7 @@ import classnames from "classnames";
 /**
  * @class IconSelector
  * @desc This is just a reskinned FormRadioGroup. It takes all the props FormRadioGroup does.
- *      The only difference is its item prop also accept the 'iconName' value.
+ *      The only difference is its item prop also accept the 'iconName'  value.
  *
  * @param {IconSelector~RadioGroupItem[]} items
  *     Array of RadioGroupItem objects to render.
