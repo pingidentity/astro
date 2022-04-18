@@ -38,7 +38,6 @@ const defaultHover = {
 };
 
 const defaultFocus = {
-  boxShadow: 'focus',
   outline: '1px solid',
   outlineColor: 'active',
   outlineOffset: '4px',
@@ -503,7 +502,6 @@ const colorField = {
   },
   '&.is-focused': {
     borderColor: 'accent.80',
-    boxShadow: 'focus',
   },
 };
 
