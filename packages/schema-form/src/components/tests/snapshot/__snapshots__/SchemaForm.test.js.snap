@@ -146,7 +146,6 @@ exports[`form elements form level markdown errors 1`] = `
 }
 
 .emotion-12.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -613,7 +612,6 @@ input~.emotion-11.is-focused {
 }
 
 .emotion-14.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -995,7 +993,6 @@ input~.emotion-13.is-focused {
 }
 
 .emotion-46.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -2758,7 +2755,6 @@ exports[`single fields password field 1`] = `
 }
 
 .emotion-9.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -5523,7 +5519,6 @@ exports[`single fields select field 1`] = `
 }
 
 .emotion-17.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -8349,7 +8344,6 @@ exports[`single fields select field with default 1`] = `
 }
 
 .emotion-17.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -9979,7 +9973,6 @@ exports[`single fields string field format email 1`] = `
 }
 
 .emotion-9.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -11547,7 +11540,6 @@ exports[`single fields string field format uri 1`] = `
 }
 
 .emotion-9.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -13115,7 +13107,6 @@ exports[`single fields string field regular 1`] = `
 }
 
 .emotion-9.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -14719,7 +14710,6 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 }
 
 .emotion-11.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -16329,7 +16319,6 @@ exports[`single fields string field with help text 1`] = `
 }
 
 .emotion-11.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -17975,7 +17964,6 @@ exports[`single fields string field with markdown errors 1`] = `
 }
 
 .emotion-17.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -19570,7 +19558,6 @@ exports[`single fields string field with placeholder 1`] = `
 }
 
 .emotion-9.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
@@ -21119,7 +21106,6 @@ exports[`single fields textarea field 1`] = `
 }
 
 .emotion-9.is-focused {
-  box-shadow: 0 0 5px #5873bdbf;
   outline: 1px solid;
   outline-color: var(--theme-ui-colors-active);
   outline-offset: 4px;
