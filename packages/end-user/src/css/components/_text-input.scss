@@ -96,6 +96,7 @@
   }
 
   &--error {
+    @include ignore-clicks();
     &::before {
       content: $pingicon-error-triangle;
       color: $color-critical-red;
@@ -104,6 +105,7 @@
   }
 
   &--success {
+    @include ignore-clicks();
     &::before {
       content: $pingicon-success-round;
       color: $color-success-green;
