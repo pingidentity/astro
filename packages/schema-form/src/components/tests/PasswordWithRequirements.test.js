@@ -71,3 +71,11 @@ test('it fires validate requirements events', async () => {
   expect(input.value).toBe('Hello');
   expect(validateRequirements).toHaveBeenCalledTimes('Hello'.length);
 });
+
+test('it sets autocomplete attribute correctly', () => {
+  const newUISchema = JSON.parse(JSON.stringify(uiSchema)); // make deep copy
+  newUISchema.password['ui:options'].autoComplete = 'new-password';
+  renderSchemaForm({ schema, uiSchema: newUISchema });
+  const input = screen.queryByLabelText(name);
+  expect(input).toHaveAttribute('autocomplete', 'new-password');
+});

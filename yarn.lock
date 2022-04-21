@@ -21719,6 +21719,11 @@ prismjs@^1.21.0, prismjs@^1.25.0, prismjs@^1.6.0, prismjs@^1.8.4, prismjs@~1.27.
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prismjs/-/prismjs-1.27.0.tgz#bb6ee3138a0b438a3653dd4d6ce0cc6510a45057"
   integrity sha1-u27jE4oLQ4o2U91NbODMZRCkUFc=
 
+prismjs@^1.27.0:
+  version "1.28.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prismjs/-/prismjs-1.28.0.tgz#0d8f561fa0f7cf6ebca901747828b149147044b6"
+  integrity sha512-8aaXdYvl1F7iC7Xm1spqSaY/OJBpYW3v+KJ+F17iYxvdc8sfjW194COK5wVhMZX45tGteiBQgdvD/nhxcRwylw==
+
 prismjs@~1.17.0:
   version "1.17.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prismjs/-/prismjs-1.17.1.tgz#e669fcbd4cdd873c35102881c33b14d0d68519be"

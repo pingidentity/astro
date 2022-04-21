@@ -97,7 +97,9 @@ const SearchField = forwardRef((props, ref) => {
 });
 
 SearchField.propTypes = {
-  /** Describes the type of autocomplete functionality the input should provide if any. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). */
+  /** How the input should handle autocompletion according to the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). The `autocomplete` prop is an alias for this. */
+  autoComplete: PropTypes.string,
+  /** @ignore Alias for `autoComplete` prop. Exists for backwards-compatibility. */
   autocomplete: PropTypes.string,
   /** The default value (uncontrolled). */
   defaultValue: PropTypes.string,

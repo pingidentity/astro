@@ -128,7 +128,9 @@ TextAreaField.propTypes = {
   onChange: PropTypes.func,
   /** The value for the textarea element (controlled). */
   value: PropTypes.string,
-  /** How the textarea element should handle autocompletion according to the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-autocomplete). */
+  /** How the input should handle autocompletion according to the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). The `autocomplete` prop is an alias for this. */
+  autoComplete: PropTypes.string,
+  /** @ignore Alias for `autoComplete` prop. Exists for backwards-compatibility. */
   autocomplete: PropTypes.string,
   /** A list of class names to apply to the textarea element. */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
