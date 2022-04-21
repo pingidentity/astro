@@ -31,18 +31,22 @@ const animals = [
 ];
 
 const withSection = [
-  { name: 'Animals',
+  {
+    name: 'Animals',
     children: [
       { name: 'Raccoon' },
       { name: 'Kangaroo' },
       { name: 'Opossum' },
-    ] },
-  { name: 'People',
+    ],
+  },
+  {
+    name: 'People',
     children: [
       { name: 'Michael' },
       { name: 'Dwight' },
       { name: 'Creed' },
-    ] },
+    ],
+  },
 ];
 
 const actions = {
@@ -278,6 +282,18 @@ export const ControlledWithCustomValue = () => {
     </OverlayProvider>
   );
 };
+
+export const WithCustomInputValue = () => (
+  <OverlayProvider>
+    <ComboBoxField
+      label="Example label"
+      defaultItems={items}
+      hasCustomValue
+    >
+      {item => <Item key={item.id} textValue={item.id}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
+);
 
 export const AllowCustomValue = () => (
   <OverlayProvider>
