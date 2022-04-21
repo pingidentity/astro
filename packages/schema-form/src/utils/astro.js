@@ -99,6 +99,8 @@ export const toAstroInputProps = (props) => {
       defaultText,
       requirements,
       validateRequirements,
+      autoComplete,
+      autocomplete,
       ...custom
     },
     placeholder,
@@ -134,6 +136,7 @@ export const toAstroInputProps = (props) => {
       isRequired: required,
       ...custom,
     },
+    autoComplete: autocomplete || autoComplete,
     defaultText,
     formContext,
     isDisabled: disabled,
