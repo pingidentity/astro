@@ -495,6 +495,165 @@
     }
 }
 
+.heatmap-chart {
+    &__title,
+    &__no-data {
+        font-size: 18px;
+        color: $color-strong-neutral-20;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    &__row {
+        display: table-row;
+    }
+
+    &__time {
+        display: flex;
+        margin-top: 15px;
+        margin-left: 44px;
+
+        &__spacer {
+            margin-left: 44px;
+        }
+
+        &__am,
+        &__pm {
+            display: flex;
+            align-items: center;
+        }
+
+        &__am {
+            margin-right: 10px;
+        }
+
+        &__line {
+            width: 82px;
+            height: 1px;
+
+            &--am {
+                background-color: $color-strong-neutral-50;
+            }
+            &--pm {
+                background-color: $color-strong-neutral-10;
+            }
+        }
+
+        &__text {
+            font-size: 10px;
+            margin: 0 2px;
+
+            &--am {
+                color: $color-strong-neutral-40;
+            }
+            &--pm {
+                color: $color-strong-neutral-10;
+            }
+        }
+
+    }
+
+    &__chart {
+        $cell-size: 17px;
+        display: inline-block;
+        text-align: center;
+
+        &__cells-row {
+            display: table-row;
+        }
+
+        .help-tooltip,
+        &__xlabel,
+        &__ylabel,
+        &__spacer {
+            display: table-cell;
+            border-style: solid;
+            border-width: 0 1px 1px 0;
+        }
+
+        .help-tooltip {
+            box-sizing: border-box;
+            padding-top: 12px;
+            position: relative;
+            height: $cell-size;
+            width: $cell-size;
+            min-width: $cell-size;
+            border-color: $color-white;
+        }
+
+        &__xlabel,
+        &__ylabel,
+        &__spacer {
+            font-size: 10px;
+            text-align: center;
+            line-height: 1em;
+            border-color: $color-white;
+            background-color: $color-white;
+        }
+
+        &__xlabel {
+            padding: 0 0 5px;
+
+            &--am {
+                color: $color-strong-neutral-40;
+            }
+            &--pm {
+                color: $color-strong-neutral-10;
+            }
+        }
+
+        &__ylabel {
+            padding: 0 5px 0 0;
+            line-height: 12px;
+            text-transform: uppercase;
+            color: $color-strong-neutral-20;
+        }
+
+        &__cell,
+        .help-tooltip-target {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &__average {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+
+        &__row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        &__cell {
+            width: 11px;
+            height: 11px;
+            background-color: #00af18;
+            border-radius: 2px;
+            margin-right: 4px;
+        }
+        &__title {
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+        &__value {
+            color: #3c5080;
+            font-weight: 600;
+            font-size: 24px;
+        }
+    }
+
+    &__no-data {
+        margin: 100px 0;
+    }
+}
+
 .chart-tooltip {
     &--align-center {
         text-align: center;

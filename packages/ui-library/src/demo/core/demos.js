@@ -1146,6 +1146,13 @@ module.exports = [
                         pathToDemoSource: "demo_components_general_charting_HeatmapCardDemo.jsx.html"
                     },
                     {
+                        label: "Heatmap Chart",
+                        demo: require("../components/general/charting/HeatmapChartDemo"),
+                        pathToDoc: "components/general/charting/HeatmapChart.jsx",
+                        pathToSource: "components_general_charting_HeatmapChart.jsx.html",
+                        pathToDemoSource: "demo_components_general_charting_HeatmapChartDemo.jsx.html"
+                    },
+                    {
                         label: "Horizontal Bar Card",
                         demo: require("../components/general/charting/HorizontalBarCardDemo"),
                         pathToDoc: "components/general/charting/HorizontalBarCard.jsx",
