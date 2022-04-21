@@ -20,7 +20,7 @@ const defaultProps = {
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props}>
-      {item => <Item key={item.id} data-id={item.name}>{item.name}</Item>}
+      {item => <Item {...item} key={item.id} data-id={item.name} >{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 ));
@@ -339,6 +339,25 @@ test('should be able to use custom default filtering', async () => {
   userEvent.type(input, 'K');
   options = await screen.findAllByRole('option');
   expect(options[0]).toHaveTextContent(items[1].name);
+});
+
+test('should show in input "textValue" if provided', async () => {
+  const newItems = items.map(item => ({ ...item, textValue: item.id }));
+  getComponent({
+    items: newItems,
+  });
+
+  const input = screen.queryByRole('combobox');
+
+  userEvent.click(input);
+  const options = await screen.findAllByRole('option');
+
+  userEvent.click(options[0]);
+  expect(input).toHaveValue(newItems[0].textValue);
+
+  // Check that on clicking again "textValue" still returning
+  userEvent.click(options[0]);
+  expect(input).toHaveValue(newItems[0].textValue);
 });
 
 describe('loadingState', () => {
