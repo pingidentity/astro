@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.2...@pingux/flow-diagram@0.27.3) (2022-04-21)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
 ## [0.27.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.1...@pingux/flow-diagram@0.27.2) (2022-04-14)
 
 

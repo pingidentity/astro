@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.8.1...@pingux/astro@1.9.0) (2022-04-21)
+
+
+### Bug Fixes
+
+* [UIP-5348] NumberField keyboard interactions not working in external projects ([bc56154](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bc561546b32121590b6219bff425b838e41e6b76))
+* [UIP-5393] Astro ComboBoxField component mixes custom value key with text content ([dbe53f6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dbe53f6e81bf2219dbad02cc632325629585fef4))
+* [UIP-5412] Fix autocomplete for Astro and Schema Form ([db7ad4d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/db7ad4dbbac061be092c654125608259ce127703))
+
+
+### Features
+
+* [UIP-5383] Remove box shadow on button focus ([4074f15](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4074f15b87548942b1b3eae27150f8ae2db8a6dc))
+
+
+
+
+
 ## [1.8.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.8.0...@pingux/astro@1.8.1) (2022-04-14)
 
 

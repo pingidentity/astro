@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.2.2...ui-library@5.3.0) (2022-04-21)
+
+
+### Features
+
+* [UIP-5322] Add Heatmap Chart Component ([8099da5](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/8099da54dec08c76ca012589cd16b7357822eb77))
+
+
+
+
+
 ## [5.2.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.2.1...ui-library@5.2.2) (2022-04-14)
 
 

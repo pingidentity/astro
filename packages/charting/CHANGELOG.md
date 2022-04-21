@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/charting@0.9.1...@pingux/charting@0.9.2) (2022-04-21)
+
+**Note:** Version bump only for package @pingux/charting
+
+
+
+
+
 ## [0.9.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/charting@0.9.1-alpha.5...@pingux/charting@0.9.1) (2022-04-14)
 
 

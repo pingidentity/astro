@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.2...@pingux/end-user@2.3.3) (2022-04-21)
+
+
+### Bug Fixes
+
+* [UIP-5388] Password Reveal Not Focusable After Input Focus ([ee15790](https://gitlab.corp.pingidentity.com/ux/end-user/commit/ee15790e25180a22564956f7d097794a90be097a))
+* [UIP-5392] clicking input status icon sets focus inside ([db71ded](https://gitlab.corp.pingidentity.com/ux/end-user/commit/db71ded78912232885ee334d5cd6304dfbe14147))
+* [UIP-5394] Eye icon is misplaced on Password field form ([f6b3fcf](https://gitlab.corp.pingidentity.com/ux/end-user/commit/f6b3fcfb97129c9dbad7549e6cd3f2694afa594e))
+
+
+
+
+
 ## [2.3.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.1...@pingux/end-user@2.3.2) (2022-04-14)
 
 

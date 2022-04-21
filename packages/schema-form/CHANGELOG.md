@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.3.3...@pingux/schema-form@3.4.0) (2022-04-21)
+
+
+### Bug Fixes
+
+* [UIP-5412] Fix autocomplete for Astro and Schema Form ([db7ad4d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/db7ad4dbbac061be092c654125608259ce127703))
+
+
+### Features
+
+* [UIP-5383] Remove box shadow on button focus ([4074f15](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4074f15b87548942b1b3eae27150f8ae2db8a6dc))
+
+
+
+
+
 ## [3.3.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.3.2...@pingux/schema-form@3.3.3) (2022-04-14)
 
 
