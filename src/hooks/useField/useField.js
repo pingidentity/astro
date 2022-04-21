@@ -148,7 +148,7 @@ const useField = (props = {}) => {
   };
 
   const fieldControlProps = {
-    autocomplete: autocomplete || autoComplete,
+    autoComplete: autocomplete || autoComplete,
     autoCorrect,
     autoFocus: hasAutoFocus,
     className: classNames,
