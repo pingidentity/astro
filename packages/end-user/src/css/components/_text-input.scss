@@ -8,8 +8,16 @@
 
   &::before {
     position: absolute;
-    right: $spacing-md;
-    top: $spacing-md;
+    right: $spacing-xs;
+    bottom: 0;
+    padding: $spacing-md;
+  }
+
+  &.is-focused {
+    &::before {
+      border: 1px solid $color-a11y-blue;
+      @include focus;
+    }
   }
 }
 
@@ -78,14 +86,26 @@
   @include input-icon();
   right: 0;
 
+  &--password {
+    &::before {
+      position: absolute;
+      margin-right: 50px;
+      bottom: 0;
+      padding: $spacing-md;
+    }
+  }
+
   &--error {
+    @include ignore-clicks();
     &::before {
       content: $pingicon-error-triangle;
       color: $color-critical-red;
+      margin-right: 0;
     }
   }
 
   &--success {
+    @include ignore-clicks();
     &::before {
       content: $pingicon-success-round;
       color: $color-success-green;
@@ -121,5 +141,5 @@
 }
 
 .text-input__icon ~ .text-input__icon {
-  margin-right: $spacing-lg;
+  right: $spacing-lg;
 }

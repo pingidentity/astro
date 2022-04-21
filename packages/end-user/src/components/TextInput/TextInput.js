@@ -90,12 +90,6 @@ const TextInput = ({
 
     return (
         <>
-        {(
-            type === 'success' || type === 'error'
-                ? <div className={iconClassNames} key="type-icon"></div>
-                : null
-        )}
-        {actionComponent}
         <FocusRing focusRingClass="is-focused">
             <input
               className={classNames}
@@ -120,6 +114,12 @@ const TextInput = ({
               {...inputProps}
           />
         </FocusRing>
+        {actionComponent}
+        {(
+            type === 'success' || type === 'error'
+                ? <div className={iconClassNames} key="type-icon"></div>
+                : null
+        )}
         {fieldMessage && (
             <FieldMessage
                 status={type !== textInputTypes.PRIMARY ? type : 'default'}

@@ -5,7 +5,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import { modes as labelModes } from '../../components/Label/constants';
 
 const defaultProps = {
-  autocomplete: 'off',
+  autoComplete: 'off',
   className: 'test',
   containerProps: {
     id: 'test',
@@ -52,7 +52,7 @@ test('should return props objects for field components', () => {
     sx: expect.objectContaining({ position: 'relative' }),
   });
   expect(fieldControlProps).toEqual({
-    autocomplete: defaultProps.autocomplete,
+    autoComplete: defaultProps.autoComplete,
     autoFocus: defaultProps.hasAutoFocus,
     className: `${defaultProps.className} is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
     defaultSelected: true,
@@ -80,6 +80,14 @@ test('should return props objects for field components', () => {
     htmlFor: expect.any(String),
     isRequired: true,
   });
+});
+
+test('should support autocomplete additionally', () => {
+  const newProps = { ...defaultProps, autocomplete: 'new-password' };
+  delete newProps.autoComplete;
+  const { result } = renderHook(() => useField(newProps));
+  const { fieldControlProps } = result.current;
+  expect(fieldControlProps).toMatchObject({ autoComplete: 'new-password' });
 });
 
 test('should return isFloatLabelActive class for container', () => {

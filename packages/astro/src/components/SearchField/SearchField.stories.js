@@ -31,7 +31,7 @@ export default {
     isDisabled: {},
     hasAutoFocus: {},
     hasNoClearButton: {},
-    autocomplete: {},
+    autoComplete: {},
     containerProps: {},
     iconProps: {},
     controlProps: {},

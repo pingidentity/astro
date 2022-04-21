@@ -35,9 +35,7 @@ export const PasswordWithRequirements = () => {
           { name: 'Has at least 1 upper case letter', status: 'default' },
         ],
         validateRequirements,
-        controlProps: {
-          autoComplete: 'new-password',
-        },
+        autoComplete: 'new-password',
       },
     },
   };

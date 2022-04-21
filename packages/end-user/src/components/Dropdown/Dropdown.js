@@ -58,11 +58,6 @@ export const StatelessDropdown = ({
 
     return (
         <div className={classNames} data-id={dataId}>
-        {
-            status === 'success' || status === 'error' 
-                ? <div className={iconClassNames} key="type-icon"></div>
-                : null
-        }
           <FocusRing focusRingClass="is-focused">
             <select
                 id={id}
@@ -83,6 +78,11 @@ export const StatelessDropdown = ({
                 ))}
             </select>
           </FocusRing>
+            {
+                status === 'success' || status === 'error' 
+                    ? <div className={iconClassNames} key="type-icon"></div>
+                    : null
+            }
             {children}
             {fieldMessage && (
                 <FieldMessage

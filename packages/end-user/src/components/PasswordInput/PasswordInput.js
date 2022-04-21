@@ -43,6 +43,7 @@ const PasswordInput = ({
     const actionIconClassNames = classnames('text-input__icon', {
         'text-input__icon--hidden': isHidden,
         'text-input__icon--view-hidden': !isHidden,
+        'text-input__icon--password': !!fieldMessage,
     });
 
     const handleKeyPress = (event) => {
