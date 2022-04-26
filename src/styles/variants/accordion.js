@@ -103,6 +103,15 @@ const accordionGridBody = {
   '&.is-selected': {
     display: 'flex !important',
   },
+  ':focus': {
+    outline: 'none',
+  },
+};
+
+const accordionGridItem = {
+  ':focus': {
+    outline: 'none',
+  },
 };
 
 export default {
@@ -113,4 +122,5 @@ export default {
   accordionBody,
   accordionGridHeaderNav,
   accordionGridNavItem,
+  accordionGridItem,
 };
