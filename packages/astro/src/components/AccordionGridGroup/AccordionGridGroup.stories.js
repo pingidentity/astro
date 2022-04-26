@@ -10,6 +10,7 @@ import {
   Text,
   Separator,
   Link,
+  TextField,
 } from '../../index';
 import AccordionGridGroup from './AccordionGridGroup';
 
@@ -221,5 +222,59 @@ export const Controlled = () => {
         )}
       </AccordionGridGroup>
     </>
+  );
+};
+
+
+// const items = [
+//   { id: 1, name: "Aardvark", key: "Aardvark" },
+//   { id: 2, name: "Kangaroo", key: "Kangaroo" },
+//   { id: 3, name: "Snake", key: "Snake" },
+//   { id: 4, name: "Frog", key: "Frog" },
+//   { id: 5, name: "Seal", key: "Seal" },
+//   { id: 6, name: "Orangutan", key: "Orangutan" },
+//   { id: 7, name: "Shark", key: "Shark" }
+// ];
+
+// const data = [
+//   {
+//     name: "Client Application Developer",
+//     key: "Client"
+//   },
+//   {
+//     name: "Environment Admin",
+//     key: "Environment"
+//   },
+//   {
+//     name: "Organization Admin",
+//     key: "Organization"
+//   }
+// ];
+
+export const AccordionWithInputs = () => {
+  return (
+    <AccordionGridGroup items={data}>
+      {item => (
+        <Item key={item.key} textValue={item.name}>
+          <Text
+            sx={{
+              fontWeight: 3,
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+            }}
+            variant="itemTitle"
+            alignSelf="center"
+          >
+            {item.name}
+          </Text>
+          <Box gap="md">
+            <TextField label="label 1" />
+            <TextField label="label 2" />
+            <TextField label="label 3" />
+          </Box>
+        </Item>
+      )}
+    </AccordionGridGroup>
   );
 };
