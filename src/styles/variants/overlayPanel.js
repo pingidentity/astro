@@ -24,7 +24,7 @@ const overlayPanel = {
     width: '800px',
   },
   '&.is-full': {
-    width: '100%',
+    width: 'container.full',
   },
   '&.is-open': {
     display: 'flex !important',

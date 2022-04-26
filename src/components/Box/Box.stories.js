@@ -108,6 +108,5 @@ export const BoxesWithGaps = () => (
       <Box width={10} height={50} bg="decorativeDark.9" />
       <Box width={10} height={50} bg="decorativeDark.10" />
     </Box>
-
   </Box>
 );
