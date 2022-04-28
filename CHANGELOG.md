@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.9.0...@pingux/astro@1.10.0) (2022-04-28)
+
+
+### Bug Fixes
+
+* [UIP-5300] Multiple inputs not focusable within AccordionGridGroup ([421f210](https://gitlab.corp.pingidentity.com/ux/pingux/commit/421f21046e0638c44ecb34085bd64af681301b3c))
+* [UIP-5408]  float label Tweaks ([eaa79fd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eaa79fd1da40eed988759a0d0e4c626d1c338dc2))
+
+
+### Features
+
+* [UIP-5334] add container widths to box ([5b672d2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5b672d2b3198e637ee7b0947a221e8ae3cdb60f3))
+* [UIP-5397] ArrayField Component - Allow a limit on the number of Fields ([61dcdcd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/61dcdcd929c540e8353996755889a320202ad003))
+* [UIP-5401] Add initial Slider recipe ([1fba9ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1fba9ae445f77359bf9db716864b7755e6d0c392))
+
+
+
+
+
 # [1.9.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.8.1...@pingux/astro@1.9.0) (2022-04-21)
 
 
