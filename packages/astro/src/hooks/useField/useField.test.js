@@ -38,11 +38,7 @@ test('default useField', () => {
 
 test('should return props objects for field components', () => {
   const { result } = renderHook(() => useField(defaultProps));
-  const {
-    fieldContainerProps,
-    fieldControlProps,
-    fieldLabelProps,
-  } = result.current;
+  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = result.current;
 
   expect(fieldContainerProps).toEqual({
     className: 'field-container has-value',
@@ -102,7 +98,7 @@ test('should return isFloatLabelActive class for container', () => {
 
   // Has the class if the container has focus within it
   act(() => result.current.fieldContainerProps.onFocus({}));
-  expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
+  expect(result.current.fieldContainerProps.className).toContain('is-float-label');
 
   // Does not have the class if the container loses focus within it
   act(() => result.current.fieldContainerProps.onBlur({ currentTarget: { contains: jest.fn() } }));
