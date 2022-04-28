@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.4.0...@pingux/schema-form@3.4.1) (2022-04-28)
+
+
+### Bug Fixes
+
+* [UIP-5408]  float label Tweaks ([eaa79fd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eaa79fd1da40eed988759a0d0e4c626d1c338dc2))
+
+
+
+
+
 # [3.4.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.3.3...@pingux/schema-form@3.4.0) (2022-04-21)
 
 
