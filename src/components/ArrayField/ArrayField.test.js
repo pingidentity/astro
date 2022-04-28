@@ -162,3 +162,22 @@ test('check if tooltip on delete button renders on hover', () => {
   fireEvent.mouseEnter(button);
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });
+
+test('removes add button if max number of fields is reached', () => {
+  getComponent({ renderField, maxSize: 3 });
+
+  expect(screen.getAllByLabelText('Text field')).toHaveLength(2);
+
+  fireEvent.click(screen.getByText('+ Add'));
+  expect(screen.getAllByLabelText('Text field')).toHaveLength(3);
+  expect(screen.queryByText('+ Add')).not.toBeInTheDocument();
+  expect(screen.getByText('Maximum 3 items.')).toBeInTheDocument();
+});
+
+test('displays max size label if provided', () => {
+  const maxSizeText = 'Too many fields';
+  getComponent({ renderField, maxSize: 1, maxSizeText });
+
+  expect(screen.queryByText('+ Add')).not.toBeInTheDocument();
+  expect(screen.getByText(maxSizeText)).toBeInTheDocument();
+});

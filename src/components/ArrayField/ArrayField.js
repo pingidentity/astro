@@ -6,6 +6,7 @@ import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
 import Text from '../Text';
 import statuses from '../../utils/devUtils/constants/statuses';
+import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 
 const ArrayField = ({
   addButtonLabel,
@@ -18,6 +19,8 @@ const ArrayField = ({
   onChange,
   onDelete,
   renderField,
+  maxSize,
+  maxSizeText,
   ...others
 }) => {
   const isControlled = value !== undefined;
@@ -77,6 +80,8 @@ const ArrayField = ({
     return setFieldValues(oldValues => [...oldValues, createEmptyField()]);
   }, [createEmptyField, onAdd]);
 
+  const isLimitReached = !!maxSize && (value || fieldValues).length >= maxSize;
+
   return (
     <Box {...others}>
       <Text variant="label">{label}</Text>
@@ -87,13 +92,13 @@ const ArrayField = ({
             return (
               <Box as="li" mb="xs" key={id}>
                 {onComponentRender ?
-                onComponentRender(id, fieldValue, onFieldValueChange,
-                  onFieldDelete, isDisabled, otherFieldProps)
+                  onComponentRender(id, fieldValue, onFieldValueChange,
+                    onFieldDelete, isDisabled, otherFieldProps)
                   : renderField(id, fieldValue, onFieldValueChange,
-                  onFieldDelete, isDisabled, otherFieldProps)}
+                    onFieldDelete, isDisabled, otherFieldProps)}
               </Box>
             );
-        })
+          })
         }
       </Box>
       {
@@ -102,16 +107,24 @@ const ArrayField = ({
           {helperText}
         </FieldHelperText>
       }
-      <Button
-        aria-label="Add field"
-        variant="text"
-        onPress={onFieldAdd}
-        sx={{ width: 'fit-content' }}
-      >
-        <Text variant="label" color="active">
-          {addButtonLabel}
-        </Text>
-      </Button>
+      {
+        isLimitReached &&
+        <FieldHelperText status={statuses.DEFAULT}>
+          {maxSizeText || `Maximum ${maxSize} items.`}
+        </FieldHelperText>
+      }
+      {!isLimitReached &&
+        <Button
+          aria-label="Add field"
+          variant="text"
+          onPress={onFieldAdd}
+          sx={{ width: 'fit-content' }}
+        >
+          <Text variant="label" color="active">
+            {addButtonLabel}
+          </Text>
+        </Button>
+      }
     </Box>
   );
 };
@@ -147,6 +160,10 @@ ArrayField.propTypes = {
   renderField: PropTypes.func,
   /** Determines the helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
+  /** Determines the maximum number of items */
+  maxSize: isValidPositiveInt,
+  /** Text to display when the maximum number of items is reached */
+  maxSizeText: PropTypes.node,
 };
 
 ArrayField.defaultProps = {
