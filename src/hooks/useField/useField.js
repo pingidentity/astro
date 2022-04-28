@@ -84,12 +84,7 @@ const useField = (props = {}) => {
   // Capture value changes so we can apply the has-value class to the container
   const fieldOnChange = (e) => {
     const eventValue = e?.target?.value;
-    if (
-      !!eventValue ||
-      eventValue === 0 ||
-      !!placeholder ||
-      placeholder === 0
-    ) {
+    if (!!eventValue || eventValue === 0 || !!placeholder || placeholder === 0) {
       setHasValue(true);
     } else {
       setHasValue(false);
@@ -102,10 +97,10 @@ const useField = (props = {}) => {
     return onChange(e);
   };
 
-  const {
-    labelProps: raLabelProps,
-    fieldProps: raFieldProps,
-  } = useLabel({ ...props, ...controlProps });
+  const { labelProps: raLabelProps, fieldProps: raFieldProps } = useLabel({
+    ...props,
+    ...controlProps,
+  });
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
     hasNoStatusIndicator,
@@ -124,9 +119,7 @@ const useField = (props = {}) => {
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
   const isFloatLabel = labelMode === labelModes.FLOAT || labelProps?.labelMode === labelModes.FLOAT;
   const isLeftLabel = labelMode === labelModes.LEFT || labelProps?.labelMode === labelModes.LEFT;
-  const isFloatLabelActive = isFloatLabel && (
-    hasValue || hasFocusWithin || containerProps?.isFloatLabelActive
-  );
+  const isFloatLabelActive = isFloatLabel && (hasValue || containerProps?.isFloatLabelActive);
   const { classNames: containerClasses } = useStatusClasses(containerProps?.className, {
     'field-container': true, // generates 'field-container' class
     hasValue,

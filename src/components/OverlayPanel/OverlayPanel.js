@@ -49,7 +49,7 @@ const OverlayPanel = forwardRef((props, ref) => {
 OverlayPanel.propTypes = {
   /** Sets the open state of the menu. */
   isOpen: PropTypes.bool,
-  /** Sets the open state of the menu. */
+  /** Sets the size of the overlay panel. */
   size: PropTypes.oneOf(Object.values(panelSizes)),
   /** JSX styling that is passed into the component. */
   sx: PropTypes.shape({

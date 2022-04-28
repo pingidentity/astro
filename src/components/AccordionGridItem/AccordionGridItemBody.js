@@ -22,9 +22,14 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
 
   const { gridCellProps } = useGridCell({
     node: cellNode,
-    focusMode: 'child',
+    focusMode: 'cell',
     shouldSelectOnPressUp: true,
   }, state, ref);
+
+  /* istanbul ignore next */
+  gridCellProps.onClick = (e) => {
+    e.target.focus();
+  };
 
   // Add the cell's key to the disabled keys array,
   // so that clicking this cell does not close the accordion.
