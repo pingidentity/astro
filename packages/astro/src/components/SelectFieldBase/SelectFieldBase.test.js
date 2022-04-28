@@ -9,11 +9,7 @@ import { useSelectField } from '../../hooks';
 import SelectFieldBase from './SelectFieldBase';
 import { modes } from '../Label/constants';
 
-const items = [
-  { name: 'a' },
-  { name: 'b' },
-  { name: 'c' },
-];
+const items = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
 const testId = 'test-dropdown';
 const controlTestId = `${testId}-input`;
 const testValue = 'test';
@@ -34,11 +30,16 @@ const SelectFieldWrapper = forwardRef((props, ref) => {
   return <SelectFieldBase {...props} {...selectFieldProps} />;
 });
 
-const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
-  <SelectFieldWrapper {...defaultProps} {...props}>
-    {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
-  </SelectFieldWrapper>
-));
+const getComponent = (props = {}, { renderFn = render } = {}) =>
+  renderFn(
+    <SelectFieldWrapper {...defaultProps} {...props}>
+      {item => (
+        <Item key={item.name} data-id={item.name}>
+          {item.name}
+        </Item>
+      )}
+    </SelectFieldWrapper>,
+  );
 
 const onSelectionChange = jest.fn();
 
@@ -117,12 +118,12 @@ test('select field with helper text', () => {
   expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
 });
 
-test('label floats after user\'s interacting', () => {
+test("label floats after user's interacting", () => {
   getComponent({ labelMode: modes.FLOAT, value: '' });
   const textAreaContainer = screen.getByTestId(testId);
   expect(textAreaContainer).not.toHaveClass('is-float-label-active');
   userEvent.tab();
-  expect(textAreaContainer).toHaveClass('is-float-label-active');
+  expect(textAreaContainer).toHaveClass('is-float-label');
 });
 
 test('clicking on the visible button opens the popuplist', () => {

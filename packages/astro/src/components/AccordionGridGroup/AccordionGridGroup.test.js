@@ -7,6 +7,8 @@ import {
   Link,
   Box,
   OverlayPanel,
+  TextField,
+  Text,
 } from '../../index';
 import AccordionGridGroup from '../AccordionGridGroup';
 
@@ -86,6 +88,20 @@ const getComponentInOverlayPanel = (props = {}) => render((
       </Item>
     </AccordionGridGroup>
   </OverlayPanel>
+));
+
+const getComponentWithTextFields = (props = {}) => render((
+  <AccordionGridGroup {...defaultProps} {...props} >
+    <Item key="first" textValue="Duplicate">
+      <Text>
+        Header
+      </Text>
+      <Box>
+        <TextField label="label 1" />
+        <TextField label="label 2" />
+      </Box>
+    </Item>
+  </AccordionGridGroup>
 ));
 
 axeTest(getComponent, {
@@ -194,4 +210,23 @@ test('items do not automatically expand if wrapped in an open OverlayPanel', () 
   const row = screen.getAllByRole('row');
   const selectedRow = row[0];
   expect(selectedRow).not.toHaveAttribute('aria-selected', 'true');
+});
+
+test('adds focus to inputs', () => {
+  getComponentWithTextFields();
+  const firstInput = screen.getAllByRole('gridcell')[0];
+  const secondInput = screen.getAllByRole('gridcell')[1];
+
+  expect(firstInput).not.toHaveFocus();
+  expect(secondInput).not.toHaveFocus();
+
+  userEvent.click(firstInput);
+
+  expect(firstInput).toHaveFocus();
+  expect(secondInput).not.toHaveFocus();
+
+  userEvent.click(secondInput);
+
+  expect(firstInput).not.toHaveFocus();
+  expect(secondInput).toHaveFocus();
 });
