@@ -34,6 +34,16 @@ export default {
         type: 'text',
       },
     },
+    maxSize: {
+      control: {
+        type: 'number',
+      },
+    },
+    maxSizeText: {
+      control: {
+        type: 'text',
+      },
+    },
   },
 };
 
@@ -162,6 +172,30 @@ export const Controlled = () => {
       onChange={handleOnChange}
       onDelete={handleOnDelete}
       sx={{ width: '400px' }}
+    />
+  );
+};
+
+export const WithLimitedItemsNumber = ({ ...args }) => {
+  return (
+    <ArrayField
+      defaultValue={defaultData}
+      renderField={
+        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) =>
+          (<TextField
+            aria-label="Text field"
+            value={fieldValue}
+            onChange={e => onFieldValueChange(e, id)}
+            mr="xs"
+            slots={
+              { inContainer:
+  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
+            {...otherFieldProps}
+          />)
+      }
+      sx={{ width: '400px' }}
+      maxSize={3}
+      {...args}
     />
   );
 };
