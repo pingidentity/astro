@@ -61,6 +61,13 @@ export const Uncontrolled = ({ ...args }) => {
   return (
     <ArrayField
       defaultValue={defaultData}
+      labelProps={{
+        hintText: 'Example Hint',
+        isRequired: true,
+        helpHintProps: {
+          tooltipProps: { direction: 'top' },
+        },
+      }}
       renderField={
         (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) =>
           (<TextField

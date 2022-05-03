@@ -21,7 +21,7 @@ const defaultProps = {
   defaultValue: defaultData,
 };
 
-const getComponent = (props = {}) => render(<ArrayField {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(<ArrayField label="test-label" {...defaultProps} {...props} />);
 
 const renderField = (id, value, onFieldValueChange, onFieldDelete, otherFieldProps) => {
   return (
@@ -143,14 +143,14 @@ test('onComponentRender displays fields correctly', () => {
     },
   ];
 
-  render(<ArrayField defaultValue={componentRenderData} onChange={onChange} />);
+  render(<ArrayField label="test-label" defaultValue={componentRenderData} onChange={onChange} />);
 
   expect(screen.getByLabelText('Text field')).toBeInTheDocument();
   expect(screen.getByLabelText('Text field 2')).toBeInTheDocument();
 });
 
 test('creates empty field when no data passed', () => {
-  render(<ArrayField renderField={renderField} />);
+  render(<ArrayField label="test-label" renderField={renderField} />);
 
   expect(screen.getByLabelText('Text field')).toBeInTheDocument();
 });

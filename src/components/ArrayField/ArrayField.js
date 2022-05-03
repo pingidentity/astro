@@ -1,28 +1,34 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps } from '@react-aria/utils';
 import { v4 as uuid } from 'uuid';
+import { useLabel } from '@react-aria/label';
 import Box from '../Box';
 import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
 import Text from '../Text';
+import Label from '../Label';
 import statuses from '../../utils/devUtils/constants/statuses';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 
-const ArrayField = ({
-  addButtonLabel,
-  defaultValue,
-  value,
-  label,
-  helperText,
-  status,
-  onAdd,
-  onChange,
-  onDelete,
-  renderField,
-  maxSize,
-  maxSizeText,
-  ...others
-}) => {
+const ArrayField = (props) => {
+  const {
+    addButtonLabel,
+    defaultValue,
+    value,
+    label,
+    helperText,
+    status,
+    onAdd,
+    onChange,
+    onDelete,
+    renderField,
+    labelProps,
+    maxSize,
+    maxSizeText,
+    ...others
+  } = props;
+
   const isControlled = value !== undefined;
 
   const createEmptyField = useCallback(() => {
@@ -80,11 +86,15 @@ const ArrayField = ({
     return setFieldValues(oldValues => [...oldValues, createEmptyField()]);
   }, [createEmptyField, onAdd]);
 
+  const {
+    labelProps: raLabelProps,
+  } = useLabel({ ...props });
+
   const isLimitReached = !!maxSize && (value || fieldValues).length >= maxSize;
 
   return (
     <Box {...others}>
-      <Text variant="label">{label}</Text>
+      <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
       <Box as="ul" pl="0">
         {(value || fieldValues).map(
           ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
@@ -148,6 +158,8 @@ ArrayField.propTypes = {
   ),
   /** The rendered label for the field. */
   label: PropTypes.node,
+  /** Props object that is spread directly into the label element. */
+  labelProps: PropTypes.shape({}),
   /** Text to display before add button. Useful for errors or other info. */
   helperText: PropTypes.node,
   /** Callback for changing array field data  */
