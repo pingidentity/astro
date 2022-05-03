@@ -1,0 +1,109 @@
+#!/usr/bin/env groovy
+@Library(['jenkins-ci-library']) _
+// https://gitlab.corp.pingidentity.com/devtools/icecream/jenkins-ci-library
+
+def centralCluster = 'central'
+
+pipeline {
+  agent {
+    kubernetes (
+      agentDefinition(
+        name: 'ui-library-agent',
+        cloud: centralCluster,
+        yaml: """
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: ui-library-agent
+        spec:
+          containers:
+            - name: "ui-library-admin"
+              command: # Jenkinsfile overwrites this, but k8s spec requires it
+              - cat
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
+              imagePullPolicy: Always
+              workingDir: "/home/jenkins/agent"
+              tty: true"""
+      )
+    )
+  }
+  environment {
+    PING_TEAM_NAME = "ux"
+  }
+  stages {
+    stage('install and link') {
+      steps {
+        dir("${env.WORKSPACE}/packages/<pkg>") {
+          container('ui-library-admin') {
+            echo "Installing and linking packages"
+            sh "yarn --frozen-lockfile --ignore-engines"
+            sh "yarn build"
+          }
+        }
+        stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
+      }
+    }
+
+    stage('upload demo') {
+      steps {
+        dir("${env.WORKSPACE}/packages/<pkg>") {
+          container('ui-library-admin') {
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              script {
+                env.RELEASE_VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();
+                sh "make PRIVATE_SSH_KEY_PATH=${keyfile} LIB_VERSION=${env.RELEASE_VERSION} initial-upload-and-version"
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('put latest and stable folders on server for redirects') {
+      steps {
+        dir("${env.WORKSPACE}/packages/<pkg>/hosting/redirects") {
+          container('ui-library-admin') {
+            withCredentials([sshUserPrivateKey(credentialsId: "uilibrary.ping-eng.com-ubuntu-user", keyFileVariable: 'keyfile')]) {
+              sh """
+                yarn install --frozen-lockfile
+
+                yarn exec webpack
+
+                make PRIVATE_SSH_KEY_PATH=${keyfile} FOLDER="dist" REMOTE_FOLDER="latest" put-folder-on-server
+                make PRIVATE_SSH_KEY_PATH=${keyfile} FOLDER="dist" REMOTE_FOLDER="stable" put-folder-on-server
+              """
+            }
+          }
+        }
+      }
+    }
+  }
+
+  post {
+    success {
+      script {
+        // Send Slack notifications
+        def message = """
+            :tada: Upload demo success!
+
+            Build details: <${env.BUILD_URL}/console|See in web console>
+          """.stripIndent()
+
+        slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"
+
+      }
+    }
+    unsuccessful {
+      script {
+        def message = """
+          :x: Upload demo failure...
+          Build details: <${env.BUILD_URL}/console|See in web console>
+        """.stripIndent()
+        slackSend channel: '#ux-deployments', message: "${message}", color: "#a31300"
+      }
+    }
+    cleanup {
+      cleanWs()
+    }
+  }
+}
