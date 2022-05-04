@@ -203,23 +203,21 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('astro-github') {
             withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
-              script {
-                sh """
-                  git config --global user.email 'devtools+jenkins@pingidentity.com'
-                  git config --global user.name 'devtools-jenkins'
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone git@gitlab.corp.pingidentity.com:ux/pingux.git -b master --single-branch
-                  mkdir tempdir
-                  cd tempdir
-                  git clone https://github.com/newren/git-filter-repo.git
-                  cd git-filter-repo
-                  cp -a git-filter-repo \$(git --exec-path)
-                  cd ../../pingux
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git remote add origin git@gitlab.corp.pingidentity.com:ux/astro-mirror.git
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git tag | grep '^@pingux/astro@[0-9]+\\.[0-9]+\\.[0-9]+$' | GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push --set-upstream --force origin
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git filter-repo --subdirectory-filter packages/astro
-                  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push --force origin HEAD:master
-                """
-              }
+              sh """
+                git config --global user.email 'devtools+jenkins@pingidentity.com'
+                git config --global user.name 'devtools-jenkins'
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone git@gitlab.corp.pingidentity.com:ux/pingux.git -b master --single-branch
+                mkdir tempdir
+                cd tempdir
+                git clone https://github.com/newren/git-filter-repo.git
+                cd git-filter-repo
+                cp -a git-filter-repo \$(git --exec-path)
+                cd ../../pingux
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git remote add origin git@gitlab.corp.pingidentity.com:ux/astro-mirror.git
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git tag | grep '^@pingux/astro@[0-9]+\\.[0-9]+\\.[0-9]+$' | GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push --set-upstream --force origin
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git filter-repo --subdirectory-filter packages/astro
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push --force origin HEAD:master
+              """
             }
           }
         }
