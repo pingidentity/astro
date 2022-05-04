@@ -5,7 +5,7 @@ import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import FilterIcon from 'mdi-react/FilterIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import AccountIcon from 'mdi-react/AccountIcon';
-import MultiselectFilter from './MultiselectFilter';
+import CollapsiblePanel from './CollapsiblePanel';
 import { useOverlayPanelState } from '../../hooks';
 import {
   Breadcrumbs,
@@ -16,7 +16,7 @@ import {
   Item,
   Icon,
   IconButton,
-  MultiselectFilterItem,
+  CollapsiblePanelItem,
   OverlayPanel,
   OverlayProvider,
   SearchField,
@@ -24,8 +24,8 @@ import {
 } from '../../index';
 
 export default {
-  title: 'MultiselectFilter',
-  component: MultiselectFilter,
+  title: 'CollapsiblePanel',
+  component: CollapsiblePanel,
   argTypes: {
     listTitle: {
       defaultValue: 'Selected Groups',
@@ -144,18 +144,18 @@ const changeSelection = (selected) => {
 };
 
 export const Default = args => (
-  <MultiselectFilter
+  <CollapsiblePanel
     {...args}
   />
 );
 
-export const MultiselectWithBadge = (args) => {
+export const CollapsiblePanelWithBadge = (args) => {
   const { state, onClose } = useOverlayPanelState();
   const triggerRef = useRef();
 
   return (
     <OverlayProvider>
-      <Button ref={triggerRef} onPress={state.open} >Open Panel</Button>
+      <Button ref={triggerRef} onPress={state.open}>Open Panel</Button>
       <OverlayPanel isOpen={state.isOpen} size="large" p="0">
         <Box sx={{ minHeight: '60px' }} bg="accent.99">
           <Box
@@ -247,7 +247,7 @@ export const MultiselectWithBadge = (args) => {
             )}
               </ListView>
             </Box>
-            <MultiselectFilter
+            <CollapsiblePanel
               items={mockData}
               onSelectionChange={changeSelection}
               selectedFilterCount="1000+"
@@ -259,10 +259,10 @@ export const MultiselectWithBadge = (args) => {
                   textValue={item.name}
                   data-id={item.key}
                 >
-                  <MultiselectFilterItem text={item.name} icon={FilterIcon} />
+                  <CollapsiblePanelItem text={item.name} icon={FilterIcon} />
                 </Item>
             )}
-            </MultiselectFilter>
+            </CollapsiblePanel>
           </Box>
         </Box>
       </OverlayPanel>

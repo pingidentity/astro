@@ -20,7 +20,7 @@ import stepper from './stepper';
 import table from './table';
 import * as tabs from './tabs';
 import tooltip from './tooltip';
-import multiselectListContainer from './multiselectListContainer';
+import collapsiblePanel from './collapsiblePanel';
 
 
 export default {
@@ -36,7 +36,7 @@ export default {
   menuItem,
   messages,
   modal,
-  multiselectListContainer,
+  collapsiblePanel,
   navBar,
   numberField,
   overlayPanel,
