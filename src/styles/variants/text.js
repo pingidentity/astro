@@ -169,7 +169,7 @@ const navBarHeaderText = {
   maxWidth: '150px',
 };
 
-const multiselectFilterItem = {
+const collapsiblePanellItem = {
   ...wordWrap,
   color: 'neutral.30',
   fontSize: 'sm',
@@ -180,7 +180,7 @@ const multiselectFilterItem = {
   whiteSpace: 'nowrap',
 };
 
-const multiselectFilterTitle = {
+const collapsiblePanelTitle = {
   ...wordWrap,
   fontSize: 'sm',
   fontWeight: 500,
@@ -248,8 +248,8 @@ export const text = {
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   maskedValue,
   expandableRow,
-  multiselectFilterItem,
-  multiselectFilterTitle,
+  collapsiblePanellItem,
+  collapsiblePanelTitle,
   navBarHeaderText,
   navBarSubtitle,
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },

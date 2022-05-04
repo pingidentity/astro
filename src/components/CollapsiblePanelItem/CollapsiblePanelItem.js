@@ -2,12 +2,12 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Icon, IconButton, Text } from '../../index';
 
-const MultiselectFilterItem = forwardRef((props, ref) => {
+const CollapsiblePanelItem = forwardRef((props, ref) => {
   const { text, icon, isDefaultSelected, onPress } = props;
 
   const iconElement = icon && (
     <Icon
-      data-testid="multiselect-filter-data-icon"
+      data-testid="collapsible-panel-data-icon"
       icon={icon}
       color={isDefaultSelected ? 'neutral.10' : 'active'}
       size={13}
@@ -16,11 +16,11 @@ const MultiselectFilterItem = forwardRef((props, ref) => {
 
   return (
     <Box
-      data-testid="multiselect-filter-item"
+      data-testid="collapsible-panel-item"
       isRow
       ref={ref}
     >
-      <Text variant="multiselectFilterItem">
+      <Text variant="collapsiblePanellItem">
         {text}
       </Text>
       {iconElement && (isDefaultSelected
@@ -35,7 +35,7 @@ const MultiselectFilterItem = forwardRef((props, ref) => {
   );
 });
 
-MultiselectFilterItem.propTypes = {
+CollapsiblePanelItem.propTypes = {
   /**
      * Display text.
      */
@@ -55,5 +55,5 @@ MultiselectFilterItem.propTypes = {
   onPress: PropTypes.func,
 };
 
-MultiselectFilterItem.displayName = 'MultiselectFilterItem';
-export default MultiselectFilterItem;
+CollapsiblePanelItem.displayName = 'CollapsiblePanelItem';
+export default CollapsiblePanelItem;
