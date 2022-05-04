@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 import { Menu, Item } from '../../index';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 const testTitle = 'Test Title';
 const defaultProps = {
@@ -31,6 +32,7 @@ test('should render basic menu with children', () => {
 
   const menuItems = screen.queryAllByRole('menuitem');
   expect(menuItems).toHaveLength(3);
+  expect(menu).toHaveAttribute('aria-orientation', ORIENTATION.VERTICAL);
 });
 
 test('should render items when selectionMode is set to single', () => {

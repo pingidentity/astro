@@ -14,6 +14,7 @@ import { MenuContext } from '../../context/MenuContext';
 import { usePropWarning } from '../../hooks';
 import MenuItem from '../MenuItem';
 import Box from '../Box';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 /**
  * Menu component intended to be used as a wrapper for MenuItem.
@@ -52,6 +53,7 @@ const Menu = forwardRef((props, ref) => {
       as="ul"
       ref={menuRef}
       variant="menu"
+      aria-orientation={ORIENTATION.VERTICAL}
       {...others}
       {...mergeProps(focusProps, menuProps)}
     >
