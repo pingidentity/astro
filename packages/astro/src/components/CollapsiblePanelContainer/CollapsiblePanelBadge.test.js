@@ -1,15 +1,15 @@
 import React from 'react';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import MultiselectBadge from './MultiselectBadge';
+import CollapsiblePanelBadge from './CollapsiblePanelBadge';
 
-const testId = 'test-multiselectBadge';
+const testId = 'test-collapsiblePanelBadge';
 const defaultProps = {
   'data-testid': testId,
   selectedFilterCount: 9,
 };
 const getComponent = (props = {}) => render(
-  <MultiselectBadge {...defaultProps} {...props} />,
+  <CollapsiblePanelBadge {...defaultProps} {...props} />,
 );
 
 afterEach(() => {
@@ -19,14 +19,14 @@ afterEach(() => {
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-test('default multiselectBadge', () => {
+test('default CollapsiblePanelBadge', () => {
   getComponent();
-  const multiselectBadge = screen.getByTestId(testId);
-  expect(multiselectBadge).toBeInTheDocument();
+  const collapsiblePanelBadge = screen.getByTestId(testId);
+  expect(collapsiblePanelBadge).toBeInTheDocument();
 });
 
 test('custom classname can be passed', () => {
   getComponent({ className: 'testing-class' });
-  const multiselectBadge = screen.getByTestId(testId);
-  expect(multiselectBadge).toHaveClass('testing-class');
+  const collapsiblePanelBadge = screen.getByTestId(testId);
+  expect(collapsiblePanelBadge).toHaveClass('testing-class');
 });

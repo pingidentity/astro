@@ -2,15 +2,15 @@ import React from 'react';
 import FilterIcon from 'mdi-react/FilterIcon';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import MultiselectFilterItem from './MultiselectFilterItem';
+import CollapsiblePanelItem from './CollapsiblePanelItem';
 
-const testId = 'multiselect-filter-item';
-const iconId = 'multiselect-filter-data-icon';
+const testId = 'collapsible-panel-item';
+const iconId = 'collapsible-panel-data-icon';
 const defaultProps = {
   text: 'Item name',
 };
 const getComponent = (props = {}) => render(
-  <MultiselectFilterItem {...defaultProps} {...props} />,
+  <CollapsiblePanelItem {...defaultProps} {...props} />,
 );
 
 afterEach(() => {
@@ -20,13 +20,13 @@ afterEach(() => {
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-test('default multiselectFilter', () => {
+test('default collapsiblePanel', () => {
   getComponent();
-  const multiselectFilterItem = screen.getByTestId(testId);
+  const collapsiblePanelItem = screen.getByTestId(testId);
   const icon = screen.queryByTestId(iconId);
 
   expect(icon).not.toBeInTheDocument();
-  expect(multiselectFilterItem).toBeInTheDocument();
+  expect(collapsiblePanelItem).toBeInTheDocument();
 });
 
 test('icon button displays when icon prop is present', () => {

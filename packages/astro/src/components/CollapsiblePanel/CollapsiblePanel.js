@@ -4,15 +4,15 @@ import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { useStatusClasses } from '../../hooks';
-import MultiselectBadge from '../MultiselectListContainer/MultiselectBadge';
-import { Box, ListView, MultiselectListContainer, Text } from '../../index';
+import CollapsiblePanelBadge from '../CollapsiblePanelContainer/CollapsiblePanelBadge';
+import { Box, ListView, CollapsiblePanelContainer, Text } from '../../index';
 
 /**
- * The MultiselectFilter serves as a filter menu with a menu title
+ * The CollapsiblePanel serves as a filter menu with a menu title
  * and selected count displayed in a badge.
  */
 
-const MultiselectFilter = forwardRef((props, ref) => {
+const CollapsiblePanel = forwardRef((props, ref) => {
   const {
     selectedFilterCount,
     className,
@@ -44,7 +44,7 @@ const MultiselectFilter = forwardRef((props, ref) => {
   });
 
   return (
-    <MultiselectListContainer
+    <CollapsiblePanelContainer
       closeAriaLabel={closeAriaLabel}
       isDefaultOpen={isDefaultOpen}
       isOpen={isOpen}
@@ -54,22 +54,22 @@ const MultiselectFilter = forwardRef((props, ref) => {
     >
       <Box
         className={classNames}
-        data-testid="multiselect-filter"
+        data-testid="collapsible-panel"
         ref={ref}
         tabIndex={0}
-        variant="multiselectListContainer.multiselectListContent"
+        variant="collapsiblePanel.collapsiblePanelContent"
         {...mergedProps}
         {...others}
       >
         <Box
           isRow
-          variant="multiselectListContainer.multiselectListTitle"
+          variant="collapsiblePanel.collapsiblePanelContainerTitle"
         >
-          <Text variant="multiselectFilterTitle">
+          <Text variant="collapsiblePanelTitle">
             {listTitle}
           </Text>
           {selectedFilterCount &&
-            <MultiselectBadge margin="0" selectedFilterCount={selectedFilterCount} />
+            <CollapsiblePanelBadge margin="0" selectedFilterCount={selectedFilterCount} />
           }
         </Box>
         <Box pl="xs" pr="xs">
@@ -84,11 +84,11 @@ const MultiselectFilter = forwardRef((props, ref) => {
           </ListView>
         </Box>
       </Box>
-    </MultiselectListContainer>
+    </CollapsiblePanelContainer>
   );
 });
 
-MultiselectFilter.propTypes = {
+CollapsiblePanel.propTypes = {
   /** Amount of selected items indicator. */
   selectedFilterCount: PropTypes.oneOfType([
     PropTypes.string,
@@ -117,9 +117,9 @@ MultiselectFilter.propTypes = {
   openAriaLabel: PropTypes.string,
 };
 
-MultiselectFilter.defaultProps = {
+CollapsiblePanel.defaultProps = {
   isDefaultOpen: true,
 };
 
-MultiselectFilter.displayName = 'MultiselectFilter';
-export default MultiselectFilter;
+CollapsiblePanel.displayName = 'CollapsiblePanel';
+export default CollapsiblePanel;

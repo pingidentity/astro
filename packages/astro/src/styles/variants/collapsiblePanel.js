@@ -1,11 +1,11 @@
-const multiselectListContainer = {
+const collapsiblePanelContainer = {
   overflowX: 'hidden',
   pr: 'sm',
   transition: 'right 500ms',
   minHeight: '80vh',
 };
 
-const multiselectListContent = {
+const collapsiblePanelContent = {
   bg: 'accent.99',
   fontSize: 'sm',
   height: '100%',
@@ -26,7 +26,7 @@ const multiselectListContent = {
   },
 };
 
-const multiselectListTitle = {
+const collapsiblePanelContainerTitle = {
   alignContent: 'center',
   bg: 'accent.99',
   display: 'flex',
@@ -39,7 +39,7 @@ const multiselectListTitle = {
   margin: '0',
 };
 
-const multiselectListBadge = {
+const collapsiblePanelBadge = {
   borderRadius: '5px',
   display: 'flex',
   height: '17px',
@@ -53,15 +53,15 @@ const multiselectListBadge = {
   fontWeight: 500,
 };
 
-const multiselectFilterItem = {
+const collapsiblePanellItem = {
   minHeight: '45px',
   margin: 'auto',
 };
 
 export default {
-  multiselectListContainer,
-  multiselectListContent,
-  multiselectListTitle,
-  multiselectListBadge,
-  multiselectFilterItem,
+  collapsiblePanelContainer,
+  collapsiblePanelContent,
+  collapsiblePanelContainerTitle,
+  collapsiblePanelBadge,
+  collapsiblePanellItem,
 };
