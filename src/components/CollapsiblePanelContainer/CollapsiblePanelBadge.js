@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Chip from '../Chip';
 
 /**
- * The MultiselectBadge serves as a badge to display selected count.
+ * The CollapsiblePanelBadge serves as a badge to display selected count.
  */
 
-const MultiselectBadge = (props) => {
+const CollapsiblePanelBadge = (props) => {
   const { selectedFilterCount, ...others } = props;
   return (
     <Chip
@@ -14,14 +14,14 @@ const MultiselectBadge = (props) => {
       bg="neutral.90"
       label={selectedFilterCount.toString()}
       textColor="neutral.30"
-      variant="multiselectListContainer.multiselectListBadge"
+      variant="collapsiblePanel.collapsiblePanelBadge"
       isUppercase
       {...others}
     />
   );
 };
 
-MultiselectBadge.propTypes = {
+CollapsiblePanelBadge.propTypes = {
   selectedFilterCount: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -29,5 +29,5 @@ MultiselectBadge.propTypes = {
   margin: PropTypes.string,
 };
 
-MultiselectBadge.displayName = 'MultiselectBadge';
-export default MultiselectBadge;
+CollapsiblePanelBadge.displayName = 'CollapsiblePanelBadge';
+export default CollapsiblePanelBadge;

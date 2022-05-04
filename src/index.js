@@ -112,14 +112,14 @@ export * from './components/Messages';
 export { default as Modal } from './components/Modal';
 export * from './components/Modal';
 
-export { default as MultiselectFilter } from './components/MultiselectFilter';
-export * from './components/MultiselectFilter';
+export { default as CollapsiblePanel } from './components/CollapsiblePanel';
+export * from './components/CollapsiblePanel';
 
-export { default as MultiselectFilterItem } from './components/MultiselectFilterItem';
-export * from './components/MultiselectFilterItem';
+export { default as CollapsiblePanelItem } from './components/CollapsiblePanelItem';
+export * from './components/CollapsiblePanelItem';
 
-export { default as MultiselectListContainer } from './components/MultiselectListContainer';
-export * from './components/MultiselectListContainer';
+export { default as CollapsiblePanelContainer } from './components/CollapsiblePanelContainer';
+export * from './components/CollapsiblePanelContainer';
 
 export { default as NavBar } from './components/NavBar';
 export * from './components/NavBar';

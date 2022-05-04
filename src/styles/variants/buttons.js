@@ -123,7 +123,7 @@ const modalCloseButton = {
   right: 10,
 };
 
-const multiselectToggle = {
+const collapsiblePanelToggle = {
   ...square,
   bg: 'accent.99',
   height: '40px',
@@ -768,6 +768,6 @@ export default {
   tooltipInline,
   colorBlock,
   menuTab,
-  multiselectToggle,
+  collapsiblePanelToggle,
   neutralText,
 };
