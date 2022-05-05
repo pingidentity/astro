@@ -110,6 +110,29 @@ export const chip = {
   },
 };
 
+const multivaluesChip = {
+  ...chip,
+  alignSelf: 'center',
+  cursor: 'default',
+  height: '100%',
+  m: 5,
+  mr: 10,
+  ml: 0,
+};
+
+const selectedItemChip = {
+  ...multivaluesChip,
+  py: 3,
+  pr: 0,
+};
+
+const readOnlyChip = {
+  ...multivaluesChip,
+  p: 3,
+  border: '1px solid',
+  borderColor: 'neutral.80',
+};
+
 const inputInContainerSlot = {
   position: 'absolute',
   bg: 'transparent',
@@ -296,6 +319,8 @@ export default {
   base,
   card,
   chip,
+  selectedItemChip,
+  readOnlyChip,
   copy,
   datePicker,
   environmentChip,
