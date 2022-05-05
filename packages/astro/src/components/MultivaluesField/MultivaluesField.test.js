@@ -332,3 +332,20 @@ test('should have no accessibility violations', async () => {
 
   expect(results).toHaveNoViolations();
 });
+
+test('read only keys', () => {
+  getComponent({ readOnlyKeys: [items[1].key, items[2].key] });
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).not.toBeInTheDocument();
+
+  const firstChip = screen.getByText(items[1].name);
+  const { nextSibling: deleteButton1 } = firstChip;
+  expect(firstChip).toBeInTheDocument();
+  expect(deleteButton1).toBeNull();
+
+  const secondChip = screen.getByText(items[2].name);
+  expect(secondChip).toBeInTheDocument();
+  const { nextSibling: deleteButton2 } = firstChip;
+  expect(deleteButton2).toBeNull();
+});
