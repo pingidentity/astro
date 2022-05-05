@@ -141,3 +141,15 @@ export const WithCustomSize = args => (
     </Box>
   </Box>
 );
+
+export const WithReadOnlyValues = args => (
+  <OverlayProvider>
+    <MultivaluesField
+      readOnlyKeys={['Aardvark', 'Snake']}
+      items={items}
+      {...args}
+    >
+      {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
+    </MultivaluesField>
+  </OverlayProvider>
+);
