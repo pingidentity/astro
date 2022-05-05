@@ -305,9 +305,9 @@ class DemoApp extends React.Component {
         return (
             <MarketSelector
                 options={versions.map(
-                    ({ label, value }, index) =>
+                    ({ label, value }) =>
                         ({
-                            label: index === 0 ? `${label}-SNAPSHOT` : label,
+                            label,
                             id: value
                         })
                 )}

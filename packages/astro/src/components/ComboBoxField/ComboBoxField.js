@@ -63,6 +63,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     isNotFlippable,
     direction,
     scrollBoxProps,
+    controlProps,
     defaultFilter,
   } = props;
   const comboBoxOptions = {
@@ -175,6 +176,11 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   useLayoutEffect(onResize, [onResize]);
 
+  const handleInputOpen = (e) => {
+    if (!state.isOpen && menuTrigger === 'focus') buttonRef.current.click();
+    if (controlProps?.onClick) controlProps.onClick(e);
+  };
+
   const style = {
     ...overlayProps.style,
     width: menuWidth,
@@ -212,6 +218,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         inputRef={inputRef}
         triggerProps={buttonProps}
         triggerRef={buttonRef}
+        controlProps={{ ...controlProps, onClick: handleInputOpen }}
       />
       <PopoverContainer
         isOpen={state.isOpen}
@@ -336,6 +343,10 @@ ComboBoxField.propTypes = {
   /** @ignore */
   scrollBoxProps: PropTypes.shape({
     maxHeight: PropTypes.string,
+  }),
+  /** Props object that is spread directly into the ComboBoxInput element. */
+  controlProps: PropTypes.shape({
+    onClick: PropTypes.func,
   }),
 };
 

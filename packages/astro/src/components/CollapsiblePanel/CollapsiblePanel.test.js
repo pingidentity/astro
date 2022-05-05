@@ -1,9 +1,9 @@
 import React from 'react';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import MultiselectFilter from './MultiselectFilter';
+import CollapsiblePanel from './CollapsiblePanel';
 
-const testId = 'multiselect-filter-item';
+const testId = 'collapsible-panel-item';
 const onSelectionChange = jest.fn();
 const defaultProps = {
   'data-testid': testId,
@@ -14,7 +14,7 @@ const defaultProps = {
   onSelectionChange,
 };
 const getComponent = (props = {}) => render(
-  <MultiselectFilter {...defaultProps} {...props} />,
+  <CollapsiblePanel {...defaultProps} {...props} />,
 );
 
 beforeAll(() => {
@@ -42,14 +42,14 @@ axeTest(getComponent, {
   },
 });
 
-test('default multiselectFilter', () => {
+test('default CollapsiblePanel', () => {
   getComponent();
-  const multiselectFilter = screen.getByTestId(testId);
-  expect(multiselectFilter).toBeInTheDocument();
+  const collapsiblePanel = screen.getByTestId(testId);
+  expect(collapsiblePanel).toBeInTheDocument();
 });
 
 test('custom classname can be passed', () => {
   getComponent({ className: 'testing-class' });
-  const multiselectFilter = screen.getByTestId(testId);
-  expect(multiselectFilter).toHaveClass('testing-class');
+  const collapsiblePanel = screen.getByTestId(testId);
+  expect(collapsiblePanel).toHaveClass('testing-class');
 });

@@ -8,8 +8,6 @@ const redirect = fetchVersions( (versions) => {
     switch (path) {
         case "latest":
         case "stable":
-            redirectPath += `/${versions[1].value}/`;
-            break;
         case "snapshot":
             redirectPath += `/${versions[0].value}/`;
             break;

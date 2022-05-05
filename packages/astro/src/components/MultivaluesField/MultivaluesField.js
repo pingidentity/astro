@@ -43,6 +43,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     onOpenChange,
     onSelectionChange,
     placeholder,
+    readOnlyKeys = [],
     selectedKeys,
     scrollBoxProps,
   } = props;
@@ -70,7 +71,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       Array.from(nodes).filter(
         item => contains(item.textValue, filterString),
       ),
-    items,
+    items: items.filter(({ key }) => !readOnlyKeys.includes(key)),
     onSelectionChange: toggleItems,
     selectionMode: 'multiple',
   });
@@ -201,6 +202,28 @@ const MultivaluesField = forwardRef((props, ref) => {
     selectionManager.toggleSelection(key);
   };
 
+  const readOnlyItems = (
+    <>
+      {readOnlyKeys
+        .map((key) => {
+          const item = initialItems.find(el => el.key === key);
+          if (item) {
+            return (
+              <Chip
+                key={item.key}
+                role="presentation"
+                label={item.name}
+                variant="boxes.readOnlyChip"
+                bg="white"
+                textProps={{ sx: { color: 'text.primary' } }}
+              />
+            );
+          }
+          return null;
+        })}
+    </>
+  );
+
   const selectedItems = (
     <>
       {Array.from(selectionManager.selectedKeys)
@@ -211,16 +234,9 @@ const MultivaluesField = forwardRef((props, ref) => {
               <Chip
                 key={item.key}
                 role="presentation"
+                variant="boxes.selectedItemChip"
                 bg="active"
-                color="white"
                 label={item.name}
-                sx={{ alignSelf: 'center', cursor: 'default', height: '100%', m: 5, mr: 10, ml: 0, py: 3, pr: 0 }}
-                textProps={{
-                  sx: {
-                    fontWeight: 500,
-                    textTransform: 'none',
-                  },
-                }}
               >
                 <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="buttons.chipDeleteButton">
                   <Icon icon={Clear} color="white" size={14} />
@@ -287,7 +303,7 @@ const MultivaluesField = forwardRef((props, ref) => {
         }}
         onKeyDown={keyDown}
         onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-        slots={{ beforeInput: selectedItems }}
+        slots={{ beforeInput: <>{readOnlyItems} {selectedItems}</> }}
         value={filterString}
         {...inputProps}
       />
@@ -383,6 +399,10 @@ MultivaluesField.propTypes = {
   onSelectionChange: PropTypes.func,
   /** Temporary text that occupies the text input when it is empty. */
   placeholder: PropTypes.string,
+  /**
+   * The item keys that are readonly. These items cannot be changed or selected.
+   */
+  readOnlyKeys: PropTypes.arrayOf(PropTypes.string),
   /** The currently selected keys in the collection (controlled). */
   selectedKeys: isIterableProp,
   // /** Props object that is spread directly into the ScrollBox element. */

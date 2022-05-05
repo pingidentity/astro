@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
 import { useOverlayTriggerState } from '@react-stately/overlays';
-import MultiselectBadge from './MultiselectBadge';
+import CollapsiblePanelBadge from './CollapsiblePanelBadge';
 import { Icon, IconButton, Box } from '../../index';
 import { useStatusClasses } from '../../hooks';
 
 /**
- * The MultiselectListContainer serves as a wrapper around a list and its associated trigger,
+ * The CollapsiblePanelContainer serves as a wrapper around a list and its associated trigger,
  * linking the list's open state with the trigger's press state and providing necessary context.
  */
 
-const MultiselectListContainer = forwardRef((props, ref) => {
+const CollapsiblePanelContainer = forwardRef((props, ref) => {
   const {
     selectedFilterCount,
     className,
@@ -53,17 +53,17 @@ const MultiselectListContainer = forwardRef((props, ref) => {
       className={classNames}
       onKeyUp={handleClose}
       ref={ref}
-      variant="multiselectListContainer.multiselectListContainer"
+      variant="collapsiblePanel.collapsiblePanelContainer"
       isRow
       {...others}
     >
       <IconButton
         isRow
         aria-label={state.isOpen ? closeAriaLabel : openAriaLabel}
-        data-testid="multiselect-list-button"
+        data-testid="collapsible-panel-button"
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="multiselectToggle"
+        variant="collapsiblePanelToggle"
         pr="sm"
       >
         <Icon
@@ -73,8 +73,8 @@ const MultiselectListContainer = forwardRef((props, ref) => {
           size="30px"
         />
         {!state.isOpen && selectedFilterCount &&
-          <MultiselectBadge
-            data-testid="multiselect-list-badge"
+          <CollapsiblePanelBadge
+            data-testid="collapsible-panel-badge"
             margin="auto"
             selectedFilterCount={selectedFilterCount}
           />
@@ -87,7 +87,7 @@ const MultiselectListContainer = forwardRef((props, ref) => {
   );
 });
 
-MultiselectListContainer.propTypes = {
+CollapsiblePanelContainer.propTypes = {
   /** Amount of selected items indicator. */
   selectedFilterCount: PropTypes.oneOfType([
     PropTypes.string,
@@ -110,10 +110,10 @@ MultiselectListContainer.propTypes = {
   openAriaLabel: PropTypes.string,
 };
 
-MultiselectListContainer.defaultProps = {
+CollapsiblePanelContainer.defaultProps = {
   openAriaLabel: 'Open filter menu?',
   closeAriaLabel: 'Close filter menu?',
 };
 
-MultiselectListContainer.displayName = 'MultiselectListContainer';
-export default MultiselectListContainer;
+CollapsiblePanelContainer.displayName = 'CollapsiblePanelContainer';
+export default CollapsiblePanelContainer;

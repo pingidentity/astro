@@ -15,14 +15,14 @@ import {
   IconButton,
   Item,
   ListView,
-  MultiselectFilter,
-  MultiselectFilterItem,
+  CollapsiblePanel,
+  CollapsiblePanelItem,
   SearchField,
   Text,
 } from '..';
 
 export default {
-  title: 'Recipes/MultiselectListContainer',
+  title: 'Recipes/CollapsiblePanel with List',
 };
 
 const data = [
@@ -260,7 +260,7 @@ export const Default = () => {
               )}
             </ListView>
           </Box>
-          <MultiselectFilter
+          <CollapsiblePanel
             items={selectedItems}
             selectedFilterCount={selectedItems.length.toString()}
             listTitle="Selected Groups"
@@ -273,7 +273,7 @@ export const Default = () => {
                 textValue={item.name}
                 data-id={item.key}
               >
-                <MultiselectFilterItem
+                <CollapsiblePanelItem
                   text={item.name}
                   icon={item.isDefaultSelected ? CheckIcon : Clear}
                   isDefaultSelected={item.isDefaultSelected}
@@ -281,7 +281,7 @@ export const Default = () => {
                 />
               </Item>
             )}
-          </MultiselectFilter>
+          </CollapsiblePanel>
         </Box>
       </Box>
     </Box>

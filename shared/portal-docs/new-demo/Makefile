@@ -1,6 +1,6 @@
 include ../../Makefile
 
-HOSTING_PROJECT_BASE:=${HOSTING_PROJECT_BASE}schema-form/
+HOSTING_PROJECT_BASE:=${HOSTING_PROJECT_BASE}<pkg>/
 
 # Only needs to be run once, leaving as an example
 initial-upload-and-version:

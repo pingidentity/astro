@@ -190,6 +190,22 @@ test('should open list on focus when menuTrigger is set to use focus', () => {
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 });
 
+test('should open list on focus on click after selection when menuTrigger is set to use focus', () => {
+  getComponent({ menuTrigger: 'focus' });
+  const input = screen.getByRole('combobox');
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  userEvent.click(input);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+
+  userEvent.click(screen.queryAllByRole('option')[0]);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(input).toHaveFocus();
+
+  userEvent.click(input);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+});
+
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   getComponent();
   const button = screen.queryByRole('button');
