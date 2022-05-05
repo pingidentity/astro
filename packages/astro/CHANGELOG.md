@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.10.0...@pingux/astro@1.11.0) (2022-05-05)
+
+
+### Bug Fixes
+
+* [UIP-5359] refactor Array Field to include label ([ea9c306](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ea9c306e062b43721d410f52ae5b34e44ea429a5))
+* [UIP-5380] Combobox doesnt open when clicked into after selection ([795675d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/795675d74a1ad8c525ed72acf679dd51c8a57a98))
+* [UIP-5405] Rename MultiSelectFilter component ([5167f64](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5167f647d1996f9ec33cba2e5ddc00408ca32069))
+
+
+### Features
+
+* [UIP-5409] Read Only Chips in Multivalues Field ([71b8b29](https://gitlab.corp.pingidentity.com/ux/pingux/commit/71b8b292d9d4fd8c75a297c5918f5cede8b947b4))
+
+
+
+
+
 # [1.10.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.9.0...@pingux/astro@1.10.0) (2022-04-28)
 
 

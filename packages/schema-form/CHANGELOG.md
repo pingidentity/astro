@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.4.1...@pingux/schema-form@3.5.0) (2022-05-05)
+
+
+### Features
+
+* [UIP-3958] Add Schema Form Storybook demo to internal portal ([307a03e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/307a03ea2f0b799e61f2a5a14edced3c9b524caa))
+
+
+
+
+
 ## [3.4.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.4.0...@pingux/schema-form@3.4.1) (2022-04-28)
 
 

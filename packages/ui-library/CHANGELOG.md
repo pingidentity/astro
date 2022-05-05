@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.3.0...ui-library@5.4.0) (2022-05-05)
+
+
+### Features
+
+* [UIP-3958] Add Schema Form Storybook demo to internal portal ([307a03e](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/307a03ea2f0b799e61f2a5a14edced3c9b524caa))
+
+
+
+
+
 # [5.3.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.2.2...ui-library@5.3.0) (2022-04-21)
 
 
