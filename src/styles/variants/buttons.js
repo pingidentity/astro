@@ -400,11 +400,12 @@ const text = {
   color: 'active',
   height: 'auto',
   padding: '0',
+  lineHeight: 'unset',
   '&.is-hovered': {
     textDecoration: 'underline',
   },
   '&.is-focused': {
-    textDecoration: 'underline',
+    ...defaultFocus,
   },
 };
 
@@ -518,6 +519,7 @@ const imageUpload = {
 
 const link = {
   ...text,
+  lineHeight: 'unset',
   textDecoration: 'none',
   display: 'flex',
   justifyContent: 'space-between',
