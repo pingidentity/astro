@@ -3,6 +3,7 @@ import React, {
   useRef,
   useImperativeHandle,
   useState,
+  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import { Image as ThemeUIImage } from 'theme-ui';
@@ -35,6 +36,7 @@ const Image = forwardRef((props, ref) => {
   } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [loadedSuccessfully, setLoadedSuccessfully] = useState(false);
+  const [hasTimedOut, setHasTimedOut] = useState(false);
   // we need to use useRef here with useState so it will be updated in setTimeout and onload
   // https://github.com/facebook/react/issues/14010#issuecomment-433788147
   const isLoadingRef = useRef(isLoading);
@@ -42,9 +44,17 @@ const Image = forwardRef((props, ref) => {
     setIsLoading(newState);
     isLoadingRef.current = newState;
   };
-  const [imgSrc, setImgSrc] = useState(fallbackImage || src);
 
+  const setImgSrc = () => {
+    if ((!loadedSuccessfully && !isLoadingRef?.current) || hasTimedOut) {
+      return fallbackImage;
+    }
+    return src;
+  };
+
+  const imgSrc = useMemo(() => setImgSrc(), [src, isLoading, hasTimedOut]);
   const imgRef = useRef();
+
   /* istanbul ignore next */
   useImperativeHandle(ref, () => imgRef.current);
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -59,20 +69,18 @@ const Image = forwardRef((props, ref) => {
   const onImageLoad = () => {
     if (isLoadingRef?.current) {
       setIsLoadingWithRef(false);
-      setImgSrc(src);
       setLoadedSuccessfully(true);
     }
   };
 
   const onImageError = () => {
     setIsLoadingWithRef(false);
-    setImgSrc(fallbackImage || null);
   };
 
   const onFallbackTimeout = () => {
     if (isLoadingRef?.current) {
       setIsLoadingWithRef(false);
-      setImgSrc(fallbackImage || null);
+      setHasTimedOut(true);
     }
   };
 

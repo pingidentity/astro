@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import isChromatic from 'chromatic/isChromatic';
 import Image from '.';
 import { chiefIdentityChampions, pingImg } from './imageConstants';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
+import { Box, Button } from '../../index';
 
 export default {
   title: 'Image',
@@ -90,5 +91,29 @@ export const WithSkeletonLoadTimeout = () => {
         height: '150px',
       }}
     />
+  );
+};
+
+export const UpdatingImageSrc = () => {
+  const [image, setImage] = useState(chiefIdentityChampions);
+  const handleButtonPress = () => {
+    const src = image === pingImg ? chiefIdentityChampions : pingImg;
+    setImage(src);
+  };
+
+  return (
+    <Box sx={{ width: '200px' }}>
+      <Button onPress={handleButtonPress}>
+        Change Image
+      </Button>
+      <Image
+        src={image}
+        sx={{
+        width: '200px',
+        height: '200px',
+        mt: '25px',
+      }}
+      />
+    </Box>
   );
 };
