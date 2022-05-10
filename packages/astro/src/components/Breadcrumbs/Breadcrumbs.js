@@ -66,7 +66,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
       <Box
         ref={breadcrumbsRef}
         isRow
-        sx={{ overflow: 'auto' }}
+        sx={{ overflow: 'auto', paddingInlineStart: 'unset' }}
         as="ol"
         {...mergeProps(wrapperProps, others)}
       >
