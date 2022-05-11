@@ -128,6 +128,7 @@ pipeline {
                   sh """
                     git config --global user.email 'devtools+jenkins@pingidentity.com'
                     git config --global user.name 'devtools-jenkins'
+                    GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git checkout master
                     GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
                     GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone https://github.com/snyk-tech-services/snyk-licenses-texts.git
                     cd snyk-licenses-texts
