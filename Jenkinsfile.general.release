@@ -128,27 +128,21 @@ pipeline {
                   sh """
                     git config --global user.email 'devtools+jenkins@pingidentity.com'
                     git config --global user.name 'devtools-jenkins'
-                    GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git checkout master
-                    GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
                     GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone https://github.com/snyk-tech-services/snyk-licenses-texts.git
                     cd snyk-licenses-texts
                     npm i
                     npm run build
+                    cd snyk-licenses-texts
+                    node dist/index.js generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
+                    mv -f *.html ../NOTICE.html
+                    rm -r snyk-licenses-texts
                   """
-                  sh """
-                      cd snyk-licenses-texts
-                      node dist/index.js generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
-                      mv -f *.html ../NOTICE.html
-                      rm -r snyk-licenses-texts
-                    """
                   if(sh(returnStdout: true, script: "git diff origin/master --name-only") != "") {
                     sh """
-                        git config --global user.email 'devtools+jenkins@pingidentity.com'
-                        git config --global user.name 'devtools-jenkins'
-                        git add NOTICE.html
-                        GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.HTML'
-                        GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin master
-                      """
+                      git add NOTICE.html
+                      GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.HTML'
+                      GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin master
+                    """
                   }
                 }
               }
