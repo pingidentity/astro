@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.4.0...ui-library@5.4.1) (2022-05-11)
+
+**Note:** Version bump only for package ui-library
+
+
+
+
+
 # [5.4.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.3.0...ui-library@5.4.0) (2022-05-05)
 
 
