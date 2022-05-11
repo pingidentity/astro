@@ -126,20 +126,19 @@ pipeline {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 script {
                   sh """
-                    git config --global user.email 'devtools+jenkins@pingidentity.com'
-                    git config --global user.name 'devtools-jenkins'
-                    GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone https://github.com/snyk-tech-services/snyk-licenses-texts.git
-                    cd snyk-licenses-texts
-                    npm i
-                    npm run build
-                    cd snyk-licenses-texts
-                    node dist/index.js generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
+                    mkdir temp
+                    cd temp
+                    curl -OL https://github.com/snyk-tech-services/snyk-licenses-texts/releases/download/v1.22.0/snyk-licenses-texts-linux
+                    chmod u+x snyk-licenses-texts-linux
+                    ./snyk-licenses-texts-linux generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
                     mv -f *.html ${env.WORKSPACE}/packages/astro/NOTICE.html
                     cd ${env.WORKSPACE}
-                    rm -r snyk-licenses-texts
+                    rm -rf temp
                   """
                   if(sh(returnStdout: true, script: "git diff origin/master --name-only") != "") {
                     sh """
+                      git config --global user.email 'devtools+jenkins@pingidentity.com'
+                      git config --global user.name 'devtools-jenkins'
                       git add packages/astro/NOTICE.html
                       GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.html file'
                       GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin master
