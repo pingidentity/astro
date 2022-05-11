@@ -20,4 +20,12 @@ test('an avatar is rendered', () => {
   const img = screen.getByRole('img');
   expect(img).toBeInstanceOf(HTMLImageElement);
   expect(img).toBeInTheDocument();
+  expect(img).toHaveAttribute('alt', 'Avatar');
+});
+
+test('an avatar is rendered with custom alt', () => {
+  getComponent({ alt: 'Custom Alt' });
+  const img = screen.getByRole('img');
+
+  expect(img).toHaveAttribute('alt', 'Custom Alt');
 });
