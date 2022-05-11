@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
+import { announce } from '@react-aria/live-announcer';
 
 import { Box, Button, Tooltip, TooltipTrigger } from '../../index';
 
@@ -45,6 +46,7 @@ const CopyText = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useEffect(() => {
     if (isCopied) {
+      announce('Copied!', 'polite');
       const timer = setTimeout(() => {
         setIsCopied(false);
       }, 1000);
@@ -64,6 +66,7 @@ const CopyText = forwardRef((props, ref) => {
         variant="quiet"
         onPress={copyToClipboard}
         aria-label="copy-content"
+        tabIndex={-1}
         {...focusProps}
       >
         {children}
