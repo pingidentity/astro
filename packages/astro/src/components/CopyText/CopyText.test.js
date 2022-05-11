@@ -45,15 +45,9 @@ describe('Text mode', () => {
     expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
   });
 
-  test('content and copy buttons are focused with keyboard', () => {
+  test('copy button is focused with keyboard', () => {
     getComponent();
-    const contentBtn = screen.getByLabelText('copy-content');
-    expect(contentBtn).not.toHaveFocus();
-    userEvent.tab();
-    expect(contentBtn).toHaveFocus();
-    expect(contentBtn).toHaveClass('is-focused');
-
-    const copyBtn = screen.getByLabelText('copy');
+    const copyBtn = screen.getByLabelText('copy to clipboard');
     expect(copyBtn).not.toHaveFocus();
     userEvent.tab();
     expect(copyBtn).toHaveFocus();
@@ -85,7 +79,7 @@ describe('Text mode', () => {
 
   test('click on copy button copies data to the clipboard', async () => {
     getComponent();
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(navigator.clipboard.writeText).toBeCalledTimes(1);
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textValue);
@@ -94,7 +88,7 @@ describe('Text mode', () => {
   test('if textToCopy is provided it\'s copied to clipboard instead of children text data', async () => {
     const textToCopy = 'This text is copied';
     getComponent({ textToCopy });
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(navigator.clipboard.writeText).toBeCalledTimes(1);
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textToCopy);
@@ -103,7 +97,7 @@ describe('Text mode', () => {
   test('copying works in insecure origin', async () => {
     global.navigator.clipboard = undefined;
     getComponent();
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(document.execCommand).toBeCalledTimes(1);
     expect(document.execCommand).toHaveBeenCalledWith('copy');
@@ -119,7 +113,7 @@ describe('Text mode', () => {
     const spy = jest.spyOn(console, 'error');
     expect(spy).not.toHaveBeenCalled();
 
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(document.execCommand).toBeCalledTimes(1);
     expect(document.execCommand).toHaveBeenCalledWith('copy');
@@ -128,7 +122,7 @@ describe('Text mode', () => {
 
   test('after button click, the tooltip renders with the text "Copied!"', async () => {
     getComponent();
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
     expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
@@ -136,7 +130,7 @@ describe('Text mode', () => {
 
   test('tooltip renders with the text "Copied!" hides after delay', async () => {
     getComponent();
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
     expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
@@ -171,7 +165,7 @@ describe('Link mode', () => {
     fireEvent.mouseEnter(container);
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     fireEvent.mouseMove(button);
     fireEvent.mouseEnter(button);
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
@@ -179,7 +173,7 @@ describe('Link mode', () => {
 
   test('copy button is focused with keyboard', () => {
     getComponent();
-    const copyBtn = screen.getByLabelText('copy');
+    const copyBtn = screen.getByLabelText('copy to clipboard');
     expect(copyBtn).not.toHaveFocus();
     userEvent.tab();
     userEvent.tab();
@@ -201,7 +195,7 @@ describe('Link mode', () => {
 
   test('click on copy button copies data to the clipboard', async () => {
     getComponent();
-    const button = screen.getByLabelText('copy');
+    const button = screen.getByLabelText('copy to clipboard');
     await act(async () => userEvent.click(button));
     expect(navigator.clipboard.writeText).toBeCalledTimes(1);
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(linkValue);
