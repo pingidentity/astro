@@ -11,7 +11,6 @@ const Avatar = forwardRef((props, ref) => {
   return (
     <ThemeUIAvatar
       ref={ref}
-      alt="Avatar"
       {...props}
     />
   );
@@ -20,6 +19,13 @@ const Avatar = forwardRef((props, ref) => {
 Avatar.propTypes = {
   /**  Source of avatar. */
   src: PropTypes.string.isRequired,
+  /** Alternative text for avatar. */
+  alt: PropTypes.string,
+};
+
+
+Avatar.defaultProps = {
+  alt: 'Avatar',
 };
 
 Avatar.displayName = 'Avatar';
