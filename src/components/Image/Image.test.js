@@ -13,8 +13,9 @@ const defaultProps = {
   fallbackImage: testFallbackSrc,
 };
 
-const getComponent = (props = {}) =>
-  render(<Image {...defaultProps} {...props} />);
+const getComponent = (props = {}, { renderFn = render } = {}) =>
+  renderFn(<Image {...defaultProps} {...props} />);
+
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
@@ -53,6 +54,22 @@ test('image shows disabled status', () => {
   });
   const img = screen.getByRole('img');
   expect(img).toHaveClass('is-disabled');
+});
+
+test('image source is able to be changed', () => {
+  const src2 = 'second-src';
+  const { rerender } = getComponent();
+  act(() => {
+    fallbackImageObj.onImageLoad();
+  });
+
+  expect(screen.getByRole('img')).toHaveAttribute('src', testSrc);
+
+  getComponent({ src: src2 }, { renderFn: rerender });
+  act(() => {
+    fallbackImageObj.onImageLoad();
+  });
+  expect(screen.getByRole('img')).toHaveAttribute('src', src2);
 });
 
 describe('test Image component with useFallbackImage hook', () => {
