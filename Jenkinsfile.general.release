@@ -130,7 +130,7 @@ pipeline {
                     git config --global user.name 'devtools-jenkins'
                     GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone https://github.com/snyk-tech-services/snyk-licenses-texts.git
                     cd snyk-licenses-texts
-                    npm ci
+                    npm i
                     npm run build
                     cd snyk-licenses-texts
                     node dist/index.js generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
