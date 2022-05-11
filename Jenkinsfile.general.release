@@ -120,7 +120,7 @@ pipeline {
 
     stage('generate notice file') {
       steps {
-        dir("${env.WORKSPACE}/packages/astro") {
+        dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
@@ -130,17 +130,18 @@ pipeline {
                     git config --global user.name 'devtools-jenkins'
                     GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone https://github.com/snyk-tech-services/snyk-licenses-texts.git
                     cd snyk-licenses-texts
-                    npm i
+                    npm ci
                     npm run build
                     cd snyk-licenses-texts
                     node dist/index.js generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
-                    mv -f *.html ../NOTICE.html
+                    mv -f *.html ${env.WORKSPACE}/packages/astro/NOTICE.html
+                    cd ${env.WORKSPACE}
                     rm -r snyk-licenses-texts
                   """
                   if(sh(returnStdout: true, script: "git diff origin/master --name-only") != "") {
                     sh """
-                      git add NOTICE.html
-                      GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.HTML'
+                      git add packages/astro/NOTICE.html
+                      GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.html file'
                       GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin master
                     """
                   }
