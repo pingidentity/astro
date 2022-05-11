@@ -19,6 +19,7 @@ def secrets = [
     engineVersion: 2,
     secretValues: [
       [envVar: 'NPM_TOKEN', vaultKey: 'NPM_TOKEN'],
+      [envVar: 'SNYK_TOKEN', vaultKey: 'SNYK_TOKEN'],
       [envVar: 'SNYK_PUBLIC_ID', vaultKey: 'SNYK_PUBLIC_ID'],
       [envVar: 'SNYK_PROJECT_ID', vaultKey: 'SNYK_PROJECT_ID'],
     ]
