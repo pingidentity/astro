@@ -55,7 +55,7 @@ test('renders component in the default state', () => {
 
 test('copy button is hovered and renders tooltip via mouse', () => {
   getComponent();
-  const copyBtn = screen.getByLabelText('copy');
+  const copyBtn = screen.getByLabelText('copy to clipboard');
   expect(copyBtn).not.toHaveFocus();
   userEvent.hover(copyBtn);
   expect(copyBtn).toHaveClass('is-hovered');
@@ -65,7 +65,7 @@ test('copy button is hovered and renders tooltip via mouse', () => {
 
 test('copy button is focused and renders tooltip via keyboard', () => {
   getComponent();
-  const copyBtn = screen.getByLabelText('copy');
+  const copyBtn = screen.getByLabelText('copy to clipboard');
   expect(copyBtn).not.toHaveFocus();
   userEvent.tab();
   expect(copyBtn).toHaveFocus();
@@ -96,7 +96,7 @@ test('renders line numbers with prop hasLineNumbers', () => {
 
 test('click on copy button copies data to the clipboard', async () => {
   getComponent();
-  const button = screen.getByLabelText('copy');
+  const button = screen.getByLabelText('copy to clipboard');
   await act(async () => userEvent.click(button));
   expect(navigator.clipboard.writeText).toBeCalledTimes(1);
   expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textValue);
@@ -104,7 +104,7 @@ test('click on copy button copies data to the clipboard', async () => {
 
 test('after button click, the tooltip renders with the text "Copied!"', async () => {
   getComponent();
-  const button = screen.getByLabelText('copy');
+  const button = screen.getByLabelText('copy to clipboard');
   await act(async () => userEvent.click(button));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');

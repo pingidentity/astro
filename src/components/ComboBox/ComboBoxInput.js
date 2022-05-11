@@ -102,6 +102,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           {...triggerProps}
           ref={triggerRef}
           isDisabled={isDisabled || isReadOnly}
+          tabIndex={-1}
         >
           <Icon
             icon={MenuDown}
