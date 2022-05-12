@@ -136,7 +136,7 @@ pipeline {
                     cd ${env.WORKSPACE}
                     rm -rf temp
                   """
-                  if(sh(returnStdout: true, script: "git diff origin/master --name-only") != "") {
+                  if(sh(returnStdout: true, script: "git diff --quiet") == 0) {
                     sh """
                       git config --global user.email 'devtools+jenkins@pingidentity.com'
                       git config --global user.name 'devtools-jenkins'
