@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.11.0...@pingux/astro@1.12.0) (2022-05-11)
+
+
+### Bug Fixes
+
+* [UIP-5384] Adjust the focus styles for text and link variant of button ([63de6fe](https://gitlab.corp.pingidentity.com/ux/pingux/commit/63de6fec3d3b2d6b1ae2b018434c29957aa74617))
+* [UIP-5411] Stop Image src from being cached ([a83a84a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a83a84af94052e70ed0a814d44f166345618ae7a))
+
+
+### Features
+
+* [UIP-5302] Template for New Nav and Header ([7cfe695](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7cfe6955a4f0bcf0bdd545418f4985c33e7f2d62))
+
+
+
+
+
 # [1.11.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.10.0...@pingux/astro@1.11.0) (2022-05-05)
 
 

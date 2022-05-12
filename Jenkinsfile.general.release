@@ -19,6 +19,7 @@ def secrets = [
     engineVersion: 2,
     secretValues: [
       [envVar: 'NPM_TOKEN', vaultKey: 'NPM_TOKEN'],
+      [envVar: 'SNYK_TOKEN', vaultKey: 'SNYK_TOKEN'],
       [envVar: 'SNYK_PUBLIC_ID', vaultKey: 'SNYK_PUBLIC_ID'],
       [envVar: 'SNYK_PROJECT_ID', vaultKey: 'SNYK_PROJECT_ID'],
     ]
@@ -120,34 +121,29 @@ pipeline {
 
     stage('generate notice file') {
       steps {
-        dir("${env.WORKSPACE}/packages/astro") {
+        dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 script {
                   sh """
-                    git config --global user.email 'devtools+jenkins@pingidentity.com'
-                    git config --global user.name 'devtools-jenkins'
-                    GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
-                    GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git clone https://github.com/snyk-tech-services/snyk-licenses-texts.git
-                    cd snyk-licenses-texts
-                    npm i
-                    npm run build
+                    mkdir temp
+                    cd temp
+                    curl -OL https://github.com/snyk-tech-services/snyk-licenses-texts/releases/download/v1.22.0/snyk-licenses-texts-linux
+                    chmod u+x snyk-licenses-texts-linux
+                    ./snyk-licenses-texts-linux generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
+                    mv -f *.html ${env.WORKSPACE}/packages/astro/NOTICE.html
+                    cd ${env.WORKSPACE}
+                    rm -rf temp
                   """
-                  sh """
-                      cd snyk-licenses-texts
-                      node dist/index.js generate --orgPublicId=$SNYK_PUBLIC_ID --project=$SNYK_PROJECT_ID
-                      mv -f *.html ../NOTICE.html
-                      rm -r snyk-licenses-texts
-                    """
-                  if(sh(returnStdout: true, script: "git diff origin/master --name-only") != "") {
+                  if(sh(returnStdout: true, script: "git diff --quiet") == 0) {
                     sh """
-                        git config --global user.email 'devtools+jenkins@pingidentity.com'
-                        git config --global user.name 'devtools-jenkins'
-                        git add NOTICE.html
-                        GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.HTML'
-                        GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin master
-                      """
+                      git config --global user.email 'devtools+jenkins@pingidentity.com'
+                      git config --global user.name 'devtools-jenkins'
+                      git add packages/astro/NOTICE.html
+                      GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git commit -m 'chore: Update NOTICE.html file'
+                      GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git push origin master
+                    """
                   }
                 }
               }
