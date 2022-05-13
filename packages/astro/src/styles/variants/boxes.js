@@ -307,6 +307,7 @@ const fileInputFieldWrapper = {
 };
 
 const floatLabelWrapper = {
+  width: 'calc(100% - 4px)',
   backgroundColor: 'white',
   position: 'relative',
   height: '17px',
