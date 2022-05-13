@@ -111,6 +111,13 @@ const iconButton = {
   },
 };
 
+const svgIconButton = {
+  ...iconButton,
+  path: {
+    fill: 'default',
+  },
+};
+
 const square = {
   ...iconButton,
   borderRadius: '2px',
@@ -772,4 +779,5 @@ export default {
   menuTab,
   collapsiblePanelToggle,
   neutralText,
+  svgIconButton,
 };
