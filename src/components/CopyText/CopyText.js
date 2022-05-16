@@ -12,7 +12,7 @@ import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 
 const TooltipWrapper = ({ children, tooltip, ...others }) => {
   return (
-    <TooltipTrigger key={tooltip} direction="top" isNotFlippable offset={5} {...others}>
+    <TooltipTrigger key={tooltip} direction="top" isNotFlippable {...others}>
       {children}
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>

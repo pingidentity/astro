@@ -197,6 +197,7 @@ export const WithSlots = () => {
     position: 'absolute',
     right: 0,
     top: '5px',
+    height: '32px',
   };
   const containerSx = { sx: { '& input': { paddingRight: '40px' } } };
 
