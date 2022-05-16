@@ -494,12 +494,14 @@ const danger = {
 const copy = {
   ml: 'xs',
   outline: 'none',
+  height: 'auto',
   cursor: 'pointer',
   path: {
     fill: 'neutral.10',
   },
   '&.is-focused': {
-    boxShadow: 'inset 0 0 5px #5873bdbf',
+    boxShadow: 'none',
+    ...defaultFocus,
   },
 };
 
