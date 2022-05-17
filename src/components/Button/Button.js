@@ -23,6 +23,7 @@ const Button = forwardRef((props, ref) => {
     onPressUp,
     children,
     variant,
+    tabIndex,
     ...others
   } = props;
   const buttonRef = useRef();
@@ -71,7 +72,7 @@ const Button = forwardRef((props, ref) => {
       sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       variant={variant}
       {...others}
-      {...mergeProps(hoverProps, focusProps, buttonProps)}
+      {...mergeProps(hoverProps, focusProps, { ...buttonProps, tabIndex })}
     >
       {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
       {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
@@ -130,6 +131,8 @@ Button.propTypes = {
   onPressUp: PropTypes.func,
   /** The styling variation of the button. */
   variant: PropTypes.string,
+  /** The focus variation of the button. */
+  tabIndex: PropTypes.number,
 };
 
 Button.defaultProps = {
