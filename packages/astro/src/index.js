@@ -68,6 +68,9 @@ export * from './components/Icon';
 export { default as IconButton } from './components/IconButton';
 export * from './components/IconButton';
 
+export { default as IconButtonToggle } from './components/IconButtonToggle';
+export * from './components/IconButtonToggle';
+
 export { default as Image } from './components/Image';
 export * from './components/Image';
 

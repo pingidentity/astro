@@ -154,8 +154,12 @@ const copy = {
   alignItems: 'center',
   width: 'max-content',
   cursor: 'pointer',
+
   '& .is-focused': {
-    boxShadow: 'inset 0 0 5px #5873bdbf',
+    outline: '1px solid',
+    outlineColor: 'active',
+    outlineOffset: '4px',
+    borderRadius: '4px',
   },
 };
 
@@ -307,6 +311,7 @@ const fileInputFieldWrapper = {
 };
 
 const floatLabelWrapper = {
+  width: 'calc(100% - 4px)',
   backgroundColor: 'white',
   position: 'relative',
   height: '17px',

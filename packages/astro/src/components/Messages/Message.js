@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { announce } from '@react-aria/live-announcer';
 
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
-import AlertCircleOutlineIcon from 'mdi-react/AlertCircleOutlineIcon';
 import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
+import AlertIcon from 'mdi-react/AlertIcon';
+import InformationIcon from 'mdi-react/InformationIcon';
 
 import useStatusClasses from '../../hooks/useStatusClasses';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -16,10 +17,10 @@ import IconButton from '../IconButton';
 import Text from '../Text';
 
 export const icons = {
-  default: AlertCircleOutlineIcon,
+  default: InformationIcon,
   success: CheckCircleIcon,
   error: AlertCircleIcon,
-  warning: AlertCircleOutlineIcon,
+  warning: AlertIcon,
 };
 
 const CloseButton = ({ color, ...others }) => {
