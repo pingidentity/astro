@@ -10,6 +10,8 @@ const testId = 'test-copy-text';
 const originalClipboard = { ...global.navigator.clipboard };
 const originalExecCommand = global.document.execCommand;
 
+const originalGetSelection = window.getSelection;
+
 const defaultTest = (getComponent = {}) => {
   getComponent();
   const container = screen.getByTestId(testId);
@@ -61,12 +63,18 @@ describe('Text mode', () => {
     global.navigator.clipboard = mockClipboard;
     global.document.execCommand = jest.fn();
     global.document.execCommand.mockReturnValue(true);
+
+    const mockGetSelection = jest.fn();
+    mockGetSelection.mockReturnValue('');
+    window.getSelection = mockGetSelection;
   });
 
   afterEach(() => {
     jest.resetAllMocks();
     global.navigator.clipboard = originalClipboard;
     global.document.execCommand = originalExecCommand;
+
+    window.getSelection = originalGetSelection;
   });
 
   test('click on text copies data to the clipboard', async () => {
@@ -186,11 +194,16 @@ describe('Link mode', () => {
       writeText: jest.fn(),
     };
     global.navigator.clipboard = mockClipboard;
+
+    const mockGetSelection = jest.fn();
+    mockGetSelection.mockReturnValue('');
+    window.getSelection = mockGetSelection;
   });
 
   afterEach(() => {
     jest.resetAllMocks();
     global.navigator.clipboard = originalClipboard;
+    window.getSelection = originalGetSelection;
   });
 
   test('click on copy button copies data to the clipboard', async () => {
