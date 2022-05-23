@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.12.0...@pingux/astro@1.13.0) (2022-05-17)
+
+
+### Bug Fixes
+
+* [UIP-5362] Avatar A11Y Improvement ([84b8b5f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/84b8b5f68100faedd8a2867a5842f3376ef1dba0))
+* [UIP-5375] Menu A11Y Improvement ([06d5309](https://gitlab.corp.pingidentity.com/ux/pingux/commit/06d530988df64e8b53fb129e12560792476fc5f8))
+* [UIP-5396] fix missed border in textAreaField with floating label ([ee95c5a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ee95c5a64c80a5ae23113b920842b3a9a41a47c0))
+* [UIP-5414] message component icon updates ([4d09c0c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d09c0caad178fe541ec9d62ac1aeed22ca3cbf8))
+* [UIP-5415] Remove 32px height from icon button in CopyText ([88a6c37](https://gitlab.corp.pingidentity.com/ux/pingux/commit/88a6c375cd358f3ec318a167fea0ad0eef12a912))
+
+
+### Features
+
+* [UIP-5350] Astro nano theme ([30f80ee](https://gitlab.corp.pingidentity.com/ux/pingux/commit/30f80eef5cfb5e2edbf8b56198cc1f64029f51f4))
+* [UIP-5366] CopyText a11y improvements ([b7c9b58](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b7c9b587a1554f98b634c977887949aaacb90754))
+* [UIP-5395] One Way to Bidirectional Arrow Recipe ([1eb4e20](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1eb4e2045ec466143dc738231f249a6428e3a60c))
+
+
+
+
+
 # [1.12.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.11.0...@pingux/astro@1.12.0) (2022-05-11)
 
 
