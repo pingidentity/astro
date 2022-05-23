@@ -153,13 +153,14 @@ const textFieldInContainerSlot = {
 const copy = {
   alignItems: 'center',
   width: 'max-content',
-  cursor: 'pointer',
-
   '& .is-focused': {
     outline: '1px solid',
     outlineColor: 'active',
     outlineOffset: '4px',
     borderRadius: '4px',
+  },
+  '& span': {
+    cursor: 'text',
   },
 };
 
