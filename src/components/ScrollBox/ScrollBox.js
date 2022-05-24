@@ -8,7 +8,6 @@ const ScrollBox = forwardRef((props, ref) => {
     maxHeight,
     children,
     sx, // eslint-disable-line
-    className,
     hasShadows,
     onScroll: scrollHandler,
     ...others
