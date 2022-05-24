@@ -74,7 +74,7 @@ const PopoverMenu = forwardRef((props, ref) => {
 
   return (
     <>
-      <PressResponder {...menuTriggerProps} ref={triggerRef} isPressed={state.isOpen}>
+      <PressResponder {...menuTriggerProps} ref={triggerRef} isPressed={state.isOpen} >
         {menuTrigger}
       </PressResponder>
       <MenuContext.Provider value={menuContext}>
@@ -85,6 +85,7 @@ const PopoverMenu = forwardRef((props, ref) => {
           onClose={state.close}
           hasNoArrow={hasNoArrow}
           isDismissable
+          isNonModal
           {...positionProps}
           {...menuProps}
         >
