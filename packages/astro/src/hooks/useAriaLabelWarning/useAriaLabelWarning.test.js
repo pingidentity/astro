@@ -21,7 +21,7 @@ test('default useAriaLabelWarning', () => {
 });
 
 test('useAriaLabelWarning with string', () => {
-  const compound = `${component} requires an aria-label`;
+  const compound = `${component} has an undefined aria-label. If the surrounding content sufficiently labels this component instance, you may disable this warning by setting the prop to \`null\`. Otherwise, please provide an appropriate aria-label. See more info here: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label`;
   const spy = jest.spyOn(console, 'warn');
   expect(spy).not.toHaveBeenCalled();
   renderHook(() => useAriaLabelWarning(component));
