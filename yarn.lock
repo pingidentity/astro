@@ -1770,15 +1770,7 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@internationalized/message@^3.0.0", "@internationalized/message@^3.0.2":
-  version "3.0.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/message/-/message-3.0.2.tgz#c3db2b6b7f75af815819f77da11f8424381416e3"
-  integrity sha1-w9sra391r4FYGfd9oR+EJDgUFuM=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    intl-messageformat "^9.6.12"
-
-"@internationalized/message@^3.0.6":
+"@internationalized/message@^3.0.0", "@internationalized/message@^3.0.2", "@internationalized/message@^3.0.6":
   version "3.0.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/message/-/message-3.0.6.tgz#3265be5c5bc70dc56e9a3e59ea08a3f3905ebb31"
   integrity sha512-ECk3toFy87I2z5zipRNwdbouvRlIyMKb/FzKj1upMaNS52AKhpvrLgo3CY/ZXQKm4CRIbeh6p/F/Ztt+enhIEA==
@@ -1786,14 +1778,7 @@
     "@babel/runtime" "^7.6.2"
     intl-messageformat "^9.12.0"
 
-"@internationalized/number@^3.0.0", "@internationalized/number@^3.0.2":
-  version "3.0.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/number/-/number-3.0.2.tgz#432574e868713d01acbdd206d358fd59da01bad1"
-  integrity sha1-QyV06GhxPQGsvdIG01j9WdoButE=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-
-"@internationalized/number@^3.1.0":
+"@internationalized/number@^3.0.0", "@internationalized/number@^3.0.2", "@internationalized/number@^3.1.0":
   version "3.1.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@internationalized/number/-/number-3.1.0.tgz#441c262e43344371b17765cf691e54df5ab8726b"
   integrity sha512-CEts+2rIB4QveKeeF6xIHdn8aLVvUt5aiarkpCZgtMyYqfqo/ZBELf2UyhvLPGpRxcF24ClCISMTP9BTVreSAg==
@@ -3436,18 +3421,7 @@
     "@react-stately/overlays" "^3.1.1"
     "@react-types/dialog" "^3.3.0"
 
-"@react-aria/focus@^3.2.2", "@react-aria/focus@^3.2.3", "@react-aria/focus@^3.3.0", "@react-aria/focus@^3.4.0", "@react-aria/focus@^3.4.1", "@react-aria/focus@^3.5.0":
-  version "3.5.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/focus/-/focus-3.5.0.tgz#02b85f97d6114af1eccc0902ce40723b626cb7f9"
-  integrity sha1-Arhfl9YRSvHszAkCzkByO2Jst/k=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/interactions" "^3.6.0"
-    "@react-aria/utils" "^3.9.0"
-    "@react-types/shared" "^3.9.0"
-    clsx "^1.1.1"
-
-"@react-aria/focus@^3.5.5":
+"@react-aria/focus@^3.2.2", "@react-aria/focus@^3.2.3", "@react-aria/focus@^3.3.0", "@react-aria/focus@^3.4.0", "@react-aria/focus@^3.4.1", "@react-aria/focus@^3.5.0", "@react-aria/focus@^3.5.5":
   version "3.5.5"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/focus/-/focus-3.5.5.tgz#d5e3eb7af8612e8dafda214746084766e55c4b01"
   integrity sha512-scv+jhbQ25JCh36gu8a++edvdEFdlRScdQdnkJOB4NbHbYYfY36APtI70hgQHdfq9dDl5fJ9LMsH9hoF7X3gLw==
@@ -3475,20 +3449,7 @@
     "@react-types/grid" "3.0.0-beta.0"
     "@react-types/shared" "^3.7.0"
 
-"@react-aria/i18n@^3.1.2", "@react-aria/i18n@^3.3.0", "@react-aria/i18n@^3.3.1", "@react-aria/i18n@^3.3.2", "@react-aria/i18n@^3.3.3":
-  version "3.3.4"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/i18n/-/i18n-3.3.4.tgz#172b8bcff0273410e67af31f7d84e49dd3ada463"
-  integrity sha1-FyuLz/AnNBDmevMffYTkndOtpGM=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@internationalized/date" "3.0.0-alpha.1"
-    "@internationalized/message" "^3.0.2"
-    "@internationalized/number" "^3.0.2"
-    "@react-aria/ssr" "^3.0.3"
-    "@react-aria/utils" "^3.10.0"
-    "@react-types/shared" "^3.10.0"
-
-"@react-aria/i18n@^3.3.9":
+"@react-aria/i18n@^3.1.2", "@react-aria/i18n@^3.3.0", "@react-aria/i18n@^3.3.1", "@react-aria/i18n@^3.3.2", "@react-aria/i18n@^3.3.3", "@react-aria/i18n@^3.3.9":
   version "3.3.9"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/i18n/-/i18n-3.3.9.tgz#58c69e650bd00e94270e2dc31ad85ffd2ee10f04"
   integrity sha512-EOqiOu84NYH/CW0s/tt3yDqDsjHlrHdi5qzrOGpGN/BvxtA/4UkMBdi8TTKXdRk8oHUIdNW1z5mZxzxkLDy1sA==
@@ -3501,16 +3462,7 @@
     "@react-aria/utils" "^3.12.0"
     "@react-types/shared" "^3.12.0"
 
-"@react-aria/interactions@^3.2.1", "@react-aria/interactions@^3.3.3", "@react-aria/interactions@^3.4.0", "@react-aria/interactions@^3.5.0", "@react-aria/interactions@^3.5.1", "@react-aria/interactions@^3.6.0", "@react-aria/interactions@^3.7.0":
-  version "3.7.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.7.0.tgz#eb19c1068b557a6b6df1e1c4abef07de719e9f25"
-  integrity sha1-6xnBBotVemtt8eHEq+8H3nGenyU=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/utils" "^3.10.0"
-    "@react-types/shared" "^3.10.0"
-
-"@react-aria/interactions@^3.8.4":
+"@react-aria/interactions@^3.2.1", "@react-aria/interactions@^3.3.3", "@react-aria/interactions@^3.4.0", "@react-aria/interactions@^3.5.0", "@react-aria/interactions@^3.5.1", "@react-aria/interactions@^3.6.0", "@react-aria/interactions@^3.7.0", "@react-aria/interactions@^3.8.4":
   version "3.8.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/interactions/-/interactions-3.8.4.tgz#f3704470b70f150b753bba01a8714f97d6299906"
   integrity sha512-6EHFKK8pmjSJSKcBbduijPETKqE669XZ1VaEY8ubr6VnlVhCszvKHoxpU384CkNiDNLJOVkK6HDzPXsn3lxhng==
@@ -3519,17 +3471,7 @@
     "@react-aria/utils" "^3.12.0"
     "@react-types/shared" "^3.12.0"
 
-"@react-aria/label@^3.1.0", "@react-aria/label@^3.1.1", "@react-aria/label@^3.1.2", "@react-aria/label@^3.1.3", "@react-aria/label@^3.2.1":
-  version "3.2.1"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/label/-/label-3.2.1.tgz#e6562259e6b17e3856c4c3e0060903cf705d094b"
-  integrity sha1-5lYiWeaxfjhWxMPgBgkDz3BdCUs=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/utils" "^3.10.0"
-    "@react-types/label" "^3.5.0"
-    "@react-types/shared" "^3.10.0"
-
-"@react-aria/label@^3.2.5":
+"@react-aria/label@^3.1.0", "@react-aria/label@^3.1.1", "@react-aria/label@^3.1.2", "@react-aria/label@^3.1.3", "@react-aria/label@^3.2.1", "@react-aria/label@^3.2.5":
   version "3.2.5"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/label/-/label-3.2.5.tgz#f1aafc2531540e56df1221233bab343fcfb84dc2"
   integrity sha512-MkcPa7Ps/BsWTctH7IgVWtYENwrByfYMPmYdZCgotI0MiI6wK4LWwRaUQmfc7mWwJ7ns2NPyBRwrzJT4+RRbew==
@@ -3708,23 +3650,7 @@
     "@react-aria/utils" "^3.3.0"
     "@react-types/shared" "^3.2.1"
 
-"@react-aria/slider@^3.0.2":
-  version "3.0.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/slider/-/slider-3.0.2.tgz#aab475ce5f1dc9b560ed778d25bf4205b75c317d"
-  integrity sha1-qrR1zl8dybVg7XeNJb9CBbdcMX0=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/focus" "^3.3.0"
-    "@react-aria/i18n" "^3.3.1"
-    "@react-aria/interactions" "^3.4.0"
-    "@react-aria/label" "^3.1.2"
-    "@react-aria/utils" "^3.8.0"
-    "@react-stately/radio" "^3.3.1"
-    "@react-stately/slider" "^3.0.2"
-    "@react-types/radio" "^3.1.1"
-    "@react-types/slider" "^3.0.1"
-
-"@react-aria/slider@^3.0.7":
+"@react-aria/slider@^3.0.2", "@react-aria/slider@^3.0.7":
   version "3.0.8"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/slider/-/slider-3.0.8.tgz#2a6474f7f61e232776e7ba691db015999d1894ea"
   integrity sha512-sQ3E1Cv3xpATCXCzZtEQe5VI/2oj1UBIs3sH7AsOxifdJql7gLhjCjfmsR73wocjiVHYkIHOA7tQrqA61j+t3g==
@@ -3752,14 +3678,7 @@
     "@react-types/button" "^3.4.1"
     "@react-types/shared" "^3.8.0"
 
-"@react-aria/ssr@^3.0.2", "@react-aria/ssr@^3.0.3", "@react-aria/ssr@^3.1.0":
-  version "3.1.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/ssr/-/ssr-3.1.0.tgz#b7163e6224725c30121932a8d1422ef91d1fab22"
-  integrity sha1-txY+YiRyXDASGTKo0UIu+R0fqyI=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-
-"@react-aria/ssr@^3.1.2":
+"@react-aria/ssr@^3.0.2", "@react-aria/ssr@^3.0.3", "@react-aria/ssr@^3.1.0", "@react-aria/ssr@^3.1.2":
   version "3.1.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/ssr/-/ssr-3.1.2.tgz#665a6fd56385068c7417922af2d0d71b0618e52d"
   integrity sha512-amXY11ImpokvkTMeKRHjsSsG7v1yzzs6yeqArCyBIk60J3Yhgxwx9Cah+Uu/804ATFwqzN22AXIo7SdtIaMP+g==
@@ -3832,18 +3751,7 @@
     "@react-types/shared" "^3.6.0"
     "@react-types/tooltip" "^3.1.1"
 
-"@react-aria/utils@^3.10.0", "@react-aria/utils@^3.11.0", "@react-aria/utils@^3.3.0", "@react-aria/utils@^3.6.0", "@react-aria/utils@^3.8.0", "@react-aria/utils@^3.8.1", "@react-aria/utils@^3.8.2", "@react-aria/utils@^3.9.0":
-  version "3.11.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.11.0.tgz#215ea23a5435672a822cd713bdb8217972c5c80b"
-  integrity sha1-IV6iOlQ1ZyqCLNcTvbgheXLFyAs=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/ssr" "^3.1.0"
-    "@react-stately/utils" "^3.3.0"
-    "@react-types/shared" "^3.10.1"
-    clsx "^1.1.1"
-
-"@react-aria/utils@^3.12.0":
+"@react-aria/utils@^3.10.0", "@react-aria/utils@^3.11.0", "@react-aria/utils@^3.12.0", "@react-aria/utils@^3.3.0", "@react-aria/utils@^3.6.0", "@react-aria/utils@^3.8.0", "@react-aria/utils@^3.8.1", "@react-aria/utils@^3.8.2", "@react-aria/utils@^3.9.0":
   version "3.12.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-aria/utils/-/utils-3.12.0.tgz#39d0f37525e050356c4de725c85d9b10e7a5c0d9"
   integrity sha512-1TMrE7UpgTgQHgW3z0r6Zo4CTUDwNsZEwzg+mQVub8ZalonhuNs5OrulUn+lRIsGELNktGNkeh/29WsS1Od8eg==
@@ -4027,16 +3935,7 @@
     "@react-stately/utils" "^3.2.2"
     "@react-types/overlays" "^3.5.1"
 
-"@react-stately/radio@^3.2.0", "@react-stately/radio@^3.2.1", "@react-stately/radio@^3.3.1":
-  version "3.3.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/radio/-/radio-3.3.2.tgz#be489c1e7fe00fadff579776a2e2f4908fae029f"
-  integrity sha1-vkicHn/gD63/V5d2ouL0kI+uAp8=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-stately/utils" "^3.2.2"
-    "@react-types/radio" "^3.1.2"
-
-"@react-stately/radio@^3.3.6":
+"@react-stately/radio@^3.2.0", "@react-stately/radio@^3.2.1", "@react-stately/radio@^3.3.1", "@react-stately/radio@^3.3.6":
   version "3.3.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/radio/-/radio-3.3.6.tgz#c0cea40c9625818b211544c5028341f128e7f4f7"
   integrity sha512-G35xuEIk7TkqA3SGGlSVUyrkauf7bNVxq0/ELSM1mhrAuKF6nXkLqK2kI5LtOrngk/ZrsVFtfJYN+H6cBNhu2Q==
@@ -4079,18 +3978,7 @@
     "@react-stately/utils" "^3.3.0"
     "@react-types/shared" "^3.10.1"
 
-"@react-stately/slider@^3.0.2":
-  version "3.0.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/slider/-/slider-3.0.2.tgz#11be662c71cf82ad5727b188ea51d16e67a874c9"
-  integrity sha1-Eb5mLHHPgq1XJ7GI6lHRbmeodMk=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/i18n" "^3.3.1"
-    "@react-aria/utils" "^3.8.0"
-    "@react-stately/utils" "^3.2.1"
-    "@react-types/slider" "^3.0.1"
-
-"@react-stately/slider@^3.0.7", "@react-stately/slider@^3.0.8":
+"@react-stately/slider@^3.0.2", "@react-stately/slider@^3.0.7", "@react-stately/slider@^3.0.8":
   version "3.0.8"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/slider/-/slider-3.0.8.tgz#2f48825cfe10b20c011252e155bc0d562ce76c6c"
   integrity sha512-LuS4eKVuf2+vLBz5nqox7kHiGDtLCdWEm6mKDQ3xXKMhGj61fCXrefO6W+wBrOzBcCPDKQu+eHmOLhHtPG4LTw==
@@ -4142,14 +4030,7 @@
     "@react-stately/utils" "^3.2.2"
     "@react-types/shared" "^3.8.0"
 
-"@react-stately/utils@^3.1.1", "@react-stately/utils@^3.2.1", "@react-stately/utils@^3.2.2", "@react-stately/utils@^3.3.0":
-  version "3.3.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/utils/-/utils-3.3.0.tgz#99866c5788539268a06035acd5925b25bb4cedde"
-  integrity sha1-mYZsV4hTkmigYDWs1ZJbJbtM7d4=
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-
-"@react-stately/utils@^3.4.1":
+"@react-stately/utils@^3.1.1", "@react-stately/utils@^3.2.1", "@react-stately/utils@^3.2.2", "@react-stately/utils@^3.3.0", "@react-stately/utils@^3.4.1":
   version "3.4.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/utils/-/utils-3.4.1.tgz#56f049aa1704d338968b5973c796ee606e9c0c62"
   integrity sha512-mjFbKklj/W8KRw1CQSpUJxHd7lhUge4i00NwJTwGxbzmiJgsTWlKKS/1rBf48ey9hUBopXT5x5vG/AxQfWTQug==
@@ -4223,14 +4104,7 @@
   dependencies:
     "@react-types/shared" "^3.5.0"
 
-"@react-types/label@^3.5.0":
-  version "3.5.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/label/-/label-3.5.0.tgz#c7093871f42c62e1b5523f61a0856a2f58d4cf2a"
-  integrity sha1-xwk4cfQsYuG1Uj9hoIVqL1jUzyo=
-  dependencies:
-    "@react-types/shared" "^3.9.0"
-
-"@react-types/label@^3.5.4":
+"@react-types/label@^3.5.0", "@react-types/label@^3.5.4":
   version "3.5.4"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/label/-/label-3.5.4.tgz#56bf50332845a161761902876cc5e6034521b48b"
   integrity sha512-LuShOdEYokzn58SKUIo7kQdN3CV5Rs+HCxmvix4+Uw6BAYG9/aqqoKKolTA9klbM8rvvEzDqFzNZZHeMTBoN6w==
@@ -4288,14 +4162,7 @@
   dependencies:
     "@react-types/shared" "^3.7.1"
 
-"@react-types/radio@^3.1.1", "@react-types/radio@^3.1.2":
-  version "3.1.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/radio/-/radio-3.1.2.tgz#a2a6aed62c0036b9c3647edd9ce944aa80624346"
-  integrity sha1-oqau1iwANrnDZH7dnOlEqoBiQ0Y=
-  dependencies:
-    "@react-types/shared" "^3.8.0"
-
-"@react-types/radio@^3.1.6":
+"@react-types/radio@^3.1.1", "@react-types/radio@^3.1.2", "@react-types/radio@^3.1.6":
   version "3.1.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/radio/-/radio-3.1.6.tgz#4de6e29468b8806ccf1f85acc77bf816e80c3757"
   integrity sha512-OmsYEdKnBIGIwX66u2dcbETWeWKlu0bKCzRUDQiTAUpBZOON6s2/34AvknzEGhmxj/OlQB916UzpUHH1EaiqdA==
@@ -4316,24 +4183,12 @@
   dependencies:
     "@react-types/shared" "^3.10.1"
 
-"@react-types/shared@^3.10.0", "@react-types/shared@^3.10.1", "@react-types/shared@^3.2.1", "@react-types/shared@^3.4.0", "@react-types/shared@^3.5.0", "@react-types/shared@^3.6.0", "@react-types/shared@^3.7.0", "@react-types/shared@^3.7.1", "@react-types/shared@^3.8.0", "@react-types/shared@^3.9.0":
-  version "3.10.1"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.10.1.tgz#16cd3038361dee63f351fa4d0fd25d90480a149b"
-  integrity sha1-Fs0wODYd7mPzUfpND9JdkEgKFJs=
-
-"@react-types/shared@^3.12.0":
+"@react-types/shared@^3.10.0", "@react-types/shared@^3.10.1", "@react-types/shared@^3.12.0", "@react-types/shared@^3.2.1", "@react-types/shared@^3.4.0", "@react-types/shared@^3.5.0", "@react-types/shared@^3.6.0", "@react-types/shared@^3.7.0", "@react-types/shared@^3.7.1", "@react-types/shared@^3.8.0", "@react-types/shared@^3.9.0":
   version "3.12.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.12.0.tgz#31a53fcec5c3159fd0d5c67f7e3f3876c7d19908"
   integrity sha512-faGr9xOjtMlkQPfA1i36iUmWS/hpPPtxIwdAtBi6p7rCejmShMLFZ2YN4DxzbJUCVubF2S1+rMMIKuXG17DkEw==
 
-"@react-types/slider@^3.0.1":
-  version "3.0.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/slider/-/slider-3.0.2.tgz#81313a14caa30ee27feeb66a50a3854a6923ca56"
-  integrity sha1-gTE6FMqjDuJ/7rZqUKOFSmkjylY=
-  dependencies:
-    "@react-types/shared" "^3.8.0"
-
-"@react-types/slider@^3.0.6":
+"@react-types/slider@^3.0.1", "@react-types/slider@^3.0.6":
   version "3.0.6"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/slider/-/slider-3.0.6.tgz#df483751802a1c10269603e8c2705ef433579e8b"
   integrity sha512-WZMEzRcyicn5a3T+2yoGxYQPHWDLqz5KxHvS5bGkUvXykXnvUvrSG3HSytZbQgFQKlb58iafYU35Ll9wFqWBjA==
@@ -6178,12 +6033,7 @@
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/pretty-hrtime/-/pretty-hrtime-1.0.1.tgz#72a26101dc567b0d68fd956cf42314556e42d601"
   integrity sha1-cqJhAdxWew1o/ZVs9CMUVW5C1gE=
 
-"@types/prop-types@*":
-  version "15.7.4"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
-  integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
-
-"@types/prop-types@^15.0.0":
+"@types/prop-types@*", "@types/prop-types@^15.0.0":
   version "15.7.5"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
@@ -15067,7 +14917,7 @@ interpret@^2.2.0:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/interpret/-/interpret-2.2.0.tgz#1a78a0b5965c40a5416d007ad6f50ad27c417df9"
   integrity sha1-GnigtZZcQKVBbQB61vUK0nxBffk=
 
-intl-messageformat@^9.12.0:
+intl-messageformat@^9.12.0, intl-messageformat@^9.6.12:
   version "9.13.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/intl-messageformat/-/intl-messageformat-9.13.0.tgz#97360b73bd82212e4f6005c712a4a16053165468"
   integrity sha512-7sGC7QnSQGa5LZP7bXLDhVDtQOeKGeBFGHF2Y8LVBwYZoQZCgWeKoPGTa5GMG8g/TzDgeXuYJQis7Ggiw2xTOw==
@@ -15075,15 +14925,6 @@ intl-messageformat@^9.12.0:
     "@formatjs/ecma402-abstract" "1.11.4"
     "@formatjs/fast-memoize" "1.2.1"
     "@formatjs/icu-messageformat-parser" "2.1.0"
-    tslib "^2.1.0"
-
-intl-messageformat@^9.6.12:
-  version "9.8.2"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/intl-messageformat/-/intl-messageformat-9.8.2.tgz#5528334506f9af660ec3f7ea8f3584bba77af8d4"
-  integrity sha1-VSgzRQb5r2YOw/fqjzWEu6d6+NQ=
-  dependencies:
-    "@formatjs/fast-memoize" "1.1.2"
-    "@formatjs/icu-messageformat-parser" "2.0.9"
     tslib "^2.1.0"
 
 invariant@^2.0.0, invariant@^2.1.0, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
@@ -21720,12 +21561,7 @@ prism-react-renderer@1.2.1:
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prism-react-renderer/-/prism-react-renderer-1.2.1.tgz#392460acf63540960e5e3caa699d851264e99b89"
   integrity sha1-OSRgrPY1QJYOXjyqaZ2FEmTpm4k=
 
-prismjs@^1.21.0, prismjs@^1.25.0, prismjs@^1.6.0, prismjs@^1.8.4, prismjs@~1.27.0:
-  version "1.27.0"
-  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prismjs/-/prismjs-1.27.0.tgz#bb6ee3138a0b438a3653dd4d6ce0cc6510a45057"
-  integrity sha1-u27jE4oLQ4o2U91NbODMZRCkUFc=
-
-prismjs@^1.27.0:
+prismjs@^1.21.0, prismjs@^1.25.0, prismjs@^1.27.0, prismjs@^1.6.0, prismjs@^1.8.4:
   version "1.28.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prismjs/-/prismjs-1.28.0.tgz#0d8f561fa0f7cf6ebca901747828b149147044b6"
   integrity sha512-8aaXdYvl1F7iC7Xm1spqSaY/OJBpYW3v+KJ+F17iYxvdc8sfjW194COK5wVhMZX45tGteiBQgdvD/nhxcRwylw==
@@ -21736,6 +21572,11 @@ prismjs@~1.17.0:
   integrity sha1-5mn8vUzdhzw1ECiBwzsU0NaFGb4=
   optionalDependencies:
     clipboard "^2.0.0"
+
+prismjs@~1.27.0:
+  version "1.27.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/prismjs/-/prismjs-1.27.0.tgz#bb6ee3138a0b438a3653dd4d6ce0cc6510a45057"
+  integrity sha1-u27jE4oLQ4o2U91NbODMZRCkUFc=
 
 private@^0.1.6, private@~0.1.5:
   version "0.1.8"
