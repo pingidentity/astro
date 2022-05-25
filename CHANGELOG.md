@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.13.0...@pingux/astro@1.14.0) (2022-05-24)
+
+
+### Bug Fixes
+
+* [UIP-5430] Popover failed accessibility test ([04ee92e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/04ee92e60560a057da4fe488180146af76623540))
+
+
+### Features
+
+* [UIP-5368] IconButton a11y Improvement ([6dc0c33](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6dc0c33cedd347e74f9c5154ccda0ed832945e0f))
+* [UIP-5402] Allow copying partial text from CopyText ([d2367de](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d2367de2e78d7977363a774be9692bbce9cc33d9))
+* [UIP-5410] Attribute mapping read only field recipe ([e472b5c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e472b5c987ab0b4cb4c405df635ba4c7756b39e1))
+* [UIP-5413] Attributes and PingOne mappings recipe ([1d4d6e5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1d4d6e5ffddaa41981690c5c4a38e8e275394d8f))
+* [UIP-5440] Trial exp industry buttons recipe ([35c212b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/35c212bf197f9fd0a15888eda52b190240992584))
+
+
+
+
+
 # [1.13.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.12.0...@pingux/astro@1.13.0) (2022-05-17)
 
 
