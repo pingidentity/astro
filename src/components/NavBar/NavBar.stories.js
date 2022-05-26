@@ -302,7 +302,7 @@ export const Default = () => (
         {logo}
       </Link>
     </Box>
-    <Separator marginTop="lg" marginBottom="sm" backgroundColor="neutral.60" />
+    <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" />
     <Box
       variant="navBar.sectionContainer"
       paddingBottom="xl"
