@@ -48,6 +48,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   } = props;
 
   const [searchValue, setSearchValue] = useState('');
+  const [selectedKeys, setSelectedKeys] = useState([]);
 
   const breadcrumbsRef = useRef();
   const overlayRef = React.useRef();
@@ -96,6 +97,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   const handleSelectionChange = useCallback(
     (selectedItemSet) => {
       const [selectedItemKey] = selectedItemSet;
+      setSelectedKeys(selectedItemSet);
       onSelectionChange(selectedItemKey);
       handlePopoverClose();
     },
@@ -108,7 +110,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     items,
     filter: imperativeItemsFilter || filterNodesWithChildren,
     onSelectionChange: handleSelectionChange,
-    selectedKeys: [],
+    selectedKeys,
     selectionMode: 'single',
     disallowEmptySelection: false,
   };
@@ -177,6 +179,8 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     </Text>
   );
 
+  const [selectedValue] = selectedKeys;
+
   const ItemsSelect = (
     <>
       <Button
@@ -184,9 +188,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         onPress={handlePopoverOpen}
         ref={triggerRef}
         variant="environmentBreadcrumb.current"
-        aria-label={`${
-          typeof selectedItem === 'string' ? selectedItem : 'Selected Item'
-        }`}
+        aria-label={`${(typeof selectedItem === 'string' ? selectedItem : selectedValue) || 'Selected Item'}`}
       >
         {selectedItem}
         <Icon
