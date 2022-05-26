@@ -14,6 +14,7 @@ const navBarSeparator = {
   ...base,
   width: '100%',
   backgroundColor: 'neutral.60',
+  my: 0,
 };
 
 const navBarSubtitleSeparator = {
