@@ -566,10 +566,15 @@ const environmentBreadcrumb = {
     color: 'neutral.30',
     fontSize: 'md',
     fontWeight: 1,
-    '&.is-hovered, &.is-focused': {
+    padding: '4px',
+    '&.is-hovered': {
       color: 'active',
       textDecoration: 'none',
       boxShadow: 'none',
+    },
+    '&.is-focused': {
+      borderRadius: '2px',
+      boxShadow: '0 0 0 1px #4462ED',
     },
     '&.is-pressed': {
       color: 'accent.20',
