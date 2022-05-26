@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
-import { Item, Section, OverlayProvider, Chip, Box, Text } from '../../index';
+import { Item, Section, Chip, Box, Text } from '../../index';
 
 export default {
   title: 'EnvironmentBreadcrumb',
@@ -72,28 +72,26 @@ export const Default = (args) => {
   };
 
   return (
-    <OverlayProvider>
-      <EnvironmentBreadcrumb
-        {...args}
-        items={defaultEnvironments}
-        name="Globochem"
-        selectedItem={envNode}
-        onSelectionChange={handleSelectionChange}
-      >
-        {({ name, isSandbox }) => (
-          <Item key={name} textValue={name}>
-            {name}
-            {isSandbox ? (
-              <Chip
-                label="SANDBOX"
-                variant="boxes.environmentChip"
-                bg="neutral.40"
-              />
-            ) : null}
-          </Item>
-        )}
-      </EnvironmentBreadcrumb>
-    </OverlayProvider>
+    <EnvironmentBreadcrumb
+      {...args}
+      items={defaultEnvironments}
+      name="Globochem"
+      selectedItem={envNode}
+      onSelectionChange={handleSelectionChange}
+    >
+      {({ name, isSandbox }) => (
+        <Item key={name} textValue={name}>
+          {name}
+          {isSandbox ? (
+            <Chip
+              label="SANDBOX"
+              variant="boxes.environmentChip"
+              bg="neutral.40"
+            />
+          ) : null}
+        </Item>
+      )}
+    </EnvironmentBreadcrumb>
   );
 };
 
@@ -158,41 +156,39 @@ export const WithSections = () => {
   );
 
   return (
-    <OverlayProvider>
-      <EnvironmentBreadcrumb
-        items={environments}
-        name="Globochem"
-        selectedItem={envNode}
-        onSelectionChange={handleEnvPress}
-      >
-        {({ name: sectionName, options: sectionOptions }) => (
-          <Section
-            key={sectionName}
-            title={sectionName}
-            items={sectionOptions}
-          >
-            {({ name: itemName, options: itemOptions, isSandbox }) => (
-              <Item
-                key={`${sectionName}-${itemName}`}
-                childItems={itemOptions}
-                textValue={itemName}
-              >
-                <Box isRow>
-                  {itemName}
-                  {isSandbox ? (
-                    <Chip
-                      label="SANDBOX"
-                      variant="boxes.environmentChip"
-                      bg="neutral.40"
-                    />
-                  ) : null}
-                </Box>
-              </Item>
-            )}
-          </Section>
-        )}
-      </EnvironmentBreadcrumb>
-    </OverlayProvider>
+    <EnvironmentBreadcrumb
+      items={environments}
+      name="Globochem"
+      selectedItem={envNode}
+      onSelectionChange={handleEnvPress}
+    >
+      {({ name: sectionName, options: sectionOptions }) => (
+        <Section
+          key={sectionName}
+          title={sectionName}
+          items={sectionOptions}
+        >
+          {({ name: itemName, options: itemOptions, isSandbox }) => (
+            <Item
+              key={`${sectionName}-${itemName}`}
+              childItems={itemOptions}
+              textValue={itemName}
+            >
+              <Box isRow>
+                {itemName}
+                {isSandbox ? (
+                  <Chip
+                    label="SANDBOX"
+                    variant="boxes.environmentChip"
+                    bg="neutral.40"
+                  />
+                ) : null}
+              </Box>
+            </Item>
+          )}
+        </Section>
+      )}
+    </EnvironmentBreadcrumb>
   );
 };
 

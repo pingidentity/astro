@@ -9,14 +9,13 @@ import { render, screen } from '../../utils/testUtils/testWrapper';
 import Messages, { messagesReducerStory, multiMessagesReducerStory } from '.';
 import Button from '../Button';
 
-jest.mock('@react-aria/live-announcer');
+jest.mock('@react-aria/live-announcer', () => ({ announce: jest.fn() }));
 
+const mockAnnounce = announce;
 const testId = 'test-messages';
-
 const defaultProps = {
   'data-testid': testId,
 };
-
 const items = [
   {
     key: 'message1',
@@ -140,7 +139,7 @@ describe('announcements', () => {
 
   test('should announce on render', () => {
     getWithDynamicList({ items });
-    items.forEach(item => expect(announce).toHaveBeenCalledWith(item.text, 'polite'));
+    items.forEach(item => expect(mockAnnounce).toHaveBeenCalledWith(item.text, 'polite'));
   });
 
   test('should announce on adding item', () => {
@@ -152,7 +151,7 @@ describe('announcements', () => {
     const button = screen.getByText('Click me!');
     userEvent.click(button);
     expect(messages.childElementCount).toBe(1);
-    expect(announce).toHaveBeenCalledWith('New message 1', 'polite');
+    expect(mockAnnounce).toHaveBeenCalledWith('New message 1', 'polite');
   });
 });
 
