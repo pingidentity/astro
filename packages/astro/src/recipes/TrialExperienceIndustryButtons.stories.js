@@ -664,7 +664,7 @@ const realtySVG = props => (
   </svg>
 );
 
-const Buttons = [
+const buttons = [
   { name: 'Retail', icon: retailSVG },
   { name: 'Financial Services', icon: financialSVG },
   { name: 'Manufacturing', icon: manufacturingSVG },
@@ -692,8 +692,7 @@ export const Default = () => {
             isRow
             sx={gridContainerStyles}
           >
-            {Buttons.map((button) => {
-            return (
+            {buttons.map(button => (
               <Button sx={buttonStyle} key={button.name}>
                 <Box alignItems="center">
                   <Icon icon={button.icon} size="58" mb="xs" mt="25px" />
@@ -702,8 +701,7 @@ export const Default = () => {
                   </Text>
                 </Box>
               </Button>
-            );
-          })}
+            ))}
           </Box>
           <Box isRow justifyContent="center" pt="30px">
             <Button variant="link">Skip</Button>
