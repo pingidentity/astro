@@ -72,7 +72,7 @@ const Button = forwardRef((props, ref) => {
       sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       variant={variant}
       {...others}
-      {...mergeProps(hoverProps, focusProps, { ...buttonProps, tabIndex })}
+      {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
     >
       {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
       {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
