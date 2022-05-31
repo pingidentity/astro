@@ -8,6 +8,7 @@ import {
   OverlayProvider,
   Text,
 } from '../index';
+import useModalState from '../hooks/useModalState';
 
 export default {
   title: 'Recipes/TrialExperienceButtons',
@@ -678,9 +679,14 @@ const buttons = [
 ];
 
 export const Default = () => {
+  const state = useModalState();
   return (
     <OverlayProvider>
-      <Modal isOpen hasCloseButton contentProps={{ maxWidth: '880px', px: '40px', pb: '45px', overflowY: 'scroll' }}>
+      <Button onPress={state.open} aria-label="Open modal">
+        Open Modal
+      </Button>
+      {state.isOpen && (
+      <Modal isOpen={state.isOpen} onClose={state.close} hasCloseButton contentProps={{ maxWidth: '880px', px: '40px', pb: '45px', overflowY: 'scroll' }}>
         <Box contentProps>
           <Text sx={headingTextStyle} >
             Choose Your Industry
@@ -711,6 +717,7 @@ export const Default = () => {
           </Box>
         </Box>
       </Modal>
+      )}
     </OverlayProvider>
   );
 };
