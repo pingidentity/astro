@@ -42,6 +42,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
         isRow
         sx={{
           alignItems: 'center',
+          minHeight: 42,
         }}
         as="li"
         key={`li-${child.key}`}

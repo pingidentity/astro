@@ -27,6 +27,7 @@ const itemHeaderContainer = {
 };
 
 const sectionContainer = {
+  pt: '10px',
   height: '100%',
   maxHeight: '100%',
   overflowY: 'overlay !important',

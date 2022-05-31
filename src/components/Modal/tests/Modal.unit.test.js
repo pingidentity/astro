@@ -21,6 +21,7 @@ axeTest(getComponent);
 test('default modal', () => {
   getComponent();
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
+  expect(screen.queryByRole('dialog')).toHaveAttribute('aria-modal', 'true');
   // Close button not rendered by default
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
 });
@@ -130,4 +131,16 @@ test('should render a custom close button if hasCloseButton is true and custom b
   getComponent({ hasCloseButton: true, closeButton: <MyButton /> });
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
   expect(screen.queryByTestId('test')).toBeInTheDocument();
+});
+
+test('shouldn\'t auto focus the first tabbable element', () => {
+  getComponent({ hasCloseButton: true });
+  const button = screen.queryByRole('button');
+  expect(button).not.toHaveFocus();
+});
+
+test('should auto focus the first tabbable element if "hasAutoFocus" is true', () => {
+  getComponent({ hasCloseButton: true, hasAutoFocus: true });
+  const button = screen.queryByRole('button');
+  expect(button).toHaveFocus();
 });

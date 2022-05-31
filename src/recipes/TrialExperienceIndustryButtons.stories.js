@@ -8,6 +8,7 @@ import {
   OverlayProvider,
   Text,
 } from '../index';
+import useModalState from '../hooks/useModalState';
 
 export default {
   title: 'Recipes/TrialExperienceButtons',
@@ -664,7 +665,7 @@ const realtySVG = props => (
   </svg>
 );
 
-const Buttons = [
+const buttons = [
   { name: 'Retail', icon: retailSVG },
   { name: 'Financial Services', icon: financialSVG },
   { name: 'Manufacturing', icon: manufacturingSVG },
@@ -678,9 +679,14 @@ const Buttons = [
 ];
 
 export const Default = () => {
+  const state = useModalState();
   return (
     <OverlayProvider>
-      <Modal isOpen hasCloseButton contentProps={{ maxWidth: '880px', px: '40px', pb: '45px', overflowY: 'scroll' }}>
+      <Button onPress={state.open} aria-label="Open modal">
+        Open Modal
+      </Button>
+      {state.isOpen && (
+      <Modal isOpen={state.isOpen} onClose={state.close} hasCloseButton contentProps={{ maxWidth: '880px', px: '40px', pb: '45px', overflowY: 'scroll' }}>
         <Box contentProps>
           <Text sx={headingTextStyle} >
             Choose Your Industry
@@ -692,8 +698,7 @@ export const Default = () => {
             isRow
             sx={gridContainerStyles}
           >
-            {Buttons.map((button) => {
-            return (
+            {buttons.map(button => (
               <Button sx={buttonStyle} key={button.name}>
                 <Box alignItems="center">
                   <Icon icon={button.icon} size="58" mb="xs" mt="25px" />
@@ -702,8 +707,7 @@ export const Default = () => {
                   </Text>
                 </Box>
               </Button>
-            );
-          })}
+            ))}
           </Box>
           <Box isRow justifyContent="center" pt="30px">
             <Button variant="link">Skip</Button>
@@ -713,6 +717,7 @@ export const Default = () => {
           </Box>
         </Box>
       </Modal>
+      )}
     </OverlayProvider>
   );
 };

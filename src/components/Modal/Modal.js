@@ -20,6 +20,7 @@ const Modal = forwardRef((props, ref) => {
   const {
     className,
     closeButton,
+    hasAutoFocus,
     hasCloseButton,
     id,
     isClosedOnBlur,
@@ -76,7 +77,7 @@ const Modal = forwardRef((props, ref) => {
   return (
     <OverlayContainer>
       <Box className={classNames} variant="modal.container" {...others} {...containerProps}>
-        <FocusScope contain restoreFocus autoFocus>
+        <FocusScope contain restoreFocus autoFocus={hasAutoFocus}>
           <Box
             variant="modal.content"
             {...propsContentProps}
@@ -84,20 +85,21 @@ const Modal = forwardRef((props, ref) => {
             {...dialogProps}
             {...modalProps}
             ref={modalRef}
+            aria-modal
           >
             {
               hasCloseButton &&
               (
                 closeButton ??
-                  <IconButton
-                    aria-label="Close modal window"
-                    data-id="icon-button__close-modal-window"
-                    size={22}
-                    variant="modalCloseButton"
-                    onPress={onClose}
-                  >
-                    <Icon icon={CloseIcon} />
-                  </IconButton>
+                <IconButton
+                  aria-label="Close modal window"
+                  data-id="icon-button__close-modal-window"
+                  size={22}
+                  variant="modalCloseButton"
+                  onPress={onClose}
+                >
+                  <Icon icon={CloseIcon} />
+                </IconButton>
               )
             }
             {
@@ -124,6 +126,8 @@ Modal.propTypes = {
   closeButton: PropTypes.node,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
+  /** Whether to auto focus the first focusable element in the focus scope on mount. */
+  hasAutoFocus: PropTypes.bool,
   /** Whether the modal has a visible close button. */
   hasCloseButton: PropTypes.bool,
   /** Whether the overlay should close when focus is lost or moves outside it. */
