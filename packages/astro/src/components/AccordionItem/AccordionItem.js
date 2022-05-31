@@ -63,7 +63,7 @@ const AccordionItem = forwardRef((props, ref) => {
         sx={{ display: 'flex', px: '0', height: 'unset' }}
         variant="accordionHeader"
         className={buttonClasses}
-        {...mergeProps(hoverProps, focusProps, accordionButtonProps, raButtonProps, buttonProps)}
+        {...mergeProps(hoverProps, accordionButtonProps, raButtonProps, buttonProps, focusProps)}
       >
         <Text className={buttonClasses} variant="accordion.accordionTitle">
           {item.props.label}

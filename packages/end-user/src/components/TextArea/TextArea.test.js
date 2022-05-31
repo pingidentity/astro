@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import TextArea, { textAreaTypes } from './TextArea';
 import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
+import 'mutationobserver-shim';
 
 window.__DEV__ = true;
 

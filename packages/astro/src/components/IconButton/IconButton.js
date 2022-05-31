@@ -54,7 +54,7 @@ const IconButton = forwardRef((props, ref) => {
       className={classNames}
       aria-label={ariaLabel}
       sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
-      {...mergeProps(hoverProps, focusProps, buttonProps, others)}
+      {...mergeProps(buttonProps, others, hoverProps, focusProps)}
     >
       {children}
     </ThemeUIIconButton>
