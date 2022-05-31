@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.14.0...@pingux/astro@1.15.0) (2022-05-31)
+
+
+### Bug Fixes
+
+* [UIP-5398] fix spacing of separator in navbar ([1940860](https://gitlab.corp.pingidentity.com/ux/pingux/commit/19408606a3540f9614809e9c75e54617f3c9a396))
+* [UIP-5472] Adding interactive close to trial exp recipe ([6ade508](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6ade508c3f4c01bb597298ea8b3239394234451b))
+* Re-order merge props so they have the correct precedence ([cd1b65c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cd1b65c2f27ef444c71f86d6d12fbb5ff768bc40))
+
+
+### Features
+
+* [UIP-5367] EnvironmentBreadcrumbs A11Y Improvement ([f113e33](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f113e333c1d2ccc2d1199eeb705cc7eab8f60fd5))
+* [UIP-5377] Modal A11Y Improvement ([dfe1c1e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dfe1c1ec707ec5ccd6c77c608510464f80fa1c33))
+* [UIP-5437] Trial status bar recipe ([2f898a0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2f898a0285a5d67698c1872a7ba6c330aaeba611))
+
+
+
+
+
 # [1.14.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.13.0...@pingux/astro@1.14.0) (2022-05-24)
 
 

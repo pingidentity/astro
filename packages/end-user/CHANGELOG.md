@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.3...@pingux/end-user@2.4.0) (2022-05-31)
+
+
+### Features
+
+* [UIP-5367] EnvironmentBreadcrumbs A11Y Improvement ([f113e33](https://gitlab.corp.pingidentity.com/ux/end-user/commit/f113e333c1d2ccc2d1199eeb705cc7eab8f60fd5))
+
+
+
+
+
 ## [2.3.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.2...@pingux/end-user@2.3.3) (2022-04-21)
 
 
