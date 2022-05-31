@@ -32,7 +32,7 @@ const Link = forwardRef((props, ref) => {
       ref={linkRef}
       role="link"
       {...others}
-      {...mergeProps(hoverProps, focusProps, pressProps, linkProps)}
+      {...mergeProps(hoverProps, pressProps, linkProps, focusProps)}
     />
   );
 });
