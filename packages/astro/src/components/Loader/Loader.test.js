@@ -16,7 +16,7 @@ axeTest(getComponent);
 
 test('default loader', () => {
   getComponent();
-  const loader = screen.getByRole('progressbar');
+  const loader = screen.getByRole('alert');
   expect(loader).toHaveAttribute('data-testid', testId);
   expect(loader).toBeInTheDocument();
 });

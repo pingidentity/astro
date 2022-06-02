@@ -268,8 +268,8 @@ describe('async loading', () => {
     const { rerender } = getComponent({ items: [], isLoading: true });
 
     const button = screen.getByRole('button');
-    const loader = within(button).getByRole('progressbar');
-    expect(loader).toHaveAttribute('aria-label', 'Loading...');
+    const loader = within(button).getByRole('alert');
+    expect(loader).toHaveAttribute('aria-label', 'Loading in progress');
     expect(loader).not.toHaveAttribute('aria-valuenow');
 
     getComponent({ items: [] }, { renderFn: rerender });
@@ -288,7 +288,7 @@ describe('async loading', () => {
     let options = within(listbox).getAllByRole('option');
     expect(options.length).toBe(2);
 
-    const loader = within(listbox).getByRole('progressbar');
+    const loader = within(listbox).getByRole('alert');
     expect(loader).toHaveAttribute('aria-label', 'Loading more...');
     expect(loader).not.toHaveAttribute('aria-valuenow');
 
