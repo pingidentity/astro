@@ -72,7 +72,7 @@ test('button loading hides children and shows loader', () => {
 
   expect(childWrapper).toBeInTheDocument();
   expect(childWrapper).not.toBeVisible();
-  expect(screen.getByRole('progressbar')).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toBeInTheDocument();
 });
 
 test('button renders children when not loading', () => {

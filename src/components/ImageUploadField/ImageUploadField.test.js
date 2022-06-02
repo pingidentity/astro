@@ -194,7 +194,7 @@ test('should render loader if isLoading prop is true', () => {
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
 
   getComponent({ isLoading: true }, { renderFn: rerender });
-  expect(screen.queryByRole('progressbar')).toBeInTheDocument();
+  expect(screen.queryByRole('alert')).toBeInTheDocument();
 });
 
 test('should render loader if isLoading prop is true', () => {
@@ -202,7 +202,7 @@ test('should render loader if isLoading prop is true', () => {
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
 
   getComponent({ isLoading: true }, { renderFn: rerender });
-  expect(screen.queryByRole('progressbar')).toBeInTheDocument();
+  expect(screen.queryByRole('alert')).toBeInTheDocument();
 });
 
 test('should render image preview and menu when previewImage prop is supplied', () => {
