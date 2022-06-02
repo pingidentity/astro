@@ -140,8 +140,8 @@ test('displays a loader while loading', () => {
   const { rerender } = getComponent({ items: [], isLoading: true });
 
   const button = screen.getByRole('button');
-  const loader = within(button).getByRole('progressbar');
-  expect(loader).toHaveAttribute('aria-label', 'Loading...');
+  const loader = within(button).getByRole('alert');
+  expect(loader).toHaveAttribute('aria-label', 'Loading in progress');
   expect(loader).not.toHaveAttribute('aria-valuenow');
 
   getComponent({ items: [] }, { renderFn: rerender });
