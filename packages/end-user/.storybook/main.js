@@ -6,8 +6,8 @@ const main = require('../../../shared/storybook/v6/main');
 main.addons = [
 	'@storybook/addon-actions',
 	'@storybook/addon-links',
-	'@storybook/addon-knobs/register',
-	'@storybook/addon-notes/register',
+	'@storybook/addon-knobs',
+	'@storybook/addon-notes',
 	{
 		name: '@storybook/addon-docs',
 		options: {
