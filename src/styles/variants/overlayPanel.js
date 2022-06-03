@@ -1,7 +1,7 @@
 const overlayPanel = {
   position: 'fixed',
   overflowY: 'scroll',
-  zIndex: 1,
+  zIndex: 10,
   top: 0,
   bottom: 0,
   right: '-100%',
@@ -34,7 +34,7 @@ const overlayPanel = {
 
 const overlayPanelInner = {
   position: 'absolute',
-  zIndex: 2,
+  zIndex: 9,
   bottom: 0,
   right: 0,
   background: 'white',
