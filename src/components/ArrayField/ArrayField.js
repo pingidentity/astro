@@ -128,7 +128,7 @@ const ArrayField = (props) => {
           aria-label="Add field"
           variant="text"
           onPress={onFieldAdd}
-          sx={{ width: 'fit-content' }}
+          sx={{ width: 'fit-content', mt: 'xs' }}
         >
           <Text variant="label" color="active">
             {addButtonLabel}
