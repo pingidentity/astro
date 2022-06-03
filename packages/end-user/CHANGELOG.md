@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.0...@pingux/end-user@2.4.1) (2022-06-03)
+
+
+### Bug Fixes
+
+* end-user storybook build errors ([dd51103](https://gitlab.corp.pingidentity.com/ux/end-user/commit/dd5110325702c71de43d58f647c051689559cd18))
+
+
+
+
+
 # [2.4.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.3.3...@pingux/end-user@2.4.0) (2022-05-31)
 
 
