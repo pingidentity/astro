@@ -44,6 +44,18 @@ export default {
         type: 'code',
       },
     },
+    a11y: {
+      config: {
+        /** The "color-contrast" test ends with an "incomplete" status
+         * since pseudo-element applies to the same container as selected values.
+         * A  workaround to disable "color-contrast" incomplete tests.
+         */
+        rules: [{
+          id: 'color-contrast',
+          enabled: false,
+        }],
+      },
+    },
   },
 };
 

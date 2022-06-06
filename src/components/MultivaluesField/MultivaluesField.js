@@ -349,7 +349,12 @@ MultivaluesField.propTypes = {
   isReadOnly: PropTypes.bool,
   /** Whether user input is required on the input before form submission. */
   isRequired: PropTypes.bool,
-  /** The list of items. */
+  /** The list of items.
+   *
+   * **Note:** Every item needs to have key and name properties.
+   *
+   * `Array<{key: string, name: string}>`
+   */
   items: isIterableProp,
   /** The rendered label for the field. */
   label: PropTypes.string,
