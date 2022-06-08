@@ -381,7 +381,7 @@ describe('loadingState', () => {
     const { rerender } = getComponent({ loadingState: loadingStates.LOADING });
     act(() => { jest.advanceTimersByTime(500); });
     // First time load will show progress bar so user can know that items are being fetched
-    expect(screen.getByRole('progressbar')).toBeInTheDocument();
+    expect(screen.getByRole('alert')).toBeInTheDocument();
 
     getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender });
 
@@ -515,7 +515,7 @@ describe('loadingState', () => {
     const listbox = screen.getByRole('listbox');
     expect(listbox).toBeVisible();
 
-    const loader = within(listbox).getByRole('progressbar');
+    const loader = within(listbox).getByRole('alert');
     expect(loader).toBeInTheDocument();
     expect(loader).toHaveAttribute('aria-label', 'Loading more...');
   });

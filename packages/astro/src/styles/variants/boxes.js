@@ -83,7 +83,7 @@ const listBoxSectionTitle = {
 };
 
 export const chip = {
-  cursor: 'pointer',
+  cursor: 'default',
   p: '3px 5px 4px 5px',
   alignItems: 'center',
   justifyContent: 'center',

@@ -16,6 +16,7 @@ const SaveableTextInput = ({
                     className="saveable-textinput__save"
                     onClick={onSave}
                     role="button"
+                    aria-label="Save"
                 ></a>
                 <TextInput
                     placeholder="Text"
@@ -27,6 +28,7 @@ const SaveableTextInput = ({
                 className="saveable-textinput__cancel"
                 role="button"
                 onClick={onCancel}
+                aria-label="Cancel"
             ></a>
         </div>
     );
