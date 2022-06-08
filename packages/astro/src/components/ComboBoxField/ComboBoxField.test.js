@@ -45,6 +45,34 @@ const ComboBoxWithCustomFilter = () => {
   );
 };
 
+const ComboBoxWithAddOption = () => {
+  const [options, setOptions] = useState(items);
+  const [inputValue, setInputValue] = useState('');
+  const [selectedKey, setSelectedKey] = useState('');
+
+  const onSelectionChange = (key) => {
+    if (key && !options.find(({ name }) => name === key)) {
+      setOptions([...options, { key, name: key }]);
+    }
+    setInputValue(key);
+    setSelectedKey(key);
+  };
+
+  return (
+    <ComboBoxField
+      label="Example label"
+      defaultItems={options}
+      inputValue={inputValue}
+      selectedKey={selectedKey}
+      onInputChange={setInputValue}
+      onSelectionChange={onSelectionChange}
+      hasAddOption
+    >
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </ComboBoxField>
+  );
+};
+
 beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
@@ -575,6 +603,47 @@ test('onSelectionChange works properly with custom value', () => {
   // Should fire when input is cleared
   userEvent.type(input, '{selectall}{backspace}{enter}');
   expect(onSelectionChange).toHaveBeenCalledWith('');
+});
+
+test('add option shows when "hasAddOption" is provided', () => {
+  render(<ComboBoxWithAddOption />);
+
+  const input = screen.queryByRole('combobox');
+  expect(input).toHaveValue('');
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const inputValue = 'New value';
+  userEvent.type(input, inputValue);
+  expect(input).toHaveValue(inputValue);
+
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+
+  const option = screen.queryByRole('option');
+  expect(option).toBeInTheDocument();
+  expect(option).toHaveClass('is-focused');
+  expect(option).toHaveTextContent(`ADD: ${inputValue}`);
+});
+
+test('if "hasAddOption" is provided, then custom value is added to listbox on blur', () => {
+  render(<ComboBoxWithAddOption />);
+
+  const input = screen.queryByRole('combobox');
+  const inputValue = 'New value';
+  userEvent.type(input, inputValue);
+  expect(input).toHaveValue(inputValue);
+
+  // blur input
+  userEvent.tab();
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  userEvent.click(input);
+  expect(input).toHaveValue(inputValue);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+
+  const options = screen.queryAllByRole('option');
+  expect(options[options.length - 1]).toHaveTextContent(inputValue);
 });
 
 test('should have no accessibility violations', async () => {
