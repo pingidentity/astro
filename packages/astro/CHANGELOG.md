@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.15.0...@pingux/astro@1.16.0) (2022-06-08)
+
+
+### Bug Fixes
+
+* [UIP-5364] make chip icon not wrapped in a button aria-hidden ([cdf7df3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cdf7df39dcce043faaba97f54f491057d1dc4174))
+* Added 5px padding to add btn ([1445f77](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1445f77cbb8b8ece4c6d21249c3277e409dfd87c))
+
+
+### Features
+
+* [UIP-5374] change Loader role to alert ([27e9cfa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/27e9cfa578b80f164ad617f28c1dd9fa92346d10))
+* [UIP-5456] Multivalues selectedKeys not showing selected options in external app ([8342005](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8342005406d0d1c351eda6a38c7070ce21ebb19b))
+
+
+
+
+
 # [1.15.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.14.0...@pingux/astro@1.15.0) (2022-05-31)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.1...@pingux/end-user@2.4.2) (2022-06-08)
+
+
+### Bug Fixes
+
+* [UIP-5480] added aria labels to cancel and save btns ([229b462](https://gitlab.corp.pingidentity.com/ux/end-user/commit/229b462a6a767aaca1d22424e14ae09c3dfe9eb2))
+
+
+
+
+
 ## [2.4.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.0...@pingux/end-user@2.4.1) (2022-06-03)
 
 
