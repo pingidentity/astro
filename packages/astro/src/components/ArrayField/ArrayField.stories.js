@@ -5,6 +5,7 @@ import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from
 
 export default {
   title: 'Form/ArrayField',
+  component: ArrayField,
   parameters: {
     actions: {
       argTypesRegex: '^on.*',
