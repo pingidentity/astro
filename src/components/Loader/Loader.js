@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { useProgressBar } from '@react-aria/progress';
 
 import Box from '../Box';
 
@@ -11,18 +10,15 @@ import Box from '../Box';
 
 const Loader = forwardRef((props, ref) => {
   const { size, ...others } = props;
-  const { progressBarProps } = useProgressBar({
-    isIndeterminate: true,
-    'aria-label': 'Loading...',
-    ...props,
-  });
   return (
     <Box
       ref={ref}
       isRow
       fontSize={size}
       variant="loader.container"
-      {...progressBarProps}
+      role="alert"
+      aria-live="assertive"
+      aria-label="Loading in progress"
       {...others}
     >
       <Box variant="loader.dotLeft" />

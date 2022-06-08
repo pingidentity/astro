@@ -63,7 +63,7 @@ export const ChipWithIcon = () => (
     </Chip>
     <div style={{ padding: '5px' }} />
     <Chip label="Chip with Icon" bg="green">
-      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" />
+      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" aria-hidden="true" focusable="false" />
     </Chip>
   </>
 );

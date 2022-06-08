@@ -118,13 +118,13 @@ test('clicking an item fires "onSelectionChange" handler and returns Set with ke
 
 test('renders loader, if a loader component is passed in, and state is loading', () => {
   getComponent({ loadingState: loadingStates.LOADING });
-  const loader = screen.getByRole('progressbar');
+  const loader = screen.getByRole('alert');
   expect(loader).toBeInTheDocument();
 });
 
 test('renders loader, if a loader component is passed in, and state is loadingMore', () => {
   getComponent({ loadingState: loadingStates.LOADING_MORE });
-  const loader = screen.getByRole('progressbar');
+  const loader = screen.getByRole('alert');
   expect(loader).toBeInTheDocument();
 });
 
