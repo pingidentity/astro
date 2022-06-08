@@ -1,6 +1,10 @@
 {
   "name": "@pingux/end-user",
+<<<<<<< HEAD
   "version": "2.4.1-alpha.5",
+=======
+  "version": "2.4.1",
+>>>>>>> master
   "description": "Style framework for end-user pages.",
   "main": "./end-user.css",
   "author": "ux-development@pingidentity.com",
