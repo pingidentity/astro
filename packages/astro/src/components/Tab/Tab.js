@@ -23,6 +23,11 @@ import {
   Button,
 } from '../..';
 
+/**
+ * Tab control for dividing up closely-related content.
+ * Typically used as a child of the Tabs component.
+ */
+
 export const CollectionTab = forwardRef((props, ref) => {
   const {
     className,

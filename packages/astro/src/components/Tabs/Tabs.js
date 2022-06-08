@@ -14,6 +14,10 @@ import { usePropWarning } from '../../hooks';
 
 export const TabsContext = React.createContext({});
 
+/**
+ * Tabs are used to divide content, navigate to other views, and indicate work progress.
+ */
+
 const Tabs = forwardRef((props, ref) => {
   const {
     children,
