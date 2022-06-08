@@ -39,6 +39,12 @@ export function useListLayout(state) {
   return layout;
 }
 
+/**
+ * ListViews are used to display a list of items. Users can select,
+ * view, or edit items in this list. This virtualized component supports
+ * asynchronous data in infinitely scrollable lists.
+*/
+
 const ListView = forwardRef((props, ref) => {
   const {
     disabledKeys,
