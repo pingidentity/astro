@@ -8,6 +8,12 @@ import { mergeProps } from '@react-aria/utils';
 import { useStatusClasses, usePropWarning, useAriaLabelWarning, useDeprecationWarning } from '../../hooks';
 import Loader from '../Loader';
 
+/**
+ * Buttons are used to trigger actions or events.
+ * This component is based on the [Button - Theme-UI](https://theme-ui.com/components/button/)
+ * and includes a variety of styles, such as primary action, secondary action, or warning.
+ */
+
 const Button = forwardRef((props, ref) => {
   const {
     className,

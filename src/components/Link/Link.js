@@ -7,6 +7,12 @@ import { useHover, usePress } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 
+/**
+ * Link uses the [Link - Theme-UI](https://theme-ui.com/components/link) component and
+ * React Aria's [useLink](https://react-spectrum.adobe.com/react-aria/useLink.html) hook.
+ *
+ */
+
 const Link = forwardRef((props, ref) => {
   const { className, isDisabled, onPress, ...others } = props;
 
