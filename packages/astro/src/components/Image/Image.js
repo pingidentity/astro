@@ -13,6 +13,7 @@ import {
   usePropWarning,
   useStatusClasses,
   useFallbackImage,
+  useAriaLabelWarning,
 } from '../../hooks';
 import { Box } from '../../index';
 import { neutral } from '../../styles/colors';
@@ -30,6 +31,7 @@ const Image = forwardRef((props, ref) => {
     fallbackTimeout,
     isDisabled,
     src,
+    alt,
     // eslint-disable-next-line react/prop-types
     sx,
     ...others
@@ -58,6 +60,9 @@ const Image = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => imgRef.current);
   usePropWarning(props, 'disabled', 'isDisabled');
+
+  const ariaLabel = props['aria-label'] || alt;
+  useAriaLabelWarning('Image', ariaLabel);
 
   const { hoverProps, isHovered } = useHover(props);
   const { classNames } = useStatusClasses(className, {
@@ -115,7 +120,7 @@ const Image = forwardRef((props, ref) => {
     <ThemeUIImage
       className={classNames}
       ref={imgRef}
-      alt="Image"
+      alt={alt}
       role="img"
       src={imgSrc}
       sx={sx}
@@ -149,6 +154,12 @@ Image.propTypes = {
   fallbackImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**  Time in milliseconds that component should wait for a response from src address. */
   fallbackTimeout: PropTypes.number,
+  /** Descriptive text for an image. This is *highly* recommended in most cases.
+   * See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-alt).
+   * */
+  alt: PropTypes.string,
+  /** Defines a string value that labels the current element. */
+  'aria-label': PropTypes.string,
 };
 
 Image.defaultProps = {

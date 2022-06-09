@@ -56,6 +56,14 @@ test('image shows disabled status', () => {
   expect(img).toHaveClass('is-disabled');
 });
 
+test('image with alt text', () => {
+  getComponent({ alt: 'Test' });
+  act(() => {
+    fallbackImageObj.onImageLoad();
+  });
+  expect(screen.getByAltText('Test')).toBeInTheDocument();
+});
+
 test('image source is able to be changed', () => {
   const src2 = 'second-src';
   const { rerender } = getComponent();
