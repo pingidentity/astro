@@ -456,6 +456,7 @@ const rocker = {
   '&.is-selected': {
     bg: 'active',
     color: 'white',
+    zIndex: '1',
   },
   '&.is-focused': {
     ...defaultFocus,
