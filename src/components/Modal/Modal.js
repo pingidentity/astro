@@ -16,6 +16,12 @@ import Icon from '../Icon';
 import Text from '../Text';
 import { useStatusClasses, useDeprecationWarning } from '../../hooks';
 
+/**
+  * Modals are overlays that interrupt a user’s workflow to convey an important message.
+  * The component must be wrapped in an OverlayProvider, and the first child should be a trigger,
+  * such as Button.
+*/
+
 const Modal = forwardRef((props, ref) => {
   const {
     className,

@@ -7,6 +7,11 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import Message from './Message';
 import Box from '../Box';
 
+/**
+ *Messages are intended to display non-critical alerts that
+ attract the users’ attention, but do not interfere or temporarily block their work.
+ */
+
 const Messages = forwardRef((props, ref) => {
   const { items, onClose, ...others } = props;
   const state = useListState(props);

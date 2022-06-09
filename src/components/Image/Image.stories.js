@@ -31,9 +31,9 @@ export default {
   },
 };
 
-export const Default = ({ ...args }) => <Image {...args} />;
+export const Default = ({ ...args }) => <Image {...args} alt="Ping identity square logo" />;
 
-export const Avatar = () => <Image src={pingImg} variant="images.avatar" />;
+export const Avatar = () => <Image src={pingImg} variant="images.avatar" alt="Ping identity round avatar" />;
 
 export const CustomSizeAndRadius = () => (
   <Image
@@ -44,10 +44,11 @@ export const CustomSizeAndRadius = () => (
       borderRadius: 8,
       bg: 'neutral.90',
     }}
+    alt="Terry Crews in a red suite"
   />
 );
 
-export const Disabled = () => <Image src={pingImg} isDisabled />;
+export const Disabled = () => <Image src={pingImg} isDisabled alt="Ping identity square logo" />;
 
 export const FallbackImage = () => {
   return (
@@ -58,6 +59,7 @@ export const FallbackImage = () => {
         width: '150px',
         height: '150px',
       }}
+      alt="Random image"
     />
   );
 };
@@ -74,6 +76,7 @@ export const WithSkeletonLoadSuccess = ({ useLocalSrc }) => {
         width: '150px',
         height: '150px',
       }}
+      alt="Random image"
     />
   );
 };
@@ -90,6 +93,7 @@ export const WithSkeletonLoadTimeout = () => {
         width: '150px',
         height: '150px',
       }}
+      alt="Random image"
     />
   );
 };
@@ -112,7 +116,8 @@ export const UpdatingImageSrc = () => {
         width: '200px',
         height: '200px',
         mt: '25px',
-      }}
+        }}
+        alt={image === pingImg ? 'Ping identity square logo' : 'Terry Crews in a red suite'}
       />
     </Box>
   );

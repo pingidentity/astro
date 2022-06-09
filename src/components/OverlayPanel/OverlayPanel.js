@@ -5,6 +5,10 @@ import Box from '../Box';
 import { useStatusClasses, useOverlayPanelState } from '../../hooks';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
+/**
+ * In Astro, side panels are used to show details and present modal interactions.
+ */
+
 const OverlayPanel = forwardRef((props, ref) => {
   const {
     children,

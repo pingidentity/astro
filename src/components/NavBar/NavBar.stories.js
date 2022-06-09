@@ -20,7 +20,7 @@ import {
 
 export default {
   title: 'NavBar',
-  component: 'NavBar',
+  component: NavBar,
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
 };
 

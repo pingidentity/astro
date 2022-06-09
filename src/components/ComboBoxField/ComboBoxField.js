@@ -4,6 +4,7 @@ import React, {
   useState,
   forwardRef,
   useImperativeHandle,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
@@ -45,13 +46,14 @@ const ComboBoxField = forwardRef((props, ref) => {
     onFocusChange,
     onKeyDown,
     onKeyUp,
+    hasAddOption,
     hasCustomValue,
     hasNoEmptySelection,
     defaultSelectedKey,
     selectedKey,
     onSelectionChange,
-    defaultItems,
-    items,
+    defaultItems: initialDefaultItems,
+    items: initialItems,
     onOpenChange,
     loadingState,
     onLoadMore,
@@ -80,13 +82,11 @@ const ComboBoxField = forwardRef((props, ref) => {
     onFocusChange,
     onKeyDown,
     onKeyUp,
-    allowsCustomValue: hasCustomValue,
+    allowsCustomValue: hasAddOption || hasCustomValue,
     disallowEmptySelection: hasNoEmptySelection,
     defaultSelectedKey,
     selectedKey,
     onSelectionChange,
-    defaultItems,
-    items,
     onOpenChange,
     loadingState,
     onLoadMore,
@@ -110,16 +110,40 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   /* istanbul ignore next */
   const onSelectionChangeHandler = (key) => {
-    const newVal = key || selectedKey || '';
+    let newVal = key || selectedKey || '';
+    if (hasAddOption && selectedKey !== inputValue) {
+      newVal = inputValue;
+    }
     if (onSelectionChange) onSelectionChange(newVal);
   };
+
+  const shouldShowAddOption = hasAddOption && inputValue && selectedKey !== inputValue;
+  const addOption = `ADD: ${inputValue}`;
+
+  const getItemsArr = (initialArr) => {
+    if (initialArr && shouldShowAddOption) {
+      return [...initialArr, { name: addOption, key: addOption }];
+    }
+    return initialArr;
+  };
+
+  const defaultItems = getItemsArr(initialDefaultItems);
+  const items = getItemsArr(initialItems);
 
   const { contains } = useFilter({ sensitivity: 'base' });
   const state = useComboBoxState({
     ...comboBoxOptions,
-    onSelectionChange: hasCustomValue ? onSelectionChangeHandler : onSelectionChange,
+    defaultItems,
+    items,
+    onSelectionChange: (hasAddOption || hasCustomValue)
+      ? onSelectionChangeHandler
+      : onSelectionChange,
     defaultFilter: (typeof defaultFilter !== 'undefined' ? defaultFilter : contains),
   });
+
+  useEffect(() => {
+    if (shouldShowAddOption) state.selectionManager.setFocusedKey(addOption);
+  }, [shouldShowAddOption, state, addOption]);
 
   const { buttonProps, inputProps, listBoxProps, labelProps } = useComboBox(
     {
@@ -235,6 +259,8 @@ const ComboBoxField = forwardRef((props, ref) => {
 });
 
 ComboBoxField.propTypes = {
+  /* Whether or not adding new options to the list is enabled. */
+  hasAddOption: PropTypes.bool,
   /** Whether the ComboBox allows a non-item matching input value to be set. */
   hasCustomValue: PropTypes.bool,
   /** Whether the collection allows empty selection. */
