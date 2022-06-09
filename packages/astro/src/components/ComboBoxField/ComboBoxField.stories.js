@@ -386,3 +386,35 @@ export const CustomDefaultFilter = () => {
     </OverlayProvider>
   );
 };
+
+export const ControlledWithAddOption = () => {
+  const [options, setOptions] = useState(items);
+  const [inputValue, setInputValue] = useState('');
+  const [selectedKey, setSelectedKey] = useState('');
+
+  const onSelectionChange = (key) => {
+    // Add new option to options array
+    if (key && !options.find(({ name }) => name === key)) {
+      setOptions([...options, { key, name: key }]);
+    }
+    setInputValue(key);
+    setSelectedKey(key);
+  };
+
+  return (
+    <OverlayProvider>
+      <ComboBoxField
+        label="Example label"
+        defaultItems={options}
+        {...actions}
+        inputValue={inputValue}
+        selectedKey={selectedKey}
+        onInputChange={setInputValue}
+        onSelectionChange={onSelectionChange}
+        hasAddOption
+      >
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </ComboBoxField>
+    </OverlayProvider>
+  );
+};

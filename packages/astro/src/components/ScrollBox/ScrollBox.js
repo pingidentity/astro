@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import Box from '../Box';
 import useStatusClasses from '../../hooks/useStatusClasses';
 
+/**
+ * Scrollbox is a container that allows content to be scrolled
+ */
+
 const ScrollBox = forwardRef((props, ref) => {
   const {
     maxHeight,
@@ -13,7 +17,7 @@ const ScrollBox = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const [scrollTopPostion, setScrollTopPosition] = useState(0);
+  const [scrollTopPosition, setScrollTopPosition] = useState(0);
   const [isTopShadowShowing, setIsTopShadowShowing] = useState(false);
   const [isBottomShadowShowing, setIsBottomShadowShowing] = useState(true);
 
@@ -32,7 +36,7 @@ const ScrollBox = forwardRef((props, ref) => {
         setIsTopShadowShowing(outerRef.current.firstChild.scrollTop !== 0);
       }
     }
-  }, [scrollTopPostion]);
+  }, [scrollTopPosition]);
 
   /* istanbul ignore next */
   const onScroll = () => {

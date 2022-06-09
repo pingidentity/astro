@@ -11,6 +11,11 @@ import Label from '../Label';
 import statuses from '../../utils/devUtils/constants/statuses';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 
+/**
+ * Displays array collections providing useful functions and
+ * optimizations for arrays.
+ */
+
 const ArrayField = (props) => {
   const {
     addButtonLabel,
@@ -51,7 +56,7 @@ const ArrayField = (props) => {
   const onFieldValueChange = useCallback(
     (event, fieldId) => {
       let tempValue = event;
-      // Checks if value receieved is a key or event
+      // Checks if value received is a key or event
       if (typeof event !== 'string') {
         tempValue = event.target.value;
       }

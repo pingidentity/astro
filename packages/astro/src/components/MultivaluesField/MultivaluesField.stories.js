@@ -5,7 +5,9 @@ export default {
   title: 'Form/MultivaluesField',
   component: MultivaluesField,
   argTypes: {
-    direction: {},
+    direction: {
+      defaultValue: 'bottom',
+    },
     hasAutoFocus: {},
     hasNoStatusIndicator: {},
     isDisabled: {},
@@ -69,30 +71,79 @@ const items = [
   { id: 7, name: 'Shark', key: 'Shark' },
 ];
 
-export const Default = args => (
-  // const items = [
-  // { id: 1, name: 'Aardvark', key: 'Aardvark' },
-  // { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
-  // { id: 3, name: 'Snake', key: 'Snake' },
-  // { id: 4, name: 'Frog', key: 'Frog' },
-  // { id: 5, name: 'Seal', key: 'Seal' },
-  // { id: 6, name: 'Orangutan', key: 'Orangutan' },
-  // { id: 7, name: 'Shark', key: 'Shark' },
-  // ];
-  <OverlayProvider>
-    <MultivaluesField items={items} {...args}>
-      {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
-    </MultivaluesField>
-  </OverlayProvider>
-);
+const setOverlayStyle = (direction, isOpen, mr, ml, mt) => {
+  return {
+    marginRight: direction === 'right' && isOpen ? mr : 0,
+    marginLeft: direction === 'left' && isOpen ? ml : 0,
+    marginTop: direction === 'top' && isOpen ? mt : 0,
+  };
+};
 
-export const WithCustomValues = args => (
-  <OverlayProvider>
-    <MultivaluesField items={items} mode="non-restrictive" {...args}>
-      {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
-    </MultivaluesField>
-  </OverlayProvider>
-);
+export const Default = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    // const items = [
+    // { id: 1, name: 'Aardvark', key: 'Aardvark' },
+    // { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
+    // { id: 3, name: 'Snake', key: 'Snake' },
+    // { id: 4, name: 'Frog', key: 'Frog' },
+    // { id: 5, name: 'Seal', key: 'Seal' },
+    // { id: 6, name: 'Orangutan', key: 'Orangutan' },
+    // { id: 7, name: 'Shark', key: 'Shark' },
+    // ];
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
+    >
+      <MultivaluesField
+        items={items}
+        {...args}
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
+
+export const WithCustomValues = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
+    >
+      <MultivaluesField
+        items={items}
+        mode="non-restrictive"
+        {...args}
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
 
 WithCustomValues.argTypes = {
   mode: {
@@ -100,68 +151,153 @@ WithCustomValues.argTypes = {
   },
 };
 
-export const WithDisabledKeys = args => (
-  <OverlayProvider>
-    <MultivaluesField
-      disabledKeys={['Aardvark']}
-      items={items}
-      {...args}
-    >
-      {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
-    </MultivaluesField>
-  </OverlayProvider>
-);
+export const WithDisabledKeys = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
 
-export const Uncontrolled = args => (
-  <OverlayProvider>
-    <MultivaluesField
-      defaultSelectedKeys={['Aardvark', 'Snake']}
-      items={items}
-      {...args}
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
-      {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
-    </MultivaluesField>
-  </OverlayProvider>
-);
+      <MultivaluesField
+        disabledKeys={['Aardvark']}
+        items={items}
+        {...args}
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
+
+export const Uncontrolled = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
+    >
+      <MultivaluesField
+        defaultSelectedKeys={['Aardvark', 'Snake']}
+        items={items}
+        {...args}
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
 
 export const Controlled = (args) => {
   const [selectedKeys, setSelectedKeys] = useState(['Aardvark', 'Snake']);
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
 
   return (
-    <OverlayProvider>
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
+    >
       <MultivaluesField
         label="Field Label"
         {...args}
         items={items}
         onSelectionChange={setSelectedKeys}
         selectedKeys={selectedKeys}
+        onOpenChange={onOpenChange}
       >
-        {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
+        {item => (
+          <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
       </MultivaluesField>
     </OverlayProvider>
   );
 };
 
-export const WithCustomSize = args => (
-  <Box sx={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-    <Box width={300}>
-      <OverlayProvider>
-        <MultivaluesField items={items} {...args}>
-          {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
-        </MultivaluesField>
-      </OverlayProvider>
-    </Box>
-  </Box>
-);
+export const WithCustomSize = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
 
-export const WithReadOnlyValues = args => (
-  <OverlayProvider>
-    <MultivaluesField
-      readOnlyKeys={['Aardvark', 'Snake']}
-      items={items}
-      {...args}
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <Box sx={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+      <Box width={300}>
+        <OverlayProvider
+        // note: spacing for demo purpose only so that the select list renders in the correct place
+          style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
+        >
+          <MultivaluesField
+            items={items}
+            {...args}
+            onOpenChange={onOpenChange}
+          >
+            {item => (
+              <Item key={item.key} data-id={item.name}>
+                {item.name}
+              </Item>
+            )}
+          </MultivaluesField>
+        </OverlayProvider>
+      </Box>
+    </Box>
+  );
+};
+
+export const WithReadOnlyValues = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
-      {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
-    </MultivaluesField>
-  </OverlayProvider>
-);
+      <MultivaluesField
+        readOnlyKeys={['Aardvark', 'Snake']}
+        items={items}
+        {...args}
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
