@@ -26,7 +26,7 @@ const CollapsiblePanelItem = forwardRef((props, ref) => {
       {iconElement && (isDefaultSelected
         ? iconElement
         : (
-          <IconButton sx={{ width: 13, height: 13, alignSelf: 'auto', '& path': { fill: 'inherit' } }} onPress={onPress}>
+          <IconButton sx={{ width: 20, height: 20, alignSelf: 'auto', '& path': { fill: 'inherit' } }} onPress={onPress}>
             {iconElement}
           </IconButton>
         )
