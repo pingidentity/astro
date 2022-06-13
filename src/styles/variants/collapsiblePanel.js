@@ -1,8 +1,17 @@
 const collapsiblePanelContainer = {
-  overflowX: 'hidden',
   pr: 'sm',
-  transition: 'right 500ms',
   minHeight: '80vh',
+
+  '>div': {
+    visibility: 'hidden',
+    width: 0,
+    transition: 'width .3s ease',
+  },
+
+  '&.is-open>div': {
+    visibility: 'visible',
+    width: '300px',
+  },
 };
 
 const collapsiblePanelContent = {
@@ -28,8 +37,6 @@ const collapsiblePanelContent = {
 
 const collapsiblePanelContainerTitle = {
   alignContent: 'center',
-  bg: 'accent.99',
-  display: 'flex',
   fontWeight: '500',
   minHeight: '40px',
   alignItems: 'center',
@@ -37,6 +44,11 @@ const collapsiblePanelContainerTitle = {
   flexWrap: 'wrap',
   maxWidth: 'max-content !important',
   margin: '0',
+  width: '0',
+
+  '.is-open &': {
+    width: '300px',
+  },
 };
 
 const collapsiblePanelBadge = {
@@ -51,6 +63,17 @@ const collapsiblePanelBadge = {
   pl: '3px !important',
   alignItems: 'center',
   fontWeight: 500,
+
+  '.is-open &.title-badge': {
+    minWidth: '0',
+    display: 'flex',
+    transition: 'min-width .3s ease',
+    width: 'max-content',
+  },
+  '&.title-badge': {
+    display: 'none',
+    width: '0',
+  },
 };
 
 const collapsiblePanellItem = {

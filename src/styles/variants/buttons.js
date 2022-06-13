@@ -135,7 +135,7 @@ const collapsiblePanelToggle = {
   bg: 'accent.99',
   height: '40px',
   minWidth: 'max-content',
-  pl: '0px',
+  pl: 'xs',
   ml: '10px',
   path: {
     fill: 'active',
@@ -145,6 +145,8 @@ const collapsiblePanelToggle = {
   },
   '&.is-focused': {
     ...defaultFocus,
+    outlineOffset: '0',
+    zIndex: 1,
   },
   '&.is-pressed': {
     backgroundColor: 'accent.99',
