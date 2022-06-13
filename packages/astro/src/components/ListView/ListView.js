@@ -120,6 +120,8 @@ const ListView = forwardRef((props, ref) => {
 
   const focusedItem = gridCollection.getFirstKey();
 
+  delete gridProps.onMouseDown;
+
   return (
     <ListViewContext.Provider value={{ state, keyboardDelegate }}>
       <Virtualizer

@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
-import Clear from 'mdi-react/CloseIcon';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import FilterIcon from 'mdi-react/FilterIcon';
+import CheckIcon from 'mdi-react/CheckIcon';
+import Clear from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import AccountIcon from 'mdi-react/AccountIcon';
 import CollapsiblePanel from './CollapsiblePanel';
@@ -11,6 +11,7 @@ import {
   Breadcrumbs,
   Box,
   Button,
+  CheckboxField,
   Chip,
   ListView,
   Item,
@@ -46,7 +47,7 @@ export default {
   },
 };
 
-const items = [
+const data = [
   {
     id: '1',
     icon: 'Group',
@@ -54,6 +55,7 @@ const items = [
     name: 'Avengers',
     subtitle: 'Default',
     chipValue: '25',
+    isDefaultSelected: true,
   },
   {
     id: '2',
@@ -78,6 +80,7 @@ const items = [
     name: 'Digital Investors',
     subtitle: 'N America',
     chipValue: '12',
+    isDefaultSelected: true,
   },
   {
     id: '5',
@@ -121,28 +124,6 @@ const items = [
   },
 ];
 
-const mockData = [
-  {
-    id: '10',
-    key: 'Avengers',
-    name: 'Avengers',
-  },
-  {
-    id: '11',
-    key: 'Digital Investors',
-    name: 'Digital Investors',
-  },
-  {
-    id: '12',
-    key: 'A very long title as well',
-    name: 'A very long title as well',
-  },
-];
-
-const changeSelection = (selected) => {
-  console.log(selected);
-};
-
 export const Default = args => (
   <CollapsiblePanel
     {...args}
@@ -150,8 +131,31 @@ export const Default = args => (
 );
 
 export const CollapsiblePanelWithBadge = (args) => {
+  const [items, setItems] = useState(data);
   const { state, onClose } = useOverlayPanelState();
   const triggerRef = useRef();
+
+  const selectedItems = useMemo(
+    () => items
+      .filter(item => item.isDefaultSelected || item.isSelected)
+      // sort elements to display "default selected" at first place
+      .sort((a, b) => Number(!!b.isDefaultSelected) - Number(!!a.isDefaultSelected)),
+    [items],
+  );
+
+  const changeSelection = (key) => {
+    setItems((prevItems) => {
+      return prevItems.map((el) => {
+        if (el.key === key) {
+          return {
+            ...el,
+            isSelected: !el.isSelected,
+          };
+        }
+        return el;
+      });
+    });
+  };
 
   return (
     <OverlayProvider>
@@ -195,7 +199,7 @@ export const CollapsiblePanelWithBadge = (args) => {
           </Box>
         </Box>
         <Box pl="md" pt="25px">
-          <Box isRow justifyContent="space-between">
+          <Box isRow justifyContent="space-between" sx={{ marginTop: '5px' }}>
             <Box width="100%">
               <SearchField
                 icon={SearchIcon}
@@ -204,22 +208,29 @@ export const CollapsiblePanelWithBadge = (args) => {
                 width="100%"
                 mt="0px"
                 mr="sm"
+                mb="xs"
               />
               <ListView
                 items={items}
-                style={{ width: '108%' }}
+                style={{ width: '100%', outline: 'none' }}
               >
                 {item => (
                   <Item
                     key={item.key}
                     textValue={item.name}
                     data-id={item.key}
-                    listItemProps={{ sx: {
-                      bg: 'white',
-                      '&.is-hovered': {
-                        bg: 'accent.99',
+                    listItemProps={{
+                      isRow: true,
+                      sx: {
+                        bg: 'white',
+                        width: '100%',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        '&.is-hovered': {
+                          bg: 'accent.99',
+                        },
                       },
-                } }}
+                    }}
                   >
                     <Box isRow>
                       <Icon
@@ -243,12 +254,39 @@ export const CollapsiblePanelWithBadge = (args) => {
                         <Text variant="listSubtitle">{item.subtitle}</Text>
                       </Box>
                     </Box>
+                    {item.isDefaultSelected
+                      ? (
+                        <Box
+                          isRow
+                          sx={{
+                            border: '1px solid',
+                            borderColor: 'neutral.80',
+                            borderRadius: 5,
+                            minHeight: 22,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            p: 'xs',
+                            maxWidth: '50%',
+                          }}
+                        >
+                          <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} />
+                          <Text sx={{ fontSize: 'sm', pl: 'xs', maxHeight: 32, overflow: 'hidden' }}>Added by Filter</Text>
+                        </Box>
+                      )
+                      : (
+                        <CheckboxField
+                          controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
+                          onChange={() => changeSelection(item.key)}
+                          isSelected={selectedItems.some(el => el.key === item.key)}
+                        />
+                      )
+                    }
                   </Item>
-            )}
+                )}
               </ListView>
             </Box>
             <CollapsiblePanel
-              items={mockData}
+              items={selectedItems}
               onSelectionChange={changeSelection}
               selectedFilterCount="1000+"
               {...args}
@@ -259,7 +297,13 @@ export const CollapsiblePanelWithBadge = (args) => {
                   textValue={item.name}
                   data-id={item.key}
                 >
-                  <CollapsiblePanelItem text={item.name} icon={FilterIcon} />
+
+                  <CollapsiblePanelItem
+                    text={item.name}
+                    icon={item.isDefaultSelected ? CheckIcon : Clear}
+                    onPress={() => changeSelection(item.key)}
+                    isDefaultSelected={item.isDefaultSelected}
+                  />
                 </Item>
             )}
             </CollapsiblePanel>
