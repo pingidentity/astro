@@ -38,6 +38,14 @@
     box-shadow: 0px 0px 5px rgba(88, 115, 189, 0.75);
   }
 
+  &::-webkit-credentials-auto-fill-button {
+    margin-right: 55px;
+  }
+  
+  &:not(:placeholder-shown){
+    padding-right: 100px;
+  }
+
   &--error,
   &--error:focus {
     border-color: $color-critical-red;

@@ -48,16 +48,16 @@ test('updates aria label when button is clicked', () => {
   const state = { isOpen: true };
   getComponent({ state });
   const button = screen.getByTestId(collapsiblePanelButtonId);
+  const container = screen.getByTestId(testId);
 
   userEvent.click(button);
-  const collapsiblePanel = screen.queryByTestId(collapsiblePanelId);
 
   expect(button).toHaveAttribute('aria-label', 'Close filter menu?');
-  expect(collapsiblePanel).toBeInTheDocument();
+  expect(container).toHaveClass('is-open');
 
   userEvent.click(button);
   expect(button).toHaveAttribute('aria-label', 'Open filter menu?');
-  expect(collapsiblePanel).not.toBeInTheDocument();
+  expect(container).not.toHaveClass('is-open');
 });
 
 test('shows children when isOpen is true', () => {
@@ -70,11 +70,11 @@ test('shows children when isOpen is true', () => {
 test('should hide children when pressing the escape key', () => {
   getComponent();
   const button = screen.getByTestId(collapsiblePanelButtonId);
+  const container = screen.getByTestId(testId);
+
   userEvent.click(button);
 
-  const collapsiblePanel = screen.queryByTestId(collapsiblePanelId);
-
-  expect(collapsiblePanel).toBeInTheDocument();
+  expect(container).toHaveClass('is-open');
   userEvent.type(button, '{esc}');
-  expect(collapsiblePanel).not.toBeInTheDocument();
+  expect(container).not.toHaveClass('is-open');
 });

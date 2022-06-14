@@ -94,6 +94,9 @@ test('color block button renders in default state', () => {
   userEvent.tab();
   expect(button).toHaveClass('is-focused');
   expect(button).toHaveFocus();
+  userEvent.tab();
+  expect(button).not.toHaveClass('is-focused');
+  expect(button).not.toHaveFocus();
 });
 
 test('color block button renders in configured state', () => {

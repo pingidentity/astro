@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { Item } from '@react-stately/collections';
-import { useFocusRing } from '@react-aria/focus';
+import { FocusRing } from '@react-aria/focus';
 import { useRockerButton, useStatusClasses, usePropWarning } from '../../hooks';
 import { Box } from '../../index';
 import { RockerContext } from '../RockerButtonGroup';
@@ -19,10 +19,8 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
   const { key, rendered, props: itemProps } = item;
   const state = useContext(RockerContext);
   const isDisabled = state.disabledKeys.has(key);
-  const { isFocusVisible, focusProps } = useFocusRing();
   const isSelected = state.selectedKey === key;
   const { classNames } = useStatusClasses(className, {
-    isFocused: isFocusVisible,
     isSelected,
     isDisabled,
   });
@@ -39,22 +37,23 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
   }, state, rockerButtonRef);
 
   return (
-    <Box
-      as="button"
-      className={classNames}
-      variant="buttons.rocker"
-      {...rockerButtonProps}
-      ref={rockerButtonRef}
-      {...focusProps}
-      {...itemProps}
-      sx={{
+    <FocusRing focusRingClass="is-focused">
+      <Box
+        as="button"
+        className={classNames}
+        variant="buttons.rocker"
+        {...rockerButtonProps}
+        ref={rockerButtonRef}
+        {...itemProps}
+        sx={{
         '&.is-selected': {
           ...itemProps.selectedStyles,
         },
       }}
-    >
-      {rendered}
-    </Box>
+      >
+        {rendered}
+      </Box>
+    </FocusRing>
   );
 });
 

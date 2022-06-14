@@ -80,9 +80,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
           />
         }
       </IconButton>
-      {state.isOpen &&
-        { ...children }
-      }
+      { children }
     </Box>
   );
 });
