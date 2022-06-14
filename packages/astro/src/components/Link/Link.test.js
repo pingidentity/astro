@@ -39,6 +39,9 @@ test('link shows focus status', () => {
   userEvent.tab();
   expect(link).toHaveFocus();
   expect(link).toHaveClass('is-focused');
+  userEvent.tab();
+  expect(link).not.toHaveFocus();
+  expect(link).not.toHaveClass('is-focused');
 });
 
 test('link shows disabled status', () => {
