@@ -135,7 +135,7 @@ const collapsiblePanelToggle = {
   bg: 'accent.99',
   height: '40px',
   minWidth: 'max-content',
-  pl: '0px',
+  pl: 'xs',
   ml: '10px',
   path: {
     fill: 'active',
@@ -145,6 +145,8 @@ const collapsiblePanelToggle = {
   },
   '&.is-focused': {
     ...defaultFocus,
+    outlineOffset: '0',
+    zIndex: 1,
   },
   '&.is-pressed': {
     backgroundColor: 'accent.99',
@@ -398,6 +400,22 @@ const inline = {
   },
 };
 
+const inlinePrimary = {
+  ...inline,
+  ...defaultActive,
+  '&.is-hovered': {
+    ...defaultHover,
+    backgroundColor: 'accent.40',
+    color: 'white',
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+    backgroundColor: 'accent.20',
+    border: '1px solid',
+    borderColor: 'accent.20',
+  },
+};
+
 const text = {
   ...base,
   display: 'inline-flex',
@@ -456,6 +474,7 @@ const rocker = {
   '&.is-selected': {
     bg: 'active',
     color: 'white',
+    zIndex: '1',
   },
   '&.is-focused': {
     ...defaultFocus,
@@ -511,7 +530,7 @@ const colorField = {
     outline: 'none',
   },
   '&.is-focused': {
-    borderColor: 'accent.80',
+    ...defaultFocus,
   },
 };
 
@@ -765,6 +784,7 @@ export default {
   iconButton,
   imageUpload,
   inline,
+  inlinePrimary,
   inverted,
   link,
   primary,

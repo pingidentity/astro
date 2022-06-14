@@ -5,6 +5,7 @@ import Earth from 'mdi-react/EarthIcon';
 import Chip from '../Chip';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
+import Box from '../Box';
 import { flatColorList } from '../../styles/colors.js';
 
 export default {
@@ -42,6 +43,14 @@ export default {
 
 export const Default = ({ ...args }) => (
   <Chip label="Label" color="white" {...args} />
+);
+
+export const Count = ({ ...args }) => (
+  <Box>
+    <Chip color="white" {...args} label="1" variant="boxes.chipCount" />
+    <br />
+    <Chip {...args} label="1" variant="boxes.countNeutral" />
+  </Box>
 );
 
 export const ChipWithCustomColors = () => (

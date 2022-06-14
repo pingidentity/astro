@@ -69,7 +69,11 @@ const CollapsiblePanel = forwardRef((props, ref) => {
             {listTitle}
           </Text>
           {selectedFilterCount &&
-            <CollapsiblePanelBadge margin="0" selectedFilterCount={selectedFilterCount} />
+            <CollapsiblePanelBadge
+              margin="0"
+              className="title-badge"
+              selectedFilterCount={selectedFilterCount}
+            />
           }
         </Box>
         <Box pl="xs" pr="xs">
@@ -77,6 +81,7 @@ const CollapsiblePanel = forwardRef((props, ref) => {
             items={items}
             onSelectionChange={onSelectionChange}
             selectionMode="none"
+            selectionStyle="highlight"
             style={{ width: '100%' }}
             pl="md"
           >
