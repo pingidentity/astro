@@ -530,7 +530,7 @@ const colorField = {
     outline: 'none',
   },
   '&.is-focused': {
-    borderColor: 'accent.80',
+    ...defaultFocus,
   },
 };
 
