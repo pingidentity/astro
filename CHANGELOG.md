@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.16.0...@pingux/astro@1.17.0) (2022-06-09)
+
+
+### Bug Fixes
+
+* [UIP-5369] added alt text prop and test form image component ([90cf618](https://gitlab.corp.pingidentity.com/ux/pingux/commit/90cf6187db00ca9b160e0548732a1eee5794f3e2))
+* [UIP-5429] field direction multi values field ([1b18908](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1b18908243815ba44d67c9d0ea2534364905ce41))
+
+
+### Features
+
+* [UIP-5479] ComboBoxField Add Option ([925f524](https://gitlab.corp.pingidentity.com/ux/pingux/commit/925f524f0c9849959930026e4ac9043b60a9246c))
+
+
+
+
+
 # [1.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.15.0...@pingux/astro@1.16.0) (2022-06-08)
 
 
