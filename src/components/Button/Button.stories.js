@@ -17,6 +17,7 @@ const variantOptions = [
   'danger',
   'default',
   'inline',
+  'inlinePrimary',
   'link',
   'primary',
   'success',
@@ -76,9 +77,14 @@ export const TextIconButton = () => (
 );
 
 export const InlineButton = () => (
-  <Button mb="sm" variant="inline">
-    Inline
-  </Button>
+  <Box>
+    <Button mb="sm" mr="auto" variant="inline">
+      Inline
+    </Button>
+    <Button mb="sm" mr="auto" variant="inlinePrimary">
+      Inline primary
+    </Button>
+  </Box>
 );
 
 export const ColorBlockButton = (args) => {
