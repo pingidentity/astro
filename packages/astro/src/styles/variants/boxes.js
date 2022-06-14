@@ -110,6 +110,26 @@ export const chip = {
   },
 };
 
+const countDefault = {
+  ...chip,
+  width: 'fit-content',
+  minWidth: '17px',
+  height: '17px',
+};
+
+const chipCount = {
+  ...countDefault,
+  backgroundColor: '#640099 !important',
+};
+
+const countNeutral = {
+  ...chipCount,
+  backgroundColor: '#E4E6E9 !important',
+  '& span': {
+    color: 'neutral.20',
+  },
+};
+
 const multivaluesChip = {
   ...chip,
   alignSelf: 'center',
@@ -325,6 +345,8 @@ export default {
   base,
   card,
   chip,
+  chipCount,
+  countNeutral,
   selectedItemChip,
   readOnlyChip,
   copy,

@@ -400,6 +400,22 @@ const inline = {
   },
 };
 
+const inlinePrimary = {
+  ...inline,
+  ...defaultActive,
+  '&.is-hovered': {
+    ...defaultHover,
+    backgroundColor: 'accent.40',
+    color: 'white',
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+    backgroundColor: 'accent.20',
+    border: '1px solid',
+    borderColor: 'accent.20',
+  },
+};
+
 const text = {
   ...base,
   display: 'inline-flex',
@@ -768,6 +784,7 @@ export default {
   iconButton,
   imageUpload,
   inline,
+  inlinePrimary,
   inverted,
   link,
   primary,
