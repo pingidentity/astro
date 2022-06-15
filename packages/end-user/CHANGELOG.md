@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.2...@pingux/end-user@2.4.3) (2022-06-15)
+
+
+### Bug Fixes
+
+* [UIP-5449] fixing icon spacing for safari ([f2cd144](https://gitlab.corp.pingidentity.com/ux/end-user/commit/f2cd1444848770bc97101e3dc55c2340fe875005))
+
+
+
+
+
 ## [2.4.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.1...@pingux/end-user@2.4.2) (2022-06-08)
 
 
