@@ -131,9 +131,14 @@
         border: none;
         ul {
             margin-bottom: 0;
+            display: flex;
             li {
                 display: inline-block;
-                padding-bottom: 2px;
+                align-self: end;
+                padding-bottom: 5px;
+                &.active {
+                    padding-bottom: 2px;
+                }
             }
         }
     }
@@ -219,6 +224,7 @@
         }
         .tabs {
             ul {
+                display: block;
                 li {
                     display: block;
                     text-transform: none;
