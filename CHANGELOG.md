@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.17.0...@pingux/astro@1.18.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* [UIP-5424] CollapsiblePanel focus and visual defects ([86e5bff](https://gitlab.corp.pingidentity.com/ux/pingux/commit/86e5bff440e1e7cb2c640ea32d9cc2f78bd26e7d))
+* [UIP-5461] OverlayPanel UI Descrepencies ([6d379e7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6d379e7aa79693eef5f41759f8f6c24e566c5699))
+* [UIP-5477] Updating z-index for RockerButtonGroup Accessibility border ([ab0e65c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab0e65c18c984ccf2aede4b5c8ec501ff6129025))
+* [UIP-5478] use FocusRing component instead of useFocusRing hook ([594a564](https://gitlab.corp.pingidentity.com/ux/pingux/commit/594a564bb4ebe5591adc434518988f7f68d1ee62))
+* [UIP-5496] Button and link fix focus tests ([63a3d1a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/63a3d1aaf1f96837b4d02114ae6daf188598213f))
+
+
+### Features
+
+* [UIP-5491] inline primary button variant ([ee8d395](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ee8d395ff103f7821da377038637fd3cee17c049))
+* [UIP-5495] ColorField focus ([032b98c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/032b98c3bdc4ee34df50dd3deb51a57666d1a3cf))
+
+
+
+
+
 # [1.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.16.0...@pingux/astro@1.17.0) (2022-06-09)
 
 
