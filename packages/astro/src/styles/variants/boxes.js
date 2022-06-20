@@ -102,7 +102,6 @@ export const chip = {
     '&.is-hovered': {
       backgroundColor: 'white',
     },
-
     '& .mdi-icon': {
       marginLeft: '0',
       padding: '2px',
@@ -114,19 +113,26 @@ const countDefault = {
   ...chip,
   width: 'fit-content',
   minWidth: '17px',
-  height: '17px',
+  minHeight: '17px',
+  p: '2px 5px 2px 5px',
+  '& span': {
+    fontSize: '11px',
+    textTransform: 'uppercase',
+  },
 };
 
-const chipCount = {
+const countChip = {
   ...countDefault,
   backgroundColor: '#640099 !important',
 };
 
 const countNeutral = {
-  ...chipCount,
+  ...countDefault,
   backgroundColor: '#E4E6E9 !important',
   '& span': {
     color: 'neutral.20',
+    fontSize: '11px',
+    textTransform: 'uppercase',
   },
 };
 
@@ -345,7 +351,7 @@ export default {
   base,
   card,
   chip,
-  chipCount,
+  countChip,
   countNeutral,
   selectedItemChip,
   readOnlyChip,
