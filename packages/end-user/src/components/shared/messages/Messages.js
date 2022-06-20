@@ -95,7 +95,7 @@ import { Layouts } from './MessagesConstants';
  */
 
 module.exports = class extends React.Component {
-    static displayName = "Messages";
+    static displayName = 'Messages';
 
     static propTypes = {
         'data-id': PropTypes.string,
@@ -132,20 +132,20 @@ module.exports = class extends React.Component {
         return (
             <div data-id={dataId} className={className}>
                 {
-                    messages && messages.map((item, i) => {
-                        return (
-                            <Message
-                                key={key || i}
-                                index={i}
-                                message={item}
-                                onI18n={onI18n}
-                                onRemoveMessage={onRemoveMessage}
-                                defaultTimeout={defaultMessageTimeout}
-                                defaultLayout={defaultMessageLayout}
-                                data-id={`${dataId}-message-${i}`}
-                            />
-                        );
-                    })
+                    messages && messages.map((item, i) => (
+                        <Message
+                            key={key || i}
+                            index={i}
+                            message={item}
+                            onI18n={onI18n}
+                            onRemoveMessage={onRemoveMessage}
+                            defaultTimeout={defaultMessageTimeout}
+                            defaultLayout={defaultMessageLayout}
+                            data-id={`${dataId}-message-${i}`}
+                            aria-live="polite"
+                            role="status"
+                        />
+                    ))
                 }
             </div>
         );
@@ -193,15 +193,15 @@ class Message extends React.Component {
     }
 
     _renderProgress = () => {
-        let progress = this.props.message.progress;
-        let percent = progress.percent || 50;
+        const progress = this.props.message.progress;
+        const percent = progress.percent || 50;
 
-        let text = progress.text ||
+        const text = progress.text ||
             (progress.textTemplate && progress.textTemplate(percent)) ||
             `${progress.percent}%`;
 
         return (
-            <div className="message__progress" data-id={`${this.props['data-id']}-progress` }>
+            <div className="message__progress" data-id={`${this.props['data-id']}-progress`}>
                 {percent >= 100 && <div className="message__progress-icon pingicon-check" />}
                 <div className="message__progress-text" data-id={`${this.props['data-id']}-progress-text`}>{text}</div>
                 {percent < 100 &&
@@ -238,7 +238,7 @@ class Message extends React.Component {
                 params,
                 progress,
                 ...message
-            }
+            },
         } = this.props;
 
         const text = message.text || this.props.onI18n(key, params);
@@ -253,7 +253,7 @@ class Message extends React.Component {
                 {iconName && <div className={classnames('message__icon', `pingicon-${iconName}`)} />}
                 {!minimized && text && (<span className="message__text">{text}</span>)}
                 {progress && this._renderProgress()}
-                {!hideClose && <a className="close" onClick={this._handleRemove} data-id="message-close"></a>}
+                {!hideClose && <a className="close" onClick={this._handleRemove} data-id="message-close" />}
             </div>
         );
     }
