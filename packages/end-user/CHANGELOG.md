@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.4](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.3...@pingux/end-user@2.4.4) (2022-06-21)
+
+
+### Bug Fixes
+
+* [UIP-5423] PasswordInput icons fix ([81a6f07](https://gitlab.corp.pingidentity.com/ux/end-user/commit/81a6f07352fc366f99117ecdf6f127a83d6a6cec))
+* [UIP-5426] EndUser: long texts in UserNav make tabs wrapping into few lines ([f33cf7e](https://gitlab.corp.pingidentity.com/ux/end-user/commit/f33cf7e33a0c33cd23510967e0fed62fa4e26a25))
+* [UIP-5509] Add role to messages ([c580230](https://gitlab.corp.pingidentity.com/ux/end-user/commit/c58023087be86153d7f6553c3576d9eb194bdc2e))
+
+
+
+
+
 ## [2.4.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.2...@pingux/end-user@2.4.3) (2022-06-15)
 
 
