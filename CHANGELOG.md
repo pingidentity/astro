@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.19.0...@pingux/astro@1.20.0) (2022-06-21)
+
+
+### Bug Fixes
+
+* [UIP-5508] Add environment breadcrumb to ui overrides theme ([e7ae8f0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e7ae8f0d4439a3efda18d4deb392e598202e471f))
+
+
+### Features
+
+* [UIP-5492] Count chip variants ([a25bb17](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a25bb17ec5eabfa7e7fa581eb40d5eb28957ff1d))
+
+
+
+
+
 # [1.19.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.18.0...@pingux/astro@1.19.0) (2022-06-15)
 
 **Note:** Version bump only for package @pingux/astro
