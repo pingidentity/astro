@@ -140,7 +140,6 @@ const multivaluesChip = {
   ...chip,
   alignSelf: 'center',
   cursor: 'default',
-  height: '100%',
   m: 5,
   mr: 10,
   ml: 0,
