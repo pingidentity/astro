@@ -88,15 +88,6 @@ export const Default = (args) => {
   };
 
   return (
-    // const items = [
-    // { id: 1, name: 'Aardvark', key: 'Aardvark' },
-    // { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
-    // { id: 3, name: 'Snake', key: 'Snake' },
-    // { id: 4, name: 'Frog', key: 'Frog' },
-    // { id: 5, name: 'Seal', key: 'Seal' },
-    // { id: 6, name: 'Orangutan', key: 'Orangutan' },
-    // { id: 7, name: 'Shark', key: 'Shark' },
-    // ];
     <OverlayProvider
       // note: spacing for demo purpose only so that the select list renders in the correct place
       style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
