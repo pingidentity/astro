@@ -29,6 +29,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
     loadingState,
     status,
     style,
+    inputWrapperRef,
     inputRef,
     inputProps,
     triggerRef,
@@ -141,6 +142,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           slots={{
             inContainer: button,
           }}
+          wrapperProps={{ ref: inputWrapperRef }}
         />
       </Box>
     </FocusRing>
@@ -159,6 +161,7 @@ ComboBoxInput.propTypes = {
   label: PropTypes.node,
   labelProps: PropTypes.shape({}),
   loadingState: PropTypes.oneOf(Object.values(loadingStates)),
+  inputWrapperRef: PropTypes.shape({}),
   inputRef: PropTypes.shape({}),
   triggerProps: PropTypes.shape({}),
   triggerRef: PropTypes.shape({}),
