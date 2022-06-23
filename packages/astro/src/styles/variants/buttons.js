@@ -37,7 +37,7 @@ const defaultHover = {
   boxShadow: 'standard',
 };
 
-const defaultFocus = {
+export const defaultFocus = {
   outline: '1px solid',
   outlineColor: 'active',
   outlineOffset: '4px',
