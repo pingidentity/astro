@@ -103,6 +103,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const buttonRef = useRef();
   const listBoxRef = useRef();
   const inputRef = useRef();
+  const inputWrapperRef = useRef();
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
@@ -162,7 +163,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   } = listBoxProps;
 
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
-    targetRef: inputRef,
+    targetRef: inputWrapperRef,
     overlayRef: popoverRef,
     scrollRef: listBoxRef,
     placement: `${direction} end`,
@@ -188,13 +189,13 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   const onResize = useCallback(() => {
     /* istanbul ignore next */
-    if (inputRef.current) {
-      setMenuWidth(inputRef.current.offsetWidth);
+    if (inputWrapperRef.current) {
+      setMenuWidth(inputWrapperRef.current.offsetWidth);
     }
-  }, [inputRef, setMenuWidth]);
+  }, [inputWrapperRef, setMenuWidth]);
 
   useResizeObserver({
-    ref: inputRef,
+    ref: inputWrapperRef,
     onResize,
   });
 
@@ -239,6 +240,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         isOpen={state.isOpen}
         inputProps={inputProps}
         labelProps={labelProps}
+        inputWrapperRef={inputWrapperRef}
         inputRef={inputRef}
         triggerProps={buttonProps}
         triggerRef={buttonRef}
