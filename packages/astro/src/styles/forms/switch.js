@@ -1,3 +1,5 @@
+import { defaultFocus } from '../variants/buttons';
+
 export const label = {
   alignItems: 'center',
   fontSize: 'md',
@@ -24,11 +26,8 @@ export const thumbContainer = {
     bg: 'active',
     borderColor: 'active',
   },
-  '.is-focused &': {
-    boxShadow: 'focus',
-  },
-  '&:focus': {
-    outline: 'none',
+  '.is-focused &, &:focus': {
+    ...defaultFocus,
   },
 };
 
