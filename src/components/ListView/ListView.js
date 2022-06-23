@@ -1,10 +1,9 @@
 import React, { useMemo, forwardRef, useRef, useImperativeHandle } from 'react';
-import { GridCollection, useGridState } from '@react-stately/grid';
-import { GridKeyboardDelegate, useGrid } from '@react-aria/grid';
+import { useList } from '@react-aria/list';
 import { ListLayout } from '@react-stately/layout';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
-import { useCollator, useLocale } from '@react-aria/i18n';
+import { useCollator } from '@react-aria/i18n';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListViewContext } from './ListViewContext';
 import ListViewItem from '../ListViewItem';
@@ -73,74 +72,41 @@ const ListView = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => listViewRef.current);
 
-  const { collection } = useListState(props);
-
-  const { direction } = useLocale();
-
-  const collator = useCollator({ usage: 'search', sensitivity: 'base' });
-
-  const gridCollection = useMemo(() => new GridCollection({
-    columnCount: 1,
-    items: Array.from(collection).map(item => ({
-      ...item,
-      hasChildNodes: true,
-      childNodes: [{
-        key: `cell-${item.key}`,
-        type: 'cell',
-        index: 0,
-        value: null,
-        level: 0,
-        rendered: null,
-        textValue: item.textValue,
-        hasChildNodes: false,
-        childNodes: [],
-      }],
-    })),
-  }), [collection]);
-
-  const state = useGridState({
+  const state = useListState({
     ...props,
-    collection: gridCollection,
-    focusMode: 'cell',
     selectionBehavior: selectionStyle === 'highlight' ? 'replace' : 'toggle',
   });
 
+  const { collection, selectionManager } = state;
+
   const layout = useListLayout(state);
 
-  const keyboardDelegate = useMemo(() => new GridKeyboardDelegate({
-    collection: state.collection,
-    disabledKeys: state.disabledKeys,
-    ref: listViewRef,
-    direction,
-    collator,
-  }), [state, listViewRef, direction, collator]);
-
-  const { gridProps } = useGrid({
+  const { gridProps } = useList({
     ...props,
     isVirtualized: true,
-    keyboardDelegate,
+    keyboardDelegate: layout,
     loadingState,
   }, state, listViewRef);
   // Sync loading state into the layout.
   layout.isLoading = isLoading;
 
-  const focusedItem = gridCollection.getFirstKey();
+  const focusedKey = selectionManager.focusedKey;
 
   delete gridProps.onMouseDown;
 
   return (
-    <ListViewContext.Provider value={{ state, keyboardDelegate }}>
+    <ListViewContext.Provider value={{ state }}>
       <Virtualizer
         {...gridProps}
         onLoadMore={onLoadMore}
         ref={listViewRef}
-        focusedKey={focusedItem?.parentKey}
+        focusedKey={focusedKey}
         renderWrapper={renderWrapper}
         sizeToFit="height"
         scrollDirection="vertical"
         layout={layout}
         isLoading={isLoading}
-        collection={gridCollection}
+        collection={collection}
         transitionDuration={0}
         {...others}
       >
