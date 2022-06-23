@@ -144,6 +144,7 @@ const selectedItemChip = {
   ...multivaluesChip,
   py: 3,
   pr: 0,
+  my: 3,
 };
 
 const readOnlyChip = {
