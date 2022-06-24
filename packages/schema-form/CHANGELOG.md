@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.7.1...@pingux/schema-form@3.8.0) (2022-06-24)
+
+
+### Features
+
+* [UIP-5457] reduce height of MultivaluesField ([30e9c83](https://gitlab.corp.pingidentity.com/ux/pingux/commit/30e9c83fdb681114646f5401d1780e4077115e2b))
+
+
+
+
+
 ## [3.7.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.7.0...@pingux/schema-form@3.7.1) (2022-06-21)
 
 **Note:** Version bump only for package @pingux/schema-form
