@@ -140,7 +140,6 @@ const multivaluesChip = {
   ...chip,
   alignSelf: 'center',
   cursor: 'default',
-  height: '100%',
   m: 5,
   mr: 10,
   ml: 0,
@@ -150,6 +149,7 @@ const selectedItemChip = {
   ...multivaluesChip,
   py: 3,
   pr: 0,
+  my: 3,
 };
 
 const readOnlyChip = {

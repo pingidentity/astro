@@ -292,7 +292,7 @@ const ListElement = ({ item }) => (
       <IconButton aria-label="create-icon" size={20} >
         <CreateIcon />
       </IconButton>
-      <IconButton aria-label="create-icon" size={20} >
+      <IconButton aria-label="actions-icon" size={20} >
         <MoreVertIcon />
       </IconButton>
     </Box>
@@ -312,7 +312,7 @@ export const Default = ({ ...args }) => (
             <IconButton aria-label="create-icon" size={20} >
               <CreateIcon />
             </IconButton>
-            <IconButton aria-label="create-icon" size={20} >
+            <IconButton aria-label="actions-icon" size={20} >
               <MoreVertIcon />
             </IconButton>
           </Box>
