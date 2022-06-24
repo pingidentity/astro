@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.20.0...@pingux/astro@1.21.0) (2022-06-24)
+
+
+### Bug Fixes
+
+* [UIP-5521] Incorrect Chips Styles in MultivaluesField When Wrapped in Box ([ee302fb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ee302fb2f0cc6d9ff3503fbdba3be2a560bd7d9b))
+
+
+### Features
+
+* [UIP-5373] ListView A11Y Improvement ([b4df30c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b4df30c1b90de4f34b7036e9c552380fd345a1cd))
+* [UIP-5457] reduce height of MultivaluesField ([30e9c83](https://gitlab.corp.pingidentity.com/ux/pingux/commit/30e9c83fdb681114646f5401d1780e4077115e2b))
+
+
+
+
+
 # [1.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.19.0...@pingux/astro@1.20.0) (2022-06-21)
 
 
