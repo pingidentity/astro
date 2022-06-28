@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.21.0...@pingux/astro@1.21.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* [UIP-5444] ComboBox long value filter issue fix ([8c6e4aa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8c6e4aa78be54337cfbfcc893a563577cf1325a7))
+* [UIP-5494] New focus style on switch component ([f01fbbd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f01fbbdf3433eb78dcf5f84fb3b4aac8a8c9aa41))
+
+
+
+
+
 # [1.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.20.0...@pingux/astro@1.21.0) (2022-06-24)
 
 
