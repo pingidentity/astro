@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { fireEvent } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { useFilter } from '@react-aria/i18n';
 import userEvent from '@testing-library/user-event';
@@ -402,6 +403,32 @@ test('should show in input "textValue" if provided', async () => {
   // Check that on clicking again "textValue" still returning
   userEvent.click(options[0]);
   expect(input).toHaveValue(newItems[0].textValue);
+});
+
+test('option list should be opened on scroll input value', async () => {
+  let options;
+  const otherItems = [
+    { name: 'Short item name one', id: '1' },
+    { name: 'Short item name two', id: '2' },
+    { name: 'Short item name three', id: '3' },
+    { name: 'This is very very very long item name', id: '4' },
+  ];
+  getComponent({ defaultItems: otherItems });
+  const input = screen.queryByRole('combobox');
+
+  userEvent.type(input, '{arrowdown}');
+  options = screen.queryAllByRole('option');
+  expect(options).toHaveLength(otherItems.length);
+
+  userEvent.type(input, 'This is very very very long item name');
+  fireEvent.scroll(input, { target: { scrollX: 10 } });
+  options = screen.queryAllByRole('option');
+  expect(options.length).toBe(1);
+  expect(options[0]).toHaveTextContent(otherItems[3].name);
+
+  fireEvent.scroll(window, { target: { scrollX: 10 } });
+  options = screen.queryAllByRole('option');
+  expect(options.length).toBe(0);
 });
 
 describe('loadingState', () => {
