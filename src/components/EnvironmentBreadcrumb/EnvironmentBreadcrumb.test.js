@@ -225,3 +225,22 @@ test('should have no accessibility violations', async () => {
 
   expect(results).toHaveNoViolations();
 });
+
+test('should be open when isDefaultOpen is true', () => {
+  getComponent({ isDefaultOpen: true });
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  userEvent.click(screen.getByText(testSelectedItem));
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).not.toHaveLength(3);
+});
+
+test('should respond to onOpenChange', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ onOpenChange });
+  expect(onOpenChange).not.toHaveBeenCalled();
+  userEvent.click(screen.getByText(testSelectedItem));
+  expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
+  userEvent.click(screen.getByText(testSelectedItem));
+  expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
+});
