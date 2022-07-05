@@ -118,6 +118,7 @@ const NumberField = forwardRef((props, ref) => {
       inputProps.onChange(trimmedValueEvent);
     }
   };
+  inputProps['aria-roledescription'] = null;
 
   return (
     <Box {...fieldContainerProps}>
