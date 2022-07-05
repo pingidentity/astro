@@ -281,6 +281,10 @@ ComboBoxField.propTypes = {
   isNotFlippable: PropTypes.bool,
   /** Where the ComboBox menu opens relative to its trigger. */
   direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /** Text rendered below the input. */
+  helperText: PropTypes.node,
+  /** Determines the input status indicator and helper text styling. */
+  status: PropTypes.oneOf(['default', 'success', 'warning', 'error']),
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey: PropTypes.string,
   /** The currently selected key in the collection (controlled). */
