@@ -105,7 +105,7 @@ export const Decimals = () => (
 export const ControlledState = () => {
   const [value, setValue] = useState(12);
 
-  return <NumberField value={value} onChange={setValue} />;
+  return <NumberField label="Controlled State" value={value} onChange={setValue} />;
 };
 
 export const CurrencyValues = () => (
