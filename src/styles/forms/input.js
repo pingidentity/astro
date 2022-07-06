@@ -52,6 +52,9 @@ export const input = {
   '&::-ms-reveal, &::-ms-clear': {
     display: 'none',
   },
+  '&.is-error': {
+    borderColor: 'critical.bright',
+  },
 };
 
 // Example variant input

@@ -35,8 +35,11 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     children,
     disabledKeys: imperativeDisabledKeys,
     emptySearchText,
+    isDefaultOpen,
+    isOpen,
     items,
     itemsFilter: imperativeItemsFilter,
+    onOpenChange,
     onNamePress,
     onPopoverClose: imperativeOnPopoverClose,
     onPopoverOpen: imperativeOnPopoverOpen,
@@ -84,7 +87,11 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     return filteredSections.filter(item => item);
   };
 
-  const popoverState = useOverlayTriggerState({});
+  const popoverState = useOverlayTriggerState({
+    defaultOpen: isDefaultOpen,
+    isOpen,
+    onOpenChange,
+  });
 
   const handlePopoverClose = useCallback(() => {
     if (imperativeOnPopoverClose) {
@@ -301,6 +308,16 @@ EnvironmentBreadcrumb.propTypes = {
   disabledKeys: PropTypes.arrayOf(PropTypes.string),
   /** Text that will be shown if no search results found. */
   emptySearchText: PropTypes.string,
+  /** Sets the default open state of the overlay. */
+  isDefaultOpen: PropTypes.bool,
+  /** Whether the overlay is currently open. */
+  isOpen: PropTypes.bool,
+  /**
+   * Method that is called when the open state of the menu changes.
+   *
+   * `(isOpen: boolean, overlayTrigger: OverlayTriggerAction) => void`
+   */
+  onOpenChange: PropTypes.func,
 };
 
 EnvironmentBreadcrumb.defaultProps = {
