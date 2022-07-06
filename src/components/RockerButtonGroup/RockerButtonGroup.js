@@ -45,6 +45,7 @@ const RockerButtonGroup = forwardRef((props, ref) => {
           {...tabListProps}
           {...raTabListProps}
           ref={buttonGroupRef}
+          role="toolbar"
         >
           {Array.from(state.collection).map(item => (
             <CollectionRockerButton
