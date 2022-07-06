@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.21.1...@pingux/astro@1.22.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* [UIP-5501] NumberField accessibility violation ([f64e54b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f64e54b80708bda1bcd85c2fff77d4e8c7160330))
+
+
+### Features
+
+* [UIP-5524] Add red border to error inputs ([a748a63](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a748a63108f3d2dbb786e60d2ed11ebd2ee1c422))
+* [UIP-5541] Environmental breadcrumbs popover state ([3d1307a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3d1307a2f5d26563b2d25b3e6e5d1981817f1ad5))
+
+
+
+
+
 ## [1.21.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.21.0...@pingux/astro@1.21.1) (2022-06-28)
 
 
