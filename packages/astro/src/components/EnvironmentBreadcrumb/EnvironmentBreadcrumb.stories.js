@@ -193,3 +193,99 @@ export const WithSections = () => {
 };
 
 export const OrgLevel = () => <EnvironmentBreadcrumb name="Globochem" />;
+
+export const DefaultOpen = () => {
+  const [selectedEnvironment, setSelectedEnvironment] = useState({
+    name: 'Dog',
+    isSandbox: true,
+  });
+
+  const envNode = (
+    <Box isRow>
+      <Text color="inherit">{selectedEnvironment.name}</Text>
+      {selectedEnvironment.isSandbox ? (
+        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+      ) : null}
+    </Box>
+  );
+
+  const findEnvObj = envName =>
+    defaultEnvironments.find(({ name }) => name === envName);
+
+  const handleSelectionChange = (newEnvName) => {
+    const envObj = findEnvObj(newEnvName);
+    setSelectedEnvironment({ ...envObj });
+  };
+
+  return (
+    <EnvironmentBreadcrumb
+      items={defaultEnvironments}
+      name="Globochem"
+      selectedItem={envNode}
+      onSelectionChange={handleSelectionChange}
+      isDefaultOpen
+    >
+      {({ name, isSandbox }) => (
+        <Item key={name} textValue={name}>
+          {name}
+          {isSandbox ? (
+            <Chip
+              label="SANDBOX"
+              variant="boxes.environmentChip"
+              bg="neutral.40"
+            />
+          ) : null}
+        </Item>
+      )}
+    </EnvironmentBreadcrumb>
+  );
+};
+
+export const ControlledMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedEnvironment, setSelectedEnvironment] = useState({
+    name: 'Shark',
+    isSandbox: true,
+  });
+
+  const envNode = (
+    <Box isRow>
+      <Text color="inherit">{selectedEnvironment.name}</Text>
+      {selectedEnvironment.isSandbox ? (
+        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+      ) : null}
+    </Box>
+  );
+
+  const findEnvObj = envName =>
+    defaultEnvironments.find(({ name }) => name === envName);
+
+  const handleSelectionChange = (newEnvName) => {
+    const envObj = findEnvObj(newEnvName);
+    setSelectedEnvironment({ ...envObj });
+  };
+
+  return (
+    <EnvironmentBreadcrumb
+      items={defaultEnvironments}
+      name="Globochem"
+      selectedItem={envNode}
+      onSelectionChange={handleSelectionChange}
+      isOpen={isOpen}
+      onOpenChange={setIsOpen}
+    >
+      {({ name, isSandbox }) => (
+        <Item key={name} textValue={name}>
+          {name}
+          {isSandbox ? (
+            <Chip
+              label="SANDBOX"
+              variant="boxes.environmentChip"
+              bg="neutral.40"
+            />
+          ) : null}
+        </Item>
+      )}
+    </EnvironmentBreadcrumb>
+  );
+};

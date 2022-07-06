@@ -1698,6 +1698,10 @@ exports[`single fields password field 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -1779,6 +1783,10 @@ exports[`single fields password field 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -1864,6 +1872,10 @@ exports[`single fields password field 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -1945,6 +1957,10 @@ exports[`single fields password field 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -2231,6 +2247,10 @@ exports[`single fields password field 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -2312,6 +2332,10 @@ exports[`single fields password field 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -2397,6 +2421,10 @@ exports[`single fields password field 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -2478,6 +2506,10 @@ exports[`single fields password field 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -3257,6 +3289,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -3338,6 +3374,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -3423,6 +3463,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -3504,6 +3548,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -3790,6 +3838,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -3871,6 +3923,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -3956,6 +4012,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -4037,6 +4097,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -4343,6 +4407,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -4424,6 +4492,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 listBoxPopup large::-ms-reveal,
 .emotion-8 listBoxPopup large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup small {
@@ -4509,6 +4581,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -4590,6 +4666,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 listBoxPopup small large::-ms-reveal,
 .emotion-8 listBoxPopup small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup wrapper {
@@ -4876,6 +4956,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -4957,6 +5041,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 listBoxPopup numberField large::-ms-reveal,
 .emotion-8 listBoxPopup numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup numberField small {
@@ -5042,6 +5130,10 @@ exports[`single fields select field 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -5123,6 +5215,10 @@ exports[`single fields select field 1`] = `
 .emotion-8 listBoxPopup numberField small large::-ms-reveal,
 .emotion-8 listBoxPopup numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup numberField wrapper {
@@ -6090,6 +6186,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -6171,6 +6271,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -6256,6 +6360,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -6337,6 +6445,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -6623,6 +6735,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -6704,6 +6820,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -6789,6 +6909,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -6870,6 +6994,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -7176,6 +7304,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -7257,6 +7389,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 listBoxPopup large::-ms-reveal,
 .emotion-8 listBoxPopup large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup small {
@@ -7342,6 +7478,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -7423,6 +7563,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 listBoxPopup small large::-ms-reveal,
 .emotion-8 listBoxPopup small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup wrapper {
@@ -7709,6 +7853,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -7790,6 +7938,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 listBoxPopup numberField large::-ms-reveal,
 .emotion-8 listBoxPopup numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup numberField small {
@@ -7875,6 +8027,10 @@ exports[`single fields select field with default 1`] = `
   display: none;
 }
 
+.emotion-8 listBoxPopup numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 listBoxPopup numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -7956,6 +8112,10 @@ exports[`single fields select field with default 1`] = `
 .emotion-8 listBoxPopup numberField small large::-ms-reveal,
 .emotion-8 listBoxPopup numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 listBoxPopup numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 listBoxPopup numberField wrapper {
@@ -8936,6 +9096,10 @@ exports[`single fields string field format email 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -9017,6 +9181,10 @@ exports[`single fields string field format email 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -9102,6 +9270,10 @@ exports[`single fields string field format email 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -9183,6 +9355,10 @@ exports[`single fields string field format email 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -9469,6 +9645,10 @@ exports[`single fields string field format email 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -9550,6 +9730,10 @@ exports[`single fields string field format email 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -9635,6 +9819,10 @@ exports[`single fields string field format email 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -9716,6 +9904,10 @@ exports[`single fields string field format email 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -10507,6 +10699,10 @@ exports[`single fields string field format uri 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -10588,6 +10784,10 @@ exports[`single fields string field format uri 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -10673,6 +10873,10 @@ exports[`single fields string field format uri 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -10754,6 +10958,10 @@ exports[`single fields string field format uri 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -11040,6 +11248,10 @@ exports[`single fields string field format uri 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -11121,6 +11333,10 @@ exports[`single fields string field format uri 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -11206,6 +11422,10 @@ exports[`single fields string field format uri 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -11287,6 +11507,10 @@ exports[`single fields string field format uri 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -12078,6 +12302,10 @@ exports[`single fields string field regular 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -12159,6 +12387,10 @@ exports[`single fields string field regular 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -12244,6 +12476,10 @@ exports[`single fields string field regular 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -12325,6 +12561,10 @@ exports[`single fields string field regular 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -12611,6 +12851,10 @@ exports[`single fields string field regular 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -12692,6 +12936,10 @@ exports[`single fields string field regular 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -12777,6 +13025,10 @@ exports[`single fields string field regular 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -12858,6 +13110,10 @@ exports[`single fields string field regular 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -13649,6 +13905,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -13730,6 +13990,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -13815,6 +14079,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -13896,6 +14164,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -14182,6 +14454,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -14263,6 +14539,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -14348,6 +14628,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -14429,6 +14713,10 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -15262,6 +15550,10 @@ exports[`single fields string field with help text 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -15343,6 +15635,10 @@ exports[`single fields string field with help text 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -15428,6 +15724,10 @@ exports[`single fields string field with help text 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -15509,6 +15809,10 @@ exports[`single fields string field with help text 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -15795,6 +16099,10 @@ exports[`single fields string field with help text 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -15876,6 +16184,10 @@ exports[`single fields string field with help text 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -15961,6 +16273,10 @@ exports[`single fields string field with help text 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -16042,6 +16358,10 @@ exports[`single fields string field with help text 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -16911,6 +17231,10 @@ exports[`single fields string field with markdown errors 1`] = `
   display: none;
 }
 
+.emotion-14.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-14 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -16992,6 +17316,10 @@ exports[`single fields string field with markdown errors 1`] = `
 .emotion-14 large::-ms-reveal,
 .emotion-14 large::-ms-clear {
   display: none;
+}
+
+.emotion-14 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-14 small {
@@ -17077,6 +17405,10 @@ exports[`single fields string field with markdown errors 1`] = `
   display: none;
 }
 
+.emotion-14 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-14 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -17158,6 +17490,10 @@ exports[`single fields string field with markdown errors 1`] = `
 .emotion-14 small large::-ms-reveal,
 .emotion-14 small large::-ms-clear {
   display: none;
+}
+
+.emotion-14 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-14 wrapper {
@@ -17444,6 +17780,10 @@ exports[`single fields string field with markdown errors 1`] = `
   display: none;
 }
 
+.emotion-14 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-14 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -17525,6 +17865,10 @@ exports[`single fields string field with markdown errors 1`] = `
 .emotion-14 numberField large::-ms-reveal,
 .emotion-14 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-14 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-14 numberField small {
@@ -17610,6 +17954,10 @@ exports[`single fields string field with markdown errors 1`] = `
   display: none;
 }
 
+.emotion-14 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-14 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -17691,6 +18039,10 @@ exports[`single fields string field with markdown errors 1`] = `
 .emotion-14 numberField small large::-ms-reveal,
 .emotion-14 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-14 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-14 numberField wrapper {
@@ -18545,6 +18897,10 @@ exports[`single fields string field with placeholder 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -18626,6 +18982,10 @@ exports[`single fields string field with placeholder 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -18711,6 +19071,10 @@ exports[`single fields string field with placeholder 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -18792,6 +19156,10 @@ exports[`single fields string field with placeholder 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -19078,6 +19446,10 @@ exports[`single fields string field with placeholder 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -19159,6 +19531,10 @@ exports[`single fields string field with placeholder 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -19244,6 +19620,10 @@ exports[`single fields string field with placeholder 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -19325,6 +19705,10 @@ exports[`single fields string field with placeholder 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
@@ -20093,6 +20477,10 @@ exports[`single fields textarea field 1`] = `
   display: none;
 }
 
+.emotion-8.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -20174,6 +20562,10 @@ exports[`single fields textarea field 1`] = `
 .emotion-8 large::-ms-reveal,
 .emotion-8 large::-ms-clear {
   display: none;
+}
+
+.emotion-8 large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 small {
@@ -20259,6 +20651,10 @@ exports[`single fields textarea field 1`] = `
   display: none;
 }
 
+.emotion-8 small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -20340,6 +20736,10 @@ exports[`single fields textarea field 1`] = `
 .emotion-8 small large::-ms-reveal,
 .emotion-8 small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 wrapper {
@@ -20626,6 +21026,10 @@ exports[`single fields textarea field 1`] = `
   display: none;
 }
 
+.emotion-8 numberField.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -20707,6 +21111,10 @@ exports[`single fields textarea field 1`] = `
 .emotion-8 numberField large::-ms-reveal,
 .emotion-8 numberField large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField small {
@@ -20792,6 +21200,10 @@ exports[`single fields textarea field 1`] = `
   display: none;
 }
 
+.emotion-8 numberField small.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
+}
+
 .emotion-8 numberField small large {
   font-weight: 500;
   color: var(--theme-ui-colors-text-primary);
@@ -20873,6 +21285,10 @@ exports[`single fields textarea field 1`] = `
 .emotion-8 numberField small large::-ms-reveal,
 .emotion-8 numberField small large::-ms-clear {
   display: none;
+}
+
+.emotion-8 numberField small large.is-error {
+  border-color: var(--theme-ui-colors-critical-bright);
 }
 
 .emotion-8 numberField wrapper {
