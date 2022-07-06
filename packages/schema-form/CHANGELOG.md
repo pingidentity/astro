@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.8.1...@pingux/schema-form@3.9.0) (2022-07-06)
+
+
+### Features
+
+* [UIP-5524] Add red border to error inputs ([a748a63](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a748a63108f3d2dbb786e60d2ed11ebd2ee1c422))
+
+
+
+
+
 ## [3.8.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.8.0...@pingux/schema-form@3.8.1) (2022-06-28)
 
 **Note:** Version bump only for package @pingux/schema-form
