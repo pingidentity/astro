@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.22.0...@pingux/astro@1.23.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* [UIP-5484] toggling SwitchField when using in ListView ([6b3dd18](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b3dd18cbabbe2283f270aa8b7ad555b28beeed7))
+* [UIP-5512] Rocker button accessibility issues ([9bae6a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9bae6a4f45a2e510e612a59652ee7f02a0be4600))
+* [UIP-5517] add props to TooltipTrigger ([bed6ead](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bed6ead817cda471b0c718c732a8b7fea4ad62b6))
+* [UIP-5544] ArrayField add button fix ([3034f77](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3034f776f1776e38d2d197c839aafe3856d1fdab))
+* [UIP-5545] listBox focus fix ([ab4238a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab4238ad6ac046aa6f344469c77d274daad0a2f1))
+
+
+### Features
+
+* [UIP-5519] Analyze ArrayField for Performance ([84fc74b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/84fc74bf0470541ea10ae07baa9f5cfc27029405))
+
+
+
+
+
 # [1.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.21.1...@pingux/astro@1.22.0) (2022-07-06)
 
 
