@@ -22,11 +22,11 @@ export const thumbContainer = {
   border: '1px solid',
   borderColor: 'neutral.80',
   borderRadius: 9999,
-  '.is-selected &': {
+  'label.is-selected &': {
     bg: 'active',
     borderColor: 'active',
   },
-  '.is-focused &, &:focus': {
+  'label.is-focused &, &:focus': {
     ...defaultFocus,
   },
 };
@@ -43,7 +43,7 @@ export const thumb = {
   transitionTimingFunction: 'ease-out',
   transitionDuration: '0.1s',
   transform: 'translateX(0)',
-  '.is-selected &': {
+  'label.is-selected &': {
     transform: 'translateX(20px)',
     borderColor: 'active',
   },
