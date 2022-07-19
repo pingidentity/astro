@@ -97,12 +97,12 @@ const ArrayField = (props) => {
   );
 
   const onFieldAdd = useCallback(() => {
-    if (onAddRef.current) {
+    if (isControlled) {
       return onAddRef.current();
     }
 
     return setFieldValues(oldValues => [...oldValues, createEmptyField()]);
-  }, [createEmptyField]);
+  }, [createEmptyField, isControlled]);
 
   const {
     labelProps: raLabelProps,

@@ -57,8 +57,9 @@ test('adds one text field and new empty field is added', () => {
 
 test('onAdd callback is fired when adding field', () => {
   const onAdd = jest.fn();
-
-  getComponent({ onAdd, renderField });
+  const value = defaultData;
+  const defaultValue = null;
+  getComponent({ value, defaultValue, onAdd, renderField });
 
   fireEvent.click(screen.getByText('+ Add'));
   expect(onAdd).toHaveBeenCalled();
