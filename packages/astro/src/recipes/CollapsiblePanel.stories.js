@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import AccountIcon from 'mdi-react/AccountIcon';
 import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
@@ -105,6 +105,7 @@ const data = [
 export const Default = () => {
   const [items, setItems] = useState(data);
   const [searchValue, setSearchValue] = useState('');
+  const checkBoxRef = useRef(null);
 
   const { contains } = useFilter({ sensitivity: 'base' });
   const filteredItems = useMemo(
@@ -253,6 +254,8 @@ export const Default = () => {
                         controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
                         onChange={() => changeSelection(item.key)}
                         isSelected={selectedItems.some(el => el.key === item.key)}
+                        ref={checkBoxRef}
+                        onClick={() => checkBoxRef.current.focus()}
                       />
                     )
                   }
