@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import { useToggleState } from '@react-stately/toggle';
 import { useSwitch } from '@react-aria/switch';
+import { usePress } from '@react-aria/interactions';
 
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -54,6 +55,8 @@ const SwitchField = forwardRef((props, ref) => {
     ...props,
   });
 
+  const { pressProps: containerPressProps } = usePress({ isDisabled });
+
   const whitelistedProps = omit(props, Object.keys(others));
   const { inputProps } = useSwitch({
     children: label,
@@ -66,6 +69,7 @@ const SwitchField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({
     statusClasses,
+    ...containerPressProps,
     ...props,
     controlProps: { ...controlProps, ...inputProps },
   });

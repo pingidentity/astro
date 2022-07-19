@@ -78,3 +78,9 @@ test('trigger press events work when a tooltip is disabled', () => {
   userEvent.click(button);
   expect(onPress).toHaveBeenCalledTimes(1);
 });
+
+test('passing in width applies the correct width to the container', () => {
+  getComponent({ isOpen: true, width: '100px' });
+  const arrow = screen.getByTestId('popover-container');
+  expect(arrow).toHaveStyle('width: 100px');
+});

@@ -10,6 +10,7 @@ import Text from '../Text';
 import Label from '../Label';
 import statuses from '../../utils/devUtils/constants/statuses';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
+import ArrayFieldItem from './ArrayFieldItem';
 
 /**
  * Displays array collections providing useful functions and
@@ -33,6 +34,18 @@ const ArrayField = (props) => {
     maxSizeText,
     ...others
   } = props;
+
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  const onAddRef = React.useRef(onAdd);
+  onAddRef.current = onAdd;
+
+  const onChangeRef = React.useRef(onChange);
+  onChangeRef.current = onChange;
+
+  const onDeleteRef = React.useRef(onDelete);
+  onDeleteRef.current = onDelete;
 
   const isControlled = value !== undefined;
 
@@ -61,35 +74,35 @@ const ArrayField = (props) => {
         tempValue = event.target.value;
       }
       if (isControlled) {
-        onChange(mapArrayFieldWithNewValue(value, tempValue, fieldId));
+        onChangeRef.current(mapArrayFieldWithNewValue(valueRef.current, tempValue, fieldId));
       } else {
         setFieldValues(oldValues =>
           mapArrayFieldWithNewValue(oldValues, tempValue, fieldId));
       }
     },
-    [isControlled, mapArrayFieldWithNewValue, onChange, value],
+    [isControlled, mapArrayFieldWithNewValue],
   );
 
   const onFieldDelete = useCallback(
     (fieldId) => {
       if (isControlled) {
-        onDelete(fieldId);
+        onDeleteRef.current(fieldId);
       } else {
         setFieldValues(oldValues =>
           oldValues.filter(({ id }) => id !== fieldId),
         );
       }
     },
-    [isControlled, onDelete],
+    [isControlled],
   );
 
   const onFieldAdd = useCallback(() => {
-    if (onAdd) {
-      return onAdd();
+    if (isControlled) {
+      return onAddRef.current();
     }
 
     return setFieldValues(oldValues => [...oldValues, createEmptyField()]);
-  }, [createEmptyField, onAdd]);
+  }, [createEmptyField, isControlled]);
 
   const {
     labelProps: raLabelProps,
@@ -105,13 +118,17 @@ const ArrayField = (props) => {
           ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
             const isDisabled = (value || fieldValues).length === 1;
             return (
-              <Box as="li" mb="xs" key={id}>
-                {onComponentRender ?
-                  onComponentRender(id, fieldValue, onFieldValueChange,
-                    onFieldDelete, isDisabled, otherFieldProps)
-                  : renderField(id, fieldValue, onFieldValueChange,
-                    onFieldDelete, isDisabled, otherFieldProps)}
-              </Box>
+              <ArrayFieldItem
+                key={id}
+                id={id}
+                isDisabled={isDisabled}
+                fieldValue={fieldValue}
+                onComponentRender={onComponentRender}
+                onFieldValueChange={onFieldValueChange}
+                onFieldDelete={onFieldDelete}
+                renderField={renderField}
+                {...otherFieldProps}
+              />
             );
           })
         }

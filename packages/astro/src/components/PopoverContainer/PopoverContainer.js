@@ -15,12 +15,15 @@ const PopoverContainer = forwardRef((props, ref) => {
     children,
     placement,
     arrowProps,
+    arrowCrossOffset,
     onClose,
     isNotClosedOnBlur,
     hasNoArrow,
     isKeyboardDismissDisabled,
     isNonModal,
     isDismissable,
+    width,
+    direction,
     ...others
   } = props;
 
@@ -36,6 +39,9 @@ const PopoverContainer = forwardRef((props, ref) => {
         hasNoArrow={hasNoArrow}
         isNonModal={isNonModal}
         isDismissable={isDismissable}
+        arrowCrossOffset={arrowCrossOffset}
+        width={width}
+        direction={direction}
         {...others}
       >
         {children}
@@ -53,6 +59,9 @@ PopoverContainer.propTypes = {
   isKeyboardDismissDisabled: PropTypes.bool,
   isNonModal: PropTypes.bool,
   isDismissable: PropTypes.bool,
+  width: PropTypes.string,
+  arrowCrossOffset: PropTypes.string,
+  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 export const PopoverWrapper = forwardRef((props, ref) => {
@@ -61,12 +70,16 @@ export const PopoverWrapper = forwardRef((props, ref) => {
     className,
     placement,
     arrowProps,
+    arrowCrossOffset,
     isOpen,
     hasNoArrow,
     isNotClosedOnBlur,
     isKeyboardDismissDisabled,
     isNonModal,
     isDismissable,
+    width,
+    direction,
+    sx,
     ...others
   } = props;
   const popoverRef = useRef();
@@ -91,13 +104,21 @@ export const PopoverWrapper = forwardRef((props, ref) => {
           role="presentation"
           data-popover-placement={placement}
           data-testid="popover-container"
+          sx={{
+            ...sx,
+            width,
+          }}
         >
           {children}
           {
             hasNoArrow
               ? null
               : (
-                <PopoverArrow {...arrowProps} />
+                <PopoverArrow
+                  {...arrowProps}
+                  arrowCrossOffset={arrowCrossOffset}
+                  direction={direction}
+                />
               )
           }
         </Box>
@@ -115,6 +136,10 @@ PopoverWrapper.propTypes = {
   isKeyboardDismissDisabled: PropTypes.bool,
   isNonModal: PropTypes.bool,
   isDismissable: PropTypes.bool,
+  width: PropTypes.string,
+  arrowCrossOffset: PropTypes.string,
+  sx: PropTypes.shape({}),
+  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 PopoverWrapper.defaultProps = {
@@ -122,15 +147,54 @@ PopoverWrapper.defaultProps = {
 };
 
 export const PopoverArrow = (props) => {
-  const { ...others } = props;
+  const {
+    arrowCrossOffset,
+    sx,
+    direction,
+    ...others
+  } = props;
+
+  /* istanbul ignore next */
+  const calculateOffset = () => {
+    switch (true) {
+      case direction === 'top':
+      case direction === 'bottom':
+        return {
+          '&:before': {
+            left: `calc(50% - ${arrowCrossOffset}) !important`,
+          },
+        };
+      case direction === 'left':
+      case direction === 'right':
+        return {
+          '&:before': {
+            top: `calc(50% - ${arrowCrossOffset}) !important`,
+          },
+        };
+      default:
+        return {};
+    }
+  };
+
   return (
     <Box
       variant="popoverMenu.arrow"
       data-popover-arrow="arrow"
       data-testid="popover-arrow"
       {...others}
+      sx={{
+        ...(arrowCrossOffset && calculateOffset()),
+        ...sx,
+      }}
     />
   );
+};
+
+PopoverArrow.propTypes = {
+  width: PropTypes.string,
+  arrowCrossOffset: PropTypes.string,
+  sx: PropTypes.shape({}),
+  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 export default PopoverContainer;

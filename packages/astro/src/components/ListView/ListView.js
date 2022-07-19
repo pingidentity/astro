@@ -42,6 +42,12 @@ export function useListLayout(state) {
  * ListViews are used to display a list of items. Users can select,
  * view, or edit items in this list. This virtualized component supports
  * asynchronous data in infinitely scrollable lists.
+ *
+ * NOTE: be careful with putting focusable elements inside ListView.
+ * It is using a grid (useList hook) with its own event listeners under the hood.
+ * [react-specttrum-github-issue](https://github.com/adobe/react-spectrum/issues/2801)
+ * If you decided to add a focusable element inside ListView,
+ * you should stop bubbling of a pointerDown event and put a focus on the element.
 */
 
 const ListView = forwardRef((props, ref) => {
