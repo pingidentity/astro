@@ -39,8 +39,22 @@ export const withDelayProp = () => (
   </TooltipTrigger>
 );
 
+export const withWidthProp = () => (
+  <TooltipTrigger width="200px">
+    <Button>Hover Over Me!</Button>
+    <Tooltip>Custom width display</Tooltip>
+  </TooltipTrigger>
+);
+
+export const withArrowCrossOffsetProp = () => (
+  <TooltipTrigger arrowCrossOffset="30px" isOpen >
+    <Button>Hover Over Me!</Button>
+    <Tooltip>Display with a delay</Tooltip>
+  </TooltipTrigger>
+);
+
 export const isOpen = () => (
-  <TooltipTrigger isOpen>
+  <TooltipTrigger isOpen >
     <Button>Hover Over Me!</Button>
     <Tooltip>Display by default</Tooltip>
   </TooltipTrigger>

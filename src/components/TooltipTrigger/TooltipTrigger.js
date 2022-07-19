@@ -17,6 +17,7 @@ import PopoverContainer from '../PopoverContainer';
  */
 const TooltipTrigger = forwardRef((props, ref) => {
   const {
+    arrowCrossOffset,
     children,
     crossOffset,
     isDisabled,
@@ -29,6 +30,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
     isDarkMode,
     hasNoArrow,
     targetRef,
+    width,
   } = props;
 
   const [trigger, tooltip] = React.Children.toArray(children);
@@ -73,6 +75,9 @@ const TooltipTrigger = forwardRef((props, ref) => {
       arrowProps={arrowProps}
       className={classNames}
       hasNoArrow={hasNoArrow}
+      arrowCrossOffset={arrowCrossOffset}
+      width={width}
+      direction={direction}
       {...positionProps}
       {...tooltipProps}
     >
@@ -121,10 +126,15 @@ TooltipTrigger.propTypes = {
   hasNoArrow: PropTypes.bool,
   /** Tooltip offset relative to its trigger. */
   offset: PropTypes.number,
+  /** Arrow offset relative to the left of the tooltip.
+   * Must be passed as a px or percentage. */
+  arrowCrossOffset: PropTypes.string,
   /** The placement of the element with respect to its anchor element. */
   placement: PropTypes.string,
   /** By default, opens for both focus and hover. Can be made to open only for focus. */
   trigger: PropTypes.string,
+  /** Width applied to the wrapper of the tooltip component. */
+  width: PropTypes.string,
   /* The ref for the element which the overlay positions itself with respect to. */
   targetRef: PropTypes.shape({}),
 };
