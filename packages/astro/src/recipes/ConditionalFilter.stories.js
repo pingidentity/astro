@@ -4,6 +4,7 @@ import DragVerticalIcon from 'mdi-react/DragVerticalIcon';
 import TrashIcon from 'mdi-react/TrashIcon';
 import {
   Box,
+  Bracket,
   Button,
   Chip,
   IconButton,
@@ -21,19 +22,6 @@ import OverlayPanel from '../components/OverlayPanel';
 
 export default {
   title: 'Recipes/ConditionalFilter',
-};
-
-const BracketSVG = (props) => {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" {...props}>
-      <title>bracket-fill</title>
-      <g>
-        <title>Layer 1</title>
-        <path fillRule="nonzero" fill="#CACED3" id="Path" d={`m6, ${props.height - 18}.89712l0,10c0,2.1422 1.68397,3.89108 3.80036,3.9951l0.19964,0.0049l5,0l0,1l-5,0c-2.76142,0 -5,-2.23858 -5,-5l0,-10l1,0z`} />
-        <line strokeLinecap="undefined" strokeLinejoin="undefined" id="svg_1" y2="0" x2="5.50861" y1={`${props.height - 17}`} x1="5.50861" stroke="#caced3" fill="none" />
-      </g>
-    </svg>
-  );
 };
 
 export const Default = () => {
@@ -99,10 +87,8 @@ export const Default = () => {
                 </Box>
                 {allConditions.map(item => (
                   <Box isRow key={item.key}>
-                    <Box mt="-10px" mr="-3px">
-                      <BracketSVG width="15" height="40" />
-                    </Box>
-                    <Box ml="3px" width="100%">
+                    <Bracket />
+                    <Box ml="3px" width="100%" >
                       <Box
                         variant="forms.input.container"
                         bg="white"
@@ -127,9 +113,7 @@ export const Default = () => {
                   </Box>
                 ))}
                 <Box isRow >
-                  <Box mt="-10px" mr="-3px">
-                    <BracketSVG width="15" height="80" />
-                  </Box>
+                  <Bracket isLast />
                   <Box
                     variant="forms.input.container"
                     borderRadius="4px"
@@ -149,12 +133,11 @@ export const Default = () => {
                       <Text> of the conditions are true</Text>
                     </Box>
                     <Box ml="sm" >
-                      {anyConditions.map(item => (
-                        <Box isRow mt="md" key={item.key}>
-                          <Box mt="-25px" mr="-3px">
-                            <BracketSVG width="15" height="40" />
-                          </Box>
+                      {anyConditions.map((item, index) => (
+                        <Box isRow key={item.key}>
+                          <Bracket isLast={index === anyConditions.length - 1} />
                           <Box
+                            mt="md"
                             variant="forms.input.container"
                             bg="white"
                             isRow

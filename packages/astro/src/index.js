@@ -26,6 +26,9 @@ export * from './components/Avatar';
 export { default as Box } from './components/Box';
 export * from './components/Box';
 
+export { default as Bracket } from './components/Bracket';
+export * from './components/Bracket';
+
 export { default as Breadcrumbs } from './components/Breadcrumbs';
 export * from './components/Breadcrumbs';
 
