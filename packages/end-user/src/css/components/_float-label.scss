@@ -54,6 +54,15 @@ $float-label-input-padding-bottom: $input-padding-vertical - $spacing-xs;
     font-weight: 200;
   }
 
+  &:not(.placeholder-shown) input::-webkit-credentials-auto-fill-button {
+      margin-top: -10px;
+  }
+
+  input::-ms-reveal,
+  input::-ms-clear {
+    margin-top: -10px;
+  }
+
   input:-webkit-autofill {
     -webkit-text-fill-color: $input-text-color;
 
