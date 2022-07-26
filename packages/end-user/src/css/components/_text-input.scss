@@ -38,7 +38,12 @@
   }
 
   &::-webkit-credentials-auto-fill-button {
-    margin-right: 55px;
+    margin-right: 18px;
+  }
+
+  &::-ms-reveal,
+  &::-ms-clear {
+    margin-right: 18px;
   }
 
   &--error,
