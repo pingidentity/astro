@@ -137,9 +137,9 @@ export const ControlledWithButton = (args) => {
 
 export const WithCustomColorsAndIcons = args => (
   <Messages {...args}>
-    <Item bg="neutral.90" color="active" icon={AccountIcon}>We have to take a look with this camera.</Item>
-    <Item bg="neutral.90" color="active" icon={AccountIcon}>Who said that? SURE you can die! You want to die?! Oh yeah, good luck with that. Stop! Do not shoot fire stick in space canoe! Cause explosive decompression!</Item>
-    <Item bg="neutral.90" color="active" icon={AccountIcon}>Oh God, what have I done?</Item>
+    <Item bg="accent.99" color="active" icon={AccountIcon}>We have to take a look with this camera.</Item>
+    <Item bg="accent.99" color="active" icon={AccountIcon}>Who said that? SURE you can die! You want to die?! Oh yeah, good luck with that. Stop! Do not shoot fire stick in space canoe! Cause explosive decompression!</Item>
+    <Item bg="accent.99" color="active" icon={AccountIcon}>Oh God, what have I done?</Item>
   </Messages>
 );
 
