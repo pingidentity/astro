@@ -347,8 +347,16 @@ const floatLabelWrapper = {
   zIndex: 2,
 };
 
+const bracketBase = {
+  width: '15px',
+  pl: '5px',
+  ml: '5px',
+  position: 'relative',
+};
+
 export default {
   base,
+  bracketBase,
   card,
   chip,
   countChip,
