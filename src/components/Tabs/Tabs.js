@@ -18,6 +18,20 @@ export const TabsContext = React.createContext({});
  * Tabs are used to divide content, navigate to other views, and indicate work progress.
  */
 
+const TabPanel = forwardRef(({ state, ...props }, ref) => {
+  const tabPanelRef = useRef();
+  const { children, tabPanelProps } = props;
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => tabPanelRef.current);
+  const { tabPanelProps: raTabPanelProps } = useTabPanel(props, state, tabPanelRef);
+
+  return (
+    <Box {...tabPanelProps} {...raTabPanelProps} ref={tabPanelRef}>
+      {children}
+    </Box>
+  );
+});
+
 const Tabs = forwardRef((props, ref) => {
   const {
     children,
@@ -35,9 +49,6 @@ const Tabs = forwardRef((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => tabListRef.current);
-  const tabPanelRef = useRef();
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => tabPanelRef.current);
 
   let allItems = [];
 
@@ -53,7 +64,6 @@ const Tabs = forwardRef((props, ref) => {
       }
     });
   }
-
   const state = useTabListState({
     ...props,
     onSelectionChange,
@@ -62,15 +72,6 @@ const Tabs = forwardRef((props, ref) => {
   const {
     tabListProps: raTabListProps,
   } = useTabList(props, state, tabListRef);
-  const {
-    tabPanelProps: raTabPanelProps,
-  } = useTabPanel(props, state, tabPanelRef);
-
-  const panelContent = (
-    state.selectedItem
-      ? (state.selectedItem.props.content || state.selectedItem.props.children)
-      : null
-  );
 
   return (
     <TabsContext.Provider value={state}>
@@ -96,14 +97,13 @@ const Tabs = forwardRef((props, ref) => {
               />
             ))}
         </Box>
-        <Box
-          variant="tabPanel"
-          ref={tabPanelRef}
-          {...tabPanelProps}
-          {...raTabPanelProps}
+        <TabPanel
+          key={state.selectedItem?.key}
+          state={state}
+          tabPanelProps={tabPanelProps}
         >
-          {panelContent}
-        </Box>
+          {state.selectedItem?.props.children || state.selectedItem?.props.content}
+        </TabPanel>
       </Box>
     </TabsContext.Provider>
   );
@@ -142,6 +142,11 @@ Tabs.defaultProps = {
   orientation: 'horizontal',
   mode: 'default',
   keyboardActivation: 'manual',
+};
+
+TabPanel.propTypes = {
+  state: PropTypes.shape({}),
+  tabPanelProps: PropTypes.shape({}),
 };
 
 Tabs.displayName = 'Tabs';
