@@ -23,7 +23,7 @@ export const textInputFormats = {
     DEFAULT: ''
 };
 
-const inputmodeByFormats = {
+const inputModeByFormats = {
     [textInputFormats.TEXT]: { inputMode: 'text' },
     [textInputFormats.NUMERIC]: { inputMode: 'numeric', pattern: '\d*', noValidate: true },
     [textInputFormats.EMAIL]: { inputMode: 'email' },
@@ -45,7 +45,7 @@ const inputmodeByFormats = {
  * @param {TextInput~onChange} onChange
  *      The callback triggered when the input value changes.
  * @param {string} placeholder
- *      The text to display in text input before a value is entered a a placeholder.
+ *      The text to display in text input before a value is entered as a placeholder.
  *      This value displays as a label once an input value is provided.
  * @param {TextInput~textInputTypes} [type]
  *      Determines the styling of the input.
@@ -110,7 +110,7 @@ const TextInput = ({
               key="textinput"
               autoFocus={autoFocus}
               autoComplete={useAutoComplete ? 'on' : 'off'}
-              {...inputmodeByFormats[format]}
+              {...inputModeByFormats[format]}
               {...inputProps}
           />
         </FocusRing>

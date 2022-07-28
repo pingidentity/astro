@@ -25,9 +25,8 @@
   @extend %input-text;
   @extend %input-box;
 
-  padding-right: 40px;
-
   margin: 0px;
+  padding-right: 40px;
 
   &::placeholder {
     @extend %placeholder-text;
@@ -39,11 +38,12 @@
   }
 
   &::-webkit-credentials-auto-fill-button {
-    margin-right: 55px;
+    margin-right: 18px;
   }
-  
-  &:not(:placeholder-shown){
-    padding-right: 100px;
+
+  &::-ms-reveal,
+  &::-ms-clear {
+    margin-right: 18px;
   }
 
   &--error,
