@@ -9,12 +9,12 @@ import PropTypes from 'prop-types';
 import { Item as Tab } from '@react-stately/collections';
 import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
 import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
+import { Pressable } from '@react-aria/interactions';
 
 import { useStatusClasses } from '../../hooks';
 import {
   Box,
   Text,
-  Button,
   PopoverMenu,
   Icon,
   Menu,
@@ -125,13 +125,18 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
 
   return (
     <PopoverMenu onOpenChange={setIsOpen} isOpen={isOpen} isContainFocus>
-      <Button className={classNames} variant="menuTab" onKeyDown={handleKeyNavigation}>
-        <Box className={classNames} variant="tab" ref={ref} {...tabProps}>
-          <Text variant="tabLabel">{item.props.name}</Text>
-          {selectedItem && <TabLine />}
+      <Pressable>
+        <Box isRow alignItems="center" className={classNames} variant="menuTab" onKeyDown={handleKeyNavigation} role="tablist">
+          <Box className={classNames} variant="tab" ref={ref} {...tabProps}>
+            <Text variant="tabLabel">{item.props.name}</Text>
+            {selectedItem && <TabLine />}
+          </Box>
+          <Icon
+            color={isTabFocused || classNames.includes('is-hovered') ? 'active' : 'neutral.40'}
+            icon={isOpen ? ArrowDropUpIcon : ArrowDropDownIcon}
+          />
         </Box>
-        <Icon icon={isOpen ? ArrowDropUpIcon : ArrowDropDownIcon} />
-      </Button>
+      </Pressable>
       <Menu onAction={setSelectedItem} selectionMode="single" selectedKeys={[selectionManager.focusedKey]} ref={menuRef}>
         {items.map(tab => <Tab key={tab.key}>{tab.name}</Tab>)}
       </Menu>
