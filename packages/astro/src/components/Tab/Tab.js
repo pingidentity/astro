@@ -7,7 +7,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { useTab } from '@react-aria/tabs';
 import { useFocusRing } from '@react-aria/focus';
-import { useHover } from '@react-aria/interactions';
+import { Pressable, useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { Item as Tab } from '@react-stately/collections';
 
@@ -20,7 +20,6 @@ import {
   Text,
   TooltipTrigger,
   Tooltip,
-  Button,
 } from '../..';
 
 /**
@@ -110,9 +109,11 @@ export const CollectionTab = forwardRef((props, ref) => {
       <>
         {separator}
         <TooltipTrigger {...tooltipTriggerProps} isOpen={isHovered || isFocusVisible}>
-          <Button variant="quiet">
-            {tab}
-          </Button>
+          <Pressable>
+            <span variant="quiet">
+              {tab}
+            </span>
+          </Pressable>
           <Tooltip>
             {itemProps.textValue || itemProps.title}
           </Tooltip>
