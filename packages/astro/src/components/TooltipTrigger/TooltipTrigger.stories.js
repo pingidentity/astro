@@ -49,7 +49,7 @@ export const withWidthProp = () => (
 export const withArrowCrossOffsetProp = () => (
   <TooltipTrigger arrowCrossOffset="30px" isOpen >
     <Button>Hover Over Me!</Button>
-    <Tooltip>Display with a delay</Tooltip>
+    <Tooltip>With arrowCrossOffset=&quot;30px&quot;</Tooltip>
   </TooltipTrigger>
 );
 
