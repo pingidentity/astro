@@ -8,6 +8,7 @@ import {
 import user from '@testing-library/user-event';
 import { FORM_MODE } from '../../utils/constants';
 import { renderSchemaForm } from './utils';
+import { FLOAT_LABEL } from '../ObjectFieldTemplate';
 
 const schema = {
   type: 'object',
@@ -448,4 +449,77 @@ test('field level markdown label', () => {
   });
 
   expect(screen.getByTestId('react-markdown')).toBeInTheDocument();
+});
+
+describe('when a field has labelMode float', () => {
+  const labelModeFloatUiSchema = {
+    value: {
+      'ui:options': {
+        label: 'Label',
+        labelMode: 'float',
+      },
+    },
+  };
+
+  describe('when the field has no value', () => {
+    test('it should not have class is-float-label-active', () => {
+      renderSchemaForm({
+        endpoint: 'test',
+        onServerError,
+        schema,
+        uiSchema: labelModeFloatUiSchema,
+      });
+
+      expect(screen.getByTestId(FLOAT_LABEL.isFloatLabel));
+    });
+  });
+
+  describe('when the field has a value', () => {
+    test('it should have class is-float-label-active', async () => {
+      renderSchemaForm({
+        endpoint: 'test',
+        onServerError,
+        schema,
+        uiSchema: labelModeFloatUiSchema,
+      });
+
+      const input = screen.getByRole('textbox', { name: 'Label' });
+      await waitFor(() => fireEvent.change(input, { target: { value: '123' } }));
+
+      expect(screen.getByTestId(FLOAT_LABEL.isFloatLabelActive));
+    });
+  });
+});
+
+describe('when a field does not have labelMode float', () => {
+  describe('when the field has no value', () => {
+    test('it should not have class is-float-label-active', () => {
+      renderSchemaForm({
+        endpoint: 'test',
+        onServerError,
+        schema,
+        uiSchema,
+      });
+
+      expect(screen.queryByTestId(FLOAT_LABEL.isFloatLabel)).toBeNull();
+      expect(screen.queryByTestId(FLOAT_LABEL.isFloatLabelActive)).toBeNull();
+    });
+  });
+
+  describe('when the field has a value', () => {
+    test('it should not have class is-float-label-active', async () => {
+      renderSchemaForm({
+        endpoint: 'test',
+        onServerError,
+        schema,
+        uiSchema,
+      });
+
+      const input = screen.getByRole('textbox', { name: 'Label' });
+      await waitFor(() => fireEvent.change(input, { target: { value: '123' } }));
+
+      expect(screen.queryByTestId(FLOAT_LABEL.isFloatLabel)).toBeNull();
+      expect(screen.queryByTestId(FLOAT_LABEL.isFloatLabelActive)).toBeNull();
+    });
+  });
 });
