@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import PopoverMenu from './PopoverMenu';
+import 'mutationobserver-shim';
 
 window.__DEV__ = true;
 jest.mock('popper.js');
@@ -68,6 +69,34 @@ describe('PopoverMenu', () => {
 
         popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
         expect(popovermenu.exists()).toEqual(false);
+    });
+
+    it('handles focus from toggle button to option and back', () => {
+        const testFn = jest.fn();
+        const wrapper = getComponent({
+            isOpen: false,
+            buttons: [{
+                id: 'testButton',
+                label: 'Test Button',
+                onClick: testFn,
+            }],
+        });
+
+        let popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
+        
+        expect(popovermenu.exists()).toBeFalsy();
+        
+        const kebabButton = wrapper.children().find('button.popover-menu__control');
+        kebabButton.simulate('click');
+        popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
+        expect(popovermenu.exists()).toBeTruthy();
+        expect(document.activeElement.className).toContain('popover-menu__item');
+        
+        const button = popovermenu.find('button.popover-menu__item');
+        button.simulate('click');
+        popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
+        expect(popovermenu.exists()).toBeFalsy();
+        expect(document.activeElement.className).toContain('popover-menu__control');
     });
 
     it("should let pass data-id to the PopoverMenu buttons", () => {
