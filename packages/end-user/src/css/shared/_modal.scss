@@ -61,11 +61,18 @@
         @include transform(translateX(-50%));
     }
     .close-modal {
-        display: block;
         position: absolute;
         top: 13px;
         right: 15px;
-        line-height: 1em;
+        display: block;
+        margin: 0;
+        padding: 0;
+        height: 18px;
+        width: auto;
+        min-height: auto;
+        border: 0;
+        border-radius: 50%;
+        background-color: transparent;
         color: transparent;
         cursor: pointer;
 
