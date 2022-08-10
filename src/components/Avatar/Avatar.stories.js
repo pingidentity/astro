@@ -1,6 +1,6 @@
 import React from 'react';
-import faker from 'faker';
 import Avatar from '.';
+import { pingImg } from '../../utils/devUtils/constants/images';
 
 export default {
   title: 'Avatar',
@@ -10,7 +10,7 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: faker.image.lorempicsum.imageUrl(150, 150, false, 0, '1'),
+      defaultValue: pingImg,
     },
   },
 };
