@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import isChromatic from 'chromatic/isChromatic';
 import Image from '.';
-import { chiefIdentityChampions, pingImg } from './imageConstants';
+import { chiefIdentityChampions, pingImg } from '../../utils/devUtils/constants/images';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import { Box, Button } from '../../index';
 
