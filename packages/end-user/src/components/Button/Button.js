@@ -32,6 +32,7 @@ const Button = React.forwardRef(({
     type,
     style,
     render,
+    ...others
 }, ref) => {
     const classNames = classnames('button file-input--button', className, iconName, {
         'button--disabled': disabled,
@@ -56,6 +57,7 @@ const Button = React.forwardRef(({
                       style={style}
                       ref={ref}
                       type={isSubmit ? 'submit' : 'button'}
+                      {...others}
                   >
                       {loading && <span className={"button--loading-ellipsis"}><span></span></span>}
                       {!loading && <>{label}{children}</>}

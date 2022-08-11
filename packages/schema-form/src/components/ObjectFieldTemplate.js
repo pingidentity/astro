@@ -4,12 +4,19 @@ import _ from 'lodash';
 import Errors from './Errors';
 import { AstroComponents } from '../utils/astro';
 
+export const FLOAT_LABEL = {
+  isFloatLabel: 'is-float-label',
+  isFloatLabelActive: 'is-float-label-active',
+};
+
+const UI_OPTIONS = 'ui:options';
+
 const ObjectFieldTemplate = (props) => {
   const {
-    formContext: { extraErrors, theme },
-    title,
     description,
+    formContext: { extraErrors, theme },
     properties,
+    title,
     uiSchema,
   } = props;
 
@@ -19,16 +26,36 @@ const ObjectFieldTemplate = (props) => {
   // eslint-disable-next-line react/prop-types
   const formLevelErrors = extraErrors?._form?.__errors; // eslint-disable-line no-underscore-dangle
 
+  const fields = properties.map((el) => {
+    const { name, content } = el;
+    const { formData } = content.props;
+
+    const hasFloatLabel = uiSchema[name] && uiSchema[name][UI_OPTIONS]?.labelMode === 'float';
+
+    return (hasFloatLabel
+      ? (
+        <div
+          className={`${formData && FLOAT_LABEL.isFloatLabelActive}`}
+          data-testid={`${formData ? FLOAT_LABEL.isFloatLabelActive : FLOAT_LABEL.isFloatLabel}`}
+          key={name}
+        >
+          {content}
+        </div>
+      )
+      : <Fragment key={name}>{content}</Fragment>
+    );
+  });
+
   return (
     <>
       {title && <FormTitle>{title}</FormTitle>}
       <Errors
         errors={formLevelErrors}
-        hasMarkdown={_.get(uiSchema, '_form["ui:options"].hasMarkdownErrors', false)}
+        hasMarkdown={_.get(uiSchema, `_form[${UI_OPTIONS}].hasMarkdownErrors`, false)}
         theme={theme}
       />
       {description && <FormDescription>{description}</FormDescription>}
-      {properties.map((el) => <Fragment key={el.name}>{el.content}</Fragment>)}
+      {fields}
     </>
   );
 };

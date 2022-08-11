@@ -5,6 +5,7 @@ import { Portal } from 'react-portal';
 import { isIE } from '../../util/Utils';
 import EventUtils from '../../util/EventUtils.js';
 import CancelTooltip from '../Tooltip/CancelTooltip';
+import Button from '../Button/Button';
 
 /**
  * @enum {string}
@@ -140,9 +141,14 @@ class Modal extends React.Component {
         this.props.onClose();
     };
 
-    _getCloseButtonMarkup = () => {
-        return <span data-id="close-button" className="close-modal" onClick={this.props.onClose}></span>;
-    };
+    _getCloseButtonMarkup = () => (
+        <Button
+            aria-label="Close"
+            data-id="close-button"
+            className="close-modal"
+            onClick={this.props.onClose}
+        />
+    );
 
     _getCloseButton = () => {
         let closeBtn;
