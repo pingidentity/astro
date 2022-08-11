@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.24.0...@pingux/astro@1.25.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* [UIP-5482] Breadcrumbs missing left focus border ([c1c1742](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c1c17423d998d74dfeae4fa2f912bf1da82c1817))
+* [UIP-5590] fix offset ToolTip Trigger Text ([cbac411](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cbac411e575a8c46ec1a63aba322f670c8efb902))
+
+
+### Features
+
+* [UIP-5433] add accessible list and panel ([61e0749](https://gitlab.corp.pingidentity.com/ux/pingux/commit/61e0749e1de5dfc271f895433e5d139b39734105))
+
+
+
+
+
 # [1.24.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.23.0...@pingux/astro@1.24.0) (2022-07-28)
 
 **Note:** Version bump only for package @pingux/astro
