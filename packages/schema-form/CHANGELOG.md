@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.9.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.9.2...@pingux/schema-form@3.9.3) (2022-08-11)
+
+
+### Bug Fixes
+
+* [UIP-5547] add is-float-label-active class to basic text field if field has value ([0c1825c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0c1825ca6980c5ece1feee9290e880ea21c782db))
+
+
+
+
+
 ## [3.9.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.9.1...@pingux/schema-form@3.9.2) (2022-07-28)
 
 **Note:** Version bump only for package @pingux/schema-form

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.6](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.5...@pingux/end-user@2.4.6) (2022-08-11)
+
+
+### Bug Fixes
+
+* [UIP-5516] End user password icon spacing changes when input is entered safari specific ([b17a7f7](https://gitlab.corp.pingidentity.com/ux/end-user/commit/b17a7f741ec167b8e4603bf1c4b4e1e83c149d3f))
+* [UIP-5518] password field with floating label edge/safari specific icons ([14b39b0](https://gitlab.corp.pingidentity.com/ux/end-user/commit/14b39b01d6a6af707ff3127bb1cff35b80ca3361))
+* [UIP-5581] change element to button and add aria-label ([2dd300c](https://gitlab.corp.pingidentity.com/ux/end-user/commit/2dd300c8bde4c116f6b50bb3bcfc6629989c768c))
+* [UIP-5583] PopoverMenu keyboard navigation ([81bc374](https://gitlab.corp.pingidentity.com/ux/end-user/commit/81bc37433bca9733283fec8995ae0479d1cf2cb2))
+* [UIP-5584] add the possibility for passing custom props to the button component ([621a1df](https://gitlab.corp.pingidentity.com/ux/end-user/commit/621a1df0339d4fffaffd5f46ea72605ddd6c1754))
+
+
+
+
+
 ## [2.4.5](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.4...@pingux/end-user@2.4.5) (2022-07-28)
 
 **Note:** Version bump only for package @pingux/end-user
