@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Portal } from 'react-portal';
+import { FocusScope } from '@react-aria/focus';
 import { isIE } from '../../util/Utils';
 import EventUtils from '../../util/EventUtils.js';
 import CancelTooltip from '../Tooltip/CancelTooltip';
@@ -14,7 +15,7 @@ import Button from '../Button/Button';
 const Type = {
     BASIC: 'basic',
     DIALOG: 'dialog',
-    ALERT: 'alert'
+    ALERT: 'alert',
 };
 /**
  * @enum {string}
@@ -76,12 +77,12 @@ const BodyOverflowTypes = {
  */
 
 class Modal extends React.Component {
-
     static displayName = 'Modal';
     static propTypes = {
         'data-id': PropTypes.string,
         className: PropTypes.string,
         expanded: PropTypes.bool,
+        setExpanded: PropTypes.func,
         modalTitle: PropTypes.node,
         showHeader: PropTypes.bool,
         onClose: PropTypes.func,
@@ -90,7 +91,7 @@ class Modal extends React.Component {
         type: PropTypes.oneOf([
             Type.BASIC,
             Type.DIALOG,
-            Type.ALERT
+            Type.ALERT,
         ]),
         overflow: PropTypes.oneOf(Object.values(BodyOverflowTypes)),
         cancelTooltip: PropTypes.object,
@@ -98,7 +99,7 @@ class Modal extends React.Component {
     };
 
     static childContextTypes = {
-        close: PropTypes.func
+        close: PropTypes.func,
     };
 
     static defaultProps = {
@@ -109,6 +110,12 @@ class Modal extends React.Component {
         type: Type.BASIC,
         overflow: BodyOverflowTypes.AUTO,
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            prevElement: null,
+        };
+    }
 
     /*
      * Set close method into context to allow children
@@ -116,7 +123,7 @@ class Modal extends React.Component {
      */
     getChildContext() {
         return {
-            close: this.props.onClose
+            close: this.props.onClose,
         };
     }
 
@@ -125,7 +132,11 @@ class Modal extends React.Component {
             return;
         }
 
-        EventUtils.callIfOutsideOfContainer(this.refs.container, function () {
+        if (e.keyCode === 27) {
+            this.props.setExpanded(false);
+        }
+
+        EventUtils.callIfOutsideOfContainer(this.refs.container, () => {
             e.stopPropagation();
             e.preventDefault();
         }, e);
@@ -134,7 +145,7 @@ class Modal extends React.Component {
     _handleBgClick = (e) => {
         if (!this.props.closeOnBgClick ||
             !this.props.onClose ||
-            ["modal-content", "modal-bg"].indexOf(e.target.getAttribute("data-id")) === -1) {
+            ['modal-content', 'modal-bg'].indexOf(e.target.getAttribute('data-id')) === -1) {
             return;
         }
 
@@ -183,30 +194,9 @@ class Modal extends React.Component {
         return this.showIeScrollHack ? { height: 'auto' } : null;
     };
 
-    _triggerEvent(open) {
-        const eventName = open ? 'ui-library-modal-open' : 'ui-library-modal-close';
-        const eventDetail = { component: this.displayName };
-        let event;
-
-        if (isIE()) {
-            event = document.createEvent('CustomEvent');
-            event.initCustomEvent(eventName, true, false, eventDetail);
-        } else {
-            event = new CustomEvent(eventName, { bubbles: true, detail: eventDetail });
-        }
-
-        if (open) {
-            document.body.classList.add('modal--open');
-        } else {
-            document.body.classList.remove('modal--open');
-        }
-
-        document.body.dispatchEvent(event);
-    }
 
     componentDidMount() {
         window.addEventListener('keydown', this._handleKeyDown);
-
         this.isIeBrowser = isIE();
         this.showIeScrollHack = false;
         this.isWizard = null;
@@ -226,11 +216,42 @@ class Modal extends React.Component {
         }
     }
 
+
     componentWillUnmount() {
         window.removeEventListener('keydown', this._handleKeyDown);
         if (this.props.expanded) {
             this._triggerEvent(false);
         }
+    }
+
+
+    _triggerEvent(open) {
+        const eventName = open ? 'ui-library-modal-open' : 'ui-library-modal-close';
+        const eventDetail = { component: this.displayName };
+        let event;
+
+
+        if (isIE()) {
+            event = document.createEvent('CustomEvent');
+            event.initCustomEvent(eventName, true, false, eventDetail);
+        } else {
+            event = new CustomEvent(eventName, { bubbles: true, detail: eventDetail });
+        }
+
+        if (open) {
+            document.body.classList.add('modal--open');
+        } else {
+            document.body.classList.remove('modal--open');
+            this.state.prevElement.focus();
+        }
+
+        document.body.dispatchEvent(event);
+
+        const activeButton = document.activeElement;
+
+        this.setState({
+            prevElement: activeButton,
+        });
     }
 
     render() {
@@ -253,36 +274,41 @@ class Modal extends React.Component {
                 data-id={this.props['data-id']}
                 ref="container"
                 key="modal"
-                className={classnames('modal', this.props.className, modalClasses)}>
-                <div
-                    className="modal-bg"
-                    data-id="modal-bg"
-                    onClick={this._handleBgClick}
-                />
-                <div
-                    className="modal-content"
-                    tabIndex="-1"
-                    data-id="modal-content"
-                    onClick={this._handleBgClick}
-                >
-                    <span data-id="modal-inner-content">
-                        {this.props.showHeader && this.props.type !== 'dialog' ? (
-                            <div className="modal-header" data-id="modal-header">
-                                {this.props.modalTitle}
-                                {this.props.onClose && this._getCloseButton()}
-                            </div>
-                        ) : null}
-                        <div
-                          className={classnames('modal-body', `overflow-${overflow}`)}
-                          data-id="modal-body"
-                          style={this._toggleIeScrollHack()}>
-                            {(!this.props.showHeader || this.props.type === 'dialog') && this.props.onClose ? (
-                                this._getCloseButton()
+                className={classnames('modal', this.props.className, modalClasses)}
+                role="dialog"
+            >
+                <FocusScope contain restoreFocus autoFocus >
+                    <div
+                        className="modal-bg"
+                        data-id="modal-bg"
+                        onClick={this._handleBgClick}
+                    />
+                    <div
+                        className="modal-content"
+                        tabIndex="-1"
+                        data-id="modal-content"
+                        onClick={this._handleBgClick}
+                    >
+                        <span data-id="modal-inner-content">
+                            {this.props.showHeader && this.props.type !== 'dialog' ? (
+                                <div className="modal-header" data-id="modal-header">
+                                    {this.props.modalTitle}
+                                    {this.props.onClose && this._getCloseButton()}
+                                </div>
                             ) : null}
-                            {this.props.children}
-                        </div>
-                    </span>
-                </div>
+                            <div
+                                className={classnames('modal-body', `overflow-${overflow}`)}
+                                data-id="modal-body"
+                                style={this._toggleIeScrollHack()}
+                            >
+                                {(!this.props.showHeader || this.props.type === 'dialog') && this.props.onClose ? (
+                                    this._getCloseButton()
+                                ) : null}
+                                {this.props.children}
+                            </div>
+                        </span>
+                    </div>
+                </FocusScope>
             </div>
         );
 
@@ -293,10 +319,10 @@ class Modal extends React.Component {
 const BodyTitle = ({
     children,
 }) => (
-        <div className="body-title">
-            {children}
-        </div>
-    );
+    <div className="body-title">
+        {children}
+    </div>
+);
 BodyTitle.propTypes = {
     children: PropTypes.node,
 };

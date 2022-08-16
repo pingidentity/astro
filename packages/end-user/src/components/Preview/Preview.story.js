@@ -390,13 +390,13 @@ export const WithModal = () => {
 
     return (
         <div>
-            <Modal expanded={expanded}>
-            <Preview>
-                <p className="page">Preview Content</p>
-            </Preview>
-            <button onClick={() => setExpanded(false)}>Close</button>
+            <Modal expanded={expanded} setExpanded={setExpanded}>
+                <Preview>
+                    <p className="page">Preview Content</p>
+                </Preview>
+                <Button onClick={() => setExpanded(false)}>Close</Button>
             </Modal>
-            <button onClick={() => setExpanded(true)}>Open</button>
+            <Button onClick={() => setExpanded(true)}>Open</Button>
         </div>
     );
 };
