@@ -19,10 +19,11 @@ Yarn:
 
 ## Usage
 
-All apps should be wrapped in an <AstroWrapper> for full functionality and styling.
+All apps should be wrapped in an `<AstroWrapper>` for full functionality and styling.
 
 ```
-Import { AstroWrapper } from ‘@pingux/astro’;
+import { AstroWrapper } from ‘@pingux/astro’;
+
 <AstroWrapper>
   <App />
 </AstroWrapper>
@@ -34,7 +35,7 @@ Astro uses [Storybook](https://storybook.js.org/) for component documentation. O
 
 `yarn && yarn start`
 
-The Storybook server defaults to  `https://localhost:6006` . This port can be customized by running the command start -p 9009. For example, this will start Storybook on port 9009. More information on customizing Storybook CLI options can be found at https://storybook.js.org/docs/react/api/cli-options. 
+The Storybook server defaults to `https://localhost:6006`. This port can be customized by running the command start -p 9009. For example, this will start Storybook on port 9009. More information on customizing Storybook CLI options can be found at https://storybook.js.org/docs/react/api/cli-options. 
 
 Component prop documentation is available under the “documentation” tab per each component story. Most props can be toggled and configured for preview purposes within the prop table.
 
@@ -62,12 +63,6 @@ Astro’s [changelog](CHANGELOG.md) notes all features and bug fixes within each
 ## Contributing and Bug Reports
 
 Astro is closed for open contributions. However, we are appreciative of bug reports and suggestions. Please use GitHub Issues to submit bug reports and suggestions.
-
-
-## Roadmap
-
-Astro is currently in a beta stage. For more information on when 1.0.0 will be released keep an eye out for our upcoming roadmap.
-
 
 ## Licensing
 
