@@ -17,96 +17,178 @@ const items = [
 ];
 
 export const Default = () => {
-  const CustomOnSvg = () => {
+  const CustomOnSvg = (props) => {
     return (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
-        <path d="M8 10V13H14V18H8V21L2 15.5L8 10Z" fill="#CACED3" />
-        <path d="M9.83325 10.6251V6.37511H15.4999V2.94678L21.0533 8.50011L15.4999 14.0534V10.6251H9.83325Z" fill="#4462ED" />
-        <path d="M8 10V13H14V18H8V21L2 15.5L8 10ZM22 8.5L16 3V6H10V11H16V14L22 8.5Z" fill="#515F6B" />
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props} >
+        <path d="M5.33325 6.66666V8.66666H9.33325V12H5.33325V14L1.33325 10.3333L5.33325 6.66666Z" fill="currentColor" />
+        <path d="M14.6666 5.66667L10.6666 2V4H6.66658V7.33333H10.6666V9.33333L14.6666 5.66667Z" fill="currentColor" />
       </svg>
     );
   };
 
-  const CustomOffSvg = () => {
+  const CustomOffSvg = (props) => {
     return (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
-        <path d="M8 10V13H14V18H8V21L2 15.5L8 10Z" fill="#CACED3" />
-        <path d="M9.83331 10.6251V6.37511H15.5V2.94678L21.0533 8.50011L15.5 14.0534V10.6251H9.83331Z" fill="#4462ED" />
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props} >
+        <path d="M5.33325 6.66667V8.66667H9.33325V12H5.33325V14L1.33325 10.3333L5.33325 6.66667Z" fill="#CACED3" />
+        <path d="M14.6666 5.66667L10.6666 2V4H6.66658V7.33333H10.6666V9.33333L14.6666 5.66667Z" fill="currentColor" />
+      </svg>
+    );
+  };
+
+  const CustomRightSvg = (props) => {
+    return (
+      <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" {...props} >
+        <path d="M8 4L4 0V2.18182H0V5.81818H4V8L8 4Z" fill="currentColor" />
       </svg>
     );
   };
 
   return (
-    <Box
-      sx={{
-        alignItems: 'center',
-      }}
-      isRow
-    >
-      <Icon icon={DragVerticalIcon} size={25} color="neutral.50" />
-      <ComboBoxField
-        items={items}
-        defaultSelectedKey="Last Name"
-        containerProps={{
-          width: '275px',
-        }}
-        labelProps={{
-          mb: 0,
-        }}
-        aria-label="Row one value"
-        controlProps={{
-          'aria-label': 'test',
-        }}
-      >
-        {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
-      </ComboBoxField>
+    <>
       <Box
         sx={{
-          ml: '5px',
-          mr: '5px',
-          flexShrink: 0,
+          alignItems: 'center',
         }}
-      >
-        <IconButtonToggle
-          toggledIcon={CustomOnSvg}
-          defaultIcon={CustomOffSvg}
-          title="Bidirectional/ Outbound toggle"
-          iconProps={{ size: 20 }}
-          buttonProps={{
-            variant: 'svgIconButton',
-          }}
-        />
-      </Box>
-      <ComboBoxField
-        items={items}
-        defaultSelectedKey="First Name"
-        containerProps={{
-          width: '275px',
-        }}
-        labelProps={{
-          mb: 0,
-        }}
-        controlProps={{
-          'aria-label': 'Row one Pingone value',
-        }}
-      >
-        {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
-      </ComboBoxField>
-      <Box
         isRow
-        alignItems="center"
-        sx={{
-          marginLeft: '12px',
-          marginRight: '12px',
-        }}
       >
-        <IconButton>
-          <Icon icon={CogsIcon} color="neutral.30" size={20} title="edit icon" />
-        </IconButton>
-        <IconButton ml="5px" >
-          <Icon icon={DeleteIcon} color="neutral.30" size={20} title="delete icon" />
-        </IconButton>
+        <Icon icon={DragVerticalIcon} size={25} color="neutral.50" />
+        <ComboBoxField
+          items={items}
+          defaultSelectedKey="Last Name"
+          containerProps={{
+            width: '275px',
+          }}
+          labelProps={{
+            mb: 0,
+          }}
+          aria-label="Row one value"
+          controlProps={{
+            'aria-label': 'test',
+          }}
+        >
+          {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+        </ComboBoxField>
+        <Box
+          sx={{
+            mx: 'sm',
+            flexShrink: 0,
+          }}
+        >
+          <IconButtonToggle
+            toggledIcon={CustomOnSvg}
+            defaultIcon={CustomOffSvg}
+            title="Bidirectional/ Outbound toggle"
+            iconProps={{
+              size: 16,
+            }}
+            buttonProps={{
+              variant: 'bidirectionalIconButton',
+            }}
+          />
+        </Box>
+        <ComboBoxField
+          items={items}
+          defaultSelectedKey="First Name"
+          containerProps={{
+            width: '275px',
+          }}
+          labelProps={{
+            mb: 0,
+          }}
+          controlProps={{
+            'aria-label': 'Row one Pingone value',
+          }}
+        >
+          {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+        </ComboBoxField>
+        <Box
+          isRow
+          alignItems="center"
+          sx={{
+            marginLeft: '12px',
+            marginRight: '12px',
+          }}
+        >
+          <IconButton aria-label="Edit">
+            <Icon icon={CogsIcon} color="neutral.30" size={20} title="edit icon" />
+          </IconButton>
+          <IconButton ml="5px" aria-label="Delete">
+            <Icon icon={DeleteIcon} color="neutral.30" size={20} title="delete icon" />
+          </IconButton>
+        </Box>
       </Box>
-    </Box>
+      <Box
+        sx={{
+          alignItems: 'center',
+        }}
+        isRow
+      >
+        <Icon icon={DragVerticalIcon} size={25} color="neutral.50" />
+        <ComboBoxField
+          items={items}
+          defaultSelectedKey="Last Name"
+          containerProps={{
+            width: '275px',
+          }}
+          labelProps={{
+            mb: 0,
+          }}
+          aria-label="Row one value"
+          controlProps={{
+            'aria-label': 'test',
+          }}
+        >
+          {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+        </ComboBoxField>
+        <Box
+          sx={{
+            mx: 'sm',
+            flexShrink: 0,
+          }}
+        >
+          <IconButtonToggle
+            toggledIcon={CustomRightSvg}
+            defaultIcon={CustomRightSvg}
+            title="This attribute does not support write-back."
+            iconProps={{
+              size: 8,
+            }}
+            buttonProps={{
+              variant: 'bidirectionalIconButton',
+            }}
+          />
+        </Box>
+        <ComboBoxField
+          items={items}
+          defaultSelectedKey="First Name"
+          containerProps={{
+            width: '275px',
+          }}
+          labelProps={{
+            mb: 0,
+          }}
+          controlProps={{
+            'aria-label': 'Row one Pingone value',
+          }}
+        >
+          {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+        </ComboBoxField>
+        <Box
+          isRow
+          alignItems="center"
+          sx={{
+            marginLeft: '12px',
+            marginRight: '12px',
+          }}
+        >
+          <IconButton aria-label="Edit">
+            <Icon icon={CogsIcon} color="neutral.30" size={20} title="edit icon" />
+          </IconButton>
+          <IconButton ml="5px" aria-label="Delete">
+            <Icon icon={DeleteIcon} color="neutral.30" size={20} title="delete icon" />
+          </IconButton>
+        </Box>
+      </Box>
+    </>
   );
 };
