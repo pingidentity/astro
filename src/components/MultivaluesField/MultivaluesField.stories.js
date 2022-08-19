@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Item, MultivaluesField, OverlayProvider } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/MultivaluesField',
@@ -37,6 +38,18 @@ export default {
     selectedKeys: {
       control: {
         type: 'none',
+      },
+    },
+    status: {
+      control: {
+        type: 'select',
+        options: statuses,
+      },
+      defaultValue: statuses.DEFAULT,
+    },
+    helperText: {
+      control: {
+        type: 'text',
       },
     },
   },
@@ -285,6 +298,35 @@ export const WithReadOnlyValues = (args) => {
       >
         {item => (
           <Item key={item.key} data-id={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
+
+export const Error = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
+    >
+      <MultivaluesField
+        {...args}
+        items={items}
+        helperText="Here is some helpful text..."
+        status="error"
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name} >
             {item.name}
           </Item>
         )}
