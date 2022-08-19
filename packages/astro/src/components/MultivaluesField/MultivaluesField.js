@@ -6,10 +6,12 @@ import { FocusScope } from '@react-aria/focus';
 import { useListState } from '@react-stately/list';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import { Chip, Icon, IconButton, PopoverContainer, ScrollBox, TextField } from '../..';
+import { Box, Chip, Icon, IconButton, PopoverContainer, ScrollBox, TextField } from '../..';
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { usePropWarning } from '../../hooks';
+import statuses from '../../utils/devUtils/constants/statuses';
+import FieldHelperText from '../FieldHelperText';
 
 /**
  * Complex control that lets you choose several tags from the dropdown list.
@@ -25,8 +27,10 @@ const MultivaluesField = forwardRef((props, ref) => {
     defaultSelectedKeys,
     direction,
     disabledKeys = [],
+    containerProps,
     hasAutoFocus,
     hasNoStatusIndicator,
+    helperText,
     inputProps: customInputProps,
     isDisabled,
     isNotFlippable,
@@ -46,6 +50,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     readOnlyKeys = [],
     selectedKeys,
     scrollBoxProps,
+    status,
   } = props;
 
   const hasCustomValue = mode === 'non-restrictive';
@@ -283,10 +288,11 @@ const MultivaluesField = forwardRef((props, ref) => {
       ref: inputRef,
       variant: 'forms.input.multivaluesWrapper',
     },
+    status,
   };
 
   return (
-    <>
+    <Box {...containerProps}>
       <TextField
         onBlur={(e) => {
           setIsOpen(false);
@@ -307,6 +313,13 @@ const MultivaluesField = forwardRef((props, ref) => {
         value={filterString}
         {...inputProps}
       />
+      {
+        helperText &&
+          <FieldHelperText status={status}>
+            {helperText}
+          </FieldHelperText>
+      }
+
       <PopoverContainer
         ref={popoverRef}
         hasNoArrow
@@ -317,11 +330,13 @@ const MultivaluesField = forwardRef((props, ref) => {
       >
         {listbox}
       </PopoverContainer>
-    </>
+    </Box>
   );
 });
 
 MultivaluesField.propTypes = {
+  /** Props object that is spread directly into the root (top-level) Box component. */
+  containerProps: PropTypes.shape({}),
   /** The initial selected keys in the collection (uncontrolled). */
   defaultSelectedKeys: isIterableProp,
   /** Where the menu opens relative to its trigger. */
@@ -334,6 +349,8 @@ MultivaluesField.propTypes = {
   hasAutoFocus: PropTypes.bool,
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator: PropTypes.bool,
+  /** Text rendered below the input. */
+  helperText: PropTypes.node,
   /**
    * Props that get passed as-is to the underlying TextField element
    */
@@ -415,12 +432,15 @@ MultivaluesField.propTypes = {
   scrollBoxProps: PropTypes.shape({
     maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
   }),
+  /** Determines the input status indicator and helper text styling. */
+  status: PropTypes.oneOf(Object.values(statuses)),
 };
 
 MultivaluesField.defaultProps = {
   direction: 'bottom',
   mode: 'restrictive',
   scrollBoxProps: { maxHeight: 300 },
+  status: statuses.DEFAULT,
 };
 
 export default MultivaluesField;

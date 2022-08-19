@@ -4,13 +4,13 @@ import { axe } from 'jest-axe';
 
 import { Item, MultivaluesField, OverlayProvider } from '../../index';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
   { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
   { id: 3, name: 'Snake', key: 'Snake' },
 ];
-
 const defaultProps = {
   items,
   label: 'Field Label',
@@ -348,4 +348,12 @@ test('read only keys', () => {
   expect(secondChip).toBeInTheDocument();
   const { nextSibling: deleteButton2 } = firstChip;
   expect(deleteButton2).toBeNull();
+});
+
+test(' multivalue field with helper text', () => {
+  const helperText = 'helper text';
+  getComponent({ helperText, status: statuses.ERROR });
+  const helper = screen.getByText(helperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
 });
