@@ -7,7 +7,7 @@ import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 
 /**
- * PopoverContainer component used for popover on SelectField, ComboBox, and PopoverMenu.
+ * PopoverContainer component used for popover on SelectField, ComboBox & PopoverMenu.
 */
 
 const PopoverContainer = forwardRef((props, ref) => {
