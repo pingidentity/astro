@@ -37,7 +37,6 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
 
   const { hoverProps } = useHover({});
 
-
   const mergedProps = mergeProps(
     gridCellProps,
     hoverProps,
@@ -51,7 +50,6 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
 
   delete mergedProps.onMouseDown;
   delete mergedProps.onPointerDown;
-  delete mergedProps.onClick;
 
   return (
     <Box
