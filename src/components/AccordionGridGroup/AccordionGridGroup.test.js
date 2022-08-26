@@ -230,3 +230,16 @@ test('adds focus to inputs', () => {
   expect(firstInput).not.toHaveFocus();
   expect(secondInput).toHaveFocus();
 });
+
+test('adds focus to input on a single click after onBlur', () => {
+  getComponentWithTextFields();
+  const firstInput = screen.getAllByRole('gridcell')[0];
+  const secondInput = screen.getAllByRole('gridcell')[1];
+
+  expect(secondInput).not.toHaveFocus();
+  userEvent.click(firstInput);
+  userEvent.click(secondInput);
+  secondInput.blur();
+  userEvent.click(secondInput);
+  expect(secondInput).toHaveFocus();
+});
