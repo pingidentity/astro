@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { noop } from 'underscore';
 import { FocusRing } from '@react-aria/focus';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import { noop } from 'underscore';
+
 import TextInput from '../TextInput';
 
 /**
@@ -11,10 +12,15 @@ import TextInput from '../TextInput';
  * @desc Enum for the different types of password input styling
  */
 export const passwordInputTypes = {
-    PRIMARY: 'primary',
     ERROR: 'error',
+    PRIMARY: 'primary',
     SUCCESS: 'success',
 };
+
+const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
+    HIDE: 'hide password',
+    SHOW: 'show password',
+  };
 
 /**
  * Hidden input field
@@ -39,6 +45,7 @@ const PasswordInput = ({
 }) => {
     const isTriggerKey = key => [" ", "Enter"].includes(key);
     const [isHidden, setIsHidden] = useState(true);
+
     const classNames = classnames('text-input--pasword', className);
     const actionIconClassNames = classnames('text-input__icon', {
         'text-input__icon--hidden': isHidden,
@@ -53,15 +60,20 @@ const PasswordInput = ({
       }
     }
 
+    const showPasswordToggleAriaLabel = !isHidden ?
+        ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.HIDE :
+        ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.SHOW;
+
     const actionComponent = (
       <FocusRing focusRingClass="is-focused">
         <div
-            role="button"
+            aria-label={showPasswordToggleAriaLabel}
             aria-pressed={!isHidden}
             className={actionIconClassNames}
+            key="password-icon"
             onClick={() => setIsHidden(!isHidden)}
             onKeyPress={handleKeyPress}
-            key="password-icon"
+            role="button"
             tabIndex={0}
         />
       </FocusRing>
@@ -69,26 +81,26 @@ const PasswordInput = ({
 
     return (
         <TextInput
+            actionComponent={actionComponent}
             className={classNames}
+            data-id={dataId}
+            defaultValue={defaultValue}
+            fieldMessage={fieldMessage}
+            fieldMessageProps={fieldMessageProps}
             id={id}
-            name={name ? name : id}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onKeyPress={onKeyPress}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            placeholder={placeholder}
             inputProps={{
                 key: 'passwordinput',
                 type: isHidden ? 'password' : 'text',
                 ...inputProps,
             }}
-            defaultValue={defaultValue}
-            data-id={dataId}
-            actionComponent={actionComponent}
-            fieldMessage={fieldMessage}
-            fieldMessageProps={fieldMessageProps}
+            name={name ? name : id}
+            onBlur={onBlur}
+            onChange={onChange}
+            onFocus={onFocus}
+            onKeyDown={onKeyDown}
+            onKeyPress={onKeyPress}
+            onMouseDown={onMouseDown}
+            placeholder={placeholder}
             type={type}
         />
     );
