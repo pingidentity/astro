@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.7](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.6...@pingux/end-user@2.4.7) (2022-08-30)
+
+
+### Bug Fixes
+
+* [UIP-5522 ] End user modal focus trap ([e00c3cc](https://gitlab.corp.pingidentity.com/ux/end-user/commit/e00c3ccb2a1c0d0e2b1e6f3f28f409ca4e4c5a92))
+* [UIP-5593] Update password toggle aria-label ([d74813d](https://gitlab.corp.pingidentity.com/ux/end-user/commit/d74813dcb1f1a9045d68a8f948ea2dcdfe58b476))
+
+
+
+
+
 ## [2.4.6](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.5...@pingux/end-user@2.4.6) (2022-08-11)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.0...@pingux/astro@1.25.1) (2022-08-30)
+
+
+### Bug Fixes
+
+* [UIP-5310] Accordion with input focus issue ([c998b3e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c998b3e3d16638be92f70aee979b5350c3997fa8))
+* [UIP-5497] Multivalues field status ([03d5b11](https://gitlab.corp.pingidentity.com/ux/pingux/commit/03d5b11e84639e911d9200aa1e7ff48f024943c8))
+* [UIP-5557] Updates to bidirectional arrow recipe ([e2b3ffe](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e2b3ffee81925855102a90b2aa76662d07f0d4f8))
+* [UIP-5589] correct links in customizing style ([39d7f30](https://gitlab.corp.pingidentity.com/ux/pingux/commit/39d7f301e7403a54f210ef9964d12c6993c44513))
+* [UIP-5593] Update password toggle aria-label ([d74813d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d74813dcb1f1a9045d68a8f948ea2dcdfe58b476))
+* [UIP-5612] List+Panel Recipe Design Improvements ([64b9546](https://gitlab.corp.pingidentity.com/ux/pingux/commit/64b9546231124a725218ef5985a5315be828d68e))
+
+
+
+
+
 # [1.25.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.24.0...@pingux/astro@1.25.0) (2022-08-11)
 
 
