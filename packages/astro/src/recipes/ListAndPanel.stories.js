@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { FocusScope } from '@react-aria/focus';
 import { Item } from '@react-stately/collections';
+import AccountIcon from 'mdi-react/AccountIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 
-import { Avatar, Box, IconButton, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
+import { Avatar, Box, Icon, IconButton, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
 
 import { useOverlayPanelState } from '../hooks';
 import { pingImg } from '../utils/devUtils/constants/images';
@@ -19,7 +20,8 @@ const items = [
     email: 'dburkitt5@columbia.edu',
     firstName: 'Nicola',
     lastName: 'Burkitt',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'idixie2@elegantthemes.com',
@@ -37,61 +39,71 @@ const items = [
     email: 'jgolde8@jimdo.com',
     firstName: 'Celisse',
     lastName: 'Golde',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'shearst9@answers.com',
     firstName: 'Jeth',
     lastName: 'Hearst',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'ajinaa@mapquest.com',
     firstName: 'Kaycee',
     lastName: 'Jina',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'vmalster4@biblegateway.com',
     firstName: 'Lorry',
     lastName: 'Malster',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'yphipp6@yellowpages.com',
     firstName: 'Stanley',
     lastName: 'Phipp',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'mskilbeck3@bbc.co.uk',
     firstName: 'Gradey',
     lastName: 'Skilbeck',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'dstebbing1@msu.edu',
     firstName: 'Marnia',
     lastName: 'Stebbing',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'lsterley7@lulu.com',
     firstName: 'Joshua',
     lastName: 'Sterley',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'luttleyb@hugedomains.com',
     firstName: 'Jarrod',
     lastName: 'Uttley',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'lidelc@yelp.com',
     firstName: 'Andromache',
     lastName: 'Idel',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
     hasSeparator: false,
   },
 ];
@@ -100,7 +112,10 @@ const ListElement = ({ item, onClosePanel }) => {
   return (
     <Box isRow minHeight="60px">
       <Box isRow mr="auto" alignItems="center" >
-        <Avatar mr="md" sx={{ width: '25px', height: '25px' }} src={item.avatar} />
+        {item.hasIcon
+            ? <Icon icon={item.avatar} alignSelf="center" size={24} mr="sm" color="accent.40" />
+            : <Avatar mr="md" sx={{ width: '25px', height: '25px' }} src={item.avatar} />
+          }
         <Box>
           <Text variant="bodyStrong" alignSelf="start">{item.lastName}, {item.firstName}</Text>
           <Text sx={{ fontSize: 'sm', my: '1px', lineHeight: '16px' }}variant="subtitle" alignSelf="start">{item.email}</Text>
@@ -151,8 +166,8 @@ export const Default = () => {
   };
 
   return (
-    <Box px="lg" py="lg" bg="accent.99">
-      <SearchField mb="sm" width="400px" placeholder="Search" aria-label="search" />
+    <Box px="lg" py="lg" bg="accent.99" height="900px" overflowY="scroll">
+      <SearchField position="fixed" mb="sm" width="400px" placeholder="Search" aria-label="search" />
       <ListView
         items={items}
         onSelectionChange={selectItemHandler}
@@ -194,7 +209,7 @@ export const Default = () => {
                   <Tab title="Profile">
                     {selectedItemId >= 0 &&
                       <>
-                        <IconButton sx={{ position: 'absolute', top: 0, right: 0 }} ><PencilIcon size={20} /></IconButton>
+                        <IconButton variant="inverted" sx={{ position: 'absolute', top: 0, right: 0 }} ><PencilIcon size={20} /></IconButton>
                         <Text sx={{ fontSize: 'sm', fontWeight: 3, lineHeight: '16px' }} variant="base" mb="xs">Full Name</Text>
                         <Text sx={{ fontWeight: 0, lineHeight: '18px' }} variant="base" mb="md">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
                         <Text sx={{ fontSize: 'sm', fontWeight: 3, lineHeight: '16px' }} variant="base" mb="xs">First Name</Text>

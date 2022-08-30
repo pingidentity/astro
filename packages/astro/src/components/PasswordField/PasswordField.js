@@ -5,18 +5,21 @@ import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import { useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 
-import useField from '../../hooks/useField';
-import useProgressiveState from '../../hooks/useProgressiveState';
+import * as hooks from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { usePropWarning, useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
-import Input from '../Input';
-import Label from '../Label';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
+import Input from '../Input';
+import Label from '../Label';
 import PopoverContainer from '../PopoverContainer';
 import RequirementsList from '../RequirementsList';
+
+const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
+  HIDE: 'hide password',
+  SHOW: 'show password',
+};
 
 /**
   * Combines a text input, label, IconButton and helper text for a complete, form-ready solution.
@@ -26,11 +29,11 @@ const PasswordField = forwardRef((props, ref) => {
     helperText,
     isVisible: isVisibleProp,
     onVisibleChange: onVisibleChangeProp,
+    requirements,
     slots,
     status,
     viewHiddenIconTestId,
     viewIconTestId,
-    requirements,
     ...others
   } = props;
 
@@ -41,27 +44,20 @@ const PasswordField = forwardRef((props, ref) => {
     fieldContainerProps,
     fieldControlProps,
     fieldLabelProps,
-  } = useField({ status, ...others });
+  } = hooks.useField({ status, ...others });
 
   const { isFocused } = fieldControlProps;
 
   const inputRef = useRef();
   const popoverRef = useRef();
 
-  usePropWarning(props, 'disabled', 'isDisabled');
+  hooks.usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
-  const [isVisible, setIsShown] = useProgressiveState(
+  const [isVisible, setIsShown] = hooks.useProgressiveState(
     isVisibleProp,
     onVisibleChangeProp);
-
-  const onVisibleChange = (...args) => {
-    setIsShown(!isVisible);
-    if (onVisibleChangeProp) {
-      onVisibleChangeProp(!isVisible, ...args);
-    }
-  };
 
   // Measure the width of the input to inform the width of the menu (below).
   const [menuWidth, setMenuWidth] = useState(null);
@@ -81,10 +77,10 @@ const PasswordField = forwardRef((props, ref) => {
   useLayoutEffect(onResize, [onResize]);
 
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
-    targetRef: inputRef,
+    isOpen: true,
     overlayRef: popoverRef,
     placement: 'bottom end',
-    isOpen: true,
+    targetRef: inputRef,
   });
 
   useLayoutEffect(() => {
@@ -96,14 +92,26 @@ const PasswordField = forwardRef((props, ref) => {
   }, [isFocused, updatePosition]);
 
   const style = {
-    ...overlayProps.style,
-    width: menuWidth,
     minWidth: menuWidth,
+    width: menuWidth,
+    ...overlayProps.style,
   };
 
-  const { classNames } = useStatusClasses(fieldControlProps.className, {
+  const { classNames } = hooks.useStatusClasses(fieldControlProps.className, {
     'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
+
+  const toggleShowPasswordAriaLabel = isVisible ?
+    ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.HIDE :
+    ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.SHOW;
+
+  const handleToggleShowPassword = (...args) => {
+    setIsShown(!isVisible);
+
+    if (onVisibleChangeProp) {
+      onVisibleChangeProp(!isVisible, ...args);
+    }
+  };
 
   return (
     <>
@@ -113,10 +121,10 @@ const PasswordField = forwardRef((props, ref) => {
           <Input ref={inputRef} {...fieldControlProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
           <Box variant="forms.input.containedIcon">
             <IconButton
-              aria-label="visible-icon"
+              aria-label={toggleShowPasswordAriaLabel}
               isDisabled={fieldControlProps.disabled}
+              onPress={handleToggleShowPassword}
               size={28}
-              onPress={onVisibleChange}
             >
               <Icon
                 data-testid={isVisible ? viewIconTestId : viewHiddenIconTestId}
@@ -134,13 +142,13 @@ const PasswordField = forwardRef((props, ref) => {
         }
       </Box>
       <PopoverContainer
-        isOpen={isFocused && requirements && Array.isArray(requirements) && !checkRequirements()}
-        ref={popoverRef}
-        placement={placement}
-        style={style}
         hasNoArrow
-        isNonModal
         isDismissable={false}
+        isNonModal
+        isOpen={isFocused && requirements && Array.isArray(requirements) && !checkRequirements()}
+        placement={placement}
+        ref={popoverRef}
+        style={style}
       >
         <RequirementsList requirements={requirements} />
       </PopoverContainer>
@@ -226,9 +234,9 @@ PasswordField.defaultProps = {
   isDisabled: false,
   isReadOnly: false,
   isRequired: false,
-  type: 'password',
-  status: statuses.DEFAULT,
   requirements: [],
+  status: statuses.DEFAULT,
+  type: 'password',
 };
 
 PasswordField.displayName = 'PasswordField';
