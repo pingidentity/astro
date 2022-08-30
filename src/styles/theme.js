@@ -3,7 +3,7 @@ import colors, { accent, line, shadow, focus } from './colors';
 import { fontSizes, fontWeights, textColors } from './text';
 import breakpoints from './breakpoints';
 import forms from './forms';
-import { variants, buttons, text, images, links } from './variants';
+import { variants, buttons, text, images, links, bidirectionalIconButton } from './variants';
 
 export default {
   name: 'Astro',
@@ -40,7 +40,7 @@ export default {
   forms,
   text,
   images,
-  buttons,
+  buttons: { ...buttons, bidirectionalIconButton },
   textColors,
   links,
   variants,
