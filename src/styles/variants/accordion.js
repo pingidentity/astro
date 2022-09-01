@@ -47,6 +47,7 @@ const accordionGridHeader = {
     boxShadow: 'focus',
     WebkitBoxShadow: 'focus',
     MozBoxShadow: 'focus',
+    zIndex: '10',
   },
   minHeight: '64px',
   '&.is-hovered': {
