@@ -12,23 +12,25 @@ const SaveableTextInput = ({
     return (
         <div className="saveable-textinput" data-id={dataId}>
             <div className="saveable-textinput__input">
-                <a
-                    className="saveable-textinput__save"
-                    onClick={onSave}
-                    role="button"
-                    aria-label="Save"
-                ></a>
                 <TextInput
                     placeholder="Text"
                     className="saveable-textinput__control"
                     {...props}
                 />
+                <a
+                    className="saveable-textinput__save"
+                    onClick={onSave}
+                    role="button"
+                    aria-label="Save"
+                    tabIndex={0}
+                ></a>
             </div>
             <a
                 className="saveable-textinput__cancel"
                 role="button"
                 onClick={onCancel}
                 aria-label="Cancel"
+                tabIndex={0}
             ></a>
         </div>
     );
