@@ -1,12 +1,17 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { FocusScope } from '@react-aria/focus';
-import Box from '../Box';
+
+import { Box } from '../../';
 import { useStatusClasses, useOverlayPanelState } from '../../hooks';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 /**
  * In Astro, side panels are used to show details and present modal interactions.
+ *
+ * Note: The way the OverlayPanel displays in the Firefox browser differs from other browsers.
+ * This is a Storybook only issue and will not effect the way it works in your app. Be sure to
+ * use Chrome or Safari to view how this component works.
  */
 
 const OverlayPanel = forwardRef((props, ref) => {
