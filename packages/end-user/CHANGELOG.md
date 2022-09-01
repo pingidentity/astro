@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.8](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.7...@pingux/end-user@2.4.8) (2022-09-01)
+
+
+### Bug Fixes
+
+* [UIP-5582] add tabIndex prop to save and cancel buttons ([953117e](https://gitlab.corp.pingidentity.com/ux/end-user/commit/953117ec786cefeb3dcbc7d27432bf0c313c2946))
+
+
+
+
+
 ## [2.4.7](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.6...@pingux/end-user@2.4.7) (2022-08-30)
 
 
