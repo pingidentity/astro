@@ -43,7 +43,7 @@ describe('PopoverMenu', () => {
         let popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
         expect(popovermenu.exists()).toEqual(false);
 
-        const kebabButton = wrapper.children().find('button.popover-menu__control');
+        const kebabButton = wrapper.children().find('.button.popover-menu__control');
         kebabButton.simulate('click');
 
         popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
@@ -86,7 +86,7 @@ describe('PopoverMenu', () => {
         
         expect(popovermenu.exists()).toBeFalsy();
         
-        const kebabButton = wrapper.children().find('button.popover-menu__control');
+        const kebabButton = wrapper.children().find('.button.popover-menu__control');
         kebabButton.simulate('click');
         popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
         expect(popovermenu.exists()).toBeTruthy();

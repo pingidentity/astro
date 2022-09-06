@@ -53,6 +53,7 @@ class PopoverBase extends React.Component {
         placement: PropTypes.string,
         triggerClassName: PropTypes.string,
         popperClassName: PropTypes.string,
+        focusable: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -65,6 +66,7 @@ class PopoverBase extends React.Component {
         triggerClassName: "",
         popperClassName: "",
         padded: false,
+        focusable: false,
     };
 
     /*
@@ -132,7 +134,6 @@ class PopoverBase extends React.Component {
                 data-parent={this.props["data-id"]}
                 className={classnames("popover-display", this.props.popperClassName)}
                 data-id="popup-frame"
-                data-parent={this.props["data-id"]}
                 getReference={this._getReference}
                 pointerClassName="popup-frame__pointer"
                 placement={getPlacement()}
@@ -153,6 +154,13 @@ class PopoverBase extends React.Component {
             this._getModifiers("popover")
         );
 
+        const focusProps = this.props.focusable ? {
+            tabIndex: 0,
+            'aria-expanded': this.props.open,
+            role: 'button',
+            id: this.props.id,
+        } : {}
+
         return (
             <div className={containerClassName} data-id={this.props["data-id"]}>
                 <a
@@ -168,6 +176,7 @@ class PopoverBase extends React.Component {
                     onKeyDown={this.props.onKeyDown}
                     title={this.props.title}
                     ref={el => this.reference = el}
+                    {...focusProps}
                 >
                     {this.props.label}
                 </a>
