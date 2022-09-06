@@ -12,6 +12,24 @@ const buttons = {
       border: 'none',
     },
   },
+  critical: {
+    '&:not(.disabled):hover': {
+      ...theme.buttons.critical,
+      ...theme.buttons.defaultHover,
+    },
+  },
+  danger: {
+    '&:not(.disabled):hover': {
+      ...theme.buttons.danger,
+      ...theme.buttons.defaultHover,
+    },
+  },
+  success: {
+    '&:not(.disabled):hover': {
+      ...theme.buttons.success,
+      ...theme.buttons.defaultHover,
+    },
+  },
   default: {
     '&:not(.disabled):hover': {
       ...theme.buttons.default,
@@ -76,6 +94,12 @@ const forms = {
       '&[type=text]:focus': {
         borderColor: 'neutral.80',
       },
+    },
+  },
+  select: {
+    '&:not(.disabled):hover': {
+      ...theme.text.inputValue,
+      borderColor: 'neutral.80',
     },
   },
   search: {
