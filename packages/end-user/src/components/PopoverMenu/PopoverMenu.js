@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
 import Popover from '../shared/Popover';
@@ -15,52 +15,58 @@ const PopoverMenu = ({
     isOpen,
 }) => {
     const [popperOpen, setPopperOpen] = useState(isOpen);
-    const openButtonRef = useRef(null);
+    const popoverRef = useRef();
     const didMount = useRef(false);
-    const uniqeId = _.uniqueId("popoverMenu-");
+    const uniqueId = useMemo(() => _.uniqueId("popoverMenu-"), []);
 
     const buttonClick = (e, cb) => {
         setPopperOpen(false);
         cb(e);
     };
 
-    useEffect(()=>{
-        if(didMount.current && !popperOpen) {
-            openButtonRef.current.focus();
+    const triggerKeyDownHandler = (e) => {
+        if (e.key === 'Enter' || e.key === " ") {
+            setPopperOpen(!popperOpen)
+        }
+    }
+
+    useEffect(() => {
+        if (popoverRef && didMount.current && !popperOpen) {
+            popoverRef.current.component.reference.focus();
         }
         didMount.current = true;
-    },[popperOpen]);
+    }, [popperOpen]);
 
     return (
         <Popover
             label={
-                <Button
-                    className="popover-menu__control"
-                    onClick={() => setPopperOpen(!popperOpen)}
-                    ref={openButtonRef}
-                    aria-expanded={popperOpen}
-                    id={uniqeId}
-                >
-                    <Icon path={mdiDotsVertical} size="26px" color="#686f77" />
-                </Button>
+                <Icon path={mdiDotsVertical} size="26px" color="#686f77" />
             }
+            focusable
+            triggerClassName="button popover-menu__control"
             open={popperOpen}
             onClose={() => setPopperOpen(false)}
+            onToggle={() => setPopperOpen(!popperOpen)}
+            onKeyDown={triggerKeyDownHandler}
             placement="left"
+            ref={popoverRef}
+            id={uniqueId}
         >
             <FocusScope contain autoFocus>
                 <div
                     className="popover-menu__dialog"
                     data-id={dataId}
-                    aria-labelledby={uniqeId}
+                    aria-labelledby={uniqueId}
                 >
-                    {buttons.map(({ id, onClick, label, ...rest }) => (
+                    {buttons.map(({
+                        id, onClick, label, ...rest
+                    }) => (
                         <Button
-                           className="popover-menu__item"
+                            className="popover-menu__item"
                             onClick={e => buttonClick(e, onClick)}
                             key={id}
                             {...rest}
-                            >
+                        >
                             {label}
                         </Button>
                     ))}
