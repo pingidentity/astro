@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.9](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.8...@pingux/end-user@2.4.9) (2022-09-06)
+
+
+### Bug Fixes
+
+* [UIP-5609] PopoverMenu navigation ([7fcb2e6](https://gitlab.corp.pingidentity.com/ux/end-user/commit/7fcb2e62dcceb5a1691dd66eb215c32985221e8a))
+
+
+
+
+
 ## [2.4.8](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.7...@pingux/end-user@2.4.8) (2022-09-01)
 
 
