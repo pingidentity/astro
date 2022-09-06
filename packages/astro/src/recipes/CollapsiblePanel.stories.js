@@ -102,6 +102,34 @@ const data = [
   },
 ];
 
+const sx = {
+  listViewItem: {
+    bg: 'white',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '&.is-hovered': {
+      bg: 'accent.99',
+    },
+  },
+  defaultSelectedBox: {
+    border: '1px solid',
+    borderColor: 'neutral.80',
+    borderRadius: 5,
+    minHeight: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    p: 'xs',
+    maxWidth: '50%',
+  },
+  defaultSelectedTitle: {
+    fontSize: 'sm',
+    pl: 'xs',
+    maxHeight: 32,
+    overflow: 'hidden',
+  },
+};
+
 export const Default = () => {
   const [items, setItems] = useState(data);
   const [searchValue, setSearchValue] = useState('');
@@ -197,15 +225,7 @@ export const Default = () => {
                   data-id={item.key}
                   listItemProps={{
                     isRow: true,
-                    sx: {
-                      bg: 'white',
-                      width: '100%',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      '&.is-hovered': {
-                        bg: 'accent.99',
-                      },
-                    },
+                    sx: sx.listViewItem,
                   }}
                 >
                   <Box isRow>
@@ -234,19 +254,10 @@ export const Default = () => {
                     ? (
                       <Box
                         isRow
-                        sx={{
-                          border: '1px solid',
-                          borderColor: 'neutral.80',
-                          borderRadius: 5,
-                          minHeight: 22,
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          p: 'xs',
-                          maxWidth: '50%',
-                        }}
+                        sx={sx.defaultSelectedBox}
                       >
                         <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} />
-                        <Text sx={{ fontSize: 'sm', pl: 'xs', maxHeight: 32, overflow: 'hidden' }}>Added by Filter</Text>
+                        <Text sx={sx.defaultSelectedTitle}>Added by Filter</Text>
                       </Box>
                     )
                     : (
