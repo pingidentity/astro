@@ -25,6 +25,33 @@ export default {
   title: 'Recipes/AttributesP1Mappings',
 };
 
+const sx = {
+  rowBox: { mb: '24.95px' },
+  textField: { height: '40px !important' },
+  comboBoxField: {
+    height: '40px !important',
+    pt: '5px !important',
+  },
+  headingText: {
+    fontSize: 'sm',
+    fontWeight: 400,
+    color: 'neutral.40',
+  },
+  firstRowTitle: {
+    fontWeight: 3,
+    fontSize: 'md',
+    maxWidth: '310px',
+    width: 'calc(50% - 26px)',
+    minWidth: '153px',
+  },
+  secondRowTitle: {
+    fontWeight: 3,
+    fontSize: 'md',
+    ml: '10px',
+    flexGrow: 1,
+  },
+};
+
 const Row = memo((props) => {
   const {
     isDisabled,
@@ -68,9 +95,7 @@ const Row = memo((props) => {
     >
       <Box
         width="310px"
-        sx={!areRowsValid && isSubmitted && inputValue === '' && textValue !== '' ? {
-          mb: '24.95px',
-        } : {}}
+        sx={!areRowsValid && isSubmitted && inputValue === '' && textValue !== '' ? sx.rowBox : {}}
       >
         <TextField
           name="custom-name"
@@ -79,11 +104,7 @@ const Row = memo((props) => {
             'aria-label': 'selection field',
             mb: 0,
           }}
-          controlProps={{
-            sx: {
-              height: '40px !important',
-            },
-          }}
+          controlProps={{ sx: sx.textField }}
           id={`textField ${index}`}
           key={`textField ${index}`}
           isReadOnly={isDisabled}
@@ -99,9 +120,7 @@ const Row = memo((props) => {
         ml="12px"
         isRow
         width="378px"
-        sx={!areRowsValid && isSubmitted && textValue === '' && inputValue !== '' ? {
-          mb: '24.95px',
-        } : {}}
+        sx={!areRowsValid && isSubmitted && textValue === '' && inputValue !== '' ? sx.rowBox : {}}
       >
         <Box
           flexGrow="1"
@@ -121,18 +140,13 @@ const Row = memo((props) => {
             aria-label="selection field"
             controlProps={{
               'aria-label': 'selection field',
-              sx: {
-                height: '40px !important',
-                pt: '5px !important',
-              },
+              sx: sx.comboBoxField,
             }}
             containerProps={{
               'aria-label': 'selection field',
               width: '100%',
               maxWidth: '310px',
-              sx: {
-                width: '100%',
-              },
+              sx: { width: '100%' },
             }}
             inputValue={inputValue}
             onInputChange={setInputValue}
@@ -226,11 +240,7 @@ export const Default = () => {
         ml="xs"
       >
         <Text
-          sx={{
-            fontSize: 'sm',
-            fontWeight: 400,
-            color: 'neutral.40',
-          }}
+          sx={sx.headingText}
         >
           Create new attributes and map predefined attributes with their PingOne Mappings.
         </Text>
@@ -249,23 +259,12 @@ export const Default = () => {
           isRow
         >
           <Text
-            sx={{
-              fontWeight: 3,
-              fontSize: 'md',
-              maxWidth: '310px',
-              width: 'calc(50% - 26px)',
-              minWidth: '153px',
-            }}
+            sx={sx.firstRowTitle}
           >
             Attributes
           </Text>
           <Text
-            sx={{
-              fontWeight: 3,
-              fontSize: 'md',
-              ml: '10px',
-              flexGrow: 1,
-            }}
+            sx={sx.secondRowTitle}
           >
             PingOne Mappings
           </Text>
