@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.1...@pingux/astro@1.25.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* [UIP-5621] AccordionGrid focusing styles ([27ff03c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/27ff03c5b3c3f5e17e334aab5d5431a773c86deb))
+
+
+
+
+
 ## [1.25.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.0...@pingux/astro@1.25.1) (2022-08-30)
 
 
