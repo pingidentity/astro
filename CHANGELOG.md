@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.2...@pingux/astro@1.26.0) (2022-09-06)
+
+
+### Features
+
+* [UIP-5599] Override Theme Additions ([ce0f8eb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ce0f8eb8943bf31c69c18eadda01437d9b5ff2c6))
+
+
+
+
+
 ## [1.25.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.1...@pingux/astro@1.25.2) (2022-09-01)
 
 
