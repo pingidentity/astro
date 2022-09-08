@@ -4,7 +4,7 @@ import Stack from '../../src/components/Stack';
 import Button, { ButtonTypes } from '../../src/components/Button';
 import Container from '../../src/components/Container';
 import Card, { CardTypes } from '../../src/components/Card';
-import UserNav from '../../src/components/shared/UserNav';
+import SelfServeNav from '../../src/components/shared/SelfServeNav';
 import FloatLabelTextInput from '../../src/components/FloatLabelTextInput';
 import FormLabel from '../../src/components/shared/FormLabel';
 import PageSection from '../../src/components/shared/PageSection';
@@ -36,7 +36,6 @@ export const Default = () => (
 class SelfService extends React.Component {
     state = {
         selectedIndex: 0,
-        openModals: [],
     };
 
     _handleSectionChange = (index) => {
@@ -46,20 +45,20 @@ class SelfService extends React.Component {
     };
 
     render = () => (
-        <>
-            <UserNav
+        <React.Fragment>
+            <SelfServeNav
                 logo
-                tabs={[
+                navs={[
                     'My Profile',
                     'Authentication',
                     'Change Password',
                     'Linked Accounts',
                 ]}
-                selectedTabIndex={this.state.selectedIndex}
-                onTabChange={this._handleSectionChange}
+                selectedNav={this.state.selectedIndex}
+                onSelectNav={this._handleSectionChange}
                 user={{
                     name: 'Tyler Grove',
-                    imageSrc: 'https://placedog.net/50/50'
+                    imageSrc: 'https://placedog.net/50/50',
                 }}
             />
 
@@ -67,7 +66,7 @@ class SelfService extends React.Component {
             {this.state.selectedIndex === 1 ? <AuthenticationPage /> : null}
             {this.state.selectedIndex === 2 ? <ChangePasswordPage /> : null}
             {this.state.selectedIndex === 3 ? <LinkedAccountsPage /> : null}
-        </>
+        </React.Fragment>
     );
 }
 
@@ -326,13 +325,13 @@ class AuthenticationPage extends React.Component {
     render = () => (
         <Container maxWidth="400px">
             {!this.state.dataIsVisible ? (
-                <>
+                <React.Fragment>
                     <h1 className="heading-text centered-text">Authentication Methods</h1>
                     <p className="normal-text centered-text">
                         To set up multi-factor authentication, you need to add an authentication method.
                     </p>
                     <Button label="Add Method" type={ButtonTypes.PRIMARY} onClick={() => this._openModal(1)()} />
-                </>
+                </React.Fragment>
             ) : (
                 <FlexRow
                     alignment={alignments.CENTER}
@@ -475,7 +474,8 @@ class AuthenticationPage extends React.Component {
                     <Button
                         label="Next"
                         type={ButtonTypes.PRIMARY}
-                        onClick={() => { this._closeModal(3)(); this._openModal(4)(); }} />
+                        onClick={() => { this._closeModal(3)(); this._openModal(4)(); }}
+                    />
                 </FlexRow>
             </Modal>
 
@@ -503,7 +503,8 @@ class AuthenticationPage extends React.Component {
                     <Button
                         label="Save"
                         type={ButtonTypes.PRIMARY}
-                        onClick={() => { this._closeModal(4)(); this._showData(); }} />
+                        onClick={() => { this._closeModal(4)(); this._showData(); }}
+                    />
                     <TextBlock size="small">
                         <a href="#" onClick={() => this._closeModal(4)()}>Cancel</a>
                     </TextBlock>
@@ -621,9 +622,9 @@ class LinkedAccountsPage extends React.Component {
                                     hintText="This is your current session. It can not be deleted"
                                 >
                                     <Button
-                                      data-id="delete-disabled-button"
-                                      disabled
-                                      inline
+                                        data-id="delete-disabled-button"
+                                        disabled
+                                        inline
                                     >
                                         Cannot be Signed Off
                                     </Button>

@@ -5,6 +5,7 @@ import _ from 'underscore';
 import PopperContainer from './PopperContainer';
 
 import popsOver from '../../util/behaviors/popsOver';
+import { FocusScope } from '@react-aria/focus';
 
 /**
  * @class Popover
@@ -107,7 +108,7 @@ class PopoverBase extends React.Component {
         }
         );
 
-        const contents = <div className={frameClassName}>{this.renderContent()}</div>;
+        const contents = <FocusScope contain autoFocus><div className={frameClassName}>{this.renderContent()}</div></FocusScope>;
 
         const positionList = (this.props.placement).split(" ");
 
@@ -146,6 +147,12 @@ class PopoverBase extends React.Component {
     };
 
     _getReference = () => this.reference;
+
+    componentDidUpdate (prevProps) {
+        if(this.reference && prevProps.open && !this.props.open) {
+            this.reference.focus();
+        }
+    };
 
     render() {
         var containerClassName = classnames(
