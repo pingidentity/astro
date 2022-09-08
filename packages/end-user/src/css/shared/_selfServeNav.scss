@@ -1,0 +1,195 @@
+.user-nav {
+
+    &__modal-bg {
+        z-index: 78;
+    }
+
+    &__dropdown-menu {
+        margin-left: auto;
+        .popover__trigger {
+            cursor: pointer;
+            &.active {
+                .user-info {
+                    &:after {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+
+    a {
+        color: $color-neutral-50;
+
+        &:focus {
+            outline: auto 1px $color-a11y-blue;
+            outline-offset: 3px;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    //override default tab styling
+    .navs {
+        position: relative;
+        margin: 0;
+        border: 0;
+
+        ul {
+            list-style-type: none;
+            margin-top: 0;
+            margin-bottom: 0;
+            display: flex;
+            
+            li {
+                display: inline-block;
+                align-self: end;
+                padding-bottom: 5px;
+                margin-right: 46px;
+                position: relative;
+                text-transform: uppercase;
+                font-size: 13px;
+
+                &.active {
+                    display: inline-block;
+                    padding-bottom: 2px;
+                    align-self: end;
+                    color: $color-strong-neutral-10;
+                    border-bottom: 3px solid $color-active-blue;
+                    cursor: default;
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        left: 50%;
+                        margin: 0 0 0 -7px;
+                        border-width: 5px 7px;
+                        border-style: solid;
+                        z-index: 10;
+                        border-color: $color-active-blue transparent transparent transparent;
+                        bottom: -13px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//based on PIC tablet menu breakpoints
+@media (max-width: 1119px) {
+    .user-nav {
+        &__collapsible-menu_v2 {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            bottom: 0;
+            left: auto;
+            padding: $spacing-lg;
+            margin: 0;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: normal;
+            transition: right 0.25s;
+            background-color: $color-white;
+            width: auto;
+            z-index: 78;
+            &--open {
+                right: 0;
+            }
+        }
+        &__collapsible-trigger_v2 {
+            margin-left: auto;
+            font-size: 20px;
+            align-self: center;
+            cursor: pointer;
+            $trigger-size: 26px;
+            display: block;
+            width: $trigger-size;
+            height: $trigger-size;
+            position: relative;
+            background-color: transparent;
+            border: 0;
+            padding: 0;
+            z-index: 1;
+            
+            span,
+            span:before,
+            span:after {
+                position: absolute;
+                width: $trigger-size;
+                height: 2px;
+                border-radius: 3px;
+                background-color: $color-midnight;
+                content: '';
+                transition: all 0.25s;
+                bottom: calc(50% - 1px);
+                right: 0;
+            }
+            span:before {
+                position: absolute;
+                bottom: 9px;
+            }
+            span:after {
+                position: absolute;
+                top: 9px;
+            }
+
+            &--open {
+                span {
+                    background-color: transparent;
+                }
+                span:before {
+                    bottom: 0;
+                    transform: rotate(135deg);
+                }
+                span:after {
+                    top: 0;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+        
+        .navs {
+            ul {
+                display: block;
+                li {
+                    display: block;
+                    text-transform: none;
+                    font-size: 16px;
+                    margin-bottom: $spacing-lg;
+                    &.active {
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__info {
+            margin-right: 0;
+        }
+    }
+
+    @keyframes menuFadeIn {
+        0% {
+            right: -100%;
+        }
+        100% {
+            right: 0;
+       }
+    }
+
+    @keyframes menuFadeOut {
+        0% {
+            right: 0;
+        }
+        100% {
+            right: -100%;
+       }
+    }
+}
+

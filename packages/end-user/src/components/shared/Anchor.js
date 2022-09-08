@@ -38,6 +38,7 @@ class AnchorBase extends React.Component {
 
     _handleKeyPress = e => {
         if (e.charCode === KeyboardUtils.KeyCodes.ENTER || e.charCode === KeyboardUtils.KeyCodes.SPACE) {
+            e.preventDefault();
             this.props.onClick(e);
         }
     }

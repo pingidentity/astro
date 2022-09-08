@@ -78,6 +78,13 @@ const popsOver = WrappedComponent =>
             }
         };
 
+        _handleKeyDown = e => {
+            if(e.keyCode === KeyboardUtils.KeyCodes.ENTER || e.keyCode === KeyboardUtils.KeyCodes.SPACE) {
+                e.preventDefault();
+                this._handleToggle();
+            }
+        }
+
         _handleGlobalClick = e => {
             // handle click outside of container
             const domRef = this.component.popperContainer
@@ -126,6 +133,7 @@ const popsOver = WrappedComponent =>
                     onClose={this._handleClose}
                     onOpen={this._handleOpen}
                     onToggle={this._handleToggle}
+                    onKeyDown={this._handleKeyDown}
                     open={this._isOpen()}
                     ref={el => this.component = el}
                 />
