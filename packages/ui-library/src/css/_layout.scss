@@ -785,7 +785,7 @@ $color-grey-minor-1: $color-neutral-30;
     @extend .stretch-content;
 
     position: absolute;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto;
     top: $layout-header-height;
     right: 0;
