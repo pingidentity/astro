@@ -18,7 +18,6 @@ import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 const AccordionGroup = forwardRef((props, ref) => {
   const {
-    onPress,
     onExpandedChange,
     ...others
   } = props;
@@ -46,8 +45,6 @@ const AccordionGroup = forwardRef((props, ref) => {
 AccordionGroup.propTypes = {
   /** Handler that is called when items are expanded or collapsed. */
   onExpandedChange: PropTypes.func,
-  /**  Handler that is called when the press is released over the target. */
-  onPress: PropTypes.func,
   /** Item objects in the collection. */
   items: isIterableProp,
   /**
