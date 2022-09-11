@@ -24,19 +24,38 @@ export default {
   title: 'Recipes/ConditionalFilter',
 };
 
-export const Default = () => {
-  const customChipStyles = ({
-    '& > span': { textTransform: 'none', fontWeight: '500' }, minWidth: '65px', 'z-index': '1',
-  });
-
-  const borderedBoxStyles = ({
+const sx = {
+  customChipStyles: {
+    marginRight: 'sm',
+    '& > span': {
+      textTransform: 'none',
+      fontWeight: '500',
+    },
+    minWidth: '65px',
+    'z-index': '1',
+  },
+  borderedBoxStyles: {
     '&::after': { bg: 'decorative.7' },
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'neutral.80',
     borderRadius: '4px',
-  });
+    padding: 'sm',
+    width: '100%',
+  },
+  allConditionsBox: {
+    '&::after': { bg: 'decorative.7' },
+    alignItems: 'center',
+    borderRadius: '4px',
+    marginTop: 'md',
+  },
+  defaultText: {
+    textTransform: 'none',
+    color: 'inherit',
+  },
+};
 
+export const Default = () => {
   const allConditions = [
     { field1: 'Family Name', field3: 'John', key: 'FamilyNameField' },
     { field1: 'Full Name', field3: 'Alex Smith', key: 'FullNameField' },
@@ -80,8 +99,7 @@ export const Default = () => {
                   <Chip
                     label="All"
                     bg="decorative.7"
-                    mr="sm"
-                    sx={customChipStyles}
+                    sx={sx.customChipStyles}
                   />
                   <Text> of the conditions are true</Text>
                 </Box>
@@ -93,18 +111,14 @@ export const Default = () => {
                         variant="forms.input.container"
                         bg="white"
                         isRow
-                        alignItems="center"
-                        borderRadius="4px"
-                        sx={{ '&::after': { bg: 'decorative.7' } }}
-                        mt="15px"
+                        sx={sx.allConditionsBox}
                       >
                         <Text pl="md" pr="sm">{item.field1}</Text>
                         <Chip
                           label="Equals"
                           bg="accent.90"
                           textColor="neutral.10"
-                          sx={customChipStyles}
-                          mr="sm"
+                          sx={sx.customChipStyles}
                           alignSelf="center"
                         />
                         <Text>{item.field3}</Text>
@@ -116,18 +130,14 @@ export const Default = () => {
                   <Bracket isLast />
                   <Box
                     variant="forms.input.container"
-                    borderRadius="4px"
-                    p="sm"
                     mt="md"
-                    sx={borderedBoxStyles}
-                    width="100%"
+                    sx={sx.borderedBoxStyles}
                   >
                     <Box isRow>
                       <Chip
                         label="Any"
                         bg="decorative.4"
-                        mr="sm"
-                        sx={customChipStyles}
+                        sx={sx.customChipStyles}
                         alignSelf="center"
                       />
                       <Text> of the conditions are true</Text>
@@ -141,18 +151,15 @@ export const Default = () => {
                             variant="forms.input.container"
                             bg="white"
                             isRow
-                            alignItems="center"
-                            borderRadius="4px"
                             width="100%"
-                            sx={{ '&::after': { bg: 'decorative.4' } }}
+                            sx={sx.allConditionsBox}
                           >
                             <Text pl="md" pr="sm">{item.field1}</Text>
                             <Chip
                               label="Equals"
                               bg="accent.90"
                               textColor="neutral.10"
-                              sx={customChipStyles}
-                              mr="sm"
+                              sx={sx.customChipStyles}
                               alignSelf="center"
                             />
                             <Text>{item.field3}</Text>
@@ -175,10 +182,10 @@ export const Default = () => {
               <Box isRow alignItems="center" mb="md">
                 <RockerButtonGroup mr="sm" selectedKey="all" aria-label="temp-label" >
                   <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.7' }} aria-label="temp-label" >
-                    <Text sx={{ textTransform: 'none', color: 'inherit' }}>Any</Text>
+                    <Text sx={sx.defaultText}>Any</Text>
                   </RockerButton>
                   <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.7' }} aria-label="temp-label" >
-                    <Text sx={{ textTransform: 'none', color: 'inherit' }}>All</Text>
+                    <Text sx={sx.defaultText}>All</Text>
                   </RockerButton>
                 </RockerButtonGroup>
                 <Text> of the conditions are true</Text>
@@ -219,19 +226,15 @@ export const Default = () => {
                 <Icon icon={DragVerticalIcon} mr="sm" />
                 <Box
                   variant="forms.input.container"
-                  borderRadius="4px"
-                  p="sm"
-                  width="100%"
-                  sx={borderedBoxStyles}
-                  mr="xs"
+                  sx={sx.borderedBoxStyles}
                 >
                   <Box isRow alignItems="center" mb="md">
                     <RockerButtonGroup mr="sm" aria-label="temp-label" >
                       <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.4' }} aria-label="any">
-                        <Text sx={{ textTransform: 'none', color: 'inherit' }}>Any</Text>
+                        <Text sx={sx.defaultText}>Any</Text>
                       </RockerButton>
                       <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.4' }} aria-label="all">
-                        <Text sx={{ textTransform: 'none', color: 'inherit' }}>All</Text>
+                        <Text sx={sx.defaultText}>All</Text>
                       </RockerButton>
                     </RockerButtonGroup>
                     <Text> of the conditions are true</Text>
