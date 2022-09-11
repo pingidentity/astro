@@ -23,6 +23,44 @@ const items = [
   { key: 'GDrive2', application: 'Google Drive2', description: 'Store all of your precious files up in the clouds', logo: Email, id: '8' },
 ];
 
+const sx = {
+  appBox: {
+    alignSelf: 'center',
+    maxWidth: '260px',
+  },
+  appTitle: {
+    alignSelf: 'center',
+    fontWeight: '700',
+    mr: 'auto',
+  },
+  appDesc: {
+    alignSelf: 'center',
+    fontSize: '15px',
+    mr: 'auto',
+  },
+  pinIconBox: {
+    alignSelf: 'center',
+    ml: 'md',
+    '&.is-hovered': {
+      bg: 'transparent',
+    },
+    '&.is-pressed': {
+      'path': {
+        fill: 'active',
+      },
+    },
+  },
+  listViewRow: {
+    bg: 'red',
+    padding: '-4px',
+  },
+  listViewItem: {
+    bg: 'white',
+    '&.is-hovered': {
+      bg: 'accent.99',
+    },
+  },
+};
 
 export const Default = () => {
   const buttonRef = useRef();
@@ -76,26 +114,15 @@ export const Default = () => {
     return (
       <Box isRow >
         <Icon icon={item.logo} mr="md" color="text.primary" size={40} alignSelf="center" ml="-10px" />
-        <Box alignSelf="center" sx={{ maxWidth: '260px' }}>
-          <Text variant="itemTitle" alignSelf="center" mr="auto" sx={{ fontWeight: '700' }}>{item.application}</Text>
-          <Text variant="itemSubtitle" alignSelf="center" mr="auto" sx={{ fontSize: '15px' }}>{item.description}</Text>
+        <Box alignSelf="center" sx={sx.appBox}>
+          <Text variant="itemTitle" sx={sx.appTitle}>{item.application}</Text>
+          <Text variant="itemSubtitle" sx={sx.appDesc}>{item.description}</Text>
         </Box>
         <Box alignSelf="center">
           <IconButton
             aria-label={`Pin ${item.application}`}
-            ml="md"
-            alignSelf="center"
             onPress={() => onPinPress()}
-            sx={{
-              '&.is-hovered': {
-                bg: 'transparent',
-              },
-              '&.is-pressed': {
-                'path': {
-                  fill: 'active',
-                },
-              },
-            }}
+            sx={sx.pinIconBox}
           >
             <Icon
               icon={Pin}
@@ -139,21 +166,14 @@ export const Default = () => {
           onFocus={() => setIsOpen(true)}
           onBlur={() => setIsOpen(false)}
         >
-          <ListView items={filteredItems} onSelectionChange={() => setIsOpen(!isOpen)} rowProps={{ sx: { bg: 'red', padding: '-4px' } }} padding="-4px">
+          <ListView items={filteredItems} onSelectionChange={() => setIsOpen(!isOpen)} rowProps={{ sx: sx.listViewRow }} padding="-4px">
             {item => (
               <Item
                 key={item.name}
                 textValue={item.name}
                 data-id={item.key}
                 hasSeparator={false}
-                listItemProps={{
-                  sx: {
-                    bg: 'white',
-                    '&.is-hovered': {
-                      bg: 'accent.99',
-                    },
-                  },
-                }}
+                listItemProps={{ sx: sx.listViewItem }}
               >
                 <InnerHtml item={item} />
               </Item>
