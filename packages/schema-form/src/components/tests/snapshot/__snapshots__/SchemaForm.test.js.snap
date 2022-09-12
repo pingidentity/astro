@@ -2081,6 +2081,11 @@ exports[`single fields password field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -2630,6 +2635,11 @@ exports[`single fields password field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -3672,6 +3682,11 @@ exports[`single fields select field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -4221,6 +4236,11 @@ exports[`single fields select field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -4790,6 +4810,11 @@ exports[`single fields select field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 listBoxPopup multivaluesWrapper>input {
@@ -5339,6 +5364,11 @@ exports[`single fields select field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper>input {
@@ -6569,6 +6599,11 @@ exports[`single fields select field with default 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -7118,6 +7153,11 @@ exports[`single fields select field with default 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -7687,6 +7727,11 @@ exports[`single fields select field with default 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 listBoxPopup multivaluesWrapper>input {
@@ -8236,6 +8281,11 @@ exports[`single fields select field with default 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper>input {
@@ -9479,6 +9529,11 @@ exports[`single fields string field format email 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -10028,6 +10083,11 @@ exports[`single fields string field format email 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -11082,6 +11142,11 @@ exports[`single fields string field format uri 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -11631,6 +11696,11 @@ exports[`single fields string field format uri 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -12685,6 +12755,11 @@ exports[`single fields string field regular 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -13234,6 +13309,11 @@ exports[`single fields string field regular 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -14288,6 +14368,11 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -14837,6 +14922,11 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -15933,6 +16023,11 @@ exports[`single fields string field with help text 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -16482,6 +16577,11 @@ exports[`single fields string field with help text 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -17614,6 +17714,11 @@ exports[`single fields string field with markdown errors 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-14 multivaluesWrapper>input {
@@ -18163,6 +18268,11 @@ exports[`single fields string field with markdown errors 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-14 numberField multivaluesWrapper>input {
@@ -19280,6 +19390,11 @@ exports[`single fields string field with placeholder 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -19829,6 +19944,11 @@ exports[`single fields string field with placeholder 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
@@ -20860,6 +20980,11 @@ exports[`single fields textarea field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 multivaluesWrapper>input {
@@ -21409,6 +21534,11 @@ exports[`single fields textarea field 1`] = `
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 12px;
+  border-radius: 2px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-8 numberField multivaluesWrapper>input {
