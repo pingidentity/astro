@@ -357,3 +357,30 @@ test(' multivalue field with helper text', () => {
   expect(helper).toBeInTheDocument();
   expect(helper).toHaveClass(`is-${statuses.ERROR}`);
 });
+
+test('read only field', () => {
+  const isReadOnly = true;
+  getComponent({ isReadOnly });
+
+  const chip = screen.queryAllByRole('presentation');
+  expect(chip[0]).toHaveAttribute('label', items[0].name);
+  expect(chip[1]).toHaveAttribute('label', items[1].name);
+  expect(chip[2]).toHaveAttribute('label', items[2].name);
+
+  const textArea = screen.getByLabelText(defaultProps.label);
+  expect(textArea).toHaveClass('is-read-only');
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+test('read only keys with read only field', () => {
+  const isReadOnly = true;
+  getComponent({ isReadOnly, readOnlyKeys: [items[1].key, items[2].key] });
+
+  const chip = screen.queryAllByRole('presentation');
+  expect(chip[0]).toHaveAttribute('label', items[1].name);
+  expect(chip[1]).toHaveAttribute('label', items[2].name);
+
+  const textArea = screen.getByLabelText(defaultProps.label);
+  expect(textArea).toHaveClass('is-read-only');
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
