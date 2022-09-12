@@ -6,7 +6,8 @@ import { FocusScope } from '@react-aria/focus';
 import { useListState } from '@react-stately/list';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import { Box, Chip, Icon, IconButton, PopoverContainer, ScrollBox, TextField } from '../..';
+import { Box, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { usePropWarning } from '../../hooks';
@@ -123,7 +124,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const onResize = useCallback(() => {
     /* istanbul ignore next */
     if (inputRef.current) {
-      setMenuWidth(inputRef.current.offsetWidth);
+      setMenuWidth(`${inputRef.current.offsetWidth + 2}px`);
     }
   }, [inputRef, isOpen, setMenuWidth]);
 
@@ -207,9 +208,51 @@ const MultivaluesField = forwardRef((props, ref) => {
     selectionManager.toggleSelection(key);
   };
 
+  const readOnlyTextItem = (key, name) => {
+    return (
+      <Text
+        key={key}
+        role="presentation"
+        label={name}
+        variant="bodyStrong"
+        sx={{
+            bg: 'accent.95',
+            fontSize: 'sm',
+            alignSelf: 'center',
+            ':not(:last-of-type):after': {
+              content: '",\u00a0"',
+            },
+          }}
+      >{name}
+      </Text>
+    );
+  };
+
+  const readOnlyInputEntry = (
+    <>
+      {isReadOnly &&
+        (readOnlyKeys.length ?
+          readOnlyKeys.map((key) => {
+            const item = [...initialItems, ...customItems].find(el => el.key === key);
+            if (item) {
+              return (readOnlyTextItem(item.key, item.name));
+            }
+            return null;
+          })
+          :
+          initialItems.map((item) => {
+            return (
+              readOnlyTextItem(item.key, item.name)
+            );
+          })
+        )
+      }
+    </>
+  );
+
   const readOnlyItems = (
     <>
-      {readOnlyKeys
+      {!isReadOnly && readOnlyKeys
         .map((key) => {
           const item = initialItems.find(el => el.key === key);
           if (item) {
@@ -287,6 +330,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     wrapperProps: {
       ref: inputRef,
       variant: 'forms.input.multivaluesWrapper',
+      sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },
     },
     status,
   };
@@ -299,17 +343,18 @@ const MultivaluesField = forwardRef((props, ref) => {
           if (onBlur) onBlur(e.nativeEvent);
         }}
         onChange={(e) => {
-          setIsOpen(true);
           setFilterString(e.target.value);
           if (onInputChange) onInputChange(e.target.value);
         }}
         onFocus={(e) => {
-          setIsOpen(true);
+          if (!isReadOnly) {
+             setIsOpen(true);
+          }
           if (onFocus) onFocus(e.nativeEvent);
         }}
         onKeyDown={keyDown}
         onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-        slots={{ beforeInput: <>{readOnlyItems} {selectedItems}</> }}
+        slots={{ beforeInput: <>{readOnlyItems} {selectedItems}{readOnlyInputEntry}</> }}
         value={filterString}
         {...inputProps}
       />
@@ -438,6 +483,7 @@ MultivaluesField.propTypes = {
 
 MultivaluesField.defaultProps = {
   direction: 'bottom',
+  isReadOnly: false,
   mode: 'restrictive',
   scrollBoxProps: { maxHeight: 300 },
   status: statuses.DEFAULT,

@@ -154,7 +154,7 @@ const selectedItemChip = {
 
 const readOnlyChip = {
   ...multivaluesChip,
-  p: 3,
+  p: 2.54,
   border: '1px solid',
   borderColor: 'neutral.80',
 };
