@@ -85,6 +85,15 @@ const useSelectField = (props, ref) => {
     state,
     triggerRef,
   );
+
+  // The following props are being passed into multiple
+  // DOM elements that leads to multiple test failures
+  // and these props are never used in any components
+  // that depend on useSelectField
+  delete menuProps.shouldSelectOnPressUp;
+  delete menuProps.shouldFocusOnHover;
+  delete menuProps.disallowEmptySelection;
+
   const {
     fieldContainerProps,
     fieldControlProps,
@@ -166,7 +175,9 @@ const useSelectField = (props, ref) => {
         variant="listBox.selectField"
         isLoading={isLoadingMore}
         onLoadMore={onLoadMore}
+
         {...menuProps}
+
       />
       <DismissButton onDismiss={() => state.close()} />
     </FocusScope>
@@ -202,6 +213,7 @@ const useSelectField = (props, ref) => {
     triggerProps,
     triggerRef,
     valueProps,
+
   };
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import * as QuickActions from "ui-library/lib/components/panels/QuickActions";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow, {
     alignments,
     spacingOptions ,

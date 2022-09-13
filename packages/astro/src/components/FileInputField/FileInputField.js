@@ -162,6 +162,8 @@ const FileInputField = forwardRef((props, ref) => {
         {...mergeProps(fieldContainerProps, others)}
         className={classNames}
         {...getRootProps()}
+        // to pass accessibility test, this removes focusable dependents
+        role="none"
       >
         <Input
           {...mergeProps(
@@ -237,8 +239,8 @@ FileInputField.propTypes = {
   fileList: PropTypes.arrayOf(
     PropTypes.shape({
       fileObj: PropTypes.shape({}),
-      id: PropTypes.string.required,
-      name: PropTypes.string.required,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       downloadLink: PropTypes.string,
       status: PropTypes.oneOf(Object.values(statuses)),
     }),
@@ -247,8 +249,8 @@ FileInputField.propTypes = {
   defaultFileList: PropTypes.arrayOf(
     PropTypes.shape({
       fileObj: PropTypes.shape({}),
-      id: PropTypes.string.required,
-      name: PropTypes.string.required,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       downloadLink: PropTypes.string,
       status: PropTypes.oneOf(Object.values(statuses)),
     }),

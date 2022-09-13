@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  useContext,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTab } from '@react-aria/tabs';
 import { useFocusRing } from '@react-aria/focus';
@@ -47,6 +42,7 @@ export const CollectionTab = forwardRef((props, ref) => {
     tabLineProps,
     content,
     titleAttr,
+    title,
     ...otherItemProps
   } = itemProps;
   const state = useContext(TabsContext);
@@ -121,7 +117,6 @@ export const CollectionTab = forwardRef((props, ref) => {
       </>
     );
   }
-
   return tab;
 });
 
@@ -130,9 +125,20 @@ CollectionTab.propTypes = {
   isDisabled: PropTypes.bool,
   item: PropTypes.shape({
     key: PropTypes.string,
-    props: PropTypes.shape({}),
+    props: PropTypes.shape({
+      icon: PropTypes.shape({}),
+      isDisabled: PropTypes.bool,
+      textValue: PropTypes.string,
+      tabLineProps: PropTypes.shape({}),
+      tabLabelProps: PropTypes.shape({}),
+      content: PropTypes.shape({}),
+      titleAttr: PropTypes.string,
+      title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.object]),
+      separator: PropTypes.oneOfType([PropTypes.element, PropTypes.bool]),
+      list: PropTypes.arrayOf(PropTypes.shape({})),
+    }),
     rendered: PropTypes.node,
-    tabLineProps: PropTypes.shape({}),
+
   }),
   mode: PropTypes.oneOf(['default', 'tooltip', 'list']),
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -141,15 +147,10 @@ CollectionTab.propTypes = {
     beforeTab: PropTypes.node,
     afterTab: PropTypes.node,
   }),
+
 };
 
-export const TabLine = props => (
-  <Box
-    role="presentation"
-    variant="tabLine"
-    {...props}
-  />
-);
+export const TabLine = props => <Box role="presentation" variant="tabLine" {...props} />;
 
 // Export Item as default Tab for simplicity, convert to CollectionTab within Tabs component
 export default Tab;

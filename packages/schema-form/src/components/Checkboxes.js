@@ -18,6 +18,7 @@ const Checkboxes = (props) => {
     options,
     rawErrors,
     value,
+    formContext,
   } = props;
   const { label, enumOptions, hasMarkdownErrors } = options;
   const FieldLabel = AstroComponents.fieldLabel;
@@ -62,7 +63,7 @@ const Checkboxes = (props) => {
             schema={{
               type: FIELD_TYPES.BOOLEAN,
             }}
-            formContext={props.formContext}
+            formContext={formContext}
           />
         ))
       }

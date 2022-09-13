@@ -126,6 +126,7 @@ Message.propTypes = {
       icon: PropTypes.elementType,
       /* Hides the message with an animated transition */
       isHidden: PropTypes.bool,
+      'data-id': PropTypes.string,
     }),
   }),
   /* Callback for clicking the message's close button */

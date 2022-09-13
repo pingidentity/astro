@@ -10,6 +10,7 @@ import PieChart from "ui-library/lib/components/general/charting/PieChart";
 import LineChart from "ui-library/lib/components/general/charting/LineChart";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import ColumnChart from "ui-library/lib/components/general/charting/ColumnChart";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Legend, {
     alignments as legendAlignments,
     boxAlignments
@@ -24,6 +25,7 @@ import ChartWrapper from "ui-library/lib/components/general/charting/ChartWrappe
 import ChartTitle from "ui-library/lib/components/general/charting/ChartTitle";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import { generateTheme } from "ui-library/lib/util/ChartingUtils";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import FlexRow, {
     justifyOptions,
     flexDirectionOptions,
