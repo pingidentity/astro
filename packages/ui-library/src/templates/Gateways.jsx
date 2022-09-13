@@ -12,6 +12,7 @@ import Link from "ui-library/lib/components/general/Link";
 import { v4 as uuidV4 } from "uuid";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import Toggle from "ui-library/lib/components/forms/form-toggle";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Table, {
     columnAlignments,
     Divider,

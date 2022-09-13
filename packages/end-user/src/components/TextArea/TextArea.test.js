@@ -1,8 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'mutationobserver-shim';
 import TextArea, { textAreaTypes } from './TextArea';
 import { fieldMessageStatuses } from '../FieldMessage/FieldMessage';
 import 'mutationobserver-shim';
+
 
 window.__DEV__ = true;
 
@@ -57,22 +60,22 @@ describe('TextArea', () => {
         textarea.simulate('focus');
         expect(testCallback).toHaveBeenCalled();
     });
-    it('renders fieldMessage',() => {
-        const wrapper = getComponent({ fieldMessage: 'Text area message' })
+    it('renders fieldMessage', () => {
+        const wrapper = getComponent({ fieldMessage: 'Text area message' });
         const fieldMessage = wrapper.find('FieldMessage');
-        expect(fieldMessage.exists()).toEqual(true)
+        expect(fieldMessage.exists()).toEqual(true);
     });
-    it('does not render fieldMessage if fieldMessage is not defined',() => {
-        const wrapper = getComponent()
+    it('does not render fieldMessage if fieldMessage is not defined', () => {
+        const wrapper = getComponent();
         const fieldMessage = wrapper.find('FieldMessage');
-        expect(fieldMessage.exists()).toEqual(false)
+        expect(fieldMessage.exists()).toEqual(false);
     });
-    it('renders fieldMessage with custom status',() => {
+    it('renders fieldMessage with custom status', () => {
         const wrapper = getComponent({ fieldMessage: 'Text area message', fieldMessageProps: { status: fieldMessageStatuses.ERROR } });
         const fieldMessage = wrapper.find('FieldMessage');
         expect(fieldMessage.props().status).toEqual('error');
     });
-    it('renders fieldMessage with custom status overriding textInput type',() => {
+    it('renders fieldMessage with custom status overriding textInput type', () => {
         const wrapper = getComponent({ fieldMessage: 'Text area message', type: textAreaTypes.ERROR, fieldMessageProps: { status: fieldMessageStatuses.INFO } });
         const fieldMessage = wrapper.find('FieldMessage');
         expect(fieldMessage.props().status).toEqual('info');

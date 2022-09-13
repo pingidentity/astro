@@ -54,19 +54,6 @@ axeTest(getComponent, {
   },
 });
 
-test('button press', () => {
-  const onPress = jest.fn();
-  getComponent({ onPress });
-  const buttons = screen.getAllByRole('button');
-  const selectedItem = buttons[0];
-  expect(selectedItem).not.toHaveClass('is-pressed');
-  expect(onPress).not.toHaveBeenCalled();
-
-  // Hold down the button to see pressed styles
-  fireEvent.mouseDown(selectedItem);
-  expect(selectedItem).toHaveClass('is-pressed');
-});
-
 test('button press uses callback', () => {
   const onPress = jest.fn();
   getComponent({ onExpandedChange: onPress });

@@ -1,6 +1,7 @@
 import React from "react";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import HeroChart from "ui-library/lib/components/general/charting/HeroChart";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import {
     CardRow,
     DonutCard,

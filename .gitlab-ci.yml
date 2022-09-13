@@ -94,9 +94,13 @@ backstop:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
         - packages/ui-library/**/*
+  # Temporarily disabled to run in the pipeline due to error. In the meantime, backstop needs to be run locally.
+  # Ref: [UIP-5633] https://jira.pingidentity.com/browse/UIP-5633
   script:
-    - lerna run demo --scope ui-library
-    - lerna run backstop-ci
+    # - lerna run demo --scope ui-library
+    # - lerna run backstop-ci
+    - echo "Run backstop locally."
+  when: manual
 
 chromatic:
   <<: *yarn-install-and-build

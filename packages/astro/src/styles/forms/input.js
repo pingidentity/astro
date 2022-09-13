@@ -167,6 +167,8 @@ input.multivaluesWrapper = {
   pr: 10,
   pb: 5,
   pl: 12,
+  borderRadius: '2px',
+  alignItems: 'center',
   '&.has-no-status-indicator': {
     left: 0,
   },

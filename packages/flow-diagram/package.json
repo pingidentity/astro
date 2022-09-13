@@ -1,71 +1,71 @@
 {
-    "name": "@pingux/flow-diagram",
-    "version": "0.27.3",
-    "description": "Flow Diagram library",
-    "author": "Ping UX Development Team",
-    "homepage": "",
-    "license": "UNLICENSED",
-    "main": "lib/cjs/index.js",
-    "module": "lib/index.js",
-    "directories": {
-        "lib": "lib"
-    },
-    "files": [
-        "lib"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
-    },
-    "publishConfig": {
-        "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
-    },
-    "scripts": {
-        "build": "rm -rf lib && npm-run-all build:*",
-        "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
-        "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
-        "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
-        "build:css": "mkdir ./lib/css && cp -r ./src/css/*.css ./lib/css/",
-        "coverage": "yarn test --coverage",
-        "coverage-ci": "yarn test --ci",
-        "demo": "rm -rf ./demo && build-storybook -o demo",
-        "verify": "yarn lint && yarn coverage",
-        "lint": "eslint --ext .js,.jsx .",
-        "start": "yarn installdeps && start-storybook -p 1339",
-        "test": "jest",
-        "test-watch": "jest --watch",
-        "docs": "gulp docs",
-        "installdeps": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
-    },
-    "dependencies": {
-        "@material-ui/core": "^4.11.3",
-        "@material-ui/lab": "^4.0.0-alpha.57",
-        "@mdi/js": "^5.8.55",
-        "@mdi/react": "^1.4.0",
-        "@pingux/astro": "^0.34.0",
-        "@pingux/icons": "^0.2.0",
-        "gojs": "^2.1.16",
-        "gojs-react": "^1.0.7",
-        "jest-canvas-mock": "^2.3.0",
-        "lodash": "^4.17.20",
-        "mdi-react": "^7.5.0",
-        "prop-types": "^15.7.2",
-        "react-xarrows": "^1.5.2",
-        "uuid": "^7.0.3"
-    },
-    "devDependencies": {
-        "@emotion/styled": "11.3.0",
-        "@storybook/addon-actions": "^6.4.19",
-        "@storybook/addon-docs": "^6.4.19",
-        "@storybook/addon-links": "^6.4.19",
-        "@storybook/addon-storysource": "^6.4.19",
-        "@storybook/react": "^6.4.19",
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.0.4",
-        "@testing-library/react-hooks": "^3.4.2"
-    },
-    "peerDependencies": {
-        "react": "^16.8.6",
-        "react-dom": "^16.13.1"
-    }
+  "name": "@pingux/flow-diagram",
+  "version": "0.27.4-alpha.0",
+  "description": "Flow Diagram library",
+  "author": "Ping UX Development Team",
+  "homepage": "",
+  "license": "UNLICENSED",
+  "main": "lib/cjs/index.js",
+  "module": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
+  },
+  "publishConfig": {
+    "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+  },
+  "scripts": {
+    "build": "rm -rf lib && npm-run-all build:*",
+    "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
+    "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
+    "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
+    "build:css": "mkdir ./lib/css && cp -r ./src/css/*.css ./lib/css/",
+    "coverage": "yarn test --coverage",
+    "coverage-ci": "yarn test --ci",
+    "demo": "rm -rf ./demo && build-storybook -o demo",
+    "verify": "yarn lint && yarn coverage",
+    "lint": "eslint --ext .js,.jsx .",
+    "start": "yarn installdeps && start-storybook -p 1339",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "docs": "gulp docs",
+    "installdeps": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@mdi/js": "^5.8.55",
+    "@mdi/react": "^1.4.0",
+    "@pingux/astro": "^1.9.0",
+    "@pingux/icons": "^0.2.0",
+    "gojs": "^2.1.16",
+    "gojs-react": "^1.0.7",
+    "jest-canvas-mock": "^2.3.0",
+    "lodash": "^4.17.20",
+    "mdi-react": "^7.5.0",
+    "prop-types": "^15.7.2",
+    "react-xarrows": "^1.5.2",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "@emotion/styled": "11.3.0",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-docs": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/addon-storysource": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/react-hooks": "^3.4.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1"
+  }
 }

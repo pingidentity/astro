@@ -23,8 +23,8 @@ export const CollectionStep = forwardRef((props, ref) => {
       ref={ref}
       {...hoverProps}
     >
-      {status === COMPLETED && !isHovered
-        ? <Icon
+      {status === COMPLETED && !isHovered ?
+        <Icon
           icon={CheckBoldIcon}
           size={23}
           color="text.primaryLight"

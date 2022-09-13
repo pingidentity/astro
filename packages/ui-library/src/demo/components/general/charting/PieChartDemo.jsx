@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ChartTitle from "ui-library/lib/components/general/charting/ChartTitle";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import PieChart from "ui-library/lib/components/general/charting/PieChart";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Legend, {
     alignments as legendAlignments,
     boxAlignments
