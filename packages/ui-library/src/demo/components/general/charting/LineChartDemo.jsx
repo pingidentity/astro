@@ -3,6 +3,7 @@ import React from "react";
 import ChartWrapper from "ui-library/lib/components/general/charting/ChartWrapper";
 //eslint-disable-next-line import/no-extraneous-dependencies
 import LineChart from "ui-library/lib/components/general/charting/LineChart";
+//eslint-disable-next-line import/no-extraneous-dependencies
 import Legend, {
     alignments as legendAlignments,
     boxAlignments

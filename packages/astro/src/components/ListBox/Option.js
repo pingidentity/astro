@@ -73,7 +73,10 @@ Option.propTypes = {
   hasVirtualFocus: PropTypes.bool,
   item: PropTypes.shape({
     key: PropTypes.string,
-    props: PropTypes.shape({}),
+    props: PropTypes.shape({
+      'data-id': PropTypes.string,
+      isSeparator: PropTypes.bool,
+    }),
     rendered: PropTypes.node,
   }),
   state: PropTypes.shape({

@@ -72,7 +72,7 @@ ObjectFieldTemplate.propTypes = {
   }).isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
-  properties: PropTypes.arrayOf(PropTypes.object),
+  properties: PropTypes.arrayOf(PropTypes.shape({})),
   /** Customization options for the look and feel of the form. */
   uiSchema: PropTypes.shape({}),
 };

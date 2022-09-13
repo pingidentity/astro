@@ -58,6 +58,7 @@
     "jest-emotion": "^10.0.32",
     "jsdoc-to-markdown": "^6.0.1",
     "lerna": "^3.16.4",
+    "moment": "^2.29.4",
     "mutationobserver-shim": "^0.3.7",
     "react": "^16.8.6",
     "react-dom": "^16.13.1",
@@ -76,7 +77,8 @@
     "color-string": "^1.6.0",
     "ua-parser-js": "^0.7.30",
     "node-sass": "^6.0.1",
-    "fibers": "^5.0.0"
+    "fibers": "^5.0.0",
+    "moment": "^2.29.4"
   },
   "workspaces": [
     "packages/*"

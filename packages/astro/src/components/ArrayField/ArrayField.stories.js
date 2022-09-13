@@ -158,19 +158,19 @@ export const Controlled = () => {
 
   const [fieldValues, setFieldValues] = React.useState(defaultDataSelectField);
 
-  function handleOnChange(values) {
+  const handleOnChange = (values) => {
     setFieldValues(values);
-  }
+  };
 
-  function handleOnAdd() {
+  const handleOnAdd = () => {
     setFieldValues(oldValues => [...oldValues, defaultEmptyField]);
-  }
+  };
 
-  function handleOnDelete(fieldId) {
+  const handleOnDelete = (fieldId) => {
     setFieldValues(oldValues =>
       oldValues.filter(({ id }) => id !== fieldId),
     );
-  }
+  };
 
   return (
     <ArrayField

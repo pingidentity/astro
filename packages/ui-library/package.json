@@ -34,7 +34,7 @@
     "highlight.js": "^11.4.0",
     "libphonenumber-js": "^1.7.25",
     "lodash": "^4.17.21",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "moment-range": "^1.0.5",
     "moment-timezone": "^0.5.5",
     "popper.js": "^1.14.7",

@@ -22,6 +22,7 @@ const ThemedWidget = (componentType) => {
       schema,
       formContext,
     };
+    const { onChange: onChangeHandler } = props;
 
     const onChange = (event) => {
       const eventProperty = type === FIELD_TYPES.BOOLEAN ? 'checked' : 'value';
@@ -29,7 +30,7 @@ const ThemedWidget = (componentType) => {
       if (value === '') { // see https://github.com/rjsf-team/react-jsonschema-form/issues/1052#issuecomment-431495633
         value = emptyValue;
       }
-      props.onChange(value);
+      onChangeHandler(value);
     };
 
     return (
