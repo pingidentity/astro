@@ -61,6 +61,7 @@ test('arrow down is subtract step to the number value', () => {
   expect(mockOnChange).toHaveBeenCalledWith(testValue - testStep);
 });
 
+
 test('value can be set from outside (controlled state)', () => {
   const controlledValue = 11;
   getComponent({

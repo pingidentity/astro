@@ -157,10 +157,10 @@ TabPicker.propTypes = {
   state: PropTypes.shape({
     collection: PropTypes.shape({}),
     selectedKey: PropTypes.string,
-    setSelectedKey: PropTypes.function,
+    setSelectedKey: PropTypes.func,
     selectionManager: PropTypes.shape({
       focusedKey: PropTypes.string,
-      setFocusedKey: PropTypes.function,
+      setFocusedKey: PropTypes.func,
     }),
   }),
 };

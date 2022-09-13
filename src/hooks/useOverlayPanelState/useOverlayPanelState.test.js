@@ -4,7 +4,7 @@ import useOverlayPanelState from './useOverlayPanelState';
 test('default useOverlayPanelState', () => {
   const { result } = renderHook(() => useOverlayPanelState());
 
-  expect(result.current).toEqual(expect.objectContaining({
+  const obj = {
     state: {
       open: expect.any(Function),
       close: expect.any(Function),
@@ -12,5 +12,7 @@ test('default useOverlayPanelState', () => {
       isOpen: expect.any(Boolean),
     },
     onClose: expect.any(Function),
-  }));
+  };
+
+  expect(result.current).toEqual(obj);
 });

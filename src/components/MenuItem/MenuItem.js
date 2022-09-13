@@ -121,6 +121,7 @@ MenuItem.propTypes = {
     props: PropTypes.shape({
       'data-id': PropTypes.string,
       isSeparator: PropTypes.bool,
+      isPressed: PropTypes.bool,
     }),
     rendered: PropTypes.node,
     isDisabled: PropTypes.bool,
