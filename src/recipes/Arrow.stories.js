@@ -8,19 +8,26 @@ export default {
 
 const ArrowIcon = '\u25BA';
 
+const sx = {
+  wrapper: {
+    height: '8px',
+    width: '80px',
+    alignItems: 'center',
+  },
+  arrowLine: {
+    width: '100%',
+    // Use this instead of border property, to avoid cropping of strokes in Safari and FF
+    backgroundImage: `linear-gradient(to right, ${line.light} 50%, white 50%)`,
+    backgroundRepeat: 'repeat-x',
+    backgroundSize: '10px 2px',
+    height: '2px',
+  },
+};
+
 export const Default = () => {
   return (
-    <Box isRow height={8} width={80} sx={{ 'align-items': 'center' }}>
-      <Box
-        width="100%"
-        // Use this instead of border property, to avoid cropping of strokes in Safari and FF
-        sx={{
-          backgroundImage: `linear-gradient(to right, ${line.light} 50%, white 50%)`,
-          backgroundRepeat: 'repeat-x',
-          backgroundSize: '10px 2px',
-          height: 2,
-        }}
-      />
+    <Box isRow sx={sx.wrapper}>
+      <Box sx={sx.arrowLine} />
       <Box color="line.regular">{ArrowIcon}</Box>
     </Box>
   );

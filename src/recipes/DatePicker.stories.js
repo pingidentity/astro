@@ -11,6 +11,16 @@ export default {
   title: 'Recipes/DatePicker',
 };
 
+const sx = {
+  calendarIcon: {
+    position: 'absolute',
+    right: 5,
+    top: 8,
+    width: 28,
+    height: 28,
+  },
+};
+
 export const Default = () => {
   const dateFormat = 'YYYY-MM-DD';
   const [date, setDate] = useState(moment('2021-01-01', 'YYYY-MM-DD'));
@@ -67,13 +77,7 @@ export const Default = () => {
           inContainer: (
             <IconButton
               aria-label="calendar-button"
-              sx={{
-                position: 'absolute',
-                right: 5,
-                top: 8,
-                width: 28,
-                height: 28,
-              }}
+              sx={sx.calendarIcon}
               onPress={handleCalendarIconPress}
               ref={triggerRef}
               {...triggerProps}

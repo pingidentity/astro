@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.26.0",
+  "version": "1.27.0-alpha.1",
   "description": "PingUX themeable React component library",
   "author": "ux-development@pingidentity.com",
   "license": "Apache-2.0",
@@ -137,7 +137,7 @@
     "emotion-normalize": "^11.0.1",
     "lodash": "^4.17.21",
     "mdi-react": "^7.4.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "prism-react-renderer": "1.2.1",
     "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",

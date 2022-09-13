@@ -334,3 +334,30 @@ export const Error = (args) => {
     </OverlayProvider>
   );
 };
+
+export const ReadOnlyField = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+  return (
+    <OverlayProvider
+    // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
+    >
+      <MultivaluesField
+        items={items}
+        {...args}
+        isReadOnly
+        onOpenChange={onOpenChange}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name} >
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
