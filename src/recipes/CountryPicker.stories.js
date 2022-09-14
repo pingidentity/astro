@@ -14,6 +14,28 @@ const validatePhoneNumber = (str) => {
   return reg.test(str);
 };
 
+const sx = {
+  wrapperBox: {
+    width: '100%',
+    maxWidth: 500,
+    position: 'relative',
+  },
+  comboBoxFieldWrapperOpen: {
+    position: 'absolute',
+    transition: '0.2s width ease',
+    width: '100%',
+  },
+  comboBoxFieldWrapperClose: {
+    position: 'absolute',
+    transition: '0.2s width ease',
+    width: '110px',
+  },
+  inputWrapper: {
+    width: '100%',
+    marginLeft: '110px',
+  },
+};
+
 export const Default = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -57,13 +79,13 @@ export const Default = () => {
   };
 
   return (
-    <Box isRow sx={{ width: '100%', maxWidth: 500, position: 'relative' }}>
+    <Box isRow sx={sx.wrapperBox}>
       <ComboBoxField
         mt={-5}
         width="100%"
         isOpen={isOpen}
         onOpenChange={setIsOpen}
-        wrapperProps={{ sx: { position: 'absolute', transition: '0.2s width ease', width: isOpen ? '100%' : 110 } }}
+        wrapperProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
         controlProps={{ 'aria-label': 'Country Picker' }}
         defaultItems={Object.entries(countriesObj)}
         inputValue={getInputValue()}
@@ -79,7 +101,7 @@ export const Default = () => {
           </Item>
         )}
       </ComboBoxField>
-      <Box width="100%" ml={110}>
+      <Box sx={sx.inputWrapper}>
         <Input
           placeholder="Phone number..."
           onChange={onPhoneNumberValueChange}
