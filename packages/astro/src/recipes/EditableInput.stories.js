@@ -37,6 +37,49 @@ const inputProps = {
   ariaLabel: 'Example aria label',
 };
 
+const sx = {
+  editablePreview: {
+    whiteSpace: 'pre-line',
+    width: '100%',
+    overflowWrap: 'break-word',
+    minHeight: '45px',
+    paddingLeft: 'xs',
+    justifyContent: 'flex-end',
+    paddingBottom: 'xs',
+    borderBottomColor: 'active',
+    color: 'neutral.10',
+    fontSize: 'md',
+    fontWeight: 1,
+    lineHeight: '18px',
+    '&:focus': {
+      outline: 'none',
+      boxShadow: 'focus',
+      borderColor: 'active',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+    },
+  },
+  editableInputWrapper: {
+    marginRight: '30px',
+    flexGrow: 1,
+  },
+  editableInpuTextArea: {
+    maxHeight: '150px',
+  },
+  editableControlWrapper: {
+    position: 'absolute',
+    right: '0',
+    top: '27.5%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  editableControlIconButton: {
+    marginRight: 'md',
+    width: '20px',
+    height: '20px',
+  },
+};
+
 export const Default = () => {
   return (
     <Editable value="Some value...">
@@ -84,6 +127,14 @@ const EditablePreview = () => {
   const [editableContext, setEditableContext] = useContext(EditableAreaContext);
   const [hasFocus, setFocus] = useState(false);
 
+  const editablePreviewDynamicSx = {
+    backgroundColor: hasFocus ? 'accent.95' : 'white',
+    borderBottom: editableContext.isEditing ? '0px' : '1px dashed',
+    '&:hover': {
+      background: editableContext.isEditing ? 'white' : 'accent.95',
+    },
+  };
+
   useEffect(() => {
     if (hasFocus && editableContext.isEditing) {
       setFocus(false);
@@ -107,37 +158,12 @@ const EditablePreview = () => {
       aria-hidden={editableContext.isEditing}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      aria-readonly="false"
       aria-label="Inline editable text field"
+      role="textbox"
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       placeholder="Click or press enter to edit text"
-      sx={{
-        whiteSpace: 'pre-line',
-        backgroundColor: hasFocus ? 'accent.95' : 'white',
-        width: '100%',
-        overflowWrap: 'break-word',
-        minHeight: '45px',
-        paddingLeft: 'xs',
-        justifyContent: 'flex-end',
-        paddingBottom: 'xs',
-        borderBottom: editableContext.isEditing ? '0px' : '1px dashed',
-        borderBottomColor: 'active',
-        color: 'neutral.10',
-        fontSize: 'md',
-        fontWeight: 1,
-        lineHeight: '18px',
-        '&:hover': {
-          background: editableContext.isEditing ? 'white' : 'accent.95',
-        },
-        '&:focus': {
-          outline: 'none',
-          boxShadow: 'focus',
-          borderColor: 'active',
-          borderWidth: '1px',
-          borderStyle: 'solid',
-        },
-      }}
+      sx={{ ...editablePreviewDynamicSx, ...sx.editablePreview }}
     >
       {editableContext.value}
     </Box>
@@ -198,10 +224,7 @@ const EditableInput = (props) => {
     <Box
       display={editableContext.isEditing ? 'flex' : 'none'}
       aria-hidden={!editableContext.isEditing}
-      sx={{
-        marginRight: '30px',
-        flexGrow: 1,
-      }}
+      sx={sx.editableInputWrapper}
     >
       <TextAreaField
         rows={1}
@@ -213,9 +236,7 @@ const EditableInput = (props) => {
         onKeyDown={handleKeyDown}
         value={editingValue}
         aria-label={ariaLabel}
-        sx={{
-          maxHeight: '150px',
-        }}
+        sx={sx.editableInpuTextArea}
         isUnresizable
       />
     </Box>
@@ -260,23 +281,13 @@ const EditableControl = (props) => {
       display={editableContext.isEditing ? 'flex' : 'none'}
       aria-hidden={!editableContext.isEditing}
       isRow
-      sx={{
-        position: 'absolute',
-        right: '0',
-        top: '27.5%',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}
+      sx={sx.editableControlWrapper}
     >
       <IconButton
         onPress={handleSubmit}
         aria-label={confirmBtn.ariaLabel}
         variant={confirmBtn.variant}
-        mr="15px"
-        sx={{
-          width: '20px',
-          height: '20px',
-        }}
+        sx={sx.editableControlIconButton}
       >
         <Icon
           icon={CheckIcon}
