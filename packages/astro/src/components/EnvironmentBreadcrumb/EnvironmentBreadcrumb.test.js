@@ -29,6 +29,11 @@ const defaultProps = {
   items,
 };
 
+const popoverProps = {
+  maxWidth: '100px',
+  'data-testid': 'popover-container',
+};
+
 const defaultWithSectionsProps = {
   'data-testid': testEnvBreadcrumb,
   name: testName,
@@ -113,6 +118,14 @@ test('should render environment breadcrumb component by default', () => {
 test('should display name', () => {
   getComponent();
   expect(screen.getByText(testName)).toBeInTheDocument();
+});
+
+test('should spread props into popover container', () => {
+  getComponent({ ...popoverProps, isDefaultOpen: true });
+
+  userEvent.click(screen.getByText(testSelectedItem));
+
+  expect(screen.queryByTestId('popover-container')).toHaveStyle('max-width: 100px');
 });
 
 test('should display selectedItem', () => {
