@@ -60,6 +60,7 @@ build:
   tags:
     - pingux-runner
   image: $STABLE_IMAGE
+  interruptible: true    
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
@@ -70,12 +71,14 @@ build:
   artifacts:
     paths:
       - ./packages/**/lib
+    expire_in: 1 week
 
 build-no-lockfile:
   stage: build-test-lint
   tags:
     - pingux-runner
   image: $STABLE_IMAGE
+  interruptible: true    
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
