@@ -97,6 +97,80 @@ const data = [
   },
 ];
 
+const sx = {
+  iconContainer: {
+    backgroundColor: 'accent.80',
+    alignItems: 'center',
+    justifyContent: 'center',
+    mr: 'sm',
+    borderRadius: '50%',
+    zIndex: 3,
+  },
+  headingSeparator: {
+    flexGrow: 1,
+    backgroundColor: 'accent.80',
+    maxHeight: '100%',
+    width: '6px !important',
+    zIndex: 2,
+    m: '0px 5px 0px 17px !important',
+  },
+  title: {
+    fontSize: 'md',
+    color: 'accent.30',
+    lineHeight: '18px',
+    fontWeight: '3',
+    m: '12px 0px 28px 5px',
+    maxWidth: '195px',
+  },
+  linkRowIconButton: {
+    '&.is-pressed': {
+      backgroundColor: 'transparent',
+    },
+    '&.is-pressed > svg > path': {
+      fill: 'accent.30',
+    },
+    '&.is-hovered': {
+      backgroundColor: 'transparent',
+    },
+  },
+  linkRowIconSelected: {
+    zIndex: 3,
+    'path': {
+      fill: 'accent.30',
+    },
+  },
+  linkRowIconNotSelected: {
+    zIndex: 3,
+    'path': {
+      fill: 'accent.80',
+    },
+  },
+  linkRowSeparator: {
+    flexGrow: 1,
+    backgroundColor: 'accent.30',
+    maxHeight: '100%',
+    width: '1px !important',
+    zIndex: 2,
+    m: '-5px 5px -5px 11.5px !important',
+  },
+  linkRowText: {
+    fontSize: 'md',
+    color: '#163CE3',
+    lineHeight: '18px',
+    fontWeight: '0',
+    m: '3px 0px 20px 10px',
+    maxWidth: '140px',
+  },
+  container: {
+    p: '15px 15px 0px 15px',
+    width: '280px',
+    backgroundColor: 'accent.95',
+    borderRadius: '8px',
+    zIndex: 1,
+    boxShadow: '3px 8px 4px rgba(202, 206, 211, 0.36)',
+  },
+};
+
 const Stage = (props) => {
   const {
     title,
@@ -127,14 +201,7 @@ const Stage = (props) => {
         <Box
           minWidth="39.5px"
           minHeight="39.5px"
-          sx={{
-            backgroundColor: 'accent.80',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mr: '10px',
-            borderRadius: '50%',
-            zIndex: 3,
-          }}
+          sx={sx.iconContainer}
         >
           <Icon
             icon={icon}
@@ -148,29 +215,14 @@ const Stage = (props) => {
         {
           !isLastStage &&
           <Separator
-            sx={{
-              flexGrow: 1,
-              backgroundColor: 'accent.80',
-              maxHeight: '100%',
-              width: '6px !important',
-              zIndex: 2,
-              m: '0px 5px 0px 17px !important',
-
-            }}
+            sx={sx.headingSeparator}
             orientation="vertical"
           />
         }
       </Box>
       <Box>
         <Text
-          sx={{
-            fontSize: '15px',
-            color: 'accent.30',
-            lineHeight: '18px',
-            fontWeight: '3',
-            m: '12px 0px 28px 5px',
-            maxWidth: '195px',
-          }}
+          sx={sx.title}
         >
           {title}
         </Text>
@@ -226,49 +278,20 @@ const LinkRow = (props) => {
         >
           <IconButton
             onPress={onIconPress}
-            sx={{
-            '&.is-pressed': {
-              backgroundColor: 'transparent',
-            },
-            '&.is-pressed > svg > path': {
-              fill: 'accent.30',
-            },
-            '&.is-hovered': {
-              backgroundColor: 'transparent',
-            },
-          }}
+            sx={sx.linkRowIconButton}
             aria-label="completed step icon indicator"
           >
             <Icon
               icon={isSelected ? CheckCircleIcon : RadioButtonIcon}
               size={isSelected ? '20px' : '18px'}
-              sx={isSelected ? {
-                zIndex: 3,
-                'path': {
-                  fill: 'accent.30',
-                },
-              } : {
-                zIndex: 3,
-                'path': {
-                  fill: 'accent.80',
-                },
-              }}
-
+              sx={isSelected ? sx.linkRowIconButton : sx.linkRowIconNotSelected}
             />
           </IconButton>
         </Box>
         {
           !isLastLink && isLinkSelected &&
           <Separator
-            sx={{
-              flexGrow: 1,
-              backgroundColor: 'accent.30',
-              maxHeight: '100%',
-              width: '1px !important',
-              zIndex: 2,
-              m: '-5px 5px -5px 11.5px !important',
-
-            }}
+            sx={sx.linkRowSeparator}
             orientation="vertical"
           />
         }
@@ -277,14 +300,7 @@ const LinkRow = (props) => {
         <Link
           href="https://www.pingidentity.com"
           target="_blank"
-          sx={{
-            fontSize: '15px',
-            color: '#163CE3',
-            lineHeight: '18px',
-            fontWeight: '0',
-            m: '3px 0px 20px 10px',
-            maxWidth: '140px',
-          }}
+          sx={sx.linkRowText}
         >
           {title}
         </Link>
@@ -298,16 +314,7 @@ export const Default = () => {
   return (
     <Box
       as="nav"
-      backgroundColor="accent.95"
-      width="280px"
-      sx={{
-        p: '15px 15px 0px 15px',
-        width: '280px',
-        backgroundColor: 'accent.95',
-        borderRadius: '8px',
-        zIndex: 1,
-        boxShadow: '3px 8px 4px rgba(202, 206, 211, 0.36)',
-      }}
+      sx={sx.container}
     >
       <Box
         paddingLeft="0px"
