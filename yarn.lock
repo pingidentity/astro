@@ -4009,6 +4009,14 @@
     "@babel/runtime" "^7.6.2"
     "@react-types/shared" "^3.13.1"
 
+"@react-stately/collections@^3.4.2":
+  version "3.4.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/collections/-/collections-3.4.2.tgz#b8625192b8cd5abe6cc2d5371643a071dc492e44"
+  integrity sha512-CmLVWtbX4r3QaTNdI6edtrRKIZRKPuxyD7TmVIaoZBdaOXStTP4wOgyPN1ELww9bvW0MoOaQBbUn5WAPrfifFw==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.14.0"
+
 "@react-stately/color@3.0.0-beta.2", "@react-stately/color@^3.0.0-beta.2":
   version "3.0.0-beta.2"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/color/-/color-3.0.0-beta.2.tgz#aca559e528a84b5190abfa2aa4c7d769a53b2422"
@@ -4210,6 +4218,16 @@
     "@react-stately/utils" "^3.4.1"
     "@react-types/shared" "^3.12.0"
 
+"@react-stately/selection@~3.10.2":
+  version "3.10.2"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/selection/-/selection-3.10.2.tgz#0871e4d7bfc5a1dc1df6ff8d6800b499b2042732"
+  integrity sha512-3/iw0BpShWt5ie+YpOzi4Mpa3yKOtlKQZXEc0fZt3v3m3N3fMoCr7Ovkfuz5Svy47HIIN1Pk1WkRJC+CQ4hfDw==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/collections" "^3.4.2"
+    "@react-stately/utils" "^3.5.1"
+    "@react-types/shared" "^3.14.0"
+
 "@react-stately/slider@^3.0.2", "@react-stately/slider@^3.0.7", "@react-stately/slider@^3.0.8":
   version "3.0.8"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/slider/-/slider-3.0.8.tgz#2f48825cfe10b20c011252e155bc0d562ce76c6c"
@@ -4280,6 +4298,13 @@
   version "3.5.0"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/utils/-/utils-3.5.0.tgz#e76231cfc93042814dcc5d96436e50c807c1d905"
   integrity sha512-WzzwlQtJrf7egaN+lt02/f/wkFKbcscsbinmXs9pL7QyYm+BCQ9xXj01w0juzt93piZgB/kfIYJqInEdpudh1A==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+
+"@react-stately/utils@^3.5.1":
+  version "3.5.1"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-stately/utils/-/utils-3.5.1.tgz#502de762e5d33e892347c5f58053674e06d3bc92"
+  integrity sha512-INeQ5Er2Jm+db8Py4upKBtgfzp3UYgwXYmbU/XJn49Xw27ktuimH9e37qP3bgHaReb5L3g8IrGs38tJUpnGPHA==
   dependencies:
     "@babel/runtime" "^7.6.2"
 
@@ -4511,6 +4536,11 @@
   version "3.13.1"
   resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.13.1.tgz#eda5e3744971606f753baf7879136bf8e3f707ab"
   integrity sha512-EHQqILDJeDvnloy5VV9lnnEjpCMwH1ghptCfa/lz9Ht9nwco3qGCvUABkWyND7yU1Adt3A/1oJxhpRUu3eTlyg==
+
+"@react-types/shared@^3.14.0":
+  version "3.14.0"
+  resolved "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/@react-types/shared/-/shared-3.14.0.tgz#240991d6672f32ecd2a172111e163be0fe0778f2"
+  integrity sha512-K069Bh/P0qV3zUG8kqabeO8beAUlFdyVPvpcNVPjRl+0Q9NDS9mfdQbmUa0LqdVo5e6jRPdos77Ylflkrz8wcw==
 
 "@react-types/slider@^3.0.1", "@react-types/slider@^3.0.6":
   version "3.0.6"
