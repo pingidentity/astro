@@ -22,6 +22,14 @@ export default {
   },
 };
 
+const sx = {
+  showHideButton: {
+    width: 'fit-content',
+    marginLeft: 'sm',
+    alignSelf: 'auto',
+  },
+};
+
 export const Default = ({ dataTitle, secretData }) => {
   const [isMasked, setIsMasked] = useState(true);
   const { classNames } = useStatusClasses(null, {
@@ -38,7 +46,7 @@ export const Default = ({ dataTitle, secretData }) => {
         <IconButton
           aria-label={isMasked ? 'Show content' : 'Hide content'}
           onPress={() => setIsMasked(!isMasked)}
-          sx={{ width: 'fit-content', marginLeft: 10, alignSelf: 'auto' }}
+          sx={sx.showHideButton}
         >
           <Icon icon={isMasked ? EyeOffIcon : EyeIcon} />
         </IconButton>
