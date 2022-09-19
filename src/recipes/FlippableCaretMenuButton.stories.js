@@ -27,6 +27,40 @@ const buttonArray = [
   'Built-in admin console for this environment',
   'Built-in Application portal',
 ];
+const sx = {
+  openButton: {
+    height: '30px',
+    borderRadius: 'md',
+    fontSize: '13px',
+    mb: 'sm',
+  },
+  closeIconButton: {
+    position: 'absolute',
+    top: '14px',
+    right: 'sm',
+  },
+  buttonsContainer: {
+    p: 'lg',
+    flexDirection: 'initial !important',
+    alignContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  selectedButton: {
+    mb: 'sm',
+    mr: '4px',
+    height: '30px',
+    borderRadius: '15px',
+    fontSize: '13px',
+  },
+  unSelectedButton: {
+    mb: 'sm',
+    mr: '4px',
+    borderColor: 'neutral.80',
+    height: '30px',
+    borderRadius: '15px',
+    fontSize: '13px',
+  },
+};
 
 export const Default = () => {
   const buttonRef = useRef();
@@ -73,14 +107,9 @@ export const Default = () => {
     <>
       <Button
         ref={buttonRef}
-        mb="sm"
         variant="inline"
         onPress={onChange}
-        sx={{
-          height: '30px',
-          borderRadius: '15px',
-          fontSize: '13px',
-        }}
+        sx={sx.openButton}
       >
         <Box isRow alignItems="center" >
           <Icon icon={isOpen ? MenuUp : MenuDown} mr="sm" color="active" size={20} />
@@ -101,34 +130,17 @@ export const Default = () => {
             aria-label="my-label"
             size={22}
             onPress={() => setIsOpen(false)}
-            sx={{ position: 'absolute', top: 14, right: 10 }}
+            sx={sx.closeIconButton}
           >
             <Icon icon={CloseIcon} />
           </IconButton>
           <Box
-            sx={{
-              p: 'lg',
-              flexDirection: 'initial !important',
-              alignContent: 'space-between',
-              flexWrap: 'wrap',
-            }}
+            sx={sx.buttonsContainer}
           >
             {buttonArray.map(item => (
               <Button
-                mb="sm"
                 variant="inline"
-                sx={selectedButtons.includes(item) ? {
-                  mr: '4px',
-                  height: '30px',
-                  borderRadius: '15px',
-                  fontSize: '13px',
-                } : {
-                  mr: '4px',
-                  borderColor: 'neutral.80',
-                  height: '30px',
-                  borderRadius: '15px',
-                  fontSize: '13px',
-                }}
+                sx={selectedButtons.includes(item) ? sx.selectedButton : sx.unSelectedButton}
                 key={item}
                 onPress={() => toggleButton(item)}
               >
