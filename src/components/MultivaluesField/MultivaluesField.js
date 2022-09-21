@@ -178,7 +178,9 @@ const MultivaluesField = forwardRef((props, ref) => {
           if (state.selectionManager.isSelected(key)) {
             return;
           }
-          selectionManager.toggleSelection(key);
+          selectionManager.setSelectedKeys(
+            [...Array.from(selectionManager.state.selectedKeys), key],
+          );
           setCustomItems([...customItems, { id: key, key, name: key }]);
           setFilterString('');
         }
