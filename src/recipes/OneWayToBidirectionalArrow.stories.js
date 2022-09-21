@@ -16,6 +16,30 @@ const items = [
   { name: 'Third Option', id: '3' },
 ];
 
+const sx = {
+  actionIcon: {
+    color: 'neutral.30',
+  },
+  dragVerticalIcon: {
+    color: 'neutral.50',
+  },
+  iconButton: {
+    ml: 'xs',
+  },
+  iconButtonToggleContainer: {
+    mx: 'sm',
+    flexShrink: 0,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    ml: '12px',
+    mr: '12px',
+  },
+  outerContainer: {
+    alignItems: 'center',
+  },
+};
+
 export const Default = () => {
   const CustomOnSvg = (props) => {
     return (
@@ -46,22 +70,20 @@ export const Default = () => {
   return (
     <>
       <Box
-        sx={{
-          alignItems: 'center',
-        }}
+        sx={sx.outerContainer}
         isRow
       >
-        <Icon icon={DragVerticalIcon} size={25} color="neutral.50" />
+        <Icon icon={DragVerticalIcon} size={25} sx={sx.dragVerticalIcon} />
         <ComboBoxField
           items={items}
           defaultSelectedKey="Last Name"
+          aria-label="Row one value"
           containerProps={{
             width: '275px',
           }}
           labelProps={{
             mb: 0,
           }}
-          aria-label="Row one value"
           controlProps={{
             'aria-label': 'test',
           }}
@@ -69,10 +91,7 @@ export const Default = () => {
           {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
         </ComboBoxField>
         <Box
-          sx={{
-            mx: 'sm',
-            flexShrink: 0,
-          }}
+          sx={sx.iconButtonToggleContainer}
         >
           <IconButtonToggle
             toggledIcon={CustomOnSvg}
@@ -103,27 +122,21 @@ export const Default = () => {
         </ComboBoxField>
         <Box
           isRow
-          alignItems="center"
-          sx={{
-            marginLeft: '12px',
-            marginRight: '12px',
-          }}
+          sx={sx.iconContainer}
         >
           <IconButton aria-label="Edit">
-            <Icon icon={CogsIcon} color="neutral.30" size={20} title="edit icon" />
+            <Icon icon={CogsIcon} sx={sx.actionIcon} size={20} title="edit icon" />
           </IconButton>
-          <IconButton ml="5px" aria-label="Delete">
-            <Icon icon={DeleteIcon} color="neutral.30" size={20} title="delete icon" />
+          <IconButton sx={sx.iconButton} aria-label="Delete">
+            <Icon icon={DeleteIcon} sx={sx.actionIcon} size={20} title="delete icon" />
           </IconButton>
         </Box>
       </Box>
       <Box
-        sx={{
-          alignItems: 'center',
-        }}
+        sx={sx.outerContainer}
         isRow
       >
-        <Icon icon={DragVerticalIcon} size={25} color="neutral.50" />
+        <Icon icon={DragVerticalIcon} size={25} sx={sx.dragVerticalIcon} />
         <ComboBoxField
           items={items}
           defaultSelectedKey="Last Name"
@@ -141,10 +154,7 @@ export const Default = () => {
           {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
         </ComboBoxField>
         <Box
-          sx={{
-            mx: 'sm',
-            flexShrink: 0,
-          }}
+          sx={sx.iconButtonToggleContainer}
         >
           <IconButtonToggle
             toggledIcon={CustomRightSvg}
@@ -175,17 +185,13 @@ export const Default = () => {
         </ComboBoxField>
         <Box
           isRow
-          alignItems="center"
-          sx={{
-            marginLeft: '12px',
-            marginRight: '12px',
-          }}
+          sx={sx.iconContainer}
         >
           <IconButton aria-label="Edit">
-            <Icon icon={CogsIcon} color="neutral.30" size={20} title="edit icon" />
+            <Icon icon={CogsIcon} sx={sx.actionIcon} size={20} title="edit icon" />
           </IconButton>
-          <IconButton ml="5px" aria-label="Delete">
-            <Icon icon={DeleteIcon} color="neutral.30" size={20} title="delete icon" />
+          <IconButton sx={sx.iconButton} aria-label="Delete">
+            <Icon icon={DeleteIcon} sx={sx.actionIcon} size={20} title="delete icon" />
           </IconButton>
         </Box>
       </Box>
