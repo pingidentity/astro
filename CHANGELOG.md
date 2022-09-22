@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.28.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.28.0...@pingux/astro@1.28.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* Change DataTable prop type definitions for width and height ([e295973](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e29597388e30eec017532a262bf79a37e147f87d))
+* Hotfix to address React Spectrum build error happening for some users ([9dccf35](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9dccf35dd2a91e2517c975812649592bef51ef43))
+
+
+
+
+
 # [1.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.27.0...@pingux/astro@1.28.0) (2022-09-22)
 
 
