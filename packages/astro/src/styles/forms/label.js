@@ -55,7 +55,7 @@ label.radio = {
   mb: 'xs',
 };
 
-// NOTE: Rebass label adds 'flex' after other styles, so we have to use !important to override it
+// NOTE: ThemeUI label adds 'flex' after other styles, so we have to use !important to override it
 label.checkbox = {
   ...text.base,
   display: 'inline-flex !important',
