@@ -4,7 +4,6 @@ import { FocusRing, useFocusRing } from '@react-aria/focus';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
 import { useTableColumnResizeState, useTableState } from '@react-stately/table';
-import { useStyleProps } from '@react-spectrum/utils';
 import { TableLayout } from '@react-stately/layout';
 import {
   useTable,
@@ -53,8 +52,11 @@ const ROW_HEIGHTS = {
 */
 
 const DataTable = forwardRef((props, ref) => {
-  const { onAction } = props;
-  const { styleProps } = useStyleProps(props);
+  const {
+    width,
+    height,
+    onAction,
+  } = props;
   const direction = 'ltr'; // useLocale override
   const scale = 'large'; // useProvider override
 
@@ -209,7 +211,8 @@ const DataTable = forwardRef((props, ref) => {
           whiteSpace: props.overflowMode === 'wrap' ? 'normal' : 'initial',
         }}
         {...gridProps}
-        {...styleProps}
+        width={width}
+        height={height}
         layout={layout}
         collection={state.collection}
         focusedKey={state.selectionManager.focusedKey}
@@ -224,6 +227,31 @@ const DataTable = forwardRef((props, ref) => {
     </DataTableContext.Provider>
   );
 });
+
+DataTable.propTypes = {
+  /**
+   * Sets the amount of vertical padding within each cell.
+   * density: 'compact' | 'regular' | 'spacious'
+   * @default 'regular'
+   */
+  density: PropTypes.string,
+  /**
+   * Sets the overflow behavior for the cell contents.
+   * overflowMode: 'wrap' | 'truncate'
+   * @default 'truncate'
+   */
+  overflowMode: PropTypes.string,
+  /** Handler that is called when a user performs an action on a row. */
+  onAction: PropTypes.func,
+  width: PropTypes.string,
+  height: PropTypes.string,
+};
+
+DataTable.defaultProps = {
+  width: '100%',
+  height: '565px',
+};
+
 
 function TableHeader({ children, ...otherProps }) {
   const { rowGroupProps } = useTableRowGroup();
@@ -385,23 +413,6 @@ function CenteredWrapper({ children }) {
     </Box>
   );
 }
-
-DataTable.propTypes = {
-  /**
-   * Sets the amount of vertical padding within each cell.
-   * density: 'compact' | 'regular' | 'spacious'
-   * @default 'regular'
-   */
-  density: PropTypes.string,
-  /**
-   * Sets the overflow behavior for the cell contents.
-   * overflowMode: 'wrap' | 'truncate'
-   * @default 'truncate'
-   */
-  overflowMode: PropTypes.string,
-  /** Handler that is called when a user performs an action on a row. */
-  onAction: PropTypes.func,
-};
 
 TableCell.propTypes = {
   cell: PropTypes.shape({
