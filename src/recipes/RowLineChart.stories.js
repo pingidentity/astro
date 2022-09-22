@@ -72,6 +72,35 @@ const zeroData = [
   { id: 12, value: 0 },
 ];
 
+const sx = {
+  container: {
+    backgroundColor: 'accent.99',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    pr: '20px',
+  },
+  button: {
+    ml: 'md',
+    pr: 'md',
+  },
+  chartTitleContainer: {
+    ml: '20px',
+    pr: 'md',
+  },
+  chartContainer: {
+    width: '100%',
+    height: '100%',
+  },
+  chart: {
+    width: '50',
+    height: '18',
+  },
+  chartTrendContainer: {
+    ml: 'md',
+    width: '50px',
+  },
+};
+
 export const Default = () => {
   const { ref, width } = useResizeObserver();
   const { visuallyHiddenProps } = useVisuallyHidden();
@@ -90,10 +119,7 @@ export const Default = () => {
   const EmptyData = (
     <Box
       isRow
-      bg="accent.99"
-      alignItems="center"
-      justifyContent="space-between"
-      pr={20}
+      sx={sx.container}
       ref={ref}
     >
       <Box p="md" variant="boxes.expandableRow.titleWrapper">
@@ -103,8 +129,7 @@ export const Default = () => {
       <Box isRow alignItems="center">
         <Box
           variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          ml={20}
-          pr={15}
+          sx={sx.chartTitleContainer}
           {...hideIfMobile()}
         >
           <Text variant="expandableRow.lineChart.title">
@@ -123,16 +148,15 @@ export const Default = () => {
           <Button
             variant="expandableRow.chartWrapper"
             onPress={action('seeContributingDataAction')}
-            ml={15}
-            pr={15}
+            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
             <Box variant="boxes.expandableRow.lineChart.divider" />
             <Box ml={15}>
               <Box variant="boxes.expandableRow.lineChart.chart">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart width={50} height={18} data={chartData}>
+                <ResponsiveContainer sx={sx.chartContainer}>
+                  <LineChart sx={sx.chart} data={chartData}>
                     <Line
                       type="monotone"
                       dataKey="emptyData"
@@ -146,7 +170,7 @@ export const Default = () => {
                 No data yet
               </Text>
             </Box>
-            <Box size="sm" ml={15} width={50}>
+            <Box size="sm" sx={sx.chartTrendContainer}>
               <Text variant="expandableRow.lineChart.trend">+ 0%</Text>
             </Box>
           </Button>
@@ -162,10 +186,7 @@ export const Default = () => {
   const FullData = (
     <Box
       isRow
-      bg="accent.99"
-      alignItems="center"
-      justifyContent="space-between"
-      pr={20}
+      sx={sx.container}
       mt={20}
     >
       <Box p="md" variant="boxes.expandableRow.titleWrapper">
@@ -175,8 +196,7 @@ export const Default = () => {
       <Box isRow alignItems="center">
         <Box
           variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          ml={20}
-          pr={15}
+          sx={sx.chartTitleContainer}
           {...hideIfMobile()}
         >
           <Text variant="expandableRow.lineChart.title">
@@ -195,16 +215,15 @@ export const Default = () => {
           <Button
             variant="expandableRow.chartWrapper"
             onPress={action('seeContributingDataAction')}
-            ml={15}
-            pr={15}
+            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
             <Box variant="boxes.expandableRow.lineChart.divider" />
             <Box ml={15}>
               <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart width={50} height={18} data={chartData}>
+                <ResponsiveContainer sx={sx.chartContainer}>
+                  <LineChart sx={sx.chart} data={chartData}>
                     <Line
                       type="monotone"
                       dataKey="fullData"
@@ -218,7 +237,7 @@ export const Default = () => {
                 12 wk trend
               </Text>
             </Box>
-            <Box size="sm" ml={15} width={50}>
+            <Box size="sm" sx={sx.chartTrendContainer}>
               <Text variant="expandableRow.lineChart.trend">+ 8.6%</Text>
             </Box>
           </Button>
@@ -234,10 +253,7 @@ export const Default = () => {
   const PartialData = (
     <Box
       isRow
-      bg="accent.99"
-      alignItems="center"
-      justifyContent="space-between"
-      pr={20}
+      sx={sx.container}
       mt={20}
     >
       <Box p="md" variant="boxes.expandableRow.titleWrapper">
@@ -247,8 +263,7 @@ export const Default = () => {
       <Box isRow alignItems="center">
         <Box
           variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          ml={20}
-          pr={15}
+          sx={sx.chartTitleContainer}
           {...hideIfMobile()}
         >
           <Text variant="expandableRow.lineChart.title">
@@ -267,16 +282,15 @@ export const Default = () => {
           <Button
             variant="expandableRow.chartWrapper"
             onPress={action('seeContributingDataAction')}
-            ml={15}
-            pr={15}
+            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
             <Box variant="boxes.expandableRow.lineChart.divider" />
             <Box ml={15}>
               <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart width={50} height={18} data={partialDataData}>
+                <ResponsiveContainer sx={sx.chartContainer}>
+                  <LineChart sx={sx.chart} data={partialDataData}>
                     <Line
                       type="monotone"
                       dataKey="value"
@@ -290,7 +304,7 @@ export const Default = () => {
                 12 wk trend
               </Text>
             </Box>
-            <Box size="sm" ml={15} width={50}>
+            <Box size="sm" sx={sx.chartTrendContainer}>
               <Text variant="expandableRow.lineChart.trend">- 8.6%</Text>
             </Box>
           </Button>
@@ -306,10 +320,7 @@ export const Default = () => {
   const ZeroData = (
     <Box
       isRow
-      bg="accent.99"
-      alignItems="center"
-      justifyContent="space-between"
-      pr={20}
+      sx={sx.container}
       mt={20}
     >
       <Box p="md" variant="boxes.expandableRow.titleWrapper">
@@ -319,8 +330,7 @@ export const Default = () => {
       <Box isRow alignItems="center">
         <Box
           variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          ml={20}
-          pr={15}
+          sx={sx.chartTitleContainer}
           {...hideIfMobile()}
         >
           <Text variant="expandableRow.lineChart.title">
@@ -339,16 +349,15 @@ export const Default = () => {
           <Button
             variant="expandableRow.chartWrapper"
             onPress={action('seeContributingDataAction')}
-            ml={15}
-            pr={15}
+            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
             <Box variant="boxes.expandableRow.lineChart.divider" />
             <Box ml={15}>
               <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart width={50} height={18} data={zeroData}>
+                <ResponsiveContainer sx={sx.chartContainer}>
+                  <LineChart sx={sx.chart} data={zeroData}>
                     <Line
                       type="monotone"
                       dataKey="value"
@@ -362,7 +371,7 @@ export const Default = () => {
                 12 wk trend
               </Text>
             </Box>
-            <Box size="sm" ml={15} width={50}>
+            <Box size="sm" sx={sx.chartTrendContainer}>
               <Text variant="expandableRow.lineChart.trend">+ 0%</Text>
             </Box>
           </Button>
@@ -378,10 +387,7 @@ export const Default = () => {
   const ZeroValues = (
     <Box
       isRow
-      bg="accent.99"
-      alignItems="center"
-      justifyContent="space-between"
-      pr={20}
+      sx={sx.container}
       mt={20}
     >
       <Box p="md" variant="boxes.expandableRow.titleWrapper">
@@ -391,8 +397,7 @@ export const Default = () => {
       <Box isRow alignItems="center">
         <Box
           variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          ml={20}
-          pr={15}
+          sx={sx.chartTitleContainer}
           {...hideIfMobile()}
         >
           <Text variant="expandableRow.lineChart.title">
@@ -411,16 +416,15 @@ export const Default = () => {
           <Button
             variant="expandableRow.chartWrapper"
             onPress={action('seeContributingDataAction')}
-            ml={15}
-            pr={15}
+            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
             <Box variant="boxes.expandableRow.lineChart.divider" />
             <Box ml={15}>
               <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart width={50} height={18} data={zeroValuesData}>
+                <ResponsiveContainer sx={sx.chartContainer}>
+                  <LineChart sx={sx.chart} data={zeroValuesData}>
                     <Line
                       type="monotone"
                       dataKey="value"
@@ -434,7 +438,7 @@ export const Default = () => {
                 12 wk trend
               </Text>
             </Box>
-            <Box size="sm" ml={15} width={50}>
+            <Box size="sm" sx={sx.chartTrendContainer}>
               <Text variant="expandableRow.lineChart.trend">+ 0%</Text>
             </Box>
           </Button>

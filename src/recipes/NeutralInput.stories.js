@@ -4,7 +4,12 @@ import CheckboxField from '../components/CheckboxField';
 export default {
   title: 'Recipes/NeutralCheckboxField',
 };
+const sx = {
+  checkboxColor: {
+    color: 'neutral.10',
+  },
+};
 
 export const Default = () => (
-  <CheckboxField controlProps={{ color: 'neutral.10' }}>Click me</CheckboxField>
+  <CheckboxField sx={sx.checkboxColor}>Click me</CheckboxField>
 );

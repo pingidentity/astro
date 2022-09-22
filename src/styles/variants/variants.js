@@ -21,7 +21,7 @@ import table from './table';
 import * as tabs from './tabs';
 import tooltip from './tooltip';
 import collapsiblePanel from './collapsiblePanel';
-
+import dataTable from './../../components/DataTable/DataTable.styles';
 
 export default {
   accordion,
@@ -47,4 +47,5 @@ export default {
   table,
   ...tabs,
   tooltip,
+  dataTable,
 };
