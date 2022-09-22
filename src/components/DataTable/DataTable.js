@@ -243,13 +243,13 @@ DataTable.propTypes = {
   overflowMode: PropTypes.string,
   /** Handler that is called when a user performs an action on a row. */
   onAction: PropTypes.func,
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 DataTable.defaultProps = {
   width: '100%',
-  height: '565px',
+  height: 565,
 };
 
 
