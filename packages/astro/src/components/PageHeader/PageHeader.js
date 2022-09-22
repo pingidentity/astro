@@ -4,6 +4,13 @@ import Text from '../Text/Text';
 import Box from '../Box/Box';
 import { useDeprecationWarning } from '../../hooks';
 
+/**
+ * A `Page Header` is a composed component using text and icon button.
+ * The component is separated from the body and appears at the top.
+ * For customization,
+ * please see [Page Header](./?path=/story/recipes-page-header--default) recipe docs.
+ */
+
 
 const PageHeader = forwardRef((props, ref) => {
   const {
@@ -13,7 +20,7 @@ const PageHeader = forwardRef((props, ref) => {
   } = props;
 
   useDeprecationWarning(
-    'The Page Header component will be deprecated in Astro-UI 2.0.0.',
+    'The Page Header component will be deprecated in Astro-UI 2.0.0. Use Page Header recipe instead.',
   );
 
   return (

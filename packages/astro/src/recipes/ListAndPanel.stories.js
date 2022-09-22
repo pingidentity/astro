@@ -108,20 +108,97 @@ const items = [
   },
 ];
 
+
+const sx = {
+  wrapper: {
+    px: 'lg',
+    py: 'lg',
+    bg: 'accent.99',
+    height: '900px',
+    overflowY: 'scroll',
+  },
+  searchField: {
+    position: 'fixed',
+    mb: 'sm',
+    width: '400px',
+  },
+  listElementWrapper: {
+    px: 'md',
+    bg: 'accent.99',
+    justifyContent: 'center',
+  },
+  separator: {
+    bg: 'accent.90',
+  },
+  tabsWrapper: {
+    px: 'lg',
+    pt: 'xs',
+  },
+  iconButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  itemLabel: {
+    fontSize: 'sm',
+    fontWeight: 3,
+    lineHeight: '16px',
+    mb: 'xs',
+  },
+  itemValue: {
+    fontWeight: 0,
+    lineHeight: '18px',
+    variant: 'base',
+    mb: 'md',
+  },
+  listElement: {
+    wrapper: {
+      minHeight: '60px',
+    },
+    iconWrapper: {
+      mr: 'auto',
+      alignItems: 'center',
+    },
+    icon: {
+      mr: 'sm',
+      alignSelf: 'center',
+      color: 'accent.40',
+    },
+    avatar: {
+      width: '25px',
+      height: '25px',
+      mr: 'md',
+    },
+    title: {
+      alignSelf: 'start',
+    },
+    subtitle: {
+      fontSize: 'sm',
+      my: '1px',
+      lineHeight: '16px',
+      alignSelf: 'start',
+    },
+    menuWrapper: {
+      alignSelf: 'center',
+    },
+  },
+};
+
+
 const ListElement = ({ item, onClosePanel }) => {
   return (
-    <Box isRow minHeight="60px">
-      <Box isRow mr="auto" alignItems="center" >
+    <Box isRow sx={sx.listElement.wrapper}>
+      <Box isRow sx={sx.listElement.iconWrapper}>
         {item.hasIcon
-            ? <Icon icon={item.avatar} alignSelf="center" size={24} mr="sm" color="accent.40" />
-            : <Avatar mr="md" sx={{ width: '25px', height: '25px' }} src={item.avatar} />
+            ? <Icon icon={item.avatar} size={24} sx={sx.listElement.icon} />
+            : <Avatar sx={sx.listElement.avatar} src={item.avatar} />
           }
         <Box>
-          <Text variant="bodyStrong" alignSelf="start">{item.lastName}, {item.firstName}</Text>
-          <Text sx={{ fontSize: 'sm', my: '1px', lineHeight: '16px' }}variant="subtitle" alignSelf="start">{item.email}</Text>
+          <Text variant="bodyStrong" sx={sx.listElement.title}>{item.lastName}, {item.firstName}</Text>
+          <Text variant="subtitle" sx={sx.listElement.subtitle}>{item.email}</Text>
         </Box>
       </Box>
-      <Box isRow alignSelf="center">
+      <Box isRow sx={sx.listElement.menuWrapper}>
         <SwitchField aria-label="active user" isDefaultSelected alignSelf="center" mr="sm" />
         <PopoverMenu>
           <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}><MoreVertIcon /></IconButton>
@@ -132,11 +209,12 @@ const ListElement = ({ item, onClosePanel }) => {
           </Menu>
         </PopoverMenu>
         {onClosePanel &&
-        <IconButton
-          aria-label="close icon button"
-          onPress={onClosePanel}
-        ><CloseIcon />
-        </IconButton>
+          <IconButton
+            aria-label="close icon button"
+            onPress={onClosePanel}
+          >
+            <CloseIcon />
+          </IconButton>
         }
       </Box>
     </Box>
@@ -166,7 +244,7 @@ export const Default = () => {
   };
 
   return (
-    <Box px="lg" py="lg" bg="accent.99" height="900px" overflowY="scroll">
+    <Box sx={sx.wrapper}>
       <SearchField position="fixed" mb="sm" width="400px" placeholder="Search" aria-label="search" />
       <ListView
         items={items}
@@ -195,29 +273,29 @@ export const Default = () => {
         {panelState.isOpen &&
           <>
             <FocusScope contain restoreFocus autoFocus>
-              <Box px="md" bg="accent.99" justifyContent="center">
+              <Box sx={sx.listElementWrapper}>
                 <ListElement
                   item={selectedItemId >= 0 ? items[selectedItemId] : []}
                   onClosePanel={closePanelHandler}
                 />
               </Box>
 
-              <Separator margin={0} bg="accent.90" />
+              <Separator margin={0} sx={sx.separator} />
 
-              <Box px="lg" pt="xs">
+              <Box sx={sx.tabsWrapper}>
                 <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }} >
                   <Tab title="Profile">
                     {selectedItemId >= 0 &&
                       <>
-                        <IconButton variant="inverted" sx={{ position: 'absolute', top: 0, right: 0 }} ><PencilIcon size={20} /></IconButton>
-                        <Text sx={{ fontSize: 'sm', fontWeight: 3, lineHeight: '16px' }} variant="base" mb="xs">Full Name</Text>
-                        <Text sx={{ fontWeight: 0, lineHeight: '18px' }} variant="base" mb="md">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
-                        <Text sx={{ fontSize: 'sm', fontWeight: 3, lineHeight: '16px' }} variant="base" mb="xs">First Name</Text>
-                        <Text sx={{ fontWeight: 0, lineHeight: '18px' }} variant="base" mb="md">{items[selectedItemId].firstName}</Text>
-                        <Text sx={{ fontSize: 'sm', fontWeight: 3, lineHeight: '16px' }} variant="base" mb="xs">Last Name</Text>
-                        <Text sx={{ fontWeight: 0, lineHeight: '18px' }} variant="base" mb="md">{items[selectedItemId].lastName}</Text>
-                        <Text sx={{ fontSize: 'sm', fontWeight: 3, lineHeight: '16px' }} variant="base" mb="xs">Email</Text>
-                        <Text sx={{ fontWeight: 0, lineHeight: '18px' }} variant="base" mb="md">{items[selectedItemId].email}</Text>
+                        <IconButton variant="inverted" sx={sx.iconButton}><PencilIcon size={20} /></IconButton>
+                        <Text sx={sx.itemLabel} variant="base">Full Name</Text>
+                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
+                        <Text sx={sx.itemLabel} variant="base">First Name</Text>
+                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
+                        <Text sx={sx.itemLabel} variant="base">Last Name</Text>
+                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].lastName}</Text>
+                        <Text sx={sx.itemLabel} variant="base">Email</Text>
+                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
                       </>
                     }
                   </Tab>

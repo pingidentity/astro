@@ -11,6 +11,7 @@ import HomeIcon from 'mdi-react/HomeIcon';
 import PropTypes from 'prop-types';
 import { useOverlayTriggerState } from '@react-stately/overlays';
 import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
+import { mergeProps } from '@react-aria/utils';
 import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
 import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
 import { FocusScope } from '@react-aria/focus';
@@ -47,6 +48,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     name,
     searchProps,
     selectedItem,
+    popoverProps,
     ...others
   } = props;
 
@@ -205,6 +207,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       <PopoverContainer
         {...overlayProps}
         {...positionProps}
+        {...mergeProps(overlayProps, positionProps, popoverProps)}
         ref={overlayRef}
         isOpen={popoverState.isOpen}
         scrollRef={scrollBoxRef}
@@ -302,6 +305,8 @@ EnvironmentBreadcrumb.propTypes = {
   onPopoverOpen: PropTypes.func,
   /** Callback function that fires when the dropdown is closed. */
   onPopoverClose: PropTypes.func,
+  /** Props object that is spread directly into the popover container component. */
+  popoverProps: PropTypes.shape({}),
   /** Props object that is spread directly into the SearchField element. */
   searchProps: PropTypes.shape({}),
   /** Array of keys to disable within the options list. */
