@@ -241,4 +241,4 @@ export {
   Row as DataTableRow,
   TableBody as DataTableBody,
   TableHeader as DataTableHeader,
-} from '@react-spectrum/table';
+} from '@react-stately/table';
