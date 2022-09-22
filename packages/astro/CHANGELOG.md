@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.27.0...@pingux/astro@1.28.0) (2022-09-22)
+
+
+### Bug Fixes
+
+* [UIP-5605] MultiValuesField custom options fix ([b5bd9f8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b5bd9f81352cc7dbbfd661dee166c69bd6de51e8))
+* [UIP-5640] Environment Breadcrumb spread props into Popover ([09c1304](https://gitlab.corp.pingidentity.com/ux/pingux/commit/09c13043fa57396a58b39b98c089f0f9394143a2))
+
+
+### Features
+
+* [UIP-5490] Add DataTable component ([799ac36](https://gitlab.corp.pingidentity.com/ux/pingux/commit/799ac3665a0b082a7c70f51255057eb03080c428))
+* [UIP-5567] Page header component ([5048e7f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5048e7f20c54585981a0875b2c6b434fc0f3657c))
+
+
+
+
+
 # [1.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.26.0...@pingux/astro@1.27.0) (2022-09-13)
 
 
