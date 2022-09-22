@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.26.0...@pingux/astro@1.27.0) (2022-09-13)
+
+
+### Bug Fixes
+
+* [UIP-5620] delete onPress from AccordionGroup ([2074816](https://gitlab.corp.pingidentity.com/ux/pingux/commit/20748165b572bae5f6876c66e665096900933e49))
+
+
+### Features
+
+* [UIP-5556] MultiValueField readOnly ([7d1e920](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7d1e920fb63115d7eee90876de6fde924d5353b5))
+
+
+
+
+
 # [1.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.2...@pingux/astro@1.26.0) (2022-09-06)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.10.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.9.6...@pingux/schema-form@3.10.0) (2022-09-13)
+
+
+### Features
+
+* [UIP-5556] MultiValueField readOnly ([7d1e920](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7d1e920fb63115d7eee90876de6fde924d5353b5))
+
+
+
+
+
 ## [3.9.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.9.5...@pingux/schema-form@3.9.6) (2022-09-06)
 
 **Note:** Version bump only for package @pingux/schema-form
