@@ -28,7 +28,7 @@ select.currentValue = {
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  // rebass adds display: flex after other styles and ellipsis goes away
+  // ThemeUI adds display: flex after other styles and ellipsis goes away
   display: 'inline !important',
 };
 

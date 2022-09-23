@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.28.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.28.0...@pingux/astro@1.28.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* Change DataTable prop type definitions for width and height ([e295973](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e29597388e30eec017532a262bf79a37e147f87d))
+* Hotfix to address React Spectrum build error happening for some users ([9dccf35](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9dccf35dd2a91e2517c975812649592bef51ef43))
+
+
+
+
+
+# [1.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.27.0...@pingux/astro@1.28.0) (2022-09-22)
+
+
+### Bug Fixes
+
+* [UIP-5605] MultiValuesField custom options fix ([b5bd9f8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b5bd9f81352cc7dbbfd661dee166c69bd6de51e8))
+* [UIP-5640] Environment Breadcrumb spread props into Popover ([09c1304](https://gitlab.corp.pingidentity.com/ux/pingux/commit/09c13043fa57396a58b39b98c089f0f9394143a2))
+
+
+### Features
+
+* [UIP-5490] Add DataTable component ([799ac36](https://gitlab.corp.pingidentity.com/ux/pingux/commit/799ac3665a0b082a7c70f51255057eb03080c428))
+* [UIP-5567] Page header component ([5048e7f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5048e7f20c54585981a0875b2c6b434fc0f3657c))
+
+
+
+
+
+# [1.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.26.0...@pingux/astro@1.27.0) (2022-09-13)
+
+
+### Bug Fixes
+
+* [UIP-5620] delete onPress from AccordionGroup ([2074816](https://gitlab.corp.pingidentity.com/ux/pingux/commit/20748165b572bae5f6876c66e665096900933e49))
+
+
+### Features
+
+* [UIP-5556] MultiValueField readOnly ([7d1e920](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7d1e920fb63115d7eee90876de6fde924d5353b5))
+
+
+
+
+
 # [1.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.25.2...@pingux/astro@1.26.0) (2022-09-06)
 
 
