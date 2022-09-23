@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.27.0-alpha.26",
+  "version": "1.28.1",
   "description": "PingUX themeable React component library",
   "repository": {
     "type": "git",
@@ -66,10 +66,6 @@
     "@react-aria/utils": "^3.12.0",
     "@react-aria/virtualizer": "^3.3.2",
     "@react-aria/visually-hidden": "3.2.1",
-    "@react-spectrum/provider": "^3.2.1",
-    "@react-spectrum/table": "^3.3.0",
-    "@react-spectrum/tooltip": "^3.2.1",
-    "@react-spectrum/utils": "3.6.1",
     "@react-stately/collections": "~3.3.8",
     "@react-stately/color": "^3.0.0-beta.2",
     "@react-stately/combobox": "^3.0.0",
@@ -92,11 +88,9 @@
     "@react-stately/tree": "^3.1.2",
     "@react-stately/utils": "~3.4.1",
     "@react-stately/virtualizer": "^3.2.1",
-    "@rebass/forms": "^4.0.6",
     "@styled-system/prop-types": "^5.1.5",
     "@styled-system/props": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
-    "@tippyjs/react": "4.2.0",
     "chroma-js": "^2.1.0",
     "classnames": "^2.2.6",
     "emotion-normalize": "^11.0.1",
@@ -109,12 +103,10 @@
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",
     "react-dropzone": "^11.4.2",
-    "rebass": "^4.0.7",
     "recharts": "^2.1.4",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
     "theme-ui": "^0.10.0",
-    "tippy.js": "6.2.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

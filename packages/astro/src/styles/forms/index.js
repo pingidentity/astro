@@ -8,7 +8,7 @@ import * as select from './select';
 import * as switchable from './switch'; // 'switch' is a reserved keyword
 import * as textarea from './textarea';
 
-// See https://rebassjs.org/forms/ for the intended structure.
+// See ThemeUI docs on variants and themes for intended structure
 // Variants should be defined in the approprate file.
 export default {
   ...checkbox,

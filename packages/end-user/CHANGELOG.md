@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.10](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.9...@pingux/end-user@2.4.10) (2022-09-13)
+
+
+### Bug Fixes
+
+* [UIP-5592] end-user UserNav rework ([a558d72](https://gitlab.corp.pingidentity.com/ux/end-user/commit/a558d7201fd3a161845f3193b1b8c2e02ad4683c))
+
+
+
+
+
 ## [2.4.9](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.8...@pingux/end-user@2.4.9) (2022-09-06)
 
 
