@@ -1,12 +1,19 @@
+include:
+  - local: .gitlab-ci/build-ci-image.yml
+  - local: .gitlab-ci/build-test-lint.yml
+  - local: .gitlab-ci/build-test-lint-all.yml
+  - local: .gitlab-ci/build-test-lint-packages.yml
+  - local: .gitlab-ci/test-screenshot.yml
+  - local: .gitlab-ci/deploy.yml
+
 # NOTE: The numerical suffix in the image string refers to the version of the docker image
 # this number will need to be incremented (i.e. 1.1 to 1.2), when changes to a package
 # require a new docker image to be consistently pulled.
-
 variables:
   STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
   LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.4.0"
   GITHUB_IMAGE: "docker.corp.pingidentity.com:5000/testing/astro-github:1.0.0"
-  KUBERNETES_MEMORY_REQUEST: "16000Mi"
+  KUBERNETES_MEMORY_REQUEST: "250Mi"
   KUBERNETES_MEMORY_LIMIT: "16000Mi"
 
 stages:
@@ -14,151 +21,3 @@ stages:
   - build-test-lint
   - screenshot
   - deploy
-
-.yarn-install-and-build: &yarn-install-and-build
-  before_script:
-    - yarn --frozen-lockfile
-
-# NOTE: Make and test changes to the "latest" image _before_ merging them to the stable one. Otherwise, all
-# pipelines will be impacted because they use the stable image for running scripts.
-build_ci_stable_image:
-  stage: build-ci-image
-  rules:
-    - changes:
-      - shared/docker/stable/Dockerfile
-  script:
-    - docker build --pull --tag "$STABLE_IMAGE" ./shared/docker/stable
-    - docker push "$STABLE_IMAGE"
-  tags:
-    - eks-platform-publish-docker
-
-build_ci_latest_image:
-  stage: build-ci-image
-  rules:
-    - changes:
-      - shared/docker/latest/Dockerfile
-  script:
-    - docker build --pull --tag "$LATEST_IMAGE" ./shared/docker/latest
-    - docker push "$LATEST_IMAGE"
-  tags:
-    - eks-platform-publish-docker
-
-build_ci_github_image:
-  stage: build-ci-image
-  rules:
-    - changes:
-      - shared/docker/github/Dockerfile
-  script:
-    - docker build --pull --tag "$GITHUB_IMAGE" ./shared/docker/github
-    - docker push "$GITHUB_IMAGE"
-  tags:
-    - eks-platform-publish-docker
-
-build:
-  <<: *yarn-install-and-build
-  stage: build-test-lint
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  interruptible: true    
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  script:
-    - bash commit_lint.sh
-    - lerna run build
-    - lerna run lint
-    - lerna run coverage-ci
-  artifacts:
-    paths:
-      - ./packages/**/lib
-    expire_in: 1 week
-
-build-no-lockfile:
-  stage: build-test-lint
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  interruptible: true    
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      changes:
-        - packages/astro/**/*
-  script:
-    - yarn --no-lockfile --ignore-engines
-    - lerna run build
-
-backstop:
-  <<: *yarn-install-and-build
-  stage: screenshot
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      changes:
-        - packages/ui-library/**/*
-  # Temporarily disabled to run in the pipeline due to error. In the meantime, backstop needs to be run locally.
-  # Ref: [UIP-5633] https://jira.pingidentity.com/browse/UIP-5633
-  script:
-    # - lerna run demo --scope ui-library
-    # - lerna run backstop-ci
-    - echo "Run backstop locally."
-  when: manual
-
-chromatic:
-  <<: *yarn-install-and-build
-  stage: screenshot
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  variables:
-    CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
-  rules:
-    # Run automatically for merge trains to develop and master
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
-      changes:
-        - packages/astro/**/*
-    # Required manual trigger for merge requests against master or develop
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
-      changes:
-        - packages/astro/**/*
-      when: manual
-      allow_failure: false
-    # Optional manual trigger for merge requests against branches other than master and develop
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME !~ /^(master|develop)/'
-      changes:
-        - packages/astro/**/*
-      when: manual
-      allow_failure: true
-    # Run automatically for all commits on develop and master, plus auto-accept any changes
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "master"'
-      changes:
-        - packages/astro/**/*
-      variables:
-        CHROMATIC_FLAGS: "--auto-accept-changes --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
-  script:
-    - lerna run chromatic -- $CHROMATIC_FLAGS
-
-deploy_prerelease:
-  stage: deploy
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  rules:
-    # Deploy develop branch via Jenkins API *UNLESS* the last commit was an alpha build.
-    # This prevents loops.
-    - if: '$CI_COMMIT_BRANCH == "develop" && $CI_COMMIT_TITLE != "chore(release): publish alpha build" && $CI_COMMIT_TITLE != "Merge branch ''master'' into develop"'
-  script:
-    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
-
-deploy_release:
-  stage: deploy
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  rules:
-    # Deploy master branch via Jenkins API *UNLESS* the last commit was a stable build.
-    # This prevents loops.
-    - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TITLE != "chore(release): publish stable build"'
-  script:
-    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/generic-release/buildWithParameters"

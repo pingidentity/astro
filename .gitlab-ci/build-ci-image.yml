@@ -1,0 +1,34 @@
+# NOTE: Make and test changes to the "latest" image _before_ merging them to the stable one. Otherwise, all
+# pipelines will be impacted because they use the stable image for running scripts.
+build_ci_stable_image:
+  stage: build-ci-image
+  rules:
+    - changes:
+      - shared/docker/stable/Dockerfile
+  script:
+    - docker build --pull --tag "$STABLE_IMAGE" ./shared/docker/stable
+    - docker push "$STABLE_IMAGE"
+  tags:
+    - eks-platform-publish-docker
+
+build_ci_latest_image:
+  stage: build-ci-image
+  rules:
+    - changes:
+      - shared/docker/latest/Dockerfile
+  script:
+    - docker build --pull --tag "$LATEST_IMAGE" ./shared/docker/latest
+    - docker push "$LATEST_IMAGE"
+  tags:
+    - eks-platform-publish-docker
+
+build_ci_github_image:
+  stage: build-ci-image
+  rules:
+    - changes:
+      - shared/docker/github/Dockerfile
+  script:
+    - docker build --pull --tag "$GITHUB_IMAGE" ./shared/docker/github
+    - docker push "$GITHUB_IMAGE"
+  tags:
+    - eks-platform-publish-docker

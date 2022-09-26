@@ -1,0 +1,29 @@
+build-test-lint-all:
+  extends: 
+    - .base-build-test-lint
+  needs:
+    - build-dependencies-commit-lint
+  rules:
+    # Run automatically for merge trains to develop and master
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
+      allow_failure: false
+    # Run automatically for merge requests if there has been top level changes
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - "*"
+        - ".gitlab-ci/**/*"
+        - ".husky/**/*"
+        - ".shared/**/*"
+      allow_failure: false
+    # Optional manual trigger for merge requests against branches other than master and develop
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME !~ /^(master|develop)/'
+      when: manual
+      allow_failure: true
+  script:
+    - lerna run build
+    - lerna run lint
+    - lerna run coverage-ci
+  artifacts:
+    paths:
+      - "./packages/**/lib"
+    expire_in: 1 week
