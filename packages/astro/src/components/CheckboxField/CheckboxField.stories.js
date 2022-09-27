@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import CheckboxField from './CheckboxField';
 import Link from '../Link';
 import Text from '../Text';
@@ -45,36 +47,6 @@ export default {
     isIndeterminate: {},
     isDefaultSelected: {},
     isSelected: {},
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-labelledby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-describedby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-details': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-controls': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-errormessage': {
-      control: {
-        type: 'text',
-      },
-    },
     containerProps: {
       control: {
         type: 'none',
@@ -90,6 +62,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

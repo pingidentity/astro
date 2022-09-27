@@ -1,22 +1,19 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
-import { v4 as uuid } from 'uuid';
 import { useLabel } from '@react-aria/label';
-import Box from '../Box';
-import Button from '../Button';
-import FieldHelperText from '../FieldHelperText';
-import Text from '../Text';
-import Label from '../Label';
-import statuses from '../../utils/devUtils/constants/statuses';
-import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
+import { mergeProps } from '@react-aria/utils';
+import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+
+import { Box, Button, FieldHelperText, Label, Text } from '../../';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import ArrayFieldItem from './ArrayFieldItem';
+import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Displays array collections providing useful functions and
  * optimizations for arrays.
  */
-
 const ArrayField = (props) => {
   const {
     addButtonLabel,
@@ -110,10 +107,12 @@ const ArrayField = (props) => {
 
   const isLimitReached = !!maxSize && (value || fieldValues).length >= maxSize;
 
+  const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
+
   return (
-    <Box {...others}>
+    <Box {...nonAriaProps}>
       <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
-      <Box as="ul" pl="0">
+      <Box as="ul" pl="0" {...ariaProps}>
         {(value || fieldValues).map(
           ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
             const isDisabled = (value || fieldValues).length === 1;
@@ -198,6 +197,7 @@ ArrayField.propTypes = {
   maxSize: isValidPositiveInt,
   /** Text to display when the maximum number of items is reached */
   maxSizeText: PropTypes.node,
+  ...ariaAttributesBasePropTypes,
 };
 
 ArrayField.defaultProps = {

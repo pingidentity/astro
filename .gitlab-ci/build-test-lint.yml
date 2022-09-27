@@ -11,6 +11,10 @@ build-dependencies-commit-lint:
     - .base-build-test-lint
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    # Run automatically for merge trains to develop and master
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
   before_script:
     - yarn --frozen-lockfile
   script:

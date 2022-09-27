@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import SearchIcon from 'mdi-react/SearchIcon';
 import TextAreaField from '.';
-import Box from '../Box';
-import Icon from '../Icon';
-import statuses from '../../utils/devUtils/constants/statuses';
+
+import { Box, Icon } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { modes as labelModes } from '../Label/constants';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/TextAreaField',
@@ -60,6 +61,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 
