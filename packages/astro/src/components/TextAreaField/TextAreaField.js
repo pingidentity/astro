@@ -1,12 +1,11 @@
 import React, { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+
+import { Box, FieldHelperText, Label, TextArea } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import FieldHelperText from '../FieldHelperText';
-import Label from '../Label';
-import TextArea from '../TextArea';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -19,13 +18,13 @@ const TextAreaField = forwardRef((props, ref) => {
     fieldControlProps,
     fieldLabelProps,
   } = useField({ statusClasses, ...props });
-  const textAreaRef = useRef();
-  const labelRef = useRef();
-  const labelWrapperRef = useRef();
 
   const containerRef = useRef();
   const inputContainerRef = useRef();
+  const labelRef = useRef();
+  const labelWrapperRef = useRef();
   const slotContainer = useRef();
+  const textAreaRef = useRef();
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
@@ -177,6 +176,7 @@ TextAreaField.propTypes = {
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
+  ...ariaAttributesBasePropTypes,
 };
 
 TextAreaField.defaultProps = {

@@ -1,15 +1,14 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useRadioGroup } from '@react-aria/radio';
 import { useRadioGroupState } from '@react-stately/radio';
+import PropTypes from 'prop-types';
 
-import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import Label from '../Label';
-import { RadioContext } from '../RadioField';
-import FieldHelperText from '../FieldHelperText';
+import { Box, FieldHelperText, Label } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useStatusClasses, usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import { RadioContext } from '../RadioField';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Radio group component for a single-choice list of options.
@@ -39,10 +38,15 @@ const RadioGroupField = forwardRef((props, ref) => {
   });
   usePropWarning(props, 'disabled', 'isDisabled');
 
+  const unhandledAriaProps = {
+    'aria-controls': props['aria-controls'],
+  };
+
   return (
     <Box
       ref={ref}
       className={classNames}
+      {...unhandledAriaProps}
       {...radioGroupProps}
     >
       <Label isDisabled={isDisabled} hintText={hintText} isRequired={isRequired} variant="forms.label.radioGroup" {...labelProps}>
@@ -98,19 +102,7 @@ RadioGroupField.propTypes = {
   label: PropTypes.node,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Identifies the element (or elements) that labels the current element. */
-  'aria-labelledby': PropTypes.string,
-  /** Identifies the element (or elements) that describes the object. */
-  'aria-describedby': PropTypes.string,
-  /**
-   * Identifies the element (or elements) that provide a detailed, extended description for the
-   * object.
-  */
-  'aria-details': PropTypes.string,
-  /** Identifies the element that provides an error message for the object. */
-  'aria-errormessage': PropTypes.string,
+  ...ariaAttributesBasePropTypes,
 };
 
 RadioGroupField.displayName = 'RadioGroupField';

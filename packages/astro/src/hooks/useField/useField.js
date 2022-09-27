@@ -6,9 +6,11 @@ import { useFocusWithin } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeProps } from '@react-aria/utils';
 
+import { getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { useStatusClasses } from '../../hooks';
 import { modes as labelModes } from '../../components/Label/constants';
+
 
 /**
  * Generates the necessary props to be used in field components.
@@ -110,10 +112,7 @@ const useField = (props = {}) => {
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
     ...statusClasses,
   });
-  const ariaProps = Object.entries(others).reduce((acc, [key, val]) => {
-    if (key.match(/^aria-.*/)) return { ...acc, [key]: val };
-    return { ...acc };
-  }, {});
+  const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
 
   // Handle focus within and value state for the container. These are needed for float labels.
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
@@ -128,10 +127,9 @@ const useField = (props = {}) => {
     isFloatLabel,
     isFloatLabelActive,
   });
-  const nonAriaOthers = { ...omit(others, Object.keys(ariaProps)) };
 
   const fieldContainerProps = {
-    ...nonAriaOthers,
+    ...nonAriaProps,
     ...mergeProps(containerProps, focusWithinProps),
     className: containerClasses,
     sx: {
