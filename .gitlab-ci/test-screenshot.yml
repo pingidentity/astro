@@ -1,7 +1,7 @@
 backstop:
   stage: screenshot
   needs:
-    - build-dependencies-commit-lint
+    - build-dependencies
   tags:
     - pingux-runner
   image: $STABLE_IMAGE
@@ -21,7 +21,7 @@ backstop:
 chromatic:
   stage: screenshot
   needs:
-    - build-dependencies-commit-lint
+    - build-dependencies
   tags:
     - pingux-runner
   image: $STABLE_IMAGE
