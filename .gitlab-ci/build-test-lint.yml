@@ -6,7 +6,7 @@
   interruptible: true
 
 # Create node_modules artifact for reuse downstream
-build-dependencies-commit-lint:
+build-dependencies:
   extends: 
     - .base-build-test-lint
   rules:
@@ -15,15 +15,23 @@ build-dependencies-commit-lint:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
     # Run automatically for all commits on develop and master
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "master"'
-  before_script:
-    - yarn --frozen-lockfile
   script:
-    - bash commit_lint.sh
+    - yarn --frozen-lockfile
   artifacts:
     untracked: true
     paths:
       - node_modules/
     expire_in: 1 week
+
+commit-lint:
+  extends: 
+    - .base-build-test-lint
+  needs:
+    - build-dependencies
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - bash commit_lint.sh
 
 # Double check astro build -- consider removing
 build-no-lockfile:
