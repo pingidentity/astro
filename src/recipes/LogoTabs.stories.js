@@ -48,51 +48,62 @@ const GoogleLogo = props => (
   </svg>
 );
 
-const logoTabsStyling = ({
-  display: 'inline-flex !important',
-  '& > div': {
-    borderStyle: 'none',
-    borderBottomWidth: '0px !important',
-    justifyContent: 'space-between',
+const sx = {
+  container: {
+    display: 'inline-flex !important',
+    position: 'relative',
+    width: '500px',
   },
-});
-
-const tabStyling = ({
-  ...tab,
-  alignSelf: 'center',
-  '& > svg': {
-    borderWidth: 1,
-    borderStyle: 'dashed',
-    borderColor: 'neutral.70',
-    borderRadius: 4,
-    bg: 'white',
-    outline: '5px solid white',
+  separator: {
+    position: 'absolute',
+    top: '25%',
+    backgroundColor: 'accent.70',
   },
-  '&.is-selected > svg': {
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'active',
-    borderRadius: 4,
-    bg: 'white',
-    outline: '5px solid white',
+  logoTabsStyling: {
+    display: 'inline-flex !important',
+    '& > div': {
+      borderStyle: 'none',
+      borderBottomWidth: '0px !important',
+      justifyContent: 'space-between',
+    },
   },
-  // we only want the change the color of icon svgs to active not company logos
-  '&.is-selected > .mdi-icon > path': {
-    fill: 'active',
+  tabStyling: {
+    ...tab,
+    alignSelf: 'center',
+    '& > svg': {
+      borderWidth: 1,
+      borderStyle: 'dashed',
+      borderColor: 'neutral.70',
+      borderRadius: 4,
+      bg: 'white',
+      outline: '5px solid white',
+    },
+    '&.is-selected > svg': {
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: 'active',
+      borderRadius: 4,
+      bg: 'white',
+      outline: '5px solid white',
+    },
+    // we only want the change the color of icon svgs to active not company logos
+    '&.is-selected > .mdi-icon > path': {
+      fill: 'active',
+    },
+    '& > [role="presentation"]': {
+      height: '0px',
+    },
   },
-  '& > [role="presentation"]': {
-    height: '0px',
-  },
-});
+};
 
 export const LogoTabs = () => {
   const [currentTab, setCurrentTab] = useState('tab1');
   const [showMiddleTabs, setShowMiddleTabs] = useState(false);
   return (
-    <Box sx={{ display: 'inline-flex !important', position: 'relative', width: '500px' }}>
-      <Separator sx={{ position: 'absolute', top: '25%' }} bg="accent.70" />
+    <Box sx={sx.container}>
+      <Separator sx={sx.separator} />
       <Tabs
-        sx={logoTabsStyling}
+        sx={sx.logoTabsStyling}
         selectedKey={currentTab}
         onSelectionChange={setCurrentTab}
         onClick={setShowMiddleTabs}
@@ -101,7 +112,7 @@ export const LogoTabs = () => {
           key="tab1"
           title={<Text mt="md" variant="tabLabel">Source</Text>}
           icon={<Icon icon={P14CLogo} size={65} color="#eb4c15" p="sm" />}
-          sx={tabStyling}
+          sx={sx.tabStyling}
         >
           <Text>This is content for the source tab</Text>
         </Tab>
@@ -113,7 +124,7 @@ export const LogoTabs = () => {
             key="tab2"
             title={<Text mt="md" variant="tabLabel">Custom Filter</Text>}
             icon={<Icon icon={Filter} size={40} color="accent.20" p="xs" />}
-            sx={tabStyling}
+            sx={sx.tabStyling}
           >
             <Text>This is content for the custom filter tab</Text>
           </Tab>
@@ -123,7 +134,7 @@ export const LogoTabs = () => {
             key="tab3"
             title={<Text mt="md" variant="tabLabel">Attribute Mapping</Text>}
             icon={<Icon icon={ShuffleVariant} size={40} color="accent.20" p="xs" />}
-            sx={tabStyling}
+            sx={sx.tabStyling}
           >
             <Text>This is content for attribute mapping tab</Text>
           </Tab>
@@ -132,7 +143,7 @@ export const LogoTabs = () => {
           key="tab4"
           title={<Text mt="md" variant="tabLabel">Target</Text>}
           icon={<Icon icon={GoogleLogo} size={65} p="sm" />}
-          sx={tabStyling}
+          sx={sx.tabStyling}
 
         >
           <Text>This is content for the target tab</Text>
