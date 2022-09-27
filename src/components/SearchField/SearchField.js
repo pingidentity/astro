@@ -1,11 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useSearchField } from '@react-aria/searchfield';
 import { useSearchFieldState } from '@react-stately/searchfield';
-import SearchIcon from 'mdi-react/SearchIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
+import SearchIcon from 'mdi-react/SearchIcon';
+import PropTypes from 'prop-types';
+
+import { Box, Icon, IconButton, Input, Label } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, usePropWarning } from '../../hooks';
-import { Box, Icon, IconButton, Input, Label } from '../../index';
 
 
 /**
@@ -97,6 +99,24 @@ const SearchField = forwardRef((props, ref) => {
 });
 
 SearchField.propTypes = {
+  /**
+   * @ignore
+   * Identifies the currently active element when DOM focus is on a composite widget, textbox,
+   * group, or application.
+   */
+  'aria-activedescendant': PropTypes.string,
+  /**
+   * Indicates whether inputting text could trigger display of one or more predictions of the
+   * user's intended value for an input and specifies how predictions would be presented if they
+   * are made.
+   */
+  'aria-autocomplete': PropTypes.oneOf(['none', 'inline', 'list', 'both']),
+  /**
+   * @ignore
+   * Indicates the availability and type of interactive popup element, such as menu or dialog, that
+   * can be triggered by an element.
+   */
+  'aria-haspopup': PropTypes.oneOf([true, false, 'menu', 'listbox', 'tree', 'grid', 'dialog']),
   /** How the input should handle autocompletion according to the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). The `autocomplete` prop is an alias for this. */
   autoComplete: PropTypes.string,
   /** @ignore Alias for `autoComplete` prop. Exists for backwards-compatibility. */
@@ -156,17 +176,6 @@ SearchField.propTypes = {
    * (value: string) => void
    */
   onChange: PropTypes.func,
-  /**
-   * Indicates whether inputting text could trigger display of one or more predictions of the
-   * user's intended value for an input and specifies how predictions would be presented if they
-   * are made.
-   */
-  'aria-autocomplete': PropTypes.oneOf(['none', 'inline', 'list', 'both']),
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Identifies the element (or elements) that labels the current element. */
-  'aria-labelledby': PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
   containerProps: PropTypes.shape({}),
   /** Props object that is spread into the input element. */
   controlProps: PropTypes.shape({}),
@@ -192,26 +201,6 @@ SearchField.propTypes = {
    * (isFocused: boolean) => void
    */
   onFocusChange: PropTypes.func,
-  /**
-   * @ignore
-   * Identifies the currently active element when DOM focus is on a composite widget, textbox,
-   * group, or application.
-   */
-  'aria-activedescendant': PropTypes.string,
-  /**
-   * @ignore
-   * Indicates the availability and type of interactive popup element, such as menu or dialog, that
-   * can be triggered by an element.
-   */
-  'aria-haspopup': PropTypes.oneOf([true, false, 'menu', 'listbox', 'tree', 'grid', 'dialog']),
-  /** @ignore Identifies the element (or elements) that describes the object. */
-  'aria-describedby': PropTypes.string,
-  /**
-   * @ignore
-   * Identifies the element (or elements) that provide a detailed, extended description for the
-   * object.
-   */
-  'aria-details': PropTypes.string,
   /**
    * @ignore
    * Whether to exclude the element from the sequential tab order. If true, the element will not be
@@ -276,8 +265,7 @@ SearchField.propTypes = {
    * Handler that is called when the input value is modified. See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event).
    */
   onInput: PropTypes.func,
-  /** @ignore Identifies the element that provides an error message for the object. */
-  'aria-errormessage': PropTypes.string,
+  ...ariaAttributesBasePropTypes,
 };
 
 SearchField.defaultProps = {

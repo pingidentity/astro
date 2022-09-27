@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { OverlayProvider } from '@react-aria/overlays';
 import { useAsyncList } from '@react-stately/data';
-import { SelectField, Item, Separator, Section } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
+
+import { Item, Section, SelectField, Separator } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { modes as labelModes } from '../Label/constants';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const animals = [
   { name: 'Aardvark', id: '1' },
@@ -97,6 +99,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

@@ -5,12 +5,10 @@ import { useToggleState } from '@react-stately/toggle';
 import { useSwitch } from '@react-aria/switch';
 import { usePress } from '@react-aria/interactions';
 
+import { Box, FieldHelperText, Label, Switch } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import FieldHelperText from '../FieldHelperText';
-import Label from '../Label';
-import Switch from '../Switch';
 
 /**
  * Combines a switch, label, and helper text for a complete, form-ready solution.
@@ -38,10 +36,6 @@ const SwitchField = forwardRef((props, ref) => {
     onKeyDown,
     onKeyUp,
     status,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledby,
-    'aria-describedby': ariaDescribedby,
-    'aria-details': ariaDetails,
     controlProps,
     ...others
   } = props;
@@ -74,10 +68,15 @@ const SwitchField = forwardRef((props, ref) => {
     controlProps: { ...controlProps, ...inputProps },
   });
 
+  const unhandledAriaProps = {
+    'aria-controls': others['aria-controls'],
+    'aria-errormessage': others['aria-errormessage'],
+  };
+
   return (
     <Box {...fieldContainerProps}>
       <Label variant="forms.switch.label" {...fieldLabelProps}>
-        <Switch ref={switchRef} inputProps={fieldControlProps} />
+        <Switch ref={switchRef} inputProps={fieldControlProps} {...unhandledAriaProps} />
         {label}
       </Label>
       {
@@ -91,8 +90,14 @@ const SwitchField = forwardRef((props, ref) => {
 });
 
 SwitchField.propTypes = {
-  /** The rendered label for the field. */
-  label: PropTypes.node,
+  /** A list of class names to apply to the input element. */
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  /** Props object that is spread directly into the root (top-level) element. */
+  containerProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the input element. */
+  controlProps: PropTypes.shape({}),
+  /** Whether the element should receive focus on render. */
+  hasAutoFocus: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
   /** If present this prop will cause a help hint to render in the label of the field. */
@@ -101,28 +106,26 @@ SwitchField.propTypes = {
   id: PropTypes.string,
   /** Whether the element should be selected (uncontrolled). */
   isDefaultSelected: PropTypes.bool,
-  /** Whether the element should be selected (controlled). */
-  isSelected: PropTypes.bool,
-  /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
-  name: PropTypes.string,
-  /** Handler that is called when the element's selection state changes. */
-  onChange: PropTypes.func,
-  /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
-  value: PropTypes.string,
-  /** A list of class names to apply to the input element. */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   /** Whether the field is disabled. */
   isDisabled: PropTypes.bool,
   /** Whether the input can be selected, but not changed by the user. */
   isReadOnly: PropTypes.bool,
   /** Whether user input is required on the input before form submission. */
   isRequired: PropTypes.bool,
-  /** Whether the element should receive focus on render. */
-  hasAutoFocus: PropTypes.bool,
-  /** Handler that is called when the element receives focus. */
-  onFocus: PropTypes.func,
+  /** Whether the element should be selected (controlled). */
+  isSelected: PropTypes.bool,
+  /** The rendered label for the field. */
+  label: PropTypes.node,
+  /** Props object that is spread directly into the label element. */
+  labelProps: PropTypes.shape({}),
+  /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
+  name: PropTypes.string,
   /** Handler that is called when the element loses focus. */
   onBlur: PropTypes.func,
+  /** Handler that is called when the element's selection state changes. */
+  onChange: PropTypes.func,
+  /** Handler that is called when the element receives focus. */
+  onFocus: PropTypes.func,
   /** Handler that is called when the element's focus status changes. */
   onFocusChange: PropTypes.func,
   /** Handler that is called when a key is pressed. */
@@ -131,23 +134,9 @@ SwitchField.propTypes = {
   onKeyUp: PropTypes.func,
   /** Determines the textarea status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Identifies the element (or elements) that labels the current element. */
-  'aria-labelledby': PropTypes.string,
-  /** Identifies the element (or elements) that describes the object. */
-  'aria-describedby': PropTypes.string,
-  /**
-   * Identifies the element (or elements) that provide a detailed, extended description for the
-   * object.
-  */
-  'aria-details': PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
+  /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
+  value: PropTypes.string,
+  ...ariaAttributesBasePropTypes,
 };
 
 SwitchField.defaultProps = {

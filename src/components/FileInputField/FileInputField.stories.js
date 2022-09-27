@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
 import FileInputField from './';
-import { Box } from '../../index';
+import { Box } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -68,6 +70,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 
