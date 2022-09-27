@@ -364,6 +364,9 @@ Frame.defaultProps = {
     width: '100%',
 };
 
+// Fixes last minor version, not a solid fix for patch versions
+const lastMinorVersion = END_USER_VERSION.match(/[0-9]+\.[0-9]+\.[0-9]+/g)[0];
+
 export const EndUserSandbox = ({
     title,
     style,
@@ -387,7 +390,7 @@ export const EndUserSandbox = ({
                 <link
                     rel="stylesheet"
                     type="text/css"
-                    href={`https://assets.pingone.com/ux/end-user/${END_USER_VERSION}/end-user.css`}
+                    href={`https://assets.pingone.com/ux/end-user/${lastMinorVersion}/end-user.css`}
                     onLoad={() => { setBaseLoaded(true); }}
                 />
                 {children}
