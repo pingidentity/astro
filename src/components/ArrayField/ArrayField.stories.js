@@ -1,7 +1,9 @@
 import React from 'react';
 import { OverlayProvider } from '@react-aria/overlays';
 import { v4 as uuid } from 'uuid';
-import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from '../../index';
+
+import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 export default {
   title: 'Form/ArrayField',
@@ -45,6 +47,7 @@ export default {
         type: 'text',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 
