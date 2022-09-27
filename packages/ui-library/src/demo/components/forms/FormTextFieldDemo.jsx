@@ -1,4 +1,5 @@
 import React from "react";
+import FormLabel from "../../../components/forms/FormLabel";
 import FormTextField from "../../../components/forms/form-text-field";
 import InputWidths from "../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
@@ -105,6 +106,18 @@ class FormTextFieldDemo extends React.Component {
                 <InputRow>
                     <FormTextField
                         labelText="Basic (stateful)"
+                        width={InputWidths.MD}
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormLabel
+                        style={{ display: "block", marginBottom: "8px" }}
+                        labelFor="this-is-input-field-with-custom-id"
+                    >
+                        Label for input field with custom id
+                    </FormLabel>
+                    <FormTextField
+                        id="this-is-input-field-with-custom-id"
                         width={InputWidths.MD}
                     />
                 </InputRow>
