@@ -1,6 +1,5 @@
-import React, { forwardRef, useEffect, useRef, useState, useLayoutEffect } from 'react';
+import React, { forwardRef, useRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
-import { announce } from '@react-aria/live-announcer';
 
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
@@ -21,6 +20,12 @@ export const icons = {
   success: CheckCircleIcon,
   error: AlertCircleIcon,
   warning: AlertIcon,
+};
+
+export const ARIA_STATUSES = {
+  SUCCESS: 'Success Message',
+  ERROR: 'Error Message',
+  WARNING: 'Warning Message',
 };
 
 const CloseButton = ({ color, ...others }) => {
@@ -59,10 +64,6 @@ const Message = forwardRef((props, ref) => {
     }
   };
 
-  useEffect(() => {
-    announce(children, 'polite');
-  }, []);
-
   const innerRef = useRef(null);
   const [innerHeight, setInnerHeight] = useState(0);
 
@@ -74,6 +75,16 @@ const Message = forwardRef((props, ref) => {
     isHidden,
   });
 
+  const ariaStatus = (ariaStatusClass) => {
+    if (ariaStatusClass === 'is-success') {
+      return ARIA_STATUSES.SUCCESS;
+    } else if (ariaStatusClass === 'is-error') {
+      return ARIA_STATUSES.ERROR;
+    } else if (ariaStatusClass === 'is-warning') {
+      return ARIA_STATUSES.WARNING;
+    } return '';
+  };
+
   return (
     <Box
       variant="messages.transition"
@@ -82,6 +93,9 @@ const Message = forwardRef((props, ref) => {
         maxHeight: !isHidden ? innerHeight : 0,
       }}
       data-id={dataId}
+      role="status"
+      aria-live="polite"
+      aria-label={ariaStatus(statusClasses)}
     >
       <Box ref={innerRef}>
         <Box
