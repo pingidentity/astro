@@ -5,7 +5,7 @@ import RadioField from '../components/RadioField';
 import RadioGroupField from '../components/RadioGroupField';
 
 export default {
-  title: 'Recipes/RadioButtonsWithLinks',
+  title: 'Recipes/Radio Buttons with Links',
 };
 
 export const Default = () => {

@@ -3,7 +3,7 @@ import { Box, Button, Text } from '../index';
 import useCopyToClipboard from '../hooks/useCopyToClipboard';
 
 export default {
-  title: 'Recipes/CopyToClipboard',
+  title: 'Recipes/Copy to Clipboard',
 };
 
 export const Default = () => {

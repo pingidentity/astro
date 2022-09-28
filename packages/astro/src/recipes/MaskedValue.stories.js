@@ -5,7 +5,7 @@ import { Box, Icon, IconButton, Text } from '../index';
 import { useStatusClasses } from '../hooks';
 
 export default {
-  title: 'Recipes/MaskedValues',
+  title: 'Recipes/Masked Values',
   argTypes: {
     dataTitle: {
       control: {
