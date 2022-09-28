@@ -22,7 +22,7 @@ const items = [
 ];
 
 export default {
-  title: 'Recipes/AttributesP1Mappings',
+  title: 'Recipes/Attributes And PingOne Mapping',
 };
 
 const sx = {

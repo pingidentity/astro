@@ -6,7 +6,7 @@ import { tab } from '../styles/variants/tabs';
 
 
 export default {
-  title: 'Recipes/LogoTabs',
+  title: 'Recipes/Logo Tabs',
 };
 
 const P14CLogo = props => (

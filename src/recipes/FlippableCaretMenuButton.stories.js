@@ -14,7 +14,7 @@ import {
 import PopoverContainer from '../components/PopoverContainer';
 
 export default {
-  title: 'Recipes/FlippableCaretMenuButton',
+  title: 'Recipes/Flippable Caret Menu Button',
 };
 
 const buttonArray = [

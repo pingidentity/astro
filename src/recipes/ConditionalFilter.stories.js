@@ -21,7 +21,7 @@ import {
 import OverlayPanel from '../components/OverlayPanel';
 
 export default {
-  title: 'Recipes/ConditionalFilter',
+  title: 'Recipes/Conditional Filter',
 };
 
 const sx = {
