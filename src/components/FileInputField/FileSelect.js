@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Text } from '../../index';
 
-const FileSelect = (props) => {
-  const { buttonText, handleFileSelect, isDisabled, textProps } = props;
+import { Button, Text } from '../../';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+
+const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...others }) => {
+  const { ariaProps } = getAriaAttributeProps(others);
 
   return (
     <Button
@@ -14,6 +16,7 @@ const FileSelect = (props) => {
       my={5}
       onPress={handleFileSelect}
       variant="fileInputField"
+      {...ariaProps}
     >
       <Text color="active" {...textProps}>
         {buttonText}
@@ -29,4 +32,5 @@ FileSelect.propTypes = {
   handleFileSelect: PropTypes.func,
   isDisabled: PropTypes.bool,
   textProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };

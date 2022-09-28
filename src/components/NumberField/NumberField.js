@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-} from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import MenuUp from 'mdi-react/MenuUpIcon';
 import MenuDown from 'mdi-react/MenuDownIcon';
@@ -12,7 +7,7 @@ import { useNumberFieldState } from '@react-stately/numberfield';
 import { useLocale } from '@react-aria/i18n';
 import { mergeProps } from '@react-aria/utils';
 import omit from 'lodash/omit';
-import statuses from '../../utils/devUtils/constants/statuses';
+
 import {
   Box,
   FieldHelperText,
@@ -20,8 +15,10 @@ import {
   IconButton,
   Input,
   Label,
-} from '../../index';
+} from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, usePropWarning } from '../../hooks';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Number fields allow users to enter a number, and increment or
@@ -212,4 +209,5 @@ NumberField.propTypes = {
   defaultValue: PropTypes.number,
   /** The current value (controlled). */
   value: PropTypes.number,
+  ...ariaAttributesBasePropTypes,
 };
