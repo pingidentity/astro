@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { noop } from 'underscore';
@@ -365,7 +365,18 @@ Frame.defaultProps = {
 };
 
 // Fixes last minor version, not a solid fix for patch versions
-const lastMinorVersion = END_USER_VERSION.match(/[0-9]+\.[0-9]+\.[0-9]+/g)[0];
+const getPublishedVersion = () => {
+    // Regex for semver matching
+    // https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+    const regex = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+    // Extract the major / minor / patch versions
+    const semver = END_USER_VERSION.match(regex);
+    const majorNum = new Number(semver[1]);
+    const minorNum = new Number(semver[2]);
+    const patchNum = new Number(semver[3]);
+    const correctedPatchNum = patchNum == 0 ? patchNum : patchNum - 1;
+    return `${majorNum}.${minorNum}.${correctedPatchNum}`;
+}
 
 export const EndUserSandbox = ({
     title,
@@ -377,6 +388,7 @@ export const EndUserSandbox = ({
 }) => {
     // Using this to hide the component until the CSS is loaded to avoid FoUC
     const [baseLoaded, setBaseLoaded] = useState(false);
+    const publishedVersion = useMemo(() => getPublishedVersion(), []);
 
     return (
         <div style={{ opacity: baseLoaded ? 1 : 0 }}>
@@ -390,7 +402,7 @@ export const EndUserSandbox = ({
                 <link
                     rel="stylesheet"
                     type="text/css"
-                    href={`https://assets.pingone.com/ux/end-user/${lastMinorVersion}/end-user.css`}
+                    href={`https://assets.pingone.com/ux/end-user/${publishedVersion}/end-user.css`}
                     onLoad={() => { setBaseLoaded(true); }}
                 />
                 {children}
