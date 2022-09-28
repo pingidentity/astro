@@ -11,7 +11,7 @@ import {
 import useModalState from '../hooks/useModalState';
 
 export default {
-  title: 'Recipes/TrialExperienceButtons',
+  title: 'Recipes/Trial Experience Buttons',
 };
 
 const headingTextStyle = ({

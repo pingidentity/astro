@@ -15,7 +15,7 @@ import {
 } from '../index';
 
 export default {
-  title: 'Recipes/EditableInput',
+  title: 'Recipes/Editable Input',
 };
 
 const EditableAreaContext = createContext();

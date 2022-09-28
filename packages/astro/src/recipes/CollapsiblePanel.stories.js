@@ -22,7 +22,7 @@ import {
 } from '..';
 
 export default {
-  title: 'Recipes/CollapsiblePanel with List',
+  title: 'Recipes/Collapsible Panel with List',
 };
 
 const data = [

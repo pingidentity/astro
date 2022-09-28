@@ -7,7 +7,7 @@ import { Icon, ComboBoxField, Item, IconButton, IconButtonToggle } from '../inde
 
 
 export default {
-  title: 'Recipes/OneWayToBidirectionalArrow',
+  title: 'Recipes/One Way to Bidirectional Arrow',
 };
 
 const items = [
