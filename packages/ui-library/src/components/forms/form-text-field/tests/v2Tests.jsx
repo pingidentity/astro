@@ -157,6 +157,28 @@ describe("FormTextField", function () {
         expect(ReactDOM.findDOMNode(component).textContent).toBe("some label");
     });
 
+    it("renders input with same id as label for", function () {
+        var component = getComponent({
+            labelText: "some label"
+        });
+
+        const inputField = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-input");
+        const fieldLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field");
+
+        expect(inputField.getAttribute("id")).toStrictEqual(fieldLabel.getAttribute("for"));
+    });
+
+    it("renders input with custom id", function () {
+        var customId = "custom-id";
+        var component = getComponent({
+            id: customId
+        });
+
+        const inputField = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-field-input");
+
+        expect(inputField.getAttribute("id")).toStrictEqual(customId);
+    });
+
     it("renders inline", function () {
         var component = getComponent({
             inline: true,

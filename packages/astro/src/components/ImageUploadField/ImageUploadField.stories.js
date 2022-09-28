@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Image, ImageUploadField, OverlayProvider } from '../../index';
+
+import { Image, ImageUploadField, OverlayProvider } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -69,6 +71,7 @@ export default {
       },
       defaultValue: statuses.DEFAULT,
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

@@ -1,9 +1,10 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useSelectField, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
 import SelectFieldBase from '../SelectFieldBase';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -101,6 +102,7 @@ SelectField.propTypes = {
   scrollBoxProps: PropTypes.shape({
     maxHeight: PropTypes.string,
   }),
+  ...ariaAttributesBasePropTypes,
 };
 
 SelectField.defaultProps = {

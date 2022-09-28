@@ -5,11 +5,14 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import ImageUploadFieldBase from './ImageUploadFieldBase';
-import { Item, Menu } from '../../index';
-import { useImageUploadState } from '../../hooks/useImageUploadState';
+
+import { Item, Menu } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import ImagePreviewButton from './ImagePreviewButton';
+import ImageUploadFieldBase from './ImageUploadFieldBase';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { useImageUploadState } from '../../hooks/useImageUploadState';
+
 
 /**
  * The Image Upload Field component gives users the ability to upload a file (image by default).
@@ -54,14 +57,14 @@ const ImageUploadField = forwardRef((props, ref) => {
       {...props}
     >
       <ImagePreviewButton
-        isLoading={isLoading}
-        loaderSize={loaderSize}
-        previewImage={state.previewImage}
         defaultPreviewImage={state.defaultPreviewImage}
         defaultPreviewNode={state.defaultPreviewNode}
         isImageType={state.isImageType}
+        isLoading={isLoading}
+        loaderSize={loaderSize}
         onPress={state.pressPreviewButton}
         previewHeight={props?.previewHeight}
+        previewImage={state.previewImage}
         previewWidth={props?.previewWidth}
         widthHeightSx={state.widthHeightSx}
       />
@@ -120,6 +123,7 @@ ImageUploadField.propTypes = {
   previewWidth: PropTypes.number,
   /** Determines the helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
+  ...ariaAttributesBasePropTypes,
 };
 
 ImageUploadField.defaultProps = {

@@ -6,7 +6,7 @@ import Input from '../components/Input';
 import { Item } from '../index';
 
 export default {
-  title: 'Recipes/CountryPicker',
+  title: 'Recipes/Country Picker',
 };
 
 const validatePhoneNumber = (str) => {

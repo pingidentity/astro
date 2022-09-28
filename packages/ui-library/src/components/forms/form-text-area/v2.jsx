@@ -197,6 +197,7 @@ class FormTextAreaStateless extends React.Component {
         disabled: false,
         edited: false,
         height: inputHeights.AUTO,
+        id: "",
         mode: FormFieldConstants.FormFieldMode.EDIT,
         monospaced: false,
         noResize: false,
@@ -225,6 +226,10 @@ class FormTextAreaStateless extends React.Component {
         this.setState({ width: entries[0].target.offsetWidth });
     };
 
+    /* istanbul ignore next  */
+    componentWillMount() {
+        this.fieldId = this.props.id || _.uniqueId("form-text-area-");
+    }
     /* istanbul ignore next  */
     componentDidMount() {
         new ResizeObserver(this._outputsize).observe(this._textarea);
@@ -258,6 +263,7 @@ class FormTextAreaStateless extends React.Component {
                 className={className}
                 value={this.props.labelText || this.props.label}
                 hint={this.props.labelHelpText}
+                labelFor={this.fieldId}
                 {...passLabelProps(this.props)}
             >
                 <span className="input-container" style={{ width: this.state.width }}>
@@ -272,6 +278,7 @@ class FormTextAreaStateless extends React.Component {
                                 "input-textarea__input--no-resize": this.props.noResize,
                             }
                         )}
+                        id={this.fieldId}
                         disabled={this.props.disabled}
                         placeholder={this.props.placeholder}
                         readOnly={readonly}

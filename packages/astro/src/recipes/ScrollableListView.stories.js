@@ -7,7 +7,7 @@ import FormSelectIcon from 'mdi-react/FormSelectIcon';
 import { SearchField, ListView, Box, IconButton, ScrollBox, Text, Icon } from '../index';
 
 export default {
-  title: 'Recipes/ScrollableListView',
+  title: 'Recipes/Scrollable List View',
 };
 
 const unfilteredItems = [

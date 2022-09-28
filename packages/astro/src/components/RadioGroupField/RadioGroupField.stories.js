@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import RadioGroupField from '.';
 import RadioField from '../RadioField';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -38,36 +40,12 @@ export default {
     isRequired: {},
     name: {},
     id: {},
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-labelledby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-describedby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-details': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-errormessage': {
-      control: {
-        type: 'text',
-      },
-    },
     value: {
       control: {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

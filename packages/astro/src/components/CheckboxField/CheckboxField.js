@@ -1,14 +1,12 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
-import { useToggleState } from '@react-stately/toggle';
 import { useCheckbox } from '@react-aria/checkbox';
+import { useToggleState } from '@react-stately/toggle';
+import PropTypes from 'prop-types';
 
+import { Box, Checkbox, FieldHelperText, Label } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import Checkbox from '../Checkbox';
-import FieldHelperText from '../FieldHelperText';
-import Label from '../Label';
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -108,30 +106,13 @@ CheckboxField.propTypes = {
   onKeyDown: PropTypes.func,
   /** Handler that is called when a key is released. */
   onKeyUp: PropTypes.func,
-  /**
-   * Identifies the element (or elements) whose contents or presence are controlled by the current
-   * element.
-  */
-  'aria-controls': PropTypes.string,
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Identifies the element (or elements) that labels the current element. */
-  'aria-labelledby': PropTypes.string,
-  /** Identifies the element (or elements) that describes the object. */
-  'aria-describedby': PropTypes.string,
-  /**
-   * Identifies the element (or elements) that provide a detailed, extended description for the
-   * object.
-  */
-  'aria-details': PropTypes.string,
-  /** Identifies the element that provides an error message for the object. */
-  'aria-errormessage': PropTypes.string,
   /** Props object that is spread directly into the root (top-level) element. */
   containerProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input element. */
   controlProps: PropTypes.shape({}),
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 CheckboxField.displayName = 'CheckboxField';
