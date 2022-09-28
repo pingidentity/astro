@@ -4,7 +4,7 @@ import Text from '../components/Text';
 import { active } from '../styles/colors';
 
 export default {
-  title: 'Recipes/StatsCircle',
+  title: 'Recipes/Stats Circle',
 };
 
 const sx = {

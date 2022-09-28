@@ -8,7 +8,7 @@ import statuses from '../utils/devUtils/constants/statuses';
 import PopoverContainer from '../components/PopoverContainer';
 
 export default {
-  title: 'Recipes/DatePicker',
+  title: 'Recipes/Date Picker',
 };
 
 const sx = {

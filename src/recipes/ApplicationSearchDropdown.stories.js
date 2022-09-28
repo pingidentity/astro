@@ -9,7 +9,7 @@ import { FocusScope, createFocusManager } from '@react-aria/focus';
 import { ListView, Item, IconButton, Text, PopoverContainer, Box, Icon, SearchField } from '../index';
 
 export default {
-  title: 'Recipes/ApplicationSearchDropdown',
+  title: 'Recipes/Application Search Dropdown',
 };
 
 const items = [

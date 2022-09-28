@@ -14,7 +14,7 @@ import {
 } from '../index';
 
 export default {
-  title: 'Recipes/RowLineChart',
+  title: 'Recipes/Row Line Chart',
   parameters: {
     chromatic: { diffThreshold: 0.9 },
   },
