@@ -46,6 +46,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
         }}
         as="li"
         key={`li-${child.key}`}
+        variant="text.breadcrumbLi"
       >
         <BreadcrumbItem
           data-id={child['data-id']}
@@ -63,7 +64,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
   }, [children.length, filteredChildren, icon, iconProps, onAction]);
 
   return (
-    <nav>
+    <nav aria-label="Breadcrumb">
       <Box
         ref={breadcrumbsRef}
         isRow

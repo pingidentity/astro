@@ -121,6 +121,12 @@ const expandableRow = {
   },
 };
 
+const breadcrumbLi = {
+  'a.is-hovered.is-current ': {
+    textDecoration: 'none',
+  },
+};
+
 const breadcrumbLink = {
   color: 'active',
   fontFamily: 'standard',
@@ -233,6 +239,7 @@ export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   bodyWeak: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
+  breadcrumbLi,
   breadcrumbLink,
   buttonLabel: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'accent.30', fontFamily: 'standard' },
   buttonTitle: { ...wordWrap, fontSize: 'xs', fontWeight: 0, color: 'text.primary', fontFamily: 'standard', lineHeight: '13px' },
