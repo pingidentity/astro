@@ -13,19 +13,31 @@ export default {
   title: 'Recipes/Panel Header',
 };
 
+const sx = {
+  wrapper: {
+    width: 'fit-content',
+    alignItems: 'center',
+    bg: 'accent.99',
+    py: 'sm',
+    pl: 'md',
+  },
+  title: {
+    fontSize: 'md',
+    lineHeight: '18px',
+  },
+  subtitle: {
+    fontSize: 'sm',
+    my: '1px',
+    lineHeight: '16px',
+  },
+};
+
 export const Default = () => (
-  <Box
-    bg="accent.99"
-    py="sm"
-    pl="md"
-    isRow
-    alignItems="center"
-    sx={{ width: 'fit-content' }}
-  >
+  <Box isRow sx={sx.wrapper}>
     <Icon icon={AccountIcon} size={25} color="accent.40" />
     <Box ml="sm" mr="xx" >
-      <Text sx={{ fontSize: 'md', lineHeight: '18px' }} variant="bodyStrong">Fons Vernall</Text>
-      <Text sx={{ fontSize: 'sm', my: '1px', lineHeight: '16px' }}variant="subtitle">fvernall0@google.it</Text>
+      <Text sx={sx.title} variant="bodyStrong">Fons Vernall</Text>
+      <Text sx={sx.subtitle} variant="subtitle">fvernall0@google.it</Text>
     </Box>
     <OverlayProvider>
       <PopoverMenu>
