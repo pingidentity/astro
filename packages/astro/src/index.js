@@ -68,6 +68,9 @@ export * from './components/HelpHint';
 export { default as Icon } from './components/Icon';
 export * from './components/Icon';
 
+export { default as IconBadge } from './components/IconBadge';
+export * from './components/IconBadge';
+
 export { default as IconButton } from './components/IconButton';
 export * from './components/IconButton';
 
