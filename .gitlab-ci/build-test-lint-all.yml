@@ -1,8 +1,6 @@
 build-test-lint-all:
   extends: 
-    - .base-build-test-lint
-  needs:
-    - build-dependencies
+    - .base-job
   rules:
     # Run automatically for merge trains to develop and master
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'

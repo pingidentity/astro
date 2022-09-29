@@ -1,11 +1,7 @@
 backstop:
+  extends:
+    - .base-job
   stage: screenshot
-  needs:
-    - build-dependencies
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  interruptible: true
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
@@ -19,13 +15,9 @@ backstop:
   when: manual
 
 chromatic:
+  extends:
+    - .base-job
   stage: screenshot
-  needs:
-    - build-dependencies
-  tags:
-    - pingux-runner
-  image: $STABLE_IMAGE
-  interruptible: true
   variables:
     CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   rules:
