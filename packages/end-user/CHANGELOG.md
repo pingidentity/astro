@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.11](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.10...@pingux/end-user@2.4.11) (2022-09-29)
+
+
+### Bug Fixes
+
+* [UIP-5623] Change way of getting last published version for Preview component] ([e6ae91c](https://gitlab.corp.pingidentity.com/ux/end-user/commit/e6ae91cec53b3d80a15f0ec17e7445de0918890c))
+* [UIP-5623] End-user Preview Component Rendering Issue ([11c0674](https://gitlab.corp.pingidentity.com/ux/end-user/commit/11c0674751fd17a34daa79b05f75278829fd2187))
+
+
+
+
+
 ## [2.4.10](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.9...@pingux/end-user@2.4.10) (2022-09-13)
 
 
