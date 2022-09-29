@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.28.1...@pingux/astro@1.29.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* [UIP-5510] Message Aria Updates ([24c0bf8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/24c0bf84e7128ca26f49077aff0a9fef33f74235))
+* [UIP-5707] add aria label for close button in RadioButtonsWithLinks story ([cf51ded](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cf51dedcd51e4b9e2be4d5329ae0586a2c7c183c))
+* [UIP-5708] Improve breadcrumb a11y ([ec3ad5f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ec3ad5fdc76dc89ebe12282cb34dd4b2f9f6849a))
+
+
+### Features
+
+* [UIP-5615] Add aria attribute support to field components ([265bdeb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/265bdeb1f9d6cc546997858da007cdce5d91c433))
+
+
+
+
+
 ## [1.28.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.28.0...@pingux/astro@1.28.1) (2022-09-22)
 
 
