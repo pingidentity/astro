@@ -1,9 +1,11 @@
 import React from 'react';
+import CloseIcon from 'mdi-react/CloseIcon';
 import {
   Box,
   Button,
   HelpHint,
   Icon,
+  IconButton,
   Modal,
   OverlayProvider,
   Text,
@@ -14,74 +16,84 @@ export default {
   title: 'Recipes/Trial Experience Buttons',
 };
 
-const headingTextStyle = ({
-  fontWeight: '3',
-  fontSize: '30px',
-  lineHeight: '37px',
-  textAlign: 'center',
-  color: 'text.primary',
-  marginBottom: 'sm',
-  marginTop: 'md',
-});
-
-const subheadingTextStyle = ({
-  fontWeight: '0',
-  fontSize: 'lg',
-  lineHeight: '20px',
-  textAlign: 'center',
-  alignSelf: 'center',
-  color: 'text.primary',
-  marginBottom: 'xl',
-  maxWidth: '357px',
-});
-
-const buttonStyle = ({
-  width: '146px',
-  height: '146px',
-  backgroundColor: 'accent.99',
-  borderColor: 'accent.90',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderRadius: '5px',
-  justifyContent: 'center',
-  py: 0,
-  '&:hover': {
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+const sx = {
+  contentProps: {
+    maxWidth: '880px',
+    width: '100%',
+    px: '40px',
+    pb: '45px',
+    overflowY: 'scroll',
+  },
+  buttonLabelStyle: {
+    whiteSpace: 'normal',
+    color: 'text.primary',
+    fontWeight: 1,
+    fontSize: 'lg',
+    lineHeight: '21px',
+    mb: '37px',
+    maxHeight: '115px',
+    overflow: 'hidden',
+  },
+  buttonStyle: {
+    width: '146px',
+    height: '146px',
+    backgroundColor: 'accent.99',
     borderColor: 'accent.90',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderRadius: '5px',
+    justifyContent: 'center',
+    py: 0,
+    '&:hover': {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      borderColor: 'accent.90',
+    },
+    '&.is-pressed > div > svg > span': {
+      color: 'white',
+    },
+    '&.is-pressed > div > span': {
+      color: 'white',
+    },
   },
-  '&.is-pressed > div > svg > span': {
-    color: 'white',
+  gridContainerStyle: {
+    display:
+    'grid !important',
+    'gridTemplateColumns': 'repeat(auto-fit, minmax(0, 146px))',
+    gap: '13px',
+    maxWidth: '862px',
+    'boxSizing': 'border-box',
+    'justifyContent': 'center',
+    overflow: 'hidden',
+    padding: '5px',
   },
-  '&.is-pressed > div > span': {
-    color: 'white',
+  headingTextStyle: {
+    fontWeight: '3',
+    fontSize: '30px',
+    lineHeight: '37px',
+    textAlign: 'center',
+    color: 'text.primary',
+    marginBottom: 'sm',
+    marginTop: 'md',
   },
-});
-
-const buttonLabelStyles = ({
-  whiteSpace: 'normal',
-  color: 'text.primary',
-  fontWeight: 1,
-  fontSize: 'lg',
-  lineHeight: '21px',
-  mb: '37px',
-  maxHeight: '115px',
-  display: '-webkit-box',
-  'webkitLineClamp': '2',
-  'webkitBoxOrient': 'vertical',
-  overflow: 'hidden',
-});
-
-const gridContainerStyles = ({
-  display:
-  'grid !important',
-  'gridTemplateColumns': 'repeat(auto-fit, minmax(0, 146px))',
-  gap: '13px',
-  maxWidth: '862px',
-  'boxSizing': 'border-box',
-  'justifyContent': 'center',
-  overflow: 'hidden',
-  padding: '5px',
-});
+  iconStyle: {
+    mb: 'sm',
+    mt: '25px',
+  },
+  InfoLinkBox: {
+    justifyContent: 'center',
+    pt: '30px',
+  },
+  subheadingTextStyle: {
+    fontWeight: '0',
+    fontSize: 'lg',
+    lineHeight: '20px',
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: 'text.primary',
+    marginBottom: 'xl',
+    maxWidth: '357px',
+  },
+};
 
 const retailSVG = props => (
   <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -686,30 +698,44 @@ export const Default = () => {
         Open Modal
       </Button>
       {state.isOpen && (
-      <Modal isOpen={state.isOpen} onClose={state.close} hasCloseButton contentProps={{ maxWidth: '880px', px: '40px', pb: '45px', overflowY: 'scroll' }}>
+      <Modal
+        isOpen={state.isOpen}
+        onClose={state.close}
+        contentProps={sx.contentProps}
+        isDismissable
+      >
         <Box contentProps>
-          <Text sx={headingTextStyle} >
+          <IconButton
+            aria-label="Close modal window"
+            data-id="icon-button__close-modal-window"
+            size={22}
+            variant="modalCloseButton"
+            onPress={state.close}
+          >
+            <Icon icon={CloseIcon} />
+          </IconButton>
+          <Text sx={sx.headingTextStyle} >
             Choose Your Industry
           </Text>
-          <Text sx={subheadingTextStyle}>
+          <Text sx={sx.subheadingTextStyle}>
             To further customize your experience, choose an industry that most resembles your own.
           </Text>
           <Box
             isRow
-            sx={gridContainerStyles}
+            sx={sx.gridContainerStyle}
           >
             {buttons.map(button => (
-              <Button sx={buttonStyle} key={button.name}>
+              <Button sx={sx.buttonStyle} key={button.name}>
                 <Box alignItems="center">
-                  <Icon icon={button.icon} size="58" mb="xs" mt="25px" />
-                  <Text sx={buttonLabelStyles} >
+                  <Icon icon={button.icon} sx={sx.iconStyle} size="58" />
+                  <Text sx={sx.buttonLabelStyle} >
                     {button.name}
                   </Text>
                 </Box>
               </Button>
             ))}
           </Box>
-          <Box isRow justifyContent="center" pt="30px">
+          <Box isRow sx={sx.InfoLinkBox}>
             <Button variant="link">Skip</Button>
             <HelpHint>
               Info skipping
