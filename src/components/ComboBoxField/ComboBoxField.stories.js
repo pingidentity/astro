@@ -2,7 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { action } from '@storybook/addon-actions';
 import { useFilter } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
-import { Item, OverlayProvider, Section } from '../../index';
+
+import { Item, OverlayProvider, Section } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import ComboBoxField from './ComboBoxField';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
@@ -114,6 +116,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

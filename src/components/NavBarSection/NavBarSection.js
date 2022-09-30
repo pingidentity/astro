@@ -20,7 +20,7 @@ const NavBarSection = (props) => {
   return (
     <>
       {title &&
-        <Text variant="text.navBarSubtitle">
+        <Text variant="variants.navBar.subtitle">
           {title}
         </Text>
       }
@@ -28,7 +28,7 @@ const NavBarSection = (props) => {
         {
           item => (
             <Item
-              headerProps={{ variant: 'accordion.accordionGridHeaderNav', hasCaret: false }}
+              headerProps={{ variant: 'accordionGrid.headerNav', hasCaret: false }}
               bodyProps={{ variant: 'navBar.sectionBody' }}
               textValue={item}
             >

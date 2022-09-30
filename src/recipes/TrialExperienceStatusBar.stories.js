@@ -11,7 +11,7 @@ import {
 } from '../index';
 
 export default {
-  title: 'Recipes/TrialExperienceNav',
+  title: 'Recipes/Trial Experience Nav',
 };
 
 const ArtIcon = () => (

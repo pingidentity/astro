@@ -2,7 +2,7 @@ import React from 'react';
 import CheckboxField from '../components/CheckboxField';
 
 export default {
-  title: 'Recipes/NeutralCheckboxField',
+  title: 'Recipes/Neutral Checkbox Field',
 };
 const sx = {
   checkboxColor: {

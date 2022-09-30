@@ -16,7 +16,7 @@ const Table = (props) => {
   return (
     <Box
       as="table"
-      variant="table.table"
+      variant="table.container"
       {...others}
     >
       {children}

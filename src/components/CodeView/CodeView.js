@@ -6,7 +6,7 @@ import { mergeProps } from '@react-aria/utils';
 import Highlight, { defaultProps, Prism } from 'prism-react-renderer';
 import { useStatusClasses } from '../../hooks';
 import { Box, CopyText } from '../..';
-import codeView from '../../styles/variants/codeView';
+import styles from './CodeView.styles';
 
 /**
  * Component for code syntax highlighting.
@@ -40,7 +40,7 @@ const CodeView = forwardRef((props, ref) => {
   const content = (
     <Highlight
       {...defaultProps}
-      theme={codeView.theme}
+      theme={styles.theme}
       code={children?.trim() || ''}
       language={language}
       Prism={customPrism || Prism}

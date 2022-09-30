@@ -3,11 +3,8 @@ import Users from 'mdi-react/AccountGroupIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 
 
-import {
-  SearchField,
-  Box,
-  Text,
-} from '../../index';
+import { Box, SearchField, Text } from '../../';
+import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/devUtils/props/ariaAttributes';
 import { useDebounce } from '../../hooks';
 
 export default {
@@ -38,22 +35,15 @@ export default {
     labelProps: {},
     name: {},
     id: {},
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
+    'aria-autocomplete': {
+      table: ariaAttributeBaseDocSettings.table,
     },
-    'aria-labelledby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-autocomplete': {},
     value: {
       control: {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 
@@ -61,7 +51,6 @@ export const Default = args => (
   <SearchField
     {...args}
     icon={SearchIcon}
-    aria-label="Search Groups"
     onSubmit={text => alert(text)} // eslint-disable-line no-alert
   />
 );

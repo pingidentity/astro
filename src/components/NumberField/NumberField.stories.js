@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import NumberField from './NumberField';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -85,6 +87,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

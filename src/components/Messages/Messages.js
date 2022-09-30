@@ -19,7 +19,7 @@ const Messages = forwardRef((props, ref) => {
   return (
     <Box
       ref={ref}
-      variant="messages.wrapper"
+      variant="message.wrapper"
       {...others}
     >
       {Array.from(state.collection).map(item => (

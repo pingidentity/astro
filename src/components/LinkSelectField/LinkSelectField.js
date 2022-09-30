@@ -2,14 +2,11 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 
+import { Box, Button, Loader, Icon, Text } from '../../';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { usePropWarning, useSelectField } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import Button from '../Button';
-import Icon from '../Icon';
-import Loader from '../Loader';
 import SelectFieldBase from '../SelectFieldBase';
-import Text from '../Text';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -20,6 +17,7 @@ import Text from '../Text';
  */
 const LinkSelectField = forwardRef((props, ref) => {
   const { placeholder, status } = props;
+  const { ariaProps } = getAriaAttributeProps(props);
 
   usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField({
@@ -40,10 +38,11 @@ const LinkSelectField = forwardRef((props, ref) => {
 
   const trigger = (
     <Button
+      className={fieldControlProps.className}
       ref={triggerRef}
       variant="link"
-      className={fieldControlProps.className}
       {...triggerProps}
+      {...ariaProps}
     >
       <Text variant="label" color="active">{placeholder}</Text>
       <Box isRow>
@@ -138,6 +137,7 @@ LinkSelectField.propTypes = {
   containerProps: PropTypes.shape({}),
   /** Props object passed along to the label as-is. */
   labelProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 LinkSelectField.defaultProps = {

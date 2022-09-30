@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { ColorField, OverlayProvider } from '../../index';
+
+import { ColorField, OverlayProvider } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -58,6 +60,7 @@ export default {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

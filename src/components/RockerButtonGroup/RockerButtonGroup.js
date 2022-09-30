@@ -38,9 +38,9 @@ const RockerButtonGroup = forwardRef((props, ref) => {
 
   return (
     <RockerContext.Provider value={state}>
-      <Box variant="rockerbutton.rockerContainer" {...others}>
+      <Box variant="rockerButton.container" {...others}>
         <Box
-          variant="rockerbutton.rockerContainerInner"
+          variant="rockerButton.innerContainer"
           isRow
           {...tabListProps}
           {...raTabListProps}

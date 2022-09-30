@@ -56,7 +56,7 @@ const NavBarItem = forwardRef((props, ref) => {
   return (
     <Box
       id={key}
-      variant="accordion.accordionGridNavItem"
+      variant="accordionGrid.navItem"
       isRow
       className={classNames}
       ref={navItemRef}
@@ -83,7 +83,7 @@ const NavBarItem = forwardRef((props, ref) => {
           />
         }
         <Text
-          variant="navBarHeaderText"
+          variant="variants.navBar.headerText"
         >
           {text}
         </Text>

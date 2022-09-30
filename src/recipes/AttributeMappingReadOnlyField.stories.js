@@ -12,7 +12,7 @@ import {
 } from '../index';
 
 export default {
-  title: 'Recipes/AttributeMappingReadOnlyField',
+  title: 'Recipes/Attribute Mapping Read Only Field',
 };
 
 export const Default = () => {

@@ -25,7 +25,7 @@ const Chip = React.forwardRef((props, ref) => {
     <ChipContext.Provider value={{ bg }}>
       <Box
         isRow
-        variant="boxes.chip"
+        variant="chip.baseChip"
         sx={isUppercase && { paddingBottom: '3px' }}
         ref={ref}
         {...props}

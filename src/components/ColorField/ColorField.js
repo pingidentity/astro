@@ -4,18 +4,20 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
-import { ChromePicker } from 'react-color';
 import { FocusScope } from '@react-aria/focus';
 import { useVisuallyHidden } from '@react-aria/visually-hidden';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
 import { useOverlayTriggerState } from '@react-stately/overlays';
 import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
-import { Box, Button, Input, FieldHelperText, Label } from '../../index';
-import useField from '../../hooks/useField';
-import statuses from '../../utils/devUtils/constants/statuses';
+import PropTypes from 'prop-types';
+import { ChromePicker } from 'react-color';
+
+import { Box, Button, Input, FieldHelperText, Label } from '../../';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import PopoverContainer from '../PopoverContainer';
+import statuses from '../../utils/devUtils/constants/statuses';
+import useField from '../../hooks/useField';
 
 /**
  * The Color Field component allows the user to pick a color and displays the chosen color.
@@ -38,6 +40,7 @@ const ColorField = forwardRef((props, ref) => {
     onChange: imperativeOnChange,
     status,
   } = props;
+  const { ariaProps, nonAriaProps } = getAriaAttributeProps(props);
 
   const colorRef = useRef();
   /* istanbul ignore next */
@@ -46,7 +49,7 @@ const ColorField = forwardRef((props, ref) => {
   const triggerRef = React.useRef();
   const overlayRef = React.useRef();
 
-  const state = useColorFieldState(props);
+  const state = useColorFieldState(nonAriaProps);
   const popoverState = useOverlayTriggerState({});
 
   const { triggerProps, overlayProps } = useOverlayTrigger(
@@ -56,7 +59,7 @@ const ColorField = forwardRef((props, ref) => {
   );
 
   const { labelProps: raLabelProps, inputProps: raInputProps } = useColorField(
-    props,
+    nonAriaProps,
     state,
     colorRef,
   );
@@ -64,7 +67,7 @@ const ColorField = forwardRef((props, ref) => {
   const { visuallyHiddenProps } = useVisuallyHidden();
 
   const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
-    ...props,
+    ...nonAriaProps,
     labelProps: {
       ...labelProps,
       ...raLabelProps,
@@ -110,8 +113,9 @@ const ColorField = forwardRef((props, ref) => {
         bg={getRgbaFromState(state)}
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="colorField"
+        variant="variants.colorField.container"
         {...triggerProps}
+        {...ariaProps}
         {...buttonProps}
       />
       <Input {...visuallyHiddenProps} {...fieldControlProps} ref={colorRef} />
@@ -119,13 +123,13 @@ const ColorField = forwardRef((props, ref) => {
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
       )}
       <PopoverContainer
-        {...overlayProps}
-        {...positionProps}
-        ref={overlayRef}
-        isOpen={popoverState.isOpen}
-        onClose={popoverState.close}
         hasNoArrow
         isDismissable
+        isOpen={popoverState.isOpen}
+        onClose={popoverState.close}
+        ref={overlayRef}
+        {...overlayProps}
+        {...positionProps}
       >
         <FocusScope restoreFocus contain autoFocus>
           <ChromePicker
@@ -164,6 +168,7 @@ ColorField.propTypes = {
   controlProps: PropTypes.shape({}),
   /** Props object that is spread into the label element. */
   labelProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 ColorField.defaultProps = {

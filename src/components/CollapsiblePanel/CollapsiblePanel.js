@@ -57,15 +57,15 @@ const CollapsiblePanel = forwardRef((props, ref) => {
         data-testid="collapsible-panel"
         ref={ref}
         tabIndex={0}
-        variant="collapsiblePanel.collapsiblePanelContent"
+        variant="collapsiblePanel.content"
         {...mergedProps}
         {...others}
       >
         <Box
           isRow
-          variant="collapsiblePanel.collapsiblePanelContainerTitle"
+          variant="collapsiblePanel.containerTitle"
         >
-          <Text variant="collapsiblePanelTitle">
+          <Text variant="variants.collapsiblePanel.title">
             {listTitle}
           </Text>
           {selectedFilterCount &&

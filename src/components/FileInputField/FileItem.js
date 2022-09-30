@@ -53,7 +53,7 @@ const FileItem = (props) => {
         isDisabled={isDisabled}
       />
       <Button
-        variant="fileInputField"
+        variant="variants.fileInputField.button"
         mx={5}
         isDisabled={isDisabled}
         aria-label={name}

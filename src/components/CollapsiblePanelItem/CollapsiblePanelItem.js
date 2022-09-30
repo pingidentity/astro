@@ -20,7 +20,7 @@ const CollapsiblePanelItem = forwardRef((props, ref) => {
       isRow
       ref={ref}
     >
-      <Text variant="collapsiblePanellItem">
+      <Text variant="variants.collapsiblePanel.itemText">
         {text}
       </Text>
       {iconElement && (isDefaultSelected

@@ -14,7 +14,7 @@ const NavBarItemBody = (props) => {
             />
             <Text
               key={`text${child.subTitle}`}
-              variant="text.navBarSubtitle"
+              variant="variants.navBar.subtitle"
               sx={{
                 mb: '10px',
                 ml: '45px',

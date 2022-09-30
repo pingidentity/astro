@@ -41,7 +41,7 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
       <Box
         as="button"
         className={classNames}
-        variant="buttons.rocker"
+        variant="variants.rockerButton.thumbSwitch"
         {...rockerButtonProps}
         ref={rockerButtonRef}
         {...itemProps}
