@@ -40,9 +40,6 @@ const BreadcrumbItem = forwardRef((props, ref) => {
       case 'Text':
         return Text;
       case 'Link':
-        if (isCurrent) {
-          return Text;
-        }
         return Link;
       case 'Fragment':
         return Fragment;

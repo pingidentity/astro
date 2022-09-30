@@ -5,16 +5,19 @@ import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import { useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 
-import * as hooks from '../../hooks';
+import {
+  Box,
+  FieldHelperText,
+  Icon,
+  IconButton,
+  Input,
+  Label,
+  PopoverContainer,
+  RequirementsList,
+} from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import FieldHelperText from '../FieldHelperText';
-import Icon from '../Icon';
-import IconButton from '../IconButton';
-import Input from '../Input';
-import Label from '../Label';
-import PopoverContainer from '../PopoverContainer';
-import RequirementsList from '../RequirementsList';
+import * as hooks from '../../hooks';
 
 const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   HIDE: 'hide password',
@@ -227,6 +230,7 @@ PasswordField.propTypes = {
   viewIconTestId: PropTypes.string,
   /** Array of Requirements and their status. */
   requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
+  ...ariaAttributesBasePropTypes,
 };
 
 PasswordField.defaultProps = {

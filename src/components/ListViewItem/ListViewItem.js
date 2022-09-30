@@ -73,8 +73,8 @@ const ListViewItem = (props) => {
       >
         <Box
           as="div"
+          variant="listViewItem.container"
           {...gridCellProps}
-          variant="boxes.listViewItem"
           isFocused={isDisabled ? false : isFocusVisible}
           isDisabled={isDisabled}
           isSelected={isSelected}

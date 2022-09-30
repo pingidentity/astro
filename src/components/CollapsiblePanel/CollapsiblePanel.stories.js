@@ -186,7 +186,7 @@ export const CollapsiblePanelWithBadge = (args) => {
                 <Item key="home" variant="link" data-id="home">
                   Ed Nepomuceno
                 </Item>
-                <Item key="editGroups" variant="neutralText" data-id="editGroups">
+                <Item key="editGroups" variant="variants.collapsiblePanel.neutralText" data-id="editGroups">
                   Edit Groups
                 </Item>
               </Breadcrumbs>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '.';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
-import variants from '../../styles/variants/links';
+import variants from './Link.styles';
 
 export default {
   title: 'Link',

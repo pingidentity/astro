@@ -1,4 +1,4 @@
-import { text } from './../../styles/variants/text';
+import { text } from '../Text/Text.styles';
 
 const tableCell = {
   ...text.tableData,

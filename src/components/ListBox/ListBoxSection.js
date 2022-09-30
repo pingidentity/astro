@@ -41,7 +41,7 @@ const ListBoxSection = (props) => {
         {item.rendered &&
           <Box
             {...headingProps}
-            variant="boxes.listBoxSectionTitle"
+            variant="listBox.sectionTitle"
           >
             {item.rendered}
           </Box>

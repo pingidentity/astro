@@ -6,20 +6,22 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from 'react';
-import PropTypes from 'prop-types';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useComboBox } from '@react-aria/combobox';
-import { useComboBoxState } from '@react-stately/combobox';
-import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { FocusScope } from '@react-aria/focus';
+import { useFilter } from '@react-aria/i18n';
+import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
+import { useComboBoxState } from '@react-stately/combobox';
+import PropTypes from 'prop-types';
 
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import { usePropWarning } from '../../hooks';
-import loadingStates from '../../utils/devUtils/constants/loadingStates';
+
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import ComboBoxInput from '../ComboBox';
-import PopoverContainer from '../PopoverContainer';
+import { usePropWarning } from '../../hooks';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import ListBox from '../ListBox';
+import PopoverContainer from '../PopoverContainer';
 import ScrollBox from '../ScrollBox';
 
 /**
@@ -33,70 +35,39 @@ import ScrollBox from '../ScrollBox';
  */
 const ComboBoxField = forwardRef((props, ref) => {
   const {
-    children,
-    isRequired,
-    isDisabled,
-    isReadOnly,
-    placeholder,
-    label,
-    id,
     hasAutoFocus,
-    onFocus,
-    onBlur,
-    onFocusChange,
-    onKeyDown,
-    onKeyUp,
     hasAddOption,
     hasCustomValue,
     hasNoEmptySelection,
-    defaultSelectedKey,
     selectedKey,
     onSelectionChange,
     defaultItems: initialDefaultItems,
     items: initialItems,
-    onOpenChange,
     loadingState,
     onLoadMore,
-    defaultInputValue,
-    onInputChange,
     inputValue,
-    disabledKeys,
     menuTrigger,
     isNotFlippable,
     direction,
     scrollBoxProps,
     controlProps,
     defaultFilter,
+    ...others
   } = props;
+  const { nonAriaProps } = getAriaAttributeProps(others);
   const comboBoxOptions = {
-    children,
-    isRequired,
-    isDisabled,
-    isReadOnly,
-    placeholder,
-    label,
-    id,
     autoFocus: hasAutoFocus,
-    onFocus,
-    onBlur,
-    onFocusChange,
-    onKeyDown,
-    onKeyUp,
     allowsCustomValue: hasAddOption || hasCustomValue,
     disallowEmptySelection: hasNoEmptySelection,
-    defaultSelectedKey,
     selectedKey,
     onSelectionChange,
-    onOpenChange,
     loadingState,
     onLoadMore,
-    defaultInputValue,
-    onInputChange,
     inputValue,
-    disabledKeys,
     menuTrigger,
     shouldFlip: !isNotFlippable,
     direction,
+    ...nonAriaProps,
   };
 
   const popoverRef = useRef();
@@ -380,6 +351,7 @@ ComboBoxField.propTypes = {
   controlProps: PropTypes.shape({
     onClick: PropTypes.func,
   }),
+  ...ariaAttributesBasePropTypes,
 };
 
 ComboBoxField.defaultProps = {

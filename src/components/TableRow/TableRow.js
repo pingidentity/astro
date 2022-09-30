@@ -14,7 +14,7 @@ const TableRow = (props) => {
   const { children, ...others } = props;
   return (
     <Box
-      variant="table.tableRow"
+      variant="table.row"
       as="tr"
       {...others}
     >

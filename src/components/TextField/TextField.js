@@ -1,11 +1,10 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
+
+import { Box, FieldHelperText, Input, Label } from '../../';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import FieldHelperText from '../FieldHelperText';
-import Input from '../Input';
-import Label from '../Label';
 import useColumnStyles from '../../hooks/useColumnStyles';
 
 /**
@@ -117,6 +116,7 @@ TextField.propTypes = {
   labelProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input wrapper element. */
   wrapperProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 TextField.defaultProps = {
