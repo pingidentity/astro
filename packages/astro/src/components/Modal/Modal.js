@@ -101,7 +101,7 @@ const Modal = forwardRef((props, ref) => {
                   aria-label="Close modal window"
                   data-id="icon-button__close-modal-window"
                   size={22}
-                  variant="modalCloseButton"
+                  variant="variants.modal.closeButton"
                   onPress={onClose}
                 >
                   <Icon icon={CloseIcon} />

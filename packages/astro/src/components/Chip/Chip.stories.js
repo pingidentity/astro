@@ -47,8 +47,8 @@ export const Default = ({ ...args }) => (
 
 export const CountChip = ({ ...args }) => (
   <Box>
-    <Chip color="white" {...args} label="1" variant="boxes.countChip" mb="12px" />
-    <Chip {...args} label="1" variant="boxes.countNeutral" />
+    <Chip color="white" {...args} label="1" variant="chip.countChip" mb="12px" />
+    <Chip {...args} label="1" variant="chip.countNeutral" />
   </Box>
 );
 

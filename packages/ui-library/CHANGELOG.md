@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.6.0](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.5.1...ui-library@5.6.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* [UIP-5513] Ui library use dataid in <a> tag data ([14f5c97](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/14f5c97a121ea46128275697e951aa495359735c))
+* [UIP-5587] content div scroll fix ([d74ccbd](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/d74ccbdc6de51e731da8a9620e6d906ddd8f5d85))
+
+
+### Features
+
+* [UIP-3489] add 'id' prop for formTextArea/formTextField and 'for' prop for FormLabel ([268e34f](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/268e34fe39f5366e638a1584802b2ea39ec768a9))
+
+
+
+
+
 ## [5.5.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.5.0...ui-library@5.5.1) (2022-09-13)
 
 **Note:** Version bump only for package ui-library

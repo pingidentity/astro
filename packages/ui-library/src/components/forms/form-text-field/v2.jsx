@@ -275,6 +275,7 @@ class Stateless extends React.Component {
         disabled: false,
         errorClassName: "",
         flexWidth: false,
+        id: "",
         inline: false,
         maskValue: false,
         noSpacing: false,
@@ -350,6 +351,11 @@ class Stateless extends React.Component {
         }
     }
 
+    /* istanbul ignore next  */
+    componentWillMount() {
+        this.fieldId = this.props.id || _.uniqueId("form-text-field-");
+    }
+
     render() {
         const dataId = this.props["data-id"];
         const inputType = this._getInputType();
@@ -394,6 +400,7 @@ class Stateless extends React.Component {
                 hint={this.props.labelHelpText}
                 lockText={this.props.labelLockText}
                 style={this.state.labelWidth ?{ width: this.state.labelWidth } : null}
+                labelFor={this.fieldId}
                 {...passLabelProps(this.props)}
             >
                 <span
@@ -418,6 +425,7 @@ class Stateless extends React.Component {
                                     "input-text--inline": this.props.inline,
                                 })
                         }
+                        id={this.fieldId}
                         onFocus={this._handleFocus}
                         onBlur={this.props.onBlur}
                         onKeyPress={this.props.onKeyPress}

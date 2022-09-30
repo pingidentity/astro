@@ -95,7 +95,7 @@ const data = [
       <NavBarItemLink
         key="Dashboard Link Group"
         id="Dashboard Link Group"
-        variant="buttons.navItemButton"
+        variant="variants.navBar.itemButton"
         href="https://pingidentity.com/"
       >
         Group

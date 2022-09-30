@@ -1,18 +1,19 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Clear from 'mdi-react/CloseIcon';
-import { useFilter } from '@react-aria/i18n';
 import { FocusScope } from '@react-aria/focus';
-import { useListState } from '@react-stately/list';
+import { useFilter } from '@react-aria/i18n';
 import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import { Box, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+import { useListState } from '@react-stately/list';
+
+import { Box, FieldHelperText, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { usePropWarning } from '../../hooks';
 
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import { usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import FieldHelperText from '../FieldHelperText';
 
 /**
  * Complex control that lets you choose several tags from the dropdown list.
@@ -52,7 +53,9 @@ const MultivaluesField = forwardRef((props, ref) => {
     selectedKeys,
     scrollBoxProps,
     status,
+    ...others
   } = props;
+  const { ariaProps } = getAriaAttributeProps(others);
 
   const hasCustomValue = mode === 'non-restrictive';
 
@@ -263,7 +266,7 @@ const MultivaluesField = forwardRef((props, ref) => {
                 key={item.key}
                 role="presentation"
                 label={item.name}
-                variant="boxes.readOnlyChip"
+                variant="chip.readOnlyChip"
                 bg="white"
                 textProps={{ sx: { color: 'text.primary' } }}
               />
@@ -284,11 +287,11 @@ const MultivaluesField = forwardRef((props, ref) => {
               <Chip
                 key={item.key}
                 role="presentation"
-                variant="boxes.selectedItemChip"
+                variant="chip.selectedItemChip"
                 bg="active"
                 label={item.name}
               >
-                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="buttons.chipDeleteButton">
+                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="variants.chip.chipDeleteButton">
                   <Icon icon={Clear} color="white" size={14} />
                 </IconButton>
               </Chip>
@@ -358,6 +361,7 @@ const MultivaluesField = forwardRef((props, ref) => {
         onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
         slots={{ beforeInput: <>{readOnlyItems} {selectedItems}{readOnlyInputEntry}</> }}
         value={filterString}
+        {...ariaProps}
         {...inputProps}
       />
       {
@@ -481,6 +485,7 @@ MultivaluesField.propTypes = {
   }),
   /** Determines the input status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
+  ...ariaAttributesBasePropTypes,
 };
 
 MultivaluesField.defaultProps = {

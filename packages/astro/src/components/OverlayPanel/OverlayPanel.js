@@ -43,9 +43,9 @@ const OverlayPanel = forwardRef((props, ref) => {
 
   return (
     <FocusScope autoFocus>
-      <Box variant="overlayPanel.overlayPanel" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose} >
+      <Box variant="overlayPanel.container" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose} >
         <Box
-          variant="overlayPanel.overlayPanelBody"
+          variant="overlayPanel.body"
           className={classNames}
         >
           {children}

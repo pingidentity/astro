@@ -104,7 +104,7 @@ export const InnerPanel = ({ ...args }) => {
       {
         innerState.isOpen &&
         <OverlayPanel
-          variant="overlayPanel.overlayPanelInner" // applies higher z-index
+          variant="overlayPanel.innerPanel" // applies higher z-index
           isOpen={innerState.isOpen}
           {...args}
           state={innerState}

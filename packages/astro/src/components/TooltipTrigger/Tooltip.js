@@ -19,11 +19,11 @@ const Tooltip = forwardRef((props, ref) => {
   return (
     <Box
       ref={tooltipRef}
-      variant="tooltip.tooltipContainer"
+      variant="tooltip.container"
       {...tooltipProps}
       {...others}
     >
-      <Text variant="tooltipContent">
+      <Text variant="variants.tooltip.content">
         {children}
       </Text>
     </Box>

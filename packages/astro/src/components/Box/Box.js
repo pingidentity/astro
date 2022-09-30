@@ -51,7 +51,7 @@ const Box = forwardRef((props, ref) => {
       ref={ref}
       display="flex"
       flexDirection={fd}
-      variant="boxes.base"
+      variant="box.base"
       fontSize={customFontSize}
       {...others}
       sx={custom}

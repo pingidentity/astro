@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Pressable } from '@react-aria/interactions';
+
 import SwitchField from '.';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { Tooltip, TooltipTrigger } from '../../index';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/SwitchField',
@@ -45,31 +47,12 @@ export default {
     labelProps: {},
     controlProps: {},
     id: {},
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-labelledby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-describedby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-details': {
-      control: {
-        type: 'text',
-      },
-    },
     isSelected: {
       control: {
         type: 'none',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

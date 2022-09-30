@@ -92,6 +92,29 @@ describe("FormTextArea", function () {
         expect(label).toBeDefined();
     });
 
+    it("renders text area with same id as label for", function () {
+        var component = getComponent({
+            labelText: "some label"
+        });
+
+        const textareaField = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-area-textarea");
+        const fieldLabel = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-area");
+
+        expect(textareaField.getAttribute("id")).toStrictEqual(fieldLabel.getAttribute("for"));
+    });
+
+    it("renders input with custom id", function () {
+        var customId = "custom-id";
+        var component = getComponent({
+            id: customId
+        });
+
+        const textareaField = TestUtils.findRenderedDOMNodeWithDataId(component, "form-text-area-textarea");
+
+        expect(textareaField.getAttribute("id")).toStrictEqual(customId);
+    });
+
+
     it("respects value over defaultValue and state precedence", function () {
         var component = getComponent({
             defaultValue: "my random value",

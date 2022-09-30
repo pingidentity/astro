@@ -22,7 +22,7 @@ import {
 } from '..';
 
 export default {
-  title: 'Recipes/CollapsiblePanel with List',
+  title: 'Recipes/Collapsible Panel with List',
 };
 
 const data = [
@@ -190,7 +190,7 @@ export const Default = () => {
               <Item key="home" variant="link" data-id="home">
                 Ed Nepomuceno
               </Item>
-              <Item key="editGroups" variant="neutralText" data-id="editGroups">
+              <Item key="editGroups" variant="variants.collapsiblePanel.neutralText" data-id="editGroups">
                 Edit Groups
               </Item>
             </Breadcrumbs>

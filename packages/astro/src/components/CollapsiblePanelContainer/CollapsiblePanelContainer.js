@@ -53,7 +53,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
       className={classNames}
       onKeyUp={handleClose}
       ref={ref}
-      variant="collapsiblePanel.collapsiblePanelContainer"
+      variant="collapsiblePanel.container"
       isRow
       {...others}
     >
@@ -63,7 +63,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
         data-testid="collapsible-panel-button"
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="collapsiblePanelToggle"
+        variant="variants.collapsiblePanel.toggle"
         pr="sm"
       >
         <Icon

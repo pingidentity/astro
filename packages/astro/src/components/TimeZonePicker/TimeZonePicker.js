@@ -124,11 +124,11 @@ const TimeZonePicker = forwardRef((props, ref) => {
       <Item key={timeZone} data-id={timeZone} textValue={timeZone}>
         <Box flexDirection="row" justifyContent="space-between" width="100%">
           <Box flexDirection="row">
-            <Text variant="timeZone.title">{timeZone}</Text>
-            <Text variant="timeZone.subTitle">{gmt}</Text>
+            <Text variant="variants.timeZone.item.title">{timeZone}</Text>
+            <Text variant="variants.timeZone.item.subTitle">{gmt}</Text>
           </Box>
           <Box>
-            <Text variant="timeZone.time">{time}</Text>
+            <Text variant="variants.timeZone.item.time">{time}</Text>
           </Box>
         </Box>
       </Item>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
+
 import PasswordField from '.';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -19,6 +21,7 @@ export default {
         type: 'text',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

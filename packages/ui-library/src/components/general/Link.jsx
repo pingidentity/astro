@@ -118,7 +118,7 @@ const Link = (props) => {
                 href={url}
                 target={target}
                 className={linkCss}
-                data-id="link-anchor"
+                data-id={`${dataId ? `${dataId}-` : ""}link-anchor`}
                 onClick={_handleClick}>
                 { _renderTitle() }
             </a>

@@ -196,7 +196,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         {...triggerProps}
         onPress={handlePopoverOpen}
         ref={triggerRef}
-        variant="environmentBreadcrumb.current"
+        variant="variants.environmentBreadcrumb.button.current"
         aria-label={`${(typeof selectedItem === 'string' ? selectedItem : selectedValue) || 'Selected Item'}`}
       >
         {selectedItem}
@@ -265,7 +265,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     >
       <Item
         key="name"
-        variant="environmentBreadcrumb.current"
+        variant="variants.environmentBreadcrumb.button.current"
         data-testid="name"
         aria-label={name}
         elementType="Button"

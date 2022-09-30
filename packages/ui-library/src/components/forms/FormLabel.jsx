@@ -63,6 +63,7 @@ class FormLabel extends React.Component {
     static defaultProps = {
         "data-id": "formLabel",
         detached: false,
+        labelFor: "",
         noSpacing: false,
         style: {},
     };
@@ -132,6 +133,7 @@ class FormLabel extends React.Component {
         return (
             <label
                 data-id={dataId}
+                htmlFor={this.props.labelFor}
                 className={classnames(
                     "form-label",
                     className,

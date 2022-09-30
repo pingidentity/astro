@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { announce } from '@react-aria/live-announcer';
+import React from 'react';
 import { Item } from '@react-stately/collections';
 import userEvent from '@testing-library/user-event';
 
@@ -7,11 +6,10 @@ import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
 import Messages, { messagesReducerStory, multiMessagesReducerStory } from '.';
-import Button from '../Button';
+import { ARIA_STATUSES } from '../Messages/Message';
 
 jest.mock('@react-aria/live-announcer', () => ({ announce: jest.fn() }));
 
-const mockAnnounce = announce;
 const testId = 'test-messages';
 const defaultProps = {
   'data-testid': testId,
@@ -40,31 +38,6 @@ const getWithDynamicList = (props = {}, renderFn = render) => renderFn(
   <Messages {...defaultProps} {...props}>
     {item => <Item {...item}>{item.text}</Item>}
   </Messages>,
-);
-
-const MessagesWithButton = (props) => {
-  const [messages, setMessages] = useState([]);
-
-  const addMessage = () => {
-    setMessages([...messages, {
-      key: `message${messages.length + 1}`,
-      text: `New message ${messages.length + 1}`,
-      status: 'default',
-    }]);
-  };
-
-  return (
-    <>
-      <Button onPress={addMessage}>Click me!</Button>
-      <Messages items={messages} {...props}>
-        {item => <Item {...item}>{item.text}</Item>}
-      </Messages>
-    </>
-  );
-};
-
-const getWithButton = (props = {}, renderFn = render) => renderFn(
-  <MessagesWithButton {...defaultProps} {...props} />,
 );
 
 // Need to be added to each test file to test accessibility using axe.
@@ -124,35 +97,25 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   expect(firstMessage).toHaveAttribute('data-id', 'message1');
 });
 
-describe('announcements', () => {
-  // Live announcer is (mostly) only used on apple devices for VoiceOver.
-  // Mock navigator.platform so we take that codepath.
-  let platformMock;
-  beforeEach(() => {
-    platformMock = jest.spyOn(navigator, 'platform', 'get').mockImplementation(() => 'MacIntel');
-  });
+test('message has role and aria-live attributes', () => {
+  getComponent();
+  const { firstChild: firstMessage } = screen.getByTestId(testId);
+  expect(firstMessage).toHaveAttribute('role', 'status');
+  expect(firstMessage).toHaveAttribute('aria-live', 'polite');
+});
 
-  afterEach(() => {
-    jest.clearAllMocks();
-    platformMock.mockRestore();
-  });
+test('messages with a status have an aria-label announcing the status', () => {
+  getComponent();
+  const successMessage = screen.getAllByRole('status')[1];
+  expect(successMessage).toHaveAttribute('aria-label', ARIA_STATUSES[0]);
+});
 
-  test('should announce on render', () => {
-    getWithDynamicList({ items });
-    items.forEach(item => expect(mockAnnounce).toHaveBeenCalledWith(item.text, 'polite'));
-  });
-
-  test('should announce on adding item', () => {
-    getWithButton();
-
-    const messages = screen.getByTestId(testId);
-    expect(messages.childElementCount).toBe(0);
-
-    const button = screen.getByText('Click me!');
-    userEvent.click(button);
-    expect(messages.childElementCount).toBe(1);
-    expect(mockAnnounce).toHaveBeenCalledWith('New message 1', 'polite');
-  });
+test('messages without a status do not have an aria-label announcing the status', () => {
+  getComponent();
+  const statusMessage = screen.getAllByRole('status')[0];
+  Object.keys(ARIA_STATUSES).map(key =>
+    expect(statusMessage).not.toHaveAttribute('aria-label', ARIA_STATUSES[key]),
+  );
 });
 
 test('should render messages with messagesReducerStory', () => {
