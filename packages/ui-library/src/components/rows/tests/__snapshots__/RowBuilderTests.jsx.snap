@@ -8,6 +8,6 @@ Array [
   "input-row",
   "row-builder-second-delete",
   "row-builder-add",
-  "link-anchor",
+  "row-builder-add-link-anchor",
 ]
 `;

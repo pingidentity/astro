@@ -54,7 +54,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
   return (
     <Box
       as="div"
-      variant="accordion.accordionGridBody"
+      variant="accordionGrid.body"
       role="gridcell"
       ref={ref}
       {...mergedProps}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { HiddenSelect } from '@react-aria/select';
 import MenuDown from 'mdi-react/MenuDownIcon';
 
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import Box from '../Box';
 import Button from '../Button';
@@ -20,35 +21,38 @@ import Text from '../Text';
  * and [useSelectState](https://react-spectrum.adobe.com/react-stately/useSelectState.html) from
  * React Stately.
  */
-const SelectFieldBase = forwardRef((props, ref) => {
-  const {
-    defaultText,
-    helperText,
-    label,
-    name,
-    placeholder,
-    status,
-    slots,
-    columnStyleProps,
-    fieldContainerProps,
-    fieldControlProps,
-    fieldLabelProps,
-    isLoadingInitial,
-    overlay,
-    state,
-    trigger,
-    triggerProps,
-    triggerRef,
-    valueProps,
-  } = props;
+const SelectFieldBase = forwardRef(({
+  columnStyleProps,
+  defaultText,
+  fieldContainerProps,
+  fieldControlProps,
+  fieldLabelProps,
+  helperText,
+  isLoadingInitial,
+  label,
+  labelMode,
+  name,
+  overlay,
+  placeholder,
+  slots,
+  state,
+  status,
+  trigger,
+  triggerProps,
+  triggerRef,
+  valueProps,
+  ...others
+}, ref) => {
+  const { ariaProps } = getAriaAttributeProps(others);
 
   const defaultTrigger = (
     <Box className={fieldControlProps.className} variant="forms.input.container">
       <Button
+        className={fieldControlProps.className}
         ref={triggerRef}
         variant="forms.select"
-        className={fieldControlProps.className}
         {...triggerProps}
+        {...ariaProps}
       >
         <Box as="span" variant="forms.select.currentValue" {...valueProps}>
           {/* Use selectedItem.props.value if item text in selectedfield
@@ -56,7 +60,7 @@ const SelectFieldBase = forwardRef((props, ref) => {
           {
             state.selectedItem
               ? state.selectedItem.rendered
-              : <Text variant="placeholder">{props.labelMode === modes.FLOAT ? '' : placeholder || defaultText}</Text>
+              : <Text variant="placeholder">{labelMode === modes.FLOAT ? '' : placeholder || defaultText}</Text>
           }
         </Box>
         {isLoadingInitial && <Loader variant="loader.withinInput" />}
@@ -149,6 +153,7 @@ SelectFieldBase.propTypes = {
   triggerRef: PropTypes.shape({}),
   /** Props for the element representing the selected value. */
   valueProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 export default SelectFieldBase;

@@ -56,7 +56,7 @@ const ScrollBox = forwardRef((props, ref) => {
   return (
     <>
       <Box
-        variant="boxes.topShadowScrollbox"
+        variant="scrollBox.topShadowBox"
         className={classNames}
         role="separator"
       />
@@ -68,13 +68,13 @@ const ScrollBox = forwardRef((props, ref) => {
           ...sx,
         }}
         onScroll={onScroll}
-        variant="boxes.scrollbox"
+        variant="scrollBox.container"
         {...others}
       >
         {children}
       </Box>
       <Box
-        variant="boxes.bottomShadowScrollbox"
+        variant="scrollBox.bottomShadowBox"
         className={classNames}
         role="separator"
       />

@@ -111,7 +111,7 @@ const modifyTheme = {
         alignItems: 'stretch',
         py: [0, 'xl'],
         my: 'auto',
-        boxShadow: ['none', astroTheme.variants.boxes.card.boxShadow],
+        boxShadow: ['none', astroTheme.variants.card.boxShadow],
         width: ['100%', '450px'],
         minHeight: 'fit-content',
       },

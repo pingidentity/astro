@@ -120,7 +120,7 @@ const CopyText = forwardRef((props, ref) => {
       <Box
         ref={ref}
         isRow
-        variant="boxes.copy"
+        variant="copyText.copy"
         {...wrapperProps}
         {...others}
       >
@@ -138,7 +138,7 @@ const CopyText = forwardRef((props, ref) => {
         <Box
           ref={ref}
           isRow
-          variant="boxes.copy"
+          variant="copyText.copy"
           {...others}
         >
           {content}

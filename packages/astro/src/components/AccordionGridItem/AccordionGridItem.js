@@ -57,7 +57,7 @@ const AccordionGridItem = (props) => {
       {...mergeProps(rowProps, others)}
       aria-selected={isSelected}
       className={classNames}
-      variant="accordion.accordionGridItem"
+      variant="accordionGrid.item"
       ref={rowRef}
     >
       <AccordionGridItemHeader

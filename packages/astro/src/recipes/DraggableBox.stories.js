@@ -6,7 +6,7 @@ import Icon from '../components/Icon';
 import Text from '../components/Text';
 
 export default {
-  title: 'Recipes/DraggableBox',
+  title: 'Recipes/Draggable Box',
 };
 
 export const Default = () => {

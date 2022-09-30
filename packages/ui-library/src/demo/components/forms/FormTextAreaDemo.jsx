@@ -1,4 +1,5 @@
 import React from "react";
+import FormLabel from "../../../components/forms/FormLabel";
 import FormTextArea from "./../../../components/forms/form-text-area";
 import InputWidths from "./../../../components/forms/InputWidths";
 import InputRow from "../../../components/layout/InputRow";
@@ -42,6 +43,18 @@ class FormTextAreaDemo extends React.Component {
                 <InputRow>
                     <FormTextArea
                         labelText="Basic"
+                        width={InputWidths.MD}
+                    />
+                </InputRow>
+                <InputRow>
+                    <FormLabel
+                        style={{ display: "block", marginBottom: "8px" }}
+                        labelFor="this-is-area-field-with-custom-id"
+                    >
+                        Label for area field with custom id
+                    </FormLabel>
+                    <FormTextArea
+                        id="this-is-area-field-with-custom-id"
                         width={InputWidths.MD}
                     />
                 </InputRow>

@@ -16,7 +16,7 @@ const Bracket = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => bracketRef.current);
 
   return (
-    <Box variant="boxes.bracketBase" {...others} >
+    <Box variant="bracket.base" {...others} >
       {!isLast && (
         <Box width={15} sx={{ position: 'absolute', top: 0, bottom: 0 }}>
           <svg

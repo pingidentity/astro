@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Item, MultivaluesField, OverlayProvider } from '../..';
+
+import { Box, Item, MultivaluesField, OverlayProvider } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -52,6 +54,7 @@ export default {
         type: 'text',
       },
     },
+    ...ariaAttributeBaseArgTypes,
   },
   parameters: {
     docs: {

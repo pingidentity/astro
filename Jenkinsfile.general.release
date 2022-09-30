@@ -415,6 +415,8 @@ pipeline {
             ```
 
             Build details: <${env.BUILD_URL}/console|See in web console>
+
+            @here Master needs to be merged back into develop now. Comment on this message once completed.
           """.stripIndent()
 
         slackSend channel: '#ux-deployments', message: "${message}", color: "#4aba78"

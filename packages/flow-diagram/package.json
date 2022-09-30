@@ -1,6 +1,6 @@
 {
   "name": "@pingux/flow-diagram",
-  "version": "0.27.7-alpha.0",
+  "version": "0.27.8-alpha.2",
   "description": "Flow Diagram library",
   "author": "Ping UX Development Team",
   "homepage": "",
@@ -22,6 +22,8 @@
   },
   "scripts": {
     "build": "rm -rf lib && npm-run-all build:*",
+    "build:astro": "cd ../astro && yarn build",
+    "build:icons": "cd ../icons && yarn build",
     "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
     "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
     "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
@@ -42,7 +44,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
-    "@pingux/astro": "^1.28.2-alpha.0",
+    "@pingux/astro": "^1.30.0-alpha.1",
     "@pingux/icons": "^0.2.0",
     "gojs": "^2.1.16",
     "gojs-react": "^1.0.7",

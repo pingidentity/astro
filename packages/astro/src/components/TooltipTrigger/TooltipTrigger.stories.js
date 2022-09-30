@@ -81,7 +81,7 @@ Disabled.parameters = {
 export const IconWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <IconButton variant="tooltipIconButton">
+      <IconButton variant="variants.tooltip.button">
         <Icon icon={AccountIcon} />
       </IconButton>
       <Tooltip>Useful tooltip</Tooltip>
@@ -92,7 +92,7 @@ export const IconWithTooltip = () => (
 export const ChipWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <Button variant="tooltipChip" bg="neutral.10">
+      <Button variant="variants.tooltip.chip" bg="neutral.10">
         <Text variant="label" sx={{ textTransform: 'uppercase' }} color="white">
           Some text
         </Text>
@@ -105,7 +105,7 @@ export const ChipWithTooltip = () => (
 export const TextWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <Button variant="tooltipInline">Some text</Button>
+      <Button variant="variants.tooltip.inline">Some text</Button>
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>
   </Box>

@@ -26,7 +26,7 @@ const NavBarItemButton = (props) => {
   return (
     <Button
       id={key}
-      variant="navItemButton"
+      variant="variants.navBar.itemButton"
       onPress={onNavPress}
       className={classNames}
       {...others}

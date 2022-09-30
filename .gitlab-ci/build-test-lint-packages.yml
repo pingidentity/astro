@@ -1,0 +1,65 @@
+.build-test-lint-packages:
+  extends: 
+    - .base-job
+  rules:
+    - if: $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - "packages/$PACKAGE/**/*"
+  script:
+    - lerna run build $SCOPE
+    - lerna run lint $SCOPE
+    - lerna run coverage-ci $SCOPE
+  artifacts:
+    paths:
+      - "./packages/$PACKAGE/lib"
+    expire_in: 1 week
+
+build-test-lint-astro:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "astro"
+    SCOPE: "--scope @pingux/astro"
+
+build-test-lint-branding-themes:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "branding-themes"
+    SCOPE: "--scope @pingux/branding-themes"
+
+build-test-lint-charting:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "charting"
+    SCOPE: "--scope @pingux/charting"
+
+build-test-lint-end-user:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "end-user"
+    SCOPE: "--scope @pingux/end-user"
+
+build-test-lint-flow-diagram:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "flow-diagram"
+    SCOPE: "--scope @pingux/flow-diagram"
+
+build-test-lint-icons:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "icons"
+    SCOPE: "--scope @pingux/icons"
+
+build-test-lint-schema-form:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "schema-form"
+    SCOPE: "--scope @pingux/schema-form"
+
+build-test-lint-ui-library:
+  extends: .build-test-lint-packages
+  variables:
+    PACKAGE: "ui-library"
+    SCOPE: "--scope ui-library"

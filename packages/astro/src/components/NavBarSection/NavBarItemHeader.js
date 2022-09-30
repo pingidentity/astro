@@ -45,7 +45,7 @@ const NavBarItemHeader = (props) => {
         />
       }
       <Text
-        variant="navBarHeaderText"
+        variant="variants.navBar.headerText"
       >
         {props.item.heading}
       </Text>

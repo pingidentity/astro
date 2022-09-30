@@ -68,7 +68,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
       as="div"
       ref={cellRef}
       {...mergedProps}
-      variant="accordion.accordionGridHeader"
+      variant="accordionGrid.header"
       isFocused={isFocusVisible}
       isSelected={isSelected}
       className={classNames}

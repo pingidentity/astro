@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
+
 import TextField from '.';
+import { Box } from '../../';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { modes as labelModes } from '../Label/constants';
-import statuses from '../../utils/devUtils/constants/statuses.js';
-import Box from '../Box';
-import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 import CopyButton from '../CopyText/CopyButton';
+import statuses from '../../utils/devUtils/constants/statuses.js';
+import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 
 export default {
   title: 'Form/TextField',
@@ -30,6 +32,7 @@ export default {
       },
       defaultValue: statuses.DEFAULT,
     },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 

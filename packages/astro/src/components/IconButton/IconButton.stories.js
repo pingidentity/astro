@@ -4,7 +4,7 @@ import IconButton from '.';
 import Icon from '../Icon';
 
 export default {
-  title: 'Icon Button',
+  title: 'IconButton',
   component: IconButton,
   parameters: {
     docs: {
