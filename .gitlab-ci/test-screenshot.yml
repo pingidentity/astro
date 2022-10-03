@@ -18,8 +18,6 @@ chromatic:
   extends:
     - .base-job
   stage: screenshot
-  needs:
-    - build-dependencies
   variables:
     CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   rules:
