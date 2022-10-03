@@ -167,6 +167,7 @@ const navBarHeaderText = {
   fontSize: '13px',
   fontWeight: 1,
   maxWidth: '150px',
+  color: 'white',
 };
 
 const collapsiblePanellItem = {
