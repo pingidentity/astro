@@ -32,7 +32,7 @@ const sectionContainer = {
   pt: '10px',
   height: '100%',
   maxHeight: '100%',
-  overflowY: 'overlay !important',
+  overflowY: 'auto',
 };
 
 const sectionBody = {
@@ -85,6 +85,7 @@ const subtitle = {
   zIndex: '100',
 };
 
+
 const headerText = {
   ...wordWrap,
   whiteSpace: 'break-spaces',
@@ -92,6 +93,44 @@ const headerText = {
   fontSize: '13px',
   fontWeight: 1,
   maxWidth: '150px',
+  color: 'white',
+};
+
+const headerNav = {
+  cursor: 'pointer',
+  minHeight: '40px',
+  lineHeight: '30px',
+  outline: 'none',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  flexShrink: 0,
+  wordBreak: 'inherit',
+  whiteSpace: 'nowrap',
+  color: 'neutral.95',
+  flexGrow: 1,
+  fontWeight: 0,
+  fontSize: '16px',
+  '&.is-focused': {
+    outline: 'none',
+    boxShadow: 'focus',
+    WebkitBoxShadow: 'focus',
+    MozBoxShadow: 'focus',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'accent.10',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'accent.5',
+  },
+};
+
+const item = {
+  ...headerNav,
+  padding: '10px 15px 10px 15px',
+  '&.is-selected': {
+    backgroundColor: 'accent.5',
+    boxShadow: 'inset 2px 0 0 0 white',
+  },
 };
 
 export default {
@@ -102,4 +141,6 @@ export default {
   itemButton,
   subtitle,
   headerText,
+  headerNav,
+  item,
 };

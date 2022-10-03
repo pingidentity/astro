@@ -1,47 +1,129 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Separator, AccordionGridGroup, Text, Item, Box } from '../../index';
+import { useFocusManager } from '@react-aria/focus';
+import { useKeyboard } from '@react-aria/interactions';
+import { Separator, Text, Box, Button } from '../../index';
 import NavBarItemBody from './NavBarItemBody';
 import NavBarItemHeader from './NavBarItemHeader';
+import { useNavBarContext } from '../../context/NavBarContext';
 
 /**
- * Composed component that creates an AccordionGrid group
+ * Composed component that creates a group
  * with title, and separator options.
  *
  */
 
 const NavBarSection = (props) => {
-  const {
-    hasSeparator,
-    title,
-    items,
-  } = props;
+  const { hasSeparator, title, items } = props;
+  const ref = useRef();
+
+  const childrenItems = items.filter(i => i.children);
 
   return (
     <>
-      {title &&
-        <Text variant="variants.navBar.subtitle">
-          {title}
-        </Text>
-      }
-      <AccordionGridGroup items={items.filter(i => i.children)} >
-        {
-          item => (
-            <Item
-              headerProps={{ variant: 'accordionGrid.headerNav', hasCaret: false }}
-              bodyProps={{ variant: 'navBar.sectionBody' }}
-              textValue={item}
-            >
-              <NavBarItemHeader item={item} />
-              <NavBarItemBody item={item} />
-            </Item>
-          )
-        }
-      </AccordionGridGroup>
-      {hasSeparator &&
-        <Box sx={{ pl: '15px', pr: '15px', my: '10px', mt: '15px', mb: '15px' }}>
+      {title && <Text variant="variants.navBar.subtitle">{title}</Text>}
+      <ul
+        ref={ref}
+        style={{
+          margin: 0,
+          padding: 0,
+          listStyle: 'none',
+        }}
+      >
+        {childrenItems.map(item => (
+          <li key={item.key}>
+            <SectionItem
+              key={item.key}
+              item={item}
+            />
+          </li>
+        ))}
+      </ul>
+      {hasSeparator && (
+        <Box
+          sx={{ pl: '15px', pr: '15px', my: '10px', mt: '15px', mb: '15px' }}
+        >
           <Separator variant="separator.navBarSeparator" />
         </Box>
+      )}
+    </>
+  );
+};
+
+const SectionItem = ({ item }) => {
+  const { key, children } = item;
+  const headerButtonRef = useRef();
+
+  const navBarState = useNavBarContext();
+  const { expandedKeys, setExpandedKeys } = navBarState;
+  const isExpanded = expandedKeys?.has(key);
+
+  const firstChildKey = children.length ? children[0].key : null;
+  const lastChildKey = children.length ? children[children.length - 1].key : null;
+
+  const onExpandedChange = (isOpen) => {
+    if (isOpen) {
+      expandedKeys.add(key);
+    } else {
+      expandedKeys.delete(key);
+    }
+
+    setExpandedKeys(new Set(expandedKeys));
+  };
+
+  const focusManager = useFocusManager();
+  const onKeyDown = (e, childKey) => {
+    switch (e.which) {
+      case 39:
+      case 40:
+        if (childKey !== lastChildKey) {
+          focusManager.focusNext();
+        }
+        e.preventDefault();
+        break;
+      case 37:
+      case 38:
+        if (childKey !== firstChildKey) {
+          focusManager.focusPrevious();
+        }
+        e.preventDefault();
+        break;
+      case 27:
+        onExpandedChange(false);
+        headerButtonRef.current.focus();
+        break;
+      case 32:
+        if (childKey && e.target?.href) {
+          e.target.click();
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  const { keyboardProps } = useKeyboard({
+    onKeyDown: (e) => {
+      onKeyDown(e);
+      e.continuePropagation();
+    },
+  });
+
+  return (
+    <>
+      <Button
+        ref={headerButtonRef}
+        variant="variants.navBar.itemButton"
+        onPress={() => onExpandedChange(!isExpanded)}
+        {...keyboardProps}
+      >
+        <NavBarItemHeader item={item} />
+      </Button>
+      {isExpanded &&
+        <NavBarItemBody
+          item={item}
+          onKeyDown={onKeyDown}
+        />
       }
     </>
   );
@@ -61,6 +143,22 @@ NavBarSection.propTypes = {
    * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
   */
   items: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+SectionItem.propTypes = {
+  item: PropTypes.shape({ key: PropTypes.string,
+    children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
+    'aria-label': PropTypes.string }),
+  state: PropTypes.shape({
+    collection: PropTypes.shape({}),
+    selectedKey: PropTypes.string,
+    setSelectedKey: PropTypes.func,
+    selectionManager: PropTypes.shape({
+      focusedKey: PropTypes.string,
+      setFocusedKey: PropTypes.func,
+    }),
+  }),
+  menuProps: PropTypes.shape({}),
 };
 
 export default NavBarSection;
