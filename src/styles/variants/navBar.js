@@ -30,7 +30,7 @@ const sectionContainer = {
   pt: '10px',
   height: '100%',
   maxHeight: '100%',
-  overflowY: 'overlay !important',
+  overflowY: 'auto',
 };
 
 const sectionBody = {
@@ -38,9 +38,41 @@ const sectionBody = {
   pl: '0',
 };
 
+const navItem = {
+  cursor: 'pointer',
+  minHeight: '40px',
+  lineHeight: '30px',
+  padding: '10px 15px 10px 15px',
+  outline: 'none',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  flexShrink: 0,
+  wordBreak: 'inherit',
+  whiteSpace: 'nowrap',
+  color: 'neutral.95',
+  flexGrow: 1,
+  fontWeight: 0,
+  fontSize: '16px',
+  '&.is-focused': {
+    outline: '1px solid',
+    outlineColor: '#D033FF',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'accent.10',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'accent.5',
+  },
+  '&.is-selected': {
+    backgroundColor: 'accent.5',
+    boxShadow: 'inset 2px 0 0 0 white',
+  },
+};
+
 export default {
   container,
   itemHeaderContainer,
   sectionContainer,
   sectionBody,
+  navItem,
 };
