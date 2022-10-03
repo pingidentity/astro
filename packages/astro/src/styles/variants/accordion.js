@@ -60,42 +60,6 @@ const accordionGridHeader = {
     },
   },
 };
-const accordionGridHeaderNav = {
-  cursor: 'pointer',
-  minHeight: '40px',
-  lineHeight: '30px',
-  outline: 'none',
-  display: 'flex',
-  justifyContent: 'flex-start',
-  flexShrink: 0,
-  wordBreak: 'inherit',
-  whiteSpace: 'nowrap',
-  color: 'neutral.95',
-  flexGrow: 1,
-  fontWeight: 0,
-  fontSize: '16px',
-  '&.is-focused': {
-    outline: 'none',
-    boxShadow: 'focus',
-    WebkitBoxShadow: 'focus',
-    MozBoxShadow: 'focus',
-  },
-  '&.is-hovered': {
-    backgroundColor: 'accent.10',
-  },
-  '&.is-pressed': {
-    backgroundColor: 'accent.5',
-  },
-};
-
-const accordionGridNavItem = {
-  ...accordionGridHeaderNav,
-  padding: '10px 15px 10px 15px',
-  '&.is-selected': {
-    backgroundColor: 'accent.5',
-    boxShadow: 'inset 2px 0 0 0 white',
-  },
-};
 
 const accordionGridBody = {
   display: 'none !important',
@@ -121,7 +85,5 @@ export default {
   accordionTitle,
   accordion,
   accordionBody,
-  accordionGridHeaderNav,
-  accordionGridNavItem,
   accordionGridItem,
 };

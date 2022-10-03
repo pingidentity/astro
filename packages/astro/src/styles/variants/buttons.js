@@ -65,7 +65,8 @@ const navItemButton = {
   wordWrap: 'break-word',
   wordBreak: 'break-word',
   '&.is-focused': {
-    ...defaultFocus,
+    outline: '1px solid',
+    outlineColor: '#D033FF',
   },
   '&.is-hovered': {
     bg: 'accent.10',
@@ -752,6 +753,21 @@ const menuTab = {
   },
 };
 
+const navBarSectionButton = {
+  ...quiet,
+  width: '100%',
+  '&.is-focused': {
+    outline: '1px solid',
+    outlineColor: '#D033FF',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'accent.10',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'accent.5',
+  },
+};
+
 
 export default {
   accordionHeader,
@@ -795,6 +811,7 @@ export default {
   helpHint,
   modalCloseButton,
   navItemButton,
+  navBarSectionButton,
   applicationPortalPinned,
   applicationPortal,
   square,
