@@ -49,7 +49,7 @@ const SwitchField = forwardRef((props, ref) => {
     ...props,
   });
 
-  const { pressProps: containerPressProps } = usePress({ isDisabled });
+  const { pressProps } = usePress({ isDisabled });
 
   const whitelistedProps = omit(props, Object.keys(others));
   const { inputProps } = useSwitch({
@@ -63,7 +63,7 @@ const SwitchField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({
     statusClasses,
-    ...containerPressProps,
+    ...pressProps,
     ...props,
     controlProps: { ...controlProps, ...inputProps },
   });
