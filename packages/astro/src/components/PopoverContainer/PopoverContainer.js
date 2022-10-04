@@ -13,17 +13,6 @@ import Box from '../Box';
 const PopoverContainer = forwardRef((props, ref) => {
   const {
     children,
-    placement,
-    arrowProps,
-    arrowCrossOffset,
-    onClose,
-    isNotClosedOnBlur,
-    hasNoArrow,
-    isKeyboardDismissDisabled,
-    isNonModal,
-    isDismissable,
-    width,
-    direction,
     ...others
   } = props;
 
@@ -31,17 +20,6 @@ const PopoverContainer = forwardRef((props, ref) => {
     <OverlayContainer>
       <PopoverWrapper
         ref={ref}
-        placement={placement}
-        arrowProps={arrowProps}
-        onClose={onClose}
-        isNotClosedOnBlur={isNotClosedOnBlur}
-        isKeyboardDismissDisabled={isKeyboardDismissDisabled}
-        hasNoArrow={hasNoArrow}
-        isNonModal={isNonModal}
-        isDismissable={isDismissable}
-        arrowCrossOffset={arrowCrossOffset}
-        width={width}
-        direction={direction}
         {...others}
       >
         {children}
