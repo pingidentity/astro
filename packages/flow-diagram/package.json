@@ -1,10 +1,6 @@
 {
   "name": "@pingux/flow-diagram",
-<<<<<<< HEAD
-  "version": "0.27.8-alpha.2",
-=======
   "version": "0.27.8-alpha.7",
->>>>>>> develop
   "description": "Flow Diagram library",
   "author": "Ping UX Development Team",
   "homepage": "",
@@ -48,11 +44,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
-<<<<<<< HEAD
-    "@pingux/astro": "^1.30.0-alpha.1",
-=======
     "@pingux/astro": "^1.30.0-alpha.6",
->>>>>>> develop
     "@pingux/icons": "^0.2.0",
     "gojs": "^2.1.16",
     "gojs-react": "^1.0.7",
