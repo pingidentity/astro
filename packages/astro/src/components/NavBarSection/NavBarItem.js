@@ -56,8 +56,9 @@ const NavBarItem = forwardRef((props, ref) => {
   return (
     <Box
       id={key}
-      variant="accordion.accordionGridNavItem"
+      variant="navBar.navItem"
       isRow
+      tabIndex={0}
       className={classNames}
       ref={navItemRef}
       {...mergedProps}
@@ -74,6 +75,7 @@ const NavBarItem = forwardRef((props, ref) => {
         {icon &&
           <Icon
             icon={icon}
+            aria-label={text}
             size={20}
             sx={{
               mr: '10px',

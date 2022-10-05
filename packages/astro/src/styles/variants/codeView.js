@@ -166,11 +166,12 @@ const wrapper = {
 const lineNo = {
   display: 'table-cell',
   userSelect: 'none',
-  p: 5,
+  px: 5,
   m: '0 10px 0 0',
   bg: 'accent.30',
   minWidth: 26,
   color: 'white',
+  lineHeight: '20px',
 };
 
 export default {

@@ -1,0 +1,7 @@
+commit-lint:
+  extends: 
+    - .base-job
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - bash commit_lint.sh
