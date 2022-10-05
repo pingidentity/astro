@@ -38,7 +38,7 @@ const Image = forwardRef((props, ref) => {
   } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [loadedSuccessfully, setLoadedSuccessfully] = useState(false);
-  const [hasTimedOut, setHasTimedOut] = useState(false);
+  const [shouldShowFallback, setShouldShowFallback] = useState(false);
   // we need to use useRef here with useState so it will be updated in setTimeout and onload
   // https://github.com/facebook/react/issues/14010#issuecomment-433788147
   const isLoadingRef = useRef(isLoading);
@@ -48,13 +48,13 @@ const Image = forwardRef((props, ref) => {
   };
 
   const setImgSrc = () => {
-    if ((!loadedSuccessfully && !isLoadingRef?.current) || hasTimedOut) {
+    if ((!loadedSuccessfully && !isLoadingRef?.current) || shouldShowFallback) {
       return fallbackImage;
     }
     return src;
   };
 
-  const imgSrc = useMemo(() => setImgSrc(), [src, isLoading, hasTimedOut]);
+  const imgSrc = useMemo(() => setImgSrc(), [src, isLoading, shouldShowFallback]);
   const imgRef = useRef();
 
   /* istanbul ignore next */
@@ -80,12 +80,13 @@ const Image = forwardRef((props, ref) => {
 
   const onImageError = () => {
     setIsLoadingWithRef(false);
+    setShouldShowFallback(true);
   };
 
   const onFallbackTimeout = () => {
     if (isLoadingRef?.current) {
       setIsLoadingWithRef(false);
-      setHasTimedOut(true);
+      setShouldShowFallback(true);
     }
   };
 
@@ -118,9 +119,9 @@ const Image = forwardRef((props, ref) => {
 
   const themeUiImage = (
     <ThemeUIImage
+      alt={alt}
       className={classNames}
       ref={imgRef}
-      alt={alt}
       role="img"
       src={imgSrc}
       sx={sx}

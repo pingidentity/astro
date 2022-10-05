@@ -50,8 +50,8 @@ export const CustomSizeAndRadius = () => (
 
 export const Disabled = () => <Image src={pingImg} isDisabled alt="Ping identity square logo" />;
 
-export const FallbackImage = () => {
-  return (
+export const FallbackImage = () =>
+  (
     <Image
       fallbackImage={pingImg}
       src="https://deelay.me/7000/https://picsum.photos/150/150"
@@ -62,7 +62,7 @@ export const FallbackImage = () => {
       alt="Random image"
     />
   );
-};
+
 
 export const WithSkeletonLoadSuccess = ({ useLocalSrc }) => {
   const imageSrc = useLocalSrc
