@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.12](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.11...@pingux/end-user@2.4.12) (2022-10-05)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
 ## [2.4.11](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.10...@pingux/end-user@2.4.11) (2022-09-29)
 
 

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.29.0...@pingux/astro@1.30.0) (2022-10-05)
+
+
+### Bug Fixes
+
+* [UIP-5379] NavBar a11y issues ([bed33a1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bed33a16f1474cbf7c1853b302d43d61009392df))
+* [UIP-5694] Correct line spacing for CodeView ([a34459a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a34459a1c119834e5d924c7337127e249e686782))
+* handle image error status codes ([56f535e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/56f535ea21130a29bce52f45079f2bba852943db))
+
+
+### Features
+
+* [UIP-5514] Icon badge component ([ffa21c4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ffa21c44ef29a5c84ce551a85361bd93b8360be9))
+
+
+
+
+
 # [1.29.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.28.1...@pingux/astro@1.29.0) (2022-09-29)
 
 
