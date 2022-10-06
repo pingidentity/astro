@@ -43,6 +43,8 @@ export function useListLayout(state) {
  * view, or edit items in this list. This virtualized component supports
  * asynchronous data in infinitely scrollable lists.
  *
+ * Can be used as in recipe: https://uilibrary.ping-eng.com/astro/?path=/docs/recipes-list-with-panel--default
+ *
  * NOTE: be careful with putting focusable elements inside ListView.
  * It is using a grid (useList hook) with its own event listeners under the hood.
  * [react-specttrum-github-issue](https://github.com/adobe/react-spectrum/issues/2801)
