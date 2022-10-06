@@ -5,8 +5,9 @@ import AccountIcon from 'mdi-react/AccountIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
+import PlusIcon from 'mdi-react/PlusIcon';
 
-import { Avatar, Box, Icon, IconButton, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
+import { Avatar, Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
 
 import { useOverlayPanelState } from '../hooks';
 import { pingImg } from '../utils/devUtils/constants/images';
@@ -227,6 +228,9 @@ export const Default = () => {
   const { state: panelState, onClose: onPanelClose } = useOverlayPanelState();
   const panelTriggerRef = useRef();
 
+  const heading = 'Title of the Page';
+  const description = 'The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page.';
+
   const closePanelHandler = () => {
     onPanelClose(panelState, panelTriggerRef);
     setSelectedItemId(-1);
@@ -245,6 +249,27 @@ export const Default = () => {
 
   return (
     <Box sx={sx.wrapper}>
+      <Box mb="md">
+        <Box
+          align="center"
+          isRow
+          mb="xs"
+          role="heading"
+          aria-level="1"
+        >
+          <Text variant="title" fontWeight={3}>
+            {heading}
+          </Text>
+          <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted" >
+            <Icon icon={PlusIcon} color="white" size={13} />
+          </IconButton>
+        </Box>
+        <Text variant="bodyWeak">
+          {description}
+          <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
+        </Text>
+      </Box>
+
       <SearchField position="fixed" mb="sm" width="400px" placeholder="Search" aria-label="search" />
       <ListView
         items={items}
