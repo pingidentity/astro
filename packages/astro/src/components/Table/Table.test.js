@@ -6,6 +6,8 @@ import TableBody from '../TableBody';
 import TableRow from '../TableRow';
 import TableCell from '../TableCell';
 import TableHead from '../TableHead';
+import TableCaption from '../TableCaption';
+import { Text } from '../../index';
 
 import axeTest from '../../utils/testUtils/testAxe';
 
@@ -14,6 +16,8 @@ const testId = 'test-table';
 const defaultProps = {
   'data-testid': testId,
 };
+
+const caption = 'Populations of Countries';
 
 const headers = [
   'Country', 'Population', 'Continent',
@@ -44,6 +48,9 @@ const objects = [
 
 const getComponent = () => render(
   <Table {...defaultProps}>
+    <TableCaption>
+      <Text fontWeight={3} fontSize="lg">{caption}</Text>
+    </TableCaption>
     <TableHead>
       <TableRow key="head">
         {headers.map(head => (
