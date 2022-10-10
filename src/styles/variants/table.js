@@ -29,6 +29,12 @@ const tableRow = {
   flexDirection: 'row !important',
 };
 
+const tableCaption = {
+  textAlign: 'left',
+  marginBottom: 'xs',
+  lineHeight: '21px',
+};
+
 const table = {
   width: '100%',
 };
@@ -38,5 +44,6 @@ export default {
   tableData,
   tableBody,
   tableRow,
+  tableCaption,
   table,
 };
