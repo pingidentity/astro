@@ -51,7 +51,13 @@ export const Default = ({ ...args }) => {
         voluptate velit esse cillum dolore eu fugiat nulla pariatur.
       </Text>
       <br />
-      <Button ref={triggerRef} onPress={state.open} >Open Panel</Button>
+      <Button
+        ref={triggerRef}
+        onPress={state.open}
+        aria-expanded={state.isOpen}
+      >
+        Open Panel
+      </Button>
       { state.isOpen &&
         <OverlayPanel
           isOpen={state.isOpen}
@@ -62,6 +68,7 @@ export const Default = ({ ...args }) => {
           <Box>
             <Button
               onPress={() => { onClose(state, triggerRef); }}
+              aria-expanded={state.isOpen}
             >
               Close Panel
             </Button>
@@ -134,7 +141,7 @@ export const InnerPanel = ({ ...args }) => {
           triggerRef={outerTriggerRef}
         >
           <Box sx={{ p: '12px' }}>
-            <Button onPress={closeOuterPanel}>Close Panel</Button>
+            <Button onPress={closeOuterPanel} aria-expanded={state.isOpen} >Close Panel</Button>
             <Text pt="md" mb="24px">
               Children render here.
             </Text>
@@ -151,7 +158,13 @@ export const InnerPanel = ({ ...args }) => {
             <br />
             <Button onPress={toggleMessagesOpen}>Toggle Messages</Button>
             <br />
-            <Button ref={innerTriggerRef} onPress={innerState.open}>Open Inner Panel</Button>
+            <Button
+              ref={innerTriggerRef}
+              onPress={innerState.open}
+              aria-expanded={innerState.isOpen}
+            >
+              Open Inner Panel
+            </Button>
             {inner}
           </Box>
         </OverlayPanel>
@@ -164,7 +177,13 @@ export const InnerPanel = ({ ...args }) => {
     // readers when an overlay opens.
     <>
       <OverlayProvider>
-        <Button ref={outerTriggerRef} onPress={state.open}>Open Panel</Button>
+        <Button
+          ref={outerTriggerRef}
+          onPress={state.open}
+          aria-expanded={state.isOpen}
+        >
+          Open Panel
+        </Button>
         {outer}
       </OverlayProvider>
       { messagesOpen &&
@@ -194,7 +213,7 @@ export const CustomWidth = () => {
         voluptate velit esse cillum dolore eu fugiat nulla pariatur.
       </Text>
       <br />
-      <Button ref={triggerRef} onPress={state.open} >Open Panel</Button>
+      <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
       { state.isOpen &&
         <OverlayPanel
           isOpen={state.isOpen}
@@ -205,6 +224,7 @@ export const CustomWidth = () => {
           <Box>
             <Button
               onPress={() => { onClose(state, triggerRef); }}
+              aria-expanded={state.isOpen}
             >
               Close Panel
             </Button>

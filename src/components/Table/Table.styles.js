@@ -33,10 +33,18 @@ const container = {
   width: '100%',
 };
 
+
+const caption = {
+  textAlign: 'left',
+  marginBottom: 'xs',
+  lineHeight: '21px',
+};
+
 export default {
-  head,
-  data,
   body,
-  row,
+  caption,
   container,
+  data,
+  head,
+  row,
 };
