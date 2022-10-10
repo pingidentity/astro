@@ -33,7 +33,6 @@ const container = {
   width: '100%',
 };
 
-
 const caption = {
   textAlign: 'left',
   marginBottom: 'xs',
