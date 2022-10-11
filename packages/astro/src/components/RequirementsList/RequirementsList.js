@@ -34,7 +34,7 @@ const RequirementsList = forwardRef((props, ref) => {
 
   const buildRequirementsLine = (req) => {
     return (
-      <Box isRow key={req.name} alignItems="center" width="100%">
+      <Box role="listitem" isRow key={req.name} alignItems="center" width="100%" as="li">
         {statusIconRender(req.status)}
         <Text variant="bodyWeak">{req.name}</Text>
       </Box>
@@ -42,7 +42,7 @@ const RequirementsList = forwardRef((props, ref) => {
   };
 
   return (
-    <Box p="lg" gap="md" ref={ref} {...others}>
+    <Box role="list" p="lg" gap="md" as="ul" ref={ref} {...others}>
       {requirements.map(req => buildRequirementsLine(req))}
     </Box>
   );
