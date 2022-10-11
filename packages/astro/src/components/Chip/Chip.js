@@ -18,15 +18,27 @@ const Chip = React.forwardRef((props, ref) => {
     textColor,
     textProps,
     label,
+    align,
     isUppercase,
   } = props;
+
+  const sx = {
+    ...isUppercase && {
+      paddingBottom: '3px',
+    },
+  };
+
+  if (align) {
+    sx.position = 'absolute';
+    sx[align] = '15px';
+  }
 
   return (
     <ChipContext.Provider value={{ bg }}>
       <Box
         isRow
         variant="chip.baseChip"
-        sx={isUppercase && { paddingBottom: '3px' }}
+        sx={sx}
         ref={ref}
         {...props}
       >
@@ -55,6 +67,8 @@ Chip.propTypes = {
   textProps: PropTypes.shape({}),
   /** When true, display chip label as uppercase. */
   isUppercase: PropTypes.bool,
+  /** Alignment of chip relative to parent container. */
+  align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 Chip.defaultProps = {
