@@ -34,7 +34,6 @@ export function useListLayout(state) {
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
-
   return layout;
 }
 
