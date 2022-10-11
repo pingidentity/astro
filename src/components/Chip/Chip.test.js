@@ -40,3 +40,11 @@ test('renders Chip component with uppercase', () => {
   getComponent({ label, isUppercase });
   expect(screen.queryByText('uppercase')).toHaveStyleRule('text-transform', 'uppercase');
 });
+
+test('renders Chip component with custom alignment', () => {
+  const align = 'right';
+
+  getComponent({ align });
+  expect(screen.getByTestId(testId)).toHaveStyleRule('position', 'absolute');
+  expect(screen.getByTestId(testId)).toHaveStyleRule('right', '15px');
+});

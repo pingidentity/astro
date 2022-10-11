@@ -289,3 +289,65 @@ export const ControlledMenu = () => {
     </EnvironmentBreadcrumb>
   );
 };
+
+export const RightAlignedChips = (args) => {
+  const [selectedEnvironment, setSelectedEnvironment] = useState({
+    name: 'Snail',
+    isSandbox: true,
+  });
+
+  const envNode = (
+    <Box isRow>
+      <Text color="inherit">{selectedEnvironment.name}</Text>
+      {selectedEnvironment.isSandbox ? (
+        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+      ) : null}
+    </Box>
+  );
+
+  const findEnvObj = envName =>
+    defaultEnvironments.find(({ name }) => name === envName);
+
+  const handleSelectionChange = (newEnvName) => {
+    const envObj = findEnvObj(newEnvName);
+    setSelectedEnvironment({ ...envObj });
+  };
+
+  const items = [
+    { name: 'Default' },
+    { name: 'Kangaroo', isSandbox: true },
+    { name: 'Snake', isSandbox: true },
+    { name: 'Snail' },
+    { name: 'Slug', isSandbox: true },
+    { name: 'Crow' },
+    { name: 'Dog' },
+    { name: 'Crab', isSandbox: true },
+    { name: 'Fish', isSandbox: true },
+    { name: 'Turtle', isSandbox: true },
+    { name: 'Mouse' },
+  ];
+
+  return (
+    <EnvironmentBreadcrumb
+      {...args}
+      items={items}
+      name="Globochem"
+      selectedItem={envNode}
+      onSelectionChange={handleSelectionChange}
+    >
+      {({ name, isSandbox }) => (
+        <Item key={name} textValue={name}>
+          {name}
+          {isSandbox ? (
+            <Chip
+              label="SANDBOX"
+              variant="boxes.environmentChip"
+              bg="neutral.40"
+              align="right"
+            />
+          ) : null}
+        </Item>
+      )}
+    </EnvironmentBreadcrumb>
+  );
+};
