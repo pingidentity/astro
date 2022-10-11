@@ -73,6 +73,22 @@ const listViewItem = {
   },
 };
 
+const linkedListViewItem = {
+  ...listViewItem,
+  minHeight: '75px',
+  '&.has-inset-separator': {
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      width: 'calc(100% - 43px)',
+      right: 0,
+      bottom: 0,
+      borderBottom: '1px solid',
+      borderBottomColor: 'line.hairline',
+    },
+  },
+};
+
 const listBoxSectionTitle = {
   fontSize: 'sm',
   fontWeight: '3',
@@ -102,6 +118,7 @@ export const chip = {
     '&.is-hovered': {
       backgroundColor: 'white',
     },
+
     '& .mdi-icon': {
       marginLeft: '0',
       padding: '2px',
@@ -373,6 +390,7 @@ export default {
   listItem,
   listBoxSectionTitle,
   listViewItem,
+  linkedListViewItem,
   radioCheckedContent,
   radioContainer,
   scrollbox,
