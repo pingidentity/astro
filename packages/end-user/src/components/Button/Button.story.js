@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 import Button from './Button';
 
 export default {
     title: 'Components/Actions/Button',
     component: Button,
-    decorators: [withKnobs],
 };
 
 
@@ -20,14 +18,14 @@ const [loading, setLoading] = useState(false);
         <div>
         <Button
             type={Button.ButtonTypes.PRIMARY}
-            disabled={boolean('Disabled', false)}
+            disabled={false}
         >
             Primary Button
         </Button>
         <br/>
         <Button
             type={Button.ButtonTypes.SECONDARY}
-            disabled={boolean('Disabled', false)}
+            disabled={false}
             onClick={action('clicked')}
         >
             Secondary Button
@@ -35,7 +33,7 @@ const [loading, setLoading] = useState(false);
         <br/>
         <Button
             type={Button.ButtonTypes.TERTIARY}
-            disabled={boolean('Disabled', false)}
+            disabled={false}
             onClick={action('clicked')}
         >
             Tertiary Button
@@ -43,7 +41,7 @@ const [loading, setLoading] = useState(false);
         <br/>
         <Button
             type={Button.ButtonTypes.DANGER}
-            disabled={boolean('Disabled', false)}
+            disabled={false}
             onClick={action('clicked')}
         >
             Danger Button
@@ -51,14 +49,14 @@ const [loading, setLoading] = useState(false);
         <br/>
         <Button
             type={Button.ButtonTypes.PRIMARY_A11Y}
-            disabled={boolean('Disabled', false)}
+            disabled={false}
         >
             Primary A11y Button
         </Button>
         <br/>
         <Button
             type={Button.ButtonTypes.PRIMARY}
-            disabled={boolean('Disabled', false)}
+            disabled={false}
             loading={loading}
             onClick={_toggleLoadingButton}
         >

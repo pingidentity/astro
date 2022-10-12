@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import SearchField from '.';
 
 const testId = 'test-radio-group';
@@ -169,6 +169,23 @@ test('check that only 1 data-testid is present', () => {
 test('clear button should be present by default ', () => {
   getComponent({ value: 'test-value' });
   expect(screen.getByRole('button')).toBeInTheDocument();
+});
+
+test('clear button should be keyboard accessible', () => {
+  getComponent();
+  const search = screen.getByLabelText(testLabel);
+  userEvent.type(search, 'clear');
+  expect(search).toHaveValue('clear');
+
+  const clearButton = screen.getByRole('button');
+  expect(clearButton).toHaveAttribute('tabindex', '0');
+
+  act(() => { clearButton.focus(); });
+  expect(clearButton).toHaveFocus();
+
+  fireEvent.keyDown(clearButton, { key: 'Enter' });
+  fireEvent.keyUp(clearButton, { key: 'Enter' });
+  expect(search).toHaveValue('');
 });
 
 test('clear button should not be present is hasNoClearButton=true ', () => {

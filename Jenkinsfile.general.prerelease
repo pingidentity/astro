@@ -268,7 +268,7 @@ pipeline {
     unsuccessful {
       script {
         def message = """
-          :x: Release failure...
+          :x: Pre-release failure...
           Build details: <${env.BUILD_URL}/console|See in web console>
         """.stripIndent()
         slackSend channel: '#ux-deployments', message: "${message}", color: "#a31300"
