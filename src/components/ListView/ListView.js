@@ -34,7 +34,6 @@ export function useListLayout(state) {
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
-
   return layout;
 }
 
@@ -42,6 +41,8 @@ export function useListLayout(state) {
  * ListViews are used to display a list of items. Users can select,
  * view, or edit items in this list. This virtualized component supports
  * asynchronous data in infinitely scrollable lists.
+ *
+ * Can be used as in recipe: https://uilibrary.ping-eng.com/astro/?path=/docs/recipes-list-with-panel--default
  *
  * NOTE: be careful with putting focusable elements inside ListView.
  * It is using a grid (useList hook) with its own event listeners under the hood.

@@ -16,7 +16,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
  * React Stately.
  */
 const LinkSelectField = forwardRef((props, ref) => {
-  const { placeholder, status } = props;
+  const { placeholder, isDisabled, status } = props;
   const { ariaProps } = getAriaAttributeProps(props);
 
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -41,6 +41,7 @@ const LinkSelectField = forwardRef((props, ref) => {
       className={fieldControlProps.className}
       ref={triggerRef}
       variant="link"
+      tabIndex={isDisabled ? -1 : 0}
       {...triggerProps}
       {...ariaProps}
     >
