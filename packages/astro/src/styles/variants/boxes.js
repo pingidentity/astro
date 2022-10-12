@@ -10,6 +10,8 @@ const card = {
   alignItems: 'center',
   justifyContent: 'center',
   flex: '1 1 0',
+  fontWeight: 1,
+  fontSize: 'md',
 };
 
 // Used to give a border to radio elements
