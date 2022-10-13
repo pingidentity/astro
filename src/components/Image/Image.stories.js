@@ -33,7 +33,7 @@ export default {
 
 export const Default = ({ ...args }) => <Image {...args} alt="Ping identity square logo" />;
 
-export const Avatar = () => <Image src={pingImg} variant="image.avatar" alt="Ping identity round avatar" />;
+export const Avatar = () => <Image src={pingImg} variant="images.avatar" alt="Ping identity round avatar" />;
 
 export const CustomSizeAndRadius = () => (
   <Image

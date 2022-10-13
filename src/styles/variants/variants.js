@@ -15,7 +15,6 @@ import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/Enviro
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
 import fileInputField from '../../components/FileInputField/FIleInputField.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
-import image from '../../components/Image/Image.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
 import link from '../../components/Link/Link.styles';
 import listBox from '../../components/ListBox/ListBox.styles';
@@ -59,7 +58,6 @@ export default {
   fieldHelperText,
   fileInputField,
   helpHint,
-  image,
   imageUpload,
   link,
   listBox,
