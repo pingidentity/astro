@@ -84,6 +84,7 @@ const MenuItem = forwardRef((props, ref) => {
       ref={menuItemRef}
       variant={isSeparator ? 'menuItem.separator' : 'menuItem.item'}
       data-id={dataId}
+      aria-disabled={isDisabled}
       {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps, others)}
     >
       {rendered}
