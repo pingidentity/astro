@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.30.0...@pingux/astro@1.31.0) (2022-10-12)
+
+
+### Bug Fixes
+
+* [UIP-5712] Tabs EA Improvements ([df7a84c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/df7a84c5b08f6a2ec6637d3ac4c55285d66e9cba))
+* [UIP-5713] Adding accessibility to clear button in SearchField ([50b5195](https://gitlab.corp.pingidentity.com/ux/pingux/commit/50b5195e9a981c52b05d509ba8fa883ef8c5566c))
+* [UIP-5718] OverlayPanel expanded state announced ([1af94a1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1af94a1160bdbc64ee90b55fe07fa70dd0198c90))
+* [UIP-5720] RequirementsList tag and role for EA improvements ([ecec6bb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ecec6bb36a47554e02aeab9ad41e83bd3647f2b8))
+* [UIP-5722] disable LinkSelectField button focus when isDisabled - true ([bc9ff2a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bc9ff2a5bc0aac4ead0769350d963b028dd7b00c))
+
+
+### Features
+
+* [UIP-5570] Linked ListItem recipe ([cde8de1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cde8de1eb4af1c6577166287921283ba68bf3fab))
+* [UIP-5614] add an error state variant for AttributeMappingReadOnlyField ([cc47e09](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cc47e09bbc6b31acbd979caa497c1844f4060efb))
+* [UIP-5642] ListAndPanel recipe additions ([912af78](https://gitlab.corp.pingidentity.com/ux/pingux/commit/912af789f371917201b02bc872a7b9939ebddd07))
+* [UIP-5714] Create TableCaption component ([80cbb5e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/80cbb5eaf14165111d24e6e8b6be265eebe80df9))
+* [UIP-5716] Add alignment to Environment breadcrumb sandbox chip ([776c0b4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/776c0b489fc11f317f9b3a6a423471a393a42eb6))
+
+
+
+
+
 # [1.30.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.29.0...@pingux/astro@1.30.0) (2022-10-05)
 
 
