@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.31.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.31.0...@pingux/astro@1.31.1) (2022-10-13)
+
+
+### Bug Fixes
+
+* [UIP-5717] fix card row EA ([1fc699d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1fc699dc3befd5fb9369cb29867f649b64419e81))
+* [UIP-5719] MenuItem - add aria-disabled ([8dc3e2c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8dc3e2ce46ae932fa7ad833f9d383f82bdff00ed))
+
+
+
+
+
 # [1.31.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.30.0...@pingux/astro@1.31.0) (2022-10-12)
 
 
