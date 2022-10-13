@@ -5,7 +5,7 @@ import breakpoints from './breakpoints';
 import forms from './forms';
 import { variants, buttons, text, images, links, bidirectionalIconButton } from './variants';
 
-const theme = {
+export default {
   name: 'Astro',
   space: spacing,
   colors: {
@@ -45,7 +45,3 @@ const theme = {
   links,
   variants,
 };
-
-console.log('theme', theme);
-
-export default theme;
