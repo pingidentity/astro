@@ -1,5 +1,5 @@
 import accordionGrid from '../AccordionGridGroup/AccordionGrid.styles';
-import { defaultFocus } from '../Button/Buttons.styles';
+import { defaultFocus, quiet } from '../Button/Buttons.styles';
 import { wordWrap } from '../Text/Text.styles';
 
 const container = {
@@ -133,11 +133,27 @@ const item = {
   },
 };
 
+const sectionButton = {
+  ...quiet,
+  width: '100%',
+  '&.is-focused': {
+    outline: '1px solid',
+    outlineColor: '#D033FF',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'accent.10',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'accent.5',
+  },
+};
+
 export default {
   container,
   itemHeaderContainer,
   sectionContainer,
   sectionBody,
+  sectionButton,
   itemButton,
   subtitle,
   headerText,
