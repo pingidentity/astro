@@ -113,7 +113,7 @@ const SectionItem = ({ item }) => {
     <>
       <Button
         ref={headerButtonRef}
-        variant="variants.navBar.itemButton"
+        variant="variants.navBar.sectionButton"
         onPress={() => onExpandedChange(!isExpanded)}
         {...keyboardProps}
       >

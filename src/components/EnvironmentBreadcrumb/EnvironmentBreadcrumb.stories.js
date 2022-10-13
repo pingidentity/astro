@@ -300,7 +300,7 @@ export const RightAlignedChips = (args) => {
     <Box isRow>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+        <Chip label="SANDBOX" variant="chip.environmentChip" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -341,7 +341,7 @@ export const RightAlignedChips = (args) => {
           {isSandbox ? (
             <Chip
               label="SANDBOX"
-              variant="boxes.environmentChip"
+              variant="chip.environmentChip"
               bg="neutral.40"
               align="right"
             />
