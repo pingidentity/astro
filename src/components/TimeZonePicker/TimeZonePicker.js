@@ -58,7 +58,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
     ...otherProps
   } = props;
   const [search, setSearch] = useState('');
-  const [timeUpdate, setTimeUpdate] = useState(false);
+  const [timeUpdate, setTimeUpdate] = useState(true);
   const [timeZones, setTimeZones] = useState([]);
   const extendedTimeZonesList = additionalTimeZones
     ? { ...defaultTimezones, ...additionalTimeZones }
@@ -156,7 +156,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
   );
 
   return (
-    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="focus" >
+    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="input" >
       {items}
     </ComboBoxField>
   );
