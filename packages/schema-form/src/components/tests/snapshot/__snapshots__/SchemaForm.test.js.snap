@@ -20538,6 +20538,7 @@ exports[`single fields textarea field 1`] = `
   padding-bottom: 10px;
   width: 100%;
   outline: none;
+  overflow: hidden;
 }
 
 .emotion-8.is-focused {
