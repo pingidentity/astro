@@ -165,3 +165,15 @@ test('selectionMode "multiple" allows to select more than one item', async () =>
   expect(updatedOption[1]).toHaveClass('is-selected');
   expect(updatedOption[2]).toHaveClass('is-selected');
 });
+
+test('when user navigates with tab and arrows keys, onFocus is called and the is-focused class is applied', async () => {
+  const onFocus = jest.fn();
+  getComponent({ onFocus });
+  const listView = screen.getByTestId(testId);
+  userEvent.tab();
+  expect(onFocus).toHaveBeenCalled();
+  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  const options = screen.getAllByRole('gridcell');
+  expect(options[1]).toHaveClass('is-focused');
+  expect(onFocus).toHaveBeenCalled();
+});
