@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.31.1...@pingux/astro@1.32.0) (2022-10-19)
+
+
+### Bug Fixes
+
+* [UIP-5695] Fix height of editable input recipe for Firefox ([7b6a588](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7b6a588838661877c72804aa16c721c3b333281b))
+* [UIP-5704] Add proper label text to neutral checkbox story ([3915140](https://gitlab.corp.pingidentity.com/ux/pingux/commit/391514030912e393830a9e9733ea102c902677d4))
+
+
+### Features
+
+* [UIP-5710] TimeZonePicker EA Improvements ([8185e2d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8185e2d656fe6d55933e50cb96586fe989cd1112))
+
+
+
+
+
 ## [1.31.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.31.0...@pingux/astro@1.31.1) (2022-10-13)
 
 
