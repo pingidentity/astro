@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.10.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.6...@pingux/schema-form@3.10.7) (2022-10-19)
+
+
+### Bug Fixes
+
+* [UIP-5695] Fix height of editable input recipe for Firefox ([7b6a588](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7b6a588838661877c72804aa16c721c3b333281b))
+
+
+
+
+
 ## [3.10.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.5...@pingux/schema-form@3.10.6) (2022-10-13)
 
 **Note:** Version bump only for package @pingux/schema-form
