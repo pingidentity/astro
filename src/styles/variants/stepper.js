@@ -56,7 +56,7 @@ const stepBase = {
 
 const step = {
   active: {
-    backgroundColor: 'accent.95',
+    backgroundColor: 'accent.99',
     borderColor: 'active',
     color: 'active',
     ...stepBase,
