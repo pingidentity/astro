@@ -101,6 +101,14 @@ const ListView = forwardRef((props, ref) => {
 
   delete gridProps.onMouseDown;
 
+  const onFocus = (e) => {
+    gridProps.onFocus(e);
+
+    if (others.onFocus) {
+      others.onFocus(e);
+    }
+  };
+
   return (
     <ListViewContext.Provider value={{ state }}>
       <Virtualizer
@@ -116,6 +124,7 @@ const ListView = forwardRef((props, ref) => {
         collection={collection}
         transitionDuration={0}
         {...others}
+        onFocus={onFocus}
       >
         {(type, item) => {
           if (type === 'item') {
