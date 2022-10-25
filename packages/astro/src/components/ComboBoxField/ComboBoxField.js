@@ -174,11 +174,6 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   useLayoutEffect(onResize, [onResize]);
 
-  const handleInputOpen = (e) => {
-    if (!state.isOpen && menuTrigger === 'focus') buttonRef.current.click();
-    if (controlProps?.onClick) controlProps.onClick(e);
-  };
-
   const style = {
     ...overlayProps.style,
     width: menuWidth,
@@ -217,15 +212,17 @@ const ComboBoxField = forwardRef((props, ref) => {
         inputRef={inputRef}
         triggerProps={buttonProps}
         triggerRef={buttonRef}
-        controlProps={{ ...controlProps, onClick: handleInputOpen }}
+        controlProps={controlProps}
       />
       <PopoverContainer
-        isOpen={state.isOpen}
-        ref={popoverRef}
-        placement={placement}
         hasNoArrow
-        style={style}
+        isDismissable
         isNonModal
+        isOpen={state.isOpen}
+        onClose={state.close}
+        placement={placement}
+        ref={popoverRef}
+        style={style}
       >
         {listbox}
       </PopoverContainer>
