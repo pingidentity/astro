@@ -372,11 +372,13 @@ const MultivaluesField = forwardRef((props, ref) => {
       }
 
       <PopoverContainer
-        ref={popoverRef}
         hasNoArrow
+        isDismissable
         isNonModal
         isOpen={isOpen}
+        onClose={close}
         placement={placement}
+        ref={popoverRef}
         style={style}
       >
         {listbox}

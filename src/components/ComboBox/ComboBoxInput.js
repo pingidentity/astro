@@ -1,7 +1,8 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FocusRing } from '@react-aria/focus';
 import { PressResponder, useHover } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
 import MenuDown from 'mdi-react/MenuDownIcon';
 
 import { Box, Button, Icon, Loader, TextField } from '../../';
@@ -33,13 +34,17 @@ const ComboBoxInput = forwardRef((props, ref) => {
     wrapperProps,
     ...others
   } = props;
+
   const textFieldProps = {
     isDisabled,
     isReadOnly,
-    ...controlProps,
-    ...inputProps,
-    ...others,
+    containerProps,
+    ...mergeProps(inputProps, others),
   };
+
+  // istanbul ignore next
+  useImperativeHandle(ref, () => inputRef.current);
+
   const { hoverProps, isHovered } = useHover({});
 
   // START - minimum delay time for loading indicator = 500ms
@@ -110,7 +115,6 @@ const ComboBoxInput = forwardRef((props, ref) => {
       autoFocus={hasAutoFocus}
     >
       <Box
-        ref={ref}
         isRow
         style={style}
         variant="forms.comboBox.container"
@@ -118,8 +122,8 @@ const ComboBoxInput = forwardRef((props, ref) => {
         {...wrapperProps}
       >
         <TextField
-          {...containerProps}
           {...textFieldProps}
+          wrapperProps={{ ref: inputWrapperRef }}
           controlProps={{
             variant: 'forms.comboBox.input',
             ...controlProps,
@@ -129,7 +133,6 @@ const ComboBoxInput = forwardRef((props, ref) => {
           slots={{
             inContainer: button,
           }}
-          wrapperProps={{ ref: inputWrapperRef }}
         />
       </Box>
     </FocusRing>
