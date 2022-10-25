@@ -143,10 +143,8 @@ const Row = memo((props) => {
               sx: sx.comboBoxField,
             }}
             containerProps={{
-              'aria-label': 'selection field',
               width: '100%',
               maxWidth: '310px',
-              sx: { width: '100%' },
             }}
             inputValue={inputValue}
             onInputChange={setInputValue}

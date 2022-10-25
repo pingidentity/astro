@@ -53,7 +53,8 @@ test('opens listbox on focus and fires "onFocus', () => {
   const onFocus = jest.fn();
   getComponent({ onFocus });
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   expect(screen.getByRole('listbox')).toBeInTheDocument();
   const options = screen.getAllByRole('option');
@@ -66,7 +67,8 @@ test('closes listbox on blur and fires "onBlur"', () => {
   const onBlur = jest.fn();
   getComponent({ onBlur });
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   input.blur();
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -77,7 +79,8 @@ test('opening and closing listbox fires "onOpenChange"', () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
   input.blur();
@@ -88,7 +91,8 @@ test('opening and closing listbox fires "onOpenChange"', () => {
 test('multiple selection is enabled, option disappears after selection', () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toHaveAttribute('aria-multiselectable', 'true');
@@ -106,7 +110,8 @@ test('multiple selection is enabled, option disappears after selection', () => {
 test('clicking an option renders chip with option name', () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
@@ -122,7 +127,8 @@ test('clicking an option renders chip with option name', () => {
 test('clicking on delete button deletes selection, and re-adds option to list', () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
@@ -135,7 +141,8 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
   deleteButton.click();
   expect(chip).not.toBeInTheDocument();
 
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
   const updatedOptions = screen.getAllByRole('option');
   expect(updatedOptions[0]).toBeInTheDocument();
   expect(updatedOptions[0]).toHaveTextContent(items[0].name);
@@ -145,7 +152,8 @@ test('clicking an option fires "onSelectionChange"', () => {
   const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange });
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
 
@@ -249,7 +257,8 @@ test('in non-restrictive mode the value that was already selected using the list
   getComponent({ mode: 'non-restrictive', onSelectionChange });
 
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
@@ -269,7 +278,8 @@ test('in non-restrictive mode the value that was already selected using the list
 test('options can be focused via keyboard', () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
@@ -285,7 +295,8 @@ test('options can be focused via keyboard', () => {
 test('options can be selected via keyboard', () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  input.focus();
+  userEvent.tab();
+  expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
@@ -382,5 +393,23 @@ test('read only keys with read only field', () => {
 
   const textArea = screen.getByLabelText(defaultProps.label);
   expect(textArea).toHaveClass('is-read-only');
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+test('popover closes on input blur', () => {
+  getComponent();
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(input);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
+
+  userEvent.click(document.body);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
