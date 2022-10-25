@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.32.0...@pingux/astro@1.32.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* [UIP-5724] Add alt text to user icon in storybook ([a4dd785](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a4dd7854573a3704ddef75178ceab0141fd9b158))
+* [UIP-5727] Fix and update conditional filter recipe ([904a44b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/904a44bd9971afced3f49cd525c5c4fb7a130f1a))
+* [UIP-5754] ListView - fix infinity list keyboard navigation ([33275f0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/33275f0bf9f7b40301b3ca6c233b91b7d98f9e7f))
+* [UIP-5759] Selection shift fix for Logo Tabs recipe ([97490cd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/97490cd7ac37140edb33067531d2e75e506e9bf6))
+* [UIP-5763] Fix stepper contrast issue ([adb17f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/adb17f7e51869fcfaf8d748ee44631defedd12f7))
+* [UIP-5771] ComboBox Fix Focus of Items ([63a6431](https://gitlab.corp.pingidentity.com/ux/pingux/commit/63a6431a9f36cf12596ce542cd2d325401d81d4f))
+* [UIP-5788] Fix popover for combobox and multivalues field components ([e993be8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e993be8d86a850c66f8aa126b819591791487ef0))
+
+
+
+
+
 # [1.32.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.31.1...@pingux/astro@1.32.0) (2022-10-19)
 
 
