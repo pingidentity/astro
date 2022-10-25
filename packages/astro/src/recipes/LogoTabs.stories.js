@@ -93,6 +93,9 @@ const sx = {
     '& > [role="presentation"]': {
       height: '0px',
     },
+    '&.is-selected': {
+      mb: '4px',
+    },
   },
 };
 
