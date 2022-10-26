@@ -1,9 +1,5 @@
 import React from 'react';
-import { Divider } from 'theme-ui';
-import Text from './Text';
-import { textVariants } from '../../utils/devUtils/constants/variants.js';
-import { flatColorList } from '../../styles/colors.js';
-import { Box } from '../../index';
+import { Box, Separator, Table, TableCell, TableBody, TableHead, TableRow, Text } from '../../index';
 
 export default {
   title: 'Text',
@@ -11,58 +7,299 @@ export default {
   argTypes: {
     variant: {
       control: {
-        type: 'select',
-        options: Object.values(textVariants),
+        type: 'none',
       },
       description: 'Text variant.',
-      defaultValue: Object.values(textVariants)[0],
     },
     children: {
       control: {
-        type: 'text',
-      },
-      table: {
-        type: {
-          summary: 'string',
-        },
+        type: 'none',
       },
       description: 'Text value.',
-      defaultValue: 'Hi, this is some text!',
     },
     color: {
       control: {
-        type: 'select',
-        options: [undefined, ...flatColorList.map(([colorName]) => colorName)],
-      },
-      table: {
-        type: {
-          summary: 'string',
-        },
+        type: 'none',
       },
       description: 'Text color.',
-      defaultValue: undefined,
     },
     bg: {
       control: {
-        type: 'select',
-        options: flatColorList.map(([colorName]) => colorName),
-      },
-      table: {
-        type: {
-          summary: 'string',
-        },
+        type: 'none',
       },
       description: 'Background color.',
-      defaultValue: 'white',
     },
   },
 };
 
-export const Default = ({ children, bg, ...args }) => (
-  <Text bg={bg} {...args} p="xl">
-    {children}
-  </Text>
+const sx = {
+  cell: {
+    wordWrap: 'break-word',
+    wordBreak: 'break-word',
+  },
+  tableBody: {
+    borderBottom: 'unset',
+  },
+};
+
+const TableHeading = ({ title }) => (
+  <TableHead>
+    <TableRow key="head">
+      <TableCell sx={sx.cell} isHeading width="30%">
+        {title}
+      </TableCell>
+      <TableCell sx={sx.cell} isHeading width="30%">
+        Weight
+      </TableCell>
+      <TableCell sx={sx.cell} isHeading width="30%">
+        Size
+      </TableCell>
+      <TableCell sx={sx.cell} isHeading >
+        Example
+      </TableCell>
+    </TableRow>
+  </TableHead>
 );
+
+const TableData = ({ variant, value }) => (
+  <TableRow sx={{ backgroundColor: 'transparent !important', alignItems: 'center' }}>
+    <TableCell sx={sx.cell} width="30%"><Text>{variant}</Text></TableCell>
+    <TableCell sx={sx.cell} width="30%"><Text>{value.weight}</Text></TableCell>
+    <TableCell sx={sx.cell} width="30%"><Text>{value.fontSize}</Text></TableCell>
+    <TableCell sx={sx.cell}><Text>{value.example}</Text></TableCell>
+  </TableRow>
+);
+
+export const Default = () => {
+  const fontSizes = {
+    xx: '23px (xx)',
+    lg: '17px (lg)',
+    md: '15px (md)',
+    sm: '13px (sm)',
+    xs: '11px (xs)',
+  };
+  const fontWeights = {
+    '-1': '300 (-1)',
+    '0': '400 (0)',
+    '1': '500 (1)',
+    '3': '700 (3)',
+  };
+  const headingVariants = {
+    H1: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.xx,
+      example: (<Text variant="H1" as="H1">{'<Text variant="H1" as="H1"/>'}</Text>),
+    },
+    H2: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.lg,
+      example: (<Text variant="H2" as="H2">{'<Text variant="H2" as="H2"/>'}</Text>),
+    },
+    H3: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.md,
+      example: (<Text variant="H3" as="H3">{'<Text variant="H3" as="H3"/>'}</Text>),
+    },
+    H4: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.sm,
+      example: (<Text variant="H4" as="H4">{'<Text variant="H4" as="H4"/>'}</Text>),
+    },
+  };
+  const baseAndSubtitleVariants = {
+    'Base (default variant of Text)': {
+      weight: fontWeights[1],
+      fontSize: fontSizes.md,
+      color: 'text.primary',
+      example: (<Text variant="base">{'<Text variant="base"/>'}</Text>),
+    },
+    Subtitle: {
+      weight: fontWeights[0],
+      fontSize: fontSizes.sm,
+      color: 'text.secondary',
+      example: (<Text variant="subtitle">{'<Text variant="subtitle"/>'}</Text>),
+    },
+  };
+  const largeVariants = {
+    Bold: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.lg,
+      example: (<Text fontSize="lg" fontWeight="3">{'<Text fontSize="lg" fontWeight="3">'}</Text>),
+    },
+    Medium: {
+      weight: fontWeights[1],
+      fontSize: fontSizes.lg,
+      example: (<Text fontSize="lg" fontWeight="1">{'<Text fontSize="lg" fontWeight="1">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeights[0],
+      fontSize: fontSizes.lg,
+      example: (<Text fontSize="lg" fontWeight="0">{'<Text fontSize="lg" fontWeight="0">'}</Text>),
+    },
+  };
+  const mediumVariants = {
+    Bold: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.md,
+      example: (<Text fontSize="md" fontWeight="3">{'<Text fontSize="md" fontWeight="3">'}</Text>),
+    },
+    Medium: {
+      weight: fontWeights[1],
+      fontSize: fontSizes.md,
+      example: (<Text fontSize="md" fontWeight="1">{'<Text fontSize="md" fontWeight="1">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeights[0],
+      fontSize: fontSizes.md,
+      example: (<Text fontSize="md" fontWeight="0">{'<Text fontSize="md" fontWeight="0">'}</Text>),
+    },
+    Light: {
+      weight: fontWeights[-1],
+      fontSize: fontSizes.md,
+      example: (<Text fontSize="md" fontWeight="-1">{'<Text fontSize="md" fontWeight="-1">'}</Text>),
+    },
+  };
+  const smallVariants = {
+    Bold: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.sm,
+      example: (<Text fontSize="sm" fontWeight="3">{'<Text fontSize="sm" fontWeight="3">'}</Text>),
+    },
+    Medium: {
+      weight: fontWeights[1],
+      fontSize: fontSizes.sm,
+      example: (<Text fontSize="sm" fontWeight="1">{'<Text fontSize="sm" fontWeight="1">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeights[0],
+      fontSize: fontSizes.sm,
+      example: (<Text fontSize="sm" fontWeight="0">{'<Text fontSize="sm" fontWeight="0">'}</Text>),
+
+    },
+    Light: {
+      weight: fontWeights[-1],
+      fontSize: fontSizes.sm,
+      example: (<Text fontSize="sm" fontWeight="-1">{'<Text fontSize="sm" fontWeight="-1">'}</Text>),
+
+    },
+  };
+  const xsmallVariants = {
+    Bold: {
+      weight: fontWeights[3],
+      fontSize: fontSizes.xs,
+      example: (<Text fontSize="xs" fontWeight="3">{'<Text fontSize="xs" fontWeight="3">'}</Text>),
+    },
+    Medium: {
+      weight: fontWeights[1],
+      fontSize: fontSizes.xs,
+      example: (<Text fontSize="xs" fontWeight="1">{'<Text fontSize="xs" fontWeight="1">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeights[0],
+      fontSize: fontSizes.xs,
+      example: (<Text fontSize="xs" fontWeight="0">{'<Text fontSize="xs" fontWeight="0">'}</Text>),
+    },
+    Light: {
+      weight: fontWeights[-1],
+      fontSize: fontSizes.xs,
+      example: (<Text fontSize="xs" fontWeight="-1">{'<Text fontSize="xs" fontWeight="-1">'}</Text>),
+    },
+  };
+
+  return (
+    <>
+      <Table mb="xx">
+        <TableHeading title="Heading" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(headingVariants).map(([key, value]) =>
+          (
+            <TableData variant={key} value={value} key={key} />
+          ),
+        )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHead>
+          <TableRow key="head">
+            <TableCell sx={sx.cell} isHeading width="60%">
+              Base and Subtitle
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading width="20%">
+              Weight
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading width="30%">
+              Size
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading width="40%">
+              Color
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading >
+              Example
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(baseAndSubtitleVariants).map(([key, value]) =>
+          (
+            <TableRow sx={{ backgroundColor: 'transparent !important' }} key={key}>
+              <TableCell sx={sx.cell} width="60%"><Text>{key}</Text></TableCell>
+              <TableCell sx={sx.cell} width="25%"><Text>{value.weight}</Text></TableCell>
+              <TableCell sx={sx.cell} width="35%"><Text>{value.fontSize}</Text></TableCell>
+              <TableCell sx={sx.cell} width="45%"><Text>{value.color}</Text></TableCell>
+              <TableCell sx={sx.cell}>{value.example}</TableCell>
+            </TableRow>
+          ),
+        )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="Large" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(largeVariants).map(([key, value]) =>
+          (
+            <TableData variant={key} value={value} key={key} />
+          ),
+        )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="Medium" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(mediumVariants).map(([key, value]) =>
+          (
+            <TableData variant={key} value={value} key={key} />
+          ),
+        )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="Small" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(smallVariants).map(([key, value]) =>
+          (
+            <TableData variant={key} value={value} key={key} />
+          ),
+        )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="XSmall" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(xsmallVariants).map(([key, value]) =>
+          (
+            <TableData variant={key} value={value} key={key} />
+          ),
+        )}
+        </TableBody>
+      </Table>
+    </>
+  );
+};
 
 export const WithCustomWidth = () => (
   <Box width={200}>
@@ -93,7 +330,7 @@ export const TypographyStyleProps = () => {
         directly.
       </Text>
       <Text {...textProps}>{loremText}</Text>
-      <Divider />
+      <Separator />
       <Text variant="title">
         Typography styles can also be passed in through the sx prop for the same
         result.
