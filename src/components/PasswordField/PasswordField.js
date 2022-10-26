@@ -60,7 +60,7 @@ const PasswordField = forwardRef((props, ref) => {
 
   const [isVisible, setIsShown] = hooks.useProgressiveState(
     isVisibleProp,
-    onVisibleChangeProp);
+    isVisibleProp);
 
   // Measure the width of the input to inform the width of the menu (below).
   const [menuWidth, setMenuWidth] = useState(null);
