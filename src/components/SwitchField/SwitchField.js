@@ -59,7 +59,7 @@ const SwitchField = forwardRef((props, ref) => {
   const statusClasses = { isSelected: inputProps.checked };
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = useField({
     statusClasses,
@@ -76,7 +76,7 @@ const SwitchField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       <Label variant="forms.switch.label" {...fieldLabelProps}>
-        <Switch ref={switchRef} inputProps={fieldControlProps} {...unhandledAriaProps} />
+        <Switch ref={switchRef} inputProps={fieldControlInputProps} {...unhandledAriaProps} />
         {label}
       </Label>
       {

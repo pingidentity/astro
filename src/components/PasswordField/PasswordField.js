@@ -45,11 +45,11 @@ const PasswordField = forwardRef((props, ref) => {
 
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = hooks.useField({ status, ...others });
 
-  const { isFocused } = fieldControlProps;
+  const { isFocused } = fieldControlInputProps;
 
   const inputRef = useRef();
   const popoverRef = useRef();
@@ -100,7 +100,7 @@ const PasswordField = forwardRef((props, ref) => {
     ...overlayProps.style,
   };
 
-  const { classNames } = hooks.useStatusClasses(fieldControlProps.className, {
+  const { classNames } = hooks.useStatusClasses(fieldControlInputProps.className, {
     'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
 
@@ -121,11 +121,11 @@ const PasswordField = forwardRef((props, ref) => {
       <Box variant="forms.input.wrapper" {...fieldContainerProps} >
         <Label {...fieldLabelProps} />
         <Box variant="forms.input.container" isRow className={classNames}>
-          <Input ref={inputRef} {...fieldControlProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
+          <Input ref={inputRef} {...fieldControlInputProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
           <Box variant="forms.input.containedIcon">
             <IconButton
               aria-label={toggleShowPasswordAriaLabel}
-              isDisabled={fieldControlProps.disabled}
+              isDisabled={fieldControlInputProps.disabled}
               onPress={handleToggleShowPassword}
               size={28}
             >

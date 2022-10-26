@@ -57,7 +57,7 @@ const RadioField = forwardRef((props, ref) => {
   const statusClasses = { isDisabled, isChecked };
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = useField({
     statusClasses,
@@ -68,7 +68,7 @@ const RadioField = forwardRef((props, ref) => {
   return (
     <Box variant="forms.outerContainer" {...fieldContainerProps}>
       <Label variant="forms.label.radio" {...fieldLabelProps}>
-        <Radio ref={radioFieldRef} {...fieldControlProps} />
+        <Radio ref={radioFieldRef} {...fieldControlInputProps} />
         {label}
       </Label>
       {

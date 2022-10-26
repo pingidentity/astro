@@ -39,7 +39,7 @@ const CheckboxField = forwardRef((props, ref) => {
   const { inputProps } = useCheckbox(checkboxProps, state, checkboxRef);
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = useField({
     ...props,
@@ -49,7 +49,7 @@ const CheckboxField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       <Label variant="forms.label.checkbox" {...fieldLabelProps}>
-        <Checkbox ref={checkboxRef} {...fieldControlProps} />
+        <Checkbox ref={checkboxRef} {...fieldControlInputProps} />
         {label}
       </Label>
       {
@@ -107,7 +107,7 @@ CheckboxField.propTypes = {
   /** Handler that is called when a key is released. */
   onKeyUp: PropTypes.func,
   /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
+  fieldContainerProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input element. */
   controlProps: PropTypes.shape({}),
   /** Props object that is spread directly into the label element. */

@@ -48,7 +48,7 @@ const SearchField = forwardRef((props, ref) => {
   }, state, searchRef);
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = useField({
     ...props,
@@ -66,7 +66,7 @@ const SearchField = forwardRef((props, ref) => {
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
       <Box variant="forms.search.container">
-        <Input ref={searchRef} pl={40} pr={40} {...fieldControlProps} />
+        <Input ref={searchRef} pl={40} pr={40} {...fieldControlInputProps} />
         {
           icon &&
           <Icon

@@ -29,7 +29,7 @@ const LinkSelectField = forwardRef((props, ref) => {
     status: status === statuses.DEFAULT ? null : status,
   }, ref);
   const {
-    fieldControlProps,
+    fieldControlInputProps,
     isLoadingInitial,
     state,
     triggerProps,
@@ -38,7 +38,7 @@ const LinkSelectField = forwardRef((props, ref) => {
 
   const trigger = (
     <Button
-      className={fieldControlProps.className}
+      className={fieldControlInputProps.className}
       ref={triggerRef}
       variant="link"
       tabIndex={isDisabled ? -1 : 0}
