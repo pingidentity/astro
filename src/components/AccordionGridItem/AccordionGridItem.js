@@ -54,8 +54,11 @@ const AccordionGridItem = (props) => {
   return (
     <Box
       as="div"
+      role="row"
+      tabindex="0"
       {...mergeProps(rowProps, others)}
       aria-selected={isSelected}
+      aria-expanded={isSelected}
       className={classNames}
       variant="accordion.accordionGridItem"
       ref={rowRef}
