@@ -30,7 +30,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
     onLoadMore,
     onOpenChange,
     onSelectionChange,
-    wrapperProps,
+    fieldControlWrapperProps,
     ...others
   } = props;
   const textFieldProps = {
@@ -115,7 +115,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
         style={style}
         variant="forms.comboBox.container"
         {...hoverProps}
-        {...wrapperProps}
+        {...fieldControlWrapperProps}
       >
         <TextField
           {...containerProps}
@@ -129,7 +129,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           slots={{
             inContainer: button,
           }}
-          wrapperProps={{ ref: inputWrapperRef }}
+          fieldControlWrapperProps={{ ref: inputWrapperRef }}
         />
       </Box>
     </FocusRing>
@@ -159,7 +159,7 @@ ComboBoxInput.propTypes = {
   style: PropTypes.shape({}),
   triggerProps: PropTypes.shape({}),
   triggerRef: PropTypes.shape({}),
-  wrapperProps: PropTypes.shape({}),
+  fieldControlWrapperProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
 };
 

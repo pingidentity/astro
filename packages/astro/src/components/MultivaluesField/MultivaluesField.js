@@ -332,7 +332,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     isRequired,
     label,
     placeholder,
-    wrapperProps: {
+    fieldControlWrapperProps: {
       ref: inputRef,
       variant: 'forms.input.multivaluesWrapper',
       sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },

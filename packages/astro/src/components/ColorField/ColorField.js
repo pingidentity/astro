@@ -32,7 +32,7 @@ const ColorField = forwardRef((props, ref) => {
   const {
     align,
     buttonProps,
-    controlProps,
+    fieldControlInputProps: controlProps,
     direction,
     helperText,
     label,
@@ -66,13 +66,17 @@ const ColorField = forwardRef((props, ref) => {
 
   const { visuallyHiddenProps } = useVisuallyHidden();
 
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldLabelProps,
+  } = useField({
     ...nonAriaProps,
     labelProps: {
       ...labelProps,
       ...raLabelProps,
     },
-    controlProps: {
+    fieldControlInputProps: {
       ...controlProps,
       ...raInputProps,
     },
@@ -118,7 +122,7 @@ const ColorField = forwardRef((props, ref) => {
         {...ariaProps}
         {...buttonProps}
       />
-      <Input {...visuallyHiddenProps} {...fieldControlProps} ref={colorRef} />
+      <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
       )}
@@ -165,7 +169,7 @@ ColorField.propTypes = {
   /** Props object that is spread directly into the root (top-level) Box component. */
   containerProps: PropTypes.shape({}),
   /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
+  fieldControlInputProps: PropTypes.shape({}),
   /** Props object that is spread into the label element. */
   labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,

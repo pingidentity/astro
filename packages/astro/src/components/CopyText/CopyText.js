@@ -30,7 +30,7 @@ TooltipWrapper.propTypes = {
  */
 
 const CopyText = forwardRef((props, ref) => {
-  const { children, textToCopy, tooltipText, mode, tooltipProps, wrapperProps, ...others } = props;
+  const { children, textToCopy, tooltipText, mode, tooltipProps, fieldControlWrapperProps, ...others } = props;
   const value = textToCopy || (mode === 'link' ? children.props.href : children.props.children);
 
   const [isCopied, setIsCopied] = useState(false);
@@ -106,7 +106,7 @@ const CopyText = forwardRef((props, ref) => {
           isRow
           tabIndex={0}
           {...mergeProps(hoverProps, others)}
-          {...wrapperProps}
+          {...fieldControlWrapperProps}
         >
           {content}
           <CopyButton onPress={copyToClipboard} {...focusProps} />
@@ -121,7 +121,7 @@ const CopyText = forwardRef((props, ref) => {
         ref={ref}
         isRow
         variant="copyText.copy"
-        {...wrapperProps}
+        {...fieldControlWrapperProps}
         {...others}
       >
         {content}
@@ -159,7 +159,7 @@ CopyText.propTypes = {
   /** Props to apply to the tooltip in nonClickableContent mode. */
   tooltipProps: PropTypes.shape({}),
   /** Props to apply to the wrapper in nonClickableContent mode. */
-  wrapperProps: PropTypes.shape({}),
+  fieldControlWrapperProps: PropTypes.shape({}),
 };
 
 CopyText.defaultProps = {

@@ -25,7 +25,7 @@ const SelectFieldBase = forwardRef(({
   columnStyleProps,
   defaultText,
   fieldContainerProps,
-  fieldControlProps,
+  fieldControlInputProps,
   fieldLabelProps,
   helperText,
   isLoadingInitial,
@@ -46,9 +46,9 @@ const SelectFieldBase = forwardRef(({
   const { ariaProps } = getAriaAttributeProps(others);
 
   const defaultTrigger = (
-    <Box className={fieldControlProps.className} variant="forms.input.container">
+    <Box className={fieldControlInputProps.className} variant="forms.input.container">
       <Button
-        className={fieldControlProps.className}
+        className={fieldControlInputProps.className}
         ref={triggerRef}
         variant="forms.select"
         {...triggerProps}
@@ -124,7 +124,7 @@ SelectFieldBase.propTypes = {
     sx: PropTypes.shape({}),
   }),
   /** Determines props that applied to control field. */
-  fieldControlProps: PropTypes.shape({
+  fieldControlInputProps: PropTypes.shape({
     className: PropTypes.string,
   }),
   /** Determines props that applied to label of field. */

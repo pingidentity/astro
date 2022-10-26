@@ -52,7 +52,7 @@ export default {
         type: 'none',
       },
     },
-    controlProps: {
+    fieldControlInputProps: {
       control: {
         type: 'none',
       },

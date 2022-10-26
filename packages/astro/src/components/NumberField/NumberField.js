@@ -45,7 +45,11 @@ const NumberField = forwardRef((props, ref) => {
     incrementButtonProps,
     decrementButtonProps,
   } = useNumberField(props, state, inputRef);
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField(
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldLabelProps,
+  } = useField(
     props,
   );
 
@@ -69,27 +73,27 @@ const NumberField = forwardRef((props, ref) => {
   const onInputFocus = useCallback(
     (e) => {
       e.persist();
-      fieldControlProps.onFocus(e);
+      fieldControlInputProps.onFocus(e);
       inputProps.onFocus(e);
     },
-    [fieldControlProps, inputProps],
+    [fieldControlInputProps, inputProps],
   );
   const onInputBlur = useCallback(
     (e) => {
       e.persist();
-      fieldControlProps.onBlur(e);
+      fieldControlInputProps.onBlur(e);
       inputProps.onBlur(e);
     },
-    [fieldControlProps, inputProps],
+    [fieldControlInputProps, inputProps],
   );
 
-  const updatedFieldControlProps = useMemo(
+  const updatedFieldControlInputProps = useMemo(
     () => ({
-      ...fieldControlProps,
+      ...fieldControlInputProps,
       onFocus: onInputFocus,
       onBlur: onInputBlur,
     }),
-    [fieldControlProps, onInputBlur, onInputFocus],
+    [fieldControlInputProps, onInputBlur, onInputFocus],
   );
 
   const onInputChange = (e) => {
@@ -123,14 +127,14 @@ const NumberField = forwardRef((props, ref) => {
       <Box variant="numberField.noDefaultArrows" {...groupProps}>
         <Box
           variant="numberField.arrowsWrapper"
-          className={fieldControlProps.className}
+          className={fieldControlInputProps.className}
         >
           <Input
             variant="forms.input.numberField"
             ref={inputRef}
             // we don't want to merge this props, we want to
             // overwrite them like defaultValue, value, ect.
-            {...updatedFieldControlProps}
+            {...updatedFieldControlInputProps}
             {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
             onChange={onInputChange}
           />

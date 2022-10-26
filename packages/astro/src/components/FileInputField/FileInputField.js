@@ -49,7 +49,11 @@ const FileInputField = forwardRef(({
   useImperativeHandle(ref, () => inputRef.current);
 
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldLabelProps,
+  } = useField({
     status,
     isDisabled,
     ...nonAriaProps,
@@ -169,7 +173,7 @@ const FileInputField = forwardRef(({
         <Input
           {...mergeProps(
             visuallyHiddenProps,
-            fieldControlProps,
+            fieldControlInputProps,
             getInputProps(),
           )}
           aria-label="File Input"

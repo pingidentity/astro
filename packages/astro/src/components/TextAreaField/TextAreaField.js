@@ -15,7 +15,7 @@ const TextAreaField = forwardRef((props, ref) => {
   const statusClasses = { isUnresizable };
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = useField({ statusClasses, ...props });
 
@@ -86,8 +86,8 @@ const TextAreaField = forwardRef((props, ref) => {
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
-      <Box isRow variant="forms.input.container" className={fieldControlProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
-        <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} sx={slots?.inContainer && { paddingRight: '35px' }} />
+      <Box isRow variant="forms.input.container" className={fieldControlInputProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
+        <TextArea ref={textAreaRef} rows={rows} {...fieldControlInputProps} sx={slots?.inContainer && { paddingRight: '35px' }} />
         {
           slots?.inContainer &&
             <Box variant="forms.textFieldInContainerSlot" ref={slotContainer} >
