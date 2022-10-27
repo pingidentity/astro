@@ -30,7 +30,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
     onLoadMore,
     onOpenChange,
     onSelectionChange,
-    fieldControlWrapperProps,
+    wrapperProps,
     ...others
   } = props;
   const textFieldProps = {
@@ -115,7 +115,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
         style={style}
         variant="forms.comboBox.container"
         {...hoverProps}
-        {...fieldControlWrapperProps}
+        {...wrapperProps}
       >
         <TextField
           {...containerProps}
@@ -129,7 +129,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           slots={{
             inContainer: button,
           }}
-          fieldControlWrapperProps={{ ref: inputWrapperRef }}
+          wrapperProps={{ ref: inputWrapperRef }}
         />
       </Box>
     </FocusRing>

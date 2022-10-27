@@ -87,7 +87,7 @@ const CodeView = forwardRef((props, ref) => {
       mode="link"
       textToCopy={children}
       tooltipProps={{ offset: 15 }}
-      fieldControlWrapperProps={{
+      wrapperProps={{
         className: classNames,
         variant: 'codeView.wrapper',
         ...others,
