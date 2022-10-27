@@ -47,6 +47,7 @@ const PasswordField = forwardRef((props, ref) => {
     fieldContainerProps,
     fieldControlInputProps,
     fieldLabelProps,
+    fieldControlWrapperProps,
   } = hooks.useField({ status, ...others });
 
   const { isFocused } = fieldControlInputProps;
@@ -100,7 +101,7 @@ const PasswordField = forwardRef((props, ref) => {
     ...overlayProps.style,
   };
 
-  const { classNames } = hooks.useStatusClasses(fieldControlInputProps.className, {
+  const { classNames } = hooks.useStatusClasses(fieldControlWrapperProps.className, {
     'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
 
@@ -118,9 +119,9 @@ const PasswordField = forwardRef((props, ref) => {
 
   return (
     <>
-      <Box variant="forms.input.wrapper" {...fieldContainerProps} >
+      <Box variant="forms.input.container" {...fieldContainerProps} >
         <Label {...fieldLabelProps} />
-        <Box variant="forms.input.container" isRow className={classNames}>
+        <Box variant="forms.input.wrapper" isRow {...fieldControlWrapperProps} className={classNames}>
           <Input ref={inputRef} {...fieldControlInputProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
           <Box variant="forms.input.containedIcon">
             <IconButton

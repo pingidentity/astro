@@ -26,6 +26,7 @@ const SelectFieldBase = forwardRef(({
   defaultText,
   fieldContainerProps,
   fieldControlInputProps,
+  fieldControlWrapperProps,
   fieldLabelProps,
   helperText,
   isLoadingInitial,
@@ -46,7 +47,7 @@ const SelectFieldBase = forwardRef(({
   const { ariaProps } = getAriaAttributeProps(others);
 
   const defaultTrigger = (
-    <Box className={fieldControlInputProps.className} variant="forms.input.container">
+    <Box {...fieldControlWrapperProps} variant="forms.input.wrapper">
       <Button
         className={fieldControlInputProps.className}
         ref={triggerRef}
@@ -80,7 +81,7 @@ const SelectFieldBase = forwardRef(({
   );
 
   return (
-    <Box ref={ref} variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
+    <Box ref={ref} variant="forms.input.container" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       {/* Actual label is applied to the hidden select */}
       <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect

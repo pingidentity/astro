@@ -38,7 +38,7 @@ test('default useField', () => {
 
 test('should return props objects for field components', () => {
   const { result } = renderHook(() => useField(defaultProps));
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = result.current;
+  const { fieldContainerProps, fieldControlInputProps, fieldLabelProps } = result.current;
 
   expect(fieldContainerProps).toEqual({
     className: 'field-container has-value',
@@ -47,10 +47,11 @@ test('should return props objects for field components', () => {
     onFocus: expect.any(Function),
     sx: expect.objectContaining({ position: 'relative' }),
   });
-  expect(fieldControlProps).toEqual({
+  expect(fieldControlInputProps).toEqual({
     autoComplete: defaultProps.autoComplete,
+    autoCorrect: undefined,
     autoFocus: defaultProps.hasAutoFocus,
-    className: `${defaultProps.className} is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
+    className: `${defaultProps.className} field-control-input is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
     defaultSelected: true,
     defaultValue: defaultProps.defaultValue,
     disabled: true,
@@ -71,7 +72,7 @@ test('should return props objects for field components', () => {
   });
   expect(fieldLabelProps).toEqual({
     children: defaultProps.label,
-    className: `${defaultProps.className} is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
+    className: `${defaultProps.className} field-label is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
     id: expect.any(String),
     htmlFor: expect.any(String),
     isRequired: true,
@@ -82,8 +83,8 @@ test('should support autocomplete additionally', () => {
   const newProps = { ...defaultProps, autocomplete: 'new-password' };
   delete newProps.autoComplete;
   const { result } = renderHook(() => useField(newProps));
-  const { fieldControlProps } = result.current;
-  expect(fieldControlProps).toMatchObject({ autoComplete: 'new-password' });
+  const { fieldControlInputProps } = result.current;
+  expect(fieldControlInputProps).toMatchObject({ autoComplete: 'new-password' });
 });
 
 test('should return isFloatLabelActive class for container', () => {
@@ -101,7 +102,7 @@ test('should return isFloatLabelActive class for container', () => {
   expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
 
   // Does not have the class if the value is invalid
-  act(() => result.current.fieldControlProps.onChange({ target: { value: undefined } }));
+  act(() => result.current.fieldControlInputProps.onChange({ target: { value: undefined } }));
   expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
 
   // Has the class if the container has focus within it
@@ -151,17 +152,17 @@ test('should return hasValue class for container when onChange updates internal 
   expect(result.current.fieldContainerProps.className).not.toContain('has-value');
 
   // 0 should be a valid value
-  act(() => result.current.fieldControlProps.onChange({ target: { value: 0 } }));
+  act(() => result.current.fieldControlInputProps.onChange({ target: { value: 0 } }));
   expect(result.current.fieldContainerProps.className).toContain('has-value');
   numCalls += 1;
 
   // undefined is not a valid value
-  act(() => result.current.fieldControlProps.onChange({ target: { value: undefined } }));
+  act(() => result.current.fieldControlInputProps.onChange({ target: { value: undefined } }));
   expect(result.current.fieldContainerProps.className).not.toContain('has-value');
   numCalls += 1;
 
   // a non-empty string is a valid value
-  act(() => result.current.fieldControlProps.onChange({ target: { value: 'a' } }));
+  act(() => result.current.fieldControlInputProps.onChange({ target: { value: 'a' } }));
   expect(result.current.fieldContainerProps.className).toContain('has-value');
   numCalls += 1;
 

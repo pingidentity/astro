@@ -159,7 +159,7 @@ ComboBoxInput.propTypes = {
   style: PropTypes.shape({}),
   triggerProps: PropTypes.shape({}),
   triggerRef: PropTypes.shape({}),
-  fieldControlWrapperProps: PropTypes.shape({}),
+  wrapperProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
 };
 
