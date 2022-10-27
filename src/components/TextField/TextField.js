@@ -11,7 +11,7 @@ import useColumnStyles from '../../hooks/useColumnStyles';
  * Combines a text input, label, and helper text for a complete, form-ready solution.
  */
 const TextField = forwardRef((props, ref) => {
-  const { helperText, slots, status, fieldControlWrapperProps } = props;
+  const { helperText, slots, status, wrapperProps } = props;
   const {
     fieldContainerProps,
     fieldControlInputProps,
@@ -31,7 +31,7 @@ const TextField = forwardRef((props, ref) => {
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
-      <Box variant="forms.input.container" className={fieldControlInputProps.className} {...fieldControlWrapperProps}>
+      <Box variant="forms.input.container" className={fieldControlInputProps.className} {...wrapperProps}>
         {slots?.beforeInput}
         <Input ref={inputRef} {...fieldControlInputProps} />
         {slots?.inContainer}
@@ -116,7 +116,7 @@ TextField.propTypes = {
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input wrapper element. */
-  fieldControlWrapperProps: PropTypes.shape({}),
+  wrapperProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
 };
 

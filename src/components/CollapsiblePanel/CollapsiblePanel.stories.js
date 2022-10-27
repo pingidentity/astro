@@ -275,7 +275,7 @@ export const CollapsiblePanelWithBadge = (args) => {
                       )
                       : (
                         <CheckboxField
-                          fieldControlInputProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
+                          controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
                           onChange={() => changeSelection(item.key)}
                           isSelected={selectedItems.some(el => el.key === item.key)}
                         />

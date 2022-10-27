@@ -85,7 +85,7 @@ export const Default = () => {
         width="100%"
         isOpen={isOpen}
         onOpenChange={setIsOpen}
-        fieldControlWrapperProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
+        wrapperProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
         controlProps={{ 'aria-label': 'Country Picker' }}
         defaultItems={Object.entries(countriesObj)}
         inputValue={getInputValue()}

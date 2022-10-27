@@ -32,7 +32,7 @@ const ColorField = forwardRef((props, ref) => {
   const {
     align,
     buttonProps,
-    fieldControlInputProps: controlProps,
+    controlProps,
     direction,
     helperText,
     label,
@@ -76,7 +76,7 @@ const ColorField = forwardRef((props, ref) => {
       ...labelProps,
       ...raLabelProps,
     },
-    fieldControlInputProps: {
+    controlProps: {
       ...controlProps,
       ...raInputProps,
     },
@@ -169,7 +169,7 @@ ColorField.propTypes = {
   /** Props object that is spread directly into the root (top-level) Box component. */
   containerProps: PropTypes.shape({}),
   /** Props object that is spread into the input element. */
-  fieldControlInputProps: PropTypes.shape({}),
+  controlProps: PropTypes.shape({}),
   /** Props object that is spread into the label element. */
   labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
