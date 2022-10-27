@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.32.1...@pingux/astro@1.33.0) (2022-10-27)
+
+
+### Bug Fixes
+
+* [UIP-5698] uiLibraryOverride Theme Link and Icon Button Update ([1f9924e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1f9924e30bb152de2089969865b7f0bf0f079dc1))
+* [UIP-5706] Accordion Grid - add aria-expanded and change focus style ([13ae129](https://gitlab.corp.pingidentity.com/ux/pingux/commit/13ae129b877c5a50797622f22f119771eef45e18))
+* [UIP-5723] Help hint improvements ([24acce7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/24acce7318af5f77574d97c3eb0d4ead7af10654))
+* [UIP-5739] PasswordField fix error on mount ([bdcd21f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bdcd21f4e437bd985b7846b659637256fae79f64))
+* [UIP-5783] Disabled Box: replace inputs with image and text ([ee91ad3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ee91ad30aa3954bad76085f813677341d609a3c7))
+
+
+### Features
+
+* [UIP-5644] Text component and recipe improvements ([a68ef47](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a68ef479985adf8cc9b078b0c10eb3db48cf4152))
+
+
+
+
+
 ## [1.32.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.32.0...@pingux/astro@1.32.1) (2022-10-25)
 
 
