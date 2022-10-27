@@ -1,3 +1,5 @@
+import { defaultFocus } from '../variants/buttons';
+
 const accordionTitle = {
   display: 'inline-block !important',
   overflowWrap: 'break-word',
@@ -43,10 +45,7 @@ const accordionGridHeader = {
   flexGrow: 1,
   fontWeight: 700,
   '&.is-focused': {
-    outline: 'none',
-    boxShadow: 'focus',
-    WebkitBoxShadow: 'focus',
-    MozBoxShadow: 'focus',
+    ...defaultFocus,
     zIndex: '10',
   },
   minHeight: '64px',

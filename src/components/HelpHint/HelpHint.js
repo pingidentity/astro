@@ -1,5 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+
 import IconButton from '../IconButton';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 import Icon from '../Icon';
@@ -25,12 +27,14 @@ const HelpHint = forwardRef((props, ref) => {
     ...others
   } = props;
 
+  const tooltipId = uuid();
+
   return (
     <TooltipTrigger ref={ref} direction="top" {...others} {...tooltipProps} >
-      <IconButton variant="helpHint" aria-label="label help hint" data-testid="help-hint__button" {...iconButtonProps}>
+      <IconButton variant="helpHint" aria-label="label help hint" data-testid="help-hint__button" {...iconButtonProps} aria-describedby={tooltipId} >
         <Icon icon={HelpIcon} />
       </IconButton>
-      <Tooltip {...tooltipProps} >{children}</Tooltip>
+      <Tooltip {...tooltipProps} role="tooltip" aria-live="polite" id={tooltipId}>{children}</Tooltip>
     </TooltipTrigger>
   );
 });
