@@ -108,7 +108,7 @@ export const Default = () => {
                     <Bracket />
                     <Box ml="3px" width="100%" >
                       <Box
-                        variant="forms.input.container"
+                        variant="forms.input.wrapper"
                         bg="white"
                         isRow
                         sx={sx.allConditionsBox}
@@ -129,7 +129,7 @@ export const Default = () => {
                 <Box isRow >
                   <Bracket isLast />
                   <Box
-                    variant="forms.input.container"
+                    variant="forms.input.wrapper"
                     mt="md"
                     sx={sx.borderedBoxStyles}
                   >
@@ -148,7 +148,7 @@ export const Default = () => {
                           <Bracket isLast={index === anyConditions.length - 1} />
                           <Box
                             mt="md"
-                            variant="forms.input.container"
+                            variant="forms.input.wrapper"
                             bg="white"
                             isRow
                             width="100%"
@@ -225,7 +225,7 @@ export const Default = () => {
               <Box isRow>
                 <Icon icon={DragVerticalIcon} mr="sm" />
                 <Box
-                  variant="forms.input.container"
+                  variant="forms.input.wrapper"
                   sx={sx.borderedBoxStyles}
                 >
                   <Box isRow alignItems="center" mb="md">

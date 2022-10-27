@@ -49,6 +49,7 @@ const NumberField = forwardRef((props, ref) => {
     fieldContainerProps,
     fieldControlInputProps,
     fieldLabelProps,
+    fieldControlWrapperProps,
   } = useField(
     props,
   );
@@ -127,7 +128,7 @@ const NumberField = forwardRef((props, ref) => {
       <Box variant="numberField.noDefaultArrows" {...groupProps}>
         <Box
           variant="numberField.arrowsWrapper"
-          className={fieldControlInputProps.className}
+          {...fieldControlWrapperProps}
         >
           <Input
             variant="forms.input.numberField"

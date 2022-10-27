@@ -98,6 +98,7 @@ const useSelectField = (props, ref) => {
     fieldContainerProps,
     fieldControlInputProps,
     fieldLabelProps,
+    fieldControlWrapperProps,
   } = useField({
     ...props,
     placeholder: props.labelMode === modes.FLOAT ? '' : placeholder,
@@ -204,6 +205,7 @@ const useSelectField = (props, ref) => {
     columnStyleProps,
     fieldContainerProps,
     fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
     isLoadingInitial,
     listBoxRef,

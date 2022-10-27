@@ -11,11 +11,12 @@ import useColumnStyles from '../../hooks/useColumnStyles';
  * Combines a text input, label, and helper text for a complete, form-ready solution.
  */
 const TextField = forwardRef((props, ref) => {
-  const { helperText, slots, status, wrapperProps } = props;
+  const { helperText, slots, status } = props;
   const {
     fieldContainerProps,
     fieldControlInputProps,
     fieldLabelProps,
+    fieldWrapperProps,
   } = useField(props);
   const inputRef = useRef();
   const labelRef = useRef();
@@ -27,11 +28,10 @@ const TextField = forwardRef((props, ref) => {
   const { isLabelHigher } = useLabelHeight({ labelRef, inputRef });
   const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
-
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
+    <Box variant="forms.input.container" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
-      <Box variant="forms.input.container" className={fieldControlInputProps.className} {...wrapperProps}>
+      <Box variant="forms.input.wrapper"{...fieldWrapperProps}>
         {slots?.beforeInput}
         <Input ref={inputRef} {...fieldControlInputProps} />
         {slots?.inContainer}

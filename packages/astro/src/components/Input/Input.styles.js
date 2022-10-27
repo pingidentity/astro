@@ -73,7 +73,7 @@ input.small = {
   pr: 'sm',
 };
 
-input.wrapper = {
+input.container = {
   position: 'relative',
   '&.is-left-label': {
     display: 'inline-grid',
@@ -85,7 +85,7 @@ input.wrapper = {
 };
 
 // Used to give a blue left border to inputs
-input.container = {
+input.wrapper = {
   position: 'relative',
   height: 'max-content',
   '> input': {
