@@ -119,9 +119,9 @@ const PasswordField = forwardRef((props, ref) => {
 
   return (
     <>
-      <Box variant="forms.input.container" {...fieldContainerProps} >
+      <Box variant="forms.input.fieldContainer" {...fieldContainerProps} >
         <Label {...fieldLabelProps} />
-        <Box variant="forms.input.wrapper" isRow {...fieldControlWrapperProps} className={classNames}>
+        <Box variant="forms.input.fieldControlWrapper" isRow {...fieldControlWrapperProps} className={classNames}>
           <Input ref={inputRef} {...fieldControlInputProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
           <Box variant="forms.input.containedIcon">
             <IconButton

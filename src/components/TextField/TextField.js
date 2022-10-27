@@ -29,9 +29,9 @@ const TextField = forwardRef((props, ref) => {
   const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
   return (
-    <Box variant="forms.input.container" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
+    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
-      <Box variant="forms.input.wrapper" {...fieldControlWrapperProps}>
+      <Box variant="forms.input.fieldControlWrapper" {...fieldControlWrapperProps}>
         {slots?.beforeInput}
         <Input ref={inputRef} {...fieldControlInputProps} />
         {slots?.inContainer}

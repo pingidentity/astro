@@ -39,7 +39,7 @@ export const Default = () => {
           <Box
             mt="md"
             ml="xs"
-            variant="forms.input.wrapper"
+            variant="forms.input.fieldControlWrapper"
             bg="white"
             isRow
             alignItems="center"

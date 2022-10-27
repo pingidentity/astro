@@ -73,7 +73,7 @@ input.small = {
   pr: 'sm',
 };
 
-input.container = {
+input.fieldContainer = {
   position: 'relative',
   '&.is-left-label': {
     display: 'inline-grid',
@@ -85,7 +85,7 @@ input.container = {
 };
 
 // Used to give a blue left border to inputs
-input.wrapper = {
+input.fieldControlWrapper = {
   position: 'relative',
   height: 'max-content',
   '> input': {
@@ -155,7 +155,7 @@ input.containedIcon = {
 };
 
 input.multivaluesWrapper = {
-  ...input.container,
+  ...input.fieldContainer,
   bg: 'white',
   borderColor: 'neutral.80',
   borderStyle: 'solid',
