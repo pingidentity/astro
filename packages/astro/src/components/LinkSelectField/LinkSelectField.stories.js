@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { OverlayProvider } from '@react-aria/overlays';
-import { useAsyncList } from '@react-stately/data';
+import { OverlayProvider } from 'react-aria';
+import { useAsyncList } from 'react-stately';
 
 import { Box, Item, LinkSelectField, Separator } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';

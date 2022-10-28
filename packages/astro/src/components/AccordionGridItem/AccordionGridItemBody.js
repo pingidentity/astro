@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
+import { mergeProps } from 'react-aria';
 import { useGridCell } from '@react-aria/grid';
 import { useHover } from '@react-aria/interactions';
+
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import Box from '../Box';
 import { useStatusClasses } from '../../hooks';

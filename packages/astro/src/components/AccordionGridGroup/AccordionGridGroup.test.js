@@ -1,6 +1,7 @@
 import React from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import {

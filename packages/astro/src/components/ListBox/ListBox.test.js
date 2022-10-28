@@ -1,8 +1,8 @@
 import React from 'react';
 import { axe } from 'jest-axe';
+import { Section } from 'react-stately';
 import { useListState } from '@react-stately/list';
 import { render, screen } from '@testing-library/react';
-import { Section } from '@react-stately/collections';
 
 import ListBox from '.';
 import { Item } from '../../index';

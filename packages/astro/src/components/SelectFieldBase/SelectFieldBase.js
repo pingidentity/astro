@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { HiddenSelect } from '@react-aria/select';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import PropTypes from 'prop-types';
+import { HiddenSelect } from 'react-aria';
 
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';

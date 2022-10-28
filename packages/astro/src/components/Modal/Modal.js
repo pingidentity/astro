@@ -1,14 +1,14 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 import {
+  FocusScope,
+  OverlayContainer,
+  useDialog,
+  useModal,
   useOverlay,
   usePreventScroll,
-  useModal,
-  OverlayContainer,
-} from '@react-aria/overlays';
-import { useDialog } from '@react-aria/dialog';
-import { FocusScope } from '@react-aria/focus';
-import CloseIcon from 'mdi-react/CloseIcon';
+} from 'react-aria';
 
 import Box from '../Box';
 import IconButton from '../IconButton';

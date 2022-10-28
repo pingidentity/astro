@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
+import { useVisuallyHidden } from 'react-aria';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
-import { action } from '@storybook/addon-actions';
 import useResizeObserver from 'use-resize-observer';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
+import { action } from '@storybook/addon-actions';
 import { neutral } from '../../styles/colors';
 import {
   Box,

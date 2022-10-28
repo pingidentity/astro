@@ -1,8 +1,8 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
-import { useToggleState } from '@react-stately/toggle';
-import { useSwitch } from '@react-aria/switch';
+import PropTypes from 'prop-types';
+import { useSwitch } from 'react-aria';
+import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
 
 import { Box, FieldHelperText, Label, Switch } from '../../';

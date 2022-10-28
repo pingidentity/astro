@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
 
 
 import CreateIcon from 'mdi-react/CreateIcon';
