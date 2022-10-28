@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
+
 import { useOverlayPanelState } from '../../hooks';
 import OverlayPanel from './OverlayPanel';
 import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages, Button } from '../../index';

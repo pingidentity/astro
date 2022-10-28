@@ -1,10 +1,9 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps, useFocusRing, useLink } from 'react-aria';
 import { Link as ThemeUILink } from 'theme-ui';
-import { useLink } from '@react-aria/link';
-import { useFocusRing } from '@react-aria/focus';
 import { useHover, usePress } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
+
 import { usePropWarning, useStatusClasses } from '../../hooks';
 
 /**

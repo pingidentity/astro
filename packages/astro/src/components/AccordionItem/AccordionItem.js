@@ -2,11 +2,10 @@ import React, { forwardRef, useRef, useContext, useImperativeHandle } from 'reac
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
+import { mergeProps, useButton } from 'react-aria';
 import { Button as ThemeUIButton } from 'theme-ui';
-import { useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
 import { useAccordionItem } from '@react-aria/accordion';
-import { useButton } from '@react-aria/button';
+import { useHover } from '@react-aria/interactions';
 
 import { useFocusRing } from '@react-aria/focus';
 import { Text, Icon, Box } from '../../index';

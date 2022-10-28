@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useListBoxSection } from '@react-aria/listbox';
 import { useLocale } from '@react-aria/i18n';
+import { useListBoxSection } from '@react-aria/listbox';
 import { layoutInfoToStyle, useVirtualizerItem } from '@react-aria/virtualizer';
+
 import Box from '../Box';
 
 const ListBoxSection = (props) => {

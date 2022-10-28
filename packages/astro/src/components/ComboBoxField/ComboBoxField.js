@@ -6,14 +6,11 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from 'react';
-import { useComboBox } from '@react-aria/combobox';
-import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import { FocusScope } from '@react-aria/focus';
-import { useFilter } from '@react-aria/i18n';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
-import { useComboBoxState } from '@react-stately/combobox';
 import PropTypes from 'prop-types';
-
+import { DismissButton, FocusScope, useComboBox, useOverlayPosition } from 'react-aria';
+import { useComboBoxState } from 'react-stately';
+import { useFilter } from '@react-aria/i18n';
+import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import ComboBoxInput from '../ComboBox';

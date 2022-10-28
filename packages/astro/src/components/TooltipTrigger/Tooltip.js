@@ -1,5 +1,6 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
-import { useTooltip } from '@react-aria/tooltip';
+import { useTooltip } from 'react-aria';
+
 import { TooltipContext } from '../../context/TooltipContext/index';
 import Box from '../Box';
 import Text from '../Text';

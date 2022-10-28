@@ -1,11 +1,12 @@
 import React, { useState, useRef, useMemo } from 'react';
-import { useOverlayPosition } from '@react-aria/overlays';
-import { useLayoutEffect } from '@react-aria/utils';
-import SearchIcon from 'mdi-react/SearchIcon';
 import Email from 'mdi-react/EmailIcon';
 import Pin from 'mdi-react/PinIcon';
+import SearchIcon from 'mdi-react/SearchIcon';
+import { FocusScope, useOverlayPosition } from 'react-aria';
+import { createFocusManager } from '@react-aria/focus';
 import { useFilter } from '@react-aria/i18n';
-import { FocusScope, createFocusManager } from '@react-aria/focus';
+import { useLayoutEffect } from '@react-aria/utils';
+
 import { ListView, Item, IconButton, Text, PopoverContainer, Box, Icon, SearchField } from '../index';
 
 export default {

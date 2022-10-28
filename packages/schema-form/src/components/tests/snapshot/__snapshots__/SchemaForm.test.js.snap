@@ -5698,6 +5698,7 @@ exports[`single fields select field 1`] = `
               size="2"
               tabindex="-1"
             >
+              <option />
               <option
                 value="foo"
               >
@@ -8615,6 +8616,7 @@ exports[`single fields select field with default 1`] = `
               size="2"
               tabindex="-1"
             >
+              <option />
               <option
                 value="foo"
               >

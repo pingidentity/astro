@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps } from 'react-aria';
 import { useGridRow } from '@react-aria/grid';
-import { mergeProps } from '@react-aria/utils';
+
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import Box from '../Box';
 import AccordionGridItemHeader from './AccordionGridItemHeader';

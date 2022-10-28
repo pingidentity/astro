@@ -1,7 +1,8 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import { useAccordion } from '@react-aria/accordion';
-import { useTreeState } from '@react-stately/tree';
 import PropTypes from 'prop-types';
+import { useTreeState } from 'react-stately';
+import { useAccordion } from '@react-aria/accordion';
+
 import { Box } from '../../index';
 import AccordionItem from '../AccordionItem';
 import { AccordionContext } from '../../context/AccordionContext';

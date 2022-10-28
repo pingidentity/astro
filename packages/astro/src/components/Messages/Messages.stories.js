@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { Item } from '@react-stately/collections';
 import AccountIcon from 'mdi-react/AccountIcon';
+import { Item } from 'react-stately';
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import { Box, Button, Messages } from '../..';

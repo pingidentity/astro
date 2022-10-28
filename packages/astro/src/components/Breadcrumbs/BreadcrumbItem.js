@@ -6,10 +6,10 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { useBreadcrumbItem } from '@react-aria/breadcrumbs';
-import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
 import { omit } from 'lodash/object';
+import PropTypes from 'prop-types';
+import { mergeProps, useBreadcrumbItem } from 'react-aria';
+
 import { usePropWarning } from '../../hooks/';
 import { Button, IconButton, Text, Link } from '../../index';
 

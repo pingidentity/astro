@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import { useCheckbox } from '@react-aria/checkbox';
-import { useToggleState } from '@react-stately/toggle';
 import PropTypes from 'prop-types';
+import { useCheckbox } from 'react-aria';
+import { useToggleState } from 'react-stately';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';

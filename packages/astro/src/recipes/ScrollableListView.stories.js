@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Item } from '@react-stately/collections';
 import CreateIcon from 'mdi-react/CreateIcon';
-import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
+import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import { Item } from 'react-stately';
 
 import { SearchField, ListView, Box, IconButton, ScrollBox, Text, Icon } from '../index';
 
