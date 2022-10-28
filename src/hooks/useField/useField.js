@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import omit from 'lodash/omit';
 import noop from 'lodash/noop';
-import { useLabel } from '@react-aria/label';
+import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
 
 import { getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';

@@ -1,9 +1,9 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { useFocusRing } from '@react-aria/focus';
 import PropTypes from 'prop-types';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useGridCell } from '@react-aria/grid';
 import { useHover, usePress } from '@react-aria/interactions';
+
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
 import { useAccordionGridContext } from '../../context/AccordionGridContext';

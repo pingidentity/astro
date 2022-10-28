@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAsyncList } from '@react-stately/data';
-import ApplicationIcon from 'mdi-react/ApplicationIcon';
-import { action } from '@storybook/addon-actions';
-import { faker } from '@faker-js/faker';
 import isChromatic from 'chromatic/isChromatic';
+import ApplicationIcon from 'mdi-react/ApplicationIcon';
+import { useAsyncList } from 'react-stately';
+import { faker } from '@faker-js/faker';
+import { action } from '@storybook/addon-actions';
 
 import {
   DataTable,

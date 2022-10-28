@@ -1,8 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
+import { FocusScope } from 'react-aria';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
-import { FocusScope } from '@react-aria/focus';
-import { Item } from '@react-stately/collections';
+
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 

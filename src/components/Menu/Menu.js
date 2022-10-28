@@ -5,10 +5,9 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useMenu } from '@react-aria/menu';
-import { useTreeState } from '@react-stately/tree';
-import { useFocusRing } from '@react-aria/focus';
-import { useSyncRef, mergeProps } from '@react-aria/utils';
+import { mergeProps, useFocusRing, useMenu } from 'react-aria';
+import { useTreeState } from 'react-stately';
+import { useSyncRef } from '@react-aria/utils';
 
 import { MenuContext } from '../../context/MenuContext';
 import { usePropWarning } from '../../hooks';

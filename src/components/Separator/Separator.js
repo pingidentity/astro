@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { useSeparator } from '@react-aria/separator';
+import { useSeparator } from 'react-aria';
 
 import Box from '../Box/Box';
 import { useStatusClasses } from '../../hooks';

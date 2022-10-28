@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
+import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 import PropTypes from 'prop-types';
 import { useOption } from '@react-aria/listbox';
-import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { action } from '@storybook/addon-actions';
+import { useAsyncList } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
-import { useAsyncList } from '@react-stately/data';
+import { action } from '@storybook/addon-actions';
 
 import { Item, OverlayProvider, Section } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';

@@ -1,10 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
-import { FocusScope } from '@react-aria/focus';
+import { DismissButton, FocusScope, useMenuTrigger, useOverlayPosition } from 'react-aria';
+import { useMenuTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
-import { useMenuTrigger } from '@react-aria/menu';
-import { useMenuTriggerState } from '@react-stately/menu';
 
 import PopoverContainer from '../PopoverContainer';
 import { MenuContext } from '../../context/MenuContext';

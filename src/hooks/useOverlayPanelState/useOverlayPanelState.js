@@ -1,4 +1,4 @@
-import { useOverlayTriggerState } from '@react-stately/overlays';
+import { useOverlayTriggerState } from 'react-stately';
 
 /**
  * Returns state-related data and functions for use with a Modal component.

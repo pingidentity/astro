@@ -4,8 +4,9 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useTabList } from '@react-aria/tabs';
-import { useTabListState } from '@react-stately/tabs';
+import { useTabList } from 'react-aria';
+import { useTabListState } from 'react-stately';
+
 import { usePropWarning } from '../../hooks';
 import Box from '../Box';
 import { CollectionRockerButton } from '../RockerButton';

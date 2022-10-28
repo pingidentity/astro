@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
-import { FocusScope } from '@react-aria/focus';
+import { FocusScope } from 'react-aria';
 
 import { Box } from '../../';
 import { useStatusClasses, useOverlayPanelState } from '../../hooks';

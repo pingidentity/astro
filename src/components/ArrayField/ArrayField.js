@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { useLabel } from '@react-aria/label';
-import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
+import { mergeProps, useLabel } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
 import { Box, Button, FieldHelperText, Label, Text } from '../../';

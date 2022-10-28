@@ -1,10 +1,11 @@
 import React, { forwardRef, useRef, useImperativeHandle, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useListBox } from '@react-aria/listbox';
-import { mergeProps } from '@react-aria/utils';
-import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
+import { mergeProps } from 'react-aria';
 import { useCollator } from '@react-aria/i18n';
+import { useListBox } from '@react-aria/listbox';
 import { ListLayout } from '@react-stately/layout';
+import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
+
 
 import { ListBoxContext } from './ListBoxContext';
 import { Option } from './index.js';

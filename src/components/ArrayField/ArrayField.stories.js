@@ -1,5 +1,5 @@
 import React from 'react';
-import { OverlayProvider } from '@react-aria/overlays';
+import { OverlayProvider } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
 import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from '../../';
