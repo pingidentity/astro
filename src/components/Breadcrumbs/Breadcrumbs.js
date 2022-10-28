@@ -4,9 +4,9 @@ import React, {
   useImperativeHandle,
   useCallback,
 } from 'react';
-import { useBreadcrumbs } from '@react-aria/breadcrumbs';
 import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useBreadcrumbs } from 'react-aria';
+
 import { Box, Icon } from '../../index';
 import { usePropWarning } from '../../hooks/';
 import BreadcrumbItem from './BreadcrumbItem';

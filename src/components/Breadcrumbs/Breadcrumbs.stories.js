@@ -1,7 +1,8 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { Item } from '@react-stately/collections';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import { Item } from 'react-stately';
+import { action } from '@storybook/addon-actions';
+
 import Breadcrumbs from './Breadcrumbs';
 
 export default {

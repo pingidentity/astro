@@ -1,9 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useSearchField } from '@react-aria/searchfield';
-import { useSearchFieldState } from '@react-stately/searchfield';
 import CloseIcon from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import PropTypes from 'prop-types';
+import { useSearchField } from 'react-aria';
+import { useSearchFieldState } from 'react-stately';
 
 import { Box, Icon, IconButton, Input, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';

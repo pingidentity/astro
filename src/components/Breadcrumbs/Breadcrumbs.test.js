@@ -1,9 +1,10 @@
 import React from 'react';
-import { mergeProps } from '@react-aria/utils';
-import CreateIcon from 'mdi-react/CreateIcon';
-import { Item } from '@react-stately/collections';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import CreateIcon from 'mdi-react/CreateIcon';
+import { mergeProps } from 'react-aria';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
+
 import Breadcrumbs from './Breadcrumbs';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';

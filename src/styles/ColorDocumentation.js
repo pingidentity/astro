@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
+
 import Box from '../components/Box';
 import Text from '../components/Text';
 import TextField from '../components/TextField';

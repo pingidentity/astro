@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { useFocusRing } from '@react-aria/focus';
 import PropTypes from 'prop-types';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useListItem } from '@react-aria/list';
 import { useHover } from '@react-aria/interactions';
+
 import { ListViewContext } from '../ListView/ListViewContext';
 import Box from '../Box';
 import { useStatusClasses } from '../../hooks';

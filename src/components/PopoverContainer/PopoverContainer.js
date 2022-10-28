@@ -1,7 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useModal, useOverlay, OverlayContainer } from '@react-aria/overlays';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, OverlayContainer, useModal, useOverlay } from 'react-aria';
 
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';

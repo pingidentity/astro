@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { FocusScope } from '@react-aria/focus';
-import { Item } from '@react-stately/collections';
 import AccountIcon from 'mdi-react/AccountIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
+import { FocusScope } from 'react-aria';
+import { Item } from 'react-stately';
 
 import { Avatar, Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
 

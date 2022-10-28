@@ -4,14 +4,12 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import { FocusScope } from '@react-aria/focus';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
+import PropTypes from 'prop-types';
+import { FocusScope, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
+import { ChromePicker } from 'react-color';
+import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
-import { useOverlayTriggerState } from '@react-stately/overlays';
-import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
-import PropTypes from 'prop-types';
-import { ChromePicker } from 'react-color';
 
 import { Box, Button, Input, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
@@ -88,18 +86,16 @@ const ColorField = forwardRef((props, ref) => {
     shouldUpdatePosition: true,
   });
 
+  /* istanbul ignore next */
   const handleButtonPress = useCallback(() => popoverState.open(), [
     triggerRef,
   ]);
 
-  const handleColorChange = useCallback(
-    (color, event) => {
-      if (imperativeOnChange) {
-        imperativeOnChange(color, event);
-      }
-    },
-    [imperativeOnChange],
-  );
+  const handleColorChange = useCallback((color, event) => {
+    if (imperativeOnChange) {
+      imperativeOnChange(color, event);
+    }
+  }, [imperativeOnChange]);
 
   const getRgbaFromState = useCallback(({ colorValue }) => {
     return `rgba(${colorValue?.red}, ${colorValue?.green}, ${colorValue?.blue}, ${colorValue?.alpha})`;

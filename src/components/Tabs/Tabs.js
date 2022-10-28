@@ -4,8 +4,8 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useTabList, useTabPanel } from '@react-aria/tabs';
-import { useTabListState } from '@react-stately/tabs';
+import { useTabList, useTabPanel } from 'react-aria';
+import { useTabListState } from 'react-stately';
 
 import Box from '../Box';
 import { CollectionTab } from '../Tab';

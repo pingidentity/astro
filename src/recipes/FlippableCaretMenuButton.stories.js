@@ -2,15 +2,15 @@ import React, { useState, useRef } from 'react';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { useOverlayPosition } from '@react-aria/overlays';
+import { useOverlayPosition } from 'react-aria';
 import { useLayoutEffect } from '@react-aria/utils';
+
 import {
   Button,
   Box,
   Icon,
   IconButton,
 } from '../index';
-
 import PopoverContainer from '../components/PopoverContainer';
 
 export default {

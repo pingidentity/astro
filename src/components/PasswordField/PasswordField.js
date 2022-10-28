@@ -1,8 +1,8 @@
 import React, { forwardRef, useRef, useImperativeHandle, useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import { useOverlayPosition } from '@react-aria/overlays';
+import EyeIcon from 'mdi-react/EyeOutlineIcon';
+import PropTypes from 'prop-types';
+import { useOverlayPosition } from 'react-aria';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 
 import {

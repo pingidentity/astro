@@ -1,10 +1,9 @@
 import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
-import { useButton } from '@react-aria/button';
-import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
+
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import { ChipContext } from '../Chip/ChipContext';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';

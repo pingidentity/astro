@@ -232,9 +232,8 @@ export * from './components/TooltipTrigger';
 
 /* eslint-enable import/export */
 
-export { Item, Section } from '@react-stately/collections';
-export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
-export { useOverlayTriggerState } from '@react-stately/overlays';
+export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
+export { Item, Section, useOverlayTriggerState } from 'react-stately';
 
 export { default as DataTable } from './components/DataTable';
 export * from './components/DataTable';
@@ -244,4 +243,4 @@ export {
   Row as DataTableRow,
   TableBody as DataTableBody,
   TableHeader as DataTableHeader,
-} from '@react-stately/table';
+} from 'react-stately';

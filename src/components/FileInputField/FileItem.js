@@ -1,9 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import InsertDriveFileIcon from 'mdi-react/InsertDriveFileIcon';
-import ErrorIcon from 'mdi-react/ErrorIcon';
-import DeleteIcon from 'mdi-react/DeleteIcon';
 import PropTypes from 'prop-types';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
+import DeleteIcon from 'mdi-react/DeleteIcon';
+import ErrorIcon from 'mdi-react/ErrorIcon';
+import InsertDriveFileIcon from 'mdi-react/InsertDriveFileIcon';
+import { useVisuallyHidden } from 'react-aria';
+
 import { Box, Button, IconButton, Icon, Text } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 

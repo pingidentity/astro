@@ -1,16 +1,14 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import Clear from 'mdi-react/CloseIcon';
-import { FocusScope } from '@react-aria/focus';
+import PropTypes from 'prop-types';
+import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
 import { useFilter } from '@react-aria/i18n';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
 
 import { Box, FieldHelperText, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { usePropWarning } from '../../hooks';
-
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import statuses from '../../utils/devUtils/constants/statuses';
