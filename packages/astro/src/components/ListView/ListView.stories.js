@@ -40,7 +40,7 @@ export default {
 };
 
 const items = [
-  { key: 'Aardvark', name: 'Aardvark', id: '1' },
+  { key: 'Aardvark', name: 'Aardvark', id: '1', hasSeparator: false },
   { key: 'Kangaroo', name: 'Kangaroo', id: '2' },
   { key: 'Snake', name: 'Snake', id: '3' },
 ];

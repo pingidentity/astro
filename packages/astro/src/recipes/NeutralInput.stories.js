@@ -11,5 +11,5 @@ const sx = {
 };
 
 export const Default = () => (
-  <CheckboxField sx={sx.checkboxColor}>Click me</CheckboxField>
+  <CheckboxField controlProps={{ sx: sx.checkboxColor }} label="Click me" />
 );

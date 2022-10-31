@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.16](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.15...@pingux/end-user@2.4.16) (2022-10-25)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+## [2.4.15](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.14...@pingux/end-user@2.4.15) (2022-10-19)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+## [2.4.14](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.13...@pingux/end-user@2.4.14) (2022-10-13)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
+## [2.4.13](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.12...@pingux/end-user@2.4.13) (2022-10-12)
+
+**Note:** Version bump only for package @pingux/end-user
+
+
+
+
+
 ## [2.4.12](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.11...@pingux/end-user@2.4.12) (2022-10-05)
 
 **Note:** Version bump only for package @pingux/end-user

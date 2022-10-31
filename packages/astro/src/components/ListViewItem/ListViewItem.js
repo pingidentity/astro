@@ -12,7 +12,7 @@ const ListViewItem = (props) => {
   const {
     item,
     item: {
-      props: { listItemProps, rowProps, hasSeparator = true },
+      props: { listItemProps, rowProps, hasSeparator = true, hasInsetSeparator },
     },
     className,
   } = props;
@@ -59,6 +59,7 @@ const ListViewItem = (props) => {
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
     hasSeparator,
+    hasInsetSeparator,
   });
 
   return (
@@ -98,6 +99,7 @@ ListViewItem.propTypes = {
       listItemProps: PropTypes.shape({}),
       rowProps: PropTypes.shape({}),
       hasSeparator: PropTypes.bool,
+      hasInsetSeparator: PropTypes.bool,
     }),
   }),
 };

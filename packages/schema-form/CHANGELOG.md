@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.10.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.8...@pingux/schema-form@3.10.9) (2022-10-27)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.10.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.7...@pingux/schema-form@3.10.8) (2022-10-25)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.10.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.6...@pingux/schema-form@3.10.7) (2022-10-19)
+
+
+### Bug Fixes
+
+* [UIP-5695] Fix height of editable input recipe for Firefox ([7b6a588](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7b6a588838661877c72804aa16c721c3b333281b))
+
+
+
+
+
+## [3.10.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.5...@pingux/schema-form@3.10.6) (2022-10-13)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.10.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.4...@pingux/schema-form@3.10.5) (2022-10-12)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
 ## [3.10.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.3...@pingux/schema-form@3.10.4) (2022-10-05)
 
 **Note:** Version bump only for package @pingux/schema-form
