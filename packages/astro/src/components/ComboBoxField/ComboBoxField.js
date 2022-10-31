@@ -181,7 +181,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const listbox = (
     <FocusScope restoreFocus>
       <DismissButton onDismiss={state.close} />
-      <ScrollBox {...scrollBoxProps} >
+      <ScrollBox {...scrollBoxProps}>
         <ListBox
           ref={listBoxRef}
           hasNoEmptySelection

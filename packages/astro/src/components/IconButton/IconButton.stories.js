@@ -35,9 +35,9 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['iconButton', 'inverted', 'square', 'invertedSquare'],
+        options: ['base', 'inverted', 'invertedSquare', 'square'],
       },
-      defaultValue: 'iconButton',
+      defaultValue: 'base',
     },
   },
 };
