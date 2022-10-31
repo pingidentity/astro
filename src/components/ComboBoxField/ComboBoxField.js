@@ -77,15 +77,6 @@ const ComboBoxField = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
-  /* istanbul ignore next */
-  const onSelectionChangeHandler = (key) => {
-    let newVal = key || selectedKey || '';
-    if (hasAddOption && selectedKey !== inputValue) {
-      newVal = inputValue;
-    }
-    if (onSelectionChange) onSelectionChange(newVal);
-  };
-
   const shouldShowAddOption = hasAddOption && inputValue && selectedKey !== inputValue;
   const addOption = `ADD: ${inputValue}`;
 
@@ -98,6 +89,18 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   const defaultItems = getItemsArr(initialDefaultItems);
   const items = getItemsArr(initialItems);
+
+  /* istanbul ignore next */
+  const onSelectionChangeHandler = (key) => {
+    let newVal = key || selectedKey || '';
+    const arrayOfValues = Array.from(items || defaultItems);
+
+    if (hasAddOption && selectedKey !== inputValue
+      && arrayOfValues[arrayOfValues.length - 1].key === key) {
+      newVal = inputValue;
+    }
+    if (onSelectionChange) onSelectionChange(newVal);
+  };
 
   const { contains } = useFilter({ sensitivity: 'base' });
   const state = useComboBoxState({
@@ -112,7 +115,7 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (shouldShowAddOption) state.selectionManager.setFocusedKey(addOption);
-  }, [shouldShowAddOption, state, addOption]);
+  }, [shouldShowAddOption, inputValue, addOption, state.isOpen]);
 
   const { buttonProps, inputProps, listBoxProps, labelProps } = useComboBox(
     {
@@ -169,11 +172,6 @@ const ComboBoxField = forwardRef((props, ref) => {
 
   useLayoutEffect(onResize, [onResize]);
 
-  const handleInputOpen = (e) => {
-    if (!state.isOpen && menuTrigger === 'focus') buttonRef.current.click();
-    if (controlProps?.onClick) controlProps.onClick(e);
-  };
-
   const style = {
     ...overlayProps.style,
     width: menuWidth,
@@ -212,15 +210,17 @@ const ComboBoxField = forwardRef((props, ref) => {
         inputRef={inputRef}
         triggerProps={buttonProps}
         triggerRef={buttonRef}
-        controlProps={{ ...controlProps, onClick: handleInputOpen }}
+        controlProps={controlProps}
       />
       <PopoverContainer
-        isOpen={state.isOpen}
-        ref={popoverRef}
-        placement={placement}
         hasNoArrow
-        style={style}
+        isDismissable
         isNonModal
+        isOpen={state.isOpen}
+        onClose={state.close}
+        placement={placement}
+        ref={popoverRef}
+        style={style}
       >
         {listbox}
       </PopoverContainer>

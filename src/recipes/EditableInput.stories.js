@@ -14,6 +14,7 @@ import {
   Box,
 } from '../index';
 
+
 export default {
   title: 'Recipes/Editable Input',
 };

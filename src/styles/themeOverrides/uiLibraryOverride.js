@@ -45,6 +45,12 @@ const buttons = {
       ...theme.buttons.defaultHover,
     },
   },
+  inverted: {
+    ...theme.buttons.inverted,
+    ':focus': {
+      border: 'none',
+    },
+  },
   primary: {
     '&:hover': {
       ...theme.buttons.primary,
@@ -125,7 +131,16 @@ const forms = {
   },
 };
 
+const links = {
+  app: {
+    '&:hover': {
+      ...theme.links.app,
+    },
+  },
+};
+
 export default {
   buttons,
   forms,
+  links,
 };

@@ -63,7 +63,10 @@ export const PopoverWrapper = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => popoverRef.current);
   const { overlayProps } = useOverlay(
-    { ...props, isDismissable: isDismissable && isOpen },
+    {
+      ...props,
+      shouldCloseOnBlur: !isNotClosedOnBlur,
+    },
     popoverRef,
   );
   const { modalProps } = useModal({ isDisabled: isNonModal });

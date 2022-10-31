@@ -62,6 +62,13 @@ const SearchField = forwardRef((props, ref) => {
     },
   });
 
+  const handleKeyDownEvent = (e) => {
+    const key = e.key;
+    if (key === 'Enter' || key === ' ') {
+      state.setValue('');
+    }
+  };
+
   return (
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
@@ -80,6 +87,8 @@ const SearchField = forwardRef((props, ref) => {
           !hasNoClearButton &&
           state.value !== '' &&
           <IconButton
+            tabIndex={0}
+            onKeyDown={handleKeyDownEvent}
             sx={{
               position: 'absolute',
               top: 8,

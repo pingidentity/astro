@@ -57,14 +57,14 @@ axeTest(getComponent);
 test('base case requirements list', () => {
   getComponent();
   const requirementsList = screen.getByTestId(testId);
-  expect(requirementsList).toBeInstanceOf(HTMLDivElement);
+  expect(requirementsList).toBeInstanceOf(HTMLUListElement);
   expect(requirementsList).toBeInTheDocument();
 });
 
 test('empty variables requirements list', () => {
   getComponent({ requirementsList: [] });
   const requirementsList = screen.getByTestId(testId);
-  expect(requirementsList).toBeInstanceOf(HTMLDivElement);
+  expect(requirementsList).toBeInstanceOf(HTMLUListElement);
   expect(requirementsList).toBeInTheDocument();
 });
 

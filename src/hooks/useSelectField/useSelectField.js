@@ -184,14 +184,14 @@ const useSelectField = (props, ref) => {
 
   const overlay = (
     <PopoverContainer
-      isOpen={state.isOpen}
-      ref={popoverRef}
-      placement={placement}
       hasNoArrow
-      onClose={state.close}
-      style={style}
-      isNonModal
       isDismissable
+      isNonModal
+      isOpen={state.isOpen}
+      onClose={state.close}
+      placement={placement}
+      ref={popoverRef}
+      style={style}
     >
       <ScrollBox {...scrollBoxProps}>
         {listbox}
@@ -212,7 +212,6 @@ const useSelectField = (props, ref) => {
     triggerProps,
     triggerRef,
     valueProps,
-
   };
 };
 
