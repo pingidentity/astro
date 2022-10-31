@@ -1,4 +1,4 @@
-import { iconButton } from '../Button/Buttons.styles';
+import { base } from '../IconButton/IconButton.styles';
 
 const wrapper = {
   position: 'absolute',
@@ -42,7 +42,7 @@ const item = {
 };
 
 const close = {
-  ...iconButton,
+  ...base,
   p: 0,
   ml: 'auto',
   outline: 'none',

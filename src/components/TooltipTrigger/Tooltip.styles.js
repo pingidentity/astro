@@ -1,5 +1,6 @@
-import { iconButton, text } from '../Button/Buttons.styles';
+import { text } from '../Button/Buttons.styles';
 import { baseChip } from '../Chip/Chip.styles';
+import { base } from '../IconButton/IconButton.styles';
 
 const container = {
   p: 'sm',
@@ -15,7 +16,7 @@ const chip = {
 };
 
 const button = {
-  ...iconButton,
+  ...base,
   cursor: 'default',
   '&.is-hovered, &.is-pressed': {
     backgroundColor: 'inherit',

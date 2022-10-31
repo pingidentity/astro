@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
-import { FocusRing } from 'react-aria';
+import { FocusRing, mergeProps } from 'react-aria';
 import { PressResponder, useHover } from '@react-aria/interactions';
 
 import { Box, Button, Icon, Loader, TextField } from '../../';

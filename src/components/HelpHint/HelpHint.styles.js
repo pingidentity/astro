@@ -1,7 +1,8 @@
-import { iconButton, defaultFocus } from '../Button/Buttons.styles';
+import { defaultFocus } from '../Button/Buttons.styles';
+import { base } from '../IconButton/IconButton.styles';
 
 const button = {
-  ...iconButton,
+  ...base,
   bg: 'neutral.90',
   borderColor: 'active',
   mt: 'auto',
