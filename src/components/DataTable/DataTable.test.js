@@ -1,8 +1,9 @@
 /* eslint-disable testing-library/no-node-access */
 import React from 'react';
+import { useAsyncList } from 'react-stately';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
-import { useAsyncList } from '@react-stately/data';
 import { renderHook, act as actHooks } from '@testing-library/react-hooks';
+
 import DataTable from './DataTable';
 import {
   DataTableCell,

@@ -219,7 +219,7 @@ test('should open list on focus when menuTrigger is set to use focus', () => {
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 });
 
-test('should open list on focus on click after selection when menuTrigger is set to use focus', () => {
+test('should open list on click after selection when menuTrigger is set to use focus', () => {
   getComponent({ menuTrigger: 'focus' });
   const input = screen.getByRole('combobox');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -231,6 +231,8 @@ test('should open list on focus on click after selection when menuTrigger is set
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(input).toHaveFocus();
 
+  // Need to click away first, then click back
+  userEvent.click(document.body);
   userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
@@ -325,7 +327,7 @@ test('should invoke onSelectionChange when selection is made', () => {
   expect(onSelectionChange).toHaveBeenNthCalledWith(1, items[2].id);
 
   // Should fire when input is cleared
-  userEvent.type(input, '{selectall}{backspace}');
+  userEvent.clear(input);
   expect(onSelectionChange).toHaveBeenNthCalledWith(2, null);
 
   // Should fire on keyboard interaction
@@ -590,7 +592,8 @@ test('two listbox can not be open at the same time', () => {
   expect(screen.queryAllByRole('option')).toHaveLength(3);
   expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
 
-  userEvent.click(button2);
+  // first click closes first popover, second click opens the second popover
+  userEvent.dblClick(button2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(2);
   expect(screen.queryByRole('option', { name: 'Tango' })).toBeInTheDocument();
@@ -679,4 +682,22 @@ test('should have no accessibility violations', async () => {
   const results = await axe(container);
 
   expect(results).toHaveNoViolations();
+});
+
+test('popover closes on input blur', () => {
+  getComponent();
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(input);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
+
+  userEvent.click(document.body);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });

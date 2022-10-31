@@ -1,11 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
-import { useSlider, useSliderThumb } from '@react-aria/slider';
-import { useSliderState } from '@react-stately/slider';
-import { useFocusRing } from '@react-aria/focus';
-import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useFocusRing, useSlider, useSliderThumb, VisuallyHidden } from 'react-aria';
+import { useSliderState } from 'react-stately';
 import { useNumberFormatter } from '@react-aria/i18n';
+
 import { Box } from '../index';
 
 export default {

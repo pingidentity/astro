@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '.';
-import { SelectField, Item, TextField } from '../../index';
+import { Image, Text } from '../../index';
+import { pingImg } from '../../utils/devUtils/constants/images';
 import { flatColorList } from '../../styles/colors.js';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
@@ -41,20 +42,34 @@ export const Default = ({ ...args }) => (
 );
 
 export const Disabled = ({ ...args }) => (
-  <Box bg="white" isDisabled sx={{ border: '1px solid', borderColor: 'neutral.80' }} width="100%" p="xl" {...args}>
-    <TextField
-      id="custom-id"
-      name="custom-name"
-      label="Example Label"
+  <Box
+    bg="white"
+    isDisabled
+    width="100%"
+    p="xl"
+    {...args}
+  >
+    <Image
+      alt="Ping identity square logo"
+      src={pingImg}
+      sx={{
+        width: '40px',
+        height: '40px',
+      }}
     />
-    <br />
-    <SelectField label="What's your favorite color?" labelMode="float">
-      <Item key="red">Red</Item>
-      <Item key="blue">Blue</Item>
-      <Item key="yellow">Yellow</Item>
-    </SelectField>
+    <Text fontSize="xl">
+      Exceptional Experiences Start with Secure Identity
+    </Text>
   </Box>
 );
+
+Disabled.parameters = {
+  docs: {
+    description: {
+      story: 'The disabled state only impacts styling and mouse clicks. Anything with keyboard events will still work.',
+    },
+  },
+};
 
 Disabled.args = {
   isDisabled: {
@@ -66,6 +81,13 @@ Disabled.args = {
       options: flatColorList.map(([colorName]) => colorName),
     },
     defaultValue: 'white',
+  },
+  sx: {
+    border: '1px solid',
+    borderColor: 'neutral.80',
+    display: 'flex',
+    flexDirection: 'row !important',
+    gap: '10px',
   },
 };
 

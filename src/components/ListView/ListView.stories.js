@@ -1,11 +1,11 @@
 import React from 'react';
-import { Item } from '@react-stately/collections';
-import CreateIcon from 'mdi-react/CreateIcon';
-import MoreVertIcon from 'mdi-react/MoreVertIcon';
-import FormSelectIcon from 'mdi-react/FormSelectIcon';
-import { useAsyncList } from '@react-stately/data';
-import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
+import CreateIcon from 'mdi-react/CreateIcon';
+import FormSelectIcon from 'mdi-react/FormSelectIcon';
+import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import { Item, useAsyncList } from 'react-stately';
+import { action } from '@storybook/addon-actions';
+
 import ListView from '.';
 import Box from '../Box/Box';
 import Icon from '../Icon';
@@ -40,7 +40,7 @@ export default {
 };
 
 const items = [
-  { key: 'Aardvark', name: 'Aardvark', id: '1' },
+  { key: 'Aardvark', name: 'Aardvark', id: '1', hasSeparator: false },
   { key: 'Kangaroo', name: 'Kangaroo', id: '2' },
   { key: 'Snake', name: 'Snake', id: '3' },
 ];

@@ -5,17 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useFilter } from '@react-aria/i18n';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import HomeIcon from 'mdi-react/HomeIcon';
 import PropTypes from 'prop-types';
-import { useOverlayTriggerState } from '@react-stately/overlays';
-import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
-import { mergeProps } from '@react-aria/utils';
-import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
-import { FocusScope } from '@react-aria/focus';
+import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
+import HomeIcon from 'mdi-react/HomeIcon';
+import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger } from 'react-aria';
+import { useOverlayTriggerState } from 'react-stately';
+import { useFilter } from '@react-aria/i18n';
 import { useListState } from '@react-stately/list';
+
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import {

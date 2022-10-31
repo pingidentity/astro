@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { useFocusRing } from '@react-aria/focus';
 import PropTypes from 'prop-types';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useListItem } from '@react-aria/list';
 import { useHover } from '@react-aria/interactions';
+
 import { ListViewContext } from '../ListView/ListViewContext';
 import Box from '../Box';
 import { useStatusClasses } from '../../hooks';
@@ -12,7 +12,7 @@ const ListViewItem = (props) => {
   const {
     item,
     item: {
-      props: { listItemProps, rowProps, hasSeparator = true },
+      props: { listItemProps, rowProps, hasSeparator = true, hasInsetSeparator },
     },
     className,
   } = props;
@@ -59,6 +59,7 @@ const ListViewItem = (props) => {
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
     hasSeparator,
+    hasInsetSeparator,
   });
 
   return (
@@ -98,6 +99,7 @@ ListViewItem.propTypes = {
       listItemProps: PropTypes.shape({}),
       rowProps: PropTypes.shape({}),
       hasSeparator: PropTypes.bool,
+      hasInsetSeparator: PropTypes.bool,
     }),
   }),
 };

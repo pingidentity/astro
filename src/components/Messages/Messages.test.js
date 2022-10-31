@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 
 import axeTest from '../../utils/testUtils/testAxe';

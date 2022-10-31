@@ -1,21 +1,23 @@
 import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { FocusRing, useFocusRing } from '@react-aria/focus';
-import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
-import { useTableColumnResizeState, useTableState } from '@react-stately/table';
-import { TableLayout } from '@react-stately/layout';
+import MenuDownIcon from 'mdi-react/MenuDownIcon';
+import MenuUpIcon from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
 import {
+  FocusRing,
+  mergeProps,
+  useFocusRing,
   useTable,
   useTableCell,
   useTableColumnHeader,
   useTableHeaderRow,
   useTableRow,
   useTableRowGroup,
-} from '@react-aria/table';
-import PropTypes from 'prop-types';
-import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import MenuUpIcon from 'mdi-react/MenuUpIcon';
+  VisuallyHidden,
+} from 'react-aria';
+import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
+import { TableLayout } from '@react-stately/layout';
+import { useTableColumnResizeState, useTableState } from '@react-stately/table';
+
 import {
   DataTableContext,
   useDataTableContext,

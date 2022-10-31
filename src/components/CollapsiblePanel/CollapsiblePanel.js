@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useFocusRing } from 'react-aria';
+
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { useStatusClasses } from '../../hooks';
 import CollapsiblePanelBadge from '../CollapsiblePanelContainer/CollapsiblePanelBadge';

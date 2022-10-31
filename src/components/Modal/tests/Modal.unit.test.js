@@ -2,12 +2,20 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import axeTest from '../../../utils/testUtils/testAxe';
 import { render, screen, queryByAttribute } from '../../../utils/testUtils/testWrapper';
-import { OverlayProvider, Modal } from '../../../index';
+import { CheckboxField, OverlayProvider, Modal } from '../../../index';
 
 // For testing the modal alone
 const getComponent = (props = {}) => render((
   <OverlayProvider>
     <Modal {...props} />
+  </OverlayProvider>
+));
+
+const getComponentWithCheckbox = (props = {}) => render((
+  <OverlayProvider>
+    <Modal {...props}>
+      <CheckboxField aria-label="checkbox" />
+    </Modal>
   </OverlayProvider>
 ));
 
@@ -143,4 +151,18 @@ test('should auto focus the first tabbable element if "hasAutoFocus" is true', (
   getComponent({ hasCloseButton: true, hasAutoFocus: true });
   const button = screen.queryByRole('button');
   expect(button).toHaveFocus();
+});
+
+test('checkbox should not have focus outline on click', () => {
+  getComponentWithCheckbox({ isOpen: true });
+  const checkbox = screen.getByRole('checkbox');
+  userEvent.click(checkbox);
+
+  expect(checkbox).toBeChecked();
+  expect(checkbox).not.toHaveClass('is-focused');
+
+  userEvent.click(checkbox);
+
+  expect(checkbox).not.toBeChecked();
+  expect(checkbox).not.toHaveClass('is-focused');
 });

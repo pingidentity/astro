@@ -41,50 +41,6 @@ export const defaultFocus = {
   outlineOffset: '4px',
 };
 
-export const iconButton = {
-  justifyContent: 'center',
-  appearance: 'none',
-  alignItems: 'center',
-  alignSelf: 'baseline',
-  display: 'inline-flex !important',
-  flexGrow: 0,
-  flexShrink: 0,
-  borderRadius: '100%',
-  cursor: 'pointer',
-  bg: 'transparent',
-  p: '3px',
-  width: 'inherit',
-  height: 'inherit',
-  path: {
-    fill: 'neutral.40',
-  },
-  outline: 'none',
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-  '&.is-hovered': {
-    bg: 'accent.95',
-  },
-  '&.is-pressed': {
-    'path': {
-      fill: 'white',
-    },
-    bg: 'active',
-  },
-};
-
-const svgIconButton = {
-  ...iconButton,
-  path: {
-    fill: 'default',
-  },
-};
-
-export const square = {
-  ...iconButton,
-  borderRadius: '2px',
-};
-
 const primary = {
   ...base,
   display: 'inline-flex',
@@ -126,73 +82,6 @@ const critical = {
   border: '1px solid',
   borderColor: 'critical.bright',
   color: 'white',
-};
-
-const inverted = {
-  ...iconButton,
-  bg: 'active',
-  borderColor: 'active',
-  'path': {
-    fill: 'white',
-  },
-  '&.is-hovered': {
-    bg: 'accent.40',
-    borderColor: 'accent.40',
-    color: 'white',
-    boxShadow: 'standard',
-  },
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-  '&.is-pressed': {
-    bg: 'accent.20',
-    borderColor: 'accent.20',
-    color: 'white',
-  },
-};
-
-const invertedSquare = {
-  ...inverted,
-  borderRadius: '2px',
-};
-
-const applicationPortal = {
-  ...iconButton,
-  background: 'transparent',
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-  '&.is-hovered': {
-    'path': {
-      fill: 'active',
-    },
-  },
-  '&.is-pressed': {
-    'path': {
-      fill: 'active',
-    },
-  },
-};
-
-const applicationPortalPinned = {
-  ...iconButton,
-  'path': {
-    fill: 'success.bright',
-  },
-  background: 'transparent',
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-  '&.is-hovered': {
-    'path': {
-      fill: 'active',
-    },
-  },
-  '&.is-pressed': {
-    'path': {
-      fill: 'active',
-    },
-  },
 };
 
 const inline = {
@@ -394,19 +283,12 @@ export default {
     },
   },
   filter,
-  iconButton,
   inline,
   inlinePrimary,
-  inverted,
   link,
   primary,
   quiet,
   success,
   text,
-  applicationPortalPinned,
-  applicationPortal,
-  square,
-  invertedSquare,
   colorBlock,
-  svgIconButton,
 };

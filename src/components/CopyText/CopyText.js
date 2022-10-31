@@ -1,8 +1,7 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useFocusRing } from '@react-aria/focus';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
 import { announce } from '@react-aria/live-announcer';
 
 import { Box, Tooltip, TooltipTrigger } from '../../index';

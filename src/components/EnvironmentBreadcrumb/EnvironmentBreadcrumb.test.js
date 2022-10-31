@@ -1,7 +1,8 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import { Section } from '@react-stately/collections';
 import { axe } from 'jest-axe';
+import { Section } from 'react-stately';
+import userEvent from '@testing-library/user-event';
+
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../../index';
 

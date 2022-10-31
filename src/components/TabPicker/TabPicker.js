@@ -5,10 +5,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
-import { Item as Tab } from '@react-stately/collections';
-import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
 import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
+import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
+import PropTypes from 'prop-types';
+import { Item as Tab } from 'react-stately';
 import { Pressable } from '@react-aria/interactions';
 
 import { useStatusClasses } from '../../hooks';

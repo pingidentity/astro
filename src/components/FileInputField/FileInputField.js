@@ -6,10 +6,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
-import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useVisuallyHidden } from 'react-aria';
+import { useDropzone } from 'react-dropzone';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Box, Input, FieldHelperText, Label, Loader } from '../../';

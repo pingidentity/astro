@@ -5,8 +5,9 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { Item } from '@react-stately/collections';
-import { FocusRing } from '@react-aria/focus';
+import { FocusRing } from 'react-aria';
+import { Item } from 'react-stately';
+
 import { useRockerButton, useStatusClasses, usePropWarning } from '../../hooks';
 import { Box } from '../../index';
 import { RockerContext } from '../RockerButtonGroup';

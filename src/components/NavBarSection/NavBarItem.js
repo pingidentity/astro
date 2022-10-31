@@ -1,8 +1,8 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
-import { useFocusRing } from '@react-aria/focus';
+
 import { Box, Icon, Text } from '../../index';
 import { useStatusClasses, useNavBarPress } from '../../hooks';
 import { useNavBarContext } from '../../context/NavBarContext';

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
+
 import Text from '../Text';
 import Button from '../Button';
 import AccordionGroup from '.';
