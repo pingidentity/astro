@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Item } from '@react-stately/collections';
 import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import {
-  ListView,
-  Text,
   Box,
+  Chip,
   Icon,
   IconButton,
-  Chip,
-  Separator,
+  Item,
+  ListView,
+  Menu,
   OverlayProvider,
   PopoverMenu,
-  Menu,
+  Separator,
+  Text,
 } from '../index';
 
 export default {
