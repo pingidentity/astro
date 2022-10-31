@@ -1,9 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useSearchField } from '@react-aria/searchfield';
-import { useSearchFieldState } from '@react-stately/searchfield';
 import CloseIcon from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import PropTypes from 'prop-types';
+import { useSearchField } from 'react-aria';
+import { useSearchFieldState } from 'react-stately';
 
 import { Box, Icon, IconButton, Input, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -63,6 +63,13 @@ const SearchField = forwardRef((props, ref) => {
     },
   });
 
+  const handleKeyDownEvent = (e) => {
+    const key = e.key;
+    if (key === 'Enter' || key === ' ') {
+      state.setValue('');
+    }
+  };
+
   return (
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
@@ -81,6 +88,8 @@ const SearchField = forwardRef((props, ref) => {
           !hasNoClearButton &&
           state.value !== '' &&
           <IconButton
+            tabIndex={0}
+            onKeyDown={handleKeyDownEvent}
             sx={{
               position: 'absolute',
               top: 8,

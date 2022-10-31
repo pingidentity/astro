@@ -1,7 +1,8 @@
 import React, { forwardRef, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
 import omit from 'lodash/omit';
+import PropTypes from 'prop-types';
+import { useVisuallyHidden } from 'react-aria';
+
 import { PopoverMenu } from '../../index';
 import useField from '../../hooks/useField';
 import FieldHelperText from '../FieldHelperText';

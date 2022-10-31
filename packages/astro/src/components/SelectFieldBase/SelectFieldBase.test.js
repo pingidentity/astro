@@ -322,3 +322,21 @@ test('should have no accessibility violations', async () => {
 
   expect(results).toHaveNoViolations();
 });
+
+test('popover closes on button blur', () => {
+  getComponent();
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const button = screen.getByRole('button');
+
+  userEvent.click(button);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.queryByRole('option', { name: 'a' })).toBeInTheDocument();
+
+  userEvent.click(document.body);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});

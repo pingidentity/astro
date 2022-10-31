@@ -1,5 +1,6 @@
 import React from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
+
 import Menu from '../Menu';
 import Text from '../Text';
 

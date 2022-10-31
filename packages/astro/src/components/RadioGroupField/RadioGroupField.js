@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
-import { useRadioGroup } from '@react-aria/radio';
-import { useRadioGroupState } from '@react-stately/radio';
+
 import PropTypes from 'prop-types';
+import { useRadioGroup } from 'react-aria';
+import { useRadioGroupState } from 'react-stately';
 
 import { Box, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';

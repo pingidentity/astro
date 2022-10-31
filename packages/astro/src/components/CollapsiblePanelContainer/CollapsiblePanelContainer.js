@@ -2,7 +2,8 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import { useOverlayTriggerState } from '@react-stately/overlays';
+import { useOverlayTriggerState } from 'react-stately';
+
 import CollapsiblePanelBadge from './CollapsiblePanelBadge';
 import { Icon, IconButton, Box } from '../../index';
 import { useStatusClasses } from '../../hooks';

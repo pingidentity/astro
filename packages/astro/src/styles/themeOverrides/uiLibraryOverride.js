@@ -54,12 +54,6 @@ const buttons = {
     'body &': theme.buttons.link,
     'body &:hover': theme.buttons.link,
   },
-  iconButton: {
-    ':focus': {
-      ...theme.buttons.defaultFocus,
-      border: 'none',
-    },
-  },
   environmentBreadcrumb: {
     current: {
       '&:hover:not(.disabled)': {
@@ -77,6 +71,22 @@ const buttons = {
     },
     ':not(.is-selected):hover': {
       color: 'accent.30',
+    },
+  },
+  iconButtons: {
+    ...theme.buttons.iconButtons,
+    base: {
+      ...theme.buttons.iconButtons.base,
+      ':focus': {
+        ...theme.buttons.defaultFocus,
+        border: 'none',
+      },
+    },
+    inverted: {
+      ...theme.buttons.iconButtons.inverted,
+      ':focus': {
+        border: 'none',
+      },
     },
   },
 };
@@ -125,7 +135,16 @@ const forms = {
   },
 };
 
+const links = {
+  app: {
+    '&:hover': {
+      ...theme.links.app,
+    },
+  },
+};
+
 export default {
   buttons,
   forms,
+  links,
 };

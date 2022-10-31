@@ -1,10 +1,9 @@
 import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
-import { useButton } from '@react-aria/button';
-import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
+
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import { ChipContext } from '../Chip/ChipContext';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
@@ -18,15 +17,19 @@ import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
  * `Button` component.
  */
 const IconButton = forwardRef((props, ref) => {
-  const { children,
+  const {
+    children,
     className,
     title,
+    variant,
     onPress,
     onPressStart,
     onPressEnd,
     onPressChange,
     onPressUp,
-    isDisabled, ...others } = props;
+    isDisabled,
+    ...others
+  } = props;
 
   const buttonRef = useRef();
   /* istanbul ignore next */
@@ -55,6 +58,7 @@ const IconButton = forwardRef((props, ref) => {
       aria-label={ariaLabel}
       sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
       {...mergeProps(buttonProps, others, hoverProps, focusProps)}
+      variant={`iconButtons.${variant}`}
     >
       {children}
     </ThemeUIIconButton>
@@ -111,7 +115,7 @@ IconButton.propTypes = {
 };
 
 IconButton.defaultProps = {
-  variant: 'iconButton',
+  variant: 'base',
   isDisabled: false,
 };
 

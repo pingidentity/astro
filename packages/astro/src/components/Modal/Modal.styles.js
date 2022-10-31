@@ -1,5 +1,5 @@
 import { text } from '../Text/Text.styles';
-import { iconButton } from '../Button/Buttons.styles';
+import { base } from '../IconButton/IconButton.styles';
 
 const closeIcon = {
   color: 'neutral.40',
@@ -48,7 +48,7 @@ const title = {
 };
 
 const closeButton = {
-  ...iconButton,
+  ...base,
   position: 'absolute',
   top: 14,
   right: 10,

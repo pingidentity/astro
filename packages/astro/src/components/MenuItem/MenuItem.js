@@ -5,8 +5,7 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
-import { useMenuItem } from '@react-aria/menu';
+import { mergeProps, useMenuItem } from 'react-aria';
 import { useFocus, useHover, usePress } from '@react-aria/interactions';
 
 import { useMenuContext } from '../../context/MenuContext';
@@ -84,6 +83,7 @@ const MenuItem = forwardRef((props, ref) => {
       ref={menuItemRef}
       variant={isSeparator ? 'menuItem.separator' : 'menuItem.item'}
       data-id={dataId}
+      aria-disabled={isDisabled}
       {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps, others)}
     >
       {rendered}

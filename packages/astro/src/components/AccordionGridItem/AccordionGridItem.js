@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps } from 'react-aria';
 import { useGridRow } from '@react-aria/grid';
-import { mergeProps } from '@react-aria/utils';
+
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import Box from '../Box';
 import AccordionGridItemHeader from './AccordionGridItemHeader';
@@ -54,8 +55,11 @@ const AccordionGridItem = (props) => {
   return (
     <Box
       as="div"
+      role="row"
+      tabindex="0"
       {...mergeProps(rowProps, others)}
       aria-selected={isSelected}
+      aria-expanded={isSelected}
       className={classNames}
       variant="accordionGrid.item"
       ref={rowRef}

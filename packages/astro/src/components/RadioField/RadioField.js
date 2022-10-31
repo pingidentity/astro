@@ -6,7 +6,7 @@ import React, {
   useImperativeHandle,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useRadio } from '@react-aria/radio';
+import { useRadio } from 'react-aria';
 
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';

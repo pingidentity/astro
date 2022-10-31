@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import CheckBoldIcon from 'mdi-react/CheckBoldIcon';
+import PropTypes from 'prop-types';
+import { Item as Step } from 'react-stately';
 import { useHover } from '@react-aria/interactions';
-import { Item as Step } from '@react-stately/collections';
 
 import { stepStatuses } from './Stepper.constants';
 

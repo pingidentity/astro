@@ -1,3 +1,5 @@
+import { defaultFocus } from '../Button/Buttons.styles';
+
 const header = {
   cursor: 'pointer',
   lineHeight: '30px',
@@ -13,10 +15,7 @@ const header = {
   flexGrow: 1,
   fontWeight: 700,
   '&.is-focused': {
-    outline: 'none',
-    boxShadow: 'focus',
-    WebkitBoxShadow: 'focus',
-    MozBoxShadow: 'focus',
+    ...defaultFocus,
     zIndex: '10',
   },
   minHeight: '64px',

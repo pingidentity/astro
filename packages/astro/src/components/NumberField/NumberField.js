@@ -1,12 +1,11 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import MenuUp from 'mdi-react/MenuUpIcon';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import { useNumberField } from '@react-aria/numberfield';
-import { useNumberFieldState } from '@react-stately/numberfield';
-import { useLocale } from '@react-aria/i18n';
-import { mergeProps } from '@react-aria/utils';
 import omit from 'lodash/omit';
+import PropTypes from 'prop-types';
+import MenuDown from 'mdi-react/MenuDownIcon';
+import MenuUp from 'mdi-react/MenuUpIcon';
+import { mergeProps, useNumberField } from 'react-aria';
+import { useNumberFieldState } from 'react-stately';
+import { useLocale } from '@react-aria/i18n';
 
 import {
   Box,

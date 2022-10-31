@@ -5698,6 +5698,7 @@ exports[`single fields select field 1`] = `
               size="2"
               tabindex="-1"
             >
+              <option />
               <option
                 value="foo"
               >
@@ -8615,6 +8616,7 @@ exports[`single fields select field with default 1`] = `
               size="2"
               tabindex="-1"
             >
+              <option />
               <option
                 value="foo"
               >
@@ -20538,6 +20540,7 @@ exports[`single fields textarea field 1`] = `
   padding-bottom: 10px;
   width: 100%;
   outline: none;
+  overflow: hidden;
 }
 
 .emotion-8.is-focused {

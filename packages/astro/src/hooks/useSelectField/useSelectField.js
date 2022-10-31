@@ -1,9 +1,8 @@
 import React, { useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import { FocusScope } from '@react-aria/focus';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
-import { useSelect } from '@react-aria/select';
+import { FocusScope, DismissButton, useOverlayPosition, useSelect } from 'react-aria';
+import { useSelectState } from 'react-stately';
 import { useResizeObserver } from '@react-aria/utils';
-import { useSelectState } from '@react-stately/select';
+
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 import ListBox from '../../components/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
@@ -186,14 +185,14 @@ const useSelectField = (props, ref) => {
 
   const overlay = (
     <PopoverContainer
-      isOpen={state.isOpen}
-      ref={popoverRef}
-      placement={placement}
       hasNoArrow
-      onClose={state.close}
-      style={style}
-      isNonModal
       isDismissable
+      isNonModal
+      isOpen={state.isOpen}
+      onClose={state.close}
+      placement={placement}
+      ref={popoverRef}
+      style={style}
     >
       <ScrollBox {...scrollBoxProps}>
         {listbox}
@@ -215,7 +214,6 @@ const useSelectField = (props, ref) => {
     triggerProps,
     triggerRef,
     valueProps,
-
   };
 };
 

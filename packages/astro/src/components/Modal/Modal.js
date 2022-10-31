@@ -1,14 +1,14 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 import {
+  FocusScope,
+  OverlayContainer,
+  useDialog,
+  useModal,
   useOverlay,
   usePreventScroll,
-  useModal,
-  OverlayContainer,
-} from '@react-aria/overlays';
-import { useDialog } from '@react-aria/dialog';
-import { FocusScope } from '@react-aria/focus';
-import CloseIcon from 'mdi-react/CloseIcon';
+} from 'react-aria';
 
 import Box from '../Box';
 import IconButton from '../IconButton';
@@ -71,6 +71,9 @@ const Modal = forwardRef((props, ref) => {
   // Get props for the dialog and its title
   const { dialogProps, titleProps } = useDialog(contentProps, modalRef);
 
+  // Prevents extra dialog focus from being called.
+  dialogProps.onMouseDown = e => e.preventDefault();
+
   const { classNames } = useStatusClasses(className, {
     isDarkMode: others.variant === 'modal.dark',
   });
@@ -79,7 +82,6 @@ const Modal = forwardRef((props, ref) => {
     'The "dark" variant for Modal will be deprecated in Astro-UI 2.0.0.',
     { isActive: others.variant === 'modal.dark' },
   );
-
   return (
     <OverlayContainer>
       <Box className={classNames} variant="modal.container" {...others} {...containerProps}>

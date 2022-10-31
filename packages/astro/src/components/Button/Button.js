@@ -1,10 +1,9 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
+import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Button as ThemeUIButton } from 'theme-ui';
-import { useButton } from '@react-aria/button';
 import { useHover } from '@react-aria/interactions';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+
 import { useStatusClasses, usePropWarning, useAriaLabelWarning, useDeprecationWarning } from '../../hooks';
 import Loader from '../Loader';
 
