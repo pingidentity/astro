@@ -46,8 +46,8 @@ const PasswordField = forwardRef((props, ref) => {
   const {
     fieldContainerProps,
     fieldControlInputProps,
-    fieldLabelProps,
     fieldControlWrapperProps,
+    fieldLabelProps,
   } = hooks.useField({ status, ...others });
 
   const { isFocused } = fieldControlInputProps;

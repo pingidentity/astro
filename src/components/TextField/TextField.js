@@ -15,8 +15,8 @@ const TextField = forwardRef((props, ref) => {
   const {
     fieldContainerProps,
     fieldControlInputProps,
-    fieldLabelProps,
     fieldControlWrapperProps,
+    fieldLabelProps,
   } = useField(props);
   const inputRef = useRef();
   const labelRef = useRef();
@@ -110,9 +110,9 @@ TextField.propTypes = {
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
   type: PropTypes.string,
   /** Props object that is spread directly into the root (top-level) element. */
-  fieldContainerProps: PropTypes.shape({}),
+  containerProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input element. */
-  fieldControlInputProps: PropTypes.shape({}),
+  controlProps: PropTypes.shape({}),
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input wrapper element. */

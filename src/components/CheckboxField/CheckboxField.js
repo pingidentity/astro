@@ -5,8 +5,12 @@ import { useToggleState } from 'react-stately';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+
+console.log(inputFieldAttributesBasePropTypes)
+console.log(ariaAttributesBasePropTypes)
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -106,13 +110,8 @@ CheckboxField.propTypes = {
   onKeyDown: PropTypes.func,
   /** Handler that is called when a key is released. */
   onKeyUp: PropTypes.func,
-  /** Props object that is spread directly into the root (top-level) element. */
-  fieldContainerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 CheckboxField.displayName = 'CheckboxField';

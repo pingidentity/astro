@@ -47,8 +47,8 @@ const NumberField = forwardRef((props, ref) => {
   const {
     fieldContainerProps,
     fieldControlInputProps,
-    fieldLabelProps,
     fieldControlWrapperProps,
+    fieldLabelProps,
   } = useField(
     props,
   );

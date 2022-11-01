@@ -51,6 +51,7 @@ const FileInputField = forwardRef(({
   const {
     fieldContainerProps,
     fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     status,
