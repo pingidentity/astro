@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.33.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.33.0...@pingux/astro@1.33.1) (2022-11-01)
+
+
+### Bug Fixes
+
+* [UIP-5638] LinkedListView - fix label font size ([aa9dfbe](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aa9dfbed209fa782f66bd01396b396003a4db030))
+* [UIP-5796] Fix checkbox getting focus indicator on click within a modal ([2fcc515](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2fcc5154bb6eef4cb1191ad5a4c6830cf7b7b3e1))
+* [UIP-5839] Fix support for checkbox indeterminism ([eef26e6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eef26e653948d0059e07475cb9056fd606955068))
+
+
+
+
+
 # [1.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.32.1...@pingux/astro@1.33.0) (2022-10-27)
 
 
