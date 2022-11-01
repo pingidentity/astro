@@ -22,3 +22,21 @@ test('default icon', () => {
   expect(icon).toBeInstanceOf(SVGSVGElement);
   expect(icon).toBeInTheDocument();
 });
+
+test('icon renders correct xsmall tshirt size', () => {
+  getComponent({ size: 'xs' });
+  const xsIcon = screen.getByTestId(testId);
+  expect(xsIcon).toHaveStyleRule('width', '15px');
+});
+
+test('icon renders correct small tshirt size', () => {
+  getComponent({ size: 'sm' });
+  const smIcon = screen.getByTestId(testId);
+  expect(smIcon).toHaveStyleRule('width', '20px');
+});
+
+test('icon renders correct medium tshirt size', () => {
+  getComponent({ size: 'md' });
+  const mdIcon = screen.getByTestId(testId);
+  expect(mdIcon).toHaveStyleRule('width', '25px');
+});

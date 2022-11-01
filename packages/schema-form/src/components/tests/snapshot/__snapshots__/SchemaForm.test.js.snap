@@ -5565,8 +5565,6 @@ exports[`single fields select field 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 20px;
-  height: 20px;
   min-width: 20px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -8482,8 +8480,6 @@ exports[`single fields select field with default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 20px;
-  height: 20px;
   min-width: 20px;
   display: -webkit-box;
   display: -webkit-flex;
