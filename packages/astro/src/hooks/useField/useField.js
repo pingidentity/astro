@@ -104,7 +104,7 @@ const useField = (props = {}) => {
   });
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames: wrapperClasses } = useStatusClasses(className, {
-    'field-control_wrapper': true, // generates 'field-control_wrapper' class
+    'field-control__wrapper': true, // generates 'field-control__wrapper' class
     hasNoStatusIndicator,
     isFocused: isFocusVisible,
     isDisabled,
@@ -114,7 +114,7 @@ const useField = (props = {}) => {
   });
 
   const { classNames: inputClasses } = useStatusClasses(className, {
-    'field-control-input': true, // generates 'field-control_input' class
+    'field-control__input': true, // generates 'field-control__input' class
     hasNoStatusIndicator,
     isFocused: isFocusVisible,
     isDisabled,

@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { FocusScope, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
+import { FocusScope, useOverlayPosition, useOverlayTrigger, useVisuallyHidden, mergeProps } from 'react-aria';
 import { ChromePicker } from 'react-color';
 import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
@@ -67,6 +67,7 @@ const ColorField = forwardRef((props, ref) => {
   const {
     fieldContainerProps,
     fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     ...nonAriaProps,
@@ -114,11 +115,11 @@ const ColorField = forwardRef((props, ref) => {
         onPress={handleButtonPress}
         ref={triggerRef}
         variant="variants.colorField.container"
-        {...triggerProps}
-        {...ariaProps}
-        {...buttonProps}
+        {...mergeProps(buttonProps, ariaProps, triggerProps)}
       />
-      <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
+      <Box {...fieldControlWrapperProps} >
+        <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
+      </Box>
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
       )}

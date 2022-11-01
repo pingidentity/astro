@@ -16,11 +16,12 @@ const TextAreaField = forwardRef((props, ref) => {
   const {
     fieldContainerProps,
     fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({ statusClasses, ...props });
 
   const containerRef = useRef();
-  const inputContainerRef = useRef();
+  const fieldControlWrapperRef = useRef();
   const labelRef = useRef();
   const labelWrapperRef = useRef();
   const slotContainer = useRef();
@@ -86,7 +87,7 @@ const TextAreaField = forwardRef((props, ref) => {
   return (
     <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
-      <Box isRow variant="forms.input.fieldControlWrapper" className={fieldControlInputProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
+      <Box isRow variant="forms.input.fieldControlWrapper" minWidth="40px" maxWidth="100%" ref={fieldControlWrapperRef} {...fieldControlWrapperProps} >
         <TextArea ref={textAreaRef} rows={rows} {...fieldControlInputProps} sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }} />
         {
           slots?.inContainer &&
