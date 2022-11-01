@@ -44,11 +44,7 @@
     "@emotion/jest": "^11.2.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "11.3.0",
-<<<<<<< HEAD
     "@pingux/astro": "^1.34.0-alpha.0",
-=======
-    "@pingux/astro": "^1.33.1",
->>>>>>> origin/master
     "@rjsf/core": "2.0.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-docs": "^6.5.10",
