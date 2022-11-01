@@ -271,9 +271,6 @@ export const Default = ({ ...args }) => {
             padding: '3px 5px 2px 5px',
           }}
           textColor="text.primary"
-          textProps={{
-            fontSize: 'xs',
-          }}
           label={expirationText}
         />
       </Box>
