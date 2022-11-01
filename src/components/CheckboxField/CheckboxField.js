@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import { useCheckbox } from '@react-aria/checkbox';
 import { useToggleState } from '@react-stately/toggle';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import { Box, Checkbox, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -21,6 +22,7 @@ const CheckboxField = forwardRef((props, ref) => {
     hasAutoFocus,
     helperText,
     isDefaultSelected,
+    isIndeterminate,
     status,
   } = props;
   const checkboxProps = {
@@ -36,6 +38,14 @@ const CheckboxField = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => checkboxRef.current);
 
+  useEffect(() => {
+    if (checkboxRef.current && isIndeterminate) {
+      checkboxRef.current.indeterminate = true;
+    } else if (checkboxRef.current && !isIndeterminate) {
+      checkboxRef.current.indeterminate = false;
+    }
+  }, [isIndeterminate]);
+
   const { inputProps } = useCheckbox(checkboxProps, state, checkboxRef);
   const {
     fieldContainerProps,
@@ -43,6 +53,7 @@ const CheckboxField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({
     ...props,
+    statusClasses: { isIndeterminate },
     controlProps: { ...controlProps, ...inputProps },
   });
 
@@ -76,8 +87,8 @@ CheckboxField.propTypes = {
   /** Whether the input is disabled. */
   isDisabled: PropTypes.bool,
   /**
-   * Indeterminism is presentational only. The indeterminate visual representation remains
-   * regardless of user interaction.
+   * Indeterminism is presentational only. The indeterminate visual representation remains until
+   * this prop is set to false regardless of user interaction.
   */
   isIndeterminate: PropTypes.bool,
   /** Whether the input can be selected, but not changed by the user. */

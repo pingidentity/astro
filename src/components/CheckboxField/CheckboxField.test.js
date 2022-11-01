@@ -8,7 +8,7 @@ const testLabel = 'Test Label';
 const defaultProps = {
   label: testLabel,
 };
-const getComponent = (props = {}) => render((
+const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <CheckboxField {...defaultProps} {...props} />
 ));
 
@@ -77,4 +77,31 @@ test('read only checkbox', () => {
   getComponent({ isReadOnly: true });
   const input = screen.getByRole('checkbox');
   expect(input).toHaveAttribute('readonly');
+});
+
+test('indeterminate checkbox', () => {
+  const { rerender } = getComponent({ isIndeterminate: true });
+  let input = screen.getByRole('checkbox');
+  const label = screen.getByText(testLabel);
+  /* eslint-disable jest-dom/prefer-checked */
+  expect(input).toHaveAttribute('aria-checked', 'mixed');
+  expect(label).toHaveClass('is-indeterminate');
+
+  // Ensure it cannot be changed via user interaction
+  userEvent.click(input);
+  expect(input).toHaveAttribute('aria-checked', 'mixed');
+  // An indeterminite checkbox can still have the checked attribute
+  expect(input).toBeChecked();
+
+  // Ensure it works normally when toggled off again
+  getComponent({}, { renderFn: rerender });
+  // Reset the variable since the DOM has changed
+  input = screen.getByRole('checkbox');
+
+  expect(input).not.toHaveAttribute('aria-checked', 'mixed');
+  expect(label).not.toHaveClass('is-indeterminate');
+
+  // Ensure it can be changed via user interaction, should be unchecked now
+  userEvent.click(input);
+  expect(input).not.toBeChecked();
 });
