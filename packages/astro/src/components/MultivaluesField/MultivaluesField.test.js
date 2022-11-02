@@ -24,6 +24,16 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   </OverlayProvider>
 ));
 
+const getComponentInForm = (props = {}, onFormSubmit, { renderFn = render } = {}) => renderFn((
+  <OverlayProvider>
+    <form onSubmit={onFormSubmit}>
+      <MultivaluesField {...defaultProps} {...props}>
+        {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
+      </MultivaluesField>
+    </form>
+  </OverlayProvider>
+));
+
 beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
@@ -412,4 +422,19 @@ test('popover closes on input blur', () => {
   userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+test('form does not submit when adding custom value', () => {
+  const onFormSubmit = jest.fn();
+  getComponentInForm({}, onFormSubmit);
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'custom';
+  userEvent.type(input, value);
+  expect(input).toHaveValue(value);
+
+  userEvent.type(input, '{enter}');
+  expect(onFormSubmit).not.toHaveBeenCalled();
 });
