@@ -16,6 +16,7 @@ import {
   Label,
 } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -214,4 +215,5 @@ NumberField.propTypes = {
   /** The current value (controlled). */
   value: PropTypes.number,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };

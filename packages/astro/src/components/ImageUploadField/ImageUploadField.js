@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import { Item, Menu } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import ImagePreviewButton from './ImagePreviewButton';
 import ImageUploadFieldBase from './ImageUploadFieldBase';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -124,6 +125,7 @@ ImageUploadField.propTypes = {
   /** Determines the helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 ImageUploadField.defaultProps = {

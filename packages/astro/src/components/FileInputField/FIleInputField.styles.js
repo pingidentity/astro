@@ -1,4 +1,4 @@
-const container = {
+const wrapper = {
   display: 'flex',
   border: '1px dashed',
   borderColor: 'active',
@@ -40,6 +40,6 @@ const button = {
 };
 
 export default {
-  container,
+  wrapper,
   button,
 };

@@ -111,6 +111,7 @@ const useField = (props = {}) => {
     isReadOnly,
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
     ...statusClasses,
+    ...wrapperProps?.statusClasses,
   });
 
   const { classNames: inputClasses } = useStatusClasses(className, {
@@ -121,16 +122,18 @@ const useField = (props = {}) => {
     isReadOnly,
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
     ...statusClasses,
+    ...controlProps?.statusClasses,
   });
 
   const { classNames: labelClasses } = useStatusClasses(className, {
-    'field-label': true, // generates 'field-control_input' class
+    'field-label': true,
     hasNoStatusIndicator,
     isFocused: isFocusVisible,
     isDisabled,
     isReadOnly,
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
     ...statusClasses,
+    ...labelProps?.statusClasses,
   });
 
 
@@ -207,5 +210,6 @@ const useField = (props = {}) => {
     fieldControlWrapperProps,
   };
 };
+
 
 export default useField;

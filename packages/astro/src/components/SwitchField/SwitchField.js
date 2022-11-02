@@ -9,6 +9,7 @@ import { Box, FieldHelperText, Label, Switch } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a switch, label, and helper text for a complete, form-ready solution.
@@ -95,10 +96,6 @@ const SwitchField = forwardRef((props, ref) => {
 SwitchField.propTypes = {
   /** A list of class names to apply to the input element. */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,
   /** Text rendered below the input. */
@@ -119,8 +116,6 @@ SwitchField.propTypes = {
   isSelected: PropTypes.bool,
   /** The rendered label for the field. */
   label: PropTypes.node,
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
   name: PropTypes.string,
   /** Handler that is called when the element loses focus. */
@@ -140,6 +135,7 @@ SwitchField.propTypes = {
   /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
   value: PropTypes.string,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 SwitchField.defaultProps = {

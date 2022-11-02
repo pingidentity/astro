@@ -6,6 +6,7 @@ import { Box, FieldHelperText, Label, TextArea } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -40,7 +41,7 @@ const TextAreaField = forwardRef((props, ref) => {
 
   /* istanbul ignore next */
   const resizeSlotContainer = () => {
-    inputContainerRef.current.style.width = textAreaRef.current.style.width;
+    fieldControlWrapperRef.current.style.width = textAreaRef.current.style.width;
   };
 
   const onResize = useCallback(() => {
@@ -166,18 +167,13 @@ TextAreaField.propTypes = {
   rows: PropTypes.number,
   /** Determines the textarea status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** Provides a way to insert markup in specified places. */
   slots: PropTypes.shape({
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 TextAreaField.defaultProps = {

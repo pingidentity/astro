@@ -3,6 +3,7 @@ import { Pressable } from '@react-aria/interactions';
 
 import SwitchField from '.';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inutFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { Tooltip, TooltipTrigger } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -43,9 +44,6 @@ export default {
     isReadOnly: {},
     isDefaultSelected: {},
     hasAutoFocus: {},
-    containerProps: {},
-    labelProps: {},
-    controlProps: {},
     id: {},
     isSelected: {
       control: {
@@ -53,6 +51,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inutFieldAttributeBaseArgTypes,
   },
 };
 

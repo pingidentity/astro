@@ -8,6 +8,7 @@ import { useListState } from '@react-stately/list';
 
 import { Box, FieldHelperText, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { usePropWarning } from '../../hooks';
 import ListBox from '../ListBox';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -386,8 +387,6 @@ const MultivaluesField = forwardRef((props, ref) => {
 });
 
 MultivaluesField.propTypes = {
-  /** Props object that is spread directly into the root (top-level) Box component. */
-  containerProps: PropTypes.shape({}),
   /** The initial selected keys in the collection (uncontrolled). */
   defaultSelectedKeys: isIterableProp,
   /** Where the menu opens relative to its trigger. */
@@ -486,6 +485,7 @@ MultivaluesField.propTypes = {
   /** Determines the input status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 MultivaluesField.defaultProps = {

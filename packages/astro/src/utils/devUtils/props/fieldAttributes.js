@@ -1,4 +1,3 @@
-import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
 
 const descriptions = {
@@ -9,7 +8,7 @@ const descriptions = {
 };
 
 export const inputFieldAttributeBaseDocSettings = {
-  type: { summary: 'string' },
+  type: { summary: 'object' },
   control: { type: 'string' },
   table: {
     category: 'Input Field Attributes',

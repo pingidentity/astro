@@ -5,6 +5,7 @@ import SearchIcon from 'mdi-react/SearchIcon';
 
 import { Box, SearchField, Text } from '../../';
 import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/devUtils/props/ariaAttributes';
+import { inutFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useDebounce } from '../../hooks';
 
 export default {
@@ -29,10 +30,7 @@ export default {
     hasAutoFocus: {},
     hasNoClearButton: {},
     autoComplete: {},
-    containerProps: {},
     iconProps: {},
-    controlProps: {},
-    labelProps: {},
     name: {},
     id: {},
     'aria-autocomplete': {
@@ -44,6 +42,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inutFieldAttributeBaseArgTypes,
   },
 };
 

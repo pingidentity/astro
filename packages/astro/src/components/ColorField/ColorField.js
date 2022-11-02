@@ -13,6 +13,7 @@ import { useColorFieldState } from '@react-stately/color';
 
 import { Box, Button, Input, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import PopoverContainer from '../PopoverContainer';
 import statuses from '../../utils/devUtils/constants/statuses';
 import useField from '../../hooks/useField';
@@ -163,13 +164,8 @@ ColorField.propTypes = {
   value: PropTypes.string,
   /** Props object that is spread into the Button element. */
   buttonProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the root (top-level) Box component. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread into the label element. */
-  labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 ColorField.defaultProps = {
