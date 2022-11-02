@@ -164,6 +164,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const keyDown = (e) => {
     switch (e.key) {
       case 'Enter': {
+        e.preventDefault();
         if (selectionManager.focusedKey) {
           const key = selectionManager.focusedKey;
           if (!disabledKeys.includes(key)) {
