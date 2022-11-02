@@ -9,9 +9,6 @@ import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fi
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 
-console.log(inputFieldAttributesBasePropTypes)
-console.log(ariaAttributesBasePropTypes)
-
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
  *

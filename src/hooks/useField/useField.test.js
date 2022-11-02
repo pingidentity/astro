@@ -9,9 +9,15 @@ const defaultProps = {
   className: 'test',
   containerProps: {
     id: 'test',
+    statusClasses: {
+      isContainer: true,
+    },
   },
   controlProps: {
     id: 'test',
+    statusClasses: {
+      isControlInput: true,
+    },
   },
   defaultValue: 'test',
   hasAutoFocus: true,
@@ -22,6 +28,11 @@ const defaultProps = {
   isRequired: true,
   isSelected: true,
   label: 'test',
+  labelProps: {
+    statusClasses: {
+      isFieldLabel: true,
+    },
+  },
   name: 'test',
   placeholder: 'test',
   role: 'test',
@@ -30,6 +41,12 @@ const defaultProps = {
   },
   type: 'test',
   value: 'test',
+  wrapperProps: {
+    id: 'test',
+    statusClasses: {
+      isControlWrapper: true,
+    },
+  },
 };
 
 test('default useField', () => {
@@ -38,7 +55,12 @@ test('default useField', () => {
 
 test('should return props objects for field components', () => {
   const { result } = renderHook(() => useField(defaultProps));
-  const { fieldContainerProps, fieldControlInputProps, fieldLabelProps } = result.current;
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = result.current;
 
   expect(fieldContainerProps).toEqual({
     className: 'field-container has-value',
@@ -46,17 +68,21 @@ test('should return props objects for field components', () => {
     onBlur: expect.any(Function),
     onFocus: expect.any(Function),
     sx: expect.objectContaining({ position: 'relative' }),
+    statusClasses: {
+      isContainer: true,
+    },
   });
   expect(fieldControlInputProps).toEqual({
     autoComplete: defaultProps.autoComplete,
     autoCorrect: undefined,
     autoFocus: defaultProps.hasAutoFocus,
-    className: `${defaultProps.className} field-control-input is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
+    className: `${defaultProps.className} field-control-input is-disabled is-read-only is-${statuses.DEFAULT} is-tested is-control-input`,
     defaultSelected: true,
     defaultValue: defaultProps.defaultValue,
     disabled: true,
     id: defaultProps.id,
     isFocused: false,
+    maxLength: undefined,
     readOnly: true,
     required: true,
     onBlur: expect.any(Function),
@@ -65,6 +91,10 @@ test('should return props objects for field components', () => {
     name: defaultProps.name,
     placeholder: defaultProps.placeholder,
     role: defaultProps.role,
+    spellCheck: undefined,
+    statusClasses: {
+      isControlInput: true,
+    },
     type: defaultProps.type,
     value: defaultProps.value,
     'aria-label': undefined,
@@ -72,10 +102,23 @@ test('should return props objects for field components', () => {
   });
   expect(fieldLabelProps).toEqual({
     children: defaultProps.label,
-    className: `${defaultProps.className} field-label is-disabled is-read-only is-${statuses.DEFAULT} is-tested`,
+    className: `${defaultProps.className} field-label is-disabled is-read-only is-${statuses.DEFAULT} is-tested is-field-label`,
+    hintText: undefined,
     id: expect.any(String),
     htmlFor: expect.any(String),
     isRequired: true,
+    mode: undefined,
+    statusClasses: {
+      isFieldLabel: true,
+    },
+  });
+
+  expect(fieldControlWrapperProps).toEqual({
+    className: `${defaultProps.className} field-control-wrapper is-disabled is-read-only is-default is-tested is-control-wrapper`,
+    id: expect.any(String),
+    statusClasses: {
+      isControlWrapper: true,
+    },
   });
 });
 

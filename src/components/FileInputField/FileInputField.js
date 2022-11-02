@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Box, Input, FieldHelperText, Label, Loader } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -160,11 +161,11 @@ const FileInputField = forwardRef(({
   }, [uploadedFiles, uploadedFilesImperative, isMultiple]);
 
   return (
-    <>
+    <Box fieldContainerProps={fieldContainerProps} >
       <Label {...fieldLabelProps} />
       <Box
-        variant="fileInputField.container"
-        {...mergeProps(fieldContainerProps, nonAriaProps)}
+        variant="fileInputField.wrapper"
+        {...mergeProps(fieldControlWrapperProps, nonAriaProps)}
         className={classNames}
         {...getRootProps()}
         // to pass accessibility test, this removes focusable dependents
@@ -203,7 +204,7 @@ const FileInputField = forwardRef(({
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
       )}
-    </>
+    </Box>
   );
 });
 
@@ -274,6 +275,7 @@ FileInputField.propTypes = {
   /** These props will be spread to the field text component. */
   textProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 FileInputField.defaultProps = {

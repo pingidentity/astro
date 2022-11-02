@@ -96,8 +96,8 @@ const useSelectField = (props, ref) => {
   const {
     fieldContainerProps,
     fieldControlInputProps,
-    fieldLabelProps,
     fieldControlWrapperProps,
+    fieldLabelProps,
   } = useField({
     ...props,
     placeholder: props.labelMode === modes.FLOAT ? '' : placeholder,

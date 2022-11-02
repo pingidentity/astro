@@ -4,6 +4,7 @@ import MenuDown from 'mdi-react/MenuDownIcon';
 
 import { Box, Button, Loader, Icon, Text } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { usePropWarning, useSelectField } from '../../hooks';
 import SelectFieldBase from '../SelectFieldBase';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -129,15 +130,7 @@ LinkSelectField.propTypes = {
    * (key: Key) => any
    */
   onSelectionChange: PropTypes.func,
-  /**
-   * Props object passed along to `useSelect` from React Aria, `useSelectState` from React Stately,
-   * and/or the visible button representation for the select input.
-   */
-  controlProps: PropTypes.shape({}),
-  /** Props object passed along to the root container as-is. */
-  containerProps: PropTypes.shape({}),
-  /** Props object passed along to the label as-is. */
-  labelProps: PropTypes.shape({}),
+  ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

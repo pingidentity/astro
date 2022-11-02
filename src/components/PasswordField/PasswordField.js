@@ -16,6 +16,7 @@ import {
   RequirementsList,
 } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import * as hooks from '../../hooks';
 
@@ -219,12 +220,6 @@ PasswordField.propTypes = {
   status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
   type: PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** @ignore Prop that allows testing of the icon button. */
   viewHiddenIconTestId: PropTypes.string,
   /** @ignore Prop that allows testing of the icon button. */
@@ -232,6 +227,7 @@ PasswordField.propTypes = {
   /** Array of Requirements and their status. */
   requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 PasswordField.defaultProps = {

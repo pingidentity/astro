@@ -7,6 +7,7 @@ import { useSearchFieldState } from 'react-stately';
 
 import { Box, Icon, IconButton, Input, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useField, usePropWarning } from '../../hooks';
 
 
@@ -186,13 +187,8 @@ SearchField.propTypes = {
    * (value: string) => void
    */
   onChange: PropTypes.func,
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
   /** Props object that is spread into the icon element. */
   iconProps: PropTypes.shape({}),
-  /** Props object that is spread into the label element. */
-  labelProps: PropTypes.shape({}),
 
 
   // NOTE: unsurfaced useSearchField / useSearchFieldState props listed below
@@ -276,6 +272,7 @@ SearchField.propTypes = {
    */
   onInput: PropTypes.func,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 SearchField.defaultProps = {
