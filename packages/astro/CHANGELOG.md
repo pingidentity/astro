@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.33.1...@pingux/astro@1.34.0) (2022-11-03)
+
+
+### Bug Fixes
+
+* [UIP-5830] Prevent form submitting when adding custom value to MultivalueField on enter press ([71dee3c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/71dee3cd85c3b49e9dd199f07fc55d0212bff50b))
+
+
+### Features
+
+* [UIP-5702] Icon & IconButton - Adding tshirt sizing, sizing story, and commonly used story ([51a3677](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51a367710a739f0576e36179fbdea7ae736b2f32))
+
+
+
+
+
 ## [1.33.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.33.0...@pingux/astro@1.33.1) (2022-11-01)
 
 

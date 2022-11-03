@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.10...@pingux/schema-form@3.11.0) (2022-11-03)
+
+
+### Features
+
+* [UIP-5702] Icon & IconButton - Adding tshirt sizing, sizing story, and commonly used story ([51a3677](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51a367710a739f0576e36179fbdea7ae736b2f32))
+
+
+
+
+
 ## [3.10.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.9...@pingux/schema-form@3.10.10) (2022-11-01)
 
 **Note:** Version bump only for package @pingux/schema-form
