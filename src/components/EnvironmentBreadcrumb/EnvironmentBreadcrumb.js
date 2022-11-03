@@ -187,8 +187,12 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       {emptySearchText}
     </Text>
   );
-
-  const [selectedValue] = selectedKeys;
+  const setAriaLabel = (itemKey) => {
+    if (itemKey !== undefined) {
+      return (popoverState.isOpen ? `${selectedItem.key} - Collapse Options` : `${selectedItem.key} - Expand Options`);
+    }
+    return selectedItem;
+  };
 
   const ItemsSelect = (
     <>
@@ -197,7 +201,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         onPress={handlePopoverOpen}
         ref={triggerRef}
         variant="environmentBreadcrumb.current"
-        aria-label={`${(typeof selectedItem === 'string' ? selectedItem : selectedValue) || 'Selected Item'}`}
+        aria-label={setAriaLabel(selectedItem)}
       >
         {selectedItem}
         <Icon
