@@ -63,7 +63,7 @@ test('should return props objects for field components', () => {
   } = result.current;
 
   expect(fieldContainerProps).toEqual({
-    className: 'field-container has-value',
+    className: 'field-container has-value is-tested is-container',
     id: defaultProps.containerProps.id,
     onBlur: expect.any(Function),
     onFocus: expect.any(Function),
