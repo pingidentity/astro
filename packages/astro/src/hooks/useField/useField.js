@@ -151,6 +151,8 @@ const useField = (props = {}) => {
     isLeftLabel,
     isFloatLabel,
     isFloatLabelActive,
+    ...statusClasses,
+    ...containerProps?.statusClasses,
   });
 
   const fieldContainerProps = {
@@ -206,8 +208,8 @@ const useField = (props = {}) => {
   return {
     fieldContainerProps,
     fieldControlInputProps,
-    fieldLabelProps,
     fieldControlWrapperProps,
+    fieldLabelProps,
   };
 };
 
