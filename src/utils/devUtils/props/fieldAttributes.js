@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
 const descriptions = {
-  containerProps: 'Identifies the element (or elements) whose contents or presence are controlled by the current element.',
-  controlProps: 'Identifies the element (or elements) that describes the object.',
+  containerProps: 'Props object spread into the outer-most container. Wrapper and label will be children.',
+  controlProps: ' Props object that is spread directly into the input element. Will be a child of the Wrapper.',
   controlWrapperProps: 'Props object spread to the field control wrapper, i.e. the immediate parent element for the control, sibling of the label, and child of the field container.',
   labelProps: 'Props object spread to the field label, i.e. the visible text which labels the control.',
 };
