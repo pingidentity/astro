@@ -14,6 +14,7 @@ import Box from '../Box';
 import Radio from '../Radio';
 import Label from '../Label';
 import FieldHelperText from '../FieldHelperText';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 export const RadioContext = createContext();
 
@@ -138,12 +139,7 @@ RadioField.propTypes = {
    * object.
   */
   'aria-details': PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 RadioField.displayName = 'RadioField';
