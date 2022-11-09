@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
-import { Separator, Text, Box, Button } from '../../index';
+import PropTypes from 'prop-types';
+
+import { Box, Button, Separator, Text } from '../../';
+import { useNavBarContext } from '../../context/NavBarContext';
 import NavBarItemBody from './NavBarItemBody';
 import NavBarItemHeader from './NavBarItemHeader';
-import { useNavBarContext } from '../../context/NavBarContext';
 
 /**
  * Composed component that creates a group
@@ -13,8 +14,7 @@ import { useNavBarContext } from '../../context/NavBarContext';
  *
  */
 
-const NavBarSection = (props) => {
-  const { hasSeparator, title, items } = props;
+const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
   const ref = useRef();
 
   const childrenItems = items.filter(i => i.children);
@@ -29,6 +29,7 @@ const NavBarSection = (props) => {
           padding: 0,
           listStyle: 'none',
         }}
+        {...others}
       >
         {childrenItems.map(item => (
           <li key={item.key}>
