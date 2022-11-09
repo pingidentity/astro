@@ -8,10 +8,11 @@ import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import Verify from 'mdi-react/VerifiedIcon';
+
+import { Box, NavBarSection, NavBarItem, NavBarItemButton, NavBarItemLink, Link, Button } from '../../';
 import NavBar from './NavBar';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
-import { Box, NavBarSection, NavBarItem, NavBarItemButton, NavBarItemLink, Link, Button } from '../../index';
 
 const DATA_ID = 'data-id';
 
@@ -192,6 +193,7 @@ test('should render title for sections that have titles', () => {
 
 test('should render title for itemBodies that have subTitles', () => {
   getComponent();
+
   clickHeaderButtons();
 
   expect(screen.getByText('PingOne Services')).toBeInTheDocument();
@@ -199,9 +201,11 @@ test('should render title for itemBodies that have subTitles', () => {
 
 test('should select NavItemLink', () => {
   getComponent();
+
   clickHeaderButtons();
 
   const link = screen.getByTestId('navItemLink');
+
   expect(link).toBeInTheDocument();
   userEvent.click(link);
   expect(link).toHaveClass('is-selected');
@@ -209,9 +213,11 @@ test('should select NavItemLink', () => {
 
 test('should select NavItemLink on space key press', () => {
   getComponent();
+
   clickHeaderButtons();
 
   const link = screen.getByTestId('navItemLink');
+
   expect(link).toBeInTheDocument();
   fireEvent.keyDown(link, { key: 'Space', keyCode: 32 });
   expect(link).toHaveClass('is-selected');
@@ -221,6 +227,7 @@ test('should select NavItem', () => {
   getComponent();
 
   const item = screen.getByTestId('navItem');
+
   expect(item).toBeInTheDocument();
   userEvent.click(item);
   expect(item).toHaveClass('is-selected');
@@ -228,6 +235,7 @@ test('should select NavItem', () => {
 
 test('should select NavItemButton', () => {
   getComponent();
+
   clickHeaderButtons();
 
   const button = screen.getByTestId('navItemButton');
@@ -240,19 +248,23 @@ test('should collapse NavItemBody', () => {
   getComponent();
 
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
+
   clickHeaderButtons();
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
+
   clickHeaderButtons();
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 });
 
 test('should collapse NavItemBody on Escape key press', () => {
   getComponent();
+
   clickHeaderButtons();
 
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
   const headerButtons = screen.getAllByRole('button');
   headerButtons.map(headerButton => fireEvent.keyDown(headerButton, { key: 'Escape', keyCode: 27 }));
+
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 });
 
@@ -264,14 +276,19 @@ test('should change focus between NavBarItemHeader on arrow key press', () => {
   expect(headerButtons[0]).toBeInTheDocument();
   headerButtons[0].focus();
   expect(headerButtons[0]).toHaveClass('is-focused');
+
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
   expect(headerButtons[1]).toHaveClass('is-focused');
+
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowRight', keyCode: 39 });
   expect(headerButtons[2]).toHaveClass('is-focused');
+
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowLeft', keyCode: 37 });
   expect(headerButtons[1]).toHaveClass('is-focused');
+
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowUp', keyCode: 38 });
   expect(headerButtons[0]).toHaveClass('is-focused');
+
   fireEvent.keyDown(headerButtons[0], { key: 'Shift', keyCode: 16 });
   expect(headerButtons[0]).toHaveClass('is-focused');
 });
@@ -283,12 +300,16 @@ test('should not change focus from NavItemBody to NavBarItemHeader on arrow key 
 
   expect(headerButtons[0]).toBeInTheDocument();
   headerButtons[0].click();
+
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
   expect(screen.getByTestId('navItemButton')).toHaveClass('is-focused');
+
   fireEvent.keyDown(screen.getByTestId('navItemButton'), { key: 'ArrowUp', keyCode: 38 });
   expect(screen.getByTestId('navItemButton')).toHaveClass('is-focused');
+
   fireEvent.keyDown(screen.getByTestId('navItemButton'), { key: 'ArrowDown', keyCode: 40 });
   expect(screen.getByTestId('navItemLink')).toHaveClass('is-focused');
+
   fireEvent.keyDown(screen.getByTestId('navItemLink'), { key: 'ArrowDown', keyCode: 40 });
   expect(screen.getByTestId('navItemLink')).toHaveClass('is-focused');
 });
@@ -307,16 +328,22 @@ test('should change focus between nav children on arrow key press', () => {
   expect(link).toBeInTheDocument();
   link.focus();
   expect(link).toHaveClass('is-focused');
+
   fireEvent.keyDown(link, { key: 'ArrowDown', keyCode: 40 });
   expect(button).toHaveClass('is-focused');
+
   fireEvent.keyDown(button, { key: 'ArrowUp', keyCode: 38 });
   expect(link).toHaveClass('is-focused');
+
   fireEvent.keyDown(link, { key: 'ArrowRight', keyCode: 39 });
   expect(button).toHaveClass('is-focused');
+
   fireEvent.keyDown(button, { key: 'ArrowLeft', keyCode: 37 });
   expect(link).toHaveClass('is-focused');
+
   fireEvent.keyDown(link, { key: 'Shift', keyCode: 16 });
   expect(link).toHaveClass('is-focused');
+
   fireEvent.keyDown(link, { key: 'Space', keyCode: 32 });
   expect(link).toHaveClass('is-focused');
 });
