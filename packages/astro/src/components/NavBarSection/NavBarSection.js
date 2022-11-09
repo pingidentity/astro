@@ -17,7 +17,7 @@ import NavBarItemHeader from './NavBarItemHeader';
 const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
   const ref = useRef();
 
-  const childrenItems = items.filter(i => i.children);
+  const childrenItems = items.filter(item => item.children);
 
   return (
     <>
