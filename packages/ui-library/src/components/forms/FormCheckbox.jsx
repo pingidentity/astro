@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import _ from "underscore";
 
 import FormError from "./FormError";
 import FormLabel from "./FormLabel";
@@ -90,6 +91,7 @@ class FormCheckboxBase extends React.Component {
         errorMessage: PropTypes.node,
         helpClassName: PropTypes.string,
         helpTarget: PropTypes.node,
+        id: PropTypes.string,
         inline: PropTypes.bool,
         label: PropTypes.node,
         labelHelpText: PropTypes.string, // use hint instead
@@ -108,6 +110,7 @@ class FormCheckboxBase extends React.Component {
         checked: false,
         "data-id": "form-checkbox",
         disabled: false,
+        id: "",
         inline: false,
         noSpacing: false,
         stacked: false,
@@ -123,6 +126,10 @@ class FormCheckboxBase extends React.Component {
         }
     };
 
+    /* istanbul ignore next  */
+    componentWillMount() {
+        this.fieldId = this.props.id || _.uniqueId("form-checkbox-");
+    }
 
     render() {
         const labelClassName = classnames(
@@ -167,8 +174,10 @@ class FormCheckboxBase extends React.Component {
                 disabled,
                 value: label,
                 hint,
+                labelFor: this.fieldId,
                 children: [
                     <input
+                        id={this.fieldId}
                         data-id={dataId}
                         type="checkbox"
                         name={name}
