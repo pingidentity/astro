@@ -1,43 +1,51 @@
 import React, { Fragment } from 'react';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
+
 import { Separator, Box, Text } from '../../index';
 
-const NavBarItemBody = (props) => {
-  const { item, onKeyDown } = props;
+const NavBarItemBody = ({ item, onKeyDown }) => {
+  const renderSubTitle = (child) => {
+    const { hasSeparator, subTitle } = child;
+
+    return (
+      <Fragment key={`fragment${subTitle}`}>
+        {(hasSeparator || hasSeparator === undefined) && <Separator
+          variant="separator.navBarSubtitleSeparator"
+        />}
+        <Text
+          key={`text${subTitle}`}
+          sx={{
+            mb: 'sm',
+            ml: '45px',
+            mt: 'md',
+          }}
+          variant="text.navBarSubtitle"
+        >
+          {subTitle}
+        </Text>
+      </Fragment>
+    );
+  };
+
+
+  const renderChild = child => (
+    child.subTitle ?
+      renderSubTitle(child)
+      :
+      <ChildItemWrapper onKeyDown={onKeyDown} key={`item${child.key || child}`}>
+        {child}
+      </ChildItemWrapper>
+  );
 
   return (
     <Box sx={{ alignItems: 'flex-start', mb: '15px' }}>
-      {item.children.map(child => (
-        child.subTitle ?
-          <Fragment key={`fragment${child.subTitle}`}>
-            <Separator
-              variant="separator.navBarSubtitleSeparator"
-              key={`separator${child.subTitle}`}
-            />
-            <Text
-              key={`text${child.subTitle}`}
-              variant="text.navBarSubtitle"
-              sx={{
-                mb: '10px',
-                ml: '45px',
-              }}
-            >
-              {child.subTitle}
-            </Text>
-          </Fragment>
-          :
-          <ChildItemWrapper onKeyDown={onKeyDown} key={`item${child.key || child}`}>
-            {child}
-          </ChildItemWrapper>
-        ))
-      }
+      {item.children.map(renderChild)}
     </Box>
   );
 };
 
-const ChildItemWrapper = (props) => {
-  const { children, onKeyDown } = props;
+const ChildItemWrapper = ({ children, onKeyDown }) => {
   const childrenKey = children.key || children;
   const { keyboardProps } = useKeyboard({ onKeyDown: e => onKeyDown(e, childrenKey) });
 
