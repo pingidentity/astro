@@ -13,6 +13,8 @@ import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 import { Box, NavBarSection, NavBarItem, NavBarItemButton, NavBarItemLink, Link, Button } from '../../index';
 
+const DATA_ID = 'data-id';
+
 const data = [
   {
     icon: GlobeIcon,
@@ -137,7 +139,7 @@ const getComponent = (props = {}) => render((
         overflowY: 'overlay !important',
       }}
     >
-      <NavBarSection items={data} hasSeparator />
+      <NavBarSection items={data} hasSeparator data-testid={DATA_ID} data-id={DATA_ID} />
       <NavBarSection items={secondData} title="test_title" />
       <NavBarItem
         id="Overview"
@@ -150,7 +152,7 @@ const getComponent = (props = {}) => render((
   </NavBar>
 ));
 
-const getComponentWithMultipleChildrens = (props = {}) => render((
+const getComponentWithMultipleChildren = (props = {}) => render((
   <NavBar {...props}>
     <Box>
       <Link
@@ -178,26 +180,27 @@ axeTest(getComponent);
 
 test('should render basic nav with children', () => {
   getComponent();
-  const nav = screen.queryByRole('navigation');
-  expect(nav).toBeInTheDocument();
+
+  expect(screen.queryByRole('navigation')).toBeInTheDocument();
 });
 
 test('should render title for sections that have titles', () => {
   getComponent();
-  const title = screen.getByText('test_title');
-  expect(title).toBeInTheDocument();
+
+  expect(screen.getByText('test_title')).toBeInTheDocument();
 });
 
 test('should render title for itemBodies that have subTitles', () => {
   getComponent();
   clickHeaderButtons();
-  const subTitle = screen.getByText('PingOne Services');
-  expect(subTitle).toBeInTheDocument();
+
+  expect(screen.getByText('PingOne Services')).toBeInTheDocument();
 });
 
 test('should select NavItemLink', () => {
   getComponent();
   clickHeaderButtons();
+
   const link = screen.getByTestId('navItemLink');
   expect(link).toBeInTheDocument();
   userEvent.click(link);
@@ -207,6 +210,7 @@ test('should select NavItemLink', () => {
 test('should select NavItemLink on space key press', () => {
   getComponent();
   clickHeaderButtons();
+
   const link = screen.getByTestId('navItemLink');
   expect(link).toBeInTheDocument();
   fireEvent.keyDown(link, { key: 'Space', keyCode: 32 });
@@ -215,6 +219,7 @@ test('should select NavItemLink on space key press', () => {
 
 test('should select NavItem', () => {
   getComponent();
+
   const item = screen.getByTestId('navItem');
   expect(item).toBeInTheDocument();
   userEvent.click(item);
@@ -224,6 +229,7 @@ test('should select NavItem', () => {
 test('should select NavItemButton', () => {
   getComponent();
   clickHeaderButtons();
+
   const button = screen.getByTestId('navItemButton');
   expect(button).toBeInTheDocument();
   userEvent.click(button);
@@ -232,6 +238,7 @@ test('should select NavItemButton', () => {
 
 test('should collapse NavItemBody', () => {
   getComponent();
+
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
   clickHeaderButtons();
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
@@ -242,6 +249,7 @@ test('should collapse NavItemBody', () => {
 test('should collapse NavItemBody on Escape key press', () => {
   getComponent();
   clickHeaderButtons();
+
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
   const headerButtons = screen.getAllByRole('button');
   headerButtons.map(headerButton => fireEvent.keyDown(headerButton, { key: 'Escape', keyCode: 27 }));
@@ -250,7 +258,9 @@ test('should collapse NavItemBody on Escape key press', () => {
 
 test('should change focus between NavBarItemHeader on arrow key press', () => {
   getComponent();
+
   const headerButtons = screen.getAllByRole('button');
+
   expect(headerButtons[0]).toBeInTheDocument();
   headerButtons[0].focus();
   expect(headerButtons[0]).toHaveClass('is-focused');
@@ -268,7 +278,9 @@ test('should change focus between NavBarItemHeader on arrow key press', () => {
 
 test('should not change focus from NavItemBody to NavBarItemHeader on arrow key press', () => {
   getComponent();
+
   const headerButtons = screen.getAllByRole('button');
+
   expect(headerButtons[0]).toBeInTheDocument();
   headerButtons[0].click();
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
@@ -281,16 +293,17 @@ test('should not change focus from NavItemBody to NavBarItemHeader on arrow key 
   expect(screen.getByTestId('navItemLink')).toHaveClass('is-focused');
 });
 
-test('should render nav with multiple childrens', () => {
-  getComponentWithMultipleChildrens();
-  const nav = screen.queryByRole('navigation');
-  expect(nav).toBeInTheDocument();
-});
+test('should render nav with multiple children', () => {
+  getComponentWithMultipleChildren();
 
-test('should change focus between nav childrens on arrow key press', () => {
-  getComponentWithMultipleChildrens();
+  expect(screen.queryByRole('navigation')).toBeInTheDocument();
+});
+test('should change focus between nav children on arrow key press', () => {
+  getComponentWithMultipleChildren();
+
   const link = screen.getByTestId('navLink');
   const button = screen.getByTestId('navButton');
+
   expect(link).toBeInTheDocument();
   link.focus();
   expect(link).toHaveClass('is-focused');
@@ -306,4 +319,10 @@ test('should change focus between nav childrens on arrow key press', () => {
   expect(link).toHaveClass('is-focused');
   fireEvent.keyDown(link, { key: 'Space', keyCode: 32 });
   expect(link).toHaveClass('is-focused');
+});
+
+test('should render NavBarSection with data-id', () => {
+  getComponent();
+
+  expect(screen.getByTestId(DATA_ID)).toHaveAttribute(DATA_ID);
 });
