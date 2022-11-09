@@ -295,9 +295,9 @@ export const Default = () => (
   <NavBar defaultSelectedKey="Dashboard Link Group" >
     <Box padding="md">
       <Link
+        aria-label="home link"
         href="https://pingidentity.com"
         target="_blank"
-        aria-label="home link"
       >
         {logo}
       </Link>
@@ -308,14 +308,15 @@ export const Default = () => (
       paddingBottom="xl"
     >
       <NavBarItem
+        data-id="nav-bar-item"
+        icon={GlobeIcon}
         id="Overview"
         key="Overview"
         text="Overview"
-        icon={GlobeIcon}
       />
-      <NavBarSection items={data} hasSeparator />
-      <NavBarSection items={secondData} hasSeparator title="PingOne Services" />
-      <NavBarSection items={thirdData} />
+      <NavBarSection items={data} hasSeparator data-id="nav-bar-section" />
+      <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+      <NavBarSection items={thirdData} data-id="third-nav-bar-section" />
     </Box>
   </NavBar>
 );
