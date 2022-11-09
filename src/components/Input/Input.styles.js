@@ -194,6 +194,11 @@ input.multivaluesWrapper = {
       boxShadow: 'none',
     },
   },
+  '&.is-read-only': {
+    '> input': {
+      backgroundColor: 'accent.95',
+    },
+  },
 };
 
 input.numberField = {
