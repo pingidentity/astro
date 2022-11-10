@@ -89,12 +89,12 @@ export const Sizes = () => (
           <Text>XS | 21px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace"> {"<IconButton aria-label='create buton' variant='inverted'/>"}</Text>
+          <Text fontFamily="monospace"> {"<IconButton aria-label='create button' variant='inverted'/>"}</Text>
           <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xs'/>"}</Text>
           <Text fontFamily="monospace">{'</IconButton>'}</Text>
         </TableCell>
         <TableCell>
-          <IconButton aria-label="create buton" variant="inverted" sx={{ width: 'unset' }}>
+          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
             <Icon icon={CreateIcon} size="xs" />
           </IconButton>
         </TableCell>
@@ -104,12 +104,12 @@ export const Sizes = () => (
           <Text>SM | 26px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace"> {"<IconButton aria-label='create buton' variant='inverted'/>"}</Text>
+          <Text fontFamily="monospace"> {"<IconButton aria-label='create button' variant='inverted'/>"}</Text>
           <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='sm'/>"}</Text>
           <Text fontFamily="monospace">{'</IconButton>'}</Text>
         </TableCell>
         <TableCell>
-          <IconButton aria-label="create buton" variant="inverted" sx={{ width: 'unset' }}>
+          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
             <Icon icon={CreateIcon} size="sm" />
           </IconButton>
         </TableCell>
@@ -119,12 +119,12 @@ export const Sizes = () => (
           <Text>MD | 31px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace"> {"<IconButton aria-label='create buton' variant='inverted'/>"}</Text>
+          <Text fontFamily="monospace"> {"<IconButton aria-label='create button' variant='inverted'/>"}</Text>
           <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='md'/>"}</Text>
           <Text fontFamily="monospace">{'</IconButton>'}</Text>
         </TableCell>
         <TableCell>
-          <IconButton aria-label="create buton" variant="inverted" sx={{ width: 'unset' }}>
+          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
             <Icon icon={CreateIcon} size="md" />
           </IconButton>
         </TableCell>
