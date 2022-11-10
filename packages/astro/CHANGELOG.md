@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.34.0...@pingux/astro@1.35.0) (2022-11-10)
+
+
+### Bug Fixes
+
+* [UIP-5879] Modal: revert checkbox focus fix inside a modal ([0f18f93](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0f18f9324aa346cc3ba9d8d3c98efa41976d500b))
+
+
+### Features
+
+* [UIP-5852] NavBarItemBody: allow no separator allow no subTitle ([1726df9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1726df9df148e6a176466df8f5de2007f07e6c06))
+* [UIP-5853] NavBarSection: allow data-id through prop spreading ([d899211](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d899211fded182d4cb700d8fb384c9cad8c549d2))
+
+
+
+
+
 # [1.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.33.1...@pingux/astro@1.34.0) (2022-11-03)
 
 
