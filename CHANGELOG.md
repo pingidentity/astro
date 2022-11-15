@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.35.0...@pingux/astro@1.36.0) (2022-11-15)
+
+
+### Features
+
+* [UIP-5880] UiLibraryOverride theme - resolve navBar style conflicts ([d960e1f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d960e1f6f89794e7f56b73cd9a9d3766784118c3))
+
+
+
+
+
 # [1.35.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.34.0...@pingux/astro@1.35.0) (2022-11-10)
 
 
