@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.1...ui-library@5.6.2) (2022-11-15)
+
+
+### Bug Fixes
+
+* [UIP-5861] checkbox and radio button is not triggering ([624699b](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/624699ba05ffb17cb3ddc50e3ad607267d3badf2))
+
+
+
+
+
 ## [5.6.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.0...ui-library@5.6.1) (2022-10-05)
 
 **Note:** Version bump only for package ui-library
