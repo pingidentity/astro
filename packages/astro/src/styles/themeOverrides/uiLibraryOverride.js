@@ -85,6 +85,27 @@ const buttons = {
       color: 'accent.30',
     },
   },
+  navBarSectionButton: {
+    ...theme.buttons.navBarSectionButton,
+    height: 'unset',
+    minHeight: '36px',
+    '&:not(.disabled):hover': {
+      ...theme.buttons.navBarSectionButton,
+    },
+    ':focus': {
+      border: 'none',
+    },
+  },
+  navItemButton: {
+    height: 'unset',
+    ...theme.buttons.navItemButton,
+    '&:not(.disabled):hover': {
+      ...theme.buttons.navItemButton,
+    },
+    ':focus': {
+      border: 'none',
+    },
+  },
 };
 
 const forms = {
