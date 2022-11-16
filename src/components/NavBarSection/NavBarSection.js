@@ -52,7 +52,7 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
 };
 
 const SectionItem = ({ item }) => {
-  const { key, children } = item;
+  const { key, children, ...others } = item;
   const headerButtonRef = useRef();
 
   const navBarState = useNavBarContext();
@@ -117,6 +117,7 @@ const SectionItem = ({ item }) => {
         variant="navBarSectionButton"
         onPress={() => onExpandedChange(!isExpanded)}
         {...keyboardProps}
+        {...others}
       >
         <NavBarItemHeader item={item} />
       </Button>
