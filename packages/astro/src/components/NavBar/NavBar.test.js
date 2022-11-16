@@ -15,9 +15,12 @@ import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 
 const DATA_ID = 'data-id';
+const SECTION_BUTTON_DATA_ID = 'section-data-id';
 
 const data = [
   {
+    'data-id': SECTION_BUTTON_DATA_ID,
+    'data-testid': SECTION_BUTTON_DATA_ID,
     icon: GlobeIcon,
     key: 'Overview',
     heading: 'Overview',
@@ -352,4 +355,10 @@ test('should render NavBarSection with data-id', () => {
   getComponent();
 
   expect(screen.getByTestId(DATA_ID)).toHaveAttribute(DATA_ID);
+});
+
+test('should render NavBarSection button with data-id', () => {
+  getComponent();
+
+  expect(screen.getByTestId(SECTION_BUTTON_DATA_ID)).toHaveAttribute(DATA_ID);
 });

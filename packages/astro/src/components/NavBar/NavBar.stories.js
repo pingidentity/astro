@@ -89,9 +89,10 @@ const logo = (
 
 const data = [
   {
+    'data-id': 'dashboard-data-id',
+    heading: 'Dashboard',
     icon: ViewDashboard,
     key: 'Dashboard',
-    heading: 'Dashboard',
     children: [
       <NavBarItemLink
         key="Dashboard Link Group"
@@ -111,6 +112,7 @@ const data = [
     ],
   },
   {
+    'data-id': 'identities-data-id',
     icon: AccountMultiple,
     key: 'Identities',
     heading: 'Identities',
@@ -153,6 +155,7 @@ const data = [
     ],
   },
   {
+    'data-id': 'connections-data-id',
     icon: TransitConnection,
     key: 'Connections',
     heading: 'Connections',
@@ -248,6 +251,7 @@ const data = [
     ],
   },
   {
+    'data-id': 'experiences-data-id',
     icon: EmoticonHappy,
     key: 'Experiences',
     heading: 'Experiences',
@@ -347,6 +351,7 @@ const data = [
 
 const secondData = [
   {
+    'data-id': 'mfa-data-id',
     icon: Fingerprint,
     key: 'MFA',
     heading: 'MFA',
@@ -370,6 +375,7 @@ const secondData = [
     ],
   },
   {
+    'data-id': 'risk-data-id',
     icon: ScaleBalance,
     key: 'Risk',
     heading: 'Risk',
@@ -393,6 +399,7 @@ const secondData = [
     ],
   },
   {
+    'data-id': 'verify-data-id',
     icon: Verify,
     key: 'Verify',
     heading: 'Verify',
@@ -416,6 +423,7 @@ const secondData = [
     ],
   },
   {
+    'data-id': 'credentials-data-id',
     icon: Credentials,
     key: 'Credentials',
     heading: 'Credentials',
@@ -442,6 +450,7 @@ const secondData = [
 
 const thirdData = [
   {
+    'data-id': 'environment-data-id',
     icon: Earth,
     key: 'Environment',
     heading: 'Environment title that is so long, it wraps',
