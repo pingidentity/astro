@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.2...ui-library@5.6.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* [UIP-5897] some inputs not working in ui-library ([6f61fd2](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/6f61fd20ddc77c93f4605cfd39b7dd72dd12f80f))
+
+
+
+
+
 ## [5.6.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.1...ui-library@5.6.2) (2022-11-15)
 
 

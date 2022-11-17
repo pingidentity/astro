@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.0...@pingux/astro@1.36.1) (2022-11-17)
+
+
+### Bug Fixes
+
+* [UIP-5895] NavBarSection: add data-id to top level button ([35be867](https://gitlab.corp.pingidentity.com/ux/pingux/commit/35be867a8a76b2538f8fa47508bfa69d9ee18adb))
+
+
+
+
+
 # [1.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.35.0...@pingux/astro@1.36.0) (2022-11-15)
 
 
