@@ -130,20 +130,21 @@ class FormLabel extends React.Component {
             return null;
         }
 
+        const labelAttr = {
+            "data-id": dataId,
+            className: classnames(
+                "form-label",
+                className,
+                {
+                    detached,
+                    "form-label--no-spacing": noSpacing,
+                }),
+            style,
+        };
+        if ( this.props.labelFor ) { labelAttr.htmlFor = this.props.labelFor; }
+
         return (
-            <label
-                data-id={dataId}
-                htmlFor={this.props.labelFor}
-                className={classnames(
-                    "form-label",
-                    className,
-                    {
-                        detached,
-                        "form-label--no-spacing": noSpacing,
-                    })
-                }
-                style={style}
-            >
+            <label {...labelAttr} >
                 { !noLabel && (
                     <span className="label-text" data-id="label">
                         <span className="label-container">
