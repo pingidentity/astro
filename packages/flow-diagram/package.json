@@ -1,6 +1,6 @@
 {
   "name": "@pingux/flow-diagram",
-  "version": "0.27.18",
+  "version": "0.27.19-alpha.0",
   "description": "Flow Diagram library",
   "author": "Ping UX Development Team",
   "homepage": "",
@@ -24,7 +24,7 @@
     "build": "rm -rf lib && npm-run-all build:*",
     "build:astro": "cd ../astro && yarn build",
     "build-icons": "cd ../icons && yarn build",
-    "build:icons": "(node -e \"if (! require('fs').existsSync('../icons/lib/ui-library/components')) {process.exit(1)} \" || npm run build-icons)",    
+    "build:icons": "(node -e \"if (! require('fs').existsSync('../icons/lib/ui-library/components')) {process.exit(1)} \" || npm run build-icons)",
     "build:cjs": "BABEL_ENV=cjs NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/cjs/",
     "build:esm": "BABEL_ENV=esm NODE_ENV=production babel --config-file ./babel.config.js src/ --out-dir lib/",
     "build:assets": "cp -r ./src/img ./lib && cp -r ./src/img ./lib/cjs",
