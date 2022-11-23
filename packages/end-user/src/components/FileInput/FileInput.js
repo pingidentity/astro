@@ -91,6 +91,14 @@ class FileInput extends Component {
         e.preventDefault();
         e.stopPropagation();
     }
+    _onKeyDownFunction = (e) => {
+        if(e.key === ' ' || e.key === 'Enter' && this.fileComponent.click){
+            this.fileComponent.click()
+        }
+        if(this.props.onKeyDown){
+            this.props.onKeyDown()
+        };
+    }
 
     _renderDefaultContentSelector = () => (
         <Button
@@ -99,6 +107,8 @@ class FileInput extends Component {
             inline
             key="button"
             label="Select"
+            role="button"
+            onKeyDown={(e)=> {this._onKeyDownFunction(e)}}
         />
     )
 

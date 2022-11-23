@@ -1,5 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act, render, screen, fireEvent } from '@testing-library/react';
+import 'mutationobserver-shim';
 import FileInput from './FileInput';
 
 window.__DEV__ = true;
@@ -7,7 +9,12 @@ window.__DEV__ = true;
 const defaultProps = {
     'data-id': 'test-input',
 };
+
 const getComponent = props => mount(<FileInput {...defaultProps} {...props} />);
+
+const getComponentSelectButton = (props = {})  => render((
+    <FileInput {...defaultProps} {...props} />
+));
 
 describe('FileInput', () => {
     it('renders the file input in the default state', () => {
@@ -19,6 +26,12 @@ describe('FileInput', () => {
         expect(component.exists()).toEqual(true);
         expect(button.exists()).toEqual(true);
         expect(input.exists()).toEqual(true);
+    });
+
+    it('calls Select Button to confirm button exists', async () => {
+        const wrapper = getComponent();
+        const button = wrapper.find('[data-id="select-button"]');
+        expect(button.exists()).toEqual(true);
     });
 
     it('renders the file input in the selected state', () => {
@@ -210,4 +223,35 @@ describe('FileInput', () => {
             expect(instance.removeEventListener).toBeCalledWith(eventName, instance._onDrop);
         });
     });
+});
+
+test('Select button is focusable via Space / Enter', () => {
+    getComponentSelectButton();
+    const buttons = screen.getAllByRole('button');
+    act(() => { buttons[0].focus(); });
+
+    expect(buttons[0]).toHaveFocus();
+    fireEvent.keyDown(buttons[0], { key: 'Space' });
+    expect(buttons[0]).toHaveFocus();
+    fireEvent.keyDown(buttons[0], { key: 'Enter' });
+});
+
+test('Select Button press with Enter', () => {
+    const onPress = jest.fn();
+    getComponentSelectButton({ onKeyDown: onPress });
+    const buttons = screen.getAllByRole('button');
+    expect(onPress).not.toHaveBeenCalled();
+    fireEvent.keyDown(buttons[0], { key: 'Enter' });
+    fireEvent.keyUp(buttons[0], { key: 'Enter' });
+    expect(onPress).toHaveBeenCalledTimes(1);
+});
+
+test('Select Button press with random key does not work', () => {
+    const onPress = jest.fn();
+    getComponentSelectButton();
+    const buttons = screen.getAllByRole('button');
+    const selectButton = buttons[0];
+
+    fireEvent.keyDown(selectButton, {key: '9' });
+    expect(onPress).not.toHaveBeenCalled();
 });
