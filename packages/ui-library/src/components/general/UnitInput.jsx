@@ -115,6 +115,7 @@ module.exports = class extends React.Component {
                         {...dropDownProps}
                         className={ classnames(
                             dropDownClassName,
+                            "unit-input__dropdown",
                             {
                                 "unit-input__drop-down-list--error": this.props.errorMessage
                             }
