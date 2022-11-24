@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.4](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.3...ui-library@5.6.4) (2022-11-24)
+
+
+### Bug Fixes
+
+* [UIP-5893] UI-Library: UnitInput: word wrap ([a32d630](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/a32d6302702b7af7e0a0b6145e4cacab1ef24fb7))
+
+
+
+
+
 ## [5.6.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.2...ui-library@5.6.3) (2022-11-17)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.17](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.16...@pingux/end-user@2.4.17) (2022-11-24)
+
+
+### Bug Fixes
+
+* [UIP-5758] FileInput End User- Added handkleKeyDownEvent to fix select keyboard navigation ([7573ab1](https://gitlab.corp.pingidentity.com/ux/end-user/commit/7573ab158069e34731ec0b66b3d64a63896da79b))
+
+
+
+
+
 ## [2.4.16](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.15...@pingux/end-user@2.4.16) (2022-10-25)
 
 **Note:** Version bump only for package @pingux/end-user
