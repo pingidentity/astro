@@ -5,6 +5,8 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
+import { v4 as uuid } from 'uuid';
 
 import { Item, Menu } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -12,7 +14,6 @@ import ImagePreviewButton from './ImagePreviewButton';
 import ImageUploadFieldBase from './ImageUploadFieldBase';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { useImageUploadState } from '../../hooks/useImageUploadState';
-
 
 /**
  * The Image Upload Field component gives users the ability to upload a file (image by default).
@@ -23,6 +24,8 @@ const ImageUploadField = forwardRef((props, ref) => {
   const state = useImageUploadState(props, inputRef);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
+
+  const statusId = uuid();
 
   const onAction = useCallback(
     (action) => {
@@ -45,34 +48,38 @@ const ImageUploadField = forwardRef((props, ref) => {
   );
 
   return (
-    <ImageUploadFieldBase
-      fileName={state.fileName}
-      handleInputChange={state.handleInputChange}
-      handleLabelClick={state.handleLabelClick}
-      handleOpenMenuChange={state.handleOpenMenuChange}
-      isImageType={state.isImageType}
-      isMenuOpen={state.isMenuOpen}
-      ref={inputRef}
-      widthHeightSx={state.widthHeightSx}
-      {...props}
-    >
-      <ImagePreviewButton
-        defaultPreviewImage={state.defaultPreviewImage}
-        defaultPreviewNode={state.defaultPreviewNode}
+    <>
+      <ImageUploadFieldBase
+        fileName={state.fileName}
+        handleInputChange={state.handleInputChange}
+        handleLabelClick={state.handleLabelClick}
+        handleOpenMenuChange={state.handleOpenMenuChange}
         isImageType={state.isImageType}
-        isLoading={isLoading}
-        loaderSize={loaderSize}
-        onPress={state.pressPreviewButton}
-        previewHeight={props?.previewHeight}
-        previewImage={state.previewImage}
-        previewWidth={props?.previewWidth}
+        isMenuOpen={state.isMenuOpen}
+        ref={inputRef}
         widthHeightSx={state.widthHeightSx}
-      />
-      <Menu onAction={onAction}>
-        <Item key="upload">{uploadItemText}</Item>
-        <Item key="remove">{removeItemText}</Item>
-      </Menu>
-    </ImageUploadFieldBase>
+        {...props}
+      >
+        <ImagePreviewButton
+          defaultPreviewImage={state.defaultPreviewImage}
+          defaultPreviewNode={state.defaultPreviewNode}
+          isImageType={state.isImageType}
+          isLoading={isLoading}
+          loaderSize={loaderSize}
+          onPress={state.pressPreviewButton}
+          previewHeight={props?.previewHeight}
+          previewImage={state.previewImage}
+          previewWidth={props?.previewWidth}
+          widthHeightSx={state.widthHeightSx}
+          aria-haspopup={state.isMenuOpen}
+        />
+        <Menu onAction={onAction} aria-labelledby={statusId}>
+          <Item key="upload" role="button" >{uploadItemText}</Item>
+          <Item key="remove" role="button">{removeItemText}</Item>
+        </Menu>
+      </ImageUploadFieldBase >
+      <VisuallyHidden aria-live="polite" role={state.isMenuOpen ? 'button' : 'status'} id={statusId}>{state.isMenuOpen && 'Menu pop up expanded'}</VisuallyHidden>
+    </>
   );
 });
 
