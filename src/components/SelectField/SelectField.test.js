@@ -3,6 +3,7 @@ import axeTest from '../../utils/testUtils/testAxe';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { SelectField, Item } from '../../index';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const items = [
   { name: 'a' },
@@ -59,4 +60,18 @@ test('default select field', () => {
   expect(hiddenLabel.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleLabel.closest('[aria-hidden="true"]')).toBeNull();
   /* eslint-enable testing-library/no-node-access */
+});
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const visibleInput = screen.getAllByLabelText(defaultProps.label)[1];
+  expect(visibleInput).toHaveAttribute('aria-invalid', 'true');
+
+  const helperTextID = helper.getAttribute('id');
+  expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
 });

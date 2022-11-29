@@ -12,7 +12,7 @@ import Text from '../Text';
  * recommended to use those instead of a standalone `FieldHelperText`.
  */
 const FieldHelperText = forwardRef((props, ref) => {
-  const { className, status, ...others } = props;
+  const { className, status, id, ...others } = props;
   const { classNames } = useStatusClasses(className, {
     [`is-${status}`]: true,
   });
@@ -22,7 +22,8 @@ const FieldHelperText = forwardRef((props, ref) => {
       ref={ref}
       pt="sm"
       variant="fieldHelperText"
-      role="status"
+      role={status === 'error' ? 'alert' : 'status'}
+      id={id}
       {...others}
       className={classNames}
     />
@@ -32,6 +33,8 @@ const FieldHelperText = forwardRef((props, ref) => {
 FieldHelperText.propTypes = {
   /** Determines the color of the field message. */
   status: PropTypes.oneOf(Object.values(statuses)),
+  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
+  id: PropTypes.string,
 };
 
 FieldHelperText.defaultProps = {

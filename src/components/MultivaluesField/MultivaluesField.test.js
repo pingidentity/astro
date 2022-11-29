@@ -371,12 +371,18 @@ test('read only keys', () => {
   expect(deleteButton2).toBeNull();
 });
 
-test(' multivalue field with helper text', () => {
-  const helperText = 'helper text';
-  getComponent({ helperText, status: statuses.ERROR });
-  const helper = screen.getByText(helperText);
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
   expect(helper).toBeInTheDocument();
   expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveAttribute('aria-invalid', 'true');
+
+  const helperTextID = helper.getAttribute('id');
+  expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
 
 test('read only field', () => {

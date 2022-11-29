@@ -55,6 +55,8 @@ const FileInputField = forwardRef(({
     ...nonAriaProps,
   });
 
+  const helperTextId = uuidv4();
+
   const { visuallyHiddenProps } = useVisuallyHidden();
 
   const handleFileSelect = useCallback(() => {
@@ -134,6 +136,7 @@ const FileInputField = forwardRef(({
         isDisabled={isDisabled || isLoading}
         key={fileProps.id}
         textProps={textProps}
+        helperTextId={helperTextId}
         {...fileProps}
       />
     ));
@@ -197,7 +200,7 @@ const FileInputField = forwardRef(({
         )}
       </Box>
       {helperText && (
-        <FieldHelperText status={status}>{helperText}</FieldHelperText>
+        <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
       )}
     </>
   );
