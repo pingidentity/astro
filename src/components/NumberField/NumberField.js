@@ -7,6 +7,7 @@ import { useNumberFieldState } from '@react-stately/numberfield';
 import { useLocale } from '@react-aria/i18n';
 import { mergeProps } from '@react-aria/utils';
 import omit from 'lodash/omit';
+import { v4 as uuid } from 'uuid';
 
 import {
   Box,
@@ -117,6 +118,8 @@ const NumberField = forwardRef((props, ref) => {
   };
   inputProps['aria-roledescription'] = null;
 
+  const helperTextId = uuid();
+
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
@@ -133,11 +136,13 @@ const NumberField = forwardRef((props, ref) => {
             {...updatedFieldControlProps}
             {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
             onChange={onInputChange}
+            aria-describedby={helperText && helperTextId}
+            role="textbox"
           />
           {ControlArrows}
         </Box>
         {helperText && (
-          <FieldHelperText status={status}>{helperText}</FieldHelperText>
+          <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
         )}
       </Box>
     </Box>

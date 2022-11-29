@@ -131,9 +131,9 @@ test('selectedKey for controlled select field', () => {
 test('select field with helper text', () => {
   const helperText = 'some text';
   getComponent({ helperText, status: statuses.ERROR });
-  const fieldHelperText = screen.getByText(helperText);
-  expect(fieldHelperText).toBeInTheDocument();
-  expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
+  const fieldHelperText = screen.getAllByText(helperText);
+  expect(fieldHelperText[1]).toBeInTheDocument();
+  expect(fieldHelperText[1]).toHaveClass(`is-${statuses.ERROR}`);
 });
 
 test('displays a loader while loading', () => {
@@ -147,6 +147,16 @@ test('displays a loader while loading', () => {
   getComponent({ items: [] }, { renderFn: rerender });
 
   expect(loader).not.toBeInTheDocument();
+});
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getAllByText(testHelperText)[0];
+  expect(helper).toBeInTheDocument();
+
+  const helperTextID = helper.getAttribute('id');
+  expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
 });
 
 test('should have no accessibility violations', async () => {
