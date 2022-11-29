@@ -140,3 +140,14 @@ test('number field can be focused', () => {
   userEvent.tab();
   expect(screen.getByLabelText(testLabel)).toHaveClass('is-focused');
 });
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const helperTextID = helper.getAttribute('id');
+  expect(screen.getByRole('textbox')).toHaveAttribute('aria-describedby', helperTextID);
+});

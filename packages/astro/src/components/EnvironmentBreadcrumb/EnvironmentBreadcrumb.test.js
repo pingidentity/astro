@@ -4,6 +4,7 @@ import { Section } from '@react-stately/collections';
 import { axe } from 'jest-axe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../../index';
+import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
 
 const testEnvBreadcrumb = 'test-env-breadcrumb';
 const testName = 'test-name';
@@ -256,4 +257,19 @@ test('should respond to onOpenChange', () => {
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
   userEvent.click(screen.getByText(testSelectedItem));
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
+});
+
+test('should add data-ids to environment button and org button', () => {
+  getComponent();
+
+  expect(screen.getByText(testSelectedItem)).toHaveAttribute('data-id', breadCrumbDataIds.environmentButton);
+  expect(screen.getByText(testName)).toHaveAttribute('data-id', breadCrumbDataIds.orgButton);
+});
+
+test('should add data-id to dropdown list', () => {
+  getComponent();
+
+  userEvent.click(screen.getByText(testSelectedItem));
+
+  expect(screen.getByRole('listbox', { name: 'Items List' })).toHaveAttribute('data-id', breadCrumbDataIds.dropdownList);
 });

@@ -1,7 +1,7 @@
 import React, { forwardRef, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
 import omit from 'lodash/omit';
+import { useVisuallyHidden } from '@react-aria/visually-hidden';
 import { PopoverMenu } from '../../index';
 import useField from '../../hooks/useField';
 import FieldHelperText from '../FieldHelperText';
@@ -36,7 +36,7 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
 
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps}>
-      <Label {...fieldLabelProps} onClick={handleLabelClick} ref={labelRef} />
+      <Label {...fieldLabelProps} onClick={handleLabelClick} ref={labelRef} tabIndex="-1" />
       <PopoverMenu isOpen={isMenuOpen} onOpenChange={handleOpenMenuChange}>
         {children}
       </PopoverMenu>

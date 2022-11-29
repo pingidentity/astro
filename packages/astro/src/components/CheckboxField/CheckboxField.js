@@ -2,6 +2,7 @@ import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react
 import { useCheckbox } from '@react-aria/checkbox';
 import { useToggleState } from '@react-stately/toggle';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -57,15 +58,21 @@ const CheckboxField = forwardRef((props, ref) => {
     controlProps: { ...controlProps, ...inputProps },
   });
 
+  const helperTextId = uuid();
+
   return (
     <Box {...fieldContainerProps}>
       <Label variant="forms.label.checkbox" {...fieldLabelProps}>
-        <Checkbox ref={checkboxRef} {...fieldControlProps} />
+        <Checkbox
+          ref={checkboxRef}
+          aria-describedby={helperText && helperTextId}
+          {...fieldControlProps}
+        />
         {label}
       </Label>
       {
         helperText &&
-        <FieldHelperText status={status} sx={{ pt: 7 }}>
+        <FieldHelperText status={status} sx={{ pt: 7 }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
       }

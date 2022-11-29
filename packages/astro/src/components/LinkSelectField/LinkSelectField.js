@@ -1,6 +1,8 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import { v4 as uuid } from 'uuid';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
 
 import { Box, Button, Loader, Icon, Text } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
@@ -16,8 +18,10 @@ import statuses from '../../utils/devUtils/constants/statuses';
  * React Stately.
  */
 const LinkSelectField = forwardRef((props, ref) => {
-  const { placeholder, isDisabled, status } = props;
+  const { placeholder, isDisabled, status, helperText } = props;
   const { ariaProps } = getAriaAttributeProps(props);
+
+  const helperTextId = uuid();
 
   usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField({
@@ -42,6 +46,7 @@ const LinkSelectField = forwardRef((props, ref) => {
       ref={triggerRef}
       variant="link"
       tabIndex={isDisabled ? -1 : 0}
+      aria-describedby={helperText && helperTextId}
       {...triggerProps}
       {...ariaProps}
     >
@@ -59,10 +64,15 @@ const LinkSelectField = forwardRef((props, ref) => {
           />
         </Box>
       </Box>
+      <VisuallyHidden aria-live="polite" id={helperTextId}>{helperText}</VisuallyHidden>
     </Button>
   );
 
-  return <SelectFieldBase {...props} {...selectFieldProps} trigger={trigger} />;
+  return (<SelectFieldBase
+    {...props}
+    {...selectFieldProps}
+    trigger={trigger}
+  />);
 });
 
 LinkSelectField.propTypes = {
