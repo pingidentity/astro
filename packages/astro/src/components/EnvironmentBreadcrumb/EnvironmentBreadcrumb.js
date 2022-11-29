@@ -29,6 +29,11 @@ import {
   Text,
 } from '../../index';
 
+export const breadCrumbDataIds = {
+  dropdownList: 'breadcrumb--dropdown-list',
+  environmentButton: 'breadcrumb--environment-button',
+  orgButton: 'breadcrumb--org-button',
+};
 /** The Environment Picker with Search and Sections support */
 
 const EnvironmentBreadcrumb = forwardRef((props, ref) => {
@@ -40,15 +45,15 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     isOpen,
     items,
     itemsFilter: imperativeItemsFilter,
-    onOpenChange,
+    name,
     onNamePress,
+    onOpenChange,
     onPopoverClose: imperativeOnPopoverClose,
     onPopoverOpen: imperativeOnPopoverOpen,
     onSelectionChange,
-    name,
+    popoverProps,
     searchProps,
     selectedItem,
-    popoverProps,
     ...others
   } = props;
 
@@ -202,6 +207,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         ref={triggerRef}
         variant="environmentBreadcrumb.current"
         aria-label={setAriaLabel(selectedItem)}
+        data-id={breadCrumbDataIds.environmentButton}
       >
         {selectedItem}
         <Icon
@@ -238,7 +244,11 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
             {checkIfListEmpty() ? (
               EmptyListState
             ) : (
-              <ListBox state={listBoxState} aria-label="Items List" />
+              <ListBox
+                aria-label="Items List"
+                data-id={breadCrumbDataIds.dropdownList}
+                state={listBoxState}
+              />
             )}
           </ScrollBox>
         </FocusScope>
@@ -272,6 +282,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         variant="environmentBreadcrumb.current"
         data-testid="name"
         aria-label={name}
+        data-id={breadCrumbDataIds.orgButton}
         elementType="Button"
       >
         <Icon icon={HomeIcon} mr={7} />
