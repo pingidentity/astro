@@ -92,7 +92,7 @@ test('it displays and clears client errors when async errors come through', asyn
   await act(async () => user.click(submitButton));
 
   // Expect validation error
-  const validationError = await screen.findByRole('status');
+  const validationError = await screen.findByRole('alert') || await screen.findByRole('status');
   expect(validationError).toHaveTextContent(validationErrorText);
 
   // Ensure validation succeeds, length = 3
@@ -200,16 +200,16 @@ test('turns on live validation after initial submit if option is given', async (
   // Ensure validation fails, length = 2
   fireEvent.change(input, { target: { value: '12' } });
   // Ensure live validation is not happening yet
-  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  expect(screen.queryByRole('status' || 'alert')).not.toBeInTheDocument();
   await act(async () => user.click(submitButton));
 
   // Expect validation error
-  const validationError = await screen.findByRole('status');
+  const validationError = await screen.findByRole('alert') || await screen.findByRole('status');
   expect(validationError).toHaveTextContent(validationErrorText);
 
   // Expect live validation to happen after initial submit (no need to submit again)
   fireEvent.change(input, { target: { value: '123' } });
-  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  expect(screen.queryByRole('status' || 'alert')).not.toBeInTheDocument();
   await act(() => promise);
 });
 
@@ -231,15 +231,15 @@ test('live validation happens all of the time if option is given', async () => {
   // Ensure validation fails, length = 2
   fireEvent.change(input, { target: { value: '12' } });
   // Ensure live validation is happening already
-  expect(screen.queryByRole('status')).toBeInTheDocument();
+  expect(screen.queryByRole('status') || screen.queryByRole('alert')).toBeInTheDocument();
 
   // Expect validation error
-  const validationError = await screen.findByRole('status');
+  const validationError = await screen.findByRole('alert') || await screen.findByRole('status');
   expect(validationError).toHaveTextContent(validationErrorText);
 
   // Expect live validation to keep happening
   fireEvent.change(input, { target: { value: '123' } });
-  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  expect(screen.queryByRole('status' || 'alert')).not.toBeInTheDocument();
   await act(() => promise);
 });
 
@@ -274,7 +274,7 @@ test('it clears async errors on change when live validation is enabled post subm
   await waitFor(() => fireEvent.change(input, { target: { value: '12' } }));
 
   // Expect validation error to be present
-  expect(screen.getByRole('status')).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toBeInTheDocument();
 
   // Expect async error to be cleared
   expect(screen.queryByText(error)).not.toBeInTheDocument();
@@ -376,7 +376,7 @@ test('providing value for required field and then clearing will trigger validati
   const input = screen.getByRole('textbox');
   fireEvent.change(input, { target: { value: '123' } });
   fireEvent.change(input, { target: { value: '' } });
-  expect(screen.queryByRole('status')).toBeInTheDocument();
+  expect(screen.queryByRole('alert') || screen.getByRole('status')).toBeInTheDocument();
   expect(screen.queryByText('Is a required property')).toBeInTheDocument();
   await act(() => promise);
 });

@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen, act, within } from '../../utils/testUtils/testWrapper';
 import { ComboBoxField, Item, OverlayProvider } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -674,6 +675,20 @@ test('if "hasAddOption" is provided, then custom value is added to listbox on bl
 
   const options = screen.queryAllByRole('option');
   expect(options[options.length - 1]).toHaveTextContent(inputValue);
+});
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveAttribute('aria-invalid', 'true');
+
+  const helperTextID = helper.getAttribute('id');
+  expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
 
 test('should have no accessibility violations', async () => {

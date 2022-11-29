@@ -2,6 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import statuses from '../../utils/devUtils/constants/statuses';
 import CheckboxField from '../CheckboxField';
 
 const testLabel = 'Test Label';
@@ -77,6 +78,17 @@ test('read only checkbox', () => {
   getComponent({ isReadOnly: true });
   const input = screen.getByRole('checkbox');
   expect(input).toHaveAttribute('readonly');
+});
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const helperTextID = helper.getAttribute('id');
+  expect(screen.getByRole('checkbox')).toHaveAttribute('aria-describedby', helperTextID);
 });
 
 test('indeterminate checkbox', () => {

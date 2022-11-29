@@ -51,6 +51,8 @@ const ComboBoxField = forwardRef((props, ref) => {
     scrollBoxProps,
     controlProps,
     defaultFilter,
+    status,
+    helperText,
     ...others
   } = props;
   const { nonAriaProps } = getAriaAttributeProps(others);
@@ -213,6 +215,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         triggerProps={buttonProps}
         triggerRef={buttonRef}
         controlProps={controlProps}
+        aria-invalid={status === 'error' && true}
       />
       <PopoverContainer
         hasNoArrow
