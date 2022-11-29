@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.1...@pingux/astro@1.36.2) (2022-11-29)
+
+
+### Bug Fixes
+
+* [UIP-5721] Image upload EA fixes ([cb0452e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cb0452e91a81dcd5bb07bef888557256d4809859))
+* [UIP-5743] Adding error announcement to all field components ([fd59ec4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd59ec4d7a55c7bb4d5f5784bce6f8a6ef9640a2))
+* [UIP-5863] ColorField overlay accessibility fix ([506ba3d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/506ba3d71843fc0ba33bc7e80f0adb82595a18ba))
+* [UIP-5896] Add data ids to EnvironmentBreadcrumb ([cb7bee4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cb7bee4232ec9f3bb3e05cdc72c1f663b4798943))
+
+
+
+
+
 ## [1.36.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.0...@pingux/astro@1.36.1) (2022-11-17)
 
 

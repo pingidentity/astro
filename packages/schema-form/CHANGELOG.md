@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.4...@pingux/schema-form@3.11.5) (2022-11-29)
+
+
+### Bug Fixes
+
+* [UIP-5743] Adding error announcement to all field components ([fd59ec4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd59ec4d7a55c7bb4d5f5784bce6f8a6ef9640a2))
+
+
+
+
+
 ## [3.11.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.3...@pingux/schema-form@3.11.4) (2022-11-24)
 
 **Note:** Version bump only for package @pingux/schema-form
