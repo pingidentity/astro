@@ -4,6 +4,7 @@ import ErrorIcon from 'mdi-react/ErrorIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
 import PropTypes from 'prop-types';
 import { useVisuallyHidden } from '@react-aria/visually-hidden';
+
 import { Box, Button, IconButton, Icon, Text } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -16,6 +17,7 @@ const FileItem = (props) => {
     name,
     status,
     textProps,
+    helperTextId,
   } = props;
   const handleDeleteButtonPress = useCallback(e => handleFileDelete(e, id), [
     id,
@@ -59,6 +61,7 @@ const FileItem = (props) => {
         aria-label={name}
         data-testid="file-uploaded__download-file-button"
         onPress={handleDownloadPress}
+        aria-describedby={helperTextId}
       >
         <Text color="active" {...textProps}>
           {name}
@@ -95,6 +98,7 @@ FileItem.propTypes = {
   id: PropTypes.string,
   isDisabled: PropTypes.bool,
   name: PropTypes.string,
+  helperTextId: PropTypes.string,
   status: PropTypes.oneOf(Object.values(statuses)),
   textProps: PropTypes.shape({}),
 };

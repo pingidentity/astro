@@ -13,6 +13,8 @@ const removeIds = (doc) => {
   const all = doc.querySelectorAll('*');
   for (let i = 0, max = all.length; i < max; i += 1) {
     all[i].removeAttribute('aria-labelledby');
+    all[i].removeAttribute('aria-describedby');
+    all[i].removeAttribute('aria-invalid');
     all[i].removeAttribute('id');
     all[i].removeAttribute('for');
   }

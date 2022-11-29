@@ -7,7 +7,7 @@ import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
 
-import { Box, FieldHelperText, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
+import { Box, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { usePropWarning } from '../../hooks';
 
@@ -362,16 +362,11 @@ const MultivaluesField = forwardRef((props, ref) => {
         onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
         slots={{ beforeInput: <>{readOnlyItems} {selectedItems}{readOnlyInputEntry}</> }}
         value={filterString}
+        helperText={helperText}
+        aria-invalid={status === 'error' && true}
         {...ariaProps}
         {...inputProps}
       />
-      {
-        helperText &&
-          <FieldHelperText status={status}>
-            {helperText}
-          </FieldHelperText>
-      }
-
       <PopoverContainer
         hasNoArrow
         isDismissable

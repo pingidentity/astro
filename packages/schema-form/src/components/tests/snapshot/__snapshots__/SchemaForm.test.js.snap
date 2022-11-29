@@ -15155,7 +15155,7 @@ exports[`single fields string field with custom errors as sentence 1`] = `
         </div>
         <span
           class="is-error emotion-9 emotion-10"
-          role="status"
+          role="alert"
         >
           Should be string, Blah
         </span>
@@ -18517,7 +18517,7 @@ exports[`single fields string field with markdown errors 1`] = `
           </div>
           <span
             class="is-error emotion-4 emotion-16"
-            role="status"
+            role="alert"
           >
             <span
               data-testid="react-markdown"
