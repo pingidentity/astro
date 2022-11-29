@@ -123,3 +123,14 @@ test('radio group with horizontal orientation', () => {
   const group = screen.getByRole('radiogroup');
   expect(group).toHaveAttribute('aria-orientation', ORIENTATION.HORIZONTAL);
 });
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const helperTextID = helper.getAttribute('id');
+  expect(screen.getByTestId('radioGroupWrapper')).toHaveAttribute('aria-labelledby', helperTextID);
+});

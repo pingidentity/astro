@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateIcon from 'mdi-react/CreateIcon';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
+import { v4 as uuid } from 'uuid';
 import {
   Box,
   Chip,
@@ -79,6 +80,7 @@ const sx = {
     width: 'md',
   },
 };
+const helperTextId = uuid();
 
 const Row = (props) => {
   const {
@@ -107,6 +109,7 @@ const Row = (props) => {
             width: '165px',
           },
         }}
+        aria-labelledby={withError && helperTextId}
         slots={withError && {
           inContainer: (
             <Icon icon={AlertCircleIcon} sx={sx.alertCircleIcon} />
@@ -221,7 +224,7 @@ export const WithError = () => {
       {withError && (
         <Box sx={withErrorSx.errorBox}>
           <Icon size={24} icon={AlertCircleIcon} color="#A31300" />
-          <Text sx={withErrorSx.text}>
+          <Text sx={withErrorSx.text} id={helperTextId} role="alert">
             This attribute is unavailable.
             Please map the attribute again or re-map to a different attribute.
           </Text>

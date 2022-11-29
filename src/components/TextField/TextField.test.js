@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TextField from '.';
 import axeTest from '../../utils/testUtils/testAxe';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const testId = 'test-text-field';
 const testLabel = 'Test Label';
@@ -108,4 +109,18 @@ test('text field container and input have is-read-only class name when isReadOnl
   getComponent({ isReadOnly: true });
   const control = screen.getByLabelText(testLabel);
   expect(control).toHaveClass('is-read-only');
+});
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const input = screen.getByRole('textbox');
+  expect(input).toHaveAttribute('aria-invalid', 'true');
+
+  const helperTextID = helper.getAttribute('id');
+  expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
