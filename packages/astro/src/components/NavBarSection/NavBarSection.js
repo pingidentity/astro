@@ -57,19 +57,19 @@ const SectionItem = ({ item }) => {
 
   const navBarState = useNavBarContext();
   const { expandedKeys, setExpandedKeys } = navBarState;
-  const isExpanded = expandedKeys?.has(key);
+  const isExpanded = expandedKeys.includes(key);
 
   const firstChildKey = children.length ? children[0].key : null;
   const lastChildKey = children.length ? children[children.length - 1].key : null;
 
   const onExpandedChange = (isOpen) => {
+    let newArray;
     if (isOpen) {
-      expandedKeys.add(key);
+      newArray = [...expandedKeys, key];
     } else {
-      expandedKeys.delete(key);
+      newArray = expandedKeys.filter(thiskey => thiskey !== key);
     }
-
-    setExpandedKeys(new Set(expandedKeys));
+    setExpandedKeys(newArray);
   };
 
   const focusManager = useFocusManager();
