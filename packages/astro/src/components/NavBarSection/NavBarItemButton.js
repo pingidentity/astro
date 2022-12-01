@@ -15,7 +15,7 @@ const NavBarItemButton = (props) => {
 
   const state = useNavBarContext();
 
-  const isSelected = state.selectedKey.includes(key);
+  const isSelected = state.selectedKey === key;
 
   const { onNavPress } = useNavBarPress({ key, onPressCallback }, state);
 

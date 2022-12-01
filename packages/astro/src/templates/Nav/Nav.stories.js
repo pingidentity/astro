@@ -22,10 +22,10 @@ export default {
   },
 };
 
-const SideNav = ({ setSelectedKeys, selectedKeys }) => (
+const SideNav = ({ setSelectedKey, selectedKey }) => (
   <NavBar
-    setSelectedKeys={setSelectedKeys}
-    selectedKeys={selectedKeys}
+    setSelectedKey={setSelectedKey}
+    selectedKey={selectedKey}
   >
     <Box padding="md">
       <Link
@@ -52,15 +52,15 @@ const SideNav = ({ setSelectedKeys, selectedKeys }) => (
 );
 
 export const Default = () => {
-  const [selectedKeys, setSelectedKeys] = useState('Overview');
+  const [selectedKey, setSelectedKey] = useState('Overview');
 
   return (
     <Box bg="accent.99" height="100vh">
-      <SideNav setSelectedKeys={setSelectedKeys} selectedKeys={selectedKeys} />
+      <SideNav setSelectedKey={setSelectedKey} selectedKey={selectedKey} />
       <HeaderBar />
       <Box ml={255} mt={25}>
         <Text as="h1" variant="title" sx={{ fontWeight: 3 }}>
-          {selectedKeys}
+          {selectedKey}
         </Text>
       </Box>
     </Box>
