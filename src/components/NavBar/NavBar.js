@@ -51,7 +51,7 @@ const NavBar = (props) => {
     >
       <Box variant="navBar.container" role="navigation" as="nav">
         {items.length ? (
-          <FocusScope restoreFocus autoFocus>
+          <FocusScope restoreFocus>
             {items.map(({ item, key }) => <FocusableItem key={key}>{item}</FocusableItem>)}
           </FocusScope>
         ) : null}
