@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.2...@pingux/astro@1.37.0) (2022-12-01)
+
+
+### Bug Fixes
+
+* [UIP-5742] AccodrionGroup focusing when input field inside ([ad40e26](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ad40e2603c32368443fe8119ca0729782c4f5b72))
+* [UIP-5901] NavBar: remove auto focus on mount ([4c6fe23](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4c6fe233d8d80354d1ccf8008eafc59c4c6d8869))
+* [UIP-5906] EnvironmentBreadcrumb gray border ([a65c8dd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a65c8dd6786fb75b5b5f83b1ebd427810434a65d))
+
+
+### Features
+
+* [UIP-5875] NavBar controlled version ([5a19e44](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5a19e44b260ae7c4ce4abb87f02a53ef15045834))
+
+
+
+
+
 ## [1.36.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.1...@pingux/astro@1.36.2) (2022-11-29)
 
 
