@@ -71,6 +71,9 @@ const buttons = {
       '&:hover:not(.disabled)': {
         ...theme.buttons.environmentBreadcrumb.current,
       },
+      '&:focus': {
+        ...theme.buttons.environmentBreadcrumb.current,
+      },
     },
   },
   rocker: {
