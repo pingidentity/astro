@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import GlobeIcon from 'mdi-react/GlobeIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
@@ -156,6 +156,57 @@ const getComponent = (props = {}) => render((
   </NavBar>
 ));
 
+const ControlledComponent = () => {
+  const [selectedKey, setSelectedKey] = useState('');
+
+  const setKeys = (e) => {
+    setSelectedKey(e);
+  };
+
+  const customData = [
+    {
+      icon: GlobeIcon,
+      key: 'Environment',
+      heading: 'Environment title that is so long, it wraps',
+      children: [
+        <NavBarItemButton
+          key="Click me for MFA Users"
+          id="Click me for MFA Users"
+          onPress={() => { setSelectedKey('MFA Button Users'); }}
+        >
+          Click me for MFA Users
+        </NavBarItemButton>,
+        <NavBarItemButton
+          key="Earth Button Group"
+          id="Earth Button Group"
+        >
+          Group
+        </NavBarItemButton>,
+      ],
+    },
+  ];
+
+  return (
+    <NavBar setSelectedKey={setKeys} selectedKey={selectedKey}>
+      <Box
+        variant="navBar.sectionContainer"
+        paddingBottom="xl"
+      >
+        <NavBarItem
+          id="Overview"
+          key="Overview"
+          text="Overview"
+          icon={ViewDashboard}
+          data-testid="navItem"
+        />
+        <NavBarSection items={data} hasSeparator data-id="nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={customData} data-id="third-nav-bar-section" />
+      </Box>
+    </NavBar>
+  );
+};
+
 const getComponentWithMultipleChildren = (props = {}) => render((
   <NavBar {...props}>
     <Box>
@@ -188,6 +239,12 @@ test('should render basic nav with children', () => {
   expect(screen.queryByRole('navigation')).toBeInTheDocument();
 });
 
+test('controlled: should render basic nav with children', () => {
+  render(<ControlledComponent />);
+
+  expect(screen.queryByRole('navigation')).toBeInTheDocument();
+});
+
 test('should render title for sections that have titles', () => {
   getComponent();
 
@@ -214,6 +271,21 @@ test('should select NavItemLink', () => {
   expect(link).toHaveClass('is-selected');
 });
 
+test('controlled: should select NavItemLink', () => {
+  render(<ControlledComponent />);
+  let link;
+
+  clickHeaderButtons();
+
+  link = screen.queryByTestId('navItemLink');
+
+  expect(link).toBeInTheDocument();
+  userEvent.click(link);
+
+  link = screen.queryByTestId('navItemLink');
+  expect(link).toHaveClass('is-selected');
+});
+
 test('should select NavItemLink on space key press', () => {
   getComponent();
 
@@ -226,6 +298,34 @@ test('should select NavItemLink on space key press', () => {
   expect(link).toHaveClass('is-selected');
 });
 
+test('controlled: should select NavItemLink on space key press', () => {
+  render(<ControlledComponent />);
+  let link;
+
+  clickHeaderButtons();
+
+  link = screen.queryByTestId('navItemLink');
+  expect(link).toBeInTheDocument();
+
+  fireEvent.keyDown(link, { key: 'Space', keyCode: 32 });
+  fireEvent.keyUp(link, { key: 'Space', keyCode: 32 });
+  link = screen.queryByTestId('navItemLink');
+
+  expect(link).toHaveClass('is-selected');
+});
+
+test('should select NavItem', () => {
+  render(<ControlledComponent />);
+  let item;
+
+  item = screen.queryByTestId('navItem');
+
+  expect(item).toBeInTheDocument();
+  userEvent.click(item);
+  item = screen.queryByTestId('navItem');
+  expect(item).toHaveClass('is-selected');
+});
+
 test('should select NavItem', () => {
   getComponent();
 
@@ -233,6 +333,19 @@ test('should select NavItem', () => {
 
   expect(item).toBeInTheDocument();
   userEvent.click(item);
+  expect(item).toHaveClass('is-selected');
+});
+
+test('controlled: should select NavItem', () => {
+  render(<ControlledComponent />);
+  let item;
+
+  item = screen.queryByTestId('navItem');
+
+  expect(item).toBeInTheDocument();
+  userEvent.click(item);
+
+  item = screen.queryByTestId('navItem');
   expect(item).toHaveClass('is-selected');
 });
 
@@ -244,6 +357,20 @@ test('should select NavItemButton', () => {
   const button = screen.getByTestId('navItemButton');
   expect(button).toBeInTheDocument();
   userEvent.click(button);
+  expect(button).toHaveClass('is-selected');
+});
+
+test('controlled: should select NavItemButton', () => {
+  render(<ControlledComponent />);
+  let button;
+
+  clickHeaderButtons();
+
+  button = screen.queryByTestId('navItemButton');
+  expect(button).toBeInTheDocument();
+  userEvent.click(button);
+
+  button = screen.queryByTestId('navItemButton');
   expect(button).toHaveClass('is-selected');
 });
 
@@ -361,4 +488,26 @@ test('should render NavBarSection button with data-id', () => {
   getComponent();
 
   expect(screen.getByTestId(SECTION_BUTTON_DATA_ID)).toHaveAttribute(DATA_ID);
+});
+
+test('passing in a string into defaultSelectedKeys makes the key selected by default, and the parent expanded by default ', () => {
+  getComponent({ defaultSelectedKey: 'Credentials Button Users' });
+
+  const child = screen.getByTestId('navItemButton');
+  expect(child).toBeInTheDocument();
+  expect(child).toHaveClass('is-selected');
+});
+
+test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', () => {
+  getComponent({ defaultSelectedKey: 'Credentials Button Users' });
+
+  const child = screen.getByTestId('navItemButton');
+  expect(child).toBeInTheDocument();
+  expect(child).toHaveClass('is-selected');
+
+  const parent = screen.queryByTestId(SECTION_BUTTON_DATA_ID);
+  expect(parent).not.toHaveClass('is-selected');
+  userEvent.click(parent);
+  const parentDiv = screen.queryByTestId('Overview');
+  expect(parentDiv).toHaveClass('is-selected');
 });

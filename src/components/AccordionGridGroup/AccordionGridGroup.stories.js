@@ -253,9 +253,9 @@ export const Controlled = () => {
 
 export const AccordionWithInputs = () => {
   return (
-    <AccordionGridGroup items={data}>
+    <AccordionGridGroup items={data} defaultSelectedKeys={['Organization']}>
       {item => (
-        <Item key={item.key} textValue={item.name}>
+        <Item key={item.key}>
           <Text
             sx={{
               fontWeight: 3,

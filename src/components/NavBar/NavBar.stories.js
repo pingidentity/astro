@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AccountMultiple from 'mdi-react/AccountMultipleIcon';
 import Earth from 'mdi-react/EarthIcon';
 import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
@@ -102,13 +102,12 @@ const data = [
       >
         Group
       </NavBarItemLink>,
-      <NavBarItemLink
+      <NavBarItemButton
         key="Dashboard Link Populations"
         id="Dashboard Link Populations"
-        href="https://pingidentity.com/"
       >
         Populations
-      </NavBarItemLink>,
+      </NavBarItemButton>,
     ],
   },
   {
@@ -145,13 +144,12 @@ const data = [
       >
         Attributes
       </NavBarItemLink>,
-      <NavBarItemLink
+      <NavBarItemButton
         key="Identities Link Roles"
         id="Identities Link Roles"
-        href="https://pingidentity.com/"
       >
         Roles
-      </NavBarItemLink>,
+      </NavBarItemButton>,
     ],
   },
   {
@@ -241,13 +239,12 @@ const data = [
       >
         Certificates & Key Pairs
       </NavBarItemLink>,
-      <NavBarItemLink
+      <NavBarItemButton
         key="Connections Resources"
         id="Connections Resources"
-        href="https://pingidentity.com/"
       >
         Resources
-      </NavBarItemLink>,
+      </NavBarItemButton>,
     ],
   },
   {
@@ -338,13 +335,12 @@ const data = [
       >
         Vanity Domains
       </NavBarItemLink>,
-      <NavBarItemLink
+      <NavBarItemButton
         key="Experiences Sender"
         id="Experiences Sender"
-        href="https://pingidentity.com/"
       >
         Sender
-      </NavBarItemLink>,
+      </NavBarItemButton>,
     ],
   },
 ];
@@ -472,7 +468,7 @@ const thirdData = [
 ];
 
 export const Default = () => (
-  <NavBar defaultSelectedKey="Dashboard Link Group" >
+  <NavBar >
     <Box padding="md">
       <Link
         aria-label="home link"
@@ -500,3 +496,60 @@ export const Default = () => (
     </Box>
   </NavBar>
 );
+
+export const Controlled = () => {
+  const [selectedKey, setSelectedKey] = useState('Dashboard Link Group');
+
+  const customData = [
+    {
+      icon: Earth,
+      key: 'Environment',
+      heading: 'Nested redirect is in here',
+      children: [
+        <NavBarItemButton
+          key="Click me for MFA Users"
+          id="Click me for MFA Users"
+          onPress={() => { setSelectedKey('MFA Button Users'); }}
+        >
+          Click me for MFA Users
+        </NavBarItemButton>,
+        <NavBarItemButton
+          key="Earth Button Group"
+          id="Earth Button Group"
+        >
+          Group
+        </NavBarItemButton>,
+      ],
+    },
+  ];
+
+  return (
+    <NavBar setSelectedKey={setSelectedKey} selectedKey={selectedKey}>
+      <Box padding="md">
+        <Link
+          aria-label="home link"
+          href="https://pingidentity.com"
+          target="_blank"
+        >
+          {logo}
+        </Link>
+      </Box>
+      <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" />
+      <Box
+        variant="navBar.sectionContainer"
+        paddingBottom="xl"
+      >
+        <NavBarItem
+          data-id="nav-bar-item"
+          icon={GlobeIcon}
+          id="Overview"
+          key="Overview"
+          text="Overview"
+        />
+        <NavBarSection items={data} hasSeparator data-id="first-nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={customData} data-id="third-nav-bar-section" />
+      </Box>
+    </NavBar>
+  );
+};
