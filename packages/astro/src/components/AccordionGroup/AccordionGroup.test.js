@@ -46,6 +46,17 @@ const getComponentInOverlayPanel = (props = {}) => render((
   </OverlayPanel>
 ));
 
+const getComponentWithInput = (props = {}) => render((
+  <AccordionGroup {...defaultProps} {...props} >
+    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item">
+      <Text>Render me!</Text>
+    </Item>
+    <Item key="second" textValue="Duplicate" data-id="second" label="Accordion item">
+      <input data-testid="testInput" />
+    </Item>
+  </AccordionGroup>
+));
+
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent, {
   // landmark-unique rule conflicts with react-aria role definition
@@ -157,6 +168,14 @@ test('expanded keys expands an accordion item', () => {
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+});
+
+test('input recives focus in expanded accordion item when click', () => {
+  getComponentWithInput({ expandedKeys: ['second'] });
+  const input = screen.getByTestId('testInput');
+  expect(input).not.toHaveFocus();
+  userEvent.click(input);
+  expect(input).toHaveFocus();
 });
 
 test('able to click a textfield that is the rendered child of an accordion', () => {
