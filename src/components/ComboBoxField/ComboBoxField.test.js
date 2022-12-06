@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { fireEvent } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { useFilter } from '@react-aria/i18n';
@@ -29,21 +29,57 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 
 const ComboBoxWithCustomFilter = () => {
   const { startsWith } = useFilter({ sensitivity: 'base' });
-  const [filterValue, setFilterValue] = useState('');
-  const filteredItems = useMemo(
-    () => items.filter(item => startsWith(item.name, filterValue)),
-    [startsWith, filterValue],
-  );
+
+  const [fieldState, setFieldState] = useState({
+    inputValue: '',
+    selectedKey: '',
+    itemsList: items,
+  });
+
+  const onSelectionChange = (key) => {
+    const selectedItem = items.filter(({ id }) => id === key);
+    setFieldState({
+      inputValue: selectedItem?.name,
+      selectedKey: key,
+      itemsList: items.filter(item =>
+        startsWith(item.name, selectedItem?.name ?? ''),
+      ),
+    });
+  };
+
+  const onInputChange = (value) => {
+    setFieldState((oldValues => ({
+      inputValue: value,
+      selectedKey: value === '' ? null : oldValues.selectedKey,
+      itemsList: items.filter(item => startsWith(item.name, value)),
+    })));
+  };
+
+  const onOpenChange = (isOpen, menuTrigger) => {
+    if (menuTrigger === 'manual' && isOpen) {
+      setFieldState(oldValues => ({
+        inputValue: oldValues.inputValue,
+        selectedKey: oldValues.selectedKey,
+        itemsList: items,
+      }));
+    }
+  };
 
   return (
-    <ComboBoxField
-      {...defaultProps}
-      items={filteredItems}
-      inputValue={filterValue}
-      onInputChange={setFilterValue}
-    >
-      {item => <Item id={item.id}>{item.name}</Item>}
-    </ComboBoxField>
+    <OverlayProvider>
+      <ComboBoxField
+        label="Example label"
+        items={fieldState.itemsList}
+        inputValue={fieldState.inputValue}
+        selectedKey={fieldState.selectedKey}
+        onInputChange={onInputChange}
+        onSelectionChange={onSelectionChange}
+        onOpenChange={onOpenChange}
+        {...defaultProps}
+      >
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </ComboBoxField>
+    </OverlayProvider>
   );
 };
 

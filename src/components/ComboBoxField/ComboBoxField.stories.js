@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { useFilter } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
@@ -244,20 +244,53 @@ export const ControlledSelection = () => {
 export const ControlledFiltering = () => {
   // import { useFilter } from '@react-aria/i18n'
   const { startsWith } = useFilter({ sensitivity: 'base' });
-  const [filterValue, setFilterValue] = useState('');
-  const filteredItems = useMemo(
-    () => items.filter(item => startsWith(item.name, filterValue)),
-    [startsWith, filterValue],
-  );
+
+  const [fieldState, setFieldState] = useState({
+    inputValue: '',
+    selectedKey: '',
+    itemsList: items,
+  });
+
+  const onSelectionChange = (key) => {
+    const selectedItem = items.filter(({ id }) => id === key);
+    setFieldState({
+      inputValue: selectedItem?.name,
+      selectedKey: key,
+      itemsList: items.filter(item =>
+        startsWith(item.name, selectedItem?.name ?? ''),
+      ),
+    });
+  };
+
+  const onInputChange = (value) => {
+    setFieldState((oldValues => ({
+      inputValue: value,
+      selectedKey: value === '' ? null : oldValues.selectedKey,
+      itemsList: items.filter(item => startsWith(item.name, value)),
+    })));
+  };
+
+  const onOpenChange = (isOpen, menuTrigger) => {
+    if (menuTrigger === 'manual' && isOpen) {
+      setFieldState(oldValues => ({
+        inputValue: oldValues.inputValue,
+        selectedKey: oldValues.selectedKey,
+        itemsList: items,
+      }));
+    }
+  };
 
   return (
     <OverlayProvider>
       <ComboBoxField
         label="Example label"
         {...actions}
-        items={filteredItems}
-        inputValue={filterValue}
-        onInputChange={setFilterValue}
+        items={fieldState.itemsList}
+        inputValue={fieldState.inputValue}
+        selectedKey={fieldState.selectedKey}
+        onInputChange={onInputChange}
+        onSelectionChange={onSelectionChange}
+        onOpenChange={onOpenChange}
       >
         {item => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
