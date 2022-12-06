@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.0...@pingux/astro@1.37.1) (2022-12-06)
+
+
+### Bug Fixes
+
+* [UIP-5903] Multivaluesfield improvements epic ([f82a7da](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f82a7da926a9c9a9d9f61fd51b6ccbef75502826))
+
+
+
+
+
 # [1.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.2...@pingux/astro@1.37.0) (2022-12-01)
 
 
