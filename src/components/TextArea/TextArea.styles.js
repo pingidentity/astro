@@ -1,7 +1,7 @@
 import { input } from '../Input/Input.styles';
 // Styles for default input and variants go here.
 
-export const textarea = {
+export const baseField = {
   ...input,
   height: 'unset',
   '&.is-unresizable': {
@@ -12,7 +12,7 @@ export const textarea = {
   },
 };
 
-export const textFieldInContainerSlot = {
+const containerSlot = {
   position: 'absolute',
   bg: 'transparent',
   width: '20px',
@@ -21,7 +21,7 @@ export const textFieldInContainerSlot = {
   transform: 'translateY(-50%)',
 };
 
-export const floatLabelWrapper = {
+const floatLabelWrapper = {
   width: 'calc(100% - 4px)',
   backgroundColor: 'white',
   position: 'relative',
@@ -29,4 +29,10 @@ export const floatLabelWrapper = {
   bottom: '-18px',
   left: '3px',
   zIndex: 2,
+};
+
+export default {
+  baseField,
+  containerSlot,
+  floatLabelWrapper,
 };

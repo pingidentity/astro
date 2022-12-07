@@ -16,6 +16,9 @@ const button = {
       borderRadius: '2px',
       boxShadow: '0 0 0 1px #4462ED',
     },
+    '&:focus-visible': {
+      outline: 'none',
+    },
     '&.is-pressed': {
       color: 'accent.20',
       textDecoration: 'none',

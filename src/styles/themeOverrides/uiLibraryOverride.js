@@ -59,6 +59,9 @@ const buttons = {
       '&:hover:not(.disabled)': {
         ...theme.buttons.environmentBreadcrumb.current,
       },
+      '&:focus': {
+        ...theme.buttons.environmentBreadcrumb.current,
+      },
     },
   },
   rocker: {
@@ -87,6 +90,27 @@ const buttons = {
       ':focus': {
         border: 'none',
       },
+    },
+  },
+  navBarSectionButton: {
+    ...theme.buttons.navBarSectionButton,
+    height: 'unset',
+    minHeight: '36px',
+    '&:not(.disabled):hover': {
+      ...theme.buttons.navBarSectionButton,
+    },
+    ':focus': {
+      border: 'none',
+    },
+  },
+  navItemButton: {
+    height: 'unset',
+    ...theme.buttons.navItemButton,
+    '&:not(.disabled):hover': {
+      ...theme.buttons.navItemButton,
+    },
+    ':focus': {
+      border: 'none',
     },
   },
 };

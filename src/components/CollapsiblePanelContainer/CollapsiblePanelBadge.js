@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chip from '../Chip';
+import Badge from '../Badge';
 
 /**
  * The CollapsiblePanelBadge serves as a badge to display selected count.
@@ -9,12 +9,12 @@ import Chip from '../Chip';
 const CollapsiblePanelBadge = (props) => {
   const { selectedFilterCount, ...others } = props;
   return (
-    <Chip
+    <Badge
       as="span"
       bg="neutral.90"
       label={selectedFilterCount.toString()}
       textColor="neutral.30"
-      variant="collapsiblePanel.badge"
+      variant="variants.collapsiblePanel.badge"
       isUppercase
       {...others}
     />

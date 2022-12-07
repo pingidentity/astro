@@ -158,6 +158,22 @@ test('should display loader if appropriate prop is passed', () => {
   expect(screen.getByTestId(loaderTestId)).toBeInTheDocument();
 });
 
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent(
+    {
+      helperText: testHelperText,
+      status: statuses.ERROR,
+      defaultFileList: [testFileObject],
+    });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const helperTextID = helper.getAttribute('id');
+  expect(screen.getAllByRole('button')[0]).toHaveAttribute('aria-describedby', helperTextID);
+});
+
 test('should display helper text if passed', () => {
   const testHelperText = 'testHelperText';
   getComponent({ helperText: testHelperText });

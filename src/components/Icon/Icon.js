@@ -1,6 +1,8 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
+import { useTShirtSize } from '../../hooks';
+
 
 /**
  * Basic icon component.
@@ -19,16 +21,22 @@ const Icon = forwardRef((props, ref) => {
   const {
     color,
     icon: IconComponent,
-    size,
     sx, // eslint-disable-line
   } = props;
+
+  const { sizeProps } = useTShirtSize(props);
 
   return (
     <Box
       as={IconComponent}
       ref={ref}
       {...props}
-      sx={{ fill: color, size: `${size}px`, minWidth: size, ...sx }}
+      size={sizeProps.size}
+      sx={{
+        fill: color,
+        minWidth: sizeProps.size,
+        ...sx,
+        }}
     />
   );
 });
@@ -38,9 +46,12 @@ Icon.propTypes = {
   icon: PropTypes.elementType.isRequired,
   /**
    * The size of the icon container. If given a number value, it will be converted to pixels.
-   * Standard icon sizes are 15, 22, and 40.
-  */
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+   * Tshirt sizing is recommended and can be passed to the size prop as 'xs', 'sm' , 'md'
+   * rendering 15, 20, and 25 pixel svg containers.  */
+  size: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   /** A theme-aware prop to set the icon's color. */
   color: PropTypes.string,
 };

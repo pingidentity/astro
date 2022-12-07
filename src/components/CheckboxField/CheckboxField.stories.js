@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inutFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
@@ -6,6 +6,7 @@ import CheckboxField from './CheckboxField';
 import Link from '../Link';
 import Text from '../Text';
 import statuses from '../../utils/devUtils/constants/statuses';
+import Box from '../Box';
 
 export default {
   title: 'Form/CheckboxField',
@@ -30,7 +31,7 @@ export default {
     status: {
       control: {
         type: 'select',
-        options: statuses,
+        options: Object.values(statuses),
       },
       defaultValue: statuses.DEFAULT,
     },
@@ -95,3 +96,87 @@ export const HelperText = () => (
     label="Click me"
   />
 );
+
+export const Indeterminate = () => {
+  // Whether the parent checkbox is indeterminate (default is true for our example)
+  const [isIndeterminate, setIsIndeterminate] = useState(true);
+  // Whether the parent checkbox should be checked, this is set independently from indeterminism
+  const [isCompleted, setIsCompleted] = useState(false);
+  // The state of the sub-checkboxes
+  const [subCheckboxes, setSubCheckboxes] = useState([
+    {
+      label: 'Apple Chunks',
+      isSelected: true,
+    }, {
+      label: 'Blueberries',
+      isSelected: false,
+    }, {
+      label: 'Grapes',
+      isSelected: false,
+    }, {
+      label: 'Strawberry Slices',
+      isSelected: true,
+    },
+  ]);
+
+  // Determine which checkbox needs its state updated
+  const handleSubCheckboxChange = (isSelected, changedIndex, changeAll = false) => {
+    const newSubCheckboxes = subCheckboxes.map((checkbox, index) => {
+      if (changeAll || index === changedIndex) return ({ ...checkbox, isSelected });
+      return checkbox;
+    });
+
+    setSubCheckboxes(newSubCheckboxes);
+  };
+
+  // Update all sub-checkbox states when the parent checkbox is pressed
+  const handleParentCheckboxChange = (isSelected) => {
+    handleSubCheckboxChange(isSelected, null, true);
+  };
+
+
+  useEffect(() => {
+    // Determine if all sub-checkboxes are selected / unselected or if there is a mix
+    // and update the parent checkbox
+    if (subCheckboxes.every(item => item.isSelected)) {
+      setIsIndeterminate(false);
+      setIsCompleted(true);
+    } else if (subCheckboxes.every(item => !item.isSelected)) {
+      setIsIndeterminate(false);
+      setIsCompleted(false);
+    } else {
+      setIsIndeterminate(true);
+      setIsCompleted(false);
+    }
+  }, [isIndeterminate, subCheckboxes]);
+
+
+  return (
+    <>
+      <CheckboxField
+        label="Fruit Salad Recipe"
+        isIndeterminate={isIndeterminate}
+        isSelected={isCompleted}
+        onChange={handleParentCheckboxChange}
+      />
+      <Box ml="lg">
+        {subCheckboxes.map((checkbox, index) => (
+          <CheckboxField
+            key={checkbox.label}
+            label={checkbox.label}
+            isSelected={checkbox.isSelected}
+            onChange={isSelected => handleSubCheckboxChange(isSelected, index)}
+          />
+        ))}
+      </Box>
+    </>
+  );
+};
+
+Indeterminate.parameters = {
+  docs: {
+    description: {
+      story: 'When a `CheckboxField` is indeterminate, it\'s necessary to control the state in order to determine how it should function when pressed. Here is an example of how to do that.',
+    },
+  },
+};

@@ -6,6 +6,7 @@ import MenuUp from 'mdi-react/MenuUpIcon';
 import { mergeProps, useNumberField } from 'react-aria';
 import { useNumberFieldState } from 'react-stately';
 import { useLocale } from '@react-aria/i18n';
+import { v4 as uuid } from 'uuid';
 
 import {
   Box,
@@ -59,7 +60,7 @@ const NumberField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   const ControlArrows = (
-    <Box variant="numberField.arrows">
+    <Box variant="forms.numberField.arrows">
       <IconButton {...incrementButtonProps} ref={decRef} tabIndex="-1" p={0}>
         <Icon icon={MenuUp} size={18} />
       </IconButton>
@@ -122,12 +123,14 @@ const NumberField = forwardRef((props, ref) => {
   };
   inputProps['aria-roledescription'] = null;
 
+  const helperTextId = useMemo(() => uuid(), []);
+
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
-      <Box variant="numberField.noDefaultArrows" {...groupProps}>
+      <Box variant="forms.numberField.noDefaultArrows" {...groupProps}>
         <Box
-          variant="numberField.arrowsWrapper"
+          variant="forms.numberField.arrowsWrapper"
           {...fieldControlWrapperProps}
         >
           <Input
@@ -138,11 +141,13 @@ const NumberField = forwardRef((props, ref) => {
             {...updatedFieldControlInputProps}
             {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
             onChange={onInputChange}
+            aria-describedby={helperText && helperTextId}
+            role="textbox"
           />
           {ControlArrows}
         </Box>
         {helperText && (
-          <FieldHelperText status={status}>{helperText}</FieldHelperText>
+          <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
         )}
       </Box>
     </Box>

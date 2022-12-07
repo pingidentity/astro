@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Input, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -29,17 +30,24 @@ const TextField = forwardRef((props, ref) => {
   const { isLabelHigher } = useLabelHeight({ labelRef, inputRef });
   const columnStyleProps = useColumnStyles({ labelMode: props.labelMode });
 
+  const helperTextId = uuid();
+
   return (
     <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
       <Box variant="forms.input.fieldControlWrapper" {...fieldControlWrapperProps}>
         {slots?.beforeInput}
-        <Input ref={inputRef} {...fieldControlInputProps} />
+        <Input
+          ref={inputRef}
+          {...fieldControlInputProps}
+          aria-invalid={status === 'error' && true}
+          aria-describedby={helperText && helperTextId}
+        />
         {slots?.inContainer}
       </Box>
       {
         helperText &&
-        <FieldHelperText status={status} >
+        <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>
       }

@@ -68,10 +68,10 @@ const RadioField = forwardRef((props, ref) => {
   });
 
   return (
-    <Box variant="forms.outerContainer" {...fieldContainerProps}>
+    <Box variant="forms.radio.outerContainer" {...fieldContainerProps}>
       <Label variant="forms.label.radio" {...fieldLabelProps}>
         <Box {...fieldControlWrapperProps} >
-          <Radio ref={radioFieldRef} {...fieldControlInputProps} />
+          <Radio ref={radioFieldRef} {...fieldControlInputProps} variant="forms.radio.base" />
         </Box>
         {label}
       </Label>
@@ -84,7 +84,7 @@ const RadioField = forwardRef((props, ref) => {
       {
         isChecked &&
         checkedContent &&
-        <Box variant="forms.checkedContent">
+        <Box variant="forms.radio.checkedContent">
           {checkedContent}
         </Box>
       }

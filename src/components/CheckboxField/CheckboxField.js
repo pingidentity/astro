@@ -1,13 +1,15 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useRef, useImperativeHandle, useMemo, useEffect } from 'react';
 import { useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
+import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -22,6 +24,7 @@ const CheckboxField = forwardRef((props, ref) => {
     hasAutoFocus,
     helperText,
     isDefaultSelected,
+    isIndeterminate,
     status,
   } = props;
   const checkboxProps = {
@@ -37,6 +40,14 @@ const CheckboxField = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => checkboxRef.current);
 
+  useEffect(() => {
+    if (checkboxRef.current && isIndeterminate) {
+      checkboxRef.current.indeterminate = true;
+    } else if (checkboxRef.current && !isIndeterminate) {
+      checkboxRef.current.indeterminate = false;
+    }
+  }, [isIndeterminate]);
+
   const { inputProps } = useCheckbox(checkboxProps, state, checkboxRef);
   const {
     fieldContainerProps,
@@ -44,18 +55,25 @@ const CheckboxField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({
     ...props,
+    statusClasses: { isIndeterminate },
     controlProps: { ...controlProps, ...inputProps },
   });
+
+  const helperTextId = useMemo(() => uuid(), []);
 
   return (
     <Box {...fieldContainerProps}>
       <Label variant="forms.label.checkbox" {...fieldLabelProps}>
-        <Checkbox ref={checkboxRef} {...fieldControlInputProps} />
+        <Checkbox
+          ref={checkboxRef}
+          aria-describedby={helperText && helperTextId}
+          {...fieldControlInputProps}
+        />
         {label}
       </Label>
       {
         helperText &&
-        <FieldHelperText status={status} sx={{ pt: 7 }}>
+        <FieldHelperText status={status} sx={{ pt: 7 }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
       }
@@ -77,8 +95,8 @@ CheckboxField.propTypes = {
   /** Whether the input is disabled. */
   isDisabled: PropTypes.bool,
   /**
-   * Indeterminism is presentational only. The indeterminate visual representation remains
-   * regardless of user interaction.
+   * Indeterminism is presentational only. The indeterminate visual representation remains until
+   * this prop is set to false regardless of user interaction.
   */
   isIndeterminate: PropTypes.bool,
   /** Whether the input can be selected, but not changed by the user. */

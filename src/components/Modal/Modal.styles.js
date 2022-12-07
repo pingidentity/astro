@@ -1,5 +1,4 @@
 import { text } from '../Text/Text.styles';
-import { base } from '../IconButton/IconButton.styles';
 
 const closeIcon = {
   color: 'neutral.40',
@@ -47,11 +46,13 @@ const title = {
   },
 };
 
-const closeButton = {
-  ...base,
+export const modalCloseButton = {
   position: 'absolute',
   top: 14,
   right: 10,
+  ':focus': {
+    outline: 'none',
+  },
 };
 
 export default {
@@ -60,5 +61,5 @@ export default {
   content,
   dark,
   title,
-  closeButton,
+  modalCloseButton,
 };
