@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.4](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.3...ui-library@5.6.4) (2022-11-24)
+
+
+### Bug Fixes
+
+* [UIP-5893] UI-Library: UnitInput: word wrap ([a32d630](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/a32d6302702b7af7e0a0b6145e4cacab1ef24fb7))
+
+
+
+
+
+## [5.6.3](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.2...ui-library@5.6.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* [UIP-5897] some inputs not working in ui-library ([6f61fd2](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/6f61fd20ddc77c93f4605cfd39b7dd72dd12f80f))
+
+
+
+
+
+## [5.6.2](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.1...ui-library@5.6.2) (2022-11-15)
+
+
+### Bug Fixes
+
+* [UIP-5861] checkbox and radio button is not triggering ([624699b](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/624699ba05ffb17cb3ddc50e3ad607267d3badf2))
+
+
+
+
+
 ## [5.6.1](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.0...ui-library@5.6.1) (2022-10-05)
 
 **Note:** Version bump only for package ui-library

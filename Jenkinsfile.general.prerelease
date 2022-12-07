@@ -96,7 +96,7 @@ pipeline {
           container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "lerna run build"
+            sh "lerna run build --concurrency=1"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -109,7 +109,7 @@ pipeline {
           sh """
             yarn --frozen-lockfile
             git log -1 --pretty=%B | npx commitlint
-            lerna run build
+            lerna run build --concurrency=1
             lerna run lint
             lerna run coverage-ci
           """

@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label, TextArea } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -25,6 +26,8 @@ const TextAreaField = forwardRef((props, ref) => {
   const labelWrapperRef = useRef();
   const slotContainer = useRef();
   const textAreaRef = useRef();
+
+  const helperTextId = uuid();
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
@@ -87,7 +90,15 @@ const TextAreaField = forwardRef((props, ref) => {
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
       <Box isRow variant="forms.input.container" className={fieldControlProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
-        <TextArea variant="forms.textarea.baseField" ref={textAreaRef} rows={rows} {...fieldControlProps} sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }} />
+        <TextArea
+          ref={textAreaRef}
+          rows={rows}
+          variant="forms.textarea.baseField"
+          {...fieldControlProps}
+          sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }}
+          aria-invalid={status === 'error' && true}
+          aria-describedby={helperText && helperTextId}
+        />
         {
           slots?.inContainer &&
             <Box variant="forms.textarea.containerSlot" ref={slotContainer} >
@@ -96,7 +107,7 @@ const TextAreaField = forwardRef((props, ref) => {
         }
       </Box>
       {helperText &&
-        <FieldHelperText status={status}>
+        <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>}
     </Box>

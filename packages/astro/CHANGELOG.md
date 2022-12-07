@@ -3,6 +3,117 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.0...@pingux/astro@1.37.1) (2022-12-06)
+
+
+### Bug Fixes
+
+* [UIP-5903] Multivaluesfield improvements epic ([f82a7da](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f82a7da926a9c9a9d9f61fd51b6ccbef75502826))
+
+
+
+
+
+# [1.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.2...@pingux/astro@1.37.0) (2022-12-01)
+
+
+### Bug Fixes
+
+* [UIP-5742] AccodrionGroup focusing when input field inside ([ad40e26](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ad40e2603c32368443fe8119ca0729782c4f5b72))
+* [UIP-5901] NavBar: remove auto focus on mount ([4c6fe23](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4c6fe233d8d80354d1ccf8008eafc59c4c6d8869))
+* [UIP-5906] EnvironmentBreadcrumb gray border ([a65c8dd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a65c8dd6786fb75b5b5f83b1ebd427810434a65d))
+
+
+### Features
+
+* [UIP-5875] NavBar controlled version ([5a19e44](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5a19e44b260ae7c4ce4abb87f02a53ef15045834))
+
+
+
+
+
+## [1.36.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.1...@pingux/astro@1.36.2) (2022-11-29)
+
+
+### Bug Fixes
+
+* [UIP-5721] Image upload EA fixes ([cb0452e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cb0452e91a81dcd5bb07bef888557256d4809859))
+* [UIP-5743] Adding error announcement to all field components ([fd59ec4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd59ec4d7a55c7bb4d5f5784bce6f8a6ef9640a2))
+* [UIP-5863] ColorField overlay accessibility fix ([506ba3d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/506ba3d71843fc0ba33bc7e80f0adb82595a18ba))
+* [UIP-5896] Add data ids to EnvironmentBreadcrumb ([cb7bee4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cb7bee4232ec9f3bb3e05cdc72c1f663b4798943))
+
+
+
+
+
+## [1.36.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.36.0...@pingux/astro@1.36.1) (2022-11-17)
+
+
+### Bug Fixes
+
+* [UIP-5895] NavBarSection: add data-id to top level button ([35be867](https://gitlab.corp.pingidentity.com/ux/pingux/commit/35be867a8a76b2538f8fa47508bfa69d9ee18adb))
+
+
+
+
+
+# [1.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.35.0...@pingux/astro@1.36.0) (2022-11-15)
+
+
+### Features
+
+* [UIP-5880] UiLibraryOverride theme - resolve navBar style conflicts ([d960e1f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d960e1f6f89794e7f56b73cd9a9d3766784118c3))
+
+
+
+
+
+# [1.35.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.34.0...@pingux/astro@1.35.0) (2022-11-10)
+
+
+### Bug Fixes
+
+* [UIP-5879] Modal: revert checkbox focus fix inside a modal ([0f18f93](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0f18f9324aa346cc3ba9d8d3c98efa41976d500b))
+
+
+### Features
+
+* [UIP-5852] NavBarItemBody: allow no separator allow no subTitle ([1726df9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1726df9df148e6a176466df8f5de2007f07e6c06))
+* [UIP-5853] NavBarSection: allow data-id through prop spreading ([d899211](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d899211fded182d4cb700d8fb384c9cad8c549d2))
+
+
+
+
+
+# [1.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.33.1...@pingux/astro@1.34.0) (2022-11-03)
+
+
+### Bug Fixes
+
+* [UIP-5830] Prevent form submitting when adding custom value to MultivalueField on enter press ([71dee3c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/71dee3cd85c3b49e9dd199f07fc55d0212bff50b))
+
+
+### Features
+
+* [UIP-5702] Icon & IconButton - Adding tshirt sizing, sizing story, and commonly used story ([51a3677](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51a367710a739f0576e36179fbdea7ae736b2f32))
+
+
+
+
+
+## [1.33.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.33.0...@pingux/astro@1.33.1) (2022-11-01)
+
+
+### Bug Fixes
+
+* [UIP-5638] LinkedListView - fix label font size ([aa9dfbe](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aa9dfbed209fa782f66bd01396b396003a4db030))
+* [UIP-5796] Fix checkbox getting focus indicator on click within a modal ([2fcc515](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2fcc5154bb6eef4cb1191ad5a4c6830cf7b7b3e1))
+* [UIP-5839] Fix support for checkbox indeterminism ([eef26e6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eef26e653948d0059e07475cb9056fd606955068))
+
+
+
+
+
 # [1.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.32.1...@pingux/astro@1.33.0) (2022-10-27)
 
 

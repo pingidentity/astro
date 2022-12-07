@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTreeState } from 'react-stately';
 import { useAccordion } from '@react-aria/accordion';
@@ -19,6 +19,8 @@ import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 const AccordionGroup = forwardRef((props, ref) => {
   const {
+    defaultExpandedKeys,
+    expandedKeys,
     onExpandedChange,
     ...others
   } = props;
@@ -29,6 +31,12 @@ const AccordionGroup = forwardRef((props, ref) => {
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => accordionRef.current);
+
+  useEffect(() => {
+    if (expandedKeys || defaultExpandedKeys) {
+      state.selectionManager.setFocused(true);
+    }
+  }, [defaultExpandedKeys, expandedKeys, state.selectionManager]);
 
   return (
     <AccordionContext.Provider value={state} >

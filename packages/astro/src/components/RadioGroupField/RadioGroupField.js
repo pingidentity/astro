@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-
 import PropTypes from 'prop-types';
 import { useRadioGroup } from 'react-aria';
 import { useRadioGroupState } from 'react-stately';
+import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -43,6 +43,8 @@ const RadioGroupField = forwardRef((props, ref) => {
     'aria-controls': props['aria-controls'],
   };
 
+  const helperTextId = useMemo(() => uuid(), []);
+
   return (
     <Box
       ref={ref}
@@ -56,6 +58,8 @@ const RadioGroupField = forwardRef((props, ref) => {
       <Box
         variant="forms.radioGroupWrapper"
         isRow={orientation === ORIENTATION.HORIZONTAL}
+        aria-labelledby={helperText && helperTextId}
+        data-testid="radioGroupWrapper"
       >
         <RadioContext.Provider value={{ isDisabled, ...state }}>
           {children}
@@ -63,7 +67,7 @@ const RadioGroupField = forwardRef((props, ref) => {
       </Box>
       {
         helperText &&
-        <FieldHelperText status={status} sx={{ pt: 'xs' }}>
+        <FieldHelperText status={status} sx={{ pt: 'xs' }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
       }

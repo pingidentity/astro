@@ -17,6 +17,7 @@ const FileItem = (props) => {
     name,
     status,
     textProps,
+    helperTextId,
   } = props;
   const handleDeleteButtonPress = useCallback(e => handleFileDelete(e, id), [
     id,
@@ -60,6 +61,7 @@ const FileItem = (props) => {
         aria-label={name}
         data-testid="file-uploaded__download-file-button"
         onPress={handleDownloadPress}
+        aria-describedby={helperTextId}
       >
         <Text color="active" {...textProps}>
           {name}
@@ -96,6 +98,7 @@ FileItem.propTypes = {
   id: PropTypes.string,
   isDisabled: PropTypes.bool,
   name: PropTypes.string,
+  helperTextId: PropTypes.string,
   status: PropTypes.oneOf(Object.values(statuses)),
   textProps: PropTypes.shape({}),
 };

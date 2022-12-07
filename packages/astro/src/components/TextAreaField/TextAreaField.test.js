@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
 import axeTest from '../../utils/testUtils/testAxe';
 import { screen, render } from '../../utils/testUtils/testWrapper';
+import statuses from '../../utils/devUtils/constants/statuses';
 import TextAreaField from '.';
 
 const testId = 'test-textAreaField';
@@ -110,4 +111,18 @@ test('providing slot props causes slot to render', () => {
   getComponent({ slots });
 
   expect(screen.getByTestId('testSlot')).toBeInTheDocument();
+});
+
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const input = screen.getByRole('textbox');
+  expect(input).toHaveAttribute('aria-invalid', 'true');
+
+  const helperTextID = helper.getAttribute('id');
+  expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
