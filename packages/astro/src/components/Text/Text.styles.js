@@ -43,6 +43,31 @@ const environmentBreadcrumb = {
   textTransform: 'capitalize',
 };
 
+const title = {
+  ...wordWrap,
+  fontSize: 'xx',
+  fontWeight: 1,
+  color: 'text.primary',
+  fontFamily: 'standard',
+};
+
+const sectionTitle = {
+  ...wordWrap,
+  fontSize: 'lg',
+  fontWeight: 2,
+  color: 'text.primary',
+  fontFamily: 'standard',
+};
+
+const itemTitle = {
+  ...wordWrap,
+  fontSize: 'md',
+  fontWeight: 1,
+  color: 'text.primary',
+  fontFamily: 'standard',
+};
+
+
 export const text = {
   base,
   bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
@@ -52,17 +77,21 @@ export const text = {
   buttonSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard', lineHeight: '16px' },
   capsLabel: { ...wordWrap, color: 'text.secondary', textTransform: 'uppercase', fontFamily: 'standard' },
   environmentBreadcrumb,
+  H1: { ...title, fontWeight: 3, lineHeight: '28px' },
+  H2: { ...sectionTitle, fontWeight: 3, lineHeight: '21px' },
+  H3: { ...itemTitle, fontWeight: 3, lineHeight: '18px' },
+  H4: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard', lineHeight: '16px' },
   inputValue: { fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
-  itemTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  itemTitle,
   itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard', fontWeight: 1 },
   listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
-  sectionTitle: { ...wordWrap, fontSize: 'lg', fontWeight: 2, color: 'text.primary', fontFamily: 'standard' },
+  sectionTitle,
   subtitle: { ...wordWrap, fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
   tabLabel,
   tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   textEllipsis: { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
-  title: { ...wordWrap, fontSize: 'xx', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  title,
 };

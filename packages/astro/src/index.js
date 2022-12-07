@@ -23,6 +23,9 @@ export * from './components/ArrayField';
 export { default as Avatar } from './components/Avatar';
 export * from './components/Avatar';
 
+export { default as Badge } from './components/Badge';
+export * from './components/Badge';
+
 export { default as Box } from './components/Box';
 export * from './components/Box';
 
@@ -43,9 +46,6 @@ export * from './components/Checkbox';
 
 export { default as CheckboxField } from './components/CheckboxField';
 export * from './components/CheckboxField';
-
-export { default as Chip } from './components/Chip';
-export * from './components/Chip';
 
 export { default as CodeView } from './components/CodeView';
 

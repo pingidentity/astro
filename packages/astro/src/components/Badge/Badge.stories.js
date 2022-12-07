@@ -2,15 +2,15 @@ import React from 'react';
 import Clear from 'mdi-react/CloseIcon';
 import ContentCopy from 'mdi-react/ContentCopyIcon';
 import Earth from 'mdi-react/EarthIcon';
-import Chip from '../Chip';
+import Badge from '.';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
 import Box from '../Box';
 import { flatColorList } from '../../styles/colors.js';
 
 export default {
-  title: 'Chip',
-  component: Chip,
+  title: 'Badge',
+  component: Badge,
   argTypes: {
     bg: {
       control: {
@@ -42,36 +42,36 @@ export default {
 };
 
 export const Default = ({ ...args }) => (
-  <Chip label="Label" color="white" {...args} />
+  <Badge label="Label" color="white" {...args} />
 );
 
-export const CountChip = ({ ...args }) => (
+export const CountBadge = ({ ...args }) => (
   <Box>
-    <Chip color="white" {...args} label="1" variant="chip.countChip" mb="12px" />
-    <Chip {...args} label="1" variant="chip.countNeutral" />
+    <Badge color="white" {...args} label="1" variant="countBadge" mb="12px" />
+    <Badge {...args} label="1" variant="countNeutral" />
   </Box>
 );
 
-export const ChipWithCustomColors = () => (
-  <Chip label="Custom Colors" bg="green" textColor="#ffffff" />
+export const BadgeWithCustomColors = () => (
+  <Badge label="Custom Colors" bg="green" textColor="#ffffff" />
 );
 
-export const ChipWithIcon = () => (
+export const BadgeWithIcon = () => (
   <>
-    <Chip label="Chip with Icon Button" bg="navy">
-      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+    <Badge label="Badge with Icon Button" bg="navy">
+      <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
         <Icon icon={Clear} ml="xs" size="14px" />
       </IconButton>
-    </Chip>
+    </Badge>
     <div style={{ padding: '5px' }} />
-    <Chip label="Chip with Icon Button">
-      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+    <Badge label="Badge with Icon Button">
+      <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
         <Icon icon={Earth} ml="xs" size="14px" />
       </IconButton>
-    </Chip>
+    </Badge>
     <div style={{ padding: '5px' }} />
-    <Chip label="Chip with Icon" bg="green">
+    <Badge label="Badge with Icon" bg="green">
       <Icon icon={ContentCopy} ml="xs" size="14px" color="white" aria-hidden="true" focusable="false" />
-    </Chip>
+    </Badge>
   </>
 );

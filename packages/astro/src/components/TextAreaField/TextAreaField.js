@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label, TextArea } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
@@ -27,6 +28,8 @@ const TextAreaField = forwardRef((props, ref) => {
   const labelWrapperRef = useRef();
   const slotContainer = useRef();
   const textAreaRef = useRef();
+
+  const helperTextId = uuid();
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
@@ -80,7 +83,7 @@ const TextAreaField = forwardRef((props, ref) => {
   );
 
   const wrappedLabel = (
-    <Box variant="forms.floatLabelWrapper" ref={labelWrapperRef}>
+    <Box variant="forms.textarea.floatLabelWrapper" ref={labelWrapperRef}>
       {labelNode}
     </Box>
   );
@@ -89,16 +92,24 @@ const TextAreaField = forwardRef((props, ref) => {
     <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
       <Box isRow variant="forms.input.fieldControlWrapper" minWidth="40px" maxWidth="100%" ref={fieldControlWrapperRef} {...fieldControlWrapperProps} >
-        <TextArea ref={textAreaRef} rows={rows} {...fieldControlInputProps} sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }} />
+        <TextArea
+          ref={textAreaRef}
+          rows={rows}
+          variant="forms.textarea.baseField"
+          {...fieldControlInputProps}
+          sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }}
+          aria-invalid={status === 'error' && true}
+          aria-describedby={helperText && helperTextId}
+        />
         {
           slots?.inContainer &&
-            <Box variant="forms.textFieldInContainerSlot" ref={slotContainer} >
+            <Box variant="forms.textarea.containerSlot" ref={slotContainer} >
               {slots?.inContainer}
             </Box>
         }
       </Box>
       {helperText &&
-        <FieldHelperText status={status}>
+        <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>}
     </Box>

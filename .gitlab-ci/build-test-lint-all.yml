@@ -18,7 +18,7 @@ build-test-lint-all:
       when: manual
       allow_failure: true
   script:
-    - lerna run build
+    - lerna run build --concurrency=1
     - lerna run lint
     - lerna run coverage-ci
   artifacts:

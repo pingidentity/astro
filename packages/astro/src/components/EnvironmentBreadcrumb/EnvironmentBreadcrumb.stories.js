@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
-import { Item, Section, Chip, Box, Text } from '../../index';
+import { Item, Section, Badge, Box, Text } from '../../index';
 
 export default {
   title: 'EnvironmentBreadcrumb',
@@ -55,10 +55,10 @@ export const Default = (args) => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="chip.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -83,9 +83,9 @@ export const Default = (args) => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="chip.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
             />
           ) : null}
@@ -147,10 +147,10 @@ export const WithSections = () => {
   };
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="chip.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -177,9 +177,9 @@ export const WithSections = () => {
               <Box isRow>
                 {itemName}
                 {isSandbox ? (
-                  <Chip
+                  <Badge
                     label="SANDBOX"
-                    variant="chip.environmentChip"
+                    variant="environmentBadge"
                     bg="neutral.40"
                   />
                 ) : null}
@@ -201,10 +201,10 @@ export const DefaultOpen = () => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="chip.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -229,9 +229,9 @@ export const DefaultOpen = () => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="chip.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
             />
           ) : null}
@@ -249,10 +249,10 @@ export const ControlledMenu = () => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="chip.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -278,9 +278,9 @@ export const ControlledMenu = () => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="chip.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
             />
           ) : null}
@@ -290,7 +290,7 @@ export const ControlledMenu = () => {
   );
 };
 
-export const RightAlignedChips = (args) => {
+export const RightAlignedBadges = (args) => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,
@@ -300,7 +300,7 @@ export const RightAlignedChips = (args) => {
     <Box isRow>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="chip.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -339,9 +339,9 @@ export const RightAlignedChips = (args) => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="chip.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
               align="right"
             />

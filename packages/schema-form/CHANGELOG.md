@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.6...@pingux/schema-form@3.11.7) (2022-12-06)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.6](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.5...@pingux/schema-form@3.11.6) (2022-12-01)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.4...@pingux/schema-form@3.11.5) (2022-11-29)
+
+
+### Bug Fixes
+
+* [UIP-5743] Adding error announcement to all field components ([fd59ec4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd59ec4d7a55c7bb4d5f5784bce6f8a6ef9640a2))
+
+
+
+
+
+## [3.11.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.3...@pingux/schema-form@3.11.4) (2022-11-24)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.2...@pingux/schema-form@3.11.3) (2022-11-17)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.1...@pingux/schema-form@3.11.2) (2022-11-15)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.0...@pingux/schema-form@3.11.1) (2022-11-10)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+# [3.11.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.10...@pingux/schema-form@3.11.0) (2022-11-03)
+
+
+### Features
+
+* [UIP-5702] Icon & IconButton - Adding tshirt sizing, sizing story, and commonly used story ([51a3677](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51a367710a739f0576e36179fbdea7ae736b2f32))
+
+
+
+
+
+## [3.10.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.9...@pingux/schema-form@3.10.10) (2022-11-01)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
 ## [3.10.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.10.8...@pingux/schema-form@3.10.9) (2022-10-27)
 
 **Note:** Version bump only for package @pingux/schema-form

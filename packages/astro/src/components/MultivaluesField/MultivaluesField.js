@@ -6,7 +6,7 @@ import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
 
-import { Box, FieldHelperText, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
+import { Box, Badge, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { usePropWarning } from '../../hooks';
@@ -155,14 +155,43 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (onOpenChange) onOpenChange(isOpen);
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!state.collection.size) close();
-  }, [state.collection]);
+  const addNewChipFromInput = (inputValue) => {
+    const key = inputValue;
+    if (state.selectionManager.isSelected(key)) {
+      return;
+    }
+    selectionManager.setSelectedKeys(
+      [...Array.from(selectionManager.state.selectedKeys), key],
+    );
+    setCustomItems([...customItems, { id: key, key, name: key }]);
+    setFilterString('');
+  };
+
+  // there actually is a test for this, but coverage is not picking it up.
+  /* istanbul ignore next */
+  const selectTheOnlyFilteredItem = () => {
+    const key = filteredItems[0].key;
+    if (!disabledKeys.includes(key)) {
+      selectionManager.toggleSelection(filteredItems[0].key);
+      setFilterString('');
+    }
+  };
+
+  // there actually is a test for this, but coverage is not picking it up.
+  /* istanbul ignore next */
+  const onBlurTextField = () => {
+    if (!hasCustomValue && filteredItems.length === 1) {
+      selectTheOnlyFilteredItem();
+    } else if (hasCustomValue) {
+      addNewChipFromInput(filterString);
+    }
+  };
 
   /* istanbul ignore next */
   const keyDown = (e) => {
     switch (e.key) {
       case 'Enter': {
+        e.preventDefault();
         if (selectionManager.focusedKey) {
           const key = selectionManager.focusedKey;
           if (!disabledKeys.includes(key)) {
@@ -170,21 +199,13 @@ const MultivaluesField = forwardRef((props, ref) => {
             setFilterString('');
           }
         } else if (!hasCustomValue && filteredItems.length === 1) {
-          const key = filteredItems[0].key;
-          if (!disabledKeys.includes(key)) {
-            selectionManager.toggleSelection(filteredItems[0].key);
-            setFilterString('');
-          }
+          selectTheOnlyFilteredItem();
         } else if (hasCustomValue) {
           const key = e.target.value;
-          if (state.selectionManager.isSelected(key)) {
+          if (key === '') {
             return;
           }
-          selectionManager.setSelectedKeys(
-            [...Array.from(selectionManager.state.selectedKeys), key],
-          );
-          setCustomItems([...customItems, { id: key, key, name: key }]);
-          setFilterString('');
+          addNewChipFromInput(e.target.value);
         }
         break;
       }
@@ -261,11 +282,11 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = initialItems.find(el => el.key === key);
           if (item) {
             return (
-              <Chip
+              <Badge
                 key={item.key}
                 role="presentation"
                 label={item.name}
-                variant="chip.readOnlyChip"
+                variant="readOnlyBadge"
                 bg="white"
                 textProps={{ sx: { color: 'text.primary' } }}
               />
@@ -283,17 +304,17 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              <Chip
+              <Badge
                 key={item.key}
                 role="presentation"
-                variant="chip.selectedItemChip"
+                variant="selectedItemBadge"
                 bg="active"
                 label={item.name}
               >
-                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="variants.chip.chipDeleteButton">
+                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="chipDeleteButton">
                   <Icon icon={Clear} color="white" size={14} />
                 </IconButton>
-              </Chip>
+              </Badge>
             );
           }
           return null;
@@ -302,7 +323,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   );
 
   const listbox = (
-    <FocusScope restoreFocus>
+    <FocusScope >
       <DismissButton onDismiss={close} />
       <ScrollBox {...scrollBoxProps} >
         <ListBox
@@ -337,6 +358,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },
     },
     status,
+    isRestrictiveMultivalues: !hasCustomValue,
   };
 
   return (
@@ -344,6 +366,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       <TextField
         onBlur={(e) => {
           setIsOpen(false);
+          if (mode === 'non-restrictive' && filterString !== '') onBlurTextField();
           if (onBlur) onBlur(e.nativeEvent);
         }}
         onChange={(e) => {
@@ -360,21 +383,15 @@ const MultivaluesField = forwardRef((props, ref) => {
         onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
         slots={{ beforeInput: <>{readOnlyItems} {selectedItems}{readOnlyInputEntry}</> }}
         value={filterString}
+        helperText={helperText}
+        aria-invalid={status === 'error' && true}
         {...ariaProps}
         {...inputProps}
       />
-      {
-        helperText &&
-          <FieldHelperText status={status}>
-            {helperText}
-          </FieldHelperText>
-      }
-
       <PopoverContainer
         hasNoArrow
-        isDismissable
         isNonModal
-        isOpen={isOpen}
+        isOpen={!state.collection.size ? false : isOpen}
         onClose={close}
         placement={placement}
         ref={popoverRef}

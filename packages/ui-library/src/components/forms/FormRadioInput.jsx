@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import classnames from "classnames";
+import _ from "underscore";
 import FormLabel from "./FormLabel";
 // Would have just destructured out withFocusOutline, but this causes issues in the FormRadioGroup for some reason
 import KeyboardUtils from "../../util/KeyboardUtils";
@@ -64,6 +65,7 @@ class FormRadioInputBase extends React.Component {
         className: PropTypes.string,
         description: PropTypes.node,
         disabled: PropTypes.bool,
+        id: PropTypes.string,
         label: PropTypes.oneOfType([
             PropTypes.array,
             PropTypes.object,
@@ -88,6 +90,11 @@ class FormRadioInputBase extends React.Component {
         this.props.onValueChange(this.props.value, e);
     };
 
+    /* istanbul ignore next  */
+    componentWillMount() {
+        this.fieldId = this.props.id || _.uniqueId("form-radio-input-");
+    }
+
     render() {
 
         return (
@@ -100,9 +107,11 @@ class FormRadioInputBase extends React.Component {
                 data-id={this.props["data-id"] + "_label_" + this.props.value}
                 value={this.props.label}
                 hint={this.props.helpHintText}
+                labelFor={this.fieldId}
                 description={this.props.description}>
                 <input
                     data-id={this.props["data-id"] + "_" + this.props.value}
+                    id={this.fieldId}
                     type="radio"
                     name={this.props.name}
                     value={this.props.value}

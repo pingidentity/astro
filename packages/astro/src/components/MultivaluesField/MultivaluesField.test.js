@@ -24,6 +24,16 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   </OverlayProvider>
 ));
 
+const getComponentInForm = (props = {}, onFormSubmit, { renderFn = render } = {}) => renderFn((
+  <OverlayProvider>
+    <form onSubmit={onFormSubmit}>
+      <MultivaluesField {...defaultProps} {...props}>
+        {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
+      </MultivaluesField>
+    </form>
+  </OverlayProvider>
+));
+
 beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
@@ -124,6 +134,49 @@ test('clicking an option renders chip with option name', () => {
   expect(chipContainer).toHaveAttribute('role', 'presentation');
 });
 
+test('after clicking an option, and then clicking the text input, the listbox remains open', () => {
+  getComponent();
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+
+  const options = screen.getAllByRole('option');
+  const firstOption = options[0];
+  firstOption.click();
+  expect(firstOption).not.toBeInTheDocument();
+
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  userEvent.click(input);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+});
+
+test('no chips are rendered, if nothing is selected', () => {
+  getComponent({ isReadOnly: false });
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument(0);
+});
+
+test('after clicking an option, and then typing a custom input, the listbox remains open and filters the options', async () => {
+  getComponent({ mode: 'non-restrictive' });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+
+  const options = screen.getAllByRole('option');
+  const firstOption = options[0];
+  firstOption.click();
+  expect(firstOption).not.toBeInTheDocument();
+  await userEvent.clear(input);
+
+  const value = 'ka';
+  await userEvent.type(input, value);
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+
+  const filteredOptions = within(listbox).getAllByRole('option');
+  expect(filteredOptions.length).toBe(1);
+});
+
 test('clicking on delete button deletes selection, and re-adds option to list', () => {
   getComponent();
   const input = screen.getByRole('combobox');
@@ -173,7 +226,7 @@ test('clicking an option fires "onSelectionChange"', () => {
 
 test('changing the input value opens listbox, filters options, and fires "onInputChange"', () => {
   const onInputChange = jest.fn();
-  getComponent({ onInputChange });
+  getComponent({ onInputChange, mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
   const value = 'aa';
   userEvent.type(input, value);
@@ -188,6 +241,59 @@ test('changing the input value opens listbox, filters options, and fires "onInpu
   expect(onInputChange).toHaveBeenCalledWith(value);
 });
 
+test('in non-restrictive mode, a chip gets added if there is input, onBlur', () => {
+  getComponent({ mode: 'non-restrictive' });
+  const input = screen.getByRole('combobox');
+  const value = 'custom';
+  userEvent.type(input, value);
+
+  userEvent.tab();
+
+  const chip = screen.queryByText(value);
+  expect(chip).toBeInTheDocument();
+  const { parentElement: chipContainer } = chip;
+  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  expect(input.value).toBe('');
+});
+
+test('in non-restrictive mode, a chip gets added if there is only one matching filtered option, onBlur', () => {
+  getComponent({ mode: 'non-restrictive' });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const firstOption = options[0];
+  const value = 'Aardvark';
+  userEvent.type(input, value);
+
+  userEvent.tab();
+
+  const chip = screen.queryByText(value);
+  expect(chip).toBeInTheDocument();
+  const { parentElement: chipContainer } = chip;
+  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  expect(firstOption).not.toBeInTheDocument();
+});
+
+test('dropdown with options reappears after entering a custom input', async () => {
+  getComponent({ mode: 'non-restrictive' });
+  const input = screen.getByRole('combobox');
+
+  const value1 = 'longstring';
+  userEvent.type(input, value1);
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  const value2 = '';
+  await userEvent.clear(input);
+  await userEvent.type(input, value2);
+
+  const listbox = screen.getByRole('listbox');
+
+  const options2 = within(listbox).getAllByRole('option');
+  expect(options2.length).toBe(items.length);
+});
+
 test('changing the input value and hitting enter by default do nothing', () => {
   getComponent();
   const input = screen.getByRole('combobox');
@@ -197,8 +303,7 @@ test('changing the input value and hitting enter by default do nothing', () => {
   userEvent.type(input, value);
   userEvent.type(input, '{enter}');
 
-  expect(input).toHaveValue(value);
-  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(input).toHaveValue('');
 });
 
 test('changing the input value and hitting enter creates new value in non-restrictive mode', () => {
@@ -217,6 +322,18 @@ test('changing the input value and hitting enter creates new value in non-restri
   expect(chip).toBeInTheDocument();
   const { parentElement: chipContainer } = chip;
   expect(chipContainer).toHaveAttribute('role', 'presentation');
+});
+
+test('pressing enter, when the input values is an empty string does not add an option, in non-restrictive mode', () => {
+  const onSelectionChange = jest.fn();
+  getComponent({ mode: 'non-restrictive', onSelectionChange });
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  userEvent.type(input, '{enter}');
+  expect(input).toHaveValue('');
+
+  expect(onSelectionChange).toBeCalledTimes(0);
 });
 
 test('in non-restrictive mode "onSelectionChange" returns entered keys', () => {
@@ -318,10 +435,10 @@ test('default selected keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  expect(firstChip).toBeInTheDocument();
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  expect(firstBadge).toBeInTheDocument();
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
 });
 
 test('selected keys', () => {
@@ -330,10 +447,10 @@ test('selected keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  expect(firstChip).toBeInTheDocument();
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  expect(firstBadge).toBeInTheDocument();
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
 });
 
 test('should have no accessibility violations', async () => {
@@ -350,23 +467,29 @@ test('read only keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  const { nextSibling: deleteButton1 } = firstChip;
-  expect(firstChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  const { nextSibling: deleteButton1 } = firstBadge;
+  expect(firstBadge).toBeInTheDocument();
   expect(deleteButton1).toBeNull();
 
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
-  const { nextSibling: deleteButton2 } = firstChip;
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
+  const { nextSibling: deleteButton2 } = firstBadge;
   expect(deleteButton2).toBeNull();
 });
 
-test(' multivalue field with helper text', () => {
-  const helperText = 'helper text';
-  getComponent({ helperText, status: statuses.ERROR });
-  const helper = screen.getByText(helperText);
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
   expect(helper).toBeInTheDocument();
   expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveAttribute('aria-invalid', 'true');
+
+  const helperTextID = helper.getAttribute('id');
+  expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
 
 test('read only field', () => {
@@ -412,4 +535,19 @@ test('popover closes on input blur', () => {
   userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+test('form does not submit when adding custom value', () => {
+  const onFormSubmit = jest.fn();
+  getComponentInForm({}, onFormSubmit);
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'custom';
+  userEvent.type(input, value);
+  expect(input).toHaveValue('');
+
+  userEvent.type(input, '{enter}');
+  expect(onFormSubmit).not.toHaveBeenCalled();
 });

@@ -12,7 +12,7 @@ import {
   Box,
   Button,
   CheckboxField,
-  Chip,
+  Badge,
   ListView,
   Item,
   Icon,
@@ -244,7 +244,7 @@ export const CollapsiblePanelWithBadge = (args) => {
                       <Box>
                         <Box isRow>
                           <Text variant="listTitle" mb="xs" mr="xs">{item.name}</Text>
-                          <Chip
+                          <Badge
                             label={item.chipValue}
                             bg="accent.99"
                             textColor="text.secondary"

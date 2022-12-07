@@ -41,8 +41,8 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
   ]);
 
   return (
-    <Box variant="forms.input.fieldContainer" {...fieldContainerProps}>
-      <Label {...fieldLabelProps} onClick={handleLabelClick} ref={labelRef} />
+    <Box variant="forms.input.wrapper" {...fieldContainerProps}>
+      <Label {...fieldLabelProps} onClick={handleLabelClick} ref={labelRef} tabIndex="-1" />
       <PopoverMenu isOpen={isMenuOpen} onOpenChange={handleOpenMenuChange}>
         {children}
       </PopoverMenu>

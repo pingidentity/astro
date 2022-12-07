@@ -5,7 +5,7 @@ import Tabs from './Tabs';
 import Tab from '../Tab';
 import Icon from '../Icon';
 import Text from '../Text';
-import { Chip } from '../../index';
+import { Badge } from '../../index';
 
 export default {
   title: 'Tabs',
@@ -172,7 +172,7 @@ export const ContentSlots = () => {
     marginTop: 10,
     minWidth: 20,
   };
-  const afterTabNode = <Chip sx={nodeSx}>14</Chip>;
+  const afterTabNode = <Badge sx={nodeSx}>14</Badge>;
 
   return (
     <>

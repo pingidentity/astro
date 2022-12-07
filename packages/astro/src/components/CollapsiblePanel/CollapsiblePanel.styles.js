@@ -1,4 +1,5 @@
-import { defaultFocus, square, link } from '../Button/Buttons.styles';
+import { defaultFocus, link } from '../Button/Buttons.styles';
+import { square } from '../IconButton/IconButton.styles';
 import { wordWrap } from '../Text/Text.styles';
 
 const container = {
@@ -84,7 +85,7 @@ const item = {
   margin: 'auto',
 };
 
-const toggle = {
+export const toggle = {
   ...square,
   bg: 'accent.99',
   height: '40px',
@@ -104,6 +105,9 @@ const toggle = {
   },
   '&.is-pressed': {
     backgroundColor: 'accent.99',
+  },
+  ':focus': {
+    outline: 'none',
   },
 };
 

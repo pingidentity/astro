@@ -1,13 +1,12 @@
 import { text } from '../Button/Buttons.styles';
-import { baseChip } from '../Chip/Chip.styles';
-import { base } from '../IconButton/IconButton.styles';
+import { baseBadge } from '../Badge/Badge.styles';
 
 const container = {
   p: 'sm',
 };
 
 const chip = {
-  ...baseChip,
+  ...baseBadge,
   cursor: 'default',
   '&.is-hovered, &.is-pressed': {
     cursor: 'default',
@@ -15,8 +14,7 @@ const chip = {
   },
 };
 
-const button = {
-  ...base,
+export const tooltipWithButton = {
   cursor: 'default',
   '&.is-hovered, &.is-pressed': {
     backgroundColor: 'inherit',
@@ -58,7 +56,7 @@ const content = {
 export default {
   container,
   chip,
-  button,
+  tooltipWithButton,
   inline,
   content,
 };

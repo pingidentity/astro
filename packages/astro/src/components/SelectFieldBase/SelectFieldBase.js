@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { HiddenSelect } from 'react-aria';
+import { v4 as uuid } from 'uuid';
 
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -46,12 +47,15 @@ const SelectFieldBase = forwardRef(({
 }, ref) => {
   const { ariaProps } = getAriaAttributeProps(others);
 
+  const helperTextId = useMemo(() => uuid(), []);
+
   const defaultTrigger = (
     <Box {...fieldControlWrapperProps} variant="forms.input.fieldControlWrapper">
       <Button
         className={fieldControlInputProps.className}
         ref={triggerRef}
         variant="forms.select"
+        aria-describedby={helperText && helperTextId}
         {...triggerProps}
         {...ariaProps}
       >
@@ -95,7 +99,7 @@ const SelectFieldBase = forwardRef(({
       {overlay}
       {
         helperText &&
-        <FieldHelperText status={status}>
+        <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>
       }

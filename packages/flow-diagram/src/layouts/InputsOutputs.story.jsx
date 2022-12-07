@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Clear, Desktop, Link } from '@pingux/icons';
-import { Box, Chip, Icon, IconButton, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
+import { Box, Badge, Icon, IconButton, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
 import {
     mdiDragVertical,
     mdiText,
@@ -139,14 +139,14 @@ function CollapsibleSection({ defaultExpanded, title, children, status, onClick,
     );
 }
 
-function ChipInputTall({ label, text, id }) {
+function BadgeInputTall({ label, text, id }) {
     return (
         <Box>
             <Text variant="bodyWeak" mb={5}>{label}</Text>
             <Box variant="forms.input.fieldControlWrapper" width="337px">
                 <Box variant="forms.input" height="40px" p="0" justifyContent="center" id={id}>
                     <Popover content="steps.registration.formData.user" placement="bottom">
-                        <Chip
+                        <Badge
                             ml="md"
                             bg="#E5E9F8"
                             width={70}
@@ -164,17 +164,17 @@ function ChipInputTall({ label, text, id }) {
     );
 }
 
-function ChipInputShort({ label, text, border, chipWidth, color, id }) {
+function BadgeInputShort({ label, text, border, badgeWidth, color, id }) {
     return (
         <Box isRow alignItems="center" mt={10}>
             <Text variant="bodyWeak" mb={5} width={70}>{label}</Text>
             <Box variant="forms.input.fieldControlWrapper" width="267px">
                 <Box variant="forms.input" height="28px" p="0" justifyContent="center" id={id}>
                     <Popover content="steps.registration.formData.user" placement="bottom">
-                        <Chip
+                        <Badge
                             ml="md"
                             bg={color}
-                            width={chipWidth}
+                            width={badgeWidth}
                             sx={{
                                 border,
                             }}
@@ -210,11 +210,11 @@ function TextInputShort({ label, id }) {
 function Inputs() {
     return (
         <Box>
-            <ChipInputTall label="User" text="user" id="userOutput" />
-            <ChipInputShort label="Username:" text="email" chipWidth={75} color="#E5E9F8" id="usernameOutput" />
+            <BadgeInputTall label="User" text="user" id="userOutput" />
+            <BadgeInputShort label="Username:" text="email" badgeWidth={75} color="#E5E9F8" id="usernameOutput" />
             <TextInputShort label="location: " id="locationOutput" />
-            <ChipInputShort label="firstName:" text="user.firstName" border="1px solid #CACED3" chipWidth={135} color="transparent" id="firstNameOutput" />
-            <ChipInputShort label="lastName:" text="user.lastName" border="1px solid #CACED3" chipWidth={135} color="transparent" id="lastNameOutput" />
+            <BadgeInputShort label="firstName:" text="user.firstName" border="1px solid #CACED3" badgeWidth={135} color="transparent" id="firstNameOutput" />
+            <BadgeInputShort label="lastName:" text="user.lastName" border="1px solid #CACED3" badgeWidth={135} color="transparent" id="lastNameOutput" />
         </Box>
     );
 }

@@ -64,7 +64,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
         data-testid="collapsible-panel-button"
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="variants.collapsiblePanel.toggle"
+        variant="toggle"
         pr="sm"
       >
         <Icon

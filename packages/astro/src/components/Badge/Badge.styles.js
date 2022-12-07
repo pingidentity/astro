@@ -1,4 +1,4 @@
-export const baseChip = {
+export const baseBadge = {
   cursor: 'default',
   p: '3px 5px 4px 5px',
   alignItems: 'center',
@@ -23,8 +23,8 @@ export const baseChip = {
   },
 };
 
-const multivaluesChip = {
-  ...baseChip,
+const multivaluesBadge = {
+  ...baseBadge,
   alignSelf: 'center',
   cursor: 'default',
   height: '100%',
@@ -33,22 +33,22 @@ const multivaluesChip = {
   ml: 0,
 };
 
-const selectedItemChip = {
-  ...multivaluesChip,
+const selectedItemBadge = {
+  ...multivaluesBadge,
   py: 3,
   pr: 0,
   my: 3,
 };
 
-const readOnlyChip = {
-  ...multivaluesChip,
+const readOnlyBadge = {
+  ...multivaluesBadge,
   p: 2.54,
   border: '1px solid',
   borderColor: 'neutral.80',
 };
 
-const environmentChip = {
-  ...baseChip,
+const environmentBadge = {
+  ...baseBadge,
   alignSelf: 'center',
   height: '17px',
   minWidth: 'fit-content',
@@ -59,7 +59,7 @@ const environmentChip = {
   },
 };
 
-const chipDeleteButton = {
+export const chipDeleteButton = {
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
@@ -79,7 +79,7 @@ const chipDeleteButton = {
 };
 
 const countDefault = {
-  ...baseChip,
+  ...baseBadge,
   width: 'fit-content',
   minWidth: '17px',
   minHeight: '17px',
@@ -90,7 +90,7 @@ const countDefault = {
   },
 };
 
-const countChip = {
+const countBadge = {
   ...countDefault,
   backgroundColor: '#640099 !important',
 };
@@ -106,12 +106,12 @@ const countNeutral = {
 };
 
 export default {
-  baseChip,
-  environmentChip,
-  multivaluesChip,
-  readOnlyChip,
-  selectedItemChip,
+  baseBadge,
+  environmentBadge,
+  multivaluesBadge,
+  readOnlyBadge,
+  selectedItemBadge,
   chipDeleteButton,
-  countChip,
+  countBadge,
   countNeutral,
 };

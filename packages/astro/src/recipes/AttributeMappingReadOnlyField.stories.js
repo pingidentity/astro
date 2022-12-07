@@ -1,9 +1,10 @@
 import React from 'react';
 import CreateIcon from 'mdi-react/CreateIcon';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
+import { v4 as uuid } from 'uuid';
 import {
   Box,
-  Chip,
+  Badge,
   IconButton,
   Text,
   Icon,
@@ -79,10 +80,11 @@ const sx = {
     width: 'md',
   },
 };
+const helperTextId = uuid();
 
 const Row = (props) => {
   const {
-    withChip,
+    withBadge,
     withTooltip,
     withError,
     leftValue,
@@ -107,6 +109,7 @@ const Row = (props) => {
             width: '165px',
           },
         }}
+        aria-labelledby={withError && helperTextId}
         slots={withError && {
           inContainer: (
             <Icon icon={AlertCircleIcon} sx={sx.alertCircleIcon} />
@@ -128,8 +131,8 @@ const Row = (props) => {
           },
         }}
       />
-      {withChip &&
-        <Chip
+      {withBadge &&
+        <Badge
           label="Required"
           sx={sx.chip}
         />
@@ -186,7 +189,7 @@ export const Default = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withChip leftValue="UserId" rightValue="mdorey" />
+        <Row withBadge leftValue="UserId" rightValue="mdorey" />
         <Row leftValue="givenName" rightValue="firstName" />
         <Row leftValue="familyName" rightValue="lastName" />
         <Row withTooltip leftValue="population" rightValue="population" />
@@ -221,7 +224,7 @@ export const WithError = () => {
       {withError && (
         <Box sx={withErrorSx.errorBox}>
           <Icon size={24} icon={AlertCircleIcon} color="#A31300" />
-          <Text sx={withErrorSx.text}>
+          <Text sx={withErrorSx.text} id={helperTextId} role="alert">
             This attribute is unavailable.
             Please map the attribute again or re-map to a different attribute.
           </Text>
@@ -245,7 +248,7 @@ export const WithError = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withChip leftValue="UserId" rightValue="mdorey" />
+        <Row withBadge leftValue="UserId" rightValue="mdorey" />
         <Row withError={withError} leftValue="givenName" rightValue="firstName" />
         <Row withError={withError} leftValue="familyName" rightValue="lastName" />
       </Box>

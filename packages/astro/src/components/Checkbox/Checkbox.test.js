@@ -20,4 +20,6 @@ test('default checkbox', () => {
   const input = screen.getByRole('checkbox');
   expect(input).toBeInstanceOf(HTMLInputElement);
   expect(input).toBeInTheDocument();
+  // Should be visually hidden
+  expect(input).not.toBeVisible();
 });
