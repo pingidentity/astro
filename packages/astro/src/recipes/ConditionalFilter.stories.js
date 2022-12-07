@@ -5,7 +5,7 @@ import {
   Box,
   Bracket,
   Button,
-  Chip,
+  Badge,
   IconButton,
   Icon,
   Item,
@@ -21,7 +21,7 @@ export default {
 };
 
 const sx = {
-  customChipStyles: {
+  customBadgeStyles: {
     marginRight: 'sm',
     '& > span': {
       textTransform: 'none',
@@ -91,10 +91,10 @@ export const Default = () => {
             </IconButton>
           </Box>
           <Box isRow>
-            <Chip
+            <Badge
               label="ALL"
               bg="decorative.7"
-              sx={sx.customChipStyles}
+              sx={sx.customBadgeStyles}
             />
             <Text> of the conditions are true</Text>
           </Box>
@@ -109,11 +109,11 @@ export const Default = () => {
                   sx={sx.allConditionsBox}
                 >
                   <Text pl="md" pr="sm">{item.field1}</Text>
-                  <Chip
+                  <Badge
                     label="Equals"
                     bg="accent.90"
                     textColor="neutral.10"
-                    sx={sx.customChipStyles}
+                    sx={sx.customBadgeStyles}
                     alignSelf="center"
                   />
                   <Text>{item.field3}</Text>
@@ -129,10 +129,10 @@ export const Default = () => {
               sx={sx.borderedBoxStyles}
             >
               <Box isRow>
-                <Chip
+                <Badge
                   label="ANY"
                   bg="decorative.4"
-                  sx={sx.customChipStyles}
+                  sx={sx.customBadgeStyles}
                   alignSelf="center"
                 />
                 <Text> of the conditions are true</Text>
@@ -150,11 +150,11 @@ export const Default = () => {
                       sx={sx.allConditionsBox}
                     >
                       <Text pl="md" pr="sm">{item.field1}</Text>
-                      <Chip
+                      <Badge
                         label="Equals"
                         bg="accent.90"
                         textColor="neutral.10"
-                        sx={sx.customChipStyles}
+                        sx={sx.customBadgeStyles}
                         alignSelf="center"
                       />
                       <Text>{item.field3}</Text>
@@ -172,10 +172,10 @@ export const Default = () => {
               sx={sx.borderedBoxStyles}
             >
               <Box isRow>
-                <Chip
+                <Badge
                   label="NONE"
                   bg="accent.20"
-                  sx={sx.customChipStyles}
+                  sx={sx.customBadgeStyles}
                   alignSelf="center"
                 />
                 <Text> of the conditions are true</Text>
@@ -193,11 +193,11 @@ export const Default = () => {
                       sx={sx.allConditionsBox}
                     >
                       <Text pl="md" pr="sm">{item.field1}</Text>
-                      <Chip
+                      <Badge
                         label="Equals"
                         bg="accent.90"
                         textColor="neutral.10"
-                        sx={sx.customChipStyles}
+                        sx={sx.customBadgeStyles}
                         alignSelf="center"
                       />
                       <Text>{item.field3}</Text>

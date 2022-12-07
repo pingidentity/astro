@@ -101,7 +101,7 @@ export const Default = () => {
               size: 16,
             }}
             buttonProps={{
-              variant: 'bidirectionalIconButton',
+              variant: 'bidirectional',
             }}
           />
         </Box>
@@ -164,7 +164,7 @@ export const Default = () => {
               size: 8,
             }}
             buttonProps={{
-              variant: 'bidirectionalIconButton',
+              variant: 'bidirectional',
             }}
           />
         </Box>

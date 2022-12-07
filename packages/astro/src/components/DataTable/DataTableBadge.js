@@ -4,9 +4,9 @@ import AlertIcon from 'mdi-react/AlertIcon';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 import CheckIcon from 'mdi-react/CheckIcon';
 import PropTypes from 'prop-types';
-import { Chip, Icon } from '../../index';
+import { Badge, Icon } from '../../index';
 
-const DataTableChip = forwardRef(({ cell }, ref) => {
+const DataTableBadge = forwardRef(({ cell }, ref) => {
   const color =
     (cell === 'Pending')
       ? 'line.light'
@@ -17,7 +17,7 @@ const DataTableChip = forwardRef(({ cell }, ref) => {
           : 'success.dark';
 
   return (
-    <Chip
+    <Badge
       label={cell}
       bg="white"
       ref={ref}
@@ -47,12 +47,12 @@ const DataTableChip = forwardRef(({ cell }, ref) => {
           color={color}
         />
       )}
-    </Chip>
+    </Badge>
   );
 });
 
-DataTableChip.propTypes = {
+DataTableBadge.propTypes = {
   cell: PropTypes.string,
 };
 
-export default DataTableChip;
+export default DataTableBadge;

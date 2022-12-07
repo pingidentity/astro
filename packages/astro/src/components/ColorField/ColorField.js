@@ -109,7 +109,7 @@ const ColorField = forwardRef((props, ref) => {
         bg={getRgbaFromState(state)}
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="variants.colorField.container"
+        variant="forms.colorField.container"
         {...triggerProps}
         {...ariaProps}
         {...buttonProps}
