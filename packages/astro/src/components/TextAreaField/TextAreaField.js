@@ -78,7 +78,7 @@ const TextAreaField = forwardRef((props, ref) => {
   );
 
   const wrappedLabel = (
-    <Box variant="forms.floatLabelWrapper" ref={labelWrapperRef}>
+    <Box variant="forms.textarea.floatLabelWrapper" ref={labelWrapperRef}>
       {labelNode}
     </Box>
   );
@@ -87,10 +87,10 @@ const TextAreaField = forwardRef((props, ref) => {
     <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
       <Box isRow variant="forms.input.container" className={fieldControlProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
-        <TextArea ref={textAreaRef} rows={rows} {...fieldControlProps} sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }} />
+        <TextArea variant="forms.textarea.baseField" ref={textAreaRef} rows={rows} {...fieldControlProps} sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }} />
         {
           slots?.inContainer &&
-            <Box variant="forms.textFieldInContainerSlot" ref={slotContainer} >
+            <Box variant="forms.textarea.containerSlot" ref={slotContainer} >
               {slots?.inContainer}
             </Box>
         }

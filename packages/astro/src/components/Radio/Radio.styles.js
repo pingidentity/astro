@@ -1,7 +1,7 @@
 // Styles for default radio and variants go here.
 
 // Default radio
-export const radio = {
+const base = {
   width: 20,
   height: 20,
   color: 'active',
@@ -16,14 +16,14 @@ export const radio = {
   },
 };
 
-export const outerContainer = {
+const outerContainer = {
   '.is-horizontal &': {
     mr: '15px',
   },
 };
 
 // Used to give a border to radio elements
-export const container = {
+const container = {
   borderWidth: 1,
   borderStyle: 'solid',
   borderColor: 'active',
@@ -33,9 +33,16 @@ export const container = {
 };
 
 // Used to add spacing for content shown when a radio is checked
-export const checkedContent = {
+const checkedContent = {
   pb: 'sm',
   pl: 'lg',
   color: 'text.secondary',
   fontSize: 'md',
+};
+
+export default {
+  base,
+  outerContainer,
+  container,
+  checkedContent,
 };

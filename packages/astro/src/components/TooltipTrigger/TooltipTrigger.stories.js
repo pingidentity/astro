@@ -81,7 +81,7 @@ Disabled.parameters = {
 export const IconWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <IconButton variant="variants.tooltip.button">
+      <IconButton variant="tooltipWithButton">
         <Icon icon={AccountIcon} />
       </IconButton>
       <Tooltip>Useful tooltip</Tooltip>
@@ -89,7 +89,7 @@ export const IconWithTooltip = () => (
   </Box>
 );
 
-export const ChipWithTooltip = () => (
+export const BadgeWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
       <Button variant="variants.tooltip.chip" bg="neutral.10">

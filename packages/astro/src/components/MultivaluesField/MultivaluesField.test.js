@@ -318,10 +318,10 @@ test('default selected keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  expect(firstChip).toBeInTheDocument();
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  expect(firstBadge).toBeInTheDocument();
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
 });
 
 test('selected keys', () => {
@@ -330,10 +330,10 @@ test('selected keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  expect(firstChip).toBeInTheDocument();
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  expect(firstBadge).toBeInTheDocument();
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
 });
 
 test('should have no accessibility violations', async () => {
@@ -350,14 +350,14 @@ test('read only keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  const { nextSibling: deleteButton1 } = firstChip;
-  expect(firstChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  const { nextSibling: deleteButton1 } = firstBadge;
+  expect(firstBadge).toBeInTheDocument();
   expect(deleteButton1).toBeNull();
 
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
-  const { nextSibling: deleteButton2 } = firstChip;
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
+  const { nextSibling: deleteButton2 } = firstBadge;
   expect(deleteButton2).toBeNull();
 });
 

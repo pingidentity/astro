@@ -158,7 +158,7 @@ const FileInputField = forwardRef(({
     <>
       <Label {...fieldLabelProps} />
       <Box
-        variant="fileInputField.wrapper"
+        variant="forms.fileInputField.wrapper"
         {...mergeProps(fieldContainerProps, nonAriaProps)}
         className={classNames}
         {...getRootProps()}

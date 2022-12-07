@@ -31,7 +31,7 @@ const HelpHint = forwardRef((props, ref) => {
 
   return (
     <TooltipTrigger ref={ref} direction="top" {...others} {...tooltipProps} >
-      <IconButton variant="variants.helpHint.button" aria-label="label help hint" data-testid="help-hint__button" aria-describedby={tooltipId} {...iconButtonProps}>
+      <IconButton variant="hintButton" aria-label="label help hint" data-testid="help-hint__button" aria-describedby={tooltipId} {...iconButtonProps}>
         <Icon icon={HelpIcon} />
       </IconButton>
       <Tooltip {...tooltipProps} role="tooltip" aria-live="polite" id={tooltipId}>{children}</Tooltip>

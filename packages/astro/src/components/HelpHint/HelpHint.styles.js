@@ -1,8 +1,6 @@
 import { defaultFocus } from '../Button/Buttons.styles';
-import { base } from '../IconButton/IconButton.styles';
 
-const button = {
-  ...base,
+export const hintButton = {
   bg: 'neutral.90',
   borderColor: 'active',
   mt: 'auto',
@@ -35,6 +33,9 @@ const button = {
     borderColor: 'accent.20',
     color: 'white',
   },
+  ':focus': {
+    outline: 'none',
+  },
 };
 
-export default { button };
+export default { hintButton };

@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChipContext } from './ChipContext';
-import Box from '../Box/Box';
+import { Badge as ThemeUIBadge } from 'theme-ui';
+import { BadgeContext } from '../../context/BadgeContext';
 import Text from '../Text/Text';
 import * as colors from '../../styles/colors';
 
 /**
- * Chip component.
- * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the
+ * Badge component.
+ * Built on top of the [Badge from Theme-UI](https://theme-ui.com/components/box/) and uses the
  * available [props from Theme-UI](https://theme-ui.com/sx-prop).
 */
 
-const Chip = React.forwardRef((props, ref) => {
+const Badge = React.forwardRef((props, ref) => {
   const {
     bg,
     children,
@@ -34,10 +34,10 @@ const Chip = React.forwardRef((props, ref) => {
   }
 
   return (
-    <ChipContext.Provider value={{ bg }}>
-      <Box
+    <BadgeContext.Provider value={{ bg }}>
+      <ThemeUIBadge
         isRow
-        variant="chip.baseChip"
+        variant="baseBadge"
         sx={sx}
         ref={ref}
         {...props}
@@ -51,30 +51,30 @@ const Chip = React.forwardRef((props, ref) => {
           {label}
         </Text>
         {children}
-      </Box>
-    </ChipContext.Provider>
+      </ThemeUIBadge>
+    </BadgeContext.Provider>
   );
 });
 
-Chip.propTypes = {
-  /** The text color of the chip. */
+Badge.propTypes = {
+  /** The text color of the badge. */
   textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The background color of the chip. */
+  /** The background color of the badge. */
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The label of the chip. */
+  /** The label of the badge. */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Props object that is spread directly into the textfield. */
   textProps: PropTypes.shape({}),
-  /** When true, display chip label as uppercase. */
+  /** When true, display badge label as uppercase. */
   isUppercase: PropTypes.bool,
-  /** Alignment of chip relative to parent container. */
+  /** Alignment of badge relative to parent container. */
   align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
-Chip.defaultProps = {
+Badge.defaultProps = {
   textColor: 'white',
   bg: colors.neutral[10],
   isUppercase: false,
 };
 
-export default Chip;
+export default Badge;

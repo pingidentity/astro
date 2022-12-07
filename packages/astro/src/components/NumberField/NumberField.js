@@ -53,7 +53,7 @@ const NumberField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   const ControlArrows = (
-    <Box variant="numberField.arrows">
+    <Box variant="forms.numberField.arrows">
       <IconButton {...incrementButtonProps} ref={decRef} tabIndex="-1" p={0}>
         <Icon icon={MenuUp} size={18} />
       </IconButton>
@@ -119,9 +119,9 @@ const NumberField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
-      <Box variant="numberField.noDefaultArrows" {...groupProps}>
+      <Box variant="forms.numberField.noDefaultArrows" {...groupProps}>
         <Box
-          variant="numberField.arrowsWrapper"
+          variant="forms.numberField.arrowsWrapper"
           className={fieldControlProps.className}
         >
           <Input
