@@ -27,6 +27,9 @@ export const GlobalStyles = () => (
           opacity: 0.5;
           pointer-events: none;
         }
+        [data-live-announcer] {
+          display: none;
+        }
       `
     }
   />
