@@ -12,7 +12,7 @@ import {
   DataTableColumn,
   DataTableHeader,
   DataTableRow,
-  DataTableChip,
+  DataTableBadge,
   DataTableMenu,
   DataTableMultiLine,
 } from '../../index';
@@ -155,7 +155,7 @@ export const CustomContent = (args) => {
           date: chromatic ? '2022-12-25' : `${faker.date.past().toLocaleDateString('fr-CA')}`,
           category: chromatic ? 'Other' : `${random(['App Catalog', 'Delete Environment', 'Other'])}`,
           status: (
-            <DataTableChip
+            <DataTableBadge
               cell={chromatic ? 'Pending' : `${random(['Pending', 'Rejected', 'Approved', 'Failed'])}`}
             />
           ),

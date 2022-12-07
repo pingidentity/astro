@@ -14,7 +14,7 @@ const copy = {
   },
 };
 
-const copyButton = {
+export const copyButton = {
   ml: 'xs',
   outline: 'none',
   height: 'auto',
@@ -25,6 +25,9 @@ const copyButton = {
   '&.is-focused': {
     boxShadow: 'none',
     ...defaultFocus,
+  },
+  ':focus': {
+    outline: 'none',
   },
 };
 

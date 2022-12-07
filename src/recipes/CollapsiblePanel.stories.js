@@ -10,7 +10,7 @@ import {
   Breadcrumbs,
   Box,
   CheckboxField,
-  Chip,
+  Badge,
   Icon,
   IconButton,
   Item,
@@ -240,7 +240,7 @@ export const Default = () => {
                     <Box>
                       <Box isRow>
                         <Text variant="listTitle" mb="xs" mr="xs">{item.name}</Text>
-                        <Chip
+                        <Badge
                           label={item.chipValue}
                           bg="accent.99"
                           textColor="text.secondary"

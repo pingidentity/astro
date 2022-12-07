@@ -54,6 +54,7 @@
     "@react-stately/virtualizer": "^3.2.1",
     "@styled-system/prop-types": "^5.1.5",
     "@styled-system/props": "^5.1.5",
+    "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "chroma-js": "^2.1.0",
     "classnames": "^2.2.6",
@@ -73,7 +74,7 @@
     "recharts": "^2.1.4",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
-    "theme-ui": "^0.10.0",
+    "theme-ui": "0.10.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -111,6 +112,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1",
+    "react-json-tree": "^0.17.0",
     "use-resize-observer": "^8.0.0"
   },
   "peerDependencies": {

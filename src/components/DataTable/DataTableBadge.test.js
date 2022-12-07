@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { DataTableChip } from '../../index';
+import { DataTableBadge } from '../../index';
 
 const getComponent = (props = {}) => render(
-  <DataTableChip {...props} />,
+  <DataTableBadge {...props} />,
 );
 
 test('renders component with rejected label', () => {

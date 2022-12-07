@@ -15,7 +15,7 @@ const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...ot
       mx={15}
       my={5}
       onPress={handleFileSelect}
-      variant="variants.fileInputField.button"
+      variant="forms.fileInputField.button"
       {...ariaProps}
     >
       <Text color="active" {...textProps}>

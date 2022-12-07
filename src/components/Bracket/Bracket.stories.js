@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box,
   Bracket,
-  Chip,
+  Badge,
   Text,
 } from '../../index';
 
@@ -17,18 +17,18 @@ export const Default = () => {
     { field1: 'Group', field3: 'UX Team', key: 'Group2Field' },
   ];
 
-  const customChipStyles = ({
+  const customBadgeStyles = ({
     '& > span': { textTransform: 'none', fontWeight: '500' }, minWidth: '65px', 'z-index': '1',
   });
 
   return (
     <Box p="md" ml="sm" bg="background" >
       <Box isRow mb="xs" >
-        <Chip
+        <Badge
           label="Any"
           bg="neutral.20"
           mr="sm"
-          sx={customChipStyles}
+          sx={customBadgeStyles}
           alignSelf="center"
         />
         <Text> of the conditions are true</Text>
@@ -48,11 +48,11 @@ export const Default = () => {
             sx={{ '&::after': { bg: 'decorative.4' } }}
           >
             <Text pl="md" pr="sm">{item.field1}</Text>
-            <Chip
+            <Badge
               label="Equals"
               bg="accent.90"
               textColor="neutral.10"
-              sx={customChipStyles}
+              sx={customBadgeStyles}
               mr="sm"
               alignSelf="center"
             />
