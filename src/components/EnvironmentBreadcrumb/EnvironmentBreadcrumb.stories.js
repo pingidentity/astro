@@ -55,7 +55,7 @@ export const Default = (args) => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
@@ -147,7 +147,7 @@ export const WithSections = () => {
   };
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
@@ -201,7 +201,7 @@ export const DefaultOpen = () => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
@@ -249,7 +249,7 @@ export const ControlledMenu = () => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />

@@ -28,6 +28,11 @@ import {
   Text,
 } from '../../index';
 
+export const breadCrumbDataIds = {
+  dropdownList: 'breadcrumb--dropdown-list',
+  environmentButton: 'breadcrumb--environment-button',
+  orgButton: 'breadcrumb--org-button',
+};
 /** The Environment Picker with Search and Sections support */
 
 const EnvironmentBreadcrumb = forwardRef((props, ref) => {
@@ -39,15 +44,15 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     isOpen,
     items,
     itemsFilter: imperativeItemsFilter,
-    onOpenChange,
+    name,
     onNamePress,
+    onOpenChange,
     onPopoverClose: imperativeOnPopoverClose,
     onPopoverOpen: imperativeOnPopoverOpen,
     onSelectionChange,
-    name,
+    popoverProps,
     searchProps,
     selectedItem,
-    popoverProps,
     ...others
   } = props;
 
@@ -186,8 +191,12 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       {emptySearchText}
     </Text>
   );
-
-  const [selectedValue] = selectedKeys;
+  const setAriaLabel = (itemKey) => {
+    if (itemKey !== undefined) {
+      return (popoverState.isOpen ? `${selectedItem.key} - Collapse Options` : `${selectedItem.key} - Expand Options`);
+    }
+    return selectedItem;
+  };
 
   const ItemsSelect = (
     <>
@@ -196,7 +205,8 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         onPress={handlePopoverOpen}
         ref={triggerRef}
         variant="variants.environmentBreadcrumb.button.current"
-        aria-label={`${(typeof selectedItem === 'string' ? selectedItem : selectedValue) || 'Selected Item'}`}
+        aria-label={setAriaLabel(selectedItem)}
+        data-id={breadCrumbDataIds.environmentButton}
       >
         {selectedItem}
         <Icon
@@ -233,7 +243,11 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
             {checkIfListEmpty() ? (
               EmptyListState
             ) : (
-              <ListBox state={listBoxState} aria-label="Items List" />
+              <ListBox
+                aria-label="Items List"
+                data-id={breadCrumbDataIds.dropdownList}
+                state={listBoxState}
+              />
             )}
           </ScrollBox>
         </FocusScope>
@@ -267,6 +281,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         variant="variants.environmentBreadcrumb.button.current"
         data-testid="name"
         aria-label={name}
+        data-id={breadCrumbDataIds.orgButton}
         elementType="Button"
       >
         <Icon icon={HomeIcon} mr={7} />

@@ -315,6 +315,19 @@ test('form wrapper will have a max label column width when custom width set', ()
   expect(textAreaContainer).toHaveStyle('grid-template-columns: 120px auto');
 });
 
+test('passing helper text should display it and correct aria attributes on input', () => {
+  const testHelperText = 'testHelperText';
+  getComponent({ helperText: testHelperText, status: statuses.ERROR });
+  const helper = screen.getByText(testHelperText);
+  expect(helper).toBeInTheDocument();
+  expect(helper).toHaveClass(`is-${statuses.ERROR}`);
+
+  const visibleInput = screen.getAllByLabelText(defaultProps.label)[1];
+
+  const helperTextID = helper.getAttribute('id');
+  expect(visibleInput).toHaveAttribute('aria-describedby', helperTextID);
+});
+
 test('should have no accessibility violations', async () => {
   jest.useRealTimers();
   const { container } = getComponent();

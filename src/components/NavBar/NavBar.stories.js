@@ -1,27 +1,28 @@
-import React from 'react';
-import GlobeIcon from 'mdi-react/GlobeIcon';
-import ViewDashboard from 'mdi-react/ViewDashboardIcon';
+import React, { useState } from 'react';
 import AccountMultiple from 'mdi-react/AccountMultipleIcon';
-import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
+import Earth from 'mdi-react/EarthIcon';
 import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
+import GlobeIcon from 'mdi-react/GlobeIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
-import Earth from 'mdi-react/EarthIcon';
+import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
+import ViewDashboard from 'mdi-react/ViewDashboardIcon';
+
 import {
-  Separator,
   Box,
   Link,
   NavBar,
-  NavBarSection,
+  NavBarItem,
   NavBarItemButton,
   NavBarItemLink,
-  NavBarItem,
+  NavBarSection,
+  Separator,
 } from '../../index';
 
 export default {
-  title: 'NavBar',
   component: NavBar,
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
+  title: 'NavBar',
 };
 
 const Credentials = props => (
@@ -88,9 +89,10 @@ const logo = (
 
 const data = [
   {
+    'data-id': 'dashboard-data-id',
+    heading: 'Dashboard',
     icon: ViewDashboard,
     key: 'Dashboard',
-    heading: 'Dashboard',
     children: [
       <NavBarItemLink
         key="Dashboard Link Group"
@@ -100,16 +102,16 @@ const data = [
       >
         Group
       </NavBarItemLink>,
-      <NavBarItemLink
+      <NavBarItemButton
         key="Dashboard Link Populations"
         id="Dashboard Link Populations"
-        href="https://pingidentity.com/"
       >
         Populations
-      </NavBarItemLink>,
+      </NavBarItemButton>,
     ],
   },
   {
+    'data-id': 'identities-data-id',
     icon: AccountMultiple,
     key: 'Identities',
     heading: 'Identities',
@@ -122,60 +124,230 @@ const data = [
         Users
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Identities Link Group"
-        id="Identities Link Group"
+        key="Identities Link Groups"
+        id="Identities Link Groups"
         href="https://pingidentity.com/"
       >
-        Group
+        Groups
       </NavBarItemLink>,
-    ],
-  },
-  {
-    icon: TransitConnection,
-    key: 'Connections',
-    heading: 'Connections',
-    children: [
       <NavBarItemLink
-        key="Connection Link Users"
-        id="Connection Link Users"
+        key="Identities Link Populations"
+        id="Identities Link Populations"
         href="https://pingidentity.com/"
       >
-        Users
+        Populations
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections Link Group"
-        id="Connections Link Group"
-        href="https://pingidentity.com/"
-      >
-        Group
-      </NavBarItemLink>,
-    ],
-  },
-  {
-    icon: EmoticonHappy,
-    key: 'Experiences',
-    heading: 'Experiences',
-    children: [
-      <NavBarItemLink
-        key="Experiences Link Attributes"
-        id="Experiences Link Attributes"
+        key="Identities Link Attributes"
+        id="Identities Link Attributes"
         href="https://pingidentity.com/"
       >
         Attributes
       </NavBarItemLink>,
-      <NavBarItemLink
-        key="Experiences Link Roles"
-        id="Experiences Link Roles"
-        href="https://pingidentity.com/"
+      <NavBarItemButton
+        key="Identities Link Roles"
+        id="Identities Link Roles"
       >
         Roles
+      </NavBarItemButton>,
+    ],
+  },
+  {
+    'data-id': 'connections-data-id',
+    icon: TransitConnection,
+    key: 'Connections',
+    heading: 'Connections',
+    children: [
+      {
+        hasSeparator: false,
+        subTitle: 'Applications',
+      },
+      <NavBarItemLink
+        key="Connections Applications"
+        id="Connections Applications"
+        href="https://pingidentity.com/"
+      >
+        Applications
       </NavBarItemLink>,
+      <NavBarItemLink
+        key="Connections Application Catalog"
+        id="Connections Application Catalog"
+        href="https://pingidentity.com/"
+      >
+        Application Catalog
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Connections Application Portal"
+        id="Connections Application Portal"
+        href="https://pingidentity.com/"
+      >
+        Application Portal
+      </NavBarItemLink>,
+      {
+        subTitle: 'Identity Providers',
+      },
+      <NavBarItemLink
+        key="Connections External IDPs"
+        id="Connections External IDPs"
+        href="https://pingidentity.com/"
+      >
+        External IDPs
+      </NavBarItemLink>,
+      {
+        subTitle: 'Ping Products',
+      },
+      <NavBarItemLink
+        key="Connections PingFederate"
+        id="Connections PingFederate"
+        href="https://pingidentity.com/"
+      >
+        PingFederate
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Connections PingIntelligence"
+        id="Connections PingIntelligence"
+        href="https://pingidentity.com/"
+      >
+        PingIntelligence
+      </NavBarItemLink>,
+      <Separator variant="separator.navBarSubtitleSeparator" />,
+      <NavBarItemLink
+        key="Connections Provisioning"
+        id="Connections Provisioning"
+        href="https://pingidentity.com/"
+      >
+        Provisioning
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Connections WebHooks"
+        id="Connections WebHooks"
+        href="https://pingidentity.com/"
+      >
+        WebHooks
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Connections Gateways"
+        id="Connections Gateways"
+        href="https://pingidentity.com/"
+      >
+        Gateways
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Connections Certificates & Key Pairs"
+        id="Connections Certificates & Key Pairs"
+        href="https://pingidentity.com/"
+      >
+        Certificates & Key Pairs
+      </NavBarItemLink>,
+      <NavBarItemButton
+        key="Connections Resources"
+        id="Connections Resources"
+      >
+        Resources
+      </NavBarItemButton>,
+    ],
+  },
+  {
+    'data-id': 'experiences-data-id',
+    icon: EmoticonHappy,
+    key: 'Experiences',
+    heading: 'Experiences',
+    children: [
+      {
+        hasSeparator: false,
+        subTitle: 'Policies',
+      },
+      <NavBarItemLink
+        key="Experiences Authentication"
+        id="Experiences Authentication"
+        href="https://pingidentity.com/"
+      >
+        Authentication
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences MFA"
+        id="Experiences MFA"
+        href="https://pingidentity.com/"
+      >
+        MFA
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Password"
+        id="Experiences Password"
+        href="https://pingidentity.com/"
+      >
+        Password
+      </NavBarItemLink>,
+      <Separator variant="separator.navBarSubtitleSeparator" />,
+      <NavBarItemLink
+        key="Experiences Risk"
+        id="Experiences Risk"
+        href="https://pingidentity.com/"
+      >
+        Risk
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Flows"
+        id="Experiences Flows"
+        href="https://pingidentity.com/"
+      >
+        Flows
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Forms"
+        id="Experiences Forms"
+        href="https://pingidentity.com/"
+      >
+        Forms
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Languages"
+        id="Experiences Languages"
+        href="https://pingidentity.com/"
+      >
+        Languages
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Agreements"
+        id="Experiences Agreements"
+        href="https://pingidentity.com/"
+      >
+        Agreements
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Branding & Themes"
+        id="Experiences Branding & Themes"
+        href="https://pingidentity.com/"
+      >
+        Branding & Themes
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Notifications"
+        id="Experiences Notifications"
+        href="https://pingidentity.com/"
+      >
+        Notifications
+      </NavBarItemLink>,
+      <NavBarItemLink
+        key="Experiences Vanity Domains"
+        id="Experiences Vanity Domains"
+        href="https://pingidentity.com/"
+      >
+        Vanity Domains
+      </NavBarItemLink>,
+      <NavBarItemButton
+        key="Experiences Sender"
+        id="Experiences Sender"
+      >
+        Sender
+      </NavBarItemButton>,
     ],
   },
 ];
 
 const secondData = [
   {
+    'data-id': 'mfa-data-id',
     icon: Fingerprint,
     key: 'MFA',
     heading: 'MFA',
@@ -187,7 +359,7 @@ const secondData = [
         Users
       </NavBarItemButton>,
       {
-        isSubTitle: true,
+        hasSeparator: false,
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -199,6 +371,7 @@ const secondData = [
     ],
   },
   {
+    'data-id': 'risk-data-id',
     icon: ScaleBalance,
     key: 'Risk',
     heading: 'Risk',
@@ -210,7 +383,7 @@ const secondData = [
         Users
       </NavBarItemButton>,
       {
-        isSubTitle: true,
+        hasSeparator: false,
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -222,6 +395,7 @@ const secondData = [
     ],
   },
   {
+    'data-id': 'verify-data-id',
     icon: Verify,
     key: 'Verify',
     heading: 'Verify',
@@ -233,7 +407,7 @@ const secondData = [
         Users
       </NavBarItemButton>,
       {
-        isSubTitle: true,
+        hasSeparator: false,
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -245,6 +419,7 @@ const secondData = [
     ],
   },
   {
+    'data-id': 'credentials-data-id',
     icon: Credentials,
     key: 'Credentials',
     heading: 'Credentials',
@@ -256,7 +431,7 @@ const secondData = [
         Users
       </NavBarItemButton>,
       {
-        isSubTitle: true,
+        hasSeparator: false,
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -271,6 +446,7 @@ const secondData = [
 
 const thirdData = [
   {
+    'data-id': 'environment-data-id',
     icon: Earth,
     key: 'Environment',
     heading: 'Environment title that is so long, it wraps',
@@ -292,12 +468,12 @@ const thirdData = [
 ];
 
 export const Default = () => (
-  <NavBar defaultSelectedKey="Dashboard Link Group" >
+  <NavBar >
     <Box padding="md">
       <Link
+        aria-label="home link"
         href="https://pingidentity.com"
         target="_blank"
-        aria-label="home link"
       >
         {logo}
       </Link>
@@ -308,14 +484,72 @@ export const Default = () => (
       paddingBottom="xl"
     >
       <NavBarItem
+        data-id="nav-bar-item"
+        icon={GlobeIcon}
         id="Overview"
         key="Overview"
         text="Overview"
-        icon={GlobeIcon}
       />
-      <NavBarSection items={data} hasSeparator />
-      <NavBarSection items={secondData} hasSeparator title="PingOne Services" />
-      <NavBarSection items={thirdData} />
+      <NavBarSection items={data} hasSeparator data-id="nav-bar-section" />
+      <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+      <NavBarSection items={thirdData} data-id="third-nav-bar-section" />
     </Box>
   </NavBar>
 );
+
+export const Controlled = () => {
+  const [selectedKey, setSelectedKey] = useState('Dashboard Link Group');
+
+  const customData = [
+    {
+      icon: Earth,
+      key: 'Environment',
+      heading: 'Nested redirect is in here',
+      children: [
+        <NavBarItemButton
+          key="Click me for MFA Users"
+          id="Click me for MFA Users"
+          onPress={() => { setSelectedKey('MFA Button Users'); }}
+        >
+          Click me for MFA Users
+        </NavBarItemButton>,
+        <NavBarItemButton
+          key="Earth Button Group"
+          id="Earth Button Group"
+        >
+          Group
+        </NavBarItemButton>,
+      ],
+    },
+  ];
+
+  return (
+    <NavBar setSelectedKey={setSelectedKey} selectedKey={selectedKey}>
+      <Box padding="md">
+        <Link
+          aria-label="home link"
+          href="https://pingidentity.com"
+          target="_blank"
+        >
+          {logo}
+        </Link>
+      </Box>
+      <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" />
+      <Box
+        variant="navBar.sectionContainer"
+        paddingBottom="xl"
+      >
+        <NavBarItem
+          data-id="nav-bar-item"
+          icon={GlobeIcon}
+          id="Overview"
+          key="Overview"
+          text="Overview"
+        />
+        <NavBarSection items={data} hasSeparator data-id="first-nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={customData} data-id="third-nav-bar-section" />
+      </Box>
+    </NavBar>
+  );
+};

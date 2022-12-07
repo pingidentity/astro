@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
@@ -11,16 +11,29 @@ const NavBarItemHeader = (props) => {
   const { icon, key, className, heading } = item;
 
   const navBarState = useNavBarContext();
-  const isExpanded = navBarState.expandedKeys?.has(key);
+
+  const {
+    selectedKey,
+    setExpandedKeys,
+    expandedKeys,
+  } = navBarState;
+
+  const isExpanded = expandedKeys.includes(key);
   const array = item.children.map(i => i.key);
   const childSelected = array.includes(navBarState.selectedKey);
+
+  useEffect(() => {
+    if (childSelected && isExpanded === false) {
+      setExpandedKeys([...expandedKeys, key]);
+    }
+  }, [selectedKey]);
 
   const { classNames } = useStatusClasses(className, {
     isSelected: childSelected && !isExpanded,
   });
 
   return (
-    <Box variant="navBar.itemHeaderContainer" className={classNames} isRow>
+    <Box variant="navBar.itemHeaderContainer" className={classNames} isRow data-testid={heading} >
       {icon && (
         <Icon
           icon={icon}

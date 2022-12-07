@@ -20,38 +20,41 @@ import useProgressiveState from '../../hooks/useProgressiveState';
 
 const NavBar = (props) => {
   const {
-    defaultSelectedKeys,
-    selectedKeys: selectedKeysProp,
-    setSelectedKeys: setSelectedKeysProp,
+    defaultSelectedKey,
+    selectedKey: selectedKeyProp,
+    setSelectedKey: setSelectedKeyProp,
     defaultExpandedKeys,
     children,
   } = props;
 
-  const [expandedKeys, setExpandedKeys] = useState(new Set(defaultExpandedKeys));
-  const [selectedKeys, setSelectedKeys] = useProgressiveState(
-    selectedKeysProp,
-    defaultSelectedKeys,
+  const [expandedKeys, setExpandedKeys] = useState(defaultExpandedKeys);
+
+  const [selectedKey, setSelectedKey] = useProgressiveState(
+    selectedKeyProp,
+    defaultSelectedKey,
   );
 
   const items = useMemo(
     () => (Array.isArray(children)
       ? children.map(child => ({ item: child, key: uuid() }))
       : [{ item: children, key: uuid() }]),
-    [children],
+    [],
   );
+
+  const contextValue = {
+    selectedKey,
+    setSelectedKey: setSelectedKeyProp || setSelectedKey,
+    expandedKeys,
+    setExpandedKeys,
+  };
 
   return (
     <NavBarContext.Provider
-      value={{
-        selectedKey: selectedKeys,
-        setSelectedKey: setSelectedKeysProp || setSelectedKeys,
-        expandedKeys,
-        setExpandedKeys,
-      }}
+      value={contextValue}
     >
       <Box variant="navBar.container" role="navigation" as="nav">
         {items.length ? (
-          <FocusScope restoreFocus autoFocus>
+          <FocusScope restoreFocus>
             {items.map(({ item, key }) => <FocusableItem key={key}>{item}</FocusableItem>)}
           </FocusScope>
         ) : null}
@@ -85,15 +88,22 @@ const FocusableItem = (props) => {
 
 NavBar.propTypes = {
   /** The initial selected key in the collection (uncontrolled). */
-  defaultSelectedKeys: isIterableProp,
+  defaultSelectedKey: PropTypes.string,
   /** The initial expanded keys in the collection (uncontrolled). */
   defaultExpandedKeys: isIterableProp,
-  selectedKeys: isIterableProp,
-  setSelectedKeys: PropTypes.func,
+  /** The selected key in the collection (controlled). */
+  selectedKey: isIterableProp,
+  /**
+  * Callback function that fires when the selected key changes.
+  *
+  * `(selectedKey: String) => void`
+  */
+  setSelectedKey: PropTypes.func,
 };
 
 NavBar.defaultProps = {
-  defaultSelectedKeys: [],
+  defaultSelectedKey: '',
+  defaultExpandedKeys: [],
 };
 
 export default NavBar;
