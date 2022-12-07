@@ -3,7 +3,7 @@ import CreateIcon from 'mdi-react/CreateIcon';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 import {
   Box,
-  Chip,
+  Badge,
   IconButton,
   Text,
   Icon,
@@ -82,7 +82,7 @@ const sx = {
 
 const Row = (props) => {
   const {
-    withChip,
+    withBadge,
     withTooltip,
     withError,
     leftValue,
@@ -128,8 +128,8 @@ const Row = (props) => {
           },
         }}
       />
-      {withChip &&
-        <Chip
+      {withBadge &&
+        <Badge
           label="Required"
           sx={sx.chip}
         />
@@ -186,7 +186,7 @@ export const Default = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withChip leftValue="UserId" rightValue="mdorey" />
+        <Row withBadge leftValue="UserId" rightValue="mdorey" />
         <Row leftValue="givenName" rightValue="firstName" />
         <Row leftValue="familyName" rightValue="lastName" />
         <Row withTooltip leftValue="population" rightValue="population" />
@@ -245,7 +245,7 @@ export const WithError = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withChip leftValue="UserId" rightValue="mdorey" />
+        <Row withBadge leftValue="UserId" rightValue="mdorey" />
         <Row withError={withError} leftValue="givenName" rightValue="firstName" />
         <Row withError={withError} leftValue="familyName" rightValue="lastName" />
       </Box>

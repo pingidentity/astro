@@ -1,5 +1,3 @@
-import { base } from '../IconButton/IconButton.styles';
-
 const wrapper = {
   position: 'absolute',
   right: 'lg',
@@ -41,8 +39,7 @@ const item = {
   },
 };
 
-const close = {
-  ...base,
+export const messageCloseButton = {
   p: 0,
   ml: 'auto',
   outline: 'none',
@@ -102,5 +99,5 @@ export default {
   wrapper,
   transition,
   item,
-  close,
+  messageCloseButton,
 };

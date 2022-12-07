@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import { Box, Icon, IconButton, Text } from '../../index';
-import { useStatusClasses } from '../../hooks';
+import { Box, Icon, IconButton, Text } from '../index';
+import { useStatusClasses } from '../hooks';
 
 export default {
   title: 'Recipes/Masked Values',
@@ -28,6 +28,17 @@ const sx = {
     marginLeft: 'sm',
     alignSelf: 'auto',
   },
+  maskedItem: {
+    color: 'black',
+    fontSize: '16px',
+    width: 252,
+    wordBreak: 'break-all',
+    '&.is-masked': {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      fontWeight: 3,
+    },
+  },
 };
 
 export const Default = ({ dataTitle, secretData }) => {
@@ -40,7 +51,7 @@ export const Default = ({ dataTitle, secretData }) => {
     <Box>
       <Text variant="label">{dataTitle}</Text>
       <Box isRow alignItems="center">
-        <Text variant="variants.maskedValue.maskedValue" className={classNames}>
+        <Text sx={sx.maskedItem} className={classNames}>
           {isMasked ? '•'.repeat(99) : secretData}
         </Text>
         <IconButton

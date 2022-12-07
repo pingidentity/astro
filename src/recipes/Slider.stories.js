@@ -47,7 +47,7 @@ const sx = {
   },
   thumbContainer: {
     position: 'absolute',
-    top: 5,
+    top: 17,
     transform: 'translateX(-50%)',
   },
   thumb: {

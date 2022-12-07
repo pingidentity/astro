@@ -6,7 +6,7 @@ import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
 
-import { Box, FieldHelperText, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
+import { Box, FieldHelperText, Badge, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { usePropWarning } from '../../hooks';
 import ListBox from '../ListBox';
@@ -260,11 +260,11 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = initialItems.find(el => el.key === key);
           if (item) {
             return (
-              <Chip
+              <Badge
                 key={item.key}
                 role="presentation"
                 label={item.name}
-                variant="chip.readOnlyChip"
+                variant="readOnlyBadge"
                 bg="white"
                 textProps={{ sx: { color: 'text.primary' } }}
               />
@@ -282,17 +282,17 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              <Chip
+              <Badge
                 key={item.key}
                 role="presentation"
-                variant="chip.selectedItemChip"
+                variant="selectedItemBadge"
                 bg="active"
                 label={item.name}
               >
-                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="variants.chip.chipDeleteButton">
+                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="chipDeleteButton">
                   <Icon icon={Clear} color="white" size={14} />
                 </IconButton>
-              </Chip>
+              </Badge>
             );
           }
           return null;

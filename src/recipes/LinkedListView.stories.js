@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import {
   Box,
-  Chip,
+  Badge,
   Icon,
   IconButton,
   Item,
@@ -82,7 +82,7 @@ const testData = [
 // I.e. the staging rows will need to immediately follow the prod row that they correspond to.
 // This flat, sorted array will then be passed into the listview component as the items prop.
 // You may not need these functions if you are able to change the data shape on the back end
-// (which is reccomended for performance reasons)
+// (which is recommended for performance reasons)
 
 const flattenArray = (array) => {
   const newArray = array;
@@ -231,9 +231,9 @@ export const Default = ({ ...args }) => {
   };
 
   // made these separate components because staging and production both use them.
-  const DefaultChip = () => {
+  const DefaultBadge = () => {
     return (
-      <Chip
+      <Badge
         label="Default"
         bg="active"
         sx={{
@@ -246,7 +246,7 @@ export const Default = ({ ...args }) => {
     );
   };
 
-  const ExprirationChip = (props) => {
+  const ExprirationBadge = (props) => {
     const {
       expirationText,
       chipText,
@@ -261,7 +261,7 @@ export const Default = ({ ...args }) => {
         alignItems="center"
         alignSelf="center"
       >
-        <Chip
+        <Badge
           bg="white"
           sx={{
             border: 'solid 1px',
@@ -323,7 +323,7 @@ export const Default = ({ ...args }) => {
           </Box>
           {
             chipText &&
-            <DefaultChip />
+            <DefaultBadge />
           }
         </Box>
         <IconWithPopover />
@@ -381,11 +381,11 @@ export const Default = ({ ...args }) => {
         </Box>
         {
           chipText &&
-          <DefaultChip />
+          <DefaultBadge />
         }
         {
           expirationText &&
-          <ExprirationChip expirationText={expirationText} />
+          <ExprirationBadge expirationText={expirationText} />
         }
         <IconWithPopover />
       </Box>
@@ -401,8 +401,21 @@ export const Default = ({ ...args }) => {
             textValue={item.name}
             data-id={item.key}
             listItemProps={{
-            variant: 'boxes.linkedListViewItem',
-          }}
+              minHeight: '75px',
+              sx: {
+                '&.has-inset-separator': {
+                  '&:before': {
+                    content: '""',
+                    position: 'absolute',
+                    width: 'calc(100% - 43px)',
+                    right: 0,
+                    bottom: 0,
+                    borderBottom: '1px solid',
+                    borderBottomColor: 'line.hairline',
+                  },
+                },
+              },
+            }}
           >
             {
               item.parentId ?

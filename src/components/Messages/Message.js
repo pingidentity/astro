@@ -115,7 +115,7 @@ const Message = forwardRef((props, ref) => {
           </Text>
           <CloseButton
             onPress={onCloseHandler}
-            variant="variants.message.close"
+            variant="messageCloseButton"
             className={statusClasses}
             color={color}
           />

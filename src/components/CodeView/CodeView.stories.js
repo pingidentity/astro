@@ -124,27 +124,27 @@ export const WithCustomSize = () => (
   <>
     <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
       {`
-export const ChipWithIcon = () => (
+export const BadgeWithIcon = () => (
   <>
-    <Chip label="Chip with Icon Button" bg="navy">
-      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+    <Badge label="Badge with Icon Button" bg="navy">
+      <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
         <Icon icon={Clear} ml="xs" size="14px" />
       </IconButton>
-    </Chip>
+    </Badge>
 
     <div style={{ padding: '5px' }} />
 
-    <Chip label="Chip with Icon Button">
-      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+    <Badge label="Badge with Icon Button">
+      <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
         <Icon icon={Earth} ml="xs" size="14px" />
       </IconButton>
-    </Chip>
+    </Badge>
 
     <div style={{ padding: '5px' }} />
 
-    <Chip label="Chip with Icon" bg="green">
+    <Badge label="Badge with Icon" bg="green">
       <Icon icon={ContentCopy} ml="xs" size="14px" color="white" />
-    </Chip>
+    </Badge>
   </>
 );
     `}

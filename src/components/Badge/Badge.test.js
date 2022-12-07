@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Chip from '../Chip/Chip';
+import Badge from './Badge';
 import Button from '../Button/Button';
 import axeTest from '../../utils/testUtils/testAxe';
 
@@ -12,19 +12,19 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}) => render(
-  <Chip {...defaultProps} {...props} />,
+  <Badge {...defaultProps} {...props} />,
 );
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-test('renders Chip component', () => {
+test('renders Badge component', () => {
   getComponent();
   const separator = screen.getByTestId(testId);
   expect(separator).toBeInTheDocument();
 });
 
-test('renders children within Chip component', () => {
+test('renders children within Badge component', () => {
   const children = (
     <Button />
   );
@@ -33,7 +33,7 @@ test('renders children within Chip component', () => {
   expect(mockedChildren).toBeInTheDocument();
 });
 
-test('renders Chip component with uppercase', () => {
+test('renders Badge component with uppercase', () => {
   const label = 'uppercase';
   const isUppercase = true;
 
@@ -41,7 +41,7 @@ test('renders Chip component with uppercase', () => {
   expect(screen.queryByText('uppercase')).toHaveStyleRule('text-transform', 'uppercase');
 });
 
-test('renders Chip component with custom alignment', () => {
+test('renders Badge component with custom alignment', () => {
   const align = 'right';
 
   getComponent({ align });
