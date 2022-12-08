@@ -39,8 +39,15 @@ const defaultHover = {
 
 export const defaultFocus = {
   outline: '1px solid',
-  outlineColor: 'active',
-  outlineOffset: '4px',
+  outlineColor: 'focus',
+  outlineOffset: '2px',
+};
+
+export const focusWithCroppedOutline = {
+  boxShadow: 'none',
+  outline: '1px solid',
+  outlineColor: 'focus',
+  outlineOffset: '1px',
 };
 
 const navItemButton = {
@@ -66,7 +73,7 @@ const navItemButton = {
   wordBreak: 'break-word',
   '&.is-focused': {
     outline: '1px solid',
-    outlineColor: '#D033FF',
+    outlineColor: 'focus',
   },
   '&.is-hovered': {
     bg: 'accent.10',
@@ -263,6 +270,9 @@ const success = {
   border: '1px solid',
   borderColor: 'success.bright',
   color: 'white',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
 };
 
 const critical = {
@@ -272,6 +282,9 @@ const critical = {
   border: '1px solid',
   borderColor: 'critical.bright',
   color: 'white',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
 };
 
 const inverted = {
@@ -431,7 +444,7 @@ const text = {
     textDecoration: 'underline',
   },
   '&.is-focused': {
-    ...defaultFocus,
+    ...focusWithCroppedOutline,
   },
 };
 
@@ -449,9 +462,7 @@ const chipDeleteButton = {
   width: 14,
   '&.is-focused, &.is-hovered': {
     bg: 'accent.40',
-    borderColor: 'accent.40',
-    boxShadow: 'standard',
-    outline: 'none',
+    ...focusWithCroppedOutline,
   },
   '&.is-pressed': {
     bg: 'accent.20',
@@ -512,16 +523,20 @@ const danger = {
 };
 
 const copy = {
-  ml: 'xs',
+  ml: 'sm',
+  mr: 'sm',
   outline: 'none',
   height: 'auto',
+  width: 'auto',
   cursor: 'pointer',
   path: {
     fill: 'neutral.10',
   },
   '&.is-focused': {
     boxShadow: 'none',
-    ...defaultFocus,
+    outline: '1px solid',
+    outlineColor: 'focus',
+    outlineOffset: '1px',
   },
 };
 
@@ -543,7 +558,11 @@ const imageUpload = {
   padding: 0,
   backgroundColor: 'accent.99',
   border: '2px solid',
-  borderColor: 'neutral.95',
+  borderColor: 'neutral.40',
+  '&.is-focused': {
+    ...defaultFocus,
+    borderColor: 'neutral.40',
+  },
 };
 
 const link = {
@@ -556,6 +575,9 @@ const link = {
   '&.is-current': {
     cursor: 'default',
     color: 'text.primary',
+  },
+  '&.is-focused': {
+    ...focusWithCroppedOutline,
   },
 };
 
@@ -593,8 +615,9 @@ const environmentBreadcrumb = {
       boxShadow: 'none',
     },
     '&.is-focused': {
-      borderRadius: '2px',
-      boxShadow: '0 0 0 1px #4462ED',
+      outline: '1px solid',
+      outlineColor: 'focus',
+      outlineOffset: '1px',
     },
     '&:focus-visible': {
       outline: 'none',
@@ -627,7 +650,7 @@ const fileInputField = {
     '& span': { textDecoration: 'underline' },
   },
   '&.is-focused': {
-    boxShadow: 'focus',
+    ...focusWithCroppedOutline,
   },
 };
 
@@ -761,7 +784,7 @@ const navBarSectionButton = {
   width: '100%',
   '&.is-focused': {
     outline: '1px solid',
-    outlineColor: '#D033FF',
+    outlineColor: 'focus',
   },
   '&.is-hovered': {
     backgroundColor: 'accent.10',

@@ -10,7 +10,7 @@ const tableCell = {
   '&.is-key-focused': {
     outline: '1px',
     outlineStyle: 'solid',
-    outlineColor: 'accent.50',
+    outlineColor: 'focus',
     outlineOffset: '-1px',
     backgroundColor: 'white',
   },
@@ -43,14 +43,17 @@ const tableRow = {
   borderBottomStyle: 'solid !important',
   backgroundColor: 'accent.99',
   borderBottomColor: 'neutral.80',
+  borderTop: '1px solid transparent',
+  borderLeft: '1px solid transparent',
+  borderRight: '1px solid transparent',
   '&:hover': {
     backgroundColor: 'white',
   },
   '&.is-row-focus-visible': {
     border: '1px solid',
-    borderColor: 'accent.50',
+    borderColor: 'focus',
     borderBottom: '1px',
-    borderBottomColor: 'accent.50',
+    borderBottomColor: 'focus',
     backgroundColor: 'white',
   },
 };
@@ -89,7 +92,7 @@ const tableHeadCell = {
   '&.is-key-focused': {
     outline: '1px',
     outlineStyle: 'solid',
-    outlineColor: 'accent.50 !important',
+    outlineColor: '#D033FF !important',
     outlineOffset: '-1px',
     backgroundColor: 'accent.99 !important',
   },

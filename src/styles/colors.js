@@ -72,7 +72,8 @@ export const decorativeLight = decorative.map(
   color => chroma(color).brighten(2).hex(),
 );
 
-export const focus = chroma(accent[50]).alpha(0.75).hex();
+// export const focus = chroma(accent[50]).alpha(0.75).hex();
+export const focus = chroma('#D033FF').hex();
 
 // COMPONENT COLORS
 export const button = {
@@ -82,6 +83,7 @@ export const button = {
   hoverBorder: accent,
   hoverLabel: accent,
   hoverBackground: accent[95],
+  focus,
 };
 
 export const line = { regular: neutral[50], light: neutral[80], hairline: neutral[90] };
