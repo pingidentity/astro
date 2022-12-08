@@ -1,3 +1,5 @@
+import { focusWithCroppedOutline } from './buttons';
+
 export const tab = {
   pt: 10,
   cursor: 'pointer',
@@ -7,7 +9,9 @@ export const tab = {
   transform: 'translateY(1px)',
   width: '100%',
   '&.is-focused': {
-    boxShadow: 'focus',
+    '& > span': {
+      ...focusWithCroppedOutline,
+    },
   },
   '&.is-disabled': {
     cursor: 'default',
