@@ -1,3 +1,6 @@
+import { focusWithCroppedOutline } from '../variants/buttons';
+
+
 const collapsiblePanelContainer = {
   pr: 'sm',
   minHeight: '80vh',
@@ -22,8 +25,7 @@ const collapsiblePanelContent = {
 
   '&.is-focused': {
     borderColor: 'accent.80',
-    boxShadow: 'focus',
-    outline: 'none',
+    ...focusWithCroppedOutline,
   },
   '& div': {
     alignItems: 'center',

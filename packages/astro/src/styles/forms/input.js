@@ -1,5 +1,6 @@
 import { text } from '../variants/text';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { defaultFocus } from '../variants/buttons';
 
 // Styles for default input and variants go here.
 
@@ -28,8 +29,9 @@ export const input = {
   width: '100%',
   outline: 'none',
   '&.is-focused': {
-    borderColor: 'accent.80',
-    boxShadow: 'focus',
+    outline: '1px solid',
+    outlineColor: 'focus',
+    outlineOffset: '2px',
   },
   '.is-float-label &': {
     height: '45px',
@@ -62,6 +64,14 @@ input.large = {
   ...input,
   lineHeight: '2em',
   height: '4em',
+};
+
+input.search = {
+  ...input,
+  '&.is-focused': {
+    outline: 'none',
+    borderColor: 'focus',
+  },
 };
 
 input.small = {
@@ -192,7 +202,12 @@ input.multivaluesWrapper = {
     p: 5,
     '&.is-focused': {
       boxShadow: 'none',
+      outline: 'none',
     },
+  },
+  '&.is-focused': {
+    boxShadow: 'none',
+    ...defaultFocus,
   },
 };
 

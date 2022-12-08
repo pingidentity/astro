@@ -51,6 +51,7 @@ const listItem = {
   },
 };
 
+// the transparent border is included so that the content does not shift on hover.
 const listViewItem = {
   ...base,
   padding: '0px 15px 0px 25px',
@@ -66,18 +67,19 @@ const listViewItem = {
     bg: 'white',
     cursor: 'pointer',
   },
-  '&.is-focused': {
-    boxShadow: 'inset 0 0 5px #5873bdbf',
-  },
   '&.has-separator': {
     borderBottom: '1px solid',
     borderBottomColor: 'line.hairline',
+  },
+  '&.is-focused': {
+    boxShadow: '0 0 0 1px inset #D033FF',
   },
 };
 
 const linkedListViewItem = {
   ...listViewItem,
   minHeight: '75px',
+  height: '76px',
   '&.has-inset-separator': {
     '&:after': {
       content: '""',
@@ -87,6 +89,17 @@ const linkedListViewItem = {
       bottom: 0,
       borderBottom: '1px solid',
       borderBottomColor: 'line.hairline',
+    },
+    '&.is-focused': {
+      '&:after': {
+        content: '""',
+        position: 'absolute',
+        width: 'calc(100% - 43px)',
+        right: 0,
+        bottom: 0,
+        borderBottom: '1px solid',
+        borderBottomColor: 'focus',
+      },
     },
   },
 };
