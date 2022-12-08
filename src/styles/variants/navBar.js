@@ -55,7 +55,7 @@ const navItem = {
   fontSize: '16px',
   '&.is-focused': {
     outline: '1px solid',
-    outlineColor: '#D033FF',
+    outlineColor: 'focus',
   },
   '&.is-hovered': {
     backgroundColor: 'accent.10',

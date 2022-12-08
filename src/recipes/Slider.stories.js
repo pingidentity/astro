@@ -7,6 +7,7 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { mergeProps } from '@react-aria/utils';
 import { useNumberFormatter } from '@react-aria/i18n';
 import { Box } from '../index';
+import { defaultFocus } from '../styles/variants/buttons';
 
 export default {
   title: 'Recipes/Slider',
@@ -184,7 +185,7 @@ const Thumb = (props) => {
         {...thumbProps}
         sx={{
           ...sx.thumb,
-          outline: isFocusVisible ? '5px solid rgba(41,150,204,0.5)' : 'none',
+          ...(isFocusVisible && defaultFocus),
         }}
       >
         <VisuallyHidden>
