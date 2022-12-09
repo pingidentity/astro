@@ -525,7 +525,7 @@ export const Controlled = () => {
 
   return (
     <NavBar setSelectedKey={setSelectedKey} selectedKey={selectedKey}>
-      <Box padding="md">
+      <Box padding="md" key="top-logo-parent" >
         <Link
           aria-label="home link"
           href="https://pingidentity.com"
@@ -534,10 +534,11 @@ export const Controlled = () => {
           {logo}
         </Link>
       </Box>
-      <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" />
+      <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" key="top-separator" />
       <Box
         variant="navBar.sectionContainer"
         paddingBottom="xl"
+        key="first-section-container"
       >
         <NavBarItem
           data-id="nav-bar-item"

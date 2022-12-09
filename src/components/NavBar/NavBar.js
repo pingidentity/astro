@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
 import { FocusScope, useFocusManager } from '@react-aria/focus';
 
 import { NavBarContext } from '../../context/NavBarContext';
@@ -34,12 +33,9 @@ const NavBar = (props) => {
     defaultSelectedKey,
   );
 
-  const items = useMemo(
-    () => (Array.isArray(children)
-      ? children.map(child => ({ item: child, key: uuid() }))
-      : [{ item: children, key: uuid() }]),
-    [],
-  );
+  const items = Array.isArray(children)
+    ? children.map(child => ({ item: child, key: child.key }))
+    : [{ item: children, key: children.key }];
 
   const contextValue = {
     selectedKey,
