@@ -142,9 +142,10 @@ const getComponent = (props = {}) => render((
         maxHeight: '100%',
         overflowY: 'overlay !important',
       }}
+      key="top-logo-parent"
     >
-      <NavBarSection items={data} hasSeparator data-testid={DATA_ID} data-id={DATA_ID} />
-      <NavBarSection items={secondData} title="test_title" />
+      <NavBarSection items={data} hasSeparator data-testid={DATA_ID} data-id={DATA_ID} key="first-section" />
+      <NavBarSection items={secondData} title="test_title" key="second-section" />
       <NavBarItem
         id="Overview"
         key="Overview"
@@ -158,11 +159,6 @@ const getComponent = (props = {}) => render((
 
 const ControlledComponent = () => {
   const [selectedKey, setSelectedKey] = useState('');
-
-  const setKeys = (e) => {
-    setSelectedKey(e);
-  };
-
   const customData = [
     {
       icon: GlobeIcon,
@@ -179,19 +175,33 @@ const ControlledComponent = () => {
         <NavBarItemButton
           key="Earth Button Group"
           id="Earth Button Group"
+          data-testid="group-item"
         >
           Group
         </NavBarItemButton>,
       ],
     },
   ];
+  const [thisData, setData] = useState([...customData]);
+
+  const testFunction = () => {
+    const newArray = [...customData];
+    newArray.pop();
+    setData([...newArray]);
+  };
+
+  const setKeys = (e) => {
+    setSelectedKey(e);
+  };
 
   return (
     <NavBar setSelectedKey={setKeys} selectedKey={selectedKey}>
       <Box
         variant="navBar.sectionContainer"
         paddingBottom="xl"
+        key="top-logo-parent"
       >
+        <button key="test-button" data-testid="test-button" onClick={testFunction} >click me!</button>
         <NavBarItem
           id="Overview"
           key="Overview"
@@ -201,7 +211,7 @@ const ControlledComponent = () => {
         />
         <NavBarSection items={data} hasSeparator data-id="nav-bar-section" />
         <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
-        <NavBarSection items={customData} data-id="third-nav-bar-section" />
+        <NavBarSection items={thisData} data-id="third-nav-bar-section" />
       </Box>
     </NavBar>
   );
@@ -209,7 +219,7 @@ const ControlledComponent = () => {
 
 const getComponentWithMultipleChildren = (props = {}) => render((
   <NavBar {...props}>
-    <Box>
+    <Box key="top-logo-parent">
       <Link
         href="https://pingidentity.com"
         target="_blank"
@@ -219,7 +229,7 @@ const getComponentWithMultipleChildren = (props = {}) => render((
         home
       </Link>
     </Box>
-    <Button data-testid="navButton">
+    <Button data-testid="navButton" key="nav-button">
       test button
     </Button>
   </NavBar>
@@ -510,4 +520,15 @@ test('when a child is selected, and the parent is collapsed, the parent has the 
   userEvent.click(parent);
   const parentDiv = screen.queryByTestId('Overview');
   expect(parentDiv).toHaveClass('is-selected');
+});
+
+test('controlled version: items can be updated.', () => {
+  render(<ControlledComponent />);
+
+  const button = screen.getByTestId('test-button');
+  const thisitem = screen.getByTestId('Environment title that is so long, it wraps');
+  expect(thisitem).toBeInTheDocument();
+
+  userEvent.click(button);
+  expect(screen.queryByTestId('Environment title that is so long, it wraps')).not.toBeInTheDocument();
 });
