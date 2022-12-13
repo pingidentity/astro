@@ -162,6 +162,9 @@ const multivaluesChip = {
   m: 5,
   mr: 10,
   ml: 0,
+  '& span': {
+    mr: '2px',
+  },
 };
 
 const selectedItemChip = {
@@ -176,6 +179,19 @@ const readOnlyChip = {
   p: 2.54,
   border: '1px solid',
   borderColor: 'neutral.80',
+};
+
+const itemChipWithSlot = {
+  ...readOnlyChip,
+  p: 3,
+  my: 0,
+  backgroundColor: 'white',
+  '& span': {
+    color: 'text.primary',
+    mr: '2px',
+    lineHeight: '16px',
+  },
+  maxHeight: '22px',
 };
 
 const inputInContainerSlot = {
@@ -387,6 +403,7 @@ export default {
   environmentChip,
   expandableRow,
   inputInContainerSlot,
+  itemChipWithSlot,
   textFieldInContainerSlot,
   fileInputFieldWrapper,
   listItem,
