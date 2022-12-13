@@ -1,4 +1,6 @@
 /** Tabs styles */
+import { defaultFocus } from './buttons';
+
 const wrapper = {
   width: '100%',
 };
@@ -15,8 +17,8 @@ const tab = {
   mr: 0,
   outline: 'none',
   '&.is-focused': {
-    boxShadow: 'focus',
     borderRadius: '50%',
+    ...defaultFocus,
   },
   '&:not(:first-of-type)': {
     flex: 1,

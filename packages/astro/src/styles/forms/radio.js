@@ -1,5 +1,7 @@
 // Styles for default radio and variants go here.
 
+import { focusWithCroppedOutline } from '../variants/buttons';
+
 // Default radio
 export const radio = {
   width: 20,
@@ -11,8 +13,7 @@ export const radio = {
     bg: 'transparent',
   },
   'input ~ &.is-focused': {
-    outline: 'none',
-    boxShadow: 'focus',
+    ...focusWithCroppedOutline,
   },
 };
 
