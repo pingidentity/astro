@@ -23,6 +23,8 @@ export * from './components/ArrayField';
 export { default as Avatar } from './components/Avatar';
 export * from './components/Avatar';
 
+export { default as Badge } from './components/Chip/Badge';
+
 export { default as Box } from './components/Box';
 export * from './components/Box';
 

@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChipContext } from './ChipContext';
-import Box from '../Box/Box';
-import Text from '../Text/Text';
-import * as colors from '../../styles/colors';
-
+import Badge from './Badge';
+import { useDeprecationWarning } from '../../hooks';
 /**
  * Chip component.
  * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the
@@ -12,53 +9,15 @@ import * as colors from '../../styles/colors';
 */
 
 const Chip = React.forwardRef((props, ref) => {
-  const {
-    bg,
-    children,
-    textColor,
-    textProps,
-    label,
-    align,
-    isUppercase,
-    slots,
-  } = props;
-
-  const sx = {
-    ...isUppercase && {
-      paddingBottom: '3px',
-    },
-  };
-
-  if (align) {
-    sx.position = 'absolute';
-    sx[align] = '15px';
-  }
+  useDeprecationWarning(
+    'The Chip component will be deprecated in Astro-UI 2.0.0 and replaced by the `Badge` component instead.',
+  );
 
   return (
-    <ChipContext.Provider value={{ bg }}>
-      <Box
-        isRow
-        variant="boxes.chip"
-        sx={sx}
-        ref={ref}
-        {...props}
-      >
-        {slots?.leftIcon &&
-        <Box mr="xs">
-          {slots.leftIcon}
-        </Box>
-        }
-        <Text
-          variant="label"
-          color={textColor}
-          sx={isUppercase && { textTransform: 'uppercase', fontSize: '11px' }}
-          {...textProps}
-        >
-          {label}
-        </Text>
-        {children}
-      </Box>
-    </ChipContext.Provider>
+    <Badge
+      ref={ref}
+      {...props}
+    />
   );
 });
 
@@ -80,12 +39,6 @@ Chip.propTypes = {
   isUppercase: PropTypes.bool,
   /** Alignment of chip relative to parent container. */
   align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-};
-
-Chip.defaultProps = {
-  textColor: 'white',
-  bg: colors.neutral[10],
-  isUppercase: false,
 };
 
 export default Chip;

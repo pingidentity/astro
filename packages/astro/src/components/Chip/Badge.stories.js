@@ -2,7 +2,7 @@ import React from 'react';
 import Clear from 'mdi-react/CloseIcon';
 import ContentCopy from 'mdi-react/ContentCopyIcon';
 import Earth from 'mdi-react/EarthIcon';
-import Chip from '../Chip';
+import Chip from '.';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
 import Box from '../Box';
@@ -63,8 +63,8 @@ export const Default = ({ ...args }) => (
 
 export const CountChip = ({ ...args }) => (
   <Box>
-    <Chip color="white" {...args} label="1" variant="boxes.countChip" mb="12px" />
-    <Chip {...args} label="1" variant="boxes.countNeutral" />
+    <Chip color="white" {...args} label="1" variant="variants.boxes.countChip" mb="12px" />
+    <Chip {...args} label="1" variant="variants.boxes.countNeutral" />
   </Box>
 );
 
@@ -94,7 +94,7 @@ export const ChipWithIcon = () => (
 
 
 export const ChipWithLeftSlotAndIcon = () => (
-  <Chip label="Chip with Icon Button and Left Slot" bg="white" variant="boxes.itemChipWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }} >
+  <Chip label="Chip with Icon Button and Left Slot" bg="white" variant="variants.boxes.itemChipWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }} >
     <IconButton
       aria-label="delete"
       variant="buttons.chipWithSlotDeleteButton"

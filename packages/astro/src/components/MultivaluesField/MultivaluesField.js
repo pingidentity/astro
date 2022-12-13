@@ -287,7 +287,7 @@ const MultivaluesField = forwardRef((props, ref) => {
                 key={item.key}
                 role="presentation"
                 label={item.name}
-                variant="boxes.readOnlyChip"
+                variant="variants.boxes.readOnlyChip"
                 bg="white"
                 textProps={{ sx: { color: 'text.primary' } }}
               />
@@ -302,7 +302,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     <Chip
       key={item.key}
       role="presentation"
-      variant="boxes.selectedItemChip"
+      variant="variants.boxes.selectedItemChip"
       bg="active"
       label={item.name}
       slots={item.slots}
