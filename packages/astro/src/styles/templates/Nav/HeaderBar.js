@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HelpCircleOutlineIcon from 'mdi-react/HelpCircleOutlineIcon';
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
 import ExploreIcon from 'mdi-react/CompassOutlineIcon';
-import { WithSections as EnvironmentBreadcrumb } from '../../components/EnvironmentBreadcrumb/EnvironmentBreadcrumb.stories';
+import { WithSections as EnvironmentBreadcrumb } from '../../../components/EnvironmentBreadcrumb/EnvironmentBreadcrumb.stories';
 import {
   Box,
   Icon,
@@ -12,7 +12,7 @@ import {
   OverlayProvider,
   PopoverMenu,
   Text,
-} from '../../index';
+} from '../../../index';
 import { PersonIcon } from './NavData';
 
 const CustomPopoverMenu = () => {
