@@ -20,6 +20,7 @@ const Chip = React.forwardRef((props, ref) => {
     label,
     align,
     isUppercase,
+    slots,
   } = props;
 
   const sx = {
@@ -42,6 +43,11 @@ const Chip = React.forwardRef((props, ref) => {
         ref={ref}
         {...props}
       >
+        {slots?.leftIcon &&
+        <Box mr="xs">
+          {slots.leftIcon}
+        </Box>
+        }
         <Text
           variant="label"
           color={textColor}
@@ -61,6 +67,11 @@ Chip.propTypes = {
   textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** The background color of the chip. */
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted into left side of the chip. */
+    leftIcon: PropTypes.node,
+  }),
   /** The label of the chip. */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Props object that is spread directly into the textfield. */

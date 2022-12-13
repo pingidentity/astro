@@ -156,9 +156,37 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (onOpenChange) onOpenChange(isOpen);
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!state.collection.size) close();
-  }, [state.collection]);
+  const addNewChipFromInput = (inputValue) => {
+    const key = inputValue;
+    if (state.selectionManager.isSelected(key)) {
+      return;
+    }
+    selectionManager.setSelectedKeys(
+      [...Array.from(selectionManager.state.selectedKeys), key],
+    );
+    setCustomItems([...customItems, { id: key, key, name: key }]);
+    setFilterString('');
+  };
+
+  // there actually is a test for this, but coverage is not picking it up.
+  /* istanbul ignore next */
+  const selectTheOnlyFilteredItem = () => {
+    const key = filteredItems[0].key;
+    if (!disabledKeys.includes(key)) {
+      selectionManager.toggleSelection(filteredItems[0].key);
+      setFilterString('');
+    }
+  };
+
+  // there actually is a test for this, but coverage is not picking it up.
+  /* istanbul ignore next */
+  const onBlurTextField = () => {
+    if (!hasCustomValue && filteredItems.length === 1) {
+      selectTheOnlyFilteredItem();
+    } else if (hasCustomValue) {
+      addNewChipFromInput(filterString);
+    }
+  };
 
   /* istanbul ignore next */
   const keyDown = (e) => {
@@ -172,21 +200,13 @@ const MultivaluesField = forwardRef((props, ref) => {
             setFilterString('');
           }
         } else if (!hasCustomValue && filteredItems.length === 1) {
-          const key = filteredItems[0].key;
-          if (!disabledKeys.includes(key)) {
-            selectionManager.toggleSelection(filteredItems[0].key);
-            setFilterString('');
-          }
+          selectTheOnlyFilteredItem();
         } else if (hasCustomValue) {
           const key = e.target.value;
-          if (state.selectionManager.isSelected(key)) {
+          if (key === '') {
             return;
           }
-          selectionManager.setSelectedKeys(
-            [...Array.from(selectionManager.state.selectedKeys), key],
-          );
-          setCustomItems([...customItems, { id: key, key, name: key }]);
-          setFilterString('');
+          addNewChipFromInput(e.target.value);
         }
         break;
       }
@@ -278,6 +298,27 @@ const MultivaluesField = forwardRef((props, ref) => {
     </>
   );
 
+  const multivaluesFieldChip = item => (
+    <Chip
+      key={item.key}
+      role="presentation"
+      variant="boxes.selectedItemChip"
+      bg="active"
+      label={item.name}
+      slots={item.slots}
+      {...item.chipProps}
+    >
+      <IconButton
+        aria-label="delete"
+        onPress={() => deleteItem(item.key)}
+        variant="buttons.chipDeleteButton"
+        {...item.buttonProps}
+      >
+        <Icon icon={Clear} color="white" size={14} />
+      </IconButton>
+    </Chip>
+  );
+
   const selectedItems = (
     <>
       {Array.from(selectionManager.selectedKeys)
@@ -285,17 +326,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              <Chip
-                key={item.key}
-                role="presentation"
-                variant="boxes.selectedItemChip"
-                bg="active"
-                label={item.name}
-              >
-                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="buttons.chipDeleteButton">
-                  <Icon icon={Clear} color="white" size={14} />
-                </IconButton>
-              </Chip>
+              multivaluesFieldChip(item)
             );
           }
           return null;
@@ -304,7 +335,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   );
 
   const listbox = (
-    <FocusScope restoreFocus>
+    <FocusScope >
       <DismissButton onDismiss={close} />
       <ScrollBox {...scrollBoxProps} >
         <ListBox
@@ -346,6 +377,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       <TextField
         onBlur={(e) => {
           setIsOpen(false);
+          if (mode === 'non-restrictive' && filterString !== '') onBlurTextField();
           if (onBlur) onBlur(e.nativeEvent);
         }}
         onChange={(e) => {
@@ -369,9 +401,8 @@ const MultivaluesField = forwardRef((props, ref) => {
       />
       <PopoverContainer
         hasNoArrow
-        isDismissable
         isNonModal
-        isOpen={isOpen}
+        isOpen={!state.collection.size ? false : isOpen}
         onClose={close}
         placement={placement}
         ref={popoverRef}
