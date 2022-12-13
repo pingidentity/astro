@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.37.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.1...@pingux/astro@1.37.2) (2022-12-13)
+
+
+### Bug Fixes
+
+* [UIP-5757] Update most focus states to use new outline ([4862b44](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4862b44571f28b4227f7854c6ab8d5aaae21228d))
+* [UIP-5918] NavBar Controlled - fix items caching ([5bb44a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5bb44a43c3d3203353b662e8d4b787a60847018d))
+
+
+
+
+
 ## [1.37.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.0...@pingux/astro@1.37.1) (2022-12-06)
 
 
