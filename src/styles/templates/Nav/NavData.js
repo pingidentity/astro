@@ -6,7 +6,7 @@ import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import Earth from 'mdi-react/EarthIcon';
-import { NavBarItemButton } from '../../components/NavBarSection';
+import { NavBarItemButton } from '../../../components/NavBarSection';
 
 const Credentials = props => (
   <svg

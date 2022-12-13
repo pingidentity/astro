@@ -6,7 +6,7 @@ import { useFocusRing } from '@react-aria/focus';
 import { Pressable, useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
-import { ChipContext } from '../Chip/ChipContext';
+import { BadgeContext } from '../../context/BadgeContext';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 /**
@@ -33,7 +33,7 @@ const IconButton = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => buttonRef.current);
 
   const { buttonProps, isPressed } = useButton({ ...props }, buttonRef);
-  const { bg: chipBg } = useContext(ChipContext);
+  const { bg: chipBg } = useContext(BadgeContext);
   const { hoverProps, isHovered } = useHover(props);
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
