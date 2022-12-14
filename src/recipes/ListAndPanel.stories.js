@@ -294,6 +294,7 @@ export const Default = () => {
         state={panelState}
         triggerRef={panelTriggerRef}
         p={0}
+        size="large"
       >
         {panelState.isOpen &&
           <>
