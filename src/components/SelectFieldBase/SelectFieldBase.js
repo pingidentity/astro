@@ -54,9 +54,9 @@ const SelectFieldBase = forwardRef(({
         className={fieldControlProps.className}
         ref={triggerRef}
         variant="forms.select"
-        aria-describedby={helperText && helperTextId}
         {...triggerProps}
         {...ariaProps}
+        aria-describedby={helperText && helperTextId}
       >
         <Box as="span" variant="forms.select.currentValue" {...valueProps}>
           {/* Use selectedItem.props.value if item text in selectedfield

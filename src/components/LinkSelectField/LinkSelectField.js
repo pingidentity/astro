@@ -46,9 +46,9 @@ const LinkSelectField = forwardRef((props, ref) => {
       ref={triggerRef}
       variant="link"
       tabIndex={isDisabled ? -1 : 0}
-      aria-describedby={helperText && helperTextId}
       {...triggerProps}
       {...ariaProps}
+      aria-describedby={helperText && helperTextId}
     >
       <Text variant="label" color="active">{placeholder}</Text>
       <Box isRow>
