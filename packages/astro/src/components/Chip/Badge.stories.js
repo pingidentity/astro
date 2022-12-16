@@ -9,7 +9,7 @@ import Box from '../Box';
 import { flatColorList } from '../../styles/colors.js';
 
 export default {
-  title: 'Chip',
+  title: 'Components/Chip',
   component: Chip,
   argTypes: {
     bg: {

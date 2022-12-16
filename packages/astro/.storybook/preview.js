@@ -30,6 +30,22 @@ export const parameters = {
   options: {
     storySort: {
       order: [
+        'Docs',
+        [
+          'Welcome',
+          'Props',
+          'Theme',
+          [
+            'Astro Theme',
+            'Custom Themes',
+            'Styling Guideline',
+            'Astro Nano Theme'
+          ],
+          'Utils',
+          'Hooks',
+          'Design',
+        ],
+        'Components',
         'Form',
         [
           'ArrayField',

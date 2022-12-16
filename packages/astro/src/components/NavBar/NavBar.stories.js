@@ -22,7 +22,7 @@ import {
 export default {
   component: NavBar,
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
-  title: 'NavBar',
+  title: 'Components/NavBar',
 };
 
 const Credentials = props => (

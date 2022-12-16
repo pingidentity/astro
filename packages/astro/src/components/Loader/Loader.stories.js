@@ -3,7 +3,7 @@ import Loader from './';
 import { flatColorList } from '../../styles/colors';
 
 export default {
-  title: 'Loader',
+  title: 'Components/Loader',
   component: Loader,
   argTypes: {
     color: {

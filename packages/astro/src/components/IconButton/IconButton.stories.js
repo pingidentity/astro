@@ -18,7 +18,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'IconButton',
+  title: 'Components/IconButton',
   component: IconButton,
   parameters: {
     docs: {

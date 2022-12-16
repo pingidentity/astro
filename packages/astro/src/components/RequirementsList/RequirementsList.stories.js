@@ -2,7 +2,7 @@ import React from 'react';
 import RequirementsList from '.';
 
 export default {
-  title: 'RequirementsList',
+  title: 'Components/RequirementsList',
   component: RequirementsList,
   argTypes: {
     requirements: {

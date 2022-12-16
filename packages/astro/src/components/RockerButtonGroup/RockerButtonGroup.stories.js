@@ -3,7 +3,7 @@ import RockerButtonGroup from '../RockerButtonGroup';
 import RockerButton from '../RockerButton';
 
 export default {
-  title: 'RockerButtonGroup',
+  title: 'Components/RockerButtonGroup',
   component: RockerButtonGroup,
   parameters: {
     docs: {

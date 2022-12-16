@@ -4,7 +4,7 @@ import Text from '../Text';
 import CopyText from './CopyText';
 
 export default {
-  title: 'CopyText',
+  title: 'Components/CopyText',
   component: CopyText,
   argTypes: {
     mode: {
