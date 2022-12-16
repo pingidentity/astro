@@ -4,7 +4,7 @@ import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import IconButtonToggle from '.';
 
 export default {
-  title: 'IconButtonToggle',
+  title: 'Components/IconButtonToggle',
   component: IconButtonToggle,
 };
 

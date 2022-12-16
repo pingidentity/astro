@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Separator, Table, TableCell, TableBody, TableHead, TableRow, Text } from '../../index';
 
 export default {
-  title: 'Text',
+  title: 'Components/Text',
   component: Text,
   argTypes: {
     variant: {
