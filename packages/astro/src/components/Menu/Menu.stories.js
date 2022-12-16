@@ -5,7 +5,7 @@ import Text from '../Text';
 
 
 export default {
-  title: 'Menu',
+  title: 'Components/Menu',
   component: Menu,
   parameters: {
     actions: {

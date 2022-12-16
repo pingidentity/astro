@@ -7,7 +7,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'Bracket',
+  title: 'Components/Bracket',
   component: Bracket,
 };
 

@@ -25,7 +25,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'CollapsiblePanel',
+  title: 'Components/CollapsiblePanel',
   component: CollapsiblePanel,
   argTypes: {
     listTitle: {

@@ -10,7 +10,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'PopoverMenu',
+  title: 'Components/PopoverMenu',
   component: PopoverMenu,
   parameters: {
     docs: {

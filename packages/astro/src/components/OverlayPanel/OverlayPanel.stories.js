@@ -6,7 +6,7 @@ import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages, Button
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 export default {
-  title: 'OverlayPanel',
+  title: 'Components/OverlayPanel',
   component: OverlayPanel,
   argTypes: {
     children: {
