@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Stepper, Step, Text } from '../../index';
 
 export default {
-  title: 'Stepper',
+  title: 'Components/Stepper',
   component: Stepper,
   args: {
     items: undefined,

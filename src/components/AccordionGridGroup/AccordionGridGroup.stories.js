@@ -72,7 +72,7 @@ const data = [
 ];
 
 export default {
-  title: 'AccordionGridGroup',
+  title: 'Components/AccordionGridGroup',
   component: AccordionGridGroup,
   parameters: {
     actions: {

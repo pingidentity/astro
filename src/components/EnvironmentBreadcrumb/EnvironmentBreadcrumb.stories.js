@@ -3,7 +3,7 @@ import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
 import { Item, Section, Chip, Box, Text } from '../../index';
 
 export default {
-  title: 'EnvironmentBreadcrumb',
+  title: 'Components/EnvironmentBreadcrumb',
   component: EnvironmentBreadcrumb,
 };
 

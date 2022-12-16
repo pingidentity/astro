@@ -9,7 +9,7 @@ import Text from '../Text';
 import Separator from '../Separator';
 
 export default {
-  title: 'ListItem',
+  title: 'Components/ListItem',
   component: ListItem,
 };
 

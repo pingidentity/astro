@@ -31,7 +31,7 @@ import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
 export default {
-  title: 'OverlayPanel',
+  title: 'Components/OverlayPanel',
   component: OverlayPanel,
   argTypes: {
     children: {

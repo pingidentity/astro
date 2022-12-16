@@ -1,11 +1,11 @@
 import React from 'react';
-import Text from '../components/Text';
-import scale from './spacing';
-import { Table, TableHead, TableRow, TableBody, TableCell, Separator } from '..';
+import Text from '../../components/Text';
+import scale from '../../styles/spacing';
+import { Table, TableHead, TableRow, TableBody, TableCell, Separator } from '../..';
 
 
 export default {
-  title: 'Design/Spacing',
+  title: 'Docs/Design/Spacing',
 };
 
 const tableBodyStyles = {

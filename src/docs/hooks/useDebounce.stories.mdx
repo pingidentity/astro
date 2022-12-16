@@ -1,7 +1,7 @@
 import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs';
-import useDebounce from './useDebounce';
+import useDebounce from '../../hooks/useDebounce/useDebounce';
 
-<Meta title="Hooks/useDebounce" />
+<Meta title="Docs/Hooks/useDebounce" />
 
 # useDebounce
 
@@ -51,8 +51,9 @@ The updated value after `delay` milliseconds have passed with no additional upda
 
 ## Example
 
-const [searchTerm, setSearchTerm] = useState(null);
-const debouncedSearchTerm = useDebounce({ searchTerm, value: 500 });
+`const [searchTerm, setSearchTerm] = useState(null);`
+
+`const debouncedSearchTerm = useDebounce({ searchTerm, value: 500 });`
 
 `debouncedSearchTerm` will only be updated after 500 milliseconds have passed since `searchTerm` was updated without
 an additional update.
