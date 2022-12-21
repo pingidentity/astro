@@ -18,7 +18,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'DataTable',
+  title: 'Components/DataTable',
   component: DataTable,
   parameters: {
     docs: {

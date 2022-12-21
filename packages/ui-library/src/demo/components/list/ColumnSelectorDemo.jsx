@@ -164,11 +164,14 @@ export default class ColumnSelectorDemo extends Component {
         console.log("onToggleOption called with: ", payload);
     }
 
-    _setInheritPopulations = value => () => this.setState({
-        inheritPopulations: value,
-        rowTooltipOpen: false
-    })
-
+    _handleInheritPopulationsToggle = value => () =>
+        this.setState({
+            inheritPopulations: value
+                ? !this.state.inheritPopulations
+                : this.state.inheritPopulations,
+            rowTooltipOpen: false
+        });
+        
     _toggleButtonTooltip = (e) => {
         if (e) {
             e.stopPropagation();
@@ -244,8 +247,8 @@ export default class ColumnSelectorDemo extends Component {
                                     toggled={this.state.inheritPopulations}
                                 />
                             }
-                            onCancel={this._setInheritPopulations(false)}
-                            onConfirm={this._setInheritPopulations(true)}
+                            onCancel={this._handleInheritPopulationsToggle(false)}
+                            onConfirm={this._handleInheritPopulationsToggle(true)}
                             onToggle={this._toggleRowTooltip}
                             open={this.state.rowTooltipOpen}
                             placement="top left"

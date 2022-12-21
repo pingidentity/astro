@@ -3,7 +3,7 @@ import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
 import { Item, Section, Chip, Box, Text } from '../../index';
 
 export default {
-  title: 'EnvironmentBreadcrumb',
+  title: 'Components/EnvironmentBreadcrumb',
   component: EnvironmentBreadcrumb,
 };
 
@@ -58,7 +58,7 @@ export const Default = (args) => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -85,7 +85,7 @@ export const Default = (args) => {
           {isSandbox ? (
             <Chip
               label="SANDBOX"
-              variant="boxes.environmentChip"
+              variant="variants.boxes.environmentChip"
               bg="neutral.40"
             />
           ) : null}
@@ -150,7 +150,7 @@ export const WithSections = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -179,7 +179,7 @@ export const WithSections = () => {
                 {isSandbox ? (
                   <Chip
                     label="SANDBOX"
-                    variant="boxes.environmentChip"
+                    variant="variants.boxes.environmentChip"
                     bg="neutral.40"
                   />
                 ) : null}
@@ -204,7 +204,7 @@ export const DefaultOpen = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -231,7 +231,7 @@ export const DefaultOpen = () => {
           {isSandbox ? (
             <Chip
               label="SANDBOX"
-              variant="boxes.environmentChip"
+              variant="variants.boxes.environmentChip"
               bg="neutral.40"
             />
           ) : null}
@@ -252,7 +252,7 @@ export const ControlledMenu = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -280,7 +280,7 @@ export const ControlledMenu = () => {
           {isSandbox ? (
             <Chip
               label="SANDBOX"
-              variant="boxes.environmentChip"
+              variant="variants.boxes.environmentChip"
               bg="neutral.40"
             />
           ) : null}
@@ -300,7 +300,7 @@ export const RightAlignedChips = (args) => {
     <Box isRow>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="boxes.environmentChip" bg="neutral.40" />
+        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -341,7 +341,7 @@ export const RightAlignedChips = (args) => {
           {isSandbox ? (
             <Chip
               label="SANDBOX"
-              variant="boxes.environmentChip"
+              variant="variants.boxes.environmentChip"
               bg="neutral.40"
               align="right"
             />

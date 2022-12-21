@@ -3,7 +3,7 @@ import Separator from './Separator';
 import Box from '../Box/Box';
 
 export default {
-  title: 'Separator',
+  title: 'Components/Separator',
   component: Separator,
 };
 

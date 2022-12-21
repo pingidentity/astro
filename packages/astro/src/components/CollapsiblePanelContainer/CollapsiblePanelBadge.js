@@ -14,7 +14,7 @@ const CollapsiblePanelBadge = (props) => {
       bg="neutral.90"
       label={selectedFilterCount.toString()}
       textColor="neutral.30"
-      variant="collapsiblePanel.collapsiblePanelBadge"
+      variant="variants.collapsiblePanel.collapsiblePanelBadge"
       isUppercase
       {...others}
     />

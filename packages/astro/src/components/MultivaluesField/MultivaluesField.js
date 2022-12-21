@@ -287,7 +287,7 @@ const MultivaluesField = forwardRef((props, ref) => {
                 key={item.key}
                 role="presentation"
                 label={item.name}
-                variant="boxes.readOnlyChip"
+                variant="variants.boxes.readOnlyChip"
                 bg="white"
                 textProps={{ sx: { color: 'text.primary' } }}
               />
@@ -298,6 +298,27 @@ const MultivaluesField = forwardRef((props, ref) => {
     </>
   );
 
+  const multivaluesFieldChip = item => (
+    <Chip
+      key={item.key}
+      role="presentation"
+      variant="variants.boxes.selectedItemChip"
+      bg="active"
+      label={item.name}
+      slots={item.slots}
+      {...item.chipProps}
+    >
+      <IconButton
+        aria-label="delete"
+        onPress={() => deleteItem(item.key)}
+        variant="buttons.chipDeleteButton"
+        {...item.buttonProps}
+      >
+        <Icon icon={Clear} color="white" size={14} />
+      </IconButton>
+    </Chip>
+  );
+
   const selectedItems = (
     <>
       {Array.from(selectionManager.selectedKeys)
@@ -305,17 +326,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              <Chip
-                key={item.key}
-                role="presentation"
-                variant="boxes.selectedItemChip"
-                bg="active"
-                label={item.name}
-              >
-                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="buttons.chipDeleteButton">
-                  <Icon icon={Clear} color="white" size={14} />
-                </IconButton>
-              </Chip>
+              multivaluesFieldChip(item)
             );
           }
           return null;

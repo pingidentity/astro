@@ -5,7 +5,7 @@ import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import Breadcrumbs from './Breadcrumbs';
 
 export default {
-  title: 'Breadcrumbs',
+  title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
   parameters: {
     docs: {

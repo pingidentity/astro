@@ -8,7 +8,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'IconBadge',
+  title: 'Components/IconBadge',
   component: IconBadge,
   parameters: {
     docs: {

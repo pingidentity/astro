@@ -23,6 +23,8 @@ export * from './components/ArrayField';
 export { default as Avatar } from './components/Avatar';
 export * from './components/Avatar';
 
+export { default as Badge } from './components/Chip/Badge';
+
 export { default as Box } from './components/Box';
 export * from './components/Box';
 
@@ -209,6 +211,9 @@ export * from './components/TableHead';
 
 export { default as TableRow } from './components/TableRow';
 export * from './components/TableRow';
+
+export { default as TableCaption } from './components/TableCaption';
+export * from './components/TableCaption';
 
 export { default as Tabs } from './components/Tabs';
 export * from './components/Tabs';

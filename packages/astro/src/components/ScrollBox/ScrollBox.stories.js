@@ -3,7 +3,7 @@ import ScrollBox from './ScrollBox';
 import Box from '../Box';
 
 export default {
-  title: 'ScrollBox',
+  title: 'Components/ScrollBox',
   component: ScrollBox,
   argTypes: {
     maxHeight: {

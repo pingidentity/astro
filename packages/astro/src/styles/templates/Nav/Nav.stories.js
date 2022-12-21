@@ -8,7 +8,7 @@ import {
   NavBarSection,
   Separator,
   Text,
-} from '../../index';
+} from '../../../index';
 import { logo, data, secondData, thirdData } from './NavData';
 import HeaderBar from './HeaderBar';
 

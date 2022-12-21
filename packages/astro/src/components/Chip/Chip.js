@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChipContext } from './ChipContext';
-import Box from '../Box/Box';
-import Text from '../Text/Text';
-import * as colors from '../../styles/colors';
-
+import Badge from './Badge';
+import { useDeprecationWarning } from '../../hooks';
 /**
  * Chip component.
  * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the
@@ -12,47 +9,15 @@ import * as colors from '../../styles/colors';
 */
 
 const Chip = React.forwardRef((props, ref) => {
-  const {
-    bg,
-    children,
-    textColor,
-    textProps,
-    label,
-    align,
-    isUppercase,
-  } = props;
-
-  const sx = {
-    ...isUppercase && {
-      paddingBottom: '3px',
-    },
-  };
-
-  if (align) {
-    sx.position = 'absolute';
-    sx[align] = '15px';
-  }
+  useDeprecationWarning(
+    'The Chip component will be deprecated in Astro-UI 2.0.0 and replaced by the `Badge` component instead.',
+  );
 
   return (
-    <ChipContext.Provider value={{ bg }}>
-      <Box
-        isRow
-        variant="boxes.chip"
-        sx={sx}
-        ref={ref}
-        {...props}
-      >
-        <Text
-          variant="label"
-          color={textColor}
-          sx={isUppercase && { textTransform: 'uppercase', fontSize: '11px' }}
-          {...textProps}
-        >
-          {label}
-        </Text>
-        {children}
-      </Box>
-    </ChipContext.Provider>
+    <Badge
+      ref={ref}
+      {...props}
+    />
   );
 });
 
@@ -61,6 +26,11 @@ Chip.propTypes = {
   textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** The background color of the chip. */
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted into left side of the chip. */
+    leftIcon: PropTypes.node,
+  }),
   /** The label of the chip. */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Props object that is spread directly into the textfield. */
@@ -69,12 +39,6 @@ Chip.propTypes = {
   isUppercase: PropTypes.bool,
   /** Alignment of chip relative to parent container. */
   align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-};
-
-Chip.defaultProps = {
-  textColor: 'white',
-  bg: colors.neutral[10],
-  isUppercase: false,
 };
 
 export default Chip;
