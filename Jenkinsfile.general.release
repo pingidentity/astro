@@ -91,6 +91,7 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
+            git config --global --add safe.directory '*' 
             git log -1 --pretty=%B | npx commitlint
             lerna run build --concurrency=1
             lerna run lint
