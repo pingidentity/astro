@@ -3,7 +3,7 @@ import HelpHint from '.';
 import Box from '../Box';
 
 export default {
-  title: 'HelpHint',
+  title: 'Components/HelpHint',
   component: HelpHint,
   argTypes: {
     children: {

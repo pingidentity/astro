@@ -14,7 +14,7 @@ import Text from '../Text';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 export default {
-  title: 'ListView',
+  title: 'Components/ListView',
   component: ListView,
   argTypes: {
     loadingState: {

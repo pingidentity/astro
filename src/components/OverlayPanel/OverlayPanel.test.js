@@ -32,7 +32,6 @@ test('custom overlayPanel gets custom width', () => {
   expect(overlayPanel).toHaveStyleRule('width', '240px');
 });
 
-
 test('onClose callback fires when provided', () => {
   const onClose = jest.fn();
   getComponent({ onClose, children: <div >Test</div> });

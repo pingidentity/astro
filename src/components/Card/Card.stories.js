@@ -3,7 +3,7 @@ import Card from './Card';
 import Box from '../Box';
 
 export default {
-  title: 'Card',
+  title: 'Components/Card',
   component: Card,
   argTypes: {
     children: {

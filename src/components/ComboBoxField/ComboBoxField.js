@@ -360,6 +360,7 @@ ComboBoxField.defaultProps = {
   menuTrigger: 'focus',
   direction: 'bottom',
   scrollBoxProps: { maxHeight: '300px' },
+  defaultItems: [],
 };
 
 ComboBoxField.displayName = 'ComboBoxField';

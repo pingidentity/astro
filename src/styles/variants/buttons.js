@@ -453,13 +453,17 @@ const quiet = {
   display: 'flex',
 };
 
-const chipDeleteButton = {
+const chipDeleteStandard = {
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
-  mx: '3px !important',
   p: 0,
   width: 14,
+  mx: '3px !important',
+};
+
+const chipDeleteButton = {
+  ...chipDeleteStandard,
   '&.is-focused, &.is-hovered': {
     bg: 'accent.40',
     ...focusWithCroppedOutline,
@@ -467,6 +471,28 @@ const chipDeleteButton = {
   '&.is-pressed': {
     bg: 'accent.20',
     borderColor: 'accent.20',
+  },
+};
+
+const chipWithSlotDeleteButton = {
+  ...chipDeleteStandard,
+  path: {
+    fill: 'neutral.40',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    backgroundColor: '#e5e9f8 !important',
+    path: {
+      fill: 'neutral.40',
+    },
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'white',
+    },
+    bg: '#4462ED !important',
   },
 };
 
@@ -798,6 +824,7 @@ const navBarSectionButton = {
 export default {
   accordionHeader,
   chipDeleteButton,
+  chipWithSlotDeleteButton,
   close,
   colorField,
   comboBox,

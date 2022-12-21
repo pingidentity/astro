@@ -17,7 +17,7 @@ const itemArrayDisabled = [
 ];
 
 export default {
-  title: 'AccordionGroup',
+  title: 'Components/AccordionGroup',
   component: AccordionGroup,
   parameters: {
     actions: {

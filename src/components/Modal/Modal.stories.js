@@ -9,7 +9,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'Modal',
+  title: 'Components/Modal',
   component: Modal,
   argTypes: {
     title: {
