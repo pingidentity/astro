@@ -15,6 +15,7 @@ ENV JAVA_HOME /opt/java
 ENV PATH $JAVA_HOME/bin:$PATH
 
 RUN yarn config set registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/
+RUN git config --global --add safe.directory '*'
 
 # This is really just ripped from the backstopjs Docker image.
 # Eventually this should be a proper multi-stage build that pulls files
