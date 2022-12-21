@@ -91,7 +91,7 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
-            git config --global --add safe.directory '*' 
+            git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
             lerna run build --concurrency=1
             lerna run lint
@@ -242,6 +242,7 @@ pipeline {
           container('astro-github') {
             withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
               sh """
+                git config --global --add safe.directory '*'
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 mkdir tempdir

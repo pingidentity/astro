@@ -14,9 +14,9 @@ include:
 variables:
   KUBERNETES_MEMORY_LIMIT: "6250Mi"
   KUBERNETES_MEMORY_REQUEST: "125Mi"
-  GITHUB_IMAGE: "docker.corp.pingidentity.com:5000/testing/astro-github:1.0.0"
+  GITHUB_IMAGE: "docker.corp.pingidentity.com:5000/testing/astro-github:1.0.1"
   LATEST_IMAGE: "docker.corp.pingidentity.com:5000/testing/pingux-latest:1.4.2"
-  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
+  STABLE_IMAGE: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.1"
 
 stages:
   - build-ci-image
@@ -29,7 +29,7 @@ stages:
   stage: build-test-lint
   tags:
     - pingux-runner-s3-cache
-  image: $LATEST_IMAGE
+  image: $STABLE_IMAGE
   interruptible: true
   cache:
     key:
