@@ -4,7 +4,7 @@
 
 import groovy.json.JsonOutput
 
-def testCluster = 'test'
+def testCluster = 'test.us-east-2.k8s.pingidentity.net'
 
 // Schema Form NPM publish stuff
 def configuration = [
@@ -56,7 +56,7 @@ pipeline {
             - name: "ui-library-admin"
               command: # Jenkinsfile overwrites this, but k8s spec requires it
               - cat
-              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.1"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
               tty: true"""
@@ -108,7 +108,7 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
-            git config --global --add safe.directory '*' 
+            git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
             lerna run build --concurrency=1
             lerna run lint

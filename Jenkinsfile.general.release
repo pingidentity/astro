@@ -4,8 +4,8 @@
 
 import groovy.json.JsonOutput
 
-def centralCluster = 'central'
-def testCluster = 'test'
+def centralCluster = 'central-us-east-2-k8s'
+def testCluster = 'test.us-east-2.k8s.pingidentity.net'
 
 // Schema Form NPM publish stuff
 def configuration = [
@@ -58,7 +58,7 @@ pipeline {
             - name: "ui-library-admin"
               command: # Jenkinsfile overwrites this, but k8s spec requires it
               - cat
-              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.1"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
               tty: true"""
@@ -91,7 +91,7 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
-            git config --global --add safe.directory '*' 
+            git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
             lerna run build --concurrency=1
             lerna run lint
@@ -230,7 +230,7 @@ pipeline {
                 - name: "astro-github"
                   command: # Jenkinsfile overwrites this, but k8s spec requires it
                   - cat
-                  image: "docker.corp.pingidentity.com:5000/testing/astro-github:1.0.0"
+                  image: "docker.corp.pingidentity.com:5000/testing/astro-github:1.0.1"
                   imagePullPolicy: Always
                   workingDir: "/home/jenkins/agent"
                   tty: true"""
@@ -242,6 +242,7 @@ pipeline {
           container('astro-github') {
             withCredentials([sshUserPrivateKey(credentialsId: "jenkins-build-user", keyFileVariable: 'bldUserKeyPath')]) {
               sh """
+                git config --global --add safe.directory '*'
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
                 mkdir tempdir
