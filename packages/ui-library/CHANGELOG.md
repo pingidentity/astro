@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.5](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.4...ui-library@5.6.5) (2022-12-27)
+
+
+### Bug Fixes
+
+* [UIP-5899] ColumnSelector: toggle button only on confirm click ([455c9a9](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/455c9a9292f544c7fc4304a7de4778314097ae1d))
+
+
+
+
+
 ## [5.6.4](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.3...ui-library@5.6.4) (2022-11-24)
 
 
