@@ -110,16 +110,16 @@ const HTMLIcon = (props) => {
         </g>
       </g>
       <defs>
-        <clipPath id="clip0_709_18936">
+        <clipPath className="clip0_709_18936">
           <rect width="16" height="16" fill="white" />
         </clipPath>
-        <clipPath id="clip1_709_18936">
+        <clipPath className="clip1_709_18936">
           <rect width="10" height="10" fill="white" transform="translate(3 3)" />
         </clipPath>
-        <clipPath id="clip2_709_18936">
+        <clipPath className="clip2_709_18936">
           <rect width="16" height="16" fill="white" />
         </clipPath>
-        <clipPath id="clip3_709_18936">
+        <clipPath className="clip3_709_18936">
           <rect width="10" height="10" fill="white" transform="translate(3 3)" />
         </clipPath>
       </defs>
