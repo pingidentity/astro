@@ -18,11 +18,14 @@ const SelectField = forwardRef((props, ref) => {
   const { status } = props;
   usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField(props, ref);
-  return (<SelectFieldBase
-    {...props}
-    {...selectFieldProps}
-    aria-invalid={status === 'error' && true}
-  />);
+
+  return (
+    <SelectFieldBase
+      {...props}
+      {...selectFieldProps}
+      aria-invalid={status === 'error' && true}
+    />
+  );
 });
 
 SelectField.propTypes = {
