@@ -163,7 +163,7 @@ const Row = memo((props) => {
           }}
         >
           <IconButton aria-label="icon button with tooltip" title="Advanced Expression" >
-            <Icon icon={CogsIcon} />
+            <Icon icon={CogsIcon} size="sm" />
           </IconButton>
           <IconButton
             aria-label="icon button with tooltip"
@@ -171,7 +171,7 @@ const Row = memo((props) => {
             sx={{ ml: 'xs' }}
             onPress={() => removeRow(index)}
           >
-            <Icon icon={DeleteIcon} />
+            <Icon icon={DeleteIcon} size="sm" />
           </IconButton>
         </Box>
       </Box>

@@ -131,6 +131,7 @@ export const Default = () => {
                 fill:
                 isPinned ? 'success.bright' : 'neutral.50',
               } }}
+              size="sm"
             />
           </IconButton>
         </Box>

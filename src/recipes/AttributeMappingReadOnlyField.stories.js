@@ -161,7 +161,7 @@ const Title = () => {
       </Text>
       <Box>
         <IconButton sx={sx.createIconButton} variant="inverted" aria-label="edit header button" >
-          <Icon icon={CreateIcon} size={18} />
+          <Icon icon={CreateIcon} size="sm" />
         </IconButton>
       </Box>
     </Box>

@@ -48,7 +48,7 @@ export const Default = ({ dataTitle, secretData }) => {
           onPress={() => setIsMasked(!isMasked)}
           sx={sx.showHideButton}
         >
-          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} />
+          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} size="sm" />
         </IconButton>
       </Box>
     </Box>
