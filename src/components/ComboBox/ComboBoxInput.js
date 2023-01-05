@@ -82,7 +82,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
 
   usePropWarning(props, 'disabled', 'isDisabled');
 
-  const button = (
+  const button = !isReadOnly && (
     <Box isRow variant="boxes.inputInContainerSlot">
       {
         // Render loader after delay if filtering or loading
