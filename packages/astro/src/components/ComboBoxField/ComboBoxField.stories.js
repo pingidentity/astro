@@ -387,6 +387,14 @@ export const HelperText = () => (
   </OverlayProvider>
 );
 
+export const ReadOnly = () => (
+  <OverlayProvider>
+    <ComboBoxField label="Example label" defaultItems={items} isReadOnly {...actions}>
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
+);
+
 export const Required = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} isRequired {...actions}>
