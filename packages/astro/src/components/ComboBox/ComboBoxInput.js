@@ -118,13 +118,6 @@ const ComboBoxInput = forwardRef((props, ref) => {
       focusRingClass="focus-ring"
       autoFocus={hasAutoFocus}
     >
-      {/* <Box
-        isRow
-        style={style}
-        variant="forms.comboBox.container"
-        {...hoverProps}
-        {...wrapperProps}
-      > */}
       <TextField
         {...textFieldProps}
         wrapperProps={{ ref: inputWrapperRef, ...wrapperProps }}
@@ -138,7 +131,6 @@ const ComboBoxInput = forwardRef((props, ref) => {
             inContainer: button,
           }}
       />
-      {/* </Box> */}
     </FocusRing>
   );
 });
