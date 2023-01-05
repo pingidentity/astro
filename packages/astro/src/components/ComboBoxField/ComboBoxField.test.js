@@ -752,3 +752,36 @@ test('popover closes on input blur', () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
+
+describe('when isReadOnly is true', () => {
+  const testProp = { isReadOnly: true };
+
+  const TEST_DEFAULT_INPUT_VALUE = 'test default input value';
+
+  test('it does not have the show suggestions button', () => {
+    getComponent(testProp);
+
+    expect(screen.queryByRole('button', { name: `${defaultProps.label} Show suggestions` })).not.toBeInTheDocument();
+  });
+
+  test('it has attribute readonly', () => {
+    getComponent(testProp);
+
+    expect(screen.getByRole('combobox', { name: defaultProps.label })).toHaveAttribute('readonly');
+  });
+
+  test('the default selected value is selected', () => {
+    testProp.defaultInputValue = TEST_DEFAULT_INPUT_VALUE;
+    getComponent(testProp);
+
+    expect(screen.getByRole('combobox', { name: defaultProps.label })).toHaveValue(TEST_DEFAULT_INPUT_VALUE);
+  });
+
+  test('the dropdown does not open when clicked', () => {
+    getComponent(testProp);
+
+    userEvent.click(screen.getByRole('combobox', { name: defaultProps.label }));
+
+    expect(screen.queryByRole('listbox', { name: 'Test Label Suggestions' })).not.toBeInTheDocument();
+  });
+});
