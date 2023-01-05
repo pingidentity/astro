@@ -24,7 +24,7 @@ const CustomPopoverMenu = () => {
         <IconButton aria-label="default icon button">
           <Icon
             icon={MenuDownIcon}
-            size={15}
+            size="xs"
             color="neutral.30"
             sx={isOpen ? { transform: 'rotate(180deg)' } : null}
           />

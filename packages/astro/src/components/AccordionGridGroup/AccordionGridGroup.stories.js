@@ -7,6 +7,7 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import {
   Box,
   IconButton,
+  Icon,
   Text,
   Separator,
   Link,
@@ -117,11 +118,11 @@ const Header = (props) => {
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }} >
         <Text sx={{ fontWeight: 0, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} alignSelf="center">{item.organizations.length} Organizations</Text>
         <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
-          <IconButton aria-label="create-icon" sx={{ mr: '4px', height: '26px', width: '26px' }} >
-            <CreateIcon />
+          <IconButton aria-label="create-icon" sx={{ mr: '4px' }} >
+            <Icon icon={CreateIcon} size="sm" />
           </IconButton>
-          <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px', height: '26px', width: '26px' }} >
-            <MoreVertIcon />
+          <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }} >
+            <Icon icon={MoreVertIcon} size="sm" />
           </IconButton>
         </Box>
       </Box>
