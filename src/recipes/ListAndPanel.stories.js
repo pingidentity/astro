@@ -202,7 +202,9 @@ const ListElement = ({ item, onClosePanel }) => {
       <Box isRow sx={sx.listElement.menuWrapper}>
         <SwitchField aria-label="active user" isDefaultSelected alignSelf="center" mr="sm" />
         <PopoverMenu>
-          <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}><MoreVertIcon /></IconButton>
+          <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
+            <Icon icon={MoreVertIcon} color="white" size="sm" />
+          </IconButton>
           <Menu >
             <Item key="enable">Enable user</Item>
             <Item key="disable">Disable user</Item>
@@ -214,7 +216,7 @@ const ListElement = ({ item, onClosePanel }) => {
             aria-label="close icon button"
             onPress={onClosePanel}
           >
-            <CloseIcon />
+            <Icon size="sm" icon={CloseIcon} />
           </IconButton>
         }
       </Box>
@@ -261,7 +263,7 @@ export const Default = () => {
             {heading}
           </Text>
           <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted" >
-            <Icon icon={PlusIcon} color="white" size={13} />
+            <Icon icon={PlusIcon} color="white" size="xs" />
           </IconButton>
         </Box>
         <Text variant="bodyWeak">

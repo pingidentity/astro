@@ -42,7 +42,7 @@ export const Default = () => (
     <OverlayProvider>
       <PopoverMenu>
         <IconButton aria-label="Menu Button" >
-          <Icon icon={DotsVerticalIcon} size={16.8} color="Neutral.40" m="0.61px" />
+          <Icon icon={DotsVerticalIcon} size="xs" color="Neutral.40" m="0.61px" />
         </IconButton>
         <Menu >
           <Item key="edit">Edit</Item>
@@ -55,7 +55,7 @@ export const Default = () => (
     </OverlayProvider>
     <Box>
       <IconButton aria-label="Close Button" mx="10px">
-        <Icon icon={CloseIcon} size={16.8} color="Neutral.40" m="0.61px" />
+        <Icon icon={CloseIcon} size="xs" color="Neutral.40" m="0.61px" />
       </IconButton>
     </Box>
   </Box>

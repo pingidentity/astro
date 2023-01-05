@@ -1,26 +1,11 @@
 import React, { forwardRef, useRef, useState, useLayoutEffect } from 'react';
+import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
-import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
-import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
-import CloseIcon from 'mdi-react/CloseIcon';
-import AlertIcon from 'mdi-react/AlertIcon';
-import InformationIcon from 'mdi-react/InformationIcon';
-
-import useStatusClasses from '../../hooks/useStatusClasses';
+import { NoticeIcon } from '../Icon/NoticeIcon';
 import statuses from '../../utils/devUtils/constants/statuses';
-
-import Box from '../Box';
-import Icon from '../Icon';
-import IconButton from '../IconButton';
-import Text from '../Text';
-
-export const icons = {
-  default: InformationIcon,
-  success: CheckCircleIcon,
-  error: AlertCircleIcon,
-  warning: AlertIcon,
-};
+import useStatusClasses from '../../hooks/useStatusClasses';
+import { Box, Icon, IconButton, Text } from '../..';
 
 export const ARIA_STATUSES = {
   SUCCESS: 'Success Message',
@@ -40,8 +25,7 @@ CloseButton.propTypes = {
   color: PropTypes.string,
 };
 
-const Message = forwardRef((props, ref) => {
-  const { className, item, onClose } = props;
+const Message = forwardRef(({ className, item, onClose }, ref) => {
   const { key, props: itemProps } = item;
 
   const {
@@ -49,7 +33,7 @@ const Message = forwardRef((props, ref) => {
     status = 'default',
     bg,
     color,
-    icon = icons[status],
+    icon,
     isHidden = false,
     'data-id': dataId,
   } = itemProps;
@@ -85,6 +69,23 @@ const Message = forwardRef((props, ref) => {
     } return '';
   };
 
+  const messageIconProps = {
+    className: statusClasses,
+    color,
+    mr: 'md',
+  };
+
+  const messageIcon = icon ?
+    (<Icon
+      icon={icon}
+      data-testid="custom-icon-testid"
+      {...messageIconProps}
+    />) :
+    (<NoticeIcon
+      status={status}
+      {...messageIconProps}
+    />);
+
   return (
     <Box
       variant="messages.transition"
@@ -105,7 +106,7 @@ const Message = forwardRef((props, ref) => {
           className={statusClasses}
           bg={bg}
         >
-          {icon && <Icon icon={icon} className={statusClasses} color={color} mr="md" />}
+          {messageIcon}
           <Text
             className={statusClasses}
             color={color}

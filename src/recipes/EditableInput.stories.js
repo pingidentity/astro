@@ -292,6 +292,7 @@ const EditableControl = (props) => {
       >
         <Icon
           icon={CheckIcon}
+          size="sm"
         />
       </IconButton>
       <IconButton
@@ -299,7 +300,7 @@ const EditableControl = (props) => {
         onPress={handleCancel}
         variant={cancelBtn.variant}
       >
-        <Icon icon={CloseIcon} />
+        <Icon icon={CloseIcon} size="sm" />
       </IconButton>
     </Box>
   );

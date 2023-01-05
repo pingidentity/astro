@@ -37,7 +37,7 @@ const NavBarItemHeader = (props) => {
       {icon && (
         <Icon
           icon={icon}
-          size={20}
+          size="sm"
           sx={{
             mr: '10px',
             color: 'white',
@@ -50,7 +50,7 @@ const NavBarItemHeader = (props) => {
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         <Icon
           icon={isExpanded ? MenuUp : MenuDown}
-          size={20}
+          size="xs"
           sx={{
               color: 'white',
               fill: 'white',

@@ -21,11 +21,13 @@ import table from './table';
 import * as tabs from './tabs';
 import tooltip from './tooltip';
 import collapsiblePanel from './collapsiblePanel';
+import bulletin from './bulletin';
 import dataTable from './../../components/DataTable/DataTable.styles';
 
 export default {
   accordion,
   boxes,
+  bulletin,
   codeView,
   images,
   imageUpload,

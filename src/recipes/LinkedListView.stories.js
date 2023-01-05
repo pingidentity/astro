@@ -209,7 +209,7 @@ export const Default = ({ ...args }) => {
       <PopoverMenu direction="left">
         <Box alignItems="center" alignSelf="center">
           <IconButton aria-label="Menu Button" >
-            <Icon icon={DotsVerticalIcon} size={16} color="Neutral.40" m="0.61px" />
+            <Icon icon={DotsVerticalIcon} size="xs" color="Neutral.40" m="0.61px" />
           </IconButton>
         </Box>
         <Menu
