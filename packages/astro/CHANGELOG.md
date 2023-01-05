@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.38.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.38.0...@pingux/astro@1.38.1) (2023-01-04)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.38.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.2...@pingux/astro@1.38.0) (2022-12-27)
+
+
+### Bug Fixes
+
+* [UIP-5874] List and Panel recipe overlayPanel design width change ([cff3339](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cff33394f06917def44eabfa501369ff964167e6))
+* [UIP-5914] live-announcer div width issue ([5496975](https://gitlab.corp.pingidentity.com/ux/pingux/commit/54969754d6fcd45f666381d24ae96d5b0d610f48))
+* [UIP-5925] TableCaption: add export from astro library ([dfa15e9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dfa15e997162889f48d6978d91e222fe1f6ff38c))
+* [UIP-5928] ComboBox: add default value to defaultItems prop ([769150c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/769150cd5829734547dce20f81401704037b3c15))
+
+
+### Features
+
+* [UIP-5804] Overlay Panel: Expandable story ([fb04c3e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fb04c3eb58da9abbad08a0f57c15473c07753057))
+* [UIP-5805] MultiValues Component add Icon to Chip ([ed9d4b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed9d4b7f049690c85cf8197f7dd23f1aeb5f34f3))
+
+
+
+
+
 ## [1.37.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.1...@pingux/astro@1.37.2) (2022-12-13)
 
 

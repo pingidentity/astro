@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.38.0-alpha.9",
+  "version": "1.38.1",
   "description": "PingUX themeable React component library",
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "lib"
   ],
   "scripts": {
+    "append-version": "node ../../append_current_version.js",
     "build": "rm -rf lib && npm-run-all build:*",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs",
     "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/",
