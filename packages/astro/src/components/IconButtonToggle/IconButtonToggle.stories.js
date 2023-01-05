@@ -27,6 +27,9 @@ export const Controlled = (args) => {
       buttonProps={{
         'aria-label': 'eye icon',
       }}
+      iconProps={{
+        size: 'sm',
+      }}
     />
   );
 };

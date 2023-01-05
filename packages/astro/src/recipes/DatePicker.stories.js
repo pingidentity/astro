@@ -82,7 +82,7 @@ export const Default = () => {
               ref={triggerRef}
               {...triggerProps}
             >
-              <Icon icon={CalendarIcon} size={20} />
+              <Icon icon={CalendarIcon} size="sm" />
             </IconButton>
           ),
         }}
