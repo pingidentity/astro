@@ -53,18 +53,25 @@ export default {
       },
       defaultValue: 'iconButton',
     },
+    size: {
+      control: {
+        type: 'select',
+        options: ['xs', 'sm', 'md'],
+      },
+      defaultValue: 'sm',
+    },
   },
 };
 
 export const Default = args => (
-  <IconButton aria-label="default icon button" {...args}>
-    <Icon icon={CreateIcon} />
+  <IconButton aria-label="default icon button" {...args} >
+    <Icon icon={CreateIcon} size={args.size} />
   </IconButton>
 );
 
 export const WithTooltip = () => (
-  <IconButton aria-label="icon button with tooltip" title="Edit">
-    <Icon icon={CreateIcon} />
+  <IconButton aria-label="icon button with tooltip" title="Edit" >
+    <Icon icon={CreateIcon} size="sm" />
   </IconButton>
 );
 export const Disabled = () => (

@@ -50,7 +50,7 @@ export const Default = () => {
             {heading}
           </Text>
           <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted" >
-            <Icon icon={PlusIcon} color="white" size={13} />
+            <Icon icon={PlusIcon} color="white" size="xs" />
           </IconButton>
         </Box>
         <Text variant="bodyWeak">
