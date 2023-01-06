@@ -464,9 +464,12 @@ const chipDeleteStandard = {
 
 const chipDeleteButton = {
   ...chipDeleteStandard,
-  '&.is-focused, &.is-hovered': {
+  '&.is-focused': {
     bg: 'accent.40',
     ...focusWithCroppedOutline,
+  },
+  '&.is-hovered': {
+    bg: 'accent.40',
   },
   '&.is-pressed': {
     bg: 'accent.20',
