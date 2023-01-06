@@ -313,7 +313,9 @@ export const Default = () => {
                   <Tab title="Profile">
                     {selectedItemId >= 0 &&
                       <>
-                        <IconButton variant="inverted" sx={sx.iconButton}><PencilIcon size={20} /></IconButton>
+                        <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
+                          <PencilIcon size={20} />
+                        </IconButton>
                         <Text sx={sx.itemLabel} variant="base">Full Name</Text>
                         <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
                         <Text sx={sx.itemLabel} variant="base">First Name</Text>
