@@ -8,7 +8,7 @@ import IconButton from '../IconButton';
 
 const CopyButton = forwardRef((props, ref) => (
   <IconButton ref={ref} aria-label="copy to clipboard" variant="buttons.copy" {...omit(props, 'iconProps')}>
-    <Icon icon={ContentCopy} size={15} {...props?.iconProps} />
+    <Icon icon={ContentCopy} size={15} color="text.secondary" {...props?.iconProps} />
   </IconButton>
 ));
 
