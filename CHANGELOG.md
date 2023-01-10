@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.0...@pingux/astro@1.39.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5910] hover for IconButton component ([7861d57](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7861d57dd0262cbbca6326e9666e9fc947fddeb6))
+* [UIP-5912] MultivaluesField focusing on hover ([feab343](https://gitlab.corp.pingidentity.com/ux/pingux/commit/feab34344ed02d270effcce78a4d02712df5a5f3))
+* [UIP-5937] ListAndPanel: add aria-label to icon button ([3fa5f46](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3fa5f468d08adbc5fc93e510374322303feb817d))
+* [UIP-5944] Fix Accordion Grid Group Accessibility Violation ([1058ac7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1058ac75816df16e6b8ce90f10ef8d0575bb0768))
+* [UIP-5945] Storybook: fix code blocks formatting ([78b29ee](https://gitlab.corp.pingidentity.com/ux/pingux/commit/78b29ee7d28e6a82113333b8107a00ba5820087d))
+* [UIP-5946] Fix A11y Violation Icon Chip Multivalues Story ([d52bf42](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d52bf42c4c62b02efdeb7461cdc50814eb760b3e))
+* [UIP-5955] MultivaluesField: remove button focus styles on hover ([4503298](https://gitlab.corp.pingidentity.com/ux/pingux/commit/450329829271f3e19727238bc891768ccccefb6e))
+
+
+
+
+
 # [1.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.38.1...@pingux/astro@1.39.0) (2023-01-05)
 
 
