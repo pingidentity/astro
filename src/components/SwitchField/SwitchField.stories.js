@@ -9,6 +9,13 @@ import statuses from '../../utils/devUtils/constants/statuses';
 export default {
   title: 'Form/SwitchField',
   component: SwitchField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     label: {
       control: {

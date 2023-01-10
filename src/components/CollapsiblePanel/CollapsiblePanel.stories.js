@@ -27,6 +27,13 @@ import {
 export default {
   title: 'Components/CollapsiblePanel',
   component: CollapsiblePanel,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     listTitle: {
       defaultValue: 'Selected Groups',
