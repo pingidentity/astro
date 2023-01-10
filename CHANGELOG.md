@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.38.1...@pingux/astro@1.39.0) (2023-01-05)
+
+
+### Bug Fixes
+
+* [UIP-5920] IconButton Stories Tshirt Sizing ([41afdbc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/41afdbcdb34f88432d2120f59590f1dc832300cf))
+* [UIP-5940] ComboBoxField: fix read only state ([f9f1c3f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f9f1c3f926f5103987f2e8bd6d59cb10d9e5ee0b))
+
+
+### Features
+
+* [UIP-5911]: Add Bulletin component ([fd73668](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd736684078c665212dbc0a61122dc86988dc630))
+
+
+
+
+
 ## [1.38.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.38.0...@pingux/astro@1.38.1) (2023-01-04)
 
 **Note:** Version bump only for package @pingux/astro
