@@ -5,6 +5,13 @@ import { Item, Section, Chip, Box, Text } from '../../index';
 export default {
   title: 'Components/EnvironmentBreadcrumb',
   component: EnvironmentBreadcrumb,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const defaultEnvironments = [

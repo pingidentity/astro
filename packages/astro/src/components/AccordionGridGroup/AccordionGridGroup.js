@@ -106,6 +106,7 @@ const AccordionGridGroup = forwardRef((props, ref) => {
       <Box
         {...mergeProps(gridProps, containerProps)}
         ref={accordionGridRef}
+        role="treegrid"
       >
         {Array.from(state.collection).map(item => (
           <AccordionGridItem key={item.key} item={item} {...item.props}>

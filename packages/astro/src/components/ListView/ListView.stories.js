@@ -16,6 +16,13 @@ import loadingStates from '../../utils/devUtils/constants/loadingStates';
 export default {
   title: 'Components/ListView',
   component: ListView,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     loadingState: {
       control: {
