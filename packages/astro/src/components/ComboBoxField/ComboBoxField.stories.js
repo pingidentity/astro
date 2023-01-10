@@ -63,6 +63,13 @@ const actions = {
 export default {
   title: 'Form/ComboBoxField',
   component: ComboBoxField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     label: {
       control: {

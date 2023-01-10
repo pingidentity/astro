@@ -10,6 +10,13 @@ import statuses from '../../utils/devUtils/constants/statuses';
 export default {
   title: 'Form/TextAreaField',
   component: TextAreaField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     label: {
       control: {
