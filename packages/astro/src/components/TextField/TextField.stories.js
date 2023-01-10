@@ -12,6 +12,13 @@ import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 export default {
   title: 'Form/TextField',
   component: TextField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     labelMode: {
       control: {

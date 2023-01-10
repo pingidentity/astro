@@ -9,6 +9,13 @@ import PopoverContainer from '../components/PopoverContainer';
 
 export default {
   title: 'Recipes/Date Picker',
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const sx = {
