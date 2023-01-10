@@ -11,6 +11,13 @@ import Separator from '../Separator';
 export default {
   title: 'Components/ListItem',
   component: ListItem,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 export const Default = args => (

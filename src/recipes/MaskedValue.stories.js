@@ -20,6 +20,13 @@ export default {
       defaultValue: 'A secret piece of text',
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const sx = {

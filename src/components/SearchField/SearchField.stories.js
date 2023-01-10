@@ -10,6 +10,13 @@ import { useDebounce } from '../../hooks';
 export default {
   title: 'Form/SearchField',
   component: SearchField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     label: {
       control: {
