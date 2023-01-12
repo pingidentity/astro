@@ -6,20 +6,17 @@ import { Separator, Box, Text } from '../../index';
 
 const NavBarItemBody = ({ item, onKeyDown }) => {
   const renderSubTitle = (child) => {
-    const { hasSeparator, subTitle } = child;
+    const { hasSeparator = true, subTitle } = child;
 
     return (
       <Fragment key={`fragment${subTitle}`}>
-        {(hasSeparator || hasSeparator === undefined) && <Separator
+        {hasSeparator && <Separator
           variant="separator.navBarSubtitleSeparator"
         />}
         <Text
           key={`text${subTitle}`}
-          sx={{
-            mb: 'sm',
-            ml: '45px',
-            mt: 'md',
-          }}
+          ml="45px"
+          mt={hasSeparator ? '0' : undefined}
           variant="text.navBarSubtitle"
         >
           {subTitle}
@@ -39,7 +36,7 @@ const NavBarItemBody = ({ item, onKeyDown }) => {
   );
 
   return (
-    <Box sx={{ alignItems: 'flex-start', mb: '15px' }}>
+    <Box sx={{ alignItems: 'stretch', mb: 'md' }}>
       {item.children.map(renderChild)}
     </Box>
   );

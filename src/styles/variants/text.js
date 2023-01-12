@@ -159,9 +159,9 @@ const environmentBreadcrumb = {
 
 const navBarSubtitle = {
   ml: 'md',
-  mb: '15px',
-  fontWeight: 3,
-  fontSize: '11px',
+  my: 'sm',
+  fontWeight: 1,
+  fontSize: 'sm',
   color: 'accent.80',
   zIndex: '100',
 };
@@ -169,11 +169,14 @@ const navBarSubtitle = {
 const navBarHeaderText = {
   ...wordWrap,
   whiteSpace: 'break-spaces',
-  lineHeight: '13px',
-  fontSize: '13px',
+  lineHeight: 1,
+  fontSize: 'md',
   fontWeight: 1,
   maxWidth: '150px',
-  color: 'white',
+  color: 'neutral.95',
+  '.is-selected &': {
+    color: 'white',
+  },
 };
 
 const collapsiblePanellItem = {
