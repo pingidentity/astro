@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.1...@pingux/astro@1.39.2) (2023-01-12)
+
+
+### Bug Fixes
+
+* [UIP-5939] AccordionGridGroup with inputs keyboard navigation ([a5d41cb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a5d41cb6265ce20c3bd89303d23c9763ade6a4be))
+* [UIP-5952] CopyText correct icon color ([7f6731a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7f6731a6131761c24d2446575248b61c3da34229))
+
+
+
+
+
 ## [1.39.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.0...@pingux/astro@1.39.1) (2023-01-10)
 
 
