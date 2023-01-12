@@ -3,6 +3,7 @@ const base = {
   width: '100%',
   height: '1px',
   my: '5px',
+  flexShrink: 0,
   '&.is-vertical': {
     width: '1px',
     height: '100%',
@@ -12,17 +13,15 @@ const base = {
 
 const navBarSeparator = {
   ...base,
-  width: '100%',
+  width: 'auto',
+  my: 'md',
+  mx: 'md',
   backgroundColor: 'neutral.60',
-  my: 0,
 };
 
 const navBarSubtitleSeparator = {
-  ...base,
-  mt: '15px',
+  ...navBarSeparator,
   ml: '45px',
-  width: 'calc(100% - 60px)',
-  backgroundColor: 'neutral.60',
 };
 
 export default {
