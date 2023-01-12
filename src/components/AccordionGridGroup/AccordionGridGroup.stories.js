@@ -253,7 +253,7 @@ export const Controlled = () => {
 
 export const AccordionWithInputs = () => {
   return (
-    <AccordionGridGroup items={data} defaultSelectedKeys={['Organization']}>
+    <AccordionGridGroup items={data} defaultSelectedKeys={['Organization']} navigationMode="native">
       {item => (
         <Item key={item.key}>
           <Text
