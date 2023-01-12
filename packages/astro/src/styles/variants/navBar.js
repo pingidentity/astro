@@ -15,11 +15,10 @@ const itemHeaderContainer = {
   flexGrow: 1,
   alignItems: 'center',
   maxWidth: '230px',
-  padding: '10px 15px 10px 15px',
+  py: 'sm',
+  px: 'md',
   cursor: 'pointer',
   minHeight: '40px',
-  fontWeight: 0,
-  fontSize: '16px',
   '&.is-selected': {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
@@ -27,7 +26,7 @@ const itemHeaderContainer = {
 };
 
 const sectionContainer = {
-  pt: '10px',
+  pt: 'sm',
   height: '100%',
   maxHeight: '100%',
   overflowY: 'auto',
@@ -42,7 +41,8 @@ const navItem = {
   cursor: 'pointer',
   minHeight: '40px',
   lineHeight: '30px',
-  padding: '10px 15px 10px 15px',
+  py: 'sm',
+  px: 'md',
   outline: 'none',
   display: 'flex',
   justifyContent: 'flex-start',
@@ -52,7 +52,6 @@ const navItem = {
   color: 'neutral.95',
   flexGrow: 1,
   fontWeight: 0,
-  fontSize: '16px',
   '&.is-focused': {
     outline: '1px solid',
     outlineColor: 'focus',

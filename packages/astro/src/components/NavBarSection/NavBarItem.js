@@ -52,6 +52,7 @@ const NavBarItem = forwardRef((props, ref) => {
     isSelected,
     isFocused: isFocusVisible,
   });
+  const color = isSelected ? 'white' : 'neutral.95';
 
   return (
     <Box
@@ -63,7 +64,7 @@ const NavBarItem = forwardRef((props, ref) => {
       ref={navItemRef}
       {...mergedProps}
       sx={{
-        maxHeight: '30px',
+        flexGrow: 0,
       }}
     >
       <Box
@@ -76,11 +77,11 @@ const NavBarItem = forwardRef((props, ref) => {
           <Icon
             icon={icon}
             aria-label={text}
-            size={20}
+            size="sm"
             sx={{
-              mr: '10px',
-              color: 'white',
-              fill: 'white',
+              mr: 'sm',
+              color,
+              fill: color,
             }}
           />
         }
