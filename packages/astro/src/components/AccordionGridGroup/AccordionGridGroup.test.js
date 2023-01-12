@@ -91,7 +91,7 @@ const getComponentInOverlayPanel = (props = {}) => render((
 ));
 
 const getComponentWithTextFields = (props = {}) => render((
-  <AccordionGridGroup {...defaultProps} {...props} >
+  <AccordionGridGroup {...defaultProps} {...props} navigationMode="native">
     <Item key="first" textValue="Duplicate">
       <Text>
         Header
@@ -242,4 +242,26 @@ test('adds focus to input on a single click after onBlur', () => {
   secondInput.blur();
   userEvent.click(secondInput);
   expect(secondInput).toHaveFocus();
+});
+
+test('native keyboard navigation mode toggle open/close item body', () => {
+  getComponentWithTextFields();
+  const firstItemHeader = screen.getAllByRole('gridcell')[0];
+
+  expect(firstItemHeader).not.toHaveFocus();
+  userEvent.tab();
+  expect(firstItemHeader).toHaveFocus();
+
+  expect(firstItemHeader).not.toHaveClass('is-selected');
+  userEvent.type(firstItemHeader, '{Enter}');
+  expect(firstItemHeader).toHaveClass('is-selected');
+
+  const firstInput = screen.getByLabelText('label 1');
+
+  expect(firstInput).not.toHaveFocus();
+  userEvent.tab();
+  expect(firstInput).toHaveFocus();
+
+  userEvent.type(firstInput, '{arrowup}');
+  expect(firstInput).toHaveFocus();
 });
