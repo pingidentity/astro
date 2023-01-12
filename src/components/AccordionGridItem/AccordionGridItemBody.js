@@ -13,6 +13,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
     className,
     children,
     isSelected,
+    navigationMode,
     ...others
   } = props;
 
@@ -50,6 +51,10 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
 
   delete mergedProps.onMouseDown;
   delete mergedProps.onPointerDown;
+  if (navigationMode === 'native') {
+    delete mergedProps.onKeyDown;
+    delete mergedProps.onKeyDownCapture;
+  }
 
   return (
     <Box
@@ -74,6 +79,7 @@ AccordionGridItemBody.propTypes = {
   item: PropTypes.shape({
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
   }),
+  navigationMode: PropTypes.string,
 };
 
 export default AccordionGridItemBody;
