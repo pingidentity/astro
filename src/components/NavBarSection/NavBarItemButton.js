@@ -29,6 +29,7 @@ const NavBarItemButton = (props) => {
       variant="navItemButton"
       onPress={onNavPress}
       className={classNames}
+      color={isSelected ? 'white' : undefined}
       {...others}
       sx={{
         paddingLeft: '45px',
