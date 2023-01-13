@@ -22,8 +22,8 @@ axeTest(getComponent);
 
 test('renders Chip component', () => {
   getComponent();
-  const separator = screen.getByTestId(testId);
-  expect(separator).toBeInTheDocument();
+  const chip = screen.getByTestId(testId);
+  expect(chip).toBeInTheDocument();
 });
 
 test('renders children within Chip component', () => {
