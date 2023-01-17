@@ -30,6 +30,30 @@ const sectionContainer = {
   height: '100%',
   maxHeight: '100%',
   overflowY: 'auto',
+  // these rules are for webkit browsers: chrome, safari, edge
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: '4px',
+  },
+  '&::-webkit-scrollbar': {
+    width: 10,
+  },
+  '&::-webkit-scrollbar-track': {
+    backgroundColor: 'accent.10',
+  },
+  // this is a newer standard that only ff supports for now
+  scrollbarColor: 'rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1)', // can't use theme values here, unfortunately
+  // different colors while hovering over the nav bar
+  '&:hover': {
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(255, 255, 255, 0.7)',
+      borderRadius: '4px',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'accent.5',
+    },
+    scrollbarColor: 'rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.2)',
+  },
 };
 
 const sectionBody = {

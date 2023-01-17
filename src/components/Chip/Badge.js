@@ -22,6 +22,7 @@ const Badge = React.forwardRef((props, ref) => {
     slots,
     textColor,
     textProps,
+    variant,
     ...others
   } = props;
 
@@ -46,12 +47,26 @@ const Badge = React.forwardRef((props, ref) => {
     ...others,
   };
 
+  // The following is to correct a visual regression released in 1.39.0 https://jira.pingidentity.com/browse/UIP-5907.
+  // TODO : Remove in Astro V2 with theme remapping roll out.
+  const oldVariantPaths = [
+    'boxes.countChip',
+    'boxes.countNeutral',
+    'boxes.itemChipWithSlot',
+    'collapsiblePanel.collapsiblePanelBadge',
+    'boxes.environmentChip',
+    'boxes.readOnlyChip',
+    'boxes.selectedItemChip',
+  ];
+
+  const fixedVariant = (oldVariantPaths.includes(props.variant)) ? `variants.${props.variant}` : props.variant;
+
   return (
     <BadgeContext.Provider value={{ bg }}>
       <ThemeUIBadge
         isRow
-        variant="variants.boxes.chip"
         {...badgeProps}
+        variant={props.variant ? fixedVariant : 'variants.boxes.chip'}
       >
         {slots?.leftIcon &&
         <Box mr="xs">
@@ -92,6 +107,8 @@ Badge.propTypes = {
   align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /** JSX styling that is passed into the component. */
   sx: PropTypes.shape({}),
+  /** The variant of the badge */
+  variant: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 Badge.defaultProps = {
