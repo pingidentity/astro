@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.2...@pingux/astro@1.40.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* [UIP-5988] Badge Variant Path Updates ([053d1b5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/053d1b5a3273864ad095f5585af4125c02bb632a))
+
+
+### Features
+
+* [UIP-5987] Custom scrollbar colors for NavBar ([8a144ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8a144aef93c4fbd1ccc5c8a06304b7cff2e5482f))
+
+
+
+
+
 ## [1.39.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.1...@pingux/astro@1.39.2) (2023-01-12)
 
 
