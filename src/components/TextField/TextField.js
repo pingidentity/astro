@@ -32,8 +32,6 @@ const TextField = forwardRef((props, ref) => {
 
   const helperTextId = uuid();
 
-  console.log(fieldContainerProps);
-
   return (
     <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />

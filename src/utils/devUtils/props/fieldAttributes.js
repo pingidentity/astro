@@ -16,7 +16,7 @@ export const inputFieldAttributeBaseDocSettings = {
 };
 
 
-export const inutFieldAttributeBaseArgTypes = {
+export const inputFieldAttributeBaseArgTypes = {
   'containerProps': {
     description: descriptions.containerProps,
     ...inputFieldAttributeBaseDocSettings,
