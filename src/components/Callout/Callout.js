@@ -1,0 +1,63 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { Box } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { NoticeIcon } from '../Icon/NoticeIcon';
+
+export const CALLOUT_TEST_ID = 'CalloutTestId';
+
+const calloutProps = {
+  [statuses.DEFAULT]: { color: 'text.secondary', variant: 'callout.base' },
+  [statuses.ERROR]: { color: 'critical.bright', variant: 'callout.error' },
+  [statuses.SUCCESS]: { color: 'success.bright', variant: 'callout.success' },
+  [statuses.WARNING]: { color: 'warning.bright', variant: 'callout.warning' },
+};
+
+const defaultIconProps = {
+  mr: 'md',
+  ml: 'md',
+  size: 'md',
+};
+
+/**
+ *Callout is composed of the Box, Icon, and Text components. It's a persistent component
+ that should be placed at the top of panels or above related content. If the Callouts
+ status is error or warning, the text should include a direct link to instructions on resolving the
+ issue or error.
+ *
+ *Please note, Callout is a static component, the [Messages](./?path=/docs/components-messages)
+ component is recommended if you need to interrupt and notify users of successful/failed actions
+ or give warnings of unexpected events.
+ */
+
+const Callout = ({ children, status, ...others }) => (
+  <Box
+    data-testid={CALLOUT_TEST_ID}
+    isRow
+    role="note"
+    variant={calloutProps[status].variant}
+    {...others}
+  >
+    <NoticeIcon
+      color={calloutProps[status].color}
+      status={status}
+      aria-label={`${status}-icon`}
+      {...defaultIconProps}
+    />
+    {children}
+  </Box>
+);
+
+Callout.propTypes = {
+  /** Determines the icon and color  */
+  status: PropTypes.oneOf(Object.values(statuses)),
+};
+
+Callout.defaultProps = {
+  status: statuses.DEFAULT,
+};
+
+Callout.displayName = 'Callout';
+
+export default Callout;
