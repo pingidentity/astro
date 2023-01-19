@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render } from '../../utils/testUtils/testWrapper';
 import { noticeIcons } from '../Icon/NoticeIcon';
-import Bulletin, { BULLETIN_TEST_ID } from './Bulletin';
+import Callout, { CALLOUT_TEST_ID } from './Callout';
 
 const TEST_TEXT = 'test text';
 
@@ -16,10 +16,10 @@ const testColors = {
 };
 
 const getComponent = (props = {}) => render((
-  <Bulletin {...props} >{TEST_TEXT}</Bulletin>
+  <Callout {...props} >{TEST_TEXT}</Callout>
 ));
 
-describe('Bulletin', () => {
+describe('Callout', () => {
   test('renders', () => {
     getComponent();
 
@@ -29,7 +29,7 @@ describe('Bulletin', () => {
   test('renders the default color', () => {
     getComponent();
 
-    expect(screen.getByTestId(BULLETIN_TEST_ID))
+    expect(screen.getByTestId(CALLOUT_TEST_ID))
       .toHaveStyle({ 'border-color': testColors[statuses.DEFAULT] });
   });
 
@@ -38,10 +38,10 @@ describe('Bulletin', () => {
     [statuses.ERROR, testColors[statuses.ERROR]],
     [statuses.SUCCESS, testColors[statuses.SUCCESS]],
     [statuses.WARNING, testColors[statuses.WARNING]],
-  ])('when given status %s it renders Bulletin with color %s', (status, expected) => {
+  ])('when given status %s it renders Callout with color %s', (status, expected) => {
     getComponent({ status });
 
-    expect(screen.getByTestId(BULLETIN_TEST_ID))
+    expect(screen.getByTestId(CALLOUT_TEST_ID))
       .toHaveStyle({ 'border-color': expected });
   });
 
