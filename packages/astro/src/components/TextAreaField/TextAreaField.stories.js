@@ -4,7 +4,7 @@ import TextAreaField from '.';
 
 import { Box, Icon } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inutFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { modes as labelModes } from '../Label/constants';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -60,7 +60,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
-    ...inutFieldAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

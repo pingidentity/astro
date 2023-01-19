@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inutFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import CheckboxField from './CheckboxField';
 import Link from '../Link';
 import Text from '../Text';
@@ -50,7 +50,7 @@ export default {
     isDefaultSelected: {},
     isSelected: {},
     ...ariaAttributeBaseArgTypes,
-    ...inutFieldAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

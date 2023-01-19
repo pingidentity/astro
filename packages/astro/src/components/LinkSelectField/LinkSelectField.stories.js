@@ -4,7 +4,7 @@ import { useAsyncList } from 'react-stately';
 
 import { Box, Item, LinkSelectField, Separator } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inutFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -59,7 +59,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
-    ...inutFieldAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 
