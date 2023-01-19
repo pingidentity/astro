@@ -102,8 +102,8 @@ const modifyTheme = {
     },
   },
   variants: {
-    boxes: {
-      card: {
+    card: {
+      container: {
         borderRadius,
         flexGrow: [1, 0],
         maxWidth: astroTheme.breakpoints[0],
@@ -111,26 +111,26 @@ const modifyTheme = {
         alignItems: 'stretch',
         py: [0, 'xl'],
         my: 'auto',
-        boxShadow: ['none', astroTheme.variants.card.boxShadow],
+        boxShadow: ['none', astroTheme.variants.card.container.boxShadow],
         width: ['100%', '450px'],
         minHeight: 'fit-content',
       },
-      wrapper: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        bg: ['white', 'accent.99'],
-        py: 'lg',
-        gap: 'lg',
-        overflow: 'auto',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-      },
-      cardBody: {
-        flexGrow: [1, 0],
-      },
+    },
+    wrapper: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      bg: ['white', 'accent.99'],
+      py: 'lg',
+      gap: 'lg',
+      overflow: 'auto',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+    },
+    cardBody: {
+      flexGrow: [1, 0],
     },
   },
 };
