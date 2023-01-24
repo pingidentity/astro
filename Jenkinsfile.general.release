@@ -79,7 +79,8 @@ pipeline {
           container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "yarn lerna run build --concurrency=1"
+            sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
+            sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -93,7 +94,8 @@ pipeline {
             yarn --frozen-lockfile
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
-            lerna run build --concurrency=1
+            lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
+            lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
             lerna run coverage-ci
           """
