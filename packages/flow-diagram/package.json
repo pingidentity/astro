@@ -21,6 +21,7 @@
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
+    "build-ci": "rm -rf lib && yarn build:cjs && yarn build:esm && yarn build:assets && yarn build:css",
     "build": "rm -rf lib && npm-run-all build:*",
     "build:astro": "cd ../astro && yarn build",
     "build-icons": "cd ../icons && yarn build",
