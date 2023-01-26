@@ -1,6 +1,7 @@
-import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import { useAccordion } from '@react-aria/accordion';
 import { useTreeState } from '@react-stately/tree';
+import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 import { Box } from '../../index';
 import AccordionItem from '../AccordionItem';
@@ -23,23 +24,29 @@ const AccordionGroup = forwardRef((props, ref) => {
     onExpandedChange,
     ...others
   } = props;
+
   const state = useTreeState(props);
   const accordionRef = useRef();
-  const { accordionProps } = useAccordion(props, state, accordionRef);
+
+  /* `autoFocus: true` is what makes the initial focus only take one click vs two. */
+  const { accordionProps } = useAccordion({
+    autoFocus: true,
+    ...props,
+  }, state, accordionRef);
   delete accordionProps.onMouseDown;
+
+  /* Splicing out the onFocus function is what allows subsequent focuses to only take one click. */
+  const { onFocus, ...theseProps } = accordionProps;
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => accordionRef.current);
 
-  useEffect(() => {
-    if (expandedKeys || defaultExpandedKeys) {
-      state.selectionManager.setFocused(true);
-    }
-  }, [defaultExpandedKeys, expandedKeys, state.selectionManager]);
-
   return (
     <AccordionContext.Provider value={state} >
-      <Box ref={accordionRef} {...accordionProps} {...others}>
+      <Box
+        ref={accordionRef}
+        {...mergeProps(theseProps, others)}
+      >
         {Array.from(state.collection).map(item => (
           <AccordionItem key={item.key} item={item} data-id={item['data-id']}>
             {item.props.children}

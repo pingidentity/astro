@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Item } from '@react-stately/collections';
 import Text from '../Text';
 import Button from '../Button';
+import TextField from '../TextField';
 import AccordionGroup from '.';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button>Hi</Button> },
   { key: 't2', label: 'Second Accordion', children: 'Child Renders Here' },
-  { key: 't3', label: 'Third Accordion', children: 'Child Renders Here' },
+  { key: 't3', label: 'Third Accordion', children: <TextField /> },
 ];
 
 const itemArrayDisabled = [
@@ -82,7 +83,7 @@ export const Multiple = () => {
 };
 
 export const ControlledExpanded = () => {
-  const [expandedKeys, setExpandedKeys] = useState(['t1']);
+  const [expandedKeys, setExpandedKeys] = useState(['t3']);
   return (
     /*
      * itemArray = [
