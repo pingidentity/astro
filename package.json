@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "1.37.1",
+  "version": "1.40.1-alpha.1",
   "description": "PingUX themeable React component library",
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
     "lib"
   ],
   "scripts": {
+    "build-ci": "yarn build",
+    "append-version": "node ../../append_current_version.js",
     "build": "rm -rf lib && npm-run-all build:*",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs",
     "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/",
@@ -30,6 +32,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/runtime": "7.16.3",
+    "@babel/runtime-corejs3": "7.13.8",
     "@emotion/jest": "^11.5.0",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
@@ -80,6 +84,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "7.13.9",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@emotion/babel-preset-css-prop": "^11.2.0",

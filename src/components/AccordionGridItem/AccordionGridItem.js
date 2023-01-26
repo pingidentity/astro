@@ -16,6 +16,7 @@ const AccordionGridItem = (props) => {
     bodyProps,
     children,
     className,
+    navigationMode,
     ...others
   } = props;
 
@@ -51,11 +52,13 @@ const AccordionGridItem = (props) => {
   delete rowProps.onMouseDown;
   delete rowProps.onPointerDown;
   delete rowProps.onClick;
+  if (navigationMode === 'native') {
+    delete rowProps.onKeyDown;
+  }
 
   return (
     <Box
       as="div"
-      role="row"
       tabindex="0"
       {...mergeProps(rowProps, others)}
       aria-selected={isSelected}
@@ -69,6 +72,7 @@ const AccordionGridItem = (props) => {
         ref={cellRef}
         isDisabled={isDisabled}
         isSelected={isSelected}
+        navigationMode={navigationMode}
         {...headerProps}
       >
         {header}
@@ -77,6 +81,7 @@ const AccordionGridItem = (props) => {
         item={item}
         ref={cellBodyRef}
         isSelected={isSelected}
+        navigationMode={navigationMode}
         {...bodyProps}
       >
         {body}
@@ -94,6 +99,7 @@ AccordionGridItem.propTypes = {
     rendered: PropTypes.node,
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
   }),
+  navigationMode: PropTypes.string,
 };
 
 export default AccordionGridItem;

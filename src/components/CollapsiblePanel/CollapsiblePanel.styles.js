@@ -1,4 +1,4 @@
-import { defaultFocus, link } from '../Button/Buttons.styles';
+import { defaultFocus, link, focusWithCroppedOutline } from '../Button/Buttons.styles';
 import { square } from '../IconButton/IconButton.styles';
 import { wordWrap } from '../Text/Text.styles';
 
@@ -26,8 +26,7 @@ const content = {
 
   '&.is-focused': {
     borderColor: 'accent.80',
-    boxShadow: 'focus',
-    outline: 'none',
+    ...focusWithCroppedOutline,
   },
   '& div': {
     alignItems: 'center',

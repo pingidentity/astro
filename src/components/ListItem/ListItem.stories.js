@@ -9,8 +9,15 @@ import Text from '../Text';
 import Separator from '../Separator';
 
 export default {
-  title: 'ListItem',
+  title: 'Components/ListItem',
   component: ListItem,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 export const Default = args => (
@@ -28,8 +35,8 @@ export const Default = args => (
         <Text variant="itemTitle" alignSelf="center">Fons Vernall</Text>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton size={26}>
-          <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
+        <IconButton >
+          <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
         </IconButton>
       </Box>
     </ListItem>
@@ -55,8 +62,8 @@ export const WithSubtitle = args => (
         </Box>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton size={26}>
-          <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
+        <IconButton >
+          <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
         </IconButton>
       </Box>
     </ListItem>

@@ -10,6 +10,13 @@ import { text } from '../components/Text/Text.styles';
 
 export default {
   title: 'Recipes/Date Picker',
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const sx = {
@@ -127,7 +134,7 @@ export const Default = () => {
               ref={triggerRef}
               {...triggerProps}
             >
-              <Icon icon={CalendarIcon} size={20} />
+              <Icon icon={CalendarIcon} size="sm" />
             </IconButton>
           ),
         }}

@@ -14,6 +14,7 @@ const header = {
   color: 'neutral.10',
   flexGrow: 1,
   fontWeight: 700,
+  border: '1px solid transparent',
   '&.is-focused': {
     ...defaultFocus,
     zIndex: '10',

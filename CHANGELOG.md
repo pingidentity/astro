@@ -3,6 +3,108 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.2...@pingux/astro@1.40.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* [UIP-5988] Badge Variant Path Updates ([053d1b5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/053d1b5a3273864ad095f5585af4125c02bb632a))
+
+
+### Features
+
+* [UIP-5987] Custom scrollbar colors for NavBar ([8a144ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8a144aef93c4fbd1ccc5c8a06304b7cff2e5482f))
+
+
+
+
+
+## [1.39.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.1...@pingux/astro@1.39.2) (2023-01-12)
+
+
+### Bug Fixes
+
+* [UIP-5939] AccordionGridGroup with inputs keyboard navigation ([a5d41cb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a5d41cb6265ce20c3bd89303d23c9763ade6a4be))
+* [UIP-5952] CopyText correct icon color ([7f6731a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7f6731a6131761c24d2446575248b61c3da34229))
+
+
+
+
+
+## [1.39.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.0...@pingux/astro@1.39.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* [UIP-5910] hover for IconButton component ([7861d57](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7861d57dd0262cbbca6326e9666e9fc947fddeb6))
+* [UIP-5912] MultivaluesField focusing on hover ([feab343](https://gitlab.corp.pingidentity.com/ux/pingux/commit/feab34344ed02d270effcce78a4d02712df5a5f3))
+* [UIP-5937] ListAndPanel: add aria-label to icon button ([3fa5f46](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3fa5f468d08adbc5fc93e510374322303feb817d))
+* [UIP-5944] Fix Accordion Grid Group Accessibility Violation ([1058ac7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1058ac75816df16e6b8ce90f10ef8d0575bb0768))
+* [UIP-5945] Storybook: fix code blocks formatting ([78b29ee](https://gitlab.corp.pingidentity.com/ux/pingux/commit/78b29ee7d28e6a82113333b8107a00ba5820087d))
+* [UIP-5946] Fix A11y Violation Icon Chip Multivalues Story ([d52bf42](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d52bf42c4c62b02efdeb7461cdc50814eb760b3e))
+* [UIP-5955] MultivaluesField: remove button focus styles on hover ([4503298](https://gitlab.corp.pingidentity.com/ux/pingux/commit/450329829271f3e19727238bc891768ccccefb6e))
+
+
+
+
+
+# [1.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.38.1...@pingux/astro@1.39.0) (2023-01-05)
+
+
+### Bug Fixes
+
+* [UIP-5920] IconButton Stories Tshirt Sizing ([41afdbc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/41afdbcdb34f88432d2120f59590f1dc832300cf))
+* [UIP-5940] ComboBoxField: fix read only state ([f9f1c3f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f9f1c3f926f5103987f2e8bd6d59cb10d9e5ee0b))
+
+
+### Features
+
+* [UIP-5911]: Add Bulletin component ([fd73668](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd736684078c665212dbc0a61122dc86988dc630))
+
+
+
+
+
+## [1.38.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.38.0...@pingux/astro@1.38.1) (2023-01-04)
+
+**Note:** Version bump only for package @pingux/astro
+
+
+
+
+
+# [1.38.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.2...@pingux/astro@1.38.0) (2022-12-27)
+
+
+### Bug Fixes
+
+* [UIP-5874] List and Panel recipe overlayPanel design width change ([cff3339](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cff33394f06917def44eabfa501369ff964167e6))
+* [UIP-5914] live-announcer div width issue ([5496975](https://gitlab.corp.pingidentity.com/ux/pingux/commit/54969754d6fcd45f666381d24ae96d5b0d610f48))
+* [UIP-5925] TableCaption: add export from astro library ([dfa15e9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dfa15e997162889f48d6978d91e222fe1f6ff38c))
+* [UIP-5928] ComboBox: add default value to defaultItems prop ([769150c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/769150cd5829734547dce20f81401704037b3c15))
+
+
+### Features
+
+* [UIP-5804] Overlay Panel: Expandable story ([fb04c3e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fb04c3eb58da9abbad08a0f57c15473c07753057))
+* [UIP-5805] MultiValues Component add Icon to Chip ([ed9d4b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed9d4b7f049690c85cf8197f7dd23f1aeb5f34f3))
+
+
+
+
+
+## [1.37.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.1...@pingux/astro@1.37.2) (2022-12-13)
+
+
+### Bug Fixes
+
+* [UIP-5757] Update most focus states to use new outline ([4862b44](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4862b44571f28b4227f7854c6ab8d5aaae21228d))
+* [UIP-5918] NavBar Controlled - fix items caching ([5bb44a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5bb44a43c3d3203353b662e8d4b787a60847018d))
+
+
+
+
+
 ## [1.37.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.37.0...@pingux/astro@1.37.1) (2022-12-06)
 
 

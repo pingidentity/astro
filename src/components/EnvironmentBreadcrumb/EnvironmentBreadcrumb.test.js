@@ -1,9 +1,6 @@
 import React from 'react';
 import { axe } from 'jest-axe';
-import { Section } from 'react-stately';
-import userEvent from '@testing-library/user-event';
-
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../../index';
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
 
@@ -18,6 +15,10 @@ const itemsWithSections = [
   {
     name: 'Heading 1',
     options: [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }],
+  },
+  {
+    name: 'Heading 2',
+    options: [{ name: 'Foo' }, { name: 'Zod' }, { name: 'Zay' }],
   },
 ];
 
@@ -65,12 +66,12 @@ const getSectionsComponent = (props = {}) =>
           // eslint-disable-next-line testing-library/no-node-access
           <Section
             key={section.name}
-            name={section.name}
+            title={section.name}
             items={section.options}
           >
             {/* eslint-disable-next-line testing-library/no-node-access */}
             {item => (
-              <Item key={item.name} childItems={item.options}>
+              <Item key={`${section.name}-${item.name}`} childItems={item.options}>
                 {item.name}
               </Item>
             )}
@@ -169,9 +170,17 @@ test('should render items with sections passed in props', () => {
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   userEvent.click(screen.getByText(testSelectedItem));
-  expect(screen.getByRole('group')).toBeInTheDocument();
+  const groups = screen.getAllByRole('group');
+  expect(groups).toHaveLength(2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.queryAllByRole('option')).toHaveLength(6);
+
+  groups.forEach((group, index) => {
+    expect(() => within(group).getByText(itemsWithSections[index].name));
+    itemsWithSections[index].options.forEach(opt => (
+      expect(() => within(group).getByText(opt.name))
+    ));
+  });
 });
 
 test('should call onSelectionChange when env clicked', () => {
@@ -273,4 +282,17 @@ test('should add data-id to dropdown list', () => {
   userEvent.click(screen.getByText(testSelectedItem));
 
   expect(screen.getByRole('listbox', { name: 'Items List' })).toHaveAttribute('data-id', breadCrumbDataIds.dropdownList);
+});
+
+test('should hide section title if no search results within it', () => {
+  getSectionsComponent();
+
+  // Open popover
+  userEvent.click(screen.getByText(testSelectedItem));
+  // Search for option exclusive to only one section
+  userEvent.type(screen.getByRole('searchbox'), 'Zod');
+
+  // 'Heading 1' should not be rendered, but 'Heading 2' should be
+  expect(screen.queryByText(itemsWithSections[0].name)).not.toBeInTheDocument();
+  expect(screen.queryByText(itemsWithSections[1].name)).toBeInTheDocument();
 });

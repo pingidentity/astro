@@ -10,6 +10,13 @@ import Box from '../Box';
 export default {
   title: 'Form/CheckboxField',
   component: CheckboxField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     label: {
       control: {

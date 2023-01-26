@@ -202,7 +202,9 @@ const ListElement = ({ item, onClosePanel }) => {
       <Box isRow sx={sx.listElement.menuWrapper}>
         <SwitchField aria-label="active user" isDefaultSelected alignSelf="center" mr="sm" />
         <PopoverMenu>
-          <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}><MoreVertIcon /></IconButton>
+          <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
+            <Icon icon={MoreVertIcon} color="white" size="sm" />
+          </IconButton>
           <Menu >
             <Item key="enable">Enable user</Item>
             <Item key="disable">Disable user</Item>
@@ -214,7 +216,7 @@ const ListElement = ({ item, onClosePanel }) => {
             aria-label="close icon button"
             onPress={onClosePanel}
           >
-            <CloseIcon />
+            <Icon size="sm" icon={CloseIcon} />
           </IconButton>
         }
       </Box>
@@ -261,7 +263,7 @@ export const Default = () => {
             {heading}
           </Text>
           <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted" >
-            <Icon icon={PlusIcon} color="white" size={13} />
+            <Icon icon={PlusIcon} color="white" size="xs" />
           </IconButton>
         </Box>
         <Text variant="bodyWeak">
@@ -294,6 +296,7 @@ export const Default = () => {
         state={panelState}
         triggerRef={panelTriggerRef}
         p={0}
+        size="large"
       >
         {panelState.isOpen &&
           <>
@@ -312,7 +315,9 @@ export const Default = () => {
                   <Tab title="Profile">
                     {selectedItemId >= 0 &&
                       <>
-                        <IconButton variant="inverted" sx={sx.iconButton}><PencilIcon size={20} /></IconButton>
+                        <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
+                          <PencilIcon size={20} />
+                        </IconButton>
                         <Text sx={sx.itemLabel} variant="base">Full Name</Text>
                         <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
                         <Text sx={sx.itemLabel} variant="base">First Name</Text>

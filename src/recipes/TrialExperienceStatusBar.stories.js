@@ -283,7 +283,7 @@ const LinkRow = (props) => {
           >
             <Icon
               icon={isSelected ? CheckCircleIcon : RadioButtonIcon}
-              size={isSelected ? '20px' : '18px'}
+              size="sm"
               sx={isSelected ? sx.linkRowIconButton : sx.linkRowIconNotSelected}
             />
           </IconButton>

@@ -708,11 +708,10 @@ export const Default = () => {
           <IconButton
             aria-label="Close modal window"
             data-id="icon-button__close-modal-window"
-            size={22}
             variant="modalCloseButton"
             onPress={state.close}
           >
-            <Icon icon={CloseIcon} />
+            <Icon icon={CloseIcon} size="sm" />
           </IconButton>
           <Text sx={sx.headingTextStyle} >
             Choose Your Industry

@@ -59,6 +59,7 @@ const IconButton = forwardRef((props, ref) => {
       sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
       {...mergeProps(buttonProps, others, hoverProps, focusProps)}
       variant={`iconButtons.${variant}`}
+      onPointerOver={hoverProps.onPointerEnter}
     >
       {children}
     </ThemeUIIconButton>

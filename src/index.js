@@ -35,6 +35,10 @@ export * from './components/Bracket';
 export { default as Breadcrumbs } from './components/Breadcrumbs';
 export * from './components/Breadcrumbs';
 
+export { default as Bulletin } from './components/Callout';
+export { default as Callout } from './components/Callout';
+export * from './components/Callout';
+
 export { default as Button } from './components/Button';
 export * from './components/Button';
 
@@ -209,6 +213,9 @@ export * from './components/TableHead';
 
 export { default as TableRow } from './components/TableRow';
 export * from './components/TableRow';
+
+export { default as TableCaption } from './components/TableCaption';
+export * from './components/TableCaption';
 
 export { default as Tabs } from './components/Tabs';
 export * from './components/Tabs';

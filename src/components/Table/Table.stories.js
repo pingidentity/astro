@@ -8,7 +8,7 @@ import TableCaption from '../TableCaption';
 import { Text } from '../../index';
 
 export default {
-  title: 'Table',
+  title: 'Components/Table',
   component: Table,
 };
 

@@ -296,6 +296,26 @@ const MultivaluesField = forwardRef((props, ref) => {
     </>
   );
 
+  const multivaluesFieldChip = item => (
+    <Badge
+      key={item.key}
+      role="presentation"
+      variant="selectedItemBadge"
+      bg="active"
+      label={item.name}
+      slots={item.slots}
+      {...item.chipProps}
+    >
+      <IconButton
+        aria-label="delete"
+        onPress={() => deleteItem(item.key)}
+        variant="chipDeleteButton"
+      >
+        <Icon icon={Clear} color="white" size={14} />
+      </IconButton>
+    </Badge>
+  );
+
   const selectedItems = (
     <>
       {Array.from(selectionManager.selectedKeys)
@@ -303,17 +323,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              <Badge
-                key={item.key}
-                role="presentation"
-                variant="selectedItemBadge"
-                bg="active"
-                label={item.name}
-              >
-                <IconButton aria-label="delete" onPress={() => deleteItem(item.key)} variant="chipDeleteButton">
-                  <Icon icon={Clear} color="white" size={14} />
-                </IconButton>
-              </Badge>
+              multivaluesFieldChip(item)
             );
           }
           return null;

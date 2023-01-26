@@ -3,7 +3,7 @@ import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { Box, Button, Separator, Text } from '../../';
+import { Button, Separator, Text } from '../../';
 import { useNavBarContext } from '../../context/NavBarContext';
 import NavBarItemBody from './NavBarItemBody';
 import NavBarItemHeader from './NavBarItemHeader';
@@ -21,7 +21,10 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
 
   return (
     <>
-      {title && <Text variant="variants.navBar.subtitle">{title}</Text>}
+      {hasSeparator && (
+        <Separator variant="separator.navBarSeparator" />
+      )}
+      {title && <Text variant="variants.navBar.subtitle" mt={hasSeparator ? '0' : undefined}>{title}</Text>}
       <ul
         ref={ref}
         style={{
@@ -40,13 +43,6 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
           </li>
         ))}
       </ul>
-      {hasSeparator && (
-        <Box
-          sx={{ pl: '15px', pr: '15px', my: '10px', mt: '15px', mb: '15px' }}
-        >
-          <Separator variant="separator.navBarSeparator" />
-        </Box>
-      )}
     </>
   );
 };

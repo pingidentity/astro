@@ -40,9 +40,16 @@ const Option = forwardRef((props, ref) => {
     optionRef,
   );
 
+  const focused = isFocused || state?.selectionManager?.focusedKey === item.key;
+  const setFocusOnHover = () => {
+    if (!focused) {
+      state.selectionManager.setFocusedKey(item.key);
+    }
+  };
+
   const { classNames } = useStatusClasses(null, {
     isDisabled: isDisabled || isSeparator,
-    isFocused: isFocused || state?.selectionManager?.focusedKey === item.key,
+    isFocused: focused,
     isSelected,
   });
 
@@ -60,6 +67,7 @@ const Option = forwardRef((props, ref) => {
       variant="listBox.option"
       data-id={dataId}
       className={classNames}
+      onPointerOver={setFocusOnHover}
       {...optionProps}
       {...others}
     >

@@ -73,7 +73,7 @@ const SearchField = forwardRef((props, ref) => {
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
       <Box variant="forms.search.container">
-        <Input ref={searchRef} pl={40} pr={40} {...fieldControlProps} />
+        <Input ref={searchRef} pl={40} pr={40} {...fieldControlProps} variant="forms.input.search" />
         {
           icon &&
           <Icon

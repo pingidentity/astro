@@ -67,26 +67,24 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => breadcrumbsRef.current);
 
-  const { contains } = useFilter({
-    sensitivity: 'base',
-  });
+  const { contains } = useFilter({ sensitivity: 'base' });
   const filterNodesWithChildren = (iterableNode) => {
     const nodeArr = Array.from(iterableNode);
 
     // with this function we are filtering child items if they have sections
     // we can't filter items because if it would be a section - we can't change childNodes
-    // eslint-disable-next-line array-callback-return,consistent-return
     const filteredSections = nodeArr.map(function f(nodeItem) {
       if (nodeItem?.type === 'item') {
-        return contains(nodeItem?.value?.name, searchValue) ? nodeItem : null;
+        return contains(nodeItem?.value?.name, searchValue) && nodeItem;
       }
 
-      if (nodeItem?.type === 'section') {
-        return {
-          ...nodeItem,
-          childNodes: Array.from(nodeItem.childNodes).filter(f),
-        };
-      }
+
+      const childNodes = Array.from(nodeItem.childNodes).filter(f);
+      // Don't return sections without children, see UIP-5951
+      return childNodes.length !== 0 && {
+        ...nodeItem,
+        childNodes,
+      };
     });
 
     // we are filtering null items here since we were not able to filter them in previous function

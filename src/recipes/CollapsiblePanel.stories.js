@@ -197,7 +197,7 @@ export const Default = () => {
           </Box>
           <Box isRow>
             <IconButton aria-label="Close Panel">
-              <Icon icon={Clear} size={20} />
+              <Icon icon={Clear} size="sm" />
             </IconButton>
           </Box>
         </Box>

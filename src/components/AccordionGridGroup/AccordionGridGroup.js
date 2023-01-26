@@ -10,6 +10,7 @@ import { AccordionGridContext } from '../../context/AccordionGridContext';
 import AccordionGridItem from '../AccordionGridItem';
 import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import useDevelopmentWarning from '../../hooks/useDevelopmentWarning';
 
 export const collectionTypes = {
   ITEM: 'item',
@@ -32,12 +33,15 @@ const AccordionGridGroup = forwardRef((props, ref) => {
   const {
     disabledKeys,
     containerProps,
+    navigationMode,
   } = props;
 
   const accordionGridRef = useRef();
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => accordionGridRef.current);
+
+  useDevelopmentWarning({ message: 'Use navigationMode prop for AccordionGridGroup', shouldTrigger: !navigationMode });
 
   const { collection } = useListState(props);
 
@@ -101,15 +105,25 @@ const AccordionGridGroup = forwardRef((props, ref) => {
   }, state, accordionGridRef);
 
   delete gridProps.onMouseDown;
+  if (navigationMode === 'native') {
+    delete gridProps.onKeyDown;
+    delete gridProps.onKeyDownCapture;
+  }
 
   return (
     <AccordionGridContext.Provider value={{ state, keyboardDelegate }}>
       <Box
         {...mergeProps(gridProps, containerProps)}
         ref={accordionGridRef}
+        role="treegrid"
       >
         {Array.from(state.collection).map(item => (
-          <AccordionGridItem key={item.key} item={item} {...item.props}>
+          <AccordionGridItem
+            key={item.key}
+            item={item}
+            navigationMode={navigationMode}
+            {...item.props}
+          >
             {item.props.children}
           </AccordionGridItem>
         ))}
@@ -137,6 +151,12 @@ AccordionGridGroup.propTypes = {
     * `(selectedKeys: Set) => void`
    */
   onSelectionChange: PropTypes.func,
+  /**
+   * Defines a type of navigation mode.
+   * "native" - navigation via "tab" key.
+   *  "arrows" - navigation via arrow keys.
+   */
+  navigationMode: PropTypes.string,
   /**
    * The item keys that are disabled. These items cannot be selected, focused, or otherwise
    * interacted with.

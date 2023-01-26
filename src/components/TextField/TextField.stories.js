@@ -12,6 +12,13 @@ import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 export default {
   title: 'Form/TextField',
   component: TextField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     labelMode: {
       control: {
@@ -38,7 +45,7 @@ export default {
 
 export const Default = ({ variant, ...args }) => (
   <TextField
-    id="custom-id"
+    id="default-id"
     name="custom-name"
     label="Example Label"
     {...variant && { controlProps: { variant } }}
@@ -48,7 +55,7 @@ export const Default = ({ variant, ...args }) => (
 
 export const SmallVariant = () => (
   <TextField
-    id="custom-id"
+    id="small-variant-id"
     name="custom-name"
     label="Example Label"
     controlProps={{ variant: 'input.small' }}
@@ -166,7 +173,7 @@ export const Warning = () => (
 
 export const WithHelpHint = () => (
   <TextField
-    id="custom-id"
+    id="with-help-hint-id"
     name="custom-name"
     hintText="Example Hint"
     label="Example Label"

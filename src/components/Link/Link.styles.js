@@ -1,3 +1,5 @@
+import { focusWithCroppedOutline } from './buttons';
+
 const app = {
   color: 'active',
   fontFamily: 'standard',
@@ -8,7 +10,7 @@ const app = {
     textDecoration: 'underline',
   },
   '&.is-focused': {
-    textDecoration: 'underline',
+    ...focusWithCroppedOutline,
   },
   '&.is-pressed': {
     color: 'accent.40',
@@ -24,6 +26,9 @@ const web = {
   textDecoration: 'underline',
   '&:visited': {
     color: 'decorative.7',
+  },
+  '&.is-focused': {
+    ...focusWithCroppedOutline,
   },
 };
 

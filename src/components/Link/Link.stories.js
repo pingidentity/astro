@@ -4,7 +4,7 @@ import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import variants from './Link.styles';
 
 export default {
-  title: 'Link',
+  title: 'Components/Link',
   component: Link,
   argTypes: {
     href: {

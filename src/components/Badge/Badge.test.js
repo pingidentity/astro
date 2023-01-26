@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Badge from './Badge';
+import Earth from 'mdi-react/EarthIcon';
 import Button from '../Button/Button';
+import Icon from '../Icon/Icon';
 import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-separator';
@@ -20,8 +22,8 @@ axeTest(getComponent);
 
 test('renders Badge component', () => {
   getComponent();
-  const separator = screen.getByTestId(testId);
-  expect(separator).toBeInTheDocument();
+  const chip = screen.getByTestId(testId);
+  expect(chip).toBeInTheDocument();
 });
 
 test('renders children within Badge component', () => {
@@ -47,4 +49,13 @@ test('renders Badge component with custom alignment', () => {
   getComponent({ align });
   expect(screen.getByTestId(testId)).toHaveStyleRule('position', 'absolute');
   expect(screen.getByTestId(testId)).toHaveStyleRule('right', '15px');
+});
+
+test('renders Chip component with left slot', () => {
+  const slots = {
+    leftIcon: <Icon icon={Earth} size={14} data-testid="iconId" />,
+  };
+
+  getComponent({ slots });
+  expect(screen.getByTestId('iconId')).toBeInTheDocument();
 });

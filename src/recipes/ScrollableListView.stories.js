@@ -56,11 +56,11 @@ export const Default = ({ ...args }) => {
                   <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
                 </Box>
                 <Box isRow alignSelf="center">
-                  <IconButton aria-label="create-icon" size={20} >
-                    <CreateIcon />
+                  <IconButton aria-label="create-icon" >
+                    <Icon icon={CreateIcon} size="sm" />
                   </IconButton>
-                  <IconButton aria-label="create-icon" size={20} >
-                    <MoreVertIcon />
+                  <IconButton aria-label="create-icon" >
+                    <Icon icon={MoreVertIcon} size="sm" />
                   </IconButton>
                 </Box>
               </Box>
