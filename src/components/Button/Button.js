@@ -4,7 +4,7 @@ import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Button as ThemeUIButton } from 'theme-ui';
 import { useHover } from '@react-aria/interactions';
 
-import { useStatusClasses, usePropWarning, useAriaLabelWarning, useDeprecationWarning } from '../../hooks';
+import { useStatusClasses, usePropWarning, useAriaLabelWarning } from '../../hooks';
 import Loader from '../Loader';
 
 /**
@@ -48,21 +48,6 @@ const Button = forwardRef((props, ref) => {
     isFocused: isFocusVisible,
     isDisabled,
   });
-
-  useDeprecationWarning(
-    'The "icon" variant for `Button` is deprecated in Astro-UI 1.0.0, use the `IconButton` component instead.',
-    { isActive: props.variant === 'icon' },
-  );
-
-  useDeprecationWarning(
-    'The "danger" variant for `Button` will be deprecated in Astro-UI 2.0.0, use the `critical` variant instead.',
-    { isActive: props.variant === 'danger' },
-  );
-
-  useDeprecationWarning(
-    'The "text" variant for `Button` will be deprecated in Astro-UI 2.0.0, use the `link` variant instead.',
-    { isActive: props.variant === 'text' },
-  );
 
   const ariaLabel = props['aria-label'];
   useAriaLabelWarning('Button', ariaLabel, variant === 'filter');

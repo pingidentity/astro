@@ -98,9 +98,6 @@ export * from './components/Link';
 export { default as LinkSelectField } from './components/LinkSelectField';
 export * from './components/LinkSelectField';
 
-export { default as List } from './components/List';
-export * from './components/List';
-
 export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 
