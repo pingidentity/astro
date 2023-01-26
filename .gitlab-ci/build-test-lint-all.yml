@@ -18,7 +18,8 @@ build-test-lint-all:
       when: manual
       allow_failure: true
   script:
-    - lerna run build --concurrency=1
+    - lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
+    - lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
     - lerna run lint
     - lerna run coverage-ci
   artifacts:

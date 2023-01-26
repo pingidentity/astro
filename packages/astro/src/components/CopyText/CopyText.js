@@ -134,7 +134,7 @@ const CopyText = forwardRef((props, ref) => {
 
   return (
     <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip} targetRef={pressableRef}>
-      <Box ref={pressableRef} {...mergeProps(hoverProps, pressableProps)} sx={{ width: 'min-content' }} >
+      <Box ref={pressableRef} {...mergeProps(hoverProps, pressableProps)} sx={{ width: 'fit-content' }}>
         <Box
           ref={ref}
           isRow

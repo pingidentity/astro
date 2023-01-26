@@ -1,6 +1,6 @@
 {
   "name": "@pingux/flow-diagram",
-  "version": "0.27.29",
+  "version": "0.27.30-alpha.3",
   "description": "Flow Diagram library",
   "author": "Ping UX Development Team",
   "homepage": "",
@@ -21,6 +21,7 @@
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
+    "build-ci": "rm -rf lib && yarn build:cjs && yarn build:esm && yarn build:assets && yarn build:css",
     "build": "rm -rf lib && npm-run-all build:*",
     "build:astro": "cd ../astro && yarn build",
     "build-icons": "cd ../icons && yarn build",
@@ -45,7 +46,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
-    "@pingux/astro": "^1.40.0",
+    "@pingux/astro": "^1.40.1-alpha.3",
     "@pingux/icons": "^0.2.0",
     "gojs": "^2.1.16",
     "gojs-react": "^1.0.7",
