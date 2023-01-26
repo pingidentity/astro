@@ -4,6 +4,7 @@
   "description": "Branding themes for end-user projects",
   "scripts": {
     "build": "rm -rf ./build && npm-run-all build:*",
+    "build-ci": "yarn build",
     "build:tokens": "node ./buildTokens.js",
     "build:css": "node-sass --recursive --output-style 'compressed' themes/ -o build/cdn/$(node -p -e 'require(`./package.json`).version') ",
     "build:images": "gulp move-images",

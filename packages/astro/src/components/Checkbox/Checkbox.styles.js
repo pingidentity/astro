@@ -7,7 +7,9 @@ export const checkbox = {
     bg: 'transparent',
   },
   'input ~ &.is-focused': {
-    outline: 'none',
-    boxShadow: 'focus',
+    boxShadow: 'none',
+    outline: '1px solid',
+    outlineColor: 'focus',
+    outlineOffset: '0px',
   },
 };

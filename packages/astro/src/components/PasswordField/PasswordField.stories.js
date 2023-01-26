@@ -8,6 +8,13 @@ import statuses from '../../utils/devUtils/constants/statuses';
 export default {
   title: 'Form/PasswordField',
   component: PasswordField,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     status: {
       control: {

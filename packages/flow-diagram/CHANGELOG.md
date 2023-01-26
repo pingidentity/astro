@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.29](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.28...@pingux/flow-diagram@0.27.29) (2023-01-17)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
+## [0.27.28](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.27...@pingux/flow-diagram@0.27.28) (2023-01-12)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
+## [0.27.27](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.26...@pingux/flow-diagram@0.27.27) (2023-01-10)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
+## [0.27.26](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.25...@pingux/flow-diagram@0.27.26) (2023-01-05)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
+## [0.27.25](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.24...@pingux/flow-diagram@0.27.25) (2023-01-04)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
+## [0.27.24](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.23...@pingux/flow-diagram@0.27.24) (2022-12-27)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
+## [0.27.23](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.22...@pingux/flow-diagram@0.27.23) (2022-12-13)
+
+**Note:** Version bump only for package @pingux/flow-diagram
+
+
+
+
+
 ## [0.27.22](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/flow-diagram@0.27.21...@pingux/flow-diagram@0.27.22) (2022-12-06)
 
 **Note:** Version bump only for package @pingux/flow-diagram

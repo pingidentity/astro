@@ -6,7 +6,7 @@ import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import { Box, Button } from '../../index';
 
 export default {
-  title: 'Image',
+  title: 'Components/Image',
   component: Image,
   argTypes: {
     isDisabled: {},

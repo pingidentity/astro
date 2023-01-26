@@ -1,6 +1,7 @@
 import React from 'react';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
+import AccountIcon from 'mdi-react/AccountIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
@@ -128,4 +129,16 @@ test('should render messages with multiMessagesReducerStory', () => {
   getComponent();
   multiMessagesReducerStory.actions.showSuccessMessage();
   expect(screen.getByTestId(testId)).toBeInTheDocument();
+});
+
+test('should render a custom icon', () => {
+  getWithDynamicList({
+    items: [{
+      key: 'message1',
+      text: 'test text',
+      icon: AccountIcon,
+    }],
+  });
+
+  screen.getByTestId('custom-icon-testid');
 });

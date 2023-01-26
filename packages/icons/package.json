@@ -18,6 +18,7 @@
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
   },
   "scripts": {
+    "build-ci": "yarn build",
     "build": "rm -rf lib && npm-run-all build:*",
     "build:css": "node-sass --output-style 'compressed' src/ -o lib",
     "build:move-files": "gulp move-files",

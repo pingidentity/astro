@@ -8,7 +8,7 @@ import Text from '../Text';
 import { Badge } from '../../index';
 
 export default {
-  title: 'Tabs',
+  title: 'Components/Tabs',
   component: Tabs,
   argTypes: {
     isDisabled: {},

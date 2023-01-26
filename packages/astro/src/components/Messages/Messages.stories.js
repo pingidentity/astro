@@ -7,7 +7,7 @@ import { Box, Button, Messages } from '../..';
 import { messagesReducerStory as messagesReducer, multiMessagesReducerStory as multiMessagesReducer } from './index';
 
 export default {
-  title: 'Messages',
+  title: 'Components/Messages',
   component: Messages,
   argTypes: {
     items: {

@@ -1,11 +1,11 @@
 import React from 'react';
-import Text from '../components/Text';
-import { Table, TableRow, TableBody, TableHead, TableCell, Box, Separator } from '..';
-import { fontWeights, fontSizes } from './text';
+import Text from '../../components/Text';
+import { Table, TableRow, TableBody, TableHead, TableCell, Box, Separator } from '../..';
+import { fontWeights, fontSizes } from '../../styles/text';
 
 
 export default {
-  title: 'Design/Typography',
+  title: 'Docs/Design/Typography',
 };
 
 const tableBodyStyles = {

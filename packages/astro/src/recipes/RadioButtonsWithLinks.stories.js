@@ -50,7 +50,7 @@ export const Default = () => {
       <Box isRow justifyContent="space-between" mb="sm">
         <Text sx={{ fontWeight: 2 }}>Permissions</Text>
         <IconButton onPress={onPress} aria-label="close icon button">
-          <Icon icon={CloseIcon} />
+          <Icon icon={CloseIcon} size="sm" />
         </IconButton>
       </Box>
       <Box>

@@ -4,7 +4,7 @@ import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import IconButtonToggle from '.';
 
 export default {
-  title: 'IconButtonToggle',
+  title: 'Components/IconButtonToggle',
   component: IconButtonToggle,
 };
 
@@ -26,6 +26,9 @@ export const Controlled = (args) => {
       isToggled={isToggled}
       buttonProps={{
         'aria-label': 'eye icon',
+      }}
+      iconProps={{
+        size: 'sm',
       }}
     />
   );

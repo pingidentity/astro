@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.14](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.13...@pingux/schema-form@3.11.14) (2023-01-17)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.13](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.12...@pingux/schema-form@3.11.13) (2023-01-12)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.12](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.11...@pingux/schema-form@3.11.12) (2023-01-10)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.11](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.10...@pingux/schema-form@3.11.11) (2023-01-05)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.10](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.9...@pingux/schema-form@3.11.10) (2023-01-04)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.8...@pingux/schema-form@3.11.9) (2022-12-27)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
+## [3.11.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.7...@pingux/schema-form@3.11.8) (2022-12-13)
+
+
+### Bug Fixes
+
+* [UIP-5757] Update most focus states to use new outline ([4862b44](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4862b44571f28b4227f7854c6ab8d5aaae21228d))
+
+
+
+
+
 ## [3.11.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.11.6...@pingux/schema-form@3.11.7) (2022-12-06)
 
 **Note:** Version bump only for package @pingux/schema-form

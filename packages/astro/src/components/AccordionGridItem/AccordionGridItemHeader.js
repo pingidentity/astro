@@ -18,6 +18,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     children,
     isSelected,
     hasCaret,
+    navigationMode,
     ...others
   } = props;
 
@@ -62,6 +63,18 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
   const ariaLabel = props['aria-label'];
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      state.selectionManager.toggleSelection(e.target.dataset.key);
+    }
+  };
+  if (navigationMode === 'native') {
+    delete mergedProps.onKeyDown;
+    delete mergedProps.onKeyDownCapture;
+    delete mergedProps.onKeyUp;
+    mergedProps.tabIndex = 0;
+    mergedProps.onKeyPress = handleKeyPress;
+  }
 
   return (
     <Box
@@ -103,6 +116,7 @@ AccordionGridItemHeader.propTypes = {
       isPressed: PropTypes.bool,
     }),
   }),
+  navigationMode: PropTypes.string,
 };
 
 export default AccordionGridItemHeader;

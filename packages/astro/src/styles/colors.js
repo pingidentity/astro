@@ -64,7 +64,7 @@ const getDecorativeColor = (index, h = cHue, s = cSaturation, l = cLightness) =>
   ? getDecorativeColor(index - 1, (h + 100) % 360, s, l * 0.95)
   : chroma(h, s, l, 'hsl').hex());
 
-export const decorative = Array(11).fill(0).map((_v, index) => getDecorativeColor(index));
+export const decorative = Array(11).fill(0).map((_v, index) => (index !== 4 ? getDecorativeColor(index) : '#e30080'));
 export const decorativeDark = decorative.map(
   color => chroma(color).darken(2).hex(),
 );
@@ -72,7 +72,8 @@ export const decorativeLight = decorative.map(
   color => chroma(color).brighten(2).hex(),
 );
 
-export const focus = chroma(accent[50]).alpha(0.75).hex();
+// export const focus = chroma(accent[50]).alpha(0.75).hex();
+export const focus = chroma('#D033FF').hex();
 
 // COMPONENT COLORS
 export const button = {
@@ -82,6 +83,7 @@ export const button = {
   hoverBorder: accent,
   hoverLabel: accent,
   hoverBackground: accent[95],
+  focus,
 };
 
 export const line = { regular: neutral[50], light: neutral[80], hairline: neutral[90] };

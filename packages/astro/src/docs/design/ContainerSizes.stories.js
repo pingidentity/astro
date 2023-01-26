@@ -2,10 +2,10 @@ import React from 'react';
 import {
   Box,
   Text,
-} from '../index';
+} from '../../index';
 
 export default {
-  title: 'Design/Container Sizes',
+  title: 'Docs/Design/Container Sizes',
 };
 
 const containerArray = [

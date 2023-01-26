@@ -20,6 +20,13 @@ export default {
       defaultValue: 'A secret piece of text',
     },
   },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const sx = {
@@ -59,7 +66,7 @@ export const Default = ({ dataTitle, secretData }) => {
           onPress={() => setIsMasked(!isMasked)}
           sx={sx.showHideButton}
         >
-          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} />
+          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} size="sm" />
         </IconButton>
       </Box>
     </Box>

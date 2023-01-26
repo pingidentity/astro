@@ -58,7 +58,7 @@ const code = `{
 }`;
 
 export default {
-  title: 'CodeView',
+  title: 'Components/CodeView',
   component: CodeView,
   argTypes: {
     children: {

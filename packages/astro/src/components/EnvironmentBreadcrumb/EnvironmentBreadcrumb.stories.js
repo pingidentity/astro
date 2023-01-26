@@ -3,8 +3,15 @@ import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
 import { Item, Section, Badge, Box, Text } from '../../index';
 
 export default {
-  title: 'EnvironmentBreadcrumb',
+  title: 'Components/EnvironmentBreadcrumb',
   component: EnvironmentBreadcrumb,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const defaultEnvironments = [

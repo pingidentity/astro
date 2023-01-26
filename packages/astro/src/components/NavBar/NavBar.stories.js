@@ -22,7 +22,7 @@ import {
 export default {
   component: NavBar,
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
-  title: 'NavBar',
+  title: 'Components/NavBar',
 };
 
 const Credentials = props => (
@@ -332,6 +332,7 @@ const data = [
         key="Experiences Vanity Domains"
         id="Experiences Vanity Domains"
         href="https://pingidentity.com/"
+        onClick={e => e.preventDefault()}
       >
         Vanity Domains
       </NavBarItemLink>,
@@ -359,7 +360,6 @@ const secondData = [
         Users
       </NavBarItemButton>,
       {
-        hasSeparator: false,
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -478,7 +478,7 @@ export const Default = () => (
         {logo}
       </Link>
     </Box>
-    <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" />
+    <Separator m={0} backgroundColor="neutral.60" />
     <Box
       variant="navBar.sectionContainer"
       paddingBottom="xl"
@@ -490,9 +490,9 @@ export const Default = () => (
         key="Overview"
         text="Overview"
       />
-      <NavBarSection items={data} hasSeparator data-id="nav-bar-section" />
+      <NavBarSection items={data} data-id="nav-bar-section" />
       <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
-      <NavBarSection items={thirdData} data-id="third-nav-bar-section" />
+      <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
     </Box>
   </NavBar>
 );
@@ -525,7 +525,7 @@ export const Controlled = () => {
 
   return (
     <NavBar setSelectedKey={setSelectedKey} selectedKey={selectedKey}>
-      <Box padding="md">
+      <Box padding="md" key="top-logo-parent" >
         <Link
           aria-label="home link"
           href="https://pingidentity.com"
@@ -534,10 +534,11 @@ export const Controlled = () => {
           {logo}
         </Link>
       </Box>
-      <Separator marginTop="lg" marginBottom="0px" backgroundColor="neutral.60" />
+      <Separator m="0" backgroundColor="neutral.60" key="top-separator" />
       <Box
         variant="navBar.sectionContainer"
         paddingBottom="xl"
+        key="first-section-container"
       >
         <NavBarItem
           data-id="nav-bar-item"
@@ -546,7 +547,7 @@ export const Controlled = () => {
           key="Overview"
           text="Overview"
         />
-        <NavBarSection items={data} hasSeparator data-id="first-nav-bar-section" />
+        <NavBarSection items={data} data-id="first-nav-bar-section" />
         <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
         <NavBarSection items={customData} data-id="third-nav-bar-section" />
       </Box>

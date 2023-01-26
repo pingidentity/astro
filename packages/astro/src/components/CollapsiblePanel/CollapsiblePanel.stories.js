@@ -25,8 +25,15 @@ import {
 } from '../../index';
 
 export default {
-  title: 'CollapsiblePanel',
+  title: 'Components/CollapsiblePanel',
   component: CollapsiblePanel,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     listTitle: {
       defaultValue: 'Selected Groups',
@@ -192,8 +199,8 @@ export const CollapsiblePanelWithBadge = (args) => {
               </Breadcrumbs>
             </Box>
             <Box isRow>
-              <IconButton aria-label="Close Panel" onPress={() => { onClose(state, triggerRef); }}>
-                <Icon icon={Clear} size={20} />
+              <IconButton aria-label="Close Panel" onPress={() => { onClose(state, triggerRef); }} >
+                <Icon icon={Clear} size="sm" />
               </IconButton>
             </Box>
           </Box>

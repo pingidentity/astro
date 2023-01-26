@@ -3,6 +3,7 @@ import { axe } from 'jest-axe';
 import { Section } from 'react-stately';
 import { useListState } from '@react-stately/list';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import ListBox from '.';
 import { Item } from '../../index';
@@ -117,4 +118,16 @@ test('renders sections and items within section', () => {
 
   const options = screen.getAllByRole('option');
   expect(options.length).toBe(itemsWithSections[0].options.length);
+});
+
+test('should have is-focused class when hover', () => {
+  getSectionsComponent();
+  const options = screen.getAllByRole('option');
+
+  expect(options[0]).not.toHaveClass('is-focused');
+  userEvent.hover(options[0]);
+  expect(options[0]).toHaveClass('is-focused');
+  userEvent.hover(options[1]);
+  expect(options[0]).not.toHaveClass('is-focused');
+  expect(options[1]).toHaveClass('is-focused');
 });

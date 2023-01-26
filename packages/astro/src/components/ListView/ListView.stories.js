@@ -14,8 +14,15 @@ import Text from '../Text';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 export default {
-  title: 'ListView',
+  title: 'Components/ListView',
   component: ListView,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     loadingState: {
       control: {
@@ -285,15 +292,15 @@ const actions = {
 const ListElement = ({ item }) => (
   <Box isRow >
     <Box isRow mr="auto" alignSelf="center" >
-      <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
+      <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size="md" />
       <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
     </Box>
     <Box isRow alignSelf="center">
-      <IconButton aria-label="create-icon" size={20} >
-        <CreateIcon />
+      <IconButton aria-label="create-icon" >
+        <Icon icon={CreateIcon} size="sm" />
       </IconButton>
-      <IconButton aria-label="actions-icon" size={20} >
-        <MoreVertIcon />
+      <IconButton aria-label="actions-icon" >
+        <Icon icon={MoreVertIcon} size="sm" />
       </IconButton>
     </Box>
   </Box>
@@ -305,15 +312,15 @@ export const Default = ({ ...args }) => (
       <Item key={item.name} textValue={item.name} data-id={item.key}>
         <Box isRow >
           <Box isRow mr="auto" alignSelf="center" >
-            <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
+            <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size="md" />
             <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
           </Box>
           <Box isRow alignSelf="center">
-            <IconButton aria-label="create-icon" size={20} >
-              <CreateIcon />
+            <IconButton aria-label="create-icon" >
+              <Icon icon={CreateIcon} size="sm" />
             </IconButton>
-            <IconButton aria-label="actions-icon" size={20} >
-              <MoreVertIcon />
+            <IconButton aria-label="actions-icon" size="sm" >
+              <Icon icon={MoreVertIcon} size="sm" />
             </IconButton>
           </Box>
         </Box>

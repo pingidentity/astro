@@ -31,17 +31,18 @@ const NavBarItemHeader = (props) => {
   const { classNames } = useStatusClasses(className, {
     isSelected: childSelected && !isExpanded,
   });
+  const color = childSelected && !isExpanded ? 'white' : 'neutral.95';
 
   return (
     <Box variant="navBar.itemHeaderContainer" className={classNames} isRow data-testid={heading} >
       {icon && (
         <Icon
           icon={icon}
-          size={20}
+          size="sm"
           sx={{
             mr: '10px',
-            color: 'white',
-            fill: 'white',
+            color,
+            fill: color,
           }}
           aria-hidden="true"
         />
@@ -54,10 +55,10 @@ const NavBarItemHeader = (props) => {
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         <Icon
           icon={isExpanded ? MenuUp : MenuDown}
-          size={20}
+          size="sm"
           sx={{
-              color: 'white',
-              fill: 'white',
+              color,
+              fill: color,
             }}
           aria-label={isExpanded ? 'Menu up' : 'Menu down'}
         />

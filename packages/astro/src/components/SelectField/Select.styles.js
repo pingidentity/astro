@@ -1,6 +1,7 @@
 // Styles for default select and variants go here.
-import { input } from '../Input/Input.styles';
-import { text } from '../../styles/variants';
+import { input } from './input';
+import { text } from '../variants';
+import { defaultFocus } from '../variants/buttons';
 
 const activeFloatLabel = {
   pt: 'md',
@@ -13,7 +14,7 @@ export const select = {
   display: 'flex',
   alignItems: 'center',
   '&.is-focused': {
-    boxShadow: 'focus',
+    ...defaultFocus,
   },
   '.is-float-label &': {
     height: '45px',

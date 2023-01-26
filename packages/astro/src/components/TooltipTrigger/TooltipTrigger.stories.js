@@ -6,7 +6,7 @@ import IconButton from '../IconButton';
 import Text from '../Text';
 
 export default {
-  title: 'TooltipTrigger',
+  title: 'Components/TooltipTrigger',
   component: TooltipTrigger,
 };
 

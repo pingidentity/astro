@@ -98,7 +98,7 @@ export const Default = () => {
             defaultIcon={CustomOffSvg}
             title="Bidirectional/ Outbound toggle"
             iconProps={{
-              size: 16,
+              size: 'xs',
             }}
             buttonProps={{
               variant: 'bidirectional',
@@ -125,10 +125,10 @@ export const Default = () => {
           sx={sx.iconContainer}
         >
           <IconButton aria-label="Edit">
-            <Icon icon={CogsIcon} sx={sx.actionIcon} size={20} title="edit icon" />
+            <Icon icon={CogsIcon} sx={sx.actionIcon} size="sm" title="edit icon" />
           </IconButton>
           <IconButton sx={sx.iconButton} aria-label="Delete">
-            <Icon icon={DeleteIcon} sx={sx.actionIcon} size={20} title="delete icon" />
+            <Icon icon={DeleteIcon} sx={sx.actionIcon} size="sm" title="delete icon" />
           </IconButton>
         </Box>
       </Box>
@@ -188,10 +188,10 @@ export const Default = () => {
           sx={sx.iconContainer}
         >
           <IconButton aria-label="Edit">
-            <Icon icon={CogsIcon} sx={sx.actionIcon} size={20} title="edit icon" />
+            <Icon icon={CogsIcon} sx={sx.actionIcon} size="sm" title="edit icon" />
           </IconButton>
           <IconButton sx={sx.iconButton} aria-label="Delete">
-            <Icon icon={DeleteIcon} sx={sx.actionIcon} size={20} title="delete icon" />
+            <Icon icon={DeleteIcon} sx={sx.actionIcon} size="sm" title="delete icon" />
           </IconButton>
         </Box>
       </Box>

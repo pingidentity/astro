@@ -87,7 +87,7 @@ export const Default = () => {
               ml="xs"
               onPress={() => setEditOverviewVisible(true)}
             >
-              <Icon icon={CreateIcon} size={14} />
+              <Icon icon={CreateIcon} size="xs" />
             </IconButton>
           </Box>
           <Box isRow>

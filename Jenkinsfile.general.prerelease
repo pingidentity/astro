@@ -4,7 +4,7 @@
 
 import groovy.json.JsonOutput
 
-def testCluster = 'test'
+def testCluster = 'test.us-east-2.k8s.pingidentity.net'
 
 // Schema Form NPM publish stuff
 def configuration = [
@@ -56,7 +56,7 @@ pipeline {
             - name: "ui-library-admin"
               command: # Jenkinsfile overwrites this, but k8s spec requires it
               - cat
-              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.0"
+              image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.1"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
               tty: true"""
@@ -96,7 +96,8 @@ pipeline {
           container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "lerna run build --concurrency=1"
+            sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
+            sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -108,8 +109,10 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
+            git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
-            lerna run build --concurrency=1
+            lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
+            lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
             lerna run coverage-ci
           """

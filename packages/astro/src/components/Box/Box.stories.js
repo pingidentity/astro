@@ -6,7 +6,7 @@ import { flatColorList } from '../../styles/colors.js';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
 export default {
-  title: 'Box',
+  title: 'Components/Box',
   component: Box,
   argTypes: {
     bg: {

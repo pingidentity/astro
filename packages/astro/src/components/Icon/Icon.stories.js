@@ -19,7 +19,7 @@ import { flatColorList } from '../../styles/colors';
 import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
 
 export default {
-  title: 'Icon',
+  title: 'Components/Icon',
   component: Icon,
   parameters: {
     docs: {

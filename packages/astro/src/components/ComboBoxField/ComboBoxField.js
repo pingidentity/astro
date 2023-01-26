@@ -43,6 +43,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     loadingState,
     onLoadMore,
     inputValue,
+    isReadOnly,
     menuTrigger,
     isNotFlippable,
     direction,
@@ -107,7 +108,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const { contains } = useFilter({ sensitivity: 'base' });
   const state = useComboBoxState({
     ...comboBoxOptions,
-    defaultItems,
+    defaultItems: isReadOnly ? [] : defaultItems,
     items,
     onSelectionChange: (hasAddOption || hasCustomValue)
       ? onSelectionChangeHandler
@@ -180,25 +181,36 @@ const ComboBoxField = forwardRef((props, ref) => {
     minWidth: menuWidth,
   };
 
-  const listbox = (
-    <FocusScope restoreFocus>
-      <DismissButton onDismiss={state.close} />
-      <ScrollBox {...scrollBoxProps}>
-        <ListBox
-          ref={listBoxRef}
-          hasNoEmptySelection
-          hasAutoFocus={state.focusStrategy || true}
-          state={state}
-          hasVirtualFocus
-          isLoading={loadingState === loadingStates.LOADING_MORE}
-          onLoadMore={onLoadMore}
-          isFocusedOnHover={shouldFocusOnHover}
-          isSelectedOnPressUp={shouldSelectOnPressUp}
-          {...otherListBoxProps}
-        />
-      </ScrollBox>
-      <DismissButton onDismiss={state.close} />
-    </FocusScope>
+  const listBox = !isReadOnly && (
+    <PopoverContainer
+      hasNoArrow
+      isDismissable
+      isNonModal
+      isOpen={state.isOpen}
+      onClose={state.close}
+      placement={placement}
+      ref={popoverRef}
+      style={style}
+    >
+      <FocusScope restoreFocus>
+        <DismissButton onDismiss={state.close} />
+        <ScrollBox {...scrollBoxProps} >
+          <ListBox
+            ref={listBoxRef}
+            hasNoEmptySelection
+            hasAutoFocus={state.focusStrategy || true}
+            state={state}
+            hasVirtualFocus
+            isLoading={loadingState === loadingStates.LOADING_MORE}
+            onLoadMore={onLoadMore}
+            isFocusedOnHover={shouldFocusOnHover}
+            isSelectedOnPressUp={shouldSelectOnPressUp}
+            {...otherListBoxProps}
+          />
+        </ScrollBox>
+        <DismissButton onDismiss={state.close} />
+      </FocusScope>
+    </PopoverContainer>
   );
 
   return (
@@ -215,18 +227,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         controlProps={controlProps}
         aria-invalid={status === 'error' && true}
       />
-      <PopoverContainer
-        hasNoArrow
-        isDismissable
-        isNonModal
-        isOpen={state.isOpen}
-        onClose={state.close}
-        placement={placement}
-        ref={popoverRef}
-        style={style}
-      >
-        {listbox}
-      </PopoverContainer>
+      {listBox}
     </>
   );
 });
@@ -358,6 +359,7 @@ ComboBoxField.defaultProps = {
   menuTrigger: 'focus',
   direction: 'bottom',
   scrollBoxProps: { maxHeight: '300px' },
+  defaultItems: [],
 };
 
 ComboBoxField.displayName = 'ComboBoxField';

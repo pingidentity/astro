@@ -3,7 +3,7 @@ import Avatar from '.';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
 export default {
-  title: 'Avatar',
+  title: 'Components/Avatar',
   component: Avatar,
   argTypes: {
     src: {

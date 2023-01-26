@@ -3,6 +3,7 @@ import accordionGrid from '../../components/AccordionGridGroup/AccordionGrid.sty
 import box from '../../components/Box/Box.styles';
 import bracket from '../../components/Bracket/Bracket.styles';
 import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
+import callout from './callout';
 import codeView from '../../components/CodeView/CodeView.styles';
 import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel.styles';
 import copyText from '../../components/CopyText/CopyText.styles';
@@ -37,6 +38,7 @@ export default {
   box,
   bracket,
   breadcrumb,
+  callout,
   codeView,
   collapsiblePanel,
   copyText,
