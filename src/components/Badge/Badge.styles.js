@@ -31,6 +31,9 @@ const multivaluesBadge = {
   m: 5,
   mr: 10,
   ml: 0,
+  '& span': {
+    mr: '2px',
+  },
 };
 
 const selectedItemBadge = {
@@ -47,6 +50,19 @@ const readOnlyBadge = {
   borderColor: 'neutral.80',
 };
 
+const itemBadgeWithSlot = {
+  ...readOnlyBadge,
+  p: 3,
+  my: 0,
+  backgroundColor: 'white',
+  '& span': {
+    color: 'text.primary',
+    mr: '2px',
+    lineHeight: '16px',
+  },
+  maxHeight: '22px',
+};
+
 const environmentBadge = {
   ...baseBadge,
   alignSelf: 'center',
@@ -59,24 +75,52 @@ const environmentBadge = {
   },
 };
 
-export const chipDeleteButton = {
+export const chipDeleteStandard = {
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
-  mx: '3px !important',
   p: 0,
   width: 14,
-  '&.is-focused, &.is-hovered': {
+  mx: '3px !important',
+};
+
+export const chipDeleteButton = {
+  ...chipDeleteStandard,
+  '&.is-focused': {
     bg: 'accent.40',
-    borderColor: 'accent.40',
-    boxShadow: 'standard',
-    outline: 'none',
+    ...focusWithCroppedOutline,
+  },
+  '&.is-hovered': {
+    bg: 'accent.40',
   },
   '&.is-pressed': {
     bg: 'accent.20',
     borderColor: 'accent.20',
   },
 };
+
+export const chipWithSlotDeleteButton = {
+  ...chipDeleteStandard,
+  path: {
+    fill: 'neutral.40',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    backgroundColor: '#e5e9f8 !important',
+    path: {
+      fill: 'neutral.40',
+    },
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'white',
+    },
+    bg: '#4462ED !important',
+  },
+};
+
 
 const countDefault = {
   ...baseBadge,
@@ -108,6 +152,7 @@ const countNeutral = {
 export default {
   baseBadge,
   environmentBadge,
+  itemBadgeWithSlot,
   multivaluesBadge,
   readOnlyBadge,
   selectedItemBadge,

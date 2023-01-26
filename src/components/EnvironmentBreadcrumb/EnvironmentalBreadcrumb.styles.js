@@ -13,8 +13,9 @@ const button = {
       boxShadow: 'none',
     },
     '&.is-focused': {
-      borderRadius: '2px',
-      boxShadow: '0 0 0 1px #4462ED',
+      outline: '1px solid',
+      outlineColor: 'focus',
+      outlineOffset: '1px',
     },
     '&:focus-visible': {
       outline: 'none',

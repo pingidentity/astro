@@ -1,3 +1,4 @@
+import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 // Styles for default radio and variants go here.
 
 // Default radio
@@ -11,8 +12,7 @@ const base = {
     bg: 'transparent',
   },
   'input ~ &.is-focused': {
-    outline: 'none',
-    boxShadow: 'focus',
+    ...focusWithCroppedOutline,
   },
 };
 

@@ -93,13 +93,13 @@ export const BadgeWithIcon = () => (
 );
 
 
-export const ChipWithLeftSlotAndIcon = () => (
-  <Chip label="Chip with Icon Button and Left Slot" bg="white" variant="variants.boxes.itemChipWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }} >
+export const BadgeWithLeftSlotAndIcon = () => (
+  <Badge label="Chip with Icon Button and Left Slot" bg="white" variant="itemBadgeWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }} >
     <IconButton
       aria-label="delete"
       variant="buttons.chipWithSlotDeleteButton"
     >
       <Icon icon={Clear} size={14} />
     </IconButton>
-  </Chip>
+  </Badge>
 );

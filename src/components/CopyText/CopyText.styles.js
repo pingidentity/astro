@@ -2,7 +2,8 @@ import { defaultFocus } from '../Button/Buttons.styles';
 
 const copy = {
   alignItems: 'center',
-  width: 'max-content',
+  wordBreak: 'break-all',
+  overflowWrap: 'break-word',
   '& .is-focused': {
     outline: '1px solid',
     outlineColor: 'active',
