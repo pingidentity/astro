@@ -5,7 +5,7 @@ import { useSliderState } from 'react-stately';
 import { useNumberFormatter } from '@react-aria/i18n';
 
 import { Box } from '../index';
-import { defaultFocus } from '../styles/variants/buttons';
+import { defaultFocus } from '../components/Button/Buttons.styles';
 
 export default {
   title: 'Recipes/Slider',

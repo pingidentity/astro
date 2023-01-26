@@ -1,5 +1,5 @@
 /** Tabs styles */
-import { defaultFocus } from './buttons';
+import { defaultFocus } from '../Button/Buttons.styles';
 
 const wrapper = {
   width: '100%',
