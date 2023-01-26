@@ -5,12 +5,27 @@ import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '../Text';
 import AccordionGroup from '../AccordionGroup';
-import { OverlayPanel, TextField } from '../../index';
+import { OverlayPanel, TextField, Box, Menu, Button, PopoverMenu } from '../../index';
 
 const testId = 'test-accordion';
 const defaultProps = {
   'data-testid': testId,
 };
+
+const items = [
+  {
+    key: 'identityProvider',
+    label: 'some label1',
+    text: 'empty',
+  },
+  {
+    key: 'identityProvider1',
+    label: 'some label2',
+    text: 'empty',
+  },
+];
+
+const selectedAccordionKeys = ['identityProvider', 'identityProvider1'];
 
 const getComponent = (props = {}) => render((
   <AccordionGroup {...defaultProps} {...props} >
@@ -55,6 +70,72 @@ const getComponentWithInput = (props = {}) => render((
       <input data-testid="testInput" />
     </Item>
   </AccordionGroup>
+));
+
+const getComponentWithPopover = () => render((
+  <Box isRow alignItems="center" justifyContent="space-between" width="50%">
+    <PopoverMenu>
+      <Button data-testid="popoverbutton" >Click me</Button>
+      <Menu onAction={() => {}}>
+        <Item key="edit">Edit</Item>
+        <Item key="duplicate">Duplicate</Item>
+        <Item key="delete" textValue="delete">
+          <Text color="critical.bright">Delete</Text>
+        </Item>
+      </Menu>
+    </PopoverMenu>
+    <AccordionGroup
+      items={items}
+      defaultExpandedKeys={selectedAccordionKeys}
+    >
+      {item => (
+        <Item key={item.key} textValue={item.label} label={item.label}>
+          {item.text}
+        </Item>
+      )}
+    </AccordionGroup>
+  </Box>
+));
+
+const getComponentWithMultipleAccordion = () => render((
+  <Box alignItems="center" justifyContent="space-between" width="50%">
+    <AccordionGroup
+      defaultExpandedKeys={['customConfiguration']}
+    >
+      <Item
+        key="customConfiguration"
+        label="connection.configuration"
+        regionProps={{ pt: 'sm' }}
+        containerProps={{ mb: 0 }}
+        textValue="connection.configuration"
+      >
+        <form data-id="connection-configuration-custom-form">
+          <Box>
+            <Text>other text</Text>
+            <Text>another text</Text>
+          </Box>
+        </form>
+      </Item>
+    </AccordionGroup>
+    <AccordionGroup
+      defaultExpandedKeys={['customConfiguration1']}
+    >
+      <Item
+        key="customConfiguration"
+        label="connection.configuration1"
+        regionProps={{ pt: 'sm' }}
+        containerProps={{ mb: 0 }}
+        textValue="connection.configuration1"
+      >
+        <form data-id="connection-configuration-custom-form">
+          <Box>
+            <Text>other text1</Text>
+            <Text>another text1</Text>
+          </Box>
+        </form>
+      </Item>
+    </AccordionGroup>
+  </Box>
 ));
 
 // Need to be added to each test file to test accessibility using axe.
@@ -200,4 +281,34 @@ test('items do not automatically expand if wrapped in an open OverlayPanel', () 
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
   expect(selectedItem).not.toHaveAttribute('aria-expanded', 'true');
+});
+
+test('accordion is compatible with another component that uses an overlay', () => {
+  getComponentWithPopover();
+  const buttons = screen.getAllByRole('button');
+  const popoverButton = screen.getByTestId('popoverbutton');
+  userEvent.click(popoverButton);
+  const selectedItem = buttons[0];
+  expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+  userEvent.click(selectedItem);
+  expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(selectedItem);
+  expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+});
+
+test('accordion works if there are multiple, controlled on the same implementation', () => {
+  getComponentWithMultipleAccordion();
+  const buttons = screen.getAllByRole('button');
+  const selectedItem = buttons[0];
+  const secondSelectedItem = buttons[1];
+  expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+  userEvent.click(selectedItem);
+  expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(selectedItem);
+  expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
+  expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(secondSelectedItem);
+  expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'true');
+  userEvent.click(secondSelectedItem);
+  expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'false');
 });

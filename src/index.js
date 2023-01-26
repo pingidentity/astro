@@ -34,8 +34,9 @@ export * from './components/Bracket';
 export { default as Breadcrumbs } from './components/Breadcrumbs';
 export * from './components/Breadcrumbs';
 
-export { default as Bulletin } from './components/Bulletin';
-export * from './components/Bulletin';
+export { default as Bulletin } from './components/Callout';
+export { default as Callout } from './components/Callout';
+export * from './components/Callout';
 
 export { default as Button } from './components/Button';
 export * from './components/Button';
