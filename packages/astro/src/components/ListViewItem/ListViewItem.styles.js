@@ -14,7 +14,7 @@ const container = {
     cursor: 'pointer',
   },
   '&.is-focused': {
-    boxShadow: 'inset 0 0 5px #5873bdbf',
+    boxShadow: '0 0 0 1px inset #D033FF',
   },
   '&.has-separator': {
     borderBottom: '1px solid',
@@ -22,6 +22,35 @@ const container = {
   },
 };
 
+const linkedViewContainer = {
+  ...container,
+  minHeight: '75px',
+  height: '76px',
+  '&.has-inset-separator': {
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      width: 'calc(100% - 43px)',
+      right: 0,
+      bottom: 0,
+      borderBottom: '1px solid',
+      borderBottomColor: 'line.hairline',
+    },
+    '&.is-focused': {
+      '&:after': {
+        content: '""',
+        position: 'absolute',
+        width: 'calc(100% - 43px)',
+        right: 0,
+        bottom: 0,
+        borderBottom: '1px solid',
+        borderBottomColor: 'focus',
+      },
+    },
+  },
+};
+
 export default {
   container,
+  linkedViewContainer,
 };

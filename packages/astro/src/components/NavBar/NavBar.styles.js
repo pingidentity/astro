@@ -17,11 +17,10 @@ const itemHeaderContainer = {
   flexGrow: 1,
   alignItems: 'center',
   maxWidth: '230px',
-  padding: '10px 15px 10px 15px',
+  py: 'sm',
+  px: 'md',
   cursor: 'pointer',
   minHeight: '40px',
-  fontWeight: 0,
-  fontSize: '16px',
   '&.is-selected': {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
@@ -29,10 +28,34 @@ const itemHeaderContainer = {
 };
 
 const sectionContainer = {
-  pt: '10px',
+  pt: 'sm',
   height: '100%',
   maxHeight: '100%',
   overflowY: 'auto',
+  // these rules are for webkit browsers: chrome, safari, edge
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: '4px',
+  },
+  '&::-webkit-scrollbar': {
+    width: 10,
+  },
+  '&::-webkit-scrollbar-track': {
+    backgroundColor: 'accent.10',
+  },
+  // this is a newer standard that only ff supports for now
+  scrollbarColor: 'rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1)', // can't use theme values here, unfortunately
+  // different colors while hovering over the nav bar
+  '&:hover': {
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(255, 255, 255, 0.7)',
+      borderRadius: '4px',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'accent.5',
+    },
+    scrollbarColor: 'rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.2)',
+  },
 };
 
 const sectionBody = {
@@ -46,23 +69,23 @@ const itemButton = {
   cursor: 'pointer',
   borderRadius: 0,
   backgroundColor: 'transparent',
-  paddingTop: '5px',
-  paddingBottom: '5px',
+  paddingTop: 'sm',
+  paddingBottom: 'sm',
   display: 'block',
-  color: 'neutral.95',
-  fontSize: 'sm',
-  fontWeight: 1,
+  color: 'neutral.90',
+  fontSize: 'md',
+  fontWeight: 0,
   flexGrow: '1',
   width: '100%',
   textAlign: 'left',
-  lineHeight: '16px',
   whiteSpace: 'break-spaces',
   overflowWrap: 'break-word',
   maxWidth: '100%',
   wordWrap: 'break-word',
   wordBreak: 'break-word',
   '&.is-focused': {
-    ...defaultFocus,
+    outline: '1px solid',
+    outlineColor: 'focus',
   },
   '&.is-hovered': {
     bg: 'accent.10',
@@ -78,9 +101,9 @@ const itemButton = {
 
 const subtitle = {
   ml: 'md',
-  mb: '15px',
-  fontWeight: 3,
-  fontSize: '11px',
+  my: 'sm',
+  fontWeight: 1,
+  fontSize: 'sm',
   color: 'accent.80',
   zIndex: '100',
 };
@@ -89,11 +112,14 @@ const subtitle = {
 const headerText = {
   ...wordWrap,
   whiteSpace: 'break-spaces',
-  lineHeight: '13px',
-  fontSize: '13px',
+  lineHeight: 1,
+  fontSize: 'md',
   fontWeight: 1,
   maxWidth: '150px',
-  color: 'white',
+  color: 'neutral.95',
+  '.is-selected &': {
+    color: 'white',
+  },
 };
 
 const headerNav = {
@@ -126,7 +152,8 @@ const headerNav = {
 
 const item = {
   ...headerNav,
-  padding: '10px 15px 10px 15px',
+  py: 'sm',
+  px: 'md',
   '&.is-selected': {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
@@ -138,7 +165,7 @@ const sectionButton = {
   width: '100%',
   '&.is-focused': {
     outline: '1px solid',
-    outlineColor: '#D033FF',
+    outlineColor: 'focus',
   },
   '&.is-hovered': {
     backgroundColor: 'accent.10',

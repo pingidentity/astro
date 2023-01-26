@@ -2,7 +2,7 @@ import { defaultFocus } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
 import { hintButton } from '../HelpHint/HelpHint.styles';
-import { chipDeleteButton } from '../Badge/Badge.styles';
+import { chipDeleteButton, chipWithSlotDeleteButton, chipDeleteStandard } from '../Badge/Badge.styles';
 import { modalCloseButton } from '../Modal/Modal.styles';
 import { messageCloseButton } from '../Messages/Message.styles';
 import { tooltipWithButton } from '../TooltipTrigger/Tooltip.styles';
@@ -147,6 +147,8 @@ export default {
   base,
   bidirectional,
   chipDeleteButton,
+  chipDeleteStandard,
+  chipWithSlotDeleteButton,
   copyButton,
   hintButton: { ...base, ...hintButton },
   inverted,

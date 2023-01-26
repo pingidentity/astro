@@ -1,3 +1,5 @@
+import { focusWithCroppedOutline } from '../Button/Buttons.styles';
+
 const wrapper = {
   display: 'flex',
   border: '1px dashed',
@@ -35,7 +37,7 @@ const button = {
     '& span': { textDecoration: 'underline' },
   },
   '&.is-focused': {
-    boxShadow: 'focus',
+    ...focusWithCroppedOutline,
   },
 };
 

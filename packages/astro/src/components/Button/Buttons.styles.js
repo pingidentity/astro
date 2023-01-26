@@ -37,8 +37,15 @@ const defaultHover = {
 
 export const defaultFocus = {
   outline: '1px solid',
-  outlineColor: 'active',
-  outlineOffset: '4px',
+  outlineColor: 'focus',
+  outlineOffset: '2px',
+};
+
+export const focusWithCroppedOutline = {
+  boxShadow: 'none',
+  outline: '1px solid',
+  outlineColor: 'focus',
+  outlineOffset: '1px',
 };
 
 const primary = {
@@ -73,6 +80,9 @@ const success = {
   border: '1px solid',
   borderColor: 'success.bright',
   color: 'white',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
 };
 
 const critical = {
@@ -82,6 +92,9 @@ const critical = {
   border: '1px solid',
   borderColor: 'critical.bright',
   color: 'white',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
 };
 
 const inline = {
@@ -138,7 +151,7 @@ export const text = {
     textDecoration: 'underline',
   },
   '&.is-focused': {
-    ...defaultFocus,
+    ...focusWithCroppedOutline,
   },
 };
 
@@ -180,6 +193,9 @@ export const link = {
   '&.is-current': {
     cursor: 'default',
     color: 'text.primary',
+  },
+  '&.is-focused': {
+    ...focusWithCroppedOutline,
   },
 };
 

@@ -1,4 +1,4 @@
-import { focusWithCroppedOutline } from './buttons';
+import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 const app = {
   color: 'active',

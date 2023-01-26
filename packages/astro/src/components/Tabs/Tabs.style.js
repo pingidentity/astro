@@ -1,5 +1,5 @@
 import { quiet } from '../Button/Buttons.styles';
-import { focusWithCroppedOutline } from './buttons';
+import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 export const tab = {
   pt: 10,
