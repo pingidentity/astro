@@ -3,7 +3,7 @@ import { Item } from 'react-stately';
 
 import { useOverlayPanelState } from '../../hooks';
 import OverlayPanel from './OverlayPanel';
-import { OverlayProvider, Box, Text, List, ListItem, Separator, Messages, Button } from '../../index';
+import { OverlayProvider, Box, Text, ListView, Messages, Button } from '../../index';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 export default {
@@ -129,6 +129,19 @@ export const InnerPanel = ({ ...args }) => {
     </>
   );
 
+  const listItems = [
+    {
+      key: 'form1',
+      name: 'Form 1',
+      id: '1',
+    },
+    {
+      key: 'form2',
+      name: 'Form 2',
+      id: '2',
+    },
+  ];
+
   const outer = (
     // should have higher z-index applied
     <>
@@ -146,16 +159,13 @@ export const InnerPanel = ({ ...args }) => {
             <Text pt="md" mb="24px">
               Children render here.
             </Text>
-            <List>
-              <ListItem>
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 1</Text>
-              </ListItem>
-              <Separator margin="0" />
-              <ListItem title="Form 2">
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 2</Text>
-              </ListItem>
-              <Separator margin="0" />
-            </List>
+            <ListView items={listItems} >
+              {item => (
+                <Item key={item.name} textValue={item.name} data-id={item.key}>
+                  <Text variant="itemTitle">{item.name}</Text>
+                </Item>
+              )}
+            </ListView>
             <br />
             <Button onPress={toggleMessagesOpen}>Toggle Messages</Button>
             <br />

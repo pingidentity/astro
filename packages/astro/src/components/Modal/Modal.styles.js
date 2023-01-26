@@ -29,21 +29,12 @@ const content = {
   maxWidth: '400px',
   boxShadow: 'standard',
   borderRadius: 3,
-  '.is-dark-mode &': {
-    color: 'white',
-    bg: 'accent.5',
-  },
 };
-
-const dark = { ...container };
 
 const title = {
   ...text.title,
   mr: 'sm',
   fontWeight: 3,
-  '.is-dark-mode &': {
-    color: 'white',
-  },
 };
 
 export const modalCloseButton = {
@@ -59,7 +50,6 @@ export default {
   closeIcon,
   container,
   content,
-  dark,
   title,
   modalCloseButton,
 };
