@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/branding-themes@0.22.4...@pingux/branding-themes@0.22.5) (2023-01-26)
+
+**Note:** Version bump only for package @pingux/branding-themes
+
+
+
+
+
 ## [0.22.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/branding-themes@0.22.4-alpha.12...@pingux/branding-themes@0.22.4) (2022-03-22)
 
 **Note:** Version bump only for package @pingux/branding-themes
