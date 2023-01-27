@@ -153,19 +153,6 @@ export const InnerPanel = ({ ...args }) => {
     </>
   );
 
-  const listItems = [
-    {
-      key: 'form1',
-      name: 'Form 1',
-      id: '1',
-    },
-    {
-      key: 'form2',
-      name: 'Form 2',
-      id: '2',
-    },
-  ];
-
   const outer = (
     // should have higher z-index applied
     <>
@@ -183,13 +170,16 @@ export const InnerPanel = ({ ...args }) => {
             <Text pt="md" mb="24px">
               Children render here.
             </Text>
-            <ListView items={listItems} >
-              {item => (
-                <Item key={item.name} textValue={item.name} data-id={item.key}>
-                  <Text variant="itemTitle">{item.name}</Text>
-                </Item>
-              )}
-            </ListView>
+            <List>
+              <ListItem>
+                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 1</Text>
+              </ListItem>
+              <Separator margin="0" />
+              <ListItem title="Form 2">
+                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 2</Text>
+              </ListItem>
+              <Separator margin="0" />
+            </List>
             <br />
             <Button onPress={toggleMessagesOpen}>Toggle Messages</Button>
             <br />
