@@ -6041,128 +6041,6 @@ exports[`single fields select field 1`] = `
   font-family: "Helvetica Neue",Helvetica,sans-serif;
 }
 
-<form
-    autocomplete="off"
-    class="form"
-    novalidate=""
-  >
-    <div
-      class=" emotion-0 emotion-1"
-      display="flex"
-    >
-      <div
-        class="field-container has-value emotion-2 emotion-1"
-        display="flex"
-      >
-        <label
-          class="is-default emotion-4 emotion-5"
-          display="flex"
-        >
-          Label
-        </label>
-        <div
-          aria-hidden="true"
-          style="border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;"
-        >
-          <input
-            disabled=""
-            style="font-size: 16px;"
-            tabindex="0"
-            type="text"
-          />
-          <label>
-            Label
-            <select
-              disabled=""
-              size="2"
-              tabindex="-1"
-            >
-              <option />
-              <option
-                value="foo"
-              >
-                foo
-              </option>
-              <option
-                value="bar"
-              >
-                bar
-              </option>
-            </select>
-          </label>
-        </div>
-        <div
-          class="is-default emotion-6 emotion-1"
-          display="flex"
-        >
-          <button
-            aria-expanded="false"
-            aria-haspopup="listbox"
-            class="is-default emotion-8"
-            role="button"
-            type="button"
-          >
-            <span
-              class=" emotion-9 emotion-1"
-              display="flex"
-            >
-              <span
-                class="emotion-11 emotion-12"
-              >
-                Select
-              </span>
-            </span>
-            <span
-              aria-hidden="true"
-              class=" emotion-13 emotion-1"
-              display="flex"
-            >
-              <svg
-                class="mdi-icon  emotion-15 emotion-1"
-                display="flex"
-                fill="currentColor"
-                height="20"
-                viewBox="0 0 24 24"
-                width="20"
-              >
-                <path
-                  d="M7,10L12,15L17,10H7Z"
-                />
-              </svg>
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <button
-      class=" emotion-17"
-      role="button"
-      type="submit"
-    >
-      Submit
-    </button>
-  </form>
-</DocumentFragment>
-`;
-
-exports[`single fields select field with default 1`] = `
-<DocumentFragment>
-  .emotion-0 {
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-top: 15px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
 .emotion-8 listBoxPopup search::-ms-expand {
   display: none;
 }
@@ -7999,6 +7877,7 @@ exports[`single fields select field with default 1`] = `
               size="2"
               tabindex="-1"
             >
+              <option />
               <option
                 value="foo"
               >
