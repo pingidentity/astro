@@ -1,4 +1,4 @@
-import { base } from '../Button/Buttons.styles';
+import { base, defaultFocus } from '../Button/Buttons.styles';
 
 const hoveredPreview = {
   wrapper: {

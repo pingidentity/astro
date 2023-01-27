@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Badge as ThemeUIBadge } from 'theme-ui';
 import { BadgeContext } from '../../context/BadgeContext';
-import Text from '../Text/Text';
+import { Box, Text } from '../../';
 import * as colors from '../../styles/colors';
 
 /**
@@ -13,35 +13,66 @@ import * as colors from '../../styles/colors';
 
 const Badge = React.forwardRef((props, ref) => {
   const {
+    align,
     bg,
     children,
+    isUppercase,
+    label,
+    sx,
+    slots,
     textColor,
     textProps,
-    label,
-    align,
-    isUppercase,
+    variant,
+    ...others
   } = props;
 
-  const sx = {
-    ...isUppercase && {
+  const badgeSx = {
+    ...(isUppercase && {
       paddingBottom: '3px',
-    },
+    }),
+    ...(align && {
+      position: 'absolute',
+      [align]: '15px',
+    }),
+    ...sx,
   };
 
-  if (align) {
-    sx.position = 'absolute';
-    sx[align] = '15px';
-  }
+  const badgeProps = {
+    bg,
+    isUppercase,
+    label,
+    ref,
+    textColor,
+    sx: badgeSx,
+    ...others,
+  };
+
+  // The following is to correct a visual regression released in 1.39.0 https://jira.pingidentity.com/browse/UIP-5907.
+  // TODO : Remove in Astro V2 with theme remapping roll out.
+  const oldVariantPaths = [
+    'boxes.countChip',
+    'boxes.countNeutral',
+    'boxes.itemChipWithSlot',
+    'collapsiblePanel.collapsiblePanelBadge',
+    'boxes.environmentChip',
+    'boxes.readOnlyChip',
+    'boxes.selectedItemChip',
+  ];
+
+  const fixedVariant = (oldVariantPaths.includes(props.variant)) ? `variants.${props.variant}` : props.variant;
 
   return (
     <BadgeContext.Provider value={{ bg }}>
       <ThemeUIBadge
         isRow
-        variant="baseBadge"
-        sx={sx}
-        ref={ref}
-        {...props}
+        {...badgeProps}
+        variant={props.variant ? fixedVariant : 'variants.boxes.chip'}
       >
+        {slots?.leftIcon &&
+        <Box mr="xs">
+          {slots.leftIcon}
+        </Box>
+        }
         <Text
           variant="label"
           color={textColor}
@@ -61,14 +92,23 @@ Badge.propTypes = {
   textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** The background color of the badge. */
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted into left side of the chip. */
+    leftIcon: PropTypes.node,
+  }),
   /** The label of the badge. */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Props object that is spread directly into the textfield. */
+  /** Props object that is spread directly into the text. */
   textProps: PropTypes.shape({}),
   /** When true, display badge label as uppercase. */
   isUppercase: PropTypes.bool,
   /** Alignment of badge relative to parent container. */
   align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /** JSX styling that is passed into the component. */
+  sx: PropTypes.shape({}),
+  /** The variant of the badge */
+  variant: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 Badge.defaultProps = {

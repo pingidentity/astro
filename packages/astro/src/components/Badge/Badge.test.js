@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Badge from './Badge';
 import Earth from 'mdi-react/EarthIcon';
+import Badge from './Badge';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import axeTest from '../../utils/testUtils/testAxe';

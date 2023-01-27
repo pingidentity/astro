@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
