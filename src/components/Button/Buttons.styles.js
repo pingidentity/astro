@@ -160,29 +160,6 @@ export const quiet = {
   display: 'flex',
 };
 
-const danger = {
-  ...base,
-  display: 'inline-flex',
-  bg: 'white',
-  border: '1px solid',
-  borderColor: 'critical.bright',
-  color: 'critical.bright',
-  '&.is-hovered': {
-    ...defaultHover,
-    color: 'critical.bright',
-    borderColor: 'critical.bright',
-  },
-  '&.is-pressed': {
-    ...defaultActive,
-    bg: 'critical.bright',
-    borderColor: 'critical.bright',
-    color: 'white',
-  },
-  '&.is-focused': {
-    ...defaultFocus,
-  },
-};
-
 export const link = {
   ...text,
   lineHeight: 'unset',
@@ -282,7 +259,6 @@ const colorBlock = {
 
 export default {
   critical,
-  danger,
   default: {
     ...base,
     bg: 'white',
@@ -305,6 +281,5 @@ export default {
   primary,
   quiet,
   success,
-  text,
   colorBlock,
 };
