@@ -14,14 +14,12 @@ delete variants.INVERTED;
 // add designer approved variants for devs to use here
 const variantOptions = [
   'critical',
-  'danger',
   'default',
   'inline',
   'inlinePrimary',
   'link',
   'primary',
   'success',
-  'text',
 ];
 
 export default {
