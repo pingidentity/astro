@@ -1,0 +1,46 @@
+<Meta title="Components/AccordionGridGroup/AccordionGridGroup" />
+
+# AccordionGridGroup
+
+The AccordionGrid is a variation of the accordion component that allows children to be passed into the header and body of each item. AccordionGridItem is a composite component with two children:
+- The header controls the expansion of the body.
+- The body renders the content. 
+
+The purpose of this component is to allow keyboard interaction with children passed into the Body and Header.
+
+### Required components
+
+- Item: Component is exported within Astro but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+- Header
+- Body
+
+### Best practices
+
+AccordionGridGroup should:
+- be used when passing complex or focusable components into an accordion component.
+- have short and concise labels.
+
+AccordionGridGroup shouldn’t:
+- be used for simple implementation.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Accordion](https://www.w3.org/WAI/ARIA/apg/example-index/accordion/accordion) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+- AccordionGrid is focusable using the Tab key and all focusable components within follow the page Tab sequence.
+- Pressing Space or Enter when the header panel is focused toggles the component.
+- Shift + Tab moves focus to the previous focusable item.
+- Components within are accessible via arrow keys.
+
+#### Screen readers
+
+The accordion grid item header button utilizes **`aria-selected`** to indicate the selection state of the row. The header button utilizes **`aria-expanded`** to indicate the expansion and collapse of the content. The **`aria-multiselectable`** attribute indicates that the user can toggle numerous items from the grid. The grid utilizes **`aria-label`** to give an accessible name to itself.
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-selected` | row | AccordionGridItem |
+| `aria-expanded` | row | AccordionGridItem |
+| `aria-multiselectable` | grid | Box(AccordionGrid) |
+| `aria-label` | grid | Box(AccordionGrid) |

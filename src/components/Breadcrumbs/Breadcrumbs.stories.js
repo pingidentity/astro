@@ -3,6 +3,8 @@ import { action } from '@storybook/addon-actions';
 import { Item } from '@react-stately/collections';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import Breadcrumbs from './Breadcrumbs';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import BreadcrumbsReadme from './Breadcrumbs.mdx';
 
 export default {
   title: 'Components/Breadcrumbs',
@@ -12,6 +14,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <BreadcrumbsReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
   argTypes: {

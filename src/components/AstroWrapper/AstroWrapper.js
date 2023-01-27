@@ -36,10 +36,6 @@ export const GlobalStyles = () => (
 );
 
 /**
- * The main wrapper for the Astro application.
- * The AstroWrapper provides a standard background,
- * some global styles, and the Astro theme by default.
- *
  * _Note: For UI Library and Astro CSS conflicts, we supply a theme override located at_
  * `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`
  */
