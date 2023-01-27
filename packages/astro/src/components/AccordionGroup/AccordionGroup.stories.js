@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Item } from '@react-stately/collections';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import Text from '../Text';
 import Button from '../Button';
 import TextField from '../TextField';
 import AccordionGroup from '.';
+import AccordionReadme from './AccordionGroup.mdx';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button>Hi</Button> },
@@ -25,6 +27,12 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
+      page: () => (
+        <>
+          <AccordionReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

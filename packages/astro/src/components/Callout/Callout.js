@@ -21,12 +21,7 @@ const defaultIconProps = {
 };
 
 /**
- *Callout is composed of the Box, Icon, and Text components. It's a persistent component
- that should be placed at the top of panels or above related content. If the Callouts
- status is error or warning, the text should include a direct link to instructions on resolving the
- issue or error.
- *
- *Please note, Callout is a static component, the [Messages](./?path=/docs/components-messages)
+ Please note, Callout is a static component, the [Messages](./?path=/docs/components-messages)
  component is recommended if you need to interrupt and notify users of successful/failed actions
  or give warnings of unexpected events.
  */

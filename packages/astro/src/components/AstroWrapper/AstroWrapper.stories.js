@@ -1,9 +1,21 @@
 import React from 'react';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { AstroWrapper, Button, Text } from '../../index';
+import AstroWrapperReadme from './AstroWrapper.mdx';
 
 export default {
   title: 'Components/AstroWrapper',
   component: AstroWrapper,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <AstroWrapperReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   decorators: [
     Story => (
       <div>
