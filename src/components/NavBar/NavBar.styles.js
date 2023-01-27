@@ -1,5 +1,5 @@
 import accordionGrid from '../AccordionGridGroup/AccordionGrid.styles';
-import { defaultFocus, quiet } from '../Button/Buttons.styles';
+import { quiet } from '../Button/Buttons.styles';
 import { wordWrap } from '../Text/Text.styles';
 
 const container = {

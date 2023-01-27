@@ -1,7 +1,9 @@
 import React from 'react';
 import { axe } from 'jest-axe';
+import userEvent from '@testing-library/user-event';
+
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
-import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../../index';
+import { EnvironmentBreadcrumb, Item, OverlayProvider, Section } from '../../index';
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
 
 const testEnvBreadcrumb = 'test-env-breadcrumb';

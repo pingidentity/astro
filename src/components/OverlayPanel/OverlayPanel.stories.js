@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
 import ArrowTopRightBottomLeft from 'mdi-react/ArrowTopRightBottomLeftIcon';
 import ArrowCollapse from 'mdi-react/ArrowCollapseIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
