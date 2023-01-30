@@ -66,7 +66,7 @@ const Badge = React.forwardRef((props, ref) => {
       <ThemeUIBadge
         isRow
         {...badgeProps}
-        variant={props.variant ? fixedVariant : 'variants.boxes.chip'}
+        variant={props.variant ? fixedVariant : 'baseBadge'}
       >
         {slots?.leftIcon &&
         <Box mr="xs">
