@@ -143,7 +143,7 @@ function BadgeInputTall({ label, text, id }) {
     return (
         <Box>
             <Text variant="bodyWeak" mb={5}>{label}</Text>
-            <Box variant="forms.input.container" width="337px">
+            <Box variant="forms.input.fieldControlWrapper" width="337px">
                 <Box variant="forms.input" height="40px" p="0" justifyContent="center" id={id}>
                     <Popover content="steps.registration.formData.user" placement="bottom">
                         <Badge
@@ -168,7 +168,7 @@ function BadgeInputShort({ label, text, border, badgeWidth, color, id }) {
     return (
         <Box isRow alignItems="center" mt={10}>
             <Text variant="bodyWeak" mb={5} width={70}>{label}</Text>
-            <Box variant="forms.input.container" width="267px">
+            <Box variant="forms.input.fieldControlWrapper" width="267px">
                 <Box variant="forms.input" height="28px" p="0" justifyContent="center" id={id}>
                     <Popover content="steps.registration.formData.user" placement="bottom">
                         <Badge
@@ -196,7 +196,7 @@ function TextInputShort({ label, id }) {
     return (
         <Box isRow alignItems="center" mt={10}>
             <Text variant="bodyWeak" mb={5} width={70}>{label}</Text>
-            <Box variant="forms.input.container" width="267px" id={id}>
+            <Box variant="forms.input.fieldControlWrapper" width="267px" id={id}>
                 <Box variant="forms.input" height="28px" p="0" justifyContent="center">
                     <Popover content="steps.registration.formData.user" placement="bottom">
                         <Text ml="md">&quot;Denver&quot;</Text>

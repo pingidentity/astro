@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { ColorField, OverlayProvider } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -50,17 +51,8 @@ export default {
       },
       defaultValue: { sx: { marginLeft: 50 } },
     },
-    controlProps: {
-      control: {
-        type: 'none',
-      },
-    },
-    labelProps: {
-      control: {
-        type: 'none',
-      },
-    },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

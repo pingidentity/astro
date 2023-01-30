@@ -7,6 +7,7 @@ import { useSearchFieldState } from 'react-stately';
 
 import { Box, Icon, IconButton, Input, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useField, usePropWarning } from '../../hooks';
 
 
@@ -48,7 +49,8 @@ const SearchField = forwardRef((props, ref) => {
   }, state, searchRef);
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     ...props,
@@ -72,8 +74,8 @@ const SearchField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
-      <Box variant="forms.search.container">
-        <Input ref={searchRef} pl={40} pr={40} {...fieldControlProps} variant="forms.input.search" />
+      <Box variant="forms.search.wrapper" {...fieldControlWrapperProps} >
+        <Input ref={searchRef} pl={40} pr={40} {...fieldControlInputProps} />
         {
           icon &&
           <Icon
@@ -185,13 +187,8 @@ SearchField.propTypes = {
    * (value: string) => void
    */
   onChange: PropTypes.func,
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
   /** Props object that is spread into the icon element. */
   iconProps: PropTypes.shape({}),
-  /** Props object that is spread into the label element. */
-  labelProps: PropTypes.shape({}),
 
 
   // NOTE: unsurfaced useSearchField / useSearchFieldState props listed below
@@ -275,6 +272,7 @@ SearchField.propTypes = {
    */
   onInput: PropTypes.func,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 SearchField.defaultProps = {

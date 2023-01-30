@@ -7,15 +7,17 @@ import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttr
 import { useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import useColumnStyles from '../../hooks/useColumnStyles';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a text input, label, and helper text for a complete, form-ready solution.
  */
 const TextField = forwardRef((props, ref) => {
-  const { helperText, slots, status, wrapperProps } = props;
+  const { helperText, slots, status } = props;
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField(props);
   const inputRef = useRef();
@@ -31,13 +33,13 @@ const TextField = forwardRef((props, ref) => {
   const helperTextId = uuid();
 
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
+    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
-      <Box variant="forms.input.container" className={fieldControlProps.className} {...wrapperProps}>
+      <Box variant="forms.input.fieldControlWrapper" {...fieldControlWrapperProps}>
         {slots?.beforeInput}
         <Input
           ref={inputRef}
-          {...fieldControlProps}
+          {...fieldControlInputProps}
           aria-invalid={status === 'error' && true}
           aria-describedby={helperText && helperTextId}
         />
@@ -116,15 +118,10 @@ TextField.propTypes = {
   status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
   type: PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** Props object that is spread directly into the input wrapper element. */
   wrapperProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 TextField.defaultProps = {
