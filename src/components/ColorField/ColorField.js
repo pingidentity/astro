@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from 'react';
 import PropTypes from 'prop-types';
-import { FocusScope, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
+import { FocusScope, useOverlayPosition, useOverlayTrigger, useVisuallyHidden, mergeProps } from 'react-aria';
 import { ChromePicker } from 'react-color';
 import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
@@ -13,6 +13,7 @@ import { useColorFieldState } from '@react-stately/color';
 
 import { Box, Button, Input, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import PopoverContainer from '../PopoverContainer';
 import statuses from '../../utils/devUtils/constants/statuses';
 import useField from '../../hooks/useField';
@@ -64,7 +65,12 @@ const ColorField = forwardRef((props, ref) => {
 
   const { visuallyHiddenProps } = useVisuallyHidden();
 
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
     ...nonAriaProps,
     labelProps: {
       ...labelProps,
@@ -110,11 +116,11 @@ const ColorField = forwardRef((props, ref) => {
         onPress={handleButtonPress}
         ref={triggerRef}
         variant="forms.colorField.container"
-        {...triggerProps}
-        {...ariaProps}
-        {...buttonProps}
+        {...mergeProps(buttonProps, ariaProps, triggerProps)}
       />
-      <Input {...visuallyHiddenProps} {...fieldControlProps} ref={colorRef} />
+      <Box {...fieldControlWrapperProps} >
+        <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
+      </Box>
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
       )}
@@ -159,13 +165,8 @@ ColorField.propTypes = {
   value: PropTypes.string,
   /** Props object that is spread into the Button element. */
   buttonProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the root (top-level) Box component. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread into the label element. */
-  labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 ColorField.defaultProps = {

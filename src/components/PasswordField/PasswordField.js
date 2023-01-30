@@ -16,6 +16,7 @@ import {
   RequirementsList,
 } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import * as hooks from '../../hooks';
 
@@ -45,11 +46,12 @@ const PasswordField = forwardRef((props, ref) => {
 
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = hooks.useField({ status, ...others });
 
-  const { isFocused } = fieldControlProps;
+  const { isFocused } = fieldControlInputProps;
 
   const inputRef = useRef();
   const popoverRef = useRef();
@@ -100,7 +102,7 @@ const PasswordField = forwardRef((props, ref) => {
     ...overlayProps.style,
   };
 
-  const { classNames } = hooks.useStatusClasses(fieldControlProps.className, {
+  const { classNames } = hooks.useStatusClasses(fieldControlWrapperProps.className, {
     'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
 
@@ -118,14 +120,14 @@ const PasswordField = forwardRef((props, ref) => {
 
   return (
     <>
-      <Box variant="forms.input.wrapper" {...fieldContainerProps} >
+      <Box variant="forms.input.fieldContainer" {...fieldContainerProps} >
         <Label {...fieldLabelProps} />
-        <Box variant="forms.input.container" isRow className={classNames}>
-          <Input ref={inputRef} {...fieldControlProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
+        <Box variant="forms.input.fieldControlWrapper" isRow {...fieldControlWrapperProps} className={classNames}>
+          <Input ref={inputRef} {...fieldControlInputProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
           <Box variant="forms.input.containedIcon">
             <IconButton
               aria-label={toggleShowPasswordAriaLabel}
-              isDisabled={fieldControlProps.disabled}
+              isDisabled={fieldControlInputProps.disabled}
               onPress={handleToggleShowPassword}
               size={28}
             >
@@ -218,12 +220,6 @@ PasswordField.propTypes = {
   status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
   type: PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** @ignore Prop that allows testing of the icon button. */
   viewHiddenIconTestId: PropTypes.string,
   /** @ignore Prop that allows testing of the icon button. */
@@ -231,6 +227,7 @@ PasswordField.propTypes = {
   /** Array of Requirements and their status. */
   requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 PasswordField.defaultProps = {

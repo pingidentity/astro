@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import CheckboxField from './CheckboxField';
 import Link from '../Link';
 import Text from '../Text';
@@ -55,22 +56,8 @@ export default {
     isIndeterminate: {},
     isDefaultSelected: {},
     isSelected: {},
-    containerProps: {
-      control: {
-        type: 'none',
-      },
-    },
-    controlProps: {
-      control: {
-        type: 'none',
-      },
-    },
-    labelProps: {
-      control: {
-        type: 'none',
-      },
-    },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

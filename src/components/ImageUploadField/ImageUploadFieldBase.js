@@ -24,7 +24,12 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
     isMenuOpen,
     status,
   } = props;
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
     ...omit(props, ['onRemove']),
   });
   const labelRef = useRef();
@@ -41,16 +46,18 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
       <PopoverMenu isOpen={isMenuOpen} onOpenChange={handleOpenMenuChange}>
         {children}
       </PopoverMenu>
-      <Input
-        {...fieldControlProps}
-        {...visuallyHiddenProps}
-        accept={acceptableInputTypes}
-        data-testid="image-upload-input"
-        onChange={handleInputChange}
-        ref={inputRef}
-        type="file"
-        value=""
-      />
+      <Box {...fieldControlWrapperProps} >
+        <Input
+          {...fieldControlInputProps}
+          {...visuallyHiddenProps}
+          accept={acceptableInputTypes}
+          data-testid="image-upload-input"
+          onChange={handleInputChange}
+          ref={inputRef}
+          type="file"
+          value=""
+        />
+      </Box>
       {!isImageType && (
         <FieldHelperText status={statuses.DEFAULT}>{fileName}</FieldHelperText>
       )}

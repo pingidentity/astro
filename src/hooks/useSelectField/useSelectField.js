@@ -95,7 +95,8 @@ const useSelectField = (props, ref) => {
 
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     ...props,
@@ -202,7 +203,8 @@ const useSelectField = (props, ref) => {
   return {
     columnStyleProps,
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
     isLoadingInitial,
     listBoxRef,

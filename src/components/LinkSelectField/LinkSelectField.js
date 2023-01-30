@@ -6,6 +6,7 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 
 import { Box, Button, Loader, Icon, Text } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { usePropWarning, useSelectField } from '../../hooks';
 import SelectFieldBase from '../SelectFieldBase';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -33,7 +34,7 @@ const LinkSelectField = forwardRef((props, ref) => {
     status: status === statuses.DEFAULT ? null : status,
   }, ref);
   const {
-    fieldControlProps,
+    fieldControlInputProps,
     isLoadingInitial,
     state,
     triggerProps,
@@ -42,7 +43,7 @@ const LinkSelectField = forwardRef((props, ref) => {
 
   const trigger = (
     <Button
-      className={fieldControlProps.className}
+      className={fieldControlInputProps.className}
       ref={triggerRef}
       variant="link"
       tabIndex={isDisabled ? -1 : 0}
@@ -139,15 +140,7 @@ LinkSelectField.propTypes = {
    * (key: Key) => any
    */
   onSelectionChange: PropTypes.func,
-  /**
-   * Props object passed along to `useSelect` from React Aria, `useSelectState` from React Stately,
-   * and/or the visible button representation for the select input.
-   */
-  controlProps: PropTypes.shape({}),
-  /** Props object passed along to the root container as-is. */
-  containerProps: PropTypes.shape({}),
-  /** Props object passed along to the label as-is. */
-  labelProps: PropTypes.shape({}),
+  ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

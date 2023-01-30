@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { Image, ImageUploadField, OverlayProvider } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -72,6 +73,7 @@ export default {
       defaultValue: statuses.DEFAULT,
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

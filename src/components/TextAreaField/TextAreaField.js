@@ -7,6 +7,7 @@ import { Box, FieldHelperText, Label, TextArea } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -16,12 +17,13 @@ const TextAreaField = forwardRef((props, ref) => {
   const statusClasses = { isUnresizable };
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({ statusClasses, ...props });
 
   const containerRef = useRef();
-  const inputContainerRef = useRef();
+  const fieldControlWrapperRef = useRef();
   const labelRef = useRef();
   const labelWrapperRef = useRef();
   const slotContainer = useRef();
@@ -42,7 +44,7 @@ const TextAreaField = forwardRef((props, ref) => {
 
   /* istanbul ignore next */
   const resizeSlotContainer = () => {
-    inputContainerRef.current.style.width = textAreaRef.current.style.width;
+    fieldControlWrapperRef.current.style.width = textAreaRef.current.style.width;
   };
 
   const onResize = useCallback(() => {
@@ -87,14 +89,14 @@ const TextAreaField = forwardRef((props, ref) => {
   );
 
   return (
-    <Box variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
+    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
-      <Box isRow variant="forms.input.container" className={fieldControlProps.className} minWidth="40px" maxWidth="100%" ref={inputContainerRef}>
+      <Box isRow variant="forms.input.fieldControlWrapper" minWidth="40px" maxWidth="100%" ref={fieldControlWrapperRef} {...fieldControlWrapperProps} >
         <TextArea
           ref={textAreaRef}
           rows={rows}
           variant="forms.textarea.baseField"
-          {...fieldControlProps}
+          {...fieldControlInputProps}
           sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }}
           aria-invalid={status === 'error' && true}
           aria-describedby={helperText && helperTextId}
@@ -176,18 +178,13 @@ TextAreaField.propTypes = {
   rows: PropTypes.number,
   /** Determines the textarea status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** Provides a way to insert markup in specified places. */
   slots: PropTypes.shape({
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 TextAreaField.defaultProps = {

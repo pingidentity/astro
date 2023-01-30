@@ -26,7 +26,8 @@ const SelectFieldBase = forwardRef(({
   columnStyleProps,
   defaultText,
   fieldContainerProps,
-  fieldControlProps,
+  fieldControlInputProps,
+  fieldControlWrapperProps,
   fieldLabelProps,
   helperText,
   isLoadingInitial,
@@ -49,9 +50,9 @@ const SelectFieldBase = forwardRef(({
   const helperTextId = useMemo(() => uuid(), []);
 
   const defaultTrigger = (
-    <Box className={fieldControlProps.className} variant="forms.input.container">
+    <Box {...fieldControlWrapperProps} variant="forms.input.fieldControlWrapper">
       <Button
-        className={fieldControlProps.className}
+        className={fieldControlInputProps.className}
         ref={triggerRef}
         variant="forms.select"
         {...triggerProps}
@@ -84,7 +85,7 @@ const SelectFieldBase = forwardRef(({
   );
 
   return (
-    <Box ref={ref} variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
+    <Box ref={ref} variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       {/* Actual label is applied to the hidden select */}
       <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect
@@ -128,7 +129,7 @@ SelectFieldBase.propTypes = {
     sx: PropTypes.shape({}),
   }),
   /** Determines props that applied to control field. */
-  fieldControlProps: PropTypes.shape({
+  fieldControlInputProps: PropTypes.shape({
     className: PropTypes.string,
   }),
   /** Determines props that applied to label of field. */

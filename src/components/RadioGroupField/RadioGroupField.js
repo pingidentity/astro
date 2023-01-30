@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label } from '../../';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { useStatusClasses, usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { RadioContext } from '../RadioField';
@@ -108,6 +109,7 @@ RadioGroupField.propTypes = {
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 RadioGroupField.displayName = 'RadioGroupField';

@@ -2,7 +2,7 @@ export const clearButtonIcon = {
   color: 'neutral.40',
 };
 
-export const container = {
+export const wrapper = {
   position: 'relative',
   justifyContent: 'center',
   '> input::-webkit-search-cancel-button, > input::-webkit-search-decoration': {
@@ -18,6 +18,6 @@ export const icon = {
 
 export default {
   clearButtonIcon,
-  container,
+  wrapper,
   icon,
 };

@@ -19,7 +19,7 @@ const arrowsWrapper = {
   display: 'flex',
   justifyContent: 'center',
   position: 'relative',
-  ...input.container,
+  ...input.fieldContainer,
 };
 
 const arrows = {

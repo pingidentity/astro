@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Box, Input, FieldHelperText, Label, Loader } from '../../';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -48,7 +49,12 @@ const FileInputField = forwardRef(({
   useImperativeHandle(ref, () => inputRef.current);
 
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
     status,
     isDisabled,
     ...nonAriaProps,
@@ -158,11 +164,11 @@ const FileInputField = forwardRef(({
   }, [uploadedFiles, uploadedFilesImperative, isMultiple]);
 
   return (
-    <>
+    <Box fieldContainerProps={fieldContainerProps} >
       <Label {...fieldLabelProps} />
       <Box
         variant="forms.fileInputField.wrapper"
-        {...mergeProps(fieldContainerProps, nonAriaProps)}
+        {...mergeProps(fieldControlWrapperProps, nonAriaProps)}
         className={classNames}
         {...getRootProps()}
         // to pass accessibility test, this removes focusable dependents
@@ -171,7 +177,7 @@ const FileInputField = forwardRef(({
         <Input
           {...mergeProps(
             visuallyHiddenProps,
-            fieldControlProps,
+            fieldControlInputProps,
             getInputProps(),
           )}
           aria-label="File Input"
@@ -201,7 +207,7 @@ const FileInputField = forwardRef(({
       {helperText && (
         <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
       )}
-    </>
+    </Box>
   );
 });
 
@@ -272,6 +278,7 @@ FileInputField.propTypes = {
   /** These props will be spread to the field text component. */
   textProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 FileInputField.defaultProps = {

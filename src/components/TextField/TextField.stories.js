@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import TextField from '.';
 import { Box } from '../../';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { modes as labelModes } from '../Label/constants';
 import CopyButton from '../CopyText/CopyButton';
 import statuses from '../../utils/devUtils/constants/statuses.js';
@@ -40,6 +41,7 @@ export default {
       defaultValue: statuses.DEFAULT,
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

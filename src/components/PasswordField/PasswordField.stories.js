@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import PasswordField from '.';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
@@ -29,6 +30,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 
