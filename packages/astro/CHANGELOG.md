@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.40.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.40.0...@pingux/astro@1.40.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* [UIP-5926] CopyText: respect parent width ([6be0ee9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6be0ee9f68f10659ac4fc70229dbdbed5ded4201))
+* [UIP-5951] Remove empty sections in search results for EnvironmentBreadcrumb ([5d4563a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5d4563a293279d056918c8fbfe72f32ca505043e))
+* [UIP-5985][UIP-5989] Astro Accordion Fixes ([c4c6d1e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c4c6d1e1ae5f407010ddd1227865a5eb812e20a0))
+
+
+
+
+
 # [1.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.39.2...@pingux/astro@1.40.0) (2023-01-17)
 
 
