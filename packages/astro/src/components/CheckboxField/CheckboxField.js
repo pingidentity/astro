@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import { useCheckbox } from '@react-aria/checkbox';
 import { useToggleState } from '@react-stately/toggle';
+import { usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
@@ -33,6 +34,9 @@ const CheckboxField = forwardRef((props, ref) => {
     ...props,
     ...controlProps,
   };
+
+  const { pressProps: containerPressProps } = usePress(props);
+
   const state = useToggleState(checkboxProps);
   const checkboxRef = useRef();
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -53,6 +57,7 @@ const CheckboxField = forwardRef((props, ref) => {
     fieldControlProps,
     fieldLabelProps,
   } = useField({
+    ...containerPressProps,
     ...props,
     statusClasses: { isIndeterminate },
     controlProps: { ...controlProps, ...inputProps },
