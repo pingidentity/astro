@@ -9,9 +9,6 @@ import { AccordionContext } from '../../context/AccordionContext';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 /**
- * Component that allows for a child to be expanded and retracted.
- * Built on top of [React Aria useAccordion and useAccordionItem](https://reactspectrum.blob.core.windows.net/reactspectrum/d77b35e970e5549f66b47a83f07423f5c93b7297/docs/react-aria/useAccordion.html).
- *
  * Console Warning: "Cannot update a component (`Unknown`)...`"
  * when using controlledExpanded prop is expected
  * and related to a known issue within React Stately.

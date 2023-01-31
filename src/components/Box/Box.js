@@ -8,12 +8,7 @@ import { toNumber } from 'lodash';
 import { useStatusClasses, usePropWarning } from '../../hooks';
 
 const ExtendedBox = styled(ThemeUIBox)(layout, flexbox, typography);
-/**
- * Basic flexbox-based layout component for creating rows and columns,
- * while controlling sizes and spacing.
- * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
- * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/).
- */
+
 const Box = forwardRef((props, ref) => {
   const {
     flexDirection, // eslint-disable-line

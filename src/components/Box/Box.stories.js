@@ -1,13 +1,28 @@
 import React from 'react';
 import Box from '.';
 import { Image, Text } from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { flatColorList } from '../../styles/colors.js';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
+import BoxReadme from './Box.mdx';
 
 export default {
   title: 'Components/Box',
   component: Box,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <BoxReadme />
+          <DocsLayout />
+        </>
+      ),
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     bg: {
       control: {
