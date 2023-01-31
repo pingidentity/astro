@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Item } from '@react-stately/collections';
-
-
 import CreateIcon from 'mdi-react/CreateIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   IconButton,
@@ -14,6 +13,7 @@ import {
   TextField,
 } from '../../index';
 import AccordionGridGroup from './AccordionGridGroup';
+import AccordionGridReadme from './AccordionGridGroup.mdx';
 
 const data = [
   {
@@ -80,10 +80,20 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
+      page: () => (
+        <>
+          <AccordionGridReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
     },
+    tabs: [
+      { label: 'Design', mdx: AccordionGridReadme },
+      { label: 'Implementation' },
+    ],
   },
   argTypes: {
     id: {
