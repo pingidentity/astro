@@ -7,6 +7,7 @@ import { render, screen } from '../../utils/testUtils/testWrapper';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 import ListView from './ListView';
+import CheckboxField from '../CheckboxField';
 
 const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1' },
@@ -62,6 +63,22 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 const getComponentEmpty = (props = {}, { renderFn = render } = {}) => renderFn((
   <FocusScope restoreFocus >
     <ListView {...defaultProps} {...props} />
+  </FocusScope>
+));
+
+const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => renderFn((
+  <FocusScope restoreFocus >
+    <ListView {...defaultProps} {...props} items={items}>
+      {item => (
+        <Item
+          key={item.key}
+          textValue={item.name}
+          data-id={item.key}
+        >
+          <CheckboxField label={item.name} containerProps={{ 'data-testid': 'TestID' }} />
+        </Item>
+      )}
+    </ListView>
   </FocusScope>
 ));
 
@@ -176,4 +193,14 @@ test('when user navigates with tab and arrows keys, onFocus is called and the is
   const options = screen.getAllByRole('gridcell');
   expect(options[1]).toHaveClass('is-focused');
   expect(onFocus).toHaveBeenCalled();
+});
+
+test('list view not receive focus when click on checkbox', () => {
+  getComponentWithCheckbox();
+  const listItem = screen.getAllByRole('gridcell');
+  const checkbox = screen.getAllByTestId('TestID');
+
+  expect(listItem[0]).not.toHaveClass('is-focused');
+  checkbox[0].click();
+  expect(listItem[0]).not.toHaveClass('is-focused');
 });
