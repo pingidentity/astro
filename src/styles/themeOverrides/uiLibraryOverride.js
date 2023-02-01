@@ -1,17 +1,6 @@
 import theme from '../theme';
 
 const buttons = {
-  accordionHeader: {
-    ...theme.buttons.accordionHeader,
-    '&:not(.disabled):hover': {
-      ...theme.buttons.defaultHover,
-      color: 'active',
-    },
-    '&:focus': {
-      ...theme.buttons.defaultFocus,
-      border: 'none',
-    },
-  },
   critical: {
     '&:not(.disabled):hover': {
       ...theme.buttons.critical,
@@ -54,28 +43,6 @@ const buttons = {
     'body &': theme.buttons.link,
     'body &:hover': theme.buttons.link,
   },
-  environmentBreadcrumb: {
-    current: {
-      '&:hover:not(.disabled)': {
-        ...theme.buttons.environmentBreadcrumb.current,
-      },
-      '&:focus': {
-        ...theme.buttons.environmentBreadcrumb.current,
-      },
-    },
-  },
-  rocker: {
-    ...theme.buttons.rocker,
-    ':focus': {
-      border: 'none',
-    },
-    '&.is-selected:hover': {
-      color: 'white',
-    },
-    ':not(.is-selected):hover': {
-      color: 'accent.30',
-    },
-  },
   iconButtons: {
     ...theme.buttons.iconButtons,
     base: {
@@ -90,27 +57,6 @@ const buttons = {
       ':focus': {
         border: 'none',
       },
-    },
-  },
-  navBarSectionButton: {
-    ...theme.buttons.navBarSectionButton,
-    height: 'unset',
-    minHeight: '36px',
-    '&:not(.disabled):hover': {
-      ...theme.buttons.navBarSectionButton,
-    },
-    ':focus': {
-      border: 'none',
-    },
-  },
-  navItemButton: {
-    height: 'unset',
-    ...theme.buttons.navItemButton,
-    '&:not(.disabled):hover': {
-      ...theme.buttons.navItemButton,
-    },
-    ':focus': {
-      border: 'none',
     },
   },
 };
@@ -167,8 +113,74 @@ const links = {
   },
 };
 
+const variants = {
+  accordion: {
+    header: {
+      ...theme.variants.accordion.header,
+      '&:not(.disabled):hover': {
+        ...theme.buttons.defaultHover,
+        color: 'active',
+      },
+      '&:focus': {
+        ...theme.buttons.defaultFocus,
+        border: 'none',
+      },
+    },
+  },
+  rockerButton: {
+    thumbSwitch: {
+      ...theme.variants.rockerButton.thumbSwitch,
+      ':focus': {
+        border: 'none',
+      },
+      '&.is-selected:hover': {
+        color: 'white',
+      },
+      ':not(.is-selected):hover': {
+        color: 'accent.30',
+      },
+    },
+  },
+  environmentBreadcrumb: {
+    button: {
+      current: {
+        '&:hover:not(.disabled)': {
+          ...theme.variants.environmentBreadcrumb.button.current,
+        },
+        '&:focus': {
+          ...theme.variants.environmentBreadcrumb.button.current,
+        },
+      },
+    },
+  },
+  navBar: {
+    sectionButton: {
+      ...theme.variants.navBar.sectionButton,
+      height: 'unset',
+      minHeight: '36px',
+      '&:not(.disabled):hover': {
+        ...theme.variants.navBar.sectionButton,
+      },
+      ':focus': {
+        border: 'none',
+      },
+    },
+    itemButton: {
+      height: 'unset',
+      ...theme.variants.navBar.itemButton,
+      '&:not(.disabled):hover': {
+        ...theme.variants.navBar.itemButton,
+      },
+      ':focus': {
+        border: 'none',
+      },
+    },
+  },
+};
+
 export default {
   buttons,
   forms,
   links,
+  variants,
 };
