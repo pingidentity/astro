@@ -144,7 +144,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
 
   const comboBoxFieldProps = useMemo(
     () => ({
-      controlProps: { sx: { width: 400, fontSize: 'md' } },
+      containerProps: { sx: { width: 400, fontSize: 'md' } },
       onInputChange: setSearch,
       items: filteredTimezones,
       ref: timeZonePickerRef,

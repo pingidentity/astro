@@ -103,7 +103,7 @@ export const Default = () => {
               <Bracket />
               <Box ml="3px" width="100%" >
                 <Box
-                  variant="forms.input.container"
+                  variant="forms.input.fieldControlWrapper"
                   bg="white"
                   isRow
                   sx={sx.allConditionsBox}
@@ -124,7 +124,7 @@ export const Default = () => {
           <Box isRow >
             <Bracket />
             <Box
-              variant="forms.input.container"
+              variant="forms.input.fieldControlWrapper"
               mt="md"
               sx={sx.borderedBoxStyles}
             >
@@ -143,7 +143,7 @@ export const Default = () => {
                     <Bracket isLast={index === anyConditions.length - 1} />
                     <Box
                       mt="md"
-                      variant="forms.input.container"
+                      variant="forms.input.fieldControlWrapper"
                       bg="white"
                       isRow
                       width="100%"
@@ -167,7 +167,7 @@ export const Default = () => {
           <Box isRow >
             <Bracket isLast />
             <Box
-              variant="forms.input.container"
+              variant="forms.input.fieldControlWrapper"
               mt="md"
               sx={sx.borderedBoxStyles}
             >
@@ -186,7 +186,7 @@ export const Default = () => {
                     <Bracket isLast={index === noneConditions.length - 1} />
                     <Box
                       mt="md"
-                      variant="forms.input.container"
+                      variant="forms.input.fieldControlWrapper"
                       bg="white"
                       isRow
                       width="100%"
@@ -260,7 +260,7 @@ export const Default = () => {
               ))}
             <Box isRow>
               <Box
-                variant="forms.input.container"
+                variant="forms.input.fieldControlWrapper"
                 sx={sx.borderedBoxStyles}
               >
                 <Box isRow alignItems="center" mb="md">
@@ -312,7 +312,7 @@ export const Default = () => {
             </Box>
             <Box isRow mt="md">
               <Box
-                variant="forms.input.container"
+                variant="forms.input.fieldControlWrapper"
                 sx={sx.borderedBoxStyles}
               >
                 <Box isRow alignItems="center" mb="md">
