@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { faker } from '@faker-js/faker';
 import isChromatic from 'chromatic/isChromatic';
 
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import {
   DataTable,
   DataTableBody,
@@ -30,30 +31,65 @@ export default {
   argTypes: {
     density: {
       control: {
-        type: 'radio',
-        options: ['compact', 'regular', 'spacious'],
+        disable: true,
       },
       defaultValue: 'spacious',
     },
     overflowMode: {
       control: {
-        type: 'radio',
-        options: ['truncate', 'wrap'],
+        disable: true,
       },
       defaultValue: 'truncate',
     },
     width: {
-      defaultValue: '100%',
+      description: 'Sets the width of the data table.',
       control: {
-        type: 'text',
+        disable: true,
       },
     },
     height: {
-      defaultValue: 565,
+      description: 'Sets the height of the data table.',
       control: {
-        type: 'number',
+        disable: true,
       },
     },
+    sortDescriptor: {
+      description: 'Defines the current column key to sort by and the sort direction.',
+      control: {
+        disable: true,
+      },
+    },
+    onSortChange: {
+      description: 'Callback function that fires when sortable column header is pressed.',
+    },
+    allowsSorting: {
+      description: 'Determine if the column supports sorting.',
+      control: {
+        disable: true,
+      },
+    },
+    hideHeader: {
+      description: 'Determine if the header should be hidden.',
+      control: {
+        disable: true,
+      },
+    },
+    loadingState: {
+      description: 'Reflects current loading state.',
+      control: {
+        disable: true,
+      },
+    },
+    onLoadMore: {
+      description: 'Callback function that fires when more data should be loaded on demand as user scrolls.',
+    },
+    items: {
+      control: {
+        disable: true,
+      },
+      description: 'The list of DataTable items.',
+    },
+    ...ariaAttributeBaseArgTypes,
   },
 };
 
@@ -82,7 +118,7 @@ export const Default = (args) => {
   ];
 
   return (
-    <DataTable {...args} aria-label="Static table">
+    <DataTable {...args} aria-label="Static table" height="100%">
       <DataTableHeader columns={columns}>
         {column => (
           <DataTableColumn align="center">{column.name}</DataTableColumn>
@@ -136,6 +172,8 @@ export const CustomContent = (args) => {
     { name: 'Menu', key: 'menu', isSortable: false },
   ];
 
+  const random = items => items[Math.floor(Math.random() * items.length)];
+
   const list = useAsyncList({
     async load({ signal, cursor }) {
       if (cursor) {
@@ -148,7 +186,8 @@ export const CustomContent = (args) => {
       });
 
       const json = await res.json();
-      const random = items => items[Math.floor(Math.random() * items.length)];
+      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+
       const fakeData = [...Array(json.results.length).keys()].map((key) => {
         return {
           id: key,
