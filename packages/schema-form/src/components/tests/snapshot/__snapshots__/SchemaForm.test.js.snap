@@ -2424,6 +2424,9 @@ exports[`single fields password field 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -2447,17 +2450,23 @@ exports[`single fields password field 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -2473,19 +2482,54 @@ exports[`single fields password field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -3296,6 +3340,9 @@ exports[`single fields password field 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -3319,17 +3366,23 @@ exports[`single fields password field 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -3345,19 +3398,54 @@ exports[`single fields password field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -4662,6 +4750,9 @@ exports[`single fields select field 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -4685,17 +4776,23 @@ exports[`single fields select field 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -4711,19 +4808,54 @@ exports[`single fields select field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -5534,6 +5666,9 @@ exports[`single fields select field 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -5557,17 +5692,23 @@ exports[`single fields select field 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -5583,19 +5724,54 @@ exports[`single fields select field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -6426,6 +6602,9 @@ exports[`single fields select field 1`] = `
 
 .emotion-8 listBoxPopup multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -6449,17 +6628,23 @@ exports[`single fields select field 1`] = `
   align-items: center;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 listBoxPopup multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 listBoxPopup multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 listBoxPopup multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 listBoxPopup multivaluesWrapper:after {
@@ -6475,19 +6660,54 @@ exports[`single fields select field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 listBoxPopup multivaluesWrapper.is-focused {
@@ -7298,6 +7518,9 @@ exports[`single fields select field 1`] = `
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -7321,17 +7544,23 @@ exports[`single fields select field 1`] = `
   align-items: center;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 listBoxPopup numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 listBoxPopup numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 listBoxPopup numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper:after {
@@ -7347,19 +7576,54 @@ exports[`single fields select field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper.is-focused {
@@ -8851,6 +9115,9 @@ exports[`single fields select field with default 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -8874,17 +9141,23 @@ exports[`single fields select field with default 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -8900,19 +9173,54 @@ exports[`single fields select field with default 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -9723,6 +10031,9 @@ exports[`single fields select field with default 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -9746,17 +10057,23 @@ exports[`single fields select field with default 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -9772,19 +10089,54 @@ exports[`single fields select field with default 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -10615,6 +10967,9 @@ exports[`single fields select field with default 1`] = `
 
 .emotion-8 listBoxPopup multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -10638,17 +10993,23 @@ exports[`single fields select field with default 1`] = `
   align-items: center;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 listBoxPopup multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 listBoxPopup multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 listBoxPopup multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 listBoxPopup multivaluesWrapper:after {
@@ -10664,19 +11025,54 @@ exports[`single fields select field with default 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 listBoxPopup multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 listBoxPopup multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 listBoxPopup multivaluesWrapper.is-focused {
@@ -11487,6 +11883,9 @@ exports[`single fields select field with default 1`] = `
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -11510,17 +11909,23 @@ exports[`single fields select field with default 1`] = `
   align-items: center;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 listBoxPopup numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 listBoxPopup numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 listBoxPopup numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper:after {
@@ -11536,19 +11941,54 @@ exports[`single fields select field with default 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 listBoxPopup numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 listBoxPopup numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 listBoxPopup numberField multivaluesWrapper.is-focused {
@@ -13052,6 +13492,9 @@ exports[`single fields string field format email 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -13075,17 +13518,23 @@ exports[`single fields string field format email 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -13101,19 +13550,54 @@ exports[`single fields string field format email 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -13924,6 +14408,9 @@ exports[`single fields string field format email 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -13947,17 +14434,23 @@ exports[`single fields string field format email 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -13973,19 +14466,54 @@ exports[`single fields string field format email 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -15301,6 +15829,9 @@ exports[`single fields string field format uri 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -15324,17 +15855,23 @@ exports[`single fields string field format uri 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -15350,19 +15887,54 @@ exports[`single fields string field format uri 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -16173,6 +16745,9 @@ exports[`single fields string field format uri 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -16196,17 +16771,23 @@ exports[`single fields string field format uri 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -16222,19 +16803,54 @@ exports[`single fields string field format uri 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -17550,6 +18166,9 @@ exports[`single fields string field regular 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -17573,17 +18192,23 @@ exports[`single fields string field regular 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -17599,19 +18224,54 @@ exports[`single fields string field regular 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -18422,6 +19082,9 @@ exports[`single fields string field regular 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -18445,17 +19108,23 @@ exports[`single fields string field regular 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -18471,19 +19140,54 @@ exports[`single fields string field regular 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -19799,6 +20503,9 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -19822,17 +20529,23 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -19848,19 +20561,54 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -20671,6 +21419,9 @@ exports[`single fields string field with custom errors as sentence 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -20694,17 +21445,23 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -20720,19 +21477,54 @@ exports[`single fields string field with custom errors as sentence 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -22090,6 +22882,9 @@ exports[`single fields string field with help text 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -22113,17 +22908,23 @@ exports[`single fields string field with help text 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -22139,19 +22940,54 @@ exports[`single fields string field with help text 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -22962,6 +23798,9 @@ exports[`single fields string field with help text 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -22985,17 +23824,23 @@ exports[`single fields string field with help text 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -23011,19 +23856,54 @@ exports[`single fields string field with help text 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -24417,6 +25297,9 @@ exports[`single fields string field with markdown errors 1`] = `
 
 .emotion-14 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -24440,17 +25323,23 @@ exports[`single fields string field with markdown errors 1`] = `
   align-items: center;
 }
 
-.emotion-14 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-14 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-14 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-14 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-14 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-14 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-14 multivaluesWrapper:after {
@@ -24466,19 +25355,54 @@ exports[`single fields string field with markdown errors 1`] = `
   bottom: -1px;
 }
 
-.emotion-14 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-14 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-14 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-14 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-14 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-14 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-14 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-14 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-14 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-14 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-14 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-14 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-14 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-14 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-14 multivaluesWrapper.is-focused {
@@ -25289,6 +26213,9 @@ exports[`single fields string field with markdown errors 1`] = `
 
 .emotion-14 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -25312,17 +26239,23 @@ exports[`single fields string field with markdown errors 1`] = `
   align-items: center;
 }
 
-.emotion-14 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-14 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-14 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-14 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-14 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-14 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-14 numberField multivaluesWrapper:after {
@@ -25338,19 +26271,54 @@ exports[`single fields string field with markdown errors 1`] = `
   bottom: -1px;
 }
 
-.emotion-14 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-14 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-14 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-14 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-14 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-14 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-14 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-14 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-14 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-14 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-14 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-14 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-14 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-14 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-14 numberField multivaluesWrapper.is-focused {
@@ -26729,6 +27697,9 @@ exports[`single fields string field with placeholder 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -26752,17 +27723,23 @@ exports[`single fields string field with placeholder 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -26778,19 +27755,54 @@ exports[`single fields string field with placeholder 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -27601,6 +28613,9 @@ exports[`single fields string field with placeholder 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -27624,17 +28639,23 @@ exports[`single fields string field with placeholder 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -27650,19 +28671,54 @@ exports[`single fields string field with placeholder 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
@@ -28956,6 +30012,9 @@ exports[`single fields textarea field 1`] = `
 
 .emotion-8 multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -28979,17 +30038,23 @@ exports[`single fields textarea field 1`] = `
   align-items: center;
 }
 
-.emotion-8 multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 multivaluesWrapper:after {
@@ -29005,19 +30070,54 @@ exports[`single fields textarea field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 multivaluesWrapper.is-focused {
@@ -29828,6 +30928,9 @@ exports[`single fields textarea field 1`] = `
 
 .emotion-8 numberField multivaluesWrapper {
   position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background-color: var(--theme-ui-colors-white);
   border-color: var(--theme-ui-colors-neutral-80);
   border-style: solid;
@@ -29851,17 +30954,23 @@ exports[`single fields textarea field 1`] = `
   align-items: center;
 }
 
-.emotion-8 numberField multivaluesWrapper.is-left-label {
-  display: inline-grid;
-  grid-template-rows: auto auto;
+.emotion-8 numberField multivaluesWrapper>input {
+  border: none;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 27px;
+  line-height: 100%;
+  padding: 5px;
 }
 
-.emotion-8 numberField multivaluesWrapper>.is-default {
-  width: 100%;
+.emotion-8 numberField multivaluesWrapper>input.is-focused {
+  box-shadow: none;
+  outline: none;
 }
 
-.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
-  left: 0;
+.emotion-8 numberField multivaluesWrapper>button {
+  border-left-width: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper:after {
@@ -29877,19 +30986,54 @@ exports[`single fields textarea field 1`] = `
   bottom: -1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input {
-  border: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 27px;
-  line-height: 100%;
-  padding: 5px;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>input {
+  border-left-width: 1px;
 }
 
-.emotion-8 numberField multivaluesWrapper>input.is-focused {
-  box-shadow: none;
-  outline: none;
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator>button {
+  border-left-width: 1px;
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator:after {
+  width: 0;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled {
+  opacity: 1;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-disabled:after {
+  opacity: 0.5;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>input {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only>textarea {
+  background-color: var(--theme-ui-colors-accent-95);
+  border: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-read-only:after {
+  display: none;
+}
+
+.emotion-8 numberField multivaluesWrapper.is-error::after {
+  background-color: var(--theme-ui-colors-critical-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-success::after {
+  background-color: var(--theme-ui-colors-success-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.is-warning::after {
+  background-color: var(--theme-ui-colors-warning-bright);
+}
+
+.emotion-8 numberField multivaluesWrapper.has-no-status-indicator {
+  left: 0;
 }
 
 .emotion-8 numberField multivaluesWrapper.is-focused {
