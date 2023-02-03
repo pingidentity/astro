@@ -49,7 +49,6 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: { sx: { marginLeft: 50 } },
     },
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,

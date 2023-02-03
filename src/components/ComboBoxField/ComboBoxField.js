@@ -225,7 +225,6 @@ const ComboBoxField = forwardRef((props, ref) => {
         triggerProps={buttonProps}
         triggerRef={buttonRef}
         controlProps={controlProps}
-        // isReadOnly={isReadOnly}
         aria-invalid={status === 'error' && true}
       />
       {listBox}

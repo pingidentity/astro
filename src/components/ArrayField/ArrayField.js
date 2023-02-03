@@ -147,7 +147,7 @@ const ArrayField = (props) => {
       {!isLimitReached &&
         <Button
           aria-label="Add field"
-          variant="text"
+          variant="link"
           onPress={onFieldAdd}
           sx={{ width: 'fit-content', mt: 'xs' }}
         >
