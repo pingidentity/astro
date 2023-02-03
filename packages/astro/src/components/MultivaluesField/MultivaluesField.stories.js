@@ -145,7 +145,7 @@ const itemsWithSlots = [
     name: 'Aardvark',
     key: 'Aardvark',
     chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
-    buttonProps: { variant: '.chipWithSlotDeleteButton' },
+    buttonProps: { variant: 'chipWithSlotDeleteButton' },
     slots: { leftIcon: <Icon icon={VariableIcon} size={16} /> },
   },
   {

@@ -165,12 +165,12 @@ input.containedIcon = {
 };
 
 input.multivaluesWrapper = {
-  ...input.fieldContainer,
+  ...input.fieldControlWrapper,
   bg: 'white',
   borderColor: 'neutral.80',
   borderStyle: 'solid',
   borderWidth: 1,
-  flexDirection: 'row!important',
+  flexDirection: 'row !important',
   flexWrap: 'wrap',
   left: 2,
   pt: 6,
@@ -208,6 +208,15 @@ input.multivaluesWrapper = {
   '&.is-focused': {
     boxShadow: 'none',
     ...defaultFocus,
+  },
+  [`&.is-${statuses.ERROR}::after`]: {
+    bg: 'critical.bright',
+  },
+  [`&.is-${statuses.SUCCESS}::after`]: {
+    bg: 'success.bright',
+  },
+  [`&.is-${statuses.WARNING}::after`]: {
+    bg: 'warning.bright',
   },
 };
 

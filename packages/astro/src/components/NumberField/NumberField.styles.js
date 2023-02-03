@@ -1,4 +1,5 @@
 import { input } from '../Input/Input.styles';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const sharedStyles = {
   WebkitAppearance: 'none',
@@ -19,7 +20,16 @@ const arrowsWrapper = {
   display: 'flex',
   justifyContent: 'center',
   position: 'relative',
-  ...input.fieldContainer,
+  ...input.fieldControlWrapper,
+  [`&.is-${statuses.ERROR}::after`]: {
+    bg: 'critical.bright',
+  },
+  [`&.is-${statuses.SUCCESS}::after`]: {
+    bg: 'success.bright',
+  },
+  [`&.is-${statuses.WARNING}::after`]: {
+    bg: 'warning.bright',
+  },
 };
 
 const arrows = {
