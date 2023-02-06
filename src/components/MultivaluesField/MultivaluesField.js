@@ -310,7 +310,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       <IconButton
         aria-label="delete"
         onPress={() => deleteItem(item.key)}
-        variant="chipDeleteButton"
+        variant="badge.deleteButton"
         {...item.buttonProps}
       >
         <Icon icon={Clear} color="white" size={14} />
