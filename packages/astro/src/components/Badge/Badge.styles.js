@@ -77,7 +77,7 @@ const environmentBadge = {
   },
 };
 
-export const chipDeleteStandard = {
+export const deleteButton = {
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
@@ -86,8 +86,8 @@ export const chipDeleteStandard = {
   mx: '3px !important',
 };
 
-export const chipDeleteButton = {
-  ...chipDeleteStandard,
+export const badgeDeleteButton = {
+  ...deleteButton,
   '&.is-focused': {
     bg: 'accent.40',
     ...focusWithCroppedOutline,
@@ -101,8 +101,8 @@ export const chipDeleteButton = {
   },
 };
 
-export const chipWithSlotDeleteButton = {
-  ...chipDeleteStandard,
+export const badgeWithSlotDeleteButton = {
+  ...deleteButton,
   path: {
     fill: 'neutral.40',
   },
@@ -158,7 +158,9 @@ export default {
   multivaluesBadge,
   readOnlyBadge,
   selectedItemBadge,
-  chipDeleteButton,
+  deleteButton,
   countBadge,
   countNeutral,
+  badgeWithSlotDeleteButton,
+  badgeDeleteButton,
 };

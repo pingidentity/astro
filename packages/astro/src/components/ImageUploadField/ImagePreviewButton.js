@@ -93,7 +93,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     <Box tabindex={0} sx={widthHeightSx} {...hoverProps}>
       <Button
         ref={buttonRef}
-        variant="variants.imageUpload.imageUpload"
+        variant="variants.imageUpload.button"
         sx={widthHeightSx}
         data-testid="image-preview-button"
         aria-label="Image preview"

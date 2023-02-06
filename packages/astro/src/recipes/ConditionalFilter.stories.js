@@ -68,7 +68,7 @@ export const Default = () => {
   ];
 
   const trashButton = (
-    <IconButton aria-label="deleteButton" sx={{ alignSelf: 'center' }}>
+    <IconButton aria-label="badge.deleteButton" sx={{ alignSelf: 'center' }}>
       <Icon icon={TrashIcon} sx={{ '& > path': { fill: 'neutral.40' } }} />
     </IconButton>
   );
