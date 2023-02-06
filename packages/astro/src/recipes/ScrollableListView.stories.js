@@ -52,10 +52,10 @@ export const Default = ({ ...args }) => {
             <Item key={item.name} textValue={item.name} >
               <Box isRow >
                 <Box isRow mr="auto" alignSelf="center" >
-                  <Icon icon={FormSelectIcon} mr="sm" color="text.primary" size={25} />
+                  <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size={25} />
                   <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
                 </Box>
-                <Box isRow alignSelf="center">
+                <Box isRow alignSelf="center" gap="sm" >
                   <IconButton aria-label="create-icon" >
                     <Icon icon={CreateIcon} size="sm" />
                   </IconButton>
