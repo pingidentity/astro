@@ -5,7 +5,7 @@ const container = {
   p: 'sm',
 };
 
-const chip = {
+const badge = {
   ...baseBadge,
   cursor: 'default',
   '&.is-hovered, &.is-pressed': {
@@ -14,7 +14,7 @@ const chip = {
   },
 };
 
-export const tooltipWithButton = {
+export const button = {
   cursor: 'default',
   '&.is-hovered, &.is-pressed': {
     backgroundColor: 'inherit',
@@ -55,8 +55,8 @@ const content = {
 
 export default {
   container,
-  chip,
-  tooltipWithButton,
+  badge,
+  button,
   inline,
   content,
 };
