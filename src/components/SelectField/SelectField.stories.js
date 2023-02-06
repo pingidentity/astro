@@ -27,16 +27,25 @@ const animals = [
 
 const withSection = [
   { name: 'Animals',
+    key: 'Animals',
     children: [
       { name: 'Aardvark' },
       { name: 'Kangaroo' },
       { name: 'Snake' },
     ] },
   { name: 'People',
+    key: 'People',
     children: [
       { name: 'Michael' },
       { name: 'Dwight' },
       { name: 'Creed' },
+    ] },
+  { name: null,
+    key: 'Fruit',
+    children: [
+      { name: 'Apple' },
+      { name: 'Strawberry' },
+      { name: 'Blueberry' },
     ] },
 ];
 
@@ -117,7 +126,7 @@ export const WithSections = args => (
   <OverlayProvider>
     <SelectField items={withSection} {...args}>
       {section => (
-        <Section key={section.name} items={section.children} title={section.name}>
+        <Section key={section.key} items={section.children} title={section.name}>
           {item => <Item key={item.name}>{item.name}</Item>}
         </Section>
       )}
