@@ -35,6 +35,7 @@ const animals = [
 const withSection = [
   {
     name: 'Animals',
+    key: 'Animals',
     children: [
       { name: 'Raccoon' },
       { name: 'Kangaroo' },
@@ -43,10 +44,20 @@ const withSection = [
   },
   {
     name: 'People',
+    key: 'People',
     children: [
       { name: 'Michael' },
       { name: 'Dwight' },
       { name: 'Creed' },
+    ],
+  },
+  {
+    name: null,
+    key: 'fruit',
+    children: [
+      { name: 'Apple' },
+      { name: 'Orange' },
+      { name: 'Banana' },
     ],
   },
 ];
@@ -139,7 +150,7 @@ export const WithSections = args => (
   <OverlayProvider>
     <ComboBoxField label="Example label" items={withSection} {...args} >
       {section => (
-        <Section key={section.name} items={section.children} title={section.name}>
+        <Section key={section.key} items={section.children} title={section.name}>
           {item => <Item key={item.name}>{item.name}</Item>}
         </Section>
       )}
