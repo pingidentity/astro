@@ -212,7 +212,7 @@ export const InnerPanel = ({ ...args }) => {
         {outer}
       </OverlayProvider>
       { messagesOpen &&
-        <Messages sx={{ zIndex: 11 }} >
+        <Messages sx={{ zIndex: 11 }} onClose={toggleMessagesOpen}>
           <Item key="message2" status="success">Z Index higher than inner pannel</Item>
         </Messages>
       }
