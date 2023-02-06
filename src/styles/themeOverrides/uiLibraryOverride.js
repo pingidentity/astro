@@ -42,6 +42,10 @@ const buttons = {
   link: {
     'body &': theme.buttons.link,
     'body &:hover': theme.buttons.link,
+    '&:not(.disabled):hover': {
+      color: 'active',
+      borderColor: 'transparent',
+    },
   },
   iconButtons: {
     ...theme.buttons.iconButtons,
