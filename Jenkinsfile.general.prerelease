@@ -59,7 +59,13 @@ pipeline {
               image: "docker.corp.pingidentity.com:5000/testing/ui-library-admin:1.4.1"
               imagePullPolicy: Always
               workingDir: "/home/jenkins/agent"
-              tty: true"""
+              tty: true
+              resources:
+                requests:
+                  memory: "1000Mi"
+                  cpu: "1000m"
+                limits:
+                  memory: "6250Mi""""
       )
     )
   }
