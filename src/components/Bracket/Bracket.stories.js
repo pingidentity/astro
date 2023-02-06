@@ -38,7 +38,7 @@ export const Default = () => {
 
   return (
     <Box p="md" ml="sm" bg="background" >
-      <Box isRow mb="xs" >
+      <Box isRow >
         <Chip
           label="Any"
           bg="neutral.20"
@@ -53,7 +53,6 @@ export const Default = () => {
           <Bracket isLast={index === anyConditions.length - 1} />
           <Box
             mt="md"
-            ml="xs"
             variant="forms.input.container"
             bg="white"
             isRow
