@@ -2,10 +2,10 @@ import { defaultFocus } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
 import { hintButton } from '../HelpHint/HelpHint.styles';
-import { chipDeleteButton, chipWithSlotDeleteButton, chipDeleteStandard } from '../Badge/Badge.styles';
+import { deleteButton, badgeWithSlotDeleteButton } from '../Badge/Badge.styles';
 import { modalCloseButton } from '../Modal/Modal.styles';
 import { messageCloseButton } from '../Messages/Message.styles';
-import { tooltipWithButton } from '../TooltipTrigger/Tooltip.styles';
+import { button } from '../TooltipTrigger/Tooltip.styles';
 
 export const base = {
   justifyContent: 'center',
@@ -146,9 +146,8 @@ const applicationPortalPinned = {
 export default {
   base,
   bidirectional,
-  chipDeleteButton,
-  chipDeleteStandard,
-  chipWithSlotDeleteButton,
+  badge: { deleteButton },
+  badgeWithSlotDeleteButton,
   copyButton,
   hintButton: { ...base, ...hintButton },
   inverted,
@@ -158,7 +157,9 @@ export default {
   square,
   svgIconButton,
   toggle,
-  tooltipWithButton: { ...base, ...tooltipWithButton },
+  tooltip: {
+    button: { ...base, ...button },
+  },
   // Recipe related variants
   applicationPortal,
   applicationPortalPinned,

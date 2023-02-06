@@ -18,7 +18,7 @@ const hoveredPreview = {
 };
 
 
-const imageUpload = {
+const button = {
   ...base,
   display: 'inline-flex',
   alignItems: 'center',
@@ -35,5 +35,5 @@ const imageUpload = {
 
 export default {
   hoveredPreview,
-  imageUpload,
+  button,
 };
