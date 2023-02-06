@@ -69,7 +69,7 @@ const listViewItem = {
   },
   '&.has-separator': {
     borderBottom: '1px solid',
-    borderBottomColor: 'line.hairline',
+    borderBottomColor: 'neutral.80',
   },
   '&.is-focused': {
     boxShadow: '0 0 0 1px inset #D033FF',
