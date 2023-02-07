@@ -51,7 +51,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
         >
           {child.props.children}
         </BreadcrumbItem>
-        {icon && !isCurrentItem && <Icon aria-hidden="true" icon={icon} mx={5} size={16} {...iconProps} />}
+        {icon && !isCurrentItem && <Icon aria-hidden="true" icon={icon} mx={5} size="xs" {...iconProps} />}
       </Box>
     );
   }, [children.length, filteredChildren, icon, iconProps, onAction]);
