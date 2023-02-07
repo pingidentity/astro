@@ -44,6 +44,7 @@ export const parameters = {
           'Utils',
           'Hooks',
           'Design',
+          'Design Patterns',
         ],
         'Components',
         'Form',
