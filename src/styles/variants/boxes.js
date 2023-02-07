@@ -5,13 +5,13 @@ const base = {
 };
 
 const card = {
-  boxShadow: 'standard',
+  boxShadow: '0px 1px 14px rgba(37, 55, 70, 0.15)',
+  borderRadius: '3px',
   p: 'lg',
-  alignItems: 'center',
-  justifyContent: 'center',
   flex: '1 1 0',
-  fontWeight: 1,
+  fontWeight: 0,
   fontSize: 'md',
+  color: 'text.primary',
 };
 
 // Used to give a border to radio elements
