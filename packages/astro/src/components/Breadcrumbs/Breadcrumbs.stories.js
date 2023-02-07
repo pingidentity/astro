@@ -56,14 +56,3 @@ export const Default = (args) => {
     </Breadcrumbs>
   );
 };
-
-export const WithSpan = () => (
-  <Breadcrumbs icon={ChevronRightIcon}>
-    <Item key="Parent" aria-label="parent" elementType="span">
-      Parent
-    </Item>
-    <Item key="FonsVernall" aria-label="fons-vernall" elementType="span">
-      Fons Vernall
-    </Item>
-  </Breadcrumbs>
-);

@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useListBoxSection } from '@react-aria/listbox';
 import { useLocale } from '@react-aria/i18n';
 import { layoutInfoToStyle, useVirtualizerItem } from '@react-aria/virtualizer';
+
+import { ListBoxContext } from './ListBoxContext';
 import Box from '../Box';
+import Separator from '../Separator';
 
 const ListBoxSection = (props) => {
   const {
@@ -28,6 +31,8 @@ const ListBoxSection = (props) => {
 
   const { direction } = useLocale();
 
+  const state = useContext(ListBoxContext);
+
   return (
     <>
       <Box
@@ -38,6 +43,9 @@ const ListBoxSection = (props) => {
         sx={{ paddingInlineStart: '0px' }}
         {...groupProps}
       >
+        {item.key !== state.collection.getFirstKey() &&
+          <Separator mt="0px" />
+        }
         {item.rendered &&
           <Box
             {...headingProps}

@@ -35,6 +35,7 @@ const defaultEnvironments = [
 const environmentsWithSections = [
   {
     name: 'Recent',
+    key: 'Recent',
     options: [
       { name: 'Default' },
       { name: 'Consumer Banking Prod' },
@@ -43,6 +44,7 @@ const environmentsWithSections = [
   },
   {
     name: 'All',
+    key: 'All',
     options: [
       { name: 'Consumer Banking Prod' },
       { name: 'Custom 360 Test' },
@@ -51,6 +53,15 @@ const environmentsWithSections = [
       { name: 'Jeff’s Workforce' },
       { name: 'Lindemuller Prod' },
       { name: 'Mine' },
+    ],
+  },
+  {
+    name: null,
+    key: 'Other',
+    options: [
+      { name: 'Default' },
+      { name: 'Auth test', isSandbox: true },
+      { name: 'Mike’s Workforce' },
     ],
   },
 ];
@@ -168,10 +179,11 @@ export const WithSections = () => {
       name="Globochem"
       selectedItem={envNode}
       onSelectionChange={handleEnvPress}
+      isDefaultOpen
     >
-      {({ name: sectionName, options: sectionOptions }) => (
+      {({ name: sectionName, options: sectionOptions, key: sectionKey }) => (
         <Section
-          key={sectionName}
+          key={sectionKey}
           title={sectionName}
           items={sectionOptions}
         >
