@@ -694,15 +694,10 @@ export const Default = () => {
   const state = useModalState();
   return (
     <OverlayProvider>
-      <Button onPress={state.open} aria-label="Open modal">
-        Open Modal
-      </Button>
-      {state.isOpen && (
       <Modal
-        isOpen={state.isOpen}
+        isOpen
         onClose={state.close}
         contentProps={sx.contentProps}
-        isDismissable
       >
         <Box contentProps>
           <IconButton
@@ -726,7 +721,7 @@ export const Default = () => {
             {buttons.map(button => (
               <Button sx={sx.buttonStyle} key={button.name}>
                 <Box alignItems="center">
-                  <Icon icon={button.icon} sx={sx.iconStyle} size="58" />
+                  <Icon icon={button.icon} sx={sx.iconStyle} size={58} />
                   <Text sx={sx.buttonLabelStyle} >
                     {button.name}
                   </Text>
@@ -742,7 +737,6 @@ export const Default = () => {
           </Box>
         </Box>
       </Modal>
-      )}
     </OverlayProvider>
   );
 };
