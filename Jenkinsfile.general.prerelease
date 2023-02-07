@@ -46,7 +46,7 @@ pipeline {
       agentDefinition(
         name: 'ui-library-agent',
         cloud: testCluster,
-        yaml: """
+        yaml: '''
         apiVersion: v1
         kind: Pod
         metadata:
@@ -65,7 +65,7 @@ pipeline {
                   memory: "1000Mi"
                   cpu: "1000m"
                 limits:
-                  memory: "6250Mi""""
+                  memory: "6250Mi"'''
       )
     )
   }
