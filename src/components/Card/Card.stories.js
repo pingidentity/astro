@@ -1,6 +1,5 @@
 import React from 'react';
-import Card from './Card';
-import Box from '../Box';
+import { Box, Button, Card } from '../../index';
 
 export default {
   title: 'Components/Card',
@@ -48,5 +47,27 @@ export const CardRow = (args) => {
         <Card sx={sx.card} {...args} />
       </Box>
     </Box>
+  );
+};
+
+export const InteractiveCard = () => {
+  const sx = {
+    alignContent: 'center',
+    height: '221px',
+    justifyContent: 'center',
+    textAlign: 'center',
+    width: '233px',
+  };
+
+  return (
+    <Card
+      onPress={() => console.log('card pressed')}
+      onHoverStart={() => console.log('card hovered')}
+      tabIndex="0"
+      sx={sx}
+    >
+      Interactive Card
+      <Button variant="inline" mt="md" onPress={() => console.log('button pressed')}>Explore</Button>
+    </Card>
   );
 };
