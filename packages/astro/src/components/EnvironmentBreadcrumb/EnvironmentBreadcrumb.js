@@ -271,7 +271,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       iconProps={{
         color: 'neutral.70',
         mx: 5,
-        size: 16,
+        size: 'xs',
       }}
       {...others}
     >
