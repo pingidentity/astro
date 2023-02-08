@@ -67,7 +67,7 @@ export const FallbackImage = () =>
 export const WithSkeletonLoadSuccess = ({ useLocalSrc }) => {
   const imageSrc = useLocalSrc
     ? pingImg
-    : 'https://deelay.me/3000/https://picsum.photos/150/150';
+    : 'https://app.requestly.io/delay/3000/https://picsum.photos/150/150';
 
   return (
     <Image
@@ -88,7 +88,7 @@ WithSkeletonLoadSuccess.args = {
 export const WithSkeletonLoadTimeout = () => {
   return (
     <Image
-      src="https://deelay.me/7000/https://picsum.photos/150/150"
+      src="https://app.requestly.io/delay/7000/https://picsum.photos/150/150"
       sx={{
         width: '150px',
         height: '150px',
