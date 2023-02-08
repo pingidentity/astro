@@ -41,9 +41,6 @@ export const modalCloseButton = {
   position: 'absolute',
   top: 14,
   right: 10,
-  ':focus': {
-    outline: 'none',
-  },
 };
 
 export default {
