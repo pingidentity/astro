@@ -87,7 +87,7 @@ const forms = {
     },
   },
   search: {
-    container: {
+    wrapper: {
       '& input[type=search]': {
         ...theme.text.inputValue,
         borderColor: 'neutral.80',
