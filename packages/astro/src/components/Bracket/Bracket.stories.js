@@ -5,10 +5,25 @@ import {
   Badge,
   Text,
 } from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import BracketReadme from './Bracket.mdx';
 
 export default {
   title: 'Components/Bracket',
   component: Bracket,
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+      page: () => (
+        <>
+          <BracketReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
 };
 
 export const Default = () => {
@@ -23,7 +38,7 @@ export const Default = () => {
 
   return (
     <Box p="md" ml="sm" bg="background" >
-      <Box isRow mb="xs" >
+      <Box isRow>
         <Badge
           label="Any"
           bg="neutral.20"
