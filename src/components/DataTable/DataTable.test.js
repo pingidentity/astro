@@ -684,11 +684,12 @@ describe('Sortable DataTable with useAsyncList', () => {
     'data-testid': testId,
   };
 
+
   const sortableDataTable = ({ result }) =>
     render(
       <DataTable
         {...defaultProps}
-        sortDescriptor={result.current.sortDescriptor}
+        sortDescriptor={result.current.sortDescriptor.direction}
         onSortChange={result.current.sort}
       >
         <DataTableHeader columns={columns}>
@@ -872,9 +873,45 @@ describe('Sortable DataTable with useAsyncList', () => {
       fireEvent.click(headers[0]);
     });
 
-    expect(result.current.items[0].country).toBe('USA');
-    expect(result.current.items[1].country).toBe('France');
-    expect(result.current.items[2].country).toBe('China');
-    expect(result.current.items[3].country).toBe('Canada');
+    expect(result.current.items[0].country).toBe('Canada');
+    expect(result.current.items[1].country).toBe('China');
+    expect(result.current.items[2].country).toBe('France');
+    expect(result.current.items[3].country).toBe('USA');
+
+    expect(result.current.items[0].continent).toBe('North America');
+    expect(result.current.items[1].continent).toBe('Asia');
+    expect(result.current.items[2].continent).toBe('Europe');
+    expect(result.current.items[3].continent).toBe('North America');
+
+    expect(result.current.items[0].population).toBe(37000000);
+    expect(result.current.items[1].population).toBe(1398000000);
+    expect(result.current.items[2].population).toBe(67000000);
+    expect(result.current.items[3].population).toBe(320000000);
+  });
+});
+
+describe('Empty DataTable', () => {
+  const staticDataTable = () =>
+    render(
+      <DataTable aria-label="Table">
+        <DataTableHeader columns={columns}>
+          {column => (
+            <DataTableColumn align="center">{column.name}</DataTableColumn>
+          )}
+        </DataTableHeader>
+        <DataTableBody>
+          {[]}
+        </DataTableBody>
+      </DataTable>,
+    );
+
+  it('should display header row only when there are no items', () => {
+    staticDataTable();
+    const staticTable = screen.getByRole('grid');
+    const tRows = within(staticTable).getByRole('row');
+
+    expect(staticTable).toBeInTheDocument();
+    expect(staticTable).toBeVisible();
+    expect(tRows).toBeInTheDocument();
   });
 });

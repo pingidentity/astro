@@ -5,7 +5,7 @@ import { useFilter } from '@react-aria/i18n';
 import userEvent from '@testing-library/user-event';
 
 import { render, screen, act, within } from '../../utils/testUtils/testWrapper';
-import { ComboBoxField, Item, OverlayProvider } from '../../index';
+import { ComboBoxField, Item, OverlayProvider, Section } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -14,6 +14,37 @@ const items = [
   { name: 'Kangaroo', id: '2' },
   { name: 'Snake', id: '3' },
 ];
+
+const withSection = [
+  {
+    name: 'Animals',
+    key: 'Animals',
+    kids: [
+      { name: 'Raccoon' },
+      { name: 'Kangaroo' },
+      { name: 'Opossum' },
+    ],
+  },
+  {
+    name: 'People',
+    key: 'People',
+    kids: [
+      { name: 'Michael' },
+      { name: 'Dwight' },
+      { name: 'Creed' },
+    ],
+  },
+  {
+    name: null,
+    key: 'fruit',
+    kids: [
+      { name: 'Apple' },
+      { name: 'Orange' },
+      { name: 'Banana' },
+    ],
+  },
+];
+
 const defaultProps = {
   defaultItems: items,
   label: 'Test Label',
@@ -23,6 +54,18 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props}>
       {item => <Item {...item} key={item.id} data-id={item.name} >{item.name}</Item>}
+    </ComboBoxField>
+  </OverlayProvider>
+));
+
+const getComponentWithSections = (props = {}, { renderFn = render } = {}) => renderFn((
+  <OverlayProvider>
+    <ComboBoxField {...defaultProps} {...props} items={withSection} >
+      {section => (
+        <Section key={section.key} items={section.kids} title={section.name}>
+          {item => <Item key={item.name}>{item.name}</Item>}
+        </Section>
+      )}
     </ComboBoxField>
   </OverlayProvider>
 ));
@@ -751,6 +794,21 @@ test('popover closes on input blur', () => {
   userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+
+test('passing sections, renders separators', () => {
+  getComponentWithSections();
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(screen.queryAllByRole('separator')).toHaveLength(4);
+});
+
+test('a blank title does not render', () => {
+  getComponentWithSections();
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
 });
 
 describe('when isReadOnly is true', () => {

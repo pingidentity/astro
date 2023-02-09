@@ -47,10 +47,29 @@ const ROW_HEIGHTS = {
 };
 
 /**
- * DataTable component using react aria Spectrum TableView
- * Primarily utilizes [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
- * Cross platform state management react hook for DataTable
- * Primarily utilizes [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
+ * Inspired by [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
+ * from React Spectrum and [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
+ * from React Stately.
+ *
+ * DataTable is a complex collection component that is built from many child elements including
+ * columns, rows and cells. Columns are defined within DataTableHeader element via DataTableColumn
+ * and rows are defined within a DataTableBody element via DataTableRow. Rows contain DataTableCell
+ * elements that correspond to each column.
+ *
+ * [TableHeader](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=defined%20using%20the-,TableHeader,-%2C%20Column%2C)
+ * uses the alias DataTableHeader.
+ *
+ * [Column](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=the%20TableHeader%2C-,Column,-%2C%20TableBody%2C)
+ * uses the alias DataTableColumn.
+ *
+ * [Cell](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=Row%2C%20and-,Cell,-components%2C%20which%20support)
+ * uses the alias DataTableCell.
+ *
+ * [Row](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20TableBody%2C-,Row,-%2C%20and%20Cell%20components)
+ * uses the alias DataTableCell.
+ *
+ * [TableBody](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20Column%2C-,TableBody,-%2C%20Row%2C%20and)
+ * uses the alias DataTableBody.
 */
 
 const DataTable = forwardRef((props, ref) => {
@@ -232,21 +251,37 @@ const DataTable = forwardRef((props, ref) => {
 
 DataTable.propTypes = {
   /**
-   * Sets the amount of vertical padding within each cell.
-   * density: 'compact' | 'regular' | 'spacious'
-   * @default 'regular'
-   */
+    * Sets the amount of vertical padding within each cell.
+    * density: 'compact' | 'regular' | 'spacious'
+    * @default 'regular'
+  */
   density: PropTypes.string,
+  /** Sets the height of table. */
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** Determine if the header should be hidden. */
+  hasHiddenHeader: PropTypes.bool,
+  /** Bool that determines if the items are sortable. */
+  isSortable: PropTypes.bool,
+  /** The list of DataTable items. */
+  items: PropTypes.arrayOf(PropTypes.shape({})),
+  /** Reflects current loading state. */
+  loadingState: PropTypes.oneOf(['error', 'filtering', 'idle', 'loading', 'loadingMore', 'sorting']),
+  /** Handler that is called when a user performs an action on a row. */
+  onAction: PropTypes.func,
   /**
    * Sets the overflow behavior for the cell contents.
    * overflowMode: 'wrap' | 'truncate'
    * @default 'truncate'
    */
   overflowMode: PropTypes.string,
-  /** Handler that is called when a user performs an action on a row. */
-  onAction: PropTypes.func,
+  /** Callback function that fires when more data should be loaded on demand as user scrolls. */
+  onLoadMore: PropTypes.func,
+  /** Callback function that fires when sortable column header is pressed. */
+  onSortChange: PropTypes.func,
+  /** Defines the current column key to sort by and the sort direction. */
+  sortDescriptor: PropTypes.oneOf(['ascending', 'descending']),
+  /** Sets the width of table. */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 DataTable.defaultProps = {

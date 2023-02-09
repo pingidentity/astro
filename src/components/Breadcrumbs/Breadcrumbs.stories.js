@@ -4,6 +4,8 @@ import { Item } from 'react-stately';
 import { action } from '@storybook/addon-actions';
 
 import Breadcrumbs from './Breadcrumbs';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import BreadcrumbsReadme from './Breadcrumbs.mdx';
 
 export default {
   title: 'Components/Breadcrumbs',
@@ -13,6 +15,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <BreadcrumbsReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
   argTypes: {
@@ -49,14 +57,3 @@ export const Default = (args) => {
     </Breadcrumbs>
   );
 };
-
-export const WithSpan = () => (
-  <Breadcrumbs icon={ChevronRightIcon}>
-    <Item key="Parent" aria-label="parent" elementType="span">
-      Parent
-    </Item>
-    <Item key="FonsVernall" aria-label="fons-vernall" elementType="span">
-      Fons Vernall
-    </Item>
-  </Breadcrumbs>
-);
