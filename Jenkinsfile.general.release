@@ -103,7 +103,7 @@ pipeline {
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
             lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
-            lerna run coverage-ci
+            lerna run coverage-ci --concurrency=1
           """
         }
       }
