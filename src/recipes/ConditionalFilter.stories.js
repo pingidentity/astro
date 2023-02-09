@@ -101,7 +101,7 @@ export const Default = () => {
           {allConditions.map(item => (
             <Box isRow key={item.key}>
               <Bracket />
-              <Box ml="3px" width="100%" >
+              <Box width="100%" >
                 <Box
                   variant="forms.input.fieldControlWrapper"
                   bg="white"

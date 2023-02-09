@@ -1,0 +1,42 @@
+<Meta title="Components/AccordionGroup/AccordionGroup" />
+
+# AccordionGroup
+
+The Accordion is a vertically stacked list of headers that can be clicked to reveal or hide content associated with them. 
+It is built on top of React Aria [useAccordion](https://reactspectrum.blob.core.windows.net/reactspectrum/d77b35e970e5549f66b47a83f07423f5c93b7297/docs/react-aria/useAccordion.html).
+
+### Required components
+
+- Item: Component is exported within Astro but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Best practices
+
+AccordionGroup should:
+- be used to hide/reveal a few key pieces of information.
+- have short and concise labels.
+
+AccordionGroup shouldn’t:
+- have focusable items as children.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Accordion](https://www.w3.org/WAI/ARIA/apg/example-index/accordion/accordion) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+- Accordion is focusable using the Tab key and all focusable components within follow the page Tab sequence.
+- Pressing Space or Enter when the header panel is focused toggles the component.
+- Shift + Tab moves focus to the previous focusable item.
+
+#### Screen readers
+
+The accordion header button utilizes **`aria-expanded`** to indicate the expansion and collapse of the content. 
+When expanded **`aria-controls`** is added to the button pointing to the content. 
+The button utilizes **`aria-label`** to give an accessible name to itself. The content has **`aria-labelledby`** supplied with button ID.
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-expanded` | button | Button |
+| `aria-controls` | button | Button |
+| `aria-label` | button | Button |
+| `aria-labelledby` | region | AccordionItem |

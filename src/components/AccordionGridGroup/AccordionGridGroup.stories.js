@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
-
-
 import CreateIcon from 'mdi-react/CreateIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   IconButton,
@@ -14,6 +13,7 @@ import {
   TextField,
 } from '../../index';
 import AccordionGridGroup from './AccordionGridGroup';
+import AccordionGridReadme from './AccordionGridGroup.mdx';
 
 const data = [
   {
@@ -80,10 +80,20 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
+      page: () => (
+        <>
+          <AccordionGridReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
     },
+    tabs: [
+      { label: 'Design', mdx: AccordionGridReadme },
+      { label: 'Implementation' },
+    ],
   },
   argTypes: {
     id: {
@@ -225,32 +235,6 @@ export const Controlled = () => {
     </>
   );
 };
-
-
-// const items = [
-//   { id: 1, name: "Aardvark", key: "Aardvark" },
-//   { id: 2, name: "Kangaroo", key: "Kangaroo" },
-//   { id: 3, name: "Snake", key: "Snake" },
-//   { id: 4, name: "Frog", key: "Frog" },
-//   { id: 5, name: "Seal", key: "Seal" },
-//   { id: 6, name: "Orangutan", key: "Orangutan" },
-//   { id: 7, name: "Shark", key: "Shark" }
-// ];
-
-// const data = [
-//   {
-//     name: "Client Application Developer",
-//     key: "Client"
-//   },
-//   {
-//     name: "Environment Admin",
-//     key: "Environment"
-//   },
-//   {
-//     name: "Organization Admin",
-//     key: "Organization"
-//   }
-// ];
 
 export const AccordionWithInputs = () => {
   return (

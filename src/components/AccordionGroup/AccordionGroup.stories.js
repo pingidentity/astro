@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
-
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import Text from '../Text';
 import Button from '../Button';
+import TextField from '../TextField';
 import AccordionGroup from '.';
+import AccordionReadme from './AccordionGroup.mdx';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button>Hi</Button> },
   { key: 't2', label: 'Second Accordion', children: 'Child Renders Here' },
-  { key: 't3', label: 'Third Accordion', children: 'Child Renders Here' },
+  { key: 't3', label: 'Third Accordion', children: <TextField /> },
 ];
 
 const itemArrayDisabled = [
@@ -25,6 +27,12 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
+      page: () => (
+        <>
+          <AccordionReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
@@ -83,7 +91,7 @@ export const Multiple = () => {
 };
 
 export const ControlledExpanded = () => {
-  const [expandedKeys, setExpandedKeys] = useState(['t1']);
+  const [expandedKeys, setExpandedKeys] = useState(['t3']);
   return (
     /*
      * itemArray = [

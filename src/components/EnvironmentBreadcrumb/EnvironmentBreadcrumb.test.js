@@ -16,11 +16,13 @@ const items = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
 const itemsWithSections = [
   {
     name: 'Heading 1',
+    key: 'Heading 1',
     options: [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }],
   },
   {
     name: 'Heading 2',
-    options: [{ name: 'Foo' }, { name: 'Zod' }, { name: 'Zay' }],
+    key: 'Heading 2',
+    options: [{ name: 'Foo1' }, { name: 'Bar1' }, { name: 'Baz1' }],
   },
 ];
 
@@ -67,7 +69,8 @@ const getSectionsComponent = (props = {}) =>
         {section => (
           // eslint-disable-next-line testing-library/no-node-access
           <Section
-            key={section.name}
+            key={section.key}
+            name={section.name}
             title={section.name}
             items={section.options}
           >
@@ -172,6 +175,16 @@ test('should render items with sections passed in props', () => {
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   userEvent.click(screen.getByText(testSelectedItem));
+  expect(screen.getAllByRole('group')).toHaveLength(2);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(6);
+});
+
+test('should render the separators', () => {
+  getSectionsComponent();
+
+  userEvent.click(screen.getByText(testSelectedItem));
+  expect(screen.queryAllByRole('separator')).toHaveLength(3);
   const groups = screen.getAllByRole('group');
   expect(groups).toHaveLength(2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
@@ -292,7 +305,7 @@ test('should hide section title if no search results within it', () => {
   // Open popover
   userEvent.click(screen.getByText(testSelectedItem));
   // Search for option exclusive to only one section
-  userEvent.type(screen.getByRole('searchbox'), 'Zod');
+  userEvent.type(screen.getByRole('searchbox'), 'Bar1');
 
   // 'Heading 1' should not be rendered, but 'Heading 2' should be
   expect(screen.queryByText(itemsWithSections[0].name)).not.toBeInTheDocument();

@@ -1,8 +1,11 @@
 import React from 'react';
+import { OverlayProvider } from 'react-aria';
+import userEvent from '@testing-library/user-event';
+
 import axeTest from '../../utils/testUtils/testAxe';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { SelectField, Item } from '../../index';
+import { SelectField, Item, Section } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 const items = [
@@ -10,6 +13,31 @@ const items = [
   { name: 'b' },
   { name: 'c' },
 ];
+
+const withSection = [
+  { name: 'Animals',
+    key: 'Animals',
+    kids: [
+      { name: 'Aardvark' },
+      { name: 'Kangaroo' },
+      { name: 'Snake' },
+    ] },
+  { name: 'People',
+    key: 'People',
+    kids: [
+      { name: 'Michael' },
+      { name: 'Dwight' },
+      { name: 'Creed' },
+    ] },
+  { name: null,
+    key: 'Fruit',
+    kids: [
+      { name: 'Apple' },
+      { name: 'Strawberry' },
+      { name: 'Blueberry' },
+    ] },
+];
+
 const testId = 'test-dropdown';
 const controlTestId = `${testId}-input`;
 const testValue = 'test';
@@ -27,6 +55,18 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <SelectField {...defaultProps} {...props}>
     {item => <Item key={item.name}>{item.name}</Item>}
   </SelectField>
+));
+
+const getComponentWithSections = (props = {}, { renderFn = render } = {}) => renderFn((
+  <OverlayProvider>
+    <SelectField {...defaultProps} {...props} items={withSection} >
+      {section => (
+        <Section key={section.key} items={section.kids} title={section.name}>
+          {item => <Item key={item.name}>{item.name}</Item>}
+        </Section>
+      )}
+    </SelectField>
+  </OverlayProvider>
 ));
 
 // Need to be added to each test file to test accessibility using axe.
@@ -74,4 +114,18 @@ test('passing helper text should display it and correct aria attributes on input
 
   const helperTextID = helper.getAttribute('id');
   expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
+});
+
+test('passing sections, renders separators', () => {
+  getComponentWithSections();
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(screen.queryAllByRole('separator')).toHaveLength(2);
+});
+
+test('a blank title does not render', () => {
+  getComponentWithSections();
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
 });
