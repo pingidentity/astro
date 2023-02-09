@@ -3,7 +3,9 @@ import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import CreateIcon from 'mdi-react/CreateIcon';
 import FilterIcon from 'mdi-react/FilterIcon';
 import { buttonVariants } from '../../utils/devUtils/constants/variants';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Icon, SearchField, Text } from '../../index';
+import ButtonReadme from './Button.mdx';
 
 // removing the iconButton variants from this story.
 const variants = buttonVariants;
@@ -51,6 +53,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <ButtonReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
 };

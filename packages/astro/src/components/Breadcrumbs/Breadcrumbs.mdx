@@ -1,0 +1,41 @@
+<Meta title="Components/Breadcrumbs/Breadcrumbs" />
+
+# Breadcrumbs
+
+Breadcrumbs component wraps an array of BreadcrumbItem components and icons, rendered between each node, sans last-child. It utilizes
+[useBreadcrumbs](https://react-spectrum.adobe.com/react-aria/useBreadcrumbs.html) from React-Aria.
+
+### Required components
+
+- Item: Component is exported within Astro but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Best practices
+
+Breadcrumbs should:
+- show a consistent hierarchical structure.
+- follow a single direction of navigation.
+
+Breadcrumbs shouldn’t:
+- display too many levels of items.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Breadcrumbs](https://www.w3.org/WAI/ARIA/apg/example-index/breadcrumb/index.html) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+- Each BreadcrumbItem is focusable using the Tab key.
+- Pressing Space or Enter selects the item and navigates to the associated location.
+- Shift + Tab moves focus to the previous focusable item.
+
+#### Screen readers
+
+Breadcrumbs and BreadcrumbItems utilizes **`aria-label`** to give an accessible name to the components. The Icon utilizes **`aria-hidden`** to hide it’s content from assistive technology.
+Only the last BreadcrumbItem has **`aria-current`** indicating that the user is currently viewing that page.
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-label` | navigation | Box(Breadcrumbs) |
+| `aria-label` | link | BreadcrumbItem |
+| `aria-hidden` | graphics-document | Icon |
+| `aria-current` | link | BreadcrumbItem(last) |

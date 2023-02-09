@@ -11,13 +11,6 @@ import { Box, Icon } from '../../index';
 import { usePropWarning } from '../../hooks/';
 import BreadcrumbItem from './BreadcrumbItem';
 
-/**
- * Breadcrumbs component wrapping an array of `BreadcrumbItem` elements and icon,
- * which will be rendered between each node, sans last-child
- *
- * Utilizes [useBreadcrumbs](https://react-spectrum.adobe.com/react-aria/useBreadcrumbs.html) from React-Aria.
- * */
-
 const Breadcrumbs = forwardRef((props, ref) => {
   const { children, icon, iconProps, onAction, ...others } = props;
   // the following filters undefined values passed as a child
@@ -58,7 +51,7 @@ const Breadcrumbs = forwardRef((props, ref) => {
         >
           {child.props.children}
         </BreadcrumbItem>
-        {icon && !isCurrentItem && <Icon aria-hidden="true" icon={icon} mx={5} size={16} {...iconProps} />}
+        {icon && !isCurrentItem && <Icon aria-hidden="true" icon={icon} mx={5} size="xs" {...iconProps} />}
       </Box>
     );
   }, [children.length, filteredChildren, icon, iconProps, onAction]);

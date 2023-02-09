@@ -2,11 +2,6 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar as ThemeUIAvatar } from 'theme-ui';
 
-/**
- * Basic avatar component.
- * Built on top of [Avatar from Theme-UI](https://theme-ui.com/components/avatar/).
- */
-
 const Avatar = forwardRef((props, ref) => {
   return (
     <ThemeUIAvatar
@@ -22,7 +17,6 @@ Avatar.propTypes = {
   /** Alternative text for avatar. */
   alt: PropTypes.string,
 };
-
 
 Avatar.defaultProps = {
   alt: 'Avatar',

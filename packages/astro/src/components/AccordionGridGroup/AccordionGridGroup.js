@@ -18,17 +18,6 @@ export const collectionTypes = {
   PLACEHOLDER: 'placeholder',
 };
 
-/**
- * Component that allows for a child to be expanded and retracted,
- * and allows for children to be passed into a header and body for each item.
- *
- * A `AccordionGridItem` is a composed component and must be comprised of two children: 1) a Header,
- * which will be control expansion of the body, and 2) a Body which renders non-interactive content.
- * The purpose of this component is to allow keyboard interaction
- * with children passed into the Body and Header
- * If a more simple implementation is desired, please consider the AccordionGroup.
- */
-
 const AccordionGridGroup = forwardRef((props, ref) => {
   const {
     disabledKeys,
