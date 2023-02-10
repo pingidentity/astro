@@ -1,0 +1,37 @@
+<Meta title="Components/Icon/Icon" />
+
+# Icon
+
+Icon component fills the default '1em' x '1em' container and maintains the aspect ratio.
+It is built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the available [props from Theme-UI](https://theme-ui.com/sx-prop).
+Use SVGR to import SVG files as React components and pass them into this component.
+You can also use the theme to color the icon. 
+Be sure to pass dimensions: false in web pack config (see [SVGR docs](https://react-svgr.com/docs/options/#dimensions)).
+Otherwise, Icon will not be resizable by size prop. 
+Icons can also be imported from the [Material UI Icon Library](https://materialdesignicons.com/).
+
+### Required Components
+
+- Icon component can be used independently and does not require additional components.
+
+### Best Practices
+
+Icon should:
+- have sufficient space in between and be centrally aligned when used in a group.
+- be paired with a text or tooltip when the icon fails to provide suitable context.
+- have a size relative to text when used together.
+
+Icon shouldn’t:
+- use letters as part of the design.
+- be randomly scaled to fit the layout. 
+
+### Accessibility
+
+#### Screen Readers
+
+If the icon has a title associated with it, the SVG has **`aria-labelledby`** with the title ID supplied to it.
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-labelledby` | graphical-document | Icon |
+

@@ -63,7 +63,6 @@ pipeline {
                 resources:
                   requests:
                     memory: "1000Mi"
-                    cpu: "1000m"
                   limits:
                     memory: "6250Mi"
       '''
