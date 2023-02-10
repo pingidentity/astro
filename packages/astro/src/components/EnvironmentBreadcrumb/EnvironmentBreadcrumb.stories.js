@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
 import { Item, Section, Chip, Box, Text } from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import EnvironmentBreadcrumbReadme from './EnvironmentBreadcrumb.mdx';
 
 export default {
   title: 'Components/EnvironmentBreadcrumb',
   component: EnvironmentBreadcrumb,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <EnvironmentBreadcrumbReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

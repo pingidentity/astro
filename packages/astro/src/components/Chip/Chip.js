@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Badge from './Badge';
 import { useDeprecationWarning } from '../../hooks';
-/**
- * Chip component.
- * Built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the
- * available [props from Theme-UI](https://theme-ui.com/sx-prop).
-*/
 
 const Chip = React.forwardRef((props, ref) => {
   useDeprecationWarning(

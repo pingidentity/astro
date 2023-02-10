@@ -5,12 +5,6 @@ import { BadgeContext } from '../../context/BadgeContext';
 import { Box, Text } from '../../';
 import * as colors from '../../styles/colors';
 
-/**
- * Badge component.
- * Built on top of the [Badge from Theme-UI](https://theme-ui.com/components/box/) and uses the
- * available [props from Theme-UI](https://theme-ui.com/sx-prop).
-*/
-
 const Badge = React.forwardRef((props, ref) => {
   const {
     align,
