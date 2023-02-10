@@ -17,12 +17,20 @@ import {
 } from '../../index';
 import { flatColorList } from '../../styles/colors';
 import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import IconReadme from './Icon.mdx';
 
 export default {
   title: 'Components/Icon',
   component: Icon,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <IconReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
