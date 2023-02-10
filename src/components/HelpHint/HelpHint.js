@@ -12,13 +12,6 @@ const HelpIcon = () => (
   </svg>
 );
 
-/**
- * A `HelpHint` is a composed component using tooltip trigger and icon button.
- *
- * For customization the trigger icon,
- * please see the [TooltipTrigger](./?path=/docs/tooltiptrigger--default) docs.
- */
-
 const HelpHint = forwardRef((props, ref) => {
   const {
     children,

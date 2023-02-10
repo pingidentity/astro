@@ -38,7 +38,7 @@ export const Default = () => {
 
   return (
     <Box p="md" ml="sm" bg="background" >
-      <Box isRow>
+      <Box isRow >
         <Badge
           label="Any"
           bg="neutral.20"

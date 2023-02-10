@@ -7,6 +7,8 @@ import Icon from '../Icon';
 import IconButton from '../IconButton';
 import Box from '../Box';
 import { flatColorList } from '../../styles/colors.js';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import BadgeReadme from './Badge.mdx';
 
 export default {
   title: 'Badge',
@@ -37,6 +39,19 @@ export default {
       control: {
         type: 'boolean',
       },
+    },
+  },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+      page: () => (
+        <>
+          <BadgeReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
 };

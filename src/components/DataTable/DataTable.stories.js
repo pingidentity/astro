@@ -4,6 +4,7 @@ import ApplicationIcon from 'mdi-react/ApplicationIcon';
 import { useAsyncList } from 'react-stately';
 import { faker } from '@faker-js/faker';
 import { action } from '@storybook/addon-actions';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import {
@@ -18,11 +19,19 @@ import {
   DataTableMultiLine,
 } from '../../index';
 
+import DataTableReadme from './DataTable.mdx';
+
 export default {
   title: 'Components/DataTable',
   component: DataTable,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <DataTableReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

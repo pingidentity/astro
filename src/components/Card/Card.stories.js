@@ -1,9 +1,21 @@
 import React from 'react';
 import { Box, Button, Card } from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import CardReadme from './Card.mdx';
 
 export default {
   title: 'Components/Card',
   component: Card,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <CardReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     children: {
       description: 'Card content.',
@@ -52,9 +64,7 @@ export const CardRow = (args) => {
 
 export const InteractiveCard = () => {
   const sx = {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
+    alignContent: 'center',
     height: '221px',
     justifyContent: 'center',
     textAlign: 'center',

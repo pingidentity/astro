@@ -2,10 +2,22 @@ import React from 'react';
 import Link from '../Link';
 import Text from '../Text';
 import CopyText from './CopyText';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import CopyTextReadme from './CopyText.mdx';
 
 export default {
   title: 'Components/CopyText',
   component: CopyText,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <CopyTextReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     mode: {
       control: 'none',

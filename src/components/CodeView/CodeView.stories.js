@@ -3,6 +3,8 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-powershell';
 import CodeView from './CodeView';
 import { Text } from '../..';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import CodeViewReadme from './CodeView.mdx';
 
 const code = `{
   "_links": {
@@ -76,6 +78,14 @@ export default {
     },
   },
   parameters: {
+    docs: {
+      page: () => (
+        <>
+          <CodeViewReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
     a11y: {
       config: {
         rules: [

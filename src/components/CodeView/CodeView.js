@@ -8,11 +8,6 @@ import { useStatusClasses } from '../../hooks';
 import { Box, CopyText } from '../..';
 import styles from './CodeView.styles';
 
-/**
- * Component for code syntax highlighting.
- * Built on top of [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer).
- */
-
 const CodeView = forwardRef((props, ref) => {
   const {
     children,
