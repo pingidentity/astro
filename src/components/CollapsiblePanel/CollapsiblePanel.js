@@ -7,11 +7,6 @@ import { useStatusClasses } from '../../hooks';
 import CollapsiblePanelBadge from '../CollapsiblePanelContainer/CollapsiblePanelBadge';
 import { Box, ListView, CollapsiblePanelContainer, Text } from '../../index';
 
-/**
- * The CollapsiblePanel serves as a filter menu with a menu title
- * and selected count displayed in a badge.
- */
-
 const CollapsiblePanel = forwardRef((props, ref) => {
   const {
     selectedFilterCount,

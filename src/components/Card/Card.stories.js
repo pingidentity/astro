@@ -1,9 +1,21 @@
 import React from 'react';
 import { Box, Button, Card } from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import CardReadme from './Card.mdx';
 
 export default {
   title: 'Components/Card',
   component: Card,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <CardReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     children: {
       description: 'Card content.',

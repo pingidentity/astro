@@ -34,7 +34,6 @@ export const breadCrumbDataIds = {
   environmentButton: 'breadcrumb--environment-button',
   orgButton: 'breadcrumb--org-button',
 };
-/** The Environment Picker with Search and Sections support */
 
 const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   const {

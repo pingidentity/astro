@@ -1,0 +1,39 @@
+<Meta title="Components/HelpHint/HelpHint" />
+
+# HelpHint
+
+HelpHint is a composed component using the Tooltip trigger and IconButton.
+For customization of the trigger icon, please see the [TooltipTrigger](./?path=/docs/components-tooltiptrigger--default) docs.
+
+### Required Components
+
+- HelpHint component can be used independently and does not require additional components.
+
+### Best Practices
+
+HelpHint should:
+- use short and clear sentences.
+- have text size relative to the trigger button.
+
+HelpHint shouldn’t:
+- be blocking important information when the Tooltip is open.
+- be used for pertinent information. Try HelperText instead.
+
+### Accessibility
+This component adheres to [WAI-ARIA Button](https://www.w3.org/TR/wai-aria-practices-1.1/examples/button/button.html) accessibility guidelines.
+
+#### Keyboard Navigation
+
+- HelpHint is focusable using the Tab key and can be selected using the Space or Enter key.
+- Pressing the Escape Key when the button is focused, closes the Tooltip.
+
+#### Screen Readers
+
+The trigger button has the attribute **`aria-describedby`** with the tooltip ID to announce the Tooltip text upon visibility. 
+The **`aria-live`** announces dynamic changes in the content of a live region.
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-describedby` | button | Button |
+| `aria-live` | tooltip | Tooltip |
+
