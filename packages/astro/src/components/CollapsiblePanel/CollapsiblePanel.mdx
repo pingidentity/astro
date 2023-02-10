@@ -1,0 +1,36 @@
+<Meta title="Components/CollapsiblePanel/CollapsiblePanel" />
+
+# CollapsiblePanel
+
+CollapsiblePanel serves as a filter menu with a menu title. The selected count is displayed on a badge.
+
+### Required Components
+
+- Text
+
+### Best Practices
+
+CollapsiblePanel should:
+- be used to reduce horizontal space.
+
+CollapsiblePanel shouldn’t:
+- be used with an invisible trigger.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+- The trigger button and content inside the panel are focusable using the Tab key.
+- Pressing Space or Enter when the trigger is focused expands/collapses the content.
+- Shift + Tab moves focus to the previous focusable component.
+- Components within are accessible via arrow keys.
+- Pressing the Escape Key when the panel is expanded closes it.
+
+#### Screen Readers
+
+CollapsiblePanel has **`aria-rowcount`** and **`aria-columncount`** to indicate the total number of rows and columns in the grid structure.
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-rowcount` | grid | ListView |
+| `aria-columncount` | grid | ListView |

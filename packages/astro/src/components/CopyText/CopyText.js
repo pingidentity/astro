@@ -25,10 +25,6 @@ TooltipWrapper.propTypes = {
   tooltip: PropTypes.string,
 };
 
-/**
- * Allows copying some pieces of text by clicking on the text or by the button nearby.
- */
-
 const CopyText = forwardRef((props, ref) => {
   const { children, textToCopy, tooltipText, mode, tooltipProps, wrapperProps, ...others } = props;
   const value = textToCopy || (mode === 'link' ? children.props.href : children.props.children);

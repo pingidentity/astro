@@ -4,6 +4,8 @@ import ApplicationIcon from 'mdi-react/ApplicationIcon';
 import { action } from '@storybook/addon-actions';
 import { faker } from '@faker-js/faker';
 import isChromatic from 'chromatic/isChromatic';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import DataTableReadme from './DataTable.mdx';
 
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import {
@@ -23,6 +25,12 @@ export default {
   component: DataTable,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <DataTableReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

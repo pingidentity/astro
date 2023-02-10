@@ -6,10 +6,6 @@ import { useFocusRing } from '@react-aria/focus';
 import Box from '../Box';
 import { useStatusClasses } from '../../hooks';
 
-/**
- * A Box component built for the common "Card" use case. Has default variant of card.
- * See Box for list of props.
- */
 const Card = forwardRef((props, ref) => {
   const {
     className,
