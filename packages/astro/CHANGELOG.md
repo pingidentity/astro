@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.40.1...@pingux/astro@1.41.0) (2023-02-10)
+
+
+### Bug Fixes
+
+* [UIP-5927] Astro Add Separator to ListBoxSection ([f18c1d2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f18c1d252744180f7875e95e360fe352ffef20b7))
+* [UIP-5978] Astro Backet Adjust Spacing ([4625efb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4625efb982acf90ecabf0452d0809fb44c482875))
+* [UIP-5982] Card component updates ([34d9206](https://gitlab.corp.pingidentity.com/ux/pingux/commit/34d920646cb4261bc75dabbd2ad2d80ba9ee2bfa))
+* [UIP-5994] CheckboxField focuses on ListView item when click ([670e3aa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/670e3aa79828e39d169fb12c682e62416dfca1ed))
+* [UIP-5999] Update skeleton load image src ([3a9fda7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3a9fda795c1e39798692f33b682aa838dd8b5bb3))
+* [UIP-6001] Updated Message Toggle in Overlay Recipe ([add7ba7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/add7ba700731c22777c4bc25cd6086beeb481c8e))
+
+
+### Features
+
+* [UIP-5968] Add component overview page AccordionGrid-button ([ddf0281](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ddf0281738dbfde8905f8684b35e2e2f96cc3771))
+* [UIP-5980] Breadcrumb story and component updates ([8b35776](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8b35776f9701b8a8f3425bdb6142afe7eef82cfb))
+* [UIP-6028] Adding Patterns to Storybook ([77457d7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/77457d71aff1cd8b6ad6699543ca0c7ff8cc458e))
+* [UIP-6030] Interactive Card ([9d41446](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9d41446c5356866c05e9dd333c631937f8333de9))
+
+
+
+
+
 ## [1.40.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.40.0...@pingux/astro@1.40.1) (2023-01-26)
 
 
