@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.41.0...@pingux/astro@1.42.0) (2023-02-13)
+
+
+### Features
+
+* [UIP-5969] Add component overview page Card-Icon ([45c0eae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/45c0eae70f9baa67defa3c0d10d5f8e8198df9a7))
+
+
+
+
+
 # [1.41.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.40.1...@pingux/astro@1.41.0) (2023-02-10)
 
 
