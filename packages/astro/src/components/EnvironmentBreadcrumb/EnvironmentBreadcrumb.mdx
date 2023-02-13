@@ -1,0 +1,44 @@
+<Meta title="Components/EnvironmentalBreadcrumb/EnvironmentalBreadcrumb" />
+
+# EnvironmentalBreadcrumb
+
+The Environment Picker with Search and Sections support.
+
+### Required components
+
+- Item: Component is exported within Astro but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+- Chip
+- Text
+- Box
+
+### Best practices
+
+EnvironmentalBreadcrumb should:
+- show a consistent hierarchical structure.
+
+EnvironmentalBreadcrumb shouldn’t:
+- display too many levels of items.
+- be used as primary navigation.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+- Each breadcrumb item is focusable using the Tab key.
+- Pressing Space or Enter selects the item.
+- Shift + Tab moves focus to the previous focusable component.
+- Components within the list are accessible via arrow keys.
+- Pressing the Escape Key when the panel is expanded, closes it.
+
+#### Screen readers
+Each breadcrumb item has **`aria-label`** to give an accessible name to the component. 
+The trigger button utilizes **`aria-expanded`** to indicate the expansion and collapse of content.
+When expanded, **`aria-controls`** is added to the button pointing to the popup content. 
+The attribute **`aria-haspopup`** describes the type of popup content(listbox).
+
+| Aria Attribute | Role | Component |
+| ---- | ---- | ----------- |
+| `aria-label` | link/button | Button |
+| `aria-haspopup` | button | Button |
+| `aria-expanded` | button | Button |
+| `aria-controls` | button | Button |

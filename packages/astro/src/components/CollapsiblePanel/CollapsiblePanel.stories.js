@@ -23,12 +23,20 @@ import {
   SearchField,
   Text,
 } from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
 
 export default {
   title: 'Components/CollapsiblePanel',
   component: CollapsiblePanel,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <CollapsiblePanelReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
