@@ -1,10 +1,22 @@
 import React from 'react';
 import HelpHint from '.';
 import Box from '../Box';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import HelpHintReadme from './HelpHint.mdx';
 
 export default {
   title: 'Components/HelpHint',
   component: HelpHint,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <HelpHintReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     children: {
       description: 'Tooltip content',

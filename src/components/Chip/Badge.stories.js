@@ -7,10 +7,22 @@ import Icon from '../Icon';
 import IconButton from '../IconButton';
 import Box from '../Box';
 import { flatColorList } from '../../styles/colors.js';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import ChipReadme from './Chip.mdx';
 
 export default {
   title: 'Components/Chip',
   component: Chip,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <ChipReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     bg: {
       control: {

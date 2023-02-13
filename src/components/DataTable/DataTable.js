@@ -44,32 +44,6 @@ const ROW_HEIGHTS = {
   },
 };
 
-/**
- * Inspired by [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
- * from React Spectrum and [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
- * from React Stately.
- *
- * DataTable is a complex collection component that is built from many child elements including
- * columns, rows and cells. Columns are defined within DataTableHeader element via DataTableColumn
- * and rows are defined within a DataTableBody element via DataTableRow. Rows contain DataTableCell
- * elements that correspond to each column.
- *
- * [TableHeader](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=defined%20using%20the-,TableHeader,-%2C%20Column%2C)
- * uses the alias DataTableHeader.
- *
- * [Column](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=the%20TableHeader%2C-,Column,-%2C%20TableBody%2C)
- * uses the alias DataTableColumn.
- *
- * [Cell](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=Row%2C%20and-,Cell,-components%2C%20which%20support)
- * uses the alias DataTableCell.
- *
- * [Row](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20TableBody%2C-,Row,-%2C%20and%20Cell%20components)
- * uses the alias DataTableCell.
- *
- * [TableBody](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20Column%2C-,TableBody,-%2C%20Row%2C%20and)
- * uses the alias DataTableBody.
-*/
-
 const DataTable = forwardRef((props, ref) => {
   const {
     width,
