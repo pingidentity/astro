@@ -6,6 +6,7 @@ include:
   - local: .gitlab-ci/build-test-lint-packages.yml
   - local: .gitlab-ci/commit-lint.yml
   - local: .gitlab-ci/deploy.yml
+  - local: .gitlab-ci/test-screenshot.yml
 
 # NOTE: The numerical suffix in the image string refers to the version of the docker image
 # this number will need to be incremented (i.e. 1.1 to 1.2), when changes to a package
@@ -21,6 +22,7 @@ stages:
   - build-ci-image
   - build-dependencies
   - build-test-lint
+  - screenshot
   - deploy
 
 .base-job:
