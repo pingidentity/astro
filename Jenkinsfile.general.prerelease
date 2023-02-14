@@ -177,9 +177,7 @@ pipeline {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
                 env.RELEASE_JSON = json;
                 def lazyMap = new groovy.json.JsonSlurper().parseText(json);
-                for (prop in lazyMap) {
-                  updatedPackagesMap[prop.key] = prop.value;
-                }
+                updatedPackagesMap["@pingux/astro"] = lazyMap["@pingux/astro"];
               }
             }
 
@@ -192,20 +190,22 @@ pipeline {
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
                 sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
 
-                script {
-                  if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
-                    echo 'Publishing @pingux/schema-form@next to npmjs.org'
-                    sh 'cd packages/schema-form/ && npm publish --tag next'
-                  }
+                // Temporarily removed to prevent publishing to npmjs.org
+                
+                // script {
+                //   if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
+                //     echo 'Publishing @pingux/schema-form@next to npmjs.org'
+                //     sh 'cd packages/schema-form/ && npm publish --tag next'
+                //   }
 
-                  if (updatedPackagesMap.containsKey("@pingux/astro")) {
-                    echo 'Publishing @pingux/astro@next dist-tag to npmjs.org'
-                    sh 'cd packages/astro/ && npm publish --tag next'
-                  }
-                }
+                //   if (updatedPackagesMap.containsKey("@pingux/astro")) {
+                //     echo 'Publishing @pingux/astro@next dist-tag to npmjs.org'
+                //     sh 'cd packages/astro/ && npm publish --tag v2'
+                //   }
+                // }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}"
+                sh "cd packages/astro/ && npm publish --tag astro-v2 --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
               }
             }
           }

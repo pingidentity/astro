@@ -1,5 +1,4 @@
-# `@pingux/astro@2.0.0.alpha.0`
-Migration documentation coming soon
+# `@pingux/astro`
 
 Astro is a lightweight, composable, and themeable React component library. Astro was created to help developers and designers create consistent, user friendly, and accessible UIs across all Ping products. Please visit https://pingidentity.design for more information and to read individual component documentation.
 
