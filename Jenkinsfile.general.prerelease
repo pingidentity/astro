@@ -184,11 +184,11 @@ pipeline {
             echo "Publishing packages"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
-                sh "echo 'Publishing packages to npmjs.org registry'"
-                sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
-                sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
-                sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
-                sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
+                // sh "echo 'Publishing packages to npmjs.org registry'"
+                // sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
+                // sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
+                // sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
+                // sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
                 sh "cp .yarnrc packages/astro/.yarnrc"
 
                 // Temporarily removed to prevent publishing to npmjs.org
