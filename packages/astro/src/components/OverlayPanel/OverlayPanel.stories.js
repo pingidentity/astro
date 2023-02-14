@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Item } from 'react-stately';
 import ArrowTopRightBottomLeft from 'mdi-react/ArrowTopRightBottomLeftIcon';
 import ArrowCollapse from 'mdi-react/ArrowCollapseIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
@@ -12,9 +11,8 @@ import {
   OverlayProvider,
   Box,
   Text,
-  List,
-  ListItem,
-  Separator,
+  ListView,
+  Item,
   Messages,
   Button,
   Avatar,
@@ -153,6 +151,11 @@ export const InnerPanel = ({ ...args }) => {
     </>
   );
 
+  const items = [
+    { id: 1, name: 'Form 1' },
+    { id: 2, name: 'Form 2' },
+  ];
+
   const outer = (
     // should have higher z-index applied
     <>
@@ -170,16 +173,15 @@ export const InnerPanel = ({ ...args }) => {
             <Text pt="md" mb="24px">
               Children render here.
             </Text>
-            <List>
-              <ListItem>
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 1</Text>
-              </ListItem>
-              <Separator margin="0" />
-              <ListItem title="Form 2">
-                <Text variant="itemTitle" alignSelf="center" mr="auto">Form 2</Text>
-              </ListItem>
-              <Separator margin="0" />
-            </List>
+            <ListView items={items}>
+              {
+                item => (
+                  <Item key={item.id}>
+                    <Text variant="itemTitle" alignSelf="center" mr="auto">{item.name}</Text>
+                  </Item>
+                )
+              }
+            </ListView>
             <br />
             <Button onPress={toggleMessagesOpen}>Toggle Messages</Button>
             <br />
