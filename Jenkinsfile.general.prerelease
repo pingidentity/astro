@@ -189,6 +189,7 @@ pipeline {
                 sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
                 sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
+                sh "cp .yarnrc packages/astro/.yarnrc"
 
                 // Temporarily removed to prevent publishing to npmjs.org
                 
@@ -205,7 +206,7 @@ pipeline {
                 // }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "cd packages/astro/ && npm publish --tag astro-v2 --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
+                sh "cd packages/astro/ && yarn publish --tag astro-v2"
               }
             }
           }
