@@ -4,10 +4,9 @@ import { useSingleSelectListState } from '@react-stately/list';
 
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 import { stepStatuses } from './Stepper.constants';
-import { CollectionStep } from './Step';
+import { Step, Tab, Tabs } from '../..';
+
 import Line from './Line';
-import Tab from '../Tab';
-import Tabs from '../Tabs';
 
 const {
   ACTIVE,
@@ -55,7 +54,7 @@ const Stepper = forwardRef((props, ref) => {
     const stepIndex = i + 1;
     const stepStatus = getStatus(stepIndex);
     const step = (
-      <CollectionStep
+      <Step
         key={item.key}
         value={stepIndex}
         status={stepStatus}
