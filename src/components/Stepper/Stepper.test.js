@@ -2,14 +2,13 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import { Item } from 'react-stately';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
 
 import Text from '../Text';
-
 import Stepper from './Stepper';
-import Step from './Step';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.
@@ -35,9 +34,9 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
   <CacheProvider value={emotionCache}>
     <Stepper {...defaultProps} {...props}>
       {({ name, children }) => (
-        <Step key={name || children} textValue={name || children}>
+        <Item key={name || children} textValue={name || children}>
           <Text>{children}</Text>
-        </Step>
+        </Item>
       )}
     </Stepper>
   </CacheProvider>,
