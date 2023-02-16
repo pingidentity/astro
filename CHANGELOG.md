@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.0...@pingux/astro@1.42.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* [UIP-6013] List and Panel Recipe Style Fixes ([c9d69b9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c9d69b9014889263e0ea16305128737ee59c9a1f))
+
+
+
+
+
 # [1.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.41.0...@pingux/astro@1.42.0) (2023-02-13)
 
 
