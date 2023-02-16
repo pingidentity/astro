@@ -3,10 +3,10 @@ import Clear from 'mdi-react/CloseIcon';
 import ContentCopy from 'mdi-react/ContentCopyIcon';
 import Earth from 'mdi-react/EarthIcon';
 import Badge from '.';
-import Icon from '../Icon';
-import IconButton from '../IconButton';
 import Box from '../Box';
 import { flatColorList } from '../../styles/colors.js';
+import Icon from '../Icon';
+import IconButton from '../IconButton';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import BadgeReadme from './Badge.mdx';
 
@@ -19,14 +19,12 @@ export default {
         type: 'select',
         options: flatColorList.map(([colorName]) => colorName),
       },
-      defaultValue: 'black',
     },
     textColor: {
       control: {
         type: 'select',
         options: flatColorList.map(([colorName]) => colorName),
       },
-      defaultValue: 'white',
     },
     label: {
       defaultValue: 'Label',
@@ -73,13 +71,13 @@ const VariableIcon = (props) => {
 };
 
 export const Default = ({ ...args }) => (
-  <Badge label="Label" color="white" {...args} />
+  <Badge label="Label" {...args} />
 );
 
-export const CountBadge = ({ ...args }) => (
+export const CountBadge = () => (
   <Box>
-    <Badge color="white" {...args} label="1" variant="countBadge" mb="12px" />
-    <Badge {...args} label="1" variant="countNeutral" />
+    <Badge label="1" variant="countBadge" mb="12px" />
+    <Badge label="1" variant="countNeutral" />
   </Box>
 );
 
