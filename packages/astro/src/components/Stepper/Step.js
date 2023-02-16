@@ -1,11 +1,9 @@
 import React, { forwardRef } from 'react';
 import CheckBoldIcon from 'mdi-react/CheckBoldIcon';
 import PropTypes from 'prop-types';
-import { Item as Step } from 'react-stately';
 import { useHover } from '@react-aria/interactions';
 
 import { stepStatuses } from './Stepper.constants';
-
 import { Box, Icon } from '../../index';
 
 const {
@@ -13,7 +11,7 @@ const {
   INACTIVE,
 } = stepStatuses;
 
-export const CollectionStep = forwardRef((props, ref) => {
+const Step = forwardRef((props, ref) => {
   const { status, value } = props;
   const { hoverProps, isHovered } = useHover(props);
 
@@ -35,12 +33,12 @@ export const CollectionStep = forwardRef((props, ref) => {
   );
 });
 
-CollectionStep.propTypes = {
+Step.propTypes = {
   status: PropTypes.oneOf(Object.values(stepStatuses)),
   value: PropTypes.number,
 };
 
-CollectionStep.defaultProps = {
+Step.defaultProps = {
   status: INACTIVE,
   value: 0,
 };
