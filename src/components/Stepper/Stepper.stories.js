@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Item } from '@react-stately/collections';
 
-import { Stepper, Step, Text } from '../../index';
+import { Stepper, Text } from '../../index';
 
 export default {
   title: 'Components/Stepper',
@@ -52,12 +53,12 @@ const steps = [
 
 export const Default = args => (
   <Stepper {...args}>
-    <Step key="step1" textValue="Step 1">
+    <Item key="step1" textValue="Step 1">
       <Text pt="lg">This is content for step 1</Text>
-    </Step>
-    <Step key="step2" textValue="Step 2">
+    </Item>
+    <Item key="step2" textValue="Step 2">
       <Text pt="lg">This is content for step 2</Text>
-    </Step>
+    </Item>
   </Stepper>
 );
 
@@ -76,9 +77,9 @@ export const ControlledStepper = () => {
       onStepChange={setActiveStep}
     >
       {item => (
-        <Step key={item.name} textValue={item.name}>
+        <Item key={item.name} textValue={item.name}>
           <Text pt="lg">{item.children}</Text>
-        </Step>
+        </Item>
       )}
     </Stepper>
   );
@@ -86,8 +87,8 @@ export const ControlledStepper = () => {
 
 export const WithoutContent = () => (
   <Stepper>
-    <Step key="step1" textValue="Step 1" />
-    <Step key="step2" textValue="Step 2" />
-    <Step key="step3" textValue="Step 3" />
+    <Item key="step1" textValue="Step 1" />
+    <Item key="step2" textValue="Step 2" />
+    <Item key="step3" textValue="Step 3" />
   </Stepper>
 );
