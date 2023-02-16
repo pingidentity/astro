@@ -184,7 +184,7 @@ export * from './components/SelectField';
 export { default as Separator } from './components/Separator';
 export * from './components/Separator';
 
-export { default as Stepper } from './components/Stepper';
+export { default as Stepper, Step } from './components/Stepper';
 export * from './components/Stepper';
 
 export { default as Switch } from './components/Switch';
