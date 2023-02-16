@@ -7,10 +7,9 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
 
-import { Avatar, Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
+import { Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
 
 import { useOverlayPanelState } from '../hooks';
-import { pingImg } from '../utils/devUtils/constants/images';
 
 export default {
   title: 'Recipes/List with Panel',
@@ -28,13 +27,15 @@ const items = [
     email: 'idixie2@elegantthemes.com',
     firstName: 'Cacilia',
     lastName: 'Dixie',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'dfowler0@rambler.ru',
     firstName: 'Stavro',
     lastName: 'Fowler',
-    avatar: pingImg,
+    hasIcon: true,
+    avatar: AccountIcon,
   },
   {
     email: 'jgolde8@jimdo.com',
@@ -105,7 +106,6 @@ const items = [
     lastName: 'Idel',
     hasIcon: true,
     avatar: AccountIcon,
-    hasSeparator: false,
   },
 ];
 
@@ -161,7 +161,7 @@ const sx = {
       alignItems: 'center',
     },
     icon: {
-      mr: 'sm',
+      mr: 'md',
       alignSelf: 'center',
       color: 'accent.40',
     },
@@ -172,6 +172,7 @@ const sx = {
     },
     title: {
       alignSelf: 'start',
+      fontSize: 'md',
     },
     subtitle: {
       fontSize: 'sm',
@@ -190,10 +191,7 @@ const ListElement = ({ item, onClosePanel }) => {
   return (
     <Box isRow sx={sx.listElement.wrapper}>
       <Box isRow sx={sx.listElement.iconWrapper}>
-        {item.hasIcon
-            ? <Icon icon={item.avatar} size={24} sx={sx.listElement.icon} />
-            : <Avatar sx={sx.listElement.avatar} src={item.avatar} />
-          }
+        <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} />
         <Box>
           <Text variant="bodyStrong" sx={sx.listElement.title}>{item.lastName}, {item.firstName}</Text>
           <Text variant="subtitle" sx={sx.listElement.subtitle}>{item.email}</Text>
@@ -203,7 +201,7 @@ const ListElement = ({ item, onClosePanel }) => {
         <SwitchField aria-label="active user" isDefaultSelected alignSelf="center" mr="sm" />
         <PopoverMenu>
           <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
-            <Icon icon={MoreVertIcon} color="white" size="sm" />
+            <Icon icon={MoreVertIcon} size="md" />
           </IconButton>
           <Menu >
             <Item key="enable">Enable user</Item>
@@ -230,7 +228,7 @@ export const Default = () => {
   const { state: panelState, onClose: onPanelClose } = useOverlayPanelState();
   const panelTriggerRef = useRef();
 
-  const heading = 'Title of the Page';
+  const heading = 'Users';
   const description = 'The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page.';
 
   const closePanelHandler = () => {
@@ -251,7 +249,7 @@ export const Default = () => {
 
   return (
     <Box sx={sx.wrapper}>
-      <Box mb="md">
+      <Box>
         <Box
           align="center"
           isRow
@@ -259,20 +257,20 @@ export const Default = () => {
           role="heading"
           aria-level="1"
         >
-          <Text variant="title" fontWeight={3}>
+          <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
             {heading}
           </Text>
-          <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted" >
-            <Icon icon={PlusIcon} color="white" size="xs" />
+          <IconButton aria-label="icon button" ml="sm" variant="inverted" >
+            <Icon icon={PlusIcon} size="sm" />
           </IconButton>
         </Box>
-        <Text variant="bodyWeak">
+        <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
           {description}
           <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
         </Text>
       </Box>
-
-      <SearchField position="fixed" mb="sm" width="400px" placeholder="Search" aria-label="search" />
+      <SearchField position="fixed" mb="lg" mt="lg" width="400px" placeholder="Search" aria-label="search" />
+      <Separator margin={0} />
       <ListView
         items={items}
         onSelectionChange={selectItemHandler}
@@ -283,7 +281,7 @@ export const Default = () => {
           <Item
             key={item.email}
             textValue={item.email}
-            hasSeparator={item.hasSeparator}
+            hasSeparator
             listItemProps={{ pl: 15, minHeight: 75 }}
           >
             <ListElement item={item} />
@@ -307,9 +305,7 @@ export const Default = () => {
                   onClosePanel={closePanelHandler}
                 />
               </Box>
-
               <Separator margin={0} sx={sx.separator} />
-
               <Box sx={sx.tabsWrapper}>
                 <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }} >
                   <Tab title="Profile">
