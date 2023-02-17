@@ -55,6 +55,7 @@ const SwitchField = forwardRef((props, ref) => {
   const { inputProps } = useSwitch({
     children: label,
     ...whitelistedProps,
+    'aria-label': 'switch-field',
   }, state, switchRef);
   const statusClasses = { isSelected: inputProps.checked };
   const {
