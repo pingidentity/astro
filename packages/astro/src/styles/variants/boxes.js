@@ -62,6 +62,9 @@ const listViewItem = {
   outline: 'none',
   '&.is-selected': {
     bg: 'white',
+    '& li': {
+      bg: 'white',
+    },
   },
   '&.is-hovered': {
     bg: 'white',
