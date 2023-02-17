@@ -7,7 +7,23 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
 
-import { Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
+import {
+  Box,
+  Icon,
+  IconButton,
+  Link,
+  ListItem,
+  ListView,
+  Menu,
+  OverlayPanel,
+  PopoverMenu,
+  SearchField,
+  Separator,
+  SwitchField,
+  Tab,
+  Tabs,
+  Text,
+} from '../';
 
 import { useOverlayPanelState } from '../hooks';
 
@@ -155,6 +171,7 @@ const sx = {
   listElement: {
     wrapper: {
       minHeight: '60px',
+      pl: '14px',
     },
     iconWrapper: {
       mr: 'auto',
@@ -168,7 +185,7 @@ const sx = {
     avatar: {
       width: '25px',
       height: '25px',
-      mr: 'md',
+      mr: '14px',
     },
     title: {
       alignSelf: 'start',
@@ -182,14 +199,54 @@ const sx = {
     },
     menuWrapper: {
       alignSelf: 'center',
+      pr: '4px',
     },
   },
 };
 
+const ListElement = ({ item, isHoverable, onClosePanel }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePosition, setMousePosition] = useState({});
 
-const ListElement = ({ item, onClosePanel }) => {
+  const listItemRef = useRef();
+
+  const handleMenuHoverEnd = () => {
+    const { currentPositionX, currentPositionY } = mousePosition;
+    const { height, right, top } = listItemRef.current.getBoundingClientRect();
+
+    const hasMovedBackToRow =
+      currentPositionY < top + height && currentPositionX < right;
+
+    if (hasMovedBackToRow) {
+      setIsHovered(true);
+      return;
+    }
+
+    setIsHovered(false);
+  };
+
+  const handleMouseMove = (e) => {
+    setMousePosition({ currentPositionX: e.clientX, currentPositionY: e.clientY });
+  };
+
+  const handleHoveEnd = () => {
+    setIsHovered(false);
+  };
+
+  const handleHoveStart = () => {
+    setIsHovered(true);
+  };
+
   return (
-    <Box isRow sx={sx.listElement.wrapper}>
+    <ListItem
+      isHovered={isHoverable && isHovered}
+      isRow
+      onHoverEnd={handleHoveEnd}
+      onHoverStart={handleHoveStart}
+      onMouseMove={handleMouseMove}
+      ref={listItemRef}
+      sx={sx.listElement.wrapper}
+    >
       <Box isRow sx={sx.listElement.iconWrapper}>
         <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} />
         <Box>
@@ -203,7 +260,11 @@ const ListElement = ({ item, onClosePanel }) => {
           <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
             <Icon icon={MoreVertIcon} size="md" />
           </IconButton>
-          <Menu >
+          <Menu
+            onAction={handleHoveEnd}
+            onHoverEnd={handleMenuHoverEnd}
+            onHoverStart={handleHoveStart}
+          >
             <Item key="enable">Enable user</Item>
             <Item key="disable">Disable user</Item>
             <Item key="delete">Delete user</Item>
@@ -218,9 +279,10 @@ const ListElement = ({ item, onClosePanel }) => {
           </IconButton>
         }
       </Box>
-    </Box>
+    </ListItem>
   );
 };
+
 
 export const Default = () => {
   const [selectedItemId, setSelectedItemId] = useState();
@@ -247,28 +309,32 @@ export const Default = () => {
     }
   };
 
+  const title = (
+    <Box>
+      <Box
+        align="center"
+        isRow
+        mb="xs"
+        role="heading"
+        aria-level="1"
+      >
+        <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
+          {heading}
+        </Text>
+        <IconButton aria-label="icon button" ml="sm" variant="inverted" >
+          <Icon icon={PlusIcon} size="sm" />
+        </IconButton>
+      </Box>
+      <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
+        {description}
+        <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
+      </Text>
+    </Box>
+  );
+
   return (
     <Box sx={sx.wrapper}>
-      <Box>
-        <Box
-          align="center"
-          isRow
-          mb="xs"
-          role="heading"
-          aria-level="1"
-        >
-          <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
-            {heading}
-          </Text>
-          <IconButton aria-label="icon button" ml="sm" variant="inverted" >
-            <Icon icon={PlusIcon} size="sm" />
-          </IconButton>
-        </Box>
-        <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
-          {description}
-          <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
-        </Text>
-      </Box>
+      {title}
       <SearchField position="fixed" mb="lg" mt="lg" width="400px" placeholder="Search" aria-label="search" />
       <Separator margin={0} />
       <ListView
@@ -276,19 +342,19 @@ export const Default = () => {
         onSelectionChange={selectItemHandler}
         ref={panelTriggerRef}
         selectedKeys={selectedKeys}
+        isHoverable={false}
       >
         {item => (
           <Item
             key={item.email}
             textValue={item.email}
-            hasSeparator
-            listItemProps={{ pl: 15, minHeight: 75 }}
+            hasSeparator={item.hasSeparator}
+            listItemProps={{ minHeight: 75, padding: 1 }}
           >
-            <ListElement item={item} />
+            <ListElement isHoverable item={item} />
           </Item>
         )}
       </ListView>
-
       <OverlayPanel
         isOpen={panelState.isOpen}
         state={panelState}
