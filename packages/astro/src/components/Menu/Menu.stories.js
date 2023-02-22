@@ -2,6 +2,7 @@ import React from 'react';
 import { Item } from '@react-stately/collections';
 import Menu from '../Menu';
 import Text from '../Text';
+import { onHoverArgTypes } from '../../utils/devUtils/props/hoverProps';
 
 
 export default {
@@ -61,6 +62,7 @@ export default {
         type: 'none',
       },
     },
+    ...onHoverArgTypes,
   },
 };
 
