@@ -1,12 +1,13 @@
 import React from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
-import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
+import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
+
 import Box from '../components/Box';
 import Icon from '../components/Icon';
-import Text from '../components/Text';
 import IconButton from '../components/IconButton';
 import PopoverMenu from '../components/PopoverMenu';
+import Text from '../components/Text';
 import { Item, Menu, OverlayProvider } from '../index';
 
 export default {
@@ -35,16 +36,16 @@ const sx = {
 export const Default = () => (
   <Box isRow sx={sx.wrapper}>
     <Icon icon={AccountIcon} size={25} color="accent.40" />
-    <Box ml="sm" mr="xx" >
+    <Box ml="sm" mr="xx">
       <Text sx={sx.title} variant="bodyStrong">Fons Vernall</Text>
       <Text sx={sx.subtitle} variant="subtitle">fvernall0@google.it</Text>
     </Box>
     <OverlayProvider>
       <PopoverMenu>
-        <IconButton aria-label="Menu Button" >
+        <IconButton aria-label="Menu Button">
           <Icon icon={DotsVerticalIcon} size="xs" color="Neutral.40" m="0.61px" />
         </IconButton>
-        <Menu >
+        <Menu>
           <Item key="edit">Edit</Item>
           <Item key="duplicate">Duplicate</Item>
           <Item key="delete" textValue="delete">

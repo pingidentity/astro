@@ -5,20 +5,20 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { Item as Tab } from 'react-stately';
+import { Pressable } from '@react-aria/interactions';
 import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
 import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
 import PropTypes from 'prop-types';
-import { Item as Tab } from 'react-stately';
-import { Pressable } from '@react-aria/interactions';
 
-import { useStatusClasses } from '../../hooks';
 import {
   Box,
-  Text,
-  PopoverMenu,
   Icon,
   Menu,
+  PopoverMenu,
+  Text,
 } from '../..';
+import { useStatusClasses } from '../../hooks';
 import { TabLine } from '../Tab';
 
 /* istanbul ignore next */
@@ -50,7 +50,7 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
 
   const menuRef = useRef();
 
-  const handleSelectedItem = (currentItem) => {
+  const handleSelectedItem = currentItem => {
     state.setSelectedKey(currentItem);
     setFocusedItem(currentItem);
   };
@@ -104,7 +104,7 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
     }
   }, [isTabSelected, isListItemSelected]);
 
-  const handleKeyNavigation = (e) => {
+  const handleKeyNavigation = e => {
     switch (e.key) {
       case 'ArrowRight': {
         selectionManager.setFocusedKey(nextKey);

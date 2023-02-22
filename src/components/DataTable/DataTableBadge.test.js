@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+
 import { DataTableBadge } from '../../index';
 
 const getComponent = (props = {}) => render(

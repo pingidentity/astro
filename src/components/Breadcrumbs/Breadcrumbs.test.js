@@ -1,13 +1,15 @@
 import React from 'react';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import CreateIcon from 'mdi-react/CreateIcon';
 import { mergeProps } from 'react-aria';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import CreateIcon from 'mdi-react/CreateIcon';
 
-import Breadcrumbs from './Breadcrumbs';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+
+import Breadcrumbs from './Breadcrumbs';
+
 
 const testId = 'test-breadcrumbs';
 const testItemId = 'test-breadcrumb-item';
@@ -19,21 +21,20 @@ const defaultProps = {
 };
 const testItemsArr = ['item1', 'item2', 'item3'];
 
-const getComponent = (props = {}, itemProps = {}) =>
-  render(
-    <Breadcrumbs {...mergeProps(defaultProps, props)}>
-      {testItemsArr.map((testItem, idx) => (
-        <Item
-          key={testItem}
-          data-id={testItem}
-          {...itemProps}
-          isCurrent={idx === testItemsArr.length - 1}
-        >
-          {testItem}
-        </Item>
-      ))}
-    </Breadcrumbs>,
-  );
+const getComponent = (props = {}, itemProps = {}) => render(
+  <Breadcrumbs {...mergeProps(defaultProps, props)}>
+    {testItemsArr.map((testItem, idx) => (
+      <Item
+        key={testItem}
+        data-id={testItem}
+        {...itemProps}
+        isCurrent={idx === testItemsArr.length - 1}
+      >
+        {testItem}
+      </Item>
+    ))}
+  </Breadcrumbs>,
+);
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);

@@ -1,6 +1,7 @@
-import { snakeCase, toUpper, fromPairs } from 'lodash';
-import { text } from '../../../components/Text/Text.styles';
+import { fromPairs, snakeCase, toUpper } from 'lodash';
+
 import buttons from '../../../components/Button/Buttons.styles';
+import { text } from '../../../components/Text/Text.styles';
 
 /**
  * Converts the given object to a constant mapping.
@@ -8,6 +9,7 @@ import buttons from '../../../components/Button/Buttons.styles';
  *
  * @param {Object} obj - An object with keys to convert
  */
+// eslint-disable-next-line max-len
 const toConstantObject = obj => fromPairs(Object.keys(obj).map(i => [toUpper(snakeCase(i)), i]));
 
 export const textVariants = toConstantObject(text);

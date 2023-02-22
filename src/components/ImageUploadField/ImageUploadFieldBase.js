@@ -1,14 +1,10 @@
 import React, { forwardRef, useMemo, useRef } from 'react';
+import { useVisuallyHidden } from 'react-aria';
 import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
-import { useVisuallyHidden } from 'react-aria';
 
-import { PopoverMenu } from '../../index';
+import { Box, FieldHelperText, Input, Label, PopoverMenu } from '../..';
 import useField from '../../hooks/useField';
-import FieldHelperText from '../FieldHelperText';
-import Input from '../Input';
-import Box from '../Box';
-import Label from '../Label';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 const ImageUploadFieldBase = forwardRef((props, inputRef) => {
@@ -46,7 +42,7 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
       <PopoverMenu isOpen={isMenuOpen} onOpenChange={handleOpenMenuChange}>
         {children}
       </PopoverMenu>
-      <Box {...fieldControlWrapperProps} >
+      <Box {...fieldControlWrapperProps}>
         <Input
           {...fieldControlInputProps}
           {...visuallyHiddenProps}

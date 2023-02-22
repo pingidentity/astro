@@ -3,9 +3,9 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { useTabList } from 'react-aria';
 import { useTabListState } from 'react-stately';
+import PropTypes from 'prop-types';
 
 import { usePropWarning } from '../../hooks';
 import Box from '../Box';

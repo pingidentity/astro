@@ -1,32 +1,33 @@
-import React, { useState, useRef } from 'react';
-import ArrowTopRightBottomLeft from 'mdi-react/ArrowTopRightBottomLeftIcon';
+import React, { useRef, useState } from 'react';
 import ArrowCollapse from 'mdi-react/ArrowCollapseIcon';
+import ArrowTopRightBottomLeft from 'mdi-react/ArrowTopRightBottomLeftIcon';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import CogIcon from 'mdi-react/CogIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 
 import { useOverlayPanelState } from '../../hooks';
-import OverlayPanel from './OverlayPanel';
 import {
-  OverlayProvider,
-  Box,
-  Text,
-  ListView,
-  Item,
-  Messages,
-  Button,
   Avatar,
-  IconButton,
+  Box,
   Breadcrumbs,
-  Tabs,
-  Tab,
-  TextField,
-  MultivaluesField,
-  SwitchField,
+  Button,
   ColorField,
+  IconButton,
+  Item,
+  ListView,
+  Messages,
+  MultivaluesField,
+  OverlayPanel,
+  OverlayProvider,
+  SwitchField,
+  Tab,
+  Tabs,
+  Text,
+  TextField,
 } from '../../index';
-import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 import { pingImg } from '../../utils/devUtils/constants/images';
+import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
+
 
 export default {
   title: 'Components/OverlayPanel',
@@ -81,7 +82,8 @@ export const Default = ({ ...args }) => {
       >
         Open Panel
       </Button>
-      { state.isOpen &&
+      { state.isOpen
+        && (
         <OverlayPanel
           isOpen={state.isOpen}
           state={state}
@@ -95,12 +97,12 @@ export const Default = ({ ...args }) => {
             >
               Close Panel
             </Button>
-            <Text pt="md" >
+            <Text pt="md">
               Children render here.
             </Text>
           </Box>
         </OverlayPanel>
-      }
+        )}
     </OverlayProvider>
   );
 };
@@ -130,25 +132,23 @@ export const InnerPanel = ({ ...args }) => {
   };
 
   const inner = (
-    <>
-      {
-        innerState.isOpen &&
-        <OverlayPanel
-          variant="overlayPanel.innerPanel" // applies higher z-index
-          isOpen={innerState.isOpen}
-          {...args}
-          state={innerState}
-          triggerRef={innerTriggerRef}
-        >
-          <Box>
-            <Button onPress={closeInnerPanel}>Close Inner Panel</Button>
-            <Text pt="md">
-              Children render here.
-            </Text>
-          </Box>
-        </OverlayPanel>
-      }
-    </>
+    innerState.isOpen
+    && (
+    <OverlayPanel
+      variant="overlayPanel.overlayPanelInner" // applies higher z-index
+      isOpen={innerState.isOpen}
+      {...args}
+      state={innerState}
+      triggerRef={innerTriggerRef}
+    >
+      <Box>
+        <Button onPress={closeInnerPanel}>Close Inner Panel</Button>
+        <Text pt="md">
+          Children render here.
+        </Text>
+      </Box>
+    </OverlayPanel>
+    )
   );
 
   const items = [
@@ -158,9 +158,8 @@ export const InnerPanel = ({ ...args }) => {
 
   const outer = (
     // should have higher z-index applied
-    <>
-      {
-        state.isOpen &&
+    state.isOpen
+        && (
         <OverlayPanel
           isOpen={state.isOpen}
           sx={{ p: '0px' }}
@@ -169,7 +168,7 @@ export const InnerPanel = ({ ...args }) => {
           triggerRef={outerTriggerRef}
         >
           <Box sx={{ p: '12px' }}>
-            <Button onPress={closeOuterPanel} aria-expanded={state.isOpen} >Close Panel</Button>
+            <Button onPress={closeOuterPanel} aria-expanded={state.isOpen}>Close Panel</Button>
             <Text pt="md" mb="24px">
               Children render here.
             </Text>
@@ -195,9 +194,9 @@ export const InnerPanel = ({ ...args }) => {
             {inner}
           </Box>
         </OverlayPanel>
-      }
-    </>
+        )
   );
+
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -213,11 +212,11 @@ export const InnerPanel = ({ ...args }) => {
         </Button>
         {outer}
       </OverlayProvider>
-      { messagesOpen &&
+      { messagesOpen && (
         <Messages sx={{ zIndex: 11 }} onClose={toggleMessagesOpen}>
           <Item key="message2" status="success">Z Index higher than inner pannel</Item>
         </Messages>
-      }
+      )}
     </>
   );
 };
@@ -241,7 +240,8 @@ export const CustomWidth = () => {
       </Text>
       <br />
       <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
-      { state.isOpen &&
+      { state.isOpen
+        && (
         <OverlayPanel
           isOpen={state.isOpen}
           state={state}
@@ -255,12 +255,12 @@ export const CustomWidth = () => {
             >
               Close Panel
             </Button>
-            <Text pt="md" >
+            <Text pt="md">
               Children render here.
             </Text>
           </Box>
         </OverlayPanel>
-      }
+        )}
     </OverlayProvider>
   );
 };
@@ -353,7 +353,7 @@ export const Expandable = () => {
           </Box>
         </Box>
         <Box isRow>
-          <IconButton aria-label="settings-icon" size={20} >
+          <IconButton aria-label="settings-icon" size={20}>
             <CogIcon />
           </IconButton>
           <IconButton
@@ -445,7 +445,8 @@ export const Expandable = () => {
     // readers when an overlay opens.
     <OverlayProvider>
       <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
-      { state.isOpen &&
+      { state.isOpen
+        && (
         <OverlayPanel
           isOpen={state.isOpen}
           state={state}
@@ -472,7 +473,7 @@ export const Expandable = () => {
           </Box>
           {footer}
         </OverlayPanel>
-      }
+        )}
     </OverlayProvider>
   );
 };

@@ -3,14 +3,14 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { useTabList, useTabPanel } from 'react-aria';
 import { useTabListState } from 'react-stately';
+import PropTypes from 'prop-types';
 
+import { usePropWarning } from '../../hooks';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import Box from '../Box';
 import { CollectionTab } from '../Tab';
-import ORIENTATION from '../../utils/devUtils/constants/orientation';
-import { usePropWarning } from '../../hooks';
 
 export const TabsContext = React.createContext({});
 
@@ -53,7 +53,7 @@ const Tabs = forwardRef((props, ref) => {
   let allItems = [];
 
   if (mode === 'list') {
-    items.forEach((item) => {
+    items.forEach(item => {
       allItems = [...allItems, item];
       if (item.list) {
         const list = item.list.map(el => ({

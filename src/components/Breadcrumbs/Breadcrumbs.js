@@ -1,14 +1,15 @@
 import React, {
   forwardRef,
-  useRef,
-  useImperativeHandle,
   useCallback,
+  useImperativeHandle,
+  useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { mergeProps, useBreadcrumbs } from 'react-aria';
+import PropTypes from 'prop-types';
 
+import { usePropWarning } from '../../hooks';
 import { Box, Icon } from '../../index';
-import { usePropWarning } from '../../hooks/';
+
 import BreadcrumbItem from './BreadcrumbItem';
 
 const Breadcrumbs = forwardRef((props, ref) => {
@@ -25,10 +26,9 @@ const Breadcrumbs = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => breadcrumbsRef.current);
   const createBreadcrumb = useCallback((child, idx) => {
-    const isCurrentItem =
-      Array.isArray(filteredChildren) && filteredChildren.length > 1
-        ? idx === children.length - 1
-        : true;
+    const isCurrentItem = Array.isArray(filteredChildren) && filteredChildren.length > 1
+      ? idx === children.length - 1
+      : true;
 
     return (
       <Box

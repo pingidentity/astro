@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Box,
   Text,
@@ -46,7 +47,7 @@ const containerArray = [
   },
 ];
 
-const Container = (props) => {
+const Container = props => {
   const {
     bg,
     codeString,
@@ -56,14 +57,14 @@ const Container = (props) => {
 
   return (
     <Box size={size} maxHeight="250px" bg={bg} p="md">
-      <Text color="white" fontWeight={1} fontSize="xx" >
+      <Text color="white" fontWeight={1} fontSize="xx">
         {size}
       </Text>
-      <Text color="white" fontWeight={0} fontSize="lg" >
+      <Text color="white" fontWeight={0} fontSize="lg">
         {widthString}
       </Text>
       <br />
-      <Text color="white" fontWeight={0} fontSize="lg" >
+      <Text color="white" fontWeight={0} fontSize="lg">
         {codeString}
       </Text>
     </Box>
@@ -80,7 +81,7 @@ export const ContainerSizes = () => {
         (Popup modals should never be LG or Full, and probably never MD as well.)
       </Text>
       <br />
-      {containerArray.map((item) => {
+      {containerArray.map(item => {
         return (
           <Container {...item} />
         );

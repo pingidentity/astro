@@ -11,7 +11,7 @@ export default {
 };
 
 export const Base = () => (
-  <IconButton aria-label="default icon button" >
+  <IconButton aria-label="default icon button">
     <Icon icon={CreateIcon} />
   </IconButton>
 );

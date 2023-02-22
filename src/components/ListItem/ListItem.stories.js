@@ -1,12 +1,14 @@
 import React from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
-import ListItem from './ListItem';
+
 import Box from '../Box';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
-import Text from '../Text';
 import Separator from '../Separator';
+import Text from '../Text';
+
+import ListItem from './ListItem';
 
 export default {
   title: 'Components/ListItem',
@@ -24,7 +26,7 @@ export const Default = args => (
   <>
     <Separator margin={0} />
     <ListItem {...args}>
-      <Box isRow mr="auto" alignSelf="center" >
+      <Box isRow mr="auto" alignSelf="center">
         <Icon
           icon={AccountIcon}
           alignSelf="center"
@@ -35,7 +37,7 @@ export const Default = args => (
         <Text variant="itemTitle" alignSelf="center">Fons Vernall</Text>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton >
+        <IconButton>
           <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
         </IconButton>
       </Box>
@@ -48,7 +50,7 @@ export const WithSubtitle = args => (
   <>
     <Separator margin={0} />
     <ListItem {...args}>
-      <Box isRow mr="auto" alignSelf="center" >
+      <Box isRow mr="auto" alignSelf="center">
         <Icon
           icon={AccountIcon}
           alignSelf="center"
@@ -62,7 +64,7 @@ export const WithSubtitle = args => (
         </Box>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton >
+        <IconButton>
           <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
         </IconButton>
       </Box>

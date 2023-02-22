@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
+import { Icon } from '../..';
 import IconButton from '../IconButton';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
-import Icon from '../Icon';
 
 const HelpIcon = () => (
   <svg width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,7 @@ const HelpHint = forwardRef((props, ref) => {
   const tooltipId = uuid();
 
   return (
-    <TooltipTrigger ref={ref} direction="top" {...others} {...tooltipProps} >
+    <TooltipTrigger ref={ref} direction="top" {...others} {...tooltipProps}>
       <IconButton variant="hintButton" aria-label="label help hint" data-testid="help-hint__button" aria-describedby={tooltipId} {...iconButtonProps}>
         <Icon icon={HelpIcon} />
       </IconButton>

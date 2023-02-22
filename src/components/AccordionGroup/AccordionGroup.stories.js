@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import Text from '../Text';
 import Button from '../Button';
+import Text from '../Text';
 import TextField from '../TextField';
-import AccordionGroup from '.';
+
 import AccordionReadme from './AccordionGroup.mdx';
+import AccordionGroup from '.';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button>Hi</Button> },
@@ -61,9 +63,9 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   return (
-    <AccordionGroup {...args} >
+    <AccordionGroup {...args}>
       <Item key="accordionKey" textValue="accordionKey" label="Accordion Label" data-id="accordionItem">
         <Text>Render me!</Text>
       </Item>

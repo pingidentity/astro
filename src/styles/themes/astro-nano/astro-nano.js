@@ -1,5 +1,6 @@
-import { merge } from 'theme-ui';
 import chroma from 'chroma-js';
+import { merge } from 'theme-ui';
+
 import astroTheme from '../../theme';
 
 const scaleFont = 1.2;

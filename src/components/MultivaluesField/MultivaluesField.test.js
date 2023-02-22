@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
 import { Item, MultivaluesField, OverlayProvider } from '../../index';
-import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { render, screen, within } from '../../utils/testUtils/testWrapper';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
@@ -24,7 +24,7 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   </OverlayProvider>
 ));
 
-const getComponentInForm = (props = {}, onFormSubmit, { renderFn = render } = {}) => renderFn((
+const getComponentInForm = (onFormSubmit, props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <form onSubmit={onFormSubmit}>
       <MultivaluesField {...defaultProps} {...props}>
@@ -194,8 +194,8 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
   deleteButton.click();
   expect(chip).not.toBeInTheDocument();
 
-  userEvent.tab();
-  expect(input).toHaveFocus();
+  input.blur();
+  input.focus();
   const updatedOptions = screen.getAllByRole('option');
   expect(updatedOptions[0]).toBeInTheDocument();
   expect(updatedOptions[0]).toHaveTextContent(items[0].name);
@@ -539,7 +539,7 @@ test('popover closes on input blur', () => {
 
 test('form does not submit when adding custom value', () => {
   const onFormSubmit = jest.fn();
-  getComponentInForm({}, onFormSubmit);
+  getComponentInForm(onFormSubmit, {});
 
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');

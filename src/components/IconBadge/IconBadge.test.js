@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+
 import {
-  IconBadge,
   Icon,
+  IconBadge,
 } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 
@@ -19,13 +20,13 @@ const ThisIcon = args => (
 );
 
 const ThisSecondIcon = args => (
-  <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...args} >
+  <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...args}>
     <path d="M1.71875 0.624999L7.96875 0.625L7.96875 6.875L6.09375 6.875L6.09375 3.89375L1.73125 8.125L0.46875 6.85625L4.75 2.5L1.71875 2.5L1.71875 0.624999Z" fill="currentColor" />
   </svg>
 );
 
 const getComponent = (props = {}) => render((
-  <IconBadge {...props} backgroundColor="white" {...defaultProps} >
+  <IconBadge {...props} backgroundColor="white" {...defaultProps}>
     <Icon
       icon={ThisIcon}
       size="25px"

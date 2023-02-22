@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
 
-import { Item, Section, SelectField, Separator } from '../../';
+import { Item, Section, SelectField, Separator } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { modes as labelModes } from '../Label/constants';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 const animals = [
   { name: 'Aardvark', id: '1' },
@@ -137,7 +137,7 @@ export const WithSections = args => (
 
 export const WithCustomHeight = args => (
   <OverlayProvider>
-    <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args} >
+    <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args}>
       {item => <Item key={item.name}>{item.name}</Item>}
     </SelectField>
   </OverlayProvider>

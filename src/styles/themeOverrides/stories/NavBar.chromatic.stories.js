@@ -8,7 +8,7 @@ import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 
-import { NavBar, Box, Link, Separator, NavBarItem, NavBarSection, NavBarItemButton, NavBarItemLink } from '../../../index';
+import { Box, Link, NavBar, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection, Separator } from '../../../index';
 import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
@@ -30,7 +30,7 @@ const Credentials = props => (
     {...props}
   >
     <g id="Layer_2" />
-    <g id="mdi-certificate-outline" >
+    <g id="mdi-certificate-outline">
       <g>
         <path d="M11,8H5V6h6C11,6,11,8,11,8z" />
         <path d="M9,11H5V9h4C9,9,9,11,9,11z" />
@@ -460,7 +460,7 @@ const thirdData = [
 ];
 
 export const Default = () => (
-  <NavBar >
+  <NavBar>
     <Box padding="md">
       <Link
         aria-label="home link"

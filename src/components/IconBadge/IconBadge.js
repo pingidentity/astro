@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Box } from '../../index';
 
-const IconBadge = (props) => {
+const IconBadge = props => {
   const {
     children,
     sx,

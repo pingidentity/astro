@@ -1,8 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+import { Modal, OverlayProvider } from '../../../index';
 import axeTest from '../../../utils/testUtils/testAxe';
-import { render, screen, queryByAttribute } from '../../../utils/testUtils/testWrapper';
-import { OverlayProvider, Modal } from '../../../index';
+import { queryByAttribute, render, screen } from '../../../utils/testUtils/testWrapper';
 
 // For testing the modal alone
 const getComponent = (props = {}) => render((

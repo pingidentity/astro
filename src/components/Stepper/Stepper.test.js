@@ -1,13 +1,13 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import { CacheProvider } from '@emotion/react';
-import createCache from '@emotion/cache';
 import { Item } from 'react-stately';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import userEvent from '@testing-library/user-event';
 
 import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
-
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '../Text';
+
 import Stepper from './Stepper';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
@@ -104,7 +104,7 @@ test('tooltip renders expected content based on props', async () => {
   }, 0);
 
   // Should render textValue
-  const stepsWithoutLabels = steps.map((step) => {
+  const stepsWithoutLabels = steps.map(step => {
     const copy = step;
     delete copy.label;
     return copy;
@@ -119,7 +119,7 @@ test('tooltip renders expected content based on props', async () => {
   }, 0);
 
   // Should render index
-  const stepsWithNeither = stepsWithoutLabels.map((step) => {
+  const stepsWithNeither = stepsWithoutLabels.map(step => {
     const copy = step;
     delete copy.name;
     return copy;

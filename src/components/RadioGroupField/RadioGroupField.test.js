@@ -1,12 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import statuses from '../../utils/devUtils/constants/statuses';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import statuses from '../../utils/devUtils/constants/statuses';
-import RadioGroupField from '.';
 import RadioField from '../RadioField';
-import ORIENTATION from '../../utils/devUtils/constants/orientation';
+
+import RadioGroupField from '.';
 
 const testId = 'test-radio-group';
 const testLabel = 'Test Label';

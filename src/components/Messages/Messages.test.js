@@ -6,8 +6,8 @@ import AccountIcon from 'mdi-react/AccountIcon';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
+import { ARIA_STATUSES } from './Message';
 import Messages, { messagesReducerStory, multiMessagesReducerStory } from '.';
-import { ARIA_STATUSES } from '../Messages/Message';
 
 jest.mock('@react-aria/live-announcer', () => ({ announce: jest.fn() }));
 
@@ -114,8 +114,7 @@ test('messages with a status have an aria-label announcing the status', () => {
 test('messages without a status do not have an aria-label announcing the status', () => {
   getComponent();
   const statusMessage = screen.getAllByRole('status')[0];
-  Object.keys(ARIA_STATUSES).map(key =>
-    expect(statusMessage).not.toHaveAttribute('aria-label', ARIA_STATUSES[key]),
+  Object.keys(ARIA_STATUSES).map(key => expect(statusMessage).not.toHaveAttribute('aria-label', ARIA_STATUSES[key]),
   );
 });
 

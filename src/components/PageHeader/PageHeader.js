@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import Text from '../Text/Text';
-import Box from '../Box/Box';
+
 import { useDeprecationWarning } from '../../hooks';
+import Box from '../Box/Box';
+import Text from '../Text/Text';
 
 /**
  * A `Page Header` is a composed component using text and icon button.

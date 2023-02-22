@@ -1,8 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Earth from 'mdi-react/EarthIcon';
-import Icon from '../Icon';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import Icon from '.';
 
 const testId = 'test-icon';
 const defaultProps = {

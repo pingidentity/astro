@@ -4,19 +4,19 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
-import { FocusScope, useOverlayPosition, useOverlayTrigger, useVisuallyHidden, mergeProps } from 'react-aria';
+import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
 import { ChromePicker } from 'react-color';
 import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
+import PropTypes from 'prop-types';
 
-import { Box, Button, Input, FieldHelperText, Label } from '../../';
+import { Box, Button, FieldHelperText, Input, Label } from '../..';
+import useField from '../../hooks/useField';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import PopoverContainer from '../PopoverContainer';
-import statuses from '../../utils/devUtils/constants/statuses';
-import useField from '../../hooks/useField';
 
 /**
  * The Color Field component allows the user to pick a color and displays the chosen color.
@@ -118,7 +118,7 @@ const ColorField = forwardRef((props, ref) => {
         variant="forms.colorField.container"
         {...mergeProps(buttonProps, ariaProps, triggerProps)}
       />
-      <Box {...fieldControlWrapperProps} >
+      <Box {...fieldControlWrapperProps}>
         <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
       </Box>
       {helperText && (

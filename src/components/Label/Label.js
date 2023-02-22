@@ -1,12 +1,14 @@
-import styled from '@emotion/styled';
-import { flexbox, layout } from 'styled-system';
 import React, { forwardRef } from 'react';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { flexbox, layout } from 'styled-system';
 import { Label as ThemeUILabel } from 'theme-ui';
+
 import { usePropWarning, useStatusClasses } from '../../hooks';
-import { modes } from './constants';
 import Box from '../Box';
 import HelpHint from '../HelpHint';
+
+import { modes } from './constants';
 
 const ExtendedLabel = styled(ThemeUILabel)(layout, flexbox);
 

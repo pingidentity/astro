@@ -1,11 +1,12 @@
 import React from 'react';
-import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 import AccountMultiple from 'mdi-react/AccountMultipleIcon';
-import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
+import Earth from 'mdi-react/EarthIcon';
 import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
-import Earth from 'mdi-react/EarthIcon';
+import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
+import ViewDashboard from 'mdi-react/ViewDashboardIcon';
+
 import { NavBarItemButton } from '../../../components/NavBarSection';
 
 const Credentials = props => (
@@ -17,7 +18,6 @@ const Credentials = props => (
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
-    xml="preserve"
     {...props}
   >
     <g id="Layer_2" />
@@ -300,4 +300,4 @@ const thirdData = [
   },
 ];
 
-export { logo, data, secondData, thirdData, PersonIcon };
+export { data, logo, PersonIcon, secondData, thirdData };

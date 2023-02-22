@@ -1,4 +1,5 @@
 import React from 'react';
+
 import RequirementsList from '.';
 
 export default {

@@ -1,7 +1,8 @@
 import React from 'react';
+
 import {
+  Badge,
   Box,
-  Chip,
   Separator,
   Text,
   TextField,
@@ -15,13 +16,13 @@ const fieldValues = [
   {
     field1: 'username',
     field2: 'UserID',
-    hasChip: true,
+    hasBadge: true,
     chipLabel: 'Required',
     key: 1,
   },
-  { field1: 'firstName', field2: 'Given Name', hasChip: false, key: 2 },
-  { field1: 'lastName', field2: 'Family Name', hasChip: false, key: 3 },
-  { field1: 'population', field2: 'Population', hasChip: false, key: 4 },
+  { field1: 'firstName', field2: 'Given Name', hasBadge: false, key: 2 },
+  { field1: 'lastName', field2: 'Family Name', hasBadge: false, key: 3 },
+  { field1: 'population', field2: 'Population', hasBadge: false, key: 4 },
 ];
 
 const sx = {
@@ -86,56 +87,54 @@ const sx = {
 
 export const Default = () => {
   return (
-    <>
-      <Box sx={sx.mainContentBox}>
-        <Box items={fieldValues} sx={sx.innerContentBox}>
-          <Box isRow>
-            <Text sx={sx.applicationText}>
-              Application
-            </Text>
-            <Text sx={sx.pingOneText}>
-              PingOne
-            </Text>
-          </Box>
-          <Box sx={sx.separatorBox}>
-            <Separator sx={sx.separatorStyle} />
-          </Box>
-          {fieldValues.map(({ field1, field2, hasChip, key }) => (
-            <Box
-              isRow
-              key={key}
-              sx={sx.mainFieldValueBox}
-            >
-              <TextField
-                aria-label={field1}
-                isReadOnly
-                value={field1}
-                controlProps={{
-                  variant: 'input.small',
-                  sx: sx.textFieldStyleProps,
-                }}
-              />
-              <Separator sx={sx.textFieldSeparator} />
-              <TextField
-                aria-label={field2}
-                isReadOnly
-                value={field2}
-                controlProps={{
-                  variant: 'input.small',
-                  sx: sx.textFieldStyleProps,
-                }}
-              />
-              {hasChip && (
-                <Chip
-                  label="Required"
-                  textColor="#253746"
-                  sx={sx.chipStyle}
-                />
-                )}
-            </Box>
-            ))}
+    <Box sx={sx.mainContentBox}>
+      <Box items={fieldValues} sx={sx.innerContentBox}>
+        <Box isRow>
+          <Text sx={sx.applicationText}>
+            Application
+          </Text>
+          <Text sx={sx.pingOneText}>
+            PingOne
+          </Text>
         </Box>
+        <Box sx={sx.separatorBox}>
+          <Separator sx={sx.separatorStyle} />
+        </Box>
+        {fieldValues.map(({ field1, field2, hasBadge, key }) => (
+          <Box
+            isRow
+            key={key}
+            sx={sx.mainFieldValueBox}
+          >
+            <TextField
+              aria-label={field1}
+              isReadOnly
+              value={field1}
+              controlProps={{
+                variant: 'input.small',
+                sx: sx.textFieldStyleProps,
+              }}
+            />
+            <Separator sx={sx.textFieldSeparator} />
+            <TextField
+              aria-label={field2}
+              isReadOnly
+              value={field2}
+              controlProps={{
+                variant: 'input.small',
+                sx: sx.textFieldStyleProps,
+              }}
+            />
+            {hasBadge && (
+            <Badge
+              label="Required"
+              textColor="#253746"
+              sx={sx.chipStyle}
+            />
+            )}
+          </Box>
+        ))}
       </Box>
-    </>
+    </Box>
   );
 };

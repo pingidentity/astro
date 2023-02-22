@@ -1,7 +1,7 @@
 import React from 'react';
-import Text from '../../components/Text';
+
+import { Separator, Table, TableBody, TableCell, TableHead, TableRow, Text } from '../..';
 import scale from '../../styles/spacing';
-import { Table, TableHead, TableRow, TableBody, TableCell, Separator } from '../..';
 
 
 export default {
@@ -32,16 +32,18 @@ export const Spacing = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        {Object.entries(scale).map(([key, value]) =>
-            (
-              <TableBody sx={tableBodyStyles} key={key}>
-                <TableRow sx={tableRowStyles}>
-                  <TableCell bg="white" >{key}</TableCell>
-                  <TableCell bg="white">{value}px</TableCell>
-                </TableRow>
-              </TableBody>
-            ),
-          )}
+        {Object.entries(scale).map(([key, value]) => (
+          <TableBody sx={tableBodyStyles} key={key}>
+            <TableRow sx={tableRowStyles}>
+              <TableCell bg="white">{key}</TableCell>
+              <TableCell bg="white">
+                {value}
+                px
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        ),
+        )}
       </Table>
     </>
   );

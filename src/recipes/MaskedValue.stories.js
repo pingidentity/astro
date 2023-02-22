@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import { Box, Icon, IconButton, Text } from '../index';
+import EyeIcon from 'mdi-react/EyeOutlineIcon';
+
 import { useStatusClasses } from '../hooks';
+import { Box, Icon, IconButton, Text } from '../index';
 
 export default {
   title: 'Recipes/Masked Values',

@@ -1,16 +1,16 @@
-import React, { forwardRef, useRef, useContext, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import { mergeProps, useButton } from 'react-aria';
+import { useAccordionItem } from '@react-aria/accordion';
+import { useFocusRing } from '@react-aria/focus';
+import { useHover } from '@react-aria/interactions';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { mergeProps, useButton } from 'react-aria';
+import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
-import { useAccordionItem } from '@react-aria/accordion';
-import { useHover } from '@react-aria/interactions';
 
-import { useFocusRing } from '@react-aria/focus';
-import { Text, Icon, Box } from '../../index';
-import { useStatusClasses } from '../../hooks';
 import { AccordionContext } from '../../context/AccordionContext';
+import { useStatusClasses } from '../../hooks';
+import { Box, Icon, Text } from '../../index';
 
 const AccordionItem = forwardRef((props, ref) => {
   const { className, item } = props;
@@ -71,11 +71,12 @@ const AccordionItem = forwardRef((props, ref) => {
           <Icon icon={isOpen ? MenuUp : MenuDown} />
         </Box>
       </ThemeUIButton>
-      {isOpen &&
-        <Box variant="accordion.body" {...accordionRegionProps} {...regionProps} className={itemClasses} >
+      {isOpen
+        && (
+        <Box variant="accordion.body" {...accordionRegionProps} {...regionProps} className={itemClasses}>
           {item.rendered}
         </Box>
-      }
+        )}
     </Box>
   );
 });

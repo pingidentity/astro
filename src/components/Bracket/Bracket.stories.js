@@ -1,11 +1,13 @@
 import React from 'react';
+
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Badge,
   Box,
   Bracket,
-  Badge,
   Text,
 } from '../../index';
-import DocsLayout from '../../../.storybook/storybookDocsLayout';
+
 import BracketReadme from './Bracket.mdx';
 
 export default {
@@ -37,8 +39,8 @@ export const Default = () => {
   });
 
   return (
-    <Box p="md" ml="sm" bg="background" >
-      <Box isRow >
+    <Box p="md" ml="sm" bg="background">
+      <Box isRow>
         <Badge
           label="Any"
           bg="neutral.20"

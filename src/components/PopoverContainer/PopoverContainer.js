@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { mergeProps, OverlayContainer, useModal, useOverlay } from 'react-aria';
+import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
@@ -73,9 +73,8 @@ export const PopoverWrapper = forwardRef((props, ref) => {
   const { classNames } = useStatusClasses(className, { isOpen });
 
   return (
-    <>
-      {
-        isOpen &&
+    isOpen
+        && (
         <Box
           {...mergeProps(others, overlayProps, modalProps)}
           variant="popoverMenu.container"
@@ -102,8 +101,7 @@ export const PopoverWrapper = forwardRef((props, ref) => {
               )
           }
         </Box>
-      }
-    </>
+        )
   );
 });
 
@@ -126,7 +124,7 @@ PopoverWrapper.defaultProps = {
   placement: 'bottom',
 };
 
-export const PopoverArrow = (props) => {
+export const PopoverArrow = props => {
   const {
     arrowCrossOffset,
     sx,

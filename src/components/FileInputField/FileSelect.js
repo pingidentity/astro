@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Text } from '../../';
+import { Button, Text } from '../..';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 
 const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...others }) => {

@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render } from '../../utils/testUtils/testWrapper';
+
 import { NoticeIcon, noticeIcons } from './NoticeIcon';
 
 const getComponent = (props = {}) => render((

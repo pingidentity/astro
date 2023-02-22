@@ -1,6 +1,8 @@
 import React from 'react';
+
+import { Box } from '../..';
 import { ColorSchema } from '../../styles/ColorDocumentation';
-import Box from '../../components/Box';
+
 
 export default {
   title: 'Docs/Design/Color Schema',

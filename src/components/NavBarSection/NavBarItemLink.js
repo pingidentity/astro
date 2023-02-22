@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '../../index';
-import { useNavBarContext } from '../../context/NavBarContext';
-import { useStatusClasses, useNavBarPress } from '../../hooks';
 
-const NavBarItemLink = (props) => {
+import { useNavBarContext } from '../../context/NavBarContext';
+import { useNavBarPress, useStatusClasses } from '../../hooks';
+import { Link } from '../../index';
+
+const NavBarItemLink = props => {
   const {
     className,
     id: key,

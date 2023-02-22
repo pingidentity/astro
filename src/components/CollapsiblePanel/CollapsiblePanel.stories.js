@@ -1,29 +1,31 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import AccountIcon from 'mdi-react/AccountIcon';
 import CheckIcon from 'mdi-react/CheckIcon';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import Clear from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
-import AccountIcon from 'mdi-react/AccountIcon';
-import CollapsiblePanel from './CollapsiblePanel';
+
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
 import {
-  Breadcrumbs,
+  Badge,
   Box,
+  Breadcrumbs,
   Button,
   CheckboxField,
-  Badge,
-  ListView,
-  Item,
+  CollapsiblePanelItem,
   Icon,
   IconButton,
-  CollapsiblePanelItem,
+  Item,
+  ListView,
   OverlayPanel,
   OverlayProvider,
   SearchField,
   Text,
 } from '../../index';
-import DocsLayout from '../../../.storybook/storybookDocsLayout';
+
+import CollapsiblePanel from './CollapsiblePanel';
 import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
 
 export default {
@@ -145,7 +147,7 @@ export const Default = args => (
   />
 );
 
-export const CollapsiblePanelWithBadge = (args) => {
+export const CollapsiblePanelWithBadge = args => {
   const [items, setItems] = useState(data);
   const { state, onClose } = useOverlayPanelState();
   const triggerRef = useRef();
@@ -158,9 +160,9 @@ export const CollapsiblePanelWithBadge = (args) => {
     [items],
   );
 
-  const changeSelection = (key) => {
-    setItems((prevItems) => {
-      return prevItems.map((el) => {
+  const changeSelection = key => {
+    setItems(prevItems => {
+      return prevItems.map(el => {
         if (el.key === key) {
           return {
             ...el,
@@ -207,7 +209,7 @@ export const CollapsiblePanelWithBadge = (args) => {
               </Breadcrumbs>
             </Box>
             <Box isRow>
-              <IconButton aria-label="Close Panel" onPress={() => { onClose(state, triggerRef); }} >
+              <IconButton aria-label="Close Panel" onPress={() => { onClose(state, triggerRef); }}>
                 <Icon icon={Clear} size="sm" />
               </IconButton>
             </Box>
@@ -294,8 +296,7 @@ export const CollapsiblePanelWithBadge = (args) => {
                           onChange={() => changeSelection(item.key)}
                           isSelected={selectedItems.some(el => el.key === item.key)}
                         />
-                      )
-                    }
+                      )}
                   </Item>
                 )}
               </ListView>
@@ -320,7 +321,7 @@ export const CollapsiblePanelWithBadge = (args) => {
                     isDefaultSelected={item.isDefaultSelected}
                   />
                 </Item>
-            )}
+              )}
             </CollapsiblePanel>
           </Box>
         </Box>

@@ -4,6 +4,7 @@ import { screen } from '@testing-library/react';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render } from '../../utils/testUtils/testWrapper';
 import { noticeIcons } from '../Icon/NoticeIcon';
+
 import Callout, { CALLOUT_TEST_ID } from './Callout';
 
 const TEST_TEXT = 'test text';
@@ -16,7 +17,7 @@ const testColors = {
 };
 
 const getComponent = (props = {}) => render((
-  <Callout {...props} >{TEST_TEXT}</Callout>
+  <Callout {...props}>{TEST_TEXT}</Callout>
 ));
 
 describe('Callout', () => {

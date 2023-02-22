@@ -2,9 +2,17 @@ import React from 'react';
 import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import CreateIcon from 'mdi-react/CreateIcon';
 import FilterIcon from 'mdi-react/FilterIcon';
-import { buttonVariants } from '../../utils/devUtils/constants/variants';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Box, Button, Icon, SearchField, Text } from '../../index';
+import {
+  Box,
+  Button,
+  Icon,
+  SearchField,
+  Text,
+} from '../../index';
+import { buttonVariants } from '../../utils/devUtils/constants/variants';
+
 import ButtonReadme from './Button.mdx';
 
 // removing the iconButton variants from this story.
@@ -93,7 +101,7 @@ export const InlineButton = () => (
   </Box>
 );
 
-export const ColorBlockButton = (args) => {
+export const ColorBlockButton = args => {
   // Change `isConfigured` property in storybook controls
   const { isConfigured, ...props } = args;
 

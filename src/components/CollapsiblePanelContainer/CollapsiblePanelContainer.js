@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
 import { useOverlayTriggerState } from 'react-stately';
+import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import PropTypes from 'prop-types';
+
+import { useStatusClasses } from '../../hooks';
+import { Box, Icon, IconButton } from '../../index';
 
 import CollapsiblePanelBadge from './CollapsiblePanelBadge';
-import { Icon, IconButton, Box } from '../../index';
-import { useStatusClasses } from '../../hooks';
 
 /**
  * The CollapsiblePanelContainer serves as a wrapper around a list and its associated trigger,
@@ -43,7 +44,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
     }
   };
 
-  const handleClose = (e) => {
+  const handleClose = e => {
     if (e.key === 'Escape') {
       close(state, triggerRef, close);
     }
@@ -73,13 +74,14 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
           role="button"
           size="30px"
         />
-        {!state.isOpen && selectedFilterCount &&
+        {!state.isOpen && selectedFilterCount
+          && (
           <CollapsiblePanelBadge
             data-testid="collapsible-panel-badge"
             margin="auto"
             selectedFilterCount={selectedFilterCount}
           />
-        }
+          )}
       </IconButton>
       { children }
     </Box>

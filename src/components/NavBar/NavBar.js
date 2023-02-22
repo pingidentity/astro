@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { FocusScope, useFocusManager } from '@react-aria/focus';
+import PropTypes from 'prop-types';
 
 import { NavBarContext } from '../../context/NavBarContext';
+import useProgressiveState from '../../hooks/useProgressiveState';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box/Box';
-import useProgressiveState from '../../hooks/useProgressiveState';
 
 /**
  * Composed component that spreads children.
@@ -17,7 +17,7 @@ import useProgressiveState from '../../hooks/useProgressiveState';
  *
  */
 
-const NavBar = (props) => {
+const NavBar = props => {
   const {
     defaultSelectedKey,
     selectedKey: selectedKeyProp,
@@ -59,9 +59,9 @@ const NavBar = (props) => {
   );
 };
 
-const FocusableItem = (props) => {
+const FocusableItem = props => {
   const focusManager = useFocusManager();
-  const onKeyDown = (e) => {
+  const onKeyDown = e => {
     switch (e.key) {
       case 'ArrowRight':
       case 'ArrowDown':

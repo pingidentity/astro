@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Item, MultivaluesField, OverlayProvider, Icon } from '../../';
+import { Box, Icon, Item, MultivaluesField, OverlayProvider } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/MultivaluesField',
@@ -80,7 +80,7 @@ export default {
 };
 
 
-const VariableIcon = (props) => {
+const VariableIcon = props => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g clipPath="url(#clip0_709_18965)">
@@ -96,7 +96,7 @@ const VariableIcon = (props) => {
   );
 };
 
-const HTMLIcon = (props) => {
+const HTMLIcon = props => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g clipPath="url(#clip0_709_18936)">
@@ -174,7 +174,7 @@ const setOverlayStyle = (direction, isOpen, mr, ml, mt) => {
   };
 };
 
-export const Default = (args) => {
+export const Default = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -193,7 +193,7 @@ export const Default = (args) => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name} >
+          <Item key={item.key} data-id={item.name}>
             {item.name}
           </Item>
         )}
@@ -202,7 +202,7 @@ export const Default = (args) => {
   );
 };
 
-export const Uncontrolled = (args) => {
+export const Uncontrolled = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -231,7 +231,7 @@ export const Uncontrolled = (args) => {
   );
 };
 
-export const Controlled = (args) => {
+export const Controlled = args => {
   const [selectedKeys, setSelectedKeys] = useState(['Aardvark', 'Snake']);
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
@@ -263,7 +263,7 @@ export const Controlled = (args) => {
   );
 };
 
-export const Error = (args) => {
+export const Error = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
   const onOpenChange = () => {
@@ -283,7 +283,7 @@ export const Error = (args) => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name} >
+          <Item key={item.key} data-id={item.name}>
             {item.name}
           </Item>
         )}
@@ -292,7 +292,7 @@ export const Error = (args) => {
   );
 };
 
-export const ReadOnlyField = (args) => {
+export const ReadOnlyField = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
   const onOpenChange = () => {
@@ -310,7 +310,7 @@ export const ReadOnlyField = (args) => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name} >
+          <Item key={item.key} data-id={item.name}>
             {item.name}
           </Item>
         )}
@@ -319,7 +319,7 @@ export const ReadOnlyField = (args) => {
   );
 };
 
-export const ReadOnlyValues = (args) => {
+export const ReadOnlyValues = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -348,7 +348,7 @@ export const ReadOnlyValues = (args) => {
   );
 };
 
-export const DisabledKeys = (args) => {
+export const DisabledKeys = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -377,7 +377,7 @@ export const DisabledKeys = (args) => {
   );
 };
 
-export const CustomValues = (args) => {
+export const CustomValues = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -412,7 +412,7 @@ CustomValues.argTypes = {
   },
 };
 
-export const IconSlotsInChip = (args) => {
+export const IconSlotsInChip = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -431,7 +431,7 @@ export const IconSlotsInChip = (args) => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name} >
+          <Item key={item.key} data-id={item.name}>
             {item.name}
           </Item>
         )}
@@ -440,7 +440,7 @@ export const IconSlotsInChip = (args) => {
   );
 };
 
-export const CustomSize = (args) => {
+export const CustomSize = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 

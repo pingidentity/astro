@@ -1,4 +1,4 @@
-import { focusWithCroppedOutline, defaultFocus } from '../Button/Buttons.styles';
+import { defaultFocus, focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 export const baseBadge = {
   cursor: 'default',

@@ -1,10 +1,11 @@
 import React from 'react';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import { Item } from 'react-stately';
 import { action } from '@storybook/addon-actions';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 
 import Breadcrumbs from './Breadcrumbs';
-import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import BreadcrumbsReadme from './Breadcrumbs.mdx';
 
 export default {
@@ -40,11 +41,11 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   const onAction = key => action(`onPress ${key}`);
 
   return (
-    <Breadcrumbs onAction={onAction} {...args} >
+    <Breadcrumbs onAction={onAction} {...args}>
       <Item key="home" aria-label="home" variant="buttons.link" data-id="home" href="https://www.pingidentity.com">
         Home
       </Item>

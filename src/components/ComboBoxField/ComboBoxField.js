@@ -1,22 +1,22 @@
 import React, {
+  forwardRef,
   useCallback,
+  useEffect,
+  useImperativeHandle,
   useRef,
   useState,
-  forwardRef,
-  useImperativeHandle,
-  useEffect,
 } from 'react';
-import PropTypes from 'prop-types';
 import { DismissButton, FocusScope, useComboBox, useOverlayPosition } from 'react-aria';
 import { useComboBoxState } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import PropTypes from 'prop-types';
 
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import ComboBoxInput from '../ComboBox';
 import { usePropWarning } from '../../hooks';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import ComboBoxInput from '../ComboBox';
 import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
 import ScrollBox from '../ScrollBox';
@@ -83,7 +83,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const shouldShowAddOption = hasAddOption && inputValue && selectedKey !== inputValue;
   const addOption = `ADD: ${inputValue}`;
 
-  const getItemsArr = (initialArr) => {
+  const getItemsArr = initialArr => {
     if (initialArr && shouldShowAddOption) {
       return [...initialArr, { name: addOption, key: addOption }];
     }
@@ -94,7 +94,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const items = getItemsArr(initialItems);
 
   /* istanbul ignore next */
-  const onSelectionChangeHandler = (key) => {
+  const onSelectionChangeHandler = key => {
     let newVal = key || selectedKey || '';
     const arrayOfValues = Array.from(items || defaultItems);
 
@@ -194,7 +194,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     >
       <FocusScope restoreFocus>
         <DismissButton onDismiss={state.close} />
-        <ScrollBox {...scrollBoxProps} >
+        <ScrollBox {...scrollBoxProps}>
           <ListBox
             ref={listBoxRef}
             hasNoEmptySelection

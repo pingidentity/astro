@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { DummyText } from '../utils/devUtils/constants/text';
+
 import { useOverlayPanelState } from '../hooks';
 import {
   Box,
@@ -9,6 +9,7 @@ import {
   ScrollBox,
   TextField,
 } from '../index';
+import { DummyText } from '../utils/devUtils/constants/text';
 
 export default {
   title: 'Design Patterns/Save Bar',
@@ -48,14 +49,13 @@ export const Default = () => {
   const { state, onClose } = useOverlayPanelState();
   const triggerRef = useRef();
   return (
-    <>
-      <Box sx={sx.mainContentBox}>
-        <OverlayProvider>
-          <Button ref={triggerRef} onPress={state.open}>
-            Open Panel
-          </Button>
+    <Box sx={sx.mainContentBox}>
+      <OverlayProvider>
+        <Button ref={triggerRef} onPress={state.open}>
+          Open Panel
+        </Button>
 
-          {state.isOpen && (
+        {state.isOpen && (
           <OverlayPanel
             isOpen={state.isOpen}
             state={state}
@@ -71,7 +71,7 @@ export const Default = () => {
               <ScrollBox sx={sx.scrollboxStyle}>
                 <p>{DummyText}</p>
               </ScrollBox>
-              <Box isRow position="fixed" >
+              <Box isRow position="fixed">
                 <Button
                   sx={sx.saveButtonStyle}
                   variant="primary"
@@ -91,8 +91,7 @@ export const Default = () => {
             </Box>
           </OverlayPanel>
         )}
-        </OverlayProvider>
-      </Box>
-    </>
+      </OverlayProvider>
+    </Box>
   );
 };

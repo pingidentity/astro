@@ -1,8 +1,9 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
+
+import { modes as labelModes } from '../../components/Label/constants';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 import useField from './useField';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { modes as labelModes } from '../../components/Label/constants';
 
 const defaultProps = {
   autoComplete: 'off',
@@ -182,14 +183,13 @@ test('should return isLeftLabel class for container', () => {
 test('should return hasValue class for container when onChange updates internal state', () => {
   const onChange = jest.fn();
   let numCalls = 0;
-  const { result } = renderHook(() =>
-    useField({
-      ...defaultProps,
-      defaultValue: null,
-      placeholder: null,
-      onChange,
-      value: '',
-    }),
+  const { result } = renderHook(() => useField({
+    ...defaultProps,
+    defaultValue: null,
+    placeholder: null,
+    onChange,
+    value: '',
+  }),
   );
   // Empty string is not a valid value
   expect(result.current.fieldContainerProps.className).not.toContain('has-value');
