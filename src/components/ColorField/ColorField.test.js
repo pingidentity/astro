@@ -44,3 +44,16 @@ test('will call onChange with arguments if provided', () => {
   userEvent.type(hexInput, testColor2);
   expect(testOnChange).toHaveBeenCalled();
 });
+
+test('clicking within the popover does not close it', () => {
+  const testOnChange = jest.fn();
+  getComponent({ onChange: testOnChange, value: testColor1 });
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  // should be open now
+  const hexLabelElement = screen.queryByText(hexLabel);
+  expect(hexLabelElement).toBeInTheDocument();
+  // click the popover container, which has caused closing in regressions
+  userEvent.click(screen.queryByRole('presentation'));
+  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+});
