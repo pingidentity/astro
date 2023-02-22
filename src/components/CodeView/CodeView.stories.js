@@ -2,7 +2,6 @@ import React from 'react';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-powershell';
 import CodeView from './CodeView';
-import { Text } from '../..';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import CodeViewReadme from './CodeView.mdx';
 
@@ -105,14 +104,12 @@ export default {
 
 export const Default = args => (
   <>
-    <Text sx={{ fontWeight: 2 }}>JSON</Text>
     <CodeView {...args} />
   </>
 );
 
 export const WithLineNumbers = () => (
   <>
-    <Text sx={{ fontWeight: 2 }}>JSON</Text>
     <CodeView hasLineNumbers>
       {/* const code =  `{
         "_links": {
