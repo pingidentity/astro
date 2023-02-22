@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-const useImageUploadState = (props = {}, inputRef) => {
+const useImageUploadState = (inputRef, props = {}) => {
   const {
     previewImage: existingImage,
     defaultPreviewImage: defaultPreviewNode,
@@ -11,10 +11,9 @@ const useImageUploadState = (props = {}, inputRef) => {
   } = props;
 
   const defaultPreviewImage = useMemo(
-    () =>
-      (typeof defaultPreviewNode === 'string'
-        ? defaultPreviewNode
-        : null),
+    () => (typeof defaultPreviewNode === 'string'
+      ? defaultPreviewNode
+      : null),
     [defaultPreviewNode],
   );
 
@@ -36,7 +35,7 @@ const useImageUploadState = (props = {}, inputRef) => {
     }
   }, [defaultPreviewImage, previewImage, inputRef]);
 
-  const handleInputChange = useCallback((event) => {
+  const handleInputChange = useCallback(event => {
     const eventFileType = event.target?.files[0]?.type?.split('/')[0];
     if (fileTypes?.includes(eventFileType)) {
       if (onChange && typeof onChange === 'function') {
@@ -62,7 +61,7 @@ const useImageUploadState = (props = {}, inputRef) => {
   }, []);
 
   const handleOpenMenuChange = useCallback(
-    (isOpen) => {
+    isOpen => {
       if (isOpen && previewImage && previewImage !== defaultPreviewImage) {
         setIsMenuOpen(true);
       } else {
@@ -82,7 +81,7 @@ const useImageUploadState = (props = {}, inputRef) => {
   ]);
 
   const handleLabelClick = useCallback(
-    (e) => {
+    e => {
       e.preventDefault();
       if (previewImage && previewImage !== defaultPreviewImage) {
         setIsMenuOpen(true);

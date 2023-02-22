@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, PageHeader, Text } from '@pingux/astro';
 
-const SuccessMessage = (props) => {
+const SuccessMessage = props => {
   const { formSuccessMessage, formSuccessTitle } = props;
 
   return (

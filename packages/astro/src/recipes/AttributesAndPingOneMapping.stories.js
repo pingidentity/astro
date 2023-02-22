@@ -1,18 +1,19 @@
-import React, { useState, useRef, useEffect, memo } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import AddIcon from 'mdi-react/AddIcon';
 import CogsIcon from 'mdi-react/CogsIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
-import AddIcon from 'mdi-react/AddIcon';
+
 import {
-  ScrollBox,
-  ComboBoxField,
-  IconButton,
-  Text,
   Box,
-  Item,
-  Icon,
-  TextField,
-  Separator,
   Button,
+  ComboBoxField,
+  Icon,
+  IconButton,
+  Item,
+  ScrollBox,
+  Separator,
+  Text,
+  TextField,
 } from '../index';
 
 const items = [
@@ -52,7 +53,7 @@ const sx = {
   },
 };
 
-const Row = memo((props) => {
+const Row = memo(props => {
   const {
     isDisabled,
     isNewRow,
@@ -69,12 +70,12 @@ const Row = memo((props) => {
   const rowRef = useRef();
   const textFieldRef = useRef();
 
-  const setTextValue = (value) => {
+  const setTextValue = value => {
     updateRow(index, value, 'textValue');
     submitFields(false);
   };
 
-  const setInputValue = (value) => {
+  const setInputValue = value => {
     updateRow(index, value, 'inputValue');
     submitFields(false);
   };
@@ -162,7 +163,7 @@ const Row = memo((props) => {
             ml: 'xs',
           }}
         >
-          <IconButton aria-label="icon button with tooltip" title="Advanced Expression" >
+          <IconButton aria-label="icon button with tooltip" title="Advanced Expression">
             <Icon icon={CogsIcon} size="sm" />
           </IconButton>
           <IconButton
@@ -208,7 +209,7 @@ export const Default = () => {
     setRows([...rows, newRow]);
   };
 
-  const removeRow = (rowIndex) => {
+  const removeRow = rowIndex => {
     const newArray = rows.filter((row, index) => {
       return rowIndex !== index;
     });

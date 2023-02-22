@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
+
 import {
-  Box,
   Badge,
+  Box,
   Icon,
   IconButton,
   Item,
@@ -84,11 +85,11 @@ const testData = [
 // You may not need these functions if you are able to change the data shape on the back end
 // (which is recommended for performance reasons)
 
-const flattenArray = (array) => {
+const flattenArray = array => {
   const newArray = array;
-  newArray.forEach((item) => {
+  newArray.forEach(item => {
     if (item.childrenObjects) {
-      item.childrenObjects.forEach((obj) => {
+      item.childrenObjects.forEach(obj => {
         const newObj = obj;
         newObj.parentId = item.id;
         newArray.push(newObj);
@@ -98,11 +99,11 @@ const flattenArray = (array) => {
   return newArray;
 };
 
-const testSort = (array) => {
+const testSort = array => {
   const newArray = array;
   newArray.forEach((item, i) => {
     if (item.parentId) {
-      const thisindex = newArray.findIndex((object) => {
+      const thisindex = newArray.findIndex(object => {
         return object.id === item.parentId;
       });
       const element = newArray.splice(i, 1)[0];
@@ -121,8 +122,8 @@ export const Default = ({ ...args }) => {
   const BottomBracket = () => {
     const color = '#CACED3';
     return (
-      <Box sx={{ width: '20px', position: 'relative' }} >
-        <Box flexBasis="50%" >
+      <Box sx={{ width: '20px', position: 'relative' }}>
+        <Box flexBasis="50%">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
@@ -145,9 +146,9 @@ export const Default = ({ ...args }) => {
               />
             </g>
           </svg>
-          <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg" >
-            <g clipPath="url(#clip0_1900_8817)" >
-              <g mask="url(#mask0_1900_8817)" >
+          <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clipPath="url(#clip0_1900_8817)">
+              <g mask="url(#mask0_1900_8817)">
                 <rect x="0.5" y="-54.5" width="20" height="63" rx="4.5" stroke="#CACED3" />
               </g>
             </g>
@@ -195,9 +196,9 @@ export const Default = ({ ...args }) => {
   };
 
   // the vector shield and key icon.
-  const ShieldVector = (props) => {
+  const ShieldVector = props => {
     return (
-      <svg width="19" height="23" viewBox="0 0 19 23" xmlns="http://www.w3.org/2000/svg" {...props} >
+      <svg width="19" height="23" viewBox="0 0 19 23" xmlns="http://www.w3.org/2000/svg" {...props}>
         <path d="M9.5 7.33342C9.77627 7.33342 10.0412 7.44316 10.2366 7.63851C10.4319 7.83386 10.5417 8.09881 10.5417 8.37508C10.5417 8.65135 10.4319 8.9163 10.2366 9.11165C10.0412 9.307 9.77627 9.41675 9.5 9.41675C9.22373 9.41675 8.95878 9.307 8.76343 9.11165C8.56808 8.9163 8.45833 8.65135 8.45833 8.37508C8.45833 8.09881 8.56808 7.83386 8.76343 7.63851C8.95878 7.44316 9.22373 7.33342 9.5 7.33342ZM18.875 10.4584C18.875 16.2397 14.875 21.6459 9.5 22.9584C4.125 21.6459 0.125 16.2397 0.125 10.4584V4.20842L9.5 0.041748L18.875 4.20842V10.4584ZM9.5 5.25008C8.6712 5.25008 7.87634 5.57932 7.29029 6.16537C6.70424 6.75142 6.375 7.54628 6.375 8.37508C6.375 9.73967 7.23958 10.8959 8.45833 11.323V17.7501H10.5417V15.6667H12.625V13.5834H10.5417V11.323C11.7604 10.8959 12.625 9.73967 12.625 8.37508C12.625 7.54628 12.2958 6.75142 11.7097 6.16537C11.1237 5.57932 10.3288 5.25008 9.5 5.25008Z" />
       </svg>
     );
@@ -208,7 +209,7 @@ export const Default = ({ ...args }) => {
     return (
       <PopoverMenu direction="left">
         <Box alignItems="center" alignSelf="center">
-          <IconButton aria-label="Menu Button" >
+          <IconButton aria-label="Menu Button">
             <Icon icon={DotsVerticalIcon} size="xs" color="Neutral.40" m="0.61px" />
           </IconButton>
         </Box>
@@ -246,7 +247,7 @@ export const Default = ({ ...args }) => {
     );
   };
 
-  const ExprirationBadge = (props) => {
+  const ExprirationBadge = props => {
     const {
       expirationText,
       chipText,
@@ -278,7 +279,7 @@ export const Default = ({ ...args }) => {
   };
 
   // jsx of the production row
-  const Production = (props) => {
+  const Production = props => {
     const {
       chipText,
       hasStaging,
@@ -297,7 +298,7 @@ export const Default = ({ ...args }) => {
           />
           {hasStaging && <TopBracket />}
         </Box>
-        <Box isRow mr="auto" alignSelf="center" justifyContent="center" ml="18px" alignItems="center" >
+        <Box isRow mr="auto" alignSelf="center" justifyContent="center" ml="18px" alignItems="center">
           <Box>
             <Text
               sx={{
@@ -315,12 +316,14 @@ export const Default = ({ ...args }) => {
                 fontSize: 'sm',
               }}
             >
-              Policy Id: {policyId}
+              Policy Id:
+              {' '}
+              {policyId}
             </Text>
           </Box>
           {
-            chipText &&
-            <DefaultBadge />
+            chipText
+            && <DefaultBadge />
           }
         </Box>
         <IconWithPopover />
@@ -329,7 +332,7 @@ export const Default = ({ ...args }) => {
   };
 
   // jsx of the staging row.
-  const Staging = (props) => {
+  const Staging = props => {
     const {
       chipText,
       expirationText,
@@ -344,7 +347,7 @@ export const Default = ({ ...args }) => {
         marginLeft="12px"
       >
         <BottomBracket />
-        <Box isRow alignItems="center" justifyContent="center" >
+        <Box isRow alignItems="center" justifyContent="center">
           <Box pl="0px" height="30px" flexDirection="row" alignItems="center">
             <Separator
               orientation="vertical"
@@ -372,17 +375,19 @@ export const Default = ({ ...args }) => {
                 fontSize: 'sm',
               }}
             >
-              Policy Id: {policyId}
+              Policy Id:
+              {' '}
+              {policyId}
             </Text>
           </Box>
         </Box>
         {
-          chipText &&
-          <DefaultBadge />
+          chipText
+          && <DefaultBadge />
         }
         {
-          expirationText &&
-          <ExprirationBadge expirationText={expirationText} />
+          expirationText
+          && <ExprirationBadge expirationText={expirationText} />
         }
         <IconWithPopover />
       </Box>
@@ -391,7 +396,7 @@ export const Default = ({ ...args }) => {
 
   return (
     <OverlayProvider>
-      <ListView {...args} items={theseItems} >
+      <ListView {...args} items={theseItems}>
         {item => (
           <Item
             {...item}
@@ -415,9 +420,9 @@ export const Default = ({ ...args }) => {
             }}
           >
             {
-              item.parentId ?
-                <Staging {...item} hasInsetSeparator /> :
-                <Production hasStaging={item.childrenObjects} {...item} />
+              item.parentId
+                ? <Staging {...item} hasInsetSeparator />
+                : <Production hasStaging={item.childrenObjects} {...item} />
             }
           </Item>
         )}

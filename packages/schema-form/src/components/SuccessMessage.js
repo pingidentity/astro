@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { AstroComponents } from '../utils/astro';
 
-const SuccessMessage = (props) => {
+const SuccessMessage = props => {
   const { formSuccessMessage, formSuccessTitle, theme } = props;
   const ThemedSuccessMessage = useMemo(() => AstroComponents.successMessage, [theme]);
 

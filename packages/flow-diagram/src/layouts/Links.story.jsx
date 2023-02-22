@@ -12,7 +12,7 @@ import {
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
-export const Default = () => {
+export function Default() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         {
@@ -45,7 +45,7 @@ export const Default = () => {
 
     const diagramLinks = [{ 'from': 'user-login', 'to': 'execute-flow', 'key': 'user-login_execute-flow', onClick: () => console.log('link clicked') }];
 
-    const onLinkDelete = (link) => {
+    const onLinkDelete = link => {
         console.log('deleting link', link);
     };
     const { diagramProps } = useDiagram({
@@ -66,9 +66,9 @@ export const Default = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const IO = () => {
+export function IO() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         {
@@ -119,9 +119,9 @@ export const IO = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Outlet = () => {
+export function Outlet() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         {
@@ -165,7 +165,7 @@ export const Outlet = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
 Default.propTypes = {
     /** Link category. Corresponds to name of desired link */

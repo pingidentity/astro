@@ -1,14 +1,14 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import omit from 'lodash/omit';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useSwitch } from 'react-aria';
 import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
+import omit from 'lodash/omit';
+import PropTypes from 'prop-types';
 
-import { Box, FieldHelperText, Label, Switch } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, FieldHelperText, Label, Switch } from '../..';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
@@ -84,10 +84,12 @@ const SwitchField = forwardRef((props, ref) => {
         {label}
       </Label>
       {
-        helperText &&
+        helperText
+        && (
         <FieldHelperText status={status}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );

@@ -6,7 +6,7 @@ export default {
     component: HeatMap,
 };
 
-export const Score = () => {
+export function Score() {
     const data = [
         {
             id: 1,
@@ -85,4 +85,4 @@ export const Score = () => {
             minZoom={2}
         />
     );
-};
+}

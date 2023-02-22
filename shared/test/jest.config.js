@@ -1,13 +1,12 @@
 module.exports = {
   rootDir: './',
-  unmockedModulePathPatterns: [
-      '<rootDir>/node_modules',
-  ],
+  resolver: require.resolve(`jest-pnp-resolver`),
   testMatch: [
       '**/**/*.test.js?(x)',
   ],
   testPathIgnorePatterns: [
       '/node_modules/',
+      '/.yarn/',
       '/lib/',
       '/dist/',
   ],

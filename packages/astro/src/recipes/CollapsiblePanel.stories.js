@@ -1,22 +1,23 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
-import AccountIcon from 'mdi-react/AccountIcon';
 import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
+import AccountIcon from 'mdi-react/AccountIcon';
 import CheckIcon from 'mdi-react/CheckIcon';
-import Clear from 'mdi-react/CloseIcon';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import Clear from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
+
 import {
-  Breadcrumbs,
-  Box,
-  CheckboxField,
   Badge,
+  Box,
+  Breadcrumbs,
+  CheckboxField,
+  CollapsiblePanel,
+  CollapsiblePanelItem,
   Icon,
   IconButton,
   Item,
   ListView,
-  CollapsiblePanel,
-  CollapsiblePanelItem,
   SearchField,
   Text,
 } from '..';
@@ -149,9 +150,9 @@ export const Default = () => {
     [items],
   );
 
-  const changeSelection = (key) => {
-    setItems((prevItems) => {
-      return prevItems.map((el) => {
+  const changeSelection = key => {
+    setItems(prevItems => {
+      return prevItems.map(el => {
         if (el.key === key) {
           return {
             ...el,
@@ -268,8 +269,7 @@ export const Default = () => {
                         ref={checkBoxRef}
                         onClick={() => checkBoxRef.current.focus()}
                       />
-                    )
-                  }
+                    )}
                 </Item>
               )}
             </ListView>

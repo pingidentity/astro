@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FORM_STATE } from '../utils/constants';
 import { AstroComponents } from '../utils/astro';
 
-const SubmitButton = (props) => {
+const SubmitButton = props => {
   const { formState, submitText, theme } = props;
   const Button = useMemo(() => AstroComponents.button, [theme]);
 

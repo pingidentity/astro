@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   Box,
   Button,
@@ -37,7 +38,7 @@ export const Default = () => {
 
   const [messageState, setMessageState] = useState(null);
 
-  const handleUpdateMessage = (message) => {
+  const handleUpdateMessage = message => {
     setMessageState(message);
     setTimeout(() => setMessageState(null), 3000);
   };
@@ -52,8 +53,8 @@ export const Default = () => {
       </Box>
       <Box>
         <Messages>
-          {messageState &&
-          <Item status={messageState.status}>{messageState.text}</Item>}
+          {messageState
+          && <Item status={messageState.status}>{messageState.text}</Item>}
         </Messages>
       </Box>
     </>

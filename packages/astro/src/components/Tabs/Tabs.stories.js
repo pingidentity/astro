@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Earth from 'mdi-react/GlobeModelIcon';
 import LockIcon from 'mdi-react/LockIcon';
-import Tabs from './Tabs';
-import Tab from '../Tab';
-import Icon from '../Icon';
-import Text from '../Text';
+
 import { Badge } from '../../index';
+import Icon from '../Icon';
+import Tab from '../Tab';
+import Text from '../Text';
+
+import Tabs from './Tabs';
 
 export default {
   title: 'Components/Tabs',

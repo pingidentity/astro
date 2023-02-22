@@ -2,7 +2,7 @@ import React from 'react';
 import { OverlayProvider } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
-import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from '../../';
+import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from '../..';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 export default {
@@ -73,17 +73,19 @@ export const Uncontrolled = ({ ...args }) => {
         },
       }}
       renderField={
-        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) =>
-          (<TextField
+        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
+          <TextField
             aria-label="Text field"
             value={fieldValue}
             onChange={e => onFieldValueChange(e, id)}
             mr="xs"
             slots={
               { inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
+  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }
+}
             {...otherFieldProps}
-          />)
+          />
+        )
       }
       sx={{ width: '400px' }}
       {...args}
@@ -161,7 +163,7 @@ export const Controlled = () => {
 
   const [fieldValues, setFieldValues] = React.useState(defaultDataSelectField);
 
-  const handleOnChange = (values) => {
+  const handleOnChange = values => {
     setFieldValues(values);
   };
 
@@ -169,9 +171,8 @@ export const Controlled = () => {
     setFieldValues(oldValues => [...oldValues, defaultEmptyField]);
   };
 
-  const handleOnDelete = (fieldId) => {
-    setFieldValues(oldValues =>
-      oldValues.filter(({ id }) => id !== fieldId),
+  const handleOnDelete = fieldId => {
+    setFieldValues(oldValues => oldValues.filter(({ id }) => id !== fieldId),
     );
   };
 
@@ -192,17 +193,19 @@ export const WithLimitedItemsNumber = ({ ...args }) => {
     <ArrayField
       defaultValue={defaultData}
       renderField={
-        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) =>
-          (<TextField
+        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
+          <TextField
             aria-label="Text field"
             value={fieldValue}
             onChange={e => onFieldValueChange(e, id)}
             mr="xs"
             slots={
               { inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
+  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }
+}
             {...otherFieldProps}
-          />)
+          />
+        )
       }
       sx={{ width: '400px' }}
       maxSize={3}

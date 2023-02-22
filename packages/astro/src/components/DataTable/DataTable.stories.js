@@ -1,23 +1,23 @@
 import React from 'react';
-import isChromatic from 'chromatic/isChromatic';
-import ApplicationIcon from 'mdi-react/ApplicationIcon';
 import { useAsyncList } from 'react-stately';
 import { faker } from '@faker-js/faker';
 import { action } from '@storybook/addon-actions';
-import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import isChromatic from 'chromatic/isChromatic';
+import ApplicationIcon from 'mdi-react/ApplicationIcon';
 
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   DataTable,
+  DataTableBadge,
   DataTableBody,
   DataTableCell,
   DataTableColumn,
   DataTableHeader,
-  DataTableRow,
-  DataTableBadge,
   DataTableMenu,
   DataTableMultiLine,
+  DataTableRow,
 } from '../../index';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 import DataTableReadme from './DataTable.mdx';
 
@@ -102,7 +102,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   const columns = [
     { name: 'Country', key: 'country' },
     { name: 'Population', key: 'population' },
@@ -144,7 +144,7 @@ export const Default = (args) => {
   );
 };
 
-export const CustomContent = (args) => {
+export const CustomContent = args => {
   /**
    * isChromatic checks if the code is running in Chromatic environment
    * @returns {Boolean}
@@ -197,7 +197,7 @@ export const CustomContent = (args) => {
       const json = await res.json();
       await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
 
-      const fakeData = [...Array(json.results.length).keys()].map((key) => {
+      const fakeData = [...Array(json.results.length).keys()].map(key => {
         return {
           id: key,
           date: chromatic ? '2022-12-25' : `${faker.date.past().toLocaleDateString('fr-CA')}`,
@@ -222,8 +222,7 @@ export const CustomContent = (args) => {
           menu: <DataTableMenu />,
         };
       });
-      const tableData = fakeData.map((item, i) =>
-        Object.assign({}, item, json.results[i]),
+      const tableData = fakeData.map((item, i) => ({ ...item, ...json.results[i] }),
       );
 
       return {
@@ -236,22 +235,19 @@ export const CustomContent = (args) => {
 
       return {
         items: items.sort((a, b) => {
-          const first =
-            sortDescriptor.column !== 'name_id'
-              ? a[sortDescriptor.column]
-              : a[sortDescriptor.column].props.cell[0].name;
-          const second =
-            sortDescriptor.column !== 'name_id'
-              ? b[sortDescriptor.column]
-              : b[sortDescriptor.column].props.cell[0].name;
+          const first = sortDescriptor.column !== 'name_id'
+            ? a[sortDescriptor.column]
+            : a[sortDescriptor.column].props.cell[0].name;
+          const second = sortDescriptor.column !== 'name_id'
+            ? b[sortDescriptor.column]
+            : b[sortDescriptor.column].props.cell[0].name;
 
           if (sortDescriptor.column.includes('date')) {
             cmp = new Date(first) < new Date(second) ? -1 : 1;
           } else {
-            cmp =
-              (parseInt(first, 10) || first) < (parseInt(second, 10) || second)
-                ? -1
-                : 1;
+            cmp = (parseInt(first, 10) || first) < (parseInt(second, 10) || second)
+              ? -1
+              : 1;
           }
           if (sortDescriptor.direction === 'descending') {
             cmp *= -1;
@@ -263,45 +259,43 @@ export const CustomContent = (args) => {
   });
 
   return (
-    <>
-      <DataTable
-        {...args}
-        sortDescriptor={list.sortDescriptor}
-        onSortChange={list.sort}
-        aria-label="Custom content table"
-        onAction={action('onAction')}
-      >
-        <DataTableHeader columns={columns}>
-          {column => (
-            <DataTableColumn
-              width={
+    <DataTable
+      {...args}
+      sortDescriptor={list.sortDescriptor}
+      onSortChange={list.sort}
+      aria-label="Custom content table"
+      onAction={action('onAction')}
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn
+            width={
                 // eslint-disable-next-line no-nested-ternary
                 column.key === 'name_id'
                   ? '26.5%'
                   : column.key === 'menu'
-                  ? '5%'
-                  : '16%'
+                    ? '5%'
+                    : '16%'
               }
-              align={column.key !== 'menu' ? 'start' : 'center'}
-              allowsSorting={column.isSortable}
-              hideHeader={column.key === 'menu'}
-            >
-              {column.name}
-            </DataTableColumn>
-          )}
-        </DataTableHeader>
-        <DataTableBody
-          items={list.items}
-          loadingState={list.loadingState}
-          onLoadMore={list.loadMore}
-        >
-          {item => (
-            <DataTableRow key={item.name}>
-              {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
-            </DataTableRow>
-          )}
-        </DataTableBody>
-      </DataTable>
-    </>
+            align={column.key !== 'menu' ? 'start' : 'center'}
+            allowsSorting={column.isSortable}
+            hideHeader={column.key === 'menu'}
+          >
+            {column.name}
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody
+        items={list.items}
+        loadingState={list.loadingState}
+        onLoadMore={list.loadMore}
+      >
+        {item => (
+          <DataTableRow key={item.name}>
+            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
   );
 };

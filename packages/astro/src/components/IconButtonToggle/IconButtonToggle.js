@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IconButton from '../IconButton';
-import Icon from '../Icon';
-import { useComponentToggle } from '../../hooks';
 
-const IconButtonToggle = (props) => {
+import { useComponentToggle } from '../../hooks';
+import Icon from '../Icon';
+import IconButton from '../IconButton';
+
+const IconButtonToggle = props => {
   const {
     toggledIcon,
     defaultIcon,
@@ -30,7 +31,7 @@ const IconButtonToggle = (props) => {
   );
 
   return (
-    <IconButton onPress={handleConditionChange} {...buttonProps} title={title} >
+    <IconButton onPress={handleConditionChange} {...buttonProps} title={title}>
       <Icon icon={RenderedComponent} {...iconProps} />
     </IconButton>
   );

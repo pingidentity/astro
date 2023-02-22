@@ -1,3 +1,4 @@
+const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -17,6 +18,17 @@ for (let i = 0; i < routes.length; i += 1) {
 module.exports = {
     entry: entries,
     devtool: 'source-map',
+    resolve: {
+        extensions: ['.js', '.jsx', '.md', '.mdx'],
+        plugins: [
+            PnpWebpackPlugin,
+        ],
+    },
+    resolveLoader: {
+        plugins: [
+          PnpWebpackPlugin.moduleLoader(module),
+        ],
+    },
     plugins: [
         new webpack.DefinePlugin({
             END_USER_VERSION: JSON.stringify(package.version)
@@ -89,7 +101,4 @@ module.exports = {
         extractDemoCSS,
         extractEndUserCSS,
     ],
-    resolve: {
-        extensions: ['.js', '.jsx', '.md', '.mdx'],
-    },
 };

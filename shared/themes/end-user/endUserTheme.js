@@ -69,6 +69,7 @@ const endUserTheme = {
     listBox: listBox.default,
     popoverMenu: popoverMenu.default,
     link: link.default,
+    fieldHelperText: { ...text.default.fieldHelperText }
   },
 };
 

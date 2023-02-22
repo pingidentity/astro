@@ -18,9 +18,9 @@
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
   },
   "scripts": {
+    "build": "rm -rf lib && yarn run build:css && yarn run build:move-files && yarn run build:components && yarn run build:cjs && yarn run build:esm",
+    "build:css": "sass src/:lib",
     "build-ci": "yarn build",
-    "build": "rm -rf lib && npm-run-all build:*",
-    "build:css": "node-sass --output-style 'compressed' src/ -o lib",
     "build:move-files": "gulp move-files",
     "build:components": "svgr -d lib/ui-library/components src/ui-library/svg --icon && create-index lib/ui-library/components -i",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js lib/ui-library/components --out-dir lib/ui-library/cjs",
@@ -28,6 +28,7 @@
     "cdn": "rm -rf cdn && gulp cdn"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
     "@babel/core": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/plugin-transform-spread": "^7.8.3",
@@ -37,8 +38,9 @@
     "create-index": "^2.5.0",
     "gulp": "^4.0.2",
     "gulp-debug": "^4.0.0",
-    "node-sass": "^6.0.1",
-    "npm-run-all": "^4.1.5"
+    "html-webpack-plugin": "^3.2.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.55.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2"

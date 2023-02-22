@@ -1,7 +1,9 @@
 import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
-import Button from '../Button/Button';
+
 import withDeprecationWarning from '../../utils/devUtils/decorators/withDeprecationWarning';
+import Button from '../Button/Button';
+
+import PageHeader from './PageHeader';
 
 export default {
   title: 'Deprecated/PageHeader',

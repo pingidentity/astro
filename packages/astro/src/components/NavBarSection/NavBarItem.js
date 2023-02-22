@@ -1,11 +1,11 @@
-import React, { useRef, forwardRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
+import PropTypes from 'prop-types';
 
-import { Box, Icon, Text } from '../../index';
-import { useStatusClasses, useNavBarPress } from '../../hooks';
 import { useNavBarContext } from '../../context/NavBarContext';
+import { useNavBarPress, useStatusClasses } from '../../hooks';
+import { Box, Icon, Text } from '../../index';
 
 const NavBarItem = forwardRef((props, ref) => {
   const {
@@ -73,7 +73,8 @@ const NavBarItem = forwardRef((props, ref) => {
           alignItems: 'center',
         }}
       >
-        {icon &&
+        {icon
+          && (
           <Icon
             icon={icon}
             aria-label={text}
@@ -84,7 +85,7 @@ const NavBarItem = forwardRef((props, ref) => {
               fill: color,
             }}
           />
-        }
+          )}
         <Text
           variant="variants.navBar.headerText"
         >

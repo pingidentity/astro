@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 
-import { Image, ImageUploadField, OverlayProvider } from '../../';
+import { Image, ImageUploadField, OverlayProvider } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/ImageUploadField',
@@ -77,7 +77,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
@@ -135,7 +135,7 @@ export const ExistingImage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // When controlling the previewImage yourself, it's important to handle updating the state
-  const handleChange = async (e) => {
+  const handleChange = async e => {
     // Clear errors
     setError(undefined);
     // Turn on loading indicator
@@ -188,7 +188,7 @@ export const ErrorOnUpload = () => {
   const errorRef = useRef(shouldError);
 
   // When controlling the previewImage yourself, it's important to handle updating the state
-  const handler = async (e) => {
+  const handler = async e => {
     // Clear errors
     setError(undefined);
     // Turn on loading indicator

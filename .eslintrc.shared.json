@@ -7,11 +7,11 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "rules": {
+        "arrow-parens": ["error", "as-needed"],
         "arrow-body-style": 0,
         "import/extensions": 0,
         "import/no-extraneous-dependencies": ["error", {
-            "devDependencies": true,
-            "packageDir": ["./", "../../"]
+            "devDependencies": true
         }],
         "import/prefer-default-export": 0,
         "indent": ["error", 4, { "SwitchCase": 1 }],
@@ -28,7 +28,10 @@
         "react/jsx-props-no-spreading": 0,
         "function-paren-newline": 0,
         "quote-props": 0,
-        "object-curly-newline": 0
+        "object-curly-newline": 0,
+        "implicit-arrow-linebreak": 1,
+        "function-call-argument-newline": 1,
+        "no-restricted-exports": 0
     },
     "settings": {
         "import/resolver": {

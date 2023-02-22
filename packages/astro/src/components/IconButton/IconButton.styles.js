@@ -1,10 +1,10 @@
+import { badgeWithSlotDeleteButton, deleteButton } from '../Badge/Badge.styles';
 import { defaultFocus } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
 import { hintButton } from '../HelpHint/HelpHint.styles';
-import { deleteButton, badgeWithSlotDeleteButton } from '../Badge/Badge.styles';
-import { modalCloseButton } from '../Modal/Modal.styles';
 import { messageCloseButton } from '../Messages/Message.styles';
+import { modalCloseButton } from '../Modal/Modal.styles';
 import { button } from '../TooltipTrigger/Tooltip.styles';
 
 export const base = {

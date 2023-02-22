@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import Box from '.';
+import { CacheProvider } from '@emotion/react';
+import { render, screen } from '@testing-library/react';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import Box from '.';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.

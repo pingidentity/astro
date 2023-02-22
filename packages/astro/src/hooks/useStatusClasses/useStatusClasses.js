@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import mapKeys from 'lodash/mapKeys';
 import kebabCase from 'lodash/kebabCase';
+import mapKeys from 'lodash/mapKeys';
 
 /**
  * Converts status information into classes which can be supplied to the rendered component's

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
-import GlobeIcon from 'mdi-react/GlobeIcon';
-import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 import AccountMultiple from 'mdi-react/AccountMultipleIcon';
-import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
+import GlobeIcon from 'mdi-react/GlobeIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
+import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import Verify from 'mdi-react/VerifiedIcon';
+import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 
-import { Box, NavBarSection, NavBarItem, NavBarItemButton, NavBarItemLink, Link, Button } from '../../';
-import NavBar from './NavBar';
+import { Box, Button, Link, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+
+import NavBar from './NavBar';
 
 const DATA_ID = 'data-id';
 const SECTION_BUTTON_DATA_ID = 'section-data-id';
@@ -190,7 +191,7 @@ const ControlledComponent = () => {
     setData([...newArray]);
   };
 
-  const setKeys = (e) => {
+  const setKeys = e => {
     setSelectedKey(e);
   };
 
@@ -201,7 +202,7 @@ const ControlledComponent = () => {
         paddingBottom="xl"
         key="top-logo-parent"
       >
-        <button key="test-button" data-testid="test-button" onClick={testFunction} >click me!</button>
+        <button key="test-button" data-testid="test-button" onClick={testFunction}>click me!</button>
         <NavBarItem
           id="Overview"
           key="Overview"

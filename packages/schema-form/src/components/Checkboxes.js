@@ -11,7 +11,7 @@ const convertToValues = (options, values = []) => options.reduce((acc, cur) => (
   [cur.value]: values.includes(cur.value),
 }), {});
 
-const Checkboxes = (props) => {
+const Checkboxes = props => {
   const {
     id,
     onChange,
@@ -56,7 +56,7 @@ const Checkboxes = (props) => {
             key={option.value}
             label={<Text>{option.label}</Text>}
             checked={values[option.value] || value.includes(option.value)}
-            onChange={(e) => handleChange(option.value, e)}
+            onChange={e => handleChange(option.value, e)}
             options={{
               isSelected: values[option.value] || value.includes(option.value),
             }}

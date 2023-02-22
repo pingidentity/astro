@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Table from './Table';
+import { Text } from '../../index';
+import axeTest from '../../utils/testUtils/testAxe';
 import TableBody from '../TableBody';
-import TableRow from '../TableRow';
+import TableCaption from '../TableCaption';
 import TableCell from '../TableCell';
 import TableHead from '../TableHead';
-import TableCaption from '../TableCaption';
-import { Text } from '../../index';
+import TableRow from '../TableRow';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import Table from './Table';
 
 const testId = 'test-table';
 

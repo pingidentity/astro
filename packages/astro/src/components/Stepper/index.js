@@ -1,2 +1,2 @@
-export { default } from './Stepper';
 export { default as Step } from './Step';
+export { default } from './Stepper';

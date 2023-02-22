@@ -4,17 +4,18 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Item, Menu } from '../../';
+import { Item, Menu } from '../..';
+import { useImageUploadState } from '../../hooks/useImageUploadState';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+
 import ImagePreviewButton from './ImagePreviewButton';
 import ImageUploadFieldBase from './ImageUploadFieldBase';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { useImageUploadState } from '../../hooks/useImageUploadState';
 
 /**
  * The Image Upload Field component gives users the ability to upload a file (image by default).
@@ -22,14 +23,14 @@ import { useImageUploadState } from '../../hooks/useImageUploadState';
 const ImageUploadField = forwardRef((props, ref) => {
   const { isLoading, loaderSize, onRemove, removeItemText, uploadItemText } = props;
   const inputRef = useRef();
-  const state = useImageUploadState(props, inputRef);
+  const state = useImageUploadState(inputRef, props);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
   const statusId = uuid();
 
   const onAction = useCallback(
-    (action) => {
+    action => {
       // eslint-disable-next-line default-case
       switch (action) {
         case 'upload': {
@@ -75,10 +76,10 @@ const ImageUploadField = forwardRef((props, ref) => {
           aria-haspopup={state.isMenuOpen}
         />
         <Menu onAction={onAction} aria-labelledby={statusId}>
-          <Item key="upload" role="button" >{uploadItemText}</Item>
+          <Item key="upload" role="button">{uploadItemText}</Item>
           <Item key="remove" role="button">{removeItemText}</Item>
         </Menu>
-      </ImageUploadFieldBase >
+      </ImageUploadFieldBase>
       <VisuallyHidden aria-live="polite" role={state.isMenuOpen ? 'button' : 'status'} id={statusId}>{state.isMenuOpen && 'Menu pop up expanded'}</VisuallyHidden>
     </>
   );

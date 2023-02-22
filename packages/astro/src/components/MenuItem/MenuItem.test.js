@@ -1,8 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+import { Item, Menu } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
-import { Menu, Item } from '../../index';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 const testId = 'testId';
 const defaultMenuItems = [

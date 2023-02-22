@@ -3,7 +3,7 @@ import * as go from 'gojs';
 /* istanbul ignore file */
 class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
     doLayout(coll) {
-        const parts = this.collectParts(coll).filter((p) => {
+        const parts = this.collectParts(coll).filter(p => {
             return (p instanceof go.Link || this.isConnected(p));
         });
 
@@ -23,7 +23,7 @@ class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
 
         if (node instanceof go.Node) {
             let isConnected = false;
-            node.findNodesConnected().each((connectedNode) => {
+            node.findNodesConnected().each(connectedNode => {
                 const links = connectedNode.linksConnected;
                 while (links.next()) {
                     const link = links.value;
@@ -38,7 +38,7 @@ class SelectiveDigraphLayout extends go.LayeredDigraphLayout {
                 return true;
             });
             if (node.memberParts) {
-                node.memberParts.each((connectedNode) => {
+                node.memberParts.each(connectedNode => {
                     if (this.isConnected(connectedNode, [...checked, node])) {
                         isConnected = true;
                     }

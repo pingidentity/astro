@@ -1,10 +1,10 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
+import { Pressable, useHover } from '@react-aria/interactions';
+import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
-import { useHover } from '@react-aria/interactions';
 
-import { useStatusClasses, usePropWarning, useAriaLabelWarning } from '../../hooks';
+import { useAriaLabelWarning, usePropWarning, useStatusClasses } from '../../hooks';
 import Loader from '../Loader';
 
 const Button = forwardRef((props, ref) => {
@@ -47,20 +47,21 @@ const Button = forwardRef((props, ref) => {
   useAriaLabelWarning('Button', ariaLabel, variant === 'filter');
 
   return (
-    <ThemeUIButton
-      aria-label={ariaLabel}
-      ref={buttonRef}
-      className={classNames}
-      role="button"
-      tx="buttons"
-      sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      variant={variant}
-      {...others}
-      {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
-    >
-      {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
-      {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
-    </ThemeUIButton>
+    <Pressable ref={buttonRef}>
+      <ThemeUIButton
+        aria-label={ariaLabel}
+        className={classNames}
+        role="button"
+        tx="buttons"
+        sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        variant={variant}
+        {...others}
+        {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
+      >
+        {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
+        {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
+      </ThemeUIButton>
+    </Pressable>
   );
 });
 

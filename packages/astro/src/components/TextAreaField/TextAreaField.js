@@ -1,12 +1,12 @@
-import React, { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, FieldHelperText, Label, TextArea } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, FieldHelperText, Label, TextArea } from '../..';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
@@ -89,9 +89,9 @@ const TextAreaField = forwardRef((props, ref) => {
   );
 
   return (
-    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%" >
+    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%">
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
-      <Box isRow variant="forms.input.fieldControlWrapper" minWidth="40px" maxWidth="100%" ref={fieldControlWrapperRef} {...fieldControlWrapperProps} >
+      <Box isRow variant="forms.input.fieldControlWrapper" minWidth="40px" maxWidth="100%" ref={fieldControlWrapperRef} {...fieldControlWrapperProps}>
         <TextArea
           ref={textAreaRef}
           rows={rows}
@@ -102,16 +102,20 @@ const TextAreaField = forwardRef((props, ref) => {
           aria-describedby={helperText && helperTextId}
         />
         {
-          slots?.inContainer &&
-            <Box variant="forms.textarea.containerSlot" ref={slotContainer} >
+          slots?.inContainer
+            && (
+            <Box variant="forms.textarea.containerSlot" ref={slotContainer}>
               {slots?.inContainer}
             </Box>
+            )
         }
       </Box>
-      {helperText &&
+      {helperText
+        && (
         <FieldHelperText status={status} id={helperTextId}>
           {helperText}
-        </FieldHelperText>}
+        </FieldHelperText>
+        )}
     </Box>
   );
 });

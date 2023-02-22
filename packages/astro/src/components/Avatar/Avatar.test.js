@@ -1,7 +1,9 @@
 import React from 'react';
 import { faker } from '@faker-js/faker';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+
 import Avatar from '.';
 
 const defaultProps = {

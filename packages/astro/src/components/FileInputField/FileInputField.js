@@ -6,19 +6,20 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
 import { mergeProps, useVisuallyHidden } from 'react-aria';
 import { useDropzone } from 'react-dropzone';
+import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Box, Input, FieldHelperText, Label, Loader } from '../../';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
-import FileItem from './FileItem';
-import FileSelect from './FileSelect';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { Box, FieldHelperText, Input, Label, Loader } from '../..';
 import useField from '../../hooks/useField';
 import useStatusClasses from '../../hooks/useStatusClasses';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+
+import FileItem from './FileItem';
+import FileSelect from './FileSelect';
 
 /**
  * The FileInputField component allows users to upload one or more files by
@@ -79,7 +80,7 @@ const FileInputField = forwardRef(({
       if (!isMultiple) {
         arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
       }
-      const newFilesWithIdAndLink = arrayWithNewFiles.map((newFile) => {
+      const newFilesWithIdAndLink = arrayWithNewFiles.map(newFile => {
         return {
           fileObj: newFile,
           name: newFile.name,
@@ -114,7 +115,7 @@ const FileInputField = forwardRef(({
   });
 
   const handleOnChange = useCallback(
-    (event) => {
+    event => {
       handleFileUpload(event, event.target.files);
     },
     [handleFileUpload],
@@ -125,8 +126,7 @@ const FileInputField = forwardRef(({
       onRemove(e, fileId);
     }
 
-    setUploadedFiles(prevFiles =>
-      prevFiles.filter(({ id }) => id !== fileId),
+    setUploadedFiles(prevFiles => prevFiles.filter(({ id }) => id !== fileId),
     );
   }, [onRemove]);
 
@@ -164,7 +164,7 @@ const FileInputField = forwardRef(({
   }, [uploadedFiles, uploadedFilesImperative, isMultiple]);
 
   return (
-    <Box fieldContainerProps={fieldContainerProps} >
+    <Box fieldContainerProps={fieldContainerProps}>
       <Label {...fieldLabelProps} />
       <Box
         variant="forms.fileInputField.wrapper"

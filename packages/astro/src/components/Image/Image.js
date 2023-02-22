@@ -1,19 +1,20 @@
 import React, {
   forwardRef,
-  useRef,
   useImperativeHandle,
-  useState,
   useMemo,
+  useRef,
+  useState,
 } from 'react';
+import { keyframes } from '@emotion/react';
+import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { Image as ThemeUIImage } from 'theme-ui';
-import { useHover } from '@react-aria/interactions';
-import { keyframes } from '@emotion/react';
+
 import {
+  useAriaLabelWarning,
+  useFallbackImage,
   usePropWarning,
   useStatusClasses,
-  useFallbackImage,
-  useAriaLabelWarning,
 } from '../../hooks';
 import { Box } from '../../index';
 import { neutral } from '../../styles/colors';
@@ -42,7 +43,7 @@ const Image = forwardRef((props, ref) => {
   // we need to use useRef here with useState so it will be updated in setTimeout and onload
   // https://github.com/facebook/react/issues/14010#issuecomment-433788147
   const isLoadingRef = useRef(isLoading);
-  const setIsLoadingWithRef = (newState) => {
+  const setIsLoadingWithRef = newState => {
     setIsLoading(newState);
     isLoadingRef.current = newState;
   };

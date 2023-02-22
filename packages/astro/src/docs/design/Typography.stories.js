@@ -1,7 +1,7 @@
 import React from 'react';
-import Text from '../../components/Text';
-import { Table, TableRow, TableBody, TableHead, TableCell, Box, Separator } from '../..';
-import { fontWeights, fontSizes } from '../../styles/text';
+
+import { Box, Separator, Table, TableBody, TableCell, TableHead, TableRow, Text } from '../..';
+import { fontSizes, fontWeights } from '../../styles/text';
 
 
 export default {
@@ -37,19 +37,22 @@ export const TypographyTokens = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {Object.entries(fontSizes).map(([key, value]) =>
-          (
+          {Object.entries(fontSizes).map(([key, value]) => (
             <TableBody sx={tableBodyStyles} key={key}>
               <TableRow sx={tableRowStyles}>
                 <TableCell><Text fontSize={value}>{key}</Text></TableCell>
                 <TableCell><Text fontSize={value}>{value}</Text></TableCell>
                 <TableCell>
-                  <Text fontSize={value}>&lt;Text fontSize=&#123;{key}&#125; /&gt;</Text>
+                  <Text fontSize={value}>
+                    &lt;Text fontSize=&#123;
+                    {key}
+                    &#125; /&gt;
+                  </Text>
                 </TableCell>
               </TableRow>
             </TableBody>
           ),
-        )}
+          )}
         </Table>
       </>
       <>
@@ -69,25 +72,28 @@ export const TypographyTokens = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {Object.entries(fontWeights).map(([key, value]) =>
-          (
+          {Object.entries(fontWeights).map(([key, value]) => (
             <TableBody sx={tableBodyStyles} key={key}>
               <TableRow sx={tableRowStyles}>
                 <TableCell><Text fontWeight={value}>{key}</Text></TableCell>
                 <TableCell><Text fontWeight={value}>{value}</Text></TableCell>
                 <TableCell>
-                  <Text fontWeight={value}>&lt;Text fontWeight=&#123;{key}&#125; /&gt;</Text>
+                  <Text fontWeight={value}>
+                    &lt;Text fontWeight=&#123;
+                    {key}
+                    &#125; /&gt;
+                  </Text>
                 </TableCell>
               </TableRow>
             </TableBody>
           ),
-        )}
+          )}
         </Table>
       </>
       <>
         <Text variant="sectionTitle" mt="xx">Text Colors</Text>
         <Separator mb="sm" />
-        <Table width="75%" >
+        <Table width="75%">
           <TableHead>
             <TableRow key="head">
               <TableCell isHeading>
@@ -103,7 +109,7 @@ export const TypographyTokens = () => {
           </TableHead>
           <TableBody sx={tableBodyStyles}>
             <TableRow sx={tableRowStyles}>
-              <TableCell >
+              <TableCell>
                 <Box isRow>
                   <Box width="30px" height="30px" bg="text.primary" mr="xs" />
                   <Text alignSelf="center">text.primary</Text>
@@ -114,7 +120,7 @@ export const TypographyTokens = () => {
 
             </TableRow>
             <TableRow sx={tableRowStyles}>
-              <TableCell >
+              <TableCell>
                 <Box isRow>
                   <Box width="30px" height="30px" bg="text.secondary" mr="xs" />
                   <Text alignSelf="center">text.secondary</Text>

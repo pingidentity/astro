@@ -1,13 +1,12 @@
-import accordion from '../../components/AccordionGroup/Accordion.styles';
 import accordionGrid from '../../components/AccordionGridGroup/AccordionGrid.styles';
+import accordion from '../../components/AccordionGroup/Accordion.styles';
 import box from '../../components/Box/Box.styles';
 import bracket from '../../components/Bracket/Bracket.styles';
 import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
-import callout from './callout';
 import codeView from '../../components/CodeView/CodeView.styles';
 import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel.styles';
 import copyText from '../../components/CopyText/CopyText.styles';
-import dataTable from './../../components/DataTable/DataTable.styles';
+import dataTable from '../../components/DataTable/DataTable.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
@@ -28,9 +27,11 @@ import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
 import separator from '../../components/Separator/Separator.styles';
 import stepper from '../../components/Stepper/Stepper.styles';
 import table from '../../components/Table/Table.styles';
+import * as tab from '../../components/Tabs/Tabs.style';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
-import * as tab from '../../components/Tabs/Tabs.style';
+
+import callout from './callout';
 
 export default {
   accordion,

@@ -18,9 +18,7 @@ export const iconButton = ({ onAction = () => {}, margin, source } = {}) => {
         width: 25,
         margin,
         alignment: go.Spot.MiddleRight,
-    },
-    new go.Binding('visible', '', (data, button) => button.part.containingGroup.isSelected),
-    $(go.Picture, {
+    }, new go.Binding('visible', '', (data, button) => button.part.containingGroup.isSelected), $(go.Picture, {
         source,
         width: 20,
         height: 20,

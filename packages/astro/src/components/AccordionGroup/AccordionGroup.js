@@ -1,13 +1,13 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useTreeState } from 'react-stately';
 import { useAccordion } from '@react-aria/accordion';
 import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
-import { useTreeState } from 'react-stately';
 
-import { Box } from '../../index';
-import AccordionItem from '../AccordionItem';
 import { AccordionContext } from '../../context/AccordionContext';
+import { Box } from '../../index';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import AccordionItem from '../AccordionItem';
 
 /**
  * Console Warning: "Cannot update a component (`Unknown`)...`"
@@ -40,7 +40,7 @@ const AccordionGroup = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => accordionRef.current);
 
   return (
-    <AccordionContext.Provider value={state} >
+    <AccordionContext.Provider value={state}>
       <Box
         ref={accordionRef}
         {...mergeProps(theseProps, others)}

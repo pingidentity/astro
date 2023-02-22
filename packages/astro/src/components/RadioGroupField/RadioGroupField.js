@@ -1,16 +1,16 @@
 import React, { forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useRadioGroup } from 'react-aria';
 import { useRadioGroupState } from 'react-stately';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, FieldHelperText, Label } from '../../';
+import { Box, FieldHelperText, Label } from '../..';
+import { usePropWarning, useStatusClasses } from '../../hooks';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
-import { useStatusClasses, usePropWarning } from '../../hooks';
-import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { RadioContext } from '../RadioField';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Radio group component for a single-choice list of options.
@@ -67,10 +67,11 @@ const RadioGroupField = forwardRef((props, ref) => {
         </RadioContext.Provider>
       </Box>
       {
-        helperText &&
+        helperText && (
         <FieldHelperText status={status} sx={{ pt: 'xs' }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );

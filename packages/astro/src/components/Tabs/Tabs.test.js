@@ -1,11 +1,13 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import userEvent from '@testing-library/user-event';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
-import Tabs from './Tabs';
 import Tab from '../Tab';
+
+import Tabs from './Tabs';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.
@@ -70,7 +72,7 @@ const testTabPanel = expectedTabIndex => defaultTabs.forEach(({ children }, inde
 ));
 
 const testSingleTab = (tabs, tab, thisTest, testParams = []) => {
-  tabs.forEach((t) => {
+  tabs.forEach(t => {
     if (t === tab) {
       expect(t)[thisTest](...testParams);
     } else {
@@ -176,7 +178,7 @@ test('disabled all tabs', () => {
   const tabLine = screen.queryByRole('presentation');
 
   // Tabs cannot be DOM disabled so must check visuals
-  defaultTabs.forEach((tab) => {
+  defaultTabs.forEach(tab => {
     const tabText = screen.getByText(tab.name);
     const { parentElement } = tabText;
     expect(parentElement).toHaveClass('is-disabled');

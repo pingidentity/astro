@@ -1,7 +1,9 @@
 # NPM / YARN
+.yarn/install-state.gz
+.yarn/unplugged
+
 node
-.yarn
-node_modules
+/node_modules
 yarn-error.log
 npm-debug.log
 package-lock.json
@@ -28,8 +30,6 @@ lerna_version.json
 
 # VS Code
 *.code-workspace
-.vscode/*
-**/.vscode/*
 .history/*
 
 # IDEA

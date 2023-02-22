@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useModalState } from '../../hooks';
 import {
-  OverlayProvider,
   Box,
   Button,
-  Text,
   Modal,
+  OverlayProvider,
+  Text,
 } from '../../index';
 
 export default {
@@ -73,7 +74,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   const state = useModalState();
 
   return (

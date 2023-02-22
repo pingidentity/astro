@@ -1,13 +1,13 @@
 import React, { useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import { FocusScope, DismissButton, useOverlayPosition, useSelect } from 'react-aria';
+import { DismissButton, FocusScope, useOverlayPosition, useSelect } from 'react-aria';
 import { useSelectState } from 'react-stately';
 import { useResizeObserver } from '@react-aria/utils';
 
-import { useColumnStyles, useDeprecationWarning, useField } from '..';
+import { modes } from '../../components/Label/constants';
 import ListBox from '../../components/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
-import { modes } from '../../components/Label/constants';
+import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
 const useSelectField = (props, ref) => {
   const {
@@ -175,9 +175,7 @@ const useSelectField = (props, ref) => {
         variant="listBox.selectField"
         isLoading={isLoadingMore}
         onLoadMore={onLoadMore}
-
         {...menuProps}
-
       />
       <DismissButton onDismiss={() => state.close()} />
     </FocusScope>

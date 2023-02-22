@@ -3,7 +3,7 @@
   "version": "0.22.8-alpha.0",
   "description": "Branding themes for end-user projects",
   "scripts": {
-    "build": "rm -rf ./build && npm-run-all build:*",
+    "build": "rm -rf ./build & yarn run build:tokens & yarn run build:css & yarn run build:images",
     "build-ci": "yarn build",
     "build:tokens": "node ./buildTokens.js",
     "build:css": "node-sass --recursive --output-style 'compressed' themes/ -o build/cdn/$(node -p -e 'require(`./package.json`).version') ",
@@ -18,6 +18,7 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-debug": "^4.0.0",
+    "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
     "onchange": "^6.1.0",
     "style-dictionary": "^2.8.3"

@@ -8,7 +8,7 @@ import Errors from './Errors';
 import { FORM_STATE } from '../utils/constants';
 import useResetRecaptcha from '../hooks/useRecaptchaReset';
 
-const RecaptchaV2 = (props) => {
+const RecaptchaV2 = props => {
   const {
     formContext: {
       formState,

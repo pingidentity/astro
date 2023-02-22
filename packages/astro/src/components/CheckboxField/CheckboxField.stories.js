@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-import CheckboxField from './CheckboxField';
+import Box from '../Box';
 import Link from '../Link';
 import Text from '../Text';
-import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
+
+import CheckboxField from './CheckboxField';
+
 
 export default {
   title: 'Form/CheckboxField',
@@ -88,11 +90,13 @@ export const Controlled = () => {
 export const Required = () => (
   <CheckboxField
     isRequired
-    label={
+    label={(
       <Text>
-        I agree to the <Link href="https://pingidentity.com" target="_blank">Terms and Conditions</Link>
+        I agree to the
+        {' '}
+        <Link href="https://pingidentity.com" target="_blank">Terms and Conditions</Link>
       </Text>
-    }
+    )}
   />
 );
 
@@ -137,7 +141,7 @@ export const Indeterminate = () => {
   };
 
   // Update all sub-checkbox states when the parent checkbox is pressed
-  const handleParentCheckboxChange = (isSelected) => {
+  const handleParentCheckboxChange = isSelected => {
     handleSubCheckboxChange(isSelected, null, true);
   };
 

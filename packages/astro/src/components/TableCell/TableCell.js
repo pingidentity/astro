@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Box from '../Box';
 
 /**
@@ -11,7 +12,7 @@ import Box from '../Box';
  *
  */
 
-const TableCell = (props) => {
+const TableCell = props => {
   const { children, isHeading, ...others } = props;
   return (
     <Box variant={isHeading ? 'table.head' : 'table.data'} as={isHeading ? 'th' : 'td'} {...others}>

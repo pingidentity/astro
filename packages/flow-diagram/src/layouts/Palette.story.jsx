@@ -16,7 +16,7 @@ import LeftContainer from '../components/LeftContainer';
 import { Palette, PaletteWrapper } from '../components/Palette';
 import usePalette from '../hooks/usePalette';
 
-export const PaletteComponent = () => {
+export function PaletteComponent() {
     const { paletteProps, paletteObject } = usePalette({
         groupTemplates: [
             ['', paletteGroupTemplate()],
@@ -62,16 +62,16 @@ export const PaletteComponent = () => {
                 'category': 'palette-group',
                 isGroup: true,
                 'text': 'Complete',
-                getIconSrc: (color = COLORS.GREEN) =>
-                    svgComponentToBase64(<Success fill={color} />),
+                getIconSrc:
+                    (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'finished',
                 'category': 'finished',
                 group: 'finished-group',
                 'text': 'Complete',
-                getIconSrc: (color = COLORS.GREEN) =>
-                    svgComponentToBase64(<Success fill={color} />),
+                getIconSrc:
+                    (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'error-group',
@@ -112,7 +112,7 @@ export const PaletteComponent = () => {
             </PaletteWrapper>
         </LeftContainer>
     );
-};
+}
 
 PaletteComponent.propTypes = {
     /** Templates for groups of nodes. paletteGroupTemplate should be used. */

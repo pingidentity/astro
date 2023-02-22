@@ -27,12 +27,14 @@
     ],
     "rules": {
         "@emotion/pkg-renaming": "error",
+        "arrow-parens": ["error", "as-needed"],
         "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
         "react/jsx-props-no-spreading": [0],
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "import/prefer-default-export": [0],
         "import/no-named-as-default-member": [0],
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/require-default-props": 1
     },
     "overrides": [
         {

@@ -1,15 +1,14 @@
 import React, { useRef, useState } from 'react';
+import { FocusScope } from 'react-aria';
+import { Item } from 'react-stately';
 import AccountIcon from 'mdi-react/AccountIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
-import { FocusScope } from 'react-aria';
-import { Item } from 'react-stately';
-
-import { Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
 
 import { useOverlayPanelState } from '../hooks';
+import { Box, Icon, IconButton, Link, ListView, Menu, OverlayPanel, PopoverMenu, SearchField, Separator, SwitchField, Tab, Tabs, Text } from '../index';
 
 export default {
   title: 'Recipes/List with Panel',
@@ -193,7 +192,12 @@ const ListElement = ({ item, onClosePanel }) => {
       <Box isRow sx={sx.listElement.iconWrapper}>
         <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} />
         <Box>
-          <Text variant="bodyStrong" sx={sx.listElement.title}>{item.lastName}, {item.firstName}</Text>
+          <Text variant="bodyStrong" sx={sx.listElement.title}>
+            {item.lastName}
+            ,
+            {' '}
+            {item.firstName}
+          </Text>
           <Text variant="subtitle" sx={sx.listElement.subtitle}>{item.email}</Text>
         </Box>
       </Box>
@@ -203,20 +207,21 @@ const ListElement = ({ item, onClosePanel }) => {
           <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
             <Icon icon={MoreVertIcon} size="md" />
           </IconButton>
-          <Menu >
+          <Menu>
             <Item key="enable">Enable user</Item>
             <Item key="disable">Disable user</Item>
             <Item key="delete">Delete user</Item>
           </Menu>
         </PopoverMenu>
-        {onClosePanel &&
+        {onClosePanel
+          && (
           <IconButton
             aria-label="close icon button"
             onPress={onClosePanel}
           >
             <Icon size="sm" icon={CloseIcon} />
           </IconButton>
-        }
+          )}
       </Box>
     </Box>
   );
@@ -237,7 +242,7 @@ export const Default = () => {
     setSelectedKeys([]);
   };
 
-  const selectItemHandler = (e) => {
+  const selectItemHandler = e => {
     if (e.size) {
       setSelectedItemId(items.findIndex(item => item.email === e.currentKey));
       setSelectedKeys([e.currentKey]);
@@ -260,7 +265,7 @@ export const Default = () => {
           <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
             {heading}
           </Text>
-          <IconButton aria-label="icon button" ml="sm" variant="inverted" >
+          <IconButton aria-label="icon button" ml="sm" variant="inverted">
             <Icon icon={PlusIcon} size="sm" />
           </IconButton>
         </Box>
@@ -288,7 +293,6 @@ export const Default = () => {
           </Item>
         )}
       </ListView>
-
       <OverlayPanel
         isOpen={panelState.isOpen}
         state={panelState}
@@ -296,50 +300,52 @@ export const Default = () => {
         p={0}
         size="large"
       >
-        {panelState.isOpen &&
-          <>
-            <FocusScope contain restoreFocus autoFocus>
-              <Box sx={sx.listElementWrapper}>
-                <ListElement
-                  item={selectedItemId >= 0 ? items[selectedItemId] : []}
-                  onClosePanel={closePanelHandler}
-                />
-              </Box>
-              <Separator margin={0} sx={sx.separator} />
-              <Box sx={sx.tabsWrapper}>
-                <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }} >
-                  <Tab title="Profile">
-                    {selectedItemId >= 0 &&
-                      <>
-                        <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
-                          <PencilIcon size={20} />
-                        </IconButton>
-                        <Text sx={sx.itemLabel} variant="base">Full Name</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
-                        <Text sx={sx.itemLabel} variant="base">First Name</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
-                        <Text sx={sx.itemLabel} variant="base">Last Name</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].lastName}</Text>
-                        <Text sx={sx.itemLabel} variant="base">Email</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
-                      </>
-                    }
-                  </Tab>
-                  <Tab title="Group Memberships">
-                    <Text>
-                      Group Memberships
-                    </Text>
-                  </Tab>
-                  <Tab title="Account Info">
-                    <Text>
-                      Account Info
-                    </Text>
-                  </Tab>
-                </Tabs>
-              </Box>
-            </FocusScope>
-          </>
-        }
+        {panelState.isOpen && (
+        <FocusScope contain restoreFocus autoFocus>
+          <Box sx={sx.listElementWrapper}>
+            <ListElement
+              item={selectedItemId >= 0 ? items[selectedItemId] : []}
+              onClosePanel={closePanelHandler}
+            />
+          </Box>
+          <Separator margin={0} sx={sx.separator} />
+          <Box sx={sx.tabsWrapper}>
+            <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }}>
+              <Tab title="Profile">
+                {selectedItemId >= 0 && (
+                <>
+                  <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
+                    <PencilIcon size={20} />
+                  </IconButton>
+                  <Text sx={sx.itemLabel} variant="base">Full Name</Text>
+                  <Text sx={sx.itemValue} variant="base">
+                    {items[selectedItemId].firstName}
+                    {' '}
+                    {items[selectedItemId].lastName}
+                  </Text>
+                  <Text sx={sx.itemLabel} variant="base">First Name</Text>
+                  <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
+                  <Text sx={sx.itemLabel} variant="base">Last Name</Text>
+                  <Text sx={sx.itemValue} variant="base">{items[selectedItemId].lastName}</Text>
+                  <Text sx={sx.itemLabel} variant="base">Email</Text>
+                  <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
+                </>
+                )}
+              </Tab>
+              <Tab title="Group Memberships">
+                <Text>
+                  Group Memberships
+                </Text>
+              </Tab>
+              <Tab title="Account Info">
+                <Text>
+                  Account Info
+                </Text>
+              </Tab>
+            </Tabs>
+          </Box>
+        </FocusScope>
+        )}
       </OverlayPanel>
     </Box>
   );

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
+
 import {
+  Button,
+  Item,
+  Menu,
   OverlayProvider,
   PopoverMenu,
-  Button,
-  Menu,
-  Item,
   Text,
 } from '../../index';
 

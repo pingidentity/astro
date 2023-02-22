@@ -18,7 +18,7 @@ import {
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
-export const DiagramComponent = () => {
+export function DiagramComponent() {
     const disabled = false;
     const diagramNodes = [
         {
@@ -102,7 +102,7 @@ export const DiagramComponent = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
 DiagramComponent.defaultProps = {
     isDisabled: false,

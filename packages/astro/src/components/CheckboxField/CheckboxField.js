@@ -1,16 +1,15 @@
-import React, { forwardRef, useRef, useImperativeHandle, useMemo, useEffect } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import { useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, Checkbox, FieldHelperText, Label } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { Box, Checkbox, FieldHelperText, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -77,10 +76,11 @@ const CheckboxField = forwardRef((props, ref) => {
         {label}
       </Label>
       {
-        helperText &&
+        helperText && (
         <FieldHelperText status={status} sx={{ pt: 7 }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );

@@ -1,12 +1,12 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, FieldHelperText, Input, Label } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, FieldHelperText, Input, Label } from '../..';
 import { useField, useLabelHeight, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
 import useColumnStyles from '../../hooks/useColumnStyles';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
@@ -33,7 +33,7 @@ const TextField = forwardRef((props, ref) => {
   const helperTextId = uuid();
 
   return (
-    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} >
+    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
       <Box variant="forms.input.fieldControlWrapper" {...fieldControlWrapperProps}>
         {slots?.beforeInput}
@@ -46,10 +46,13 @@ const TextField = forwardRef((props, ref) => {
         {slots?.inContainer}
       </Box>
       {
-        helperText &&
+        helperText
+        && (
         <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
+
       }
     </Box>
   );

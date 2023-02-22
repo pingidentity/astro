@@ -1,5 +1,5 @@
-import { defaultFocus } from '../Button/Buttons.styles';
 import { neutral } from '../../styles/colors';
+import { defaultFocus } from '../Button/Buttons.styles';
 
 const container = {
   border: `1px solid ${neutral['80']}`,
