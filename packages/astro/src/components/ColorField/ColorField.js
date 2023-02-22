@@ -126,6 +126,7 @@ const ColorField = forwardRef((props, ref) => {
         hasNoArrow
         isDismissable
         isNonModal
+        isNotClosedOnBlur
         isOpen={popoverState.isOpen}
         onClose={popoverState.close}
         ref={overlayRef}
