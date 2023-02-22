@@ -98,7 +98,7 @@ pipeline {
           sh """
             yarn --frozen-lockfile
             git config --global --add safe.directory '*'
-            git log -1 --pretty=%B | npx commitlint
+            git log -1 --pretty=%B | yarn commitlint
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
             lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
