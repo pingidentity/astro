@@ -1,7 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Box from '../Box';
+
 import useStatusClasses from '../../hooks/useStatusClasses';
+import Box from '../Box';
 
 /**
  * Scrollbox is a container that allows content to be scrolled

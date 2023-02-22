@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+
 import useStatusClasses from './useStatusClasses';
 
 test('should return empty', () => {

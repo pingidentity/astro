@@ -1,8 +1,10 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+
 import ImageUploadField from './ImageUploadField';
 
 const imageUploadNoImagePreview = 'image-upload-no-image-preview';
@@ -37,8 +39,10 @@ afterAll(() => {
   global.URL.createObjectURL = originalValue;
 });
 
-const getComponent = (props = {}, { renderFn = render } = {}) =>
-  renderFn(<ImageUploadField {...defaultProps} {...props} />);
+const getComponent = (
+  props = {},
+  { renderFn = render } = {},
+) => renderFn(<ImageUploadField {...defaultProps} {...props} />);
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import CheckboxField from '../components/CheckboxField';
 
 export default {

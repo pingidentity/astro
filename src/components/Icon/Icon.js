@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import Box from '../Box';
+
 import { useTShirtSize } from '../../hooks';
+import Box from '../Box';
 
 const Icon = forwardRef((props, ref) => {
   const {
@@ -22,7 +23,7 @@ const Icon = forwardRef((props, ref) => {
         fill: color,
         minWidth: sizeProps.size,
         ...sx,
-        }}
+      }}
     />
   );
 });

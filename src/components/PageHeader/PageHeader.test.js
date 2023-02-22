@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import PageHeader from './PageHeader';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import PageHeader from './PageHeader';
 
 const testTitle = 'Test Title';
 const defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
@@ -34,7 +35,7 @@ test('custom overlayPanel gets custom width', () => {
 
 test('onClose callback fires when provided', () => {
   const onClose = jest.fn();
-  getComponent({ onClose, children: <div >Test</div> });
+  getComponent({ onClose, children: <div>Test</div> });
   const overlayPanel = screen.getByTestId(testId);
   fireEvent.keyDown(overlayPanel, {
     key: 'Escape',
@@ -82,7 +83,7 @@ test('triggerRef.current.focus() fires when provided', () => {
   const focusFunction = jest.fn();
   const state = { close: onClose };
   const triggerRef = { current: { focus: focusFunction } };
-  getComponent({ state, children: <div >Test</div>, triggerRef });
+  getComponent({ state, children: <div>Test</div>, triggerRef });
   const overlayPanel = screen.getByTestId(testId);
   fireEvent.keyDown(overlayPanel, {
     key: 'Escape',
@@ -104,7 +105,7 @@ test('triggerRef.current.focus() does not fire when key other than esc is presse
   const focusFunction = jest.fn();
   const state = { close: onClose };
   const triggerRef = { current: { focus: focusFunction } };
-  getComponent({ state, children: <div >Test</div>, triggerRef });
+  getComponent({ state, children: <div>Test</div>, triggerRef });
   const overlayPanel = screen.getByTestId(testId);
   fireEvent.keyDown(overlayPanel, {
     key: 'KeyA',

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import isChromatic from 'chromatic/isChromatic';
-import Image from '.';
-import { chiefIdentityChampions, pingImg } from '../../utils/devUtils/constants/images';
-import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
+
 import { Box, Button } from '../../index';
+import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
+import { chiefIdentityChampions, pingImg } from '../../utils/devUtils/constants/images';
+
+import Image from '.';
 
 export default {
   title: 'Components/Image',
@@ -50,18 +52,17 @@ export const CustomSizeAndRadius = () => (
 
 export const Disabled = () => <Image src={pingImg} isDisabled alt="Ping identity square logo" />;
 
-export const FallbackImage = () =>
-  (
-    <Image
-      fallbackImage={pingImg}
-      src="https://deelay.me/7000/https://picsum.photos/150/150"
-      sx={{
-        width: '150px',
-        height: '150px',
-      }}
-      alt="Random image"
-    />
-  );
+export const FallbackImage = () => (
+  <Image
+    fallbackImage={pingImg}
+    src="https://deelay.me/7000/https://picsum.photos/150/150"
+    sx={{
+      width: '150px',
+      height: '150px',
+    }}
+    alt="Random image"
+  />
+);
 
 
 export const WithSkeletonLoadSuccess = ({ useLocalSrc }) => {
@@ -113,9 +114,9 @@ export const UpdatingImageSrc = () => {
       <Image
         src={image}
         sx={{
-        width: '200px',
-        height: '200px',
-        mt: '25px',
+          width: '200px',
+          height: '200px',
+          mt: '25px',
         }}
         alt={image === pingImg ? 'Ping identity square logo' : 'Terry Crews in a red suite'}
       />

@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useSeparator } from 'react-aria';
+import PropTypes from 'prop-types';
 
-import Box from '../Box/Box';
 import { useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import Box from '../Box/Box';
 
 /**
  * Basic separator or HR component.

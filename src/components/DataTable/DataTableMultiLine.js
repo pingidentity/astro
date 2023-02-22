@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+
 import { Box, Icon } from '../../index';
 
 const DataTableMultiLine = forwardRef(({ cell }, ref) => (
@@ -21,7 +22,9 @@ const DataTableMultiLine = forwardRef(({ cell }, ref) => (
             <Box
               sx={{ color: 'neutral.40', fontWeight: 400, fontSize: '13px' }}
             >
-              Account ID: {item.accountId}
+              Account ID:
+              {' '}
+              {item.accountId}
             </Box>
           </Box>
         </Box>

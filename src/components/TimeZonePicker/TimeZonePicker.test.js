@@ -1,7 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+import { OverlayProvider, TimeZonePicker } from '../../index';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { TimeZonePicker, OverlayProvider } from '../../index';
 
 const testTimeZoneJuba = 'Africa/Juba';
 const testTimeZoneApia = 'Pacific/Apia';
@@ -10,12 +11,11 @@ const defaultProps = {
   label: 'Test Label',
 };
 
-const getComponent = (props = {}, { renderFn = render } = {}) =>
-  renderFn(
-    <OverlayProvider>
-      <TimeZonePicker {...defaultProps} {...props} />
-    </OverlayProvider>,
-  );
+const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
+  <OverlayProvider>
+    <TimeZonePicker {...defaultProps} {...props} />
+  </OverlayProvider>,
+);
 
 beforeAll(() => {
   jest

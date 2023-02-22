@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { mergeProps, useFocusRing } from 'react-aria';
+import PropTypes from 'prop-types';
 
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { Box, CollapsiblePanelContainer, ListView, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import CollapsiblePanelBadge from '../CollapsiblePanelContainer/CollapsiblePanelBadge';
-import { Box, ListView, CollapsiblePanelContainer, Text } from '../../index';
 
 const CollapsiblePanel = forwardRef((props, ref) => {
   const {
@@ -63,13 +63,14 @@ const CollapsiblePanel = forwardRef((props, ref) => {
           <Text variant="variants.collapsiblePanel.title">
             {listTitle}
           </Text>
-          {selectedFilterCount &&
+          {selectedFilterCount
+            && (
             <CollapsiblePanelBadge
               margin="0"
               className="title-badge"
               selectedFilterCount={selectedFilterCount}
             />
-          }
+            )}
         </Box>
         <Box pl="xs" pr="xs">
           <ListView

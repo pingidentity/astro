@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import SearchIcon from 'mdi-react/SearchIcon';
-import TextAreaField from '.';
 
-import { Box, Icon } from '../../';
+import { Box, Icon } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { modes as labelModes } from '../Label/constants';
-import statuses from '../../utils/devUtils/constants/statuses';
+
+import TextAreaField from '.';
 
 export default {
   title: 'Form/TextAreaField',

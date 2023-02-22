@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import ContentCopy from 'mdi-react/ContentCopyIcon';
 import { omit } from 'lodash';
+import ContentCopy from 'mdi-react/ContentCopyIcon';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon';

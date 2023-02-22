@@ -1,11 +1,11 @@
 import React, { forwardRef, useMemo } from 'react';
+import { HiddenSelect } from 'react-aria';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
-import { HiddenSelect } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import Box from '../Box';
 import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
@@ -98,10 +98,11 @@ const SelectFieldBase = forwardRef(({
       {trigger || defaultTrigger}
       {overlay}
       {
-        helperText &&
+        helperText && (
         <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );

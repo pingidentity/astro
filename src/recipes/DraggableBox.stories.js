@@ -1,6 +1,7 @@
 import React from 'react';
 import DragVerticalIcon from 'mdi-react/DragVerticalIcon';
 import FormTextboxIcon from 'mdi-react/FormTextboxIcon';
+
 import Box from '../components/Box';
 import Icon from '../components/Icon';
 import Text from '../components/Text';

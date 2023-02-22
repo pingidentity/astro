@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { layout, flexbox, typography } from 'styled-system';
+import PropTypes from 'prop-types';
+import { flexbox, layout, typography } from 'styled-system';
 import { Text as ThemeUIText } from 'theme-ui';
 
 import { textVariants } from '../../utils/devUtils/constants/variants';

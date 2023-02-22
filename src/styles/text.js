@@ -1,4 +1,4 @@
-import { button, neutral, white, active } from './colors';
+import { active, button, neutral, white } from './colors';
 
 const baseSize = 15;
 const majorMultiplier = 1.15;

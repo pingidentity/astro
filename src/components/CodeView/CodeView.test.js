@@ -1,8 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+import { CodeView } from '../..';
 import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
-import { CodeView } from '../..';
 
 const testId = 'test-code-sample';
 

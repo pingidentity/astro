@@ -1,12 +1,11 @@
 import React from 'react';
-import { axe } from 'jest-axe';
-import { Section } from 'react-stately';
+import { Item, Section } from 'react-stately';
 import { useListState } from '@react-stately/list';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
 import ListBox from '.';
-import { Item } from '../../index';
 
 const testId = 'test-label';
 
@@ -39,7 +38,7 @@ const defaultWithSectionsProps = {
   items: itemsWithSections,
 };
 
-const ListBoxWithState = (props) => {
+const ListBoxWithState = props => {
   const state = useListState(props);
 
   return (
@@ -49,7 +48,7 @@ const ListBoxWithState = (props) => {
   );
 };
 
-const ListBoxWithSections = (props) => {
+const ListBoxWithSections = props => {
   const state = useListState(props);
 
   return (

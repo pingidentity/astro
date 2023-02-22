@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import PasswordField from '.';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-import statuses from '../../utils/devUtils/constants/statuses';
+
+import PasswordField from '.';
 
 export default {
   title: 'Form/PasswordField',
@@ -34,7 +35,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   return (
     <PasswordField
       label="Example Label"
@@ -65,7 +66,7 @@ export const WithRequirementsList = () => {
     status: statuses.DEFAULT,
   });
 
-  const checkPasswordExample = (string) => {
+  const checkPasswordExample = string => {
     const specialCharacters = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
 
     if (string.length > 5) {
@@ -99,7 +100,7 @@ export const WithRequirementsList = () => {
     }
   };
 
-  const onChange = (event) => {
+  const onChange = event => {
     checkPasswordExample(event.target.value);
   };
 

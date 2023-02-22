@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { useSelectField, usePropWarning } from '../../hooks';
-import SelectFieldBase from '../SelectFieldBase';
+import { usePropWarning, useSelectField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import SelectFieldBase from '../SelectFieldBase';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.

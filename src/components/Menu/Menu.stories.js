@@ -1,9 +1,9 @@
 import React from 'react';
 import { Item } from 'react-stately';
 
-import Menu from '../Menu';
 import Text from '../Text';
 
+import Menu from '.';
 
 export default {
   title: 'Components/Menu',

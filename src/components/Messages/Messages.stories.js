@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import AccountIcon from 'mdi-react/AccountIcon';
 import { Item } from 'react-stately';
+import AccountIcon from 'mdi-react/AccountIcon';
 
-import statuses from '../../utils/devUtils/constants/statuses';
 import { Box, Button, Messages } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
+
 import { messagesReducerStory as messagesReducer, multiMessagesReducerStory as multiMessagesReducer } from './index';
 
 export default {
@@ -75,7 +76,7 @@ export const DefaultDynamic = args => (
   </Messages>
 );
 
-export const Controlled = (args) => {
+export const Controlled = args => {
   // messages = [{...}]
   const [items, setItems] = useState([]);
 
@@ -83,7 +84,7 @@ export const Controlled = (args) => {
     setItems(messages);
   }, []);
 
-  const removeMessage = (key) => {
+  const removeMessage = key => {
     setItems(items.map(item => (item.key === key
       ? {
         ...item,
@@ -102,7 +103,7 @@ export const Controlled = (args) => {
   );
 };
 
-export const ControlledWithButton = (args) => {
+export const ControlledWithButton = args => {
   const [items, setItems] = useState([]);
 
   const addMessage = () => {
@@ -113,7 +114,7 @@ export const ControlledWithButton = (args) => {
     }]);
   };
 
-  const removeMessage = (key) => {
+  const removeMessage = key => {
     setItems(items.map(item => (item.key === key
       ? {
         ...item,
@@ -169,7 +170,7 @@ export const UseReducer = () => {
     actionFn(message)(dispatch);
   };
 
-  const removeMessage = (key) => {
+  const removeMessage = key => {
     dispatch(messagesReducer.actions.hideMessage(key));
     setTimeout(() => dispatch(messagesReducer.actions.removeMessage(key)), 200);
   };
@@ -179,13 +180,14 @@ export const UseReducer = () => {
       <Button onPress={showAMessage}>Add Message</Button>
       {
         items?.length > 0
-        &&
+        && (
         <Button
           mt="md"
           onPress={() => dispatch(messagesReducer.actions.clearMessages())}
         >
           Clear messages
         </Button>
+        )
       }
       <Messages
         items={items}
@@ -202,7 +204,7 @@ export const UseReducerWithMultipleContainers = () => {
     'container-one': [], 'container-two': [],
   });
 
-  const showAMessage = (container) => {
+  const showAMessage = container => {
     const actionFn = [
       multiMessagesReducer.actions.showSuccessMessage,
       multiMessagesReducer.actions.showCriticalMessage,
@@ -241,7 +243,7 @@ export const UseReducerWithMultipleContainers = () => {
   );
 };
 
-export const WithTextStyling = (args) => {
+export const WithTextStyling = args => {
   const items = [
     {
       key: 'message1',

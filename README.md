@@ -14,7 +14,7 @@ Yarn:
 
 ## Requirements
 
-- Node: 12+
+- Node: 16+
 - React: 16.8+
 
 ## Usage
@@ -33,7 +33,7 @@ import { AstroWrapper } from ‘@pingux/astro’;
 
 Astro uses [Storybook](https://storybook.js.org/) for component documentation. Once Astro has been cloned, run the following commands to start a local Storybook server:
 
-`yarn && yarn start`
+`yarn start`
 
 The Storybook server defaults to `https://localhost:6006`. This port can be customized by running the command start -p 9009. For example, this will start Storybook on port 9009. More information on customizing Storybook CLI options can be found at https://storybook.js.org/docs/react/api/cli-options. 
 
@@ -41,6 +41,8 @@ Component prop documentation is available under the “documentation” tab per 
 
 For example, to view the disabled button styling, navigate to the Button story’s props table, locate the “isDisabled” prop, and toggle to “true”. This change allows you to preview the disabled button’s styling and functionality.
 
+## Yarn
+We use a modern version of [Yarn](https://yarnpkg.com/getting-started) for package management with the [Plug'n'Play](https://yarnpkg.com/features/pnp) feature enabled. This allows for a [Zero Install](https://yarnpkg.com/features/zero-installs) approach to be used.
 
 ## Browser Compatibility
 
@@ -63,6 +65,27 @@ Astro’s [changelog](CHANGELOG.md) notes all features and bug fixes within each
 ## Contributing and Bug Reports
 
 Astro is closed for open contributions. However, we are appreciative of bug reports and suggestions. Please use GitHub Issues to submit bug reports and suggestions.
+
+## VS Code Linting
+The Astro development team prefers to use VS Code as a code editor. To enable code highlighting and autolinting on save you will need to install the ESLint, Prettier and ZipFS plugins, plus add the 
+following settings in your `settings.json` file. 
+
+```
+{
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+      "javascript",
+  ],
+}
+```
+
+You will need to have the monorepo open at the root directory in VS Code for linting and highlighting to work.
+
+Note: To make linting and highlighting work with Yarn 2, `yarn dlx @yarnpkg/sdks vscode` needs to be run in the root directory of the monorepo. If any changes are made to any 
+ESLint packages or versions these features may stop working. Run this command again to solve the issue. Be sure to commit the changes so others don't run into the same issue. 
 
 ## Licensing
 

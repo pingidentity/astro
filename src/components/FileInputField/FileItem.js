@@ -1,14 +1,14 @@
 import React, { useCallback, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useVisuallyHidden } from 'react-aria';
 import DeleteIcon from 'mdi-react/DeleteIcon';
 import ErrorIcon from 'mdi-react/ErrorIcon';
 import InsertDriveFileIcon from 'mdi-react/InsertDriveFileIcon';
-import { useVisuallyHidden } from 'react-aria';
+import PropTypes from 'prop-types';
 
-import { Box, Button, IconButton, Icon, Text } from '../../index';
+import { Box, Button, Icon, IconButton, Text } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
-const FileItem = (props) => {
+const FileItem = props => {
   const {
     downloadLink,
     handleFileDelete,

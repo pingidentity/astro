@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useHover } from '@react-aria/interactions';
-import Box from '../Box/Box';
+import PropTypes from 'prop-types';
+
 import { useStatusClasses } from '../../hooks';
+import Box from '../Box/Box';
 
 /**
  * List Item component.

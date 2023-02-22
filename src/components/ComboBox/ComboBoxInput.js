@@ -1,14 +1,14 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import MenuDown from 'mdi-react/MenuDownIcon';
 import { FocusRing, mergeProps } from 'react-aria';
 import { PressResponder, useHover } from '@react-aria/interactions';
+import MenuDown from 'mdi-react/MenuDownIcon';
+import PropTypes from 'prop-types';
 
-import { Box, Button, Icon, Loader, TextField } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, Button, Icon, Loader, TextField } from '../..';
 import { usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 const ComboBoxInput = forwardRef((props, ref) => {
   const {
@@ -90,8 +90,8 @@ const ComboBoxInput = forwardRef((props, ref) => {
     <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
         // Render loader after delay if filtering or loading
-        showLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING) &&
-        <Loader variant="loader.withinInput" />
+        showLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING)
+        && <Loader variant="loader.withinInput" />
       }
       <PressResponder preventFocusOnPress isPressed={isOpen}>
         <Button
@@ -122,14 +122,14 @@ const ComboBoxInput = forwardRef((props, ref) => {
         {...textFieldProps}
         wrapperProps={{ ref: inputWrapperRef, ...wrapperProps }}
         controlProps={{
-            variant: 'forms.comboBox.input',
-            ...controlProps,
-          }}
+          variant: 'forms.comboBox.input',
+          ...controlProps,
+        }}
         statusClasses={{ isHovered }}
         ref={inputRef}
         slots={{
-            inContainer: button,
-          }}
+          inContainer: button,
+        }}
       />
     </FocusRing>
   );

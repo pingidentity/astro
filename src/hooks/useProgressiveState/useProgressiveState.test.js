@@ -1,7 +1,8 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import { renderHook } from '@testing-library/react-hooks';
 import { render, screen } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
+import userEvent from '@testing-library/user-event';
+
 import useProgressiveState from './useProgressiveState';
 
 const testId = 'test';

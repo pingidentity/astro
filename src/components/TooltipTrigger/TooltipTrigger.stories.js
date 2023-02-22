@@ -1,6 +1,7 @@
 import React from 'react';
-import Earth from 'mdi-react/EarthIcon';
 import AccountIcon from 'mdi-react/AccountIcon';
+import Earth from 'mdi-react/EarthIcon';
+
 import { Box, Button, Icon, Tooltip, TooltipTrigger } from '../../index';
 import IconButton from '../IconButton';
 import Text from '../Text';
@@ -47,14 +48,14 @@ export const withWidthProp = () => (
 );
 
 export const withArrowCrossOffsetProp = () => (
-  <TooltipTrigger arrowCrossOffset="30px" isOpen >
+  <TooltipTrigger arrowCrossOffset="30px" isOpen>
     <Button>Hover Over Me!</Button>
     <Tooltip>With arrowCrossOffset=&quot;30px&quot;</Tooltip>
   </TooltipTrigger>
 );
 
 export const isOpen = () => (
-  <TooltipTrigger isOpen >
+  <TooltipTrigger isOpen>
     <Button>Hover Over Me!</Button>
     <Tooltip>Display by default</Tooltip>
   </TooltipTrigger>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { Item } from 'react-stately';
 import CreateIcon from 'mdi-react/CreateIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
-import { Item } from 'react-stately';
 
-import { SearchField, ListView, Box, IconButton, ScrollBox, Text, Icon } from '../index';
+import { Box, Icon, IconButton, ListView, ScrollBox, SearchField, Text } from '../index';
 
 export default {
   title: 'Recipes/Scrollable List View',
@@ -25,14 +25,14 @@ export const Default = ({ ...args }) => {
   const [value, setValue] = useState('');
   const [items, setItems] = useState(unfilteredItems);
 
-  const filterItems = (input) => {
-    const filtered = unfilteredItems.filter((obj) => {
+  const filterItems = input => {
+    const filtered = unfilteredItems.filter(obj => {
       return obj.name.toLowerCase().includes(input.toLowerCase());
     });
     setItems(filtered);
   };
 
-  const onChangeInput = (input) => {
+  const onChangeInput = input => {
     setValue(input);
     filterItems(input);
   };
@@ -49,17 +49,17 @@ export const Default = ({ ...args }) => {
       >
         <ListView {...args} items={items}>
           {item => (
-            <Item key={item.name} textValue={item.name} >
-              <Box isRow >
-                <Box isRow mr="auto" alignSelf="center" >
+            <Item key={item.name} textValue={item.name}>
+              <Box isRow>
+                <Box isRow mr="auto" alignSelf="center">
                   <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size={25} />
                   <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
                 </Box>
-                <Box isRow alignSelf="center" gap="sm" >
-                  <IconButton aria-label="create-icon" >
+                <Box isRow alignSelf="center" gap="sm">
+                  <IconButton aria-label="create-icon">
                     <Icon icon={CreateIcon} size="sm" />
                   </IconButton>
-                  <IconButton aria-label="create-icon" >
+                  <IconButton aria-label="create-icon">
                     <Icon icon={MoreVertIcon} size="sm" />
                   </IconButton>
                 </Box>

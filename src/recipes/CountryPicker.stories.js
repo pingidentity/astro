@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { countries as countriesObj } from 'countries-list';
+
 import Box from '../components/Box';
 import ComboBoxField from '../components/ComboBoxField';
 import Input from '../components/Input';
@@ -9,7 +10,7 @@ export default {
   title: 'Recipes/Country Picker',
 };
 
-const validatePhoneNumber = (str) => {
+const validatePhoneNumber = str => {
   const reg = /^$|^[\d\-(\d)\s.]+$|^\+/g;
   return reg.test(str);
 };
@@ -48,7 +49,7 @@ export const Default = () => {
     return phoneCodeValue || searchValue;
   };
 
-  const inputHandler = (value) => {
+  const inputHandler = value => {
     setSearchValue(value);
     if (!value) {
       setSelectedKey(null);
@@ -56,7 +57,7 @@ export const Default = () => {
     }
   };
 
-  const selectionHandler = (key) => {
+  const selectionHandler = key => {
     setSelectedKey(key);
     if (key) {
       setPhoneCodeValue(`+${countriesObj[key].phone.split(',')[0]}`);
@@ -67,11 +68,11 @@ export const Default = () => {
     setIsOpen(false);
   };
 
-  const keyHandler = (e) => {
+  const keyHandler = e => {
     if (e.keyCode !== 13) setIsOpen(true);
   };
 
-  const onPhoneNumberValueChange = (e) => {
+  const onPhoneNumberValueChange = e => {
     const value = e.target.value;
     if (value === '' || validatePhoneNumber(value)) {
       setPhoneNumber(value);

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+
 import CollapsiblePanel from './CollapsiblePanel';
 
 const testId = 'collapsible-panel-item';

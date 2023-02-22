@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+
 import NumberField from './NumberField';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/NumberField',

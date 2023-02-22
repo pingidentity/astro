@@ -4,16 +4,16 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { mergeProps, useFocusRing, useMenu } from 'react-aria';
 import { useTreeState } from 'react-stately';
 import { useSyncRef } from '@react-aria/utils';
+import PropTypes from 'prop-types';
 
 import { MenuContext } from '../../context/MenuContext';
 import { usePropWarning } from '../../hooks';
-import MenuItem from '../MenuItem';
-import Box from '../Box';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import Box from '../Box';
+import MenuItem from '../MenuItem';
 
 /**
  * Menu component intended to be used as a wrapper for MenuItem.

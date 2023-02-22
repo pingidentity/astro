@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Badge as ThemeUIBadge } from 'theme-ui';
+
+import { Box, Text } from '../..';
 import { BadgeContext } from '../../context/BadgeContext';
-import { Box, Text } from '../../';
 import * as colors from '../../styles/colors';
 
 const Badge = React.forwardRef((props, ref) => {
@@ -62,11 +63,12 @@ const Badge = React.forwardRef((props, ref) => {
         {...badgeProps}
         variant={props.variant ? fixedVariant : 'baseBadge'}
       >
-        {slots?.leftIcon &&
+        {slots?.leftIcon
+        && (
         <Box mr="xs">
           {slots.leftIcon}
         </Box>
-        }
+        )}
         <Text
           variant="label"
           color={textColor}

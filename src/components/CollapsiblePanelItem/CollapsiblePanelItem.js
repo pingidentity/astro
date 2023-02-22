@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+
 import { Box, Icon, IconButton, Text } from '../../index';
 
 const CollapsiblePanelItem = forwardRef((props, ref) => {
@@ -26,7 +27,7 @@ const CollapsiblePanelItem = forwardRef((props, ref) => {
       {iconElement && (isDefaultSelected
         ? iconElement
         : (
-          <IconButton sx={{ width: 20, height: 20, alignSelf: 'auto', '& path': { fill: 'inherit' } }} onPress={onPress} aria-label="icon" >
+          <IconButton sx={{ width: 20, height: 20, alignSelf: 'auto', '& path': { fill: 'inherit' } }} onPress={onPress} aria-label="icon">
             {iconElement}
           </IconButton>
         )

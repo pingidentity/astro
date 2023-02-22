@@ -1,6 +1,4 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import CloseIcon from 'mdi-react/CloseIcon';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import {
   FocusScope,
   OverlayContainer,
@@ -9,10 +7,12 @@ import {
   useOverlay,
   usePreventScroll,
 } from 'react-aria';
+import CloseIcon from 'mdi-react/CloseIcon';
+import PropTypes from 'prop-types';
 
 import Box from '../Box';
-import IconButton from '../IconButton';
 import Icon from '../Icon';
+import IconButton from '../IconButton';
 import Text from '../Text';
 
 /**
@@ -84,9 +84,10 @@ const Modal = forwardRef((props, ref) => {
             aria-modal
           >
             {
-              hasCloseButton &&
-              (
-                closeButton ??
+              hasCloseButton
+              && (
+                closeButton
+                ?? (
                 <IconButton
                   aria-label="Close modal window"
                   data-id="icon-button__close-modal-window"
@@ -96,18 +97,19 @@ const Modal = forwardRef((props, ref) => {
                 >
                   <Icon icon={CloseIcon} />
                 </IconButton>
+                )
               )
             }
             {
-              title &&
-              <>
-                <Text
-                  {...titleProps}
-                  variant="variants.modal.title"
-                >
+              title
+              && (
+              <Text
+                {...titleProps}
+                variant="variants.modal.title"
+              >
                   {title}
-                </Text>
-              </>
+              </Text>
+              )
             }
             {children}
           </Box>

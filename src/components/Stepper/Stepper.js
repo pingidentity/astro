@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useSingleSelectListState } from '@react-stately/list';
+import PropTypes from 'prop-types';
 
-import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
-import { stepStatuses } from './Stepper.constants';
 import { Step, Tab, Tabs } from '../..';
+import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 
 import Line from './Line';
+import { stepStatuses } from './Stepper.constants';
 
 const {
   ACTIVE,
@@ -30,16 +30,16 @@ const Stepper = forwardRef((props, ref) => {
 
   const state = useSingleSelectListState(props);
 
-  const getStatus = (i) => {
+  const getStatus = i => {
     if (i === activeStep) {
       return ACTIVE;
-    } else if (i < activeStep) {
+    } if (i < activeStep) {
       return COMPLETED;
     }
     return INACTIVE;
   };
 
-  const onStepChangeHandler = (key) => {
+  const onStepChangeHandler = key => {
     if (onStepChange) {
       onStepChange(+key);
     }
@@ -61,7 +61,7 @@ const Stepper = forwardRef((props, ref) => {
       />
     );
 
-    const line = <>{Array.isArray(lines) ? lines[i - 1] : lines}</>;
+    const line = Array.isArray(lines) ? lines[i - 1] : lines;
 
     const textValue = (item && item.value && item.value.label)
       || item.textValue

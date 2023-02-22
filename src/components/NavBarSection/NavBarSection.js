@@ -3,8 +3,9 @@ import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { Button, Separator, Text } from '../../';
+import { Button, Separator, Text } from '../..';
 import { useNavBarContext } from '../../context/NavBarContext';
+
 import NavBarItemBody from './NavBarItemBody';
 import NavBarItemHeader from './NavBarItemHeader';
 
@@ -49,7 +50,6 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
 
 const SectionItem = ({ item }) => {
   const { key, children, ...others } = item;
-  const headerButtonRef = useRef();
 
   const navBarState = useNavBarContext();
   const { expandedKeys, setExpandedKeys } = navBarState;
@@ -58,7 +58,7 @@ const SectionItem = ({ item }) => {
   const firstChildKey = children.length ? children[0].key : null;
   const lastChildKey = children.length ? children[children.length - 1].key : null;
 
-  const onExpandedChange = (isOpen) => {
+  const onExpandedChange = isOpen => {
     let newArray;
     if (isOpen) {
       newArray = [...expandedKeys, key];
@@ -87,7 +87,6 @@ const SectionItem = ({ item }) => {
         break;
       case 27:
         onExpandedChange(false);
-        headerButtonRef.current.focus();
         break;
       case 32:
         if (childKey && e.target?.href) {
@@ -100,7 +99,7 @@ const SectionItem = ({ item }) => {
   };
 
   const { keyboardProps } = useKeyboard({
-    onKeyDown: (e) => {
+    onKeyDown: e => {
       onKeyDown(e);
       e.continuePropagation();
     },
@@ -109,7 +108,6 @@ const SectionItem = ({ item }) => {
   return (
     <>
       <Button
-        ref={headerButtonRef}
         variant="variants.navBar.sectionButton"
         onPress={() => onExpandedChange(!isExpanded)}
         {...keyboardProps}
@@ -117,12 +115,13 @@ const SectionItem = ({ item }) => {
       >
         <NavBarItemHeader item={item} />
       </Button>
-      {isExpanded &&
+      {isExpanded
+        && (
         <NavBarItemBody
           item={item}
           onKeyDown={onKeyDown}
         />
-      }
+        )}
     </>
   );
 };

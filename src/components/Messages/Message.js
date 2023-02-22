@@ -1,11 +1,11 @@
-import React, { forwardRef, useRef, useState, useLayoutEffect } from 'react';
+import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
-import { NoticeIcon } from '../Icon/NoticeIcon';
-import statuses from '../../utils/devUtils/constants/statuses';
-import useStatusClasses from '../../hooks/useStatusClasses';
 import { Box, Icon, IconButton, Text } from '../..';
+import useStatusClasses from '../../hooks/useStatusClasses';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { NoticeIcon } from '../Icon/NoticeIcon';
 
 export const ARIA_STATUSES = {
   SUCCESS: 'Success Message',
@@ -59,12 +59,12 @@ const Message = forwardRef(({ className, item, onClose }, ref) => {
     isHidden,
   });
 
-  const ariaStatus = (ariaStatusClass) => {
+  const ariaStatus = ariaStatusClass => {
     if (ariaStatusClass === 'is-success') {
       return ARIA_STATUSES.SUCCESS;
-    } else if (ariaStatusClass === 'is-error') {
+    } if (ariaStatusClass === 'is-error') {
       return ARIA_STATUSES.ERROR;
-    } else if (ariaStatusClass === 'is-warning') {
+    } if (ariaStatusClass === 'is-warning') {
       return ARIA_STATUSES.WARNING;
     } return '';
   };
@@ -75,16 +75,20 @@ const Message = forwardRef(({ className, item, onClose }, ref) => {
     mr: 'md',
   };
 
-  const messageIcon = icon ?
-    (<Icon
-      icon={icon}
-      data-testid="custom-icon-testid"
-      {...messageIconProps}
-    />) :
-    (<NoticeIcon
-      status={status}
-      {...messageIconProps}
-    />);
+  const messageIcon = icon
+    ? (
+      <Icon
+        icon={icon}
+        data-testid="custom-icon-testid"
+        {...messageIconProps}
+      />
+    )
+    : (
+      <NoticeIcon
+        status={status}
+        {...messageIconProps}
+      />
+    );
 
   return (
     <Box

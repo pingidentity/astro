@@ -1,10 +1,10 @@
 import React from 'react';
-import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
+import { Item, LinkSelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
-import { LinkSelectField, Item } from '../../index';
 
 const items = [
   { name: 'a' },

@@ -1,9 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TextField from '.';
-import axeTest from '../../utils/testUtils/testAxe';
+
 import statuses from '../../utils/devUtils/constants/statuses';
+import axeTest from '../../utils/testUtils/testAxe';
+
+import TextField from '.';
 
 const testId = 'test-text-field';
 const testLabel = 'Test Label';

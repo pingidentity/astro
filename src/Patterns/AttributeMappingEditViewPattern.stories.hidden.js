@@ -1,6 +1,7 @@
 import React from 'react';
 import CogsIcon from 'mdi-react/CogsIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
+
 import {
   Box,
   CheckboxField,
@@ -86,61 +87,59 @@ const sx = {
 
 export const Default = () => {
   return (
-    <>
-      <Box sx={sx.mainBox}>
-        <Box isRow>
-          <Text sx={sx.headerTextApplication}>
-            Application
-          </Text>
-          <Text sx={sx.headerTextPingOne}>
-            PingOne
-          </Text>
-          <Text sx={sx.headerTextRequired}>
-            Required
-          </Text>
-        </Box>
-        <Separator sx={sx.separator} />
-        <Box items={editFieldValues} sx={sx.editFieldsBox}>
-          {editFieldValues.map(({ field1, field2, key }) => (
-            <Box isRow key={key} gap="sm" sx={sx.comboBoxFieldContainer}>
-              <ComboBoxField
-                isReadonly
-                value={field1}
-                controlProps={{
-                  sx: sx.comboBoxField,
-                }}
-              />
-              <ComboBoxField
-                isReadonly
-                value={field2}
-                controlProps={{
-                  sx: sx.comboBoxField,
-                }}
-              />
-              <Box isRow gap="lg" sx={sx.iconsBox}>
-                <IconButton aria-label="Cogs Icon">
-                  <Icon
-                    icon={CogsIcon}
-                    size={24}
-                  />
-                </IconButton>
-                <CheckboxField
-                  status="default"
-                  containerProps={{
-                    sx: sx.checkboxField,
-                  }}
-                />
-                <IconButton aria-label="Delete Icon">
-                  <Icon
-                    icon={DeleteIcon}
-                    size={24}
-                  />
-                </IconButton>
-              </Box>
-            </Box>
-          ))}
-        </Box>
+    <Box sx={sx.mainBox}>
+      <Box isRow>
+        <Text sx={sx.headerTextApplication}>
+          Application
+        </Text>
+        <Text sx={sx.headerTextPingOne}>
+          PingOne
+        </Text>
+        <Text sx={sx.headerTextRequired}>
+          Required
+        </Text>
       </Box>
-    </>
+      <Separator sx={sx.separator} />
+      <Box items={editFieldValues} sx={sx.editFieldsBox}>
+        {editFieldValues.map(({ field1, field2, key }) => (
+          <Box isRow key={key} gap="sm" sx={sx.comboBoxFieldContainer}>
+            <ComboBoxField
+              isReadonly
+              value={field1}
+              controlProps={{
+                sx: sx.comboBoxField,
+              }}
+            />
+            <ComboBoxField
+              isReadonly
+              value={field2}
+              controlProps={{
+                sx: sx.comboBoxField,
+              }}
+            />
+            <Box isRow gap="lg" sx={sx.iconsBox}>
+              <IconButton aria-label="Cogs Icon">
+                <Icon
+                  icon={CogsIcon}
+                  size={24}
+                />
+              </IconButton>
+              <CheckboxField
+                status="default"
+                containerProps={{
+                  sx: sx.checkboxField,
+                }}
+              />
+              <IconButton aria-label="Delete Icon">
+                <Icon
+                  icon={DeleteIcon}
+                  size={24}
+                />
+              </IconButton>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    </Box>
   );
 };

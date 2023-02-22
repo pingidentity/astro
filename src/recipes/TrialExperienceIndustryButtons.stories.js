@@ -1,5 +1,7 @@
 import React from 'react';
 import CloseIcon from 'mdi-react/CloseIcon';
+
+import useModalState from '../hooks/useModalState';
 import {
   Box,
   Button,
@@ -10,7 +12,6 @@ import {
   OverlayProvider,
   Text,
 } from '../index';
-import useModalState from '../hooks/useModalState';
 
 export default {
   title: 'Recipes/Trial Experience Buttons',
@@ -309,7 +310,7 @@ const financialSVG = props => (
 );
 
 const governmentSVG = props => (
-  <svg width="251" height="250" viewBox="0 0 251 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props} >
+  <svg width="251" height="250" viewBox="0 0 251 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_2_568)">
       <path
         fillRule="evenodd"
@@ -708,7 +709,7 @@ export const Default = () => {
           >
             <Icon icon={CloseIcon} size="sm" />
           </IconButton>
-          <Text sx={sx.headingTextStyle} >
+          <Text sx={sx.headingTextStyle}>
             Choose Your Industry
           </Text>
           <Text sx={sx.subheadingTextStyle}>
@@ -722,7 +723,7 @@ export const Default = () => {
               <Button sx={sx.buttonStyle} key={button.name}>
                 <Box alignItems="center">
                   <Icon icon={button.icon} sx={sx.iconStyle} size={58} />
-                  <Text sx={sx.buttonLabelStyle} >
+                  <Text sx={sx.buttonLabelStyle}>
                     {button.name}
                   </Text>
                 </Box>

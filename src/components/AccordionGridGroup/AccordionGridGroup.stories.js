@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { Item } from 'react-stately';
 import CreateIcon from 'mdi-react/CreateIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
-  IconButton,
   Icon,
-  Text,
-  Separator,
+  IconButton,
   Link,
+  Separator,
+  Text,
   TextField,
 } from '../../index';
+
 import AccordionGridGroup from './AccordionGridGroup';
 import AccordionGridReadme from './AccordionGridGroup.mdx';
 
@@ -117,21 +119,25 @@ export default {
   },
 };
 
-const Header = (props) => {
+const Header = props => {
   const { item } = props;
 
   return (
-    <Box isRow sx={{ flexGrow: 1 }} >
+    <Box isRow sx={{ flexGrow: 1 }}>
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
         <Text sx={{ fontWeight: 3, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} variant="itemTitle" alignSelf="center">{item.name}</Text>
       </Box>
-      <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }} >
-        <Text sx={{ fontWeight: 0, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} alignSelf="center">{item.organizations.length} Organizations</Text>
+      <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
+        <Text sx={{ fontWeight: 0, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} alignSelf="center">
+          {item.organizations.length}
+          {' '}
+          Organizations
+        </Text>
         <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
-          <IconButton aria-label="create-icon" sx={{ mr: '4px' }} >
+          <IconButton aria-label="create-icon" sx={{ mr: '4px' }}>
             <Icon icon={CreateIcon} size="sm" />
           </IconButton>
-          <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }} >
+          <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }}>
             <Icon icon={MoreVertIcon} size="sm" />
           </IconButton>
         </Box>
@@ -140,7 +146,7 @@ const Header = (props) => {
   );
 };
 
-const Body = (props) => {
+const Body = props => {
   const { item } = props;
   return (
     <Box isRow>
@@ -155,12 +161,15 @@ const Body = (props) => {
           View permissions
         </Link>
       </Box>
-      <Box sx={{ flexGrow: 1, width: '50%' }} >
+      <Box sx={{ flexGrow: 1, width: '50%' }}>
         {item.organizations.map(org => (
-          <Box key={`box${org.name}`} sx={{ marginTop: '15px', mb: '15px' }} >
-            <Text sx={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} key={`text${org.name}`} >{org.name}</Text>
+          <Box key={`box${org.name}`} sx={{ marginTop: '15px', mb: '15px' }}>
+            <Text sx={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} key={`text${org.name}`}>{org.name}</Text>
             {org.populations.map(pop => (
-              <Text key={pop} sx={{ marginLeft: 'md', mt: '10px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} >{pop})</Text>
+              <Text key={pop} sx={{ marginLeft: 'md', mt: '10px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                {pop}
+                )
+              </Text>
             ))}
           </Box>
         ))}
@@ -172,7 +181,7 @@ const Body = (props) => {
 export const Default = () => (
   // See story source for info about the data used
   <>
-    <Text sx={{ fontWeight: 3, fontSize: '13px' }} >
+    <Text sx={{ fontWeight: 3, fontSize: '13px' }}>
       Role
     </Text>
     <Separator sx={{ mb: 0 }} />
@@ -190,12 +199,12 @@ export const Default = () => (
           {/* Code that removes the seperator
             from the last item */}
           {
-              item.key !== 'Organization' ?
-                <Separator sx={{ m: 0, bg: 'neutral.90' }} /> :
-                null
+              item.key !== 'Organization'
+                ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
+                : null
             }
         </Item>
-        )}
+      )}
     </AccordionGridGroup>
   </>
 );
@@ -206,7 +215,7 @@ export const Controlled = () => {
   return (
   // See story source for info about the data used
     <>
-      <Text sx={{ fontWeight: 3, fontSize: '13px' }} >
+      <Text sx={{ fontWeight: 3, fontSize: '13px' }}>
         Role
       </Text>
       <Separator sx={{ mb: 0 }} />
@@ -225,9 +234,9 @@ export const Controlled = () => {
             {/* Code that removes the seperator
             from the last item */}
             {
-              item.key !== 'Organization' ?
-                <Separator sx={{ m: 0, bg: 'neutral.90' }} /> :
-                null
+              item.key !== 'Organization'
+                ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
+                : null
             }
           </Item>
         )}

@@ -1,15 +1,15 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import { VisuallyHidden } from 'react-aria';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import { VisuallyHidden } from '@react-aria/visually-hidden';
 
-import { Box, Button, Loader, Icon, Text } from '../../';
+import { Box, Button, Icon, Loader, Text } from '../..';
+import { usePropWarning, useSelectField } from '../../hooks';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
-import { usePropWarning, useSelectField } from '../../hooks';
 import SelectFieldBase from '../SelectFieldBase';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -69,11 +69,13 @@ const LinkSelectField = forwardRef((props, ref) => {
     </Button>
   );
 
-  return (<SelectFieldBase
-    {...props}
-    {...selectFieldProps}
-    trigger={trigger}
-  />);
+  return (
+    <SelectFieldBase
+      {...props}
+      {...selectFieldProps}
+      trigger={trigger}
+    />
+  );
 });
 
 LinkSelectField.propTypes = {
