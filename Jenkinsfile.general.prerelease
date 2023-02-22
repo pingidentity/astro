@@ -101,12 +101,11 @@ pipeline {
       }
     }
 
-    stage('install and link') {
+    stage('Link') {
       steps {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
-            echo "Installing and linking packages"
-            sh "yarn --frozen-lockfile --ignore-engines"
+            echo "Linking packages"
             sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
             sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
           }
@@ -119,7 +118,6 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            yarn --frozen-lockfile
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
