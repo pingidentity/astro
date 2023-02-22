@@ -1,9 +1,11 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
-import axeTest from '../../utils/testUtils/testAxe';
-import { screen, render } from '../../utils/testUtils/testWrapper';
+import userEvent from '@testing-library/user-event';
+
 import statuses from '../../utils/devUtils/constants/statuses';
+import axeTest from '../../utils/testUtils/testAxe';
+import { render, screen } from '../../utils/testUtils/testWrapper';
+
 import TextAreaField from '.';
 
 const testId = 'test-textAreaField';

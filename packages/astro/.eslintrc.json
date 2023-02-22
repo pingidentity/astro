@@ -9,12 +9,11 @@
     "rules": {
         "@emotion/pkg-renaming": "error",
         "arrow-body-style": 0,
+        "arrow-parens": ["error", "as-needed"],
         "import/extensions": 0,
         "import/no-extraneous-dependencies": ["error", {
-            "devDependencies": true,
-            "packageDir": ["./", "../../"]
+            "devDependencies": true
         }],
-        "import/no-unresolved": 0, // causing issues resolving from core, removing for now
         "import/prefer-default-export": 0,
         "jsx-a11y/label-has-for": 0,
         "jsx-a11y/label-has-associated-control": [2, {
@@ -39,7 +38,23 @@
         "quote-props": 0,
         "object-curly-newline": ["error", { "consistent": true }],
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn", 
+        "react/jsx-props-no-spreading": 0,
+        "react/function-component-definition": 0,
+        "react/destructuring-assignment": 0, 
+        "no-restricted-exports": 0,
+        "react/no-unstable-nested-components": 0,
+        "import/no-cycle": 0,
+        "testing-library/prefer-presence-queries": 0,
+        "react/button-has-type": 1,
+        "react/no-unused-prop-types": 0,
+        "testing-library/no-node-access": 0,
+        "testing-library/no-unnecessary-act": 1,
+        "react/no-unknown-property": 0,
+        "no-promise-executor-return": 0,
+        "react/jsx-no-constructed-context-values": 1,
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error"
     },
     "settings": {
         "import/resolver": {
@@ -57,7 +72,32 @@
             "rules": {
                 "react/prop-types": 0
             }
+        },
+          // override "simple-import-sort" config
+    {
+        "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+        "rules": {
+          "simple-import-sort/imports": [
+            "error",
+            {
+              "groups": [
+                // Packages `react` related packages come first.
+                ["^react", "^@?\\w"],
+                // Internal packages.
+                ["^(@|components)(/.*|$)"],
+                // Side effect imports.
+                ["^\\u0000"],
+                // Parent imports. Put `..` last.
+                ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                // Other relative imports. Put same-folder imports and `.` last.
+                ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+                // Style imports.
+                ["^.+\\.?(css)$"]
+              ]
+            }
+          ]
         }
+      }
     ],
-    "plugins": ["@emotion", "testing-library", "jest-dom", "react-hooks"]
+    "plugins": ["@emotion", "testing-library", "jest-dom", "react-hooks", "simple-import-sort"]
 }

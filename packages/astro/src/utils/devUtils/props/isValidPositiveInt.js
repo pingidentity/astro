@@ -1,4 +1,4 @@
-const isWithinRange = (inclusiveLowerBound = 0, inclusiveUpperBound = Infinity) => (num) => {
+const isWithinRange = (inclusiveLowerBound = 0, inclusiveUpperBound = Infinity) => num => {
   return Number.isInteger(num) && inclusiveLowerBound <= num && num <= inclusiveUpperBound;
 };
 

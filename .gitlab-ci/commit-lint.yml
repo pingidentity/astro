@@ -4,4 +4,4 @@ commit-lint:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   script:
-    - bash commit_lint.sh
+    - NODE_OPTIONS="--require ./.pnp.cjs" bash commit_lint.sh

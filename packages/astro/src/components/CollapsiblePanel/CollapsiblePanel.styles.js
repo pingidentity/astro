@@ -1,4 +1,4 @@
-import { defaultFocus, link, focusWithCroppedOutline } from '../Button/Buttons.styles';
+import { defaultFocus, focusWithCroppedOutline, link } from '../Button/Buttons.styles';
 import { square } from '../IconButton/IconButton.styles';
 import { wordWrap } from '../Text/Text.styles';
 

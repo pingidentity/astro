@@ -44,7 +44,7 @@ export const AstroComponents = {
  * Return the proper fieldMessage and fieldMessageProps for Astro consumption
  * @param {{}} props - The list of props from RJSF
  */
-const getFieldMessageData = (props) => {
+const getFieldMessageData = props => {
   const {
     rawErrors = [],
     options: {
@@ -78,7 +78,7 @@ const getFieldMessageData = (props) => {
  * @param {Object} props The props supplied by RJSF from the schema and uiSchema objects supplied
  * to the form
  */
-export const toAstroInputProps = (props) => {
+export const toAstroInputProps = props => {
   const {
     autofocus,
     disabled,

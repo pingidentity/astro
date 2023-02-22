@@ -1,5 +1,5 @@
-import { input } from '../Input/Input.styles';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { input } from '../Input/Input.styles';
 
 const sharedStyles = {
   WebkitAppearance: 'none',

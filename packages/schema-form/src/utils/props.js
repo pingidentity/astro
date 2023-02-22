@@ -4,7 +4,7 @@ import { FIELD_TYPES } from './constants';
  * Alters the schema object to set strings as booleans when they should be formatted as such
  * @param {Object} schema The raw schema object passed in from the form
  */
-export const getCorrectedSchema = (schema) => {
+export const getCorrectedSchema = schema => {
   const { properties } = schema;
 
   if (!properties) return schema;
@@ -32,7 +32,7 @@ export const getDisabledEnumOptions = (optionsArray, disabledArray) => {
     return optionsArray;
   }
 
-  return optionsArray.map((option) => {
+  return optionsArray.map(option => {
     const { label } = option;
     if (disabledArray.includes(label)) {
       return { ...option, disabled: true };

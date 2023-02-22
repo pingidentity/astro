@@ -4,8 +4,8 @@ import { mergeProps, useFocusRing, useSlider, useSliderThumb, VisuallyHidden } f
 import { useSliderState } from 'react-stately';
 import { useNumberFormatter } from '@react-aria/i18n';
 
-import { Box } from '../index';
 import { defaultFocus } from '../components/Button/Buttons.styles';
+import { Box } from '../index';
 
 export default {
   title: 'Recipes/Slider',
@@ -61,7 +61,7 @@ const sx = {
   },
 };
 
-const setSliderColor = (thumbPosition) => {
+const setSliderColor = thumbPosition => {
   return thumbPosition < 25
     ? `linear-gradient(to right, rgb(169, 215, 50) 0%, rgb(169, 215, 50) ${thumbPosition}%, rgb(242, 242, 242) ${thumbPosition}%, rgb(242, 242, 242) 100%)`
     : thumbPosition >= 25 && thumbPosition <= 49
@@ -101,7 +101,7 @@ export const Default = () => {
   );
 };
 
-const Slider = (props) => {
+const Slider = props => {
   const trackRef = React.useRef(null);
   const numberFormatter = useNumberFormatter(props.formatOptions);
   const state = useSliderState({ ...props, numberFormatter });
@@ -118,7 +118,9 @@ const Slider = (props) => {
       <Box sx={sx.sliderOuterBox}>
         {props.label && <label {...labelProps}>{props.label}</label>}
         <Box {...outputProps} sx={sx.sliderInnerBox}>
-          ({state.getThumbValueLabel(0)})
+          (
+          {state.getThumbValueLabel(0)}
+          )
         </Box>
       </Box>
       {/* The track element holds the visible track line and the thumb. */}
@@ -132,7 +134,7 @@ const Slider = (props) => {
   );
 };
 
-const RangeSlider = (props) => {
+const RangeSlider = props => {
   const trackRef = React.useRef(null);
   const numberFormatter = useNumberFormatter(props.formatOptions);
   const state = useSliderState({ ...props, numberFormatter });
@@ -147,7 +149,9 @@ const RangeSlider = (props) => {
       <Box sx={sx.sliderOuterBox}>
         {props.label && <label {...labelProps}>{props.label}</label>}
         <Box {...outputProps} sx={sx.sliderInnerBox}>
-          ({`${state.getThumbValueLabel(0)}, ${state.getThumbValueLabel(1)}`})
+          (
+          {`${state.getThumbValueLabel(0)}, ${state.getThumbValueLabel(1)}`}
+          )
         </Box>
       </Box>
       <Box {...trackProps} ref={trackRef} sx={sx.sliderBox}>
@@ -159,7 +163,7 @@ const RangeSlider = (props) => {
   );
 };
 
-const Thumb = (props) => {
+const Thumb = props => {
   const { state, trackRef, index } = props;
   const inputRef = React.useRef(null);
   const { thumbProps, inputProps } = useSliderThumb(

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
-import { Item, Section, Badge, Box, Text } from '../../index';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Badge, Box, Item, Section, Text } from '../../index';
+
+import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
 import EnvironmentBreadcrumbReadme from './EnvironmentBreadcrumb.mdx';
 
 export default {
@@ -74,7 +76,7 @@ const environmentsWithSections = [
   },
 ];
 
-export const Default = (args) => {
+export const Default = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,
@@ -89,10 +91,9 @@ export const Default = (args) => {
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -131,8 +132,7 @@ export const WithSections = () => {
   const getUpdatedRecentEnvs = (envObj, prevEnvs) => {
     const { name: envName } = envObj;
 
-    const isDuplicate =
-      prevEnvs.filter(prevEnv => prevEnv.name === envName).length > 0;
+    const isDuplicate = prevEnvs.filter(prevEnv => prevEnv.name === envName).length > 0;
 
     if (isDuplicate) {
       return [
@@ -146,12 +146,11 @@ export const WithSections = () => {
     return [{ ...envObj }, ...prevEnvs];
   };
 
-  const findEnvObj = envName =>
-    environments
-      .find(section => section.name === 'All')
-      .options.find(option => option.name === envName);
+  const findEnvObj = envName => environments
+    .find(section => section.name === 'All')
+    .options.find(option => option.name === envName);
 
-  const handleEnvPress = (newEnv) => {
+  const handleEnvPress = newEnv => {
     const sectionPrefixIndex = newEnv.indexOf('-');
     const envKey = newEnv.substr(sectionPrefixIndex + 1);
     const recentEnvironments = environments.find(
@@ -162,12 +161,10 @@ export const WithSections = () => {
       envObj,
       recentEnvironments,
     );
-    setEnvironments(prevEnvs =>
-      prevEnvs.map(section =>
-        (section.name === 'Recent'
-          ? { ...section, options: updatedRecentEnvironments }
-          : section),
-      ),
+    setEnvironments(prevEnvs => prevEnvs.map(section => (section.name === 'Recent'
+      ? { ...section, options: updatedRecentEnvironments }
+      : section),
+    ),
     );
     setSelectedEnvironment({ ...envObj });
   };
@@ -236,10 +233,9 @@ export const DefaultOpen = () => {
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -284,10 +280,9 @@ export const ControlledMenu = () => {
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -317,7 +312,7 @@ export const ControlledMenu = () => {
   );
 };
 
-export const RightAlignedBadges = (args) => {
+export const RightAlignedChips = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,
@@ -332,10 +327,9 @@ export const RightAlignedBadges = (args) => {
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };

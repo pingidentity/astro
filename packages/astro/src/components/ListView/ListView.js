@@ -1,15 +1,17 @@
-import React, { useMemo, forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import { useCollator } from '@react-aria/i18n';
 import { useList } from '@react-aria/list';
+import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
-import { useCollator } from '@react-aria/i18n';
-import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
-import { ListViewContext } from './ListViewContext';
+
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import ListViewItem from '../ListViewItem';
 import Loader from '../Loader';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import loadingStates from '../../utils/devUtils/constants/loadingStates';
+
+import { ListViewContext } from './ListViewContext';
 
 export const collectionTypes = {
   ITEM: 'item',
@@ -20,17 +22,16 @@ export const collectionTypes = {
 export function useListLayout(state) {
   const ROW_HEIGHT = 81;
   const collator = useCollator({ usage: 'search', sensitivity: 'base' });
-  const layout = useMemo(() =>
-    new ListLayout({
-      estimatedRowHeight: ROW_HEIGHT,
-      estimatedHeadingHeight: 26,
-      paddingRight: 4,
-      paddingLeft: 4,
-      loaderHeight: ROW_HEIGHT,
-      placeholderHeight: ROW_HEIGHT,
-      collator,
-    })
-  , [collator]);
+  const layout = useMemo(() => new ListLayout({
+    estimatedRowHeight: ROW_HEIGHT,
+    estimatedHeadingHeight: 26,
+    paddingRight: 4,
+    paddingLeft: 4,
+    loaderHeight: ROW_HEIGHT,
+    placeholderHeight: ROW_HEIGHT,
+    collator,
+  }),
+  [collator]);
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
@@ -101,7 +102,7 @@ const ListView = forwardRef((props, ref) => {
 
   delete gridProps.onMouseDown;
 
-  const onFocus = (e) => {
+  const onFocus = e => {
     gridProps.onFocus(e);
 
     if (others.onFocus) {
@@ -131,7 +132,7 @@ const ListView = forwardRef((props, ref) => {
             return (
               <ListViewItem item={item} />
             );
-          } else if (type === collectionTypes.LOADER) {
+          } if (type === collectionTypes.LOADER) {
             return <Loader variant="loader.withinListView" aria-label="Loading more..." />;
           }
           return null;

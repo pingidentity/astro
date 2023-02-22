@@ -1,8 +1,10 @@
 import React from 'react';
+
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import TextField from '../TextField';
+
 import ArrayField from './ArrayField';
 import ArrayFieldDeleteButton from './ArrayFieldDeleteButton';
-import TextField from '../TextField';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 jest.mock('uuid', () => ({ v4: () => 'testid' }));
 

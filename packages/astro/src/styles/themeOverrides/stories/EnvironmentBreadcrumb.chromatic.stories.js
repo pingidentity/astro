@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { EnvironmentBreadcrumb, Box, Text, Badge, Item } from '../../../index';
+import { Badge, Box, EnvironmentBreadcrumb, Item, Text } from '../../../index';
 import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
@@ -27,7 +27,7 @@ const defaultEnvironments = [
   { name: 'Goat' },
 ];
 
-export const Default = (args) => {
+export const Default = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,
@@ -42,10 +42,9 @@ export const Default = (args) => {
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };

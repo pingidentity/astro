@@ -1,9 +1,9 @@
-import React, { forwardRef, useRef, useImperativeHandle, useState, useCallback } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
+import { useOverlayPosition } from 'react-aria';
+import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import PropTypes from 'prop-types';
-import { useOverlayPosition } from 'react-aria';
-import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 
 import {
   Box,
@@ -14,11 +14,11 @@ import {
   Label,
   PopoverContainer,
   RequirementsList,
-} from '../../';
+} from '../..';
+import * as hooks from '../../hooks';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
-import statuses from '../../utils/devUtils/constants/statuses';
-import * as hooks from '../../hooks';
 
 const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   HIDE: 'hide password',
@@ -41,8 +41,7 @@ const PasswordField = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const checkRequirements = () =>
-    !requirements.filter(req => req.status === 'default').length > 0;
+  const checkRequirements = () => !requirements.filter(req => req.status === 'default').length > 0;
 
   const {
     fieldContainerProps,
@@ -106,9 +105,9 @@ const PasswordField = forwardRef((props, ref) => {
     'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
 
-  const toggleShowPasswordAriaLabel = isVisible ?
-    ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.HIDE :
-    ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.SHOW;
+  const toggleShowPasswordAriaLabel = isVisible
+    ? ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.HIDE
+    : ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE.SHOW;
 
   const handleToggleShowPassword = (...args) => {
     setIsShown(!isVisible);
@@ -120,7 +119,7 @@ const PasswordField = forwardRef((props, ref) => {
 
   return (
     <>
-      <Box variant="forms.input.fieldContainer" {...fieldContainerProps} >
+      <Box variant="forms.input.fieldContainer" {...fieldContainerProps}>
         <Label {...fieldLabelProps} />
         <Box variant="forms.input.fieldControlWrapper" isRow {...fieldControlWrapperProps} className={classNames}>
           <Input ref={inputRef} {...fieldControlInputProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
@@ -140,10 +139,12 @@ const PasswordField = forwardRef((props, ref) => {
           {slots?.inContainer}
         </Box>
         {
-          helperText &&
+          helperText
+          && (
           <FieldHelperText status={status}>
             {helperText}
           </FieldHelperText>
+          )
         }
       </Box>
       <PopoverContainer

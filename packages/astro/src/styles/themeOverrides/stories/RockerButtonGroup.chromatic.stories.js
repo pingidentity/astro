@@ -12,7 +12,7 @@ export default {
 export const Default = () => (
   <RockerButtonGroup>
     <RockerButton name="and" key="and">And</RockerButton>
-    <RockerButton name="or" key="or" >Or</RockerButton>
-    <RockerButton name="maybe" key="maybe" >Maybe</RockerButton>
+    <RockerButton name="or" key="or">Or</RockerButton>
+    <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
   </RockerButtonGroup>
 );

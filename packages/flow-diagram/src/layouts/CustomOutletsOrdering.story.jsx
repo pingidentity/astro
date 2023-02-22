@@ -28,7 +28,7 @@ const customComparer = (a, b) => {
     return a.node.data.index - b.node.data.index;
 };
 
-export const DiagramComponent = () => {
+export function DiagramComponent() {
     const disabled = false;
     const [diagramNodes, setDiagramNodes] = React.useState([
         {
@@ -84,7 +84,6 @@ export const DiagramComponent = () => {
         return () => clearTimeout(timerId);
     });
 
-
     const { diagramProps, diagramObject } = useDiagram({
         isDisabled: disabled,
         groupTemplates: [
@@ -118,7 +117,7 @@ export const DiagramComponent = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
 DiagramComponent.defaultProps = {
     isDisabled: false,

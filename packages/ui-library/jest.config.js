@@ -1,30 +1,26 @@
 module.exports = {
     "rootDir": "./",
-    "unmockedModulePathPatterns": [
-        "<rootDir>/node_modules",
-        "<rootDir>/src/util/Utils.js",
-        "<rootDir>/src/testutil/TestUtils.js",
-        "<rootDir>/src/util/ReduxTestUtils.js",
-        "<rootDir>/src/util/ReactWithDefaultMethods.js"
-    ],
+    resolver: require.resolve(`jest-pnp-resolver`),
     "testMatch": [
         "**/tests/**/*.js?(x)"
     ],
     "testPathIgnorePatterns": [
-        "/node/",
-        "/node_modules/",
-        "/tests/coverage/",
+        "/.yarn/",
         "/build/",
         "/demo/",
         "/dist/",
+        "/node/",
         "/src/selenium/tests",
-        "commonTests.js?(x)",
+        "/tests/coverage/",
         "Backstop",
+        "commonTests.js?(x)",
     ],
     "modulePathIgnorePatterns": [
-        "/node/",
-        "/build/",
-        "/dist/"
+        "<rootDir>/build/",
+        "<rootDir>/demo/",
+        "<rootDir>/dist/",
+        "<rootDir>/lib/",
+        "<rootDir>/node/",
     ],
     "setupFiles": [
         "<rootDir>/src/util/polyfills.js",

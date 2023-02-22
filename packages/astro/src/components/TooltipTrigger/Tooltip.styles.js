@@ -1,5 +1,5 @@
-import { text } from '../Button/Buttons.styles';
 import { baseBadge } from '../Badge/Badge.styles';
+import { text } from '../Button/Buttons.styles';
 
 const container = {
   p: 'sm',

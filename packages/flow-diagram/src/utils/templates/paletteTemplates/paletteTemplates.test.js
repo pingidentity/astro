@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Desktop } from '@pingux/icons';
 import { COLORS } from '../../constants';
@@ -24,7 +23,7 @@ jest.mock('gojs', () => {
     });
 });
 
-const isDraggingItem = jest.fn((node) => {
+const isDraggingItem = jest.fn(node => {
     return node.part.layerName === 'Tool';
 });
 

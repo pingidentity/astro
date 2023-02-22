@@ -1,7 +1,5 @@
 include:
   - local: .gitlab-ci/build-ci-image.yml
-  - local: .gitlab-ci/build-dependencies.yml
-  - local: .gitlab-ci/build-no-lockfile.yml
   - local: .gitlab-ci/build-test-lint-all.yml
   - local: .gitlab-ci/build-test-lint-packages.yml
   - local: .gitlab-ci/commit-lint.yml
@@ -20,7 +18,6 @@ variables:
 
 stages:
   - build-ci-image
-  - build-dependencies
   - build-test-lint
   - screenshot
   - deploy
@@ -31,10 +28,3 @@ stages:
     - pingux-runner-s3-cache
   image: $STABLE_IMAGE
   interruptible: true
-  cache:
-    key:
-      files:
-        - yarn.lock
-    paths:
-      - node_modules
-    policy: pull

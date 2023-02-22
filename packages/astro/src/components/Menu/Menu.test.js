@@ -1,9 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
-import { Menu, Item } from '../../index';
+
+import { Item, Menu } from '../../index';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import axeTest from '../../utils/testUtils/testAxe';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 const testTitle = 'Test Title';
 const defaultProps = {

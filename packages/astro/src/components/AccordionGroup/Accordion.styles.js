@@ -1,4 +1,4 @@
-import { defaultFocus, base } from '../Button/Buttons.styles';
+import { base, defaultFocus } from '../Button/Buttons.styles';
 
 const title = {
   display: 'inline-block !important',

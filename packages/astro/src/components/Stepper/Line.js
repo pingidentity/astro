@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
-import { stepStatuses } from './Stepper.constants';
 import Box from '../Box';
+
+import { stepStatuses } from './Stepper.constants';
 
 const {
   INACTIVE,

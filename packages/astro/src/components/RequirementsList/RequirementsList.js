@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import SuccessCircle from 'mdi-react/CheckCircleIcon';
 import ErrorCircle from 'mdi-react/AlertCircleIcon';
 import WarningCircle from 'mdi-react/AlertCircleOutlineIcon';
 import DefaultCircle from 'mdi-react/CheckboxBlankCircleOutlineIcon';
+import SuccessCircle from 'mdi-react/CheckCircleIcon';
+import PropTypes from 'prop-types';
+
 import Box from '../Box';
-import Text from '../Text';
 import Icon from '../Icon';
+import Text from '../Text';
 
 /**
  * List of requirements for a password, with indicators that can change to show when
@@ -19,7 +20,7 @@ const RequirementsList = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const statusIconRender = (status) => {
+  const statusIconRender = status => {
     switch (status) {
       case 'success':
         return <Icon icon={SuccessCircle} color="success.bright" mr="sm" size={18} data-testid={`status-icon__${status}`} />;
@@ -32,7 +33,7 @@ const RequirementsList = forwardRef((props, ref) => {
     }
   };
 
-  const buildRequirementsLine = (req) => {
+  const buildRequirementsLine = req => {
     return (
       <Box role="listitem" isRow key={req.name} alignItems="center" width="100%" as="li">
         {statusIconRender(req.status)}

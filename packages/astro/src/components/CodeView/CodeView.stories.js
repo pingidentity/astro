@@ -1,9 +1,12 @@
 import React from 'react';
 import Prism from 'prismjs';
+
 import 'prismjs/components/prism-powershell';
-import CodeView from './CodeView';
-import { Text } from '../..';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Text } from '../..';
+
+import CodeView from './CodeView';
 import CodeViewReadme from './CodeView.mdx';
 
 const code = `{
@@ -131,9 +134,8 @@ WithLineNumbers.parameters = {
 };
 
 export const WithCustomSize = () => (
-  <>
-    <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
-      {`
+  <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
+    {`
 export const BadgeWithIcon = () => (
   <>
     <Badge label="Badge with Icon Button" bg="navy">
@@ -158,8 +160,7 @@ export const BadgeWithIcon = () => (
   </>
 );
     `}
-    </CodeView>
-  </>
+  </CodeView>
 );
 
 export const WithAdditionalLanguage = () => {

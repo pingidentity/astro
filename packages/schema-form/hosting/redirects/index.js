@@ -3,8 +3,8 @@ import { fetchVersions } from '../fetchVersions';
 const originPath = window.location.origin;
 const packagePath = '/schema-form';
 
-const redirect = fetchVersions((versions) => {
-  const subpath = window.location.pathname.split('/').filter((i) => i)[1];
+const redirect = fetchVersions(versions => {
+  const subpath = window.location.pathname.split('/').filter(i => i)[1];
   let redirectPath = originPath + packagePath;
   switch (subpath) {
     case 'latest':

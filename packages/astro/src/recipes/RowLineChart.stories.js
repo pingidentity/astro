@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { useVisuallyHidden } from 'react-aria';
+import { action } from '@storybook/addon-actions';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
 import useResizeObserver from 'use-resize-observer';
-import { action } from '@storybook/addon-actions';
-import { neutral } from '../styles/colors';
+
 import {
   Box,
   Button,
@@ -12,6 +12,7 @@ import {
   Tooltip,
   TooltipTrigger,
 } from '../index';
+import { neutral } from '../styles/colors';
 
 export default {
   title: 'Recipes/Row Line Chart',

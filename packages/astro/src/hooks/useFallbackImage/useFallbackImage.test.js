@@ -19,21 +19,19 @@ test('should return node if all props are correct ', () => {
 });
 
 test('should not trigger onImageLoad if no fallback passed', () => {
-  renderHook(() =>
-    useFallbackImage({
-      ...defaultProps,
-      fallbackImage: null,
-    }),
+  renderHook(() => useFallbackImage({
+    ...defaultProps,
+    fallbackImage: null,
+  }),
   );
   expect(defaultProps.onImageLoad).not.toHaveBeenCalled();
 });
 
 test('should not trigger onImageLoad if component unmounted', () => {
-  const { unmount } = renderHook(() =>
-    useFallbackImage({
-      ...defaultProps,
-      fallbackImage: null,
-    }),
+  const { unmount } = renderHook(() => useFallbackImage({
+    ...defaultProps,
+    fallbackImage: null,
+  }),
   );
   unmount();
   expect(defaultProps.onImageLoad).not.toHaveBeenCalled();

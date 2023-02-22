@@ -1,11 +1,9 @@
-const requiredErrorText = ({ propName, componentName }) =>
-  `Required prop \`${propName}\` for \`${componentName}\` is missing.`;
+const requiredErrorText = ({ propName, componentName }) => `Required prop \`${propName}\` for \`${componentName}\` is missing.`;
 
-const validationErrorText = ({ propName, componentName }) =>
-  `Invalid prop \`${propName}\` supplied to \`${componentName}\`.
+const validationErrorText = ({ propName, componentName }) => `Invalid prop \`${propName}\` supplied to \`${componentName}\`.
   Expected an Iterable object such as String, Array, TypedArray, Map, or Set.`;
 
-export const isIterable = (obj) => {
+export const isIterable = obj => {
   // checks for null and undefined
   if (obj == null) {
     return false;
@@ -13,7 +11,7 @@ export const isIterable = (obj) => {
   return typeof obj[Symbol.iterator] === 'function';
 };
 
-const createIsIterableProp = (isRequired) => {
+const createIsIterableProp = isRequired => {
   // The factory returns a custom prop type
   return (props, propName, componentName) => {
     const prop = props[propName];

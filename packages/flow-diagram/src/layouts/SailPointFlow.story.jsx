@@ -42,7 +42,7 @@ import usePalette from '../hooks/usePalette';
 import OuterContainer from '../components/OuterContainer';
 import { makePaletteItem, makeCanvasStep, makeCanvasLink, makeCanvasLinksForStep } from './utils/demoUtils';
 
-const Demo = () => {
+function Demo() {
     const [selectedNode, setSelectedNode] = useState();
     const disabled = false;
 
@@ -237,8 +237,8 @@ const Demo = () => {
             if (insertedNodeKeys) {
                 // Don't worry about other modified nodes, since these will just be
                 // location changes that GoJS is already tracking.
-                const addedNodes =
-                    modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
+                const addedNodes = modifiedNodeData
+                    .filter(node => insertedNodeKeys.includes(node.key));
 
                 let groupKey;
 
@@ -263,10 +263,10 @@ const Demo = () => {
                                 'text': outlet,
                             }))),
                         ];
-                    } else if (node.isGroup) {
+                    } if (node.isGroup) {
                         groupKey = replacementKey;
                         return modifiedNode;
-                    } else if (node.group) {
+                    } if (node.group) {
                         return {
                             ...modifiedNode,
                             key: `${groupKey}-step`,
@@ -294,7 +294,7 @@ const Demo = () => {
                 if (droppedOntoLinkKey) {
                     let linkTo;
                     // Changing existing link to go to dropped node
-                    newLinks = diagramLinks.map((link) => {
+                    newLinks = diagramLinks.map(link => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
                             return { from: link.from, to: `${groupKey}-step` };
@@ -321,7 +321,7 @@ const Demo = () => {
                 const sortedNodeData = modifiedNodeData.sort((a, b) => ((Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1));
                 if (droppedOntoLinkKey) {
                     let linkTo;
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
                             return { from: link.from, to: sortedNodeData[0].key };
@@ -335,7 +335,7 @@ const Demo = () => {
                 } else if (droppedOntoNodeKey) {
                     let linkTo;
                     let linkedFrom = false;
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.from === droppedOntoNodeKey) {
                             linkedFrom = true;
                             linkTo = link.to;
@@ -345,9 +345,9 @@ const Demo = () => {
                     });
                     setDiagramLinks([
                         ...newLinks,
-                        linkedFrom ?
-                            { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo } :
-                            { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
+                        linkedFrom
+                            ? { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo }
+                            : { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
                     ]);
                 }
             }
@@ -448,15 +448,15 @@ const Demo = () => {
         setDiagramNodes(
             diagramNodes.map(
                 node => (
-                    node.key === selected.key ?
-                        { ...currentNode, [field]: id } :
-                        node
+                    node.key === selected.key
+                        ? { ...currentNode, [field]: id }
+                        : node
                 ),
             ),
         );
     };
 
-    const getPanelIcon = (category) => {
+    const getPanelIcon = category => {
         switch (category) {
             case 'finished':
                 return <Success height={20} fill={COLORS.GREEN} />;
@@ -514,26 +514,24 @@ const Demo = () => {
                             </Box>
                         </Box>
                     ) : (
-                        <React.Fragment>
-                            <Box
-                                isRow
-                                sx={{
-                                    justifyContent: 'center',
-                                    margin: '15px 0px 20px 0px',
-                                }}
-                            >
-                                <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
-                                    <Tab key="properties" title="Properties" />
-                                    <Tab key="toolbox" title="Toolbox">
-                                        <Box sx={{ height: 400 }}>
-                                            <PaletteWrapper>
-                                                <Palette {...paletteProps} />
-                                            </PaletteWrapper>
-                                        </Box>
-                                    </Tab>
-                                </Tabs>
-                            </Box>
-                        </React.Fragment>
+                        <Box
+                            isRow
+                            sx={{
+                                justifyContent: 'center',
+                                margin: '15px 0px 20px 0px',
+                            }}
+                        >
+                            <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
+                                <Tab key="properties" title="Properties" />
+                                <Tab key="toolbox" title="Toolbox">
+                                    <Box sx={{ height: 400 }}>
+                                        <PaletteWrapper>
+                                            <Palette {...paletteProps} />
+                                        </PaletteWrapper>
+                                    </Box>
+                                </Tab>
+                            </Tabs>
+                        </Box>
                     )}
                 </LeftContainer>
                 <DiagramWrapper>
@@ -542,11 +540,11 @@ const Demo = () => {
             </Body>
         </OuterContainer>
     );
-};
+}
 
-export const SailPointFlow = () => (
-    <Demo />
-);
+export function SailPointFlow() {
+    return <Demo />;
+}
 
 export default {
     title: 'Example Flows',

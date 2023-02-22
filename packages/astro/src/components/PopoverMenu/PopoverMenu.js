@@ -1,11 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { DismissButton, FocusScope, useMenuTrigger, useOverlayPosition } from 'react-aria';
 import { useMenuTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
+import PropTypes from 'prop-types';
 
-import PopoverContainer from '../PopoverContainer';
 import { MenuContext } from '../../context/MenuContext';
+import PopoverContainer from '../PopoverContainer';
 
 /**
  * The PopoverMenu serves as a wrapper around a Menu and its associated trigger, linking the Menu's
@@ -72,7 +72,7 @@ const PopoverMenu = forwardRef((props, ref) => {
 
   return (
     <>
-      <PressResponder {...menuTriggerProps} ref={triggerRef} isPressed={state.isOpen} >
+      <PressResponder {...menuTriggerProps} ref={triggerRef} isPressed={state.isOpen}>
         {menuTrigger}
       </PressResponder>
       <MenuContext.Provider value={menuContext}>

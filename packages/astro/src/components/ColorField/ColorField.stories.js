@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 
-import { ColorField, OverlayProvider } from '../../';
+import { ColorField, OverlayProvider } from '../..';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Form/ColorField',
@@ -55,7 +55,7 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = args => {
   const [color, setColor] = useState('rgba(127, 0, 127, 1)');
   const handleChange = useCallback(({ rgb }) => {
     const { r, b, g, a } = rgb;

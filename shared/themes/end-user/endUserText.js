@@ -13,23 +13,25 @@ const baseFont = {
 };
 
 const fieldHelperText = {
-  ...baseFont,
-  fontSize: 'md',
-  p: '15px !important',
-  minWidth: 169,
-  borderRadius: '0 0 2px 2px',
-  animation: 'fade-down-in 0.2s',
-  '&::first-letter': {
-    textTransform: 'uppercase !important',
-  },
-  '&.is-default': {
-    backgroundColor: 'fieldHelperText.defaultBackground',
-    color: 'fieldHelperText.default',
-  },
-  '&.is-error': {
-    backgroundColor: 'fieldHelperText.errorBackground',
-    color: 'fieldHelperText.error',
-  },
+  title: {
+    ...baseFont,
+    fontSize: 'md',
+    p: '15px !important',
+    minWidth: 169,
+    borderRadius: '0 0 2px 2px',
+    animation: 'fade-down-in 0.2s',
+    '&::first-letter': {
+      textTransform: 'uppercase !important',
+    },
+    '&.is-default': {
+      backgroundColor: 'fieldHelperText.defaultBackground',
+      color: 'fieldHelperText.default',
+    },
+    '&.is-error': {
+      backgroundColor: 'fieldHelperText.errorBackground',
+      color: 'fieldHelperText.error',
+    },
+  }
 };
 
 const endUserText = {

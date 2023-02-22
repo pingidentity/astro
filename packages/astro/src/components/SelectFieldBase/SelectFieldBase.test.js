@@ -1,13 +1,14 @@
 import React, { forwardRef } from 'react';
-import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
-import { render, screen, within } from '../../utils/testUtils/testWrapper';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { Item } from '../../index';
 import { useSelectField } from '../../hooks';
-import SelectFieldBase from './SelectFieldBase';
+import { Item } from '../../index';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import { modes } from '../Label/constants';
+
+import SelectFieldBase from './SelectFieldBase';
 
 const items = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
 const testId = 'test-dropdown';
@@ -30,16 +31,15 @@ const SelectFieldWrapper = forwardRef((props, ref) => {
   return <SelectFieldBase {...props} {...selectFieldProps} />;
 });
 
-const getComponent = (props = {}, { renderFn = render } = {}) =>
-  renderFn(
-    <SelectFieldWrapper {...defaultProps} {...props}>
-      {item => (
-        <Item key={item.name} data-id={item.name}>
-          {item.name}
-        </Item>
-      )}
-    </SelectFieldWrapper>,
-  );
+const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
+  <SelectFieldWrapper {...defaultProps} {...props}>
+    {item => (
+      <Item key={item.name} data-id={item.name}>
+        {item.name}
+      </Item>
+    )}
+  </SelectFieldWrapper>,
+);
 
 const onSelectionChange = jest.fn();
 

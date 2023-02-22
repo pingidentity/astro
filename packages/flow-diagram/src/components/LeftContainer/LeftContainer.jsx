@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Box } from '@pingux/astro';
 import { leftContainer } from './LeftContainer.styles';
 
-
 export default function LeftContainer({
     children,
     styles,

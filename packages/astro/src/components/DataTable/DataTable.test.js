@@ -1,17 +1,19 @@
 /* eslint-disable testing-library/no-node-access */
 import React from 'react';
 import { useAsyncList } from 'react-stately';
-import { render, screen, within, fireEvent, act } from '@testing-library/react';
-import { renderHook, act as actHooks } from '@testing-library/react-hooks';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { act as actHooks, renderHook } from '@testing-library/react-hooks';
 
-import DataTable from './DataTable';
 import {
+  DataTableBody,
   DataTableCell,
   DataTableColumn,
-  DataTableRow,
-  DataTableBody,
   DataTableHeader,
+  DataTableRow,
 } from '../../index';
+
+import DataTable from './DataTable';
+
 
 let offsetWidth;
 let offsetHeight;
@@ -59,8 +61,8 @@ const getCell = (view, text) => {
   // eslint-disable-next-line testing-library/prefer-screen-queries
   let el = view.getByText(text);
   while (
-    el &&
-    !/gridcell|rowheader|columnheader/.test(el.getAttribute('role'))
+    el
+    && !/gridcell|rowheader|columnheader/.test(el.getAttribute('role'))
   ) {
     el = el.parentElement;
   }
@@ -83,23 +85,22 @@ describe('Static DataTable', () => {
     'data-testid': testId,
   };
 
-  const staticDataTable = () =>
-    render(
-      <DataTable {...defaultProps}>
-        <DataTableHeader columns={columns}>
-          {column => (
-            <DataTableColumn align="center">{column.name}</DataTableColumn>
-          )}
-        </DataTableHeader>
-        <DataTableBody items={rows}>
-          {item => (
-            <DataTableRow>
-              {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
-            </DataTableRow>
-          )}
-        </DataTableBody>
-      </DataTable>,
-    );
+  const staticDataTable = () => render(
+    <DataTable {...defaultProps}>
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn align="center">{column.name}</DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>,
+  );
 
   test('renders DataTable component with static content', () => {
     staticDataTable();
@@ -453,13 +454,13 @@ describe('Sortable with useAsyncList', () => {
   const ITEMS2 = [{ id: 2, name: '1' }, { id: 1, name: '2' }];
 
   function getItems() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => resolve({ items: ITEMS }));
     });
   }
 
   function getItems2() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => resolve({ items: ITEMS2 }));
     });
   }
@@ -536,9 +537,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     list.items = list.items.sort((a, b) => {
       const first = a[list.sortDescriptor.column];
       const second = b[list.sortDescriptor.column];
-      let cmp =
-      // eslint-disable-next-line radix
-      (parseInt(first) || first) < (parseInt(second) || second)
+      let cmp = (parseInt(first) || first) < (parseInt(second) || second) // eslint-disable-line
         ? -1
         : 1;
       if (list.sortDescriptor.direction === 'descending') {
@@ -549,27 +548,26 @@ describe('Sortable DataTable with useAsyncList', () => {
     return list;
   }
 
-  const sortableDataTable = ({ result }) =>
-    render(
-      <DataTable {...defaultProps}>
-        <DataTableHeader columns={columns}>
-          {column => (
-            <DataTableColumn align="center" allowsSorting>
-              {column.name}
-            </DataTableColumn>
-          )}
-        </DataTableHeader>
-        <DataTableBody items={result.current.items}>
-          {item => (
-            <DataTableRow>
-              {columnKey => (
-                <DataTableCell>{item[columnKey]}</DataTableCell>
-              )}
-            </DataTableRow>
-          )}
-        </DataTableBody>
-      </DataTable>,
-    );
+  const sortableDataTable = ({ result }) => render(
+    <DataTable {...defaultProps}>
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn align="center" allowsSorting>
+            {column.name}
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={result.current.items}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell>{item[columnKey]}</DataTableCell>
+            )}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>,
+  );
 
   test('sort by country column A => Z', async () => {
     const { result } = renderHook(() => useAsyncList({
@@ -684,32 +682,30 @@ describe('Sortable DataTable with useAsyncList', () => {
     'data-testid': testId,
   };
 
-
-  const sortableDataTable = ({ result }) =>
-    render(
-      <DataTable
-        {...defaultProps}
-        sortDescriptor={result.current.sortDescriptor.direction}
-        onSortChange={result.current.sort}
-      >
-        <DataTableHeader columns={columns}>
-          {column => (
-            <DataTableColumn align="center" allowsSorting>
-              {column.name}
-            </DataTableColumn>
+  const sortableDataTable = ({ result }) => render(
+    <DataTable
+      {...defaultProps}
+      sortDescriptor={result.current.sortDescriptor.direction}
+      onSortChange={result.current.sort}
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn align="center" allowsSorting>
+            {column.name}
+          </DataTableColumn>
         )}
-        </DataTableHeader>
-        <DataTableBody items={result.current.items}>
-          {item => (
-            <DataTableRow>
-              {columnKey => (
-                <DataTableCell>{item[columnKey]}</DataTableCell>
+      </DataTableHeader>
+      <DataTableBody items={result.current.items}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell>{item[columnKey]}</DataTableCell>
             )}
-            </DataTableRow>
+          </DataTableRow>
         )}
-        </DataTableBody>
-      </DataTable>,
-    );
+      </DataTableBody>
+    </DataTable>,
+  );
 
   test('click on column header should sort column A => Z', async () => {
     const { result } = renderHook(() => useAsyncList({
@@ -891,19 +887,18 @@ describe('Sortable DataTable with useAsyncList', () => {
 });
 
 describe('Empty DataTable', () => {
-  const staticDataTable = () =>
-    render(
-      <DataTable aria-label="Table">
-        <DataTableHeader columns={columns}>
-          {column => (
-            <DataTableColumn align="center">{column.name}</DataTableColumn>
-          )}
-        </DataTableHeader>
-        <DataTableBody>
-          {[]}
-        </DataTableBody>
-      </DataTable>,
-    );
+  const staticDataTable = () => render(
+    <DataTable aria-label="Table">
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn align="center">{column.name}</DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody>
+        {[]}
+      </DataTableBody>
+    </DataTable>,
+  );
 
   it('should display header row only when there are no items', () => {
     staticDataTable();

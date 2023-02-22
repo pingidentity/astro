@@ -1,25 +1,26 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
 import Close from 'mdi-react/CloseIcon';
 import CreateIcon from 'mdi-react/CreateIcon';
 import DotsVertical from 'mdi-react/DotsVerticalIcon';
+
 import { useOverlayPanelState } from '../hooks';
-import { pingImg } from '../utils/devUtils/constants/images';
 import {
   Avatar,
   Box,
   Icon,
   IconButton,
   ListItem,
-  OverlayProvider,
   OverlayPanel,
-  Separator,
+  OverlayProvider,
   SearchField,
+  Separator,
   SwitchField,
   Tab,
   Tabs,
   Text,
 } from '../index';
+import { pingImg } from '../utils/devUtils/constants/images';
 
 export default {
   title: 'Design Patterns/List And Panel',
@@ -270,9 +271,8 @@ export const Default = () => {
                 <>
                   <Box isRow sx={sx.listItemBoxStyle}>
                     {person.hasIcon
-                    ? <Icon icon={person.avatar} sx={sx.iconStyle} size={24} />
-                    : <Avatar sx={sx.avatarStyle} src={person.avatar} />
-                    }
+                      ? <Icon icon={person.avatar} sx={sx.iconStyle} size={24} />
+                      : <Avatar sx={sx.avatarStyle} src={person.avatar} />}
                     <Box>
                       <Text variant="itemTitle">{person.fullname}</Text>
                       <Text sx={sx.subtitleTextStyle} variant="itemSubtitle">
@@ -321,9 +321,8 @@ export const Default = () => {
                 >
                   <Box isRow>
                     {selected.hasIcon
-                    ? <Icon icon={selected.avatar} sx={sx.iconStyle} size={24} />
-                    : <Avatar sx={sx.avatarStyle} src={selected.avatar} />
-                    }
+                      ? <Icon icon={selected.avatar} sx={sx.iconStyle} size={24} />
+                      : <Avatar sx={sx.avatarStyle} src={selected.avatar} />}
                     <Box>
                       <Text variant="itemTitle">{selected.fullname}</Text>
                       <Text sx={sx.subtitleTextStyle} variant="itemSubtitle">

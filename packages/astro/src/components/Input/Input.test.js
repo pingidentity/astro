@@ -1,8 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Input from '.';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import Input from '.';
 
 const testId = 'test-input';
 const defaultProps = {

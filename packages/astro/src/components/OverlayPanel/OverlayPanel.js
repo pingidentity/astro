@@ -1,9 +1,9 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { FocusScope } from 'react-aria';
+import PropTypes from 'prop-types';
 
-import { Box } from '../../';
-import { useStatusClasses, useOverlayPanelState } from '../../hooks';
+import { Box } from '../..';
+import { useOverlayPanelState, useStatusClasses } from '../../hooks';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
 /**
@@ -34,7 +34,7 @@ const OverlayPanel = forwardRef((props, ref) => {
 
   const { classNames } = useStatusClasses(className, { isOpen, [`is-${props?.sx?.width ? 'custom' : size}`]: size });
 
-  const handleClose = (e) => {
+  const handleClose = e => {
     e.stopPropagation();
     if (e.key === 'Escape') {
       onClose(state, triggerRef, onCloseProp);
@@ -43,7 +43,7 @@ const OverlayPanel = forwardRef((props, ref) => {
 
   return (
     <FocusScope autoFocus>
-      <Box variant="overlayPanel.container" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose} >
+      <Box variant="overlayPanel.container" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose}>
         <Box
           variant="overlayPanel.body"
           className={classNames}

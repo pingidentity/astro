@@ -18,21 +18,20 @@ export default function usePalette({
     const initPalette = () => {
         const $ = go.GraphObject.make;
 
-        const paletteObject =
-            $(go.Palette,
-                {
-                    'animationManager.isInitial': false,
-                    layout: $(go.GridLayout,
-                    ),
-                    maxSelectionCount: 1,
-                    model: $(go.GraphLinksModel,
-                        {
-                            linkKeyProperty: 'key',
-                            makeUniqueKeyFunction: generateKey,
-                            makeUniqueLinkKeyFunction: generateKey,
-                        }),
-                },
-            );
+        const paletteObject = $(go.Palette,
+            {
+                'animationManager.isInitial': false,
+                layout: $(go.GridLayout,
+                ),
+                maxSelectionCount: 1,
+                model: $(go.GraphLinksModel,
+                    {
+                        linkKeyProperty: 'key',
+                        makeUniqueKeyFunction: generateKey,
+                        makeUniqueLinkKeyFunction: generateKey,
+                    }),
+            },
+        );
         setPalette(paletteObject);
 
         nodeTemplates.forEach(([name, template]) => {

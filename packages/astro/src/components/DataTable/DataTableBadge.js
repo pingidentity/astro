@@ -1,20 +1,20 @@
 /* eslint-disable no-nested-ternary */
 import React, { forwardRef } from 'react';
-import AlertIcon from 'mdi-react/AlertIcon';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
+import AlertIcon from 'mdi-react/AlertIcon';
 import CheckIcon from 'mdi-react/CheckIcon';
 import PropTypes from 'prop-types';
+
 import { Badge, Icon } from '../../index';
 
 const DataTableBadge = forwardRef(({ cell }, ref) => {
-  const color =
-    (cell === 'Pending')
-      ? 'line.light'
-      : (cell === 'Failed')
-        ? 'warning.bright'
-        : (cell === 'Rejected')
-          ? 'critical.bright'
-          : 'success.dark';
+  const color = (cell === 'Pending')
+    ? 'line.light'
+    : (cell === 'Failed')
+      ? 'warning.bright'
+      : (cell === 'Rejected')
+        ? 'critical.bright'
+        : 'success.dark';
 
   return (
     <Badge
@@ -37,10 +37,10 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
             cell === 'Approved'
               ? CheckIcon
               : cell === 'Rejected'
-              ? AlertCircleIcon
-              : cell === 'Failed'
-              ? AlertIcon
-              : null
+                ? AlertCircleIcon
+                : cell === 'Failed'
+                  ? AlertIcon
+                  : null
           }
           mr="xs"
           size="14px"

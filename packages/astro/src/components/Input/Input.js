@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
-import { Input as ThemeUIInput } from 'theme-ui';
 import PropTypes from 'prop-types';
+import { Input as ThemeUIInput } from 'theme-ui';
+
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 /**
  * Base input component.

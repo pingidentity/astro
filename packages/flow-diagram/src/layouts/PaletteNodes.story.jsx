@@ -17,7 +17,7 @@ import usePalette from '../hooks/usePalette';
  * Node object defines how the node will appear when dropped onto the canvas.
  */
 
-export const PaletteNode = () => {
+export function PaletteNode() {
     const { paletteProps } = usePalette({
         groupTemplates: [
             ['', paletteGroupTemplate()],
@@ -53,12 +53,11 @@ export const PaletteNode = () => {
             </PaletteWrapper>
         </LeftContainer>
     );
-};
+}
 
 PaletteNode.defaultProps = {
     isGroup: false,
 };
-
 
 PaletteNode.propTypes = {
     /** Color of node being dropped onto palette (only applies to category: 'step'). */

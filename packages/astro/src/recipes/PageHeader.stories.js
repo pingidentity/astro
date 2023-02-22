@@ -1,6 +1,7 @@
 import React from 'react';
 import PlusIcon from 'mdi-react/PlusIcon';
-import { Box, Button, IconButton, Icon, Text } from '../index';
+
+import { Box, Button, Icon, IconButton, Text } from '../index';
 
 export default {
   title: 'Recipes/Page Header',
@@ -10,7 +11,7 @@ export const Default = () => {
   const description = 'The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page.';
 
   return (
-    <Box >
+    <Box>
       <Box>
         <Box
           align="center"
@@ -22,7 +23,7 @@ export const Default = () => {
           <Text variant="title" fontWeight={3}>
             {heading}
           </Text>
-          <Button variant="inlinePrimary" ml="sm" >
+          <Button variant="inlinePrimary" ml="sm">
             <Icon
               icon={PlusIcon}
               color="white"
@@ -49,7 +50,7 @@ export const Default = () => {
           <Text variant="title" fontWeight={3}>
             {heading}
           </Text>
-          <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted" >
+          <IconButton aria-label="icon button" ml="sm" mt="3px" variant="inverted">
             <Icon icon={PlusIcon} color="white" size="xs" />
           </IconButton>
         </Box>

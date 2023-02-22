@@ -1,13 +1,13 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
 import { announce } from '@react-aria/live-announcer';
+import PropTypes from 'prop-types';
 
+import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 import { Box, Tooltip, TooltipTrigger } from '../../index';
 
 import CopyButton from './CopyButton';
-import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 
 const TooltipWrapper = ({ children, tooltip, ...others }) => {
   return (

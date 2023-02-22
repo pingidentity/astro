@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text } from '@pingux/astro';
 import Markdown from '../../Markdown';
 
-const Error = (props) => {
+const Error = props => {
   const {
     error,
     hasMarkdown,

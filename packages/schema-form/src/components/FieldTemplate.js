@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '@pingux/astro';
 
 /* istanbul ignore next */
-const FieldTemplate = (props) => {
+const FieldTemplate = props => {
   const {
     children,
     hidden,

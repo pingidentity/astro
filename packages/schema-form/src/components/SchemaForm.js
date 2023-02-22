@@ -15,7 +15,7 @@ import SubmitButton from './SubmitButton';
 import SuccessMessage from './SuccessMessage';
 import endUserTheme from '../../../../shared/themes/end-user/endUserTheme';
 
-const SchemaForm = (props) => {
+const SchemaForm = props => {
   const {
     children,
     extraErrors: formExtraErrors,

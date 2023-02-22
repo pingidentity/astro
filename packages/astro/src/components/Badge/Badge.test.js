@@ -1,9 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Earth from 'mdi-react/EarthIcon';
-import Badge from './Badge';
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
+
+import { Badge, Button, Icon } from '../..';
 import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-separator';

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { Box, Icon, Text } from '../../index';
+import PropTypes from 'prop-types';
+
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useStatusClasses } from '../../hooks';
+import { Box, Icon, Text } from '../../index';
 
-const NavBarItemHeader = (props) => {
+const NavBarItemHeader = props => {
   const { item } = props;
   const { icon, key, className, heading } = item;
 
@@ -34,7 +35,7 @@ const NavBarItemHeader = (props) => {
   const color = childSelected && !isExpanded ? 'white' : 'neutral.95';
 
   return (
-    <Box variant="navBar.itemHeaderContainer" className={classNames} isRow data-testid={heading} >
+    <Box variant="navBar.itemHeaderContainer" className={classNames} isRow data-testid={heading}>
       {icon && (
         <Icon
           icon={icon}
@@ -57,9 +58,9 @@ const NavBarItemHeader = (props) => {
           icon={isExpanded ? MenuUp : MenuDown}
           size="sm"
           sx={{
-              color,
-              fill: color,
-            }}
+            color,
+            fill: color,
+          }}
           aria-label={isExpanded ? 'Menu up' : 'Menu down'}
         />
       </Box>

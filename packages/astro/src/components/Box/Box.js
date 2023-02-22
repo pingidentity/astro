@@ -1,11 +1,12 @@
 import React, { forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { layout, flexbox, typography } from 'styled-system';
-import { Box as ThemeUIBox } from 'theme-ui';
 import { propType as stylePropType } from '@styled-system/prop-types';
 import { toNumber } from 'lodash';
-import { useStatusClasses, usePropWarning } from '../../hooks';
+import PropTypes from 'prop-types';
+import { flexbox, layout, typography } from 'styled-system';
+import { Box as ThemeUIBox } from 'theme-ui';
+
+import { usePropWarning, useStatusClasses } from '../../hooks';
 
 const ExtendedBox = styled(ThemeUIBox)(layout, flexbox, typography);
 

@@ -4,7 +4,7 @@ import { SelectField, Item } from '@pingux/astro';
 import _ from 'lodash';
 
 const Dropdown = ({ options, onChange, ...props }) => {
-  const items = options.map((option) => (
+  const items = options.map(option => (
     <Item key={option.value}>{option.label}</Item>
   ));
 

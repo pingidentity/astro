@@ -6,12 +6,12 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
+import { mergeProps, useBreadcrumbItem } from 'react-aria';
 import { omit } from 'lodash/object';
 import PropTypes from 'prop-types';
-import { mergeProps, useBreadcrumbItem } from 'react-aria';
 
-import { usePropWarning } from '../../hooks/';
-import { Button, IconButton, Text, Link } from '../../index';
+import { usePropWarning } from '../../hooks';
+import { Button, IconButton, Link, Text } from '../../index';
 
 const BreadcrumbItem = forwardRef((props, ref) => {
   const {

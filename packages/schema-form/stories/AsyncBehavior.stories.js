@@ -125,7 +125,7 @@ export const customSubmit = () => {
 
   const handleSubmit = async ({ formData }, _event, onServerError, onServerSuccess) => {
     // Simulate network request
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     if (formData && formData.test && formData.test === 'abc') {
       onServerSuccess();

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+
 import ScrollBox from './ScrollBox';
 
 const testId = 'scrollBoxTestId';

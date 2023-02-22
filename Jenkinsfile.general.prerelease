@@ -144,7 +144,6 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            yarn --frozen-lockfile
             lerna run demo --scope ui-library
             lerna run backstop-ci
           """

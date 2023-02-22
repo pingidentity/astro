@@ -7,7 +7,6 @@ export default function Connections({ links, panels }) {
         const container = document.getElementById(panel);
         const element = document.getElementById(elem);
 
-
         if (element && container && container.contains(element)) {
             const containerHeader = container.firstElementChild;
             const headerPosition = containerHeader.getBoundingClientRect();
@@ -15,9 +14,9 @@ export default function Connections({ links, panels }) {
             const containerPosition = container.getBoundingClientRect();
 
             if (
-                elementPosition.top >= 0 &&
-                elementPosition.top >= headerPosition.bottom &&
-                elementPosition.bottom <= containerPosition.bottom
+                elementPosition.top >= 0
+                && elementPosition.top >= headerPosition.bottom
+                && elementPosition.bottom <= containerPosition.bottom
             ) {
                 return true;
             }
@@ -29,8 +28,8 @@ export default function Connections({ links, panels }) {
         const visibleToLinks = [];
         const visibleFromLinks = [];
 
-        panels.forEach((panel) => {
-            links.forEach((link) => {
+        panels.forEach(panel => {
+            links.forEach(link => {
                 if (checkInView(panel, link.from)) {
                     visibleFromLinks.push(link);
                 }

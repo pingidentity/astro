@@ -1,11 +1,13 @@
 import React from 'react';
-import Table from './Table';
+
+import { Text } from '../../index';
 import TableBody from '../TableBody';
-import TableRow from '../TableRow';
+import TableCaption from '../TableCaption';
 import TableCell from '../TableCell';
 import TableHead from '../TableHead';
-import TableCaption from '../TableCaption';
-import { Text } from '../../index';
+import TableRow from '../TableRow';
+
+import Table from './Table';
 
 export default {
   title: 'Components/Table',

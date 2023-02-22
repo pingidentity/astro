@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AstroComponents } from '../utils/astro';
 
-const Errors = (props) => {
+const Errors = props => {
   const { errors, hasMarkdown } = props;
   const Error = AstroComponents.error;
 
   if (errors && errors.length) {
-    return errors.map((err) => (
+    return errors.map(err => (
       <Error key={err} error={err} hasMarkdown={hasMarkdown} />
     ));
   }

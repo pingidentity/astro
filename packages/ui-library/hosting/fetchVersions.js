@@ -1,8 +1,4 @@
 import fetch from "isomorphic-fetch";
-// isomorphic-fetch need a Promise polyfill for older browsers.
-// Promise use inside of fetch, fetch should go with Promise to avoid page crashing in IE.
-import "es6-promise"; // eslint-disable-lint;
-
 
 export const versionToNumber = version => {
     const numbers = version.replace("-SNAPSHOT", "").split(".").map(string => string * 1); // parseInt didn't work

@@ -1,12 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import CalendarIcon from 'mdi-react/CalendarIcon';
 import moment from 'moment';
-import { Box, Icon, IconButton, TextField, useOverlayPosition, useOverlayTrigger, useOverlayTriggerState } from '../index';
-import statuses from '../utils/devUtils/constants/statuses';
-import PopoverContainer from '../components/PopoverContainer';
+
 import { text } from '../components/Text/Text.styles';
+import {
+  Box,
+  Icon,
+  IconButton,
+  PopoverContainer,
+  TextField,
+  useOverlayPosition,
+  useOverlayTrigger,
+  useOverlayTriggerState,
+} from '../index';
+import statuses from '../utils/devUtils/constants/statuses';
+
+import 'react-calendar/dist/Calendar.css';
 
 export default {
   title: 'Recipes/Date Picker',
@@ -116,14 +126,14 @@ export const Default = () => {
     }
   }, []);
 
-  const handleCalendarChange = useCallback((newDate) => {
+  const handleCalendarChange = useCallback(newDate => {
     setDate(moment(newDate));
     setInputValue(moment(newDate).format(dateFormat));
     setError(false);
   }, []);
 
   return (
-    <Box sx={sx.container} >
+    <Box sx={sx.container}>
       <TextField
         slots={{
           inContainer: (

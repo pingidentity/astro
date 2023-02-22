@@ -17,7 +17,7 @@ import {
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
-export const Branch = () => {
+export function Branch() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         { 'key': 'branch', 'category': 'branch', 'group': 'group', 'text': 'Branch' },
@@ -40,9 +40,9 @@ export const Branch = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Failure = () => {
+export function Failure() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         { 'key': 'failure', 'category': 'failure', 'group': 'group', 'text': 'Failure' },
@@ -65,9 +65,9 @@ export const Failure = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Group = () => {
+export function Group() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         {
@@ -110,9 +110,9 @@ export const Group = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Outlet = () => {
+export function Outlet() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         { 'key': 'user-login-success', 'category': 'outlet', color: '#D5DCF3', 'text': 'On Success', width: 100, 'group': 'group' },
@@ -135,9 +135,9 @@ export const Outlet = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Start = () => {
+export function Start() {
     const diagramNodes = [{ 'key': 'START', 'category': 'START', 'loc': '0 60', 'id': 'START', 'text': 'Start' }];
 
     const { diagramProps } = useDiagram({
@@ -157,9 +157,9 @@ export const Start = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Step = () => {
+export function Step() {
     const onStepClick = (e, obj) => {
         console.log('clicked');
     };
@@ -196,9 +196,9 @@ export const Step = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
-export const Success = () => {
+export function Success() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         { 'key': 'success', 'category': 'success', 'group': 'group', 'text': 'Complete' },
@@ -221,7 +221,7 @@ export const Success = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
 Branch.defaultProps = {
     canLinkFrom: true,

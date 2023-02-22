@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import TableCell from './TableCell';
+import axeTest from '../../utils/testUtils/testAxe';
 import Table from '../Table';
 import TableBody from '../TableBody';
 import TableRow from '../TableRow';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import TableCell from './TableCell';
 
 const testId = 'test-cell';
 

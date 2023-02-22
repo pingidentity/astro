@@ -3,11 +3,11 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
-import CameraAltIcon from 'mdi-react/CameraAltIcon';
-import ImageFilterHdrIcon from 'mdi-react/ImageFilterHdrIcon';
 import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover } from '@react-aria/interactions';
+import CameraAltIcon from 'mdi-react/CameraAltIcon';
+import ImageFilterHdrIcon from 'mdi-react/ImageFilterHdrIcon';
+import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Image } from '../../index';
 import Loader from '../Loader';

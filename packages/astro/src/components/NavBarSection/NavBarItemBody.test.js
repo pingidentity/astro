@@ -1,9 +1,9 @@
 import React from 'react';
 
-import NavBarItemBody from './NavBarItemBody';
-
-import { Text } from '../../';
+import { Text } from '../..';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+
+import NavBarItemBody from './NavBarItemBody';
 
 
 const getComponent = item => render((

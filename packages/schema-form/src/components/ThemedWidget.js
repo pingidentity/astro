@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { FIELD_TYPES } from '../utils/constants';
 import { AstroComponents, toAstroInputProps } from '../utils/astro';
 
-const ThemedWidget = (componentType) => {
-  const Widget = (props) => {
+const ThemedWidget = componentType => {
+  const Widget = props => {
     const {
       schema: { type },
       options: { emptyValue },
@@ -24,7 +24,7 @@ const ThemedWidget = (componentType) => {
     };
     const { onChange: onChangeHandler } = props;
 
-    const onChange = (event) => {
+    const onChange = event => {
       const eventProperty = type === FIELD_TYPES.BOOLEAN ? 'checked' : 'value';
       let value = _.get(event, `target.${eventProperty}`, event);
       if (value === '') { // see https://github.com/rjsf-team/react-jsonschema-form/issues/1052#issuecomment-431495633

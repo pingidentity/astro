@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import TextArea from '.';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import TextArea from '.';
 
 const testId = 'textAreaField';
 const defaultProps = {

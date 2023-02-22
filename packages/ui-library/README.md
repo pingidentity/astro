@@ -10,14 +10,12 @@ This is what you need to get started building.
 
 ### Dependencies
 
-* [Node.js](https://nodejs.org/en/download/releases/) v8.12.0
+* [Node.js](https://nodejs.org/en/download/releases/) v16+
 * Fix the npm permissions, as described [here](https://docs.npmjs.com/getting-started/fixing-npm-permissions), under Option 1
-* ESLint v5.15.3 (only if you have ESLint installed globally): `$ npm install -g eslint@5.15.3`
-* Jest CLI v24.5.0 (only if you have Jest CLI installed globally): `$ npm install -g jest-cli@24.5.0`
 
 ### Running
 
-Run `npm install && npm run start` and open http://localhost:8080
+Run `npm run start` and open http://localhost:8080
 in the browser.
 
 ## Distribution

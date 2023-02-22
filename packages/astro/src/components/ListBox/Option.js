@@ -1,13 +1,14 @@
-import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
+import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import { useOption } from '@react-aria/listbox';
 import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 import PropTypes from 'prop-types';
-import { useOption } from '@react-aria/listbox';
 
 import { useStatusClasses } from '../../hooks';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box';
 import Icon from '../Icon';
+
 import { ListBoxContext } from './ListBoxContext';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 
 const Option = forwardRef((props, ref) => {
   const {

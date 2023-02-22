@@ -1,17 +1,16 @@
 import React from 'react';
+import { Item, useAsyncList } from 'react-stately';
+import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
 import CreateIcon from 'mdi-react/CreateIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
-import { Item, useAsyncList } from 'react-stately';
-import { action } from '@storybook/addon-actions';
+
+import { Box, Icon, IconButton, Text } from '../..';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 import ListView from '.';
-import Box from '../Box/Box';
-import Icon from '../Icon';
-import IconButton from '../IconButton';
-import Text from '../Text';
-import loadingStates from '../../utils/devUtils/constants/loadingStates';
+
 
 export default {
   title: 'Components/ListView',
@@ -290,16 +289,16 @@ const actions = {
 };
 
 const ListElement = ({ item }) => (
-  <Box isRow >
-    <Box isRow mr="auto" alignSelf="center" >
+  <Box isRow>
+    <Box isRow mr="auto" alignSelf="center">
       <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size="md" />
       <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
     </Box>
-    <Box isRow alignSelf="center" gap="sm" >
-      <IconButton aria-label="create-icon" >
+    <Box isRow alignSelf="center" gap="sm">
+      <IconButton aria-label="create-icon">
         <Icon icon={CreateIcon} size="sm" />
       </IconButton>
-      <IconButton aria-label="actions-icon" >
+      <IconButton aria-label="actions-icon">
         <Icon icon={MoreVertIcon} size="sm" />
       </IconButton>
     </Box>
@@ -307,19 +306,19 @@ const ListElement = ({ item }) => (
 );
 
 export const Default = ({ ...args }) => (
-  <ListView {...props} {...args} items={items} >
+  <ListView {...props} {...args} items={items}>
     {item => (
       <Item key={item.name} textValue={item.name} data-id={item.key}>
-        <Box isRow >
-          <Box isRow mr="auto" alignSelf="center" >
+        <Box isRow>
+          <Box isRow mr="auto" alignSelf="center">
             <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size="md" />
             <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
           </Box>
-          <Box isRow alignSelf="center" gap="sm" >
-            <IconButton aria-label="create-icon" >
+          <Box isRow alignSelf="center" gap="sm">
+            <IconButton aria-label="create-icon">
               <Icon icon={CreateIcon} size="sm" />
             </IconButton>
-            <IconButton aria-label="actions-icon" size="sm" >
+            <IconButton aria-label="actions-icon" size="sm">
               <Icon icon={MoreVertIcon} size="sm" />
             </IconButton>
           </Box>
@@ -329,14 +328,17 @@ export const Default = ({ ...args }) => (
   </ListView>
 );
 
-export const InfiniteLoadingList = (args) => {
+export const InfiniteLoadingList = args => {
   const getMockData = async (signal, cursor) => {
     let pageNumber = 1;
     if (cursor) {
       pageNumber = Number(cursor.substr(cursor.indexOf('-') + 1));
     }
     // With this we will emulate load even with mocked API, except for Chromatic runs
-    if (!args.useMockData) await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+    if (!args.useMockData) {
+      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+    }
+
     return {
       items: animals.slice((pageNumber - 1) * 10, pageNumber * 10),
       cursor: `mock-${pageNumber + 1}`,
@@ -356,8 +358,7 @@ export const InfiniteLoadingList = (args) => {
         fetch(cursor || `https://swapi.dev/api/people/?search=${filterText}`, {
           signal,
         }),
-        new Promise((_resolve, reject) =>
-          setTimeout(() => reject(new Error('timeout')), 3000),
+        new Promise((_resolve, reject) => setTimeout(() => reject(new Error('timeout')), 3000),
         ),
       ]);
       const json = await res.json();

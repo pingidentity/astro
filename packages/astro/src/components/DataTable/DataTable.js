@@ -1,7 +1,4 @@
 import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
-import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import MenuUpIcon from 'mdi-react/MenuUpIcon';
-import PropTypes from 'prop-types';
 import {
   FocusRing,
   mergeProps,
@@ -17,14 +14,18 @@ import {
 import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
 import { TableLayout } from '@react-stately/layout';
 import { useTableColumnResizeState, useTableState } from '@react-stately/table';
+import MenuDownIcon from 'mdi-react/MenuDownIcon';
+import MenuUpIcon from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
 
 import {
   DataTableContext,
   useDataTableContext,
 } from '../../context/DataTableContext';
-import DataTableVirtualizer from './DataTableVirtualizer';
 import { useStatusClasses } from '../../hooks';
 import { Box, Icon, Loader } from '../../index';
+
+import DataTableVirtualizer from './DataTableVirtualizer';
 
 const DEFAULT_HEADER_HEIGHT = {
   medium: 34,
@@ -97,19 +98,18 @@ const DataTable = forwardRef((props, ref) => {
 
   const density = props.density || 'regular';
   const layout = useMemo(
-    () =>
-      new TableLayout({
-        // If props.rowHeight is auto, then use estimated heights based on scale,
-        // otherwise use fixed heights.
-        rowHeight:
+    () => new TableLayout({
+      // If props.rowHeight is auto, then use estimated heights based on scale,
+      // otherwise use fixed heights.
+      rowHeight:
           props.overflowMode === 'wrap' ? null : ROW_HEIGHTS[density][scale],
-        estimatedRowHeight:
+      estimatedRowHeight:
           props.overflowMode === 'wrap' ? ROW_HEIGHTS[density][scale] : null,
-        headingHeight:
+      headingHeight:
           props.overflowMode === 'wrap' ? null : DEFAULT_HEADER_HEIGHT[scale],
-        estimatedHeadingHeight:
+      estimatedHeadingHeight:
           props.overflowMode === 'wrap' ? DEFAULT_HEADER_HEIGHT[scale] : null,
-      }),
+    }),
     [props.overflowMode, scale, density],
   );
   layout.collection = state.collection;
@@ -215,10 +215,10 @@ const DataTable = forwardRef((props, ref) => {
   };
 
   const viewport = useRef({ x: 0, y: 0, width: 0, height: 0 });
-  const onVisibleRectChange = useCallback((e) => {
+  const onVisibleRectChange = useCallback(e => {
     if (
-      viewport.current.width === e.width &&
-      viewport.current.height === e.height
+      viewport.current.width === e.width
+      && viewport.current.height === e.height
     ) {
       return;
     }
@@ -313,13 +313,12 @@ function TableColumnHeader(props) {
   );
 
   const columnProps = column.props;
-  const arrowIcon =
-    state.sortDescriptor?.direction === 'ascending' &&
-    column.key === state.sortDescriptor?.column ? (
+  const arrowIcon = state.sortDescriptor?.direction === 'ascending'
+    && column.key === state.sortDescriptor?.column ? (
       <Icon icon={MenuUpIcon} />
-      ) : (
-        <Icon icon={MenuDownIcon} color="active" />
-      );
+    ) : (
+      <Icon icon={MenuDownIcon} color="active" />
+    );
   const allProps = [columnHeaderProps];
 
   const { classNames } = useStatusClasses({
@@ -368,8 +367,10 @@ function TableRow({ item, children, hasActions, ...otherProps }) {
     ref,
   );
 
-  const { isFocusVisible: isFocusVisibleWithin, focusProps: focusWithinProps } =
-    useFocusRing({ within: true });
+  const {
+    isFocusVisible: isFocusVisibleWithin,
+    focusProps: focusWithinProps,
+  } = useFocusRing({ within: true });
   const { isFocusVisible, focusProps } = useFocusRing();
   const props = mergeProps(rowProps, otherProps, focusWithinProps, focusProps);
 

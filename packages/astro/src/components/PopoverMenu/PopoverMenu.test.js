@@ -1,24 +1,23 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
+
 import {
   Button,
-  PopoverMenu,
-  Menu,
   Item,
+  Menu,
+  PopoverMenu,
 } from '../../index';
+import axeTest from '../../utils/testUtils/testAxe';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 const getComponent = (props = {}) => render((
-  <>
-    <PopoverMenu {...props}>
-      <Button>Mock Button</Button>
-      <Menu>
-        <Item key="a">A</Item>
-        <Item key="b">B</Item>
-      </Menu>
-    </PopoverMenu>
-  </>
+  <PopoverMenu {...props}>
+    <Button>Mock Button</Button>
+    <Menu>
+      <Item key="a">A</Item>
+      <Item key="b">B</Item>
+    </Menu>
+  </PopoverMenu>
 ));
 
 // Need to be added to each test file to test accessibility using axe.

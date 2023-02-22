@@ -28,7 +28,7 @@ import { Palette, PaletteWrapper } from '../components/Palette';
 import usePalette from '../hooks/usePalette';
 import OuterContainer from '../components/OuterContainer';
 
-const Demo = () => {
+function Demo() {
     const [selectedNode, setSelectedNode] = useState();
     const disabled = false;
 
@@ -84,14 +84,14 @@ const Demo = () => {
         return false;
     };
 
-    const onDelete = (node) => {
+    const onDelete = node => {
         const filterByKey = () => array => array.filter(item => item.key !== node.key);
         setDiagramNodes(filterByKey(diagramNodes));
         setDiagramLinks(diagramLinks.filter(diagramLink => diagramLink.to !== node.key
             && diagramLink.from !== node.key));
         setSelectedNode(null);
     };
-    const onLinkDelete = (link) => {
+    const onLinkDelete = link => {
         setDiagramLinks(diagramLinks.filter(diagramLink => diagramLink.key !== link.key));
     };
 
@@ -152,8 +152,8 @@ const Demo = () => {
             if (insertedNodeKeys) {
                 // Don't worry about other modified nodes, since these will just be
                 // location changes that GoJS is already tracking.
-                const addedNodes =
-                    modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
+                const addedNodes = modifiedNodeData
+                    .filter(node => insertedNodeKeys.includes(node.key));
 
                 let groupKey;
                 setDiagramNodes([
@@ -181,7 +181,7 @@ const Demo = () => {
                                 }] : [],
                             ];
                             return returnNode;
-                        } else if (node.group) {
+                        } if (node.group) {
                             const returnNode = {
                                 ...modifiedNode,
                                 key: `${groupKey}-step`,
@@ -190,12 +190,11 @@ const Demo = () => {
                             return returnNode;
                         }
 
-
                         return modifiedNode;
                     }),
                 ]);
 
-                const createLinkedNodes = (key) => {
+                const createLinkedNodes = key => {
                     return {
                         'from': `${key}-step`,
                         'to': `${key}-success`,
@@ -207,7 +206,7 @@ const Demo = () => {
                 if (droppedOntoLinkKey) {
                     let linkTo;
                     // Changing existing link to go to dropped node
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
                             return { from: link.from, to: `${groupKey}-step` };
@@ -231,7 +230,7 @@ const Demo = () => {
                     let linkTo;
                     let linkedFrom = false;
                     // Changing link after node dropped onto to go to dropped node
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.from === droppedOntoNodeKey) {
                             linkedFrom = true;
                             linkTo = link.to;
@@ -272,7 +271,7 @@ const Demo = () => {
                         return;
                     }
                     let linkTo;
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
                             return { from: link.from, to: sortedNodeData[0].key };
@@ -284,13 +283,14 @@ const Demo = () => {
                         { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo },
                     ]);
                 } else if (droppedOntoNodeKey) {
-                    const linkData = diagramLinks.filter(link => link.from === droppedOntoNodeKey);
+                    const linkData = diagramLinks
+                        .filter(link => link.from === droppedOntoNodeKey);
                     if (linkData.from === selectedNode?.key) {
                         return;
                     }
                     let linkTo;
                     let linkedFrom = false;
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.from === droppedOntoNodeKey) {
                             linkedFrom = true;
                             linkTo = link.to;
@@ -300,12 +300,12 @@ const Demo = () => {
                     });
                     setDiagramLinks([
                         ...newLinks,
-                        linkedFrom ?
-                            {
+                        linkedFrom
+                            ? {
                                 from: sortedNodeData[sortedNodeData.length - 1].key,
                                 to: linkTo,
-                            } :
-                            {
+                            }
+                            : {
                                 from: droppedOntoNodeKey,
                                 to: sortedNodeData[0].key,
                             },
@@ -373,16 +373,16 @@ const Demo = () => {
                 'category': 'palette-group',
                 isGroup: true,
                 'text': 'Complete',
-                getIconSrc: (color = COLORS.GREEN) =>
-                    svgComponentToBase64(<Success fill={color} />),
+                getIconSrc:
+                    (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'finished',
                 'category': 'finished',
                 'text': 'Complete',
                 group: 'finished-group',
-                getIconSrc: (color = COLORS.GREEN) =>
-                    svgComponentToBase64(<Success fill={color} />),
+                getIconSrc:
+                    (color = COLORS.GREEN) => svgComponentToBase64(<Success fill={color} />),
             },
             {
                 'key': 'error-group',
@@ -421,15 +421,15 @@ const Demo = () => {
         setSelectedNode({ ...currentNode, [field]: id });
         setDiagramNodes(
             diagramNodes.map(
-                node => (node.key === selected.key ?
-                    { ...currentNode, [field]: id } :
-                    node
+                node => (node.key === selected.key
+                    ? { ...currentNode, [field]: id }
+                    : node
                 ),
             ),
         );
     };
 
-    const getPanelIcon = (category) => {
+    const getPanelIcon = category => {
         switch (category) {
             case 'finished':
                 return <Success height={20} fill={COLORS.GREEN} />;
@@ -487,26 +487,24 @@ const Demo = () => {
                             </Box>
                         </Box>
                     ) : (
-                        <React.Fragment>
-                            <Box
-                                isRow
-                                sx={{
-                                    justifyContent: 'center',
-                                    margin: '15px 0px 20px 0px',
-                                }}
-                            >
-                                <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
-                                    <Tab key="properties" title="Properties" />
-                                    <Tab key="toolbox" title="Toolbox">
-                                        <Box sx={{ height: 300 }}>
-                                            <PaletteWrapper>
-                                                <Palette {...paletteProps} />
-                                            </PaletteWrapper>
-                                        </Box>
-                                    </Tab>
-                                </Tabs>
-                            </Box>
-                        </React.Fragment>
+                        <Box
+                            isRow
+                            sx={{
+                                justifyContent: 'center',
+                                margin: '15px 0px 20px 0px',
+                            }}
+                        >
+                            <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
+                                <Tab key="properties" title="Properties" />
+                                <Tab key="toolbox" title="Toolbox">
+                                    <Box sx={{ height: 300 }}>
+                                        <PaletteWrapper>
+                                            <Palette {...paletteProps} />
+                                        </PaletteWrapper>
+                                    </Box>
+                                </Tab>
+                            </Tabs>
+                        </Box>
                     )}
                 </LeftContainer>
                 <DiagramWrapper>
@@ -515,11 +513,11 @@ const Demo = () => {
             </Body>
         </OuterContainer>
     );
-};
+}
 
-export const Composed = () => (
-    <Demo />
-);
+export function Composed() {
+    return <Demo />;
+}
 
 export default {
     title: 'Basic Layout',

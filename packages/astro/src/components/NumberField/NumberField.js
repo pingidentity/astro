@@ -1,11 +1,11 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
-import omit from 'lodash/omit';
-import PropTypes from 'prop-types';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import MenuUp from 'mdi-react/MenuUpIcon';
 import { mergeProps, useNumberField } from 'react-aria';
 import { useNumberFieldState } from 'react-stately';
 import { useLocale } from '@react-aria/i18n';
+import omit from 'lodash/omit';
+import MenuDown from 'mdi-react/MenuDownIcon';
+import MenuUp from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -15,11 +15,11 @@ import {
   IconButton,
   Input,
   Label,
-} from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+} from '../..';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Number fields allow users to enter a number, and increment or
@@ -73,7 +73,7 @@ const NumberField = forwardRef((props, ref) => {
   // this needed to remove console warning in React 16
   // I believe once we update to 17 - we can remove this
   const onInputFocus = useCallback(
-    (e) => {
+    e => {
       e.persist();
       fieldControlInputProps.onFocus(e);
       inputProps.onFocus(e);
@@ -81,7 +81,7 @@ const NumberField = forwardRef((props, ref) => {
     [fieldControlInputProps, inputProps],
   );
   const onInputBlur = useCallback(
-    (e) => {
+    e => {
       e.persist();
       fieldControlInputProps.onBlur(e);
       inputProps.onBlur(e);
@@ -98,7 +98,7 @@ const NumberField = forwardRef((props, ref) => {
     [fieldControlInputProps, onInputBlur, onInputFocus],
   );
 
-  const onInputChange = (e) => {
+  const onInputChange = e => {
     const { minValue } = props;
     const trimmedInputValue = e.target.value.trim();
     const trimmedValueEvent = {

@@ -1,20 +1,20 @@
 import React, {
-  forwardRef,
   createContext,
+  forwardRef,
   useContext,
-  useRef,
   useImperativeHandle,
+  useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import { useRadio } from 'react-aria';
+import PropTypes from 'prop-types';
 
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import Box from '../Box';
-import Radio from '../Radio';
-import Label from '../Label';
-import FieldHelperText from '../FieldHelperText';
 import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import Box from '../Box';
+import FieldHelperText from '../FieldHelperText';
+import Label from '../Label';
+import Radio from '../Radio';
 
 export const RadioContext = createContext();
 
@@ -70,23 +70,28 @@ const RadioField = forwardRef((props, ref) => {
   return (
     <Box variant="forms.radio.outerContainer" {...fieldContainerProps}>
       <Label variant="forms.label.radio" {...fieldLabelProps}>
-        <Box {...fieldControlWrapperProps} >
+        <Box {...fieldControlWrapperProps}>
           <Radio ref={radioFieldRef} {...fieldControlInputProps} variant="forms.radio.base" />
         </Box>
         {label}
       </Label>
       {
-        helperText &&
+        helperText
+        && (
         <FieldHelperText status={status}>
           {helperText}
         </FieldHelperText>
+        )
       }
       {
-        isChecked &&
-        checkedContent &&
+        isChecked && (
+          checkedContent
+        && (
         <Box variant="forms.radio.checkedContent">
           {checkedContent}
         </Box>
+        )
+        )
       }
     </Box>
   );

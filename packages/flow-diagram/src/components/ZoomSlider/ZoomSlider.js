@@ -33,6 +33,7 @@ export default class ZoomSlider {
             // Set up the runtime code
             this.sliderListenerSetup();
         };
+
         /**
          * @ignore
          * Create the necessary divs for the slider and add the slider as a sibling of the diagram.
@@ -83,6 +84,7 @@ export default class ZoomSlider {
                 }
             }
         };
+
         /**
          * @ignore
          * Add listeners to the buttons and range input.
@@ -114,6 +116,7 @@ export default class ZoomSlider {
             zoomRangeInput.oninput = valChanged;
             zoomRangeInput.onchange = valChanged;
         };
+
         /**
          * @ignore
          * Update the value of the slider input to match the diagram's scale.
@@ -128,6 +131,7 @@ export default class ZoomSlider {
             sliderText.innerHTML = `${(y1 * 100).toFixed(0)}%`;
             slider.value = Math.round(Math.log(y1 / A) / Math.log(B)).toString();
         };
+
         /**
          * @ignore
          * Update the diagram's scale to match the value of the slider input.
@@ -140,6 +144,7 @@ export default class ZoomSlider {
             const B = diagram.commandHandler.zoomFactor;
             diagram.scale = A * (B ** x);
         };
+
         /**
          * Remove the slider from the page.
          */

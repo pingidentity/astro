@@ -1,3 +1,4 @@
+const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const VERSION = require('./package.json').version;
 
@@ -27,4 +28,15 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('end-user.css'),
     ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.md', '.mdx'],
+        plugins: [
+            PnpWebpackPlugin,
+        ],
+    },
+    resolveLoader: {
+        plugins: [
+          PnpWebpackPlugin.moduleLoader(module),
+        ],
+    },
 };

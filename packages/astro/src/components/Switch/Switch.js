@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { VisuallyHidden } from 'react-aria';
+import PropTypes from 'prop-types';
 
 import Box from '../Box';
 

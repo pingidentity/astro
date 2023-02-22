@@ -87,7 +87,7 @@ export const makeCanvasLink = (from, to) => ({ from, to, key: `${from}-${to}-lin
 
 export const makeEditFlowDemo = ({
     diagramNodes: initialNodes, diagramLinks: initialLinks,
-}) => () => {
+}) => function () {
     const [selectedNode, setSelectedNode] = useState();
     const disabled = false;
 
@@ -147,8 +147,8 @@ export const makeEditFlowDemo = ({
             if (insertedNodeKeys) {
                 // Don't worry about other modified nodes, since these will just be
                 // location changes that GoJS is already tracking.
-                const addedNodes =
-                    modifiedNodeData.filter(node => insertedNodeKeys.includes(node.key));
+                const addedNodes = modifiedNodeData
+                    .filter(node => insertedNodeKeys.includes(node.key));
                 const newNodes = addedNodes.flatMap(({ category, key, ...node }) => {
                     const replacementKey = key;
                     const modifiedNode = {
@@ -171,10 +171,10 @@ export const makeEditFlowDemo = ({
                                 'text': outlet,
                             }))),
                         ];
-                    } else if (node.isGroup) {
+                    } if (node.isGroup) {
                         groupKey = replacementKey;
                         return modifiedNode;
-                    } else if (node.group) {
+                    } if (node.group) {
                         return {
                             ...modifiedNode,
                             key: `${groupKey}-step`,
@@ -201,7 +201,7 @@ export const makeEditFlowDemo = ({
                 let newLinks = [];
                 if (droppedOntoLinkKey) {
                     // Changing existing link to go to dropped node
-                    newLinks = diagramLinks.map((link) => {
+                    newLinks = diagramLinks.map(link => {
                         if (link.key === droppedOntoLinkKey) {
                             return { from: link.from, to: `${groupKey}-step` };
                         }
@@ -226,7 +226,7 @@ export const makeEditFlowDemo = ({
                 const sortedNodeData = modifiedNodeData.sort((a, b) => ((Number(a.loc.split(' ')) < Number(b.loc.split(' '))) ? 1 : -1));
                 if (droppedOntoLinkKey) {
                     let linkTo;
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.key === droppedOntoLinkKey) {
                             linkTo = link.to;
                             return { from: link.from, to: sortedNodeData[0].key };
@@ -240,7 +240,7 @@ export const makeEditFlowDemo = ({
                 } else if (droppedOntoNodeKey) {
                     let linkTo;
                     let linkedFrom = false;
-                    const newLinks = diagramLinks.map((link) => {
+                    const newLinks = diagramLinks.map(link => {
                         if (link.from === droppedOntoNodeKey) {
                             linkedFrom = true;
                             linkTo = link.to;
@@ -250,9 +250,9 @@ export const makeEditFlowDemo = ({
                     });
                     setDiagramLinks([
                         ...newLinks,
-                        linkedFrom ?
-                            { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo } :
-                            { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
+                        linkedFrom
+                            ? { from: sortedNodeData[sortedNodeData.length - 1].key, to: linkTo }
+                            : { from: droppedOntoNodeKey, to: sortedNodeData[0].key },
                     ]);
                 }
             }
@@ -350,11 +350,11 @@ export const makeEditFlowDemo = ({
     const updateStepId = (selected, id, field) => {
         const currentNode = diagramNodes.find(node => node.key === selected.key);
         setSelectedNode({ ...currentNode, [field]: id });
-        setDiagramNodes(diagramNodes.map(node => (node.key === selected.key ?
-            { ...currentNode, [field]: id } : node)));
+        setDiagramNodes(diagramNodes.map(node => (node.key === selected.key
+            ? { ...currentNode, [field]: id } : node)));
     };
 
-    const getPanelIcon = (category) => {
+    const getPanelIcon = category => {
         switch (category) {
             case 'finished':
                 return <Success height={20} fill={COLORS.GREEN} />;
@@ -412,26 +412,24 @@ export const makeEditFlowDemo = ({
                             </Box>
                         </Box>
                     ) : (
-                        <React.Fragment>
-                            <Box
-                                isRow
-                                sx={{
-                                    justifyContent: 'center',
-                                    margin: '15px 0px 20px 0px',
-                                }}
-                            >
-                                <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
-                                    <Tab key="properties" title="Properties" />
-                                    <Tab key="toolbox" title="Toolbox">
-                                        <Box sx={{ height: 400 }}>
-                                            <PaletteWrapper>
-                                                <Palette {...paletteProps} />
-                                            </PaletteWrapper>
-                                        </Box>
-                                    </Tab>
-                                </Tabs>
-                            </Box>
-                        </React.Fragment>
+                        <Box
+                            isRow
+                            sx={{
+                                justifyContent: 'center',
+                                margin: '15px 0px 20px 0px',
+                            }}
+                        >
+                            <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
+                                <Tab key="properties" title="Properties" />
+                                <Tab key="toolbox" title="Toolbox">
+                                    <Box sx={{ height: 400 }}>
+                                        <PaletteWrapper>
+                                            <Palette {...paletteProps} />
+                                        </PaletteWrapper>
+                                    </Box>
+                                </Tab>
+                            </Tabs>
+                        </Box>
                     )}
                 </LeftContainer>
                 <DiagramWrapper>

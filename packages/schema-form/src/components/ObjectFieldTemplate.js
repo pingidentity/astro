@@ -11,7 +11,7 @@ export const FLOAT_LABEL = {
 
 const UI_OPTIONS = 'ui:options';
 
-const ObjectFieldTemplate = (props) => {
+const ObjectFieldTemplate = props => {
   const {
     description,
     formContext: { extraErrors, theme },
@@ -26,7 +26,7 @@ const ObjectFieldTemplate = (props) => {
   // eslint-disable-next-line react/prop-types
   const formLevelErrors = extraErrors?._form?.__errors; // eslint-disable-line no-underscore-dangle
 
-  const fields = properties.map((el) => {
+  const fields = properties.map(el => {
     const { name, content } = el;
     const { formData } = content.props;
 

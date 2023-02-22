@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ListItem from './ListItem';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import ListItem from './ListItem';
 
 const testTitle = 'Test Title';
 const defaultProps = {

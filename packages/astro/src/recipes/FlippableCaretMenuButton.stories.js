@@ -1,17 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { useOverlayPosition } from 'react-aria';
+import { useLayoutEffect } from '@react-aria/utils';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { useOverlayPosition } from 'react-aria';
-import { useLayoutEffect } from '@react-aria/utils';
 
+import PopoverContainer from '../components/PopoverContainer';
 import {
-  Button,
   Box,
+  Button,
   Icon,
   IconButton,
 } from '../index';
-import PopoverContainer from '../components/PopoverContainer';
 
 export default {
   title: 'Recipes/Flippable Caret Menu Button',
@@ -72,7 +72,7 @@ export const Default = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleButton = (key) => {
+  const toggleButton = key => {
     const newState = selectedButtons;
     if (selectedButtons.includes(key)) {
       const index = newState.indexOf(key);
@@ -111,7 +111,7 @@ export const Default = () => {
         onPress={onChange}
         sx={sx.openButton}
       >
-        <Box isRow alignItems="center" >
+        <Box isRow alignItems="center">
           <Icon icon={isOpen ? MenuUp : MenuDown} mr="sm" color="active" size={20} />
           Add a Form
         </Box>

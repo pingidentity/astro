@@ -1,6 +1,6 @@
-import { text } from '../Text/Text.styles';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { defaultFocus } from '../Button/Buttons.styles';
+import { text } from '../Text/Text.styles';
 
 // Styles for default input and variants go here.
 

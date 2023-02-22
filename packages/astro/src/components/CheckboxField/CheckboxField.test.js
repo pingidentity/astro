@@ -1,9 +1,11 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+import statuses from '../../utils/devUtils/constants/statuses';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import statuses from '../../utils/devUtils/constants/statuses';
-import CheckboxField from '../CheckboxField';
+
+import CheckboxField from '.';
 
 const testLabel = 'Test Label';
 const defaultProps = {

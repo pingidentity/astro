@@ -1,6 +1,8 @@
 import React from 'react';
-import { Box, Button, Card } from '../../index';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Box, Button, Card } from '../../index';
+
 import CardReadme from './Card.mdx';
 
 export default {
@@ -35,7 +37,7 @@ export const Default = args => (
   <Card {...args} />
 );
 
-export const CardRow = (args) => {
+export const CardRow = args => {
   const sx = {
     li: {
       display: 'inline',
@@ -48,14 +50,14 @@ export const CardRow = (args) => {
   };
 
   return (
-    <Box isRow gap="md" as="ul" pl="0px" >
-      <Box as="li" sx={sx.li} >
+    <Box isRow gap="md" as="ul" pl="0px">
+      <Box as="li" sx={sx.li}>
         <Card sx={sx.card} {...args} />
       </Box>
-      <Box as="li" sx={sx.li} >
+      <Box as="li" sx={sx.li}>
         <Card sx={sx.card} {...args} />
       </Box>
-      <Box as="li" sx={sx.li} >
+      <Box as="li" sx={sx.li}>
         <Card sx={sx.card} {...args} />
       </Box>
     </Box>

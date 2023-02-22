@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Label } from '@pingux/astro';
 
-const FieldLabel = (props) => (
+const FieldLabel = props => (
   <Label {...props} />
 );
 
