@@ -16,14 +16,11 @@ delete variants.INVERTED;
 // add designer approved variants for devs to use here
 const variantOptions = [
   'critical',
-  'danger',
   'default',
   'inline',
   'inlinePrimary',
   'link',
   'primary',
-  'success',
-  'text',
 ];
 
 export default {
@@ -126,4 +123,16 @@ export const FilterButton = () => (
       <Icon icon={FilterIcon} />
     </Button>
   </Box>
+);
+
+export const Critical = () => (
+  <Button variant="critical">
+    Button Text
+  </Button>
+);
+
+export const Primary = () => (
+  <Button variant="primary">
+    Button Text
+  </Button>
 );
