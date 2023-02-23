@@ -278,7 +278,7 @@ const MultivaluesField = forwardRef((props, ref) => {
               key={item.key}
               role="presentation"
               label={item.name}
-              variant="boxes.readOnlyChip"
+              variant="readOnlyBadge"
               bg="white"
               textProps={{ sx: { color: 'text.primary' } }}
             />
