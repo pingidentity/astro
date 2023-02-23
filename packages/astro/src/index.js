@@ -93,8 +93,6 @@ export { default as NumberField } from './components/NumberField';
 export * from './components/NumberField';
 export { default as OverlayPanel } from './components/OverlayPanel';
 export * from './components/OverlayPanel';
-export { default as PageHeader } from './components/PageHeader';
-export * from './components/PageHeader';
 export { default as PasswordField } from './components/PasswordField';
 export * from './components/PasswordField';
 export { default as PopoverContainer } from './components/PopoverContainer';
