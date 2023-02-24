@@ -181,15 +181,15 @@ pipeline {
             echo "Publishing packages"
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
-                // sh "echo 'Publishing packages to npmjs.org registry'"
+                sh "echo 'Publishing packages to npmjs.org registry'"
                 // sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
                 // sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
-                // sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
-                // sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
+                sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
+                sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
                 
-                sh "cp .yarnrc.yml packages/astro/.yarnrc.yml"
-                sh "mkdir -p packages/astro/.yarn/releases/"
-                sh "cp .yarn/releases/* packages/astro/.yarn/releases/"
+                // sh "cp .yarnrc.yml packages/astro/.yarnrc.yml"
+                // sh "mkdir -p packages/astro/.yarn/releases/"
+                // sh "cp .yarn/releases/* packages/astro/.yarn/releases/"
 
                 // Temporarily removed to prevent publishing to npmjs.org
                 
@@ -199,14 +199,14 @@ pipeline {
                 //     sh 'cd packages/schema-form/ && npm publish --tag next'
                 //   }
 
-                //   if (updatedPackagesMap.containsKey("@pingux/astro")) {
-                //     echo 'Publishing @pingux/astro@next dist-tag to npmjs.org'
-                //     sh 'cd packages/astro/ && npm publish --tag v2'
-                //   }
-                // }
+                  if (updatedPackagesMap.containsKey("@pingux/astro")) {
+                    echo 'Publishing @pingux/astro@astro-v2 dist-tag to npmjs.org'
+                    sh 'cd packages/astro/ && npm publish --tag astro-v2'
+                  }
+                }
 
-                echo "Publishing changed packages to Artifactory"
-                sh "cd packages/astro/ && yarn npm publish --tag astro-v2"
+                // echo "Publishing changed packages to Artifactory"
+                // sh "cd packages/astro/ && yarn npm publish --tag astro-v2"
               }
             }
           }
