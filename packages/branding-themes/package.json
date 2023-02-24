@@ -1,6 +1,6 @@
 {
   "name": "@pingux/branding-themes",
-  "version": "0.22.8-alpha.8",
+  "version": "0.22.8-alpha.9",
   "description": "Branding themes for end-user projects",
   "scripts": {
     "build": "rm -rf ./build & yarn run build:tokens & yarn run build:css & yarn run build:images",
