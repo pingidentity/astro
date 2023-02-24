@@ -206,7 +206,7 @@ pipeline {
                 // }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "cd packages/astro/ && yarn publish --tag astro-v2"
+                sh "cd packages/astro/ && yarn npm publish --tag astro-v2"
               }
             }
           }
