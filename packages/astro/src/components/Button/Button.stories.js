@@ -29,7 +29,6 @@ const variantOptions = [
   'inlinePrimary',
   'link',
   'primary',
-  'success',
 ];
 
 export default {
@@ -132,4 +131,16 @@ export const FilterButton = () => (
       <Icon icon={FilterIcon} />
     </Button>
   </Box>
+);
+
+export const Critical = () => (
+  <Button variant="critical">
+    Button Text
+  </Button>
+);
+
+export const Primary = () => (
+  <Button variant="primary">
+    Button Text
+  </Button>
 );
