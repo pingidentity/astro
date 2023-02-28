@@ -1,6 +1,7 @@
 import React from 'react';
 import { Item } from 'react-stately';
 
+import { onHoverArgTypes } from '../../utils/devUtils/props/hoverProps';
 import Text from '../Text';
 
 import Menu from '.';
@@ -62,6 +63,7 @@ export default {
         type: 'none',
       },
     },
+    ...onHoverArgTypes,
   },
 };
 

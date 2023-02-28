@@ -55,9 +55,11 @@ export function useListLayout(state) {
 const ListView = forwardRef((props, ref) => {
   const {
     disabledKeys,
+    isHoverable = true,
     loadingState,
     onLoadMore,
     onSelectionChange,
+    selectedKeys,
     selectionMode,
     selectionStyle,
     ...others
@@ -130,7 +132,7 @@ const ListView = forwardRef((props, ref) => {
         {(type, item) => {
           if (type === 'item') {
             return (
-              <ListViewItem item={item} />
+              <ListViewItem isHoverable={isHoverable} item={item} />
             );
           } if (type === collectionTypes.LOADER) {
             return <Loader variant="loader.withinListView" aria-label="Loading more..." />;
@@ -154,6 +156,8 @@ ListView.propTypes = {
   items: isIterableProp,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
+  /** Whether ListView should handle hover state (defaults to true) */
+  isHoverable: PropTypes.bool,
   /** Defines a string value that labels the current element. */
   'aria-label': PropTypes.string,
   /** Identifies the element (or elements) that labels the current element. */

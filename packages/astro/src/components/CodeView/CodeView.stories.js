@@ -4,7 +4,6 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-powershell';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Text } from '../..';
 
 import CodeView from './CodeView';
 import CodeViewReadme from './CodeView.mdx';
@@ -107,24 +106,18 @@ export default {
 
 
 export const Default = args => (
-  <>
-    <Text sx={{ fontWeight: 2 }}>JSON</Text>
-    <CodeView {...args} />
-  </>
+  <CodeView {...args} />
 );
 
 export const WithLineNumbers = () => (
-  <>
-    <Text sx={{ fontWeight: 2 }}>JSON</Text>
-    <CodeView hasLineNumbers>
-      {/* const code =  `{
+  <CodeView hasLineNumbers>
+    {/* const code =  `{
         "_links": {
           "self": {
             "href": "https://api.pingone.com/v1/environments/94e3268d-847d-47aa-a45e-1ef8dd8f4df0/users/5a5d4c0c-8383-4796-9cdc-16b5a22f45ad"
           }, ... */}
-      {code}
-    </CodeView>
-  </>
+    {code}
+  </CodeView>
 );
 
 WithLineNumbers.parameters = {

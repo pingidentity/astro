@@ -14,6 +14,7 @@ const ListViewItem = props => {
     item: {
       props: { listItemProps, rowProps, hasSeparator = true, hasInsetSeparator },
     },
+    isHoverable,
     className,
   } = props;
 
@@ -55,7 +56,7 @@ const ListViewItem = props => {
   );
 
   const { classNames } = useStatusClasses(className, {
-    isHovered: isSelectable && isHovered,
+    isHovered: isSelectable && isHovered && isHoverable,
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
     hasSeparator,
@@ -100,6 +101,7 @@ ListViewItem.propTypes = {
       hasInsetSeparator: PropTypes.bool,
     }),
   }),
+  isHoverable: PropTypes.bool,
 };
 
 export default ListViewItem;

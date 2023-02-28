@@ -81,7 +81,7 @@ export const SVGIcons = () => {
       </svg>
     );
   };
-  return <Icon icon={SVGComponent} color="active" size={40} />;
+  return <Icon icon={SVGComponent} color="active" size="sm" />;
 };
 
 

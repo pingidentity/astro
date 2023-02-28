@@ -6,6 +6,8 @@ export const critical = {
   bright: '#a31300',
   dark: '#a31300',
   light: '#ffebe7',
+  primaryDark: chroma.mix('#a31300', '#000000', 0.2).hex(),
+  secondaryDark: chroma.mix('#a31300', '#000000', 0.4).hex(),
 };
 export const success = {
   bright: '#00af18',
