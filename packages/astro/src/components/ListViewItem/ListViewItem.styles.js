@@ -18,7 +18,7 @@ const container = {
   },
   '&.has-separator': {
     borderBottom: '1px solid',
-    borderBottomColor: 'line.hairline',
+    borderBottomColor: 'line.light',
   },
 };
 
@@ -34,7 +34,7 @@ const linkedViewContainer = {
       right: 0,
       bottom: 0,
       borderBottom: '1px solid',
-      borderBottomColor: 'line.hairline',
+      borderBottomColor: 'line.light',
     },
     '&.is-focused': {
       '&:after': {

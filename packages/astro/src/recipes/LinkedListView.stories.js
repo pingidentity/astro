@@ -413,7 +413,7 @@ export const Default = ({ ...args }) => {
                     right: 0,
                     bottom: 0,
                     borderBottom: '1px solid',
-                    borderBottomColor: 'line.hairline',
+                    borderBottomColor: 'line.light',
                   },
                 },
               },
