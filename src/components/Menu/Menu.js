@@ -6,14 +6,17 @@ import React, {
 } from 'react';
 import { mergeProps, useFocusRing, useMenu } from 'react-aria';
 import { useTreeState } from 'react-stately';
+import { useHover } from '@react-aria/interactions';
 import { useSyncRef } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 
 import { MenuContext } from '../../context/MenuContext';
 import { usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import { onHoverPropTypes } from '../../utils/devUtils/props/hoverProps';
 import Box from '../Box';
 import MenuItem from '../MenuItem';
+
 
 /**
  * Menu component intended to be used as a wrapper for MenuItem.
@@ -25,15 +28,24 @@ import MenuItem from '../MenuItem';
 const Menu = forwardRef((props, ref) => {
   const {
     isDisabled,
-    onAction,
-    onSelectionChange,
     isNotFocusedOnHover,
+    onAction,
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+    onSelectionChange,
     ...others
   } = props;
   const contextProps = useContext(MenuContext);
   const completeProps = {
     ...mergeProps(contextProps, props),
   };
+
+  const { hoverProps } = useHover({
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+  });
 
   const state = useTreeState(completeProps);
   const menuRef = useRef();
@@ -54,7 +66,7 @@ const Menu = forwardRef((props, ref) => {
       variant="menu"
       aria-orientation={ORIENTATION.VERTICAL}
       {...others}
-      {...mergeProps(focusProps, menuProps)}
+      {...mergeProps(focusProps, menuProps, hoverProps)}
     >
       {Array.from(state.collection).map(item => (
         <MenuItem
@@ -122,6 +134,7 @@ Menu.propTypes = {
    * extended description for the object.
    */
   'aria-details': PropTypes.string,
+  ...onHoverPropTypes,
 };
 
 Menu.defaultProps = {
