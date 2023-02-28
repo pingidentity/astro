@@ -1,4 +1,4 @@
-import { defaultFocus, focusWithCroppedOutline } from '../Button/Buttons.styles';
+import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 export const baseBadge = {
   cursor: 'default',
@@ -88,26 +88,12 @@ export const deleteButton = {
 
 export const badgeDeleteButton = {
   ...deleteButton,
-  '&.is-focused': {
-    bg: 'accent.40',
-    ...focusWithCroppedOutline,
-  },
-  '&.is-hovered': {
-    bg: 'accent.40',
-  },
-  '&.is-pressed': {
-    bg: 'accent.20',
-    borderColor: 'accent.20',
-  },
-};
-
-export const badgeWithSlotDeleteButton = {
-  ...deleteButton,
+  outline: 'none',
   path: {
     fill: 'neutral.40',
   },
   '&.is-focused': {
-    ...defaultFocus,
+    ...focusWithCroppedOutline,
   },
   '&.is-hovered': {
     backgroundColor: '#e5e9f8 !important',
@@ -122,7 +108,6 @@ export const badgeWithSlotDeleteButton = {
     bg: '#4462ED !important',
   },
 };
-
 
 const countDefault = {
   ...baseBadge,
@@ -161,6 +146,5 @@ export default {
   deleteButton,
   countBadge,
   countNeutral,
-  badgeWithSlotDeleteButton,
   badgeDeleteButton,
 };

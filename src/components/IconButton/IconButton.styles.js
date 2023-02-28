@@ -1,4 +1,4 @@
-import { badgeWithSlotDeleteButton, deleteButton } from '../Badge/Badge.styles';
+import { badgeDeleteButton, deleteButton } from '../Badge/Badge.styles';
 import { defaultFocus } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
@@ -147,7 +147,7 @@ export default {
   base,
   bidirectional,
   badge: { deleteButton },
-  badgeWithSlotDeleteButton,
+  badgeDeleteButton,
   copyButton,
   hintButton: { ...base, ...hintButton },
   inverted,
