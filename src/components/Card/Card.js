@@ -46,7 +46,7 @@ const Card = forwardRef((props, ref) => {
   return (
     <Box
       aria-label={ariaLabel}
-      variant="boxes.card"
+      variant="cards.container"
       className={classNames}
       ref={ref}
       isFocused={isFocusVisible}
