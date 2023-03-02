@@ -169,7 +169,7 @@ ImageInput.propTypes = {
     /**
      * The value of the selected image
      */
-    value: PropTypes.value,
+    value: PropTypes.any,
 };
 
 ImageInput.defaultProps = {
