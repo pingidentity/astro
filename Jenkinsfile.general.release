@@ -85,8 +85,8 @@ pipeline {
           container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "lerna run build-ci --parallel --scope=@pingux/icons,@pingux/astro,@pingux/end-user,@pingux/charting"
-            sh "lerna run build-ci --parallel --scope=@pingux/flow-diagram,@pingux/schema-form,ui-library,@pingux/branding-themes"
+            sh "lerna run build-ci --parallel --scope '{@pingux/icons,@pingux/astro,@pingux/end-user,@pingux/charting}'"
+            sh "lerna run build-ci --parallel --scope '{@pingux/flow-diagram,@pingux/schema-form,ui-library,@pingux/branding-themes}'"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -100,8 +100,8 @@ pipeline {
             yarn --frozen-lockfile
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | npx commitlint
-            lerna run build-ci --parallel --scope=@pingux/icons,@pingux/astro,@pingux/end-user,@pingux/charting
-            lerna run build-ci --parallel --scope=@pingux/flow-diagram,@pingux/schema-form,ui-library,@pingux/branding-themes
+            lerna run build-ci --parallel --scope '{@pingux/icons,@pingux/astro,@pingux/end-user,@pingux/charting}'
+            lerna run build-ci --parallel --scope '{@pingux/flow-diagram,@pingux/schema-form,ui-library,@pingux/branding-themes}'
             lerna run lint
             lerna run coverage-ci --concurrency=1
           """
@@ -121,7 +121,7 @@ pipeline {
         container('ui-library-admin') {
           sh """
             yarn --frozen-lockfile
-            lerna run demo --scope=ui-library
+            lerna run demo --scope ui-library
             lerna run backstop-ci
           """
         }
