@@ -16,19 +16,21 @@ const copy = {
 };
 
 export const copyButton = {
-  ml: 'xs',
+  ml: 'sm',
   outline: 'none',
   height: 'auto',
   cursor: 'pointer',
+  width: 'auto',
   path: {
     fill: 'neutral.10',
   },
-  '&.is-focused': {
-    boxShadow: 'none',
-    ...defaultFocus,
-  },
   ':focus': {
     outline: 'none',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+    boxShadow: 'none',
+    outlineOffset: '1px',
   },
 };
 
