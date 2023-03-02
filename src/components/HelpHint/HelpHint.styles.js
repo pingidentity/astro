@@ -33,9 +33,6 @@ export const hintButton = {
     borderColor: 'accent.20',
     color: 'white',
   },
-  ':focus': {
-    outline: 'none',
-  },
 };
 
 export default { hintButton };

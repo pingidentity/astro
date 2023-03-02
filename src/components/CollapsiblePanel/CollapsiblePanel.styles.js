@@ -87,6 +87,7 @@ const item = {
 export const toggle = {
   ...square,
   bg: 'accent.99',
+  borderRadius: '2px',
   height: '40px',
   minWidth: 'max-content',
   pl: 'xs',
@@ -97,16 +98,16 @@ export const toggle = {
   '&.is-hovered': {
     backgroundColor: 'accent.99',
   },
-  '&.is-focused': {
-    ...defaultFocus,
-    outlineOffset: '0',
-    zIndex: 1,
-  },
   '&.is-pressed': {
     backgroundColor: 'accent.99',
   },
   ':focus': {
     outline: 'none',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+    outlineOffset: '0',
+    zIndex: 1,
   },
 };
 
