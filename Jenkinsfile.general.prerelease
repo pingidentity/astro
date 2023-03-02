@@ -102,8 +102,8 @@ pipeline {
           container('ui-library-admin') {
             echo "Installing and linking packages"
             sh "yarn --frozen-lockfile --ignore-engines"
-            sh "lerna run build-ci --parallel --scope=@pingux/icons,@pingux/astro,@pingux/end-user,@pingux/charting"
-            sh "lerna run build-ci --parallel --scope=@pingux/flow-diagram,@pingux/schema-form,ui-library,@pingux/branding-themes"
+            sh "lerna run build-ci --parallel --scope '{@pingux/icons,@pingux/astro,@pingux/end-user,@pingux/charting}'"
+            sh "lerna run build-ci --parallel --scope '{@pingux/flow-diagram,@pingux/schema-form,ui-library,@pingux/branding-themes}'"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
