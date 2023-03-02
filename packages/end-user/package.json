@@ -56,6 +56,8 @@
     "@storybook/react": "^6.5.10",
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.3",
+    "@testing-library/user-event": "^12.8.3",
+
     "@whitespace/storybook-addon-html": "^5.0.0",
     "autoprefixer": "^8.0.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -129,45 +131,6 @@
     "jest",
     "static"
   ],
-  "jest": {
-    "rootDir": "./",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules",
-      "<rootDir>/src/util",
-      "<rootDir>/src/testutil"
-    ],
-    "testMatch": [
-      "**/**/*.test.js?(x)"
-    ],
-    "globals": {
-      "END_USER_VERSION": "0.0.0"
-    },
-    "testPathIgnorePatterns": [
-      "/node/",
-      "/node_modules/",
-      "/tests/coverage/",
-      "/build/",
-      "/dist/",
-      "/lib/",
-      "commonTests.js?(x)"
-    ],
-    "modulePathIgnorePatterns": [
-      "/node/",
-      "/build/",
-      "/dist/",
-      "/lib/"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/util/polyfills.js",
-      "<rootDir>/src/devUtil/enzymeSetup.js"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/devUtil/jestAfterEnvSetup.js"
-    ],
-    "moduleNameMapper": {
-      ".+\\.(svg)$": "jest-transform-stub"
-    }
-  },
   "scripts": {
     "append-version": "node ../../append_current_version.js",
     "build": "gulp build-lib && yarn run cdn && cp -R ./cdn/*/. ./lib/",
