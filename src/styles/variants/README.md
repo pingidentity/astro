@@ -53,7 +53,7 @@ const MyComponent = () => (
   <Box variant="myComponent.container">
     <Box variant="myComponent.leftSide" />
     <Box variant="myComponent.rightSide" />
-    {/* The following variant would go into */}
+    {/* The Button variant is exported differently in the theme */}
     <Button variant="myComponentButton">Click me</Button>
   </Box>
 );
