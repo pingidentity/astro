@@ -37,17 +37,15 @@ This results in a `theme` object as such:
 
 ```json
 {
-  badges: {
-    myBadge: {
-      backgroundColor: 'red'
-    }
+  "badges": {
+    "myBadge": { "backgroundColor": "red" }
   }
 }
 ```
 
 ## Example of custom component and internal layout components
 
-In the example below, `MyComponent` is custom and has `Box` as its foundation. The object within `MyComponent.styles.js` would then be exported as part of the theme within the `variants` object.
+In the example below, `MyComponent` is custom and has `Box` as its foundation. It also includes layout components and a `Button`. Since the `Button` component is built on a Theme UI base, it will follow the variant naming rules for those types of components. The object within `MyComponent.styles.js` should then be exported as part of the theme within the `variants` object.
 
 ```js
 // `src/components/MyComponent/MyComponent.js`
@@ -55,10 +53,13 @@ const MyComponent = () => (
   <Box variant="myComponent.container">
     <Box variant="myComponent.leftSide" />
     <Box variant="myComponent.rightSide" />
+    {/* The following variant would go into */}
+    <Button variant="myComponentButton">Click me</Button>
   </Box>
 );
 
 // `src/components/MyComponent/MyComponent.styles.js`
+export const myComponentButton = { backgroundColor: 'critical' };
 const container = { paddingTop: 'xl' };
 const leftSide = { width: '100px', backgroundColor: 'green' };
 const rightSide = { width: '20px', backgroundColor: 'orange' };
@@ -69,22 +70,28 @@ import myComponent from '../../components/MyComponent/MyComponent.styles';
 export default { myComponent };
 
 // `src/styles/variants/index.js`
+import defaultButtons from '../../components/Button/Button.styles';
+import { myComponentButton } from '../../components/MyComponent/MyComponent.styles';
+export const buttons = { ...defaultButtons, myComponentButton };
 export { default as variants } from './variants';
 
 // `src/styles/theme.js`
-import { variants } from './variants';
-const theme = { variants };
+import { buttons, variants } from './variants';
+const theme = { buttons, variants };
 ```
 
 This results in a `theme` object as such:
 
 ```json
 {
-  variants: {
-    myComponent: {
-      container: { paddingTop: 'xl' },
-      leftSide: { width: '100px', backgroundColor: 'green' },
-      rightSide: { width: '20px', backgroundColor: 'orange' }
+  "buttons": {
+    "myComponentButton": { "backgroundColor": "critical" }
+  },
+  "variants": {
+    "myComponent": {
+      "container": { "paddingTop": "xl" },
+      "leftSide": { "width": "100px", "backgroundColor": "green" },
+      "rightSide": { "width": "20px", "backgroundColor": "orange" }
     }
   }
 }
