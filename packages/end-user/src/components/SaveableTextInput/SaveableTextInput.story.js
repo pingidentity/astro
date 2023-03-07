@@ -8,6 +8,6 @@ export default {
 
 export const Default = () => (
     <div>
-        <SaveableTextInput/>
+        <SaveableTextInput onCancel={() => console.log('cancel')} onSave={() => console.log('save')}/>
     </div>
 );
