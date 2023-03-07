@@ -10,7 +10,7 @@ import AccordionReadme from './AccordionGroup.mdx';
 import AccordionGroup from '.';
 
 const itemArray = [
-  { key: 't1', label: 'First Accordion', children: <Button>Hi</Button> },
+  { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },
   { key: 't2', label: 'Second Accordion', children: 'Child Renders Here' },
   { key: 't3', label: 'Third Accordion', children: <TextField /> },
 ];
