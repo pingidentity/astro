@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'underscore';
 import TextInput from '../TextInput';
+import Button from '../Button'
 
 const SaveableTextInput = ({
     'data-id': dataId,
@@ -17,21 +18,19 @@ const SaveableTextInput = ({
                     className="saveable-textinput__control"
                     {...props}
                 />
-                <a
+                <Button
                     className="saveable-textinput__save"
                     onClick={onSave}
                     role="button"
                     aria-label="Save"
-                    tabIndex={0}
-                ></a>
+                ></Button>
             </div>
-            <a
+            <Button
                 className="saveable-textinput__cancel"
                 role="button"
                 onClick={onCancel}
                 aria-label="Cancel"
-                tabIndex={0}
-            ></a>
+            ></Button>
         </div>
     );
 };

@@ -9,6 +9,8 @@ window.__DEV__ = true;
 
 const defaultProps = {
     'data-id': 'account-table',
+    unlinkModalTitle: 'Title',
+    unlinkModalMessage: 'Some message',
 };
 const getComponent = props => mount(<AccountTable {...defaultProps} {...props} />);
 
