@@ -5,6 +5,7 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Badge,
   Box,
   Icon,
   IconButton,
@@ -119,6 +120,17 @@ export default {
   },
 };
 
+const badgeSx = {
+  height: '22px',
+  border: '1px solid',
+  mr: '10px',
+  alignSelf: 'center',
+  '> span': {
+    // Account for A11y error. Text height was rendering bigger than badge.
+    lineHeight: 'initial',
+  },
+};
+
 const Header = props => {
   const { item } = props;
 
@@ -128,11 +140,24 @@ const Header = props => {
         <Text sx={{ fontWeight: 3, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} variant="itemTitle" alignSelf="center">{item.name}</Text>
       </Box>
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
-        <Text sx={{ fontWeight: 0, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} alignSelf="center">
-          {item.organizations.length}
-          {' '}
-          Organizations
-        </Text>
+        <Badge
+          label={`${item.organizations.length} Organizations`}
+          textColor="text.primary"
+          bg="white"
+          sx={{ ...badgeSx, borderColor: 'decorative.2' }}
+        />
+        <Badge
+          label="2 Environment"
+          textColor="text.primary"
+          bg="white"
+          sx={{ ...badgeSx, borderColor: 'decorative.0' }}
+        />
+        <Badge
+          label="2 Population"
+          textColor="text.primary"
+          bg="white"
+          sx={{ ...badgeSx, borderColor: 'decorative.1' }}
+        />
         <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
           <IconButton aria-label="create-icon" sx={{ mr: '4px' }}>
             <Icon icon={CreateIcon} size="sm" />
