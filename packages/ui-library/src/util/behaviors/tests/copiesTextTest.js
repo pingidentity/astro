@@ -5,6 +5,9 @@ import React from "react";
 import ReactTestUtils from "react-dom/test-utils";
 import TestUtils from "../../../testutil/TestUtils";
 import copiesText from "../copiesText";
+import CopyIcon from "./../../../components/utils/CopyIcon";
+import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/react";
 import * as clipboard from "clipboard-polyfill";
 import _ from "underscore";
 
@@ -70,6 +73,23 @@ describe("copiesText", function () {
         expect(clipboard.writeText).not.toHaveBeenCalled();
         ReactTestUtils.Simulate.click(link);
         expect(clipboard.writeText).lastCalledWith("dummy text");
+    });
+
+    it("calls stopPropagation function with onClick", () => {
+        const onClick = jest.fn(e => e.stopPropagation());
+        const onOuterClick = jest.fn();
+
+        render(
+            <div onClick={onOuterClick}>
+                <CopyIcon data-testid="copyIcon" onClick={onClick} />
+            </div>
+        );
+        const copyIcon = screen.getByTestId("copyIcon");
+        expect(copyIcon).toBeInTheDocument();
+        userEvent.click(copyIcon);
+
+        expect(onClick).toHaveBeenCalled();
+        expect(onOuterClick).toHaveBeenCalledTimes(0);
     });
 
     it("changes message when succeeding", function () {
