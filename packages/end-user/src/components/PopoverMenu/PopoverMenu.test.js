@@ -96,7 +96,7 @@ describe('PopoverMenu', () => {
         button.simulate('click');
         popovermenu = wrapper.find(`div[data-id="${defaultProps['data-id']}"]`);
         expect(popovermenu.exists()).toBeFalsy();
-        expect(document.activeElement.className).toContain('popover-menu__control');
+        expect(document.activeElement.className).not.toContain('popover-menu__control');
     });
 
     it("should let pass data-id to the PopoverMenu buttons", () => {

@@ -4835,7 +4835,7 @@ __metadata:
     "@react-stately/grid": ~3.3.1
     "@react-stately/layout": ~3.7.1
     "@react-stately/list": ~3.4.1
-    "@react-stately/table": ^3.2.1
+    "@react-stately/table": ~3.3.0
     "@react-stately/virtualizer": ^3.2.1
     "@storybook/addon-a11y": ^6.5.10
     "@storybook/addon-actions": ^6.5.10
@@ -4998,6 +4998,7 @@ __metadata:
     "@babel/preset-react": ^7.0.0
     "@babel/runtime": ^7.9.2
     "@babel/runtime-corejs3": ^7.11.2
+    "@emotion/react": ^11.10.5
     "@mdi/js": ^5.5.55
     "@mdi/react": ^1.4.0
     "@popperjs/core": ^2.5.3
@@ -5010,6 +5011,7 @@ __metadata:
     "@storybook/react": ^6.5.10
     "@testing-library/jest-dom": ^5.11.0
     "@testing-library/react": ^10.4.3
+    "@testing-library/user-event": ^12.8.3
     "@whitespace/storybook-addon-html": ^5.0.0
     autoprefixer: ^8.0.0
     babel-core: ^7.0.0-bridge.0
@@ -5040,7 +5042,9 @@ __metadata:
     gulp-debug: ^4.0.0
     html-webpack-plugin: ^3.2.0
     isomorphic-fetch: ^2.2.1
-    jest: ^24.8.0
+    jest: ^26.0.1
+    jest-canvas-mock: ^2.3.0
+    jest-pnp-resolver: ^1.2.2
     jest-transform-stub: ^2.0.0
     jsdoc: ^3.6.2
     jsdoc-babel: ^0.5.0
@@ -6757,6 +6761,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-stately/collections@npm:^3.4.2, @react-stately/collections@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@react-stately/collections@npm:3.6.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-stately%2Fcollections%2F-%2Fcollections-3.6.0.tgz"
+  dependencies:
+    "@react-types/shared": ^3.17.0
+    "@swc/helpers": ^0.4.14
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: e7fa7adbbfeb981c5723630a6cab4a79f4330efba02124ab339fdc850143d198334af446c37be73fed84ef7ae061214dcc8c1aa1efaf9e41789e80d835bf8e7a
+  languageName: node
+  linkType: hard
+
 "@react-stately/color@npm:3.2.1-nightly.3553+2f2e7fee3":
   version: 3.2.1-nightly.3553
   resolution: "@react-stately/color@npm:3.2.1-nightly.3553"
@@ -6864,6 +6880,20 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1
   checksum: f785350ba87ae19567ae35b28f0aef83ddcd4edc5e4d7f5c73dd9dfb3256c094ec755f7d37922f608e5353151d46834c7468eb7be7fbe94b1637bc933699cb1b
+  languageName: node
+  linkType: hard
+
+"@react-stately/grid@npm:^3.3.0":
+  version: 3.5.0
+  resolution: "@react-stately/grid@npm:3.5.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-stately%2Fgrid%2F-%2Fgrid-3.5.0.tgz"
+  dependencies:
+    "@react-stately/selection": ^3.12.0
+    "@react-types/grid": ^3.1.6
+    "@react-types/shared": ^3.17.0
+    "@swc/helpers": ^0.4.14
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: f458e3d2232c803231e0baadf8c66f4e61eb4acec6d53fc103e489f7421226ff9281b841d9e40889484b8aa364169a9b6c89df7e43a7f091ce074c4bb6d7ea0f
   languageName: node
   linkType: hard
 
@@ -7114,6 +7144,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-stately/selection@npm:^3.10.2, @react-stately/selection@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "@react-stately/selection@npm:3.12.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-stately%2Fselection%2F-%2Fselection-3.12.0.tgz"
+  dependencies:
+    "@react-stately/collections": ^3.6.0
+    "@react-stately/utils": ^3.6.0
+    "@react-types/shared": ^3.17.0
+    "@swc/helpers": ^0.4.14
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: 9a71f78b4f5e105602120e6682b3cf3aad467a3d85010bafa08cbfc7d0ba34bc7d77cff8e1f165f46083aecfb897308b130a4dad7512fb8c83823283813b80c7
+  languageName: node
+  linkType: hard
+
 "@react-stately/selection@npm:^3.10.3, @react-stately/selection@npm:^3.11.0, @react-stately/selection@npm:^3.9.4":
   version: 3.11.0
   resolution: "@react-stately/selection@npm:3.11.0"
@@ -7160,7 +7204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-stately/table@npm:^3.2.1, @react-stately/table@npm:^3.4.0, @react-stately/table@npm:^3.5.0":
+"@react-stately/table@npm:^3.4.0, @react-stately/table@npm:^3.5.0":
   version: 3.5.0
   resolution: "@react-stately/table@npm:3.5.0"
   dependencies:
@@ -7174,6 +7218,23 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: 541a3f5463f110a7550a6551c0dacda733265b6503bd0ccda1e215c7dfdcd46fb3f9dc058693ef0b9ccf84552531d8f0d15840c096d75df25edad89eb4cc4dc5
+  languageName: node
+  linkType: hard
+
+"@react-stately/table@npm:~3.3.0":
+  version: 3.3.0
+  resolution: "@react-stately/table@npm:3.3.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-stately%2Ftable%2F-%2Ftable-3.3.0.tgz"
+  dependencies:
+    "@babel/runtime": ^7.6.2
+    "@react-stately/collections": ^3.4.2
+    "@react-stately/grid": ^3.3.0
+    "@react-stately/selection": ^3.10.2
+    "@react-types/grid": ^3.1.2
+    "@react-types/shared": ^3.14.0
+    "@react-types/table": ^3.3.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: d8bbbc6ef344e7cb8e097aeb58eff49451e2f0364d79c95ef528328dc7f870d6d247428370bc3389c0a11deff117032a209273f51c6abc0ba40fd39dabe0c074
   languageName: node
   linkType: hard
 
@@ -7304,6 +7365,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: 156fdc5389337921a34e9a9ac3c8876c82953479dd696771f1ecd852def0d269bcee879f51ad036024b06f9d6e68b2e25eae12f1996599cb9bfdaa243351b2b1
+  languageName: node
+  linkType: hard
+
+"@react-stately/utils@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@react-stately/utils@npm:3.6.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-stately%2Futils%2F-%2Futils-3.6.0.tgz"
+  dependencies:
+    "@swc/helpers": ^0.4.14
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: d2ff4cfed5555b112ad71b9bc1837abd777d8fa225043c476b7c9417f8b21a0bcddad0d7127e0acdbf4d85dc9a260c9ae97722b4e9507e6243b412c2724c5f54
   languageName: node
   linkType: hard
 
@@ -7502,6 +7574,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1
   checksum: ac8cae6aca88d8f60ed614b35a2661d9d00f7c25eb0ac178a4c8aa9ce457b39cb79c52b84935d04ed01b3c51ff277c437a4c0c064c7cc34dc42b3fcec8a17f42
+  languageName: node
+  linkType: hard
+
+"@react-types/grid@npm:^3.1.2, @react-types/grid@npm:^3.1.6":
+  version: 3.1.6
+  resolution: "@react-types/grid@npm:3.1.6::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-types%2Fgrid%2F-%2Fgrid-3.1.6.tgz"
+  dependencies:
+    "@react-types/shared": ^3.17.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: d88c4fa8a08c9c66514e8291de328ef02a306d27fa48b6a20537cda5e212f2bca1a00d11cdf54091c452f25dbda968b0c8d2d0f158926b68cc4cf4e8b6e6518c
   languageName: node
   linkType: hard
 
@@ -7735,6 +7818,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-types/shared@npm:^3.14.0, @react-types/shared@npm:^3.17.0":
+  version: 3.17.0
+  resolution: "@react-types/shared@npm:3.17.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-types%2Fshared%2F-%2Fshared-3.17.0.tgz"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: 004fc58ab0d3d64a84ce5a98e7e201b88bbb64f8b4a8309d50be30fe6172d0f172f00c666074aa96f13bbbfbced8b986901ad6b35b6d2d32d8dc25e251fcdb31
+  languageName: node
+  linkType: hard
+
 "@react-types/shared@npm:^3.16.0":
   version: 3.16.0
   resolution: "@react-types/shared@npm:3.16.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-types%2Fshared%2F-%2Fshared-3.16.0.tgz"
@@ -7775,6 +7867,18 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: 52819b1a61e19f9013162dd9594de4312f33a24ccb018c9d4fd08c5372b536ac1d9a1a748dbb31fbad2546e64c027c44630d5aef4e885a18649cf9fa7a0ed64e
+  languageName: node
+  linkType: hard
+
+"@react-types/table@npm:^3.3.0":
+  version: 3.5.0
+  resolution: "@react-types/table@npm:3.5.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40react-types%2Ftable%2F-%2Ftable-3.5.0.tgz"
+  dependencies:
+    "@react-types/grid": ^3.1.6
+    "@react-types/shared": ^3.17.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: c1e22f3f7ab41f9800b1ed205101a895ac599ba5d34159668837bf097e5856e68b8754e555e7ef4daf3bd2168069d8ef54978b4dc631d589fc5bef92fcc0e5c6
   languageName: node
   linkType: hard
 
@@ -25288,7 +25392,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^24.8.0, jest@npm:^24.9.0":
+"jest@npm:^24.9.0":
   version: 24.9.0
   resolution: "jest@npm:24.9.0"
   dependencies:

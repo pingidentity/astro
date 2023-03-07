@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import TextInput from '../TextInput';
 
 /**
  * @class FloatLabel
@@ -73,8 +74,9 @@ FloatLabel.propTypes = {
     'data-id': PropTypes.string,
 };
 
-PropTypes.defaultProps = {
+FloatLabel.defaultProps = {
     'data-id': 'floatlabel',
+    InputType: TextInput,
 };
 
 export default FloatLabel;

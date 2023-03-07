@@ -26,6 +26,9 @@ const linkedViewContainer = {
   ...container,
   minHeight: '75px',
   height: '76px',
+  '& li': {
+    bg: 'white',
+  },
   '&.has-inset-separator': {
     '&:after': {
       content: '""',

@@ -95,6 +95,14 @@ const critical = {
   '&.is-focused': {
     ...defaultFocus,
   },
+  '&.is-hovered': {
+    bg: 'critical.primaryDark',
+    borderColor: 'critical.primaryDark',
+  },
+  '&.is-pressed': {
+    bg: 'critical.secondaryDark',
+    borderColor: 'critical.secondaryDark',
+  },
 };
 
 const inline = {
