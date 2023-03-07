@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.2...@pingux/astro@1.42.3) (2023-03-07)
+
+
+### Bug Fixes
+
+* [UIP-6181] DataTable error ([a99481e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a99481e31c31e74619cff883a7fde3c2da7a7ba5))
+
+
+
+
+
 ## [1.42.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.1...@pingux/astro@1.42.2) (2023-02-22)
 
 

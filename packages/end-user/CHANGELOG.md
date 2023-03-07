@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.21](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.20...@pingux/end-user@2.4.21) (2023-03-07)
+
+
+### Bug Fixes
+
+* [UIP-6158] Fix SaveableTextInput Button Keyboard Interactions ([9833839](https://gitlab.corp.pingidentity.com/ux/end-user/commit/9833839cf0184ba865e04537d44cbc77cacd69d1))
+
+
+
+
+
 ## [2.4.20](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.19...@pingux/end-user@2.4.20) (2023-02-13)
 
 **Note:** Version bump only for package @pingux/end-user
