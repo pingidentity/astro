@@ -84,6 +84,10 @@ export const deleteButton = {
   p: 0,
   width: 14,
   mx: '3px !important',
+  '&.is-focused': {
+    ...focusWithCroppedOutline,
+    bg: 'accent.40',
+  },
 };
 
 export const badgeDeleteButton = {
