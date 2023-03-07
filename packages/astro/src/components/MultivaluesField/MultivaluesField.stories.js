@@ -145,7 +145,7 @@ const itemsWithSlots = [
     name: 'Aardvark',
     key: 'Aardvark',
     chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
-    buttonProps: { variant: 'chipWithSlotDeleteButton' },
+    buttonProps: { variant: 'badgeDeleteButton' },
     slots: { leftIcon: <Icon icon={VariableIcon} size={16} /> },
   },
   {
@@ -153,7 +153,7 @@ const itemsWithSlots = [
     name: 'Kangaroo',
     key: 'Kangaroo',
     chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
-    buttonProps: { variant: 'chipWithSlotDeleteButton' },
+    buttonProps: { variant: 'badgeDeleteButton' },
     slots: { leftIcon: <Icon icon={HTMLIcon} size={16} /> },
   },
   {
@@ -161,7 +161,7 @@ const itemsWithSlots = [
     name: 'Snake',
     key: 'Snake',
     chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
-    buttonProps: { variant: 'chipWithSlotDeleteButton' },
+    buttonProps: { variant: 'badgeDeleteButton' },
     slots: { leftIcon: <Icon icon={HTMLIcon} size={16} /> },
   },
 ];
