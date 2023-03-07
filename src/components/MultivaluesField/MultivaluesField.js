@@ -288,7 +288,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       })
   );
 
-  const multivaluesFieldChip = item => (
+  const multivaluesFieldBadge = item => (
     <Badge
       key={item.key}
       role="presentation"
@@ -316,7 +316,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              multivaluesFieldChip(item)
+              multivaluesFieldBadge(item)
             );
           }
           return null;
