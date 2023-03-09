@@ -4,8 +4,8 @@ import { action } from '@storybook/addon-actions';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Breadcrumbs } from '../../index';
 
-import Breadcrumbs from './Breadcrumbs';
 import BreadcrumbsReadme from './Breadcrumbs.mdx';
 
 export default {

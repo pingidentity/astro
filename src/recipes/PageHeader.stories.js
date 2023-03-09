@@ -1,7 +1,13 @@
 import React from 'react';
 import PlusIcon from 'mdi-react/PlusIcon';
 
-import { Box, Button, Icon, IconButton, Text } from '../index';
+import {
+  Box,
+  Button,
+  Icon,
+  IconButton,
+  Text,
+} from '../index';
 
 export default {
   title: 'Recipes/Page Header',

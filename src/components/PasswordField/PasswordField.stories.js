@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
+import { PasswordField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-
-import PasswordField from '.';
 
 export default {
   title: 'Form/PasswordField',

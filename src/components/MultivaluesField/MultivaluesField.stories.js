@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
-import { Box, Icon, Item, MultivaluesField, OverlayProvider } from '../..';
+import {
+  Box,
+  Icon,
+  Item,
+  MultivaluesField,
+  OverlayProvider,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';

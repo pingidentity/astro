@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Badge, Box, Item, Section, Text } from '../../index';
+import {
+  Badge,
+  Box,
+  EnvironmentBreadcrumb,
+  Item,
+  Section,
+  Text,
+} from '../../index';
 
-import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
 import EnvironmentBreadcrumbReadme from './EnvironmentBreadcrumb.mdx';
 
 export default {

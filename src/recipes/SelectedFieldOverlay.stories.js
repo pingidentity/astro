@@ -1,9 +1,11 @@
 import React from 'react';
 import VisibilityOffOutlineIcon from 'mdi-react/VisibilityOffOutlineIcon';
 
-import Box from '../components/Box';
-import Icon from '../components/Icon';
-import TextField from '../components/TextField';
+import {
+  Box,
+  Icon,
+  TextField,
+} from '../index';
 
 export default {
   title: 'Recipes/Selected Field Overlay',

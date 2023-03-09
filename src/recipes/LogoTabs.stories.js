@@ -3,7 +3,14 @@ import Filter from 'mdi-react/FilterIcon';
 import ShuffleVariant from 'mdi-react/ShuffleVariantIcon';
 
 import { tab } from '../components/Tabs/Tabs.style';
-import { Box, Icon, Separator, Tab, Tabs, Text } from '../index';
+import {
+  Box,
+  Icon,
+  Separator,
+  Tab,
+  Tabs,
+  Text,
+} from '../index';
 
 
 export default {
@@ -101,7 +108,7 @@ const sx = {
   },
 };
 
-export const LogoTabs = () => {
+export const Default = () => {
   const [currentTab, setCurrentTab] = useState('tab1');
   const [showMiddleTabs, setShowMiddleTabs] = useState(false);
   return (

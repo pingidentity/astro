@@ -1,10 +1,8 @@
 import React from 'react';
 import { Item } from 'react-stately';
 
+import { Menu, Text } from '../../index';
 import { onHoverArgTypes } from '../../utils/devUtils/props/hoverProps';
-import Text from '../Text';
-
-import Menu from '.';
 
 export default {
   title: 'Components/Menu',

@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { FieldHelperText } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-
-import FieldHelperText from '.';
 
 export default {
   title: 'Form/Base Components/FieldHelperText',

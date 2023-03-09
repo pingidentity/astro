@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
-import RockerButton from '../RockerButton';
-
-import RockerButtonGroup from '.';
+import { RockerButton, RockerButtonGroup } from '../../index';
 
 export default {
   title: 'Components/RockerButtonGroup',
