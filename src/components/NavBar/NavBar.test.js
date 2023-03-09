@@ -8,6 +8,8 @@ import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import Verify from 'mdi-react/VerifiedIcon';
+import ViewGridPlusOutline from 'mdi-react/ViewGridPlusOutlineIcon';
+import OpenInNew from 'mdi-react/OpenInNewIcon';
 
 import { Box, NavBarSection, NavBarItem, NavBarItemButton, NavBarItemLink, Link, Button } from '../../';
 import NavBar from './NavBar';
@@ -93,6 +95,14 @@ const data = [
 ];
 
 const secondData = [
+  {
+    'data-id': 'da-vinci-data-id',
+    icon: ViewGridPlusOutline,
+    key: 'DaVinci',
+    heading: 'DaVinci',
+    customIcon: OpenInNew,
+    href: 'https://pingidentity.com/',
+  },
   {
     icon: Fingerprint,
     key: 'MFA',
