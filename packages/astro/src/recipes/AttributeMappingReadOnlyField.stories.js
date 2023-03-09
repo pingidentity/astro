@@ -35,7 +35,7 @@ const sx = {
     marginBottom: 'md',
     alignItems: 'center',
   },
-  chip: {
+  badge: {
     width: 'xx',
     height: '22px',
     alignSelf: 'center',
@@ -136,7 +136,7 @@ const Row = props => {
         && (
         <Badge
           label="Required"
-          sx={sx.chip}
+          sx={sx.badge}
         />
         )}
       {withTooltip

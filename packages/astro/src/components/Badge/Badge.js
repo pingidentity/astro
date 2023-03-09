@@ -45,13 +45,13 @@ const Badge = React.forwardRef((props, ref) => {
   // The following is to correct a visual regression released in 1.39.0 https://jira.pingidentity.com/browse/UIP-5907.
   // TODO : Remove in Astro V2 with theme remapping roll out.
   const oldVariantPaths = [
-    'boxes.countChip',
+    'boxes.countBadge',
     'boxes.countNeutral',
-    'boxes.itemChipWithSlot',
+    'boxes.itemBadgeWithSlot',
     'collapsiblePanel.collapsiblePanelBadge',
-    'boxes.environmentChip',
-    'boxes.readOnlyChip',
-    'boxes.selectedItemChip',
+    'boxes.environmentBadge',
+    'boxes.readOnlyBadge',
+    'boxes.selectedItemBadge',
   ];
 
   const fixedVariant = (oldVariantPaths.includes(props.variant)) ? `variants.${props.variant}` : props.variant;
@@ -90,7 +90,7 @@ Badge.propTypes = {
   bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Provides a way to insert markup in specified places. */
   slots: PropTypes.shape({
-    /** The given node will be inserted into left side of the chip. */
+    /** The given node will be inserted into left side of the badge. */
     leftIcon: PropTypes.node,
   }),
   /** The label of the badge. */

@@ -17,7 +17,7 @@ const fieldValues = [
     field1: 'username',
     field2: 'UserID',
     hasBadge: true,
-    chipLabel: 'Required',
+    badgeLabel: 'Required',
     key: 1,
   },
   { field1: 'firstName', field2: 'Given Name', hasBadge: false, key: 2 },
@@ -66,7 +66,7 @@ const sx = {
     mb: 'auto',
     width: '21px',
   },
-  chipStyle: {
+  badgeStyles: {
     width: '65px',
     height: '22px',
     minWidth: 'fit-content',
@@ -129,7 +129,7 @@ export const Default = () => {
             <Badge
               label="Required"
               textColor="#253746"
-              sx={sx.chipStyle}
+              sx={sx.badgeStyles}
             />
             )}
           </Box>
