@@ -54,6 +54,23 @@ const modifyTheme = {
       ...baseButton,
     },
   },
+  cards: {
+    container: {
+      borderRadius,
+      flexGrow: [1, 0],
+      maxWidth: astroTheme.breakpoints[0],
+      bg: 'white',
+      alignItems: 'stretch',
+      py: [0, 'xl'],
+      my: 'auto',
+      boxShadow: ['none', astroTheme.cards.container.boxShadow],
+      width: ['100%', '450px'],
+      minHeight: 'fit-content',
+    },
+    cardBody: {
+      flexGrow: [1, 0],
+    },
+  },
   colors: {
     activeDark: chroma(astroTheme.colors.active).darken(0.5).hex(),
     activeDarker: chroma(astroTheme.colors.active).darken(1).hex(),
@@ -103,20 +120,6 @@ const modifyTheme = {
     },
   },
   variants: {
-    card: {
-      container: {
-        borderRadius,
-        flexGrow: [1, 0],
-        maxWidth: astroTheme.breakpoints[0],
-        bg: 'white',
-        alignItems: 'stretch',
-        py: [0, 'xl'],
-        my: 'auto',
-        boxShadow: ['none', astroTheme.variants.card.container.boxShadow],
-        width: ['100%', '450px'],
-        minHeight: 'fit-content',
-      },
-    },
     wrapper: {
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -129,9 +132,6 @@ const modifyTheme = {
       bottom: 0,
       left: 0,
       right: 0,
-    },
-    cardBody: {
-      flexGrow: [1, 0],
     },
   },
 };
