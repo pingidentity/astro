@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Box from '../Box';
-
-import ScrollBox from './ScrollBox';
+import { Box, ScrollBox } from '../../index';
 
 export default {
   title: 'Components/ScrollBox',

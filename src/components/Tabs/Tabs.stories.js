@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Earth from 'mdi-react/GlobeModelIcon';
 import LockIcon from 'mdi-react/LockIcon';
 
-import { Badge } from '../../index';
-import Icon from '../Icon';
-import Tab from '../Tab';
-import Text from '../Text';
-
-import Tabs from './Tabs';
+import {
+  Badge,
+  Icon,
+  Tab,
+  Tabs,
+  Text,
+} from '../../index';
 
 export default {
   title: 'Components/Tabs',

@@ -4,8 +4,8 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-powershell';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { CodeView } from '../../index';
 
-import CodeView from './CodeView';
 import CodeViewReadme from './CodeView.mdx';
 
 const code = `{
@@ -129,7 +129,7 @@ WithLineNumbers.parameters = {
 export const WithCustomSize = () => (
   <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
     {`
-export const BadgeWithIcon = () => (
+const BadgeWithIcon = () => (
   <>
     <Badge label="Badge with Icon Button" bg="navy">
       <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">

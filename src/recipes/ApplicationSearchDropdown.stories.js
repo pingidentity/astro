@@ -7,7 +7,16 @@ import Email from 'mdi-react/EmailIcon';
 import Pin from 'mdi-react/PinIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 
-import { Box, Icon, IconButton, Item, ListView, PopoverContainer, SearchField, Text } from '../index';
+import {
+  Box,
+  Icon,
+  IconButton,
+  Item,
+  ListView,
+  PopoverContainer,
+  SearchField,
+  Text,
+} from '../index';
 
 export default {
   title: 'Recipes/Application Search Dropdown',

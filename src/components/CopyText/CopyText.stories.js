@@ -1,10 +1,12 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import Link from '../Link';
-import Text from '../Text';
+import {
+  CopyText,
+  Link,
+  Text,
+} from '../../index';
 
-import CopyText from './CopyText';
 import CopyTextReadme from './CopyText.mdx';
 
 export default {

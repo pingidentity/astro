@@ -5,9 +5,8 @@ import ArrowIcon from 'mdi-react/ArrowTopRightThickIcon';
 import {
   Box,
   Icon,
+  IconBadge,
 } from '../../index';
-
-import IconBadge from '.';
 
 export default {
   title: 'Components/IconBadge',

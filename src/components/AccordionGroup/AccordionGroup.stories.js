@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Item } from 'react-stately';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import Button from '../Button';
-import Text from '../Text';
-import TextField from '../TextField';
+import {
+  AccordionGroup,
+  Button,
+  Text,
+  TextField,
+} from '../../index';
 
 import AccordionReadme from './AccordionGroup.mdx';
-import AccordionGroup from '.';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },

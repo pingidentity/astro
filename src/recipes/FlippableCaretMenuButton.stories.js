@@ -5,12 +5,12 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
 
-import PopoverContainer from '../components/PopoverContainer';
 import {
   Box,
   Button,
   Icon,
   IconButton,
+  PopoverContainer,
 } from '../index';
 
 export default {

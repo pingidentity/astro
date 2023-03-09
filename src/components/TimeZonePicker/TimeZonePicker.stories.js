@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TimeZonePicker from './TimeZonePicker';
+import { TimeZonePicker } from '../../index';
 
 export default {
   title: 'Form/TimeZonePicker',

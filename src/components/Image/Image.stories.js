@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import isChromatic from 'chromatic/isChromatic';
 
-import { Box, Button } from '../../index';
+import { Box, Button, Image } from '../../index';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import { chiefIdentityChampions, pingImg } from '../../utils/devUtils/constants/images';
-
-import Image from '.';
 
 export default {
   title: 'Components/Image',

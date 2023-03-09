@@ -1,10 +1,10 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Avatar } from '../../index';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
 import AvatarReadme from './Avatar.mdx';
-import Avatar from '.';
 
 export default {
   title: 'Components/Avatar',

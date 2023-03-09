@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 
-import IconButtonToggle from '.';
+import { IconButtonToggle } from '../../index';
 
 export default {
   title: 'Components/IconButtonToggle',

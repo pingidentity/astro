@@ -3,12 +3,16 @@ import AccountIcon from 'mdi-react/AccountIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 
-import Box from '../components/Box';
-import Icon from '../components/Icon';
-import IconButton from '../components/IconButton';
-import PopoverMenu from '../components/PopoverMenu';
-import Text from '../components/Text';
-import { Item, Menu, OverlayProvider } from '../index';
+import {
+  Box,
+  Icon,
+  IconButton,
+  Item,
+  Menu,
+  OverlayProvider,
+  PopoverMenu,
+  Text,
+} from '../index';
 
 export default {
   title: 'Recipes/Panel Header',

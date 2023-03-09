@@ -2,7 +2,11 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { Item } from 'react-stately';
 import AccountIcon from 'mdi-react/AccountIcon';
 
-import { Box, Button, Messages } from '../..';
+import {
+  Box,
+  Button,
+  Messages,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 import { messagesReducerStory as messagesReducer, multiMessagesReducerStory as multiMessagesReducer } from './index';
