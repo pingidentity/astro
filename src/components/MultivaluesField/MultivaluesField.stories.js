@@ -150,7 +150,7 @@ const itemsWithSlots = [
     id: 1,
     name: 'Aardvark',
     key: 'Aardvark',
-    chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
+    badgeProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
     buttonProps: { variant: 'badgeDeleteButton' },
     slots: { leftIcon: <Icon icon={VariableIcon} size={16} /> },
   },
@@ -158,7 +158,7 @@ const itemsWithSlots = [
     id: 2,
     name: 'Kangaroo',
     key: 'Kangaroo',
-    chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
+    badgeProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
     buttonProps: { variant: 'badgeDeleteButton' },
     slots: { leftIcon: <Icon icon={HTMLIcon} size={16} /> },
   },
@@ -166,7 +166,7 @@ const itemsWithSlots = [
     id: 3,
     name: 'Snake',
     key: 'Snake',
-    chipProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
+    badgeProps: { variant: 'itemBadgeWithSlot', bg: 'white' },
     buttonProps: { variant: 'badgeDeleteButton' },
     slots: { leftIcon: <Icon icon={HTMLIcon} size={16} /> },
   },
@@ -418,7 +418,7 @@ CustomValues.argTypes = {
   },
 };
 
-export const IconSlotsInChip = args => {
+export const IconSlotsInBadge = args => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 

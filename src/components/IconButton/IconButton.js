@@ -36,7 +36,7 @@ const IconButton = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => buttonRef.current);
 
   const { buttonProps, isPressed } = useButton({ ...props }, buttonRef);
-  const { bg: chipBg } = useContext(BadgeContext);
+  const { bg: badgeBg } = useContext(BadgeContext);
   const { hoverProps, isHovered } = useHover(props);
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
@@ -59,7 +59,7 @@ const IconButton = forwardRef((props, ref) => {
         tabIndex={0}
         className={classNames}
         aria-label={ariaLabel}
-        sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
+        sx={badgeBg && isHovered && { 'path': { fill: badgeBg } }}
         variant={`iconButtons.${variant}`}
         onPointerOver={hoverProps.onPointerEnter}
       >

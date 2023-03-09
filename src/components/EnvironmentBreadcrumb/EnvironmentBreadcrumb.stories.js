@@ -318,7 +318,7 @@ export const ControlledMenu = () => {
   );
 };
 
-export const RightAlignedChips = args => {
+export const RightAlignedBadges = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,

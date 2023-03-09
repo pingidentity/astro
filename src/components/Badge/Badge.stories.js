@@ -110,7 +110,7 @@ export const BadgeWithIcon = () => (
 );
 
 export const BadgeWithLeftSlotAndIcon = () => (
-  <Badge label="Chip with Icon Button and Left Slot" bg="white" variant="itemBadgeWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }}>
+  <Badge label="Badge with Icon Button and Left Slot" bg="white" variant="itemBadgeWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }}>
     <IconButton
       aria-label="delete"
       variant="badgeDeleteButton"
