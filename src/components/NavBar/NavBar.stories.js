@@ -4,9 +4,11 @@ import Earth from 'mdi-react/EarthIcon';
 import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import GlobeIcon from 'mdi-react/GlobeIcon';
+import OpenInNew from 'mdi-react/OpenInNewIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
+import ViewGridPlusOutline from 'mdi-react/ViewGridPlusOutlineIcon';
 
 import {
   Box,
@@ -347,6 +349,14 @@ const data = [
 
 const secondData = [
   {
+    'data-id': 'da-vinci-data-id',
+    icon: ViewGridPlusOutline,
+    key: 'DaVinci',
+    heading: 'DaVinci',
+    customIcon: OpenInNew,
+    href: 'https://pingidentity.com/',
+  },
+  {
     'data-id': 'mfa-data-id',
     icon: Fingerprint,
     key: 'MFA',
@@ -468,7 +478,7 @@ const thirdData = [
 
 export const Default = () => (
   <NavBar>
-    <Box padding="md">
+    <Box padding="md" key="top-logo-parent">
       <Link
         aria-label="home link"
         href="https://pingidentity.com"
@@ -481,6 +491,7 @@ export const Default = () => (
     <Box
       variant="navBar.sectionContainer"
       paddingBottom="xl"
+      key="first-section-container"
     >
       <NavBarItem
         data-id="nav-bar-item"

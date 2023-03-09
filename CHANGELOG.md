@@ -3,12 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.1...@pingux/astro@1.42.2) (2023-02-22)
+
+
+### Bug Fixes
+
+* [UIP-5862]: ListView: incorrect hover state ([c8104a3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c8104a34a3bdf4b8d4b92eaeb24af2876cd07d0a))
+* [UIP-6017] Astro CopyView, CopyText, and Icon design updates ([69fa4af](https://gitlab.corp.pingidentity.com/ux/pingux/commit/69fa4afd09029721548fbb6d58435df2678626af))
+* [UIP-6118] Astro ColorField fix closure ([d8864ed](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d8864ed90d0494ec0f98bec854ea3218bf71c0e1))
+
+
+
+
+
 ## [1.42.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.0...@pingux/astro@1.42.1) (2023-02-16)
 
 
 ### Bug Fixes
 
 * [UIP-6013] List and Panel Recipe Style Fixes ([c9d69b9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c9d69b9014889263e0ea16305128737ee59c9a1f))
+
+
+
 
 
 # [1.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.41.0...@pingux/astro@1.42.0) (2023-02-13)

@@ -6,6 +6,9 @@ const container = {
   justifyContent: 'center',
   bg: 'accent.99',
   outline: 'none',
+  '& li': {
+    bg: 'white',
+  },
   '&.is-selected': {
     bg: 'white',
   },
