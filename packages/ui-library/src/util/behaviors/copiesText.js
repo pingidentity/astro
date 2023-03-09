@@ -20,6 +20,7 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
     static propTypes = {
         text: PropTypes.string,
         strings: PropTypes.object,
+        onClick: PropTypes.func,
     };
 
     static defaultProps = {
@@ -66,7 +67,7 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
         }
     }
 
-    _copyText = () => {
+    _copyText = (e) => {
         const component = ReactDOM.findDOMNode(this);
         const copyField = component.querySelector("[data-id='copy-field-input']");
         this._saveSelection(copyField);
@@ -75,6 +76,10 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
         }).catch(() => {
             this.setState({ message: -1 });
         });
+
+        if (this.props.onClick) {
+            this.props.onClick(e);
+        }
     };
 
     _hintMessage = () => {
@@ -114,7 +119,7 @@ const copiesText = (WrappedComponent, mapProps = {}) => class extends React.Comp
                 <WrappedComponent
                     {...props}
                     {...this._getMappedProps()}
-                    onClick={this._copyText}
+                    onClick={(e) => this._copyText(e)}
                 />
             </HelpHint>
         );
