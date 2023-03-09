@@ -9,6 +9,15 @@ import { Box, Icon, Text } from '../../index';
 
 const NavBarItemHeader = props => {
   const { item } = props;
+  const { children, href } = item;
+
+  return !children && href
+    ? <NavBarPrimaryItemHeader item={item} />
+    : <NavBarSectionItemHeader item={item} />;
+};
+
+const NavBarSectionItemHeader = props => {
+  const { item } = props;
   const { icon, key, className, heading } = item;
 
   const navBarState = useNavBarContext();
@@ -32,6 +41,7 @@ const NavBarItemHeader = props => {
   const { classNames } = useStatusClasses(className, {
     isSelected: childSelected && !isExpanded,
   });
+
   const color = childSelected && !isExpanded ? 'white' : 'neutral.95';
 
   return (
@@ -41,7 +51,7 @@ const NavBarItemHeader = props => {
           icon={icon}
           size="sm"
           sx={{
-            mr: '10px',
+            mr: 'sm',
             color,
             fill: color,
           }}
@@ -68,13 +78,64 @@ const NavBarItemHeader = props => {
   );
 };
 
+const NavBarPrimaryItemHeader = ({ item }) => {
+  const { icon, className, heading, customIcon } = item;
+
+  return (
+    <Box variant="navBar.itemHeaderContainer" className={className} isRow data-testid={heading}>
+      {icon && (
+      <Icon
+        icon={icon}
+        size="sm"
+        sx={{
+          mr: 'sm',
+          color: 'neutral.95',
+          fill: 'neutral.95',
+        }}
+        aria-hidden="true"
+      />
+      )}
+      <Text variant="navBarHeaderText">{heading}</Text>
+      <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
+        {customIcon && (
+        <Icon
+          icon={customIcon}
+          size="sm"
+          sx={{
+            color: 'neutral.95',
+            fill: 'neutral.95',
+          }}
+        />
+        )}
+      </Box>
+    </Box>
+  );
+};
+
 NavBarItemHeader.propTypes = {
+  item: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
+    href: PropTypes.string,
+  }),
+};
+
+NavBarSectionItemHeader.propTypes = {
   item: PropTypes.shape({
     heading: PropTypes.string,
     icon: PropTypes.elementType,
     className: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
     key: PropTypes.string,
+    href: PropTypes.string,
+  }),
+};
+
+NavBarPrimaryItemHeader.propTypes = {
+  item: PropTypes.shape({
+    heading: PropTypes.string,
+    icon: PropTypes.elementType,
+    className: PropTypes.string,
+    customIcon: PropTypes.elementType,
   }),
 };
 

@@ -3,7 +3,7 @@ import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { Button, Separator, Text } from '../..';
+import { Button, Link, Separator, Text } from '../..';
 import { useNavBarContext } from '../../context/NavBarContext';
 
 import NavBarItemBody from './NavBarItemBody';
@@ -18,7 +18,7 @@ import NavBarItemHeader from './NavBarItemHeader';
 const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
   const ref = useRef();
 
-  const childrenItems = items.filter(item => item.children);
+  const childrenItems = items.filter(item => item.children || item.href);
 
   return (
     <>
@@ -37,10 +37,19 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
       >
         {childrenItems.map(item => (
           <li key={item.key}>
-            <SectionItem
-              key={item.key}
-              item={item}
-            />
+            {!item.children && item.href
+              ? (
+                <PrimaryItem
+                  key={item.key}
+                  item={item}
+                />
+              )
+              : (
+                <SectionItem
+                  key={item.key}
+                  item={item}
+                />
+              )}
           </li>
         ))}
       </ul>
@@ -126,6 +135,18 @@ const SectionItem = ({ item }) => {
   );
 };
 
+const PrimaryItem = ({ item }) => {
+  return (
+    <Link
+      variant="buttons.navBarSectionButton"
+      href={item.href}
+      target="_blank"
+    >
+      <NavBarItemHeader item={item} />
+    </Link>
+  );
+};
+
 NavBarSection.defaultProps = {
   hasSeparator: false,
 };
@@ -156,6 +177,10 @@ SectionItem.propTypes = {
     }),
   }),
   menuProps: PropTypes.shape({}),
+};
+
+PrimaryItem.propTypes = {
+  item: PropTypes.shape({ href: PropTypes.string }),
 };
 
 export default NavBarSection;
