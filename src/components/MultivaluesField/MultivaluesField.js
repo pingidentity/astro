@@ -154,7 +154,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (onOpenChange) onOpenChange(isOpen);
   }, [isOpen]);
 
-  const addNewChipFromInput = inputValue => {
+  const addNewBadgeFromInput = inputValue => {
     const key = inputValue;
     if (state.selectionManager.isSelected(key)) {
       return;
@@ -182,7 +182,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (!hasCustomValue && filteredItems.length === 1) {
       selectTheOnlyFilteredItem();
     } else if (hasCustomValue) {
-      addNewChipFromInput(filterString);
+      addNewBadgeFromInput(filterString);
     }
   };
 
@@ -204,7 +204,7 @@ const MultivaluesField = forwardRef((props, ref) => {
           if (key === '') {
             return;
           }
-          addNewChipFromInput(e.target.value);
+          addNewBadgeFromInput(e.target.value);
         }
         break;
       }
@@ -296,7 +296,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       bg="active"
       label={item.name}
       slots={item.slots}
-      {...item.chipProps}
+      {...item.badgeProps}
     >
       <IconButton
         aria-label="delete"
