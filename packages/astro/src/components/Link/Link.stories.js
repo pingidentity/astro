@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Link } from '../../index';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
 import variants from './Link.styles';
-import Link from '.';
 
 export default {
   title: 'Components/Link',

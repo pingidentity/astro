@@ -1,6 +1,15 @@
 import React from 'react';
 
-import { Box, Separator, Table, TableBody, TableCell, TableHead, TableRow, Text } from '../../index';
+import {
+  Box,
+  Separator,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Text,
+} from '../../index';
 
 export default {
   title: 'Components/Text',

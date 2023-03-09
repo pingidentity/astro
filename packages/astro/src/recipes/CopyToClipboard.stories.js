@@ -1,7 +1,11 @@
 import React from 'react';
 
 import useCopyToClipboard from '../hooks/useCopyToClipboard';
-import { Box, Button, Text } from '../index';
+import {
+  Box,
+  Button,
+  Text,
+} from '../index';
 
 export default {
   title: 'Recipes/Copy to Clipboard',

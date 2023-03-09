@@ -13,7 +13,8 @@ import {
   useOverlayPosition,
   useOverlayTrigger,
   useOverlayTriggerState,
-} from '../index';
+}
+from '../index';
 import statuses from '../utils/devUtils/constants/statuses';
 
 import 'react-calendar/dist/Calendar.css';

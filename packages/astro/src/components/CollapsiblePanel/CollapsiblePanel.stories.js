@@ -14,6 +14,7 @@ import {
   Breadcrumbs,
   Button,
   CheckboxField,
+  CollapsiblePanel,
   CollapsiblePanelItem,
   Icon,
   IconButton,
@@ -25,7 +26,6 @@ import {
   Text,
 } from '../../index';
 
-import CollapsiblePanel from './CollapsiblePanel';
 import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
 
 export default {

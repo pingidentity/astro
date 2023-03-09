@@ -9,7 +9,7 @@ import {
   ListItem,
   Separator,
   Text,
-} from '../..';
+} from '../../index';
 import { onHoverArgTypes } from '../../utils/devUtils/props/hoverProps';
 
 export default {

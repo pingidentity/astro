@@ -20,7 +20,7 @@ import {
   ListView,
   SearchField,
   Text,
-} from '..';
+} from '../index';
 
 export default {
   title: 'Recipes/CollapsiblePanel with List',

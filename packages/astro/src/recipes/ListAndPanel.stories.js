@@ -24,7 +24,7 @@ import {
   Tab,
   Tabs,
   Text,
-} from '..';
+} from '../index';
 
 export default {
   title: 'Recipes/List with Panel',

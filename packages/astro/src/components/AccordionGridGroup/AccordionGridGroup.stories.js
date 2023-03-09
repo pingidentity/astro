@@ -5,6 +5,7 @@ import MoreVertIcon from 'mdi-react/MoreVertIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  AccordionGridGroup,
   Badge,
   Box,
   Icon,
@@ -15,7 +16,6 @@ import {
   TextField,
 } from '../../index';
 
-import AccordionGridGroup from './AccordionGridGroup';
 import AccordionGridReadme from './AccordionGridGroup.mdx';
 
 const data = [

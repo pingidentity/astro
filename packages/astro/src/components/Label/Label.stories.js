@@ -1,7 +1,8 @@
 import React from 'react';
 
+import { Label } from '../../index';
+
 import { modes } from './constants';
-import Label from '.';
 
 export default {
   title: 'Form/Base Components/Label',

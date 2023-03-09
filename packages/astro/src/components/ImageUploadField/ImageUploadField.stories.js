@@ -1,6 +1,10 @@
 import React, { useRef, useState } from 'react';
 
-import { Image, ImageUploadField, OverlayProvider } from '../..';
+import {
+  Image,
+  ImageUploadField,
+  OverlayProvider,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';

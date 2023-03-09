@@ -1,11 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { RockerButton, RockerButtonGroup } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, queryByAttribute, render, screen } from '../../utils/testUtils/testWrapper';
-import RockerButton from '../RockerButton';
-
-import RockerButtonGroup from './RockerButtonGroup';
 
 
 const testId = 'testId';

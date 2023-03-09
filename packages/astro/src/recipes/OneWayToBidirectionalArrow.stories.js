@@ -3,9 +3,14 @@ import CogsIcon from 'mdi-react/CogsIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
 import DragVerticalIcon from 'mdi-react/DragVerticalIcon';
 
-import Box from '../components/Box';
-import { ComboBoxField, Icon, IconButton, IconButtonToggle, Item } from '../index';
-
+import {
+  Box,
+  ComboBoxField,
+  Icon,
+  IconButton,
+  IconButtonToggle,
+  Item,
+} from '../index';
 
 export default {
   title: 'Recipes/One Way to Bidirectional Arrow',

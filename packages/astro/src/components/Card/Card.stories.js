@@ -1,7 +1,11 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Box, Button, Card } from '../../index';
+import {
+  Box,
+  Button,
+  Card,
+} from '../../index';
 
 import CardReadme from './Card.mdx';
 
