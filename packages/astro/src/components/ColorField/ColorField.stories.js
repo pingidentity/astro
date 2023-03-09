@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import { ColorField, OverlayProvider } from '../..';
+import { ColorField, OverlayProvider } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';

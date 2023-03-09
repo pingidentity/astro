@@ -6,11 +6,14 @@ import CreateIcon from 'mdi-react/CreateIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 
-import { Box, Icon, IconButton, Text } from '../..';
+import {
+  Box,
+  Icon,
+  IconButton,
+  ListView,
+  Text,
+} from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-
-import ListView from '.';
-
 
 export default {
   title: 'Components/ListView',

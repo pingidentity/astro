@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import { Box } from '../..';
 import useCopyToClipboard from '../../hooks/useCopyToClipboard';
+import { Box, TextField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses.js';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 import CopyButton from '../CopyText/CopyButton';
 import { modes as labelModes } from '../Label/constants';
-
-import TextField from '.';
 
 export default {
   title: 'Form/TextField',

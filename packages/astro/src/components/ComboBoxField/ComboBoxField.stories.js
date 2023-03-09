@@ -3,11 +3,14 @@ import { useAsyncList } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
 import { action } from '@storybook/addon-actions';
 
-import { Item, OverlayProvider, Section } from '../..';
+import {
+  ComboBoxField,
+  Item,
+  OverlayProvider,
+  Section,
+} from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-
-import ComboBoxField from './ComboBoxField';
 
 const items = [
   { name: 'Aardvark', id: '1' },

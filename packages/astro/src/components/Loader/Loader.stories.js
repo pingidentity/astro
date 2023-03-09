@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { Loader } from '../../index';
 import { flatColorList } from '../../styles/colors';
-
-import Loader from '.';
 
 export default {
   title: 'Components/Loader',

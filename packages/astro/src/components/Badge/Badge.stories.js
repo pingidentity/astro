@@ -4,13 +4,15 @@ import ContentCopy from 'mdi-react/ContentCopyIcon';
 import Earth from 'mdi-react/EarthIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import {
+  Badge,
+  Box,
+  Icon,
+  IconButton,
+} from '../../index';
 import { flatColorList } from '../../styles/colors.js';
-import Box from '../Box';
-import Icon from '../Icon';
-import IconButton from '../IconButton';
 
 import BadgeReadme from './Badge.mdx';
-import Badge from '.';
 
 export default {
   title: 'Components/Badge',

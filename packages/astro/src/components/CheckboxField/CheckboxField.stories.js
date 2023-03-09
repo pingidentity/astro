@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import {
+  Box,
+  CheckboxField,
+  Link,
+  Text,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-import Box from '../Box';
-import Link from '../Link';
-import Text from '../Text';
-
-import CheckboxField from './CheckboxField';
-
 
 export default {
   title: 'Form/CheckboxField',

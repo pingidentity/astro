@@ -1,7 +1,11 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Callout, Link, Text } from '../..';
+import {
+  Callout,
+  Link,
+  Text,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 import CalloutReadme from './Callout.mdx';

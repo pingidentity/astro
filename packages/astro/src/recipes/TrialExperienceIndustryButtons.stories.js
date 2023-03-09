@@ -1,7 +1,7 @@
 import React from 'react';
 import CloseIcon from 'mdi-react/CloseIcon';
 
-import useModalState from '../hooks/useModalState';
+import { useModalState } from '../hooks';
 import {
   Box,
   Button,

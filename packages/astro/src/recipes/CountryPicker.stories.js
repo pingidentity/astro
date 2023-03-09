@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { countries as countriesObj } from 'countries-list';
 
-import Box from '../components/Box';
-import ComboBoxField from '../components/ComboBoxField';
-import Input from '../components/Input';
-import { Item } from '../index';
+import {
+  Box,
+  ComboBoxField,
+  Input,
+  Item,
+} from '../index';
 
 export default {
   title: 'Recipes/Country Picker',

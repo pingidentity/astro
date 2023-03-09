@@ -2,7 +2,13 @@ import React from 'react';
 import { OverlayProvider } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
-import { ArrayField, ArrayFieldDeleteButton, Item, SelectField, TextField } from '../..';
+import {
+  ArrayField,
+  ArrayFieldDeleteButton,
+  Item,
+  SelectField,
+  TextField,
+} from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 export default {

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Pressable } from '@react-aria/interactions';
 
-import { Tooltip, TooltipTrigger } from '../../index';
+import {
+  SwitchField,
+  Tooltip,
+  TooltipTrigger,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
-
-import SwitchField from '.';
 
 export default {
   title: 'Form/SwitchField',

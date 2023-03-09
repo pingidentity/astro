@@ -2,9 +2,15 @@ import React from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
 import Earth from 'mdi-react/EarthIcon';
 
-import { Box, Button, Icon, Tooltip, TooltipTrigger } from '../../index';
-import IconButton from '../IconButton';
-import Text from '../Text';
+import {
+  Box,
+  Button,
+  Icon,
+  IconButton,
+  Text,
+  Tooltip,
+  TooltipTrigger,
+} from '../../index';
 
 export default {
   title: 'Components/TooltipTrigger',

@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import Users from 'mdi-react/AccountGroupIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 
-import { Box, SearchField, Text } from '../..';
 import { useDebounce } from '../../hooks';
+import {
+  Box,
+  SearchField,
+  Text,
+} from '../../index';
 import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 

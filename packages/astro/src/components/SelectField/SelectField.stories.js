@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
 
-import { Item, Section, SelectField, Separator } from '../..';
+import {
+  Item,
+  Section,
+  SelectField,
+  Separator,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';

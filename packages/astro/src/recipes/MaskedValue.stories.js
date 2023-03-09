@@ -3,7 +3,12 @@ import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 
 import { useStatusClasses } from '../hooks';
-import { Box, Icon, IconButton, Text } from '../index';
+import {
+  Box,
+  Icon,
+  IconButton,
+  Text,
+} from '../index';
 
 export default {
   title: 'Recipes/Masked Values',
