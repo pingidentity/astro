@@ -21,8 +21,8 @@ axeTest(getComponent);
 
 test('renders Badge component', () => {
   getComponent();
-  const chip = screen.getByTestId(testId);
-  expect(chip).toBeInTheDocument();
+  const badge = screen.getByTestId(testId);
+  expect(badge).toBeInTheDocument();
 });
 
 test('renders children within Badge component', () => {
@@ -50,7 +50,7 @@ test('renders Badge component with custom alignment', () => {
   expect(screen.getByTestId(testId)).toHaveStyleRule('right', '15px');
 });
 
-test('renders Chip component with left slot', () => {
+test('renders Badge component with left slot', () => {
   const slots = {
     leftIcon: <Icon icon={Earth} size={14} data-testid="iconId" />,
   };

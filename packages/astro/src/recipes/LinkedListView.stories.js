@@ -47,7 +47,7 @@ const testData = [
     id: '1',
     hasSeparator: false,
     hasInsetSeparator: true,
-    chipText: 'default',
+    badgeText: 'default',
     expirationText: 'Expiring On: 2022-12-08',
     childrenObjects: [
       {
@@ -64,7 +64,7 @@ const testData = [
     key: 'Policy4',
     name: 'Policy4',
     policyId: '9234890324k-124123asdf',
-    chipText: 'default',
+    badgeText: 'default',
     id: '2',
     hasSeparator: true,
   },
@@ -250,12 +250,12 @@ export const Default = ({ ...args }) => {
   const ExprirationBadge = props => {
     const {
       expirationText,
-      chipText,
+      badgeText,
     } = props;
 
     return (
       <Box
-        sx={!chipText && {
+        sx={!badgeText && {
           paddingLeft: '72px',
         }}
         flexGrow={1}
@@ -281,7 +281,7 @@ export const Default = ({ ...args }) => {
   // jsx of the production row
   const Production = props => {
     const {
-      chipText,
+      badgeText,
       hasStaging,
       policyId,
       name,
@@ -322,7 +322,7 @@ export const Default = ({ ...args }) => {
             </Text>
           </Box>
           {
-            chipText
+            badgeText
             && <DefaultBadge />
           }
         </Box>
@@ -334,7 +334,7 @@ export const Default = ({ ...args }) => {
   // jsx of the staging row.
   const Staging = props => {
     const {
-      chipText,
+      badgeText,
       expirationText,
       policyId,
       name,
@@ -382,7 +382,7 @@ export const Default = ({ ...args }) => {
           </Box>
         </Box>
         {
-          chipText
+          badgeText
           && <DefaultBadge />
         }
         {
