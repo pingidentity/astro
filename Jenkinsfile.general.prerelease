@@ -84,9 +84,9 @@ pipeline {
               env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version'
               break
             case 'astro-v2':
-              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish astro-v2 alpha build'
+              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish astro-v2 beta build'
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag v2 --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --preid beta --no-changelog --no-git-tag-version'
               break
             case ~/^release-.*/:
               env.LERNA_COMMIT_MESSAGE = 'chore(release): publish rc build'
