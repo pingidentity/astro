@@ -17,7 +17,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "rm -rf lib & yarn run build:cjs & yarn run build:esm & cp README.md ./lib & cp MIGRATION.md ./lib",
+    "build": "rm -rf lib && yarn run build:cjs && yarn run build:esm && cp README.md ./lib && cp MIGRATION.md ./lib",
     "build-ci": "yarn build",
     "append-version": "node ../../append_current_version.js",
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs",
