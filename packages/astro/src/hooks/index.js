@@ -1,6 +1,7 @@
 export { default as useAriaLabelWarning } from './useAriaLabelWarning';
 export { default as useColumnStyles } from './useColumnStyles';
 export { default as useComponentToggle } from './useComponentToggle';
+export { default as useCopyToClipboard } from './useCopyToClipboard';
 export { default as useDebounce } from './useDebounce';
 export { default as useDeprecationWarning } from './useDeprecationWarning';
 export { default as useFallbackImage } from './useFallbackImage';
