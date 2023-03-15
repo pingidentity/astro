@@ -45,6 +45,18 @@ const buttons = {
       ...theme.buttons.defaultHover,
     },
   },
+  inlinePrimary: {
+    '&:not(.disabled):hover': {
+      ...theme.buttons.inlinePrimary,
+      ...theme.buttons.defaultHover,
+    },
+  },
+  text: {
+    '&:not(.disabled):hover': {
+      ...theme.buttons.text,
+      ...theme.buttons.defaultHover,
+    },
+  },
   inverted: {
     ...theme.buttons.inverted,
     ':focus': {
