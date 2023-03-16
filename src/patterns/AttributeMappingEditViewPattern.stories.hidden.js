@@ -22,9 +22,9 @@ const editFieldValues = [
     field2: 'User ID',
     key: 1,
   },
-  { field1: 'firstName', field2: 'Given Name', hasBadge: false, key: 2 },
-  { field1: 'lastName', field2: 'Family Name', hasBadge: false, key: 3 },
-  { field1: 'population', field2: 'Population', hasBadge: false, key: 4 },
+  { field1: 'firstName', field2: 'Given Name', hasChip: false, key: 2 },
+  { field1: 'lastName', field2: 'Family Name', hasChip: false, key: 3 },
+  { field1: 'population', field2: 'Population', hasChip: false, key: 4 },
 ];
 
 const sx = {

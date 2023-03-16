@@ -55,7 +55,6 @@ export const Default = () => {
           <Bracket isLast={index === anyConditions.length - 1} />
           <Box
             mt="md"
-            ml="xs"
             variant="forms.input.fieldControlWrapper"
             bg="white"
             isRow
