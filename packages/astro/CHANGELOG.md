@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.3...@pingux/astro@1.43.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* [UIP-6152] UI Library overrides doesn't override hover for some buttons ([ed8b4b6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed8b4b67661cf197c20eb1f2618942caabc18487))
+* [UIP-6183] Table Cell Support Ellipsis ([b564a3a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b564a3a85eebfff3c97fbce68b937226d0de2629))
+* [UIP-6203]: add useCopyToClipboard to list of hook exports ([66580ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/66580ec2322ae9ed3e5df6f6e23aa5cfb1b22c50))
+
+
+### Features
+
+* [UIP-6092] NavBar: possibility to add external link as primary item ([a6d3208](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a6d320899b183b21f718122d86334595cbe46d1c))
+
+
+
+
+
 ## [1.42.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.2...@pingux/astro@1.42.3) (2023-03-07)
 
 
