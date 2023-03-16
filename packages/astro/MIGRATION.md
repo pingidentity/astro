@@ -39,7 +39,7 @@ Upgrading to Yarn 2 offers several benefits to developers, including:
 * Enhanced security
 * Improved developer experience
 
-Upgrading Astro to utilize Yarn 2 also guarantees that it will not impede applications that rely on Astro from following suit.
+Upgrading Astro to utilize Yarn 2 also guarantees that it will not impede applications that rely on Astro from following suit. A [migration guide](https://yarnpkg.com/getting-started/migration) is available for reference if your team is interested in making the switch.
 
 ### Breaking Changes
 
