@@ -34,22 +34,17 @@ const ComboBoxInput = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const { hoverProps, isHovered } = useHover({});
-
   const textFieldProps = {
     isDisabled,
     isReadOnly,
-    containerProps: {
-      sx: style,
-      variant: 'forms.comboBox.container',
-      ...hoverProps,
-      ...containerProps,
-    },
+    containerProps,
     ...mergeProps(inputProps, others),
   };
 
   // istanbul ignore next
   useImperativeHandle(ref, () => inputRef.current);
+
+  const { hoverProps, isHovered } = useHover({});
 
   // START - minimum delay time for loading indicator = 500ms
   const [showLoading, setShowLoading] = useState(false);
@@ -118,19 +113,27 @@ const ComboBoxInput = forwardRef((props, ref) => {
       focusRingClass="focus-ring"
       autoFocus={hasAutoFocus}
     >
-      <TextField
-        {...textFieldProps}
-        wrapperProps={{ ref: inputWrapperRef, ...wrapperProps }}
-        controlProps={{
-          variant: 'forms.comboBox.input',
-          ...controlProps,
-        }}
-        statusClasses={{ isHovered }}
-        ref={inputRef}
-        slots={{
-          inContainer: button,
-        }}
-      />
+      <Box
+        isRow
+        style={style}
+        variant="forms.comboBox.container"
+        {...hoverProps}
+        {...wrapperProps}
+      >
+        <TextField
+          {...textFieldProps}
+          wrapperProps={{ ref: inputWrapperRef }}
+          controlProps={{
+            variant: 'forms.comboBox.input',
+            ...controlProps,
+          }}
+          statusClasses={{ isHovered }}
+          ref={inputRef}
+          slots={{
+            inContainer: button,
+          }}
+        />
+      </Box>
     </FocusRing>
   );
 });
