@@ -27,12 +27,12 @@ const tableCell = {
 
 const tableCellContents = {
   flex: '1 1 0%',
-  minWidth: '0px',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
   fontWeight: '400',
   justifyContent: 'center',
+  maxWidth: '100%',
 };
 
 const tableRow = {
