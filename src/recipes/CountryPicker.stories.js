@@ -31,7 +31,7 @@ const sx = {
   comboBoxFieldWrapperClose: {
     position: 'absolute',
     transition: '0.2s width ease',
-    maxWidth: '110px',
+    width: '110px',
   },
   inputWrapper: {
     width: '100%',
@@ -88,7 +88,7 @@ export const Default = () => {
         width="100%"
         isOpen={isOpen}
         onOpenChange={setIsOpen}
-        containerProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
+        wrapperProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
         controlProps={{ 'aria-label': 'Country Picker' }}
         defaultItems={Object.entries(countriesObj)}
         inputValue={getInputValue()}
