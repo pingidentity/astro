@@ -66,7 +66,7 @@ const sx = {
     mb: 'auto',
     width: '21px',
   },
-  badgeStyles: {
+  badgeStyle: {
     width: '65px',
     height: '22px',
     minWidth: 'fit-content',
@@ -129,7 +129,7 @@ export const Default = () => {
             <Badge
               label="Required"
               textColor="#253746"
-              sx={sx.badgeStyles}
+              sx={sx.badgeStyle}
             />
             )}
           </Box>
