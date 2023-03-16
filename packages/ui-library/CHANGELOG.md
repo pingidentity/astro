@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.10](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.9...ui-library@5.6.10) (2023-03-07)
+
+
+### Bug Fixes
+
+* [UIP-6155] CopyIcon onClick propagates to other components ([3b7f3bc](https://hg-od01.corp.pingidentity.com/r/gitweb/commits/3b7f3bc13fb797d988ac996e5a9fe445c184d3a7))
+
+
+
+
+
 ## [5.6.9](https://hg-od01.corp.pingidentity.com/r/gitweb/compare/ui-library@5.6.8...ui-library@5.6.9) (2023-02-13)
 
 **Note:** Version bump only for package ui-library
