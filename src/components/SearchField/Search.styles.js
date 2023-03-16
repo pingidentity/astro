@@ -8,6 +8,9 @@ export const wrapper = {
   '> input::-webkit-search-cancel-button, > input::-webkit-search-decoration': {
     WebkitAppearance: 'none',
   },
+  '&.is-focused > *': {
+    zIndex: 1,
+  },
 };
 
 export const icon = {
