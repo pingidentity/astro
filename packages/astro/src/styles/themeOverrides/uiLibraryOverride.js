@@ -91,11 +91,16 @@ const forms = {
       '& input[type=search]': {
         ...theme.text.inputValue,
         borderColor: 'neutral.80',
+        fontSize: '15px',
         bg: 'white',
         '::placeholder': {
           ...theme.text.placeholder,
           fontStyle: 'unset',
+          fontSize: '15px',
         },
+      },
+      '& input[type=search]:focus': {
+        borderColor: 'neutral.80',
       },
     },
   },
