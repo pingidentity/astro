@@ -153,6 +153,18 @@ test('if all requirements are successful, do not render popover', () => {
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 
+test('passing in props to the requirements list works', () => {
+  const requirementsListProps = { 'data-testid': 'my-custom-id' };
+  getComponent({
+    requirements: defaultRequirements,
+    requirementsListProps,
+  });
+  expect(screen.queryByTestId(requirementsListProps['data-testid'])).not.toBeInTheDocument();
+
+  userEvent.click(screen.getByRole('textbox'));
+  expect(screen.queryByTestId(requirementsListProps['data-testid'])).toBeInTheDocument();
+});
+
 test('password field with helper text', () => {
   const helperText = 'helper text';
   getComponent({ helperText });
