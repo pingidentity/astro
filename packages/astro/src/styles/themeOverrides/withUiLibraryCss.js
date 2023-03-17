@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { ThemeProvider } from 'theme-ui';
+import { ThemeProvider } from '@emotion/react';
+import { merge } from 'theme-ui';
+
+import astroTheme from '../theme';
 
 import uiLibraryOverride from './uiLibraryOverride';
 
@@ -18,8 +21,10 @@ const WithUiLibraryCss = Story => {
     });
   }, []);
 
+  const theme = merge(astroTheme, uiLibraryOverride);
+
   return (
-    <ThemeProvider theme={uiLibraryOverride}>
+    <ThemeProvider theme={theme}>
       <Story />
     </ThemeProvider>
   );
