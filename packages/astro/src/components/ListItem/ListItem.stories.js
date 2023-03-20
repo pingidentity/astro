@@ -42,7 +42,7 @@ export const Default = args => (
         <Text variant="itemTitle" alignSelf="center">Fons Vernall</Text>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton >
+        <IconButton aria-label="filter">
           <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
         </IconButton>
       </Box>
@@ -69,7 +69,7 @@ export const WithSubtitle = args => (
         </Box>
       </Box>
       <Box isRow alignSelf="center">
-        <IconButton >
+        <IconButton aria-label="filter">
           <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
         </IconButton>
       </Box>
@@ -109,7 +109,7 @@ export const WithHoverHandlers = (args) => {
           </Box>
         </Box>
         <Box isRow alignSelf="center">
-          <IconButton size={26}>
+          <IconButton size={26} aria-label="filter">
             <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
           </IconButton>
         </Box>
