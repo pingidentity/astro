@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
-import { Pressable, useHover } from '@react-aria/interactions';
+import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
 
@@ -35,13 +35,14 @@ const IconButton = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
+  const { isPressed: isPressedFromContext } = usePress(buttonRef);
   const { buttonProps, isPressed } = useButton({ ...props }, buttonRef);
   const { bg: badgeBg } = useContext(BadgeContext);
   const { hoverProps, isHovered } = useHover(props);
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
     isHovered,
-    isPressed,
+    isPressed: isPressed || isPressedFromContext,
     isFocused: isFocusVisible,
     isDisabled,
   });
