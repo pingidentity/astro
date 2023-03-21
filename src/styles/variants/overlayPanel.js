@@ -14,6 +14,7 @@ const overlayPanel = {
   p: '25px',
   transition: 'right 500ms',
   maxWidth: '100%',
+  display: 'none !important',
   '&.is-small': {
     width: '400px',
   },
