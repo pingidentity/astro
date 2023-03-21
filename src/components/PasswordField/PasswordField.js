@@ -34,6 +34,7 @@ const PasswordField = forwardRef((props, ref) => {
     isVisible: isVisibleProp,
     onVisibleChange: onVisibleChangeProp,
     requirements,
+    requirementsListProps,
     slots,
     status,
     viewHiddenIconTestId,
@@ -156,7 +157,10 @@ const PasswordField = forwardRef((props, ref) => {
         ref={popoverRef}
         style={style}
       >
-        <RequirementsList requirements={requirements} />
+        <RequirementsList
+          requirements={requirements}
+          {...requirementsListProps}
+        />
       </PopoverContainer>
     </>
   );
@@ -227,6 +231,8 @@ PasswordField.propTypes = {
   viewIconTestId: PropTypes.string,
   /** Array of Requirements and their status. */
   requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
+  /** Props object that is spread to the requirements list. */
+  requirementsListProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
