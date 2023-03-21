@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.44.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.43.0...@pingux/astro@1.44.0) (2023-03-21)
+
+
+### Bug Fixes
+
+* [UIP-6040] NumberField: fix increment and decrement buttons focus ([9147d19](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9147d196d8e07b7040ae2c1e5d835c37ee24a7a3))
+* [UIP-6114] Overlay Panel Colorfield Doesnt Update ([f806c76](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f806c761101ccf8b28b7338cb95a66821295effd))
+* [UIP-6180] Update Close Button Aria Label ([f0489f8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f0489f8a6249afecf468d7c9a6f7cb60ea95210b))
+* [UIP-6182] Add aria-labels to list-item buttons ([634a755](https://gitlab.corp.pingidentity.com/ux/pingux/commit/634a755a4e313eb38940c1bba6fd87ba202073f3))
+* [UIP-6184] OverlayPanel: add visibility css prop ([8b69e03](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8b69e030a933cf968336dbc73060fb1a72973b05))
+* [UIP-6194] Update PageHeader Recipe to match mock changes ([401f62f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/401f62fcc280a58c4bdbaf92221a5b79e10ea164))
+* [UIP-6200] CollapsiblePanel Breadcrumbs Accessibility ([e0b569c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e0b569cc9ccc7b4ac79dde7807a6c1ff22e1d1a8))
+* [UIP-6202] Multivalues Select Item Screen Reader ([26e7571](https://gitlab.corp.pingidentity.com/ux/pingux/commit/26e7571076e04083d45af742cf40f0f6cf589fe0))
+
+
+### Features
+
+* [UIP-6206] Add requirementsListProps to PasswordField ([705f977](https://gitlab.corp.pingidentity.com/ux/pingux/commit/705f9777f0d8c5ce2841c1a649eb57d5e013ad0f))
+
+
+
+
+
+# [1.43.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.3...@pingux/astro@1.43.0) (2023-03-16)
+
+
+### Bug Fixes
+
+* [UIP-6152] UI Library overrides doesn't override hover for some buttons ([ed8b4b6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed8b4b67661cf197c20eb1f2618942caabc18487))
+* [UIP-6183] Table Cell Support Ellipsis ([b564a3a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b564a3a85eebfff3c97fbce68b937226d0de2629))
+* [UIP-6203]: add useCopyToClipboard to list of hook exports ([66580ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/66580ec2322ae9ed3e5df6f6e23aa5cfb1b22c50))
+
+
+### Features
+
+* [UIP-6092] NavBar: possibility to add external link as primary item ([a6d3208](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a6d320899b183b21f718122d86334595cbe46d1c))
+
+
+
+
+
+## [1.42.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.2...@pingux/astro@1.42.3) (2023-03-07)
+
+
+### Bug Fixes
+
+* [UIP-6181] DataTable error ([a99481e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a99481e31c31e74619cff883a7fde3c2da7a7ba5))
+
+
+
+
+
 ## [1.42.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.42.1...@pingux/astro@1.42.2) (2023-02-22)
 
 

@@ -119,14 +119,14 @@ test('should show hintText text if prop is passed', () => {
   expect(screen.getByText(hintText)).toBeInTheDocument();
 });
 
-test('increment and decrement buttons shouldn\'t be able to be focused via keyboard', () => {
+test('increment and decrement buttons should be able to be focused via keyboard', () => {
   getComponent();
   userEvent.tab();
   expect(screen.getByLabelText(testLabel)).toHaveFocus();
   userEvent.tab();
-  expect(screen.getByLabelText('arrow-up')).not.toHaveFocus();
+  expect(screen.getByLabelText('arrow-up')).toHaveFocus();
   userEvent.tab();
-  expect(screen.getByLabelText('arrow-down')).not.toHaveFocus();
+  expect(screen.getByLabelText('arrow-down')).toHaveFocus();
 });
 
 test('number field input receiving name attribute', () => {
