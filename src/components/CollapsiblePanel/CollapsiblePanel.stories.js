@@ -200,10 +200,22 @@ export const CollapsiblePanelWithBadge = args => {
                 display="flex"
               />
               <Breadcrumbs icon={ChevronRightIcon}>
-                <Item key="home" variant="link" data-id="home">
+                <Item
+                  aria-label="Ed Nepomuceno"
+                  data-id="home"
+                  href="https://www.pingidentity.com"
+                  key="home"
+                  variant="buttons.link"
+                >
                   Ed Nepomuceno
                 </Item>
-                <Item key="editGroups" variant="variants.collapsiblePanel.neutralText" data-id="editGroups">
+                <Item
+                  aria-label="edit groups"
+                  data-id="editGroups"
+                  href="https://www.pingidentity.com"
+                  key="editGroups"
+                  variant="buttons.link"
+                >
                   Edit Groups
                 </Item>
               </Breadcrumbs>

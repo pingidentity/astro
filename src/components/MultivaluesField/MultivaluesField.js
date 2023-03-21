@@ -299,7 +299,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       {...item.badgeProps}
     >
       <IconButton
-        aria-label="delete"
+        aria-label={`delete ${item.name}`}
         onPress={() => deleteItem(item.key)}
         variant="badge.deleteButton"
         {...item.buttonProps}

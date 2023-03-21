@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
+import { Item } from 'react-stately';
 import ArrowCollapse from 'mdi-react/ArrowCollapseIcon';
 import ArrowTopRightBottomLeft from 'mdi-react/ArrowTopRightBottomLeftIcon';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
@@ -13,7 +14,6 @@ import {
   Button,
   ColorField,
   IconButton,
-  Item,
   ListView,
   Messages,
   MultivaluesField,
@@ -340,6 +340,11 @@ export const Expandable = () => {
   ];
 
   const onCloseHandler = () => onClose(state, triggerRef);
+  const [color, setColor] = useState('#EACE91');
+  const handleColorChange = useCallback(({ rgb }) => {
+    const { r, b, g, a } = rgb;
+    setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
+  }, []);
 
   const header = (
     <Box sx={sx.header}>
@@ -389,7 +394,7 @@ export const Expandable = () => {
     <Box sx={sx.tabContent}>
       <TextField label="Node Title" defaultValue="The Value of the Text Input" />
       <TextField label="Node Description" defaultValue="The Value of the Text Input" />
-      <ColorField value="#EACE91" label="Node Background Color" buttonProps={{ sx: sx.colorField }} />
+      <ColorField value={color} label="Node Background Color" buttonProps={{ sx: sx.colorField }} onChange={handleColorChange} />
       <SwitchField hintText="Example Hint" labelProps={{ sx: sx.switchField }} label="Expire Authentication Token" value="expire-authentication-token" />
       <SwitchField hintText="Example Hint" labelProps={{ sx: sx.switchField }} label="Expire Flow Instance Cache" value="expire-flow-instance-cache" />
       <MultivaluesField
