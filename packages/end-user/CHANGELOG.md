@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.22](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.21...@pingux/end-user@2.4.22) (2023-03-21)
+
+
+### Bug Fixes
+
+* [UIP-5950] update ping logo in end-user lib ([6c00073](https://gitlab.corp.pingidentity.com/ux/end-user/commit/6c000730acae5b4745cf8904358571e514f43322))
+* [UIP-5950] update ping logo png file in end-user lib ([c5335e3](https://gitlab.corp.pingidentity.com/ux/end-user/commit/c5335e3158ce14185ffc17ee5cffc59129bf3b8f))
+
+
+
+
+
 ## [2.4.21](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.20...@pingux/end-user@2.4.21) (2023-03-07)
 
 
