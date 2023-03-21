@@ -161,3 +161,15 @@ test('two menus can not be open at the same time', () => {
   expect(screen.queryAllByRole('menuitem')).toHaveLength(3);
   expect(screen.queryByRole('menuitem', { name: 'C' })).toBeInTheDocument();
 });
+
+test('holds a pressed state for menu trigger when isOpen is true', () => {
+  getComponent();
+  const button = screen.getByRole('button');
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  expect(button).not.toHaveClass('is-pressed');
+
+  userEvent.click(button);
+  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  expect(button).toHaveClass('is-pressed');
+});
