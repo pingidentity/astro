@@ -98,6 +98,7 @@ export const toAstroInputProps = (props) => {
       labelMode,
       defaultText,
       requirements,
+      requirementsListProps,
       validateRequirements,
       autoComplete,
       autocomplete,
@@ -147,6 +148,7 @@ export const toAstroInputProps = (props) => {
     options: getDisabledEnumOptions(enumOptions, enumDisabled),
     status,
     requirements,
+    requirementsListProps,
     validateRequirements,
   };
 

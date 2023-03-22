@@ -79,3 +79,14 @@ test('it sets autocomplete attribute correctly', () => {
   const input = screen.queryByLabelText(name);
   expect(input).toHaveAttribute('autocomplete', 'new-password');
 });
+
+test('it passes requirementsListProps correctly', async () => {
+  const newUISchema = JSON.parse(JSON.stringify(uiSchema)); // make deep copy
+  newUISchema.password['ui:options'].requirementsListProps = { 'data-testid': 'test-password' };
+  renderSchemaForm({ schema, uiSchema: newUISchema });
+  expect(screen.queryByTestId('test-password')).not.toBeInTheDocument();
+
+  // Ensure the popover is inserted into the document and displays when the input is focused
+  await waitFor(() => userEvent.tab());
+  expect(screen.queryByTestId('test-password')).toBeInTheDocument();
+});
