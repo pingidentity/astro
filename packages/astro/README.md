@@ -1,6 +1,6 @@
 # `@pingux/astro`
 
-Astro is a lightweight, composable, and themeable React component library. Astro was created to help developers and designers create consistent, user friendly, and accessible UIs across all Ping products. Please visit https://pingidentity.design for more information and to read individual component documentation.
+Astro is a lightweight, composable, and themeable React component library. Astro was created to help developers and designers create consistent, user friendly, and accessible UIs across all Ping products. Please visit https://pingidentity.design for more information. To read individual component documentation, [our Storybook docs site](https://storybook.pingidentity.design) is a great resource.
 
 ## Installing
 
@@ -21,8 +21,8 @@ Yarn:
 
 All apps should be wrapped in an `<AstroWrapper>` for full functionality and styling.
 
-```
-import { AstroWrapper } from ‘@pingux/astro’;
+```js
+import { AstroWrapper } from '@pingux/astro';
 
 <AstroWrapper>
   <App />
@@ -37,9 +37,9 @@ Astro uses [Storybook](https://storybook.js.org/) for component documentation. O
 
 The Storybook server defaults to `https://localhost:6006`. This port can be customized by running the command start -p 9009. For example, this will start Storybook on port 9009. More information on customizing Storybook CLI options can be found at https://storybook.js.org/docs/react/api/cli-options. 
 
-Component prop documentation is available under the “documentation” tab per each component story. Most props can be toggled and configured for preview purposes within the prop table.
+Component prop documentation is available under the "documentation" tab per each component story. Most props can be toggled and configured for preview purposes within the prop table.
 
-For example, to view the disabled button styling, navigate to the Button story’s props table, locate the “isDisabled” prop, and toggle to “true”. This change allows you to preview the disabled button’s styling and functionality.
+For example, to view the disabled button styling, navigate to the Button story’s props table, locate the "isDisabled" prop, and toggle to "true". This change allows you to preview the disabled button’s styling and functionality.
 
 ## Yarn
 We use a modern version of [Yarn](https://yarnpkg.com/getting-started) for package management with the [Plug'n'Play](https://yarnpkg.com/features/pnp) feature enabled. This allows for a [Zero Install](https://yarnpkg.com/features/zero-installs) approach to be used.
