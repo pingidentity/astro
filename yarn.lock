@@ -2073,6 +2073,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emotion/babel-plugin@npm:^11.10.6":
+  version: 11.10.6
+  resolution: "@emotion/babel-plugin@npm:11.10.6::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40emotion%2Fbabel-plugin%2F-%2Fbabel-plugin-11.10.6.tgz"
+  dependencies:
+    "@babel/helper-module-imports": ^7.16.7
+    "@babel/runtime": ^7.18.3
+    "@emotion/hash": ^0.9.0
+    "@emotion/memoize": ^0.8.0
+    "@emotion/serialize": ^1.1.1
+    babel-plugin-macros: ^3.1.0
+    convert-source-map: ^1.5.0
+    escape-string-regexp: ^4.0.0
+    find-root: ^1.1.0
+    source-map: ^0.5.7
+    stylis: 4.1.3
+  checksum: 3eed138932e8edf2598352e69ad949b9db3051a4d6fcff190dacbac9aa838d7ef708b9f3e6c48660625d9311dae82d73477ae4e7a31139feef5eb001a5528421
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-preset-css-prop@npm:^11.2.0":
   version: 11.10.0
   resolution: "@emotion/babel-preset-css-prop@npm:11.10.0"
@@ -2125,7 +2144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/core@npm:^10.0.0, @emotion/core@npm:^10.0.28, @emotion/core@npm:^10.0.9":
+"@emotion/core@npm:^10.0.28, @emotion/core@npm:^10.0.9":
   version: 10.3.1
   resolution: "@emotion/core@npm:10.3.1"
   dependencies:
@@ -2185,7 +2204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:0.8.8, @emotion/is-prop-valid@npm:^0.8.1":
+"@emotion/is-prop-valid@npm:^0.8.1":
   version: 0.8.8
   resolution: "@emotion/is-prop-valid@npm:0.8.8"
   dependencies:
@@ -2353,21 +2372,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled-base@npm:^10.3.0":
-  version: 10.3.0
-  resolution: "@emotion/styled-base@npm:10.3.0"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    "@emotion/is-prop-valid": 0.8.8
-    "@emotion/serialize": ^0.11.15
-    "@emotion/utils": 0.11.3
-  peerDependencies:
-    "@emotion/core": ^10.0.28
-    react: ">=16.3.0"
-  checksum: ac0bb8f39e92fda12686afe5d398f7215cc7276d66195d5937f58ee7dae516e58017594cc74deed72859043623db824fdaf8213d29276316749ebff2ef7a5e4d
-  languageName: node
-  linkType: hard
-
 "@emotion/styled@npm:11.3.0":
   version: 11.3.0
   resolution: "@emotion/styled@npm:11.3.0"
@@ -2387,19 +2391,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 5e5c1e89d2022696e44d2a44e352aba56ab0961d9c4a78eff5d1bfa3deae08487fb17641610446595471d74e956b791e619d3a9006c18e145ed849ef7062e1b5
-  languageName: node
-  linkType: hard
-
-"@emotion/styled@npm:^10.0.0":
-  version: 10.3.0
-  resolution: "@emotion/styled@npm:10.3.0"
-  dependencies:
-    "@emotion/styled-base": ^10.3.0
-    babel-plugin-emotion: ^10.0.27
-  peerDependencies:
-    "@emotion/core": ^10.0.27
-    react: ">=16.3.0"
-  checksum: 9d9609c008c009d8b9249fdbb2017a404b1fc6c9118c84ec9a916e86670d4c61f03fee24297ad10b460dab628ff8260066338617ee99ede3ae7969ce5995e9bc
   languageName: node
   linkType: hard
 
@@ -2423,6 +2414,26 @@ __metadata:
     "@types/react":
       optional: true
   checksum: d56cbf48f30c5a36d618adf2c4d7d9440b5059373a96964fa2a6e832ce9b9ae8cee11b5292b444264b3acbfdd6a8f6c9050e197a35c8dea7e9b9cc78f55ac31c
+  languageName: node
+  linkType: hard
+
+"@emotion/styled@npm:^11.1.1":
+  version: 11.10.6
+  resolution: "@emotion/styled@npm:11.10.6::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40emotion%2Fstyled%2F-%2Fstyled-11.10.6.tgz"
+  dependencies:
+    "@babel/runtime": ^7.18.3
+    "@emotion/babel-plugin": ^11.10.6
+    "@emotion/is-prop-valid": ^1.2.0
+    "@emotion/serialize": ^1.1.1
+    "@emotion/use-insertion-effect-with-fallbacks": ^1.0.0
+    "@emotion/utils": ^1.2.0
+  peerDependencies:
+    "@emotion/react": ^11.0.0-rc.0
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: ed0ee4bec3b63ee9c5eb8216b22646313ff1ada06c5183f128d25b73252126e9fde625e81c868be7ccd666b686a73076f923ce188dac25e93d5062ddffdad46f
   languageName: node
   linkType: hard
 
@@ -4806,8 +4817,8 @@ __metadata:
     "@emotion/cache": ^11.4.0
     "@emotion/eslint-plugin": ^11.2.0
     "@emotion/jest": ^11.5.0
-    "@emotion/react": ^11.10.5
-    "@emotion/styled": ^11.10.5
+    "@emotion/react": ^11.1.1
+    "@emotion/styled": ^11.1.1
     "@faker-js/faker": ~7.5.0
     "@mdx-js/react": ^1.6.22
     "@react-aria/accordion": ~3.0.0-alpha.11
@@ -4895,7 +4906,6 @@ __metadata:
     react-json-tree: ^0.17.0
     react-stately: ~3.17.0
     react-test-renderer: 16.13.1
-    rebass: ^4.0.7
     recharts: ^2.1.4
     regenerator-runtime: ^0.13.7
     styled-system: ^5.1.5
@@ -9867,7 +9877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@styled-system/css@npm:^5.0.0, @styled-system/css@npm:^5.1.5":
+"@styled-system/css@npm:^5.1.5":
   version: 5.1.5
   resolution: "@styled-system/css@npm:5.1.5"
   checksum: 0d3579ae82f5f53412c22e675aec9f77fa17b52deddc03d680340d8187006f1698ef0577db30a3c57ee0204f83ec61bb8a01105c3f0d60ca5c925a70175b5358
@@ -9939,7 +9949,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@styled-system/should-forward-prop@npm:^5.0.0, @styled-system/should-forward-prop@npm:^5.1.2":
+"@styled-system/should-forward-prop@npm:^5.1.2":
   version: 5.1.5
   resolution: "@styled-system/should-forward-prop@npm:5.1.5"
   dependencies:
@@ -33637,15 +33647,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rebass@npm:^4.0.7":
-  version: 4.0.7
-  resolution: "rebass@npm:4.0.7"
-  dependencies:
-    reflexbox: ^4.0.6
-  checksum: 2819f5d7605d9804a47718bb39898c94d88da67cd1b2709c29c6b5997083a0de36fd2b1795e15934fb85f6895f765ca920c1ab65f714041bfc505ede9521ea8e
-  languageName: node
-  linkType: hard
-
 "recast@npm:^0.11.17, recast@npm:~0.11.12":
   version: 0.11.23
   resolution: "recast@npm:0.11.23"
@@ -33884,21 +33885,6 @@ __metadata:
   version: 0.2.0
   resolution: "reflect.ownkeys@npm:0.2.0"
   checksum: 9530b166569e547c2cf25ade3cdc39c662212feeccf3e0ed46e6d8abf92f5683c82d7857011cee6230bf648eb0b99b6b419a007012b8571dcd4bb4d818d3b88d
-  languageName: node
-  linkType: hard
-
-"reflexbox@npm:^4.0.6":
-  version: 4.0.6
-  resolution: "reflexbox@npm:4.0.6"
-  dependencies:
-    "@emotion/core": ^10.0.0
-    "@emotion/styled": ^10.0.0
-    "@styled-system/css": ^5.0.0
-    "@styled-system/should-forward-prop": ^5.0.0
-    styled-system: ^5.0.0
-  peerDependencies:
-    react: ^16.8.6
-  checksum: b532551c8b84242c7f49abcb41efa3e68b7ee42228221973da9b385e665ca8c04b216fda710b41641d97d75fbd7ebe0a21bb9c9f5428617199afbde684afe842
   languageName: node
   linkType: hard
 
@@ -36777,7 +36763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-system@npm:^5.0.0, styled-system@npm:^5.1.5":
+"styled-system@npm:^5.1.5":
   version: 5.1.5
   resolution: "styled-system@npm:5.1.5"
   dependencies:
