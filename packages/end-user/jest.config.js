@@ -3,10 +3,6 @@ const config = require('../../shared/test/jest.config.js');
 module.exports = {
     ...config,
     unmockedModulePathPatterns: [
-<<<<<<< HEAD
-=======
-        ...config.unmockedModulePathPatterns,
->>>>>>> d48e867b951e06c36402f43c96d95242b54a3f51
         "<rootDir>/src/util",
         "<rootDir>/src/testutil"
     ],
