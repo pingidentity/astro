@@ -95,7 +95,7 @@ const NavBarPrimaryItemHeader = ({ item }) => {
         aria-hidden="true"
       />
       )}
-      <Text variant="navBarHeaderText">{heading}</Text>
+      <Text variant="variants.navBar.headerText">{heading}</Text>
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         {customIcon && (
         <Icon
