@@ -20,6 +20,28 @@ chromatic:
   stage: screenshot
   variables:
     CHROMATIC_FLAGS: "--project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
-  when: manual
+  rules:
+    # Run automatically for merge trains to develop and master
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
+    # Required manual trigger for merge requests against master or develop
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
+      when: manual
+      allow_failure: false
+    # Optional manual trigger for merge requests against branches other than master and develop
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME !~ /^(master|develop)/'
+      changes:
+        - packages/astro/**/*
+      when: manual
+      allow_failure: true
+    # Run automatically for all commits on develop and master, plus auto-accept any changes
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "master"'
+      changes:
+        - packages/astro/**/*
+      variables:
+        CHROMATIC_FLAGS: "--auto-accept-changes --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name demo --scope astro"
   script:
     - lerna run chromatic -- $CHROMATIC_FLAGS
