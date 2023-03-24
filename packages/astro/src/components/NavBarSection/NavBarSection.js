@@ -138,7 +138,7 @@ const SectionItem = ({ item }) => {
 const PrimaryItem = ({ item }) => {
   return (
     <Link
-      variant="buttons.navBarSectionButton"
+      variant="variants.navBar.sectionButton"
       href={item.href}
       target="_blank"
     >
