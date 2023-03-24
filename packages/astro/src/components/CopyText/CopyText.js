@@ -11,7 +11,7 @@ import CopyButton from './CopyButton';
 
 const TooltipWrapper = ({ children, tooltip, ...others }) => {
   return (
-    <TooltipTrigger key={tooltip} direction="top" isNotFlippable {...others}>
+    <TooltipTrigger key={tooltip} direction="top" {...others}>
       {children}
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>
