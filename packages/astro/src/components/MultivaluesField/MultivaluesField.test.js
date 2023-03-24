@@ -4,7 +4,7 @@ import { axe } from 'jest-axe';
 
 import { Item, MultivaluesField, OverlayProvider } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { render, screen, within } from '../../utils/testUtils/testWrapper';
+import { getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
@@ -550,4 +550,28 @@ test('form does not submit when adding custom value', () => {
 
   userEvent.type(input, '{enter}');
   expect(onFormSubmit).not.toHaveBeenCalled();
+});
+
+test('in non-restrictive mode the value should be trimmed', () => {
+  getComponent({ mode: 'non-restrictive' });
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'test ';
+  const trimmedValue = 'test';
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+
+  const badge = screen.queryByText(value, {
+    normalizer: getDefaultNormalizer({ trim: false }),
+  });
+
+  const trimmedBadge = screen.queryByText(trimmedValue, {
+    normalizer: getDefaultNormalizer({ trim: false }),
+  });
+
+  expect(badge).not.toBeInTheDocument();
+  expect(trimmedBadge).toBeInTheDocument();
+  expect(input).toHaveValue('');
 });

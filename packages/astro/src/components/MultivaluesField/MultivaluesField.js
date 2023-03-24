@@ -155,7 +155,10 @@ const MultivaluesField = forwardRef((props, ref) => {
   }, [isOpen]);
 
   const addNewBadgeFromInput = inputValue => {
-    const key = inputValue;
+    const key = inputValue.trim();
+    if (key === '') {
+      return;
+    }
     if (state.selectionManager.isSelected(key)) {
       return;
     }
