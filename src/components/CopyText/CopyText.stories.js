@@ -2,6 +2,7 @@ import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Box,
   CopyText,
   Link,
   Text,
@@ -12,6 +13,13 @@ import CopyTextReadme from './CopyText.mdx';
 export default {
   title: 'Components/CopyText',
   component: CopyText,
+  decorators: [
+    Story => (
+      <Box pt="10px">
+        <Story />
+      </Box>
+    ),
+  ],
   parameters: {
     docs: {
       page: () => (
