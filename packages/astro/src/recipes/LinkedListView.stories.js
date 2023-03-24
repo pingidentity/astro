@@ -122,7 +122,7 @@ export const Default = ({ ...args }) => {
   const BottomBracket = () => {
     const color = '#CACED3';
     return (
-      <Box sx={{ width: '20px', position: 'relative' }}>
+      <Box sx={{ width: '15px', position: 'relative' }}>
         <Box flexBasis="50%">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +167,7 @@ export const Default = ({ ...args }) => {
   const TopBracket = () => {
     const color = '#CACED3';
     return (
-      <Box width={15} sx={{ position: 'absolute', bottom: 0, left: 12, top: 55 }}>
+      <Box width={15} sx={{ position: 'absolute', bottom: 0, left: 12, top: 50 }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
