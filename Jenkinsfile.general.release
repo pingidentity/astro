@@ -96,7 +96,6 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            yarn --frozen-lockfile
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
