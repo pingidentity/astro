@@ -83,11 +83,6 @@ pipeline {
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'  
               env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version'
               break
-            case 'astro-v2':
-              env.LERNA_COMMIT_MESSAGE = 'chore(release): publish astro-v2 rc build'
-              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag v2 --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --preid rc --no-changelog --no-git-tag-version'
-              break
             case ~/^release-.*/:
               env.LERNA_COMMIT_MESSAGE = 'chore(release): publish rc build'
               env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
@@ -106,6 +101,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Linking packages"
+            sh "yarn install --immutable --immutable-cache"
             sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
             sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
           }
@@ -120,6 +116,7 @@ pipeline {
           sh """
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
+            yarn install --immutable --immutable-cache
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
             lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
@@ -174,7 +171,9 @@ pipeline {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
                 env.RELEASE_JSON = json;
                 def lazyMap = new groovy.json.JsonSlurper().parseText(json);
-                updatedPackagesMap["@pingux/astro"] = lazyMap["@pingux/astro"];
+                for (prop in lazyMap) {
+                  updatedPackagesMap[prop.key] = prop.value;
+                }
               }
             }
 
@@ -182,31 +181,25 @@ pipeline {
             configFileProvider([configFile(fileId: 'NPM_SETTINGS_FOR_ART01', targetLocation: '.npmrc')]) {
               withVault([configuration: configuration, vaultSecrets: secrets]) {
                 sh "echo 'Publishing packages to npmjs.org registry'"
-                // sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
-                // sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
+                sh "echo \"registry=https://registry.npmjs.org/\" >> packages/schema-form/.npmrc"
+                sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/schema-form/.npmrc"
                 sh "echo \"registry=https://registry.npmjs.org/\" >> packages/astro/.npmrc"
                 sh "echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" >> packages/astro/.npmrc"
-                
-                // sh "cp .yarnrc.yml packages/astro/.yarnrc.yml"
-                // sh "mkdir -p packages/astro/.yarn/releases/"
-                // sh "cp .yarn/releases/* packages/astro/.yarn/releases/"
 
-                // Temporarily removed to prevent publishing to npmjs.org
-                
                 script {
-                //   if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
-                //     echo 'Publishing @pingux/schema-form@next to npmjs.org'
-                //     sh 'cd packages/schema-form/ && npm publish --tag next'
-                //   }
+                  if (updatedPackagesMap.containsKey("@pingux/schema-form")) {
+                    echo 'Publishing @pingux/schema-form@next to npmjs.org'
+                    sh 'cd packages/schema-form/ && npm publish --tag next'
+                  }
 
                   if (updatedPackagesMap.containsKey("@pingux/astro")) {
-                    echo 'Publishing @pingux/astro@astro-v2 dist-tag to npmjs.org'
-                    sh 'cd packages/astro/ && npm publish --tag astro-v2'
+                    echo 'Publishing @pingux/astro@next dist-tag to npmjs.org'
+                    sh 'cd packages/astro/ && npm publish --tag next'
                   }
                 }
 
-                // echo "Publishing changed packages to Artifactory"
-                // sh "cd packages/astro/ && yarn npm publish --tag astro-v2"
+                echo "Publishing changed packages to Artifactory"
+                sh "yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}"
               }
             }
           }

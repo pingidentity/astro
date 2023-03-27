@@ -10,19 +10,6 @@ deploy_prerelease:
   script:
     - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
 
-deploy_astro_v2_prerelease:
-  extends:
-    - .base-job
-  stage: deploy
-  interruptible: false
-  rules:
-    # Deploy astro-v2 branch via Jenkins API *UNLESS* the last commit was an alpha build.
-    # This prevents loops.
-    - if: '$CI_COMMIT_BRANCH == "astro-v2"'
-      when: manual
-  script:
-    - curl -X POST -u "elijahcooper:$JENKINS_API_TOKEN" "https://jenkins-icecream.pingdev.tools/job/devtools-controlled-pipelines/job/PingOne/job/UI-Library/job/pingux-monorepo-build/job/$CI_COMMIT_BRANCH/build"
-
 deploy_release:
   extends:
     - .base-job
