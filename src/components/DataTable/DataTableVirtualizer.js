@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
@@ -11,6 +10,8 @@ import {
   useVirtualizer,
 } from '@react-aria/virtualizer';
 import { useVirtualizerState } from '@react-stately/virtualizer';
+import PropTypes from 'prop-types';
+
 import {
   Box,
 } from '../../index';
@@ -36,8 +37,7 @@ const DataTableVirtualizer = forwardRef(({
   const direction = 'ltr'; // useLocale override
   const headerRef = useRef(ref);
   const loadingState = collection.body.props.loadingState;
-  const isLoading =
-    loadingState === 'loading' || loadingState === 'loadingMore';
+  const isLoading = loadingState === 'loading' || loadingState === 'loadingMore';
   const onLoadMore = collection.body.props.onLoadMore;
   const state = useVirtualizerState({
     layout,
@@ -85,14 +85,13 @@ const DataTableVirtualizer = forwardRef(({
   }, [bodyRef]);
 
   const onVisibleRectChange = useCallback(
-    (rect) => {
+    rect => {
       setTableWidth(rect.width);
 
       state.setVisibleRect(rect);
 
       if (!isLoading && onLoadMore) {
-        const scrollOffset =
-          state.virtualizer.contentSize.height - (rect.height * 2);
+        const scrollOffset = state.virtualizer.contentSize.height - (rect.height * 2);
         if (rect.y > scrollOffset) {
           onLoadMore();
         }

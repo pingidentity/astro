@@ -1,12 +1,14 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import Highlight, { defaultProps, Prism } from 'prism-react-renderer';
-import { useStatusClasses } from '../../hooks';
+import PropTypes from 'prop-types';
+
 import { Box, CopyText } from '../..';
-import codeView from '../../styles/variants/codeView';
+import { useStatusClasses } from '../../hooks';
+
+import styles from './CodeView.styles';
 
 const CodeView = forwardRef((props, ref) => {
   const {
@@ -35,7 +37,7 @@ const CodeView = forwardRef((props, ref) => {
   const content = (
     <Highlight
       {...defaultProps}
-      theme={codeView.theme}
+      theme={styles.theme}
       code={children?.trim() || ''}
       language={language}
       Prism={customPrism || Prism}
@@ -45,14 +47,15 @@ const CodeView = forwardRef((props, ref) => {
           {tokens.map((line, i) => (
             <Box isRow {...getLineProps({ line, key: i })}>
               {hasLineNumbers
-                &&
+                && (
                 <Box
                   as="span"
                   variant="codeView.lineNo"
                   sx={{ minWidth: getLineNoWidth(tokens) }}
                 >
                   {i + 1}
-                </Box>}
+                </Box>
+                )}
               {line.map((token, key) => (
                 <span {...getTokenProps({ token, key })} />
               ))}

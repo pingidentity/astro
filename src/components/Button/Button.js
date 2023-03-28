@@ -1,11 +1,10 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { mergeProps, useButton, useFocusRing } from 'react-aria';
+import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
-import { useButton } from '@react-aria/button';
-import { useHover } from '@react-aria/interactions';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
-import { useStatusClasses, usePropWarning, useAriaLabelWarning, useDeprecationWarning } from '../../hooks';
+
+import { useAriaLabelWarning, usePropWarning, useStatusClasses } from '../../hooks';
 import Loader from '../Loader';
 
 const Button = forwardRef((props, ref) => {
@@ -32,6 +31,7 @@ const Button = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => buttonRef.current);
 
   const { isFocusVisible, focusProps } = useFocusRing();
+  const { isPressed: isPressedFromContext } = usePress(buttonRef);
   const { buttonProps, isPressed } = useButton({
     elementType: 'button',
     ...props,
@@ -39,44 +39,30 @@ const Button = forwardRef((props, ref) => {
   const { hoverProps, isHovered } = useHover(props);
   const { classNames } = useStatusClasses(className, {
     isHovered,
-    isPressed,
+    isPressed: isPressed || isPressedFromContext,
     isFocused: isFocusVisible,
     isDisabled,
   });
-
-  useDeprecationWarning(
-    'The "icon" variant for `Button` is deprecated in Astro-UI 1.0.0, use the `IconButton` component instead.',
-    { isActive: props.variant === 'icon' },
-  );
-
-  useDeprecationWarning(
-    'The "danger" variant for `Button` will be deprecated in Astro-UI 2.0.0, use the `critical` variant instead.',
-    { isActive: props.variant === 'danger' },
-  );
-
-  useDeprecationWarning(
-    'The "text" variant for `Button` will be deprecated in Astro-UI 2.0.0, use the `link` variant instead.',
-    { isActive: props.variant === 'text' },
-  );
 
   const ariaLabel = props['aria-label'];
   useAriaLabelWarning('Button', ariaLabel, variant === 'filter');
 
   return (
-    <ThemeUIButton
-      aria-label={ariaLabel}
-      ref={buttonRef}
-      className={classNames}
-      role="button"
-      tx="buttons"
-      sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      variant={variant}
-      {...others}
-      {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
-    >
-      {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
-      {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
-    </ThemeUIButton>
+    <Pressable ref={buttonRef}>
+      <ThemeUIButton
+        aria-label={ariaLabel}
+        className={classNames}
+        role="button"
+        tx="buttons"
+        sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        variant={variant}
+        {...others}
+        {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
+      >
+        {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
+        {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
+      </ThemeUIButton>
+    </Pressable>
   );
 });
 

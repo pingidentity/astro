@@ -1,11 +1,23 @@
 import React, { useCallback, useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import CalendarIcon from 'mdi-react/CalendarIcon';
 import moment from 'moment';
-import { Box, Icon, IconButton, TextField, useOverlayPosition, useOverlayTrigger, useOverlayTriggerState } from '../index';
+
+import { text } from '../components/Text/Text.styles';
+import {
+  Box,
+  Icon,
+  IconButton,
+  PopoverContainer,
+  TextField,
+  useOverlayPosition,
+  useOverlayTrigger,
+  useOverlayTriggerState,
+}
+from '../index';
 import statuses from '../utils/devUtils/constants/statuses';
-import PopoverContainer from '../components/PopoverContainer';
+
+import 'react-calendar/dist/Calendar.css';
 
 export default {
   title: 'Recipes/Date Picker',
@@ -25,6 +37,50 @@ const sx = {
     top: 8,
     width: 28,
     height: 28,
+  },
+  container: {
+    maxWidth: 300,
+    '.react-calendar': {
+      width: 280,
+      '& .react-calendar__month-view__days__day': {
+        width: 40,
+        height: 40,
+        color: 'neutral.10',
+        fontSize: 'sm',
+        fontWeight: 1,
+      },
+      '& .react-calendar__navigation__label__labelText': text.itemTitle,
+      '& .react-calendar__navigation__arrow, & .react-calendar__month-view__days__day--neighboringMonth': {
+        color: 'neutral.40',
+      },
+      '& .react-calendar__month-view__weekdays': {
+        borderBottom: '1px solid',
+        borderColor: 'neutral.80',
+      },
+      '& .react-calendar__month-view__weekdays__weekday abbr': {
+        textDecoration: 'none',
+        textTransform: 'capitalize',
+      },
+      '& .react-calendar__month-view__days__day--weekend': {
+        color: 'decorative.4',
+      },
+      '& .react-calendar__tile--active, & .react-calendar__tile--hasActive': {
+        backgroundColor: 'active',
+        color: 'white',
+      },
+      '& .react-calendar__year-view__months__month': {
+        padding: '19px 0',
+      },
+      '& .react-calendar__decade-view__years__year, & .react-calendar__month-view__days__day, & .react-calendar__year-view__months__month': {
+        '&:hover': {
+          backgroundColor: 'rgba(70, 96, 162, .1);',
+          color: 'neutral.10',
+        },
+      },
+      '& .react-calendar__navigation': {
+        marginBottom: 0,
+      },
+    },
   },
 };
 
@@ -71,14 +127,14 @@ export const Default = () => {
     }
   }, []);
 
-  const handleCalendarChange = useCallback((newDate) => {
+  const handleCalendarChange = useCallback(newDate => {
     setDate(moment(newDate));
     setInputValue(moment(newDate).format(dateFormat));
     setError(false);
   }, []);
 
   return (
-    <Box sx={{ maxWidth: 300 }} variant="boxes.dataPicker">
+    <Box sx={sx.container}>
       <TextField
         slots={{
           inContainer: (
@@ -109,7 +165,7 @@ export const Default = () => {
         hasNoArrow
         isDismissable
       >
-        <Box variant="boxes.datePicker">
+        <Box sx={sx.container}>
           <Calendar onChange={handleCalendarChange} value={date.toDate()} />
         </Box>
       </PopoverContainer>

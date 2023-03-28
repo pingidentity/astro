@@ -1,8 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ListItem from './ListItem';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import ListItem from './ListItem';
 
 const testTitle = 'Test Title';
 const TEST_ID = 'ListItem-testid';

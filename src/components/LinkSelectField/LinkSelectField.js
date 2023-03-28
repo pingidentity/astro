@@ -1,14 +1,15 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import { VisuallyHidden } from 'react-aria';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import { VisuallyHidden } from '@react-aria/visually-hidden';
 
-import { Box, Button, Loader, Icon, Text } from '../../';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, Button, Icon, Loader, Text } from '../..';
 import { usePropWarning, useSelectField } from '../../hooks';
-import SelectFieldBase from '../SelectFieldBase';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import SelectFieldBase from '../SelectFieldBase';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -33,7 +34,7 @@ const LinkSelectField = forwardRef((props, ref) => {
     status: status === statuses.DEFAULT ? null : status,
   }, ref);
   const {
-    fieldControlProps,
+    fieldControlInputProps,
     isLoadingInitial,
     state,
     triggerProps,
@@ -42,13 +43,13 @@ const LinkSelectField = forwardRef((props, ref) => {
 
   const trigger = (
     <Button
-      className={fieldControlProps.className}
+      className={fieldControlInputProps.className}
       ref={triggerRef}
       variant="link"
       tabIndex={isDisabled ? -1 : 0}
-      aria-describedby={helperText && helperTextId}
       {...triggerProps}
       {...ariaProps}
+      aria-describedby={helperText && helperTextId}
     >
       <Text variant="label" color="active">{placeholder}</Text>
       <Box isRow>
@@ -68,11 +69,13 @@ const LinkSelectField = forwardRef((props, ref) => {
     </Button>
   );
 
-  return (<SelectFieldBase
-    {...props}
-    {...selectFieldProps}
-    trigger={trigger}
-  />);
+  return (
+    <SelectFieldBase
+      {...props}
+      {...selectFieldProps}
+      trigger={trigger}
+    />
+  );
 });
 
 LinkSelectField.propTypes = {
@@ -139,15 +142,7 @@ LinkSelectField.propTypes = {
    * (key: Key) => any
    */
   onSelectionChange: PropTypes.func,
-  /**
-   * Props object passed along to `useSelect` from React Aria, `useSelectState` from React Stately,
-   * and/or the visible button representation for the select input.
-   */
-  controlProps: PropTypes.shape({}),
-  /** Props object passed along to the root container as-is. */
-  containerProps: PropTypes.shape({}),
-  /** Props object passed along to the label as-is. */
-  labelProps: PropTypes.shape({}),
+  ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

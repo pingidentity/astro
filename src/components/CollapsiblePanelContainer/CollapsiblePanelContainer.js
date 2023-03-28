@@ -1,11 +1,13 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import { useOverlayTriggerState } from 'react-stately';
 import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import { useOverlayTriggerState } from '@react-stately/overlays';
-import CollapsiblePanelBadge from './CollapsiblePanelBadge';
-import { Icon, IconButton, Box } from '../../index';
+import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import PropTypes from 'prop-types';
+
 import { useStatusClasses } from '../../hooks';
+import { Box, Icon, IconButton } from '../../index';
+
+import CollapsiblePanelBadge from './CollapsiblePanelBadge';
 
 /**
  * The CollapsiblePanelContainer serves as a wrapper around a list and its associated trigger,
@@ -42,7 +44,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
     }
   };
 
-  const handleClose = (e) => {
+  const handleClose = e => {
     if (e.key === 'Escape') {
       close(state, triggerRef, close);
     }
@@ -53,7 +55,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
       className={classNames}
       onKeyUp={handleClose}
       ref={ref}
-      variant="collapsiblePanel.collapsiblePanelContainer"
+      variant="collapsiblePanel.container"
       isRow
       {...others}
     >
@@ -63,7 +65,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
         data-testid="collapsible-panel-button"
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="collapsiblePanelToggle"
+        variant="toggle"
         pr="sm"
       >
         <Icon
@@ -72,13 +74,14 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
           role="button"
           size="30px"
         />
-        {!state.isOpen && selectedFilterCount &&
+        {!state.isOpen && selectedFilterCount
+          && (
           <CollapsiblePanelBadge
             data-testid="collapsible-panel-badge"
             margin="auto"
             selectedFilterCount={selectedFilterCount}
           />
-        }
+          )}
       </IconButton>
       { children }
     </Box>

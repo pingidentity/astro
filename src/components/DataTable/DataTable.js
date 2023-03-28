@@ -1,28 +1,31 @@
 import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { FocusRing, useFocusRing } from '@react-aria/focus';
-import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
-import { useTableColumnResizeState, useTableState } from '@react-stately/table';
-import { TableLayout } from '@react-stately/layout';
 import {
+  FocusRing,
+  mergeProps,
+  useFocusRing,
   useTable,
   useTableCell,
   useTableColumnHeader,
   useTableHeaderRow,
   useTableRow,
   useTableRowGroup,
-} from '@react-aria/table';
-import PropTypes from 'prop-types';
+  VisuallyHidden,
+} from 'react-aria';
+import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
+import { TableLayout } from '@react-stately/layout';
+import { useTableColumnResizeState, useTableState } from '@react-stately/table';
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
 import MenuUpIcon from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
+
 import {
   DataTableContext,
   useDataTableContext,
 } from '../../context/DataTableContext';
-import DataTableVirtualizer from './DataTableVirtualizer';
 import { useStatusClasses } from '../../hooks';
 import { Box, Icon, Loader } from '../../index';
+
+import DataTableVirtualizer from './DataTableVirtualizer';
 
 const DEFAULT_HEADER_HEIGHT = {
   medium: 34,
@@ -43,6 +46,32 @@ const ROW_HEIGHTS = {
     large: 75,
   },
 };
+
+/**
+ * Inspired by [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
+ * from React Spectrum and [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
+ * from React Stately.
+ *
+ * DataTable is a complex collection component that is built from many child elements including
+ * columns, rows and cells. Columns are defined within DataTableHeader element via DataTableColumn
+ * and rows are defined within a DataTableBody element via DataTableRow. Rows contain DataTableCell
+ * elements that correspond to each column.
+ *
+ * [TableHeader](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=defined%20using%20the-,TableHeader,-%2C%20Column%2C)
+ * uses the alias DataTableHeader.
+ *
+ * [Column](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=the%20TableHeader%2C-,Column,-%2C%20TableBody%2C)
+ * uses the alias DataTableColumn.
+ *
+ * [Cell](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=Row%2C%20and-,Cell,-components%2C%20which%20support)
+ * uses the alias DataTableCell.
+ *
+ * [Row](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20TableBody%2C-,Row,-%2C%20and%20Cell%20components)
+ * uses the alias DataTableCell.
+ *
+ * [TableBody](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20Column%2C-,TableBody,-%2C%20Row%2C%20and)
+ * uses the alias DataTableBody.
+*/
 
 const DataTable = forwardRef((props, ref) => {
   const {
@@ -69,19 +98,18 @@ const DataTable = forwardRef((props, ref) => {
 
   const density = props.density || 'regular';
   const layout = useMemo(
-    () =>
-      new TableLayout({
-        // If props.rowHeight is auto, then use estimated heights based on scale,
-        // otherwise use fixed heights.
-        rowHeight:
+    () => new TableLayout({
+      // If props.rowHeight is auto, then use estimated heights based on scale,
+      // otherwise use fixed heights.
+      rowHeight:
           props.overflowMode === 'wrap' ? null : ROW_HEIGHTS[density][scale],
-        estimatedRowHeight:
+      estimatedRowHeight:
           props.overflowMode === 'wrap' ? ROW_HEIGHTS[density][scale] : null,
-        headingHeight:
+      headingHeight:
           props.overflowMode === 'wrap' ? null : DEFAULT_HEADER_HEIGHT[scale],
-        estimatedHeadingHeight:
+      estimatedHeadingHeight:
           props.overflowMode === 'wrap' ? DEFAULT_HEADER_HEIGHT[scale] : null,
-      }),
+    }),
     [props.overflowMode, scale, density],
   );
   layout.collection = state.collection;
@@ -187,10 +215,10 @@ const DataTable = forwardRef((props, ref) => {
   };
 
   const viewport = useRef({ x: 0, y: 0, width: 0, height: 0 });
-  const onVisibleRectChange = useCallback((e) => {
+  const onVisibleRectChange = useCallback(e => {
     if (
-      viewport.current.width === e.width &&
-      viewport.current.height === e.height
+      viewport.current.width === e.width
+      && viewport.current.height === e.height
     ) {
       return;
     }
@@ -285,13 +313,12 @@ function TableColumnHeader(props) {
   );
 
   const columnProps = column.props;
-  const arrowIcon =
-    state.sortDescriptor?.direction === 'ascending' &&
-    column.key === state.sortDescriptor?.column ? (
+  const arrowIcon = state.sortDescriptor?.direction === 'ascending'
+    && column.key === state.sortDescriptor?.column ? (
       <Icon icon={MenuUpIcon} />
-      ) : (
-        <Icon icon={MenuDownIcon} color="active" />
-      );
+    ) : (
+      <Icon icon={MenuDownIcon} color="active" />
+    );
   const allProps = [columnHeaderProps];
 
   const { classNames } = useStatusClasses({
@@ -340,8 +367,10 @@ function TableRow({ item, children, hasActions, ...otherProps }) {
     ref,
   );
 
-  const { isFocusVisible: isFocusVisibleWithin, focusProps: focusWithinProps } =
-    useFocusRing({ within: true });
+  const {
+    isFocusVisible: isFocusVisibleWithin,
+    focusProps: focusWithinProps,
+  } = useFocusRing({ within: true });
   const { isFocusVisible, focusProps } = useFocusRing();
   const props = mergeProps(rowProps, otherProps, focusWithinProps, focusProps);
 

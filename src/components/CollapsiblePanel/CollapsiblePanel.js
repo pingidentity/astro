@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
+import { mergeProps, useFocusRing } from 'react-aria';
 import PropTypes from 'prop-types';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+
+import { Box, CollapsiblePanelContainer, ListView, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import CollapsiblePanelBadge from '../CollapsiblePanelContainer/CollapsiblePanelBadge';
-import { Box, ListView, CollapsiblePanelContainer, Text } from '../../index';
 
 const CollapsiblePanel = forwardRef((props, ref) => {
   const {
@@ -52,24 +52,25 @@ const CollapsiblePanel = forwardRef((props, ref) => {
         data-testid="collapsible-panel"
         ref={ref}
         tabIndex={0}
-        variant="collapsiblePanel.collapsiblePanelContent"
+        variant="collapsiblePanel.content"
         {...mergedProps}
         {...others}
       >
         <Box
           isRow
-          variant="collapsiblePanel.collapsiblePanelContainerTitle"
+          variant="collapsiblePanel.containerTitle"
         >
-          <Text variant="collapsiblePanelTitle">
+          <Text variant="variants.collapsiblePanel.title">
             {listTitle}
           </Text>
-          {selectedFilterCount &&
+          {selectedFilterCount
+            && (
             <CollapsiblePanelBadge
               margin="0"
               className="title-badge"
               selectedFilterCount={selectedFilterCount}
             />
-          }
+            )}
         </Box>
         <Box pl="xs" pr="xs">
           <ListView

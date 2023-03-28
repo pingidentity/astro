@@ -1,12 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useOverlayPosition, useTooltipTrigger } from 'react-aria';
+import { useTooltipTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
-import { useOverlayPosition } from '@react-aria/overlays';
-import { useTooltipTrigger } from '@react-aria/tooltip';
-import { useTooltipTriggerState } from '@react-stately/tooltip';
+import PropTypes from 'prop-types';
 
-import { useStatusClasses, usePropWarning } from '../../hooks';
 import { TooltipContext } from '../../context/TooltipContext/index';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 import PopoverContainer from '../PopoverContainer';
 
 /**

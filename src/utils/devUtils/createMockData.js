@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+
 import animals from './constants/animals';
 import firstNames from './constants/firstNames';
 
@@ -12,7 +13,7 @@ function createMockData(length, objectScheme) {
     firstName: 0,
   };
 
-  const getPropValue = (valueType) => {
+  const getPropValue = valueType => {
     if (valueType === 'id') {
       return uuid();
     }

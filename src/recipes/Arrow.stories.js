@@ -1,5 +1,6 @@
 import React from 'react';
-import Box from '../components/Box';
+
+import { Box } from '../index';
 import { line } from '../styles/colors';
 
 export default {

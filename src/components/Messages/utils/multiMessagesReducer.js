@@ -1,9 +1,10 @@
 import { v4 as uuid } from 'uuid';
+
 import messagesReducer, {
   addMessage as addMessageSingle,
+  clearMessages as clearMessagesSingle,
   hideMessage as hideMessageSingle,
   removeMessage as removeMessageSingle,
-  clearMessages as clearMessagesSingle,
 } from './messagesReducer';
 
 export const withContainer = (container, action) => ({
@@ -38,7 +39,7 @@ export const clearMessages = createMultiple(clearMessagesSingle);
 /**
  * Create an action to add a message and then remove it if there's a timeout
  */
-export const showMessage = (container, messageArg, timeout = -1) => (dispatch) => {
+export const showMessage = (container, messageArg, timeout = -1) => dispatch => {
   const message = { key: uuid(), ...messageArg };
   dispatch(addMessage(container, message));
 

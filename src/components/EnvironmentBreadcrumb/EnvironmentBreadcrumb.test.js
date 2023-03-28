@@ -1,9 +1,11 @@
 import React from 'react';
+import { Section } from 'react-stately';
 import userEvent from '@testing-library/user-event';
-import { Section } from '@react-stately/collections';
 import { axe } from 'jest-axe';
+
+import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../..';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
-import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../../index';
+
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
 
 const testEnvBreadcrumb = 'test-env-breadcrumb';
@@ -53,38 +55,36 @@ const defaultWithSectionsProps = {
 
 const onSelectionChange = jest.fn();
 
-const getComponent = props =>
-  render(
-    <OverlayProvider>
-      <EnvironmentBreadcrumb {...defaultProps} {...props}>
-        {item => <Item key={item.name} data-testid={item.name}>{item.name}</Item>}
-      </EnvironmentBreadcrumb>
-    </OverlayProvider>,
-  );
+const getComponent = props => render(
+  <OverlayProvider>
+    <EnvironmentBreadcrumb {...defaultProps} {...props}>
+      {item => <Item key={item.name} data-testid={item.name}>{item.name}</Item>}
+    </EnvironmentBreadcrumb>
+  </OverlayProvider>,
+);
 
-const getSectionsComponent = (props = {}) =>
-  render(
-    <OverlayProvider>
-      <EnvironmentBreadcrumb {...defaultWithSectionsProps} {...props}>
-        {section => (
-          // eslint-disable-next-line testing-library/no-node-access
-          <Section
-            key={section.key}
-            name={section.name}
-            title={section.name}
-            items={section.options}
-          >
-            {/* eslint-disable-next-line testing-library/no-node-access */}
-            {item => (
-              <Item key={`${section.name}-${item.name}`} childItems={item.options}>
-                {item.name}
-              </Item>
-            )}
-          </Section>
-        )}
-      </EnvironmentBreadcrumb>
-    </OverlayProvider>,
-  );
+const getSectionsComponent = (props = {}) => render(
+  <OverlayProvider>
+    <EnvironmentBreadcrumb {...defaultWithSectionsProps} {...props}>
+      {section => (
+        // eslint-disable-next-line testing-library/no-node-access
+        <Section
+          key={section.key}
+          name={section.name}
+          title={section.name}
+          items={section.options}
+        >
+          {/* eslint-disable-next-line testing-library/no-node-access */}
+          {item => (
+            <Item key={`${section.name}-${item.name}`} childItems={item.options}>
+              {item.name}
+            </Item>
+          )}
+        </Section>
+      )}
+    </EnvironmentBreadcrumb>
+  </OverlayProvider>,
+);
 
 beforeAll(() => {
   jest

@@ -6,19 +6,20 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
+import { mergeProps, useVisuallyHidden } from 'react-aria';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Box, Input, FieldHelperText, Label, Loader } from '../../';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import FileItem from './FileItem';
-import FileSelect from './FileSelect';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { Box, FieldHelperText, Input, Label, Loader } from '../..';
 import useField from '../../hooks/useField';
 import useStatusClasses from '../../hooks/useStatusClasses';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+
+import FileItem from './FileItem';
+import FileSelect from './FileSelect';
 
 /**
  * The FileInputField component allows users to upload one or more files by
@@ -49,7 +50,12 @@ const FileInputField = forwardRef(({
   useImperativeHandle(ref, () => inputRef.current);
 
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
     status,
     isDisabled,
     ...nonAriaProps,
@@ -74,7 +80,7 @@ const FileInputField = forwardRef(({
       if (!isMultiple) {
         arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
       }
-      const newFilesWithIdAndLink = arrayWithNewFiles.map((newFile) => {
+      const newFilesWithIdAndLink = arrayWithNewFiles.map(newFile => {
         return {
           fileObj: newFile,
           name: newFile.name,
@@ -109,7 +115,7 @@ const FileInputField = forwardRef(({
   });
 
   const handleOnChange = useCallback(
-    (event) => {
+    event => {
       handleFileUpload(event, event.target.files);
     },
     [handleFileUpload],
@@ -120,8 +126,7 @@ const FileInputField = forwardRef(({
       onRemove(e, fileId);
     }
 
-    setUploadedFiles(prevFiles =>
-      prevFiles.filter(({ id }) => id !== fileId),
+    setUploadedFiles(prevFiles => prevFiles.filter(({ id }) => id !== fileId),
     );
   }, [onRemove]);
 
@@ -159,11 +164,11 @@ const FileInputField = forwardRef(({
   }, [uploadedFiles, uploadedFilesImperative, isMultiple]);
 
   return (
-    <>
+    <Box fieldContainerProps={fieldContainerProps}>
       <Label {...fieldLabelProps} />
       <Box
-        variant="boxes.fileInputFieldWrapper"
-        {...mergeProps(fieldContainerProps, nonAriaProps)}
+        variant="forms.fileInputField.wrapper"
+        {...mergeProps(fieldControlWrapperProps, nonAriaProps)}
         className={classNames}
         {...getRootProps()}
         // to pass accessibility test, this removes focusable dependents
@@ -172,7 +177,7 @@ const FileInputField = forwardRef(({
         <Input
           {...mergeProps(
             visuallyHiddenProps,
-            fieldControlProps,
+            fieldControlInputProps,
             getInputProps(),
           )}
           aria-label="File Input"
@@ -202,7 +207,7 @@ const FileInputField = forwardRef(({
       {helperText && (
         <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
       )}
-    </>
+    </Box>
   );
 });
 
@@ -273,6 +278,7 @@ FileInputField.propTypes = {
   /** These props will be spread to the field text component. */
   textProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 FileInputField.defaultProps = {

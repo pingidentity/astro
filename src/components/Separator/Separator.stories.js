@@ -1,6 +1,6 @@
 import React from 'react';
-import Separator from './Separator';
-import Box from '../Box/Box';
+
+import { Box, Separator } from '../../index';
 
 export default {
   title: 'Components/Separator',

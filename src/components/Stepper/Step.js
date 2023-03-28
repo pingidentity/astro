@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import CheckBoldIcon from 'mdi-react/CheckBoldIcon';
 import { useHover } from '@react-aria/interactions';
-
-import { stepStatuses } from './Stepper.constants';
+import CheckBoldIcon from 'mdi-react/CheckBoldIcon';
+import PropTypes from 'prop-types';
 
 import { Box, Icon } from '../../index';
+
+import { stepStatuses } from './Stepper.constants';
 
 const {
   COMPLETED,
@@ -22,14 +22,15 @@ const Step = forwardRef((props, ref) => {
       ref={ref}
       {...hoverProps}
     >
-      {status === COMPLETED && !isHovered ?
-        <Icon
-          icon={CheckBoldIcon}
-          size={23}
-          color="text.primaryLight"
-        />
-        : value
-      }
+      {status === COMPLETED && !isHovered
+        ? (
+          <Icon
+            icon={CheckBoldIcon}
+            size={23}
+            color="text.primaryLight"
+          />
+        )
+        : value}
     </Box>
   );
 });

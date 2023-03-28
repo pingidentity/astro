@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { OverlayProvider } from '@react-aria/overlays';
-import { useAsyncList } from '@react-stately/data';
+import { OverlayProvider } from 'react-aria';
+import { useAsyncList } from 'react-stately';
 
-import { Box, Item, LinkSelectField, Separator } from '../../';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import {
+  Box,
+  Item,
+  LinkSelectField,
+  Separator,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 export default {
   title: 'Form/LinkSelectField',
@@ -52,13 +58,13 @@ export default {
     isDisabled: {},
     isOpen: {},
     isRequired: {},
-    controlProps: {},
     selectedKey: {
       control: {
         type: 'none',
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import RadioGroupField from '.';
-import RadioField from '../RadioField';
+import { RadioField, RadioGroupField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 export default {
   title: 'Form/RadioGroupField',

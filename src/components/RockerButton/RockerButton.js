@@ -4,10 +4,11 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
+import { FocusRing } from 'react-aria';
+import { Item } from 'react-stately';
 import PropTypes from 'prop-types';
-import { Item } from '@react-stately/collections';
-import { FocusRing } from '@react-aria/focus';
-import { useRockerButton, useStatusClasses, usePropWarning } from '../../hooks';
+
+import { usePropWarning, useRockerButton, useStatusClasses } from '../../hooks';
 import { Box } from '../../index';
 import { RockerContext } from '../RockerButtonGroup';
 
@@ -41,15 +42,15 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
       <Box
         as="button"
         className={classNames}
-        variant="buttons.rocker"
+        variant="variants.rockerButton.thumbSwitch"
         {...rockerButtonProps}
         ref={rockerButtonRef}
         {...itemProps}
         sx={{
-        '&.is-selected': {
-          ...itemProps.selectedStyles,
-        },
-      }}
+          '&.is-selected': {
+            ...itemProps.selectedStyles,
+          },
+        }}
       >
         {rendered}
       </Box>

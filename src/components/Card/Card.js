@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
-import { useHover, usePress } from '@react-aria/interactions';
 import { useFocusRing } from '@react-aria/focus';
-import Box from '../Box';
+import { useHover, usePress } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
+import PropTypes from 'prop-types';
+
 import { useStatusClasses } from '../../hooks';
+import Box from '../Box';
 
 const Card = forwardRef((props, ref) => {
   const {
@@ -45,7 +46,7 @@ const Card = forwardRef((props, ref) => {
   return (
     <Box
       aria-label={ariaLabel}
-      variant="boxes.card"
+      variant="cards.container"
       className={classNames}
       ref={ref}
       isFocused={isFocusVisible}

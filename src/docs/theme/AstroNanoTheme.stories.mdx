@@ -8,20 +8,23 @@ The Astro Nano Theme extends styles from the base Astro Theme with new variants 
 
 ## Modified Astro Variants
 
-### Boxes
-
-#### Card
+### Cards
 ```
 {
-    alignItems: "stretch",
-    bg: "white",
-    borderRadius: 4,
-    boxShadow: ['none', 'standard'],
-    flexGrow: [1, 0],
-    maxWidth: "480px",
-    my: "auto",
-    py: [0, 'xl'],
-    width: ['100%', '450px']
+    container: {
+        alignItems: "stretch",
+        bg: "white",
+        borderRadius: 4,
+        boxShadow: ['none', 'standard'],
+        flexGrow: [1, 0],
+        maxWidth: "480px",
+        my: "auto",
+        py: [0, 'xl'],
+        width: ['100%', '450px']
+    },
+    cardBody: {
+        flexGrow: [1, 0],
+    },
 }
 ```
 
@@ -119,12 +122,10 @@ Font sizes in Astro Nano use the font sizes from the Astro theme and scales them
 
 ## Variants Introduced in Astro Nano
 
-### Boxes
-
-#### Card Body
+### Card Body
 `flexGrow: [1, 0]`
 
-#### Wrapper
+### Wrapper
 ```
 {
     alignItems: "center",

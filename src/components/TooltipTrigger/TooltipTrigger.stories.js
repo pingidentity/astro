@@ -1,9 +1,16 @@
 import React from 'react';
-import Earth from 'mdi-react/EarthIcon';
 import AccountIcon from 'mdi-react/AccountIcon';
-import { Box, Button, Icon, Tooltip, TooltipTrigger } from '../../index';
-import IconButton from '../IconButton';
-import Text from '../Text';
+import Earth from 'mdi-react/EarthIcon';
+
+import {
+  Box,
+  Button,
+  Icon,
+  IconButton,
+  Text,
+  Tooltip,
+  TooltipTrigger,
+} from '../../index';
 
 export default {
   title: 'Components/TooltipTrigger',
@@ -47,14 +54,14 @@ export const withWidthProp = () => (
 );
 
 export const withArrowCrossOffsetProp = () => (
-  <TooltipTrigger arrowCrossOffset="30px" isOpen >
+  <TooltipTrigger arrowCrossOffset="30px" isOpen>
     <Button>Hover Over Me!</Button>
     <Tooltip>With arrowCrossOffset=&quot;30px&quot;</Tooltip>
   </TooltipTrigger>
 );
 
 export const isOpen = () => (
-  <TooltipTrigger isOpen >
+  <TooltipTrigger isOpen>
     <Button>Hover Over Me!</Button>
     <Tooltip>Display by default</Tooltip>
   </TooltipTrigger>
@@ -81,7 +88,7 @@ Disabled.parameters = {
 export const IconWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <IconButton variant="tooltipIconButton">
+      <IconButton variant="tooltip.button">
         <Icon icon={AccountIcon} />
       </IconButton>
       <Tooltip>Useful tooltip</Tooltip>
@@ -89,10 +96,10 @@ export const IconWithTooltip = () => (
   </Box>
 );
 
-export const ChipWithTooltip = () => (
+export const BadgeWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <Button variant="tooltipChip" bg="neutral.10">
+      <Button variant="variants.tooltip.badge" bg="neutral.10">
         <Text variant="label" sx={{ textTransform: 'uppercase' }} color="white">
           Some text
         </Text>
@@ -105,7 +112,7 @@ export const ChipWithTooltip = () => (
 export const TextWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
-      <Button variant="tooltipInline">Some text</Button>
+      <Button variant="variants.tooltip.inline">Some text</Button>
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>
   </Box>

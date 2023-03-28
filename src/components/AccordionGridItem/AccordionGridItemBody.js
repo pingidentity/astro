@@ -1,11 +1,12 @@
 import React, { forwardRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import PropTypes from 'prop-types';
+import { mergeProps } from 'react-aria';
 import { useGridCell } from '@react-aria/grid';
 import { useHover } from '@react-aria/interactions';
+import PropTypes from 'prop-types';
+
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
-import Box from '../Box';
 import { useStatusClasses } from '../../hooks';
+import Box from '../Box';
 
 const AccordionGridItemBody = forwardRef((props, ref) => {
   const {
@@ -28,7 +29,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
   }, state, ref);
 
   /* istanbul ignore next */
-  gridCellProps.onClick = (e) => {
+  gridCellProps.onClick = e => {
     e.target.focus();
   };
 
@@ -59,7 +60,7 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
   return (
     <Box
       as="div"
-      variant="accordion.accordionGridBody"
+      variant="accordionGrid.body"
       role="gridcell"
       ref={ref}
       {...mergedProps}

@@ -1,16 +1,17 @@
 import React from 'react';
-import CreateIcon from 'mdi-react/CreateIcon';
 import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
+import CreateIcon from 'mdi-react/CreateIcon';
 import { v4 as uuid } from 'uuid';
+
 import {
+  Badge,
   Box,
-  Chip,
-  IconButton,
-  Text,
-  Icon,
-  Separator,
-  TextField,
   HelpHint,
+  Icon,
+  IconButton,
+  Separator,
+  Text,
+  TextField,
 } from '../index';
 
 export default {
@@ -34,7 +35,7 @@ const sx = {
     marginBottom: 'md',
     alignItems: 'center',
   },
-  chip: {
+  badge: {
     width: 'xx',
     height: '22px',
     alignSelf: 'center',
@@ -82,9 +83,9 @@ const sx = {
 };
 const helperTextId = uuid();
 
-const Row = (props) => {
+const Row = props => {
   const {
-    withChip,
+    withBadge,
     withTooltip,
     withError,
     leftValue,
@@ -131,13 +132,15 @@ const Row = (props) => {
           },
         }}
       />
-      {withChip &&
-        <Chip
+      {withBadge
+        && (
+        <Badge
           label="Required"
-          sx={sx.chip}
+          sx={sx.badge}
         />
-      }
-      {withTooltip &&
+        )}
+      {withTooltip
+        && (
         <Box sx={sx.tooltipBox}>
           <HelpHint
             tooltipProps={{ direction: 'bottom' }}
@@ -145,7 +148,7 @@ const Row = (props) => {
             Population set to default
           </HelpHint>
         </Box>
-      }
+        )}
     </Box>
   );
 };
@@ -160,7 +163,7 @@ const Title = () => {
         Attribute Mapping
       </Text>
       <Box>
-        <IconButton sx={sx.createIconButton} variant="inverted" aria-label="edit header button" >
+        <IconButton sx={sx.createIconButton} variant="inverted" aria-label="edit header button">
           <Icon icon={CreateIcon} size="sm" />
         </IconButton>
       </Box>
@@ -189,7 +192,7 @@ export const Default = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withChip leftValue="UserId" rightValue="mdorey" />
+        <Row withBadge leftValue="UserId" rightValue="mdorey" />
         <Row leftValue="givenName" rightValue="firstName" />
         <Row leftValue="familyName" rightValue="lastName" />
         <Row withTooltip leftValue="population" rightValue="population" />
@@ -248,7 +251,7 @@ export const WithError = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withChip leftValue="UserId" rightValue="mdorey" />
+        <Row withBadge leftValue="UserId" rightValue="mdorey" />
         <Row withError={withError} leftValue="givenName" rightValue="firstName" />
         <Row withError={withError} leftValue="familyName" rightValue="lastName" />
       </Box>

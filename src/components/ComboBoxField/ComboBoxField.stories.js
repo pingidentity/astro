@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { useAsyncList } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
-import { useAsyncList } from '@react-stately/data';
+import { action } from '@storybook/addon-actions';
 
-import { Item, OverlayProvider, Section } from '../../';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import ComboBoxField from './ComboBoxField';
+import {
+  ComboBoxField,
+  Item,
+  OverlayProvider,
+  Section,
+} from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -140,7 +144,7 @@ export default {
 
 export const Default = args => (
   <OverlayProvider>
-    <ComboBoxField {...actions} {...args} >
+    <ComboBoxField {...actions} {...args}>
       {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
@@ -148,7 +152,7 @@ export const Default = args => (
 
 export const WithSections = args => (
   <OverlayProvider>
-    <ComboBoxField label="Example label" items={withSection} {...args} >
+    <ComboBoxField label="Example label" items={withSection} {...args}>
       {section => (
         <Section key={section.key} items={section.children} title={section.name}>
           {item => <Item key={item.name}>{item.name}</Item>}
@@ -269,18 +273,17 @@ export const ControlledFiltering = () => {
     itemsList: items,
   });
 
-  const onSelectionChange = (key) => {
+  const onSelectionChange = key => {
     const selectedItem = items.filter(({ id }) => id === key);
     setFieldState({
       inputValue: selectedItem?.name,
       selectedKey: key,
-      itemsList: items.filter(item =>
-        startsWith(item.name, selectedItem?.name ?? ''),
+      itemsList: items.filter(item => startsWith(item.name, selectedItem?.name ?? ''),
       ),
     });
   };
 
-  const onInputChange = (value) => {
+  const onInputChange = value => {
     setFieldState((oldValues => ({
       inputValue: value,
       selectedKey: value === '' ? null : oldValues.selectedKey,
@@ -454,7 +457,7 @@ export const ControlledWithAddOption = () => {
   const [inputValue, setInputValue] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
 
-  const onSelectionChange = (key) => {
+  const onSelectionChange = key => {
     // Add new option to options array
     if (key && !options.find(({ name }) => name === key)) {
       setOptions([...options, { key, name: key }]);

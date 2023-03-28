@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
-import { Box, Icon, Text } from '../../index';
+import PropTypes from 'prop-types';
+
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useStatusClasses } from '../../hooks';
+import { Box, Icon, Text } from '../../index';
 
-const NavBarItemHeader = (props) => {
+const NavBarItemHeader = props => {
   const { item } = props;
   const { children, href } = item;
 
@@ -15,7 +16,7 @@ const NavBarItemHeader = (props) => {
     : <NavBarSectionItemHeader item={item} />;
 };
 
-const NavBarSectionItemHeader = (props) => {
+const NavBarSectionItemHeader = props => {
   const { item } = props;
   const { icon, key, className, heading } = item;
 
@@ -44,7 +45,7 @@ const NavBarSectionItemHeader = (props) => {
   const color = childSelected && !isExpanded ? 'white' : 'neutral.95';
 
   return (
-    <Box variant="navBar.itemHeaderContainer" className={classNames} isRow data-testid={heading} >
+    <Box variant="navBar.itemHeaderContainer" className={classNames} isRow data-testid={heading}>
       {icon && (
         <Icon
           icon={icon}
@@ -57,7 +58,11 @@ const NavBarSectionItemHeader = (props) => {
           aria-hidden="true"
         />
       )}
-      <Text variant="navBarHeaderText">{heading}</Text>
+      <Text
+        variant="variants.navBar.headerText"
+      >
+        {heading}
+      </Text>
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         <Icon
           icon={isExpanded ? MenuUp : MenuDown}
@@ -77,7 +82,7 @@ const NavBarPrimaryItemHeader = ({ item }) => {
   const { icon, className, heading, customIcon } = item;
 
   return (
-    <Box variant="navBar.itemHeaderContainer" className={className} isRow data-testid={heading} >
+    <Box variant="navBar.itemHeaderContainer" className={className} isRow data-testid={heading}>
       {icon && (
       <Icon
         icon={icon}
@@ -89,20 +94,19 @@ const NavBarPrimaryItemHeader = ({ item }) => {
         }}
         aria-hidden="true"
       />
-    )}
-      <Text variant="navBarHeaderText">{heading}</Text>
+      )}
+      <Text variant="variants.navBar.headerText">{heading}</Text>
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
-        {customIcon
-        ?
-          <Icon
-            icon={customIcon}
-            size="sm"
-            sx={{
-              color: 'neutral.95',
-              fill: 'neutral.95',
-            }}
-          />
-        : <></>}
+        {customIcon && (
+        <Icon
+          icon={customIcon}
+          size="sm"
+          sx={{
+            color: 'neutral.95',
+            fill: 'neutral.95',
+          }}
+        />
+        )}
       </Box>
     </Box>
   );

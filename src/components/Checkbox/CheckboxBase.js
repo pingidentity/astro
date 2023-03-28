@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
-import { Checkbox as ThemeUICheckbox } from 'theme-ui';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
+import { Checkbox as ThemeUICheckbox } from 'theme-ui';
+
 import Box from '../Box';
 
 /**

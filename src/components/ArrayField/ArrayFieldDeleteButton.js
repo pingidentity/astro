@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TrashIcon from 'mdi-react/TrashIcon';
+import PropTypes from 'prop-types';
+
 import Icon from '../Icon';
 import IconButton from '../IconButton';
 

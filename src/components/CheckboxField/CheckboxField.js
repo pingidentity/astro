@@ -1,15 +1,15 @@
-import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
-import { useCheckbox } from '@react-aria/checkbox';
-import { useToggleState } from '@react-stately/toggle';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
+import { useCheckbox } from 'react-aria';
+import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, Checkbox, FieldHelperText, Label } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, Checkbox, FieldHelperText, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -54,7 +54,7 @@ const CheckboxField = forwardRef((props, ref) => {
   const { inputProps } = useCheckbox(checkboxProps, state, checkboxRef);
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
     fieldLabelProps,
   } = useField({
     ...containerPressProps,
@@ -63,7 +63,7 @@ const CheckboxField = forwardRef((props, ref) => {
     controlProps: { ...controlProps, ...inputProps },
   });
 
-  const helperTextId = uuid();
+  const helperTextId = useMemo(() => uuid(), []);
 
   return (
     <Box {...fieldContainerProps}>
@@ -71,15 +71,16 @@ const CheckboxField = forwardRef((props, ref) => {
         <Checkbox
           ref={checkboxRef}
           aria-describedby={helperText && helperTextId}
-          {...fieldControlProps}
+          {...fieldControlInputProps}
         />
         {label}
       </Label>
       {
-        helperText &&
+        helperText && (
         <FieldHelperText status={status} sx={{ pt: 7 }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );
@@ -129,13 +130,8 @@ CheckboxField.propTypes = {
   onKeyDown: PropTypes.func,
   /** Handler that is called when a key is released. */
   onKeyUp: PropTypes.func,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 CheckboxField.displayName = 'CheckboxField';

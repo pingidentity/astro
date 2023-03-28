@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Pressable } from '@react-aria/interactions';
 
-import SwitchField from '.';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { Tooltip, TooltipTrigger } from '../../index';
+import {
+  SwitchField,
+  Tooltip,
+  TooltipTrigger,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 export default {
   title: 'Form/SwitchField',
@@ -50,9 +54,6 @@ export default {
     isReadOnly: {},
     isDefaultSelected: {},
     hasAutoFocus: {},
-    containerProps: {},
-    labelProps: {},
-    controlProps: {},
     id: {},
     isSelected: {
       control: {
@@ -60,6 +61,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 
@@ -108,11 +110,14 @@ export const Required = () => (
   <SwitchField isRequired label="Required" value="my-switch" />
 );
 
-export const WithTooltip = () => (
-  <TooltipTrigger crossOffset={15} offset={20}>
-    <Pressable>
-      <SwitchField aria-label="my-label" value="my-switch" />
-    </Pressable>
-    <Tooltip>Tooltip Content</Tooltip>
-  </TooltipTrigger>
-);
+export const WithTooltip = () => {
+  const tooltipTrigger = useRef();
+  return (
+    <TooltipTrigger crossOffset={15} offset={20} targetRef={tooltipTrigger}>
+      <Pressable ref={tooltipTrigger}>
+        <SwitchField aria-label="my-label" value="my-switch" />
+      </Pressable>
+      <Tooltip>Tooltip Content</Tooltip>
+    </TooltipTrigger>
+  );
+};

@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import EnvironmentBreadcrumb from './EnvironmentBreadcrumb';
-import { Item, Section, Chip, Box, Text } from '../../index';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import {
+  Badge,
+  Box,
+  EnvironmentBreadcrumb,
+  Item,
+  Section,
+  Text,
+} from '../../index';
+
 import EnvironmentBreadcrumbReadme from './EnvironmentBreadcrumb.mdx';
 
 export default {
@@ -74,7 +82,7 @@ const environmentsWithSections = [
   },
 ];
 
-export const Default = (args) => {
+export const Default = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,
@@ -84,15 +92,14 @@ export const Default = (args) => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -109,9 +116,9 @@ export const Default = (args) => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="variants.boxes.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
             />
           ) : null}
@@ -131,8 +138,7 @@ export const WithSections = () => {
   const getUpdatedRecentEnvs = (envObj, prevEnvs) => {
     const { name: envName } = envObj;
 
-    const isDuplicate =
-      prevEnvs.filter(prevEnv => prevEnv.name === envName).length > 0;
+    const isDuplicate = prevEnvs.filter(prevEnv => prevEnv.name === envName).length > 0;
 
     if (isDuplicate) {
       return [
@@ -146,12 +152,11 @@ export const WithSections = () => {
     return [{ ...envObj }, ...prevEnvs];
   };
 
-  const findEnvObj = envName =>
-    environments
-      .find(section => section.name === 'All')
-      .options.find(option => option.name === envName);
+  const findEnvObj = envName => environments
+    .find(section => section.name === 'All')
+    .options.find(option => option.name === envName);
 
-  const handleEnvPress = (newEnv) => {
+  const handleEnvPress = newEnv => {
     const sectionPrefixIndex = newEnv.indexOf('-');
     const envKey = newEnv.substr(sectionPrefixIndex + 1);
     const recentEnvironments = environments.find(
@@ -162,12 +167,10 @@ export const WithSections = () => {
       envObj,
       recentEnvironments,
     );
-    setEnvironments(prevEnvs =>
-      prevEnvs.map(section =>
-        (section.name === 'Recent'
-          ? { ...section, options: updatedRecentEnvironments }
-          : section),
-      ),
+    setEnvironments(prevEnvs => prevEnvs.map(section => (section.name === 'Recent'
+      ? { ...section, options: updatedRecentEnvironments }
+      : section),
+    ),
     );
     setSelectedEnvironment({ ...envObj });
   };
@@ -176,7 +179,7 @@ export const WithSections = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
@@ -204,9 +207,9 @@ export const WithSections = () => {
               <Box isRow>
                 {itemName}
                 {isSandbox ? (
-                  <Chip
+                  <Badge
                     label="SANDBOX"
-                    variant="variants.boxes.environmentChip"
+                    variant="environmentBadge"
                     bg="neutral.40"
                   />
                 ) : null}
@@ -231,15 +234,14 @@ export const DefaultOpen = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -256,9 +258,9 @@ export const DefaultOpen = () => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="variants.boxes.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
             />
           ) : null}
@@ -279,15 +281,14 @@ export const ControlledMenu = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -305,9 +306,9 @@ export const ControlledMenu = () => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="variants.boxes.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
             />
           ) : null}
@@ -317,7 +318,7 @@ export const ControlledMenu = () => {
   );
 };
 
-export const RightAlignedChips = (args) => {
+export const RightAlignedBadges = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Snail',
     isSandbox: true,
@@ -327,15 +328,14 @@ export const RightAlignedChips = (args) => {
     <Box isRow>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Chip label="SANDBOX" variant="variants.boxes.environmentChip" bg="neutral.40" />
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
 
-  const findEnvObj = envName =>
-    defaultEnvironments.find(({ name }) => name === envName);
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
 
-  const handleSelectionChange = (newEnvName) => {
+  const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
     setSelectedEnvironment({ ...envObj });
   };
@@ -366,9 +366,9 @@ export const RightAlignedChips = (args) => {
         <Item key={name} textValue={name}>
           {name}
           {isSandbox ? (
-            <Chip
+            <Badge
               label="SANDBOX"
-              variant="variants.boxes.environmentChip"
+              variant="environmentBadge"
               bg="neutral.40"
               align="right"
             />

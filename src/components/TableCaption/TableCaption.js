@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Box from '../Box';
 
 /**
@@ -10,10 +11,10 @@ import Box from '../Box';
  *
  */
 
-const TableCaption = (props) => {
+const TableCaption = props => {
   const { children, ...others } = props;
   return (
-    <Box variant="table.tableCaption" as="caption" {...others}>
+    <Box variant="table.caption" as="caption" {...others}>
       {children}
     </Box>
   );

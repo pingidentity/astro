@@ -1,24 +1,23 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import axeTest from '../../utils/testUtils/testAxe';
-import { render, screen, fireEvent } from '../../utils/testUtils/testWrapper';
+
 import {
   Button,
-  PopoverMenu,
-  Menu,
   Item,
+  Menu,
+  PopoverMenu,
 } from '../../index';
+import axeTest from '../../utils/testUtils/testAxe';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 const getComponent = (props = {}) => render((
-  <>
-    <PopoverMenu {...props}>
-      <Button>Mock Button</Button>
-      <Menu>
-        <Item key="a">A</Item>
-        <Item key="b">B</Item>
-      </Menu>
-    </PopoverMenu>
-  </>
+  <PopoverMenu {...props}>
+    <Button>Mock Button</Button>
+    <Menu>
+      <Item key="a">A</Item>
+      <Item key="b">B</Item>
+    </Menu>
+  </PopoverMenu>
 ));
 
 // Need to be added to each test file to test accessibility using axe.
@@ -161,4 +160,16 @@ test('two menus can not be open at the same time', () => {
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   expect(screen.queryAllByRole('menuitem')).toHaveLength(3);
   expect(screen.queryByRole('menuitem', { name: 'C' })).toBeInTheDocument();
+});
+
+test('holds a pressed state for menu trigger when isOpen is true', () => {
+  getComponent();
+  const button = screen.getByRole('button');
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  expect(button).not.toHaveClass('is-pressed');
+
+  userEvent.click(button);
+  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  expect(button).toHaveClass('is-pressed');
 });

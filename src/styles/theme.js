@@ -1,9 +1,9 @@
-import spacing from './spacing';
-import colors, { accent, line, shadow, focus } from './colors';
-import { fontSizes, fontWeights, textColors } from './text';
 import breakpoints from './breakpoints';
+import colors, { accent, focus, line, shadow } from './colors';
 import forms from './forms';
-import { variants, buttons, text, images, links, bidirectionalIconButton } from './variants';
+import spacing from './spacing';
+import { fontSizes, fontWeights, textColors } from './text';
+import { badges, buttons, cards, images, links, text, variants } from './variants';
 
 export default {
   name: 'Astro',
@@ -40,7 +40,9 @@ export default {
   forms,
   text,
   images,
-  buttons: { ...buttons, bidirectionalIconButton },
+  buttons,
+  badges,
+  cards,
   textColors,
   links,
   variants,

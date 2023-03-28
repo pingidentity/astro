@@ -1,5 +1,7 @@
 import React from 'react';
-import Label from '.';
+
+import { Label } from '../../index';
+
 import { modes } from './constants';
 
 export default {

@@ -1,12 +1,11 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import MenuUp from 'mdi-react/MenuUpIcon';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import { useNumberField } from '@react-aria/numberfield';
-import { useNumberFieldState } from '@react-stately/numberfield';
+import { mergeProps, useNumberField } from 'react-aria';
+import { useNumberFieldState } from 'react-stately';
 import { useLocale } from '@react-aria/i18n';
-import { mergeProps } from '@react-aria/utils';
 import omit from 'lodash/omit';
+import MenuDown from 'mdi-react/MenuDownIcon';
+import MenuUp from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -16,10 +15,11 @@ import {
   IconButton,
   Input,
   Label,
-} from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+} from '../..';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Number fields allow users to enter a number, and increment or
@@ -46,7 +46,12 @@ const NumberField = forwardRef((props, ref) => {
     incrementButtonProps,
     decrementButtonProps,
   } = useNumberField(props, state, inputRef);
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField(
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField(
     props,
   );
 
@@ -55,7 +60,7 @@ const NumberField = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => inputRef.current);
 
   const ControlArrows = (
-    <Box variant="numberField.arrows">
+    <Box variant="forms.numberField.arrows">
       <IconButton {...incrementButtonProps} ref={decRef} tabIndex="0" p={0}>
         <Icon icon={MenuUp} size={18} />
       </IconButton>
@@ -68,32 +73,32 @@ const NumberField = forwardRef((props, ref) => {
   // this needed to remove console warning in React 16
   // I believe once we update to 17 - we can remove this
   const onInputFocus = useCallback(
-    (e) => {
+    e => {
       e.persist();
-      fieldControlProps.onFocus(e);
+      fieldControlInputProps.onFocus(e);
       inputProps.onFocus(e);
     },
-    [fieldControlProps, inputProps],
+    [fieldControlInputProps, inputProps],
   );
   const onInputBlur = useCallback(
-    (e) => {
+    e => {
       e.persist();
-      fieldControlProps.onBlur(e);
+      fieldControlInputProps.onBlur(e);
       inputProps.onBlur(e);
     },
-    [fieldControlProps, inputProps],
+    [fieldControlInputProps, inputProps],
   );
 
-  const updatedFieldControlProps = useMemo(
+  const updatedFieldControlInputProps = useMemo(
     () => ({
-      ...fieldControlProps,
+      ...fieldControlInputProps,
       onFocus: onInputFocus,
       onBlur: onInputBlur,
     }),
-    [fieldControlProps, onInputBlur, onInputFocus],
+    [fieldControlInputProps, onInputBlur, onInputFocus],
   );
 
-  const onInputChange = (e) => {
+  const onInputChange = e => {
     const { minValue } = props;
     const trimmedInputValue = e.target.value.trim();
     const trimmedValueEvent = {
@@ -118,22 +123,22 @@ const NumberField = forwardRef((props, ref) => {
   };
   inputProps['aria-roledescription'] = null;
 
-  const helperTextId = uuid();
+  const helperTextId = useMemo(() => uuid(), []);
 
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
-      <Box variant="numberField.noDefaultArrows" {...groupProps}>
+      <Box variant="forms.numberField.noDefaultArrows" {...groupProps}>
         <Box
-          variant="numberField.arrowsWrapper"
-          className={fieldControlProps.className}
+          variant="forms.numberField.arrowsWrapper"
+          {...fieldControlWrapperProps}
         >
           <Input
             variant="forms.input.numberField"
             ref={inputRef}
             // we don't want to merge this props, we want to
             // overwrite them like defaultValue, value, ect.
-            {...updatedFieldControlProps}
+            {...updatedFieldControlInputProps}
             {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
             onChange={onInputChange}
             aria-describedby={helperText && helperTextId}
@@ -215,4 +220,5 @@ NumberField.propTypes = {
   /** The current value (controlled). */
   value: PropTypes.number,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };

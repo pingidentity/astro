@@ -1,7 +1,8 @@
 import React from 'react';
-import HelpHint from '.';
-import Box from '../Box';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Box, HelpHint } from '../../index';
+
 import HelpHintReadme from './HelpHint.mdx';
 
 export default {

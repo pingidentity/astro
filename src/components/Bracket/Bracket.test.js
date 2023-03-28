@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Bracket from '.';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import Bracket from '.';
 
 const testId = 'test-bracket';
 const defaultProps = {

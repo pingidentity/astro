@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+
 import { useModalState } from '../hooks';
 import {
   Box,
   Button,
+  Item,
+  Link,
+  Messages,
   Modal,
   OverlayProvider,
   Text,
   TextField,
-  Link,
-  Messages,
-  Item,
 } from '../index';
 
 export default {
@@ -58,21 +59,20 @@ export const Default = () => {
   };
 
   return (
-    <>
-      <OverlayProvider>
-        <Box sx={sx.mainContentBox} gap="lg">
-          <Box sx={sx.textFieldBoxStyle} gap="lg">
-            <TextField
-              label="Place Holder"
-              onChange={e => setValue(e.target.value)}
-              value={value}
-            />
-          </Box>
-          <Link onPress={state.open} aria-label="Open modal">
-            Go Somewhere Else
-          </Link>
+    <OverlayProvider>
+      <Box sx={sx.mainContentBox} gap="lg">
+        <Box sx={sx.textFieldBoxStyle} gap="lg">
+          <TextField
+            label="Place Holder"
+            onChange={e => setValue(e.target.value)}
+            value={value}
+          />
         </Box>
-        {state.isOpen && (
+        <Link onPress={state.open} aria-label="Open modal">
+          Go Somewhere Else
+        </Link>
+      </Box>
+      {state.isOpen && (
         <Modal isOpen={state.isOpen} onClose={state.close} hasCloseButton>
           <Text sx={sx.modalTextSaveChanges} variant="Bold">
             Save Changes?
@@ -91,13 +91,12 @@ export const Default = () => {
           </Box>
         </Modal>
       )}
-        <Messages>
-          {isShowingNeutral && <Item>Changes have been Discarded.</Item>}
-          {isShowingSuccess && (
+      <Messages>
+        {isShowingNeutral && <Item>Changes have been Discarded.</Item>}
+        {isShowingSuccess && (
           <Item status="success">Form has been saved successfully.</Item>
         )}
-        </Messages>
-      </OverlayProvider>
-    </>
+      </Messages>
+    </OverlayProvider>
   );
 };

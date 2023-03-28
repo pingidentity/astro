@@ -1,9 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+
+import { RockerButton, RockerButtonGroup } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, queryByAttribute, render, screen } from '../../utils/testUtils/testWrapper';
-import RockerButtonGroup from './RockerButtonGroup';
-import RockerButton from '../RockerButton';
 
 
 const testId = 'testId';
@@ -44,7 +44,7 @@ test('buttonGroup is not disabled by default', () => {
   const rockerContainer = queryByAttribute('data-id', document, 'test-container');
   expect(rockerContainer).toBeEnabled();
 
-  testButtons.forEach((button) => {
+  testButtons.forEach(button => {
     const buttonKey = screen.getByText(button.key);
     expect(buttonKey).not.toHaveClass('is-disabled');
   });
@@ -52,7 +52,7 @@ test('buttonGroup is not disabled by default', () => {
 
 test('rocker button is disabled when its key is included in disabledKeys', () => {
   getComponent({ disabledKeys: testButtons.map(button => button.key) });
-  testButtons.forEach((button) => {
+  testButtons.forEach(button => {
     const buttonKey = screen.getByText(button.key);
     expect(buttonKey).toHaveClass('is-disabled');
   });

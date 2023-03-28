@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import NumberField from './NumberField';
+import { NumberField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 export default {
   title: 'Form/NumberField',
@@ -88,6 +89,7 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import ArrowIcon from 'mdi-react/ArrowTopRightThickIcon';
 import GroupIcon from 'mdi-react/AccountGroupIcon';
-import IconBadge from '.';
+import ArrowIcon from 'mdi-react/ArrowTopRightThickIcon';
+
 import {
-  Icon,
   Box,
+  Icon,
+  IconBadge,
 } from '../../index';
 
 export default {
@@ -21,7 +22,7 @@ export default {
 
 export const Default = args => (
   <Box>
-    <IconBadge {...args} baseSize={25} circleSize={15} >
+    <IconBadge {...args} baseSize={25} circleSize={15}>
       <Icon
         icon={GroupIcon}
         size="25px"

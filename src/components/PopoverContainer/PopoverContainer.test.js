@@ -1,19 +1,19 @@
 import React from 'react';
+
+import { Box, OverlayPanel } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-import { Box, OverlayPanel } from '../../index';
+
 import PopoverContainer from './PopoverContainer';
 
 const getComponent = (props = {}) => render((
-  <>
-    <PopoverContainer {...props}>
-      <Box>I am in a popover</Box>
-    </PopoverContainer>
-  </>
+  <PopoverContainer {...props}>
+    <Box>I am in a popover</Box>
+  </PopoverContainer>
 ));
 
 const getComponentInOverlayPanel = (props = {}) => render((
-  <OverlayPanel isOpen >
+  <OverlayPanel isOpen>
     <PopoverContainer {...props}>
       <Box>I am in a popover</Box>
     </PopoverContainer>

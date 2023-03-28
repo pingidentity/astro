@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { mergeProps } from 'react-aria';
 import { useGridRow } from '@react-aria/grid';
-import { mergeProps } from '@react-aria/utils';
-import { useAccordionGridContext } from '../../context/AccordionGridContext';
-import Box from '../Box';
-import AccordionGridItemHeader from './AccordionGridItemHeader';
-import AccordionGridItemBody from './AccordionGridItemBody';
-import { useStatusClasses } from '../../hooks';
+import PropTypes from 'prop-types';
 
-const AccordionGridItem = (props) => {
+import { useAccordionGridContext } from '../../context/AccordionGridContext';
+import { useStatusClasses } from '../../hooks';
+import Box from '../Box';
+
+import AccordionGridItemBody from './AccordionGridItemBody';
+import AccordionGridItemHeader from './AccordionGridItemHeader';
+
+const AccordionGridItem = props => {
   const {
     item,
     headerProps,
@@ -63,7 +65,7 @@ const AccordionGridItem = (props) => {
       aria-selected={isSelected}
       aria-expanded={isSelected}
       className={classNames}
-      variant="accordion.accordionGridItem"
+      variant="accordionGrid.item"
       ref={rowRef}
     >
       <AccordionGridItemHeader

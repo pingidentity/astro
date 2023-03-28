@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { useNavBarContext } from '../../context/NavBarContext';
-import { useStatusClasses, useNavBarPress } from '../../hooks';
+import { useNavBarPress, useStatusClasses } from '../../hooks';
 import { Button } from '../../index';
 
-const NavBarItemButton = (props) => {
+const NavBarItemButton = props => {
   const {
     className,
     id: key,
@@ -26,7 +27,7 @@ const NavBarItemButton = (props) => {
   return (
     <Button
       id={key}
-      variant="navItemButton"
+      variant="variants.navBar.itemButton"
       onPress={onNavPress}
       className={classNames}
       color={isSelected ? 'white' : undefined}

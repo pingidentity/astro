@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useNavBarPress from './';
+
+import useNavBarPress from '.';
 
 const key = 'testKey';
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import IconButtonToggle from '.';
+import EyeIcon from 'mdi-react/EyeOutlineIcon';
+
+import { IconButtonToggle } from '../../index';
 
 export default {
   title: 'Components/IconButtonToggle',
@@ -12,7 +13,7 @@ export const Default = args => (
   <IconButtonToggle {...args} toggledIcon={EyeIcon} defaultIcon={EyeOffIcon} buttonProps={{ 'aria-label': 'eye icon' }} />
 );
 
-export const Controlled = (args) => {
+export const Controlled = args => {
   const [isToggled, onToggledChange] = useState(false);
   const handleToggleChange = () => {
     onToggledChange(!isToggled);

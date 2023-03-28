@@ -1,14 +1,14 @@
 import React, { useCallback, useRef } from 'react';
-import InsertDriveFileIcon from 'mdi-react/InsertDriveFileIcon';
-import ErrorIcon from 'mdi-react/ErrorIcon';
+import { useVisuallyHidden } from 'react-aria';
 import DeleteIcon from 'mdi-react/DeleteIcon';
+import ErrorIcon from 'mdi-react/ErrorIcon';
+import InsertDriveFileIcon from 'mdi-react/InsertDriveFileIcon';
 import PropTypes from 'prop-types';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
 
-import { Box, Button, IconButton, Icon, Text } from '../../index';
+import { Box, Button, Icon, IconButton, Text } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
-const FileItem = (props) => {
+const FileItem = props => {
   const {
     downloadLink,
     handleFileDelete,
@@ -55,7 +55,7 @@ const FileItem = (props) => {
         isDisabled={isDisabled}
       />
       <Button
-        variant="fileInputField"
+        variant="forms.fileInputField.button"
         mx={5}
         isDisabled={isDisabled}
         aria-label={name}

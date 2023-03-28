@@ -1,14 +1,13 @@
 import React, { useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import { FocusScope } from '@react-aria/focus';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
-import { useSelect } from '@react-aria/select';
+import { DismissButton, FocusScope, useOverlayPosition, useSelect } from 'react-aria';
+import { useSelectState } from 'react-stately';
 import { useResizeObserver } from '@react-aria/utils';
-import { useSelectState } from '@react-stately/select';
-import { useColumnStyles, useDeprecationWarning, useField } from '..';
+
+import { modes } from '../../components/Label/constants';
 import ListBox from '../../components/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
-import { modes } from '../../components/Label/constants';
+import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
 const useSelectField = (props, ref) => {
   const {
@@ -96,7 +95,8 @@ const useSelectField = (props, ref) => {
 
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     ...props,
@@ -175,9 +175,7 @@ const useSelectField = (props, ref) => {
         variant="listBox.selectField"
         isLoading={isLoadingMore}
         onLoadMore={onLoadMore}
-
         {...menuProps}
-
       />
       <DismissButton onDismiss={() => state.close()} />
     </FocusScope>
@@ -203,7 +201,8 @@ const useSelectField = (props, ref) => {
   return {
     columnStyleProps,
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
     isLoadingInitial,
     listBoxRef,

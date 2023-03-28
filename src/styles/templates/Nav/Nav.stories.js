@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GlobeIcon from 'mdi-react/GlobeIcon';
+
 import {
   Box,
   Link,
@@ -8,9 +9,10 @@ import {
   NavBarSection,
   Separator,
   Text,
-} from '../../../index';
-import { logo, data, secondData, thirdData } from './NavData';
+} from '../../..';
+
 import HeaderBar from './HeaderBar';
+import { data, logo, secondData, thirdData } from './NavData';
 
 export default {
   title: 'Templates/Nav',

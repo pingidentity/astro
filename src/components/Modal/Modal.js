@@ -1,20 +1,19 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import {
+  FocusScope,
+  OverlayContainer,
+  useDialog,
+  useModal,
   useOverlay,
   usePreventScroll,
-  useModal,
-  OverlayContainer,
-} from '@react-aria/overlays';
-import { useDialog } from '@react-aria/dialog';
-import { FocusScope } from '@react-aria/focus';
+} from 'react-aria';
 import CloseIcon from 'mdi-react/CloseIcon';
+import PropTypes from 'prop-types';
 
 import Box from '../Box';
-import IconButton from '../IconButton';
 import Icon from '../Icon';
+import IconButton from '../IconButton';
 import Text from '../Text';
-import { useStatusClasses, useDeprecationWarning } from '../../hooks';
 
 /**
   * Modals are overlays that interrupt a user’s workflow to convey an important message.
@@ -71,18 +70,9 @@ const Modal = forwardRef((props, ref) => {
   // Get props for the dialog and its title
   const { dialogProps, titleProps } = useDialog(contentProps, modalRef);
 
-  const { classNames } = useStatusClasses(className, {
-    isDarkMode: others.variant === 'modal.dark',
-  });
-
-  useDeprecationWarning(
-    'The "dark" variant for Modal will be deprecated in Astro-UI 2.0.0.',
-    { isActive: others.variant === 'modal.dark' },
-  );
-
   return (
     <OverlayContainer>
-      <Box className={classNames} variant="modal.container" {...others} {...containerProps}>
+      <Box variant="modal.container" {...others} {...containerProps}>
         <FocusScope contain restoreFocus autoFocus={hasAutoFocus}>
           <Box
             variant="modal.content"
@@ -94,9 +84,10 @@ const Modal = forwardRef((props, ref) => {
             aria-modal
           >
             {
-              hasCloseButton &&
-              (
-                closeButton ??
+              hasCloseButton
+              && (
+                closeButton
+                ?? (
                 <IconButton
                   aria-label="Close modal window"
                   data-id="icon-button__close-modal-window"
@@ -106,18 +97,19 @@ const Modal = forwardRef((props, ref) => {
                 >
                   <Icon icon={CloseIcon} />
                 </IconButton>
+                )
               )
             }
             {
-              title &&
-              <>
-                <Text
-                  {...titleProps}
-                  variant="variants.modal.title"
-                >
+              title
+              && (
+              <Text
+                {...titleProps}
+                variant="variants.modal.title"
+              >
                   {title}
-                </Text>
-              </>
+              </Text>
+              )
             }
             {children}
           </Box>

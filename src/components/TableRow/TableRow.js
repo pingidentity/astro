@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Box from '../Box';
 
 /**
@@ -10,11 +11,11 @@ import Box from '../Box';
  *
  */
 
-const TableRow = (props) => {
+const TableRow = props => {
   const { children, ...others } = props;
   return (
     <Box
-      variant="table.tableRow"
+      variant="table.row"
       as="tr"
       {...others}
     >

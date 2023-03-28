@@ -1,13 +1,10 @@
 import React, { forwardRef, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useVisuallyHidden } from 'react-aria';
 import omit from 'lodash/omit';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
-import { PopoverMenu } from '../../index';
+import PropTypes from 'prop-types';
+
+import { Box, FieldHelperText, Input, Label, PopoverMenu } from '../..';
 import useField from '../../hooks/useField';
-import FieldHelperText from '../FieldHelperText';
-import Input from '../Input';
-import Box from '../Box';
-import Label from '../Label';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 const ImageUploadFieldBase = forwardRef((props, inputRef) => {
@@ -23,7 +20,12 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
     isMenuOpen,
     status,
   } = props;
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
     ...omit(props, ['onRemove']),
   });
   const labelRef = useRef();
@@ -40,16 +42,18 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
       <PopoverMenu isOpen={isMenuOpen} onOpenChange={handleOpenMenuChange}>
         {children}
       </PopoverMenu>
-      <Input
-        {...fieldControlProps}
-        {...visuallyHiddenProps}
-        accept={acceptableInputTypes}
-        data-testid="image-upload-input"
-        onChange={handleInputChange}
-        ref={inputRef}
-        type="file"
-        value=""
-      />
+      <Box {...fieldControlWrapperProps}>
+        <Input
+          {...fieldControlInputProps}
+          {...visuallyHiddenProps}
+          accept={acceptableInputTypes}
+          data-testid="image-upload-input"
+          onChange={handleInputChange}
+          ref={inputRef}
+          type="file"
+          value=""
+        />
+      </Box>
       {!isImageType && (
         <FieldHelperText status={statuses.DEFAULT}>{fileName}</FieldHelperText>
       )}

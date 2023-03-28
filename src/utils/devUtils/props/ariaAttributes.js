@@ -54,7 +54,7 @@ export const ariaAttributesBasePropTypes = {
   'aria-labelledby': PropTypes.string,
 };
 
-export const getAriaAttributeProps = (props) => {
+export const getAriaAttributeProps = props => {
   const ariaProps = Object.entries(props).reduce((acc, [key, val]) => {
     if (key.match(/^aria-.*/)) return { ...acc, [key]: val };
     return { ...acc };

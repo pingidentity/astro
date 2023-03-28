@@ -1,14 +1,14 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useSearchField } from '@react-aria/searchfield';
-import { useSearchFieldState } from '@react-stately/searchfield';
+import { useSearchField } from 'react-aria';
+import { useSearchFieldState } from 'react-stately';
 import CloseIcon from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import PropTypes from 'prop-types';
 
-import { Box, Icon, IconButton, Input, Label } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, Icon, IconButton, Input, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
-
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Renders a search field with associated controls including visual elements and keyboard
@@ -48,7 +48,8 @@ const SearchField = forwardRef((props, ref) => {
   }, state, searchRef);
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     ...props,
@@ -62,7 +63,7 @@ const SearchField = forwardRef((props, ref) => {
     },
   });
 
-  const handleKeyDownEvent = (e) => {
+  const handleKeyDownEvent = e => {
     const key = e.key;
     if (key === 'Enter' || key === ' ') {
       state.setValue('');
@@ -72,20 +73,23 @@ const SearchField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
-      <Box variant="forms.search.container">
-        <Input ref={searchRef} pl={40} pr={40} {...fieldControlProps} variant="forms.input.search" />
+      <Box variant="forms.search.wrapper" {...fieldControlWrapperProps}>
+        <Input ref={searchRef} pl={40} pr={40} {...fieldControlInputProps} />
         {
-          icon &&
+          icon
+          && (
           <Icon
             icon={icon}
             variant="forms.search.icon"
             size={22}
             {...iconProps}
           />
+          )
         }
         {
-          !hasNoClearButton &&
-          state.value !== '' &&
+          !hasNoClearButton
+          && state.value !== ''
+          && (
           <IconButton
             tabIndex={0}
             onKeyDown={handleKeyDownEvent}
@@ -101,6 +105,7 @@ const SearchField = forwardRef((props, ref) => {
           >
             <Icon icon={CloseIcon} />
           </IconButton>
+          )
         }
       </Box>
     </Box>
@@ -185,13 +190,8 @@ SearchField.propTypes = {
    * (value: string) => void
    */
   onChange: PropTypes.func,
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
   /** Props object that is spread into the icon element. */
   iconProps: PropTypes.shape({}),
-  /** Props object that is spread into the label element. */
-  labelProps: PropTypes.shape({}),
 
 
   // NOTE: unsurfaced useSearchField / useSearchFieldState props listed below
@@ -275,6 +275,7 @@ SearchField.propTypes = {
    */
   onInput: PropTypes.func,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 SearchField.defaultProps = {

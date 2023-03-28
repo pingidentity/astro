@@ -1,5 +1,6 @@
 import React from 'react';
-import CheckboxField from '../components/CheckboxField';
+
+import { CheckboxField } from '../index';
 
 export default {
   title: 'Recipes/Neutral Checkbox Field',

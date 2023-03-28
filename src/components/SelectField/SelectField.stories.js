@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { OverlayProvider } from '@react-aria/overlays';
-import { useAsyncList } from '@react-stately/data';
+import { OverlayProvider } from 'react-aria';
+import { useAsyncList } from 'react-stately';
 
-import { Item, Section, SelectField, Separator } from '../../';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { modes as labelModes } from '../Label/constants';
+import {
+  Item,
+  Section,
+  SelectField,
+  Separator,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { modes as labelModes } from '../Label/constants';
 
 const animals = [
   { name: 'Aardvark', id: '1' },
@@ -102,13 +108,13 @@ export default {
     isDisabled: {},
     isOpen: {},
     isRequired: {},
-    controlProps: {},
     selectedKey: {
       control: {
         type: 'none',
       },
     },
     ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
   },
 };
 
@@ -136,7 +142,7 @@ export const WithSections = args => (
 
 export const WithCustomHeight = args => (
   <OverlayProvider>
-    <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args} >
+    <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args}>
       {item => <Item key={item.name}>{item.name}</Item>}
     </SelectField>
   </OverlayProvider>

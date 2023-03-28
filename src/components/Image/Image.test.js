@@ -1,7 +1,9 @@
 import React from 'react';
 import { act } from '@testing-library/react';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+
 import Image from '.';
 
 const testSrc = 'test-src';
@@ -13,8 +15,10 @@ const defaultProps = {
   fallbackImage: testFallbackSrc,
 };
 
-const getComponent = (props = {}, { renderFn = render } = {}) =>
-  renderFn(<Image {...defaultProps} {...props} />);
+const getComponent = (
+  props = {},
+  { renderFn = render } = {},
+) => renderFn(<Image {...defaultProps} {...props} />);
 
 
 // Need to be added to each test file to test accessibility using axe.
@@ -22,7 +26,7 @@ axeTest(getComponent);
 
 let fallbackImageObj = null;
 
-jest.mock('../../hooks/useFallbackImage', () => (props) => {
+jest.mock('../../hooks/useFallbackImage', () => props => {
   fallbackImageObj = { ...props };
   return [];
 });

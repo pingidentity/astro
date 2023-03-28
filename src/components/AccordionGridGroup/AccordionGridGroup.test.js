@@ -1,16 +1,18 @@
 import React from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
+
+import {
+  Box,
+  Link,
+  OverlayPanel,
+  Text,
+  TextField,
+} from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
-import {
-  Link,
-  Box,
-  OverlayPanel,
-  TextField,
-  Text,
-} from '../../index';
-import AccordionGridGroup from '../AccordionGridGroup';
+
+import AccordionGridGroup from '.';
 
 
 const testId = 'test-accordion';
@@ -19,7 +21,7 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}) => render((
-  <AccordionGridGroup {...defaultProps} {...props} >
+  <AccordionGridGroup {...defaultProps} {...props}>
     <Item key="first" textValue="Duplicate">
       <Box>
         <Link>Header Button</Link>
@@ -54,8 +56,8 @@ const getComponent = (props = {}) => render((
 ));
 
 const getComponentInOverlayPanel = (props = {}) => render((
-  <OverlayPanel isOpen >
-    <AccordionGridGroup {...defaultProps} {...props} >
+  <OverlayPanel isOpen>
+    <AccordionGridGroup {...defaultProps} {...props}>
       <Item key="first" textValue="Duplicate">
         <Box>
           <Link>Header Button</Link>

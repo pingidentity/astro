@@ -8,8 +8,10 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import defaultTimezones, { usCities } from './timezones.js';
+
 import { Box, ComboBoxField, Item, Text } from '../../index';
+
+import defaultTimezones, { usCities } from './timezones.js';
 
 const createSearchTags = ({ gmt, gmtLabel, timeZone }) => {
   let additionalTags = '';
@@ -31,7 +33,7 @@ const getLocaleTime = ({ timeZone, locales, localeOptions }) => {
   });
 };
 
-const getTimezoneOffset = (timeZone) => {
+const getTimezoneOffset = timeZone => {
   const now = new Date();
   const tzString = now.toLocaleString('en-US', { timeZone });
   const localString = now.toLocaleString('en-US');
@@ -70,24 +72,23 @@ const TimeZonePicker = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (timeUpdate) {
-      const createTimeZoneTimes = () =>
-        Object.entries(extendedTimeZonesList).map((item) => {
-          const gmt = `GMT${getTimezoneOffset(item[1])}`;
-          const gmtLabel = item[0].substring(12);
-          const timeZone = item[1]?.replace(/_/g, ' ');
-          const time = getLocaleTime({
-            timeZone: item[1],
-            locales,
-            localeOptions,
-          });
-          const searchTags = createSearchTags({ gmt, gmtLabel, timeZone });
-          return {
-            gmt,
-            timeZone,
-            time,
-            searchTags,
-          };
+      const createTimeZoneTimes = () => Object.entries(extendedTimeZonesList).map(item => {
+        const gmt = `GMT${getTimezoneOffset(item[1])}`;
+        const gmtLabel = item[0].substring(12);
+        const timeZone = item[1]?.replace(/_/g, ' ');
+        const time = getLocaleTime({
+          timeZone: item[1],
+          locales,
+          localeOptions,
         });
+        const searchTags = createSearchTags({ gmt, gmtLabel, timeZone });
+        return {
+          gmt,
+          timeZone,
+          time,
+          searchTags,
+        };
+      });
 
       setTimeZones(createTimeZoneTimes());
       setTimeUpdate(false);
@@ -95,7 +96,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
   }, [extendedTimeZonesList, locales, localeOptions, timeUpdate]);
 
   const filterTimezones = useCallback(
-    (timeZonesList) => {
+    timeZonesList => {
       return timeZonesList.filter(({ searchTags }) => {
         return searchTags.toUpperCase().indexOf(search.toUpperCase()) > -1;
       });
@@ -119,16 +120,16 @@ const TimeZonePicker = forwardRef((props, ref) => {
     return timeZones.filter(tz => tz.timeZone === search).length > 0;
   };
 
-  const renderTimeZones = (timeZonesToRender) => {
+  const renderTimeZones = timeZonesToRender => {
     return timeZonesToRender.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
       <Item key={timeZone} data-id={timeZone} textValue={timeZone}>
         <Box flexDirection="row" justifyContent="space-between" width="100%">
           <Box flexDirection="row">
-            <Text variant="timeZone.title">{timeZone}</Text>
-            <Text variant="timeZone.subTitle">{gmt}</Text>
+            <Text variant="variants.timeZone.item.title">{timeZone}</Text>
+            <Text variant="variants.timeZone.item.subTitle">{gmt}</Text>
           </Box>
           <Box>
-            <Text variant="timeZone.time">{time}</Text>
+            <Text variant="variants.timeZone.item.time">{time}</Text>
           </Box>
         </Box>
       </Item>
@@ -144,7 +145,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
 
   const comboBoxFieldProps = useMemo(
     () => ({
-      controlProps: { sx: { width: 400, fontSize: 'md' } },
+      containerProps: { sx: { width: 400, fontSize: 'md' } },
       onInputChange: setSearch,
       items: filteredTimezones,
       ref: timeZonePickerRef,
@@ -156,7 +157,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
   );
 
   return (
-    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="input" >
+    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="input">
       {items}
     </ComboBoxField>
   );

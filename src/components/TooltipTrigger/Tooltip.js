@@ -1,5 +1,6 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
-import { useTooltip } from '@react-aria/tooltip';
+import { useTooltip } from 'react-aria';
+
 import { TooltipContext } from '../../context/TooltipContext/index';
 import Box from '../Box';
 import Text from '../Text';
@@ -19,11 +20,11 @@ const Tooltip = forwardRef((props, ref) => {
   return (
     <Box
       ref={tooltipRef}
-      variant="tooltip.tooltipContainer"
+      variant="tooltip.container"
       {...tooltipProps}
       {...others}
     >
-      <Text variant="tooltipContent">
+      <Text variant="variants.tooltip.content">
         {children}
       </Text>
     </Box>

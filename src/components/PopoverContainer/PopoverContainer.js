@@ -1,7 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { mergeProps, OverlayContainer, useModal, useOverlay } from 'react-aria';
 import PropTypes from 'prop-types';
-import { useModal, useOverlay, OverlayContainer } from '@react-aria/overlays';
-import { mergeProps } from '@react-aria/utils';
 
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
@@ -13,17 +12,6 @@ import Box from '../Box';
 const PopoverContainer = forwardRef((props, ref) => {
   const {
     children,
-    placement,
-    arrowProps,
-    arrowCrossOffset,
-    onClose,
-    isNotClosedOnBlur,
-    hasNoArrow,
-    isKeyboardDismissDisabled,
-    isNonModal,
-    isDismissable,
-    width,
-    direction,
     ...others
   } = props;
 
@@ -31,17 +19,6 @@ const PopoverContainer = forwardRef((props, ref) => {
     <OverlayContainer>
       <PopoverWrapper
         ref={ref}
-        placement={placement}
-        arrowProps={arrowProps}
-        onClose={onClose}
-        isNotClosedOnBlur={isNotClosedOnBlur}
-        isKeyboardDismissDisabled={isKeyboardDismissDisabled}
-        hasNoArrow={hasNoArrow}
-        isNonModal={isNonModal}
-        isDismissable={isDismissable}
-        arrowCrossOffset={arrowCrossOffset}
-        width={width}
-        direction={direction}
         {...others}
       >
         {children}
@@ -96,9 +73,8 @@ export const PopoverWrapper = forwardRef((props, ref) => {
   const { classNames } = useStatusClasses(className, { isOpen });
 
   return (
-    <>
-      {
-        isOpen &&
+    isOpen
+        && (
         <Box
           {...mergeProps(others, overlayProps, modalProps)}
           variant="popoverMenu.container"
@@ -125,8 +101,7 @@ export const PopoverWrapper = forwardRef((props, ref) => {
               )
           }
         </Box>
-      }
-    </>
+        )
   );
 });
 
@@ -149,7 +124,7 @@ PopoverWrapper.defaultProps = {
   placement: 'bottom',
 };
 
-export const PopoverArrow = (props) => {
+export const PopoverArrow = props => {
   const {
     arrowCrossOffset,
     sx,

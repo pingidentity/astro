@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
-import { HiddenSelect } from '@react-aria/select';
+import React, { forwardRef, useMemo } from 'react';
+import { HiddenSelect } from 'react-aria';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import Box from '../Box';
 import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
@@ -26,7 +26,8 @@ const SelectFieldBase = forwardRef(({
   columnStyleProps,
   defaultText,
   fieldContainerProps,
-  fieldControlProps,
+  fieldControlInputProps,
+  fieldControlWrapperProps,
   fieldLabelProps,
   helperText,
   isLoadingInitial,
@@ -46,17 +47,17 @@ const SelectFieldBase = forwardRef(({
 }, ref) => {
   const { ariaProps } = getAriaAttributeProps(others);
 
-  const helperTextId = uuid();
+  const helperTextId = useMemo(() => uuid(), []);
 
   const defaultTrigger = (
-    <Box className={fieldControlProps.className} variant="forms.input.container">
+    <Box {...fieldControlWrapperProps} variant="forms.input.fieldControlWrapper">
       <Button
-        className={fieldControlProps.className}
+        className={fieldControlInputProps.className}
         ref={triggerRef}
         variant="forms.select"
-        aria-describedby={helperText && helperTextId}
         {...triggerProps}
         {...ariaProps}
+        aria-describedby={helperText && helperTextId}
       >
         <Box as="span" variant="forms.select.currentValue" {...valueProps}>
           {/* Use selectedItem.props.value if item text in selectedfield
@@ -84,7 +85,7 @@ const SelectFieldBase = forwardRef(({
   );
 
   return (
-    <Box ref={ref} variant="forms.input.wrapper" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
+    <Box ref={ref} variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
       {/* Actual label is applied to the hidden select */}
       <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect
@@ -97,10 +98,11 @@ const SelectFieldBase = forwardRef(({
       {trigger || defaultTrigger}
       {overlay}
       {
-        helperText &&
+        helperText && (
         <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );
@@ -128,7 +130,7 @@ SelectFieldBase.propTypes = {
     sx: PropTypes.shape({}),
   }),
   /** Determines props that applied to control field. */
-  fieldControlProps: PropTypes.shape({
+  fieldControlInputProps: PropTypes.shape({
     className: PropTypes.string,
   }),
   /** Determines props that applied to label of field. */

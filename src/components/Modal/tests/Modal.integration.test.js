@@ -1,12 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen, fireEvent } from '../../../utils/testUtils/testWrapper';
-import { OverlayProvider, Modal, Button } from '../../../index';
+
 import { useModalState } from '../../../hooks';
+import { Button, Modal, OverlayProvider } from '../../../index';
+import { fireEvent, render, screen } from '../../../utils/testUtils/testWrapper';
 
 // For testing the connection between the state hook, the trigger, and the modal itself
 /* eslint-disable react/prop-types */
-const ComposedComponent = (props) => {
+const ComposedComponent = props => {
   const { defaultState, modalProps } = props;
   const state = useModalState(defaultState);
 
@@ -15,7 +16,8 @@ const ComposedComponent = (props) => {
       <Button onPress={state.open} />
 
       {
-        state.isOpen &&
+        state.isOpen
+        && (
         <OverlayProvider>
           <Modal
             isOpen={state.isOpen}
@@ -25,6 +27,7 @@ const ComposedComponent = (props) => {
             {...modalProps}
           />
         </OverlayProvider>
+        )
       }
     </>
   );

@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import ShuffleVariant from 'mdi-react/ShuffleVariantIcon';
 import Filter from 'mdi-react/FilterIcon';
-import { Tabs, Tab, Text, Icon, Box, Separator } from '../index';
-import { tab } from '../styles/variants/tabs';
+import ShuffleVariant from 'mdi-react/ShuffleVariantIcon';
+
+import { tab } from '../components/Tabs/Tabs.style';
+import {
+  Box,
+  Icon,
+  Separator,
+  Tab,
+  Tabs,
+  Text,
+} from '../index';
 
 
 export default {
@@ -10,7 +18,8 @@ export default {
 };
 
 const P14CLogo = props => (
-  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" {...props}><defs />
+  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" {...props}>
+    <defs />
     <path className="cls-1" d="M2.63,54.68a13.63,13.63,0,0,1,2.63-4.54,12.08,12.08,0,0,1,4.2-3,13.72,13.72,0,0,1,5.6-1.1,13.71,13.71,0,0,1,5.62,1.1,12.09,12.09,0,0,1,4.18,3,13.63,13.63,0,0,1,2.63,4.54,17.21,17.21,0,0,1,.91,5.65,16.62,16.62,0,0,1-.91,5.53,13.27,13.27,0,0,1-2.63,4.46,12,12,0,0,1-4.18,3,13.71,13.71,0,0,1-5.62,1.09,13.72,13.72,0,0,1-5.6-1.09,11.93,11.93,0,0,1-4.2-3,13.27,13.27,0,0,1-2.63-4.46,16.62,16.62,0,0,1-.91-5.53A17.21,17.21,0,0,1,2.63,54.68Zm5.46,9a8.88,8.88,0,0,0,1.27,2.91,6.49,6.49,0,0,0,2.28,2.07,7,7,0,0,0,3.42.78,7,7,0,0,0,3.42-.78,6.49,6.49,0,0,0,2.28-2.07A8.88,8.88,0,0,0,22,63.65a13.53,13.53,0,0,0,.4-3.32,14.63,14.63,0,0,0-.4-3.46,9,9,0,0,0-1.27-3,6.36,6.36,0,0,0-2.28-2.09A7,7,0,0,0,15.06,51a7,7,0,0,0-3.42.78,6.36,6.36,0,0,0-2.28,2.09,9,9,0,0,0-1.27,3,14.63,14.63,0,0,0-.4,3.46A13.53,13.53,0,0,0,8.09,63.65Z" />
     <path className="cls-1" d="M38.39,46.65l11.33,18.2h.07V46.65h5.59V73.78h-6L38.13,55.62h-.08V73.78H32.46V46.65Z" />
     <path className="cls-1" d="M80.91,46.65v5H66.59v5.82H79.74v4.63H66.59v6.65H81.22v5H60.62V46.65Z" />
@@ -99,7 +108,7 @@ const sx = {
   },
 };
 
-export const LogoTabs = () => {
+export const Default = () => {
   const [currentTab, setCurrentTab] = useState('tab1');
   const [showMiddleTabs, setShowMiddleTabs] = useState(false);
   return (

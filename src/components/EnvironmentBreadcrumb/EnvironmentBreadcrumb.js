@@ -5,19 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger } from 'react-aria';
+import { useOverlayTriggerState } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
+import { useListState } from '@react-stately/list';
+import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
+import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import HomeIcon from 'mdi-react/HomeIcon';
 import PropTypes from 'prop-types';
-import { useOverlayTriggerState } from '@react-stately/overlays';
-import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
-import { mergeProps } from '@react-aria/utils';
-import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
-import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
-import { FocusScope } from '@react-aria/focus';
-import { useListState } from '@react-stately/list';
-import ListBox from '../ListBox';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+
 import {
   Breadcrumbs,
   Button,
@@ -28,6 +25,8 @@ import {
   SearchField,
   Text,
 } from '../../index';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import ListBox from '../ListBox';
 
 export const breadCrumbDataIds = {
   dropdownList: 'breadcrumb--dropdown-list',
@@ -68,7 +67,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => breadcrumbsRef.current);
 
   const { contains } = useFilter({ sensitivity: 'base' });
-  const filterNodesWithChildren = (iterableNode) => {
+  const filterNodesWithChildren = iterableNode => {
     const nodeArr = Array.from(iterableNode);
 
     // with this function we are filtering child items if they have sections
@@ -106,7 +105,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   }, [imperativeOnPopoverClose, popoverState]);
 
   const handleSelectionChange = useCallback(
-    (selectedItemSet) => {
+    selectedItemSet => {
       const [selectedItemKey] = selectedItemSet;
       setSelectedKeys(selectedItemSet);
       onSelectionChange(selectedItemKey);
@@ -142,8 +141,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         return;
       }
       // here we are checking where are listItems array is stored
-      const listItemsArr =
-        listState?.collection?.iterable || listState?.childNodes;
+      const listItemsArr = listState?.collection?.iterable || listState?.childNodes;
 
       if (listItemsArr?.length > 0) {
         // if there are a few listItems we are checking their types (can be sections) - if we have
@@ -189,7 +187,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       {emptySearchText}
     </Text>
   );
-  const setAriaLabel = (itemKey) => {
+  const setAriaLabel = itemKey => {
     if (itemKey !== undefined) {
       return (popoverState.isOpen ? `${selectedItem.key} - Collapse Options` : `${selectedItem.key} - Expand Options`);
     }
@@ -202,7 +200,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         {...triggerProps}
         onPress={handlePopoverOpen}
         ref={triggerRef}
-        variant="environmentBreadcrumb.current"
+        variant="variants.environmentBreadcrumb.button.current"
         aria-label={setAriaLabel(selectedItem)}
         data-id={breadCrumbDataIds.environmentButton}
       >
@@ -254,7 +252,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   );
 
   const handleOnAction = useCallback(
-    (actionKey) => {
+    actionKey => {
       if (actionKey === 'name' && onNamePress) {
         onNamePress();
       }
@@ -276,7 +274,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     >
       <Item
         key="name"
-        variant="environmentBreadcrumb.current"
+        variant="variants.environmentBreadcrumb.button.current"
         data-testid="name"
         aria-label={name}
         data-id={breadCrumbDataIds.orgButton}

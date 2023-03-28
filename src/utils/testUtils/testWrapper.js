@@ -1,7 +1,8 @@
 import React from 'react';
+import { css, Global } from '@emotion/react';
 import { render } from '@testing-library/react';
-import { Global, css } from '@emotion/react';
 import { ThemeProvider } from 'theme-ui';
+
 import theme from '../../styles/theme';
 
 const GlobalTestStyles = () => (

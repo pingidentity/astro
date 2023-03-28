@@ -1,7 +1,9 @@
 import React from 'react';
-import Link from '.';
+
+import { Link } from '../../index';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
-import variants from '../../styles/variants/links';
+
+import variants from './Link.styles';
 
 export default {
   title: 'Components/Link',
@@ -38,6 +40,8 @@ export default {
 
 export const Default = ({ ...args }) => (
   <div>
-    <Link {...args}>A link</Link> to your favorite website.
+    <Link {...args}>A link</Link>
+    {' '}
+    to your favorite website.
   </div>
 );

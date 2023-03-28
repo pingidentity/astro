@@ -1,15 +1,14 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { FocusRing } from '@react-aria/focus';
+import { FocusRing, mergeProps } from 'react-aria';
 import { PressResponder, useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
 import MenuDown from 'mdi-react/MenuDownIcon';
+import PropTypes from 'prop-types';
 
-import { Box, Button, Icon, Loader, TextField } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, Button, Icon, Loader, TextField } from '../..';
 import { usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 
 const ComboBoxInput = forwardRef((props, ref) => {
   const {
@@ -83,15 +82,15 @@ const ComboBoxInput = forwardRef((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
 
   const button = !isReadOnly && (
-    <Box isRow variant="boxes.inputInContainerSlot">
+    <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
         // Render loader after delay if filtering or loading
-        showLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING) &&
-        <Loader variant="loader.withinInput" />
+        showLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING)
+        && <Loader variant="loader.withinInput" />
       }
       <PressResponder preventFocusOnPress isPressed={isOpen}>
         <Button
-          variant="comboBox"
+          variant="forms.comboBox.button"
           {...triggerProps}
           ref={triggerRef}
           isDisabled={isDisabled || isReadOnly}

@@ -1,17 +1,6 @@
 import theme from '../theme';
 
 const buttons = {
-  accordionHeader: {
-    ...theme.buttons.accordionHeader,
-    '&:not(.disabled):hover': {
-      ...theme.buttons.defaultHover,
-      color: 'active',
-    },
-    '&:focus': {
-      ...theme.buttons.defaultFocus,
-      border: 'none',
-    },
-  },
   critical: {
     '&:not(.disabled):hover': {
       ...theme.buttons.critical,
@@ -71,54 +60,25 @@ const buttons = {
   link: {
     'body &': theme.buttons.link,
     'body &:hover': theme.buttons.link,
-  },
-  iconButton: {
-    ':focus': {
-      ...theme.buttons.defaultFocus,
-      border: 'none',
+    '&:not(.disabled):hover': {
+      color: 'active',
+      borderColor: 'transparent',
     },
   },
-  environmentBreadcrumb: {
-    current: {
-      '&:hover:not(.disabled)': {
-        ...theme.buttons.environmentBreadcrumb.current,
-      },
-      '&:focus': {
-        ...theme.buttons.environmentBreadcrumb.current,
+  iconButtons: {
+    ...theme.buttons.iconButtons,
+    base: {
+      ...theme.buttons.iconButtons.base,
+      ':focus': {
+        ...theme.buttons.defaultFocus,
+        border: 'none',
       },
     },
-  },
-  rocker: {
-    ...theme.buttons.rocker,
-    ':focus': {
-      border: 'none',
-    },
-    '&.is-selected:hover': {
-      color: 'white',
-    },
-    ':not(.is-selected):hover': {
-      color: 'accent.30',
-    },
-  },
-  navBarSectionButton: {
-    ...theme.buttons.navBarSectionButton,
-    height: 'unset',
-    minHeight: '36px',
-    '&:not(.disabled):hover': {
-      ...theme.buttons.navBarSectionButton,
-    },
-    ':focus': {
-      border: 'none',
-    },
-  },
-  navItemButton: {
-    height: 'unset',
-    ...theme.buttons.navItemButton,
-    '&:not(.disabled):hover': {
-      ...theme.buttons.navItemButton,
-    },
-    ':focus': {
-      border: 'none',
+    inverted: {
+      ...theme.buttons.iconButtons.inverted,
+      ':focus': {
+        border: 'none',
+      },
     },
   },
 };
@@ -145,15 +105,20 @@ const forms = {
     },
   },
   search: {
-    container: {
+    wrapper: {
       '& input[type=search]': {
         ...theme.text.inputValue,
         borderColor: 'neutral.80',
+        fontSize: '15px',
         bg: 'white',
         '::placeholder': {
           ...theme.text.placeholder,
           fontStyle: 'unset',
+          fontSize: '15px',
         },
+      },
+      '& input[type=search]:focus': {
+        borderColor: 'neutral.80',
       },
     },
   },
@@ -175,8 +140,74 @@ const links = {
   },
 };
 
+const variants = {
+  accordion: {
+    header: {
+      ...theme.variants.accordion.header,
+      '&:not(.disabled):hover': {
+        ...theme.buttons.defaultHover,
+        color: 'active',
+      },
+      '&:focus': {
+        ...theme.buttons.defaultFocus,
+        border: 'none',
+      },
+    },
+  },
+  rockerButton: {
+    thumbSwitch: {
+      ...theme.variants.rockerButton.thumbSwitch,
+      ':focus': {
+        border: 'none',
+      },
+      '&.is-selected:hover': {
+        color: 'white',
+      },
+      ':not(.is-selected):hover': {
+        color: 'accent.30',
+      },
+    },
+  },
+  environmentBreadcrumb: {
+    button: {
+      current: {
+        '&:hover:not(.disabled)': {
+          ...theme.variants.environmentBreadcrumb.button.current,
+        },
+        '&:focus': {
+          ...theme.variants.environmentBreadcrumb.button.current,
+        },
+      },
+    },
+  },
+  navBar: {
+    sectionButton: {
+      ...theme.variants.navBar.sectionButton,
+      height: 'unset',
+      minHeight: '36px',
+      '&:not(.disabled):hover': {
+        ...theme.variants.navBar.sectionButton,
+      },
+      ':focus': {
+        border: 'none',
+      },
+    },
+    itemButton: {
+      height: 'unset',
+      ...theme.variants.navBar.itemButton,
+      '&:not(.disabled):hover': {
+        ...theme.variants.navBar.itemButton,
+      },
+      ':focus': {
+        border: 'none',
+      },
+    },
+  },
+};
+
 export default {
   buttons,
   forms,
   links,
+  variants,
 };

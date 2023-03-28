@@ -1,10 +1,15 @@
 import React from 'react';
-import Box from '.';
-import { Image, Text } from '../../index';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { pingImg } from '../../utils/devUtils/constants/images';
+import {
+  Box,
+  Image,
+  Text,
+} from '../../index';
 import { flatColorList } from '../../styles/colors.js';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
+import { pingImg } from '../../utils/devUtils/constants/images';
+
 import BoxReadme from './Box.mdx';
 
 export default {

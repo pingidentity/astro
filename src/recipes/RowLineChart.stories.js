@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
-import { Line, LineChart, ResponsiveContainer } from 'recharts';
+import { useVisuallyHidden } from 'react-aria';
 import { action } from '@storybook/addon-actions';
+import { Line, LineChart, ResponsiveContainer } from 'recharts';
 import useResizeObserver from 'use-resize-observer';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
-import { neutral } from '../styles/colors';
+
 import {
   Box,
   Button,
@@ -12,6 +12,7 @@ import {
   Tooltip,
   TooltipTrigger,
 } from '../index';
+import { neutral } from '../styles/colors';
 
 export default {
   title: 'Recipes/Row Line Chart',
@@ -72,6 +73,17 @@ const zeroData = [
   { id: 12, value: 0 },
 ];
 
+const expandableRowSharedStyle = {
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+};
+const alignCellRightWrapper = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+};
+
 const sx = {
   container: {
     backgroundColor: 'accent.99',
@@ -79,13 +91,8 @@ const sx = {
     justifyContent: 'space-between',
     pr: '20px',
   },
-  button: {
-    ml: 'md',
-    pr: 'md',
-  },
   chartTitleContainer: {
-    ml: '20px',
-    pr: 'md',
+
   },
   chartContainer: {
     width: '100%',
@@ -98,6 +105,95 @@ const sx = {
   chartTrendContainer: {
     ml: 'md',
     width: '50px',
+  },
+  expandableRow: {
+    titleWrapper: {
+      maxWidth: '50%',
+      p: 'md',
+    },
+    lineChart: {
+      title: {
+        ...alignCellRightWrapper,
+        ml: '20px',
+        pr: 'md',
+      },
+      content: {
+        ...alignCellRightWrapper,
+        width: 100,
+      },
+      chart: {
+        width: '50px',
+        height: '18px',
+      },
+      chartWrapper: {
+        '&:hover': {
+          backgroundColor: '#4462ED1A',
+        },
+      },
+      divider: {
+        backgroundColor: 'neutral.80',
+        height: '35px',
+        width: '1px',
+      },
+    },
+  },
+  expandableRowButton: {
+    chartWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      color: 'black',
+      background: 'none',
+      cursor: 'pointer',
+      height: 60,
+      padding: 0,
+      ml: 'md',
+      pr: 'md',
+      border: 'none',
+      '&:hover': {
+        backgroundColor: '#4462ED1A',
+      },
+    },
+  },
+  expandableRowText: {
+    title: {
+      fontSize: 'lg',
+      color: 'neutral.20',
+      ...expandableRowSharedStyle,
+    },
+    subtitle: {
+      fontSize: 'sm',
+      color: 'neutral.60',
+      ...expandableRowSharedStyle,
+    },
+    lineChart: {
+      title: {
+        fontSize: 'sm',
+        color: 'neutral.40',
+        maxWidth: '100%',
+        ...expandableRowSharedStyle,
+      },
+      count: {
+        color: 'neutral.20',
+        fontSize: 22,
+        fontWeight: 2,
+      },
+      countLabel: {
+        fontSize: 'xs',
+        color: 'neutral.50',
+      },
+      chartLabel: {
+        fontSize: 'xs',
+        color: 'neutral.50',
+        minWidth: '60px',
+      },
+      trend: {
+        color: 'neutral.20',
+        fontSize: 'sm',
+        fontWeight: 3,
+        whiteSpace: 'nowrap',
+      },
+    },
   },
 };
 
@@ -122,39 +218,36 @@ export const Default = () => {
       sx={sx.container}
       ref={ref}
     >
-      <Box p="md" variant="boxes.expandableRow.titleWrapper">
-        <Text variant="expandableRow.title">Expanded Row with Line Chart</Text>
-        <Text variant="expandableRow.subtitle">Empty Data</Text>
+      <Box sx={sx.expandableRow.titleWrapper}>
+        <Text sx={sx.expandableRowText.title}>Expanded Row with Line Chart</Text>
+        <Text sx={sx.expandableRowText.subtitle}>Empty Data</Text>
       </Box>
       <Box isRow alignItems="center">
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          sx={sx.chartTitleContainer}
+          sx={sx.expandableRow.lineChart.title}
           {...hideIfMobile()}
         >
-          <Text variant="expandableRow.lineChart.title">
+          <Text sx={sx.expandableRowText.lineChart.title}>
             Avg daily sign-ons:
           </Text>
         </Box>
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          width={100}
+          sx={sx.expandableRow.lineChart.content}
           {...hideIfTablet()}
         >
-          <Text variant="expandableRow.lineChart.count">0</Text>
-          <Text variant="expandableRow.lineChart.countLabel">Past 7 days</Text>
+          <Text sx={sx.expandableRowText.lineChart.count}>0</Text>
+          <Text sx={sx.expandableRowText.lineChart.countLabel}>Past 7 days</Text>
         </Box>
         <TooltipTrigger>
           <Button
-            variant="expandableRow.chartWrapper"
+            sx={sx.expandableRowButton.chartWrapper}
             onPress={action('seeContributingDataAction')}
-            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
-            <Box variant="boxes.expandableRow.lineChart.divider" />
+            <Box sx={sx.expandableRow.lineChart.divider} />
             <Box ml={15}>
-              <Box variant="boxes.expandableRow.lineChart.chart">
+              <Box sx={sx.expandableRow.lineChart.chart}>
                 <ResponsiveContainer sx={sx.chartContainer}>
                   <LineChart sx={sx.chart} data={chartData}>
                     <Line
@@ -166,12 +259,12 @@ export const Default = () => {
                   </LineChart>
                 </ResponsiveContainer>
               </Box>
-              <Text variant="expandableRow.lineChart.chartLabel">
+              <Text sx={sx.expandableRowText.lineChart.chartLabel}>
                 No data yet
               </Text>
             </Box>
             <Box size="sm" sx={sx.chartTrendContainer}>
-              <Text variant="expandableRow.lineChart.trend">+ 0%</Text>
+              <Text sx={sx.expandableRowText.lineChart.trend}>+ 0%</Text>
             </Box>
           </Button>
           <Tooltip>See Contributing Data</Tooltip>
@@ -189,39 +282,36 @@ export const Default = () => {
       sx={sx.container}
       mt={20}
     >
-      <Box p="md" variant="boxes.expandableRow.titleWrapper">
-        <Text variant="expandableRow.title">Expanded Row with Line Chart</Text>
-        <Text variant="expandableRow.subtitle">Full Data</Text>
+      <Box sx={sx.expandableRow.titleWrapper}>
+        <Text sx={sx.expandableRowText.title}>Expanded Row with Line Chart</Text>
+        <Text sx={sx.expandableRowText.subtitle}>Full Data</Text>
       </Box>
       <Box isRow alignItems="center">
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          sx={sx.chartTitleContainer}
+          sx={sx.expandableRow.lineChart.title}
           {...hideIfMobile()}
         >
-          <Text variant="expandableRow.lineChart.title">
+          <Text sx={sx.expandableRowText.lineChart.title}>
             Avg daily sign-ons:
           </Text>
         </Box>
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          width={100}
+          sx={sx.expandableRow.lineChart.content}
           {...hideIfTablet()}
         >
-          <Text variant="expandableRow.lineChart.count">1,234,234</Text>
-          <Text variant="expandableRow.lineChart.countLabel">Past 7 days</Text>
+          <Text sx={sx.expandableRowText.lineChart.count}>1,234,234</Text>
+          <Text sx={sx.expandableRowText.lineChart.countLabel}>Past 7 days</Text>
         </Box>
         <TooltipTrigger>
           <Button
-            variant="expandableRow.chartWrapper"
+            sx={sx.expandableRowButton.chartWrapper}
             onPress={action('seeContributingDataAction')}
-            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
-            <Box variant="boxes.expandableRow.lineChart.divider" />
+            <Box sx={sx.expandableRow.lineChart.divider} />
             <Box ml={15}>
-              <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
+              <Box sx={sx.expandableRow.lineChart.chart} width={50}>
                 <ResponsiveContainer sx={sx.chartContainer}>
                   <LineChart sx={sx.chart} data={chartData}>
                     <Line
@@ -233,12 +323,12 @@ export const Default = () => {
                   </LineChart>
                 </ResponsiveContainer>
               </Box>
-              <Text variant="expandableRow.lineChart.chartLabel">
+              <Text sx={sx.expandableRowText.lineChart.chartLabel}>
                 12 wk trend
               </Text>
             </Box>
             <Box size="sm" sx={sx.chartTrendContainer}>
-              <Text variant="expandableRow.lineChart.trend">+ 8.6%</Text>
+              <Text sx={sx.expandableRowText.lineChart.trend}>+ 8.6%</Text>
             </Box>
           </Button>
           <Tooltip>See Contributing Data</Tooltip>
@@ -256,39 +346,36 @@ export const Default = () => {
       sx={sx.container}
       mt={20}
     >
-      <Box p="md" variant="boxes.expandableRow.titleWrapper">
-        <Text variant="expandableRow.title">Expanded Row with Line Chart</Text>
-        <Text variant="expandableRow.subtitle">Partial Data</Text>
+      <Box sx={sx.expandableRow.titleWrapper}>
+        <Text sx={sx.expandableRowText.title}>Expanded Row with Line Chart</Text>
+        <Text sx={sx.expandableRowText.subtitle}>Partial Data</Text>
       </Box>
       <Box isRow alignItems="center">
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          sx={sx.chartTitleContainer}
+          sx={sx.expandableRow.lineChart.title}
           {...hideIfMobile()}
         >
-          <Text variant="expandableRow.lineChart.title">
+          <Text sx={sx.expandableRowText.lineChart.title}>
             Avg daily sign-ons:
           </Text>
         </Box>
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          width={100}
+          sx={sx.expandableRow.lineChart.content}
           {...hideIfTablet()}
         >
-          <Text variant="expandableRow.lineChart.count">234,234</Text>
-          <Text variant="expandableRow.lineChart.countLabel">Past 7 days</Text>
+          <Text sx={sx.expandableRowText.lineChart.count}>234,234</Text>
+          <Text sx={sx.expandableRowText.lineChart.countLabel}>Past 7 days</Text>
         </Box>
         <TooltipTrigger>
           <Button
-            variant="expandableRow.chartWrapper"
+            sx={sx.expandableRowButton.chartWrapper}
             onPress={action('seeContributingDataAction')}
-            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
-            <Box variant="boxes.expandableRow.lineChart.divider" />
+            <Box sx={sx.expandableRow.lineChart.divider} />
             <Box ml={15}>
-              <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
+              <Box sx={sx.expandableRow.lineChart.chart} width={50}>
                 <ResponsiveContainer sx={sx.chartContainer}>
                   <LineChart sx={sx.chart} data={partialDataData}>
                     <Line
@@ -300,12 +387,12 @@ export const Default = () => {
                   </LineChart>
                 </ResponsiveContainer>
               </Box>
-              <Text variant="expandableRow.lineChart.chartLabel">
+              <Text sx={sx.expandableRowText.lineChart.chartLabel}>
                 12 wk trend
               </Text>
             </Box>
             <Box size="sm" sx={sx.chartTrendContainer}>
-              <Text variant="expandableRow.lineChart.trend">- 8.6%</Text>
+              <Text sx={sx.expandableRowText.lineChart.trend}>- 8.6%</Text>
             </Box>
           </Button>
           <Tooltip>See Contributing Data</Tooltip>
@@ -323,39 +410,36 @@ export const Default = () => {
       sx={sx.container}
       mt={20}
     >
-      <Box p="md" variant="boxes.expandableRow.titleWrapper">
-        <Text variant="expandableRow.title">Expanded Row with Line Chart</Text>
-        <Text variant="expandableRow.subtitle">Zero Data</Text>
+      <Box sx={sx.expandableRow.titleWrapper}>
+        <Text sx={sx.expandableRowText.title}>Expanded Row with Line Chart</Text>
+        <Text sx={sx.expandableRowText.subtitle}>Zero Data</Text>
       </Box>
       <Box isRow alignItems="center">
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          sx={sx.chartTitleContainer}
+          sx={sx.expandableRow.lineChart.title}
           {...hideIfMobile()}
         >
-          <Text variant="expandableRow.lineChart.title">
+          <Text sx={sx.expandableRowText.lineChart.title}>
             Avg daily sign-ons:
           </Text>
         </Box>
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          width={100}
+          sx={sx.expandableRow.lineChart.content}
           {...hideIfTablet()}
         >
-          <Text variant="expandableRow.lineChart.count">0</Text>
-          <Text variant="expandableRow.lineChart.countLabel">Past 7 days</Text>
+          <Text sx={sx.expandableRowText.lineChart.count}>0</Text>
+          <Text sx={sx.expandableRowText.lineChart.countLabel}>Past 7 days</Text>
         </Box>
         <TooltipTrigger>
           <Button
-            variant="expandableRow.chartWrapper"
+            sx={sx.expandableRowButton.chartWrapper}
             onPress={action('seeContributingDataAction')}
-            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
-            <Box variant="boxes.expandableRow.lineChart.divider" />
+            <Box sx={sx.expandableRow.lineChart.divider} />
             <Box ml={15}>
-              <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
+              <Box sx={sx.expandableRow.lineChart.chart} width={50}>
                 <ResponsiveContainer sx={sx.chartContainer}>
                   <LineChart sx={sx.chart} data={zeroData}>
                     <Line
@@ -367,12 +451,12 @@ export const Default = () => {
                   </LineChart>
                 </ResponsiveContainer>
               </Box>
-              <Text variant="expandableRow.lineChart.chartLabel">
+              <Text sx={sx.expandableRowText.lineChart.chartLabel}>
                 12 wk trend
               </Text>
             </Box>
             <Box size="sm" sx={sx.chartTrendContainer}>
-              <Text variant="expandableRow.lineChart.trend">+ 0%</Text>
+              <Text sx={sx.expandableRowText.lineChart.trend}>+ 0%</Text>
             </Box>
           </Button>
           <Tooltip>See Contributing Data</Tooltip>
@@ -390,39 +474,36 @@ export const Default = () => {
       sx={sx.container}
       mt={20}
     >
-      <Box p="md" variant="boxes.expandableRow.titleWrapper">
-        <Text variant="expandableRow.title">Expanded Row with Line Chart</Text>
-        <Text variant="expandableRow.subtitle">Zero Values</Text>
+      <Box sx={sx.expandableRow.titleWrapper}>
+        <Text sx={sx.expandableRowText.title}>Expanded Row with Line Chart</Text>
+        <Text sx={sx.expandableRowText.subtitle}>Zero Values</Text>
       </Box>
       <Box isRow alignItems="center">
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          sx={sx.chartTitleContainer}
+          sx={sx.expandableRow.lineChart.title}
           {...hideIfMobile()}
         >
-          <Text variant="expandableRow.lineChart.title">
+          <Text sx={sx.expandableRowText.lineChart.title}>
             Avg daily sign-ons:
           </Text>
         </Box>
         <Box
-          variant="boxes.expandableRow.lineChart.alignCellRightWrapper"
-          width={100}
+          sx={sx.expandableRow.lineChart.content}
           {...hideIfTablet()}
         >
-          <Text variant="expandableRow.lineChart.count">0</Text>
-          <Text variant="expandableRow.lineChart.countLabel">Past 7 days</Text>
+          <Text sx={sx.expandableRowText.lineChart.count}>0</Text>
+          <Text sx={sx.expandableRowText.lineChart.countLabel}>Past 7 days</Text>
         </Box>
         <TooltipTrigger>
           <Button
-            variant="expandableRow.chartWrapper"
+            sx={sx.expandableRowButton.chartWrapper}
             onPress={action('seeContributingDataAction')}
-            sx={sx.button}
             aria-label="line-chart button"
             {...hideIfTablet()}
           >
-            <Box variant="boxes.expandableRow.lineChart.divider" />
+            <Box sx={sx.expandableRow.lineChart.divider} />
             <Box ml={15}>
-              <Box variant="boxes.expandableRow.lineChart.chart" width={50}>
+              <Box sx={sx.expandableRow.lineChart.chart} width={50}>
                 <ResponsiveContainer sx={sx.chartContainer}>
                   <LineChart sx={sx.chart} data={zeroValuesData}>
                     <Line
@@ -434,12 +515,12 @@ export const Default = () => {
                   </LineChart>
                 </ResponsiveContainer>
               </Box>
-              <Text variant="expandableRow.lineChart.chartLabel">
+              <Text sx={sx.expandableRowText.lineChart.chartLabel}>
                 12 wk trend
               </Text>
             </Box>
             <Box size="sm" sx={sx.chartTrendContainer}>
-              <Text variant="expandableRow.lineChart.trend">+ 0%</Text>
+              <Text sx={sx.expandableRowText.lineChart.trend}>+ 0%</Text>
             </Box>
           </Button>
           <Tooltip>See Contributing Data</Tooltip>

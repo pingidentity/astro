@@ -1,15 +1,15 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { useFocusRing } from '@react-aria/focus';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useGridCell } from '@react-aria/grid';
 import { useHover, usePress } from '@react-aria/interactions';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
+
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import Icon from '../Icon';
-import { useStatusClasses } from '../../hooks';
 
 const AccordionGridItemHeader = forwardRef((props, ref) => {
   const {
@@ -63,7 +63,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
   const ariaLabel = props['aria-label'];
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     if (e.key === 'Enter') {
       state.selectionManager.toggleSelection(e.target.dataset.key);
     }
@@ -81,7 +81,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
       as="div"
       ref={cellRef}
       {...mergedProps}
-      variant="accordion.accordionGridHeader"
+      variant="accordionGrid.header"
       isFocused={isFocusVisible}
       isSelected={isSelected}
       className={classNames}
@@ -91,10 +91,12 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
       <Box isRow>
         {children}
         {
-          hasCaret &&
+          hasCaret
+          && (
           <Box isRow alignItems="center" sx={{ mr: '0px' }}>
             <Icon icon={isSelected ? MenuUp : MenuDown} size={20} />
           </Box>
+          )
         }
       </Box>
     </Box>

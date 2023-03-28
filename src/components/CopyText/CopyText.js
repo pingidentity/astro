@@ -1,18 +1,17 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useFocusRing } from '@react-aria/focus';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
 import { announce } from '@react-aria/live-announcer';
+import PropTypes from 'prop-types';
 
+import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 import { Box, Tooltip, TooltipTrigger } from '../../index';
 
 import CopyButton from './CopyButton';
-import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 
 const TooltipWrapper = ({ children, tooltip, ...others }) => {
   return (
-    <TooltipTrigger key={tooltip} direction="top" isNotFlippable {...others}>
+    <TooltipTrigger key={tooltip} direction="top" {...others}>
       {children}
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>
@@ -116,7 +115,7 @@ const CopyText = forwardRef((props, ref) => {
       <Box
         ref={ref}
         isRow
-        variant="boxes.copy"
+        variant="copyText.copy"
         {...wrapperProps}
         {...others}
       >
@@ -134,7 +133,7 @@ const CopyText = forwardRef((props, ref) => {
         <Box
           ref={ref}
           isRow
-          variant="boxes.copy"
+          variant="copyText.copy"
           {...others}
         >
           {content}

@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { FocusScope } from '@react-aria/focus';
-import { Item } from '@react-stately/collections';
+import { FocusScope } from 'react-aria';
+import { Item } from 'react-stately';
 import AccountIcon from 'mdi-react/AccountIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
 
+import { useOverlayPanelState } from '../hooks';
 import {
   Box,
   Icon,
@@ -23,9 +24,7 @@ import {
   Tab,
   Tabs,
   Text,
-} from '../';
-
-import { useOverlayPanelState } from '../hooks';
+} from '../index';
 
 export default {
   title: 'Recipes/List with Panel',
@@ -214,8 +213,7 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
     const { currentPositionX, currentPositionY } = mousePosition;
     const { height, right, top } = listItemRef.current.getBoundingClientRect();
 
-    const hasMovedBackToRow =
-      currentPositionY < top + height && currentPositionX < right;
+    const hasMovedBackToRow = currentPositionY < top + height && currentPositionX < right;
 
     if (hasMovedBackToRow) {
       setIsHovered(true);
@@ -225,7 +223,7 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
     setIsHovered(false);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = e => {
     setMousePosition({ currentPositionX: e.clientX, currentPositionY: e.clientY });
   };
 
@@ -250,7 +248,12 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
       <Box isRow sx={sx.listElement.iconWrapper}>
         <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} />
         <Box>
-          <Text variant="bodyStrong" sx={sx.listElement.title}>{item.lastName}, {item.firstName}</Text>
+          <Text variant="bodyStrong" sx={sx.listElement.title}>
+            {item.lastName}
+            ,
+            {' '}
+            {item.firstName}
+          </Text>
           <Text variant="subtitle" sx={sx.listElement.subtitle}>{item.email}</Text>
         </Box>
       </Box>
@@ -270,14 +273,15 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
             <Item key="delete">Delete user</Item>
           </Menu>
         </PopoverMenu>
-        {onClosePanel &&
+        {onClosePanel
+          && (
           <IconButton
             aria-label="close icon button"
             onPress={onClosePanel}
           >
             <Icon size="sm" icon={CloseIcon} />
           </IconButton>
-        }
+          )}
       </Box>
     </ListItem>
   );
@@ -299,7 +303,7 @@ export const Default = () => {
     setSelectedKeys([]);
   };
 
-  const selectItemHandler = (e) => {
+  const selectItemHandler = e => {
     if (e.size) {
       setSelectedItemId(items.findIndex(item => item.email === e.currentKey));
       setSelectedKeys([e.currentKey]);
@@ -321,7 +325,7 @@ export const Default = () => {
         <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
           {heading}
         </Text>
-        <IconButton aria-label="icon button" ml="sm" variant="inverted" >
+        <IconButton aria-label="icon button" ml="sm" variant="inverted">
           <Icon icon={PlusIcon} size="sm" />
         </IconButton>
       </Box>
@@ -362,26 +366,31 @@ export const Default = () => {
         p={0}
         size="large"
       >
-        {panelState.isOpen &&
-          <>
-            <FocusScope contain restoreFocus autoFocus>
-              <Box sx={sx.listElementWrapper}>
-                <ListElement
-                  item={selectedItemId >= 0 ? items[selectedItemId] : []}
-                  onClosePanel={closePanelHandler}
-                />
-              </Box>
-              <Separator margin={0} sx={sx.separator} />
-              <Box sx={sx.tabsWrapper}>
-                <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }} >
-                  <Tab title="Profile">
-                    {selectedItemId >= 0 &&
+        {panelState.isOpen
+          && (
+          <FocusScope contain restoreFocus autoFocus>
+            <Box sx={sx.listElementWrapper}>
+              <ListElement
+                item={selectedItemId >= 0 ? items[selectedItemId] : []}
+                onClosePanel={closePanelHandler}
+              />
+            </Box>
+            <Separator margin={0} sx={sx.separator} />
+            <Box sx={sx.tabsWrapper}>
+              <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }}>
+                <Tab title="Profile">
+                  {selectedItemId >= 0
+                      && (
                       <>
                         <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
                           <PencilIcon size={20} />
                         </IconButton>
                         <Text sx={sx.itemLabel} variant="base">Full Name</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName} {items[selectedItemId].lastName}</Text>
+                        <Text sx={sx.itemValue} variant="base">
+                          {items[selectedItemId].firstName}
+                          {' '}
+                          {items[selectedItemId].lastName}
+                        </Text>
                         <Text sx={sx.itemLabel} variant="base">First Name</Text>
                         <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
                         <Text sx={sx.itemLabel} variant="base">Last Name</Text>
@@ -389,23 +398,22 @@ export const Default = () => {
                         <Text sx={sx.itemLabel} variant="base">Email</Text>
                         <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
                       </>
-                    }
-                  </Tab>
-                  <Tab title="Group Memberships">
-                    <Text>
-                      Group Memberships
-                    </Text>
-                  </Tab>
-                  <Tab title="Account Info">
-                    <Text>
-                      Account Info
-                    </Text>
-                  </Tab>
-                </Tabs>
-              </Box>
-            </FocusScope>
-          </>
-        }
+                      )}
+                </Tab>
+                <Tab title="Group Memberships">
+                  <Text>
+                    Group Memberships
+                  </Text>
+                </Tab>
+                <Tab title="Account Info">
+                  <Text>
+                    Account Info
+                  </Text>
+                </Tab>
+              </Tabs>
+            </Box>
+          </FocusScope>
+          )}
       </OverlayPanel>
     </Box>
   );
