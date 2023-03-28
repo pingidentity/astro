@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.44.1...@pingux/astro@2.0.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* [UIP-5746] "Update enduser theme in astro for v2 changes" ([e4e71f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e4e71f742978d14f6a16ef00bedfc847e18a234c))
+* [UIP-5748] Update theme overrides for v2 theme changes ([f734f35](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f734f35a0ec99a0ae67c9447c7f032bfbdb77311))
+* [UIP-5781] Styling regression fix ([1475102](https://gitlab.corp.pingidentity.com/ux/pingux/commit/14751028b397880893b428eda0016d9b128407db))
+* [UIP-5827] Input components refactor prop spreading ([b667ca1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b667ca13176dba506056fbd12254ac1797f1b0fc))
+* [UIP-5997 Astro Modal Fix IconButton Focus Styling ([2af0ebc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2af0ebc9276341fb3e8205dc39a449d8a74971ff))
+* [UIP-6015] Astro accordion recipe updates ([44d1133](https://gitlab.corp.pingidentity.com/ux/pingux/commit/44d11332237f55e42d5fef03a54b60a4318a5df1))
+* [UIP-6016] Astro badge story updates ([2b68dbc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2b68dbcca5a7e3707087f17f65ace8b2e5829452))
+* [UIP-6029] Update OverlayPanel to ListView ([209bdcd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/209bdcdc2b04361e76a6f96386518a159ee367bf))
+* [UIP-6097] Missing Focus Indicators: HelpHint/CollapsiblePanel/CopyText ([05b724a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/05b724aa5e2eed543b10a6f5397c3770277792fb))
+* [UIP-6102] Badge story: fix IconButton variant ([de15e14](https://gitlab.corp.pingidentity.com/ux/pingux/commit/de15e146969c1ba76261bc6c43571f068cde0384))
+* [UIP-6103] ListViewItem: fix border bottom color ([95ca43f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/95ca43f01580df8d8d3ecb6dbe583652c7380eb6)), closes [#e4e6e9](https://gitlab.corp.pingidentity.com/ux/pingux/issues/e4e6e9) [#caced3](https://gitlab.corp.pingidentity.com/ux/pingux/issues/caced3)
+* [UIP-6105] ScrollableListView: fix search field focus ([e89f8a7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e89f8a7cb304f1a834cc204ce712586b9777d5c5))
+* [UIP-6107] Combobox: fix width ([b9382ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b9382ec643048443efb8ccabefcd6f2020eca8af))
+* [UIP-6109] Extra spacing in bracket between content ([888085a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/888085a53fca7d224e69ec1ee4fd4efa1215060c))
+* [UIP-6112] Fix Card Styling ([4fe3c45](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4fe3c45e69048945323c226512c1efbe97eda1c1))
+* [UIP-6115] Multivalues Delete Focus Indicator ([c282968](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c282968e0c50f752439ece4f6d92e4815a8ab92b))
+* [UIP-6116] MultivaluesField close button for icon slots variant ([51fb36e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51fb36ec6ddb7ffce77d5ee0e11ab25ff3637e58))
+* [UIP-6159] Button & IconButton: add usePress hook to handle context ([9b8f3d1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9b8f3d1926aee7719641d36712a3eabf21347758))
+* [UIP-6193] MultiValuesField: trim custom value ([7a9c159](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7a9c159659a19fe2b5780cc800af52746551d4d5))
+* [UIP-6197] uiLibraryOverride fix ThemeProvider ([6d942db](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6d942dbd620da9a4c97d09c8dc099812085074f9))
+* [UIP-6199] TooltipTrigger incorrect placement with SwitchField ([5ce835b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5ce835bce13578467f8eedae6170c15f58f7a92e))
+* [UIP-6218] NavBar: fix primary items variants ([0e16f2e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0e16f2e8e33acfedf51e35f15e7e5d1a7604377e))
+* [UIP-6220] Down grade @emotion/react and @emotion/styled to 11.1.1 ([508a398](https://gitlab.corp.pingidentity.com/ux/pingux/commit/508a398aca2b2ffcf4742f5086ea2ff293c5c485))
+
+
+* ci!: [UIP-6036]: publish astro alpha only ([84e2093](https://gitlab.corp.pingidentity.com/ux/pingux/commit/84e2093bf4c84c45127e5619d252db09142ed0ac))
+
+
+### Features
+
+* [UIP-5938] Update astro nano theme to support v2 ([e317303](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e317303585ade483073f8ece9cff036f10dfa2f0))
+* [UIP-5983] setup chromatic only stories ([aed7966](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aed79668ca9db752d648f19dd4787a12a9875746))
+
+
+### BREAKING CHANGES
+
+* This change includes Astro v2 changes which will be documented in a migration guide coming soon.
+
+## Describe your changes
+Use `npm publish` to publish only astro to Artifactory by adding the registry in `package.json`, as scene at the bottom of [this doc](https://docs.npmjs.com/cli/v8/using-npm/registry)
+## Checklist before requesting a review
+- [:white_check_mark: ] I have performed a self-review of my code
+- [n/a] I have added tests for any new or fixed functionality to prevent regressions
+- [:white_check_mark: ] I have added clarifying code comments to blocks which other devs may have questions on
+
+Closes UIP-6036
+
+
+
+
+
 ## [1.44.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.44.0...@pingux/astro@1.44.1) (2023-03-22)
 
 **Note:** Version bump only for package @pingux/astro
