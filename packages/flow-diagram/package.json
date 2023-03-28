@@ -39,7 +39,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "docs": "gulp docs",
-    "installdeps": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
+    "installdeps": "cd ../../ && lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
   },
   "dependencies": {
     "@babel/core": "^7.11.6",
@@ -47,7 +47,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
-    "@pingux/astro": "^2.0.0",
+    "@pingux/astro": "~2.0.0",
     "@pingux/icons": "^0.2.0",
     "gojs": "^2.1.16",
     "gojs-react": "^1.0.7",
