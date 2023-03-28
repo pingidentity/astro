@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
 import { Item, MultivaluesField, OverlayProvider } from '../../index';
-import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
@@ -24,7 +24,7 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   </OverlayProvider>
 ));
 
-const getComponentInForm = (props = {}, onFormSubmit, { renderFn = render } = {}) => renderFn((
+const getComponentInForm = (onFormSubmit, props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <form onSubmit={onFormSubmit}>
       <MultivaluesField {...defaultProps} {...props}>
@@ -117,7 +117,7 @@ test('multiple selection is enabled, option disappears after selection', () => {
   expect(secondOption).not.toBeInTheDocument();
 });
 
-test('clicking an option renders chip with option name', () => {
+test('clicking an option renders badge with option name', () => {
   getComponent();
   const input = screen.getByRole('combobox');
   userEvent.tab();
@@ -128,10 +128,10 @@ test('clicking an option renders chip with option name', () => {
   firstOption.click();
   expect(firstOption).not.toBeInTheDocument();
 
-  const chip = screen.getByText(items[0].name);
-  expect(chip).toBeInTheDocument();
-  const { parentElement: chipContainer } = chip;
-  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  const badge = screen.getByText(items[0].name);
+  expect(badge).toBeInTheDocument();
+  const { parentElement: badgeContainer } = badge;
+  expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
 test('after clicking an option, and then clicking the text input, the listbox remains open', () => {
@@ -150,7 +150,7 @@ test('after clicking an option, and then clicking the text input, the listbox re
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
 
-test('no chips are rendered, if nothing is selected', () => {
+test('no badges are rendered, if nothing is selected', () => {
   getComponent({ isReadOnly: false });
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument(0);
 });
@@ -188,14 +188,14 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
   firstOption.click();
   expect(firstOption).not.toBeInTheDocument();
 
-  const chip = screen.getByText(items[0].name);
-  expect(chip).toBeInTheDocument();
-  const { nextSibling: deleteButton } = chip;
+  const badge = screen.getByText(items[0].name);
+  expect(badge).toBeInTheDocument();
+  const { nextSibling: deleteButton } = badge;
   deleteButton.click();
-  expect(chip).not.toBeInTheDocument();
+  expect(badge).not.toBeInTheDocument();
 
-  userEvent.tab();
-  expect(input).toHaveFocus();
+  input.blur();
+  input.focus();
   const updatedOptions = screen.getAllByRole('option');
   expect(updatedOptions[0]).toBeInTheDocument();
   expect(updatedOptions[0]).toHaveTextContent(items[0].name);
@@ -241,7 +241,7 @@ test('changing the input value opens listbox, filters options, and fires "onInpu
   expect(onInputChange).toHaveBeenCalledWith(value);
 });
 
-test('in non-restrictive mode, a chip gets added if there is input, onBlur', () => {
+test('in non-restrictive mode, a badge gets added if there is input, onBlur', () => {
   getComponent({ mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
   const value = 'custom';
@@ -249,14 +249,14 @@ test('in non-restrictive mode, a chip gets added if there is input, onBlur', () 
 
   userEvent.tab();
 
-  const chip = screen.queryByText(value);
-  expect(chip).toBeInTheDocument();
-  const { parentElement: chipContainer } = chip;
-  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  const badge = screen.queryByText(value);
+  expect(badge).toBeInTheDocument();
+  const { parentElement: badgeContainer } = badge;
+  expect(badgeContainer).toHaveAttribute('role', 'presentation');
   expect(input.value).toBe('');
 });
 
-test('in non-restrictive mode, a chip gets added if there is only one matching filtered option, onBlur', () => {
+test('in non-restrictive mode, a badge gets added if there is only one matching filtered option, onBlur', () => {
   getComponent({ mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
   userEvent.tab();
@@ -268,10 +268,10 @@ test('in non-restrictive mode, a chip gets added if there is only one matching f
 
   userEvent.tab();
 
-  const chip = screen.queryByText(value);
-  expect(chip).toBeInTheDocument();
-  const { parentElement: chipContainer } = chip;
-  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  const badge = screen.queryByText(value);
+  expect(badge).toBeInTheDocument();
+  const { parentElement: badgeContainer } = badge;
+  expect(badgeContainer).toHaveAttribute('role', 'presentation');
   expect(firstOption).not.toBeInTheDocument();
 });
 
@@ -318,10 +318,10 @@ test('changing the input value and hitting enter creates new value in non-restri
   userEvent.type(input, '{enter}');
   expect(input).toHaveValue('');
 
-  const chip = screen.queryByText(value);
-  expect(chip).toBeInTheDocument();
-  const { parentElement: chipContainer } = chip;
-  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  const badge = screen.queryByText(value);
+  expect(badge).toBeInTheDocument();
+  const { parentElement: badgeContainer } = badge;
+  expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
 test('pressing enter, when the input values is an empty string does not add an option, in non-restrictive mode', () => {
@@ -344,8 +344,8 @@ test('in non-restrictive mode "onSelectionChange" returns entered keys', () => {
   userEvent.type(input, value);
   userEvent.type(input, '{enter}');
 
-  const chip = screen.queryByText(value);
-  expect(chip).toBeInTheDocument();
+  const badge = screen.queryByText(value);
+  expect(badge).toBeInTheDocument();
 
   expect(onSelectionChange).toBeCalledTimes(1);
   expect(onSelectionChange.mock.calls[0][0].has(value)).toBeTruthy();
@@ -359,8 +359,8 @@ test('in non-restrictive mode the same value cannot be applied twice', () => {
   userEvent.type(input, value);
   userEvent.type(input, '{enter}');
 
-  const chip = screen.queryByText(value);
-  expect(chip).toBeInTheDocument();
+  const badge = screen.queryByText(value);
+  expect(badge).toBeInTheDocument();
 
   expect(input).toHaveValue('');
   userEvent.type(input, value);
@@ -423,10 +423,10 @@ test('options can be selected via keyboard', () => {
   expect(options[0]).toHaveClass('is-focused');
   userEvent.type(options[0], '{enter}');
   expect(options[0]).not.toBeInTheDocument();
-  const chip = screen.getByText(items[0].name);
-  expect(chip).toBeInTheDocument();
-  const { parentElement: chipContainer } = chip;
-  expect(chipContainer).toHaveAttribute('role', 'presentation');
+  const badge = screen.getByText(items[0].name);
+  expect(badge).toBeInTheDocument();
+  const { parentElement: badgeContainer } = badge;
+  expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
 test('default selected keys', () => {
@@ -435,10 +435,10 @@ test('default selected keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  expect(firstChip).toBeInTheDocument();
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  expect(firstBadge).toBeInTheDocument();
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
 });
 
 test('selected keys', () => {
@@ -447,10 +447,10 @@ test('selected keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  expect(firstChip).toBeInTheDocument();
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  expect(firstBadge).toBeInTheDocument();
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
 });
 
 test('should have no accessibility violations', async () => {
@@ -467,14 +467,14 @@ test('read only keys', () => {
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstChip = screen.getByText(items[1].name);
-  const { nextSibling: deleteButton1 } = firstChip;
-  expect(firstChip).toBeInTheDocument();
+  const firstBadge = screen.getByText(items[1].name);
+  const { nextSibling: deleteButton1 } = firstBadge;
+  expect(firstBadge).toBeInTheDocument();
   expect(deleteButton1).toBeNull();
 
-  const secondChip = screen.getByText(items[2].name);
-  expect(secondChip).toBeInTheDocument();
-  const { nextSibling: deleteButton2 } = firstChip;
+  const secondBadge = screen.getByText(items[2].name);
+  expect(secondBadge).toBeInTheDocument();
+  const { nextSibling: deleteButton2 } = firstBadge;
   expect(deleteButton2).toBeNull();
 });
 
@@ -496,10 +496,10 @@ test('read only field', () => {
   const isReadOnly = true;
   getComponent({ isReadOnly });
 
-  const chip = screen.queryAllByRole('presentation');
-  expect(chip[0]).toHaveAttribute('label', items[0].name);
-  expect(chip[1]).toHaveAttribute('label', items[1].name);
-  expect(chip[2]).toHaveAttribute('label', items[2].name);
+  const badge = screen.queryAllByRole('presentation');
+  expect(badge[0]).toHaveAttribute('label', items[0].name);
+  expect(badge[1]).toHaveAttribute('label', items[1].name);
+  expect(badge[2]).toHaveAttribute('label', items[2].name);
 
   const textArea = screen.getByLabelText(defaultProps.label);
   expect(textArea).toHaveClass('is-read-only');
@@ -510,9 +510,9 @@ test('read only keys with read only field', () => {
   const isReadOnly = true;
   getComponent({ isReadOnly, readOnlyKeys: [items[1].key, items[2].key] });
 
-  const chip = screen.queryAllByRole('presentation');
-  expect(chip[0]).toHaveAttribute('label', items[1].name);
-  expect(chip[1]).toHaveAttribute('label', items[2].name);
+  const badge = screen.queryAllByRole('presentation');
+  expect(badge[0]).toHaveAttribute('label', items[1].name);
+  expect(badge[1]).toHaveAttribute('label', items[2].name);
 
   const textArea = screen.getByLabelText(defaultProps.label);
   expect(textArea).toHaveClass('is-read-only');
@@ -539,7 +539,7 @@ test('popover closes on input blur', () => {
 
 test('form does not submit when adding custom value', () => {
   const onFormSubmit = jest.fn();
-  getComponentInForm({}, onFormSubmit);
+  getComponentInForm(onFormSubmit, {});
 
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
@@ -550,4 +550,28 @@ test('form does not submit when adding custom value', () => {
 
   userEvent.type(input, '{enter}');
   expect(onFormSubmit).not.toHaveBeenCalled();
+});
+
+test('in non-restrictive mode the value should be trimmed', () => {
+  getComponent({ mode: 'non-restrictive' });
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'test ';
+  const trimmedValue = 'test';
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+
+  const badge = screen.queryByText(value, {
+    normalizer: getDefaultNormalizer({ trim: false }),
+  });
+
+  const trimmedBadge = screen.queryByText(trimmedValue, {
+    normalizer: getDefaultNormalizer({ trim: false }),
+  });
+
+  expect(badge).not.toBeInTheDocument();
+  expect(trimmedBadge).toBeInTheDocument();
+  expect(input).toHaveValue('');
 });

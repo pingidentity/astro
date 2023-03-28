@@ -1,9 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Card from './Card';
-import Button from '../Button';
+
 import axeTest from '../../utils/testUtils/testAxe';
+import Button from '../Button';
+
+import Card from './Card';
 
 const testId = 'test-separator';
 

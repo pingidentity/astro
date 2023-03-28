@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Text } from '../../';
+import { Button, Text } from '../..';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 
 const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...others }) => {
@@ -15,7 +15,7 @@ const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...ot
       mx={15}
       my={5}
       onPress={handleFileSelect}
-      variant="fileInputField"
+      variant="forms.fileInputField.button"
       {...ariaProps}
     >
       <Text color="active" {...textProps}>

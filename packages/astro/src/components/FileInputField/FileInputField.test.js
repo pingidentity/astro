@@ -1,9 +1,11 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '@testing-library/react';
-import axeTest from '../../utils/testUtils/testAxe';
-import FileInputField from './FileInputField';
+import userEvent from '@testing-library/user-event';
+
 import statuses from '../../utils/devUtils/constants/statuses';
+import axeTest from '../../utils/testUtils/testAxe';
+
+import FileInputField from './FileInputField';
 
 const fileInputFieldTestId = 'file-input-test-id';
 const testLabel = 'file-input-test-label';
@@ -44,8 +46,7 @@ afterAll(() => {
   global.URL.createObjectURL = originalValue;
 });
 
-const getComponent = props =>
-  render(<FileInputField {...defaultProps} {...props} />);
+const getComponent = props => render(<FileInputField {...defaultProps} {...props} />);
 
 axeTest(getComponent);
 

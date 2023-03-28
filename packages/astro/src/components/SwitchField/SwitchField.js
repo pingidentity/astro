@@ -1,14 +1,15 @@
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
-import { useToggleState } from '@react-stately/toggle';
-import { useSwitch } from '@react-aria/switch';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useSwitch } from 'react-aria';
+import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
+import omit from 'lodash/omit';
+import PropTypes from 'prop-types';
 
-import { Box, FieldHelperText, Label, Switch } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { Box, FieldHelperText, Label, Switch } from '../..';
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 
 /**
  * Combines a switch, label, and helper text for a complete, form-ready solution.
@@ -49,7 +50,7 @@ const SwitchField = forwardRef((props, ref) => {
     ...props,
   });
 
-  const { pressProps: containerPressProps } = usePress({ isDisabled });
+  const { pressProps } = usePress({ isDisabled });
 
   const whitelistedProps = omit(props, Object.keys(others));
   const { inputProps } = useSwitch({
@@ -60,11 +61,12 @@ const SwitchField = forwardRef((props, ref) => {
   const statusClasses = { isSelected: inputProps.checked };
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     statusClasses,
-    ...containerPressProps,
+    ...pressProps,
     ...props,
     controlProps: { ...controlProps, ...inputProps },
   });
@@ -77,14 +79,18 @@ const SwitchField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       <Label variant="forms.switch.label" {...fieldLabelProps}>
-        <Switch ref={switchRef} inputProps={fieldControlProps} {...unhandledAriaProps} />
+        <Box {...fieldControlWrapperProps}>
+          <Switch ref={switchRef} inputProps={fieldControlInputProps} {...unhandledAriaProps} />
+        </Box>
         {label}
       </Label>
       {
-        helperText &&
+        helperText
+        && (
         <FieldHelperText status={status}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );
@@ -93,10 +99,6 @@ const SwitchField = forwardRef((props, ref) => {
 SwitchField.propTypes = {
   /** A list of class names to apply to the input element. */
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,
   /** Text rendered below the input. */
@@ -117,8 +119,6 @@ SwitchField.propTypes = {
   isSelected: PropTypes.bool,
   /** The rendered label for the field. */
   label: PropTypes.node,
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
   /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
   name: PropTypes.string,
   /** Handler that is called when the element loses focus. */
@@ -138,6 +138,7 @@ SwitchField.propTypes = {
   /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
   value: PropTypes.string,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 SwitchField.defaultProps = {

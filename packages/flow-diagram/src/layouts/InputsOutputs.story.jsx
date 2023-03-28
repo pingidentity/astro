@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Clear, Desktop, Link } from '@pingux/icons';
-import { Box, Chip, Icon, IconButton, Image, Separator, Popover, Tabs, Tab, Text, TextField } from '@pingux/astro';
+import { Box, Badge, Icon, IconButton, Image, Separator, PopoverContainer, Tabs, Tab, Text, TextField } from '@pingux/astro';
 import {
     mdiDragVertical,
     mdiText,
@@ -139,53 +139,53 @@ function CollapsibleSection({ defaultExpanded, title, children, status, onClick,
     );
 }
 
-function ChipInputTall({ label, text, id }) {
+function BadgeInputTall({ label, text, id }) {
     return (
         <Box>
             <Text variant="bodyWeak" mb={5}>{label}</Text>
-            <Box variant="forms.input.container" width="337px">
+            <Box variant="forms.input.fieldControlWrapper" width="337px">
                 <Box variant="forms.input" height="40px" p="0" justifyContent="center" id={id}>
-                    <Popover content="steps.registration.formData.user" placement="bottom">
-                        <Chip
+                    <PopoverContainer content="steps.registration.formData.user" placement="bottom">
+                        <Badge
                             ml="md"
                             bg="#E5E9F8"
                             width={70}
-                            label={
+                            label={(
                                 <Box isRow justifyContent="center">
                                     <Icon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
                                     <Text color="#253746" sx={{ textTransform: 'lowercase' }}>{text}</Text>
                                 </Box>
-                            }
+                            )}
                         />
-                    </Popover>
+                    </PopoverContainer>
                 </Box>
             </Box>
         </Box>
     );
 }
 
-function ChipInputShort({ label, text, border, chipWidth, color, id }) {
+function BadgeInputShort({ label, text, border, badgeWidth, color, id }) {
     return (
         <Box isRow alignItems="center" mt={10}>
             <Text variant="bodyWeak" mb={5} width={70}>{label}</Text>
-            <Box variant="forms.input.container" width="267px">
+            <Box variant="forms.input.fieldControlWrapper" width="267px">
                 <Box variant="forms.input" height="28px" p="0" justifyContent="center" id={id}>
-                    <Popover content="steps.registration.formData.user" placement="bottom">
-                        <Chip
+                    <PopoverContainer content="steps.registration.formData.user" placement="bottom">
+                        <Badge
                             ml="md"
                             bg={color}
-                            width={chipWidth}
+                            width={badgeWidth}
                             sx={{
                                 border,
                             }}
-                            label={
+                            label={(
                                 <Box isRow justifyContent="center">
                                     <Icon icon={Link} color="#253746" size={10} alignSelf="center" mr="xs" />
                                     <Text color="#253746" sx={{ textTransform: 'lowercase' }}>{text}</Text>
                                 </Box>
-                            }
+                            )}
                         />
-                    </Popover>
+                    </PopoverContainer>
                 </Box>
             </Box>
         </Box>
@@ -196,11 +196,11 @@ function TextInputShort({ label, id }) {
     return (
         <Box isRow alignItems="center" mt={10}>
             <Text variant="bodyWeak" mb={5} width={70}>{label}</Text>
-            <Box variant="forms.input.container" width="267px" id={id}>
+            <Box variant="forms.input.fieldControlWrapper" width="267px" id={id}>
                 <Box variant="forms.input" height="28px" p="0" justifyContent="center">
-                    <Popover content="steps.registration.formData.user" placement="bottom">
+                    <PopoverContainer content="steps.registration.formData.user" placement="bottom">
                         <Text ml="md">&quot;Denver&quot;</Text>
-                    </Popover>
+                    </PopoverContainer>
                 </Box>
             </Box>
         </Box>
@@ -210,23 +210,23 @@ function TextInputShort({ label, id }) {
 function Inputs() {
     return (
         <Box>
-            <ChipInputTall label="User" text="user" id="userOutput" />
-            <ChipInputShort label="Username:" text="email" chipWidth={75} color="#E5E9F8" id="usernameOutput" />
+            <BadgeInputTall label="User" text="user" id="userOutput" />
+            <BadgeInputShort label="Username:" text="email" badgeWidth={75} color="#E5E9F8" id="usernameOutput" />
             <TextInputShort label="location: " id="locationOutput" />
-            <ChipInputShort label="firstName:" text="user.firstName" border="1px solid #CACED3" chipWidth={135} color="transparent" id="firstNameOutput" />
-            <ChipInputShort label="lastName:" text="user.lastName" border="1px solid #CACED3" chipWidth={135} color="transparent" id="lastNameOutput" />
+            <BadgeInputShort label="firstName:" text="user.firstName" border="1px solid #CACED3" badgeWidth={135} color="transparent" id="firstNameOutput" />
+            <BadgeInputShort label="lastName:" text="user.lastName" border="1px solid #CACED3" badgeWidth={135} color="transparent" id="lastNameOutput" />
         </Box>
     );
 }
 
-export const InputsOutputs = () => {
+export function InputsOutputs() {
     const [selectedNode, setSelectedNode] = useState();
     const [isScrolling, setIsScrolling] = useState(false);
     const [outputsDocked, setOutputsDocked] = useState(true);
     const [inputsDocked, setInputsDocked] = useState(true);
     const [linksVisible, setLinksVisible] = useState(false);
 
-    const selectLink = (link) => {
+    const selectLink = link => {
         if (link.data.category === 'io') {
             setOutputsDocked(false);
             setInputsDocked(false);
@@ -262,9 +262,9 @@ export const InputsOutputs = () => {
         { 'from': 'registration', 'to': 'create', 'key': 'registration_create_io', 'category': 'io', 'visible': false, onClick: (e, link) => selectLink(link) },
     ]);
 
-    const selectNode = (node) => {
+    const selectNode = node => {
         if (Object.keys(node).length) {
-            const ioLinksVisible = diagramLinks.map((link) => {
+            const ioLinksVisible = diagramLinks.map(link => {
                 if (link.category === 'io') {
                     if (link.to === node.key || link.from === node.key) {
                         return { ...link, visible: true };
@@ -276,7 +276,7 @@ export const InputsOutputs = () => {
             setDiagramLinks(ioLinksVisible);
             setSelectedNode(node);
         } else {
-            const ioLinksInvisible = diagramLinks.map((link) => {
+            const ioLinksInvisible = diagramLinks.map(link => {
                 if (link.category === 'io') {
                     return { ...link, visible: false };
                 }
@@ -350,9 +350,9 @@ export const InputsOutputs = () => {
         setDiagramNodes(
             diagramNodes.map(
                 node => (
-                    node.key === selected.key ?
-                        { ...currentNode, [field]: id } :
-                        node
+                    node.key === selected.key
+                        ? { ...currentNode, [field]: id }
+                        : node
                 ),
             ),
         );
@@ -416,26 +416,24 @@ export const InputsOutputs = () => {
                             </Box>
                         </Box>
                     ) : (
-                        <React.Fragment>
-                            <Box
-                                isRow
-                                sx={{
-                                    justifyContent: 'center',
-                                    margin: '15px 0px 20px 0px',
-                                }}
-                            >
-                                <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
-                                    <Tab key="properties" title="Properties" />
-                                    <Tab key="toolbox" title="Toolbox">
-                                        <Box sx={{ height: 300 }}>
-                                            <PaletteWrapper>
-                                                <Palette {...paletteProps} />
-                                            </PaletteWrapper>
-                                        </Box>
-                                    </Tab>
-                                </Tabs>
-                            </Box>
-                        </React.Fragment>
+                        <Box
+                            isRow
+                            sx={{
+                                justifyContent: 'center',
+                                margin: '15px 0px 20px 0px',
+                            }}
+                        >
+                            <Tabs sx={{ width: 260 }} defaultSelectedKey="toolbox">
+                                <Tab key="properties" title="Properties" />
+                                <Tab key="toolbox" title="Toolbox">
+                                    <Box sx={{ height: 300 }}>
+                                        <PaletteWrapper>
+                                            <Palette {...paletteProps} />
+                                        </PaletteWrapper>
+                                    </Box>
+                                </Tab>
+                            </Tabs>
+                        </Box>
                     )}
                 </LeftContainer>
                 <DiagramWrapper>
@@ -450,7 +448,7 @@ export const InputsOutputs = () => {
                         {!outputsDocked ? (
                             <Panel
                                 title={(
-                                    <React.Fragment>
+                                    <>
                                         <Text
                                             sx={{
                                                 color: '#68747F',
@@ -464,17 +462,17 @@ export const InputsOutputs = () => {
                                             Standard Registration With Long Title
                                         </Text>
                                         <Text sx={{ color: '#253746', fontSize: 15, fontWeight: 700 }}>Outputs</Text>
-                                    </React.Fragment>
+                                    </>
                                 )}
                                 id="outputsPanel"
                                 onScroll={() => onScroll()}
-                                icon={
+                                icon={(
                                     <IconButton
                                         onPress={() => setOutputsDocked(true)}
                                     >
                                         <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" />
                                     </IconButton>
-                                }
+                                )}
                             >
                                 <Outputs />
                             </Panel>
@@ -482,19 +480,20 @@ export const InputsOutputs = () => {
                         {!inputsDocked ? (
                             <Panel
                                 title={(
-                                    <React.Fragment>
+                                    <>
                                         <Text sx={{ color: '#68747F', fontSize: 15 }}>Create User</Text>
                                         <Text sx={{ color: '#253746', fontSize: 15, fontWeight: 700 }}>Inputs</Text>
-                                    </React.Fragment>
+                                    </>
                                 )}
                                 id="inputsPanel"
                                 onScroll={() => onScroll()}
-                                icon={
+                                icon={(
                                     <IconButton
                                         onPress={() => setInputsDocked(true)}
                                     >
                                         <Icon icon={ArrowCollapseLeftIcon} color="#253746" size={25} alignSelf="center" />
-                                    </IconButton>}
+                                    </IconButton>
+                                )}
                             >
                                 <Inputs />
                             </Panel>
@@ -504,7 +503,7 @@ export const InputsOutputs = () => {
             </Body>
         </OuterContainer>
     );
-};
+}
 
 export default {
     title: 'Inputs & Outputs',

@@ -1,28 +1,29 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
-import AccountIcon from 'mdi-react/AccountIcon';
 import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
+import AccountIcon from 'mdi-react/AccountIcon';
 import CheckIcon from 'mdi-react/CheckIcon';
-import Clear from 'mdi-react/CloseIcon';
 import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import Clear from 'mdi-react/CloseIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
+
 import {
-  Breadcrumbs,
+  Badge,
   Box,
+  Breadcrumbs,
   CheckboxField,
-  Chip,
+  CollapsiblePanel,
+  CollapsiblePanelItem,
   Icon,
   IconButton,
   Item,
   ListView,
-  CollapsiblePanel,
-  CollapsiblePanelItem,
   SearchField,
   Text,
-} from '..';
+} from '../index';
 
 export default {
-  title: 'Recipes/Collapsible Panel with List',
+  title: 'Recipes/CollapsiblePanel with List',
 };
 
 const data = [
@@ -32,7 +33,7 @@ const data = [
     key: 'Avengers',
     name: 'Avengers',
     subtitle: 'Default',
-    chipValue: '25',
+    badgeValue: '25',
     isDefaultSelected: true,
   },
   {
@@ -41,7 +42,7 @@ const data = [
     key: 'Credit Cards',
     name: 'Credit Cards',
     subtitle: '',
-    chipValue: '123',
+    badgeValue: '123',
   },
   {
     id: '3',
@@ -49,7 +50,7 @@ const data = [
     key: 'Debit Cards',
     name: 'Debit Cards',
     subtitle: '',
-    chipValue: '23',
+    badgeValue: '23',
   },
   {
     id: '4',
@@ -57,7 +58,7 @@ const data = [
     key: 'Digital Investors',
     name: 'Digital Investors',
     subtitle: 'N America',
-    chipValue: '12',
+    badgeValue: '12',
     isDefaultSelected: true,
   },
   {
@@ -66,7 +67,7 @@ const data = [
     key: 'Mortgages',
     name: 'Mortgages',
     subtitle: 'N America',
-    chipValue: '112',
+    badgeValue: '112',
   },
   {
     id: '6',
@@ -74,7 +75,7 @@ const data = [
     key: 'Person LOC',
     name: 'Person LOC',
     subtitle: '',
-    chipValue: '45',
+    badgeValue: '45',
   },
   {
     id: '7',
@@ -82,7 +83,7 @@ const data = [
     key: 'Production',
     name: 'Production',
     subtitle: '',
-    chipValue: '55',
+    badgeValue: '55',
   },
   {
     id: '8',
@@ -90,7 +91,7 @@ const data = [
     key: 'UX Team',
     name: 'UX Team',
     subtitle: '',
-    chipValue: '61',
+    badgeValue: '61',
   },
   {
     id: '9',
@@ -98,7 +99,7 @@ const data = [
     key: 'UI Team',
     name: 'UI Team',
     subtitle: '',
-    chipValue: '29',
+    badgeValue: '29',
   },
 ];
 
@@ -149,9 +150,9 @@ export const Default = () => {
     [items],
   );
 
-  const changeSelection = (key) => {
-    setItems((prevItems) => {
-      return prevItems.map((el) => {
+  const changeSelection = key => {
+    setItems(prevItems => {
+      return prevItems.map(el => {
         if (el.key === key) {
           return {
             ...el,
@@ -190,7 +191,7 @@ export const Default = () => {
               <Item key="home" variant="link" data-id="home">
                 Ed Nepomuceno
               </Item>
-              <Item key="editGroups" variant="neutralText" data-id="editGroups">
+              <Item key="editGroups" variant="link" data-id="editGroups">
                 Edit Groups
               </Item>
             </Breadcrumbs>
@@ -240,8 +241,8 @@ export const Default = () => {
                     <Box>
                       <Box isRow>
                         <Text variant="listTitle" mb="xs" mr="xs">{item.name}</Text>
-                        <Chip
-                          label={item.chipValue}
+                        <Badge
+                          label={item.badgeValue}
                           bg="accent.99"
                           textColor="text.secondary"
                           sx={{ minWidth: 'max-content' }}
@@ -268,8 +269,7 @@ export const Default = () => {
                         ref={checkBoxRef}
                         onClick={() => checkBoxRef.current.focus()}
                       />
-                    )
-                  }
+                    )}
                 </Item>
               )}
             </ListView>

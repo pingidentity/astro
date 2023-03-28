@@ -16,7 +16,8 @@ Packages:
 
 ## Install
 
-To get rolling with PingUX, first clone down the repository, make sure Lerna is installed, and run `lerna bootstrap` in the root directory. The monorepo works well with `node@10`.
+To get rolling with PingUX, first clone down the repository and be sure Lerna is installed globally. The monorepo works well with `node@16+`.
+The monorepo uses a [Zero Install](https://yarnpkg.com/features/zero-installs) approach for package management and therefore you wont need to run bootstrap or install commands to get started.
 
 ## Developing
 

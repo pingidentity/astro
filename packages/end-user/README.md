@@ -18,14 +18,12 @@ You can see the styles in action with code examples at http://uilibrary.ping-eng
 
 You can also pull down the repo and view the catalog of components locally by running the server.
 ```
-yarn
 yarn start
 ```
 
 or
 
 ```
-npm i
 npm run start
 ```
 

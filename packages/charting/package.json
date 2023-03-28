@@ -1,6 +1,6 @@
 {
     "name": "@pingux/charting",
-    "version": "0.9.9",
+    "version": "0.9.10-rc.0",
     "description": "Charting components",
     "author": "Ping UX Development Team",
     "homepage": "",
@@ -19,8 +19,8 @@
         "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
     },
     "scripts": {
+        "build": "yarn run build:cjs & yarn run build:esm",
         "build-ci": "yarn build",
-        "build": "npm-run-all build:*",
         "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js src/components --out-dir lib/cjs/components",
         "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js src/components --out-dir lib/components",
         "coverage": "yarn test --coverage",
@@ -37,18 +37,36 @@
         "lodash": "^4.17.15",
         "mapbox-gl": "^1.11.0",
         "prop-types": "^15.7.2",
+        "react": "^16.8.6",
+        "react-dom": "^16.13.1",
         "recharts": "^1.8.5",
         "uuid": "^7.0.3"
     },
     "devDependencies": {
+        "@babel/cli": "^7.11.6",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/plugin-transform-spread": "^7.16.7",
+        "@babel/preset-env": "^7.9.0",
+        "@babel/preset-react": "^7.9.4",
+        "@emotion/babel-plugin": "^11.10.2",
+        "@emotion/babel-preset-css-prop": "^11.2.0",
+        "@emotion/react": "^11.1.5",
         "@storybook/addon-actions": "^6.5.10",
         "@storybook/addon-docs": "^6.5.10",
         "@storybook/addon-links": "^6.5.10",
         "@storybook/addon-storysource": "^6.5.10",
-        "@storybook/react": "^6.5.10"
-    },
-    "peerDependencies": {
-        "react": "^16.8.6",
-        "react-dom": "^16.13.1"
+        "@storybook/react": "^6.5.10",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.2",
+        "eslint": "^8.25.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jest-dom": "^4.0.2",
+        "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-react": "^7.31.10",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-testing-library": "^5.7.3",
+        "jest": "^26.0.1",
+        "jest-pnp-resolver": "^1.2.2"
     }
 }

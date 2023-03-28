@@ -1,6 +1,8 @@
-const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const PnpWebpackPlugin = require('pnp-webpack-plugin');
+const sass = require('sass');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
@@ -17,13 +19,21 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
+    plugins: [
+      PnpWebpackPlugin,
+    ],
+  },
+  resolveLoader: {
+    plugins: [
+      PnpWebpackPlugin.moduleLoader(module),
+    ],
   },
   module: {
     rules: [
       {
         test: /\.js(x)?$/,
         use: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /\.yarn|node_modules/,
       },
       {
         test: /\.css$/i,
@@ -57,6 +67,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
+              implementation: sass,
             },
           },
         ],

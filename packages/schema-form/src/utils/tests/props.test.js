@@ -5,7 +5,7 @@ const disabled = ['0', '3', '9'];
 
 test('it transforms a list of options into one with disabled objects', () => {
   const actual = propsUtils.getDisabledEnumOptions(options, disabled);
-  actual.forEach((option) => {
+  actual.forEach(option => {
     const { label } = option;
     if (disabled.includes(label)) {
       expect(option).toHaveProperty('disabled', true);

@@ -1,13 +1,14 @@
 import React from 'react';
-import _ from 'lodash';
+import { FocusScope } from 'react-aria';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
-import { FocusScope } from '@react-aria/focus';
-import { Item } from '@react-stately/collections';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import _ from 'lodash';
+
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { render, screen } from '../../utils/testUtils/testWrapper';
+import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
-import CheckboxField from '../CheckboxField';
 
 const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1' },
@@ -40,7 +41,7 @@ afterAll(() => {
 });
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
-  <FocusScope restoreFocus >
+  <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} items={items}>
       {item => (
         <Item
@@ -61,13 +62,13 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 ));
 
 const getComponentEmpty = (props = {}, { renderFn = render } = {}) => renderFn((
-  <FocusScope restoreFocus >
+  <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} />
   </FocusScope>
 ));
 
 const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => renderFn((
-  <FocusScope restoreFocus >
+  <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} items={items}>
       {item => (
         <Item

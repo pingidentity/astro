@@ -3,8 +3,9 @@ import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { Button, Link, Separator, Text } from '../../';
+import { Button, Link, Separator, Text } from '../..';
 import { useNavBarContext } from '../../context/NavBarContext';
+
 import NavBarItemBody from './NavBarItemBody';
 import NavBarItemHeader from './NavBarItemHeader';
 
@@ -24,7 +25,7 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
       {hasSeparator && (
         <Separator variant="separator.navBarSeparator" />
       )}
-      {title && <Text variant="text.navBarSubtitle" mt={hasSeparator ? '0' : undefined}>{title}</Text>}
+      {title && <Text variant="variants.navBar.subtitle" mt={hasSeparator ? '0' : undefined}>{title}</Text>}
       <ul
         ref={ref}
         style={{
@@ -37,17 +38,18 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
         {childrenItems.map(item => (
           <li key={item.key}>
             {!item.children && item.href
-             ?
-               <PrimaryItem
-                 key={item.key}
-                 item={item}
-               />
-              :
-               <SectionItem
-                 key={item.key}
-                 item={item}
-               />
-            }
+              ? (
+                <PrimaryItem
+                  key={item.key}
+                  item={item}
+                />
+              )
+              : (
+                <SectionItem
+                  key={item.key}
+                  item={item}
+                />
+              )}
           </li>
         ))}
       </ul>
@@ -57,7 +59,6 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
 
 const SectionItem = ({ item }) => {
   const { key, children, ...others } = item;
-  const headerButtonRef = useRef();
 
   const navBarState = useNavBarContext();
   const { expandedKeys, setExpandedKeys } = navBarState;
@@ -66,7 +67,7 @@ const SectionItem = ({ item }) => {
   const firstChildKey = children.length ? children[0].key : null;
   const lastChildKey = children.length ? children[children.length - 1].key : null;
 
-  const onExpandedChange = (isOpen) => {
+  const onExpandedChange = isOpen => {
     let newArray;
     if (isOpen) {
       newArray = [...expandedKeys, key];
@@ -95,7 +96,6 @@ const SectionItem = ({ item }) => {
         break;
       case 27:
         onExpandedChange(false);
-        headerButtonRef.current.focus();
         break;
       case 32:
         if (childKey && e.target?.href) {
@@ -108,7 +108,7 @@ const SectionItem = ({ item }) => {
   };
 
   const { keyboardProps } = useKeyboard({
-    onKeyDown: (e) => {
+    onKeyDown: e => {
       onKeyDown(e);
       e.continuePropagation();
     },
@@ -117,20 +117,20 @@ const SectionItem = ({ item }) => {
   return (
     <>
       <Button
-        ref={headerButtonRef}
-        variant="navBarSectionButton"
+        variant="variants.navBar.sectionButton"
         onPress={() => onExpandedChange(!isExpanded)}
         {...keyboardProps}
         {...others}
       >
         <NavBarItemHeader item={item} />
       </Button>
-      {isExpanded &&
+      {isExpanded
+        && (
         <NavBarItemBody
           item={item}
           onKeyDown={onKeyDown}
         />
-      }
+        )}
     </>
   );
 };
@@ -138,7 +138,7 @@ const SectionItem = ({ item }) => {
 const PrimaryItem = ({ item }) => {
   return (
     <Link
-      variant="buttons.navBarSectionButton"
+      variant="variants.navBar.sectionButton"
       href={item.href}
       target="_blank"
     >

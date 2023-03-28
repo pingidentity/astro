@@ -1,21 +1,19 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { useTab } from '@react-aria/tabs';
-import { useFocusRing } from '@react-aria/focus';
+import { mergeProps, useFocusRing, useTab } from 'react-aria';
+import { Item as Tab } from 'react-stately';
 import { Pressable, useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
-import { Item as Tab } from '@react-stately/collections';
+import PropTypes from 'prop-types';
 
-import { TabsContext } from '../Tabs';
-import { useStatusClasses, usePropWarning } from '../../hooks';
-import ORIENTATION from '../../utils/devUtils/constants/orientation';
-import TabPicker from '../TabPicker';
 import {
   Box,
   Text,
-  TooltipTrigger,
   Tooltip,
+  TooltipTrigger,
 } from '../..';
+import { usePropWarning, useStatusClasses } from '../../hooks';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import TabPicker from '../TabPicker';
+import { TabsContext } from '../Tabs';
 
 /**
  * Tab control for dividing up closely-related content.

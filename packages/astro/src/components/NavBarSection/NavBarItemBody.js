@@ -2,22 +2,24 @@ import React, { Fragment } from 'react';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { Separator, Box, Text } from '../../index';
+import { Box, Separator, Text } from '../../index';
 
 const NavBarItemBody = ({ item, onKeyDown }) => {
-  const renderSubTitle = (child) => {
+  const renderSubTitle = child => {
     const { hasSeparator = true, subTitle } = child;
 
     return (
       <Fragment key={`fragment${subTitle}`}>
-        {hasSeparator && <Separator
+        {hasSeparator && (
+        <Separator
           variant="separator.navBarSubtitleSeparator"
-        />}
+        />
+        )}
         <Text
           key={`text${subTitle}`}
           ml="45px"
           mt={hasSeparator ? '0' : undefined}
-          variant="text.navBarSubtitle"
+          variant="variants.navBar.subtitle"
         >
           {subTitle}
         </Text>
@@ -27,12 +29,13 @@ const NavBarItemBody = ({ item, onKeyDown }) => {
 
 
   const renderChild = child => (
-    child.subTitle ?
-      renderSubTitle(child)
-      :
-      <ChildItemWrapper onKeyDown={onKeyDown} key={`item${child.key || child}`}>
-        {child}
-      </ChildItemWrapper>
+    child.subTitle
+      ? renderSubTitle(child)
+      : (
+        <ChildItemWrapper onKeyDown={onKeyDown} key={`item${child.key || child}`}>
+          {child}
+        </ChildItemWrapper>
+      )
   );
 
   return (

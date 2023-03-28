@@ -1,10 +1,11 @@
 import React, { forwardRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { ThemeProvider, merge } from 'theme-ui';
-import { Global, css } from '@emotion/react';
+import { css, Global, ThemeProvider } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
-import Box from '../Box';
+import PropTypes from 'prop-types';
+import { merge } from 'theme-ui';
+
 import astroTheme from '../../styles/theme';
+import Box from '../Box';
 
 export const GlobalStyles = () => (
   <Global

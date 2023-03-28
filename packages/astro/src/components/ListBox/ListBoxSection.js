@@ -1,14 +1,15 @@
-import React, { useRef, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { useListBoxSection } from '@react-aria/listbox';
+import React, { useContext, useRef } from 'react';
 import { useLocale } from '@react-aria/i18n';
+import { useListBoxSection } from '@react-aria/listbox';
 import { layoutInfoToStyle, useVirtualizerItem } from '@react-aria/virtualizer';
+import PropTypes from 'prop-types';
 
-import { ListBoxContext } from './ListBoxContext';
 import Box from '../Box';
 import Separator from '../Separator';
 
-const ListBoxSection = (props) => {
+import { ListBoxContext } from './ListBoxContext';
+
+const ListBoxSection = props => {
   const {
     children,
     reusableView,
@@ -43,17 +44,16 @@ const ListBoxSection = (props) => {
         sx={{ paddingInlineStart: '0px' }}
         {...groupProps}
       >
-        {item.key !== state.collection.getFirstKey() &&
-          <Separator mt="0px" />
-        }
-        {item.rendered &&
+        {item.key !== state.collection.getFirstKey()
+          && <Separator mt="0px" />}
+        {item.rendered && (
           <Box
             {...headingProps}
-            variant="boxes.listBoxSectionTitle"
+            variant="listBox.sectionTitle"
           >
             {item.rendered}
           </Box>
-        }
+        )}
       </Box>
       <Box
         style={layoutInfoToStyle(reusableView.layoutInfo, direction)}

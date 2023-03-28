@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Checkbox from './Checkbox';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import Checkbox from './Checkbox';
 
 const getComponent = (props = {}) => render((
   <Checkbox {...props} />

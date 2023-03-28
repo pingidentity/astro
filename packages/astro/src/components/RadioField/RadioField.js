@@ -1,19 +1,20 @@
 import React, {
-  forwardRef,
   createContext,
+  forwardRef,
   useContext,
-  useRef,
   useImperativeHandle,
+  useRef,
 } from 'react';
+import { useRadio } from 'react-aria';
 import PropTypes from 'prop-types';
-import { useRadio } from '@react-aria/radio';
 
 import { useField, usePropWarning } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
 import Box from '../Box';
-import Radio from '../Radio';
-import Label from '../Label';
 import FieldHelperText from '../FieldHelperText';
+import Label from '../Label';
+import Radio from '../Radio';
 
 export const RadioContext = createContext();
 
@@ -57,7 +58,8 @@ const RadioField = forwardRef((props, ref) => {
   const statusClasses = { isDisabled, isChecked };
   const {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   } = useField({
     statusClasses,
@@ -66,23 +68,30 @@ const RadioField = forwardRef((props, ref) => {
   });
 
   return (
-    <Box variant="forms.radioField" {...fieldContainerProps}>
+    <Box variant="forms.radio.outerContainer" {...fieldContainerProps}>
       <Label variant="forms.label.radio" {...fieldLabelProps}>
-        <Radio ref={radioFieldRef} {...fieldControlProps} />
+        <Box {...fieldControlWrapperProps}>
+          <Radio ref={radioFieldRef} {...fieldControlInputProps} variant="forms.radio.base" />
+        </Box>
         {label}
       </Label>
       {
-        helperText &&
+        helperText
+        && (
         <FieldHelperText status={status}>
           {helperText}
         </FieldHelperText>
+        )
       }
       {
-        isChecked &&
-        checkedContent &&
-        <Box variant="boxes.radioCheckedContent">
+        isChecked && (
+          checkedContent
+        && (
+        <Box variant="forms.radio.checkedContent">
           {checkedContent}
         </Box>
+        )
+        )
       }
     </Box>
   );
@@ -135,12 +144,7 @@ RadioField.propTypes = {
    * object.
   */
   'aria-details': PropTypes.string,
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
+  ...ariaAttributesBasePropTypes,
 };
 
 RadioField.displayName = 'RadioField';

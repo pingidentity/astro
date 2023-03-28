@@ -1,6 +1,6 @@
 {
   "name": "@pingux/flow-diagram",
-  "version": "0.27.38",
+  "version": "0.27.39-rc.0",
   "description": "Flow Diagram library",
   "author": "Ping UX Development Team",
   "homepage": "",
@@ -21,8 +21,8 @@
     "registry": "https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/"
   },
   "scripts": {
+    "build": "rm -rf lib && yarn run build:astro && yarn run build:icons && yarn run build:cjs && yarn run build:esm && yarn run build:assets && yarn run build:css",
     "build-ci": "rm -rf lib && yarn build:cjs && yarn build:esm && yarn build:assets && yarn build:css",
-    "build": "rm -rf lib && npm-run-all build:*",
     "build:astro": "cd ../astro && yarn build",
     "build-icons": "cd ../icons && yarn build",
     "build:icons": "(node -e \"if (! require('fs').existsSync('../icons/lib/ui-library/components')) {process.exit(1)} \" || npm run build-icons)",
@@ -42,11 +42,12 @@
     "installdeps": "lerna run build --scope @pingux/astro && lerna run build --scope @pingux/icons"
   },
   "dependencies": {
+    "@babel/core": "^7.11.6",
     "@material-ui/core": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
-    "@pingux/astro": "^1.44.1",
+    "@pingux/astro": "^2.0.0-rc.0",
     "@pingux/icons": "^0.2.0",
     "gojs": "^2.1.16",
     "gojs-react": "^1.0.7",
@@ -54,10 +55,23 @@
     "lodash": "^4.17.20",
     "mdi-react": "^7.5.0",
     "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.13.1",
     "react-xarrows": "^1.5.2",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-private-methods": "7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/plugin-transform-spread": "^7.16.7",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@emotion/babel-plugin": "^11.10.2",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/react": "^11.1.5",
     "@emotion/styled": "11.3.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-docs": "^6.5.10",
@@ -66,10 +80,16 @@
     "@storybook/react": "^6.5.10",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
-    "@testing-library/react-hooks": "^3.4.2"
-  },
-  "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.13.1"
+    "@testing-library/react-hooks": "^3.4.1",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest-dom": "^4.0.2",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-testing-library": "^5.7.3",
+    "jest": "^26.0.1",
+    "react-test-renderer": "^16.8.6"
   }
 }

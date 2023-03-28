@@ -3,9 +3,10 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
+import { useTabList } from 'react-aria';
+import { useTabListState } from 'react-stately';
 import PropTypes from 'prop-types';
-import { useTabList } from '@react-aria/tabs';
-import { useTabListState } from '@react-stately/tabs';
+
 import { usePropWarning } from '../../hooks';
 import Box from '../Box';
 import { CollectionRockerButton } from '../RockerButton';
@@ -38,9 +39,9 @@ const RockerButtonGroup = forwardRef((props, ref) => {
 
   return (
     <RockerContext.Provider value={state}>
-      <Box variant="rockerbutton.rockerContainer" {...others}>
+      <Box variant="rockerButton.container" {...others}>
         <Box
-          variant="rockerbutton.rockerContainerInner"
+          variant="rockerButton.innerContainer"
           isRow
           {...tabListProps}
           {...raTabListProps}

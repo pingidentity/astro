@@ -1,13 +1,25 @@
 import React from 'react';
-import Link from '../Link';
-import Text from '../Text';
-import CopyText from './CopyText';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import {
+  Box,
+  CopyText,
+  Link,
+  Text,
+} from '../../index';
+
 import CopyTextReadme from './CopyText.mdx';
 
 export default {
   title: 'Components/CopyText',
   component: CopyText,
+  decorators: [
+    Story => (
+      <Box pt="10px">
+        <Story />
+      </Box>
+    ),
+  ],
   parameters: {
     docs: {
       page: () => (

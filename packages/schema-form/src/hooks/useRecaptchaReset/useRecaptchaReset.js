@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useRecaptchaReset = (args) => {
+const useRecaptchaReset = args => {
   const {
     formState,
     onChange,

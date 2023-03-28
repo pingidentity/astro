@@ -38,7 +38,7 @@ export const removeMessage = key => ({
 /**
  * Create an action to add a message and then remove it if there's a timeout
  */
-export const showMessage = (messageArg, timeout = -1) => (dispatch) => {
+export const showMessage = (messageArg, timeout = -1) => dispatch => {
   const message = { key: uuid(), ...messageArg };
   dispatch(addMessage(message));
 
@@ -65,7 +65,7 @@ const messagesReducer = (
   switch (type) {
     case messagesActions.ADD_MESSAGE: return [...state, { ...message }];
     case messagesActions.HIDE_MESSAGE:
-      return state.map((search) => {
+      return state.map(search => {
         if (search.key === key) {
           return {
             ...search,

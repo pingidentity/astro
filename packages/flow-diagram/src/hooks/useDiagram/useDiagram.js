@@ -18,7 +18,8 @@ const isKeyEqual = (a, b) => {
 
 export const addNodes = (diagram, nodeDataArray) => {
     const addedNodes = differenceWith(nodeDataArray,
-        diagram.model.nodeDataArray, isKeyEqual);
+        diagram.model.nodeDataArray,
+        isKeyEqual);
     if (addedNodes.length > 0) {
         diagram.model.addNodeDataCollection(addedNodes);
     }
@@ -26,7 +27,8 @@ export const addNodes = (diagram, nodeDataArray) => {
 
 export const removeNodes = (diagram, nodeDataArray) => {
     const removedNodes = differenceWith(diagram.model.nodeDataArray,
-        nodeDataArray, isKeyEqual);
+        nodeDataArray,
+        isKeyEqual);
 
     if (removedNodes.length > 0) {
         diagram.model.removeNodeDataCollection(removedNodes);
@@ -35,7 +37,8 @@ export const removeNodes = (diagram, nodeDataArray) => {
 
 export const addLinks = (diagram, linkDataArray) => {
     const addedLinks = differenceWith(linkDataArray,
-        diagram.model.linkDataArray, isKeyEqual);
+        diagram.model.linkDataArray,
+        isKeyEqual);
     if (addedLinks.length > 0) {
         diagram.model.addLinkDataCollection(addedLinks);
     }
@@ -43,13 +46,14 @@ export const addLinks = (diagram, linkDataArray) => {
 
 export const removeLinks = (diagram, linkDataArray) => {
     const removedLinks = differenceWith(diagram.model.linkDataArray,
-        linkDataArray, isKeyEqual);
+        linkDataArray,
+        isKeyEqual);
     if (removedLinks.length > 0) {
         diagram.model.removeLinkDataCollection(removedLinks);
     }
 };
 
-export const renderPortCursor = (node) => {
+export const renderPortCursor = node => {
     const fromPort = node.findPort('from');
     const toPort = node.findPort('to');
     if (node.findNodesOutOf().count > 0) {
@@ -72,7 +76,7 @@ export const dragGroupTogether = compute =>
     // this context.
     function computeEffectiveCollection(parts, options) {
         const all = new go.List();
-        parts.each((part) => {
+        parts.each(part => {
             all.add(part);
             if (part.containingGroup !== null && !(part instanceof go.Link)) {
                 all.add(part.containingGroup);
@@ -82,8 +86,8 @@ export const dragGroupTogether = compute =>
     };
 
 /* istanbul ignore next */
-export const externalObjectsDropped = (e) => {
-    e.subject.each((node) => {
+export const externalObjectsDropped = e => {
+    e.subject.each(node => {
         if (node instanceof go.Link) return;
         const grid = e.diagram.grid;
         // eslint-disable-next-line
@@ -95,14 +99,14 @@ export const externalObjectsDropped = (e) => {
 };
 
 /* istanbul ignore next */
-export const layoutConnected = (e) => {
+export const layoutConnected = e => {
     e.diagram.layout.isValidLayout = false;
     e.diagram.layout.invalidateLayout(true);
 };
 
 /* istanbul ignore next */
-export const dontShowDropzones = (diagram) => {
-    diagram.links.each((n) => {
+export const dontShowDropzones = diagram => {
+    diagram.links.each(n => {
         const selectedLink = n;
         if (selectedLink.fromPort.findObject('fromNode') !== null) {
             if (selectedLink.fromPort.findObject('fromNode')?.visible === true) {
@@ -120,7 +124,7 @@ export const dontShowDropzones = (diagram) => {
             selectedLink.isHighlighted = false;
         }
     });
-    diagram.nodes.each((n) => {
+    diagram.nodes.each(n => {
         const node = n;
         if (node.findObject('fromNode') !== null) {
             node.findObject('fromNode').fill = node.findObject('fromNodeOuter').stroke;
@@ -180,7 +184,7 @@ export default function useDiagram({
     }, [selected]);
 
     // Adds link or node that was dropped onto to onModelChange
-    const modelChange = (args) => {
+    const modelChange = args => {
         addNodes(diagram, nodeDataArray);
         removeNodes(diagram, nodeDataArray);
         addLinks(diagram, linkDataArray);
@@ -199,23 +203,22 @@ export default function useDiagram({
     };
 
     const initDiagram = () => {
-        const diagramObject =
-            $(go.Diagram,
+        const diagramObject = $(go.Diagram,
 
-                {
-                    hoverDelay: 0,
-                    allowCopy,
-                    'undoManager.isEnabled': true,
-                    'animationManager.isInitial': false,
-                    'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
-                        .computeEffectiveCollection),
-                    draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }, {
-                        setDraggedPart: (draggedParts) => {
-                            const mappedDraggedParts = draggedParts.map(part => part.data);
-                            setDraggedElementData(mappedDraggedParts);
-                        },
-                    }),
-                    layout:
+            {
+                hoverDelay: 0,
+                allowCopy,
+                'undoManager.isEnabled': true,
+                'animationManager.isInitial': false,
+                'draggingTool.computeEffectiveCollection': dragGroupTogether(go.DraggingTool.prototype
+                    .computeEffectiveCollection),
+                draggingTool: $(NonRealtimeDraggingTool, { duration: 600 }, {
+                    setDraggedPart: draggedParts => {
+                        const mappedDraggedParts = draggedParts.map(part => part.data);
+                        setDraggedElementData(mappedDraggedParts);
+                    },
+                }),
+                layout:
                         $(SelectiveDigraphLayout,
                             {
                                 setsPortSpots: false,
@@ -225,40 +228,40 @@ export default function useDiagram({
                                 isOngoing: true,
                                 packOption: go.LayeredDigraphLayout.PackStraighten,
                             }),
-                    'linkingTool.insertLink': (fromnode, fromport, tonode, toport) => {
-                        const linkingTool = diagramObject.toolManager.linkingTool;
-                        if (fromport.portId === 'bottom') {
-                            diagramObject.model.setCategoryForLinkData(linkingTool.archetypeLinkData, 'io');
-                        } else {
-                            diagramObject.model.setCategoryForLinkData(linkingTool.archetypeLinkData, '');
-                        }
-                        return go
-                            .LinkingTool
-                            .prototype
-                            .insertLink
-                            .call(linkingTool, fromnode, fromport, tonode, toport);
-                    },
-                    'ExternalObjectsDropped': externalObjectsDropped,
-                    'InitialAnimationStarting': renderPortCursors,
-                    'LinkDrawn': renderPortCursors,
-                    'SelectionDeleted': renderPortCursors,
-                    'ChangedSelection': (e) => {
-                        const it = e.diagram.selection.iterator;
-                        while (it.next()) {
-                            setSelectedGroup(it.value.data);
-                        }
-                        if (e.diagram.selection.count === 0) {
-                            setSelected(null);
-                        }
-                    },
-                    'SelectionMoved': layoutConnected,
-                    model: $(go.GraphLinksModel,
-                        {
-                            linkKeyProperty: 'key',
-                            makeUniqueKeyFunction: null,
-                            makeUniqueLinkKeyFunction: null,
-                        }),
-                });
+                'linkingTool.insertLink': (fromnode, fromport, tonode, toport) => {
+                    const linkingTool = diagramObject.toolManager.linkingTool;
+                    if (fromport.portId === 'bottom') {
+                        diagramObject.model.setCategoryForLinkData(linkingTool.archetypeLinkData, 'io');
+                    } else {
+                        diagramObject.model.setCategoryForLinkData(linkingTool.archetypeLinkData, '');
+                    }
+                    return go
+                        .LinkingTool
+                        .prototype
+                        .insertLink
+                        .call(linkingTool, fromnode, fromport, tonode, toport);
+                },
+                'ExternalObjectsDropped': externalObjectsDropped,
+                'InitialAnimationStarting': renderPortCursors,
+                'LinkDrawn': renderPortCursors,
+                'SelectionDeleted': renderPortCursors,
+                'ChangedSelection': e => {
+                    const it = e.diagram.selection.iterator;
+                    while (it.next()) {
+                        setSelectedGroup(it.value.data);
+                    }
+                    if (e.diagram.selection.count === 0) {
+                        setSelected(null);
+                    }
+                },
+                'SelectionMoved': layoutConnected,
+                model: $(go.GraphLinksModel,
+                    {
+                        linkKeyProperty: 'key',
+                        makeUniqueKeyFunction: null,
+                        makeUniqueLinkKeyFunction: null,
+                    }),
+            });
         nodeTemplates.forEach(([name, template]) => {
             const updatedTemplate = template;
             const templateClick = template.click;
@@ -283,69 +286,63 @@ export default function useDiagram({
             dontShowDropzones(diagramObject);
         };
 
-
         diagramObject.mouseLeave = () => {
             dontShowDropzones(diagramObject);
         };
 
-        diagramObject.linkTemplate =
-            $(go.Link,
-                {
-                    adjusting: go.Link.Stretch,
-                    curve: go.Link.Bezier,
-                    curviness: 0,
-                    fromShortLength: -20,
-                    toShortLength: -20,
-                    selectable: true,
-                    layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
-                    selectionAdorned: false,
-                    fromPortId: 'from',
-                    toPortId: 'to',
-                    layerName: 'Background',
-                    mouseDrop: (e, link) => {
-                        const selectedLink = link.part;
-                        setDroppedOntoLinkKey(link.key);
-                        dontShowDropzones(diagramObject);
-                        selectedLink.findObject('arrow').stroke = COLORS.BLUE;
-                    },
-                    mouseDragEnter: (e, link) => {
-                        const selectedLink = link;
-                        // eslint-disable-next-line
+        diagramObject.linkTemplate = $(go.Link,
+            {
+                adjusting: go.Link.Stretch,
+                curve: go.Link.Bezier,
+                curviness: 0,
+                fromShortLength: -20,
+                toShortLength: -20,
+                selectable: true,
+                layoutConditions: go.Part.LayoutAdded || go.Part.LayoutRemoved,
+                selectionAdorned: false,
+                fromPortId: 'from',
+                toPortId: 'to',
+                layerName: 'Background',
+                mouseDrop: (e, link) => {
+                    const selectedLink = link.part;
+                    setDroppedOntoLinkKey(link.key);
+                    dontShowDropzones(diagramObject);
+                    selectedLink.findObject('arrow').stroke = COLORS.BLUE;
+                },
+                mouseDragEnter: (e, link) => {
+                    const selectedLink = link;
+                    // eslint-disable-next-line
                         selectedLink.findObject('link').strokeWidth = 3;
-                    },
-                    mouseDragLeave: (e, link) => {
-                        const selectedLink = link;
-                        selectedLink.findObject('link').strokeWidth = 1;
-                    },
                 },
-                new go.Binding('click', 'onClick'),
-                new go.Binding('relinkableFrom', 'canRelink').ofModel(),
-                new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
-                $(go.Shape, { isPanelMain: true, name: 'link', stroke: COLORS.BLUE },
-                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
-                $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity, segmentOrientation: go.Link.OrientAlong },
-                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
-                $('Button', 'Spot', {
-                    'ButtonBorder.figure': 'Circle',
-                    'ButtonBorder.fill': COLORS.BUTTON_NORMAL,
-                    'ButtonBorder.strokeWidth': 0,
-                    '_buttonFillOver': COLORS.BUTTON_HOVER,
-                    '_buttonFillPressed': COLORS.BLUE,
-                    click: (e, obj) => onLinkDelete(obj.part.data),
-                    name: 'DELETE_BUTTON',
-                    height: 25,
-                    width: 25,
-                    segmentOffset: new go.Point(-5, 23),
+                mouseDragLeave: (e, link) => {
+                    const selectedLink = link;
+                    selectedLink.findObject('link').strokeWidth = 1;
                 },
-                new go.Binding('visible', 'isSelected', (s) => { return s === true; }).ofObject(''),
-                $(go.Picture, {
-                    source: svgComponentToBase64(<Icon path={mdiDelete} height="20px" width="20px" color={COLORS.WHITE} />),
-                    width: 20,
-                    height: 20,
-                }),
-                ),
-            );
+            },
+            new go.Binding('click', 'onClick'),
+            new go.Binding('relinkableFrom', 'canRelink').ofModel(),
+            new go.Binding('relinkableTo', 'canRelink').ofModel(),
+            $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
+            $(go.Shape, { isPanelMain: true, name: 'link', stroke: COLORS.BLUE }, new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+            $(go.Shape, { name: 'arrow', toArrow: 'Standard', stroke: COLORS.BLUE, fill: COLORS.BLUE, segmentIndex: -Infinity, segmentOrientation: go.Link.OrientAlong }, new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+            $('Button', 'Spot', {
+                'ButtonBorder.figure': 'Circle',
+                'ButtonBorder.fill': COLORS.BUTTON_NORMAL,
+                'ButtonBorder.strokeWidth': 0,
+                '_buttonFillOver': COLORS.BUTTON_HOVER,
+                '_buttonFillPressed': COLORS.BLUE,
+                click: (e, obj) => onLinkDelete(obj.part.data),
+                name: 'DELETE_BUTTON',
+                height: 25,
+                width: 25,
+                segmentOffset: new go.Point(-5, 23),
+            }, new go.Binding('visible', 'isSelected', s => { return s === true; }).ofObject(''), $(go.Picture, {
+                source: svgComponentToBase64(<Icon path={mdiDelete} height="20px" width="20px" color={COLORS.WHITE} />),
+                width: 20,
+                height: 20,
+            }),
+            ),
+        );
 
         diagramObject.linkTemplateMap.add('outlet',
             $(go.Link,
@@ -363,35 +360,26 @@ export default function useDiagram({
                 new go.Binding('click', 'onClick'),
                 new go.Binding('relinkableFrom', 'canRelink').ofModel(),
                 new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { stroke: COLORS.GRAY_MEDIUM },
-                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+                $(go.Shape, { stroke: COLORS.GRAY_MEDIUM }, new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
             ),
         );
 
         const curveSize = 60;
         diagramObject.linkTemplateMap.add('io',
-            $(go.Link, go.Link.Bezier,
-                {
-                    deletable: false,
-                    fromShortLength: -10,
-                    toShortLength: -10,
-                    selectable: true,
-                    selectionAdorned: false,
-                    fromPortId: 'bottom',
-                    toPortId: 'bottom',
-                    layerName: 'Background',
-                    curviness: curveSize,
-                    fromEndSegmentLength: curveSize,
-                    toEndSegmentLength: curveSize,
-                    isLayoutPositioned: false,
-                },
-                new go.Binding('click', 'onClick'),
-                new go.Binding('visible', 'visible'),
-                new go.Binding('relinkableFrom', 'canRelink').ofModel(),
-                new go.Binding('relinkableTo', 'canRelink').ofModel(),
-                $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }),
-                $(go.Shape, { isPanelMain: true, stroke: COLORS.ORANGE },
-                    new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
+            $(go.Link, go.Link.Bezier, {
+                deletable: false,
+                fromShortLength: -10,
+                toShortLength: -10,
+                selectable: true,
+                selectionAdorned: false,
+                fromPortId: 'bottom',
+                toPortId: 'bottom',
+                layerName: 'Background',
+                curviness: curveSize,
+                fromEndSegmentLength: curveSize,
+                toEndSegmentLength: curveSize,
+                isLayoutPositioned: false,
+            }, new go.Binding('click', 'onClick'), new go.Binding('visible', 'visible'), new go.Binding('relinkableFrom', 'canRelink').ofModel(), new go.Binding('relinkableTo', 'canRelink').ofModel(), $(go.Shape, { isPanelMain: true, stroke: 'transparent', strokeWidth: 15 }), $(go.Shape, { isPanelMain: true, stroke: COLORS.ORANGE }, new go.Binding('strokeWidth', 'isSelected', getBorderWidth).ofObject('')),
             ),
         );
 

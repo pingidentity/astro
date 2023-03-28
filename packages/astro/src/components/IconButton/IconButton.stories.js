@@ -1,19 +1,19 @@
 import React from 'react';
 import CreateIcon from 'mdi-react/CreateIcon';
-import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
-import PlusIcon from 'mdi-react/PlusIcon';
+import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
+import PlusIcon from 'mdi-react/PlusIcon';
 
 import {
   Box,
   Icon,
   IconButton,
   Table,
+  TableBody,
+  TableCell,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
   Text,
 } from '../../index';
 
@@ -49,9 +49,9 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: ['iconButton', 'inverted', 'square', 'invertedSquare'],
+        options: ['base', 'inverted', 'invertedSquare', 'square'],
       },
-      defaultValue: 'iconButton',
+      defaultValue: 'base',
     },
     size: {
       control: {
@@ -64,13 +64,13 @@ export default {
 };
 
 export const Default = args => (
-  <IconButton aria-label="default icon button" {...args} >
+  <IconButton aria-label="default icon button" {...args}>
     <Icon icon={CreateIcon} size={args.size} />
   </IconButton>
 );
 
 export const WithTooltip = () => (
-  <IconButton aria-label="icon button with tooltip" title="Edit" >
+  <IconButton aria-label="icon button with tooltip" title="Edit">
     <Icon icon={CreateIcon} size="sm" />
   </IconButton>
 );
@@ -96,7 +96,10 @@ export const Sizes = () => (
           <Text>XS | 21px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace"> {"<IconButton aria-label='create button' variant='inverted'/>"}</Text>
+          <Text fontFamily="monospace">
+            {' '}
+            {"<IconButton aria-label='create button' variant='inverted'/>"}
+          </Text>
           <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xs'/>"}</Text>
           <Text fontFamily="monospace">{'</IconButton>'}</Text>
         </TableCell>
@@ -111,7 +114,10 @@ export const Sizes = () => (
           <Text>SM | 26px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace"> {"<IconButton aria-label='create button' variant='inverted'/>"}</Text>
+          <Text fontFamily="monospace">
+            {' '}
+            {"<IconButton aria-label='create button' variant='inverted'/>"}
+          </Text>
           <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='sm'/>"}</Text>
           <Text fontFamily="monospace">{'</IconButton>'}</Text>
         </TableCell>
@@ -126,7 +132,10 @@ export const Sizes = () => (
           <Text>MD | 31px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace"> {"<IconButton aria-label='create button' variant='inverted'/>"}</Text>
+          <Text fontFamily="monospace">
+            {' '}
+            {"<IconButton aria-label='create button' variant='inverted'/>"}
+          </Text>
           <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='md'/>"}</Text>
           <Text fontFamily="monospace">{'</IconButton>'}</Text>
         </TableCell>

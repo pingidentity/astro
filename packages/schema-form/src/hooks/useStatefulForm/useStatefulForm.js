@@ -86,7 +86,7 @@ const useStatefulForm = (props = {}) => {
     // Remove any async errors related to the differences
     if (!ignoreChange && differences.length && Object.keys(asyncErrors).length) {
       const newAsyncErrors = { ...asyncErrors };
-      differences.forEach((diff) => {
+      differences.forEach(diff => {
         const [fieldId] = diff;
         delete newAsyncErrors[fieldId];
       });
@@ -104,12 +104,12 @@ const useStatefulForm = (props = {}) => {
     setAsyncErrors({});
     setFormState(FORM_STATE.ERROR);
   };
-  const handleServerError = async (response) => {
+  const handleServerError = async response => {
     const newErrors = await onServerError(response);
     setAsyncErrors(newErrors);
     setFormState(FORM_STATE.ERROR);
   };
-  const handleServerSuccess = (response) => {
+  const handleServerSuccess = response => {
     onServerSuccess(response);
     setFormState(FORM_STATE.SUCCESS);
   };

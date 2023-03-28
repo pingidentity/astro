@@ -48,12 +48,11 @@ NonRealtimeDraggingTool.prototype.computeEffectiveCollection = function compute(
         const bounds = this.diagram.computePartsBounds(map.toKeySet());
         const offset = this.diagram.lastInput.documentPoint.copy().subtract(bounds.position);
         const $ = go.GraphObject.make;
-        this._imagePart =
-            $(go.Part,
-                { layerName: 'Tool', opacity: 0.5, locationSpot: new go.Spot(0, 0, offset.x, offset.y) },
-                $(go.Picture,
-                    { element: this.diagram.makeImage({ parts: map.toKeySet() }) }),
-            );
+        this._imagePart = $(go.Part,
+            { layerName: 'Tool', opacity: 0.5, locationSpot: new go.Spot(0, 0, offset.x, offset.y) },
+            $(go.Picture,
+                { element: this.diagram.makeImage({ parts: map.toKeySet() }) }),
+        );
     }
     return map;
 };
@@ -114,8 +113,8 @@ NonRealtimeDraggingTool.prototype.doMouseUp = function doMouseUp() {
 * @this {NonRealtimeDraggingTool}
 */
 NonRealtimeDraggingTool.prototype.doKeyDown = function doKeyDown() {
-    if (this._imagePart !== null && this._originalDraggedParts !== null &&
-        (this.diagram.lastInput.control || this.diagram.lastInput.meta) && this.mayCopy()) {
+    if (this._imagePart !== null && this._originalDraggedParts !== null
+        && (this.diagram.lastInput.control || this.diagram.lastInput.meta) && this.mayCopy()) {
         this.draggedParts = this._originalDraggedParts;
         this.diagram.remove(this._imagePart);
     }

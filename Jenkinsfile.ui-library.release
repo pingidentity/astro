@@ -24,7 +24,6 @@ pipeline {
         dir("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo "Running ui-library linting and tests"
-            sh "yarn install --frozen-lockfile --ignore-engines"
             sh "yarn run lint"
             sh "yarn run coverage-ci"
           }

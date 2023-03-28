@@ -1,6 +1,6 @@
 import React from 'react';
-import ScrollBox from './ScrollBox';
-import Box from '../Box';
+
+import { Box, ScrollBox } from '../../index';
 
 export default {
   title: 'Components/ScrollBox',
@@ -16,7 +16,7 @@ export default {
 };
 
 export const Default = args => (
-  <ScrollBox maxHeight="100px" {...args} >
+  <ScrollBox maxHeight="100px" {...args}>
     <Box
       sx={{
         height: '150px',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { PageWrapper, Box } from '../../index';
+
+import { Box, PageWrapper } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-box';
@@ -18,8 +19,9 @@ axeTest(getComponent);
 // Probably something to do with Jest / RTL
 test('should provide theme styling through PageWrapper', () => {
   getComponent();
+  const activeRgb = 'rgb(68, 98, 237)';
   const box = screen.queryByTestId(testId);
   expect(box).toBeInstanceOf(HTMLDivElement);
   expect(box).toBeInTheDocument();
-  expect(box).toHaveStyle('background-color: active');
+  expect(box).toHaveStyle(`background-color: ${activeRgb}`);
 });

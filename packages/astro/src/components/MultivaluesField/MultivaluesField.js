@@ -1,19 +1,18 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import Clear from 'mdi-react/CloseIcon';
-import { FocusScope } from '@react-aria/focus';
+import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
 import { useFilter } from '@react-aria/i18n';
-import { DismissButton, useOverlayPosition } from '@react-aria/overlays';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
+import Clear from 'mdi-react/CloseIcon';
+import PropTypes from 'prop-types';
 
-import { Box, Chip, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../../';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { usePropWarning } from '../../hooks';
-
-import ListBox from '../ListBox';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import ListBox from '../ListBox';
 
 /**
  * Complex control that lets you choose several tags from the dropdown list.
@@ -66,7 +65,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [items, setItems] = useState(initialItems);
 
-  const toggleItems = (keys) => {
+  const toggleItems = keys => {
     setItems(initialItems.filter(item => !Array.from(keys).includes(item.key)));
     setFilterString('');
     if (onSelectionChange) onSelectionChange(keys);
@@ -76,10 +75,9 @@ const MultivaluesField = forwardRef((props, ref) => {
 
   const state = useListState({
     ...props,
-    filter: nodes =>
-      Array.from(nodes).filter(
-        item => contains(item.textValue, filterString),
-      ),
+    filter: nodes => Array.from(nodes).filter(
+      item => contains(item.textValue, filterString),
+    ),
     items: items.filter(({ key }) => !readOnlyKeys.includes(key)),
     onSelectionChange: toggleItems,
     selectionMode: 'multiple',
@@ -156,8 +154,11 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (onOpenChange) onOpenChange(isOpen);
   }, [isOpen]);
 
-  const addNewChipFromInput = (inputValue) => {
-    const key = inputValue;
+  const addNewBadgeFromInput = inputValue => {
+    const key = inputValue.trim();
+    if (key === '') {
+      return;
+    }
     if (state.selectionManager.isSelected(key)) {
       return;
     }
@@ -184,12 +185,12 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (!hasCustomValue && filteredItems.length === 1) {
       selectTheOnlyFilteredItem();
     } else if (hasCustomValue) {
-      addNewChipFromInput(filterString);
+      addNewBadgeFromInput(filterString);
     }
   };
 
   /* istanbul ignore next */
-  const keyDown = (e) => {
+  const keyDown = e => {
     switch (e.key) {
       case 'Enter': {
         e.preventDefault();
@@ -206,21 +207,19 @@ const MultivaluesField = forwardRef((props, ref) => {
           if (key === '') {
             return;
           }
-          addNewChipFromInput(e.target.value);
+          addNewBadgeFromInput(e.target.value);
         }
         break;
       }
       case 'ArrowDown': {
-        const nextKey =
-          state.collection.getKeyAfter(selectionManager.focusedKey) ||
-          state.collection.getFirstKey();
+        const nextKey = state.collection.getKeyAfter(selectionManager.focusedKey)
+          || state.collection.getFirstKey();
         if (nextKey) selectionManager.setFocusedKey(nextKey);
         break;
       }
       case 'ArrowUp': {
-        const prevKey =
-          state.collection.getKeyBefore(selectionManager.focusedKey) ||
-          state.collection.getLastKey();
+        const prevKey = state.collection.getKeyBefore(selectionManager.focusedKey)
+          || state.collection.getLastKey();
         if (prevKey) selectionManager.setFocusedKey(prevKey);
         break;
       }
@@ -230,7 +229,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (onKeyDown) onKeyDown(e.nativeEvent);
   };
 
-  const deleteItem = (key) => {
+  const deleteItem = key => {
     selectionManager.toggleSelection(key);
   };
 
@@ -242,91 +241,85 @@ const MultivaluesField = forwardRef((props, ref) => {
         label={name}
         variant="bodyStrong"
         sx={{
-            bg: 'accent.95',
-            fontSize: 'sm',
-            alignSelf: 'center',
-            ':not(:last-of-type):after': {
-              content: '",\u00a0"',
-            },
-          }}
-      >{name}
+          bg: 'accent.95',
+          fontSize: 'sm',
+          alignSelf: 'center',
+          ':not(:last-of-type):after': {
+            content: '",\u00a0"',
+          },
+        }}
+      >
+        {name}
       </Text>
     );
   };
 
   const readOnlyInputEntry = (
-    <>
-      {isReadOnly &&
-        (readOnlyKeys.length ?
-          readOnlyKeys.map((key) => {
-            const item = [...initialItems, ...customItems].find(el => el.key === key);
-            if (item) {
-              return (readOnlyTextItem(item.key, item.name));
-            }
-            return null;
-          })
-          :
-          initialItems.map((item) => {
-            return (
-              readOnlyTextItem(item.key, item.name)
-            );
-          })
-        )
-      }
-    </>
+    isReadOnly && (readOnlyKeys.length
+      ? readOnlyKeys.map(key => {
+        const item = [...initialItems, ...customItems].find(el => el.key === key);
+        if (item) {
+          return (readOnlyTextItem(item.key, item.name));
+        }
+        return null;
+      })
+      : initialItems.map(item => {
+        return (
+          readOnlyTextItem(item.key, item.name)
+        );
+      })
+    )
   );
 
   const readOnlyItems = (
-    <>
-      {!isReadOnly && readOnlyKeys
-        .map((key) => {
-          const item = initialItems.find(el => el.key === key);
-          if (item) {
-            return (
-              <Chip
-                key={item.key}
-                role="presentation"
-                label={item.name}
-                variant="variants.boxes.readOnlyChip"
-                bg="white"
-                textProps={{ sx: { color: 'text.primary' } }}
-              />
-            );
-          }
-          return null;
-        })}
-    </>
+    !isReadOnly && readOnlyKeys
+      .map(key => {
+        const item = initialItems.find(el => el.key === key);
+        if (item) {
+          return (
+            <Badge
+              key={item.key}
+              role="presentation"
+              label={item.name}
+              variant="readOnlyBadge"
+              bg="white"
+              textProps={{ sx: { color: 'text.primary' } }}
+            />
+          );
+        }
+        return null;
+      })
   );
 
-  const multivaluesFieldChip = item => (
-    <Chip
+  const multivaluesFieldBadge = item => (
+    <Badge
       key={item.key}
       role="presentation"
-      variant="variants.boxes.selectedItemChip"
+      variant="selectedItemBadge"
       bg="active"
       label={item.name}
       slots={item.slots}
-      {...item.chipProps}
+      {...item.badgeProps}
     >
       <IconButton
         aria-label={`delete ${item.name}`}
         onPress={() => deleteItem(item.key)}
-        variant="buttons.chipDeleteButton"
+        variant="badge.deleteButton"
         {...item.buttonProps}
       >
         <Icon icon={Clear} color="white" size={14} />
       </IconButton>
-    </Chip>
+    </Badge>
   );
 
   const selectedItems = (
     <>
       {Array.from(selectionManager.selectedKeys)
-        .map((key) => {
+        .map(key => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              multivaluesFieldChip(item)
+              multivaluesFieldBadge(item)
             );
           }
           return null;
@@ -335,9 +328,9 @@ const MultivaluesField = forwardRef((props, ref) => {
   );
 
   const listbox = (
-    <FocusScope >
+    <FocusScope>
       <DismissButton onDismiss={close} />
-      <ScrollBox {...scrollBoxProps} >
+      <ScrollBox {...scrollBoxProps}>
         <ListBox
           ref={listBoxRef}
           hasAutoFocus={hasAutoFocus}
@@ -376,24 +369,29 @@ const MultivaluesField = forwardRef((props, ref) => {
   return (
     <Box {...containerProps}>
       <TextField
-        onBlur={(e) => {
+        onBlur={e => {
           setIsOpen(false);
           if (mode === 'non-restrictive' && filterString !== '') onBlurTextField();
           if (onBlur) onBlur(e.nativeEvent);
         }}
-        onChange={(e) => {
+        onChange={e => {
           setFilterString(e.target.value);
           if (onInputChange) onInputChange(e.target.value);
         }}
-        onFocus={(e) => {
+        onFocus={e => {
           if (!isReadOnly) {
-             setIsOpen(true);
+            setIsOpen(true);
           }
           if (onFocus) onFocus(e.nativeEvent);
         }}
         onKeyDown={keyDown}
         onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-        slots={{ beforeInput: <>{readOnlyItems} {selectedItems}{readOnlyInputEntry}</> }}
+        slots={{ beforeInput: <>
+          {readOnlyItems}
+          {' '}
+          {selectedItems}
+          {readOnlyInputEntry}
+        </> }} // eslint-disable-line
         value={filterString}
         helperText={helperText}
         aria-invalid={status === 'error' && true}
@@ -416,8 +414,6 @@ const MultivaluesField = forwardRef((props, ref) => {
 });
 
 MultivaluesField.propTypes = {
-  /** Props object that is spread directly into the root (top-level) Box component. */
-  containerProps: PropTypes.shape({}),
   /** The initial selected keys in the collection (uncontrolled). */
   defaultSelectedKeys: isIterableProp,
   /** Where the menu opens relative to its trigger. */
@@ -516,6 +512,7 @@ MultivaluesField.propTypes = {
   /** Determines the input status indicator and helper text styling. */
   status: PropTypes.oneOf(Object.values(statuses)),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 MultivaluesField.defaultProps = {

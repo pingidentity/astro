@@ -9,7 +9,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import Form from '../../SchemaForm';
 
-const removeIds = (doc) => {
+const removeIds = doc => {
   const all = doc.querySelectorAll('*');
   for (let i = 0, max = all.length; i < max; i += 1) {
     all[i].removeAttribute('aria-labelledby');

@@ -1,15 +1,16 @@
-import React, { forwardRef } from 'react';
-import { useRadioGroup } from '@react-aria/radio';
-import { useRadioGroupState } from '@react-stately/radio';
+import React, { forwardRef, useMemo } from 'react';
+import { useRadioGroup } from 'react-aria';
+import { useRadioGroupState } from 'react-stately';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, FieldHelperText, Label } from '../../';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { useStatusClasses, usePropWarning } from '../../hooks';
+import { Box, FieldHelperText, Label } from '../..';
+import { usePropWarning, useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
-import { RadioContext } from '../RadioField';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { RadioContext } from '../RadioField';
 
 /**
  * Radio group component for a single-choice list of options.
@@ -43,7 +44,7 @@ const RadioGroupField = forwardRef((props, ref) => {
     'aria-controls': props['aria-controls'],
   };
 
-  const helperTextId = uuid();
+  const helperTextId = useMemo(() => uuid(), []);
 
   return (
     <Box
@@ -66,10 +67,11 @@ const RadioGroupField = forwardRef((props, ref) => {
         </RadioContext.Provider>
       </Box>
       {
-        helperText &&
+        helperText && (
         <FieldHelperText status={status} sx={{ pt: 'xs' }} id={helperTextId}>
           {helperText}
         </FieldHelperText>
+        )
       }
     </Box>
   );
@@ -108,6 +110,7 @@ RadioGroupField.propTypes = {
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 RadioGroupField.displayName = 'RadioGroupField';

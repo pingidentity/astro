@@ -4,20 +4,19 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import { FocusScope } from '@react-aria/focus';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
+import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
+import { ChromePicker } from 'react-color';
+import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
-import { useOverlayTriggerState } from '@react-stately/overlays';
-import { useOverlayPosition, useOverlayTrigger } from '@react-aria/overlays';
 import PropTypes from 'prop-types';
-import { ChromePicker } from 'react-color';
 
-import { Box, Button, Input, FieldHelperText, Label } from '../../';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import PopoverContainer from '../PopoverContainer';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { Box, Button, FieldHelperText, Input, Label } from '../..';
 import useField from '../../hooks/useField';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import PopoverContainer from '../PopoverContainer';
 
 /**
  * The Color Field component allows the user to pick a color and displays the chosen color.
@@ -66,7 +65,12 @@ const ColorField = forwardRef((props, ref) => {
 
   const { visuallyHiddenProps } = useVisuallyHidden();
 
-  const { fieldContainerProps, fieldControlProps, fieldLabelProps } = useField({
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
     ...nonAriaProps,
     labelProps: {
       ...labelProps,
@@ -88,18 +92,16 @@ const ColorField = forwardRef((props, ref) => {
     shouldUpdatePosition: true,
   });
 
+  /* istanbul ignore next */
   const handleButtonPress = useCallback(() => popoverState.open(), [
     triggerRef,
   ]);
 
-  const handleColorChange = useCallback(
-    (color, event) => {
-      if (imperativeOnChange) {
-        imperativeOnChange(color, event);
-      }
-    },
-    [imperativeOnChange],
-  );
+  const handleColorChange = useCallback((color, event) => {
+    if (imperativeOnChange) {
+      imperativeOnChange(color, event);
+    }
+  }, [imperativeOnChange]);
 
   const getRgbaFromState = useCallback(({ colorValue }) => {
     return `rgba(${colorValue?.red}, ${colorValue?.green}, ${colorValue?.blue}, ${colorValue?.alpha})`;
@@ -113,12 +115,12 @@ const ColorField = forwardRef((props, ref) => {
         bg={getRgbaFromState(state)}
         onPress={handleButtonPress}
         ref={triggerRef}
-        variant="colorField"
-        {...triggerProps}
-        {...ariaProps}
-        {...buttonProps}
+        variant="forms.colorField.container"
+        {...mergeProps(buttonProps, ariaProps, triggerProps)}
       />
-      <Input {...visuallyHiddenProps} {...fieldControlProps} ref={colorRef} />
+      <Box {...fieldControlWrapperProps}>
+        <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
+      </Box>
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
       )}
@@ -164,13 +166,8 @@ ColorField.propTypes = {
   value: PropTypes.string,
   /** Props object that is spread into the Button element. */
   buttonProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the root (top-level) Box component. */
-  containerProps: PropTypes.shape({}),
-  /** Props object that is spread into the input element. */
-  controlProps: PropTypes.shape({}),
-  /** Props object that is spread into the label element. */
-  labelProps: PropTypes.shape({}),
   ...ariaAttributesBasePropTypes,
+  ...inputFieldAttributesBasePropTypes,
 };
 
 ColorField.defaultProps = {

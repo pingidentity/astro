@@ -1,15 +1,16 @@
-import React, { useMemo, forwardRef, useImperativeHandle, useRef } from 'react';
-import { GridCollection, useGridState } from '@react-stately/grid';
+import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import { mergeProps } from 'react-aria';
 import { GridKeyboardDelegate, useGrid } from '@react-aria/grid';
-import { mergeProps } from '@react-aria/utils';
+import { useCollator, useLocale } from '@react-aria/i18n';
+import { GridCollection, useGridState } from '@react-stately/grid';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
-import { useCollator, useLocale } from '@react-aria/i18n';
+
 import { AccordionGridContext } from '../../context/AccordionGridContext';
+import useDevelopmentWarning from '../../hooks/useDevelopmentWarning';
+import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import AccordionGridItem from '../AccordionGridItem';
 import Box from '../Box';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import useDevelopmentWarning from '../../hooks/useDevelopmentWarning';
 
 export const collectionTypes = {
   ITEM: 'item',

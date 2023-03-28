@@ -1,8 +1,11 @@
 import React from 'react';
 import Prism from 'prismjs';
+
 import 'prismjs/components/prism-powershell';
-import CodeView from './CodeView';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { CodeView } from '../../index';
+
 import CodeViewReadme from './CodeView.mdx';
 
 const code = `{
@@ -103,22 +106,18 @@ export default {
 
 
 export const Default = args => (
-  <>
-    <CodeView {...args} />
-  </>
+  <CodeView {...args} />
 );
 
 export const WithLineNumbers = () => (
-  <>
-    <CodeView hasLineNumbers>
-      {/* const code =  `{
+  <CodeView hasLineNumbers>
+    {/* const code =  `{
         "_links": {
           "self": {
             "href": "https://api.pingone.com/v1/environments/94e3268d-847d-47aa-a45e-1ef8dd8f4df0/users/5a5d4c0c-8383-4796-9cdc-16b5a22f45ad"
           }, ... */}
-      {code}
-    </CodeView>
-  </>
+    {code}
+  </CodeView>
 );
 
 WithLineNumbers.parameters = {
@@ -128,35 +127,33 @@ WithLineNumbers.parameters = {
 };
 
 export const WithCustomSize = () => (
+  <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
+    {`
+const BadgeWithIcon = () => (
   <>
-    <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
-      {`
-export const ChipWithIcon = () => (
-  <>
-    <Chip label="Chip with Icon Button" bg="navy">
-      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+    <Badge label="Badge with Icon Button" bg="navy">
+      <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
         <Icon icon={Clear} ml="xs" size="14px" />
       </IconButton>
-    </Chip>
+    </Badge>
 
     <div style={{ padding: '5px' }} />
 
-    <Chip label="Chip with Icon Button">
-      <IconButton aria-label="Clear Chip with Icon Button" variant="inverted">
+    <Badge label="Badge with Icon Button">
+      <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
         <Icon icon={Earth} ml="xs" size="14px" />
       </IconButton>
-    </Chip>
+    </Badge>
 
     <div style={{ padding: '5px' }} />
 
-    <Chip label="Chip with Icon" bg="green">
+    <Badge label="Badge with Icon" bg="green">
       <Icon icon={ContentCopy} ml="xs" size="14px" color="white" />
-    </Chip>
+    </Badge>
   </>
 );
     `}
-    </CodeView>
-  </>
+  </CodeView>
 );
 
 export const WithAdditionalLanguage = () => {

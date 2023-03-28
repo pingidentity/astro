@@ -126,14 +126,13 @@ function flattenColors(obj, prefix = '') {
     .map(([key, value]) => {
       if (typeof value === 'string') {
         return [`${prefix}${key}`, value];
-      } else if (typeof value === 'object') {
+      } if (typeof value === 'object') {
         return flattenColors(value, `${prefix}${key}.`);
       }
       return [];
     })
     .reduce(
-      (result, current) =>
-        (typeof current[0] === 'string' ? [...result, current] : [...result, ...current]),
+      (result, current) => (typeof current[0] === 'string' ? [...result, current] : [...result, ...current]),
       [],
     );
 }

@@ -4,11 +4,11 @@ import Earth from 'mdi-react/EarthIcon';
 import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from 'mdi-react/FingerprintIcon';
 import GlobeIcon from 'mdi-react/GlobeIcon';
+import OpenInNew from 'mdi-react/OpenInNewIcon';
 import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 import ViewGridPlusOutline from 'mdi-react/ViewGridPlusOutlineIcon';
-import OpenInNew from 'mdi-react/OpenInNewIcon';
 
 import {
   Box,
@@ -36,11 +36,10 @@ const Credentials = props => (
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
-    xml="preserve"
     {...props}
   >
     <g id="Layer_2" />
-    <g id="mdi-certificate-outline" >
+    <g id="mdi-certificate-outline">
       <g>
         <path d="M11,8H5V6h6C11,6,11,8,11,8z" />
         <path d="M9,11H5V9h4C9,9,9,11,9,11z" />
@@ -99,7 +98,7 @@ const data = [
       <NavBarItemLink
         key="Dashboard Link Group"
         id="Dashboard Link Group"
-        variant="buttons.navItemButton"
+        variant="variants.navBar.itemButton"
         href="https://pingidentity.com/"
       >
         Group
@@ -478,7 +477,7 @@ const thirdData = [
 ];
 
 export const Default = () => (
-  <NavBar >
+  <NavBar>
     <Box padding="md" key="top-logo-parent">
       <Link
         aria-label="home link"
@@ -536,7 +535,7 @@ export const Controlled = () => {
 
   return (
     <NavBar setSelectedKey={setSelectedKey} selectedKey={selectedKey}>
-      <Box padding="md" key="top-logo-parent" >
+      <Box padding="md" key="top-logo-parent">
         <Link
           aria-label="home link"
           href="https://pingidentity.com"

@@ -1,20 +1,18 @@
 import React, { useCallback, useState } from 'react';
-import { useLabel } from '@react-aria/label';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useLabel } from 'react-aria';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import { Box, Button, FieldHelperText, Label, Text } from '../../';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import ArrayFieldItem from './ArrayFieldItem';
-import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
+import { Box, Button, FieldHelperText, Label, Text } from '../..';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 
 /**
  * Displays array collections providing useful functions and
  * optimizations for arrays.
  */
-const ArrayField = (props) => {
+const ArrayField = props => {
   const {
     addButtonLabel,
     defaultValue,
@@ -53,13 +51,12 @@ const ArrayField = (props) => {
   const [fieldValues, setFieldValues] = useState(defaultValue || [createEmptyField()]);
 
   const mapArrayFieldWithNewValue = useCallback(
-    (arrValues, newValue, fieldId) =>
-      arrValues.map((fieldValue) => {
-        if (fieldValue.id === fieldId) {
-          return { ...fieldValue, value: newValue };
-        }
-        return fieldValue;
-      }),
+    (arrValues, newValue, fieldId) => arrValues.map(fieldValue => {
+      if (fieldValue.id === fieldId) {
+        return { ...fieldValue, value: newValue };
+      }
+      return fieldValue;
+    }),
     [],
   );
 
@@ -73,20 +70,18 @@ const ArrayField = (props) => {
       if (isControlled) {
         onChangeRef.current(mapArrayFieldWithNewValue(valueRef.current, tempValue, fieldId));
       } else {
-        setFieldValues(oldValues =>
-          mapArrayFieldWithNewValue(oldValues, tempValue, fieldId));
+        setFieldValues(oldValues => mapArrayFieldWithNewValue(oldValues, tempValue, fieldId));
       }
     },
     [isControlled, mapArrayFieldWithNewValue],
   );
 
   const onFieldDelete = useCallback(
-    (fieldId) => {
+    fieldId => {
       if (isControlled) {
         onDeleteRef.current(fieldId);
       } else {
-        setFieldValues(oldValues =>
-          oldValues.filter(({ id }) => id !== fieldId),
+        setFieldValues(oldValues => oldValues.filter(({ id }) => id !== fieldId),
         );
       }
     },
@@ -106,6 +101,29 @@ const ArrayField = (props) => {
   } = useLabel({ ...props });
 
   const isLimitReached = !!maxSize && (value || fieldValues).length >= maxSize;
+  const isDisabled = (value || fieldValues).length === 1;
+
+  const renderedItem = useCallback(
+    (id, fieldValue, otherFieldProps, onComponentRender) => {
+      if (onComponentRender) {
+        return onComponentRender(
+          id,
+          fieldValue,
+          onFieldValueChange,
+          onFieldDelete,
+          isDisabled,
+          otherFieldProps,
+        );
+      }
+      return renderField(
+        id,
+        fieldValue,
+        onFieldValueChange,
+        onFieldDelete,
+        isDisabled,
+        otherFieldProps,
+      );
+    }, [onFieldValueChange, onFieldDelete, renderField, isDisabled]);
 
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
 
@@ -115,39 +133,34 @@ const ArrayField = (props) => {
       <Box as="ul" pl="0" {...ariaProps}>
         {(value || fieldValues).map(
           ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
-            const isDisabled = (value || fieldValues).length === 1;
             return (
-              <ArrayFieldItem
-                key={id}
-                id={id}
-                isDisabled={isDisabled}
-                fieldValue={fieldValue}
-                onComponentRender={onComponentRender}
-                onFieldValueChange={onFieldValueChange}
-                onFieldDelete={onFieldDelete}
-                renderField={renderField}
-                {...otherFieldProps}
-              />
+              <Box as="li" mb="xs" key={id}>
+                {renderedItem(id, fieldValue, otherFieldProps, onComponentRender)}
+              </Box>
             );
-          })
-        }
+          })}
       </Box>
       {
-        helperText &&
+        helperText
+        && (
         <FieldHelperText status={status}>
           {helperText}
         </FieldHelperText>
+        )
       }
       {
-        isLimitReached &&
+        isLimitReached
+        && (
         <FieldHelperText status={statuses.DEFAULT}>
           {maxSizeText || `Maximum ${maxSize} items.`}
         </FieldHelperText>
+        )
       }
-      {!isLimitReached &&
+      {!isLimitReached
+        && (
         <Button
           aria-label="Add field"
-          variant="text"
+          variant="link"
           onPress={onFieldAdd}
           sx={{ width: 'fit-content', mt: 'xs' }}
         >
@@ -155,7 +168,7 @@ const ArrayField = (props) => {
             {addButtonLabel}
           </Text>
         </Button>
-      }
+        )}
     </Box>
   );
 };

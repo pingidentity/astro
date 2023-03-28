@@ -1,14 +1,14 @@
 import React, { useContext, useRef } from 'react';
-import { mergeProps } from '@react-aria/utils';
-import { useFocusRing } from '@react-aria/focus';
-import PropTypes from 'prop-types';
-import { useListItem } from '@react-aria/list';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover } from '@react-aria/interactions';
-import { ListViewContext } from '../ListView/ListViewContext';
-import Box from '../Box';
-import { useStatusClasses } from '../../hooks';
+import { useListItem } from '@react-aria/list';
+import PropTypes from 'prop-types';
 
-const ListViewItem = (props) => {
+import { useStatusClasses } from '../../hooks';
+import Box from '../Box';
+import { ListViewContext } from '../ListView/ListViewContext';
+
+const ListViewItem = props => {
   const {
     item,
     item: {
@@ -64,30 +64,28 @@ const ListViewItem = (props) => {
   });
 
   return (
-    <>
+    <Box
+      isDisabled={isDisabled}
+      isRow
+      ref={rowRef}
+      {...mergedProps}
+      {...rowProps}
+      sx={{ outline: 'none' }}
+    >
       <Box
+        as="div"
+        variant="listViewItem.container"
+        {...gridCellProps}
+        isFocused={isDisabled ? false : isFocusVisible}
         isDisabled={isDisabled}
-        isRow
-        ref={rowRef}
-        {...mergedProps}
-        {...rowProps}
-        sx={{ outline: 'none' }}
+        isSelected={isSelected}
+        className={classNames}
+        data-id={dataId}
+        {...listItemProps}
       >
-        <Box
-          as="div"
-          {...gridCellProps}
-          variant="boxes.listViewItem"
-          isFocused={isDisabled ? false : isFocusVisible}
-          isDisabled={isDisabled}
-          isSelected={isSelected}
-          className={classNames}
-          data-id={dataId}
-          {...listItemProps}
-        >
-          {item.rendered}
-        </Box>
+        {item.rendered}
       </Box>
-    </>
+    </Box>
   );
 };
 

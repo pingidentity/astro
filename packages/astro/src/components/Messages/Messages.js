@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useListState } from '@react-stately/list';
+import PropTypes from 'prop-types';
 
 import statuses from '../../utils/devUtils/constants/statuses';
+import Box from '../Box';
 
 import Message from './Message';
-import Box from '../Box';
 
 /**
  *Messages are intended to display non-critical alerts that
@@ -19,7 +19,7 @@ const Messages = forwardRef((props, ref) => {
   return (
     <Box
       ref={ref}
-      variant="messages.wrapper"
+      variant="message.wrapper"
       {...others}
     >
       {Array.from(state.collection).map(item => (
@@ -27,7 +27,8 @@ const Messages = forwardRef((props, ref) => {
           key={item.key}
           item={item}
           onClose={onClose}
-        />))}
+        />
+      ))}
     </Box>
   );
 });

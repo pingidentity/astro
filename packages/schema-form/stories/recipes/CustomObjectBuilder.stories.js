@@ -21,7 +21,7 @@ const ObjectFieldTemplate = ({
   <div style={{ marginBottom: '20px' }}>
     <TitleField title={title} />
     <div className="row">
-      {properties.map((prop) => (
+      {properties.map(prop => (
         <div
           className="col-lg-2 col-md-4 col-sm-6 col-xs-12"
           key={prop.content.key}

@@ -1,15 +1,16 @@
-import React, { forwardRef, useRef, useImperativeHandle, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { useListBox } from '@react-aria/listbox';
-import { mergeProps } from '@react-aria/utils';
-import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
+import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import { mergeProps } from 'react-aria';
 import { useCollator } from '@react-aria/i18n';
+import { useListBox } from '@react-aria/listbox';
+import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
+import PropTypes from 'prop-types';
 
-import { ListBoxContext } from './ListBoxContext';
-import { Option } from './index.js';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Loader from '../Loader';
+
+import { Option } from './index.js';
+import { ListBoxContext } from './ListBoxContext';
 import ListBoxSection from './ListBoxSection';
 
 export const collectionTypes = {
@@ -158,7 +159,7 @@ const ListBox = forwardRef((props, ref) => {
                 hasVirtualFocus={hasVirtualFocus}
               />
             );
-          } else if (type === collectionTypes.LOADER) {
+          } if (type === collectionTypes.LOADER) {
             return (
               <Loader variant="loader.withinListbox" aria-label="Loading more..." />
             );

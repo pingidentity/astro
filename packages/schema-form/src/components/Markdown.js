@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 // Need to ignore this since we have to mock the Markdown component in tests
 /* istanbul ignore next */
-const renderLink = (props) => (
+const renderLink = props => (
   <a
     href={props.href}
     rel="nofollow noreferrer noopener"
@@ -18,7 +18,7 @@ const defaultComponents = {
   a: renderLink,
 };
 
-const Markdown = (props) => {
+const Markdown = props => {
   const {
     source,
     hasMarkdown,

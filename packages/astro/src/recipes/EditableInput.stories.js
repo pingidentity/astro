@@ -1,17 +1,18 @@
 import React, {
   createContext,
   useContext,
+  useEffect,
   useRef,
   useState,
-  useEffect,
 } from 'react';
-import CloseIcon from 'mdi-react/CloseIcon';
 import CheckIcon from 'mdi-react/CheckIcon';
+import CloseIcon from 'mdi-react/CloseIcon';
+
 import {
-  TextAreaField,
-  IconButton,
-  Icon,
   Box,
+  Icon,
+  IconButton,
+  TextAreaField,
 } from '../index';
 
 
@@ -96,7 +97,7 @@ export const Default = () => {
  * Wrapper component that provides context value for all editable components
  */
 
-const Editable = (props) => {
+const Editable = props => {
   const { value, isEditing } = props;
 
   const editableContextValue = {
@@ -146,7 +147,7 @@ const EditablePreview = () => {
     setEditableContext({ ...editableContext, isEditing: true });
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.key === 'Enter') {
       setEditableContext({ ...editableContext, isEditing: true });
     }
@@ -177,7 +178,7 @@ const EditablePreview = () => {
  * Input view of the component
  */
 
-const EditableInput = (props) => {
+const EditableInput = props => {
   const { inputProps: { ariaLabel } } = props;
   const editableInput = useRef(null);
   const [editableContext, setEditableContext] = useContext(EditableAreaContext);
@@ -194,12 +195,12 @@ const EditableInput = (props) => {
     }
   }, [editableContext.isEditing]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setEditingValue(e.target.value);
     setEditableContext({ ...editableContext, value: e.target.value });
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.key === 'Escape') {
       setEditableContext({
         ...editableContext,
@@ -250,7 +251,7 @@ const EditableInput = (props) => {
  * Extend with more button controls as needed
  */
 
-const EditableControl = (props) => {
+const EditableControl = props => {
   const { controlProps: { confirmBtn }, controlProps: { cancelBtn }, onPress } = props;
   const [editableContext, setEditableContext] = useContext(EditableAreaContext);
   const [prevValue, setPrevValue] = useState(editableContext.value || '');

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ApplicationIcon from 'mdi-react/ApplicationIcon';
+
 import { DataTableMultiLine } from '../../index';
 
 const getComponent = (props = {}) => render(

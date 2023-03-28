@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
-import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react-hooks';
+import userEvent from '@testing-library/user-event';
+
 import useComponentToggle from './useComponentToggle';
 
 const callback = jest.fn();

@@ -13,7 +13,7 @@ import useDiagram, {
 jest.mock('../../components/ZoomSlider/ZoomSlider.js');
 jest.mock('../../components/NonRealtimeDraggingTool/NonRealtimeDraggingTool.js');
 
-jest.mock('gojs', (replacements) => {
+jest.mock('gojs', replacements => {
     const diagramObjectProps = {
         ...replacements,
         model: {

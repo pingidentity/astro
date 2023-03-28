@@ -53,7 +53,7 @@ const DefaultObjectFieldTemplate = ({
         formContext={formContext}
       />
     )}
-    {properties.map((prop) => prop.content)}
+    {properties.map(prop => prop.content)}
     <AddButton
       className="object-property-expand"
       onClick={onAddClick(schema)}
@@ -112,7 +112,7 @@ const ObjectField = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalValue, setModalValue] = useState('');
 
-  const isRequired = (itemName) => Array
+  const isRequired = itemName => Array
     .isArray(schema.required)
     && schema.required.indexOf(itemName) !== -1;
 
@@ -138,7 +138,7 @@ const ObjectField = ({
     );
   };
 
-  const onDropPropertyClick = (key) => {
+  const onDropPropertyClick = key => {
     onChange(_.omit(formData, key));
   };
 
@@ -152,7 +152,7 @@ const ObjectField = ({
     return newKey;
   };
 
-  const onKeyChange = (oldValue) => (val, curErrorSchema) => {
+  const onKeyChange = oldValue => (val, curErrorSchema) => {
     let value = val;
     if (oldValue === value) {
       return;
@@ -161,7 +161,7 @@ const ObjectField = ({
     value = getAvailableKey(value, formData);
     const newFormData = { ...formData };
     const newKeys = { [oldValue]: value };
-    const keyValues = Object.keys(newFormData).map((key) => {
+    const keyValues = Object.keys(newFormData).map(key => {
       const newKey = newKeys[key] || key;
       return { [newKey]: newFormData[key] };
     });
@@ -180,7 +180,7 @@ const ObjectField = ({
     );
   };
 
-  const getDefaultValue = (type) => {
+  const getDefaultValue = type => {
     switch (type) {
       case 'string':
         return 'New Value';
@@ -262,7 +262,7 @@ const ObjectField = ({
     description,
     TitleField,
     DescriptionField,
-    properties: orderedProperties.map((curName) => {
+    properties: orderedProperties.map(curName => {
       const addedByAdditionalProperties = refSchema.properties[
         curName
       ].hasOwnProperty(ADDITIONAL_PROPERTY_FLAG);
@@ -333,14 +333,14 @@ const ObjectField = ({
               <Box isRow pt="lg" mr="auto" width="300px">
                 <SelectField
                   selectedKey={modalValue}
-                  onSelectionChange={(key) => setModalValue(key)}
+                  onSelectionChange={key => setModalValue(key)}
                   label="Property Key"
                   width="100%"
                 >
                   {
                     schema.additionalOptions
-                      .filter((prop) => !Object.keys(formData).includes(prop) && !isRequired(prop))
-                      .map((itemName) => (
+                      .filter(prop => !Object.keys(formData).includes(prop) && !isRequired(prop))
+                      .map(itemName => (
                         <Item key={itemName}>{itemName}</Item>
                       ))
                   }

@@ -1,17 +1,16 @@
-import React, { forwardRef, useRef, useContext, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import { mergeProps, useButton } from 'react-aria';
+import { useAccordionItem } from '@react-aria/accordion';
+import { useFocusRing } from '@react-aria/focus';
+import { useHover } from '@react-aria/interactions';
 import MenuDown from 'mdi-react/MenuDownIcon';
 import MenuUp from 'mdi-react/MenuUpIcon';
+import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
-import { useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
-import { useAccordionItem } from '@react-aria/accordion';
-import { useButton } from '@react-aria/button';
 
-import { useFocusRing } from '@react-aria/focus';
-import { Text, Icon, Box } from '../../index';
-import { useStatusClasses } from '../../hooks';
 import { AccordionContext } from '../../context/AccordionContext';
+import { useStatusClasses } from '../../hooks';
+import { Box, Icon, Text } from '../../index';
 
 const AccordionItem = forwardRef((props, ref) => {
   const { className, item } = props;
@@ -61,22 +60,23 @@ const AccordionItem = forwardRef((props, ref) => {
         aria-label={ariaLabel}
         ref={buttonRef}
         sx={{ display: 'flex', px: '0', height: 'unset' }}
-        variant="accordionHeader"
+        variant="variants.accordion.header"
         className={buttonClasses}
         {...mergeProps(hoverProps, accordionButtonProps, raButtonProps, buttonProps, focusProps)}
       >
-        <Text className={buttonClasses} variant="accordion.accordionTitle">
+        <Text className={buttonClasses} variant="accordion.title">
           {item.props.label}
         </Text>
         <Box as="span" ml="5px">
           <Icon icon={isOpen ? MenuUp : MenuDown} />
         </Box>
       </ThemeUIButton>
-      {isOpen &&
-        <Box variant="accordion.accordionBody" {...accordionRegionProps} {...regionProps} className={itemClasses} >
+      {isOpen
+        && (
+        <Box variant="accordion.body" {...accordionRegionProps} {...regionProps} className={itemClasses}>
           {item.rendered}
         </Box>
-      }
+        )}
     </Box>
   );
 });

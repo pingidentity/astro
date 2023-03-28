@@ -1,12 +1,22 @@
-import React, { useState, useRef, useMemo } from 'react';
-import { useOverlayPosition } from '@react-aria/overlays';
+import React, { useMemo, useRef, useState } from 'react';
+import { FocusScope, useOverlayPosition } from 'react-aria';
+import { createFocusManager } from '@react-aria/focus';
+import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect } from '@react-aria/utils';
-import SearchIcon from 'mdi-react/SearchIcon';
 import Email from 'mdi-react/EmailIcon';
 import Pin from 'mdi-react/PinIcon';
-import { useFilter } from '@react-aria/i18n';
-import { FocusScope, createFocusManager } from '@react-aria/focus';
-import { ListView, Item, IconButton, Text, PopoverContainer, Box, Icon, SearchField } from '../index';
+import SearchIcon from 'mdi-react/SearchIcon';
+
+import {
+  Box,
+  Icon,
+  IconButton,
+  Item,
+  ListView,
+  PopoverContainer,
+  SearchField,
+  Text,
+} from '../index';
 
 export default {
   title: 'Recipes/Application Search Dropdown',
@@ -97,13 +107,13 @@ export const Default = () => {
   );
 
 
-  const onKeyDown = (e) => {
+  const onKeyDown = e => {
     if (e.key === 'ArrowDown') {
       focusManager.focusNext();
     }
   };
 
-  const InnerHtml = (props) => {
+  const InnerHtml = props => {
     const [isPinned, setIsPinned] = useState(false);
     const { item } = props;
 
@@ -112,7 +122,7 @@ export const Default = () => {
     };
 
     return (
-      <Box isRow >
+      <Box isRow>
         <Icon icon={item.logo} mr="md" color="text.primary" size={40} alignSelf="center" ml="-10px" />
         <Box alignSelf="center" sx={sx.appBox}>
           <Text variant="itemTitle" sx={sx.appTitle}>{item.application}</Text>
@@ -127,10 +137,10 @@ export const Default = () => {
             <Icon
               icon={Pin}
               sx={{ transform: 'rotate(45deg)',
-              '& > path': {
-                fill:
+                '& > path': {
+                  fill:
                 isPinned ? 'success.bright' : 'neutral.50',
-              } }}
+                } }}
               size="sm"
             />
           </IconButton>
@@ -141,7 +151,7 @@ export const Default = () => {
 
   return (
     <Box isRow>
-      <FocusScope >
+      <FocusScope>
         <SearchField
           ref={buttonRef}
           icon={SearchIcon}

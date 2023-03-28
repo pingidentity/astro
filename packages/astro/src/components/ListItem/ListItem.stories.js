@@ -9,7 +9,7 @@ import {
   ListItem,
   Separator,
   Text,
-} from '../..';
+} from '../../index';
 import { onHoverArgTypes } from '../../utils/devUtils/props/hoverProps';
 
 export default {
@@ -31,7 +31,7 @@ export const Default = args => (
   <>
     <Separator margin={0} />
     <ListItem {...args}>
-      <Box isRow mr="auto" alignSelf="center" >
+      <Box isRow mr="auto" alignSelf="center">
         <Icon
           icon={AccountIcon}
           alignSelf="center"
@@ -55,7 +55,7 @@ export const WithSubtitle = args => (
   <>
     <Separator margin={0} />
     <ListItem {...args}>
-      <Box isRow mr="auto" alignSelf="center" >
+      <Box isRow mr="auto" alignSelf="center">
         <Icon
           icon={AccountIcon}
           alignSelf="center"
@@ -78,7 +78,7 @@ export const WithSubtitle = args => (
   </>
 );
 
-export const WithHoverHandlers = (args) => {
+export const WithHoverHandlers = args => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleHoverChange = () => {
@@ -95,7 +95,7 @@ export const WithHoverHandlers = (args) => {
         onHoverEnd={handleHoverChange}
         onHoverStart={handleHoverChange}
       >
-        <Box isRow mr="auto" alignSelf="center" >
+        <Box isRow mr="auto" alignSelf="center">
           <Icon
             icon={AccountIcon}
             alignSelf="center"

@@ -3,12 +3,11 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import ImageFilterHdrIcon from 'mdi-react/ImageFilterHdrIcon';
-import CameraAltIcon from 'mdi-react/CameraAltIcon';
-import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover } from '@react-aria/interactions';
-import { useFocusRing } from '@react-aria/focus';
+import CameraAltIcon from 'mdi-react/CameraAltIcon';
+import ImageFilterHdrIcon from 'mdi-react/ImageFilterHdrIcon';
+import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Image } from '../../index';
 import Loader from '../Loader';
@@ -94,7 +93,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     <Box tabindex={0} sx={widthHeightSx} {...hoverProps}>
       <Button
         ref={buttonRef}
-        variant="imageUpload"
+        variant="variants.imageUpload.button"
         sx={widthHeightSx}
         data-testid="image-preview-button"
         aria-label="Image preview"

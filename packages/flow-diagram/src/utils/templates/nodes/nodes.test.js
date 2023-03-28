@@ -1,4 +1,3 @@
-
 import * as go from 'gojs';
 import {
     fillIfColor,

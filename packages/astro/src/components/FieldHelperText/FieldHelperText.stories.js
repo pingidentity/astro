@@ -1,5 +1,6 @@
 import React from 'react';
-import FieldHelperText from '.';
+
+import { FieldHelperText } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 export default {

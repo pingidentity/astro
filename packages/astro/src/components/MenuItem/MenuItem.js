@@ -4,15 +4,14 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
-import { useMenuItem } from '@react-aria/menu';
+import { mergeProps, useMenuItem } from 'react-aria';
 import { useFocus, useHover, usePress } from '@react-aria/interactions';
+import PropTypes from 'prop-types';
 
 import { useMenuContext } from '../../context/MenuContext';
 import { usePropWarning, useStatusClasses } from '../../hooks';
-import Box from '../Box';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import Box from '../Box';
 
 /**
  * Menu Item component intended to be used within Menu or PopupMenu.

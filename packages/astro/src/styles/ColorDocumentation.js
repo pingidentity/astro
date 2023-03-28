@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Item } from 'react-stately';
 import PropTypes from 'prop-types';
-import { Item } from '@react-stately/collections';
+
 import Box from '../components/Box';
+import SelectField from '../components/SelectField';
 import Text from '../components/Text';
 import TextField from '../components/TextField';
+
 import { flatColorList } from './colors.js';
-import SelectField from '../components/SelectField';
 
 const exactMatchThreshold = 0.02;
 function Color({ name, hex, distanceFromReference, referenceColor }) {
@@ -20,12 +22,12 @@ function Color({ name, hex, distanceFromReference, referenceColor }) {
       gap={20}
       p="sm"
       sx={{
-      alignItems: 'center',
-      opacity: 1 - distanceFromReference,
-      ':hover': {
-        opacity: 1,
-      },
-    }}
+        alignItems: 'center',
+        opacity: 1 - distanceFromReference,
+        ':hover': {
+          opacity: 1,
+        },
+      }}
     >
       <Box
         sx={{
@@ -51,12 +53,17 @@ function Color({ name, hex, distanceFromReference, referenceColor }) {
         <Text variant="title">{name}</Text>
         {distanceFromReference <= exactMatchThreshold && (
           <Text variant="title" color="active">
-            Exact match(&gt;{100 - Math.trunc(exactMatchThreshold * 100)}%)!
+            Exact match(&gt;
+            {100 - Math.trunc(exactMatchThreshold * 100)}
+            %)!
           </Text>
         )}
         {distanceFromReference > exactMatchThreshold && (
           <Text variant="subtitle">
-            matchLevel: {100 - Math.trunc(distanceFromReference * 100)}%
+            matchLevel:
+            {' '}
+            {100 - Math.trunc(distanceFromReference * 100)}
+            %
           </Text>
         )}
         <Text variant="bodyWeak">
@@ -88,8 +95,7 @@ const Colors = React.memo(({ distanceFromReferenceCb, referenceColor }) => {
             distanceFromReference={distance}
             referenceColor={referenceColor}
           />
-        ))
-      }
+        ))}
     </Box>
   );
 });
@@ -163,27 +169,27 @@ function rgbToHsl(rgb) {
 }
 
 const matchers = {
-  'RGB Average Diff': referenceValue => (entry) => {
+  'RGB Average Diff': referenceValue => entry => {
     const rgb1 = hexToRgb(entry);
     const rgb2 = hexToRgb(referenceValue);
     // eslint-disable-next-line no-mixed-operators
-    return (Math.abs(rgb1[0] - rgb2[0]) +
+    return (Math.abs(rgb1[0] - rgb2[0])
       // eslint-disable-next-line no-mixed-operators
-      Math.abs(rgb1[1] - rgb2[1]) +
+      + Math.abs(rgb1[1] - rgb2[1])
       // eslint-disable-next-line no-mixed-operators
-      Math.abs(rgb1[2] - rgb2[2])) / (3 * 256);
+      + Math.abs(rgb1[2] - rgb2[2])) / (3 * 256);
   },
-  'RGB distance': referenceValue => (entry) => {
+  'RGB distance': referenceValue => entry => {
     const rgb1 = hexToRgb(entry);
     const rgb2 = hexToRgb(referenceValue);
     // eslint-disable-next-line no-mixed-operators
-    return Math.sqrt((rgb1[0] - rgb2[0]) ** 2 +
+    return Math.sqrt((rgb1[0] - rgb2[0]) ** 2
       // eslint-disable-next-line no-mixed-operators
-      (rgb1[1] - rgb2[1]) ** 2 +
+      + (rgb1[1] - rgb2[1]) ** 2
       // eslint-disable-next-line no-mixed-operators
-      (rgb1[2] - rgb2[2]) ** 2) / (3 * 256);
+      + (rgb1[2] - rgb2[2]) ** 2) / (3 * 256);
   },
-  'By Hue Difference': referenceValue => (entry) => {
+  'By Hue Difference': referenceValue => entry => {
     const h1 = rgbToHsl(hexToRgb(entry))[0];
     const h2 = rgbToHsl(hexToRgb(referenceValue))[0];
     const distance = Math.abs(h1 - h2);

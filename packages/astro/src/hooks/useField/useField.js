@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import omit from 'lodash/omit';
-import noop from 'lodash/noop';
-import { useLabel } from '@react-aria/label';
+import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
-import { useFocusRing } from '@react-aria/focus';
-import { mergeProps } from '@react-aria/utils';
+import noop from 'lodash/noop';
+import omit from 'lodash/omit';
 
-import { getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { useStatusClasses } from '../../hooks';
 import { modes as labelModes } from '../../components/Label/constants';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { useStatusClasses } from '..';
 
 
 /**
@@ -63,6 +61,7 @@ const useField = (props = {}) => {
     statusClasses,
     type,
     value,
+    wrapperProps,
     ...others
   } = props;
 
@@ -72,12 +71,12 @@ const useField = (props = {}) => {
 
   useEffect(() => {
     if (
-      !!defaultValue ||
-      defaultValue === 0 ||
-      !!value ||
-      value === 0 ||
-      !!placeholder ||
-      placeholder === 0
+      !!defaultValue
+      || defaultValue === 0
+      || !!value
+      || value === 0
+      || !!placeholder
+      || placeholder === 0
     ) {
       setHasValue(true);
     } else {
@@ -86,7 +85,7 @@ const useField = (props = {}) => {
   }, [defaultValue, value, placeholder]);
 
   // Capture value changes so we can apply the has-value class to the container
-  const fieldOnChange = (e) => {
+  const fieldOnChange = e => {
     const eventValue = e?.target?.value;
     if (!!eventValue || eventValue === 0 || !!placeholder || placeholder === 0) {
       setHasValue(true);
@@ -106,14 +105,40 @@ const useField = (props = {}) => {
     ...controlProps,
   });
   const { isFocusVisible, focusProps } = useFocusRing();
-  const { classNames } = useStatusClasses(className, {
+  const { classNames: wrapperClasses } = useStatusClasses(className, {
+    'field-control__wrapper': true, // generates 'field-control__wrapper' class
     hasNoStatusIndicator,
     isFocused: isFocusVisible,
     isDisabled,
     isReadOnly,
     [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
     ...statusClasses,
+    ...wrapperProps?.statusClasses,
   });
+
+  const { classNames: inputClasses } = useStatusClasses(className, {
+    'field-control__input': true, // generates 'field-control__input' class
+    hasNoStatusIndicator,
+    isFocused: isFocusVisible,
+    isDisabled,
+    isReadOnly,
+    [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
+    ...statusClasses,
+    ...controlProps?.statusClasses,
+  });
+
+  const { classNames: labelClasses } = useStatusClasses(className, {
+    'field-label': true,
+    hasNoStatusIndicator,
+    isFocused: isFocusVisible,
+    isDisabled,
+    isReadOnly,
+    [`is-${status}`]: true, // Will generate 'is-default', 'is-error', etc.
+    ...statusClasses,
+    ...labelProps?.statusClasses,
+  });
+
+
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
 
   // Handle focus within and value state for the container. These are needed for float labels.
@@ -128,6 +153,8 @@ const useField = (props = {}) => {
     isLeftLabel,
     isFloatLabel,
     isFloatLabelActive,
+    ...statusClasses,
+    ...containerProps?.statusClasses,
   });
 
   const fieldContainerProps = {
@@ -140,11 +167,11 @@ const useField = (props = {}) => {
     },
   };
 
-  const fieldControlProps = {
+  const fieldControlInputProps = {
     autoComplete: autocomplete || autoComplete,
     autoCorrect,
     autoFocus: hasAutoFocus,
-    className: classNames,
+    className: inputClasses,
     defaultSelected: isDefaultSelected,
     defaultValue,
     disabled: isDisabled,
@@ -168,7 +195,7 @@ const useField = (props = {}) => {
 
   const fieldLabelProps = {
     children: label,
-    className: classNames,
+    className: labelClasses,
     hintText,
     isRequired,
     mode: labelMode,
@@ -176,11 +203,18 @@ const useField = (props = {}) => {
     ...labelProps,
   };
 
+  const fieldControlWrapperProps = {
+    className: wrapperClasses,
+    ...wrapperProps,
+  };
+
   return {
     fieldContainerProps,
-    fieldControlProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
     fieldLabelProps,
   };
 };
+
 
 export default useField;

@@ -1,10 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import PasswordField from '.';
+
 import axeTest from '../../utils/testUtils/testAxe';
+
+import PasswordField from '.';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.

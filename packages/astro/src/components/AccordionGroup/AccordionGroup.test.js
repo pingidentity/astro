@@ -1,11 +1,13 @@
 import React from 'react';
-import { Item } from '@react-stately/collections';
+import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
+
+import { Box, Button, Menu, OverlayPanel, PopoverMenu, TextField } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import Text from '../Text';
-import AccordionGroup from '../AccordionGroup';
-import { OverlayPanel, TextField, Box, Menu, Button, PopoverMenu } from '../../index';
+
+import AccordionGroup from '.';
 
 const testId = 'test-accordion';
 const defaultProps = {
@@ -28,7 +30,7 @@ const items = [
 const selectedAccordionKeys = ['identityProvider', 'identityProvider1'];
 
 const getComponent = (props = {}) => render((
-  <AccordionGroup {...defaultProps} {...props} >
+  <AccordionGroup {...defaultProps} {...props}>
     <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
@@ -46,8 +48,8 @@ const getComponent = (props = {}) => render((
 ));
 
 const getComponentInOverlayPanel = (props = {}) => render((
-  <OverlayPanel isOpen >
-    <AccordionGroup {...defaultProps} {...props} >
+  <OverlayPanel isOpen>
+    <AccordionGroup {...defaultProps} {...props}>
       <Item key="first" textValue="Duplicate" data-id="first">
         <Text>Render me!</Text>
       </Item>
@@ -62,7 +64,7 @@ const getComponentInOverlayPanel = (props = {}) => render((
 ));
 
 const getComponentWithInput = (props = {}) => render((
-  <AccordionGroup {...defaultProps} {...props} >
+  <AccordionGroup {...defaultProps} {...props}>
     <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item">
       <Text>Render me!</Text>
     </Item>
@@ -75,7 +77,7 @@ const getComponentWithInput = (props = {}) => render((
 const getComponentWithPopover = () => render((
   <Box isRow alignItems="center" justifyContent="space-between" width="50%">
     <PopoverMenu>
-      <Button data-testid="popoverbutton" >Click me</Button>
+      <Button data-testid="popoverbutton">Click me</Button>
       <Menu onAction={() => {}}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>

@@ -11,7 +11,7 @@ import {
 import { Diagram, DiagramWrapper } from '../components/Diagram';
 import useDiagram from '../hooks/useDiagram';
 
-export const Errors = () => {
+export function Errors() {
     const diagramNodes = [
         { isGroup: 'true', 'key': 'group' },
         {
@@ -58,7 +58,7 @@ export const Errors = () => {
             <Diagram {...diagramProps} />
         </DiagramWrapper>
     );
-};
+}
 
 export default {
     title: 'Error State',

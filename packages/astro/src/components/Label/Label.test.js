@@ -1,8 +1,10 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Label from '.';
-import Input from '../Input';
+
 import axeTest from '../../utils/testUtils/testAxe';
+import Input from '../Input';
+
+import Label from '.';
 
 
 const testId = 'test-label';

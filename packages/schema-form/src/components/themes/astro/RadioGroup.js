@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RadioGroupField, RadioField } from '@pingux/astro';
 
-const RadioGroup = (props) => {
+const RadioGroup = props => {
   const { controlProps, options } = props;
 
   return (
@@ -11,7 +11,7 @@ const RadioGroup = (props) => {
       {...props}
     >
       {
-        options.map((option) => (
+        options.map(option => (
           <RadioField
             key={option.value}
             value={option.value}

@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+
 import useOverlayPanelState from './useOverlayPanelState';
 
 test('default useOverlayPanelState', () => {
@@ -10,6 +11,7 @@ test('default useOverlayPanelState', () => {
       close: expect.any(Function),
       toggle: expect.any(Function),
       isOpen: expect.any(Boolean),
+      setOpen: expect.any(Function),
     },
     onClose: expect.any(Function),
   };

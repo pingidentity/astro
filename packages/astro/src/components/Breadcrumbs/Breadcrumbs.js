@@ -1,14 +1,15 @@
 import React, {
   forwardRef,
-  useRef,
-  useImperativeHandle,
   useCallback,
+  useImperativeHandle,
+  useRef,
 } from 'react';
-import { useBreadcrumbs } from '@react-aria/breadcrumbs';
+import { mergeProps, useBreadcrumbs } from 'react-aria';
 import PropTypes from 'prop-types';
-import { mergeProps } from '@react-aria/utils';
+
+import { usePropWarning } from '../../hooks';
 import { Box, Icon } from '../../index';
-import { usePropWarning } from '../../hooks/';
+
 import BreadcrumbItem from './BreadcrumbItem';
 
 const Breadcrumbs = forwardRef((props, ref) => {
@@ -25,10 +26,9 @@ const Breadcrumbs = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => breadcrumbsRef.current);
   const createBreadcrumb = useCallback((child, idx) => {
-    const isCurrentItem =
-      Array.isArray(filteredChildren) && filteredChildren.length > 1
-        ? idx === children.length - 1
-        : true;
+    const isCurrentItem = Array.isArray(filteredChildren) && filteredChildren.length > 1
+      ? idx === children.length - 1
+      : true;
 
     return (
       <Box
@@ -39,14 +39,14 @@ const Breadcrumbs = forwardRef((props, ref) => {
         }}
         as="li"
         key={`li-${child.key}`}
-        variant="text.breadcrumbLi"
+        variant="variants.breadcrumb.containerLi"
       >
         <BreadcrumbItem
           data-id={child['data-id']}
           isCurrent={isCurrentItem}
           onAction={onAction}
           actionKey={child.key}
-          variant="text.breadcrumbLink"
+          variant="variants.breadcrumb.link"
           {...child.props}
         >
           {child.props.children}

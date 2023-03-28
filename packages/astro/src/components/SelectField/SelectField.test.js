@@ -1,12 +1,11 @@
 import React from 'react';
-import { OverlayProvider } from '@react-aria/overlays';
+import { OverlayProvider } from 'react-aria';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
-
-import { render, screen } from '../../utils/testUtils/testWrapper';
-import { SelectField, Item, Section } from '../../index';
+import { Item, Section, SelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import axeTest from '../../utils/testUtils/testAxe';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 
 const items = [
   { name: 'a' },
@@ -59,7 +58,7 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 
 const getComponentWithSections = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
-    <SelectField {...defaultProps} {...props} items={withSection} >
+    <SelectField {...defaultProps} {...props} items={withSection}>
       {section => (
         <Section key={section.key} items={section.kids} title={section.name}>
           {item => <Item key={item.name}>{item.name}</Item>}

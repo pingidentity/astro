@@ -1,12 +1,11 @@
-import React, { forwardRef, useRef, useImperativeHandle, useContext } from 'react';
+import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import { mergeProps, useButton, useFocusRing } from 'react-aria';
+import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
-import { useButton } from '@react-aria/button';
-import { useFocusRing } from '@react-aria/focus';
-import { Pressable, useHover } from '@react-aria/interactions';
-import { mergeProps } from '@react-aria/utils';
-import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
+
 import { BadgeContext } from '../../context/BadgeContext';
+import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 /**
@@ -18,27 +17,32 @@ import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
  * `Button` component.
  */
 const IconButton = forwardRef((props, ref) => {
-  const { children,
+  const {
+    children,
     className,
     title,
+    variant,
     onPress,
     onPressStart,
     onPressEnd,
     onPressChange,
     onPressUp,
-    isDisabled, ...others } = props;
+    isDisabled,
+    ...others
+  } = props;
 
   const buttonRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => buttonRef.current);
 
+  const { isPressed: isPressedFromContext } = usePress(buttonRef);
   const { buttonProps, isPressed } = useButton({ ...props }, buttonRef);
-  const { bg: chipBg } = useContext(BadgeContext);
+  const { bg: badgeBg } = useContext(BadgeContext);
   const { hoverProps, isHovered } = useHover(props);
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
     isHovered,
-    isPressed,
+    isPressed: isPressed || isPressedFromContext,
     isFocused: isFocusVisible,
     isDisabled,
   });
@@ -48,23 +52,27 @@ const IconButton = forwardRef((props, ref) => {
   useAriaLabelWarning('IconButton', ariaLabel);
 
   const button = (
-    <ThemeUIIconButton
-      tabIndex={0}
+    <Pressable
       ref={buttonRef}
-      className={classNames}
-      aria-label={ariaLabel}
-      sx={chipBg && isHovered && { 'path': { fill: chipBg } }}
       {...mergeProps(buttonProps, others, hoverProps, focusProps)}
-      onPointerOver={hoverProps.onPointerEnter}
     >
-      {children}
-    </ThemeUIIconButton>
+      <ThemeUIIconButton
+        tabIndex={0}
+        className={classNames}
+        aria-label={ariaLabel}
+        sx={badgeBg && isHovered && { 'path': { fill: badgeBg } }}
+        variant={`iconButtons.${variant}`}
+        onPointerOver={hoverProps.onPointerEnter}
+      >
+        {children}
+      </ThemeUIIconButton>
+    </Pressable>
   );
 
   if (title) {
     return (
       <TooltipTrigger isDisabled={!title}>
-        <Pressable>{button}</Pressable>
+        {button}
         {title && <Tooltip>{title}</Tooltip>}
       </TooltipTrigger>
     );
@@ -112,7 +120,7 @@ IconButton.propTypes = {
 };
 
 IconButton.defaultProps = {
-  variant: 'iconButton',
+  variant: 'base',
   isDisabled: false,
 };
 

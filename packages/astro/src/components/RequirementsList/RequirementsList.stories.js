@@ -1,5 +1,6 @@
 import React from 'react';
-import RequirementsList from '.';
+
+import { RequirementsList } from '../../index';
 
 export default {
   title: 'Components/RequirementsList',

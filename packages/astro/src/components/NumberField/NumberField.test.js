@@ -1,10 +1,11 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import userEvent from '@testing-library/user-event';
+
 import { NumberField } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import statuses from '../../utils/devUtils/constants/statuses';
+import axeTest from '../../utils/testUtils/testAxe';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 
 const testId = 'test-NumberField';
 const testLabel = 'test-NumberField-label';
@@ -23,8 +24,7 @@ const defaultProps = {
   decrementAriaLabel,
 };
 
-const getComponent = (props = {}) =>
-  render(<NumberField {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(<NumberField {...defaultProps} {...props} />);
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent, {

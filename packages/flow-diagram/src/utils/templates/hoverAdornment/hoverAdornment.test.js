@@ -1,4 +1,3 @@
-
 import {
     selectFromAdornment,
     getAdornmentOnHover,

@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { useSelectField, usePropWarning } from '../../hooks';
-import SelectFieldBase from '../SelectFieldBase';
+import { usePropWarning, useSelectField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import SelectFieldBase from '../SelectFieldBase';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -17,11 +18,14 @@ const SelectField = forwardRef((props, ref) => {
   const { status } = props;
   usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField(props, ref);
-  return (<SelectFieldBase
-    {...props}
-    {...selectFieldProps}
-    aria-invalid={status === 'error' && true}
-  />);
+
+  return (
+    <SelectFieldBase
+      {...props}
+      {...selectFieldProps}
+      aria-invalid={status === 'error' && true}
+    />
+  );
 });
 
 SelectField.propTypes = {
@@ -92,15 +96,12 @@ SelectField.propTypes = {
    * (key: Key) => any
    */
   onSelectionChange: PropTypes.func,
+  ...inputFieldAttributesBasePropTypes,
   /**
    * Props object passed along to `useSelect` from React Aria, `useSelectState` from React Stately,
    * and/or the visible button representation for the select input.
    */
   controlProps: PropTypes.shape({}),
-  /** Props object passed along to the root container as-is. */
-  containerProps: PropTypes.shape({}),
-  /** Props object passed along to the label as-is. */
-  labelProps: PropTypes.shape({}),
   /** Props object that is spread directly into the ScrollBox element. */
   // /** Props object that is spread directly into the ScrollBox element. */
   /** @ignore */

@@ -23,7 +23,6 @@ pipeline {
         dir ("${env.WORKSPACE}/packages/ui-library") {
           container('node-builder') {
             echo "Building SNAPSHOT"
-            sh "yarn install --ignore-engines"
             sh "yarn version --minor --no-git-tag-version"
             script {
               env.VERSION = sh(returnStdout: true, script: $/echo $(node -p -e "require('.\/package.json').version")/$).trim();

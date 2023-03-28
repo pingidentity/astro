@@ -35,27 +35,23 @@ export const dragLeave = (e, obj) => {
     node.findObject('fromNodeOuter').height = 20;
 };
 
-export const sendToForeground = (node) => {
+export const sendToForeground = node => {
     const currentNode = node;
     currentNode.layerName = 'Foreground';
 };
 
-const textBlock =
-    $(go.Part,
-        $(go.TextBlock, { font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN) }));
+const textBlock = $(go.Part,
+    $(go.TextBlock, { font: 'normal normal 600 13px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN) }));
 
-const stepIdBlock =
-    $(go.Part,
-        $(go.TextBlock, { font: 'normal normal normal 12px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN) }));
+const stepIdBlock = $(go.Part,
+    $(go.TextBlock, { font: 'normal normal normal 12px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(180, NaN) }));
 
-const paletteBlock =
-    $(go.Part,
-        $(go.TextBlock,
-            { font: 'normal normal normal 14px Helvetica', margin: new go.Margin(0, 0, 0, 13), alignment: go.Spot.Left, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(190, NaN) }));
+const paletteBlock = $(go.Part,
+    $(go.TextBlock,
+        { font: 'normal normal normal 14px Helvetica', margin: new go.Margin(0, 0, 0, 13), alignment: go.Spot.Left, overflow: go.TextBlock.OverflowClip, maxSize: new go.Size(190, NaN) }));
 
-const outletBlock =
-    $(go.Part,
-        $(go.TextBlock, { font: 'normal normal 600 12px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, minSize: new go.Size(50, NaN), maxSize: new go.Size(250, NaN) }));
+const outletBlock = $(go.Part,
+    $(go.TextBlock, { font: 'normal normal 600 12px Helvetica', alignment: go.Spot.Left, editable: false, overflow: go.TextBlock.OverflowClip, minSize: new go.Size(50, NaN), maxSize: new go.Size(250, NaN) }));
 
 export const getSize = (s, element) => {
     textBlock.elt(0).text = s.text;

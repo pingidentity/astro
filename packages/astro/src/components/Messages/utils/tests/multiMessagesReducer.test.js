@@ -1,5 +1,7 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { act } from 'react-dom/test-utils';
+
+import { render, screen } from '../../../../utils/testUtils/testWrapper';
 import messagesReducer, {
   addMessage,
   clearMessages,
@@ -7,7 +9,6 @@ import messagesReducer, {
   removeMessage,
   showMessage,
 } from '../multiMessagesReducer';
-import { render, screen } from '../../../../utils/testUtils/testWrapper';
 
 const testId = 'test-messages';
 

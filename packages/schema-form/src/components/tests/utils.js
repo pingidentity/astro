@@ -8,14 +8,14 @@ import SchemaForm from '../SchemaForm';
 const emotionCache = createCache({ key: 'password-field-test' });
 emotionCache.compat = true;
 
-export const generateSchema = (custom) => ({
+export const generateSchema = custom => ({
   title: 'Test',
   description: 'This is an example description',
   type: 'object',
   $schema: 'http://json-schema.org/draft-04/schema#',
   ...custom,
 });
-export const renderSchemaForm = (props) => render((
+export const renderSchemaForm = props => render((
   <CacheProvider value={emotionCache}>
     <SchemaForm {...props} />
   </CacheProvider>

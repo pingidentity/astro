@@ -1,5 +1,15 @@
 import React from 'react';
-import { Box, Separator, Table, TableCell, TableBody, TableHead, TableRow, Text } from '../../index';
+
+import {
+  Box,
+  Separator,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Text,
+} from '../../index';
 
 export default {
   title: 'Components/Text',
@@ -54,7 +64,7 @@ const TableHeading = ({ title }) => (
       <TableCell sx={sx.cell} isHeading width="30%">
         Size
       </TableCell>
-      <TableCell sx={sx.cell} isHeading >
+      <TableCell sx={sx.cell} isHeading>
         Example
       </TableCell>
     </TableRow>
@@ -88,22 +98,22 @@ export const Default = () => {
     H1: {
       weight: fontWeights[3],
       fontSize: fontSizes.xx,
-      example: (<Text variant="H1" as="H1">{'<Text variant="H1" as="H1"/>'}</Text>),
+      example: (<Text variant="H1" as="h1">{'<Text variant="H1" as="H1"/>'}</Text>),
     },
     H2: {
       weight: fontWeights[3],
       fontSize: fontSizes.lg,
-      example: (<Text variant="H2" as="H2">{'<Text variant="H2" as="H2"/>'}</Text>),
+      example: (<Text variant="H2" as="h2">{'<Text variant="H2" as="H2"/>'}</Text>),
     },
     H3: {
       weight: fontWeights[3],
       fontSize: fontSizes.md,
-      example: (<Text variant="H3" as="H3">{'<Text variant="H3" as="H3"/>'}</Text>),
+      example: (<Text variant="H3" as="h3">{'<Text variant="H3" as="H3"/>'}</Text>),
     },
     H4: {
       weight: fontWeights[3],
       fontSize: fontSizes.sm,
-      example: (<Text variant="H4" as="H4">{'<Text variant="H4" as="H4"/>'}</Text>),
+      example: (<Text variant="H4" as="h4">{'<Text variant="H4" as="H4"/>'}</Text>),
     },
   };
   const baseAndSubtitleVariants = {
@@ -211,11 +221,10 @@ export const Default = () => {
       <Table mb="xx">
         <TableHeading title="Heading" />
         <TableBody sx={sx.tableBody}>
-          {Object.entries(headingVariants).map(([key, value]) =>
-          (
+          {Object.entries(headingVariants).map(([key, value]) => (
             <TableData variant={key} value={value} key={key} />
           ),
-        )}
+          )}
         </TableBody>
       </Table>
 
@@ -234,14 +243,13 @@ export const Default = () => {
             <TableCell sx={sx.cell} isHeading width="40%">
               Color
             </TableCell>
-            <TableCell sx={sx.cell} isHeading >
+            <TableCell sx={sx.cell} isHeading>
               Example
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody sx={sx.tableBody}>
-          {Object.entries(baseAndSubtitleVariants).map(([key, value]) =>
-          (
+          {Object.entries(baseAndSubtitleVariants).map(([key, value]) => (
             <TableRow sx={{ backgroundColor: 'transparent !important' }} key={key}>
               <TableCell sx={sx.cell} width="60%"><Text>{key}</Text></TableCell>
               <TableCell sx={sx.cell} width="25%"><Text>{value.weight}</Text></TableCell>
@@ -250,51 +258,47 @@ export const Default = () => {
               <TableCell sx={sx.cell}>{value.example}</TableCell>
             </TableRow>
           ),
-        )}
+          )}
         </TableBody>
       </Table>
 
       <Table mb="xx">
         <TableHeading title="Large" />
         <TableBody sx={sx.tableBody}>
-          {Object.entries(largeVariants).map(([key, value]) =>
-          (
+          {Object.entries(largeVariants).map(([key, value]) => (
             <TableData variant={key} value={value} key={key} />
           ),
-        )}
+          )}
         </TableBody>
       </Table>
 
       <Table mb="xx">
         <TableHeading title="Medium" />
         <TableBody sx={sx.tableBody}>
-          {Object.entries(mediumVariants).map(([key, value]) =>
-          (
+          {Object.entries(mediumVariants).map(([key, value]) => (
             <TableData variant={key} value={value} key={key} />
           ),
-        )}
+          )}
         </TableBody>
       </Table>
 
       <Table mb="xx">
         <TableHeading title="Small" />
         <TableBody sx={sx.tableBody}>
-          {Object.entries(smallVariants).map(([key, value]) =>
-          (
+          {Object.entries(smallVariants).map(([key, value]) => (
             <TableData variant={key} value={value} key={key} />
           ),
-        )}
+          )}
         </TableBody>
       </Table>
 
       <Table mb="xx">
         <TableHeading title="XSmall" />
         <TableBody sx={sx.tableBody}>
-          {Object.entries(xsmallVariants).map(([key, value]) =>
-          (
+          {Object.entries(xsmallVariants).map(([key, value]) => (
             <TableData variant={key} value={value} key={key} />
           ),
-        )}
+          )}
         </TableBody>
       </Table>
     </>
@@ -320,8 +324,7 @@ export const TypographyStyleProps = () => {
     fontStyle: 'italic',
   };
 
-  const loremText =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.';
+  const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.';
 
   return (
     <Box p="xx" gap="md">

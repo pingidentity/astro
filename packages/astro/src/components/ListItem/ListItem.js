@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { useHover } from '@react-aria/interactions';
+import PropTypes from 'prop-types';
 
-import Box from '../Box/Box';
 import { useStatusClasses } from '../../hooks';
 import { onHoverPropTypes } from '../../utils/devUtils/props/hoverProps';
+import Box from '../Box/Box';
 
 /**
  * List Item component.
@@ -32,7 +32,7 @@ const ListItem = forwardRef(({
     <Box
       className={classNames}
       ref={ref}
-      variant="boxes.listItem"
+      variant="listItem.container"
       isRow
       {...hoverProps}
       {...others}

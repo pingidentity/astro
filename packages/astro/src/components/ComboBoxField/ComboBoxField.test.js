@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { fireEvent } from '@testing-library/react';
-import { axe } from 'jest-axe';
 import { useFilter } from '@react-aria/i18n';
+import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
-import { render, screen, act, within } from '../../utils/testUtils/testWrapper';
 import { ComboBoxField, Item, OverlayProvider, Section } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { act, render, screen, within } from '../../utils/testUtils/testWrapper';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -53,14 +53,14 @@ const defaultProps = {
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props}>
-      {item => <Item {...item} key={item.id} data-id={item.name} >{item.name}</Item>}
+      {item => <Item {...item} key={item.id} data-id={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 ));
 
 const getComponentWithSections = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
-    <ComboBoxField {...defaultProps} {...props} items={withSection} >
+    <ComboBoxField {...defaultProps} {...props} items={withSection}>
       {section => (
         <Section key={section.key} items={section.kids} title={section.name}>
           {item => <Item key={item.name}>{item.name}</Item>}
@@ -79,18 +79,17 @@ const ComboBoxWithCustomFilter = () => {
     itemsList: items,
   });
 
-  const onSelectionChange = (key) => {
+  const onSelectionChange = key => {
     const selectedItem = items.filter(({ id }) => id === key);
     setFieldState({
       inputValue: selectedItem?.name,
       selectedKey: key,
-      itemsList: items.filter(item =>
-        startsWith(item.name, selectedItem?.name ?? ''),
+      itemsList: items.filter(item => startsWith(item.name, selectedItem?.name ?? ''),
       ),
     });
   };
 
-  const onInputChange = (value) => {
+  const onInputChange = value => {
     setFieldState((oldValues => ({
       inputValue: value,
       selectedKey: value === '' ? null : oldValues.selectedKey,
@@ -131,7 +130,7 @@ const ComboBoxWithAddOption = () => {
   const [inputValue, setInputValue] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
 
-  const onSelectionChange = (key) => {
+  const onSelectionChange = key => {
     if (key && !options.find(({ name }) => name === key)) {
       setOptions([...options, { key, name: key }]);
     }

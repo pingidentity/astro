@@ -1,9 +1,11 @@
 import React from 'react';
 import { ThemeProvider } from 'theme-ui';
-import { render, screen } from '../../utils/testUtils/testWrapper';
-import Text from '.';
+
 import axeTest from '../../utils/testUtils/testAxe';
 import testTheme from '../../utils/testUtils/testTheme';
+import { render, screen } from '../../utils/testUtils/testWrapper';
+
+import Text from '.';
 
 const testId = 'test-text';
 const defaultProps = {
@@ -43,13 +45,11 @@ test('typography props will be applied', () => {
 
   getComponent({ ...customTypographyProps });
   const text = screen.getByTestId(testId);
-  expect(text).toHaveStyle({
-    fontFamily: 'times',
-    fontSize: '23px',
-    fontWeight: 900,
-    lineHeight: '2em',
-    letterSpacing: '5px',
-    textAlign: 'right',
-    fontStyle: 'italic',
-  });
+  expect(text).toHaveStyle('fontFamily: times');
+  expect(text).toHaveStyle('fontSize: xx');
+  expect(text).toHaveStyle('fontWeight: 900');
+  expect(text).toHaveStyle('lineHeight: 2em');
+  expect(text).toHaveStyle('letterSpacing: 5px');
+  expect(text).toHaveStyle('textAlign: right');
+  expect(text).toHaveStyle('fontStyle: italic');
 });

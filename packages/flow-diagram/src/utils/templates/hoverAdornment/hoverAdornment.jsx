@@ -18,31 +18,22 @@ export const getAdornmentOnHover = adornment => (e, obj) => {
 /* istanbul ignore next */
 // Would have to mock a lot of gojs to test. May do this later.
 export const getNodeHoverAdornment = () => {
-    return $(go.Adornment, 'Spot',
+    return $(go.Adornment, 'Spot', {
+        height: 38,
+        background: 'transparent',
+        click: selectFromAdornment,
+    }, $(go.Placeholder,
         {
-            height: 38,
+            margin: new go.Margin(10, 10, 10, 10),
             background: 'transparent',
-            click: selectFromAdornment,
+            isActionable: true,
+        }), $(go.Panel, 'Auto', { alignment: go.Spot.Top }, { name: 'BODY' }, $(go.Shape, 'RoundedRectangle', { fill: COLORS.ERROR_LIGHT, stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(0, 0, 10, 0) }), $(go.Panel, 'Horizontal', { padding: 10, alignment: go.Spot.Top }, $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 10, 0) }, $(go.TextBlock,
+        {
+            stroke: COLORS.ERROR, font: 'bold 11px sans-serif', alignment: go.Spot.Left, editable: false,
         },
-        $(go.Placeholder,
-            {
-                margin: new go.Margin(10, 10, 10, 10),
-                background: 'transparent',
-                isActionable: true,
-            }),
-        $(go.Panel, 'Auto', { alignment: go.Spot.Top },
-            { name: 'BODY' },
-            $(go.Shape, 'RoundedRectangle',
-                { fill: COLORS.ERROR_LIGHT, stroke: 'transparent', strokeWidth: 0, margin: new go.Margin(0, 0, 10, 0) }),
-            $(go.Panel, 'Horizontal', { padding: 10, alignment: go.Spot.Top },
-                $(go.Panel, 'Vertical', { padding: new go.Margin(0, 0, 10, 0) },
-                    $(go.TextBlock,
-                        {
-                            stroke: COLORS.ERROR, font: 'bold 11px sans-serif', alignment: go.Spot.Left, editable: false,
-                        },
-                        new go.Binding('text', 'errorMessage').makeTwoWay()),
-                ),
-            ),
-        ),
+        new go.Binding('text', 'errorMessage').makeTwoWay()),
+    ),
+    ),
+    ),
     );
 };

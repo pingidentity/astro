@@ -2,8 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import * as go from 'gojs';
 import usePalette, { setDragState } from './usePalette';
 
-
-jest.mock('gojs', (replacements) => {
+jest.mock('gojs', replacements => {
     const paletteObjectProps = {
         ...replacements,
         model: {

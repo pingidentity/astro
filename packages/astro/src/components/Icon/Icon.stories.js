@@ -1,10 +1,12 @@
 import React from 'react';
-import AccountIcon from 'mdi-react/AccountIcon';
 import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
+import AccountIcon from 'mdi-react/AccountIcon';
 import LockIcon from 'mdi-react/LockIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 import TagIcon from 'mdi-react/TagIcon';
 import { v4 as uuid } from 'uuid';
+
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Icon,
@@ -17,7 +19,7 @@ import {
 } from '../../index';
 import { flatColorList } from '../../styles/colors';
 import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
-import DocsLayout from '../../../.storybook/storybookDocsLayout';
+
 import IconReadme from './Icon.mdx';
 
 export default {
@@ -49,9 +51,9 @@ export default {
         type: 'select',
         options: Object.keys(tShirtSizes),
       },
-      description: 'The size of the icon container. If given a number value, it will be converted to pixels. ' +
-      'Tshirt sizing is recommended and can be passed to the size prop as "xs", "sm" , "md" ' +
-      'rendering 15, 20, and 25 pixel svg containers.',
+      description: 'The size of the icon container. If given a number value, it will be converted to pixels. '
+      + 'Tshirt sizing is recommended and can be passed to the size prop as "xs", "sm" , "md" '
+      + 'rendering 15, 20, and 25 pixel svg containers.',
     },
     color: {
       control: {
@@ -69,7 +71,7 @@ export const Default = args => (
 
 export const SVGIcons = () => {
   // SVGR can used to convert .svg files to components instead of doing this manually
-  const SVGComponent = (props) => {
+  const SVGComponent = props => {
     const id = uuid();
     const { title = 'User Icon' } = props;
     return (
@@ -95,11 +97,11 @@ export const Sizes = () => (
           <TableCell isHeading key={head}>
             {head}
           </TableCell>
-          ))}
+        ))}
       </TableRow>
     </TableHead>
     <TableBody sx={{ borderBottom: 'unset' }}>
-      <TableRow height="45px" bg="transparent !important" >
+      <TableRow height="45px" bg="transparent !important">
         <TableCell>
           <Text>XS | 15px</Text>
         </TableCell>

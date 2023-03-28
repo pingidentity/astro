@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Desktop } from '@pingux/icons';
 import { svgComponentToBase64 } from '../templateUtils';

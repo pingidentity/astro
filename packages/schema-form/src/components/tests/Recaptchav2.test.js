@@ -20,10 +20,10 @@ const uiSchema = {
   },
 };
 const testString = 'this is a test';
-const transformErrors = (errors) => {
+const transformErrors = errors => {
   const newErrors = errors;
 
-  return newErrors.map((err) => {
+  return newErrors.map(err => {
     const { name } = err;
     if (name === 'required') {
       return { ...err, message: testString };

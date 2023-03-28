@@ -79,14 +79,14 @@ pipeline {
           echo "The current branch is: ${env.BRANCH_NAME} or ${env.CHANGE_TARGET}"
           switch(env.BRANCH_NAME) {
             case 'develop':
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version'
-              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
               env.LERNA_COMMIT_MESSAGE = 'chore(release): publish alpha build'
+              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'  
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version'
               break
             case ~/^release-.*/:
-              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version --preid rc'
-              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
               env.LERNA_COMMIT_MESSAGE = 'chore(release): publish rc build'
+              env.LERNA_PUBLISH_FLAGS = 'from-package --yes --pre-dist-tag next --registry https://art01.corp.pingidentity.com/artifactory/api/npm/npm-virtual/'
+              env.LERNA_VERSION_FLAGS = '--yes --conventional-commits --conventional-prerelease --no-changelog --no-git-tag-version --preid rc'
               break
             default:
               // don't set release vars, causing build to fail
@@ -96,12 +96,12 @@ pipeline {
       }
     }
 
-    stage('install and link') {
+    stage('link') {
       steps {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
-            echo "Installing and linking packages"
-            sh "yarn --frozen-lockfile --ignore-engines"
+            echo "Linking packages"
+            sh "yarn install --immutable --immutable-cache"
             sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
             sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
           }
@@ -114,9 +114,9 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            yarn --frozen-lockfile
             git config --global --add safe.directory '*'
-            git log -1 --pretty=%B | npx commitlint
+            git log -1 --pretty=%B | yarn commitlint
+            yarn install --immutable --immutable-cache
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
             lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
@@ -139,7 +139,6 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            yarn --frozen-lockfile
             lerna run demo --scope ui-library
             lerna run backstop-ci
           """

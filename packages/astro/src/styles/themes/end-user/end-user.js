@@ -88,7 +88,7 @@ const buttonBase = {
     ...buttonFocus,
   },
 };
-const card = {
+const cards = {
   bg: 'cardBg',
   boxShadow: 'overlay',
   boxSizing: 'border-box',
@@ -140,15 +140,16 @@ const wordWrap = {
   wordBreak: 'break-word',
 };
 const fieldHelperText = {
-  ...base,
-  ...wordWrap,
-  fontSize: 'sm',
-  pb: 'sm',
-  '&.is-default': {
-    color: 'text.secondary',
-  },
-  '&.is-error': {
-    color: 'critical',
+  title: {
+    ...base,
+    ...wordWrap,
+    fontSize: 'sm',
+    '&.is-default': {
+      color: 'text.secondary',
+    },
+    '&.is-error': {
+      color: 'critical.dark',
+    },
   },
 };
 const text = {
@@ -179,7 +180,6 @@ const text = {
     fontWeight: 500,
     fontFamily: 'proxima-nova, sans-serif',
   },
-  fieldHelperText,
 };
 const activeFloatLabel = {
   fontWeight: 0,
@@ -244,7 +244,8 @@ export default {
     input,
     label,
   },
+  cards,
   variants: {
-    card,
+    fieldHelperText,
   },
 };

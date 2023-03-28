@@ -1,7 +1,7 @@
 import React from 'react';
 import SaveableTextInput from './SaveableTextInput';
 import userEvent from '@testing-library/user-event';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 
 const testId = 'test-saveabletextinput';
 const defaultProps = {
@@ -23,7 +23,8 @@ describe('SaveableTextInput', () => {
         const buttons = screen.getAllByRole('button');
         const saveButton = buttons[0];
 
-        fireEvent.click(saveButton);
+        act(() => { userEvent.click(saveButton); });
+
         expect(testFn).toHaveBeenCalled();
     });
 
@@ -36,7 +37,7 @@ describe('SaveableTextInput', () => {
         const buttons = screen.getAllByRole('button');
         const cancelButton = buttons[1];
 
-        fireEvent.click(cancelButton);
+        act(() => { userEvent.click(cancelButton); });
         expect(testFn).toHaveBeenCalled();
     });
 
@@ -47,10 +48,10 @@ describe('SaveableTextInput', () => {
         const buttons = screen.getAllByRole('button');
         const cancelButton = buttons[1];
 
-        userEvent.type(cancelButton, '{Enter}');
+        act(() => { userEvent.type(cancelButton, '{Enter}'); });
         expect(testFn).toHaveBeenCalled();
 
-        userEvent.type(cancelButton, '{Space}');
+        act(() => { userEvent.type(cancelButton, '{Space}'); });
         expect(testFn).toHaveBeenCalled();
     });
 
@@ -63,10 +64,10 @@ describe('SaveableTextInput', () => {
         const buttons = screen.getAllByRole('button');
         const saveButton = buttons[0];
 
-        userEvent.type(saveButton, '{Enter}');
+        act(() => { userEvent.type(saveButton, '{Enter}'); });
         expect(testFn).toHaveBeenCalled();
 
-        userEvent.type(saveButton, '{Space}');
+        act(() => { userEvent.type(saveButton, '{Space}'); });
         expect(testFn).toHaveBeenCalled();
     })
 });
