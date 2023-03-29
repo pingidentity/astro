@@ -197,7 +197,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}"
+                sh "lerna publish ${env.LERNA_PUBLISH_FLAGS}"
               }
             }
           }
@@ -210,7 +210,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Run Lerna CDN command"
-            sh "yarn lerna run cdn"
+            sh "lerna run cdn"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
