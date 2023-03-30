@@ -212,7 +212,7 @@ export const CreateProfile = () => (
 
 export const UserSelect = () => (
     <Card>
-        <Logo src="./ping-logo.svg" />
+        <Logo src={logo} />
         <TextBlock> Please select the account to login with:</TextBlock>
         <FlexRow spacing={spacingOptions.MD} alignment={flexRowAlignments.CENTER} flexDirection={flexDirectionOptions.COLUMN}>
             <TileSelector.TileButton type="side-icon">

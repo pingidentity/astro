@@ -64,7 +64,7 @@ pipeline {
                   requests:
                     memory: "1000Mi"
                   limits:
-                    memory: "6250Mi"
+                    memory: "8000Mi"
       '''
       )
     )
@@ -101,7 +101,6 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Linking packages"
-            sh "yarn install --immutable --immutable-cache"
             sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
             sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
           }
@@ -116,7 +115,6 @@ pipeline {
           sh """
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
-            yarn install --immutable --immutable-cache
             lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
             lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
             lerna run lint
@@ -199,7 +197,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}"
+                sh "lerna publish ${env.LERNA_PUBLISH_FLAGS}"
               }
             }
           }
@@ -212,7 +210,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Run Lerna CDN command"
-            sh "yarn lerna run cdn"
+            sh "lerna run cdn"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
