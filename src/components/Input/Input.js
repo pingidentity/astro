@@ -9,7 +9,9 @@ import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
  * Accepts relevant styling props from [styled-system](https://styled-system.com/table).
  * Built on top of [Input from Theme-UI](https://theme-ui.com/components/input/).
  *
- * **Note**: It's recommended to use a more specific field component when possible.
+ * **Note**: This component does not supply all of the accessibility assistance on its own.
+ * We instead encourage developers to utilize our Field components wherever possible.
+ * If this component is used, accessibility is left to the developer.
  */
 
 const Input = forwardRef((props, ref) => {
