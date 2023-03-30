@@ -64,7 +64,7 @@ pipeline {
                   requests:
                     memory: "1000Mi"
                   limits:
-                    memory: "6250Mi"
+                    memory: "8000Mi"
       '''
       )
     )
