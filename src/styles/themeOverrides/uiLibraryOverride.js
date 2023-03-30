@@ -81,6 +81,12 @@ const buttons = {
       },
     },
   },
+  filter: {
+    '&:not(.disabled):hover': {
+      borderColor: 'accent.40',
+      color: 'accent.40',
+    },
+  },
 };
 
 const forms = {
