@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.24](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.23...@pingux/end-user@2.4.24) (2023-03-30)
+
+
+### Bug Fixes
+
+* [UIP-6210] End User: fix logo src for UserSelect story ([779e46f](https://gitlab.corp.pingidentity.com/ux/end-user/commit/779e46fa7a6ccb82fe3e34319df102f6ecdc89a4))
+
+
+
+
+
 ## [2.4.23](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.22...@pingux/end-user@2.4.23) (2023-03-28)
 
 **Note:** Version bump only for package @pingux/end-user
