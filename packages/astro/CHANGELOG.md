@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.0...@pingux/astro@2.0.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* [UIP-6201] FilterButton:  add ui library styles override ([1b70a4b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1b70a4bab264d93585daf9a19c6b141209b1c911))
+* [UIP-6215] Update disclaimer note for basic input ([cfb70b2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cfb70b200a5a9a751d85fc4031d32f0664456e70))
+
+
+
+
+
 # [2.0.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@1.44.1...@pingux/astro@2.0.0) (2023-03-28)
 
 
