@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.25](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.24...@pingux/end-user@2.4.25) (2023-04-04)
+
+
+### Bug Fixes
+
+* [UIP-6209] Default ping logo image is incorrect in end-user ([ac58c94](https://gitlab.corp.pingidentity.com/ux/end-user/commit/ac58c949b0fbce5e38bbbe1086f039a8fae84598))
+
+
+
+
+
 ## [2.4.24](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.23...@pingux/end-user@2.4.24) (2023-03-30)
 
 
