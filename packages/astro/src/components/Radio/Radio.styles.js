@@ -20,6 +20,17 @@ const outerContainer = {
   '.is-horizontal &': {
     mr: '15px',
   },
+  // unset opacity to not affect the child element (label) opacity
+  '&.is-disabled': {
+    opacity: 'unset',
+  },
+};
+
+const controlWrapper = {
+  // unset opacity to not affect the child element (radio) opacity
+  '&.is-disabled': {
+    opacity: 'unset',
+  },
 };
 
 // Used to give a border to radio elements
@@ -43,6 +54,7 @@ const checkedContent = {
 export default {
   base,
   outerContainer,
+  controlWrapper,
   container,
   checkedContent,
 };
