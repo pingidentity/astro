@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.1...@pingux/astro@2.0.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* [UIP-6211] fix dropdown overlaps text field by 1px ([1ec1c53](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1ec1c53295b3719a0e548ee5aa5a81014fe78b7c))
+* [UIP-6234] CollapsiblePanelBadge: fix variant ([a490bda](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a490bda0dc17d6d7879c71af9849030425cdb3a7))
+* [UIP-6236] RadioField: fix opacity ([4447ab4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4447ab4f9fa75d1bb20468ab54ddbaaa49473f60)), closes [#6236](https://gitlab.corp.pingidentity.com/ux/pingux/issues/6236)
+
+
+
+
+
 ## [2.0.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.0...@pingux/astro@2.0.1) (2023-03-30)
 
 
