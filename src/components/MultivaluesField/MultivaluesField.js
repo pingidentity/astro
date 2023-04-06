@@ -101,6 +101,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
     isOpen,
     onClose: close,
+    offset: 1,
     overlayRef: popoverRef,
     placement: `${direction} end`,
     scrollRef: listBoxRef,
