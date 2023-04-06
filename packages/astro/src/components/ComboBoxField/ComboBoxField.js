@@ -137,6 +137,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   } = listBoxProps;
 
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
+    offset: 1,
     targetRef: inputWrapperRef,
     overlayRef: popoverRef,
     scrollRef: listBoxRef,
