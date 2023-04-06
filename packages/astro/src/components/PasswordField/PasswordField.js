@@ -83,6 +83,7 @@ const PasswordField = forwardRef((props, ref) => {
 
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
     isOpen: true,
+    offset: 1,
     overlayRef: popoverRef,
     placement: 'bottom end',
     targetRef: inputRef,
