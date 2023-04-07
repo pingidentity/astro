@@ -35,41 +35,34 @@ export default {
   },
 };
 
+const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
 const messages = [
   {
     key: 'message1',
-    text: 'Here\'s a very neutral thing',
+    text: loremText,
   },
   {
     key: 'message2',
-    text: 'Form saved successfully',
+    text: loremText,
     status: 'success',
   },
   {
     key: 'message3',
-    text: 'Something unexpected happened.',
+    text: loremText,
     status: 'warning',
   },
   {
     key: 'message4',
-    text: 'Not saved! We could not validate one of the fields. Please see inline message below.',
+    text: loremText,
     status: 'error',
   },
 ];
 
-const messageText = [
-  'WINDMILLS DO NOT WORK THAT WAY! GOOD NIGHT! Oh yeah, good luck with that.',
-  "Oh no! The professor will hit me! But if Zoidberg 'fixes' it… then perhaps gifts! You've killed me! Oh, you've killed me!",
-  'Does anybody else feel jealous and aroused and worried?',
-  "Stop it, stop it. It's fine. I will 'destroy' you! Um, is this the boring, peaceful kind of taking to the streets?",
-  "She also liked to shut up! Fry! Stay back! He's too powerful!",
-  "This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel.",
-];
-
 export const Default = args => (
   <Messages {...args}>
-    <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
-    <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
+    <Item key="message1" data-id="message1">{loremText}</Item>
+    <Item key="message2" data-id="message2" status="success">{loremText}</Item>
   </Messages>
 );
 
@@ -113,7 +106,7 @@ export const ControlledWithButton = args => {
   const addMessage = () => {
     setItems([...items, {
       key: `message${items.length + 1}`,
-      text: messageText[Math.floor(Math.random() * 6)],
+      text: loremText,
       status: Object.values(statuses)[Math.floor(Math.random() * 4)],
     }]);
   };
@@ -142,9 +135,7 @@ export const ControlledWithButton = args => {
 
 export const WithCustomColorsAndIcons = args => (
   <Messages {...args}>
-    <Item bg="accent.99" color="active" icon={AccountIcon}>We have to take a look with this camera.</Item>
-    <Item bg="accent.99" color="active" icon={AccountIcon}>Who said that? SURE you can die! You want to die?! Oh yeah, good luck with that. Stop! Do not shoot fire stick in space canoe! Cause explosive decompression!</Item>
-    <Item bg="accent.99" color="active" icon={AccountIcon}>Oh God, what have I done?</Item>
+    <Item bg="accent.99" color="active" icon={AccountIcon}>{loremText}</Item>
   </Messages>
 );
 
@@ -170,8 +161,7 @@ export const UseReducer = () => {
       messagesReducer.actions.showErrorMessage,
       messagesReducer.actions.showWarningMessage,
     ][Math.floor(Math.random() * 3)];
-    const message = messageText[Math.floor(Math.random() * 6)];
-    actionFn(message)(dispatch);
+    actionFn(loremText)(dispatch);
   };
 
   const removeMessage = key => {
@@ -214,8 +204,7 @@ export const UseReducerWithMultipleContainers = () => {
       multiMessagesReducer.actions.showCriticalMessage,
       multiMessagesReducer.actions.showWarningMessage,
     ][Math.floor(Math.random() * 3)];
-    const message = messageText[Math.floor(Math.random() * 6)];
-    actionFn(container, message)(dispatch);
+    actionFn(container, loremText)(dispatch);
   };
 
   const removeMessage = (key, container) => {
@@ -251,24 +240,24 @@ export const WithTextStyling = args => {
   const items = [
     {
       key: 'message1',
-      node: <strong>Here is a very neutral thing</strong>,
+      node: <strong>{loremText}</strong>,
     },
     {
       key: 'message2',
-      text: 'Form saved successfully',
+      text: loremText,
       status: 'success',
     },
     {
       key: 'message3',
-      text: 'Something unexpected happened.',
+      text: loremText,
       status: 'warning',
     },
     {
       key: 'message4',
       node: (
         <>
-          <b>Not saved! </b>
-          We could not validate one of the fields. Please see inline message below.
+          <b>Lorem Ipsum! </b>
+          {loremText}
         </>
       ),
       status: 'error',
