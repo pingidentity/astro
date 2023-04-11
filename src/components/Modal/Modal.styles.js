@@ -29,6 +29,26 @@ const content = {
   maxWidth: '400px',
   boxShadow: 'standard',
   borderRadius: 3,
+  '&.is-extra-small': {
+    maxWidth: 'none',
+    width: 'container.xs',
+  },
+  '&.is-small': {
+    maxWidth: 'none',
+    width: 'container.sm',
+  },
+  '&.is-medium': {
+    maxWidth: 'none',
+    width: 'container.md',
+  },
+  '&.is-large': {
+    maxWidth: 'none',
+    width: 'container.lg',
+  },
+  '&.is-full': {
+    maxWidth: 'none',
+    width: 'container.full',
+  },
 };
 
 const title = {
@@ -41,6 +61,8 @@ export const modalCloseButton = {
   position: 'absolute',
   top: 14,
   right: 10,
+  width: '22px',
+  height: '22px',
 };
 
 export default {

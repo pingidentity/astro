@@ -10,6 +10,8 @@ import {
 import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
+import { useStatusClasses } from '../../hooks';
+import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 import Box from '../Box';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
@@ -33,6 +35,7 @@ const Modal = forwardRef((props, ref) => {
     isKeyboardDismissDisabled,
     isOpen,
     role,
+    size,
     title,
     onClose,
     shouldCloseOnInteractOutside,
@@ -70,12 +73,15 @@ const Modal = forwardRef((props, ref) => {
   // Get props for the dialog and its title
   const { dialogProps, titleProps } = useDialog(contentProps, modalRef);
 
+  const { classNames } = useStatusClasses(className, { [`is-${size || 'custom'}`]: size });
+
   return (
     <OverlayContainer>
       <Box variant="modal.container" {...others} {...containerProps}>
         <FocusScope contain restoreFocus autoFocus={hasAutoFocus}>
           <Box
             variant="modal.content"
+            className={classNames}
             {...propsContentProps}
             {...overlayProps}
             {...dialogProps}
@@ -91,7 +97,6 @@ const Modal = forwardRef((props, ref) => {
                 <IconButton
                   aria-label="Close modal window"
                   data-id="icon-button__close-modal-window"
-                  size={22}
                   variant="modalCloseButton"
                   onPress={onClose}
                 >
@@ -138,6 +143,8 @@ Modal.propTypes = {
   isOpen: PropTypes.bool,
   /** The accessibility role for the dialog. */
   role: PropTypes.oneOf(['dialog', 'alertdialog']),
+  /** Sets the size of the modal container. */
+  size: PropTypes.oneOf(modalSizes),
   /** The title for the modal. */
   title: PropTypes.node,
   /**
