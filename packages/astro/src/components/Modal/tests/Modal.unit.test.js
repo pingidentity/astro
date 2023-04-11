@@ -145,3 +145,29 @@ test('should auto focus the first tabbable element if "hasAutoFocus" is true', (
   const button = screen.queryByRole('button');
   expect(button).toHaveFocus();
 });
+
+test('should render sizes correctly with passed size prop', () => {
+  const { unmount: xsUnmount } = getComponent({ size: 'extra-small' });
+  const xsModal = screen.getByRole('dialog');
+  expect(xsModal).toHaveClass('is-extra-small');
+  xsUnmount();
+
+  const { unmount: sUnmount } = getComponent({ size: 'small' });
+  const sModal = screen.getByRole('dialog');
+  expect(sModal).toHaveClass('is-small');
+  sUnmount();
+
+  const { unmount: mUnmount } = getComponent({ size: 'medium' });
+  const mModal = screen.getByRole('dialog');
+  expect(mModal).toHaveClass('is-medium');
+  mUnmount();
+
+  const { unmount: lUnmount } = getComponent({ size: 'large' });
+  const lModal = screen.getByRole('dialog');
+  expect(lModal).toHaveClass('is-large');
+  lUnmount();
+
+  getComponent({ size: 'full' });
+  const fModal = screen.getByRole('dialog');
+  expect(fModal).toHaveClass('is-full');
+});
