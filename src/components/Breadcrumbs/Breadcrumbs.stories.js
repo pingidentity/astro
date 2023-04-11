@@ -46,13 +46,30 @@ export const Default = args => {
 
   return (
     <Breadcrumbs onAction={onAction} {...args}>
-      <Item key="home" aria-label="home" variant="buttons.link" data-id="home" href="https://www.pingidentity.com">
+      <Item
+        aria-label="home"
+        data-id="home"
+        href="https://www.pingidentity.com"
+        key="home"
+        variant="buttons.link"
+      >
         Home
       </Item>
-      <Item key="trendy" aria-label="trendy" variant="buttons.link" data-id="trendy" href="https://www.pingidentity.com">
+      <Item
+        aria-label="trendy"
+        data-id="trendy"
+        href="https://www.pingidentity.com"
+        key="trendy"
+        variant="buttons.link"
+      >
         Trendy
       </Item>
-      <Item key="march 2020 assets" aria-label="march-2020-assets" variant="buttons.link" data-id="march" href="https://www.pingidentity.com">
+      <Item
+        aria-label="march-2020-assets"
+        data-id="march"
+        key="march 2020 assets"
+        variant="buttons.link"
+      >
         March 2020 Assets
       </Item>
     </Breadcrumbs>

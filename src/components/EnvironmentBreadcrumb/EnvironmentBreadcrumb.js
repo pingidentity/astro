@@ -231,6 +231,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
                 // this one is needed to cancel default scrollBox items behavior
                 sx: {
                   overflow: 'visible',
+                  padding: '3px',
                 },
               }}
               onChange={setSearchValue}

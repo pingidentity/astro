@@ -8,6 +8,7 @@ import {
   OverlayProvider,
   Text,
 } from '../../index';
+import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 
 export default {
   title: 'Components/Modal',
@@ -23,6 +24,12 @@ export default {
     id: {
       control: {
         type: 'text',
+      },
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: modalSizes,
       },
     },
     hasCloseButton: {
