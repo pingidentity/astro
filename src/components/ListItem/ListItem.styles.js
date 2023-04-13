@@ -1,3 +1,10 @@
+const hover = {
+  bg: 'accent.99',
+  '&.is-hovered': {
+    bg: 'white',
+  },
+};
+
 const container = {
   display: 'flex',
   flex: '1 1 0px',
@@ -8,15 +15,13 @@ const container = {
   pt: 16,
   pb: 16,
   justifyContent: 'center',
-  bg: 'accent.99',
   '&.is-selected': {
     bg: 'white',
   },
-  '&.is-hovered': {
-    bg: 'white',
-  },
+  ...hover,
 };
 
 export default {
   container,
+  hover,
 };
