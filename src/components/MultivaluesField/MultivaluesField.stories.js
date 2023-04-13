@@ -193,13 +193,9 @@ export const Default = args => {
       // note: spacing for demo purpose only so that the select list renders in the correct place
       style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
-      <MultivaluesField
-        items={items}
-        {...args}
-        onOpenChange={onOpenChange}
-      >
+      <MultivaluesField items={items} {...args} onOpenChange={onOpenChange}>
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -228,7 +224,7 @@ export const Uncontrolled = args => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -260,7 +256,7 @@ export const Controlled = args => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -289,7 +285,7 @@ export const Error = args => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -306,17 +302,12 @@ export const ReadOnlyField = args => {
   };
   return (
     <OverlayProvider
-    // note: spacing for demo purpose only so that the select list renders in the correct place
+      // note: spacing for demo purpose only so that the select list renders in the correct place
       style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
-      <MultivaluesField
-        items={items}
-        {...args}
-        isReadOnly
-        onOpenChange={onOpenChange}
-      >
+      <MultivaluesField items={items} {...args} isReadOnly onOpenChange={onOpenChange}>
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -345,7 +336,7 @@ export const ReadOnlyValues = args => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -374,7 +365,7 @@ export const DisabledKeys = args => {
         onOpenChange={onOpenChange}
       >
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -396,14 +387,9 @@ export const CustomValues = args => {
       // note: spacing for demo purpose only so that the select list renders in the correct place
       style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
-      <MultivaluesField
-        items={items}
-        mode="non-restrictive"
-        {...args}
-        onOpenChange={onOpenChange}
-      >
+      <MultivaluesField items={items} mode="non-restrictive" {...args} onOpenChange={onOpenChange}>
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -431,13 +417,9 @@ export const IconSlotsInBadge = args => {
       // note: spacing for demo purpose only so that the select list renders in the correct place
       style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
-      <MultivaluesField
-        items={itemsWithSlots}
-        {...args}
-        onOpenChange={onOpenChange}
-      >
+      <MultivaluesField items={itemsWithSlots} {...args} onOpenChange={onOpenChange}>
         {item => (
-          <Item key={item.key} data-id={item.name}>
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}
           </Item>
         )}
@@ -458,16 +440,12 @@ export const CustomSize = args => {
     <Box sx={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
       <Box width={300}>
         <OverlayProvider
-        // note: spacing for demo purpose only so that the select list renders in the correct place
+          // note: spacing for demo purpose only so that the select list renders in the right place
           style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
         >
-          <MultivaluesField
-            items={items}
-            {...args}
-            onOpenChange={onOpenChange}
-          >
+          <MultivaluesField items={items} {...args} onOpenChange={onOpenChange}>
             {item => (
-              <Item key={item.key} data-id={item.name}>
+              <Item key={item.key} data-id={item.name} aria-label={item.name}>
                 {item.name}
               </Item>
             )}
