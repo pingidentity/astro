@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
 
 import {
@@ -123,6 +123,8 @@ const sx = {
     maxWidth: '195px',
   },
   linkRowIconButton: {
+    height: '23.5px',
+    width: '23.5px',
     '&.is-pressed': {
       backgroundColor: 'transparent',
     },
@@ -148,10 +150,9 @@ const sx = {
   linkRowSeparator: {
     flexGrow: 1,
     backgroundColor: 'accent.30',
-    maxHeight: '100%',
     width: '1px !important',
     zIndex: 2,
-    m: '-5px 5px -5px 11.5px !important',
+    m: '-4px 5px -5px 11.5px !important',
   },
   linkRowText: {
     fontSize: 'md',
@@ -171,14 +172,12 @@ const sx = {
   },
 };
 
-const Stage = props => {
-  const {
-    title,
-    icon,
-    links,
-    isLastStage,
-  } = props;
-
+const Stage = ({
+  title,
+  icon,
+  links,
+  isLastStage,
+}) => {
   const [selectedLinks, updateSelectedLinks] = useState([]);
 
   const onSelectionChange = thisIndex => {
@@ -252,16 +251,29 @@ const Stage = props => {
   );
 };
 
-const LinkRow = props => {
-  const {
-    title,
-    index,
-    onSelectionChange,
-    isLinkSelected,
-    isLastLink,
-  } = props;
-
+const LinkRow = ({
+  index,
+  isLastLink,
+  isLinkSelected,
+  onSelectionChange,
+  title,
+}) => {
   const [isSelected, handleSelectionChange] = useState(false);
+  const [verticalSeparatorHeight, setVerticalSeparatorHeight] = useState(0);
+
+  const iconRef = useRef();
+  const rowRef = useRef();
+
+  useEffect(() => {
+    const { height } = rowRef.current.getBoundingClientRect();
+    const { height: iconRefHeight } = iconRef.current.getBoundingClientRect();
+
+    const marginAccommodation = 4;
+    const halfIconHeight = iconRefHeight / 2;
+
+    setVerticalSeparatorHeight(height - halfIconHeight - marginAccommodation);
+  }, [iconRef, rowRef]);
+
   const onIconPress = () => {
     handleSelectionChange(!isSelected);
     onSelectionChange(index);
@@ -270,45 +282,38 @@ const LinkRow = props => {
   return (
     <Box
       isRow
+      ref={rowRef}
     >
       <Box>
-        <Box
-          sx={{
-            height: '23.5px',
-            width: '23.5px',
-          }}
+        <IconButton
+          aria-label="completed step icon indicator"
+          onPress={onIconPress}
+          ref={iconRef}
+          sx={sx.linkRowIconButton}
         >
-          <IconButton
-            onPress={onIconPress}
-            sx={sx.linkRowIconButton}
-            aria-label="completed step icon indicator"
-          >
-            <Icon
-              icon={isSelected ? CheckCircleIcon : RadioButtonIcon}
-              size="sm"
-              sx={isSelected ? sx.linkRowIconButton : sx.linkRowIconNotSelected}
-            />
-          </IconButton>
-        </Box>
+          <Icon
+            icon={isSelected ? CheckCircleIcon : RadioButtonIcon}
+            size="sm"
+            sx={isSelected ? sx.linkRowIconButton : sx.linkRowIconNotSelected}
+          />
+        </IconButton>
         {
           !isLastLink && isLinkSelected
           && (
           <Separator
-            sx={sx.linkRowSeparator}
             orientation="vertical"
+            sx={{ ...sx.linkRowSeparator, maxHeight: verticalSeparatorHeight }}
           />
           )
         }
       </Box>
-      <Box>
-        <Link
-          href="https://www.pingidentity.com"
-          target="_blank"
-          sx={sx.linkRowText}
-        >
-          {title}
-        </Link>
-      </Box>
+      <Link
+        href="https://www.pingidentity.com"
+        sx={sx.linkRowText}
+        target="_blank"
+      >
+        {title}
+      </Link>
     </Box>
   );
 };
