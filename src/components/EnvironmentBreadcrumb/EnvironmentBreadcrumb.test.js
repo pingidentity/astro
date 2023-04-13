@@ -311,3 +311,14 @@ test('should hide section title if no search results within it', () => {
   expect(screen.queryByText(itemsWithSections[0].name)).not.toBeInTheDocument();
   expect(screen.queryByText(itemsWithSections[1].name)).toBeInTheDocument();
 });
+
+test('should reflect the selection change when env is clicked', () => {
+  const onSelectionChangeMock = jest.fn();
+  getSectionsComponent({ isDefaultOpen: true, onSelectionChange: onSelectionChangeMock });
+
+  userEvent.click(screen.getByText(itemsWithSections[1].options[1].name));
+  expect(onSelectionChangeMock).toHaveBeenNthCalledWith(
+    1,
+    `${itemsWithSections[1].name}-${itemsWithSections[1].options[1].name}`,
+  );
+});
