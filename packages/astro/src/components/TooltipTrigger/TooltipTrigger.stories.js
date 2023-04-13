@@ -69,7 +69,7 @@ export const isOpen = () => (
 
 export const Disabled = () => (
   <TooltipTrigger delay={0} isDisabled>
-    <IconButton>
+    <IconButton aria-label="Earth Icon">
       <Icon icon={Earth} />
     </IconButton>
     <Tooltip>

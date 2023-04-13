@@ -11,16 +11,8 @@ import Icon from '../Icon';
 import { ListBoxContext } from './ListBoxContext';
 
 const Option = forwardRef((props, ref) => {
-  const {
-    item,
-    hasVirtualFocus,
-    ...others
-  } = props;
-  const {
-    key,
-    props: itemProps,
-    rendered,
-  } = item;
+  const { item, hasVirtualFocus, ...others } = props;
+  const { key, props: itemProps, rendered, 'aria-label': ariaLabel } = item;
 
   const state = useContext(ListBoxContext);
   const { isSeparator, 'data-id': dataId } = itemProps;
@@ -71,6 +63,7 @@ const Option = forwardRef((props, ref) => {
       onPointerOver={setFocusOnHover}
       {...optionProps}
       {...others}
+      aria-label={ariaLabel}
     >
       {isSelected && <Icon icon={CircleSmallIcon} />}
       {rendered}
@@ -87,6 +80,7 @@ Option.propTypes = {
       isSeparator: PropTypes.bool,
     }),
     rendered: PropTypes.node,
+    'aria-label': PropTypes.string,
   }),
   state: PropTypes.shape({
     disabledKeys: isIterableProp,
