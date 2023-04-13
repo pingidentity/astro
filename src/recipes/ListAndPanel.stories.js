@@ -8,6 +8,7 @@ import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
 
 import { useOverlayPanelState } from '../hooks';
+import useOverlappingMenuHoverState from '../hooks/useOverlappingMenuHoverState';
 import {
   Box,
   Icon,
@@ -204,43 +205,22 @@ const sx = {
 };
 
 const ListElement = ({ item, isHoverable, onClosePanel }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState({});
-
   const listItemRef = useRef();
 
-  const handleMenuHoverEnd = () => {
-    const { currentPositionX, currentPositionY } = mousePosition;
-    const { height, right, top } = listItemRef.current.getBoundingClientRect();
-
-    const hasMovedBackToRow = currentPositionY < top + height && currentPositionX < right;
-
-    if (hasMovedBackToRow) {
-      setIsHovered(true);
-      return;
-    }
-
-    setIsHovered(false);
-  };
-
-  const handleMouseMove = e => {
-    setMousePosition({ currentPositionX: e.clientX, currentPositionY: e.clientY });
-  };
-
-  const handleHoveEnd = () => {
-    setIsHovered(false);
-  };
-
-  const handleHoveStart = () => {
-    setIsHovered(true);
-  };
+  const {
+    handleHoverEnd,
+    handleHoverStart,
+    handleMenuHoverEnd,
+    handleMouseMove,
+    isHovered,
+  } = useOverlappingMenuHoverState({ listItemRef });
 
   return (
     <ListItem
       isHovered={isHoverable && isHovered}
       isRow
-      onHoverEnd={handleHoveEnd}
-      onHoverStart={handleHoveStart}
+      onHoverEnd={handleHoverEnd}
+      onHoverStart={handleHoverStart}
       onMouseMove={handleMouseMove}
       ref={listItemRef}
       sx={sx.listElement.wrapper}
@@ -264,9 +244,9 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
             <Icon icon={MoreVertIcon} size="md" />
           </IconButton>
           <Menu
-            onAction={handleHoveEnd}
+            onAction={handleHoverEnd}
             onHoverEnd={handleMenuHoverEnd}
-            onHoverStart={handleHoveStart}
+            onHoverStart={handleHoverStart}
           >
             <Item key="enable">Enable user</Item>
             <Item key="disable">Disable user</Item>
