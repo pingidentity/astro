@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.3...@pingux/astro@2.0.4) (2023-04-13)
+
+
+### Bug Fixes
+
+* [UIP-6041]: LinkedListView: incorrect hover state ([72c2ff5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/72c2ff553040d26e2d781622a5d063f371318482))
+* [UIP-6177] hovering over when scrolling in Listview for Firefox ([a9e3bbb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a9e3bbb01b091a253921c164a5eac953bf249dc0))
+* [UIP-6185] Add aria label to MultiValuesField list options and TooltipTrigger ([ad15d45](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ad15d45820734c178b3de8f3962310fc714361e2))
+* [UIP-6230] TrialExperienceNav: vertical line overlap ([eede2a7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eede2a79abdef3a5491781d55533fa6674d43045))
+* [UIP-6231] Environment Breadcrumbs selection issues ([ae939f9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ae939f96624cd8e8757700c465a9b071e80cd425))
+
+
+
+
+
 ## [2.0.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.2...@pingux/astro@2.0.3) (2023-04-11)
 
 
