@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.2...@pingux/astro@2.0.3) (2023-04-11)
+
+
+### Bug Fixes
+
+* [UIP-6226] EnvironmentBreadcrumb: fix search field outline ([bbc3f1f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bbc3f1f1fe7901c7028eb1dfd4c562227707d998))
+* [UIP-6228] Remove href from last item in BreadCrumb story ([738f1b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/738f1b16288dba5fe28a870f168c81081004a613))
+
+
+
+
+
 ## [2.0.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.1...@pingux/astro@2.0.2) (2023-04-06)
 
 
