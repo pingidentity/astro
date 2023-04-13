@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
 
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
@@ -204,4 +204,17 @@ test('list view not receive focus when click on checkbox', () => {
   expect(listItem[0]).not.toHaveClass('is-focused');
   checkbox[0].click();
   expect(listItem[0]).not.toHaveClass('is-focused');
+});
+
+test('list view reset hover on item when scroll', () => {
+  getComponent();
+  const listView = screen.getAllByRole('grid');
+  const listItem = screen.getAllByRole('gridcell');
+
+  expect(listItem[0]).not.toHaveClass('is-hovered');
+  userEvent.hover(listItem[0]);
+  expect(listItem[0]).toHaveClass('is-hovered');
+
+  fireEvent.scroll(listView[0], { target: { scrollY: 100 } });
+  expect(listItem[0]).not.toHaveClass('is-hovered');
 });
