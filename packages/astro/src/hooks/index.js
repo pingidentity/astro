@@ -9,6 +9,7 @@ export { default as useField } from './useField';
 export { default as useLabelHeight } from './useLabelHeight';
 export { default as useModalState } from './useModalState';
 export { default as useNavBarPress } from './useNavBarPress';
+export { default as useOverlappingMenuHoverState } from './useOverlappingMenuHoverState';
 export { default as useOverlayPanelState } from './useOverlayPanelState';
 export { default as useProgressiveState } from './useProgressiveState';
 export { default as usePropWarning } from './usePropWarning';
