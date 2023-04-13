@@ -72,7 +72,7 @@ const environmentsWithSections = [
     ],
   },
   {
-    name: null,
+    name: 'Other',
     key: 'Other',
     options: [
       { name: 'Default' },
@@ -152,17 +152,20 @@ export const WithSections = () => {
     return [{ ...envObj }, ...prevEnvs];
   };
 
-  const findEnvObj = envName => environments
-    .find(section => section.name === 'All')
-    .options.find(option => option.name === envName);
+  const findEnvObj = (envName, envSectionName) => {
+    return environments
+      .find(section => section.name === envSectionName)
+      .options.find(option => option.name === envName);
+  };
 
   const handleEnvPress = newEnv => {
     const sectionPrefixIndex = newEnv.indexOf('-');
     const envKey = newEnv.substr(sectionPrefixIndex + 1);
+    const envSectionName = newEnv.substr(0, sectionPrefixIndex);
     const recentEnvironments = environments.find(
       envSection => envSection.name === 'Recent',
     ).options;
-    const envObj = findEnvObj(envKey);
+    const envObj = findEnvObj(envKey, envSectionName);
     const updatedRecentEnvironments = getUpdatedRecentEnvs(
       envObj,
       recentEnvironments,
