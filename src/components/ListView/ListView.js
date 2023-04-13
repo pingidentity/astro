@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { useCollator } from '@react-aria/i18n';
 import { useList } from '@react-aria/list';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
@@ -65,6 +65,8 @@ const ListView = forwardRef((props, ref) => {
     ...others
   } = props;
 
+  const [hoveredItem, setHoveredItem] = useState(null);
+
   const isLoading = (
     loadingState === loadingStates.LOADING_MORE || loadingState === loadingStates.LOADING
   );
@@ -86,6 +88,11 @@ const ListView = forwardRef((props, ref) => {
     ...props,
     selectionBehavior: selectionStyle === 'highlight' ? 'replace' : 'toggle',
   });
+
+  state.hover = {
+    hoveredItem,
+    setHoveredItem,
+  };
 
   const { collection, selectionManager } = state;
 
@@ -112,6 +119,11 @@ const ListView = forwardRef((props, ref) => {
     }
   };
 
+  // This code removes hover when scrolling ListView in the Firefox browser.
+  const resetHoverState = () => {
+    state.hover.setHoveredItem(null);
+  };
+
   return (
     <ListViewContext.Provider value={{ state }}>
       <Virtualizer
@@ -128,6 +140,7 @@ const ListView = forwardRef((props, ref) => {
         transitionDuration={0}
         {...others}
         onFocus={onFocus}
+        onScroll={resetHoverState}
       >
         {(type, item) => {
           if (type === 'item') {

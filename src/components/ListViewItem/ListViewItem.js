@@ -35,7 +35,11 @@ const ListViewItem = props => {
 
   const { focusProps, isFocusVisible } = useFocusRing();
 
-  const { hoverProps, isHovered } = useHover({});
+  const { hoverProps, isHovered } = useHover({
+    onHoverStart: () => {
+      state.hover.setHoveredItem(item.key);
+    },
+  });
 
   const {
     rowProps: raRowProps,
@@ -56,7 +60,7 @@ const ListViewItem = props => {
   );
 
   const { classNames } = useStatusClasses(className, {
-    isHovered: isSelectable && isHovered && isHoverable,
+    isHovered: isSelectable && isHovered && isHoverable && (item.key === state.hover.hoveredItem),
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
     hasSeparator,
