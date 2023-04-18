@@ -185,7 +185,6 @@ const ComboBoxField = forwardRef((props, ref) => {
   const listBox = !isReadOnly && (
     <PopoverContainer
       hasNoArrow
-      isDismissable
       isNonModal
       isOpen={state.isOpen}
       onClose={state.close}
@@ -193,7 +192,7 @@ const ComboBoxField = forwardRef((props, ref) => {
       ref={popoverRef}
       style={style}
     >
-      <FocusScope restoreFocus>
+      <FocusScope>
         <DismissButton onDismiss={state.close} />
         <ScrollBox {...scrollBoxProps}>
           <ListBox
