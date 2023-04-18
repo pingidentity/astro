@@ -672,7 +672,7 @@ test('two listbox can not be open at the same time', () => {
   expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
 
   // first click closes first popover, second click opens the second popover
-  userEvent.dblClick(button2);
+  userEvent.click(button2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(2);
   expect(screen.queryByRole('option', { name: 'Tango' })).toBeInTheDocument();
