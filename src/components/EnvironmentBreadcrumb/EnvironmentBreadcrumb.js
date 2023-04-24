@@ -222,21 +222,14 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         p={10}
       >
         <FocusScope restoreFocus autoFocus contain>
+          <SearchField
+            placeholder="Search"
+            aria-label="Items Search"
+            data-testid="Environment-Breadcrumb-Search"
+            onChange={setSearchValue}
+            {...searchProps}
+          />
           <ScrollBox ref={scrollBoxRef}>
-            <SearchField
-              placeholder="Search"
-              aria-label="Items Search"
-              data-testid="Environment-Breadcrumb-Search"
-              containerProps={{
-                // this one is needed to cancel default scrollBox items behavior
-                sx: {
-                  overflow: 'visible',
-                  padding: '3px',
-                },
-              }}
-              onChange={setSearchValue}
-              {...searchProps}
-            />
             {checkIfListEmpty() ? (
               EmptyListState
             ) : (
