@@ -32,6 +32,9 @@ export const hintButton = {
     bg: 'accent.20',
     borderColor: 'accent.20',
     color: 'white',
+    'path': {
+      fill: 'white',
+    },
   },
 };
 
