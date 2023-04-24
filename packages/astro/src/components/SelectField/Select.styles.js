@@ -1,7 +1,6 @@
 // Styles for default select and variants go here.
 import { text } from '../../styles/variants';
-import { defaultFocus } from '../Button/Buttons.styles';
-import { input } from '../Input/Input.styles';
+import { defaultFocus, input } from '../Input/Input.styles';
 
 const activeFloatLabel = {
   pt: 'md',
