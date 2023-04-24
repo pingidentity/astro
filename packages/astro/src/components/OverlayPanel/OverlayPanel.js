@@ -18,6 +18,7 @@ const OverlayPanel = forwardRef((props, ref) => {
   const {
     children,
     isOpen,
+    isTransitioning,
     onClose: onCloseProp,
     className,
     state,
@@ -32,7 +33,12 @@ const OverlayPanel = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => overlayPanelRef.current);
 
-  const { classNames } = useStatusClasses(className, { isOpen, [`is-${props?.sx?.width ? 'custom' : size}`]: size });
+  // this is code to avoid regressions -- implementations that do not use the
+  // useMountTransition hook will not break, because this className gives the
+  // component the styling properties that it needs.
+  const isOpenNoTransition = isTransitioning === undefined && isOpen === true;
+
+  const { classNames } = useStatusClasses(className, { isOpen, isTransitioning, isOpenNoTransition, [`is-${props?.sx?.width ? 'custom' : size}`]: size });
 
   const handleClose = e => {
     e.stopPropagation();
@@ -43,7 +49,7 @@ const OverlayPanel = forwardRef((props, ref) => {
 
   return (
     <FocusScope autoFocus>
-      <Box variant="overlayPanel.container" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose}>
+      <Box variant="overlayPanel.container" ref={overlayPanelRef} {...others} className={classNames} onKeyUp={handleClose} aria-hidden={!isOpen}>
         <Box
           variant="overlayPanel.body"
           className={classNames}
@@ -70,6 +76,8 @@ OverlayPanel.propTypes = {
   }),
   /** Callback function that runs when the esc key is used to close the OverlayPanel. */
   onClose: PropTypes.func,
+  /** Boolean that determines whether or not the css transition is occuring. */
+  isTransitioning: PropTypes.bool,
   /** Ref that is connected to the button that triggers the overlay state.
    Focus will return to this ref when the keyboard is used to close the OverlayPanel. */
   triggerRef: PropTypes.shape({}),

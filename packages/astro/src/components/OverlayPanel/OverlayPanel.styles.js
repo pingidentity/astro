@@ -11,7 +11,7 @@ const container = {
   borderLeft: '1px solid',
   borderLeftColor: 'neutral.80',
   boxShadow: '-2px 0px 2px 1px rgba(37, 55, 70, 0.15)',
-  display: 'none !important',
+  display: 'flex !important',
   p: '25px',
   transition: 'right 500ms',
   maxWidth: '100%',
@@ -27,8 +27,10 @@ const container = {
   '&.is-full': {
     width: 'container.full',
   },
-  '&.is-open': {
-    display: 'flex !important',
+  '&.is-open.is-transitioning': {
+    right: 0,
+  },
+  '&.is-open-no-transition': {
     right: 0,
   },
 };
@@ -52,11 +54,11 @@ const innerPanel = {
 };
 
 const body = {
-  display: 'none',
+  display: 'none !important',
   height: '100%',
   width: '100%',
   '&.is-open': {
-    display: 'flex',
+    display: 'flex !important',
   },
 };
 
