@@ -177,167 +177,176 @@ export const CollapsiblePanelWithBadge = args => {
   return (
     <OverlayProvider>
       <Button ref={triggerRef} onPress={state.open}>Open Panel</Button>
-      <OverlayPanel isOpen={state.isOpen} size="large" p="0">
-        <Box sx={{ minHeight: '60px' }} bg="accent.99">
-          <Box
-            isRow
-            flexBasis="0px"
-            flexGrow="1"
-            alignItems="center"
-            pl="md"
-            pr="md"
-            justifyContent="space-between"
-            zIndex={2}
+      {
+        (state.isOpen || state.isTransitioning)
+        && (
+          <OverlayPanel
+            isOpen={state.isOpen}
+            isTransitioning={state.isTransitioning}
+            size="large"
+            p="0"
           >
-            <Box isRow>
-              <Icon
-                icon={AccountIcon}
-                alignSelf="center"
-                mr="md"
-                color="accent.40"
-                size={25}
-                flexShrink={0}
-                display="flex"
-              />
-              <Breadcrumbs icon={ChevronRightIcon}>
-                <Item
-                  aria-label="Ed Nepomuceno"
-                  data-id="home"
-                  href="https://www.pingidentity.com"
-                  key="home"
-                  variant="buttons.link"
-                >
-                  Ed Nepomuceno
-                </Item>
-                <Item
-                  aria-label="edit groups"
-                  data-id="editGroups"
-                  href="https://www.pingidentity.com"
-                  key="editGroups"
-                  variant="buttons.link"
-                >
-                  Edit Groups
-                </Item>
-              </Breadcrumbs>
-            </Box>
-            <Box isRow>
-              <IconButton aria-label="Close Panel" onPress={() => { onClose(state, triggerRef); }}>
-                <Icon icon={Clear} size="sm" />
-              </IconButton>
-            </Box>
-          </Box>
-        </Box>
-        <Box pl="md" pt="25px">
-          <Box isRow justifyContent="space-between" sx={{ marginTop: '5px' }}>
-            <Box width="100%">
-              <SearchField
-                icon={SearchIcon}
-                aria-label="Search"
-                placeholder="Search"
-                width="100%"
-                mt="0px"
-                mr="sm"
-                mb="xs"
-              />
-              <ListView
-                items={items}
-                style={{ width: '100%', outline: 'none' }}
+            <Box sx={{ minHeight: '60px' }} bg="accent.99">
+              <Box
+                isRow
+                flexBasis="0px"
+                flexGrow="1"
+                alignItems="center"
+                pl="md"
+                pr="md"
+                justifyContent="space-between"
+                zIndex={2}
               >
-                {item => (
-                  <Item
-                    key={item.key}
-                    textValue={item.name}
-                    data-id={item.key}
-                    listItemProps={{
-                      isRow: true,
-                      sx: {
-                        bg: 'white',
-                        width: '100%',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        '&.is-hovered': {
-                          bg: 'accent.99',
-                        },
-                      },
-                    }}
-                  >
-                    <Box isRow>
-                      <Icon
-                        icon={AccountGroupIcon}
-                        alignSelf="center"
-                        mr="md"
-                        color="accent.40"
-                        size={25}
-                        flexShrink={1}
-                      />
-                      <Box>
-                        <Box isRow>
-                          <Text variant="listTitle" mb="xs" mr="xs">{item.name}</Text>
-                          <Badge
-                            label={item.badgeValue}
-                            bg="accent.99"
-                            textColor="text.secondary"
-                            sx={{ minWidth: 'max-content' }}
-                          />
-                        </Box>
-                        <Text variant="listSubtitle">{item.subtitle}</Text>
-                      </Box>
-                    </Box>
-                    {item.isDefaultSelected
-                      ? (
-                        <Box
-                          isRow
-                          sx={{
-                            border: '1px solid',
-                            borderColor: 'neutral.80',
-                            borderRadius: 5,
-                            minHeight: 22,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            p: 'xs',
-                            maxWidth: '50%',
-                          }}
-                        >
-                          <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} />
-                          <Text sx={{ fontSize: 'sm', pl: 'xs', maxHeight: 32, overflow: 'hidden' }}>Added by Filter</Text>
-                        </Box>
-                      )
-                      : (
-                        <CheckboxField
-                          controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
-                          onChange={() => changeSelection(item.key)}
-                          isSelected={selectedItems.some(el => el.key === item.key)}
-                        />
-                      )}
-                  </Item>
-                )}
-              </ListView>
-            </Box>
-            <CollapsiblePanel
-              items={selectedItems}
-              onSelectionChange={changeSelection}
-              selectedFilterCount="1000+"
-              {...args}
-            >
-              {item => (
-                <Item
-                  key={item.key}
-                  textValue={item.name}
-                  data-id={item.key}
-                >
-
-                  <CollapsiblePanelItem
-                    text={item.name}
-                    icon={item.isDefaultSelected ? CheckIcon : Clear}
-                    onPress={() => changeSelection(item.key)}
-                    isDefaultSelected={item.isDefaultSelected}
+                <Box isRow>
+                  <Icon
+                    icon={AccountIcon}
+                    alignSelf="center"
+                    mr="md"
+                    color="accent.40"
+                    size={25}
+                    flexShrink={0}
+                    display="flex"
                   />
-                </Item>
-              )}
-            </CollapsiblePanel>
-          </Box>
-        </Box>
-      </OverlayPanel>
+                  <Breadcrumbs icon={ChevronRightIcon}>
+                    <Item
+                      aria-label="Ed Nepomuceno"
+                      data-id="home"
+                      href="https://www.pingidentity.com"
+                      key="home"
+                      variant="buttons.link"
+                    >
+                      Ed Nepomuceno
+                    </Item>
+                    <Item
+                      aria-label="edit groups"
+                      data-id="editGroups"
+                      href="https://www.pingidentity.com"
+                      key="editGroups"
+                      variant="buttons.link"
+                    >
+                      Edit Groups
+                    </Item>
+                  </Breadcrumbs>
+                </Box>
+                <Box isRow>
+                  <IconButton aria-label="Close Panel" onPress={() => { onClose(state, triggerRef); }}>
+                    <Icon icon={Clear} size="sm" />
+                  </IconButton>
+                </Box>
+              </Box>
+            </Box>
+            <Box pl="md" pt="25px">
+              <Box isRow justifyContent="space-between" sx={{ marginTop: '5px' }}>
+                <Box width="100%">
+                  <SearchField
+                    icon={SearchIcon}
+                    aria-label="Search"
+                    placeholder="Search"
+                    width="100%"
+                    mt="0px"
+                    mr="sm"
+                    mb="xs"
+                  />
+                  <ListView
+                    items={items}
+                    style={{ width: '100%', outline: 'none' }}
+                  >
+                    {item => (
+                      <Item
+                        key={item.key}
+                        textValue={item.name}
+                        data-id={item.key}
+                        listItemProps={{
+                          isRow: true,
+                          sx: {
+                            bg: 'white',
+                            width: '100%',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            '&.is-hovered': {
+                              bg: 'accent.99',
+                            },
+                          },
+                        }}
+                      >
+                        <Box isRow>
+                          <Icon
+                            icon={AccountGroupIcon}
+                            alignSelf="center"
+                            mr="md"
+                            color="accent.40"
+                            size={25}
+                            flexShrink={1}
+                          />
+                          <Box>
+                            <Box isRow>
+                              <Text variant="listTitle" mb="xs" mr="xs">{item.name}</Text>
+                              <Badge
+                                label={item.badgeValue}
+                                bg="accent.99"
+                                textColor="text.secondary"
+                                sx={{ minWidth: 'max-content' }}
+                              />
+                            </Box>
+                            <Text variant="listSubtitle">{item.subtitle}</Text>
+                          </Box>
+                        </Box>
+                        {item.isDefaultSelected
+                          ? (
+                            <Box
+                              isRow
+                              sx={{
+                                border: '1px solid',
+                                borderColor: 'neutral.80',
+                                borderRadius: 5,
+                                minHeight: 22,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                p: 'xs',
+                                maxWidth: '50%',
+                              }}
+                            >
+                              <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} />
+                              <Text sx={{ fontSize: 'sm', pl: 'xs', maxHeight: 32, overflow: 'hidden' }}>Added by Filter</Text>
+                            </Box>
+                          )
+                          : (
+                            <CheckboxField
+                              controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
+                              onChange={() => changeSelection(item.key)}
+                              isSelected={selectedItems.some(el => el.key === item.key)}
+                            />
+                          )}
+                      </Item>
+                    )}
+                  </ListView>
+                </Box>
+                <CollapsiblePanel
+                  items={selectedItems}
+                  onSelectionChange={changeSelection}
+                  selectedFilterCount="1000+"
+                  {...args}
+                >
+                  {item => (
+                    <Item
+                      key={item.key}
+                      textValue={item.name}
+                      data-id={item.key}
+                    >
+                      <CollapsiblePanelItem
+                        text={item.name}
+                        icon={item.isDefaultSelected ? CheckIcon : Clear}
+                        onPress={() => changeSelection(item.key)}
+                        isDefaultSelected={item.isDefaultSelected}
+                      />
+                    </Item>
+                  )}
+                </CollapsiblePanel>
+              </Box>
+            </Box>
+          </OverlayPanel>
+        )
+      }
     </OverlayProvider>
   );
 };
