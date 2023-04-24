@@ -18,37 +18,41 @@ import {
 } from '../index';
 
 export default {
-  title: 'Recipes/Conditional Filter',
+  title: 'Recipes/Condition Filter',
 };
 
 const sx = {
   customBadgeStyles: {
     marginRight: 'sm',
     '& > span': {
-      textTransform: 'none',
       fontWeight: '500',
+      textTransform: 'none',
     },
+    ml: '3px',
     minWidth: '65px',
     'z-index': '1',
   },
   borderedBoxStyles: {
-    '&::after': { bg: 'decorative.7' },
-    borderWidth: 1,
-    borderStyle: 'solid',
+    '&::after': { bg: 'decorative.7', width: '2px' },
     borderColor: 'neutral.80',
     borderRadius: '4px',
+    borderStyle: 'solid',
+    borderWidth: '1px 1px 1px 0px',
     padding: 'sm',
     width: '100%',
   },
   allConditionsBox: {
-    '&::after': { bg: 'decorative.7' },
+    '&::after': { bg: 'decorative.7', width: '2px' },
     alignItems: 'center',
     borderRadius: '4px',
     marginTop: 'md',
+    fontWeight: 1,
   },
   defaultText: {
     textTransform: 'none',
     color: 'inherit',
+    fontSize: 'sm',
+    fontWeight: '3',
   },
 };
 
@@ -64,24 +68,24 @@ export const Default = () => {
   ];
 
   const noneConditions = [
-    { field1: 'Miscellaneous', field3: 'Apple', key: 'Miscellaneous1Field' },
-    { field1: 'Miscellaneous', field3: 'Banana', key: 'Miscellaneous2Field' },
+    { field1: 'Misc', field3: 'Apple', key: 'Miscellaneous1' },
+    { field1: 'Misc', field3: 'Banana', key: 'Miscellaneous2' },
   ];
 
   const trashButton = (
-    <IconButton aria-label="badge.deleteButton" sx={{ alignSelf: 'center' }}>
-      <Icon icon={TrashIcon} sx={{ '& > path': { fill: 'neutral.40' } }} />
+    <IconButton aria-label="deleteButton" sx={{ alignSelf: 'center' }}>
+      <Icon icon={TrashIcon} sx={{ '& > path': { fill: 'neutral.40' } }} size="md" />
     </IconButton>
   );
 
   const [editOverviewVisible, setEditOverviewVisible] = React.useState(false);
 
   return (
-    <Box maxWidth="800px">
+    <Box>
       {!editOverviewVisible ? (
-        <Box bg="accent.99" p="md">
+        <Box bg="accent.99" maxWidth="318px" p="sm">
           <Box isRow>
-            <Text variant="itemTitle" pb="md">Branch Condition</Text>
+            <Text variant="itemTitle" fontWeight="0" pb="md">Branch Condition</Text>
             <IconButton
               aria-label="edit"
               variant="inverted"
@@ -93,8 +97,8 @@ export const Default = () => {
           </Box>
           <Box isRow>
             <Badge
-              label="ALL"
-              bg="decorative.7"
+              label="All"
+              bg="decorative.4"
               sx={sx.customBadgeStyles}
             />
             <Text> of the conditions are true</Text>
@@ -131,17 +135,17 @@ export const Default = () => {
             >
               <Box isRow>
                 <Badge
-                  label="ANY"
-                  bg="decorative.4"
+                  label="Any"
+                  bg="decorative.7"
                   sx={sx.customBadgeStyles}
                   alignSelf="center"
                 />
                 <Text> of the conditions are true</Text>
               </Box>
-              <Box ml="sm">
+              <Box ml="xs">
                 {anyConditions.map((item, index) => (
                   <Box isRow key={item.key}>
-                    <Bracket isLast={index === anyConditions.length - 1} />
+                    <Bracket ml={0} isLast={index === anyConditions.length - 1} />
                     <Box
                       mt="md"
                       variant="forms.input.fieldControlWrapper"
@@ -174,17 +178,17 @@ export const Default = () => {
             >
               <Box isRow>
                 <Badge
-                  label="NONE"
+                  label="None"
                   bg="accent.20"
                   sx={sx.customBadgeStyles}
                   alignSelf="center"
                 />
                 <Text> of the conditions are true</Text>
               </Box>
-              <Box ml="sm">
+              <Box ml="xs">
                 {noneConditions.map((item, index) => (
                   <Box isRow key={item.key}>
-                    <Bracket isLast={index === noneConditions.length - 1} />
+                    <Bracket ml={0} isLast={index === noneConditions.length - 1} />
                     <Box
                       mt="md"
                       variant="forms.input.fieldControlWrapper"
@@ -211,14 +215,14 @@ export const Default = () => {
         </Box>
       )
         : (
-          <Box bg="accent.99" p="md">
-            <Text variant="itemTitle" pb="md">Branch Condition</Text>
-            <Box isRow alignItems="center" mb="md">
+          <Box bg="accent.99" p="md" maxWidth="966px">
+            <Text variant="itemTitle" fontWeight="0" pb="md">Branch Condition</Text>
+            <Box isRow alignItems="center" mb="sm" pr="37px">
               <RockerButtonGroup mr="sm" defaultSelectedKey="all">
-                <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.7' }}>
+                <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.4' }}>
                   <Text sx={sx.defaultText}>ALL</Text>
                 </RockerButton>
-                <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.4' }}>
+                <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.7' }}>
                   <Text sx={sx.defaultText}>ANY</Text>
                 </RockerButton>
                 <RockerButton name="none" key="none" selectedStyles={{ bg: 'accent.20' }}>
@@ -232,7 +236,6 @@ export const Default = () => {
                 role="button"
                 title="Add Field Button"
                 ml="auto"
-                mr="sm"
                 aria-label="add"
               >
                 + Add
@@ -241,20 +244,25 @@ export const Default = () => {
 
             {allConditions.map(item => (
               <Box isRow alignItems="center" mb="md" key={item.key}>
-
                 <Box isRow width="100%">
                   <TextField
-                    width="40%"
+                    width="44%"
                     value={item.field1}
                     mr="md"
-                    containerProps={{ sx: { '& > div::after': { bg: 'decorative.7' } } }}
+                    containerProps={{ sx: { '& > div::after': { bg: 'decorative.4' } } }}
                     aria-label="temp-label"
                   />
-                  <SelectField hasNoStatusIndicator selectedKey="Equals" mr="md" aria-label="temp-label">
+                  <SelectField
+                    hasNoStatusIndicator
+                    selectedKey="Equals"
+                    mr="md"
+                    aria-label="temp-label"
+                    width="125px"
+                  >
                     <Item key="Equals" textValue="Equals" aria-label="equals">Equals</Item>
                     <Item key="NotEquals" textValue="NotEquals" aria-label="notequal">Not Equal</Item>
                   </SelectField>
-                  <TextField hasNoStatusIndicator width="40%" value={item.field3} mr="xs" aria-label="temp-label" />
+                  <TextField hasNoStatusIndicator width="44%" value={item.field3} mr="xs" aria-label="temp-label" />
                 </Box>
                 {trashButton}
               </Box>
@@ -262,14 +270,14 @@ export const Default = () => {
             <Box isRow>
               <Box
                 variant="forms.input.fieldControlWrapper"
-                sx={sx.borderedBoxStyles}
+                sx={{ ...sx.borderedBoxStyles, '&::after': { bg: 'decorative.4', width: '2px' } }}
               >
-                <Box isRow alignItems="center" mb="md">
+                <Box isRow alignItems="center" mb="sm" pr="37px">
                   <RockerButtonGroup mr="sm" defaultSelectedKey="any">
-                    <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.7' }}>
+                    <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.4' }}>
                       <Text sx={sx.defaultText}>ALL</Text>
                     </RockerButton>
-                    <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.4' }}>
+                    <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.7' }}>
                       <Text sx={sx.defaultText}>ANY</Text>
                     </RockerButton>
                     <RockerButton name="none" key="none" selectedStyles={{ bg: 'accent.20' }}>
@@ -283,7 +291,6 @@ export const Default = () => {
                     role="button"
                     title="Add Field Button"
                     ml="auto"
-                    mr="sm"
                     aria-label="add"
                   >
                     + Add
@@ -293,14 +300,19 @@ export const Default = () => {
                 <Box ml="lg">
                   {anyConditions.map(item => (
                     <Box isRow alignItems="center" mb="md" key={item.key}>
-
                       <Box isRow width="100%">
-                        <TextField aria-label="temp-label" value={item.field1} width="40%" mr="md" containerProps={{ sx: { '& > div::after': { bg: 'decorative.4' } } }} />
-                        <SelectField aria-label="temp-label" hasNoStatusIndicator selectedKey="Equals" mr="md">
+                        <TextField aria-label="temp-label" value={item.field1} width="44%" mr="md" containerProps={{ sx: { '& > div::after': { bg: 'decorative.7' } } }} />
+                        <SelectField
+                          aria-label="temp-label"
+                          hasNoStatusIndicator
+                          selectedKey="Equals"
+                          mr="md"
+                          width="125px"
+                        >
                           <Item key="Equals" textValue="Equals" aria-label="Equals">Equals</Item>
                           <Item key="NotEquals" textValue="NotEqual" aria-label="NotEqual">Not Equal</Item>
                         </SelectField>
-                        <TextField aria-label="temp-label" hasNoStatusIndicator value={item.field3} width="40%" mr="xs" />
+                        <TextField aria-label="temp-label" hasNoStatusIndicator value={item.field3} width="44%" mr="xs" />
                       </Box>
                       {trashButton}
                     </Box>
@@ -314,14 +326,14 @@ export const Default = () => {
             <Box isRow mt="md">
               <Box
                 variant="forms.input.fieldControlWrapper"
-                sx={sx.borderedBoxStyles}
+                sx={{ ...sx.borderedBoxStyles, '&::after': { bg: 'decorative.4', width: '2px' } }}
               >
-                <Box isRow alignItems="center" mb="md">
+                <Box isRow alignItems="center" mb="sm" pr="37px">
                   <RockerButtonGroup mr="sm" defaultSelectedKey="none">
-                    <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.7' }}>
+                    <RockerButton name="all" key="all" selectedStyles={{ bg: 'decorative.4' }}>
                       <Text sx={sx.defaultText}>ALL</Text>
                     </RockerButton>
-                    <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.4' }}>
+                    <RockerButton name="any" key="any" selectedStyles={{ bg: 'decorative.7' }}>
                       <Text sx={sx.defaultText}>ANY</Text>
                     </RockerButton>
                     <RockerButton name="none" key="none" selectedStyles={{ bg: 'accent.20' }}>
@@ -335,7 +347,6 @@ export const Default = () => {
                     role="button"
                     title="Add Field Button"
                     ml="auto"
-                    mr="sm"
                     aria-label="add"
                   >
                     + Add
@@ -346,12 +357,18 @@ export const Default = () => {
                   {noneConditions.map(item => (
                     <Box isRow alignItems="center" mb="md" key={item.key}>
                       <Box isRow width="100%">
-                        <TextField aria-label="temp-label" value={item.field1} width="40%" mr="md" containerProps={{ sx: { '& > div::after': { bg: 'accent.20' } } }} />
-                        <SelectField aria-label="temp-label" hasNoStatusIndicator selectedKey="Equals" mr="md">
+                        <TextField aria-label="temp-label" value={item.field1} width="44%" mr="md" containerProps={{ sx: { '& > div::after': { bg: 'accent.20' } } }} />
+                        <SelectField
+                          aria-label="temp-label"
+                          hasNoStatusIndicator
+                          selectedKey="Equals"
+                          mr="md"
+                          width="125px"
+                        >
                           <Item key="Equals" textValue="Equals" aria-label="Equals">Equals</Item>
                           <Item key="NotEquals" textValue="NotEqual" aria-label="NotEqual">Not Equal</Item>
                         </SelectField>
-                        <TextField aria-label="temp-label" hasNoStatusIndicator value={item.field3} width="40%" mr="xs" />
+                        <TextField aria-label="temp-label" hasNoStatusIndicator value={item.field3} width="44%" mr="xs" />
                       </Box>
                       {trashButton}
                     </Box>
