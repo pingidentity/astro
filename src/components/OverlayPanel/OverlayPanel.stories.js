@@ -82,10 +82,11 @@ export const Default = ({ ...args }) => {
       >
         Open Panel
       </Button>
-      { state.isOpen
+      { (state.isOpen || state.isTransitioning)
         && (
         <OverlayPanel
           isOpen={state.isOpen}
+          isTransitioning={state.isTransitioning}
           state={state}
           {...args}
           triggerRef={triggerRef}
@@ -135,7 +136,7 @@ export const InnerPanel = ({ ...args }) => {
     innerState.isOpen
     && (
     <OverlayPanel
-      variant="overlayPanel.overlayPanelInner" // applies higher z-index
+      variant="overlayPanel.innerPanel" // applies higher z-index
       isOpen={innerState.isOpen}
       {...args}
       state={innerState}
@@ -158,10 +159,11 @@ export const InnerPanel = ({ ...args }) => {
 
   const outer = (
     // should have higher z-index applied
-    state.isOpen
+    (state.isOpen || state.isTransitioning)
         && (
         <OverlayPanel
           isOpen={state.isOpen}
+          isTransitioning={state.isTransitioning}
           sx={{ p: '0px' }}
           {...args}
           state={state}
@@ -240,9 +242,10 @@ export const CustomWidth = () => {
       </Text>
       <br />
       <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
-      { state.isOpen
+      { (state.isOpen || state.isTransitioning)
         && (
         <OverlayPanel
+          isTransitioning={state.isTransitioning}
           isOpen={state.isOpen}
           state={state}
           triggerRef={triggerRef}
@@ -450,9 +453,10 @@ export const Expandable = () => {
     // readers when an overlay opens.
     <OverlayProvider>
       <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
-      { state.isOpen
+      { (state.isOpen || state.isTransitioning)
         && (
         <OverlayPanel
+          isTransitioning={state.isTransitioning}
           isOpen={state.isOpen}
           state={state}
           triggerRef={triggerRef}

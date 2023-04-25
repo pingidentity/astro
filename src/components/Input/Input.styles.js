@@ -1,5 +1,4 @@
 import statuses from '../../utils/devUtils/constants/statuses';
-import { defaultFocus } from '../Button/Buttons.styles';
 import { text } from '../Text/Text.styles';
 
 // Styles for default input and variants go here.
@@ -7,6 +6,13 @@ import { text } from '../Text/Text.styles';
 const activeFloatLabel = {
   pt: 'md',
   pb: 'xs',
+};
+
+export const defaultFocus = {
+  borderColor: 'active',
+  outline: '1px solid',
+  outlineColor: 'accent.60',
+  outlineOffset: '0px',
 };
 
 // Default input styling
@@ -29,9 +35,7 @@ export const input = {
   width: '100%',
   outline: 'none',
   '&.is-focused': {
-    outline: '1px solid',
-    outlineColor: 'focus',
-    outlineOffset: '2px',
+    ...defaultFocus,
   },
   '.is-float-label &': {
     height: '45px',
@@ -54,7 +58,7 @@ export const input = {
   '&::-ms-reveal, &::-ms-clear': {
     display: 'none',
   },
-  '&.is-error': {
+  '&.is-error:not(.is-focused)': {
     borderColor: 'critical.bright',
   },
 };
@@ -69,8 +73,7 @@ input.large = {
 input.search = {
   ...input,
   '&.is-focused': {
-    outline: 'none',
-    borderColor: 'focus',
+    ...defaultFocus,
   },
 };
 
@@ -172,7 +175,6 @@ input.multivaluesWrapper = {
   borderWidth: 1,
   flexDirection: 'row !important',
   flexWrap: 'wrap',
-  left: 2,
   pt: 6,
   pr: 10,
   pb: 5,
@@ -191,7 +193,7 @@ input.multivaluesWrapper = {
     bg: 'active',
     width: 3,
     top: -1,
-    left: -3,
+    left: -1,
     bottom: -1,
   },
   '> input': {
@@ -206,7 +208,6 @@ input.multivaluesWrapper = {
     },
   },
   '&.is-focused': {
-    boxShadow: 'none',
     ...defaultFocus,
   },
   [`&.is-${statuses.ERROR}::after`]: {

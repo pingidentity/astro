@@ -170,35 +170,10 @@ const sx = {
       marginRight: 'auto',
     },
   },
-  listViewItem: {
-    minHeight: '75px',
-    padding: 1,
-    '&.has-inset-separator': {
-      '&:before': {
-        borderBottom: '1px solid',
-        borderBottomColor: 'line.light',
-        bottom: 0,
-        content: '""',
-        position: 'absolute',
-        right: 0,
-        width: 'calc(100% - 43px)',
-      },
-    },
-    '&.is-focused': {
-      '&:after': {
-        borderBottomColor: 'focus',
-        bottom: 0,
-        content: '""',
-        position: 'absolute',
-        right: 0,
-        width: 'calc(100% - 43px)',
-      },
-    },
-  },
   topBracket: {
     top: 50,
     left: 12,
-    bottom: 0,
+    bottom: -1,
     position: 'absolute',
   },
 };
@@ -453,7 +428,7 @@ export const Default = ({ ...args }) => {
           {...item}
           textValue={item.name}
           data-id={item.key}
-          listItemProps={{ sx: sx.listViewItem }}
+          listItemProps={{ variant: 'listViewItem.linkedViewContainer', sx: { padding: 1 } }}
         >
           <ListElement
             isParent={item.childrenObjects}
