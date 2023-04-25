@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.5...@pingux/astro@2.1.0) (2023-04-25)
+
+
+### Bug Fixes
+
+* [UIP-5979] Conditional Filter Story Updates ([8e55ca9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8e55ca9367d2cd0df7968a2a7727daabc5b64501))
+* [UIP-6224] Astro OverlayPanel fix transition css ([51de926](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51de926d59a92b9656e0e19725957ab5d007252f))
+* [UIP-6238] link to example for useModalState hook ([dd1e57c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dd1e57c096f864d39497ac9dc606fdb6f2473956))
+* [UIP-6240] HelpHint: fix pressed style ([ee67a2c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ee67a2c31f76512ec46a0b8344c1c37db38bcbca))
+* [UIP-6246] Astro Combobox Blur Fixes ([99972bc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/99972bc79b2598539fc11e7d246d3ad28577b658))
+* [UIP-6259] ListViewItem: use linkedViewContainer variant ([5a177a8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5a177a86c4d4893006dab798c8c8a4fb97b93464))
+
+
+### Features
+
+* [UIP-5986] change focus indicator for inputs ([5bf69e2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5bf69e2aa0477fe09ccd42437a2e5022ffc2c923))
+
+
+
+
+
 ## [2.0.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.4...@pingux/astro@2.0.5) (2023-04-18)
 
 **Note:** Version bump only for package @pingux/astro
