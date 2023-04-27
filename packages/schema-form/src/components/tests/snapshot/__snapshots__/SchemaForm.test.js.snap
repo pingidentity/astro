@@ -3999,7 +3999,7 @@ exports[`single fields textarea field 1`] = `
   border-radius: 4px;
   color: inherit;
   background-color: transparent;
-  overflow: hidden;
+  position: relative;
 }
 
 .emotion-10 {
@@ -4054,6 +4054,7 @@ exports[`single fields textarea field 1`] = `
           <textarea
             class="field-control-input is-default emotion-9"
             rows="4"
+            style="overflow: hidden;"
           />
         </div>
       </div>

@@ -97,24 +97,27 @@ const TextAreaField = forwardRef((props, ref) => {
           rows={rows}
           variant="forms.textarea.baseField"
           {...fieldControlInputProps}
-          sx={slots?.inContainer ? { paddingRight: '35px' } : { overflow: 'hidden' }}
+          // DO NOT put paddingRight and overflow into sx object.
+          /// It will cause issue with resizing in Safari browser.
+          paddingRight={slots?.inContainer && 35}
+          style={{ overflow: !slots?.inContainer && 'hidden' }}
           aria-invalid={status === 'error' && true}
           aria-describedby={helperText && helperTextId}
         />
         {
           slots?.inContainer
-            && (
+          && (
             <Box variant="forms.textarea.containerSlot" ref={slotContainer}>
               {slots?.inContainer}
             </Box>
-            )
+          )
         }
       </Box>
       {helperText
         && (
-        <FieldHelperText status={status} id={helperTextId}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status} id={helperTextId}>
+            {helperText}
+          </FieldHelperText>
         )}
     </Box>
   );
