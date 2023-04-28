@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.0...@pingux/astro@2.1.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* [UIP-5286] TextAreaField resizing in Safari ([cd24529](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cd24529fbb177b2e583d9d3dfc70ea55d4b765c2))
+
+
+
+
+
 # [2.1.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.0.5...@pingux/astro@2.1.0) (2023-04-25)
 
 
