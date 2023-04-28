@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.9](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.12.8...@pingux/schema-form@3.12.9) (2023-04-28)
+
+
+### Bug Fixes
+
+* [UIP-5286] TextAreaField resizing in Safari ([cd24529](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cd24529fbb177b2e583d9d3dfc70ea55d4b765c2))
+
+
+
+
+
 ## [3.12.8](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.12.7...@pingux/schema-form@3.12.8) (2023-04-25)
 
 **Note:** Version bump only for package @pingux/schema-form
