@@ -53,6 +53,7 @@ export const Disabled = () => <Image src={pingImg} isDisabled alt="Ping identity
 export const FallbackImage = () => (
   <Image
     fallbackImage={pingImg}
+    fallbackAlt="Ping Identity"
     src="https://deelay.me/7000/https://picsum.photos/150/150"
     sx={{
       width: '150px',
