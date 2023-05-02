@@ -8,11 +8,13 @@ import Image from '.';
 
 const testSrc = 'test-src';
 const testFallbackSrc = 'test-fallback-src';
+const testFallbackAlt = 'test-fallback-alt';
 const skeletonImageId = 'skeleton-image';
 
 const defaultProps = {
   src: testSrc,
   fallbackImage: testFallbackSrc,
+  fallbackAlt: testFallbackAlt,
 };
 
 const getComponent = (
@@ -93,25 +95,27 @@ describe('test Image component with useFallbackImage hook', () => {
     expect(screen.getByRole('img')).toHaveAttribute('src', testSrc);
   });
 
-  test('image component will use fallbackImg if src loaded with error', () => {
+  test('image component will use fallbackImg and fallbackAlt if src loaded with error', () => {
     getComponent();
     act(() => {
       fallbackImageObj.onImageError();
     });
     const img = screen.getByRole('img');
     expect(img).toHaveAttribute('src', testFallbackSrc);
+    expect(img).toHaveAttribute('alt', testFallbackAlt);
   });
 
-  test('image component will use fallbackImg if src timed out', () => {
+  test('image component will use fallbackImg and fallbackAlt if src timed out', () => {
     getComponent();
     act(() => {
       fallbackImageObj.onFallbackTimeout();
     });
     const img = screen.getByRole('img');
     expect(img).toHaveAttribute('src', testFallbackSrc);
+    expect(img).toHaveAttribute('alt', testFallbackAlt);
   });
 
-  test('if image loads after timeout src still be the fallback', () => {
+  test('if image loads after timeout src and alt still be the fallback', () => {
     getComponent();
     act(() => {
       fallbackImageObj.onFallbackTimeout();
@@ -119,6 +123,7 @@ describe('test Image component with useFallbackImage hook', () => {
     });
     const img = screen.getByRole('img');
     expect(img).toHaveAttribute('src', testFallbackSrc);
+    expect(img).toHaveAttribute('alt', testFallbackAlt);
   });
 
   test('if image loads before timeout src still be the the origin one', () => {

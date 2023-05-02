@@ -1,5 +1,7 @@
-import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 // Styles for default radio and variants go here.
+
+import { isSafari } from '../../styles/safariAgent.js';
+import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 // Default radio
 const base = {
@@ -10,10 +12,17 @@ const base = {
   // override the default focus styling
   'input:focus ~ &': {
     bg: 'transparent',
+    boxSizing: 'border-box',
   },
-  'input ~ &.is-focused': {
-    ...focusWithCroppedOutline,
-  },
+  'input ~ &.is-focused': isSafari ? {
+    boxShadow: 'none',
+    border: '1px solid',
+    borderColor: 'focus',
+    boxSizing: 'border-box',
+    transform: 'scale(1.1)',
+    transformOrigin: 'center',
+  }
+    : focusWithCroppedOutline,
 };
 
 const outerContainer = {
