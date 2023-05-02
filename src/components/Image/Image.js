@@ -12,6 +12,7 @@ import { Image as ThemeUIImage } from 'theme-ui';
 
 import {
   useAriaLabelWarning,
+  useDevelopmentWarning,
   useFallbackImage,
   usePropWarning,
   useStatusClasses,
@@ -35,6 +36,7 @@ const Image = forwardRef((props, ref) => {
     alt,
     // eslint-disable-next-line react/prop-types
     sx,
+    fallbackAlt,
     ...others
   } = props;
   const [isLoading, setIsLoading] = useState(true);
@@ -48,14 +50,17 @@ const Image = forwardRef((props, ref) => {
     isLoadingRef.current = newState;
   };
 
-  const setImgSrc = () => {
-    if ((!loadedSuccessfully && !isLoadingRef?.current) || shouldShowFallback) {
-      return fallbackImage;
-    }
-    return src;
+  const shouldUseFallbackProps = (!loadedSuccessfully && !isLoadingRef?.current)
+    || shouldShowFallback;
+
+  const setImgAttribute = (attribute, fallbackAttribute) => {
+    return shouldUseFallbackProps ? fallbackAttribute : attribute;
   };
 
-  const imgSrc = useMemo(() => setImgSrc(), [src, isLoading, shouldShowFallback]);
+  const imgSrc = useMemo(() => setImgAttribute(src, fallbackImage),
+    [src, isLoading, shouldShowFallback]);
+  const imgAlt = useMemo(() => setImgAttribute(alt, fallbackAlt),
+    [alt, isLoading, shouldShowFallback]);
   const imgRef = useRef();
 
   /* istanbul ignore next */
@@ -64,6 +69,10 @@ const Image = forwardRef((props, ref) => {
 
   const ariaLabel = props['aria-label'] || alt;
   useAriaLabelWarning('Image', ariaLabel);
+  useDevelopmentWarning({
+    message: 'Use fallbackAlt to proivide alt attribute for fallback image',
+    shouldTrigger: shouldUseFallbackProps && !fallbackAlt,
+  });
 
   const { hoverProps, isHovered } = useHover(props);
   const { classNames } = useStatusClasses(className, {
@@ -120,7 +129,7 @@ const Image = forwardRef((props, ref) => {
 
   const themeUiImage = (
     <ThemeUIImage
-      alt={alt}
+      alt={imgAlt}
       className={classNames}
       ref={imgRef}
       role="img"
@@ -160,6 +169,8 @@ Image.propTypes = {
    * See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-alt).
    * */
   alt: PropTypes.string,
+  /**  Load failure fault-tolerant alt */
+  fallbackAlt: PropTypes.string,
   /** Defines a string value that labels the current element. */
   'aria-label': PropTypes.string,
 };
