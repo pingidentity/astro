@@ -4,6 +4,7 @@ export { default as useComponentToggle } from './useComponentToggle';
 export { default as useCopyToClipboard } from './useCopyToClipboard';
 export { default as useDebounce } from './useDebounce';
 export { default as useDeprecationWarning } from './useDeprecationWarning';
+export { default as useDevelopmentWarning } from './useDevelopmentWarning';
 export { default as useFallbackImage } from './useFallbackImage';
 export { default as useField } from './useField';
 export { default as useLabelHeight } from './useLabelHeight';
