@@ -32,7 +32,10 @@ test('shows tooltip on hover', () => {
   expect(screen.queryByText(tooltipValue)).not.toBeInTheDocument();
   fireEvent.mouseMove(helpHintButton);
   fireEvent.mouseEnter(helpHintButton);
-  expect(screen.getByText(tooltipValue)).toBeInTheDocument();
+  const tooltip = screen.getByRole('tooltip');
+  const tooltipId = tooltip.getAttribute('id');
+  expect(tooltip).toBeInTheDocument();
+  expect(helpHintButton).toHaveAttribute('aria-describedby', tooltipId);
 });
 
 test('shows tooltip on focus', () => {
@@ -41,7 +44,10 @@ test('shows tooltip on focus', () => {
   expect(screen.queryByText(tooltipValue)).not.toBeInTheDocument();
   userEvent.tab();
   expect(helpHintButton).toHaveFocus();
-  expect(screen.queryByText(tooltipValue)).toBeInTheDocument();
+  const tooltip = screen.getByRole('tooltip');
+  const tooltipId = tooltip.getAttribute('id');
+  expect(tooltip).toBeInTheDocument();
+  expect(helpHintButton).toHaveAttribute('aria-describedby', tooltipId);
 });
 
 test('applies tooltipProps', () => {
