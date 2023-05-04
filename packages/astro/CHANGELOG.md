@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.1...@pingux/astro@2.1.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* UIP-6214 RadioGroupField Safari Focus Outline Improvement ([58ea0d6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/58ea0d62317cd297884a18baa63b735692c1ec1b))
+
+
+
+
+
 ## [2.1.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.0...@pingux/astro@2.1.1) (2023-04-28)
 
 
