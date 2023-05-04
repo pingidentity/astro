@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
+import { useFocusRing } from 'react-aria';
+import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
@@ -21,10 +23,24 @@ const HelpHint = forwardRef((props, ref) => {
   } = props;
 
   const tooltipId = uuid();
+  const buttonRef = useRef();
+  const { focusProps, isFocusVisible } = useFocusRing();
+  const { hoverProps, isHovered } = useHover({});
+
+  const isTooltipOpen = isFocusVisible || isHovered;
 
   return (
-    <TooltipTrigger ref={ref} direction="top" {...others} {...tooltipProps}>
-      <IconButton variant="hintButton" aria-label="label help hint" data-testid="help-hint__button" aria-describedby={tooltipId} {...iconButtonProps}>
+    <TooltipTrigger ref={ref} direction="top" {...others} isOpen={isTooltipOpen} {...tooltipProps}>
+      <IconButton
+        ref={buttonRef}
+        variant="hintButton"
+        aria-label="label help hint"
+        data-testid="help-hint__button"
+        aria-describedby={isTooltipOpen ? tooltipId : null}
+        {...iconButtonProps}
+        {...hoverProps}
+        {...focusProps}
+      >
         <Icon icon={HelpIcon} />
       </IconButton>
       <Tooltip {...tooltipProps} role="tooltip" aria-live="polite" id={tooltipId}>{children}</Tooltip>

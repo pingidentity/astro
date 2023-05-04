@@ -31,6 +31,12 @@ export const GlobalStyles = () => (
         [data-live-announcer] {
           display: none;
         }
+        button:focus-visible,
+        [type="button"]:focus-visible,
+        [type="reset"]:focus-visible,
+        [type="submit"]:focus-visible {
+          outline: 0;
+        }
       `
     }
   />
