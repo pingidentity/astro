@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.2...@pingux/astro@2.1.3) (2023-05-04)
+
+
+### Bug Fixes
+
+* [UIP-6260] button dotted outline in Firefox ([1c95282](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1c952823171225f4c9d826de4e83443cd8ad78bd))
+* [UIP-6263] HelpHint: add aria-describedby once the trigger button is focused or hovered ([a731de9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a731de97679fb32a25676a9e37ea437804f04a3f))
+
+
+
+
+
 ## [2.1.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.1...@pingux/astro@2.1.2) (2023-05-02)
 
 
