@@ -1,9 +1,9 @@
 import React from 'react';
-import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
-import AccountIcon from 'mdi-react/AccountIcon';
-import LockIcon from 'mdi-react/LockIcon';
-import SearchIcon from 'mdi-react/SearchIcon';
-import TagIcon from 'mdi-react/TagIcon';
+import AccountGroupIcon from '@pingux/mdi-react/AccountGroupIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import LockIcon from '@pingux/mdi-react/LockIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
+import TagIcon from '@pingux/mdi-react/TagIcon';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -66,7 +66,7 @@ export default {
 };
 
 export const Default = args => (
-  <Icon {...args} />
+  <Icon {...args} title={{ id: 'search-icon-title', name: 'Search Icon' }} />
 );
 
 export const SVGIcons = () => {
@@ -109,7 +109,7 @@ export const Sizes = () => (
           <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="xs"/>'}</Text>
         </TableCell>
         <TableCell>
-          <Icon icon={SearchIcon} size="xs" />
+          <Icon icon={SearchIcon} size="xs" title={{ id: 'search-icon-title', name: 'Search Icon' }} />
         </TableCell>
       </TableRow>
       <TableRow height="45px" bg="transparent !important">
@@ -120,7 +120,7 @@ export const Sizes = () => (
           <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="sm"/>'}</Text>
         </TableCell>
         <TableCell>
-          <Icon icon={SearchIcon} size="sm" />
+          <Icon icon={SearchIcon} size="sm" title={{ id: 'search-icon-title', name: 'Search Icon' }} />
         </TableCell>
       </TableRow>
       <TableRow height="45px" bg="transparent !important">
@@ -131,7 +131,7 @@ export const Sizes = () => (
           <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="md"/>'}</Text>
         </TableCell>
         <TableCell>
-          <Icon icon={SearchIcon} size="md" />
+          <Icon icon={SearchIcon} size="md" title={{ id: 'search-icon-title', name: 'Search Icon' }} />
         </TableCell>
       </TableRow>
     </TableBody>
@@ -142,24 +142,24 @@ export const Sizes = () => (
 export const CommonlyUsed = () => (
   <>
     <Box isRow gap="md" mb="xs">
-      <Icon icon={AccountIcon} color="accent.40" size="sm" />
-      <Text fontFamily="monospace">{ "import AccountIcon from 'mdi-react/AccountIcon'; "}</Text>
+      <Icon icon={AccountIcon} color="accent.40" size="sm" title={{ id: 'account-icon-title', name: 'Account Icon' }} />
+      <Text fontFamily="monospace">{ "import AccountIcon from '@pingux/mdi-react/AccountIcon'; "}</Text>
     </Box>
     <Box isRow gap="md" mb="xs">
-      <Icon icon={AccountGroupIcon} color="accent.40" size="sm" />
-      <Text fontFamily="monospace">{ "import AccountGroupIcon from 'mdi-react/AccountGroupIcon'; "}</Text>
+      <Icon icon={AccountGroupIcon} color="accent.40" size="sm" title={{ id: 'account-group-title', name: 'Account Group Icon' }} />
+      <Text fontFamily="monospace">{ "import AccountGroupIcon from '@pingux/mdi-react/AccountGroupIcon'; "}</Text>
     </Box>
     <Box isRow gap="md" mb="xs">
-      <Icon icon={LockIcon} color="accent.40" size="sm" />
-      <Text fontFamily="monospace">{ "import LockIcon from 'mdi-react/LockIcon'; "}</Text>
+      <Icon icon={LockIcon} color="accent.40" size="sm" title={{ id: 'lock-icon-title', name: 'Lock Icon' }} />
+      <Text fontFamily="monospace">{ "import LockIcon from '@pingux/mdi-react/LockIcon'; "}</Text>
     </Box>
     <Box isRow gap="md" mb="xs">
-      <Icon icon={SearchIcon} color="accent.40" size="sm" />
-      <Text fontFamily="monospace">{ "import SearchIcon from 'mdi-react/SearchIcon'; "}</Text>
+      <Icon icon={SearchIcon} color="accent.40" size="sm" title={{ id: 'search-icon-title', name: 'Search Icon' }} />
+      <Text fontFamily="monospace">{ "import SearchIcon from '@pingux/mdi-react/SearchIcon'; "}</Text>
     </Box>
     <Box isRow gap="md" mb="xs">
-      <Icon icon={TagIcon} color="accent.40" size="sm" />
-      <Text fontFamily="monospace">{ "import TagIcon from 'mdi-react/TagIcon'; "}</Text>
+      <Icon icon={TagIcon} color="accent.40" size="sm" title={{ id: 'tag-icon-title', name: 'Tag Icon' }} />
+      <Text fontFamily="monospace">{ "import TagIcon from '@pingux/mdi-react/TagIcon'; "}</Text>
     </Box>
   </>
 );
