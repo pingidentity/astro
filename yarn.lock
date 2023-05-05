@@ -4798,6 +4798,7 @@ __metadata:
     "@emotion/styled": ^11.1.1
     "@faker-js/faker": ~7.5.0
     "@mdx-js/react": ^1.6.22
+    "@pingux/mdi-react": ^1.0.0
     "@react-aria/accordion": ~3.0.0-alpha.11
     "@react-aria/breadcrumbs": ^3.1.4
     "@react-aria/button": ^3.2.1
@@ -5181,6 +5182,15 @@ __metadata:
     react: ^16.0.0
   languageName: unknown
   linkType: soft
+
+"@pingux/mdi-react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@pingux/mdi-react@npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"
+  peerDependencies:
+    react: ">=0.14.0"
+  checksum: fb58cb618039e859ff8762304ae3d8e412c410cb547ae48278977e6332ef9b1d4378dcd21f2ebe710622c0ae368a431b325a3908b1dd02f46f577d9d6ec20dc9
+  languageName: node
+  linkType: hard
 
 "@pingux/schema-form@workspace:packages/schema-form":
   version: 0.0.0-use.local
