@@ -135,6 +135,7 @@ const Image = forwardRef((props, ref) => {
       role="img"
       src={imgSrc}
       sx={sx}
+      aria-live="polite"
       {...others}
       {...hoverProps}
     />
