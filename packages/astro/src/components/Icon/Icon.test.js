@@ -1,6 +1,6 @@
 import React from 'react';
+import Earth from '@pingux/mdi-react/EarthIcon';
 import { render, screen } from '@testing-library/react';
-import Earth from 'mdi-react/EarthIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 
@@ -10,6 +10,10 @@ const testId = 'test-icon';
 const defaultProps = {
   'data-testid': testId,
   icon: Earth,
+  title: {
+    id: 'title-id',
+    name: 'Earth Icon',
+  },
 };
 const getComponent = (props = {}) => render((
   <Icon {...defaultProps} {...props} />
@@ -41,4 +45,14 @@ test('icon renders correct medium tshirt size', () => {
   getComponent({ size: 'md' });
   const mdIcon = screen.getByTestId(testId);
   expect(mdIcon).toHaveStyleRule('width', '25px');
+});
+
+test('icon renders with associated title', () => {
+  getComponent();
+  const icon = screen.getByTestId(testId);
+  const title = screen.getByText('Earth Icon');
+  expect(icon).toBeInstanceOf(SVGSVGElement);
+  expect(icon).toBeInTheDocument();
+  expect(icon).toHaveAttribute('aria-labelledby', 'title-id');
+  expect(title).toBeInTheDocument();
 });
