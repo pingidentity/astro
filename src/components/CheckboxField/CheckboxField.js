@@ -7,9 +7,9 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 /**
  * Combines a checkbox, label, and helper text for a complete, form-ready solution.
@@ -114,8 +114,6 @@ CheckboxField.propTypes = {
   label: PropTypes.node,
   /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
   name: PropTypes.string,
-  /** Determines the textarea status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
   value: PropTypes.string,
   /** Handler that is called when the element's selection state changes. */
@@ -130,6 +128,7 @@ CheckboxField.propTypes = {
   onKeyDown: PropTypes.func,
   /** Handler that is called when a key is released. */
   onKeyUp: PropTypes.func,
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };

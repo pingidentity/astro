@@ -8,7 +8,8 @@ Use SVGR to import SVG files as React components and pass them into this compone
 You can also use the theme to color the icon. 
 Be sure to pass dimensions: false in web pack config (see [SVGR docs](https://react-svgr.com/docs/options/#dimensions)).
 Otherwise, Icon will not be resizable by size prop. 
-Icons can also be imported from the [Material UI Icon Library](https://materialdesignicons.com/).
+Icons can also be imported from the [Material UI Icon Library](https://materialdesignicons.com/) or from [@pingux/mdi-react](https://www.npmjs.com/package/@pingux/mdi-react).
+When importing an icon, it is recommended to import from @pingux/mdi-react to allow the title prop to be utilized for accessibility.
 
 ### Required Components
 
@@ -20,6 +21,7 @@ Icon should:
 - have sufficient space in between and be centrally aligned when used in a group.
 - be paired with a text or tooltip when the icon fails to provide suitable context.
 - have a size relative to text when used together.
+- have a title associated with it.
 
 Icon shouldn’t:
 - use letters as part of the design.

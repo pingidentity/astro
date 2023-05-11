@@ -6,9 +6,9 @@ import {
   Icon,
   TextAreaField,
 } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 import { modes as labelModes } from '../Label/constants';
 
 export default {
@@ -49,13 +49,6 @@ export default {
       },
     },
     rows: {},
-    status: {
-      control: {
-        type: 'select',
-        options: statuses,
-      },
-      defaultValue: statuses.DEFAULT,
-    },
     isDisabled: {},
     isRequired: {},
     isReadOnly: {},
@@ -69,6 +62,7 @@ export default {
         type: 'none',
       },
     },
+    ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },

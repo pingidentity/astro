@@ -5,9 +5,9 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label, TextArea } from '../..';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
 /**
  * Combines a textarea, label, and helper text for a complete, form-ready solution.
@@ -183,13 +183,12 @@ TextAreaField.propTypes = {
   placeholder: PropTypes.string,
   /** The number of rows to display for the textarea. Controls the default height. */
   rows: PropTypes.number,
-  /** Determines the textarea status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Provides a way to insert markup in specified places. */
   slots: PropTypes.shape({
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
@@ -201,7 +200,7 @@ TextAreaField.defaultProps = {
   isRequired: false,
   isUnresizable: false,
   rows: 4,
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 TextAreaField.displayName = 'TextAreaField';

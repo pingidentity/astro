@@ -3,8 +3,9 @@ import isEmpty from 'lodash/isEmpty';
 
 import { PasswordField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
   title: 'Form/PasswordField',
@@ -17,18 +18,12 @@ export default {
     },
   },
   argTypes: {
-    status: {
-      control: {
-        type: 'select',
-        options: statuses,
-      },
-      defaultValue: statuses.DEFAULT,
-    },
     helperText: {
       control: {
         type: 'text',
       },
     },
+    ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },

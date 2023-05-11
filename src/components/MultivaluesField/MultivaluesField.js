@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 
 import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import ListBox from '../ListBox';
 
 /**
@@ -510,8 +510,7 @@ MultivaluesField.propTypes = {
   scrollBoxProps: PropTypes.shape({
     maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
   }),
-  /** Determines the input status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
@@ -521,7 +520,7 @@ MultivaluesField.defaultProps = {
   isReadOnly: false,
   mode: 'restrictive',
   scrollBoxProps: { maxHeight: 300 },
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 export default MultivaluesField;

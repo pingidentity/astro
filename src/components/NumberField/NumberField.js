@@ -17,9 +17,9 @@ import {
   Label,
 } from '../..';
 import { useField, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 /**
  * Number fields allow users to enter a number, and increment or
@@ -213,12 +213,11 @@ NumberField.propTypes = {
    * (value: number) => void
    */
   onChange: PropTypes.func,
-  /** Determines the input status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** The default value (uncontrolled). */
   defaultValue: PropTypes.number,
   /** The current value (controlled). */
   value: PropTypes.number,
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };

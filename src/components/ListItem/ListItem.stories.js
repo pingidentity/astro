@@ -10,7 +10,7 @@ import {
   Separator,
   Text,
 } from '../../index';
-import { onHoverArgTypes } from '../../utils/devUtils/props/hoverProps';
+import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 export default {
   title: 'Components/ListItem',

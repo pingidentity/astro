@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 
 import { Box, FieldHelperText, Label, Switch } from '../..';
 import { useField, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
 /**
  * Combines a switch, label, and helper text for a complete, form-ready solution.
@@ -133,10 +133,9 @@ SwitchField.propTypes = {
   onKeyDown: PropTypes.func,
   /** Handler that is called when a key is released. */
   onKeyUp: PropTypes.func,
-  /** Determines the textarea status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
   value: PropTypes.string,
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
@@ -146,7 +145,7 @@ SwitchField.defaultProps = {
   isReadOnly: false,
   isRequired: false,
   hasAutoFocus: false,
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 SwitchField.displayName = 'SwitchField';
