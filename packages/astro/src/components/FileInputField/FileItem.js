@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, IconButton, Text } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 const FileItem = props => {
   const {
@@ -99,6 +100,6 @@ FileItem.propTypes = {
   isDisabled: PropTypes.bool,
   name: PropTypes.string,
   helperTextId: PropTypes.string,
-  status: PropTypes.oneOf(Object.values(statuses)),
   textProps: PropTypes.shape({}),
+  ...statusPropTypes,
 };

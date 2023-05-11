@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 
 import { ColorField, OverlayProvider } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
   title: 'Form/ColorField',
@@ -32,13 +32,6 @@ export default {
         type: 'text',
       },
     },
-    status: {
-      control: {
-        type: 'select',
-        options: statuses,
-      },
-      defaultValue: statuses.DEFAULT,
-    },
     buttonProps: {
       control: {
         type: 'none',
@@ -50,6 +43,7 @@ export default {
         type: 'none',
       },
     },
+    ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },

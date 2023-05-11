@@ -5,6 +5,7 @@ import DefaultCircle from 'mdi-react/CheckboxBlankCircleOutlineIcon';
 import SuccessCircle from 'mdi-react/CheckCircleIcon';
 import PropTypes from 'prop-types';
 
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import Box from '../Box';
 import Icon from '../Icon';
 import Text from '../Text';
@@ -53,7 +54,10 @@ RequirementsList.propTypes = {
   /**
    * Requirements and their status.
    */
-  requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
+  requirements: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    ...statusPropTypes,
+  })),
 };
 
 RequirementsList.defaultProps = {
