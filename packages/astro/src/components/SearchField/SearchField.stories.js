@@ -8,8 +8,8 @@ import {
   SearchField,
   Text,
 } from '../../index';
-import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 
 export default {
   title: 'Form/SearchField',

@@ -4,8 +4,8 @@ import MenuDown from 'mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import Box from '../Box';
 import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
@@ -121,8 +121,6 @@ SelectFieldBase.propTypes = {
   name: PropTypes.string,
   /** Temporary text that occupies the text input when it is empty. */
   placeholder: PropTypes.string,
-  /** Determines the type of label applied to the component. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines whether to use column styles. */
   columnStyleProps: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({})]),
   /** Determines props that applied to root container. */
@@ -159,6 +157,7 @@ SelectFieldBase.propTypes = {
   triggerRef: PropTypes.shape({}),
   /** Props for the element representing the selected value. */
   valueProps: PropTypes.shape({}),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

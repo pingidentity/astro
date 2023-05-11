@@ -8,9 +8,9 @@ import {
   LinkSelectField,
   Separator,
 } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
   title: 'Form/LinkSelectField',
@@ -41,13 +41,6 @@ export default {
         type: 'text',
       },
     },
-    status: {
-      control: {
-        type: 'select',
-        options: statuses,
-      },
-      defaultValue: statuses.DEFAULT,
-    },
     defaultSelectedKey: {},
     disabledKeys: {},
     name: {},
@@ -63,6 +56,7 @@ export default {
         type: 'none',
       },
     },
+    ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },

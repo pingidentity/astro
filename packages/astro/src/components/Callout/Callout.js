@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Box } from '../..';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import { NoticeIcon } from '../Icon/NoticeIcon';
 
 export const CALLOUT_TEST_ID = 'CalloutTestId';
@@ -45,12 +45,11 @@ const Callout = ({ children, status, ...others }) => (
 );
 
 Callout.propTypes = {
-  /** Determines the icon and color  */
-  status: PropTypes.oneOf(Object.values(statuses)),
+  ...statusPropTypes,
 };
 
 Callout.defaultProps = {
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 Callout.displayName = 'Callout';

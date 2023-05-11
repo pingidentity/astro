@@ -5,9 +5,9 @@ import { v4 as uuid } from 'uuid';
 import { Box, FieldHelperText, Input, Label } from '../..';
 import { useField, useLabelHeight, usePropWarning } from '../../hooks';
 import useColumnStyles from '../../hooks/useColumnStyles';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
 /**
  * Combines a text input, label, and helper text for a complete, form-ready solution.
@@ -117,12 +117,11 @@ TextField.propTypes = {
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
-  /** Determines the input status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
   type: PropTypes.string,
   /** Props object that is spread directly into the input wrapper element. */
   wrapperProps: PropTypes.shape({}),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
@@ -132,7 +131,7 @@ TextField.defaultProps = {
   isDisabled: false,
   isReadOnly: false,
   isRequired: false,
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 TextField.displayName = 'TextField';

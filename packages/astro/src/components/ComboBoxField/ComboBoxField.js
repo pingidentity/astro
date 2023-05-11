@@ -14,8 +14,9 @@ import PropTypes from 'prop-types';
 
 import { usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import ComboBoxInput from '../ComboBox';
 import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
@@ -255,8 +256,6 @@ ComboBoxField.propTypes = {
   direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /** Text rendered below the input. */
   helperText: PropTypes.node,
-  /** Determines the input status indicator and helper text styling. */
-  status: PropTypes.oneOf(['default', 'success', 'warning', 'error']),
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey: PropTypes.string,
   /** The currently selected key in the collection (controlled). */
@@ -352,6 +351,7 @@ ComboBoxField.propTypes = {
   controlProps: PropTypes.shape({
     onClick: PropTypes.func,
   }),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

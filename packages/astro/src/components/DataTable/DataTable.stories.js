@@ -17,7 +17,7 @@ import {
   DataTableMultiLine,
   DataTableRow,
 } from '../../index';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import DataTableReadme from './DataTable.mdx';
 
