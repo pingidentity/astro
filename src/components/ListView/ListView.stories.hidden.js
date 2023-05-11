@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Item, useAsyncList } from 'react-stately';
 import { action } from '@storybook/addon-actions';
