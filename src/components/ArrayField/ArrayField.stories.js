@@ -9,7 +9,7 @@ import {
   SelectField,
   TextField,
 } from '../../index';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 export default {
   title: 'Form/ArrayField',

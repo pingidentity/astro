@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Input, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 
 /**
  * Renders a search field with associated controls including visual elements and keyboard

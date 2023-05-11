@@ -3,10 +3,10 @@ import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
 import AlertIcon from 'mdi-react/AlertIcon';
 import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
 import InformationIcon from 'mdi-react/InformationIcon';
-import PropTypes from 'prop-types';
 
 import { Icon } from '../..';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 export const noticeIcons = {
   [statuses.DEFAULT]: { icon: InformationIcon, testid: 'default-icon-testid' },
@@ -28,5 +28,5 @@ export const NoticeIcon = ({
 
 
 NoticeIcon.propTypes = {
-  status: PropTypes.oneOf(Object.values(statuses)),
+  ...statusPropTypes,
 };

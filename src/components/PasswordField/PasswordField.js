@@ -17,8 +17,9 @@ import {
 } from '../..';
 import * as hooks from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
 const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   HIDE: 'hide password',
@@ -222,8 +223,6 @@ PasswordField.propTypes = {
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
-  /** Determines the input status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
   type: PropTypes.string,
   /** @ignore Prop that allows testing of the icon button. */
@@ -231,9 +230,13 @@ PasswordField.propTypes = {
   /** @ignore Prop that allows testing of the icon button. */
   viewIconTestId: PropTypes.string,
   /** Array of Requirements and their status. */
-  requirements: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired, status: PropTypes.oneOf(['default', 'success', 'warning', 'error']) })),
+  requirements: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    ...statusPropTypes,
+  })),
   /** Props object that is spread to the requirements list. */
   requirementsListProps: PropTypes.shape({}),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
@@ -244,8 +247,8 @@ PasswordField.defaultProps = {
   isReadOnly: false,
   isRequired: false,
   requirements: [],
-  status: statuses.DEFAULT,
   type: 'password',
+  ...statusDefaultProp,
 };
 
 PasswordField.displayName = 'PasswordField';

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import Text from '../Text';
 
 /**
@@ -31,14 +31,13 @@ const FieldHelperText = forwardRef((props, ref) => {
 });
 
 FieldHelperText.propTypes = {
-  /** Determines the color of the field message. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id: PropTypes.string,
+  ...statusPropTypes,
 };
 
 FieldHelperText.defaultProps = {
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 FieldHelperText.displayName = 'FieldHelperText';

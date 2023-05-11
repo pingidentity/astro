@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import { Box, Button, Icon, Loader, TextField } from '../..';
 import { usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 const ComboBoxInput = forwardRef((props, ref) => {
   const {
@@ -157,11 +157,11 @@ ComboBoxInput.propTypes = {
   onLoadMore: PropTypes.func,
   onOpenChange: PropTypes.func,
   onSelectionChange: PropTypes.func,
-  status: PropTypes.oneOf(Object.values(statuses)),
   style: PropTypes.shape({}),
   triggerProps: PropTypes.shape({}),
   triggerRef: PropTypes.shape({}),
   wrapperProps: PropTypes.shape({}),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

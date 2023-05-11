@@ -7,6 +7,7 @@ import {
   Text,
 } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import CalloutReadme from './Callout.mdx';
 
@@ -14,12 +15,7 @@ export default {
   title: 'Components/Callout',
   component: Callout,
   argTypes: {
-    status: {
-      control: {
-        type: 'select',
-        options: Object.values(statuses),
-      },
-    },
+    ...statusArgTypes,
   },
   parameters: {
     docs: {

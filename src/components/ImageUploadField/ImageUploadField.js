@@ -10,9 +10,9 @@ import { v4 as uuid } from 'uuid';
 
 import { Item, Menu } from '../..';
 import { useImageUploadState } from '../../hooks/useImageUploadState';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 import ImagePreviewButton from './ImagePreviewButton';
 import ImageUploadFieldBase from './ImageUploadFieldBase';
@@ -130,8 +130,7 @@ ImageUploadField.propTypes = {
   previewHeight: PropTypes.number,
   /** Define component height */
   previewWidth: PropTypes.number,
-  /** Determines the helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
