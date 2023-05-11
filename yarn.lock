@@ -4778,7 +4778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pingux/astro@^2.1.3, @pingux/astro@workspace:packages/astro":
+"@pingux/astro@^2.2.0-alpha.7, @pingux/astro@workspace:packages/astro":
   version: 0.0.0-use.local
   resolution: "@pingux/astro@workspace:packages/astro"
   dependencies:
@@ -4798,6 +4798,7 @@ __metadata:
     "@emotion/styled": ^11.1.1
     "@faker-js/faker": ~7.5.0
     "@mdx-js/react": ^1.6.22
+    "@pingux/mdi-react": ^1.0.0
     "@react-aria/accordion": ~3.0.0-alpha.11
     "@react-aria/breadcrumbs": ^3.1.4
     "@react-aria/button": ^3.2.1
@@ -5105,7 +5106,7 @@ __metadata:
     "@material-ui/lab": ^4.0.0-alpha.57
     "@mdi/js": ^5.8.55
     "@mdi/react": ^1.4.0
-    "@pingux/astro": ^2.1.3
+    "@pingux/astro": ^2.2.0-alpha.7
     "@pingux/icons": ^0.2.0
     "@storybook/addon-actions": ^6.5.10
     "@storybook/addon-docs": ^6.5.10
@@ -5182,6 +5183,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@pingux/mdi-react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@pingux/mdi-react@npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"
+  peerDependencies:
+    react: ">=0.14.0"
+  checksum: fb58cb618039e859ff8762304ae3d8e412c410cb547ae48278977e6332ef9b1d4378dcd21f2ebe710622c0ae368a431b325a3908b1dd02f46f577d9d6ec20dc9
+  languageName: node
+  linkType: hard
+
 "@pingux/schema-form@workspace:packages/schema-form":
   version: 0.0.0-use.local
   resolution: "@pingux/schema-form@workspace:packages/schema-form"
@@ -5202,7 +5212,7 @@ __metadata:
     "@emotion/react": ^11.1.1
     "@emotion/styled": ^11.1.1
     "@mdx-js/react": ^1.6.22
-    "@pingux/astro": ^2.1.3
+    "@pingux/astro": ^2.2.0-alpha.7
     "@pingux/icons": ^0.2.0
     "@rjsf/core": 2.0.0
     "@storybook/addon-actions": ^6.5.10

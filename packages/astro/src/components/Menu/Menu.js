@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { MenuContext } from '../../context/MenuContext';
 import { usePropWarning } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
-import { onHoverPropTypes } from '../../utils/devUtils/props/hoverProps';
+import { onHoverPropTypes } from '../../utils/docUtils/hoverProps';
 import Box from '../Box';
 import MenuItem from '../MenuItem';
 

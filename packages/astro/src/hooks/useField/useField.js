@@ -6,7 +6,7 @@ import omit from 'lodash/omit';
 
 import { modes as labelModes } from '../../components/Label/constants';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
+import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { useStatusClasses } from '..';
 
 

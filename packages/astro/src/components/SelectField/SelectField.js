@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { usePropWarning, useSelectField } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import SelectFieldBase from '../SelectFieldBase';
 
 /**
@@ -76,8 +76,6 @@ SelectField.propTypes = {
   selectedKey: PropTypes.string,
   /** Determines the textarea status indicator and helper text styling. Eg. float. */
   labelMode: PropTypes.string,
-  /** Determines the type of label applied to the component. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /**
    * Handler that is called when more items should be loaded, e.g. while scrolling near the bottom.
    *
@@ -108,15 +106,16 @@ SelectField.propTypes = {
   scrollBoxProps: PropTypes.shape({
     maxHeight: PropTypes.string,
   }),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
 };
 
 SelectField.defaultProps = {
   placeholder: 'Select',
-  status: statuses.DEFAULT,
   align: 'start',
   direction: 'bottom',
   scrollBoxProps: { maxHeight: '300px' },
+  ...statusDefaultProp,
 };
 
 SelectField.displayName = 'SelectField';

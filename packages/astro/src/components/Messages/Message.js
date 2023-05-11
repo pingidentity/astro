@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Text } from '../..';
 import useStatusClasses from '../../hooks/useStatusClasses';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import { NoticeIcon } from '../Icon/NoticeIcon';
 
 export const ARIA_STATUSES = {
@@ -135,8 +135,6 @@ Message.propTypes = {
     key: PropTypes.string,
     props: PropTypes.shape({
       children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-      /* status changes the background, text, and button color accordingly */
-      status: PropTypes.oneOf(Object.values(statuses)),
       /* Background color */
       bg: PropTypes.string,
       /* Text color */
@@ -146,6 +144,7 @@ Message.propTypes = {
       /* Hides the message with an animated transition */
       isHidden: PropTypes.bool,
       'data-id': PropTypes.string,
+      status: { ...statusPropTypes }.status,
     }),
   }),
   /* Callback for clicking the message's close button */

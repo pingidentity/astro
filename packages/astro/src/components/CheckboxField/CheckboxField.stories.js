@@ -6,9 +6,9 @@ import {
   Link,
   Text,
 } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
   title: 'Form/CheckboxField',
@@ -37,13 +37,6 @@ export default {
         type: 'text',
       },
     },
-    status: {
-      control: {
-        type: 'select',
-        options: Object.values(statuses),
-      },
-      defaultValue: statuses.DEFAULT,
-    },
     name: {},
     id: {
       control: {
@@ -58,6 +51,7 @@ export default {
     isIndeterminate: {},
     isDefaultSelected: {},
     isSelected: {},
+    ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },

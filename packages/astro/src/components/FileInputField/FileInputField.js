@@ -15,8 +15,9 @@ import { Box, FieldHelperText, Input, Label, Loader } from '../..';
 import useField from '../../hooks/useField';
 import useStatusClasses from '../../hooks/useStatusClasses';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
@@ -218,8 +219,6 @@ FileInputField.propTypes = {
   label: PropTypes.node,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
-  /** Determines the component border status color indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Default button text that will be changed on the file name once file is uploaded */
   defaultButtonText: PropTypes.string,
   /** Defines whether input can accept multiple files or not */
@@ -252,7 +251,7 @@ FileInputField.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       downloadLink: PropTypes.string,
-      status: PropTypes.oneOf(Object.values(statuses)),
+      ...statusPropTypes,
     }),
   ),
   /** Default array of objects for uploaded files. */
@@ -262,7 +261,7 @@ FileInputField.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       downloadLink: PropTypes.string,
-      status: PropTypes.oneOf(Object.values(statuses)),
+      ...statusPropTypes,
     }),
   ),
   /** The handler that is called when the input files is uploaded.
@@ -277,13 +276,14 @@ FileInputField.propTypes = {
   onRemove: PropTypes.func,
   /** These props will be spread to the field text component. */
   textProps: PropTypes.shape({}),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };
 
 FileInputField.defaultProps = {
   defaultButtonText: 'Select a file',
-  status: statuses.DEFAULT,
+  ...statusDefaultProp,
 };
 
 export default FileInputField;

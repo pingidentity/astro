@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Box, FieldHelperText, Input, Label, PopoverMenu } from '../..';
 import useField from '../../hooks/useField';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 const ImageUploadFieldBase = forwardRef((props, inputRef) => {
   const {
@@ -50,6 +51,7 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
           data-testid="image-upload-input"
           onChange={handleInputChange}
           ref={inputRef}
+          sx={{ display: 'none' }}
           type="file"
           value=""
         />
@@ -84,7 +86,7 @@ ImageUploadFieldBase.propTypes = {
   helperText: PropTypes.node,
   isImageType: PropTypes.bool,
   isMenuOpen: PropTypes.bool,
-  status: PropTypes.oneOf(Object.values(statuses)),
+  ...statusPropTypes,
 };
 
 ImageUploadFieldBase.displayName = 'ImageUploadFieldBase';
