@@ -50,6 +50,7 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
           data-testid="image-upload-input"
           onChange={handleInputChange}
           ref={inputRef}
+          sx={{ display: 'none' }}
           type="file"
           value=""
         />
