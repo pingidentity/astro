@@ -3,7 +3,7 @@ import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
-import { onHoverPropTypes } from '../../utils/devUtils/props/hoverProps';
+import { onHoverPropTypes } from '../../utils/docUtils/hoverProps';
 import Box from '../Box/Box';
 
 /**

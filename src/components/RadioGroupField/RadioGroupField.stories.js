@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { RadioField, RadioGroupField } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
   title: 'Form/RadioGroupField',
@@ -24,13 +24,6 @@ export default {
         type: 'text',
       },
     },
-    status: {
-      control: {
-        type: 'select',
-        options: statuses,
-      },
-      defaultValue: statuses.DEFAULT,
-    },
     defaultValue: {
       defaultValue: 'A',
     },
@@ -44,6 +37,7 @@ export default {
         type: 'none',
       },
     },
+    ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
   },
 };

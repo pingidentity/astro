@@ -7,8 +7,9 @@ import { v4 as uuid } from 'uuid';
 import { Box, Button, Icon, Loader, Text } from '../..';
 import { usePropWarning, useSelectField } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import SelectFieldBase from '../SelectFieldBase';
 
 /**
@@ -122,8 +123,6 @@ LinkSelectField.propTypes = {
   placeholder: PropTypes.string,
   /** The currently selected key in the collection (controlled). */
   selectedKey: PropTypes.string,
-  /** Determines the type of label applied to the component. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /**
    * Handler that is called when more items should be loaded, e.g. while scrolling near the bottom.
    *
@@ -142,15 +141,16 @@ LinkSelectField.propTypes = {
    * (key: Key) => any
    */
   onSelectionChange: PropTypes.func,
+  ...statusPropTypes,
   ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,
 };
 
 LinkSelectField.defaultProps = {
   placeholder: 'Select',
-  status: statuses.DEFAULT,
   align: 'start',
   direction: 'bottom',
+  ...statusDefaultProp,
 };
 
 LinkSelectField.displayName = 'LinkSelectField';

@@ -13,9 +13,9 @@ import PropTypes from 'prop-types';
 
 import { Box, Button, FieldHelperText, Input, Label } from '../..';
 import useField from '../../hooks/useField';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/devUtils/props/fieldAttributes';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import PopoverContainer from '../PopoverContainer';
 
 /**
@@ -160,12 +160,11 @@ ColorField.propTypes = {
    * (color, event) => void;
    */
   onChange: PropTypes.func,
-  /** Determines the helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Color controls what color is active on the color picker. */
   value: PropTypes.string,
   /** Props object that is spread into the Button element. */
   buttonProps: PropTypes.shape({}),
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,
 };

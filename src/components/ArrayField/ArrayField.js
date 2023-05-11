@@ -5,8 +5,9 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, Button, FieldHelperText, Label, Text } from '../..';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/devUtils/props/ariaAttributes';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
+import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 /**
  * Displays array collections providing useful functions and
@@ -204,12 +205,11 @@ ArrayField.propTypes = {
   onDelete: PropTypes.func,
   /** Render prop to display an input field */
   renderField: PropTypes.func,
-  /** Determines the helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** Determines the maximum number of items */
   maxSize: isValidPositiveInt,
   /** Text to display when the maximum number of items is reached */
   maxSizeText: PropTypes.node,
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

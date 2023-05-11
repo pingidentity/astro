@@ -9,8 +9,8 @@ import { useRadio } from 'react-aria';
 import PropTypes from 'prop-types';
 
 import { useField, usePropWarning } from '../../hooks';
-import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
@@ -119,8 +119,6 @@ RadioField.propTypes = {
   isReadOnly: PropTypes.bool,
   /** Whether the Radio is required. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required). */
   isRequired: PropTypes.bool,
-  /** Determines the textarea status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
   /** The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). */
   value: PropTypes.string,
   /** Handler that is called when the element receives focus. */
@@ -144,6 +142,7 @@ RadioField.propTypes = {
    * object.
   */
   'aria-details': PropTypes.string,
+  ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
 };
 

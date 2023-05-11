@@ -1,19 +1,13 @@
 import React from 'react';
 
 import { FieldHelperText } from '../../index';
-import statuses from '../../utils/devUtils/constants/statuses';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
   title: 'Form/Base Components/FieldHelperText',
   component: FieldHelperText,
   argTypes: {
-    status: {
-      control: {
-        type: 'select',
-        options: statuses,
-      },
-      defaultValue: statuses.DEFAULT,
-    },
+    ...statusArgTypes,
   },
 };
 

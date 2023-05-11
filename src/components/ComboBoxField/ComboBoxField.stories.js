@@ -10,7 +10,7 @@ import {
   Section,
 } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import { ariaAttributeBaseArgTypes } from '../../utils/devUtils/props/ariaAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 const items = [
   { name: 'Aardvark', id: '1' },

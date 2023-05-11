@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
-import statuses from '../../utils/devUtils/constants/statuses';
+import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import Box from '../Box';
 
 import Message from './Message';
@@ -38,8 +38,8 @@ Messages.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string,
     text: PropTypes.string,
-    status: PropTypes.oneOf(Object.values(statuses)),
     node: PropTypes.node,
+    ...statusPropTypes,
   })),
   /* Callback for clicking the message's close button */
   onClose: PropTypes.func,
