@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useMemo, useRef, useState } from 'react';
 import { FocusScope, useOverlayPosition } from 'react-aria';
 import { createFocusManager } from '@react-aria/focus';
