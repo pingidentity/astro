@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.3...@pingux/astro@2.2.0) (2023-05-11)
+
+
+### Bug Fixes
+
+* [UIP-6198] ImageUploadField Screen Reader Hidden Content ([c066516](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c066516ec7aa5c23f620c9cc825a2e39988cb857))
+* [UIP-6267] Image: add aria-live attribute ([903e3f3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/903e3f33a0da6380b3658e2f40894c17af9d2cea))
+
+
+### Features
+
+* [UIP-6243] Icon - Add Associated Title ([0a9dae2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0a9dae2626537b83809e322f66795a9c121a2faa))
+
+
+
+
+
 ## [2.1.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.2...@pingux/astro@2.1.3) (2023-05-04)
 
 
