@@ -77,7 +77,7 @@ TextField.propTypes = {
    */
   onChange: PropTypes.func,
   /** The value for the input element (controlled). */
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** How the input should handle autocompletion according to the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). The `autocomplete` prop is an alias for this. */
   autoComplete: PropTypes.string,
   /** @ignore Alias for `autoComplete` prop. Exists for backwards-compatibility. */

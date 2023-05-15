@@ -2,6 +2,7 @@ import { badgeDeleteButton, deleteButton } from '../Badge/Badge.styles';
 import { defaultFocus } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
+import { containedIcon } from '../DatePicker/DatePicker.styles';
 import { hintButton } from '../HelpHint/HelpHint.styles';
 import { messageCloseButton } from '../Messages/Message.styles';
 import { modalCloseButton } from '../Modal/Modal.styles';
@@ -149,6 +150,9 @@ export default {
   badge: { deleteButton },
   badgeDeleteButton,
   copyButton,
+  datePicker: {
+    containedIcon: { ...base, ...containedIcon },
+  },
   hintButton: { ...base, ...hintButton },
   inverted,
   messageCloseButton: { ...base, ...messageCloseButton },
