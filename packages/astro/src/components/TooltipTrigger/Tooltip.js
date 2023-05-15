@@ -2,7 +2,6 @@ import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'reac
 import { useTooltip } from 'react-aria';
 
 import { TooltipContext } from '../../context/TooltipContext/index';
-import Box from '../Box';
 import Text from '../Text';
 
 const Tooltip = forwardRef((props, ref) => {
@@ -18,16 +17,15 @@ const Tooltip = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => tooltipRef.current);
 
   return (
-    <Box
+    <Text
       ref={tooltipRef}
-      variant="tooltip.container"
+      variant="variants.tooltip.container"
+      p="sm"
       {...tooltipProps}
       {...others}
     >
-      <Text variant="variants.tooltip.content">
-        {children}
-      </Text>
-    </Box>
+      {children}
+    </Text>
   );
 });
 
