@@ -2,7 +2,20 @@ import { baseBadge } from '../Badge/Badge.styles';
 import { text } from '../Button/Buttons.styles';
 
 const container = {
-  p: 'sm',
+  maxWidth: '11.3em',
+  maxHeight: '15em',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  WebkitLineClamp: '10',
+  WebkitBoxOrient: 'vertical',
+  display: '-webkit-box !important',
+  wordBreak: 'break-word',
+
+  '.is-right > * > &, .is-left > * > &': {
+    maxWidth: '24em',
+    maxHeight: '6.5em',
+    WebkitLineClamp: '4',
+  },
 };
 
 const badge = {
@@ -36,27 +49,9 @@ const inline = {
   },
 };
 
-const content = {
-  maxWidth: '10em',
-  maxHeight: '15em',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  WebkitLineClamp: '10',
-  WebkitBoxOrient: 'vertical',
-  display: '-webkit-box !important',
-  wordBreak: 'break-word',
-
-  '.is-right > * > &, .is-left > * > &': {
-    maxWidth: '24em',
-    maxHeight: '6.5em',
-    WebkitLineClamp: '4',
-  },
-};
-
 export default {
   container,
   badge,
   button,
   inline,
-  content,
 };
