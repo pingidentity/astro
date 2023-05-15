@@ -13,7 +13,7 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
  * Combines a text input, label, and helper text for a complete, form-ready solution.
  */
 const TextField = forwardRef((props, ref) => {
-  const { helperText, slots, status } = props;
+  const { helperText, helpHintProps, slots, status } = props;
   const {
     fieldContainerProps,
     fieldControlInputProps,
@@ -34,7 +34,12 @@ const TextField = forwardRef((props, ref) => {
 
   return (
     <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
-      <Label {...fieldLabelProps} ref={labelRef} sx={isLabelHigher && { gridRow: '1/5' }} />
+      <Label
+        {...fieldLabelProps}
+        ref={labelRef}
+        sx={isLabelHigher && { gridRow: '1/5' }}
+        helpHintProps={helpHintProps}
+      />
       <Box variant="forms.input.fieldControlWrapper" {...fieldControlWrapperProps}>
         {slots?.beforeInput}
         <Input
@@ -92,6 +97,8 @@ TextField.propTypes = {
   hintText: PropTypes.string,
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator: PropTypes.bool,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps: PropTypes.shape({}),
   /** Whether the field is disabled. */
   isDisabled: PropTypes.bool,
   /** Whether the input can be selected, but not changed by the user. */
