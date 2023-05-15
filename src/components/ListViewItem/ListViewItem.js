@@ -15,6 +15,7 @@ const ListViewItem = props => {
       props: { listItemProps, rowProps, hasSeparator = true, hasInsetSeparator },
     },
     isHoverable,
+    isFocusable,
     className,
   } = props;
 
@@ -55,8 +56,7 @@ const ListViewItem = props => {
   const mergedProps = mergeProps(
     raRowProps,
     hoverProps,
-    focusWithinProps,
-    focusProps,
+    isFocusable ? { ...focusProps, ...focusWithinProps } : {},
   );
 
   const { classNames } = useStatusClasses(className, {
@@ -106,6 +106,7 @@ ListViewItem.propTypes = {
     }),
   }),
   isHoverable: PropTypes.bool,
+  isFocusable: PropTypes.bool,
 };
 
 export default ListViewItem;
