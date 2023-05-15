@@ -218,3 +218,23 @@ test('list view reset hover on item when scroll', () => {
   fireEvent.scroll(listView[0], { target: { scrollY: 100 } });
   expect(listItem[0]).not.toHaveClass('is-hovered');
 });
+
+test('list view item should not receive focus when selectionMode is "none"', () => {
+  const onFocus = jest.fn();
+  getComponent({ onFocus, selectionMode: 'none' });
+  const options = screen.getAllByRole('gridcell');
+
+  userEvent.tab();
+  expect(onFocus).not.toHaveBeenCalled();
+  expect(options[0]).not.toHaveClass('is-focused');
+});
+
+test('list view item should receive focus when selectionMode is default or a value other than "none"', () => {
+  const onFocus = jest.fn();
+  getComponent({ onFocus });
+  const options = screen.getAllByRole('gridcell');
+
+  userEvent.tab();
+  expect(onFocus).toHaveBeenCalled();
+  expect(options[0]).toHaveClass('is-focused');
+});
