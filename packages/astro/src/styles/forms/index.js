@@ -1,6 +1,7 @@
 import * as checkbox from '../../components/Checkbox/Checkbox.styles';
 import colorField from '../../components/ColorField/ColorField.styles';
 import comboBox from '../../components/ComboBox/ComboBox.styles';
+import datePicker from '../../components/DatePicker/DatePicker.styles';
 import fileInputField from '../../components/FileInputField/FileInputField.styles';
 import * as input from '../../components/Input/Input.styles';
 import * as label from '../../components/Label/Label.styles';
@@ -17,6 +18,7 @@ export default {
   ...checkbox,
   colorField,
   comboBox,
+  datePicker,
   fileInputField,
   ...input,
   ...label,
