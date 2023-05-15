@@ -164,18 +164,16 @@ export const ContentSlots = () => {
     <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} />
   );
   const nodeSx = {
-    alignItems: 'center',
-    backgroundColor: 'neutral.95',
-    borderRadius: '50%',
-    color: 'neutral.30',
-    fontSize: 'sm',
-    height: 20,
-    justifyContent: 'center',
     marginLeft: 6,
     marginTop: 10,
-    minWidth: 20,
   };
-  const afterTabNode = <Badge sx={nodeSx}>14</Badge>;
+  const afterTabNode = (
+    <Badge
+      variant="countNeutral"
+      sx={nodeSx}
+      label="14"
+    />
+  );
 
   return (
     <>
