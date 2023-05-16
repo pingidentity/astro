@@ -17,9 +17,6 @@ const button = {
       outlineColor: 'focus',
       outlineOffset: '1px',
     },
-    '&:focus-visible': {
-      outline: 'none',
-    },
     '&.is-pressed': {
       color: 'accent.20',
       textDecoration: 'none',
