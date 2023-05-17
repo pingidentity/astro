@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.2.0...@pingux/astro@2.3.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* [UIP-6113] EnvironmentBreadcrumb: remove 'outline: none' ([93f2d79](https://gitlab.corp.pingidentity.com/ux/pingux/commit/93f2d79056486c2213b875877265bbfd508ab07d))
+* [UIP-6120] Tab content slot chip update ([6e9e630](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6e9e63074393add5c3e586afe26b81923eb17922))
+* [UIP-6272] Disable focus for non interactive list elements ([c764f65](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c764f651b34288275adf9c5f406641873f21f48b))
+
+
+### Features
+
+* [UIP-5588] Add DatePicker component ([f213eab](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f213eab274c331515e5c681f055d8ce723954844))
+* [UIP-6262] TextField Custom Tooltip Width ([466dd8c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/466dd8c8b8d791f522e499a722a864cd641c7079))
+
+
+
+
+
 # [2.2.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.1.3...@pingux/astro@2.2.0) (2023-05-11)
 
 
