@@ -51,7 +51,7 @@ const CollapsiblePanel = forwardRef((props, ref) => {
         className={classNames}
         data-testid="collapsible-panel"
         ref={ref}
-        tabIndex={0}
+        tabIndex={-1}
         variant="collapsiblePanel.content"
         {...mergedProps}
         {...others}

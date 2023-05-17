@@ -3,6 +3,8 @@ import accordion from '../../components/AccordionGroup/Accordion.styles';
 import box from '../../components/Box/Box.styles';
 import bracket from '../../components/Bracket/Bracket.styles';
 import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
+import calendar from '../../components/Calendar/Calendar.styles';
+import callout from '../../components/Callout/Callout.styles';
 import codeView from '../../components/CodeView/CodeView.styles';
 import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel.styles';
 import copyText from '../../components/CopyText/CopyText.styles';
@@ -31,14 +33,13 @@ import * as tab from '../../components/Tabs/Tabs.style';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
 
-import callout from './callout';
-
 export default {
   accordion,
   accordionGrid,
   box,
   bracket,
   breadcrumb,
+  calendar,
   callout,
   codeView,
   collapsiblePanel,

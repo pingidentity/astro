@@ -70,6 +70,7 @@ const ListView = forwardRef((props, ref) => {
   const isLoading = (
     loadingState === loadingStates.LOADING_MORE || loadingState === loadingStates.LOADING
   );
+  const isFocusable = selectionMode !== 'none';
 
   const renderWrapper = (parent, reusableView) => (
     <VirtualizerItem
@@ -139,13 +140,15 @@ const ListView = forwardRef((props, ref) => {
         collection={collection}
         transitionDuration={0}
         {...others}
-        onFocus={onFocus}
+        onFocus={isFocusable && onFocus}
         onScroll={resetHoverState}
+        tabIndex={isFocusable ? 0 : -1}
+        shouldUseVirtualFocus={!isFocusable}
       >
         {(type, item) => {
           if (type === 'item') {
             return (
-              <ListViewItem isHoverable={isHoverable} item={item} />
+              <ListViewItem isHoverable={isHoverable} isFocusable={isFocusable} item={item} />
             );
           } if (type === collectionTypes.LOADER) {
             return <Loader variant="loader.withinListView" aria-label="Loading more..." />;

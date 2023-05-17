@@ -53,6 +53,7 @@ export const parameters = {
           'CheckboxField',
           'ColorField',
           'ComboBoxField',
+          'DatePicker',
           'FileInputField',
           'ImageUploadField',
           'LinkSelectField',

@@ -175,6 +175,16 @@ export const WithHelpHint = () => (
   />
 );
 
+export const WithHelpHintCustomWidth = () => (
+  <TextField
+    id="with-help-hint-id"
+    name="custom-name"
+    hintText="Example Hint"
+    label="Example Label"
+    helpHintProps={{ width: '300px' }}
+  />
+);
+
 export const WithoutStatusIndicator = () => (
   <TextField
     label="Example Label"

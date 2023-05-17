@@ -118,7 +118,8 @@ const countDefault = {
   width: 'fit-content',
   minWidth: '17px',
   minHeight: '17px',
-  p: '2px 5px 2px 5px',
+  px: '0',
+  py: '2px',
   '& span': {
     fontSize: '11px',
     textTransform: 'uppercase',
@@ -134,7 +135,7 @@ const countNeutral = {
   ...countDefault,
   backgroundColor: '#E4E6E9 !important',
   '& span': {
-    color: 'neutral.20',
+    color: 'neutral.30',
     fontSize: '11px',
     textTransform: 'uppercase',
   },
