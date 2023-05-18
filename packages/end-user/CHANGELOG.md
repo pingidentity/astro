@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.26](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.25...@pingux/end-user@2.4.26) (2023-05-18)
+
+
+### Bug Fixes
+
+* [UIP-6289] End User fix data-id in Anchor ([d8896cd](https://gitlab.corp.pingidentity.com/ux/end-user/commit/d8896cde232371dccce4912b4a0177d98c8b26cc))
+
+
+
+
+
 ## [2.4.25](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.24...@pingux/end-user@2.4.25) (2023-04-04)
 
 

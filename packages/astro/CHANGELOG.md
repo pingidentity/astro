@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.3.0...@pingux/astro@2.4.0) (2023-05-18)
+
+
+### Features
+
+* [UIP-6266] Environment breadcrumb screenreader sections ([aff5aad](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aff5aad8549406e4e2702d67af2fed0a70a3f795))
+
+
+
+
+
 # [2.3.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.2.0...@pingux/astro@2.3.0) (2023-05-17)
 
 
