@@ -69,7 +69,7 @@ const SelfServeNav = ({
             <ul>
                 {navs.map((nav,index)=>(
                     <li className={index===selectedNav ? 'active' : null} key={index}>
-                        <Anchor role="button" onClick={() => handleNavSelection(index)}>{nav}</Anchor>
+                        <Anchor data-id={`tab_${nav}`}role="button" onClick={() => handleNavSelection(index)}>{nav}</Anchor>
                     </li>
                 ))}
             </ul>
