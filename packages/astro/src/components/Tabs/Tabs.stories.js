@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Earth from 'mdi-react/GlobeModelIcon';
 import LockIcon from 'mdi-react/LockIcon';
 
 import {
@@ -81,20 +80,6 @@ export const Controlled = () => {
     </Tabs>
   );
 };
-
-export const WithIcon = () => (
-  <Tabs items={tabs}>
-    {item => (
-      <Tab
-        key={item.name}
-        title={item.name}
-        icon={<Icon icon={Earth} size={20} color="active" mb={10} />}
-      >
-        {item.children}
-      </Tab>
-    )}
-  </Tabs>
-);
 
 export const WithTooltips = () => {
   return (
