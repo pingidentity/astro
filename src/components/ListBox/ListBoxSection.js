@@ -37,25 +37,23 @@ const ListBoxSection = props => {
   return (
     <>
       <Box
-        as="ul"
         ref={headerRef}
         style={layoutInfoToStyle(header.layoutInfo, direction)}
-        // uls add a 40px left padding by default
-        sx={{ paddingInlineStart: '0px' }}
-        {...groupProps}
       >
         {item.key !== state.collection.getFirstKey()
           && <Separator mt="0px" />}
-        {item.rendered && (
+        {item.rendered
+          && (
           <Box
             {...headingProps}
             variant="listBox.sectionTitle"
           >
             {item.rendered}
           </Box>
-        )}
+          )}
       </Box>
       <Box
+        {...groupProps}
         style={layoutInfoToStyle(reusableView.layoutInfo, direction)}
       >
         {children}
