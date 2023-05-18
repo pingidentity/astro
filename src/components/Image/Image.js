@@ -112,7 +112,7 @@ const Image = forwardRef((props, ref) => {
 `;
 
   const skeletonSx = {
-    backgroundColor: neutral[90],
+    backgroundImage: !isLoading && 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\'%3E%3Crect x=\'0\' y=\'0\' width=\'150\' height=\'150\' fill=\'%23e4e6e9\' /%3E%3C/svg%3E")',
     // eslint-disable-next-line react/prop-types
     width: sx?.width || '100%',
     // eslint-disable-next-line react/prop-types
@@ -122,7 +122,13 @@ const Image = forwardRef((props, ref) => {
   };
 
   const Skeleton = ({ children }) => (
-    <Box sx={skeletonSx} data-testid="skeleton-image">
+    <Box
+      role="img"
+      sx={skeletonSx}
+      data-testid="skeleton-image"
+      aria-busy={isLoading}
+      aria-label={isLoading ? 'Image is loading' : 'Loading of image timed out'}
+    >
       {children}
     </Box>
   );
