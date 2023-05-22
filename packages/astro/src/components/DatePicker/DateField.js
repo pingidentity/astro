@@ -17,7 +17,7 @@ import { useDateFieldState } from '@react-stately/datepicker';
 import CalendarIcon from 'mdi-react/CalendarIcon';
 import PropTypes from 'prop-types';
 
-import { useField } from '../../hooks';
+import { useField, useStatusClasses } from '../../hooks';
 import {
   Box,
   FieldHelperText,
@@ -44,6 +44,7 @@ const ARIA_LABELS_CALENDAR_BUTTON_EXPANSION = {
 const DateField = forwardRef((props, ref) => {
   const {
     buttonProps,
+    className,
     fieldProps,
     groupProps,
     groupRef,
@@ -76,6 +77,12 @@ const DateField = forwardRef((props, ref) => {
     ...fieldProps,
     locale,
     createCalendar,
+  });
+
+  const { classNames } = useStatusClasses(className, {
+    isDisabled,
+    isReadOnly,
+    [`is-${status}`]: true,
   });
 
   const { segments } = state;
@@ -231,6 +238,7 @@ const DateField = forwardRef((props, ref) => {
         variant="forms.datePicker.inSlotContainer"
         {...groupProps}
         ref={groupRef}
+        className={classNames}
       >
         <Box {...fieldControlWrapperProps}>
           <VisuallyHidden>
@@ -249,6 +257,7 @@ const DateField = forwardRef((props, ref) => {
           variant="forms.datePicker.inputField"
           {...dateFieldProps}
           ref={fieldRef}
+          className={classNames}
         >
           <FocusScope>
             {(locale === 'en-US' ? enUSSegments : segments).map((segment, index) => (
