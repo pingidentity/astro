@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.4.0...@pingux/astro@2.4.1) (2023-05-23)
+
+
+### Bug Fixes
+
+* [UIP-5890] DatePicker story fixes ([532cf8c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/532cf8c12ebad54a9d2a83b1529ca227c6483823))
+* [UIP-6291] DateField format fix for 2 digit month and day ([43a9e6e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/43a9e6ef10c9d4022f5c478e39d181ac6594a815))
+
+
+
+
+
 # [2.4.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.3.0...@pingux/astro@2.4.0) (2023-05-18)
 
 
