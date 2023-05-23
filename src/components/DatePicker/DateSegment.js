@@ -19,7 +19,7 @@ const DateSegment = forwardRef((props, ref) => {
   const { segmentProps } = useDateSegment(segment, state, segmentRef);
 
   /**
-   * Handler to autofocus segments when using deleting them
+   * Handler to autofocus segments when using delete key
    */
   const focusManager = useFocusManager();
 
@@ -40,7 +40,7 @@ const DateSegment = forwardRef((props, ref) => {
       onKeyUp={handleKeyEvents}
       onPaste={handlePaste}
     >
-      {text === '/' ? '-' : text}
+      {text === '/' ? '-' : text.padStart(segment.type === 'year' ? 4 : 2, 0)}
     </Box>
   );
 });
@@ -52,6 +52,7 @@ DateSegment.propTypes = {
     text: PropTypes.string,
     placeholder: PropTypes.string,
     value: PropTypes.number,
+    type: PropTypes.string,
   }),
   /** state returned by useDateField */
   state: PropTypes.shape({}),

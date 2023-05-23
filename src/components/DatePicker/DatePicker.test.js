@@ -510,6 +510,20 @@ test('dateField should handle autofocus when deleting segments ', () => {
   expect(hiddenInput).toHaveValue('');
 });
 
+test('should add the correct number of padded 0 to year, month and day', () => {
+  getComponent({ defaultValue: '0009-08-02' });
+  expect(screen.queryByTestId('date-field')).toHaveValue('0009-08-02');
+
+  userEvent.click(screen.queryByRole('button'));
+
+  const dateButtons = screen.queryAllByRole('button');
+
+  expect(dateButtons[5]).toHaveAttribute('aria-label', 'Saturday, August 1, 9');
+  userEvent.click(dateButtons[5]);
+
+  expect(screen.queryByTestId('date-field')).toHaveValue('0009-08-01');
+});
+
 test('should have no accessibility violations', async () => {
   jest.useRealTimers();
   const { container } = getComponent();
