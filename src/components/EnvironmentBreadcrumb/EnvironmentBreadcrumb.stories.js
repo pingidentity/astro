@@ -128,6 +128,52 @@ export const Default = args => {
   );
 };
 
+export const DefaultClosed = args => {
+  const [selectedEnvironment, setSelectedEnvironment] = useState({
+    name: 'Snail',
+    isSandbox: true,
+  });
+
+  const envNode = (
+    <Box isRow key={selectedEnvironment.name}>
+      <Text color="inherit">{selectedEnvironment.name}</Text>
+      {selectedEnvironment.isSandbox ? (
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
+      ) : null}
+    </Box>
+  );
+
+  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
+
+  const handleSelectionChange = newEnvName => {
+    const envObj = findEnvObj(newEnvName);
+    setSelectedEnvironment({ ...envObj });
+  };
+
+  return (
+    <EnvironmentBreadcrumb
+      {...args}
+      items={defaultEnvironments}
+      name="Globochem"
+      selectedItem={envNode}
+      onSelectionChange={handleSelectionChange}
+    >
+      {({ name, isSandbox }) => (
+        <Item key={name} textValue={name}>
+          {name}
+          {isSandbox ? (
+            <Badge
+              label="SANDBOX"
+              variant="environmentBadge"
+              bg="neutral.40"
+            />
+          ) : null}
+        </Item>
+      )}
+    </EnvironmentBreadcrumb>
+  );
+};
+
 export const WithSections = () => {
   const [environments, setEnvironments] = useState(environmentsWithSections);
   const [selectedEnvironment, setSelectedEnvironment] = useState({

@@ -2,12 +2,15 @@ import React from 'react';
 
 import { Text } from '../..';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import NavBar from '../NavBar';
 
 import NavBarItemBody from './NavBarItemBody';
 
 
 const getComponent = item => render((
-  <NavBarItemBody item={{ children: [item] }} />
+  <NavBar>
+    <NavBarItemBody item={{ children: [item] }} />
+  </NavBar>
 ));
 
 const SUBTITLE = 'subtitle';

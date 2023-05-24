@@ -26,7 +26,7 @@ const NavBarItemLink = props => {
   return (
     <Link
       id={key}
-      variant="variants.navBar.itemButton"
+      variant={state.navStyles.navBarItemLink}
       className={classNames}
       onPress={onNavPress}
       color={isSelected ? 'white' : undefined}
