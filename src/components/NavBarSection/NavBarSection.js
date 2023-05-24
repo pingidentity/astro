@@ -3,7 +3,7 @@ import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { Button, Link, Separator, Text } from '../..';
+import { Box, Button, Link, Separator, Text } from '../..';
 import { useNavBarContext } from '../../context/NavBarContext';
 
 import NavBarItemBody from './NavBarItemBody';
@@ -15,10 +15,12 @@ import NavBarItemHeader from './NavBarItemHeader';
  *
  */
 
-const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
+const NavBarSection = ({ hasSeparator, title, items, onKeyDown, ...others }) => {
   const ref = useRef();
 
   const childrenItems = items.filter(item => item.children || item.href);
+
+  const state = useNavBarContext();
 
   return (
     <>
@@ -36,7 +38,7 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
         {...others}
       >
         {childrenItems.map(item => (
-          <li key={item.key}>
+          <Box as="li" key={item.key} variant={state.navStyles.navBarItemHeaderListItem}>
             {!item.children && item.href
               ? (
                 <PrimaryItem
@@ -48,16 +50,17 @@ const NavBarSection = ({ hasSeparator, title, items, ...others }) => {
                 <SectionItem
                   key={item.key}
                   item={item}
+                  onKeyDown={onKeyDown}
                 />
               )}
-          </li>
+          </Box>
         ))}
       </ul>
     </>
   );
 };
 
-const SectionItem = ({ item }) => {
+const SectionItem = ({ item, onKeyDown: onKeyDownProp }) => {
   const { key, children, ...others } = item;
 
   const navBarState = useNavBarContext();
@@ -105,6 +108,9 @@ const SectionItem = ({ item }) => {
       default:
         break;
     }
+    if (onKeyDownProp) {
+      onKeyDownProp(e);
+    }
   };
 
   const { keyboardProps } = useKeyboard({
@@ -117,7 +123,7 @@ const SectionItem = ({ item }) => {
   return (
     <>
       <Button
-        variant="variants.navBar.sectionButton"
+        variant={navBarState.navStyles.sectionItem}
         onPress={() => onExpandedChange(!isExpanded)}
         {...keyboardProps}
         {...others}
@@ -136,9 +142,10 @@ const SectionItem = ({ item }) => {
 };
 
 const PrimaryItem = ({ item }) => {
+  const state = useNavBarContext();
   return (
     <Link
-      variant="variants.navBar.sectionButton"
+      variant={state.navStyles.primaryItem}
       href={item.href}
       target="_blank"
     >
@@ -154,6 +161,8 @@ NavBarSection.defaultProps = {
 NavBarSection.propTypes = {
   /** If true, a separator will render at the end of the section */
   hasSeparator: PropTypes.bool,
+  /** callback that runs on key down */
+  onKeyDown: PropTypes.func,
   /** If present, this string will render at the top of the section */
   title: PropTypes.string,
   /**
@@ -164,6 +173,7 @@ NavBarSection.propTypes = {
 };
 
 SectionItem.propTypes = {
+  onKeyDown: PropTypes.func,
   item: PropTypes.shape({ key: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
     'aria-label': PropTypes.string }),
@@ -182,5 +192,4 @@ SectionItem.propTypes = {
 PrimaryItem.propTypes = {
   item: PropTypes.shape({ href: PropTypes.string }),
 };
-
 export default NavBarSection;

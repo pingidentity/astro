@@ -3,7 +3,7 @@ import ExploreIcon from 'mdi-react/CompassOutlineIcon';
 import HelpCircleOutlineIcon from 'mdi-react/HelpCircleOutlineIcon';
 import MenuDownIcon from 'mdi-react/MenuDownIcon';
 
-import { WithSections as EnvironmentBreadcrumb } from '../../../components/EnvironmentBreadcrumb/EnvironmentBreadcrumb.stories';
+import { DefaultClosed as EnvironmentBreadcrumb } from '../../../components/EnvironmentBreadcrumb/EnvironmentBreadcrumb.stories';
 import {
   Box,
   Icon,
