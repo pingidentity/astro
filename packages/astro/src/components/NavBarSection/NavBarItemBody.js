@@ -2,9 +2,11 @@ import React, { Fragment } from 'react';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
+import { useNavBarContext } from '../../context/NavBarContext';
 import { Box, Separator, Text } from '../../index';
 
 const NavBarItemBody = ({ item, onKeyDown }) => {
+  const state = useNavBarContext();
   const renderSubTitle = child => {
     const { hasSeparator = true, subTitle } = child;
 
@@ -39,7 +41,7 @@ const NavBarItemBody = ({ item, onKeyDown }) => {
   );
 
   return (
-    <Box sx={{ alignItems: 'stretch', mb: 'md' }}>
+    <Box variant={state.navStyles.navBarItemBody}>
       {item.children.map(renderChild)}
     </Box>
   );

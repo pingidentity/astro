@@ -265,6 +265,25 @@ const colorBlock = {
   },
 };
 
+const headerBar = {
+  ...base,
+  backgroundColor: 'white',
+  '&.is-hovered': {
+    ...defaultHover,
+    border: 'none',
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+    border: 'none',
+    '> div > span': {
+      color: 'white',
+    },
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
 export default {
   critical,
   default: {
@@ -283,6 +302,7 @@ export default {
     },
   },
   filter,
+  headerBar,
   inline,
   inlinePrimary,
   link,
