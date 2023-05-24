@@ -57,7 +57,7 @@ const NavBarItem = forwardRef((props, ref) => {
   return (
     <Box
       id={key}
-      variant="navBar.item"
+      variant={state.navStyles.navBarItem}
       isRow
       tabIndex={0}
       className={classNames}
@@ -86,9 +86,7 @@ const NavBarItem = forwardRef((props, ref) => {
             }}
           />
           )}
-        <Text
-          variant="variants.navBar.headerText"
-        >
+        <Text variant={state.navStyles.navBarItemText}>
           {text}
         </Text>
       </Box>

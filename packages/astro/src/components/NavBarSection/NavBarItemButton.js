@@ -27,16 +27,11 @@ const NavBarItemButton = props => {
   return (
     <Button
       id={key}
-      variant="variants.navBar.itemButton"
+      variant={state.navStyles.navBarItemButton}
       onPress={onNavPress}
       className={classNames}
       color={isSelected ? 'white' : undefined}
       {...others}
-      sx={{
-        paddingLeft: '45px',
-        paddingRight: '45px',
-        ...sx, // eslint-disable-line react/prop-types
-      }}
     />
   );
 };
