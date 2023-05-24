@@ -211,14 +211,9 @@ export const Default = ({ ...args }) => {
           <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_1900_8817)">
               <g mask="url(#mask0_1900_8817)">
-                <rect x="0.5" y="-54.5" width="20" height="63" rx="4.5" stroke="#CACED3" />
+                <rect x="0.5" y="-54.5" width="20" height="63" rx="4.5" stroke={color} />
               </g>
             </g>
-            <defs>
-              <clipPath id="clip0_1900_8817">
-                <rect width="1600" height="917" fill="white" transform="translate(-280 -419)" />
-              </clipPath>
-            </defs>
           </svg>
         </Box>
       </Box>
@@ -403,7 +398,7 @@ export const Default = ({ ...args }) => {
         variant="listItem.hover"
         sx={sx.listElement.container}
       >
-        {!isChild ? <Shield isParent={isParent} /> : <BottomBracket />}
+        {isChild ? <BottomBracket /> : <Shield isParent={isParent} />}
         <ListElementContent
           badgeText={badgeText}
           expirationText={expirationText}
