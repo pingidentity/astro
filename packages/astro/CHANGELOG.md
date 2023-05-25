@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.4.1...@pingux/astro@2.5.0) (2023-05-25)
+
+
+### Bug Fixes
+
+* [UIP-6242] error styles of MultivaluesField ([b035c77](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b035c7727b722bd50bf09e2493fd6cb7490012f7))
+* [UIP-6270] remove defs tag from BottomBracket ([fa14b15](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fa14b150ac303852b32d44cbdd9d069156e1b4e5))
+* [UIP-6306] Replace broken links on AccordionGroup components ([c0c1ff7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c0c1ff72518b66b929a35c094aaa54bd3501b7d8))
+
+
+### Features
+
+* [UIP-6264] Astro Nav Popup Variant ([84a6c2b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/84a6c2bc7e57eed350e97e45716db5706b4b138c))
+
+
+
+
+
 ## [2.4.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.4.0...@pingux/astro@2.4.1) (2023-05-23)
 
 
