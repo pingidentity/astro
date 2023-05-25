@@ -13,6 +13,16 @@ const container = {
   overflowY: 'hidden',
 };
 
+const popUpContainer = {
+  ...container,
+  minWidth: '184px',
+  maxWidth: '184px',
+  width: '184px',
+  backgroundColor: 'white',
+  borderRight: '3px solid',
+  borderRightColor: 'active',
+};
+
 const itemHeaderContainer = {
   flexGrow: 1,
   alignItems: 'center',
@@ -25,6 +35,21 @@ const itemHeaderContainer = {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
   },
+};
+
+const popUpItemHeaderContainer = {
+  ...itemHeaderContainer,
+  minHeight: '36px',
+  maxWidth: '184px',
+  pl: 'sm',
+  pr: 'sm',
+  '&.is-selected': {
+    backgroundColor: 'active',
+  },
+};
+
+const popUpItemListItem = {
+  borderBottom: '1px solid #BDBDBD',
 };
 
 const sectionContainer = {
@@ -58,6 +83,36 @@ const sectionContainer = {
   },
 };
 
+const popUpSectionContainer = {
+  height: '100%',
+  maxHeight: '100%',
+  overflowY: 'auto',
+  // these rules are for webkit browsers: chrome, safari, edge
+  '&::-webkit-scrollbar-thumb': {
+    backgroundColor: 'rgba(147, 163, 219, 1)',
+    borderRadius: '5px',
+  },
+  '&::-webkit-scrollbar': {
+    width: 7,
+  },
+  '&::-webkit-scrollbar-track': {
+    backgroundColor: 'accent.95',
+  },
+  // this is a newer standard that only ff supports for now
+  scrollbarColor: 'rgba(229, 233, 248, 1) rgba(0, 0, 0, 0.1)', // can't use theme values here, unfortunately
+  // different colors while hovering over the nav bar
+  '&:hover': {
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(147, 163, 219, 1)',
+      borderRadius: '4px',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'accent.95',
+    },
+    scrollbarColor: 'rgba(229, 233, 248, 1) rgba(0, 0, 0, 0.2)',
+  },
+};
+
 const sectionBody = {
   ...accordionGrid.body,
   pl: '0',
@@ -83,6 +138,8 @@ const itemButton = {
   maxWidth: '100%',
   wordWrap: 'break-word',
   wordBreak: 'break-word',
+  paddingLeft: '45px',
+  paddingRight: '45px',
   '&.is-focused': {
     outline: '1px solid',
     outlineColor: 'focus',
@@ -96,6 +153,30 @@ const itemButton = {
   },
   '&.is-pressed': {
     bg: 'accent.5',
+  },
+};
+
+const popUpItemButton = {
+  ...itemButton,
+  fontSize: 'sm',
+  px: 'sm',
+  color: 'text.primary',
+  '&.is-focused': {
+    outline: '1px solid',
+    outlineColor: 'focus',
+    outlineOffset: '2px',
+  },
+  '&.is-selected': {
+    bg: 'active',
+    color: 'white',
+  },
+  '&.is-hovered': {
+    bg: 'neutral.90',
+    color: 'text.primary',
+  },
+  '&.is-pressed': {
+    bg: 'active',
+    color: 'white',
   },
 };
 
@@ -117,6 +198,18 @@ const headerText = {
   fontWeight: 1,
   maxWidth: '150px',
   color: 'neutral.95',
+  '.is-selected &': {
+    color: 'white',
+  },
+};
+
+const popUpHeaderText = {
+  ...headerText,
+  fontWeight: 3,
+  color: 'text.primary',
+  '.is-pressed &': {
+    color: 'white',
+  },
   '.is-selected &': {
     color: 'white',
   },
@@ -160,6 +253,15 @@ const item = {
   },
 };
 
+const popUpItem = {
+  ...headerNav,
+  py: 'sm',
+  px: 'md',
+  '&.is-selected': {
+    boxShadow: 'inset 2px 0 0 0 white',
+  },
+};
+
 const sectionButton = {
   ...quiet,
   width: '100%',
@@ -175,15 +277,54 @@ const sectionButton = {
   },
 };
 
+const popUpSectionButton = {
+  ...quiet,
+  width: '100%',
+  '&.is-focused': {
+    outline: '1px solid',
+    outlineColor: 'focus',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'neutral.90',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'active',
+    color: 'white',
+  },
+  '&.is-pressed > div > div > svg > path': {
+    fill: 'white !important',
+  },
+};
+
+const navBarItemBody = {
+  alignItems: 'stretch',
+  mb: 'md',
+};
+
+const popUpNavBarItemBody = {
+  ...navBarItemBody,
+  mb: 0,
+};
+
 export default {
   container,
+  popUpContainer,
   itemHeaderContainer,
+  popUpItemHeaderContainer,
+  popUpItemListItem,
   sectionContainer,
+  popUpSectionContainer,
   sectionBody,
   sectionButton,
+  popUpSectionButton,
   itemButton,
+  popUpItemButton,
   subtitle,
   headerText,
+  popUpHeaderText,
   headerNav,
   item,
+  popUpItem,
+  navBarItemBody,
+  popUpNavBarItemBody,
 };

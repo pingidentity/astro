@@ -3,6 +3,7 @@ import { FocusScope, useFocusManager } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 
 import { NavBarContext } from '../../context/NavBarContext';
+import useNavBarStyling from '../../hooks/useNavBarStyling/useNavBarStyling';
 import useProgressiveState from '../../hooks/useProgressiveState';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box/Box';
@@ -22,8 +23,11 @@ const NavBar = props => {
     defaultSelectedKey,
     selectedKey: selectedKeyProp,
     setSelectedKey: setSelectedKeyProp,
+    hasRestoreFocus,
     defaultExpandedKeys,
     children,
+    variant,
+    ...others
   } = props;
 
   const [expandedKeys, setExpandedKeys] = useState(defaultExpandedKeys);
@@ -32,6 +36,8 @@ const NavBar = props => {
     selectedKeyProp,
     defaultSelectedKey,
   );
+
+  const navStyles = useNavBarStyling(variant);
 
   const items = Array.isArray(children)
     ? children.map(child => ({ item: child, key: child.key }))
@@ -42,15 +48,16 @@ const NavBar = props => {
     setSelectedKey: setSelectedKeyProp || setSelectedKey,
     expandedKeys,
     setExpandedKeys,
+    navStyles,
   };
 
   return (
     <NavBarContext.Provider
       value={contextValue}
     >
-      <Box variant="navBar.container" role="navigation" as="nav">
+      <Box variant={navStyles.navBar} role="navigation" as="nav" {...others}>
         {items.length ? (
-          <FocusScope restoreFocus>
+          <FocusScope restoreFocus={hasRestoreFocus}>
             {items.map(({ item, key }) => <FocusableItem key={key}>{item}</FocusableItem>)}
           </FocusScope>
         ) : null}
@@ -83,6 +90,10 @@ const FocusableItem = props => {
 };
 
 NavBar.propTypes = {
+  /** This applies a style to the entire nav tree. the options are default and popup. */
+  variant: PropTypes.oneOf(['default', 'popupNav']),
+  /** Whether or not the focus will return to the previously focused element upon unmount. */
+  hasRestoreFocus: PropTypes.bool,
   /** The initial selected key in the collection (uncontrolled). */
   defaultSelectedKey: PropTypes.string,
   /** The initial expanded keys in the collection (uncontrolled). */
@@ -100,6 +111,8 @@ NavBar.propTypes = {
 NavBar.defaultProps = {
   defaultSelectedKey: '',
   defaultExpandedKeys: [],
+  variant: 'default',
+  hasRestoreFocus: true,
 };
 
 export default NavBar;
