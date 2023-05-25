@@ -210,6 +210,9 @@ input.multivaluesWrapper = {
   '&.is-focused': {
     ...defaultFocus,
   },
+  '&.is-error': {
+    borderColor: 'critical.dark',
+  },
   [`&.is-${statuses.ERROR}::after`]: {
     bg: 'critical.bright',
   },
