@@ -16,7 +16,7 @@ export const Default = () => {
         role="heading"
         aria-level="1"
       >
-        <Text fontSize="xx" fontWeight="3" fontColor="text.primary">
+        <Text fontSize="xx" fontWeight="3" fontColor="text.primary" as="h1">
           Title of the Page
         </Text>
         <IconButton aria-label="icon button" ml="sm" variant="inverted">
