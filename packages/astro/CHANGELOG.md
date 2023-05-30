@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.0...@pingux/astro@2.5.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* [UIP-5768] Last selected calendar remains highlighted in external app ([b5a6954](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b5a6954ce37bf8bb020d0bd8404219645ba69132))
+* [UIP-6039] PasswordField: make the screen reader read the requirements list ([b8ec48e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b8ec48ed4f4e2d15506bf53ea4f08b3a2d715a2d))
+* [UIP-6314] Page Header: make title an h1 ([8e3ba4d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8e3ba4dda4b17a0bbddf4b6709918bfa718227ae))
+
+
+
+
+
 # [2.5.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.4.1...@pingux/astro@2.5.0) (2023-05-25)
 
 
