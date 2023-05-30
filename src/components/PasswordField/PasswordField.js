@@ -159,10 +159,12 @@ const PasswordField = forwardRef((props, ref) => {
         ref={popoverRef}
         style={style}
       >
-        <RequirementsList
-          requirements={requirements}
-          {...requirementsListProps}
-        />
+        <Box role="alert" aria-label="requirements list">
+          <RequirementsList
+            requirements={requirements}
+            {...requirementsListProps}
+          />
+        </Box>
       </PopoverContainer>
     </>
   );

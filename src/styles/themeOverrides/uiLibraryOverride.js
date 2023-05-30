@@ -80,6 +80,16 @@ const buttons = {
         border: 'none',
       },
     },
+    datePicker: {
+      containedIcon: {
+        '&:not(.disabled):hover': {
+          border: 'none',
+        },
+        '&:focus': {
+          border: 'none',
+        },
+      },
+    },
   },
   filter: {
     '&:not(.disabled):hover': {
