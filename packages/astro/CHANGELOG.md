@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.1...@pingux/astro@2.5.2) (2023-06-01)
+
+
+### Bug Fixes
+
+* [UIP-6171] Remove date from DateField using delete key ([5fdc2df](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5fdc2dfd732f6522063b61820028c3043870007f))
+* [UIP-6297] Image: add alt to ComponentAsDefaultImage story ([3db0ead](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3db0ead1f532346de6e5e997945b116331cde9d4))
+* [UIP-6310] Astro Date Picker Fix Focus Style ([5b78e96](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5b78e9691d21e7c42e385b487e4e1c0501fc976a))
+* [UIP-6319] TooltipTriggert: add isNonModal prop ([a9b0a07](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a9b0a074134d9992683ccbe0ef0efb5d5ca08d30))
+
+
+
+
+
 ## [2.5.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.0...@pingux/astro@2.5.1) (2023-05-30)
 
 
