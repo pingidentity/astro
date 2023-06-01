@@ -4815,7 +4815,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pingux/astro@^2.5.1, @pingux/astro@workspace:packages/astro":
+"@pingux/astro@^2.5.2-alpha.3, @pingux/astro@workspace:packages/astro":
   version: 0.0.0-use.local
   resolution: "@pingux/astro@workspace:packages/astro"
   dependencies:
@@ -5149,7 +5149,7 @@ __metadata:
     "@material-ui/lab": ^4.0.0-alpha.57
     "@mdi/js": ^5.8.55
     "@mdi/react": ^1.4.0
-    "@pingux/astro": ^2.5.1
+    "@pingux/astro": ^2.5.2-alpha.3
     "@pingux/icons": ^0.2.0
     "@storybook/addon-actions": ^6.5.10
     "@storybook/addon-docs": ^6.5.10
@@ -5255,7 +5255,7 @@ __metadata:
     "@emotion/react": ^11.1.1
     "@emotion/styled": ^11.1.1
     "@mdx-js/react": ^1.6.22
-    "@pingux/astro": ^2.5.1
+    "@pingux/astro": ^2.5.2-alpha.3
     "@pingux/icons": ^0.2.0
     "@rjsf/core": 2.0.0
     "@storybook/addon-actions": ^6.5.10
@@ -17735,9 +17735,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decode-uri-component@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "decode-uri-component@npm:0.2.0"
+"decode-uri-component@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "decode-uri-component@npm:0.2.2"
   checksum: f3749344ab9305ffcfe4bfe300e2dbb61fc6359e2b736812100a3b1b6db0a5668cba31a05e4b45d4d63dbf1a18dfa354cd3ca5bb3ededddabb8cd293f4404f94
   languageName: node
   linkType: hard
@@ -27013,9 +27013,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^1.0.0, loader-utils@npm:^1.0.2, loader-utils@npm:^1.1.0, loader-utils@npm:^1.2.3, loader-utils@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "loader-utils@npm:1.4.0"
+"loader-utils@npm:^1.0.0, loader-utils@npm:^1.0.2, loader-utils@npm:^1.1.0, loader-utils@npm:^1.2.3, loader-utils@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "loader-utils@npm:1.4.1"
   dependencies:
     big.js: ^5.2.2
     emojis-list: ^3.0.0
@@ -27025,8 +27025,8 @@ __metadata:
   linkType: hard
 
 "loader-utils@npm:^2.0.0":
-  version: 2.0.2
-  resolution: "loader-utils@npm:2.0.2"
+  version: 2.0.3
+  resolution: "loader-utils@npm:2.0.3"
   dependencies:
     big.js: ^5.2.2
     emojis-list: ^3.0.0
@@ -36186,7 +36186,7 @@ __metadata:
   resolution: "source-map-resolve@npm:0.5.3"
   dependencies:
     atob: ^2.1.2
-    decode-uri-component: ^0.2.0
+    decode-uri-component: ^0.2.2
     resolve-url: ^0.2.1
     source-map-url: ^0.4.0
     urix: ^0.1.0
@@ -40366,7 +40366,7 @@ __metadata:
     global-modules: ^2.0.0
     import-local: ^2.0.0
     interpret: ^1.4.0
-    loader-utils: ^1.4.0
+    loader-utils: ^1.4.1
     supports-color: ^6.1.0
     v8-compile-cache: ^2.1.1
     yargs: ^13.3.2

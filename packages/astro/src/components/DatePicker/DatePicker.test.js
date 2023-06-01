@@ -478,7 +478,7 @@ test('dateField should handle min, max or next available date if the pasted date
   expect(screen.queryByTestId('date-field')).toHaveValue('2022-08-04');
 });
 
-test('dateField should handle autofocus when deleting segments ', () => {
+test('dateField should handle autofocus when deleting segments right to left', () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const hiddenInput = screen.queryByTestId('date-field');
@@ -489,7 +489,9 @@ test('dateField should handle autofocus when deleting segments ', () => {
 
   expect(hiddenInput).toHaveValue('2022-08-10');
 
-  act(() => { day.focus(); });
+  act(() => {
+    day.focus();
+  });
   expect(day).toHaveFocus();
   for (let i = 0; i < 2; i += 1) {
     fireEvent.keyDown(day, { key: 'Backspace' });
@@ -508,6 +510,108 @@ test('dateField should handle autofocus when deleting segments ', () => {
     fireEvent.keyUp(year, { key: 'Backspace' });
   }
   expect(hiddenInput).toHaveValue('');
+});
+
+test('dateField should handle autofocus when deleting segments left to right', () => {
+  getComponent({ defaultValue: '2022-08-10' });
+
+  const hiddenInput = screen.queryByTestId('date-field');
+  const inputButtons = screen.queryAllByRole('spinbutton');
+  const year = inputButtons[0];
+  const month = inputButtons[1];
+  const day = inputButtons[2];
+
+  expect(hiddenInput).toHaveValue('2022-08-10');
+
+  act(() => {
+    year.focus();
+  });
+  expect(year).toHaveFocus();
+  for (let i = 0; i < 4; i += 1) {
+    fireEvent.keyDown(year, { key: 'Backspace' });
+    fireEvent.keyUp(year, { key: 'Backspace' });
+  }
+  expect(month).toHaveFocus();
+
+  for (let i = 0; i < 2; i += 1) {
+    fireEvent.keyDown(month, { key: 'Backspace' });
+    fireEvent.keyUp(month, { key: 'Backspace' });
+  }
+  expect(day).toHaveFocus();
+
+  for (let i = 0; i < 2; i += 1) {
+    fireEvent.keyDown(day, { key: 'Backspace' });
+    fireEvent.keyUp(day, { key: 'Backspace' });
+  }
+  expect(hiddenInput).toHaveValue('');
+});
+
+test('dateField should handle autofocus when deleting segments from middle', () => {
+  getComponent({ defaultValue: '2022-08-10' });
+
+  const hiddenInput = screen.queryByTestId('date-field');
+  const inputButtons = screen.queryAllByRole('spinbutton');
+  const year = inputButtons[0];
+  const month = inputButtons[1];
+  const day = inputButtons[2];
+
+  expect(hiddenInput).toHaveValue('2022-08-10');
+
+  act(() => {
+    month.focus();
+  });
+  expect(month).toHaveFocus();
+  for (let i = 0; i < 2; i += 1) {
+    fireEvent.keyDown(month, { key: 'Backspace' });
+    fireEvent.keyUp(month, { key: 'Backspace' });
+  }
+  expect(year).toHaveFocus();
+
+  for (let i = 0; i < 4; i += 1) {
+    fireEvent.keyDown(year, { key: 'Backspace' });
+    fireEvent.keyUp(year, { key: 'Backspace' });
+  }
+  expect(day).toHaveFocus();
+
+  for (let i = 0; i < 2; i += 1) {
+    fireEvent.keyDown(day, { key: 'Backspace' });
+    fireEvent.keyUp(day, { key: 'Backspace' });
+  }
+
+  fireEvent.keyDown(year, { key: 'Backspace' });
+  fireEvent.keyUp(year, { key: 'Backspace' });
+  expect(day).toHaveFocus();
+  expect(hiddenInput).toHaveValue('');
+});
+
+test('segment focus should move to the year if month is already empty', () => {
+  getComponent({ defaultValue: '2022-08-10' });
+
+  const hiddenInput = screen.queryByTestId('date-field');
+  const inputButtons = screen.queryAllByRole('spinbutton');
+  const year = inputButtons[0];
+  const month = inputButtons[1];
+  const day = inputButtons[2];
+
+  expect(hiddenInput).toHaveValue('2022-08-10');
+
+  act(() => {
+    month.focus();
+  });
+  expect(month).toHaveFocus();
+  for (let i = 0; i < 2; i += 1) {
+    fireEvent.keyDown(month, { key: 'Backspace' });
+    fireEvent.keyUp(month, { key: 'Backspace' });
+  }
+  act(() => {
+    day.focus();
+  });
+  expect(day).toHaveFocus();
+  for (let i = 0; i < 2; i += 1) {
+    fireEvent.keyDown(day, { key: 'Backspace' });
+    fireEvent.keyUp(day, { key: 'Backspace' });
+  }
+  expect(year).toHaveFocus();
 });
 
 test('should add the correct number of padded 0 to year, month and day', () => {

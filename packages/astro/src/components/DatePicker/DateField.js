@@ -268,7 +268,9 @@ const DateField = forwardRef((props, ref) => {
                 isDisabled={isDisabled}
                 isReadOnly={isReadOnly}
                 isRequired={isRequired}
+                segments={locale === 'en-US' ? enUSSegments : segments}
                 handlePaste={handlePaste}
+                segmentIndex={index}
                 {...other}
               />
             ))}
