@@ -77,6 +77,7 @@ const TooltipTrigger = forwardRef((props, ref) => {
       arrowCrossOffset={arrowCrossOffset}
       width={width}
       direction={direction}
+      isNonModal
       {...positionProps}
       {...tooltipProps}
     >

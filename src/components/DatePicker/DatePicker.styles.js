@@ -1,5 +1,4 @@
-import { defaultFocus } from '../Button/Buttons.styles';
-import { input } from '../Input/Input.styles';
+import { defaultFocus, input } from '../Input/Input.styles';
 
 const inSlotContainer = {
   ...input.fieldControlWrapper,
