@@ -9,7 +9,7 @@ import { Box } from '../../index';
  * Each editable segment of date.
  */
 const DateSegment = forwardRef((props, ref) => {
-  const { segment, state, handlePaste } = props;
+  const { segment, state, handlePaste, segments, segmentIndex } = props;
 
   const segmentRef = useRef();
   // istanbul ignore next
@@ -25,11 +25,34 @@ const DateSegment = forwardRef((props, ref) => {
 
   const handleKeyEvents = useCallback(
     e => {
-      if (e.key === 'Backspace' && isPlaceholder && (text === 'mm' || text === 'dd')) {
-        focusManager.focusPrevious();
+      const getSegmentValue = index => {
+        const isNumber = /^\d+$/.test(segments[index].text);
+        return isNumber;
+      };
+
+      if (e.key === 'Backspace' && isPlaceholder) {
+        switch (segmentIndex) {
+          case 0:
+            if (getSegmentValue(2)) return focusManager.focusNext();
+            if (!getSegmentValue(2) && getSegmentValue(4)) return focusManager.focusLast();
+            break;
+
+          case 2:
+            if (getSegmentValue(0)) return focusManager.focusPrevious();
+            if (getSegmentValue(4)) return focusManager.focusNext();
+            break;
+
+          case 4:
+            if (getSegmentValue(2)) return focusManager.focusPrevious();
+            if (!getSegmentValue(2) && getSegmentValue(0)) return focusManager.focusFirst();
+            break;
+
+          default:
+        }
       }
+      return null;
     },
-    [focusManager, segment, text, isPlaceholder],
+    [focusManager, segment, isPlaceholder],
   );
 
   return (
@@ -54,6 +77,14 @@ DateSegment.propTypes = {
     value: PropTypes.number,
     type: PropTypes.string,
   }),
+  /** index value of each segment */
+  segmentIndex: PropTypes.number,
+  /** An array of segments */
+  segments: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+    }),
+  ),
   /** state returned by useDateField */
   state: PropTypes.shape({}),
   /**
