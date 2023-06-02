@@ -39,6 +39,9 @@ export function useListLayout(state) {
 }
 
 /**
+ * The intention of ListView is that it be used together with ListItem. An update that
+ * demonstrates this is coming soon.
+ *
  * ListViews are used to display a list of items. Users can select,
  * view, or edit items in this list. This virtualized component supports
  * asynchronous data in infinitely scrollable lists.
