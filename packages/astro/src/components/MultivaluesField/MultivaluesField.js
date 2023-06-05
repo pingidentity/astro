@@ -7,6 +7,7 @@ import Clear from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
 import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { usePropWarning } from '../../hooks';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -345,9 +346,12 @@ const MultivaluesField = forwardRef((props, ref) => {
     </FocusScope>
   );
 
+  const [activeDescendant, setActiveDescendant] = useState(null);
   const inputProps = {
     ...customInputProps,
     controlProps: {
+      'aria-activedescendant': activeDescendant,
+      'aria-controls': listBoxRef.current?.id,
       'aria-expanded': isOpen,
       role: 'combobox',
     },
@@ -368,49 +372,51 @@ const MultivaluesField = forwardRef((props, ref) => {
   };
 
   return (
-    <Box {...containerProps}>
-      <TextField
-        onBlur={e => {
-          setIsOpen(false);
-          if (mode === 'non-restrictive' && filterString !== '') onBlurTextField();
-          if (onBlur) onBlur(e.nativeEvent);
-        }}
-        onChange={e => {
-          setFilterString(e.target.value);
-          if (onInputChange) onInputChange(e.target.value);
-        }}
-        onFocus={e => {
-          if (!isReadOnly) {
-            setIsOpen(true);
-          }
-          if (onFocus) onFocus(e.nativeEvent);
-        }}
-        onKeyDown={keyDown}
-        onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-        slots={{ beforeInput: <>
-          {readOnlyItems}
-          {' '}
-          {selectedItems}
-          {readOnlyInputEntry}
+    <MultivaluesContext.Provider value={setActiveDescendant}>
+      <Box {...containerProps}>
+        <TextField
+          onBlur={e => {
+            setIsOpen(false);
+            if (mode === 'non-restrictive' && filterString !== '') onBlurTextField();
+            if (onBlur) onBlur(e.nativeEvent);
+          }}
+          onChange={e => {
+            setFilterString(e.target.value);
+            if (onInputChange) onInputChange(e.target.value);
+          }}
+          onFocus={e => {
+            if (!isReadOnly) {
+              setIsOpen(true);
+            }
+            if (onFocus) onFocus(e.nativeEvent);
+          }}
+          onKeyDown={keyDown}
+          onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
+          slots={{ beforeInput: <>
+            {readOnlyItems}
+            {' '}
+            {selectedItems}
+            {readOnlyInputEntry}
         </> }} // eslint-disable-line
-        value={filterString}
-        helperText={helperText}
-        aria-invalid={status === 'error' && true}
-        {...ariaProps}
-        {...inputProps}
-      />
-      <PopoverContainer
-        hasNoArrow
-        isNonModal
-        isOpen={!state.collection.size ? false : isOpen}
-        onClose={close}
-        placement={placement}
-        ref={popoverRef}
-        style={style}
-      >
-        {listbox}
-      </PopoverContainer>
-    </Box>
+          value={filterString}
+          helperText={helperText}
+          aria-invalid={status === 'error' && true}
+          {...ariaProps}
+          {...inputProps}
+        />
+        <PopoverContainer
+          hasNoArrow
+          isNonModal
+          isOpen={!state.collection.size ? false : isOpen}
+          onClose={close}
+          placement={placement}
+          ref={popoverRef}
+          style={style}
+        >
+          {listbox}
+        </PopoverContainer>
+      </Box>
+    </MultivaluesContext.Provider>
   );
 });
 
