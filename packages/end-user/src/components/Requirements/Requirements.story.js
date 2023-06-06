@@ -25,6 +25,10 @@ export const Default = () => (
                 name: '1 number (0-9)',
                 status: 'no',
             },
+            {
+                name: 'Differs from recently used passwords',
+                status: 'blueIcon',
+            },
         ]}
     />
 );

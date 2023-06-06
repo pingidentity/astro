@@ -7,6 +7,7 @@ const Requirement = ({ status, name }) => {
         'pingicon-incomplete': status === 'no',
         'pingicon-success-round': status === 'yes',
         'requirement__icon--success': status === 'yes',
+        'pingicon-blue-round': status === 'blueIcon',
         'pingicon-error-triangle': status === 'error',
         'requirement__icon--error': status === 'error',
     });

@@ -24,3 +24,11 @@
 .requirement__name {
     @extend %icon-pair__label;
 }
+
+.pingicon-blue-round {
+    @include border-radius(50%);
+    background: $color-active-blue;
+    width: 13px;
+    height: 13px;
+}
+
