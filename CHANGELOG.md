@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.2...@pingux/astro@2.5.3) (2023-06-06)
+
+
+### Bug Fixes
+
+* [UIP-6292] Image: update ping logo img ([f787c49](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f787c4967ed6e50cabe49b26bd2f585cac2b3996))
+* [UIP-6307] Multivalues Screenreader Issue ([011ef53](https://gitlab.corp.pingidentity.com/ux/pingux/commit/011ef530a4d48a0fadc1973f76f7f05efe379570))
+
+
+
+
+
 ## [2.5.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.1...@pingux/astro@2.5.2) (2023-06-01)
 
 
