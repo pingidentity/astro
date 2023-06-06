@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.27](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.26...@pingux/end-user@2.4.27) (2023-06-06)
+
+
+### Bug Fixes
+
+* [UIP-6139] Fix Icon alignment for icons ([62688aa](https://gitlab.corp.pingidentity.com/ux/end-user/commit/62688aa3ebf6aa830ae09ec6366fe1c7e0cdf33d))
+
+
+
+
+
 ## [2.4.26](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.25...@pingux/end-user@2.4.26) (2023-05-18)
 
 
