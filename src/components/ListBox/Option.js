@@ -1,8 +1,9 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from 'react';
 import { useOption } from '@react-aria/listbox';
 import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 import PropTypes from 'prop-types';
 
+import { useMultivaluesContext } from '../../context/MultivaluesContext';
 import { useStatusClasses } from '../../hooks';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box';
@@ -45,6 +46,15 @@ const Option = forwardRef((props, ref) => {
     isFocused: focused,
     isSelected,
   });
+
+  const updateActiveDescendant = useMultivaluesContext();
+
+  useEffect(() => {
+    if (isFocused && updateActiveDescendant) {
+      updateActiveDescendant(optionProps.id);
+    }
+  }, [isFocused, updateActiveDescendant]);
+
 
   /* Related to UIP-4992
    * Need to remove these properties to avoid errors in the console on the external app.
