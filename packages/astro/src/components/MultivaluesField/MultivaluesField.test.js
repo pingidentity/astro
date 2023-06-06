@@ -4,7 +4,7 @@ import { axe } from 'jest-axe';
 
 import { Item, MultivaluesField, OverlayProvider } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
+import { fireEvent, getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
@@ -115,6 +115,21 @@ test('multiple selection is enabled, option disappears after selection', () => {
   const secondOption = options[1];
   secondOption.click();
   expect(secondOption).not.toBeInTheDocument();
+});
+
+test('updates aria attributes on option focus', () => {
+  getComponent();
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+
+  fireEvent.keyDown(input, { key: 'ArrowDown' });
+  const options = screen.getAllByRole('option');
+  const listbox = screen.getByRole('listbox');
+
+  expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
+  expect(input).toHaveAttribute('aria-expanded', 'true');
+  expect(input).toHaveAttribute('aria-controls', listbox.id);
 });
 
 test('clicking an option renders badge with option name', () => {

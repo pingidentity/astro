@@ -147,6 +147,6 @@
   }
 }
 
-.text-input__icon ~ .text-input__icon {
+.text-input__icon + .text-input__icon {
   right: $spacing-xl;
 }
