@@ -58,7 +58,7 @@
     "jest-emotion": "^10.0.32",
     "jest-pnp-resolver": "^1.2.2",
     "jsdoc-to-markdown": "^6.0.1",
-    "lerna": "^5.6.2",
+    "lerna": "^7.0.0",
     "mutationobserver-shim": "^0.3.7",
     "node-gyp": "^9.0.0",
     "react": "^16.8.6",
