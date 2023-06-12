@@ -84,8 +84,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Linking packages"
-            sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
-            sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
+            sh "yarn build-ci"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -98,10 +97,9 @@ pipeline {
           sh """
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
-            lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
-            lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
-            lerna run lint
-            lerna run coverage-ci --concurrency=1
+            yarn build-ci
+            yarn lint-ci
+            yarn coverage-ci --concurrency=1
           """
         }
       }
@@ -118,8 +116,8 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            lerna run demo --scope ui-library
-            lerna run backstop-ci
+            yarn lerna run demo --scope ui-library
+            yarn lerna run backstop-ci
           """
         }
       }
@@ -170,7 +168,7 @@ pipeline {
               sh """
                 git config --global user.email 'devtools+jenkins@pingidentity.com'
                 git config --global user.name 'devtools-jenkins'
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${params.LERNA_VERSION_FLAGS} > lerna_version.txt
               """
               script {
                 def json = sh(returnStdout: true, script: $/node generate_lerna_version_json.js && echo $(cat lerna_version.json)/$).trim();
@@ -211,7 +209,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "lerna publish ${params.LERNA_PUBLISH_FLAGS}"
+                sh "yarn lerna publish ${params.LERNA_PUBLISH_FLAGS}"
               }
             }
           }
@@ -274,7 +272,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Run Lerna CDN command"
-            sh "lerna run cdn"
+            sh "yarn lerna run cdn"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'

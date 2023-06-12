@@ -101,8 +101,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Linking packages"
-            sh "lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting"
-            sh "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes"
+            sh "yarn build-ci"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
@@ -115,10 +114,9 @@ pipeline {
           sh """
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
-            lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting
-            lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes
-            lerna run lint
-            lerna run coverage-ci --concurrency=1
+            yarn build-ci
+            yarn lint-ci
+            yarn coverage-ci --concurrency=1
           """
         }
       }
@@ -137,8 +135,8 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
-            lerna run demo --scope ui-library
-            lerna run backstop-ci
+            yarn lerna run demo --scope ui-library
+            yarn lerna run backstop-ci
           """
         }
       }
@@ -157,8 +155,8 @@ pipeline {
                 git config --global user.name 'devtools-jenkins'
                 git checkout ${env.BRANCH_NAME}
                 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' git pull
-                lerna changed || true
-                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
+                yarn lerna changed || true
+                GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no -i ${bldUserKeyPath}' yarn lerna version ${env.LERNA_VERSION_FLAGS} > lerna_version.txt
                 git status
                 git add .
                 git status
@@ -197,7 +195,7 @@ pipeline {
                 }
 
                 echo "Publishing changed packages to Artifactory"
-                sh "lerna publish ${env.LERNA_PUBLISH_FLAGS}"
+                sh "yarn lerna publish ${env.LERNA_PUBLISH_FLAGS}"
               }
             }
           }
@@ -210,7 +208,7 @@ pipeline {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Run Lerna CDN command"
-            sh "lerna run cdn"
+            sh "yarn lerna run cdn"
           }
         }
         stash includes: 'packages/**/*', excludes: '**/node_modules/**', name: 'packages'
