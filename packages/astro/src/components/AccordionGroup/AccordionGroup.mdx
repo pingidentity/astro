@@ -2,21 +2,20 @@
 
 # AccordionGroup
 
-The Accordion is a vertically stacked list of headers that can be clicked to reveal or hide content associated with them. 
-It is built on top of React Aria [useAccordion](https://reactspectrum.blob.core.windows.net/reactspectrum/d77b35e970e5549f66b47a83f07423f5c93b7297/docs/react-aria/useAccordion.html).
+Accordions are for grouping big chunks of content into easier-to-scan headers, which the user can expand when they want to read what is associated with that header.
+
+Accordions should be used:
+- To organize related information.
+- To shorten pages and reduce scrolling when it’s not crucial that users review the content.
+- When white space is at a minimum and content cannot be displayed all at once. 
+
+Accordions should not have focusable items as children.
+
+It is built on React Aria [useAccordion](https://reactspectrum.blob.core.windows.net/reactspectrum/d77b35e970e5549f66b47a83f07423f5c93b7297/docs/react-aria/useAccordion.html).
 
 ### Required components
 
-- Item: Component is exported within Astro but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
-
-### Best practices
-
-AccordionGroup should:
-- be used to hide/reveal a few key pieces of information.
-- have short and concise labels.
-
-AccordionGroup shouldn’t:
-- have focusable items as children.
+This component requires Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
 
 ### Accessibility
 
@@ -24,19 +23,17 @@ This component should adhere to the [WAI-ARIA Accordion](https://www.w3.org/WAI/
 
 #### Keyboard Navigation
 
-- Accordion is focusable using the Tab key and all focusable components within follow the page Tab sequence.
-- Pressing Space or Enter when the header panel is focused toggles the component.
-- Shift + Tab moves focus to the previous focusable item.
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | When focus is on the accordion header of a collapsed section, these keys expand the section. |
+| Tab | Moves focus to the next focusable component. All focusable components in the accordion are included in the page tab sequence.|
+| Shift + Tab | Moves focus to the previous focusable component. All focusable components in the accordion are included in the page tab sequence. |
 
 #### Screen readers
 
-The accordion header button utilizes **`aria-expanded`** to indicate the expansion and collapse of the content. 
-When expanded **`aria-controls`** is added to the button pointing to the content. 
-The button utilizes **`aria-label`** to give an accessible name to itself. The content has **`aria-labelledby`** supplied with button ID.
-
-| Aria Attribute | Role | Component |
-| ---- | ---- | ----------- |
-| `aria-expanded` | button | Button |
-| `aria-controls` | button | Button |
-| `aria-label` | button | Button |
-| `aria-labelledby` | region | AccordionItem |
+This component uses the following attributes to assist screen readers:
+- The accordion header button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
+- When expanded, the **`aria-controls`** attribute is added to the button pointing to the content. The button uses **`aria-label`** to provide an accessible name. 
+- The **`aria-labelledby`** attribute is added to the entire accordion component, which is supplied with the button ID.  

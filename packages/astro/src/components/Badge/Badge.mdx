@@ -2,26 +2,21 @@
 
 # Badge
 
-Badge is a compact Box component used to enter information as options. 
-It utilizes the available [props from Theme-UI](https://theme-ui.com/sx-prop).
+Badges are compact Box components used as filtering cues or contextual support. They should be clearly labeled and should not be used as buttons. 
+
+This component uses [props from Theme-UI](https://theme-ui.com/sx-prop).
 
 ### Required Components
 
-Badge component can be used independently and does not require additional components.
-
-### Best Practices
-
-Badge should:
-- be clearly & descriptively labeled.
-- only display a single label.
-- be used as a filtering cue or contextual support.
-
-Badge shouldn’t:
-- be used as buttons.
-- substitute a label for an icon.
+This component can be used independently and does not require additional components.
 
 ### Accessibility
 
 #### Keyboard Navigation
 
-- Badge itself is not focusable; when components are added inside it, they can be focused using the Tab key and selected using the Space or Enter key.  
+Badge itself is not focusable. However, when components are added to it, these keys provide additional functionality.
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the component. |
+| Tab | Focuses the component and follows the page tab sequence. |
