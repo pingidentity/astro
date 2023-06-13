@@ -2,18 +2,13 @@
 
 # AstroWrapper
 
-The main wrapper for the Astro application. The AstroWrapper provides a standard background, some global styles, and the Astro theme by default.
+The AstroWrapper component provides a standard background, global styles, and the Astro theme, by default. This component should be used:
+- Sparingly and cautiously when altering the default theme.
+- With the **`themeOverrides`** prop to change some base theme properties.
+- When targeting multiple components on a global scale.
+
+It should not be used for minor CSS alterations. Use sx objects instead.
 
 ### Required components 
 
-- AstroWrapper can be used independently and does not require additional components. 
-
-### Best practices
-
-AstroWrapper should:
-- be used sparingly and cautiously when altering the default theme.
-- be used with `themeOverrides` prop to extend or change some base theme properties.
-- be used when targeting multiple components on a global scale.
-
-AstroWrapper shouldn’t:
-- be used for minor CSS alteration. Instead, opt for sx objects.
+This component can be used independently and does not require additional components.
