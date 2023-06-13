@@ -5,6 +5,13 @@ import { useComponentToggle } from '../../hooks';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
 
+/**
+ * `IconButtonToggle` is using  `Icon` component under the hood.
+ * You can change properties of the icon via `iconProps` prop.
+ * Documentation for the `Icon` component can be found
+ * [here](.?path=/docs/components-icon--default).
+ */
+
 const IconButtonToggle = props => {
   const {
     toggledIcon,
