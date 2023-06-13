@@ -29,6 +29,14 @@ Icon shouldn’t:
 
 ### Accessibility
 
+#### Labelling
+
+The Icon component accepts the title prop:
+`title={{ id: 'unique id', name: 'short description of the icon'}}`.
+The `name` will be passed inside `<title>` element of the SVG.
+The `id` is optional. If not specified, it will be generated automatically.
+This is needed to make SVG icon accessible.
+
 #### Screen Readers
 
 If the icon has a title associated with it, the SVG has **`aria-labelledby`** with the title ID supplied to it.
