@@ -2,23 +2,22 @@
 
 # Button
 
-Button is used primarily to trigger an action or event. It is built on top of
-[Button from Theme-UI](https://theme-ui.com/components/button). The stylings of a button is different based on its purpose.
-(Primary Action, Secondary Action, Danger Button)
+Buttons are used to trigger actions or events and can contain an icon or a text label. The style used depends on its type:
+
+-  **Primary buttons**: Indicate the call to action on the page. Primary buttons should only appear once per screen (not including the application header, modal dialog, or side panel).
+-  **Secondary buttons**: Secondary buttons, the default, often have text labels and can only be used in conjunction with a primary button. As part of a pair, the secondary button’s function is to perform the negative action of the set, such as “Cancel” or “Back.”
+-  **Tertiary buttons**: Indicate that lower-priority tasks can be accomplished, and are often used in sections of the UI that have less space, such as cards, lists, or tables.
+-  **Danger buttons**: Use these buttons for:
+
+   - Dangerous actions, such as those that lose or destroy data.
+   - Primary danger buttons should only be used when the dangerous action is the most likely action, such as the affirmative Delete action in a deletion confirmation dialog.
+   - Secondary and tertiary variants can also be used for actions related to current errors, such as resolving them or viewing their details.
+
+This component is built on [Button from Theme-UI](https://theme-ui.com/components/button)
 
 ### Required components 
 
-- Button component can be used independently and does not require additional components.
-
-### Best practices
-
-Button should:
-- be clearly and accurately labeled.
-
-Button shouldn’t:
-- be used as links.
-- override colors (accessibility purposes).
-- use uppercase titles.
+This component can be used independently and does not require additional components. 
 
 ### Accessibility
 
@@ -26,12 +25,14 @@ This component should adhere to the [WAI-ARIA Button](https://www.w3.org/TR/wai-
 
 #### Keyboard Navigation
 
-- Buttons are focusable using the Tab key and can be selected using the Space or Enter key. 
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the button. |
+| Tab | Focuses the button and follows the page tab sequence. |
 
 #### Screen readers.
 
-Button utilizes `aria-label` to give an accessible name to the component.
+This component uses the **`aria-label`** attribute to provide an accessible name.
 
-| Aria Attribute | Role | Component |
-| ---- | ---- | ----------- |
-| `aria-label` | button | Button |
