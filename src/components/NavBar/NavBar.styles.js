@@ -139,7 +139,7 @@ const itemButton = {
   wordWrap: 'break-word',
   wordBreak: 'break-word',
   paddingLeft: '45px',
-  paddingRight: '45px',
+  paddingRight: 'md',
   '&.is-focused': {
     outline: '1px solid',
     outlineColor: 'focus',

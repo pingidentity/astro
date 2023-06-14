@@ -33,7 +33,7 @@ const NavBarItemLink = props => {
       {...others}
       sx={{
         paddingLeft: '45px',
-        paddingRight: '45px',
+        paddingRight: 'md',
         ...props.sx, // eslint-disable-line react/prop-types
       }}
     />
