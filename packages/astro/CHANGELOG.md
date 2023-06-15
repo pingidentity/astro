@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.3...@pingux/astro@2.5.4) (2023-06-15)
+
+
+### Bug Fixes
+
+* [6099] Astro LinkedListView fix story name ([e1e5ce5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e1e5ce580b2b2256d7f96c14ab45ff9f75eebe59))
+* [UIP-6322] Nav items and buttons right-padding 15px (md) ([6c9a4cd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6c9a4cdc60d9c0289984a7c219c7f979c5b6530f))
+
+
+
+
+
 ## [2.5.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.2...@pingux/astro@2.5.3) (2023-06-06)
 
 

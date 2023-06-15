@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.27...@pingux/end-user@2.5.0) (2023-06-15)
+
+
+### Bug Fixes
+
+* [UIP-6150] multiselect values use tab navigation instead of arrow keys ([ae71371](https://gitlab.corp.pingidentity.com/ux/end-user/commit/ae71371dde755b905ad929c0f58459e5f668ef2f))
+
+
+### Features
+
+* [UIP-6326] End User add Requirements Icon ([1bc5152](https://gitlab.corp.pingidentity.com/ux/end-user/commit/1bc5152c574a3f15cf493377dff589560b15e720))
+
+
+
+
+
 ## [2.4.27](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.26...@pingux/end-user@2.4.27) (2023-06-06)
 
 
