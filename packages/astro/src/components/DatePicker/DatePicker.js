@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import { Calendar, FieldHelperText, PopoverContainer } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
 
 import DateField from './DateField';
 
@@ -47,10 +48,7 @@ const DatePicker = forwardRef((props, ref) => {
   /**
    *  This function is run against each date in the calendar
    */
-  const isDateUnavailable = date => unavailableRanges.some(
-    interval => date.compare(parseDate(interval[0])) >= 0
-        && date.compare(parseDate(interval[1])) <= 0,
-  );
+  const isDateUnavailable = date => isDateWithinRanges(date, unavailableRanges);
 
   /**
    * To accept date value as an object or as a string in format YYYY-MM-DD
