@@ -15,6 +15,9 @@ import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
  *
  * In addition to the props below, `IconButton` accepts the same props available to the normal
  * `Button` component.
+ *
+ * `IconButton` children should be the `Icon` component. Documentation for `Icon` component can
+ * be found [here](.?path=/docs/components-icon--default).
  */
 const IconButton = forwardRef((props, ref) => {
   const {

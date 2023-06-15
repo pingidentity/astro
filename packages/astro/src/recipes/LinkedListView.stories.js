@@ -17,7 +17,7 @@ import {
 } from '../index';
 
 export default {
-  title: 'Recipes/LinkedListView',
+  title: 'Recipes/Linked List View',
   argTypes: {
     loadingState: {
       control: {

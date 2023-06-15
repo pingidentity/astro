@@ -59,6 +59,13 @@
             &:hover {
                 background-color: unset !important;
             }
+
+            &--is-focused {
+                outline: 0;
+                border-color: $button-primary-bg-color;
+                box-shadow: 0 0 0 1px $color-active-blue-highlighted,
+                  inset 0 0 0 1px $button-primary-bg-color;
+            }
         }
     }
 

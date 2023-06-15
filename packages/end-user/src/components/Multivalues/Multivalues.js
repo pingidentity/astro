@@ -1,21 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Select from 'react-select';
 import Creatable from 'react-select/creatable';
 import { noop } from 'lodash';
-import FieldMessage from '../FieldMessage'
+import FieldMessage from '../FieldMessage';
 
 /**
  * @enum {string}
  * @alias Multivalues~multivaluesInputTypes
  * @desc Enum for the different types of multivalue input styling
  */
- export const multivalueInputTypes = {
+export const multivalueInputTypes = {
     PRIMARY: 'default',
     ERROR: 'error',
     SUCCESS: 'success',
     EMPTY: '',
+};
+
+const CrossIcon = ({ size }) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 20 20"
+        aria-hidden="true"
+        fill="currentColor"
+        strokeWidth="1"
+        stroke="currentColor"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z" />
+    </svg>
+);
+
+const MultiValueRemove = ({ innerProps, data }) => {
+    const [focused, setFocused] = useState(false);
+
+    const onFocus = () => setFocused(true);
+    const onBlur = () => setFocused(false);
+
+    const onKeyDown = (e) => {
+        if (e.key === "Enter") {
+            innerProps.onClick();
+        }
+    };
+  
+    const classNames = classnames("multivalues__multi-value__remove", innerProps.className, {
+        "multivalues__multi-value__remove--is-focused": focused
+    });
+  
+    return (
+        <div
+            role="button"
+            {...innerProps}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            className={classNames}
+            tabIndex={0}
+            aria-label={`delete ${data.label}`}
+            onKeyDown={onKeyDown}
+        >
+            <CrossIcon size={14} />
+        </div>
+    );
+};
+
+const guidance = (props) => {
+    const { isSearchable, isMulti, isDisabled, tabSelectsValue, context } = props;
+    switch (context) {
+        case "menu":
+            return `Use Up and Down to choose options${isDisabled ? "" : ", press Enter to select the currently focused option"
+                }, press Escape to exit the menu${tabSelectsValue
+                    ? ", press Tab to select the option and exit the menu"
+                    : ""
+                }.`;
+        case "input":
+            return `${props["aria-label"] || "Select"} is focused ${isSearchable ? ",type to refine list" : ""
+                }, press Down to open the menu, ${isMulti ? " press Shift+Tab to focus selected values" : ""
+                }`;
+        case "value":
+            return "Use Tab and Shift+Tab to toggle between focused values, press Enter to remove the currently focused value";
+        default:
+            return "";
+    }
 };
 
 const Multivalues = ({
@@ -31,8 +99,8 @@ const Multivalues = ({
     optionsStrict,
     placeholder,
     type,
-    fieldMessage,  
-    fieldMessageProps, 
+    fieldMessage,
+    fieldMessageProps,
 }) => {
     const classNames = classnames('multivalues__control', className, {
         'multivalues__control--error': type === multivalueInputTypes.ERROR,
@@ -46,13 +114,22 @@ const Multivalues = ({
     });
 
     const SelectTag = optionsStrict ? Select : Creatable;
+
+    const onKeyDown = (e) => {
+        // prevents react-selects ArrowLeft and ArrowRight behavior
+        if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            e.preventDefault();
+            return;
+        }
+    };
+
     return (
         <>
-            {(
-                type === 'success' || type === 'error'
-                    ? <div className={iconClassNames} key="type-icon"></div>
-                    : null
-            )}
+        {(
+            type === 'success' || type === 'error'
+                ? <div className={iconClassNames} key="type-icon"></div>
+                : null
+        )}
             <SelectTag
                 classNamePrefix="multivalues"
                 components={{
@@ -65,7 +142,9 @@ const Multivalues = ({
                             {children}
                         </div>
                     ),
+                    MultiValueRemove,
                 }}
+                onKeyDown={onKeyDown}
                 className={className}
                 isMulti
                 autoFocus={autoFocus}
@@ -76,13 +155,12 @@ const Multivalues = ({
                 onFocus={onFocus}
                 placeholder={placeholder}
                 onChange={onValueChange}
+                backspaceRemovesValue={false}
+                ariaLiveMessages={{ guidance }}
             />
-        
+
             {fieldMessage && (
-                <FieldMessage
-                    status={type}
-                    {...fieldMessageProps}
-                >
+                <FieldMessage status={type} {...fieldMessageProps}>
                     {fieldMessage}
                 </FieldMessage>
             )}
@@ -110,7 +188,7 @@ Multivalues.propTypes = {
      */
     label: PropTypes.node,
     /**
-     * Whether or not to auto-focus the element.
+     * Name of the HTML Input.
      */
     name: PropTypes.string,
     /**

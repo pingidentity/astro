@@ -1,6 +1,14 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "build-ci": "yarn build-ci-group-1 && yarn build-ci-group-2",
+    "build-ci-group-1": "yarn lerna run build-ci --parallel --scope @pingux/icons --scope @pingux/astro --scope @pingux/end-user --scope @pingux/charting",
+    "build-ci-group-2": "lerna run build-ci --parallel --scope @pingux/flow-diagram --scope @pingux/schema-form --scope ui-library --scope @pingux/branding-themes",
+    "coverage-ci": "yarn lerna run coverage-ci",
+    "lint-ci": "yarn lerna run lint",
+    "postinstall": "husky install"
+  },
   "devDependencies": {
     "@babel/cli": "^7.9.0",
     "@babel/core": "^7.9.0",
@@ -58,7 +66,7 @@
     "jest-emotion": "^10.0.32",
     "jest-pnp-resolver": "^1.2.2",
     "jsdoc-to-markdown": "^6.0.1",
-    "lerna": "^5.6.2",
+    "lerna": "^7.0.0",
     "mutationobserver-shim": "^0.3.7",
     "node-gyp": "^9.0.0",
     "react": "^16.8.6",
@@ -69,9 +77,6 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@babel/runtime-corejs3": "^7.11.2"
-  },
-  "scripts": {
-    "postinstall": "husky install"
   },
   "resolutions": {
     "ast-types": "^0.14.0",

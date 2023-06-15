@@ -8,9 +8,9 @@
       changes:
         - "packages/$PACKAGE/**/*"
   script:
-    - lerna run build $SCOPE
-    - lerna run lint $SCOPE
-    - lerna run coverage-ci $SCOPE
+    - yarn lerna run build $SCOPE
+    - yarn lint-ci $SCOPE
+    - yarn coverage-ci $SCOPE
   artifacts:
     paths:
       - "./packages/$PACKAGE/lib"

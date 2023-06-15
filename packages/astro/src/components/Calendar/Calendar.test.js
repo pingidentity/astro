@@ -1,8 +1,9 @@
 import React from 'react';
-import { getLocalTimeZone, parseDate, today } from '@internationalized/date';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
+import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
 import { act, fireEvent, render, screen, within } from '../../utils/testUtils/testWrapper';
 
 import Calendar from './Calendar';
@@ -12,10 +13,7 @@ const unavailableRanges = [
   ['2022-08-15', '2022-08-20'],
 ];
 // This function is run against each date in the calendar
-const isDateUnavailable = date => unavailableRanges.some(interval => date.compare(
-  parseDate(interval[0]),
-) >= 0 && date.compare(parseDate(interval[1])) <= 0,
-);
+const isDateUnavailable = date => isDateWithinRanges(date, unavailableRanges);
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <Calendar {...props} />
