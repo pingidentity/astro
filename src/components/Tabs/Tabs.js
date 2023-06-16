@@ -14,10 +14,6 @@ import { CollectionTab } from '../Tab';
 
 export const TabsContext = React.createContext({});
 
-/**
- * Tabs are used to divide content, navigate to other views, and indicate work progress.
- */
-
 const TabPanel = forwardRef(({ state, ...props }, ref) => {
   const tabPanelRef = useRef();
   const { children, tabPanelProps } = props;

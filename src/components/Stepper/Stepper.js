@@ -14,12 +14,6 @@ const {
   INACTIVE,
 } = stepStatuses;
 
-/**
- * The Stepper component acts as a wrapper for individual Step components.
- * Stepper is used to display progress through a sequence of logical and numbered steps
- *  usually within a configuration wizard.
- */
-
 const Stepper = forwardRef((props, ref) => {
   const {
     activeStep,
