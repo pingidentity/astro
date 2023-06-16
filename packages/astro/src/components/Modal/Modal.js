@@ -1,12 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import {
   FocusScope,
+  mergeProps,
   OverlayContainer,
   useDialog,
-  useModal,
-  useOverlay,
-  usePreventScroll,
 } from 'react-aria';
+import { useModalOverlay } from '@react-aria/overlays';
 import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
@@ -58,17 +57,19 @@ const Modal = forwardRef((props, ref) => {
     ...propsContentProps,
   };
 
+  const modalState = {
+    isOpen,
+    close: onClose,
+  };
+
   const modalRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => modalRef.current);
   // Handle interacting outside the dialog and pressing
-  // the Escape key to close the modal.
-  const { overlayProps } = useOverlay(contentProps, modalRef);
-
-  // Prevent scrolling while the modal is open, and hide content
+  // the Escape key to close the modal,
+  // prevent scrolling while the modal is open, and hide content
   // outside the modal from screen readers.
-  usePreventScroll();
-  const { modalProps } = useModal();
+  const { modalProps, underlayProps } = useModalOverlay(contentProps, modalState, modalRef);
 
   // Get props for the dialog and its title
   const { dialogProps, titleProps } = useDialog(contentProps, modalRef);
@@ -77,13 +78,15 @@ const Modal = forwardRef((props, ref) => {
 
   return (
     <OverlayContainer>
-      <Box variant="modal.container" {...others} {...containerProps}>
+      <Box
+        variant="modal.container"
+        {...mergeProps(containerProps, underlayProps, others)}
+      >
         <FocusScope contain restoreFocus autoFocus={hasAutoFocus}>
           <Box
             variant="modal.content"
             className={classNames}
             {...propsContentProps}
-            {...overlayProps}
             {...dialogProps}
             {...modalProps}
             ref={modalRef}
@@ -94,26 +97,26 @@ const Modal = forwardRef((props, ref) => {
               && (
                 closeButton
                 ?? (
-                <IconButton
-                  aria-label="Close modal window"
-                  data-id="icon-button__close-modal-window"
-                  variant="modalCloseButton"
-                  onPress={onClose}
-                >
-                  <Icon icon={CloseIcon} />
-                </IconButton>
+                  <IconButton
+                    aria-label="Close modal window"
+                    data-id="icon-button__close-modal-window"
+                    variant="modalCloseButton"
+                    onPress={onClose}
+                  >
+                    <Icon icon={CloseIcon} />
+                  </IconButton>
                 )
               )
             }
             {
               title
               && (
-              <Text
-                {...titleProps}
-                variant="variants.modal.title"
-              >
+                <Text
+                  {...titleProps}
+                  variant="variants.modal.title"
+                >
                   {title}
-              </Text>
+                </Text>
               )
             }
             {children}

@@ -18,15 +18,15 @@ const ComposedComponent = props => {
       {
         state.isOpen
         && (
-        <OverlayProvider>
-          <Modal
-            isOpen={state.isOpen}
-            onClose={state.close}
-            isDismissable
-            hasCloseButton
-            {...modalProps}
-          />
-        </OverlayProvider>
+          <OverlayProvider>
+            <Modal
+              isOpen={state.isOpen}
+              onClose={state.close}
+              isDismissable
+              hasCloseButton
+              {...modalProps}
+            />
+          </OverlayProvider>
         )
       }
     </>
@@ -60,7 +60,7 @@ test('close button should close the modal', () => {
   getComposedComponent({ isDefaultOpen: true });
 
   // Target the close button
-  userEvent.click(screen.queryAllByRole('button')[1]);
+  userEvent.click(screen.queryAllByRole('button')[0]);
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
 
@@ -68,7 +68,19 @@ test('keyboard interactions on the close button should close the modal', () => {
   getComposedComponent({ isDefaultOpen: true });
 
   // Target the close button
-  fireEvent.keyDown(screen.queryAllByRole('button')[1], { key: 'Enter', code: 13 });
-  fireEvent.keyUp(screen.queryAllByRole('button')[1], { key: 'Enter', code: 13 });
+  fireEvent.keyDown(screen.queryAllByRole('button')[0], { key: 'Enter', code: 13 });
+  fireEvent.keyUp(screen.queryAllByRole('button')[0], { key: 'Enter', code: 13 });
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+});
+
+test('assign aria-hidden to elements outside the modal when the modal is opened', () => {
+  getComposedComponent();
+  const button = screen.queryByRole('button');
+  const buttonParent = button.closest('div');
+
+  expect(buttonParent).not.toHaveAttribute('aria-hidden');
+
+  // Open the modal
+  userEvent.click(screen.queryByRole('button'));
+  expect(buttonParent).toHaveAttribute('aria-hidden');
 });
