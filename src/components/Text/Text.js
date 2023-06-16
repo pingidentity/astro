@@ -8,11 +8,6 @@ import { textVariants } from '../../utils/devUtils/constants/variants';
 
 const ExtendedText = styled(ThemeUIText)(layout, flexbox, typography);
 
-/**
- * The Text component is used for displaying text.
- * Text supports [Typography Props from Styled System ](https://styled-system.com/table/#typography).
- */
-
 const Text = React.forwardRef((props, ref) => (
   <ExtendedText variant="base" {...props} ref={ref} />
 ));
