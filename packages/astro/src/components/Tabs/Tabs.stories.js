@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LockIcon from 'mdi-react/LockIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Badge,
   Icon,
@@ -8,6 +9,8 @@ import {
   Tabs,
   Text,
 } from '../../index';
+
+import TabsReadme from './Tabs.mdx';
 
 export default {
   title: 'Components/Tabs',
@@ -40,6 +43,12 @@ export default {
   },
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <TabsReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

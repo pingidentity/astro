@@ -1,5 +1,6 @@
 import React from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Table,
   TableBody,
@@ -10,10 +11,21 @@ import {
   Text,
 } from '../../index';
 
+import TableReadme from './Table.mdx';
 
 export default {
   title: 'Components/Table',
   component: Table,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <TableReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
 };
 
 const caption = 'Populations of Countries';
