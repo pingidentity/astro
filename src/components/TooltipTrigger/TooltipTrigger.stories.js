@@ -2,19 +2,24 @@ import React from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
 import Earth from 'mdi-react/EarthIcon';
 
-import {
-  Box,
-  Button,
-  Icon,
-  IconButton,
-  Text,
-  Tooltip,
-  TooltipTrigger,
-} from '../../index';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Box, Button, Icon, IconButton, Text, Tooltip, TooltipTrigger } from '../../index';
+
+import TooltipTriggerReadme from './TooltipTrigger.mdx';
 
 export default {
   title: 'Components/TooltipTrigger',
   component: TooltipTrigger,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <TooltipTriggerReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
 };
 
 export const Default = args => (

@@ -1,10 +1,23 @@
 import React from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, ScrollBox } from '../../index';
+
+import ScrollBoxReadme from './ScrollBox.mdx';
 
 export default {
   title: 'Components/ScrollBox',
   component: ScrollBox,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <ScrollBoxReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     maxHeight: {
       control: {

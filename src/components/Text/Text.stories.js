@@ -1,5 +1,6 @@
 import React from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Separator,
@@ -11,9 +12,21 @@ import {
   Text,
 } from '../../index';
 
+import TextReadme from './Text.mdx';
+
 export default {
   title: 'Components/Text',
   component: Text,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <TextReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     variant: {
       control: {

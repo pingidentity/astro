@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 import useStatusClasses from '../../hooks/useStatusClasses';
 import Box from '../Box';
 
-/**
- * Scrollbox is a container that allows content to be scrolled
- */
-
 const ScrollBox = forwardRef((props, ref) => {
   const {
     maxHeight,

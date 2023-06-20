@@ -8,12 +8,6 @@ import { TooltipContext } from '../../context/TooltipContext/index';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 import PopoverContainer from '../PopoverContainer';
 
-/**
- * A `TooltipTrigger` is a composed component and must be comprised of two children: 1) a
- * focusable button, and 2) a `Tooltip` which renders non-interactive content. This component
- * is typically used as a design fallback for contextual information that may be hard to convey
- * otherwise. The tooltip trigger can also be disabled without disabling button press events.
- */
 const TooltipTrigger = forwardRef((props, ref) => {
   const {
     arrowCrossOffset,

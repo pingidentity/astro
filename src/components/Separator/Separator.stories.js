@@ -1,10 +1,23 @@
 import React from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Separator } from '../../index';
+
+import SeparatorReadme from './Separator.mdx';
 
 export default {
   title: 'Components/Separator',
   component: Separator,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <SeparatorReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
 };
 
 export const Default = ({ ...args }) => (

@@ -6,10 +6,6 @@ import { useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import Box from '../Box/Box';
 
-/**
- * Basic separator or HR component.
- * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
-*/
 const Separator = forwardRef((props, ref) => {
   const { className, orientation, ...others } = props;
   const { separatorProps } = useSeparator(props, ref);

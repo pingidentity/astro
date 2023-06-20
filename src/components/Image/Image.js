@@ -20,12 +20,6 @@ import {
 import { Box } from '../../index';
 import { neutral } from '../../styles/colors';
 
-/**
- * Basic image component.
- * Built on top of [Image from Theme-UI](https://theme-ui.com/components/image/).
- * If you are looking to add an icon please use [Icon component](/icon--default).
- */
-
 const Image = forwardRef((props, ref) => {
   const {
     className,
