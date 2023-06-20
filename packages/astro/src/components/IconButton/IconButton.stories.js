@@ -5,6 +5,7 @@ import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Icon,
@@ -17,11 +18,19 @@ import {
   Text,
 } from '../../index';
 
+import IconButtonReadme from './IconButton.mdx';
+
 export default {
   title: 'Components/IconButton',
   component: IconButton,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <IconButtonReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 
 import Box from '../Box';
 
-/**
- * Indeterminite progress component. Used to show general loading.
- * Uses [useProgressBar](https://react-spectrum.adobe.com/react-aria/useProgressBar.html) from React Aria
- */
-
 const Loader = forwardRef((props, ref) => {
   const { size, ...others } = props;
   return (

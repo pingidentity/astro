@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Icon,
@@ -12,11 +13,19 @@ import {
 } from '../../index';
 import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
+import ListItemReadme from './ListItem.mdx';
+
 export default {
   title: 'Components/ListItem',
   component: ListItem,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <ListItemReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
