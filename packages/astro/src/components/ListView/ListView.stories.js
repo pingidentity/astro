@@ -7,6 +7,7 @@ import CreateIcon from 'mdi-react/CreateIcon';
 import FormSelectIcon from 'mdi-react/FormSelectIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Icon,
@@ -16,11 +17,19 @@ import {
 } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
+import ListViewReadme from './ListView.mdx';
+
 export default {
   title: 'Components/ListView',
   component: ListView,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <ListViewReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

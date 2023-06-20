@@ -2,11 +2,24 @@ import React, { useState } from 'react';
 import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
 import EyeIcon from 'mdi-react/EyeOutlineIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { IconButtonToggle } from '../../index';
+
+import IconButtonToggleReadme from './IconButtonToggle.mdx';
 
 export default {
   title: 'Components/IconButtonToggle',
   component: IconButtonToggle,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <IconButtonToggleReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
 };
 
 export const Default = args => (
