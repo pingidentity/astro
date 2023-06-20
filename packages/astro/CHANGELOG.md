@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.5](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.4...@pingux/astro@2.5.5) (2023-06-20)
+
+
+### Bug Fixes
+
+* [UIP-6318] add aria-hidden when Modal is open ([d2bf1ac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d2bf1aca90574c0e53b4fb5f9dad68a0eca9e101))
+
+
+
+
+
 ## [2.5.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.3...@pingux/astro@2.5.4) (2023-06-15)
 
 

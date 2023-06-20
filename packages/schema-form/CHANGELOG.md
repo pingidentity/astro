@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.21](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.12.20...@pingux/schema-form@3.12.21) (2023-06-20)
+
+**Note:** Version bump only for package @pingux/schema-form
+
+
+
+
+
 ## [3.12.20](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.12.19...@pingux/schema-form@3.12.20) (2023-06-15)
 
 **Note:** Version bump only for package @pingux/schema-form

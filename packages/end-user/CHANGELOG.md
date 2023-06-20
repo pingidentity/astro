@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.5.0...@pingux/end-user@2.5.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* [UIP-6151] End User Fix shared user state in PageSelfService ([edfe8b8](https://gitlab.corp.pingidentity.com/ux/end-user/commit/edfe8b81e03d5fdc362a31fa9dc24e41dfc6a643))
+
+
+
+
+
 # [2.5.0](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.4.27...@pingux/end-user@2.5.0) (2023-06-15)
 
 
