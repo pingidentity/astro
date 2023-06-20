@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import isChromatic from 'chromatic/isChromatic';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Image } from '../../index';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import { chiefIdentityChampions, pingImg } from '../../utils/devUtils/constants/images';
 
+import ImageReadme from './Image.mdx';
+
 export default {
   title: 'Components/Image',
   component: Image,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <ImageReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     isDisabled: {},
     variant: {

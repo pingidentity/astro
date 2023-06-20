@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
 
-/**
- * `IconBadge` children should be the `Icon` component. Documentation for
- * `Icon` component can be found [here](.?path=/docs/components-icon--default).
- */
-
 const IconBadge = props => {
   const {
     children,
