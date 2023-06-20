@@ -6,10 +6,6 @@ import { useStatusClasses } from '../../hooks';
 import { onHoverPropTypes } from '../../utils/docUtils/hoverProps';
 import Box from '../Box/Box';
 
-/**
- * List Item component.
- * Accepts most of the styling props from [styled-system](https://styled-system.com/table).
-*/
 const ListItem = forwardRef(({
   children,
   className,

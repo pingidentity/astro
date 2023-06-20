@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Stack from '../../src/components/Stack';
 import Button, { ButtonTypes } from '../../src/components/Button';
@@ -18,7 +19,7 @@ import DeviceTable from '../../src/components/shared/DeviceTable';
 import AccountTable from '../../src/components/AccountTable';
 import SocialIcons from '../../src/components/SocialIcon';
 import ImageInput from '../../src/components/ImageInput';
-import FloatLabelDropdownCustom from '../../src/components/FloatLabelDropdownCustom';
+import FloatLabelDropdown from '../../src/components/FloatLabelDropdown';
 import Columns, { Column, alignments as colAlignments, widths as colWidths } from '../../src/components/Columns';
 
 import '../../src/css/styles.scss';
@@ -36,12 +37,58 @@ export const Default = () => (
 class SelfService extends React.Component {
     state = {
         selectedIndex: 0,
+        user: {
+            imageSrc: 'https://placedog.net/50/50',
+            email: 'katie.addleman@compra',
+            familyName: 'Kaddleman',
+            givenName: 'Katherine',
+            middleName: 'Anne',
+            name: 'Katherine Anne Kaddleman',
+            honorificPrefix: 'Dr.',
+            honorificSuffix: '',
+            jobTitle: '',
+            nickname: '',
+            primaryPhone: '(123) 456-7890',
+            mobilePhone: '',
+            streetAddress: '1440 S Main Street',
+            streetAddress2: '',
+            locality: 'San Diego',
+            region: 'CA',
+            postalCode: '92121',
+            country: 'United States',
+        },
     };
 
-    _handleSectionChange = (index) => {
+    _handleSectionChange = index => {
         this.setState({
             selectedIndex: index,
         });
+    };
+
+    _handleUserChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            user: {
+                ...this.state.user,
+                [name]: value,
+            },
+        });
+    };
+
+    _handleImgChange = (file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const { result } = e.target
+            if (result) {
+                this.setState({
+                    user: {
+                        ...this.state.user,
+                        imageSrc: result
+                    },
+                });
+            }
+        };
+        reader.readAsDataURL(file);
     };
 
     render = () => (
@@ -57,12 +104,18 @@ class SelfService extends React.Component {
                 selectedNav={this.state.selectedIndex}
                 onSelectNav={this._handleSectionChange}
                 user={{
-                    name: 'Tyler Grove',
-                    imageSrc: 'https://placedog.net/50/50',
+                    name: this.state.user.name,
+                    imageSrc: this.state.user.imageSrc,
                 }}
             />
 
-            {this.state.selectedIndex === 0 ? <MyProfilePage /> : null}
+            {this.state.selectedIndex === 0 ? (
+                <MyProfilePage
+                    user={this.state.user}
+                    handleUserChange={this._handleUserChange}
+                    handleImgChange={this._handleImgChange}
+                />
+            ) : null}
             {this.state.selectedIndex === 1 ? <AuthenticationPage /> : null}
             {this.state.selectedIndex === 2 ? <ChangePasswordPage /> : null}
             {this.state.selectedIndex === 3 ? <LinkedAccountsPage /> : null}
@@ -77,12 +130,14 @@ class MyProfilePage extends React.Component {
 
     _toggleEdit = () => {
         this.setState({ isEditToggled: !this.state.isEditToggled });
-    }
+    };
 
     render() {
         const {
             isEditToggled,
         } = this.state;
+
+        const { user, handleUserChange, handleImgChange } = this.props;
 
         return (
             <Container>
@@ -99,19 +154,38 @@ class MyProfilePage extends React.Component {
                                     flexDirection={flexDirectionOptions.ROW}
                                     justify={justifyOptions.SPACEBETWEEN}
                                 >
-                                    <Column width={colWidths.TWO} alignment={colAlignments.CENTER}>
+                                    <Column
+                                        width={colWidths.TWO}
+                                        alignment={colAlignments.CENTER}
+                                    >
                                         <ImageInput
-                                            value="https://images-na.ssl-images-amazon.com/images/I/61qxTCzXx0L._SX425_.jpg"
+                                            value={user.imageSrc}
+                                            onChange={handleImgChange}
                                         />
                                     </Column>
                                     <Column width={colWidths.FOUR}>
-                                        <FloatLabelTextInput label="First Name" />
+                                        <FloatLabelTextInput
+                                            label="First Name"
+                                            name="givenName"
+                                            value={user.givenName}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.TWO}>
-                                        <FloatLabelTextInput label="Middle Name" />
+                                        <FloatLabelTextInput
+                                            label="Middle Name"
+                                            name="middleName"
+                                            value={user.middleName}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.FOUR}>
-                                        <FloatLabelTextInput label="Last Name" />
+                                        <FloatLabelTextInput
+                                            label="Last Name"
+                                            name="familyName"
+                                            value={user.familyName}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                 </FlexRow>
                             </FlexRow>
@@ -124,16 +198,31 @@ class MyProfilePage extends React.Component {
                             >
                                 <Columns>
                                     <Column width={colWidths.FOUR}>
-                                        <FloatLabelTextInput label="Primary Number" />
+                                        <FloatLabelTextInput
+                                            label="Primary Number"
+                                            name="primaryPhone"
+                                            value={user.primaryPhone}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.FOUR}>
-                                        <FloatLabelTextInput label="Mobile Number" />
+                                        <FloatLabelTextInput
+                                            label="Mobile Number"
+                                            name="mobilePhone"
+                                            value={user.mobilePhone}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.FOUR} />
                                 </Columns>
                                 <Columns>
                                     <Column width={colWidths.FOUR}>
-                                        <FloatLabelTextInput label="Email Address" />
+                                        <FloatLabelTextInput
+                                            label="Email Address"
+                                            name="email"
+                                            value={user.email}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.FOUR} />
                                     <Column width={colWidths.FOUR} />
@@ -148,34 +237,58 @@ class MyProfilePage extends React.Component {
                             >
                                 <Columns>
                                     <Column width={colWidths.EIGHT}>
-                                        <FloatLabelTextInput label="Street Address" />
+                                        <FloatLabelTextInput
+                                            label="Street Address"
+                                            name="streetAddress"
+                                            value={user.streetAddress}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.FOUR}>
-                                        <FloatLabelTextInput label="Apt. / Suite" />
+                                        <FloatLabelTextInput
+                                            label="Apt. / Suite"
+                                            name="streetAddress2"
+                                            value={user.streetAddress2}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                 </Columns>
                                 <Columns>
                                     <Column width={colWidths.TWO}>
-                                        <FloatLabelDropdownCustom
+                                        <FloatLabelDropdown
                                             id="countryDropdown"
                                             label="Country"
-                                            options={['Canada', 'United States']}
-                                            value="United States"
+                                            options={["Canada", "United States"]}
+                                            name="country"
+                                            value={user.country}
+                                            onChange={(value) => handleUserChange({ target: { name: 'country', value } })}
                                         />
                                     </Column>
                                     <Column width={colWidths.SIX}>
-                                        <FloatLabelTextInput label="City" />
-                                    </Column>
-                                    <Column width={colWidths.TWO}>
-                                        <FloatLabelDropdownCustom
-                                            id="stateDropdown"
-                                            label="State"
-                                            options={['NE', 'IA']}
-                                            value="NE"
+                                        <FloatLabelTextInput
+                                            label="City"
+                                            name="locality"
+                                            value={user.locality}
+                                            onChange={handleUserChange}
                                         />
                                     </Column>
                                     <Column width={colWidths.TWO}>
-                                        <FloatLabelTextInput label="Zip Code" />
+                                        <FloatLabelDropdown
+                                            id="stateDropdown"
+                                            label="State"
+                                            name="region"
+                                            options={["NE", "IA", "CA"]}
+                                            value={user.region}
+                                            onChange={(value) => handleUserChange({ target: { name: 'region', value } })}
+                                        />
+                                    </Column>
+                                    <Column width={colWidths.TWO}>
+                                        <FloatLabelTextInput
+                                            label="Zip Code"
+                                            name="postalCode"
+                                            value={user.postalCode}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                 </Columns>
                             </FlexRow>
@@ -188,7 +301,12 @@ class MyProfilePage extends React.Component {
                             >
                                 <Columns>
                                     <Column width={colWidths.EIGHT}>
-                                        <FloatLabelTextInput label="Job Title" />
+                                        <FloatLabelTextInput
+                                            label="Job Title"
+                                            name="jobTitle"
+                                            value={user.jobTitle}
+                                            onChange={handleUserChange}
+                                        />
                                     </Column>
                                     <Column width={colWidths.FOUR} />
                                 </Columns>
@@ -211,13 +329,15 @@ class MyProfilePage extends React.Component {
                                         alignment={alignments.CENTER}
                                     >
                                         <img
-                                            src="https://placedog.net/150/150"
+                                            src={user.imageSrc}
                                             alt="Profile"
                                             className="profile-image"
                                         />
                                         <div>
-                                            <FormLabel className="mobileCenter">kaddleman</FormLabel>
-                                            <h1 className="heading-text centered-text">Dr. Katherine Anne Addleman</h1>
+                                            <FormLabel className="mobileCenter">{user.familyName}</FormLabel>
+                                            <h1 className="heading-text centered-text">
+                                                {user.honorificPrefix} {user.givenName} {user.middleName} {user.familyName} {user.honorificSuffix}
+                                            </h1>
                                         </div>
                                     </FlexRow>
                                 </Column>
@@ -235,11 +355,15 @@ class MyProfilePage extends React.Component {
                                 <Columns>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>Phone</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">(123) 456-7890</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.primaryPhone}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>Email</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">katie.addleman@compra</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.email}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.SIX} />
                                 </Columns>
@@ -254,26 +378,38 @@ class MyProfilePage extends React.Component {
                                 <Columns>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>Street Address</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">1440 S Main Street</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.streetAddress}
+                                            <br />
+                                            {user.streetAddress2}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>City</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">San Diego</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.locality}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>State</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">CA</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.region}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.THREE} />
                                 </Columns>
                                 <Columns>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>Zip Code</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">92121</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.postalCode}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.THREE}>
                                         <FormLabel>Country</FormLabel>
-                                        <TextBlock className="text-block--full-width text-block--left">United States</TextBlock>
+                                        <TextBlock className="text-block--full-width text-block--left">
+                                            {user.country}
+                                        </TextBlock>
                                     </Column>
                                     <Column width={colWidths.SIX} />
                                 </Columns>
@@ -286,6 +422,29 @@ class MyProfilePage extends React.Component {
     }
 }
 
+MyProfilePage.propTypes = {
+    handleImgChange: PropTypes.func,
+    handleUserChange: PropTypes.func,
+    user: PropTypes.shape({
+        imageSrc: PropTypes.string,
+        email: PropTypes.string,
+        familyName: PropTypes.string,
+        givenName: PropTypes.string,
+        middleName: PropTypes.string,
+        name: PropTypes.string,
+        jobTitle: PropTypes.string,
+        honorificSuffix: PropTypes.string,
+        honorificPrefix: PropTypes.string,
+        nickname: PropTypes.string,
+        primaryPhone: PropTypes.string,
+        streetAddress: PropTypes.string,
+        streetAddress2: PropTypes.string,
+        locality: PropTypes.string,
+        region: PropTypes.string,
+        postalCode: PropTypes.string,
+        country: PropTypes.string,
+    }),
+};
 const ChangePasswordPage = () => (
     <Container maxWidth="400px">
         <h1 className="heading-text centered-text">Change Password</h1>
@@ -320,7 +479,7 @@ class AuthenticationPage extends React.Component {
 
     _showData = () => {
         this.setState({ dataIsVisible: true });
-    }
+    };
 
     render = () => (
         <Container maxWidth="400px">
@@ -561,7 +720,7 @@ class LinkedAccountsPage extends React.Component {
             },
         ],
         accountToUnlink: '',
-    }
+    };
     render() {
         return (
             <Container maxWidth="400px">
@@ -574,7 +733,7 @@ class LinkedAccountsPage extends React.Component {
                     >
                         <AccountTable
                             onUnlink={({ name: accountName }) => {
-                                this.setState(prevState => prevState.accounts.map((account) => {
+                                this.setState(prevState => prevState.accounts.map(account => {
                                     if (account.name === accountName) {
                                         account.unlinked = true;
                                     }
@@ -605,7 +764,7 @@ class LinkedAccountsPage extends React.Component {
                         <AccountTable
                             onUnlink={({ name: nameToDelete }) => {
                                 this.setState(({ sessions }) => ({
-                                    sessions: sessions.filter((({ name }) => name !== nameToDelete)),
+                                    sessions: sessions.filter(({ name }) => name !== nameToDelete),
                                 }));
                             }}
                             accounts={this.state.sessions}

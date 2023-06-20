@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Stepper, Text } from '../../index';
+
+import StepperReadme from './Stepper.mdx';
 
 export default {
   title: 'Components/Stepper',
@@ -38,6 +41,12 @@ export default {
   },
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <StepperReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
