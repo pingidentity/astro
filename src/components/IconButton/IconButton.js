@@ -8,17 +8,6 @@ import { BadgeContext } from '../../context/BadgeContext';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
-/**
- * Convenience wrapper for a Button + Icon. This component applies specific styles necessary for
- * icons and changes the behavior pattern for Button. This ensures compatibility across browsers
- * and devices.
- *
- * In addition to the props below, `IconButton` accepts the same props available to the normal
- * `Button` component.
- *
- * `IconButton` children should be the `Icon` component. Documentation for `Icon` component can
- * be found [here](.?path=/docs/components-icon--default).
- */
 const IconButton = forwardRef((props, ref) => {
   const {
     children,
