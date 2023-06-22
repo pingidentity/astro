@@ -19,7 +19,7 @@ const thumbSwitch = {
   display: 'inline-flex',
   height: '26px',
   lineHeight: '26px',
-  fontSize: '14px',
+  fontSize: '13px',
   borderRadius: '15px',
   alignSelf: 'center',
   paddingTop: '0px',
@@ -27,12 +27,15 @@ const thumbSwitch = {
   textTransform: 'uppercase',
   bg: 'accent.95',
   '&.is-selected': {
-    bg: 'active',
+    bg: 'accent.20',
     color: 'white',
     zIndex: '1',
   },
   '&.is-focused': {
     ...defaultFocus,
+  },
+  '&.is-hovered': {
+    bg: 'white',
   },
 };
 
