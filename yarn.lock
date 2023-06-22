@@ -4086,7 +4086,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pingux/astro@^2.5.5, @pingux/astro@workspace:packages/astro":
+"@pingux/astro@^2.5.6-alpha.0, @pingux/astro@workspace:packages/astro":
   version: 0.0.0-use.local
   resolution: "@pingux/astro@workspace:packages/astro"
   dependencies:
@@ -4420,7 +4420,7 @@ __metadata:
     "@material-ui/lab": ^4.0.0-alpha.57
     "@mdi/js": ^5.8.55
     "@mdi/react": ^1.4.0
-    "@pingux/astro": ^2.5.5
+    "@pingux/astro": ^2.5.6-alpha.0
     "@pingux/icons": ^0.2.0
     "@storybook/addon-actions": ^6.5.10
     "@storybook/addon-docs": ^6.5.10
@@ -4526,7 +4526,7 @@ __metadata:
     "@emotion/react": ^11.1.1
     "@emotion/styled": ^11.1.1
     "@mdx-js/react": ^1.6.22
-    "@pingux/astro": ^2.5.5
+    "@pingux/astro": ^2.5.6-alpha.0
     "@pingux/icons": ^0.2.0
     "@rjsf/core": 2.0.0
     "@storybook/addon-actions": ^6.5.10
