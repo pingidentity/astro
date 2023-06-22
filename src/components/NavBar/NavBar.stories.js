@@ -10,6 +10,7 @@ import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 import ViewGridPlusOutline from 'mdi-react/ViewGridPlusOutlineIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Link,
@@ -21,10 +22,22 @@ import {
   Separator,
 } from '../../index';
 
+import NavBarReadme from './NavBar.mdx';
+
 export default {
   component: NavBar,
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
   title: 'Components/NavBar',
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <NavBarReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
 };
 
 const Credentials = props => (

@@ -16,12 +16,6 @@ import Icon from '../Icon';
 import IconButton from '../IconButton';
 import Text from '../Text';
 
-/**
-  * Modals are overlays that interrupt a user’s workflow to convey an important message.
-  * The component must be wrapped in an OverlayProvider, and the first child should be a trigger,
-  * such as Button.
-*/
-
 const Modal = forwardRef((props, ref) => {
   const {
     className,

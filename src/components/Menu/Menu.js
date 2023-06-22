@@ -17,14 +17,6 @@ import { onHoverPropTypes } from '../../utils/docUtils/hoverProps';
 import Box from '../Box';
 import MenuItem from '../MenuItem';
 
-
-/**
- * Menu component intended to be used as a wrapper for MenuItem.
- * This component is typically used alongside others such as PopoverMenu.
- *
- * Utilizes [React Aria](https://react-spectrum.adobe.com/react-aria/useMenu.html).
- */
-
 const Menu = forwardRef((props, ref) => {
   const {
     isDisabled,

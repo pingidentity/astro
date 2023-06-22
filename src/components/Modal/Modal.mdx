@@ -1,0 +1,57 @@
+<Meta title="Components/Modal/Modal" />
+
+# Modal
+
+Modals (also known as modal windows, overlays, and dialogs) are large UI elements that sit on top of an application's main window.
+To return to the application's main interface, users must interact with the modal.
+
+This component must be wrapped in an OverlayProvider and the first child component should be a trigger, such as a button.
+
+If the modal is used to display an error message, it displays after users perform an action and require a response. 
+These messages should be short, meaningful, free of technical jargon, and follow status color guidelines. 
+They can also be used to educate users, but don’t try to explain complicated troubleshooting processes in error messages.
+
+Error messages should clearly explain: 
+- What happened
+- Why it happened, if that’s relevant
+- The steps users should take to resolve the issue
+
+See our [Error message writing guidelines](https://pingidentity.atlassian.net/wiki/spaces/CCC/pages/21137273/Error+messages) for additional information. 
+
+Modals should:
+- Be used for important warnings and information requests as a way to prevent or correct critical errors.
+- Be used to break down complex workflow to not overwhelm the user.
+- Have all the critical information inside it to help users make decisions.
+
+Modals should not:
+- Be nested inside or replaced by another modal.
+- Be overused as it disrupts the user’s workflow and requires a response.
+- Have content that requires scrolling. If the content length is exceedingly large or requires complex forms, use the [OverlayPanel](./?path=/docs/components-overlaypanel--default) component.
+- Be used for brief warnings and alerts, use the [Messages](./?path=/docs/components-messages--default) component instead.
+
+### Required Components
+
+This component requires the OverlayProvider and [Button](./?path=/docs/components-button--default) components. 
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Modal](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Key | Functions |
+| ---- | ---- |
+| Tab | The trigger component and the content in the modal are focusable using the Tab key.   |
+|  | When a modal opens, focus moves to an element contained in the modal, which is usually the first focusable element. If the first focusable element does not make sense, tabindex=”-1” should be added to a static element at the top of the modal, which could be the panel title. |
+| Space or Enter | Opens the modal when the trigger is focused. Once opened, the focus is locked inside the modal. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Esc | Pressing the escape key closes the modal and adds focus to the previously focused component. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The button uses the **`aria-label`** attribute to provide an accessible name.
+- The **`aria-labelledby`** attribute is supplied with label ID.
+- The **`aria-modal`** attribute allows the assistive technologies to inform users that the ability to interact with or access other content on the page requires the modal dialog to be closed.
