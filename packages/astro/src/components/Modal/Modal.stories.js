@@ -1,5 +1,6 @@
 import React from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useModalState } from '../../hooks';
 import {
   Box,
@@ -10,9 +11,21 @@ import {
 } from '../../index';
 import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 
+import ModalReadme from './Modal.mdx';
+
 export default {
   title: 'Components/Modal',
   component: Modal,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <ModalReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     title: {
       control: {
