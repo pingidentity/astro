@@ -1,20 +1,33 @@
 import React from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RequirementsList } from '../../index';
+
+import RequirementsListReadme from './RequirementsList.mdx';
 
 export default {
   title: 'Components/RequirementsList',
   component: RequirementsList,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <RequirementsListReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     requirements: {
       control: {
         type: 'object',
       },
       defaultValue: [
-        { 'name': 'requirement 1', 'status': 'default' },
-        { 'name': 'requirement 2', 'status': 'warning' },
-        { 'name': 'requirement 3', 'status': 'error' },
-        { 'name': 'requirement 4', 'status': 'success' },
+        { name: 'requirement 1', status: 'default' },
+        { name: 'requirement 2', status: 'warning' },
+        { name: 'requirement 3', status: 'error' },
+        { name: 'requirement 4', status: 'success' },
       ],
       description: 'Requirements and their status.',
     },

@@ -74,6 +74,8 @@ export const decorativeLight = decorative.map(
   color => chroma(color).brighten(2).hex(),
 );
 
+export const getDarkerColor = (color, percentage) => (chroma.valid(color) ? chroma.mix(color, '#000000', percentage).hex() : '');
+
 // export const focus = chroma(accent[50]).alpha(0.75).hex();
 export const focus = chroma('#D033FF').hex();
 
@@ -139,3 +141,16 @@ function flattenColors(obj, prefix = '') {
 
 /* used by Storybook's stories */
 export const flatColorList = flattenColors(allColors);
+
+export const getBaseHexColor = colorName => {
+  if (chroma.valid(colorName)) {
+    return colorName;
+  }
+
+  try {
+    const keys = colorName.includes('.') ? colorName.split('.') : [colorName];
+    return keys.reduce((obj, key) => obj[key], allColors);
+  } catch (error) {
+    return accentBase;
+  }
+};
