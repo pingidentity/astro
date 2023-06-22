@@ -1,9 +1,11 @@
 import React from 'react';
 import { Item } from 'react-stately';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Menu, Text } from '../../index';
 import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
+import MenuReadme from './Menu.mdx';
 
 export default {
   title: 'Components/Menu',
@@ -13,6 +15,12 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
+      page: () => (
+        <>
+          <MenuReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

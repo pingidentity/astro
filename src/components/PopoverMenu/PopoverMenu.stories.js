@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Button,
   Item,
@@ -10,11 +11,19 @@ import {
   Text,
 } from '../../index';
 
+import PopoverMenuReadme from './PopoverMenu.mdx';
+
 export default {
   title: 'Components/PopoverMenu',
   component: PopoverMenu,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <PopoverMenuReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

@@ -8,16 +8,6 @@ import useProgressiveState from '../../hooks/useProgressiveState';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box/Box';
 
-/**
- * Composed component that spreads children.
- *
- * This component is built to have the NavBarSection component passed into it.
- *
- * NavBarSection is an iterative component that using
- * an array of objects that is passed into it.
- *
- */
-
 const NavBar = props => {
   const {
     defaultSelectedKey,

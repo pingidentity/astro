@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { Item } from 'react-stately';
 import AccountIcon from 'mdi-react/AccountIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Button,
@@ -9,7 +10,11 @@ import {
 } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 
-import { messagesReducerStory as messagesReducer, multiMessagesReducerStory as multiMessagesReducer } from './index';
+import {
+  messagesReducerStory as messagesReducer,
+  multiMessagesReducerStory as multiMessagesReducer,
+} from './index';
+import MessagesReadme from './Messages.mdx';
 
 export default {
   title: 'Components/Messages',
@@ -28,6 +33,12 @@ export default {
   },
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <MessagesReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RockerButton, RockerButtonGroup } from '../../index';
+
+import RockerButtonGroupReadme from './RockerButtonGroup.mdx';
 
 export default {
   title: 'Components/RockerButtonGroup',
   component: RockerButtonGroup,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <RockerButtonGroupReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
