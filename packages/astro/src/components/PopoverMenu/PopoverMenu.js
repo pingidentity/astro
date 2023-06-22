@@ -7,12 +7,6 @@ import PropTypes from 'prop-types';
 import { MenuContext } from '../../context/MenuContext';
 import PopoverContainer from '../PopoverContainer';
 
-/**
- * The PopoverMenu serves as a wrapper around a Menu and its associated trigger, linking the Menu's
- * open state with the trigger's press state and providing necessary overlay context.
- *
- * Primarily utilizes [useMenuTrigger](https://react-spectrum.adobe.com/react-aria/useMenuTrigger.html) from React Aria and [useMenuTriggerState](https://react-spectrum.adobe.com/react-stately/useMenuTriggerState.html) from React Stately.
- */
 const PopoverMenu = forwardRef((props, ref) => {
   const menuPopoverRef = useRef();
   const triggerRef = useRef();

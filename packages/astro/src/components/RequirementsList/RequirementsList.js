@@ -11,11 +11,6 @@ import Box from '../Box';
 import Icon from '../Icon';
 import Text from '../Text';
 
-/**
- * List of requirements for a password, with indicators that can change to show when
- * requirements are satisfied.
- */
-
 const RequirementsList = forwardRef((props, ref) => {
   const {
     requirements,

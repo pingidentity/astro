@@ -13,11 +13,6 @@ import { CollectionRockerButton } from '../RockerButton';
 
 export const RockerContext = React.createContext({});
 
-/**
- * This component handles a single selection state for a group of rocker buttons.
- * It is intended to be used with < RockerButton > as children.
-*/
-
 const RockerButtonGroup = forwardRef((props, ref) => {
   const {
     children,

@@ -1,0 +1,34 @@
+<Meta title="Components/RockerButtonGroup/RockerButtonGroup" />
+
+# RockerButtonGroup
+
+This component handles a single selection state for a group of rocker buttons. It is intended to be used with the RockerButton component as children.
+
+This component should:
+- Be used for a single-item selection.
+- Contain concise labels.
+
+It shouldn’t be used as a replacement for RadioButton.
+
+### Required Components
+
+This component requires the RockerButton component.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Key | Functions |
+| ---- | ---- |
+| Tab | The group is focusable using the Tab key and follows the page tab sequence. |
+| Arrow keys & Enter or Space| After the RockerButtonGroup has focus, individual rocker buttons can be focused using the right and left arrow keys, and selected by either pressing the Enter key or Space. |
+| Arrow keys | The right and left arrow keys can loop back to the beginning and end of the group |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-orientation`** attribute indicates whether the orientation is horizontal, vertical, unknown, or ambiguous. 
+- The default **`aria-disabled`** attribute is set to “False” by default. 
+- The buttons use the **`aria-pressed`** attribute to indicate the current status of the toggle button.
