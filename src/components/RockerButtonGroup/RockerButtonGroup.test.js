@@ -9,7 +9,7 @@ import { fireEvent, queryByAttribute, render, screen } from '../../utils/testUti
 const testId = 'testId';
 const testButtons = [
   { name: 'And', key: 'And', selectedStyles: { bg: '#640099' } },
-  { name: 'Or', key: 'Or' },
+  { name: 'Or', key: 'Or', selectedStyles: { bg: 'accent.30' } },
   { name: 'Maybe?', key: 'Maybe?' },
 ];
 const defaultProps = {
@@ -75,4 +75,33 @@ test('selected button can be changed by keyboard interaction', () => {
   fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
   expect(screen.getByText(testButtons[1].key)).toHaveClass('is-selected');
   expect(screen.getByText(testButtons[0].key)).not.toHaveClass('is-selected');
+});
+
+test('rockerButton renders correct darker bg when selectedStyles prop is passed', () => {
+  getComponent();
+  const button0 = screen.getByText(testButtons[0].key);
+  expect(button0).toHaveClass('is-selected');
+  expect(button0).toHaveStyle('background-color: #640099');
+  userEvent.hover(button0);
+  expect(button0).toHaveClass('is-selected');
+  expect(button0).toHaveClass('is-hovered');
+  expect(button0).toHaveStyle('background-color: #590089');
+  fireEvent.keyDown(button0, { key: 'Enter', code: 13 });
+  expect(button0).toHaveClass('is-selected');
+  expect(button0).toHaveClass('is-pressed');
+  expect(button0).toHaveStyle('background-color: #4d0077');
+});
+
+test('rockerButton renders correct bg when selectedStyles prop is css variable', () => {
+  getComponent();
+  const button1 = screen.getByText(testButtons[1].key);
+  fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
+  userEvent.hover(button1);
+  expect(button1).toHaveClass('is-selected');
+  expect(button1).toHaveClass('is-hovered');
+  expect(button1).toHaveStyle('background-color: #364872');
+  fireEvent.keyDown(button1, { key: 'Enter', code: 13 });
+  expect(button1).toHaveClass('is-selected');
+  expect(button1).toHaveClass('is-pressed');
+  expect(button1).toHaveStyle('background-color: #2e3e63');
 });
