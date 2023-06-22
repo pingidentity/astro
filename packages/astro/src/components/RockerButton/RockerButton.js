@@ -6,10 +6,13 @@ import React, {
 } from 'react';
 import { FocusRing } from 'react-aria';
 import { Item } from 'react-stately';
+import { useHover, usePress } from '@react-aria/interactions';
+import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 
 import { usePropWarning, useRockerButton, useStatusClasses } from '../../hooks';
 import { Box } from '../../index';
+import { accent, getBaseHexColor, getDarkerColor } from '../../styles/colors';
 import { RockerContext } from '../RockerButtonGroup';
 
 export const CollectionRockerButton = forwardRef((props, ref) => {
@@ -21,12 +24,21 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
   const state = useContext(RockerContext);
   const isDisabled = state.disabledKeys.has(key);
   const isSelected = state.selectedKey === key;
+
+  const rockerButtonRef = useRef();
+  const { hoverProps, isHovered } = useHover({});
+  const { pressProps, isPressed } = usePress(rockerButtonRef);
+
   const { classNames } = useStatusClasses(className, {
+    isHovered,
+    isPressed,
     isSelected,
     isDisabled,
   });
 
-  const rockerButtonRef = useRef();
+  const backgroundHexColor = itemProps.selectedStyles?.bg
+    ? getBaseHexColor(itemProps.selectedStyles?.bg)
+    : accent[20];
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
@@ -43,14 +55,19 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
         as="button"
         className={classNames}
         variant="variants.rockerButton.thumbSwitch"
-        {...rockerButtonProps}
         ref={rockerButtonRef}
-        {...itemProps}
         sx={{
           '&.is-selected': {
             ...itemProps.selectedStyles,
           },
+          '&.is-selected.is-hovered': {
+            bg: getDarkerColor(backgroundHexColor, 0.2),
+          },
+          '&.is-selected.is-pressed': {
+            bg: getDarkerColor(backgroundHexColor, 0.4),
+          },
         }}
+        {...mergeProps(hoverProps, pressProps, itemProps, rockerButtonProps)}
       >
         {rendered}
       </Box>
@@ -61,12 +78,16 @@ export const CollectionRockerButton = forwardRef((props, ref) => {
 CollectionRockerButton.displayName = 'CollectionRockerButton';
 CollectionRockerButton.propTypes = {
   /** Allows custom styles to be passed to button. */
-  selectedStyles: PropTypes.shape({}), // adding to surface in props table
+  selectedStyles: PropTypes.shape({
+    bg: PropTypes.string,
+  }), // adding to surface in props table
   /** @ignore */
   item: PropTypes.shape({
     key: PropTypes.string,
     props: PropTypes.shape({
-      selectedStyles: PropTypes.shape({}),
+      selectedStyles: PropTypes.shape({
+        bg: PropTypes.string,
+      }),
     }),
     rendered: PropTypes.node,
   }),
