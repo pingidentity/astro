@@ -6,6 +6,7 @@ import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import CloseIcon from 'mdi-react/CloseIcon';
 import CogIcon from 'mdi-react/CogIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
 import {
   Avatar,
@@ -26,6 +27,7 @@ import {
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 
+import OverlayPanelReadme from './OverlayPanel.mdx';
 
 export default {
   title: 'Components/OverlayPanel',
@@ -48,6 +50,12 @@ export default {
   },
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <OverlayPanelReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
