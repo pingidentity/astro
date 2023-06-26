@@ -2,37 +2,25 @@
 
 # Callout
 
-A Box component to display brief status reports of continuing or developing conditions. It is composed of the Box, Icon, and Text components.
-It's a persistent component that should be placed at the top of panels or above related content.
-If the Callout status is an error or warning, the text should include a direct link to instructions on resolving the issue or error.
+Callouts are persistent box-like components that display brief status reports regarding continuing and developing conditions. 
+Callouts should contain only 1 or 2 pieces of information and display at the top of the panels or above the related content without blocking important information on the screen, and should not be stacked on top of each other.
 
 ### Required components
 
-- Link
-- Text
-
-### Best practices
-
-Callout should:
-
-- contain 1-2 pieces of information to avoid overwhelming the user.
-- include dismiss button when possible although it is optional.
-
-Callout shouldn’t:
-
-- be stacked on top of each other.
+This component requires the [Link](./?path=/docs/components-link--default) and [Text](./?path=/docs/components-text--default) components. 
 
 ### Accessibility
 
 #### Keyboard Navigation
 
-- Callout itself is not focusable but the link component inside it is focusable using the Tab key and can be selected using the Space or the Enter key.
+The callout itself is not focusable but the components within it are. 
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the component within. |
+| Tab | Focuses the component within and follows the page tab sequence. |
 
 #### Screen readers
 
-Callout and Icon utilize `aria-label` to give an accessible name to the components.
-
-| Aria Attribute | Role   | Component    |
-| -------------- | ------ | ------------ |
-| `aria-label`   | note   | Box(Callout) |
-| `aria-label`   | button | Icon         |
+This component uses the **`aria-label`** attribute to provide an accessible name.
