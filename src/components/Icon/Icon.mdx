@@ -2,30 +2,31 @@
 
 # Icon
 
-Icon component fills the default '1em' x '1em' container and maintains the aspect ratio.
+Icons are small images that represent concepts or capabilities that often provide information or lead users to other pages within the application. 
+
+Icon should be:
+- Centrally aligned when used in a group with an appropriate amount of space between them.
+- Paired with text or a tooltip when its intention is not immediately evident. 
+- Relatively sized when used with text.
+
+Icon shouldn’t:
+- Include letters in the icon design.
+- Be randomly scaled to fit the layout.
+
+Regarding sizing, this component uses the **1em x 1em** container by default and maintains the aspect ratios. You can:
+
+- Use SVGR to import SVG files as React components and then pass them into icon components. 
+- Use the theme to color the icon.
+  
+  **Note**: Ensure that the dimensions in Webpack configuration file are set to false, or the icon cannot be resized using the size property. 
+  See [SVGR docs](https://react-svgr.com/docs/options/#dimensions) for more information. 
+- Import icons from the [Material UI Icon Library](https://materialdesignicons.com/)
+
 It is built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the available [props from Theme-UI](https://theme-ui.com/sx-prop).
-Use SVGR to import SVG files as React components and pass them into this component.
-You can also use the theme to color the icon. 
-Be sure to pass dimensions: false in web pack config (see [SVGR docs](https://react-svgr.com/docs/options/#dimensions)).
-Otherwise, Icon will not be resizable by size prop. 
-Icons can also be imported from the [Material UI Icon Library](https://materialdesignicons.com/) or from [@pingux/mdi-react](https://www.npmjs.com/package/@pingux/mdi-react).
-When importing an icon, it is recommended to import from @pingux/mdi-react to allow the title prop to be utilized for accessibility.
 
 ### Required Components
 
-- Icon component can be used independently and does not require additional components.
-
-### Best Practices
-
-Icon should:
-- have sufficient space in between and be centrally aligned when used in a group.
-- be paired with a text or tooltip when the icon fails to provide suitable context.
-- have a size relative to text when used together.
-- have a title associated with it.
-
-Icon shouldn’t:
-- use letters as part of the design.
-- be randomly scaled to fit the layout. 
+This component can be used independently and does not require additional components.
 
 ### Accessibility
 
@@ -39,9 +40,8 @@ This is needed to make SVG icon accessible.
 
 #### Screen Readers
 
-If the icon has a title associated with it, the SVG has **`aria-labelledby`** with the title ID supplied to it.
+If the icon has a title associated with it, the **`aria-labelledby`** attribute is used to provide the label ID.
 
-| Aria Attribute | Role | Component |
-| ---- | ---- | ----------- |
-| `aria-labelledby` | graphical-document | Icon |
+
+
 

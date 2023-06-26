@@ -2,23 +2,20 @@
 
 # CodeView
 
-A component for code syntax highlighting built on top of [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer).
+This component is used for code syntax highlighting and is built on [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer).
+It should contain the language title and be formatted with indentations, line breaks, and comments, and should not contain complex code snippets.
 
 ### Required Components
 
-- Text
-
-### Best Practices
-
-CodeView should:
-- have code formatted with indentations, line breaks, and comments.
-- have a proper title of the language.
-
-CodeView shouldn’t:
-- have complex code snippets.
+This component requires the [Text](./?path=/docs/components-text--default) component. 
 
 ### Accessibility
 
 #### Keyboard Navigation
 
-- The CopyButton inside CodeView can be focused using the Tab key and selected using the Space or Enter key. 
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the CopyButton inside the CodeView component. |
+| Tab | Focuses the CopyButton inside the CodeView component. |
