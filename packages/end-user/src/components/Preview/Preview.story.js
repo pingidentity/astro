@@ -65,8 +65,8 @@ export const Default = () =>
                                         <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Password" id="password1" />
                                         <Padding top={sizes.SM} />
                                         <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                        <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
-                                        <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
+                                        <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                        <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
                                     </Form>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@ export const Default = () =>
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Verify New Password" id="verifypassword3" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Save" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-container">Didn't receive an email? <a href="#" className="branding-template-link-text">Resend</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container">Didn't receive an email? <a className="branding-template-link-text">Resend</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -189,7 +189,7 @@ export const Default = () =>
                                         </FlexRow>
                                     </TileSelector.TileButton>
                                     <FlexRow justify={justifyOptions.END} >
-                                        <a href="#" className="branding-template-link-text">
+                                        <a className="branding-template-link-text">
                                             See 6 more accounts
                                         </a>
                                     </FlexRow>
@@ -202,7 +202,7 @@ export const Default = () =>
                                         type={Button.ButtonTypes.PRIMARY}
                                     />
                                     <FlexRow justify={justifyOptions.CENTER} >
-                                        <a href="#" className="branding-template-link-text">
+                                        <a className="branding-template-link-text">
                                             Already have an account? Sign on.
                                         </a>
                                     </FlexRow>
@@ -237,7 +237,7 @@ export const Default = () =>
                                     <FloatLabelPasswordInput inputClassName="branding-template-password-input" label="Re-enter Password" id="verifypassword4" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Create Account" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-container">Already have an account? <a href="#" className="branding-template-link-text">Sign In</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container">Already have an account? <a className="branding-template-link-text">Sign In</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -319,8 +319,8 @@ export const Default = () =>
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Password" id="password7" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
-                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Not You? Switch Accounts.</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">Not You? Switch Accounts.</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -345,7 +345,7 @@ export const Default = () =>
                                     <FloatLabelTextInput inputClassName="branding-template-text-input" label="Username" id="password" />
                                     <Padding top={sizes.SM} />
                                     <Button label="Submit" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
-                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Cancel</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">Cancel</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
@@ -372,8 +372,8 @@ export const Default = () =>
                                     <Padding top={sizes.SM} />
                                     <Button label="Sign On" className="branding-template-primary-button" type={Button.ButtonTypes.PRIMARY} />
                                     <SocialButton label="Login with Facebook" className="branding-template-social-button" branding={SocialButton.BrandTypes.FACEBOOK} />
-                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">Forgot Password</a></TextBlock>
-                                    <TextBlock className="branding-template-link-container"><a href="#" className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">Forgot Password</a></TextBlock>
+                                    <TextBlock className="branding-template-link-container"><a className="branding-template-link-text">No Account? Register Now!</a></TextBlock>
                                 </Form>
                             </div>
                         </div>
