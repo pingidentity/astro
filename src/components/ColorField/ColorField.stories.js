@@ -1,15 +1,24 @@
 import React, { useCallback, useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { ColorField, OverlayProvider } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
+
+import ColorFieldReadme from './ColorField.mdx';
 
 export default {
   title: 'Form/ColorField',
   component: ColorField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <ColorFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

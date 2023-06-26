@@ -9,10 +9,6 @@ import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
-/**
- * Displays array collections providing useful functions and
- * optimizations for arrays.
- */
 const ArrayField = props => {
   const {
     addButtonLabel,

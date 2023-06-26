@@ -3,6 +3,7 @@ import { useAsyncList } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
 import { action } from '@storybook/addon-actions';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   ComboBoxField,
   Item,
@@ -11,6 +12,8 @@ import {
 } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+
+import ComboBoxFieldReadme from './ComboBoxField.mdx';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -80,6 +83,12 @@ export default {
   component: ComboBoxField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <ComboBoxFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
