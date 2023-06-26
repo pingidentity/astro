@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, FileInputField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import FileInputFieldReadme from './FileInputField.mdx';
+
 export default {
   title: 'Form/FileInputField',
   component: FileInputField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <FileInputFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

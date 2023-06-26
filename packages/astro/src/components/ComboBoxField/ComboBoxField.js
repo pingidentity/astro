@@ -22,15 +22,6 @@ import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
 import ScrollBox from '../ScrollBox';
 
-/**
- * Combines an input with a listbox for a filterable dropdown list.
- *
- * Utilizes [useComboBox](https://react-spectrum.adobe.com/react-aria/useComboBox.html) from React
- * Aria and [useComboBoxState](https://react-spectrum.adobe.com/react-stately/useComboBoxState.html)
- * from React Stately.
- *
- * Props not specified are passed along to the underlying `TextField` component.
- */
 const ComboBoxField = forwardRef((props, ref) => {
   const {
     hasAutoFocus,

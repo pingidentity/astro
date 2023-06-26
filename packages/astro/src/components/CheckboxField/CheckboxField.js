@@ -11,12 +11,6 @@ import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
-/**
- * Combines a checkbox, label, and helper text for a complete, form-ready solution.
- *
- * Utilizes [useCheckbox](https://react-spectrum.adobe.com/react-aria/useCheckbox.html) from React Aria and
- * [useToggleState](https://react-spectrum.adobe.com/react-stately/useToggleState.html) from React Stately.
- */
 const CheckboxField = forwardRef((props, ref) => {
   const {
     label,
