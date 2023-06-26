@@ -22,14 +22,6 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
 
-/**
- * The FileInputField component allows users to upload one or more files by
- * clicking the button or via drag and drop.
- *
- * We utilize [react-dropzone](https://react-dropzone.js.org/) for the drag and drop functionality.
- * */
-
-
 const FileInputField = forwardRef(({
   defaultButtonText,
   defaultFileList,

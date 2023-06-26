@@ -18,15 +18,6 @@ import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAtt
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import PopoverContainer from '../PopoverContainer';
 
-/**
- * The Color Field component allows the user to pick a color and displays the chosen color.
- *
- * Utilizes [useColorField](https://react-spectrum.adobe.com/react-aria/useColorField.html) from React Aria and
- * [useColorFieldState](https://react-spectrum.adobe.com/react-stately/useColorFieldState.html) from React Stately.
- *
- * Using [React Color](https://casesandberg.github.io/react-color/) as a color picker.
- */
-
 const ColorField = forwardRef((props, ref) => {
   const {
     align,
