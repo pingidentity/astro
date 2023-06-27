@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.5.1...@pingux/end-user@2.5.2) (2023-06-27)
+
+
+### Bug Fixes
+
+* [UIP-6143] End User fix Anchor Tags in Preview ([45b71c7](https://gitlab.corp.pingidentity.com/ux/end-user/commit/45b71c72e0d6e12ba8fd79652a4f3288fadc76d2))
+
+
+
+
+
 ## [2.5.1](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.5.0...@pingux/end-user@2.5.1) (2023-06-20)
 
 
