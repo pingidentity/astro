@@ -2,6 +2,7 @@ import React from 'react';
 import Clear from 'mdi-react/CloseIcon';
 import ContentCopy from 'mdi-react/ContentCopyIcon';
 import Earth from 'mdi-react/EarthIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -11,12 +12,14 @@ import {
   IconButton,
 } from '../../index';
 import { flatColorList } from '../../styles/colors.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import BadgeReadme from './Badge.mdx';
 
 export default {
   title: 'Components/Badge',
   component: Badge,
+  decorators: [withDesign],
   argTypes: {
     bg: {
       control: {
@@ -78,12 +81,26 @@ export const Default = ({ ...args }) => (
   <Badge label="Label" {...args} />
 );
 
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.badge.default,
+  },
+};
+
 export const CountBadge = () => (
   <Box>
     <Badge label="1" variant="countBadge" mb="12px" />
     <Badge label="1" variant="countNeutral" />
   </Box>
 );
+
+CountBadge.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.badge.countBadge,
+  },
+};
 
 export const BadgeWithCustomColors = () => (
   <Badge label="Custom Colors" bg="green" textColor="#ffffff" />

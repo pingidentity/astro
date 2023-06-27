@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { Item } from 'react-stately';
 import AccountIcon from 'mdi-react/AccountIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -8,6 +9,7 @@ import {
   Button,
   Messages,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 import {
@@ -19,6 +21,7 @@ import MessagesReadme from './Messages.mdx';
 export default {
   title: 'Components/Messages',
   component: Messages,
+  decorators: [withDesign],
   argTypes: {
     items: {
       control: {
@@ -76,6 +79,13 @@ export const Default = args => (
     <Item key="message2" data-id="message2" status="success">{loremText}</Item>
   </Messages>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.messages.default,
+  },
+};
 
 export const DefaultDynamic = args => (
   // messages = [{...}]

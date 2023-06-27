@@ -4,6 +4,7 @@ import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import LockIcon from '@pingux/mdi-react/LockIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import TagIcon from '@pingux/mdi-react/TagIcon';
+import { withDesign } from 'storybook-addon-designs';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -18,6 +19,7 @@ import {
   Text,
 } from '../../index';
 import { flatColorList } from '../../styles/colors';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
 
 import IconReadme from './Icon.mdx';
@@ -25,6 +27,7 @@ import IconReadme from './Icon.mdx';
 export default {
   title: 'Components/Icon',
   component: Icon,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -68,6 +71,13 @@ export default {
 export const Default = args => (
   <Icon {...args} title={{ id: 'search-icon-title', name: 'Search Icon' }} />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.icon.default,
+  },
+};
 
 export const SVGIcons = () => {
   // SVGR can used to convert .svg files to components instead of doing this manually

@@ -9,6 +9,7 @@ import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
 import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from 'mdi-react/ViewDashboardIcon';
 import ViewGridPlusOutline from 'mdi-react/ViewGridPlusOutlineIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -21,11 +22,13 @@ import {
   NavBarSection,
   Separator,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import NavBarReadme from './NavBar.mdx';
 
 export default {
   component: NavBar,
+  decorators: [withDesign],
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
   title: 'Components/NavBar',
   parameters: {
@@ -519,6 +522,13 @@ export const Default = () => (
     </Box>
   </NavBar>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.navBar.default,
+  },
+};
 
 export const Controlled = () => {
   const [selectedKey, setSelectedKey] = useState('Dashboard Link Group');
