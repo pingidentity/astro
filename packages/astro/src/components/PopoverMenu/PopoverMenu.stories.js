@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -10,12 +11,14 @@ import {
   PopoverMenu,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import PopoverMenuReadme from './PopoverMenu.mdx';
 
 export default {
   title: 'Components/PopoverMenu',
   component: PopoverMenu,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -62,6 +65,13 @@ export const Default = args => (
     </PopoverMenu>
   </OverlayProvider>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.popoverMenu.default,
+  },
+};
 
 export const DefaultOpen = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
+import { withDesign } from 'storybook-addon-designs';
 
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import Calendar from './Calendar';
@@ -8,6 +10,7 @@ import Calendar from './Calendar';
 export default {
   title: 'Components/Calendar',
   component: Calendar,
+  decorators: [withDesign],
   parameters: {
     actions: {
       argTypesRegex: '^on.*',
@@ -94,6 +97,13 @@ export default {
 export const Default = args => (
   <Calendar {...args} aria-label="calendar-default" />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.default,
+  },
+};
 
 export const DefaultValue = args => (
   <Calendar {...args} aria-label="calendar-with-default-value" defaultValue="2022-08-10" />

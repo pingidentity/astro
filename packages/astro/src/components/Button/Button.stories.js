@@ -2,6 +2,7 @@ import React from 'react';
 import AddCircleIcon from 'mdi-react/AddCircleIcon';
 import CreateIcon from 'mdi-react/CreateIcon';
 import FilterIcon from 'mdi-react/FilterIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -11,6 +12,7 @@ import {
   SearchField,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { buttonVariants } from '../../utils/devUtils/constants/variants';
 
 import ButtonReadme from './Button.mdx';
@@ -34,6 +36,7 @@ const variantOptions = [
 export default {
   title: 'Components/Button',
   component: Button,
+  decorators: [withDesign],
   argTypes: {
     variant: {
       control: {
@@ -73,6 +76,13 @@ export default {
 export const Default = args => (
   <Button {...args} />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.button.default,
+  },
+};
 
 export const Disabled = () => (
   <Button isDisabled>

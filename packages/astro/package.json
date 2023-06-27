@@ -150,6 +150,7 @@
     "react-is": "^16.13.1",
     "react-json-tree": "^0.17.0",
     "react-test-renderer": "16.13.1",
+    "storybook-addon-designs": "beta",
     "use-resize-observer": "^8.0.0",
     "whatwg-fetch": "^3.2.0"
   },

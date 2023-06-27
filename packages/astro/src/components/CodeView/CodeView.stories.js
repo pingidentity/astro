@@ -1,10 +1,12 @@
 import React from 'react';
 import Prism from 'prismjs';
+import { withDesign } from 'storybook-addon-designs';
 
 import 'prismjs/components/prism-powershell';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeView } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import CodeViewReadme from './CodeView.mdx';
 
@@ -64,6 +66,7 @@ const code = `{
 export default {
   title: 'Components/CodeView',
   component: CodeView,
+  decorators: [withDesign],
   argTypes: {
     children: {
       defaultValue: code,
@@ -108,6 +111,13 @@ export default {
 export const Default = args => (
   <CodeView {...args} />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.codeView.default,
+  },
+};
 
 export const WithLineNumbers = () => (
   <CodeView hasLineNumbers>
