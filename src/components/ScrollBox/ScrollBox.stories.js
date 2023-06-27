@@ -1,13 +1,16 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, ScrollBox } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import ScrollBoxReadme from './ScrollBox.mdx';
 
 export default {
   title: 'Components/ScrollBox',
   component: ScrollBox,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -55,3 +58,10 @@ export const Default = args => (
     </Box>
   </ScrollBox>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.scrollBox.default,
+  },
+};
