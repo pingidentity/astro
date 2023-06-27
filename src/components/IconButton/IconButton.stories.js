@@ -4,6 +4,7 @@ import DeleteIcon from 'mdi-react/DeleteIcon';
 import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
 import PencilIcon from 'mdi-react/PencilIcon';
 import PlusIcon from 'mdi-react/PlusIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -17,12 +18,14 @@ import {
   TableRow,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import IconButtonReadme from './IconButton.mdx';
 
 export default {
   title: 'Components/IconButton',
   component: IconButton,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -77,6 +80,13 @@ export const Default = args => (
     <Icon icon={CreateIcon} size={args.size} />
   </IconButton>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.iconButton.default,
+  },
+};
 
 export const WithTooltip = () => (
   <IconButton aria-label="icon button with tooltip" title="Edit">

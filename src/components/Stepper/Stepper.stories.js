@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Stepper, Text } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import StepperReadme from './Stepper.mdx';
 
 export default {
   title: 'Components/Stepper',
   component: Stepper,
+  decorators: [withDesign],
   args: {
     items: undefined,
     onStepChange: undefined,
@@ -70,6 +73,13 @@ export const Default = args => (
     </Item>
   </Stepper>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.stepper.default,
+  },
+};
 
 export const ControlledStepper = () => {
   const [activeStep, setActiveStep] = useState(2);

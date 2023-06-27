@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AccountIcon from 'mdi-react/AccountIcon';
 import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -11,6 +12,7 @@ import {
   Separator,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 import ListItemReadme from './ListItem.mdx';
@@ -18,6 +20,7 @@ import ListItemReadme from './ListItem.mdx';
 export default {
   title: 'Components/ListItem',
   component: ListItem,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -59,6 +62,13 @@ export const Default = args => (
     <Separator margin={0} />
   </>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listItem.default,
+  },
+};
 
 export const WithSubtitle = args => (
   <>

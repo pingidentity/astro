@@ -1,4 +1,5 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -6,12 +7,14 @@ import {
   Button,
   Card,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import CardReadme from './Card.mdx';
 
 export default {
   title: 'Components/Card',
   component: Card,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -40,6 +43,13 @@ export default {
 export const Default = args => (
   <Card {...args} />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.card.default,
+  },
+};
 
 export const CardRow = args => {
   const sx = {
