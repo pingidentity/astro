@@ -2,23 +2,20 @@
 
 # CopyText
 
-CopyText allows the copying of information by clicking on the text or the nearby CopyButton with a tooltip.
+CopyText allows users to copy information by clicking on the text or a nearby CopyButton. These components should have labels that match the action. 
+Do not override the colors used for this component for accessibility reasons, and ensure tooltip text is included.
 
 ### Required Components
 
-- Text
-
-### Best Practices
-
-CopyText should:
-- have a label that matches the action.
-
-CopyText shouldn’t:
-- override colors (accessibility purposes).
-- have an empty tooltip text.
+This component requires the [Text](./?path=/docs/components-text--default) component. 
 
 ### Accessibility
 
 #### Keyboard Navigation
+ 
+These keys provide additional functionality to the component. 
 
-- CopyButton is focusable using the Tab key and can be selected using the Space or Enter key.  
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the button. |
+| Tab | Focuses the button and follows the page tab sequence.|

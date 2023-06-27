@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   CheckboxField,
@@ -10,11 +11,19 @@ import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import CheckboxFieldReadme from './CheckboxField.mdx';
+
 export default {
   title: 'Form/CheckboxField',
   component: CheckboxField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <CheckboxFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
