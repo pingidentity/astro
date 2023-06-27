@@ -2,6 +2,7 @@ import React from 'react';
 import { OverlayProvider } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   ArrayField,
   ArrayFieldDeleteButton,
@@ -11,6 +12,8 @@ import {
 } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
+import ArrayFieldReadme from './ArrayField.mdx';
+
 export default {
   title: 'Form/ArrayField',
   component: ArrayField,
@@ -19,6 +22,12 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
+      page: () => (
+        <>
+          <ArrayFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

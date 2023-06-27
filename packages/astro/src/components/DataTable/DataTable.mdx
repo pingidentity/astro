@@ -2,76 +2,51 @@
 
 # DataTable
 
-Inspired by [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
-from React Spectrum and [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
+DataTables are containers that display data in rows, columns, and cells, which allows users to quickly scan, sort, and compare information. This component was inspired by [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
+from React Spectrum and build using [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
 from React Stately.
 
-DataTable is a complex collection component that is built from many child elements including
-columns, rows and cells. Columns are defined within DataTableHeader element via DataTableColumn
-and rows are defined within a DataTableBody element via DataTableRow. Rows contain DataTableCell
-elements that correspond to each column.
+Columns are defined within the DataTableHeader component with the DataTableColumn component, and rows are defined within the DataTableBody component with the DataTableRow component. 
+Rows contain DataTableCell components that correspond to each column.
 
-[TableHeader](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=defined%20using%20the-,TableHeader,-%2C%20Column%2C)
-uses the alias DataTableHeader.
+DataTables should:
+- Contain vertically aligned content.
+- Use multiple heading rows for higher-level column groupings.
+- Use column dividers sparingly.
 
-[Column](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=the%20TableHeader%2C-,Column,-%2C%20TableBody%2C)
-uses the alias DataTableColumn.
-
-[Cell](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=Row%2C%20and-,Cell,-components%2C%20which%20support)
-uses the alias DataTableCell.
-
-[Row](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20TableBody%2C-,Row,-%2C%20and%20Cell%20components)
-uses the alias DataTableCell.
-
-[TableBody](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20Column%2C-,TableBody,-%2C%20Row%2C%20and)
-uses the alias DataTableBody.
-
+They should not use different indicators to represent empty fields.
 
 ### Required Components
 
-- DataTableHeader
-- DataTableColumn
-- DataTableBody
-- DataTableRow
-- DataTableCell
-
-### Best Practices
-
-DataTable should:
-- have vertically aligned content.
-- use multiple heading rows for higher-level grouping of the columns.
-- sparingly use column dividers.
-
-DataTable shouldn’t:
-- use different indicators to represent empty fields.
+This component requires these additional React Spectrum components:
+- [TableHeader](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=defined%20using%20the-,TableHeader,-%2C%20Column%2C) aliased DataTableHeader
+- [Column](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=the%20TableHeader%2C-,Column,-%2C%20TableBody%2C) aliased DataTableColumn
+- [Cell](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=Row%2C%20and-,Cell,-components%2C%20which%20support) aliased DataTableCell
+- [Row](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20TableBody%2C-,Row,-%2C%20and%20Cell%20components) aliased DataTableRow
+- [TableBody](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20Column%2C-,TableBody,-%2C%20Row%2C%20and) aliased DataTableBody
 
 ### Accessibility
 
 #### Keyboard Navigation
 
-- DataTable is focusable using the Tab key and all focusable components follow the page Tab sequence.
-- Shift + Tab moves focus to the previous focusable component.
-- Components within are accessible via arrow keys and pressing Space/Enter when focused, triggers an action associated with the interactive component.
-- Scrolling down after focusing on a row shifts the focus back to the entire table, instead of the previously focused row.
-- Pressing Home(Fn + Right Arrow Key) or PageUp(Fn + Up Key) or Control/Command + Home shifts the focus to the first row.
-- Pressing End(Fn + Left Arrow Key) or PageDown(Fn + Down Key) or Control/Command + End shifts the focus to the last visible row.
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Moves focus to the next focusable component. All focusable components in the table are included in the page tab sequence. | 
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter  | Focuses the component and triggers an action if one is associated with it. |
+| Arrow keys | Can be used to navigate between the components in the table. |
+| Focus on a row and scroll down | Shifts the focus to the entire table, not the previously focused row. |
+| Home or page up | Shifts the focus to the first row. |
+| End or page down | Shifts the focus to the last visible row. |
 
 #### Screen Readers
 
-DataTable utilizes **`aria-label** to give an accessible name to the component. 
-It has an **`aria-rowcount`** and **`aria-columncount`** to indicate the total number of rows and columns in the grid structure. 
-DataTableHeader uses **`aria-rowindex`** and DataTableColumn uses **`aria-colindex`** to enumerate the header row and columns. 
-In the body element, DataTableRow has **`aria-labelledby`** supplied with the grid Id and **`aria-rowindex`** passed to each row. 
-Each DataTableCell has **`aria-colindex`** to enumerate the columns within each row in the body.
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute is used to provide an accessible name.
+- The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure. 
+- The DataTableHeader uses the **`aria-rowindex`** attribute and DataTableColumn uses the **`aria-colindex`** attribute to enumerate the header row and columns. 
+- In the body component, the DataTableRow uses the **`aria-labelledby`** attribute and the grid ID to identify the component and the **`aria-rowindex`** attribute is passed to each row.
+- Each DataTableCell uses the **`aria-colindex`** attribute to enumerate the columns within each row.
 
-| Aria Attribute | Role | Component |
-| ---- | ---- | ----------- |
-| `aria-label` | grid | DataTable |
-| `aria-rowcount` | grid | DataTable |
-| `aria-columncount` | grid | DataTable |
-| `aria-rowindex` | row | DataTableHeader |
-| `aria-colindex` | columnheader | DataTableColumn |
-| `aria-labelledby` | row | DataTableRow |
-| `aria-rowindex` | row | DataTableRow |
-| `aria-colindex` | rowheader | DataTableCell |
-| `aria-colindex` | gridcell | DataTableCell |

@@ -1,44 +1,34 @@
-<Meta title="Components/EnvironmentalBreadcrumb/EnvironmentalBreadcrumb" />
+<Meta title="Components/EnvironmentBreadcrumb/EnvironmentBreadcrumb" />
 
-# EnvironmentalBreadcrumb
+# EnvironmentBreadcrumb
 
-The Environment Picker with Search and Sections support.
+EnvironmentBreadcrumb shows users where they are within the environment hierarchy. 
+They take up little space but still provide context for the user’s place in the hierarchy, but should be treated as secondary navigation and never entirely replace the primary navigation.
 
 ### Required components
 
-- Item: Component is exported within Astro but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
-- Badge
-- Text
-- Box
-
-### Best practices
-
-EnvironmentalBreadcrumb should:
-- show a consistent hierarchical structure.
-
-EnvironmentalBreadcrumb shouldn’t:
-- display too many levels of items.
-- be used as primary navigation.
+This component requires the [Badge](./?path=/docs/components-badge--default),
+[Box](./?path=/story/components-box--default), [Text](./?path=/docs/components-text--default) components and  
+Item from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
 
 ### Accessibility
 
 #### Keyboard Navigation
 
-- Each breadcrumb item is focusable using the Tab key.
-- Pressing Space or Enter selects the item.
-- Shift + Tab moves focus to the previous focusable component.
-- Components within the list are accessible via arrow keys.
-- Pressing the Escape Key when the panel is expanded, closes it.
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter  | Selects the breadcrumb item. |
+| Tab | Focuses the breadcrumb item and follows the page tab sequence. | 
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Arrow keys | Can be used to navigate between the items in the dropdown list. |
+| Esc | Closes the popover when it is expanded. |
 
 #### Screen readers
-Each breadcrumb item has **`aria-label`** to give an accessible name to the component. 
-The trigger button utilizes **`aria-expanded`** to indicate the expansion and collapse of content.
-When expanded, **`aria-controls`** is added to the button pointing to the popup content. 
-The attribute **`aria-haspopup`** describes the type of popup content(listbox).
 
-| Aria Attribute | Role | Component |
-| ---- | ---- | ----------- |
-| `aria-label` | link/button | Button |
-| `aria-haspopup` | button | Button |
-| `aria-expanded` | button | Button |
-| `aria-controls` | button | Button |
+This component uses the following attributes to assist screen readers:
+- Each breadcrumb item uses an **`aria-label`** attribute to provide an accessible name.
+- The trigger button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
+- When expanded, **`aria-controls`** is added to the button pointing to the pop-up content.
+- The **`aria-haspopup`** attribute describes the type of content presented.
