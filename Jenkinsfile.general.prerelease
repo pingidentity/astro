@@ -96,11 +96,12 @@ pipeline {
       }
     }
 
-    stage('link') {
+    stage('install and link') {
       steps {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Linking packages"
+            sh "yarn install"
             sh "yarn build-ci"
           }
         }
@@ -112,6 +113,7 @@ pipeline {
       steps {
         container('ui-library-admin') {
           sh """
+            yarn install
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
             yarn build-ci
