@@ -5,8 +5,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import CheckIcon from 'mdi-react/CheckIcon';
-import CloseIcon from 'mdi-react/CloseIcon';
+import CheckIcon from '@pingux/mdi-react/CheckIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 
 import {
   Box,
@@ -293,6 +293,7 @@ const EditableControl = props => {
       >
         <Icon
           icon={CheckIcon}
+          title={{ name: 'Check Icon' }}
           size="sm"
         />
       </IconButton>
@@ -301,7 +302,7 @@ const EditableControl = props => {
         onPress={handleCancel}
         variant={cancelBtn.variant}
       >
-        <Icon icon={CloseIcon} size="sm" />
+        <Icon icon={CloseIcon} size="sm" title={{ name: 'Close Icon' }} />
       </IconButton>
     </Box>
   );

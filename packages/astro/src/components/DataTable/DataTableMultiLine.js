@@ -15,7 +15,7 @@ const DataTableMultiLine = forwardRef(({ cell }, ref) => (
               mx: '18px',
             }}
           >
-            <Icon icon={item.icon} color="accent.40" size="18.75" />
+            <Icon icon={item.icon} color="accent.40" size="18.75" title={{ name: `Icon for ${item.name}` }} />
           </Box>
           <Box>
             <Box sx={{ fontWeight: 500, fontSize: '15px' }}>{item.name}</Box>

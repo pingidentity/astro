@@ -1,10 +1,10 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useButton } from 'react-aria';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useAccordionItem } from '@react-aria/accordion';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import MenuUp from 'mdi-react/MenuUpIcon';
 import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
 
@@ -68,14 +68,14 @@ const AccordionItem = forwardRef((props, ref) => {
           {item.props.label}
         </Text>
         <Box as="span" ml="5px">
-          <Icon icon={isOpen ? MenuUp : MenuDown} />
+          <Icon icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
         </Box>
       </ThemeUIButton>
       {isOpen
         && (
-        <Box variant="accordion.body" {...accordionRegionProps} {...regionProps} className={itemClasses}>
-          {item.rendered}
-        </Box>
+          <Box variant="accordion.body" {...accordionRegionProps} {...regionProps} className={itemClasses}>
+            {item.rendered}
+          </Box>
         )}
     </Box>
   );

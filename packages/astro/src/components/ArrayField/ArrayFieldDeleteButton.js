@@ -1,5 +1,5 @@
 import React from 'react';
-import TrashIcon from 'mdi-react/TrashIcon';
+import TrashIcon from '@pingux/mdi-react/TrashIcon';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
@@ -19,7 +19,7 @@ const ArrayFieldDeleteButton = ({ isDisabled, id, onDelete }) => (
       cursor: 'pointer',
     }}
   >
-    <Icon icon={TrashIcon} size={20} color="neutral.40" />
+    <Icon icon={TrashIcon} size={20} color="neutral.40" title={{ name: 'Trash Icon' }} />
   </IconButton>
 );
 

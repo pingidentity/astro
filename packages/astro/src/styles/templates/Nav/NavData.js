@@ -1,11 +1,11 @@
 import React from 'react';
-import AccountMultiple from 'mdi-react/AccountMultipleIcon';
-import Earth from 'mdi-react/EarthIcon';
-import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
-import Fingerprint from 'mdi-react/FingerprintIcon';
-import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
-import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
-import ViewDashboard from 'mdi-react/ViewDashboardIcon';
+import AccountMultiple from '@pingux/mdi-react/AccountMultipleIcon';
+import Earth from '@pingux/mdi-react/EarthIcon';
+import EmoticonHappy from '@pingux/mdi-react/EmoticonHappyOutlineIcon';
+import Fingerprint from '@pingux/mdi-react/FingerprintIcon';
+import ScaleBalance from '@pingux/mdi-react/ScaleBalanceIcon';
+import TransitConnection from '@pingux/mdi-react/TransitConnectionVariantIcon';
+import ViewDashboard from '@pingux/mdi-react/ViewDashboardIcon';
 
 import { NavBarItemButton } from '../../../components/NavBarSection';
 
@@ -18,8 +18,10 @@ const Credentials = props => (
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
+    aria-labelledby="credentials-icon-title"
     {...props}
   >
+    <title id="credentials-icon-title">Credentials Icon</title>
     <g id="Layer_2" />
     <g id="mdi-certificate-outline">
       <g>
@@ -50,8 +52,9 @@ const Verify = props => (
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
+    aria-labelledby="verify-icon-title"
   >
-    <title>Icons / Custom Material / verify </title>
+    <title id="verify-icon-title">Icons / Custom Material / verify</title>
     <g
       id="Hero-Chart"
       stroke="none"
@@ -88,7 +91,9 @@ const logo = (
     viewBox="0 0 130 23"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-labelledby="logo-icon-title"
   >
+    <title id="logo-icon-title">Logo Icon</title>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -111,7 +116,8 @@ const logo = (
 );
 
 const PersonIcon = props => (
-  <svg viewBox="0 0 24 24" {...props}>
+  <svg viewBox="0 0 24 24" aira-labelby="person-icon-title" {...props}>
+    <title id="person-icon-title">Person Icon</title>
     <path
       fill="currentColor"
       d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"

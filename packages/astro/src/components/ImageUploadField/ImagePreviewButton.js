@@ -4,9 +4,9 @@ import React, {
   useRef,
 } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
+import CameraAltIcon from '@pingux/mdi-react/CameraAltIcon';
+import ImageFilterHdrIcon from '@pingux/mdi-react/ImageFilterHdrIcon';
 import { useHover } from '@react-aria/interactions';
-import CameraAltIcon from 'mdi-react/CameraAltIcon';
-import ImageFilterHdrIcon from 'mdi-react/ImageFilterHdrIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Image } from '../../index';
@@ -39,6 +39,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
       color="neutral.60"
       size={24}
       data-testid="image-upload-no-image-preview"
+      title={{ name: 'Image Filter Hdr Icon' }}
     />
   );
 
@@ -81,6 +82,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
         color={isFocusVisible || isMenuOpen ? 'active' : 'white'}
         size={24}
         sx={{ zIndex: 1 }}
+        title={{ name: 'Camera Alt Icon' }}
       />
 
       {(previewImage || previewImage === defaultPreviewImage || !isImageType) && (

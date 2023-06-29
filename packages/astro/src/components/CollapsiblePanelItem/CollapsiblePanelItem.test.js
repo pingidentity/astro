@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterIcon from 'mdi-react/FilterIcon';
+import FilterIcon from '@pingux/mdi-react/FilterIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';

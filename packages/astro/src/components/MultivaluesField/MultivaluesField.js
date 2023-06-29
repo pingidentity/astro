@@ -1,9 +1,9 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
+import Clear from '@pingux/mdi-react/CloseIcon';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
-import Clear from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
 import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
@@ -309,7 +309,7 @@ const MultivaluesField = forwardRef((props, ref) => {
         variant="badge.deleteButton"
         {...item.buttonProps}
       >
-        <Icon icon={Clear} color="white" size={14} />
+        <Icon icon={Clear} color="white" size={14} title={{ name: 'Clear Icon' }} />
       </IconButton>
     </Badge>
   );
@@ -392,12 +392,15 @@ const MultivaluesField = forwardRef((props, ref) => {
           }}
           onKeyDown={keyDown}
           onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-          slots={{ beforeInput: <>
-            {readOnlyItems}
-            {' '}
-            {selectedItems}
-            {readOnlyInputEntry}
-        </> }} // eslint-disable-line
+          slots={{
+            beforeInput:
+  <>
+    {readOnlyItems}
+    {' '}
+    {selectedItems}
+    {readOnlyInputEntry}
+  </>,
+          }} // eslint-disable-line
           value={filterString}
           helperText={helperText}
           aria-invalid={status === 'error' && true}

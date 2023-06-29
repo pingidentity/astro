@@ -4151,7 +4151,7 @@ __metadata:
     "@faker-js/faker": ~7.5.0
     "@internationalized/date": 3.0.1
     "@mdx-js/react": ^1.6.22
-    "@pingux/mdi-react": ^1.0.0
+    "@pingux/mdi-react": ^1.2.0
     "@react-aria/accordion": ~3.0.0-alpha.11
     "@react-aria/breadcrumbs": ^3.1.4
     "@react-aria/button": ^3.2.1
@@ -4226,7 +4226,6 @@ __metadata:
     jest-emotion: ^11.0.0
     jest-pnp-resolver: ^1.2.2
     lodash: ^4.17.21
-    mdi-react: ^7.4.0
     moment: ^2.29.4
     mutationobserver-shim: ^0.3.7
     prism-react-renderer: 1.2.1
@@ -4542,12 +4541,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pingux/mdi-react@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@pingux/mdi-react@npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"
+"@pingux/mdi-react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@pingux/mdi-react@npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"
+  dependencies:
+    uuid: ^9.0.0
   peerDependencies:
     react: ">=0.14.0"
-  checksum: fb58cb618039e859ff8762304ae3d8e412c410cb547ae48278977e6332ef9b1d4378dcd21f2ebe710622c0ae368a431b325a3908b1dd02f46f577d9d6ec20dc9
+  checksum: 7f91fdd44cc1cca25388e29c0553d6b012785fd4cdeec6c431c278bfe4534db423c2fbd4c41857cd91f30edaa3a874ab43659a099fa2a8d6bcbdaed2c490b4f3
   languageName: node
   linkType: hard
 
@@ -27615,7 +27616,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdi-react@npm:^7.4.0, mdi-react@npm:^7.5.0":
+"mdi-react@npm:^7.5.0":
   version: 7.5.0
   resolution: "mdi-react@npm:7.5.0"
   peerDependencies:

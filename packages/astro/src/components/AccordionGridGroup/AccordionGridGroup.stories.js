@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
-import CreateIcon from 'mdi-react/CreateIcon';
-import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -160,10 +160,10 @@ const Header = props => {
         />
         <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
           <IconButton aria-label="create-icon" sx={{ mr: '4px' }}>
-            <Icon icon={CreateIcon} size="sm" />
+            <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
           </IconButton>
           <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }}>
-            <Icon icon={MoreVertIcon} size="sm" />
+            <Icon icon={MoreVertIcon} size="sm" title={{ name: 'Vertical Lines Icon' }} />
           </IconButton>
         </Box>
       </Box>
@@ -224,10 +224,10 @@ export const Default = () => (
           {/* Code that removes the seperator
             from the last item */}
           {
-              item.key !== 'Organization'
-                ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
-                : null
-            }
+            item.key !== 'Organization'
+              ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
+              : null
+          }
         </Item>
       )}
     </AccordionGridGroup>
@@ -238,7 +238,7 @@ export const Controlled = () => {
   const [selectedKeys, setSelectedKeys] = useState(['Client']);
 
   return (
-  // See story source for info about the data used
+    // See story source for info about the data used
     <>
       <Text sx={{ fontWeight: 3, fontSize: '13px' }}>
         Role

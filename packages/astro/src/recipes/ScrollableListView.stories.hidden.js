@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
-import CreateIcon from 'mdi-react/CreateIcon';
-import FormSelectIcon from 'mdi-react/FormSelectIcon';
-import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 
 import {
   Box,
@@ -60,15 +60,15 @@ export const Default = ({ ...args }) => {
             <Item key={item.name} textValue={item.name}>
               <Box isRow>
                 <Box isRow mr="auto" alignSelf="center">
-                  <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size={25} />
+                  <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size={25} title={{ name: 'Form Select Icon' }} />
                   <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
                 </Box>
                 <Box isRow alignSelf="center" gap="sm">
                   <IconButton aria-label="create-icon">
-                    <Icon icon={CreateIcon} size="sm" />
+                    <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
                   </IconButton>
                   <IconButton aria-label="create-icon">
-                    <Icon icon={MoreVertIcon} size="sm" />
+                    <Icon icon={MoreVertIcon} size="sm" title={{ name: 'More Vertical Icon' }} />
                   </IconButton>
                 </Box>
               </Box>

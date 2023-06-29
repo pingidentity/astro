@@ -1553,9 +1553,13 @@ exports[`single fields select field 1`] = `
                 display="flex"
                 fill="currentColor"
                 height="20"
+                role="img"
                 viewBox="0 0 24 24"
                 width="20"
               >
+                <title>
+                  Menu down
+                </title>
                 <path
                   d="M7,10L12,15L17,10H7Z"
                 />
@@ -1923,9 +1927,13 @@ exports[`single fields select field with default 1`] = `
                 display="flex"
                 fill="currentColor"
                 height="20"
+                role="img"
                 viewBox="0 0 24 24"
                 width="20"
               >
+                <title>
+                  Menu down
+                </title>
                 <path
                   d="M7,10L12,15L17,10H7Z"
                 />

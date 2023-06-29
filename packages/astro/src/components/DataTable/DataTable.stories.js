@@ -1,9 +1,9 @@
 import React from 'react';
 import { useAsyncList } from 'react-stately';
 import { faker } from '@faker-js/faker';
+import ApplicationIcon from '@pingux/mdi-react/ApplicationIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
-import ApplicationIcon from 'mdi-react/ApplicationIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -270,13 +270,13 @@ export const CustomContent = args => {
         {column => (
           <DataTableColumn
             width={
-                // eslint-disable-next-line no-nested-ternary
-                column.key === 'name_id'
-                  ? '26.5%'
-                  : column.key === 'menu'
-                    ? '5%'
-                    : '16%'
-              }
+              // eslint-disable-next-line no-nested-ternary
+              column.key === 'name_id'
+                ? '26.5%'
+                : column.key === 'menu'
+                  ? '5%'
+                  : '16%'
+            }
             align={column.key !== 'menu' ? 'start' : 'center'}
             allowsSorting={column.isSortable}
             hideHeader={column.key === 'menu'}

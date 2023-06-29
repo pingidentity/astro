@@ -1,18 +1,18 @@
 import React from 'react';
-import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
-import AlertIcon from 'mdi-react/AlertIcon';
-import CheckCircleIcon from 'mdi-react/CheckCircleIcon';
-import InformationIcon from 'mdi-react/InformationIcon';
+import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
+import AlertIcon from '@pingux/mdi-react/AlertIcon';
+import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
+import InformationIcon from '@pingux/mdi-react/InformationIcon';
 
 import { Icon } from '../..';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 export const noticeIcons = {
-  [statuses.DEFAULT]: { icon: InformationIcon, testid: 'default-icon-testid' },
-  [statuses.ERROR]: { icon: AlertCircleIcon, testid: 'error-icon-testid' },
-  [statuses.SUCCESS]: { icon: CheckCircleIcon, testid: 'success-icon-testid' },
-  [statuses.WARNING]: { icon: AlertIcon, testid: 'warning-icon-testid' },
+  [statuses.DEFAULT]: { icon: InformationIcon, testid: 'default-icon-testid', name: 'Information Icon' },
+  [statuses.ERROR]: { icon: AlertCircleIcon, testid: 'error-icon-testid', name: 'Alert Circle Icon' },
+  [statuses.SUCCESS]: { icon: CheckCircleIcon, testid: 'success-icon-testid', name: 'Check Circle Icon' },
+  [statuses.WARNING]: { icon: AlertIcon, testid: 'warning-icon-testid', name: 'Alert Icon' },
 };
 
 export const NoticeIcon = ({
@@ -22,6 +22,7 @@ export const NoticeIcon = ({
   <Icon
     data-testid={noticeIcons[status].testid}
     icon={noticeIcons[status].icon}
+    title={{ name: noticeIcons[status].name }}
     {...others}
   />
 );

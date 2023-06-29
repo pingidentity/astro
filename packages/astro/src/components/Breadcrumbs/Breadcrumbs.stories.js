@@ -1,7 +1,7 @@
 import React from 'react';
 import { Item } from 'react-stately';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import { action } from '@storybook/addon-actions';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';

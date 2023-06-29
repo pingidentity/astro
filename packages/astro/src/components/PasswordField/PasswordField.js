@@ -1,8 +1,8 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { useOverlayPosition } from 'react-aria';
+import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
+import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
 import PropTypes from 'prop-types';
 
 import {
@@ -135,6 +135,7 @@ const PasswordField = forwardRef((props, ref) => {
             >
               <Icon
                 data-testid={isVisible ? viewIconTestId : viewHiddenIconTestId}
+                title={{ name: isVisible ? 'Eye Icon' : 'Eye Off Icon' }}
                 icon={isVisible ? EyeIcon : EyeOffIcon}
               />
             </IconButton>
@@ -144,9 +145,9 @@ const PasswordField = forwardRef((props, ref) => {
         {
           helperText
           && (
-          <FieldHelperText status={status}>
-            {helperText}
-          </FieldHelperText>
+            <FieldHelperText status={status}>
+              {helperText}
+            </FieldHelperText>
           )
         }
       </Box>
