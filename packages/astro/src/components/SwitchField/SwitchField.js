@@ -11,12 +11,6 @@ import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
-/**
- * Combines a switch, label, and helper text for a complete, form-ready solution.
- *
- * Utilizes [useSwitch](https://react-spectrum.adobe.com/react-aria/useSwitch.html) from React Aria and
- * [useToggleState](https://react-spectrum.adobe.com/react-stately/useToggleState.html) from React Stately.
- */
 const SwitchField = forwardRef((props, ref) => {
   const {
     label,

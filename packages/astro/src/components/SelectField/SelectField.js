@@ -7,13 +7,6 @@ import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAtt
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import SelectFieldBase from '../SelectFieldBase';
 
-/**
- * Select field (dropdown) that does not rely on native browser or mobile implementations.
- *
- * Utilizes [useSelect](https://react-spectrum.adobe.com/react-aria/useSelect.html) from React Aria
- * and [useSelectState](https://react-spectrum.adobe.com/react-stately/useSelectState.html) from
- * React Stately.
- */
 const SelectField = forwardRef((props, ref) => {
   const { status } = props;
   usePropWarning(props, 'disabled', 'isDisabled');
