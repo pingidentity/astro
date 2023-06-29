@@ -125,6 +125,10 @@ const DateField = forwardRef((props, ref) => {
     return `${segment}-${index}`;
   };
 
+  const isLocalEnUS = useMemo(() => {
+    return locale === 'en-US';
+  }, [locale]);
+
   /**
    * Reordering segments object for YYYY-MM-DD format
    */
@@ -157,7 +161,7 @@ const DateField = forwardRef((props, ref) => {
    */
 
   const formatHelpText = useMemo(() => {
-    return (locale === 'en-US' ? enUSSegments : segments)
+    return (isLocalEnUS ? enUSSegments : segments)
       .map(s => {
         return s.text;
       })
@@ -173,7 +177,7 @@ const DateField = forwardRef((props, ref) => {
         setValue(isDate);
       };
 
-      if (locale === 'en-US' && !isDisabled && !isReadOnly) {
+      if (isLocalEnUS && !isDisabled && !isReadOnly) {
         try {
           if (copiedValue.match(/^\d{4}-\d{2}-\d{2}$/) !== null) {
             const DateProps = {
@@ -260,7 +264,7 @@ const DateField = forwardRef((props, ref) => {
           className={classNames}
         >
           <FocusScope>
-            {(locale === 'en-US' ? enUSSegments : segments).map((segment, index) => (
+            {(isLocalEnUS ? enUSSegments : segments).map((segment, index) => (
               <DateSegment
                 key={getKey(segment, index)}
                 segment={segment}
@@ -268,9 +272,10 @@ const DateField = forwardRef((props, ref) => {
                 isDisabled={isDisabled}
                 isReadOnly={isReadOnly}
                 isRequired={isRequired}
-                segments={locale === 'en-US' ? enUSSegments : segments}
+                segments={isLocalEnUS ? enUSSegments : segments}
                 handlePaste={handlePaste}
                 segmentIndex={index}
+                isLocalEnUS={isLocalEnUS}
                 {...other}
               />
             ))}
