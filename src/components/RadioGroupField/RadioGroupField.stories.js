@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RadioField, RadioGroupField } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import RadioGroupFieldReadme from './RadioGroupField.mdx';
+
 export default {
   title: 'Form/RadioGroupField',
   component: RadioGroupField,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <RadioGroupFieldReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
   argTypes: {
     label: {
       control: {
