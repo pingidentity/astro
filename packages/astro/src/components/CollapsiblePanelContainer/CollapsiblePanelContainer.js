@@ -24,6 +24,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
     isOpen,
     onOpenChange,
     openAriaLabel,
+    collapsiblePanelId,
     ...others
   } = props;
 
@@ -62,11 +63,13 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
       <IconButton
         isRow
         aria-label={state.isOpen ? closeAriaLabel : openAriaLabel}
+        aria-expanded={state.isOpen}
         data-testid="collapsible-panel-button"
         onPress={handleButtonPress}
         ref={triggerRef}
         variant="toggle"
         pr="sm"
+        aria-controls={state.isOpen ? collapsiblePanelId : null}
       >
         <Icon
           color="active"
@@ -110,6 +113,8 @@ CollapsiblePanelContainer.propTypes = {
   onOpenChange: PropTypes.func,
   /** Defines a string value that labels the trigger icon when menu is closed. */
   openAriaLabel: PropTypes.string,
+  /** Used in button aria-controls attribute. */
+  collapsiblePanelId: PropTypes.string,
 };
 
 CollapsiblePanelContainer.defaultProps = {
