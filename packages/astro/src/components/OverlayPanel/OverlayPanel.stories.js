@@ -1,10 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { Item } from 'react-stately';
-import ArrowCollapse from 'mdi-react/ArrowCollapseIcon';
-import ArrowTopRightBottomLeft from 'mdi-react/ArrowTopRightBottomLeftIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import CloseIcon from 'mdi-react/CloseIcon';
-import CogIcon from 'mdi-react/CogIcon';
+import ArrowCollapse from '@pingux/mdi-react/ArrowCollapseIcon';
+import ArrowTopRightBottomLeft from '@pingux/mdi-react/ArrowTopRightBottomLeftIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import CogIcon from '@pingux/mdi-react/CogIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
@@ -88,27 +88,27 @@ export const Default = ({ ...args }) => {
       >
         Open Panel
       </Button>
-      { (state.isOpen || state.isTransitioning)
+      {(state.isOpen || state.isTransitioning)
         && (
-        <OverlayPanel
-          isOpen={state.isOpen}
-          isTransitioning={state.isTransitioning}
-          state={state}
-          {...args}
-          triggerRef={triggerRef}
-        >
-          <Box>
-            <Button
-              onPress={() => { onClose(state, triggerRef); }}
-              aria-expanded={state.isOpen}
-            >
-              Close Panel
-            </Button>
-            <Text pt="md">
-              Children render here.
-            </Text>
-          </Box>
-        </OverlayPanel>
+          <OverlayPanel
+            isOpen={state.isOpen}
+            isTransitioning={state.isTransitioning}
+            state={state}
+            {...args}
+            triggerRef={triggerRef}
+          >
+            <Box>
+              <Button
+                onPress={() => { onClose(state, triggerRef); }}
+                aria-expanded={state.isOpen}
+              >
+                Close Panel
+              </Button>
+              <Text pt="md">
+                Children render here.
+              </Text>
+            </Box>
+          </OverlayPanel>
         )}
     </OverlayProvider>
   );
@@ -133,27 +133,27 @@ export const CustomWidth = () => {
       </Text>
       <br />
       <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
-      { (state.isOpen || state.isTransitioning)
+      {(state.isOpen || state.isTransitioning)
         && (
-        <OverlayPanel
-          isTransitioning={state.isTransitioning}
-          isOpen={state.isOpen}
-          state={state}
-          triggerRef={triggerRef}
-          sx={{ width: '720px' }}
-        >
-          <Box>
-            <Button
-              onPress={() => { onClose(state, triggerRef); }}
-              aria-expanded={state.isOpen}
-            >
-              Close Panel
-            </Button>
-            <Text pt="md">
-              Children render here.
-            </Text>
-          </Box>
-        </OverlayPanel>
+          <OverlayPanel
+            isTransitioning={state.isTransitioning}
+            isOpen={state.isOpen}
+            state={state}
+            triggerRef={triggerRef}
+            sx={{ width: '720px' }}
+          >
+            <Box>
+              <Button
+                onPress={() => { onClose(state, triggerRef); }}
+                aria-expanded={state.isOpen}
+              >
+                Close Panel
+              </Button>
+              <Text pt="md">
+                Children render here.
+              </Text>
+            </Box>
+          </OverlayPanel>
         )}
     </OverlayProvider>
   );
@@ -344,35 +344,35 @@ export const Expandable = () => {
     // readers when an overlay opens.
     <OverlayProvider>
       <Button ref={triggerRef} onPress={state.open} aria-expanded={state.isOpen}>Open Panel</Button>
-      { (state.isOpen || state.isTransitioning)
+      {(state.isOpen || state.isTransitioning)
         && (
-        <OverlayPanel
-          isTransitioning={state.isTransitioning}
-          isOpen={state.isOpen}
-          state={state}
-          triggerRef={triggerRef}
-          sx={sx.overlayPanel}
-          size={isExpanded ? 'full' : 'medium'}
-        >
-          {header}
-          <Box sx={sx.contentContainer}>
-            <Tabs
-              tabListProps={sx.tabs}
-              tabPanelProps={sx.tabPanel}
-            >
-              <Tab key="tab1" title="General">
-                {generalTabContent}
-              </Tab>
-              <Tab key="tab2" title="Settings">
-                {settingsTabContent}
-              </Tab>
-              <Tab key="tab3" title="Schema">
-                {schemaTabContent}
-              </Tab>
-            </Tabs>
-          </Box>
-          {footer}
-        </OverlayPanel>
+          <OverlayPanel
+            isTransitioning={state.isTransitioning}
+            isOpen={state.isOpen}
+            state={state}
+            triggerRef={triggerRef}
+            sx={sx.overlayPanel}
+            size={isExpanded ? 'full' : 'medium'}
+          >
+            {header}
+            <Box sx={sx.contentContainer}>
+              <Tabs
+                tabListProps={sx.tabs}
+                tabPanelProps={sx.tabPanel}
+              >
+                <Tab key="tab1" title="General">
+                  {generalTabContent}
+                </Tab>
+                <Tab key="tab2" title="Settings">
+                  {settingsTabContent}
+                </Tab>
+                <Tab key="tab3" title="Schema">
+                  {schemaTabContent}
+                </Tab>
+              </Tabs>
+            </Box>
+            {footer}
+          </OverlayPanel>
         )}
     </OverlayProvider>
   );

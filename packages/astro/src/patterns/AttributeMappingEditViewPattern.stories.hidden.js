@@ -1,6 +1,6 @@
 import React from 'react';
-import CogsIcon from 'mdi-react/CogsIcon';
-import DeleteIcon from 'mdi-react/DeleteIcon';
+import CogsIcon from '@pingux/mdi-react/CogsIcon';
+import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 
 import {
   Box,
@@ -122,6 +122,7 @@ export const Default = () => {
                 <Icon
                   icon={CogsIcon}
                   size={24}
+                  title={{ name: 'Cogs Icon' }}
                 />
               </IconButton>
               <CheckboxField
@@ -134,6 +135,7 @@ export const Default = () => {
                 <Icon
                   icon={DeleteIcon}
                   size={24}
+                  title={{ name: 'Delete Icon' }}
                 />
               </IconButton>
             </Box>

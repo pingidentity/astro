@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from 'react';
+import CircleSmallIcon from '@pingux/mdi-react/CircleSmallIcon';
 import { useOption } from '@react-aria/listbox';
-import CircleSmallIcon from 'mdi-react/CircleSmallIcon';
 import PropTypes from 'prop-types';
 
 import { useMultivaluesContext } from '../../context/MultivaluesContext';
@@ -75,7 +75,7 @@ const Option = forwardRef((props, ref) => {
       {...others}
       aria-label={ariaLabel}
     >
-      {isSelected && <Icon icon={CircleSmallIcon} />}
+      {isSelected && <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />}
       {rendered}
     </Box>
   );

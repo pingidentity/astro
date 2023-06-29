@@ -1,7 +1,7 @@
 import React from 'react';
-import AddCircleIcon from 'mdi-react/AddCircleIcon';
-import CreateIcon from 'mdi-react/CreateIcon';
-import FilterIcon from 'mdi-react/FilterIcon';
+import AddCircleIcon from '@pingux/mdi-react/AddCircleIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import FilterIcon from '@pingux/mdi-react/FilterIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -93,7 +93,7 @@ export const Disabled = () => (
 export const TextIconButton = () => (
   <Button mb="sm">
     <Box isRow alignItems="center">
-      <Icon icon={AddCircleIcon} mr="sm" color="active" size={20} />
+      <Icon icon={AddCircleIcon} mr="sm" color="active" size={20} title={{ name: 'Add Circle Icon' }} />
       Add a Form
     </Box>
   </Button>
@@ -120,7 +120,7 @@ export const ColorBlockButton = args => {
         <Text variant="buttonTitle">Title</Text>
         <Text variant="buttonSubtitle">Info</Text>
       </Box>
-      <Icon icon={CreateIcon} />
+      <Icon icon={CreateIcon} title={{ name: 'Create Icon' }} />
     </Button>
   );
 };
@@ -138,7 +138,7 @@ export const FilterButton = () => (
   <Box p="xx" isRow gap="md">
     <SearchField aria-label="search items" />
     <Button variant="filter" aria-label="filter button">
-      <Icon icon={FilterIcon} />
+      <Icon icon={FilterIcon} title={{ name: 'Filter Icon' }} />
     </Button>
   </Box>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import PlusIcon from 'mdi-react/PlusIcon';
+import PlusIcon from '@pingux/mdi-react/PlusIcon';
 
 import { Box, Icon, IconButton, Link, Text } from '../index';
 
@@ -20,7 +20,7 @@ export const Default = () => {
           Title of the Page
         </Text>
         <IconButton aria-label="icon button" ml="sm" variant="inverted">
-          <Icon icon={PlusIcon} size="sm" />
+          <Icon icon={PlusIcon} size="sm" title={{ name: 'Plus Icon' }} />
         </IconButton>
       </Box>
       <Text fontSize="sm" color="text.secondary" fontWeight="0" width="800px">

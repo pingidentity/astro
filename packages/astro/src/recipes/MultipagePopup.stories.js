@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { FocusScope, useOverlayPosition, useOverlayTrigger } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
+import ExploreIcon from '@pingux/mdi-react/CompassOutlineIcon';
+import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
+import HelpCircleOutlineIcon from '@pingux/mdi-react/HelpCircleOutlineIcon';
+import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
+import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
 import { useLayoutEffect } from '@react-aria/utils';
-import ExploreIcon from 'mdi-react/CompassOutlineIcon';
-import GlobeIcon from 'mdi-react/GlobeIcon';
-import HelpCircleOutlineIcon from 'mdi-react/HelpCircleOutlineIcon';
-import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import MenuUpIcon from 'mdi-react/MenuUpIcon';
 
 import {
   Box,
@@ -279,11 +279,11 @@ const CustomPopover = () => {
         {...triggerProps}
       >
         <Box isRow alignItems="center">
-          <Icon icon={ExploreIcon} size="sm" />
+          <Icon icon={ExploreIcon} size="sm" title={{ name: 'Explore Icon' }} />
           <Text color="neutral.30" fontSize="md" fontWeight={1} mx={7} variant="textEllipsis">
             Explore
           </Text>
-          <Icon icon={state.isOpen ? MenuUpIcon : MenuDownIcon} mr="sm" size="sm" />
+          <Icon icon={state.isOpen ? MenuUpIcon : MenuDownIcon} mr="sm" size="sm" title={{ name: state.isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
         </Box>
       </Button>
       <PopoverContainer
@@ -351,6 +351,7 @@ const CustomPopoverMenu = () => {
             size="xs"
             color="neutral.30"
             sx={isOpen ? { transform: 'rotate(180deg)' } : null}
+            title={{ name: 'Menu Down Icon' }}
           />
         </IconButton>
         <Menu>
@@ -381,7 +382,7 @@ const HeaderBar = () => {
       <EnvironmentBreadcrumb name="Globochem" />
       <Box isRow>
         <Box isRow alignItems="center">
-          <Icon icon={HelpCircleOutlineIcon} size={20} color="neutral.30" />
+          <Icon icon={HelpCircleOutlineIcon} size={20} color="neutral.30" title={{ name: 'Help Circle Outline Icon' }} />
           <CustomPopoverMenu />
         </Box>
         <Rectangle />

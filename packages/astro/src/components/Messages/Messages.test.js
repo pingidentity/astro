@@ -1,7 +1,7 @@
 import React from 'react';
 import { Item } from 'react-stately';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import userEvent from '@testing-library/user-event';
-import AccountIcon from 'mdi-react/AccountIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';

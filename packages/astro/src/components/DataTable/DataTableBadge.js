@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import React, { forwardRef } from 'react';
-import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
-import AlertIcon from 'mdi-react/AlertIcon';
-import CheckIcon from 'mdi-react/CheckIcon';
+import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
+import AlertIcon from '@pingux/mdi-react/AlertIcon';
+import CheckIcon from '@pingux/mdi-react/CheckIcon';
 import PropTypes from 'prop-types';
 
 import { Badge, Icon } from '../../index';
@@ -31,7 +31,7 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
         flexDirection: 'row-reverse !important',
       }}
     >
-      {cell !== 'Pending' && (
+      {cell && cell !== 'Pending' && (
         <Icon
           icon={
             cell === 'Approved'
@@ -42,6 +42,15 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
                   ? AlertIcon
                   : null
           }
+          title={{
+            name: cell === 'Approved'
+              ? 'Check Icon'
+              : cell === 'Rejected'
+                ? 'Alert Circle Icon'
+                : cell === 'Failed'
+                  ? 'Alert Icon'
+                  : null,
+          }}
           mr="xs"
           size="14px"
           color={color}

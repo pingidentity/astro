@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
+import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
+import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 
 import { useStatusClasses } from '../hooks';
 import {
@@ -72,7 +72,7 @@ export const Default = ({ dataTitle, secretData }) => {
           onPress={() => setIsMasked(!isMasked)}
           sx={sx.showHideButton}
         >
-          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} size="sm" />
+          <Icon icon={isMasked ? EyeOffIcon : EyeIcon} size="sm" title={{ name: isMasked ? 'Eye Off Icon' : 'Eye Icon' }} />
         </IconButton>
       </Box>
     </Box>

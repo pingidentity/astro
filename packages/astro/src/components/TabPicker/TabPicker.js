@@ -6,9 +6,9 @@ import React, {
   useState,
 } from 'react';
 import { Item as Tab } from 'react-stately';
+import ArrowDropDownIcon from '@pingux/mdi-react/ArrowDropDownIcon';
+import ArrowDropUpIcon from '@pingux/mdi-react/ArrowDropUpIcon';
 import { Pressable } from '@react-aria/interactions';
-import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
-import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
 import PropTypes from 'prop-types';
 
 import {
@@ -134,6 +134,7 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
           <Icon
             color={isTabFocused || classNames.includes('is-hovered') ? 'active' : 'neutral.40'}
             icon={isOpen ? ArrowDropUpIcon : ArrowDropDownIcon}
+            title={{ name: isOpen ? 'Arrow Drop Up Icon' : 'Arrow Drop Down Icon' }}
           />
         </Box>
       </Pressable>

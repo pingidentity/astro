@@ -1,8 +1,8 @@
 import React, { useCallback, useRef } from 'react';
 import { useVisuallyHidden } from 'react-aria';
-import DeleteIcon from 'mdi-react/DeleteIcon';
-import ErrorIcon from 'mdi-react/ErrorIcon';
-import InsertDriveFileIcon from 'mdi-react/InsertDriveFileIcon';
+import ErrorIcon from '@pingux/mdi-react/AlertCircleIcon';
+import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
+import InsertDriveFileIcon from '@pingux/mdi-react/InsertDriveFileIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, IconButton, Text } from '../../index';
@@ -32,12 +32,14 @@ const FileItem = props => {
       case statuses.ERROR:
         return {
           icon: ErrorIcon,
+          title: { name: 'Error Icon' },
           color: 'critical.dark',
           'data-testid': 'file-uploaded__file-icon--is-error',
         };
       default:
         return {
           icon: InsertDriveFileIcon,
+          title: { name: 'Insert Drive File Icon' },
           color: 'neutral.10',
         };
     }
@@ -75,7 +77,7 @@ const FileItem = props => {
         onPress={handleDeleteButtonPress}
         sx={{ alignSelf: 'auto' }}
       >
-        <Icon icon={DeleteIcon} size={15} isDisabled={isDisabled} />
+        <Icon icon={DeleteIcon} size={15} isDisabled={isDisabled} title={{ name: 'Delete Icon' }} />
       </IconButton>
       {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
       <a
