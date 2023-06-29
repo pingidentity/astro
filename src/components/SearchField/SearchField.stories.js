@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Users from 'mdi-react/AccountGroupIcon';
-import SearchIcon from 'mdi-react/SearchIcon';
+import Users from '@pingux/mdi-react/AccountGroupIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 
 import { useDebounce } from '../../hooks';
 import {

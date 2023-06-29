@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useOverlayPosition } from 'react-aria';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useLayoutEffect } from '@react-aria/utils';
-import CloseIcon from 'mdi-react/CloseIcon';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import MenuUp from 'mdi-react/MenuUpIcon';
 
 import {
   Box,
@@ -112,7 +112,7 @@ export const Default = () => {
         sx={sx.openButton}
       >
         <Box isRow alignItems="center">
-          <Icon icon={isOpen ? MenuUp : MenuDown} mr="sm" color="active" size={20} />
+          <Icon icon={isOpen ? MenuUp : MenuDown} mr="sm" color="active" size={20} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
           Add a Form
         </Box>
       </Button>
@@ -132,7 +132,7 @@ export const Default = () => {
             onPress={() => setIsOpen(false)}
             sx={sx.closeIconButton}
           >
-            <Icon icon={CloseIcon} />
+            <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
           </IconButton>
           <Box
             sx={sx.buttonsContainer}

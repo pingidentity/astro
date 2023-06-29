@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { useOverlayTriggerState } from 'react-stately';
-import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import ChevronLeftIcon from '@pingux/mdi-react/ChevronLeftIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
@@ -71,19 +71,20 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
         <Icon
           color="active"
           icon={state.isOpen ? ChevronRightIcon : ChevronLeftIcon}
+          title={{ name: state.isOpen ? 'Chevron Right Icon' : 'Chevron Left Icon' }}
           role="button"
           size="30px"
         />
         {!state.isOpen && selectedFilterCount
           && (
-          <CollapsiblePanelBadge
-            data-testid="collapsible-panel-badge"
-            margin="auto"
-            selectedFilterCount={selectedFilterCount}
-          />
+            <CollapsiblePanelBadge
+              data-testid="collapsible-panel-badge"
+              margin="auto"
+              selectedFilterCount={selectedFilterCount}
+            />
           )}
       </IconButton>
-      { children }
+      {children}
     </Box>
   );
 });

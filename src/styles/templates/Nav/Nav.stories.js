@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GlobeIcon from 'mdi-react/GlobeIcon';
+import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
 
 import {
   Box,

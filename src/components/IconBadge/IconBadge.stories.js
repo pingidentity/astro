@@ -1,6 +1,6 @@
 import React from 'react';
-import GroupIcon from 'mdi-react/AccountGroupIcon';
-import ArrowIcon from 'mdi-react/ArrowTopRightThickIcon';
+import GroupIcon from '@pingux/mdi-react/AccountGroupIcon';
+import ArrowIcon from '@pingux/mdi-react/ArrowTopRightThickIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -39,11 +39,13 @@ export const Default = args => (
         icon={GroupIcon}
         size="25px"
         color="accent.40"
+        title={{ name: 'Group Icon' }}
       />
       <Icon
         icon={ArrowIcon}
         size="13px"
         color="accent.40"
+        title={{ name: 'Arrow Icon' }}
       />
     </IconBadge>
   </Box>

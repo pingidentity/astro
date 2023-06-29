@@ -10,11 +10,11 @@ import React, {
 import { FocusScope } from 'react-aria';
 import { Item } from 'react-stately';
 import { createCalendar, parseDate } from '@internationalized/date';
+import CalendarIcon from '@pingux/mdi-react/CalendarIcon';
 import { useDateField } from '@react-aria/datepicker';
 import { useLocale } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useDateFieldState } from '@react-stately/datepicker';
-import CalendarIcon from 'mdi-react/CalendarIcon';
 import PropTypes from 'prop-types';
 
 import { useField, useStatusClasses } from '../../hooks';
@@ -283,6 +283,7 @@ const DateField = forwardRef((props, ref) => {
           >
             <Icon
               icon={CalendarIcon}
+              title={{ name: 'Calendar Icon' }}
               size={20}
             />
           </IconButton>

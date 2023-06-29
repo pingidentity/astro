@@ -5,8 +5,8 @@ import {
   OverlayContainer,
   useDialog,
 } from 'react-aria';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import { useModalOverlay } from '@react-aria/overlays';
-import CloseIcon from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
@@ -97,7 +97,7 @@ const Modal = forwardRef((props, ref) => {
                     variant="modalCloseButton"
                     onPress={onClose}
                   >
-                    <Icon icon={CloseIcon} />
+                    <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
                   </IconButton>
                 )
               )

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import MenuUp from 'mdi-react/MenuUpIcon';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
@@ -77,7 +77,7 @@ const NavBarSectionItemHeader = props => {
             color: getIconColor(),
             fill: getIconColor(),
           }}
-          aria-label={isExpanded ? 'Menu up' : 'Menu down'}
+          title={{ name: isExpanded ? 'Menu up' : 'Menu down' }}
         />
       </Box>
     </Box>
@@ -92,28 +92,30 @@ const NavBarPrimaryItemHeader = ({ item }) => {
   return (
     <Box variant={navStyles.navBarItemHeader} className={className} isRow data-testid={heading}>
       {icon && (
-      <Icon
-        icon={icon}
-        size="sm"
-        sx={{
-          mr: 'sm',
-          color: 'neutral.95',
-          fill: 'neutral.95',
-        }}
-        aria-hidden="true"
-      />
+        <Icon
+          icon={icon}
+          size="sm"
+          sx={{
+            mr: 'sm',
+            color: 'neutral.95',
+            fill: 'neutral.95',
+          }}
+          title={{ name: `${heading} Icon` }}
+          aria-hidden="true"
+        />
       )}
       <Text variant={navStyles.navBarItemHeaderText}>{heading}</Text>
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         {customIcon && (
-        <Icon
-          icon={customIcon}
-          size="sm"
-          sx={{
-            color: 'neutral.95',
-            fill: 'neutral.95',
-          }}
-        />
+          <Icon
+            icon={customIcon}
+            size="sm"
+            sx={{
+              color: 'neutral.95',
+              fill: 'neutral.95',
+            }}
+            title={{ name: 'Action Icon' }}
+          />
         )}
       </Box>
     </Box>

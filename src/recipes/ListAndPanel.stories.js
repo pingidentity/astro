@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { FocusScope } from 'react-aria';
 import { Item } from 'react-stately';
-import AccountIcon from 'mdi-react/AccountIcon';
-import CloseIcon from 'mdi-react/CloseIcon';
-import MoreVertIcon from 'mdi-react/MoreVertIcon';
-import PencilIcon from 'mdi-react/PencilIcon';
-import PlusIcon from 'mdi-react/PlusIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
+import PencilIcon from '@pingux/mdi-react/PencilIcon';
+import PlusIcon from '@pingux/mdi-react/PlusIcon';
 
 import { useOverlayPanelState } from '../hooks';
 import useOverlappingMenuHoverState from '../hooks/useOverlappingMenuHoverState';
@@ -226,7 +226,7 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
       sx={sx.listElement.wrapper}
     >
       <Box isRow sx={sx.listElement.iconWrapper}>
-        <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} />
+        <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} title={{ name: 'Account Icon' }} />
         <Box>
           <Text variant="bodyStrong" sx={sx.listElement.title}>
             {item.lastName}
@@ -241,7 +241,7 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
         <SwitchField aria-label="active user" isDefaultSelected alignSelf="center" mr="sm" />
         <PopoverMenu>
           <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
-            <Icon icon={MoreVertIcon} size="md" />
+            <Icon icon={MoreVertIcon} size="md" title={{ name: 'More Vertical Icon' }} />
           </IconButton>
           <Menu
             onAction={handleHoverEnd}
@@ -255,12 +255,12 @@ const ListElement = ({ item, isHoverable, onClosePanel }) => {
         </PopoverMenu>
         {onClosePanel
           && (
-          <IconButton
-            aria-label="close icon button"
-            onPress={onClosePanel}
-          >
-            <Icon size="sm" icon={CloseIcon} />
-          </IconButton>
+            <IconButton
+              aria-label="close icon button"
+              onPress={onClosePanel}
+            >
+              <Icon size="sm" icon={CloseIcon} title={{ name: 'Close Icon' }} />
+            </IconButton>
           )}
       </Box>
     </ListItem>
@@ -306,7 +306,7 @@ export const Default = () => {
           {heading}
         </Text>
         <IconButton aria-label="icon button" ml="sm" variant="inverted">
-          <Icon icon={PlusIcon} size="sm" />
+          <Icon icon={PlusIcon} size="sm" title={{ name: 'Plus Icon' }} />
         </IconButton>
       </Box>
       <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
@@ -348,51 +348,51 @@ export const Default = () => {
       >
         {panelState.isOpen
           && (
-          <FocusScope contain restoreFocus autoFocus>
-            <Box sx={sx.listElementWrapper}>
-              <ListElement
-                item={selectedItemId >= 0 ? items[selectedItemId] : []}
-                onClosePanel={closePanelHandler}
-              />
-            </Box>
-            <Separator margin={0} sx={sx.separator} />
-            <Box sx={sx.tabsWrapper}>
-              <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }}>
-                <Tab title="Profile">
-                  {selectedItemId >= 0
+            <FocusScope contain restoreFocus autoFocus>
+              <Box sx={sx.listElementWrapper}>
+                <ListElement
+                  item={selectedItemId >= 0 ? items[selectedItemId] : []}
+                  onClosePanel={closePanelHandler}
+                />
+              </Box>
+              <Separator margin={0} sx={sx.separator} />
+              <Box sx={sx.tabsWrapper}>
+                <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }}>
+                  <Tab title="Profile">
+                    {selectedItemId >= 0
                       && (
-                      <>
-                        <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
-                          <PencilIcon size={20} />
-                        </IconButton>
-                        <Text sx={sx.itemLabel} variant="base">Full Name</Text>
-                        <Text sx={sx.itemValue} variant="base">
-                          {items[selectedItemId].firstName}
-                          {' '}
-                          {items[selectedItemId].lastName}
-                        </Text>
-                        <Text sx={sx.itemLabel} variant="base">First Name</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
-                        <Text sx={sx.itemLabel} variant="base">Last Name</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].lastName}</Text>
-                        <Text sx={sx.itemLabel} variant="base">Email</Text>
-                        <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
-                      </>
+                        <>
+                          <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
+                            <PencilIcon size={20} />
+                          </IconButton>
+                          <Text sx={sx.itemLabel} variant="base">Full Name</Text>
+                          <Text sx={sx.itemValue} variant="base">
+                            {items[selectedItemId].firstName}
+                            {' '}
+                            {items[selectedItemId].lastName}
+                          </Text>
+                          <Text sx={sx.itemLabel} variant="base">First Name</Text>
+                          <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
+                          <Text sx={sx.itemLabel} variant="base">Last Name</Text>
+                          <Text sx={sx.itemValue} variant="base">{items[selectedItemId].lastName}</Text>
+                          <Text sx={sx.itemLabel} variant="base">Email</Text>
+                          <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
+                        </>
                       )}
-                </Tab>
-                <Tab title="Group Memberships">
-                  <Text>
-                    Group Memberships
-                  </Text>
-                </Tab>
-                <Tab title="Account Info">
-                  <Text>
-                    Account Info
-                  </Text>
-                </Tab>
-              </Tabs>
-            </Box>
-          </FocusScope>
+                  </Tab>
+                  <Tab title="Group Memberships">
+                    <Text>
+                      Group Memberships
+                    </Text>
+                  </Tab>
+                  <Tab title="Account Info">
+                    <Text>
+                      Account Info
+                    </Text>
+                  </Tab>
+                </Tabs>
+              </Box>
+            </FocusScope>
           )}
       </OverlayPanel>
     </Box>

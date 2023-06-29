@@ -1,6 +1,6 @@
 import React from 'react';
-import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
+import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
+import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
@@ -10,11 +10,11 @@ import IconButtonToggle from '.';
 const iconTestId = 'test-icon';
 
 const OnIcon = props => (
-  <EyeIcon data-testid={iconTestId} {...props} />
+  <EyeIcon data-testid={iconTestId} {...props} title={{ name: 'on-icon' }} />
 );
 
 const OffIcon = props => (
-  <EyeOffIcon data-testid={iconTestId} {...props} />
+  <EyeOffIcon data-testid={iconTestId} {...props} title={{ name: 'off-icon' }} />
 );
 
 const testId = 'test-button';

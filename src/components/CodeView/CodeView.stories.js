@@ -143,7 +143,7 @@ const BadgeWithIcon = () => (
   <>
     <Badge label="Badge with Icon Button" bg="navy">
       <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
-        <Icon icon={Clear} ml="xs" size="14px" />
+        <Icon icon={Clear} ml="xs" size="14px" title={{ name: 'Clear Icon' }} />
       </IconButton>
     </Badge>
 
@@ -151,14 +151,14 @@ const BadgeWithIcon = () => (
 
     <Badge label="Badge with Icon Button">
       <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
-        <Icon icon={Earth} ml="xs" size="14px" />
+        <Icon icon={Earth} ml="xs" size="14px" title={{ name: 'Earth Icon' }} />
       </IconButton>
     </Badge>
 
     <div style={{ padding: '5px' }} />
 
     <Badge label="Badge with Icon" bg="green">
-      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" />
+      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" title={{ name: 'Copy Icon' }} />
     </Badge>
   </>
 );

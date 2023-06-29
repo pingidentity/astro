@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { VisuallyHidden } from 'react-aria';
-import MenuDown from 'mdi-react/MenuDownIcon';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
@@ -58,6 +58,7 @@ const LinkSelectField = forwardRef((props, ref) => {
         <Box as="span" aria-hidden="true" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
+            title={{ name: 'Menu Down Icon' }}
             sx={
               state.isOpen
                 ? { transform: 'rotate(180deg)' }

@@ -13,12 +13,18 @@ const Icon = forwardRef((props, ref) => {
 
   const { sizeProps } = useTShirtSize(props);
 
+  const title = props.title || (IconComponent.type
+    ? { name: IconComponent.type.name }
+    : null);
+
   return (
     <Box
       as={IconComponent}
       ref={ref}
+      title={title}
       {...props}
       size={sizeProps.size}
+      role="img"
       sx={{
         fill: color,
         minWidth: sizeProps.size,

@@ -1,6 +1,6 @@
 import React from 'react';
-import DragVerticalIcon from 'mdi-react/DragVerticalIcon';
-import FormTextboxIcon from 'mdi-react/FormTextboxIcon';
+import DragVerticalIcon from '@pingux/mdi-react/DragVerticalIcon';
+import FormTextboxIcon from '@pingux/mdi-react/FormTextboxIcon';
 
 import {
   Box,
@@ -26,8 +26,8 @@ export const Default = () => {
         },
       }}
     >
-      <Icon icon={DragVerticalIcon} size={22} color="neutral.60" />
-      <Icon icon={FormTextboxIcon} size={22} ml="sm" />
+      <Icon icon={DragVerticalIcon} size={22} color="neutral.60" title={{ name: 'Drag Vertical Icon' }} />
+      <Icon icon={FormTextboxIcon} size={22} ml="sm" title={{ name: 'Form Textbox Icon' }} />
       <Text fontWeight={500} ml="md">
         Text Input
       </Text>

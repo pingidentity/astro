@@ -1,6 +1,6 @@
 import React from 'react';
-import AccountIcon from 'mdi-react/AccountIcon';
-import Earth from 'mdi-react/EarthIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import Earth from '@pingux/mdi-react/EarthIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Icon, IconButton, Text, Tooltip, TooltipTrigger } from '../../index';
@@ -75,7 +75,7 @@ export const isOpen = () => (
 export const Disabled = () => (
   <TooltipTrigger delay={0} isDisabled>
     <IconButton aria-label="Earth Icon">
-      <Icon icon={Earth} />
+      <Icon icon={Earth} title={{ name: 'Earth Icon' }} />
     </IconButton>
     <Tooltip>
       Hello World
@@ -94,7 +94,7 @@ export const IconWithTooltip = () => (
   <Box pl={50}>
     <TooltipTrigger>
       <IconButton variant="tooltip.button">
-        <Icon icon={AccountIcon} />
+        <Icon icon={AccountIcon} title={{ name: 'Account Icon' }} />
       </IconButton>
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>

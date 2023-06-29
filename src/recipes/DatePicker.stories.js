@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import Calendar from 'react-calendar';
-import CalendarIcon from 'mdi-react/CalendarIcon';
+import CalendarIcon from '@pingux/mdi-react/CalendarIcon';
 import moment from 'moment';
 
 import { text } from '../components/Text/Text.styles';
@@ -145,7 +145,7 @@ export const Default = () => {
               ref={triggerRef}
               {...triggerProps}
             >
-              <Icon icon={CalendarIcon} size="sm" />
+              <Icon icon={CalendarIcon} size="sm" title={{ name: 'Calendar Icon' }} />
             </IconButton>
           ),
         }}
