@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Pressable } from '@react-aria/interactions';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   SwitchField,
   Tooltip,
@@ -10,11 +11,20 @@ import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import SwitchFieldReadme from './SwitchField.mdx';
+
 export default {
   title: 'Form/SwitchField',
   component: SwitchField,
   parameters: {
     docs: {
+
+      page: () => (
+        <>
+          <SwitchFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

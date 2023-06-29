@@ -10,15 +10,6 @@ import { useField, usePropWarning } from '../../hooks';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 
-/**
- * Renders a search field with associated controls including visual elements and keyboard
- * interaction handlers.
- *
- * Built with [useSearchField](https://react-spectrum.adobe.com/react-aria/useSearchField.html)
- * from React Aria and
- * [useSearchFieldState](https://react-spectrum.adobe.com/react-stately/useSearchFieldState.html)
- * from React Stately.
- */
 const SearchField = forwardRef((props, ref) => {
   const {
     autocomplete,

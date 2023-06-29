@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Item,
   Section,
@@ -12,6 +13,8 @@ import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 import { modes as labelModes } from '../Label/constants';
+
+import SelectFieldReadme from './SelectField.mdx';
 
 const animals = [
   { name: 'Aardvark', id: '1' },
@@ -60,6 +63,12 @@ export default {
   component: SelectField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <SelectFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

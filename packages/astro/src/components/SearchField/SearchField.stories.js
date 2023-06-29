@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Users from 'mdi-react/AccountGroupIcon';
 import SearchIcon from 'mdi-react/SearchIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useDebounce } from '../../hooks';
 import {
   Box,
@@ -11,11 +12,19 @@ import {
 import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 
+import SearchFieldReadme from './SearchField.mdx';
+
 export default {
   title: 'Form/SearchField',
   component: SearchField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <SearchFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
