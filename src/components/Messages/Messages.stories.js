@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { Item } from 'react-stately';
-import AccountIcon from 'mdi-react/AccountIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -196,12 +196,12 @@ export const UseReducer = () => {
       {
         items?.length > 0
         && (
-        <Button
-          mt="md"
-          onPress={() => dispatch(messagesReducer.actions.clearMessages())}
-        >
-          Clear messages
-        </Button>
+          <Button
+            mt="md"
+            onPress={() => dispatch(messagesReducer.actions.clearMessages())}
+          >
+            Clear messages
+          </Button>
         )
       }
       <Messages

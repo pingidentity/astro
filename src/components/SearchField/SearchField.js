@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useSearchField } from 'react-aria';
 import { useSearchFieldState } from 'react-stately';
-import CloseIcon from 'mdi-react/CloseIcon';
-import SearchIcon from 'mdi-react/SearchIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Input, Label } from '../..';
@@ -78,33 +78,34 @@ const SearchField = forwardRef((props, ref) => {
         {
           icon
           && (
-          <Icon
-            icon={icon}
-            variant="forms.search.icon"
-            size={22}
-            {...iconProps}
-          />
+            <Icon
+              icon={icon}
+              variant="forms.search.icon"
+              size={22}
+              title={{ name: 'Search Icon' }}
+              {...iconProps}
+            />
           )
         }
         {
           !hasNoClearButton
           && state.value !== ''
           && (
-          <IconButton
-            tabIndex={0}
-            onKeyDown={handleKeyDownEvent}
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 10,
-              path: {
-                fill: 'text.secondary',
-              },
-            }}
-            {...clearButtonProps}
-          >
-            <Icon icon={CloseIcon} />
-          </IconButton>
+            <IconButton
+              tabIndex={0}
+              onKeyDown={handleKeyDownEvent}
+              sx={{
+                position: 'absolute',
+                top: 8,
+                right: 10,
+                path: {
+                  fill: 'text.secondary',
+                },
+              }}
+              {...clearButtonProps}
+            >
+              <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
+            </IconButton>
           )
         }
       </Box>

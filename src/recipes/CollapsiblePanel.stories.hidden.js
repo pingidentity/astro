@@ -1,11 +1,11 @@
 import React, { useMemo, useRef, useState } from 'react';
+import AccountGroupIcon from '@pingux/mdi-react/AccountGroupIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import CheckIcon from '@pingux/mdi-react/CheckIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
+import Clear from '@pingux/mdi-react/CloseIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import { useFilter } from '@react-aria/i18n';
-import AccountGroupIcon from 'mdi-react/AccountGroupIcon';
-import AccountIcon from 'mdi-react/AccountIcon';
-import CheckIcon from 'mdi-react/CheckIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import Clear from 'mdi-react/CloseIcon';
-import SearchIcon from 'mdi-react/SearchIcon';
 
 import {
   Badge,
@@ -186,6 +186,7 @@ export const Default = () => {
               size={25}
               flexShrink={0}
               display="flex"
+              title={{ name: 'Account Icon' }}
             />
             <Breadcrumbs icon={ChevronRightIcon}>
               <Item key="home" variant="link" data-id="home">
@@ -198,7 +199,7 @@ export const Default = () => {
           </Box>
           <Box isRow>
             <IconButton aria-label="Close Panel">
-              <Icon icon={Clear} size="sm" />
+              <Icon icon={Clear} size="sm" title={{ name: 'Clear Icon' }} />
             </IconButton>
           </Box>
         </Box>
@@ -237,6 +238,7 @@ export const Default = () => {
                       color="accent.40"
                       size={25}
                       flexShrink={1}
+                      title={{ name: 'Account Group Icon' }}
                     />
                     <Box>
                       <Box isRow>
@@ -257,7 +259,7 @@ export const Default = () => {
                         isRow
                         sx={sx.defaultSelectedBox}
                       >
-                        <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} />
+                        <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} title={{ name: 'Check Icon' }} />
                         <Text sx={sx.defaultSelectedTitle}>Added by Filter</Text>
                       </Box>
                     )

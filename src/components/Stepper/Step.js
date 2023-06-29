@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
+import CheckBoldIcon from '@pingux/mdi-react/CheckBoldIcon';
 import { useHover } from '@react-aria/interactions';
-import CheckBoldIcon from 'mdi-react/CheckBoldIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Icon } from '../../index';
@@ -28,6 +28,7 @@ const Step = forwardRef((props, ref) => {
             icon={CheckBoldIcon}
             size={23}
             color="text.primaryLight"
+            title={{ name: 'Check Bold Icon' }}
           />
         )
         : value}

@@ -1,13 +1,13 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { createCalendar, parseDate } from '@internationalized/date';
+import ChevronDoubleLeftIcon from '@pingux/mdi-react/ChevronDoubleLeftIcon';
+import ChevronDoubleRightIcon from '@pingux/mdi-react/ChevronDoubleRightIcon';
+import ChevronLeftIcon from '@pingux/mdi-react/ChevronLeftIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import { useCalendar } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useCalendarState } from '@react-stately/calendar';
-import ChevronDoubleLeftIcon from 'mdi-react/ChevronDoubleLeftIcon';
-import ChevronDoubleRightIcon from 'mdi-react/ChevronDoubleRightIcon';
-import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, IconButton, Text } from '../../index';
@@ -88,12 +88,12 @@ const Calendar = forwardRef((props, ref) => {
           isDisabled={prevButtonProps.isDisabled}
           aria-label="previous year navigation"
         >
-          <Icon icon={ChevronDoubleLeftIcon} size={18} />
+          <Icon icon={ChevronDoubleLeftIcon} size={18} title={{ name: 'Chevron Double Left Icon' }} />
         </IconButton>
         <IconButton
           {...prevButtonProps}
         >
-          <Icon icon={ChevronLeftIcon} size={18} />
+          <Icon icon={ChevronLeftIcon} size={18} title={{ name: 'Chevron Left Icon' }} />
         </IconButton>
         <VisuallyHidden>
           <Text>{calendarProps['aria-label']}</Text>
@@ -109,7 +109,7 @@ const Calendar = forwardRef((props, ref) => {
         <IconButton
           {...nextButtonProps}
         >
-          <Icon icon={ChevronRightIcon} size={18} />
+          <Icon icon={ChevronRightIcon} size={18} title={{ name: 'Chevron Right Icon' }} />
         </IconButton>
         <IconButton
           onPress={() => handleYearSelection(nav.NEXT)}
@@ -117,7 +117,7 @@ const Calendar = forwardRef((props, ref) => {
           isDisabled={nextButtonProps.isDisabled}
           aria-label="next year navigation"
         >
-          <Icon icon={ChevronDoubleRightIcon} size={18} />
+          <Icon icon={ChevronDoubleRightIcon} size={18} title={{ name: 'Chevron Double Right Icon' }} />
         </IconButton>
       </Box>
       <CalendarGrid state={state} />

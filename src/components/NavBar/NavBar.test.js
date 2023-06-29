@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import AccountMultiple from '@pingux/mdi-react/AccountMultipleIcon';
+import EmoticonHappy from '@pingux/mdi-react/EmoticonHappyOutlineIcon';
+import Fingerprint from '@pingux/mdi-react/FingerprintIcon';
+import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
+import OpenInNew from '@pingux/mdi-react/OpenInNewIcon';
+import ScaleBalance from '@pingux/mdi-react/ScaleBalanceIcon';
+import TransitConnection from '@pingux/mdi-react/TransitConnectionVariantIcon';
+import Verify from '@pingux/mdi-react/VerifiedIcon';
+import ViewDashboard from '@pingux/mdi-react/ViewDashboardIcon';
+import ViewGridPlusOutline from '@pingux/mdi-react/ViewGridPlusOutlineIcon';
 import userEvent from '@testing-library/user-event';
-import AccountMultiple from 'mdi-react/AccountMultipleIcon';
-import EmoticonHappy from 'mdi-react/EmoticonHappyOutlineIcon';
-import Fingerprint from 'mdi-react/FingerprintIcon';
-import GlobeIcon from 'mdi-react/GlobeIcon';
-import OpenInNew from 'mdi-react/OpenInNewIcon';
-import ScaleBalance from 'mdi-react/ScaleBalanceIcon';
-import TransitConnection from 'mdi-react/TransitConnectionVariantIcon';
-import Verify from 'mdi-react/VerifiedIcon';
-import ViewDashboard from 'mdi-react/ViewDashboardIcon';
-import ViewGridPlusOutline from 'mdi-react/ViewGridPlusOutlineIcon';
 
 import { Box, Button, Link, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';

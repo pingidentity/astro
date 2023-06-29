@@ -75,16 +75,16 @@ const NavBarItem = forwardRef((props, ref) => {
       >
         {icon
           && (
-          <Icon
-            icon={icon}
-            aria-label={text}
-            size="sm"
-            sx={{
-              mr: 'sm',
-              color,
-              fill: color,
-            }}
-          />
+            <Icon
+              icon={icon}
+              title={{ name: text }}
+              size="sm"
+              sx={{
+                mr: 'sm',
+                color,
+                fill: color,
+              }}
+            />
           )}
         <Text variant={state.navStyles.navBarItemText}>
           {text}

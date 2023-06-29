@@ -1,9 +1,9 @@
 import React from 'react';
 import { mergeProps } from 'react-aria';
 import { Item } from 'react-stately';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import userEvent from '@testing-library/user-event';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import CreateIcon from 'mdi-react/CreateIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SearchIcon from 'mdi-react/SearchIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 
 import {
   Box,
@@ -72,6 +72,7 @@ const IconSlot = (
   <Box isRow>
     <Icon
       icon={SearchIcon}
+      title={{ name: 'Search Icon' }}
     />
   </Box>
 );

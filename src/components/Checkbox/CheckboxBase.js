@@ -23,8 +23,10 @@ const IndeterminateCheckboxIcon = props => (
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-labelledby="checkbox-icon-title"
     {...props}
   >
+    <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
     <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill="#4462ED" stroke="#4462ED" />
     <rect x="6.5" y="11" width="11" height="2" fill="white" />
   </svg>
