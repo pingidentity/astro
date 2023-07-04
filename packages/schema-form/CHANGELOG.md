@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.24](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.12.23...@pingux/schema-form@3.12.24) (2023-07-04)
+
+
+### Bug Fixes
+
+* [UIP-6188] Icon: add title prop to all icons and import them from @pingux/mdi-react package ([c66232c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c66232cc069da1e2e5ea5ed87db041a3a90faf41))
+
+
+
+
+
 ## [3.12.23](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/schema-form@3.12.22...@pingux/schema-form@3.12.23) (2023-06-27)
 
 **Note:** Version bump only for package @pingux/schema-form

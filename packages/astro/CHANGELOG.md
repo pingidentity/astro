@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.7...@pingux/astro@2.6.0) (2023-07-04)
+
+
+### Bug Fixes
+
+* [UIP-6188] Icon: add title prop to all icons and import them from @pingux/mdi-react package ([c66232c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c66232cc069da1e2e5ea5ed87db041a3a90faf41))
+* [UIP-6212] MultivaluesField black rectangle ([fe9fc1d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fe9fc1df7b411f05c559dd88e31d5edb01d06631))
+* [UIP-6317] CollapsiblePanel: add aria-expanded ([e5b0fe7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e5b0fe7cc17074d1769034d321d2e6945b3b305f))
+* [UIP-6325] Remove zero in DatePickerField when localized ([bd43f5a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bd43f5a57d06394bb09df497a2c424c4739a3d77))
+
+
+### Features
+
+* [UIP-6327] default figma URLs for astro stories ([da65675](https://gitlab.corp.pingidentity.com/ux/pingux/commit/da656753ed7ff6750a46a03684a6f0a33c16758c))
+* UIP-6354 removing deprecated recipes ([6a0b955](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6a0b9553e754bfdf25a73b7e82918f64011ce0b7))
+
+
+
+
+
 ## [2.5.7](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.6...@pingux/astro@2.5.7) (2023-06-27)
 
 **Note:** Version bump only for package @pingux/astro
