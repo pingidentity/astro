@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { FocusRing, mergeProps } from 'react-aria';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import { PressResponder, useHover } from '@react-aria/interactions';
-import MenuDown from 'mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Loader, TextField } from '../..';
@@ -99,6 +99,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           <Icon
             icon={MenuDown}
             sx={isOpen ? { transform: 'rotate(180deg)' } : null}
+            title={{ name: 'Menu Down Icon' }}
           />
         </Button>
       </PressResponder>

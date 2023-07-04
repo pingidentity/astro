@@ -1,13 +1,16 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, HelpHint } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import HelpHintReadme from './HelpHint.mdx';
 
 export default {
   title: 'Components/HelpHint',
   component: HelpHint,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -34,6 +37,13 @@ export const Default = args => (
     <HelpHint {...args} />
   </Box>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.helpHint.default,
+  },
+};
 
 export const WithTooltipAndIconButtonProps = () => (
   <Box p={50}>

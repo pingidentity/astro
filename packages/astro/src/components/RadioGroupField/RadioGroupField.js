@@ -12,14 +12,6 @@ import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAtt
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import { RadioContext } from '../RadioField';
 
-/**
- * Radio group component for a single-choice list of options.
- *
- * Utilizes [useRadioGroup](https://react-spectrum.adobe.com/react-aria/useRadioGroup.html) from
- * React Aria and
- * [useRadioGroupState](https://react-spectrum.adobe.com/react-stately/useRadioGroupState.html)
- * from React Stately.
- */
 const RadioGroupField = forwardRef((props, ref) => {
   const {
     children,

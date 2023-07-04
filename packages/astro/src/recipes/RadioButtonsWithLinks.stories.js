@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CloseIcon from 'mdi-react/CloseIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 
 import {
   Box,
@@ -57,7 +57,7 @@ export const Default = () => {
       <Box isRow justifyContent="space-between" mb="sm">
         <Text sx={{ fontWeight: 2 }}>Permissions</Text>
         <IconButton onPress={onPress} aria-label="close">
-          <Icon icon={CloseIcon} size="sm" />
+          <Icon icon={CloseIcon} size="sm" title={{ name: 'Close Icon' }} />
         </IconButton>
       </Box>
       <Box>

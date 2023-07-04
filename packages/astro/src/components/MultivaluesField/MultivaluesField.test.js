@@ -590,3 +590,49 @@ test('in non-restrictive mode the value should be trimmed', () => {
   expect(trimmedBadge).toBeInTheDocument();
   expect(input).toHaveValue('');
 });
+
+test('deleting a single badge via keyboard moves focus to the input', () => {
+  getComponent();
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  const options = screen.getAllByRole('option');
+  const firstOption = options[0];
+  firstOption.click();
+
+  const badge = screen.getByText(items[0].name);
+  expect(badge).toBeInTheDocument();
+
+  userEvent.tab({ shift: true });
+  const { nextSibling: deleteButton } = badge;
+  expect(deleteButton).toHaveClass('is-focused');
+
+  fireEvent.keyDown(deleteButton, { key: 'Enter' });
+  fireEvent.keyUp(deleteButton, { key: 'Enter' });
+  expect(badge).not.toBeInTheDocument();
+  expect(input).toHaveClass('is-focused');
+});
+
+test('deleting the last badge via keyboard moves focus to the previous badge', () => {
+  getComponent();
+  userEvent.tab();
+  const options = screen.getAllByRole('option');
+  const firstOption = options[0];
+  const secondOption = options[1];
+  firstOption.click();
+  secondOption.click();
+
+  const badge1 = screen.getByText(items[0].name);
+  const badge2 = screen.getByText(items[1].name);
+  expect(badge1).toBeInTheDocument();
+  expect(badge2).toBeInTheDocument();
+
+  userEvent.tab({ shift: true });
+  const { nextSibling: deleteButton1 } = badge1;
+  const { nextSibling: deleteButton2 } = badge2;
+  expect(deleteButton2).toHaveClass('is-focused');
+
+  fireEvent.keyDown(deleteButton2, { key: 'Enter' });
+  fireEvent.keyUp(deleteButton2, { key: 'Enter' });
+  expect(badge2).not.toBeInTheDocument();
+  expect(deleteButton1).toHaveClass('is-focused');
+});

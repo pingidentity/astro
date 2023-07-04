@@ -1,8 +1,10 @@
 import React from 'react';
 import { Item } from 'react-stately';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Menu, Text } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 import MenuReadme from './Menu.mdx';
@@ -10,6 +12,7 @@ import MenuReadme from './Menu.mdx';
 export default {
   title: 'Components/Menu',
   component: Menu,
+  decorators: [withDesign],
   parameters: {
     actions: {
       argTypesRegex: '^on.*',
@@ -24,6 +27,9 @@ export default {
       source: {
         type: 'code',
       },
+    },
+    design: {
+      type: 'figma',
     },
   },
   argTypes: {
@@ -88,4 +94,11 @@ export const Default = ({ ...args }) => {
       </Item>
     </Menu>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.menu.default,
+  },
 };

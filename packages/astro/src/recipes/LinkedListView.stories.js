@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
+import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon';
 
 import useOverlappingMenuHoverState from '../hooks/useOverlappingMenuHoverState';
 import {
@@ -192,8 +192,9 @@ export const Default = ({ ...args }) => {
             preserveAspectRatio="none"
             viewBox="0 0 10 10"
             style={{ flexGrow: 1 }}
+            aria-labelledby="vertical-bracket-icon-title"
           >
-            <title>bracket-fill</title>
+            <title id="vertical-bracket-icon-title">bracket-fill</title>
             <g>
               <title>Layer 1</title>
               <line
@@ -208,7 +209,8 @@ export const Default = ({ ...args }) => {
               />
             </g>
           </svg>
-          <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="bracket-icon-title">
+            <title id="bracket-icon-title">Bracket Icon</title>
             <g clipPath="url(#clip0_1900_8817)">
               <g mask="url(#mask0_1900_8817)">
                 <rect x="0.5" y="-54.5" width="20" height="63" rx="4.5" stroke={color} />
@@ -222,7 +224,8 @@ export const Default = ({ ...args }) => {
 
   // the vector shield and key icon.
   const ShieldIcon = props => (
-    <svg width="19" height="23" viewBox="0 0 19 23" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg width="19" height="23" viewBox="0 0 19 23" xmlns="http://www.w3.org/2000/svg" aria-labelledby="shield-icon-title" {...props}>
+      <title id="shield-icon-title">Shield Icon</title>
       <path d="M9.5 7.33342C9.77627 7.33342 10.0412 7.44316 10.2366 7.63851C10.4319 7.83386 10.5417 8.09881 10.5417 8.37508C10.5417 8.65135 10.4319 8.9163 10.2366 9.11165C10.0412 9.307 9.77627 9.41675 9.5 9.41675C9.22373 9.41675 8.95878 9.307 8.76343 9.11165C8.56808 8.9163 8.45833 8.65135 8.45833 8.37508C8.45833 8.09881 8.56808 7.83386 8.76343 7.63851C8.95878 7.44316 9.22373 7.33342 9.5 7.33342ZM18.875 10.4584C18.875 16.2397 14.875 21.6459 9.5 22.9584C4.125 21.6459 0.125 16.2397 0.125 10.4584V4.20842L9.5 0.041748L18.875 4.20842V10.4584ZM9.5 5.25008C8.6712 5.25008 7.87634 5.57932 7.29029 6.16537C6.70424 6.75142 6.375 7.54628 6.375 8.37508C6.375 9.73967 7.23958 10.8959 8.45833 11.323V17.7501H10.5417V15.6667H12.625V13.5834H10.5417V11.323C11.7604 10.8959 12.625 9.73967 12.625 8.37508C12.625 7.54628 12.2958 6.75142 11.7097 6.16537C11.1237 5.57932 10.3288 5.25008 9.5 5.25008Z" />
     </svg>
   );
@@ -256,8 +259,9 @@ export const Default = ({ ...args }) => {
           viewBox="0 0 10 10"
           style={{ flexGrow: 1 }}
           data-testid="isLastLayer"
+          aria-labelledby="top-bracket-icon-title"
         >
-          <title>bracket-fill</title>
+          <title id="top-bracket-icon-title">Top Bracket Icon</title>
           <g>
             <title>Layer 3</title>
             <line
@@ -285,7 +289,7 @@ export const Default = ({ ...args }) => {
     <PopoverMenu direction="left">
       <Box alignItems="center" alignSelf="center">
         <IconButton aria-label="Menu Button">
-          <Icon icon={DotsVerticalIcon} size="xs" color="Neutral.40" m="0.61px" />
+          <Icon icon={DotsVerticalIcon} size="xs" color="Neutral.40" m="0.61px" title={{ name: 'Dots Vertical Icon' }} />
         </IconButton>
       </Box>
       <Menu
@@ -346,10 +350,10 @@ export const Default = ({ ...args }) => {
       sx={sx.listElement.textBox}
     >
       {isChild && (
-      <Separator
-        orientation="vertical"
-        sx={sx.bottomBracket.separator}
-      />
+        <Separator
+          orientation="vertical"
+          sx={sx.bottomBracket.separator}
+        />
       )}
       <Box>
         <Text

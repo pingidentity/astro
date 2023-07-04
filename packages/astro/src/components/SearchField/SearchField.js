@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useSearchField } from 'react-aria';
 import { useSearchFieldState } from 'react-stately';
-import CloseIcon from 'mdi-react/CloseIcon';
-import SearchIcon from 'mdi-react/SearchIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Input, Label } from '../..';
@@ -10,15 +10,6 @@ import { useField, usePropWarning } from '../../hooks';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 
-/**
- * Renders a search field with associated controls including visual elements and keyboard
- * interaction handlers.
- *
- * Built with [useSearchField](https://react-spectrum.adobe.com/react-aria/useSearchField.html)
- * from React Aria and
- * [useSearchFieldState](https://react-spectrum.adobe.com/react-stately/useSearchFieldState.html)
- * from React Stately.
- */
 const SearchField = forwardRef((props, ref) => {
   const {
     autocomplete,
@@ -78,33 +69,34 @@ const SearchField = forwardRef((props, ref) => {
         {
           icon
           && (
-          <Icon
-            icon={icon}
-            variant="forms.search.icon"
-            size={22}
-            {...iconProps}
-          />
+            <Icon
+              icon={icon}
+              variant="forms.search.icon"
+              size={22}
+              title={{ name: 'Search Icon' }}
+              {...iconProps}
+            />
           )
         }
         {
           !hasNoClearButton
           && state.value !== ''
           && (
-          <IconButton
-            tabIndex={0}
-            onKeyDown={handleKeyDownEvent}
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 10,
-              path: {
-                fill: 'text.secondary',
-              },
-            }}
-            {...clearButtonProps}
-          >
-            <Icon icon={CloseIcon} />
-          </IconButton>
+            <IconButton
+              tabIndex={0}
+              onKeyDown={handleKeyDownEvent}
+              sx={{
+                position: 'absolute',
+                top: 8,
+                right: 10,
+                path: {
+                  fill: 'text.secondary',
+                },
+              }}
+              {...clearButtonProps}
+            >
+              <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
+            </IconButton>
           )
         }
       </Box>

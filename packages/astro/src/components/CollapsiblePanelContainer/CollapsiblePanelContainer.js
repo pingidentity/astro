@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { useOverlayTriggerState } from 'react-stately';
-import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import ChevronLeftIcon from '@pingux/mdi-react/ChevronLeftIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
@@ -24,6 +24,7 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
     isOpen,
     onOpenChange,
     openAriaLabel,
+    collapsiblePanelId,
     ...others
   } = props;
 
@@ -62,28 +63,31 @@ const CollapsiblePanelContainer = forwardRef((props, ref) => {
       <IconButton
         isRow
         aria-label={state.isOpen ? closeAriaLabel : openAriaLabel}
+        aria-expanded={state.isOpen}
         data-testid="collapsible-panel-button"
         onPress={handleButtonPress}
         ref={triggerRef}
         variant="toggle"
         pr="sm"
+        aria-controls={state.isOpen ? collapsiblePanelId : null}
       >
         <Icon
           color="active"
           icon={state.isOpen ? ChevronRightIcon : ChevronLeftIcon}
+          title={{ name: state.isOpen ? 'Chevron Right Icon' : 'Chevron Left Icon' }}
           role="button"
           size="30px"
         />
         {!state.isOpen && selectedFilterCount
           && (
-          <CollapsiblePanelBadge
-            data-testid="collapsible-panel-badge"
-            margin="auto"
-            selectedFilterCount={selectedFilterCount}
-          />
+            <CollapsiblePanelBadge
+              data-testid="collapsible-panel-badge"
+              margin="auto"
+              selectedFilterCount={selectedFilterCount}
+            />
           )}
       </IconButton>
-      { children }
+      {children}
     </Box>
   );
 });
@@ -109,6 +113,8 @@ CollapsiblePanelContainer.propTypes = {
   onOpenChange: PropTypes.func,
   /** Defines a string value that labels the trigger icon when menu is closed. */
   openAriaLabel: PropTypes.string,
+  /** Used in button aria-controls attribute. */
+  collapsiblePanelId: PropTypes.string,
 };
 
 CollapsiblePanelContainer.defaultProps = {

@@ -1,16 +1,19 @@
 import React from 'react';
 import { Item } from 'react-stately';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import { action } from '@storybook/addon-actions';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Breadcrumbs } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import BreadcrumbsReadme from './Breadcrumbs.mdx';
 
 export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
+  decorators: [withDesign],
   parameters: {
     docs: {
       source: {
@@ -74,4 +77,11 @@ export const Default = args => {
       </Item>
     </Breadcrumbs>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.breadcrumbs.default,
+  },
 };

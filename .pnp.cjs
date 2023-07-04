@@ -4544,6 +4544,55 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@figspec/components", [\
+        ["npm:1.0.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Fcomponents%2F-%2Fcomponents-1.0.1.tgz", {\
+          "packageLocation": "./.yarn/cache/@figspec-components-npm-1.0.1-8ec56c1bd4-db33333ad2.zip/node_modules/@figspec/components/",\
+          "packageDependencies": [\
+            ["@figspec/components", "npm:1.0.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Fcomponents%2F-%2Fcomponents-1.0.1.tgz"],\
+            ["lit", "npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit%2F-%2Flit-2.7.4.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@figspec/react", [\
+        ["npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz", {\
+          "packageLocation": "./.yarn/cache/@figspec-react-npm-1.0.3-461183f7e6-8cfc1be1d8.zip/node_modules/@figspec/react/",\
+          "packageDependencies": [\
+            ["@figspec/react", "npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5c5b1e59bd40e3e22db424540cb955fd5f7709264435c2f9cd71f2bcb3951d0c51c747ec9975b327a31bccbf25c2cfd010f6aef10c3ddd378ad4de13187a104d#npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@figspec-react-virtual-2915a2bcfa/0/cache/@figspec-react-npm-1.0.3-461183f7e6-8cfc1be1d8.zip/node_modules/@figspec/react/",\
+          "packageDependencies": [\
+            ["@figspec/react", "virtual:5c5b1e59bd40e3e22db424540cb955fd5f7709264435c2f9cd71f2bcb3951d0c51c747ec9975b327a31bccbf25c2cfd010f6aef10c3ddd378ad4de13187a104d#npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz"],\
+            ["@figspec/components", "npm:1.0.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Fcomponents%2F-%2Fcomponents-1.0.1.tgz"],\
+            ["@lit-labs/react", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Freact%2F-%2Freact-1.1.1.tgz"],\
+            ["@types/react", "npm:16.14.32"],\
+            ["react", "npm:16.14.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:6f01a6172076ba884877822104f30319e115ab889a621888f4618bfbd2f5f67521ded8ac9634d45b3310e3c786251ea97a822303bffbb9d229d6b5030131c7a7#npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@figspec-react-virtual-f7beb45110/0/cache/@figspec-react-npm-1.0.3-461183f7e6-8cfc1be1d8.zip/node_modules/@figspec/react/",\
+          "packageDependencies": [\
+            ["@figspec/react", "virtual:6f01a6172076ba884877822104f30319e115ab889a621888f4618bfbd2f5f67521ded8ac9634d45b3310e3c786251ea97a822303bffbb9d229d6b5030131c7a7#npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz"],\
+            ["@figspec/components", "npm:1.0.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Fcomponents%2F-%2Fcomponents-1.0.1.tgz"],\
+            ["@lit-labs/react", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Freact%2F-%2Freact-1.1.1.tgz"],\
+            ["@types/react", null],\
+            ["react", "npm:16.14.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@formatjs/ecma402-abstract", [\
         ["npm:1.11.4", {\
           "packageLocation": "./.yarn/cache/@formatjs-ecma402-abstract-npm-1.11.4-98baf4d2cc-05dbe1c645.zip/node_modules/@formatjs/ecma402-abstract/",\
@@ -5449,6 +5498,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["validate-npm-package-license", "npm:3.0.4"],\
             ["validate-npm-package-name", "npm:5.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fvalidate-npm-package-name%2F-%2Fvalidate-npm-package-name-5.0.0.tgz"],\
             ["yargs-parser", "npm:20.2.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@lit-labs/react", [\
+        ["npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Freact%2F-%2Freact-1.1.1.tgz", {\
+          "packageLocation": "./.yarn/cache/@lit-labs-react-npm-1.1.1-02090e3ed9-e46b87a3e0.zip/node_modules/@lit-labs/react/",\
+          "packageDependencies": [\
+            ["@lit-labs/react", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Freact%2F-%2Freact-1.1.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@lit-labs/ssr-dom-shim", [\
+        ["npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Fssr-dom-shim%2F-%2Fssr-dom-shim-1.1.1.tgz", {\
+          "packageLocation": "./.yarn/cache/@lit-labs-ssr-dom-shim-npm-1.1.1-3c8c32bb6f-7a7add78e3.zip/node_modules/@lit-labs/ssr-dom-shim/",\
+          "packageDependencies": [\
+            ["@lit-labs/ssr-dom-shim", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Fssr-dom-shim%2F-%2Fssr-dom-shim-1.1.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@lit/reactive-element", [\
+        ["npm:1.6.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit%2Freactive-element%2F-%2Freactive-element-1.6.1.tgz", {\
+          "packageLocation": "./.yarn/cache/@lit-reactive-element-npm-1.6.1-e7f8092c48-fab0bcfdad.zip/node_modules/@lit/reactive-element/",\
+          "packageDependencies": [\
+            ["@lit/reactive-element", "npm:1.6.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit%2Freactive-element%2F-%2Freactive-element-1.6.1.tgz"],\
+            ["@lit-labs/ssr-dom-shim", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Fssr-dom-shim%2F-%2Fssr-dom-shim-1.1.1.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6423,7 +6500,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@faker-js/faker", "npm:7.5.0"],\
             ["@internationalized/date", "npm:3.0.1"],\
             ["@mdx-js/react", "virtual:f605a6b0ed53a229f7219a38fbe5eedd522061c62cf3f25507f96e0fe92d03809c35602247e5f73ea58324ecdf8ce6a9a02ef02f25a240dc20141a16813c5dc0#npm:1.6.22"],\
-            ["@pingux/mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"],\
+            ["@pingux/mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"],\
             ["@react-aria/accordion", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:3.0.0-nightly.3553"],\
             ["@react-aria/breadcrumbs", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:3.3.2"],\
             ["@react-aria/button", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:3.6.2"],\
@@ -6500,7 +6577,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-emotion", "npm:11.0.0"],\
             ["jest-pnp-resolver", "virtual:36a01d8083315b8a6e8362097258ea8bc0f9dfb672cb210742e054760850c673a1038f542a6b7156397b5275ace8ee0482231cac5e8898044fa1a1c29f78ee5b#npm:1.2.2"],\
             ["lodash", "npm:4.17.21"],\
-            ["mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.5.0"],\
             ["moment", "npm:2.29.4"],\
             ["mutationobserver-shim", "npm:0.3.7"],\
             ["prism-react-renderer", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.2.1"],\
@@ -6518,6 +6594,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:16.13.1"],\
             ["recharts", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:2.1.14"],\
             ["regenerator-runtime", "npm:0.13.9"],\
+            ["storybook-addon-designs", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz"],\
             ["styled-system", "npm:5.1.5"],\
             ["theme-ui", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:0.10.0"],\
             ["use-resize-observer", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:8.0.0"],\
@@ -6554,7 +6631,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@faker-js/faker", "npm:7.5.0"],\
             ["@internationalized/date", "npm:3.0.1"],\
             ["@mdx-js/react", "virtual:ffea2975246caca1e66b552a730b557d42534f451187acdf0c678015f405325bddbbe66fa2ce447b445f62c3a68301fac8db0812d8b3bd5b5242c17deb59d22e#npm:1.6.22"],\
-            ["@pingux/mdi-react", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"],\
+            ["@pingux/mdi-react", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"],\
             ["@react-aria/accordion", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:3.0.0-nightly.3553"],\
             ["@react-aria/breadcrumbs", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:3.3.2"],\
             ["@react-aria/button", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:3.6.2"],\
@@ -6631,7 +6708,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-emotion", "npm:11.0.0"],\
             ["jest-pnp-resolver", "virtual:36a01d8083315b8a6e8362097258ea8bc0f9dfb672cb210742e054760850c673a1038f542a6b7156397b5275ace8ee0482231cac5e8898044fa1a1c29f78ee5b#npm:1.2.2"],\
             ["lodash", "npm:4.17.21"],\
-            ["mdi-react", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:7.5.0"],\
             ["moment", "npm:2.29.4"],\
             ["mutationobserver-shim", "npm:0.3.7"],\
             ["prism-react-renderer", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.2.1"],\
@@ -6649,6 +6725,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:ffea2975246caca1e66b552a730b557d42534f451187acdf0c678015f405325bddbbe66fa2ce447b445f62c3a68301fac8db0812d8b3bd5b5242c17deb59d22e#npm:16.13.1"],\
             ["recharts", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:2.1.14"],\
             ["regenerator-runtime", "npm:0.13.9"],\
+            ["storybook-addon-designs", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz"],\
             ["styled-system", "npm:5.1.5"],\
             ["theme-ui", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:0.10.0"],\
             ["use-resize-observer", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:8.0.0"],\
@@ -6685,7 +6762,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@faker-js/faker", "npm:7.5.0"],\
             ["@internationalized/date", "npm:3.0.1"],\
             ["@mdx-js/react", "virtual:f605a6b0ed53a229f7219a38fbe5eedd522061c62cf3f25507f96e0fe92d03809c35602247e5f73ea58324ecdf8ce6a9a02ef02f25a240dc20141a16813c5dc0#npm:1.6.22"],\
-            ["@pingux/mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"],\
+            ["@pingux/mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"],\
             ["@react-aria/accordion", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:3.0.0-nightly.3553"],\
             ["@react-aria/breadcrumbs", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:3.3.2"],\
             ["@react-aria/button", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:3.6.2"],\
@@ -6760,7 +6837,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-emotion", "npm:11.0.0"],\
             ["jest-pnp-resolver", "virtual:36a01d8083315b8a6e8362097258ea8bc0f9dfb672cb210742e054760850c673a1038f542a6b7156397b5275ace8ee0482231cac5e8898044fa1a1c29f78ee5b#npm:1.2.2"],\
             ["lodash", "npm:4.17.21"],\
-            ["mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.5.0"],\
             ["moment", "npm:2.29.4"],\
             ["mutationobserver-shim", "npm:0.3.7"],\
             ["prism-react-renderer", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.2.1"],\
@@ -6778,6 +6854,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:16.13.1"],\
             ["recharts", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:2.1.14"],\
             ["regenerator-runtime", "npm:0.13.9"],\
+            ["storybook-addon-designs", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz"],\
             ["styled-system", "npm:5.1.5"],\
             ["theme-ui", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:0.10.0"],\
             ["use-resize-observer", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:8.0.0"],\
@@ -7037,7 +7114,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "npm:26.6.3"],\
             ["jest-canvas-mock", "npm:2.4.0"],\
             ["lodash", "npm:4.17.21"],\
-            ["mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.5.0"],\
+            ["mdi-react", "virtual:054af8f626b58c8bd7ac066c328f41d1287444f25d70434f014bae91c904f3c4334be645c1eef8d484350b953464c10774078c58ba83cbe9a47f3b999692ebde#npm:7.5.0"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:16.14.0"],\
             ["react-dom", "virtual:36a01d8083315b8a6e8362097258ea8bc0f9dfb672cb210742e054760850c673a1038f542a6b7156397b5275ace8ee0482231cac5e8898044fa1a1c29f78ee5b#npm:16.14.0"],\
@@ -7118,19 +7195,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@pingux/mdi-react", [\
-        ["npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz", {\
-          "packageLocation": "./.yarn/cache/@pingux-mdi-react-npm-1.0.0-55339fa814-fb58cb6180.zip/node_modules/@pingux/mdi-react/",\
+        ["npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz", {\
+          "packageLocation": "./.yarn/cache/@pingux-mdi-react-npm-1.2.0-4bc225c690-7f91fdd44c.zip/node_modules/@pingux/mdi-react/",\
           "packageDependencies": [\
-            ["@pingux/mdi-react", "npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"]\
+            ["@pingux/mdi-react", "npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@pingux-mdi-react-virtual-ecca3ef246/0/cache/@pingux-mdi-react-npm-1.0.0-55339fa814-fb58cb6180.zip/node_modules/@pingux/mdi-react/",\
+        ["virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@pingux-mdi-react-virtual-73a808cc10/0/cache/@pingux-mdi-react-npm-1.2.0-4bc225c690-7f91fdd44c.zip/node_modules/@pingux/mdi-react/",\
           "packageDependencies": [\
-            ["@pingux/mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"],\
+            ["@pingux/mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"],\
             ["@types/react", null],\
-            ["react", "npm:16.14.0"]\
+            ["react", "npm:16.14.0"],\
+            ["uuid", "npm:9.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fuuid%2F-%2Fuuid-9.0.0.tgz"]\
           ],\
           "packagePeers": [\
             "@types/react",\
@@ -7138,12 +7216,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@pingux-mdi-react-virtual-4b784f5ea1/0/cache/@pingux-mdi-react-npm-1.0.0-55339fa814-fb58cb6180.zip/node_modules/@pingux/mdi-react/",\
+        ["virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@pingux-mdi-react-virtual-1bde917c54/0/cache/@pingux-mdi-react-npm-1.2.0-4bc225c690-7f91fdd44c.zip/node_modules/@pingux/mdi-react/",\
           "packageDependencies": [\
-            ["@pingux/mdi-react", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.0.0.tgz"],\
+            ["@pingux/mdi-react", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:1.2.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40pingux%2Fmdi-react%2F-%2Fmdi-react-1.2.0.tgz"],\
             ["@types/react", "npm:16.14.32"],\
-            ["react", "npm:16.14.0"]\
+            ["react", "npm:16.14.0"],\
+            ["uuid", "npm:9.0.0::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fuuid%2F-%2Fuuid-9.0.0.tgz"]\
           ],\
           "packagePeers": [\
             "@types/react",\
@@ -21997,6 +22076,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-tinycolor2-npm-1.4.3-90e6bf0ed8-61984b2825.zip/node_modules/@types/tinycolor2/",\
           "packageDependencies": [\
             ["@types/tinycolor2", "npm:1.4.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/trusted-types", [\
+        ["npm:2.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40types%2Ftrusted-types%2F-%2Ftrusted-types-2.0.3.tgz", {\
+          "packageLocation": "./.yarn/cache/@types-trusted-types-npm-2.0.3-85e7dbd469-4794804bc4.zip/node_modules/@types/trusted-types/",\
+          "packageDependencies": [\
+            ["@types/trusted-types", "npm:2.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40types%2Ftrusted-types%2F-%2Ftrusted-types-2.0.3.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -40343,6 +40431,40 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["lit", [\
+        ["npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit%2F-%2Flit-2.7.4.tgz", {\
+          "packageLocation": "./.yarn/cache/lit-npm-2.7.4-63767a02cd-7494f4e814.zip/node_modules/lit/",\
+          "packageDependencies": [\
+            ["lit", "npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit%2F-%2Flit-2.7.4.tgz"],\
+            ["@lit/reactive-element", "npm:1.6.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit%2Freactive-element%2F-%2Freactive-element-1.6.1.tgz"],\
+            ["lit-element", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-element%2F-%2Flit-element-3.3.2.tgz"],\
+            ["lit-html", "npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-html%2F-%2Flit-html-2.7.4.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lit-element", [\
+        ["npm:3.3.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-element%2F-%2Flit-element-3.3.2.tgz", {\
+          "packageLocation": "./.yarn/cache/lit-element-npm-3.3.2-17c9efd330-afe50825be.zip/node_modules/lit-element/",\
+          "packageDependencies": [\
+            ["lit-element", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-element%2F-%2Flit-element-3.3.2.tgz"],\
+            ["@lit-labs/ssr-dom-shim", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit-labs%2Fssr-dom-shim%2F-%2Fssr-dom-shim-1.1.1.tgz"],\
+            ["@lit/reactive-element", "npm:1.6.1::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40lit%2Freactive-element%2F-%2Freactive-element-1.6.1.tgz"],\
+            ["lit-html", "npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-html%2F-%2Flit-html-2.7.4.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lit-html", [\
+        ["npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-html%2F-%2Flit-html-2.7.4.tgz", {\
+          "packageLocation": "./.yarn/cache/lit-html-npm-2.7.4-caa89a8022-3809d62d8b.zip/node_modules/lit-html/",\
+          "packageDependencies": [\
+            ["lit-html", "npm:2.7.4::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Flit-html%2F-%2Flit-html-2.7.4.tgz"],\
+            ["@types/trusted-types", "npm:2.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40types%2Ftrusted-types%2F-%2Ftrusted-types-2.0.3.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["load-bmfont", [\
         ["npm:1.4.1", {\
           "packageLocation": "./.yarn/cache/load-bmfont-npm-1.4.1-f3f8c0beeb-688d932fb0.zip/node_modules/load-bmfont/",\
@@ -41480,24 +41602,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.5.0", {\
-          "packageLocation": "./.yarn/__virtual__/mdi-react-virtual-7e6694ffc7/0/cache/mdi-react-npm-7.5.0-d9b52f1759-6c4014a79b.zip/node_modules/mdi-react/",\
+        ["virtual:054af8f626b58c8bd7ac066c328f41d1287444f25d70434f014bae91c904f3c4334be645c1eef8d484350b953464c10774078c58ba83cbe9a47f3b999692ebde#npm:7.5.0", {\
+          "packageLocation": "./.yarn/__virtual__/mdi-react-virtual-2d570abdd0/0/cache/mdi-react-npm-7.5.0-d9b52f1759-6c4014a79b.zip/node_modules/mdi-react/",\
           "packageDependencies": [\
-            ["mdi-react", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.5.0"],\
+            ["mdi-react", "virtual:054af8f626b58c8bd7ac066c328f41d1287444f25d70434f014bae91c904f3c4334be645c1eef8d484350b953464c10774078c58ba83cbe9a47f3b999692ebde#npm:7.5.0"],\
             ["@types/react", null],\
-            ["react", "npm:16.14.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:7.5.0", {\
-          "packageLocation": "./.yarn/__virtual__/mdi-react-virtual-7fcca8132b/0/cache/mdi-react-npm-7.5.0-d9b52f1759-6c4014a79b.zip/node_modules/mdi-react/",\
-          "packageDependencies": [\
-            ["mdi-react", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:7.5.0"],\
-            ["@types/react", "npm:16.14.32"],\
             ["react", "npm:16.14.0"]\
           ],\
           "packagePeers": [\
@@ -52284,6 +52393,91 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/store2-npm-2.14.2-c286d27e4f-6f270fc5ba.zip/node_modules/store2/",\
           "packageDependencies": [\
             ["store2", "npm:2.14.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["storybook-addon-designs", [\
+        ["npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz", {\
+          "packageLocation": "./.yarn/cache/storybook-addon-designs-npm-7.0.0-beta.2-a83db71608-14a199d2b3.zip/node_modules/storybook-addon-designs/",\
+          "packageDependencies": [\
+            ["storybook-addon-designs", "npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/storybook-addon-designs-virtual-6f01a61720/0/cache/storybook-addon-designs-npm-7.0.0-beta.2-a83db71608-14a199d2b3.zip/node_modules/storybook-addon-designs/",\
+          "packageDependencies": [\
+            ["storybook-addon-designs", "virtual:1041540a52ba5ddad9111337a30d8e3604d72a450bbafc9d3df722808a5dd9fdac025c3bbf379da807b92162a32eef641901870e3de1af1d5ad890f1d362468b#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz"],\
+            ["@figspec/react", "virtual:6f01a6172076ba884877822104f30319e115ab889a621888f4618bfbd2f5f67521ded8ac9634d45b3310e3c786251ea97a822303bffbb9d229d6b5030131c7a7#npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz"],\
+            ["@storybook/addon-docs", "virtual:36a01d8083315b8a6e8362097258ea8bc0f9dfb672cb210742e054760850c673a1038f542a6b7156397b5275ace8ee0482231cac5e8898044fa1a1c29f78ee5b#npm:6.5.12"],\
+            ["@storybook/addons", "virtual:398df49c4982ea3f4385dbd967d4259f2339564752beb52a47ec935d8b4842031a894cc5daa73cfdf0578b987fc71f9cfa4d4db7a84617dc0061ea723d57609d#npm:6.5.12"],\
+            ["@storybook/api", null],\
+            ["@storybook/components", null],\
+            ["@storybook/theming", "virtual:398df49c4982ea3f4385dbd967d4259f2339564752beb52a47ec935d8b4842031a894cc5daa73cfdf0578b987fc71f9cfa4d4db7a84617dc0061ea723d57609d#npm:6.5.12"],\
+            ["@types/react", null],\
+            ["@types/react-dom", null],\
+            ["@types/storybook__addon-docs", null],\
+            ["@types/storybook__addons", null],\
+            ["@types/storybook__api", null],\
+            ["@types/storybook__components", null],\
+            ["@types/storybook__theming", null],\
+            ["react", "npm:16.14.0"],\
+            ["react-dom", "virtual:36a01d8083315b8a6e8362097258ea8bc0f9dfb672cb210742e054760850c673a1038f542a6b7156397b5275ace8ee0482231cac5e8898044fa1a1c29f78ee5b#npm:16.14.0"]\
+          ],\
+          "packagePeers": [\
+            "@storybook/addon-docs",\
+            "@storybook/addons",\
+            "@storybook/api",\
+            "@storybook/components",\
+            "@storybook/theming",\
+            "@types/react-dom",\
+            "@types/react",\
+            "@types/storybook__addon-docs",\
+            "@types/storybook__addons",\
+            "@types/storybook__api",\
+            "@types/storybook__components",\
+            "@types/storybook__theming",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/storybook-addon-designs-virtual-5c5b1e59bd/0/cache/storybook-addon-designs-npm-7.0.0-beta.2-a83db71608-14a199d2b3.zip/node_modules/storybook-addon-designs/",\
+          "packageDependencies": [\
+            ["storybook-addon-designs", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:7.0.0-beta.2::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2Fstorybook-addon-designs%2F-%2Fstorybook-addon-designs-7.0.0-beta.2.tgz"],\
+            ["@figspec/react", "virtual:5c5b1e59bd40e3e22db424540cb955fd5f7709264435c2f9cd71f2bcb3951d0c51c747ec9975b327a31bccbf25c2cfd010f6aef10c3ddd378ad4de13187a104d#npm:1.0.3::__archiveUrl=https%3A%2F%2Fart01.corp.pingidentity.com%2Fapi%2Fnpm%2Fnpm-virtual%2F%40figspec%2Freact%2F-%2Freact-1.0.3.tgz"],\
+            ["@storybook/addon-docs", "virtual:ffea2975246caca1e66b552a730b557d42534f451187acdf0c678015f405325bddbbe66fa2ce447b445f62c3a68301fac8db0812d8b3bd5b5242c17deb59d22e#npm:6.5.12"],\
+            ["@storybook/addons", "virtual:ffea2975246caca1e66b552a730b557d42534f451187acdf0c678015f405325bddbbe66fa2ce447b445f62c3a68301fac8db0812d8b3bd5b5242c17deb59d22e#npm:6.5.12"],\
+            ["@storybook/api", null],\
+            ["@storybook/components", null],\
+            ["@storybook/theming", "virtual:aa823f606a349dd1514eab1edf6763478a202d2c1d9032ef2eaa06881cc29cedf7fefb1c3c76d561452933e6e49bd2ffae65757e29943509038697337cf146bf#npm:6.5.12"],\
+            ["@types/react", "npm:16.14.32"],\
+            ["@types/react-dom", null],\
+            ["@types/storybook__addon-docs", null],\
+            ["@types/storybook__addons", null],\
+            ["@types/storybook__api", null],\
+            ["@types/storybook__components", null],\
+            ["@types/storybook__theming", null],\
+            ["react", "npm:16.14.0"],\
+            ["react-dom", "virtual:ffea2975246caca1e66b552a730b557d42534f451187acdf0c678015f405325bddbbe66fa2ce447b445f62c3a68301fac8db0812d8b3bd5b5242c17deb59d22e#npm:16.14.0"]\
+          ],\
+          "packagePeers": [\
+            "@storybook/addon-docs",\
+            "@storybook/addons",\
+            "@storybook/api",\
+            "@storybook/components",\
+            "@storybook/theming",\
+            "@types/react-dom",\
+            "@types/react",\
+            "@types/storybook__addon-docs",\
+            "@types/storybook__addons",\
+            "@types/storybook__api",\
+            "@types/storybook__components",\
+            "@types/storybook__theming",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

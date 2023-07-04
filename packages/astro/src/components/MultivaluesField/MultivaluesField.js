@@ -1,9 +1,9 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
+import Clear from '@pingux/mdi-react/CloseIcon';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { useListState } from '@react-stately/list';
-import Clear from 'mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
 import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
@@ -93,8 +93,12 @@ const MultivaluesField = forwardRef((props, ref) => {
 
   const close = () => setIsOpen(false);
 
+  const closeBadgeRefs = useRef([]);
+  const inputWrapperRef = useRef();
   const inputRef = useRef();
   /* istanbul ignore next */
+  useImperativeHandle(ref, () => inputWrapperRef.current);
+
   useImperativeHandle(ref, () => inputRef.current);
   const listBoxRef = useRef();
   const popoverRef = useRef();
@@ -107,7 +111,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     placement: `${direction} end`,
     scrollRef: listBoxRef,
     shouldFlip: !isNotFlippable,
-    targetRef: inputRef,
+    targetRef: inputWrapperRef,
   });
 
   // Update position once the ListBox has rendered. This ensures that
@@ -126,13 +130,13 @@ const MultivaluesField = forwardRef((props, ref) => {
 
   const onResize = useCallback(() => {
     /* istanbul ignore next */
-    if (inputRef.current) {
-      setMenuWidth(`${inputRef.current.offsetWidth + 2}px`);
+    if (inputWrapperRef.current) {
+      setMenuWidth(`${inputWrapperRef.current.offsetWidth + 2}px`);
     }
-  }, [inputRef, isOpen, setMenuWidth]);
+  }, [inputWrapperRef, isOpen, setMenuWidth]);
 
   useResizeObserver({
-    ref: inputRef,
+    ref: inputWrapperRef,
     onResize,
   });
 
@@ -231,8 +235,26 @@ const MultivaluesField = forwardRef((props, ref) => {
     if (onKeyDown) onKeyDown(e.nativeEvent);
   };
 
-  const deleteItem = key => {
+  const deleteItem = (key, e) => {
+    const activeBadgesKeys = closeBadgeRefs.current.reduce((result, item) => {
+      if (item) {
+        result.push(item.dataset.item);
+      }
+      return result;
+    }, []);
+
     selectionManager.toggleSelection(key);
+
+    if (e.pointerType !== 'keyboard') return;
+
+    if (activeBadgesKeys.length > 1) {
+      const badgeIndex = activeBadgesKeys.findIndex(item => item === key);
+      const nextFocusBadgeIndex = badgeIndex === activeBadgesKeys.length - 1
+        ? badgeIndex - 1 : badgeIndex;
+      closeBadgeRefs.current[nextFocusBadgeIndex].focus();
+    } else {
+      inputRef.current.focus();
+    }
   };
 
   const readOnlyTextItem = (key, name) => {
@@ -293,7 +315,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       })
   );
 
-  const multivaluesFieldBadge = item => (
+  const multivaluesFieldBadge = (item, index) => (
     <Badge
       key={item.key}
       role="presentation"
@@ -305,11 +327,13 @@ const MultivaluesField = forwardRef((props, ref) => {
     >
       <IconButton
         aria-label={`delete ${item.name}`}
-        onPress={() => deleteItem(item.key)}
+        data-item={item.name}
+        onPress={e => deleteItem(item.key, e)}
+        ref={el => closeBadgeRefs.current[index] = el} // eslint-disable-line
         variant="badge.deleteButton"
         {...item.buttonProps}
       >
-        <Icon icon={Clear} color="white" size={14} />
+        <Icon icon={Clear} color="white" size={14} title={{ name: 'Clear Icon' }} />
       </IconButton>
     </Badge>
   );
@@ -317,11 +341,11 @@ const MultivaluesField = forwardRef((props, ref) => {
   const selectedItems = (
     <>
       {Array.from(selectionManager.selectedKeys)
-        .map(key => {
+        .map((key, i) => {
           const item = [...initialItems, ...customItems].find(el => el.key === key);
           if (item) {
             return (
-              multivaluesFieldBadge(item)
+              multivaluesFieldBadge(item, i)
             );
           }
           return null;
@@ -354,6 +378,7 @@ const MultivaluesField = forwardRef((props, ref) => {
       'aria-controls': listBoxRef.current?.id,
       'aria-expanded': isOpen,
       role: 'combobox',
+      ref: inputRef,
     },
     hasAutoFocus,
     hasNoStatusIndicator,
@@ -363,7 +388,7 @@ const MultivaluesField = forwardRef((props, ref) => {
     label,
     placeholder,
     wrapperProps: {
-      ref: inputRef,
+      ref: inputWrapperRef,
       variant: 'forms.input.multivaluesWrapper',
       sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },
     },
@@ -392,12 +417,15 @@ const MultivaluesField = forwardRef((props, ref) => {
           }}
           onKeyDown={keyDown}
           onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-          slots={{ beforeInput: <>
-            {readOnlyItems}
-            {' '}
-            {selectedItems}
-            {readOnlyInputEntry}
-        </> }} // eslint-disable-line
+          slots={{
+            beforeInput:
+  <>
+    {readOnlyItems}
+    {' '}
+    {selectedItems}
+    {readOnlyInputEntry}
+  </>,
+          }} // eslint-disable-line
           value={filterString}
           helperText={helperText}
           aria-invalid={status === 'error' && true}

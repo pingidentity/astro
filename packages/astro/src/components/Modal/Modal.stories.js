@@ -1,4 +1,5 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useModalState } from '../../hooks';
@@ -9,6 +10,7 @@ import {
   OverlayProvider,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 
 import ModalReadme from './Modal.mdx';
@@ -16,6 +18,7 @@ import ModalReadme from './Modal.mdx';
 export default {
   title: 'Components/Modal',
   component: Modal,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -130,4 +133,11 @@ export const Default = args => {
       )}
     </OverlayProvider>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.modal.default,
+  },
 };

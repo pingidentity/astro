@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import AccountIcon from 'mdi-react/AccountIcon';
-import MoreVertIcon from 'mdi-react/MoreVertIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -11,6 +12,7 @@ import {
   Separator,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 import ListItemReadme from './ListItem.mdx';
@@ -18,6 +20,7 @@ import ListItemReadme from './ListItem.mdx';
 export default {
   title: 'Components/ListItem',
   component: ListItem,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -47,18 +50,26 @@ export const Default = args => (
           mr="sm"
           color="accent.40"
           size={32}
+          title={{ name: 'Account Icon' }}
         />
         <Text variant="itemTitle" alignSelf="center">Fons Vernall</Text>
       </Box>
       <Box isRow alignSelf="center">
         <IconButton aria-label="filter">
-          <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
+          <Icon icon={MoreVertIcon} size="sm" color="neutral.20" title={{ name: 'More Vertical Icon' }} />
         </IconButton>
       </Box>
     </ListItem>
     <Separator margin={0} />
   </>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listItem.default,
+  },
+};
 
 export const WithSubtitle = args => (
   <>
@@ -71,6 +82,7 @@ export const WithSubtitle = args => (
           mr="sm"
           color="accent.40"
           size={32}
+          title={{ name: 'Account Icon' }}
         />
         <Box>
           <Text variant="itemTitle">Fons Vernall</Text>
@@ -79,7 +91,7 @@ export const WithSubtitle = args => (
       </Box>
       <Box isRow alignSelf="center">
         <IconButton aria-label="filter">
-          <Icon icon={MoreVertIcon} size="sm" color="neutral.20" />
+          <Icon icon={MoreVertIcon} size="sm" color="neutral.20" title={{ name: 'More Vertical Icon' }} />
         </IconButton>
       </Box>
     </ListItem>
@@ -111,6 +123,7 @@ export const WithHoverHandlers = args => {
             mr="sm"
             color="accent.40"
             size={32}
+            title={{ name: 'Account Icon' }}
           />
           <Box sx={sx(isHovered)}>
             <Text variant="itemTitle">Fons Vernall</Text>
@@ -119,7 +132,7 @@ export const WithHoverHandlers = args => {
         </Box>
         <Box isRow alignSelf="center">
           <IconButton size={26} aria-label="filter">
-            <Icon icon={MoreVertIcon} size={20} color="neutral.20" />
+            <Icon icon={MoreVertIcon} size={20} color="neutral.20" title={{ name: 'More Vertical Icon' }} />
           </IconButton>
         </Box>
       </ListItem>

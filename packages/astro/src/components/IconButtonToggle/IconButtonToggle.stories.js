@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import EyeOffIcon from 'mdi-react/EyeOffOutlineIcon';
-import EyeIcon from 'mdi-react/EyeOutlineIcon';
+import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
+import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { IconButtonToggle } from '../../index';

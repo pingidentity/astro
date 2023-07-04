@@ -1,6 +1,6 @@
 import React from 'react';
+import ApplicationIcon from '@pingux/mdi-react/ApplicationIcon';
 import { render, screen } from '@testing-library/react';
-import ApplicationIcon from 'mdi-react/ApplicationIcon';
 
 import { DataTableMultiLine } from '../../index';
 

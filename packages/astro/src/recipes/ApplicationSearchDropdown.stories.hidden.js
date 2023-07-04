@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo, useRef, useState } from 'react';
 import { FocusScope, useOverlayPosition } from 'react-aria';
+import Email from '@pingux/mdi-react/EmailIcon';
+import Pin from '@pingux/mdi-react/PinIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import { createFocusManager } from '@react-aria/focus';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect } from '@react-aria/utils';
-import Email from 'mdi-react/EmailIcon';
-import Pin from 'mdi-react/PinIcon';
-import SearchIcon from 'mdi-react/SearchIcon';
 
 import {
   Box,
@@ -137,11 +137,14 @@ export const Default = () => {
           >
             <Icon
               icon={Pin}
-              sx={{ transform: 'rotate(45deg)',
+              sx={{
+                transform: 'rotate(45deg)',
                 '& > path': {
                   fill:
-                isPinned ? 'success.bright' : 'neutral.50',
-                } }}
+                    isPinned ? 'success.bright' : 'neutral.50',
+                },
+              }}
+              title={{ name: 'Pin Icon' }}
               size="sm"
             />
           </IconButton>

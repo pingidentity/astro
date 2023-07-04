@@ -79,11 +79,12 @@ pipeline {
     PING_TEAM_NAME = "ux"
   }
   stages {
-    stage('Link') {
+    stage('install and link') {
       steps {
         dir("${env.WORKSPACE}") {
           container('ui-library-admin') {
             echo "Linking packages"
+            sh "yarn install"
             sh "yarn build-ci"
           }
         }
@@ -94,7 +95,8 @@ pipeline {
     stage('build-test-lint') {
       steps {
         container('ui-library-admin') {
-          sh """
+          sh """ 
+            yarn install
             git config --global --add safe.directory '*'
             git log -1 --pretty=%B | yarn commitlint
             yarn build-ci

@@ -11,11 +11,11 @@ import {
   useTableRowGroup,
   VisuallyHidden,
 } from 'react-aria';
+import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
+import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
 import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
 import { TableLayout } from '@react-stately/layout';
 import { useTableColumnResizeState, useTableState } from '@react-stately/table';
-import MenuDownIcon from 'mdi-react/MenuDownIcon';
-import MenuUpIcon from 'mdi-react/MenuUpIcon';
 import PropTypes from 'prop-types';
 
 import {
@@ -76,13 +76,13 @@ const DataTable = forwardRef((props, ref) => {
       // If props.rowHeight is auto, then use estimated heights based on scale,
       // otherwise use fixed heights.
       rowHeight:
-          props.overflowMode === 'wrap' ? null : ROW_HEIGHTS[density][scale],
+        props.overflowMode === 'wrap' ? null : ROW_HEIGHTS[density][scale],
       estimatedRowHeight:
-          props.overflowMode === 'wrap' ? ROW_HEIGHTS[density][scale] : null,
+        props.overflowMode === 'wrap' ? ROW_HEIGHTS[density][scale] : null,
       headingHeight:
-          props.overflowMode === 'wrap' ? null : DEFAULT_HEADER_HEIGHT[scale],
+        props.overflowMode === 'wrap' ? null : DEFAULT_HEADER_HEIGHT[scale],
       estimatedHeadingHeight:
-          props.overflowMode === 'wrap' ? DEFAULT_HEADER_HEIGHT[scale] : null,
+        props.overflowMode === 'wrap' ? DEFAULT_HEADER_HEIGHT[scale] : null,
     }),
     [props.overflowMode, scale, density],
   );
@@ -289,9 +289,9 @@ function TableColumnHeader(props) {
   const columnProps = column.props;
   const arrowIcon = state.sortDescriptor?.direction === 'ascending'
     && column.key === state.sortDescriptor?.column ? (
-      <Icon icon={MenuUpIcon} />
+      <Icon icon={MenuUpIcon} title={{ name: 'Menu Up Icon' }} />
     ) : (
-      <Icon icon={MenuDownIcon} color="active" />
+      <Icon icon={MenuDownIcon} color="active" title={{ name: 'Menu Down Icon' }} />
     );
   const allProps = [columnHeaderProps];
 

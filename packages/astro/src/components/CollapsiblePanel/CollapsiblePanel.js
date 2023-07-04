@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
+import kebabCase from 'lodash/kebabCase';
 import PropTypes from 'prop-types';
 
 import { Box, CollapsiblePanelContainer, ListView, Text } from '../..';
@@ -38,6 +39,8 @@ const CollapsiblePanel = forwardRef((props, ref) => {
     isFocused: isFocusVisible,
   });
 
+  const collapsiblePanelId = `${kebabCase(listTitle)}-collapsible-panel`;
+
   return (
     <CollapsiblePanelContainer
       closeAriaLabel={closeAriaLabel}
@@ -46,10 +49,12 @@ const CollapsiblePanel = forwardRef((props, ref) => {
       onOpenChange={onOpenChange}
       openAriaLabel={openAriaLabel}
       selectedFilterCount={selectedFilterCount}
+      collapsiblePanelId={collapsiblePanelId}
     >
       <Box
         className={classNames}
         data-testid="collapsible-panel"
+        id={collapsiblePanelId}
         ref={ref}
         tabIndex={-1}
         variant="collapsiblePanel.content"
@@ -65,11 +70,11 @@ const CollapsiblePanel = forwardRef((props, ref) => {
           </Text>
           {selectedFilterCount
             && (
-            <CollapsiblePanelBadge
-              margin="0"
-              className="title-badge"
-              selectedFilterCount={selectedFilterCount}
-            />
+              <CollapsiblePanelBadge
+                margin="0"
+                className="title-badge"
+                selectedFilterCount={selectedFilterCount}
+              />
             )}
         </Box>
         <Box pl="xs" pr="xs">

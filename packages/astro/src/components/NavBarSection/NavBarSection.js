@@ -132,10 +132,10 @@ const SectionItem = ({ item, onKeyDown: onKeyDownProp }) => {
       </Button>
       {isExpanded
         && (
-        <NavBarItemBody
-          item={item}
-          onKeyDown={onKeyDown}
-        />
+          <NavBarItemBody
+            item={item}
+            onKeyDown={onKeyDown}
+          />
         )}
     </>
   );
@@ -174,9 +174,11 @@ NavBarSection.propTypes = {
 
 SectionItem.propTypes = {
   onKeyDown: PropTypes.func,
-  item: PropTypes.shape({ key: PropTypes.string,
+  item: PropTypes.shape({
+    key: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
-    'aria-label': PropTypes.string }),
+    'aria-label': PropTypes.string,
+  }),
   state: PropTypes.shape({
     collection: PropTypes.shape({}),
     selectedKey: PropTypes.string,

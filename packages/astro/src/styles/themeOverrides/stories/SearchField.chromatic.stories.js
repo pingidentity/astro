@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchIcon from 'mdi-react/SearchIcon';
+import SearchIcon from '@pingux/mdi-react/SearchIcon';
 
 import { SearchField } from '../../../index';
 import WithUiLibraryCss from '../withUiLibraryCss';

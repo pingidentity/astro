@@ -18,6 +18,7 @@ variables:
 
 stages:
   - build-ci-image
+  - setup
   - build-test-lint
   - screenshot
   - deploy
@@ -28,3 +29,32 @@ stages:
     - pingux-runner-s3-cache
   image: $STABLE_IMAGE
   interruptible: true
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/unplugged
+    policy: pull
+
+
+yarn-install:
+  extends: 
+    - .base-job
+  stage: setup
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - yarn.lock
+    # Run automatically for all commits on develop and master
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "master"'
+  script: 
+    - yarn install
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/unplugged
+    policy: push
+    untracked: true

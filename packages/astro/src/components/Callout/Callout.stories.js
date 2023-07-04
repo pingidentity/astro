@@ -1,4 +1,5 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -6,6 +7,7 @@ import {
   Link,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
@@ -14,6 +16,7 @@ import CalloutReadme from './Callout.mdx';
 export default {
   title: 'Components/Callout',
   component: Callout,
+  decorators: [withDesign],
   argTypes: {
     ...statusArgTypes,
   },
@@ -50,6 +53,13 @@ export const Default = args => (
     </Text>
   </Callout>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.callout.default,
+  },
+};
 
 export const ErrorStatus = () => (
   <Callout status={statuses.ERROR}>

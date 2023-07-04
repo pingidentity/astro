@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -8,6 +9,7 @@ import {
   Text,
   TextField,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import AccordionReadme from './AccordionGroup.mdx';
 
@@ -26,6 +28,7 @@ const itemArrayDisabled = [
 export default {
   title: 'Components/AccordionGroup',
   component: AccordionGroup,
+  decorators: [withDesign],
   parameters: {
     actions: {
       argTypesRegex: '^on.*',
@@ -73,6 +76,13 @@ export const Default = args => {
       </Item>
     </AccordionGroup>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.accordionGroup.default,
+  },
 };
 
 export const Multiple = () => {

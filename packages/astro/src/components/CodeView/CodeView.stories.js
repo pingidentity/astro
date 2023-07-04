@@ -1,10 +1,12 @@
 import React from 'react';
 import Prism from 'prismjs';
+import { withDesign } from 'storybook-addon-designs';
 
 import 'prismjs/components/prism-powershell';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeView } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import CodeViewReadme from './CodeView.mdx';
 
@@ -64,6 +66,7 @@ const code = `{
 export default {
   title: 'Components/CodeView',
   component: CodeView,
+  decorators: [withDesign],
   argTypes: {
     children: {
       defaultValue: code,
@@ -109,6 +112,13 @@ export const Default = args => (
   <CodeView {...args} />
 );
 
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.codeView.default,
+  },
+};
+
 export const WithLineNumbers = () => (
   <CodeView hasLineNumbers>
     {/* const code =  `{
@@ -133,7 +143,7 @@ const BadgeWithIcon = () => (
   <>
     <Badge label="Badge with Icon Button" bg="navy">
       <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
-        <Icon icon={Clear} ml="xs" size="14px" />
+        <Icon icon={Clear} ml="xs" size="14px" title={{ name: 'Clear Icon' }} />
       </IconButton>
     </Badge>
 
@@ -141,14 +151,14 @@ const BadgeWithIcon = () => (
 
     <Badge label="Badge with Icon Button">
       <IconButton aria-label="Clear Badge with Icon Button" variant="inverted">
-        <Icon icon={Earth} ml="xs" size="14px" />
+        <Icon icon={Earth} ml="xs" size="14px" title={{ name: 'Earth Icon' }} />
       </IconButton>
     </Badge>
 
     <div style={{ padding: '5px' }} />
 
     <Badge label="Badge with Icon" bg="green">
-      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" />
+      <Icon icon={ContentCopy} ml="xs" size="14px" color="white" title={{ name: 'Copy Icon' }} />
     </Badge>
   </>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import CloseIcon from 'mdi-react/CloseIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 
 import { useModalState } from '../hooks';
 import {
@@ -58,7 +58,7 @@ const sx = {
   },
   gridContainerStyle: {
     display:
-    'grid !important',
+      'grid !important',
     'gridTemplateColumns': 'repeat(auto-fit, minmax(0, 146px))',
     gap: '13px',
     maxWidth: '862px',
@@ -97,7 +97,8 @@ const sx = {
 };
 
 const retailSVG = props => (
-  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="retail-icon-title" {...props}>
+    <title id="retail-icon-title">Retail Icon</title>
     <path fillRule="evenodd" clipRule="evenodd" d="M250 29.5L217 29.5V20.5L250 20.5V29.5Z" fill="#B3282D" />
     <path fillRule="evenodd" clipRule="evenodd" d="M45.5 235H16V226H45.5V235Z" fill="#051727" />
     <path fillRule="evenodd" clipRule="evenodd" d="M18 208.5H0V217.5H18V208.5ZM28 217.5L38 217.5V208.5H28V217.5Z" fill="#B3282D" />
@@ -126,7 +127,8 @@ const retailSVG = props => (
 );
 
 const airlineSVG = props => (
-  <svg width="251" height="251" viewBox="0 0 251 251" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="251" height="251" viewBox="0 0 251 251" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="airline-icon-title" {...props}>
+    <title id="airline-icon-title">Airline Icon</title>
     <g clipPath="url(#clip0_1363_5255)">
 
       <path
@@ -185,7 +187,8 @@ const airlineSVG = props => (
 );
 
 const educationSVG = props => (
-  <svg width="251" height="251" viewBox="0 0 251 251" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="251" height="251" viewBox="0 0 251 251" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="education-icon-title" {...props}>
+    <title id="education-icon-title">Education Icon</title>
     <g clipPath="url(#clip0_1363_5233)">
       <path
         fillRule="evenodd"
@@ -250,7 +253,8 @@ const educationSVG = props => (
 );
 
 const financialSVG = props => (
-  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="financial-icon-title" {...props}>
+    <title id="financial-icon-title">Fincancial Icon</title>
 
     <g clipPath="url(#clip0_2_553)">
 
@@ -310,7 +314,8 @@ const financialSVG = props => (
 );
 
 const governmentSVG = props => (
-  <svg width="251" height="250" viewBox="0 0 251 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="251" height="250" viewBox="0 0 251 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="govermant-icon-title" {...props}>
+    <title id="govermant-icon-title">Govermant Icon</title>
     <g clipPath="url(#clip0_2_568)">
       <path
         fillRule="evenodd"
@@ -362,7 +367,8 @@ const governmentSVG = props => (
 );
 
 const healthcareSVG = props => (
-  <svg width="250" height="251" viewBox="0 0 250 251" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="250" height="251" viewBox="0 0 250 251" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="healthcare-icon-title" {...props}>
+    <title id="healthcare-icon-title">Healthcare Icon</title>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -427,7 +433,8 @@ const healthcareSVG = props => (
 );
 
 const hotelSVG = props => (
-  <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="hotel-icon-title" {...props}>
+    <title id="hotel-icon-title">Hotel Icon</title>
     <g clipPath="url(#clip0_212_10020)">
       <path fillRule="evenodd" clipRule="evenodd" d="M4.15229 52.8122H0.0922852V50.7242H4.15229V52.8122Z" fill="#B3282D" />
       <path fillRule="evenodd" clipRule="evenodd" d="M58.0922 6.41222L50.7842 6.41222L50.7842 4.32422L58.0922 4.32422L58.0922 6.41222Z" fill="#B3282D" />
@@ -464,7 +471,8 @@ const hotelSVG = props => (
 );
 
 const manufacturingSVG = props => (
-  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="manufacturing-icon-title" {...props}>
+    <title id="manufacturing-icon-title">Manufacturing Icon</title>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -533,7 +541,8 @@ const manufacturingSVG = props => (
 );
 
 const pharmancySVG = props => (
-  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="pharmancy-icon-title" {...props}>
+    <title id="pharmancy-icon-title">Pharmancy Icon</title>
 
     <path
       fillRule="evenodd"
@@ -595,7 +604,8 @@ const pharmancySVG = props => (
 );
 
 const realtySVG = props => (
-  <svg width="250" height="251" viewBox="0 0 250 251" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width="250" height="251" viewBox="0 0 250 251" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="realty-icon-title" {...props}>
+    <title id="realty-icon-title">Realty Icon</title>
     <g clipPath="url(#clip0_6_8180)">
       <path
         fillRule="evenodd"
@@ -707,7 +717,7 @@ export const Default = () => {
             variant="modalCloseButton"
             onPress={state.close}
           >
-            <Icon icon={CloseIcon} size="sm" />
+            <Icon icon={CloseIcon} size="sm" title={{ name: 'Close Icon' }} />
           </IconButton>
           <Text sx={sx.headingTextStyle}>
             Choose Your Industry

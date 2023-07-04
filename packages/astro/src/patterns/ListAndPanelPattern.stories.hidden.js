@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import AccountIcon from 'mdi-react/AccountIcon';
-import Close from 'mdi-react/CloseIcon';
-import CreateIcon from 'mdi-react/CreateIcon';
-import DotsVertical from 'mdi-react/DotsVerticalIcon';
+import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import Close from '@pingux/mdi-react/CloseIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import DotsVertical from '@pingux/mdi-react/DotsVerticalIcon';
 
 import { useOverlayPanelState } from '../hooks';
 import {
@@ -271,7 +271,7 @@ export const Default = () => {
                 <>
                   <Box isRow sx={sx.listItemBoxStyle}>
                     {person.hasIcon
-                      ? <Icon icon={person.avatar} sx={sx.iconStyle} size={24} />
+                      ? <Icon icon={person.avatar} sx={sx.iconStyle} size={24} title={{ name: 'Avatar Icon' }} />
                       : <Avatar sx={sx.avatarStyle} src={person.avatar} />}
                     <Box>
                       <Text variant="itemTitle">{person.fullname}</Text>
@@ -295,6 +295,7 @@ export const Default = () => {
                     <IconButton aria-label="Dots Vertical Icon">
                       <Icon
                         icon={DotsVertical}
+                        title={{ name: 'Dots Vertical Icon' }}
                         sx={sx.dotsVerticalIcon}
                         size={24}
                       />
@@ -321,7 +322,7 @@ export const Default = () => {
                 >
                   <Box isRow>
                     {selected.hasIcon
-                      ? <Icon icon={selected.avatar} sx={sx.iconStyle} size={24} />
+                      ? <Icon icon={selected.avatar} sx={sx.iconStyle} size={24} title={{ name: 'Avatar Icon' }} />
                       : <Avatar sx={sx.avatarStyle} src={selected.avatar} />}
                     <Box>
                       <Text variant="itemTitle">{selected.fullname}</Text>
@@ -339,7 +340,7 @@ export const Default = () => {
                       justifyContent="center"
                     />
                     <IconButton aria-label="Dots Vertical Icon">
-                      <Icon icon={DotsVertical} sx={sx.dotsVerticalIcon} size={24} />
+                      <Icon icon={DotsVertical} sx={sx.dotsVerticalIcon} size={24} title={{ name: 'Dots Vertical Icon' }} />
                     </IconButton>
                     <IconButton
                       aria-label="Close Icon Button"
@@ -347,7 +348,7 @@ export const Default = () => {
                         onClose(state, triggerRef);
                       }}
                     >
-                      <Icon icon={Close} sx={sx.closeIconStyle} size={24} />
+                      <Icon icon={Close} sx={sx.closeIconStyle} size={24} title={{ name: 'Close Icon' }} />
                     </IconButton>
                   </Box>
                 </ListItem>
@@ -366,7 +367,7 @@ export const Default = () => {
                         variant="inverted"
                         sx={sx.tabsCreateIconButton}
                       >
-                        <Icon icon={CreateIcon} />
+                        <Icon icon={CreateIcon} title={{ name: 'Create Icon' }} />
                       </IconButton>
                     </Box>
                     <Text sx={sx.tabsBoldText}>

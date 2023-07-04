@@ -7,12 +7,12 @@ import React, {
 } from 'react';
 import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
+import ArrowDropDownIcon from '@pingux/mdi-react/ArrowDropDownIcon';
+import ArrowDropUpIcon from '@pingux/mdi-react/ArrowDropUpIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
+import HomeIcon from '@pingux/mdi-react/HomeIcon';
 import { useFilter } from '@react-aria/i18n';
 import { useListState } from '@react-stately/list';
-import ArrowDropDownIcon from 'mdi-react/ArrowDropDownIcon';
-import ArrowDropUpIcon from 'mdi-react/ArrowDropUpIcon';
-import ChevronRightIcon from 'mdi-react/ChevronRightIcon';
-import HomeIcon from 'mdi-react/HomeIcon';
 import PropTypes from 'prop-types';
 
 import {
@@ -207,6 +207,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         {selectedItem}
         <Icon
           icon={popoverState.isOpen ? ArrowDropUpIcon : ArrowDropDownIcon}
+          title={{ name: popoverState.isOpen ? 'Arrow Drop Up Icon' : 'Arrow Drop Down Icon' }}
         />
       </Button>
       <PopoverContainer
@@ -274,7 +275,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
         data-id={breadCrumbDataIds.orgButton}
         elementType="Button"
       >
-        <Icon icon={HomeIcon} mr={7} />
+        <Icon icon={HomeIcon} mr={7} title={{ name: 'Home Icon' }} />
         {name}
       </Item>
       {selectedItem && (

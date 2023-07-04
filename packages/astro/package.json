@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.5.7",
+  "version": "2.6.0-alpha.4",
   "description": "PingUX themeable React component library",
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "@faker-js/faker": "~7.5.0",
     "@internationalized/date": "3.0.1",
     "@mdx-js/react": "^1.6.22",
-    "@pingux/mdi-react": "^1.0.0",
+    "@pingux/mdi-react": "^1.2.0",
     "@react-aria/accordion": "~3.0.0-alpha.11",
     "@react-aria/breadcrumbs": "^3.1.4",
     "@react-aria/button": "^3.2.1",
@@ -86,7 +86,6 @@
     "countries-list": "^2.6.1",
     "emotion-normalize": "^11.0.1",
     "lodash": "^4.17.21",
-    "mdi-react": "^7.4.0",
     "moment": "^2.29.4",
     "prism-react-renderer": "1.2.1",
     "prismjs": "^1.27.0",
@@ -150,6 +149,7 @@
     "react-is": "^16.13.1",
     "react-json-tree": "^0.17.0",
     "react-test-renderer": "16.13.1",
+    "storybook-addon-designs": "beta",
     "use-resize-observer": "^8.0.0",
     "whatwg-fetch": "^3.2.0"
   },
