@@ -1,9 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useGridCell } from '@react-aria/grid';
 import { useHover, usePress } from '@react-aria/interactions';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import MenuUp from 'mdi-react/MenuUpIcon';
 import PropTypes from 'prop-types';
 
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
@@ -93,9 +93,9 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
         {
           hasCaret
           && (
-          <Box isRow alignItems="center" sx={{ mr: '0px' }}>
-            <Icon icon={isSelected ? MenuUp : MenuDown} size={20} />
-          </Box>
+            <Box isRow alignItems="center" sx={{ mr: '0px' }}>
+              <Icon icon={isSelected ? MenuUp : MenuDown} size={20} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+            </Box>
           )
         }
       </Box>

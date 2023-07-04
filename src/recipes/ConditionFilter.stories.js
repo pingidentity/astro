@@ -1,6 +1,6 @@
 import React from 'react';
-import CreateIcon from 'mdi-react/CreateIcon';
-import TrashIcon from 'mdi-react/TrashIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import TrashIcon from '@pingux/mdi-react/TrashIcon';
 
 import {
   Badge,
@@ -74,7 +74,7 @@ export const Default = () => {
 
   const trashButton = (
     <IconButton aria-label="deleteButton" sx={{ alignSelf: 'center' }}>
-      <Icon icon={TrashIcon} sx={{ '& > path': { fill: 'neutral.40' } }} size="md" />
+      <Icon icon={TrashIcon} sx={{ '& > path': { fill: 'neutral.40' } }} size="md" title={{ name: 'Trash Icon' }} />
     </IconButton>
   );
 
@@ -92,7 +92,7 @@ export const Default = () => {
               ml="xs"
               onPress={() => setEditOverviewVisible(true)}
             >
-              <Icon icon={CreateIcon} size="xs" />
+              <Icon icon={CreateIcon} size="xs" title={{ name: 'Create Icon' }} />
             </IconButton>
           </Box>
           <Box isRow>
@@ -386,7 +386,7 @@ export const Default = () => {
               <Button onPress={() => setEditOverviewVisible(false)} variant="link" aria-label="cancel">Cancel</Button>
             </Box>
           </Box>
-        ) }
+        )}
     </Box>
   );
 };

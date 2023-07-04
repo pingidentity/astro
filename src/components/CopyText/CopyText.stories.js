@@ -1,4 +1,5 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -7,6 +8,7 @@ import {
   Link,
   Text,
 } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import CopyTextReadme from './CopyText.mdx';
 
@@ -19,6 +21,7 @@ export default {
         <Story />
       </Box>
     ),
+    withDesign,
   ],
   parameters: {
     docs: {
@@ -42,6 +45,13 @@ export const Default = args => (
     <Text>Here is a value</Text>
   </CopyText>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.copyText.default,
+  },
+};
 
 export const WithLink = args => (
   <CopyText {...args} mode="link">

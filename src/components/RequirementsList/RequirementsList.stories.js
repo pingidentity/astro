@@ -1,13 +1,16 @@
 import React from 'react';
+import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RequirementsList } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import RequirementsListReadme from './RequirementsList.mdx';
 
 export default {
   title: 'Components/RequirementsList',
   component: RequirementsList,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -37,6 +40,13 @@ export default {
 export const Default = ({ label, requirements }) => (
   <RequirementsList label={label} requirements={requirements} />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.requirementsList.default,
+  },
+};
 
 export const Password = () => (
   <RequirementsList

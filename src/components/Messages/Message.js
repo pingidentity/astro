@@ -1,5 +1,5 @@
 import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import CloseIcon from 'mdi-react/CloseIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Text } from '../..';
@@ -16,7 +16,7 @@ export const ARIA_STATUSES = {
 const CloseButton = ({ color, ...others }) => {
   return (
     <IconButton aria-label="Close" {...others}>
-      <Icon color={color} icon={CloseIcon} sx={{ path: { fill: color } }} />
+      <Icon color={color} icon={CloseIcon} sx={{ path: { fill: color } }} title={{ name: 'Close Icon' }} />
     </IconButton>
   );
 };

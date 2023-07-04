@@ -1,5 +1,5 @@
 import React from 'react';
-import VisibilityOffOutlineIcon from 'mdi-react/VisibilityOffOutlineIcon';
+import VisibilityOffOutlineIcon from '@pingux/mdi-react/VisibilityOffOutlineIcon';
 
 import {
   Box,
@@ -44,7 +44,7 @@ export const Default = () => (
       sx={sx.overlay}
       tabIndex="0"
     >
-      <Icon icon={VisibilityOffOutlineIcon} size={22} />
+      <Icon icon={VisibilityOffOutlineIcon} size={22} title={{ name: 'Visibility Off Outline Icon' }} />
     </Box>
   </Box>
 );

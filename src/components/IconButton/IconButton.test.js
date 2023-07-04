@@ -1,6 +1,6 @@
 import React from 'react';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import userEvent from '@testing-library/user-event';
-import CreateIcon from 'mdi-react/CreateIcon';
 
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
@@ -10,7 +10,7 @@ import IconButton from '.';
 const iconTestId = 'test-icon';
 
 const Icon = props => (
-  <CreateIcon data-testid={iconTestId} {...props} />
+  <CreateIcon data-testid={iconTestId} {...props} title={{ name: 'Create Icon' }} />
 );
 
 const testId = 'test-button';

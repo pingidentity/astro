@@ -1,10 +1,10 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
 import { mergeProps, useNumberField } from 'react-aria';
 import { useNumberFieldState } from 'react-stately';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useLocale } from '@react-aria/i18n';
 import omit from 'lodash/omit';
-import MenuDown from 'mdi-react/MenuDownIcon';
-import MenuUp from 'mdi-react/MenuUpIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
@@ -62,10 +62,10 @@ const NumberField = forwardRef((props, ref) => {
   const ControlArrows = (
     <Box variant="forms.numberField.arrows">
       <IconButton {...incrementButtonProps} ref={decRef} tabIndex="0" p={0}>
-        <Icon icon={MenuUp} size={18} />
+        <Icon icon={MenuUp} size={18} title={{ name: 'Menu Up Icon' }} />
       </IconButton>
       <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="0" p={0}>
-        <Icon icon={MenuDown} size={18} />
+        <Icon icon={MenuDown} size={18} title={{ name: 'Menu Down Icon' }} />
       </IconButton>
     </Box>
   );

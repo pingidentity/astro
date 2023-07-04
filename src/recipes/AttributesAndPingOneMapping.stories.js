@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
-import AddIcon from 'mdi-react/AddIcon';
-import CogsIcon from 'mdi-react/CogsIcon';
-import DeleteIcon from 'mdi-react/DeleteIcon';
+import AddIcon from '@pingux/mdi-react/AddIcon';
+import CogsIcon from '@pingux/mdi-react/CogsIcon';
+import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 
 import {
   Box,
@@ -164,7 +164,7 @@ const Row = memo(props => {
           }}
         >
           <IconButton aria-label="icon button with tooltip" title="Advanced Expression">
-            <Icon icon={CogsIcon} size="sm" />
+            <Icon icon={CogsIcon} size="sm" title={{ name: 'Cogs Icon' }} />
           </IconButton>
           <IconButton
             aria-label="icon button with tooltip"
@@ -172,7 +172,7 @@ const Row = memo(props => {
             sx={{ ml: 'xs' }}
             onPress={() => removeRow(index)}
           >
-            <Icon icon={DeleteIcon} size="sm" />
+            <Icon icon={DeleteIcon} size="sm" title={{ name: 'Delete Icon' }} />
           </IconButton>
         </Box>
       </Box>
@@ -245,7 +245,7 @@ export const Default = () => {
         </Text>
         <Button variant="inline" ml="auto" height="22px" minWidth="0px" width="70px" onPress={addRow}>
           <Box isRow alignItems="center" width="38px" justifyContent="center">
-            <Icon icon={AddIcon} mr="xs" color="active" size={15} />
+            <Icon icon={AddIcon} mr="xs" color="active" size={15} title={{ name: 'Add Icon' }} />
             Add
           </Box>
         </Button>

@@ -27,8 +27,9 @@ const Bracket = forwardRef((props, ref) => {
             viewBox="0 0 10 10"
             style={{ flexGrow: 1 }}
             data-testid="isLastLayer"
+            aria-labelledby="bracket-fill-vertical-icon-title"
           >
-            <title>bracket-fill</title>
+            <title id="bracket-fill-vertical-icon-title">bracket-fill</title>
             <g>
               <title>Layer 3</title>
               <line
@@ -52,8 +53,9 @@ const Bracket = forwardRef((props, ref) => {
           preserveAspectRatio="none"
           viewBox="0 0 10 10"
           style={{ flexGrow: 1 }}
+          aria-labelledby="bracket-fill-1-icon-title"
         >
-          <title>bracket-fill</title>
+          <title id="bracket-fill-1-icon-title">bracket-fill</title>
           <g>
             <title>Layer 1</title>
             <line
@@ -68,8 +70,8 @@ const Bracket = forwardRef((props, ref) => {
             />
           </g>
         </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="15">
-          <title>bracket-fill</title>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="15" aria-labelledby="bracket-fill-2-icon-title">
+          <title id="bracket-fill-2-icon-title">bracket-fill</title>
           <g transform="translate(-1, 0)">
             <title>Layer 2</title>
             <path

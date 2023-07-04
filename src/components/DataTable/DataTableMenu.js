@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import DotsVerticalIcon from 'mdi-react/DotsVerticalIcon';
+import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon';
 
 import {
   Box,
@@ -21,7 +21,7 @@ const DataTableMenu = forwardRef((props, ref) => {
       <OverlayProvider>
         <PopoverMenu>
           <IconButton aria-label="row menu">
-            <Icon icon={DotsVerticalIcon} />
+            <Icon icon={DotsVerticalIcon} title={{ name: 'Dots Vertical Icon' }} />
           </IconButton>
           <Menu>
             <Item key="edit">Edit</Item>

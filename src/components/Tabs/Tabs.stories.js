@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LockIcon from 'mdi-react/LockIcon';
+import LockIcon from '@pingux/mdi-react/LockIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -155,7 +155,7 @@ export const TabPanelProps = () => (
 
 export const ContentSlots = () => {
   const beforeTabNode = (
-    <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} />
+    <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} title={{ name: 'Lock Icon' }} />
   );
   const nodeSx = {
     marginLeft: 6,

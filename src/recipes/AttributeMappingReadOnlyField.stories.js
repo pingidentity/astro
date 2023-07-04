@@ -1,6 +1,6 @@
 import React from 'react';
-import AlertCircleIcon from 'mdi-react/AlertCircleIcon';
-import CreateIcon from 'mdi-react/CreateIcon';
+import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -113,7 +113,7 @@ const Row = props => {
         aria-labelledby={withError && helperTextId}
         slots={withError && {
           inContainer: (
-            <Icon icon={AlertCircleIcon} sx={sx.alertCircleIcon} />
+            <Icon icon={AlertCircleIcon} sx={sx.alertCircleIcon} title={{ name: 'Alert Circle Icon' }} />
           ),
         }}
       />
@@ -134,20 +134,20 @@ const Row = props => {
       />
       {withBadge
         && (
-        <Badge
-          label="Required"
-          sx={sx.badge}
-        />
+          <Badge
+            label="Required"
+            sx={sx.badge}
+          />
         )}
       {withTooltip
         && (
-        <Box sx={sx.tooltipBox}>
-          <HelpHint
-            tooltipProps={{ direction: 'bottom' }}
-          >
-            Population set to default
-          </HelpHint>
-        </Box>
+          <Box sx={sx.tooltipBox}>
+            <HelpHint
+              tooltipProps={{ direction: 'bottom' }}
+            >
+              Population set to default
+            </HelpHint>
+          </Box>
         )}
     </Box>
   );
@@ -164,7 +164,7 @@ const Title = () => {
       </Text>
       <Box>
         <IconButton sx={sx.createIconButton} variant="inverted" aria-label="edit header button">
-          <Icon icon={CreateIcon} size="sm" />
+          <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
         </IconButton>
       </Box>
     </Box>
@@ -226,7 +226,7 @@ export const WithError = () => {
 
       {withError && (
         <Box sx={withErrorSx.errorBox}>
-          <Icon size={24} icon={AlertCircleIcon} color="#A31300" />
+          <Icon size={24} icon={AlertCircleIcon} color="#A31300" title={{ name: 'Alert Circle Icon' }} />
           <Text sx={withErrorSx.text} id={helperTextId} role="alert">
             This attribute is unavailable.
             Please map the attribute again or re-map to a different attribute.

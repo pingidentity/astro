@@ -9,13 +9,13 @@ import { Box } from '../../index';
  * Each editable segment of date.
  */
 const DateSegment = forwardRef((props, ref) => {
-  const { segment, state, handlePaste, segments, segmentIndex } = props;
+  const { isLocalEnUS, segment, state, handlePaste, segments, segmentIndex } = props;
 
   const segmentRef = useRef();
   // istanbul ignore next
   useImperativeHandle(ref, () => segmentRef.current);
 
-  const { text, isPlaceholder } = segment;
+  const { text, isPlaceholder, type } = segment;
   const { segmentProps } = useDateSegment(segment, state, segmentRef);
 
   /**
@@ -63,7 +63,7 @@ const DateSegment = forwardRef((props, ref) => {
       onKeyUp={handleKeyEvents}
       onPaste={handlePaste}
     >
-      {text === '/' ? '-' : text.padStart(segment.type === 'year' ? 4 : 2, 0)}
+      {text === '/' ? '-' : text.padStart(isLocalEnUS && (type === 'year' ? 4 : 2), 0)}
     </Box>
   );
 });
@@ -92,6 +92,8 @@ DateSegment.propTypes = {
    * (e: PasteEvent) => void
    */
   handlePaste: PropTypes.func,
+  /** checks if the current locale is en-US */
+  isLocalEnUS: PropTypes.bool,
 };
 
 export default DateSegment;

@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { HiddenSelect } from 'react-aria';
-import MenuDown from 'mdi-react/MenuDownIcon';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
@@ -72,6 +72,7 @@ const SelectFieldBase = forwardRef(({
         <Box as="span" aria-hidden="true" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
+            title={{ name: 'Menu down' }}
             sx={
               state.isOpen
                 ? { transform: 'rotate(180deg)' }
@@ -99,9 +100,9 @@ const SelectFieldBase = forwardRef(({
       {overlay}
       {
         helperText && (
-        <FieldHelperText status={status} id={helperTextId}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status} id={helperTextId}>
+            {helperText}
+          </FieldHelperText>
         )
       }
     </Box>
