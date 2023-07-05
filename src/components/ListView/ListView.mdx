@@ -40,3 +40,7 @@ This component uses the following attributes to assist screen readers:
 - The **`aria-multiselectable`**  attribute is used to indicate that users can toggle between items in the grid. 
 - Each ListViewItem uses the **`aria-rowindex`**  attribute, which defines a component's position in the total number of rows. 
 - Each item also uses the aria-label, **`aria-colindex`**  attributes to indicate the component’s column position and aria-selected to indicate the currently selected state.
+
+#### NOTES:
+- When building a ListView, for styling consistency, its recommended that you use the [StyledListItem](./?path=/story/experimental-styledlistitem--default). See the [ListAndPanel](./?path=/story/experimental-recipes-listandpanel--list-and-panel) and [ScrollableListView](./?path=/story/experimental-recipes-scrollablelistview--scrollable-list-view) recipes for a more detailed examples.
+- ListView wraps ListItems with padding and height styles, when using the StyledListItem use the `listViewItem.styledListItem` variant to override this.

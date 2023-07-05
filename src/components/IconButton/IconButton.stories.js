@@ -21,6 +21,7 @@ import {
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import IconButtonReadme from './IconButton.mdx';
+import { iconButtonArgTypes } from './iconButtonAttributes';
 
 export default {
   title: 'Components/IconButton',
@@ -39,40 +40,7 @@ export default {
       },
     },
   },
-  argTypes: {
-    icon: {
-      control: {
-        type: 'none',
-      },
-      defaultValue: CreateIcon,
-      description: 'The icon to render. List of icons at https://materialdesignicons.com/',
-    },
-    title: {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
-    },
-    isDisabled: {},
-    variant: {
-      control: {
-        type: 'select',
-        options: ['base', 'inverted', 'invertedSquare', 'square'],
-      },
-      defaultValue: 'base',
-    },
-    size: {
-      control: {
-        type: 'select',
-        options: ['xs', 'sm', 'md'],
-      },
-      defaultValue: 'sm',
-    },
-  },
+  argTypes: iconButtonArgTypes,
 };
 
 export const Default = args => (

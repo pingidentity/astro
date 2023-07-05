@@ -6,11 +6,10 @@ import { render, screen } from '../../utils/testUtils/testWrapper';
 
 import SwitchField from './SwitchField';
 
-const testId = 'test-switch';
+const TEST_LABEL = 'test label';
 
 const defaultProps = {
-  label: 'Example label',
-  'data-testid': testId,
+  label: TEST_LABEL,
 };
 
 const getComponent = (props = {}) => render((
@@ -22,9 +21,9 @@ axeTest(getComponent);
 
 test('renders Switch component', () => {
   getComponent({ 'aria-label': 'test' });
-  const switchComponent = screen.getByTestId(testId);
+  const switchComponent = screen.getByText(TEST_LABEL);
   screen.getByRole('switch');
-  expect(switchComponent).toBeInstanceOf(HTMLDivElement);
+  expect(switchComponent).toBeInstanceOf(HTMLLabelElement);
   expect(switchComponent).toBeInTheDocument();
 });
 
