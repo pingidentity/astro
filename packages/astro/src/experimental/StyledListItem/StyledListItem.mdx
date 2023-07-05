@@ -1,0 +1,25 @@
+<Meta title="Experimental/StyledListItem" />
+
+# StyledListItem
+
+The StyledListItem allows easy creation of list items. Styles have been included to match Ping specs. Use the details prop to pass in text, subtext and an mdi or svg icon.
+
+### Recommended Use
+This component is intended to be used inside a ListView component. See the [ListAndPanel](./?path=/story/experimental-recipes-listandpanel) and [ScrollableListView](./?path=/docs/experimental-recipes-scrollablelistview)
+recipes for a more detailed examples.
+
+#### Slots
+The slots prop has been provided for added flexibility. Use the `rightOfDetails` slot to add icons, badges or other elements to the right of the details
+section. Use the `leftOfDetails` slot to add elements to the left of the details element. Note that when the
+leftOfDetails slot is used, it will prevent an icon in the `details.icon` prop from rendering and remove all margins/padding on the left of the details.
+
+#### Children
+To add action controls, pass control elements as `{children}`. All elements passed in this way will be right justified and center aligned. Use one of the following
+styled control components to easily match Ping specs.
+- [ListItemEditButton](./?path=/story/experimental-styledlistitem-controls-listitemeditbutton--default)
+- [ListItemMenu](./?path=/story/experimental-styledlistitem-controls-listitemmenu--default)
+- [ListItemSwitchField](./?path=/story/experimental-styledlistitem-controls-listitemswitchfield--default)
+
+### Note:
+The nature of components that have been styled to match design specs is that as design specs are updated, so will the matching component. Be aware that styles 
+inside this component may be adjusted in small ways over time.

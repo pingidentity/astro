@@ -38,14 +38,6 @@ export function useListLayout(state) {
   return layout;
 }
 
-/**
- * NOTE: be careful with putting focusable elements inside ListView.
- * It is using a grid (useList hook) with its own event listeners under the hood.
- * [react-specttrum-github-issue](https://github.com/adobe/react-spectrum/issues/2801)
- * If you decided to add a focusable element inside ListView,
- * you should stop bubbling of a pointerDown event and put a focus on the element.
-*/
-
 const ListView = forwardRef((props, ref) => {
   const {
     disabledKeys,
