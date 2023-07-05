@@ -80,7 +80,7 @@ const ImageUploadField = forwardRef((props, ref) => {
           <Item key="remove" role="button">{removeItemText}</Item>
         </Menu>
       </ImageUploadFieldBase>
-      <VisuallyHidden aria-live="polite" role={state.isMenuOpen ? 'button' : 'status'} id={statusId}>{state.isMenuOpen && 'Menu pop up expanded'}</VisuallyHidden>
+      <VisuallyHidden aria-live="polite" aria-hidden="true" role={state.isMenuOpen ? 'button' : 'status'} id={statusId}>{state.isMenuOpen && 'Menu pop up expanded'}</VisuallyHidden>
     </>
   );
 });
