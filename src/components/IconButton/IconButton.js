@@ -1,12 +1,13 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
 
 import { BadgeContext } from '../../context/BadgeContext';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
+
+import { iconButtonPropTypes } from './iconButtonAttributes';
 
 const IconButton = forwardRef((props, ref) => {
   const {
@@ -73,43 +74,7 @@ const IconButton = forwardRef((props, ref) => {
   return button;
 });
 
-IconButton.propTypes = {
-  /** Styling to apply to the IconButton. */
-  variant: PropTypes.string,
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Content will be displayed in a tooltip on hover or focus. */
-  title: PropTypes.string,
-  /**
-   * Handler that is called when the press is released over the target.
-   * (e: PressEvent) => void
-   */
-  onPress: PropTypes.func,
-  /**
-   * Handler that is called when a press interaction starts.
-   * (e: PressEvent) => void
-   */
-  onPressStart: PropTypes.func,
-  /**
-   * Handler that is called when a press interaction ends, either over the target or when the
-   * pointer leaves the target.
-   * (e: PressEvent) => void
-   */
-  onPressEnd: PropTypes.func,
-  /**
-   * Handler that is called when the press state changes.
-   * (isPressed: boolean) => void
-   */
-  onPressChange: PropTypes.func,
-  /**
-   * Handler that is called when a press is released over the target, regardless of whether it
-   * started on the target or not.
-   * (e: PressEvent) => void
-   */
-  onPressUp: PropTypes.func,
-  /** Whether the icon is disabled. */
-  isDisabled: PropTypes.bool,
-};
+IconButton.propTypes = iconButtonPropTypes;
 
 IconButton.defaultProps = {
   variant: 'base',
