@@ -25,6 +25,12 @@ const container = {
   },
 };
 
+const styledListItem = {
+  ...container,
+  padding: 0,
+  minHeight: 0,
+};
+
 const linkedViewContainer = {
   ...container,
   minHeight: '75px',
@@ -59,4 +65,5 @@ const linkedViewContainer = {
 export default {
   container,
   linkedViewContainer,
+  styledListItem,
 };

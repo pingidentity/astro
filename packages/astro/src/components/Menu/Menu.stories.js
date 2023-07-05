@@ -5,9 +5,9 @@ import { withDesign } from 'storybook-addon-designs';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Menu, Text } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
-import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 import MenuReadme from './Menu.mdx';
+import { menuArgTypes } from './menuAttributes';
 
 export default {
   title: 'Components/Menu',
@@ -32,52 +32,7 @@ export default {
       type: 'figma',
     },
   },
-  argTypes: {
-    selectionMode: {},
-    isDisabled: {},
-    isNotFocusedOnHover: {},
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-labelledby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-describedby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-details': {
-      control: {
-        type: 'text',
-      },
-    },
-    isSelected: {
-      control: {
-        type: 'none',
-      },
-    },
-    disabledKeys: {
-      control: {
-        type: 'none',
-      },
-    },
-    defaultSelectedKeys: {
-      control: {
-        type: 'none',
-      },
-    },
-    selectedKeys: {
-      control: {
-        type: 'none',
-      },
-    },
-    ...onHoverArgTypes,
-  },
+  argTypes: menuArgTypes,
 };
 
 export const Default = ({ ...args }) => {
