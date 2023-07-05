@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.6.0-alpha.5",
+  "version": "2.6.0",
   "description": "PingUX themeable React component library",
   "repository": {
     "type": "git",
