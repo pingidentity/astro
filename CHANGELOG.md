@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.6.0...@pingux/astro@2.7.0) (2023-07-06)
+
+
+### Bug Fixes
+
+* [UIP-6296] Astro ImageUpload ScreenReader ([1005ec1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1005ec16d14181cabb760e558a1a249706633339))
+
+
+### Features
+
+* [UIP-6353]: Add StyledListItem ([46d55db](https://gitlab.corp.pingidentity.com/ux/pingux/commit/46d55db27d5129ca63cd412d46a147d74f754ced))
+
+
+
+
+
 # [2.6.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.5.7...@pingux/astro@2.6.0) (2023-07-04)
 
 
