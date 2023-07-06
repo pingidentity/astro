@@ -123,6 +123,14 @@ const Multivalues = ({
         }
     };
 
+    const handleIsValidNewOption = (inputValue) => {
+        const key = inputValue.trim();
+        if (key === '' ){
+            return false
+        }
+        return true;
+    }
+
     return (
         <>
         {(
@@ -157,6 +165,7 @@ const Multivalues = ({
                 onChange={onValueChange}
                 backspaceRemovesValue={false}
                 ariaLiveMessages={{ guidance }}
+                isValidNewOption={handleIsValidNewOption}
             />
 
             {fieldMessage && (
