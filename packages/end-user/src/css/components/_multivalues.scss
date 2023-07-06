@@ -103,7 +103,7 @@
         }
     }
     
-    &__icon ~ &__icon::before {
+    &__icon + &__icon::before {
         margin-right: $spacing-lg;
     }
 }
