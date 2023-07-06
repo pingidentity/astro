@@ -1,7 +1,7 @@
 import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
 
-export const descriptions = {
+const descriptions = {
   ariaControls: 'Identifies the element (or elements) whose contents or presence are controlled by the current element.',
   ariaDescribedby: 'Identifies the element (or elements) that describes the object.',
   ariaDetails: 'Identifies the element (or elements) that provide a detailed, extended description for the object.',

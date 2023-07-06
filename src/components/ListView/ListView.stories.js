@@ -1,23 +1,26 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Item, useAsyncList } from 'react-stately';
+import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
-  ListItemMenu,
-  ListItemSwitchField,
+  Icon,
+  IconButton,
   ListView,
-  StyledListItem,
+  Text,
 } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 import ListViewReadme from './ListView.mdx';
 
 export default {
-  title: 'Experimental/ListView',
+  title: 'Components/ListView',
   component: ListView,
   parameters: {
     docs: {
@@ -299,41 +302,40 @@ const actions = {
 };
 
 const ListElement = ({ item }) => (
-  <StyledListItem details={{
-    text: item.name,
-    icon: FormSelectIcon,
-  }}
-  >
-    <ListItemSwitchField />
-    <ListItemMenu>
-      <Item key="enable">Enable user</Item>
-      <Item key="disable">Disable user</Item>
-      <Item key="delete">Delete user</Item>
-    </ListItemMenu>
-  </StyledListItem>
+  <Box isRow>
+    <Box isRow mr="auto" alignSelf="center">
+      <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size="md" title={{ name: 'Form Select Icon' }} />
+      <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
+    </Box>
+    <Box isRow alignSelf="center" gap="sm">
+      <IconButton aria-label="create-icon">
+        <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
+      </IconButton>
+      <IconButton aria-label="actions-icon">
+        <Icon icon={MoreVertIcon} size="sm" title={{ name: 'More Vertical Icon' }} />
+      </IconButton>
+    </Box>
+  </Box>
 );
 
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items}>
     {item => (
-      <Item
-        data-id={item.key}
-        key={item.name}
-        listItemProps={{ variant: 'listViewItem.styledListItem' }}
-        textValue={item.name}
-      >
-        <StyledListItem details={{
-          text: item.name,
-          icon: FormSelectIcon,
-        }}
-        >
-          <ListItemSwitchField />
-          <ListItemMenu>
-            <Item key="enable">Enable user</Item>
-            <Item key="disable">Disable user</Item>
-            <Item key="delete">Delete user</Item>
-          </ListItemMenu>
-        </StyledListItem>
+      <Item key={item.name} textValue={item.name} data-id={item.key}>
+        <Box isRow>
+          <Box isRow mr="auto" alignSelf="center">
+            <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size="md" title={{ name: 'Form Select Icon' }} />
+            <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
+          </Box>
+          <Box isRow alignSelf="center" gap="sm">
+            <IconButton aria-label="create-icon">
+              <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
+            </IconButton>
+            <IconButton aria-label="actions-icon" size="sm">
+              <Icon icon={MoreVertIcon} size="sm" title={{ name: 'More Vertical Icon' }} />
+            </IconButton>
+          </Box>
+        </Box>
       </Item>
     )}
   </ListView>
@@ -413,11 +415,7 @@ export const InfiniteLoadingList = args => {
         onLoadMore={list.loadMore}
       >
         {item => (
-          <Item
-            key={item.name}
-            listItemProps={{ variant: 'listViewItem.styledListItem' }}
-            textValue={item.name}
-          >
+          <Item key={item.name} textValue={item.name}>
             <ListElement item={item} />
           </Item>
         )}
@@ -442,11 +440,7 @@ InfiniteLoadingList.parameters = {
 export const MultipleSelection = ({ ...args }) => (
   <ListView {...props} {...args} items={items} selectionMode="multiple">
     {item => (
-      <Item
-        key={item.name}
-        listItemProps={{ variant: 'listViewItem.styledListItem' }}
-        textValue={item.name}
-      >
+      <Item key={item.name} textValue={item.name}>
         <ListElement item={item} />
       </Item>
     )}

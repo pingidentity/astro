@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 const descriptions = {
-  isHovered: 'If the item is hovered',
   onHoverStart: 'Handler that is called when a hover interaction starts.',
   onHoverEnd: 'Handler that is called when a hover interaction ends.',
   onHoverChange: 'Handler that is called when the hover state changes.',
@@ -16,10 +15,6 @@ export const baseDocSettings = {
 };
 
 export const onHoverArgTypes = {
-  isHovered: {
-    description: descriptions.isHovered,
-    ...baseDocSettings,
-  },
   'onHoverStart': {
     description: descriptions.onHoverStart,
     ...baseDocSettings,
@@ -35,8 +30,7 @@ export const onHoverArgTypes = {
 };
 
 export const onHoverPropTypes = {
-  isHovered: PropTypes.bool,
-  onHoverChange: PropTypes.func,
-  onHoverEnd: PropTypes.func,
   onHoverStart: PropTypes.func,
+  onHoverEnd: PropTypes.func,
+  onHoverChange: PropTypes.func,
 };
