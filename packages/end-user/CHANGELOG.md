@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.3](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.5.2...@pingux/end-user@2.5.3) (2023-07-06)
+
+
+### Bug Fixes
+
+* [UIP-6336] multivalues icons alignment fix enduser ([b50abe7](https://gitlab.corp.pingidentity.com/ux/end-user/commit/b50abe7461bc6e628116bcdf83a80dc029240de3))
+* [UIP-6345] Restrict adding empty badges in MultiValuesField ([dd3d312](https://gitlab.corp.pingidentity.com/ux/end-user/commit/dd3d31266deb79d63b8159d9422ccfe17c38d70e))
+
+
+
+
+
 ## [2.5.2](https://gitlab.corp.pingidentity.com/ux/end-user/compare/@pingux/end-user@2.5.1...@pingux/end-user@2.5.2) (2023-06-27)
 
 
