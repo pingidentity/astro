@@ -75,6 +75,8 @@
     "@react-stately/table": "~3.3.0",
     "@react-stately/virtualizer": "^3.2.1",
     "@storybook/addon-actions": "^6.5.10",
+    "@storybook/api": "^7.0.24",
+    "@storybook/components": "^7.0.24",
     "@styled-system/prop-types": "^5.1.5",
     "@styled-system/props": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
