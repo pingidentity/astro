@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.7.0...@pingux/astro@2.7.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* [UIP-6391] check for navigator before accessing it ([a64af4a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a64af4a57396a025f684adf9c69b5bd7f6930290))
+
+
+
+
+
 # [2.7.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.6.0...@pingux/astro@2.7.0) (2023-07-06)
 
 
