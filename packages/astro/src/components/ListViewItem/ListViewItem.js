@@ -67,6 +67,12 @@ const ListViewItem = props => {
     hasInsetSeparator,
   });
 
+  // Whether the current component should have legacy styles removed
+  // TODO: [Astro 3.0.0] Remove the legacy styles and update the code here.
+  const shouldOverRideLegacyStyles = Object.keys(item.rendered.props).includes(
+    'data',
+  );
+
   return (
     <Box
       isDisabled={isDisabled}
@@ -78,7 +84,8 @@ const ListViewItem = props => {
     >
       <Box
         as="div"
-        variant="listViewItem.container"
+        // Apply appropriate variant dependant on whether a legacy list item is used
+        variant={shouldOverRideLegacyStyles ? 'listViewItem.styledListItem' : 'listViewItem.container'}
         {...gridCellProps}
         isFocused={isDisabled ? false : isFocusVisible}
         isDisabled={isDisabled}
