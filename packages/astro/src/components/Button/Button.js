@@ -1,11 +1,12 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 import { Button as ThemeUIButton } from 'theme-ui';
 
 import { useAriaLabelWarning, usePropWarning, useStatusClasses } from '../../hooks';
 import Loader from '../Loader';
+
+import { buttonPropTypes } from './buttonAttributes';
 
 const Button = forwardRef((props, ref) => {
   const {
@@ -66,60 +67,7 @@ const Button = forwardRef((props, ref) => {
   );
 });
 
-Button.propTypes = {
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Whether the button is disabled. */
-  isDisabled: PropTypes.bool,
-  /** Shows loader instead of children */
-  isLoading: PropTypes.bool,
-  /**
-   * Handler that is called when a hover interaction starts.
-   * (e: HoverEvent) => void
-   */
-  onHoverStart: PropTypes.func,
-  /**
-   * Handler that is called when a hover interaction ends.
-   * (e: HoverEvent) => void
-   */
-  onHoverEnd: PropTypes.func,
-  /**
-   * Handler that is called when the hover state changes.
-   * (isHovering: boolean) => void
-   */
-  onHoverChange: PropTypes.func,
-  /**
-   * Handler that is called when the press is released over the target.
-   * (e: PressEvent) => void
-   */
-  onPress: PropTypes.func,
-  /**
-   * Handler that is called when a press interaction starts.
-   * (e: PressEvent) => void
-   */
-  onPressStart: PropTypes.func,
-  /**
-   * Handler that is called when a press interaction ends, either over the target or when the
-   * pointer leaves the target.
-   * (e: PressEvent) => void
-   */
-  onPressEnd: PropTypes.func,
-  /**
-   * Handler that is called when the press state changes.
-   * (isPressed: boolean) => void
-   */
-  onPressChange: PropTypes.func,
-  /**
-   * Handler that is called when a press is released over the target, regardless of whether it
-   * started on the target or not.
-   * (e: PressEvent) => void
-   */
-  onPressUp: PropTypes.func,
-  /** The styling variation of the button. */
-  variant: PropTypes.string,
-  /** The focus variation of the button. */
-  tabIndex: PropTypes.number,
-};
+Button.propTypes = buttonPropTypes;
 
 Button.defaultProps = {
   isDisabled: false,
