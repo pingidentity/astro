@@ -83,8 +83,6 @@ export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 export { default as ListView } from './components/ListView';
 export * from './components/ListView';
-export { default as ListViewItem } from './components/ListViewItem';
-export * from './components/ListViewItem';
 export { default as Loader } from './components/Loader';
 export * from './components/Loader';
 export { default as Menu } from './components/Menu';
@@ -173,3 +171,9 @@ export {
   TableHeader as DataTableHeader,
   Row as DataTableRow,
 } from 'react-stately';
+
+// Experimental
+export { default as ListViewItemEditButton } from './experimental/ListViewItem/controls/ListViewItemEditButton';
+export { default as ListViewItemMenu } from './experimental/ListViewItem/controls/ListViewItemMenu';
+export { default as ListViewItemSwitchField } from './experimental/ListViewItem/controls/ListViewItemSwitchField';
+export { default as ListViewItem } from './experimental/ListViewItem/ListViewItem';

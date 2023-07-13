@@ -12,6 +12,7 @@ import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttri
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import SwitchFieldReadme from './SwitchField.mdx';
+import { switchFieldArgTypes } from './switchFieldAttributes';
 
 export default {
   title: 'Form/SwitchField',
@@ -31,38 +32,7 @@ export default {
     },
   },
   argTypes: {
-    label: {
-      control: {
-        type: 'text',
-      },
-      defaultValue: 'Example Label',
-    },
-    helperText: {
-      control: {
-        type: 'text',
-      },
-    },
-    hintText: {
-      control: {
-        type: 'text',
-      },
-    },
-    value: {
-      defaultValue: 'my-switch',
-    },
-    name: {},
-    className: {},
-    isDisabled: {},
-    isRequired: {},
-    isReadOnly: {},
-    isDefaultSelected: {},
-    hasAutoFocus: {},
-    id: {},
-    isSelected: {
-      control: {
-        type: 'none',
-      },
-    },
+    ...switchFieldArgTypes,
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
