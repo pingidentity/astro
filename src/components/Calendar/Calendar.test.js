@@ -115,7 +115,7 @@ test('should be able to select dates', () => {
   expect(dateButtons[4]).toHaveClass('is-selected');
 });
 
-test('should be able to navigate and select shown previous month dates', () => {
+test('should be able to navigate to previous month dates without selection', () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const disabledGridCells = screen.queryAllByRole('gridcell').filter(cell => cell.getAttribute('aria-disabled') !== 'false');
@@ -124,11 +124,11 @@ test('should be able to navigate and select shown previous month dates', () => {
   expect(within(previousDate).getByText(31)).toHaveAttribute('aria-label', 'Sunday, July 31, 2022');
   userEvent.click(previousDate);
 
-  const selectedDate = screen.queryByText(31);
-  expect(selectedDate).toHaveAttribute('aria-label', 'Sunday, July 31, 2022 selected');
+  const selectedMonth = screen.queryByRole('grid');
+  expect(selectedMonth).toHaveAttribute('aria-label', 'July 2022');
 });
 
-test('should be able to navigate and select shown next month dates', () => {
+test('should be able to navigate to next month dates without selection', () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const disabledGridCells = screen.queryAllByRole('gridcell').filter(cell => cell.getAttribute('aria-disabled') !== 'false');
@@ -138,8 +138,8 @@ test('should be able to navigate and select shown next month dates', () => {
   expect(within(NextDate).getByText(3)).toHaveAttribute('aria-label', 'Saturday, September 3, 2022');
   userEvent.click(NextDate);
 
-  const selectedDate = screen.queryByText(3);
-  expect(selectedDate).toHaveAttribute('aria-label', 'Saturday, September 3, 2022 selected');
+  const selectedMonth = screen.queryByRole('grid');
+  expect(selectedMonth).toHaveAttribute('aria-label', 'September 2022');
 });
 
 test('allows users to open calendar item with enter / space key', () => {
