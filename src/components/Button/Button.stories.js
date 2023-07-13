@@ -13,50 +13,16 @@ import {
   Text,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
-import { buttonVariants } from '../../utils/devUtils/constants/variants';
 
 import ButtonReadme from './Button.mdx';
-
-// removing the iconButton variants from this story.
-const variants = buttonVariants;
-delete variants.ICON;
-delete variants.ICON_BUTTON;
-delete variants.INVERTED;
-
-// add designer approved variants for devs to use here
-const variantOptions = [
-  'critical',
-  'default',
-  'inline',
-  'inlinePrimary',
-  'link',
-  'primary',
-];
+import { buttonArgTypes } from './buttonAttributes';
 
 export default {
   title: 'Components/Button',
   component: Button,
   decorators: [withDesign],
   argTypes: {
-    variant: {
-      control: {
-        type: 'select',
-        options: variantOptions,
-      },
-      defaultValue: 'default',
-    },
-    children: {
-      description: 'Button text.',
-      defaultValue: 'Button Text',
-      table: {
-        type: {
-          summary: 'string',
-        },
-      },
-      control: {
-        type: 'text',
-      },
-    },
+    ...buttonArgTypes,
   },
   parameters: {
     docs: {
