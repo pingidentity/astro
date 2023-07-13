@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
-import { useStatusClasses } from '../../hooks';
+import { useDeprecationWarning, useStatusClasses } from '../../hooks';
 import { onHoverPropTypes } from '../../utils/docUtils/hoverProps';
 import Box from '../Box/Box';
 
@@ -22,6 +22,7 @@ const ListItem = forwardRef(({
     onHoverStart,
   });
 
+  useDeprecationWarning('The ListItem will be depreciated in the near future, please use ListViewItem');
   const { classNames } = useStatusClasses(className, { isHovered, isSelected });
 
   return (
