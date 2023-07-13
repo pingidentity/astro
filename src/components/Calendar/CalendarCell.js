@@ -36,7 +36,7 @@ const CalendarCell = forwardRef((props, ref) => {
     isDisabled,
   } = useCalendarCell({ date }, state, cellRef);
 
-  const { focusPreviousPage, setValue, focusNextPage } = state;
+  const { focusPreviousPage, focusNextPage, setFocused } = state;
 
   /**
    * Function handles the navigation and adds focus to previous or next month dates
@@ -45,19 +45,19 @@ const CalendarCell = forwardRef((props, ref) => {
 
   const handleDisableClick = useCallback(() => {
     if (cellRef.current?.hidden && !state.isDisabled && formattedDate > 20) {
+      setFocused(undefined);
       focusPreviousPage();
-      setValue(date);
     } else if (cellRef.current?.hidden && !state.isDisabled && formattedDate < 15) {
+      setFocused(undefined);
       focusNextPage();
-      setValue(date);
     }
   }, [
     date,
     focusNextPage,
     focusPreviousPage,
     formattedDate,
-    setValue,
     state,
+    setFocused,
   ]);
 
   const { hoverProps, isHovered } = useHover({});
@@ -116,6 +116,7 @@ CalendarCell.propTypes = {
     focusPreviousPage: PropTypes.func,
     setValue: PropTypes.func,
     focusNextPage: PropTypes.func,
+    setFocused: PropTypes.func,
     setFocusedDate: PropTypes.func,
     isDisabled: PropTypes.bool,
   }),
