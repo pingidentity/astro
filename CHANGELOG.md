@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.7.1...@pingux/astro@2.8.0) (2023-07-13)
+
+
+### Bug Fixes
+
+* [UIP-6351] DatePicker calendar close issue ([a096be2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a096be28cab5eca1fcb848797511bc7390e43d11)), closes [40react-stately/calendar/src/useCalendarState.ts#L138](https://gitlab.corp.pingidentity.com/40react-stately/calendar/src/useCalendarState.ts/issues/L138)
+
+
+### Features
+
+* [UIP-6353]: Add ListViewItem ([02145b4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/02145b4075185aeae9de11c4e2af20f3a237309e)), closes [674653#163ab50ccc8fa60d6af637316db29b5db6a435a1](https://gitlab.corp.pingidentity.com/674653/issues/163ab50ccc8fa60d6af637316db29b5db6a435a1)
+* [UIP-6359] Astro SaveBar Component ([9fd9f4f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9fd9f4f932ffa1263321a60a13f21f99a4aa83ad))
+
+
+
+
+
 ## [2.7.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.7.0...@pingux/astro@2.7.1) (2023-07-11)
 
 
