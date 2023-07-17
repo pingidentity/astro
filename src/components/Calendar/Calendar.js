@@ -86,12 +86,13 @@ const Calendar = forwardRef((props, ref) => {
           onPress={() => handleYearSelection(nav.PREVIOUS)}
           mx="sm"
           isDisabled={prevButtonProps.isDisabled}
-          aria-label="previous year navigation"
+          aria-label="Previous year navigation"
         >
           <Icon icon={ChevronDoubleLeftIcon} size={18} title={{ name: 'Chevron Double Left Icon' }} />
         </IconButton>
         <IconButton
           {...prevButtonProps}
+          aria-label="Previous month navigation"
         >
           <Icon icon={ChevronLeftIcon} size={18} title={{ name: 'Chevron Left Icon' }} />
         </IconButton>
@@ -108,6 +109,7 @@ const Calendar = forwardRef((props, ref) => {
         </Text>
         <IconButton
           {...nextButtonProps}
+          aria-label="Next month navigation"
         >
           <Icon icon={ChevronRightIcon} size={18} title={{ name: 'Chevron Right Icon' }} />
         </IconButton>
@@ -115,7 +117,7 @@ const Calendar = forwardRef((props, ref) => {
           onPress={() => handleYearSelection(nav.NEXT)}
           mx="sm"
           isDisabled={nextButtonProps.isDisabled}
-          aria-label="next year navigation"
+          aria-label="Next year navigation"
         >
           <Icon icon={ChevronDoubleRightIcon} size={18} title={{ name: 'Chevron Double Right Icon' }} />
         </IconButton>
