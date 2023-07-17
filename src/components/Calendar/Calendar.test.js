@@ -31,8 +31,8 @@ test('renders calendar component', () => {
   const previous = buttons[1];
   const next = buttons[2];
 
-  expect(previous).toHaveAttribute('aria-label', 'Previous');
-  expect(next).toHaveAttribute('aria-label', 'Next');
+  expect(previous).toHaveAttribute('aria-label', 'Previous month navigation');
+  expect(next).toHaveAttribute('aria-label', 'Next month navigation');
 
   expect(screen.queryByRole('grid')).toHaveAttribute('aria-label', 'August 2022');
 
@@ -45,7 +45,7 @@ test('renders calendar component', () => {
   const gridCells = screen.queryAllByRole('gridcell').filter(cell => cell.getAttribute('aria-disabled') !== 'true');
   expect(gridCells.length).toBe(31);
 
-  const hiddenButton = screen.queryAllByRole('button').filter(button => button.getAttribute('aria-label') === 'Next')[1];
+  const hiddenButton = screen.queryAllByRole('button').filter(button => button.getAttribute('aria-label') === 'Next')[0];
   expect(hiddenButton).toHaveAttribute('tabindex', '-1');
 
   userEvent.click(hiddenButton);
