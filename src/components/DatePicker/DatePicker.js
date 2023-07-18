@@ -101,6 +101,7 @@ const DatePicker = forwardRef((props, ref) => {
       ref={popoverRef}
       isOpen={state.isOpen}
       onClose={state.setOpen}
+      overflow="scroll"
       {...mergeProps(dialogProps, positionProps)}
     >
       <FocusScope
