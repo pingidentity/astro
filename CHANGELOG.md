@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.0...@pingux/astro@2.8.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* [UIP-5753] Removing visual issues from Calendar ([f5a5190](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f5a5190dd2f1b889de61c904d85cdc2a115562ab))
+* [UIP-6173] Add correct aria-labels on monthly navigation buttons for Calendar ([b533926](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b5339260b5392f7dcc6ce1cc2f6386c76315f0fd))
+* [UIP-6216] NumberField screen reader issues ([821235c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/821235c8301c51fe67251ad59804e68b361f5e79))
+
+
+
+
+
 # [2.8.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.7.1...@pingux/astro@2.8.0) (2023-07-13)
 
 
