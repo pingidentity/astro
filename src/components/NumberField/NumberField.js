@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
-import { mergeProps, useNumberField } from 'react-aria';
+import { mergeProps, useNumberField, VisuallyHidden } from 'react-aria';
 import { useNumberFieldState } from 'react-stately';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuUp from '@pingux/mdi-react/MenuUpIcon';
@@ -17,6 +17,7 @@ import {
   Label,
 } from '../..';
 import { useField, usePropWarning } from '../../hooks';
+import useHiddenNumberFieldValue from '../../hooks/useHiddenNumberFieldValue';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
@@ -31,7 +32,7 @@ import { statusPropTypes } from '../../utils/docUtils/statusProp';
  */
 
 const NumberField = forwardRef((props, ref) => {
-  const { helperText, status } = props;
+  const { helperText, status, formatOptions } = props;
   const { locale } = useLocale();
 
   const state = useNumberFieldState({ ...props, locale });
@@ -121,6 +122,12 @@ const NumberField = forwardRef((props, ref) => {
       inputProps.onChange(trimmedValueEvent);
     }
   };
+
+  const hiddenInputValue = useHiddenNumberFieldValue({
+    numberValue: state.numberValue,
+    isCurrency: formatOptions?.currency,
+  });
+
   inputProps['aria-roledescription'] = null;
 
   const helperTextId = useMemo(() => uuid(), []);
@@ -128,7 +135,10 @@ const NumberField = forwardRef((props, ref) => {
   return (
     <Box {...fieldContainerProps}>
       <Label {...mergeProps(fieldLabelProps, labelProps)} />
-      <Box variant="forms.numberField.noDefaultArrows" {...groupProps}>
+      <Box
+        variant="forms.numberField.noDefaultArrows"
+        {...groupProps}
+      >
         <Box
           variant="forms.numberField.arrowsWrapper"
           {...fieldControlWrapperProps}
@@ -146,8 +156,17 @@ const NumberField = forwardRef((props, ref) => {
           />
           {ControlArrows}
         </Box>
+        {/* NOTE: Firefox + Voice Over isn’t supported in react spectrum */}
+        <VisuallyHidden aria-live="assertive">
+          {hiddenInputValue}
+        </VisuallyHidden>
         {helperText && (
-          <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
+          <FieldHelperText
+            status={status}
+            id={helperTextId}
+          >
+            {helperText}
+          </FieldHelperText>
         )}
       </Box>
     </Box>
