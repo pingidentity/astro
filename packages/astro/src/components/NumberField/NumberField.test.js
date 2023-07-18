@@ -24,7 +24,12 @@ const defaultProps = {
   decrementAriaLabel,
 };
 
-const getComponent = (props = {}) => render(<NumberField {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(
+  <NumberField
+    {...defaultProps}
+    {...props}
+  />,
+);
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent, {
@@ -60,7 +65,6 @@ test('arrow down is subtract step to the number value', () => {
   userEvent.click(screen.getByLabelText(decrementAriaLabel));
   expect(mockOnChange).toHaveBeenCalledWith(testValue - testStep);
 });
-
 
 test('value can be set from outside (controlled state)', () => {
   const controlledValue = 11;
