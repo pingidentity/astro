@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Icon,
@@ -11,11 +12,19 @@ import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttri
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 import { modes as labelModes } from '../Label/constants';
 
+import TextAreaFieldReadme from './TextAreaField.mdx';
+
 export default {
   title: 'Form/TextAreaField',
   component: TextAreaField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <TextAreaFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
