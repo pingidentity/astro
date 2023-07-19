@@ -1,9 +1,8 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Button } from '../../index';
+import { Button, SaveBar } from '../..';
 
-import SaveBar from './SaveBar';
 import SaveBarReadme from './SaveBar.mdx';
 
 export default {
