@@ -1,7 +1,9 @@
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -12,9 +14,12 @@ import ArrowDropUpIcon from '@pingux/mdi-react/ArrowDropUpIcon';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import HomeIcon from '@pingux/mdi-react/HomeIcon';
 import { useFilter } from '@react-aria/i18n';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
 
+import { useDebounce } from '../../hooks';
 import {
   Breadcrumbs,
   Button,
@@ -44,8 +49,10 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     items,
     itemsFilter: imperativeItemsFilter,
     name,
+    onFilteredOptionsNumber,
     onNamePress,
     onOpenChange,
+    optionsCountMessage,
     onPopoverClose: imperativeOnPopoverClose,
     onPopoverOpen: imperativeOnPopoverOpen,
     onSelectionChange,
@@ -55,8 +62,11 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     ...others
   } = props;
 
+  const optionsNumberMessageId = useMemo(() => uuid(), []);
+
   const [searchValue, setSearchValue] = useState('');
   const [selectedKeys, setSelectedKeys] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
 
   const breadcrumbsRef = useRef();
   const overlayRef = React.useRef();
@@ -194,6 +204,42 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     return selectedItem;
   };
 
+  const getFilteredOptionsNumber = useCallback(() => {
+    const nodeArr = Array.from(listBoxState.collection.iterable);
+    if (nodeArr.length === 0) return 0;
+    const itemsCount = nodeArr.reduce((acc, node) => {
+      if (node.type === 'section') return acc + node.childNodes.length;
+      return acc + 1;
+    }, 0);
+    return itemsCount;
+  }, [listBoxState.collection.iterable]);
+
+  useEffect(() => {
+    if (onFilteredOptionsNumber) {
+      onFilteredOptionsNumber(getFilteredOptionsNumber());
+    }
+  }, [onFilteredOptionsNumber, getFilteredOptionsNumber, listBoxState.collection]);
+
+  useEffect(() => {
+    setIsTyping(true);
+    const handler = setTimeout(() => {
+      setIsTyping(false);
+    }, [1000]);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchValue]);
+
+  const optionsMessage = () => {
+    const totalOptionsNumber = items && items.length;
+    const filteredOptionsNumber = getFilteredOptionsNumber();
+    const message = filteredOptionsNumber === totalOptionsNumber
+      ? `${totalOptionsNumber} options in total`
+      : `${filteredOptionsNumber} of ${totalOptionsNumber} options for "${searchValue}"`;
+    return message;
+  };
+
   const ItemsSelect = (
     <>
       <Button
@@ -224,12 +270,17 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
       >
         <FocusScope restoreFocus autoFocus contain>
           <SearchField
+            aria-describedby={optionsNumberMessageId}
+            autocomplete="off"
             placeholder="Search"
             aria-label="Items Search"
             data-testid="Environment-Breadcrumb-Search"
             onChange={setSearchValue}
             {...searchProps}
           />
+          <VisuallyHidden role="alert" aria-live="polite" aria-busy={isTyping} id={optionsNumberMessageId}>
+            {useDebounce({ value: optionsCountMessage || optionsMessage(), delay: 1000 })}
+          </VisuallyHidden>
           <ScrollBox ref={scrollBoxRef}>
             {checkIfListEmpty() ? (
               EmptyListState
@@ -328,6 +379,10 @@ EnvironmentBreadcrumb.propTypes = {
    * `(isOpen: boolean, overlayTrigger: OverlayTriggerAction) => void`
    */
   onOpenChange: PropTypes.func,
+  /** Callback function that returns number of filtered options. */
+  onFilteredOptionsNumber: PropTypes.func,
+  /** Message to announce number of available options by screen reader. */
+  optionsCountMessage: PropTypes.string,
 };
 
 EnvironmentBreadcrumb.defaultProps = {
