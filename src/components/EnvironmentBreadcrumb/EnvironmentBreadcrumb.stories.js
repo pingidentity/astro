@@ -176,10 +176,16 @@ export const DefaultClosed = args => {
 
 export const WithSections = () => {
   const [environments, setEnvironments] = useState(environmentsWithSections);
+  const [filteredOptionsNumber, setFilteredOptionsNumber] = useState(null);
   const [selectedEnvironment, setSelectedEnvironment] = useState({
     name: 'Consumer Banking Prod',
   });
   const recentEnvShown = 3;
+  const totalOptionsNumber = environmentsWithSections.reduce(
+    (acc, section) => acc + section.options.length, 0);
+  const optionsCountMessage = filteredOptionsNumber === totalOptionsNumber
+    ? `${totalOptionsNumber} options in total`
+    : `${filteredOptionsNumber} of ${totalOptionsNumber} options`;
 
   const getUpdatedRecentEnvs = (envObj, prevEnvs) => {
     const { name: envName } = envObj;
@@ -239,6 +245,8 @@ export const WithSections = () => {
       name="Globochem"
       selectedItem={envNode}
       onSelectionChange={handleEnvPress}
+      onFilteredOptionsNumber={setFilteredOptionsNumber}
+      optionsCountMessage={optionsCountMessage}
       isDefaultOpen
     >
       {({ name: sectionName, options: sectionOptions, key: sectionKey }) => (
