@@ -1,9 +1,8 @@
 import React from 'react';
 
+import { SaveBar } from '../..';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
-
-import SaveBar from '.';
 
 const testId = 'test-SaveBar';
 
