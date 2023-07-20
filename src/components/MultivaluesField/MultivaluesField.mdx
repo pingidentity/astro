@@ -1,0 +1,42 @@
+<Meta title="Components/MultivaluesField/MultivaluesField" />
+
+# MultivaluesField
+ 
+The MultivalueField component allows users to select more than one option from a list. 
+Using [useListState](https://react-spectrum.adobe.com/react-stately/useListState.html) from React Stately, it combines an input with a Listbox for a filterable dropdown list.
+
+This component should:
+- Be used when choosing multiple items from a list of options or filtering through items by typing.
+- Allow you to add and remove custom items from the list.
+
+It should not:
+- Have fewer than 4 options. If it does, use a [CheckboxField](./?path=/docs/form-checkboxfield--default) instead.
+- Be used when only 1 item can be selected. 
+- Have a long async loaded list, consider using useAsyncList like [ComboBoxField](./?path=/docs/form-comboboxfield--default) instead.
+
+### Required components
+
+This component requires the OverlayProvider and Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html). 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Space or Enter | Opens or closes the menu when the input is focused. |
+| Arrow keys | Moves through the list popover. |
+| Shift + Tab | Moves focus to the previous focusable component.|
+|  | To allow multiple selections, the user making a selection does not close the menu. However, clicking outside of the listbox or pressing Tab with an open popover does. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The input uses the **`aria-expanded`** attribute to show the expansion and collapse of the popover, the **`aria-invalid`** attribute set to “True” when an incorrect value or status error occurs, and the **`aria-labelledby`** attribute is used to reference the label.
+- The list box **`aria-multiselectable`** attribute is set to “True” by default. 
+- Each option uses the **`aria-selected`** attribute to indicate the state of selection, **`aria-posinset`** to give the option position in the current set of list items, and the **`aria-setsize`** attribute to define the current set of options. 
+- The **`aria-disabled`** attribute is set to “False” for each option by default.

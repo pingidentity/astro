@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { PasswordField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import PasswordFieldReadme from './PasswordField.mdx';
+
 export default {
   title: 'Form/PasswordField',
   component: PasswordField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <PasswordFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

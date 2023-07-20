@@ -9,9 +9,6 @@ import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 
-/**
- * Combines a text input, label, and helper text for a complete, form-ready solution.
- */
 const TextField = forwardRef((props, ref) => {
   const { helperText, helpHintProps, slots, status } = props;
   const {

@@ -17,9 +17,6 @@ import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import ImagePreviewButton from './ImagePreviewButton';
 import ImageUploadFieldBase from './ImageUploadFieldBase';
 
-/**
- * The Image Upload Field component gives users the ability to upload a file (image by default).
- */
 const ImageUploadField = forwardRef((props, ref) => {
   const { isLoading, loaderSize, onRemove, removeItemText, uploadItemText } = props;
   const inputRef = useRef();

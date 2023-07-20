@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Image,
   ImageUploadField,
@@ -9,11 +10,19 @@ import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import ImageUploadFieldReadme from './ImageUploadField.mdx';
+
 export default {
   title: 'Form/ImageUploadField',
   component: ImageUploadField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <ImageUploadFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

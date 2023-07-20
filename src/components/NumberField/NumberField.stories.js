@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { NumberField } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
+
+import NumberFieldReadme from './NumberField.mdx';
 
 export default {
   title: 'Form/NumberField',
   component: NumberField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <NumberFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
