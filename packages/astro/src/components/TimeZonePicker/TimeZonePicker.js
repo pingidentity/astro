@@ -44,13 +44,6 @@ const getTimezoneOffset = timeZone => {
   return offset > 0 ? `+${formattedString}` : formattedString;
 };
 
-/**
- *  Component allows users to choose a timezone from the list.
- *  You can checkout the default timezones list [here](https://github.com/yury-dymov/react-bootstrap-timezone-picker/blob/master/src/timezones.json).
- *
- *  Utilizes ComboBoxField component. You can use the same props as with
- *  the ComboBoxField - they will be spread into it.
- */
 const TimeZonePicker = forwardRef((props, ref) => {
   const {
     additionalTimeZones,
