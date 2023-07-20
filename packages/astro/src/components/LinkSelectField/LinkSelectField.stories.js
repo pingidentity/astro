@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Item,
@@ -12,11 +13,19 @@ import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
+import LinkSelectFieldReadme from './LinkSelectField.mdx';
+
 export default {
   title: 'Form/LinkSelectField',
   component: LinkSelectField,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <LinkSelectFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },

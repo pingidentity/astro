@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Icon,
@@ -10,6 +11,8 @@ import {
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
+
+import MultivaluesFieldReadme from './MultivaluesField.mdx';
 
 export default {
   title: 'Form/MultivaluesField',
@@ -60,6 +63,12 @@ export default {
   },
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <MultivaluesFieldReadme />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
