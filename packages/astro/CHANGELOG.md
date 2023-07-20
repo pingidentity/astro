@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.1...@pingux/astro@2.8.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* [UIP-6324] EnvironmentBreadcrumb screenreader announce available options number ([2f66176](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2f66176b7db8c837c0786a986b9e8d33aed909ac))
+* [UIP-6410]: export SaveBar from index ([49561ad](https://gitlab.corp.pingidentity.com/ux/pingux/commit/49561ad23fedffa51f534c0e175947fa6e51dd89))
+
+
+
+
+
 ## [2.8.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.0...@pingux/astro@2.8.1) (2023-07-18)
 
 
