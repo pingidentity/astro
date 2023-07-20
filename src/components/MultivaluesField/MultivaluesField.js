@@ -15,15 +15,6 @@ import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAtt
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import ListBox from '../ListBox';
 
-/**
- * Complex control that lets you choose several tags from the dropdown list.
- * Or to add your own values in non-restrictive mode.
- *
- * Combines an input with a Listbox for a filterable dropdown list.
- *
- * Utilizes [useListState](https://react-spectrum.adobe.com/react-stately/useListState.html) from React
- * Stately.
- */
 const MultivaluesField = forwardRef((props, ref) => {
   const {
     defaultSelectedKeys,
