@@ -26,9 +26,6 @@ const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   SHOW: 'show password',
 };
 
-/**
-  * Combines a text input, label, IconButton and helper text for a complete, form-ready solution.
- */
 const PasswordField = forwardRef((props, ref) => {
   const {
     helperText,

@@ -22,15 +22,6 @@ import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
-/**
- * Number fields allow users to enter a number, and increment or
- * decrement the value using stepper buttons.
- *
- * Utilizes [useNumberField](https://react-spectrum.adobe.com/react-aria/useNumberField.html) from React Aria
- * and [useNumberFieldState](https://react-spectrum.adobe.com/react-stately/useNumberFieldState.html) from
- * React Stately.
- */
-
 const NumberField = forwardRef((props, ref) => {
   const { helperText, status, formatOptions } = props;
   const { locale } = useLocale();
