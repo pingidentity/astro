@@ -102,11 +102,11 @@ CodeView.propTypes = {
   /** Whether the CodeView hides the copy button.  */
   hasNoCopyButton: PropTypes.bool,
   /**
-   * Which programming language the CodeView should use for highlighting. A list of default languages is listed [here](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js).
+   * Which programming language the CodeView should use for highlighting. A list of default languages is listed [here](https://github.com/FormidableLabs/prism-react-renderer/blob/master/packages/generate-prism-languages/index.ts#L9-L23).
    *
    *
    * Additional languages may be added, see
-   * [CodeView with additional language](./?path=/docs/codeview--with-additional-language)
+   * [CodeView with additional language](/?path=/docs/components-codeview--with-additional-language)
    * for more information.
   */
   language: PropTypes.string,
