@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.2...@pingux/astro@2.8.3) (2023-07-25)
+
+
+### Bug Fixes
+
+* [UIP-6357] update supported languages link ([440b80c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/440b80cdb136a77f78108907095c72faeb587bfb))
+
+
+
+
+
 ## [2.8.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.1...@pingux/astro@2.8.2) (2023-07-20)
 
 
