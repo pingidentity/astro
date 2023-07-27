@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.3...@pingux/astro@2.8.4) (2023-07-27)
+
+
+### Bug Fixes
+
+* [UIP-6395] Add rule for react object props ([0cdec70](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0cdec700074da7de4125c0beee35bb899f7166ff))
+
+
+
+
+
 ## [2.8.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.2...@pingux/astro@2.8.3) (2023-07-25)
 
 
