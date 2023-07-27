@@ -72,7 +72,7 @@ const SearchField = forwardRef((props, ref) => {
             <Icon
               icon={icon}
               variant="forms.search.icon"
-              size={22}
+              size={20}
               title={{ name: 'Search Icon' }}
               {...iconProps}
             />

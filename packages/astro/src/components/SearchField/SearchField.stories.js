@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import Users from '@pingux/mdi-react/AccountGroupIcon';
+import FilterIcon from '@pingux/mdi-react/FilterIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useDebounce } from '../../hooks';
 import {
   Box,
+  Button,
+  Icon,
   SearchField,
   Text,
 } from '../../index';
@@ -117,6 +120,21 @@ export const ControlledWithDebouncedInput = () => {
         onSubmit={text => alert(text)} // eslint-disable-line no-alert
       />
       <Text mt="xs">{`Debounced value: ${debouncedSearchText}`}</Text>
+    </Box>
+  );
+};
+
+export const WithFilter = () => {
+  return (
+    <Box p="xx" isRow gap="md">
+      <SearchField
+        aria-label="search items"
+        placeholder="Search"
+        size="container.xs"
+      />
+      <Button variant="filter" aria-label="filter button">
+        <Icon icon={FilterIcon} />
+      </Button>
     </Box>
   );
 };
