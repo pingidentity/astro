@@ -30,6 +30,7 @@
         // See UIP-4486 for more info on why instanceOf is forbidden
         "react/forbid-prop-types": ["error", { "forbid": ["any", "array", "object", "instanceOf"] }],
         "react/jsx-filename-extension": 0,
+        "react/jsx-first-prop-new-line": ["error", "multiline"],
         "react/prop-types": ["error", { "ignore": ["children", "className"]}],
         "react/require-default-props": 0,
         "react/no-multi-comp": 0,
