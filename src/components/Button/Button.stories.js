@@ -1,7 +1,6 @@
 import React from 'react';
 import AddCircleIcon from '@pingux/mdi-react/AddCircleIcon';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
-import FilterIcon from '@pingux/mdi-react/FilterIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -9,7 +8,6 @@ import {
   Box,
   Button,
   Icon,
-  SearchField,
   Text,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
@@ -99,15 +97,6 @@ ColorBlockButton.argTypes = {
     defaultValue: false,
   },
 };
-
-export const FilterButton = () => (
-  <Box p="xx" isRow gap="md">
-    <SearchField aria-label="search items" />
-    <Button variant="filter" aria-label="filter button">
-      <Icon icon={FilterIcon} title={{ name: 'Filter Icon' }} />
-    </Button>
-  </Box>
-);
 
 export const Critical = () => (
   <Button variant="critical">
