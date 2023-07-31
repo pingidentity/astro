@@ -3,10 +3,12 @@ import { parseDate } from '@internationalized/date';
 import { chain } from '@react-aria/utils';
 import { actions } from '@storybook/addon-actions';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import DatePicker from './DatePicker';
+import DatePickerReadme from './DatePicker.mdx';
 
 export default {
   title: 'Form/DatePicker',
@@ -16,6 +18,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <DatePickerReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
   argTypes: {

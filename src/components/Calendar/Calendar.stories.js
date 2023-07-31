@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
 import { withDesign } from 'storybook-addon-designs';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import Calendar from './Calendar';
+import CalendarReadme from './Calendar.mdx';
 
 export default {
   title: 'Components/Calendar',
@@ -19,6 +21,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <CalendarReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
   argTypes: {
