@@ -53,5 +53,5 @@ Default.parameters = {
 };
 
 export const CustomColor = () => (
-  <Loader color="neutral.60" />
+  <Loader color="neutral.50" />
 );
