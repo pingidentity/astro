@@ -18,18 +18,14 @@ export default {
   title: 'Form/MultivaluesField',
   component: MultivaluesField,
   argTypes: {
-    direction: {
-      defaultValue: 'bottom',
-    },
+    direction: {},
     hasAutoFocus: {},
     hasNoStatusIndicator: {},
     isDisabled: {},
     isNotFlippable: {},
     isReadOnly: {},
     isRequired: {},
-    label: {
-      defaultValue: 'Field Label',
-    },
+    label: {},
     mode: {},
     placeholder: {},
     defaultSelectedKeys: {
@@ -60,6 +56,10 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    direction: 'bottom',
+    label: 'Field Label',
   },
   parameters: {
     docs: {
@@ -403,10 +403,8 @@ export const CustomValues = args => {
   );
 };
 
-CustomValues.argTypes = {
-  mode: {
-    defaultValue: 'non-restrictive',
-  },
+CustomValues.args = {
+  mode: 'non-restrictive',
 };
 
 export const IconSlotsInBadge = args => {

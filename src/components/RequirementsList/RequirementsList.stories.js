@@ -26,14 +26,16 @@ export default {
       control: {
         type: 'object',
       },
-      defaultValue: [
-        { name: 'requirement 1', status: 'default' },
-        { name: 'requirement 2', status: 'warning' },
-        { name: 'requirement 3', status: 'error' },
-        { name: 'requirement 4', status: 'success' },
-      ],
       description: 'Requirements and their status.',
     },
+  },
+  args: {
+    requirements: [
+      { 'name': 'requirement 1', 'status': 'default' },
+      { 'name': 'requirement 2', 'status': 'warning' },
+      { 'name': 'requirement 3', 'status': 'error' },
+      { 'name': 'requirement 4', 'status': 'success' },
+    ],
   },
 };
 

@@ -34,7 +34,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Click me!',
     },
     helperText: {
       control: {
@@ -63,6 +62,9 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Click me!',
   },
 };
 

@@ -21,7 +21,6 @@ export const iconButtonArgTypes = {
     control: {
       type: 'none',
     },
-    defaultValue: CreateIcon,
     description: descriptions.icon,
   },
   title: {
@@ -45,7 +44,6 @@ export const iconButtonArgTypes = {
       type: 'select',
       options: ['base', 'inverted', 'invertedSquare', 'square'],
     },
-    defaultValue: 'base',
     description: descriptions.variant,
   },
   size: {
@@ -53,7 +51,6 @@ export const iconButtonArgTypes = {
       type: 'select',
       options: ['xs', 'sm', 'md'],
     },
-    defaultValue: 'sm',
   },
   onPress: {
     description: descriptions.onPress,
@@ -75,6 +72,12 @@ export const iconButtonArgTypes = {
     description: descriptions.onPressUp,
     ...funcArg,
   },
+};
+
+export const iconButtonArgs = {
+  icon: CreateIcon,
+  variant: 'base',
+  size: 'sm',
 };
 
 export const iconButtonPropTypes = {

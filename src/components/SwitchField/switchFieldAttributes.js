@@ -79,7 +79,6 @@ export const switchFieldArgTypes = {
   label: {
     control: { type: text },
     type: { summary: string },
-    defaultValue: 'Example Label',
     description: descriptions.label,
   },
   name: {
@@ -112,7 +111,6 @@ export const switchFieldArgTypes = {
     description: descriptions.onKeyUp,
   },
   value: {
-    defaultValue: 'my-switch',
     control: { type: text },
     type: { summary: string },
     description: descriptions.value,
@@ -122,9 +120,14 @@ export const switchFieldArgTypes = {
       type: 'select',
       options: statuses,
     },
-    defaultValue: statuses.DEFAULT,
     description: descriptions.status,
   },
+};
+
+export const switchFieldArgs = {
+  label: 'Example Label',
+  value: 'my-switch',
+  status: statuses.DEFAULT,
 };
 
 export const switchFieldPropTypes = {

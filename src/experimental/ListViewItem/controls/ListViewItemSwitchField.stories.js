@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { switchFieldArgTypes } from '../../../components/SwitchField/switchFieldAttributes';
+import { switchFieldArgs, switchFieldArgTypes } from '../../../components/SwitchField/switchFieldAttributes';
 import { ListViewItemSwitchField } from '../../../index';
 import { onHoverArgTypes } from '../../../utils/docUtils/hoverProps';
 
@@ -19,6 +19,10 @@ export default {
   argTypes: {
     ...switchFieldArgTypes,
     ...onHoverArgTypes,
+  },
+  args: {
+    ...switchFieldArgs,
+    label: '',
   },
 };
 

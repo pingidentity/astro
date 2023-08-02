@@ -28,7 +28,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'https://uilibrary.ping-eng.com/',
     },
     isDisabled: {},
     as: {
@@ -36,13 +35,11 @@ export default {
         type: 'none',
         options: htmlElements,
       },
-      defaultValue: 'a',
     },
     target: {
       control: {
         type: 'none',
       },
-      defaultValue: '_blank',
     },
     variant: {
       control: {
@@ -50,6 +47,11 @@ export default {
         options: Object.keys(variants),
       },
     },
+  },
+  args: {
+    href: 'https://uilibrary.ping-eng.com/',
+    as: 'a',
+    target: '_blank',
   },
 };
 

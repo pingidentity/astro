@@ -43,7 +43,6 @@ export default {
       control: {
         type: 'array',
       },
-      defaultValue: ['image'],
     },
     helperText: {
       control: {
@@ -54,7 +53,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Upload Image',
     },
     onChange: {
       control: {
@@ -70,17 +68,21 @@ export default {
       control: {
         type: 'number',
       },
-      defaultValue: 50,
     },
     previewWidth: {
       control: {
         type: 'number',
       },
-      defaultValue: 50,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    fileTypes: ['image'],
+    label: 'Upload Image',
+    previewHeight: 50,
+    previewWidth: 50,
   },
 };
 

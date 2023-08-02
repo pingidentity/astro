@@ -24,9 +24,7 @@ export default {
         type: 'select',
       },
     },
-    disabledKeys: {
-      defaultValue: [],
-    },
+    disabledKeys: {},
     items: {
       control: {
         type: 'none',
@@ -34,9 +32,12 @@ export default {
     },
     onSelectionChange: {
       control: 'none',
-      // eslint-disable-next-line no-console
-      defaultValue: console.log,
     },
+  },
+  args: {
+    disabledKeys: [],
+    // eslint-disable-next-line no-console
+    onSelectionChange: console.log,
   },
 };
 

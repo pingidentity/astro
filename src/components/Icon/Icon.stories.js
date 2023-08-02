@@ -46,7 +46,6 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: SearchIcon,
       description: 'The icon to render. List of icons at https://materialdesignicons.com/',
     },
     size: {
@@ -63,8 +62,11 @@ export default {
         type: 'select',
         options: flatColorList.map(([colorName]) => colorName),
       },
-      defaultValue: 'active',
     },
+  },
+  args: {
+    icon: SearchIcon,
+    color: 'active',
   },
 };
 

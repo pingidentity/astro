@@ -31,7 +31,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Field Label',
     },
     helperText: {
       control: {
@@ -76,6 +75,9 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Field Label',
   },
 };
 

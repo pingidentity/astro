@@ -42,13 +42,11 @@ export default {
       control: {
         disable: true,
       },
-      defaultValue: 'spacious',
     },
     overflowMode: {
       control: {
         disable: true,
       },
-      defaultValue: 'truncate',
     },
     width: {
       description: 'Sets the width of the data table.',
@@ -99,6 +97,10 @@ export default {
       description: 'The list of DataTable items.',
     },
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    density: 'spacious',
+    overflowMode: 'truncate',
   },
 };
 

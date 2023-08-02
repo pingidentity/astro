@@ -6,12 +6,13 @@ export default {
   title: 'Form/Base Components/Input',
   component: Input,
   argTypes: {
-    placeholder: {
-      defaultValue: 'This is a basic input',
-    },
+    placeholder: {},
     type: {},
     name: {},
     id: {},
+  },
+  args: {
+    placeholder: 'This is a basic input',
   },
 };
 

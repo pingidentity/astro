@@ -99,18 +99,13 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Example label',
     },
     placeholder: {},
     id: {},
-    defaultItems: {
-      defaultValue: items,
-    },
+    defaultItems: {},
     defaultSelectedKey: {},
     defaultInputValue: {},
-    disabledKeys: {
-      defaultValue: ['Snake'],
-    },
+    disabledKeys: {},
     direction: {},
     menuTrigger: {},
     isRequired: {},
@@ -148,6 +143,11 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Example label',
+    defaultItems: items,
+    disableKeys: ['Snake'],
   },
 };
 

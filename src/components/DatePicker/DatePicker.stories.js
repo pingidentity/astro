@@ -41,37 +41,31 @@ export default {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     hasFormatHelpText: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isDisabled: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isReadOnly: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isRequired: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     label: {
       control: {
         type: 'text',
       },
-      defaultValue: 'Example label',
     },
     maxValue: {
       control: {
@@ -84,10 +78,18 @@ export default {
       },
     },
     onChange: {
-      defaultValue: null,
       action: 'handleChange',
     },
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    hasAutoFocus: false,
+    hasFormatHelpText: false,
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+    label: 'Example label',
+    onChange: null,
   },
 };
 
