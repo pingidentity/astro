@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.4...@pingux/astro@2.9.0) (2023-08-02)
+
+
+### Bug Fixes
+
+* [UIP-6364] Loader: update the color from neutral.60 to neutral.50 ([97a5c8b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/97a5c8b73cb1c8c8977032b85903ce0d9c13c2cc))
+
+
+### Features
+
+* [UIP-6352] Add PageHeader component in Astro ([e0b685b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e0b685b9a7faf17d6e2c944a5d69de0d62c10528))
+
+
+
+
+
 ## [2.8.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.3...@pingux/astro@2.8.4) (2023-07-27)
 
 
