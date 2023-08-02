@@ -21,7 +21,7 @@ export default {
   },
   args: {
     title: 'Title of the Page',
-  }
+  },
 };
 
 const description = `The description of the page. The description of the page. The description of the page. The
