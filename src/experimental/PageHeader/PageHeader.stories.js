@@ -17,9 +17,11 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Title of the Page',
     },
   },
+  args: {
+    title: 'Title of the Page',
+  }
 };
 
 const description = `The description of the page. The description of the page. The description of the page. The
@@ -38,7 +40,7 @@ export const WithoutLink = args => <PageHeader {...args}>{description}</PageHead
 export const WithButtonProps = args => (
   <PageHeader
     {...args}
-    buttonProps={{ bg: 'mistyrose' }}
+    buttonProps={{ bg: 'critical.bright' }}
   >
     {description}
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>
