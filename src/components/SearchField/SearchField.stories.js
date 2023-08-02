@@ -39,9 +39,7 @@ export default {
         type: 'text',
       },
     },
-    placeholder: {
-      defaultValue: 'Search Groups',
-    },
+    placeholder: {},
     defaultValue: {},
     icon: {
       control: {
@@ -65,6 +63,9 @@ export default {
     },
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    placeholder: 'Search Groups',
   },
 };
 

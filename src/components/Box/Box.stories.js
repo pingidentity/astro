@@ -34,22 +34,24 @@ export default {
         type: 'select',
         options: flatColorList.map(([colorName]) => colorName),
       },
-      defaultValue: 'active',
     },
     gap: {
       control: {
         type: 'text',
       },
       description: 'Gap between items, whether in a row or column. Numeric value paired with a unit. https://www.w3schools.com/cssref/css_units.asp',
-      defaultValue: '10px',
     },
     as: {
       control: {
         type: 'select',
         options: htmlElements,
       },
-      defaultValue: 'div',
     },
+  },
+  args: {
+    bg: 'active',
+    gap: '10px',
+    as: 'div',
   },
 };
 

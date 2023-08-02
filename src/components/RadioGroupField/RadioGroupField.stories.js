@@ -25,7 +25,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Pick one',
     },
     helperText: {
       control: {
@@ -37,9 +36,7 @@ export default {
         type: 'text',
       },
     },
-    defaultValue: {
-      defaultValue: 'A',
-    },
+    defaultValue: {},
     orientation: {},
     isDisabled: {},
     isRequired: {},
@@ -52,6 +49,10 @@ export default {
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Pick one',
+    defaultValue: 'A',
   },
 };
 

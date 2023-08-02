@@ -24,11 +24,13 @@ export default {
   argTypes: {
     children: {
       description: 'Tooltip content',
-      defaultValue: 'Text of the tooltip right here...',
       control: {
         type: 'text',
       },
     },
+  },
+  args: {
+    children: 'Text of the tooltip right here...',
   },
 };
 

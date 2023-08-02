@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { iconButtonArgTypes } from '../../../components/IconButton/iconButtonAttributes';
+import { iconButtonArgs, iconButtonArgTypes } from '../../../components/IconButton/iconButtonAttributes';
 import { ListViewItemEditButton } from '../../../index';
 
 delete iconButtonArgTypes.size;
@@ -17,6 +17,7 @@ export default {
     },
   },
   argTypes: iconButtonArgTypes,
+  args: iconButtonArgs,
 };
 
 export const Default = args => (

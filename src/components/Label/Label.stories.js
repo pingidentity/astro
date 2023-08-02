@@ -13,13 +13,15 @@ export default {
         type: 'select',
         options: modes,
       },
-      defaultValue: modes.DEFAULT,
     },
     isDisabled: {},
     isRequired: {},
     requiredIndicator: {
       control: 'none',
     },
+  },
+  args: {
+    mode: modes.DEFAULT,
   },
 };
 

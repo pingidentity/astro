@@ -26,8 +26,10 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: '100px',
     },
+  },
+  args: {
+    maxHeight: '100px',
   },
 };
 

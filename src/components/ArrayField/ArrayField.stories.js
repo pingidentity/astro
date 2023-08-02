@@ -35,19 +35,16 @@ export default {
   },
   argTypes: {
     label: {
-      defaultValue: 'Array field label',
       control: {
         type: 'text',
       },
     },
     helperText: {
-      defaultValue: 'Helper text info...',
       control: {
         type: 'text',
       },
     },
     addButtonLabel: {
-      defaultValue: '+ Add field',
       control: {
         type: 'text',
       },
@@ -63,6 +60,11 @@ export default {
       },
     },
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Array field label',
+    helperText: 'Helper text info...',
+    addButtonLabel: '+ Add field',
   },
 };
 

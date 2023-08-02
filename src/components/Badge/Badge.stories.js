@@ -34,17 +34,19 @@ export default {
       },
     },
     label: {
-      defaultValue: 'Label',
       control: {
         type: 'text',
       },
     },
     isUppercase: {
-      defaultValue: false,
       control: {
         type: 'boolean',
       },
     },
+  },
+  args: {
+    label: 'Label',
+    isUppercase: false,
   },
   parameters: {
     docs: {

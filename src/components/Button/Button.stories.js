@@ -22,6 +22,10 @@ export default {
   argTypes: {
     ...buttonArgTypes,
   },
+  args: {
+    variant: 'default',
+    children: 'Button Text',
+  },
   parameters: {
     docs: {
       source: {

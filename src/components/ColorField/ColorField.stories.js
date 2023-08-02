@@ -34,7 +34,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Color Field',
     },
     helperText: {
       control: {
@@ -45,7 +44,6 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: { sx: { width: 40, height: 30 } },
     },
     containerProps: {
       control: {
@@ -55,6 +53,10 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Color Field',
+    buttonProps: { sx: { width: 40, height: 30 } },
   },
 };
 

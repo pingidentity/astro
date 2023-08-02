@@ -17,14 +17,16 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Clients Secret',
     },
     secretData: {
       control: {
         type: 'text',
       },
-      defaultValue: 'A secret piece of text',
     },
+  },
+  args: {
+    dataTitle: 'Clients Secret',
+    secretData: 'A secret piece of text',
   },
   parameters: {
     docs: {

@@ -27,8 +27,10 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: pingImg,
     },
+  },
+  args: {
+    src: pingImg,
   },
 };
 

@@ -42,11 +42,13 @@ export default {
         type: 'select',
         options: panelSizes,
       },
-      defaultValue: 'medium',
     },
     isOpen: {
       control: 'none',
     },
+  },
+  args: {
+    size: 'medium',
   },
   parameters: {
     docs: {
