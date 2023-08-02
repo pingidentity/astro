@@ -32,7 +32,6 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: ChevronRightIcon,
       description:
         'The icon to render. List of icons at https://materialdesignicons.com/',
     },
@@ -41,6 +40,9 @@ export default {
         type: 'none',
       },
     },
+  },
+  args: {
+    icon: ChevronRightIcon,
   },
 };
 

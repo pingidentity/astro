@@ -12,14 +12,13 @@ import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttri
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import SwitchFieldReadme from './SwitchField.mdx';
-import { switchFieldArgTypes } from './switchFieldAttributes';
+import { switchFieldArgs, switchFieldArgTypes } from './switchFieldAttributes';
 
 export default {
   title: 'Form/SwitchField',
   component: SwitchField,
   parameters: {
     docs: {
-
       page: () => (
         <>
           <SwitchFieldReadme />
@@ -37,6 +36,7 @@ export default {
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },
+  args: switchFieldArgs,
 };
 
 export const Default = args => (

@@ -157,6 +157,8 @@ export * from './components/TextField';
 export { default as TimeZonePicker } from './components/TimeZonePicker';
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
+export { default as PageHeader } from './experimental/PageHeader';
+export * from './experimental/PageHeader';
 
 /* eslint-enable import/export */
 

@@ -33,14 +33,16 @@ export default {
         type: 'none',
         options: htmlElements,
       },
-      defaultValue: 'img',
     },
     src: {
       control: {
         type: 'none',
       },
-      defaultValue: pingImg,
     },
+  },
+  args: {
+    as: 'img',
+    src: pingImg,
   },
 };
 

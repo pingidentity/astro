@@ -29,7 +29,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Example Label',
     },
     hintText: {
       control: {
@@ -50,13 +49,11 @@ export default {
       control: {
         type: 'number',
       },
-      defaultValue: 1,
     },
     defaultValue: {
       control: {
         type: 'none',
       },
-      defaultValue: 17,
     },
     formatOptions: {
       control: {
@@ -72,13 +69,11 @@ export default {
       control: {
         type: 'none',
       },
-      defaultValue: 'decrement-button',
     },
     incrementAriaLabel: {
       control: {
         type: 'none',
       },
-      defaultValue: 'increment-button',
     },
     minValue: {
       control: {
@@ -93,6 +88,13 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Example Label',
+    step: 1,
+    defaultValue: 17,
+    decrementAriaLabel: 'decrement-button',
+    incrementAriaLabel: 'increment-button',
   },
 };
 

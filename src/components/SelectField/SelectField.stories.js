@@ -79,7 +79,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Example Label',
     },
     placeholder: {},
     defaultText: {},
@@ -98,7 +97,6 @@ export default {
         type: 'select',
         options: Object.values(labelModes),
       },
-      defaultValue: Object.values(labelModes)[0],
     },
     defaultSelectedKey: {},
     disabledKeys: {},
@@ -118,6 +116,10 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Example Label',
+    labelMode: Object.values(labelModes)[0],
   },
 };
 

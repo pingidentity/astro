@@ -22,15 +22,16 @@ export default {
     },
   },
   argTypes: {
-    isDisabled: {
-      defaultValue: false,
-    },
+    isDisabled: {},
     defaultSelectedKey: {},
     selectedKey: {
       control: {
         type: 'none',
       },
     },
+  },
+  args: {
+    isDisabled: false,
   },
 };
 

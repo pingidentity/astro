@@ -14,13 +14,6 @@ import { Box, Button, Icon, IconButton, Text } from '../../index';
 
 import CalendarGrid from './CalendarGrid';
 
-/**
- * A simple component to display a monthly grid for date selection.
- * Utilizes [useCalendar, useCalendarGrid, useCalendarCell](https://react-spectrum.adobe.com/react-aria/useCalendar.html),
- * from React Aria and [useCalendarState](https://react-spectrum.adobe.com/react-stately/useCalendarState.html)
- * from React Stately.
- */
-
 const Calendar = forwardRef((props, ref) => {
   const { value, defaultValue, minValue, maxValue } = props;
   const { locale } = useLocale();

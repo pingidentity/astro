@@ -34,7 +34,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Continue',
     },
     role: {},
     id: {
@@ -49,7 +48,6 @@ export default {
       },
     },
     hasCloseButton: {
-      defaultValue: true,
     },
     isClosedOnBlur: {},
     isDismissable: {},
@@ -94,6 +92,10 @@ export default {
         type: 'none',
       },
     },
+  },
+  args: {
+    title: 'Continue',
+    hasCloseButton: true,
   },
 };
 

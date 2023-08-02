@@ -18,16 +18,6 @@ import DateField from './DateField';
  * The `is-selected` class is added to the button after the component unmounts.
  */
 
-/**
- * Combines an DateField with a calendar to enter or select a date.
- *
- * Utilizes [useDatePicker](https://react-spectrum.adobe.com/react-aria/useDatePicker.html) from React
- * Aria and [useDatePickerState](https://react-spectrum.adobe.com/react-stately/useDatePickerState.html)
- * from React Stately.
- *
- * Props not specified are passed along to the underlying `DateField` component.
- */
-
 const DatePicker = forwardRef((props, ref) => {
   const {
     defaultValue,

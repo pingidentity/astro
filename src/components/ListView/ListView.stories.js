@@ -39,9 +39,7 @@ export default {
         options: loadingStates,
       },
     },
-    disabledKeys: {
-      defaultValue: ['Snake'],
-    },
+    disabledKeys: {},
     items: {
       control: {
         type: 'none',
@@ -49,9 +47,12 @@ export default {
     },
     onSelectionChange: {
       control: 'none',
-      // eslint-disable-next-line no-console
-      defaultValue: console.log,
     },
+  },
+  args: {
+    disabledKeys: ['Snake'],
+    // eslint-disable-next-line no-console
+    onSelectionChange: console.log,
   },
 };
 

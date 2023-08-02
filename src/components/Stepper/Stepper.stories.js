@@ -12,10 +12,6 @@ export default {
   title: 'Components/Stepper',
   component: Stepper,
   decorators: [withDesign],
-  args: {
-    items: undefined,
-    onStepChange: undefined,
-  },
   argTypes: {
     activeStep: {
       control: {
@@ -23,11 +19,9 @@ export default {
         min: 0,
         step: 1,
       },
-      defaultValue: 1,
       description: 'The number of the current step (using one-based indexing)',
       table: {
         type: { summary: 'number' },
-        defaultValue: { summary: 1 },
       },
     },
     onStepChange: {
@@ -36,11 +30,16 @@ export default {
       },
     },
     items: {
-      defaultValue: undefined,
       control: {
         type: 'none',
       },
     },
+  },
+  args: {
+    activeStep: 1,
+    table: { summary: 1 },
+    items: undefined,
+    onStepChange: undefined,
   },
   parameters: {
     docs: {

@@ -27,15 +27,9 @@ export default {
     },
   },
   argTypes: {
-    listTitle: {
-      defaultValue: 'Selected Groups',
-    },
-    openAriaLabel: {
-      defaultValue: 'Open filter menu?',
-    },
-    closeAriaLabel: {
-      defaultValue: 'Close filter menu?',
-    },
+    listTitle: {},
+    openAriaLabel: {},
+    closeAriaLabel: {},
     isDefaultOpen: {},
     isOpen: {
       onClick: { action: 'clicked' },
@@ -43,6 +37,11 @@ export default {
         type: 'none',
       },
     },
+  },
+  args: {
+    listTitle: 'Selected Groups',
+    openAriaLabel: 'Open filter menu?',
+    closeAriaLabel: 'Close filter menu?',
   },
 };
 

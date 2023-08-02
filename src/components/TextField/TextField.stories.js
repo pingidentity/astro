@@ -34,7 +34,6 @@ export default {
         type: 'select',
         options: Object.values(labelModes),
       },
-      defaultValue: Object.values(labelModes)[0],
     },
     variant: {
       control: {
@@ -44,6 +43,9 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    labelMode: Object.values(labelModes)[0],
   },
 };
 

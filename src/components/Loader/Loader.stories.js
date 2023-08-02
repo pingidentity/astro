@@ -28,7 +28,6 @@ export default {
         type: 'select',
         options: flatColorList.map(([colorName]) => colorName),
       },
-      defaultValue: 'active',
     },
     size: {
       control: {
@@ -38,6 +37,9 @@ export default {
         'The size of the loader. Sizes can either be a string such as xs, sm, md, etc or numeric size with unit such as 15px. Default size inherits the font size. '
         + 'Numeric value paired with a unit. https://www.w3schools.com/cssref/css_units.asp',
     },
+  },
+  args: {
+    color: 'active',
   },
 };
 
@@ -53,5 +55,5 @@ Default.parameters = {
 };
 
 export const CustomColor = () => (
-  <Loader color="neutral.60" />
+  <Loader color="neutral.50" />
 );

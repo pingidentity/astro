@@ -35,14 +35,12 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'Example Label',
     },
     labelMode: {
       control: {
         type: 'select',
         options: Object.values(labelModes),
       },
-      defaultValue: Object.values(labelModes)[0],
     },
     defaultValue: {},
     placeholder: {},
@@ -74,6 +72,10 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Example Label',
+    labelMode: Object.values(labelModes)[0],
   },
 };
 

@@ -21,7 +21,7 @@ import {
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import IconButtonReadme from './IconButton.mdx';
-import { iconButtonArgTypes } from './iconButtonAttributes';
+import { iconButtonArgs, iconButtonArgTypes } from './iconButtonAttributes';
 
 export default {
   title: 'Components/IconButton',
@@ -41,6 +41,7 @@ export default {
     },
   },
   argTypes: iconButtonArgTypes,
+  args: iconButtonArgs,
 };
 
 export const Default = args => (

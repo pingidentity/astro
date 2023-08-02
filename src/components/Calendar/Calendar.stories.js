@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
 import { withDesign } from 'storybook-addon-designs';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import Calendar from './Calendar';
+import CalendarReadme from './Calendar.mdx';
 
 export default {
   title: 'Components/Calendar',
@@ -19,6 +21,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <CalendarReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
   argTypes: {
@@ -41,7 +49,6 @@ export default {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     id: {
       control: {
@@ -52,19 +59,16 @@ export default {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isReadOnly: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isRequired: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     maxValue: {
       control: {
@@ -80,17 +84,23 @@ export default {
       control: {
         type: 'func',
       },
-      defaultValue: null,
       action: 'change',
     },
     onFocusChange: {
       control: {
         type: 'func',
       },
-      defaultValue: null,
       action: 'focus change',
     },
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    hasAutoFocus: false,
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+    onChange: null,
+    onFocusChange: null,
   },
 };
 

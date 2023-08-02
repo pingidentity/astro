@@ -3,10 +3,12 @@ import { parseDate } from '@internationalized/date';
 import { chain } from '@react-aria/utils';
 import { actions } from '@storybook/addon-actions';
 
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import DatePicker from './DatePicker';
+import DatePickerReadme from './DatePicker.mdx';
 
 export default {
   title: 'Form/DatePicker',
@@ -16,6 +18,12 @@ export default {
       source: {
         type: 'code',
       },
+      page: () => (
+        <>
+          <DatePickerReadme />
+          <DocsLayout />
+        </>
+      ),
     },
   },
   argTypes: {
@@ -33,37 +41,31 @@ export default {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     hasFormatHelpText: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isDisabled: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isReadOnly: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     isRequired: {
       control: {
         type: 'boolean',
       },
-      defaultValue: false,
     },
     label: {
       control: {
         type: 'text',
       },
-      defaultValue: 'Example label',
     },
     maxValue: {
       control: {
@@ -76,10 +78,18 @@ export default {
       },
     },
     onChange: {
-      defaultValue: null,
       action: 'handleChange',
     },
     ...ariaAttributeBaseArgTypes,
+  },
+  args: {
+    hasAutoFocus: false,
+    hasFormatHelpText: false,
+    isDisabled: false,
+    isReadOnly: false,
+    isRequired: false,
+    label: 'Example label',
+    onChange: null,
   },
 };
 

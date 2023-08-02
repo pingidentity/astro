@@ -36,7 +36,6 @@ export default {
       control: {
         type: 'text',
       },
-      defaultValue: 'What\'s your favourite color?',
     },
     placeholder: {},
     defaultText: {},
@@ -68,6 +67,9 @@ export default {
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'What\'s your favourite color?',
   },
 };
 

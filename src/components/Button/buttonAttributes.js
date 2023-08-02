@@ -36,11 +36,9 @@ export const buttonArgTypes = {
       type: 'select',
       options: variantOptions,
     },
-    defaultValue: 'default',
     description: descriptions.variant,
   },
   children: {
-    defaultValue: 'Button Text',
     table: {
       type: {
         summary: 'string',

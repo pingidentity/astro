@@ -69,7 +69,6 @@ export default {
   decorators: [withDesign],
   argTypes: {
     children: {
-      defaultValue: code,
       table: {
         type: {
         },
@@ -81,6 +80,9 @@ export default {
     Prism: {
       control: 'none',
     },
+  },
+  args: {
+    children: code,
   },
   parameters: {
     docs: {
