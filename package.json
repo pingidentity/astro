@@ -1,7 +1,7 @@
 {
   "name": "@pingux/astro",
   "version": "2.9.1",
-  "description": "PingUX themeable React component library",
+  "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
     "url": "git@gitlab.corp.pingidentity.com:ux/pingux.git"
