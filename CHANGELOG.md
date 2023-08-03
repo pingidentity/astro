@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.0...@pingux/astro@2.9.1) (2023-08-03)
+
+
+### Bug Fixes
+
+* Add dangle comma for lint rule ([4733d5e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4733d5e96041d3ee6cc19156a0075aa4c026bba7))
+* Add default title arg for PageHeader according to Storybook 7 deprecation ([eca2cfa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eca2cfac2388767768cc635ba7b2de5e9aa980df))
+* Add imports for Meta component to DatePicker and Calendar mdx files ([97c904e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/97c904e09a4655a0e57b1627ea0c83750605486a))
+
+
+
+
+
 # [2.9.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.8.4...@pingux/astro@2.9.0) (2023-08-02)
 
 
