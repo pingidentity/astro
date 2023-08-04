@@ -89,4 +89,4 @@ ESLint packages or versions these features may stop working. Run this command ag
 
 ## Licensing
 
-This project is licensed under the Apache license. See the [LICENSE](LICENSE) file for more information.
+This project is licensed under the Apache 2.0 license. See the [LICENSE](LICENSE) file for more information.
