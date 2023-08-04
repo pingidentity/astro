@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.2...@pingux/astro@2.9.3) (2023-08-04)
+
+
+### Bug Fixes
+
+* Update license text in readme ([3b8bfa4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3b8bfa419bb5eab22d7b4d048ae76f8c78bcab9e))
+
+
+
+
+
 ## [2.9.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.1...@pingux/astro@2.9.2) (2023-08-04)
 
 
