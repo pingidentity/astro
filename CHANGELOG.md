@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.1...@pingux/astro@2.9.2) (2023-08-04)
+
+
+### Bug Fixes
+
+* Update package.json to rev version of Astro package: ([66fb4b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/66fb4b1e3bccadacdc7975e0b0cb1a21d03d36b6))
+
+
+
+
+
 ## [2.9.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.0...@pingux/astro@2.9.1) (2023-08-03)
 
 
