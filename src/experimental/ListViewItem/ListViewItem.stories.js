@@ -77,7 +77,7 @@ export const WithControls = () => (
       }}
     >
       <ListViewItemEditButton />
-      <ListViewItemSwitchField />
+      <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
         <Item key="enable">Enable user</Item>
         <Item key="disable">Disable user</Item>
