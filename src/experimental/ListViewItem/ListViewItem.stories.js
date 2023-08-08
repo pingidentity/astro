@@ -76,7 +76,7 @@ export const WithControls = () => (
         text: 'Fons Vernall',
       }}
     >
-      <ListViewItemEditButton />
+      <ListViewItemEditButton aria-label="edit-icon" />
       <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
         <Item key="enable">Enable user</Item>
