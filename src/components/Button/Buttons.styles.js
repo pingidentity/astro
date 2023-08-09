@@ -2,10 +2,10 @@ import { text as textVariants } from '../Text/Text.styles';
 
 export const base = {
   cursor: 'pointer',
-  height: 36,
-  lineHeight: '30px',
+  height: '37px',
+  lineHeight: '115%',
   minWidth: 'min-content',
-  px: 'md',
+  padding: '10px 15px',
   outline: 'none',
   display: 'inline-flex',
   alignItems: 'center',
@@ -73,6 +73,23 @@ const primary = {
   },
 };
 
+const withIcon = {
+  ...base,
+  padding: '8.5px 15px 8.5px 10px',
+  bg: 'white',
+  border: '1px solid',
+  borderColor: 'active',
+  '&.is-hovered': {
+    ...defaultHover,
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
 const success = {
   ...base,
   display: 'inline-flex',
@@ -109,7 +126,7 @@ const inline = {
   ...base,
   display: 'inline-flex',
   bg: 'white',
-  height: '22px',
+  height: '21px',
   lineHeight: 1,
   fontSize: 'sm',
   borderRadius: '15px',
@@ -143,6 +160,16 @@ const inlinePrimary = {
     border: '1px solid',
     borderColor: 'accent.20',
   },
+};
+
+const inlineWithIcon = {
+  ...inline,
+  padding: '3px 15px 3px 10px',
+};
+
+const inlinePrimaryWithIcon = {
+  ...inlinePrimary,
+  padding: '3px 15px 3px 10px',
 };
 
 export const text = {
@@ -217,8 +244,8 @@ const colorBlock = {
   outline: 'none',
   cursor: 'pointer',
   width: 150,
-  minHeight: 40,
-  p: '5px 15px',
+  height: '40px',
+  p: '5px 10px 5px 15px',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -310,4 +337,7 @@ export default {
   quiet,
   success,
   colorBlock,
+  withIcon,
+  inlineWithIcon,
+  inlinePrimaryWithIcon,
 };
