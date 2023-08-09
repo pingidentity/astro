@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import { ariaAttributeBaseArgTypes, ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { booleanArg, stringOrStringArray } from '../../utils/docUtils/docArgTypes';
 import { onHoverArgTypes, onHoverPropTypes } from '../../utils/docUtils/hoverProps';
 
@@ -40,6 +41,7 @@ export const listViewItemArgTypes = {
     type: { summary: '{ leftOfData, rightOfData }' },
   },
   ...onHoverArgTypes,
+  ...ariaAttributeBaseArgTypes,
 };
 
 export const listViewItemPropTypes = {
@@ -57,4 +59,5 @@ export const listViewItemPropTypes = {
     rightOfData: PropTypes.node,
   }),
   ...onHoverPropTypes,
+  ...ariaAttributesBasePropTypes,
 };
