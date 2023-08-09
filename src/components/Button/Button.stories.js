@@ -1,6 +1,6 @@
 import React from 'react';
-import AddCircleIcon from '@pingux/mdi-react/AddCircleIcon';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import PlusIcon from '@pingux/mdi-react/PlusIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -55,9 +55,15 @@ export const Disabled = () => (
 );
 
 export const TextIconButton = () => (
-  <Button mb="sm">
+  <Button mb="sm" variant="withIcon">
     <Box isRow alignItems="center">
-      <Icon icon={AddCircleIcon} mr="sm" color="active" size={20} title={{ name: 'Add Circle Icon' }} />
+      <Icon
+        icon={PlusIcon}
+        mr="xs"
+        color="active"
+        size={20}
+        title={{ name: 'Add Circle Icon' }}
+      />
       Add a Form
     </Box>
   </Button>
@@ -68,8 +74,28 @@ export const InlineButton = () => (
     <Button mb="sm" mr="auto" variant="inline">
       Inline
     </Button>
+    <Button mb="sm" mr="auto" variant="inlineWithIcon">
+      <Icon
+        icon={PlusIcon}
+        mr="xs"
+        color="active"
+        size={15}
+        title={{ name: 'Add Circle Icon' }}
+      />
+      Inline with icon
+    </Button>
     <Button mb="sm" mr="auto" variant="inlinePrimary">
       Inline primary
+    </Button>
+    <Button mb="sm" mr="auto" variant="inlinePrimaryWithIcon">
+      <Icon
+        icon={PlusIcon}
+        mr="xs"
+        color="active"
+        size={15}
+        title={{ name: 'Add Circle Icon' }}
+      />
+      Inline primary with icon
     </Button>
   </Box>
 );
