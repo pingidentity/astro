@@ -21,5 +21,5 @@ export default {
 };
 
 export const Default = args => (
-  <ListViewItemEditButton {...args} />
+  <ListViewItemEditButton aria-label="edit-icon" {...args} />
 );

@@ -35,8 +35,7 @@ const header = {
   display: 'inline-flex',
   bg: 'transparent',
   color: 'neutral.10',
-  paddingLeft: '5px',
-  paddingRight: '5px',
+  padding: '0 5px',
   flexGrow: 0,
   fontWeight: 700,
   '&.is-hovered': {

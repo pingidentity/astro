@@ -15,7 +15,7 @@ import { Box, Icon, IconButton } from '../../../index';
 const ListViewItemEditButton = props => {
   return (
     <Box>
-      <IconButton aria-label="edit-icon" {...props}>
+      <IconButton {...props}>
         <Icon icon={CreateIcon} size="sm" />
       </IconButton>
     </Box>

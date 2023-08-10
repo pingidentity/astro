@@ -52,6 +52,7 @@ export const Default = () => (
         icon: AccountIcon,
         text: 'Fons Vernall',
       }}
+      aria-label="Fons Vernall"
     />
   </Wrapper>
 );
@@ -64,6 +65,7 @@ export const WithSubtext = () => (
         subtext: 'rad_developer@pingidentity.com',
         text: 'Fons Vernall',
       }}
+      aria-label="Fons Vernall"
     />
   </Wrapper>
 );
@@ -75,9 +77,10 @@ export const WithControls = () => (
         icon: FormSelectIcon,
         text: 'Fons Vernall',
       }}
+      aria-label="Fons Vernall"
     >
-      <ListViewItemEditButton />
-      <ListViewItemSwitchField />
+      <ListViewItemEditButton aria-label="edit-icon" />
+      <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
         <Item key="enable">Enable user</Item>
         <Item key="disable">Disable user</Item>
@@ -104,6 +107,7 @@ export const WithRightOfDataSlot = () => {
           subtext: 'verylongemailaddress@email.com',
         }}
         slots={{ rightOfData: renderRightOfData }}
+        aria-label="Fons Vernall"
       >
         <ListViewItemMenu>
           <Item key="enable">Enable user</Item>
@@ -133,6 +137,7 @@ export const WithLeftOfDataSlot = () => {
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
+        aria-label="Fons Vernall"
       >
         <ListViewItemMenu>
           <Item key="enable">Enable user</Item>
