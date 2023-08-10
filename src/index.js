@@ -173,6 +173,7 @@ export {
 } from 'react-stately';
 
 // Experimental
+export { default as EditButton } from './experimental/EditButton';
 export { default as ListViewItemEditButton } from './experimental/ListViewItem/controls/ListViewItemEditButton';
 export { default as ListViewItemMenu } from './experimental/ListViewItem/controls/ListViewItemMenu';
 export { default as ListViewItemSwitchField } from './experimental/ListViewItem/controls/ListViewItemSwitchField';
