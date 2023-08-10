@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.3...@pingux/astro@2.10.0) (2023-08-10)
+
+
+### Bug Fixes
+
+* [UIP-6394] update button height and padding ([d55d6b4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d55d6b46b054f4d6c0669f77e9ac3bf9b49c6481))
+* [UIP-6418] Astro ListViewItem add aria props ([d98e322](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d98e3224467d8fc1b3cff25f2bf47bdb208163fc))
+
+
+### Features
+
+* [UIP-6402] Add EditButton component ([dd0da25](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dd0da25de3c5fbc1bad90578610d746000dc44c4))
+* [UIP-6428] ListViewItemSwitchField remove hardcoded aria-label ([cac06d3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cac06d3a968408c6bac02a1eda670df44bff3a1a))
+* [UIP-6429] ListViewItemEditButton remove hardcoded aria-label ([0d13dbd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0d13dbdf0b0b21c8620dcc70e9fabf0d6c98b21d))
+
+
+
+
+
 ## [2.9.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.2...@pingux/astro@2.9.3) (2023-08-04)
 
 
