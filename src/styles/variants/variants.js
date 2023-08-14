@@ -32,6 +32,7 @@ import table from '../../components/Table/Table.styles';
 import * as tab from '../../components/Tabs/Tabs.style';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
+import panelHeader from '../../experimental/PanelHeader/PanelHeader.styles';
 
 export default {
   accordion,
@@ -60,6 +61,7 @@ export default {
   navBar,
   overlayPanel,
   popoverMenu,
+  panelHeader,
   rockerButton,
   scrollBox,
   separator,
