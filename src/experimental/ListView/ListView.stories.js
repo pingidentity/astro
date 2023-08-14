@@ -1,26 +1,23 @@
 import React from 'react';
 import { Item, useAsyncList } from 'react-stately';
-import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
-import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
-  Icon,
-  IconButton,
   ListView,
-  Text,
+  ListViewItem,
+  ListViewItemMenu,
+  ListViewItemSwitchField,
 } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 
 import ListViewReadme from './ListView.mdx';
 
-
 export default {
-  title: 'Components/ListView',
+  title: 'Experimental/ListView',
   component: ListView,
   parameters: {
     docs: {
@@ -42,9 +39,7 @@ export default {
         options: loadingStates,
       },
     },
-    disabledKeys: {
-      defaultValue: ['Snake'],
-    },
+    disabledKeys: {},
     items: {
       control: {
         type: 'none',
@@ -52,9 +47,12 @@ export default {
     },
     onSelectionChange: {
       control: 'none',
-      // eslint-disable-next-line no-console
-      defaultValue: console.log,
     },
+  },
+  args: {
+    disabledKeys: ['Snake'],
+    // eslint-disable-next-line no-console
+    onSelectionChange: console.log,
   },
 };
 
@@ -301,41 +299,29 @@ const actions = {
   onLoadMore: action('onLoadMore'),
 };
 
-const ListElement = ({ item }) => (
-  <Box isRow>
-    <Box isRow mr="auto" alignSelf="center">
-      <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size="md" />
-      <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
-    </Box>
-    <Box isRow alignSelf="center" gap="sm">
-      <IconButton aria-label="create-icon">
-        <Icon icon={CreateIcon} size="sm" />
-      </IconButton>
-      <IconButton aria-label="actions-icon">
-        <Icon icon={MoreVertIcon} size="sm" />
-      </IconButton>
-    </Box>
-  </Box>
+const Controls = () => (
+  <>
+    <ListViewItemSwitchField />
+    <ListViewItemMenu>
+      <Item key="enable">Enable user</Item>
+      <Item key="disable">Disable user</Item>
+      <Item key="delete">Delete user</Item>
+    </ListViewItemMenu>
+  </>
 );
 
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items}>
     {item => (
-      <Item key={item.name} textValue={item.name} data-id={item.key}>
-        <Box isRow>
-          <Box isRow mr="auto" alignSelf="center">
-            <Icon icon={FormSelectIcon} mr="sm" color="accent.40" size="md" />
-            <Text variant="itemTitle" alignSelf="center">{item.name}</Text>
-          </Box>
-          <Box isRow alignSelf="center" gap="sm">
-            <IconButton aria-label="create-icon">
-              <Icon icon={CreateIcon} size="sm" />
-            </IconButton>
-            <IconButton aria-label="actions-icon" size="sm">
-              <Icon icon={MoreVertIcon} size="sm" />
-            </IconButton>
-          </Box>
-        </Box>
+      <Item key={item.name}>
+        <ListViewItem
+          data={{
+            text: item.name,
+            icon: FormSelectIcon,
+          }}
+        >
+          <Controls />
+        </ListViewItem>
       </Item>
     )}
   </ListView>
@@ -415,8 +401,15 @@ export const InfiniteLoadingList = args => {
         onLoadMore={list.loadMore}
       >
         {item => (
-          <Item key={item.name} textValue={item.name}>
-            <ListElement item={item} />
+          <Item key={item.name}>
+            <ListViewItem
+              data={{
+                text: item.name,
+                icon: FormSelectIcon,
+              }}
+            >
+              <Controls />
+            </ListViewItem>
           </Item>
         )}
       </ListView>
@@ -440,8 +433,15 @@ InfiniteLoadingList.parameters = {
 export const MultipleSelection = ({ ...args }) => (
   <ListView {...props} {...args} items={items} selectionMode="multiple">
     {item => (
-      <Item key={item.name} textValue={item.name}>
-        <ListElement item={item} />
+      <Item key={item.name}>
+        <ListViewItem
+          data={{
+            text: item.name,
+            icon: FormSelectIcon,
+          }}
+        >
+          <Controls />
+        </ListViewItem>
       </Item>
     )}
   </ListView>
