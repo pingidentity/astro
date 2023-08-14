@@ -14,6 +14,8 @@ import { SwitchField } from '../../../index';
 const ListViewItemSwitchField = props => {
   return (
     <SwitchField
+      role="group"
+      aria-label="active user"
       isDefaultSelected
       mr={0}
       {...props}

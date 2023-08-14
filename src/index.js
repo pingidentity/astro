@@ -180,4 +180,8 @@ export { default as ListViewItemEditButton } from './experimental/ListViewItem/c
 export { default as ListViewItemMenu } from './experimental/ListViewItem/controls/ListViewItemMenu';
 export { default as ListViewItemSwitchField } from './experimental/ListViewItem/controls/ListViewItemSwitchField';
 export { default as ListViewItem } from './experimental/ListViewItem/ListViewItem';
+export { default as PanelHeader } from './experimental/PanelHeader';
+export { default as PanelHeaderCloseButton } from './experimental/PanelHeader/controls/PanelHeaderCloseButton';
+export { default as PanelHeaderMenu } from './experimental/PanelHeader/controls/PanelHeaderMenu';
+export { default as PanelHeaderSwitchField } from './experimental/PanelHeader/controls/PanelHeaderSwitchField';
 export { default as SaveBar } from './experimental/SaveBar/SaveBar';
