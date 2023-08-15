@@ -382,20 +382,13 @@ export const RightAlignedBadges = args => {
   });
 
   const envNode = (
-    <Box isRow>
+    <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
   );
-
-  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
-
-  const handleSelectionChange = newEnvName => {
-    const envObj = findEnvObj(newEnvName);
-    setSelectedEnvironment({ ...envObj });
-  };
 
   const items = [
     { name: 'Default' },
@@ -410,6 +403,13 @@ export const RightAlignedBadges = args => {
     { name: 'Turtle', isSandbox: true },
     { name: 'Mouse' },
   ];
+
+  const findEnvObj = envName => items.find(({ name }) => name === envName);
+
+  const handleSelectionChange = newEnvName => {
+    const envObj = findEnvObj(newEnvName);
+    setSelectedEnvironment({ ...envObj });
+  };
 
   return (
     <EnvironmentBreadcrumb
