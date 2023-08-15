@@ -13,15 +13,21 @@ const descriptions = {
   linkProps: 'When present, provides meta click functionality',
 };
 
-export const listViewItemArgTypes = {
+export const SharedItemArgTypes = {
+  data: {
+    description: descriptions.data,
+    type: { summary: '{ icon, text, subtext }' },
+    control: {
+      type: 'none',
+    },
+  },
   className: {
     description: descriptions.className,
     type: { summary: stringOrStringArray },
   },
-  data: {
-    description: descriptions.data,
-    type: { summary: '{ icon, text, subtext }' },
-  },
+};
+
+export const listViewItemArgTypes = {
   isSelected: {
     ...booleanArg,
     description: descriptions.isSelected,
@@ -40,17 +46,21 @@ export const listViewItemArgTypes = {
     description: descriptions.slots,
     type: { summary: '{ leftOfData, rightOfData }' },
   },
+  ...SharedItemArgTypes,
   ...onHoverArgTypes,
   ...ariaAttributeBaseArgTypes,
 };
 
-export const listViewItemPropTypes = {
+export const SharedItemPropTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   data: PropTypes.shape({
     icon: PropTypes.elementType,
     subtext: PropTypes.string,
     text: PropTypes.string,
   }),
+};
+
+export const listViewItemPropTypes = {
   isSelected: PropTypes.bool,
   linkProps: PropTypes.object,
   onMetaClick: PropTypes.func,
@@ -58,6 +68,7 @@ export const listViewItemPropTypes = {
     leftOfData: PropTypes.node,
     rightOfData: PropTypes.node,
   }),
+  ...SharedItemPropTypes,
   ...onHoverPropTypes,
   ...ariaAttributesBasePropTypes,
 };

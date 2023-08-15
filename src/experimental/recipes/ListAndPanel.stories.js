@@ -328,7 +328,7 @@ export const PanelHeader = ({ item = { email: 'dburkitt5@columbia.edu', icon: Ac
             aria-label="close icon button"
             onPress={onClosePanel}
           >
-            <Icon size="sm" icon={CloseIcon} />
+            <Icon size="md" icon={CloseIcon} />
           </IconButton>
         </Box>
       </Box>
