@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.10.0...@pingux/astro@2.11.0) (2023-08-15)
+
+
+### Bug Fixes
+
+* [UIP-6431] badges are aligned ([76822d8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/76822d8938c4293f1f77c0c5012f48f101251269))
+
+
+### Features
+
+* [UIP-6401] Experimental PanelHeader ([7203991](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7203991f540abf23015207f158cc62758ec8ac10))
+
+
+
+
+
 # [2.10.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.9.3...@pingux/astro@2.10.0) (2023-08-10)
 
 
