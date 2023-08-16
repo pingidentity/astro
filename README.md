@@ -14,7 +14,7 @@ Yarn:
 
 ## Requirements
 
-- Node: 16+
+- Node: 18+
 - React: 16.8+
 
 ## Usage
