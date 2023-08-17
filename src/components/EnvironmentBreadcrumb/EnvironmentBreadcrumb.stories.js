@@ -83,10 +83,7 @@ const environmentsWithSections = [
 ];
 
 export const Default = args => {
-  const [selectedEnvironment, setSelectedEnvironment] = useState({
-    name: 'Snail',
-    isSandbox: true,
-  });
+  const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
 
   const envNode = (
     <Box isRow key={selectedEnvironment.name}>
@@ -129,10 +126,7 @@ export const Default = args => {
 };
 
 export const DefaultClosed = args => {
-  const [selectedEnvironment, setSelectedEnvironment] = useState({
-    name: 'Snail',
-    isSandbox: true,
-  });
+  const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
 
   const envNode = (
     <Box isRow key={selectedEnvironment.name}>
@@ -177,9 +171,9 @@ export const DefaultClosed = args => {
 export const WithSections = () => {
   const [environments, setEnvironments] = useState(environmentsWithSections);
   const [filteredOptionsNumber, setFilteredOptionsNumber] = useState(null);
-  const [selectedEnvironment, setSelectedEnvironment] = useState({
-    name: 'Consumer Banking Prod',
-  });
+  const [selectedEnvironment, setSelectedEnvironment] = useState(
+    environmentsWithSections[0].options[0],
+  );
   const recentEnvShown = 3;
   const totalOptionsNumber = environmentsWithSections.reduce(
     (acc, section) => acc + section.options.length, 0);
@@ -282,10 +276,7 @@ export const WithSections = () => {
 export const OrgLevel = () => <EnvironmentBreadcrumb name="Globochem" />;
 
 export const DefaultOpen = () => {
-  const [selectedEnvironment, setSelectedEnvironment] = useState({
-    name: 'Dog',
-    isSandbox: true,
-  });
+  const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
 
   const envNode = (
     <Box isRow key={selectedEnvironment.name}>
@@ -329,10 +320,7 @@ export const DefaultOpen = () => {
 
 export const ControlledMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedEnvironment, setSelectedEnvironment] = useState({
-    name: 'Shark',
-    isSandbox: true,
-  });
+  const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
 
   const envNode = (
     <Box isRow key={selectedEnvironment.name}>
@@ -376,20 +364,6 @@ export const ControlledMenu = () => {
 };
 
 export const RightAlignedBadges = args => {
-  const [selectedEnvironment, setSelectedEnvironment] = useState({
-    name: 'Snail',
-    isSandbox: true,
-  });
-
-  const envNode = (
-    <Box isRow key={selectedEnvironment.name}>
-      <Text color="inherit">{selectedEnvironment.name}</Text>
-      {selectedEnvironment.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
-      ) : null}
-    </Box>
-  );
-
   const items = [
     { name: 'Default' },
     { name: 'Kangaroo', isSandbox: true },
@@ -403,6 +377,17 @@ export const RightAlignedBadges = args => {
     { name: 'Turtle', isSandbox: true },
     { name: 'Mouse' },
   ];
+
+  const [selectedEnvironment, setSelectedEnvironment] = useState(items[0]);
+
+  const envNode = (
+    <Box isRow key={selectedEnvironment.name}>
+      <Text color="inherit">{selectedEnvironment.name}</Text>
+      {selectedEnvironment.isSandbox ? (
+        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
+      ) : null}
+    </Box>
+  );
 
   const findEnvObj = envName => items.find(({ name }) => name === envName);
 
