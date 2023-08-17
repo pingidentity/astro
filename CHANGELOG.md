@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.11.0...@pingux/astro@2.11.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* [UIP-6432] Environmentbreadcrumb default badge behavior ([c6ec814](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c6ec814dcad7783185f15e98d583c1e2c9839eb2))
+
+
+
+
+
 # [2.11.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.10.0...@pingux/astro@2.11.0) (2023-08-15)
 
 
