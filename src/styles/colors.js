@@ -10,7 +10,7 @@ export const critical = {
   secondaryDark: chroma.mix('#a31300', '#000000', 0.4).hex(),
 };
 export const success = {
-  bright: '#00af18',
+  bright: '#00A817',
   dark: '#008512',
   light: '#e6ffe9',
 };
