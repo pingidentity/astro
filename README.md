@@ -17,6 +17,10 @@ Yarn:
 - Node: 18+
 - React: 16.8+
 
+## Typescript
+
+Run `yarn dlx @yarnpkg/sdks vscode` and reload the window to configure vscode for TypeScript.
+
 ## Usage
 
 All apps should be wrapped in an `<AstroWrapper>` for full functionality and styling.

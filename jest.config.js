@@ -2,7 +2,7 @@ module.exports = {
   rootDir: './',
   resolver: require.resolve('jest-pnp-resolver'),
   testMatch: [
-    '**/**/*.test.js?(x)',
+    '**/**/*.test.(js|ts)?(x)',
   ],
   testPathIgnorePatterns: [
     '/node_modules/',
@@ -39,6 +39,7 @@ module.exports = {
     },
   },
   coveragePathIgnorePatterns: [
+    '<rootDir>/src/index.ts',
     '<rootDir>/.storybook/',
     '.(story|stories).(js|jsx|mdx)',
     '<rootDir>/src/styles/',
@@ -51,5 +52,6 @@ module.exports = {
   ],
   transform: {
     '\\.jsx?$': ['babel-jest', { rootMode: 'upward' }],
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
 };

@@ -7,8 +7,8 @@ import mapKeys from 'lodash/mapKeys';
  * `className` prop.
  * @param {string} [defaultClass] An optional default class that will be added
  * @param {{}} [statuses] A mapping of conditional statuses and the current value of each one
- * @returns {string} A string of classes based on the input. Status keys will be converted to
- * kebab-case.
+ * @returns {{classNames: string}} A string of classes based on the input. Status keys will be
+ * converted to kebab-case.
  * e.g. useStatusClasses('thing', { isDisabled: true }) => "thing is-disabled"
  */
 const useStatusClasses = (defaultClass, statuses = {}) => {

@@ -3,6 +3,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render, screen } from '@testing-library/react';
 
+import { BoxProps } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
 
 import Box from '.';
@@ -17,7 +18,7 @@ const testId = 'test-box';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(
+const getComponent = (props: BoxProps = {}) => render(
   <CacheProvider value={emotionCache}>
     <Box {...defaultProps} {...props} />
   </CacheProvider>,
@@ -42,11 +43,11 @@ test('box as a row', () => {
 test('box with default gap', () => {
   getComponent({ gap: '30px' });
   const box = screen.getByTestId(testId);
-  expect(box).toHaveStyle('margin-top: 0px', { target: '> * + *' });
+  expect(box).toHaveStyle('margin-top: 0px');
 });
 
 test('box as row with gap', () => {
   getComponent({ isRow: true, gap: '30px' });
   const box = screen.getByTestId(testId);
-  expect(box).toHaveStyle('margin-left: 0px', { target: '> * + *' });
+  expect(box).toHaveStyle('margin-left: 0px');
 });

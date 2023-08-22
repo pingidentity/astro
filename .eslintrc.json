@@ -60,7 +60,7 @@
     "settings": {
         "import/resolver": {
             "node": {
-                "extensions": [".js", ".jsx", ".mdx"]
+                "extensions": [".js", ".jsx", ".mdx", ".ts", ".tsx"]
             }
         }
     },
@@ -73,6 +73,15 @@
             "rules": {
                 "react/prop-types": 0
             }
+        },
+        {
+          "files": [ "src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts" ],
+          "parser": "@typescript-eslint/parser",
+          "plugins": ["@typescript-eslint"],
+          "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+          "rules": {
+            "no-use-before-define": 0
+          }
         },
           // override "simple-import-sort" config
     {

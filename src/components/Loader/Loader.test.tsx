@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { LoaderProps } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
@@ -9,7 +10,7 @@ const testId = 'test-loader';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render((
+const getComponent = (props: LoaderProps = {}) => render((
   <Loader {...defaultProps} {...props} />
 ));
 

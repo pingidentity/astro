@@ -164,6 +164,7 @@ export * from './experimental/PageHeader';
 
 export { default as DataTable } from './components/DataTable';
 export * from './components/DataTable';
+export * from './types';
 export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
 export { Item, Section, useOverlayTriggerState } from 'react-stately';
 export {
