@@ -1,24 +1,27 @@
 import React, { forwardRef, useMemo } from 'react';
 import styled from '@emotion/styled';
-import { propType as stylePropType } from '@styled-system/prop-types';
 import { toNumber } from 'lodash';
-import PropTypes from 'prop-types';
 import { flexbox, layout, typography } from 'styled-system';
 import { Box as ThemeUIBox } from 'theme-ui';
 
 import { usePropWarning, useStatusClasses } from '../../hooks';
+import { BoxProps, ReactRef } from '../../types';
 
-const ExtendedBox = styled(ThemeUIBox)(layout, flexbox, typography);
+const ExtendedBox = styled(ThemeUIBox)(
+  layout,
+  flexbox,
+  typography,
+);
 
-const Box = forwardRef((props, ref) => {
+const Box = forwardRef((props: BoxProps, ref: ReactRef) => {
   const {
-    flexDirection, // eslint-disable-line
+    flexDirection,
     gap,
     isRow,
     isDisabled,
     className,
     fontSize,
-    sx, // eslint-disable-line
+    sx,
     ...others
   } = props;
   const fd = flexDirection || isRow ? 'row' : 'column';
@@ -28,7 +31,7 @@ const Box = forwardRef((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
 
   if (gap) {
-    custom['& > * + *:not(:first-child) /* emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason */'] = {
+    custom['& > * + *:not(:first-of-type:not(style):not(:first-of-type ~ *))'] = {
       [fd === 'row' ? 'marginLeft' : 'marginTop']: gap,
     };
   }
@@ -54,20 +57,6 @@ const Box = forwardRef((props, ref) => {
     />
   );
 });
-
-Box.propTypes = {
-  /** The background color of the box. */
-  bg: PropTypes.string,
-  /** Whether the box is disabled. */
-  isDisabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  /** The base HTML tag name or React component type to render */
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
-  /** When true, display as a row rather than a column. */
-  isRow: PropTypes.bool,
-  /** Gap between items, whether in a row or column. */
-  gap: stylePropType,
-  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
 
 Box.defaultProps = {
   as: 'div',

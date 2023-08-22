@@ -5,7 +5,7 @@ import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
 /**
  * A custom hook which returns the pixel value of a tShirtSize.
  * @param {Object} [props] The props object
- * @param {String} [props.size] The size of the svg container
+ * @param {String | Number} [props.size] The size of the svg container
  * @returns {Object} `{ sizeProps: Object }`
  */
 

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { Meta, Story } from '@storybook/react';
+import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -11,6 +13,7 @@ import {
   TableRow,
   Text,
 } from '../../index';
+import { SxObject } from '../../types';
 
 import TextReadme from './Text.mdx';
 
@@ -53,9 +56,9 @@ export default {
       description: 'Background color.',
     },
   },
-};
+} as Meta;
 
-const sx = {
+const sx: SxObject = {
   cell: {
     wordWrap: 'break-word',
     wordBreak: 'break-word',
@@ -65,7 +68,7 @@ const sx = {
   },
 };
 
-const TableHeading = ({ title }) => (
+const TableHeading = ({ title }: {title: string}) => (
   <TableHead>
     <TableRow key="head">
       <TableCell sx={sx.cell} isHeading width="30%">
@@ -84,7 +87,19 @@ const TableHeading = ({ title }) => (
   </TableHead>
 );
 
-const TableData = ({ variant, value }) => (
+type TableDataValue = {
+  weight: string,
+  fontSize: string,
+  example: ReactNode,
+}
+
+type TableDataProps = {
+  key?: string | undefined,
+  variant: string,
+  value: TableDataValue
+}
+
+const TableData = ({ variant, value }: TableDataProps) => (
   <TableRow sx={{ backgroundColor: 'transparent !important', alignItems: 'center' }}>
     <TableCell sx={sx.cell} width="30%"><Text>{variant}</Text></TableCell>
     <TableCell sx={sx.cell} width="30%"><Text>{value.weight}</Text></TableCell>
@@ -93,7 +108,7 @@ const TableData = ({ variant, value }) => (
   </TableRow>
 );
 
-export const Default = () => {
+export const Default: Story = () => {
   const fontSizes = {
     xx: '23px (xx)',
     lg: '17px (lg)',
@@ -318,7 +333,7 @@ export const Default = () => {
   );
 };
 
-export const WithCustomWidth = () => (
+export const WithCustomWidth: Story = () => (
   <Box width={200}>
     <Text p="xl">
       superlongtextinonelinewithnowhitespacessoitcanbelongerthatanywidth
@@ -326,8 +341,8 @@ export const WithCustomWidth = () => (
   </Box>
 );
 
-export const TypographyStyleProps = () => {
-  const textProps = {
+export const TypographyStyleProps: Story = () => {
+  const textProps: ThemeUICSSObject = {
     fontFamily: 'times',
     fontSize: 'md',
     fontWeight: 900,

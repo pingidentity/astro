@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { JSX } from 'react';
 
+import { TableCellProps } from '../../types';
 import Box from '../Box';
 
 /**
@@ -12,18 +12,13 @@ import Box from '../Box';
  *
  */
 
-const TableCell = props => {
+const TableCell = (props: TableCellProps): JSX.Element => {
   const { children, isHeading, ...others } = props;
   return (
     <Box variant={isHeading ? 'table.head' : 'table.data'} as={isHeading ? 'th' : 'td'} {...others}>
       {children}
     </Box>
   );
-};
-
-TableCell.propTypes = {
-  /** Determines whether or not the html rendered is a th or td element. */
-  isHeading: PropTypes.bool,
 };
 
 export default TableCell;
