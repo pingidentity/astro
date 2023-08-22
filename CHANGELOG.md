@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.11.1...@pingux/astro@2.12.0) (2023-08-22)
+
+
+### Features
+
+* [UIP-6398] init typescript in Astro ([18bc665](https://gitlab.corp.pingidentity.com/ux/pingux/commit/18bc665864ec3c553d164934dbc24af3d7df4fef))
+
+
+
+
+
 ## [2.11.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.11.0...@pingux/astro@2.11.1) (2023-08-17)
 
 
