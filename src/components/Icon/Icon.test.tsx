@@ -2,12 +2,13 @@ import React from 'react';
 import Earth from '@pingux/mdi-react/EarthIcon';
 import { render, screen } from '@testing-library/react';
 
+import { IconProps, IconTypeExtended, Modify } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
 
 import Icon from '.';
 
 const testId = 'test-icon';
-const defaultProps = {
+const defaultProps: IconProps = {
   'data-testid': testId,
   icon: Earth,
   title: {
@@ -15,7 +16,10 @@ const defaultProps = {
     name: 'Earth Icon',
   },
 };
-const getComponent = (props = {}) => render((
+
+type IconPropsWithDefaults = Modify<IconProps, {icon?: IconTypeExtended}>
+
+const getComponent = (props: IconPropsWithDefaults = {}) => render((
   <Icon {...defaultProps} {...props} />
 ));
 

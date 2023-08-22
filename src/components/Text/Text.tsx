@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import { flexbox, layout, typography } from 'styled-system';
 import { Text as ThemeUIText } from 'theme-ui';
 
+import { TextProps } from '../../types';
 import { textVariants } from '../../utils/devUtils/constants/variants';
 
-const ExtendedText = styled(ThemeUIText)(layout, flexbox, typography);
+const ExtendedText = styled(ThemeUIText)(
+  layout,
+  flexbox,
+  typography,
+);
 
-const Text = React.forwardRef((props, ref) => (
+const Text = React.forwardRef((props: TextProps, ref: React.Ref<HTMLDivElement>) => (
   <ExtendedText variant="base" {...props} ref={ref} />
 ));
-
-Text.propTypes = {
-  variant: PropTypes.string,
-};
-
 
 Text.defaultProps = {
   variant: textVariants.BASE,

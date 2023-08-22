@@ -1,6 +1,7 @@
 import React from 'react';
-import { ThemeProvider } from 'theme-ui';
+import { ThemeProvider, ThemeUICSSObject } from 'theme-ui';
 
+import { TextProps } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
 import testTheme from '../../utils/testUtils/testTheme';
 import { render, screen } from '../../utils/testUtils/testWrapper';
@@ -11,8 +12,9 @@ const testId = 'test-text';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => {
+const getComponent = (props: TextProps = {}) => {
   const { children } = props;
+
   return render(
     <ThemeProvider theme={testTheme}>
       <Text {...defaultProps} {...props}>
@@ -33,7 +35,7 @@ test('default text', () => {
 });
 
 test('typography props will be applied', () => {
-  const customTypographyProps = {
+  const customTypographyProps: ThemeUICSSObject = {
     fontFamily: 'times',
     fontSize: 'xx',
     fontWeight: 900,

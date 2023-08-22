@@ -7,7 +7,7 @@ const alreadyShown = new Set();
  * @param {Object} props - The whole props object
  * @param {String} propToWarn - Specify prop to warn not to use
  * @param {String} propToUse - Specify prop that should be used instead
- * @param {Boolean} allowDuplicates - If allow duplicate warning messages
+ * @param {Boolean} [allowDuplicates] - If allow duplicate warning messages
  */
 const usePropWarning = (props, propToWarn, propToUse, allowDuplicates) => {
   useEffect(() => {
