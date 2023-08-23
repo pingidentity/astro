@@ -4,11 +4,20 @@ import { Meta } from '@storybook/addon-docs';
 
 # ListViewItem
 
-The ListViewItem allows easy creation of list items. Styles have been included to match Ping specs. Use the data prop to pass in text, subtext and an mdi or svg icon.
+The ListViewItem allows easy creation of list items. Styles have been included to match Ping specs. Use the data prop to pass in text, subtext and an image, mdi or svg icon.
 
 ### Recommended Use
 This component is intended to be used inside a ListView component. See the [ListAndPanel](./?path=/story/experimental-recipes-listandpanel--list-and-panel) and [ScrollableListView](./?path=/story/experimental-recipes-scrollablelistview--scrollable-list-view)
 recipes for a more detailed examples.
+
+#### Icons and Images
+Add an icon by passing an mdi or svg icon to the `data.icon` prop. Default size is 25px.
+
+Add an image by passing an object with a `src` key to the `data.image` prop. `alt` and `aria-label` keys are supported but not required. Default size is 35px.
+
+If both an icon and an image are provided the icon will be rendered.
+
+For other Icon or Image sizes use slots with `rightOfData`.
 
 #### Slots
 The slots prop has been provided for added flexibility. Use the `rightOfData` slot to add icons, badges or other elements to the right of the data
