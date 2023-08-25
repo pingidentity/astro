@@ -1,7 +1,7 @@
 import { baseBadge } from '../Badge/Badge.styles';
 import { text } from '../Button/Buttons.styles';
 
-const container = {
+export const container = {
   maxWidth: '11.3em',
   maxHeight: '15em',
   overflow: 'hidden',

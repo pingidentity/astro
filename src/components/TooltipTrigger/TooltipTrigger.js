@@ -97,6 +97,8 @@ TooltipTrigger.propTypes = {
   /** The additional offset applied along the cross axis
    * between the element and its anchor element. */
   crossOffset: PropTypes.number,
+  /** Amount of time before the tooltip disappears */
+  closeDelay: PropTypes.number,
   /** Amount of time before the tooltip shows */
   delay: PropTypes.number,
   /** Where the popover menu opens relative to its trigger. */

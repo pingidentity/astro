@@ -32,7 +32,19 @@ const web = {
   },
 };
 
+const popover = {
+  ...app,
+  color: 'white',
+  fontSize: 'sm',
+  fontWeight: 1,
+  textDecoration: 'underline',
+  '&.is-hovered': {
+    cursor: 'pointer',
+  },
+};
+
 export default {
   app,
+  popover,
   web,
 };

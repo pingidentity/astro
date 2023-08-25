@@ -32,6 +32,7 @@ export const FIGMA_LINKS = {
   },
   helpHint: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A4534&t=We3h7LaaFJQnxdSy-1',
+    withLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=28958%3A40081&mode=design&t=WmSYPx1hR8kxFiXf-1',
   },
   icon: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=24360%3A49754&t=3b86het2R9G2Zyo2-1',

@@ -1,4 +1,5 @@
 import { defaultFocus } from '../Button/Buttons.styles';
+import { container } from '../TooltipTrigger/Tooltip.styles.js';
 
 export const hintButton = {
   bg: 'neutral.90',
@@ -38,4 +39,12 @@ export const hintButton = {
   },
 };
 
-export default { hintButton };
+const popoverContainer = {
+  ...container,
+  p: '10px',
+  fontSize: 'sm',
+  fontWeight: 1,
+  width: '117px',
+};
+
+export default { hintButton, popoverContainer };

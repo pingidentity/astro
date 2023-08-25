@@ -8,7 +8,7 @@ import {
 } from '../../index';
 import theme from '../../styles/theme';
 import axeTest from '../../utils/testUtils/testAxe';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 
 const getComponent = (props = {}) => render((
   <TooltipTrigger {...props}>
@@ -84,4 +84,23 @@ test('passing in width applies the correct width to the container', () => {
   getComponent({ isOpen: true, width: '100px' });
   const arrow = screen.getByTestId('popover-container');
   expect(arrow).toHaveStyle('width: 100px');
+});
+
+
+test('tooltip closes after closeDelay when mouse leaves trigger', async () => {
+  const closeDelay = 5000;
+
+  getComponent({ closeDelay });
+  const button = screen.getByRole('button');
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  fireEvent.mouseLeave(button);
+
+  await waitFor(() => {
+    expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  }, { timeout: closeDelay / 2 + 100 });
+
+  await waitFor(() => {
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  }, { timeout: closeDelay + 100 });
 });
