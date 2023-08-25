@@ -100,7 +100,7 @@
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",
     "react-dropzone": "^11.4.2",
-    "react-stately": "~3.17.0",
+    "react-stately": "^3.20.0",
     "recharts": "^2.1.4",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",

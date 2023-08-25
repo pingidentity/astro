@@ -1,20 +1,25 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { HelpHint, Link } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
-
-import HelpHint from './HelpHint';
+import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 
 const testId = 'help-hint__button';
-const tooltipValue = 'Some text';
+const popoverValue = 'Some text';
 
 const defaultProps = {
-  children: tooltipValue,
+  children: popoverValue,
 };
 
 const getComponent = (props = {}) => render(
   <HelpHint {...defaultProps} {...props} />,
+);
+
+const getComponentWithLink = (props = {}) => render(
+  <HelpHint {...defaultProps} {...props}>
+    <Link href="https://uilibrary.ping-eng.com/">Learn More</Link>
+  </HelpHint>,
 );
 
 // Need to be added to each test file to test accessibility using axe.
@@ -26,37 +31,107 @@ test('renders HelpHint component', () => {
   expect(helpHintButton).toBeInTheDocument();
 });
 
-test('shows tooltip on hover', () => {
+test('shows popover when trigger is hovered', async () => {
   getComponent();
   const helpHintButton = screen.getByTestId(testId);
-  expect(screen.queryByText(tooltipValue)).not.toBeInTheDocument();
+  expect(screen.queryByText(popoverValue)).not.toBeInTheDocument();
   fireEvent.mouseMove(helpHintButton);
   fireEvent.mouseEnter(helpHintButton);
-  const tooltip = screen.getByRole('tooltip');
-  const tooltipId = tooltip.getAttribute('id');
-  expect(tooltip).toBeInTheDocument();
-  expect(helpHintButton).toHaveAttribute('aria-describedby', tooltipId);
+
+  const popover = screen.getByRole('presentation');
+  expect(popover).toBeInTheDocument();
 });
 
-test('shows tooltip on focus', () => {
+test('keeps the popover open if the popover is hovered', async () => {
   getComponent();
   const helpHintButton = screen.getByTestId(testId);
-  expect(screen.queryByText(tooltipValue)).not.toBeInTheDocument();
-  userEvent.tab();
-  expect(helpHintButton).toHaveFocus();
-  const tooltip = screen.getByRole('tooltip');
-  const tooltipId = tooltip.getAttribute('id');
-  expect(tooltip).toBeInTheDocument();
-  expect(helpHintButton).toHaveAttribute('aria-describedby', tooltipId);
+  expect(screen.queryByText(popoverValue)).not.toBeInTheDocument();
+  fireEvent.mouseMove(helpHintButton);
+  fireEvent.mouseEnter(helpHintButton);
+
+  const popover = screen.getByRole('presentation');
+
+  fireEvent.mouseMove(popover);
+  fireEvent.mouseEnter(popover);
+  expect(popover).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  }, { timeout: 2000 });
 });
 
-test('applies tooltipProps', () => {
-  getComponent({ tooltipProps: { isOpen: true } });
-  expect(screen.getByText(tooltipValue)).toBeInTheDocument();
+test('popover without focusable children should open onPress and disappear in 1000ms', async () => {
+  getComponent();
+  const helpHintButton = screen.getByTestId(testId);
+  userEvent.tab();
+  expect(helpHintButton).toHaveFocus();
+  userEvent.type(helpHintButton, '{enter}', { skipClick: true });
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  }, { timeout: 500 });
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  }, { timeout: 1100 });
+});
+
+test('popover with focusable children should open onPress and focus the first focusable child', async () => {
+  getComponentWithLink();
+  const helpHintButton = screen.getByTestId(testId);
+  userEvent.tab();
+  expect(helpHintButton).toHaveFocus();
+  userEvent.type(helpHintButton, '{enter}', { skipClick: true });
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  }, { timeout: 3000 });
+  const link = screen.queryByRole('link');
+  expect(link).toBeInTheDocument();
+  expect(link).toHaveFocus();
+});
+
+test('applies popoverProps', () => {
+  getComponent({ popoverProps: { isOpen: true } });
+  expect(screen.getByText(popoverValue)).toBeInTheDocument();
 });
 
 test('applies iconButtonProps', () => {
   const newLabel = 'New label';
   getComponent({ iconButtonProps: { 'aria-label': newLabel } });
   expect(screen.getByLabelText(newLabel)).toBeInTheDocument();
+});
+
+test('popover closes after closeDelay when mouse leaves trigger', async () => {
+  const closeDelay = 5000;
+
+  getComponent({ closeDelay });
+  const helpHintButton = screen.getByTestId(testId);
+  fireEvent.mouseEnter(helpHintButton);
+  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  fireEvent.mouseLeave(helpHintButton);
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  }, { timeout: 2000 });
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  }, { timeout: closeDelay + 100 });
+});
+
+test('popover automatically closes in 1000ms after mouse leaves trigger', async () => {
+  getComponent();
+  const helpHintButton = screen.getByTestId(testId);
+  fireEvent.mouseEnter(helpHintButton);
+  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  fireEvent.mouseLeave(helpHintButton);
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  }, { timeout: 500 });
+
+  await waitFor(() => {
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+  }, { timeout: 1100 });
 });
