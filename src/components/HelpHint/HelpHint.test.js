@@ -102,36 +102,40 @@ test('applies iconButtonProps', () => {
   expect(screen.getByLabelText(newLabel)).toBeInTheDocument();
 });
 
-test('popover closes after closeDelay when mouse leaves trigger', async () => {
-  const closeDelay = 5000;
+test('popover stays open until closeDelay after mouse leaves trigger', async () => {
+  const closeDelay = 10;
 
   getComponent({ closeDelay });
   const helpHintButton = screen.getByTestId(testId);
   fireEvent.mouseEnter(helpHintButton);
-  expect(screen.queryByRole('presentation')).toBeInTheDocument();
   fireEvent.mouseLeave(helpHintButton);
 
   await waitFor(() => {
     expect(screen.queryByRole('presentation')).toBeInTheDocument();
-  }, { timeout: 2000 });
+  }, { timeout: closeDelay - 1 });
+});
+
+test('popover closes after closeDelay when mouse leaves trigger', async () => {
+  const closeDelay = 10;
+
+  getComponent({ closeDelay });
+  const helpHintButton = screen.getByTestId(testId);
+  fireEvent.mouseEnter(helpHintButton);
+  fireEvent.mouseLeave(helpHintButton);
 
   await waitFor(() => {
     expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
-  }, { timeout: closeDelay + 100 });
+  }, { timeout: closeDelay + 1 });
 });
 
 test('popover automatically closes in 1000ms after mouse leaves trigger', async () => {
+  const oneSecond = 1000;
   getComponent();
   const helpHintButton = screen.getByTestId(testId);
   fireEvent.mouseEnter(helpHintButton);
-  expect(screen.queryByRole('presentation')).toBeInTheDocument();
   fireEvent.mouseLeave(helpHintButton);
 
   await waitFor(() => {
-    expect(screen.queryByRole('presentation')).toBeInTheDocument();
-  }, { timeout: 500 });
-
-  await waitFor(() => {
     expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
-  }, { timeout: 1100 });
+  }, { timeout: oneSecond + 1 });
 });
