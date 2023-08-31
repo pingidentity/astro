@@ -43,7 +43,7 @@ const TextField = forwardRef((props, ref) => {
           ref={inputRef}
           {...fieldControlInputProps}
           aria-invalid={status === 'error' && true}
-          aria-describedby={helperText && helperTextId}
+          aria-describedby={[helperText && helperTextId, fieldControlInputProps['aria-describedby']].join(fieldControlInputProps['aria-describedby'] ? ' ' : '')}
         />
         {slots?.inContainer}
       </Box>

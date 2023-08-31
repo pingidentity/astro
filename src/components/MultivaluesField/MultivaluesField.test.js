@@ -504,7 +504,7 @@ test('passing helper text should display it and correct aria attributes on input
   expect(input).toHaveAttribute('aria-invalid', 'true');
 
   const helperTextID = helper.getAttribute('id');
-  expect(input).toHaveAttribute('aria-describedby', helperTextID);
+  expect(input).toHaveAttribute('aria-describedby', `${helperTextID} emptyKeysState`);
 });
 
 test('read only field', () => {
