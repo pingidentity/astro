@@ -6,7 +6,7 @@ import { Meta } from '@storybook/addon-docs';
 
 HelpHints display information intended to help users enter, select or provide the appropriate information in a field. This component can be customized, and consists of the [TooltipTrigger](./?path=/docs/components-tooltiptrigger--default) and [IconButton](./?path=/docs/components-iconbutton--default).
 
-When implementing this component, use short, clear language and a text size relative to the trigger button. They should not block important information when the tooltip displays, nor should it be used to communicate important information.
+When implementing this component, use short, clear language and a text size relative to the trigger button. They should not block important information when the popover displays, nor should it be used to communicate important information.
 
 ### Required Components
 
@@ -27,6 +27,6 @@ These keys provide additional functionality to the component.
 #### Screen Readers
 
 This component uses the following attributes to assist screen readers:
-- The trigger button uses the **`aria-desribedby`** attribute, which announces the tooltip text.
+- The trigger button uses **`aria-expanded`** to indicate the expansion and collapse of the popover.
 - The **`aria-live`** attribute announces the dynamic changes in live region content.
 

@@ -132,7 +132,8 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
     onSelectionChange: handleSelectionChange,
     selectedKeys,
     selectionMode: 'single',
-    disallowEmptySelection: false,
+    disallowEmptySelection: true,
+    allowDuplicateSelectionEvents: true,
   };
 
   const listBoxState = useListState(listBoxProps);

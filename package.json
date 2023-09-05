@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.12.0",
+  "version": "2.13.0-alpha.9",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
   "dependencies": {
     "@babel/runtime": "7.16.3",
     "@babel/runtime-corejs3": "7.13.8",
-    "@emotion/jest": "^11.5.0",
+    "@emotion/jest": "11.11.0",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.1.1",
     "@faker-js/faker": "~7.5.0",
@@ -100,7 +100,7 @@
     "react-calendar": "^3.4.0",
     "react-color": "^2.19.3",
     "react-dropzone": "^11.4.2",
-    "react-stately": "~3.17.0",
+    "react-stately": "^3.20.0",
     "recharts": "^2.1.4",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
@@ -110,8 +110,8 @@
     "webpack": "^5.84.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
+    "@babel/cli": "^7.22.0",
+    "@babel/core": "^7.22.0",
     "@babel/plugin-transform-runtime": "7.13.9",
     "@babel/plugin-transform-spread": "^7.16.7",
     "@babel/preset-env": "^7.11.5",

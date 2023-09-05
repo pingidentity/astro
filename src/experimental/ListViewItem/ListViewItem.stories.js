@@ -14,6 +14,7 @@ import {
   Separator,
   Text,
 } from '../../index';
+import { pingImg } from '../../utils/devUtils/constants/images';
 
 import ListViewItemReadMe from './ListViewItem.mdx';
 import { listViewItemArgTypes } from './listViewItemAttributes';
@@ -66,6 +67,22 @@ export const WithSubtext = () => (
         text: 'Fons Vernall',
       }}
       aria-label="Fons Vernall"
+    />
+  </Wrapper>
+);
+
+export const WithImage = () => (
+  <Wrapper>
+    <ListViewItem
+      data={{
+        image: {
+          src: pingImg,
+          alt: 'avatar',
+          'aria-label': 'avatar',
+        },
+        subtext: 'rad_developer@pingidentity.com',
+        text: 'Fons Vernall',
+      }}
     />
   </Wrapper>
 );

@@ -3,6 +3,7 @@ import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
 import Clear from '@pingux/mdi-react/CloseIcon';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
@@ -292,14 +293,16 @@ const MultivaluesField = forwardRef((props, ref) => {
         const item = initialItems.find(el => el.key === key);
         if (item) {
           return (
-            <Badge
-              key={item.key}
-              role="presentation"
-              label={item.name}
-              variant="readOnlyBadge"
-              bg="white"
-              textProps={{ sx: { color: 'text.primary' } }}
-            />
+            <Box as="li" key={`li ${item.key}`}>
+              <Badge
+                key={item.key}
+                role="presentation"
+                label={item.name}
+                variant="readOnlyBadge"
+                bg="white"
+                textProps={{ sx: { color: 'text.primary' } }}
+              />
+            </Box>
           );
         }
         return null;
@@ -307,26 +310,29 @@ const MultivaluesField = forwardRef((props, ref) => {
   );
 
   const multivaluesFieldBadge = (item, index) => (
-    <Badge
-      key={item.key}
-      role="presentation"
-      variant="selectedItemBadge"
-      bg="active"
-      label={item.name}
-      slots={item.slots}
-      {...item.badgeProps}
-    >
-      <IconButton
-        aria-label={`delete ${item.name}`}
-        data-item={item.name}
-        onPress={e => deleteItem(item.key, e)}
-        ref={el => closeBadgeRefs.current[index] = el} // eslint-disable-line
-        variant="badge.deleteButton"
-        {...item.buttonProps}
+    <Box as="li" key={`li ${item.key}`}>
+      <Badge
+        key={item.key}
+        role="presentation"
+        variant="selectedItemBadge"
+        bg="active"
+        label={item.name}
+        slots={item.slots}
+        {...item.badgeProps}
       >
-        <Icon icon={Clear} color="white" size={14} title={{ name: 'Clear Icon' }} />
-      </IconButton>
-    </Badge>
+        <IconButton
+          aria-label={`delete ${item.name}`}
+          data-item={item.name}
+          onPress={e => deleteItem(item.key, e)}
+          ref={el => closeBadgeRefs.current[index] = el} // eslint-disable-line
+          variant="badge.deleteButton"
+          aria-describedby="selectedKeysState"
+          {...item.buttonProps}
+        >
+          <Icon icon={Clear} color="white" size={14} title={{ name: 'Clear Icon' }} />
+        </IconButton>
+      </Badge>
+    </Box>
   );
 
   const selectedItems = (
@@ -360,6 +366,23 @@ const MultivaluesField = forwardRef((props, ref) => {
       <DismissButton onDismiss={close} />
     </FocusScope>
   );
+
+  const visuallyHidden = (
+    <VisuallyHidden id="selectedKeysState">
+      Selected options:
+      {[...selectionManager.selectedKeys].join(' ')}
+    </VisuallyHidden>
+  );
+
+  // the reason we are using two different visually hiddens, rather than one that updates it's value
+  // is because there are tests that break if an empty visually hidden is rendered in the TextField
+  const EmptyVisuallyHidden = () => {
+    return (
+      <VisuallyHidden id="emptyKeysState">
+        Nothing Selected
+      </VisuallyHidden>
+    );
+  };
 
   const [activeDescendant, setActiveDescendant] = useState(null);
   const inputProps = {
@@ -408,13 +431,29 @@ const MultivaluesField = forwardRef((props, ref) => {
           }}
           onKeyDown={keyDown}
           onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
+          aria-describedby={selectionManager.selectedKeys.size > 0 ? 'selectedKeysState' : 'emptyKeysState'}
           slots={{
             beforeInput:
   <>
-    {readOnlyItems}
+    {
+      readOnlyItems
+      && (
+        <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
+          {readOnlyItems}
+        </Box>
+      )
+    }
     {' '}
-    {selectedItems}
+    {
+      selectedItems
+      && (
+        <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
+          {selectedItems}
+        </Box>
+      )
+    }
     {readOnlyInputEntry}
+    {selectionManager.selectedKeys.size > 0 && visuallyHidden}
   </>,
           }} // eslint-disable-line
           value={filterString}
@@ -434,6 +473,7 @@ const MultivaluesField = forwardRef((props, ref) => {
         >
           {listbox}
         </PopoverContainer>
+        <EmptyVisuallyHidden />
       </Box>
     </MultivaluesContext.Provider>
   );

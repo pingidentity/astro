@@ -1,12 +1,11 @@
-import React, { forwardRef, useRef } from 'react';
-import { useFocusRing } from 'react-aria';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { FocusScope, mergeProps, useFocusRing, useFocusWithin, useOverlayPosition, useOverlayTrigger } from 'react-aria';
+import { useOverlayTriggerState } from 'react-stately';
 import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
 
-import { Icon } from '../..';
-import IconButton from '../IconButton';
-import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
+import { Box, Icon, IconButton, PopoverContainer } from '../..';
+import { useStatusClasses } from '../../hooks';
 
 const HelpIcon = () => (
   <svg width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="help-icon-title">
@@ -17,43 +16,158 @@ const HelpIcon = () => (
 
 const HelpHint = forwardRef((props, ref) => {
   const {
+    align,
+    arrowCrossOffset,
     children,
-    tooltipProps,
+    className,
+    closeDelay,
+    direction,
+    hasNoArrow,
     iconButtonProps,
+    isDarkMode,
+    isNotFlippable,
+    offset,
+    popoverProps,
     ...others
   } = props;
 
-  const tooltipId = uuid();
-  const buttonRef = useRef();
-  const { focusProps, isFocusVisible } = useFocusRing();
-  const { hoverProps, isHovered } = useHover({});
+  const [isFocusWithinOverlay, setIsFocusWithinOverlay] = useState(false);
+  const { focusWithinProps } = useFocusWithin({
+    onFocusWithinChange: isFocusWithin => setIsFocusWithinOverlay(isFocusWithin),
+  });
 
-  const isTooltipOpen = isFocusVisible || isHovered;
+  const overlayRef = useRef();
+  const triggerRef = useRef(null);
+
+  const { focusProps, isFocusVisible } = useFocusRing();
+
+  const { hoverProps, isHovered } = useHover({});
+  const { hoverProps: overlayHoverProps, isHovered: isOverlayHovered } = useHover({});
+
+  const popoverState = useOverlayTriggerState({});
+  const { open, close, isOpen } = popoverState;
+
+  const { triggerProps, overlayProps } = useOverlayTrigger(
+    { type: 'dialog' },
+    popoverState,
+    triggerRef,
+  );
+
+  /* istanbul ignore next */
+  useImperativeHandle(ref, () => triggerRef.current);
+
+  // Set a timeout to close the overlay upon hover / focus loss,
+  // but keep it open if the trigger or overlay are hovered again before it closes.
+  useEffect(() => {
+    let timeout;
+    if (isHovered || isOverlayHovered || isFocusWithinOverlay) {
+      open();
+    } else {
+      timeout = setTimeout(close, closeDelay || 1000);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isHovered, isOverlayHovered, isFocusWithinOverlay, open, close, closeDelay]);
+
+  useEffect(() => {
+    if (isOpen) {
+      return triggerRef?.current.setAttribute('aria-expanded', 'true');
+    }
+    return triggerRef?.current.setAttribute('aria-expanded', 'false');
+  }, [isOpen]);
+
+  const { overlayProps: positionProps, placement } = useOverlayPosition({
+    targetRef: triggerRef,
+    overlayRef,
+    placement: `${direction} ${align}`,
+    offset: 15,
+    isOpen,
+    onClose: close,
+    shouldUpdatePosition: true,
+    shouldFlip: !isNotFlippable,
+  });
+
+  const { classNames } = useStatusClasses(className, {
+    isDarkMode,
+  });
 
   return (
-    <TooltipTrigger ref={ref} direction="top" {...others} isOpen={isTooltipOpen} {...tooltipProps}>
+    <Box {...others} ref={ref}>
       <IconButton
-        ref={buttonRef}
-        variant="hintButton"
+        ref={triggerRef}
         aria-label="label help hint"
         data-testid="help-hint__button"
-        aria-describedby={isTooltipOpen ? tooltipId : null}
-        {...iconButtonProps}
-        {...hoverProps}
-        {...focusProps}
+        variant="hintButton"
+        {...mergeProps(triggerProps, iconButtonProps, focusProps, hoverProps)}
       >
         <Icon icon={HelpIcon} />
       </IconButton>
-      <Tooltip {...tooltipProps} role="tooltip" aria-live="polite" id={tooltipId}>{children}</Tooltip>
-    </TooltipTrigger>
+      <PopoverContainer
+        arrowCrossOffset={arrowCrossOffset}
+        arrowProps={{ width: '8px', height: '4px' }}
+        className={classNames}
+        direction={direction}
+        hasNoArrow={hasNoArrow}
+        isDismissable={!isOpen}
+        isNonModal
+        isOpen={isOpen}
+        onClose={close}
+        placement={placement}
+        ref={overlayRef}
+        {...mergeProps(overlayProps, positionProps, popoverProps, overlayHoverProps)}
+        {...focusWithinProps}
+      >
+        {/* Only autofocus if keyboard is being used */}
+        <FocusScope restoreFocus autoFocus={isFocusVisible}>
+          <Box variant="helpHint.popoverContainer">
+            {children}
+          </Box>
+        </FocusScope>
+      </PopoverContainer>
+    </Box>
   );
 });
 
 HelpHint.propTypes = {
-  /** Props object that is spread directly into the tooltip element. */
-  tooltipProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the popover element. */
+  popoverProps: PropTypes.shape({}),
   /** Props object that is spread directly into the IconButton element. */
   iconButtonProps: PropTypes.shape({}),
+  /** Defaults to true, displays dark popover with white text */
+  isDarkMode: PropTypes.bool,
+  /** Where the popover menu opens relative to its trigger. */
+  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /**
+     * Whether the popover is prevented from flipping directions when insufficient space is
+     * available for the given `direction` placement.
+     */
+  isNotFlippable: PropTypes.bool,
+  /** Alignment of the popover menu relative to the trigger. */
+  align: PropTypes.oneOf(['start', 'end', 'middle']),
+  /**
+   * Allows to add an arrow to popover container
+   */
+  hasNoArrow: PropTypes.bool,
+  /** Popover offset relative to its trigger. */
+  offset: PropTypes.number,
+  /** Arrow offset relative to the left of the popover.
+   * Must be passed as a px or percentage. */
+  arrowCrossOffset: PropTypes.string,
+  /** The additional offset applied along the cross axis
+   * between the element and its anchor element. */
+  crossOffset: PropTypes.number,
+  /** Amount of time before the popover closes */
+  closeDelay: PropTypes.number,
+};
+
+HelpHint.defaultProps = {
+  align: 'middle',
+  direction: 'top',
+  hasNoArrow: false,
+  isDarkMode: true,
+  isNotFlippable: false,
 };
 
 export default HelpHint;

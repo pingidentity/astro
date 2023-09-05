@@ -16,7 +16,7 @@ const descriptions = {
 export const SharedItemArgTypes = {
   data: {
     description: descriptions.data,
-    type: { summary: '{ icon, text, subtext }' },
+    type: { summary: '{ icon, image, text, subtext }' },
     control: {
       type: 'none',
     },
@@ -55,6 +55,11 @@ export const SharedItemPropTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   data: PropTypes.shape({
     icon: PropTypes.elementType,
+    image: PropTypes.shape({
+      src: PropTypes.string,
+      alt: PropTypes.string,
+      'aria-label': PropTypes.string,
+    }),
     subtext: PropTypes.string,
     text: PropTypes.string,
   }),

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { useHover } from '@react-aria/interactions';
 
 import { useStatusClasses } from '../../hooks';
-import { Box, Icon, Text } from '../../index';
+import { Box, Icon, Image, Text } from '../../index';
 
 import { listViewItemPropTypes } from './listViewItemAttributes';
 
@@ -26,6 +26,9 @@ const sx = {
   icon: {
     width: 25,
     color: 'accent.40',
+  },
+  image: {
+    width: 35,
   },
   rightOfData: {
     alignSelf: 'center',
@@ -69,6 +72,7 @@ const ListViewItem = forwardRef(({
 }, ref) => {
   const {
     icon,
+    image,
     subtext,
     text,
   } = data;
@@ -86,24 +90,38 @@ const ListViewItem = forwardRef(({
     isSelected,
   });
 
-  const wrapperStyles = slots?.leftOfData ? { ...sx.wrapper, ml: 0 } : sx.wrapper;
-  const textStyles = slots?.leftOfData ? { ...sx.text, ml: 0 } : sx.text;
+  const iff = (condition, then, otherwise) => (condition ? then : otherwise);
 
-  const renderIcon = (
-    <Box sx={sx.icon}>
-      {icon && (
-      <Icon
-        icon={icon}
-        size="md"
-        title={{ id: `${text}${LIST_ITEM_ICON}`, name: `${text}${LIST_ITEM_ICON}` }}
-      />
-      )}
-    </Box>
+  const wrapperStyles = slots?.leftOfData
+    ? { ...sx.wrapper, ml: 0 }
+    : iff(!icon && image, { ...sx.wrapper, ml: 10 }, sx.wrapper);
+  const textStyles = slots?.leftOfData
+    ? { ...sx.text, ml: 0 }
+    : iff(!icon && image, { ...sx.wrapper, ml: 10 }, sx.wrapper);
+
+  const renderIcon = icon && (
+  <Box sx={sx.icon}>
+    <Icon
+      icon={icon}
+      size="md"
+      title={{ id: `${text}${LIST_ITEM_ICON}`, name: `${text}${LIST_ITEM_ICON}` }}
+    />
+  </Box>
+  );
+
+  const renderImage = !icon && image && (
+  <Box sx={sx.image}>
+    <Image
+      src={image.src}
+      alt={image.alt}
+      aria-label={image['aria-label']}
+    />
+  </Box>
   );
 
   const renderData = (
     <Box isRow sx={sx.data}>
-      { slots?.leftOfData || renderIcon }
+      {slots?.leftOfData || renderIcon || renderImage}
       <Box sx={textStyles}>
         {text && (
           <Text variant="bodyStrong" sx={sx.title}>
@@ -124,11 +142,11 @@ const ListViewItem = forwardRef(({
       {...others}
     >
       <Box isRow sx={wrapperStyles}>
-        {renderData }
+        {renderData}
         {slots?.rightOfData && (
-        <Box isRow alignSelf="center">
-          {slots.rightOfData}
-        </Box>
+          <Box isRow alignSelf="center">
+            {slots.rightOfData}
+          </Box>
         )}
         <Box isRow gap="sm" alignItems="center" sx={sx.controls}>
           {children}
