@@ -1,13 +1,13 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Button, SaveBar } from '../..';
+import { Button, ButtonBar } from '../..';
 
-import SaveBarReadme from './SaveBar.mdx';
+import ButtonBarReadme from './ButtonBar.mdx';
 
 export default {
-  title: 'Experimental/SaveBar',
-  component: SaveBar,
+  title: 'Experimental/ButtonBar',
+  component: ButtonBar,
   parameters: {
     docs: {
       source: {
@@ -15,7 +15,7 @@ export default {
       },
       page: () => (
         <>
-          <SaveBarReadme />
+          <ButtonBarReadme />
           <DocsLayout />
         </>
       ),
@@ -24,7 +24,7 @@ export default {
 };
 
 export const Default = args => (
-  <SaveBar
+  <ButtonBar
     saveButtonProps={{ key: 'save button', text: 'Save', onPress: () => alert('Save button pressed') }}
     cancelButtonProps={{ key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') }}
     {...args}
@@ -32,7 +32,7 @@ export const Default = args => (
 );
 
 export const WithRefreshButton = args => (
-  <SaveBar
+  <ButtonBar
     saveButtonProps={{ key: 'save button', text: 'Save', onPress: () => alert('Save button pressed') }}
     cancelButtonProps={{ key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') }}
     refreshButtonProps={{ key: 'refresh button', text: 'Refresh', onPress: () => alert('Refresh button pressed') }}
@@ -41,7 +41,7 @@ export const WithRefreshButton = args => (
 );
 
 export const JustifiedRight = () => (
-  <SaveBar
+  <ButtonBar
     saveButtonProps={{ key: 'next button', text: 'Next', onPress: () => alert('Save button pressed') }}
     cancelButtonProps={{ key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') }}
     isJustifiedRight
@@ -49,8 +49,8 @@ export const JustifiedRight = () => (
 );
 
 export const WithChildren = args => (
-  <SaveBar {...args}>
+  <ButtonBar {...args}>
     <Button>Custom Button!</Button>
     <Button variant="link">Custom Link!</Button>
-  </SaveBar>
+  </ButtonBar>
 );

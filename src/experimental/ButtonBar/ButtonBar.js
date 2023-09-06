@@ -22,7 +22,7 @@ const RefreshButton = props => (
   </Button>
 );
 
-const SaveBar = props => {
+const ButtonBar = props => {
   const {
     saveButtonProps,
     cancelButtonProps,
@@ -65,7 +65,7 @@ const SaveBar = props => {
   );
 };
 
-SaveBar.propTypes = {
+ButtonBar.propTypes = {
   saveButtonProps: PropTypes.shape(buttonPropTypes),
   cancelButtonProps: PropTypes.shape(buttonPropTypes),
   refreshButtonProps: PropTypes.shape(buttonPropTypes),
@@ -84,4 +84,4 @@ RefreshButton.propTypes = {
   text: PropTypes.string,
 };
 
-export default SaveBar;
+export default ButtonBar;
