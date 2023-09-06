@@ -20,6 +20,7 @@ import {
   Text,
   TextField,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Attribute Mappings',
@@ -270,6 +271,13 @@ export const Display = () => {
   );
 };
 
+Display.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.attributeMappings.display,
+  },
+};
+
 export const DisplayWithError = () => {
   const withError = true;
   const withErrorSx = {
@@ -432,6 +440,13 @@ export const Edit = () => {
       </Box>
     </Box>
   );
+};
+
+Edit.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.attributeMappings.edit,
+  },
 };
 
 const EditRow = memo(props => {

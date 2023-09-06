@@ -2,6 +2,11 @@ export const FIGMA_LINKS = {
   accordionGroup: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=446-1808&t=8Wwd3tIBh3GEjCJB-0',
   },
+  attributeMappings: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=15076%3A33905&mode=dev',
+    display: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=15077-33982&t=VgqEexa1CXAXfPpp-0',
+    edit: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=15077-35822&t=VgqEexa1CXAXfPpp-0',
+  },
   badge: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=1899-11550&t=VgqEexa1CXAXfPpp-0',
     countBadge: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=4255%3A12558&t=3b86het2R9G2Zyo2-1',
@@ -78,4 +83,5 @@ export const FIGMA_LINKS = {
   stepper: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=7523-27301&t=rLZVlRDdR1JhehkH-0',
   },
+
 };
