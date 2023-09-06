@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.12.0...@pingux/astro@2.13.0) (2023-09-05)
+
+
+### Bug Fixes
+
+* [UIP-6042] Astro MultiValues Field fix a11 ([77dbeac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/77dbeaca2ecb284022b8dc45cf9f971f6ff789d0))
+* [UIP-6403] Astro Success Bright Color Change ([8477498](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8477498187c45f3d08425a721dfb7df8b8c0a606))
+* [UIP-6406] Add content with link story ([b2c8cd8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b2c8cd86a7e4474616eadd29bbcae82f6031b222))
+* [UIP-6433] Environmentbreadcrumb not shown if selected twice ([0dffb8e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0dffb8edfdd57377ec4b2fd34da39e8755175d22))
+* [UIP-6447] import meta into mdx files ([46259c5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/46259c59f04149cac93c9774032f83deba05723a))
+* failing tests in HelpHint ([3be8ec0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3be8ec0b733cc0d07a8dd87b5d892cb9d58714d7))
+
+
+### Features
+
+* [UIP-6419] ListViewItem add Image support ([8a72f22](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8a72f22a7e19ff98b123b4ad9dbb7b08bc7244f6))
+
+
+
+
+
 # [2.12.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.11.1...@pingux/astro@2.12.0) (2023-08-22)
 
 
