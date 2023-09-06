@@ -2,7 +2,7 @@ import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 export const baseBadge = {
   cursor: 'default',
-  p: '3px 5px 4px 5px',
+  p: '3px 5px 3px 5px',
   alignItems: 'center',
   justifyContent: 'center',
   minWidth: '50px',
