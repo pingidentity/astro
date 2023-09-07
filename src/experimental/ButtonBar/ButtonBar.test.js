@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { SaveBar } from '../..';
+import { ButtonBar } from '../..';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
-const testId = 'test-SaveBar';
+const testId = 'test-ButtonBar';
 
 const saveButtonProps = { key: 'save button', text: 'Save', onPress: () => alert('Save button pressed') };
 const cancelButtonProps = { key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') };
@@ -13,20 +13,20 @@ const refreshButtonProps = { key: 'refresh button', text: 'Refresh', onPress: ()
 const defaultProps = { 'data-testid': testId, saveButtonProps, cancelButtonProps };
 
 const getComponent = (props = {}) => render((
-  <SaveBar {...defaultProps} {...props} />
+  <ButtonBar {...defaultProps} {...props} />
 ));
 
 const getComponentCustomChildren = (props = {}) => render((
-  <SaveBar {...defaultProps} {...props}>
+  <ButtonBar {...defaultProps} {...props}>
     <button>custom text</button>
     <button>Also custom text</button>
-  </SaveBar>
+  </ButtonBar>
 ));
 
 const getComponentTextChildren = (props = {}) => render((
-  <SaveBar {...props}>
+  <ButtonBar {...props}>
     custom text
-  </SaveBar>
+  </ButtonBar>
 ));
 
 axeTest(getComponent);
@@ -35,7 +35,7 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test('SaveBar does render', () => {
+test('ButtonBar does render', () => {
   getComponent({});
   const element = screen.getByTestId(testId);
   expect(element).toBeInTheDocument();

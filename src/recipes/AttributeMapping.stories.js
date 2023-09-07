@@ -10,16 +10,20 @@ import {
   Badge,
   Box,
   Button,
+  Callout,
   ComboBoxField,
   HelpHint,
   Icon,
   IconButton,
   Item,
+  Link,
   ScrollBox,
   Separator,
   Text,
   TextField,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
+import statuses from '../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Recipes/Attribute Mappings',
@@ -56,6 +60,11 @@ const sx = {
       lineHeight: 1,
       color: '#253746',
     },
+  },
+  calloutSx: {
+    width: '450px',
+    marginBottom: 'xs',
+    paddingRight: 'md',
   },
   createIconButton: {
     marginLeft: 'xs',
@@ -270,37 +279,30 @@ export const Display = () => {
   );
 };
 
+Display.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.attributeMappings.display,
+  },
+};
+
 export const DisplayWithError = () => {
   const withError = true;
-  const withErrorSx = {
-    errorBox: {
-      flexDirection: 'row !important',
-      alignItems: 'center',
-      padding: '13px 12px 13px 15px',
-      gap: 'md',
-      border: '1px solid #A31300',
-      width: '450px',
-      marginBottom: 'xs',
-    },
-    text: {
-      fontSize: 'sm',
-      lineHeight: '15px',
-    },
-  };
 
   return (
     <Box>
       <Title />
 
-      {withError && (
-        <Box sx={withErrorSx.errorBox}>
-          <Icon size={24} icon={AlertCircleIcon} color="#A31300" title={{ name: 'Alert Circle Icon' }} />
-          <Text sx={withErrorSx.text} id={helperTextId} role="alert">
-            This attribute is unavailable.
-            Please map the attribute again or re-map to a different attribute.
-          </Text>
-        </Box>
-      )}
+      <Callout status={statuses.ERROR} sx={sx.calloutSx}>
+        <Text>
+          You’ve got problems. Allow me to tell you about them in some detail so
+          that you can address them.
+          <Link href="https://pingidentity.com" target="_blank" aria-label={`${statuses.ERROR}-callout`} variant="app">
+            {' '}
+            Read More
+          </Link>
+        </Text>
+      </Callout>
 
       <Box sx={sx.defaultFieldsWrapperBox}>
         <Box
@@ -432,6 +434,13 @@ export const Edit = () => {
       </Box>
     </Box>
   );
+};
+
+Edit.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.attributeMappings.edit,
+  },
 };
 
 const EditRow = memo(props => {

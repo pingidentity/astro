@@ -1,9 +1,9 @@
 import React from 'react';
 import { Section } from 'react-stately';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../..';
+import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
 
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
@@ -96,7 +96,6 @@ beforeAll(() => {
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
   jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
-  jest.useFakeTimers();
 });
 
 afterEach(() => {
@@ -257,13 +256,7 @@ test('should show empty state in search if there are no results', () => {
   expect(screen.getByText(testEmptySearchText)).toBeInTheDocument();
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-
-  expect(results).toHaveNoViolations();
-});
+axeTest(getComponent);
 
 test('should be open when isDefaultOpen is true', () => {
   getComponent({ isDefaultOpen: true });
