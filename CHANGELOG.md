@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.13.0...@pingux/astro@2.14.0) (2023-09-07)
+
+
+### Bug Fixes
+
+* [UIP-6417] ListViewItem truncate text ([4782993](https://gitlab.corp.pingidentity.com/ux/pingux/commit/47829932f7fee434b6523738fd774bfecfbb61cd))
+* [UIP-6426] Badge: bottom padding ([2ba30aa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2ba30aa76f424736917084ce07966b0c6ddc80a0))
+* [UIP-6436] fix axe test ([481b563](https://gitlab.corp.pingidentity.com/ux/pingux/commit/481b5632ddc36eafdf08d6e580b10b56e0a891dd))
+* [UIP-6452] aria-activedescendant update on popover menu closing ([64c4e5b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/64c4e5bd90af83490dc52bb25004319e85c8b1e2)), closes [/github.com/w3c/aria/issues/501#issuecomment-335679591](https://gitlab.corp.pingidentity.com//github.com/w3c/aria/issues/501/issues/issuecomment-335679591)
+
+
+### Features
+
+* [UIP-6411] add figma liks for AttributeMappings recipe ([cabfc86](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cabfc86f50df6b880ab85a4ead0ec81563cb183e))
+* [UIP-6422] update ListViewItem docs ([5ee5b01](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5ee5b01d93a6e96f6b77922f08023f95042ebeae))
+
+
+
+
+
 # [2.13.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.12.0...@pingux/astro@2.13.0) (2023-09-05)
 
 
