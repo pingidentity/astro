@@ -6,6 +6,12 @@ import { Box, Icon, Image, Text } from '../../index';
 
 import { listViewItemPropTypes } from './listViewItemAttributes';
 
+const truncate = {
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+};
+
 const sx = {
   container: {
     m: 1,
@@ -19,6 +25,7 @@ const sx = {
     alignSelf: 'center',
     ml: 'auto',
     pr: 'sm',
+    flexShrink: 0,
   },
   data: {
     alignItems: 'center',
@@ -35,6 +42,7 @@ const sx = {
     ml: 'sm',
   },
   subtitle: {
+    ...truncate,
     alignSelf: 'start',
     fontSize: 'sm',
     lineHeight: '16px',
@@ -44,6 +52,7 @@ const sx = {
     ml: 'md',
   },
   title: {
+    ...truncate,
     alignSelf: 'start',
     fontSize: 'md',
   },
@@ -121,7 +130,7 @@ const ListViewItem = forwardRef(({
 
   const renderData = (
     <Box isRow sx={sx.data}>
-      {slots?.leftOfData || renderIcon || renderImage}
+      { slots?.leftOfData || renderIcon || renderImage }
       <Box sx={textStyles}>
         {text && (
           <Text variant="bodyStrong" sx={sx.title}>
@@ -144,7 +153,7 @@ const ListViewItem = forwardRef(({
       <Box isRow sx={wrapperStyles}>
         {renderData}
         {slots?.rightOfData && (
-          <Box isRow alignSelf="center">
+          <Box isRow alignSelf="center" flexShrink={0}>
             {slots.rightOfData}
           </Box>
         )}

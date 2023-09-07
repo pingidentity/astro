@@ -138,7 +138,7 @@ export const WithRightOfDataSlot = () => {
 
 export const WithLeftOfDataSlot = () => {
   const renderLeftOfData = (
-    <Box mx="sm">
+    <Box mx="sm" minWidth={35}>
       <Text pr={3} variant="H3">Ping</Text>
     </Box>
   );
@@ -154,6 +154,36 @@ export const WithLeftOfDataSlot = () => {
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
+        aria-label="Fons Vernall"
+      >
+        <ListViewItemMenu>
+          <Item key="enable">Enable user</Item>
+          <Item key="disable">Disable user</Item>
+          <Item key="delete">Delete user</Item>
+        </ListViewItemMenu>
+      </ListViewItem>
+    </Wrapper>
+  );
+};
+
+export const WithExtraLongText = () => {
+  const renderRightOfData = (
+    <Box isRow gap="sm" mx="sm">
+      <Badge label="Label" />
+      <Badge label="Label" bg="active" />
+    </Box>
+  );
+  const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+
+  return (
+    <Wrapper>
+      <ListViewItem
+        data={{
+          icon: AccountIcon,
+          text: longText,
+          subtext: longText,
+        }}
+        slots={{ rightOfData: renderRightOfData }}
         aria-label="Fons Vernall"
       >
         <ListViewItemMenu>
