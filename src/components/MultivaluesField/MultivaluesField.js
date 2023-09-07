@@ -57,6 +57,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const [filterString, setFilterString] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [items, setItems] = useState(initialItems);
+  const [activeDescendant, setActiveDescendant] = useState('');
 
   const toggleItems = keys => {
     setItems(initialItems.filter(item => !Array.from(keys).includes(item.key)));
@@ -150,6 +151,7 @@ const MultivaluesField = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (onOpenChange) onOpenChange(isOpen);
+    if (!isOpen) setActiveDescendant('');
   }, [isOpen]);
 
   const addNewBadgeFromInput = inputValue => {
@@ -384,7 +386,6 @@ const MultivaluesField = forwardRef((props, ref) => {
     );
   };
 
-  const [activeDescendant, setActiveDescendant] = useState(null);
   const inputProps = {
     ...customInputProps,
     controlProps: {
