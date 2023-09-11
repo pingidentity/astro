@@ -67,10 +67,45 @@ const itemTitle = {
   fontFamily: 'standard',
 };
 
+const bodyStrong = {
+  ...wordWrap,
+  color: 'text.primary',
+  fontFamily: 'standard',
+  fontWeight: 1,
+};
+
+const subtitle = {
+  ...wordWrap,
+  color: 'text.secondary',
+  fontFamily: 'standard',
+  fontWeight: 0,
+};
+
+const textEllipsis = {
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+};
+
+const listViewItemText = {
+  ...bodyStrong,
+  ...textEllipsis,
+  alignSelf: 'start',
+  fontSize: 'md',
+};
+
+const listViewItemSubtext = {
+  ...subtitle,
+  ...textEllipsis,
+  alignSelf: 'start',
+  fontSize: 'sm',
+  lineHeight: '16px',
+  my: '1px',
+};
 
 export const text = {
   base,
-  bodyStrong: { ...wordWrap, fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
+  bodyStrong,
   bodyWeak: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   buttonLabel: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'accent.30', fontFamily: 'standard' },
   buttonTitle: { ...wordWrap, fontSize: 'xs', fontWeight: 0, color: 'text.primary', fontFamily: 'standard', lineHeight: '13px' },
@@ -85,13 +120,15 @@ export const text = {
   itemTitle,
   itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard', fontWeight: 1 },
-  listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
-  listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
+  listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', ...textEllipsis },
+  listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', ...textEllipsis },
+  listViewItemSubtext,
+  listViewItemText,
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
   sectionTitle,
-  subtitle: { ...wordWrap, fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },
+  subtitle,
   tabLabel,
   tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
-  textEllipsis: { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
+  textEllipsis,
   title,
 };

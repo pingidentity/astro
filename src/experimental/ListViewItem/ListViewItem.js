@@ -6,64 +6,6 @@ import { Box, Icon, Image, Text } from '../../index';
 
 import { listViewItemPropTypes } from './listViewItemAttributes';
 
-const truncate = {
-  textOverflow: 'ellipsis',
-  overflow: 'hidden',
-  whiteSpace: 'nowrap',
-};
-
-const sx = {
-  container: {
-    m: 1,
-    minHeight: 72,
-    '&.is-hovered': {
-      bg: 'white',
-      cursor: 'pointer',
-    },
-  },
-  controls: {
-    alignSelf: 'center',
-    ml: 'auto',
-    pr: 'sm',
-    flexShrink: 0,
-  },
-  data: {
-    alignItems: 'center',
-  },
-  icon: {
-    width: 25,
-    color: 'accent.40',
-  },
-  image: {
-    width: 35,
-  },
-  rightOfData: {
-    alignSelf: 'center',
-    ml: 'sm',
-  },
-  subtitle: {
-    ...truncate,
-    alignSelf: 'start',
-    fontSize: 'sm',
-    lineHeight: '16px',
-    my: '1px',
-  },
-  text: {
-    ml: 'md',
-  },
-  title: {
-    ...truncate,
-    alignSelf: 'start',
-    fontSize: 'md',
-  },
-  wrapper: {
-    cursor: 'pointer',
-    display: 'flex',
-    flex: '1 1 0px',
-    ml: 'md',
-  },
-};
-
 export const LIST_ITEM_ICON = '-list-item-icon';
 
 const ListViewItem = forwardRef(({
@@ -79,12 +21,7 @@ const ListViewItem = forwardRef(({
   slots,
   ...others
 }, ref) => {
-  const {
-    icon,
-    image,
-    subtext,
-    text,
-  } = data;
+  const { icon, image, subtext, text } = data;
 
   const shouldUseDefaultHover = isHovered === undefined;
 
@@ -99,18 +36,17 @@ const ListViewItem = forwardRef(({
     isSelected,
   });
 
-  const iff = (condition, then, otherwise) => (condition ? then : otherwise);
+  const getWrapperVariant = () => {
+    if (slots?.leftOfData) return 'listViewItem.leftOfDataWrapper';
+    if (image && !icon) return 'listViewItem.imageWrapper';
 
-  const wrapperStyles = slots?.leftOfData
-    ? { ...sx.wrapper, ml: 0 }
-    : iff(!icon && image, { ...sx.wrapper, ml: 10 }, sx.wrapper);
-  const textStyles = slots?.leftOfData
-    ? { ...sx.text, ml: 0 }
-    : iff(!icon && image, { ...sx.wrapper, ml: 10 }, sx.wrapper);
+    return 'listViewItem.iconWrapper';
+  };
 
   const renderIcon = icon && (
-  <Box sx={sx.icon}>
+  <Box width="25px">
     <Icon
+      color="accent.40"
       icon={icon}
       size="md"
       title={{ id: `${text}${LIST_ITEM_ICON}`, name: `${text}${LIST_ITEM_ICON}` }}
@@ -119,7 +55,7 @@ const ListViewItem = forwardRef(({
   );
 
   const renderImage = !icon && image && (
-  <Box sx={sx.image}>
+  <Box width="35px">
     <Image
       src={image.src}
       alt={image.alt}
@@ -129,15 +65,15 @@ const ListViewItem = forwardRef(({
   );
 
   const renderData = (
-    <Box isRow sx={sx.data}>
+    <Box isRow alignItems="center">
       { slots?.leftOfData || renderIcon || renderImage }
-      <Box sx={textStyles}>
+      <Box variant={getWrapperVariant()}>
         {text && (
-          <Text variant="bodyStrong" sx={sx.title}>
+          <Text variant="listViewItemText">
             {text}
           </Text>
         )}
-        {subtext && <Text variant="subtitle" sx={sx.subtitle}>{subtext}</Text>}
+        {subtext && <Text variant="listViewItemSubtext">{subtext}</Text>}
       </Box>
     </Box>
   );
@@ -146,18 +82,18 @@ const ListViewItem = forwardRef(({
     <Box
       className={classNames}
       ref={ref}
-      sx={sx.container}
+      variant="listViewItem.styledContainer"
       {...hoverProps}
       {...others}
     >
-      <Box isRow sx={wrapperStyles}>
+      <Box isRow variant={getWrapperVariant()}>
         {renderData}
         {slots?.rightOfData && (
-          <Box isRow alignSelf="center" flexShrink={0}>
+          <Box isRow variant="listViewItem.rightOfData">
             {slots.rightOfData}
           </Box>
         )}
-        <Box isRow gap="sm" alignItems="center" sx={sx.controls}>
+        <Box isRow gap="sm" variant="listViewItem.controls">
           {children}
         </Box>
       </Box>
