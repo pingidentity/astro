@@ -41,7 +41,7 @@ axeTest(getComponent, {
 
 test('renders NumberField component', () => {
   getComponent();
-  expect(screen.getByLabelText(testLabel)).toBeInTheDocument();
+  expect(screen.queryAllByLabelText(testLabel)[0]).toBeInTheDocument();
 });
 
 test('arrow up is adding step to the number value', () => {
@@ -71,14 +71,14 @@ test('value can be set from outside (controlled state)', () => {
   getComponent({
     value: controlledValue,
   });
-  expect(screen.getByLabelText(testLabel)).toHaveValue('11');
+  expect(screen.queryAllByLabelText(testLabel)[1]).toHaveValue('11');
 });
 
 test('calling onChange with integer when input value changed (controlled state)', () => {
   const mockOnChange = jest.fn();
   const newTestValue = 123;
   getComponent({ onChange: mockOnChange });
-  const numberInput = screen.getByLabelText(testLabel);
+  const numberInput = screen.queryAllByLabelText(testLabel)[1];
   userEvent.clear(numberInput);
   userEvent.type(numberInput, newTestValue.toString());
   numberInput.blur();
@@ -101,13 +101,13 @@ test('should show helper text if appropriate prop passed', () => {
 test('should be able to be focused via keyboard', () => {
   getComponent();
   userEvent.tab();
-  expect(screen.getByLabelText(testLabel)).toHaveFocus();
+  expect(screen.queryAllByLabelText(testLabel)[1]).toHaveFocus();
 });
 
 test('should be able to interact with the keyboard', () => {
   getComponent();
   userEvent.tab();
-  const numberInput = screen.getByLabelText(testLabel);
+  const numberInput = screen.queryAllByLabelText(testLabel)[1];
   userEvent.type(numberInput, '{arrowup}');
   expect(numberInput).toHaveValue((testValue + 1).toString());
   userEvent.type(numberInput, '{arrowdown}{arrowdown}');
@@ -126,7 +126,7 @@ test('should show hintText text if prop is passed', () => {
 test('increment and decrement buttons should be able to be focused via keyboard', () => {
   getComponent();
   userEvent.tab();
-  expect(screen.getByLabelText(testLabel)).toHaveFocus();
+  expect(screen.queryAllByLabelText(testLabel)[1]).toHaveFocus();
   userEvent.tab();
   expect(screen.getByLabelText('arrow-up')).toHaveFocus();
   userEvent.tab();
@@ -136,13 +136,13 @@ test('increment and decrement buttons should be able to be focused via keyboard'
 test('number field input receiving name attribute', () => {
   const testName = 'testName';
   getComponent({ name: testName });
-  expect(screen.getByLabelText(testLabel)).toHaveAttribute('name', testName);
+  expect(screen.queryAllByLabelText(testLabel)[1]).toHaveAttribute('name', testName);
 });
 
 test('number field can be focused', () => {
   getComponent();
   userEvent.tab();
-  expect(screen.getByLabelText(testLabel)).toHaveClass('is-focused');
+  expect(screen.queryAllByLabelText(testLabel)[1]).toHaveClass('is-focused');
 });
 
 test('passing helper text should display it and correct aria attributes on input', () => {

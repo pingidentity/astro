@@ -1,5 +1,5 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
-import { mergeProps, useNumberField, VisuallyHidden } from 'react-aria';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import { mergeProps, useNumberField } from 'react-aria';
 import { useNumberFieldState } from 'react-stately';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuUp from '@pingux/mdi-react/MenuUpIcon';
@@ -17,13 +17,12 @@ import {
   Label,
 } from '../..';
 import { useField, usePropWarning } from '../../hooks';
-import useHiddenNumberFieldValue from '../../hooks/useHiddenNumberFieldValue';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 const NumberField = forwardRef((props, ref) => {
-  const { helperText, status, formatOptions } = props;
+  const { helperText, status } = props;
   const { locale } = useLocale();
 
   const state = useNumberFieldState({ ...props, locale });
@@ -64,68 +63,31 @@ const NumberField = forwardRef((props, ref) => {
 
   // this needed to remove console warning in React 16
   // I believe once we update to 17 - we can remove this
-  const onInputFocus = useCallback(
-    e => {
-      e.persist();
-      fieldControlInputProps.onFocus(e);
-      inputProps.onFocus(e);
-    },
-    [fieldControlInputProps, inputProps],
-  );
-  const onInputBlur = useCallback(
-    e => {
-      e.persist();
-      fieldControlInputProps.onBlur(e);
-      inputProps.onBlur(e);
-    },
-    [fieldControlInputProps, inputProps],
-  );
-
-  const updatedFieldControlInputProps = useMemo(
-    () => ({
-      ...fieldControlInputProps,
-      onFocus: onInputFocus,
-      onBlur: onInputBlur,
-    }),
-    [fieldControlInputProps, onInputBlur, onInputFocus],
-  );
-
-  const onInputChange = e => {
-    const { minValue } = props;
-    const trimmedInputValue = e.target.value.trim();
-    const trimmedValueEvent = {
-      ...e,
-      target: {
-        ...e.target,
-        value: trimmedInputValue,
-      },
-    };
-    if (!trimmedInputValue && typeof minValue !== 'undefined') {
-      const minValueEvent = {
-        ...e,
-        target: {
-          ...e.target,
-          value: minValue.toString(),
-        },
-      };
-      inputProps.onChange(minValueEvent);
-    } else {
-      inputProps.onChange(trimmedValueEvent);
-    }
+  const onInputFocus = e => {
+    e.persist();
+    fieldControlInputProps.onFocus(e);
+    inputProps.onFocus(e);
+  };
+  const onInputBlur = e => {
+    e.persist();
+    fieldControlInputProps.onBlur(e);
+    inputProps.onBlur(e);
+  };
+  const updatedFieldControlInputProps = {
+    ...fieldControlInputProps,
+    onFocus: onInputFocus,
+    onBlur: onInputBlur,
   };
 
-  const hiddenInputValue = useHiddenNumberFieldValue({
-    numberValue: state.numberValue,
-    isCurrency: formatOptions?.currency,
-  });
+  const helperTextId = uuid();
 
-  inputProps['aria-roledescription'] = null;
+  const updatedLabelProps = { ...mergeProps(fieldLabelProps, labelProps) };
 
-  const helperTextId = useMemo(() => uuid(), []);
+  const inputPropsValue = inputProps.value || 0;
 
   return (
     <Box {...fieldContainerProps}>
-      <Label {...mergeProps(fieldLabelProps, labelProps)} />
+      <Label {...updatedLabelProps} />
       <Box
         variant="forms.numberField.noDefaultArrows"
         {...groupProps}
@@ -133,6 +95,10 @@ const NumberField = forwardRef((props, ref) => {
         <Box
           variant="forms.numberField.arrowsWrapper"
           {...fieldControlWrapperProps}
+          role="spinbutton"
+          aria-valuetext={inputPropsValue}
+          aria-valuenow={inputPropsValue}
+          aria-labelledby={updatedLabelProps.id}
         >
           <Input
             variant="forms.input.numberField"
@@ -140,17 +106,11 @@ const NumberField = forwardRef((props, ref) => {
             // we don't want to merge this props, we want to
             // overwrite them like defaultValue, value, ect.
             {...updatedFieldControlInputProps}
-            {...omit(inputProps, ['name', 'onFocus', 'onBlur'])}
-            onChange={onInputChange}
+            {...omit(inputProps, ['name', 'onFocus', 'onBlur', 'aria-roledescription'])}
             aria-describedby={helperText && helperTextId}
-            role="textbox"
           />
           {ControlArrows}
         </Box>
-        {/* NOTE: Firefox + Voice Over isn’t supported in react spectrum */}
-        <VisuallyHidden aria-live="assertive">
-          {hiddenInputValue}
-        </VisuallyHidden>
         {helperText && (
           <FieldHelperText
             status={status}
