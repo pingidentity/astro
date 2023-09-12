@@ -25,12 +25,6 @@ const container = {
   },
 };
 
-const styledListItem = {
-  ...container,
-  padding: 0,
-  minHeight: 0,
-};
-
 const linkedViewContainer = {
   ...container,
   minHeight: '75px',
@@ -62,8 +56,59 @@ const linkedViewContainer = {
   },
 };
 
+const styledContainer = {
+  m: '1px',
+  minHeight: '72px',
+  '&.is-hovered': {
+    bg: 'white',
+    cursor: 'pointer',
+  },
+};
+
+const styledListItem = {
+  ...container,
+  minHeight: 0,
+  padding: 0,
+};
+
+const controls = {
+  alignItems: 'center',
+  alignSelf: 'center',
+  flexShrink: 0,
+  ml: 'auto',
+  pr: 'sm',
+};
+
+const iconWrapper = {
+  cursor: 'pointer',
+  display: 'flex',
+  flex: '1 1 0px',
+  ml: 'md',
+};
+
+const imageWrapper = {
+  ...iconWrapper,
+  ml: 'sm',
+};
+
+const leftOfDataWrapper = {
+  ...iconWrapper,
+  ml: 0,
+};
+
+const rightOfData = {
+  alignSelf: 'center',
+  flexShrink: 0,
+};
+
 export default {
   container,
+  controls,
+  iconWrapper,
+  imageWrapper,
+  leftOfDataWrapper,
   linkedViewContainer,
+  rightOfData,
+  styledContainer,
   styledListItem,
 };
