@@ -2,7 +2,6 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 import AddIcon from '@pingux/mdi-react/AddIcon';
 import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
 import CogsIcon from '@pingux/mdi-react/CogsIcon';
-import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 import { v4 as uuid } from 'uuid';
 
@@ -12,7 +11,6 @@ import {
   Button,
   Callout,
   ComboBoxField,
-  HelpHint,
   Icon,
   IconButton,
   Item,
@@ -34,32 +32,25 @@ const sx = {
     position: 'absolute',
     right: '4px',
     top: '4px',
-    fill: '#A31300',
-  },
-  attributeMappingTitle: {
-    fontSize: 'lg',
-    lineHeight: '21px',
-    fontWeight: 3,
-    color: 'text.primary',
-  },
-  attributeMappingTitleWrapper: {
-    marginBottom: 'md',
-    alignItems: 'center',
+    fill: 'critical.bright',
   },
   badge: {
-    width: 'xx',
-    height: '22px',
     alignSelf: 'center',
-    minWidth: 'fit-content',
     border: '1px solid',
     borderColor: 'neutral.80',
-    backgroundColor: 'white !important',
-    marginLeft: 8,
+    backgroundColor: 'white',
+    marginLeft: 'sm',
     '& span': {
-      fontSize: 'sm',
       lineHeight: 1,
-      color: '#253746',
+      color: 'text.primary',
     },
+  },
+  container: {
+    px: 'sm',
+    pt: 'sm',
+    pb: 'lg',
+    width: '450px',
+    backgroundColor: 'accent.99',
   },
   calloutSx: {
     width: '450px',
@@ -68,11 +59,6 @@ const sx = {
   },
   createIconButton: {
     marginLeft: 'xs',
-  },
-  defaultFieldsWrapperBox: {
-    padding: '10px 10px 24px 10px',
-    width: '450px',
-    backgroundColor: 'accent.99',
   },
   fieldColumnTitle: {
     fontWeight: 3,
@@ -88,13 +74,8 @@ const sx = {
     marginTop: 'sm',
   },
   separator: {
-    width: '21px',
+    width: '20px',
     margin: '0 2px',
-  },
-  tooltipBox: {
-    marginLeft: 'xs',
-    height: 'md',
-    width: 'md',
   },
 };
 
@@ -163,7 +144,6 @@ const helperTextId = uuid();
 const Row = props => {
   const {
     withBadge,
-    withTooltip,
     withError,
     leftValue,
     rightValue,
@@ -216,34 +196,6 @@ const Row = props => {
             sx={sx.badge}
           />
         )}
-      {withTooltip
-        && (
-          <Box sx={sx.tooltipBox}>
-            <HelpHint
-              tooltipProps={{ direction: 'bottom' }}
-            >
-              Population set to default
-            </HelpHint>
-          </Box>
-        )}
-    </Box>
-  );
-};
-
-const Title = () => {
-  return (
-    <Box
-      isRow
-      sx={sx.attributeMappingTitleWrapper}
-    >
-      <Text sx={sx.attributeMappingTitle}>
-        Attribute Mapping
-      </Text>
-      <Box>
-        <IconButton sx={sx.createIconButton} variant="inverted" aria-label="edit header button">
-          <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
-        </IconButton>
-      </Box>
     </Box>
   );
 };
@@ -251,29 +203,27 @@ const Title = () => {
 export const Display = () => {
   return (
     <Box>
-      <Title />
-      <Box sx={sx.defaultFieldsWrapperBox}>
+      <Box sx={sx.container}>
         <Box
           isRow
           sx={{ width: '100%' }}
         >
           <Box sx={sx.fieldColumnTitleWrapper}>
             <Text sx={sx.fieldColumnTitle}>
-              PingOne
+              Application
             </Text>
           </Box>
           <Box sx={sx.fieldColumnTitleWrapper}>
             <Text sx={sx.fieldColumnTitle}>
-              Google Suites
+              PingOne
             </Text>
           </Box>
         </Box>
         <Separator />
-        <Row withBadge leftValue="UserId" rightValue="mdorey" />
-        <Row leftValue="givenName" rightValue="firstName" />
-        <Row leftValue="familyName" rightValue="lastName" />
-        <Row withTooltip leftValue="population" rightValue="population" />
-        <Row leftValue="password" rightValue="password" />
+        <Row withBadge leftValue="username" rightValue="User ID" />
+        <Row leftValue="firstName" rightValue="Given Name" />
+        <Row leftValue="lastName" rightValue="Family Name" />
+        <Row leftValue="population" rightValue="Population" />
       </Box>
     </Box>
   );
@@ -291,8 +241,6 @@ export const DisplayWithError = () => {
 
   return (
     <Box>
-      <Title />
-
       <Callout status={statuses.ERROR} sx={sx.calloutSx}>
         <Text>
           You’ve got problems. Allow me to tell you about them in some detail so
@@ -304,26 +252,27 @@ export const DisplayWithError = () => {
         </Text>
       </Callout>
 
-      <Box sx={sx.defaultFieldsWrapperBox}>
+      <Box sx={sx.container}>
         <Box
           isRow
           sx={{ width: '100%' }}
         >
           <Box sx={sx.fieldColumnTitleWrapper}>
             <Text sx={sx.fieldColumnTitle}>
-              PingOne
+              Application
             </Text>
           </Box>
           <Box sx={sx.fieldColumnTitleWrapper}>
             <Text sx={sx.fieldColumnTitle}>
-              Google Suites
+              PingOne
             </Text>
           </Box>
         </Box>
         <Separator />
-        <Row withBadge leftValue="UserId" rightValue="mdorey" />
-        <Row withError={withError} leftValue="givenName" rightValue="firstName" />
-        <Row withError={withError} leftValue="familyName" rightValue="lastName" />
+        <Row withBadge leftValue="username" rightValue="User ID" />
+        <Row leftValue="firstName" rightValue="Given Name" />
+        <Row leftValue="lastName" rightValue="Family Name" />
+        <Row withError={withError} leftValue="population" rightValue="Population" />
       </Box>
     </Box>
   );
