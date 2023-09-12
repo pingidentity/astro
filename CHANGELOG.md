@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.14.0...@pingux/astro@2.14.1) (2023-09-12)
+
+
+### Bug Fixes
+
+* [UIP-6425] Separate Conditional Filter into stories ([eaf8f72](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eaf8f726083dd9ec3a0e84fd0e397799f73f87f6))
+* [UIP-6439] ListViewItem move styles into variants ([8b89f8d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8b89f8d475d38a6c47dbc0e088f58e32612f8e25))
+* [UIP-6467]: Fix voice over repeating content ([e80150e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e80150e22b4382dc885d374f8d03d1b6b38ebeaf))
+
+
+
+
+
 # [2.14.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.13.0...@pingux/astro@2.14.0) (2023-09-07)
 
 
