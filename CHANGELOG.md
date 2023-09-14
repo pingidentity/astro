@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.14.1...@pingux/astro@2.15.0) (2023-09-14)
+
+
+### Bug Fixes
+
+* [UIP-6521] Astro Multivalues VoiceOver bug ([690a898](https://gitlab.corp.pingidentity.com/ux/pingux/commit/690a898b1427ee7248d7a2b3f1ba9a4e0a465250))
+* [UIP-6522] Astro Multivalues ReadOnly Badge focus ([058c70f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/058c70f01a0287c3214db4e590e8e5f6f012efb8))
+
+
+### Features
+
+* [UIP-6421] add DisplayRow as exported component ([0aeb8db](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0aeb8dbec6a17a4eb8187b1448cb404166328ace))
+
+
+
+
+
 ## [2.14.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.14.0...@pingux/astro@2.14.1) (2023-09-12)
 
 
