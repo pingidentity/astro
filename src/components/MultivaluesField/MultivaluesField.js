@@ -372,7 +372,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const visuallyHidden = (
     <VisuallyHidden id="selectedKeysState">
       Selected options:
-      {[...selectionManager.selectedKeys].join(' ')}
+      {Array.from(selectionManager.selectedKeys).join(' ')}
     </VisuallyHidden>
   );
 
