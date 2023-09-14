@@ -295,16 +295,15 @@ const MultivaluesField = forwardRef((props, ref) => {
         const item = initialItems.find(el => el.key === key);
         if (item) {
           return (
-            <Box as="li" key={`li ${item.key}`}>
-              <Badge
-                key={item.key}
-                role="presentation"
-                label={item.name}
-                variant="readOnlyBadge"
-                bg="white"
-                textProps={{ sx: { color: 'text.primary' } }}
-              />
-            </Box>
+            <Badge
+              key={item.key}
+              label={item.name}
+              variant="readOnlyBadge"
+              bg="white"
+              textProps={{ sx: { color: 'text.primary', tabIndex: '-1' } }}
+              as="li"
+              tabIndex={0}
+            />
           );
         }
         return null;
@@ -372,7 +371,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   const visuallyHidden = (
     <VisuallyHidden id="selectedKeysState">
       Selected options:
-      {[...selectionManager.selectedKeys].join(' ')}
+      {Array.from(selectionManager.selectedKeys).join(' ')}
     </VisuallyHidden>
   );
 

@@ -141,65 +141,6 @@ const editSx = {
 
 const helperTextId = uuid();
 
-const Row = props => {
-  const {
-    withBadge,
-    withError,
-    leftValue,
-    rightValue,
-  } = props;
-
-  return (
-    <Box
-      isRow
-      sx={sx.fieldRowWrapper}
-    >
-      <TextField
-        isReadOnly
-        value={leftValue}
-        labelProps={{
-          mb: 0,
-        }}
-        controlProps={{
-          variant: 'input.small',
-          'aria-label': `input ${leftValue}`,
-          sx: {
-            width: '165px',
-          },
-        }}
-        aria-labelledby={withError && helperTextId}
-        slots={withError && {
-          inContainer: (
-            <Icon icon={AlertCircleIcon} sx={sx.alertCircleIcon} title={{ name: 'Alert Circle Icon' }} />
-          ),
-        }}
-      />
-      <Separator sx={sx.separator} />
-      <TextField
-        isReadOnly
-        value={rightValue}
-        labelProps={{
-          mb: 0,
-        }}
-        controlProps={{
-          variant: 'input.small',
-          'aria-label': `input ${rightValue}`,
-          sx: {
-            width: '165px',
-          },
-        }}
-      />
-      {withBadge
-        && (
-          <Badge
-            label="Required"
-            sx={sx.badge}
-          />
-        )}
-    </Box>
-  );
-};
-
 export const Display = () => {
   return (
     <Box>
@@ -220,10 +161,10 @@ export const Display = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withBadge leftValue="username" rightValue="User ID" />
-        <Row leftValue="firstName" rightValue="Given Name" />
-        <Row leftValue="lastName" rightValue="Family Name" />
-        <Row leftValue="population" rightValue="Population" />
+        <DisplayRow withBadge leftValue="username" rightValue="User ID" />
+        <DisplayRow leftValue="firstName" rightValue="Given Name" />
+        <DisplayRow leftValue="lastName" rightValue="Family Name" />
+        <DisplayRow leftValue="population" rightValue="Population" />
       </Box>
     </Box>
   );
@@ -269,10 +210,10 @@ export const DisplayWithError = () => {
           </Box>
         </Box>
         <Separator />
-        <Row withBadge leftValue="username" rightValue="User ID" />
-        <Row leftValue="firstName" rightValue="Given Name" />
-        <Row leftValue="lastName" rightValue="Family Name" />
-        <Row withError={withError} leftValue="population" rightValue="Population" />
+        <DisplayRow withBadge leftValue="username" rightValue="User ID" />
+        <DisplayRow leftValue="firstName" rightValue="Given Name" />
+        <DisplayRow leftValue="lastName" rightValue="Family Name" />
+        <DisplayRow withError={withError} leftValue="population" rightValue="Population" />
       </Box>
     </Box>
   );
@@ -390,6 +331,65 @@ Edit.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.attributeMappings.edit,
   },
+};
+
+export const DisplayRow = props => {
+  const {
+    withBadge = false,
+    withError,
+    leftValue = 'UserId',
+    rightValue = 'mdorey',
+  } = props;
+
+  return (
+    <Box
+      isRow
+      sx={sx.fieldRowWrapper}
+    >
+      <TextField
+        isReadOnly
+        value={leftValue}
+        labelProps={{
+          mb: 0,
+        }}
+        controlProps={{
+          variant: 'input.small',
+          'aria-label': `input ${leftValue}`,
+          sx: {
+            width: '165px',
+          },
+        }}
+        aria-labelledby={withError && helperTextId}
+        slots={withError && {
+          inContainer: (
+            <Icon icon={AlertCircleIcon} sx={sx.alertCircleIcon} title={{ name: 'Alert Circle Icon' }} />
+          ),
+        }}
+      />
+      <Separator sx={sx.separator} />
+      <TextField
+        isReadOnly
+        value={rightValue}
+        labelProps={{
+          mb: 0,
+        }}
+        controlProps={{
+          variant: 'input.small',
+          'aria-label': `input ${rightValue}`,
+          sx: {
+            width: '165px',
+          },
+        }}
+      />
+      {withBadge
+        && (
+          <Badge
+            label="Required"
+            sx={sx.badge}
+          />
+        )}
+    </Box>
+  );
 };
 
 const EditRow = memo(props => {
