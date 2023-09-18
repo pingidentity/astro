@@ -66,6 +66,9 @@ export const FIGMA_LINKS = {
   modal: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=7513-27244&t=8Wwd3tIBh3GEjCJB-0',
   },
+  multiPagePopup: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43112%3A1263&mode=dev',
+  },
   navBar: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=548-3473&t=8Wwd3tIBh3GEjCJB-0',
   },
@@ -84,5 +87,4 @@ export const FIGMA_LINKS = {
   stepper: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=7523-27301&t=rLZVlRDdR1JhehkH-0',
   },
-
 };

@@ -28,6 +28,7 @@ import {
   Text,
 } from '../index';
 import { data, logo, PersonIcon, secondData, thirdData } from '../styles/templates/Nav/NavData';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Multipage Popup',
@@ -423,5 +424,9 @@ Default.decorators = [
 ];
 
 Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.multiPagePopup.default,
+  },
   layout: 'fullscreen',
 };
