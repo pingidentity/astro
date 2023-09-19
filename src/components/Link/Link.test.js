@@ -52,3 +52,12 @@ test('link shows disabled status', () => {
   const link = screen.getByTestId(testId);
   expect(link).toHaveClass('is-disabled');
 });
+
+test('link removes onPointer events when isSafariCompatible', () => {
+  const onPointerEvents = jest.fn();
+
+  getComponent({ href: 'blah', isSafariCompatible: true, onPointerDown: () => onPointerEvents, onPointerUp: () => onPointerEvents });
+  const link = screen.getByTestId(testId);
+  userEvent.click(link);
+  expect(onPointerEvents).not.toHaveBeenCalled();
+});

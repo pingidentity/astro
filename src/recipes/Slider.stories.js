@@ -6,6 +6,7 @@ import { useNumberFormatter } from '@react-aria/i18n';
 
 import { defaultFocus } from '../components/Button/Buttons.styles';
 import { Box } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Slider',
@@ -99,6 +100,13 @@ export const Default = () => {
       </Box>
     </>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.slider.default,
+  },
 };
 
 const Slider = props => {

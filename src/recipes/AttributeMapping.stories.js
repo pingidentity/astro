@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AddIcon from '@pingux/mdi-react/AddIcon';
 import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
 import CogsIcon from '@pingux/mdi-react/CogsIcon';
@@ -236,7 +236,7 @@ export const Edit = () => {
   ];
 
   const [rows, setRows] = useState(defaultRows);
-  const [isSubmitted, submitFields] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const addRow = () => {
     const newRow = {
       isDisabled: false,
@@ -315,7 +315,7 @@ export const Edit = () => {
                   updateRow={updateRow}
                   key={`row container ${row.name}`}
                   isSubmitted={isSubmitted}
-                  submitFields={submitFields}
+                  setIsSubmitted={setIsSubmitted}
                 />
               );
             })}
@@ -392,18 +392,18 @@ export const DisplayRow = props => {
   );
 };
 
-const EditRow = memo(props => {
+export const EditRow = props => {
   const {
     isDisabled,
     isNewRow,
     index,
     textValue,
     inputValue,
-    updateRow,
-    removeRow,
+    removeRow = () => {},
+    updateRow = () => {},
     areRowsValid,
     isSubmitted,
-    submitFields,
+    setIsSubmitted = () => {},
   } = props;
 
   const items = [
@@ -417,12 +417,12 @@ const EditRow = memo(props => {
 
   const setTextValue = value => {
     updateRow(index, value, 'textValue');
-    submitFields(false);
+    setIsSubmitted(false);
   };
 
   const setInputValue = value => {
     updateRow(index, value, 'inputValue');
-    submitFields(false);
+    setIsSubmitted(false);
   };
 
   useEffect(() => {
@@ -522,4 +522,4 @@ const EditRow = memo(props => {
       </Box>
     </Box>
   );
-});
+};

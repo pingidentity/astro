@@ -315,3 +315,17 @@ test('should reflect the selection change when env is clicked', () => {
     `${itemsWithSections[1].name}-${itemsWithSections[1].options[1].name}`,
   );
 });
+
+test('should indicate selected item on first render', () => {
+  const selectedItem = items[0].name;
+  const envNode = (
+    <Item key={selectedItem}>
+      {selectedItem}
+    </Item>
+  );
+
+  getComponent({ isDefaultOpen: true, selectedItem: envNode });
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(3);
+  expect(screen.getByText(selectedItem)).toHaveClass('is-selected');
+});
