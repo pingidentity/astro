@@ -87,4 +87,8 @@ export const FIGMA_LINKS = {
   stepper: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=7523-27301&t=rLZVlRDdR1JhehkH-0',
   },
+  slider: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43112%3A1773&mode=dev',
+  },
+
 };
