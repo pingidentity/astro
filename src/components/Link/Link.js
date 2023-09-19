@@ -7,7 +7,7 @@ import { Link as ThemeUILink } from 'theme-ui';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 
 const Link = forwardRef((props, ref) => {
-  const { className, isDisabled, onPress, ...others } = props;
+  const { className, isDisabled, onPress, isSafariCompatible, ...others } = props;
 
   const linkRef = useRef();
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -24,6 +24,14 @@ const Link = forwardRef((props, ref) => {
     isPressed,
   });
 
+  // This relates to UIP-6502. Due to browser inconsistencies
+  // react aria prevent default on pointer down
+  if (isSafariCompatible) {
+    delete linkProps.onPointerUp;
+    delete linkProps.onPointerDown;
+    delete pressProps.onPointerUp;
+    delete pressProps.onPointerDown;
+  }
 
   return (
     <ThemeUILink
@@ -49,6 +57,8 @@ Link.propTypes = {
   target: PropTypes.string,
   /** The styling variation of the link. */
   variant: PropTypes.string,
+  /** Whether the link is clickable inside a popover in safari */
+  isSafariCompatible: PropTypes.bool,
 };
 
 Link.defaultProps = {

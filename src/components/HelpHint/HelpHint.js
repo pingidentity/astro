@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, PopoverContainer } from '../..';
 import { useStatusClasses } from '../../hooks';
+import { isSafari } from '../../styles/safariAgent';
 
 const HelpIcon = () => (
   <svg width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="help-icon-title">
@@ -93,6 +94,19 @@ const HelpHint = forwardRef((props, ref) => {
     isDarkMode,
   });
 
+  const addIsSafariCompatiblePropToLinkChildren = containerChildren => {
+    if (containerChildren) {
+      return React.Children.map(containerChildren, child => {
+        if (!React.isValidElement(child)) return child;
+        return React.cloneElement(child, {
+          children: addIsSafariCompatiblePropToLinkChildren(child.props.children),
+          isSafariCompatible: child.type.displayName === 'Link',
+        });
+      });
+    }
+    return undefined;
+  };
+
   return (
     <Box {...others} ref={ref}>
       <IconButton
@@ -110,19 +124,24 @@ const HelpHint = forwardRef((props, ref) => {
         className={classNames}
         direction={direction}
         hasNoArrow={hasNoArrow}
-        isDismissable={!isOpen}
+        isDismissable={isFocusWithinOverlay ? !isOpen : true}
         isNonModal
         isOpen={isOpen}
         onClose={close}
         placement={placement}
         ref={overlayRef}
-        {...mergeProps(overlayProps, positionProps, popoverProps, overlayHoverProps)}
-        {...focusWithinProps}
+        {...mergeProps(
+          overlayProps,
+          positionProps,
+          popoverProps,
+          overlayHoverProps,
+          focusWithinProps,
+        )}
       >
         {/* Only autofocus if keyboard is being used */}
         <FocusScope restoreFocus autoFocus={isFocusVisible}>
           <Box variant="helpHint.popoverContainer">
-            {children}
+            { isSafari ? addIsSafariCompatiblePropToLinkChildren(children) : children }
           </Box>
         </FocusScope>
       </PopoverContainer>
