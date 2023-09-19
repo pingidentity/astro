@@ -169,11 +169,14 @@ export const DefaultClosed = args => {
 };
 
 export const WithSections = () => {
+  const selectedSectionIndex = 0;
+  const selectedOptionIndex = 0;
   const [environments, setEnvironments] = useState(environmentsWithSections);
   const [filteredOptionsNumber, setFilteredOptionsNumber] = useState(null);
   const [selectedEnvironment, setSelectedEnvironment] = useState(
-    environmentsWithSections[0].options[0],
+    environmentsWithSections[selectedSectionIndex].options[selectedOptionIndex],
   );
+  const selectedKey = `${environmentsWithSections[selectedSectionIndex].key}-${selectedEnvironment.name}`;
   const recentEnvShown = 3;
   const totalOptionsNumber = environmentsWithSections.reduce(
     (acc, section) => acc + section.options.length, 0);
@@ -225,7 +228,7 @@ export const WithSections = () => {
   };
 
   const envNode = (
-    <Box isRow key={selectedEnvironment.name}>
+    <Box isRow key={selectedKey}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
