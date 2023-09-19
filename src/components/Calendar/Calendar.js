@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { createCalendar, parseDate } from '@internationalized/date';
 import ChevronDoubleLeftIcon from '@pingux/mdi-react/ChevronDoubleLeftIcon';
 import ChevronDoubleRightIcon from '@pingux/mdi-react/ChevronDoubleRightIcon';
@@ -42,40 +42,62 @@ const Calendar = forwardRef((props, ref) => {
     calenderRef,
   );
 
-  /**
-   * Grabs the currently displayed date for yearly navigation.
-   */
-
-  const [currentDate, setCurrentDate] = useState();
-  const todayDate = useMemo(() => {
-    setCurrentDate(state.visibleRange.start);
-  }, [state.visibleRange.start]);
+  const [yearChangeDirection, setYearChangeDirection] = useState(null);
+  const previousYearRef = useRef(null);
+  const nextYearRef = useRef(null);
 
   const nav = {
     NEXT: 'next',
     PREVIOUS: 'previous',
   };
 
-  /**
-   * Function handles the navigation to previous and next year
-   * based on the currently displayed date.
-   */
-
-  const handleYearSelection = useCallback(navigation => {
-    let tempValue;
-    if (navigation === nav.PREVIOUS) {
-      tempValue = currentDate.subtract({ years: 1 });
-    } else if (navigation === nav.NEXT) {
-      tempValue = currentDate.add({ years: 1 });
+  // after updating visible year, reapplies focus to corresponding year buttons
+  useEffect(() => {
+    if (yearChangeDirection === nav.NEXT) {
+      nextYearRef.current.focus();
     }
-    state.setFocusedDate(tempValue);
-    setCurrentDate(tempValue);
-  }, [currentDate, state, todayDate]);
 
+    if (yearChangeDirection === nav.PREVIOUS) {
+      previousYearRef.current.focus();
+    }
+
+    setYearChangeDirection(null);
+  }, [nav.NEXT, nav.PREVIOUS, yearChangeDirection]);
+
+
+  // update visible year
+  const handleYearSelection = navigation => {
+    if (navigation === nav.PREVIOUS) {
+      const previousYear = state.focusedDate.subtract({ years: 1 });
+      state.setFocusedDate(previousYear);
+    }
+
+    if (navigation === nav.NEXT) {
+      const nextYear = state.focusedDate.add({ years: 1 });
+      state.setFocusedDate(nextYear);
+    }
+
+    setYearChangeDirection(navigation);
+  };
+
+  const renderTitle = (
+    <Text
+      variant="itemTitle"
+      role="heading"
+      aria-level="3"
+      fontWeight={3}
+    >
+      {title}
+    </Text>
+  );
   return (
     <Box {...calendarProps} ref={calenderRef} variant="calendar.calendarContainer">
+      <VisuallyHidden aria-live="assertive">
+        <Text>{title}</Text>
+      </VisuallyHidden>
       <Box className="header" isRow variant="calendar.calendarHeader" verticalAlign="middle">
         <IconButton
+          ref={previousYearRef}
           onPress={() => handleYearSelection(nav.PREVIOUS)}
           mx="sm"
           isDisabled={prevButtonProps.isDisabled}
@@ -89,17 +111,7 @@ const Calendar = forwardRef((props, ref) => {
         >
           <Icon icon={ChevronLeftIcon} size={18} title={{ name: 'Chevron Left Icon' }} />
         </IconButton>
-        <VisuallyHidden>
-          <Text>{calendarProps['aria-label']}</Text>
-        </VisuallyHidden>
-        <Text
-          variant="itemTitle"
-          role="heading"
-          aria-level="3"
-          fontWeight={3}
-        >
-          {title}
-        </Text>
+        {renderTitle}
         <IconButton
           {...nextButtonProps}
           aria-label="Next month navigation"
@@ -107,6 +119,7 @@ const Calendar = forwardRef((props, ref) => {
           <Icon icon={ChevronRightIcon} size={18} title={{ name: 'Chevron Right Icon' }} />
         </IconButton>
         <IconButton
+          ref={nextYearRef}
           onPress={() => handleYearSelection(nav.NEXT)}
           mx="sm"
           isDisabled={nextButtonProps.isDisabled}
