@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.15.0...@pingux/astro@2.16.0) (2023-09-19)
+
+
+### Bug Fixes
+
+* [UIP-6404]: Calendar: fix voiceover and button focus ([f3ca748](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f3ca7489f994fb19ad091c6d9a611373575cb90e))
+* [UIP-6474] EnvironmentBreadcrumb: pass selectedItem key prop to selectedKeys state ([29cd34e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/29cd34e539a00af4c6229d6fe3d7dcd97eb27c20))
+* [UIP-6502] fix Link inside HelpHint to work in Safari ([579d492](https://gitlab.corp.pingidentity.com/ux/pingux/commit/579d492a3c5f403bcbc1f7b078b62d2256ee6856))
+
+
+### Features
+
+* [UIP-5624] add Figma link to MultipagePopup ([4be99f4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4be99f46d5e53a2a66089d31dc51aedd0ce62e03))
+* [UIP-6413] export EditRow from attribute mapping ([64e99df](https://gitlab.corp.pingidentity.com/ux/pingux/commit/64e99df4b7b7aa25096205f2a0220ba88a443f38))
+
+
+
+
+
 # [2.15.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.14.1...@pingux/astro@2.15.0) (2023-09-14)
 
 
