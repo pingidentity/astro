@@ -65,7 +65,7 @@ const EnvironmentBreadcrumb = forwardRef((props, ref) => {
   const optionsNumberMessageId = useMemo(() => uuid(), []);
 
   const [searchValue, setSearchValue] = useState('');
-  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([selectedItem?.key]);
   const [isTyping, setIsTyping] = useState(false);
 
   const breadcrumbsRef = useRef();
