@@ -3,7 +3,6 @@ import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, HelpHint, Link, Text } from '../../index';
-import { isSafari } from '../../styles/safariAgent';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import HelpHintReadme from './HelpHint.mdx';
@@ -60,14 +59,7 @@ export const ContentWithLink = () => (
   <Box p={70}>
     <HelpHint>
       <Text variant="popover">Text of the popover right here... </Text>
-      {/* TODO: In safari the Link component inside the Popover is not working as intended */}
-      {isSafari ? (
-        <Box href="https://uilibrary.ping-eng.com/" as="a" pl="xs">
-          <Link variant="popover">
-            Learn More
-          </Link>
-        </Box>
-      ) : <Link variant="popover" href="https://uilibrary.ping-eng.com/">Learn More</Link> }
+      <Link variant="popover" href="https://uilibrary.ping-eng.com/" target="_blank">Learn More</Link>
     </HelpHint>
   </Box>
 );

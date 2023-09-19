@@ -30,6 +30,11 @@ export default {
       },
     },
     isDisabled: {},
+    isSafariCompatible: {
+      table: {
+        disable: true,
+      },
+    },
     as: {
       control: {
         type: 'none',
