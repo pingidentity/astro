@@ -97,7 +97,6 @@ const TextAreaField = forwardRef((props, ref) => {
           // DO NOT put paddingRight and overflow into sx object.
           /// It will cause issue with resizing in Safari browser.
           paddingRight={slots?.inContainer && 35}
-          style={{ overflow: !slots?.inContainer && 'hidden' }}
           aria-invalid={status === 'error' && true}
           aria-describedby={helperText && helperTextId}
         />
