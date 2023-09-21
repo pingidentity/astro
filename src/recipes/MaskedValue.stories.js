@@ -9,6 +9,7 @@ import {
   IconButton,
   Text,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Masked Values',
@@ -79,4 +80,11 @@ export const Default = ({ dataTitle, secretData }) => {
       </Box>
     </Box>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.maskedValue.default,
+  },
 };
