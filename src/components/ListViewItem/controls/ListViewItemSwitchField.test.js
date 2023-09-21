@@ -1,24 +1,23 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { ListViewItemSwitchField } from '../../..';
 import axeTest from '../../../utils/testUtils/testAxe';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
 
-import ListViewItemEditButton from './ListViewItemEditButton';
-
 const getComponent = (props = {}) => render((
-  <ListViewItemEditButton {...props} />
+  <ListViewItemSwitchField {...props} />
 ));
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-test('ListViewItemEditButton responds to IconButton props', () => {
-  const onPress = jest.fn();
-  getComponent({ onPress });
+test('ListViewItemSwitchField responds to SwitchFiled props', () => {
+  const onChange = jest.fn();
+  getComponent({ onChange });
 
-  const button = screen.getByRole('button');
-  userEvent.click(button);
+  const switchField = screen.getByRole('switch');
+  userEvent.click(switchField);
 
-  expect(onPress).toBeCalled();
+  expect(onChange).toBeCalled();
 });

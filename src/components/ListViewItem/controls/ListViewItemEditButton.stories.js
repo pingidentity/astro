@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { iconButtonArgs, iconButtonArgTypes } from '../../../components/IconButton/iconButtonAttributes';
-import { ListViewItemEditButton } from '../../../index';
+import { ListViewItemEditButton } from '../../..';
+import { iconButtonArgs, iconButtonArgTypes } from '../../IconButton/iconButtonAttributes';
 
 delete iconButtonArgTypes.size;
 delete iconButtonArgTypes.icon;
 
 export default {
-  title: 'Experimental/ListViewItem/Controls/ListViewItemEditButton',
+  title: 'Components/ListViewItem/Controls/ListViewItemEditButton',
   component: ListViewItemEditButton,
   parameters: {
     docs: {

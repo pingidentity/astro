@@ -2,12 +2,12 @@ import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { SharedItemArgTypes } from '../../components/ListViewItem/listViewItemAttributes';
 import { Item,
   PanelHeader,
   PanelHeaderCloseButton,
   PanelHeaderMenu,
   PanelHeaderSwitchField } from '../../index';
-import { SharedItemArgTypes } from '../ListViewItem/listViewItemAttributes';
 
 import PanelHeaderReadMe from './PanelHeader.mdx';
 

@@ -10,10 +10,10 @@ import {
   ListViewItemMenu,
   ScrollBox,
   SearchField,
-} from '../../index';
+} from '../..';
 
 export default {
-  title: 'Experimental/recipes/ScrollableListView',
+  title: 'Recipes/Scrollable List View',
 };
 
 export const ScrollableListView = () => {

@@ -1,11 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { Item } from '../../../index';
+import { Item, ListViewItemMenu } from '../../..';
 import axeTest from '../../../utils/testUtils/testAxe';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
 
-import ListViewItemMenu from './ListViewItemMenu';
 
 const getComponent = (props = {}) => render((
   <ListViewItemMenu {...props}>

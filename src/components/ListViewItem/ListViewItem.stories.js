@@ -13,14 +13,14 @@ import {
   ListViewItemSwitchField,
   Separator,
   Text,
-} from '../../index';
+} from '../..';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
 import ListViewItemReadMe from './ListViewItem.mdx';
 import { listViewItemArgTypes } from './listViewItemAttributes';
 
 export default {
-  title: 'Experimental/ListViewItem',
+  title: 'Components/ListViewItem',
   component: ListViewItem,
   parameters: {
     docs: {
@@ -53,7 +53,6 @@ export const Default = () => (
         icon: AccountIcon,
         text: 'Fons Vernall',
       }}
-      aria-label="Fons Vernall"
     />
   </Wrapper>
 );
@@ -66,7 +65,6 @@ export const WithSubtext = () => (
         subtext: 'rad_developer@pingidentity.com',
         text: 'Fons Vernall',
       }}
-      aria-label="Fons Vernall"
     />
   </Wrapper>
 );
@@ -124,7 +122,6 @@ export const WithRightOfDataSlot = () => {
           subtext: 'verylongemailaddress@email.com',
         }}
         slots={{ rightOfData: renderRightOfData }}
-        aria-label="Fons Vernall"
       >
         <ListViewItemMenu>
           <Item key="enable">Enable user</Item>
@@ -154,7 +151,6 @@ export const WithLeftOfDataSlot = () => {
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
-        aria-label="Fons Vernall"
       >
         <ListViewItemMenu>
           <Item key="enable">Enable user</Item>
@@ -184,7 +180,6 @@ export const WithExtraLongText = () => {
           subtext: longText,
         }}
         slots={{ rightOfData: renderRightOfData }}
-        aria-label="Fons Vernall"
       >
         <ListViewItemMenu>
           <Item key="enable">Enable user</Item>

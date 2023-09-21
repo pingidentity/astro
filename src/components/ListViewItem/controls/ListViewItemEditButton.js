@@ -1,13 +1,13 @@
 import React from 'react';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 
-import { iconButtonPropTypes } from '../../../components/IconButton/iconButtonAttributes';
-import { Box, Icon, IconButton } from '../../../index';
+import { Box, Icon, IconButton } from '../../..';
+import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
 
 /**
  * ListViewItemEditButton is one of several styled control components that can be used as a child
- * nested inside of the [ListViewItem](./?path=/story/experimental-listviewitem--default).
- * Its a wrapper component around the [IconButton](./?path=/story/components-iconbutton--default),
+ * nested inside of the [ListViewItem](./?path=/docs/components-listviewitem--docs).
+ * Its a wrapper component around the [IconButton](./?path=/docs/components-iconbutton--docs),
  * intended to make matching specs easy. Most props available to the IconButton are also available
  * to ListItemEditButton.
 */
