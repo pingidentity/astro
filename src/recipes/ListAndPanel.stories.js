@@ -7,15 +7,16 @@ import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 import PencilIcon from '@pingux/mdi-react/PencilIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
 
-import { useOverlayPanelState } from '../hooks';
-import useOverlappingMenuHoverState from '../hooks/useOverlappingMenuHoverState';
+import { useOverlappingMenuHoverState, useOverlayPanelState } from '../hooks';
 import {
   Box,
   Icon,
   IconButton,
   Link,
-  ListItem,
   ListView,
+  ListViewItem,
+  ListViewItemMenu,
+  ListViewItemSwitchField,
   Menu,
   OverlayPanel,
   PopoverMenu,
@@ -27,104 +28,18 @@ import {
   Text,
 } from '../index';
 
+import { items } from './items';
+
 export default {
-  title: 'Recipes/List with Panel',
+  title: 'Recipes/List And Panel',
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
-
-const items = [
-  {
-    email: 'dburkitt5@columbia.edu',
-    firstName: 'Nicola',
-    lastName: 'Burkitt',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'idixie2@elegantthemes.com',
-    firstName: 'Cacilia',
-    lastName: 'Dixie',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'dfowler0@rambler.ru',
-    firstName: 'Stavro',
-    lastName: 'Fowler',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'jgolde8@jimdo.com',
-    firstName: 'Celisse',
-    lastName: 'Golde',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'shearst9@answers.com',
-    firstName: 'Jeth',
-    lastName: 'Hearst',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'ajinaa@mapquest.com',
-    firstName: 'Kaycee',
-    lastName: 'Jina',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'vmalster4@biblegateway.com',
-    firstName: 'Lorry',
-    lastName: 'Malster',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'yphipp6@yellowpages.com',
-    firstName: 'Stanley',
-    lastName: 'Phipp',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'mskilbeck3@bbc.co.uk',
-    firstName: 'Gradey',
-    lastName: 'Skilbeck',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'dstebbing1@msu.edu',
-    firstName: 'Marnia',
-    lastName: 'Stebbing',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'lsterley7@lulu.com',
-    firstName: 'Joshua',
-    lastName: 'Sterley',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'luttleyb@hugedomains.com',
-    firstName: 'Jarrod',
-    lastName: 'Uttley',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-  {
-    email: 'lidelc@yelp.com',
-    firstName: 'Andromache',
-    lastName: 'Idel',
-    hasIcon: true,
-    avatar: AccountIcon,
-  },
-];
-
 
 const sx = {
   wrapper: {
@@ -133,16 +48,6 @@ const sx = {
     bg: 'accent.99',
     height: '900px',
     overflowY: 'scroll',
-  },
-  searchField: {
-    position: 'fixed',
-    mb: 'sm',
-    width: '400px',
-  },
-  listElementWrapper: {
-    px: 'md',
-    bg: 'accent.99',
-    justifyContent: 'center',
   },
   separator: {
     bg: 'accent.90',
@@ -165,117 +70,84 @@ const sx = {
   itemValue: {
     fontWeight: 0,
     lineHeight: '18px',
-    variant: 'base',
     mb: 'md',
   },
-  listElement: {
-    wrapper: {
-      minHeight: '60px',
-      pl: '14px',
+  panelHeader: {
+    container: {
+      bg: 'accent.99',
+      minHeight: 58,
+      ml: 0,
+      pl: 14,
+      pr: 'xs',
     },
-    iconWrapper: {
-      mr: 'auto',
+    controls: {
+      alignSelf: 'center',
+      ml: 'auto',
+      pr: 'sm',
+    },
+    data: {
       alignItems: 'center',
     },
-    icon: {
-      mr: 'md',
-      alignSelf: 'center',
-      color: 'accent.40',
-    },
-    avatar: {
-      width: '25px',
-      height: '25px',
-      mr: '14px',
+    subtitle: {
+      alignSelf: 'start',
+      fontSize: 'sm',
+      lineHeight: '16px',
+      my: '1px',
     },
     title: {
       alignSelf: 'start',
       fontSize: 'md',
     },
-    subtitle: {
-      fontSize: 'sm',
-      my: '1px',
-      lineHeight: '16px',
-      alignSelf: 'start',
-    },
-    menuWrapper: {
-      alignSelf: 'center',
-      pr: '4px',
+    wrapper: {
+      cursor: 'pointer',
+      display: 'flex',
+      flex: '1 1 0px',
+      ml: 'md',
     },
   },
 };
 
-const ListElement = ({ item, isHoverable, onClosePanel }) => {
-  const listItemRef = useRef();
-
-  const {
-    handleHoverEnd,
-    handleHoverStart,
-    handleMenuHoverEnd,
-    handleMouseMove,
-    isHovered,
-  } = useOverlappingMenuHoverState({ listItemRef });
-
-  return (
-    <ListItem
-      isHovered={isHoverable && isHovered}
+const heading = 'Users';
+const description = 'The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page.';
+const title = (
+  <Box>
+    <Box
+      align="center"
       isRow
-      onHoverEnd={handleHoverEnd}
-      onHoverStart={handleHoverStart}
-      onMouseMove={handleMouseMove}
-      ref={listItemRef}
-      sx={sx.listElement.wrapper}
+      mb="xs"
+      role="heading"
+      aria-level="1"
     >
-      <Box isRow sx={sx.listElement.iconWrapper}>
-        <Icon icon={item.avatar} size="md" sx={sx.listElement.icon} title={{ name: 'Account Icon' }} />
-        <Box>
-          <Text variant="bodyStrong" sx={sx.listElement.title}>
-            {item.lastName}
-            ,
-            {' '}
-            {item.firstName}
-          </Text>
-          <Text variant="subtitle" sx={sx.listElement.subtitle}>{item.email}</Text>
-        </Box>
-      </Box>
-      <Box isRow sx={sx.listElement.menuWrapper}>
-        <SwitchField aria-label="active user" isDefaultSelected alignSelf="center" mr="sm" />
-        <PopoverMenu>
-          <IconButton aria-label="more icon button" mr={onClosePanel ? 'sm' : 0}>
-            <Icon icon={MoreVertIcon} size="md" title={{ name: 'More Vertical Icon' }} />
-          </IconButton>
-          <Menu
-            onAction={handleHoverEnd}
-            onHoverEnd={handleMenuHoverEnd}
-            onHoverStart={handleHoverStart}
-          >
-            <Item key="enable">Enable user</Item>
-            <Item key="disable">Disable user</Item>
-            <Item key="delete">Delete user</Item>
-          </Menu>
-        </PopoverMenu>
-        {onClosePanel
-          && (
-            <IconButton
-              aria-label="close icon button"
-              onPress={onClosePanel}
-            >
-              <Icon size="sm" icon={CloseIcon} title={{ name: 'Close Icon' }} />
-            </IconButton>
-          )}
-      </Box>
-    </ListItem>
-  );
-};
+      <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
+        {heading}
+      </Text>
+      <IconButton aria-label="icon button" ml="sm" variant="inverted">
+        <Icon icon={PlusIcon} size="sm" />
+      </IconButton>
+    </Box>
+    <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
+      {description}
+      <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
+    </Text>
+  </Box>
+);
 
+export const ListAndPanel = () => {
+  // Example of items data structure
+  // const items = [
+  //   {
+  //     email: 'dburkitt5@columbia.edu',
+  //     firstName: 'Nicola',
+  //     lastName: 'Burkitt',
+  //     icon: AccountIcon,
+  //   },
+  // ]
 
-export const Default = () => {
   const [selectedItemId, setSelectedItemId] = useState();
   const [selectedKeys, setSelectedKeys] = useState();
   const { state: panelState, onClose: onPanelClose } = useOverlayPanelState();
   const panelTriggerRef = useRef();
 
-  const heading = 'Users';
-  const description = 'The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page. The description of the page.';
 
   const closePanelHandler = () => {
     onPanelClose(panelState, panelTriggerRef);
@@ -293,29 +165,6 @@ export const Default = () => {
     }
   };
 
-  const title = (
-    <Box>
-      <Box
-        align="center"
-        isRow
-        mb="xs"
-        role="heading"
-        aria-level="1"
-      >
-        <Text fontSize="xx" fontWeight={3} fontColor="text.primary">
-          {heading}
-        </Text>
-        <IconButton aria-label="icon button" ml="sm" variant="inverted">
-          <Icon icon={PlusIcon} size="sm" title={{ name: 'Plus Icon' }} />
-        </IconButton>
-      </Box>
-      <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
-        {description}
-        <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
-      </Text>
-    </Box>
-  );
-
   return (
     <Box sx={sx.wrapper}>
       {title}
@@ -326,16 +175,19 @@ export const Default = () => {
         onSelectionChange={selectItemHandler}
         ref={panelTriggerRef}
         selectedKeys={selectedKeys}
-        isHoverable={false}
       >
         {item => (
-          <Item
-            key={item.email}
-            textValue={item.email}
-            hasSeparator={item.hasSeparator}
-            listItemProps={{ minHeight: 75, padding: 1 }}
-          >
-            <ListElement isHoverable item={item} />
+          <Item key={item.email}>
+            {/* If you're rendering the `ListViewItem` as another component
+            and you want the styling to be handled similarly, then be sure
+            to pass the `data` prop to it as shown here. */}
+            <ListElement
+              data={{
+                text: `${item.lastName}, ${item.firstName}`,
+                subtext: item.email,
+                icon: item.icon,
+              }}
+            />
           </Item>
         )}
       </ListView>
@@ -348,53 +200,134 @@ export const Default = () => {
       >
         {panelState.isOpen
           && (
-            <FocusScope contain restoreFocus autoFocus>
-              <Box sx={sx.listElementWrapper}>
-                <ListElement
-                  item={selectedItemId >= 0 ? items[selectedItemId] : []}
-                  onClosePanel={closePanelHandler}
-                />
-              </Box>
-              <Separator margin={0} sx={sx.separator} />
-              <Box sx={sx.tabsWrapper}>
-                <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }}>
-                  <Tab title="Profile">
-                    {selectedItemId >= 0
-                      && (
-                        <>
-                          <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
-                            <PencilIcon size={20} />
-                          </IconButton>
-                          <Text sx={sx.itemLabel} variant="base">Full Name</Text>
-                          <Text sx={sx.itemValue} variant="base">
-                            {items[selectedItemId].firstName}
-                            {' '}
-                            {items[selectedItemId].lastName}
-                          </Text>
-                          <Text sx={sx.itemLabel} variant="base">First Name</Text>
-                          <Text sx={sx.itemValue} variant="base">{items[selectedItemId].firstName}</Text>
-                          <Text sx={sx.itemLabel} variant="base">Last Name</Text>
-                          <Text sx={sx.itemValue} variant="base">{items[selectedItemId].lastName}</Text>
-                          <Text sx={sx.itemLabel} variant="base">Email</Text>
-                          <Text sx={sx.itemValue} variant="base">{items[selectedItemId].email}</Text>
-                        </>
-                      )}
-                  </Tab>
-                  <Tab title="Group Memberships">
-                    <Text>
-                      Group Memberships
-                    </Text>
-                  </Tab>
-                  <Tab title="Account Info">
-                    <Text>
-                      Account Info
-                    </Text>
-                  </Tab>
-                </Tabs>
-              </Box>
-            </FocusScope>
+          <FocusScope contain restoreFocus autoFocus>
+            <PanelHeader
+              item={selectedItemId >= 0 ? items[selectedItemId] : []}
+              onClosePanel={closePanelHandler}
+            />
+            <Separator margin={0} sx={sx.separator} />
+            <Box sx={sx.tabsWrapper}>
+              <Tabs tabListProps={{ justifyContent: 'center' }} tabPanelProps={{ sx: { position: 'relative' } }}>
+                <Tab title="Profile">
+                  {selectedItemId >= 0
+              && (
+              <>
+                <IconButton variant="inverted" aria-label="pencil icon button" sx={sx.iconButton}>
+                  <Icon icon={PencilIcon} size="sm" />
+                </IconButton>
+                <Text sx={sx.itemLabel}>Full Name</Text>
+                <Text sx={sx.itemValue}>
+                  {items[selectedItemId].firstName}
+                  {' '}
+                  {items[selectedItemId].lastName}
+                </Text>
+                <Text sx={sx.itemLabel}>First Name</Text>
+                <Text sx={sx.itemValue}>{items[selectedItemId].firstName}</Text>
+                <Text sx={sx.itemLabel}>Last Name</Text>
+                <Text sx={sx.itemValue}>{items[selectedItemId].lastName}</Text>
+                <Text sx={sx.itemLabel}>Email</Text>
+                <Text sx={sx.itemValue}>{items[selectedItemId].email}</Text>
+              </>
+              )}
+                </Tab>
+                <Tab title="Group Memberships">
+                  <Text>
+                    Group Memberships
+                  </Text>
+                </Tab>
+                <Tab title="Account Info">
+                  <Text>
+                    Account Info
+                  </Text>
+                </Tab>
+              </Tabs>
+            </Box>
+          </FocusScope>
           )}
       </OverlayPanel>
+    </Box>
+  );
+};
+
+export const ListElement = ({
+  data = {
+    subtext: 'dburkitt5@columbia.edu',
+    text: 'Burkitt, Nicola',
+    icon: AccountIcon,
+  },
+}) => {
+  const listItemRef = useRef();
+
+  const {
+    handleHoverEnd,
+    handleHoverStart,
+    handleMenuHoverEnd,
+    handleMouseMove,
+    isHovered,
+  } = useOverlappingMenuHoverState({ listItemRef });
+
+  return (
+    <ListViewItem
+      data={data}
+      isHovered={isHovered}
+      onHoverEnd={handleHoverEnd}
+      onHoverStart={handleHoverStart}
+      onMouseMove={handleMouseMove}
+      ref={listItemRef}
+    >
+      <ListViewItemSwitchField />
+      <ListViewItemMenu
+        onAction={handleHoverEnd}
+        onHoverEnd={handleMenuHoverEnd}
+        onHoverStart={handleHoverStart}
+      >
+        <Item key="enable">Enable user</Item>
+        <Item key="disable">Disable user</Item>
+        <Item key="delete">Delete user</Item>
+      </ListViewItemMenu>
+    </ListViewItem>
+  );
+};
+
+export const PanelHeader = ({ item = { email: 'dburkitt5@columbia.edu', icon: AccountIcon, firstName: 'John', lastName: 'Doe' }, onClosePanel }) => {
+  const { email, firstName, lastName } = item;
+  const text = `${lastName}, ${firstName}`;
+
+  return (
+    <Box sx={sx.panelHeader.container}>
+      <Box isRow sx={sx.panelHeader.wrapper}>
+        <Box isRow sx={sx.panelHeader.data}>
+          <Box>
+            <Text variant="bodyStrong" sx={sx.panelHeader.title}>
+              {text}
+            </Text>
+            <Text variant="subtitle" sx={sx.panelHeader.subtitle}>{email}</Text>
+          </Box>
+        </Box>
+        <Box isRow sx={sx.panelHeader.controls}>
+          <SwitchField
+            isDefaultSelected
+            alignSelf="center"
+            mr="xs"
+          />
+          <PopoverMenu>
+            <IconButton aria-label="more">
+              <Icon icon={MoreVertIcon} size="md" />
+            </IconButton>
+            <Menu>
+              <Item key="enable">Enable user</Item>
+              <Item key="disable">Disable user</Item>
+              <Item key="delete">Delete user</Item>
+            </Menu>
+          </PopoverMenu>
+          <IconButton
+            aria-label="close icon button"
+            onPress={onClosePanel}
+          >
+            <Icon size="md" icon={CloseIcon} />
+          </IconButton>
+        </Box>
+      </Box>
     </Box>
   );
 };

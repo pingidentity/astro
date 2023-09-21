@@ -2,7 +2,7 @@ import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import { act } from '@testing-library/react';
 
-import { ListViewItem, ListViewItemSwitchField } from '../../index';
+import { ListViewItem, ListViewItemSwitchField } from '../..';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';

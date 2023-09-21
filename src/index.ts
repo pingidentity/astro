@@ -83,6 +83,10 @@ export { default as ListItem } from './components/ListItem';
 export * from './components/ListItem';
 export { default as ListView } from './components/ListView';
 export * from './components/ListView';
+export { default as ListViewItem } from './components/ListViewItem';
+export { default as ListViewItemEditButton } from './components/ListViewItem/controls/ListViewItemEditButton';
+export { default as ListViewItemMenu } from './components/ListViewItem/controls/ListViewItemMenu';
+export { default as ListViewItemSwitchField } from './components/ListViewItem/controls/ListViewItemSwitchField';
 export { default as Loader } from './components/Loader';
 export * from './components/Loader';
 export { default as Menu } from './components/Menu';
@@ -178,10 +182,6 @@ export {
 // Experimental
 export { default as ButtonBar } from './experimental/ButtonBar/ButtonBar';
 export { default as EditButton } from './experimental/EditButton';
-export { default as ListViewItemEditButton } from './experimental/ListViewItem/controls/ListViewItemEditButton';
-export { default as ListViewItemMenu } from './experimental/ListViewItem/controls/ListViewItemMenu';
-export { default as ListViewItemSwitchField } from './experimental/ListViewItem/controls/ListViewItemSwitchField';
-export { default as ListViewItem } from './experimental/ListViewItem/ListViewItem';
 export { default as PanelHeader } from './experimental/PanelHeader';
 export { default as PanelHeaderCloseButton } from './experimental/PanelHeader/controls/PanelHeaderCloseButton';
 export { default as PanelHeaderMenu } from './experimental/PanelHeader/controls/PanelHeaderMenu';

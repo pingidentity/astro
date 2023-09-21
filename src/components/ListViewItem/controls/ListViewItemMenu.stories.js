@@ -1,11 +1,11 @@
 import React from 'react';
 import { Item } from 'react-stately';
 
-import { menuArgTypes } from '../../../components/Menu/menuAttributes';
-import { ListViewItemMenu } from '../../../index';
+import { ListViewItemMenu } from '../../..';
+import { menuArgTypes } from '../../Menu/menuAttributes';
 
 export default {
-  title: 'Experimental/ListViewItem/Controls/ListViewItemMenu',
+  title: 'Components/ListViewItem/Controls/ListViewItemMenu',
   component: ListViewItemMenu,
   parameters: {
     docs: {

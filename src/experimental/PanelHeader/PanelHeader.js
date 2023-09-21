@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
+import { SharedItemPropTypes } from '../../components/ListViewItem/listViewItemAttributes';
 import { Box, Icon, Text } from '../../index';
-import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
 
