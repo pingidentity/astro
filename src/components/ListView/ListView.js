@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import ListViewItem from '../ListViewItem';
 import Loader from '../Loader';
 
 import { ListViewContext } from './ListViewContext';
+import ListViewItem from './ListViewItem';
 
 export const collectionTypes = {
   ITEM: 'item',

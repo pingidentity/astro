@@ -9,11 +9,11 @@ const testId = 'test-header';
 const defaultProps = {
   title: 'test-title',
   'data-testid': testId,
+  buttonProps: { onPress: jest.fn() },
 };
 
-const getComponent = (props = {}) => render(
+const getComponent = (props = defaultProps) => render(
   <PageHeader
-    {...defaultProps}
     {...props}
   >
     The description of the page. The description of the page. The description of the page. The
@@ -46,7 +46,14 @@ test('renders default PageHeader', () => {
   expect(wrapper.children.length).toEqual(2);
 });
 
-test('button press uses callback', () => {
+test('when there are no buttonProps, it does not render a button', () => {
+  getComponent({ title: 'test-title' });
+
+  const button = screen.queryByRole('button');
+  expect(button).not.toBeInTheDocument();
+});
+
+test('when the button is pressed, it calls the onPress callback', () => {
   const onPress = jest.fn();
   const customButtonProps = { bg: '#000000' };
 

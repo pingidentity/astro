@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { switchFieldArgs, switchFieldArgTypes } from '../../../components/SwitchField/switchFieldAttributes';
-import { ListViewItemSwitchField } from '../../../index';
+import { ListViewItemSwitchField } from '../../..';
 import { onHoverArgTypes } from '../../../utils/docUtils/hoverProps';
+import { switchFieldArgs, switchFieldArgTypes } from '../../SwitchField/switchFieldAttributes';
 
 delete switchFieldArgTypes.label;
 
 export default {
-  title: 'Experimental/ListViewItem/Controls/ListViewItemSwitchField',
+  title: 'Components/ListViewItem/Controls/ListViewItemSwitchField',
   component: ListViewItemSwitchField,
   parameters: {
     docs: {

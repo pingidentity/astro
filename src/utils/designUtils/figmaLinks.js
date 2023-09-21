@@ -57,6 +57,9 @@ export const FIGMA_LINKS = {
   loader: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=13675-33113&t=8Wwd3tIBh3GEjCJB-0',
   },
+  maskedValue: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=10328%3A31859&mode=dev',
+  },
   menu: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=12726-41720&t=8Wwd3tIBh3GEjCJB-0',
   },
