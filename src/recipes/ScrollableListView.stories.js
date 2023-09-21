@@ -10,7 +10,7 @@ import {
   ListViewItemMenu,
   ScrollBox,
   SearchField,
-} from '../..';
+} from '../index';
 
 export default {
   title: 'Recipes/Scrollable List View',
