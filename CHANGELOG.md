@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.16.0...@pingux/astro@2.17.0) (2023-09-21)
+
+
+### Bug Fixes
+
+* [UIP-6500]: ScrollableListView: import from index ([189780c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/189780ccfaa9c73c117976cb5e99170f38c7f0e2))
+* [UIP-6519] remove hidden style for TextAreaField ([84c9f97](https://gitlab.corp.pingidentity.com/ux/pingux/commit/84c9f976292c8e25d6a288d72ceeac270bd73999))
+
+
+### Features
+
+* [UIP-6497] PageHeader: make button optional ([85fea95](https://gitlab.corp.pingidentity.com/ux/pingux/commit/85fea955e1f8df9dde334f442f2c03356ac7e261))
+* [UIP-6499] add figma link for MaskedValue recipe ([bd2aeff](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bd2aeff20ff7f8989a6e73e4061071c70e009140))
+* [UIP-6500]: ListViewItem: move out of experimental ([c039dcc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c039dcc7bed2b1695fca8c8a218e08a3142aff1c))
+* [UIP-6525] remove RadioButtons with Links recipe ([dcdfe62](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dcdfe623c80be9ba057fdcaeb05e25f92dfe0745))
+
+
+
+
+
 # [2.16.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.15.0...@pingux/astro@2.16.0) (2023-09-19)
 
 
