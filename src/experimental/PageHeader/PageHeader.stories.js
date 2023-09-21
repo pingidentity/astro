@@ -19,9 +19,6 @@ export default {
       },
     },
   },
-  args: {
-    title: 'Title of the Page',
-  },
 };
 
 const description = `The description of the page. The description of the page. The description of the page. The
@@ -29,18 +26,38 @@ const description = `The description of the page. The description of the page. T
     description of the page. The description of the page. The description of the page. `;
 
 export const Default = args => (
-  <PageHeader {...args}>
+  <PageHeader
+    buttonProps={{ onPress: () => {} }}
+    title="Title of the Page"
+    {...args}
+  >
     {description}
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>
   </PageHeader>
 );
 
-export const WithoutLink = args => <PageHeader {...args}>{description}</PageHeader>;
-
-export const WithButtonProps = args => (
+export const WithoutButton = () => (
   <PageHeader
-    {...args}
+    title="Title of the Page"
+  >
+    {description}
+    <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>
+  </PageHeader>
+);
+
+export const WithoutLink = () => (
+  <PageHeader
+    buttonProps={{ onPress: () => {} }}
+    title="Title of the Page"
+  >
+    {description}
+  </PageHeader>
+);
+
+export const WithButtonProps = () => (
+  <PageHeader
     buttonProps={{ bg: 'critical.bright' }}
+    title="Title of the Page"
   >
     {description}
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>

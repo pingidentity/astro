@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Text } from '../..';
 
-const PageHeader = forwardRef((props, ref) => {
-  const { buttonProps = {}, children, title, ...other } = props;
-
+const PageHeader = forwardRef(({
+  buttonProps,
+  children,
+  title,
+  ...other
+}, ref) => {
   const sx = {
     wrapper: {
       align: 'center',
@@ -30,6 +33,20 @@ const PageHeader = forwardRef((props, ref) => {
     },
   };
 
+  const renderButton = buttonProps && (
+    <IconButton
+      aria-label="icon button"
+      ml="sm"
+      variant="inverted"
+      {...buttonProps}
+    >
+      <Icon
+        icon={PlusIcon}
+        size="sm"
+      />
+    </IconButton>
+  );
+
   return (
     <>
       <Box
@@ -46,17 +63,7 @@ const PageHeader = forwardRef((props, ref) => {
         >
           {title}
         </Text>
-        <IconButton
-          aria-label="icon button"
-          ml="sm"
-          variant="inverted"
-          {...buttonProps}
-        >
-          <Icon
-            icon={PlusIcon}
-            size="sm"
-          />
-        </IconButton>
+        {renderButton}
       </Box>
       <Text sx={sx.description}>{children}</Text>
     </>
