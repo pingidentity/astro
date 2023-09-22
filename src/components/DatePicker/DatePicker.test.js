@@ -362,7 +362,7 @@ test('correct aria-labelledby attributes are passed to dateField', () => {
   const labelId = screen.queryByText(labelText).id;
   const dateField = screen.queryByRole('group');
 
-  expect(dateField).toHaveAttribute('aria-labelledby', `${labelId} ${dateField.id}`);
+  expect(dateField).toHaveAttribute('aria-labelledby', `${dateField.id} ${labelId}`);
 
   const inputButtons = screen.queryAllByRole('spinbutton');
   const monthInputId = inputButtons[0].id;
@@ -371,15 +371,15 @@ test('correct aria-labelledby attributes are passed to dateField', () => {
 
   expect(inputButtons[0]).toHaveAttribute(
     'aria-labelledby',
-    `${labelId} ${dateField.id} ${monthInputId}`,
+    `${monthInputId} ${dateField.id} ${labelId}`,
   );
   expect(inputButtons[1]).toHaveAttribute(
     'aria-labelledby',
-    `${labelId} ${dateField.id} ${dayInputId}`,
+    `${dayInputId} ${dateField.id} ${labelId}`,
   );
   expect(inputButtons[2]).toHaveAttribute(
     'aria-labelledby',
-    `${labelId} ${dateField.id} ${yearInputId}`,
+    `${yearInputId} ${dateField.id} ${labelId}`,
   );
 });
 
