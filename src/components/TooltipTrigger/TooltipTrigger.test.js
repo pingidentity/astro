@@ -86,9 +86,22 @@ test('passing in width applies the correct width to the container', () => {
   expect(arrow).toHaveStyle('width: 100px');
 });
 
-
 test('tooltip closes after closeDelay when mouse leaves trigger', async () => {
-  const closeDelay = 5000;
+  const closeDelay = 10;
+
+  getComponent({ closeDelay });
+  const button = screen.getByRole('button');
+  fireEvent.mouseEnter(button);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  fireEvent.mouseLeave(button);
+
+  await waitFor(() => {
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  }, { timeout: closeDelay + 1 });
+});
+
+test('tooltip stays open until closeDelay after mouse leaves trigger', async () => {
+  const closeDelay = 10;
 
   getComponent({ closeDelay });
   const button = screen.getByRole('button');
@@ -98,9 +111,5 @@ test('tooltip closes after closeDelay when mouse leaves trigger', async () => {
 
   await waitFor(() => {
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  }, { timeout: closeDelay / 2 + 100 });
-
-  await waitFor(() => {
-    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-  }, { timeout: closeDelay + 100 });
+  }, { timeout: closeDelay - 1 });
 });
