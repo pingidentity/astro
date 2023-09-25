@@ -49,7 +49,7 @@ Default.parameters = {
 
 export const WithPopoverAndIconButtonProps = () => (
   <Box p={50}>
-    <HelpHint popoverProps={{ direction: 'bottom' }} iconButtonProps={{ 'aria-label': 'Help hint' }}>
+    <HelpHint popoverProps={{ 'data-id': 'popover-container' }} iconButtonProps={{ 'aria-label': 'Help hint' }} direction="bottom">
       Text of the popover right here...
     </HelpHint>
   </Box>

@@ -86,7 +86,7 @@ export const Uncontrolled = ({ ...args }) => {
         hintText: 'Example Hint',
         isRequired: true,
         helpHintProps: {
-          tooltipProps: { direction: 'top' },
+          direction: 'top',
         },
       }}
       renderField={
