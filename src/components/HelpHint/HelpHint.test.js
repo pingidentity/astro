@@ -96,6 +96,15 @@ test('applies popoverProps', () => {
   expect(screen.getByText(popoverValue)).toBeInTheDocument();
 });
 
+test('applies tooltipProps', () => {
+  getComponent({ tooltipProps: { isOpen: true, maxWidth: 'unset', width: '1000px' } });
+
+  const popover = screen.queryByRole('presentation');
+  expect(popover).toBeInTheDocument();
+  expect(popover).toHaveStyle('width: 1000px');
+  expect(popover).toHaveStyle('maxWidth: unset');
+});
+
 test('applies iconButtonProps', () => {
   const newLabel = 'New label';
   getComponent({ iconButtonProps: { 'aria-label': newLabel } });
