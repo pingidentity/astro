@@ -3,7 +3,6 @@ import { Section } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../..';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
 
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
@@ -55,7 +54,7 @@ const defaultWithSectionsProps = {
 
 const onSelectionChange = jest.fn();
 
-const getComponent = props => render(
+export const getComponent = props => render(
   <OverlayProvider>
     <EnvironmentBreadcrumb {...defaultProps} {...props}>
       {item => <Item key={item.name} data-testid={item.name}>{item.name}</Item>}
@@ -63,7 +62,7 @@ const getComponent = props => render(
   </OverlayProvider>,
 );
 
-const getSectionsComponent = (props = {}) => render(
+export const getSectionsComponent = (props = {}) => render(
   <OverlayProvider>
     <EnvironmentBreadcrumb {...defaultWithSectionsProps} {...props}>
       {section => (
@@ -96,6 +95,8 @@ beforeAll(() => {
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
   jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+
+  jest.useFakeTimers();
 });
 
 afterEach(() => {
@@ -255,8 +256,6 @@ test('should show empty state in search if there are no results', () => {
   userEvent.type(screen.getByRole('searchbox'), '111');
   expect(screen.getByText(testEmptySearchText)).toBeInTheDocument();
 });
-
-axeTest(getComponent);
 
 test('should be open when isDefaultOpen is true', () => {
   getComponent({ isDefaultOpen: true });
