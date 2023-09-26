@@ -76,7 +76,7 @@ const controls = {
   alignSelf: 'center',
   flexShrink: 0,
   ml: 'auto',
-  pr: 'sm',
+  pr: 'md',
 };
 
 const iconWrapper = {

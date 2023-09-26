@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Item, useAsyncList } from 'react-stately';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import { action } from '@storybook/addon-actions';
@@ -9,10 +9,12 @@ import {
   Box,
   ListView,
   ListViewItem,
+  ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
 } from '../..';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { chartData } from '../ListViewItem/controls/chart/chartData';
 
 import ListViewReadme from './ListView.mdx';
 
@@ -446,3 +448,36 @@ export const MultipleSelection = ({ ...args }) => (
     )}
   </ListView>
 );
+
+export const WithCharts = ({ ...args }) => {
+  const chartContainerRef = useRef();
+  return (
+    <ListView {...args} items={items} selectionMode="multiple">
+      {item => (
+        <Item key={item.name}>
+          <ListViewItem
+            ref={chartContainerRef}
+            data={{
+              text: item.name,
+              subtext: item.subtext,
+              icon: FormSelectIcon,
+            }}
+          >
+            <ListViewItemChart
+              containerRef={chartContainerRef}
+              chartData={chartData}
+              chartDataKey="fullData"
+              title="Avg daily sign-ons:"
+              contentCount="31"
+              contentCountLabel="Past 7 days"
+              chartLabel="12 wk trend"
+              trend="+115.0%"
+              tooltipText="See Contributing Data"
+            />
+            <Controls />
+          </ListViewItem>
+        </Item>
+      )}
+    </ListView>
+  );
+};
