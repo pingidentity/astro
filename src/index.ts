@@ -84,6 +84,7 @@ export * from './components/ListItem';
 export { default as ListView } from './components/ListView';
 export * from './components/ListView';
 export { default as ListViewItem } from './components/ListViewItem';
+export { default as ListViewItemChart } from './components/ListViewItem/controls/chart/ListViewItemChart';
 export { default as ListViewItemEditButton } from './components/ListViewItem/controls/ListViewItemEditButton';
 export { default as ListViewItemMenu } from './components/ListViewItem/controls/ListViewItemMenu';
 export { default as ListViewItemSwitchField } from './components/ListViewItem/controls/ListViewItemSwitchField';

@@ -15,6 +15,7 @@ import helpHint from '../../components/HelpHint/HelpHint.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
 import listBox from '../../components/ListBox/ListBox.styles';
 import listItem from '../../components/ListItem/ListItem.styles';
+import lisViewItemChart from '../../components/ListViewItem/controls/chart/ListViewItemChart.styles';
 import listViewItem from '../../components/ListViewItem/ListViewItem.styles';
 import loader from '../../components/Loader/Loader.styles';
 import menu from '../../components/Menu/Menu.styles';
@@ -53,6 +54,7 @@ export default {
   listBox,
   listItem,
   listViewItem,
+  lisViewItemChart,
   loader,
   menu,
   menuItem,

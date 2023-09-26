@@ -102,7 +102,7 @@
     "react-color": "^2.19.3",
     "react-dropzone": "^11.4.2",
     "react-stately": "^3.20.0",
-    "recharts": "^2.1.4",
+    "recharts": "^2.7.0",
     "regenerator-runtime": "^0.13.7",
     "styled-system": "^5.1.5",
     "theme-ui": "^0.10.0",
