@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
@@ -8,6 +8,7 @@ import {
   Badge,
   Box,
   ListViewItem,
+  ListViewItemChart,
   ListViewItemEditButton,
   ListViewItemMenu,
   ListViewItemSwitchField,
@@ -16,6 +17,7 @@ import {
 } from '../..';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
+import { chartData } from './controls/chart/chartData';
 import ListViewItemReadMe from './ListViewItem.mdx';
 import { listViewItemArgTypes } from './listViewItemAttributes';
 
@@ -152,6 +154,40 @@ export const WithLeftOfDataSlot = () => {
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
       >
+        <ListViewItemMenu>
+          <Item key="enable">Enable user</Item>
+          <Item key="disable">Disable user</Item>
+          <Item key="delete">Delete user</Item>
+        </ListViewItemMenu>
+      </ListViewItem>
+    </Wrapper>
+  );
+};
+
+export const WithCharts = () => {
+  const containerRef = useRef();
+  return (
+    <Wrapper>
+      <ListViewItem
+        ref={containerRef}
+        data={{
+          text: 'Kangaroo',
+          subtext: 'kangaroo@example.com',
+          icon: FormSelectIcon,
+        }}
+      >
+        <ListViewItemChart
+          containerRef={containerRef}
+          chartData={chartData}
+          title="Avg daily sign-ons:"
+          chartDataKey="fullData"
+          contentCount="31"
+          contentCountLabel="Past 7 days"
+          chartLabel="12 wk trend"
+          trend="+115.0%"
+          tooltipText="See Contributing Data"
+        />
+        <ListViewItemSwitchField />
         <ListViewItemMenu>
           <Item key="enable">Enable user</Item>
           <Item key="disable">Disable user</Item>

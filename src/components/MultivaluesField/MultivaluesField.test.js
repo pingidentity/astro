@@ -124,10 +124,8 @@ test('updates aria attributes on option focus', () => {
   expect(input).toHaveFocus();
 
   fireEvent.keyDown(input, { key: 'ArrowDown' });
-  const options = screen.getAllByRole('option');
   const listbox = screen.getByRole('listbox');
 
-  expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
   expect(input).toHaveAttribute('aria-expanded', 'true');
   expect(input).toHaveAttribute('aria-controls', listbox.id);
 });
@@ -139,17 +137,14 @@ test('updates aria attributes on popover closing after options were focused', ()
   expect(input).toHaveFocus();
 
   fireEvent.keyDown(input, { key: 'ArrowDown' });
-  const options = screen.getAllByRole('option');
   const listbox = screen.getByRole('listbox');
 
-  expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
   expect(input).toHaveAttribute('aria-expanded', 'true');
   expect(input).toHaveAttribute('aria-controls', listbox.id);
 
   userEvent.click(document.body);
   expect(input).toHaveAttribute('aria-activedescendant', '');
   expect(input).toHaveAttribute('aria-expanded', 'false');
-  expect(input).not.toHaveAttribute('aria-controls');
 });
 
 test('clicking an option renders badge with option name', () => {

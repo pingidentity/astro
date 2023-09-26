@@ -29,6 +29,7 @@ const HelpHint = forwardRef((props, ref) => {
     isNotFlippable,
     offset,
     popoverProps,
+    tooltipProps,
     ...others
   } = props;
 
@@ -133,7 +134,7 @@ const HelpHint = forwardRef((props, ref) => {
         {...mergeProps(
           overlayProps,
           positionProps,
-          popoverProps,
+          popoverProps || tooltipProps,
           overlayHoverProps,
           focusWithinProps,
         )}
@@ -152,6 +153,8 @@ const HelpHint = forwardRef((props, ref) => {
 HelpHint.propTypes = {
   /** Props object that is spread directly into the popover element. */
   popoverProps: PropTypes.shape({}),
+  /** @ignore Alias for `popoverProps` prop. Exists for backwards-compatibility. */
+  tooltipProps: PropTypes.shape({}),
   /** Props object that is spread directly into the IconButton element. */
   iconButtonProps: PropTypes.shape({}),
   /** Defaults to true, displays dark popover with white text */

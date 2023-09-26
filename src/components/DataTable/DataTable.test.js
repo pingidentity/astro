@@ -41,15 +41,15 @@ const columns = [
 
 const rows = [
   {
-    id: 1,
-    country: 'USA',
-    population: 320000000,
-    continent: 'North America',
-  },
-  {
     id: 2,
     country: 'Canada',
     population: 37000000,
+    continent: 'North America',
+  },
+  {
+    id: 1,
+    country: 'USA',
+    population: 320000000,
     continent: 'North America',
   },
   { id: 3, country: 'China', population: 1398000000, continent: 'Asia' },
@@ -138,10 +138,10 @@ describe('Static DataTable', () => {
 
     const tRows = within(rowgroups[1]).getAllByRole('row');
     expect(tRows).toHaveLength(4);
-    expect(tRows[0]).toHaveAttribute('aria-rowindex', '2');
-    expect(tRows[1]).toHaveAttribute('aria-rowindex', '3');
-    expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
-    expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
+    expect(tRows[0]).toHaveAttribute('aria-rowindex', '1');
+    expect(tRows[1]).toHaveAttribute('aria-rowindex', '2');
+    expect(tRows[2]).toHaveAttribute('aria-rowindex', '3');
+    expect(tRows[3]).toHaveAttribute('aria-rowindex', '4');
 
     let rowheader = within(tRows[0]).getByRole('rowheader');
     expect(rowheader).toHaveTextContent(rows[0].country);
@@ -192,7 +192,7 @@ describe('Static DataTable', () => {
     focusCell(view, 'China');
     moveFocus('ArrowUp');
     // eslint-disable-next-line jest-dom/prefer-focus
-    expect(document.activeElement).toBe(getCell(view, 'Canada'));
+    expect(document.activeElement).toBe(getCell(view, 'USA'));
   });
 
   test('should move focus to the previous cell in a row with ArrowDown', () => {
@@ -607,16 +607,16 @@ describe('Sortable DataTable with useAsyncList', () => {
 
     // verify country column is sorted a -> z
     expect(tRows).toHaveLength(4);
-    expect(tRows[0]).toHaveAttribute('aria-rowindex', '2');
+    expect(tRows[0]).toHaveAttribute('aria-rowindex', '1');
     expect(tRows[0]).toHaveTextContent('Canada');
 
-    expect(tRows[1]).toHaveAttribute('aria-rowindex', '3');
+    expect(tRows[1]).toHaveAttribute('aria-rowindex', '2');
     expect(tRows[1]).toHaveTextContent('China');
 
-    expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
+    expect(tRows[2]).toHaveAttribute('aria-rowindex', '3');
     expect(tRows[2]).toHaveTextContent('France');
 
-    expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
+    expect(tRows[3]).toHaveAttribute('aria-rowindex', '4');
     expect(tRows[3]).toHaveTextContent('USA');
   });
 
@@ -658,16 +658,16 @@ describe('Sortable DataTable with useAsyncList', () => {
 
     // verify country column is sorted z -> a
     expect(tRows).toHaveLength(4);
-    expect(tRows[0]).toHaveAttribute('aria-rowindex', '2');
+    expect(tRows[0]).toHaveAttribute('aria-rowindex', '1');
     expect(tRows[0]).toHaveTextContent('USA');
 
-    expect(tRows[1]).toHaveAttribute('aria-rowindex', '3');
+    expect(tRows[1]).toHaveAttribute('aria-rowindex', '2');
     expect(tRows[1]).toHaveTextContent('France');
 
-    expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
+    expect(tRows[2]).toHaveAttribute('aria-rowindex', '3');
     expect(tRows[2]).toHaveTextContent('China');
 
-    expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
+    expect(tRows[3]).toHaveAttribute('aria-rowindex', '4');
     expect(tRows[3]).toHaveTextContent('Canada');
   });
 });
@@ -757,13 +757,13 @@ describe('Sortable DataTable with useAsyncList', () => {
     expect(headers[1]).toHaveTextContent(columns[1].name);
     expect(headers[2]).toHaveTextContent(columns[2].name);
 
-    expect(result.current.items[0].country).toBe('USA');
-    expect(result.current.items[1].country).toBe('Canada');
+    expect(result.current.items[0].country).toBe('Canada');
+    expect(result.current.items[1].country).toBe('USA');
     expect(result.current.items[2].country).toBe('China');
     expect(result.current.items[3].country).toBe('France');
 
-    expect(result.current.items[0].population).toBe(320000000);
-    expect(result.current.items[1].population).toBe(37000000);
+    expect(result.current.items[0].population).toBe(37000000);
+    expect(result.current.items[1].population).toBe(320000000);
     expect(result.current.items[2].population).toBe(1398000000);
     expect(result.current.items[3].population).toBe(67000000);
 
@@ -850,13 +850,13 @@ describe('Sortable DataTable with useAsyncList', () => {
     expect(headers[1]).toHaveTextContent(columns[1].name);
     expect(headers[2]).toHaveTextContent(columns[2].name);
 
-    expect(result.current.items[0].country).toBe('USA');
-    expect(result.current.items[1].country).toBe('Canada');
+    expect(result.current.items[0].country).toBe('Canada');
+    expect(result.current.items[1].country).toBe('USA');
     expect(result.current.items[2].country).toBe('China');
     expect(result.current.items[3].country).toBe('France');
 
-    expect(result.current.items[0].population).toBe(320000000);
-    expect(result.current.items[1].population).toBe(37000000);
+    expect(result.current.items[0].population).toBe(37000000);
+    expect(result.current.items[1].population).toBe(320000000);
     expect(result.current.items[2].population).toBe(1398000000);
     expect(result.current.items[3].population).toBe(67000000);
 

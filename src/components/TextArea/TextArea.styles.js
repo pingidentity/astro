@@ -29,6 +29,12 @@ const floatLabelWrapper = {
   bottom: '-18px',
   left: '3px',
   zIndex: 2,
+  '.is-float-label & .is-float-label': {
+    left: '13px',
+  },
+  '.is-float-label-active & .is-float-label': {
+    left: '13px',
+  },
 };
 
 export default {
