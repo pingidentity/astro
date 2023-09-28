@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.17.0...@pingux/astro@2.18.0) (2023-09-28)
+
+
+### Bug Fixes
+
+* [UIP-6436]: EnvironmentBreadcrumb: fix flaky test ([fb402ed](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fb402ed0cc26b9bdeaf58fa7e4fbd67acbbc333d))
+* [UIP-6453] aligns textarea with float label ([53e1a30](https://gitlab.corp.pingidentity.com/ux/pingux/commit/53e1a301ebfcb55ff504ccfcb1c78989bb019312))
+* [UIP-6458]: MultivaluesField-fix-filtering ([9623285](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9623285adb8b10f23a282377592e42d9a8a08476))
+* [UIP-6532] typescript error on Item ([2c1a18b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2c1a18b71ca2a80d80097911ad097e4f6286e466))
+* [UIP-6543 ] Astro make TooltipProps backwards compatible ([ab155a5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab155a5e400cece11d09b7c3aa74d88602fc7571))
+* [UIP-6553] TooltipTrigger flaky test ([2657747](https://gitlab.corp.pingidentity.com/ux/pingux/commit/26577470c2a13d4fa7557d3d29b8ea91c866473b))
+
+
+### Features
+
+* [UIP-6434] add ListViewItemChart component ([6a287a1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6a287a166bfe1c7a1c8f575585ec1d7dc88adc40))
+
+
+
+
+
 # [2.17.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.16.0...@pingux/astro@2.17.0) (2023-09-21)
 
 
