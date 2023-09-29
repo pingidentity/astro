@@ -19,57 +19,71 @@ import {
 export default {
   title: 'Recipes/Condition Filter',
 };
-const customBadgeStyles = {
-  marginRight: 'sm',
-  '& > span': {
-    fontWeight: 1,
-    textTransform: 'none',
-  },
-  ml: '3px',
-  minWidth: '65px',
-  height: '20px',
-  'z-index': '1',
+
+const borderBox = {
+  borderColor: 'neutral.80',
+  borderRadius: '3px 4px 4px 3px',
+  borderStyle: 'solid',
+  borderWidth: '1px 1px 1px 0px',
+  width: '100%',
+  '&::after': { bg: 'decorative.4', width: '2px' },
 };
+
 const sx = {
-  equalBadgeStyles: {
-    ...customBadgeStyles,
-    bg: 'accent.95',
-    textColor: 'neutral.10',
-    alignSelf: 'center',
-    height: '21px',
-    minWidth: '51px',
+  badge: {
+    condition: {
+      height: '20px',
+      minWidth: '65px',
+    },
+    equal: {
+      alignSelf: 'center',
+      bg: 'accent.95',
+    },
   },
   borderedBoxStyles: {
-    '&::after': { bg: 'decorative.4', width: '2px', display: 'block' },
-    borderColor: 'neutral.80',
-    borderRadius: '3px 4px 4px 3px',
-    borderStyle: 'solid',
-    borderWidth: '1px 1px 1px 0px',
+    ...borderBox,
     padding: 'sm',
-    width: '100%',
   },
-  allConditionsBox: {
-    '&::after': { bg: 'decorative.4', width: '2px' },
-    alignItems: 'center',
-    borderRadius: '4px',
-    marginTop: 'md',
-    fontWeight: 1,
+  display: {
+    borderBox: {
+      ...borderBox,
+      ml: '20px',
+      mt: 'md',
+      p: 'sm',
+      pl: 0,
+    },
+    bracket: {
+      position: 'absolute',
+      height: '56px',
+    },
+    container: {
+      bg: 'accent.99',
+      maxWidth: '318px',
+      p: 'sm',
+      pl: 0,
+    },
+    rowBox: {
+      alignItems: 'center',
+      bg: 'white',
+      borderRadius: '4px',
+      fontWeight: 1,
+      marginTop: 'md',
+      minHeight: '25px',
+      ml: '20px',
+      pl: '13px',
+    },
   },
   defaultText: {
-    textTransform: 'none',
     color: 'inherit',
     fontSize: 'sm',
     fontWeight: '3',
   },
-  textStyles: {
-    pl: 'md',
-    pr: 'sm',
-  },
 };
 
 const allConditions = [
-  { field1: 'Family Name', field3: 'John', key: 'FamilyNameField' },
-  { field1: 'Full Name', field3: 'Alex Smith', key: 'FullNameField' },
+  { field1: 'Family Name', field3: 'Smith', key: 'familyNameField' },
+  { field1: 'Given Name', field3: 'John', key: 'givenNameField' },
+  { field1: 'Email', field3: 'jsmith@company.com', key: 'emailField' },
 ];
 
 const anyConditions = [
@@ -82,145 +96,61 @@ const noneConditions = [
   { field1: 'Misc', field3: 'Banana', key: 'Miscellaneous2' },
 ];
 
-export const Display = () => {
-  return (
-    <Box>
-      <Box
-        bg="accent.99"
-        maxWidth="318px"
-        p="sm"
-      >
-        <Box isRow />
-        <Box isRow>
-          <Badge
-            label="All"
-            bg="decorative.4"
-            sx={customBadgeStyles}
-          />
-          <Text> of the conditions are true</Text>
-        </Box>
-        {allConditions.map(item => (
-          <Box
-            isRow
+const ofTheConditionsAreTrueCopy = ' of the conditions are true';
+
+export const Display = () => (
+  <Box sx={sx.display.container}>
+    <DisplaySectionHeader />
+    {allConditions.map(item => <DisplayRow item={item} key={item.key} />)}
+    <Box isRow ml="xs">
+      <Bracket sx={{ ...sx.display.bracket, height: '148px' }} isLast />
+      <Box sx={sx.display.borderBox} variant="forms.input.fieldControlWrapper">
+        <DisplaySectionHeader badgeColor="decorative.7" label="Any" />
+        {anyConditions.map((item, index) => (
+          <DisplayRow
+            barColor="decorative.7"
+            isLast={index === anyConditions.length - 1}
+            item={item}
             key={item.key}
-          >
-            <Bracket />
-            <Box width="100%">
-              <Box
-                variant="forms.input.fieldControlWrapper"
-                bg="white"
-                isRow
-                sx={sx.allConditionsBox}
-              >
-                <Text sx={sx.textStyles}>{item.field1}</Text>
-                <Badge
-                  label="Equals"
-                  sx={sx.equalBadgeStyles}
-                  textColor="neutral.10"
-                />
-                <Text>{item.field3}</Text>
-              </Box>
-            </Box>
-          </Box>
+          />
         ))}
-        <Box isRow>
-          <Bracket />
-          <Box
-            variant="forms.input.fieldControlWrapper"
-            mt="md"
-            sx={sx.borderedBoxStyles}
-          >
-            <Box isRow>
-              <Badge
-                label="Any"
-                bg="decorative.7"
-                sx={customBadgeStyles}
-                alignSelf="center"
-              />
-              <Text> of the conditions are true</Text>
-            </Box>
-            <Box ml="xs">
-              {anyConditions.map((item, index) => (
-                <Box
-                  isRow
-                  key={item.key}
-                >
-                  <Bracket
-                    ml={0}
-                    isLast={index === anyConditions.length - 1}
-                  />
-                  <Box
-                    mt="md"
-                    variant="forms.input.fieldControlWrapper"
-                    bg="white"
-                    isRow
-                    width="100%"
-                    sx={{ ...sx.allConditionsBox, '&::after': { bg: 'decorative.7', width: '2px' } }}
-                  >
-                    <Text sx={sx.textStyles}>{item.field1}</Text>
-                    <Badge
-                      label="Equals"
-                      textColor="neutral.10"
-                      sx={sx.equalBadgeStyles}
-                    />
-                    <Text>{item.field3}</Text>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-        <Box isRow>
-          <Bracket isLast />
-          <Box
-            variant="forms.input.fieldControlWrapper"
-            mt="md"
-            sx={sx.borderedBoxStyles}
-          >
-            <Box isRow>
-              <Badge
-                label="None"
-                bg="accent.20"
-                sx={customBadgeStyles}
-                alignSelf="center"
-              />
-              <Text> of the conditions are true</Text>
-            </Box>
-            <Box ml="xs">
-              {noneConditions.map((item, index) => (
-                <Box
-                  isRow
-                  key={item.key}
-                >
-                  <Bracket
-                    ml={0}
-                    isLast={index === noneConditions.length - 1}
-                  />
-                  <Box
-                    mt="md"
-                    variant="forms.input.fieldControlWrapper"
-                    bg="white"
-                    isRow
-                    width="100%"
-                    sx={{ ...sx.allConditionsBox, '&::after': { bg: 'accent.20', width: '2px' } }}
-                  >
-                    <Text sx={sx.textStyles}>{item.field1}</Text>
-                    <Badge
-                      label="Equals"
-                      textColor="neutral.10"
-                      sx={sx.equalBadgeStyles}
-                    />
-                    <Text>{item.field3}</Text>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </Box>
       </Box>
     </Box>
-  );
-};
+  </Box>
+);
+
+export const DisplayRow = ({ item = allConditions[0], isLast = false, barColor = 'decorative.4' }) => (
+  <Box isRow ml="xs">
+    <Bracket sx={sx.display.bracket} isLast={isLast} />
+    <Box width="100%">
+      <Box
+        gap="sm"
+        isRow
+        sx={{ ...sx.display.rowBox, '&::after': { bg: barColor, width: '2px' } }}
+        variant="forms.input.fieldControlWrapper"
+      >
+        <Text>{item.field1}</Text>
+        <Badge
+          label="Equals"
+          sx={sx.badge.equal}
+          textColor="neutral.10"
+        />
+        <Text>{item.field3}</Text>
+      </Box>
+    </Box>
+  </Box>
+);
+
+export const DisplaySectionHeader = ({ badgeColor = 'decorative.4', label = 'All' }) => (
+  <Box isRow ml="sm">
+    <Badge
+      bg={badgeColor}
+      label={label}
+      sx={sx.badge.condition}
+    />
+    <Text ml="sm" alignSelf="center">{ofTheConditionsAreTrueCopy}</Text>
+  </Box>
+);
 
 export const Edit = () => {
   const trashButton = (
@@ -276,7 +206,7 @@ export const Edit = () => {
               <Text sx={sx.defaultText}>NONE</Text>
             </RockerButton>
           </RockerButtonGroup>
-          <Text> of the conditions are true</Text>
+          <Text>{ofTheConditionsAreTrueCopy}</Text>
           <Button
             variant="inline"
             width="fit-content"
@@ -377,7 +307,7 @@ export const Edit = () => {
                   <Text sx={sx.defaultText}>NONE</Text>
                 </RockerButton>
               </RockerButtonGroup>
-              <Text> of the conditions are true</Text>
+              <Text>{ofTheConditionsAreTrueCopy}</Text>
               <Button
                 variant="inline"
                 width="fit-content"
@@ -486,7 +416,7 @@ export const Edit = () => {
                   <Text sx={sx.defaultText}>NONE</Text>
                 </RockerButton>
               </RockerButtonGroup>
-              <Text> of the conditions are true</Text>
+              <Text>{ofTheConditionsAreTrueCopy}</Text>
               <Button
                 variant="inline"
                 width="fit-content"
