@@ -1,34 +1,39 @@
 const container = {
   bg: 'accent.99',
+  borderBottom: '1px',
+  borderBottomColor: 'accent.90',
+  borderBottomStyle: 'solid',
   justifyContent: 'center',
   minHeight: 60,
-  borderBottom: '1px',
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'accent.90',
 };
 
 const controls = {
-  alignSelf: 'center',
   alignItems: 'center',
+  alignSelf: 'center',
+  flexShrink: 0,
   gap: 'sm',
   ml: 'auto',
+  mr: 'md',
 };
 
 const data = {
   alignItems: 'center',
-  display: 'grid !important',
-  gridTemplateColumns: 'max-content auto',
 };
 
 const wrapper = {
-  display: 'grid !important',
-  gridTemplateColumns: 'auto auto',
-  mx: 'md',
+  display: 'flex',
+  flex: '1 1 0px',
+  ml: 'md',
+};
+
+const imageWrapper = {
+  ml: 'sm',
 };
 
 export default {
   container,
   controls,
   data,
+  imageWrapper,
   wrapper,
 };
