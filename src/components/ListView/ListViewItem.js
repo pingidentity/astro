@@ -5,7 +5,7 @@ import { useListItem } from '@react-aria/list';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
-import Box from '../Box';
+import { Box, Loader } from '../../index';
 
 import { ListViewContext } from './ListViewContext';
 
@@ -96,6 +96,11 @@ const ListViewItem = props => {
         {...listItemProps}
       >
         {item.rendered}
+        {state.isLoading && isFocusVisibleWithin && (
+          <Box variant="listViewItem.loaderContainer">
+            <Loader color="neutral.50" />
+          </Box>
+        )}
       </Box>
     </Box>
   );
