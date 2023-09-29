@@ -15,6 +15,7 @@ import {
   Text,
   TextField,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Condition Filter',
@@ -220,6 +221,13 @@ export const Display = () => {
       </Box>
     </Box>
   );
+};
+
+Display.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.conditionFilter.display,
+  },
 };
 
 export const Edit = () => {
@@ -558,4 +566,11 @@ export const Edit = () => {
       </Box>
     </Box>
   );
+};
+
+Edit.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.conditionFilter.edit,
+  },
 };
