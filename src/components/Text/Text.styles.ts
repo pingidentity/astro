@@ -89,14 +89,12 @@ const textEllipsis = {
 
 const listViewItemText = {
   ...bodyStrong,
-  ...textEllipsis,
   alignSelf: 'start',
   fontSize: 'md',
 };
 
 const listViewItemSubtext = {
   ...subtitle,
-  ...textEllipsis,
   alignSelf: 'start',
   fontSize: 'sm',
   lineHeight: '16px',
@@ -122,9 +120,11 @@ export const text = {
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard', fontWeight: 1 },
   listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', ...textEllipsis },
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', ...textEllipsis },
-  listViewItemSubtext,
-  listViewItemText,
+  listViewItemSubtext: { ...listViewItemSubtext, ...textEllipsis },
+  listViewItemText: { ...listViewItemText, ...textEllipsis },
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
+  panelHeaderSubtext: listViewItemSubtext,
+  panelHeaderText: listViewItemText,
   sectionTitle,
   subtitle,
   tabLabel,

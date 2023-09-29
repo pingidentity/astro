@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { SharedItemPropTypes } from '../../components/ListViewItem/listViewItemAttributes';
-import { Box, Icon, Text } from '../../index';
+import { Box, Icon, Image, Text } from '../../index';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
 
@@ -13,14 +13,22 @@ const PanelHeader = forwardRef(({
 }, ref) => {
   const {
     icon,
+    image,
     subtext,
     text,
   } = data;
 
+  const getWrapperVariant = () => {
+    if (image && !icon) return 'panelHeader.imageWrapper';
+
+    return 'panelHeader.wrapper';
+  };
+
   const renderIcon = (
-    <Box sx={{ width: 25, color: 'accent.40' }}>
+    <Box width="25px">
       {icon && (
         <Icon
+          color="accent.40"
           icon={icon}
           size="md"
           title={{ name: `${text}${PANEL_HEADER_ICON}` }}
@@ -29,30 +37,22 @@ const PanelHeader = forwardRef(({
     </Box>
   );
 
+  const renderImage = !icon && image && (
+    <Box width="35px">
+      <Image
+        src={image.src}
+        alt={image.alt}
+        aria-label={image['aria-label']}
+      />
+    </Box>
+  );
+
   const renderData = (
     <Box isRow variant="panelHeader.data">
-      {renderIcon}
-      <Box sx={{ ml: 'md' }}>
-        {text && (
-          <Text
-            variant="bodyStrong"
-            sx={{ alignSelf: 'start', fontSize: 'md' }}
-          >
-            {text}
-          </Text>
-        )}
-        {subtext && (
-        <Text
-          variant="subtitle"
-          sx={{
-            fontSize: 'sm',
-            lineHeight: '16px',
-            my: '1px',
-          }}
-        >
-          {subtext}
-        </Text>
-        )}
+      {icon ? renderIcon : renderImage}
+      <Box variant={getWrapperVariant()}>
+        {text && (<Text variant="panelHeaderText">{text}</Text>)}
+        {subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
       </Box>
     </Box>
   );
@@ -64,7 +64,7 @@ const PanelHeader = forwardRef(({
       ref={ref}
       {...others}
     >
-      <Box variant="panelHeader.wrapper">
+      <Box isRow variant={getWrapperVariant()}>
         {renderData}
         <Box isRow variant="panelHeader.controls">
           {children}

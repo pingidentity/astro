@@ -1,7 +1,9 @@
 import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import { act } from '@testing-library/react';
 
 import { PanelHeader, PanelHeaderSwitchField } from '../../index';
+import { pingImg } from '../../utils/devUtils/constants/images';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
@@ -12,12 +14,23 @@ const defaultProps = {
     text: 'testText',
     subtext: 'testSubtext',
     icon: AccountIcon,
+    image: {
+      src: pingImg,
+      alt: 'avatar',
+      'aria-label': 'avatar',
+    },
   },
 };
 
 const getComponent = (props = {}) => render((
   <PanelHeader {...defaultProps} {...props} />
 ));
+
+let fallbackImageObj = null;
+jest.mock('../../hooks/useFallbackImage', () => props => {
+  fallbackImageObj = { ...props };
+  return [];
+});
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
@@ -37,4 +50,30 @@ describe('PanelHeader', () => {
 
     screen.getByRole('switch');
   });
+});
+
+test('renders icon if both icon and image are passed', () => {
+  getComponent();
+
+  const icon = screen.getByRole('img');
+
+  expect(icon).not.toHaveAttribute('src', pingImg);
+  expect(icon.tagName.toLowerCase()).toBe('svg');
+  expect(icon.tagName.toLowerCase()).not.toBe('img');
+});
+
+test('renders image', () => {
+  delete defaultProps.data.icon;
+
+  getComponent();
+  act(() => {
+    fallbackImageObj.onImageLoad();
+  });
+
+  const image = screen.getByRole('img');
+
+  expect(image.tagName.toLowerCase()).toBe('img');
+  expect(image).toHaveAttribute('src', pingImg);
+  expect(image).toHaveAttribute('alt', 'avatar');
+  expect(image).toHaveAttribute('aria-label', 'avatar');
 });
