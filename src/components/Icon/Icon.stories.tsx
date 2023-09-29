@@ -87,7 +87,8 @@ export const SVGIcons: Story = () => {
   // SVGR can used to convert .svg files to components instead of doing this manually
   const SVGComponent: React.FC<SVGComponentProps> = props => {
     const id = uuid();
-    const { title = 'User Icon' } = props;
+    const title = 'User Icon';
+
     return (
       <svg viewBox="0 0 24 24" {...props} aria-labelledby={id}>
         <title id={id}>{title}</title>
