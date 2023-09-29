@@ -21,36 +21,49 @@ export default {
       ),
     },
   },
+  argTypes: {
+    align: {
+      control: {
+        type: 'text',
+      },
+    },
+  },
 };
 
 export const Default = args => (
-  <ButtonBar
-    saveButtonProps={{ key: 'save button', text: 'Save', onPress: () => alert('Save button pressed') }}
-    cancelButtonProps={{ key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') }}
-    {...args}
-  />
-);
-
-export const WithRefreshButton = args => (
-  <ButtonBar
-    saveButtonProps={{ key: 'save button', text: 'Save', onPress: () => alert('Save button pressed') }}
-    cancelButtonProps={{ key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') }}
-    refreshButtonProps={{ key: 'refresh button', text: 'Refresh', onPress: () => alert('Refresh button pressed') }}
-    {...args}
-  />
-);
-
-export const JustifiedRight = () => (
-  <ButtonBar
-    saveButtonProps={{ key: 'next button', text: 'Next', onPress: () => alert('Save button pressed') }}
-    cancelButtonProps={{ key: 'cancel button', text: 'Cancel', onPress: () => alert('Cancel button pressed') }}
-    isJustifiedRight
-  />
-);
-
-export const WithChildren = args => (
   <ButtonBar {...args}>
-    <Button>Custom Button!</Button>
-    <Button variant="link">Custom Link!</Button>
+    <Button
+      variant="primary"
+      data-id="save-button"
+      onPress={() => alert('Save button pressed')}
+    >
+      Save
+    </Button>
+    <Button
+      variant="link"
+      data-id="cancel-button"
+      onPress={() => alert('Cancel button pressed')}
+    >
+      Cancel
+    </Button>
+  </ButtonBar>
+);
+
+export const RightAligned = () => (
+  <ButtonBar align="right">
+    <Button
+      variant="primary"
+      data-id="next-button"
+      onPress={() => alert('Next button pressed')}
+    >
+      Next
+    </Button>
+    <Button
+      variant="link"
+      data-id="cancel-button"
+      onPress={() => alert('Cancel button pressed')}
+    >
+      Cancel
+    </Button>
   </ButtonBar>
 );
