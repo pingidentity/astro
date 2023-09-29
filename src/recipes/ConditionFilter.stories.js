@@ -15,6 +15,7 @@ import {
   Text,
   TextField,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Condition Filter',
@@ -151,6 +152,13 @@ export const DisplaySectionHeader = ({ badgeColor = 'decorative.4', label = 'All
     <Text ml="sm" alignSelf="center">{ofTheConditionsAreTrueCopy}</Text>
   </Box>
 );
+
+Display.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.conditionFilter.display,
+  },
+};
 
 export const Edit = () => {
   const trashButton = (
@@ -488,4 +496,11 @@ export const Edit = () => {
       </Box>
     </Box>
   );
+};
+
+Edit.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.conditionFilter.edit,
+  },
 };
