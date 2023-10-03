@@ -5,7 +5,7 @@ import { Box } from '../../index';
 
 const ButtonBar = props => {
   const {
-    align = 'left',
+    align,
     children,
     ...others
   } = props;
@@ -13,8 +13,7 @@ const ButtonBar = props => {
   return (
     <Box
       isRow
-      gap="md"
-      sx={{ bg: 'white', px: 'lg', py: 'md', justifyContent: align === 'right' ? 'right' : 'left' }}
+      variant={align === 'right' ? 'buttonBar.justifyRightContainer' : 'buttonBar.container'}
       {...others}
     >
       {children}
@@ -23,7 +22,12 @@ const ButtonBar = props => {
 };
 
 ButtonBar.propTypes = {
+  /** Justifies the component's children. */
   align: PropTypes.oneOf(['left', 'right']),
+};
+
+ButtonBar.defaultProps = {
+  align: 'left',
 };
 
 export default ButtonBar;

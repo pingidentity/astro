@@ -1,12 +1,13 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Button, ButtonBar } from '../..';
+import { Button, ButtonBar } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import ButtonBarReadme from './ButtonBar.mdx';
 
 export default {
-  title: 'Experimental/ButtonBar',
+  title: 'Components/ButtonBar',
   component: ButtonBar,
   parameters: {
     docs: {
@@ -49,6 +50,13 @@ export const Default = args => (
   </ButtonBar>
 );
 
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.buttonBar.default,
+  },
+};
+
 export const RightAligned = () => (
   <ButtonBar align="right">
     <Button
@@ -67,3 +75,10 @@ export const RightAligned = () => (
     </Button>
   </ButtonBar>
 );
+
+RightAligned.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.buttonBar.rightAligned,
+  },
+};
