@@ -3,6 +3,7 @@ import accordion from '../../components/AccordionGroup/Accordion.styles';
 import box from '../../components/Box/Box.styles';
 import bracket from '../../components/Bracket/Bracket.styles';
 import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
+import buttonBar from '../../components/ButtonBar/ButtonBar.styles';
 import calendar from '../../components/Calendar/Calendar.styles';
 import callout from '../../components/Callout/Callout.styles';
 import codeView from '../../components/CodeView/CodeView.styles';
@@ -41,6 +42,7 @@ export default {
   box,
   bracket,
   breadcrumb,
+  buttonBar,
   calendar,
   callout,
   codeView,

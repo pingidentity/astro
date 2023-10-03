@@ -17,6 +17,10 @@ export const FIGMA_LINKS = {
   button: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=0-1&t=8Wwd3tIBh3GEjCJB-0',
   },
+  buttonBar: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=3660%3A20551&mode=dev',
+    rightAligned: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=3660%3A20657&mode=dev',
+  },
   calendar: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=6373%3A25490&t=BoHXzVpQq9Lf7MaU-1',
   },
