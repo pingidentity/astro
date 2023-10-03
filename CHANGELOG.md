@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.18.0...@pingux/astro@2.19.0) (2023-10-03)
+
+
+### Bug Fixes
+
+* [UIP-5724] Fix empty svg title tag ([440d3d4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/440d3d4b94a964a65690964171696b8a6b1e70da))
+* [UIP-6414] add Loader to ListViewItem for keyboaard users ([b587792](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b587792d6313dafe6d34c441c8999fb33c890fa0))
+* [UIP-6435]: ConditionFilter: match display story to specs ([6a5a73a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6a5a73a7e83866ff2a34516dcac448fe116332a6))
+* [UIP-6449] ButtonBar refactor to return children only ([0a9a83b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0a9a83bac88bb7b015703d2dcb3992d71b31c4c1))
+
+
+### Features
+
+* [UIP-6427] add figma links for Condition Filter recipes ([3712087](https://gitlab.corp.pingidentity.com/ux/pingux/commit/37120870cff9566452943b4fbf6feca3099567b0))
+* [UIP-6438] PanelHeader add support for images ([3c401c2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3c401c22b5e3ad20803c81afbd862fb529bc63ac))
+
+
+
+
+
 # [2.18.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.17.0...@pingux/astro@2.18.0) (2023-09-28)
 
 
