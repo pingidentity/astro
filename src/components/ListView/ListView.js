@@ -81,6 +81,8 @@ const ListView = forwardRef((props, ref) => {
     setHoveredItem,
   };
 
+  state.isLoading = useMemo(() => isLoading, [isLoading]);
+
   const { collection, selectionManager } = state;
 
   const layout = useListLayout(state);

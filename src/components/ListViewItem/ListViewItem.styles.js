@@ -56,6 +56,18 @@ const linkedViewContainer = {
   },
 };
 
+const loaderContainer = {
+  bg: 'white',
+  p: 'xs',
+  position: 'absolute',
+  top: 'calc(50% - 18px)',
+  left: 'calc(50% - 44px)',
+  borderWidth: '1px',
+  borderColor: 'neutral.80',
+  borderStyle: 'solid',
+  borderRadius: '25px',
+};
+
 const styledContainer = {
   m: '1px',
   minHeight: '72px',
@@ -111,4 +123,5 @@ export default {
   rightOfData,
   styledContainer,
   styledListItem,
+  loaderContainer,
 };

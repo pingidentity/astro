@@ -32,6 +32,10 @@ export const FIGMA_LINKS = {
   collapsiblePanel: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=14546-33229&t=VgqEexa1CXAXfPpp-0',
   },
+  conditionFilter: {
+    display: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=218%3A574&mode=dev',
+    edit: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=218%3A597&mode=dev',
+  },
   copyText: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=218-1442&t=8Wwd3tIBh3GEjCJB-0',
   },

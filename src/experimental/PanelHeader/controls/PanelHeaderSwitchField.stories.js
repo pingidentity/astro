@@ -2,7 +2,6 @@ import React from 'react';
 
 import { switchFieldArgTypes } from '../../../components/SwitchField/switchFieldAttributes';
 import { PanelHeaderSwitchField } from '../../../index';
-import { onHoverArgTypes } from '../../../utils/docUtils/hoverProps';
 
 delete switchFieldArgTypes.label;
 
@@ -18,7 +17,6 @@ export default {
   },
   argTypes: {
     ...switchFieldArgTypes,
-    ...onHoverArgTypes,
   },
 };
 
