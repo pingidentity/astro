@@ -34,6 +34,7 @@ import table from '../../components/Table/Table.styles';
 import * as tab from '../../components/Tabs/Tabs.style';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
+import treeView from '../../components/TreeView/TreeView.styles';
 import panelHeader from '../../experimental/PanelHeader/PanelHeader.styles';
 
 export default {
@@ -73,5 +74,6 @@ export default {
   table,
   timeZone,
   tooltip,
+  treeView,
   ...tab,
 };

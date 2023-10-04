@@ -163,6 +163,8 @@ export * from './components/TextField';
 export { default as TimeZonePicker } from './components/TimeZonePicker';
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
+export { default as TreeView } from './components/TreeView';
+export * from './components/TreeView';
 export { default as PageHeader } from './experimental/PageHeader';
 export * from './experimental/PageHeader';
 
@@ -172,7 +174,7 @@ export { default as DataTable } from './components/DataTable';
 export * from './components/DataTable';
 export * from './types';
 export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
-export { Item, Section, useOverlayTriggerState } from 'react-stately';
+export { Item, Section, useOverlayTriggerState, useTreeData } from 'react-stately';
 export {
   TableBody as DataTableBody,
   Cell as DataTableCell,
