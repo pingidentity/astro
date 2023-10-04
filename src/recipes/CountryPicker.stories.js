@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { countries as countriesObj } from 'countries-list';
+import { withDesign } from 'storybook-addon-designs';
 
 import {
   Box,
@@ -7,9 +8,11 @@ import {
   Input,
   Item,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 export default {
   title: 'Recipes/Country Picker',
+  decorators: [withDesign],
 };
 
 const validatePhoneNumber = str => {
@@ -113,4 +116,11 @@ export const Default = () => {
       </Box>
     </Box>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.countryPicker.default,
+  },
 };
