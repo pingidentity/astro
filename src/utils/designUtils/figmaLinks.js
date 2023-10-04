@@ -56,6 +56,9 @@ export const FIGMA_LINKS = {
   iconButton: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A2520&t=We3h7LaaFJQnxdSy-1',
   },
+  inlineEditing: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=5244-14864&mode=design&t=1pPbrQvGkdMYBNqk-0',
+  },
   link: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=8708-29543&t=8Wwd3tIBh3GEjCJB-0',
   },
