@@ -79,6 +79,9 @@ export const FIGMA_LINKS = {
   navBar: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=548-3473&t=8Wwd3tIBh3GEjCJB-0',
   },
+  OnewayToBidirectionalArrow: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43504-1214&mode=design&t=R4kdj0liRHxsqbV5-0',
+  },
   popoverMenu: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A3073&t=We3h7LaaFJQnxdSy-1',
   },
