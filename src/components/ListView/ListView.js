@@ -48,6 +48,7 @@ const ListView = forwardRef((props, ref) => {
     selectedKeys,
     selectionMode,
     selectionStyle,
+    items,
     ...others
   } = props;
 
@@ -98,6 +99,10 @@ const ListView = forwardRef((props, ref) => {
 
   delete gridProps.onMouseDown;
 
+  if (!items) {
+    delete others['aria-label'];
+  }
+
   const onFocus = e => {
     gridProps.onFocus(e);
 
@@ -114,7 +119,7 @@ const ListView = forwardRef((props, ref) => {
   return (
     <ListViewContext.Provider value={{ state }}>
       <Virtualizer
-        {...gridProps}
+        {...(items ? gridProps : { role: 'presentation' })}
         onLoadMore={onLoadMore}
         ref={listViewRef}
         focusedKey={focusedKey}
