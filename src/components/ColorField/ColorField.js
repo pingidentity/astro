@@ -110,7 +110,7 @@ const ColorField = forwardRef((props, ref) => {
         {...mergeProps(buttonProps, ariaProps, triggerProps)}
       />
       <Box {...fieldControlWrapperProps}>
-        <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} />
+        <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} sx={{ display: 'none' }} />
       </Box>
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
