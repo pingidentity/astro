@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import CheckIcon from '@pingux/mdi-react/CheckIcon';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import { withDesign } from 'storybook-addon-designs';
 
 import {
   Box,
@@ -14,10 +15,12 @@ import {
   IconButton,
   TextAreaField,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 
 export default {
-  title: 'Recipes/Editable Input',
+  title: 'Recipes/Inline Editing',
+  decorators: [withDesign],
 };
 
 const EditableAreaContext = createContext();
@@ -91,6 +94,14 @@ export const Default = () => {
     </Editable>
   );
 };
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.inlineEditing.default,
+  },
+};
+
 
 /**
  * Editable

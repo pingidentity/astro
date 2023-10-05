@@ -26,6 +26,7 @@ export { default as Breadcrumbs } from './components/Breadcrumbs';
 export * from './components/Breadcrumbs';
 export { default as Button } from './components/Button';
 export * from './components/Button';
+export { default as ButtonBar } from './components/ButtonBar/ButtonBar';
 export { default as Calendar } from './components/Calendar';
 export * from './components/Calendar';
 export { default as CalendarCell } from './components/Calendar/CalendarCell';
@@ -162,6 +163,8 @@ export * from './components/TextField';
 export { default as TimeZonePicker } from './components/TimeZonePicker';
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
+export { default as TreeView } from './components/TreeView';
+export * from './components/TreeView';
 export { default as PageHeader } from './experimental/PageHeader';
 export * from './experimental/PageHeader';
 
@@ -171,7 +174,7 @@ export { default as DataTable } from './components/DataTable';
 export * from './components/DataTable';
 export * from './types';
 export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
-export { Item, Section, useOverlayTriggerState } from 'react-stately';
+export { Item, Section, useOverlayTriggerState, useTreeData } from 'react-stately';
 export {
   TableBody as DataTableBody,
   Cell as DataTableCell,
@@ -181,7 +184,6 @@ export {
 } from 'react-stately';
 
 // Experimental
-export { default as ButtonBar } from './experimental/ButtonBar/ButtonBar';
 export { default as EditButton } from './experimental/EditButton';
 export { default as PanelHeader } from './experimental/PanelHeader';
 export { default as PanelHeaderCloseButton } from './experimental/PanelHeader/controls/PanelHeaderCloseButton';

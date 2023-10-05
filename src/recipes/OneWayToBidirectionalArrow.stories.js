@@ -11,6 +11,8 @@ import {
   IconButtonToggle,
   Item,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
+
 
 export default {
   title: 'Recipes/One Way to Bidirectional Arrow',
@@ -206,4 +208,11 @@ export const Default = () => {
       </Box>
     </>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.OnewayToBidirectionalArrow.default,
+  },
 };

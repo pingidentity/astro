@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, ButtonBar } from '../..';
+import { Button, ButtonBar } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 
