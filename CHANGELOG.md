@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.19.0...@pingux/astro@2.20.0) (2023-10-05)
+
+
+### Bug Fixes
+
+* [UIP-6361] use role presentation instead of grid when no items passed ([0c3d072](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0c3d072f6e44fd43df15479ceedcaa1fb2b6eb64))
+* [UIP-6513] screen reader issue with ColorFeld ([3d1ef2e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3d1ef2ef4325f90b0ccac34770c51db5e55a0a57))
+* [UIP-6530] Delete-RowLineChart-recipe ([8f0a351](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8f0a3513466e5549d7ae12e9d2e15cf341a28d48))
+
+
+### Features
+
+* [UIP-6470] Astro TreeView component ([fafe37b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fafe37b49b9767d3e2123686d1618a77d6521ed7))
+* [UIP-6545] add figma link for OnewayToBidirectionalArrow recipe ([f2c4ab9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f2c4ab950b4ab6b497a06b3ef6f0d8473c56e2f9))
+* [UIP-6560]: ButtonBar: move out of experimental ([262ca07](https://gitlab.corp.pingidentity.com/ux/pingux/commit/262ca07b884a37c3f6bd65ed2152af6257b8f96c))
+
+
+
+
+
 # [2.19.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.18.0...@pingux/astro@2.19.0) (2023-10-03)
 
 
