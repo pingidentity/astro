@@ -25,6 +25,7 @@ import message from '../../components/Messages/Message.styles';
 import modal from '../../components/Modal/Modal.styles';
 import navBar from '../../components/NavBar/NavBar.styles';
 import overlayPanel from '../../components/OverlayPanel/OverlayPanel.styles';
+import panelHeader from '../../components/PanelHeader/PanelHeader.styles';
 import popoverMenu from '../../components/PopoverMenu/PopoverMenu.styles';
 import rockerButton from '../../components/RockerButton/RockerButton.styles';
 import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
@@ -35,7 +36,6 @@ import * as tab from '../../components/Tabs/Tabs.style';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
 import treeView from '../../components/TreeView/TreeView.styles';
-import panelHeader from '../../experimental/PanelHeader/PanelHeader.styles';
 
 export default {
   accordion,

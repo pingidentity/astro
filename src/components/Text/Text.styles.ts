@@ -97,8 +97,7 @@ const listViewItemSubtext = {
   ...subtitle,
   alignSelf: 'start',
   fontSize: 'sm',
-  lineHeight: '16px',
-  my: '1px',
+  mt: '1px',
 };
 
 export const text = {

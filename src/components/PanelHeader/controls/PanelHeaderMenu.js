@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { menuPropTypes } from '../../../components/Menu/menuAttributes';
 import { ListViewItemMenu } from '../../../index';
+import { menuPropTypes } from '../../Menu/menuAttributes';
 
 /**
  * PanelHeaderMenu is one of several styled control components that can be used as a child
- * nested inside of the [PanelHeader](./?path=/story/experimental-panelheader--default).
- * Its a wrapper component around the [PopoverMenu](./?path=/story/components-popovermenu--default)
- * and [Menu](./?path=/docs/components-menu--default) component, intended to make matching
+ * nested inside of the [PanelHeader](./?path=/docs/components-panelheader--docs).
+ * Its a wrapper component around the [PopoverMenu](./?path=/story/components-popovermenu--docs)
+ * and [Menu](./?path=/docs/components-menu--docs) component, intended to make matching
  * specs easy. Most props available to the Menu component are available to PanelHeaderMenu.
 */
 
