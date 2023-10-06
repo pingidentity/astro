@@ -3,6 +3,7 @@ import theme from '../src/styles/theme';
 import yourTheme from './AstroTheme';
 import { withConsole } from '@storybook/addon-console';
 import { AstroWrapper } from '../src/index';
+import "@storybook/react";
 
 const withThemeProvider = (Story, context) => (
     <AstroWrapper theme={theme} bg="transparent">
