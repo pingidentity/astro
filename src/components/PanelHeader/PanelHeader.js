@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
-import { SharedItemPropTypes } from '../../components/ListViewItem/listViewItemAttributes';
 import { Box, Icon, Image, Text } from '../../index';
+import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
 
@@ -11,12 +11,7 @@ const PanelHeader = forwardRef(({
   data,
   ...others
 }, ref) => {
-  const {
-    icon,
-    image,
-    subtext,
-    text,
-  } = data;
+  const { icon, image, subtext, text } = data;
 
   const getWrapperVariant = () => {
     if (image && !icon) return 'panelHeader.imageWrapper';

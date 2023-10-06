@@ -18,6 +18,7 @@ const controls = {
 
 const data = {
   alignItems: 'center',
+  mr: 'sm',
 };
 
 const wrapper = {
@@ -27,6 +28,8 @@ const wrapper = {
 };
 
 const imageWrapper = {
+  display: 'flex',
+  flex: '1 1 0px',
   ml: 'sm',
 };
 

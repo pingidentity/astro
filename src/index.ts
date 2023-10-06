@@ -105,6 +105,10 @@ export { default as NumberField } from './components/NumberField';
 export * from './components/NumberField';
 export { default as OverlayPanel } from './components/OverlayPanel';
 export * from './components/OverlayPanel';
+export { default as PanelHeader } from './components/PanelHeader';
+export { default as PanelHeaderCloseButton } from './components/PanelHeader/controls/PanelHeaderCloseButton';
+export { default as PanelHeaderMenu } from './components/PanelHeader/controls/PanelHeaderMenu';
+export { default as PanelHeaderSwitchField } from './components/PanelHeader/controls/PanelHeaderSwitchField';
 export { default as PasswordField } from './components/PasswordField';
 export * from './components/PasswordField';
 export { default as PopoverContainer } from './components/PopoverContainer';
@@ -185,7 +189,3 @@ export {
 
 // Experimental
 export { default as EditButton } from './experimental/EditButton';
-export { default as PanelHeader } from './experimental/PanelHeader';
-export { default as PanelHeaderCloseButton } from './experimental/PanelHeader/controls/PanelHeaderCloseButton';
-export { default as PanelHeaderMenu } from './experimental/PanelHeader/controls/PanelHeaderMenu';
-export { default as PanelHeaderSwitchField } from './experimental/PanelHeader/controls/PanelHeaderSwitchField';

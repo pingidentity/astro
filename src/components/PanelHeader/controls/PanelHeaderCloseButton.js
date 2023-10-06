@@ -1,13 +1,13 @@
 import React from 'react';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
 
-import { iconButtonPropTypes } from '../../../components/IconButton/iconButtonAttributes';
 import { Box, Icon, IconButton } from '../../../index';
+import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
 
 /**
  * PanelHeaderCloseButton is one of several styled control components that can be used as a child
- * nested inside of the [PanelHeader](./?path=/story/experimental-panelheader--default).
- * Its a wrapper component around the [IconButton](./?path=/story/components-iconbutton--default),
+ * nested inside of the [PanelHeader](./?path=/docs/components-panelheader--docs).
+ * Its a wrapper component around the [IconButton](./?path=/docs/components-iconbutton--docs),
  * intended to make matching specs easy. Most props available to the IconButton are also available
  * to PanelHeaderCloseButton.
 */
