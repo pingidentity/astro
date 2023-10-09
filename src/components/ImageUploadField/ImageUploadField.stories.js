@@ -243,3 +243,13 @@ export const ErrorOnUpload = () => {
     </OverlayProvider>
   );
 };
+
+export const CustomizePopoverMenu = args => {
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <OverlayProvider>
+      <ImageUploadField {...args} popoverMenuProps={{ align: 'start' }} />
+    </OverlayProvider>
+  );
+};
