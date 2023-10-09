@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FocusScope, useFocusManager } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 
@@ -10,6 +10,7 @@ import Box from '../Box/Box';
 
 const NavBar = props => {
   const {
+    isAutoСollapsible,
     defaultSelectedKey,
     selectedKey: selectedKeyProp,
     setSelectedKey: setSelectedKeyProp,
@@ -20,7 +21,11 @@ const NavBar = props => {
     ...others
   } = props;
 
-  const [expandedKeys, setExpandedKeys] = useState(defaultExpandedKeys);
+  const initialExpandedKeys = isAutoСollapsible && defaultExpandedKeys.length
+    ? defaultExpandedKeys[0]
+    : defaultExpandedKeys;
+
+  const [expandedKeys, setExpandedKeys] = useState(initialExpandedKeys);
 
   const [selectedKey, setSelectedKey] = useProgressiveState(
     selectedKeyProp,
@@ -33,13 +38,24 @@ const NavBar = props => {
     ? children.map(child => ({ item: child, key: child.key }))
     : [{ item: children, key: children.key }];
 
-  const contextValue = {
+  const contextValue = useMemo(() => {
+    return {
+      isAutoСollapsible,
+      selectedKey,
+      setSelectedKey: setSelectedKeyProp || setSelectedKey,
+      expandedKeys,
+      setExpandedKeys,
+      navStyles,
+    };
+  }, [
+    isAutoСollapsible,
     selectedKey,
-    setSelectedKey: setSelectedKeyProp || setSelectedKey,
+    setSelectedKeyProp,
+    setSelectedKey,
     expandedKeys,
     setExpandedKeys,
     navStyles,
-  };
+  ]);
 
   return (
     <NavBarContext.Provider
@@ -80,6 +96,8 @@ const FocusableItem = props => {
 };
 
 NavBar.propTypes = {
+  /** Allows only one item to be expanded. */
+  isAutoСollapsible: PropTypes.bool,
   /** This applies a style to the entire nav tree. the options are default and popup. */
   variant: PropTypes.oneOf(['default', 'popupNav']),
   /** Whether or not the focus will return to the previously focused element upon unmount. */
@@ -99,6 +117,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
+  isAutoСollapsible: false,
   defaultSelectedKey: '',
   defaultExpandedKeys: [],
   variant: 'default',
