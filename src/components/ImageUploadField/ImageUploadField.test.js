@@ -259,3 +259,20 @@ test('should render node element if passed as default image', () => {
   expect(img).toBeInstanceOf(HTMLImageElement);
   expect(img).toBeInTheDocument();
 });
+
+test('should implement popover menu props', async () => {
+  getComponent({ popoverMenuProps: { direction: 'right' } });
+  fireEvent.change(screen.getByTestId('image-upload-input'), {
+    target: { files: [file] },
+  });
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
+  expect(imagePreview).toBeInTheDocument();
+  expect(imagePreview).toHaveAttribute('src');
+
+  // Click on the image preview button
+  userEvent.click(screen.getByRole('button'));
+
+  expect(screen.getByRole('presentation')).toBeInTheDocument();
+  expect(screen.getByRole('presentation')).toBeVisible();
+  expect(screen.getByRole('presentation')).toHaveAttribute('data-popover-placement', 'right');
+});

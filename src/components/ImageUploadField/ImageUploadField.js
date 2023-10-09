@@ -123,6 +123,8 @@ ImageUploadField.propTypes = {
    * `(event: InputEvent) => void`
    * */
   onRemove: PropTypes.func,
+  /** Props that will be passed to the Popover Menu. */
+  popoverMenuProps: PropTypes.shape({}),
   /** Define component height */
   previewHeight: PropTypes.number,
   /** Define component height */
