@@ -64,7 +64,7 @@ const SectionItem = ({ item, onKeyDown: onKeyDownProp }) => {
   const { key, children, ...others } = item;
 
   const navBarState = useNavBarContext();
-  const { expandedKeys, setExpandedKeys } = navBarState;
+  const { isAutoСollapsible, expandedKeys, setExpandedKeys } = navBarState;
   const isExpanded = expandedKeys.includes(key);
 
   const firstChildKey = children.length ? children[0].key : null;
@@ -73,7 +73,7 @@ const SectionItem = ({ item, onKeyDown: onKeyDownProp }) => {
   const onExpandedChange = isOpen => {
     let newArray;
     if (isOpen) {
-      newArray = [...expandedKeys, key];
+      newArray = isAutoСollapsible ? [key] : [...expandedKeys, key];
     } else {
       newArray = expandedKeys.filter(thiskey => thiskey !== key);
     }

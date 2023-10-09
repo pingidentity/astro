@@ -55,6 +55,7 @@ const data = [
       'Populations',
       'Attributes',
       'Roles',
+      'Dashboard Unique',
     ],
   },
   {
@@ -67,6 +68,7 @@ const data = [
       'Populations',
       'Attributes',
       'Roles',
+      'Identities Unique',
     ],
   },
   {
@@ -542,4 +544,22 @@ test('controlled version: items can be updated.', () => {
 
   userEvent.click(button);
   expect(screen.queryByTestId('Environment title that is so long, it wraps')).not.toBeInTheDocument();
+});
+
+test('expand only one item', () => {
+  getComponent({ isAutoСollapsible: true });
+
+  expect(screen.queryByText('Dashboard Unique')).not.toBeInTheDocument();
+  expect(screen.queryByText('Identities Unique')).not.toBeInTheDocument();
+
+  const headerButtons = screen.getAllByRole('button');
+  userEvent.click(headerButtons[1]);
+
+  expect(screen.queryByText('Dashboard Unique')).toBeInTheDocument();
+  expect(screen.queryByText('Identities Unique')).not.toBeInTheDocument();
+
+  userEvent.click(headerButtons[2]);
+
+  expect(screen.queryByText('Dashboard Unique')).not.toBeInTheDocument();
+  expect(screen.queryByText('Identities Unique')).toBeInTheDocument();
 });

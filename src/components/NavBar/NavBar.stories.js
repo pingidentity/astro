@@ -593,3 +593,34 @@ export const Controlled = () => {
     </NavBar>
   );
 };
+
+export const AutoCollapse = () => (
+  <NavBar isAutoСollapsible>
+    <Box padding="md" key="top-logo-parent">
+      <Link
+        aria-label="home link"
+        href="https://pingidentity.com"
+        target="_blank"
+      >
+        {logo}
+      </Link>
+    </Box>
+    <Separator m={0} backgroundColor="neutral.60" />
+    <Box
+      variant="navBar.sectionContainer"
+      paddingBottom="xl"
+      key="first-section-container"
+    >
+      <NavBarItem
+        data-id="nav-bar-item"
+        icon={GlobeIcon}
+        id="Overview"
+        key="Overview"
+        text="Overview"
+      />
+      <NavBarSection items={data} data-id="nav-bar-section" />
+      <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+      <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
+    </Box>
+  </NavBar>
+);
