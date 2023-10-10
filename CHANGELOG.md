@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.20.0...@pingux/astro@2.21.0) (2023-10-10)
+
+
+### Bug Fixes
+
+* [UIP-6538] Update the warning colors in Astro for accessibility ([1706b81](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1706b81b416122e7ccb5d29c527ae2b266f0106b))
+* [UIP-6573] import storybook/react in preview.js ([3469e28](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3469e28c5f1e8ee62339a0dde161a6b4011a486c))
+
+
+### Features
+
+* [UIP-6531] add possibility to autocollapse items on NavBar ([136e498](https://gitlab.corp.pingidentity.com/ux/pingux/commit/136e498f8c7c739782d4ac30d211b78fa059c332))
+* [UIP-6561]: PanelHeader: move out of experimental ([7557124](https://gitlab.corp.pingidentity.com/ux/pingux/commit/75571246c8b8a85fd9c1004ad4b59ec64e4d6fe1))
+* [UIP-6571] ImageUploadField - Allow Popover Menu Props ([083c189](https://gitlab.corp.pingidentity.com/ux/pingux/commit/083c18931cfc669a166aac05623bd1f5cd776801))
+
+
+
+
+
 # [2.20.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.19.0...@pingux/astro@2.20.0) (2023-10-05)
 
 
