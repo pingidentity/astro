@@ -1,11 +1,11 @@
 import React from 'react';
 import { Item } from 'react-stately';
 
-import { menuArgTypes } from '../../../components/Menu/menuAttributes';
 import { PanelHeaderMenu } from '../../../index';
+import { menuArgTypes } from '../../Menu/menuAttributes';
 
 export default {
-  title: 'Experimental/PanelHeader/Controls/PanelHeaderMenu',
+  title: 'Components/PanelHeader/Controls/PanelHeaderMenu',
   component: PanelHeaderMenu,
   parameters: {
     docs: {

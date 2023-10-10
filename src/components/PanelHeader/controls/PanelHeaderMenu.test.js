@@ -14,15 +14,15 @@ const getComponent = (props = {}) => render((
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-test('PanelHeaderMenu responds to Menu props', async () => {
+test('PanelHeaderMenu responds to Menu props', () => {
   const onAction = jest.fn();
   getComponent({ onAction });
 
   const menuTrigger = screen.getByRole('button', { name: 'more' });
-  await userEvent.click(menuTrigger);
+  userEvent.click(menuTrigger);
 
   const menuItem = screen.getByRole('menuitem', { name: 'testItem' });
-  await userEvent.click(menuItem);
+  userEvent.click(menuItem);
 
   expect(onAction).toBeCalled();
 });

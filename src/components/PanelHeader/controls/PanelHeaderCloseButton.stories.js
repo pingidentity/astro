@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { iconButtonArgTypes } from '../../../components/IconButton/iconButtonAttributes';
 import { PanelHeaderCloseButton } from '../../../index';
+import { iconButtonArgTypes } from '../../IconButton/iconButtonAttributes';
 
 delete iconButtonArgTypes.size;
 delete iconButtonArgTypes.icon;
 
 export default {
-  title: 'Experimental/PanelHeader/Controls/PanelHeaderCloseButton',
+  title: 'Components/PanelHeader/Controls/PanelHeaderCloseButton',
   component: PanelHeaderCloseButton,
   parameters: {
     docs: {

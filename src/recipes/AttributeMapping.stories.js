@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import AddIcon from '@pingux/mdi-react/AddIcon';
 import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
 import CogsIcon from '@pingux/mdi-react/CogsIcon';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
@@ -8,8 +7,8 @@ import { v4 as uuid } from 'uuid';
 import {
   Badge,
   Box,
-  Button,
   Callout,
+  CheckboxField,
   ComboBoxField,
   Icon,
   IconButton,
@@ -80,62 +79,43 @@ const sx = {
 };
 
 const editSx = {
-  rowBox: { mb: '24.95px' },
-  textField: { height: '40px !important' },
+  comboBoxFieldWrapper: {
+    width: '275px',
+    '& .is-float-label .field-control-input': {
+      pt: '11px',
+      pb: '11px',
+    },
+  },
   comboBoxField: {
-    height: '40px !important',
-    pt: '5px !important',
+    maxHeight: '40px',
   },
-  headingText: {
-    fontSize: 'sm',
-    fontWeight: 0,
-    color: 'neutral.40',
-  },
-  firstRowTitle: {
+  rowTitle: {
     fontWeight: 3,
     fontSize: 'md',
-    maxWidth: '310px',
-    width: 'calc(50% - 26px)',
+    width: '275px',
     minWidth: '153px',
+    mr: 'sm',
   },
-  secondRowTitle: {
+  lastRowTitle: {
     fontWeight: 3,
     fontSize: 'md',
-    ml: 'sm',
-    flexGrow: 1,
-  },
-  comboBoxAndIconParentBox: {
-    width: '378px',
-    ml: '12px',
-    alignItems: 'center',
-  },
-  headingParentBox: {
-    alignItems: 'center',
-    mb: 'md',
-    ml: 'xs',
-  },
-  addRowButton: {
-    ml: 'auto',
-    height: '22px',
-    minWidth: '0',
-    width: '70px',
-  },
-  addButtonIconBox: {
-    alignItems: 'center',
-    width: '38px',
-    justifyContent: 'center',
-  },
-  addIcon: {
-    mr: 'xs',
-    color: 'active',
+    width: '135px',
+    textAlign: 'center',
   },
   editAttributesBox: {
     bg: 'accent.99',
-    p: '16px',
+    p: 'md',
+    pr: '12px',
+    pt: 'sm',
   },
   scrollBox: {
     mt: 'md',
     maxHeight: '700px',
+  },
+  checkbox: {
+    '& .field-control-input': {
+      margin: 0,
+    },
   },
 };
 
@@ -222,31 +202,28 @@ export const DisplayWithError = () => {
 export const Edit = () => {
   const defaultRows = [
     {
-      isDisabled: false,
-      textValue: '',
-      inputValue: '',
+      leftValue: 'username',
+      rightValue: 'User ID',
       name: 'first default',
     },
     {
-      isDisabled: false,
-      textValue: '',
-      inputValue: '',
+      leftValue: 'firstName',
+      rightValue: 'Given Name',
       name: 'second default',
+    },
+    {
+      leftValue: 'lastName',
+      rightValue: 'Family Name',
+      name: 'third default',
+    },
+    {
+      leftValue: 'population',
+      rightValue: 'Population',
+      name: 'fourth default',
     },
   ];
 
   const [rows, setRows] = useState(defaultRows);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const addRow = () => {
-    const newRow = {
-      isDisabled: false,
-      isNewRow: true,
-      textValue: '',
-      inputValue: '',
-      name: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-    };
-    setRows([...rows, newRow]);
-  };
 
   const removeRow = rowIndex => {
     const newArray = rows.filter((row, index) => {
@@ -269,21 +246,8 @@ export const Edit = () => {
 
   return (
     <Box
-      maxWidth="740px"
+      maxWidth="735px"
     >
-      <Box isRow sx={editSx.headingParentBox}>
-        <Text
-          sx={editSx.headingText}
-        >
-          Create new attributes and map predefined attributes with their PingOne Mappings.
-        </Text>
-        <Button variant="inline" onPress={addRow} sx={editSx.addRowButton}>
-          <Box isRow sx={editSx.addButtonIconBox}>
-            <Icon icon={AddIcon} size={15} title={{ name: 'Add Icon' }} sx={editSx.addIcon} />
-            Add
-          </Box>
-        </Button>
-      </Box>
       <Box
         sx={editSx.editAttributesBox}
       >
@@ -291,17 +255,24 @@ export const Edit = () => {
           isRow
         >
           <Text
-            sx={editSx.firstRowTitle}
+            sx={editSx.rowTitle}
           >
-            Attributes
+            Application
           </Text>
           <Text
-            sx={editSx.secondRowTitle}
+            sx={editSx.rowTitle}
           >
-            PingOne Mappings
+            PingOne
+          </Text>
+          <Text
+            sx={editSx.lastRowTitle}
+          >
+            Required
           </Text>
         </Box>
-        <Separator />
+        <Box sx={{ mr: '3px' }}>
+          <Separator sx={{ mb: 0, mt: 'sm' }} />
+        </Box>
         <ScrollBox
           sx={editSx.scrollBox}
         >
@@ -314,8 +285,6 @@ export const Edit = () => {
                   removeRow={removeRow}
                   updateRow={updateRow}
                   key={`row container ${row.name}`}
-                  isSubmitted={isSubmitted}
-                  setIsSubmitted={setIsSubmitted}
                 />
               );
             })}
@@ -394,129 +363,123 @@ export const DisplayRow = props => {
 
 export const EditRow = props => {
   const {
-    isDisabled,
     isNewRow,
     index,
-    textValue,
-    inputValue,
-    removeRow = () => {},
+    leftValue,
+    rightValue,
     updateRow = () => {},
-    areRowsValid,
-    isSubmitted,
-    setIsSubmitted = () => {},
+    removeRow = () => {},
   } = props;
 
-  const items = [
-    { name: 'Aardvark', id: '1' },
-    { name: 'Kangaroo', id: '2' },
-    { name: 'Snake', id: '3' },
+  const leftItems = [
+    { name: 'username', id: '1' },
+    { name: 'firstName', id: '2' },
+    { name: 'lastName', id: '3' },
+    { name: 'population', id: '4' },
+  ];
+
+  const rightItems = [
+    { name: 'User ID', id: '1' },
+    { name: 'Given Name', id: '2' },
+    { name: 'Family Name', id: '3' },
+    { name: 'Population', id: '4' },
   ];
 
   const rowRef = useRef();
-  const textFieldRef = useRef();
+  const comboBoxFieldRef = useRef();
 
-  const setTextValue = value => {
-    updateRow(index, value, 'textValue');
-    setIsSubmitted(false);
+  const setLeftInputValue = value => {
+    updateRow(index, value, 'leftValue');
   };
 
-  const setInputValue = value => {
-    updateRow(index, value, 'inputValue');
-    setIsSubmitted(false);
+  const setRightInputValue = value => {
+    updateRow(index, value, 'rightValue');
   };
 
   useEffect(() => {
     if (isNewRow) {
-      textFieldRef.current.focus();
-      textFieldRef.current.scrollIntoView();
+      comboBoxFieldRef.current.focus();
+      comboBoxFieldRef.current.scrollIntoView();
     }
   }, []);
-
-  const isInputValueEmpty = !areRowsValid && isSubmitted && inputValue === '' && textValue !== '';
-  const isTextValueEmpty = !areRowsValid && isSubmitted && textValue === '' && inputValue !== '';
 
   return (
     <Box
       isRow
       alignItems="center"
-      mb="md"
+      mb="sm"
+      gap="sm"
       ref={rowRef}
     >
-      <Box
-        width="310px"
-        sx={isInputValueEmpty ? editSx.rowBox : {}}
-      >
-        <TextField
-          name="custom-name"
-          aria-label="text field"
+      <Box sx={editSx.comboBoxFieldWrapper}>
+        <ComboBoxField
+          ref={comboBoxFieldRef}
+          items={leftItems}
+          labelMode="float"
+          id={`leftInputField ${index}`}
+          key={`leftInputField ${index}`}
           labelProps={{
             'aria-label': 'selection field',
             mb: 0,
           }}
-          controlProps={{ sx: editSx.textField }}
-          id={`textField ${index}`}
-          key={`textField ${index}`}
-          isReadOnly={isDisabled}
-          value={textValue}
-          onChange={e => setTextValue(e.target.value)}
-          ref={textFieldRef}
-          status={isTextValueEmpty ? 'error' : 'default'}
-          helperText={!areRowsValid && isSubmitted && textValue === '' && inputValue !== '' ? 'Enter an attribute.' : null}
-        />
-      </Box>
-      <Box
-        isRow
-        sx={isInputValueEmpty ? editSx.rowBox : {} && editSx.comboBoxAndIconParentBox}
-      >
-        <Box
-          flexGrow="1"
-          maxWidth="310px"
+          aria-label="selection field"
+          controlProps={{
+            'aria-label': 'selection field',
+            sx: editSx.comboBoxField,
+          }}
+          containerProps={{
+            width: '100%',
+            maxWidth: '275px',
+          }}
+          inputValue={leftValue}
+          onInputChange={setLeftInputValue}
         >
-          <ComboBoxField
-            items={items}
-            labelMode="float"
-            id={`inputField ${index}`}
-            key={`inputField ${index}`}
-            status={isInputValueEmpty ? 'error' : 'default'}
-            helperText={isInputValueEmpty ? 'Select an item.' : null}
-            labelProps={{
-              'aria-label': 'selection field',
-              mb: 0,
-            }}
-            aria-label="selection field"
-            controlProps={{
-              'aria-label': 'selection field',
-              sx: editSx.comboBoxField,
-            }}
-            containerProps={{
-              width: '100%',
-              maxWidth: '310px',
-            }}
-            inputValue={inputValue}
-            onInputChange={setInputValue}
-          >
-            {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
-          </ComboBoxField>
-        </Box>
+          {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+        </ComboBoxField>
+      </Box>
+      <Box sx={editSx.comboBoxFieldWrapper}>
+        <ComboBoxField
+          items={rightItems}
+          labelMode="float"
+          id={`rightInputField ${index}`}
+          key={`rightInputField ${index}`}
+          labelProps={{
+            'aria-label': 'selection field',
+            mb: 0,
+          }}
+          aria-label="selection field"
+          controlProps={{
+            'aria-label': 'selection field',
+            sx: editSx.comboBoxField,
+          }}
+          containerProps={{
+            width: '100%',
+            maxWidth: '275px',
+          }}
+          inputValue={rightValue}
+          onInputChange={setRightInputValue}
+        >
+          {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+        </ComboBoxField>
+      </Box>
+      <Box width="135px">
         <Box
           isRow
-          alignItems="center"
-          ml="xs"
-          sx={isInputValueEmpty && {
-            mb: '22.475px',
-            ml: 'xs',
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          <IconButton aria-label="icon button with tooltip" title="Advanced Expression">
+          <IconButton sx={{ alignSelf: 'center' }} aria-label="icon button with tooltip" title="Advanced Expression">
             <Icon icon={CogsIcon} size="sm" title={{ name: 'Cogs Icon' }} />
           </IconButton>
+          <CheckboxField aria-label="required checkbox" containerProps={{ sx: editSx.checkbox }} />
           <IconButton
             aria-label="icon button with tooltip"
             title="Delete"
-            sx={{ ml: 'xs' }}
             onPress={() => removeRow(index)}
           >
-            <Icon icon={DeleteIcon} size="sm" title={{ name: 'Delete Icon' }} />
+            <Icon icon={DeleteIcon} color="neutral.30" size="24px" title={{ name: 'Delete Icon' }} />
           </IconButton>
         </Box>
       </Box>
