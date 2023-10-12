@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.21.0...@pingux/astro@2.22.0) (2023-10-12)
+
+
+### Bug Fixes
+
+* [UIP-6559] Move editButton out of experimental ([32ab391](https://gitlab.corp.pingidentity.com/ux/pingux/commit/32ab391645ade47cc7687f8469916818ba62a034))
+
+
+### Features
+
+* [UIP-6039] PasswordField with requirements list screen reader improvements ([29fedf3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/29fedf3a3d7d6b14636d295ec61566457134ee71))
+
+
+
+
+
 # [2.21.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.20.0...@pingux/astro@2.21.0) (2023-10-10)
 
 
