@@ -54,6 +54,7 @@ export { default as ComboBoxField } from './components/ComboBoxField';
 export { default as CopyText } from './components/CopyText';
 export { default as DatePicker } from './components/DatePicker';
 export { default as DateField } from './components/DatePicker/DateField';
+export { default as EditButton } from './components/EditButton';
 export { default as EnvironmentBreadcrumb } from './components/EnvironmentBreadcrumb';
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
@@ -188,4 +189,3 @@ export {
 } from 'react-stately';
 
 // Experimental
-export { default as EditButton } from './experimental/EditButton';

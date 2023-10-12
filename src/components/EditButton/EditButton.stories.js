@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { iconButtonArgTypes } from '../../components/IconButton/iconButtonAttributes';
 import { Box, EditButton, Text } from '../../index';
+import { iconButtonArgTypes } from '../IconButton/iconButtonAttributes';
 
 import { IconSize } from './EditButton';
 import EditButtonReadme from './EditButton.mdx';
@@ -11,7 +11,7 @@ import EditButtonReadme from './EditButton.mdx';
 const { variant, ...other } = iconButtonArgTypes;
 
 export default {
-  title: 'experimental/EditButton',
+  title: 'components/IconButton/Convenience/EditButton',
   component: EditButton,
   decorators: [withDesign],
   parameters: {
