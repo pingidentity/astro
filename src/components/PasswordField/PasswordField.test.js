@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render, screen } from '@testing-library/react';
@@ -79,6 +80,10 @@ const getComponent = (props = {}) => render(
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
+
+afterEach(() => {
+  jest.resetAllMocks();
+});
 
 test('default password field', () => {
   getComponent();
@@ -172,4 +177,20 @@ test('password field with helper text', () => {
   getComponent({ helperText });
   const helper = screen.getByText(helperText);
   expect(helper).toBeInTheDocument();
+});
+
+test('onChange function receives right text', () => {
+  let inputText = '';
+  act(() => {
+    global.setTimeout = jest.fn(cb => cb());
+  });
+  const testOnChange = e => {
+    inputText = e.target.value;
+  };
+  getComponent({ onChange: testOnChange });
+
+  const input = screen.getByRole('textbox');
+  userEvent.type(input, '12345678');
+
+  expect(inputText).toBe('12345678');
 });

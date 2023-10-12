@@ -3,6 +3,7 @@ import { useOverlayPosition } from 'react-aria';
 import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
 import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
 import PropTypes from 'prop-types';
 
 import {
@@ -15,7 +16,7 @@ import {
   PopoverContainer,
   RequirementsList,
 } from '../..';
-import * as hooks from '../../hooks';
+import { useDebounce, useField, useProgressiveState, usePropWarning, useStatusClasses } from '../../hooks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
@@ -24,6 +25,24 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
 const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   HIDE: 'hide password',
   SHOW: 'show password',
+};
+
+const RequirementMessage = ({ requirement }) => {
+  return (
+    <>
+      {useDebounce({
+        value: `${requirement.name} ${requirement.status === statuses.SUCCESS ? 'success' : 'not met'}`,
+        delay: 100,
+      })}
+    </>
+  );
+};
+
+RequirementMessage.propTypes = {
+  requirement: PropTypes.shape({
+    name: PropTypes.string,
+    status: PropTypes.string,
+  }),
 };
 
 const PasswordField = forwardRef((props, ref) => {
@@ -40,6 +59,8 @@ const PasswordField = forwardRef((props, ref) => {
     ...others
   } = props;
 
+  const [isTyping, setIsTyping] = useState(false);
+
   const checkRequirements = () => !requirements.filter(req => req.status === 'default').length > 0;
 
   const {
@@ -47,18 +68,18 @@ const PasswordField = forwardRef((props, ref) => {
     fieldControlInputProps,
     fieldControlWrapperProps,
     fieldLabelProps,
-  } = hooks.useField({ status, ...others });
+  } = useField({ status, ...others });
 
-  const { isFocused } = fieldControlInputProps;
+  const { isFocused, onChange } = fieldControlInputProps;
 
   const inputRef = useRef();
   const popoverRef = useRef();
 
-  hooks.usePropWarning(props, 'disabled', 'isDisabled');
+  usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => inputRef.current);
 
-  const [isVisible, setIsShown] = hooks.useProgressiveState(
+  const [isVisible, setIsShown] = useProgressiveState(
     isVisibleProp,
     isVisibleProp);
 
@@ -101,7 +122,7 @@ const PasswordField = forwardRef((props, ref) => {
     ...overlayProps.style,
   };
 
-  const { classNames } = hooks.useStatusClasses(fieldControlWrapperProps.className, {
+  const { classNames } = useStatusClasses(fieldControlWrapperProps.className, {
     'is-success': (status === statuses.SUCCESS) || (checkRequirements() && requirements.length > 0),
   });
 
@@ -117,12 +138,22 @@ const PasswordField = forwardRef((props, ref) => {
     }
   };
 
+  const handleInputChange = e => {
+    if (onChange) {
+      onChange(e);
+    }
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+    }, [300]);
+  };
+
   return (
     <>
       <Box variant="forms.input.fieldContainer" {...fieldContainerProps}>
         <Label {...fieldLabelProps} />
         <Box variant="forms.input.fieldControlWrapper" isRow {...fieldControlWrapperProps} className={classNames}>
-          <Input ref={inputRef} {...fieldControlInputProps} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
+          <Input ref={inputRef} {...fieldControlInputProps} onChange={handleInputChange} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
           <Box variant="forms.input.containedIcon">
             <IconButton
               aria-label={toggleShowPasswordAriaLabel}
@@ -148,6 +179,9 @@ const PasswordField = forwardRef((props, ref) => {
           )
         }
       </Box>
+      <VisuallyHidden role="alert" aria-live="polite">
+        {requirements.length > 0 && checkRequirements() ? 'All requirements are met' : ''}
+      </VisuallyHidden>
       <PopoverContainer
         hasNoArrow
         isDismissable={false}
@@ -157,12 +191,18 @@ const PasswordField = forwardRef((props, ref) => {
         ref={popoverRef}
         style={style}
       >
-        <Box role="alert" aria-label="requirements list">
-          <RequirementsList
-            requirements={requirements}
-            {...requirementsListProps}
-          />
-        </Box>
+        <RequirementsList
+          requirements={requirements}
+          {...requirementsListProps}
+        />
+        <VisuallyHidden aria-live="polite" aria-busy={isTyping}>
+          Password requirements:
+          {requirements.map(req => (
+            <React.Fragment key={req.name}>
+              <RequirementMessage requirement={req} />
+            </React.Fragment>
+          ))}
+        </VisuallyHidden>
       </PopoverContainer>
     </>
   );
