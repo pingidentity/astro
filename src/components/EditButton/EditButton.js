@@ -2,8 +2,8 @@ import React, { forwardRef } from 'react';
 import PencilIcon from '@pingux/mdi-react/PencilIcon';
 import PropTypes from 'prop-types';
 
-import { iconButtonPropTypes } from '../../components/IconButton/iconButtonAttributes';
 import { Box, Icon, IconButton } from '../../index';
+import { iconButtonPropTypes } from '../IconButton/iconButtonAttributes';
 
 export const IconSize = {
   sm: 10,
