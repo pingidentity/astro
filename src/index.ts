@@ -105,6 +105,7 @@ export { default as NumberField } from './components/NumberField';
 export * from './components/NumberField';
 export { default as OverlayPanel } from './components/OverlayPanel';
 export * from './components/OverlayPanel';
+export { default as PageHeader } from './components/PageHeader';
 export { default as PanelHeader } from './components/PanelHeader';
 export { default as PanelHeaderCloseButton } from './components/PanelHeader/controls/PanelHeaderCloseButton';
 export { default as PanelHeaderMenu } from './components/PanelHeader/controls/PanelHeaderMenu';
@@ -169,8 +170,6 @@ export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
 export { default as TreeView } from './components/TreeView';
 export * from './components/TreeView';
-export { default as PageHeader } from './experimental/PageHeader';
-export * from './experimental/PageHeader';
 
 /* eslint-enable import/export */
 

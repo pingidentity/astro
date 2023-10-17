@@ -1,12 +1,21 @@
 import React from 'react';
 
-import { Link, PageHeader } from '../..';
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { Link, PageHeader } from '../../index';
+
+import PageHeaderReadMe from './PageHeader.mdx';
 
 export default {
-  title: 'Experimental/PageHeader',
+  title: 'Components/PageHeader',
   component: PageHeader,
   parameters: {
     docs: {
+      page: () => (
+        <>
+          <PageHeaderReadMe />
+          <DocsLayout />
+        </>
+      ),
       source: {
         type: 'code',
       },
