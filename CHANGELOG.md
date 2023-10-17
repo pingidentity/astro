@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.22.0...@pingux/astro@2.23.0) (2023-10-17)
+
+
+### Features
+
+* [UIP-6527]: move PageHeader out of experimental ([129afa6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/129afa6ad83b85ca3231fea849c641160fc4b8ca))
+
+
+
+
+
 # [2.22.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.21.0...@pingux/astro@2.22.0) (2023-10-12)
 
 
