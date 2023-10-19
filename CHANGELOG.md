@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.23.0...@pingux/astro@2.24.0) (2023-10-19)
+
+
+### Features
+
+* [UIP-6581] AstroWrapper renamed to AstroProvider ([2fae647](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2fae647bf6e1fec53399c42c6cd6fa4863798835))
+
+
+
+
+
 # [2.23.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.22.0...@pingux/astro@2.23.0) (2023-10-17)
 
 
