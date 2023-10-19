@@ -46,7 +46,7 @@ export const GlobalStyles = () => (
  * _Note: For UI Library and Astro CSS conflicts, we supply a theme override located at_
  * `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`
  */
-const AstroWrapper = forwardRef((props, ref) => {
+const AstroProvider = forwardRef((props, ref) => {
   const {
     defaultTheme,
     themeOverrides,
@@ -69,7 +69,7 @@ const AstroWrapper = forwardRef((props, ref) => {
   );
 });
 
-AstroWrapper.propTypes = {
+AstroProvider.propTypes = {
   /** Array of theme objects which will be merged with the default theme.
      * In the case of clashes, these will take priority.
      * Useful for customizing the default variants, adding new ones,
@@ -81,7 +81,7 @@ AstroWrapper.propTypes = {
   defaultTheme: PropTypes.shape({}),
 };
 
-AstroWrapper.defaultProps = {
+AstroProvider.defaultProps = {
   defaultTheme: astroTheme,
   themeOverrides: [{}],
 };
@@ -155,4 +155,4 @@ PageWrapper.defaultProps = {
 };
 
 export { ThemeProvider };
-export default AstroWrapper;
+export default AstroProvider;
