@@ -11,14 +11,14 @@ The Astro component library ships with [a default theme](./?path=/docs/docs-them
 Astro design system. To extend, modify, or replace the theme to change the visual look 
 of components then there are two options:
 
-1. `themeOverrides` - this prop on the `AstroWrapper` component facilitates extending and modifying the base theme. 
-See AstroWrapper custom theme story for more information.
+1. `themeOverrides` - this prop on the `AstroProvider` component facilitates extending and modifying the base theme. 
+See AstroProvider custom theme story for more information.
 The `themeOverrides` prop uses [the merge function from ThemeUI](https://theme-ui.com/guides/merging-themes/).
 With this approach, only variants that you specifically target within your new theme will be changed, 
 but those not targeted will still inherit styles from the default theme. If you are attempting to keep the majority of styling from the 
 Astro Design System (and therefore base astroTheme), but wish to override a few global styles, this is the favored approach. 
 
-2. `defaultTheme` - this is another prop on the `AstroWrapper` component, 
+2. `defaultTheme` - this is another prop on the `AstroProvider` component, 
 but this _replaces_ the base theme with the object passed in. We discourage using this in most situations.
 
 
@@ -67,4 +67,4 @@ const myThemeOverride = {
 }
 ```
 
-These overrides can then be passed to the `themeOverrides` prop on the `AstroWrapper` as mentioned above.
+These overrides can then be passed to the `themeOverrides` prop on the `AstroProvider` as mentioned above.

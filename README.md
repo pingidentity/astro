@@ -23,14 +23,14 @@ Run `yarn dlx @yarnpkg/sdks vscode` and reload the window to configure vscode fo
 
 ## Usage
 
-All apps should be wrapped in an `<AstroWrapper>` for full functionality and styling.
+All apps should be wrapped in an `<AstroProvider>` for full functionality and styling.
 
 ```js
-import { AstroWrapper } from '@pingux/astro';
+import { AstroProvider } from '@pingux/astro';
 
-<AstroWrapper>
+<AstroProvider>
   <App />
-</AstroWrapper>
+</AstroProvider>
 ```
 
 ## Running Storybook Locally

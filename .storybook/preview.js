@@ -2,15 +2,15 @@ import React from 'react';
 import theme from '../src/styles/theme';
 import yourTheme from './AstroTheme';
 import { withConsole } from '@storybook/addon-console';
-import { AstroWrapper } from '../src/index';
+import { AstroProvider} from '../src/index';
 import "@storybook/react";
 
 const withThemeProvider = (Story, context) => (
-    <AstroWrapper theme={theme} bg="transparent">
+    <AstroProvider theme={theme} bg="transparent">
       <div style={{ padding: "50px" }}>
         <Story {...context} />
       </div>
-    </AstroWrapper>
+    </AstroProvider>
 );
 
 const withConsoleAddon = (storyFn, context) => withConsole()(storyFn)(context);

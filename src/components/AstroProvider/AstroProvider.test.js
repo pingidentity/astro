@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import { Box, PageWrapper } from '../../index';
+import { AstroProvider, Box } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 
 const testId = 'test-box';
@@ -10,14 +10,12 @@ const defaultProps = {
   'data-testid': testId,
 };
 
-const getComponent = () => render(<Box {...defaultProps} />, { wrapper: PageWrapper });
+const getComponent = () => render(<Box {...defaultProps} />, { wrapper: AstroProvider });
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-// NOTE: This will fail if in the AstroWrapper test file...
-// Probably something to do with Jest / RTL
-test('should provide theme styling through PageWrapper', () => {
+test('should provide theme styling through AstroProvider', () => {
   getComponent();
   const activeRgb = 'rgb(68, 98, 237)';
   const box = screen.queryByTestId(testId);
