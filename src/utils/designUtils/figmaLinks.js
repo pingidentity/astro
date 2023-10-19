@@ -110,5 +110,7 @@ export const FIGMA_LINKS = {
   slider: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43112%3A1773&mode=dev',
   },
-
+  trialExperienceButtons: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43369%3A445',
+  },
 };
