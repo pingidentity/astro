@@ -576,9 +576,9 @@ test('form does not submit when adding custom value', () => {
 
   const value = 'custom';
   userEvent.type(input, value);
-  expect(input).toHaveValue('');
 
   userEvent.type(input, '{enter}');
+  expect(input).toHaveValue('');
   expect(onFormSubmit).not.toHaveBeenCalled();
 });
 
@@ -650,4 +650,62 @@ test('deleting the last badge via keyboard moves focus to the previous badge', (
   fireEvent.keyUp(deleteButton2, { key: 'Enter' });
   expect(badge2).not.toBeInTheDocument();
   expect(deleteButton1).toHaveClass('is-focused');
+});
+
+test('pressing Esc should clear the input', () => {
+  getComponent();
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'custom';
+  userEvent.type(input, value);
+  userEvent.type(input, '{esc}');
+
+  expect(screen.queryByText(value)).not.toBeInTheDocument();
+  expect(input).toHaveValue('');
+  expect(input).toHaveFocus();
+
+  userEvent.type(input, 'Aardvark');
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+});
+
+test('should clear the input text onBlur', () => {
+  getComponent();
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'custom';
+  userEvent.type(input, value);
+  userEvent.tab();
+
+  expect(screen.queryByText(value)).not.toBeInTheDocument();
+  expect(input).toHaveValue('');
+});
+
+test('should clear the input text onBlur and enter when a single filter result is showing', () => {
+  getComponent();
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'Snake';
+  userEvent.type(input, value);
+
+  const listbox = screen.getByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+  const options = within(listbox).getAllByRole('option');
+  expect(options.length).toBe(1);
+
+  userEvent.tab();
+
+  expect(screen.queryByText(value)).not.toBeInTheDocument();
+  expect(input).toHaveValue('');
+
+  userEvent.type(input, value);
+  expect(options.length).toBe(1);
+  userEvent.type(input, '{enter}', { skipClick: true });
+
+  expect(input).toHaveValue('');
 });
