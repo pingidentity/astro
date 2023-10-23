@@ -15,6 +15,9 @@ import {
   Button,
   ColorField,
   IconButton,
+  ListView,
+  ListViewItem,
+  Messages,
   MultivaluesField,
   OverlayPanel,
   OverlayProvider,
@@ -377,5 +380,124 @@ export const Expandable = () => {
           </OverlayPanel>
         )}
     </OverlayProvider>
+  );
+};
+
+export const InnerPanel = ({ ...args }) => {
+  const { state, onClose } = useOverlayPanelState();
+  const { state: innerState, onClose: onCloseInner } = useOverlayPanelState();
+
+  const outerTriggerRef = useRef();
+  const innerTriggerRef = useRef();
+
+  const [messagesOpen, setMessagesOpen] = useState(false);
+
+  const toggleMessagesOpen = () => {
+    setMessagesOpen(!messagesOpen);
+  };
+
+  const closeOuterPanel = () => {
+    if (innerState.isOpen) {
+      innerState.close();
+    }
+    onClose(state, outerTriggerRef);
+  };
+
+  const closeInnerPanel = () => {
+    onCloseInner(innerState, innerTriggerRef);
+  };
+
+  const inner = (
+    innerState.isOpen
+    && (
+      <OverlayPanel
+        variant="overlayPanel.innerPanel" // applies higher z-index
+        isOpen={innerState.isOpen}
+        {...args}
+        state={innerState}
+        triggerRef={innerTriggerRef}
+      >
+        <Box>
+          <Button onPress={closeInnerPanel}>Close Inner Panel</Button>
+          <Text pt="md">
+            Children render here.
+          </Text>
+        </Box>
+      </OverlayPanel>
+    )
+  );
+
+  const items = [
+    { id: 1, name: 'Form 1' },
+    { id: 2, name: 'Form 2' },
+  ];
+
+  const outer = (
+    // should have higher z-index applied
+    (state.isOpen || state.isTransitioning)
+    && (
+      <OverlayPanel
+        isOpen={state.isOpen}
+        isTransitioning={state.isTransitioning}
+        sx={{ p: '0px' }}
+        {...args}
+        state={state}
+        triggerRef={outerTriggerRef}
+      >
+        <Box sx={{ p: '12px' }}>
+          <Button onPress={closeOuterPanel} aria-expanded={state.isOpen}>Close Panel</Button>
+          <Text pt="md" mb="24px">
+            Children render here.
+          </Text>
+          <ListView items={items}>
+            {
+              item => (
+                <Item key={item.id}>
+                  <ListViewItem
+                    data={{
+                      text: item.name,
+                    }}
+                  />
+                </Item>
+              )
+            }
+          </ListView>
+          <br />
+          <Button onPress={toggleMessagesOpen}>Toggle Messages</Button>
+          <br />
+          <Button
+            ref={innerTriggerRef}
+            onPress={innerState.open}
+            aria-expanded={innerState.isOpen}
+          >
+            Open Inner Panel
+          </Button>
+          {inner}
+        </Box>
+      </OverlayPanel>
+    )
+  );
+
+
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <>
+      <OverlayProvider>
+        <Button
+          ref={outerTriggerRef}
+          onPress={state.open}
+          aria-expanded={state.isOpen}
+        >
+          Open Panel
+        </Button>
+        {outer}
+      </OverlayProvider>
+      {messagesOpen && (
+        <Messages sx={{ zIndex: 11 }} onClose={toggleMessagesOpen}>
+          <Item key="message2" status="success">Z Index higher than inner pannel</Item>
+        </Messages>
+      )}
+    </>
   );
 };
