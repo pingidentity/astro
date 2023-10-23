@@ -311,6 +311,17 @@ const headerBar = {
   },
 };
 
+const exampleText = {
+  ...base,
+  '&.is-hovered': {
+    textDecoration: 'underline',
+  },
+  background: 'none',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
 export default {
   critical,
   default: {
@@ -337,6 +348,7 @@ export default {
   quiet,
   success,
   colorBlock,
+  exampleText,
   withIcon,
   inlineWithIcon,
   inlinePrimaryWithIcon,
