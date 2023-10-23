@@ -21,7 +21,7 @@ const DataTableMenu = forwardRef((props, ref) => {
       <OverlayProvider>
         <PopoverMenu>
           <IconButton aria-label="row menu">
-            <Icon icon={DotsVerticalIcon} title={{ name: 'Dots Vertical Icon' }} />
+            <Icon size={25} icon={DotsVerticalIcon} title={{ name: 'Dots Vertical Icon' }} />
           </IconButton>
           <Menu>
             <Item key="edit">Edit</Item>

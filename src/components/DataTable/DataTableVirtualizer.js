@@ -24,7 +24,6 @@ import {
 const DataTableVirtualizer = forwardRef(({
   layout,
   collection,
-  focusedKey,
   renderView,
   renderWrapper,
   domRef,
@@ -39,6 +38,7 @@ const DataTableVirtualizer = forwardRef(({
   const loadingState = collection.body.props.loadingState;
   const isLoading = loadingState === 'loading' || loadingState === 'loadingMore';
   const onLoadMore = collection.body.props.onLoadMore;
+  /* istanbul ignore next */
   const state = useVirtualizerState({
     layout,
     collection,
@@ -47,14 +47,17 @@ const DataTableVirtualizer = forwardRef(({
     onVisibleRectChange(rect) {
       // eslint-disable-next-line no-param-reassign
       bodyRef.current.scrollTop = rect.y;
-      setScrollLeft(bodyRef.current, direction, rect.x);
+      setScrollLeft(
+        bodyRef.current,
+        direction,
+        rect.x,
+      );
     },
     transitionDuration: isLoading ? 160 : 220,
   });
 
   const { virtualizerProps } = useVirtualizer(
     {
-      focusedKey,
       scrollToItem(key) {
         const item = collection.getItem(key);
         state.virtualizer.scrollToItem(key, {
@@ -71,7 +74,7 @@ const DataTableVirtualizer = forwardRef(({
     domRef,
   );
 
-  // If column widths change, need to relay out.
+  // If column widths change, need to relay out
   useLayoutEffect(() => {
     state.virtualizer.relayoutNow({ sizeChanged: true });
   }, [state.virtualizer]);
@@ -84,22 +87,16 @@ const DataTableVirtualizer = forwardRef(({
     headerRef.current.scrollLeft = bodyRef.current.scrollLeft;
   }, [bodyRef]);
 
-  const onVisibleRectChange = useCallback(
-    rect => {
-      setTableWidth(rect.width);
-
-      state.setVisibleRect(rect);
-
-      if (!isLoading && onLoadMore) {
-        const scrollOffset = state.virtualizer.contentSize.height - (rect.height * 2);
-        if (rect.y > scrollOffset) {
-          onLoadMore();
-        }
+  const onVisibleRectChange = useCallback(rect => {
+    state.setVisibleRect(rect);
+    if (!isLoading && onLoadMore) {
+      const scrollOffset = state.virtualizer.contentSize.height - rect.height * 2;
+      if (rect.y > scrollOffset) {
+        onLoadMore();
       }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [onLoadMore, isLoading, state.setVisibleRect, state.virtualizer],
-  );
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onLoadMore, isLoading, state.setVisibleRect, state.virtualizer]);
 
   useLayoutEffect(() => {
     if (!isLoading && onLoadMore && !state.isAnimating) {
@@ -153,6 +150,7 @@ const DataTableVirtualizer = forwardRef(({
         onScrollStart={state.startScrolling}
         onScrollEnd={state.endScrolling}
         onScroll={onScroll}
+        tabIndex={0}
       >
         {state.visibleViews[1]}
       </ScrollView>
@@ -177,10 +175,6 @@ DataTableVirtualizer.propTypes = {
     getItem: PropTypes.func,
   }),
   domRef: PropTypes.shape({}),
-  focusedKey: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
   getColumnWidth: PropTypes.func,
   layout: PropTypes.shape({
     getLayoutInfo: PropTypes.func,
