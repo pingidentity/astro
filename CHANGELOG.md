@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.25.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.24.0...@pingux/astro@2.25.0) (2023-10-24)
+
+
+### Bug Fixes
+
+* [UIP-6533] Make Multivalues component searchable ([b7e6114](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b7e6114a6a9944fe3c4079f54eed995a68e914e2))
+
+
+### Features
+
+* [UIP-6285] add inner panel story for OverlayPanel ([94a14ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/94a14ae74f22caff46e1835a06510e7089056c37))
+* [UIP-6335] Astro DataTable epic merge ([7404aaf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7404aaff1a3f8bc18e6213c81b2d13aa77c162e0))
+
+
+
+
+
 # [2.24.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.23.0...@pingux/astro@2.24.0) (2023-10-19)
 
 
