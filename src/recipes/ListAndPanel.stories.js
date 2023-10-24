@@ -27,6 +27,7 @@ import {
   Tabs,
   Text,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 import { items } from './items';
 
@@ -248,6 +249,15 @@ export const ListAndPanel = () => {
     </Box>
   );
 };
+
+
+ListAndPanel.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listAndPanel.listAndPanel,
+  },
+};
+
 
 export const ListElement = ({
   data = {
