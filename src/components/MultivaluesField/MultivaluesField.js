@@ -182,7 +182,7 @@ const MultivaluesField = forwardRef((props, ref) => {
   // there actually is a test for this, but coverage is not picking it up.
   /* istanbul ignore next */
   const onBlurTextField = () => {
-    if (!hasCustomValue && filteredItems.length === 1) {
+    if (hasCustomValue && filteredItems.length === 1) {
       selectTheOnlyFilteredItem();
     } else if (hasCustomValue) {
       addNewBadgeFromInput(filterString);
@@ -200,8 +200,11 @@ const MultivaluesField = forwardRef((props, ref) => {
             selectionManager.toggleSelection(selectionManager.focusedKey);
             setFilterString('');
           }
-        } else if (!hasCustomValue && filteredItems.length === 1) {
+        } else if (hasCustomValue && filteredItems.length === 1) {
           selectTheOnlyFilteredItem();
+        } else if (!hasCustomValue) {
+          setFilterString('');
+          close();
         } else if (hasCustomValue) {
           const key = e.target.value;
           if (key === '') {
@@ -221,6 +224,11 @@ const MultivaluesField = forwardRef((props, ref) => {
         const prevKey = state.collection.getKeyBefore(selectionManager.focusedKey)
           || state.collection.getLastKey();
         if (prevKey) selectionManager.setFocusedKey(prevKey);
+        break;
+      }
+      case 'Escape': {
+        setFilterString('');
+        close();
         break;
       }
       default:
@@ -407,7 +415,6 @@ const MultivaluesField = forwardRef((props, ref) => {
       sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },
     },
     status,
-    isRestrictiveMultivalues: !hasCustomValue,
   };
 
   return (
@@ -416,10 +423,12 @@ const MultivaluesField = forwardRef((props, ref) => {
         <TextField
           onBlur={e => {
             setIsOpen(false);
-            if (mode === 'non-restrictive' && filterString !== '') onBlurTextField();
+            if (filterString !== '') onBlurTextField();
             if (onBlur) onBlur(e.nativeEvent);
+            if (!hasCustomValue) setFilterString('');
           }}
           onChange={e => {
+            if (!isOpen) setIsOpen(true);
             setFilterString(e.target.value);
             if (onInputChange) onInputChange(e.target.value);
           }}
@@ -583,7 +592,6 @@ MultivaluesField.propTypes = {
 MultivaluesField.defaultProps = {
   direction: 'bottom',
   isReadOnly: false,
-  mode: 'restrictive',
   scrollBoxProps: { maxHeight: 300 },
   ...statusDefaultProp,
 };

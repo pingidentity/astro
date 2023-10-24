@@ -127,6 +127,7 @@ export const text = {
   sectionTitle,
   subtitle,
   tabLabel,
+  tableHeader: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard' },
   tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   textEllipsis,
   title,

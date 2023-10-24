@@ -7,6 +7,12 @@ const tableCell = {
   display: 'flex',
   fontSize: '13px',
   height: '100%',
+  pr: 'lg',
+  flex: '1 1 0%',
+  overflow: 'hidden',
+  fontWeight: 0,
+  justifyContent: 'center',
+  py: 10,
   '&.is-key-focused': {
     outline: '1px',
     outlineStyle: 'solid',
@@ -26,13 +32,11 @@ const tableCell = {
 };
 
 const tableCellContents = {
-  flex: '1 1 0%',
+  maxHeight: 80,
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
-  textOverflow: 'ellipsis',
-  fontWeight: '400',
-  justifyContent: 'center',
-  maxWidth: '100%',
+  display: '-webkit-box !important',
+  '-webkit-line-clamp': '4',
+  '-webkit-box-orient': 'vertical',
 };
 
 const tableRow = {
@@ -41,14 +45,7 @@ const tableRow = {
   borderBottom: '1px',
   outline: '0',
   borderBottomStyle: 'solid !important',
-  backgroundColor: 'accent.99',
   borderBottomColor: 'neutral.80',
-  borderTop: '1px solid transparent',
-  borderLeft: '1px solid transparent',
-  borderRight: '1px solid transparent',
-  '&:hover': {
-    backgroundColor: 'white',
-  },
   '&.is-row-focus-visible': {
     border: '1px solid',
     borderColor: 'focus',
@@ -78,13 +75,13 @@ const tableCenteredWrapper = {
 };
 
 const tableHeadCell = {
-  ...text.label,
+  ...text.tableHeader,
   cursor: 'default',
-  backgroundColor: 'accent.99',
   flexDirection: 'row !important',
-  alignItems: 'flex-end',
-  fontWeight: 500,
+  alignItems: 'center',
+  fontWeight: 1,
   height: '100%',
+  pr: 'lg',
   py: '10px',
   '&.is-click-focused': {
     outline: '0',
@@ -94,11 +91,29 @@ const tableHeadCell = {
     outlineStyle: 'solid',
     outlineColor: '#D033FF !important',
     outlineOffset: '-1px',
-    backgroundColor: 'accent.99 !important',
   },
   '&.is-column-sortable': {
-    color: 'text.active',
     cursor: 'pointer',
+    borderLeft: '1px solid',
+    borderRight: '1px solid',
+    borderColor: 'transparent',
+    'svg': {
+      fill: 'text.primary',
+    },
+    '&:hover': {
+      color: 'active',
+      textDecoration: 'underline',
+      borderColor: 'neutral.80',
+      'svg': {
+        fill: 'active',
+      },
+    },
+  },
+  '&.is-column-sortable.is-first-column': {
+    borderLeft: 'none',
+  },
+  '&.is-column-sortable.is-last-column': {
+    borderRight: 'none',
   },
   '&.is-align-start': {
     justifyContent: 'flex-start',
@@ -117,7 +132,6 @@ const tableBody = {
 };
 
 const tableMenu = {
-  p: '5px',
   borderRadius: '50px',
 };
 

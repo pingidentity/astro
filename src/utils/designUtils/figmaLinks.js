@@ -113,4 +113,7 @@ export const FIGMA_LINKS = {
   trialExperienceButtons: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43369%3A445',
   },
+  listAndPanel: {
+    listAndPanel: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=15251-33924',
+  },
 };

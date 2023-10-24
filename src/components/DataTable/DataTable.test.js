@@ -1,6 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 import React from 'react';
 import { useAsyncList } from 'react-stately';
+import { useCollator } from '@react-aria/i18n';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { act as actHooks, renderHook } from '@testing-library/react-hooks';
 
@@ -320,7 +321,7 @@ describe('Async DataTable', () => {
       jest.runAllTimers();
     });
 
-    expect(onLoadMore).toHaveBeenCalledTimes(2);
+    expect(onLoadMore).toHaveBeenCalledTimes(6);
   });
 
   test('renders a spinner at the bottom when loading more', () => {
@@ -708,6 +709,9 @@ describe('Sortable DataTable with useAsyncList', () => {
   );
 
   test('click on column header should sort column A => Z', async () => {
+    const utils = renderHook(() => useCollator({ numeric: true }));
+    const collator = utils.result.current;
+
     const { result } = renderHook(() => useAsyncList({
       async load() {
         return {
@@ -720,9 +724,7 @@ describe('Sortable DataTable with useAsyncList', () => {
             const first = a[sortDescriptor.column];
             const second = b[sortDescriptor.column];
             // eslint-disable-next-line radix
-            let cmp = (parseInt(first) || first) < (parseInt(second) || second)
-              ? -1
-              : 1;
+            let cmp = collator.compare(first, second);
             if (sortDescriptor.direction === 'descending') {
               cmp *= -1;
             }
