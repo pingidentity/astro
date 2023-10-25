@@ -93,6 +93,7 @@ export const Default = () => {
         onOpenChange={setIsOpen}
         wrapperProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
         controlProps={{ 'aria-label': 'Country Picker' }}
+        scrollBoxProps={{ maxHeight: '215px' }}
         defaultItems={Object.entries(countriesObj)}
         inputValue={getInputValue()}
         onInputChange={inputHandler}
