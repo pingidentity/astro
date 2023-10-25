@@ -139,3 +139,19 @@ export const BadgeWithLeftSlotAndIcon = () => (
     </IconButton>
   </Badge>
 );
+
+export const StatusBadgeVariants = ({ ...args }) => (
+  <Box>
+    <Badge variant="criticalStatusBadge" {...args} label="Critical" mb="lg" />
+    <Badge variant="warningStatusBadge" {...args} label="Warning" mb="lg" />
+    <Badge variant="healthyStatusBadge" {...args} label="Healthy" mb="lg" />
+    <Badge variant="activeStatusBadge" {...args} label="Active" />
+  </Box>
+);
+
+StatusBadgeVariants.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.badge.statusVariants,
+  },
+};

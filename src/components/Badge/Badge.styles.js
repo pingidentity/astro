@@ -141,6 +141,77 @@ const countNeutral = {
   },
 };
 
+const convenienceDefault = {
+  ...baseBadge,
+  backgroundColor: '#4462ED !important',
+  '& span': {
+    fontWeight: 1,
+  },
+};
+
+const calloutBadge = {
+  ...baseBadge,
+  height: '21px',
+  backgroundColor: '#FFF !important',
+  border: 'solid 1px',
+  '& span': {
+    color: 'text.primary',
+  },
+};
+
+const errorCalloutBadge = {
+  ...calloutBadge,
+  borderColor: 'critical.bright',
+};
+
+const warningCalloutBadge = {
+  ...calloutBadge,
+  borderColor: '#E86900',
+};
+
+const successCalloutBadge = {
+  ...calloutBadge,
+  borderColor: 'success.bright',
+};
+
+const infoCalloutBadge = {
+  ...calloutBadge,
+  borderColor: 'text.secondary',
+};
+
+const statusBadge = {
+  ...baseBadge,
+  border: 'solid 1px',
+  height: '21px',
+  '& span': {
+    color: 'text.primary',
+  },
+};
+
+const criticalStatusBadge = {
+  ...statusBadge,
+  borderColor: 'critical.bright',
+  backgroundColor: '#FFEBE7 !important',
+};
+
+const warningStatusBadge = {
+  ...statusBadge,
+  borderColor: '#E86900',
+  backgroundColor: '#FFF6F2 !important',
+};
+
+const healthyStatusBadge = {
+  ...statusBadge,
+  borderColor: 'success.bright',
+  backgroundColor: '#E5FFE9 !important',
+};
+
+const activeStatusBadge = {
+  ...statusBadge,
+  borderColor: 'active',
+  backgroundColor: '#F7F8FD !important',
+};
+
 export default {
   baseBadge,
   environmentBadge,
@@ -152,4 +223,13 @@ export default {
   countBadge,
   countNeutral,
   badgeDeleteButton,
+  convenienceDefault,
+  errorCalloutBadge,
+  warningCalloutBadge,
+  successCalloutBadge,
+  infoCalloutBadge,
+  criticalStatusBadge,
+  warningStatusBadge,
+  healthyStatusBadge,
+  activeStatusBadge,
 };
