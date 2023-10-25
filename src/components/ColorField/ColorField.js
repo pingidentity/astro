@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from 'react';
 import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
-import { ChromePicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
@@ -127,7 +127,7 @@ const ColorField = forwardRef((props, ref) => {
         {...positionProps}
       >
         <FocusScope restoreFocus contain autoFocus>
-          <ChromePicker
+          <SketchPicker
             color={getRgbaFromState(state)}
             onChange={handleColorChange}
           />
