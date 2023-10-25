@@ -19,6 +19,7 @@ const AccordionGroup = forwardRef((props, ref) => {
   const {
     defaultExpandedKeys,
     expandedKeys,
+    labelHeadingTag,
     onExpandedChange,
     ...others
   } = props;
@@ -46,7 +47,12 @@ const AccordionGroup = forwardRef((props, ref) => {
         {...mergeProps(theseProps, others)}
       >
         {Array.from(state.collection).map(item => (
-          <AccordionItem key={item.key} item={item} data-id={item['data-id']}>
+          <AccordionItem
+            data-id={item['data-id']}
+            item={item}
+            key={item.key}
+            labelHeadingTag={labelHeadingTag}
+          >
             {item.props.children}
           </AccordionItem>
         ))}
@@ -71,7 +77,10 @@ AccordionGroup.propTypes = {
   defaultExpandedKeys: isIterableProp,
   /** Id of the selected element */
   id: PropTypes.string,
+  /** HTML header element wrapping the label */
+  labelHeadingTag: AccordionItem.propTypes.labelHeadingTag,
 };
 
 AccordionGroup.displayName = 'AccordionGroup';
+
 export default AccordionGroup;

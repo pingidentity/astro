@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { Box, Button, Menu, OverlayPanel, PopoverMenu, TextField } from '../../index';
 import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { validHeadingTags } from '../AccordionItem/AccordionItem';
 import Text from '../Text';
 
 import AccordionGroup from '.';
@@ -313,4 +314,42 @@ test('accordion works if there are multiple, controlled on the same implementati
   expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'true');
   userEvent.click(secondSelectedItem);
   expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'false');
+});
+
+// get the last char of heading tag and convert to number, 'h1' => 1
+const getLabelHeadingLevel = labelHeading => Number(labelHeading.slice(-1));
+
+test('when labelHeadingTag is h1, the label is rendered as an h1 tag', () => {
+  const h1Tag = validHeadingTags[0];
+  getComponent({ labelHeadingTag: h1Tag });
+
+  screen.getAllByRole('heading', { level: getLabelHeadingLevel(h1Tag) });
+});
+
+test('when labelHeadingTag is h2, the label is rendered as an h2 tag', () => {
+  const h2Tag = validHeadingTags[1];
+  getComponent({ labelHeadingTag: h2Tag });
+
+  screen.getAllByRole('heading', { level: getLabelHeadingLevel(h2Tag) });
+});
+
+test('when labelHeadingTag is h3, the label is rendered as an h3 tag', () => {
+  const h3Tag = validHeadingTags[2];
+  getComponent({ labelHeadingTag: h3Tag });
+
+  screen.getAllByRole('heading', { level: getLabelHeadingLevel(h3Tag) });
+});
+
+test('when labelHeadingTag is h4, the label is rendered as an h4 tag', () => {
+  const h4Tag = validHeadingTags[3];
+  getComponent({ labelHeadingTag: h4Tag });
+
+  screen.getAllByRole('heading', { level: getLabelHeadingLevel(h4Tag) });
+});
+
+test('when labelHeadingTag is uppercase, the label is rendered', () => {
+  const h4Tag = validHeadingTags[3].toUpperCase();
+  getComponent({ labelHeadingTag: h4Tag });
+
+  screen.getAllByRole('heading', { level: getLabelHeadingLevel(h4Tag) });
 });
