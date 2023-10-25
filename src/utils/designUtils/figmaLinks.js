@@ -10,6 +10,9 @@ export const FIGMA_LINKS = {
   badge: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=1899-11550&t=VgqEexa1CXAXfPpp-0',
     countBadge: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=4255%3A12558&t=3b86het2R9G2Zyo2-1',
+    statusVariants: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43214%3A600&mode=design&t=1lk7azcFoekl7S8N-1',
+    convenienceDefault: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43601%3A18124&mode=dev',
+    calloutBadges: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=12854-33198&mode=design&t=cJyYBxLFH8D5XxOw-0',
   },
   breadcrumbs: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=1162-11924&t=8Wwd3tIBh3GEjCJB-0',
