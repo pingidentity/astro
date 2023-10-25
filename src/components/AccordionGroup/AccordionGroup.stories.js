@@ -10,6 +10,7 @@ import {
   TextField,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { validHeadingTags } from '../AccordionItem/AccordionItem';
 
 import AccordionReadme from './AccordionGroup.mdx';
 
@@ -65,12 +66,16 @@ export default {
         type: 'none',
       },
     },
+    labelHeadingTag: {
+      control: 'radio',
+      options: validHeadingTags,
+    },
   },
 };
 
 export const Default = args => {
   return (
-    <AccordionGroup {...args}>
+    <AccordionGroup labelHeadingTag="h3" {...args}>
       <Item key="accordionKey" textValue="accordionKey" label="Accordion Label" data-id="accordionItem">
         <Text>Render me!</Text>
       </Item>
@@ -85,6 +90,30 @@ Default.parameters = {
   },
 };
 
+export const DifferentLevels = () => {
+  return (
+    <>
+      <AccordionGroup labelHeadingTag="h3">
+        <Item key="accordionLabelH3Key" textValue="accordionLabelH3Key" label="Accordion Label H3" data-id="accordionItem">
+          <Text>Render me!</Text>
+        </Item>
+      </AccordionGroup>
+      <AccordionGroup labelHeadingTag="h2">
+        <Item key="accordionLabelH2Key" textValue="accordionLabelH2Key" label="Accordion Label H2" data-id="accordionItem">
+          <Text>Render me!</Text>
+        </Item>
+      </AccordionGroup>
+    </>
+  );
+};
+
+DifferentLevels.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.accordionGroup.differentLevels,
+  },
+};
+
 export const Multiple = () => {
   return (
     /*
@@ -94,7 +123,7 @@ export const Multiple = () => {
      *   { key: 't3', label: 'Third Accordion', children: 'Child Renders Here' },
      * ];
      */
-    <AccordionGroup items={itemArray}>
+    <AccordionGroup items={itemArray} labelHeadingTag="h3">
       {item => (
         <Item key={item.key} textValue={item.label} label={item.label}>
           {item.children}
@@ -122,6 +151,7 @@ export const ControlledExpanded = () => {
       onExpandedChange={setExpandedKeys}
       expandedKeys={expandedKeys}
       items={itemArray}
+      labelHeadingTag="h3"
     >
       {item => (
         <Item key={item.key} textValue={item.label} label={item.label}>
@@ -141,7 +171,7 @@ export const UncontrolledExpanded = () => {
      *   { key: 't3', label: 'Third Accordion', children: 'Child Renders Here' },
      * ];
      */
-    <AccordionGroup defaultExpandedKeys={['t1']} items={itemArray}>
+    <AccordionGroup defaultExpandedKeys={['t1']} items={itemArray} labelHeadingTag="h3">
       {item => (
         <Item key={item.key} textValue={item.label} label={item.label}>
           {item.children}
@@ -160,7 +190,7 @@ export const DisabledItems = () => {
         { key: 't3', label: 'Disabled Accordion', children: 'Child Renders Here' },
       ];
      */
-    <AccordionGroup disabledKeys={['t1', 't3']} items={itemArrayDisabled}>
+    <AccordionGroup disabledKeys={['t1', 't3']} items={itemArrayDisabled} labelHeadingTag="h3">
       {item => (
         <Item key={item.key} textValue={item.label} label={item.label}>
           {item.children}
@@ -179,7 +209,7 @@ export const CustomPresentation = () => {
         { key: 't3', label: 'Disabled Accordion', children: 'Child Renders Here' },
       ];
      */
-    <AccordionGroup items={itemArrayDisabled}>
+    <AccordionGroup items={itemArrayDisabled} labelHeadingTag="h3">
       {item => (
         <Item
           key={item.key}

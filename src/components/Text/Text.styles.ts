@@ -100,6 +100,26 @@ const listViewItemSubtext = {
   mt: '1px',
 };
 
+const hTags = {
+  h1: { ...title, fontWeight: 3 },
+  h2: { ...sectionTitle, fontWeight: 3 },
+  h3: { ...itemTitle, fontWeight: 3 },
+  h4: {
+    ...wordWrap,
+    fontSize: 'sm',
+    fontWeight: 3,
+    color: 'text.primary',
+    fontFamily: 'standard',
+  },
+};
+
+const HTags = {
+  H1: { ...hTags.h1, lineHeight: '28px' },
+  H2: { ...hTags.h2, lineHeight: '21px' },
+  H3: { ...hTags.h3, lineHeight: '18px' },
+  H4: { ...hTags.h4, lineHeight: '16px' },
+};
+
 export const text = {
   base,
   bodyStrong,
@@ -109,10 +129,8 @@ export const text = {
   buttonSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard', lineHeight: '16px' },
   capsLabel: { ...wordWrap, color: 'text.secondary', textTransform: 'uppercase', fontFamily: 'standard' },
   environmentBreadcrumb,
-  H1: { ...title, fontWeight: 3, lineHeight: '28px' },
-  H2: { ...sectionTitle, fontWeight: 3, lineHeight: '21px' },
-  H3: { ...itemTitle, fontWeight: 3, lineHeight: '18px' },
-  H4: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard', lineHeight: '16px' },
+  ...hTags,
+  ...HTags,
   inputValue: { fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   itemTitle,
   itemSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', fontFamily: 'standard' },

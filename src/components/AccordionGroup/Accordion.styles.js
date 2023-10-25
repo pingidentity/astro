@@ -30,6 +30,13 @@ const body = {
   },
 };
 
+export const hoveredState = {
+  '&.is-hovered': {
+    color: 'active',
+  },
+
+};
+
 const header = {
   ...base,
   display: 'inline-flex',
@@ -38,15 +45,13 @@ const header = {
   padding: '0 5px',
   flexGrow: 0,
   fontWeight: 700,
-  '&.is-hovered': {
-    color: 'active',
-  },
   '&.is-pressed': {
     color: 'accent.20',
   },
   '&.is-focused': {
     ...defaultFocus,
   },
+  ...hoveredState,
 };
 
 export default {
