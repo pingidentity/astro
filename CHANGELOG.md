@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.25.0...@pingux/astro@2.26.0) (2023-10-26)
+
+
+### Bug Fixes
+
+* [UIP-6511] Replace ChromePicker with SketchPicker ([b515435](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b515435f2702e4c2327a82cea825c50b8e07aa18))
+* [UIP-6515] Add Helper Text Warning/Success PasswordField ([48d69b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/48d69b7d1e1abb458108e3568290f01642eb63e8))
+
+
+### Features
+
+* [UIP-6556] add special Badge types ([8717759](https://gitlab.corp.pingidentity.com/ux/pingux/commit/87177593ab5058ab49f1a859d31a0b815e93d3a9))
+* [UIP-6583]: AccordionGroup: add header tag to label ([35b362c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/35b362c5000c0a77793b2d494edb53d72f401fcd))
+
+
+
+
+
 # [2.25.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.24.0...@pingux/astro@2.25.0) (2023-10-24)
 
 
