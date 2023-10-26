@@ -11,9 +11,12 @@ import { Button as ThemeUIButton } from 'theme-ui';
 import { AccordionContext } from '../../context/AccordionContext';
 import { useStatusClasses } from '../../hooks';
 import { Box, Icon, Text } from '../../index';
+import { hoveredState } from '../AccordionGroup/Accordion.styles';
+
+export const validHeadingTags = ['h1', 'h2', 'h3', 'h4'];
 
 const AccordionItem = forwardRef((props, ref) => {
-  const { className, item } = props;
+  const { className, item, labelHeadingTag } = props;
   const {
     label,
     children,
@@ -54,6 +57,12 @@ const AccordionItem = forwardRef((props, ref) => {
 
   const ariaLabel = props['aria-label'] || item.props.label;
 
+  const isValidHeadingTag = validHeadingTags.includes(labelHeadingTag?.toLowerCase());
+
+  const validLabelHeadingTag = isValidHeadingTag
+    ? labelHeadingTag?.toLowerCase()
+    : 'span';
+
   return (
     <Box variant="accordion.accordion" className={itemClasses} {...others} {...containerProps}>
       <ThemeUIButton
@@ -64,7 +73,12 @@ const AccordionItem = forwardRef((props, ref) => {
         className={buttonClasses}
         {...mergeProps(hoverProps, accordionButtonProps, raButtonProps, buttonProps, focusProps)}
       >
-        <Text className={buttonClasses} variant="accordion.title">
+        <Text
+          as={validLabelHeadingTag}
+          className={buttonClasses}
+          variant={validLabelHeadingTag}
+          sx={hoveredState}
+        >
           {item.props.label}
         </Text>
         <Box as="span" ml="5px">
@@ -83,6 +97,10 @@ const AccordionItem = forwardRef((props, ref) => {
 
 AccordionItem.propTypes = {
   'aria-label': PropTypes.string,
+  labelHeadingTag: PropTypes.oneOf([
+    ...validHeadingTags,
+    ...validHeadingTags.map(heading => heading.toUpperCase()),
+  ]),
   item: PropTypes.shape({
     key: PropTypes.string,
     rendered: PropTypes.node,

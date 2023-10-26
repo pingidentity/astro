@@ -247,6 +247,7 @@ export const Warning = () => {
       isVisible={isVisible}
       label="Example Label"
       status="warning"
+      helperText="This might match a password you’ve used before."
     />
   );
 };
@@ -263,6 +264,7 @@ export const Success = () => {
       isVisible={isVisible}
       label="Example Label"
       status="success"
+      helperText="This password meets requirements."
     />
   );
 };
