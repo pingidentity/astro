@@ -25,6 +25,16 @@ export const baseBadge = {
   },
 };
 
+const defaultBadge = {
+  ...baseBadge,
+  backgroundColor: 'white !important',
+  border: 'solid 1px',
+  borderColor: 'neutral.80',
+  '& span': {
+    color: 'text.primary',
+  },
+};
+
 const multivaluesBadge = {
   ...baseBadge,
   alignSelf: 'center',
@@ -213,23 +223,24 @@ const activeStatusBadge = {
 };
 
 export default {
+  activeStatusBadge,
+  badgeDeleteButton,
   baseBadge,
+  convenienceDefault,
+  countBadge,
+  countNeutral,
+  criticalStatusBadge,
+  defaultBadge,
+  deleteButton,
   environmentBadge,
+  errorCalloutBadge,
+  healthyStatusBadge,
+  infoCalloutBadge,
   itemBadgeWithSlot,
   multivaluesBadge,
   readOnlyBadge,
   selectedItemBadge,
-  deleteButton,
-  countBadge,
-  countNeutral,
-  badgeDeleteButton,
-  convenienceDefault,
-  errorCalloutBadge,
-  warningCalloutBadge,
   successCalloutBadge,
-  infoCalloutBadge,
-  criticalStatusBadge,
+  warningCalloutBadge,
   warningStatusBadge,
-  healthyStatusBadge,
-  activeStatusBadge,
 };
