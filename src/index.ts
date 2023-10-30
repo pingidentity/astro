@@ -69,7 +69,6 @@ export { default as HelpHint } from './components/HelpHint';
 export * from './components/HelpHint';
 export { default as Icon } from './components/Icon';
 export * from './components/Icon';
-export { NoticeIcon } from './components/Icon/NoticeIcon';
 export { default as IconBadge } from './components/IconBadge';
 export * from './components/IconBadge';
 export { default as IconButton } from './components/IconButton';
@@ -193,5 +192,3 @@ export {
   TableHeader as DataTableHeader,
   Row as DataTableRow,
 } from 'react-stately';
-
-// Experimental
