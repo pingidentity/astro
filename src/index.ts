@@ -192,5 +192,3 @@ export {
   TableHeader as DataTableHeader,
   Row as DataTableRow,
 } from 'react-stately';
-
-// Experimental

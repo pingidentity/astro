@@ -3,7 +3,7 @@
   "draftPR": true,
   "labels": ["astro"],
   "lockFileMaintenance": {
-    "enable": true
+    "enabled": true
   },
   "packageRules": [
     {

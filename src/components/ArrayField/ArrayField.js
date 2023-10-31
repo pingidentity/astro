@@ -101,7 +101,7 @@ const ArrayField = props => {
   const isDisabled = (value || fieldValues).length === 1;
 
   const renderedItem = useCallback(
-    (id, fieldValue, otherFieldProps, onComponentRender) => {
+    (id, fieldValue, otherFieldProps, onComponentRender, labelId) => {
       if (onComponentRender) {
         return onComponentRender(
           id,
@@ -109,6 +109,7 @@ const ArrayField = props => {
           onFieldValueChange,
           onFieldDelete,
           isDisabled,
+          labelId,
           otherFieldProps,
         );
       }
@@ -132,7 +133,7 @@ const ArrayField = props => {
           ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
             return (
               <Box as="li" mb="xs" key={id}>
-                {renderedItem(id, fieldValue, otherFieldProps, onComponentRender)}
+                {renderedItem(id, fieldValue, otherFieldProps, onComponentRender, raLabelProps?.id)}
               </Box>
             );
           })}
