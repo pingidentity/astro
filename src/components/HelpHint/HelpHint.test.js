@@ -60,12 +60,13 @@ test('keeps the popover open if the popover is hovered', async () => {
   }, { timeout: 2000 });
 });
 
-test('popover without focusable children should open onPress and disappear in 1000ms', async () => {
+test('popover without focusable children should open onPress and disappear in 1000ms after blur', async () => {
   getComponent();
   const helpHintButton = screen.getByTestId(testId);
   userEvent.tab();
   expect(helpHintButton).toHaveFocus();
   userEvent.type(helpHintButton, '{enter}', { skipClick: true });
+  userEvent.tab();
 
   await waitFor(() => {
     expect(screen.queryByRole('presentation')).toBeInTheDocument();

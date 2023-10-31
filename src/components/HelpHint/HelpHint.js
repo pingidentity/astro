@@ -43,8 +43,8 @@ const HelpHint = forwardRef((props, ref) => {
 
   const { focusProps, isFocusVisible } = useFocusRing();
 
-  const { hoverProps, isHovered } = useHover({});
   const { hoverProps: overlayHoverProps, isHovered: isOverlayHovered } = useHover({});
+  const { hoverProps, isHovered: isTriggerHovered } = useHover({});
 
   const popoverState = useOverlayTriggerState({});
   const { open, close, isOpen } = popoverState;
@@ -62,16 +62,18 @@ const HelpHint = forwardRef((props, ref) => {
   // but keep it open if the trigger or overlay are hovered again before it closes.
   useEffect(() => {
     let timeout;
-    if (isHovered || isOverlayHovered || isFocusWithinOverlay) {
+    const isHovered = isTriggerHovered || isOverlayHovered;
+
+    if (isHovered || isFocusWithinOverlay) {
       open();
-    } else {
+    } else if (!isFocusWithinOverlay && !isFocusVisible && !isHovered) {
       timeout = setTimeout(close, closeDelay || 1000);
     }
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [isHovered, isOverlayHovered, isFocusWithinOverlay, open, close, closeDelay]);
+  }, [isFocusWithinOverlay, isFocusVisible, isOverlayHovered, isTriggerHovered]);
 
   useEffect(() => {
     if (isOpen) {
@@ -141,7 +143,7 @@ const HelpHint = forwardRef((props, ref) => {
       >
         {/* Only autofocus if keyboard is being used */}
         <FocusScope restoreFocus autoFocus={isFocusVisible}>
-          <Box variant="helpHint.popoverContainer">
+          <Box variant="helpHint.popoverContainer" role="status">
             { isSafari ? addIsSafariCompatiblePropToLinkChildren(children) : children }
           </Box>
         </FocusScope>
