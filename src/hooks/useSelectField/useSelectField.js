@@ -36,6 +36,7 @@ const useSelectField = (props, ref) => {
     onSelectionChange,
     controlProps,
     scrollBoxProps,
+    listBoxProps,
   } = props;
   // We use falsy booleans as defaults, but React Aria has this as true by default so we need to
   // negate this.
@@ -176,6 +177,7 @@ const useSelectField = (props, ref) => {
         isLoading={isLoadingMore}
         onLoadMore={onLoadMore}
         {...menuProps}
+        {...listBoxProps}
       />
       <DismissButton onDismiss={() => state.close()} />
     </FocusScope>

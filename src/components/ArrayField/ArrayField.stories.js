@@ -77,7 +77,6 @@ const defaultData = [
   },
 ];
 
-
 export const Uncontrolled = ({ ...args }) => {
   return (
     <ArrayField
@@ -110,7 +109,7 @@ export const Uncontrolled = ({ ...args }) => {
   );
 };
 
-export const Controlled = () => {
+export const Controlled = ({ ...args }) => {
   const defaultDataSelectField = [
     {
       id: uuid(),
@@ -125,6 +124,7 @@ export const Controlled = () => {
               slots={{ inContainer:
   <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
               {...otherFieldProps}
+              listBoxProps={{ 'aria-labelledby': otherFieldProps }}
             >
               <Item key="red">Red</Item>
               <Item key="blue">Blue</Item>
@@ -146,6 +146,7 @@ export const Controlled = () => {
               slots={{ inContainer:
   <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
               {...otherFieldProps}
+              listBoxProps={{ 'aria-labelledby': otherFieldProps }}
             >
               <Item key="orange">Orange</Item>
               <Item key="purple">Purple</Item>
@@ -169,6 +170,7 @@ export const Controlled = () => {
             slots={{ inContainer:
   <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
             {...otherFieldProps}
+            listBoxProps={{ 'aria-labelledby': otherFieldProps }}
           >
             <Item key="blue">Blue</Item>
             <Item key="teal">Teal</Item>
@@ -201,6 +203,7 @@ export const Controlled = () => {
       onChange={handleOnChange}
       onDelete={handleOnDelete}
       sx={{ width: '400px' }}
+      label={args.label}
     />
   );
 };
