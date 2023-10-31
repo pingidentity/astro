@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.26.0...@pingux/astro@2.27.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* [UIIP-6564] HelpHint Tooltip Screenreader ([8fdb643](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8fdb6433dd8c3192ee7b3f9eecd24372a457b09e))
+* [UIP-6512] Add label to controlled ArrayField ([6e2527d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6e2527d3abfe82cdb7ad0f4da7b432001545d8ea))
+* fix renovate json typo ([b30d006](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b30d0066b86d2285820325335b75bffced89e511))
+
+
+### Features
+
+* [UIP-6363]: add panel content recipe ([7bbad44](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7bbad443a9f63ae4455d133b778aa350958028a0))
+
+
+### Reverts
+
+* [UIP-6363]: add panel content recipe ([4792c7b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4792c7b8fccef7ecd17bb7ea86d1915ffba4cc40))
+
+
+
+
+
 # [2.26.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.25.0...@pingux/astro@2.26.0) (2023-10-26)
 
 
