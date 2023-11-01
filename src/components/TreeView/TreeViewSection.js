@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useOption } from '@react-aria/listbox';
 import PropTypes from 'prop-types';
 
 import { useTreeViewContext } from '../../context/TreeViewContext';
@@ -17,15 +18,21 @@ const TreeViewSection = forwardRef((props, ref) => {
     title,
   } = props;
 
+  const { key } = item;
+
   const treeSectionRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => treeSectionRef.current);
 
-  const { state, tree } = useTreeViewContext();
+  const { state } = useTreeViewContext();
 
-  const isExpanded = Array.from(state.expandedKeys).includes(item.key);
-  const isSelected = Array.from(tree.selectedKeys).includes(item.key);
-  const isDisabled = Array.from(state.disabledKeys).includes(item.key);
+  const { optionProps, isDisabled, isSelected } = useOption(
+    { key },
+    state,
+    treeSectionRef,
+  );
+
+  const isExpanded = state.expandedKeys.has(key);
 
   return (
     <Box
@@ -36,10 +43,11 @@ const TreeViewSection = forwardRef((props, ref) => {
           pb: 'sm',
         },
       }}
-      role="treeitem"
       aria-expanded={isExpanded}
-      aria-selected={isSelected}
       aria-disabled={isDisabled}
+      {...optionProps}
+      role="treeitem"
+      aria-selected={isSelected}
     >
       <TreeViewRow
         item={item}
