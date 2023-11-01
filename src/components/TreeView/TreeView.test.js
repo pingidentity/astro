@@ -1,32 +1,55 @@
 import React from 'react';
 import { useTreeData } from 'react-stately';
 
-import { Item, Section } from '../../index';
+import { Item } from '../../index';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 import { SectionOrItemRender } from './TreeView';
 import TreeView from '.';
 
 const testId = 'test-TreeView';
-const defaultProps = { 'data-testid': testId };
+const defaultProps = { 'data-testid': testId, label: 'example tree' };
 
 const data = [
   {
-    title: 'People',
-    items: [{ title: 'David', customProp: 1 }, { title: 'Sam' }, { title: 'Jane' }],
-  },
-  {
-    title: 'Animals',
+    title: 'Policies',
     items: [
       {
-        title: 'Bears',
-        items: [{ title: 'Black Bear' }, { title: 'Brown Bear' }],
+        title: 'Registration',
+        items: [
+          {
+            title: 'Registration A',
+          },
+          {
+            title: 'Registration B',
+          },
+          {
+            title: 'Registration C',
+          },
+          {
+            title: 'Registration D',
+          },
+        ],
       },
-      { title: 'Kangaroo' }, { title: 'Snake' },
+      {
+        title: 'Authentication',
+        items: [
+          {
+            title: 'Authentication A',
+          },
+          {
+            title: 'Authentication B',
+          },
+        ],
+      },
     ],
   },
   {
-    title: 'Plant',
+    title: 'Other',
+    items: [{ title: 'Other A' }],
+  },
+  {
+    title: 'Single Item',
   },
 ];
 
@@ -38,34 +61,54 @@ const TreeViewComponent = props => {
   });
 
   return (
-    <TreeView {...defaultProps} {...props} items={tree.items} tree={tree}>
-      {section => (
-        SectionOrItemRender(
-          section.children?.length > 0,
-          <Section
-            key={section.key}
-            items={section.children}
-            title={section.key}
-            customProp={{ testp: 1 }}
-          />,
-          <Item
-            key={section.key}
-            title={section.key}
-          />,
-        )
+    <TreeView {...defaultProps} {...props} items={tree.items} tree={tree} aria-label="Example Tree">
+      {item => (
+        <Item
+          key={item.key}
+          items={item.children}
+          title={item.key}
+        />
       )}
     </TreeView>
   );
 };
 
+let offsetWidth;
+let offsetHeight;
+let scrollHeight;
+const onSelectionChange = jest.fn();
+
+beforeAll(() => {
+  offsetWidth = jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
+  offsetHeight = jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
+  scrollHeight = jest.spyOn(window.HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => 48);
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  onSelectionChange.mockClear();
+});
+
+afterAll(() => {
+  offsetWidth.mockReset();
+  offsetHeight.mockReset();
+  scrollHeight.mockReset();
+});
+
+test('TreeView component does load', () => {
+  render(<TreeViewComponent />);
+  const element = screen.queryByRole('treegrid');
+  expect(element).toBeInTheDocument();
+});
+
 test('Can select an Item using the mouse', () => {
   render(<TreeViewComponent />);
-  const element = screen.getByTestId(testId);
+  const element = screen.queryByRole('treegrid');
   expect(element).toBeInTheDocument();
 
-  const peopleElement = screen.getByText('People');
+  const peopleElement = screen.queryByText('Single Item');
   expect(peopleElement).not.toHaveClass('is-selected');
-
   fireEvent.click(peopleElement);
   expect(peopleElement).toHaveClass('is-selected');
 });
@@ -73,10 +116,10 @@ test('Can select an Item using the mouse', () => {
 test('Renders both Sections and Items', () => {
   render(<TreeViewComponent />);
 
-  const peopleElement = screen.getByText('People');
+  const peopleElement = screen.getByText('Single Item');
   expect(peopleElement).toBeInTheDocument();
 
-  const plantElement = screen.getByText('Plant');
+  const plantElement = screen.getByText('Other');
   expect(plantElement).toBeInTheDocument();
 
   const allListItems = screen.getAllByRole('treeitem');
@@ -109,16 +152,50 @@ test('onExpandedChange change prop calls when used', () => {
 });
 
 test('disabledKeys prop disables items in the tree -- rendering them unclickable', () => {
-  render(<TreeViewComponent disabledKeys={['Plant']} />);
+  render(<TreeViewComponent disabledKeys={['Single Item']} />);
 
-  const listItems = screen.getAllByRole('treeitem');
+  const listItems = screen.queryAllByRole('treeitem');
   const thisItem = listItems[2];
 
   expect(thisItem).not.toHaveClass('is-selected');
   expect(thisItem).toHaveAttribute('aria-disabled', 'true');
 
+
   fireEvent.mouseDown(thisItem);
   fireEvent.mouseUp(thisItem);
+
   expect(thisItem).not.toHaveClass('is-selected');
   expect(thisItem).toHaveAttribute('aria-selected', 'false');
+});
+
+const firstJSX = (
+  <p>first</p>
+);
+
+const secondJSX = (
+  <p>second</p>
+);
+
+test('Section or Item Render renders first item if condition is true', () => {
+  render(
+    <div>
+      {SectionOrItemRender(true, firstJSX, secondJSX)}
+    </div>,
+  );
+
+  const thisItem = screen.getByText('first');
+  expect(thisItem).toBeInTheDocument();
+  expect(screen.queryByText('second')).not.toBeInTheDocument();
+});
+
+test('Section or Item Render renders second item if condition is false', () => {
+  render(
+    <div>
+      {SectionOrItemRender(false, firstJSX, secondJSX)}
+    </div>,
+  );
+
+  const thisItem = screen.getByText('second');
+  expect(thisItem).toBeInTheDocument();
+  expect(screen.queryByText('first')).not.toBeInTheDocument();
 });

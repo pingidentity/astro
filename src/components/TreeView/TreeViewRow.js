@@ -9,8 +9,12 @@ import PropTypes from 'prop-types';
 
 import { useTreeViewContext } from '../../context/TreeViewContext';
 import { useStatusClasses } from '../../hooks';
-import { Box, Icon,
-  IconButtonToggle, Text } from '../../index';
+import {
+  Box,
+  Icon,
+  IconButtonToggle,
+  Text,
+} from '../../index';
 
 const TreeViewRow = forwardRef((props, ref) => {
   const {

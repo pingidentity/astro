@@ -1,9 +1,8 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Item, Section, TreeView, useTreeData } from '../../index';
+import { Item, TreeView, useTreeData } from '../../index';
 
-import { SectionOrItemRender } from './TreeView';
 import TreeViewReadMe from './TreeView.mdx';
 
 export default {
@@ -79,17 +78,13 @@ export const Default = args => {
   });
 
   return (
-    <TreeView {...args} items={tree.items} tree={tree}>
+    <TreeView {...args} items={tree.items} tree={tree} aria-label="Example Tree" disabledKeys={['Single Item']}>
       {section => (
-        SectionOrItemRender(
-          section.children.length > 0,
-          <Section
-            key={section.key}
-            items={section.children}
-            title={section.value.title}
-          />,
-          <Item key={section.key} title={section.title} />,
-        )
+        <Item
+          key={section.key}
+          items={section.children}
+          title={section.value?.title}
+        />
       )}
     </TreeView>
   );
