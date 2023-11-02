@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
 
 import {
@@ -9,6 +9,7 @@ import {
   Separator,
   Text,
 } from '../index';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Trial Experience Nav',
@@ -39,10 +40,19 @@ const EarthCircleIcon = () => {
 
 const RadioButtonIcon = props => {
   return (
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.5 17.5" aria-labelledby="radio-button-icon-title" {...props}>
+    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="radio-button-icon-title" {...props}>
       <title id="radio-button-icon-title">Radio Button Icon</title>
-      <path className="cls-1" fill="#B3BEE8" d="M9,18.25A8.75,8.75,0,1,1,17.75,9.5,8.76,8.76,0,0,1,9,18.25ZM9,1.75A7.75,7.75,0,1,0,16.75,9.5,7.76,7.76,0,0,0,9,1.75Z" transform="translate(-0.25 -0.75)" />
-      <circle className="cls-2" cx="8.75" cy="8.75" r="8.05" fill="white" />
+      <path d="M11 18.3333C9.05508 18.3333 7.18982 17.5607 5.81455 16.1854C4.43928 14.8102 3.66667 12.9449 3.66667 11C3.66667 9.05507 4.43928 7.18981 5.81455 5.81455C7.18982 4.43928 9.05508 3.66666 11 3.66666C12.9449 3.66666 14.8102 4.43928 16.1854 5.81455C17.5607 7.18981 18.3333 9.05507 18.3333 11C18.3333 12.9449 17.5607 14.8102 16.1854 16.1854C14.8102 17.5607 12.9449 18.3333 11 18.3333ZM11 1.83333C9.79621 1.83333 8.60422 2.07043 7.49207 2.5311C6.37992 2.99177 5.36939 3.66698 4.51819 4.51818C2.7991 6.23727 1.83333 8.56884 1.83333 11C1.83333 13.4311 2.7991 15.7627 4.51819 17.4818C5.36939 18.333 6.37992 19.0082 7.49207 19.4689C8.60422 19.9296 9.79621 20.1667 11 20.1667C13.4311 20.1667 15.7627 19.2009 17.4818 17.4818C19.2009 15.7627 20.1667 13.4311 20.1667 11C20.1667 9.79621 19.9296 8.60421 19.4689 7.49206C19.0082 6.37991 18.333 5.36939 17.4818 4.51818C16.6306 3.66698 15.6201 2.99177 14.5079 2.5311C13.3958 2.07043 12.2038 1.83333 11 1.83333Z" fill="#B3BEE8" />
+      <circle cx="11" cy="11" r="8" fill="white" />
+    </svg>
+  );
+};
+
+const IntegrateYourAppIcon = props => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="integrate-your-app-icon-title" {...props}>
+      <title id="integrate-your-app-icon-title">Integrate Your App Icon</title>
+      <path d="M2 5H5V8H2V5ZM8.98124 9.18922C8.40906 8.51487 7.5878 8 6 8V5C8.4122 5 10.0909 5.86013 11.2688 7.24828C12.3198 8.48703 12.8987 10.0806 13.3691 11.3758L13.4097 11.4874C13.9318 12.9231 14.3502 14.0229 15.0188 14.8108C15.5909 15.4851 16.4122 16 18 16V19H6V16H11.0563C10.9745 15.8905 10.8976 15.7846 10.8245 15.6841L10.7869 15.6323C10.2778 14.9323 9.93844 14.4905 9.36346 14.1517C8.79448 13.8164 7.83564 13.5 6 13.5V10.5C7.7039 10.5 9.02155 10.73 10.0813 11.1674C9.7558 10.3671 9.42315 9.71004 8.98124 9.18922ZM5 10.5H2V13.5H5V10.5ZM2 16H5V19H2V16ZM22 16H19V19H22V16Z" fill="#FF8324" />
     </svg>
   );
 };
@@ -55,13 +65,19 @@ const data = [
     key: 0,
     links: [
       {
+        isLinkSelected: true,
         title: 'Registration',
       },
       {
+        isLinkSelected: true,
         title: 'Authentication',
       },
       {
+        isLinkSelected: true,
         title: 'Profile management',
+      },
+      {
+        title: 'Account recovery',
       },
       {
         title: 'Experience your solution',
@@ -95,6 +111,10 @@ const data = [
     key: 2,
     links: [
       {
+        customIcon: IntegrateYourAppIcon,
+        title: 'Integrate your app',
+      },
+      {
         title: 'Learn about DaVinci',
       },
       {
@@ -112,6 +132,10 @@ const sx = {
     mr: 'sm',
     borderRadius: '50%',
     zIndex: 3,
+    '& > svg ': {
+      width: '28px',
+      height: '28px',
+    },
   },
   headingSeparator: {
     flexGrow: 1,
@@ -126,7 +150,7 @@ const sx = {
     color: 'accent.30',
     lineHeight: '18px',
     fontWeight: '3',
-    m: '12px 0px 28px 5px',
+    m: '12px 0px 28px 0px',
     maxWidth: '195px',
   },
   linkRowIconButton: {
@@ -154,19 +178,12 @@ const sx = {
       fill: 'accent.80',
     },
   },
-  linkRowSeparator: {
-    flexGrow: 1,
-    backgroundColor: 'accent.30',
-    width: '1px !important',
-    zIndex: 2,
-    m: '-4px 5px -5px 11.5px !important',
-  },
   linkRowText: {
     fontSize: 'md',
     color: '#163CE3',
     lineHeight: '18px',
     fontWeight: '0',
-    m: '3px 0px 20px 10px',
+    m: '3px 0px 15px 10px',
     maxWidth: '140px',
   },
   container: {
@@ -186,25 +203,11 @@ const Stage = ({
   links,
   isLastStage,
 }) => {
-  const [selectedLinks, updateSelectedLinks] = useState([]);
-
-  const onSelectionChange = thisIndex => {
-    let newArray = [];
-    if (selectedLinks.includes(thisIndex)) {
-      newArray = selectedLinks.filter(link => {
-        return link !== thisIndex;
-      });
-    } else {
-      newArray = [...selectedLinks, thisIndex];
-    }
-    updateSelectedLinks([...newArray]);
-  };
-
   return (
     <Box
       isRow
     >
-      <Box>
+      <Box mr="xs">
         <Box
           minWidth="39.5px"
           minHeight="39.5px"
@@ -214,7 +217,7 @@ const Stage = ({
             icon={icon}
             title={{ name: iconTitle }}
             color="accent.40"
-            size="24px"
+            size="15px"
             sx={{
               zIndex: 3,
             }}
@@ -241,14 +244,10 @@ const Stage = ({
           mb="25px"
         >
           {
-            links.map((link, index) => {
+            links.map(link => {
               return (
                 <LinkRow
                   {...link}
-                  onSelectionChange={onSelectionChange}
-                  index={index}
-                  isLinkSelected={selectedLinks.length !== 0}
-                  isLastLink={index === links.length - 1}
                   key={link.title}
                 />
               );
@@ -261,61 +260,42 @@ const Stage = ({
 };
 
 const LinkRow = ({
-  index,
-  isLastLink,
-  isLinkSelected,
-  onSelectionChange,
   title,
+  isLinkSelected,
+  customIcon,
 }) => {
-  const [isSelected, handleSelectionChange] = useState(false);
-  const [verticalSeparatorHeight, setVerticalSeparatorHeight] = useState(0);
-
-  const iconRef = useRef();
-  const rowRef = useRef();
-
-  useEffect(() => {
-    const { height } = rowRef.current.getBoundingClientRect();
-    const { height: iconRefHeight } = iconRef.current.getBoundingClientRect();
-
-    const marginAccommodation = 4;
-    const halfIconHeight = iconRefHeight / 2;
-
-    setVerticalSeparatorHeight(height - halfIconHeight - marginAccommodation);
-  }, [iconRef, rowRef]);
+  const [isSelected, handleSelectionChange] = useState(isLinkSelected);
 
   const onIconPress = () => {
     handleSelectionChange(!isSelected);
-    onSelectionChange(index);
   };
 
   return (
     <Box
       isRow
-      ref={rowRef}
     >
       <Box>
-        <IconButton
-          aria-label="completed step icon indicator"
-          onPress={onIconPress}
-          ref={iconRef}
-          sx={sx.linkRowIconButton}
-        >
-          <Icon
-            icon={isSelected ? CheckCircleIcon : RadioButtonIcon}
-            size="sm"
-            sx={isSelected ? sx.linkRowIconButton : sx.linkRowIconNotSelected}
-            title={{ name: 'Check Circle Icon' }}
-          />
-        </IconButton>
-        {
-          !isLastLink && isLinkSelected
-          && (
-            <Separator
-              orientation="vertical"
-              sx={{ ...sx.linkRowSeparator, maxHeight: verticalSeparatorHeight }}
+        {customIcon
+          ? (
+            <Icon
+              icon={customIcon}
+              size="22px"
             />
           )
-        }
+          : (
+            <IconButton
+              aria-label="completed step icon indicator"
+              onPress={onIconPress}
+              sx={sx.linkRowIconButton}
+            >
+              <Icon
+                icon={isSelected ? CheckCircleIcon : RadioButtonIcon}
+                size="22px"
+                sx={isSelected ? sx.linkRowIconSelected : sx.linkRowIconNotSelected}
+                title={{ name: 'Check Circle Icon' }}
+              />
+            </IconButton>
+          )}
       </Box>
       <Link
         href="https://www.pingidentity.com"
@@ -353,4 +333,11 @@ export const Default = () => {
       </Box>
     </Box>
   );
+};
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.trialExperienceNav.default,
+  },
 };

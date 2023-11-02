@@ -1,5 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import FileIcon from '@pingux/mdi-react/FileIcon';
+import { useOption } from '@react-aria/listbox';
 import PropTypes from 'prop-types';
 
 import { useTreeViewContext } from '../../context/TreeViewContext';
@@ -10,28 +11,26 @@ import TreeViewRow from './TreeViewRow';
 const TreeViewItem = forwardRef((props, ref) => {
   const { item, title } = props;
 
+  const { key } = item;
+
   const treeItemRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => treeItemRef.current);
 
-  const { state, tree } = useTreeViewContext();
-  const isExpanded = Array.from(state.expandedKeys).includes(item.key);
-  const isSelected = Array.from(tree.selectedKeys).includes(item.key);
-  const isDisabled = Array.from(state.disabledKeys).includes(item.key);
+  const { state } = useTreeViewContext();
 
+  const { optionProps, isSelected, isDisabled } = useOption({ key }, state, treeItemRef);
 
-  // this component may seem unnecessary, but it will be where the
-  // useOption and dragAndDrop stuff will go
-  // this comment will be removed at that time.
+  const isExpanded = state.expandedKeys.has(key);
 
   return (
     <Box
       as="li"
       isRow
       ref={treeItemRef}
-      role="treeitem"
-      aria-selected={isSelected}
       aria-disabled={isDisabled}
+      {...optionProps}
+      role="treeitem"
       sx={{
         width: '100%',
         ml: '36px',
@@ -39,7 +38,7 @@ const TreeViewItem = forwardRef((props, ref) => {
           pb: 'sm',
         },
       }}
-
+      aria-selected={isSelected}
     >
       <TreeViewRow
         item={item}

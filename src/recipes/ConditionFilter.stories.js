@@ -1,4 +1,5 @@
 import React from 'react';
+import PlusIcon from '@pingux/mdi-react/PlusIcon';
 import TrashIcon from '@pingux/mdi-react/TrashIcon';
 
 import {
@@ -19,6 +20,20 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Condition Filter',
+  parameters: {
+    a11y: {
+      config: {
+        /** The "color-contrast" test ends with an "incomplete" status
+         * since pseudo-element applies to the same container as selected values.
+         * A workaround to disable "color-contrast" incomplete tests.
+         */
+        rules: [{
+          id: 'color-contrast',
+          enabled: false,
+        }],
+      },
+    },
+  },
 };
 
 const borderBox = {
@@ -165,6 +180,7 @@ export const Edit = () => {
     <IconButton
       aria-label="deleteButton"
       sx={{ alignSelf: 'center' }}
+      ml="sm"
     >
       <Icon
         icon={TrashIcon}
@@ -185,8 +201,8 @@ export const Edit = () => {
         <Box
           isRow
           alignItems="center"
-          mb="sm"
-          pr="37px"
+          mb="md"
+          pr="42px"
         >
           <RockerButtonGroup
             mr="sm"
@@ -216,14 +232,20 @@ export const Edit = () => {
           </RockerButtonGroup>
           <Text>{ofTheConditionsAreTrueCopy}</Text>
           <Button
-            variant="inline"
-            width="fit-content"
-            role="button"
-            title="Add Field Button"
             ml="auto"
+            variant="inlineWithIcon"
+            title="Add Field Button"
             aria-label="add"
           >
-            + Add
+            <Icon
+              icon={PlusIcon}
+              mr="xs"
+              size={15}
+              title={{
+                name: 'Add Icon',
+              }}
+            />
+            Add
           </Button>
         </Box>
 
@@ -243,6 +265,7 @@ export const Edit = () => {
                 value={item.field1}
                 mr="md"
                 containerProps={{ sx: { '& > div::after': { bg: 'decorative.4' } } }}
+                labelProps={{ mb: 0 }}
                 aria-label="temp-label"
               />
               <SelectField
@@ -250,6 +273,7 @@ export const Edit = () => {
                 selectedKey="Equals"
                 mr="md"
                 aria-label="temp-label"
+                labelProps={{ mb: 0 }}
                 width="125px"
               >
                 <Item
@@ -271,8 +295,8 @@ export const Edit = () => {
                 hasNoStatusIndicator
                 width="44%"
                 value={item.field3}
-                mr="xs"
                 aria-label="temp-label"
+                labelProps={{ mb: 0 }}
               />
             </Box>
             {trashButton}
@@ -281,13 +305,13 @@ export const Edit = () => {
         <Box isRow>
           <Box
             variant="forms.input.fieldControlWrapper"
-            sx={{ ...sx.borderedBoxStyles, '&::after': { bg: 'decorative.4', width: '2px' } }}
+            sx={{ ...sx.borderedBoxStyles, '&::after': { bg: 'decorative.4', width: '2px' }, p: 'md' }}
           >
             <Box
               isRow
               alignItems="center"
-              mb="sm"
-              pr="37px"
+              mb="md"
+              pr="42px"
             >
               <RockerButtonGroup
                 mr="sm"
@@ -317,23 +341,29 @@ export const Edit = () => {
               </RockerButtonGroup>
               <Text>{ofTheConditionsAreTrueCopy}</Text>
               <Button
-                variant="inline"
-                width="fit-content"
-                role="button"
-                title="Add Field Button"
                 ml="auto"
+                variant="inlineWithIcon"
+                title="Add Field Button"
                 aria-label="add"
               >
-                + Add
+                <Icon
+                  icon={PlusIcon}
+                  mr="xs"
+                  size={15}
+                  title={{
+                    name: 'Add Icon',
+                  }}
+                />
+                Add
               </Button>
             </Box>
 
-            <Box ml="lg">
-              {anyConditions.map(item => (
+            <Box>
+              {anyConditions.map((item, index) => (
                 <Box
                   isRow
                   alignItems="center"
-                  mb="md"
+                  mb={index + 1 === anyConditions.length ? 0 : 'md'}
                   key={item.key}
                 >
                   <Box
@@ -346,6 +376,7 @@ export const Edit = () => {
                       width="44%"
                       mr="md"
                       containerProps={{ sx: { '& > div::after': { bg: 'decorative.7' } } }}
+                      labelProps={{ mb: 0 }}
                     />
                     <SelectField
                       aria-label="temp-label"
@@ -353,6 +384,7 @@ export const Edit = () => {
                       selectedKey="Equals"
                       mr="md"
                       width="125px"
+                      labelProps={{ mb: 0 }}
                     >
                       <Item
                         key="Equals"
@@ -374,7 +406,7 @@ export const Edit = () => {
                       hasNoStatusIndicator
                       value={item.field3}
                       width="44%"
-                      mr="xs"
+                      labelProps={{ mb: 0 }}
                     />
                   </Box>
                   {trashButton}
@@ -390,13 +422,13 @@ export const Edit = () => {
         >
           <Box
             variant="forms.input.fieldControlWrapper"
-            sx={{ ...sx.borderedBoxStyles, '&::after': { bg: 'decorative.4', width: '2px' } }}
+            sx={{ ...sx.borderedBoxStyles, '&::after': { bg: 'decorative.4', width: '2px' }, p: 'md' }}
           >
             <Box
               isRow
               alignItems="center"
-              mb="sm"
-              pr="37px"
+              mb="md"
+              pr="42px"
             >
               <RockerButtonGroup
                 mr="sm"
@@ -426,23 +458,29 @@ export const Edit = () => {
               </RockerButtonGroup>
               <Text>{ofTheConditionsAreTrueCopy}</Text>
               <Button
-                variant="inline"
-                width="fit-content"
-                role="button"
-                title="Add Field Button"
                 ml="auto"
+                variant="inlineWithIcon"
+                title="Add Field Button"
                 aria-label="add"
               >
-                + Add
+                <Icon
+                  icon={PlusIcon}
+                  mr="xs"
+                  size={15}
+                  title={{
+                    name: 'Add Icon',
+                  }}
+                />
+                Add
               </Button>
             </Box>
 
-            <Box ml="lg">
-              {noneConditions.map(item => (
+            <Box>
+              {noneConditions.map((item, index) => (
                 <Box
                   isRow
                   alignItems="center"
-                  mb="md"
+                  mb={index + 1 === anyConditions.length ? 0 : 'md'}
                   key={item.key}
                 >
                   <Box
@@ -455,6 +493,7 @@ export const Edit = () => {
                       width="44%"
                       mr="md"
                       containerProps={{ sx: { '& > div::after': { bg: 'accent.20' } } }}
+                      labelProps={{ mb: 0 }}
                     />
                     <SelectField
                       aria-label="temp-label"
@@ -462,6 +501,7 @@ export const Edit = () => {
                       selectedKey="Equals"
                       mr="md"
                       width="125px"
+                      labelProps={{ mb: 0 }}
                     >
                       <Item
                         key="Equals"
@@ -481,9 +521,9 @@ export const Edit = () => {
                     <TextField
                       aria-label="temp-label"
                       hasNoStatusIndicator
+                      labelProps={{ mb: 0 }}
                       value={item.field3}
                       width="44%"
-                      mr="xs"
                     />
                   </Box>
                   {trashButton}
