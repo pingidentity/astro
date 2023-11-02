@@ -20,6 +20,20 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
 
 export default {
   title: 'Recipes/Condition Filter',
+  parameters: {
+    a11y: {
+      config: {
+        /** The "color-contrast" test ends with an "incomplete" status
+         * since pseudo-element applies to the same container as selected values.
+         * A workaround to disable "color-contrast" incomplete tests.
+         */
+        rules: [{
+          id: 'color-contrast',
+          enabled: false,
+        }],
+      },
+    },
+  },
 };
 
 const borderBox = {
