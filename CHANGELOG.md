@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.27.0...@pingux/astro@2.28.0) (2023-11-02)
+
+
+### Bug Fixes
+
+* [UIP-6555] Astro TreeView add ListBox ([a21ed5b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a21ed5b5e470e497b53b8d494e573be5e9de6af8))
+* [UIP-6574] Condition Filter: fix accessibility test ([19480a7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/19480a7dd699a785ca945c95c9c475a9d2c1b045))
+
+
+### Features
+
+* [UIP-6440] update ConditionFilter Edit recipe ([acf31da](https://gitlab.corp.pingidentity.com/ux/pingux/commit/acf31da0e520ee5e862ed9b2ecff0ef795cad170))
+* [UIP-6582] AccordionGroup disabled story ([4ec5185](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4ec5185018295e9b20d3e6dcbe22704b65650b8d))
+
+
+
+
+
 # [2.27.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.26.0...@pingux/astro@2.27.0) (2023-10-31)
 
 
