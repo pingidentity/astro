@@ -73,6 +73,7 @@ const SelectFieldBase = forwardRef(({
           <Icon
             icon={MenuDown}
             title={{ name: 'Menu down' }}
+            size="md"
             sx={
               state.isOpen
                 ? { transform: 'rotate(180deg)' }
