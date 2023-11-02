@@ -21,9 +21,9 @@ const itemArray = [
 ];
 
 const itemArrayDisabled = [
-  { key: 't1', label: 'Disabled Accordion', children: <Text>Hi</Text> },
-  { key: 't2', label: 'Accordion', children: 'Child Renders Here' },
-  { key: 't3', label: 'Disabled Accordion', children: 'Child Renders Here' },
+  { key: 't1', label: 'Accordion Disabled', children: <Text>Hi</Text> },
+  { key: 't2', label: 'Accordion Active', children: <Text>Hi</Text> },
+  { key: 't3', label: 'Accordion Disabled', children: <Text>Hi</Text> },
 ];
 
 export default {
@@ -181,13 +181,13 @@ export const UncontrolledExpanded = () => {
   );
 };
 
-export const DisabledItems = () => {
+export const DisabledState = () => {
   return (
     /*
       itemArrayDisabled = [
-        { key: 't1', label: 'Disabled Accordion', children: <Text>Hi</Text> },
-        { key: 't2', label: 'Accordion', children: 'Child Renders Here' },
-        { key: 't3', label: 'Disabled Accordion', children: 'Child Renders Here' },
+        { key: 't1', label: 'Accordion Disabled', children: <Text>Hi</Text> },
+        { key: 't2', label: 'Accordion Active', children: <Text>Hi</Text> },
+        { key: 't3', label: 'Accordion Disabled', children: <Text>Hi</Text> },
       ];
      */
     <AccordionGroup disabledKeys={['t1', 't3']} items={itemArrayDisabled} labelHeadingTag="h3">
@@ -198,6 +198,13 @@ export const DisabledItems = () => {
       )}
     </AccordionGroup>
   );
+};
+
+DisabledState.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.accordionGroup.disabledState,
+  },
 };
 
 export const CustomPresentation = () => {
@@ -225,6 +232,7 @@ export const CustomPresentation = () => {
     </AccordionGroup>
   );
 };
+
 CustomPresentation.parameters = {
   docs: {
     description: {

@@ -1,6 +1,7 @@
 export const FIGMA_LINKS = {
   accordionGroup: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=446-1808&t=8Wwd3tIBh3GEjCJB-0',
+    disabledState: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43917%3A31554&mode=dev',
     differentLevels: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=446%3A1949&mode=dev',
   },
   attributeMappings: {
