@@ -55,7 +55,7 @@ const AccordionItem = forwardRef((props, ref) => {
     isPressed,
   });
 
-  const ariaLabel = props['aria-label'] || item.props.label;
+  const ariaLabel = props['aria-label'];
 
   const isValidHeadingTag = validHeadingTags.includes(labelHeadingTag?.toLowerCase());
 
@@ -105,7 +105,7 @@ AccordionItem.propTypes = {
     key: PropTypes.string,
     rendered: PropTypes.node,
     props: PropTypes.shape({
-      label: PropTypes.string,
+      label: PropTypes.node,
       children: PropTypes.node,
       textValue: PropTypes.string,
       containerProps: PropTypes.shape({}),

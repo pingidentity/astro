@@ -5,6 +5,8 @@ import { withDesign } from 'storybook-addon-designs';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   AccordionGroup,
+  Badge,
+  Box,
   Button,
   Text,
   TextField,
@@ -231,4 +233,26 @@ CustomPresentation.parameters = {
       story: 'In addition to customizing the theme, prop objects can be passed to certain elements. This allows for simple customization in a pinch. See the source code below for an example.',
     },
   },
+};
+
+export const LabelWithBadge = args => {
+  return (
+    <AccordionGroup {...args} labelHeadingTag="h4">
+      <Item
+        key="accordionKey"
+        textValue="accordionKey"
+        label={(
+          <Box isRow alignItems="center">
+            Accordion Label
+            <Box isRow gap="5px" ml="5px">
+              <Badge label="Label" sx={{ height: '21px' }} />
+            </Box>
+          </Box>
+        )}
+        data-id="accordionItem"
+      >
+        <Text>Render me!</Text>
+      </Item>
+    </AccordionGroup>
+  );
 };
