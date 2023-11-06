@@ -96,6 +96,13 @@ export const FIGMA_LINKS = {
   OnewayToBidirectionalArrow: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43504-1214&mode=design&t=R4kdj0liRHxsqbV5-0',
   },
+  panelHeader: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44688%3A39612&mode=dev',
+    withSubtext: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39651&mode=dev',
+    withControls: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39662&mode=dev',
+    withImage: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39682&mode=dev',
+    withExtraLongText: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39713&mode=dev',
+  },
   popoverMenu: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A3073&t=We3h7LaaFJQnxdSy-1',
   },
