@@ -7,6 +7,7 @@ import { Item,
   PanelHeaderCloseButton,
   PanelHeaderMenu,
   PanelHeaderSwitchField } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { SharedItemArgTypes } from '../ListViewItem/listViewItemAttributes';
 
@@ -41,6 +42,13 @@ export const Default = ({ ...args }) => (
   />
 );
 
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.default,
+  },
+};
+
 export const WithSubtext = ({ ...args }) => (
   <PanelHeader
     {...args}
@@ -51,6 +59,13 @@ export const WithSubtext = ({ ...args }) => (
     }}
   />
 );
+
+WithSubtext.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.withSubtext,
+  },
+};
 
 export const WithControls = ({ ...args }) => (
   <PanelHeader
@@ -71,6 +86,13 @@ export const WithControls = ({ ...args }) => (
   </PanelHeader>
 );
 
+WithControls.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.withControls,
+  },
+};
+
 export const WithImage = () => (
   <PanelHeader
     data={{
@@ -83,6 +105,13 @@ export const WithImage = () => (
     }}
   />
 );
+
+WithImage.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.withImage,
+  },
+};
 
 export const WithExtraLongText = ({ ...args }) => (
   <PanelHeader
@@ -102,3 +131,10 @@ export const WithExtraLongText = ({ ...args }) => (
     <PanelHeaderCloseButton />
   </PanelHeader>
 );
+
+WithExtraLongText.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.withExtraLongText,
+  },
+};

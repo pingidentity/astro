@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
+import { v4 as uuid } from 'uuid';
 
 import {
   Box,
@@ -39,9 +40,10 @@ const EarthCircleIcon = () => {
 };
 
 const RadioButtonIcon = props => {
+  const id = uuid();
   return (
-    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="radio-button-icon-title" {...props}>
-      <title id="radio-button-icon-title">Radio Button Icon</title>
+    <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby={`radio-button-icon-title-${id}`} {...props}>
+      <title id={`radio-button-icon-title-${id}`}>Radio Button Icon</title>
       <path d="M11 18.3333C9.05508 18.3333 7.18982 17.5607 5.81455 16.1854C4.43928 14.8102 3.66667 12.9449 3.66667 11C3.66667 9.05507 4.43928 7.18981 5.81455 5.81455C7.18982 4.43928 9.05508 3.66666 11 3.66666C12.9449 3.66666 14.8102 4.43928 16.1854 5.81455C17.5607 7.18981 18.3333 9.05507 18.3333 11C18.3333 12.9449 17.5607 14.8102 16.1854 16.1854C14.8102 17.5607 12.9449 18.3333 11 18.3333ZM11 1.83333C9.79621 1.83333 8.60422 2.07043 7.49207 2.5311C6.37992 2.99177 5.36939 3.66698 4.51819 4.51818C2.7991 6.23727 1.83333 8.56884 1.83333 11C1.83333 13.4311 2.7991 15.7627 4.51819 17.4818C5.36939 18.333 6.37992 19.0082 7.49207 19.4689C8.60422 19.9296 9.79621 20.1667 11 20.1667C13.4311 20.1667 15.7627 19.2009 17.4818 17.4818C19.2009 15.7627 20.1667 13.4311 20.1667 11C20.1667 9.79621 19.9296 8.60421 19.4689 7.49206C19.0082 6.37991 18.333 5.36939 17.4818 4.51818C16.6306 3.66698 15.6201 2.99177 14.5079 2.5311C13.3958 2.07043 12.2038 1.83333 11 1.83333Z" fill="#B3BEE8" />
       <circle cx="11" cy="11" r="8" fill="white" />
     </svg>
