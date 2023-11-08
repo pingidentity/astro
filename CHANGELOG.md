@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.29.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.28.0...@pingux/astro@2.29.0) (2023-11-08)
+
+
+### Bug Fixes
+
+* [UIP-6591]Add Unique ID to Trial Nav Radio Buttons ([691803d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/691803d06d4cad6cfdf7f31a39306abd89a9d390))
+
+
+### Features
+
+* [UIP-6570] AccordionGroupItem label can be a react node ([bca5942](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bca594200080e51d0437638522b0fd4bc8f9a7e4))
+* [UIP-6590] PanelHeader add figma links ([82513b7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/82513b78a9b23ece08214fac174240e7c6afc875))
+
+
+
+
+
 # [2.28.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.27.0...@pingux/astro@2.28.0) (2023-11-02)
 
 
