@@ -35,17 +35,18 @@ const Bracket = forwardRef((props, ref) => {
             aria-labelledby={`bracket-fill-vertical-icon-title-${bracketId}`}
           >
             <title id={`bracket-fill-vertical-icon-title-${bracketId}`}>bracket-fill</title>
-            <g>
+            <g transform="translate(-0.85, 0)">
               <title>Layer 3</title>
               <line
                 strokeLinecap="undefined"
                 strokeLinejoin="undefined"
                 y2="0"
-                x2="0"
+                x2="1"
                 y1="10"
-                x1="0"
+                x1="1"
                 stroke={color}
                 fill="none"
+                // strokeWidth={2}
               />
             </g>
           </svg>
@@ -56,7 +57,7 @@ const Bracket = forwardRef((props, ref) => {
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
           preserveAspectRatio="none"
-          viewBox="0 0 10 10"
+          viewBox="0 0 5 5"
           style={{ flexGrow: 1 }}
           aria-labelledby={`bracket-fill-1-icon-title-${bracketFillOneId}`}
         >
@@ -77,7 +78,7 @@ const Bracket = forwardRef((props, ref) => {
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="15" aria-labelledby={`bracket-fill-2-icon-title-${bracketFillTwoId}`}>
           <title id={`bracket-fill-2-icon-title-${bracketFillTwoId}`}>bracket-fill</title>
-          <g transform="translate(-1, 0)">
+          <g transform="translate(-0.5, -0.5)">
             <title>Layer 2</title>
             <path
               fill="none"
