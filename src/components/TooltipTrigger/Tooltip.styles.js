@@ -2,14 +2,10 @@ import { baseBadge } from '../Badge/Badge.styles';
 import { text } from '../Button/Buttons.styles';
 
 export const container = {
-  maxWidth: '11.3em',
-  maxHeight: '15em',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  WebkitLineClamp: '10',
-  WebkitBoxOrient: 'vertical',
-  display: '-webkit-box !important',
+  maxWidth: '300px',
+  overflow: 'visible',
   wordBreak: 'break-word',
+  display: 'flex',
 
   '.is-right > * > &, .is-left > * > &': {
     maxWidth: '24em',
