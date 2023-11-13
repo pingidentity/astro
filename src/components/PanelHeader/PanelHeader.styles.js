@@ -7,6 +7,15 @@ const container = {
   minHeight: 60,
 };
 
+const emptyData = {
+  alignItems: 'center',
+};
+
+const data = {
+  ...emptyData,
+  mr: 'sm',
+};
+
 const controls = {
   alignItems: 'center',
   alignSelf: 'center',
@@ -16,27 +25,20 @@ const controls = {
   mr: 'md',
 };
 
-const data = {
-  alignItems: 'center',
-  mr: 'sm',
-};
-
 const wrapper = {
   display: 'flex',
   flex: '1 1 0px',
-  ml: 'md',
 };
 
-const imageWrapper = {
-  display: 'flex',
-  flex: '1 1 0px',
-  ml: 'sm',
+const rightOfData = {
+  alignSelf: 'center',
 };
 
 export default {
   container,
   controls,
   data,
-  imageWrapper,
+  emptyData,
+  rightOfData,
   wrapper,
 };

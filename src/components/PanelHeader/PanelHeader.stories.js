@@ -1,12 +1,16 @@
 import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Item,
+import {
+  Breadcrumbs,
+  Item,
   PanelHeader,
   PanelHeaderCloseButton,
   PanelHeaderMenu,
-  PanelHeaderSwitchField } from '../../index';
+  PanelHeaderSwitchField,
+} from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { SharedItemArgTypes } from '../ListViewItem/listViewItemAttributes';
@@ -105,6 +109,35 @@ export const WithImage = () => (
     }}
   />
 );
+
+export const WithBreadcrumbs = () => {
+  const breadcrumbs = (
+    <Breadcrumbs icon={ChevronRightIcon}>
+      <Item
+        aria-label="Fons Vernall"
+        href="https://www.pingidentity.com"
+        key="fonsVernallKey"
+        variant="buttons.link"
+      >
+        Fons Vernall
+      </Item>
+      <Item
+        aria-label="Edit"
+        key="editKey"
+        variant="buttons.link"
+      >
+        Edit
+      </Item>
+    </Breadcrumbs>
+  );
+
+  return (
+    <PanelHeader
+      data={{ icon: AccountIcon }}
+      slots={{ rightOfData: breadcrumbs }}
+    />
+  );
+};
 
 WithImage.parameters = {
   design: {
