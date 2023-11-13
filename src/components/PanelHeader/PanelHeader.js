@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
 import { Box, Icon, Image, Text } from '../../index';
 import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
@@ -9,18 +10,13 @@ const PanelHeader = forwardRef(({
   children,
   className,
   data,
+  slots,
   ...others
 }, ref) => {
   const { icon, image, subtext, text } = data;
 
-  const getWrapperVariant = () => {
-    if (image && !icon) return 'panelHeader.imageWrapper';
-
-    return 'panelHeader.wrapper';
-  };
-
   const renderIcon = (
-    <Box width="25px">
+    <Box width="25px" mx="md">
       {icon && (
         <Icon
           color="accent.40"
@@ -33,7 +29,7 @@ const PanelHeader = forwardRef(({
   );
 
   const renderImage = !icon && image && (
-    <Box width="35px">
+    <Box width="35px" mx="sm">
       <Image
         src={image.src}
         alt={image.alt}
@@ -43,9 +39,9 @@ const PanelHeader = forwardRef(({
   );
 
   const renderData = (
-    <Box isRow variant="panelHeader.data">
+    <Box isRow variant={text && subtext ? 'panelHeader.data' : 'panelHeader.emptyData'}>
       {icon ? renderIcon : renderImage}
-      <Box variant={getWrapperVariant()}>
+      <Box variant="panelHeader.wrapper">
         {text && (<Text variant="panelHeaderText">{text}</Text>)}
         {subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
       </Box>
@@ -59,8 +55,13 @@ const PanelHeader = forwardRef(({
       ref={ref}
       {...others}
     >
-      <Box isRow variant={getWrapperVariant()}>
+      <Box isRow variant="panelHeader.wrapper">
         {renderData}
+        {slots?.rightOfData && (
+          <Box isRow variant="panelHeader.rightOfData">
+            {slots.rightOfData}
+          </Box>
+        )}
         <Box isRow variant="panelHeader.controls">
           {children}
         </Box>
@@ -71,6 +72,9 @@ const PanelHeader = forwardRef(({
 
 PanelHeader.propTypes = {
   ...SharedItemPropTypes,
+  slots: PropTypes.shape({
+    rightOfData: PropTypes.node,
+  }),
 };
 
 export default PanelHeader;
