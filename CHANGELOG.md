@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.30.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.29.1...@pingux/astro@2.30.0) (2023-11-14)
+
+
+### Features
+
+* [UIP-6288] recreate CollapsiblePanel with List recipe ([fe72ff3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fe72ff373475dc9e148ff4858b335598e85c1b4b))
+* [UIP-6605]: add right of data slot for With Breadcrumb story ([0e978ea](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0e978ea62f33a899f21022d32091309c149ccc12))
+* [UIP-6612] update Bracket stories to match specs ([8e152a8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8e152a8f685c28395b8653dddc81602d02360280))
+* [UIP-6637] useAriaLabelWarning typescript conversion ([bb6a13b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bb6a13b9f3177d2d58d3e12ba1f3678ad73a6a79))
+
+
+
+
+
 ## [2.29.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.29.0...@pingux/astro@2.29.1) (2023-11-09)
 
 **Note:** Version bump only for package @pingux/astro
