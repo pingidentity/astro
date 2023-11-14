@@ -6,7 +6,7 @@ const message = 'This is test message';
 
 beforeEach(() => {
   process.env.NODE_ENV = 'development';
-  global.console.warn = () => jest.mock(); // eslint-disable-line no-console
+  global.console.warn = jest.fn(); // eslint-disable-line no-console
 });
 
 afterEach(() => {
