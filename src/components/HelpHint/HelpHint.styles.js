@@ -44,11 +44,6 @@ const popoverContainer = {
   p: '10px',
   fontSize: 'sm',
   fontWeight: 1,
-  maxWidth: '300px',
-  overflow: 'visible',
-  textOverflow: '',
-  maxHeight: 'unset',
-  display: 'flex',
 };
 
 export default { hintButton, popoverContainer };

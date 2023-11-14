@@ -77,3 +77,13 @@ test('renders image', () => {
   expect(image).toHaveAttribute('alt', 'avatar');
   expect(image).toHaveAttribute('aria-label', 'avatar');
 });
+
+test('renders rightOfData slot', () => {
+  const TEST_TEXT = 'test text';
+
+  getComponent({ slots: {
+    rightOfData: <div>{TEST_TEXT}</div>,
+  } });
+
+  screen.getByText(TEST_TEXT);
+});
