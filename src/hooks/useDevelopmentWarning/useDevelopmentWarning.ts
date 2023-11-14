@@ -1,9 +1,14 @@
 import { useMemo } from 'react';
 
-/**
- * Provides a development-only console warning.
-*/
-const useDevelopmentWarning = ({ message, shouldTrigger }) => {
+interface UseDevelopmentWarning {
+
+  /**
+   * Provides a development-only console warning.
+  */
+  ({ message, shouldTrigger }: { message: string, shouldTrigger: boolean }): void;
+}
+
+const useDevelopmentWarning: UseDevelopmentWarning = ({ message, shouldTrigger }) => {
   useMemo(() => {
     if (process.env.NODE_ENV === 'development' && shouldTrigger) {
       // eslint-disable-next-line no-console
