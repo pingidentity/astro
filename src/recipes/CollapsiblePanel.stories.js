@@ -18,6 +18,7 @@ import {
   IconButton,
   Item,
   ListView,
+  ListViewItem,
   SearchField,
   Text,
 } from '../index';
@@ -106,9 +107,6 @@ const data = [
 const sx = {
   listViewItem: {
     bg: 'white',
-    width: '100%',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     '&.is-hovered': {
       bg: 'accent.99',
     },
@@ -121,7 +119,6 @@ const sx = {
     justifyContent: 'center',
     alignItems: 'center',
     p: 'xs',
-    maxWidth: '50%',
   },
   defaultSelectedTitle: {
     fontSize: 'sm',
@@ -218,60 +215,49 @@ export const Default = () => {
             />
             <ListView
               items={filteredItems}
-              style={{ width: '100%', outline: 'none' }}
             >
               {item => (
                 <Item
                   key={item.key}
                   textValue={item.name}
                   data-id={item.key}
-                  listItemProps={{
-                    isRow: true,
-                    sx: sx.listViewItem,
-                  }}
                 >
-                  <Box isRow>
-                    <Icon
-                      icon={AccountGroupIcon}
-                      alignSelf="center"
-                      mr="md"
-                      color="accent.40"
-                      size={25}
-                      flexShrink={1}
-                      title={{ name: 'Account Group Icon' }}
-                    />
-                    <Box>
-                      <Box isRow>
-                        <Text variant="listTitle" mb="xs" mr="xs">{item.name}</Text>
+                  <ListViewItem
+                    sx={sx.listViewItem}
+                    data={{
+                      icon: AccountGroupIcon,
+                      text: item.name,
+                      subtext: item.subtitle,
+                    }}
+                    slots={{
+                      rightOfData: (
                         <Badge
                           label={item.badgeValue}
                           bg="accent.99"
                           textColor="text.secondary"
                           sx={{ minWidth: 'max-content' }}
+                          ml="xs"
                         />
-                      </Box>
-                      <Text variant="listSubtitle">{item.subtitle}</Text>
-                    </Box>
-                  </Box>
-                  {item.isDefaultSelected
-                    ? (
-                      <Box
-                        isRow
-                        sx={sx.defaultSelectedBox}
-                      >
-                        <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} title={{ name: 'Check Icon' }} />
-                        <Text sx={sx.defaultSelectedTitle}>Added by Filter</Text>
-                      </Box>
-                    )
-                    : (
-                      <CheckboxField
-                        controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
-                        onChange={() => changeSelection(item.key)}
-                        isSelected={selectedItems.some(el => el.key === item.key)}
-                        ref={checkBoxRef}
-                        onClick={() => checkBoxRef.current.focus()}
-                      />
-                    )}
+                      ),
+                    }}
+                  >
+                    {item.isDefaultSelected
+                      ? (
+                        <Box isRow sx={sx.defaultSelectedBox}>
+                          <Icon icon={CheckIcon} color="neutral.20" size={13} sx={{ flexShrink: 0 }} title={{ name: 'Check Icon' }} />
+                          <Text sx={sx.defaultSelectedTitle}>Added by Filter</Text>
+                        </Box>
+                      )
+                      : (
+                        <CheckboxField
+                          controlProps={{ color: 'neutral.10', 'aria-label': 'Select' }}
+                          onChange={() => changeSelection(item.key)}
+                          isSelected={selectedItems.some(el => el.key === item.key)}
+                          ref={checkBoxRef}
+                          onClick={() => checkBoxRef.current.focus()}
+                        />
+                      )}
+                  </ListViewItem>
                 </Item>
               )}
             </ListView>
