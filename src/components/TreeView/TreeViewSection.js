@@ -16,6 +16,9 @@ const TreeViewSection = forwardRef((props, ref) => {
     item,
     items,
     title,
+    level,
+    position,
+    setSize,
   } = props;
 
   const { key } = item;
@@ -45,6 +48,9 @@ const TreeViewSection = forwardRef((props, ref) => {
       }}
       aria-expanded={isExpanded}
       aria-disabled={isDisabled}
+      aria-level={level}
+      aria-setsize={setSize}
+      aria-posinset={position + 1}
       {...optionProps}
       role="treeitem"
       aria-selected={isSelected}
@@ -66,7 +72,7 @@ const TreeViewSection = forwardRef((props, ref) => {
           pl: 'md',
         }}
       >
-        { Array.from(items).map(_item => (
+        { Array.from(items).map((_item, _index) => (
           SectionOrItemRender(
             _item.value.items?.length > 0,
             <TreeViewSection
@@ -74,11 +80,17 @@ const TreeViewSection = forwardRef((props, ref) => {
               items={_item.children}
               title={_item.value.title}
               key={_item.value.title}
+              level={level + 1}
+              position={_index}
+              setSize={items.length}
             />,
             <TreeViewItem
               item={_item}
               title={_item.value.title}
               key={_item.value.title}
+              level={level + 1}
+              position={_index}
+              setSize={items.length}
             />,
           )
         ))}
@@ -94,6 +106,9 @@ TreeViewSection.propTypes = {
     key: PropTypes.string,
   }),
   title: PropTypes.string,
+  level: PropTypes.number,
+  position: PropTypes.number,
+  setSize: PropTypes.number,
 };
 
 export default TreeViewSection;

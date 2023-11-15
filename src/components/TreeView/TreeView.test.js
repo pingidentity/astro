@@ -168,6 +168,27 @@ test('disabledKeys prop disables items in the tree -- rendering them unclickable
   expect(thisItem).toHaveAttribute('aria-selected', 'false');
 });
 
+test('displays correct aria attributes', () => {
+  render(<TreeViewComponent />);
+
+  const listItems = screen.getAllByRole('treeitem');
+  const lastTreeItem = listItems[2];
+
+  expect(lastTreeItem).toHaveAttribute('aria-level', '1');
+  expect(lastTreeItem).toHaveAttribute('aria-posinset', '3');
+  expect(lastTreeItem).toHaveAttribute('aria-setsize', '3');
+
+  const buttons = screen.queryAllByRole('button');
+  fireEvent.click(buttons[1]);
+
+  const expandedItems = screen.getAllByRole('treeitem');
+  const nestedItem = expandedItems[2];
+
+  expect(nestedItem).toHaveAttribute('aria-level', '2');
+  expect(nestedItem).toHaveAttribute('aria-posinset', '1');
+  expect(nestedItem).toHaveAttribute('aria-setsize', '1');
+});
+
 const firstJSX = (
   <p>first</p>
 );
