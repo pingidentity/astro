@@ -101,6 +101,10 @@ export const FIGMA_LINKS = {
   OnewayToBidirectionalArrow: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43504-1214&mode=design&t=R4kdj0liRHxsqbV5-0',
   },
+  panelContent: {
+    displayPanel: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43431%3A4249&mode=dev',
+    editPanel: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=5013%3A15377&mode=dev',
+  },
   panelHeader: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44688%3A39612&mode=dev',
     withSubtext: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39651&mode=dev',
