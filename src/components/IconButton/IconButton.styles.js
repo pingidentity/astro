@@ -1,4 +1,4 @@
-import { badgeDeleteButton, deleteButton } from '../Badge/Badge.styles';
+import { badgeDeleteButton, deleteButton, invertedBadgeDeleteButton } from '../Badge/Badge.styles';
 import { defaultFocus } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
@@ -157,6 +157,7 @@ export default {
   inverted,
   messageCloseButton: { ...base, ...messageCloseButton },
   modalCloseButton: { ...base, ...modalCloseButton },
+  invertedBadgeDeleteButton,
   invertedSquare,
   square,
   svgIconButton,

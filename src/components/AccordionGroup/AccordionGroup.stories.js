@@ -18,7 +18,7 @@ import AccordionReadme from './AccordionGroup.mdx';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },
-  { key: 't2', label: 'Second Accordion', children: 'Child Renders Here' },
+  { key: 't2', label: 'Second Accordion', children: <Text variant="base" lineHeight={1.2}>Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section.</Text> },
   { key: 't3', label: 'Third Accordion', children: <TextField /> },
 ];
 
@@ -125,7 +125,11 @@ export const Multiple = () => {
      *   { key: 't3', label: 'Third Accordion', children: 'Child Renders Here' },
      * ];
      */
-    <AccordionGroup items={itemArray} labelHeadingTag="h3">
+    <AccordionGroup
+      defaultExpandedKeys={['t2']}
+      items={itemArray}
+      labelHeadingTag="h3"
+    >
       {item => (
         <Item key={item.key} textValue={item.label} label={item.label}>
           {item.children}
@@ -133,6 +137,13 @@ export const Multiple = () => {
       )}
     </AccordionGroup>
   );
+};
+
+Multiple.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.accordionGroup.multiple,
+  },
 };
 
 export const ControlledExpanded = () => {

@@ -1,4 +1,11 @@
-const useCopyToClipboard = (value, setIsCopied = () => {}) => {
+interface UseCopyToClipboard {
+  (value?: string, setIsCopied?: React.Dispatch<React.SetStateAction<boolean>>): () => Promise<void>
+}
+
+const useCopyToClipboard: UseCopyToClipboard = (
+  value = '',
+  setIsCopied = () => undefined,
+) => {
   return async () => {
     try {
       if (navigator.clipboard) {

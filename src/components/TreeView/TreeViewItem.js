@@ -9,7 +9,7 @@ import { Box } from '../../index';
 import TreeViewRow from './TreeViewRow';
 
 const TreeViewItem = forwardRef((props, ref) => {
-  const { item, title } = props;
+  const { item, title, level, position, setSize } = props;
 
   const { key } = item;
 
@@ -29,6 +29,9 @@ const TreeViewItem = forwardRef((props, ref) => {
       isRow
       ref={treeItemRef}
       aria-disabled={isDisabled}
+      aria-level={level}
+      aria-posinset={position + 1}
+      aria-setsize={setSize}
       {...optionProps}
       role="treeitem"
       sx={{
@@ -58,6 +61,9 @@ TreeViewItem.propTypes = {
   }),
   name: PropTypes.string,
   title: PropTypes.string,
+  level: PropTypes.number,
+  position: PropTypes.number,
+  setSize: PropTypes.number,
 };
 
 export default TreeViewItem;

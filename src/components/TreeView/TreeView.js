@@ -54,6 +54,7 @@ const TreeView = forwardRef((props, ref) => {
     ...others,
   });
 
+  const level = 0;
   const ariaLabel = props['aria-label'];
 
   const listBoxOptions = {
@@ -83,24 +84,28 @@ const TreeView = forwardRef((props, ref) => {
         sx={{ overflow: 'hidden' }}
         {...others}
       >
-        {
-          Array.from(state.collection).map(item => (
-            SectionOrItemRender(
-              item.props.items.length > 0,
-              <TreeViewSection
-                item={item}
-                items={item.props.items}
-                title={item.props.title}
-                key={item.props.title}
-              />,
-              <TreeViewItem
-                item={item}
-                title={item.value.value.title}
-                key={item.value.value.title}
-              />,
-            )
-          ))
-        }
+        {Array.from(state.collection).map((item, index) => (
+          SectionOrItemRender(
+            item.props.items.length > 0,
+            <TreeViewSection
+              item={item}
+              items={item.props.items}
+              title={item.props.title}
+              key={item.props.title}
+              level={level + 1}
+              setSize={state.collection.size}
+              position={index}
+            />,
+            <TreeViewItem
+              item={item}
+              title={item.value.value.title}
+              key={item.value.value.title}
+              level={level + 1}
+              position={index}
+              setSize={state.collection.size}
+            />,
+          )
+        ))}
       </Box>
     </TreeViewContext.Provider>
   );

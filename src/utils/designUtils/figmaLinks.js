@@ -3,6 +3,7 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=446-1808&t=8Wwd3tIBh3GEjCJB-0',
     disabledState: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43917%3A31554&mode=dev',
     differentLevels: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=446%3A1949&mode=dev',
+    multiple: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=4549%3A12455&mode=dev',
   },
   attributeMappings: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=15076%3A33905&mode=dev',
@@ -15,6 +16,7 @@ export const FIGMA_LINKS = {
     statusVariants: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43214%3A600&mode=design&t=1lk7azcFoekl7S8N-1',
     convenienceDefault: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43601%3A18124&mode=dev',
     calloutBadges: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=12854-33198&mode=design&t=cJyYBxLFH8D5XxOw-0',
+    removable: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=1899%3A11485&mode=dev',
   },
   bracket: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=45365%3A7834&mode=dev',
@@ -37,7 +39,9 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=14289-33201&t=VgqEexa1CXAXfPpp-0',
   },
   card: {
-    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=335-1780&t=VgqEexa1CXAXfPpp-0',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=335%3A1780&mode=dev',
+    cardRow: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46142%3A6248&mode=dev',
+    interactiveCard: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46142%3A6279&mode=dev',
   },
   codeView: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=7510-27175&t=8Wwd3tIBh3GEjCJB-0',
@@ -100,6 +104,10 @@ export const FIGMA_LINKS = {
   },
   OnewayToBidirectionalArrow: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43504-1214&mode=design&t=R4kdj0liRHxsqbV5-0',
+  },
+  panelContent: {
+    displayPanel: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43431%3A4249&mode=dev',
+    editPanel: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=5013%3A15377&mode=dev',
   },
   panelHeader: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44688%3A39612&mode=dev',
