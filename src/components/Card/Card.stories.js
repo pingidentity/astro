@@ -80,6 +80,13 @@ export const CardRow = args => {
   );
 };
 
+CardRow.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.card.cardRow,
+  },
+};
+
 export const InteractiveCard = () => {
   const sx = {
     alignContent: 'center',
@@ -100,4 +107,11 @@ export const InteractiveCard = () => {
       <Button variant="inline" mt="md" onPress={() => console.log('button pressed')}>Explore</Button>
     </Card>
   );
+};
+
+InteractiveCard.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.card.interactiveCard,
+  },
 };
