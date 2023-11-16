@@ -16,6 +16,7 @@ export const FIGMA_LINKS = {
     statusVariants: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=43214%3A600&mode=design&t=1lk7azcFoekl7S8N-1',
     convenienceDefault: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43601%3A18124&mode=dev',
     calloutBadges: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=12854-33198&mode=design&t=cJyYBxLFH8D5XxOw-0',
+    removable: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=1899%3A11485&mode=dev',
   },
   bracket: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=45365%3A7834&mode=dev',

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../../.storybook/storybookDocsLayout';
 import {
@@ -6,6 +7,7 @@ import {
   DefaultBadge,
   ErrorCalloutBadge,
   InfoCalloutBadge,
+  RemovableBadge,
   SuccessCalloutBadge,
   WarningCalloutBadge,
 } from '../../../index';
@@ -63,5 +65,40 @@ CalloutBadges.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.badge.calloutBadges,
+  },
+};
+
+const badges = [
+  { key: 'b1', id: uuid(), label: 'Removable Badge' },
+  { key: 'b2', id: uuid(), label: 'Inverted Removable Badge', isInverted: true },
+];
+
+export const Removable = ({ ...args }) => {
+  const [items, setItems] = useState(badges);
+
+  const closeBadgeHandler = id => {
+    setItems(items.filter((item => item.id !== id)));
+  };
+
+  return (
+    <Box gap="sm">
+      {items.map(badge => (
+        <RemovableBadge
+          id={badge.id}
+          key={badge.key}
+          label={badge.label}
+          isInverted={badge.isInverted}
+          onClose={closeBadgeHandler}
+          {...args}
+        />
+      ))}
+    </Box>
+  );
+};
+
+Removable.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.badge.removable,
   },
 };
