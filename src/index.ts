@@ -22,6 +22,7 @@ export * from './components/Badge';
 export { default as DefaultBadge } from './components/Badge/Convenience/DefaultBadge';
 export { default as ErrorCalloutBadge } from './components/Badge/Convenience/ErrorCalloutBadge';
 export { default as InfoCalloutBadge } from './components/Badge/Convenience/InfoCalloutBadge';
+export { default as RemovableBadge } from './components/Badge/Convenience/RemovableBadge';
 export { default as SuccessCalloutBadge } from './components/Badge/Convenience/SuccessCalloutBadge';
 export { default as WarningCalloutBadge } from './components/Badge/Convenience/WarningCalloutBadge';
 export { default as Box } from './components/Box';

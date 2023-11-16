@@ -123,6 +123,16 @@ export const badgeDeleteButton = {
   },
 };
 
+export const invertedBadgeDeleteButton = {
+  ...badgeDeleteButton,
+  path: {
+    fill: 'white',
+  },
+  '&.is-hovered': {
+    bg: 'white',
+  },
+};
+
 const countDefault = {
   ...baseBadge,
   width: 'fit-content',
@@ -222,6 +232,31 @@ const activeStatusBadge = {
   backgroundColor: '#F7F8FD !important',
 };
 
+const invertedRemovableBadge = {
+  ...baseBadge,
+  height: '21px',
+  '& span': {
+    color: 'white',
+  },
+  '& button': {
+    ml: '5px !important',
+    mr: '0 !important',
+    p: '3px',
+    height: 15,
+    width: 15,
+  },
+};
+
+const removableBadge = {
+  ...invertedRemovableBadge,
+  border: '1px solid',
+  backgroundColor: 'white !important',
+  borderColor: 'neutral.80',
+  '& span': {
+    color: 'text.primary',
+  },
+};
+
 export default {
   activeStatusBadge,
   badgeDeleteButton,
@@ -234,13 +269,16 @@ export default {
   deleteButton,
   environmentBadge,
   errorCalloutBadge,
-  healthyStatusBadge,
   infoCalloutBadge,
   itemBadgeWithSlot,
   multivaluesBadge,
   readOnlyBadge,
   selectedItemBadge,
+  invertedBadgeDeleteButton,
   successCalloutBadge,
   warningCalloutBadge,
   warningStatusBadge,
+  healthyStatusBadge,
+  removableBadge,
+  invertedRemovableBadge,
 };
