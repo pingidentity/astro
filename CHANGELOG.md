@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.31.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.30.0...@pingux/astro@2.31.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* [UIP-6554] Astro treeView improve accessibility ([54436c8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/54436c84ff9f9931668b6dfc708616e43bf1b2f5))
+
+
+### Features
+
+* [UIP-6363]: create panel content recipe ([f4da9ce](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f4da9ce76abe29ba44b09ad6ee6579de95a9d7a9))
+* [UIP-6585] AccordionGroup: match Multiple story to specs ([dae06e5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dae06e5d1ea5337069c4aa8180dcd6167e1130be))
+* [UIP-6589] create convenience component RemovableBadge ([bd70c0b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bd70c0ba8cc17ad70bc3fea148b39f98d50f2792))
+* [UIP-6640] convert useCopyToClipboard to typescript ([fff6268](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fff6268d0f3d30911f1c95ca7b630706f54a7f50))
+* [UIP-6671] update figma links for Card stories ([96f50ff](https://gitlab.corp.pingidentity.com/ux/pingux/commit/96f50ffb37b80268408e2c9b1765fa4c0ebd7ecc))
+
+
+
+
+
 # [2.30.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.29.1...@pingux/astro@2.30.0) (2023-11-14)
 
 
