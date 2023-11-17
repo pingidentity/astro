@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { ButtonProps } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
@@ -11,9 +12,9 @@ const defaultProps = {
   'data-testid': testId,
   'aria-label': 'Test button',
 };
-const getComponent = (props = {}) => render((
-  <Button {...defaultProps} {...props} />
-));
+const getComponent = (props: ButtonProps = {}) => render(
+  <Button {...defaultProps} {...props} />,
+);
 
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);

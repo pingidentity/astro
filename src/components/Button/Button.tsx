@@ -1,48 +1,72 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import { Button as ThemeUIButton } from 'theme-ui';
 
-import { useAriaLabelWarning, usePropWarning, useStatusClasses } from '../../hooks';
+import {
+  useAriaLabelWarning,
+  useLocalOrForwardRef,
+  usePropWarning,
+  useStatusClasses,
+} from '../../hooks';
+import { ButtonProps } from '../../types';
+import { FocusEventHandler } from '../../types/shared';
 import Loader from '../Loader';
 
-import { buttonPropTypes } from './buttonAttributes';
-
-const Button = forwardRef((props, ref) => {
+const Button = forwardRef((props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
   const {
+    children,
     className,
     isDisabled,
     isLoading,
-    onHoverStart,
+    onBlur,
+    onFocus,
     onHoverChange,
     onHoverEnd,
+    onHoverStart,
+    onKeyDown,
+    onKeyUp,
     onPress,
-    onPressStart,
-    onPressEnd,
     onPressChange,
+    onPressEnd,
+    onPressStart,
     onPressUp,
-    children,
-    variant,
     tabIndex,
+    variant,
     ...others
   } = props;
-  const buttonRef = useRef();
-  usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => buttonRef.current);
+  const buttonRef = useLocalOrForwardRef<HTMLButtonElement>(ref);
 
+  usePropWarning(props, 'disabled', 'isDisabled');
   const { isFocusVisible, focusProps } = useFocusRing();
-  const { isPressed: isPressedFromContext } = usePress(buttonRef);
+  const { isPressed: isPressedFromContext } = usePress({ ref: buttonRef });
+
   const { buttonProps, isPressed } = useButton({
     elementType: 'button',
-    ...props,
+    isDisabled,
+    onBlur: onBlur as FocusEventHandler,
+    onFocus: onFocus as FocusEventHandler,
+    onKeyDown,
+    onKeyUp,
+    onPress,
+    onPressChange,
+    onPressEnd,
+    onPressStart,
+    onPressUp,
+    ...others,
   }, buttonRef);
-  const { hoverProps, isHovered } = useHover(props);
+
+  const { hoverProps, isHovered } = useHover({
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+  });
+
   const { classNames } = useStatusClasses(className, {
+    isDisabled,
+    isFocused: isFocusVisible,
     isHovered,
     isPressed: isPressed || isPressedFromContext,
-    isFocused: isFocusVisible,
-    isDisabled,
   });
 
   const ariaLabel = props['aria-label'];
@@ -54,8 +78,7 @@ const Button = forwardRef((props, ref) => {
         aria-label={ariaLabel}
         className={classNames}
         role="button"
-        tx="buttons"
-        sx={isLoading && { display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        sx={isLoading ? { display: 'flex', justifyContent: 'center', alignItems: 'center' } : {}}
         variant={variant}
         {...others}
         {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
@@ -66,8 +89,6 @@ const Button = forwardRef((props, ref) => {
     </Pressable>
   );
 });
-
-Button.propTypes = buttonPropTypes;
 
 Button.defaultProps = {
   isDisabled: false,

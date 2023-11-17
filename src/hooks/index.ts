@@ -8,6 +8,7 @@ export { default as useDevelopmentWarning } from './useDevelopmentWarning';
 export { default as useFallbackImage } from './useFallbackImage';
 export { default as useField } from './useField';
 export { default as useLabelHeight } from './useLabelHeight';
+export { default as useLocalOrForwardRef } from './useLocalOrForwardRef';
 export { default as useModalState } from './useModalState';
 export { default as useMountTransition } from './useMountTransition';
 export { default as useNavBarPress } from './useNavBarPress';

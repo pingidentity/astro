@@ -7,12 +7,10 @@ export const base = {
   minWidth: 'min-content',
   padding: '10px 15px',
   outline: 'none',
-  display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '2px',
   flexShrink: 0,
-  wordBreak: 'inherit',
   whiteSpace: 'nowrap',
   ...textVariants.buttonLabel,
 };
