@@ -54,9 +54,11 @@ const BreadcrumbItem = forwardRef((props, ref) => {
     }
   }, [onAction, actionKey]);
 
+  const elementsWithOnPressProp = ['Button', 'IconButton', 'Link'];
+
   const elementProps = useMemo(() => {
     const elementTypeProps = { ...mergeProps(itemProps, others) };
-    if (ElementType.propTypes?.onPress) {
+    if (elementsWithOnPressProp.includes(elementType)) {
       elementTypeProps.onPress = onPressHandler;
     }
     if (isCurrent) {

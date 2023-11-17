@@ -10,6 +10,7 @@ import {
   Icon,
   Text,
 } from '../../index';
+import { ButtonProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
 
 import ButtonReadme from './Button.mdx';
@@ -41,7 +42,7 @@ export default {
   },
 };
 
-export const Default = args => (
+export const Default = (args: ButtonProps) => (
   <Button {...args} />
 );
 
