@@ -1,21 +1,22 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, RenderHookResult } from '@testing-library/react-hooks';
 
-import useFallbackImage from './useFallbackImage';
+import { UseFallbackImageProps } from './useFallbackImage';
+import useFallbackImage from '.';
 
-const defaultProps = {
+const defaultProps: UseFallbackImageProps = {
   src: 'test-src',
-  fallbackImage: 'test-fallback-src',
   onImageLoad: jest.fn(),
   onImageError: jest.fn(),
   fallbackTimeout: 5,
   onFallbackTimeout: jest.fn(),
+  fallbackImage: 'test-fallback-src',
 };
 
-test('should return node if all props are correct ', () => {
-  const {
-    result: { current },
-  } = renderHook(() => useFallbackImage(defaultProps));
-  expect(current).toBeInstanceOf(HTMLImageElement);
+test('should return node if all props are correct', () => {
+  const { result }: RenderHookResult<undefined, HTMLImageElement> = renderHook(
+    () => useFallbackImage(defaultProps),
+  );
+  expect(result.current).toBeInstanceOf(HTMLImageElement);
 });
 
 test('should not trigger onImageLoad if no fallback passed', () => {
