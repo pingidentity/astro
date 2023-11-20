@@ -13,6 +13,7 @@ import {
   Box,
   Breadcrumbs,
   Button,
+  ButtonBar,
   ColorField,
   IconButton,
   ListView,
@@ -209,7 +210,7 @@ export const Expandable = () => {
       fontSize: 'sm',
       fontWeight: 500,
       color: 'text.secondary',
-      '> div': {
+      '& > div:first-child': {
         order: 2,
       },
     },
@@ -221,15 +222,6 @@ export const Expandable = () => {
       gap: 'md',
       width: isExpanded ? '100%' : '400px',
       transition: 'width 500ms',
-    },
-    footer: {
-      marginTop: 'auto',
-      padding: '15px 25px',
-      button: {
-        width: '65px',
-        height: '38px',
-        border: '0 !important',
-      },
     },
   };
 
@@ -326,22 +318,20 @@ export const Expandable = () => {
   );
 
   const footer = (
-    <Box isRow sx={sx.footer}>
+    <ButtonBar>
       <Button
         onPress={onCloseHandler}
-        sx={sx.footer.button}
         variant="primary"
       >
         Save
       </Button>
       <Button
         onPress={onCloseHandler}
-        sx={sx.footer.button}
-        variant="text"
+        variant="link"
       >
         Cancel
       </Button>
-    </Box>
+    </ButtonBar>
   );
 
   return (
