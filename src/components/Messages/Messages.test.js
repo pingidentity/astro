@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import userEvent from '@testing-library/user-event';
@@ -81,15 +82,16 @@ test('`onClose` get as first arg key of message', () => {
 });
 
 test('click on close button removes message after delay', () => {
+  act(() => {
+    global.setTimeout = jest.fn(cb => cb());
+  });
   getComponent();
   const messages = screen.getByTestId(testId);
   expect(messages.childElementCount).toBe(2);
 
   const buttons = screen.getAllByRole('button');
   userEvent.click(buttons[0]);
-  setTimeout(() => {
-    expect(messages.childElementCount).toBe(1);
-  }, 200);
+  expect(messages.childElementCount).toBe(1);
 });
 
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {
