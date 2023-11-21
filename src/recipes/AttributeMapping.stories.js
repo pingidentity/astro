@@ -19,7 +19,7 @@ import {
   Text,
   TextField,
 } from '../index';
-import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 import statuses from '../utils/devUtils/constants/statuses';
 
 export default {
@@ -367,8 +367,8 @@ export const EditRow = props => {
     index,
     leftValue,
     rightValue,
-    updateRow = () => {},
-    removeRow = () => {},
+    updateRow = () => { },
+    removeRow = () => { },
   } = props;
 
   const leftItems = [

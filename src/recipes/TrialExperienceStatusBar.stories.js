@@ -10,7 +10,7 @@ import {
   Separator,
   Text,
 } from '../index';
-import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 
 export default {
   title: 'Recipes/Trial Experience Nav',

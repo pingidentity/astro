@@ -11,7 +11,7 @@ import {
   Text,
 } from '../../index';
 import { ButtonProps } from '../../types';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import ButtonReadme from './Button.mdx';
 import { buttonArgTypes } from './buttonAttributes';

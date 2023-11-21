@@ -7,7 +7,7 @@ import {
   Link,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 

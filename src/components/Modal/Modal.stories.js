@@ -10,7 +10,7 @@ import {
   OverlayProvider,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 
 import ModalReadme from './Modal.mdx';

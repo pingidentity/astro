@@ -11,7 +11,7 @@ import {
   PopoverMenu,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import PopoverMenuReadme from './PopoverMenu.mdx';
 

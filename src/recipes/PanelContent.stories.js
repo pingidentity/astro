@@ -28,7 +28,7 @@ import {
   Text,
   TextField,
 } from '../index';
-import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 import UserImage from '../utils/devUtils/assets/UserImage.png';
 import statuses from '../utils/devUtils/constants/statuses';
 
@@ -225,15 +225,15 @@ export const LabelValuePairs = ({ fields = data.contactInfo.fields }) => (
         <Box isRow gap="md">
           <Text>{value}</Text>
           {isVerified && (
-          <Box isRow gap="xs">
-            <NoticeIcon
-              color="success.dark"
-              status={statuses.SUCCESS}
-              aria-label={`${statuses.SUCCESS}-icon`}
-              size="xs"
-            />
-            <Text variant="listSubtitle" color="success.dark">Verified</Text>
-          </Box>
+            <Box isRow gap="xs">
+              <NoticeIcon
+                color="success.dark"
+                status={statuses.SUCCESS}
+                aria-label={`${statuses.SUCCESS}-icon`}
+                size="xs"
+              />
+              <Text variant="listSubtitle" color="success.dark">Verified</Text>
+            </Box>
           )}
         </Box>
       </Box>
@@ -302,7 +302,7 @@ export const EditPanel = () => (
           >
             <Box gap="md" width="500px">
               {editData[item].image
-               && <ImageUploadField label="Photo" previewHeight={40} previewWidth={40} previewImage={UserImage} />}
+                && <ImageUploadField label="Photo" previewHeight={40} previewWidth={40} previewImage={UserImage} />}
               {editData[item].fields.map(({ label, value, slot }) => (
                 <Box key={`${label}-key`}>
                   <TextField label={label} defaultValue={value} />

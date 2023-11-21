@@ -11,7 +11,7 @@ import {
   PanelHeaderMenu,
   PanelHeaderSwitchField,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { SharedItemArgTypes } from '../ListViewItem/listViewItemAttributes';
 
