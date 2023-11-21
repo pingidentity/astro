@@ -1,6 +1,16 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 
-const useImageUploadState = (inputRef, props = {}) => {
+interface ImageUploadStateProps {
+  previewImage?: string;
+  defaultPreviewImage?: string | null;
+  fileTypes?: string[];
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  previewHeight?: string;
+  previewWidth?: string;
+}
+
+const useImageUploadState = (inputRef: RefObject<HTMLInputElement | null>,
+  props: ImageUploadStateProps = {}) => {
   const {
     previewImage: existingImage,
     defaultPreviewImage: defaultPreviewNode,
@@ -31,11 +41,14 @@ const useImageUploadState = (inputRef, props = {}) => {
     if (previewImage && previewImage !== defaultPreviewImage) {
       setIsMenuOpen(true);
     } else {
-      inputRef.current.click();
+      inputRef.current?.click();
     }
   }, [defaultPreviewImage, previewImage, inputRef]);
 
-  const handleInputChange = useCallback(event => {
+  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      return;
+    }
     const eventFileType = event.target?.files[0]?.type?.split('/')[0];
     if (fileTypes?.includes(eventFileType)) {
       if (onChange && typeof onChange === 'function') {
@@ -48,8 +61,8 @@ const useImageUploadState = (inputRef, props = {}) => {
           setIsImageType(true);
 
           const reader = new FileReader();
-          reader.onload = ({ target: { result } }) => {
-            setPreviewImage(result);
+          reader.onload = () => {
+            setPreviewImage(reader.result as string);
           };
           reader.readAsDataURL(event.target?.files[0]);
         } else {
@@ -61,7 +74,7 @@ const useImageUploadState = (inputRef, props = {}) => {
   }, []);
 
   const handleOpenMenuChange = useCallback(
-    isOpen => {
+    (isOpen: boolean) => {
       if (isOpen && previewImage && previewImage !== defaultPreviewImage) {
         setIsMenuOpen(true);
       } else {
@@ -81,7 +94,7 @@ const useImageUploadState = (inputRef, props = {}) => {
   ]);
 
   const handleLabelClick = useCallback(
-    e => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if (previewImage && previewImage !== defaultPreviewImage) {
         setIsMenuOpen(true);
