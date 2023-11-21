@@ -1,4 +1,10 @@
-export const FIGMA_LINKS = {
+interface FigmaLinks {
+  [key: string]: {
+    [key: string]: string
+  }
+}
+
+export const FIGMA_LINKS: FigmaLinks = {
   accordionGroup: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=446-1808&t=8Wwd3tIBh3GEjCJB-0',
     disabledState: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43917%3A31554&mode=dev',

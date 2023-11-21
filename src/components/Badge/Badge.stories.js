@@ -12,7 +12,7 @@ import {
   IconButton,
 } from '../../index';
 import { flatColorList } from '../../styles/colors.js';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import BadgeReadme from './Badge.mdx';
 

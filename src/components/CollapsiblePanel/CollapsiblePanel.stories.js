@@ -5,7 +5,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   CollapsiblePanel,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
 

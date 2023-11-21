@@ -21,7 +21,7 @@ import {
 } from '../../index';
 import { flatColorList } from '../../styles/colors';
 import { IconProps, SVGComponentProps } from '../../types';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
 
 import IconReadme from './Icon.mdx';

@@ -11,7 +11,7 @@ import {
   IconButtonToggle,
   Item,
 } from '../index';
-import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 
 
 export default {

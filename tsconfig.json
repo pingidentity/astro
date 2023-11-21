@@ -5,7 +5,10 @@
     "target": "ES5",
     "outDir": "lib/cjs",
     "rootDir": "./src/",
-    "types": ["mdx", "@testing-library/jest-dom"],
+    "types": [
+      "mdx",
+      "@testing-library/jest-dom"
+    ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
@@ -18,5 +21,7 @@
     "sourceMap": true,
     "skipLibCheck": true,
   },
-  "include": ["./src"]
- }
+  "include": [
+    "./src"
+  ]
+}

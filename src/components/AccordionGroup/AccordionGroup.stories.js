@@ -11,7 +11,7 @@ import {
   Text,
   TextField,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 import { validHeadingTags } from '../AccordionItem/AccordionItem';
 
 import AccordionReadme from './AccordionGroup.mdx';
