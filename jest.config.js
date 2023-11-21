@@ -24,7 +24,7 @@ module.exports = {
     'jest-canvas-mock',
   ],
   setupFilesAfterEnv: [
-    '<rootDir>/src/utils/testUtils/setupTests.js',
+    '<rootDir>/src/utils/testUtils/setupTests.ts',
   ],
   coverageThreshold: {
     global: {

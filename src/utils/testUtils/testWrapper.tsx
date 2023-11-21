@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { css, Global } from '@emotion/react';
-import { render } from '@testing-library/react';
+import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from 'theme-ui';
 
 import theme from '../../styles/theme';
 
-const GlobalTestStyles = () => (
+const GlobalTestStyles: React.FC = () => (
   <Global
     styles={
       css`
@@ -28,18 +28,23 @@ const GlobalTestStyles = () => (
  * See Button.test.js as an example for how to apply conditional classes and then testing that
  * those classes have the appropriate styles tied to them in the theme.
  */
-const Wrapper = ({ children }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalTestStyles />
-      {children}
-    </ThemeProvider>
-  );
-};
 
-const customRender = (ui, options) => render(ui, { wrapper: Wrapper, ...options });
+interface WrapperProps {
+  children: ReactNode;
+}
 
-// re-export everything
+const Wrapper: React.FC<WrapperProps> = ({ children }) => (
+  <ThemeProvider theme={theme}>
+    <GlobalTestStyles />
+    {children}
+  </ThemeProvider>
+);
+
+const customRender = (ui: React.ReactElement, options?: RenderOptions) => render(ui,
+  { wrapper: Wrapper as React.FC, ...options },
+);
+
+// re-export everything -
 export * from '@testing-library/react';
 
 // override render method
