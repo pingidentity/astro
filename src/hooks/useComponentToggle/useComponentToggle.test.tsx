@@ -10,8 +10,8 @@ const condition = false;
 const defaultProps = {
   condition,
   onConditionChange: callback,
-  ComponentToRenderIfTrue: 'true-string',
-  ComponentToRenderIfFalse: 'false-string',
+  ComponentToRenderIfTrue: <span>true-string</span>,
+  ComponentToRenderIfFalse: <span>false-string</span>,
 };
 
 const TestComponent = () => {
@@ -20,8 +20,8 @@ const TestComponent = () => {
   const conditionalRenderProps = {
     condition: thisCondition,
     onConditionChange: setCondition,
-    ComponentToRenderIfTrue: 'true-string',
-    ComponentToRenderIfFalse: 'false-string',
+    ComponentToRenderIfTrue: <span>true-string</span>,
+    ComponentToRenderIfFalse: <span>false-string</span>,
     onConditionChangeProp: callback,
   };
 
@@ -33,16 +33,16 @@ const TestComponent = () => {
   );
 
   return (
-    <button data-testid="test-div" onClick={handleConditionChange} onKeyDown={handleConditionChange}>
+    <button type="button" data-testid="test-div" onClick={handleConditionChange} onKeyDown={handleConditionChange}>
       {RenderedComponent}
     </button>
   );
 };
 
-const getComponent = (props = {}) => render(<TestComponent {...props} {...defaultProps} />);
+const getComponent = () => render(<TestComponent />);
 
 test('default useField', () => {
-  renderHook(() => useComponentToggle());
+  renderHook(() => useComponentToggle(defaultProps));
 });
 
 test('callback function should call, if provided', () => {
@@ -58,7 +58,7 @@ test('expect hook to return correct data shape', async () => {
     RenderedComponent,
   } = result.current;
   expect(handleConditionChange).toEqual(expect.any(Function));
-  expect(RenderedComponent).toEqual('false-string');
+  expect(RenderedComponent).toEqual(<span>false-string</span>);
 });
 
 test('expect conditional toggling to work', async () => {
