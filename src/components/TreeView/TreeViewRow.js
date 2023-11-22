@@ -26,6 +26,7 @@ const TreeViewRow = forwardRef((props, ref) => {
     isExpanded,
     isSelected,
     isDisabled,
+    isParentFocused,
     iconButtonProps,
     ...others
   } = props;
@@ -72,13 +73,16 @@ const TreeViewRow = forwardRef((props, ref) => {
     others,
   );
 
+  // console.log(`ROW: ${key} has parent focus: ${isParentFocused}`)
+
   return (
     <Box
       ref={treeRowRef}
       isRow
       alignItems="center"
       gap="xs"
-      sx={{ flexGrow: 1 }}
+      sx={{ flexGrow: 1,
+        '& :focus': { border: 'none' } }}
       className={classNames}
       key={`${key} box`}
       {...mergedProps}
@@ -90,10 +94,23 @@ const TreeViewRow = forwardRef((props, ref) => {
           defaultIcon={MenuRight}
           toggledIcon={MenuDownIcon}
           iconProps={{ size: 25, title: `${title} expand or collapse button` }}
-          buttonProps={{ 'aria-label': `${title} expand or collapse button` }}
+          buttonProps={{
+            'aria-label': `${title} expand or collapse button`,
+            ...(isParentFocused && { tabIndex: 0 }),
+            ...(!isParentFocused && { tabIndex: -1 }),
+          }}
         />
       )}
-      <Box isRow className={classNames} alignItems="center" gap="xs" variant="treeView.treeRow">
+      <Box
+        isRow
+        className={classNames}
+        alignItems="center"
+        gap="xs"
+        variant="treeView.treeRow"
+        sx={!items && {
+          ml: '36px',
+        }}
+      >
         <Icon color="focus" icon={mainIcon} size={25} title="folder icon" alt="folder icon" />
         <Text className={classNames}>
           {title}
@@ -108,6 +125,7 @@ TreeViewRow.propTypes = {
   isSelected: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isExpanded: PropTypes.bool,
+  isParentFocused: PropTypes.bool,
   title: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({})),
   iconButtonProps: PropTypes.shape({
