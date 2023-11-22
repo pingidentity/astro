@@ -23,7 +23,7 @@ const defaultCloseButtonProps = {
 
 const ControlledWithTransition = () => {
   const { state, onClose } = useOverlayPanelState();
-  const triggerRef = useRef();
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -37,28 +37,28 @@ const ControlledWithTransition = () => {
       >
         Open Panel
       </Button>
-      { (state.isOpen || state.isTransitioning)
+      {(state.isOpen || state.isTransitioning)
         && (
-        <OverlayPanel
-          isOpen={state.isOpen}
-          isTransitioning={state.isTransitioning}
-          state={state}
-          triggerRef={triggerRef}
-          {...defaultOverlayProps}
-        >
-          <div>
-            <Button
-              onPress={() => { onClose(state, triggerRef); }}
-              aria-expanded={state.isOpen}
-              {...defaultCloseButtonProps}
-            >
-              Close Panel
-            </Button>
-            <p pt="md">
-              {JSON.stringify(state.isOpen)}
-            </p>
-          </div>
-        </OverlayPanel>
+          <OverlayPanel
+            isOpen={state.isOpen}
+            isTransitioning={state.isTransitioning}
+            state={state}
+            triggerRef={triggerRef}
+            {...defaultOverlayProps}
+          >
+            <div>
+              <Button
+                onPress={() => { onClose(state, triggerRef); }}
+                aria-expanded={state.isOpen}
+                {...defaultCloseButtonProps}
+              >
+                Close Panel
+              </Button>
+              <p padding-top="md">
+                {JSON.stringify(state.isOpen)}
+              </p>
+            </div>
+          </OverlayPanel>
         )}
     </OverlayProvider>
   );
