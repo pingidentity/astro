@@ -1,10 +1,14 @@
 import React from 'react';
 import { useTreeData } from 'react-stately';
+import userEvent from '@testing-library/user-event';
+import PropTypes from 'prop-types';
 
 import { Item } from '../../index';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 
 import { SectionOrItemRender } from './TreeView';
+import { refArray } from './TreeViewKeyboardDelegate.test';
+import { addRefToArrayHelper, removeRefFromArrayHelper } from './TreeViewSection';
 import TreeView from '.';
 
 const testId = 'test-TreeView';
@@ -53,9 +57,15 @@ const data = [
   },
 ];
 
+const singleData = [
+  {
+    title: 'Single Item',
+  },
+];
+
 const TreeViewComponent = props => {
   const tree = useTreeData({
-    initialItems: data,
+    initialItems: props.data,
     getKey: item => item.title,
     getChildren: item => item.items,
   });
@@ -71,6 +81,10 @@ const TreeViewComponent = props => {
       )}
     </TreeView>
   );
+};
+
+TreeViewComponent.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 let offsetWidth;
@@ -103,18 +117,18 @@ test('TreeView component does load', () => {
 });
 
 test('Can select an Item using the mouse', () => {
-  render(<TreeViewComponent />);
+  render(<TreeViewComponent data={data} />);
   const element = screen.queryByRole('treegrid');
   expect(element).toBeInTheDocument();
 
   const peopleElement = screen.queryByText('Single Item');
   expect(peopleElement).not.toHaveClass('is-selected');
-  fireEvent.click(peopleElement);
+  userEvent.click(peopleElement);
   expect(peopleElement).toHaveClass('is-selected');
 });
 
 test('Renders both Sections and Items', () => {
-  render(<TreeViewComponent />);
+  render(<TreeViewComponent data={data} />);
 
   const peopleElement = screen.getByText('Single Item');
   expect(peopleElement).toBeInTheDocument();
@@ -127,7 +141,7 @@ test('Renders both Sections and Items', () => {
 });
 
 test('Can expand an Item using the mouse', () => {
-  render(<TreeViewComponent />);
+  render(<TreeViewComponent data={data} />);
 
   // The children of collapsed sections will not
   // be rendered by default.
@@ -136,23 +150,23 @@ test('Can expand an Item using the mouse', () => {
   // Clicking the dropdown icon, renders the children
   // of the collapsed section.
   const buttons = screen.queryAllByRole('button');
-  fireEvent.click(buttons[0]);
+  userEvent.click(buttons[0]);
   expect(screen.queryByText(data[0].items[0].title)).toBeInTheDocument();
 });
 
 test('onExpandedChange change prop calls when used', () => {
   const onPress = jest.fn();
-  render(<TreeViewComponent onExpandedChange={onPress} />);
+  render(<TreeViewComponent data={data} onExpandedChange={onPress} />);
   expect(onPress).not.toHaveBeenCalled();
 
   const buttons = screen.queryAllByRole('button');
-  fireEvent.click(buttons[0]);
+  userEvent.click(buttons[0]);
 
   expect(onPress).toHaveBeenCalled();
 });
 
 test('disabledKeys prop disables items in the tree -- rendering them unclickable', () => {
-  render(<TreeViewComponent disabledKeys={['Single Item']} />);
+  render(<TreeViewComponent data={data} disabledKeys={['Single Item']} />);
 
   const listItems = screen.queryAllByRole('treeitem');
   const thisItem = listItems[2];
@@ -161,15 +175,14 @@ test('disabledKeys prop disables items in the tree -- rendering them unclickable
   expect(thisItem).toHaveAttribute('aria-disabled', 'true');
 
 
-  fireEvent.mouseDown(thisItem);
-  fireEvent.mouseUp(thisItem);
+  userEvent.click(thisItem);
 
   expect(thisItem).not.toHaveClass('is-selected');
   expect(thisItem).toHaveAttribute('aria-selected', 'false');
 });
 
 test('displays correct aria attributes', () => {
-  render(<TreeViewComponent />);
+  render(<TreeViewComponent data={data} />);
 
   const listItems = screen.getAllByRole('treeitem');
   const lastTreeItem = listItems[2];
@@ -179,7 +192,7 @@ test('displays correct aria attributes', () => {
   expect(lastTreeItem).toHaveAttribute('aria-setsize', '3');
 
   const buttons = screen.queryAllByRole('button');
-  fireEvent.click(buttons[1]);
+  userEvent.click(buttons[1]);
 
   const expandedItems = screen.getAllByRole('treeitem');
   const nestedItem = expandedItems[2];
@@ -187,6 +200,45 @@ test('displays correct aria attributes', () => {
   expect(nestedItem).toHaveAttribute('aria-level', '2');
   expect(nestedItem).toHaveAttribute('aria-posinset', '1');
   expect(nestedItem).toHaveAttribute('aria-setsize', '1');
+});
+
+test('onKeyDown calls passed in prop call back function', () => {
+  const callback = jest.fn();
+  render(<TreeViewComponent data={data} onKeyDown={callback} />);
+  const listItems = screen.queryAllByRole('treeitem');
+  const thisItem = listItems[0];
+
+  userEvent.type(thisItem, '{arrowleft}');
+
+  expect(callback).toHaveBeenCalled();
+});
+
+test('onKeyDown calls passed in prop call back function', () => {
+  const callback = jest.fn();
+  render(<TreeViewComponent data={data} onKeyDown={callback} />);
+  const listItems = screen.queryAllByRole('treeitem');
+  const thisItem = listItems[2];
+  userEvent.type(thisItem, '{arrowleft}');
+
+  expect(callback).toHaveBeenCalled();
+});
+
+test('onKeyDown does not call passed in prop call back function', () => {
+  const callback = jest.fn();
+  render(<TreeViewComponent data={data} />);
+  const listItems = screen.queryAllByRole('treeitem');
+  const thisItem = listItems[2];
+  userEvent.type(thisItem, '{arrowleft}');
+
+  expect(callback).not.toHaveBeenCalled();
+});
+
+test('items still render if there is only one provided', () => {
+  const callback = jest.fn();
+  render(<TreeViewComponent data={singleData} onKeyDown={callback} />);
+  const listItem = screen.queryByText('Single Item');
+
+  expect(listItem).toBeInTheDocument();
 });
 
 const firstJSX = (
@@ -219,4 +271,24 @@ test('Section or Item Render renders second item if condition is false', () => {
   const thisItem = screen.getByText('second');
   expect(thisItem).toBeInTheDocument();
   expect(screen.queryByText('first')).not.toBeInTheDocument();
+});
+
+test('Handler function removes ref from array', () => {
+  const newArray = removeRefFromArrayHelper(refArray, 'test');
+  expect(newArray).toHaveLength(2);
+});
+
+test('Handler function does not remove ref from array', () => {
+  const newArray = removeRefFromArrayHelper(refArray, 'anothertest');
+  expect(newArray).toHaveLength(3);
+});
+
+test('Handler function does add ref to array', () => {
+  const newArray = addRefToArrayHelper(refArray, 'yetanothertest', { current: 'currentlystilltesting' });
+  expect(newArray).toHaveLength(4);
+});
+
+test('Handler function does not add ref to array', () => {
+  const newArray = addRefToArrayHelper(refArray, 'test', { current: 'currentlystilltesting' });
+  expect(newArray).toHaveLength(3);
 });
