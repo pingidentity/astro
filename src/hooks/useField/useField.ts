@@ -3,34 +3,106 @@ import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
+import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
 import { modes as labelModes } from '../../components/Label/constants';
+import { BoxProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { useStatusClasses } from '..';
-
 
 /**
  * Generates the necessary props to be used in field components.
  * @param {{}} props Props for the field
  * @returns {{}} Prop objects to be spread into field components.
  */
-const useField = (props = {}) => {
+
+interface WrapperProps extends BoxProps {
+  id?: string;
+  statusClasses?: { [className: string]: boolean };
+}
+
+interface ContainerProps extends WrapperProps {
+  isFloatLabelActive?: boolean;
+}
+
+// TODO: replace with LabelProps instead of ThemeUILabelProps
+// once Label component is rewritten to ts
+interface LabelProps extends ThemeUILabelProps {
+  labelMode?: 'default' | 'float' | 'left';
+  statusClasses?: { [className: string]: boolean };
+}
+
+interface ControlProps<T> extends React.HTMLAttributes<T> {
+  statusClasses?: { [className: string]: boolean };
+}
+
+export interface UseFieldProps<T> {
+  autocomplete?: string;
+  autoComplete?: string;
+  autoCorrect?: string;
+  children?: React.ReactNode;
+  className?: string;
+  containerProps?: ContainerProps;
+  controlProps?: ControlProps<T>;
+  defaultText?: string;
+  defaultValue?: string | number;
+  direction?: string;
+  disabledKeys?: string[];
+  hasAutoFocus?: boolean;
+  hasNoStatusIndicator?: boolean;
+  helperText?: string;
+  hintText?: string;
+  id?: string;
+  isDefaultSelected?: boolean;
+  isDisabled?: boolean;
+  isIndeterminate?: boolean;
+  isReadOnly?: boolean;
+  isRequired?: boolean;
+  isRestrictiveMultivalues?: boolean;
+  isSelected?: boolean;
+  label?: string;
+  labelMode?: string;
+  labelProps?: LabelProps;
+  maxLength?: number;
+  name?: string;
+  onBlur?: (e: React.FocusEvent) => void;
+  onChange?: (e: React.ChangeEvent) => void;
+  onClear?: () => void;
+  onFocus?: (e: React.FocusEvent) => void;
+  onFocusChange?: (isFocused: boolean) => void;
+  onLoadMore?: () => void;
+  onOpenChange?: () => void;
+  onSelectionChange?: (key: string) => void;
+  placeholder?: string | number;
+  role?: string;
+  selectedKey?: string;
+  spellCheck?: string;
+  status?: string;
+  statusClasses?: { [className: string]: boolean };
+  type?: string;
+  value?: string | number;
+  wrapperProps?: WrapperProps;
+}
+
+type CustomChangeEventType = {
+  target?: {
+    value: string | number | undefined
+  },
+  persist?(): void;
+}
+
+const useField = <T>(props: UseFieldProps<T>) => {
   const {
     autocomplete,
     autoComplete,
     autoCorrect,
-    children,
     className,
     containerProps = {},
     controlProps = {},
-    defaultText,
     defaultValue,
-    direction,
-    disabledKeys,
     hasAutoFocus,
     hasNoStatusIndicator,
-    helperText,
     hintText,
     id,
     isDefaultSelected,
@@ -39,7 +111,6 @@ const useField = (props = {}) => {
     isReadOnly,
     isRequired,
     isRestrictiveMultivalues,
-    isSelected,
     label,
     labelMode,
     labelProps = {},
@@ -47,15 +118,9 @@ const useField = (props = {}) => {
     name,
     onBlur,
     onChange = noop,
-    onClear,
     onFocus,
-    onFocusChange,
-    onLoadMore,
-    onOpenChange,
-    onSelectionChange,
     placeholder,
     role,
-    selectedKey,
     spellCheck,
     status = statuses.DEFAULT,
     statusClasses,
@@ -85,13 +150,14 @@ const useField = (props = {}) => {
   }, [defaultValue, value, placeholder]);
 
   // Capture value changes so we can apply the has-value class to the container
-  const fieldOnChange = e => {
+  const fieldOnChange = (e: CustomChangeEventType) => {
     const eventValue = e?.target?.value;
     if (!!eventValue || eventValue === 0 || !!placeholder || placeholder === 0) {
       setHasValue(true);
     } else {
       setHasValue(false);
     }
+
     // adding this function resolves the error brought up in UIP-5116
     if (e.persist) {
       e.persist();
@@ -138,8 +204,23 @@ const useField = (props = {}) => {
     ...labelProps?.statusClasses,
   });
 
-
-  const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
+  const { ariaProps, nonAriaProps } = getAriaAttributeProps(
+    omit(others, [
+      'children',
+      'defaultText',
+      'direction',
+      'disabledKeys',
+      'helperText',
+      'isSelected',
+      'onClear',
+      'onFocusChange',
+      'onLoadMore',
+      'onOpenChange',
+      'onRemove',
+      'onSelectionChange',
+      'selectedKey',
+    ]),
+  );
 
   // Handle focus within and value state for the container. These are needed for float labels.
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
@@ -190,7 +271,7 @@ const useField = (props = {}) => {
     value,
     ...ariaProps,
     ...raFieldProps,
-    ...mergeProps({ onBlur, onFocus }, omit(controlProps, 'data-testid'), focusProps),
+    ...mergeProps({ onBlur, onFocus }, omit(controlProps, 'data-testid'), focusProps) as object,
   };
 
   const fieldLabelProps = {
@@ -215,6 +296,5 @@ const useField = (props = {}) => {
     fieldLabelProps,
   };
 };
-
 
 export default useField;
