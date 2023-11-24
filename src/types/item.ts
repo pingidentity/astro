@@ -8,7 +8,7 @@ export interface StylingProps extends DOMAttributes, StyleProps {
 }
 
 declare module '@react-types/shared' {
-  // eslint-disable-next-line no-shadow
+  // eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars
   interface ItemProps<T> extends StyleProps, DOMAttributes {
       /** The rendered label for the item. */
     label?: string;
