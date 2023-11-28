@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.31.0...@pingux/astro@2.32.0) (2023-11-28)
+
+
+### Bug Fixes
+
+* [UIP-6509] Astro Messages close with Keyboard ([667b9e0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/667b9e06b5b7003cdc6db43b194945f8570bce6a))
+* [UIP-6602] OverlayPanel: update switch selector ([5cbb0ce](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5cbb0cee8f54a0fa356e560f8bc50c8b7ae77b5f))
+
+
+### Features
+
+* [UIP-6471] Astro TreeView Keyboard Delegate ([a953f17](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a953f178d0f366699cdbdc55a5f4c1962063c45a))
+* [UIP-6609]: Convert Button to TypeScript ([9bbb6f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9bbb6f7cbb0313ff7f3edb6a5c1327576885dfc0))
+* [UIP-6639]: useComponentToggle: convert to typescript ([c7baa58](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c7baa5884df6fc6aebb1b5daf3fd6fd26b516295))
+* [UIP-6641] convert useDebounce to typescript ([8d796d8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8d796d8cd9c42be0c6d54421afd72eddadce4f47))
+* [UIP-6643]: useFallbackImage: update to typescript ([34788a9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/34788a9077d8d58bc98b4ab9865f15fa1315e25c))
+* [UIP-6644] convert useField to typescript ([8266794](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8266794252fcf0b1d2ac37633be0656ddb68946c))
+* [UIP-6646]: useImageUploadState: update to typescript ([e9ae323](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e9ae323762aaab99c22f61a60419bb6ebaa739de))
+* [UIP-6648] useModalState convert to typescript ([6d412a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6d412a450c2456f98e5a98e40848388b4f394bdc))
+* [UIP-6649] Convert useMountTransition to TS ([42c2d0c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/42c2d0c8aca53959f8b09a979a284ff0158489d0))
+* [UIP-6659]: useStatusClasses: update to typescript ([e2f2e62](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e2f2e62c859a6da0857656bee9e3cf22e35c225e))
+* [UIP-6661]: testUtils: update to typescript ([e36cd76](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e36cd76d184ac3b93cec2374cba2c17d09951886))
+* [UIP-6662]: figmaLinks: update to typescript ([9448bde](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9448bded83cd262c3b09f14f445f75b2bc0da4f1))
+
+
+
+
+
 # [2.31.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.30.0...@pingux/astro@2.31.0) (2023-11-16)
 
 
