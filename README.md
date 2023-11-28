@@ -17,10 +17,6 @@ Yarn:
 - Node: 18+
 - React: 16.8+
 
-## Typescript
-
-Run `yarn dlx @yarnpkg/sdks vscode` and reload the window to configure vscode for TypeScript.
-
 ## Usage
 
 All apps should be wrapped in an `<AstroProvider>` for full functionality and styling.
@@ -47,6 +43,17 @@ For example, to view the disabled button styling, navigate to the Button storyâ€
 
 ## Yarn
 We use a modern version of [Yarn](https://yarnpkg.com/getting-started) for package management with the [Plug'n'Play](https://yarnpkg.com/features/pnp) feature enabled. This allows for a [Zero Install](https://yarnpkg.com/features/zero-installs) approach to be used.
+
+## Enabling TypeScript in VSCode
+
+To run TypeScript properly, there are a couple of steps to run first:
+
+1. Run `yarn dlx @yarnpkg/sdks vscode` and reload the window to configure vscode for TypeScript. 
+2. Open a TypeScript file in VSCode and open the command palette with `cmd + shift + p`.
+    
+    a. Search for "TypeScript: Select TypeScript Version..."
+    
+    b. Choose "Use Workspace Version"
 
 ## Browser Compatibility
 

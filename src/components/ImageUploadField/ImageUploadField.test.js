@@ -232,6 +232,25 @@ test('loader size can be changed via the prop', () => {
     'font-size': `${testLoaderSize}px`,
   });
 });
+test('should show the menu if label clicked when preview image exists', async () => {
+  getComponent();
+  const imageUploadButton = screen.getByTestId(testButtonId);
+  userEvent.click(imageUploadButton);
+  fireEvent.change(screen.getByTestId('image-upload-input'), {
+    target: { files: [file] },
+  });
+  const imagePreview = await screen.findByTestId(imageUploadImagePreview);
+  expect(imagePreview).toBeInTheDocument();
+  expect(imagePreview).toHaveAttribute('src');
+
+  // Click on the image preview button
+  const imageUploadLabel = screen.getByText(testLabel);
+  fireEvent.click(imageUploadLabel);
+  expect((screen.getAllByRole('button'))[0]).toHaveAttribute('aria-expanded', 'true');
+  expect(screen.getByRole('menu')).toBeInTheDocument();
+  expect(screen.getByText('Upload New Image')).toBeInTheDocument();
+  expect(screen.getByText('Remove Image')).toBeInTheDocument();
+});
 
 test('should show the menu if label clicked when preview image exists with custom uploads', async () => {
   const customUploadProp = 'Custom Upload';

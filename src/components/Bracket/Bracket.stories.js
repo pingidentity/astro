@@ -5,7 +5,7 @@ import {
   Box,
   Bracket,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import BracketReadme from './Bracket.mdx';
 

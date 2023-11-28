@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { useTreeState } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { useListBox } from '@react-aria/listbox';
@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { TreeViewContext } from '../../context/TreeViewContext';
 import { Box, TreeViewItem, TreeViewSection } from '../../index';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+
+import TreeViewWrapper from './TreeViewWrapper';
 
 // split out and exported for ease of use across components
 // and to facilitate easier testing (eliminates redundant conditional renders)
@@ -35,8 +37,17 @@ const TreeView = forwardRef((props, ref) => {
     tree,
     disabledKeys,
     onExpandedChange,
+    onKeyDown,
+    pageLength = 5,
     ...others
   } = props;
+
+  // we are tracking the last focused item.
+  // this enables us to have focus jump back to the item, after focus
+  // leaves the tree, and then returns.
+  const [lastFocusedItem, setLastFocusedItem] = useState(tree?.items[0]?.key);
+
+  const level = 0;
 
   const treeViewRef = useRef();
 
@@ -54,7 +65,62 @@ const TreeView = forwardRef((props, ref) => {
     ...others,
   });
 
-  const level = 0;
+  const flattenNestedData = _data => {
+    const returnArray = [];
+
+    const checkItemNesting = item => {
+      if (item.value?.items?.length > 0) {
+        return {
+          isTopLevel: true,
+          hasChildren: true,
+        };
+      }
+      if (item.items?.length > 0) {
+        return {
+          isTopLevel: false,
+          hasChildren: true,
+        };
+      } return {
+        isTopLevel: false,
+        hasChildren: false,
+      };
+    };
+
+    const checkSection = (isRendered, hasItems) => {
+      return isRendered && hasItems;
+    };
+
+    const loop = data => {
+      for (let i = 0; i < data.length; i += 1) {
+        const obj = {
+          key: data[i].key,
+        };
+        returnArray.push(obj);
+        const { hasChildren, isTopLevel } = checkItemNesting(data[i]);
+        if (checkSection(state.expandedKeys.has(data[i].key), hasChildren) === true) {
+          if (isTopLevel) {
+            loop(data[i].value?.items);
+          } else {
+            loop(data[i].items);
+          }
+        }
+      }
+    };
+
+    loop(_data);
+
+    return returnArray;
+  };
+
+  // list of value pairs of keys and refs
+  // does not need to be in order, because they are values pairs
+  const [refArray, setRefs] = useState([]);
+
+  // creates a flattened list of keys for up/down keyboard use
+  // this DOES need to be in the same order as the HTML appears in the DOM.
+  // we are essentially turning all rendered items into a flat list, for up/down
+  const flatKeyArray = useMemo(() => flattenNestedData(props.items), [state.expandedKeys]);
+
   const ariaLabel = props['aria-label'];
 
   const listBoxOptions = {
@@ -74,38 +140,53 @@ const TreeView = forwardRef((props, ref) => {
   );
 
   return (
-    <TreeViewContext.Provider value={{ state, tree }}>
+    <TreeViewContext.Provider
+      value={{
+        state,
+        tree,
+        refArray,
+        setRefs,
+        flatKeyArray,
+        pageLength,
+        setLastFocusedItem,
+        lastFocusedItem,
+      }}
+    >
       <Box
         as="ul"
         {...listBoxProps}
         ref={treeViewRef}
         aria-label={ariaLabel}
         role="treegrid"
-        sx={{ overflow: 'hidden' }}
+        sx={{ overflow: 'hidden', p: '5px', border: 'none !important' }}
         {...others}
       >
-        {Array.from(state.collection).map((item, index) => (
-          SectionOrItemRender(
-            item.props.items.length > 0,
-            <TreeViewSection
-              item={item}
-              items={item.props.items}
-              title={item.props.title}
-              key={item.props.title}
-              level={level + 1}
-              setSize={state.collection.size}
-              position={index}
-            />,
-            <TreeViewItem
-              item={item}
-              title={item.value.value.title}
-              key={item.value.value.title}
-              level={level + 1}
-              position={index}
-              setSize={state.collection.size}
-            />,
-          )
-        ))}
+        <TreeViewWrapper>
+          {Array.from(state.collection).map((item, index) => (
+            SectionOrItemRender(
+              item.props.items.length > 0,
+              <TreeViewSection
+                item={item}
+                items={item.props.items}
+                title={item.props.title}
+                key={item.props.title}
+                onKeyDown={onKeyDown}
+                level={level + 1}
+                setSize={state.collection.size}
+                position={index}
+              />,
+              <TreeViewItem
+                item={item}
+                title={item.value.value.title}
+                key={item.value.value.title}
+                onKeyDown={onKeyDown}
+                level={level + 1}
+                setSize={state.collection.size}
+                position={index}
+              />,
+            )
+          ))}
+        </TreeViewWrapper>
       </Box>
     </TreeViewContext.Provider>
   );
@@ -116,6 +197,7 @@ TreeView.propTypes = {
   this is returned from the useTreeData hook in React-Aria */
   tree: PropTypes.shape({
     selectedKeys: isIterableProp,
+    items: isIterableProp,
   }).isRequired,
   /** The currently disabled keys in the collection. */
   disabledKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
@@ -125,6 +207,10 @@ TreeView.propTypes = {
   items: isIterableProp,
   /** String that describes the treeview when using a screen reader. */
   'aria-label': PropTypes.string,
+  /** Handler that is called when a key is pressed. */
+  onKeyDown: PropTypes.func,
+  /** Number of items to move the focus when page up or page down is pressed */
+  pageLength: PropTypes.number,
 };
 
 export default TreeView;

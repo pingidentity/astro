@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
-import { useListState } from '@react-stately/list';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import { useCollection } from '@react-stately/collections';
+import { ListCollection } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
@@ -9,7 +10,37 @@ import Message from './Message';
 
 const Messages = forwardRef((props, ref) => {
   const { items, onClose, ...others } = props;
-  const state = useListState(props);
+  const [messages, setMessages] = useState([]);
+
+  const factory = useCallback(nodes => new ListCollection(nodes), []);
+  const collection = useCollection(props, factory);
+
+  useEffect(() => {
+    setMessages(Array.from(collection));
+  }, [collection]);
+
+  const removeMessage = key => {
+    setMessages(messages.map(item => (item.key === key
+      ? {
+        ...item,
+        props: {
+          ...item.props,
+          isHidden: true,
+        },
+      }
+      : item
+    )));
+
+    setTimeout(() => setMessages(messages.filter(item => item.key !== key)), 200);
+  };
+
+  const onCloseHandler = key => {
+    if (onClose) {
+      onClose(key);
+    }
+
+    removeMessage(key);
+  };
 
   return (
     <Box
@@ -17,11 +48,11 @@ const Messages = forwardRef((props, ref) => {
       variant="message.wrapper"
       {...others}
     >
-      {Array.from(state.collection).map(item => (
+      {messages.map(item => (
         <Message
           key={item.key}
           item={item}
-          onClose={onClose}
+          onClose={onCloseHandler}
         />
       ))}
     </Box>

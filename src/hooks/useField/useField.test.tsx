@@ -3,7 +3,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { modes as labelModes } from '../../components/Label/constants';
 import statuses from '../../utils/devUtils/constants/statuses';
 
-import useField from './useField';
+import useField, { UseFieldProps } from './useField';
 
 const defaultProps = {
   autoComplete: 'off',
@@ -48,10 +48,10 @@ const defaultProps = {
       isControlWrapper: true,
     },
   },
-};
+} as UseFieldProps<HTMLInputElement>;
 
 test('default useField', () => {
-  renderHook(() => useField());
+  renderHook(() => useField({}));
 });
 
 test('should return props objects for field components', () => {
@@ -65,7 +65,7 @@ test('should return props objects for field components', () => {
 
   expect(fieldContainerProps).toEqual({
     className: 'field-container has-value is-tested is-container',
-    id: defaultProps.containerProps.id,
+    id: defaultProps.containerProps?.id,
     onBlur: expect.any(Function),
     onFocus: expect.any(Function),
     sx: expect.objectContaining({ position: 'relative' }),
@@ -124,7 +124,7 @@ test('should return props objects for field components', () => {
 });
 
 test('should support autocomplete additionally', () => {
-  const newProps = { ...defaultProps, autocomplete: 'new-password' };
+  const newProps = { ...defaultProps, autocomplete: 'new-password' } as UseFieldProps<HTMLInputElement>;
   delete newProps.autoComplete;
   const { result } = renderHook(() => useField(newProps));
   const { fieldControlInputProps } = result.current;
@@ -133,7 +133,7 @@ test('should support autocomplete additionally', () => {
 
 test('should return isFloatLabelActive class for container', () => {
   const { result, rerender } = renderHook(
-    initialProps => useField({ ...initialProps, placeholder: null }),
+    initialProps => useField({ ...initialProps, placeholder: undefined }),
     {
       initialProps: defaultProps,
     },
@@ -185,8 +185,8 @@ test('should return hasValue class for container when onChange updates internal 
   let numCalls = 0;
   const { result } = renderHook(() => useField({
     ...defaultProps,
-    defaultValue: null,
-    placeholder: null,
+    defaultValue: undefined,
+    placeholder: undefined,
     onChange,
     value: '',
   }),

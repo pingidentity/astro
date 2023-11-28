@@ -1,4 +1,5 @@
 export * from './box';
+export * from './button';
 export * from './icon';
 export * from './item';
 export * from './loader';

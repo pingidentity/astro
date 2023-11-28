@@ -1,12 +1,21 @@
 import { useEffect, useMemo } from 'react';
 
+export interface UseFallbackImageProps {
+  src: string;
+  onImageLoad: () => void;
+  onImageError: () => void;
+  fallbackTimeout: number;
+  onFallbackTimeout: () => void;
+  fallbackImage?: string | object | null;
+}
+
 const useFallbackImage = ({
   src: imageSrc,
   onImageLoad,
   onImageError,
   fallbackTimeout,
   onFallbackTimeout,
-}) => {
+}: UseFallbackImageProps): HTMLImageElement => {
   const displayImage = useMemo(() => document.createElement('img'), []);
 
   useEffect(() => {
@@ -20,8 +29,7 @@ const useFallbackImage = ({
   }, []);
 
   useEffect(() => {
-    let timeoutId = 0;
-    timeoutId = setTimeout(onFallbackTimeout, fallbackTimeout);
+    const timeoutId: ReturnType<typeof setTimeout> = setTimeout(onFallbackTimeout, fallbackTimeout);
     return () => clearTimeout(timeoutId);
   }, []);
 

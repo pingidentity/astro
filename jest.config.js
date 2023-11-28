@@ -24,7 +24,7 @@ module.exports = {
     'jest-canvas-mock',
   ],
   setupFilesAfterEnv: [
-    '<rootDir>/src/utils/testUtils/setupTests.js',
+    '<rootDir>/src/utils/testUtils/setupTests.ts',
   ],
   coverageThreshold: {
     global: {
@@ -40,6 +40,7 @@ module.exports = {
   },
   coveragePathIgnorePatterns: [
     '<rootDir>/src/index.ts',
+    '<rootDir>/src/hooks/index.ts',
     '<rootDir>/.storybook/',
     '.(story|stories).(js|jsx|mdx)',
     '<rootDir>/src/styles/',

@@ -1,10 +1,10 @@
 import React from 'react';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
 import { act, fireEvent, render, screen, within } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Calendar from './Calendar';
 
@@ -18,6 +18,9 @@ const isDateUnavailable = date => isDateWithinRanges(date, unavailableRanges);
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <Calendar {...props} />
 ));
+
+// Needs to be added to each components test file.
+universalComponentTests({ renderComponent: props => <Calendar {...props} /> });
 
 test('renders calendar component', () => {
   getComponent({ defaultValue: '2022-08-10' });
@@ -260,11 +263,4 @@ test('should autofocus on current day with hasAutoFocus', () => {
   const day = dateToday.day;
   const focusedDay = screen.queryAllByText(day).filter(cell => cell.getAttribute('aria-disabled') !== 'true');
   expect(focusedDay[0]).toHaveTextContent(day);
-});
-
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
 });

@@ -18,7 +18,7 @@ import {
   TableRow,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.js';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import IconButtonReadme from './IconButton.mdx';
 import { iconButtonArgs, iconButtonArgTypes } from './iconButtonAttributes';

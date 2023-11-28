@@ -1,6 +1,7 @@
 import React, {
   AriaAttributes,
   DOMAttributes as ReactDOMAttributes,
+  FocusEvent,
 } from 'react';
 
 export type AriaRole =
@@ -76,6 +77,7 @@ export type AriaRole =
     | (string & Record<string, unknown>);
 
 export interface FocusableElement extends Element, HTMLOrSVGElement {}
+export type FocusEventHandler = (e: FocusEvent<Element>) => void
 
 export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, ReactDOMAttributes<T> {
   role?: AriaRole | undefined,
