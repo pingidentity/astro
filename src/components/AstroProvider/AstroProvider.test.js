@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { AstroProvider, Box } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-box';
 const defaultProps = {
@@ -12,8 +12,8 @@ const defaultProps = {
 
 const getComponent = () => render(<Box {...defaultProps} />, { wrapper: AstroProvider });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <AstroProvider {...props} /> });
 
 test('should provide theme styling through AstroProvider', () => {
   getComponent();
