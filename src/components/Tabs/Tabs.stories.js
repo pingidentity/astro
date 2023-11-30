@@ -4,6 +4,7 @@ import LockIcon from '@pingux/mdi-react/LockIcon';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Badge,
+  Box,
   Icon,
   Tab,
   Tabs,
@@ -162,11 +163,13 @@ export const ContentSlots = () => {
     marginTop: 10,
   };
   const afterTabNode = (
-    <Badge
-      variant="countNeutral"
-      sx={nodeSx}
-      label="14"
-    />
+    <Box>
+      <Badge
+        variant="countNeutral"
+        sx={nodeSx}
+        label="14"
+      />
+    </Box>
   );
 
   return (
