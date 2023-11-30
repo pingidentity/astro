@@ -5,7 +5,7 @@ import usePropWarning from './usePropWarning';
 describe('usePropWarning', () => {
   beforeEach(() => {
     process.env.NODE_ENV = 'development';
-    global.console.warn = () => jest.mock(); // eslint-disable-line no-console
+    global.console.warn = () => jest.fn(); // eslint-disable-line no-console
   });
 
   afterEach(() => {
@@ -14,8 +14,7 @@ describe('usePropWarning', () => {
   });
 
   test('default', () => {
-    const props = {};
-    props.disabled = true;
+    const props = { disabled: true };
 
     const spy = jest.spyOn(console, 'warn');
     expect(spy).not.toHaveBeenCalled();
@@ -24,8 +23,7 @@ describe('usePropWarning', () => {
   });
 
   test('does not warn if prop does not exist', () => {
-    const props = {};
-    props.isDisabled = true;
+    const props = { isDisabled: true };
 
     const spy = jest.spyOn(console, 'warn');
     expect(spy).not.toHaveBeenCalled();
@@ -35,8 +33,8 @@ describe('usePropWarning', () => {
 
 
   test('showns duplicated messages if explicitly allowed', () => {
-    const props = {};
-    props.disabled = true;
+    const props = { disabled: true };
+
     const spy = jest.spyOn(console, 'warn');
 
     renderHook(() => usePropWarning(props, 'disabled', 'isDisabled', true));
@@ -47,8 +45,8 @@ describe('usePropWarning', () => {
   test('does not warn if it is in production environment', () => {
     process.env.NODE_ENV = 'production';
 
-    const props = {};
-    props.disabled = true;
+    const props = { disabled: true };
+
 
     const spy = jest.spyOn(console, 'warn');
     expect(spy).not.toHaveBeenCalled();
