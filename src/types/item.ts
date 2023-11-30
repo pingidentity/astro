@@ -1,11 +1,7 @@
-import { CSSProperties, ElementType } from 'react';
+import { ElementType } from 'react';
 import type { ItemProps } from '@react-types/shared';
 
 import { DOMAttributes, StyleProps } from './shared';
-
-export interface StylingProps extends DOMAttributes, StyleProps {
-  style?: CSSProperties | string,
-}
 
 declare module '@react-types/shared' {
   // eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars
@@ -13,9 +9,9 @@ declare module '@react-types/shared' {
       /** The rendered label for the item. */
     label?: string;
     /** Props for the accordion item content element. */
-    regionProps?: StylingProps,
+    regionProps?: StyleProps,
      /** Props for the accordion item content element. */
-    containerProps?: StylingProps,
+    containerProps?: StyleProps,
      /** Whether the item has a separator */
     isSeparator?: boolean,
      /** Whether the item is pressed */
@@ -27,7 +23,7 @@ declare module '@react-types/shared' {
       /** A URL to link to if elementType="a". */
     href?: string,
     /** Inline styling prop for item */
-    sx?: StylingProps
+    sx?: StyleProps
   }
 }
 

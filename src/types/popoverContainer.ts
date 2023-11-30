@@ -18,6 +18,7 @@ export interface PopoverContainerProps extends StylePropsExtended, DOMAttributes
   isKeyboardDismissDisabled?: boolean,
   isNonModal?: boolean,
   isDismissable?: boolean,
+  isOpen?: boolean,
 }
 
 export interface PopoverWrapperProps extends PopoverContainerProps {

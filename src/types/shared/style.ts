@@ -10,4 +10,15 @@ export interface StyleProps extends ThemeUICSSProperties, SxProp {
   variant?: string,
   /** The base HTML tag name or React component type to render */
   as?: string | React.ReactNode | React.ElementType,
+  /** Inline style object that allows you to directly apply CSS styles to the element. */
+  style?: React.CSSProperties | string
 }
+
+export type Placement = 'bottom' | 'bottom left' | 'bottom right' | 'bottom start' | 'bottom end' |
+    'top' | 'top left' | 'top right' | 'top start' | 'top end' |
+    'left' | 'left top' | 'left bottom' | 'start' | 'start top' | 'start bottom' |
+    'right' | 'right top' | 'right bottom' | 'end' | 'end top' | 'end bottom';
+
+export type Axis = 'top' | 'bottom' | 'left' | 'right';
+export type SizeAxis = 'width' | 'height';
+export type PlacementAxis = Axis | 'center';
