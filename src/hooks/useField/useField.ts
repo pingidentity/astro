@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Key, useEffect, useState } from 'react';
 import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
+// eslint-disable-next-line import/no-unresolved
+import { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import { LabelProps as ThemeUILabelProps } from 'theme-ui';
@@ -33,7 +35,30 @@ interface LabelProps extends ThemeUILabelProps {
   statusClasses?: { [className: string]: boolean };
 }
 
-interface ControlProps<T> extends React.HTMLAttributes<T> {
+export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
+  autoComplete?: string;
+  autoCorrect?: string;
+  autoFocus?: boolean;
+  className?: string;
+  defaultSelected?: boolean;
+  defaultValue?: string | number;
+  disabled?: boolean;
+  id?: string;
+  isFocused?: boolean;
+  isIndeterminate?: boolean;
+  maxLength?: number;
+  name?: string;
+  onChange: (event: CustomChangeEventType | React.ChangeEvent) => void | undefined;
+  placeholder?: string;
+  readOnly?: boolean;
+  required?: boolean;
+  role?: string;
+  spellCheck?: boolean;
+  type?: string;
+  value?: string | number;
+}
+
+export interface ControlProps extends React.HTMLAttributes<Element> {
   statusClasses?: { [className: string]: boolean };
 }
 
@@ -41,14 +66,14 @@ export interface UseFieldProps<T> {
   autocomplete?: string;
   autoComplete?: string;
   autoCorrect?: string;
-  children?: React.ReactNode;
+  children?: React.ReactNode | CollectionChildren<T>;
   className?: string;
   containerProps?: ContainerProps;
-  controlProps?: ControlProps<T>;
+  controlProps?: ControlProps;
   defaultText?: string;
   defaultValue?: string | number;
   direction?: string;
-  disabledKeys?: string[];
+  disabledKeys?: string[] | Iterable<Key>;
   hasAutoFocus?: boolean;
   hasNoStatusIndicator?: boolean;
   helperText?: string;
@@ -72,7 +97,7 @@ export interface UseFieldProps<T> {
   onFocus?: (e: React.FocusEvent) => void;
   onFocusChange?: (isFocused: boolean) => void;
   onLoadMore?: () => void;
-  onOpenChange?: () => void;
+  onOpenChange?: (isOpen: boolean) => unknown;
   onSelectionChange?: (key: string) => void;
   placeholder?: string | number;
   role?: string;
@@ -272,7 +297,7 @@ const useField = <T>(props: UseFieldProps<T>) => {
     ...ariaProps,
     ...raFieldProps,
     ...mergeProps({ onBlur, onFocus }, omit(controlProps, 'data-testid'), focusProps) as object,
-  };
+  } as FieldControlInputProps;
 
   const fieldLabelProps = {
     children: label,
