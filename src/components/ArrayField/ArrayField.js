@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import { mergeProps, useLabel } from 'react-aria';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
@@ -9,7 +9,7 @@ import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
-const ArrayField = props => {
+const ArrayField = forwardRef((props, ref) => {
   const {
     addButtonLabel,
     defaultValue,
@@ -126,7 +126,7 @@ const ArrayField = props => {
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
 
   return (
-    <Box {...nonAriaProps}>
+    <Box {...nonAriaProps} ref={ref}>
       <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
       <Box as="ul" pl="0" {...ariaProps}>
         {(value || fieldValues).map(
@@ -169,7 +169,7 @@ const ArrayField = props => {
         )}
     </Box>
   );
-};
+});
 
 ArrayField.propTypes = {
   /** Label for add button */

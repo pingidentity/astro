@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Link, Text } from '../..';
-import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import CopyText from '.';
 
@@ -55,8 +55,14 @@ describe('CopyText', () => {
       </CopyText>
     ));
 
-    // Need to be added to each test file to test accessibility using axe.
-    axeTest(getComponent);
+    // Needs to be added to each components test file
+    universalComponentTests({
+      renderComponent: props => (
+        <CopyText {...defaultProps} {...props}>
+          <Text>{textValue}</Text>
+        </CopyText>
+      ),
+    });
 
     test('renders component in the default state', () => {
       defaultTest(getComponent);
@@ -162,8 +168,14 @@ describe('CopyText', () => {
       </CopyText>
     ));
 
-    // Need to be added to each test file to test accessibility using axe.
-    axeTest(getComponent);
+    // Needs to be added to each components test file
+    universalComponentTests({
+      renderComponent: props => (
+        <CopyText {...defaultProps} {...props}>
+          <Link href={linkValue}>{linkValue}</Link>
+        </CopyText>
+      ),
+    });
 
     test('renders component in the default state', () => {
       defaultTest(getComponent);

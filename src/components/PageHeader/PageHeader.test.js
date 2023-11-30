@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Link, PageHeader } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-header';
 const defaultProps = {
@@ -23,7 +23,12 @@ const getComponent = (props = defaultProps) => render(
   </PageHeader>,
 );
 
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <PageHeader title="Title of the Page" {...props}>some test  </PageHeader>
+  ),
+});
 
 test('renders default PageHeader', () => {
   getComponent();

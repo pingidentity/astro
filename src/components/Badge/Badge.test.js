@@ -3,7 +3,7 @@ import Earth from '@pingux/mdi-react/EarthIcon';
 import { render, screen } from '@testing-library/react';
 
 import { Badge, Button, Icon } from '../..';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-separator';
 
@@ -16,8 +16,8 @@ const getComponent = (props = {}) => render(
   <Badge {...defaultProps} {...props} />,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Badge {...props} /> });
 
 test('renders Badge component', () => {
   getComponent();

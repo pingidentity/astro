@@ -1,15 +1,71 @@
-import React, { useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import { DismissButton, FocusScope, useOverlayPosition, useSelect } from 'react-aria';
-import { useSelectState } from 'react-stately';
+import React, { DOMAttributes, Key, useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
+import { AriaButtonProps, DismissButton, FocusScope, useOverlayPosition, useSelect } from 'react-aria';
+import { SelectState, useSelectState } from 'react-stately';
 import { useResizeObserver } from '@react-aria/utils';
+// eslint-disable-next-line import/no-unresolved
+import { CollectionChildren } from '@react-types/shared';
+import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
 import { modes } from '../../components/Label/constants';
-import ListBox from '../../components/ListBox';
+import ListBox from '../../components/ListBox/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
+import { Axis, BoxProps, FocusableElement, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
+import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
-const useSelectField = (props, ref) => {
+interface UseSelectFieldProps<T> {
+  children: CollectionChildren<T>
+  align?: PlacementAxis;
+  defaultSelectedKey?: string;
+  defaultText?: string;
+  direction?: Axis;
+  disabledKeys?: Iterable<Key>;
+  hasNoEmptySelection?: boolean;
+  isDefaultOpen?: boolean;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  isNotFlippable?: boolean;
+  isOpen?: boolean;
+  isReadOnly?: boolean;
+  isRequired?: boolean;
+  items?: Iterable<T>;
+  label?: string;
+  listboxStyle?: React.CSSProperties;
+  name?: string;
+  placeholder?: string;
+  selectedKey?: string;
+  onLoadMore?: () => unknown;
+  onOpenChange?: (isOpen: boolean) => unknown;
+  onSelectionChange?: (key: Key) => unknown;
+  controlProps?: React.HTMLAttributes<Element>;
+  scrollBoxProps?: BoxProps;
+  listBoxProps?: BoxProps;
+  labelProps?: ThemeUILabelProps;
+  containerProps?: BoxProps;
+  labelMode: 'default' | 'float' | 'left'
+}
+
+interface UseSelectFieldReturnProps {
+  columnStyleProps: StyleProps,
+  fieldContainerProps: BoxProps,
+  fieldControlInputProps: FieldControlInputProps,
+  fieldControlWrapperProps: BoxProps,
+  fieldLabelProps: ThemeUILabelProps,
+  isLoadingInitial?: boolean,
+  listBoxRef: ReactRef,
+  overlay: React.ReactNode;
+  popoverRef: ReactRef,
+  state: SelectState<object>,
+  triggerProps: AriaButtonProps<'button'>,
+  triggerRef: ReactRef,
+  valueProps: DOMAttributes<FocusableElement>,
+}
+
+const useSelectField = <T extends object, >(
+  props: UseSelectFieldProps<T>,
+  ref: ReactRef,
+): UseSelectFieldReturnProps => {
   const {
     align,
     children,
@@ -42,7 +98,6 @@ const useSelectField = (props, ref) => {
   // negate this.
   const shouldFlip = !isNotFlippable;
   const selectProps = {
-    children,
     defaultSelectedKey,
     defaultText,
     disabledKeys,
@@ -63,16 +118,16 @@ const useSelectField = (props, ref) => {
     disallowEmptySelection, // must match React Aria API
     shouldFlip, // must match React Aria API
     ...controlProps,
+    children,
   };
   // Create state based on the incoming props
   const state = useSelectState(selectProps);
 
-  const popoverRef = useRef();
-  const triggerRef = useRef();
-  const listBoxRef = useRef();
-
+  const popoverRef = useRef() as React.RefObject<HTMLElement>;
+  const listBoxRef = useRef() as React.RefObject<HTMLElement>;
+  const triggerRef = useRef() as React.RefObject<HTMLElement>;
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => triggerRef.current);
+  useImperativeHandle(ref, () => triggerRef.current as HTMLElement);
 
   useDeprecationWarning(
     'The "defaultText" prop for `SelectField` will be deprecated in Astro-UI 1.0.0, use the "placeholder" prop instead.',
@@ -107,16 +162,16 @@ const useSelectField = (props, ref) => {
       ...labelProps,
     },
     containerProps: {
-      isFloatLabelActive: state.selectedItem,
+      isFloatLabelActive: !!state.selectedItem,
       ...props.containerProps,
     },
   });
 
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
-    targetRef: triggerRef,
-    overlayRef: popoverRef,
-    scrollRef: listBoxRef,
-    placement: `${direction} ${align}`,
+    targetRef: triggerRef as React.RefObject<Element>,
+    overlayRef: popoverRef as React.RefObject<Element>,
+    scrollRef: listBoxRef as React.RefObject<Element>,
+    placement: `${direction} ${align}` as Placement,
     shouldFlip: !isNotFlippable,
     isOpen: state.isOpen,
     onClose: state.close,
@@ -134,14 +189,14 @@ const useSelectField = (props, ref) => {
   }, [state.isOpen, updatePosition]);
 
   // Measure the width of the input to inform the width of the listbox (below).
-  const [buttonWidth, setButtonWidth] = useState(null);
+  const [buttonWidth, setButtonWidth] = useState(0);
 
   const onResize = useCallback(() => {
     /* istanbul ignore next */
     if (triggerRef.current) {
       setButtonWidth(triggerRef.current.offsetWidth);
     }
-  }, [triggerRef, setButtonWidth, state.isOpen]);
+  }, [triggerRef, setButtonWidth]);
 
   useResizeObserver({
     ref: triggerRef,

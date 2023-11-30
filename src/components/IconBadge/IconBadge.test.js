@@ -5,7 +5,7 @@ import {
   Icon,
   IconBadge,
 } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-icon';
 
@@ -42,8 +42,14 @@ const getComponent = (props = {}) => render((
   </IconBadge>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <IconBadge {...props} {...defaultProps}>
+      <Icon icon={ThisIcon} />
+    </IconBadge>
+  ),
+});
 
 test('default iconbadge render', () => {
   getComponent();

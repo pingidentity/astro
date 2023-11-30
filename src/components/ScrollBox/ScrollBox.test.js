@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ScrollBox from './ScrollBox';
 
@@ -18,6 +19,8 @@ const getComponent = (props = {}) => render(
   />,
 );
 
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <ScrollBox {...props} /> });
 
 test('maxHeight passes into the component', () => {
   getComponent();

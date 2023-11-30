@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { ComboBoxField, Item, OverlayProvider, Section } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, render, screen, within } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -769,14 +769,6 @@ test('passing helper text should display it and correct aria attributes on input
   expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-
-  expect(results).toHaveNoViolations();
-});
-
 test('popover closes on input blur', () => {
   getComponent();
 
@@ -841,4 +833,12 @@ describe('when isReadOnly is true', () => {
 
     expect(screen.queryByRole('listbox', { name: 'Test Label Suggestions' })).not.toBeInTheDocument();
   });
+});
+
+universalComponentTests({
+  renderComponent: props => (
+    <ComboBoxField {...defaultProps} {...props}>
+      <Item key="item" data-id="item">item.name</Item>
+    </ComboBoxField>
+  ),
 });

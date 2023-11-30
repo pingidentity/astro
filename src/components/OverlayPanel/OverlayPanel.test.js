@@ -1,7 +1,7 @@
 import React from 'react';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import OverlayPanel from './OverlayPanel';
 
@@ -15,8 +15,10 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <OverlayPanel {...defaultProps} {...props} />,
+});
 
 test('default overlayPanel', () => {
   getComponent({ children: <div>Test</div> });

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Button, ButtonBar } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-ButtonBar';
 
@@ -29,8 +29,8 @@ const getComponent = (props = {}) => render(
 
 const getComponentCustomChildren = (props = {}) => render(
   <ButtonBar {...defaultProps} {...props}>
-    <button>custom text</button>
-    <button>Also custom text</button>
+    <button type="button">custom text</button>
+    <button type="button">Also custom text</button>
   </ButtonBar>,
 );
 
@@ -40,7 +40,8 @@ const getComponentTextChildren = (props = {}) => render((
   </ButtonBar>
 ));
 
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <ButtonBar {...props} /> });
 
 afterEach(() => {
   jest.resetAllMocks();

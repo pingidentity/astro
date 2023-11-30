@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import Box from '../Box';
 
@@ -11,13 +11,13 @@ import Box from '../Box';
  *
  */
 
-const TableBody = props => {
+const TableBody = forwardRef((props, ref) => {
   const { children, ...others } = props;
   return (
-    <Box variant="table.body" as="tbody" {...others}>
+    <Box ref={ref} variant="table.body" as="tbody" {...others}>
       {children}
     </Box>
   );
-};
+});
 
 export default TableBody;

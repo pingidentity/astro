@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import Box from '../Box';
 
@@ -11,10 +11,11 @@ import Box from '../Box';
  *
  */
 
-const TableHead = (props => {
+const TableHead = forwardRef((props, ref) => {
   const { children, ...others } = props;
   return (
     <Box
+      ref={ref}
       as="thead"
       {...others}
     >

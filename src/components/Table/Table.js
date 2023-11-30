@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import Box from '../Box';
 
-const Table = props => {
+const Table = forwardRef((props, ref) => {
   const { children,
     ...others } = props;
   return (
     <Box
+      ref={ref}
       as="table"
       variant="table.container"
       {...others}
@@ -14,6 +15,6 @@ const Table = props => {
       {children}
     </Box>
   );
-};
+});
 
 export default Table;

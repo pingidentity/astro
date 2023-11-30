@@ -29,13 +29,13 @@ const CheckboxField = forwardRef((props, ref) => {
     ...controlProps,
   };
 
-  const { pressProps: containerPressProps } = usePress(props);
-
   const state = useToggleState(checkboxProps);
   const checkboxRef = useRef();
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
   useImperativeHandle(ref, () => checkboxRef.current);
+
+  const { pressProps: containerPressProps } = usePress({ ...props, ref: checkboxRef });
 
   useEffect(() => {
     if (checkboxRef.current && isIndeterminate) {

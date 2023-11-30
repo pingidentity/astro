@@ -2,8 +2,8 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ImageUploadField from './ImageUploadField';
 
@@ -44,8 +44,11 @@ const getComponent = (
   { renderFn = render } = {},
 ) => renderFn(<ImageUploadField {...defaultProps} {...props} />);
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <ImageUploadField {...defaultProps} {...props} />,
+});
+
 
 test('should render image upload component by default', () => {
   getComponent();

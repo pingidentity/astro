@@ -4,8 +4,8 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Text from '../Text';
 
 import Stepper from './Stepper';
@@ -42,14 +42,17 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
   </CacheProvider>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
-  rules: {
-    // Need to be fixed. Occurs due to wrapping the tab with pressable wrapper
-    'aria-required-children': { enabled: false },
-    'aria-required-parent': { enabled: false },
-    'nested-interactive': { enabled: false },
-  },
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <Stepper {...defaultProps} {...props}>
+      {({ name, children }) => (
+        <Item key={name || children} textValue={name || children}>
+          <Text>{children}</Text>
+        </Item>
+      )}
+    </Stepper>
+  ),
 });
 
 test('renders Stepper component in the default state', () => {

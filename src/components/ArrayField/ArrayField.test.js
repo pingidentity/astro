@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import TextField from '../TextField';
 
 import ArrayField from './ArrayField';
@@ -21,9 +22,10 @@ const defaultData = [
 
 const defaultProps = {
   defaultValue: defaultData,
+  label: 'test-label',
 };
 
-const getComponent = (props = {}) => render(<ArrayField label="test-label" {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(<ArrayField {...defaultProps} {...props} />);
 
 const renderField = (id, value, onFieldValueChange, onFieldDelete, otherFieldProps) => {
   return (
@@ -41,6 +43,11 @@ const renderField = (id, value, onFieldValueChange, onFieldDelete, otherFieldPro
     />
   );
 };
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (<ArrayField renderField={renderField} {...defaultProps} {...props} />),
+});
 
 test('displays multiple text fields', () => {
   const onChange = jest.fn();

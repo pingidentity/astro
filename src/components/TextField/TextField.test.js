@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import statuses from '../../utils/devUtils/constants/statuses';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import TextField from '.';
 
@@ -15,8 +15,8 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render(<TextField {...defaultProps} {...props} />);
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <TextField {...defaultProps} {...props} /> });
 
 test('default text field', () => {
   getComponent();

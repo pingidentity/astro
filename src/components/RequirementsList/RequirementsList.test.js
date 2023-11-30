@@ -3,7 +3,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render, screen } from '@testing-library/react';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import RequirementsList from '.';
 
@@ -53,8 +53,10 @@ const getComponent = (props = {}) => render(
   </CacheProvider>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <RequirementsList {...defaultProps} {...props} />,
+});
 
 test('base case requirements list', () => {
   getComponent();

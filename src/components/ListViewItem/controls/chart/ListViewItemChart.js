@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { forwardRef, useCallback, useMemo } from 'react';
 import { useVisuallyHidden } from 'react-aria';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
 import useResizeObserver from 'use-resize-observer';
@@ -8,7 +8,7 @@ import { neutral } from '../../../../styles/colors';
 
 import { listViewItemChartPropTypes } from './ListViewItemChartAttributes';
 
-const ListViewItemChart = props => {
+const ListViewItemChart = forwardRef((props, ref) => {
   const {
     buttonProps,
     chartData,
@@ -36,7 +36,7 @@ const ListViewItemChart = props => {
     isMobile, visuallyHiddenProps,
   ]);
   return (
-    <Box isRow alignItems="center" height={0} mr="md">
+    <Box isRow alignItems="center" height={0} mr="md" ref={ref}>
       <Box
         variant="lisViewItemChart.titleContainer"
         {...hideIfMobile()}
@@ -93,7 +93,7 @@ const ListViewItemChart = props => {
       </TooltipTrigger>
     </Box>
   );
-};
+});
 
 ListViewItemChart.propTypes = listViewItemChartPropTypes;
 

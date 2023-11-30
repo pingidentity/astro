@@ -5,8 +5,8 @@ import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Breadcrumbs from './Breadcrumbs';
 
@@ -36,8 +36,12 @@ const getComponent = (props = {}, itemProps = {}) => render(
   </Breadcrumbs>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => (
+  <Breadcrumbs {...mergeProps(defaultProps, props)}>
+    <Item>{testItemsArr[0]}</Item>
+  </Breadcrumbs>
+) });
 
 test('default breadcrumbs', () => {
   getComponent();
