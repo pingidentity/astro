@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
 
 import { Box, Icon, IconButton } from '../../../index';
@@ -12,15 +12,15 @@ import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
  * to PanelHeaderCloseButton.
 */
 
-const PanelHeaderCloseButton = props => {
+const PanelHeaderCloseButton = forwardRef((props, ref) => {
   return (
     <Box>
-      <IconButton aria-label="close-icon" {...props}>
+      <IconButton ref={ref} aria-label="close-icon" {...props}>
         <Icon icon={CloseIcon} size="md" />
       </IconButton>
     </Box>
   );
-};
+});
 
 PanelHeaderCloseButton.propTypes = iconButtonPropTypes;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 
 import { Box, Icon, IconButton } from '../../..';
@@ -12,15 +12,15 @@ import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
  * to ListItemEditButton.
 */
 
-const ListViewItemEditButton = props => {
+const ListViewItemEditButton = forwardRef((props, ref) => {
   return (
-    <Box>
+    <Box ref={ref}>
       <IconButton {...props}>
         <Icon icon={CreateIcon} size="sm" />
       </IconButton>
     </Box>
   );
-};
+});
 
 ListViewItemEditButton.propTypes = iconButtonPropTypes;
 

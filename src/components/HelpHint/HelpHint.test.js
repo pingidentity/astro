@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { HelpHint, Link } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'help-hint__button';
 const popoverValue = 'Some text';
@@ -22,8 +22,8 @@ const getComponentWithLink = (props = {}) => render(
   </HelpHint>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <HelpHint {...defaultProps} {...props} /> });
 
 test('renders HelpHint component', () => {
   getComponent();

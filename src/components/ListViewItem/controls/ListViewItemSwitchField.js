@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { SwitchField } from '../../..';
 import { switchFieldPropTypes } from '../../SwitchField/switchFieldAttributes';
@@ -11,9 +11,10 @@ import { switchFieldPropTypes } from '../../SwitchField/switchFieldAttributes';
  * available to ListItemEditButton.
 */
 
-const ListViewItemSwitchField = props => {
+const ListViewItemSwitchField = forwardRef((props, ref) => {
   return (
     <SwitchField
+      ref={ref}
       role="group"
       aria-label="active user"
       isDefaultSelected
@@ -21,7 +22,7 @@ const ListViewItemSwitchField = props => {
       {...props}
     />
   );
-};
+});
 
 ListViewItemSwitchField.displayName = 'ListViewItemSwitchField';
 

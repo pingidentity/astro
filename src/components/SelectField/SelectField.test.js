@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event';
 
 import { Item, Section, SelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const items = [
   { name: 'a' },
@@ -68,8 +68,14 @@ const getComponentWithSections = (props = {}, { renderFn = render } = {}) => ren
   </OverlayProvider>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <SelectField {...defaultProps} {...props}>
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </SelectField>
+  ),
+});
 
 test('default select field', () => {
   getComponent();

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import CollapsiblePanelBadge from './CollapsiblePanelBadge';
 
@@ -18,8 +18,10 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <CollapsiblePanelBadge {...defaultProps} {...props} />,
+});
 
 test('default CollapsiblePanelBadge', () => {
   getComponent();

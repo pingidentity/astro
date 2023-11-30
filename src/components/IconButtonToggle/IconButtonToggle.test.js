@@ -2,8 +2,8 @@ import React from 'react';
 import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
 import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import IconButtonToggle from '.';
 
@@ -28,8 +28,11 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render(<IconButtonToggle {...defaultProps} {...props} />);
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <IconButtonToggle {...defaultProps} {...props} />,
+});
+
 
 test('default icon button', () => {
   getComponent();

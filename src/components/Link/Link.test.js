@@ -1,8 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Link from '.';
 
@@ -13,8 +13,9 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render(<Link {...defaultProps} {...props} />);
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Link {...defaultProps} {...props} /> });
+
 
 test('a link is rendered', () => {
   getComponent();

@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event';
 
 import { NumberField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-NumberField';
 const testLabel = 'test-NumberField-label';
@@ -31,12 +31,11 @@ const getComponent = (props = {}) => render(
   />,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
-  // ListItem represents list's child without parent
-  rules: {
-    'aria-required-parent': { enabled: false },
-  },
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <NumberField {...defaultProps} {...props} />
+  ),
 });
 
 test('renders NumberField component', () => {

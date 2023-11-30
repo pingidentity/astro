@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Table from '../Table';
 import TableBody from '../TableBody';
 import TableRow from '../TableRow';
@@ -26,8 +26,20 @@ const getComponent = (props = {}) => render(
   </Table>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <Table>
+      <TableBody>
+        <TableRow>
+          <TableCell {...props}>
+            Here is text.
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+});
 
 test('isHeading = true', () => {
   const props = {

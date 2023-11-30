@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Text } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import TableBody from '../TableBody';
 import TableCaption from '../TableCaption';
 import TableCell from '../TableCell';
@@ -74,8 +74,36 @@ const getComponent = () => render(
   </Table>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <Table {...props}>
+      <TableCaption>
+        <Text fontWeight={3} fontSize="lg">{caption}</Text>
+      </TableCaption>
+      <TableHead>
+        <TableRow key="head">
+          {headers.map(head => (
+            <TableCell isHeading key={head}>
+              {head}
+            </TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {objects.map(object => (
+          <TableRow key={object.country}>
+            {Object.values(object).map(value => (
+              <TableCell key={value}>
+                {value}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  ),
+});
 
 test('default table', () => {
   getComponent();

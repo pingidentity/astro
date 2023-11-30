@@ -1,7 +1,7 @@
 import React from 'react';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import CollapsiblePanel from './CollapsiblePanel';
 
@@ -36,12 +36,9 @@ afterAll(() => {
   jest.restoreAllMocks();
 });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
-  rules: {
-    'aria-required-children': { enabled: false },
-    'aria-required-parent': { enabled: false },
-  },
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <CollapsiblePanel {...defaultProps} {...props} />,
 });
 
 test('default CollapsiblePanel', () => {

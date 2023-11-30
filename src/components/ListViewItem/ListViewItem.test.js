@@ -4,8 +4,8 @@ import { act } from '@testing-library/react';
 
 import { ListViewItem, ListViewItemSwitchField } from '../..';
 import { pingImg } from '../../utils/devUtils/constants/images';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { LIST_ITEM_ICON } from './ListViewItem';
 
@@ -32,8 +32,10 @@ jest.mock('../../hooks/useFallbackImage', () => props => {
   return [];
 });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <ListViewItem {...defaultProps} {...props} />,
+});
 
 const TEST_TEXT = 'test text';
 

@@ -4,7 +4,7 @@ import { CacheProvider } from '@emotion/react';
 import { render, screen } from '@testing-library/react';
 
 import { BoxProps } from '../../types';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Box from '.';
 
@@ -23,9 +23,8 @@ const getComponent = (props: BoxProps = {}) => render(
     <Box {...defaultProps} {...props} />
   </CacheProvider>,
 );
-
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Box {...props} /> });
 
 test('default box', () => {
   getComponent();

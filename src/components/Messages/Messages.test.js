@@ -4,8 +4,8 @@ import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { ARIA_STATUSES } from './Message';
 import Messages, { messagesReducerStory, multiMessagesReducerStory } from '.';
@@ -42,8 +42,14 @@ const getWithDynamicList = (props = {}, renderFn = render) => renderFn(
   </Messages>,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <Messages {...defaultProps} {...props}>
+      {item => <Item {...item}>{item.text}</Item>}
+    </Messages>
+  ),
+});
 
 test('renders Messages component in the default state', () => {
   getComponent();

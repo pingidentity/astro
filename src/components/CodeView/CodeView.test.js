@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { CodeView } from '../..';
-import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-code-sample';
 
@@ -44,8 +44,8 @@ afterEach(() => {
   global.document.execCommand = originalExecCommand;
 });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <CodeView {...props}>{textValue}</CodeView> });
 
 test('renders component in the default state', () => {
   getComponent();

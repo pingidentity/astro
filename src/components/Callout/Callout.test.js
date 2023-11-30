@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { noticeIcons } from '../Icon/NoticeIcon';
 
 import Callout, { CALLOUT_TEST_ID } from './Callout';
@@ -15,6 +16,9 @@ const testColors = {
   [statuses.SUCCESS]: 'var(--theme-ui-colors-success-bright)',
   [statuses.WARNING]: 'var(--theme-ui-colors-warning-bright)',
 };
+
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Callout {...props} /> });
 
 const getComponent = (props = {}) => render((
   <Callout {...props}>{TEST_TEXT}</Callout>

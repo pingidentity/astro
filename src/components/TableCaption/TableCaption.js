@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import Box from '../Box';
 
@@ -11,13 +11,13 @@ import Box from '../Box';
  *
  */
 
-const TableCaption = props => {
+const TableCaption = forwardRef((props, ref) => {
   const { children, ...others } = props;
   return (
-    <Box variant="table.caption" as="caption" {...others}>
+    <Box ref={ref} variant="table.caption" as="caption" {...others}>
       {children}
     </Box>
   );
-};
+});
 
 export default TableCaption;

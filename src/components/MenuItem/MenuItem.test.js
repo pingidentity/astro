@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Item, Menu } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'testId';
 const defaultMenuItems = [
@@ -26,8 +26,14 @@ const getComponent = (props = {}, {
   </Menu>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <Menu {...defaultProps} {...props}>
+      {defaultMenuItems.map(li => <Item key={li.key} {...li} sx={{ backgroundColor: 'orange' }} />)}
+    </Menu>
+  ),
+});
 
 test('renders menu with menu items', () => {
   getComponent();

@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Modal, OverlayProvider } from '../../../index';
-import axeTest from '../../../utils/testUtils/testAxe';
 import { queryByAttribute, render, screen } from '../../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 
 // For testing the modal alone
 const getComponent = (props = {}) => render((
@@ -16,8 +16,8 @@ const getComponent = (props = {}) => render((
 // Unit tests
 // **********
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Modal {...props} /> });
 
 test('default modal', () => {
   getComponent();

@@ -1,10 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { Item, LinkSelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const items = [
   { name: 'a' },
@@ -159,10 +159,11 @@ test('passing helper text should display it and correct aria attributes on input
   expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-
-  expect(results).toHaveNoViolations();
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <LinkSelectField {...defaultProps} {...props}>
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </LinkSelectField>
+  ),
 });

@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import statuses from '../../utils/devUtils/constants/statuses';
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import FileInputField from './FileInputField';
 
@@ -48,7 +48,10 @@ afterAll(() => {
 
 const getComponent = props => render(<FileInputField {...defaultProps} {...props} />);
 
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <FileInputField {...defaultProps} {...props} />,
+});
 
 test('should render file input field component by default', () => {
   getComponent();

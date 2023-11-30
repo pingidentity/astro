@@ -1,8 +1,8 @@
 import React from 'react';
 import useResizeObserver from 'use-resize-observer';
 
-import axeTest from '../../../../utils/testUtils/testAxe';
 import { render, screen } from '../../../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../../../utils/testUtils/universalComponentTest';
 import Box from '../../../Box/Box';
 
 import { chartData } from './chartData';
@@ -54,8 +54,8 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <ListViewItemChart {...props} /> });
 
 test('renders ListViewItemChart component', () => {
   getComponent();

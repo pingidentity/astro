@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ListItem from './ListItem';
 
@@ -16,12 +16,9 @@ const getComponent = (props = {}) => render(
   <ListItem {...defaultProps} {...props} data-testid={TEST_ID} />,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
-  // ListItem represents list's child without parent
-  rules: {
-    'aria-required-parent': { enabled: false },
-  },
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <ListItem {...defaultProps} {...props} />,
 });
 
 describe('ListItem', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Checkbox from './Checkbox';
 
@@ -9,9 +9,10 @@ const getComponent = (props = {}) => render((
   <Checkbox {...props} />
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
-  // Checkbox with label provided by CheckboxField
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <Checkbox {...props} />,
+  // Checkbox label is provided by CheckboxField
   rules: {
     'label': { enabled: false },
   },

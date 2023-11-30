@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ListViewItemMenu } from '../../../index';
 import { menuPropTypes } from '../../Menu/menuAttributes';
@@ -11,9 +11,9 @@ import { menuPropTypes } from '../../Menu/menuAttributes';
  * specs easy. Most props available to the Menu component are available to PanelHeaderMenu.
 */
 
-const PanelHeaderMenu = props => {
-  return <ListViewItemMenu {...props} />;
-};
+const PanelHeaderMenu = forwardRef((props, ref) => {
+  return <ListViewItemMenu ref={ref} {...props} />;
+});
 
 PanelHeaderMenu.propTypes = menuPropTypes;
 

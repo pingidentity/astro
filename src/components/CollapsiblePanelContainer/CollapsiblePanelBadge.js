@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Badge from '../Badge';
@@ -7,10 +7,11 @@ import Badge from '../Badge';
  * The CollapsiblePanelBadge serves as a badge to display selected count.
  */
 
-const CollapsiblePanelBadge = props => {
+const CollapsiblePanelBadge = forwardRef((props, ref) => {
   const { selectedFilterCount, ...others } = props;
   return (
     <Badge
+      ref={ref}
       as="span"
       bg="neutral.90"
       label={selectedFilterCount.toString()}
@@ -20,7 +21,7 @@ const CollapsiblePanelBadge = props => {
       {...others}
     />
   );
-};
+});
 
 CollapsiblePanelBadge.propTypes = {
   selectedFilterCount: PropTypes.oneOfType([

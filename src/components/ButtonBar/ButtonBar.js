@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
 
-const ButtonBar = props => {
+const ButtonBar = forwardRef((props, ref) => {
   const {
     align,
     children,
@@ -12,6 +12,7 @@ const ButtonBar = props => {
 
   return (
     <Box
+      ref={ref}
       isRow
       variant={align === 'right' ? 'buttonBar.justifyRightContainer' : 'buttonBar.container'}
       {...others}
@@ -19,7 +20,7 @@ const ButtonBar = props => {
       {children}
     </Box>
   );
-};
+});
 
 ButtonBar.propTypes = {
   /** Justifies the component's children. */

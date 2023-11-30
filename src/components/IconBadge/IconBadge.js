@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
 
-const IconBadge = props => {
+const IconBadge = forwardRef((props, ref) => {
   const {
     children,
     sx,
@@ -17,6 +17,7 @@ const IconBadge = props => {
 
   return (
     <Box
+      ref={ref}
       as="span"
       sx={{
         position: 'relative',
@@ -47,7 +48,7 @@ const IconBadge = props => {
       </Box>
     </Box>
   );
-};
+});
 
 IconBadge.propTypes = {
   /** JSX styling that is passed into the component. */
