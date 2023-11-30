@@ -28,8 +28,10 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=0-1&t=8Wwd3tIBh3GEjCJB-0',
   },
   buttonBar: {
-    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=3660%3A20551&mode=dev',
-    rightAligned: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=3660%3A20657&mode=dev',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46080%3A753&mode=dev',
+    rightAligned: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46080%3A770&mode=dev',
+    secondary: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46080%3A778&mode=dev',
+    secondaryRightAligned: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46080%3A788&mode=dev',
   },
   calendar: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=6373%3A25490&t=BoHXzVpQq9Lf7MaU-1',
