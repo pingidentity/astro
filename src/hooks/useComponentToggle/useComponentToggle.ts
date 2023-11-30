@@ -42,7 +42,7 @@ const useComponentToggle: UseComponentToggle = props => {
 
   const [isToggled, setIsToggled] = useProgressiveState(
     condition,
-    () => null);
+    false);
 
   const RenderedComponent = isToggled ? ComponentToRenderIfTrue : ComponentToRenderIfFalse;
 
