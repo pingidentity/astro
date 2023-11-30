@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.32.0...@pingux/astro@2.33.0) (2023-11-30)
+
+
+### Bug Fixes
+
+* [UIP-6667] Tabs with badge in right slot styles issues ([f0b102b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f0b102b77338f5ba6ba6902c9e7da915394d96a6))
+
+
+### Features
+
+* [UIP-6647] useLabelHeight convert to typescript ([49e81af](https://gitlab.corp.pingidentity.com/ux/pingux/commit/49e81af20a701ff760712bc67080e272ece076cc))
+* [UIP-6650] covert useNavBarPress to ts ([aad1e08](https://gitlab.corp.pingidentity.com/ux/pingux/commit/aad1e08b6fe9a853547f824bc5b11fa6306926ff))
+* [UIP-6653] Convert useOverlayPanelState to TS ([cae85f3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cae85f3a25dffde9c21c65e7dedfb95f2b01f571))
+* [UIP-6654] convert useProgressiveState to TS ([29680dd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/29680dde3279c978c9dd20d9ad5d386c03d98439))
+* [UIP-6655] covert usePropWarning to TS ([37bae85](https://gitlab.corp.pingidentity.com/ux/pingux/commit/37bae85592637baa16626f6999d8bdac4ee32fcc))
+* [UIP-6656]: useRockerButton: update to typescript ([6cfd4d7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6cfd4d7d319a11d659f4c8fa897c072867c2db48))
+* [UIP-6657] convert useSelectField to typescript ([fce94d0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fce94d0e05d290a0e5f765dfd5b3ccf29045a698))
+* [UIP-6668] update ButtonBar to match specs ([a744b92](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a744b9247015b5f596cdb27e921432e95371f47b))
+
+
+
+
+
 # [2.32.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.31.0...@pingux/astro@2.32.0) (2023-11-28)
 
 
