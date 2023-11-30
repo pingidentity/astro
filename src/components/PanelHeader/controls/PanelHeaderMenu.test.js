@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Item, PanelHeaderMenu } from '../../../index';
-import axeTest from '../../../utils/testUtils/testAxe';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 
 const getComponent = (props = {}) => render((
   <PanelHeaderMenu {...props}>
@@ -11,8 +11,14 @@ const getComponent = (props = {}) => render((
   </PanelHeaderMenu>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <PanelHeaderMenu {...props}>
+      <Item>testItem</Item>
+    </PanelHeaderMenu>
+  ),
+});
 
 test('PanelHeaderMenu responds to Menu props', () => {
   const onAction = jest.fn();

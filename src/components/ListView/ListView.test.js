@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
@@ -82,6 +83,28 @@ const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => ren
     </ListView>
   </FocusScope>
 ));
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <ListView {...defaultProps} {...props} items={items}>
+      {item => (
+        <Item
+          key={item.key}
+          textValue={item.name}
+          data-id={item.key}
+        >
+          <h1
+            key={item.key}
+            data-testid={item.name}
+          >
+            {item.name}
+          </h1>
+        </Item>
+      )}
+    </ListView>
+  ),
+});
 
 test('renders listview component', () => {
   getComponent();

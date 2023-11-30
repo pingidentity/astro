@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 import { FocusScope, useFocusManager } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,7 @@ import useProgressiveState from '../../hooks/useProgressiveState';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Box from '../Box/Box';
 
-const NavBar = props => {
+const NavBar = forwardRef((props, ref) => {
   const {
     isAutoСollapsible,
     defaultSelectedKey,
@@ -61,7 +61,7 @@ const NavBar = props => {
     <NavBarContext.Provider
       value={contextValue}
     >
-      <Box variant={navStyles.navBar} role="navigation" as="nav" {...others}>
+      <Box ref={ref} variant={navStyles.navBar} role="navigation" as="nav" {...others}>
         {items.length ? (
           <FocusScope restoreFocus={hasRestoreFocus}>
             {items.map(({ item, key }) => <FocusableItem key={key}>{item}</FocusableItem>)}
@@ -70,7 +70,7 @@ const NavBar = props => {
       </Box>
     </NavBarContext.Provider>
   );
-};
+});
 
 const FocusableItem = props => {
   const focusManager = useFocusManager();

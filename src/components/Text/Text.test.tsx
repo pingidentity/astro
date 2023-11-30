@@ -2,9 +2,9 @@ import React from 'react';
 import { ThemeProvider, ThemeUICSSObject } from 'theme-ui';
 
 import { TextProps } from '../../types';
-import axeTest from '../../utils/testUtils/testAxe';
 import testTheme from '../../utils/testUtils/testTheme';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Text from '.';
 
@@ -24,8 +24,8 @@ const getComponent = (props: TextProps = {}) => {
   );
 };
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Text {...props}>text</Text> });
 
 test('default text', () => {
   getComponent();

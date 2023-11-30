@@ -2,15 +2,15 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { PanelHeaderCloseButton } from '../../../index';
-import axeTest from '../../../utils/testUtils/testAxe';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 
 const getComponent = (props = {}) => render((
   <PanelHeaderCloseButton {...props} />
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <PanelHeaderCloseButton {...props} /> });
 
 test('PanelHeaderCloseButton responds to IconButton props', () => {
   const onPress = jest.fn();

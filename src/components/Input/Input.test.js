@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Input from '.';
 
@@ -13,8 +13,9 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render(<Input {...defaultProps} {...props} />);
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Input {...defaultProps} {...props} /> });
+
 
 test('default input', () => {
   getComponent();

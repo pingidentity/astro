@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
 import { chain } from '@react-aria/utils';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { Button, DatePicker } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -15,6 +14,7 @@ import {
   waitFor,
   within,
 } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const hiddenStyling = 'border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;';
 
@@ -628,10 +628,12 @@ test('should add the correct number of padded 0 to year, month and day', () => {
   expect(screen.queryByTestId('date-field')).toHaveValue('0009-08-01');
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-
-  expect(results).toHaveNoViolations();
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <DatePicker
+      aria-label="datePicker-controlled"
+      {...props}
+    />
+  ),
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 
 import { Icon, IconButton, Menu, PopoverMenu } from '../../..';
@@ -12,16 +12,16 @@ import { menuPropTypes } from '../../Menu/menuAttributes';
  * specs easy. Most props available to the Menu component are available to ListItemMenu.
 */
 
-const ListViewItemMenu = ({ children, ...others }) => (
+const ListViewItemMenu = forwardRef(({ children, ...others }, ref) => (
   <PopoverMenu>
-    <IconButton aria-label="more">
+    <IconButton aria-label="more" ref={ref}>
       <Icon icon={MoreVertIcon} size="md" />
     </IconButton>
     <Menu {...others}>
       {children}
     </Menu>
   </PopoverMenu>
-);
+));
 
 ListViewItemMenu.propTypes = menuPropTypes;
 

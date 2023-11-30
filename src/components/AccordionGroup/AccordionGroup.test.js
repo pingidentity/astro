@@ -3,8 +3,8 @@ import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 
 import { Box, Button, Menu, OverlayPanel, PopoverMenu, TextField } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { validHeadingTags } from '../AccordionItem/AccordionItem';
 import Text from '../Text';
 
@@ -14,6 +14,9 @@ const testId = 'test-accordion';
 const defaultProps = {
   'data-testid': testId,
 };
+
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <AccordionGroup {...props} /> });
 
 const items = [
   {
@@ -140,14 +143,6 @@ const getComponentWithMultipleAccordion = () => render((
     </AccordionGroup>
   </Box>
 ));
-
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
-  // landmark-unique rule conflicts with react-aria role definition
-  rules: {
-    'landmark-unique': { enabled: false },
-  },
-});
 
 test('button press uses callback', () => {
   const onPress = jest.fn();

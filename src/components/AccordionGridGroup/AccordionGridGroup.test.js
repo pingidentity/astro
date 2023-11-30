@@ -9,16 +9,18 @@ import {
   Text,
   TextField,
 } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import AccordionGridGroup from '.';
-
 
 const testId = 'test-accordion';
 const defaultProps = {
   'data-testid': testId,
 };
+
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <AccordionGridGroup {...props} /> });
 
 const getComponent = (props = {}) => render((
   <AccordionGridGroup {...defaultProps} {...props}>
@@ -105,13 +107,6 @@ const getComponentWithTextFields = (props = {}) => render((
     </Item>
   </AccordionGridGroup>
 ));
-
-axeTest(getComponent, {
-  // landmark-unique rule conflicts with react-aria role definition
-  rules: {
-    'landmark-unique': { enabled: false },
-  },
-});
 
 test('button press uses callback', () => {
   const onPress = jest.fn();

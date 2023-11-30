@@ -1,7 +1,7 @@
 import React from 'react';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Separator from './Separator';
 
@@ -15,8 +15,8 @@ const getComponent = (props = {}) => render(
   <Separator {...defaultProps} {...props} />,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Separator {...defaultProps} {...props} /> });
 
 test('renders Separator component', () => {
   getComponent();

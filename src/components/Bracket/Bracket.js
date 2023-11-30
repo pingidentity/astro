@@ -22,7 +22,7 @@ const Bracket = forwardRef((props, ref) => {
   const bracketFillTwoId = useMemo(() => uuid(), []);
 
   return (
-    <Box variant="bracket.base" {...others}>
+    <Box variant="bracket.base" {...others} ref={bracketRef}>
       {!isLast && (
         <Box width={15} sx={{ position: 'absolute', top: 0, bottom: 0 }}>
           <svg

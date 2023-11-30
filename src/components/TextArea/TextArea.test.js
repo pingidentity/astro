@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import TextArea from '.';
 
@@ -13,8 +13,9 @@ const getComponent = (props = {}) => render(
   <TextArea {...defaultProps} {...props} />,
 );
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent, {
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <TextArea label="label" {...props} />,
   // TextArea with label provided by TextAreaField
   rules: {
     'label': { enabled: false },

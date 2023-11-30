@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { OverlayProvider, TimeZonePicker } from '../../index';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testTimeZoneJuba = 'Africa/Juba';
 const testTimeZoneApia = 'Pacific/Apia';
@@ -75,4 +76,9 @@ test('shows custom empty search state text when no items are found', () => {
   const input = screen.queryByRole('combobox');
   userEvent.type(input, 'awdasrf213');
   expect(screen.getByText(testEmptyText)).toBeInTheDocument();
+});
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <TimeZonePicker {...defaultProps} {...props} />,
 });

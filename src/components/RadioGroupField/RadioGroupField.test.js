@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import statuses from '../../utils/devUtils/constants/statuses';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import RadioField from '../RadioField';
 
 import RadioGroupField from '.';
@@ -24,8 +24,14 @@ const getComponent = (groupProps = {}, radioProps = []) => render((
   </RadioGroupField>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <RadioGroupField {...defaultProps} {...props}>
+      <RadioField value={testValues[0]} label={testValues[0]} />
+    </RadioGroupField>
+  ),
+});
 
 test('default radio group', () => {
   getComponent();

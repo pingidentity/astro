@@ -12,8 +12,8 @@ import ViewGridPlusOutline from '@pingux/mdi-react/ViewGridPlusOutlineIcon';
 import userEvent from '@testing-library/user-event';
 
 import { Box, Button, Link, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import NavBar from './NavBar';
 
@@ -254,7 +254,14 @@ const clickHeaderButtons = () => {
   headerButtons.map(button => userEvent.click(button));
 };
 
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <NavBar {...props}>
+      <NavBarSection items={data} />
+    </NavBar>
+  ),
+});
 
 test('should render basic nav with children', () => {
   getComponent();

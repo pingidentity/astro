@@ -2,8 +2,8 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Item, ListViewItemMenu } from '../../..';
-import axeTest from '../../../utils/testUtils/testAxe';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 
 
 const getComponent = (props = {}) => render((
@@ -11,9 +11,13 @@ const getComponent = (props = {}) => render((
     <Item>testItem</Item>
   </ListViewItemMenu>
 ));
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => (
+  <ListViewItemMenu {...props}>
+    <Item>testItem</Item>
+  </ListViewItemMenu>
+) });
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
 
 test('ListViewItemMenu responds to Menu props', async () => {
   const onAction = jest.fn();

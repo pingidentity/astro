@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useComponentToggle } from '../../hooks';
 import Icon from '../Icon';
 import IconButton from '../IconButton';
 
-const IconButtonToggle = props => {
+const IconButtonToggle = forwardRef((props, ref) => {
   const {
     toggledIcon,
     defaultIcon,
@@ -31,11 +31,16 @@ const IconButtonToggle = props => {
   );
 
   return (
-    <IconButton onPress={handleConditionChange} {...buttonProps} title={title}>
+    <IconButton
+      onPress={handleConditionChange}
+      ref={ref}
+      title={title}
+      {...buttonProps}
+    >
       <Icon icon={RenderedComponent} {...iconProps} />
     </IconButton>
   );
-};
+});
 
 IconButtonToggle.propTypes = {
   /** Props object that is spread into the icon element. */

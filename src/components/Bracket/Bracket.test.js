@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import axeTest from '../../utils/testUtils/testAxe';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Bracket from '.';
 
@@ -13,9 +13,8 @@ const getComponent = (props = {}) => render(
   <Bracket {...defaultProps} {...props} />,
 );
 
-// // Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
-
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <Bracket {...props} /> });
 
 test('default bracket', () => {
   getComponent();

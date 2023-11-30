@@ -1,10 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { Item, MultivaluesField, OverlayProvider } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { fireEvent, getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
@@ -483,14 +483,6 @@ test('selected keys', () => {
   expect(secondBadge).toBeInTheDocument();
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-
-  expect(results).toHaveNoViolations();
-});
-
 test('read only keys', () => {
   getComponent({ readOnlyKeys: [items[1].key, items[2].key] });
 
@@ -708,4 +700,15 @@ test('should clear the input text onBlur and enter when a single filter result i
   userEvent.type(input, '{enter}', { skipClick: true });
 
   expect(input).toHaveValue('');
+});
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <OverlayProvider>
+      <MultivaluesField {...defaultProps} {...props}>
+        {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
+      </MultivaluesField>
+    </OverlayProvider>
+  ),
 });

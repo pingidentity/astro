@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ListViewItemSwitchField } from '../../../index';
 import { switchFieldPropTypes } from '../../SwitchField/switchFieldAttributes';
@@ -11,9 +11,9 @@ import { switchFieldPropTypes } from '../../SwitchField/switchFieldAttributes';
  * available to ListItemEditButton.
 */
 
-const PanelHeaderSwitchField = props => {
-  return <ListViewItemSwitchField {...props} />;
-};
+const PanelHeaderSwitchField = forwardRef((props, ref) => {
+  return <ListViewItemSwitchField {...props} ref={ref} />;
+});
 
 PanelHeaderSwitchField.propTypes = switchFieldPropTypes;
 

@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 
 import { useSelectField } from '../../hooks';
 import { Item } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { modes } from '../Label/constants';
 
 import SelectFieldBase from './SelectFieldBase';
@@ -328,14 +328,6 @@ test('passing helper text should display it and correct aria attributes on input
   expect(visibleInput).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-
-  expect(results).toHaveNoViolations();
-});
-
 test('popover closes on button blur', () => {
   getComponent();
 
@@ -352,4 +344,17 @@ test('popover closes on button blur', () => {
   userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
+});
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <SelectFieldWrapper {...defaultProps} {...props}>
+      {item => (
+        <Item key={item.name} data-id={item.name}>
+          {item.name}
+        </Item>
+      )}
+    </SelectFieldWrapper>
+  ),
 });

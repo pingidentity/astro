@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { EditButton } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-edit-button';
 const defaultProps = {
@@ -11,7 +11,8 @@ const defaultProps = {
 };
 const getComponent = (props = {}) => render(<EditButton {...defaultProps} {...props} />);
 
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <EditButton {...props} /> });
 
 test('renders edit button', () => {
   getComponent();

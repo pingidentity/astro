@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { Item, Menu } from '../../index';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
-import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testTitle = 'Test Title';
 const defaultProps = {
@@ -23,8 +23,14 @@ const getComponent = (props = {}) => render((
   </Menu>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <Menu {...defaultProps} {...props}>
+      {defaultItems.map(item => <Item key={item.key} {...item} />)}
+    </Menu>
+  ),
+});
 
 test('should render basic menu with children', () => {
   getComponent();

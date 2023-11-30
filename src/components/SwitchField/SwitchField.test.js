@@ -1,8 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import SwitchField from './SwitchField';
 
@@ -16,8 +16,8 @@ const getComponent = (props = {}) => render((
   <SwitchField {...defaultProps} {...props} />
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <SwitchField {...defaultProps} {...props} /> });
 
 test('renders Switch component', () => {
   getComponent({ 'aria-label': 'test' });

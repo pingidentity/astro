@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { Box } from '../..';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -26,8 +26,9 @@ const defaultIconProps = {
  or give warnings of unexpected events.
  */
 
-const Callout = ({ children, status, ...others }) => (
+const Callout = forwardRef(({ children, status, ...others }, ref) => (
   <Box
+    ref={ref}
     data-testid={CALLOUT_TEST_ID}
     isRow
     role="note"
@@ -42,7 +43,7 @@ const Callout = ({ children, status, ...others }) => (
     />
     {children}
   </Box>
-);
+));
 
 Callout.propTypes = {
   ...statusPropTypes,

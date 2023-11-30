@@ -26,12 +26,12 @@ const ComponentWithRef = ({ renderComponent }: ComponentWithRefProps) => {
   );
 };
 
-export const universalComponentTests = async ({ renderComponent, props, rules = {} }) => {
+export const universalComponentTests = async ({ renderComponent, rules = {} }) => {
   test('should have no accessibility violations', async () => {
     jest.useRealTimers();
 
-    const { container } = render(renderComponent(props));
-    const results = await axe(container, rules);
+    const { container } = render(renderComponent());
+    const results = await axe(container, { rules });
 
     expect(results).toHaveNoViolations();
   });
