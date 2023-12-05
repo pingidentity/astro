@@ -8,8 +8,8 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
+import { ELEMENT_TYPE } from './BreadcrumbItem';
 import Breadcrumbs from './Breadcrumbs';
-
 
 const testId = 'test-breadcrumbs';
 const testItemId = 'test-breadcrumb-item';
@@ -66,7 +66,7 @@ test('breadcrumbItem should render breadcrumbItem as a Text component when appro
   getComponent(
     {},
     {
-      elementType: 'Text',
+      elementType: ELEMENT_TYPE.TEXT,
       'data-testid': testItemId,
     },
   );
@@ -77,7 +77,7 @@ test('breadcrumbItem should render breadcrumbItem as a IconButton component when
   getComponent(
     {},
     {
-      elementType: 'IconButton',
+      elementType: ELEMENT_TYPE.ICON_BUTTON,
       'data-testid': testItemId,
       icon: CreateIcon,
     },
@@ -103,7 +103,7 @@ test('breadcrumbItem should render breadcrumbItem as a html tag when appropriate
 
 test('breadcrumbs will use onAction if provided', () => {
   const mockOnAction = jest.fn();
-  getComponent({}, { elementType: 'Link', onAction: mockOnAction });
+  getComponent({}, { elementType: ELEMENT_TYPE.LINK, onAction: mockOnAction });
   userEvent.click(screen.getByText(testItemsArr[0]));
   expect(mockOnAction).toHaveBeenCalled();
 });

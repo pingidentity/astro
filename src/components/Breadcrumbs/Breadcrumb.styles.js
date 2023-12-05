@@ -1,34 +1,39 @@
-import { base } from '../Button/Buttons.styles';
+import { link as buttonLink } from '../Button/Buttons.styles';
+import { text } from '../Text/Text.styles';
+
+const breadcrumbMinWidth = '40px';
 
 const link = {
-  color: 'active',
-  fontFamily: 'standard',
-  fontSize: '15px',
-  textDecoration: 'none',
-  outline: 'none',
-  '&.is-hovered': {
-    textDecoration: 'underline',
-  },
-  '&.is-focused': {
-    textDecoration: 'underline',
-  },
-  '&.is-disabled': {
-    pointerEvents: 'none',
-  },
+  ...text.textEllipsis,
+  ...buttonLink,
+  display: 'block',
+  minWidth: breadcrumbMinWidth,
   '&.is-current': {
-    pointerEvents: 'none',
-    ...base,
-    fontWeight: 1,
+    color: 'text.primary',
+    textDecoration: 'none',
+    cursor: 'default',
   },
 };
 
-const containerLi = {
+const containerOl = {
+  alignItems: 'center',
+  minHeight: 42,
+  paddingInlineStart: 'unset',
   'a.is-hovered.is-current ': {
     textDecoration: 'none',
   },
 };
 
+const containerLi = {
+  flex: '0 1000000 auto',
+  minWidth: breadcrumbMinWidth,
+  '&.is-current': {
+    flex: '0 1 auto',
+  },
+};
+
 export default {
-  link,
   containerLi,
+  containerOl,
+  link,
 };

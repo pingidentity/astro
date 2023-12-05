@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Breadcrumbs } from '../../index';
+import { Box, Breadcrumbs } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import BreadcrumbsReadme from './Breadcrumbs.mdx';
@@ -41,22 +41,19 @@ export default {
       },
     },
   },
-  args: {
-    icon: ChevronRightIcon,
-  },
+
 };
 
 export const Default = args => {
   const onAction = key => action(`onPress ${key}`);
 
   return (
-    <Breadcrumbs onAction={onAction} {...args}>
+    <Breadcrumbs onAction={onAction} {...args} icon={ChevronRightIcon}>
       <Item
         aria-label="home"
         data-id="home"
         href="https://www.pingidentity.com"
         key="home"
-        variant="buttons.link"
       >
         Home
       </Item>
@@ -65,7 +62,6 @@ export const Default = args => {
         data-id="trendy"
         href="https://www.pingidentity.com"
         key="trendy"
-        variant="buttons.link"
       >
         Trendy
       </Item>
@@ -73,7 +69,6 @@ export const Default = args => {
         aria-label="march-2020-assets"
         data-id="march"
         key="march 2020 assets"
-        variant="buttons.link"
       >
         March 2020 Assets
       </Item>
@@ -85,5 +80,62 @@ Default.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.breadcrumbs.default,
+  },
+};
+
+export const Overflowing = () => {
+  const reallyLongText = 'If This Text Were Really Very Much So Extremely Long';
+
+  return (
+    <Box gap="md" maxWidth="385px">
+      <Breadcrumbs icon={ChevronRightIcon}>
+        <Item
+          aria-label="breadcrumb_1"
+          data-id="breadcrumb_1"
+          href="https://www.pingidentity.com"
+          key="breadcrumb_1"
+        >
+          {reallyLongText}
+        </Item>
+        <Item
+          aria-label="breadcrumb_2"
+          data-id="breadcrumb_2"
+          href="https://www.pingidentity.com"
+          key="breadcrumb_2"
+        >
+          Edit
+        </Item>
+      </Breadcrumbs>
+      <Breadcrumbs icon={ChevronRightIcon}>
+        <Item
+          aria-label="breadcrumb_1"
+          data-id="breadcrumb_1"
+          href="https://www.pingidentity.com"
+          key="breadcrumb_1"
+        >
+          {reallyLongText}
+        </Item>
+        <Item
+          aria-label="breadcrumb_1"
+          data-id="breadcrumb_2"
+          href="https://www.pingidentity.com"
+          key="breadcrumb_2"
+        >
+          {reallyLongText}
+        </Item>
+      </Breadcrumbs>
+    </Box>
+  );
+};
+
+Overflowing.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.breadcrumbs.overflowing,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'landmark-unique', enabled: false }],
+    },
   },
 };
