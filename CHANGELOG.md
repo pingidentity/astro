@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.33.0...@pingux/astro@2.34.0) (2023-12-05)
+
+
+### Bug Fixes
+
+* [UIP-6699]: Calendar remove hover state when disabled ([6d6cc7c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6d6cc7c4ec872a78bc717b73fe347218a381ac8d))
+* [UIP-6711]: Icon: replace axeTest with universalComponentTest ([e3f3dc4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e3f3dc44ee7a6ce54d08bc14969ae690bae1e398))
+
+
+### Features
+
+* [UIP-6601]: Add overflowing text story for Breadcrumbs ([e0500b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e0500b1794fed591ddc39391e10cc5e49b00096f))
+* [UIP-6651]: useNavBarStyling: update to typescript ([54146e4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/54146e45d59c3a1b20b468bf0bc10642c7da0e0d))
+
+
+
+
+
 # [2.33.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.32.0...@pingux/astro@2.33.0) (2023-11-30)
 
 
