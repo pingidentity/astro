@@ -30,6 +30,7 @@ export const FIGMA_LINKS: FigmaLinks = {
   },
   breadcrumbs: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=1162-11924&t=8Wwd3tIBh3GEjCJB-0',
+    overflowing: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45064-7148&mode=design&t=0RGDgLyKBzT6bOXO-0',
   },
   button: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=0-1&t=8Wwd3tIBh3GEjCJB-0',
