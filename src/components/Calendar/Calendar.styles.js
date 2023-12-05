@@ -32,6 +32,11 @@ const calendarButton = {
     color: 'neutral.10',
     opacity: 1,
   },
+  '&.is-disabled': {
+    '&.is-hovered': {
+      backgroundColor: 'unset',
+    },
+  },
 };
 
 const calendarCell = {

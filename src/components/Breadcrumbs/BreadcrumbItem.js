@@ -11,7 +11,21 @@ import { omit } from 'lodash/object';
 import PropTypes from 'prop-types';
 
 import { usePropWarning } from '../../hooks';
-import { Button, IconButton, Link, Text } from '../../index';
+import {
+  Box,
+  Button,
+  IconButton,
+  Link,
+  Text,
+} from '../../index';
+
+export const ELEMENT_TYPE = {
+  BUTTON: 'Button',
+  ICON_BUTTON: 'IconButton',
+  TEXT: 'Text',
+  LINK: 'Link',
+  FRAGMENT: 'Fragment',
+};
 
 const BreadcrumbItem = forwardRef((props, ref) => {
   const {
@@ -33,15 +47,15 @@ const BreadcrumbItem = forwardRef((props, ref) => {
 
   const ElementType = useMemo(() => {
     switch (elementType) {
-      case 'Button':
+      case ELEMENT_TYPE.BUTTON:
         return Button;
-      case 'IconButton':
+      case ELEMENT_TYPE.ICON_BUTTON:
         return IconButton;
-      case 'Text':
+      case ELEMENT_TYPE.TEXT:
         return Text;
-      case 'Link':
+      case ELEMENT_TYPE.LINK:
         return Link;
-      case 'Fragment':
+      case ELEMENT_TYPE.FRAGMENT:
         return Fragment;
       default:
         return elementType;
@@ -69,13 +83,22 @@ const BreadcrumbItem = forwardRef((props, ref) => {
     return omit(elementTypeProps, 'onClick', 'onKeyDown', 'onKeyUp');
   }, [elementType, itemProps, others, onPressHandler]);
 
-  return React.cloneElement(
-    <ElementType />,
-    {
-      ...elementProps,
-      ref,
-    },
-    children,
+  const elementVariantProps = elementType !== ELEMENT_TYPE.FRAGMENT && {
+    variant: elementType === ELEMENT_TYPE.LINK ? 'variants.breadcrumb.link' : '',
+    ref: itemRef,
+    ...elementProps,
+  };
+
+  return (
+    <Box
+      as="li"
+      className={isCurrent && 'is-current'}
+      variant="variants.breadcrumb.containerLi"
+    >
+      <ElementType {...elementVariantProps}>
+        {children}
+      </ElementType>
+    </Box>
   );
 });
 

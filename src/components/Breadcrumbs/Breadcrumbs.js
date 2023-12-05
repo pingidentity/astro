@@ -31,38 +31,37 @@ const Breadcrumbs = forwardRef((props, ref) => {
       : true;
 
     return (
-      <Box
-        isRow
-        sx={{
-          alignItems: 'center',
-          minHeight: 42,
-        }}
-        as="li"
-        key={`li-${child.key}`}
-        variant="variants.breadcrumb.containerLi"
-      >
+      <React.Fragment key={`li-${child.key}`}>
         <BreadcrumbItem
+          actionKey={child.key}
           data-id={child['data-id']}
           isCurrent={isCurrentItem}
           onAction={onAction}
-          actionKey={child.key}
-          variant="variants.breadcrumb.link"
           {...child.props}
         >
           {child.props.children}
         </BreadcrumbItem>
-        {icon && !isCurrentItem && <Icon aria-hidden="true" icon={icon} mx={5} size="xs" {...iconProps} />}
-      </Box>
+        {icon && !isCurrentItem && (
+        <Icon
+          aria-hidden="true"
+          icon={icon}
+          mx={5}
+          size="xs"
+          title={{ name: 'Breadcrumb Separator' }}
+          {...iconProps}
+        />
+        )}
+      </React.Fragment>
     );
   }, [children.length, filteredChildren, icon, iconProps, onAction]);
 
   return (
     <nav aria-label="Breadcrumb">
       <Box
-        ref={breadcrumbsRef}
-        isRow
-        sx={{ paddingInlineStart: 'unset' }}
         as="ol"
+        isRow
+        ref={breadcrumbsRef}
+        variant="variants.breadcrumb.containerOl"
         {...mergeProps(wrapperProps, others)}
       >
         {Array.isArray(filteredChildren)
