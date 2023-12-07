@@ -42,14 +42,14 @@ module.exports = {
     '<rootDir>/src/index.ts',
     '<rootDir>/src/hooks/index.ts',
     '<rootDir>/.storybook/',
-    '.(story|stories).(js|jsx|mdx)',
+    '.(story|stories).(js|jsx|mdx|ts|tsx)',
     '<rootDir>/src/styles/',
     '.styles.js',
     '/styles/',
     '/utils/',
     // FIXME: upgrade RTL to v14 (UIP-6248), then fix test in useOverlappingMenuHoverState.test.js,
     // then remove this once test is fixed
-    '/hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.js',
+    '/hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.ts',
   ],
   transform: {
     '\\.jsx?$': ['babel-jest', { rootMode: 'upward' }],
