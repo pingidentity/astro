@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.35.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.34.0...@pingux/astro@2.35.0) (2023-12-07)
+
+
+### Bug Fixes
+
+* [UIP-6698]: Calendar organize stories and fix figma links ([bb9a6c1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bb9a6c1da4535ce212634f0030425de3501cd2b5))
+* [UIP-6710] EnvironmentBreadcrumb: replace axeTest with universalComponentTest ([2f7945e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2f7945e7c8dfe20aae2fbd7e32d7212b6bbcd948))
+* [UIP-6712] Replace axeTest for Image ([1ca7adf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1ca7adf6bf0d9a1eed60dd0564eca47a124430e6))
+
+
+### Features
+
+* [UIP-6588] update count badge story styles ([ba89141](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ba89141b052d1f2c52754c23b7102b36093fce6a))
+* [UIP-6652] convert useOverlappingMenuHoverState to TS ([5b8b9d1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5b8b9d13faa677bb40f35085240f6bbdbd78951f))
+
+
+
+
+
 # [2.34.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.33.0...@pingux/astro@2.34.0) (2023-12-05)
 
 
