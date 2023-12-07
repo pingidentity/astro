@@ -14,6 +14,7 @@ import {
   useAriaLabelWarning,
   useDevelopmentWarning,
   useFallbackImage,
+  useLocalOrForwardRef,
   usePropWarning,
   useStatusClasses,
 } from '../../hooks';
@@ -55,7 +56,7 @@ const Image = forwardRef((props, ref) => {
     [src, isLoading, shouldShowFallback]);
   const imgAlt = useMemo(() => setImgAttribute(alt, fallbackAlt),
     [alt, isLoading, shouldShowFallback]);
-  const imgRef = useRef();
+  const imgRef = useLocalOrForwardRef(ref);
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => imgRef.current);
