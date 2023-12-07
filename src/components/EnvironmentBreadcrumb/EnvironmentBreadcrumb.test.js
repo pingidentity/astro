@@ -54,15 +54,15 @@ const defaultWithSectionsProps = {
 
 const onSelectionChange = jest.fn();
 
-export const getComponent = props => render(
+export const renderComponent = props => (
   <OverlayProvider>
     <EnvironmentBreadcrumb {...defaultProps} {...props}>
       {item => <Item key={item.name} data-testid={item.name}>{item.name}</Item>}
     </EnvironmentBreadcrumb>
-  </OverlayProvider>,
+  </OverlayProvider>
 );
 
-export const getSectionsComponent = (props = {}) => render(
+export const renderSectionsComponent = props => (
   <OverlayProvider>
     <EnvironmentBreadcrumb {...defaultWithSectionsProps} {...props}>
       {section => (
@@ -82,8 +82,11 @@ export const getSectionsComponent = (props = {}) => render(
         </Section>
       )}
     </EnvironmentBreadcrumb>
-  </OverlayProvider>,
+  </OverlayProvider>
 );
+
+const getComponent = props => render(renderComponent(props));
+const getSectionsComponent = (props = {}) => render(renderSectionsComponent(props));
 
 beforeAll(() => {
   jest
