@@ -92,9 +92,9 @@ Default.parameters = {
 };
 
 export const CountBadge = () => (
-  <Box>
-    <Badge label="1" variant="countBadge" mb="12px" />
-    <Badge label="1" variant="countNeutral" />
+  <Box isRow gap="xs">
+    <Badge label="4" variant="countBadge" />
+    <Badge label="4" variant="countNeutral" />
   </Box>
 );
 
