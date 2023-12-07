@@ -9,7 +9,7 @@ import {
   PopoverMenu,
 } from '../../index';
 
-import useOverlappingMenuHoverState from './useOverlappingMenuHoverState';
+import useOverlappingMenuHoverState from './index';
 
 const IS_HOVERED = 'isHovered';
 
