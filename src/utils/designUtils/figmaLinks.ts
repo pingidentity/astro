@@ -42,7 +42,13 @@ export const FIGMA_LINKS: FigmaLinks = {
     secondaryRightAligned: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46080%3A788&mode=dev',
   },
   calendar: {
-    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=6373%3A25490&t=BoHXzVpQq9Lf7MaU-1',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=47640-5789&mode=design&t=SZGzEV7PufQjYBN5-4',
+    defaultValue: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-14593&mode=design&t=PX1Q47IuuVvOafDQ-4',
+    disabled: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-15106&mode=design&t=PX1Q47IuuVvOafDQ-4',
+    unavailableDates: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-15681&mode=design&t=PX1Q47IuuVvOafDQ-4',
+    minimumDate: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-16197&mode=design&t=PX1Q47IuuVvOafDQ-4',
+    maximumDate: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-16454&mode=design&t=PX1Q47IuuVvOafDQ-4',
+    autofocus: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-16768&mode=design&t=PX1Q47IuuVvOafDQ-4',
   },
   callout: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=14289-33201&t=VgqEexa1CXAXfPpp-0',
