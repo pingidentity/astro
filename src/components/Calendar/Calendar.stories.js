@@ -119,25 +119,23 @@ export const DefaultValue = args => (
   <Calendar {...args} aria-label="calendar-with-default-value" defaultValue="2022-08-10" />
 );
 
-export const Controlled = args => {
-  const [date, setDate] = useState(null);
-  return (
-    <Calendar
-      {...args}
-      aria-label="calendar-component-controlled"
-      value={date}
-      onChange={setDate}
-    />
-  );
+DefaultValue.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.defaultValue,
+  },
 };
 
 export const Disabled = args => (
   <Calendar {...args} aria-label="calendar-component-disabled" isDisabled />
 );
 
-export const ReadOnly = args => (
-  <Calendar {...args} aria-label="calendar-component-readonly" isReadOnly />
-);
+Disabled.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.disabled,
+  },
+};
 
 export const UnavailableDates = args => {
   const unavailableRanges = [
@@ -161,6 +159,13 @@ export const UnavailableDates = args => {
   );
 };
 
+UnavailableDates.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.unavailableDates,
+  },
+};
+
 export const MinimumDate = args => (
   <Calendar
     {...args}
@@ -169,6 +174,13 @@ export const MinimumDate = args => (
     defaultDate="2022-09-14"
   />
 );
+
+MinimumDate.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.minimumDate,
+  },
+};
 
 export const MaximumDate = args => (
   <Calendar
@@ -179,6 +191,32 @@ export const MaximumDate = args => (
   />
 );
 
+MaximumDate.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.maximumDate,
+  },
+};
+
 export const Autofocus = args => (
   <Calendar {...args} aria-label="calendar-component" hasAutoFocus />
 );
+
+Autofocus.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.calendar.autofocus,
+  },
+};
+
+export const Controlled = args => {
+  const [date, setDate] = useState(null);
+  return (
+    <Calendar
+      {...args}
+      aria-label="calendar-component-controlled"
+      value={date}
+      onChange={setDate}
+    />
+  );
+};

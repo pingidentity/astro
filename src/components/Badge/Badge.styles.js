@@ -138,7 +138,7 @@ const countDefault = {
   width: 'fit-content',
   minWidth: '17px',
   minHeight: '17px',
-  px: '0',
+  px: '5px',
   py: '2px',
   '& span': {
     fontSize: '11px',
