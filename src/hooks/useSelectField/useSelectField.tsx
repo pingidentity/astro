@@ -11,6 +11,7 @@ import ListBox from '../../components/ListBox/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
 import { Axis, BoxProps, FocusableElement, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
+import { LabelMode } from '../useColumnStyles/useColumnStyles';
 import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
@@ -43,7 +44,7 @@ interface UseSelectFieldProps<T> {
   listBoxProps?: BoxProps;
   labelProps?: ThemeUILabelProps;
   containerProps?: BoxProps;
-  labelMode: 'default' | 'float' | 'left'
+  labelMode: LabelMode;
 }
 
 interface UseSelectFieldReturnProps {
