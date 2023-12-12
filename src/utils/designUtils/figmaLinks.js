@@ -20,7 +20,13 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=1162-11924&t=8Wwd3tIBh3GEjCJB-0',
   },
   button: {
-    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=0-1&t=8Wwd3tIBh3GEjCJB-0',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44916%3A47047&mode=dev',
+    disabled: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45003%3A54887&mode=dev',
+    textIconButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45003%3A54941&mode=dev',
+    inlineButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44916%3A47247&mode=dev',
+    colorBlockButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44916%3A47405&mode=dev',
+    critical: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44916%3A47237&mode=dev',
+    primary: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=44916%3A47151&mode=dev',
   },
   buttonBar: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=3660%3A20551&mode=dev',

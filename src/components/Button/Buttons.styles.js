@@ -75,10 +75,11 @@ const primary = {
 
 const withIcon = {
   ...base,
-  padding: '8.5px 15px 8.5px 10px',
+  padding: '10px 15px 10px 10px',
   bg: 'white',
   border: '1px solid',
   borderColor: 'active',
+  display: 'inline-flex',
   '&.is-hovered': {
     ...defaultHover,
   },
@@ -292,6 +293,26 @@ const colorBlock = {
   },
 };
 
+const colorBlockPrimary = {
+  ...colorBlock,
+  ...defaultActive,
+  '& span': {
+    color: 'white',
+    textAlign: 'left',
+  },
+  '&.is-hovered': {
+    ...defaultHover,
+    backgroundColor: 'accent.40',
+    color: 'white',
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+    backgroundColor: 'accent.20',
+    border: '1px solid',
+    borderColor: 'accent.20',
+  },
+};
+
 const headerBar = {
   ...base,
   backgroundColor: 'white',
@@ -348,6 +369,7 @@ export default {
   quiet,
   success,
   colorBlock,
+  colorBlockPrimary,
   exampleText,
   withIcon,
   inlineWithIcon,
