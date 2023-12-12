@@ -1,12 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Badge as ThemeUIBadge } from 'theme-ui';
+import { ResponsiveValue } from 'styled-system';
+import { Badge as ThemeUIBadge, ThemeUIStyleObject } from 'theme-ui';
 
 import { Box, Text } from '../..';
 import { BadgeContext } from '../../context/BadgeContext';
 import * as colors from '../../styles/colors';
+import { BadgeProps } from '../../types';
 
-const Badge = React.forwardRef((props, ref) => {
+const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
     align,
     bg,
@@ -33,12 +34,12 @@ const Badge = React.forwardRef((props, ref) => {
   };
 
   const badgeProps = {
-    bg,
+    bg: bg as ResponsiveValue<string>,
     isUppercase,
     label,
-    ref,
+    ref: ref as React.Ref<HTMLDivElement>,
     textColor,
-    sx: badgeSx,
+    sx: badgeSx as ThemeUIStyleObject,
     ...others,
   };
 
@@ -54,14 +55,13 @@ const Badge = React.forwardRef((props, ref) => {
     'boxes.selectedItemBadge',
   ];
 
-  const fixedVariant = (oldVariantPaths.includes(props.variant)) ? `variants.${props.variant}` : props.variant;
+  const fixedVariant = (variant && oldVariantPaths.includes(variant)) ? `variants.${variant}` : variant;
 
   return (
     <BadgeContext.Provider value={{ bg }}>
       <ThemeUIBadge
-        isRow
         {...badgeProps}
-        variant={props.variant ? fixedVariant : 'baseBadge'}
+        variant={variant ? fixedVariant : 'baseBadge'}
       >
         {slots?.leftIcon
         && (
@@ -72,7 +72,7 @@ const Badge = React.forwardRef((props, ref) => {
         <Text
           variant="label"
           color={textColor}
-          sx={isUppercase && { textTransform: 'uppercase', fontSize: '11px' }}
+          sx={isUppercase ? { textTransform: 'uppercase', fontSize: '11px' } : {}}
           {...textProps}
         >
           {label}
@@ -82,30 +82,6 @@ const Badge = React.forwardRef((props, ref) => {
     </BadgeContext.Provider>
   );
 });
-
-Badge.propTypes = {
-  /** The text color of the badge. */
-  textColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The background color of the badge. */
-  bg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Provides a way to insert markup in specified places. */
-  slots: PropTypes.shape({
-    /** The given node will be inserted into left side of the badge. */
-    leftIcon: PropTypes.node,
-  }),
-  /** The label of the badge. */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Props object that is spread directly into the text. */
-  textProps: PropTypes.shape({}),
-  /** When true, display badge label as uppercase. */
-  isUppercase: PropTypes.bool,
-  /** Alignment of badge relative to parent container. */
-  align: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /** JSX styling that is passed into the component. */
-  sx: PropTypes.shape({}),
-  /** The variant of the badge */
-  variant: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-};
 
 Badge.defaultProps = {
   textColor: 'white',

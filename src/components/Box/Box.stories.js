@@ -6,7 +6,7 @@ import {
   Image,
   Text,
 } from '../../index';
-import { flatColorList } from '../../styles/colors.js';
+import { flatColorList } from '../../styles/colors';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
