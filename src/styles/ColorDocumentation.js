@@ -7,7 +7,7 @@ import SelectField from '../components/SelectField';
 import Text from '../components/Text';
 import TextField from '../components/TextField';
 
-import { flatColorList } from './colors.js';
+import { flatColorList } from './colors';
 
 const exactMatchThreshold = 0.02;
 function Color({ name, hex, distanceFromReference, referenceColor }) {
