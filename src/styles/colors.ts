@@ -62,7 +62,7 @@ export const accent = {
 };
 
 const [cHue, cSaturation, cLightness] = chroma('#D033FF').hsl();
-const getDecorativeColor = (index, h = cHue, s = cSaturation, l = cLightness) => (index > 0
+const getDecorativeColor = (index: number, h = cHue, s = cSaturation, l = cLightness) => (index > 0
   ? getDecorativeColor(index - 1, (h + 100) % 360, s, l * 0.95)
   : chroma(h, s, l, 'hsl').hex());
 
@@ -74,7 +74,7 @@ export const decorativeLight = decorative.map(
   color => chroma(color).brighten(2).hex(),
 );
 
-export const getDarkerColor = (color, percentage) => (chroma.valid(color) ? chroma.mix(color, '#000000', percentage).hex() : '');
+export const getDarkerColor = (color: string, percentage: number) => (chroma.valid(color) ? chroma.mix(color, '#000000', percentage).hex() : '');
 
 // export const focus = chroma(accent[50]).alpha(0.75).hex();
 export const focus = chroma('#D033FF').hex();
@@ -123,7 +123,13 @@ const allColors = {
 
 export default allColors;
 
-function flattenColors(obj, prefix = '') {
+type NestedColorPalette = string | string[] | { [key: string]: NestedColorPalette };
+
+type ColorPalette = {
+  [key: string]: NestedColorPalette;
+} | string[];
+
+function flattenColors(obj: ColorPalette, prefix = '') {
   return Object.entries(obj)
     .map(([key, value]) => {
       if (typeof value === 'string') {
@@ -142,7 +148,7 @@ function flattenColors(obj, prefix = '') {
 /* used by Storybook's stories */
 export const flatColorList = flattenColors(allColors);
 
-export const getBaseHexColor = colorName => {
+export const getBaseHexColor = (colorName: string) => {
   if (chroma.valid(colorName)) {
     return colorName;
   }

@@ -12,6 +12,7 @@ import {
   DataTableHeader,
   DataTableRow,
 } from '../../index';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import DataTable from './DataTable';
 
@@ -911,4 +912,22 @@ describe('Empty DataTable', () => {
     expect(staticTable).toBeVisible();
     expect(tRows).toBeInTheDocument();
   });
+});
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <DataTable {...props} aria-label="label">
+      <DataTableHeader columns={[columns[0]]}>
+        <DataTableColumn align="center">{columns[0].name}</DataTableColumn>
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  ),
 });

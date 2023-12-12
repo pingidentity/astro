@@ -11,7 +11,7 @@ import {
   Icon,
   IconButton,
 } from '../../index';
-import { flatColorList } from '../../styles/colors.js';
+import { flatColorList } from '../../styles/colors';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import BadgeReadme from './Badge.mdx';
