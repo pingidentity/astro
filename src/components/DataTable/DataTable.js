@@ -24,7 +24,7 @@ import {
   DataTableContext,
   useDataTableContext,
 } from '../../context/DataTableContext';
-import { useStatusClasses } from '../../hooks';
+import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { Box, Icon, Loader } from '../../index';
 
 import DataTableVirtualizer from './DataTableVirtualizer';
@@ -82,7 +82,7 @@ const DataTable = forwardRef((props, ref) => {
     ...props,
   });
 
-  const domRef = useRef(ref);
+  const domRef = useLocalOrForwardRef(ref);
   const headerRef = useRef();
   const bodyRef = useRef();
 

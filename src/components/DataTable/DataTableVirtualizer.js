@@ -132,7 +132,6 @@ const DataTableVirtualizer = forwardRef(({
         {state.visibleViews[0]}
       </Box>
       <ScrollView
-        role="presentation"
         variant="dataTable.tableBody"
         style={{ flex: 1 }}
         innerStyle={{
