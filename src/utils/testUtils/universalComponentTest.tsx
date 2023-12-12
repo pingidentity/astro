@@ -27,17 +27,19 @@ const ComponentWithRef = ({ renderComponent }: ComponentWithRefProps) => {
 };
 
 export const universalComponentTests = async ({ renderComponent, rules = {} }) => {
-  test('should have no accessibility violations', async () => {
-    jest.useRealTimers();
+  describe('Universal Component Tests', () => {
+    test('should have no accessibility violations', async () => {
+      jest.useRealTimers();
 
-    const { container } = render(renderComponent());
-    const results = await axe(container, { rules });
+      const { container } = render(renderComponent());
+      const results = await axe(container, { rules });
 
-    expect(results).toHaveNoViolations();
-  });
+      expect(results).toHaveNoViolations();
+    });
 
-  test('should forward refs properly', () => {
-    render(<ComponentWithRef renderComponent={renderComponent} />);
-    screen.getByText(HAS_REF);
+    test('should forward refs properly', () => {
+      render(<ComponentWithRef renderComponent={renderComponent} />);
+      screen.getByText(HAS_REF);
+    });
   });
 };
