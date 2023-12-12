@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.35.0...@pingux/astro@2.36.0) (2023-12-12)
+
+
+### Bug Fixes
+
+* [UIP-6613] button update to match figma specs ([50b67d9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/50b67d9000af0200299be7bbb77cac3677743fe8))
+
+
+### Features
+
+* [UIP-6638] useColumnStyles convert to typescript ([86b05e4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/86b05e406594a76b17ad38d2d255a5d047beeca7))
+* [UIP-6680]: Badge: convert to typescript ([d1bd26d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d1bd26d0c50ea12c02e45af4dd0db76fcb9b1daa))
+
+
+
+
+
 # [2.35.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.34.0...@pingux/astro@2.35.0) (2023-12-07)
 
 
