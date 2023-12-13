@@ -263,4 +263,5 @@ test('should autofocus on current day with hasAutoFocus', () => {
   const day = dateToday.day;
   const focusedDay = screen.queryAllByText(day).filter(cell => cell.getAttribute('aria-disabled') !== 'true');
   expect(focusedDay[0]).toHaveTextContent(day);
+  expect(focusedDay[0]).toHaveFocus();
 });
