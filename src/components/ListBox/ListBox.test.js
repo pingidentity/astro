@@ -3,7 +3,8 @@ import { Item, Section } from 'react-stately';
 import { useListState } from '@react-stately/list';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ListBox from '.';
 
@@ -38,15 +39,15 @@ const defaultWithSectionsProps = {
   items: itemsWithSections,
 };
 
-const ListBoxWithState = props => {
-  const state = useListState(props);
+const ListBoxWithState = React.forwardRef((props, ref) => {
+  const state = useListState({ props });
 
   return (
-    <ListBox {...props} state={state}>
-      {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+    <ListBox {...props} state={state} ref={ref}>
+      {item => <Item key={item.name} childItems={item.options}>{item.name}</Item>}
     </ListBox>
   );
-};
+});
 
 const ListBoxWithSections = props => {
   const state = useListState(props);
@@ -101,11 +102,9 @@ test('default listbox', () => {
   expect(listbox).toBeInTheDocument();
 });
 
-test('should have no accessibility violations', async () => {
-  jest.useRealTimers();
-  const { container } = getComponent();
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <ListBoxWithState aria-label="label" {...props} />,
 });
 
 test('renders sections and items within section', () => {
