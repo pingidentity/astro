@@ -101,6 +101,7 @@ export default {
     isRequired: false,
     onChange: null,
     onFocusChange: null,
+    defaultFocusedValue: '2023-11-15',
   },
 };
 
@@ -115,8 +116,8 @@ Default.parameters = {
   },
 };
 
-export const DefaultValue = args => (
-  <Calendar {...args} aria-label="calendar-with-default-value" defaultValue="2022-08-10" />
+export const DefaultValue = () => (
+  <Calendar aria-label="calendar-with-default-value" defaultValue="2022-08-10" />
 );
 
 DefaultValue.parameters = {
@@ -137,7 +138,7 @@ Disabled.parameters = {
   },
 };
 
-export const UnavailableDates = args => {
+export const UnavailableDates = () => {
   const unavailableRanges = [
     ['2022-07-29', '2022-08-05'],
     ['2022-08-15', '2022-08-20'],
@@ -151,7 +152,6 @@ export const UnavailableDates = args => {
 
   return (
     <Calendar
-      {...args}
       aria-label="calendar-component-unavailable-dates"
       defaultValue="2022-08-10"
       isDateUnavailable={isDateUnavailable}
@@ -166,12 +166,11 @@ UnavailableDates.parameters = {
   },
 };
 
-export const MinimumDate = args => (
+export const MinimumDate = () => (
   <Calendar
-    {...args}
     aria-label="calendar-component-min-date"
     minValue="2022-09-10"
-    defaultDate="2022-09-14"
+    defaultValue="2022-09-14"
   />
 );
 
@@ -182,9 +181,8 @@ MinimumDate.parameters = {
   },
 };
 
-export const MaximumDate = args => (
+export const MaximumDate = () => (
   <Calendar
-    {...args}
     aria-label="calendar-component-max-date"
     maxValue="2022-10-10"
     defaultValue="2022-10-05"
