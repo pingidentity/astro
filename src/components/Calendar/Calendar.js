@@ -15,7 +15,7 @@ import { Box, Button, Icon, IconButton, Text } from '../../index';
 import CalendarGrid from './CalendarGrid';
 
 const Calendar = forwardRef((props, ref) => {
-  const { value, defaultValue, minValue, maxValue } = props;
+  const { value, defaultValue, minValue, maxValue, hasAutoFocus } = props;
   const { locale } = useLocale();
   const calenderRef = useRef();
 
@@ -30,6 +30,7 @@ const Calendar = forwardRef((props, ref) => {
   };
 
   const state = useCalendarState({
+    autoFocus: hasAutoFocus,
     ...props,
     ...parsedDates,
     locale,

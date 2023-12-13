@@ -198,17 +198,6 @@ MaximumDate.parameters = {
   },
 };
 
-export const Autofocus = args => (
-  <Calendar {...args} aria-label="calendar-component" hasAutoFocus />
-);
-
-Autofocus.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.calendar.autofocus,
-  },
-};
-
 export const Controlled = args => {
   const [date, setDate] = useState(null);
   return (
