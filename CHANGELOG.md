@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.36.0...@pingux/astro@2.37.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* [UIP-6697] Remove AutoFocus story from Calendar ([a662db9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a662db96c58d8355f9e59582f237e648bad3db5e))
+* [UIP-6701]: Calendar: default focus dates ([00de51d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/00de51d80098ba91bcc78eafd0486055024fc2a4))
+* [UIP-6715] PopoverContainer: replace axeTest with universalComponentTest ([fcd7e8e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fcd7e8ec388bd20ebf6efe977713f2d30389150c))
+
+
+### Features
+
+* [UIP-6669] update Button hover styles ([4b280c4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4b280c4ea5ddcc52088f06d5d74fc5df4a622026))
+
+
+
+
+
 # [2.36.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.35.0...@pingux/astro@2.36.0) (2023-12-12)
 
 
