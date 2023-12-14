@@ -14,13 +14,17 @@ export interface UseOverlayPanelReturnState extends OverlayTriggerState {
   isTransitioning?: boolean;
 }
 
-interface UseOverlayPanelStateReturnValues {
-  state: UseOverlayPanelReturnState;
-  onClose: (
+interface UseOverlayPanelStateReturnOnClose {
+  (
     stateProp?: OverlayTriggerState,
     triggerRef?: React.RefObject<HTMLButtonElement>,
     onCloseProp?: VoidFunction,
-  ) => void;
+  ): void;
+}
+
+interface UseOverlayPanelStateReturnValues {
+  state: UseOverlayPanelReturnState;
+  onClose: UseOverlayPanelStateReturnOnClose;
   isTransitioning: boolean;
 }
 
@@ -59,7 +63,7 @@ const useOverlayPanelState: UseOverlayPanelState = (props = {}) => {
 
   const isTransitioning = useMountTransition(panelOpen, transitionDuration);
 
-  const onClose = (stateProp, triggerRef, onCloseProp) => {
+  const onClose: UseOverlayPanelStateReturnOnClose = (stateProp, triggerRef, onCloseProp) => {
     if (stateProp) {
       stateProp.close();
     }

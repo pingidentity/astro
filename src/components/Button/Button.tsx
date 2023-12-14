@@ -13,7 +13,7 @@ import { ButtonProps } from '../../types';
 import { FocusEventHandler } from '../../types/shared';
 import Loader from '../Loader';
 
-const Button = forwardRef((props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     children,
     className,

@@ -15,7 +15,7 @@ interface UseComponentToggle {
    * @param {Function} [props.onConditionChange]
    * Callback function that is called, when the condition boolean changes, if it is provided .
    * @returns {Object} `{ isOpen: Boolean, open: Function, close: Function, toggle: Function }`
-   * @returns {Object} `{ handleCondtionChange: Function, renderedComponent: Component, }`
+   * @returns {Object} `{ handleConditionChange: Function, renderedComponent: Component, }`
    */
   (props: ComponentToggleProps): ComponentToggleResult
 }

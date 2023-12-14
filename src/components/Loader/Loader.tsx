@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
-import { LoaderProps, ReactRef } from '../../types';
+import { LoaderProps } from '../../types';
 import Box from '../Box';
 
-const Loader = forwardRef((props: LoaderProps, ref: ReactRef) => {
+const Loader = forwardRef<HTMLDivElement, LoaderProps>((props, ref) => {
   const { size, ...others } = props;
   return (
     <Box

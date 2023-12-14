@@ -1,15 +1,15 @@
-import React, { forwardRef, JSX, useImperativeHandle, useRef } from 'react';
+import React, { FC, forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, OverlayContainer, useModal, useOverlay } from 'react-aria';
 
 import { useStatusClasses } from '../../hooks';
-import { PopoverArrowProps, PopoverContainerProps, PopoverWrapperProps, ReactRef } from '../../types';
+import { PopoverArrowProps, PopoverContainerProps, PopoverWrapperProps } from '../../types';
 import Box from '../Box';
 
 /**
  * PopoverContainer component used for popover on SelectField, ComboBox & PopoverMenu.
 */
 
-const PopoverContainer = forwardRef((props: PopoverContainerProps, ref: ReactRef) => {
+const PopoverContainer = forwardRef<HTMLElement, PopoverContainerProps>((props, ref) => {
   const {
     children,
     ...others
@@ -28,7 +28,7 @@ const PopoverContainer = forwardRef((props: PopoverContainerProps, ref: ReactRef
 });
 
 // eslint-disable-next-line max-len
-export const PopoverWrapper = forwardRef((props: PopoverWrapperProps, ref: React.Ref<HTMLElement | null>) => {
+export const PopoverWrapper = forwardRef<HTMLElement, PopoverWrapperProps>((props, ref) => {
   const {
     children,
     className,
@@ -46,9 +46,9 @@ export const PopoverWrapper = forwardRef((props: PopoverWrapperProps, ref: React
   } = props;
 
 
-  const popoverRef = useRef(null);
+  const popoverRef = useRef<HTMLElement>(null);
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => popoverRef.current);
+  useImperativeHandle(ref, () => popoverRef.current as HTMLElement);
   const { overlayProps } = useOverlay(
     {
       ...props,
@@ -100,7 +100,7 @@ PopoverWrapper.defaultProps = {
   placement: 'bottom',
 };
 
-export const PopoverArrow = (props: PopoverArrowProps): JSX.Element => {
+export const PopoverArrow: FC<PopoverArrowProps> = props => {
   const {
     arrowCrossOffset,
     sx,

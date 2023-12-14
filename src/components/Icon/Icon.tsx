@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
 import { useTShirtSize } from '../../hooks';
-import { IconProps, ReactRef } from '../../types';
+import { IconProps } from '../../types';
 import Box from '../Box';
 
 
-const Icon = forwardRef((props: IconProps, ref: ReactRef) => {
+const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
   const {
     color,
     icon: IconComponent,

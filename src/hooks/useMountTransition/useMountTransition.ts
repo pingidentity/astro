@@ -18,10 +18,10 @@ interface UseMountTransition {
 }
 
 const useMountTransition : UseMountTransition = (isMounted, unmountDelay) => {
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
   useEffect(() => {
-    let timeoutId;
+    let timeoutId: NodeJS.Timeout;
 
     if (isMounted && !isTransitioning) {
       setIsTransitioning(true);

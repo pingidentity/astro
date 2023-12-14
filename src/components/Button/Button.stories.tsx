@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
+import { StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -42,7 +43,7 @@ export default {
   },
 };
 
-export const Default = (args: ButtonProps) => (
+export const Default: StoryFn<ButtonProps> = (args: ButtonProps) => (
   <Button {...args} />
 );
 
