@@ -12,7 +12,7 @@ const ExtendedText = styled(ThemeUIText)(
   typography,
 );
 
-const Text = React.forwardRef((props: TextProps, ref: React.Ref<HTMLDivElement>) => (
+const Text = React.forwardRef<HTMLDivElement, TextProps>((props, ref) => (
   <ExtendedText variant="base" {...props} ref={ref} />
 ));
 
