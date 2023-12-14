@@ -20,6 +20,7 @@ const defaultActive = {
   border: '1px solid',
   borderColor: 'active',
   color: 'white',
+  boxShadow: 'unset',
   'path': {
     fill: 'white',
   },
@@ -65,6 +66,7 @@ const primary = {
     border: '1px solid',
     borderColor: 'accent.20',
     color: 'white',
+    boxShadow: 'unset',
   },
   '&.is-focused': {
     ...defaultFocus,
@@ -112,10 +114,13 @@ const critical = {
     ...defaultFocus,
   },
   '&.is-hovered': {
+    ...defaultHover,
     bg: 'critical.primaryDark',
+    color: 'white',
     borderColor: 'critical.primaryDark',
   },
   '&.is-pressed': {
+    ...defaultActive,
     bg: 'critical.secondaryDark',
     borderColor: 'critical.secondaryDark',
   },

@@ -5,7 +5,7 @@ import { flexbox, layout, typography } from 'styled-system';
 import { Box as ThemeUIBox } from 'theme-ui';
 
 import { usePropWarning, useStatusClasses } from '../../hooks';
-import { BoxProps, ReactRef } from '../../types';
+import { BoxProps } from '../../types';
 
 const ExtendedBox = styled(ThemeUIBox)(
   layout,
@@ -13,7 +13,7 @@ const ExtendedBox = styled(ThemeUIBox)(
   typography,
 );
 
-const Box = forwardRef((props: BoxProps, ref: ReactRef) => {
+const Box = forwardRef<HTMLElement, BoxProps>((props, ref) => {
   const {
     flexDirection,
     gap,

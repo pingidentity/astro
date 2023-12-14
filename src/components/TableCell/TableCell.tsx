@@ -1,5 +1,4 @@
-import React, { forwardRef, JSX } from 'react';
-import { ForwardRef } from 'theme-ui';
+import React, { forwardRef } from 'react';
 
 import { TableCellProps } from '../../types';
 import Box from '../Box';
@@ -13,10 +12,7 @@ import Box from '../Box';
  *
  */
 
-const TableCell = forwardRef<HTMLDivElement, TableCellProps>((
-  props: TableCellProps,
-  ref,
-) => {
+const TableCell = forwardRef<HTMLDivElement, TableCellProps>((props, ref) => {
   const { children, isHeading, ...others } = props;
   return (
     <Box ref={ref} variant={isHeading ? 'table.head' : 'table.data'} as={isHeading ? 'th' : 'td'} {...others}>

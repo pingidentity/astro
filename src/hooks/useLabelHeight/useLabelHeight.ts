@@ -11,7 +11,7 @@ interface UseLabelHeight {
 }
 
 const useLabelHeight: UseLabelHeight = ({ labelRef, inputRef }) => {
-  const [isLabelHigher, setIsLabelHigher] = useState(false);
+  const [isLabelHigher, setIsLabelHigher] = useState<boolean>(false);
 
   useEffect(() => {
     const labelOffsetHeight = labelRef?.current?.offsetHeight || 0;

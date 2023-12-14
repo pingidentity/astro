@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Box, OverlayPanel } from '../../index';
-import axeTest from '../../utils/testUtils/testAxe';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import PopoverContainer from './PopoverContainer';
 
@@ -20,8 +20,11 @@ const getComponentInOverlayPanel = (props = {}) => render((
   </OverlayPanel>
 ));
 
-// Need to be added to each test file to test accessibility using axe.
-axeTest(getComponent);
+universalComponentTests({ renderComponent: props => (
+  <PopoverContainer isOpen {...props}>
+    <Box>I am in a popover</Box>
+  </PopoverContainer>
+) });
 
 test('should render a popover with an arrow by default', () => {
   getComponent({ isOpen: true });

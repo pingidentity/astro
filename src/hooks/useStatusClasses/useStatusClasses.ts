@@ -14,7 +14,7 @@ interface UseStatusClasses {
    */
   (
     defaultClass?: string | undefined | null,
-    statuses?: { [key: string]: string | boolean | undefined | null }
+    statuses?: Record<string, string | boolean | undefined | null>
   ): { classNames: string }
 }
 

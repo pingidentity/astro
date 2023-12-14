@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Meta, Story } from '@storybook/react';
+import React, { FC, ReactNode } from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -68,7 +68,7 @@ const sx: SxObject = {
   },
 };
 
-const TableHeading = ({ title }: {title: string}) => (
+const TableHeading: FC<{ title: string }> = ({ title }) => (
   <TableHead>
     <TableRow key="head">
       <TableCell sx={sx.cell} isHeading width="30%">
@@ -99,7 +99,7 @@ type TableDataProps = {
   value: TableDataValue
 }
 
-const TableData = ({ variant, value }: TableDataProps) => (
+const TableData: FC<TableDataProps> = ({ variant, value }) => (
   <TableRow sx={{ backgroundColor: 'transparent !important', alignItems: 'center' }}>
     <TableCell sx={sx.cell} width="30%"><Text>{variant}</Text></TableCell>
     <TableCell sx={sx.cell} width="30%"><Text>{value.weight}</Text></TableCell>
@@ -108,7 +108,7 @@ const TableData = ({ variant, value }: TableDataProps) => (
   </TableRow>
 );
 
-export const Default: Story = () => {
+export const Default: StoryFn = () => {
   const fontSizes = {
     xx: '23px (xx)',
     lg: '17px (lg)',
@@ -333,7 +333,7 @@ export const Default: Story = () => {
   );
 };
 
-export const WithCustomWidth: Story = () => (
+export const WithCustomWidth: StoryFn = () => (
   <Box width={200}>
     <Text p="xl">
       superlongtextinonelinewithnowhitespacessoitcanbelongerthatanywidth
@@ -341,7 +341,7 @@ export const WithCustomWidth: Story = () => (
   </Box>
 );
 
-export const TypographyStyleProps: Story = () => {
+export const TypographyStyleProps: StoryFn = () => {
   const textProps: ThemeUICSSObject = {
     fontFamily: 'times',
     fontSize: 'md',

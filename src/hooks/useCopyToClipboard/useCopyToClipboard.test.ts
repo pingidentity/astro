@@ -6,6 +6,7 @@ const originalClipboard = { ...global.navigator.clipboard };
 const originalExecCommand = global.document.execCommand;
 
 beforeEach(() => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (global as any).navigator.clipboard = {
     writeText: jest.fn(),
   };
@@ -14,6 +15,7 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.resetAllMocks();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (global as any).navigator.clipboard = originalClipboard;
   global.document.execCommand = originalExecCommand;
 });

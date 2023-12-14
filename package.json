@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.36.0",
+  "version": "2.37.0-alpha.6",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -72,10 +72,10 @@
     "@react-stately/color": "~3.1.1",
     "@react-stately/datepicker": "^3.0.1",
     "@react-stately/grid": "~3.3.1",
-    "@react-stately/layout": "^3.12.0",
+    "@react-stately/layout": "^3.13.4",
     "@react-stately/list": "~3.4.1",
     "@react-stately/table": "^3.9.0",
-    "@react-stately/virtualizer": "~3.5.1",
+    "@react-stately/virtualizer": "~3.6.5",
     "@react-types/shared": "^3.20.0",
     "@storybook/addon-actions": "^7.1.0",
     "@storybook/api": "^7.1.0",

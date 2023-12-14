@@ -15,7 +15,14 @@ import { Box, Button, Icon, IconButton, Text } from '../../index';
 import CalendarGrid from './CalendarGrid';
 
 const Calendar = forwardRef((props, ref) => {
-  const { value, defaultValue, minValue, maxValue } = props;
+  const {
+    defaultFocusedValue,
+    defaultValue,
+    hasAutoFocus,
+    maxValue,
+    minValue,
+    value,
+  } = props;
   const { locale } = useLocale();
   const calenderRef = useRef();
 
@@ -25,11 +32,13 @@ const Calendar = forwardRef((props, ref) => {
   const parsedDates = {
     value: (typeof value === 'string' && parseDate(value)) || value,
     defaultValue: (typeof defaultValue === 'string' && parseDate(defaultValue)) || defaultValue,
+    defaultFocusedValue: (typeof defaultFocusedValue === 'string' && parseDate(defaultFocusedValue)) || defaultFocusedValue,
     maxValue: (typeof maxValue === 'string' && parseDate(maxValue)) || maxValue,
     minValue: (typeof minValue === 'string' && parseDate(minValue)) || minValue,
   };
 
   const state = useCalendarState({
+    autoFocus: hasAutoFocus,
     ...props,
     ...parsedDates,
     locale,
@@ -144,6 +153,8 @@ const Calendar = forwardRef((props, ref) => {
 Calendar.propTypes = {
   /** Prop to provide a custom default date (uncontrolled) */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Prop to provide a custom default focused date (uncontrolled) */
+  defaultFocusedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** Prop to provide a default date (controlled) */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /** custom week days for other calendars */

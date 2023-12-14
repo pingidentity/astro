@@ -80,7 +80,8 @@
           "plugins": ["@typescript-eslint"],
           "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
           "rules": {
-            "no-use-before-define": 0
+            "no-use-before-define": 0,
+            "@typescript-eslint/no-explicit-any": "error"
           }
         },
           // override "simple-import-sort" config

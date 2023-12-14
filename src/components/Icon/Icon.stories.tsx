@@ -4,7 +4,7 @@ import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import LockIcon from '@pingux/mdi-react/LockIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import TagIcon from '@pingux/mdi-react/TagIcon';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 import { v4 as uuid } from 'uuid';
 
@@ -72,7 +72,7 @@ export default {
   },
 } as Meta;
 
-export const Default: Story<IconProps> = (args: IconProps) => (
+export const Default: StoryFn<IconProps> = (args: IconProps) => (
   <Icon {...args} title={{ name: 'Search Icon' }} />
 );
 
@@ -83,7 +83,7 @@ Default.parameters = {
   },
 };
 
-export const SVGIcons: Story = () => {
+export const SVGIcons: StoryFn = () => {
   // SVGR can used to convert .svg files to components instead of doing this manually
   const SVGComponent: React.FC<SVGComponentProps> = props => {
     const id = uuid();
@@ -104,7 +104,7 @@ const rowHeadings = [
   'SVG Size', 'Code Example', 'Icon Example',
 ];
 
-export const Sizes: Story = () => (
+export const Sizes: StoryFn = () => (
   <Table>
     <TableHead>
       <TableRow key="head">
@@ -154,7 +154,7 @@ export const Sizes: Story = () => (
 );
 
 
-export const CommonlyUsed: Story = () => (
+export const CommonlyUsed: StoryFn = () => (
   <>
     <Box isRow gap="md" mb="xs">
       <Icon icon={AccountIcon} color="accent.40" size="sm" title={{ name: 'Account Icon' }} />
