@@ -1,4 +1,7 @@
+import { defaultFocus } from '../Button/Buttons.styles';
+
 const calendarBody = {
+  pb: '10px',
   borderTop: '1px solid',
   borderTopColor: 'neutral.80',
   '& > tr:nth-of-type(odd) ': {
@@ -12,7 +15,7 @@ const calendarButton = {
   fontWeight: 1,
   color: 'neutral.10',
   lineHeight: '16px',
-  width: '40.5px',
+  width: '40px',
   height: '40px',
   '&.is-hovered': {
     bg: 'accent.99',
@@ -23,6 +26,9 @@ const calendarButton = {
     color: 'white',
     outline: 'none',
     boxShadow: 'none',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
   },
   '&.is-unavailable': {
     backgroundColor: 'neutral.80',
@@ -44,6 +50,7 @@ const calendarCell = {
   textAlign: 'center',
   position: 'relative',
   color: '#333',
+  padding: '0',
 };
 
 const columnHeader = {
@@ -63,7 +70,7 @@ const calendarContainer = {
 const calendarHeader = {
   justifyContent: 'space-between',
   mt: '10px',
-  mb: '17px',
+  mb: '16px',
   alignItems: 'center',
 };
 

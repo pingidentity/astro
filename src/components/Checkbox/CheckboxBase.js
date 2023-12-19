@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
+import { omit } from 'lodash';
 import { Checkbox as ThemeUICheckbox } from 'theme-ui';
 
 import Box from '../Box';
@@ -24,7 +25,7 @@ const IndeterminateCheckboxIcon = props => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-labelledby="checkbox-icon-title"
-    {...props}
+    {...omit(props, 'id', 'aria-checked')}
   >
     <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
     <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill="#4462ED" stroke="#4462ED" />

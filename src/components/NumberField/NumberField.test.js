@@ -154,3 +154,32 @@ test('passing helper text should display it and correct aria attributes on input
   const helperTextID = helper.getAttribute('id');
   expect(screen.getByRole('textbox')).toHaveAttribute('aria-describedby', helperTextID);
 });
+
+test('should extract numeric value from unit format and pass it to aria-valuenow', () => {
+  const numericValue = 45;
+  getComponent({
+    defaultValue: numericValue,
+    formatOptions: {
+      style: 'unit',
+      unit: 'kilogram',
+      unitDisplay: 'long',
+    },
+  });
+
+  expect(screen.getByRole('spinbutton')).toHaveAttribute('aria-valuenow', String(numericValue));
+});
+
+test('should extract numeric value from currency format and pass it to aria-valuenow', () => {
+  const numericValue = 45;
+  getComponent({
+    defaultValue: numericValue,
+    formatOptions: {
+      style: 'currency',
+      currency: 'EUR',
+      currencyDisplay: 'code',
+      currencySign: 'accounting',
+    },
+  });
+
+  expect(screen.getByRole('spinbutton')).toHaveAttribute('aria-valuenow', String(numericValue.toFixed(2)));
+});

@@ -266,13 +266,13 @@ export const Default = args => {
       <DataTable {...args} aria-label="Static table" height="100%">
         <DataTableHeader columns={columns}>
           {column => (
-            <DataTableColumn align="center">{column.name}</DataTableColumn>
+            <DataTableColumn cellProps={{ pr: 'lg', pl: 'lg' }} align="center">{column.name}</DataTableColumn>
           )}
         </DataTableHeader>
         <DataTableBody items={filteredItems}>
           {item => (
             <DataTableRow>
-              {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+              {columnKey => <DataTableCell cellProps={{ pr: 'lg', pl: 'lg' }}>{item[columnKey]}</DataTableCell>}
             </DataTableRow>
           )}
         </DataTableBody>
