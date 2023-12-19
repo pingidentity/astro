@@ -7,6 +7,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   DataTable,
+  DataTableBadge,
   DataTableBody,
   DataTableCell,
   DataTableColumn,
@@ -101,7 +102,136 @@ export default {
   },
 };
 
+const getCellProps = columnKey => ({
+  pr: columnKey !== 'menu' ? 'lg' : 0,
+  pl: columnKey === 'timestamp' || columnKey === 'menu' ? 0 : 'lg',
+});
+
 export const Default = args => {
+  const date = '2023-05-03';
+  const time = '07:16:30 pm UTC';
+
+  const timestampCell = (
+    <>
+      <Box>{date}</Box>
+      <Box>{time}</Box>
+    </>
+  );
+
+  const columns = [
+    { name: 'Timestamp', key: 'timestamp' },
+    { name: 'Event Type', key: 'eventType' },
+    { name: 'Description', key: 'description' },
+    { name: 'Status', key: 'status' },
+    { name: 'User Identity', key: 'userIdentity' },
+    { name: 'Menu', key: 'menu' },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: (
+        <>
+          <Box>Passed Role Access</Box>
+          <Box>Control</Box>
+        </>
+      ),
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 2,
+      timestamp: timestampCell,
+      eventType: 'User Access Denied',
+      description: (
+        <>
+          <Box display="block">Passed Role Access</Box>
+          <Box display="block">Control</Box>
+          <Box display="block">Words Words Words Words Words Words Words Words Words Words Words Words Words Words</Box>
+        </>
+      ),
+      status: <DataTableBadge cell="Rejected" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 3,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: 'Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words',
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 4,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: (
+        <>
+          <Box>Passed Role Access</Box>
+          <Box>Control</Box>
+        </>
+      ),
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 5,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: (
+        <>
+          <Box>Passed Role Access</Box>
+          <Box>Control</Box>
+        </>
+      ),
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+  ];
+
+  return (
+    <DataTable
+      {...args}
+      aria-label="Static table"
+      height="100%"
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn
+            cellProps={getCellProps(column.key)}
+            minWidth={column.key !== 'menu' ? 175 : 32}
+            width={column.key !== 'menu' ? '19.4%' : 32}
+            hideHeader={column.key === 'menu'}
+          >
+            {column.name}
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell
+                cellProps={getCellProps(columnKey)}
+              >
+                {item[columnKey]}
+              </DataTableCell>
+            )}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  );
+};
+
+export const Dynamic = args => {
   const columns = [
     { name: 'Country', key: 'country' },
     { name: 'Population', key: 'population' },
@@ -128,6 +258,77 @@ export const Default = args => {
     { id: 7, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
   ];
 
+  const list = useAsyncList({
+    async load() {
+      return {
+        items: rows,
+      };
+    },
+  });
+
+  return (
+    <DataTable
+      {...args}
+      aria-label="Dynamic table"
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn
+            cellProps={getCellProps(column.key)}
+            minWidth={155}
+            align="center"
+          >
+            {column.name}
+
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={list.items}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell
+                cellProps={getCellProps(columnKey)}
+              >
+                {item[columnKey]}
+              </DataTableCell>
+            )}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  );
+};
+
+export const Sortable = args => {
+  const [firstSortFlag, setFirstSortFlag] = useState(true);
+
+  const columns = [
+    { name: 'Country', key: 'country', isSortable: true },
+    { name: 'Population', key: 'population', isSortable: true },
+    { name: 'Continent', key: 'continent', isSortable: true },
+  ];
+
+  const rows = [
+    { id: 1, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
+    {
+      id: 2,
+      country: 'Canada',
+      population: '37,000,000',
+      continent: 'North America',
+    },
+    { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
+    { id: 4, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
+    { id: 5, country: 'France', population: '67,000,000', continent: 'Europe' },
+    { id: 6, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    {
+      id: 7,
+      country: 'USA',
+      population: '320,000,000',
+      continent: 'North America',
+    },
+  ];
+
   const collator = useCollator({ numeric: true });
 
   const list = useAsyncList({
@@ -137,36 +338,68 @@ export const Default = args => {
       };
     },
     async sort({ items, sortDescriptor }) {
+      const getNumericValue = str => {
+        return !Number.isNaN(str) && parseFloat(str.replace(/,/g, ''));
+      };
+
       return {
         items: items.sort((a, b) => {
           const first = a[sortDescriptor.column];
           const second = b[sortDescriptor.column];
-          let cmp = collator.compare(first, second);
-          if (sortDescriptor.direction === 'descending') {
-            cmp *= -1;
-          }
-          return cmp;
+
+          const firstNumericValue = getNumericValue(first);
+          const secondNumericValue = getNumericValue(second);
+
+          const cmp = (firstNumericValue && secondNumericValue)
+            ? firstNumericValue - secondNumericValue
+            : collator.compare(first, second);
+
+          return (sortDescriptor.direction === 'descending') ? -cmp : cmp;
         }),
       };
     },
   });
 
+  useEffect(() => {
+    if (firstSortFlag && !list.isLoading && list.items.length > 0) {
+      list.sort({
+        column: 'country',
+        direction: 'ascending',
+      });
+      setFirstSortFlag(false);
+    }
+  }, [firstSortFlag, list, list.isLoading, list.items]);
+
   return (
     <DataTable
       {...args}
-      aria-label="Static table"
-      sortDescriptor={list.sortDescriptor?.direction}
+      aria-label="Sortable table"
+      sortDescriptor={list.sortDescriptor}
       onSortChange={list.sort}
     >
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn allowsSorting align="center">{column.name}</DataTableColumn>
+          <DataTableColumn
+            cellProps={getCellProps(column.key)}
+            allowsSorting
+            minWidth={155}
+            align="center"
+          >
+            {column.name}
+
+          </DataTableColumn>
         )}
       </DataTableHeader>
       <DataTableBody items={list.items}>
         {item => (
           <DataTableRow>
-            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+            {columnKey => (
+              <DataTableCell
+                cellProps={getCellProps(columnKey)}
+              >
+                {item[columnKey]}
+              </DataTableCell>
+            )}
           </DataTableRow>
         )}
       </DataTableBody>
@@ -219,8 +452,8 @@ export const AsyncLoading = args => {
       <DataTableHeader columns={columns}>
         {column => (
           <DataTableColumn
-            align={column.key !== 'menu' ? 'start' : 'center'}
-            hideHeader={column.key === 'menu'}
+            cellProps={getCellProps(column.key)}
+            minWidth={155}
           >
             {column.name}
           </DataTableColumn>
@@ -233,175 +466,9 @@ export const AsyncLoading = args => {
       >
         {item => (
           <DataTableRow key={item.name}>
-            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
-          </DataTableRow>
-        )}
-      </DataTableBody>
-    </DataTable>
-  );
-};
-
-export const New = args => {
-  const [firstSortFlag, setFirstSortFlag] = useState(true);
-
-  const date = '2023-05-03';
-  const time = '07:16:30 pm UTC';
-
-  const timestampCell = (
-    <>
-      <Box>{date}</Box>
-      <Box>{time}</Box>
-    </>
-  );
-
-  const columns = [
-    { name: 'Timestamp', key: 'timestamp', isSortable: true },
-    { name: 'Event Type', key: 'eventType', isSortable: true },
-    { name: 'Description', key: 'description', isSortable: true },
-    { name: 'Console', key: 'console', isSortable: true },
-    { name: 'User Identity', key: 'userIdentity', isSortable: true },
-    { name: 'Menu', key: 'menu' },
-  ];
-
-  const rows = [
-    {
-      id: 1,
-      timestamp: timestampCell,
-      eventType: 'User Access Allowed',
-      description: (
-        <>
-          <Box>Passed Role Access</Box>
-          <Box>Control</Box>
-        </>
-      ),
-      console: 'PingOne Admin Console',
-      userIdentity: 'Vincent Diep',
-      menu: <DataTableMenu />,
-    },
-    {
-      id: 2,
-      timestamp: timestampCell,
-      eventType: 'User Access Denied',
-      description: (
-        <>
-          <Box display="block">Passed Role Access</Box>
-          <Box display="block">Control</Box>
-          <Box display="block">Words Words Words Words Words Words Words Words Words Words Words Words Words Words</Box>
-        </>
-      ),
-      console: 'PingOne Admin Console',
-      userIdentity: 'Vincent Diep',
-      menu: <DataTableMenu />,
-    },
-    {
-      id: 3,
-      timestamp: timestampCell,
-      eventType: 'User Access Allowed',
-      description: 'Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words',
-      console: 'PingOne Admin Console',
-      userIdentity: 'Vincent Diep',
-      menu: <DataTableMenu />,
-    },
-    {
-      id: 4,
-      timestamp: timestampCell,
-      eventType: 'User Access Allowed',
-      description: (
-        <>
-          <Box>Passed Role Access</Box>
-          <Box>Control</Box>
-        </>
-      ),
-      console: 'PingOne Admin Console',
-      userIdentity: 'Vincent Diep',
-      menu: <DataTableMenu />,
-    },
-    {
-      id: 5,
-      timestamp: timestampCell,
-      eventType: 'User Access Allowed',
-      description: (
-        <>
-          <Box>Passed Role Access</Box>
-          <Box>Control</Box>
-        </>
-      ),
-      console: 'PingOne Admin Console',
-      userIdentity: 'Vincent Diep',
-      menu: <DataTableMenu />,
-    },
-  ];
-
-  const list = useAsyncList({
-    async load() {
-      return {
-        items: rows,
-      };
-    },
-    async sort({ items, sortDescriptor }) {
-      let cmp;
-
-      return {
-        items: items.sort((a, b) => {
-          const first = a[sortDescriptor.column];
-          const second = b[sortDescriptor.column];
-
-          cmp = (parseInt(first, 10) || first) < (parseInt(second, 10) || second)
-            ? -1
-            : 1;
-
-          if (sortDescriptor.direction === 'descending') {
-            cmp *= -1;
-          }
-          return cmp;
-        }),
-      };
-    },
-  });
-
-  useEffect(() => {
-    if (firstSortFlag && !list.isLoading && list.items.length > 0) {
-      list.sort({
-        column: 'timestamp',
-        direction: 'ascending',
-      });
-      setFirstSortFlag(false);
-    }
-  }, [list.isLoading, list.items]);
-
-  return (
-    <DataTable
-      {...args}
-      aria-label="Static table"
-      height="100%"
-      sortDescriptor={list.sortDescriptor}
-      onSortChange={list.sort}
-    >
-      <DataTableHeader columns={columns}>
-        {column => (
-          <DataTableColumn
-            cellProps={{
-              pr: column.key !== 'menu' ? 'lg' : 0,
-              pl: column.key === 'timestamp' || column.key === 'menu' ? 0 : 'lg',
-            }}
-            minWidth={column.key !== 'menu' ? 175 : 32}
-            width={column.key !== 'menu' ? '19.4%' : 32}
-            hideHeader={column.key === 'menu'}
-            allowsSorting={column.isSortable}
-          >
-            {column.name}
-          </DataTableColumn>
-        )}
-      </DataTableHeader>
-      <DataTableBody items={list.items} loadingState={list.loadingState}>
-        {item => (
-          <DataTableRow>
             {columnKey => (
               <DataTableCell
-                cellProps={{
-                  pr: columnKey !== 'menu' ? 'lg' : 0,
-                  pl: columnKey === 'timestamp' || columnKey === 'menu' ? 0 : 'lg',
-                }}
+                cellProps={getCellProps(columnKey)}
               >
                 {item[columnKey]}
               </DataTableCell>
