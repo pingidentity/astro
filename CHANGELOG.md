@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.37.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.37.0...@pingux/astro@2.37.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* [UIP-6672] Update Interactive Card ([b2f68c3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b2f68c3d54ad591c955897e245af4ef26e2ed50e))
+* [UIP-6691] ChekboxField accessibility test ([c589d9c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c589d9cacace1058f7e4cf6638e1c9042e495dba))
+* [UIP-6692] NumberField: extract numberc value to use in  aria-valuenow ([e8d9ea0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e8d9ea0b2b0a1b84b5c263ca84e5dd2e52489873))
+* [UIP-6696] Update number focus ring in Calendar ([66ed892](https://gitlab.corp.pingidentity.com/ux/pingux/commit/66ed8925efb480052f133105f69ff4eea672a78b))
+* [UIP-6702]: Calendar remove space between rows ([3a8c3fd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3a8c3fd558a842de21bb595da82378cbeff5007e))
+
+
+
+
+
 # [2.37.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.36.0...@pingux/astro@2.37.0) (2023-12-14)
 
 
