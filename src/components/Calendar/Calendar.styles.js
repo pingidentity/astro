@@ -1,3 +1,5 @@
+import { defaultFocus } from '../Button/Buttons.styles';
+
 const calendarBody = {
   borderTop: '1px solid',
   borderTopColor: 'neutral.80',
@@ -23,6 +25,9 @@ const calendarButton = {
     color: 'white',
     outline: 'none',
     boxShadow: 'none',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
   },
   '&.is-unavailable': {
     backgroundColor: 'neutral.80',
