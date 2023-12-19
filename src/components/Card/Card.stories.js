@@ -4,7 +4,6 @@ import { withDesign } from 'storybook-addon-designs';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
-  Button,
   Card,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
@@ -93,7 +92,7 @@ export const InteractiveCard = () => {
     height: '221px',
     justifyContent: 'center',
     textAlign: 'center',
-    width: '233px',
+    maxWidth: '233px',
   };
 
   return (
@@ -101,10 +100,10 @@ export const InteractiveCard = () => {
       onPress={() => console.log('card pressed')}
       onHoverStart={() => console.log('card hovered')}
       tabIndex="0"
+      variant="cards.interactive"
       sx={sx}
     >
       Interactive Card
-      <Button variant="inline" mt="md" onPress={() => console.log('button pressed')}>Explore</Button>
     </Card>
   );
 };
