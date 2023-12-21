@@ -183,6 +183,7 @@ const data = [
     children: [
       {
         hasSeparator: false,
+        key: 'Applications',
         subTitle: 'Applications',
       },
       <NavBarItemLink
@@ -207,6 +208,7 @@ const data = [
         Application Portal
       </NavBarItemLink>,
       {
+        key: 'Identity Providers',
         subTitle: 'Identity Providers',
       },
       <NavBarItemLink
@@ -217,6 +219,7 @@ const data = [
         External IDPs
       </NavBarItemLink>,
       {
+        key: 'Ping Products',
         subTitle: 'Ping Products',
       },
       <NavBarItemLink
@@ -278,6 +281,7 @@ const data = [
     children: [
       {
         hasSeparator: false,
+        key: 'Policies',
         subTitle: 'Policies',
       },
       <NavBarItemLink
@@ -391,6 +395,7 @@ const secondData = [
         Users
       </NavBarItemButton>,
       {
+        key: 'PingOne Services',
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -415,6 +420,7 @@ const secondData = [
       </NavBarItemButton>,
       {
         hasSeparator: false,
+        key: 'PingOne Services',
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -439,6 +445,7 @@ const secondData = [
       </NavBarItemButton>,
       {
         hasSeparator: false,
+        key: 'PingOne Services',
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
@@ -463,6 +470,7 @@ const secondData = [
       </NavBarItemButton>,
       {
         hasSeparator: false,
+        key: 'PingOne Services',
         subTitle: 'PingOne Services',
       },
       <NavBarItemButton
