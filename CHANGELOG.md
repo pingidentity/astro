@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.37.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.37.1...@pingux/astro@2.37.2) (2023-12-21)
+
+
+### Bug Fixes
+
+* [UIP-6714]: NavBarSection replace axeTest with universalComponentTest ([6ab54bd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6ab54bda471e0da8762104fcd278a2724ce0e713))
+* [UIP-6721] Textfield label controls type ([6c89fc8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6c89fc823d27d17a8140725c1b0a25c96f6d7cb6))
+* [UIP-6728]: Astroprovider theme button moves after pressing enter key ([51411ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/51411ec0752db275c7e8c80982233a81f304c6de))
+* [UIP-6732]: NavBar item not accessible using up arrow key ([402b67d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/402b67d5551f516013d7aae7bf830aedeb1545e9))
+
+
+
+
+
 ## [2.37.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.37.0...@pingux/astro@2.37.1) (2023-12-19)
 
 
