@@ -59,6 +59,9 @@ export const WithCustomThemeOverride = () => {
           bg: '#0090C1',
           border: 'none',
         },
+        '&.is-pressed': {
+          border: 'none',
+        },
       },
     },
     text: {

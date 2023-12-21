@@ -2,19 +2,64 @@ import React from 'react';
 
 import { Text } from '../..';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import NavBar from '../NavBar';
 
 import NavBarItemBody from './NavBarItemBody';
+import NavBarSection from './NavBarSection';
 
+const SUBTITLE = 'subtitle';
+const TEXT = 'text';
+
+const data = [
+  {
+    key: 'Dashboard',
+    children: [
+      'Users',
+      'Group',
+      'Populations',
+      'Attributes',
+      'Roles',
+      'Dashboard Unique',
+    ],
+  },
+];
+
+const NavBarWithItemBody = React.forwardRef((props, ref) => {
+  return (
+    <NavBar>
+      <NavBarItemBody ref={ref} {...props} item={{ children: [<Text>{TEXT}</Text>] }} />
+    </NavBar>
+  );
+});
+
+const NavBarWithSection = React.forwardRef((props, ref) => {
+  return (
+    <NavBar>
+      <NavBarSection ref={ref} {...props} items={data} />
+    </NavBar>
+  );
+});
+
+// Needs to be added to each component's test file
+universalComponentTests({
+  renderComponent: props => (
+    <NavBarWithItemBody {...props} />
+  ),
+});
+
+// Needs to be added to each component's test file
+universalComponentTests({
+  renderComponent: props => (
+    <NavBarWithSection {...props} />
+  ),
+});
 
 const getComponent = item => render((
   <NavBar>
     <NavBarItemBody item={{ children: [item] }} />
   </NavBar>
 ));
-
-const SUBTITLE = 'subtitle';
-const TEXT = 'text';
 
 describe('NavBarItemBody', () => {
   describe('when its passed a component', () => {

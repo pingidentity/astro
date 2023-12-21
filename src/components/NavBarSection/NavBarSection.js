@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useFocusManager } from '@react-aria/focus';
 import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
@@ -15,9 +15,7 @@ import NavBarItemHeader from './NavBarItemHeader';
  *
  */
 
-const NavBarSection = ({ hasSeparator, title, items, onKeyDown, ...others }) => {
-  const ref = useRef();
-
+const NavBarSection = forwardRef(({ hasSeparator, title, items, onKeyDown, ...others }, ref) => {
   const childrenItems = items.filter(item => item.children || item.href);
 
   const state = useNavBarContext();
@@ -58,7 +56,7 @@ const NavBarSection = ({ hasSeparator, title, items, onKeyDown, ...others }) => 
       </ul>
     </>
   );
-};
+});
 
 const SectionItem = ({ item, onKeyDown: onKeyDownProp }) => {
   const { key, children, ...others } = item;
