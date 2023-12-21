@@ -35,6 +35,9 @@ export default {
         options: Object.values(labelModes),
       },
     },
+    label: {
+      control: { type: 'text' },
+    },
     variant: {
       control: {
         type: 'text',
