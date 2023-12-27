@@ -193,11 +193,10 @@ const TreeViewSection = forwardRef((props, ref) => {
   return (
     <Box
       ref={treeSectionRef}
-      as="li"
       aria-expanded={isExpanded}
       aria-disabled={isDisabled}
       {...mergedProps}
-      role="treeitem"
+      role="row"
       variant="treeView.wrapper"
       className={classNames}
       aria-selected={isSelected}
@@ -218,8 +217,7 @@ const TreeViewSection = forwardRef((props, ref) => {
       />
       { isExpanded && (
         <Box
-          as="ul"
-          role="group"
+          role="rowgroup"
           key={`${item.key} ul`}
           sx={{
             pl: 'md',

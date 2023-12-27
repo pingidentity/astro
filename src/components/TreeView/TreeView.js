@@ -153,7 +153,6 @@ const TreeView = forwardRef((props, ref) => {
       }}
     >
       <Box
-        as="ul"
         {...listBoxProps}
         ref={treeViewRef}
         aria-label={ariaLabel}

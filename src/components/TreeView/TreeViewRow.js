@@ -73,8 +73,6 @@ const TreeViewRow = forwardRef((props, ref) => {
     others,
   );
 
-  // console.log(`ROW: ${key} has parent focus: ${isParentFocused}`)
-
   return (
     <Box
       ref={treeRowRef}
@@ -85,6 +83,7 @@ const TreeViewRow = forwardRef((props, ref) => {
         '& :focus': { border: 'none' } }}
       className={classNames}
       key={`${key} box`}
+      role="gridcell"
       {...mergedProps}
     >
       { items?.length > 0 && (
