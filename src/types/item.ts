@@ -3,6 +3,10 @@ import type { ItemProps } from '@react-types/shared';
 
 import { DOMAttributes, StyleProps } from './shared';
 
+export interface Status {
+  status?: 'default' | 'error' | 'success' | 'warning',
+}
+
 declare module '@react-types/shared' {
   // eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars
   interface ItemProps<T> extends StyleProps, DOMAttributes {
@@ -19,7 +23,7 @@ declare module '@react-types/shared' {
      /** The HTML element type that will be used to render the item. */
     elementType?: string | ElementType,
      /** Indicates the status of item */
-    status?: 'default' | 'error' | 'success' | 'warning',
+    status?: Status,
       /** A URL to link to if elementType="a". */
     href?: string,
     /** Inline styling prop for item */

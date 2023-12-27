@@ -39,8 +39,7 @@ module.exports = {
     },
   },
   coveragePathIgnorePatterns: [
-    '<rootDir>/src/index.ts',
-    '<rootDir>/src/hooks/index.ts',
+    'index.ts',
     '<rootDir>/.storybook/',
     '.(story|stories).(js|jsx|mdx|ts|tsx)',
     '<rootDir>/src/styles/',

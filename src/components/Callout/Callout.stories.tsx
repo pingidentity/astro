@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -7,7 +8,8 @@ import {
   Link,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { CalloutProps } from '../../types/callout';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
@@ -33,10 +35,10 @@ export default {
       ),
     },
   },
-};
+} as Meta;
 
 // main
-export const Default = args => (
+export const Default: StoryFn<CalloutProps> = args => (
   <Callout {...args}>
     <Text>
       You should be aware of this. It might be good or bad, I don’t know. You
@@ -61,7 +63,7 @@ Default.parameters = {
   },
 };
 
-export const ErrorStatus = () => (
+export const ErrorStatus: StoryFn = () => (
   <Callout status={statuses.ERROR}>
     <Text>
       You’ve got problems. Allow me to tell you about them in some detail so
@@ -82,7 +84,7 @@ export const ErrorStatus = () => (
 // Avoiding using Error as the function name due to it being a JS built-in method
 ErrorStatus.storyName = 'Error';
 
-export const Success = () => (
+export const Success: StoryFn = () => (
   <Callout status={statuses.SUCCESS}>
     <Text>
       It Worked! Maybe there is something else related to it working that I need
@@ -100,7 +102,7 @@ export const Success = () => (
   </Callout>
 );
 
-export const Warning = () => (
+export const Warning: StoryFn = () => (
   <Callout status={statuses.WARNING}>
     <Text>
       You’ve got issues. Allow me to tell you about them in some detail so that
