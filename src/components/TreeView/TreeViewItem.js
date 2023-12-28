@@ -154,12 +154,11 @@ const TreeViewItem = forwardRef((props, ref) => {
 
   return (
     <Box
-      as="li"
       isRow
       ref={treeItemRef}
       aria-disabled={isDisabled}
       {...mergedProps}
-      role="treeitem"
+      role="row"
       variant="treeView.wrapper"
       className={classNames}
       aria-selected={isSelected}

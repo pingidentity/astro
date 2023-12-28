@@ -5,8 +5,8 @@ import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 
 import { Icon } from '../..';
+import { IconProps, Status } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 export const noticeIcons = {
   [statuses.DEFAULT]: { icon: InformationIcon, testid: 'default-icon-testid', name: 'Information Icon' },
@@ -15,19 +15,18 @@ export const noticeIcons = {
   [statuses.WARNING]: { icon: AlertIcon, testid: 'warning-icon-testid', name: 'Alert Icon' },
 };
 
-export const NoticeIcon = ({
+interface NoticeIconProps extends Omit<IconProps, 'icon'> {
+  status?: Status,
+}
+
+export const NoticeIcon: React.FC<NoticeIconProps> = ({
   status = statuses.DEFAULT,
   ...others
 }) => (
   <Icon
     data-testid={noticeIcons[status].testid}
-    icon={noticeIcons[status].icon}
     title={{ name: noticeIcons[status].name }}
+    icon={noticeIcons[status].icon}
     {...others}
   />
 );
-
-
-NoticeIcon.propTypes = {
-  ...statusPropTypes,
-};

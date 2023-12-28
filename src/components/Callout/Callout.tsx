@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 
 import { Box } from '../..';
+import { CalloutProps } from '../../types/callout';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import { NoticeIcon } from '../Icon/NoticeIcon';
 
 export const CALLOUT_TEST_ID = 'CalloutTestId';
@@ -26,7 +26,9 @@ const defaultIconProps = {
  or give warnings of unexpected events.
  */
 
-const Callout = forwardRef(({ children, status, ...others }, ref) => (
+const Callout = forwardRef<HTMLElement, CalloutProps>(({
+  children, status = statuses.DEFAULT, ...others
+}, ref) => (
   <Box
     ref={ref}
     data-testid={CALLOUT_TEST_ID}
@@ -44,14 +46,6 @@ const Callout = forwardRef(({ children, status, ...others }, ref) => (
     {children}
   </Box>
 ));
-
-Callout.propTypes = {
-  ...statusPropTypes,
-};
-
-Callout.defaultProps = {
-  ...statusDefaultProp,
-};
 
 Callout.displayName = 'Callout';
 

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useTreeData } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 import PropTypes from 'prop-types';
 
 import { Item } from '../../index';
 import { render, screen } from '../../utils/testUtils/testWrapper';
+// Needs to be added to each components test file
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { SectionOrItemRender } from './TreeView';
 import { refArray } from './TreeViewKeyboardDelegate.test';
@@ -63,7 +65,7 @@ const singleData = [
   },
 ];
 
-const TreeViewComponent = props => {
+const TreeViewComponent = forwardRef((props, ref) => {
   const tree = useTreeData({
     initialItems: props.data,
     getKey: item => item.title,
@@ -71,7 +73,7 @@ const TreeViewComponent = props => {
   });
 
   return (
-    <TreeView {...defaultProps} {...props} items={tree.items} tree={tree} aria-label="Example Tree">
+    <TreeView ref={ref} {...defaultProps} {...props} items={tree.items} tree={tree} aria-label="Example Tree">
       {item => (
         <Item
           key={item.key}
@@ -81,7 +83,7 @@ const TreeViewComponent = props => {
       )}
     </TreeView>
   );
-};
+});
 
 TreeViewComponent.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})),
@@ -110,6 +112,8 @@ afterAll(() => {
   scrollHeight.mockReset();
 });
 
+universalComponentTests({ renderComponent: props => <TreeViewComponent {...props} /> });
+
 test('TreeView component does load', () => {
   render(<TreeViewComponent />);
   const element = screen.queryByRole('treegrid');
@@ -136,7 +140,7 @@ test('Renders both Sections and Items', () => {
   const plantElement = screen.getByText('Other');
   expect(plantElement).toBeInTheDocument();
 
-  const allListItems = screen.getAllByRole('treeitem');
+  const allListItems = screen.getAllByRole('row');
   expect(allListItems).toHaveLength(3);
 });
 
@@ -168,7 +172,7 @@ test('onExpandedChange change prop calls when used', () => {
 test('disabledKeys prop disables items in the tree -- rendering them unclickable', () => {
   render(<TreeViewComponent data={data} disabledKeys={['Single Item']} />);
 
-  const listItems = screen.queryAllByRole('treeitem');
+  const listItems = screen.queryAllByRole('row');
   const thisItem = listItems[2];
 
   expect(thisItem).not.toHaveClass('is-selected');
@@ -184,7 +188,7 @@ test('disabledKeys prop disables items in the tree -- rendering them unclickable
 test('displays correct aria attributes', () => {
   render(<TreeViewComponent data={data} />);
 
-  const listItems = screen.getAllByRole('treeitem');
+  const listItems = screen.getAllByRole('row');
   const lastTreeItem = listItems[2];
 
   expect(lastTreeItem).toHaveAttribute('aria-level', '1');
@@ -194,7 +198,7 @@ test('displays correct aria attributes', () => {
   const buttons = screen.queryAllByRole('button');
   userEvent.click(buttons[1]);
 
-  const expandedItems = screen.getAllByRole('treeitem');
+  const expandedItems = screen.getAllByRole('row');
   const nestedItem = expandedItems[2];
 
   expect(nestedItem).toHaveAttribute('aria-level', '2');
@@ -205,7 +209,7 @@ test('displays correct aria attributes', () => {
 test('onKeyDown calls passed in prop call back function', () => {
   const callback = jest.fn();
   render(<TreeViewComponent data={data} onKeyDown={callback} />);
-  const listItems = screen.queryAllByRole('treeitem');
+  const listItems = screen.queryAllByRole('row');
   const thisItem = listItems[0];
 
   userEvent.type(thisItem, '{arrowleft}');
@@ -216,7 +220,7 @@ test('onKeyDown calls passed in prop call back function', () => {
 test('onKeyDown calls passed in prop call back function', () => {
   const callback = jest.fn();
   render(<TreeViewComponent data={data} onKeyDown={callback} />);
-  const listItems = screen.queryAllByRole('treeitem');
+  const listItems = screen.queryAllByRole('row');
   const thisItem = listItems[2];
   userEvent.type(thisItem, '{arrowleft}');
 
@@ -226,7 +230,7 @@ test('onKeyDown calls passed in prop call back function', () => {
 test('onKeyDown does not call passed in prop call back function', () => {
   const callback = jest.fn();
   render(<TreeViewComponent data={data} />);
-  const listItems = screen.queryAllByRole('treeitem');
+  const listItems = screen.queryAllByRole('row');
   const thisItem = listItems[2];
   userEvent.type(thisItem, '{arrowleft}');
 
