@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.38.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.37.2...@pingux/astro@2.38.0) (2023-12-28)
+
+
+### Features
+
+* [UIP-6682] Callout: rewrite to TS ([5cffea8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5cffea84760d0378b67c9234e8afe0ba2971aa0e))
+
+
+
+
+
 ## [2.37.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.37.1...@pingux/astro@2.37.2) (2023-12-21)
 
 
