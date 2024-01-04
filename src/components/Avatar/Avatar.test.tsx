@@ -1,20 +1,23 @@
 import React from 'react';
 import { faker } from '@faker-js/faker';
 
+import { AvatarProps } from '../../types/avatar';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Avatar from '.';
 
-const defaultProps = {
-  src: faker.image.lorempicsum.imageUrl(150, 150, false, 0, '1'),
+const defaultProps: AvatarProps = {
+  src: faker.image.lorempicsum.imageUrl(150, 150, false, undefined, '1'),
 };
 
 const getComponent = (props = {}) => render((
   <Avatar {...defaultProps} {...props} />
 ));
 // Needs to be added to each components test file
-universalComponentTests({ renderComponent: props => <Avatar {...defaultProps} {...props} /> });
+universalComponentTests({
+  renderComponent: (props: AvatarProps) => <Avatar {...defaultProps} {...props} />,
+});
 
 test('an avatar is rendered', () => {
   getComponent();
