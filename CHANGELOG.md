@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.38.0...@pingux/astro@2.39.0) (2024-01-04)
+
+
+### Bug Fixes
+
+* [UIP-6734]: Elements color contrast error is observed for DataTable ([e00ddd8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e00ddd8253badef9033e9b933a959888612885e7))
+
+
+### Features
+
+* [UIP-6679] Avatar: rewrite to TS ([b6669e3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b6669e3f131323e9b7ca898611f4c40b66e41461))
+
+
+
+
+
 # [2.38.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.37.2...@pingux/astro@2.38.0) (2023-12-28)
 
 
