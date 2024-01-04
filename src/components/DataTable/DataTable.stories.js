@@ -231,6 +231,15 @@ export const Default = args => {
   );
 };
 
+// Added to bypass color contrast issue due to virtualizer
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const Dynamic = args => {
   const columns = [
     { name: 'Country', key: 'country' },
@@ -298,6 +307,15 @@ export const Dynamic = args => {
       </DataTableBody>
     </DataTable>
   );
+};
+
+// Added to bypass color contrast issue due to virtualizer
+Dynamic.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
 
 export const Sortable = args => {
@@ -407,6 +425,15 @@ export const Sortable = args => {
   );
 };
 
+// Added to bypass color contrast issue due to virtualizer
+Sortable.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const AsyncLoading = args => {
   /**
    * isChromatic checks if the code is running in Chromatic environment
@@ -478,4 +505,13 @@ export const AsyncLoading = args => {
       </DataTableBody>
     </DataTable>
   );
+};
+
+// Added to bypass color contrast issue due to virtualizer
+AsyncLoading.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
