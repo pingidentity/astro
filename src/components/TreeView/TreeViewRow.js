@@ -1,9 +1,12 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
 import FolderIcon from '@pingux/mdi-react/FolderIcon';
 import LockIcon from '@pingux/mdi-react/LockIcon';
 import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
 import MenuRight from '@pingux/mdi-react/MenuRightIcon';
-import { useHover, usePress } from '@react-aria/interactions';
+import { useDraggableItem, useDroppableItem } from '@react-aria/dnd';
+import { useFocusRing } from '@react-aria/focus';
+import { useHover } from '@react-aria/interactions';
+import { useOption } from '@react-aria/listbox';
 import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 
@@ -16,6 +19,8 @@ import {
   Text,
 } from '../../index';
 
+import { addRefToArrayHelper, removeRefFromArrayHelper } from './TreeViewSection';
+
 const TreeViewRow = forwardRef((props, ref) => {
   const {
     title,
@@ -24,10 +29,8 @@ const TreeViewRow = forwardRef((props, ref) => {
     item,
     items,
     isExpanded,
-    isSelected,
-    isDisabled,
-    isParentFocused,
-    iconButtonProps,
+    isDragging,
+    onKeyDown,
     ...others
   } = props;
 
@@ -39,38 +42,125 @@ const TreeViewRow = forwardRef((props, ref) => {
     key,
   } = item;
 
-  const { state, tree } = useTreeViewContext();
+  const {
+    state,
+    dragState,
+    dropState,
+    refArray,
+    setRefs,
+    tree,
+    setLastFocusedItem,
+    lastFocusedItem,
+    flatKeyArray,
+    targetKey,
+    keyBeingDragged,
+  } = useTreeViewContext();
+
+  const addRefToArray = (thisKey, thisRef) => {
+    setRefs(prev => {
+      return addRefToArrayHelper(prev, thisKey, thisRef);
+    });
+  };
+
+  const removeRefFromArray = () => {
+    setRefs(prev => {
+      return removeRefFromArrayHelper(prev, key);
+    });
+  };
+
+  // this runs on mount
+  useEffect(() => {
+    addRefToArray(key, treeRowRef);
+  }, []);
+
+  // cleanup, that runs on dismount.
+  useEffect(() => () => {
+    return removeRefFromArray(key, refArray);
+  }, []);
 
   const { hoverProps, isHovered } = useHover({});
 
-  const pressIcon = e => {
+  const pressIcon = () => {
     state.toggleKey(item.key);
-    if (iconButtonProps?.onPress) {
-      iconButtonProps.onPress(e);
-    }
   };
 
+  const { optionProps, isDisabled, isSelected } = useOption(
+    { key },
+    state,
+    treeRowRef,
+  );
+
   const pressRow = () => {
+    if (isSelected) {
+      tree.setSelectedKeys([]);
+      return;
+    }
     tree.setSelectedKeys([item.key]);
   };
 
+
+  const { dropProps, isDropTarget } = useDroppableItem(
+    {
+      target: { type: 'item', key: item.key, dropPosition: 'on' },
+    },
+    dropState,
+    treeRowRef,
+  );
+
+  const { dragProps } = useDraggableItem({
+    hasDragButton: true,
+    key: item.key,
+  }, dragState);
+
+  const { focusProps, isFocused } = useFocusRing();
+
   const {
-    isPressed,
-    pressProps,
-  } = usePress({ ...others, ref: treeRowRef, onPress: pressRow });
+    focusProps: focusWithinProps,
+    isFocused: isFocusedWithin,
+  } = useFocusRing({ within: true });
+
+  // we do not allow for items to be dropped on themselves, or on their children
+  const validateDropTarget = () => {
+    const foundTargetItem = flatKeyArray.find(_item => _item.key === targetKey);
+    if (
+      !isDropTarget
+      || foundTargetItem?.parentKeys?.includes(keyBeingDragged)
+      || foundTargetItem.key === keyBeingDragged
+      || Array.from(state.disabledKeys).includes(foundTargetItem.key)
+    ) {
+      return false;
+    }
+    if (isDropTarget) {
+      return true;
+    }
+    return false;
+  };
+
+  const isValidDropTarget = useMemo(() => {
+    return validateDropTarget();
+  }, [targetKey, isDropTarget]);
 
   const { classNames } = useStatusClasses('', {
     isHovered,
     isSelected,
     isExpanded,
-    isPressed,
     isDisabled,
+    isDragging,
+    isDropTarget: isValidDropTarget,
+    isFocused,
   });
 
   const mergedProps = mergeProps(
     hoverProps,
-    pressProps,
     others,
+    optionProps,
+    dragProps,
+    dropProps,
+    focusProps,
+    focusWithinProps,
+    { onFocus: () => {
+      setLastFocusedItem(key);
+    } },
   );
 
   return (
@@ -79,12 +169,23 @@ const TreeViewRow = forwardRef((props, ref) => {
       isRow
       alignItems="center"
       gap="xs"
-      sx={{ flexGrow: 1,
-        '& :focus': { border: 'none' } }}
+      sx={{
+        flexGrow: 1,
+        '& :focus': { border: 'none' },
+      }}
+      variant="treeView.rowWrapper"
       className={classNames}
       key={`${key} box`}
-      role="gridcell"
+      data-droptarget={isDropTarget}
       {...mergedProps}
+      role="gridcell"
+      tabIndex="-1"
+      {...(lastFocusedItem === key && {
+        tabIndex: 0,
+      })}
+      onKeyDown={e => {
+        onKeyDown(e);
+      }}
     >
       { items?.length > 0 && (
         <IconButtonToggle
@@ -95,8 +196,10 @@ const TreeViewRow = forwardRef((props, ref) => {
           iconProps={{ size: 25, title: `${title} expand or collapse button` }}
           buttonProps={{
             'aria-label': `${title} expand or collapse button`,
-            ...(isParentFocused && { tabIndex: 0 }),
-            ...(!isParentFocused && { tabIndex: -1 }),
+            tabIndex: '-1',
+            ...((lastFocusedItem === key && isFocusedWithin) && {
+              tabIndex: 0,
+            }),
           }}
         />
       )}
@@ -109,6 +212,7 @@ const TreeViewRow = forwardRef((props, ref) => {
         sx={!items && {
           ml: '36px',
         }}
+        onClick={pressRow}
       >
         <Icon color="focus" icon={mainIcon} size={25} title="folder icon" alt="folder icon" />
         <Text className={classNames}>
@@ -122,14 +226,12 @@ const TreeViewRow = forwardRef((props, ref) => {
 
 TreeViewRow.propTypes = {
   isSelected: PropTypes.bool,
+  isDragging: PropTypes.bool,
+  onKeyDown: PropTypes.func,
   isDisabled: PropTypes.bool,
   isExpanded: PropTypes.bool,
-  isParentFocused: PropTypes.bool,
   title: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.shape({})),
-  iconButtonProps: PropTypes.shape({
-    onPress: PropTypes.func,
-  }),
   item: PropTypes.shape({
     key: PropTypes.string,
   }),

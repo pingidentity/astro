@@ -1,17 +1,14 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import FileIcon from '@pingux/mdi-react/FileIcon';
-import { useFocusRing } from '@react-aria/focus';
 import { useOption } from '@react-aria/listbox';
-import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 
 import { useTreeViewContext } from '../../context/TreeViewContext';
-import { useStatusClasses } from '../../hooks';
 import { Box } from '../../index';
 
+import InsertionIndicator from './InsertionIndicator';
 import { itemPressHandlers } from './TreeViewKeyboardDelegate';
 import TreeViewRow from './TreeViewRow';
-import { addRefToArrayHelper, removeRefFromArrayHelper } from './TreeViewSection';
 
 export const onKeyDownItem = (
   e,
@@ -86,18 +83,18 @@ const TreeViewItem = forwardRef((props, ref) => {
     state,
     tree,
     refArray,
-    setRefs,
     flatKeyArray,
+    dragState,
+    dropState,
     pageLength,
-    setLastFocusedItem,
   } = useTreeViewContext();
 
-  const { optionProps, isSelected, isDisabled } = useOption({ key }, state, treeItemRef);
+  const { isSelected, isDisabled } = useOption({ key }, state, treeItemRef);
 
   const isExpanded = state.expandedKeys.has(key);
+  const isDragging = dragState.isDragging(item.key);
 
   const onKeyDownFunction = e => {
-    /* istanbul ignore next */
     onKeyDownItem(
       e,
       state,
@@ -115,67 +112,39 @@ const TreeViewItem = forwardRef((props, ref) => {
     }
   };
 
-  // ignoring from tests, but this is actually being unit tested
-  /* istanbul ignore next */
-  const removeRefFromArray = () => {
-    setRefs(prev => {
-      return removeRefFromArrayHelper(prev, key);
-    });
-  };
-
-  const addRefToArray = () => {
-    setRefs(prev => {
-      return addRefToArrayHelper(prev, key, treeItemRef);
-    });
-  };
-
-  // adds and removes refs on mount and dismount
-  /* istanbul ignore next */
-  useEffect(() => {
-    // this  runs on mount
-    addRefToArray();
-    return () => {
-      // this runs on cleanup
-      removeRefFromArray(key, refArray);
-    };
-  }, []);
-
-  const { isFocusVisible, focusProps } = useFocusRing();
-
-  const mergedProps = mergeProps(
-    focusProps,
-    optionProps,
-    { onFocus: () => setLastFocusedItem(key) },
-  );
-
-  const { classNames } = useStatusClasses('', {
-    isFocused: isFocusVisible,
-  });
-
   return (
-    <Box
-      isRow
-      ref={treeItemRef}
-      aria-disabled={isDisabled}
-      {...mergedProps}
-      role="row"
-      variant="treeView.wrapper"
-      className={classNames}
-      aria-selected={isSelected}
-      aria-level={level}
-      aria-posinset={position + 1}
-      aria-setsize={setSize}
-      onKeyDown={e => onKeyDownFunction(e)}
-    >
-      <TreeViewRow
-        item={item}
-        title={title}
-        mainIcon={FileIcon}
-        isSelected={isSelected}
-        isExpanded={isExpanded}
-        isDisabled={isDisabled}
+    <>
+      <InsertionIndicator
+        target={{ type: 'item', key: item.key, dropPosition: 'before' }}
+        dropState={dropState}
       />
-    </Box>
+      <Box
+        isRow
+        ref={treeItemRef}
+        aria-disabled={isDisabled}
+        role="row"
+        variant="treeView.wrapper"
+        aria-selected={isSelected}
+        aria-level={level}
+        aria-posinset={position + 1}
+        aria-setsize={setSize}
+      >
+        <TreeViewRow
+          item={item}
+          title={title}
+          mainIcon={FileIcon}
+          isSelected={isSelected}
+          isExpanded={isExpanded}
+          isDisabled={isDisabled}
+          isDragging={isDragging}
+          onKeyDown={e => onKeyDownFunction(e)}
+        />
+      </Box>
+      <InsertionIndicator
+        target={{ type: 'item', key: item.key, dropPosition: 'after' }}
+        dropState={dropState}
+      />
+    </>
   );
 });
 

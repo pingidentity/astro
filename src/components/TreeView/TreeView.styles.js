@@ -3,7 +3,7 @@ const treeRow = {
   cursor: 'pointer',
   height: '31px',
   outline: 'none',
-  '&.is-selected, &.is-hovered': {
+  '&.is-selected, &.is-hovered, &.is-drop-target': {
     backgroundColor: 'active',
     '& span': {
       color: 'white',
@@ -15,9 +15,6 @@ const treeRow = {
       fill: 'white',
     },
   },
-  '&.is-expanded': {
-    marginBottom: 'xs',
-  },
   '& :focus': { border: 'none' },
 };
 
@@ -25,7 +22,7 @@ const wrapper = {
   '&.is-focused': {
     boxSizing: 'unset',
     outline: '1px solid',
-    outlineColor: 'focus',
+    outlineColor: 'blue',
     outlineOffset: '2px',
   },
   width: '100%',
@@ -38,7 +35,32 @@ const wrapper = {
   outline: 'none',
 };
 
+const rowWrapper = {
+  '&.is-focused': {
+    boxSizing: 'unset',
+    outline: '1px solid',
+    outlineColor: 'focus',
+    outlineOffset: '2px',
+  },
+  border: 'none',
+  ':focus': {
+    border: 'none',
+  },
+  '&.is-expanded': {
+    marginBottom: 'xs',
+  },
+  outline: 'none',
+};
+
+const insertionIndicator = {
+  width: '100%',
+  outline: '1px solid',
+  outlineColor: 'active',
+};
+
 export default {
   treeRow,
+  rowWrapper,
   wrapper,
+  insertionIndicator,
 };
