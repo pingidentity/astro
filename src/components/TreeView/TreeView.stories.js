@@ -90,12 +90,12 @@ const data = [
 export const Default = args => {
   const tree = useTreeData({
     initialItems: data,
-    getKey: item => item.title,
+    getKey: item => item.key,
     getChildren: item => item.items,
   });
 
   return (
-    <TreeView {...args} items={tree.items} tree={tree} aria-label="Example Tree">
+    <TreeView {...args} items={tree.items} tree={tree} aria-label="Example Tree" disabledKeys={['Single Item']}>
       {section => (
         <Item
           key={section.key}

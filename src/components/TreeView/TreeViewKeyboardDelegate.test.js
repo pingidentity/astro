@@ -230,6 +230,18 @@ test('onDownPress calls when down Arrow is pressed and expanded', () => {
   expect(refFocus).toHaveBeenCalled();
 });
 
+test('nothing happens when a unspecified key is pressed', () => {
+  getComponent({ onKeyDown: onKeyDownSection });
+  const button = screen.getByRole('button');
+  fireEvent.keyDown(button, { key: 'a', keyCode: 65 });
+  fireEvent.keyUp(button, { key: 'a', keyCode: 65 });
+  expect(refFocus).not.toHaveBeenCalled();
+  expect(focusNext).not.toHaveBeenCalled();
+  expect(focusPrevious).not.toHaveBeenCalled();
+  expect(setSelectedKeys).not.toHaveBeenCalled();
+  expect(toggleKey).not.toHaveBeenCalled();
+});
+
 test('onUpPress calls when down Arrow is pressed and expanded', () => {
   getComponent({ onKeyDown: onKeyDownSection });
   const button = screen.getByRole('button');

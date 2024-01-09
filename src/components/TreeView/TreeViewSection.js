@@ -1,16 +1,14 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
-import { useFocusRing } from '@react-aria/focus';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useOption } from '@react-aria/listbox';
-import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 
 import { useTreeViewContext } from '../../context/TreeViewContext';
-import { useStatusClasses } from '../../hooks';
 import {
   Box,
   TreeViewItem,
 } from '../../index';
 
+import InsertionIndicator from './InsertionIndicator';
 import { SectionOrItemRender } from './TreeView';
 import { sectionPressHandlers } from './TreeViewKeyboardDelegate';
 import TreeViewRow from './TreeViewRow';
@@ -70,12 +68,11 @@ export const onKeyDownSection = (
       }
       break;
     case 40:
-      sectionPressHandlers.onDownPress(e, key, refArray, flatKeyArray);
       e.preventDefault();
       e.stopPropagation();
+      sectionPressHandlers.onDownPress(e, key, refArray, flatKeyArray);
       break;
     default:
-      /* istanbul ignore next */
       break;
   }
 };
@@ -121,23 +118,19 @@ const TreeViewSection = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => treeSectionRef.current);
 
   const {
-    state, tree, refArray, setRefs, flatKeyArray, pageLength, setLastFocusedItem, lastFocusedItem,
+    state,
+    tree,
+    refArray,
+    flatKeyArray,
+    dragState,
+    dropState,
+    pageLength,
   } = useTreeViewContext();
 
-  const { optionProps, isDisabled, isSelected } = useOption(
-    { key },
-    state,
-    treeSectionRef,
-  );
-
-  const { focusProps, isFocused } = useFocusRing();
-
-  const {
-    focusProps: focusPropsWithin,
-    isFocused: isFocusedWithin,
-  } = useFocusRing({ within: true });
+  const { isSelected, isDisabled } = useOption({ key }, state, treeSectionRef);
 
   const isExpanded = state.expandedKeys.has(key);
+  const isDragging = dragState.isDragging(item.key);
 
   const onKeyDownFunction = e => {
     onKeyDownSection(e,
@@ -150,107 +143,80 @@ const TreeViewSection = forwardRef((props, ref) => {
       flatKeyArray,
       refArray,
       pageLength,
-      isFocused,
+      true,
     );
     if (onKeyDown) {
       onKeyDown(e, key);
     }
   };
 
-  const addRefToArray = (thisKey, thisRef) => {
-    setRefs(prev => {
-      return addRefToArrayHelper(prev, thisKey, thisRef);
-    });
-  };
-
-  const removeRefFromArray = () => {
-    setRefs(prev => {
-      return removeRefFromArrayHelper(prev, key);
-    });
-  };
-
-  // adds and removes refs on mount and dismount
-  useEffect(() => {
-    // this  runs on mount
-    addRefToArray(key, treeSectionRef);
-    return () => {
-      // this runs on cleanup
-      removeRefFromArray(key, refArray);
-    };
-  }, []);
-
-  const mergedProps = mergeProps(
-    focusPropsWithin,
-    focusProps,
-    optionProps,
-    { onFocus: () => setLastFocusedItem(key) },
-  );
-
-  const { classNames } = useStatusClasses('', {
-    isFocused,
-  });
-
   return (
-    <Box
-      ref={treeSectionRef}
-      aria-expanded={isExpanded}
-      aria-disabled={isDisabled}
-      {...mergedProps}
-      role="row"
-      variant="treeView.wrapper"
-      className={classNames}
-      aria-selected={isSelected}
-      aria-level={level}
-      aria-setsize={setSize}
-      aria-posinset={position + 1}
-      onKeyDown={e => onKeyDownFunction(e)}
-      tabIndex={lastFocusedItem === key ? 0 : -1}
-    >
-      <TreeViewRow
-        item={item}
-        title={title}
-        items={items}
-        isExpanded={isExpanded}
-        isSelected={isSelected}
-        isDisabled={isDisabled}
-        isParentFocused={isFocusedWithin}
+    <>
+      <InsertionIndicator
+        target={{ type: 'item', key: item.key, dropPosition: 'before' }}
+        dropState={dropState}
       />
-      { isExpanded && (
-        <Box
-          role="rowgroup"
-          key={`${item.key} ul`}
-          sx={{
-            pl: 'md',
-            '& :focus': { border: 'none' },
-          }}
-        >
-          { Array.from(items).map((_item, _index) => (
-            SectionOrItemRender(
-              _item.value.items?.length > 0,
-              <TreeViewSection
-                item={_item}
-                items={_item.children}
-                title={_item.value.title}
-                key={_item.value.title}
-                focusManager={focusManager}
-                level={level + 1}
-                position={_index}
-                setSize={items.length}
-              />,
-              <TreeViewItem
-                item={_item}
-                title={_item.value.title}
-                key={_item.value.title}
-                focusManager={focusManager}
-                level={level + 1}
-                position={_index}
-                setSize={items.length}
-              />,
-            )
-          ))}
-        </Box>
-      )}
-    </Box>
+      <Box
+        ref={treeSectionRef}
+        aria-expanded={isExpanded}
+        aria-disabled={isDisabled}
+        role="row"
+        variant="treeView.wrapper"
+        aria-selected={isSelected}
+        tabIndex="-1"
+        aria-level={level}
+        aria-setsize={setSize}
+        aria-posinset={position + 1}
+      >
+        <TreeViewRow
+          item={item}
+          title={title}
+          items={items}
+          isDragging={isDragging}
+          isExpanded={isExpanded}
+          onKeyDown={onKeyDownFunction}
+        />
+        { isExpanded && (
+          <Box
+            role="rowgroup"
+            key={`${item.key} ul`}
+            sx={{
+              pl: 'md',
+              '& :focus': { border: 'none' },
+            }}
+          >
+            { Array.from(items).map((_item, _index) => (
+              SectionOrItemRender(
+                _item.children?.length > 0,
+                <TreeViewSection
+                  item={_item}
+                  items={_item.children}
+                  title={_item.value.title}
+                  key={_item.value.title}
+                  focusManager={focusManager}
+                  level={level + 1}
+                  position={_index}
+                  setSize={items.length}
+                />,
+                <TreeViewItem
+                  item={_item}
+                  title={_item.value.title}
+                  key={_item.value.title}
+                  focusManager={focusManager}
+                  level={level + 1}
+                  position={_index}
+                  setSize={items.length}
+                />,
+              )
+            ))}
+          </Box>
+        )}
+      </Box>
+      <InsertionIndicator
+        target={{ type: 'item', key: item.key, dropPosition: 'after' }}
+        dropState={dropState}
+      />
+    </>
   );
 });
 
