@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.39.0...@pingux/astro@2.40.0) (2024-01-09)
+
+
+### Features
+
+* [UIP-6454]: PanelContent => Edit: add breadcrumb to header ([6bdecb6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6bdecb60d9bcf4889ce64663baeee56b730e7fcb))
+* [UIP-6472] Astro TreeView Drag and Drop ([7398e25](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7398e2581b5dc3d2d85af6d20a9516d12f3f913e))
+
+
+
+
+
 # [2.39.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.38.0...@pingux/astro@2.39.0) (2024-01-04)
 
 
