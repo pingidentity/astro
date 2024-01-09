@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Item } from 'react-stately';
+import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import PencilIcon from '@pingux/mdi-react/PencilIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
 
@@ -8,6 +8,7 @@ import {
   AccordionGroup,
   Badge,
   Box,
+  Breadcrumbs,
   Button,
   ButtonBar,
   CheckboxField,
@@ -15,6 +16,7 @@ import {
   Icon,
   Image,
   ImageUploadField,
+  Item,
   NoticeIcon,
   OverlayPanel,
   OverlayProvider,
@@ -92,9 +94,44 @@ const data = {
   },
 };
 
-const OverlayWrapper = ({ children }) => {
+const OverlayWrapper = ({ children, isEditPanel }) => {
   const { state } = useOverlayPanelState({ isDefaultOpen: true });
   const triggerRef = useRef();
+
+  const { personalInfo } = data;
+  const { fields } = personalInfo;
+
+  const renderBreadcrumbs = (
+    <Breadcrumbs icon={ChevronRightIcon}>
+      <Item
+        aria-label={personalInfo.label}
+        href="https://www.pingidentity.com"
+        key={personalInfo.key}
+        variant="buttons.link"
+      >
+        {`${fields[0].value} ${fields[1].value}`}
+      </Item>
+      <Item
+        aria-label="Edit"
+        key="editKey"
+        variant="buttons.link"
+      >
+        Edit
+      </Item>
+    </Breadcrumbs>
+  );
+
+  const image = { src: UserImage, alt: 'user image' };
+  const panelHeaderProps = isEditPanel ? {
+    data: { image },
+    slots: { rightOfData: renderBreadcrumbs },
+  } : {
+    data: {
+      image,
+      text: `${fields[0].value} ${fields[1].value}`,
+      subtext: `${fields[0].value.toLowerCase()}${fields[1].value.toLowerCase()}`,
+    },
+  };
 
   return (
     <OverlayProvider>
@@ -106,14 +143,16 @@ const OverlayWrapper = ({ children }) => {
         p="0"
       >
         <PanelHeader
-          data={{
-            image: { src: UserImage, alt: 'user image' },
-            text: data.personalInfo.fields[0].value,
-            subtext: data.personalInfo.fields[1].value,
-          }}
+          {...panelHeaderProps}
         >
-          <PanelHeaderSwitchField />
-          <PanelHeaderMenu />
+          {!isEditPanel && <PanelHeaderSwitchField />}
+          {!isEditPanel && (
+          <PanelHeaderMenu>
+            <Item key="enable">Enable user</Item>
+            <Item key="disable">Disable user</Item>
+            <Item key="delete">Delete user</Item>
+          </PanelHeaderMenu>
+          )}
           <PanelHeaderCloseButton onPress={state.close} />
         </PanelHeader>
         {children}
@@ -281,7 +320,7 @@ const editData = {
 };
 
 export const EditPanel = () => (
-  <OverlayWrapper>
+  <OverlayWrapper isEditPanel>
     <Box p="lg" pb="0">
       <Box gap="md" mb="20px" width="500px">
         <TextField defaultValue="ednepomuceno" isRequired label="Username" />

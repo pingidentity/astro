@@ -4,11 +4,12 @@ import userEvent from '@testing-library/user-event';
 import PropTypes from 'prop-types';
 
 import { Item } from '../../index';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { DataTransfer, DragEvent } from '../../utils/testUtils/dndMocks';
+import { act, fireEvent, render, screen, within } from '../../utils/testUtils/testWrapper';
 // Needs to be added to each components test file
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
-import { SectionOrItemRender } from './TreeView';
+import { dropItem, SectionOrItemRender } from './TreeView';
 import { refArray } from './TreeViewKeyboardDelegate.test';
 import { addRefToArrayHelper, removeRefFromArrayHelper } from './TreeViewSection';
 import TreeView from '.';
@@ -65,6 +66,81 @@ const singleData = [
   },
 ];
 
+const exampleItem = {
+  items: [
+    {
+      key: 'testChild',
+      parentKey: 'testKey',
+      items: [
+        {
+          key: 'last',
+          title: 'last',
+          parentKey: 'testChild',
+        },
+      ],
+      children: [
+        {
+          key: 'last',
+          title: 'last',
+          parentKey: 'testChild',
+        },
+      ],
+      title: 'testChild',
+    },
+  ],
+  key: 'testKey',
+  parentKey: 'parent',
+  title: 'testKey',
+};
+
+const exampleItemWithChildren = {
+  items: [
+    {
+      key: 'testChild',
+      parentKey: 'testKey',
+      items: [
+        {
+          key: 'last',
+          title: 'last',
+          parentKey: 'testChild',
+        },
+      ],
+      children: [
+        {
+          key: 'last',
+          title: 'last',
+          parentKey: 'testChild',
+        },
+      ],
+      title: 'testChild',
+    },
+  ],
+  children: [
+    {
+      key: 'testChild',
+      parentKey: 'testKey',
+      items: [
+        {
+          key: 'last',
+          title: 'last',
+          parentKey: 'testChild',
+        },
+      ],
+      children: [
+        {
+          key: 'last',
+          title: 'last',
+          parentKey: 'testChild',
+        },
+      ],
+      title: 'testChild',
+    },
+  ],
+  key: 'testKey',
+  parentKey: 'parent',
+  title: 'testKey',
+};
+
 const TreeViewComponent = forwardRef((props, ref) => {
   const tree = useTreeData({
     initialItems: props.data,
@@ -94,11 +170,57 @@ let offsetHeight;
 let scrollHeight;
 const onSelectionChange = jest.fn();
 
+const treeInsert = jest.fn();
+const treeRemove = jest.fn();
+const treeMove = jest.fn();
+const treeInsertBefore = jest.fn();
+const treeInsertAfter = jest.fn();
+const tree = {
+  insert: treeInsert,
+  remove: treeRemove,
+  move: treeMove,
+  insertBefore: treeInsertBefore,
+  insertAfter: treeInsertAfter,
+};
+
+const toggleStateKey = jest.fn();
+
+const state = {
+  expandedKeys: new Set(),
+  toggleKey: toggleStateKey,
+};
+
+const stateExpanded = {
+  expandedKeys: new Set([...'Expanded']),
+  toggleKey: toggleStateKey,
+};
+
+const thisEventTarget = {
+  key: 'testTarget',
+};
+
+const expandedEventTarget = {
+  key: 'Expanded',
+};
+
 beforeAll(() => {
   offsetWidth = jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
   offsetHeight = jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   scrollHeight = jest.spyOn(window.HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => 48);
   jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.useFakeTimers();
+});
+
+beforeEach(() => {
+  jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(() => ({
+    left: 0,
+    top: 0,
+    x: 0,
+    y: 0,
+    width: 100,
+    height: 50,
+  }));
+
   jest.useFakeTimers();
 });
 
@@ -115,7 +237,7 @@ afterAll(() => {
 universalComponentTests({ renderComponent: props => <TreeViewComponent {...props} /> });
 
 test('TreeView component does load', () => {
-  render(<TreeViewComponent />);
+  render(<TreeViewComponent data={data} />);
   const element = screen.queryByRole('treegrid');
   expect(element).toBeInTheDocument();
 });
@@ -129,6 +251,8 @@ test('Can select an Item using the mouse', () => {
   expect(peopleElement).not.toHaveClass('is-selected');
   userEvent.click(peopleElement);
   expect(peopleElement).toHaveClass('is-selected');
+  fireEvent.click(peopleElement);
+  expect(peopleElement).not.toHaveClass('is-selected');
 });
 
 test('Renders both Sections and Items', () => {
@@ -156,6 +280,15 @@ test('Can expand an Item using the mouse', () => {
   const buttons = screen.queryAllByRole('button');
   userEvent.click(buttons[0]);
   expect(screen.queryByText(data[0].items[0].title)).toBeInTheDocument();
+});
+
+test('Focus moves using keyboard', () => {
+  render(<TreeViewComponent data={data} />);
+  userEvent.tab();
+  expect(screen.queryByText('Policies')).toHaveClass('is-focused');
+  userEvent.tab();
+  expect(screen.queryByText('Policies')).not.toHaveClass('is-focused');
+  expect(screen.queryAllByRole('button')[0]).toHaveClass('is-focused');
 });
 
 test('onExpandedChange change prop calls when used', () => {
@@ -209,10 +342,10 @@ test('displays correct aria attributes', () => {
 test('onKeyDown calls passed in prop call back function', () => {
   const callback = jest.fn();
   render(<TreeViewComponent data={data} onKeyDown={callback} />);
-  const listItems = screen.queryAllByRole('row');
+  const listItems = screen.queryAllByRole('gridcell');
   const thisItem = listItems[0];
-
-  userEvent.type(thisItem, '{arrowleft}');
+  fireEvent.keyDown(thisItem, { key: 'ArrowLeft', keyCode: 37 });
+  fireEvent.keyUp(thisItem, { key: 'ArrowLeft', keyCode: 37 });
 
   expect(callback).toHaveBeenCalled();
 });
@@ -220,9 +353,10 @@ test('onKeyDown calls passed in prop call back function', () => {
 test('onKeyDown calls passed in prop call back function', () => {
   const callback = jest.fn();
   render(<TreeViewComponent data={data} onKeyDown={callback} />);
-  const listItems = screen.queryAllByRole('row');
+  const listItems = screen.queryAllByRole('gridcell');
   const thisItem = listItems[2];
-  userEvent.type(thisItem, '{arrowleft}');
+  fireEvent.keyDown(thisItem, { key: 'ArrowLeft', keyCode: 37 });
+  fireEvent.keyUp(thisItem, { key: 'ArrowLeft', keyCode: 37 });
 
   expect(callback).toHaveBeenCalled();
 });
@@ -235,6 +369,41 @@ test('onKeyDown does not call passed in prop call back function', () => {
   userEvent.type(thisItem, '{arrowleft}');
 
   expect(callback).not.toHaveBeenCalled();
+});
+
+test('onDragStart calls passed in prop call back function', async () => {
+  const callback = jest.fn();
+  const secondCallback = jest.fn();
+  render(<TreeViewComponent data={data} onDragStart={callback} onDrop={secondCallback} />);
+  const listItems = screen.queryAllByRole('gridcell');
+  const element = listItems[2];
+  const target = listItems[1];
+
+  expect(listItems.length).toBe(3);
+
+  const dataTransfer = new DataTransfer();
+
+  fireEvent(element, new DragEvent('dragstart', { dataTransfer, clientX: 0, clientY: 0 }));
+  act(() => jest.runAllTimers());
+  expect(callback).toHaveBeenCalled();
+
+  fireEvent(element, new DragEvent('drag', { dataTransfer, clientX: 1, clientY: 1 }));
+
+  fireEvent(target, new DragEvent('dragenter', { dataTransfer, clientX: 1, clientY: 1 }));
+
+  fireEvent(target, new DragEvent('dragover', { dataTransfer, clientX: 51, clientY: 51 }));
+  expect(target).toHaveAttribute('data-droptarget', 'true');
+
+  await fireEvent(target, new DragEvent('drop', { dataTransfer, clientX: 51, clientY: 51 }));
+  act(() => jest.runAllTimers());
+
+  await fireEvent(element, new DragEvent('dragend', { dataTransfer, clientX: 51, clientY: 51 }));
+
+
+  expect(secondCallback).toHaveBeenCalled();
+
+  expect(() => within(target).getByText('Other A'));
+  expect(() => within(target).getByText('Single Item'));
 });
 
 test('items still render if there is only one provided', () => {
@@ -295,4 +464,39 @@ test('Handler function does add ref to array', () => {
 test('Handler function does not add ref to array', () => {
   const newArray = addRefToArrayHelper(refArray, 'test', { current: 'currentlystilltesting' });
   expect(newArray).toHaveLength(3);
+});
+
+test('insertItem is called', () => {
+  dropItem({ ...thisEventTarget, dropPosition: 'on' }, tree, state, exampleItem);
+
+  expect(treeMove).toHaveBeenCalled();
+  expect(toggleStateKey).toHaveBeenCalled();
+});
+
+test('insertItem is called, but does not call toggle key', () => {
+  dropItem({ ...expandedEventTarget, dropPosition: 'on' }, tree, stateExpanded, exampleItem);
+
+  expect(treeMove).toHaveBeenCalled();
+  expect(toggleStateKey).not.toHaveBeenCalled();
+});
+
+test('insertItemToPosition is called with after', () => {
+  dropItem({ ...thisEventTarget, dropPosition: 'after' }, tree, state, exampleItem);
+
+  expect(treeInsertAfter).toHaveBeenCalled();
+  expect(treeRemove).toHaveBeenCalled();
+});
+
+test('insertItemToPosition is called with before', () => {
+  dropItem({ ...thisEventTarget, dropPosition: 'before' }, tree, state, exampleItem);
+
+  expect(treeInsertBefore).toHaveBeenCalled();
+  expect(treeRemove).toHaveBeenCalled();
+});
+
+test('insertItemToPosition is called with an item that has children', () => {
+  dropItem({ ...thisEventTarget, dropPosition: 'before' }, tree, state, exampleItemWithChildren);
+
+  expect(treeInsertBefore).toHaveBeenCalled();
+  expect(treeRemove).toHaveBeenCalled();
 });
