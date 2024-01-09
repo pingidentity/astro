@@ -5,10 +5,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useFocusRing } from 'react-aria';
 import CheckIcon from '@pingux/mdi-react/CheckIcon';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
+import { usePress } from '@react-aria/interactions';
 import { withDesign } from 'storybook-addon-designs';
 
+import { useStatusClasses } from '../hooks';
 import {
   Box,
   Icon,
@@ -43,6 +46,14 @@ const inputProps = {
 };
 
 const sx = {
+  containerFocused: {
+    padding: 0,
+    position: 'relative',
+    borderColor: 'accent.60',
+    borderStyle: 'solid',
+    borderRadius: '3px 2px 2px 3px',
+    borderWidth: '1px',
+  },
   editablePreview: {
     whiteSpace: 'pre-line',
     width: '100%',
@@ -56,30 +67,54 @@ const sx = {
     fontSize: 'md',
     fontWeight: 1,
     lineHeight: '18px',
+    '&:hover': {
+      cursor: 'pointer',
+      bg: 'accent.95',
+    },
     '&:focus': {
       outline: 'none',
-      boxShadow: 'focus',
+      borderRadius: '2px',
       borderColor: 'active',
-      borderWidth: '1px',
+      borderWidth: '2px',
       borderStyle: 'solid',
+      paddingLeft: '3px',
+      paddingBottom: '4px',
+    },
+    '&.is-pressed': {
+      borderWidth: '1px',
+      paddingLeft: '4px',
+      paddingBottom: 'xs',
     },
   },
   editableInputWrapper: {
-    marginRight: '30px',
+    marginRight: '36px',
     flexGrow: 1,
+    '&.is-focused textarea': {
+      outline: 'none',
+    },
+    '& label': {
+      margin: 0,
+    },
+    '& textarea': {
+      minHeight: '45px',
+      height: '45px',
+      padding: '13px 35px 15px 18px',
+      lineHeight: '100%',
+      resize: 'vertical',
+    },
   },
   editableInpuTextArea: {
     maxHeight: '150px',
   },
   editableControlWrapper: {
     position: 'absolute',
-    right: '0',
-    top: '27.5%',
+    right: '5px',
+    top: 'calc(50% - 13px)',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   editableControlIconButton: {
-    marginRight: 'md',
+    marginRight: '20px',
     width: '20px',
     height: '20px',
   },
@@ -87,7 +122,7 @@ const sx = {
 
 export const Default = () => {
   return (
-    <Editable value="Some value...">
+    <Editable value="Inline Editable text">
       <EditablePreview />
       <EditableInput inputProps={inputProps} />
       <EditableControl controlProps={controlProps} />
@@ -113,6 +148,7 @@ const Editable = props => {
 
   const editableContextValue = {
     isEditing: isEditing || false,
+    isFocused: false,
     prevValue: '',
     value: value || '',
   };
@@ -120,9 +156,7 @@ const Editable = props => {
 
   return (
     <Box
-      sx={{
-        position: 'relative',
-      }}
+      sx={editableContext.isEditing && editableContext.isFocused ? sx.containerFocused : { padding: '1px', position: 'relative' }}
     >
       <EditableAreaProvider value={[editableContext, setEditableContext]}>
         {props.children}
@@ -139,6 +173,8 @@ const Editable = props => {
 const EditablePreview = () => {
   const [editableContext, setEditableContext] = useContext(EditableAreaContext);
   const [hasFocus, setFocus] = useState(false);
+  const editablePreview = useRef(null);
+  const { pressProps, isPressed } = usePress({ ref: editablePreview });
 
   const editablePreviewDynamicSx = {
     backgroundColor: hasFocus ? 'accent.95' : 'white',
@@ -147,6 +183,10 @@ const EditablePreview = () => {
       background: editableContext.isEditing ? 'white' : 'accent.95',
     },
   };
+
+  const { classNames } = useStatusClasses('', {
+    isPressed,
+  });
 
   useEffect(() => {
     if (hasFocus && editableContext.isEditing) {
@@ -166,6 +206,8 @@ const EditablePreview = () => {
 
   return (
     <Box
+      {...pressProps}
+      ref={editablePreview}
       tabIndex={editableContext.isEditing ? '-1' : '0'}
       display={editableContext.isEditing ? 'none' : 'flex'}
       aria-hidden={editableContext.isEditing}
@@ -176,6 +218,7 @@ const EditablePreview = () => {
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
       placeholder="Click or press enter to edit text"
+      className={classNames}
       sx={{ ...editablePreviewDynamicSx, ...sx.editablePreview }}
     >
       {editableContext.value}
@@ -195,6 +238,15 @@ const EditableInput = props => {
   const [editableContext, setEditableContext] = useContext(EditableAreaContext);
   const [prevValue, setPrevValue] = useState(editableContext.value || '');
   const [editingValue, setEditingValue] = useState(editableContext.value || '');
+
+  const { focusProps, isFocusVisible } = useFocusRing();
+
+  useEffect(() => {
+    setEditableContext({
+      ...editableContext,
+      isFocused: isFocusVisible,
+    });
+  }, [isFocusVisible]);
 
   useEffect(() => {
     setEditingValue(editableContext.value);
@@ -233,14 +285,20 @@ const EditableInput = props => {
     }
   };
 
+  const { classNames } = useStatusClasses('', {
+    isFocused: isFocusVisible,
+  });
+
   return (
     <Box
       display={editableContext.isEditing ? 'flex' : 'none'}
       aria-hidden={!editableContext.isEditing}
+      className={classNames}
       sx={sx.editableInputWrapper}
     >
       <TextAreaField
         rows={1}
+        {...focusProps}
         ref={editableInput}
         role="textbox"
         contenteditable="true"
@@ -250,7 +308,6 @@ const EditableInput = props => {
         value={editingValue}
         aria-label={ariaLabel}
         sx={sx.editableInpuTextArea}
-        isUnresizable
       />
     </Box>
   );
