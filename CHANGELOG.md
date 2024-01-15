@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.40.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.40.0...@pingux/astro@2.40.1) (2024-01-15)
+
+
+### Bug Fixes
+
+* [UIP-6569] remove proxima font files and updated font stacks ([3aedc28](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3aedc2841a4c391f3e2ab96edd742c7d43d4402c))
+
+
+
+
+
 # [2.40.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.39.0...@pingux/astro@2.40.0) (2024-01-09)
 
 
