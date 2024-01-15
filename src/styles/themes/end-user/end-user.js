@@ -152,6 +152,11 @@ const fieldHelperText = {
     },
   },
 };
+
+const fontDefault = {
+  fontFamily: '"pingito", "Helvetica Neue", Helvetica, Roboto, "Segoe UI", sans-serif',
+};
+
 const text = {
   base: {
     color: 'neutral.20',
@@ -171,14 +176,14 @@ const text = {
     fontSize: 15,
     fontWeight: 500,
     position: 'absolute',
-    fontFamily: 'proxima-nova, sans-serif',
     color: 'text.secondary',
+    ...fontDefault,
   },
   input: {
     color: 'neutral.30',
     fontSize: 15,
     fontWeight: 500,
-    fontFamily: 'proxima-nova, sans-serif',
+    ...fontDefault,
   },
 };
 const activeFloatLabel = {
@@ -228,10 +233,11 @@ const input = {
     display: 'none',
   },
 };
+
 export default {
   name: 'End User',
   fonts: {
-    standard: '"proxima-nova", "helvetica", "arial", sans-serif',
+    standard: fontDefault.fontFamily,
   },
   space: spacing,
   shadows,
