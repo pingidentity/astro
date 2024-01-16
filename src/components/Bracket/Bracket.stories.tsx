@@ -1,11 +1,13 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Bracket,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { BracketProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import BracketReadme from './Bracket.mdx';
 
@@ -25,9 +27,9 @@ export default {
       ),
     },
   },
-};
+} as Meta;
 
-export const Default = () => {
+export const Default: StoryFn<BracketProps> = () => {
   return (
     <Box p="md" ml="sm">
       <Bracket />

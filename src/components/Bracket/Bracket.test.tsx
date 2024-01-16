@@ -1,20 +1,26 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
+import { BracketProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Bracket from '.';
 
 const testId = 'test-bracket';
-const defaultProps = {
+const defaultProps: BracketProps = {
   'data-testid': testId,
 };
+
 const getComponent = (props = {}) => render(
   <Bracket {...defaultProps} {...props} />,
 );
 
 // Needs to be added to each components test file
-universalComponentTests({ renderComponent: props => <Bracket {...props} /> });
+universalComponentTests({
+  renderComponent: props => (
+    <Bracket {...defaultProps} {...props} />
+  ),
+});
 
 test('default bracket', () => {
   getComponent();

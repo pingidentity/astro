@@ -1,5 +1,6 @@
 export * from './badge';
 export * from './box';
+export * from './bracket';
 export * from './button';
 export * from './icon';
 export * from './item';
