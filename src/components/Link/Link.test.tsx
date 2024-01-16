@@ -1,13 +1,14 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { LinkProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Link from '.';
 
 const testId = 'test-link';
-const defaultProps = {
+const defaultProps: LinkProps = {
   'data-testid': testId,
   children: 'This is a link',
 };

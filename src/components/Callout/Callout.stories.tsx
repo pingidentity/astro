@@ -41,17 +41,9 @@ export default {
 export const Default: StoryFn<CalloutProps> = args => (
   <Callout {...args}>
     <Text>
-      You should be aware of this. It might be good or bad, I don’t know. You
-      may already be aware of it, but I want to be sure
-      <Link
-        href="https://pingidentity.com"
-        target="_blank"
-        aria-label={`${statuses.DEFAULT}-callout`}
-        variant="app"
-      >
-        {' '}
-        Read More
-      </Link>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
     </Text>
   </Callout>
 );
@@ -66,20 +58,20 @@ Default.parameters = {
 export const ErrorStatus: StoryFn = () => (
   <Callout status={statuses.ERROR}>
     <Text>
-      You’ve got problems. Allow me to tell you about them in some detail so
-      that you can address them
-      <Link
-        href="https://pingidentity.com"
-        target="_blank"
-        aria-label={`${statuses.ERROR}-callout`}
-        variant="app"
-      >
-        {' '}
-        Read More
-      </Link>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
+      Etiam at urna erat.
     </Text>
   </Callout>
 );
+
+ErrorStatus.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.callout.errorStatus,
+  },
+};
 
 // Avoiding using Error as the function name due to it being a JS built-in method
 ErrorStatus.storyName = 'Error';
@@ -87,36 +79,58 @@ ErrorStatus.storyName = 'Error';
 export const Success: StoryFn = () => (
   <Callout status={statuses.SUCCESS}>
     <Text>
-      It Worked! Maybe there is something else related to it working that I need
-      to explain
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
+    </Text>
+  </Callout>
+);
+
+Success.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.callout.success,
+  },
+};
+
+export const WithLink = args => (
+  <Callout {...args}>
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
+      {' '}
       <Link
         href="https://pingidentity.com"
         target="_blank"
-        aria-label={`${statuses.SUCCESS}-callout`}
+        aria-label={`${statuses.DEFAULT}-callout`}
         variant="app"
       >
-        {' '}
-        Read More
+        Learn More
       </Link>
     </Text>
   </Callout>
 );
 
+WithLink.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.callout.withLink,
+  },
+};
 export const Warning: StoryFn = () => (
   <Callout status={statuses.WARNING}>
     <Text>
-      You’ve got issues. Allow me to tell you about them in some detail so that
-      you can address them. I’ll continue to type enough text to demonstrate
-      that the Callout box will grow in height with the content
-      <Link
-        href="https://pingidentity.com"
-        target="_blank"
-        aria-label={`${statuses.WARNING}-callout`}
-        variant="app"
-      >
-        {' '}
-        Read More
-      </Link>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
     </Text>
   </Callout>
 );
+
+Warning.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.callout.warning,
+  },
+};
