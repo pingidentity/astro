@@ -1,9 +1,11 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Link } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { LinkProps } from '../../types/link';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
 import LinkReadme from './Link.mdx';
@@ -58,9 +60,9 @@ export default {
     as: 'a',
     target: '_blank',
   },
-};
+} as Meta;
 
-export const Default = ({ ...args }) => (
+export const Default: StoryFn<LinkProps> = ({ ...args }) => (
   <div>
     <Link {...args}>A link</Link>
     {' '}
