@@ -51,7 +51,11 @@ export const FIGMA_LINKS = {
     autofocus: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=46454-16768&mode=design&t=PX1Q47IuuVvOafDQ-4',
   },
   callout: {
-    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=14289-33201&t=VgqEexa1CXAXfPpp-0',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45647%3A506&mode=dev',
+    errorStatus: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=14289%3A33238&mode=dev',
+    success: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45647%3A511&mode=dev',
+    warning: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45647%3A501&mode=dev',
+    withLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=45652%3A1604&mode=dev',
   },
   card: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=335%3A1780&mode=dev',
