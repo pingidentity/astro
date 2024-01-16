@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.41.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.40.1...@pingux/astro@2.41.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* [UIP-6660] callout update to match figma specs ([a65fa4e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a65fa4e55beda896cc2e4d362cf91549ac0bd5af))
+
+
+### Features
+
+* [UIP-6687] Link: rewrite to TS ([05d0b0f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/05d0b0f763727c63fcf55fc00d88a444ba384300))
+* [UIP-6688]: Separator convert to TypeScript ([8cf0989](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8cf0989a1f73837e2a1d5dcafbe638a7742e850f))
+* [UIP-6729]: Bracket convert to TypeScript ([e6d7238](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e6d72381a85a959f8fd5a48b90e184cc8ec8f4c6))
+
+
+
+
+
 ## [2.40.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.40.0...@pingux/astro@2.40.1) (2024-01-15)
 
 
