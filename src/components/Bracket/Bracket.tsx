@@ -1,21 +1,21 @@
 import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import { Box } from '../../index';
 import { line } from '../../styles/colors';
+import { BracketProps } from '../../types';
 
-const Bracket = forwardRef((props, ref) => {
+const Bracket = forwardRef<HTMLElement, BracketProps>((props, ref) => {
   const {
     isLast,
     color,
     ...others
   } = props;
 
-  const bracketRef = useRef();
+  const bracketRef = useRef<HTMLElement>(null);
 
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => bracketRef.current);
+  useImperativeHandle(ref, () => bracketRef.current as HTMLElement);
 
   const bracketId = useMemo(() => uuid(), []);
   const bracketFillOneId = useMemo(() => uuid(), []);
@@ -38,15 +38,13 @@ const Bracket = forwardRef((props, ref) => {
             <g transform="translate(-0.85, 0)">
               <title>Layer 3</title>
               <line
-                strokeLinecap="undefined"
-                strokeLinejoin="undefined"
                 y2="0"
                 x2="1"
                 y1="10"
                 x1="1"
                 stroke={color}
                 fill="none"
-                // strokeWidth={2}
+              // strokeWidth={2}
               />
             </g>
           </svg>
@@ -65,8 +63,6 @@ const Bracket = forwardRef((props, ref) => {
           <g>
             <title>Layer 1</title>
             <line
-              strokeLinecap="undefined"
-              strokeLinejoin="undefined"
               y2="0"
               x2="0"
               y1="10"
@@ -94,13 +90,6 @@ const Bracket = forwardRef((props, ref) => {
 
 Bracket.defaultProps = {
   color: line.light,
-};
-
-Bracket.propTypes = {
-  /** A prop to set the strokes color. */
-  color: PropTypes.string,
-  /** Whether or not the bracket is the last in a series of brackets. */
-  isLast: PropTypes.bool,
 };
 
 export default Bracket;
