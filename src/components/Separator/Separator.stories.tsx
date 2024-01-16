@@ -1,9 +1,11 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Separator } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { SeparatorProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import SeparatorReadme from './Separator.mdx';
 
@@ -21,9 +23,9 @@ export default {
       ),
     },
   },
-};
+} as Meta;
 
-export const Default = ({ ...args }) => (
+export const Default: StoryFn<SeparatorProps> = ({ ...args }) => (
   <Box height="60px" alignItems="center">
     Content above
     <Separator {...args} />

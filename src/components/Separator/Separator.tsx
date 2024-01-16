@@ -1,14 +1,14 @@
 import React, { forwardRef } from 'react';
 import { useSeparator } from 'react-aria';
-import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
+import { SeparatorProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import Box from '../Box/Box';
 
-const Separator = forwardRef((props, ref) => {
+const Separator = forwardRef<HTMLElement, SeparatorProps>((props, ref) => {
   const { className, orientation, ...others } = props;
-  const { separatorProps } = useSeparator(props, ref);
+  const { separatorProps } = useSeparator(props);
   const { classNames } = useStatusClasses(className, {
     'is-vertical': orientation === ORIENTATION.VERTICAL,
     'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
@@ -21,17 +21,10 @@ const Separator = forwardRef((props, ref) => {
       variant="separator.base"
       {...others}
       {...separatorProps}
+      role="separator"
     />
   );
 });
-
-Separator.propTypes = {
-  /** Sets horizontal or vertical orientation of the divider. If
-  * vertical orientation is specified, the parent container must have the following styles:
-  * a defined height, flexDirection="row" alignItems="center"
-  */
-  orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-};
 
 Separator.defaultProps = {
   orientation: 'horizontal',
