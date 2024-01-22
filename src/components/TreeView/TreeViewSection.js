@@ -1,10 +1,12 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useOption } from '@react-aria/listbox';
+import { VisuallyHidden } from '@react-aria/visually-hidden';
 import PropTypes from 'prop-types';
 
 import { useTreeViewContext } from '../../context/TreeViewContext';
 import {
   Box,
+  Loader,
   TreeViewItem,
 } from '../../index';
 
@@ -104,6 +106,8 @@ const TreeViewSection = forwardRef((props, ref) => {
     item,
     items,
     title,
+    hasChildren,
+    loadingNodes,
     focusManager,
     onKeyDown,
     level,
@@ -114,6 +118,7 @@ const TreeViewSection = forwardRef((props, ref) => {
   const { key } = item;
 
   const treeSectionRef = useRef();
+
   /* istanbul ignore next */
   useImperativeHandle(ref, () => treeSectionRef.current);
 
@@ -131,6 +136,16 @@ const TreeViewSection = forwardRef((props, ref) => {
 
   const isExpanded = state.expandedKeys.has(key);
   const isDragging = dragState.isDragging(item.key);
+
+  const [loaderState, setLoaderState] = useState();
+
+  useEffect(() => {
+    if (loadingNodes) {
+      loadingNodes.forEach(loader => {
+        if (loader.node === title) setLoaderState(loader.loadingState);
+      });
+    }
+  }, [loadingNodes, title]);
 
   const onKeyDownFunction = e => {
     onKeyDownSection(e,
@@ -175,6 +190,7 @@ const TreeViewSection = forwardRef((props, ref) => {
           isDragging={isDragging}
           isExpanded={isExpanded}
           onKeyDown={onKeyDownFunction}
+          hasChildren={hasChildren}
         />
         { isExpanded && (
           <Box
@@ -185,30 +201,35 @@ const TreeViewSection = forwardRef((props, ref) => {
               '& :focus': { border: 'none' },
             }}
           >
-            { Array.from(items).map((_item, _index) => (
-              SectionOrItemRender(
-                _item.children?.length > 0,
-                <TreeViewSection
-                  item={_item}
-                  items={_item.children}
-                  title={_item.value.title}
-                  key={_item.value.title}
-                  focusManager={focusManager}
-                  level={level + 1}
-                  position={_index}
-                  setSize={items.length}
-                />,
-                <TreeViewItem
-                  item={_item}
-                  title={_item.value.title}
-                  key={_item.value.title}
-                  focusManager={focusManager}
-                  level={level + 1}
-                  position={_index}
-                  setSize={items.length}
-                />,
-              )
-            ))}
+            <VisuallyHidden aria-live="polite">{loaderState === false && (isExpanded && items.length > 0 ? ' Loading successful' : 'Loading unsuccessful')}</VisuallyHidden>
+            { loaderState ? <Loader color="active" ml="31px" />
+              : (Array.from(items).map((_item, _index) => (
+                SectionOrItemRender(
+                  // _item.value.items?.length > 0 || _item.value.items,
+                  _item.children?.length > 0 || _item.value.items,
+                  <TreeViewSection
+                    item={_item}
+                    items={_item.children}
+                    title={_item.value.title}
+                    key={_item.value.title}
+                    hasChildren={_item.value.items && true}
+                    loadingNodes={loadingNodes}
+                    focusManager={focusManager}
+                    level={level + 1}
+                    position={_index}
+                    setSize={items.length}
+                  />,
+                  <TreeViewItem
+                    item={_item}
+                    title={_item.value.title}
+                    key={_item.value.title}
+                    focusManager={focusManager}
+                    level={level + 1}
+                    position={_index}
+                    setSize={items.length}
+                  />,
+                )
+              )))}
           </Box>
         )}
       </Box>
@@ -226,6 +247,8 @@ TreeViewSection.propTypes = {
     key: PropTypes.string,
   }),
   title: PropTypes.string,
+  hasChildren: PropTypes.bool,
+  loadingNodes: PropTypes.arrayOf(PropTypes.shape({})),
   focusManager: PropTypes.shape({}),
   onKeyDown: PropTypes.func,
   level: PropTypes.number,
