@@ -104,6 +104,7 @@ const TreeView = forwardRef((props, ref) => {
     tree,
     disabledKeys,
     onExpandedChange,
+    loadingNodes,
     onDragStart: onDragStartProp,
     onDrop: onDropProp,
     onKeyDown,
@@ -141,13 +142,13 @@ const TreeView = forwardRef((props, ref) => {
     const returnArray = [];
 
     const checkItemNesting = item => {
-      if (item.value?.children?.length > 0) {
+      if (item.value?.children?.length > 0 || item?.props?.hasChildren) {
         return {
           isTopLevel: true,
           hasChildren: true,
         };
       }
-      if (item.children?.length > 0) {
+      if (item.children?.length > 0 || item.value?.items) {
         return {
           isTopLevel: false,
           hasChildren: true,
@@ -188,6 +189,7 @@ const TreeView = forwardRef((props, ref) => {
         };
         returnArray.push(obj);
         const { hasChildren, isTopLevel } = checkItemNesting(data[i]);
+
         if (checkSection(state.expandedKeys.has(data[i].key), hasChildren) === true) {
           if (isTopLevel) {
             loop(data[i].value?.children, data[i].key, buildParentKeys(parentKey, parentKeys));
@@ -351,12 +353,14 @@ const TreeView = forwardRef((props, ref) => {
         <TreeViewWrapper>
           {Array.from(state.collection).map((item, index) => (
             SectionOrItemRender(
-              item.value.children.length > 0,
+              item.props.hasChildren || item.value.children.length > 0,
               <TreeViewSection
                 item={item}
                 items={item.value.children}
                 title={item.props.title}
                 key={item.props.title}
+                hasChildren={item.props.hasChildren}
+                loadingNodes={loadingNodes}
                 onKeyDown={onKeyDown}
                 level={level + 1}
                 setSize={state.collection.size}
@@ -398,6 +402,8 @@ TreeView.propTypes = {
   items: isIterableProp,
   /** String that describes the treeview when using a screen reader. */
   'aria-label': PropTypes.string,
+  /** Determines whether the loading indicator is shown for the expanded node. */
+  loadingNodes: PropTypes.arrayOf(PropTypes.shape({})),
   /** Handler that is called when a key is pressed. */
   onKeyDown: PropTypes.func,
   /** Callback that is called when the dragging action starts. */

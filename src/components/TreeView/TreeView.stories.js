@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Item, TreeView, useTreeData } from '../../index';
@@ -87,6 +87,33 @@ const data = [
   },
 ];
 
+const initialAsyncItems = [
+  {
+    title: 'Item1',
+    items: [],
+  },
+  {
+    title: 'Item2',
+    items: [],
+  },
+  {
+    title: 'Item3',
+  },
+  {
+    title: 'Item4',
+    items: [],
+  },
+  {
+    title: 'Item5',
+    items: [],
+  },
+  {
+    title: 'Item6',
+    items: [],
+  },
+];
+
+
 export const Default = args => {
   const tree = useTreeData({
     initialItems: data,
@@ -102,6 +129,86 @@ export const Default = args => {
           items={section.children}
           title={section.value?.title}
         />
+      )}
+    </TreeView>
+  );
+};
+
+export const AsyncLoading = args => {
+  const [expandedKeys, setExpandedKeys] = useState(new Set([]));
+  const [childNode, setChildNode] = useState(1);
+
+  const [loadingNodes, setLoadingNodes] = useState([]);
+
+  const getMockData = async () => {
+    setChildNode(childNode + 1);
+
+    // emulate loading state
+    await new Promise(resolve => setTimeout(resolve, childNode ? 2000 : 3000));
+
+    return [
+      { title: `Child Node ${childNode}`, items: [] },
+      { title: `Single Node ${childNode}` },
+    ];
+  };
+
+  const tree = useTreeData({
+    initialItems: initialAsyncItems,
+    getKey: item => item.title,
+    getChildren: item => item.items,
+
+  });
+
+  const handleExpand = async node => {
+    if (expandedKeys.size < 0 || expandedKeys.size < node.size) {
+      const expandedNode = Array.from(node).pop();
+      if (tree.getItem(expandedNode)?.children?.length <= 0) {
+        setLoadingNodes([...loadingNodes, { node: expandedNode, loadingState: true }]);
+
+        const list = await getMockData();
+
+        list.forEach(item => {
+          tree.insert(expandedNode, 1, item);
+        });
+
+        setExpandedKeys(node);
+      }
+    } else if (expandedKeys.size > node.size) {
+      setExpandedKeys(node);
+    }
+  };
+
+  useEffect(() => {
+    loadingNodes.forEach((item, index) => {
+      const isFulfilled = tree.getItem(item.node)?.children?.length > 0;
+
+      if (isFulfilled) {
+        const tempArray = [...loadingNodes];
+
+        tempArray.splice(index, 1, { node: item.node,
+          loadingState: false });
+        setLoadingNodes(tempArray);
+      }
+    });
+  }, [expandedKeys]);
+
+  return (
+    <TreeView
+      {...args}
+      items={tree.items}
+      tree={tree}
+      onExpandedChange={handleExpand}
+      loadingNodes={loadingNodes}
+    >
+      {section => (
+
+        <Item
+          key={section.key}
+          items={section.children}
+          title={section.value.title}
+          hasChildren={section.value.items && true}
+        />
+
       )}
     </TreeView>
   );
