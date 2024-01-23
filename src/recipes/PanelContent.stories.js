@@ -35,7 +35,7 @@ import UserImage from '../utils/devUtils/assets/UserImage.png';
 import statuses from '../utils/devUtils/constants/statuses';
 
 export default {
-  title: 'Experimental/PanelContent',
+  title: 'Recipes/Panel Content',
   parameters: {
     docs: {
       source: {
