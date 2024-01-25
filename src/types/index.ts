@@ -2,6 +2,7 @@ export * from './badge';
 export * from './box';
 export * from './button';
 export * from './icon';
+export * from './iconBadge';
 export * from './item';
 export * from './loader';
 export * from './popoverContainer';

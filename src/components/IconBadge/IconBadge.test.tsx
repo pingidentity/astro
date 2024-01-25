@@ -56,3 +56,11 @@ test('default iconbadge render', () => {
   const iconButton = screen.getByTestId(testId);
   expect(iconButton).toBeInTheDocument();
 });
+
+test('iconbadge borderRadius renders correctly', () => {
+  const circleSize = 20;
+  getComponent({ circleSize: 20 });
+  const icons = screen.getAllByRole('img');
+  const secondIcon = icons[1].closest('span');
+  expect(secondIcon).toHaveStyle(`border-radius: ${circleSize / 2}px`);
+});

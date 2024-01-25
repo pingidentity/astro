@@ -1,6 +1,7 @@
 import React from 'react';
 import GroupIcon from '@pingux/mdi-react/AccountGroupIcon';
 import ArrowIcon from '@pingux/mdi-react/ArrowTopRightThickIcon';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -9,7 +10,8 @@ import {
   Icon,
   IconBadge,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { IconBadgeProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import IconBadgeReadme from './IconBadge.mdx';
 
@@ -30,9 +32,9 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<IconBadgeProps> = args => (
   <Box>
     <IconBadge {...args} baseSize={25} circleSize={15}>
       <Icon
