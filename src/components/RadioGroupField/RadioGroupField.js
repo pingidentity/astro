@@ -54,7 +54,7 @@ const RadioGroupField = forwardRef((props, ref) => {
         aria-labelledby={helperText && helperTextId}
         data-testid="radioGroupWrapper"
       >
-        <RadioContext.Provider value={{ isDisabled, ...state }}>
+        <RadioContext.Provider value={state}>
           {children}
         </RadioContext.Provider>
       </Box>
