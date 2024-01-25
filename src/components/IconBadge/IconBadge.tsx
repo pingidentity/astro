@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
+import { IconBadgeProps } from '../../types';
 
-const IconBadge = forwardRef((props, ref) => {
+const IconBadge = forwardRef<HTMLElement, IconBadgeProps>((props, ref) => {
   const {
     children,
     sx,
@@ -36,7 +36,7 @@ const IconBadge = forwardRef((props, ref) => {
           position: 'absolute',
           bottom: '-5.5px',
           right: '1px',
-          borderRadius: `${circleSize / 2}px`,
+          borderRadius: `${circleSize !== undefined && circleSize / 2}px`,
           height: `${circleSize}px`,
           width: `${circleSize}px`,
           alignItems: 'center',
@@ -49,24 +49,6 @@ const IconBadge = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-IconBadge.propTypes = {
-  /** JSX styling that is passed into the component. */
-  sx: PropTypes.shape({}),
-  /** Color that is applied to the circular background.
-   * Default is white.
-   */
-  circleColor: PropTypes.string,
-  /**
-   * The size of the base Icon. When given a number value, it will be converted to pixels.
-   */
-  baseSize: PropTypes.number,
-  /**
-   * The size of the Icon within the circle.
-   * When given a number value, it will be converted to pixels.
-   */
-  circleSize: PropTypes.number,
-};
 
 IconBadge.defaultProps = {
   circleColor: 'white',

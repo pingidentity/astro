@@ -4,6 +4,7 @@ export * from './bracket';
 export * from './button';
 export * from './card';
 export * from './icon';
+export * from './iconBadge';
 export * from './item';
 export * from './link';
 export * from './loader';
