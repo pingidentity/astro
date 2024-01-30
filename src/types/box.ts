@@ -9,4 +9,6 @@ export interface BoxProps extends StyleProps, DOMAttributes {
   isRow?: boolean,
   /** Whether the box is disabled. */
   isDisabled?: boolean,
+  /** Whether the box is focused. */
+  isFocused?: boolean,
 }

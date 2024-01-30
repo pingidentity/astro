@@ -1,14 +1,19 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
+import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Card,
+  CardProps,
+  SxObject,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import CardReadme from './Card.mdx';
+import { cardArgTypes } from './cardAttributes';
 
 export default {
   title: 'Components/Card',
@@ -25,21 +30,12 @@ export default {
     },
   },
   argTypes: {
-    children: {
-      description: 'Card content.',
-      table: {
-        type: {
-        },
-      },
-      control: {
-        type: 'text',
-      },
-    },
+    ...cardArgTypes,
   },
   args: {
     children: 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut at enim nunc. Cras congue consequat odio, ac sodales lacus imperdiet quis. In id ex eu lorem sollicitudin hendrerit feugiat ultrices elit. Curabitur imperdiet libero vitae luctus blandit. Ut ac dignissim tortor. Pellentesque convallis eu metus vitae mollis. Donec sapien felis, laoreet eu egestas eu, blandit quis tellus. Donec luctus suscipit nibh, et tincidunt nisl facilisis ut. Mauris molestie purus at lectus venenatis, ac ultrices felis ultrices.',
   },
-};
+} as Meta;
 
 export const Default = args => (
   <Card {...args} />
@@ -52,8 +48,8 @@ Default.parameters = {
   },
 };
 
-export const CardRow = args => {
-  const sx = {
+export const CardRow: StoryFn<CardProps> = args => {
+  const sx: SxObject = {
     li: {
       display: 'inline',
       flexGrow: 1,
@@ -87,7 +83,7 @@ CardRow.parameters = {
 };
 
 export const InteractiveCard = () => {
-  const sx = {
+  const sx: ThemeUICSSObject = {
     alignContent: 'center',
     height: '221px',
     justifyContent: 'center',

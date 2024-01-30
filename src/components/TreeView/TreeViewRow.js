@@ -29,6 +29,7 @@ const TreeViewRow = forwardRef((props, ref) => {
     item,
     items,
     isExpanded,
+    hasChildren,
     isDragging,
     onKeyDown,
     ...others
@@ -187,7 +188,7 @@ const TreeViewRow = forwardRef((props, ref) => {
         onKeyDown(e);
       }}
     >
-      { items?.length > 0 && (
+      { (items?.length > 0 || hasChildren) && (
         <IconButtonToggle
           onToggle={pressIcon}
           isToggled={isExpanded}
@@ -237,6 +238,7 @@ TreeViewRow.propTypes = {
   }),
   mainIcon: PropTypes.elementType,
   lastIcon: PropTypes.elementType,
+  hasChildren: PropTypes.bool,
 };
 
 export default TreeViewRow;

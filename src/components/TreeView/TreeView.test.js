@@ -161,6 +161,55 @@ const TreeViewComponent = forwardRef((props, ref) => {
   );
 });
 
+const asyncData = [
+  {
+    title: 'Item1',
+    items: [],
+  },
+  {
+    title: 'Item2',
+    items: [],
+  },
+  {
+    title: 'Item3',
+  },
+  {
+    title: 'Item4',
+    items: [],
+  },
+];
+
+const AsyncTreeViewComponent = props => {
+  const tree = useTreeData({
+    initialItems: asyncData,
+    getKey: item => item.title,
+    getChildren: item => item.items,
+
+  });
+  const loadingNodes = [];
+
+  return (
+    <TreeView
+      {...defaultProps}
+      {...props}
+      items={tree.items}
+      tree={tree}
+      isLoading={loadingNodes}
+      aria-label="Example Tree"
+    >
+      {section => (
+        <Item
+          key={section.key}
+          items={section.children}
+          title={section.key}
+          hasChildren={section.value.items && true}
+          customProp={{ testp: 1 }}
+        />
+      )}
+    </TreeView>
+
+  );
+};
 TreeViewComponent.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({})),
 };
@@ -316,6 +365,49 @@ test('disabledKeys prop disables items in the tree -- rendering them unclickable
 
   expect(thisItem).not.toHaveClass('is-selected');
   expect(thisItem).toHaveAttribute('aria-selected', 'false');
+});
+
+describe('loadingState', () => {
+  test('should not render loader if tree item is not expanded', () => {
+    render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item2', loadingState: true }]} />);
+
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  test('should render loader if tree item is expanded', () => {
+    render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item1', loadingState: true }]} />);
+
+    const buttons = screen.queryAllByRole('button');
+    userEvent.click(buttons[0]);
+    const listItems = screen.getAllByRole('row');
+    const thisItem = listItems[0];
+    const loader = within(thisItem).getByRole('alert');
+
+    expect(loader).toBeInTheDocument();
+  });
+
+  test('should hide loader after children are added to the tree item', async () => {
+    render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item1', loadingState: true }]} />);
+
+    const buttons = screen.queryAllByRole('button');
+    fireEvent.click(buttons[0]);
+    render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item1', loadingState: false }]} />);
+
+    fireEvent.click(buttons[0]);
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  test('should add loader to item without children and not other expanded items', async () => {
+    render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item1', loadingState: true }, { node: 'Item2', loadingState: true }, { node: 'Item4', loadingState: false }]} />);
+
+    const buttons = screen.queryAllByRole('button');
+    userEvent.click(buttons[0]);
+    userEvent.click(buttons[1]);
+    userEvent.click(buttons[2]);
+
+    const loader = screen.getAllByRole('alert');
+    expect(loader).toHaveLength(2);
+  });
 });
 
 test('displays correct aria attributes', () => {
