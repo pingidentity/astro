@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.41.0...@pingux/astro@2.42.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* [UIP-6731] unique id for aria-labelledby ([e94cd4e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e94cd4eb82457c08b3b9f423199cc6702ab41ee8))
+* [UIP-6744] Astro Radio fix name error ([ab4fc06](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab4fc06ecf580b5c8cbe865ef924325f6e417563))
+
+
+### Features
+
+* [UIP-6473] TreeView asynchronously load children ([310c14d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/310c14d3be546a6c7a9abcee4e44610266e66ef8))
+* [UIP-6562] Move Panel Content recipe out of experimental ([dee1bbf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dee1bbff33bac06781d22b20cff1ddf5bd2cc8c6))
+* [UIP-6684] Convert IconBadge to TS ([465ab11](https://gitlab.corp.pingidentity.com/ux/pingux/commit/465ab117cae56e31ec100047a65214b9c40278ad))
+
+
+
+
+
 # [2.41.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.40.1...@pingux/astro@2.41.0) (2024-01-16)
 
 
