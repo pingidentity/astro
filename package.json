@@ -26,6 +26,7 @@
     "chromatic": "npx chromatic",
     "coverage": "yarn test --coverage",
     "coverage-ci": "yarn test --coverage --ci",
+    "coverage-jenkins": "yarn coverage-ci --maxWorkers=25%",
     "demo": "rm -rf ./demo && storybook build -o demo",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "start": "storybook dev -p 6006",
