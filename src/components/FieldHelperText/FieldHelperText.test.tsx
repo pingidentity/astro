@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { FieldHelperTextProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -8,10 +9,11 @@ import FieldHelperText from '.';
 
 const testId = 'test-field';
 const children = 'example text';
-const defaultProps = {
+const defaultProps: FieldHelperTextProps = {
   'data-testid': testId,
   children,
 };
+
 const getComponent = (props = {}, { renderFn = render } = {}) => (
   renderFn(<FieldHelperText {...defaultProps} {...props} />)
 );
@@ -29,12 +31,12 @@ test('basic field message', () => {
   expect(fieldHelperText).toBeInTheDocument();
 });
 
-test('status field message', () => {
-  const { rerender } = getComponent();
-  const fieldHelperText = screen.getByText(children);
-
+describe('status field message', () => {
   Object.values(statuses).forEach(status => {
-    getComponent({ status }, { renderFn: rerender });
-    expect(fieldHelperText).toHaveClass(`is-${status}`);
+    test('applies class', () => {
+      getComponent({ status });
+      const fieldHelperText = screen.getByText(children);
+      expect(fieldHelperText).toHaveClass(`is-${status}`);
+    });
   });
 });

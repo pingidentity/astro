@@ -3,6 +3,7 @@ export * from './box';
 export * from './bracket';
 export * from './button';
 export * from './card';
+export * from './fieldHelperText';
 export * from './icon';
 export * from './iconBadge';
 export * from './item';
