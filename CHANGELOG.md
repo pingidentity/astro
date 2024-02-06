@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.42.0...@pingux/astro@2.43.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* [UIP-6759] Add link content to aria-label for Callout ([a104fd4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a104fd47f58bea2c070a619f5ec794778f4cde91))
+
+
+### Features
+
+* [UIP-6685] convert Image to TS ([e942854](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e942854ba47e7572c0fc38b221101b6814970688))
+* [UIP-6689]: Table: convert to TypeScript ([5904bd2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5904bd217f0243b2a3ab1df2f8b82ea179336767))
+* [UIP-6723] TooltipTrigger convert to TS ([f27f12e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f27f12e2a4381bf4a36a77f2db13359b467fcc44))
+* [UIP-6727]: FieldHelperText convert to TypeScript ([ab6688a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab6688a2fbfb2d80678504720053402611c3c339))
+* [UIP-6784] Move experimental overview docs to top in Storybook ([8474b10](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8474b1063c3d1b799bbbac9de34b430fb95238c5))
+
+
+
+
+
 # [2.42.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.41.0...@pingux/astro@2.42.0) (2024-01-30)
 
 
