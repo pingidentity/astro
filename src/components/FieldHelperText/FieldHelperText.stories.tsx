@@ -1,6 +1,8 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { FieldHelperText } from '../../index';
+import { FieldHelperTextProps } from '../../types';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export default {
@@ -9,9 +11,9 @@ export default {
   argTypes: {
     ...statusArgTypes,
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<FieldHelperTextProps> = (args: FieldHelperTextProps) => (
   <FieldHelperText {...args}>
     Look at me!
   </FieldHelperText>
