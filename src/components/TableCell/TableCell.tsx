@@ -12,7 +12,7 @@ import Box from '../Box';
  *
  */
 
-const TableCell = forwardRef<HTMLDivElement, TableCellProps>((props, ref) => {
+const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>((props, ref) => {
   const { children, isHeading, ...others } = props;
   return (
     <Box ref={ref} variant={isHeading ? 'table.head' : 'table.data'} as={isHeading ? 'th' : 'td'} {...others}>
