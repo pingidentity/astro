@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.42.0",
+  "version": "2.43.0-alpha.7",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "chromatic": "npx chromatic",
     "coverage": "yarn test --coverage",
     "coverage-ci": "yarn test --coverage --ci",
+    "coverage-jenkins": "yarn coverage-ci --maxWorkers=25%",
     "demo": "rm -rf ./demo && storybook build -o demo",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "start": "storybook dev -p 6006",

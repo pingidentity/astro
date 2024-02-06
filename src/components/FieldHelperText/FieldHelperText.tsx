@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+import { FieldHelperTextProps } from '../../types';
+import { statusDefaultProp } from '../../utils/docUtils/statusProp';
 import Text from '../Text';
 
 /**
@@ -11,7 +11,8 @@ import Text from '../Text';
  * **NOTE**: Specialized field components contain built-in support for helper text. It's
  * recommended to use those instead of a standalone `FieldHelperText`.
  */
-const FieldHelperText = forwardRef((props, ref) => {
+
+const FieldHelperText = forwardRef<HTMLDivElement, FieldHelperTextProps>((props, ref) => {
   const { className, status, id, ...others } = props;
   const { classNames } = useStatusClasses(className, {
     [`is-${status}`]: true,
@@ -29,12 +30,6 @@ const FieldHelperText = forwardRef((props, ref) => {
     />
   );
 });
-
-FieldHelperText.propTypes = {
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string,
-  ...statusPropTypes,
-};
 
 FieldHelperText.defaultProps = {
   ...statusDefaultProp,

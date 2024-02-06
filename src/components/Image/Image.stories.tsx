@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StoryFn } from '@storybook/react';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -46,11 +47,11 @@ export default {
   },
 };
 
-export const Default = ({ ...args }) => <Image {...args} alt="Ping identity square logo" />;
+export const Default: StoryFn = ({ ...args }) => <Image {...args} alt="Ping identity square logo" />;
 
-export const Avatar = () => <Image src={pingImg} variant="images.avatar" alt="Ping identity round avatar" />;
+export const Avatar: StoryFn = () => <Image src={pingImg} variant="images.avatar" alt="Ping identity round avatar" />;
 
-export const CustomSizeAndRadius = () => (
+export const CustomSizeAndRadius: StoryFn = () => (
   <Image
     src={chiefIdentityChampions}
     sx={{
@@ -63,9 +64,9 @@ export const CustomSizeAndRadius = () => (
   />
 );
 
-export const Disabled = () => <Image src={pingImg} isDisabled alt="Ping identity square logo" />;
+export const Disabled: StoryFn = () => <Image src={pingImg} isDisabled alt="Ping identity square logo" />;
 
-export const FallbackImage = () => (
+export const FallbackImage: StoryFn = () => (
   <Image
     fallbackImage={pingImg}
     fallbackAlt="Ping Identity"
@@ -79,8 +80,8 @@ export const FallbackImage = () => (
 );
 
 
-export const WithSkeletonLoadSuccess = ({ useLocalSrc }) => {
-  const imageSrc = useLocalSrc
+export const WithSkeletonLoadSuccess: StoryFn = () => {
+  const imageSrc = isChromatic()
     ? pingImg
     : 'https://app.requestly.io/delay/3000/https://picsum.photos/150/150';
 
@@ -96,11 +97,7 @@ export const WithSkeletonLoadSuccess = ({ useLocalSrc }) => {
   );
 };
 
-WithSkeletonLoadSuccess.args = {
-  useLocalSrc: isChromatic(),
-};
-
-export const WithSkeletonLoadTimeout = () => {
+export const WithSkeletonLoadTimeout: StoryFn = () => {
   return (
     <Image
       src="https://app.requestly.io/delay/7000/https://picsum.photos/150/150"
@@ -113,7 +110,7 @@ export const WithSkeletonLoadTimeout = () => {
   );
 };
 
-export const UpdatingImageSrc = () => {
+export const UpdatingImageSrc: StoryFn = () => {
   const [image, setImage] = useState(chiefIdentityChampions);
   const handleButtonPress = () => {
     const src = image === pingImg ? chiefIdentityChampions : pingImg;

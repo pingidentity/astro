@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import { keyframes } from '@emotion/react';
 import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 import { Image as ThemeUIImage } from 'theme-ui';
 
 import {
@@ -20,12 +19,13 @@ import {
 } from '../../hooks';
 import { Box } from '../../index';
 import { neutral } from '../../styles/colors';
+import { ImageProps } from '../../types/image';
 
-const Image = forwardRef((props, ref) => {
+const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
   const {
     className,
     fallbackImage,
-    fallbackTimeout,
+    fallbackTimeout = 5000,
     isDisabled,
     src,
     alt,
@@ -95,7 +95,13 @@ const Image = forwardRef((props, ref) => {
     }
   };
 
-  useFallbackImage({ onImageLoad, onImageError, onFallbackTimeout, ...props });
+  useFallbackImage({
+    onImageLoad,
+    onImageError,
+    onFallbackTimeout,
+    fallbackTimeout,
+    src: src || '',
+  });
 
   const skeletonFrames = keyframes`
   0% {
@@ -108,24 +114,20 @@ const Image = forwardRef((props, ref) => {
 
   const skeletonSx = {
     backgroundImage: !isLoading && 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\'%3E%3Crect x=\'0\' y=\'0\' width=\'150\' height=\'150\' fill=\'%23e4e6e9\' /%3E%3C/svg%3E")',
-    // eslint-disable-next-line react/prop-types
     width: sx?.width || '100%',
-    // eslint-disable-next-line react/prop-types
     height: sx?.height || '100%',
     animation:
       isLoading && `${skeletonFrames} 1.5s ease-in-out 0.5s infinite alternate`,
   };
 
-  const Skeleton = ({ children }) => (
+  const Skeleton = () => (
     <Box
       role="img"
       sx={skeletonSx}
       data-testid="skeleton-image"
       aria-busy={isLoading}
       aria-label={isLoading ? 'Image is loading' : 'Loading of image timed out'}
-    >
-      {children}
-    </Box>
+    />
   );
 
   const themeUiImage = (
@@ -149,38 +151,9 @@ const Image = forwardRef((props, ref) => {
   return themeUiImage;
 });
 
-Image.propTypes = {
-  /** The styling variation of the image. */
-  variant: PropTypes.string,
-  /** Whether the image is disabled; applies disabled styling. */
-  isDisabled: PropTypes.bool,
-  /**  The HTML element used to render the image. */
-  as: PropTypes.string,
-  /**  Source of image(Image path). */
-  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**  Load failure fault-tolerant src
-   * We do recommend using JS File or Blob object as an src for the "fallbackImage".
-   * Here is some documentation on how to create a blob image [https://developer.mozilla.org/en-US/docs/Web/API/Blob].
-   * Also please note that URLs are accepted, but if the URL cannot be loaded,
-   * the fallback image will not be rendered so it's not recommended.
-   * */
-  fallbackImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**  Time in milliseconds that component should wait for a response from src address. */
-  fallbackTimeout: PropTypes.number,
-  /** Descriptive text for an image. This is *highly* recommended in most cases.
-   * See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-alt).
-   * */
-  alt: PropTypes.string,
-  /**  Load failure fault-tolerant alt */
-  fallbackAlt: PropTypes.string,
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-};
-
 Image.defaultProps = {
   isDisabled: false,
   as: 'img',
-  fallbackTimeout: 5000,
 };
 
 Image.displayName = 'Image';

@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
+import { TableCaptionProps } from '../../types';
 import Box from '../Box';
-
 /**
  * Basic TableCaption component.
  *
@@ -11,7 +11,7 @@ import Box from '../Box';
  *
  */
 
-const TableCaption = forwardRef((props, ref) => {
+const TableCaption = forwardRef<HTMLTableCaptionElement, TableCaptionProps>((props, ref) => {
   const { children, ...others } = props;
   return (
     <Box ref={ref} variant="table.caption" as="caption" {...others}>

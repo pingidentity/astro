@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -10,6 +11,7 @@ import {
   TableRow,
   Text,
 } from '../../index';
+import { TableProps } from '../../types';
 
 import TableReadme from './Table.mdx';
 
@@ -26,7 +28,7 @@ export default {
       ),
     },
   },
-};
+} as Meta;
 
 const caption = 'Populations of Countries';
 
@@ -57,7 +59,7 @@ const objects = [
   },
 ];
 
-export const Default = () => {
+export const Default: StoryFn<TableProps> = () => {
   return (
     <Table>
       <TableCaption>

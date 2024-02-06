@@ -3,16 +3,22 @@ import userEvent from '@testing-library/user-event';
 
 import {
   Button,
+  ButtonProps,
   Tooltip,
   TooltipTrigger,
+  TooltipTriggerProps,
 } from '../../index';
 import theme from '../../styles/theme';
 import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
-const getComponent = (props = {}) => render((
-  <TooltipTrigger {...props}>
-    <Button {...props.buttonProps}>Mock Button</Button>
+interface getComponentProps extends TooltipTriggerProps {
+  buttonProps?: ButtonProps;
+}
+
+const getComponent = ({ buttonProps, ...others }: getComponentProps = {}) => render((
+  <TooltipTrigger {...others}>
+    <Button {...buttonProps}>Mock Button</Button>
     <Tooltip>Tooltip Content</Tooltip>
   </TooltipTrigger>
 ));

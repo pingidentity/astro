@@ -2,15 +2,15 @@ import React from 'react';
 import theme from '../src/styles/theme';
 import yourTheme from './AstroTheme';
 import { withConsole } from '@storybook/addon-console';
-import { AstroProvider} from '../src/index';
+import { AstroProvider } from '../src/index';
 import "@storybook/react";
 
 const withThemeProvider = (Story, context) => (
-    <AstroProvider theme={theme} bg="transparent">
-      <div style={{ padding: "50px" }}>
-        <Story {...context} />
-      </div>
-    </AstroProvider>
+  <AstroProvider theme={theme} bg="transparent">
+    <div style={{ padding: "50px" }}>
+      <Story {...context} />
+    </div>
+  </AstroProvider>
 );
 
 const withConsoleAddon = (storyFn, context) => withConsole()(storyFn)(context);
@@ -70,6 +70,11 @@ export const parameters = {
           'TimeZonePicker',
           'Base Components',
         ],
+        'Experimental',
+        [
+          'Overview',
+          '*',
+        ]
       ],
     },
   },

@@ -103,7 +103,7 @@ export const WithLink = args => (
       <Link
         href="https://pingidentity.com"
         target="_blank"
-        aria-label={`${statuses.DEFAULT}-callout`}
+        aria-label={`${statuses.SUCCESS}-callout read more`}
         variant="app"
       >
         Learn More
