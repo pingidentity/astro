@@ -8,3 +8,4 @@ export * from './popoverContainer';
 export * from './shared';
 export * from './tableCell';
 export * from './text';
+export * from './tooltipTrigger';
