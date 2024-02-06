@@ -6,5 +6,5 @@ export * from './item';
 export * from './loader';
 export * from './popoverContainer';
 export * from './shared';
-export * from './tableCell';
+export * from './table';
 export * from './text';

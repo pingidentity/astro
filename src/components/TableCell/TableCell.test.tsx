@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
+import { TableCellProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Table from '../Table';
 import TableBody from '../TableBody';
@@ -10,7 +11,7 @@ import TableCell from './TableCell';
 
 const testId = 'test-cell';
 
-const defaultProps = {
+const defaultProps: TableCellProps = {
   'data-testid': testId,
 };
 

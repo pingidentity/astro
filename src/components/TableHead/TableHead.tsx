@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
+import { TableHeadProps } from '../../types';
 import Box from '../Box';
-
 /**
  * TableHead component.
  *
@@ -11,7 +11,7 @@ import Box from '../Box';
  *
  */
 
-const TableHead = forwardRef((props, ref) => {
+const TableHead = forwardRef<HTMLTableSectionElement, TableHeadProps>((props, ref) => {
   const { children, ...others } = props;
   return (
     <Box

@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 
+import { TableRowProps } from '../../types';
 import Box from '../Box';
 
 /**
@@ -11,7 +12,7 @@ import Box from '../Box';
  *
  */
 
-const TableRow = forwardRef((props, ref) => {
+const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>((props, ref) => {
   const { children, ...others } = props;
   return (
     <Box
