@@ -13,3 +13,4 @@ export * from './separator';
 export * from './shared';
 export * from './table';
 export * from './text';
+export * from './tooltipTrigger';

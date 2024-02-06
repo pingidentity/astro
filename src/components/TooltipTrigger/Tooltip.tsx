@@ -1,27 +1,27 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { useTooltip } from 'react-aria';
 
 import { TooltipContext } from '../../context/TooltipContext/index';
+import { useLocalOrForwardRef } from '../../hooks';
+import { DOMAttributes, TooltipProps } from '../../types';
 import Text from '../Text';
 
-const Tooltip = forwardRef((props, ref) => {
+const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
   const {
     children,
     ...others
   } = props;
-  const { state } = useContext(TooltipContext);
+  const state = useContext(TooltipContext);
   const { tooltipProps } = useTooltip(props, state);
-  const tooltipRef = useRef();
 
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => tooltipRef.current);
+  const tooltipRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   return (
     <Text
       ref={tooltipRef}
       variant="variants.tooltip.container"
       p="sm"
-      {...tooltipProps}
+      {...(tooltipProps as DOMAttributes)}
       {...others}
     >
       {children}
