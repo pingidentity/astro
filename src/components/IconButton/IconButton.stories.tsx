@@ -4,6 +4,7 @@ import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon';
 import PencilIcon from '@pingux/mdi-react/PencilIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -18,7 +19,8 @@ import {
   TableRow,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { IconButtonProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import IconButtonReadme from './IconButton.mdx';
 import { iconButtonArgs, iconButtonArgTypes } from './iconButtonAttributes';
@@ -42,11 +44,11 @@ export default {
   },
   argTypes: iconButtonArgTypes,
   args: iconButtonArgs,
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<IconButtonProps> = (args: IconButtonProps) => (
   <IconButton aria-label="default icon button" {...args}>
-    <Icon icon={CreateIcon} size={args.size} title={{ name: 'Create Icon' }} />
+    <Icon icon={CreateIcon} title={{ name: 'Create Icon' }} />
   </IconButton>
 );
 
@@ -62,12 +64,12 @@ export const WithTooltip = () => (
     <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
   </IconButton>
 );
+
 export const Disabled = () => (
   <IconButton aria-label="disabled icon button" isDisabled>
     <Icon icon={CreateIcon} title={{ name: 'Create Icon' }} />
   </IconButton>
 );
-
 
 export const Sizes = () => (
   <Table>

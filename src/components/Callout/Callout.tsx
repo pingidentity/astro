@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { Box } from '../..';
+import { Box, IconSize } from '../..';
 import { CalloutProps } from '../../types/callout';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { NoticeIcon } from '../Icon/NoticeIcon';
@@ -17,7 +17,7 @@ const calloutProps = {
 const defaultIconProps = {
   mr: 'md',
   ml: 'md',
-  size: 'md',
+  size: 'md' as IconSize,
 };
 
 /**

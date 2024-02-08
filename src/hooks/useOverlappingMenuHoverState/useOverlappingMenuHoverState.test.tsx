@@ -14,7 +14,7 @@ import useOverlappingMenuHoverState from './index';
 const IS_HOVERED = 'isHovered';
 
 const TestComponent = () => {
-  const listItemRef = useRef();
+  const listItemRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const {
     handleHoverEnd,
@@ -30,7 +30,7 @@ const TestComponent = () => {
         isHovered={isHovered}
         onHoverEnd={handleHoverEnd}
         onHoverStart={handleHoverStart}
-        onMouseMove={handleMouseMove}
+        onMouseMove={() => handleMouseMove}
         role="listitem"
         ref={listItemRef}
       >

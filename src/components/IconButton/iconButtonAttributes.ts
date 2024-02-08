@@ -46,12 +46,6 @@ export const iconButtonArgTypes = {
     },
     description: descriptions.variant,
   },
-  size: {
-    control: {
-      type: 'select',
-      options: ['xs', 'sm', 'md'],
-    },
-  },
   onPress: {
     description: descriptions.onPress,
     ...funcArg,
@@ -77,7 +71,6 @@ export const iconButtonArgTypes = {
 export const iconButtonArgs = {
   icon: CreateIcon,
   variant: 'base',
-  size: 'sm',
 };
 
 export const iconButtonPropTypes = {
