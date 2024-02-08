@@ -3,35 +3,59 @@ import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
 
-import { BadgeContext } from '../../context/BadgeContext';
+import { BadgeContext, BadgeContextProps } from '../../context/BadgeContext';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
+import { IconButtonProps } from '../../types';
+import { FocusEventHandler } from '../../types/shared';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
-import { iconButtonPropTypes } from './iconButtonAttributes';
-
-const IconButton = forwardRef((props, ref) => {
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   const {
     children,
     className,
     title,
     variant,
+    onBlur,
+    onFocus,
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+    onKeyDown,
+    onKeyUp,
     onPress,
-    onPressStart,
     onPressEnd,
+    onPressStart,
     onPressChange,
     onPressUp,
     isDisabled,
     ...others
   } = props;
 
-  const buttonRef = useRef();
+  const buttonRef = useRef<HTMLButtonElement>(null);
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => buttonRef.current);
+  useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
-  const { isPressed: isPressedFromContext } = usePress(buttonRef);
-  const { buttonProps, isPressed } = useButton({ ...props }, buttonRef);
-  const { bg: badgeBg } = useContext(BadgeContext);
-  const { hoverProps, isHovered } = useHover(props);
+  const { isPressed: isPressedFromContext } = usePress({ ref: buttonRef });
+  const { buttonProps, isPressed } = useButton({
+    elementType: 'button',
+    isDisabled,
+    onBlur: onBlur as FocusEventHandler,
+    onFocus: onFocus as FocusEventHandler,
+    onKeyDown,
+    onKeyUp,
+    onPress,
+    onPressChange,
+    onPressEnd,
+    onPressStart,
+    onPressUp,
+    ...others,
+  }, buttonRef);
+  const { bg: badgeBg } = useContext(BadgeContext) as BadgeContextProps;
+  const { hoverProps, isHovered } = useHover({
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+  });
   const { isFocusVisible, focusProps } = useFocusRing();
   const { classNames } = useStatusClasses(className, {
     isHovered,
@@ -53,7 +77,7 @@ const IconButton = forwardRef((props, ref) => {
         tabIndex={0}
         className={classNames}
         aria-label={ariaLabel}
-        sx={badgeBg && isHovered && { 'path': { fill: badgeBg } }}
+        sx={badgeBg && isHovered ? { 'path': { fill: badgeBg } } : undefined}
         variant={`iconButtons.${variant}`}
         onPointerOver={hoverProps.onPointerEnter}
       >
@@ -74,12 +98,10 @@ const IconButton = forwardRef((props, ref) => {
   return button;
 });
 
-IconButton.propTypes = iconButtonPropTypes;
-
 IconButton.defaultProps = {
   variant: 'base',
   isDisabled: false,
 };
 
-IconButton.displayName = 'Icon Button';
+IconButton.displayName = 'IconButton';
 export default IconButton;

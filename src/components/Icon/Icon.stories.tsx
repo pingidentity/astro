@@ -22,7 +22,7 @@ import {
 import { flatColorList } from '../../styles/colors';
 import { IconProps, SVGComponentProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
+import { sizeArgTypes } from '../../utils/docUtils/iconSizeProps';
 
 import IconReadme from './Icon.mdx';
 
@@ -50,15 +50,7 @@ export default {
       },
       description: 'The icon to render. List of icons at https://materialdesignicons.com/',
     },
-    size: {
-      control: {
-        type: 'select',
-        options: Object.keys(tShirtSizes),
-      },
-      description: 'The size of the icon container. If given a number value, it will be converted to pixels. '
-        + 'Tshirt sizing is recommended and can be passed to the size prop as "xs", "sm" , "md" '
-        + 'rendering 15, 20, and 25 pixel svg containers.',
-    },
+    ...sizeArgTypes,
     color: {
       control: {
         type: 'select',
@@ -67,8 +59,9 @@ export default {
     },
   },
   args: {
-    icon: SearchIcon,
     color: 'active',
+    icon: SearchIcon,
+    size: 'sm',
   },
 } as Meta;
 

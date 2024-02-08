@@ -5,6 +5,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Loader } from '../../index';
 import { flatColorList } from '../../styles/colors';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { sizeArgTypes } from '../../utils/docUtils/iconSizeProps';
 
 import LoaderReadme from './Loader.mdx';
 
@@ -30,12 +31,8 @@ export default {
       },
     },
     size: {
-      control: {
-        type: 'text',
-      },
-      description:
-        'The size of the loader. Sizes can either be a string such as xs, sm, md, etc or numeric size with unit such as 15px. Default size inherits the font size. '
-        + 'Numeric value paired with a unit. https://www.w3schools.com/cssref/css_units.asp',
+      ...sizeArgTypes.size,
+      description: 'The size of the loader. Sizes can either be a string such as xs, sm, md, etc or numeric size with unit such as 15px. Default size inherits the font size. Numeric value paired with a unit. https://www.w3schools.com/cssref/css_units.asp',
     },
   },
   args: {

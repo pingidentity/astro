@@ -1,4 +1,4 @@
-import { StyleProps } from './shared';
+import { IconSize, StyleProps } from './shared';
 
 export interface LoaderProps extends StyleProps {
   /**
@@ -6,10 +6,5 @@ export interface LoaderProps extends StyleProps {
    * Default color inherits the font color.
   */
   color?: string,
-    /**
-   * Size as number or pixel / em / rem value.
-   * Sizes can either be a string such as xs, sm, md, etc or numeric size with unit such as 15px.
-   * Default size inherits the font size.
-  */
-  size?: number | string
+  size?: IconSize
 }
