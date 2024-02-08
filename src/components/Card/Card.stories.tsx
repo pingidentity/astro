@@ -41,6 +41,24 @@ export const Default = args => (
   <Card {...args} />
 );
 
+export const CardWidth = args => {
+  return (
+    <Box gap="40px" width="1300px">
+      <Card size="container.xs" {...args} />
+      <Card size="container.sm" {...args} />
+      <Card size="container.md" {...args} />
+      <Card size="container.lg" {...args} />
+    </Box>
+  );
+};
+
+CardWidth.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.card.cardWidth,
+  },
+};
+
 Default.parameters = {
   design: {
     type: 'figma',
