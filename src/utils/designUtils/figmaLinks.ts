@@ -59,6 +59,7 @@ export const FIGMA_LINKS = {
   },
   card: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=335%3A1780&mode=dev',
+    cardWidth: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46142%3A6241&mode=dev',
     cardRow: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46142%3A6248&mode=dev',
     interactiveCard: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=46142%3A6279&mode=dev',
   },
