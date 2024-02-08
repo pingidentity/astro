@@ -9,6 +9,7 @@ export * from './iconBadge';
 export * from './iconButton';
 export * from './item';
 export * from './link';
+export * from './listItem';
 export * from './loader';
 export * from './popoverContainer';
 export * from './separator';

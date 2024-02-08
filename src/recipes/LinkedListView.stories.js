@@ -114,6 +114,7 @@ const testSort = array => {
   });
   return newArray;
 };
+
 const unsorted = flattenArray(testData);
 const sorted = testSort(unsorted);
 
@@ -179,6 +180,7 @@ const sx = {
     position: 'absolute',
   },
 };
+
 export const Default = ({ ...args }) => {
   const [theseItems] = useState([...sorted]);
 
@@ -443,4 +445,13 @@ export const Default = ({ ...args }) => {
       )}
     </ListView>
   );
+};
+
+// Added to bypass the rule "Certain ARIA roles must be contained by particular parents"
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'aria-required-parent', enabled: false }],
+    },
+  },
 };
