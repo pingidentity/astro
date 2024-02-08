@@ -2,6 +2,7 @@ import React from 'react';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import userEvent from '@testing-library/user-event';
 
+import { IconButtonProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -14,7 +15,7 @@ const Icon = props => (
 );
 
 const testId = 'test-button';
-const defaultProps = {
+const defaultProps: IconButtonProps = {
   'data-testid': testId,
   icon: Icon,
   'aria-label': 'Create',
@@ -117,7 +118,8 @@ test('tooltip is not shown on hover or focus when prop is not passed', () => {
 test('the button should be getting aria label attribute', () => {
   const testLabel = defaultProps['aria-label'];
   getComponent();
-  expect(screen.getByLabelText(testLabel)).toBeInTheDocument();
+  const button = screen.getByRole('button');
+  expect(button).toHaveAttribute('aria-label', testLabel);
 });
 
 test('show button isDisabled status', () => {
