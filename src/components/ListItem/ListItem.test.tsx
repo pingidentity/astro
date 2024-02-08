@@ -2,13 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { ListItemProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ListItem from './ListItem';
 
 const testTitle = 'Test Title';
 const TEST_ID = 'ListItem-testid';
-const defaultProps = {
+const defaultProps: ListItemProps = {
   title: testTitle,
 };
 
@@ -18,7 +19,11 @@ const getComponent = (props = {}) => render(
 
 // Needs to be added to each components test file
 universalComponentTests({
-  renderComponent: props => <ListItem {...defaultProps} {...props} />,
+  renderComponent: props => (
+    <div role="list">
+      <ListItem {...defaultProps} {...props} />
+    </div>
+  ),
 });
 
 describe('ListItem', () => {

@@ -1,21 +1,23 @@
 import React, { forwardRef } from 'react';
 import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 
 import { useDeprecationWarning, useStatusClasses } from '../../hooks';
-import { onHoverPropTypes } from '../../utils/docUtils/hoverProps';
+import { ListItemProps } from '../../types';
 import Box from '../Box/Box';
 
-const ListItem = forwardRef(({
-  children,
-  className,
-  isHovered,
-  isSelected,
-  onHoverChange,
-  onHoverEnd,
-  onHoverStart,
-  ...others
-}, ref) => {
+
+const ListItem = forwardRef<HTMLDivElement, ListItemProps>((props, ref) => {
+  const {
+    children,
+    className,
+    isHovered,
+    isSelected,
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+    ...others
+  } = props;
+
   const { hoverProps } = useHover({
     onHoverChange,
     onHoverEnd,
@@ -23,6 +25,7 @@ const ListItem = forwardRef(({
   });
 
   useDeprecationWarning('The ListItem will be depreciated in the near future, please use ListViewItem');
+
   const { classNames } = useStatusClasses(className, { isHovered, isSelected });
 
   return (
@@ -33,23 +36,12 @@ const ListItem = forwardRef(({
       isRow
       {...hoverProps}
       {...others}
+      role="listitem"
     >
       {children}
     </Box>
   );
 });
-
-ListItem.propTypes = {
-  /**
-   * A list of class names to apply to the element
-   */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  /**
-   * Sets the selected state of the ListItem
-   */
-  isSelected: PropTypes.bool,
-  ...onHoverPropTypes,
-};
 
 ListItem.defaultProps = {
   isSelected: false,
