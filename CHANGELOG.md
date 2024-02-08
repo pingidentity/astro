@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.44.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.43.0...@pingux/astro@2.44.0) (2024-02-08)
+
+
+### Features
+
+* [UIP-6670] add Card width story ([c632bcd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c632bcd102e2ed140e74e225ca613b53a479fe81))
+* [UIP-6724] IconButton convert to TypeScript ([06866dd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/06866dd87bb6221c5450b4189b48d06967636249))
+* [UIP-6781] ListItem convert to TS ([62991a5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/62991a511bd0aa9284785eb0c584ea6348595e6d))
+
+
+
+
+
 # [2.43.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.42.0...@pingux/astro@2.43.0) (2024-02-06)
 
 
