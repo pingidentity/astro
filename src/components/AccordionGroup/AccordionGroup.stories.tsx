@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { Key, ReactNode, useState } from 'react';
 import { Item } from 'react-stately';
+import { Meta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -11,10 +12,11 @@ import {
   Text,
   TextField,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import ItemProps from '../../types/item';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { validHeadingTags } from '../AccordionItem/AccordionItem';
 
-import AccordionReadme from './AccordionGroup.mdx';
+import AccordionReadme from './AccordionGroup';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },
@@ -73,7 +75,7 @@ export default {
       options: validHeadingTags,
     },
   },
-};
+} as Meta;
 
 export const Default = args => {
   return (
@@ -131,8 +133,12 @@ export const Multiple = () => {
       labelHeadingTag="h3"
     >
       {item => (
-        <Item key={item.key} textValue={item.label} label={item.label}>
-          {item.children}
+        <Item
+          key={(item as ItemProps<Key>).key}
+          textValue={(item as ItemProps<string>).label?.toString()}
+          label={(item as ItemProps<string>).label}
+        >
+          {(item as ItemProps<ReactNode>).children}
         </Item>
       )}
     </AccordionGroup>
@@ -148,6 +154,7 @@ Multiple.parameters = {
 
 export const ControlledExpanded = () => {
   const [expandedKeys, setExpandedKeys] = useState(['t3']);
+
   return (
     /*
      * itemArray = [
@@ -167,8 +174,12 @@ export const ControlledExpanded = () => {
       labelHeadingTag="h3"
     >
       {item => (
-        <Item key={item.key} textValue={item.label} label={item.label}>
-          {item.children}
+        <Item
+          key={(item as ItemProps<Key>).key}
+          textValue={(item as ItemProps<string>).label?.toString()}
+          label={(item as ItemProps<string>).label}
+        >
+          {(item as ItemProps<ReactNode>).children}
         </Item>
       )}
     </AccordionGroup>
@@ -186,8 +197,12 @@ export const UncontrolledExpanded = () => {
      */
     <AccordionGroup defaultExpandedKeys={['t1']} items={itemArray} labelHeadingTag="h3">
       {item => (
-        <Item key={item.key} textValue={item.label} label={item.label}>
-          {item.children}
+        <Item
+          key={(item as ItemProps<Key>).key}
+          textValue={(item as ItemProps<string>).label?.toString()}
+          label={(item as ItemProps<string>).label}
+        >
+          {(item as ItemProps<ReactNode>).children}
         </Item>
       )}
     </AccordionGroup>
@@ -205,8 +220,12 @@ export const DisabledState = () => {
      */
     <AccordionGroup disabledKeys={['t1', 't3']} items={itemArrayDisabled} labelHeadingTag="h3">
       {item => (
-        <Item key={item.key} textValue={item.label} label={item.label}>
-          {item.children}
+        <Item
+          key={(item as ItemProps<Key>).key}
+          textValue={(item as ItemProps<string>).label?.toString()}
+          label={(item as ItemProps<string>).label}
+        >
+          {(item as ItemProps<ReactNode>).children}
         </Item>
       )}
     </AccordionGroup>
@@ -232,14 +251,14 @@ export const CustomPresentation = () => {
     <AccordionGroup items={itemArrayDisabled} labelHeadingTag="h3">
       {item => (
         <Item
-          key={item.key}
-          textValue={item.label}
-          label={item.label}
-          buttonProps={{ bg: item.key === 't2' ? 'darkseagreen' : 'skyblue' }}
+          key={(item as ItemProps<Key>).key}
+          textValue={(item as ItemProps<string>).label?.toString()}
+          label={(item as ItemProps<string>).label}
+          buttonProps={{ bg: (item as ItemProps<object>).key === 't2' ? 'darkseagreen' : 'skyblue' }}
           regionProps={{ bg: 'mistyrose' }}
           containerProps={{ bg: 'lavender' }}
         >
-          {item.children}
+          {(item as ItemProps<ReactNode>).children}
         </Item>
       )}
     </AccordionGroup>

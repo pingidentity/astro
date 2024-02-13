@@ -1,12 +1,14 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { useTreeState } from 'react-stately';
+import React, { Dispatch, forwardRef, SetStateAction, useImperativeHandle, useRef } from 'react';
+import { mergeProps } from 'react-aria';
+import { TreeProps, useTreeState } from 'react-stately';
 import { useAccordion } from '@react-aria/accordion';
-import { mergeProps } from '@react-aria/utils';
-import PropTypes from 'prop-types';
+import { TreeState } from '@react-stately/tree';
+// eslint-disable-next-line import/no-unresolved
+import { AriaAccordionProps } from '@react-types/accordion';
 
 import { AccordionContext } from '../../context/AccordionContext';
 import { Box } from '../../index';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { BoxProps } from '../../types/box';
 import AccordionItem from '../AccordionItem';
 
 /**
@@ -15,22 +17,24 @@ import AccordionItem from '../AccordionItem';
  * and related to a known issue within React Stately.
  */
 
-const AccordionGroup = forwardRef((props, ref) => {
+interface AccordionProps extends Omit<TreeProps<object>, 'onExpandedChange'>{
+    labelHeadingTag?: string,
+    onExpandedChange?: Dispatch<SetStateAction<string[]>>,
+}
+
+const AccordionGroup = forwardRef((props: AccordionProps, ref) => {
   const {
-    defaultExpandedKeys,
-    expandedKeys,
-    labelHeadingTag,
+    labelHeadingTag = 'span',
     onExpandedChange,
     ...others
   } = props;
 
-  const state = useTreeState(props);
-  const accordionRef = useRef();
+  const state = useTreeState(props as TreeProps<object>) as TreeState<object>;
+  const accordionRef = useRef(null);
 
   /* `autoFocus: true` is what makes the initial focus only take one click vs two. */
   const { accordionProps } = useAccordion({
-    autoFocus: true,
-    ...props,
+    ...props as AriaAccordionProps<object>,
   }, state, accordionRef);
   delete accordionProps.onMouseDown;
 
@@ -40,11 +44,20 @@ const AccordionGroup = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => accordionRef.current);
 
+  const mergedProps = mergeProps(theseProps, others) as BoxProps;
+
+  const onFocusGroup = () => {
+    if (state.selectionManager.isFocused === false) {
+      state.selectionManager.setFocused(true);
+    }
+  };
+
   return (
     <AccordionContext.Provider value={state}>
       <Box
         ref={accordionRef}
-        {...mergeProps(theseProps, others)}
+        {...mergedProps}
+        onFocus={onFocusGroup}
       >
         {Array.from(state.collection).map(item => (
           <AccordionItem
@@ -60,26 +73,6 @@ const AccordionGroup = forwardRef((props, ref) => {
     </AccordionContext.Provider>
   );
 });
-
-AccordionGroup.propTypes = {
-  /** Handler that is called when items are expanded or collapsed. */
-  onExpandedChange: PropTypes.func,
-  /** Item objects in the collection. */
-  items: isIterableProp,
-  /**
-   * The item keys that are disabled. These items cannot be selected, focused, or otherwise
-   * interacted with.
-   */
-  disabledKeys: isIterableProp,
-  /** The currently expanded keys in the collection (controlled). */
-  expandedKeys: isIterableProp,
-  /** The initial expanded keys in the collection (uncontrolled). */
-  defaultExpandedKeys: isIterableProp,
-  /** Id of the selected element */
-  id: PropTypes.string,
-  /** HTML header element wrapping the label */
-  labelHeadingTag: AccordionItem.propTypes.labelHeadingTag,
-};
 
 AccordionGroup.displayName = 'AccordionGroup';
 
