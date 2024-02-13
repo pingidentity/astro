@@ -170,7 +170,8 @@ test('passing helper text should display it and correct aria attributes on input
       status: statuses.ERROR,
       defaultFileList: [testFileObject],
     });
-  const helper = screen.getByText(testHelperText);
+  const helper = screen.getByRole('alert');
+  expect(helper).toHaveTextContent(testHelperText);
   expect(helper).toBeInTheDocument();
   expect(helper).toHaveClass(`is-${statuses.ERROR}`);
 
