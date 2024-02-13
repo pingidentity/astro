@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.45.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.44.0...@pingux/astro@2.45.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* [UIP-6087] FileInputField upload and delete accessibility improvement ([53f9865](https://gitlab.corp.pingidentity.com/ux/pingux/commit/53f986519fc4edd2080c5934e5ae4ed79940ab96))
+* [UIP-6735] Adding outline-offset to DataTable menu icon ([7f54b6d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7f54b6d90901ac02aaaa0e04467eb379687b9b8b))
+
+
+### Features
+
+* [UIP-6771] ButtonBar convert to TS ([626753f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/626753fd8bf7023dfb63dad914d473075cd5e5e3))
+* [UIP-6774] OverlayPanel convert to TS ([25b0d68](https://gitlab.corp.pingidentity.com/ux/pingux/commit/25b0d686e86cff75c680c3a7667d603177be8d2c))
+* [UIP-6776] Astro Accordion Group ts conversion ([a17e653](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a17e653d2f1b93a0f4ecf090189dcfebbfa116f6))
+
+
+
+
+
 # [2.44.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.43.0...@pingux/astro@2.44.0) (2024-02-08)
 
 
