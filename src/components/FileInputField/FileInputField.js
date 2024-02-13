@@ -1,13 +1,15 @@
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import { mergeProps, useVisuallyHidden } from 'react-aria';
+import { mergeProps, useVisuallyHidden, VisuallyHidden } from 'react-aria';
 import { useDropzone } from 'react-dropzone';
+import pluralize from 'pluralize';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -21,6 +23,11 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
 
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
+
+const FILE_CHANGE_STATUS = {
+  ADDED: 'added',
+  DELETED: 'deleted',
+};
 
 const FileInputField = forwardRef(({
   defaultButtonText,
@@ -37,6 +44,8 @@ const FileInputField = forwardRef(({
   ...others
 }, ref) => {
   const [uploadedFiles, setUploadedFiles] = useState(defaultFileList || []);
+  const [fileChangeStatus, setFileChangeStatus] = useState(null);
+  const [fileChangeMessage, setFileChangeMessage] = useState('');
 
   const inputRef = useRef();
   /* istanbul ignore next */
@@ -63,43 +72,57 @@ const FileInputField = forwardRef(({
     inputRef.current.click();
   }, [inputRef]);
 
-  const handleFileUpload = useCallback(
-    (event, newFiles) => {
-      if (onFileSelect) {
-        onFileSelect(event, newFiles);
-      }
+  useEffect(() => {
+    // TODO: The function works fine in Google Chrome, but sometimes voiceover skips the
+    // update/delete file status update on Safari
 
-      let arrayWithNewFiles = Array.from(newFiles);
-      if (!isMultiple) {
-        arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
-      }
-      const newFilesWithIdAndLink = arrayWithNewFiles.map(newFile => {
-        return {
-          fileObj: newFile,
-          name: newFile.name,
-          id: uuidv4(),
-          downloadLink: URL.createObjectURL(newFile),
-          status: statuses.DEFAULT,
-        };
-      });
-      if (isMultiple) {
-        setUploadedFiles(prevFiles => [
-          ...prevFiles,
-          ...newFilesWithIdAndLink,
-        ]);
-      } else {
-        setUploadedFiles(newFilesWithIdAndLink);
-      }
-    },
-    [isMultiple, onFileSelect],
-  );
+    if (status === statuses.ERROR) {
+      setFileChangeMessage(helperText);
+    } else if (fileChangeStatus) {
+      setFileChangeMessage(
+        `${pluralize('file', fileChangeStatus.fileCount, true)} ${fileChangeStatus.status} successfully`,
+      );
+    }
 
-  const onDrop = useCallback(
-    (acceptedFiles, fileRejections, event) => {
-      handleFileUpload(event, acceptedFiles);
-    },
-    [handleFileUpload],
-  );
+    setFileChangeStatus(null);
+  }, [fileChangeStatus, helperText, status]);
+
+  const handleFileUpload = (event, newFiles) => {
+    if (status === statuses.ERROR) {
+      setFileChangeMessage('');
+    }
+
+    if (onFileSelect) {
+      onFileSelect(event, newFiles);
+    }
+
+    let arrayWithNewFiles = Array.from(newFiles);
+    if (!isMultiple) {
+      arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
+    }
+
+    const filesWithIdAndLink = arrayWithNewFiles.map(newFile => {
+      return {
+        fileObj: newFile,
+        name: newFile.name,
+        id: uuidv4(),
+        downloadLink: URL.createObjectURL(newFile),
+        status: statuses.DEFAULT,
+      };
+    });
+
+    if (isMultiple) {
+      setUploadedFiles(prevFiles => [...prevFiles, ...filesWithIdAndLink]);
+    } else {
+      setUploadedFiles(filesWithIdAndLink);
+    }
+
+    setFileChangeStatus({ fileCount: filesWithIdAndLink.length, status: FILE_CHANGE_STATUS.ADDED });
+  };
+
+  const onDrop = (acceptedFiles, fileRejections, event) => {
+    handleFileUpload(event, acceptedFiles);
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -107,38 +130,51 @@ const FileInputField = forwardRef(({
     disabled: isDisabled || isLoading,
   });
 
-  const handleOnChange = useCallback(
-    event => {
-      handleFileUpload(event, event.target.files);
-    },
-    [handleFileUpload],
-  );
-
-  const handleFileDelete = useCallback((e, fileId) => {
-    if (onRemove) {
-      onRemove(e, fileId);
-    }
-
-    setUploadedFiles(prevFiles => prevFiles.filter(({ id }) => id !== fileId),
-    );
-  }, [onRemove]);
+  const handleOnChange = event => {
+    handleFileUpload(event, event.target.files);
+  };
 
   const filesListNode = useMemo(() => {
+    const handleFileDelete = (e, fileId) => {
+      setFileChangeMessage('');
+
+      if (onRemove) {
+        onRemove(e, fileId);
+      }
+
+      setUploadedFiles(prevFiles => prevFiles.filter(({ id }) => id !== fileId),
+      );
+
+      setFileChangeStatus({ fileCount: 1, status: FILE_CHANGE_STATUS.DELETED });
+    };
+
     const filesToRender = uploadedFilesImperative || uploadedFiles;
     if (!filesToRender?.length) {
       return null;
     }
-    return filesToRender.map(fileProps => (
-      <FileItem
-        handleFileDelete={handleFileDelete}
-        isDisabled={isDisabled || isLoading}
-        key={fileProps.id}
-        textProps={textProps}
-        helperTextId={helperTextId}
-        {...fileProps}
-      />
-    ));
-  }, [uploadedFilesImperative, uploadedFiles, handleFileDelete, isDisabled, isLoading, textProps]);
+    return (
+      <>
+        {filesToRender.map(fileProps => (
+          <FileItem
+            handleFileDelete={handleFileDelete}
+            isDisabled={isDisabled || isLoading}
+            key={fileProps.id}
+            textProps={textProps}
+            helperTextId={helperTextId}
+            {...fileProps}
+          />
+        ))}
+      </>
+    );
+  }, [
+    helperTextId,
+    isDisabled,
+    isLoading,
+    onRemove,
+    textProps,
+    uploadedFiles,
+    uploadedFilesImperative,
+  ]);
 
   const { classNames } = useStatusClasses('fileInputFieldWrapper', {
     isDragActive,
@@ -181,28 +217,41 @@ const FileInputField = forwardRef(({
         />
         {filesListNode}
         {shouldFileSelectRender() && (
-          <FileSelect
-            buttonText={defaultButtonText}
-            handleFileSelect={handleFileSelect}
-            isDisabled={isDisabled || isLoading}
-            textProps={textProps}
-            {...ariaProps}
-          />
+        <FileSelect
+          buttonText={defaultButtonText}
+          handleFileSelect={handleFileSelect}
+          isDisabled={isDisabled || isLoading}
+          textProps={textProps}
+          {...ariaProps}
+        />
         )}
         {isLoading && (
-          <Loader
-            color="active"
-            sx={{ position: 'absolute' }}
-            data-testid="file-input-field__loader"
-          />
+        <Loader
+          color="active"
+          sx={{ position: 'absolute' }}
+          data-testid="file-input-field__loader"
+        />
         )}
       </Box>
       {helperText && (
-        <FieldHelperText status={status} id={helperTextId}>{helperText}</FieldHelperText>
+      <Box aria-label={helperText}>
+        <FieldHelperText status={status} id={helperTextId}>
+          {helperText}
+        </FieldHelperText>
+      </Box>
       )}
+      {fileChangeMessage
+        && (
+          <Box aria-relevant="all" aria-live="assertive" role="status">
+            <VisuallyHidden>
+              <h1>{fileChangeMessage}</h1>
+            </VisuallyHidden>
+          </Box>
+        )}
     </Box>
   );
-});
+},
+);
 
 FileInputField.displayName = 'FileInputField';
 

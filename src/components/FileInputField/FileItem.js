@@ -13,12 +13,12 @@ const FileItem = props => {
   const {
     downloadLink,
     handleFileDelete,
+    helperTextId,
     id,
     isDisabled,
     name,
     status,
     textProps,
-    helperTextId,
   } = props;
   const handleDeleteButtonPress = useCallback(e => handleFileDelete(e, id), [
     id,
@@ -65,13 +65,14 @@ const FileItem = props => {
         data-testid="file-uploaded__download-file-button"
         onPress={handleDownloadPress}
         aria-describedby={helperTextId}
+        aria-live="polite"
       >
         <Text color="active" {...textProps}>
           {name}
         </Text>
       </Button>
       <IconButton
-        aria-label={`Delete ${name} file icon`}
+        aria-label={`Delete ${name}`}
         data-testid="file-uploaded__delete-file-button"
         isDisabled={isDisabled}
         onPress={handleDeleteButtonPress}
@@ -85,7 +86,7 @@ const FileItem = props => {
         {...visuallyHiddenProps}
         download
         ref={downloadRef}
-        aria-label="download"
+        aria-label={`download ${name}`}
         data-testid="file-uploaded__download-link"
         tabIndex={-1}
       />
@@ -101,7 +102,6 @@ FileItem.propTypes = {
   id: PropTypes.string,
   isDisabled: PropTypes.bool,
   name: PropTypes.string,
-  helperTextId: PropTypes.string,
   textProps: PropTypes.shape({}),
   ...statusPropTypes,
 };
