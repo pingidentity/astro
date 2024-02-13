@@ -5,6 +5,7 @@ import ArrowTopRightBottomLeft from '@pingux/mdi-react/ArrowTopRightBottomLeftIc
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
@@ -28,8 +29,10 @@ import {
   Text,
   TextField,
 } from '../../index';
+import { OverlayPanelProps } from '../../types';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 import OverlayPanelReadme from './OverlayPanel.mdx';
 
@@ -67,11 +70,11 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-export const Default = ({ ...args }) => {
+export const Default: StoryFn<OverlayPanelProps> = ({ ...args }: OverlayPanelProps) => {
   const { state, onClose } = useOverlayPanelState();
-  const triggerRef = useRef();
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -120,9 +123,9 @@ export const Default = ({ ...args }) => {
   );
 };
 
-export const CustomWidth = () => {
+export const CustomWidth: StoryFn = () => {
   const { state, onClose } = useOverlayPanelState();
-  const triggerRef = useRef();
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -165,9 +168,9 @@ export const CustomWidth = () => {
   );
 };
 
-export const Expandable = () => {
+export const Expandable: StoryFn = () => {
   const { state, onClose } = useOverlayPanelState();
-  const triggerRef = useRef();
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const sx = {
@@ -373,12 +376,12 @@ export const Expandable = () => {
   );
 };
 
-export const InnerPanel = ({ ...args }) => {
+export const InnerPanel: StoryFn<OverlayPanelProps> = ({ ...args }: OverlayPanelProps) => {
   const { state, onClose } = useOverlayPanelState();
   const { state: innerState, onClose: onCloseInner } = useOverlayPanelState();
 
-  const outerTriggerRef = useRef();
-  const innerTriggerRef = useRef();
+  const outerTriggerRef = useRef<HTMLButtonElement>(null);
+  const innerTriggerRef = useRef<HTMLButtonElement>(null);
 
   const [messagesOpen, setMessagesOpen] = useState(false);
 
@@ -485,7 +488,7 @@ export const InnerPanel = ({ ...args }) => {
       </OverlayProvider>
       {messagesOpen && (
         <Messages sx={{ zIndex: 11 }} onClose={toggleMessagesOpen}>
-          <Item key="message2" status="success">Z Index higher than inner pannel</Item>
+          <Item key="message2" status={statuses.SUCCESS}>Z Index higher than inner pannel</Item>
         </Messages>
       )}
     </>

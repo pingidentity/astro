@@ -14,7 +14,7 @@ export interface UseOverlayPanelReturnState extends OverlayTriggerState {
   isTransitioning?: boolean;
 }
 
-interface UseOverlayPanelStateReturnOnClose {
+export interface UseOverlayPanelStateReturnOnClose {
   (
     stateProp?: OverlayTriggerState,
     triggerRef?: React.RefObject<HTMLButtonElement>,
