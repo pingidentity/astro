@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
+import { ButtonBarProps } from '../../types';
 
-const ButtonBar = forwardRef((props, ref) => {
+const ButtonBar = forwardRef<HTMLDivElement, ButtonBarProps>((props, ref) => {
   const {
     align,
     children,
@@ -21,11 +21,6 @@ const ButtonBar = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-ButtonBar.propTypes = {
-  /** Justifies the component's children. */
-  align: PropTypes.oneOf(['left', 'right']),
-};
 
 ButtonBar.defaultProps = {
   align: 'left',
