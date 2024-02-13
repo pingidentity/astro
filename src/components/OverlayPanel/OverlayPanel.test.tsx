@@ -1,15 +1,18 @@
 import React from 'react';
 
+import { OverlayPanelProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import OverlayPanel from './OverlayPanel';
 
 const testId = 'test-overlayPanel';
-const defaultProps = {
+const defaultProps: OverlayPanelProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(<OverlayPanel {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(
+  <OverlayPanel {...defaultProps} {...props} />,
+);
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -59,7 +62,6 @@ test('custom classname can be passed', () => {
   const overlayPanel = screen.getByTestId(testId);
   expect(overlayPanel).toHaveClass('testing-class');
 });
-
 
 test('neither callback fires when not provided', () => {
   const onClose = jest.fn();

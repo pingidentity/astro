@@ -12,6 +12,7 @@ export * from './item';
 export * from './link';
 export * from './listItem';
 export * from './loader';
+export * from './overlayPanel';
 export * from './popoverContainer';
 export * from './separator';
 export * from './shared';

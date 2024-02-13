@@ -23,6 +23,8 @@ export type Axis = 'top' | 'bottom' | 'left' | 'right';
 export type SizeAxis = 'width' | 'height';
 export type PlacementAxis = Axis | 'center';
 
+export type PanelSize = 'small' | 'medium' | 'large' | 'full' | 'custom';
+
 type IconTShirtSize = 'xs' | 'sm' | 'md';
 type pixelSize = 'em' | 'px' | 'rem'
 
