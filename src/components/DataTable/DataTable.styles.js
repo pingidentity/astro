@@ -90,7 +90,7 @@ const tableHeadCell = {
     outline: '1px',
     outlineStyle: 'solid',
     outlineColor: '#D033FF !important',
-    outlineOffset: '-1px',
+    outlineOffset: '-2px',
   },
   '&.is-column-sortable': {
     cursor: 'pointer',
