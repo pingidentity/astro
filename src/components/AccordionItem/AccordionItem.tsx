@@ -1,11 +1,13 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { mergeProps, useButton } from 'react-aria';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuUp from '@pingux/mdi-react/MenuUpIcon';
-import { useAccordionItem } from '@react-aria/accordion';
+import { AccordionItemAriaProps, useAccordionItem } from '@react-aria/accordion';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
+import { TreeState } from '@react-stately/tree';
+// eslint-disable-next-line import/no-unresolved
+import { Node } from '@react-types/shared';
 import { Button as ThemeUIButton } from 'theme-ui';
 
 import { AccordionContext } from '../../context/AccordionContext';
@@ -15,31 +17,41 @@ import { hoveredState } from '../AccordionGroup/Accordion.styles';
 
 export const validHeadingTags = ['h1', 'h2', 'h3', 'h4'];
 
-const AccordionItem = forwardRef((props, ref) => {
+interface AccordionItemProps<T> {
+  item: Node<T>,
+  className?: string,
+  labelHeadingTag: string,
+  'aria-label'?: string,
+  'data-id'?: string,
+  children: React.ReactNode,
+  buttonProps?: object,
+}
+
+const AccordionItem = (props: AccordionItemProps<object>) => {
   const { className, item, labelHeadingTag } = props;
   const {
-    label,
-    children,
-    textValue,
     containerProps = {},
     buttonProps = {},
     regionProps = {},
     ...others
   } = item.props;
 
-  const state = useContext(AccordionContext);
-  const buttonRef = useRef();
+  const state = useContext(AccordionContext) as TreeState<object>;
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const {
     buttonProps: accordionButtonProps,
     regionProps: accordionRegionProps,
-  } = useAccordionItem(props, state, buttonRef);
-  const { hoverProps, isHovered } = useHover(props);
+  } = useAccordionItem(
+    props as AccordionItemAriaProps<object>,
+    state,
+    buttonRef);
   const { focusProps, isFocusVisible } = useFocusRing();
   const isOpen = state.expandedKeys.has(item.key);
   const isDisabled = state.disabledKeys.has(item.key);
+  const { hoverProps, isHovered } = useHover({ isDisabled });
 
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => buttonRef.current);
 
   const { isPressed, buttonProps: raButtonProps } = useButton(props, buttonRef);
 
@@ -93,26 +105,6 @@ const AccordionItem = forwardRef((props, ref) => {
         )}
     </Box>
   );
-});
-
-AccordionItem.propTypes = {
-  'aria-label': PropTypes.string,
-  labelHeadingTag: PropTypes.oneOf([
-    ...validHeadingTags,
-    ...validHeadingTags.map(heading => heading.toUpperCase()),
-  ]),
-  item: PropTypes.shape({
-    key: PropTypes.string,
-    rendered: PropTypes.node,
-    props: PropTypes.shape({
-      label: PropTypes.node,
-      children: PropTypes.node,
-      textValue: PropTypes.string,
-      containerProps: PropTypes.shape({}),
-      buttonProps: PropTypes.shape({}),
-      regionProps: PropTypes.shape({}),
-    }),
-  }),
 };
 
 AccordionItem.displayName = 'AccordionItem';
