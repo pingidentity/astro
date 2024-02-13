@@ -82,7 +82,7 @@ const getComponentWithPopover = () => render((
   <Box isRow alignItems="center" justifyContent="space-between" width="50%">
     <PopoverMenu>
       <Button data-testid="popoverbutton">Click me</Button>
-      <Menu onAction={() => {}}>
+      <Menu onAction={() => { return false; }}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
         <Item key="delete" textValue="delete">
@@ -94,11 +94,12 @@ const getComponentWithPopover = () => render((
       items={items}
       defaultExpandedKeys={selectedAccordionKeys}
     >
-      {item => (
-        <Item key={item.key} textValue={item.label} label={item.label}>
-          {item.text}
-        </Item>
-      )}
+      <Item key={items[0].key} textValue={items[0].label} label={items[0].label}>
+        {items[0].text}
+      </Item>
+      <Item key={items[1].key} textValue={items[1].label} label={items[1].label}>
+        {items[1].text}
+      </Item>
     </AccordionGroup>
   </Box>
 ));
@@ -209,7 +210,7 @@ test('allows users to navigate accordion headers through the tab key', () => {
   getComponent();
   const buttons = screen.getAllByRole('button');
   const [firstItem, secondItem, thirdItem] = buttons;
-  act(() => { firstItem.focus(); });
+  userEvent.tab();
   expect(firstItem).toHaveFocus();
   userEvent.tab();
   expect(secondItem).toHaveFocus();

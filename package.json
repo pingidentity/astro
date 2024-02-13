@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.44.0",
+  "version": "2.45.0-alpha.3",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -80,7 +80,8 @@
     "@react-stately/table": "^3.9.0",
     "@react-stately/tree": "^3.7.4",
     "@react-stately/virtualizer": "~3.6.5",
-    "@react-types/shared": "^3.20.0",
+    "@react-types/accordion": "^3.0.0-alpha.18",
+    "@react-types/shared": "^3.22.0",
     "@storybook/addon-actions": "^7.1.0",
     "@storybook/api": "^7.1.0",
     "@storybook/components": "^7.1.0",
@@ -99,6 +100,7 @@
     "emotion-normalize": "^11.0.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "pluralize": "^8.0.0",
     "prism-react-renderer": "1.2.1",
     "prismjs": "^1.27.0",
     "prop-types": "^15.7.2",

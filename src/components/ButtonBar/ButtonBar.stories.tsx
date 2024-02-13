@@ -1,7 +1,9 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Button, ButtonBar } from '../../index';
+import { ButtonBarProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import ButtonBarReadme from './ButtonBar.mdx';
@@ -29,9 +31,9 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<ButtonBarProps> = (args: ButtonBarProps) => (
   <ButtonBar {...args}>
     <Button
       variant="primary"
@@ -57,7 +59,7 @@ Default.parameters = {
   },
 };
 
-export const RightAligned = () => (
+export const RightAligned: StoryFn = () => (
   <ButtonBar align="right">
     <Button
       variant="link"
@@ -83,7 +85,7 @@ RightAligned.parameters = {
   },
 };
 
-export const Secondary = () => (
+export const Secondary: StoryFn = () => (
   <ButtonBar>
     <Button
       variant="primary"
@@ -116,7 +118,7 @@ Secondary.parameters = {
   },
 };
 
-export const SecondaryRightAligned = () => (
+export const SecondaryRightAligned: StoryFn = () => (
   <ButtonBar align="right">
     <Button
       variant="link"

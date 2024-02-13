@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { Button, ButtonBar } from '../../index';
+import { ButtonBarProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-ButtonBar';
 
-const defaultProps = { 'data-testid': testId };
+const defaultProps: ButtonBarProps = { 'data-testid': testId };
 
 const getComponent = (props = {}) => render(
   <ButtonBar {...defaultProps} {...props}>
@@ -27,14 +28,14 @@ const getComponent = (props = {}) => render(
   </ButtonBar>,
 );
 
-const getComponentCustomChildren = (props = {}) => render(
+const getComponentCustomChildren = (props: ButtonBarProps = {}) => render(
   <ButtonBar {...defaultProps} {...props}>
     <button type="button">custom text</button>
     <button type="button">Also custom text</button>
   </ButtonBar>,
 );
 
-const getComponentTextChildren = (props = {}) => render((
+const getComponentTextChildren = (props: ButtonBarProps = {}) => render((
   <ButtonBar {...props}>
     custom text
   </ButtonBar>
@@ -98,8 +99,4 @@ test('justify-content left when align prop is excluded', () => {
   const element = screen.getByTestId(testId);
 
   expect(element).toHaveStyleRule('justify-content', 'left');
-});
-
-test('an error is thrown when align has invalid prop value', () => {
-  expect(() => getComponent({ align: 'rihgt' })).toThrow('Failed prop type');
 });

@@ -20,7 +20,7 @@ const DataTableMenu = forwardRef((props, ref) => {
     >
       <OverlayProvider>
         <PopoverMenu>
-          <IconButton aria-label="row menu">
+          <IconButton aria-label="row menu" sx={{ '&.is-focused': { outlineOffset: '-1px' } }}>
             <Icon size={25} icon={DotsVerticalIcon} title={{ name: 'Dots Vertical Icon' }} />
           </IconButton>
           <Menu>

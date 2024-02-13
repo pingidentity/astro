@@ -9,7 +9,6 @@ const container = {
 const justifyRightContainer = {
   ...container,
   justifyContent: 'right',
-
 };
 
 export default {

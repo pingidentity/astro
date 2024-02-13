@@ -2,7 +2,7 @@ import { IconButtonProps as ThemeUIIconButtonProps, ThemeUICSSObject } from 'the
 
 import { TestingAttributes } from './shared/test';
 import { IconTypeExtended } from './icon';
-import { HoverProps, PressProps } from './shared';
+import { HoverProps, IconSize, PressProps } from './shared';
 
 export interface IconButtonProps extends ThemeUIIconButtonProps, TestingAttributes,
     PressProps, HoverProps {
@@ -21,4 +21,6 @@ export interface IconButtonProps extends ThemeUIIconButtonProps, TestingAttribut
     isDisabled?: boolean;
     /** Inline styling prop */
     sx?: ThemeUICSSObject;
+    size?: IconSize;
+
 }
