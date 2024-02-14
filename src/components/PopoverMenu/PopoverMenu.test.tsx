@@ -7,10 +7,11 @@ import {
   Menu,
   PopoverMenu,
 } from '../../index';
+import { PopoverMenuProps } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: PopoverMenuProps = {}) => render((
   <PopoverMenu {...props}>
     <Button>Mock Button</Button>
     <Menu>

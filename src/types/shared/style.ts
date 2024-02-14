@@ -15,10 +15,11 @@ export interface StyleProps extends ThemeUICSSProperties, SxProp {
 }
 
 export type Placement = 'bottom' | 'bottom left' | 'bottom right' | 'bottom start' | 'bottom end' |
-    'top' | 'top left' | 'top right' | 'top start' | 'top end' |
-    'left' | 'left top' | 'left bottom' | 'start' | 'start top' | 'start bottom' |
-    'right' | 'right top' | 'right bottom' | 'end' | 'end top' | 'end bottom';
+  'top' | 'top left' | 'top right' | 'top start' | 'top end' |
+  'left' | 'left top' | 'left bottom' | 'start' | 'start top' | 'start bottom' |
+  'right' | 'right top' | 'right bottom' | 'end' | 'end top' | 'end bottom';
 
 export type Axis = 'top' | 'bottom' | 'left' | 'right';
+export type Alignment = 'start' | 'end' | 'middle';
 export type SizeAxis = 'width' | 'height';
 export type PlacementAxis = Axis | 'center';

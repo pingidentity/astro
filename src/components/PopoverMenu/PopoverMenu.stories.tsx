@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -11,7 +12,8 @@ import {
   PopoverMenu,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { PopoverMenuProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import PopoverMenuReadme from './PopoverMenu.mdx';
 
@@ -45,9 +47,9 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<PopoverMenuProps> = (args: PopoverMenuProps) => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -73,7 +75,7 @@ Default.parameters = {
   },
 };
 
-export const DefaultOpen = () => (
+export const DefaultOpen: StoryFn = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -92,7 +94,7 @@ export const DefaultOpen = () => (
   </OverlayProvider>
 );
 
-export const Controlled = () => {
+export const Controlled: StoryFn = () => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
@@ -114,7 +116,7 @@ export const Controlled = () => {
   );
 };
 
-export const Placement = () => (
+export const Placement: StoryFn = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -133,7 +135,7 @@ export const Placement = () => (
   </OverlayProvider>
 );
 
-export const NotFlippable = () => (
+export const NotFlippable: StoryFn = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -153,7 +155,7 @@ export const NotFlippable = () => (
   </OverlayProvider>
 );
 
-export const NotClosedOnSelect = () => (
+export const NotClosedOnSelect: StoryFn = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -172,7 +174,7 @@ export const NotClosedOnSelect = () => (
   </OverlayProvider>
 );
 
-export const DisabledItem = () => (
+export const DisabledItem: StoryFn = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -191,7 +193,7 @@ export const DisabledItem = () => (
   </OverlayProvider>
 );
 
-export const isPressed = () => (
+export const isPressed: StoryFn = () => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
