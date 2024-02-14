@@ -2,7 +2,7 @@ import React from 'react';
 import { SxProp, ThemeUICSSObject, ThemeUICSSProperties } from 'theme-ui';
 
 export type SxObject = {
-  [styleKey: string]: ThemeUICSSObject
+  [styleKey: string]: ThemeUICSSObject,
 }
 
 export interface StyleProps extends ThemeUICSSProperties, SxProp {

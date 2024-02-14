@@ -1,5 +1,8 @@
+import { ThemeUICSSObject } from 'theme-ui';
+
 import statuses from '../../utils/devUtils/constants/statuses';
 import { text } from '../Text/Text.styles';
+
 
 // Styles for default input and variants go here.
 
@@ -14,9 +17,8 @@ export const defaultFocus = {
   outlineColor: 'accent.60',
   outlineOffset: '0px',
 };
-
 // Default input styling
-export const input = {
+export const input: ThemeUICSSObject = {
   ...text.inputValue,
   appearance: 'none',
   boxSizing: 'border-box',
@@ -173,7 +175,7 @@ input.multivaluesWrapper = {
   borderColor: 'neutral.80',
   borderStyle: 'solid',
   borderWidth: 1,
-  flexDirection: 'row !important',
+  flexDirection: 'row !important' as 'row',
   flexWrap: 'wrap',
   pt: 6,
   pr: 10,
