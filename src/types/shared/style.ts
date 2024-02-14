@@ -20,6 +20,7 @@ export type Placement = 'bottom' | 'bottom left' | 'bottom right' | 'bottom star
   'right' | 'right top' | 'right bottom' | 'end' | 'end top' | 'end bottom';
 
 export type Axis = 'top' | 'bottom' | 'left' | 'right';
+export type Alignment = 'start' | 'end' | 'middle';
 export type SizeAxis = 'width' | 'height';
 export type PlacementAxis = Axis | 'center';
 

@@ -14,6 +14,7 @@ export * from './listItem';
 export * from './loader';
 export * from './overlayPanel';
 export * from './popoverContainer';
+export * from './popoverMenu';
 export * from './separator';
 export * from './shared';
 export * from './table';
