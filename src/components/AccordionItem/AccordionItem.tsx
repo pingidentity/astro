@@ -25,6 +25,9 @@ interface AccordionItemProps<T> {
   'data-id'?: string,
   children: React.ReactNode,
   buttonProps?: object,
+  slots?: {
+    postHeading: React.ReactNode,
+  },
 }
 
 const AccordionItem = (props: AccordionItemProps<object>) => {
@@ -77,26 +80,32 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
 
   return (
     <Box variant="accordion.accordion" className={itemClasses} {...others} {...containerProps}>
-      <ThemeUIButton
-        aria-label={ariaLabel}
-        ref={buttonRef}
-        sx={{ display: 'flex', px: '0', height: 'unset' }}
-        variant="variants.accordion.header"
-        className={buttonClasses}
-        {...mergeProps(hoverProps, accordionButtonProps, raButtonProps, buttonProps, focusProps)}
-      >
-        <Text
-          as={validLabelHeadingTag}
+      <Box isRow>
+        <ThemeUIButton
+          aria-label={ariaLabel}
+          ref={buttonRef}
+          sx={{ display: 'flex', px: '0', height: 'unset' }}
+          variant="variants.accordion.header"
           className={buttonClasses}
-          variant={validLabelHeadingTag}
-          sx={hoveredState}
+          {...mergeProps(hoverProps, accordionButtonProps, raButtonProps, buttonProps, focusProps)}
         >
-          {item.props.label}
-        </Text>
-        <Box as="span" ml="5px">
-          <Icon icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
-        </Box>
-      </ThemeUIButton>
+          <Text
+            as={validLabelHeadingTag}
+            className={buttonClasses}
+            variant={validLabelHeadingTag}
+            sx={hoveredState}
+          >
+            {item.props.label}
+          </Text>
+          <Box as="span" ml="5px">
+            <Icon icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+          </Box>
+        </ThemeUIButton>
+        {item.props.slots?.postHeading
+          && (
+            item.props.slots?.postHeading
+          )}
+      </Box>
       {isOpen
         && (
           <Box variant="accordion.body" {...accordionRegionProps} {...regionProps} className={itemClasses}>

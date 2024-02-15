@@ -2,7 +2,7 @@ import React from 'react';
 import { SxProp, ThemeUICSSObject, ThemeUICSSProperties } from 'theme-ui';
 
 export type SxObject = {
-  [styleKey: string]: ThemeUICSSObject
+  [styleKey: string]: ThemeUICSSObject,
 }
 
 export interface StyleProps extends ThemeUICSSProperties, SxProp {
@@ -20,6 +20,7 @@ export type Placement = 'bottom' | 'bottom left' | 'bottom right' | 'bottom star
   'right' | 'right top' | 'right bottom' | 'end' | 'end top' | 'end bottom';
 
 export type Axis = 'top' | 'bottom' | 'left' | 'right';
+export type Alignment = 'start' | 'end' | 'middle';
 export type SizeAxis = 'width' | 'height';
 export type PlacementAxis = Axis | 'center';
 

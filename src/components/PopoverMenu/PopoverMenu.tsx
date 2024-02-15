@@ -1,18 +1,18 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { DismissButton, FocusScope, useMenuTrigger, useOverlayPosition } from 'react-aria';
 import { useMenuTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 
 import { MenuContext } from '../../context/MenuContext';
+import { useLocalOrForwardRef } from '../../hooks';
+import { Placement, PopoverMenuProps } from '../../types';
 import PopoverContainer from '../PopoverContainer';
 
-const PopoverMenu = forwardRef((props, ref) => {
-  const menuPopoverRef = useRef();
-  const triggerRef = useRef();
-  const menuRef = useRef();
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => menuPopoverRef.current);
+const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) => {
+  const menuPopoverRef = useLocalOrForwardRef<HTMLDivElement>(ref);
+  const triggerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
+
   const {
     children,
     align,
@@ -25,12 +25,14 @@ const PopoverMenu = forwardRef((props, ref) => {
   } = props;
 
   const [menuTrigger, menu] = React.Children.toArray(children);
-  const state = useMenuTriggerState({
+
+  const menuTriggerState = {
     ...props,
     defaultOpen: isDefaultOpen,
     closeOnSelect: !isNotClosedOnSelect,
     shouldFlip: !isNotFlippable,
-  });
+  };
+  const state = useMenuTriggerState(menuTriggerState);
 
   const { menuTriggerProps, menuProps } = useMenuTrigger({}, state, triggerRef);
 
@@ -39,7 +41,7 @@ const PopoverMenu = forwardRef((props, ref) => {
     overlayRef: menuPopoverRef,
     scrollRef: menuRef,
     offset: 15,
-    placement: `${direction} ${align}`,
+    placement: `${direction} ${align}` as Placement | undefined,
     // Our API preference is for default false so we invert this since it should be default true
     shouldFlip: !isNotFlippable,
     isOpen: state.isOpen,
@@ -47,6 +49,7 @@ const PopoverMenu = forwardRef((props, ref) => {
     shouldUpdatePosition: true,
   });
 
+  /* eslint-disable react/jsx-no-constructed-context-values */
   const menuContext = {
     ...menuProps,
     ref: menuRef,
@@ -80,6 +83,7 @@ const PopoverMenu = forwardRef((props, ref) => {
           isNonModal
           {...positionProps}
           {...menuProps}
+          role="dialog"
         >
           {contents}
         </PopoverContainer>
@@ -88,33 +92,6 @@ const PopoverMenu = forwardRef((props, ref) => {
   );
 });
 
-PopoverMenu.propTypes = {
-  /** Alignment of the popover menu relative to the trigger. */
-  align: PropTypes.oneOf(['start', 'end', 'middle']),
-  /** Where the popover menu opens relative to its trigger. */
-  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /** Whether the overlay is open by default (controlled). */
-  isOpen: PropTypes.bool,
-  /** Whether the overlay is open by default (uncontrolled). */
-  isDefaultOpen: PropTypes.bool,
-  /** Whether the popover is prevented from closing when a selection is made. */
-  isNotClosedOnSelect: PropTypes.bool,
-  /**
-   * Whether the popover is prevented from flipping directions when insufficient space is
-   * available for the given `direction` placement.
-   */
-  isNotFlippable: PropTypes.bool,
-  /** Whether the PopoverMenu hides the arrow. */
-  hasNoArrow: PropTypes.bool,
-  /** Whether the PopoverMenu contains focus inside the scope. */
-  isContainFocus: PropTypes.bool,
-  /**
-   * Handler that is called when the overlay's open state changes.
-   *
-   * `(isOpen: boolean) => void`
-   */
-  onOpenChange: PropTypes.func,
-};
 
 PopoverMenu.defaultProps = {
   align: 'middle',

@@ -194,7 +194,7 @@ const TreeViewRow = forwardRef((props, ref) => {
           isToggled={isExpanded}
           defaultIcon={MenuRight}
           toggledIcon={MenuDownIcon}
-          iconProps={{ size: 25, title: `${title} expand or collapse button` }}
+          iconProps={{ size: 25, title: { name: `${title} expand or collapse button` } }}
           buttonProps={{
             'aria-label': `${title} expand or collapse button`,
             tabIndex: '-1',
@@ -215,11 +215,11 @@ const TreeViewRow = forwardRef((props, ref) => {
         }}
         onClick={pressRow}
       >
-        <Icon color="focus" icon={mainIcon} size={25} title="folder icon" alt="folder icon" />
+        <Icon color="focus" icon={mainIcon} size={25} title={{ name: 'folder icon' }} alt="folder icon" />
         <Text className={classNames}>
           {title}
         </Text>
-        <Icon icon={lastIcon} size={15} color="accent.80" title="lock icon" alt="lock icon" />
+        <Icon icon={lastIcon} size={15} color="accent.80" title={{ name: 'lock icon' }} alt="lock icon" />
       </Box>
     </Box>
   );

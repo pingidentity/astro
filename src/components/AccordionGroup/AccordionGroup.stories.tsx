@@ -9,6 +9,7 @@ import {
   Badge,
   Box,
   Button,
+  HelpHint,
   Text,
   TextField,
 } from '../../index';
@@ -288,6 +289,22 @@ export const LabelWithBadge = args => {
           </Box>
         )}
         data-id="accordionItem"
+      >
+        <Text>Render me!</Text>
+      </Item>
+    </AccordionGroup>
+  );
+};
+
+export const AccordionWithSlot = args => {
+  return (
+    <AccordionGroup labelHeadingTag="h3" {...args}>
+      <Item
+        key="accordionKey"
+        textValue="accordionKey"
+        label="Accordion Label"
+        data-id="accordionItem"
+        slots={{ postHeading: <HelpHint> Text of the popover right here...</HelpHint> }}
       >
         <Text>Render me!</Text>
       </Item>
