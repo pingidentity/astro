@@ -10,6 +10,7 @@ Accordions should be used:
 - To organize related information.
 - To shorten pages and reduce scrolling when it’s not crucial that users review the content.
 - When white space is at a minimum and content cannot be displayed all at once. 
+- With Slots props to insert extra UI elements next to headings.
 
 Accordions should not have focusable items as children.
 
@@ -34,6 +35,11 @@ These keys provide additional functionality to the component.
 | Space or Enter | When focus is on the accordion header of a collapsed section, these keys expand the section. |
 | Tab | Moves focus to the next focusable component. All focusable components in the accordion are included in the page tab sequence.|
 | Shift + Tab | Moves focus to the previous focusable component. All focusable components in the accordion are included in the page tab sequence. |
+
+#### Slots
+
+The slots prop has been provided for added flexibility. Use the **`postHeading`** slot to add helpHint or icon elements next to the heading
+section. Keep in mind that this component is best suited for specific designs necessitates its use.
 
 #### Screen readers
 

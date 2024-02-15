@@ -2,7 +2,7 @@ import React from 'react';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 
-import { Box, Button, Menu, OverlayPanel, PopoverMenu, TextField } from '../../index';
+import { Box, Button, HelpHint, Menu, OverlayPanel, PopoverMenu, TextField } from '../../index';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { validHeadingTags } from '../AccordionItem/AccordionItem';
@@ -35,13 +35,13 @@ const selectedAccordionKeys = ['identityProvider', 'identityProvider1'];
 
 const getComponent = (props = {}) => render((
   <AccordionGroup {...defaultProps} {...props}>
-    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item">
+    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item" data-testid="first">
       <Text>Render me!</Text>
     </Item>
-    <Item key="second" textValue="Duplicate" data-id="second" label="Accordion item">
+    <Item key="second" textValue="Duplicate" data-id="second" label="Accordion item" data-testid="second">
       <Text>Render me!</Text>
     </Item>
-    <Item key="third" textValue="Duplicate" data-id="third" label="Accordion item">
+    <Item key="third" textValue="Duplicate" data-id="third" label="Accordion item" data-testid="third">
       <TextField
         role="form"
         label="Example Label"
@@ -145,6 +145,14 @@ const getComponentWithMultipleAccordion = () => render((
   </Box>
 ));
 
+const getComponentWithSlot = props => render((
+  <AccordionGroup {...defaultProps} {...props}>
+    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item" slots={props.slots}>
+      <Text>Render me!</Text>
+    </Item>
+  </AccordionGroup>
+));
+
 test('button press uses callback', () => {
   const onPress = jest.fn();
   getComponent({ onExpandedChange: onPress });
@@ -230,10 +238,8 @@ test('allows users to navigate accordion headers through the tab key', () => {
 
 test('disabled keys prop disables an accordion item', () => {
   getComponent({ disabledKeys: ['first'] });
-  const buttons = screen.getAllByRole('button');
-  const selectedItem = buttons[0];
-  const { parentElement } = selectedItem;
-  expect(parentElement).toHaveClass('is-disabled');
+  const button = screen.getByTestId('first');
+  expect(button).toHaveClass('is-disabled');
 });
 
 test('default expanded keys expands an accordion item', () => {
@@ -269,10 +275,10 @@ test('able to click a textfield that is the rendered child of an accordion', () 
 
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   getComponent();
-  const buttons = screen.getAllByRole('button');
+  const buttons = screen.getAllByText('Accordion item');
   const selectedItem = buttons[0];
   const { parentElement } = selectedItem;
-  expect(parentElement).toHaveAttribute('data-id', 'first');
+  expect(parentElement).toHaveAttribute('data-key', 'first');
 });
 
 test('items do not automatically expand if wrapped in an open OverlayPanel', () => {
@@ -348,4 +354,9 @@ test('when labelHeadingTag is uppercase, the label is rendered', () => {
   getComponent({ labelHeadingTag: h4Tag });
 
   screen.getAllByRole('heading', { level: getLabelHeadingLevel(h4Tag) });
+});
+
+test('renders Accordion component with slot', () => {
+  getComponentWithSlot({ slots: { postHeading: <HelpHint data-testid="helpHint">Text of the popover right here...</HelpHint> } });
+  expect(screen.getByTestId('helpHint')).toBeInTheDocument();
 });
