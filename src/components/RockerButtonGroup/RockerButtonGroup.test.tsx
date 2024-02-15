@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { RockerButton, RockerButtonGroup } from '../../index';
-import { fireEvent, queryByAttribute, render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 
@@ -43,7 +43,7 @@ universalComponentTests({
 
 test('renders rocker container with buttons', () => {
   getComponent();
-  const rockerContainer = queryByAttribute('data-id', document, 'test-container');
+  const rockerContainer = screen.getByTestId(testId);
   expect(rockerContainer).toBeInTheDocument();
   const buttons = screen.getAllByRole('button');
   expect(buttons).toHaveLength(3);
@@ -51,7 +51,7 @@ test('renders rocker container with buttons', () => {
 
 test('buttonGroup is not disabled by default', () => {
   getComponent();
-  const rockerContainer = queryByAttribute('data-id', document, 'test-container');
+  const rockerContainer = screen.getByTestId(testId);
   expect(rockerContainer).toBeEnabled();
 
   testButtons.forEach(button => {
@@ -81,7 +81,6 @@ test('selected button can be changed by keyboard interaction', () => {
   expect(button0).toHaveClass('is-selected');
   const button1 = screen.getByText(testButtons[1].key);
   expect(button1).not.toHaveClass('is-selected');
-
   fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
   expect(screen.getByText(testButtons[1].key)).toHaveClass('is-selected');
   expect(screen.getByText(testButtons[0].key)).not.toHaveClass('is-selected');

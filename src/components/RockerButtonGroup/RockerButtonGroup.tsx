@@ -1,34 +1,29 @@
 import React, {
   forwardRef,
-  useImperativeHandle,
-  useRef,
 } from 'react';
 import { useTabList } from 'react-aria';
 import { useTabListState } from 'react-stately';
-import PropTypes from 'prop-types';
+import { AriaTabListProps } from '@react-aria/tabs';
+import { TabListState, TabListStateOptions } from '@react-stately/tabs';
 
-import { usePropWarning } from '../../hooks';
+import { RockerContext } from '../../context/RockerButtonGroupContext';
+import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { RockerButtonGroupProps } from '../../types';
 import Box from '../Box';
 import { CollectionRockerButton } from '../RockerButton';
 
-export const RockerContext = React.createContext({});
-
-const RockerButtonGroup = forwardRef((props, ref) => {
+const RockerButtonGroup = forwardRef<HTMLDivElement, RockerButtonGroupProps>((props, ref) => {
   const {
-    children,
-    onSelectionChange,
     tabListProps, // eslint-disable-line
-    disabledKeys,
     ...others
   } = props;
-  const buttonGroupRef = useRef();
+  const buttonGroupRef = useLocalOrForwardRef<HTMLDivElement>(ref);
+
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => buttonGroupRef.current);
-  const state = useTabListState({ ...props, onSelectionChange });
+  const state = useTabListState(props as TabListStateOptions<object>) as TabListState<object>;
   const {
     tabListProps: raTabListProps,
-  } = useTabList(props, state, buttonGroupRef);
+  } = useTabList(props as AriaTabListProps<object>, state, buttonGroupRef);
   // removed tabList role for now as this isn't really the role we are looking for
   delete raTabListProps.role;
 
@@ -54,17 +49,6 @@ const RockerButtonGroup = forwardRef((props, ref) => {
     </RockerContext.Provider>
   );
 });
-
-RockerButtonGroup.propTypes = {
-  /** The default button key to be selected. (uncontrolled) */
-  defaultSelectedKey: PropTypes.string,
-  /** The button key that is currently selected. (controlled) */
-  selectedKey: PropTypes.string,
-  /** Which keys should be disabled. */
-  disabledKeys: PropTypes.arrayOf(PropTypes.string),
-  /** Handler that is called when the selected button has changed. */
-  onSelectionChange: PropTypes.func,
-};
 
 RockerButtonGroup.displayName = 'RockerButtonGroup';
 export default RockerButtonGroup;

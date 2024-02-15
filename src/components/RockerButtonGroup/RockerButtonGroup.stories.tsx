@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RockerButton, RockerButtonGroup } from '../../index';
+import { RockerButtonGroupProps } from '../../types';
 
 import RockerButtonGroupReadme from './RockerButtonGroup.mdx';
 
@@ -33,9 +35,9 @@ export default {
   args: {
     isDisabled: false,
   },
-};
+} as Meta;
 
-export const Default = ({ ...args }) => (
+export const Default: StoryFn<RockerButtonGroupProps> = ({ ...args }: RockerButtonGroupProps) => (
   <RockerButtonGroup {...args}>
     <RockerButton name="and" key="and">And</RockerButton>
     <RockerButton name="or" key="or">Or</RockerButton>
@@ -43,7 +45,7 @@ export const Default = ({ ...args }) => (
   </RockerButtonGroup>
 );
 
-export const Uncontrolled = () => (
+export const Uncontrolled: StoryFn = () => (
   <RockerButtonGroup>
     <RockerButton name="and" key="and">And</RockerButton>
     <RockerButton name="or" key="or">Or</RockerButton>
@@ -51,7 +53,7 @@ export const Uncontrolled = () => (
   </RockerButtonGroup>
 );
 
-export const Controlled = () => {
+export const Controlled: StoryFn = () => {
   const [currentTab, setCurrentTab] = useState('and');
   return (
     <RockerButtonGroup selectedKey={currentTab} onSelectionChange={setCurrentTab}>
@@ -62,7 +64,7 @@ export const Controlled = () => {
   );
 };
 
-export const withCustomSelectedColors = () => (
+export const withCustomSelectedColors: StoryFn = () => (
   <RockerButtonGroup>
     <RockerButton
       name="and"
@@ -95,7 +97,7 @@ export const withCustomSelectedColors = () => (
   </RockerButtonGroup>
 );
 
-export const DisabledSingleButton = () => (
+export const DisabledSingleButton: StoryFn = () => (
   <RockerButtonGroup defaultSelectedKey="or" disabledKeys={['and']}>
     <RockerButton name="and" key="and">And</RockerButton>
     <RockerButton name="or" key="or">Or</RockerButton>
