@@ -10,10 +10,10 @@ import { useHover, usePress } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import PropTypes from 'prop-types';
 
+import { RockerContext } from '../../context/RockerButtonGroupContext';
 import { usePropWarning, useRockerButton, useStatusClasses } from '../../hooks';
 import { Box } from '../../index';
 import { accent, getBaseHexColor, getDarkerColor } from '../../styles/colors';
-import { RockerContext } from '../RockerButtonGroup';
 
 export const CollectionRockerButton = forwardRef((props, ref) => {
   const {
