@@ -32,6 +32,9 @@ declare module '@react-types/shared' {
     sx?: StyleProps
     /** Key for the item. */
     key?: Key,
+    slots?: {
+      postHeading: React.ReactNode
+    }
   }
 }
 
