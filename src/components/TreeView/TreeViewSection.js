@@ -93,6 +93,7 @@ export const addRefToArrayHelper = (prevState, keyToAdd, refToAdd) => {
       key: keyToAdd,
       thisRef: refToAdd,
     };
+
     return [
       ...prevState,
       thisObj,

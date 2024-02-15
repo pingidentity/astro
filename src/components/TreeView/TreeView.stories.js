@@ -20,6 +20,22 @@ export default {
         type: 'code',
       },
     },
+    a11y: {
+      config: {
+        rules: [
+          /* Turned off since dynamic parent and children getting added on treegrid role
+           * and design specs */
+          {
+            id: 'aria-required-parent',
+            enabled: false,
+          },
+          {
+            id: 'aria-required-children',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
 };
 
