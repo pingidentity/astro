@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.47.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.45.0...@pingux/astro@2.47.0) (2024-02-19)
+
+
+### Bug Fixes
+
+* bump version from failed release ([fbe90b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fbe90b1b1d66dd9fb3a29553e48ab8cd215bf104))
+* bump versions ([181dc6f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/181dc6f34da009f519733396d0affe6b42eb2e5e))
+
+
+### Features
+
+* [UIP-6763] 4 accessibility violations found for Treeview ([b47ac1a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b47ac1acccc2375e60e395645ca871824b624b18))
+* [UIP-6768] RockerButtonGroup convert to TypeScript ([0d2907c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0d2907c88950f16c4d9b70e8a75497d310bf0f09))
+* [UIP-6772] PopoverMenu convert to TS ([afa9ba6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/afa9ba6e228a042dba46aefa45f0b33021332398))
+* [UIP-6794] Accordion post heading slot ([b7a6e93](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b7a6e93ac460f2c0cd419c1902485a02cefeba68))
+
+
+
+
+
 # [2.45.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.44.0...@pingux/astro@2.45.0) (2024-02-13)
 
 
