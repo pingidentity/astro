@@ -2,6 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { HelpHint, Link } from '../../index';
+import { HelpHintProps } from '../../types';
 import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -12,11 +13,11 @@ const defaultProps = {
   children: popoverValue,
 };
 
-const getComponent = (props = {}) => render(
+const getComponent = (props: HelpHintProps = {}) => render(
   <HelpHint {...defaultProps} {...props} />,
 );
 
-const getComponentWithLink = (props = {}) => render(
+const getComponentWithLink = (props: HelpHintProps = {}) => render(
   <HelpHint {...defaultProps} {...props}>
     <Link href="https://uilibrary.ping-eng.com/">Learn More</Link>
   </HelpHint>,

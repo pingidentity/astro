@@ -3,6 +3,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render, screen } from '@testing-library/react';
 
+import { Requirements, RequirementsListProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import RequirementsList from '.';
@@ -20,7 +21,7 @@ const testStatusIdSuccess = 'status-icon__success';
 const testStatusIdWarning = 'status-icon__warning';
 const testStatusIdError = 'status-icon__error';
 
-const testRequirements = [
+const testRequirements: Requirements = [
   {
     name: '6 characters',
     status: 'default',
@@ -47,7 +48,9 @@ const defaultProps = {
   'data-testid': testId,
   requirements: testRequirements,
 };
-const getComponent = (props = {}) => render(
+
+
+const getComponent = (props: RequirementsListProps = {}) => render(
   <CacheProvider value={emotionCache}>
     <RequirementsList {...defaultProps} {...props} />
   </CacheProvider>,
@@ -66,7 +69,7 @@ test('base case requirements list', () => {
 });
 
 test('empty variables requirements list', () => {
-  getComponent({ requirementsList: [] });
+  getComponent({ requirements: [] });
   const requirementsList = screen.getByTestId(testId);
   expect(requirementsList).toBeInstanceOf(HTMLUListElement);
   expect(requirementsList).toBeInTheDocument();

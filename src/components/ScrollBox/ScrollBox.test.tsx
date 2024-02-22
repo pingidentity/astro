@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ScrollBoxProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -12,7 +13,7 @@ const defaultProps = {
   'maxHeight': '100px',
 };
 
-const getComponent = (props = {}) => render(
+const getComponent = (props: ScrollBoxProps = {}) => render(
   <ScrollBox
     {...defaultProps}
     {...props}
