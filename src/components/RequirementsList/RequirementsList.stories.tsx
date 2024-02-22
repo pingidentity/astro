@@ -1,9 +1,11 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RequirementsList } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { RequirementsListProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import RequirementsListReadme from './RequirementsList.mdx';
 
@@ -37,9 +39,11 @@ export default {
       { 'name': 'requirement 4', 'status': 'success' },
     ],
   },
-};
+} as Meta;
 
-export const Default = ({ label, requirements }) => (
+export const Default: StoryFn<RequirementsListProps> = (
+  { label, requirements }: RequirementsListProps,
+) => (
   <RequirementsList label={label} requirements={requirements} />
 );
 
@@ -50,7 +54,7 @@ Default.parameters = {
   },
 };
 
-export const Password = () => (
+export const Password: StoryFn = () => (
   <RequirementsList
     label="Password Requirements"
     requirements={[
