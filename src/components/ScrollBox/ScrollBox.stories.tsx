@@ -1,9 +1,11 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, ScrollBox } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { ScrollBoxProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import ScrollBoxReadme from './ScrollBox.mdx';
 
@@ -31,9 +33,9 @@ export default {
   args: {
     maxHeight: '100px',
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<ScrollBoxProps> = args => (
   <ScrollBox maxHeight="100px" {...args}>
     <Box
       sx={{
