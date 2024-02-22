@@ -25,7 +25,17 @@ TooltipWrapper.propTypes = {
 };
 
 const CopyText = forwardRef((props, ref) => {
-  const { children, textToCopy, tooltipText, mode, tooltipProps, wrapperProps, ...others } = props;
+  const {
+    children,
+    textToCopy,
+    tooltipText,
+    mode,
+    tooltipProps,
+    wrapperProps,
+    iconButtonProps,
+    ...others
+  } = props;
+
   const value = textToCopy || (mode === 'link' ? children.props.href : children.props.children);
 
   const [isCopied, setIsCopied] = useState(false);
@@ -104,7 +114,7 @@ const CopyText = forwardRef((props, ref) => {
           {...wrapperProps}
         >
           {content}
-          <CopyButton onPress={copyToClipboard} {...focusProps} />
+          <CopyButton onPress={copyToClipboard} {...focusProps} {...iconButtonProps} />
         </Box>
       </TooltipWrapper>
     );
@@ -121,7 +131,10 @@ const CopyText = forwardRef((props, ref) => {
       >
         {content}
         <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip}>
-          <CopyButton onPress={copyToClipboard} {...mergeProps(hoverProps, focusProps)} />
+          <CopyButton
+            onPress={copyToClipboard}
+            {...mergeProps(hoverProps, focusProps, iconButtonProps)}
+          />
         </TooltipWrapper>
       </Box>
     );
@@ -137,7 +150,7 @@ const CopyText = forwardRef((props, ref) => {
           {...others}
         >
           {content}
-          <CopyButton onPress={copyToClipboard} {...focusProps} />
+          <CopyButton onPress={copyToClipboard} {...focusProps} {...iconButtonProps} />
         </Box>
       </Box>
     </TooltipWrapper>
@@ -155,6 +168,8 @@ CopyText.propTypes = {
   tooltipProps: PropTypes.shape({}),
   /** Props to apply to the wrapper in nonClickableContent mode. */
   wrapperProps: PropTypes.shape({}),
+  /** Props to apply to the icon button */
+  iconButtonProps: PropTypes.shape({}),
 };
 
 CopyText.defaultProps = {
