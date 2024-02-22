@@ -78,6 +78,7 @@
     "@react-stately/grid": "~3.3.1",
     "@react-stately/layout": "^3.13.4",
     "@react-stately/list": "~3.4.1",
+    "@react-stately/overlays": "^3.6.4",
     "@react-stately/table": "^3.9.0",
     "@react-stately/tabs": "^3.6.3",
     "@react-stately/tree": "^3.7.4",

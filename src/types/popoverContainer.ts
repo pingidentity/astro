@@ -1,3 +1,4 @@
+import { TestingAttributes } from './shared/test';
 import { DOMAttributes, Modify, StyleProps } from './shared';
 
 type PopoverPlacement = 'top' | 'right' | 'bottom' | 'left'
@@ -8,7 +9,8 @@ export interface PopoverArrowProps extends DOMAttributes, StylePropsExtended {
   arrowCrossOffset?: string,
 }
 
-export interface PopoverContainerProps extends StylePropsExtended, DOMAttributes {
+export interface PopoverContainerProps extends StylePropsExtended, DOMAttributes,
+TestingAttributes {
   placement?: string,
   arrowProps?: PopoverArrowProps,
   arrowCrossOffset?: string,

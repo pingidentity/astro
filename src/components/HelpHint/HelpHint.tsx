@@ -1,12 +1,18 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { FocusScope, mergeProps, useFocusRing, useFocusWithin, useOverlayPosition, useOverlayTrigger } from 'react-aria';
+import React, { forwardRef, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import {
+  AriaPositionProps, FocusScope, FocusWithinProps, mergeProps,
+  OverlayTriggerProps, PositionAria, useFocusRing, useFocusWithin,
+  useOverlayPosition, useOverlayTrigger,
+} from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
-import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
+import { FocusRingAria } from '@react-aria/focus';
+import { FocusWithinResult, HoverProps, HoverResult, useHover } from '@react-aria/interactions';
+import { OverlayTriggerState } from '@react-stately/overlays';
 
 import { Box, Icon, IconButton, PopoverContainer } from '../..';
-import { useStatusClasses } from '../../hooks';
+import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { isSafari } from '../../styles/safariAgent';
+import { HelpHintProps } from '../../types';
 
 const HelpIcon = () => (
   <svg width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="help-icon-title">
@@ -15,7 +21,7 @@ const HelpIcon = () => (
   </svg>
 );
 
-const HelpHint = forwardRef((props, ref) => {
+const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
   const {
     align,
     arrowCrossOffset,
@@ -27,36 +33,34 @@ const HelpHint = forwardRef((props, ref) => {
     iconButtonProps,
     isDarkMode,
     isNotFlippable,
-    offset,
     popoverProps,
     tooltipProps,
     ...others
   } = props;
 
-  const [isFocusWithinOverlay, setIsFocusWithinOverlay] = useState(false);
-  const { focusWithinProps } = useFocusWithin({
+  const [isFocusWithinOverlay, setIsFocusWithinOverlay] = useState<boolean>(false);
+  const { focusWithinProps }: FocusWithinResult = useFocusWithin({
     onFocusWithinChange: isFocusWithin => setIsFocusWithinOverlay(isFocusWithin),
-  });
+  } as FocusWithinProps);
 
-  const overlayRef = useRef();
-  const triggerRef = useRef(null);
+  const overlayRef = useRef<HTMLElement>(null);
+  const triggerRef = useLocalOrForwardRef<HTMLButtonElement>(ref);
 
-  const { focusProps, isFocusVisible } = useFocusRing();
+  const { focusProps, isFocusVisible }: FocusRingAria = useFocusRing();
 
   const { hoverProps: overlayHoverProps, isHovered: isOverlayHovered } = useHover({});
-  const { hoverProps, isHovered: isTriggerHovered } = useHover({});
+  const { hoverProps, isHovered: isTriggerHovered }: HoverResult = useHover({} as HoverProps);
 
-  const popoverState = useOverlayTriggerState({});
+  const popoverState: OverlayTriggerState = useOverlayTriggerState({});
+
   const { open, close, isOpen } = popoverState;
 
   const { triggerProps, overlayProps } = useOverlayTrigger(
-    { type: 'dialog' },
-    popoverState,
-    triggerRef,
-  );
+    { type: 'dialog' } as OverlayTriggerProps,
+    popoverState as OverlayTriggerState,
+    triggerRef as RefObject<HTMLButtonElement>,
 
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => triggerRef.current);
+  );
 
   // Set a timeout to close the overlay upon hover / focus loss,
   // but keep it open if the trigger or overlay are hovered again before it closes.
@@ -82,7 +86,7 @@ const HelpHint = forwardRef((props, ref) => {
     return triggerRef?.current.setAttribute('aria-expanded', 'false');
   }, [isOpen]);
 
-  const { overlayProps: positionProps, placement } = useOverlayPosition({
+  const { overlayProps: positionProps, placement }: PositionAria = useOverlayPosition({
     targetRef: triggerRef,
     overlayRef,
     placement: `${direction} ${align}`,
@@ -91,19 +95,20 @@ const HelpHint = forwardRef((props, ref) => {
     onClose: close,
     shouldUpdatePosition: true,
     shouldFlip: !isNotFlippable,
-  });
+  } as AriaPositionProps);
 
   const { classNames } = useStatusClasses(className, {
     isDarkMode,
   });
 
-  const addIsSafariCompatiblePropToLinkChildren = containerChildren => {
-    if (containerChildren) {
-      return React.Children.map(containerChildren, child => {
+  const addIsSafariCompatiblePropToLinkChildren = (element: ReactNode) => {
+    if (element) {
+      return React.Children.map(element, (child: ReactNode) => {
         if (!React.isValidElement(child)) return child;
-        return React.cloneElement(child, {
+        return React.cloneElement(child as React.ReactElement<HelpHintProps>, {
           children: addIsSafariCompatiblePropToLinkChildren(child.props.children),
-          isSafariCompatible: child.type.displayName === 'Link',
+          isSafariCompatible: typeof (child as React.ReactElement).type === 'string'
+            && (child as React.ReactElement).type === 'Link',
         });
       });
     }
@@ -129,10 +134,10 @@ const HelpHint = forwardRef((props, ref) => {
         hasNoArrow={hasNoArrow}
         isDismissable={isFocusWithinOverlay ? !isOpen : true}
         isNonModal
-        isOpen={isOpen}
         onClose={close}
         placement={placement}
         ref={overlayRef}
+        isOpen={isOpen}
         {...mergeProps(
           overlayProps,
           positionProps,
@@ -144,47 +149,13 @@ const HelpHint = forwardRef((props, ref) => {
         {/* Only autofocus if keyboard is being used */}
         <FocusScope restoreFocus autoFocus={isFocusVisible}>
           <Box variant="helpHint.popoverContainer" role="status">
-            { isSafari ? addIsSafariCompatiblePropToLinkChildren(children) : children }
+            {isSafari ? addIsSafariCompatiblePropToLinkChildren(children) : children}
           </Box>
         </FocusScope>
       </PopoverContainer>
     </Box>
   );
 });
-
-HelpHint.propTypes = {
-  /** Props object that is spread directly into the popover element. */
-  popoverProps: PropTypes.shape({}),
-  /** @ignore Alias for `popoverProps` prop. Exists for backwards-compatibility. */
-  tooltipProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the IconButton element. */
-  iconButtonProps: PropTypes.shape({}),
-  /** Defaults to true, displays dark popover with white text */
-  isDarkMode: PropTypes.bool,
-  /** Where the popover menu opens relative to its trigger. */
-  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /**
-     * Whether the popover is prevented from flipping directions when insufficient space is
-     * available for the given `direction` placement.
-     */
-  isNotFlippable: PropTypes.bool,
-  /** Alignment of the popover menu relative to the trigger. */
-  align: PropTypes.oneOf(['start', 'end', 'middle']),
-  /**
-   * Allows to add an arrow to popover container
-   */
-  hasNoArrow: PropTypes.bool,
-  /** Popover offset relative to its trigger. */
-  offset: PropTypes.number,
-  /** Arrow offset relative to the left of the popover.
-   * Must be passed as a px or percentage. */
-  arrowCrossOffset: PropTypes.string,
-  /** The additional offset applied along the cross axis
-   * between the element and its anchor element. */
-  crossOffset: PropTypes.number,
-  /** Amount of time before the popover closes */
-  closeDelay: PropTypes.number,
-};
 
 HelpHint.defaultProps = {
   align: 'middle',

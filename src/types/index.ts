@@ -5,6 +5,7 @@ export * from './button';
 export * from './buttonBar';
 export * from './card';
 export * from './fieldHelperText';
+export * from './helpHint';
 export * from './icon';
 export * from './iconBadge';
 export * from './iconButton';
