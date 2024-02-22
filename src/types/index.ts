@@ -4,6 +4,7 @@ export * from './bracket';
 export * from './button';
 export * from './card';
 export * from './fieldHelperText';
+export * from './helpHint';
 export * from './icon';
 export * from './iconBadge';
 export * from './iconButton';
