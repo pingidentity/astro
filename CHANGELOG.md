@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.48.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.47.0...@pingux/astro@2.48.0) (2024-02-22)
+
+
+### Features
+
+* [UIP-6725] HelpHint convert to TypeScript ([4da0e5d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4da0e5d1fc1a333431e5cae1de51f0a315011e31))
+* [UIP-6767] Scrollbox convert to typescript ([56bf971](https://gitlab.corp.pingidentity.com/ux/pingux/commit/56bf9712c3395b32ac5b9dca57233e2e8adb5465))
+* [UIP-6770] RequirementsList convert to TypeScript ([8e5707f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8e5707f2c7ed23d7cf5e90b7e23e00733693091e))
+* [UIP-6783] CopyText add iconButtonProps ([2e80d7a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2e80d7a74bfdfe9f36742b3c46145a2da60e4d4e))
+
+
+
+
+
 # [2.47.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.45.0...@pingux/astro@2.47.0) (2024-02-19)
 
 
