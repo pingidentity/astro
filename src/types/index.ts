@@ -18,6 +18,7 @@ export * from './overlayPanel';
 export * from './popoverContainer';
 export * from './popoverMenu';
 export * from './rockerButtonGroup';
+export * from './scrollBox';
 export * from './separator';
 export * from './shared';
 export * from './table';
