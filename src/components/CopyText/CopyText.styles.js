@@ -16,7 +16,7 @@ const copy = {
 };
 
 export const copyButton = {
-  ml: 'sm',
+  mx: 'sm',
   outline: 'none',
   height: 'auto',
   cursor: 'pointer',
