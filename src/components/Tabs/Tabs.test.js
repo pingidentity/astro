@@ -26,8 +26,8 @@ const tabsWithList = [
   {
     name: 'Tab 2',
     list: [
-      { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list', role: 'listitem' },
-      { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list', role: 'listitem' },
+      { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list', role: 'menuitemradio' },
+      { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list', role: 'menuitemradio' },
     ],
   },
 ];
@@ -336,7 +336,7 @@ test('will render tab with list if provided', async () => {
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   testTabPanel(0);
 
-  const menuItems = screen.queryAllByRole('listitem');
+  const menuItems = screen.queryAllByRole('menuitemradio');
   expect(menuItems).toHaveLength(tabsWithList[1].list.length);
   expect(menuItems[0]).not.toHaveFocus();
 
@@ -362,7 +362,7 @@ test('tab list is accessible via keyboard', () => {
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   testTabPanel(0);
 
-  const menuItems = screen.queryAllByRole('listitem');
+  const menuItems = screen.queryAllByRole('menuitemradio');
   expect(menuItems).toHaveLength(tabsWithList[1].list.length);
   expect(menuItems[0]).toHaveFocus();
 

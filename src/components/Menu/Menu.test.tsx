@@ -2,24 +2,26 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Item, Menu } from '../../index';
+import { MenuProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testTitle = 'Test Title';
-const defaultProps = {
+const defaultProps: MenuProps = {
   title: testTitle,
   'aria-label': 'testLabel',
 };
+
 const defaultItems = [
-  { key: 'a', children: 'A' },
-  { key: 'b', children: 'B' },
-  { key: 'c', children: 'C' },
+  { id: 'a', children: 'A' },
+  { id: 'b', children: 'B' },
+  { id: 'c', children: 'C' },
 ];
 
 const getComponent = (props = {}) => render((
   <Menu {...defaultProps} {...props}>
-    {defaultItems.map(item => <Item key={item.key} {...item} />)}
+    {defaultItems.map(item => <Item key={item.id} {...item} />)}
   </Menu>
 ));
 
@@ -27,7 +29,7 @@ const getComponent = (props = {}) => render((
 universalComponentTests({
   renderComponent: props => (
     <Menu {...defaultProps} {...props}>
-      {defaultItems.map(item => <Item key={item.key} {...item} />)}
+      {defaultItems.map(item => <Item key={item.id} {...item} />)}
     </Menu>
   ),
 });
@@ -97,11 +99,11 @@ test('should fire onAction', () => {
   userEvent.tab();
   fireEvent.keyDown(menuItems[0], { key: 'Enter' });
   fireEvent.keyUp(menuItems[0], { key: 'Enter' });
-  expect(onAction).toHaveBeenNthCalledWith(1, defaultItems[0].key);
+  expect(onAction).toHaveBeenNthCalledWith(1, defaultItems[0].id);
 
   // Click events
   userEvent.click(menuItems[1]);
-  expect(onAction).toHaveBeenNthCalledWith(2, defaultItems[1].key);
+  expect(onAction).toHaveBeenNthCalledWith(2, defaultItems[1].id);
 });
 
 test('should not fire onSelectionChange when selectionMode is none', () => {
