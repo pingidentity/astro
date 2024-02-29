@@ -201,8 +201,8 @@ export const WithList = () => {
     {
       name: 'Tab 4',
       list: [
-        { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list', role: 'listitem' },
-        { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list', role: 'listitem' },
+        { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list', role: 'menuitemradio' },
+        { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list', role: 'menuitemradio' },
       ],
     },
   ];

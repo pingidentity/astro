@@ -16,11 +16,12 @@ const copy = {
 };
 
 export const copyButton = {
-  ml: 'sm',
+  mx: 'sm',
   outline: 'none',
   height: 'auto',
   cursor: 'pointer',
   width: 'auto',
+  minWidth: '17px',
   path: {
     fill: 'neutral.10',
   },

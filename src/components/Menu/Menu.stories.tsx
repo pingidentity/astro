@@ -1,10 +1,12 @@
 import React from 'react';
 import { Item } from 'react-stately';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Menu, Text } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { MenuProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import MenuReadme from './Menu.mdx';
 import { menuArgTypes } from './menuAttributes';
@@ -33,9 +35,9 @@ export default {
     },
   },
   argTypes: menuArgTypes,
-};
+} as Meta;
 
-export const Default = ({ ...args }) => {
+export const Default: StoryFn<MenuProps> = (args: MenuProps) => {
   return (
     <Menu aria-label="Example Menu" {...args}>
       <Item key="edit" textValue="Edit" data-id="edit">
