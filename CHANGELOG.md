@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.49.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.48.0...@pingux/astro@2.49.0) (2024-02-29)
+
+
+### Features
+
+* [UIP-6779] Menu convert to TS ([eac139b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eac139bb1b73c11e4431b659a9e2175212ed8deb))
+* [UIP-6791] CopyText set IconButton minWidth ([d8bfb02](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d8bfb02729ab0eaaedfa64fc0c184dc4b19d82c9))
+* [UIP-6792] Codeview update copy button spacing ([155047d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/155047de088489445dba3ca06d9ef5a688470723))
+
+
+
+
+
 # [2.48.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.47.0...@pingux/astro@2.48.0) (2024-02-22)
 
 
