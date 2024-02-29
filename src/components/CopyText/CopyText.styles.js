@@ -21,6 +21,7 @@ export const copyButton = {
   height: 'auto',
   cursor: 'pointer',
   width: 'auto',
+  minWidth: '17px',
   path: {
     fill: 'neutral.10',
   },
