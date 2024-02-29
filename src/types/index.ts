@@ -14,6 +14,8 @@ export * from './item';
 export * from './link';
 export * from './listItem';
 export * from './loader';
+export * from './menu';
+export * from './menuItem';
 export * from './overlayPanel';
 export * from './popoverContainer';
 export * from './popoverMenu';

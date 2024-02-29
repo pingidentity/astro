@@ -1,23 +1,20 @@
 import React, {
   forwardRef,
   useContext,
-  useImperativeHandle,
-  useRef,
 } from 'react';
 import { mergeProps, useFocusRing, useMenu } from 'react-aria';
-import { useTreeState } from 'react-stately';
+import { TreeProps, TreeState, useTreeState } from 'react-stately';
 import { useHover } from '@react-aria/interactions';
 import { useSyncRef } from '@react-aria/utils';
 
 import { MenuContext } from '../../context/MenuContext';
-import { usePropWarning } from '../../hooks';
+import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { MenuProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import Box from '../Box';
 import MenuItem from '../MenuItem';
 
-import { menuPropTypes } from './menuAttributes';
-
-const Menu = forwardRef((props, ref) => {
+const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   const {
     isDisabled = false,
     isNotFocusedOnHover,
@@ -25,11 +22,13 @@ const Menu = forwardRef((props, ref) => {
     onHoverChange,
     onHoverEnd,
     onHoverStart,
+    // eslint-disable-next-line no-unused-vars
     onSelectionChange,
     // eslint-disable-next-line no-unused-vars
     selectionMode = 'none',
     ...others
   } = props;
+
   const contextProps = useContext(MenuContext);
   const completeProps = {
     ...mergeProps(contextProps, props),
@@ -41,12 +40,12 @@ const Menu = forwardRef((props, ref) => {
     onHoverStart,
   });
 
-  const state = useTreeState(completeProps);
-  const menuRef = useRef();
+  const state = useTreeState(completeProps as TreeProps<object>) as TreeState<object>;
+
+  const menuRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => menuRef.current);
+
   const { menuProps } = useMenu(completeProps, state, menuRef);
   const { isFocusVisible, focusProps } = useFocusRing({ within: true });
 
@@ -61,6 +60,7 @@ const Menu = forwardRef((props, ref) => {
       aria-orientation={ORIENTATION.VERTICAL}
       {...others}
       {...mergeProps(focusProps, menuProps, hoverProps)}
+      role="menu"
     >
       {Array.from(state.collection).map(item => (
         <MenuItem
@@ -76,8 +76,6 @@ const Menu = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-Menu.propTypes = menuPropTypes;
 
 Menu.displayName = 'Menu';
 

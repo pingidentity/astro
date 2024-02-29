@@ -1,8 +1,13 @@
-import { createContext, useContext } from 'react';
+import { createContext, MutableRefObject, useContext } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface MenuContent { }
+export interface MenuContextValue {
+  onClose?: () => void,
+  closeOnSelect?: boolean,
+  ref?: MutableRefObject<HTMLDivElement | HTMLElement | null>,
+}
 
-export const MenuContext = createContext<MenuContent | undefined>({});
+export const MenuContext = createContext<MenuContextValue>({});
 
-export const useMenuContext = () => useContext(MenuContext);
+export function useMenuContext(): MenuContextValue {
+  return useContext(MenuContext);
+}

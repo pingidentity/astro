@@ -7,9 +7,9 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 
 const testId = 'testId';
 const defaultMenuItems = [
-  { key: 'MenuItem 1', children: 'MenuItem 1', 'data-id': 'menuItem1' },
-  { key: 'MenuItem 2', children: 'MenuItem 2', 'data-id': 'menuItem2' },
-  { key: 'MenuItem 3', children: 'MenuItem 3', 'data-id': 'menuItem3' },
+  { key: 'MenuItem 1', children: 'MenuItem 1', 'data-id': 'menuItem1', isPressed: false },
+  { key: 'MenuItem 2', children: 'MenuItem 2', 'data-id': 'menuItem2', isPressed: false },
+  { key: 'MenuItem 3', children: 'MenuItem 3', 'data-id': 'menuItem3', isPressed: false },
 ];
 
 const defaultProps = {
@@ -22,7 +22,7 @@ const getComponent = (props = {}, {
   renderFn = render,
 } = {}) => renderFn((
   <Menu {...defaultProps} {...props}>
-    {items.map(li => <Item key={li.key} {...li} sx={{ backgroundColor: 'orange' }} />)}
+    {items.map(li => <Item {...li} sx={{ backgroundColor: 'orange' }} />)}
   </Menu>
 ));
 
@@ -30,7 +30,7 @@ const getComponent = (props = {}, {
 universalComponentTests({
   renderComponent: props => (
     <Menu {...defaultProps} {...props}>
-      {defaultMenuItems.map(li => <Item key={li.key} {...li} sx={{ backgroundColor: 'orange' }} />)}
+      {defaultMenuItems.map(li => <Item {...li} sx={{ backgroundColor: 'orange' }} />)}
     </Menu>
   ),
 });
@@ -156,4 +156,22 @@ test('custom props are passed into menuItem', () => {
   const { children: itemText1 } = defaultMenuItems[0];
   const menuItem1 = screen.getByText(itemText1);
   expect(menuItem1).toHaveStyleRule('background-color', 'orange');
+});
+
+test('Selection mode given as single', () => {
+  getComponent({
+    selectionMode: 'single',
+    defaultSelectedKeys: [defaultMenuItems[0].key],
+  });
+  const menuItems = screen.queryAllByRole('menuitemradio');
+  expect(menuItems).toHaveLength(defaultMenuItems.length);
+});
+
+test('Selection mode given as multiple', () => {
+  getComponent({
+    selectionMode: 'multiple',
+    defaultSelectedKeys: [defaultMenuItems[0].key],
+  });
+  const menuItems = screen.queryAllByRole('menuitemcheckbox');
+  expect(menuItems).toHaveLength(defaultMenuItems.length);
 });
