@@ -7,9 +7,11 @@ import _ from 'lodash';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import Button from '../Button';
 import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
+import { escapeFocusDelegate } from './ListViewFocusWrapper';
 
 const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1' },
@@ -22,6 +24,22 @@ const testId = 'testId';
 const defaultProps = {
   label: 'Test Label',
   'data-testid': testId,
+};
+
+const stopPropagation = jest.fn();
+const preventDefault = jest.fn();
+const focusNext = jest.fn();
+const focusPrevious = jest.fn();
+const setIsFocusEscaped = jest.fn();
+
+const testEvent = {
+  stopPropagation,
+  preventDefault,
+};
+
+const focusManager = {
+  focusNext,
+  focusPrevious,
 };
 
 beforeAll(() => {
@@ -60,6 +78,17 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
       )}
     </ListView>
   </FocusScope>
+));
+
+const getComponentExpandable = (props = {}, { renderFn = render } = {}) => renderFn((
+  <ListView {...defaultProps} {...props} items={items}>
+    {item => (
+      <Item key={item.name} textValue={item.name}>
+        <h1>{item.name}</h1>
+        <Button>I am a button</Button>
+      </Item>
+    )}
+  </ListView>
 ));
 
 const getComponentEmpty = (props = {}, { renderFn = render } = {}) => renderFn((
@@ -137,6 +166,17 @@ test('navigating to a disabled key will not apply the isFocused class', async ()
   expect(options[1]).not.toHaveClass('is-focused');
 });
 
+test('navigating to a disabled key will not apply the isFocused class', async () => {
+  getComponent({ selectionMode: 'expansion', disabledKeys: ['Kangaroo'] });
+  const listView = screen.getByTestId(testId);
+  // Open the list arrow down to the second option,
+  // and ensure that it is focused, and then selected after enter is pressed
+  userEvent.tab();
+  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  const options = screen.getAllByRole('gridcell');
+  expect(options[1]).not.toHaveClass('is-focused');
+});
+
 test('clicking an item on the list selects the item', async () => {
   getComponent();
   const options = screen.getByTestId(items[1].name);
@@ -161,6 +201,17 @@ test('renders loader, if a loader component is passed in, and state is loading',
   getComponent({ loadingState: loadingStates.LOADING });
   const loader = screen.getByRole('alert');
   expect(loader).toBeInTheDocument();
+});
+
+test('renders loader, if a loader component is passed in, and state is loading', () => {
+  getComponent({ loadingState: loadingStates.LOADING });
+  const listView = screen.getByTestId(testId);
+  userEvent.tab();
+
+  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+
+  const loaders = screen.getAllByRole('alert');
+  expect(loaders).toHaveLength(2);
 });
 
 test('renders loader, if a loader component is passed in, and state is loadingMore', () => {
@@ -240,6 +291,20 @@ test('list view reset hover on item when scroll', () => {
 
   fireEvent.scroll(listView[0], { target: { scrollY: 100 } });
   expect(listItem[0]).not.toHaveClass('is-hovered');
+  userEvent.hover(listItem[1]);
+  expect(listItem[0]).not.toHaveClass('is-hovered');
+});
+
+test('list view expandable reset hover on item when scroll', async () => {
+  getComponentExpandable({ selectionMode: 'expansion' });
+  // const listView = screen.getAllByRole('grid');
+  const listItem = screen.getAllByRole('gridcell');
+  const listRow = screen.getAllByRole('row');
+
+  expect(listItem[0]).not.toHaveClass('is-hovered');
+  userEvent.hover(listRow[0]);
+  userEvent.hover(listRow[1]);
+  expect(listItem[0]).not.toHaveClass('is-hovered');
 });
 
 test('list view item should not receive focus when selectionMode is "none"', () => {
@@ -260,4 +325,113 @@ test('list view item should receive focus when selectionMode is default or a val
   userEvent.tab();
   expect(onFocus).toHaveBeenCalled();
   expect(options[0]).toHaveClass('is-focused');
+});
+
+test('selectionMode "expanded" cells render expandable list items, and can be expanded, and collapsed', async () => {
+  getComponent({ selectionMode: 'expansion' });
+  const options = screen.getAllByRole('gridcell');
+
+  expect(options[0]).toHaveAttribute('aria-expanded', 'false');
+
+  userEvent.click(options[0]);
+
+  const updatedOptions = await screen.findAllByRole('gridcell');
+
+  expect(updatedOptions[0]).toHaveAttribute('aria-expanded', 'true');
+
+
+  userEvent.click(options[0]);
+
+  const updatedOptions1 = await screen.findAllByRole('gridcell');
+
+  expect(updatedOptions1[0]).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('should navigate to expandable listitems with keyboard ', async () => {
+  getComponentExpandable({ selectionMode: 'expansion' });
+  const option = screen.getAllByRole('gridcell')[0];
+  const row = screen.getAllByRole('row')[0];
+
+  userEvent.tab();
+  userEvent.type(option, '{enter}', { skipClick: true });
+  userEvent.type(option, '{arrowright}', { skipClick: true });
+
+  const focusContainer = screen.getAllByTestId('focuscontainer')[0];
+  expect(focusContainer).toHaveClass('is-focused');
+
+  userEvent.type(row, '{arrowright}', { skipClick: true });
+  userEvent.type(row, '{arrowright}', { skipClick: true });
+
+  userEvent.type(option, '{arrowleft}', { skipClick: true });
+  userEvent.type(option, '{arrowleft}', { skipClick: true });
+
+  userEvent.type(focusContainer, '{enter}', { skipClick: true });
+
+  const button = await screen.findByRole('button');
+  expect(button).toHaveClass('is-focused');
+});
+
+test('should navigate to expandable container ', async () => {
+  getComponentExpandable({ selectionMode: 'expansion' });
+  const option = screen.getAllByRole('gridcell')[0];
+
+  userEvent.tab();
+  userEvent.type(option, '{enter}', { skipClick: true });
+  userEvent.type(option, '{arrowright}', { skipClick: true });
+
+  userEvent.type(option, '{arrowleft}', { skipClick: true });
+
+  expect(option).toHaveClass('is-focused');
+
+  userEvent.type(option, '{arrowright}', { skipClick: true });
+  userEvent.type(option, '{arrowright}', { skipClick: true });
+
+  expect(option).toHaveClass('is-focused');
+
+  userEvent.type(option, '{arrowleft}', { skipClick: true });
+  userEvent.type(option, '{arrowleft}', { skipClick: true });
+  expect(option).toHaveClass('is-focused');
+
+  fireEvent.keyDown(option, { key: 'ArrowLeft' });
+  fireEvent.keyUp(option, { key: 'ArrowLeft' });
+  fireEvent.keyDown(option, { key: 'ArrowLeft' });
+  fireEvent.keyUp(option, { key: 'ArrowLeft' });
+});
+
+test('escape focus delegate turns on if enter is pressed', () => {
+  escapeFocusDelegate({ ...testEvent, keyCode: 13 }, setIsFocusEscaped, focusManager, false);
+  expect(setIsFocusEscaped).toHaveBeenCalled();
+  expect(focusNext).toHaveBeenCalled();
+});
+
+test('escape focus delegate calls correct functions if left is pressed', () => {
+  escapeFocusDelegate({ ...testEvent, keyCode: 37 }, setIsFocusEscaped, focusManager, true);
+  expect(setIsFocusEscaped).not.toHaveBeenCalled();
+  expect(focusNext).not.toHaveBeenCalled();
+  expect(stopPropagation).toHaveBeenCalled();
+});
+
+test('escape focus delegate calls correct functions if left is pressed', () => {
+  escapeFocusDelegate({ ...testEvent, keyCode: 39 }, setIsFocusEscaped, focusManager, true);
+  expect(setIsFocusEscaped).not.toHaveBeenCalled();
+  expect(focusNext).not.toHaveBeenCalled();
+  expect(stopPropagation).toHaveBeenCalled();
+});
+
+test('escape focus delegate calls correct functions if left is pressed', () => {
+  escapeFocusDelegate({ ...testEvent, keyCode: 38 }, setIsFocusEscaped, focusManager, true);
+  expect(focusNext).not.toHaveBeenCalled();
+  expect(focusPrevious).toHaveBeenCalled();
+});
+
+test('escape focus delegate calls correct functions if left is pressed', () => {
+  escapeFocusDelegate({ ...testEvent, keyCode: 40 }, setIsFocusEscaped, focusManager, true);
+  expect(focusNext).toHaveBeenCalled();
+  expect(focusPrevious).not.toHaveBeenCalled();
+});
+
+test('escape focus delegate calls correct functions if anything else is pressed', () => {
+  escapeFocusDelegate({ ...testEvent, keyCode: 4 }, setIsFocusEscaped, focusManager, true);
+  expect(focusNext).not.toHaveBeenCalled();
+  expect(focusPrevious).not.toHaveBeenCalled();
 });

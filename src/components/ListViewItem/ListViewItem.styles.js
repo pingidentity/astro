@@ -113,6 +113,39 @@ const rightOfData = {
   flexShrink: 0,
 };
 
+const expandableFocusContainer = {
+  px: 'sm',
+  outline: 'none',
+  border: 'none',
+  '&.is-focused': {
+    boxShadow: '0 0 0 1px inset #D033FF',
+  },
+};
+
+const expandableStyledListItem = {
+  display: 'flex',
+  padding: '0px 15px 0px 25px',
+  flex: '1 1 0px',
+  minHeight: '80px',
+  flexGrow: 1,
+  justifyContent: 'center',
+  bg: 'white',
+  '&.is-hovered': {
+    bg: 'accent.99',
+    cursor: 'pointer',
+  },
+  '&.is-focused': {
+    boxShadow: '0 0 0 1px inset #D033FF',
+  },
+};
+
+const expandableRow = {
+  '&.has-separator': {
+    borderBottom: '1px solid',
+    borderBottomColor: 'line.light',
+  },
+};
+
 export default {
   container,
   controls,
@@ -124,4 +157,7 @@ export default {
   styledContainer,
   styledListItem,
   loaderContainer,
+  expandableFocusContainer,
+  expandableStyledListItem,
+  expandableRow,
 };

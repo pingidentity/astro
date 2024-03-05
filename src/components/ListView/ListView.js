@@ -1,9 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import { useGridList } from 'react-aria';
+import { useTreeState } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
-import { useList } from '@react-aria/list';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
-import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -11,6 +11,7 @@ import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Loader from '../Loader';
 
 import { ListViewContext } from './ListViewContext';
+import ListViewExpandableItem from './ListViewExpandableItem';
 import ListViewItem from './ListViewItem';
 
 export const collectionTypes = {
@@ -31,7 +32,7 @@ export function useListLayout(state) {
     placeholderHeight: ROW_HEIGHT,
     collator,
   }),
-  [collator]);
+  [collator, state.collection]);
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
@@ -45,6 +46,8 @@ const ListView = forwardRef((props, ref) => {
     loadingState,
     onLoadMore,
     onSelectionChange,
+    onExpandedChange,
+    expandedKeys,
     selectedKeys,
     selectionMode,
     selectionStyle,
@@ -52,7 +55,7 @@ const ListView = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const [hoveredItem, setHoveredItem] = useState(null);
+  const [hoveredItem, setHoveredItem] = useState('');
 
   const isLoading = (
     loadingState === loadingStates.LOADING_MORE || loadingState === loadingStates.LOADING
@@ -72,9 +75,9 @@ const ListView = forwardRef((props, ref) => {
   /* istanbul ignore next */
   useImperativeHandle(ref, () => listViewRef.current);
 
-  const state = useListState({
+  const state = useTreeState({
     ...props,
-    selectionBehavior: selectionStyle === 'highlight' ? 'replace' : 'toggle',
+    selectionMode: selectionMode === 'expansion' ? 'single' : selectionMode,
   });
 
   state.hover = {
@@ -88,7 +91,7 @@ const ListView = forwardRef((props, ref) => {
 
   const layout = useListLayout(state);
 
-  const { gridProps } = useList({
+  const { gridProps } = useGridList({
     ...props,
     isVirtualized: true,
     keyboardDelegate: layout,
@@ -140,6 +143,15 @@ const ListView = forwardRef((props, ref) => {
       >
         {(type, item) => {
           if (type === 'item') {
+            if (props.selectionMode === 'expansion') {
+              return (
+                <ListViewExpandableItem
+                  isHoverable={isHoverable}
+                  isFocusable={isFocusable}
+                  item={item}
+                />
+              );
+            }
             return (
               <ListViewItem isHoverable={isHoverable} isFocusable={isFocusable} item={item} />
             );
@@ -161,6 +173,12 @@ ListView.propTypes = {
    * interacted with.
    */
   disabledKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
+  /** The initial expanded keys in the collection (uncontrolled). */
+  defaultExpandedKeys: isIterableProp,
+  /** The expanded keys in the collection (controlled). */
+  expandedKeys: isIterableProp,
+  /** Handler that is called when items are expanded or collapsed. */
+  onExpandedChange: PropTypes.func,
   /** The list of ListView items (controlled). */
   items: isIterableProp,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
@@ -185,7 +203,7 @@ ListView.propTypes = {
    */
   selectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   /** The type of selection that is allowed in the collection. */
-  selectionMode: PropTypes.oneOf(['none', 'single', 'multiple']),
+  selectionMode: PropTypes.oneOf(['none', 'single', 'multiple', 'expansion']),
   /** */
   selectionStyle: PropTypes.oneOf(['highlight', undefined]),
   /** Callback function that fires when the selected key changes. */
