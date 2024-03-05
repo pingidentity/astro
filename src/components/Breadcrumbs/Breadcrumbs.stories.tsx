@@ -2,11 +2,13 @@ import React from 'react';
 import { Item } from 'react-stately';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import { action } from '@storybook/addon-actions';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Breadcrumbs } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { breadCrumbsProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import BreadcrumbsReadme from './Breadcrumbs.mdx';
 
@@ -42,13 +44,13 @@ export default {
     },
   },
 
-};
+} as Meta;
 
-export const Default = args => {
+export const Default: StoryFn<breadCrumbsProps> = args => {
   const onAction = key => action(`onPress ${key}`);
 
   return (
-    <Breadcrumbs onAction={onAction} {...args} icon={ChevronRightIcon}>
+    <Breadcrumbs {...args} onAction={onAction} icon={ChevronRightIcon}>
       <Item
         aria-label="home"
         data-id="home"
@@ -83,7 +85,7 @@ Default.parameters = {
   },
 };
 
-export const Overflowing = () => {
+export const Overflowing: StoryFn = () => {
   const reallyLongText = 'If This Text Were Really Very Much So Extremely Long';
 
   return (

@@ -5,6 +5,7 @@ import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import userEvent from '@testing-library/user-event';
 
+import { breadCrumbsProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -21,7 +22,7 @@ const defaultProps = {
 };
 const testItemsArr = ['item1', 'item2', 'item3'];
 
-const getComponent = (props = {}, itemProps = {}) => render(
+const getComponent = (props: breadCrumbsProps = {}, itemProps = {}) => render(
   <Breadcrumbs {...mergeProps(defaultProps, props)}>
     {testItemsArr.map((testItem, idx) => (
       <Item
@@ -37,11 +38,13 @@ const getComponent = (props = {}, itemProps = {}) => render(
 );
 
 // Needs to be added to each components test file
-universalComponentTests({ renderComponent: props => (
-  <Breadcrumbs {...mergeProps(defaultProps, props)}>
-    <Item>{testItemsArr[0]}</Item>
-  </Breadcrumbs>
-) });
+universalComponentTests({
+  renderComponent: props => (
+    <Breadcrumbs {...mergeProps(defaultProps, props)}>
+      <Item>{testItemsArr[0]}</Item>
+    </Breadcrumbs>
+  ),
+});
 
 test('default breadcrumbs', () => {
   getComponent();
@@ -56,9 +59,9 @@ test('should render nodes from the children', () => {
 });
 
 test('should render correct amount of icons', () => {
-  getComponent({ iconProps: { 'data-testid': testIconId } });
+  getComponent({ iconProps: { 'data-testid': testIconId, icon: ChevronRightIcon } });
   expect(screen.getAllByTestId(testIconId).length).toBe(
-    testItemsArr.length - 1,
+    testItemsArr.length - 2,
   );
 });
 
@@ -118,7 +121,11 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
 test('will render correctly with single child item', () => {
   render(
     <Breadcrumbs {...mergeProps(defaultProps)}>
-      <Item key={testItemsArr[0]} data-id={testItemsArr[0]} isCurrent>
+      <Item
+        key={testItemsArr[0]}
+        data-id={testItemsArr[0]}
+        isCurrent
+      >
         {testItemsArr[0]}
       </Item>
     </Breadcrumbs>,

@@ -1,6 +1,7 @@
 export * from './badge';
 export * from './box';
 export * from './bracket';
+export * from './breadCrumbs';
 export * from './button';
 export * from './buttonBar';
 export * from './card';

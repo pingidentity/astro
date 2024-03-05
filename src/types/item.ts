@@ -35,6 +35,8 @@ declare module '@react-types/shared' {
     slots?: {
       postHeading: React.ReactNode
     }
+    /** isCurrent for the Breadcrumbs item. */
+    isCurrent?: boolean;
   }
 }
 
