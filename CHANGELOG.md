@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.50.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.49.0...@pingux/astro@2.50.0) (2024-03-05)
+
+
+### Features
+
+* [UIP-6773] Breadcrumbs convert to TypeScript ([691b88b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/691b88b455a0a787df17f5825831ee1b42b1f054))
+* [UIP-6806] add primaryWithIcon Button variant ([9303236](https://gitlab.corp.pingidentity.com/ux/pingux/commit/93032367f84f28b5fe3ff484f2cd57a1dc2ebbf1))
+* [UIP-6811] DatePick provide default date ([a408cc1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a408cc1cb16a7cc2b1f92ee129139f34ea3ecf59))
+
+
+
+
+
 # [2.49.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.48.0...@pingux/astro@2.49.0) (2024-02-29)
 
 
