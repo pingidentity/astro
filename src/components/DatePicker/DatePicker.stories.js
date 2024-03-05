@@ -100,7 +100,7 @@ export const Default = args => (
 );
 
 export const DefaultValue = args => (
-  <DatePicker {...args} defaultValue="2022-08-10" />
+  <DatePicker {...args} defaultValue="2030-01-15" />
 );
 
 export const Controlled = args => {
@@ -127,26 +127,26 @@ export const ReadOnly = args => (
 
 export const UnavailableDates = args => {
   const unavailableRanges = [
-    ['2022-07-29', '2022-08-05'],
-    ['2022-08-15', '2022-08-20'],
-    ['2022-08-25', '2022-08-26'],
+    ['2030-07-28', '2030-08-03'],
+    ['2030-08-11', '2030-08-17'],
+    ['2030-08-25', '2030-08-31'],
   ];
 
   return (
     <DatePicker
       {...args}
       unavailableRanges={unavailableRanges}
-      defaultValue="2022-08-10"
+      defaultValue="2030-08-07"
     />
   );
 };
 
 export const MinimumDate = args => (
-  <DatePicker {...args} defaultValue="2022-08-17" minValue="2022-08-10" />
+  <DatePicker {...args} defaultValue="2030-01-15" minValue="2030-01-15" />
 );
 
 export const MaximumDate = args => (
-  <DatePicker {...args} defaultValue="2022-08-03" maxValue="2022-08-10" />
+  <DatePicker {...args} defaultValue="2030-01-15" maxValue="2030-01-15" />
 );
 
 export const Required = args => (
@@ -158,7 +158,7 @@ export const FormatHelperText = args => (
 );
 
 export const DefaultOpen = args => (
-  <DatePicker {...args} isDefaultOpen />
+  <DatePicker {...args} isDefaultOpen defaultValue="2030-01-15" />
 );
 
 export const Error = args => (
