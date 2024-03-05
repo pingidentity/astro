@@ -91,6 +91,11 @@ const withIcon = {
   },
 };
 
+const primaryWithIcon = {
+  ...primary,
+  padding: '10px 15px 10px 10px',
+};
+
 const success = {
   ...base,
   display: 'inline-flex',
@@ -347,6 +352,8 @@ const exampleText = {
 };
 
 export default {
+  colorBlock,
+  colorBlockPrimary,
   critical,
   default: {
     ...base,
@@ -363,18 +370,17 @@ export default {
       ...defaultFocus,
     },
   },
+  exampleText,
   filter,
   headerBar,
   inline,
   inlinePrimary,
+  inlinePrimaryWithIcon,
+  inlineWithIcon,
   link,
   primary,
+  primaryWithIcon,
   quiet,
   success,
-  colorBlock,
-  colorBlockPrimary,
-  exampleText,
   withIcon,
-  inlineWithIcon,
-  inlinePrimaryWithIcon,
 };

@@ -110,6 +110,16 @@ export const TextIconButton = () => (
       />
       Button Text
     </Button>
+    <Button mb="sm" variant="primaryWithIcon">
+      <Icon
+        icon={PlusIcon}
+        mr="xs"
+        color="white"
+        size={20}
+        title={{ name: 'Add Circle Icon' }}
+      />
+      Button Text
+    </Button>
     <Button mb="sm" mr="auto" variant="inlineWithIcon">
       <Icon
         icon={PlusIcon}
