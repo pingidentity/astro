@@ -1,17 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Item, useAsyncList } from 'react-stately';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Badge,
   Box,
+  Button,
+  HelpHint,
+  Icon,
+  IconButton,
   ListView,
   ListViewItem,
   ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
+  Text,
+  TextField,
 } from '../..';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { chartData } from '../ListViewItem/controls/chart/chartData';
@@ -62,6 +70,14 @@ const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1', hasSeparator: false },
   { key: 'Kangaroo', name: 'Kangaroo', id: '2' },
   { key: 'Snake', name: 'Snake', id: '3' },
+];
+
+const environments = [
+  { title: 'Ping' },
+  { title: 'PingOne' },
+  { title: 'Montana' },
+  { title: 'Europe', populations: ['Spain', 'Switzerland', 'Germany'] },
+  { title: 'Asia', populations: ['Hong Kong'], isLimitedAccess: true },
 ];
 
 const animals = [
@@ -301,6 +317,62 @@ const actions = {
   onLoadMore: action('onLoadMore'),
 };
 
+const CustomText = ({ string, secondString, ...others }) => (
+  <Text {...others}>
+    {string}
+    {' '}
+    <i>{secondString}</i>
+  </Text>
+);
+
+const ExpandableChildren = () => {
+  return (
+    <Box sx={{ my: 'md' }}>
+      <TextField maxWidth="300px" />
+      <Box sx={{ mt: 'md', gap: 'md' }}>
+        {environments.map(env => {
+          return (
+            <Box key={env.title}>
+              <Box isRow>
+                <CustomText key={`${env.title} title`} string={env.title} secondString="Environment" />
+                { env.isLimitedAccess
+                && (
+                <>
+                  <Badge label="Limited Access" bg="white" textColor="text.primary" sx={{ ml: 'xs', border: '1px solid', borderColor: 'neutral.80' }} />
+                  <HelpHint label={`${env} help hint`}>
+                    Text of the popover right here...
+                  </HelpHint>
+                </>
+                )}
+              </Box>
+              {env.populations?.map(pop => {
+                return (
+                  <CustomText key={pop} sx={{ ml: 'sm' }} string={pop} secondString="Population" />
+                );
+              })}
+            </Box>
+          );
+        })}
+        <Button sx={{ alignSelf: 'start' }} variant="link">More Environments</Button>
+      </Box>
+    </Box>
+  );
+};
+
+const ExampleContent = contentProps => {
+  const { text } = contentProps;
+  return (
+    <Box isRow sx={{ alignItems: 'center' }}>
+      <Text variant="itemTitle">
+        {text}
+      </Text>
+      <IconButton aria-label={`${text} information icon`}>
+        <Icon icon={InformationIcon} title={{ name: 'Information Icon' }} />
+      </IconButton>
+    </Box>
+  );
+};
+
 const Controls = () => (
   <>
     <ListViewItemSwitchField />
@@ -328,6 +400,83 @@ export const Default = ({ ...args }) => (
     )}
   </ListView>
 );
+
+export const Controlled = () => {
+  const [selectedKeys, setSelectedKeys] = useState(['Snake']);
+
+  const onSelectedChange = e => {
+    setSelectedKeys(Array.from(e));
+  };
+
+  return (
+    <ListView
+      items={items}
+      onSelectionChange={onSelectedChange}
+      selectedKeys={selectedKeys}
+    >
+      {item => (
+        <Item key={item.name}>
+          <ListViewItem
+            data={{
+              text: item.name,
+              icon: FormSelectIcon,
+            }}
+          >
+            <Controls />
+          </ListViewItem>
+        </Item>
+      )}
+    </ListView>
+  );
+};
+
+export const WithExpandableItems = ({ ...args }) => {
+  return (
+    <ListView {...props} {...args} items={items} selectionMode="expansion">
+      {/* The first child inside of <Item> will render as the collapsed content, within the row
+          The  Second child will render when expanded. */}
+      {item => (
+        <Item key={item.name} textValue={item.name}>
+          <ExampleContent text={item.name} />
+          <ExpandableChildren />
+        </Item>
+      )}
+    </ListView>
+  );
+};
+
+export const ControlledExpandableItems = ({ ...args }) => {
+  const [expandedKeys, setExpandedKeys] = useState(['Kangaroo']);
+
+  const onExpandedKeyCallback = e => {
+    setExpandedKeys(Array.from(e));
+  };
+
+  const expandAllKeys = () => {
+    setExpandedKeys(items.map(_item => _item.key));
+  };
+
+  return (
+    <Box>
+      <Button onPress={() => { expandAllKeys(); }}>Expand all</Button>
+      <ListView
+        {...props}
+        {...args}
+        items={items}
+        expandedKeys={expandedKeys}
+        onExpandedChange={onExpandedKeyCallback}
+        selectionMode="expansion"
+      >
+        {item => (
+          <Item key={item.name} textValue={item.name}>
+            <ExampleContent text={item.name} />
+            <ExpandableChildren />
+          </Item>
+        )}
+      </ListView>
+    </Box>
+  );
+};
 
 export const InfiniteLoadingList = args => {
   const getMockData = async (signal, cursor) => {

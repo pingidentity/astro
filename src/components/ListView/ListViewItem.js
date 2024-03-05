@@ -1,7 +1,6 @@
 import React, { useContext, useRef } from 'react';
-import { mergeProps, useFocusRing } from 'react-aria';
+import { mergeProps, useFocusRing, useGridListItem } from 'react-aria';
 import { useHover } from '@react-aria/interactions';
-import { useListItem } from '@react-aria/list';
 import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
@@ -37,19 +36,27 @@ const ListViewItem = props => {
 
   const { focusProps, isFocusVisible } = useFocusRing();
 
-  const { hoverProps, isHovered } = useHover({
+  const onPointerLeaveFunction = /* istanbul ignore next */ () => {
+    state.hover.setHoveredItem('');
+  };
+
+  const { hoverProps } = useHover({
     onHoverStart: () => {
       state.hover.setHoveredItem(item.key);
+    },
+    onHoverEnd:
+    /* istanbul ignore next */
+    () => {
+      onPointerLeaveFunction();
     },
   });
 
   const {
     rowProps: raRowProps,
     gridCellProps,
-  } = useListItem({
+  } = useGridListItem({
     node: item,
     isVirtualized: true,
-    isDisabled,
   }, state, rowRef);
 
   const isSelected = state.selectionManager.isSelected(item.key);
@@ -58,10 +65,11 @@ const ListViewItem = props => {
     raRowProps,
     hoverProps,
     isFocusable ? { ...focusProps, ...focusWithinProps } : {},
+    { onPointerLeave: onPointerLeaveFunction },
   );
 
   const { classNames } = useStatusClasses(className, {
-    isHovered: isSelectable && isHovered && isHoverable && (item.key === state.hover.hoveredItem),
+    isHovered: isSelectable && isHoverable && (item.key === state.hover.hoveredItem),
     isSelected,
     isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
     hasSeparator,
@@ -70,9 +78,13 @@ const ListViewItem = props => {
 
   // Whether the current component should have legacy styles removed
   // TODO: [Astro 3.0.0] Remove the legacy styles and update the code here.
-  const shouldOverRideLegacyStyles = Object.keys(item.rendered.props).includes(
+  const shouldOverRideLegacyStyles = Object.keys(item?.rendered?.props).includes(
     'data',
   );
+
+  // Apply appropriate variant dependant on whether a legacy list item is used
+  /* istanbul ignore next */
+  const listItemVariant = shouldOverRideLegacyStyles ? 'listViewItem.styledListItem' : 'listViewItem.container';
 
   return (
     <Box
@@ -85,8 +97,7 @@ const ListViewItem = props => {
     >
       <Box
         as="div"
-        // Apply appropriate variant dependant on whether a legacy list item is used
-        variant={shouldOverRideLegacyStyles ? 'listViewItem.styledListItem' : 'listViewItem.container'}
+        variant={listItemVariant}
         {...gridCellProps}
         isFocused={isDisabled ? false : isFocusVisible}
         isDisabled={isDisabled}
