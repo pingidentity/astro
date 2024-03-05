@@ -1,16 +1,15 @@
 import React, {
+  ElementType,
   forwardRef,
   Fragment,
+  RefObject,
   useCallback,
-  useImperativeHandle,
   useMemo,
-  useRef,
 } from 'react';
-import { mergeProps, useBreadcrumbItem } from 'react-aria';
+import { AriaBreadcrumbItemProps, BreadcrumbItemAria, mergeProps, useBreadcrumbItem } from 'react-aria';
 import { omit } from 'lodash/object';
-import PropTypes from 'prop-types';
 
-import { usePropWarning } from '../../hooks';
+import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import {
   Box,
   Button,
@@ -18,6 +17,7 @@ import {
   Link,
   Text,
 } from '../../index';
+import { breadCrumbItemProps, FocusableElement } from '../../types';
 
 export const ELEMENT_TYPE = {
   BUTTON: 'Button',
@@ -27,7 +27,7 @@ export const ELEMENT_TYPE = {
   FRAGMENT: 'Fragment',
 };
 
-const BreadcrumbItem = forwardRef((props, ref) => {
+const BreadcrumbItem = forwardRef<HTMLElement, breadCrumbItemProps>((props, ref) => {
   const {
     children,
     elementType,
@@ -37,15 +37,15 @@ const BreadcrumbItem = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const itemRef = useRef();
+  const itemRef = useLocalOrForwardRef<HTMLElement>(ref);
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => itemRef.current);
 
-  const { itemProps } = useBreadcrumbItem({ ...props }, itemRef);
+  const { itemProps }: BreadcrumbItemAria = useBreadcrumbItem(
+    { ...props } as AriaBreadcrumbItemProps,
+    itemRef as RefObject<FocusableElement>);
 
-  const ElementType = useMemo(() => {
+  const BreadcrumbItemElementType = useMemo(() => {
     switch (elementType) {
       case ELEMENT_TYPE.BUTTON:
         return Button;
@@ -60,7 +60,7 @@ const BreadcrumbItem = forwardRef((props, ref) => {
       default:
         return elementType;
     }
-  }, [elementType]);
+  }, [elementType]) as ElementType;
 
   const onPressHandler = useCallback(() => {
     if (onAction) {
@@ -68,7 +68,7 @@ const BreadcrumbItem = forwardRef((props, ref) => {
     }
   }, [onAction, actionKey]);
 
-  const elementsWithOnPressProp = ['Button', 'IconButton', 'Link'];
+  const elementsWithOnPressProp: unknown[] = ['Button', 'IconButton', 'Link'];
 
   const elementProps = useMemo(() => {
     const elementTypeProps = { ...mergeProps(itemProps, others) };
@@ -92,29 +92,15 @@ const BreadcrumbItem = forwardRef((props, ref) => {
   return (
     <Box
       as="li"
-      className={isCurrent && 'is-current'}
+      className={isCurrent ? 'is-current' : ''}
       variant="variants.breadcrumb.containerLi"
     >
-      <ElementType {...elementVariantProps}>
+      <BreadcrumbItemElementType {...elementVariantProps}>
         {children}
-      </ElementType>
+      </BreadcrumbItemElementType>
     </Box>
   );
 });
-
-BreadcrumbItem.propTypes = {
-  actionKey: PropTypes.string,
-  /** Whether the breadcrumb item represents the current page. */
-  isCurrent: PropTypes.bool,
-  /** The HTML element used to render the breadcrumb link, e.g. 'a', or 'span'.
-   * Also can be passed 'Button', 'Icon', 'IconButton', 'Text' - will be used
-   * appropriate component from Astro library.
-   * */
-  elementType: PropTypes.elementType,
-  /** Whether the breadcrumb item is disabled. */
-  isDisabled: PropTypes.bool,
-  onAction: PropTypes.func,
-};
 
 BreadcrumbItem.defaultProps = {
   elementType: 'Link',
