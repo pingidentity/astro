@@ -1,32 +1,32 @@
 import React, {
   forwardRef,
   useCallback,
-  useImperativeHandle,
-  useRef,
 } from 'react';
-import { mergeProps, useBreadcrumbs } from 'react-aria';
-import PropTypes from 'prop-types';
+import { AriaBreadcrumbsProps, BreadcrumbsAria, mergeProps, useBreadcrumbs } from 'react-aria';
 
-import { usePropWarning } from '../../hooks';
+import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { Box, Icon } from '../../index';
+import { breadCrumbsProps } from '../../types';
 
 import BreadcrumbItem from './BreadcrumbItem';
 
-const Breadcrumbs = forwardRef((props, ref) => {
+const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
   const { children, icon, iconProps, onAction, ...others } = props;
+
   // the following filters undefined values passed as a child
   const filteredChildren = Array.isArray(children)
     ? children.filter(child => child)
     : children;
-  const { navProps: wrapperProps } = useBreadcrumbs(props);
 
-  const breadcrumbsRef = useRef();
+  const { navProps: wrapperProps }: BreadcrumbsAria = useBreadcrumbs(props as AriaBreadcrumbsProps);
+
+  const breadcrumbsRef = useLocalOrForwardRef<HTMLElement>(ref);
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => breadcrumbsRef.current);
-  const createBreadcrumb = useCallback((child, idx) => {
-    const isCurrentItem = Array.isArray(filteredChildren) && filteredChildren.length > 1
+
+  const createBreadcrumb = useCallback((child, idx?: number) => {
+    const isCurrentItem = idx && Array.isArray(children) && Array.isArray(filteredChildren)
+      && filteredChildren.length > 1
       ? idx === children.length - 1
       : true;
 
@@ -42,18 +42,18 @@ const Breadcrumbs = forwardRef((props, ref) => {
           {child.props.children}
         </BreadcrumbItem>
         {icon && !isCurrentItem && (
-        <Icon
-          aria-hidden="true"
-          icon={icon}
-          mx={5}
-          size="xs"
-          title={{ name: 'Breadcrumb Separator' }}
-          {...iconProps}
-        />
+          <Icon
+            aria-hidden="true"
+            mx={5}
+            size="xs"
+            title={{ name: 'Breadcrumb Separator' }}
+            {...iconProps}
+            icon={icon}
+          />
         )}
       </React.Fragment>
     );
-  }, [children.length, filteredChildren, icon, iconProps, onAction]);
+  }, [(Array.isArray(children) && children.length), filteredChildren, icon, iconProps, onAction]);
 
   return (
     <nav aria-label="Breadcrumb">
@@ -72,19 +72,6 @@ const Breadcrumbs = forwardRef((props, ref) => {
   );
 });
 
-Breadcrumbs.propTypes = {
-  /** The icon to render in between each node. */
-  icon: PropTypes.elementType,
-  /** Props object passed along to the Icon component. */
-  iconProps: PropTypes.shape({}),
-  /** Whether the Breadcrumbs are disabled. */
-  isDisabled: PropTypes.bool,
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Called when an item is acted upon (usually selection via press). */
-  /** (key: Key) => void. */
-  onAction: PropTypes.func,
-};
 
 Breadcrumbs.displayName = 'Breadcrumbs';
 
