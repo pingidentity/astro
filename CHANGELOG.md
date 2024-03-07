@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.51.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.50.0...@pingux/astro@2.51.0) (2024-03-07)
+
+
+### Features
+
+* [UIP-6741] Astro Expandable ListViewItem component ([4fa2814](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4fa2814a17a74374b37be4e40996441ee2146295))
+* [UIP-6757] Astro ListBox TS conversion ([96dc413](https://gitlab.corp.pingidentity.com/ux/pingux/commit/96dc413b67eaf3cd60ce1b21c223a9bccbb64121))
+
+
+
+
+
 # [2.50.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.49.0...@pingux/astro@2.50.0) (2024-03-05)
 
 
