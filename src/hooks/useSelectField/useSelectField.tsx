@@ -10,7 +10,7 @@ import { modes } from '../../components/Label/constants';
 import ListBox from '../../components/ListBox/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
-import { Axis, BoxProps, FocusableElement, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
+import { Axis, BoxProps, FocusableElement, ListBoxProps, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
 import { LabelMode } from '../useColumnStyles/useColumnStyles';
 import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
@@ -41,7 +41,7 @@ interface UseSelectFieldProps<T> {
   onSelectionChange?: (key: Key) => unknown;
   controlProps?: React.HTMLAttributes<Element>;
   scrollBoxProps?: BoxProps;
-  listBoxProps?: BoxProps;
+  listBoxProps?: ListBoxProps;
   labelProps?: ThemeUILabelProps;
   containerProps?: BoxProps;
   labelMode: LabelMode;
@@ -227,7 +227,7 @@ const useSelectField = <T extends object, >(
       <ListBox
         ref={listBoxRef}
         hasNoEmptySelection
-        hasAutoFocus={state.focusStrategy || true}
+        hasAutoFocus
         state={state}
         variant="listBox.selectField"
         isLoading={isLoadingMore}

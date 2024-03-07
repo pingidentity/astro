@@ -1,15 +1,15 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useMemo } from 'react';
 import { mergeProps } from 'react-aria';
 import { useCollator } from '@react-aria/i18n';
 import { useListBox } from '@react-aria/listbox';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
-import PropTypes from 'prop-types';
 
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { useLocalOrForwardRef } from '../../hooks';
+import { ListBoxProps } from '../../types';
 import Loader from '../Loader';
 
-import { Option } from './index.js';
+import { Option } from './index';
 import { ListBoxContext } from './ListBoxContext';
 import ListBoxSection from './ListBoxSection';
 
@@ -37,7 +37,7 @@ export function useListBoxLayout(state) {
   return layout;
 }
 
-const ListBox = forwardRef((props, ref) => {
+const ListBox = forwardRef((props: ListBoxProps, ref) => {
   const {
     defaultSelectedKeys,
     disabledKeys,
@@ -67,10 +67,9 @@ const ListBox = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const { focusStrategy } = state;
   // Object matching React Aria API with all options
   const listBoxOptions = {
-    autoFocus: hasAutoFocus || focusStrategy,
+    autoFocus: hasAutoFocus,
     defaultSelectedKeys,
     disabledKeys,
     disallowEmptySelection: hasNoEmptySelection,
@@ -96,11 +95,11 @@ const ListBox = forwardRef((props, ref) => {
     'aria-details': ariaDetails,
   };
 
-  const listBoxRef = useRef();
+  const listBoxRef = useLocalOrForwardRef<HTMLDivElement>(null);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => listBoxRef.current);
   const layout = useListBoxLayout(state);
-  layout.isLoading = props.isLoading;
+  layout.isLoading = props.isLoading ? props.isLoading : false;
 
   // Get props for the listbox
   const { listBoxProps } = useListBox({
@@ -135,7 +134,8 @@ const ListBox = forwardRef((props, ref) => {
   return (
     <ListBoxContext.Provider value={state}>
       <Virtualizer
-        {...mergeProps(listBoxProps, others)}
+        {...mergeProps((listBoxProps), others)}
+        autoFocus={hasAutoFocus}
         style={{ outline: 'none' }}
         ref={listBoxRef}
         focusedKey={state?.selectionManager?.focusedKey}
@@ -171,45 +171,5 @@ const ListBox = forwardRef((props, ref) => {
     </ListBoxContext.Provider>
   );
 });
-
-ListBox.propTypes = {
-  defaultSelectedKeys: isIterableProp,
-  disabledKeys: isIterableProp,
-  hasAutoFocus: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  hasFocusWrap: PropTypes.bool,
-  hasNoEmptySelection: PropTypes.bool,
-  hasVirtualFocus: PropTypes.bool,
-  id: PropTypes.string,
-  isFocusedOnHover: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  isSelectedOnPressUp: PropTypes.bool,
-  isVirtualized: PropTypes.bool,
-  items: isIterableProp,
-  keyboardDelegate: PropTypes.shape({}),
-  label: PropTypes.node,
-  onLoadMore: PropTypes.func,
-  onScroll: PropTypes.func,
-  onSelectionChange: PropTypes.func,
-  renderEmptyState: PropTypes.node,
-  selectedKeys: isIterableProp,
-  selectionMode: PropTypes.oneOf(['none', 'single', 'multiple']),
-  'aria-label': PropTypes.string,
-  'aria-labelledby': PropTypes.string,
-  'aria-describedby': PropTypes.string,
-  'aria-details': PropTypes.string,
-  state: PropTypes.shape({
-    close: PropTypes.func,
-    collection: PropTypes.shape({}),
-    focusStrategy: PropTypes.string,
-    isOpen: PropTypes.bool,
-    selectionManager: PropTypes.shape({
-      focusedKey: PropTypes.string,
-    }),
-  }),
-};
-
-ListBox.defaultProps = {
-  state: {},
-};
 
 export default ListBox;
