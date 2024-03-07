@@ -1,6 +1,8 @@
+import { ThemeUICSSObject } from 'theme-ui';
+
 import { text } from '../Text/Text.styles';
 
-const listBox = {
+const listBox: ThemeUICSSObject = {
   outline: 'none',
 };
 

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Item, Section } from 'react-stately';
-import { useListState } from '@react-stately/list';
+import { ListProps, useListState } from '@react-stately/list';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { ListBoxProps, ListStateType } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ListBox from '.';
@@ -39,13 +40,20 @@ const defaultWithSectionsProps = {
   items: itemsWithSections,
 };
 
-const ListBoxWithState = React.forwardRef((props, ref) => {
-  const state = useListState({ props });
+type TestItem = {
+  name: string,
+  options: Iterable<object>
+}
+
+type TestInterface = Omit<ListBoxProps, 'state'>
+
+const ListBoxWithState = forwardRef((props: TestInterface, ref) => {
+  const theseProps = {} as ListProps<object>;
+  const state = useListState(theseProps) as ListStateType;
+
 
   return (
-    <ListBox {...props} state={state} ref={ref}>
-      {item => <Item key={item.name} childItems={item.options}>{item.name}</Item>}
-    </ListBox>
+    <ListBox {...props} state={state} ref={ref} />
   );
 });
 
@@ -58,16 +66,30 @@ const ListBoxWithSections = props => {
 };
 
 const getComponent = (props = {}) => render((
-  <ListBoxWithState {...defaultProps} {...props} />
+  <ListBoxWithState {...defaultProps} {...props} items={items}>
+    {item => (
+      <Item
+        key={(item as TestItem).name}
+        childItems={(item as TestItem).options}
+      >
+        {(item as TestItem).name}
+      </Item>
+    )}
+  </ListBoxWithState>
 ));
 
 const getSectionsComponent = (props = {}) => render((
   <ListBoxWithSections {...defaultWithSectionsProps} {...props}>
     {section => (
-      // eslint-disable-next-line testing-library/no-node-access
       <Section key={section.name} title={section.name} items={section.options}>
-        {/* eslint-disable-next-line testing-library/no-node-access */}
-        {item => <Item key={item.name} childItems={item.options}>{item.name}</Item>}
+        {item => (
+          <Item
+            key={(item as TestItem).name}
+            childItems={(item as TestItem).options}
+          >
+            {(item as TestItem).name}
+          </Item>
+        )}
       </Section>
     )}
   </ListBoxWithSections>
@@ -82,7 +104,6 @@ beforeAll(() => {
   offsetWidth = jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
   offsetHeight = jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   scrollHeight = jest.spyOn(window.HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => 48);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
   jest.useFakeTimers();
 });
 

@@ -1,24 +1,23 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from 'react';
 import CircleSmallIcon from '@pingux/mdi-react/CircleSmallIcon';
 import { useOption } from '@react-aria/listbox';
-import PropTypes from 'prop-types';
 
 import { useMultivaluesContext } from '../../context/MultivaluesContext';
 import { useStatusClasses } from '../../hooks';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { AriaListBoxOptionsType, ListBoxStateType, OptionType } from '../../types';
 import Box from '../Box';
 import Icon from '../Icon';
 
 import { ListBoxContext } from './ListBoxContext';
 
-const Option = forwardRef((props, ref) => {
+const Option = forwardRef((props: OptionType, ref) => {
   const { item, hasVirtualFocus, ...others } = props;
   const { key, props: itemProps, rendered, 'aria-label': ariaLabel } = item;
 
-  const state = useContext(ListBoxContext);
+  const state = useContext(ListBoxContext) as ListBoxStateType;
   const { isSeparator, 'data-id': dataId } = itemProps;
   // Get props for the option element
-  const optionRef = useRef();
+  const optionRef = useRef(null);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => optionRef.current);
   const { optionProps, isDisabled, isSelected, isFocused } = useOption(
@@ -55,12 +54,10 @@ const Option = forwardRef((props, ref) => {
     }
   }, [isFocused, updateActiveDescendant]);
 
-
-  /* Related to UIP-4992
-   * Need to remove these properties to avoid errors in the console on the external app.
-   * By the way, these properties return "undefined", so it shouldn't create issues */
-  delete optionProps.onPressStart;
-  delete optionProps.onPressUp;
+  // /* Related to UIP-4992
+  //  * Need to remove these properties to avoid errors in the console on the external app.
+  //  * By the way, these properties return "undefined", so it shouldn't create issues */
+  const { onPressStart, onPressUp, ...theseOptionProps } = (optionProps as AriaListBoxOptionsType);
 
   return (
     <Box
@@ -71,7 +68,7 @@ const Option = forwardRef((props, ref) => {
       data-id={dataId}
       className={classNames}
       onPointerOver={setFocusOnHover}
-      {...optionProps}
+      {...theseOptionProps}
       {...others}
       aria-label={ariaLabel}
     >
@@ -80,30 +77,5 @@ const Option = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-Option.propTypes = {
-  hasVirtualFocus: PropTypes.bool,
-  item: PropTypes.shape({
-    key: PropTypes.string,
-    props: PropTypes.shape({
-      'data-id': PropTypes.string,
-      isSeparator: PropTypes.bool,
-    }),
-    rendered: PropTypes.node,
-    'aria-label': PropTypes.string,
-  }),
-  state: PropTypes.shape({
-    disabledKeys: isIterableProp,
-    selectionManager: PropTypes.shape({
-      focusedKey: PropTypes.string,
-      isSelected: PropTypes.func,
-    }),
-  }),
-};
-
-Option.defaultProps = {
-  item: {},
-  state: {},
-};
 
 export default Option;

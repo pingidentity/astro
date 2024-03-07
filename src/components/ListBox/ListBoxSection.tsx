@@ -1,29 +1,31 @@
-import React, { useContext, useRef } from 'react';
+import React, { ReactNode, useContext, useRef } from 'react';
 import { useLocale } from '@react-aria/i18n';
 import { useListBoxSection } from '@react-aria/listbox';
 import { layoutInfoToStyle, useVirtualizerItem } from '@react-aria/virtualizer';
+import { LayoutInfo, ReusableView } from '@react-stately/virtualizer';
 import PropTypes from 'prop-types';
 
+import { ListBoxSectionProps, ListBoxStateType, UseListBoxSectionProps } from '../../types';
 import Box from '../Box';
 import Separator from '../Separator';
 
 import { ListBoxContext } from './ListBoxContext';
 
-const ListBoxSection = props => {
+const ListBoxSection = (props: ListBoxSectionProps) => {
   const {
     children,
     reusableView,
     header,
   } = props;
 
-  const item = reusableView.content;
+  const item = reusableView.content as ReusableView<object, ReactNode>;
 
   const { headingProps, groupProps } = useListBoxSection({
     heading: item.rendered,
     'aria-label': item['aria-label'],
-  });
+  }) as UseListBoxSectionProps;
 
-  const headerRef = useRef();
+  const headerRef = useRef(null);
 
   useVirtualizerItem({
     reusableView: header,
@@ -32,13 +34,13 @@ const ListBoxSection = props => {
 
   const { direction } = useLocale();
 
-  const state = useContext(ListBoxContext);
+  const state = useContext(ListBoxContext) as ListBoxStateType;
 
   return (
     <>
       <Box
         ref={headerRef}
-        style={layoutInfoToStyle(header.layoutInfo, direction)}
+        style={layoutInfoToStyle(header.layoutInfo as LayoutInfo, direction)}
       >
         {item.key !== state.collection.getFirstKey()
           && <Separator mt="0px" />}
@@ -54,7 +56,7 @@ const ListBoxSection = props => {
       </Box>
       <Box
         {...groupProps}
-        style={layoutInfoToStyle(reusableView.layoutInfo, direction)}
+        style={layoutInfoToStyle(reusableView.layoutInfo as LayoutInfo, direction)}
       >
         {children}
       </Box>
