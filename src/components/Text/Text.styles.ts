@@ -1,4 +1,6 @@
-export const base = {
+import { ThemeUICSSObject } from 'theme-ui';
+
+export const base: ThemeUICSSObject = {
   display: 'block',
   fontSize: 'md',
   color: 'text.primary',
