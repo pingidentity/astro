@@ -5,10 +5,9 @@ import { useFocusWithin } from '@react-aria/interactions';
 import { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
-import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
-import { modes as labelModes } from '../../components/Label/constants';
-import { BoxProps } from '../../types';
+import { BoxProps, LabelModeProps, LabelProps } from '../../types';
+import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { useStatusClasses } from '..';
@@ -26,13 +25,6 @@ interface WrapperProps extends BoxProps {
 
 interface ContainerProps extends WrapperProps {
   isFloatLabelActive?: boolean;
-}
-
-// TODO: replace with LabelProps instead of ThemeUILabelProps
-// once Label component is rewritten to ts
-interface LabelProps extends ThemeUILabelProps {
-  labelMode?: 'default' | 'float' | 'left';
-  statusClasses?: { [className: string]: boolean };
 }
 
 export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
@@ -87,7 +79,7 @@ export interface UseFieldProps<T> {
   isRestrictiveMultivalues?: boolean;
   isSelected?: boolean;
   label?: string;
-  labelMode?: string;
+  labelMode?: LabelModeProps;
   labelProps?: LabelProps;
   maxLength?: number;
   name?: string;

@@ -7,10 +7,10 @@ import {
   Icon,
   TextAreaField,
 } from '../../index';
+import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
-import { modes as labelModes } from '../Label/constants';
 
 import TextAreaFieldReadme from './TextAreaField.mdx';
 

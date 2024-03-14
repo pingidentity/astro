@@ -4,11 +4,11 @@ import isEmpty from 'lodash/isEmpty';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 import { Box, TextField } from '../../index';
+import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 import CopyButton from '../CopyText/CopyButton';
-import { modes as labelModes } from '../Label/constants';
 
 import TextFieldReadme from './TextField.mdx';
 

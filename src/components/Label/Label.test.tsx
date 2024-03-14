@@ -2,13 +2,14 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { Input, Label } from '../..';
+import { LabelProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-label';
-const defaultProps = {
+const defaultProps: LabelProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(<Label {...defaultProps} {...props} />);
+const getComponent = (props: LabelProps = {}) => render(<Label {...defaultProps} {...props} />);
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <Label {...props} /> });

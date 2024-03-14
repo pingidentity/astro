@@ -6,12 +6,11 @@ import { useResizeObserver } from '@react-aria/utils';
 import { CollectionChildren } from '@react-types/shared';
 import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
-import { modes } from '../../components/Label/constants';
 import ListBox from '../../components/ListBox/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
-import { Axis, BoxProps, FocusableElement, ListBoxProps, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
-import { LabelMode } from '../useColumnStyles/useColumnStyles';
+import { Axis, BoxProps, FocusableElement, LabelModeProps, ListBoxProps, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
+import { modes } from '../../utils/devUtils/constants/labelModes';
 import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
@@ -44,7 +43,7 @@ interface UseSelectFieldProps<T> {
   listBoxProps?: ListBoxProps;
   labelProps?: ThemeUILabelProps;
   containerProps?: BoxProps;
-  labelMode: LabelMode;
+  labelMode: LabelModeProps;
 }
 
 interface UseSelectFieldReturnProps {
@@ -63,7 +62,7 @@ interface UseSelectFieldReturnProps {
   valueProps: DOMAttributes<FocusableElement>,
 }
 
-const useSelectField = <T extends object, >(
+const useSelectField = <T extends object>(
   props: UseSelectFieldProps<T>,
   ref: ReactRef,
 ): UseSelectFieldReturnProps => {

@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 
 import { useSelectField } from '../../hooks';
 import { Item } from '../../index';
+import { modes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
-import { modes } from '../Label/constants';
 
 import SelectFieldBase from './SelectFieldBase';
 

@@ -1,19 +1,21 @@
 import { ThemeUICSSObject } from 'theme-ui';
 
+import { overflowWrap, wordBreak, wordWrap as wordWrapText } from '../../types';
+
 export const base: ThemeUICSSObject = {
   display: 'block',
   fontSize: 'md',
   color: 'text.primary',
   fontFamily: 'standard',
-  overflowWrap: 'break-word',
+  overflowWrap: 'break-word' as overflowWrap,
 };
 
 export const wordWrap = {
   display: 'block',
-  overflowWrap: 'break-word',
+  overflowWrap: 'break-word' as overflowWrap,
   maxWidth: '100%',
-  wordWrap: 'break-word',
-  wordBreak: 'break-word',
+  wordWrap: 'break-word' as wordWrapText,
+  wordBreak: 'break-word' as wordBreak,
 };
 
 const tabLabel = {
