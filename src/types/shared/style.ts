@@ -30,3 +30,7 @@ type IconTShirtSize = 'xs' | 'sm' | 'md';
 type pixelSize = 'em' | 'px' | 'rem'
 
 export type IconSize = IconTShirtSize | number | `${number}${pixelSize}`;
+
+export type overflowWrap = 'normal' | 'break-word' | 'anywhere' | 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
+export type wordBreak = 'normal' | 'break-all' | 'keep-all' | 'break-word' | 'initial' | 'inherit';
+export type wordWrap = 'normal' | 'break-word' | 'initial' | 'inherit';

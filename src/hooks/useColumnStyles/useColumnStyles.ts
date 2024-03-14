@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-export type LabelMode = 'default' | 'float' | 'left';
+import { LabelModeProps } from '../../types';
 
 interface UseColumnStylesProps {
-  labelMode: LabelMode;
+  labelMode: LabelModeProps;
 }
 
 interface LabelStyleProps {

@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { modes as labelModes } from '../../components/Label/constants';
+import { LabelModeProps } from '../../types';
+import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 import useField, { UseFieldProps } from './useField';
@@ -142,7 +143,7 @@ test('should return isFloatLabelActive class for container', () => {
   expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
 
   // Has the class if the value is valid and label mode is float
-  rerender({ ...defaultProps, labelMode: labelModes.FLOAT });
+  rerender({ ...defaultProps, labelMode: labelModes.FLOAT as LabelModeProps });
   expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
 
   // Does not have the class if the value is invalid
@@ -160,7 +161,7 @@ test('should return isFloatLabelActive class for container', () => {
   // Has the class if the mode is float and the isFloatLabelActive containerProp is passed in
   rerender({
     ...defaultProps,
-    labelMode: labelModes.FLOAT,
+    labelMode: labelModes.FLOAT as LabelModeProps,
     containerProps: {
       isFloatLabelActive: true,
     },
@@ -176,7 +177,7 @@ test('should return isLeftLabel class for container', () => {
   expect(result.current.fieldContainerProps.className).not.toContain('is-left-label');
 
   // Has the class if the value is valid and label mode is left
-  rerender({ ...defaultProps, labelMode: labelModes.LEFT });
+  rerender({ ...defaultProps, labelMode: labelModes.LEFT as LabelModeProps });
   expect(result.current.fieldContainerProps.className).toContain('is-left-label');
 });
 
