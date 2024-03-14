@@ -1,4 +1,6 @@
 // Styles for default label and variants go here.
+import { ThemeUICSSObject } from 'theme-ui';
+
 import { text } from '../Text/Text.styles';
 
 const activeFloatLabel = {
@@ -7,7 +9,7 @@ const activeFloatLabel = {
 };
 
 // Default label
-export const label = {
+export const label: ThemeUICSSObject = {
   ...text.label,
   display: 'block',
   mb: 'xs',

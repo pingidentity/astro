@@ -4,6 +4,7 @@ import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
+import { modes } from '../../utils/devUtils/constants/labelModes';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import Box from '../Box';
@@ -11,7 +12,6 @@ import Button from '../Button';
 import FieldHelperText from '../FieldHelperText';
 import Icon from '../Icon';
 import Label from '../Label';
-import { modes } from '../Label/constants';
 import Loader from '../Loader';
 import Text from '../Text';
 

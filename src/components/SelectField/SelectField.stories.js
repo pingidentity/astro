@@ -9,10 +9,10 @@ import {
   SelectField,
   Separator,
 } from '../../index';
+import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
-import { modes as labelModes } from '../Label/constants';
 
 import SelectFieldReadme from './SelectField.mdx';
 
@@ -35,27 +35,33 @@ const animals = [
 ];
 
 const withSection = [
-  { name: 'Animals',
+  {
+    name: 'Animals',
     key: 'Animals',
     children: [
       { name: 'Aardvark' },
       { name: 'Kangaroo' },
       { name: 'Snake' },
-    ] },
-  { name: 'People',
+    ],
+  },
+  {
+    name: 'People',
     key: 'People',
     children: [
       { name: 'Michael' },
       { name: 'Dwight' },
       { name: 'Creed' },
-    ] },
-  { name: null,
+    ],
+  },
+  {
+    name: null,
     key: 'Fruit',
     children: [
       { name: 'Apple' },
       { name: 'Strawberry' },
       { name: 'Blueberry' },
-    ] },
+    ],
+  },
 ];
 
 export default {
