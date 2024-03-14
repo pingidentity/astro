@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuRight from '@pingux/mdi-react/MenuRightIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import {
+import { Badge,
   Box,
   CheckboxField,
+  IconButtonToggle,
   Link,
-  Text,
-} from '../../index';
+  SwitchField,
+  Text } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -112,6 +115,119 @@ export const HelperText = () => (
     label="Click me"
   />
 );
+
+export const ExpandableAndToggleableIndeterminate = () => {
+  const [isReadOnly, setIsReadOnly] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
+  // Whether the parent checkbox is indeterminate (default is true for our example)
+  const [isIndeterminate, setIsIndeterminate] = useState(true);
+  // Whether the parent checkbox should be checked, this is set independently from indeterminism
+  const [isCompleted, setIsCompleted] = useState(false);
+  // The state of the sub-checkboxes
+  const [subCheckboxes, setSubCheckboxes] = useState([
+    {
+      label: 'Apple Chunks',
+      isSelected: true,
+    }, {
+      label: 'Blueberries',
+      isSelected: false,
+    }, {
+      label: 'Grapes',
+      isSelected: false,
+    }, {
+      label: 'Strawberry Slices',
+      isSelected: true,
+    },
+  ]);
+
+  // Determine which checkbox needs its state updated
+  const handleSubCheckboxChange = (isSelected, changedIndex, changeAll = false) => {
+    const newSubCheckboxes = subCheckboxes.map((checkbox, index) => {
+      if (changeAll || index === changedIndex) return ({ ...checkbox, isSelected });
+      return checkbox;
+    });
+
+    setSubCheckboxes(newSubCheckboxes);
+  };
+
+  // Update all sub-checkbox states when the parent checkbox is pressed
+  const handleParentCheckboxChange = isSelected => {
+    handleSubCheckboxChange(isSelected, null, true);
+  };
+
+
+  useEffect(() => {
+    // Determine if all sub-checkboxes are selected / unselected or if there is a mix
+    // and update the parent checkbox
+    if (subCheckboxes.every(item => item.isSelected)) {
+      setIsIndeterminate(false);
+      setIsCompleted(true);
+    } else if (subCheckboxes.every(item => !item.isSelected)) {
+      setIsIndeterminate(false);
+      setIsCompleted(false);
+    } else {
+      setIsIndeterminate(true);
+      setIsCompleted(false);
+    }
+  }, [isIndeterminate, subCheckboxes]);
+
+  return (
+    <>
+      <SwitchField
+        isSelected={isReadOnly}
+        label="Is Read Only"
+        onChange={setIsReadOnly}
+        value="my-switch"
+      />
+      <br />
+      <Box isRow alignItems="center">
+        <IconButtonToggle
+          toggledIcon={MenuDown}
+          defaultIcon={MenuRight}
+          onToggle={setIsExpanded}
+          isToggled={isExpanded}
+          buttonProps={{
+            'aria-label': isExpanded ? 'menu down' : 'menu up',
+            'aria-controls': 'expanded-checkboxes',
+            'aria-expanded': isExpanded,
+          }}
+          iconProps={{
+            size: 'sm',
+          }}
+        />
+        {isReadOnly
+          ? <Text>Fruit Salad Recipe</Text>
+          : (
+            <CheckboxField
+              label="Fruit Salad Recipe"
+              isIndeterminate={isIndeterminate}
+              isSelected={isCompleted}
+              onChange={handleParentCheckboxChange}
+            />
+          )}
+        <Box>
+          <Badge ml="sm" label={subCheckboxes.length} variant="countNeutral" />
+        </Box>
+      </Box>
+      <Box ml="50px" id="expanded-checkboxes">
+        {isExpanded && subCheckboxes.map((checkbox, index) => (
+          <Box isRow alignItems="center" height="24px">
+            { isReadOnly
+              ? <Text>{checkbox.label}</Text>
+              : (
+                <CheckboxField
+                  key={checkbox.label}
+                  label={checkbox.label}
+                  isSelected={checkbox.isSelected}
+                  onChange={isSelected => handleSubCheckboxChange(isSelected, index)}
+                />
+              )}
+          </Box>
+        ))}
+      </Box>
+    </>
+  );
+};
 
 export const Indeterminate = () => {
   // Whether the parent checkbox is indeterminate (default is true for our example)
