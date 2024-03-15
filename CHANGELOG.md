@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.52.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.51.0...@pingux/astro@2.52.0) (2024-03-15)
+
+
+### Features
+
+* [UIP-6686] Label convert to TS ([e5f9cc1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e5f9cc1165fb75e2a21c4278ef38d00ffbeea9bc))
+* [UIP-6790] Pingito font in Astro ([a80dfd4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a80dfd4a252e10dd9d0d5832f6ad1f578eb864d4))
+* [UIP-6805] Astro CheckboxField add Expandable Story ([4fd1900](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4fd1900e5e493e56833f13e4fc9f25ca28691c10))
+
+
+
+
+
 # [2.51.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.50.0...@pingux/astro@2.51.0) (2024-03-07)
 
 
