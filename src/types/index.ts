@@ -9,6 +9,7 @@ export * from './helpHint';
 export * from './icon';
 export * from './iconBadge';
 export * from './iconButton';
+export * from './iconButtonToggle';
 export * from './input';
 export * from './item';
 export * from './link';

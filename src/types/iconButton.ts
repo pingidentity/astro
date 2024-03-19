@@ -19,8 +19,5 @@ export interface IconButtonProps extends ThemeUIIconButtonProps, TestingAttribut
     'aria-label'?: string | undefined,
     /** Whether the icon button is disabled. */
     isDisabled?: boolean;
-    /** Inline styling prop */
-    sx?: ThemeUICSSObject;
     size?: IconSize;
-
 }
