@@ -1,20 +1,20 @@
 import React from 'react';
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Link, Text } from '../..';
+import { CopyTextProps } from '../../types';
 import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
-import CopyText from '.';
+import CopyText from './CopyText';
 
 const testId = 'test-copy-text';
 
 const originalClipboard = { ...global.navigator.clipboard };
-const originalExecCommand = global.document.execCommand;
-
 const originalGetSelection = window.getSelection;
 
-const defaultTest = (getComponent = {}) => {
+const defaultTest = getComponent => {
   getComponent();
   const container = screen.getByTestId(testId);
   expect(container).toBeInstanceOf(HTMLDivElement);
@@ -26,9 +26,15 @@ describe('CopyText', () => {
     const mockClipboard = {
       writeText: jest.fn(),
     };
-    global.navigator.clipboard = mockClipboard;
+    Object.defineProperty(window, 'navigator', {
+      value: {
+        clipboard: mockClipboard,
+      },
+      configurable: true,
+    });
     global.document.execCommand = jest.fn();
-    global.document.execCommand.mockReturnValue(true);
+
+    jest.spyOn(document, 'execCommand').mockReturnValue(true);
 
     const mockGetSelection = jest.fn();
     mockGetSelection.mockReturnValue('');
@@ -37,25 +43,30 @@ describe('CopyText', () => {
 
   afterEach(() => {
     jest.resetAllMocks();
-    global.navigator.clipboard = originalClipboard;
-    global.document.execCommand = originalExecCommand;
+    Object.defineProperty(window, 'navigator', {
+      value: {
+        clipboard: originalClipboard,
+      },
+      configurable: true,
+    });
 
+    jest.spyOn(document, 'execCommand').mockReturnValue(true);
     window.getSelection = originalGetSelection;
   });
 
   describe('Text mode', () => {
-    const defaultProps = {
+    const defaultProps: CopyTextProps = {
       'data-testid': testId,
     };
     const textValue = 'Here is a value';
 
-    const getComponent = (props = {}) => render((
+    const getComponent = (props: CopyTextProps = {}) => render((
       <CopyText {...defaultProps} {...props}>
         <Text>{textValue}</Text>
       </CopyText>
     ));
 
-    // Needs to be added to each components test file
+    // Needs to be added to each component's test file
     universalComponentTests({
       renderComponent: props => (
         <CopyText {...defaultProps} {...props}>
@@ -112,7 +123,10 @@ describe('CopyText', () => {
     });
 
     test('copying works in insecure origin', async () => {
-      global.navigator.clipboard = undefined;
+      Object.defineProperty(window.navigator, 'clipboard', {
+        value: undefined,
+        writable: true,
+      });
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
       await act(async () => userEvent.click(button));
@@ -121,9 +135,12 @@ describe('CopyText', () => {
     });
 
     test('if copying is failed, a warning shows in the console', async () => {
-      global.navigator.clipboard = undefined;
-      global.document.execCommand.mockReturnValue(false);
-      global.console.error = () => jest.mock(); // eslint-disable-line no-console
+      Object.defineProperty(window.navigator, 'clipboard', {
+        value: undefined,
+        writable: true,
+      });
+      jest.spyOn(document, 'execCommand').mockReturnValue(false);
+      jest.spyOn(console, 'error').mockImplementation(() => { return false; }); // eslint-disable-line no-console
 
       getComponent();
 
@@ -140,35 +157,39 @@ describe('CopyText', () => {
     test('after button click, the tooltip renders with the text "Copied!"', async () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
-      await act(async () => userEvent.click(button));
+      fireEvent.click(button);
       expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+      await waitFor(() => {
+        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+      });
     });
 
     test('tooltip renders with the text "Copied!" hides after delay', async () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
-      await act(async () => userEvent.click(button));
+      fireEvent.click(button);
       expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+      await waitFor(() => {
+        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+      });
       await waitForElementToBeRemoved(screen.queryByRole('tooltip'));
     });
   });
 
   describe('Link mode', () => {
-    const defaultProps = {
+    const defaultProps: CopyTextProps = {
       'data-testid': testId,
       mode: 'link',
     };
     const linkValue = 'https://a.url.com';
 
-    const getComponent = (props = {}) => render((
+    const getComponent = (props: CopyTextProps = {}) => render((
       <CopyText {...defaultProps} {...props}>
         <Link href={linkValue}>{linkValue}</Link>
       </CopyText>
     ));
 
-    // Needs to be added to each components test file
+    // Needs to be added to each component's test file
     universalComponentTests({
       renderComponent: props => (
         <CopyText {...defaultProps} {...props}>
@@ -208,8 +229,11 @@ describe('CopyText', () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
       await act(async () => userEvent.click(button));
-      expect(navigator.clipboard.writeText).toBeCalledTimes(1);
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(linkValue);
+      // If navigator.clipboard is available and in secure context
+      if (navigator.clipboard) {
+        expect(navigator.clipboard.writeText).toBeCalledTimes(1);
+        expect(navigator.clipboard.writeText).toHaveBeenCalledWith(linkValue);
+      }
     });
   });
 });

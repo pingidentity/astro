@@ -5,6 +5,7 @@ export * from './breadCrumbs';
 export * from './button';
 export * from './buttonBar';
 export * from './card';
+export * from './copyText';
 export * from './fieldHelperText';
 export * from './helpHint';
 export * from './icon';

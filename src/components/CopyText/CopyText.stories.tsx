@@ -1,14 +1,16 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   CopyText,
+  CopyTextProps,
   Link,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import CopyTextReadme from './CopyText.mdx';
 
@@ -38,9 +40,9 @@ export default {
       control: 'none',
     },
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<CopyTextProps> = (args: CopyTextProps) => (
   <CopyText {...args}>
     <Text>Here is a value</Text>
   </CopyText>
@@ -53,13 +55,13 @@ Default.parameters = {
   },
 };
 
-export const WithLink = args => (
+export const WithLink: StoryFn<CopyTextProps> = (args: CopyTextProps) => (
   <CopyText {...args} mode="link">
     <Link href="https://a.url.com">https://a.url.com</Link>
   </CopyText>
 );
 
-export const WithChangedCopiedValue = args => (
+export const WithChangedCopiedValue: StoryFn<CopyTextProps> = (args: CopyTextProps) => (
   <CopyText {...args} textToCopy="Here is a copied value">
     <Text>Here is a value</Text>
   </CopyText>
