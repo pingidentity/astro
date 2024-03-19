@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.53.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.52.0...@pingux/astro@2.53.0) (2024-03-19)
+
+
+### Features
+
+* [UIP-6766] CopyText convert to TS ([65fd5a4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/65fd5a4a1a7222720ef93de76f4794cfa0ad3ac7))
+* [UIP-6777] Modal convert to typescript ([837d5d4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/837d5d4cb853e57648c423197457df497fd70d02))
+* [UIP-6782] IconButtonToggle convert to TS ([7f3e53c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7f3e53c36395f8479f85b52eec67d67c6ad619bb))
+
+
+
+
+
 # [2.52.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.51.0...@pingux/astro@2.52.0) (2024-03-15)
 
 
