@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
 import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { IconButtonToggle } from '../../index';
+import { IconButtonToggleProps } from '../../types';
 
 import IconButtonToggleReadme from './IconButtonToggle.mdx';
 
@@ -20,13 +22,13 @@ export default {
       ),
     },
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<IconButtonToggleProps> = (args: IconButtonToggleProps) => (
   <IconButtonToggle {...args} toggledIcon={EyeIcon} defaultIcon={EyeOffIcon} buttonProps={{ 'aria-label': 'eye icon' }} />
 );
 
-export const Controlled = args => {
+export const Controlled: StoryFn<IconButtonToggleProps> = (args: IconButtonToggleProps) => {
   const [isToggled, onToggledChange] = useState(false);
   const handleToggleChange = () => {
     onToggledChange(!isToggled);
