@@ -32,7 +32,7 @@ const ComposedComponent = props => {
     </>
   );
 };
-const getComposedComponent = (defaultState, modalProps) => (
+const getComposedComponent = (defaultState = {}, modalProps = {}) => (
   render(<ComposedComponent defaultState={defaultState} modalProps={modalProps} />)
 );
 
@@ -41,13 +41,13 @@ test('clicking the trigger should open the modal', () => {
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
   // Open it with the button trigger
-  userEvent.click(screen.queryByRole('button'));
+  userEvent.click(screen.getByRole('button'));
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
 });
 
 test('keyboard interaction with the trigger should open the modal', () => {
   getComposedComponent();
-  const button = screen.queryByRole('button');
+  const button = screen.getByRole('button');
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
   // Open it with the button trigger
@@ -75,12 +75,12 @@ test('keyboard interactions on the close button should close the modal', () => {
 
 test('assign aria-hidden to elements outside the modal when the modal is opened', () => {
   getComposedComponent();
-  const button = screen.queryByRole('button');
+  const button = screen.getByRole('button');
   const buttonParent = button.closest('div');
 
   expect(buttonParent).not.toHaveAttribute('aria-hidden');
 
   // Open the modal
-  userEvent.click(screen.queryByRole('button'));
+  userEvent.click(screen.getByRole('button'));
   expect(buttonParent).toHaveAttribute('aria-hidden');
 });

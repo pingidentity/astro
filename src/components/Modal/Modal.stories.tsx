@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -10,7 +11,8 @@ import {
   OverlayProvider,
   Text,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { ModalProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 
 import ModalReadme from './Modal.mdx';
@@ -97,9 +99,9 @@ export default {
     title: 'Continue',
     hasCloseButton: true,
   },
-};
+} as Meta;
 
-export const Default = args => {
+export const Default: StoryFn<ModalProps> = args => {
   const state = useModalState();
 
   return (
