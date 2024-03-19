@@ -2,6 +2,7 @@ import React from 'react';
 import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
 import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 
+import { IconButtonToggleProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -18,7 +19,7 @@ const OffIcon = props => (
 );
 
 const testId = 'test-button';
-const defaultProps = {
+const defaultProps: IconButtonToggleProps = {
   buttonProps: {
     'data-testid': testId,
     'aria-label': 'Eye',
@@ -32,7 +33,6 @@ const getComponent = (props = {}) => render(<IconButtonToggle {...defaultProps} 
 universalComponentTests({
   renderComponent: props => <IconButtonToggle {...defaultProps} {...props} />,
 });
-
 
 test('default icon button', () => {
   getComponent();

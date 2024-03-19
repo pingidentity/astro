@@ -20,14 +20,14 @@ interface UseComponentToggle {
   (props: ComponentToggleProps): ComponentToggleResult
 }
 
-interface ComponentToggleProps {
+export interface ComponentToggleProps {
   ComponentToRenderIfTrue: React.ReactNode;
   ComponentToRenderIfFalse: React.ReactNode;
   condition: boolean;
   onConditionChange?: (newCondition: boolean, ...args: unknown[]) => void;
 }
 
-interface ComponentToggleResult {
+export interface ComponentToggleResult {
   handleConditionChange: (...args: unknown[]) => void;
   RenderedComponent: React.ReactNode;
 }

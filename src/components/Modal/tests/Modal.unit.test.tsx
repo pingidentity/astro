@@ -2,11 +2,12 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Modal, OverlayProvider } from '../../../index';
-import { queryByAttribute, render, screen } from '../../../utils/testUtils/testWrapper';
+import { ModalProps } from '../../../types/Modal';
+import { render, screen } from '../../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 
 // For testing the modal alone
-const getComponent = (props = {}) => render((
+const getComponent = (props: ModalProps = {}) => render((
   <OverlayProvider>
     <Modal {...props} />
   </OverlayProvider>
@@ -28,25 +29,25 @@ test('default modal', () => {
 });
 
 test('should spread undocumented props to the container element', () => {
-  getComponent({ 'data-prop': 'test' });
-  const container = queryByAttribute('data-prop', document, 'test');
+  getComponent({ 'data-testid': 'test' });
+  const container = screen.queryByTestId('test');
   const modal = screen.getByRole('dialog');
   expect(container).toContainElement(modal);
-  expect(modal).not.toHaveAttribute('data-prop', 'test');
+  expect(modal).not.toHaveAttribute('data-testid', 'test');
 });
 
 test('should spread container props to the container element even if documented', () => {
-  getComponent({ containerProps: { id: 'test' } });
-  const container = queryByAttribute('id', document, 'test');
+  getComponent({ containerProps: { 'data-testid': 'test' } });
+  const container = screen.queryByTestId('test');
   const modal = screen.getByRole('dialog');
   expect(container).toContainElement(modal);
-  expect(modal).not.toHaveAttribute('id', 'test');
+  expect(modal).not.toHaveAttribute('data-testid', 'test');
 });
 
 test('should spread content props to the modal dialog even if undocumented', () => {
-  getComponent({ contentProps: { 'data-prop': 'test' } });
+  getComponent({ contentProps: { 'data-testid': 'test' } });
   const modal = screen.getByRole('dialog');
-  expect(modal).toHaveAttribute('data-prop', 'test');
+  expect(modal).toHaveAttribute('data-testid', 'test');
 });
 
 test('should display title for modal', () => {
