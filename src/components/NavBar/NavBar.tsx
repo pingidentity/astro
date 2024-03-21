@@ -1,14 +1,13 @@
 import React, { forwardRef, useMemo, useState } from 'react';
 import { FocusScope, useFocusManager } from '@react-aria/focus';
-import PropTypes from 'prop-types';
 
 import { NavBarContext } from '../../context/NavBarContext';
 import useNavBarStyling from '../../hooks/useNavBarStyling/useNavBarStyling';
 import useProgressiveState from '../../hooks/useProgressiveState';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
+import { NavBarProps } from '../../types/navBar';
 import Box from '../Box/Box';
 
-const NavBar = forwardRef((props, ref) => {
+const NavBar = forwardRef<HTMLElement, NavBarProps>((props, ref) => {
   const {
     isAutoСollapsible,
     defaultSelectedKey,
@@ -21,7 +20,8 @@ const NavBar = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const initialExpandedKeys = isAutoСollapsible && defaultExpandedKeys.length
+  const initialExpandedKeys = isAutoСollapsible
+    && Array.isArray(defaultExpandedKeys) && defaultExpandedKeys.length
     ? defaultExpandedKeys[0]
     : defaultExpandedKeys;
 
@@ -32,11 +32,11 @@ const NavBar = forwardRef((props, ref) => {
     defaultSelectedKey,
   );
 
-  const navStyles = useNavBarStyling(variant);
+  const navStyles = useNavBarStyling(variant!);
 
   const items = Array.isArray(children)
     ? children.map(child => ({ item: child, key: child.key }))
-    : [{ item: children, key: children.key }];
+    : [{ item: children, key: !children ? '' : children[0]?.key }];
 
   const contextValue = useMemo(() => {
     return {
@@ -64,7 +64,7 @@ const NavBar = forwardRef((props, ref) => {
       <Box ref={ref} variant={navStyles.navBar} role="navigation" as="nav" {...others}>
         {items.length ? (
           <FocusScope restoreFocus={hasRestoreFocus}>
-            {items.map(({ item, key }) => <FocusableItem key={key}>{item}</FocusableItem>)}
+            {items.map(({ item, key }, index) => <FocusableItem key={key || `key${index}`}>{item}</FocusableItem>)}
           </FocusScope>
         ) : null}
       </Box>
@@ -93,27 +93,6 @@ const FocusableItem = props => {
 
   const childWithFocusHandle = React.cloneElement(props.children, { onKeyDown });
   return childWithFocusHandle;
-};
-
-NavBar.propTypes = {
-  /** Allows only one item to be expanded. */
-  isAutoСollapsible: PropTypes.bool,
-  /** This applies a style to the entire nav tree. the options are default and popup. */
-  variant: PropTypes.oneOf(['default', 'popupNav']),
-  /** Whether or not the focus will return to the previously focused element upon unmount. */
-  hasRestoreFocus: PropTypes.bool,
-  /** The initial selected key in the collection (uncontrolled). */
-  defaultSelectedKey: PropTypes.string,
-  /** The initial expanded keys in the collection (uncontrolled). */
-  defaultExpandedKeys: isIterableProp,
-  /** The selected key in the collection (controlled). */
-  selectedKey: isIterableProp,
-  /**
-  * Callback function that fires when the selected key changes.
-  *
-  * `(selectedKey: String) => void`
-  */
-  setSelectedKey: PropTypes.func,
 };
 
 NavBar.defaultProps = {

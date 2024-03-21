@@ -9,7 +9,7 @@ interface UseNavBarPress {
    */
 
   (params: {
-    key: string
+    key: string | undefined
     onPressCallback?: () => void
   }, state: { setSelectedKey: (key: string) => void }): {
     onNavPress: () => void;
@@ -19,9 +19,11 @@ interface UseNavBarPress {
 const useNavBarPress: UseNavBarPress = ({ key, onPressCallback }, state) => {
   const { setSelectedKey } = state;
   const onNavPress = () => {
-    setSelectedKey(key);
-    if (onPressCallback) {
-      onPressCallback();
+    if (key) {
+      setSelectedKey(key);
+      if (onPressCallback) {
+        onPressCallback();
+      }
     }
   };
   return {

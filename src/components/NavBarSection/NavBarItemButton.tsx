@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useNavBarPress, useStatusClasses } from '../../hooks';
 import { Button } from '../../index';
+import { NavBarItemButtonProps } from '../../types/navBar';
 
-const NavBarItemButton = props => {
+const NavBarItemButton = (props: NavBarItemButtonProps) => {
   const {
     className,
     id: key,
@@ -34,13 +34,6 @@ const NavBarItemButton = props => {
       {...others}
     />
   );
-};
-
-NavBarItemButton.propTypes = {
-  /**  Handler that is called when the press is released over the target. */
-  onPress: PropTypes.func,
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string.isRequired,
 };
 
 export default NavBarItemButton;

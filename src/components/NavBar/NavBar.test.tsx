@@ -12,6 +12,7 @@ import ViewGridPlusOutline from '@pingux/mdi-react/ViewGridPlusOutlineIcon';
 import userEvent from '@testing-library/user-event';
 
 import { Box, Button, Link, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection } from '../../index';
+import { NavBarProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -147,13 +148,13 @@ const secondData = [
   },
 ];
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: NavBarProps = {}) => render((
   <NavBar {...props}>
     <Box
       sx={{
         height: '100%',
         maxHeight: '100%',
-        overflowY: 'overlay !important',
+        overflowY: 'overlay !important' as 'auto',
       }}
       key="top-logo-parent"
     >
@@ -230,7 +231,7 @@ const ControlledComponent = () => {
   );
 };
 
-const getComponentWithMultipleChildren = (props = {}) => render((
+const getComponentWithMultipleChildren = (props: NavBarProps = {}) => render((
   <NavBar {...props}>
     <Box key="top-logo-parent">
       <Link
@@ -537,7 +538,7 @@ test('when a child is selected, and the parent is collapsed, the parent has the 
 
   const parent = screen.queryByTestId(SECTION_BUTTON_DATA_ID);
   expect(parent).not.toHaveClass('is-selected');
-  userEvent.click(parent);
+  userEvent.click(parent!);
   const parentDiv = screen.queryByTestId('Overview');
   expect(parentDiv).toHaveClass('is-selected');
 });

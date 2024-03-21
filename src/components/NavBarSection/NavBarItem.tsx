@@ -1,13 +1,13 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
-import { useNavBarPress, useStatusClasses } from '../../hooks';
+import { useLocalOrForwardRef, useNavBarPress, useStatusClasses } from '../../hooks';
 import { Box, Icon, Text } from '../../index';
+import { NavBarItemProps } from '../../types/navBar';
 
-const NavBarItem = forwardRef((props, ref) => {
+const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
   const {
     icon,
     text,
@@ -17,10 +17,10 @@ const NavBarItem = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const navItemRef = useRef();
+  const navItemRef = useLocalOrForwardRef<HTMLElement>(null);
 
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => navItemRef.current);
+  useImperativeHandle(ref, () => navItemRef.current as HTMLElement);
 
   const { hoverProps, isHovered } = useHover({});
 
@@ -77,7 +77,7 @@ const NavBarItem = forwardRef((props, ref) => {
           && (
             <Icon
               icon={icon}
-              title={{ name: text }}
+              title={{ name: text! }}
               size="sm"
               sx={{
                 mr: 'sm',
@@ -93,16 +93,5 @@ const NavBarItem = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-NavBarItem.propTypes = {
-  /**  Handler that is called when the press is released over the target. */
-  onPress: PropTypes.func,
-  /** The icon to render in between each node. */
-  icon: PropTypes.elementType,
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string,
-  /** Text that will render within the component */
-  text: PropTypes.string,
-};
 
 export default NavBarItem;

@@ -9,6 +9,7 @@ import ScaleBalance from '@pingux/mdi-react/ScaleBalanceIcon';
 import TransitConnection from '@pingux/mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from '@pingux/mdi-react/ViewDashboardIcon';
 import ViewGridPlusOutline from '@pingux/mdi-react/ViewGridPlusOutlineIcon';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -22,7 +23,8 @@ import {
   NavBarSection,
   Separator,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { NavBarProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import NavBarReadme from './NavBar.mdx';
 
@@ -41,7 +43,7 @@ export default {
       ),
     },
   },
-};
+} as Meta;
 
 const Credentials = props => (
   <svg
@@ -506,7 +508,7 @@ const thirdData = [
   },
 ];
 
-export const Default = () => (
+export const Default: StoryFn<NavBarProps> = () => (
   <NavBar>
     <Box padding="md" key="top-logo-parent">
       <Link
@@ -544,7 +546,7 @@ Default.parameters = {
   },
 };
 
-export const Controlled = () => {
+export const Controlled: StoryFn<NavBarProps> = () => {
   const [selectedKey, setSelectedKey] = useState('Dashboard Link Group');
 
   const customData = [
@@ -602,7 +604,7 @@ export const Controlled = () => {
   );
 };
 
-export const AutoCollapse = () => (
+export const AutoCollapse: StoryFn<NavBarProps> = () => (
   <NavBar isAutoСollapsible>
     <Box padding="md" key="top-logo-parent">
       <Link
