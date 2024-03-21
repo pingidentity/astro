@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuUp from '@pingux/mdi-react/MenuUpIcon';
-import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useStatusClasses } from '../../hooks';
 import { Box, Icon, Text } from '../../index';
+import { NavBarItemHeaderProps, NavBarPrimaryItemHeaderProps, NavBarSectionItemHeaderProps } from '../../types/navBar';
 
-const NavBarItemHeader = props => {
-  const { item } = props;
+const NavBarItemHeader = ({ item }: NavBarItemHeaderProps) => {
   const { children, href } = item;
 
   return !children && href
@@ -16,8 +15,8 @@ const NavBarItemHeader = props => {
     : <NavBarSectionItemHeader item={item} />;
 };
 
-const NavBarSectionItemHeader = props => {
-  const { item } = props;
+const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
+  // const { item } = props;
   const { icon, key, className, heading } = item;
 
   const navBarState = useNavBarContext();
@@ -30,8 +29,8 @@ const NavBarSectionItemHeader = props => {
   } = navBarState;
 
   const isExpanded = expandedKeys.includes(key);
-  const array = item.children.map(i => i.key);
-  const childSelected = array.includes(navBarState.selectedKey);
+  const array = item?.children && item.children.map(i => i.key);
+  const childSelected = array && array.includes(navBarState.selectedKey);
 
   useEffect(() => {
     if (childSelected && isExpanded === false) {
@@ -84,7 +83,7 @@ const NavBarSectionItemHeader = props => {
   );
 };
 
-const NavBarPrimaryItemHeader = ({ item }) => {
+const NavBarPrimaryItemHeader = ({ item }: NavBarPrimaryItemHeaderProps) => {
   const { icon, className, heading, customIcon } = item;
   const navBarState = useNavBarContext();
   const { navStyles } = navBarState;
@@ -120,33 +119,6 @@ const NavBarPrimaryItemHeader = ({ item }) => {
       </Box>
     </Box>
   );
-};
-
-NavBarItemHeader.propTypes = {
-  item: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
-    href: PropTypes.string,
-  }),
-};
-
-NavBarSectionItemHeader.propTypes = {
-  item: PropTypes.shape({
-    heading: PropTypes.string,
-    icon: PropTypes.elementType,
-    className: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
-    key: PropTypes.string,
-    href: PropTypes.string,
-  }),
-};
-
-NavBarPrimaryItemHeader.propTypes = {
-  item: PropTypes.shape({
-    heading: PropTypes.string,
-    icon: PropTypes.elementType,
-    className: PropTypes.string,
-    customIcon: PropTypes.elementType,
-  }),
 };
 
 export default NavBarItemHeader;

@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useNavBarPress, useStatusClasses } from '../../hooks';
 import { Link } from '../../index';
+import { NavBarItemLinkProps } from '../../types/navBar';
 
-const NavBarItemLink = props => {
+const NavBarItemLink = (props: NavBarItemLinkProps) => {
   const {
     className,
     id: key,
@@ -38,15 +38,6 @@ const NavBarItemLink = props => {
       }}
     />
   );
-};
-
-NavBarItemLink.propTypes = {
-  /**  Specifies the location of the URL */
-  href: PropTypes.string,
-  /**  Handler that is called when the press is released over the target. */
-  onPress: PropTypes.func,
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string.isRequired,
 };
 
 export default NavBarItemLink;

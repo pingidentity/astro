@@ -25,7 +25,7 @@ const data = [
   },
 ];
 
-const NavBarWithItemBody = React.forwardRef((props, ref) => {
+const NavBarWithItemBody = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <NavBar>
       <NavBarItemBody ref={ref} {...props} item={{ children: [<Text>{TEXT}</Text>] }} />
@@ -33,7 +33,7 @@ const NavBarWithItemBody = React.forwardRef((props, ref) => {
   );
 });
 
-const NavBarWithSection = React.forwardRef((props, ref) => {
+const NavBarWithSection = React.forwardRef<HTMLUListElement>((props, ref) => {
   return (
     <NavBar>
       <NavBarSection ref={ref} {...props} items={data} />
