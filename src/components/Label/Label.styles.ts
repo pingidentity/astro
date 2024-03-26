@@ -64,7 +64,7 @@ label.checkbox = {
   div: {
     flexShrink: 0,
   },
-  width: 'auto',
+  width: 'max-content',
   alignItems: 'center',
   cursor: 'pointer',
 };
