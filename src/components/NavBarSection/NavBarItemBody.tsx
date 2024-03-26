@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { Box, Separator, Text } from '../../index';
+import { ChildItemWrapperProps, NavBarItemBodyProps } from '../../types/navBar';
 
-const NavBarItemBody = forwardRef(({ item, onKeyDown }, ref) => {
+const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>(({ item, onKeyDown }, ref) => {
   const state = useNavBarContext();
 
   const renderSubTitle = child => {
@@ -42,28 +43,30 @@ const NavBarItemBody = forwardRef(({ item, onKeyDown }, ref) => {
 
   return (
     <Box variant={state.navStyles.navBarItemBody} ref={ref}>
-      {item.children.map(renderChild)}
+      {item?.children && item.children.map(renderChild)}
     </Box>
   );
 });
 
-const ChildItemWrapper = ({ children, onKeyDown }) => {
-  const childrenKey = children.key || children;
-  const { keyboardProps } = useKeyboard({ onKeyDown: e => onKeyDown(e, childrenKey) });
+const ChildItemWrapper = ({ children, onKeyDown }: ChildItemWrapperProps) => {
+  const childrenKey = children?.key || children;
+
+  const { keyboardProps } = useKeyboard({
+    onKeyDown: e => { return onKeyDown ? onKeyDown(e, childrenKey) : undefined; },
+  });
 
   return (
-    <Box width="100%" {...keyboardProps}>
-      {children}
+    <Box
+      width="100%"
+      {...keyboardProps}
+      role="none"
+    >
+      <>
+        {' '}
+        {children && children}
+      </>
     </Box>
   );
-};
-
-NavBarItemBody.propTypes = {
-  item: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
-    key: PropTypes.string,
-  }),
-  onKeyDown: PropTypes.func,
 };
 
 ChildItemWrapper.propTypes = {

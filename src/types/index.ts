@@ -22,6 +22,7 @@ export * from './loader';
 export * from './menu';
 export * from './menuItem';
 export * from './Modal';
+export * from './navBar';
 export * from './overlayPanel';
 export * from './popoverContainer';
 export * from './popoverMenu';
