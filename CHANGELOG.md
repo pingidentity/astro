@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.53.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.53.0...@pingux/astro@2.53.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [UIP-6775] NavBar convert to TS ([0a80404](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0a80404ab6c8f5996f1d0df3547ab885a32d9016))
+* [UIP-6812] Selecting checkbox when clicking outside ([11f92ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/11f92ec868a509e4a2d8517673e314d8383ae096))
+
+
+
+
+
 # [2.53.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.52.0...@pingux/astro@2.53.0) (2024-03-19)
 
 
