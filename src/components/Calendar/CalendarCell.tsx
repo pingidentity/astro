@@ -1,20 +1,20 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
-import { useCalendarCell } from '@react-aria/calendar';
+import React, { DOMAttributes, forwardRef, RefObject, useCallback } from 'react';
+import { AriaCalendarCellProps, CalendarCellAria, useCalendarCell } from '@react-aria/calendar';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover, usePress } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
-import PropTypes from 'prop-types';
+import { CalendarState } from '@react-stately/calendar';
 
-import { useStatusClasses } from '../../hooks';
+import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { Box, TableCell } from '../../index';
-
+import { CalendarCellProps, FocusableElement } from '../../types';
 /**
 * Grid cell button element with the formatted day number.
 * Utilizes the useCalendarCell hook to return  props for an individual cell,
 * along with states and information.
 */
 
-const CalendarCell = forwardRef((props, ref) => {
+const CalendarCell = forwardRef<HTMLDivElement, CalendarCellProps>((props, ref) => {
   const {
     state,
     date,
@@ -22,9 +22,7 @@ const CalendarCell = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const cellRef = useRef();
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => cellRef.current);
+  const cellRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   const {
     cellProps,
@@ -34,7 +32,9 @@ const CalendarCell = forwardRef((props, ref) => {
     isUnavailable,
     formattedDate,
     isDisabled,
-  } = useCalendarCell({ date }, state, cellRef);
+  }: CalendarCellAria = useCalendarCell({ date } as AriaCalendarCellProps,
+    state as CalendarState,
+    cellRef as RefObject<HTMLDivElement>);
 
   const { focusPreviousPage, focusNextPage, setFocused } = state;
 
@@ -44,11 +44,11 @@ const CalendarCell = forwardRef((props, ref) => {
    */
 
   const handleDisableClick = useCallback(() => {
-    if (cellRef.current?.hidden && !state.isDisabled && formattedDate > 20) {
-      setFocused(undefined);
+    if (cellRef.current?.hidden && !state.isDisabled && Number(formattedDate) > 20) {
+      setFocused(false);
       focusPreviousPage();
-    } else if (cellRef.current?.hidden && !state.isDisabled && formattedDate < 15) {
-      setFocused(undefined);
+    } else if (cellRef.current?.hidden && !state.isDisabled && Number(formattedDate) < 15) {
+      setFocused(false);
       focusNextPage();
     }
   }, [
@@ -67,7 +67,7 @@ const CalendarCell = forwardRef((props, ref) => {
     focusProps: focusWithinProps, isFocusVisible,
   } = useFocusRing({ within: true });
 
-  const mergedProps = mergeProps(
+  const mergedProps: DOMAttributes<FocusableElement> = mergeProps(
     cellProps,
     hoverProps,
     pressProps,
@@ -94,11 +94,11 @@ const CalendarCell = forwardRef((props, ref) => {
         variant="calendar.calendarButton"
         ref={cellRef}
         hidden={isOutsideVisibleRange}
+        {...mergeProps(buttonProps, others)}
         isSelected={isSelected}
         isDisabled={isDisabled}
         isUnavailable={isUnavailable}
         className={classNames}
-        {...mergeProps(buttonProps, others)}
       >
         {formattedDate}
       </Box>
@@ -106,21 +106,5 @@ const CalendarCell = forwardRef((props, ref) => {
   );
 });
 
-CalendarCell.propTypes = {
-  isSelected: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isOutsideVisibleRange: PropTypes.bool,
-  isUnavailable: PropTypes.bool,
-  formattedDate: PropTypes.string,
-  state: PropTypes.shape({
-    focusPreviousPage: PropTypes.func,
-    setValue: PropTypes.func,
-    focusNextPage: PropTypes.func,
-    setFocused: PropTypes.func,
-    setFocusedDate: PropTypes.func,
-    isDisabled: PropTypes.bool,
-  }),
-  date: PropTypes.shape({}),
-};
 
 export default CalendarCell;

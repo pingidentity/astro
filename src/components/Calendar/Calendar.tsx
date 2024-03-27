@@ -1,20 +1,22 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { createCalendar, parseDate } from '@internationalized/date';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import { CalendarAria } from 'react-aria';
+import { createCalendar, DateValue, parseDate } from '@internationalized/date';
 import ChevronDoubleLeftIcon from '@pingux/mdi-react/ChevronDoubleLeftIcon';
 import ChevronDoubleRightIcon from '@pingux/mdi-react/ChevronDoubleRightIcon';
 import ChevronLeftIcon from '@pingux/mdi-react/ChevronLeftIcon';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
-import { useCalendar } from '@react-aria/calendar';
+import { AriaCalendarProps, useCalendar } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { useCalendarState } from '@react-stately/calendar';
-import PropTypes from 'prop-types';
+import { type CalendarState, type CalendarStateOptions, useCalendarState } from '@react-stately/calendar';
 
+import { useLocalOrForwardRef } from '../../hooks';
 import { Box, Button, Icon, IconButton, Text } from '../../index';
+import { CalendarProps } from '../../types';
 
 import CalendarGrid from './CalendarGrid';
 
-const Calendar = forwardRef((props, ref) => {
+const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
   const {
     defaultFocusedValue,
     defaultValue,
@@ -24,10 +26,8 @@ const Calendar = forwardRef((props, ref) => {
     value,
   } = props;
   const { locale } = useLocale();
-  const calenderRef = useRef();
 
-  // istanbul ignore next
-  useImperativeHandle(ref, () => calenderRef.current);
+  const calenderRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   const parsedDates = {
     value: (typeof value === 'string' && parseDate(value)) || value,
@@ -37,23 +37,22 @@ const Calendar = forwardRef((props, ref) => {
     minValue: (typeof minValue === 'string' && parseDate(minValue)) || minValue,
   };
 
-  const state = useCalendarState({
+  const state: CalendarState = useCalendarState({
     autoFocus: hasAutoFocus,
     ...props,
     ...parsedDates,
     locale,
     createCalendar,
-  });
+  } as CalendarStateOptions);
 
   const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(
-    { ...props, ...parsedDates },
+    { ...props, ...parsedDates } as AriaCalendarProps<DateValue>,
     state,
-    calenderRef,
-  );
+  ) as CalendarAria;
 
   const [yearChangeDirection, setYearChangeDirection] = useState(null);
-  const previousYearRef = useRef(null);
-  const nextYearRef = useRef(null);
+  const previousYearRef = useRef<HTMLButtonElement>(null);
+  const nextYearRef = useRef<HTMLButtonElement>(null);
 
   const nav = {
     NEXT: 'next',
@@ -63,11 +62,11 @@ const Calendar = forwardRef((props, ref) => {
   // after updating visible year, reapplies focus to corresponding year buttons
   useEffect(() => {
     if (yearChangeDirection === nav.NEXT) {
-      nextYearRef.current.focus();
+      nextYearRef.current?.focus();
     }
 
     if (yearChangeDirection === nav.PREVIOUS) {
-      previousYearRef.current.focus();
+      previousYearRef.current?.focus();
     }
 
     setYearChangeDirection(null);
@@ -93,14 +92,14 @@ const Calendar = forwardRef((props, ref) => {
     <Text
       variant="itemTitle"
       role="heading"
-      aria-level="3"
+      aria-level={3}
       fontWeight={3}
     >
       {title}
     </Text>
   );
   return (
-    <Box {...calendarProps} ref={calenderRef} variant="calendar.calendarContainer">
+    <Box {...calendarProps} ref={calenderRef} variant="calendar.calendarContainer" role="group">
       <VisuallyHidden aria-live="assertive">
         <Text>{title}</Text>
       </VisuallyHidden>
@@ -149,49 +148,5 @@ const Calendar = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-Calendar.propTypes = {
-  /** Prop to provide a custom default date (uncontrolled) */
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Prop to provide a custom default focused date (uncontrolled) */
-  defaultFocusedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Prop to provide a default date (controlled) */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** custom week days for other calendars */
-  customWeekDays: PropTypes.arrayOf(PropTypes.string),
-  /** Whether the element should receive focus on render. */
-  hasAutoFocus: PropTypes.bool,
-  /** The element's unique identifier. */
-  id: PropTypes.string,
-  /**
-   * Callback that is called for each date of the calendar.
-   * If it returns true, then the date is unavailable.
-   *
-   * (date: DateValue) => boolean
-   */
-  isDateUnavailable: PropTypes.func,
-  /** Whether the calendar is disabled. */
-  isDisabled: PropTypes.bool,
-  /** Whether the calendar dates are only focusable. */
-  isReadOnly: PropTypes.bool,
-  /** Whether user input is required on the input before form submission. */
-  isRequired: PropTypes.bool,
-  /** The maximum allowed date that a user may select. */
-  maxValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The minimum allowed date that a user may select. */
-  minValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Handler that is called when the element loses focus. */
-  onBlur: PropTypes.func,
-  /** Handler that is called when the element's selection state changes. */
-  onChange: PropTypes.func,
-  /** Handler that is called when the element receives focus. */
-  onFocus: PropTypes.func,
-  /** Handler that is called when the element's focus status changes. */
-  onFocusChange: PropTypes.func,
-  /** Handler that is called when a key is pressed. */
-  onKeyDown: PropTypes.func,
-  /** Handler that is called when a key is released. */
-  onKeyUp: PropTypes.func,
-};
 
 export default Calendar;

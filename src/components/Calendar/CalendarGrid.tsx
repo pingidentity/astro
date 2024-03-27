@@ -1,10 +1,11 @@
 import React from 'react';
 import { getWeeksInMonth } from '@internationalized/date';
-import { useCalendarGrid } from '@react-aria/calendar';
+import { AriaCalendarGridProps, CalendarGridAria, useCalendarGrid } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
-import PropTypes from 'prop-types';
+import { CalendarState, RangeCalendarState } from '@react-stately/calendar';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '../../index';
+import { CalendarGridProps, DateValue } from '../../types/calendar';
 
 import CalendarCell from './CalendarCell';
 
@@ -14,38 +15,43 @@ import CalendarCell from './CalendarCell';
  * along with formatted weekday names based on the current locale.
  */
 
-const CalendarGrid = props => {
+const CalendarGrid = (props: CalendarGridProps) => {
   const { state, customWeekDays } = props;
 
   const { locale } = useLocale();
   const { visibleRange, getDatesInWeek } = state;
 
-  const { gridProps, headerProps, weekDays } = useCalendarGrid(props, state);
-  const weeksInMonth = getWeeksInMonth(visibleRange.start, locale);
+  const { gridProps, headerProps, weekDays }: CalendarGridAria = useCalendarGrid(
+    props as AriaCalendarGridProps, state as CalendarState | RangeCalendarState);
+  const weeksInMonth = getWeeksInMonth(visibleRange.start as DateValue, locale);
 
   const getKey = (day, index) => {
     return `${day}-${index}`;
   };
 
   return (
-    <Table {...gridProps}>
+    <Table {...gridProps} role="grid">
       <TableHead {...headerProps}>
         <TableRow>
-          {(customWeekDays || weekDays).map((day, index) => <TableCell variant="calendar.columnHeader" key={getKey(day, index)} role="columnheader">{day}</TableCell>)}
+          {(customWeekDays || weekDays).map((day, index) => (
+            <TableCell variant="calendar.columnHeader" key={getKey(day, index)} role="columnheader">
+              {day}
+            </TableCell>
+          ))}
         </TableRow>
       </TableHead>
       <TableBody variant="calendar.calendarBody">
         {Array.from(Array(weeksInMonth).keys()).map(weekIndex => (
           <TableRow key={weekIndex}>
             {getDatesInWeek(weekIndex).map(date => (
-              date.day
-               && (
-               <CalendarCell
-                 key={date}
-                 state={state}
-                 date={date}
-               />
-               )
+              date?.day
+              && (
+                <CalendarCell
+                  key={date.toString()}
+                  state={state}
+                  date={date}
+                />
+              )
             ))}
           </TableRow>
         ))}
@@ -54,16 +60,5 @@ const CalendarGrid = props => {
   );
 };
 
-CalendarGrid.propTypes = {
-  /** State object that is passed in from the  useCalendar hook */
-  state: PropTypes.shape({
-    visibleRange: PropTypes.shape({
-      start: PropTypes.shape({}),
-    }),
-    getDatesInWeek: PropTypes.func,
-  }),
-  /** Custom week days for other international calendars */
-  customWeekDays: PropTypes.arrayOf(PropTypes.string),
-};
 
 export default CalendarGrid;
