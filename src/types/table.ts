@@ -2,9 +2,10 @@ import { ReactNode } from 'react';
 
 import { TestingAttributes } from './shared/test';
 import { BoxProps } from './box';
+import { CalendarGridProps } from './calendar';
 import { DOMAttributes, StyleProps } from './shared';
 
-export interface TableProps extends BoxProps, TestingAttributes { }
+export interface TableProps extends BoxProps, TestingAttributes, DOMAttributes { }
 
 export interface TableChildrenProp extends StyleProps, TestingAttributes {
     children: ReactNode;

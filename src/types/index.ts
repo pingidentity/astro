@@ -4,6 +4,7 @@ export * from './bracket';
 export * from './breadCrumbs';
 export * from './button';
 export * from './buttonBar';
+export * from './calendar';
 export * from './card';
 export * from './copyText';
 export * from './fieldHelperText';
