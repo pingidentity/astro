@@ -6,11 +6,14 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, Button, Icon, Loader, Text } from '../..';
 import { usePropWarning, useSelectField } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import SelectFieldBase from '../SelectFieldBase';
+
+const displayName = 'LinkSelectField';
 
 const LinkSelectField = forwardRef((props, ref) => {
   const { placeholder, isDisabled, status, helperText } = props;
@@ -41,6 +44,7 @@ const LinkSelectField = forwardRef((props, ref) => {
       ref={triggerRef}
       variant="link"
       tabIndex={isDisabled ? -1 : 0}
+      {...getPendoID(displayName)}
       {...triggerProps}
       {...ariaProps}
       aria-describedby={helperText && helperTextId}
@@ -147,5 +151,5 @@ LinkSelectField.defaultProps = {
   ...statusDefaultProp,
 };
 
-LinkSelectField.displayName = 'LinkSelectField';
+LinkSelectField.displayName = displayName;
 export default LinkSelectField;

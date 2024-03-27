@@ -13,10 +13,13 @@ import PropTypes from 'prop-types';
 
 import { Box, Button, FieldHelperText, Input, Label } from '../..';
 import useField from '../../hooks/useField';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import PopoverContainer from '../PopoverContainer';
+
+const displayName = 'ColorField';
 
 const ColorField = forwardRef((props, ref) => {
   const {
@@ -99,7 +102,7 @@ const ColorField = forwardRef((props, ref) => {
   }, []);
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
       <Button
         aria-label="Select color"
@@ -165,6 +168,6 @@ ColorField.defaultProps = {
   direction: 'bottom',
 };
 
-ColorField.displayName = 'ColorField';
+ColorField.displayName = displayName;
 
 export default ColorField;

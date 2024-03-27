@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 
 import { usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
@@ -21,6 +22,8 @@ import ComboBoxInput from '../ComboBox';
 import ListBox from '../ListBox';
 import PopoverContainer from '../PopoverContainer';
 import ScrollBox from '../ScrollBox';
+
+const displayName = 'ComboBoxField';
 
 const ComboBoxField = forwardRef((props, ref) => {
   const {
@@ -208,6 +211,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   return (
     <>
       <ComboBoxInput
+        {...getPendoID(displayName)}
         {...props}
         isOpen={state.isOpen}
         inputProps={inputProps}
@@ -353,5 +357,5 @@ ComboBoxField.defaultProps = {
   defaultItems: [],
 };
 
-ComboBoxField.displayName = 'ComboBoxField';
+ComboBoxField.displayName = displayName;
 export default ComboBoxField;

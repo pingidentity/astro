@@ -7,9 +7,12 @@ import omit from 'lodash/omit';
 
 import { Box, FieldHelperText, Label, Switch } from '../..';
 import { useField, usePropWarning } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { statusDefaultProp } from '../../utils/docUtils/statusProp';
 
 import { switchFieldPropTypes } from './switchFieldAttributes';
+
+const displayName = 'SwitchField';
 
 const SwitchField = forwardRef((props, ref) => {
   const {
@@ -71,14 +74,14 @@ const SwitchField = forwardRef((props, ref) => {
   };
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
       <Label variant="forms.switch.label" {...fieldLabelProps}>
         <Box {...fieldControlWrapperProps}>
           <Switch
             ref={switchRef}
             inputProps={fieldControlInputProps}
             {...unhandledAriaProps}
-            {...others}
+            {...omit(others, 'data-pendo-id')}
           />
         </Box>
         {label}
@@ -101,6 +104,6 @@ SwitchField.defaultProps = {
   ...statusDefaultProp,
 };
 
-SwitchField.displayName = 'SwitchField';
+SwitchField.displayName = displayName;
 
 export default SwitchField;

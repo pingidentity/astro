@@ -7,7 +7,10 @@ import { BadgeContext, BadgeContextProps } from '../../context/BadgeContext';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
 import { IconButtonProps } from '../../types';
 import { FocusEventHandler } from '../../types/shared';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
+
+const displayName = 'IconButton';
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   const {
@@ -71,6 +74,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
   const button = (
     <Pressable
       ref={buttonRef}
+      {...getPendoID(displayName)}
       {...mergeProps(buttonProps, others, hoverProps, focusProps)}
     >
       <ThemeUIIconButton
@@ -103,5 +107,5 @@ IconButton.defaultProps = {
   isDisabled: false,
 };
 
-IconButton.displayName = 'IconButton';
+IconButton.displayName = displayName;
 export default IconButton;

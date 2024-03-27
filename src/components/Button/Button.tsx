@@ -11,7 +11,10 @@ import {
 } from '../../hooks';
 import { ButtonProps } from '../../types';
 import { FocusEventHandler } from '../../types/shared';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import Loader from '../Loader';
+
+const displayName = 'Button';
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
@@ -80,6 +83,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         role="button"
         sx={isLoading ? { display: 'flex', justifyContent: 'center', alignItems: 'center' } : {}}
         variant={variant}
+        {...getPendoID(displayName)}
         {...others}
         {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
       >
@@ -95,5 +99,5 @@ Button.defaultProps = {
   variant: 'default',
 };
 
-Button.displayName = 'Button';
+Button.displayName = displayName;
 export default Button;
