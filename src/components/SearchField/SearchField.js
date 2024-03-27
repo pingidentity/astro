@@ -7,8 +7,11 @@ import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Input, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
+
+const displayName = 'SearchField';
 
 const SearchField = forwardRef((props, ref) => {
   const {
@@ -62,7 +65,7 @@ const SearchField = forwardRef((props, ref) => {
   };
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
       {label && <Label {...fieldLabelProps} />}
       <Box variant="forms.search.wrapper" {...fieldControlWrapperProps}>
         <Input variant="forms.input.search" ref={searchRef} pl="xl" pr="xl" {...fieldControlInputProps} />
@@ -275,6 +278,6 @@ SearchField.defaultProps = {
   icon: SearchIcon,
 };
 
-SearchField.displayName = 'SearchField';
+SearchField.displayName = displayName;
 
 export default SearchField;

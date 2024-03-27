@@ -5,9 +5,12 @@ import { v4 as uuid } from 'uuid';
 import { Box, FieldHelperText, Input, Label } from '../..';
 import { useField, useLabelHeight, usePropWarning } from '../../hooks';
 import useColumnStyles from '../../hooks/useColumnStyles';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+
+const displayName = 'TextField';
 
 const TextField = forwardRef((props, ref) => {
   const { helperText, helpHintProps, slots, status } = props;
@@ -30,7 +33,12 @@ const TextField = forwardRef((props, ref) => {
   const helperTextId = uuid();
 
   return (
-    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
+    <Box
+      variant="forms.input.fieldContainer"
+      {...getPendoID(displayName)}
+      {...fieldContainerProps}
+      sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}
+    >
       <Label
         {...fieldLabelProps}
         ref={labelRef}
@@ -138,6 +146,6 @@ TextField.defaultProps = {
   ...statusDefaultProp,
 };
 
-TextField.displayName = 'TextField';
+TextField.displayName = displayName;
 
 export default TextField;

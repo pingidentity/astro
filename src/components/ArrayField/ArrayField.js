@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import { Box, Button, FieldHelperText, Label, Text } from '../..';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -126,7 +127,11 @@ const ArrayField = forwardRef((props, ref) => {
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
 
   return (
-    <Box {...nonAriaProps} ref={ref}>
+    <Box
+      {...getPendoID('ArrayField')}
+      {...nonAriaProps}
+      ref={ref}
+    >
       <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
       <Box as="ul" pl="0" {...ariaProps}>
         {(value || fieldValues).map(

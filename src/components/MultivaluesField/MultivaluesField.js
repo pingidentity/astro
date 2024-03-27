@@ -10,8 +10,9 @@ import PropTypes from 'prop-types';
 import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { usePropWarning } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
 import ListBox from '../ListBox';
@@ -47,8 +48,6 @@ const MultivaluesField = forwardRef((props, ref) => {
     status,
     ...others
   } = props;
-  const { ariaProps } = getAriaAttributeProps(others);
-
   const hasCustomValue = mode === 'non-restrictive';
 
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -468,7 +467,8 @@ const MultivaluesField = forwardRef((props, ref) => {
           value={filterString}
           helperText={helperText}
           aria-invalid={status === 'error' && true}
-          {...ariaProps}
+          {...getPendoID('MultivaluesField')}
+          {...others}
           {...inputProps}
         />
         <PopoverContainer

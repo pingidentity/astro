@@ -17,10 +17,13 @@ import {
   RequirementsList,
 } from '../..';
 import { useDebounce, useField, useProgressiveState, usePropWarning, useStatusClasses } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+
+const displayName = 'PasswordField';
 
 const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   HIDE: 'hide password',
@@ -150,7 +153,11 @@ const PasswordField = forwardRef((props, ref) => {
 
   return (
     <>
-      <Box variant="forms.input.fieldContainer" {...fieldContainerProps}>
+      <Box
+        variant="forms.input.fieldContainer"
+        {...getPendoID(displayName)}
+        {...fieldContainerProps}
+      >
         <Label {...fieldLabelProps} />
         <Box variant="forms.input.fieldControlWrapper" isRow {...fieldControlWrapperProps} className={classNames}>
           <Input ref={inputRef} {...fieldControlInputProps} onChange={handleInputChange} type={isVisible ? 'text' : 'password'} sx={{ pr: '43px' }} role="textbox" />
@@ -291,6 +298,6 @@ PasswordField.defaultProps = {
   ...statusDefaultProp,
 };
 
-PasswordField.displayName = 'PasswordField';
+PasswordField.displayName = displayName;
 
 export default PasswordField;

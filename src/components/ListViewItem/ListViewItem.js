@@ -3,10 +3,12 @@ import { useHover } from '@react-aria/interactions';
 
 import { Box, Icon, Image, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
 import { listViewItemPropTypes } from './listViewItemAttributes';
 
 export const LIST_ITEM_ICON = '-list-item-icon';
+const displayName = 'ListViewItem';
 
 const ListViewItem = forwardRef(({
   children,
@@ -84,6 +86,7 @@ const ListViewItem = forwardRef(({
       ref={ref}
       variant="listViewItem.styledContainer"
       {...hoverProps}
+      {...getPendoID(displayName)}
       {...others}
     >
       <Box isRow variant={getWrapperVariant()}>
@@ -103,6 +106,6 @@ const ListViewItem = forwardRef(({
 
 ListViewItem.propTypes = listViewItemPropTypes;
 
-ListViewItem.displayName = 'ListViewItem';
+ListViewItem.displayName = displayName;
 
 export default ListViewItem;

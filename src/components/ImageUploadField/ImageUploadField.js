@@ -10,12 +10,15 @@ import { v4 as uuid } from 'uuid';
 
 import { Item, Menu } from '../..';
 import { useImageUploadState } from '../../hooks/useImageUploadState';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 import ImagePreviewButton from './ImagePreviewButton';
 import ImageUploadFieldBase from './ImageUploadFieldBase';
+
+const displayName = 'ImageUploadField';
 
 const ImageUploadField = forwardRef((props, ref) => {
   const { isLoading, loaderSize, onRemove, removeItemText, uploadItemText } = props;
@@ -57,6 +60,7 @@ const ImageUploadField = forwardRef((props, ref) => {
         isMenuOpen={state.isMenuOpen}
         ref={inputRef}
         widthHeightSx={state.widthHeightSx}
+        {...getPendoID(displayName)}
         {...props}
       >
         <ImagePreviewButton
@@ -143,5 +147,5 @@ ImageUploadField.defaultProps = {
   removeItemText: 'Remove Image',
 };
 
-ImageUploadField.displayName = 'ImageUploadField';
+ImageUploadField.displayName = displayName;
 export default ImageUploadField;

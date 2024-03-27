@@ -17,6 +17,7 @@ import {
   Label,
 } from '../..';
 import { useField, usePropWarning } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
@@ -91,7 +92,7 @@ const NumberField = forwardRef((props, ref) => {
     ? inputPropsValue.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0] : inputPropsValue;
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...getPendoID('NumberField')} {...fieldContainerProps}>
       <Label {...updatedLabelProps} />
       <Box
         variant="forms.numberField.noDefaultArrows"

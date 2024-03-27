@@ -12,6 +12,7 @@ import {
 } from '../..';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import TabPicker from '../TabPicker';
 import { TabsContext } from '../Tabs';
 
@@ -70,6 +71,7 @@ export const CollectionTab = forwardRef((props, ref) => {
         className={classNames}
         variant="tab"
         {...mergeProps(focusProps, hoverProps, tabProps)}
+        {...getPendoID('Tab')}
         {...otherItemProps}
         ref={tabRef}
         title={titleAttr || undefined}
