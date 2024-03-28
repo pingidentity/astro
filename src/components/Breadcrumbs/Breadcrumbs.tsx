@@ -25,9 +25,8 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
 
   const createBreadcrumb = useCallback((child, idx?: number) => {
-    const isCurrentItem = idx && Array.isArray(children) && Array.isArray(filteredChildren)
-      && filteredChildren.length > 1
-      ? idx === children.length - 1
+    const isCurrentItem = Array.isArray(filteredChildren) && filteredChildren.length > 1
+      ? idx === (React.Children.toArray(children).length - 1)
       : true;
 
     return (
