@@ -7,9 +7,12 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../..';
 import { useField, usePropWarning } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
+
+const displayName = 'CheckboxField';
 
 const CheckboxField = forwardRef((props, ref) => {
   const {
@@ -60,7 +63,7 @@ const CheckboxField = forwardRef((props, ref) => {
   const helperTextId = useMemo(() => uuid(), []);
 
   return (
-    <Box {...fieldContainerProps}>
+    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
       <Label variant="forms.label.checkbox" {...fieldLabelProps}>
         <Checkbox
           ref={checkboxRef}
@@ -127,6 +130,6 @@ CheckboxField.propTypes = {
   ...inputFieldAttributesBasePropTypes,
 };
 
-CheckboxField.displayName = 'CheckboxField';
+CheckboxField.displayName = displayName;
 
 export default CheckboxField;

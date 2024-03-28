@@ -5,9 +5,11 @@ import { FocusScope } from '@react-aria/focus';
 import { useOverlayPosition } from '@react-aria/overlays';
 import { mergeProps } from '@react-aria/utils';
 import { useDatePickerState } from '@react-stately/datepicker';
+import { omit } from 'lodash/object';
 import PropTypes from 'prop-types';
 
 import { Calendar, FieldHelperText, PopoverContainer } from '../../index';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
 
@@ -107,11 +109,12 @@ const DatePicker = forwardRef((props, ref) => {
   return (
     <>
       <DateField
+        {...getPendoID('DatePicker')}
         {...props}
         ref={ref}
         buttonProps={buttonProps}
         fieldProps={fieldProps}
-        groupProps={groupProps}
+        groupProps={omit(groupProps, 'data-pendo-id')}
         groupRef={groupRef}
         helperText={helperText}
         labelProps={labelProps}

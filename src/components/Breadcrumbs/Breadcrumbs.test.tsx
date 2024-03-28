@@ -59,9 +59,9 @@ test('should render nodes from the children', () => {
 });
 
 test('should render correct amount of icons', () => {
-  getComponent({ iconProps: { 'data-testid': testIconId, icon: ChevronRightIcon } });
+  getComponent({ iconProps: { 'data-testid': testIconId } });
   expect(screen.getAllByTestId(testIconId).length).toBe(
-    testItemsArr.length - 2,
+    testItemsArr.length - 1,
   );
 });
 

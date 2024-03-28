@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
+import { StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { CalendarProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
-import Calendar from './Calendar';
 import CalendarReadme from './Calendar.mdx';
+import Calendar from '.';
 
 export default {
   title: 'Components/Calendar',
@@ -105,7 +107,7 @@ export default {
   },
 };
 
-export const Default = args => (
+export const Default: StoryFn<CalendarProps> = (args: CalendarProps) => (
   <Calendar {...args} aria-label="calendar-default" />
 );
 

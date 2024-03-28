@@ -2,6 +2,7 @@ import React from 'react';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 
+import { CalendarProps } from '../../types';
 import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
 import { act, fireEvent, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -15,7 +16,7 @@ const unavailableRanges = [
 // This function is run against each date in the calendar
 const isDateUnavailable = date => isDateWithinRanges(date, unavailableRanges);
 
-const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+const getComponent = (props: CalendarProps = {}, { renderFn = render } = {}) => renderFn((
   <Calendar {...props} />
 ));
 
@@ -249,7 +250,7 @@ test('unavailable dates cannot be picked', () => {
   const cells = screen.getAllByRole('button').filter(cell => cell.getAttribute('aria-disabled') === 'true');
   expect(cells.length).toBe(9);
 
-  const disabledDate = screen.queryByText(16);
+  const disabledDate = screen.getByText(16);
   userEvent.click(disabledDate);
   expect(disabledDate).toHaveAttribute('aria-disabled', 'true');
   expect(disabledDate).not.toHaveClass('is-selected');
@@ -262,6 +263,6 @@ test('should autofocus on current day with hasAutoFocus', () => {
   const dateToday = today(getLocalTimeZone());
   const day = dateToday.day;
   const focusedDay = screen.queryAllByText(day).filter(cell => cell.getAttribute('aria-disabled') !== 'true');
-  expect(focusedDay[0]).toHaveTextContent(day);
+  expect(focusedDay[0]).toHaveTextContent(day.toString());
   expect(focusedDay[0]).toHaveFocus();
 });

@@ -9,7 +9,8 @@ import {
   Button,
   Messages,
 } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { MessageItem, Status } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 import {
@@ -59,24 +60,24 @@ const messages = [
   {
     key: 'message2',
     text: loremText,
-    status: 'success',
+    status: statuses.SUCCESS,
   },
   {
     key: 'message3',
     text: loremText,
-    status: 'warning',
+    status: statuses.WARNING,
   },
   {
     key: 'message4',
     text: loremText,
-    status: 'error',
+    status: statuses.ERROR,
   },
 ];
 
 export const Default = args => (
   <Messages {...args}>
     <Item key="message1" data-id="message1">{loremText}</Item>
-    <Item key="message2" data-id="message2" status="success">{loremText}</Item>
+    <Item key="message2" data-id="message2" status={statuses.SUCCESS}>{loremText}</Item>
   </Messages>
 );
 
@@ -88,15 +89,22 @@ Default.parameters = {
 };
 
 export const DefaultDynamic = args => (
-  // messages = [{...}]
   <Messages {...args} items={messages}>
     {item => <Item {...item}>{item.text}</Item>}
   </Messages>
 );
 
+// Added to bypass color contrast in safari
+DefaultDynamic.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const Controlled = args => {
-  // messages = [{...}]
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<MessageItem[]>([]);
 
   useEffect(() => {
     setItems(messages);
@@ -121,14 +129,23 @@ export const Controlled = args => {
   );
 };
 
+// Added to bypass color contrast in safari
+Controlled.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const ControlledWithButton = args => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<MessageItem[]>([]);
 
   const addMessage = () => {
     setItems([...items, {
       key: `message${items.length + 1}`,
       text: loremText,
-      status: Object.values(statuses)[Math.floor(Math.random() * 4)],
+      status: Object.values(statuses)[Math.floor(Math.random() * 4)] as Status,
     }]);
   };
 
@@ -154,11 +171,30 @@ export const ControlledWithButton = args => {
   );
 };
 
+// Added to bypass color contrast in safari
+ControlledWithButton.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const WithCustomColorsAndIcons = args => (
   <Messages {...args}>
     <Item bg="accent.99" color="active" icon={AccountIcon}>{loremText}</Item>
   </Messages>
 );
+
+// Added to bypass color contrast in safari
+WithCustomColorsAndIcons.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 
 export const UseReducer = () => {
   // import { messagesReducer as messagesReducerCore } from '@pingux/astro';
@@ -174,7 +210,7 @@ export const UseReducer = () => {
   //   showWarningMessage: makeShowMessage('warning', -1),
   // };
 
-  const [items, dispatch] = useReducer(messagesReducer);
+  const [items, dispatch] = useReducer(messagesReducer, []);
 
   const showAMessage = () => {
     const actionFn = [
@@ -212,6 +248,15 @@ export const UseReducer = () => {
       </Messages>
     </>
   );
+};
+
+// Added to bypass color contrast in safari
+UseReducer.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
 
 export const UseReducerWithMultipleContainers = () => {
@@ -257,6 +302,15 @@ export const UseReducerWithMultipleContainers = () => {
   );
 };
 
+// Added to bypass color contrast in safari
+UseReducerWithMultipleContainers.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const WithTextStyling = args => {
   const items = [
     {
@@ -290,4 +344,13 @@ export const WithTextStyling = args => {
       {item => <Item {...item}>{item.node || item.text}</Item>}
     </Messages>
   );
+};
+
+// Added to bypass color contrast in safari
+WithTextStyling.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };

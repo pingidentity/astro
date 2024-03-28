@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import { modes } from '../../utils/devUtils/constants/labelModes';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import Box from '../Box';
@@ -87,7 +88,13 @@ const SelectFieldBase = forwardRef(({
   );
 
   return (
-    <Box ref={ref} variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}>
+    <Box
+      ref={ref}
+      variant="forms.input.fieldContainer"
+      {...getPendoID('SelectField')}
+      {...fieldContainerProps}
+      sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}
+    >
       {/* Actual label is applied to the hidden select */}
       <Label {...fieldLabelProps}>{label}</Label>
       <HiddenSelect

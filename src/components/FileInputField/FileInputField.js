@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Box, FieldHelperText, Input, Label, Loader } from '../..';
 import useField from '../../hooks/useField';
 import useStatusClasses from '../../hooks/useStatusClasses';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
@@ -23,6 +24,8 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
 
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
+
+const displayName = 'FileInputField';
 
 const FILE_CHANGE_STATUS = {
   ADDED: 'added',
@@ -197,6 +200,7 @@ const FileInputField = forwardRef(({
       <Label {...fieldLabelProps} />
       <Box
         variant="forms.fileInputField.wrapper"
+        {...getPendoID(displayName)}
         {...mergeProps(fieldControlWrapperProps, nonAriaProps)}
         className={classNames}
         {...getRootProps()}
@@ -253,7 +257,7 @@ const FileInputField = forwardRef(({
 },
 );
 
-FileInputField.displayName = 'FileInputField';
+FileInputField.displayName = displayName;
 
 FileInputField.propTypes = {
   /** The rendered label for the field. */

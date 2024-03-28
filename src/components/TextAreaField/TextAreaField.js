@@ -5,9 +5,12 @@ import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label, TextArea } from '../..';
 import { useColumnStyles, useField, useLabelHeight, usePropWarning } from '../../hooks';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+
+const displayName = 'TextAreaField';
 
 const TextAreaField = forwardRef((props, ref) => {
   const { helperText, isUnresizable, rows, status, slots } = props;
@@ -86,7 +89,14 @@ const TextAreaField = forwardRef((props, ref) => {
   );
 
   return (
-    <Box variant="forms.input.fieldContainer" {...fieldContainerProps} sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }} ref={containerRef} maxWidth="100%">
+    <Box
+      variant="forms.input.fieldContainer"
+      {...getPendoID(displayName)}
+      {...fieldContainerProps}
+      sx={{ ...columnStyleProps?.sx, ...fieldContainerProps?.sx }}
+      ref={containerRef}
+      maxWidth="100%"
+    >
       {props.labelMode === 'float' ? wrappedLabel : labelNode}
       <Box isRow variant="forms.input.fieldControlWrapper" minWidth="40px" maxWidth="100%" ref={fieldControlWrapperRef} {...fieldControlWrapperProps}>
         <TextArea
@@ -199,6 +209,6 @@ TextAreaField.defaultProps = {
   ...statusDefaultProp,
 };
 
-TextAreaField.displayName = 'TextAreaField';
+TextAreaField.displayName = displayName;
 
 export default TextAreaField;

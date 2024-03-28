@@ -7,10 +7,13 @@ import { v4 as uuid } from 'uuid';
 import { Box, FieldHelperText, Label } from '../..';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import { RadioContext } from '../RadioField';
+
+const displayName = 'RadioGroupField';
 
 const RadioGroupField = forwardRef((props, ref) => {
   const {
@@ -42,6 +45,7 @@ const RadioGroupField = forwardRef((props, ref) => {
     <Box
       ref={ref}
       className={classNames}
+      {...getPendoID(displayName)}
       {...unhandledAriaProps}
       {...radioGroupProps}
     >
@@ -104,6 +108,6 @@ RadioGroupField.propTypes = {
   ...inputFieldAttributesBasePropTypes,
 };
 
-RadioGroupField.displayName = 'RadioGroupField';
+RadioGroupField.displayName = displayName;
 
 export default RadioGroupField;

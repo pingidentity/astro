@@ -4,6 +4,7 @@ import { flexbox, layout, typography } from 'styled-system';
 import { Input as ThemeUIInput } from 'theme-ui';
 
 import { InputProps } from '../../types';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 /**
  * Base input component.
  *
@@ -14,6 +15,8 @@ import { InputProps } from '../../types';
  * We instead encourage developers to utilize our Field components wherever possible.
  * If this component is used, accessibility is left to the developer.
  */
+
+const displayName = 'Input';
 
 const ExtendedInput = styled(ThemeUIInput)(
   layout,
@@ -30,11 +33,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       name={name}
       placeholder={placeholder}
       maxLength={maxLength && maxLength}
+      {...getPendoID(displayName)}
       {...others}
     />
   );
 });
 
-Input.displayName = 'Input';
+Input.displayName = displayName;
 
 export default Input;

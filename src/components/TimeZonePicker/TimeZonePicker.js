@@ -10,6 +10,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import { Box, ComboBoxField, Item, Text } from '../../index';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
 import defaultTimezones, { usCities } from './timezones.js';
 
@@ -150,7 +151,12 @@ const TimeZonePicker = forwardRef((props, ref) => {
   );
 
   return (
-    <ComboBoxField {...comboBoxFieldProps} disabledKeys={[emptySearchText]} menuTrigger="input">
+    <ComboBoxField
+      {...getPendoID('TimeZonePicker')}
+      {...comboBoxFieldProps}
+      disabledKeys={[emptySearchText]}
+      menuTrigger="input"
+    >
       {items}
     </ComboBoxField>
   );
