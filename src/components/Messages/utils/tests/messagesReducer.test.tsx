@@ -37,7 +37,7 @@ const getComponent = (props = {}, renderFn = render) => renderFn(
 );
 
 test('should create an empty state', () => {
-  const state = messagesReducer();
+  const state = messagesReducer([], {});
   expect(state.length).toBe(0);
 });
 
@@ -64,12 +64,8 @@ test('should clear all messages', () => {
 
 test('should show and hide a message', () => {
   jest.useFakeTimers();
-
   getComponent();
-
-  expect(screen.queryByTestId(testId).children.length).toBe(1);
-
+  expect(screen.queryByTestId(testId)?.children.length).toBe(1);
   act(() => { jest.runAllTimers(); });
-
-  expect(screen.queryByTestId(testId).children.length).toBe(0);
+  expect(screen.queryByTestId(testId)?.children.length).toBe(0);
 });
