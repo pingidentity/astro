@@ -32,12 +32,12 @@ export default {
     },
   },
   args: {
-    children: 'Text of the popover right here...',
+    children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
   },
 } as Meta;
 
 export const Default: StoryFn<HelpHintProps> = (args: HelpHintProps) => (
-  <Box p={50}>
+  <Box p={100}>
     <HelpHint {...args} />
   </Box>
 );
@@ -50,17 +50,22 @@ Default.parameters = {
 };
 
 export const WithPopoverAndIconButtonProps: StoryFn = () => (
-  <Box p={50}>
-    <HelpHint popoverProps={{ 'data-testid': 'popover-container' }} iconButtonProps={{ 'aria-label': 'Help hint' }} direction="bottom">
-      Text of the popover right here...
+  <Box p={100}>
+    <HelpHint
+      popoverProps={{ 'data-testid': 'popover-container' }}
+      iconButtonProps={{ 'aria-label': 'Help hint' }}
+      direction="bottom"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
     </HelpHint>
   </Box>
 );
 
 export const ContentWithLink: StoryFn = () => (
-  <Box p={70}>
+  <Box p={100}>
     <HelpHint>
-      <Text variant="popover">Text of the popover right here... </Text>
+      <Text variant="popover">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
       <Link variant="popover" href="https://uilibrary.ping-eng.com/" target="_blank">Learn More</Link>
     </HelpHint>
   </Box>
@@ -74,7 +79,7 @@ ContentWithLink.parameters = {
 };
 
 export const WithDelay: StoryFn = (args: HelpHintProps) => (
-  <Box p={50}>
+  <Box p={100}>
     <HelpHint {...args} closeDelay={5000} />
   </Box>
 );
