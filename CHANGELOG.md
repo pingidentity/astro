@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.54.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.53.1...@pingux/astro@2.54.0) (2024-03-28)
+
+
+### Features
+
+* [UIP-6769] Calendar convert to TypeScript ([f66d455](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f66d4552044a19798ac8e75f38b11454a630f08c))
+* [UIP-6778] Messages convert to TS New ([ee2849e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ee2849eb80b16e90ddda2a72e77da92fd031e804))
+* [UIP-6838] HelpHint update stories text to Lorem Ipsum ([fed9146](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fed9146c61b08c6cfa8ba4a8160f5d6e621210a7))
+* [UIP-6850] Breadcrumbs not matching  design ([ddfcd56](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ddfcd5618d5bf5ed05d1ee81195ca583b93e9579))
+* [UIP-6858] Add initial pendo data id attribute to interactive components ([2807750](https://gitlab.corp.pingidentity.com/ux/pingux/commit/28077509cf5ead981405e66f4259c5b51ca857d9))
+
+
+
+
+
 ## [2.53.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.53.0...@pingux/astro@2.53.1) (2024-03-26)
 
 
