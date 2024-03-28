@@ -4,6 +4,7 @@ import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import userEvent from '@testing-library/user-event';
 
+import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -16,6 +17,7 @@ const testId = 'test-messages';
 const defaultProps = {
   'data-testid': testId,
 };
+
 const items = [
   {
     key: 'message1',
@@ -25,14 +27,14 @@ const items = [
   {
     key: 'message2',
     text: 'Form saved successfully',
-    status: 'success',
+    status: statuses.SUCCESS,
   },
 ];
 
 const getComponent = (props = {}, renderFn = render) => renderFn(
   <Messages {...defaultProps} {...props}>
     <Item key="message1" data-id="message1">Here is a very neutral thing</Item>
-    <Item key="message2" data-id="message2" status="success">Form saved successfully</Item>
+    <Item key="message2" data-id="message2" status={statuses.SUCCESS}>Form saved successfully</Item>
   </Messages>,
 );
 
@@ -88,15 +90,15 @@ test('`onClose` get as first arg key of message', () => {
 });
 
 test('click on close button removes message after delay', () => {
-  act(() => {
-    global.setTimeout = jest.fn(cb => cb());
-  });
+  jest.useFakeTimers();
+
   getComponent();
   const messages = screen.getByTestId(testId);
   expect(messages.childElementCount).toBe(2);
 
   const buttons = screen.getAllByRole('button');
   userEvent.click(buttons[0]);
+  act(() => { jest.runAllTimers(); });
   expect(messages.childElementCount).toBe(1);
 });
 
@@ -128,13 +130,13 @@ test('messages without a status do not have an aria-label announcing the status'
 
 test('should render messages with messagesReducerStory', () => {
   getComponent();
-  messagesReducerStory.actions.showSuccessMessage();
+  messagesReducerStory.actions.showSuccessMessage('Some');
   expect(screen.getByTestId(testId)).toBeInTheDocument();
 });
 
 test('should render messages with multiMessagesReducerStory', () => {
   getComponent();
-  multiMessagesReducerStory.actions.showSuccessMessage();
+  multiMessagesReducerStory.actions.showSuccessMessage('some', 'container-one');
   expect(screen.getByTestId(testId)).toBeInTheDocument();
 });
 

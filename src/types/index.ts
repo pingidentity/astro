@@ -22,6 +22,7 @@ export * from './listItem';
 export * from './loader';
 export * from './menu';
 export * from './menuItem';
+export * from './messages';
 export * from './Modal';
 export * from './navBar';
 export * from './overlayPanel';

@@ -1,6 +1,7 @@
 import { ElementType, Key } from 'react';
 import type { ItemProps } from '@react-types/shared';
 
+import { IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
 
 export interface Status {
@@ -34,7 +35,8 @@ declare module '@react-types/shared' {
     key?: Key,
     slots?: {
       postHeading: React.ReactNode
-    }
+    },
+    icon?: IconTypeExtended
     /** isCurrent for the Breadcrumbs item. */
     isCurrent?: boolean;
   }

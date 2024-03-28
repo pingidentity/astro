@@ -1,10 +1,10 @@
 import React, { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
-import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Text } from '../..';
 import useStatusClasses from '../../hooks/useStatusClasses';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
+import { CloseButtonProps, MessageItemProps, MessageProps } from '../../types';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { NoticeIcon } from '../Icon/NoticeIcon';
 
 export const ARIA_STATUSES = {
@@ -13,7 +13,7 @@ export const ARIA_STATUSES = {
   WARNING: 'Warning Message',
 };
 
-const CloseButton = ({ color, ...others }) => {
+const CloseButton = ({ color, ...others }: CloseButtonProps) => {
   return (
     <IconButton aria-label="Close" {...others}>
       <Icon color={color} icon={CloseIcon} sx={{ path: { fill: color } }} title={{ name: 'Close Icon' }} />
@@ -21,38 +21,34 @@ const CloseButton = ({ color, ...others }) => {
   );
 };
 
-CloseButton.propTypes = {
-  color: PropTypes.string,
-};
-
-const Message = forwardRef(({ className, item, onClose }, ref) => {
+const Message = forwardRef<HTMLDivElement, MessageProps>(({ className, item, onClose }, ref) => {
   const { key, props: itemProps } = item;
 
   const {
     children,
-    status = 'default',
+    status = statuses.DEFAULT,
     bg,
     color,
     icon,
     isHidden = false,
     'data-id': dataId,
-  } = itemProps;
+  } = itemProps as MessageItemProps;
 
   const { classNames: statusClasses } = useStatusClasses(className, {
     [`is-${status}`]: true,
   });
 
   const onCloseHandler = () => {
-    if (onClose) {
+    if (onClose && key) {
       onClose(key);
     }
   };
 
-  const innerRef = useRef(null);
+  const innerRef = useRef<HTMLDivElement>(null);
   const [innerHeight, setInnerHeight] = useState(0);
 
   useLayoutEffect(() => {
-    setInnerHeight(innerRef.current.clientHeight);
+    setInnerHeight(innerRef.current?.clientHeight ?? 0);
   }, [children]);
 
   const { classNames: wrapperClasses } = useStatusClasses(className, {
@@ -129,26 +125,5 @@ const Message = forwardRef(({ className, item, onClose }, ref) => {
     </Box>
   );
 });
-
-Message.propTypes = {
-  item: PropTypes.shape({
-    key: PropTypes.string,
-    props: PropTypes.shape({
-      children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-      /* Background color */
-      bg: PropTypes.string,
-      /* Text color */
-      color: PropTypes.string,
-      /* Message icon */
-      icon: PropTypes.elementType,
-      /* Hides the message with an animated transition */
-      isHidden: PropTypes.bool,
-      'data-id': PropTypes.string,
-      status: { ...statusPropTypes }.status,
-    }),
-  }),
-  /* Callback for clicking the message's close button */
-  onClose: PropTypes.func,
-};
 
 export default Message;
