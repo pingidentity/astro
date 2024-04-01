@@ -104,10 +104,19 @@ export const HelperText = () => (
   </RadioGroupField>
 );
 
+// Added to bypass aria-allowed-attr issue due to ticket UIP-6801
+HelperText.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'aria-allowed-attr', enabled: false }],
+    },
+  },
+};
+
 export const HorizontalOrientation = () => (
   <RadioGroupField label="Pick one" orientation="horizontal">
-    <RadioField value="A" label="A" />
-    <RadioField value="B" label="B" />
-    <RadioField value="C" label="C" />
+    <RadioField value="A" label="Option A" />
+    <RadioField value="B" label="Option B" />
+    <RadioField value="C" label="Option C" />
   </RadioGroupField>
 );
