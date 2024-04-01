@@ -60,9 +60,9 @@ const RadioGroupField = forwardRef((props, ref) => {
       </Box>
       {
         helperText && (
-        <FieldHelperText status={status} sx={{ pt: 'xs' }} id={helperTextId}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status} sx={{ pt: 'xs' }} id={helperTextId}>
+            {helperText}
+          </FieldHelperText>
         )
       }
     </Box>
