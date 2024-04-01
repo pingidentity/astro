@@ -1,5 +1,9 @@
+import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+
+import { CheckboxField } from '../index';
+import UserImage from '../utils/devUtils/assets/UserImage.png';
 
 export const items = [
   {
@@ -81,3 +85,91 @@ export const items = [
     icon: AccountIcon,
   },
 ];
+
+export const personalData = {
+  contactInfo: {
+    label: 'Contact Info',
+    key: 'contactInfoKey',
+    fields: [
+      { label: 'Email', value: 'ednepomuceno@pingidentity.com', isVerified: true },
+      { label: 'Primary', value: '+1 767-777-3333' },
+      { label: 'Address', value: '1234 W California St, Denver CO 80101' },
+    ],
+  },
+  personalInfo: {
+    label: 'Personal Info',
+    key: 'personalInfoKey',
+    image: UserImage,
+    fields: [
+      { label: 'Given Name', value: 'Ed' },
+      { label: 'Famile Name', value: 'Nepomuceno' },
+    ],
+  },
+  companyInfo: {
+    label: 'Company Info',
+    key: 'companyInfoKey',
+    fields: [
+      { label: 'Tile', value: 'Interaction Designer' },
+    ],
+  },
+  customAttributes: {
+    label: 'Custom Attributes',
+    key: 'customAttributesKey',
+    fields: [
+      { label: 'T-Shirt Size', value: 'Large' },
+      { label: 'Example Multi-Value Attribute', value: 'value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,' },
+    ],
+  },
+  jsonAttributes: {
+    label: 'JSON Attributes',
+    key: 'jsonAttributesKey',
+    badges: ['Address', 'Contact', 'Another Json'],
+    fields: [],
+  },
+};
+
+export const colorBlockButtons = [
+  { text: 'Groups', subtext: '21', isConfigured: true },
+  { text: 'Population', subtext: 'Denver', isConfigured: true },
+  { text: 'MFA', subtext: 'Enabled', isConfigured: true },
+  { text: 'Roles', subtext: '0' },
+];
+
+export const editData = {
+  personalInfo: {
+    label: 'Personal Info',
+    key: 'personalInfoKey',
+    image: UserImage,
+    fields: [
+      { label: 'Prefix', value: '' },
+      { label: 'Given Name', value: 'Ed' },
+      { label: 'Middle Name', value: '' },
+      { label: 'Family Name', value: 'Nepomuceno' },
+      { label: 'Suffix', value: '' },
+      { label: 'Formatted', value: '' },
+      { label: 'Nickname', value: '' },
+    ],
+  },
+  contactInfo: {
+    label: 'Contact Info',
+    key: 'contactInfoKey',
+    fields: [
+      { label: 'Email', value: 'ednepomuceno@pingidentity.com', slot: <CheckboxField mt="xs" label="Require Email to be Verified" /> },
+      { label: 'Phone Number', value: '123-456-7890' },
+      { label: 'Street Address', value: '123 Example St' },
+      { label: 'Country Code', value: '' },
+      { label: 'Loality', value: '' },
+      { label: 'Region', value: '' },
+      { label: 'Zip Code', value: '12345' },
+    ],
+  },
+  companyInfo: {
+    label: 'Company Info',
+    key: 'companyInfoKey',
+    fields: [
+      { label: 'Account ID', value: '' },
+      { label: 'Type', value: '' },
+      { label: 'Title', value: '' },
+    ],
+  },
+};

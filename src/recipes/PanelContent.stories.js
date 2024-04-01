@@ -11,7 +11,6 @@ import {
   Breadcrumbs,
   Button,
   ButtonBar,
-  CheckboxField,
   EditButton,
   Icon,
   Image,
@@ -34,6 +33,8 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 import UserImage from '../utils/devUtils/assets/UserImage.png';
 import statuses from '../utils/devUtils/constants/statuses';
 
+import { colorBlockButtons, editData, personalData } from './items';
+
 export default {
   title: 'Recipes/Panel Content',
   parameters: {
@@ -45,60 +46,11 @@ export default {
   },
 };
 
-const colorBlockButtons = [
-  { text: 'Groups', subtext: '21', isConfigured: true },
-  { text: 'Population', subtext: 'Denver', isConfigured: true },
-  { text: 'MFA', subtext: 'Enabled', isConfigured: true },
-  { text: 'Roles', subtext: '0' },
-];
-
-const data = {
-  contactInfo: {
-    label: 'Contact Info',
-    key: 'contactInfoKey',
-    fields: [
-      { label: 'Email', value: 'ednepomuceno@pingidentity.com', isVerified: true },
-      { label: 'Primary', value: '+1 767-777-3333' },
-      { label: 'Address', value: '1234 W California St, Denver CO 80101' },
-    ],
-  },
-  personalInfo: {
-    label: 'Personal Info',
-    key: 'personalInfoKey',
-    image: UserImage,
-    fields: [
-      { label: 'Given Name', value: 'Ed' },
-      { label: 'Famile Name', value: 'Nepomuceno' },
-    ],
-  },
-  companyInfo: {
-    label: 'Company Info',
-    key: 'companyInfoKey',
-    fields: [
-      { label: 'Tile', value: 'Interaction Designer' },
-    ],
-  },
-  customAttributes: {
-    label: 'Custom Attributes',
-    key: 'customAttributesKey',
-    fields: [
-      { label: 'T-Shirt Size', value: 'Large' },
-      { label: 'Example Multi-Value Attribute', value: 'value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,' },
-    ],
-  },
-  jsonAttributes: {
-    label: 'JSON Attributes',
-    key: 'jsonAttributesKey',
-    badges: ['Address', 'Contact', 'Another Json'],
-    fields: [],
-  },
-};
-
 const OverlayWrapper = ({ children, isEditPanel }) => {
   const { state } = useOverlayPanelState({ isDefaultOpen: true });
   const triggerRef = useRef();
 
-  const { personalInfo } = data;
+  const { personalInfo } = personalData;
   const { fields } = personalInfo;
 
   const renderBreadcrumbs = (
@@ -147,11 +99,11 @@ const OverlayWrapper = ({ children, isEditPanel }) => {
         >
           {!isEditPanel && <PanelHeaderSwitchField />}
           {!isEditPanel && (
-          <PanelHeaderMenu>
-            <Item key="enable">Enable user</Item>
-            <Item key="disable">Disable user</Item>
-            <Item key="delete">Delete user</Item>
-          </PanelHeaderMenu>
+            <PanelHeaderMenu>
+              <Item key="enable">Enable user</Item>
+              <Item key="disable">Disable user</Item>
+              <Item key="delete">Delete user</Item>
+            </PanelHeaderMenu>
           )}
           <PanelHeaderCloseButton onPress={state.close} />
         </PanelHeader>
@@ -160,7 +112,6 @@ const OverlayWrapper = ({ children, isEditPanel }) => {
     </OverlayProvider>
   );
 };
-
 
 export const DisplayPanel = () => {
   const renderProfileTab = (
@@ -172,27 +123,27 @@ export const DisplayPanel = () => {
       </Box>
       <Box isRow justifyContent="space-between">
         <AccordionGroup
-          defaultExpandedKeys={Object.keys(data).map(item => data[item].key)}
+          defaultExpandedKeys={Object.keys(personalData).map(item => personalData[item].key)}
           labelHeadingTag="h2"
         >
-          {Object.keys(data).map(item => (
+          {Object.keys(personalData).map(item => (
             <Item
-              data-id={data[item].label}
-              key={data[item].key}
-              label={data[item].label}
-              textValue={data[item].label}
+              data-id={personalData[item].label}
+              key={personalData[item].key}
+              label={personalData[item].label}
+              textValue={personalData[item].label}
             >
-              {data[item].image
+              {personalData[item].image
                 ? (
                   <Box isRow gap="md">
                     <Image src={UserImage} alt="user" />
-                    <LabelValuePairs fields={data[item].fields} />
+                    <LabelValuePairs fields={personalData[item].fields} />
                   </Box>
                 )
-                : <LabelValuePairs fields={data[item].fields} />}
-              {data[item].badges && (
+                : <LabelValuePairs fields={personalData[item].fields} />}
+              {personalData[item].badges && (
                 <Box isRow gap="sm">
-                  {data[item].badges.map(badge => (
+                  {personalData[item].badges.map(badge => (
                     <Badge label={badge} variant="defaultBadge" key={`${badge}-key`} />
                   ))}
                 </Box>
@@ -256,7 +207,7 @@ export const ColorBlockButton = ({ buttonData = colorBlockButtons[0] }) => (
   </Button>
 );
 
-export const LabelValuePairs = ({ fields = data.contactInfo.fields }) => (
+export const LabelValuePairs = ({ fields = personalData.contactInfo.fields }) => (
   <Box gap="md" maxWidth="675px">
     {fields.map(({ label, value, isVerified }) => (
       <Box gap="xs" key={`${label}-key`}>
@@ -279,45 +230,6 @@ export const LabelValuePairs = ({ fields = data.contactInfo.fields }) => (
     ))}
   </Box>
 );
-
-const editData = {
-  personalInfo: {
-    label: 'Personal Info',
-    key: 'personalInfoKey',
-    image: UserImage,
-    fields: [
-      { label: 'Prefix', value: '' },
-      { label: 'Given Name', value: 'Ed' },
-      { label: 'Middle Name', value: '' },
-      { label: 'Family Name', value: 'Nepomuceno' },
-      { label: 'Suffix', value: '' },
-      { label: 'Formatted', value: '' },
-      { label: 'Nickname', value: '' },
-    ],
-  },
-  contactInfo: {
-    label: 'Contact Info',
-    key: 'contactInfoKey',
-    fields: [
-      { label: 'Email', value: 'ednepomuceno@pingidentity.com', slot: <CheckboxField mt="xs" label="Require Email to be Verified" /> },
-      { label: 'Phone Number', value: '123-456-7890' },
-      { label: 'Street Address', value: '123 Example St' },
-      { label: 'Country Code', value: '' },
-      { label: 'Loality', value: '' },
-      { label: 'Region', value: '' },
-      { label: 'Zip Code', value: '12345' },
-    ],
-  },
-  companyInfo: {
-    label: 'Company Info',
-    key: 'companyInfoKey',
-    fields: [
-      { label: 'Account ID', value: '' },
-      { label: 'Type', value: '' },
-      { label: 'Title', value: '' },
-    ],
-  },
-};
 
 export const EditPanel = () => (
   <OverlayWrapper isEditPanel>
