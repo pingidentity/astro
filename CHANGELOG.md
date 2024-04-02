@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.55.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.54.0...@pingux/astro@2.55.0) (2024-04-02)
+
+
+### Bug Fixes
+
+* [UIP-6801] RadioGroupField color contrast accessibility issue ([a03406c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a03406cea9eee49adc841fd8bd38b94da947852b))
+
+
+### Features
+
+* [UIP-6496] ListAndPanel update the panel content ([11ec822](https://gitlab.corp.pingidentity.com/ux/pingux/commit/11ec822f15bef82828d8d7184e1ae097d29584e6))
+* [UIP-6840] PhoneInputField improvements ([7b40677](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7b4067789662a0d5026acee04164ab6f951352e4))
+
+
+
+
+
 # [2.54.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.53.1...@pingux/astro@2.54.0) (2024-03-28)
 
 
