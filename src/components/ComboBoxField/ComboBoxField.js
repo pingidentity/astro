@@ -340,6 +340,7 @@ ComboBoxField.propTypes = {
   // /** Props object that is spread directly into the ScrollBox element. */
   /** @ignore */
   scrollBoxProps: PropTypes.shape({
+
     maxHeight: PropTypes.string,
   }),
   /** Props object that is spread directly into the ComboBoxInput element. */
