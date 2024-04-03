@@ -33,6 +33,7 @@ import { OverlayPanelProps } from '../../types';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 import statuses from '../../utils/devUtils/constants/statuses';
+import { ExampleItemProps } from '../ListView/ListView.stories';
 
 import OverlayPanelReadme from './OverlayPanel.mdx';
 
@@ -444,7 +445,7 @@ export const InnerPanel: StoryFn<OverlayPanelProps> = ({ ...args }: OverlayPanel
           </Text>
           <ListView items={items}>
             {
-              item => (
+              (item: ExampleItemProps) => (
                 <Item key={item.id}>
                   <ListViewItem
                     data={{

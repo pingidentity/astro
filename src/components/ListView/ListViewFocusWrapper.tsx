@@ -4,6 +4,7 @@ import { FocusScope, useFocusManager } from '@react-aria/focus';
 import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
+import { ExpandableContainerProps, ExpandableItemChildrenContainerProps } from '../../types/listView';
 
 export const escapeFocusDelegate = (e, setIsFocusEscaped, focusManager, isFocusEscaped) => {
   if (e.keyCode === 13) {
@@ -35,7 +36,9 @@ export const escapeFocusDelegate = (e, setIsFocusEscaped, focusManager, isFocusE
   }
 };
 
-const ExpandableItemChildrenContainer = forwardRef((props, ref) => {
+
+// eslint-disable-next-line max-len
+const ExpandableItemChildrenContainer = forwardRef<HTMLElement, ExpandableItemChildrenContainerProps>((props, ref) => {
   const {
     children,
     gridCellProps,
@@ -58,7 +61,7 @@ const ExpandableItemChildrenContainer = forwardRef((props, ref) => {
 
   // this handles instances where a user clicks into the container.
   useEffect(() => {
-    if (isFocusWithin && !isFocusEscaped && !isFocused) {
+    if (isFocusWithin && !isFocusEscaped && !isFocused && setIsFocusEscaped) {
       setIsFocusEscaped(true);
     }
   }, [isFocusWithin]);
@@ -75,20 +78,7 @@ const ExpandableItemChildrenContainer = forwardRef((props, ref) => {
   );
 });
 
-ExpandableItemChildrenContainer.propTypes = {
-  gridCellProps: PropTypes.shape({}),
-  focusManager: PropTypes.shape({}),
-  focusProps: PropTypes.shape({}),
-  focusWithinProps: PropTypes.shape({}),
-  isFocusEscaped: PropTypes.bool,
-  isFocused: PropTypes.bool,
-  isFocusWithin: PropTypes.bool,
-  expandableContainerOnBlur: PropTypes.func,
-  expandableContainerOnFocus: PropTypes.func,
-  setIsFocusEscaped: PropTypes.func,
-};
-
-const ListViewFocusWrapper = props => {
+const ListViewFocusWrapper = (props: ExpandableContainerProps) => {
   const {
     children,
     containerProps,

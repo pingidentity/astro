@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { mergeProps, useFocusRing, useGridListItem } from 'react-aria';
-import type { TreeState } from 'react-stately';
 import { useHover } from '@react-aria/interactions';
-import type { SelectionManager } from '@react-stately/selection';
-import type { GridNode } from '@react-types/grid';
 
+import { ExpandableItemState, ExpandableListViewItemProps } from '../../types/listView';
 import { useStatusClasses } from '..';
 
 interface UseExpandableListViewItemResult {
   expandableRowProps: object,
   cellProps: object,
   expandableContainerProps: object,
-  expandableItemState: object,
+  expandableItemState: ExpandableItemState,
 }
 
 interface UseExpandableListViewItem<T> {
@@ -23,6 +21,7 @@ interface UseExpandableListViewItem<T> {
    * Returns four objects, three of which are spread into subcomponents,
    * the fourth provides state handing props.
    * @param {Object} [props] Properties provided to the underlying hooks
+   * @param {Boolean} [props.isFocusable] whether or not the option is focusable
    * @param {Boolean} [props.isHoverable] whether or not the option is hoverable
    * @param {ReactRef} [props.expandableChildrenRef] the container of all of the expandable content
    * @param {ReactRef} [props.expandableItemRowRef] the container of for the entire item
@@ -38,40 +37,18 @@ interface UseExpandableListViewItem<T> {
   (props: ExpandableListViewItemProps<T>): UseExpandableListViewItemResult
 }
 
-interface ListViewState<T> extends TreeState<T> {
-  hover: {
-    hoveredItem?: string,
-    setHoveredItem: (hoveredItem: string | number) => unknown,
-  }
-  isLink: boolean,
-  selectionManager: SelectionManager
-}
-
-interface ExpandableListViewItemProps<T> {
-  expandableItemRowRef: React.MutableRefObject<HTMLDivElement | null>,
-  expandableChildrenRef: React.MutableRefObject<HTMLDivElement | null>,
-  className: string,
-  // isHoverable: boolean,
-  item: GridNode<T>,
-  state: ListViewState<T>,
-  key: string | number,
-}
-
 const useExpandableListViewItem: UseExpandableListViewItem<object> = <T extends object, >(
   props: ExpandableListViewItemProps<T>): UseExpandableListViewItemResult => {
   const {
     item,
     item: {
-      props: { listItemProps, rowProps },
+      props: { listItemProps, rowProps, hasSeparator = true },
     },
     state,
     expandableItemRowRef,
     expandableChildrenRef,
     className,
-    // isHoverable,
   } = props;
-
-  const hasSeparator = true;
 
   // convenience extractions from props
   const { key } = item;
@@ -171,6 +148,7 @@ const useExpandableListViewItem: UseExpandableListViewItem<object> = <T extends 
 
   // if the expanded content container is focused, this function will call
   // it returns focus to the row on right press, and calls the native left press
+  /* istanbul ignore next */
   const expandedChildrenKeyCaptureOverride = e => {
     // if left go back ie dont stifle
     // if right, stifle, but then send back to row, using ref.
