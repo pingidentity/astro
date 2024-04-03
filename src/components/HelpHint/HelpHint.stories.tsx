@@ -83,3 +83,12 @@ export const WithDelay: StoryFn = (args: HelpHintProps) => (
     <HelpHint {...args} closeDelay={5000} />
   </Box>
 );
+
+export const Customization: StoryFn = () => (
+  <Box p={100}>
+    <HelpHint direction="bottom">
+      Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    </HelpHint>
+  </Box>
+);
