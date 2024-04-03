@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Key } from 'react';
 import { FocusScope } from 'react-aria';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
@@ -12,6 +12,13 @@ import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
 import { escapeFocusDelegate } from './ListViewFocusWrapper';
+
+interface TestItemProps {
+  key?: Key,
+  name?: string,
+  textValue?: string,
+  id?: string,
+}
 
 const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1' },
@@ -47,7 +54,6 @@ beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
   jest.useFakeTimers();
 });
 
@@ -62,7 +68,7 @@ afterAll(() => {
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} items={items}>
-      {item => (
+      {(item: TestItemProps) => (
         <Item
           key={item.key}
           textValue={item.name}
@@ -82,9 +88,12 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 
 const getComponentExpandable = (props = {}, { renderFn = render } = {}) => renderFn((
   <ListView {...defaultProps} {...props} items={items}>
-    {item => (
-      <Item key={item.name} textValue={item.name}>
-        <h1>{item.name}</h1>
+    {(item: TestItemProps) => (
+      <Item
+        key={item.name}
+        textValue={item.name}
+      >
+        <h1>I am a heading</h1>
         <Button>I am a button</Button>
       </Item>
     )}
@@ -100,7 +109,7 @@ const getComponentEmpty = (props = {}, { renderFn = render } = {}) => renderFn((
 const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => renderFn((
   <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} items={items}>
-      {item => (
+      {(item: TestItemProps) => (
         <Item
           key={item.key}
           textValue={item.name}
@@ -117,7 +126,7 @@ const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => ren
 universalComponentTests({
   renderComponent: props => (
     <ListView {...defaultProps} {...props} items={items}>
-      {item => (
+      {(item: TestItemProps) => (
         <Item
           key={item.key}
           textValue={item.name}
@@ -339,7 +348,6 @@ test('selectionMode "expanded" cells render expandable list items, and can be ex
 
   expect(updatedOptions[0]).toHaveAttribute('aria-expanded', 'true');
 
-
   userEvent.click(options[0]);
 
   const updatedOptions1 = await screen.findAllByRole('gridcell');
@@ -369,6 +377,8 @@ test('should navigate to expandable listitems with keyboard ', async () => {
 
   const button = await screen.findByRole('button');
   expect(button).toHaveClass('is-focused');
+
+  userEvent.type(row, '{esc}', { skipClick: true });
 });
 
 test('should navigate to expandable container ', async () => {

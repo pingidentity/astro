@@ -1,13 +1,13 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, Key, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { useGridList } from 'react-aria';
 import { useTreeState } from 'react-stately';
+import { GridListProps } from '@react-aria/gridlist';
 import { useCollator } from '@react-aria/i18n';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
-import PropTypes from 'prop-types';
 
+import { ListViewProps, ListViewState } from '../../types/listView';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import Loader from '../Loader';
 
 import { ListViewContext } from './ListViewContext';
@@ -26,8 +26,6 @@ export function useListLayout(state) {
   const layout = useMemo(() => new ListLayout({
     estimatedRowHeight: ROW_HEIGHT,
     estimatedHeadingHeight: 26,
-    paddingRight: 4,
-    paddingLeft: 4,
     loaderHeight: ROW_HEIGHT,
     placeholderHeight: ROW_HEIGHT,
     collator,
@@ -39,7 +37,8 @@ export function useListLayout(state) {
   return layout;
 }
 
-const ListView = forwardRef((props, ref) => {
+
+const ListView = forwardRef((props: ListViewProps, ref) => {
   const {
     disabledKeys,
     isHoverable = true,
@@ -52,10 +51,11 @@ const ListView = forwardRef((props, ref) => {
     selectionMode,
     selectionStyle,
     items,
+    onFocus,
     ...others
   } = props;
 
-  const [hoveredItem, setHoveredItem] = useState('');
+  const [hoveredItem, setHoveredItem] = useState<Key | null>(null);
 
   const isLoading = (
     loadingState === loadingStates.LOADING_MORE || loadingState === loadingStates.LOADING
@@ -70,7 +70,7 @@ const ListView = forwardRef((props, ref) => {
     />
   );
 
-  const listViewRef = useRef();
+  const listViewRef = useRef(null);
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => listViewRef.current);
@@ -78,7 +78,7 @@ const ListView = forwardRef((props, ref) => {
   const state = useTreeState({
     ...props,
     selectionMode: selectionMode === 'expansion' ? 'single' : selectionMode,
-  });
+  }) as ListViewState<object>;
 
   state.hover = {
     hoveredItem,
@@ -92,10 +92,9 @@ const ListView = forwardRef((props, ref) => {
   const layout = useListLayout(state);
 
   const { gridProps } = useGridList({
-    ...props,
+    ...props as GridListProps<object>,
     isVirtualized: true,
     keyboardDelegate: layout,
-    loadingState,
   }, state, listViewRef);
   // Sync loading state into the layout.
   layout.isLoading = isLoading;
@@ -108,11 +107,13 @@ const ListView = forwardRef((props, ref) => {
     delete others['aria-label'];
   }
 
-  const onFocus = e => {
-    gridProps.onFocus(e);
+  const onFocusCallback = e => {
+    if (gridProps?.onFocus) {
+      gridProps.onFocus(e);
+    }
 
-    if (others.onFocus) {
-      others.onFocus(e);
+    if (onFocus) {
+      onFocus(e);
     }
   };
 
@@ -136,7 +137,7 @@ const ListView = forwardRef((props, ref) => {
         collection={collection}
         transitionDuration={0}
         {...others}
-        onFocus={isFocusable && onFocus}
+        onFocus={isFocusable ? onFocusCallback : undefined}
         onScroll={resetHoverState}
         tabIndex={isFocusable ? 0 : -1}
         shouldUseVirtualFocus={!isFocusable}
@@ -164,57 +165,6 @@ const ListView = forwardRef((props, ref) => {
     </ListViewContext.Provider>
   );
 });
-
-ListView.propTypes = {
-  /** Shows loader instead of children */
-  loadingState: PropTypes.oneOf(Object.values(loadingStates)),
-  /**
-   * The item keys that are disabled. These items cannot be selected, focused, or otherwise
-   * interacted with.
-   */
-  disabledKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
-  /** The initial expanded keys in the collection (uncontrolled). */
-  defaultExpandedKeys: isIterableProp,
-  /** The expanded keys in the collection (controlled). */
-  expandedKeys: isIterableProp,
-  /** Handler that is called when items are expanded or collapsed. */
-  onExpandedChange: PropTypes.func,
-  /** The list of ListView items (controlled). */
-  items: isIterableProp,
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string,
-  /** Whether ListView should handle hover state (defaults to true) */
-  isHoverable: PropTypes.bool,
-  /** Defines a string value that labels the current element. */
-  'aria-label': PropTypes.string,
-  /** Identifies the element (or elements) that labels the current element. */
-  'aria-labelledby': PropTypes.string,
-  /** Identifies the element (or elements) that describes the object. */
-  'aria-describedby': PropTypes.string,
-  /**
-   * Identifies the element (or elements) that provide a detailed, extended description for the
-   * object.
-  */
-  'aria-details': PropTypes.string,
-  /**
-   * The currently selected keys in the collection (controlled).
-   *
-   * `selectedKeys="all"` can be used to select every key.
-   */
-  selectedKeys: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  /** The type of selection that is allowed in the collection. */
-  selectionMode: PropTypes.oneOf(['none', 'single', 'multiple', 'expansion']),
-  /** */
-  selectionStyle: PropTypes.oneOf(['highlight', undefined]),
-  /** Callback function that fires when the selected key changes. */
-  onSelectionChange: PropTypes.func,
-  /**
-   * Handler that is called when more items should be loaded, e.g. while scrolling near the bottom.
-   *
-   * () => any
-   */
-  onLoadMore: PropTypes.func,
-};
 
 ListView.defaultProps = {
   'aria-label': 'listView',

@@ -56,7 +56,7 @@
     "@react-aria/dnd": "^3.5.0",
     "@react-aria/focus": "~3.8.0",
     "@react-aria/grid": "~3.4.1",
-    "@react-aria/gridlist": "^3.7.2",
+    "@react-aria/gridlist": "^3.7.4",
     "@react-aria/i18n": "~3.6.0",
     "@react-aria/interactions": "~3.11.0",
     "@react-aria/label": "^3.1.0",

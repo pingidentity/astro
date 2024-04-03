@@ -1,34 +1,34 @@
 import React, { useContext, useRef } from 'react';
 import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
 import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
-import PropTypes from 'prop-types';
 
 import useExpandableListViewItem from '../../hooks/useExpandableListViewItem/useExpandableListViewItem';
 import { Box, Icon } from '../../index';
+import { ListViewExpandableItemProps } from '../../types/listView';
 
 import { ListViewContext } from './ListViewContext';
 import ListViewFocusWrapper from './ListViewFocusWrapper';
 
-const ListViewExpandableItem = props => {
+const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => {
   const {
     item,
     item: {
-      props: { listItemProps, rowProps, hasSeparator = true, hasInsetSeparator },
+      props: { listItemProps, rowProps, hasSeparator = true, hasInsetSeparator } = {},
+      key,
     },
     isHoverable,
     isFocusable,
     className,
   } = props;
 
-  const { key } = item;
-
   const { state } = useContext(ListViewContext);
 
-  const expandableItemRowRef = useRef();
-  const expandableChildrenRef = useRef();
+  const expandableItemRowRef = useRef(null);
+  const expandableChildrenRef = useRef(null);
 
   const hookProps = {
     item,
+    key,
     listItemProps,
     rowProps,
     hasSeparator,
@@ -66,7 +66,7 @@ const ListViewExpandableItem = props => {
           isRow
           sx={{ alignItems: 'center', width: '100%' }}
         >
-          {item.rendered[0]}
+          {item.rendered && item.rendered[0]}
           <Icon
             sx={{ ml: 'auto' }}
             icon={isExpanded ? MenuUpIcon : MenuDownIcon}
@@ -81,28 +81,12 @@ const ListViewExpandableItem = props => {
             isFocusEscaped={isFocusEscaped}
             containerProps={expandableContainerProps}
           >
-            {item.rendered[1]}
+            {item.rendered && item.rendered[1]}
           </ListViewFocusWrapper>
           )}
       </Box>
     </Box>
   );
-};
-
-ListViewExpandableItem.propTypes = {
-  item: PropTypes.shape({
-    key: PropTypes.string,
-    rendered: PropTypes.node,
-    props: PropTypes.shape({
-      'data-id': PropTypes.string,
-      listItemProps: PropTypes.shape({}),
-      rowProps: PropTypes.shape({}),
-      hasSeparator: PropTypes.bool,
-      hasInsetSeparator: PropTypes.bool,
-    }),
-  }),
-  isHoverable: PropTypes.bool,
-  isFocusable: PropTypes.bool,
 };
 
 export default ListViewExpandableItem;

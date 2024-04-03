@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { Key, useRef, useState } from 'react';
 import { Item, useAsyncList } from 'react-stately';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
+import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -21,10 +22,10 @@ import {
   Text,
   TextField,
 } from '../..';
-import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { chartData } from '../ListViewItem/controls/chart/chartData';
 
 import ListViewReadme from './ListView.mdx';
+import { listViewArgTypes } from './listViewAttributes';
 
 export default {
   title: 'Components/ListView',
@@ -43,21 +44,7 @@ export default {
     },
   },
   argTypes: {
-    loadingState: {
-      control: {
-        type: 'select',
-        options: loadingStates,
-      },
-    },
-    disabledKeys: {},
-    items: {
-      control: {
-        type: 'none',
-      },
-    },
-    onSelectionChange: {
-      control: 'none',
-    },
+    ...listViewArgTypes,
   },
   args: {
     disabledKeys: ['Snake'],
@@ -317,7 +304,21 @@ const actions = {
   onLoadMore: action('onLoadMore'),
 };
 
-const CustomText = ({ string, secondString, ...others }) => (
+interface CustomTextProps {
+  string?: string,
+  secondString?: string,
+  sx?: ThemeUICSSObject,
+}
+
+export interface ExampleItemProps {
+  key?: Key,
+  name?: string,
+  textValue?: string,
+  subtext?: string,
+  id?: string,
+}
+
+const CustomText = ({ string, secondString, ...others }: CustomTextProps) => (
   <Text {...others}>
     {string}
     {' '}
@@ -339,7 +340,7 @@ const ExpandableChildren = () => {
                 && (
                 <>
                   <Badge label="Limited Access" bg="white" textColor="text.primary" sx={{ ml: 'xs', border: '1px solid', borderColor: 'neutral.80' }} />
-                  <HelpHint label={`${env} help hint`}>
+                  <HelpHint>
                     Text of the popover right here...
                   </HelpHint>
                 </>
@@ -386,7 +387,7 @@ const Controls = () => (
 
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items}>
-    {item => (
+    {(item: ExampleItemProps) => (
       <Item key={item.name}>
         <ListViewItem
           data={{
@@ -401,41 +402,12 @@ export const Default = ({ ...args }) => (
   </ListView>
 );
 
-export const Controlled = () => {
-  const [selectedKeys, setSelectedKeys] = useState(['Snake']);
-
-  const onSelectedChange = e => {
-    setSelectedKeys(Array.from(e));
-  };
-
-  return (
-    <ListView
-      items={items}
-      onSelectionChange={onSelectedChange}
-      selectedKeys={selectedKeys}
-    >
-      {item => (
-        <Item key={item.name}>
-          <ListViewItem
-            data={{
-              text: item.name,
-              icon: FormSelectIcon,
-            }}
-          >
-            <Controls />
-          </ListViewItem>
-        </Item>
-      )}
-    </ListView>
-  );
-};
-
 export const WithExpandableItems = ({ ...args }) => {
   return (
     <ListView {...props} {...args} items={items} selectionMode="expansion">
       {/* The first child inside of <Item> will render as the collapsed content, within the row
           The  Second child will render when expanded. */}
-      {item => (
+      {(item: ExampleItemProps) => (
         <Item key={item.name} textValue={item.name}>
           <ExampleContent text={item.name} />
           <ExpandableChildren />
@@ -467,7 +439,7 @@ export const ControlledExpandableItems = ({ ...args }) => {
         onExpandedChange={onExpandedKeyCallback}
         selectionMode="expansion"
       >
-        {item => (
+        {(item: ExampleItemProps) => (
           <Item key={item.name} textValue={item.name}>
             <ExampleContent text={item.name} />
             <ExpandableChildren />
@@ -495,7 +467,7 @@ export const InfiniteLoadingList = args => {
     };
   };
   const fetchApiData = async (signal, cursor, filterText) => {
-    if (args.useMockData) return getMockData();
+    if (args.useMockData) return getMockData(null, null);
 
     try {
       // this race will throw an error if api won't respond in 3 seconds
@@ -510,7 +482,7 @@ export const InfiniteLoadingList = args => {
         }),
         new Promise((_resolve, reject) => setTimeout(() => reject(new Error('timeout')), 3000),
         ),
-      ]);
+      ]) as Response;
       const json = await res.json();
       // The API is too fast sometimes, so make it take longer so we can see the loader
       await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
@@ -520,7 +492,7 @@ export const InfiniteLoadingList = args => {
         cursor: json.next,
       };
     } catch (e) {
-      return getMockData();
+      return getMockData(null, null);
     }
   };
 
@@ -533,7 +505,7 @@ export const InfiniteLoadingList = args => {
 
       // check if we are mocking pages
       if (cursor && cursor.includes('mock')) {
-        return getMockData(signal, cursor, filterText);
+        return getMockData(signal, cursor);
       }
       return fetchApiData(signal, cursor, filterText);
     },
@@ -547,11 +519,11 @@ export const InfiniteLoadingList = args => {
     >
       <ListView
         {...actions}
-        items={list.items}
+        items={(list.items as Iterable<object>)}
         loadingState={list.loadingState}
         onLoadMore={list.loadMore}
       >
-        {item => (
+        {(item: ExampleItemProps) => (
           <Item key={item.name}>
             <ListViewItem
               data={{
@@ -583,7 +555,7 @@ InfiniteLoadingList.parameters = {
 
 export const MultipleSelection = ({ ...args }) => (
   <ListView {...props} {...args} items={items} selectionMode="multiple">
-    {item => (
+    {(item: ExampleItemProps) => (
       <Item key={item.name}>
         <ListViewItem
           data={{
@@ -602,7 +574,7 @@ export const WithCharts = ({ ...args }) => {
   const chartContainerRef = useRef();
   return (
     <ListView {...args} items={items} selectionMode="multiple">
-      {item => (
+      {(item: ExampleItemProps) => (
         <Item key={item.name}>
           <ListViewItem
             ref={chartContainerRef}

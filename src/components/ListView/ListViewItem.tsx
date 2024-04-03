@@ -25,7 +25,7 @@ const ListViewItem = props => {
 
   const isDisabled = state.disabledKeys.has(item.key);
 
-  const rowRef = useRef();
+  const rowRef = useRef(null);
 
   const isSelectable = state.selectionManager.selectionMode !== 'none';
 
