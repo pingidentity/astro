@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.56.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.55.0...@pingux/astro@2.56.0) (2024-04-04)
+
+
+### Bug Fixes
+
+* [UIP-6780] ListView TypeScript conversion ([1a00b4d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1a00b4d3dc694598cf13306cea62f14e7361c8d0))
+
+
+### Features
+
+* [UIP-6839] HelpHint-add-Customization-story ([07afa6c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/07afa6c54c3ed13e7daf49ce82e579c9e445394a))
+
+
+
+
+
 # [2.55.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.54.0...@pingux/astro@2.55.0) (2024-04-02)
 
 
