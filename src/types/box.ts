@@ -11,7 +11,8 @@ export interface BoxProps extends StyleProps, DOMAttributes {
   isDisabled?: boolean,
   /** Whether the box is focused. */
   isFocused?: boolean,
-  isSelected?: boolean;
-  isUnavailable?: boolean;
-  hidden?: boolean;
+  tabIndex?: string | number,
+  isSelected?: boolean,
+  isUnavailable?: boolean,
+  hidden?: boolean,
 }
