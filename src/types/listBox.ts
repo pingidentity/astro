@@ -12,7 +12,7 @@ export interface ComboBoxStateType extends ComboBoxState<object> {
 }
 
 export interface ListStateType extends ListState<object> {
-  focusStrategy: FocusStrategy,
+  focusStrategy?: FocusStrategy,
 }
 
 export type ListBoxStateType = ListStateType | ComboBoxStateType
