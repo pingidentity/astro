@@ -3,7 +3,9 @@ import { Section } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../..';
+import { EnvironmentBreadcrumbProps, EnvironmentItemProps } from '../../types';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
 
@@ -12,9 +14,10 @@ const testName = 'test-name';
 const testSelectedItem = 'test-selected-item';
 const testSearchLabel = 'test-Search-Label';
 
-const items = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
 
-const itemsWithSections = [
+const items: EnvironmentItemProps[] = [{ name: 'a' }, { name: 'b' }, { name: 'c' }];
+
+const itemsWithSections: EnvironmentItemProps[] = [
   {
     name: 'Heading 1',
     key: 'Heading 1',
@@ -54,7 +57,7 @@ const defaultWithSectionsProps = {
 
 const onSelectionChange = jest.fn();
 
-export const renderComponent = props => (
+export const renderComponent = (props: EnvironmentBreadcrumbProps<EnvironmentItemProps>) => (
   <OverlayProvider>
     <EnvironmentBreadcrumb {...defaultProps} {...props}>
       {item => <Item key={item.name} data-testid={item.name}>{item.name}</Item>}
@@ -62,33 +65,40 @@ export const renderComponent = props => (
   </OverlayProvider>
 );
 
-export const renderSectionsComponent = props => (
-  <OverlayProvider>
-    <EnvironmentBreadcrumb {...defaultWithSectionsProps} {...props}>
-      {section => (
-        // eslint-disable-next-line testing-library/no-node-access
-        <Section
-          key={section.key}
-          name={section.name}
-          title={section.name}
-          items={section.options}
-        >
-          {/* eslint-disable-next-line testing-library/no-node-access */}
-          {item => (
-            <Item key={`${section.name}-${item.name}`} childItems={item.options}>
-              {item.name}
-            </Item>
-          )}
-        </Section>
-      )}
-    </EnvironmentBreadcrumb>
-  </OverlayProvider>
-);
+export const renderSectionsComponent = (
+  props: EnvironmentBreadcrumbProps<EnvironmentItemProps>) => {
+  return (
+    <OverlayProvider>
+      <EnvironmentBreadcrumb {...defaultWithSectionsProps} {...props}>
+        {(section: EnvironmentItemProps) => (
+          <Section
+            key={section.key}
+            title={section.name}
+            items={section.options}
+          >
+            {item => (
+              <Item key={`${section.name}-${item.name}`} childItems={item.options}>
+                {item.name}
+              </Item>
+            )}
+          </Section>
+        )}
+      </EnvironmentBreadcrumb>
+    </OverlayProvider>
+  );
+};
 
-const getComponent = props => render(renderComponent(props));
-const getSectionsComponent = (props = {}) => render(renderSectionsComponent(props));
+const getComponent = (props: EnvironmentBreadcrumbProps<
+  EnvironmentItemProps> = {}) => render(renderComponent(props));
+const getSectionsComponent = (props: EnvironmentBreadcrumbProps<
+  EnvironmentItemProps> = {}) => render(renderSectionsComponent(props));
+
+universalComponentTests({ renderComponent });
+universalComponentTests({ renderComponent: renderSectionsComponent });
 
 beforeAll(() => {
+  const callback = cb => cb();
+
   jest
     .spyOn(window.HTMLElement.prototype, 'clientWidth', 'get')
     .mockImplementation(() => 1000);
@@ -97,7 +107,7 @@ beforeAll(() => {
     .mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(callback);
 
   jest.useFakeTimers();
 });
@@ -195,9 +205,12 @@ test('should render the separators', () => {
 
   groups.forEach((group, index) => {
     expect(() => within(group).getByText(itemsWithSections[index].name));
-    itemsWithSections[index].options.forEach(opt => (
-      expect(() => within(group).getByText(opt.name))
-    ));
+    const itemOpt = itemsWithSections[index].options;
+    if (Array.isArray(itemOpt)) {
+      itemOpt.forEach(opt => (
+        expect(() => within(group).getByText(opt.name))
+      ));
+    }
   });
 });
 
@@ -207,6 +220,7 @@ test('should call onSelectionChange when env clicked', () => {
   expect(onSelectionChangeMock).not.toHaveBeenCalled();
 
   userEvent.click(screen.getByText(testSelectedItem));
+  expect(screen.getByText(items[0].name)).toBeInTheDocument();
   userEvent.click(screen.getByText(items[0].name));
   expect(onSelectionChangeMock).toHaveBeenNthCalledWith(1, items[0].name);
 });
@@ -222,6 +236,7 @@ test('should call onPopoverOpen if it is passed in the props', () => {
   getComponent({ onPopoverOpen: onPopoverOpenMock });
   expect(onPopoverOpenMock).not.toHaveBeenCalled();
   userEvent.click(screen.getByText(testSelectedItem));
+
   expect(onPopoverOpenMock).toHaveBeenCalled();
 });
 
@@ -311,11 +326,14 @@ test('should reflect the selection change when env is clicked', () => {
   const onSelectionChangeMock = jest.fn();
   getSectionsComponent({ isDefaultOpen: true, onSelectionChange: onSelectionChangeMock });
 
-  userEvent.click(screen.getByText(itemsWithSections[1].options[1].name));
-  expect(onSelectionChangeMock).toHaveBeenNthCalledWith(
-    1,
-    `${itemsWithSections[1].name}-${itemsWithSections[1].options[1].name}`,
-  );
+  const itemOpt = itemsWithSections[1].options;
+  if (Array.isArray(itemOpt)) {
+    userEvent.click(screen.getByText(itemOpt[1].name));
+    expect(onSelectionChangeMock).toHaveBeenNthCalledWith(
+      1,
+      `${itemsWithSections[1].name}-${itemOpt[1].name}`,
+    );
+  }
 });
 
 test('should indicate selected item on first render', () => {
