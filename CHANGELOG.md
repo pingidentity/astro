@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.57.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.56.0...@pingux/astro@2.57.0) (2024-04-10)
+
+
+### Features
+
+* [UIP-6821] EnvironmentalBreadcrumb convert to TypeScript ([27e431a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/27e431ad44b479df3906696b6530ca4230871073))
+* [UIP-6842] Link update to match specs ([911503b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/911503b9adb4fb0f438871f0288eba36575f977e))
+
+
+
+
+
 # [2.56.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.55.0...@pingux/astro@2.56.0) (2024-04-04)
 
 
