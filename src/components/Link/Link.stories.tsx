@@ -63,10 +63,10 @@ export default {
 } as Meta;
 
 export const Default: StoryFn<LinkProps> = ({ ...args }) => (
-  <div>
-    <Link {...args}>A link</Link>
+  <div style={{ width: 'max-content' }}>
+    <Link {...args}>Lorem ipsum</Link>
     {' '}
-    to your favorite website.
+    dolor sit amet, consectetur adipiscing elit
   </div>
 );
 
