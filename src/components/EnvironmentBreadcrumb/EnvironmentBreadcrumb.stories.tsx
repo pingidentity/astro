@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -9,6 +10,7 @@ import {
   Section,
   Text,
 } from '../../index';
+import { EnvironmentBreadcrumbProps, EnvironmentItemProps } from '../../types';
 
 import EnvironmentBreadcrumbReadme from './EnvironmentBreadcrumb.mdx';
 
@@ -28,9 +30,9 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-const defaultEnvironments = [
+const defaultEnvironments: EnvironmentItemProps[] = [
   { name: 'Default' },
   { name: 'Kangaroo' },
   { name: 'Snake' },
@@ -48,7 +50,7 @@ const defaultEnvironments = [
   { name: 'Goat' },
 ];
 
-const environmentsWithSections = [
+const environmentsWithSections: EnvironmentItemProps[] = [
   {
     name: 'Recent',
     key: 'Recent',
@@ -82,7 +84,7 @@ const environmentsWithSections = [
   },
 ];
 
-export const Default = args => {
+export const Default: StoryFn<EnvironmentBreadcrumbProps<EnvironmentItemProps>> = args => {
   const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
 
   const envNode = (
@@ -98,7 +100,7 @@ export const Default = args => {
 
   const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
-    setSelectedEnvironment({ ...envObj });
+    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
   };
 
   return (
@@ -125,7 +127,7 @@ export const Default = args => {
   );
 };
 
-export const DefaultClosed = args => {
+export const DefaultClosed = (args: EnvironmentBreadcrumbProps<EnvironmentItemProps>) => {
   const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
 
   const envNode = (
@@ -141,7 +143,7 @@ export const DefaultClosed = args => {
 
   const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
-    setSelectedEnvironment({ ...envObj });
+    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
   };
 
   return (
@@ -172,14 +174,19 @@ export const WithSections = () => {
   const selectedSectionIndex = 0;
   const selectedOptionIndex = 0;
   const [environments, setEnvironments] = useState(environmentsWithSections);
-  const [filteredOptionsNumber, setFilteredOptionsNumber] = useState(null);
+  const [filteredOptionsNumber, setFilteredOptionsNumber] = useState<number | null>(null);
   const [selectedEnvironment, setSelectedEnvironment] = useState(
-    environmentsWithSections[selectedSectionIndex].options[selectedOptionIndex],
+    environmentsWithSections[selectedSectionIndex].options
+    && environmentsWithSections[selectedSectionIndex].options[selectedOptionIndex],
   );
-  const selectedKey = `${environmentsWithSections[selectedSectionIndex].key}-${selectedEnvironment.name}`;
+  const selectedKey = `${environmentsWithSections[selectedSectionIndex].key}-${selectedEnvironment?.name}`;
   const recentEnvShown = 3;
   const totalOptionsNumber = environmentsWithSections.reduce(
-    (acc, section) => acc + section.options.length, 0);
+    (acc, section) => {
+      if (Array.isArray(section.options)) return acc + section.options.length;
+      return acc;
+    }, 0);
+
   const optionsCountMessage = filteredOptionsNumber === totalOptionsNumber
     ? `${totalOptionsNumber} options in total`
     : `${filteredOptionsNumber} of ${totalOptionsNumber} options`;
@@ -201,19 +208,24 @@ export const WithSections = () => {
     return [{ ...envObj }, ...prevEnvs];
   };
 
-  const findEnvObj = (envName, envSectionName) => {
-    return environments
-      .find(section => section.name === envSectionName)
-      .options.find(option => option.name === envName);
+  const findEnvObj = (envName: string, envSectionName: string) => {
+    const foundItem = environments
+      .find((section: EnvironmentItemProps) => section.name === envSectionName);
+    if (foundItem && foundItem.options) {
+      return foundItem.options.find(option => option.name === envName);
+    }
+    return undefined;
   };
 
   const handleEnvPress = newEnv => {
     const sectionPrefixIndex = newEnv.indexOf('-');
     const envKey = newEnv.substr(sectionPrefixIndex + 1);
     const envSectionName = newEnv.substr(0, sectionPrefixIndex);
-    const recentEnvironments = environments.find(
-      envSection => envSection.name === 'Recent',
-    ).options;
+
+    const foundItem = environments
+      .find((section: EnvironmentItemProps) => section.name === 'Recent');
+    const recentEnvironments = foundItem && foundItem.options;
+
     const envObj = findEnvObj(envKey, envSectionName);
     const updatedRecentEnvironments = getUpdatedRecentEnvs(
       envObj,
@@ -224,13 +236,13 @@ export const WithSections = () => {
       : section),
     ),
     );
-    setSelectedEnvironment({ ...envObj });
+    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
   };
 
   const envNode = (
     <Box isRow key={selectedKey}>
-      <Text color="inherit">{selectedEnvironment.name}</Text>
-      {selectedEnvironment.isSandbox ? (
+      <Text color="inherit">{selectedEnvironment?.name}</Text>
+      {selectedEnvironment?.isSandbox ? (
         <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
       ) : null}
     </Box>
@@ -276,7 +288,10 @@ export const WithSections = () => {
   );
 };
 
-export const OrgLevel = () => <EnvironmentBreadcrumb name="Globochem" />;
+
+export const OrgLevel = () => (
+  <EnvironmentBreadcrumb name="Globochem" />
+);
 
 export const DefaultOpen = () => {
   const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
@@ -294,7 +309,7 @@ export const DefaultOpen = () => {
 
   const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
-    setSelectedEnvironment({ ...envObj });
+    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
   };
 
   return (
@@ -338,7 +353,7 @@ export const ControlledMenu = () => {
 
   const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
-    setSelectedEnvironment({ ...envObj });
+    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
   };
 
   return (
@@ -366,7 +381,7 @@ export const ControlledMenu = () => {
   );
 };
 
-export const RightAlignedBadges = args => {
+export const RightAlignedBadges = (args: EnvironmentBreadcrumbProps<EnvironmentItemProps>) => {
   const items = [
     { name: 'Default' },
     { name: 'Kangaroo', isSandbox: true },
@@ -396,7 +411,7 @@ export const RightAlignedBadges = args => {
 
   const handleSelectionChange = newEnvName => {
     const envObj = findEnvObj(newEnvName);
-    setSelectedEnvironment({ ...envObj });
+    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
   };
 
   return (

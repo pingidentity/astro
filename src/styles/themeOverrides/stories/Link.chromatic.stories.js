@@ -11,8 +11,8 @@ export default {
 
 export const Default = () => (
   <div>
-    <Link href="https://uilibrary.ping-eng.com">A link</Link>
+    <Link href="https://uilibrary.ping-eng.com">Lorem ipsum</Link>
     {' '}
-    to your favorite website.
+    dolor sit amet, consectetur adipiscing elit
   </div>
 );
