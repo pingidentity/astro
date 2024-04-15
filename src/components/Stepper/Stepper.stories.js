@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Item } from 'react-stately';
+import CreationOutlineIcon from '@pingux/mdi-react/CreationOutlineIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Stepper, Text } from '../../index';
+import { useOverlayPanelState } from '../../hooks';
+import { Box, Button, OverlayPanel, OverlayProvider, PanelHeader, PanelHeaderCloseButton,
+  Stepper, Text } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
 import StepperReadme from './Stepper.mdx';
+
 
 export default {
   title: 'Components/Stepper',
@@ -57,18 +61,47 @@ export default {
 };
 
 const steps = [
-  { label: 'Label 1', children: 'This is content for step 1', name: 'step1' },
-  { label: 'Label 2', children: 'This is content for step 2', name: 'step2' },
-  { label: 'Label 3', children: 'This is content for step 3', name: 'step3' },
+  { label: 'Duis Aute', children: 'Quis autem vel eum iure reprehenderit qui in ea voluptate', title: 'Duis Aute', name: 'step1' },
+  { label: 'Lorem Ipsum', children: 'Sed ut perspiciatis unde omnis', title: 'Lorem Ipsum', name: 'step2' },
+  { label: 'Excepteur Sint', children: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam', title: 'Excepteur Sint', name: 'step3' },
 ];
+
+const sx = {
+  overlayPanel: {
+    padding: '0px',
+    transition: 'width 500ms, right 500ms',
+  },
+  stepperContainer: {
+    padding: 'lg',
+  },
+  contentContainer: {
+    marginTop: 'lg',
+    gap: 'sm',
+  },
+  buttonStyle: {
+    margin: '50px 0px',
+  },
+};
 
 export const Default = args => (
   <Stepper {...args}>
-    <Item key="step1" textValue="Step 1">
-      <Text pt="lg">This is content for step 1</Text>
+    <Item key="step1" textValue="Duis Aute">
+      <Box sx={sx.contentContainer}>
+        <Text fontSize="md" fontWeight="3">Duis Aute</Text>
+        <Text fontSize="md">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
+      </Box>
     </Item>
-    <Item key="step2" textValue="Step 2">
-      <Text pt="lg">This is content for step 2</Text>
+    <Item key="step2" textValue="Lorem Ipsum">
+      <Box sx={sx.contentContainer}>
+        <Text fontSize="md" fontWeight="3">Lorem Ipsum</Text>
+        <Text fontSize="md">Sed ut perspiciatis unde omnis</Text>
+      </Box>
+    </Item>
+    <Item key="step3" textValue="Excepteur Sint">
+      <Box sx={sx.contentContainer}>
+        <Text fontSize="md" fontWeight="3">Excepteur Sint</Text>
+        <Text fontSize="md">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
+      </Box>
     </Item>
   </Stepper>
 );
@@ -82,12 +115,6 @@ Default.parameters = {
 
 export const ControlledStepper = () => {
   const [activeStep, setActiveStep] = useState(2);
-
-  // steps = [
-  // { label: 'Label 1', children: 'This is content for step 1', name: 'step1' },
-  // { label: 'Label 2', children: 'This is content for step 2', name: 'step2' },
-  // { label: 'Label 3', children: 'This is content for step 3', name: 'step3' },
-  // ];
   return (
     <Stepper
       items={steps}
@@ -95,18 +122,76 @@ export const ControlledStepper = () => {
       onStepChange={setActiveStep}
     >
       {item => (
-        <Item key={item.name} textValue={item.name}>
-          <Text pt="lg">{item.children}</Text>
+        <Item key={item.name} textValue={item.title}>
+          <Box sx={sx.contentContainer}>
+            <Text fontSize="md" fontWeight="3">{item.title}</Text>
+            <Text fontSize="md">{item.children}</Text>
+          </Box>
         </Item>
       )}
     </Stepper>
   );
 };
 
-export const WithoutContent = () => (
-  <Stepper>
-    <Item key="step1" textValue="Step 1" />
-    <Item key="step2" textValue="Step 2" />
-    <Item key="step3" textValue="Step 3" />
-  </Stepper>
-);
+export const Panel = () => {
+  const [activeStep, setActiveStep] = useState(1);
+
+  const { state, onClose } = useOverlayPanelState();
+  const triggerRef = useRef < HTMLButtonElement > (null);
+
+  const onCloseHandler = () => onClose(state, triggerRef);
+
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <OverlayProvider>
+      <Button
+        onPress={state.open}
+        aria-expanded={state.isOpen}
+        sx={sx.buttonStyle}
+      >
+        Open Panel
+      </Button>
+      {(state.isOpen || state.isTransitioning)
+        && (
+        <OverlayPanel
+          isTransitioning={state.isTransitioning}
+          isOpen={state.isOpen}
+          state={state}
+          triggerRef={triggerRef}
+          sx={sx.overlayPanel}
+          size="full"
+        >
+          <PanelHeader
+            data={{
+              icon: CreationOutlineIcon,
+              text: 'Sed Ut Perspiciatis',
+            }}
+          >
+            <PanelHeaderCloseButton
+              onPress={onCloseHandler}
+            />
+          </PanelHeader>
+          <Stepper
+            items={steps}
+            activeStep={activeStep}
+            onStepChange={setActiveStep}
+            sx={sx.stepperContainer}
+          >
+            {item => (
+              <Item
+                key={item.name}
+                textValue={item.title}
+              >
+                <Box sx={sx.contentContainer}>
+                  <Text fontSize="md" fontWeight="3">{item.title}</Text>
+                  <Text fontSize="md">{item.children}</Text>
+                </Box>
+              </Item>
+            )}
+          </Stepper>
+        </OverlayPanel>
+        )}
+    </OverlayProvider>
+  );
+};
