@@ -4,12 +4,10 @@ import { useFilter } from '@react-aria/i18n';
 import { action } from '@storybook/addon-actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import {
-  ComboBoxField,
+import { ComboBoxField,
   Item,
   OverlayProvider,
-  Section,
-} from '../../index';
+  Section } from '../../index';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 

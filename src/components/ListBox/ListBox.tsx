@@ -2,8 +2,8 @@ import React, { forwardRef, useImperativeHandle, useMemo } from 'react';
 import { mergeProps } from 'react-aria';
 import { useCollator } from '@react-aria/i18n';
 import { useListBox } from '@react-aria/listbox';
-import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
-import { ListLayout } from '@react-stately/layout';
+import { ListLayout } from 'listbox-layout';
+import { Virtualizer, VirtualizerItem } from 'listbox-virtualizer';
 
 import { useLocalOrForwardRef } from '../../hooks';
 import { ListBoxProps } from '../../types';
