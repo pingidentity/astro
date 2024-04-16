@@ -200,17 +200,15 @@ const MultivaluesField = forwardRef((props, ref) => {
             selectionManager.toggleSelection(selectionManager.focusedKey);
             setFilterString('');
           }
+        } else if (hasCustomValue && !selectionManager.focusedKey) {
+          const key = e.target.value;
+          if (key === '') { return; }
+          addNewBadgeFromInput(e.target.value);
         } else if (hasCustomValue && filteredItems.length === 1) {
           selectTheOnlyFilteredItem();
         } else if (!hasCustomValue) {
           setFilterString('');
           close();
-        } else if (hasCustomValue) {
-          const key = e.target.value;
-          if (key === '') {
-            return;
-          }
-          addNewBadgeFromInput(e.target.value);
         }
         break;
       }
