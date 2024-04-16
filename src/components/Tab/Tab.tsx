@@ -1,8 +1,8 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { mergeProps, useFocusRing, useTab } from 'react-aria';
 import { Item as Tab } from 'react-stately';
 import { Pressable, useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
+import { TabListState } from '@react-stately/tabs';
 
 import {
   Box,
@@ -10,7 +10,8 @@ import {
   Tooltip,
   TooltipTrigger,
 } from '../..';
-import { usePropWarning, useStatusClasses } from '../../hooks';
+import { useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
+import { TabProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import TabPicker from '../TabPicker';
@@ -21,7 +22,7 @@ import { TabsContext } from '../Tabs';
  * Typically used as a child of the Tabs component.
  */
 
-export const CollectionTab = forwardRef((props, ref) => {
+export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
   const {
     className,
     item,
@@ -31,21 +32,11 @@ export const CollectionTab = forwardRef((props, ref) => {
     slots,
     tooltipTriggerProps,
   } = props;
+
   const { key, rendered, props: itemProps } = item;
 
-  const {
-    icon,
-    isDisabled: tabDisabled,
-    separator,
-    tabLabelProps,
-    tabLineProps,
-    content,
-    titleAttr,
-    title,
-    ...otherItemProps
-  } = itemProps;
-  const state = useContext(TabsContext);
-  const isDisabled = tabsDisabled || tabDisabled || state.disabledKeys.has(key);
+  const state = useContext(TabsContext) as TabListState<object>;
+  const isDisabled = tabsDisabled || itemProps?.isDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectedKey === key;
   const { isFocusVisible, focusProps } = useFocusRing();
   const { hoverProps, isHovered } = useHover({});
@@ -58,10 +49,8 @@ export const CollectionTab = forwardRef((props, ref) => {
     isSelected,
   });
 
-  const tabRef = useRef();
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => tabRef.current);
+  const tabRef = useLocalOrForwardRef<HTMLElement>(ref);
   const { tabProps } = useTab({ key, isDisabled }, state, tabRef);
 
   const tab = (
@@ -70,32 +59,36 @@ export const CollectionTab = forwardRef((props, ref) => {
       <Box
         className={classNames}
         variant="tab"
+        // title={itemProps?.titleAttr || undefined}
         {...mergeProps(focusProps, hoverProps, tabProps)}
         {...getPendoID('Tab')}
-        {...otherItemProps}
+        // {...otherItemProps}
         ref={tabRef}
-        title={titleAttr || undefined}
+        {...itemProps}
+        role="tab"
       >
-        {icon}
-        <Text variant="tabLabel" {...tabLabelProps}>
-          {rendered}
-        </Text>
-        {isSelected && !isDisabled && <TabLine {...tabLineProps} />}
+        <>
+          {itemProps?.icon}
+          <Text variant="tabLabel" {...itemProps?.tabLabelProps}>
+            {rendered}
+          </Text>
+          {isSelected && !isDisabled && <TabLine {...itemProps?.tabLineProps} />}
+        </>
       </Box>
       {slots?.afterTab}
     </Box>
   );
 
-  if (mode === 'list' && itemProps.list) {
+  if (mode === 'list' && itemProps?.list) {
     return (
       <TabPicker
         ref={tabRef}
         className={classNames}
-        items={itemProps.list}
+        items={itemProps?.list}
         state={state}
         item={item}
         {...mergeProps(focusProps, hoverProps, tabProps)}
-        {...otherItemProps}
+        {...itemProps}
       />
     );
   }
@@ -103,15 +96,15 @@ export const CollectionTab = forwardRef((props, ref) => {
   if (mode === 'tooltip') {
     return (
       <>
-        {separator}
+        {itemProps?.separator}
         <TooltipTrigger {...tooltipTriggerProps} isOpen={isHovered || isFocusVisible}>
           <Pressable>
-            <span variant="quiet">
+            <span>
               {tab}
             </span>
           </Pressable>
           <Tooltip>
-            {itemProps.textValue || itemProps.title}
+            {itemProps?.textValue || itemProps?.title}
           </Tooltip>
         </TooltipTrigger>
       </>
@@ -121,34 +114,6 @@ export const CollectionTab = forwardRef((props, ref) => {
 });
 
 CollectionTab.displayName = 'CollectionTab';
-CollectionTab.propTypes = {
-  isDisabled: PropTypes.bool,
-  item: PropTypes.shape({
-    key: PropTypes.string,
-    props: PropTypes.shape({
-      icon: PropTypes.shape({}),
-      isDisabled: PropTypes.bool,
-      textValue: PropTypes.string,
-      tabLineProps: PropTypes.shape({}),
-      tabLabelProps: PropTypes.shape({}),
-      content: PropTypes.shape({}),
-      titleAttr: PropTypes.string,
-      title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.object]),
-      separator: PropTypes.oneOfType([PropTypes.element, PropTypes.bool]),
-      list: PropTypes.arrayOf(PropTypes.shape({})),
-    }),
-    rendered: PropTypes.node,
-
-  }),
-  mode: PropTypes.oneOf(['default', 'tooltip', 'list']),
-  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-  tooltipTriggerProps: PropTypes.shape({}),
-  slots: PropTypes.shape({
-    beforeTab: PropTypes.node,
-    afterTab: PropTypes.node,
-  }),
-
-};
 
 export const TabLine = props => <Box role="presentation" variant="tabLine" {...props} />;
 

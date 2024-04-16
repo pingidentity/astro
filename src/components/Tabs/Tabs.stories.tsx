@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LockIcon from '@pingux/mdi-react/LockIcon';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -10,6 +11,7 @@ import {
   Tabs,
   Text,
 } from '../../index';
+import { TabListItemProps, TabsProps } from '../../types';
 
 import TabsReadme from './Tabs.mdx';
 
@@ -55,15 +57,15 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-const tabs = [
+const tabs: TabListItemProps[] = [
   { name: 'Tab 1', children: 'Tab 1 body' },
   { name: 'Tab 2', children: 'Tab 2 body' },
   { name: 'Tab 3', children: 'Tab 3 body' },
 ];
 
-export const Uncontrolled = args => (
+export const Uncontrolled: StoryFn<TabsProps> = args => (
   <Tabs items={tabs} {...args}>
     <Tab key="tab1" title="Tab 1">
       <Text>This is content for Tab 1</Text>
@@ -74,7 +76,7 @@ export const Uncontrolled = args => (
   </Tabs>
 );
 
-export const Controlled = () => {
+export const Controlled: StoryFn = () => {
   const [currentTab, setCurrentTab] = useState(tabs[0].name);
   return (
     <Tabs
@@ -82,7 +84,7 @@ export const Controlled = () => {
       onSelectionChange={setCurrentTab}
       items={tabs}
     >
-      {item => (
+      {(item: TabListItemProps) => (
         <Tab key={item.name} title={item.name} textValue={item.name}>
           {item.children}
         </Tab>
@@ -91,10 +93,10 @@ export const Controlled = () => {
   );
 };
 
-export const WithTooltips = () => {
+export const WithTooltips: StoryFn = () => {
   return (
     <Tabs mode="tooltip" items={tabs}>
-      {item => (
+      {(item: TabListItemProps) => (
         <Tab key={item.name} title={item.name} textValue={item.name}>
           {item.children}
         </Tab>
@@ -103,9 +105,9 @@ export const WithTooltips = () => {
   );
 };
 
-export const Centered = () => (
+export const Centered: StoryFn = () => (
   <Tabs tabListProps={{ justifyContent: 'center' }} items={tabs}>
-    {item => (
+    {(item: TabListItemProps) => (
       <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
@@ -113,9 +115,9 @@ export const Centered = () => (
   </Tabs>
 );
 
-export const DisabledSingleTab = () => (
+export const DisabledSingleTab: StoryFn = () => (
   <Tabs items={tabs} disabledKeys={['Tab 2']}>
-    {item => (
+    {(item: TabListItemProps) => (
       <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
@@ -123,9 +125,9 @@ export const DisabledSingleTab = () => (
   </Tabs>
 );
 
-export const DisabledAllTabs = () => (
+export const DisabledAllTabs: StoryFn = () => (
   <Tabs isDisabled items={tabs}>
-    {item => (
+    {(item: TabListItemProps) => (
       <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
@@ -133,9 +135,9 @@ export const DisabledAllTabs = () => (
   </Tabs>
 );
 
-export const CustomTabLine = () => (
+export const CustomTabLine: StoryFn = () => (
   <Tabs items={tabs}>
-    {item => (
+    {(item: TabListItemProps) => (
       <Tab key={item.name} title={item.name} tabLineProps={{ bg: 'red' }}>
         {item.children}
       </Tab>
@@ -143,9 +145,9 @@ export const CustomTabLine = () => (
   </Tabs>
 );
 
-export const TabPanelProps = () => (
+export const TabPanelProps: StoryFn = () => (
   <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
-    {item => (
+    {(item: TabListItemProps) => (
       <Tab key={item.name} title={item.name}>
         {item.children}
       </Tab>
@@ -153,8 +155,7 @@ export const TabPanelProps = () => (
   </Tabs>
 );
 
-
-export const ContentSlots = () => {
+export const ContentSlots: StoryFn = () => {
   const beforeTabNode = (
     <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} title={{ name: 'Lock Icon' }} />
   );
@@ -195,7 +196,7 @@ export const ContentSlots = () => {
   );
 };
 
-export const WithList = () => {
+export const WithList: StoryFn = () => {
   const allTabs = [
     ...tabs,
     {
@@ -209,7 +210,7 @@ export const WithList = () => {
 
   return (
     <Tabs items={allTabs} mode="list">
-      {item => (
+      {(item: TabListItemProps) => (
         <Tab key={item.name} title={item.name} {...item}>
           {item.children}
         </Tab>
