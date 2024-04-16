@@ -702,6 +702,29 @@ test('should clear the input text onBlur and enter when a single filter result i
   expect(input).toHaveValue('');
 });
 
+test('in non-restrictive mode the partial string values should be accepted', () => {
+  const itemsWithDuplicatePartialString = [
+    { id: 1, name: 'echo:read', key: 'echo:read' },
+    { id: 2, name: 'echo:write', key: 'echo:write' },
+    { id: 3, name: 'echo:delete', key: 'echo:delete' },
+  ];
+  getComponent({ mode: 'non-restrictive', items: itemsWithDuplicatePartialString });
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue('');
+
+  const value = 'echo:r';
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+  expect(input).toHaveValue('');
+  expect(screen.queryByText(value)).toBeInTheDocument();
+
+  userEvent.type(input, value);
+  userEvent.type(input, '{enter}');
+  expect(input).not.toHaveValue('');
+  expect(input).toHaveValue(value);
+});
+
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (
