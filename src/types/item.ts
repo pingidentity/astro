@@ -1,4 +1,4 @@
-import { ElementType, Key } from 'react';
+import { ElementType, Key, ReactNode } from 'react';
 import type { ItemProps } from '@react-types/shared';
 
 import { IconTypeExtended } from './icon';
@@ -12,13 +12,15 @@ declare module '@react-types/shared' {
   // eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars
   interface ItemProps<T> extends StyleProps, DOMAttributes {
     /** The rendered label for the item. */
-    label?: string | React.ReactNode;
+    label?: string | ReactNode;
     /** Props for the accordion item content element. */
     regionProps?: StyleProps,
     /** Props for the accordion item content element. */
     containerProps?: StyleProps,
     /** Props for the accordion item button element. */
     buttonProps?: StyleProps,
+    /** Props for the tab line element. */
+    tabLineProps?: StyleProps,
     /** Whether the item has a separator */
     isSeparator?: boolean,
     /** Whether the item is pressed */
@@ -34,7 +36,9 @@ declare module '@react-types/shared' {
     /** Key for the item. */
     key?: Key,
     slots?: {
-      postHeading: React.ReactNode
+      postHeading?: ReactNode,
+      afterTab?: ReactNode,
+      beforeTab?: ReactNode,
     },
     icon?: IconTypeExtended
     /** isCurrent for the Breadcrumbs item. */
