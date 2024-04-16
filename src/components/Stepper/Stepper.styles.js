@@ -10,6 +10,7 @@ const tabs = {
   borderBottom: 'none',
   mb: 0,
   width: '100%',
+  justifyContent: 'center',
 };
 
 const tab = {

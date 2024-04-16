@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.57.0",
+  "version": "2.57.0-alpha.8",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -105,6 +105,8 @@
     "classnames": "^2.2.6",
     "countries-list": "^2.6.1",
     "emotion-normalize": "^11.0.1",
+    "listbox-layout": "npm:@react-stately/layout@3.9.0",
+    "listbox-virtualizer": "npm:@react-aria/virtualizer@3.6.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "pluralize": "^8.0.0",

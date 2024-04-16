@@ -3,6 +3,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 
+import { TabListItemProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Tab from '../Tab';
@@ -16,29 +17,33 @@ const emotionCache = createCache({ key: 'tabs-test' });
 emotionCache.compat = true;
 
 const testId = 'testId';
-const defaultTabs = [
-  { name: 'Tab 1', children: 'Tab 1 body' },
-  { name: 'Tab 2', children: 'Tab 2 body' },
-  { name: 'Tab 3', children: 'Tab 3 body' },
+const defaultTabs: TabListItemProps[] = [
+  { name: 'Tab 1', children: 'Tab 1 body', props: {} },
+  { name: 'Tab 2', children: 'Tab 2 body', props: {} },
+  { name: 'Tab 3', children: 'Tab 3 body', props: {} },
 ];
-const tabsWithList = [
-  { name: 'Tab 1', children: 'Tab 1 body' },
+
+const tabsWithList: TabListItemProps[] = [
+  { name: 'Tab 1', children: 'Tab 1 body', props: {} },
   {
     name: 'Tab 2',
     list: [
       { key: 'tab1list', name: 'Tab 1 list', children: 'Tab 1 from list', role: 'menuitemradio' },
       { key: 'tab2list', name: 'Tab 2 list', children: 'Tab 2 from list', role: 'menuitemradio' },
     ],
+    props: {},
   },
 ];
+
 const defaultProps = {
   'data-testid': testId,
   defaultSelectedKey: defaultTabs[0].name,
 };
+
 const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}) => renderFn((
   <CacheProvider value={emotionCache}>
     <Tabs {...defaultProps} {...props}>
-      {tabs.map(({ name, props: tabProps, children }) => (
+      {tabs.map(({ name, children, props: tabProps }) => (
         <Tab key={name} title={name} {...tabProps}>
           {children}
         </Tab>
@@ -50,7 +55,7 @@ const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}
 const getComponentWithDynamicItems = props => render((
   <CacheProvider value={emotionCache}>
     <Tabs {...props}>
-      {({ name, children, ...tabProps }) => (
+      {({ name, children, ...tabProps }: TabListItemProps) => (
         <Tab key={name} title={name} {...tabProps}>
           {children}
         </Tab>
@@ -65,13 +70,16 @@ const getTabs = () => {
   return { tabs, tab0, tab1, tab2 };
 };
 
-const testTabPanel = expectedTabIndex => defaultTabs.forEach(({ children }, index) => (
-  index === expectedTabIndex
-    ? expect(screen.queryByText(children)).toBeInTheDocument()
-    : expect(screen.queryByText(children)).not.toBeInTheDocument()
-));
+const testTabPanel = expectedTabIndex => defaultTabs.forEach(({ children }, index) => {
+  if (typeof children === 'string') {
+    return index === expectedTabIndex
+      ? expect(screen.queryByText(children)).toBeInTheDocument()
+      : expect(screen.queryByText(children)).not.toBeInTheDocument();
+  }
+  return null;
+});
 
-const testSingleTab = (tabs, tab, thisTest, testParams = []) => {
+const testSingleTab = (tabs, tab, thisTest, testParams: unknown[] = []) => {
   tabs.forEach(t => {
     if (t === tab) {
       expect(t)[thisTest](...testParams);
@@ -187,9 +195,11 @@ test('disabled all tabs', () => {
 
   // Tabs cannot be DOM disabled so must check visuals
   defaultTabs.forEach(tab => {
-    const tabText = screen.getByText(tab.name);
-    const { parentElement } = tabText;
-    expect(parentElement).toHaveClass('is-disabled');
+    if (tab.name) {
+      const tabText = screen.getByText(tab.name);
+      const { parentElement } = tabText;
+      expect(parentElement).toHaveClass('is-disabled');
+    }
   });
   expect(tabLine).not.toBeInTheDocument();
 
@@ -239,7 +249,14 @@ test('controlled tabs', () => {
   // Ensure the tab DOES change when selectedKey is updated
   userEvent.click(tab0);
   expect(onSelectionChange).toHaveBeenCalledWith(defaultTabs[0].name);
-  getComponent({ selectedKey: defaultTabs[0].name, onSelectionChange }, { renderFn: rerender });
+
+  getComponent({ selectedKey: defaultTabs[0].name, onSelectionChange },
+    { renderFn: rerender } as {
+      tabs: TabListItemProps[],
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
   testSingleTab(tabs, tab0, 'toContainElement', [screen.queryByRole('presentation')]);
   testTabPanel(0);
 });
@@ -256,7 +273,12 @@ test('tab line props', () => {
 
   // Expect the tab line to be updated with a blue background
   newTabs[0].props = { tabLineProps: { bg: 'blue' } };
-  getComponent({}, { tabs: newTabs, renderFn: rerender });
+  getComponent({}, { tabs: newTabs, renderFn: rerender } as {
+    tabs: TabListItemProps[],
+    renderFn: (ui: React.ReactElement<unknown, string |
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      React.JSXElementConstructor<unknown>>) => any
+  });
   testSingleTab(tabs, tab0, 'toContainElement', [tabLine]);
 });
 
@@ -285,7 +307,7 @@ test('tooltip renders on tab\'s hover in `tooltip` mode', async () => {
 
 test('tabs without selected keys show null tab panel content', () => {
   getComponent({ defaultSelectedKey: undefined });
-  expect(screen.queryByRole('tabpanel')).not.toHaveTextContent();
+  expect(screen.queryByRole('tabpanel')).not.toHaveTextContent('');
 });
 
 test('hover tab style', () => {
@@ -332,17 +354,21 @@ test('will render tab with list if provided', async () => {
 
   const { tab1: { parentElement: menuBtn } } = getTabs();
 
-  userEvent.click(menuBtn);
+  if (menuBtn) userEvent.click(menuBtn);
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   testTabPanel(0);
 
   const menuItems = screen.queryAllByRole('menuitemradio');
-  expect(menuItems).toHaveLength(tabsWithList[1].list.length);
+  if (tabsWithList[1].list) {
+    expect(menuItems).toHaveLength(tabsWithList[1].list.length);
+  }
   expect(menuItems[0]).not.toHaveFocus();
 
   userEvent.click(menuItems[0]);
-  const { children: firstListItemContent } = tabsWithList[1].list[0];
-  expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
+  if (tabsWithList[1].list) {
+    const { children: firstListItemContent } = tabsWithList[1].list[0];
+    expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
+  }
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
 
@@ -363,11 +389,15 @@ test('tab list is accessible via keyboard', () => {
   testTabPanel(0);
 
   const menuItems = screen.queryAllByRole('menuitemradio');
-  expect(menuItems).toHaveLength(tabsWithList[1].list.length);
+  if (tabsWithList[1].list) {
+    expect(menuItems).toHaveLength(tabsWithList[1].list.length);
+  }
   expect(menuItems[0]).toHaveFocus();
 
   fireEvent.keyDown(menuItems[0], { key: 'Enter', code: 'Enter' });
-  const { children: firstListItemContent } = tabsWithList[1].list[0];
-  expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
+  if (tabsWithList[1].list) {
+    const { children: firstListItemContent } = tabsWithList[1].list[0];
+    expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
+  }
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
