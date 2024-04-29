@@ -12,9 +12,9 @@ import { menuPropTypes } from '../../Menu/menuAttributes';
  * specs easy. Most props available to the Menu component are available to ListItemMenu.
 */
 
-const ListViewItemMenu = forwardRef(({ children, ...others }, ref) => (
+const ListViewItemMenu = forwardRef(({ children, iconButtonProps, ...others }, ref) => (
   <PopoverMenu>
-    <IconButton aria-label="more" ref={ref}>
+    <IconButton aria-label="more" ref={ref} {...iconButtonProps}>
       <Icon icon={MoreVertIcon} size="md" />
     </IconButton>
     <Menu {...others}>
