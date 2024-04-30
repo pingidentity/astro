@@ -29,6 +29,7 @@ export * from './navBar';
 export * from './overlayPanel';
 export * from './popoverContainer';
 export * from './popoverMenu';
+export * from './progressBar';
 export * from './requirementsList';
 export * from './rockerButtonGroup';
 export * from './scrollBox';

@@ -3,24 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [2.58.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.57.0...@pingux/astro@2.58.0) (2024-04-26)
-
-
-### Bug Fixes
-
-* [UIP-6856] Inconsistent ComboBoxField ListItem sizing ([0e349b3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0e349b3c882a3df1ffa27782c40b996b1ca826b7))
-
-
-### Features
-
-* [UIP-6789] MultivaluesField non restrictive mode ([91532b9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/91532b9752668bcf8a7d765b600990423f118ed7))
-* [UIP-6822] Tabs convert to typescript ([66d7111](https://gitlab.corp.pingidentity.com/ux/pingux/commit/66d71114fc66508c641d6f8e65e4a6d382fcea2b))
-* [UIP-6843] Stepper update to match specs ([03574ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/03574ae729cc2ae4e7d3cfd825db8e8e556b4fc1))
-
-
-
-
-
 # [2.57.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.56.0...@pingux/astro@2.57.0) (2024-04-10)
 
 

@@ -27,6 +27,7 @@ import navBar from '../../components/NavBar/NavBar.styles';
 import overlayPanel from '../../components/OverlayPanel/OverlayPanel.styles';
 import panelHeader from '../../components/PanelHeader/PanelHeader.styles';
 import popoverMenu from '../../components/PopoverMenu/PopoverMenu.styles';
+import progressBar from '../../components/ProgressBar/ProgressBar.styles';
 import rockerButton from '../../components/RockerButton/RockerButton.styles';
 import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
 import separator from '../../components/Separator/Separator.styles';
@@ -67,6 +68,7 @@ export default {
   overlayPanel,
   popoverMenu,
   panelHeader,
+  progressBar,
   rockerButton,
   scrollBox,
   separator,

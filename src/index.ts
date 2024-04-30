@@ -124,6 +124,7 @@ export * from './components/PasswordField';
 export { default as PopoverContainer } from './components/PopoverContainer';
 export * from './components/PopoverContainer';
 export { default as PopoverMenu } from './components/PopoverMenu';
+export { default as ProgressBar } from './components/ProgressBar';
 export { default as Radio } from './components/Radio';
 export * from './components/Radio';
 export { default as RadioField } from './components/RadioField';
