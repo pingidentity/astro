@@ -14,11 +14,16 @@ export default {
       },
     },
   },
-  argTypes: menuArgTypes,
+  argTypes: {
+    ...menuArgTypes,
+    iconButtonProps: {
+      description: 'object that gets spread into the IconButton component',
+    },
+  },
 };
 
 export const Default = () => (
-  <ListViewItemMenu>
+  <ListViewItemMenu iconButtonProps={{ 'data-id': 'list-item-menu' }}>
     <Item key="enable">Enable user</Item>
     <Item key="disable">Disable user</Item>
     <Item key="delete">Delete user</Item>

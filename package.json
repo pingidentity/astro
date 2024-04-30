@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.58.0",
+  "version": "2.59.0-alpha.1",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -65,6 +65,7 @@
     "@react-aria/listbox": "~3.10.2",
     "@react-aria/live-announcer": "~3.1.1",
     "@react-aria/overlays": "^3.7.0",
+    "@react-aria/progress": "^3.4.9",
     "@react-aria/selection": "~3.10.1",
     "@react-aria/table": "^3.9.0",
     "@react-aria/tabs": "^3.8.3",
@@ -73,7 +74,6 @@
     "@react-aria/visually-hidden": "~3.6.0",
     "@react-spectrum/utils": "~3.6.1",
     "@react-stately/calendar": "3.0.1",
-    "@react-stately/collections": "^3.10.5",
     "@react-stately/color": "~3.1.1",
     "@react-stately/datepicker": "^3.0.1",
     "@react-stately/dnd": "^3.2.6",
@@ -139,6 +139,7 @@
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/cache": "^11.4.0",
     "@emotion/eslint-plugin": "^11.2.0",
+    "@react-stately/collections": "^3.10.2",
     "@storybook/addon-a11y": "^7.1.0",
     "@storybook/addon-console": "^2.0.0",
     "@storybook/addon-docs": "^7.1.0",
