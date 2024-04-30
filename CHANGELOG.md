@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.59.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.58.0...@pingux/astro@2.59.0) (2024-04-30)
+
+
+### Features
+
+* [UIP-6764] Progressbar component ([15b6999](https://gitlab.corp.pingidentity.com/ux/pingux/commit/15b6999c5cdadfabf892f8798cfcf186aa97f86a))
+* [UIP-6879] add iconButtonProps to ListViewItemMenu ([a1f60fd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a1f60fda24c9f8574528bae5a2ca297b2934cb18))
+
+
+
+
+
 # [2.57.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.56.0...@pingux/astro@2.57.0) (2024-04-10)
 
 
