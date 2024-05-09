@@ -2,15 +2,15 @@ import React, { forwardRef } from 'react';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
-import Highlight, { defaultProps, Prism } from 'prism-react-renderer';
-import PropTypes from 'prop-types';
+import Highlight, { defaultProps, Language, Prism } from 'prism-react-renderer';
 
 import { Box, CopyText } from '../..';
 import { useStatusClasses } from '../../hooks';
+import { CodeViewProps, PrismProps, PrismThemeProps } from '../../types/codeView';
 
 import styles from './CodeView.styles';
 
-const CodeView = forwardRef((props, ref) => {
+const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const {
     children,
     className: outerClassName,
@@ -34,27 +34,29 @@ const CodeView = forwardRef((props, ref) => {
   // Get the width for the line number element depending on the total amount of lines
   const getLineNoWidth = tokens => tokens.length.toString().length * 12;
 
+  const code = children?.trim() || '' as string;
+
   const content = (
     <Highlight
       {...defaultProps}
-      theme={styles.theme}
-      code={children?.trim() || ''}
-      language={language}
-      Prism={customPrism || Prism}
+      theme={styles.theme as PrismThemeProps}
+      code={code}
+      language={language as Language}
+      Prism={customPrism as PrismProps || Prism as PrismProps}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Box as="pre" className={className} style={style}>
+        <Box as="pre" className={className} style={style} tabIndex="0">
           {tokens.map((line, i) => (
             <Box isRow {...getLineProps({ line, key: i })}>
               {hasLineNumbers
                 && (
-                <Box
-                  as="span"
-                  variant="codeView.lineNo"
-                  sx={{ minWidth: getLineNoWidth(tokens) }}
-                >
-                  {i + 1}
-                </Box>
+                  <Box
+                    as="span"
+                    variant="codeView.lineNo"
+                    sx={{ minWidth: getLineNoWidth(tokens) }}
+                  >
+                    {i + 1}
+                  </Box>
                 )}
               {line.map((token, key) => (
                 <span {...getTokenProps({ token, key })} />
@@ -71,9 +73,9 @@ const CodeView = forwardRef((props, ref) => {
       <Box
         ref={ref}
         variant="codeView.wrapper"
-        tabIndex={0}
         className={classNames}
         {...mergeProps(focusProps, hoverProps, others)}
+        role="none"
       >
         {content}
       </Box>
@@ -96,24 +98,6 @@ const CodeView = forwardRef((props, ref) => {
     </CopyText>
   );
 });
-
-CodeView.propTypes = {
-  /** Whether the CodeView displays line numbers. */
-  hasLineNumbers: PropTypes.bool,
-  /** Whether the CodeView hides the copy button.  */
-  hasNoCopyButton: PropTypes.bool,
-  /**
-   * Which programming language the CodeView should use for highlighting. A list of default languages is listed [here](https://github.com/FormidableLabs/prism-react-renderer/blob/master/packages/generate-prism-languages/index.ts#L9-L23).
-   *
-   *
-   * Additional languages may be added, see
-   * [CodeView with additional language](/?path=/docs/components-codeview--with-additional-language)
-   * for more information.
-  */
-  language: PropTypes.string,
-  /* Prism object for using instead of Prism from "react-prism-renderer" */
-  Prism: PropTypes.shape({}),
-};
 
 CodeView.defaultProps = {
   language: 'json',

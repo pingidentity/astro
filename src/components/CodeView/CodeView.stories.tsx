@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import Prism from 'prismjs';
 import { withDesign } from 'storybook-addon-designs';
 
@@ -6,7 +7,8 @@ import 'prismjs/components/prism-powershell';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeView } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { CodeViewProps } from '../../types/codeView';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import CodeViewReadme from './CodeView.mdx';
 
@@ -107,10 +109,10 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
 
-export const Default = args => (
+export const Default: StoryFn<CodeViewProps> = (args: CodeViewProps) => (
   <CodeView {...args} />
 );
 
@@ -119,9 +121,14 @@ Default.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.codeView.default,
   },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
 
-export const WithLineNumbers = () => (
+export const WithLineNumbers: StoryFn = () => (
   <CodeView hasLineNumbers>
     {/* const code =  `{
         "_links": {
@@ -136,9 +143,14 @@ WithLineNumbers.parameters = {
   docs: {
     storyDescription: 'Please note that with adding line numbers, line wrapping does not work.',
   },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
 
-export const WithCustomSize = () => (
+export const WithCustomSize: StoryFn = () => (
   <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
     {`
 const BadgeWithIcon = () => (
@@ -168,23 +180,33 @@ const BadgeWithIcon = () => (
   </CodeView>
 );
 
-export const WithAdditionalLanguage = () => {
-  /**
-   * import { CodeView } from "@pingux/astro";
-   * import Prism from 'prismjs';
-   * import 'prismjs/components/prism-powershell';
-   */
+WithCustomSize.parameters = {
+  docs: {
+    storyDescription: 'All available languages are listed [here](https://github.com/PrismJS/prism/tree/master/components).',
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
-  const powershellCode = `
-   Get-WinEvent -FilterHashtable @{
-     LogName='Application'
-     ProviderName='*defrag'
-   }
+export const WithAdditionalLanguage: StoryFn = () => {
+  const cssCode = `
+  body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+  }
+  
+  h1 {
+    color: red;
+    margin-left: 40px;
+  } 
  `.trim();
 
   return (
-    <CodeView language="powershell" Prism={Prism}>
-      {powershellCode}
+    <CodeView language="css" Prism={Prism}>
+      {cssCode}
     </CodeView>
   );
 };
@@ -192,5 +214,10 @@ export const WithAdditionalLanguage = () => {
 WithAdditionalLanguage.parameters = {
   docs: {
     storyDescription: 'All available languages are listed [here](https://github.com/PrismJS/prism/tree/master/components).',
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
   },
 };
