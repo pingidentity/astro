@@ -26,10 +26,10 @@ export default {
 } as Meta;
 
 export const Default: StoryFn<SeparatorProps> = ({ ...args }) => (
-  <Box height="60px" alignItems="center">
-    Content above
-    <Separator {...args} />
-    Content below
+  <Box width="400px">
+    Lorem ipsum dolor sit amet
+    <Separator {...args} sx={{ my: 'md' }} />
+    Lorem ipsum dolor sit amet
   </Box>
 );
 
@@ -42,8 +42,10 @@ Default.parameters = {
 
 export const verticalSeparator = () => (
   <Box height="50px" flexDirection="row" alignItems="center">
-    Content left
-    <Separator orientation="vertical" />
-    Content right
+    Lorem ipsum
+    <Separator orientation="vertical" sx={{ mx: '15px !important' }} />
+    Lorem ipsum
+    <Separator orientation="vertical" sx={{ mx: '15px !important' }} />
+    Lorem ipsum
   </Box>
 );
