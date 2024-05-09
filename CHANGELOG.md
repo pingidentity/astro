@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.61.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.60.0...@pingux/astro@2.61.0) (2024-05-09)
+
+
+### Features
+
+* [UIP-6910] Create new recipe for access feedback ([c9ddcc9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c9ddcc9b2bf6a9f7d7cc5e15538f2558ec706f25))
+
+
+
+
+
 # [2.60.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.59.0...@pingux/astro@2.60.0) (2024-05-09)
 
 
