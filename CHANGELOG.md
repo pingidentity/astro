@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.60.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.59.0...@pingux/astro@2.60.0) (2024-05-09)
+
+
+### Features
+
+* [UIP-6818] CodeView convert to TypeScript ([1c0465b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1c0465bb83536f62652fe8a6c60c7ae671b27210))
+* [UIP-6851] Separator update to match specs ([fa7fd4e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fa7fd4e6057550bc95eb70fb3119d51345e6a44e))
+
+
+
+
+
 # [2.59.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.58.0...@pingux/astro@2.59.0) (2024-04-30)
 
 
