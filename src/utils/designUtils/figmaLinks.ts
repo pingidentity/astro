@@ -163,4 +163,7 @@ export const FIGMA_LINKS = {
   listAndPanel: {
     listAndPanel: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=15251-33924',
   },
+  noAccess: {
+    default: 'https://www.figma.com/file/S1tRCG90PVgCJRCyDwxkBk/429-Error?type=design&node-id=9-940&mode=design&t=Z6pZWCsrvY0g6b2q-0',
+  },
 };
