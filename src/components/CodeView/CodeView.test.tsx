@@ -2,13 +2,13 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { CodeView } from '../..';
+import { CodeViewProps } from '../../types/codeView';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-code-sample';
 
 const originalClipboard = { ...global.navigator.clipboard };
-const originalExecCommand = global.document.execCommand;
 
 const defaultProps = {
   'data-testid': testId,
@@ -23,7 +23,7 @@ export const Default = args => (
 );
 `;
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: CodeViewProps = {}) => render((
   <CodeView {...defaultProps} {...props}>
     {textValue}
   </CodeView>
@@ -33,15 +33,22 @@ beforeEach(() => {
   const mockClipboard = {
     writeText: jest.fn(),
   };
-  global.navigator.clipboard = mockClipboard;
+  Object.defineProperty(global.navigator, 'clipboard', {
+    writable: true,
+    value: mockClipboard,
+  });
   global.document.execCommand = jest.fn();
-  global.document.execCommand.mockReturnValue(true);
+  jest.spyOn(document, 'execCommand').mockReturnValue(true);
 });
 
 afterEach(() => {
   jest.resetAllMocks();
-  global.navigator.clipboard = originalClipboard;
-  global.document.execCommand = originalExecCommand;
+
+  Object.defineProperty(global.navigator, 'clipboard', {
+    writable: true,
+    value: originalClipboard,
+  });
+  jest.spyOn(document, 'execCommand').mockReturnValue(true);
 });
 
 // Needs to be added to each components test file
@@ -68,6 +75,7 @@ test('copy button is focused and renders tooltip via keyboard', () => {
   getComponent();
   const copyBtn = screen.getByLabelText('copy to clipboard');
   expect(copyBtn).not.toHaveFocus();
+  userEvent.tab();
   userEvent.tab();
   expect(copyBtn).toHaveFocus();
   expect(copyBtn).toHaveClass('is-focused');
@@ -109,4 +117,29 @@ test('after button click, the tooltip renders with the text "Copied!"', async ()
   await act(async () => userEvent.click(button));
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+});
+
+test('renders CodeView component with default language', () => {
+  const children = ' ';
+  getComponent({ children });
+  const codeViewElement = screen.getByTestId(testId).querySelector('pre');
+  expect(codeViewElement).toBeInTheDocument();
+  expect(codeViewElement).toHaveClass('language-json');
+});
+
+test('renders CodeView component with highlighted code', () => {
+  const children = `
+    export const Default = args => (
+      <>
+        <Text sx={{ fontWeight: 2 }}>JSON</Text>
+        <CodeView {...args} />
+      </>
+    );
+  `;
+  const language = 'jsx';
+  getComponent({ children, language });
+
+  const codeViewElement = screen.getByTestId(testId).querySelector('pre');
+  expect(codeViewElement).toBeInTheDocument();
+  expect(codeViewElement).toHaveClass(`language-${language}`);
 });

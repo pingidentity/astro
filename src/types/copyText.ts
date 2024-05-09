@@ -9,6 +9,8 @@ import { TooltipTriggerProps } from './tooltipTrigger';
 export interface TooltipWrapperProps {
     children?: React.ReactNode;
     isOpen?: boolean;
+    className?: string;
+    variant?: string;
     tooltip?: string;
     targetRef?: RefObject<HTMLDivElement | FocusableElement>
 }
