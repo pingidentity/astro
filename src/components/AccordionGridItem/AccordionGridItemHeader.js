@@ -19,6 +19,8 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     isSelected,
     hasCaret,
     navigationMode,
+    customDownArrow,
+    customUpArrow,
     ...others
   } = props;
 
@@ -68,6 +70,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
       state.selectionManager.toggleSelection(e.target.dataset.key);
     }
   };
+
   if (navigationMode === 'native') {
     delete mergedProps.onKeyDown;
     delete mergedProps.onKeyDownCapture;
@@ -75,6 +78,9 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     mergedProps.tabIndex = 0;
     mergedProps.onKeyPress = handleKeyPress;
   }
+
+  const downArrow = customDownArrow || MenuDown;
+  const upArrow = customUpArrow || MenuUp;
 
   return (
     <Box
@@ -94,7 +100,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
           hasCaret
           && (
             <Box isRow alignItems="center" sx={{ mr: '0px' }}>
-              <Icon icon={isSelected ? MenuUp : MenuDown} size={20} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+              <Icon icon={isSelected ? upArrow : downArrow} size={20} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
             </Box>
           )
         }
@@ -111,6 +117,8 @@ AccordionGridItemHeader.propTypes = {
   'aria-label': PropTypes.string,
   isSelected: PropTypes.bool,
   hasCaret: PropTypes.bool,
+  customDownArrow: PropTypes.node,
+  customUpArrow: PropTypes.node,
   item: PropTypes.shape({
     key: PropTypes.string,
     childNodes: PropTypes.arrayOf(PropTypes.shape({})),
