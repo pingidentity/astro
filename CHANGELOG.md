@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.62.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.61.0...@pingux/astro@2.62.0) (2024-05-14)
+
+
+### Features
+
+* [UIP-6841] Recipe for Accordion Card ([fc02465](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fc024658e5961d40786a3f371efdaf8a3aff129a))
+* [UIP-6845] ListView throws error ([0552a59](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0552a59ef0db6079458da46f8c758d81484703f8))
+
+
+
+
+
 # [2.61.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.60.0...@pingux/astro@2.61.0) (2024-05-09)
 
 
