@@ -157,6 +157,10 @@ AccordionGridGroup.propTypes = {
   id: PropTypes.string,
   /** Props object that is spread directly into the root (top-level) element. */
   containerProps: PropTypes.shape({}),
+  /** The props object is directly spread into the accordion header element.
+   * Utilize the `customUpArrow` & `customDownArrow` keys to incorporate custom Up and Down arrows.
+   * */
+  headerProps: PropTypes.shape({}),
   /** Defines a string value that labels the current element. */
   'aria-label': PropTypes.string,
   /** Identifies the element (or elements) that labels the current element. */

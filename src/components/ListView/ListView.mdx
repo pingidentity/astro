@@ -45,3 +45,21 @@ This component uses the following attributes to assist screen readers:
 
 #### NOTES:
 - See the [ListAndPanel](./?path=/docs/recipes-listandpanel--docs) and [ScrollableListView](./?path=/docs/recipes-scrollablelistview--docs) recipes for more detailed examples.
+
+#### KNOWN ISSUES:
+Error Message: **`ResizeObserver loop completed with undelivered notifications.`**
+
+The ListView's ResizeObserver exhibits a rendering bug specifically in development mode. This issue originates from @react-aria/virtualizer and is expected to be resolved upon upgrading to React 18. 
+
+Refer to issue [!1924](https://github.com/adobe/react-spectrum/issues/1924) for further details.
+
+To address this issue, add the following CSS code to hide the error:
+
+`#webpack-dev-server-client-overlay {
+    display: none !important;
+}`
+
+
+
+
+
