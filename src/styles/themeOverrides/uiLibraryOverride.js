@@ -101,6 +101,16 @@ const buttons = {
 
 const forms = {
   input: {
+    '&[type=password]': {
+      backgroundColor: 'white !important',
+      borderColor: '#caced3 !important',
+    },
+    '&[type=password]:focus': {
+      outline: '1px solid',
+      outlineColor: 'accent.60',
+      outlineOffset: '0px',
+      borderColor: '#4462ED !important',
+    },
     numberField: {
       ...theme.input,
       ...theme.numberFieldStyles,
@@ -110,7 +120,10 @@ const forms = {
         borderColor: 'neutral.80',
       },
       '&[type=text]:focus': {
-        borderColor: 'neutral.80',
+        outline: '1px solid',
+        outlineColor: 'accent.60',
+        outlineOffset: '0px',
+        borderColor: '#4462ED !important',
       },
     },
   },
@@ -134,7 +147,10 @@ const forms = {
         },
       },
       '& input[type=search]:focus': {
-        borderColor: 'neutral.80',
+        outline: '1px solid',
+        outlineColor: 'accent.60',
+        outlineOffset: '0px',
+        borderColor: '#4462ED !important',
       },
     },
   },
