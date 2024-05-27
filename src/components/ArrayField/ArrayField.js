@@ -14,6 +14,7 @@ const ArrayField = forwardRef((props, ref) => {
   const {
     addButtonLabel,
     defaultValue,
+    fieldControlWrapperProps,
     value,
     label,
     helperText,
@@ -133,7 +134,7 @@ const ArrayField = forwardRef((props, ref) => {
       ref={ref}
     >
       <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
-      <Box as="ul" pl="0" {...ariaProps}>
+      <Box as="ul" pl="0" {...ariaProps} {...fieldControlWrapperProps}>
         {(value || fieldValues).map(
           ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
             return (
@@ -146,31 +147,31 @@ const ArrayField = forwardRef((props, ref) => {
       {
         helperText
         && (
-        <FieldHelperText status={status}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status}>
+            {helperText}
+          </FieldHelperText>
         )
       }
       {
         isLimitReached
         && (
-        <FieldHelperText status={statuses.DEFAULT}>
-          {maxSizeText || `Maximum ${maxSize} items.`}
-        </FieldHelperText>
+          <FieldHelperText status={statuses.DEFAULT}>
+            {maxSizeText || `Maximum ${maxSize} items.`}
+          </FieldHelperText>
         )
       }
       {!isLimitReached
         && (
-        <Button
-          aria-label="Add field"
-          variant="link"
-          onPress={onFieldAdd}
-          sx={{ width: 'fit-content', mt: 'xs' }}
-        >
-          <Text variant="label" color="active">
-            {addButtonLabel}
-          </Text>
-        </Button>
+          <Button
+            aria-label="Add field"
+            variant="link"
+            onPress={onFieldAdd}
+            sx={{ width: 'fit-content', mt: 'xs' }}
+          >
+            <Text variant="label" color="active">
+              {addButtonLabel}
+            </Text>
+          </Button>
         )}
     </Box>
   );
@@ -197,6 +198,8 @@ ArrayField.propTypes = {
   label: PropTypes.node,
   /** Props object that is spread directly into the label element. */
   labelProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the wrapper rendering the fields. */
+  fieldControlWrapperProps: PropTypes.shape({}),
   /** Text to display before add button. Useful for errors or other info. */
   helperText: PropTypes.node,
   /** Callback for changing array field data  */

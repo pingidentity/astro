@@ -6,6 +6,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   ArrayField,
   ArrayFieldDeleteButton,
+  Box,
   Item,
   SelectField,
   TextField,
@@ -96,9 +97,15 @@ export const Uncontrolled = ({ ...args }) => {
             onChange={e => onFieldValueChange(e, id)}
             mr="xs"
             slots={
-              { inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }
-}
+              {
+                inContainer: (
+                  <ArrayFieldDeleteButton
+                    isDisabled={isDisabled}
+                    onDelete={() => onFieldDelete(id)}
+                  />
+                ),
+              }
+            }
             {...otherFieldProps}
           />
         )
@@ -114,45 +121,57 @@ export const Controlled = ({ ...args }) => {
     {
       id: uuid(),
       fieldValue: 'red',
-      onComponentRender: (id, fieldValue, onFieldValueChange,
-        onFieldDelete, isDisabled, otherFieldProps) => (
-          <OverlayProvider>
-            <SelectField
-              defaultSelectedKey={fieldValue}
-              onSelectionChange={e => onFieldValueChange(e, id)}
-              width="100%"
-              slots={{ inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
-              {...otherFieldProps}
-              listBoxProps={{ 'aria-labelledby': otherFieldProps }}
-            >
-              <Item key="red">Red</Item>
-              <Item key="blue">Blue</Item>
-              <Item key="yellow">Yellow</Item>
-            </SelectField>
-          </OverlayProvider>
+      onComponentRender: (
+        id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+      ) => (
+        <OverlayProvider>
+          <SelectField
+            defaultSelectedKey={fieldValue}
+            onSelectionChange={e => onFieldValueChange(e, id)}
+            width="100%"
+            slots={{
+              inContainer: (<ArrayFieldDeleteButton
+                isDisabled={isDisabled}
+                onDelete={() => onFieldDelete(id)}
+              />),
+            }}
+            {...otherFieldProps}
+            listBoxProps={{ 'aria-labelledby': otherFieldProps }}
+          >
+            <Item key="red">Red</Item>
+            <Item key="blue">Blue</Item>
+            <Item key="yellow">Yellow</Item>
+          </SelectField>
+        </OverlayProvider>
       ),
     },
     {
       id: uuid(),
       fieldValue: 'black',
-      onComponentRender: (id, fieldValue, onFieldValueChange,
-        onFieldDelete, isDisabled, otherFieldProps) => (
-          <OverlayProvider>
-            <SelectField
-              defaultSelectedKey={fieldValue}
-              onSelectionChange={key => onFieldValueChange(key, id)}
-              width="100%"
-              slots={{ inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
-              {...otherFieldProps}
-              listBoxProps={{ 'aria-labelledby': otherFieldProps }}
-            >
-              <Item key="orange">Orange</Item>
-              <Item key="purple">Purple</Item>
-              <Item key="black">Black</Item>
-            </SelectField>
-          </OverlayProvider>
+      onComponentRender: (
+        id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+      ) => (
+        <OverlayProvider>
+          <SelectField
+            defaultSelectedKey={fieldValue}
+            onSelectionChange={key => onFieldValueChange(key, id)}
+            width="100%"
+            slots={{
+              inContainer: (
+                <ArrayFieldDeleteButton
+                  isDisabled={isDisabled}
+                  onDelete={() => onFieldDelete(id)}
+                />
+              ),
+            }}
+            {...otherFieldProps}
+            listBoxProps={{ 'aria-labelledby': otherFieldProps }}
+          >
+            <Item key="orange">Orange</Item>
+            <Item key="purple">Purple</Item>
+            <Item key="black">Black</Item>
+          </SelectField>
+        </OverlayProvider>
       ),
     },
   ];
@@ -160,23 +179,27 @@ export const Controlled = ({ ...args }) => {
   const defaultEmptyField = {
     id: uuid(),
     fieldValue: 'blue',
-    onComponentRender: (id, fieldValue, onFieldValueChange,
-      onFieldDelete, isDisabled, otherFieldProps) => (
-        <OverlayProvider>
-          <SelectField
-            defaultSelectedKey={fieldValue}
-            onSelectionChange={e => onFieldValueChange(e, id)}
-            width="100%"
-            slots={{ inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }}
-            {...otherFieldProps}
-            listBoxProps={{ 'aria-labelledby': otherFieldProps }}
-          >
-            <Item key="blue">Blue</Item>
-            <Item key="teal">Teal</Item>
-            <Item key="turquoise">Turquoise</Item>
-          </SelectField>
-        </OverlayProvider>
+    onComponentRender: (
+      id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+    ) => (
+      <OverlayProvider>
+        <SelectField
+          defaultSelectedKey={fieldValue}
+          onSelectionChange={e => onFieldValueChange(e, id)}
+          width="100%"
+          slots={{
+            inContainer: (
+              <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} />
+            ),
+          }}
+          {...otherFieldProps}
+          listBoxProps={{ 'aria-labelledby': otherFieldProps }}
+        >
+          <Item key="blue">Blue</Item>
+          <Item key="teal">Teal</Item>
+          <Item key="turquoise">Turquoise</Item>
+        </SelectField>
+      </OverlayProvider>
     ),
   };
 
@@ -220,15 +243,58 @@ export const WithLimitedItemsNumber = ({ ...args }) => {
             onChange={e => onFieldValueChange(e, id)}
             mr="xs"
             slots={
-              { inContainer:
-  <ArrayFieldDeleteButton isDisabled={isDisabled} onDelete={() => onFieldDelete(id)} /> }
-}
+              {
+                inContainer: (
+                  <ArrayFieldDeleteButton
+                    isDisabled={isDisabled}
+                    onDelete={() => onFieldDelete(id)}
+                  />
+                ),
+              }
+            }
             {...otherFieldProps}
           />
         )
       }
       sx={{ width: '400px' }}
       maxSize={3}
+      {...args}
+    />
+  );
+};
+
+export const Customizations = ({ ...args }) => {
+  return (
+    <ArrayField
+      fieldControlWrapperProps={{ overflowY: 'scroll', maxHeight: '150px' }}
+      defaultValue={defaultData}
+      width="450px"
+      labelProps={{
+        hintText: 'Example Hint',
+        isRequired: true,
+        helpHintProps: { direction: 'top' },
+      }}
+      renderField={
+        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
+          <Box width="400px">
+            <TextField
+              aria-label="Text field"
+              value={fieldValue}
+              onChange={e => onFieldValueChange(e, id)}
+              mr="xs"
+              slots={{
+                inContainer: (
+                  <ArrayFieldDeleteButton
+                    isDisabled={isDisabled}
+                    onDelete={() => onFieldDelete(id)}
+                  />
+                ),
+              }}
+              {...otherFieldProps}
+            />
+          </Box>
+        )
+      }
       {...args}
     />
   );
