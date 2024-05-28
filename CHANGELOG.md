@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.63.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.62.0...@pingux/astro@2.63.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* [UIP-6878] UILibraryOverride-styles-for-numberField-passwordField-searchField ([fd4e243](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fd4e243194cb2fad433a6286fc393c9e08b5889c))
+
+
+### Features
+
+* [UIP-6934] ArrayField Add ability to pass attributes into the wrapper ([eca657f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eca657fb41b434656faca67d0c29cb8c2993e0c4))
+
+
+
+
+
 # [2.62.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.61.0...@pingux/astro@2.62.0) (2024-05-14)
 
 
