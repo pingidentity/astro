@@ -44,7 +44,7 @@ export default {
 
 export const Default: StoryFn<CopyTextProps> = (args: CopyTextProps) => (
   <CopyText {...args}>
-    <Text>Here is a value</Text>
+    <Text>Here is a value </Text>
   </CopyText>
 );
 
