@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Link, Text } from '../..';
 import { CopyTextProps } from '../../types';
-import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import CopyText from './CopyText';
@@ -169,10 +169,10 @@ describe('CopyText', () => {
       const button = screen.getByLabelText('copy to clipboard');
       fireEvent.click(button);
       expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-      await waitFor(() => {
-        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
-      });
-      await waitForElementToBeRemoved(screen.queryByRole('tooltip'));
+      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
     });
   });
 
