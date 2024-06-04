@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.64.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.63.0...@pingux/astro@2.64.0) (2024-06-04)
+
+
+### Features
+
+* [UIP-6860] CopyText fix multiple confirmation messages ([3bdede2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3bdede263454077321eec573613b8912bbc31b4b))
+
+
+
+
+
 # [2.63.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.62.0...@pingux/astro@2.63.0) (2024-05-28)
 
 
