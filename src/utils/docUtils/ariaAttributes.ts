@@ -11,9 +11,9 @@ export const descriptions = {
 };
 
 export const ariaAttributeBaseDocSettings = {
-  type: { summary: 'string' },
   control: { type: 'text' },
   table: {
+    type: { summary: 'string' },
     category: 'Aria Attributes',
   },
 };
