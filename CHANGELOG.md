@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.65.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.64.0...@pingux/astro@2.65.0) (2024-06-06)
+
+
+### Bug Fixes
+
+* [UIP-6946] PhoneInputField change label and remove clearing input ([b19cc82](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b19cc82a66e6575abd91e1bef3fb32ad027303ee))
+
+
+### Features
+
+* [UIP-6823] ArrayField convert to TS ([0d322be](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0d322be7ef77eaeaf6253b65ff7a62c3ea409896))
+
+
+
+
+
 # [2.64.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.63.0...@pingux/astro@2.64.0) (2024-06-04)
 
 
