@@ -1,8 +1,9 @@
 import { BoxProps } from './box';
 import { Status } from './item';
 
-export interface Requirement extends Status{
+export interface Requirement {
   name: string;
+  status?: Status;
 }
 
 export type Requirements = Array<Requirement>;

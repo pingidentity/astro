@@ -4,9 +4,7 @@ import type { ItemProps } from '@react-types/shared';
 import { IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
 
-export interface Status {
-  status?: 'default' | 'error' | 'success' | 'warning',
-}
+export type Status = 'default' | 'error' | 'success' | 'warning';
 
 declare module '@react-types/shared' {
   // eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars
