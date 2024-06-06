@@ -166,7 +166,7 @@ test('creates empty field when no data passed', () => {
 });
 
 test('check if tooltip on delete button renders on hover', () => {
-  render(<ArrayFieldDeleteButton renderField={renderField} />);
+  render(<ArrayFieldDeleteButton />);
   const button = screen.getByRole('button');
   fireEvent.mouseMove(button);
   fireEvent.mouseEnter(button);

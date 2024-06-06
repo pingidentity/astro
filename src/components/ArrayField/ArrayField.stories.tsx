@@ -1,5 +1,6 @@
 import React from 'react';
 import { OverlayProvider } from 'react-aria';
+import { Meta, StoryFn } from '@storybook/react';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -11,6 +12,7 @@ import {
   SelectField,
   TextField,
 } from '../../index';
+import { ArrayFieldProps } from '../../types';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import ArrayFieldReadme from './ArrayField.mdx';
@@ -36,29 +38,19 @@ export default {
   },
   argTypes: {
     label: {
-      control: {
-        type: 'text',
-      },
+      control: { type: 'text' },
     },
     helperText: {
-      control: {
-        type: 'text',
-      },
+      control: { type: 'text' },
     },
     addButtonLabel: {
-      control: {
-        type: 'text',
-      },
+      control: { type: 'text' },
     },
     maxSize: {
-      control: {
-        type: 'number',
-      },
+      control: { type: 'text' },
     },
     maxSizeText: {
-      control: {
-        type: 'text',
-      },
+      control: { type: 'text' },
     },
     ...ariaAttributeBaseArgTypes,
   },
@@ -67,7 +59,7 @@ export default {
     helperText: 'Helper text info...',
     addButtonLabel: '+ Add field',
   },
-};
+} as Meta;
 
 const defaultData = [
   {
@@ -78,7 +70,7 @@ const defaultData = [
   },
 ];
 
-export const Uncontrolled = ({ ...args }) => {
+export const Uncontrolled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   return (
     <ArrayField
       defaultValue={defaultData}
@@ -90,7 +82,9 @@ export const Uncontrolled = ({ ...args }) => {
         },
       }}
       renderField={
-        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
+        (
+          id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+        ) => (
           <TextField
             aria-label="Text field"
             value={fieldValue}
@@ -116,7 +110,7 @@ export const Uncontrolled = ({ ...args }) => {
   );
 };
 
-export const Controlled = ({ ...args }) => {
+export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   const defaultDataSelectField = [
     {
       id: uuid(),
@@ -130,10 +124,12 @@ export const Controlled = ({ ...args }) => {
             onSelectionChange={e => onFieldValueChange(e, id)}
             width="100%"
             slots={{
-              inContainer: (<ArrayFieldDeleteButton
-                isDisabled={isDisabled}
-                onDelete={() => onFieldDelete(id)}
-              />),
+              inContainer: (
+                <ArrayFieldDeleteButton
+                  isDisabled={isDisabled}
+                  onDelete={() => onFieldDelete(id)}
+                />
+              ),
             }}
             {...otherFieldProps}
             listBoxProps={{ 'aria-labelledby': otherFieldProps }}
@@ -231,7 +227,7 @@ export const Controlled = ({ ...args }) => {
   );
 };
 
-export const WithLimitedItemsNumber = ({ ...args }) => {
+export const WithLimitedItemsNumber: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   return (
     <ArrayField
       defaultValue={defaultData}
@@ -268,7 +264,7 @@ export const Customizations = ({ ...args }) => {
     <ArrayField
       fieldControlWrapperProps={{ overflowY: 'scroll', maxHeight: '150px' }}
       defaultValue={defaultData}
-      width="450px"
+      sx={{ width: '450px' }}
       labelProps={{
         hintText: 'Example Hint',
         isRequired: true,

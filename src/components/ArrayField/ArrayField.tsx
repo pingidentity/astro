@@ -1,16 +1,14 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import { mergeProps, useLabel } from 'react-aria';
-import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import { Box, Button, FieldHelperText, Label, Text } from '../..';
+import { ArrayFieldProps, FieldValue } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
-import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
+import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 
-const ArrayField = forwardRef((props, ref) => {
+const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
   const {
     addButtonLabel,
     defaultValue,
@@ -47,7 +45,9 @@ const ArrayField = forwardRef((props, ref) => {
     return { id: uuid(), value: '' };
   }, []);
 
-  const [fieldValues, setFieldValues] = useState(defaultValue || [createEmptyField()]);
+  const [fieldValues, setFieldValues] = useState<FieldValue[]>(
+    defaultValue || [createEmptyField()],
+  );
 
   const mapArrayFieldWithNewValue = useCallback(
     (arrValues, newValue, fieldId) => arrValues.map(fieldValue => {
@@ -66,7 +66,7 @@ const ArrayField = forwardRef((props, ref) => {
       if (typeof event !== 'string') {
         tempValue = event.target.value;
       }
-      if (isControlled) {
+      if (isControlled && onChangeRef.current) {
         onChangeRef.current(mapArrayFieldWithNewValue(valueRef.current, tempValue, fieldId));
       } else {
         setFieldValues(oldValues => mapArrayFieldWithNewValue(oldValues, tempValue, fieldId));
@@ -77,7 +77,7 @@ const ArrayField = forwardRef((props, ref) => {
 
   const onFieldDelete = useCallback(
     fieldId => {
-      if (isControlled) {
+      if (isControlled && onDeleteRef.current) {
         onDeleteRef.current(fieldId);
       } else {
         setFieldValues(oldValues => oldValues.filter(({ id }) => id !== fieldId),
@@ -89,7 +89,7 @@ const ArrayField = forwardRef((props, ref) => {
 
   const onFieldAdd = useCallback(() => {
     if (isControlled) {
-      return onAddRef.current();
+      return onAddRef.current && onAddRef.current();
     }
 
     return setFieldValues(oldValues => [...oldValues, createEmptyField()]);
@@ -115,14 +115,17 @@ const ArrayField = forwardRef((props, ref) => {
           otherFieldProps,
         );
       }
-      return renderField(
-        id,
-        fieldValue,
-        onFieldValueChange,
-        onFieldDelete,
-        isDisabled,
-        otherFieldProps,
-      );
+      if (renderField) {
+        return renderField(
+          id,
+          fieldValue,
+          onFieldValueChange,
+          onFieldDelete,
+          isDisabled,
+          otherFieldProps,
+        );
+      }
+      return null;
     }, [onFieldValueChange, onFieldDelete, renderField, isDisabled]);
 
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
@@ -136,7 +139,7 @@ const ArrayField = forwardRef((props, ref) => {
       <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
       <Box as="ul" pl="0" {...ariaProps} {...fieldControlWrapperProps}>
         {(value || fieldValues).map(
-          ({ id, onComponentRender, fieldValue, ...otherFieldProps }) => {
+          ({ id, onComponentRender, fieldValue, ...otherFieldProps }: FieldValue) => {
             return (
               <Box as="li" mb="xs" key={id}>
                 {renderedItem(id, fieldValue, otherFieldProps, onComponentRender, raLabelProps?.id)}
@@ -177,49 +180,9 @@ const ArrayField = forwardRef((props, ref) => {
   );
 });
 
-ArrayField.propTypes = {
-  /** Label for add button */
-  addButtonLabel: PropTypes.string,
-  /** The default value for the array input field (uncontrolled). */
-  defaultValue: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ),
-  /** The default value of the array input field (controlled). */
-  value: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ),
-  /** The rendered label for the field. */
-  label: PropTypes.node,
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the wrapper rendering the fields. */
-  fieldControlWrapperProps: PropTypes.shape({}),
-  /** Text to display before add button. Useful for errors or other info. */
-  helperText: PropTypes.node,
-  /** Callback for changing array field data  */
-  onChange: PropTypes.func,
-  /** Callback for adding new empty field */
-  onAdd: PropTypes.func,
-  /** Callback for deleting a field */
-  onDelete: PropTypes.func,
-  /** Render prop to display an input field */
-  renderField: PropTypes.func,
-  /** Determines the maximum number of items */
-  maxSize: isValidPositiveInt,
-  /** Text to display when the maximum number of items is reached */
-  maxSizeText: PropTypes.node,
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-};
-
 ArrayField.defaultProps = {
   addButtonLabel: '+ Add',
+  status: statuses.DEFAULT,
 };
 
 export default ArrayField;
