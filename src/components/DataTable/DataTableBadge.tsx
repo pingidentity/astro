@@ -3,11 +3,10 @@ import React, { forwardRef } from 'react';
 import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
 import AlertIcon from '@pingux/mdi-react/AlertIcon';
 import CheckIcon from '@pingux/mdi-react/CheckIcon';
-import PropTypes from 'prop-types';
 
-import { Badge, Icon } from '../../index';
+import { Badge, DataTableBadgeProps, Icon } from '../../index';
 
-const DataTableBadge = forwardRef(({ cell }, ref) => {
+const DataTableBadge = forwardRef<HTMLDivElement, DataTableBadgeProps>(({ cell }, ref) => {
   const color = (cell === 'Pending')
     ? 'line.light'
     : (cell === 'Failed')
@@ -28,7 +27,7 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
         border: '1px',
         borderStyle: 'solid',
         borderColor: color,
-        flexDirection: 'row-reverse !important',
+        flexDirection: 'row-reverse !important' as 'row-reverse',
       }}
     >
       {cell && cell !== 'Pending' && (
@@ -40,7 +39,7 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
                 ? AlertCircleIcon
                 : cell === 'Failed'
                   ? AlertIcon
-                  : null
+                  : undefined
           }
           title={{
             name: cell === 'Approved'
@@ -49,7 +48,7 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
                 ? 'Alert Circle Icon'
                 : cell === 'Failed'
                   ? 'Alert Icon'
-                  : null,
+                  : '',
           }}
           mr="xs"
           size="14px"
@@ -59,9 +58,5 @@ const DataTableBadge = forwardRef(({ cell }, ref) => {
     </Badge>
   );
 });
-
-DataTableBadge.propTypes = {
-  cell: PropTypes.string,
-};
 
 export default DataTableBadge;

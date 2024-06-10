@@ -7,7 +7,7 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 
 const cell = [{ name: 'Acme', icon: ApplicationIcon, accountId: 123 }];
 
-const getComponent = (props = {}) => render(
+const getComponent = props => render(
   <DataTableMultiLine {...props} />,
 );
 

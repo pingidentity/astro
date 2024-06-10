@@ -12,7 +12,7 @@ import {
   Text,
 } from '../../index';
 
-const DataTableMenu = forwardRef((props, ref) => {
+const DataTableMenu = forwardRef<HTMLDivElement, object>((props, ref) => {
   return (
     <Box
       ref={ref}

@@ -102,9 +102,11 @@ export default {
   },
 };
 
-const getCellProps = columnKey => ({
+const getCellProps = (columnKey, align) => ({
   pr: columnKey !== 'menu' ? 'lg' : 0,
   pl: columnKey === 'timestamp' || columnKey === 'menu' ? 0 : 'lg',
+  hideHeader: columnKey === 'menu',
+  align,
 });
 
 export const Default = args => {
@@ -205,10 +207,9 @@ export const Default = args => {
       <DataTableHeader columns={columns}>
         {column => (
           <DataTableColumn
-            cellProps={getCellProps(column.key)}
+            {...getCellProps(column.key, false)}
             minWidth={column.key !== 'menu' ? 175 : 32}
             width={column.key !== 'menu' ? '19.4%' : 32}
-            hideHeader={column.key === 'menu'}
           >
             {column.name}
           </DataTableColumn>
@@ -219,7 +220,7 @@ export const Default = args => {
           <DataTableRow>
             {columnKey => (
               <DataTableCell
-                cellProps={getCellProps(columnKey)}
+                {...getCellProps(columnKey, false)}
               >
                 {item[columnKey]}
               </DataTableCell>
@@ -279,13 +280,14 @@ export const Dynamic = args => {
     <DataTable
       {...args}
       aria-label="Dynamic table"
+      density="compact"
+      scale="medium"
     >
       <DataTableHeader columns={columns}>
         {column => (
           <DataTableColumn
-            cellProps={getCellProps(column.key)}
+            {...getCellProps(column.key, 'center')}
             minWidth={155}
-            align="center"
           >
             {column.name}
 
@@ -297,7 +299,7 @@ export const Dynamic = args => {
           <DataTableRow>
             {columnKey => (
               <DataTableCell
-                cellProps={getCellProps(columnKey)}
+                {...getCellProps(columnKey, 'left')}
               >
                 {item[columnKey]}
               </DataTableCell>
@@ -362,17 +364,20 @@ export const Sortable = args => {
 
       return {
         items: items.sort((a, b) => {
-          const first = a[sortDescriptor.column];
-          const second = b[sortDescriptor.column];
+          if (sortDescriptor.column) {
+            const first = a[sortDescriptor.column];
+            const second = b[sortDescriptor.column];
 
-          const firstNumericValue = getNumericValue(first);
-          const secondNumericValue = getNumericValue(second);
+            const firstNumericValue = getNumericValue(first);
+            const secondNumericValue = getNumericValue(second);
 
-          const cmp = (firstNumericValue && secondNumericValue)
-            ? firstNumericValue - secondNumericValue
-            : collator.compare(first, second);
+            const cmp = (firstNumericValue && secondNumericValue)
+              ? firstNumericValue - secondNumericValue
+              : collator.compare(first, second);
 
-          return (sortDescriptor.direction === 'descending') ? -cmp : cmp;
+            return (sortDescriptor.direction === 'descending') ? -cmp : cmp;
+          }
+          return 1;
         }),
       };
     },
@@ -394,14 +399,15 @@ export const Sortable = args => {
       aria-label="Sortable table"
       sortDescriptor={list.sortDescriptor}
       onSortChange={list.sort}
+      density="compact"
+      scale="medium"
     >
       <DataTableHeader columns={columns}>
         {column => (
           <DataTableColumn
-            cellProps={getCellProps(column.key)}
+            {...getCellProps(column.key, 'center')}
             allowsSorting
             minWidth={155}
-            align="center"
           >
             {column.name}
 
@@ -413,7 +419,7 @@ export const Sortable = args => {
           <DataTableRow>
             {columnKey => (
               <DataTableCell
-                cellProps={getCellProps(columnKey)}
+                {...getCellProps(columnKey, false)}
               >
                 {item[columnKey]}
               </DataTableCell>
@@ -475,11 +481,13 @@ export const AsyncLoading = args => {
       {...args}
       aria-label="Custom content table"
       onAction={action('onAction')}
+      density="compact"
+      scale="medium"
     >
       <DataTableHeader columns={columns}>
         {column => (
           <DataTableColumn
-            cellProps={getCellProps(column.key)}
+            {...getCellProps(column.key, false)}
             minWidth={155}
           >
             {column.name}
@@ -487,15 +495,15 @@ export const AsyncLoading = args => {
         )}
       </DataTableHeader>
       <DataTableBody
-        items={list.items}
+        items={list.items as Iterable<{name: string}>}
         loadingState={list.loadingState}
         onLoadMore={list.loadMore}
       >
-        {item => (
+        {(item: { name: string}) => (
           <DataTableRow key={item.name}>
             {columnKey => (
               <DataTableCell
-                cellProps={getCellProps(columnKey)}
+                {...getCellProps(columnKey, false)}
               >
                 {item[columnKey]}
               </DataTableCell>
