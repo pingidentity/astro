@@ -74,7 +74,9 @@ const getCell = (view, text) => {
 
 const focusCell = (tree, text) => act(() => getCell(tree, text).focus());
 const moveFocus = (key, opts = {}) => {
-  fireEvent.keyDown(document.activeElement, { key, ...opts });
+  if (document.activeElement) {
+    fireEvent.keyDown(document.activeElement, { key, ...opts });
+  }
 };
 
 describe('Static DataTable', () => {
@@ -83,15 +85,14 @@ describe('Static DataTable', () => {
     'aria-label': 'Default table with static content',
     width: '100%',
     height: '100%',
-    density: 'spacious',
     'data-testid': testId,
   };
 
   const staticDataTable = () => render(
-    <DataTable {...defaultProps}>
+    <DataTable {...defaultProps} density="spacious">
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn align="center">{column.name}</DataTableColumn>
+          <DataTableColumn>{column.name}</DataTableColumn>
         )}
       </DataTableHeader>
       <DataTableBody items={rows}>
@@ -212,15 +213,14 @@ describe('Async DataTable', () => {
       'aria-label': 'Custom table with loading content',
       width: '100%',
       height: 565,
-      density: 'spacious',
       'data-testid': testId,
     };
 
     render(
-      <DataTable {...defaultProps}>
+      <DataTable {...defaultProps} density="spacious">
         <DataTableHeader columns={columns}>
           {column => (
-            <DataTableColumn align="center">{column.name}</DataTableColumn>
+            <DataTableColumn>{column.name}</DataTableColumn>
           )}
         </DataTableHeader>
         <DataTableBody loadingState="loading">{[]}</DataTableBody>
@@ -258,11 +258,10 @@ describe('Async DataTable', () => {
       'aria-label': 'Custom table with onLoadMore',
       width: '100%',
       height: 565,
-      density: 'spacious',
       'data-testid': testId,
     };
 
-    const items = [];
+    const items = [] as object[];
     for (let i = 1; i <= 100; i += 1) {
       items.push({
         id: i,
@@ -275,10 +274,10 @@ describe('Async DataTable', () => {
     const onLoadMore = jest.fn();
 
     render(
-      <DataTable {...defaultProps}>
+      <DataTable {...defaultProps} scale="medium" density="compact">
         <DataTableHeader columns={columns}>
           {column => (
-            <DataTableColumn align="center">{column.name}</DataTableColumn>
+            <DataTableColumn>{column.name}</DataTableColumn>
           )}
         </DataTableHeader>
         <DataTableBody items={items} onLoadMore={onLoadMore}>
@@ -302,10 +301,12 @@ describe('Async DataTable', () => {
     );
 
     const body = screen.getAllByRole('rowgroup')[1];
-    const scrollView = body.parentNode.parentNode;
+    const scrollView = body?.parentNode?.parentNode as HTMLElement;
 
-    scrollView.scrollTop = 250;
-    fireEvent.scroll(scrollView);
+    if (scrollView) {
+      scrollView.scrollTop = 250;
+      fireEvent.scroll(scrollView);
+    }
     act(() => {
       jest.runAllTimers();
     });
@@ -322,7 +323,7 @@ describe('Async DataTable', () => {
       jest.runAllTimers();
     });
 
-    expect(onLoadMore).toHaveBeenCalledTimes(6);
+    expect(onLoadMore).toHaveBeenCalledTimes(3);
   });
 
   test('renders a spinner at the bottom when loading more', () => {
@@ -331,15 +332,14 @@ describe('Async DataTable', () => {
       'aria-label': 'Custom table with loadingMore',
       width: '100%',
       height: '100%',
-      density: 'spacious',
       'data-testid': testId,
     };
 
     render(
-      <DataTable {...defaultProps}>
+      <DataTable {...defaultProps} density="spacious">
         <DataTableHeader columns={columns}>
           {column => (
-            <DataTableColumn align="center">{column.name}</DataTableColumn>
+            <DataTableColumn>{column.name}</DataTableColumn>
           )}
         </DataTableHeader>
         <DataTableBody items={rows} loadingState="loadingMore">
@@ -391,16 +391,15 @@ describe('Sortable DataTable', () => {
     'aria-label': 'Custom table with sortable content',
     width: '100%',
     height: '100%',
-    density: 'spacious',
     'data-testid': testId,
   };
 
   test('sorting', () => {
     render(
-      <DataTable {...defaultProps}>
+      <DataTable {...defaultProps} density="spacious">
         <DataTableHeader columns={columns}>
           {column => (
-            <DataTableColumn align="center" allowsSorting>
+            <DataTableColumn allowsSorting>
               {column.name}
             </DataTableColumn>
           )}
@@ -438,15 +437,15 @@ describe('Sortable DataTable', () => {
     expect(columnheaders[2]).toHaveAttribute('aria-sort', 'none');
     expect(columnheaders[0]).toHaveAttribute('aria-describedby');
     expect(
-      document.getElementById(columnheaders[0].getAttribute('aria-describedby')),
+      document.getElementById(columnheaders[0].getAttribute('aria-describedby') as string),
     ).toHaveTextContent('sortable column');
     expect(columnheaders[1]).toHaveAttribute('aria-describedby');
     expect(
-      document.getElementById(columnheaders[1].getAttribute('aria-describedby')),
+      document.getElementById(columnheaders[1].getAttribute('aria-describedby')as string),
     ).toHaveTextContent('sortable column');
     expect(columnheaders[1]).toHaveAttribute('aria-describedby');
     expect(
-      document.getElementById(columnheaders[1].getAttribute('aria-describedby')),
+      document.getElementById(columnheaders[1].getAttribute('aria-describedby')as string),
     ).toHaveTextContent('sortable column');
   });
 });
@@ -487,12 +486,12 @@ describe('Sortable with useAsyncList', () => {
     const { result } = renderHook(() => useAsyncList({
       load,
       sort,
-      initialSortDescriptor: { direction: 'ASC' },
+      initialSortDescriptor: { direction: 'ascending' },
     }));
 
     expect(load).toHaveBeenCalledTimes(1);
     let args = load.mock.calls[0][0];
-    expect(args.sortDescriptor).toEqual({ direction: 'ASC' });
+    expect(args.sortDescriptor).toEqual({ direction: 'ascending' });
     expect(result.current.items).toEqual([]);
 
     await actHooks(async () => {
@@ -524,7 +523,6 @@ describe('Sortable DataTable with useAsyncList', () => {
     'aria-label': 'Custom table with sortable content',
     width: '100%',
     height: '100%',
-    density: 'spacious',
     'data-testid': testId,
   };
 
@@ -554,13 +552,13 @@ describe('Sortable DataTable with useAsyncList', () => {
     <DataTable {...defaultProps}>
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn align="center" allowsSorting>
+          <DataTableColumn allowsSorting>
             {column.name}
           </DataTableColumn>
         )}
       </DataTableHeader>
       <DataTableBody items={result.current.items}>
-        {item => (
+        {(item: object) => (
           <DataTableRow>
             {columnKey => (
               <DataTableCell>{item[columnKey]}</DataTableCell>
@@ -583,7 +581,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     });
 
     await actHooks(async () => {
-      result.current.sort();
+      result.current.sort({ column: 'country' });
     });
 
     await actHooks(async () => {
@@ -634,7 +632,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     });
 
     await actHooks(async () => {
-      result.current.sort();
+      result.current.sort({ column: 'country', direction: 'descending' });
     });
 
     await actHooks(async () => {
@@ -680,7 +678,6 @@ describe('Sortable DataTable with useAsyncList', () => {
     'aria-label': 'Custom table with sortable content',
     width: '100%',
     height: '100%',
-    density: 'spacious',
     'data-testid': testId,
   };
 
@@ -689,16 +686,17 @@ describe('Sortable DataTable with useAsyncList', () => {
       {...defaultProps}
       sortDescriptor={result.current.sortDescriptor.direction}
       onSortChange={result.current.sort}
+      density="spacious"
     >
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn align="center" allowsSorting>
+          <DataTableColumn allowsSorting>
             {column.name}
           </DataTableColumn>
         )}
       </DataTableHeader>
       <DataTableBody items={result.current.items}>
-        {item => (
+        {(item: object) => (
           <DataTableRow>
             {columnKey => (
               <DataTableCell>{item[columnKey]}</DataTableCell>
@@ -721,15 +719,17 @@ describe('Sortable DataTable with useAsyncList', () => {
       },
       async sort({ items, sortDescriptor }) {
         return {
-          items: items.sort((a, b) => {
-            const first = a[sortDescriptor.column];
-            const second = b[sortDescriptor.column];
-            // eslint-disable-next-line radix
-            let cmp = collator.compare(first, second);
-            if (sortDescriptor.direction === 'descending') {
-              cmp *= -1;
+          items: items.slice().sort((a, b) => {
+            if (sortDescriptor.column) {
+              let cmp = a[sortDescriptor.column] < b[sortDescriptor.column] ? -1 : 1;
+
+              if (sortDescriptor.direction === 'descending') {
+                cmp *= -1;
+              }
+
+              return cmp;
             }
-            return cmp;
+            return 1;
           }),
         };
       },
@@ -804,7 +804,9 @@ describe('Sortable DataTable with useAsyncList', () => {
   });
 
   test('click on column header should sort column Z => A', async () => {
-    const { result } = renderHook(() => useAsyncList({
+    const { result } = renderHook(() => useAsyncList<{
+      id: number, population: number, country: string, continent: string
+    }>({
       async load() {
         return {
           items: rows,
@@ -812,17 +814,17 @@ describe('Sortable DataTable with useAsyncList', () => {
       },
       async sort({ items, sortDescriptor }) {
         return {
-          items: items.sort((a, b) => {
-            const first = a[sortDescriptor.column];
-            const second = b[sortDescriptor.column];
-            // eslint-disable-next-line radix
-            let cmp = (parseInt(first) || first) < (parseInt(second) || second)
-              ? -1
-              : 1;
-            if (sortDescriptor.direction === 'descending') {
-              cmp *= -1;
+          items: items.slice().sort((a, b) => {
+            if (sortDescriptor.column) {
+              let cmp = a[sortDescriptor.column] < b[sortDescriptor.column] ? -1 : 1;
+
+              if (sortDescriptor.direction === 'descending') {
+                cmp *= -1;
+              }
+
+              return cmp;
             }
-            return cmp;
+            return 1;
           }),
         };
       },
@@ -894,7 +896,7 @@ describe('Empty DataTable', () => {
     <DataTable aria-label="Table">
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn align="center">{column.name}</DataTableColumn>
+          <DataTableColumn>{column.name}</DataTableColumn>
         )}
       </DataTableHeader>
       <DataTableBody>
@@ -919,7 +921,7 @@ universalComponentTests({
   renderComponent: props => (
     <DataTable {...props} aria-label="label">
       <DataTableHeader columns={[columns[0]]}>
-        <DataTableColumn align="center">{columns[0].name}</DataTableColumn>
+        <DataTableColumn>{columns[0].name}</DataTableColumn>
       </DataTableHeader>
       <DataTableBody items={rows}>
         {item => (

@@ -7,6 +7,7 @@ export * from './buttonBar';
 export * from './calendar';
 export * from './card';
 export * from './copyText';
+export * from './dataTable';
 export * from './environmentBreadcrumb';
 export * from './fieldHelperText';
 export * from './helpHint';

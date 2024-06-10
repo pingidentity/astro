@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { Box, Icon } from '../../index';
+import { Box, DataTableMultiLineProps, Icon } from '../../index';
 
-const DataTableMultiLine = forwardRef(({ cell }, ref) => (
+const DataTableMultiLine = forwardRef<HTMLDivElement, DataTableMultiLineProps>(({ cell }, ref) => (
   <>
     {cell.map(item => (
-      <Box key={`${cell.key}_${item.accountId}`} ref={ref}>
-        <Box sx={{ flexDirection: 'row !important' }}>
+      <Box key={`${item.key}_${item.accountId}`} ref={ref}>
+        <Box sx={{ flexDirection: 'row !important' as 'row' }}>
           <Box
             sx={{
               alignItems: 'center',
@@ -15,7 +15,7 @@ const DataTableMultiLine = forwardRef(({ cell }, ref) => (
               mx: '18px',
             }}
           >
-            <Icon icon={item.icon} color="accent.40" size="18.75" title={{ name: `Icon for ${item.name}` }} />
+            <Icon icon={item.icon} color="accent.40" size="18.75px" title={{ name: `Icon for ${item.name}` }} />
           </Box>
           <Box>
             <Box sx={{ fontWeight: 500, fontSize: '15px' }}>{item.name}</Box>
