@@ -1,7 +1,6 @@
 import React, {
   forwardRef,
   useCallback,
-  useImperativeHandle,
   useRef,
 } from 'react';
 import { FocusScope, mergeProps, useOverlayPosition, useOverlayTrigger, useVisuallyHidden } from 'react-aria';
@@ -9,19 +8,19 @@ import { SketchPicker } from 'react-color';
 import { useOverlayTriggerState } from 'react-stately';
 import { useColorField } from '@react-aria/color';
 import { useColorFieldState } from '@react-stately/color';
-import PropTypes from 'prop-types';
 
 import { Box, Button, FieldHelperText, Input, Label } from '../..';
+import { useLocalOrForwardRef } from '../../hooks';
 import useField from '../../hooks/useField';
+import { FieldControlInputProps, UseFieldProps } from '../../hooks/useField/useField';
+import { ColorFieldProps, CustomColorProps, Placement } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
+import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import PopoverContainer from '../PopoverContainer';
 
 const displayName = 'ColorField';
 
-const ColorField = forwardRef((props, ref) => {
+const ColorField = forwardRef<HTMLInputElement, ColorFieldProps>((props, ref) => {
   const {
     align,
     buttonProps,
@@ -35,12 +34,10 @@ const ColorField = forwardRef((props, ref) => {
   } = props;
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(props);
 
-  const colorRef = useRef();
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => colorRef.current);
+  const colorRef = useLocalOrForwardRef<HTMLInputElement>(ref);
 
-  const triggerRef = React.useRef();
-  const overlayRef = React.useRef();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const state = useColorFieldState(nonAriaProps);
   const popoverState = useOverlayTriggerState({});
@@ -74,12 +71,12 @@ const ColorField = forwardRef((props, ref) => {
       ...controlProps,
       ...raInputProps,
     },
-  });
+  } as UseFieldProps<ColorFieldProps>);
 
   const { overlayProps: positionProps } = useOverlayPosition({
     targetRef: triggerRef,
     overlayRef,
-    placement: `${direction} ${align}`,
+    placement: `${direction} ${align}` as Placement,
     offset: 15,
     isOpen: popoverState.isOpen,
     onClose: popoverState.close,
@@ -88,14 +85,15 @@ const ColorField = forwardRef((props, ref) => {
 
   /* istanbul ignore next */
   const handleButtonPress = useCallback(() => popoverState.open(), [
-    triggerRef,
+    popoverState,
   ]);
 
-  const handleColorChange = useCallback((color, event) => {
-    if (imperativeOnChange) {
-      imperativeOnChange(color, event);
-    }
-  }, [imperativeOnChange]);
+  const handleColorChange = useCallback(
+    (color: CustomColorProps, event: React.ChangeEvent<HTMLInputElement>) => {
+      if (imperativeOnChange) {
+        imperativeOnChange(color, event);
+      }
+    }, [imperativeOnChange]);
 
   const getRgbaFromState = useCallback(({ colorValue }) => {
     return `rgba(${colorValue?.red}, ${colorValue?.green}, ${colorValue?.blue}, ${colorValue?.alpha})`;
@@ -113,7 +111,13 @@ const ColorField = forwardRef((props, ref) => {
         {...mergeProps(buttonProps, ariaProps, triggerProps)}
       />
       <Box {...fieldControlWrapperProps}>
-        <Input {...visuallyHiddenProps} {...fieldControlInputProps} ref={colorRef} sx={{ display: 'none' }} />
+        <Input
+          {...visuallyHiddenProps}
+          {...fieldControlInputProps as Omit<FieldControlInputProps, 'onChange'>}
+          role="textbox"
+          ref={colorRef}
+          sx={{ display: 'none' }}
+        />
       </Box>
       {helperText && (
         <FieldHelperText status={status}>{helperText}</FieldHelperText>
@@ -128,6 +132,7 @@ const ColorField = forwardRef((props, ref) => {
         ref={overlayRef}
         {...overlayProps}
         {...positionProps}
+        role="presentation"
       >
         <FocusScope restoreFocus contain autoFocus>
           <SketchPicker
@@ -139,29 +144,6 @@ const ColorField = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-ColorField.propTypes = {
-  /** Alignment of the popover menu relative to the trigger. */
-  align: PropTypes.oneOf(['start', 'end', 'middle']),
-  /** Where the popover menu opens relative to its trigger. */
-  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /** Text to display after the Color Field button. Useful for errors or other info. */
-  helperText: PropTypes.node,
-  /** The content to display as the label. */
-  label: PropTypes.node,
-  /** Pass a function to call every time the color is changed. [React Color onChange](https://casesandberg.github.io/react-color/#api-onChange)
-   *
-   * (color, event) => void;
-   */
-  onChange: PropTypes.func,
-  /** Color controls what color is active on the color picker. */
-  value: PropTypes.string,
-  /** Props object that is spread into the Button element. */
-  buttonProps: PropTypes.shape({}),
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-  ...inputFieldAttributesBasePropTypes,
-};
 
 ColorField.defaultProps = {
   align: 'middle',

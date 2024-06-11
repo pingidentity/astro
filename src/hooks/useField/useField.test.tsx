@@ -37,7 +37,7 @@ const defaultProps = {
   },
   name: 'test',
   placeholder: 'test',
-  role: 'test',
+  role: 'none',
   statusClasses: {
     isTested: true,
   },

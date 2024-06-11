@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { ColorField, OverlayProvider } from '../../index';
+import { ColorFieldProps, CustomColorProps } from '../../types';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -58,20 +60,26 @@ export default {
     label: 'Color Field',
     buttonProps: { sx: { width: 40, height: 30 } },
   },
-};
+} as Meta;
 
-export const Default = args => {
+export const Default: StoryFn<ColorFieldProps> = (args: ColorFieldProps) => {
   const [color, setColor] = useState('rgba(127, 0, 127, 1)');
-  const handleChange = useCallback(({ rgb }) => {
-    const { r, b, g, a } = rgb;
-    setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
+
+  const handleChange = useCallback((colorVal: CustomColorProps) => {
+    if (typeof colorVal === 'string') {
+      setColor(colorVal);
+    } else if (colorVal.rgb) {
+      const { rgb } = colorVal;
+      const { r, b, g, a } = rgb;
+      setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
+    }
   }, []);
 
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
     <OverlayProvider>
-      <ColorField value={color} {...args} onChange={handleChange} />
+      <ColorField {...args} value={color} onChange={handleChange} />
     </OverlayProvider>
   );
 };

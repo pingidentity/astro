@@ -2,8 +2,7 @@ import React, { DOMAttributes, Key, useCallback, useImperativeHandle, useLayoutE
 import { AriaButtonProps, DismissButton, FocusScope, useOverlayPosition, useSelect } from 'react-aria';
 import { SelectState, useSelectState } from 'react-stately';
 import { useResizeObserver } from '@react-aria/utils';
-// eslint-disable-next-line import/no-unresolved
-import { CollectionChildren } from '@react-types/shared';
+import type { CollectionChildren } from '@react-types/shared';
 import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
 import ListBox from '../../components/ListBox/ListBox';
