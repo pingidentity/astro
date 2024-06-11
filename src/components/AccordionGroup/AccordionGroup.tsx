@@ -3,8 +3,7 @@ import { mergeProps } from 'react-aria';
 import { TreeProps, useTreeState } from 'react-stately';
 import { useAccordion } from '@react-aria/accordion';
 import { TreeState } from '@react-stately/tree';
-// eslint-disable-next-line import/no-unresolved
-import { AriaAccordionProps } from '@react-types/accordion';
+import type { AriaAccordionProps } from '@react-types/accordion';
 
 import { AccordionContext } from '../../context/AccordionContext';
 import { Box } from '../../index';
@@ -17,9 +16,9 @@ import AccordionItem from '../AccordionItem';
  * and related to a known issue within React Stately.
  */
 
-interface AccordionProps extends Omit<TreeProps<object>, 'onExpandedChange'>{
-    labelHeadingTag?: string,
-    onExpandedChange?: Dispatch<SetStateAction<string[]>>,
+interface AccordionProps extends Omit<TreeProps<object>, 'onExpandedChange'> {
+  labelHeadingTag?: string,
+  onExpandedChange?: Dispatch<SetStateAction<string[]>>,
 }
 
 const AccordionGroup = forwardRef((props: AccordionProps, ref) => {

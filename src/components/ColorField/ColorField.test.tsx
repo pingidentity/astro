@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { ColorFieldProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -18,7 +19,9 @@ const defaultProps = {
   helperText: 'test-helper-text',
 };
 
-const getComponent = (props = {}) => render(<ColorField {...defaultProps} {...props} />);
+const getComponent = (props: ColorFieldProps = {}) => render(
+  <ColorField {...defaultProps} {...props} />,
+);
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <ColorField {...defaultProps} {...props} /> });
@@ -55,6 +58,6 @@ test('clicking within the popover does not close it', () => {
   const hexLabelElement = screen.queryByText(hexLabel);
   expect(hexLabelElement).toBeInTheDocument();
   // click the popover container, which has caused closing in regressions
-  userEvent.click(screen.queryByRole('presentation'));
-  expect(screen.queryByRole('presentation')).toBeInTheDocument();
+  userEvent.click(screen.getByRole('presentation'));
+  expect(screen.getByRole('presentation')).toBeInTheDocument();
 });

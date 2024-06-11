@@ -1,7 +1,7 @@
 import React, {
   forwardRef,
+  ReactNode,
   useCallback,
-  useRef,
 } from 'react';
 import { chain, mergeProps, useLayoutEffect } from '@react-aria/utils';
 import {
@@ -9,11 +9,11 @@ import {
   setScrollLeft,
   useVirtualizer,
 } from '@react-aria/virtualizer';
-import { useVirtualizerState } from '@react-stately/virtualizer';
-import PropTypes from 'prop-types';
+import { useVirtualizerState, VirtualizerState } from '@react-stately/virtualizer';
 
+import { useLocalOrForwardRef } from '../../hooks';
 import {
-  Box,
+  Box, DataTableItem, DataTableVirtualizerProps,
 } from '../../index';
 
 /**
@@ -21,20 +21,21 @@ import {
  * Primarily utilizes [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
 */
 
-const DataTableVirtualizer = forwardRef(({
+const DataTableVirtualizer = forwardRef<HTMLDivElement,
+DataTableVirtualizerProps<object, object>>(({
   layout,
   collection,
   renderView,
   renderWrapper,
   domRef,
   bodyRef,
-  setTableWidth,
-  getColumnWidth,
   onVisibleRectChange: onVisibleRectChangeProp,
   ...otherProps
 }, ref) => {
   const direction = 'ltr'; // useLocale override
-  const headerRef = useRef(ref);
+
+  const headerRef = useLocalOrForwardRef<HTMLDivElement>(ref);
+
   const loadingState = collection.body.props.loadingState;
   const isLoading = loadingState === 'loading' || loadingState === 'loadingMore';
   const onLoadMore = collection.body.props.onLoadMore;
@@ -45,13 +46,15 @@ const DataTableVirtualizer = forwardRef(({
     renderView,
     renderWrapper,
     onVisibleRectChange(rect) {
+      if (bodyRef.current) {
       // eslint-disable-next-line no-param-reassign
-      bodyRef.current.scrollTop = rect.y;
-      setScrollLeft(
-        bodyRef.current,
-        direction,
-        rect.x,
-      );
+        bodyRef.current.scrollTop = rect.y;
+        setScrollLeft(
+          bodyRef.current,
+          direction,
+          rect.x,
+        );
+      }
     },
     transitionDuration: isLoading ? 160 : 220,
   });
@@ -59,7 +62,7 @@ const DataTableVirtualizer = forwardRef(({
   const { virtualizerProps } = useVirtualizer(
     {
       scrollToItem(key) {
-        const item = collection.getItem(key);
+        const item = collection.getItem(key) as DataTableItem;
         state.virtualizer.scrollToItem(key, {
           duration: 0,
           // Prevent scrolling to the top when clicking on column headers.
@@ -70,7 +73,7 @@ const DataTableVirtualizer = forwardRef(({
         });
       },
     },
-    state,
+    state as VirtualizerState<object, object, object>,
     domRef,
   );
 
@@ -84,7 +87,9 @@ const DataTableVirtualizer = forwardRef(({
 
   // Sync the scroll position from the table body to the header container.
   const onScroll = useCallback(() => {
-    headerRef.current.scrollLeft = bodyRef.current.scrollLeft;
+    if (headerRef.current && bodyRef.current) {
+      headerRef.current.scrollLeft = bodyRef.current.scrollLeft;
+    }
   }, [bodyRef]);
 
   const onVisibleRectChange = useCallback(rect => {
@@ -129,10 +134,9 @@ const DataTableVirtualizer = forwardRef(({
         }}
         ref={headerRef}
       >
-        {state.visibleViews[0]}
+        {state.visibleViews[0] as ReactNode}
       </Box>
       <ScrollView
-        variant="dataTable.tableBody"
         style={{ flex: 1 }}
         innerStyle={{
           overflow: 'visible',
@@ -151,37 +155,10 @@ const DataTableVirtualizer = forwardRef(({
         onScroll={onScroll}
         tabIndex={0}
       >
-        {state.visibleViews[1]}
+        {state.visibleViews[1] as ReactNode}
       </ScrollView>
     </Box>
   );
 });
-
-DataTableVirtualizer.propTypes = {
-  bodyRef: PropTypes.shape({
-    current: PropTypes.shape({
-      scrollLeft: PropTypes.number,
-      scrollTop: PropTypes.number,
-    }),
-  }),
-  collection: PropTypes.shape({
-    body: PropTypes.shape({
-      props: PropTypes.shape({
-        loadingState: PropTypes.string,
-        onLoadMore: PropTypes.func,
-      }),
-    }),
-    getItem: PropTypes.func,
-  }),
-  domRef: PropTypes.shape({}),
-  getColumnWidth: PropTypes.func,
-  layout: PropTypes.shape({
-    getLayoutInfo: PropTypes.func,
-  }),
-  onVisibleRectChange: PropTypes.func,
-  renderView: PropTypes.func,
-  renderWrapper: PropTypes.func,
-  setTableWidth: PropTypes.func,
-};
 
 export default DataTableVirtualizer;

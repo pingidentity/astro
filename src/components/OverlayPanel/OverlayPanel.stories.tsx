@@ -29,7 +29,7 @@ import {
   Text,
   TextField,
 } from '../../index';
-import { OverlayPanelProps } from '../../types';
+import { CustomColorProps, OverlayPanelProps } from '../../types';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { panelSizes } from '../../utils/devUtils/constants/panelSizes';
 import statuses from '../../utils/devUtils/constants/statuses';
@@ -236,9 +236,14 @@ export const Expandable: StoryFn = () => {
 
   const onCloseHandler = () => onClose(state, triggerRef);
   const [color, setColor] = useState('#EACE91');
-  const handleColorChange = useCallback(({ rgb }) => {
-    const { r, b, g, a } = rgb;
-    setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
+  const handleColorChange = useCallback((colorVal: CustomColorProps) => {
+    if (typeof colorVal === 'string') {
+      setColor(colorVal);
+    } else if (colorVal.rgb) {
+      const { rgb } = colorVal;
+      const { r, b, g, a } = rgb;
+      setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
+    }
   }, []);
 
   const header = (

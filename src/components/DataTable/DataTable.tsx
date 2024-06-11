@@ -5,6 +5,7 @@ import {
   useFocusRing,
   VisuallyHidden,
 } from 'react-aria';
+import { TableStateProps } from 'react-stately';
 import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
 import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
 import {
@@ -18,14 +19,13 @@ import {
 import { layoutInfoToStyle, VirtualizerItem } from '@react-aria/virtualizer';
 import { TableLayout } from '@react-stately/layout';
 import { TableColumnLayout, useTableState } from '@react-stately/table';
-import PropTypes from 'prop-types';
 
 import {
   DataTableContext,
   useDataTableContext,
 } from '../../context/DataTableContext';
 import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
-import { Box, Icon, Loader } from '../../index';
+import { Box, BoxProps, DataTableCellProps, DataTableColumnHeader, DataTableHeaderRowProps, DataTableProps, DataTableRowProps, GetDefaultMinWidth, Icon, Loader } from '../../index';
 
 import DataTableVirtualizer from './DataTableVirtualizer';
 
@@ -50,17 +50,18 @@ const ROW_HEIGHTS = {
   },
   spacious: {
     medium: 48,
+    large: 60,
   },
 };
 
-const DataTable = forwardRef((props, ref) => {
-  const scale = 'large';
+const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
   const direction = 'ltr';
   const {
     onAction,
+    scale = 'large',
   } = props;
 
-  const getDefaultWidth = useCallback();
+  // const getDefaultWidth = useCallback(() => null, []) as GetDefaultWidth;
 
   const getDefaultMinWidth = useCallback(({ props: {
     hideHeader, showDivider,
@@ -71,7 +72,7 @@ const DataTable = forwardRef((props, ref) => {
       return showDivider ? width + 1 : width;
     }
     return 75;
-  }, [scale]);
+  }, [scale]) as GetDefaultMinWidth;
 
   // Starts when the user selects resize from the menu, ends when resizing ends
   // used to control the visibility of the resizer Nubbin
@@ -80,19 +81,18 @@ const DataTable = forwardRef((props, ref) => {
   // with table layout, so we need to track it here
   const state = useTableState({
     ...props,
-  });
+  } as TableStateProps<object>);
 
   const domRef = useLocalOrForwardRef(ref);
-  const headerRef = useRef();
-  const bodyRef = useRef();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   const density = props.density || 'regular';
   const columnLayout = useMemo(
     () => new TableColumnLayout({
-      getDefaultWidth,
       getDefaultMinWidth,
     }),
-    [getDefaultWidth, getDefaultMinWidth],
+    [getDefaultMinWidth],
   );
 
   const layout = useMemo(() => new TableLayout({
@@ -105,11 +105,11 @@ const DataTable = forwardRef((props, ref) => {
       ? ROW_HEIGHTS[density][scale]
       : null,
     headingHeight: props.overflowMode === 'wrap'
-      ? null
+      ? undefined
       : DEFAULT_HEADER_HEIGHT[scale],
     estimatedHeadingHeight: props.overflowMode === 'wrap'
       ? DEFAULT_HEADER_HEIGHT[scale]
-      : null,
+      : undefined,
     columnLayout,
     initialCollection: state.collection,
   }),
@@ -133,10 +133,6 @@ const DataTable = forwardRef((props, ref) => {
       direction,
       parent && parent.layoutInfo,
     );
-
-    if (style.overflow === 'hidden') {
-      style.overflow = 'visible'; // needed to support position: sticky
-    }
 
     if (reusableView.viewType === 'rowgroup') {
       return (
@@ -198,7 +194,7 @@ const DataTable = forwardRef((props, ref) => {
       case 'rowgroup':
       case 'row':
       case 'headerrow':
-        return null;
+        return undefined;
       case 'cell': {
         return <TableCell cell={item} />;
       }
@@ -214,7 +210,7 @@ const DataTable = forwardRef((props, ref) => {
           </CenteredWrapper>
         );
       default:
-        return null;
+        return undefined;
     }
   };
 
@@ -232,7 +228,9 @@ const DataTable = forwardRef((props, ref) => {
 
   const onFocusedResizer = () => {
     /* istanbul ignore next */
-    bodyRef.current.scrollLeft = headerRef.current.scrollLeft;
+    if (bodyRef.current && headerRef.current) {
+      bodyRef.current.scrollLeft = headerRef.current.scrollLeft;
+    }
   };
 
   const mergedProps = mergeProps(
@@ -274,62 +272,17 @@ const DataTable = forwardRef((props, ref) => {
   );
 });
 
-DataTable.propTypes = {
-  /**
-    * Sets the amount of vertical padding within each cell.
-    * density: 'compact' | 'regular' | 'spacious'
-    * @default 'regular'
-  */
-  density: PropTypes.string,
-  /** Sets the height of table. */
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  /** Determine if the header should be hidden. */
-  hasHiddenHeader: PropTypes.bool,
-  /** Bool that determines if the items are sortable. */
-  isSortable: PropTypes.bool,
-  /** The list of DataTable items. */
-  items: PropTypes.arrayOf(PropTypes.shape({})),
-  /** Reflects current loading state. */
-  loadingState: PropTypes.oneOf(['error', 'filtering', 'idle', 'loading', 'loadingMore', 'sorting']),
-  /** Handler that is called when a user performs an action on a row. */
-  onAction: PropTypes.func,
-  /**
-   * Sets the overflow behavior for the cell contents.
-   * overflowMode: 'wrap' | 'truncate'
-   * @default 'truncate'
-   */
-  overflowMode: PropTypes.string,
-  /** Callback function that fires when more data should be loaded on demand as user scrolls. */
-  onLoadMore: PropTypes.func,
-  /** Callback function that fires when sortable column header is pressed. */
-  onSortChange: PropTypes.func,
-  /** Defines the current column key to sort by and the sort direction. */
-  sortDescriptor: PropTypes.oneOfType([
-    PropTypes.shape({
-      column: PropTypes.string,
-      direction: PropTypes.oneOf(['ascending', 'descending']),
-    }),
-    PropTypes.string]),
-  /** Sets the width of table. */
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
-DataTable.defaultProps = {
-  width: '100%',
-  height: 565,
-};
-
 const TableHeader = ({ children, ...otherProps }) => {
   const { rowGroupProps } = useTableRowGroup();
 
   return (
-    <Box {...rowGroupProps} {...otherProps}>
+    <Box {...rowGroupProps as BoxProps} {...otherProps}>
       {children}
     </Box>
   );
 };
 
-const TableColumnHeader = props => {
+const TableColumnHeader = (props: DataTableColumnHeader) => {
   const { column, isFirst, isLast } = props;
   const ref = useRef(null);
   const { state } = useDataTableContext();
@@ -351,7 +304,7 @@ const TableColumnHeader = props => {
     );
   const allProps = [columnHeaderProps];
 
-  const { classNames } = useStatusClasses({
+  const { classNames } = useStatusClasses('', {
     'is-column-sortable': columnProps.allowsSorting,
     [`is-align-${columnProps.align}`]: columnProps.align,
     'is-first-column': isFirst,
@@ -365,7 +318,7 @@ const TableColumnHeader = props => {
         ref={ref}
         variant="dataTable.tableHeadCell"
         className={classNames}
-        {...mergeProps(...allProps, column.props.cellProps)}
+        {...mergeProps(...allProps, column.props)}
       >
         {columnProps.hideHeader ? (
           <VisuallyHidden>{column.rendered}</VisuallyHidden>
@@ -384,14 +337,14 @@ const TableRowGroup = ({ children, ...otherProps }) => {
   const { rowGroupProps } = useTableRowGroup();
 
   return (
-    <Box {...rowGroupProps} {...otherProps}>
+    <Box {...rowGroupProps as BoxProps} {...otherProps}>
       {children}
     </Box>
   );
 };
 
-const TableRow = ({ item, children, hasActions, ...otherProps }) => {
-  const ref = useRef();
+const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   const { state } = useDataTableContext();
   const { rowProps } = useTableRow(
     {
@@ -411,13 +364,13 @@ const TableRow = ({ item, children, hasActions, ...otherProps }) => {
 
   const props = mergeProps(rowProps, otherProps, focusWithinProps, focusProps);
 
-  const { classNames } = useStatusClasses({
+  const { classNames } = useStatusClasses('', {
     'is-row-focus-visible': isFocusVisible || isFocusVisibleWithin,
   });
 
   return (
     <Box
-      {...props}
+      {...props as BoxProps}
       ref={ref}
       variant="dataTable.tableRow"
       className={classNames}
@@ -427,9 +380,9 @@ const TableRow = ({ item, children, hasActions, ...otherProps }) => {
   );
 };
 
-const TableHeaderRow = ({ item, children, style }) => {
+const TableHeaderRow = ({ item, children, style }:DataTableHeaderRowProps) => {
   const { state } = useDataTableContext();
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
 
   const { rowProps } = useTableHeaderRow(
     { node: item, isVirtualized: true },
@@ -438,17 +391,17 @@ const TableHeaderRow = ({ item, children, style }) => {
   );
 
   return (
-    <Box {...rowProps} ref={ref} style={style}>
+    <Box {...rowProps as BoxProps} ref={ref} style={style}>
       {children}
     </Box>
   );
 };
 
-const TableCell = ({ cell }) => {
+const TableCell = ({ cell }: DataTableCellProps) => {
   const { state } = useDataTableContext();
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
 
-  const columnProps = cell.column.props;
+  const columnProps = cell.column?.props;
 
   const { gridCellProps } = useTableCell(
     {
@@ -459,7 +412,7 @@ const TableCell = ({ cell }) => {
     ref,
   );
 
-  const { classNames } = useStatusClasses({
+  const { classNames } = useStatusClasses('', {
     [`is-align-${columnProps.align}`]: columnProps.align,
   });
 
@@ -470,7 +423,7 @@ const TableCell = ({ cell }) => {
         ref={ref}
         variant="dataTable.tableCell"
         className={classNames}
-        {...mergeProps(gridCellProps, cell.props.cellProps)}
+        {...mergeProps(gridCellProps, cell.props)}
       >
         <Box variant="dataTable.tableCellContents">
           {cell.rendered}
@@ -495,50 +448,6 @@ const CenteredWrapper = ({ children }) => {
       </Box>
     </Box>
   );
-};
-
-TableCell.propTypes = {
-  cell: PropTypes.shape({
-    column: PropTypes.shape({
-      props: PropTypes.shape({
-        align: PropTypes.string,
-      }),
-    }),
-    index: PropTypes.number,
-    parentKey: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    props: PropTypes.shape({
-      cellProps: PropTypes.shape({}),
-    }),
-    rendered: PropTypes.node,
-  }),
-};
-
-TableHeaderRow.propTypes = {
-  children: PropTypes.node,
-  item: PropTypes.shape({}),
-  style: PropTypes.shape({}),
-};
-
-TableRow.propTypes = {
-  children: PropTypes.node,
-  hasActions: PropTypes.func,
-  item: PropTypes.shape({}),
-};
-
-TableColumnHeader.propTypes = {
-  column: PropTypes.shape({
-    index: PropTypes.number,
-    key: PropTypes.string,
-    props: PropTypes.shape({
-      align: PropTypes.string,
-      allowsSorting: PropTypes.bool,
-      cellProps: PropTypes.shape({}),
-      hideHeader: PropTypes.bool,
-    }),
-    rendered: PropTypes.node,
-  }),
-  isFirst: PropTypes.bool,
-  isLast: PropTypes.bool,
 };
 
 
