@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.66.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.65.0...@pingux/astro@2.66.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* [UIP-6820] DataTable Convert to Typescript ([ce268bc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ce268bcc1eb069eaf86f767aab53d42ab992634c))
+
+
+### Features
+
+* [UIP-6825] ColorField convert to TS ([066ae73](https://gitlab.corp.pingidentity.com/ux/pingux/commit/066ae738ddfd594f3c5576591e102550dae9fe5e))
+* [UIP-6862] HelpHint icon has static id and aria-labelledby ([cac46dc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cac46dc9176559b8e8f498369f5ee34cb63e0a57))
+
+
+
+
+
 # [2.65.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.64.0...@pingux/astro@2.65.0) (2024-06-06)
 
 
