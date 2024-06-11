@@ -1,12 +1,11 @@
 import { Key, useEffect, useState } from 'react';
 import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
-// eslint-disable-next-line import/no-unresolved
-import { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
+import type { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 
-import { BoxProps, LabelModeProps, LabelProps } from '../../types';
+import { AriaRole, BoxProps, LabelModeProps, LabelProps, ValidPositiveInteger } from '../../types';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -38,13 +37,13 @@ export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
   id?: string;
   isFocused?: boolean;
   isIndeterminate?: boolean;
-  maxLength?: number;
+  maxLength?: ValidPositiveInteger;
   name?: string;
   onChange: (event: CustomChangeEventType | React.ChangeEvent) => void | undefined;
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;
-  role?: string;
+  role?: AriaRole;
   spellCheck?: boolean;
   type?: string;
   value?: string | number;
@@ -81,7 +80,7 @@ export interface UseFieldProps<T> {
   label?: string;
   labelMode?: LabelModeProps;
   labelProps?: LabelProps;
-  maxLength?: number;
+  maxLength?: ValidPositiveInteger;
   name?: string;
   onBlur?: (e: React.FocusEvent) => void;
   onChange?: (e: React.ChangeEvent) => void;
@@ -92,7 +91,7 @@ export interface UseFieldProps<T> {
   onOpenChange?: (isOpen: boolean) => unknown;
   onSelectionChange?: (key: string) => void;
   placeholder?: string | number;
-  role?: string;
+  role?: AriaRole;
   selectedKey?: string;
   spellCheck?: string;
   status?: string;
@@ -102,7 +101,7 @@ export interface UseFieldProps<T> {
   wrapperProps?: WrapperProps;
 }
 
-type CustomChangeEventType = {
+export type CustomChangeEventType = {
   target?: {
     value: string | number | undefined
   },
