@@ -30,32 +30,30 @@ export default {
   },
 } as Meta;
 
-const caption = 'Populations of Countries';
+const caption = 'Lorem Ipsum';
 
 const headers = [
-  'Country', 'Population', 'Continent',
+  'Type', 'Date', 'Additional Grant', 'Total Grant',
 ];
 
 const objects = [
   {
-    country: 'USA',
-    population: '320,000,000',
-    continent: 'North America',
+    type: 'Lorem ipsum',
+    date: '2020-06-12',
+    additional_grant: '+25,000',
+    total_grant: '25,000',
   },
   {
-    country: 'Canada',
-    population: '37,000,000',
-    continent: 'North America',
+    type: 'Lorem ipsum',
+    date: '2020-10-01',
+    additional_grant: '+25,000',
+    total_grant: '50,000',
   },
   {
-    country: 'China',
-    population: '1,398,000,000',
-    continent: 'Asia',
-  },
-  {
-    country: 'France',
-    population: '67,000,000',
-    continent: 'Europe',
+    type: 'Lorem ipsum',
+    date: '2021-01-01',
+    additional_grant: '+25,000',
+    total_grant: '75,000',
   },
 ];
 
@@ -76,7 +74,7 @@ export const Default: StoryFn<TableProps> = () => {
       </TableHead>
       <TableBody>
         {objects.map(object => (
-          <TableRow key={object.country}>
+          <TableRow key={object.date}>
             {Object.values(object).map(value => (
               <TableCell key={value}>
                 {value}
