@@ -26,3 +26,9 @@ test('default checkbox', () => {
   // Should be visually hidden
   expect(input).not.toBeVisible();
 });
+
+test('indeterminate checkbox', () => {
+  getComponent({ isIndeterminate: true });
+  const input = screen.getByText('Indeterminate Checkbox Icon');
+  expect(input).toBeInTheDocument();
+});

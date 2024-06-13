@@ -1,11 +1,11 @@
-import { Key, useEffect, useState } from 'react';
+import React, { Key, useEffect, useState } from 'react';
 import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
 import type { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 
-import { AriaRole, BoxProps, LabelModeProps, LabelProps, ValidPositiveInteger } from '../../types';
+import { AriaRole, BoxProps, LabelModeProps, LabelProps, Status, ValidPositiveInteger } from '../../types';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -24,6 +24,7 @@ interface WrapperProps extends BoxProps {
 
 interface ContainerProps extends WrapperProps {
   isFloatLabelActive?: boolean;
+  'data-testid'?: string;
 }
 
 export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
@@ -51,6 +52,8 @@ export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
 
 export interface ControlProps extends React.HTMLAttributes<Element> {
   statusClasses?: { [className: string]: boolean };
+  hasAutoFocus?: boolean;
+  isDefaultSelected?: boolean;
 }
 
 export interface UseFieldProps<T> {
@@ -65,38 +68,64 @@ export interface UseFieldProps<T> {
   defaultValue?: string | number;
   direction?: string;
   disabledKeys?: string[] | Iterable<Key>;
+  /** Whether the element should receive focus on render. */
   hasAutoFocus?: boolean;
   hasNoStatusIndicator?: boolean;
+  /** Text rendered below the input. */
   helperText?: string;
+  /** If present this prop will cause a help hint to render in the label of the field. */
   hintText?: string;
+  /** The element's unique identifier.
+   * See [MDN](https?://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id?: string;
+  /** Whether the element should be selected (uncontrolled). */
   isDefaultSelected?: boolean;
+  /** Whether the input is disabled. */
   isDisabled?: boolean;
+  /**
+   * Indeterminism is presentational only. The indeterminate visual representation remains until
+   * this prop is set to false regardless of user interaction.
+  */
   isIndeterminate?: boolean;
+  /** Whether the input can be selected, but not changed by the user. */
   isReadOnly?: boolean;
+  /** Whether user input is required on the input before form submission. */
   isRequired?: boolean;
   isRestrictiveMultivalues?: boolean;
+  /** Whether the element should be selected (controlled). */
   isSelected?: boolean;
-  label?: string;
+  /** The rendered label for the field. */
+  label?: string | React.ReactNode;
   labelMode?: LabelModeProps;
   labelProps?: LabelProps;
   maxLength?: ValidPositiveInteger;
+  /** The name of the input element, used when submitting an HTML form.
+   * See [MDN](https?://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
   name?: string;
+  /** Handler that is called when the element loses focus. */
   onBlur?: (e: React.FocusEvent) => void;
+  /** Handler that is called when the element's selection state changes. */
   onChange?: (e: React.ChangeEvent) => void;
   onClear?: () => void;
+  /** Handler that is called when the element receives focus. */
   onFocus?: (e: React.FocusEvent) => void;
+  /** Handler that is called when the element's focus status changes. */
   onFocusChange?: (isFocused: boolean) => void;
   onLoadMore?: () => void;
   onOpenChange?: (isOpen: boolean) => unknown;
   onSelectionChange?: (key: string) => void;
+  /** Handler that is called when the element's toggle state changes. */
+  onToggle?: () => void;
   placeholder?: string | number;
   role?: AriaRole;
   selectedKey?: string;
   spellCheck?: string;
-  status?: string;
+  status?: Status;
   statusClasses?: { [className: string]: boolean };
   type?: string;
+  /** The value of the input element, used when submitting an HTML form.
+   * See [MDN](https?://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue).
+   * */
   value?: string | number;
   wrapperProps?: WrapperProps;
 }
