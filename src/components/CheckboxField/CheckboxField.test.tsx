@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { CheckboxFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -8,10 +9,10 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 import CheckboxField from '.';
 
 const testLabel = 'Test Label';
-const defaultProps = {
+const defaultProps: CheckboxFieldProps = {
   label: testLabel,
 };
-const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+const getComponent = (props: CheckboxFieldProps = {}, { renderFn = render } = {}) => renderFn((
   <CheckboxField {...defaultProps} {...props} />
 ));
 
@@ -110,7 +111,11 @@ test('indeterminate checkbox', () => {
   expect(input).toBeChecked();
 
   // Ensure it works normally when toggled off again
-  getComponent({}, { renderFn: rerender });
+  getComponent({}, { renderFn: rerender } as {
+    renderFn: (ui: React.ReactElement<unknown, string |
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      React.JSXElementConstructor<unknown>>) => any
+  });
   // Reset the variable since the DOM has changed
   input = screen.getByRole('checkbox');
 
