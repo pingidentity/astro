@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuRight from '@pingux/mdi-react/MenuRightIcon';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Badge,
+import {
+  Badge,
   Box,
   CheckboxField,
   IconButtonToggle,
   Link,
   SwitchField,
-  Text } from '../../index';
+  Text,
+} from '../../index';
+import { CheckboxFieldProps } from '../../types';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -69,33 +74,33 @@ export default {
   args: {
     label: 'Click me!',
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<CheckboxFieldProps> = (args: CheckboxFieldProps) => (
   <CheckboxField
     {...args}
   />
 );
 
-export const DefaultSelected = () => (
+export const DefaultSelected: StoryFn<CheckboxFieldProps> = () => (
   <CheckboxField
     isDefaultSelected
     label="Click me"
   />
 );
 
-export const Controlled = () => {
+export const Controlled: StoryFn<CheckboxFieldProps> = () => {
   const [isSelected, setSelected] = React.useState(false);
   return (
     <CheckboxField
       isSelected={isSelected}
-      onChange={setSelected}
+      onChange={e => setSelected}
       label="Click me"
     />
   );
 };
 
-export const Required = () => (
+export const Required: StoryFn<CheckboxFieldProps> = () => (
   <CheckboxField
     isRequired
     label={(
@@ -108,15 +113,15 @@ export const Required = () => (
   />
 );
 
-export const HelperText = () => (
+export const HelperText: StoryFn<CheckboxFieldProps> = () => (
   <CheckboxField
-    status="error"
+    status={statuses.ERROR}
     helperText="Here is some helpful text..."
     label="Click me"
   />
 );
 
-export const ExpandableAndToggleableIndeterminate = () => {
+export const ExpandableAndToggleableIndeterminate: StoryFn<CheckboxFieldProps> = () => {
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   // Whether the parent checkbox is indeterminate (default is true for our example)
@@ -184,7 +189,7 @@ export const ExpandableAndToggleableIndeterminate = () => {
         <IconButtonToggle
           toggledIcon={MenuDown}
           defaultIcon={MenuRight}
-          onToggle={setIsExpanded}
+          onToggle={() => setIsExpanded(!isExpanded)}
           isToggled={isExpanded}
           buttonProps={{
             'aria-label': isExpanded ? 'menu down' : 'menu up',
@@ -206,13 +211,13 @@ export const ExpandableAndToggleableIndeterminate = () => {
             />
           )}
         <Box>
-          <Badge ml="sm" label={subCheckboxes.length} variant="countNeutral" />
+          <Badge sx={{ ml: 'sm' }} label={subCheckboxes.length} variant="countNeutral" />
         </Box>
       </Box>
       <Box ml="50px" id="expanded-checkboxes">
         {isExpanded && subCheckboxes.map((checkbox, index) => (
           <Box isRow alignItems="center" height="24px">
-            { isReadOnly
+            {isReadOnly
               ? <Text>{checkbox.label}</Text>
               : (
                 <CheckboxField
@@ -229,7 +234,7 @@ export const ExpandableAndToggleableIndeterminate = () => {
   );
 };
 
-export const Indeterminate = () => {
+export const Indeterminate: StoryFn<CheckboxFieldProps> = () => {
   // Whether the parent checkbox is indeterminate (default is true for our example)
   const [isIndeterminate, setIsIndeterminate] = useState(true);
   // Whether the parent checkbox should be checked, this is set independently from indeterminism
