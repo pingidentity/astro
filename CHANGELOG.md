@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.67.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.66.0...@pingux/astro@2.67.0) (2024-06-13)
+
+
+### Features
+
+* [UIP-6824] CheckboxField convert to TS ([9a0e82a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9a0e82a1b196688ab8c880c7fb76a55ee515c57d))
+* [UIP-6853] table update to match specs ([1777c46](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1777c46a717b56a385c18df72f4a239a6ca2d8e3))
+
+
+
+
+
 # [2.66.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.65.0...@pingux/astro@2.66.0) (2024-06-11)
 
 
