@@ -166,4 +166,9 @@ export const FIGMA_LINKS = {
   noAccess: {
     default: 'https://www.figma.com/file/S1tRCG90PVgCJRCyDwxkBk/429-Error?type=design&node-id=9-940&mode=design&t=Z6pZWCsrvY0g6b2q-0',
   },
+  pageHeader: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-11051&t=OK8Fy4P3se6BKy0F-4',
+    withoutButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16196&t=OK8Fy4P3se6BKy0F-4',
+    withoutLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16201&t=OK8Fy4P3se6BKy0F-4',
+  },
 };
