@@ -1,7 +1,8 @@
 import React, { DOMAttributes, Key, useCallback, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
-import { AriaButtonProps, DismissButton, FocusScope, useOverlayPosition, useSelect } from 'react-aria';
-import { SelectState, useSelectState } from 'react-stately';
+import { AriaButtonProps, DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
+import { AriaSelectOptions, SelectAria, useSelect } from '@react-aria/select';
 import { useResizeObserver } from '@react-aria/utils';
+import { SelectState, useSelectState } from '@react-stately/select';
 import type { CollectionChildren } from '@react-types/shared';
 import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
@@ -13,7 +14,7 @@ import { modes } from '../../utils/devUtils/constants/labelModes';
 import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
-interface UseSelectFieldProps<T> {
+interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   children: CollectionChildren<T>
   align?: PlacementAxis;
   defaultSelectedKey?: string;
@@ -45,7 +46,7 @@ interface UseSelectFieldProps<T> {
   labelMode: LabelModeProps;
 }
 
-interface UseSelectFieldReturnProps {
+interface UseSelectFieldReturnProps<T> {
   columnStyleProps: StyleProps,
   fieldContainerProps: BoxProps,
   fieldControlInputProps: FieldControlInputProps,
@@ -55,7 +56,7 @@ interface UseSelectFieldReturnProps {
   listBoxRef: ReactRef,
   overlay: React.ReactNode;
   popoverRef: ReactRef,
-  state: SelectState<object>,
+  state: SelectState<T>,
   triggerProps: AriaButtonProps<'button'>,
   triggerRef: ReactRef,
   valueProps: DOMAttributes<FocusableElement>,
@@ -64,7 +65,7 @@ interface UseSelectFieldReturnProps {
 const useSelectField = <T extends object>(
   props: UseSelectFieldProps<T>,
   ref: ReactRef,
-): UseSelectFieldReturnProps => {
+): UseSelectFieldReturnProps<T> => {
   const {
     align,
     children,
@@ -120,7 +121,7 @@ const useSelectField = <T extends object>(
     children,
   };
   // Create state based on the incoming props
-  const state = useSelectState(selectProps);
+  const state = useSelectState(selectProps) as SelectState<T>;
 
   const popoverRef = useRef() as React.RefObject<HTMLElement>;
   const listBoxRef = useRef() as React.RefObject<HTMLElement>;
@@ -138,7 +139,7 @@ const useSelectField = <T extends object>(
     selectProps,
     state,
     triggerRef,
-  );
+  ) as SelectAria<T>;
 
   // The following props are being passed into multiple
   // DOM elements that leads to multiple test failures
@@ -147,6 +148,7 @@ const useSelectField = <T extends object>(
   delete menuProps.shouldSelectOnPressUp;
   delete menuProps.shouldFocusOnHover;
   delete menuProps.disallowEmptySelection;
+  delete menuProps.linkBehavior;
 
   const {
     fieldContainerProps,
