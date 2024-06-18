@@ -165,6 +165,8 @@ describe('CopyText', () => {
     });
 
     test('tooltip renders with the text "Copied!" hides after delay', async () => {
+      jest.useRealTimers();
+
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
       fireEvent.click(button);
@@ -173,6 +175,8 @@ describe('CopyText', () => {
 
       await new Promise(resolve => setTimeout(resolve, 1000));
       expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
+
+      jest.useFakeTimers();
     });
   });
 
