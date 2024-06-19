@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.68.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.67.0...@pingux/astro@2.68.0) (2024-06-19)
+
+
+### Features
+
+* [UIP-6863] LinkSelectField Console error ([f348e20](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f348e20a46bd33141c4c244312425399f7347c5e))
+* [UIP-6870] PageHeader Update to match spec ([d7c488a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d7c488a45647c3bd035eaf3fb33a19212d205bd8))
+
+
+
+
+
 # [2.67.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.66.0...@pingux/astro@2.67.0) (2024-06-13)
 
 
