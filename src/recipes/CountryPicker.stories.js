@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useFilter } from '@react-aria/i18n';
 import { countries as countriesObj } from 'countries-list';
 import { withDesign } from 'storybook-addon-designs';
 
@@ -43,38 +44,40 @@ const sx = {
 };
 
 export const Default = () => {
+  const countries = Object.entries(countriesObj);
+
   const [isOpen, setIsOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-  const [phoneCodeValue, setPhoneCodeValue] = useState('');
-  const [selectedKey, setSelectedKey] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const getInputValue = () => {
-    if (isOpen) return searchValue;
-    return phoneCodeValue || searchValue;
-  };
+  const [fieldState, setFieldState] = useState({
+    inputValue: '',
+    selectedKey: '',
+    searchValue: '',
+    items: countries,
+  });
 
-  const inputHandler = value => {
-    setSearchValue(value);
-    if (!value) {
-      setSelectedKey(null);
-      setPhoneCodeValue('');
-    }
-  };
+  const { contains } = useFilter({
+    sensitivity: 'base',
+  });
+
+  const inputHandler = useCallback(value => {
+    setFieldState({
+      inputValue: !value ? '' : value,
+      selectedKey: null,
+      searchValue: value,
+      items: countries.filter(item => contains(`${item[1].name}${item[1].name !== item[1].native ? ` (${item[1].native})` : ''} +${item[1].phone[0]}`, value)),
+    });
+  }, [countries, setFieldState, contains]);
 
   const selectionHandler = key => {
-    setSelectedKey(key);
-    if (key) {
-      setPhoneCodeValue(`+${countriesObj[key].phone.split(',')[0]}`);
-    } else {
-      setSearchValue('');
-      setPhoneCodeValue('');
-    }
-    setIsOpen(false);
-  };
-
-  const keyHandler = e => {
-    if (e.keyCode !== 13) setIsOpen(true);
+    const selectedItem = Object.entries(countries.filter(item => item[0] === key));
+    setFieldState({
+      inputValue: key ? `+${countriesObj[key].phone.split(',')[0]}` : '',
+      selectedKey: key,
+      searchValue: !key ? '' : `+${countriesObj[key].phone.split(',')[0]}`,
+      items: countries.filter(item => contains(item[1].name, selectedItem[1]?.name ?? '')),
+    });
+    if (isOpen) setIsOpen(false);
   };
 
   const onPhoneNumberValueChange = e => {
@@ -94,16 +97,17 @@ export const Default = () => {
         wrapperProps={{ sx: isOpen ? sx.comboBoxFieldWrapperOpen : sx.comboBoxFieldWrapperClose }}
         controlProps={{ 'aria-label': 'Country Picker' }}
         scrollBoxProps={{ maxHeight: '215px' }}
-        defaultItems={Object.entries(countriesObj)}
-        inputValue={getInputValue()}
+        items={fieldState.items}
+        inputValue={isOpen ? fieldState.searchValue : fieldState.inputValue}
+        selectedKey={fieldState.selectedKey}
         onInputChange={inputHandler}
-        selectedKey={selectedKey}
         onSelectionChange={selectionHandler}
-        onKeyUp={keyHandler}
         menuTrigger="focus"
+        aria-labelledby="group-label"
+        label=" "
       >
         {item => (
-          <Item key={item[0]}>
+          <Item key={item[0]} textValue={`+${item[1].phone.split(',')[0]}`}>
             {`${item[1].name}${item[1].name !== item[1].native ? ` (${item[1].native})` : ''} +${item[1].phone.split(',')[0]}`}
           </Item>
         )}
