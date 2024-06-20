@@ -74,24 +74,30 @@ test('renders Messages component in the default state with dynamic list', () => 
 });
 
 test('click on close button fires `onClose` callback', () => {
+  jest.useRealTimers();
+
   const onClose = jest.fn();
   getComponent({ onClose });
   const buttons = screen.getAllByRole('button');
   userEvent.click(buttons[0]);
   expect(onClose).toHaveBeenCalled();
+
+  jest.useFakeTimers();
 });
 
 test('`onClose` get as first arg key of message', () => {
+  jest.useRealTimers();
+
   const onClose = jest.fn();
   getComponent({ onClose });
   const buttons = screen.getAllByRole('button');
   userEvent.click(buttons[0]);
   expect(onClose).toHaveBeenCalledWith('message1');
+
+  jest.useFakeTimers();
 });
 
 test('click on close button removes message after delay', () => {
-  jest.useFakeTimers();
-
   getComponent();
   const messages = screen.getByTestId(testId);
   expect(messages.childElementCount).toBe(2);

@@ -33,7 +33,7 @@ export const universalComponentTests = async ({ renderComponent, rules = {} }) =
 
       const { container } = render(renderComponent());
       const results = await axe(container, { rules });
-
+      jest.useFakeTimers();
       expect(results).toHaveNoViolations();
     });
 

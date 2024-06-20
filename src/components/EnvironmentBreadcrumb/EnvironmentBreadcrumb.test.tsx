@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { EnvironmentBreadcrumb, Item, OverlayProvider } from '../..';
 import { EnvironmentBreadcrumbProps, EnvironmentItemProps } from '../../types';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
-import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { breadCrumbDataIds } from './EnvironmentBreadcrumb';
 
@@ -93,8 +92,9 @@ const getComponent = (props: EnvironmentBreadcrumbProps<
 const getSectionsComponent = (props: EnvironmentBreadcrumbProps<
   EnvironmentItemProps> = {}) => render(renderSectionsComponent(props));
 
-universalComponentTests({ renderComponent });
-universalComponentTests({ renderComponent: renderSectionsComponent });
+// This file does not call universalComponentTests directly. There is a separate file,
+// ./EnvironmentalBreadcrumbUniversal.test.tsx, that calls it for both the EnvironmentBreadcrumb
+// and the EnvironmentBreadcrumb with sections.
 
 beforeAll(() => {
   const callback = cb => cb();
@@ -108,8 +108,6 @@ beforeAll(() => {
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
   jest.spyOn(window, 'requestAnimationFrame').mockImplementation(callback);
-
-  jest.useFakeTimers();
 });
 
 afterEach(() => {
