@@ -2,5 +2,10 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 
 import { renderComponent, renderSectionsComponent } from './EnvironmentBreadcrumb.test';
 
-universalComponentTests({ renderComponent });
-universalComponentTests({ renderComponent: renderSectionsComponent });
+const runUniversalComponentTests = async () => {
+  await universalComponentTests({ renderComponent });
+
+  await universalComponentTests({ renderComponent: renderSectionsComponent });
+};
+
+runUniversalComponentTests();
