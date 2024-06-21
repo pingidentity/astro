@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.69.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.68.0...@pingux/astro@2.69.0) (2024-06-21)
+
+
+### Bug Fixes
+
+* await EnvironmentalBreadcrumb universal tests ([9b90678](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9b906783d13f10ac53a65d5a3359f3b697823214))
+* usage of useFakeTimer and useRealTimer ([f62c8c0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f62c8c015896ed33d2142f5e4f66466c1d6e55c3))
+
+
+### Features
+
+* [UIP-6947] CountryPicker freezes after invalid country ([6262bf1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6262bf1f87653e8f8a60673f08cb8ae20f72df74))
+
+
+
+
+
 # [2.68.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.67.0...@pingux/astro@2.68.0) (2024-06-19)
 
 
