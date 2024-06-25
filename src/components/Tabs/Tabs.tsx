@@ -24,6 +24,12 @@ const TabPanel = forwardRef<HTMLElement, TabPanelProps>(({ state, ...props }, re
     state as TabListState<object>,
     tabPanelRef as RefObject<Element>) as TabPanelAria;
 
+  if (state?.selectedItem?.props?.isListItem) {
+    const parentTab = tabPanelRef.current?.previousElementSibling?.querySelector(
+      `[name="${state?.selectedItem?.props?.parentName}"]`);
+    raTabPanelProps['aria-labelledby'] = parentTab?.id;
+  }
+
   return (
     <Box {...tabPanelProps} {...raTabPanelProps} ref={tabPanelRef} role="tabpanel">
       {children}
@@ -71,7 +77,7 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
     tabListProps: raTabListProps,
   }: TabListAria = useTabList(props as AriaTabListOptions<TabListItemProps>,
     state as TabListState<TabListItemProps>,
-    tabListRef as RefObject<HTMLElement>);//= useTabList(props, state, tabListRef);
+    tabListRef as RefObject<HTMLElement>);
 
 
   return (
