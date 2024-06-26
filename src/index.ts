@@ -59,6 +59,8 @@ export * from './components/CollapsiblePanelItem';
 export { default as ColorField } from './components/ColorField';
 export { default as ComboBoxField } from './components/ComboBoxField';
 export { default as CopyText } from './components/CopyText';
+export { default as DataTable } from './components/DataTable';
+export * from './components/DataTable';
 export { default as DatePicker } from './components/DatePicker';
 export { default as DateField } from './components/DatePicker/DateField';
 export { default as EditButton } from './components/EditButton';
@@ -66,6 +68,7 @@ export { default as EnvironmentBreadcrumb } from './components/EnvironmentBreadc
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 export { default as FileInputField } from './components/FileInputField';
+export { default as Grid } from './components/Grid';
 export { default as HelpHint } from './components/HelpHint';
 export * from './components/HelpHint';
 export { default as Icon } from './components/Icon';
@@ -183,8 +186,6 @@ export * from './components/TreeView';
 
 /* eslint-enable import/export */
 
-export { default as DataTable } from './components/DataTable';
-export * from './components/DataTable';
 export * from './types';
 export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
 export { Item, Section, useOverlayTriggerState, useTreeData } from 'react-stately';

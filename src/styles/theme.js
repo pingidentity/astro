@@ -3,7 +3,7 @@ import colors, { accent, focus, line, shadow } from './colors';
 import forms from './forms';
 import spacing from './spacing';
 import { fontSizes, fontWeights, textColors } from './text';
-import { badges, buttons, cards, images, links, text, variants } from './variants';
+import { badges, buttons, cards, grids, images, links, text, variants } from './variants';
 
 export default {
   name: 'Astro',
@@ -40,6 +40,7 @@ export default {
   forms,
   text,
   images,
+  grids,
   buttons,
   badges,
   cards,
