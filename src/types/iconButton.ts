@@ -1,4 +1,4 @@
-import { IconButtonProps as ThemeUIIconButtonProps, ThemeUICSSObject } from 'theme-ui';
+import { IconButtonProps as ThemeUIIconButtonProps } from 'theme-ui';
 
 import { TestingAttributes } from './shared/test';
 import { IconTypeExtended } from './icon';

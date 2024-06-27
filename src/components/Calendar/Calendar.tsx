@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { CalendarAria } from 'react-aria';
+import { AriaCalendarProps, CalendarAria } from 'react-aria';
 import { createCalendar, DateValue, parseDate } from '@internationalized/date';
 import ChevronDoubleLeftIcon from '@pingux/mdi-react/ChevronDoubleLeftIcon';
 import ChevronDoubleRightIcon from '@pingux/mdi-react/ChevronDoubleRightIcon';
 import ChevronLeftIcon from '@pingux/mdi-react/ChevronLeftIcon';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
-import { AriaCalendarProps, useCalendar } from '@react-aria/calendar';
+import { useCalendar } from '@react-aria/calendar';
 import { useLocale } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { type CalendarState, type CalendarStateOptions, useCalendarState } from '@react-stately/calendar';
@@ -49,6 +49,10 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
     { ...props, ...parsedDates } as AriaCalendarProps<DateValue>,
     state,
   ) as CalendarAria;
+
+  // to remove warning for unknown event handler property `onFocusChange`.
+  delete prevButtonProps.onFocusChange;
+  delete nextButtonProps.onFocusChange;
 
   const [yearChangeDirection, setYearChangeDirection] = useState(null);
   const previousYearRef = useRef<HTMLButtonElement>(null);

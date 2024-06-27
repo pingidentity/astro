@@ -577,9 +577,6 @@ test('dateField should handle autofocus when deleting segments from middle', () 
     fireEvent.keyDown(day, { key: 'Backspace' });
     fireEvent.keyUp(day, { key: 'Backspace' });
   }
-
-  fireEvent.keyDown(year, { key: 'Backspace' });
-  fireEvent.keyUp(year, { key: 'Backspace' });
   expect(day).toHaveFocus();
   expect(hiddenInput).toHaveValue('');
 });
@@ -612,6 +609,68 @@ test('segment focus should move to the year if month is already empty', () => {
     fireEvent.keyUp(day, { key: 'Backspace' });
   }
   expect(year).toHaveFocus();
+});
+
+test('segment focus stay on year if all are empty for year segment', () => {
+  getComponent({ defaultValue: '' });
+
+  const hiddenInput = screen.queryByTestId('date-field');
+  const inputButtons = screen.queryAllByRole('spinbutton');
+  const year = inputButtons[0];
+
+  expect(hiddenInput).toHaveValue('');
+
+  act(() => {
+    year.focus();
+  });
+  expect(year).toHaveFocus();
+
+  fireEvent.keyDown(year, { key: 'Backspace' });
+  fireEvent.keyUp(year, { key: 'Backspace' });
+
+  expect(year).toHaveFocus();
+});
+
+test('segment focus should move to previous if all are empty for month segment', () => {
+  getComponent({ defaultValue: '' });
+
+  const hiddenInput = screen.queryByTestId('date-field');
+  const inputButtons = screen.queryAllByRole('spinbutton');
+  const month = inputButtons[1];
+  const year = inputButtons[0];
+
+  expect(hiddenInput).toHaveValue('');
+
+  act(() => {
+    month.focus();
+  });
+  expect(month).toHaveFocus();
+
+  fireEvent.keyDown(month, { key: 'Backspace' });
+  fireEvent.keyUp(month, { key: 'Backspace' });
+
+  expect(year).toHaveFocus();
+});
+
+test('segment focus should move to previous if all are empty for day segment', () => {
+  getComponent({ defaultValue: '' });
+
+  const hiddenInput = screen.queryByTestId('date-field');
+  const inputButtons = screen.queryAllByRole('spinbutton');
+  const day = inputButtons[2];
+  const month = inputButtons[1];
+
+  expect(hiddenInput).toHaveValue('');
+
+  act(() => {
+    day.focus();
+  });
+  expect(day).toHaveFocus();
+
+  fireEvent.keyDown(day, { key: 'Backspace' });
+  fireEvent.keyUp(day, { key: 'Backspace' });
+
+  expect(month).toHaveFocus();
 });
 
 test('should add the correct number of padded 0 to year, month and day', () => {
