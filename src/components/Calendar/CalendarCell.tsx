@@ -52,12 +52,12 @@ const CalendarCell = forwardRef<HTMLDivElement, CalendarCellProps>((props, ref) 
       focusNextPage();
     }
   }, [
-    date,
     focusNextPage,
     focusPreviousPage,
     formattedDate,
     state,
     setFocused,
+    cellRef,
   ]);
 
   const { hoverProps, isHovered } = useHover({});

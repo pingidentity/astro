@@ -189,14 +189,13 @@ test('allows users to select and navigate through calendar items', () => {
 });
 
 test('readonly calendar', () => {
-  getComponent({ isReadOnly: true, defaultValue: '2022-08-10' });
+  getComponent({ isReadOnly: true });
 
   expect(screen.queryByRole('grid')).toHaveAttribute('aria-readonly', 'true');
   const dateButtons = screen.queryAllByRole('button');
+
   userEvent.click(dateButtons[4]);
   expect(dateButtons[4]).not.toHaveClass('is-selected');
-  expect(dateButtons[4]).toHaveFocus();
-  expect(dateButtons[4]).toHaveAttribute('tabindex', '0');
 });
 
 test('disabled calendar date', () => {

@@ -6,8 +6,7 @@ import { AccordionItemAriaProps, useAccordionItem } from '@react-aria/accordion'
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { TreeState } from '@react-stately/tree';
-// eslint-disable-next-line import/no-unresolved
-import { Node } from '@react-types/shared';
+import type { Node } from '@react-types/shared';
 import { Button as ThemeUIButton } from 'theme-ui';
 
 import { AccordionContext } from '../../context/AccordionContext';
