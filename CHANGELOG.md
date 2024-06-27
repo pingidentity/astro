@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.70.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.69.0...@pingux/astro@2.70.0) (2024-06-27)
+
+
+### Features
+
+* [UIP-6897] Accessibility violations found for Tab lists ([6b48aff](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b48aff46428fe8e8a7ebf39efdd58c2ff08f179))
+* [UIP-6931] RangeCalendar ([0e73477](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0e73477845a022bcb65e78e3bca72cb7d6949f7d))
+* [UIP-6978] Add Grid component ([75c700c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/75c700c6a78fc06dff728966c719ba84f8e2a023))
+
+
+
+
+
 # [2.69.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.68.0...@pingux/astro@2.69.0) (2024-06-21)
 
 
