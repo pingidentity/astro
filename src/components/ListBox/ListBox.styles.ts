@@ -22,6 +22,27 @@ listBox.option = {
     color: 'white',
     bg: 'active',
   },
+  '&.is-condensed': {
+    '&.is-selected': {
+      pl: 'md',
+      color: 'text.primary',
+      fontWeight: 400,
+    },
+    '&.is-focused': {
+      color: 'text.primary',
+      fontWeight: 400,
+      bg: 'white',
+    },
+  },
+};
+
+listBox.checkboxIcon = {
+  '&.is-focus-visible': {
+    boxShadow: 'none',
+    outline: '1px solid',
+    outlineColor: 'focus',
+    outlineOffset: '0px',
+  },
 };
 
 listBox.selectField = {

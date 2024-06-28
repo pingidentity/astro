@@ -10,8 +10,27 @@ import Icon from '../Icon';
 
 import { ListBoxContext } from './ListBoxContext';
 
+const UncheckedIcon = prop => (
+
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="variable-icon-title" {...prop}>
+    <title id="variable-icon-title">Unchecked Icon</title>
+    <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+  </svg>
+);
+
+
+const CheckedIcon = prop => (
+
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="variable-icon-title" {...prop}>
+    <title id="variable-icon-title">Checked Icon</title>
+    <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+  </svg>
+
+);
+
 const Option = forwardRef((props: OptionType, ref) => {
-  const { item, hasVirtualFocus, ...others } = props;
+  const { item, hasVirtualFocus, isCondensed, ...others } = props;
+
   const { key, props: itemProps, rendered, 'aria-label': ariaLabel } = item;
 
   const state = useContext(ListBoxContext) as ListBoxStateType;
@@ -20,12 +39,12 @@ const Option = forwardRef((props: OptionType, ref) => {
   const optionRef = useRef(null);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => optionRef.current);
-  const { optionProps, isDisabled, isSelected, isFocused } = useOption(
+  const { optionProps, isDisabled, isSelected, isFocused, isFocusVisible } = useOption(
     {
       key,
       shouldSelectOnPressUp: true,
-      shouldFocusOnHover: true,
-      shouldUseVirtualFocus: hasVirtualFocus,
+      shouldFocusOnHover: !isCondensed,
+      shouldUseVirtualFocus: isCondensed ? false : hasVirtualFocus,
       isVirtualized: true,
       ...others,
     },
@@ -34,8 +53,9 @@ const Option = forwardRef((props: OptionType, ref) => {
   );
 
   const focused = isFocused || state?.selectionManager?.focusedKey === item.key;
+
   const setFocusOnHover = () => {
-    if (!focused) {
+    if (!focused && !isCondensed) {
       state.selectionManager.setFocusedKey(item.key);
     }
   };
@@ -44,6 +64,8 @@ const Option = forwardRef((props: OptionType, ref) => {
     isDisabled: isDisabled || isSeparator,
     isFocused: focused,
     isSelected,
+    isCondensed,
+    isFocusVisible,
   });
 
   const updateActiveDescendant = useMultivaluesContext();
@@ -72,8 +94,17 @@ const Option = forwardRef((props: OptionType, ref) => {
       {...others}
       aria-label={ariaLabel}
     >
-      {isSelected && <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />}
-      {rendered}
+      { (isCondensed ? (
+        <Icon
+          icon={isSelected ? CheckedIcon : UncheckedIcon}
+          color="active"
+          size="24px"
+          mr="xs"
+          className={classNames}
+          variant="listBox.checkboxIcon"
+        />
+      ) : (isSelected && <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />)) }
+      { rendered}
     </Box>
   );
 });

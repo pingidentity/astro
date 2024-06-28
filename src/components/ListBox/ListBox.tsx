@@ -46,6 +46,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     hasNoEmptySelection,
     hasVirtualFocus,
     id,
+    isCondensed,
     isLoading,
     isFocusedOnHover,
     isSelectedOnPressUp,
@@ -158,6 +159,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
                 key={item.key}
                 item={item}
                 hasVirtualFocus={hasVirtualFocus}
+                isCondensed={isCondensed}
               />
             );
           } if (type === collectionTypes.LOADER) {
