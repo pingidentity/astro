@@ -6,6 +6,7 @@ import { ReusableView } from '@react-stately/virtualizer';
 import type { CollectionChildren, FocusStrategy } from '@react-types/shared';
 
 import { BoxProps } from './box';
+import { StyleProps } from './shared';
 
 export interface ComboBoxStateType extends ComboBoxState<object> {
   focusStrategy: FocusStrategy,
@@ -35,11 +36,17 @@ export interface ListBoxProps extends AriaListBoxOptions<object>{
   renderEmptyState?: React.ReactNode,
   variant?: string
   children?: CollectionChildren<object>
+  isCondensed?: boolean
 }
 
 export interface OptionType {
   item: ListBoxItemType,
   hasVirtualFocus?: boolean,
+  isCondensed?: boolean
+}
+
+export interface OptionWithCheckboxType extends StyleProps {
+  isSelected?: boolean
 }
 
 export interface AriaListBoxOptionsType extends AriaOptionProps {

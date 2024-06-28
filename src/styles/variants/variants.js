@@ -35,6 +35,7 @@ import separator from '../../components/Separator/Separator.styles';
 import stepper from '../../components/Stepper/Stepper.styles';
 import table from '../../components/Table/Table.styles';
 import * as tab from '../../components/Tabs/Tabs.style';
+import timefield from '../../components/TimeField/TimeField.styles';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
 import treeView from '../../components/TreeView/TreeView.styles';
@@ -76,6 +77,7 @@ export default {
   separator,
   stepper,
   table,
+  timefield,
   timeZone,
   tooltip,
   treeView,

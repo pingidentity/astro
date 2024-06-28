@@ -79,6 +79,9 @@ export const FIGMA_LINKS = {
   countryPicker: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=4568-7532&mode=design&t=eSfQYHRFNPf37J4C-0',
   },
+  dateTimeRangePicker: {
+    default: 'https://www.figma.com/design/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=49152-4497&t=n7OkhpTOBBWW4rme-0',
+  },
   helpHint: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A4534&t=We3h7LaaFJQnxdSy-1',
     withLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=28958%3A40081&mode=design&t=WmSYPx1hR8kxFiXf-1',
