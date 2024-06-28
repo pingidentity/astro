@@ -577,6 +577,7 @@ test('dateField should handle autofocus when deleting segments from middle', () 
     fireEvent.keyDown(day, { key: 'Backspace' });
     fireEvent.keyUp(day, { key: 'Backspace' });
   }
+
   expect(day).toHaveFocus();
   expect(hiddenInput).toHaveValue('');
 });

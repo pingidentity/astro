@@ -11,6 +11,7 @@ import search from '../../components/SearchField/Search.styles';
 import * as select from '../../components/SelectField/Select.styles';
 import * as switchable from '../../components/Switch/Switch.styles'; // 'switch' is a reserved keyword
 import textarea from '../../components/TextArea/TextArea.styles';
+import timeField from '../../components/TimeField/TimeField.styles';
 
 // See ThemeUI docs on variants and themes for intended structure
 // Variants should be defined in the approprate file.
@@ -26,6 +27,7 @@ export default {
   radio,
   ...select,
   textarea,
+  timeField,
   switch: { ...switchable },
   search,
 };
