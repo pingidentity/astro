@@ -180,6 +180,8 @@ export { default as TextAreaField } from './components/TextAreaField';
 export * from './components/TextAreaField';
 export { default as TextField } from './components/TextField';
 export * from './components/TextField';
+export { default as TimeField } from './components/TimeField';
+export * from './components/TimeField';
 export { default as TimeZonePicker } from './components/TimeZonePicker';
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';

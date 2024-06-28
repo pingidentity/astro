@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Experimental/TimeField/TimeField" />
+
+# TimeField
+
+The TimeField component allows users to enter and edit time values using a keyboard. Each part of the time is displayed in individual editable segments.
+
+When using strings as props for different TimeValues, ensure that they adhere to the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+
+This component is built on [useTimeField](https://react-spectrum.adobe.com/react-aria/useTimeField.html) from React Aria
+and [useTimeFieldState](https://react-spectrum.adobe.com/react-stately/useTimeFieldState.html) from React Stately.
+
+### Required components 
+
+This component can be used independently and does not require additional components. 
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Up and down Arrow keys | When segments are focused, it increments and decrements time values |
+| Left and right arrows | Moves focus between segments. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+
+- The **`aria-label`** attribute is used to provide an accessible name.
+- The hidden input, TimeField, and all spin buttons have an **`aria-labelledby`** attribute pointing to the label ID, along with the **`aria-label`** attribute for an accessible name.
+- Each spin button has an **`aria-valuenow`**, **`aria-valuemin`**, and **`aria-valuemax`** to represent the current value, minimum allowed value, and maximum allowed value.
