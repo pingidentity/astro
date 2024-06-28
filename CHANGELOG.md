@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.71.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.70.0...@pingux/astro@2.71.0) (2024-06-28)
+
+
+### Features
+
+* [UIP-6932] Checkbox multiselect list ([8779391](https://gitlab.corp.pingidentity.com/ux/pingux/commit/877939160496f1c53725283c79d715e2ce8b5b57))
+* [UIP-6941] "Timefield component" ([83e9111](https://gitlab.corp.pingidentity.com/ux/pingux/commit/83e9111c5ba194aaef41d8ba85e0b09a2b4c0fb4))
+* [UIP-6942] "DateTimeRangePicker" ([2e9601a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2e9601ab5a6b3c89cefcd1912fb7bb5a3bfd4086))
+
+
+
+
+
 # [2.70.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.69.0...@pingux/astro@2.70.0) (2024-06-27)
 
 
