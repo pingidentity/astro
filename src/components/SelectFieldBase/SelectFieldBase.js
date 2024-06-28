@@ -60,6 +60,7 @@ const SelectFieldBase = forwardRef(({
         {...ariaProps}
         aria-describedby={helperText && helperTextId}
       >
+        {slots?.leftOfData}
         <Box as="span" variant="forms.select.currentValue" {...valueProps}>
           {/* Use selectedItem.props.value if item text in selectedfield
               should differ from the option text */}
@@ -155,6 +156,8 @@ SelectFieldBase.propTypes = {
   }),
   /** Provides a way to insert markup in specified places. */
   slots: PropTypes.shape({
+    /** The given node will be inserted before the text in field container. */
+    leftOfData: PropTypes.node,
     /** The given node will be inserted into the field container. */
     inContainer: PropTypes.node,
   }),
