@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { Item, MultivaluesField, OverlayProvider } from '../../index';
+import { Item, MultivaluesField, OverlayProvider, Section } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { fireEvent, getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -11,8 +11,33 @@ const items = [
   { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
   { id: 3, name: 'Snake', key: 'Snake' },
 ];
+
+const withSection = [
+  {
+    name: 'Animals',
+    key: 'Animals',
+    children: [
+      { name: 'Option A1' },
+      { name: 'Option A2' },
+    ],
+  },
+  {
+    name: 'People',
+    key: 'People',
+    children: [
+      { name: 'Option B1' },
+      { name: 'Option B2' },
+      { name: 'Option B3' },
+    ],
+  },
+];
+
 const defaultProps = {
   items,
+  label: 'Field Label',
+};
+const defaultSectionProps = {
+  items: withSection,
   label: 'Field Label',
 };
 
@@ -31,6 +56,18 @@ const getComponentInForm = (onFormSubmit, props = {}, { renderFn = render } = {}
         {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
       </MultivaluesField>
     </form>
+  </OverlayProvider>
+));
+
+const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+  <OverlayProvider>
+    <MultivaluesField {...defaultSectionProps} {...props} mode="condensed">
+      {section => (
+        <Section key={section.key} items={section.children} title={section.name}>
+          {item => <Item key={item.name}>{item.name}</Item>}
+        </Section>
+      )}
+    </MultivaluesField>
   </OverlayProvider>
 ));
 
@@ -723,6 +760,224 @@ test('in non-restrictive mode the partial string values should be accepted', () 
   userEvent.type(input, '{enter}');
   expect(input).not.toHaveValue('');
   expect(input).toHaveValue(value);
+});
+
+test('in condensed mode selects and deselects ', () => {
+  getComponent({ mode: 'condensed' });
+
+  userEvent.tab();
+
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const firstOption = options[0];
+  const buttons = screen.getAllByRole('button');
+  const button = buttons[1];
+  expect(button).toHaveTextContent('Select All');
+  button.click();
+
+  expect(button).toHaveTextContent('Deselect All');
+
+  expect(screen.getByText('All Selected')).toBeInTheDocument();
+
+  firstOption.click();
+  expect(button).toHaveTextContent('Select All');
+  expect(screen.getByText('2 Selected')).toBeInTheDocument();
+
+  button.click();
+  expect(button).toHaveTextContent('Deselect All');
+  button.click();
+  expect(button).toHaveTextContent('Select All');
+});
+
+test('in condensed mode "onSelectionChange" is called', () => {
+  const onSelectionChange = jest.fn();
+  getComponent({ mode: 'condensed', onSelectionChange });
+  const input = screen.getByRole('combobox');
+  const value = 'Aardvark';
+  userEvent.type(input, value);
+  const option = within(screen.getByRole('listbox')).getByRole('option');
+  userEvent.click(option);
+  expect(screen.getByText('1 Selected')).toBeInTheDocument();
+
+  expect(onSelectionChange).toBeCalledTimes(1);
+  expect(onSelectionChange.mock.calls[0][0].has(value)).toBeTruthy();
+});
+
+test('opening and closing listbox fires "onOpenChange" in condensed mode', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ mode: 'condensed', onOpenChange });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenCalledWith(true);
+  input.blur();
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenCalledWith(false);
+});
+
+test('selected keys in condensed mode ', () => {
+  getComponent({ mode: 'condensed', selectedKeys: [items[1].key, items[2].key] });
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).not.toBeInTheDocument();
+
+  expect(screen.getByText('2 Selected')).toBeInTheDocument();
+});
+
+test('default selected keys in condensed mode ', () => {
+  getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key] });
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).not.toBeInTheDocument();
+
+  expect(screen.getByText('2 Selected')).toBeInTheDocument();
+});
+
+test('onInputChange is called in condensed mode ', () => {
+  const onInputChange = jest.fn();
+  getComponent({ mode: 'condensed', onInputChange });
+
+  const input = screen.getByRole('combobox');
+  const value = 'Aardvark';
+  userEvent.type(input, value);
+
+  const listbox = screen.getByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+
+  const options = within(listbox).getAllByRole('option');
+  expect(options.length).toBe(1);
+
+  expect(onInputChange).toBeCalledTimes(value.length);
+  expect(onInputChange).toHaveBeenCalledWith(value);
+});
+
+test('opens listbox on focus and fires "onFocus', () => {
+  const onFocus = jest.fn();
+  getComponent({ mode: 'condensed', onFocus });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
+  const options = screen.getAllByRole('option');
+  expect(options.length).toBe(items.length);
+  expect(options[0]).toHaveTextContent(items[0].name);
+  expect(onFocus).toBeCalled();
+});
+
+test('closes listbox on blur and fires "onBlur"', () => {
+  const onBlur = jest.fn();
+  getComponent({ mode: 'condensed', onBlur });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  input.blur();
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(onBlur).toBeCalled();
+});
+
+test('list and button are keyboard accessible', () => {
+  getComponent({ mode: 'condensed' });
+
+  userEvent.tab();
+
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const firstOption = options[0];
+  const secondOption = options[1];
+  const buttons = screen.getAllByRole('button');
+  const button = buttons[1];
+
+  userEvent.tab();
+  expect(button).toHaveFocus();
+
+  userEvent.tab();
+  expect(firstOption).toHaveFocus();
+
+  userEvent.type(firstOption, '{arrowdown}', { skipClick: true });
+  expect(secondOption).toHaveFocus();
+
+  userEvent.type(secondOption, '{esc}', { skipClick: true });
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+});
+
+test('popover closes on input blur', () => {
+  getComponent({ mode: 'condensed' });
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(input);
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const checkboxes = within(listbox).getAllByRole('img');
+  expect(checkboxes.length).toBe(3);
+
+  const secondOption = options[1];
+  secondOption.click();
+
+  const value = 'Aardvark';
+  userEvent.type(input, value);
+
+  userEvent.click(document.body);
+  expect(input).toHaveValue('');
+  expect(listbox).not.toBeInTheDocument();
+});
+
+test('trigger button handles popover open and close in condensed', () => {
+  getComponent({ mode: 'condensed' });
+
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(screen.getAllByRole('button')[0]);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(input).toHaveFocus();
+  userEvent.tab();
+
+  fireEvent.click(screen.getAllByRole('button')[0]);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+});
+
+test('should render items with sections passed in props', () => {
+  getSectionsComponent();
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(input);
+  expect(screen.getAllByRole('group')).toHaveLength(2);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(5);
+});
+
+test('should render the separators', () => {
+  getSectionsComponent();
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(input);
+  expect(screen.queryAllByRole('separator')).toHaveLength(3);
+  const groups = screen.getAllByRole('group');
+  expect(groups).toHaveLength(2);
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.queryAllByRole('option')).toHaveLength(5);
+
+  groups.forEach((group, index) => {
+    expect(() => within(group).getByText(withSection[index].name));
+    const itemOpt = withSection[index].options;
+    if (Array.isArray(itemOpt)) {
+      itemOpt.forEach(opt => (
+        expect(() => within(group).getByText(opt.name))
+      ));
+    }
+  });
 });
 
 // Needs to be added to each components test file

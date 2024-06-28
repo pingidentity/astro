@@ -7,12 +7,14 @@ import {
   Item,
   MultivaluesField,
   OverlayProvider,
+  Section,
 } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import MultivaluesFieldReadme from './MultivaluesField.mdx';
+
 
 export default {
   title: 'Form/MultivaluesField',
@@ -148,6 +150,40 @@ const items = [
   { id: 5, name: 'Seal', key: 'Seal' },
   { id: 6, name: 'Orangutan', key: 'Orangutan' },
   { id: 7, name: 'Shark', key: 'Shark' },
+];
+
+const checkboxItems = [
+  { id: 1, name: 'Option 1', key: 'Option 1' },
+  { id: 2, name: 'Option 2', key: 'Option 2' },
+  { id: 3, name: 'Option 3', key: 'Option 3' },
+  { id: 4, name: 'Option 4', key: 'Option 4' },
+  { id: 5, name: 'Option 5', key: 'Option 5' },
+  { id: 6, name: 'Option 6', key: 'Option 6' },
+  { id: 7, name: 'Option 7', key: 'Option 7' },
+];
+
+const withSection = [
+  {
+    name: 'Animals',
+    key: 'Animals',
+    children: [
+      { name: 'Option A1' },
+      { name: 'Option A2' },
+      { name: 'Option A3' },
+      { name: 'Option A4' },
+      { name: 'Option A5' },
+    ],
+  },
+  {
+    name: 'People',
+    key: 'People',
+    children: [
+      { name: 'Option B1' },
+      { name: 'Option B2' },
+      { name: 'Option B3' },
+    ],
+  },
+
 ];
 
 const itemsWithSlots = [
@@ -443,7 +479,7 @@ export const CustomSize = args => {
     <Box sx={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
       <Box width={300}>
         <OverlayProvider
-          // note: spacing for demo purpose only so that the select list renders in the right place
+      // note: spacing for demo purpose only so that the select list renders in the right place
           style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
         >
           <MultivaluesField items={items} {...args} onOpenChange={onOpenChange}>
@@ -456,5 +492,56 @@ export const CustomSize = args => {
         </OverlayProvider>
       </Box>
     </Box>
+  );
+};
+
+
+export const Condensed = args => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the right place
+      style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
+    >
+      <MultivaluesField items={checkboxItems} {...args} mode="condensed" onOpenChange={onOpenChange}>
+        {item => (
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+
+  );
+};
+
+export const CondensedWithSection = args => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the right place
+      style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
+    >
+      <MultivaluesField items={withSection} {...args} mode="condensed" onOpenChange={onOpenChange}>
+        {section => (
+          <Section key={section.key} items={section.children} title={section.name}>
+            {item => <Item key={item.name}>{item.name}</Item>}
+          </Section>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+
   );
 };
