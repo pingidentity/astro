@@ -3,7 +3,7 @@ import ExploreIcon from '@pingux/mdi-react/CompassOutlineIcon';
 import HelpCircleOutlineIcon from '@pingux/mdi-react/HelpCircleOutlineIcon';
 import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
 
-import { DefaultClosed as EnvironmentBreadcrumb } from '../../../components/EnvironmentBreadcrumb/EnvironmentBreadcrumb.stories';
+import { Default as EnvironmentBreadcrumb } from '../../../components/EnvironmentBreadcrumb/EnvironmentBreadcrumb.stories';
 import {
   Box,
   Icon,
