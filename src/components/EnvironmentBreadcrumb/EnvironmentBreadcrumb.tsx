@@ -272,7 +272,6 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
           onClose={handlePopoverClose}
           hasNoArrow
           isDismissable
-          p={10}
           role="presentation"
         >
           <FocusScope restoreFocus autoFocus contain>
@@ -283,6 +282,7 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
               aria-label="Items Search"
               data-testid="Environment-Breadcrumb-Search"
               onChange={setSearchValue}
+              p="10px"
               {...searchProps}
             />
             <VisuallyHidden role="alert" aria-live="polite" aria-busy={isTyping} id={optionsNumberMessageId}>

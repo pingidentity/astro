@@ -73,15 +73,6 @@ const environmentsWithSections: EnvironmentItemProps[] = [
       { name: 'Mine' },
     ],
   },
-  {
-    name: 'Other',
-    key: 'Other',
-    options: [
-      { name: 'Default' },
-      { name: 'Auth test', isSandbox: true },
-      { name: 'Mike’s Workforce' },
-    ],
-  },
 ];
 
 export const Default: StoryFn<EnvironmentBreadcrumbProps<EnvironmentItemProps>> = args => {
@@ -107,7 +98,7 @@ export const Default: StoryFn<EnvironmentBreadcrumbProps<EnvironmentItemProps>> 
     <EnvironmentBreadcrumb
       {...args}
       items={defaultEnvironments}
-      name="Globochem"
+      name="Organization"
       selectedItem={envNode}
       onSelectionChange={handleSelectionChange}
     >
@@ -119,49 +110,7 @@ export const Default: StoryFn<EnvironmentBreadcrumbProps<EnvironmentItemProps>> 
               label="SANDBOX"
               variant="environmentBadge"
               bg="neutral.40"
-            />
-          ) : null}
-        </Item>
-      )}
-    </EnvironmentBreadcrumb>
-  );
-};
-
-export const DefaultClosed = (args: EnvironmentBreadcrumbProps<EnvironmentItemProps>) => {
-  const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
-
-  const envNode = (
-    <Box isRow key={selectedEnvironment.name}>
-      <Text color="inherit">{selectedEnvironment.name}</Text>
-      {selectedEnvironment.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
-      ) : null}
-    </Box>
-  );
-
-  const findEnvObj = envName => defaultEnvironments.find(({ name }) => name === envName);
-
-  const handleSelectionChange = newEnvName => {
-    const envObj = findEnvObj(newEnvName);
-    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
-  };
-
-  return (
-    <EnvironmentBreadcrumb
-      {...args}
-      items={defaultEnvironments}
-      name="Globochem"
-      selectedItem={envNode}
-      onSelectionChange={handleSelectionChange}
-    >
-      {({ name, isSandbox }) => (
-        <Item key={name} textValue={name}>
-          {name}
-          {isSandbox ? (
-            <Badge
-              label="SANDBOX"
-              variant="environmentBadge"
-              bg="neutral.40"
+              align="right"
             />
           ) : null}
         </Item>
@@ -251,7 +200,7 @@ export const WithSections = () => {
   return (
     <EnvironmentBreadcrumb
       items={environments}
-      name="Globochem"
+      name="Organization"
       selectedItem={envNode}
       onSelectionChange={handleEnvPress}
       onFilteredOptionsNumber={setFilteredOptionsNumber}
@@ -277,6 +226,7 @@ export const WithSections = () => {
                     label="SANDBOX"
                     variant="environmentBadge"
                     bg="neutral.40"
+                    align="right"
                   />
                 ) : null}
               </Box>
@@ -290,7 +240,7 @@ export const WithSections = () => {
 
 
 export const OrgLevel = () => (
-  <EnvironmentBreadcrumb name="Globochem" />
+  <EnvironmentBreadcrumb name="Organization" />
 );
 
 export const DefaultOpen = () => {
@@ -315,7 +265,7 @@ export const DefaultOpen = () => {
   return (
     <EnvironmentBreadcrumb
       items={defaultEnvironments}
-      name="Globochem"
+      name="Organization"
       selectedItem={envNode}
       onSelectionChange={handleSelectionChange}
       isDefaultOpen
@@ -328,6 +278,7 @@ export const DefaultOpen = () => {
               label="SANDBOX"
               variant="environmentBadge"
               bg="neutral.40"
+              align="right"
             />
           ) : null}
         </Item>
@@ -359,68 +310,11 @@ export const ControlledMenu = () => {
   return (
     <EnvironmentBreadcrumb
       items={defaultEnvironments}
-      name="Globochem"
+      name="Organization"
       selectedItem={envNode}
       onSelectionChange={handleSelectionChange}
       isOpen={isOpen}
       onOpenChange={setIsOpen}
-    >
-      {({ name, isSandbox }) => (
-        <Item key={name} textValue={name}>
-          {name}
-          {isSandbox ? (
-            <Badge
-              label="SANDBOX"
-              variant="environmentBadge"
-              bg="neutral.40"
-            />
-          ) : null}
-        </Item>
-      )}
-    </EnvironmentBreadcrumb>
-  );
-};
-
-export const RightAlignedBadges = (args: EnvironmentBreadcrumbProps<EnvironmentItemProps>) => {
-  const items = [
-    { name: 'Default' },
-    { name: 'Kangaroo', isSandbox: true },
-    { name: 'Snake', isSandbox: true },
-    { name: 'Snail' },
-    { name: 'Slug', isSandbox: true },
-    { name: 'Crow' },
-    { name: 'Dog' },
-    { name: 'Crab', isSandbox: true },
-    { name: 'Fish', isSandbox: true },
-    { name: 'Turtle', isSandbox: true },
-    { name: 'Mouse' },
-  ];
-
-  const [selectedEnvironment, setSelectedEnvironment] = useState(items[0]);
-
-  const envNode = (
-    <Box isRow key={selectedEnvironment.name}>
-      <Text color="inherit">{selectedEnvironment.name}</Text>
-      {selectedEnvironment.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
-      ) : null}
-    </Box>
-  );
-
-  const findEnvObj = envName => items.find(({ name }) => name === envName);
-
-  const handleSelectionChange = newEnvName => {
-    const envObj = findEnvObj(newEnvName);
-    if (typeof envObj === 'object') setSelectedEnvironment({ ...envObj });
-  };
-
-  return (
-    <EnvironmentBreadcrumb
-      {...args}
-      items={items}
-      name="Globochem"
-      selectedItem={envNode}
-      onSelectionChange={handleSelectionChange}
     >
       {({ name, isSandbox }) => (
         <Item key={name} textValue={name}>
