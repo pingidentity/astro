@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.72.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.71.0...@pingux/astro@2.72.0) (2024-07-03)
+
+
+### Features
+
+* [UIP-6905] CopyText Update to match spec ([68a8a3c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/68a8a3c8f386fbcf8a721bf8503ac3066ff9caee))
+* [UIP-6933] environment breadcrumb update to match spec ([4a4b5f3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4a4b5f369caf4c6f5e224a71aaf649efd5432a6e))
+
+
+
+
+
 # [2.71.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.70.0...@pingux/astro@2.71.0) (2024-06-28)
 
 
