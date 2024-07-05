@@ -39,7 +39,7 @@ export default {
     },
   },
   args: {
-    listTitle: 'Selected Groups',
+    listTitle: '',
     openAriaLabel: 'Open filter menu?',
     closeAriaLabel: 'Close filter menu?',
   },
