@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.73.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.72.0...@pingux/astro@2.73.0) (2024-07-09)
+
+
+### Features
+
+* [UIP-6943] collapsible panel update to match spec ([d07ea0b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d07ea0b569d347b473f57d6f700857e602a5887b))
+* [UIP-6984] Update ScrollBox to match specs ([724d919](https://gitlab.corp.pingidentity.com/ux/pingux/commit/724d9196cc568434a4b6a9fd45aa87d5103a03b9))
+
+
+
+
+
 # [2.72.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.71.0...@pingux/astro@2.72.0) (2024-07-03)
 
 
