@@ -11,7 +11,7 @@ const defaultProps = {
   'data-testid': testId,
   isOpen: true,
   items: [{ name: 'item name' }],
-  listTitle: 'Selected Groups',
+  listTitle: '',
   selectedFilterCount: 8,
   onSelectionChange,
 };
