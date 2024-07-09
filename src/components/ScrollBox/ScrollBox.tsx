@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
+import React, { forwardRef, useLayoutEffect, useState } from 'react';
 
 import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { ScrollBoxProps } from '../../types';

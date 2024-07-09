@@ -40,6 +40,8 @@ export const Default: StoryFn<ScrollBoxProps> = args => (
     <Box
       sx={{
         height: '150px',
+        color: 'text.primary',
+        fontSize: 'md',
       }}
     >
       <p>
