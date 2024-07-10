@@ -35,7 +35,36 @@ const interactive = {
   },
 };
 
+const flat = {
+  ...container,
+  p: 0,
+  boxShadow: '0 1px 3px 0px rgba(0,0,0, 0.13)',
+  border: '1px solid',
+  borderColor: 'neutral.90',
+  borderRadius: '16px',
+};
+
+const header = {
+  p: 24,
+  borderBottom: '1px solid',
+  borderBottomColor: 'neutral.90',
+};
+
+const footer = {
+  borderTop: '1px solid',
+  borderTopColor: 'neutral.90',
+  p: 24,
+};
+
+const body = {
+  p: 24,
+};
+
 export default {
   container,
   interactive,
+  header,
+  footer,
+  flat,
+  body,
 };
