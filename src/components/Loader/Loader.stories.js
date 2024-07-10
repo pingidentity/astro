@@ -54,3 +54,7 @@ Default.parameters = {
 export const CustomColor = () => (
   <Loader color="neutral.50" />
 );
+
+export const CustomSize = args => (
+  <Loader {...args} size={32} />
+);
