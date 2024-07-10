@@ -64,7 +64,15 @@ export const Controlled: StoryFn = () => {
   );
 };
 
-export const withCustomSelectedColors: StoryFn = () => (
+export const DisabledSingleButton: StoryFn = () => (
+  <RockerButtonGroup defaultSelectedKey="or" disabledKeys={['and']}>
+    <RockerButton name="and" key="and">And</RockerButton>
+    <RockerButton name="or" key="or">Or</RockerButton>
+    <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
+  </RockerButtonGroup>
+);
+
+export const customColors: StoryFn = () => (
   <RockerButtonGroup>
     <RockerButton
       name="and"
@@ -88,19 +96,10 @@ export const withCustomSelectedColors: StoryFn = () => (
       name="maybe"
       key="maybe"
       selectedStyles={{
-        bg: 'accent.30',
-        color: 'yellow',
+        bg: 'decorative.4',
       }}
     >
       Maybe
     </RockerButton>
-  </RockerButtonGroup>
-);
-
-export const DisabledSingleButton: StoryFn = () => (
-  <RockerButtonGroup defaultSelectedKey="or" disabledKeys={['and']}>
-    <RockerButton name="and" key="and">And</RockerButton>
-    <RockerButton name="or" key="or">Or</RockerButton>
-    <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
   </RockerButtonGroup>
 );
