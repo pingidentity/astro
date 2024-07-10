@@ -6,9 +6,11 @@ import { ThemeUICSSObject } from 'theme-ui';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
+  Button,
   Card,
   CardProps,
   SxObject,
+  Text,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
@@ -40,6 +42,35 @@ export default {
 export const Default = args => (
   <Card {...args} />
 );
+
+export const HeaderAndFooter = args => {
+  const textStyling = {
+    fontSize: 'md',
+    fontWeight: 600,
+  };
+
+  return (
+    <Card {...args} variant="cards.flat" width="500px">
+      <Box variant="cards.header">
+        <Text sx={textStyling}>Optional Card Header</Text>
+      </Box>
+      <Box variant="cards.body">
+        <Text sx={textStyling} mb="md">Card Body</Text>
+        <Box gap="md">
+          <Button sx={{ width: 'fit-content' }} variant="primary">Save</Button>
+          <Text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sed ratione,
+            recusandae ipsam explicabo, quasi vel maxime sint harum qui rerum perferendis.
+            Voluptatem nisi eaque, distinctio accusamus nobis voluptas nemo.
+          </Text>
+        </Box>
+      </Box>
+      <Box variant="cards.footer">
+        <Text sx={textStyling}>Optional Card Footer</Text>
+      </Box>
+    </Card>
+  );
+};
 
 export const CardWidth = args => {
   return (
