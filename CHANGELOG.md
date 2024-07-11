@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.74.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.73.0...@pingux/astro@2.74.0) (2024-07-11)
+
+
+### Features
+
+* [UIP-6907] PopoverMenu Update to match spec ([ddb5e43](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ddb5e43ebfbeb784635553ccd8019e5de6212ffc))
+* [UIP-6973] Add Card Variants ([8173f54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8173f542a2495ee0389abf319c7757ca0e470e97))
+* [UIP-6974] loader update to match spec ([4f2bee0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4f2bee0237e8daceed85f9cd05e52bd717b7a0c8))
+* [UIP-6976] rocker button update to match spec ([bdd4bb3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bdd4bb314c9020e678b37d1f5f3b3a9f7888e6d9))
+
+
+
+
+
 # [2.73.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.72.0...@pingux/astro@2.73.0) (2024-07-09)
 
 
