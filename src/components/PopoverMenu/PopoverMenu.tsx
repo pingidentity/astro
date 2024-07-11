@@ -40,7 +40,7 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
     targetRef: triggerRef,
     overlayRef: menuPopoverRef,
     scrollRef: menuRef,
-    offset: 15,
+    offset: 5,
     placement: `${direction} ${align}` as Placement | undefined,
     // Our API preference is for default false so we invert this since it should be default true
     shouldFlip: !isNotFlippable,

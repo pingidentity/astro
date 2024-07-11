@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
-  Button,
+  Icon,
+  IconButton,
   Item,
   Menu,
   OverlayProvider,
@@ -54,7 +56,9 @@ export const Default: StoryFn<PopoverMenuProps> = (args: PopoverMenuProps) => (
   // readers when an overlay opens.
   <OverlayProvider>
     <PopoverMenu {...args}>
-      <Button>Click me</Button>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
       <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
@@ -80,8 +84,10 @@ export const DefaultOpen: StoryFn = () => (
   // readers when an overlay opens.
   <OverlayProvider>
     <PopoverMenu isDefaultOpen>
-      <Button>Click me</Button>
-      <Menu onAction={action('onAction')}>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
+      <Menu onAction={action('onAction')} disabledKeys={['duplicate']}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
         <Item key="delete" textValue="delete">
@@ -101,7 +107,9 @@ export const Controlled: StoryFn = () => {
     // readers when an overlay opens.
     <OverlayProvider>
       <PopoverMenu isOpen={isOpen} onOpenChange={setIsOpen}>
-        <Button>Click me</Button>
+        <IconButton aria-label="more options" variant="inverted">
+          <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+        </IconButton>
         <Menu onAction={action('onAction')}>
           <Item key="edit">Edit</Item>
           <Item key="duplicate">Duplicate</Item>
@@ -121,7 +129,9 @@ export const Placement: StoryFn = () => (
   // readers when an overlay opens.
   <OverlayProvider>
     <PopoverMenu direction="left">
-      <Button>Click me</Button>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
       <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
@@ -141,7 +151,9 @@ export const NotFlippable: StoryFn = () => (
   <OverlayProvider>
     {/* There is no room on the left so it will flip by default. `isNotFlippable` prevents this. */}
     <PopoverMenu direction="left" isNotFlippable>
-      <Button>Click me</Button>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
       <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
         <Item key="duplicate">Duplicate</Item>
@@ -160,47 +172,11 @@ export const NotClosedOnSelect: StoryFn = () => (
   // readers when an overlay opens.
   <OverlayProvider>
     <PopoverMenu isNotClosedOnSelect>
-      <Button>Click me</Button>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
       <Menu onAction={action('onAction')}>
         <Item key="edit">Edit</Item>
-        <Item key="duplicate">Duplicate</Item>
-        <Item key="delete" textValue="delete">
-          <Text color="critical.bright">
-            Delete
-          </Text>
-        </Item>
-      </Menu>
-    </PopoverMenu>
-  </OverlayProvider>
-);
-
-export const DisabledItem: StoryFn = () => (
-  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
-  // readers when an overlay opens.
-  <OverlayProvider>
-    <PopoverMenu>
-      <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['duplicate']}>
-        <Item key="edit">Edit</Item>
-        <Item key="duplicate">Duplicate</Item>
-        <Item key="delete" textValue="delete">
-          <Text color="critical.bright">
-            Delete
-          </Text>
-        </Item>
-      </Menu>
-    </PopoverMenu>
-  </OverlayProvider>
-);
-
-export const isPressed: StoryFn = () => (
-  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
-  // readers when an overlay opens.
-  <OverlayProvider>
-    <PopoverMenu>
-      <Button>Click me</Button>
-      <Menu onAction={action('onAction')} disabledKeys={['duplicate']}>
-        <Item key="edit" isPressed>Edit</Item>
         <Item key="duplicate">Duplicate</Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
