@@ -19,7 +19,7 @@ const inputInContainerSlot = {
 
 const button = {
   bg: 'transparent',
-  color: 'black',
+  color: 'text.primary',
   padding: 0,
 };
 
