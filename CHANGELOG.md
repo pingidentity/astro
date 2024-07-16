@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.75.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.74.0...@pingux/astro@2.75.0) (2024-07-16)
+
+
+### Features
+
+* [UIP-6982] caret in combo box is black ([d571aa1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d571aa1559e7bce3a7b7af91618b14018382013a))
+* [UIP-6983] requirement list update to match spec ([c88d3c4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c88d3c4b08895e86462f951dc4a23925997b1a40))
+
+
+
+
+
 # [2.74.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.73.0...@pingux/astro@2.74.0) (2024-07-11)
 
 
