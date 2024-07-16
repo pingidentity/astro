@@ -33,10 +33,10 @@ export default {
   },
   args: {
     requirements: [
-      { 'name': 'requirement 1', 'status': 'default' },
-      { 'name': 'requirement 2', 'status': 'warning' },
-      { 'name': 'requirement 3', 'status': 'error' },
-      { 'name': 'requirement 4', 'status': 'success' },
+      { 'name': 'Requirement 1', 'status': 'default' },
+      { 'name': 'Requirement 2', 'status': 'warning' },
+      { 'name': 'Requirement 3', 'status': 'error' },
+      { 'name': 'Requirement 4', 'status': 'success' },
     ],
   },
 } as Meta;
