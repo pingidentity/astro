@@ -72,6 +72,7 @@ const ExpandableItemChildrenContainer = forwardRef<HTMLElement, ExpandableItemCh
       {...mergedProps}
       tabIndex={0}
       onKeyDown={e => { escapeFocusDelegate(e, setIsFocusEscaped, focusManager, isFocusEscaped); }}
+      variant="listViewItem.expandableItemBody"
     >
       {children}
     </Box>

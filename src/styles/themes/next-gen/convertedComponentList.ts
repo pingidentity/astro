@@ -1,0 +1,26 @@
+const nextGenConvertedComponents = [
+  'DataTable',
+  'Message',
+  'Button',
+  'Badge',
+  'IconButton',
+  'CheckboxField',
+  'Messages',
+  'PopoverMenu',
+  'TextField',
+  'PasswordField',
+  'SearchField',
+  'SelectField',
+  'ComboBoxField',
+  'MultiValuesField',
+  'TextAreaField',
+  'RadioGroupField',
+  'Tabs',
+  'ProgressBar',
+  'NavBar',
+  'OverlayPanel',
+  'AstroProvider',
+  'ListView',
+];
+
+export default nextGenConvertedComponents;

@@ -74,7 +74,7 @@ export interface DataTableProps {
   },
   width?: string | number,
   children: ReactNode,
-  scale?: 'large' | 'medium'
+  scale?: 'large' | 'medium' | 'xl'
 }
 
 export interface DataTableCellProps {

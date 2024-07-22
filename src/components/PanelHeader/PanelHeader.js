@@ -40,7 +40,7 @@ const PanelHeader = forwardRef(({
 
   const renderData = (
     <Box isRow variant={text && subtext ? 'panelHeader.data' : 'panelHeader.emptyData'}>
-      {icon ? renderIcon : renderImage}
+      { slots?.leftOfData || icon ? renderIcon : renderImage}
       <Box variant="panelHeader.wrapper">
         {text && (<Text variant="panelHeaderText">{text}</Text>)}
         {subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}

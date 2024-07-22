@@ -212,7 +212,6 @@ const useExpandableListViewItem: UseExpandableListViewItem<object> = <T extends 
   const cellProps = {
     ...hoverProps,
     variant: 'listViewItem.expandableStyledListItem',
-    sx: { minHeight: '75px', py: 'lg', px: 'md' },
     ...gridCellProps,
     isFocused: isDisabled ? false : isFocusVisible,
     isDisabled,

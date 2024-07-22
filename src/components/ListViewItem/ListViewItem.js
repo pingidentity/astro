@@ -14,6 +14,7 @@ const ListViewItem = forwardRef(({
   children,
   className,
   data,
+  iconProps,
   isHovered,
   isSelected,
   linkProps,
@@ -45,13 +46,15 @@ const ListViewItem = forwardRef(({
     return 'listViewItem.iconWrapper';
   };
 
+
   const renderIcon = icon && (
-  <Box width="25px">
+  <Box width="25px" variant="listViewItem.iconContainer">
     <Icon
       color="accent.40"
       icon={icon}
       size="md"
       title={{ name: `${text}${LIST_ITEM_ICON}` }}
+      {...iconProps}
     />
   </Box>
   );

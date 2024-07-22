@@ -257,6 +257,45 @@ const removableBadge = {
   },
 };
 
+const dataTableBase = {
+  ...baseBadge,
+  border: '1px',
+  borderStyle: 'solid',
+  flexDirection: 'row-reverse !important' as 'row-reverse',
+  bg: 'white !important',
+};
+
+const dataTable = {
+  pending: {
+    ...dataTableBase,
+    '& span, & > svg': {
+      color: 'line.light',
+    },
+    borderColor: 'line.light',
+  },
+  failed: {
+    ...dataTableBase,
+    '& span, & > svg': {
+      color: 'warning.bright',
+    },
+    borderColor: 'warning.bright',
+  },
+  rejected: {
+    ...dataTableBase,
+    '& span, & > svg': {
+      color: 'critical.bright',
+    },
+    borderColor: 'critical.bright',
+  },
+  approved: {
+    ...dataTableBase,
+    '& span, & > svg': {
+      color: 'success.dark',
+    },
+    borderColor: 'success.dark',
+  },
+};
+
 export default {
   activeStatusBadge,
   badgeDeleteButton,
@@ -281,4 +320,5 @@ export default {
   healthyStatusBadge,
   removableBadge,
   invertedRemovableBadge,
+  dataTable,
 };
