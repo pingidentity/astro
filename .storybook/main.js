@@ -18,7 +18,8 @@ function getPackageDir(filepath) {
 }
 module.exports = {
   stories: ["../@(src|stories)/**/*.@(story|stories).@(ts|tsx|js|jsx|mdx)"],
-  addons: ["@storybook/addon-a11y", {
+  addons: ["@storybook/addon-a11y",
+    {
     name: '@storybook/addon-docs',
     options: {}
   },

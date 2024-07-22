@@ -51,6 +51,7 @@ const ROW_HEIGHTS = {
   spacious: {
     medium: 48,
     large: 60,
+    xl: 74,
   },
 };
 
@@ -239,36 +240,37 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
   );
 
   return (
-    <DataTableContext.Provider
-      value={{
-        state,
-        layout,
-        isInResizeMode,
-        setIsInResizeMode,
-        isEmpty,
-        onFocusedResizer,
-        headerMenuOpen,
-        setHeaderMenuOpen,
-      }}
-    >
-      <DataTableVirtualizer
-        {...mergedProps}
-        layout={layout}
-        collection={state.collection}
-        renderView={renderView}
-        renderWrapper={renderWrapper}
-        onVisibleRectChange={onVisibleRectChange}
-        domRef={domRef}
-        headerRef={headerRef}
-        bodyRef={bodyRef}
-        isFocusVisible={isFocusVisible}
-        height={props.height}
-        style={{
-          whiteSpace: props.overflowMode === 'wrap' ? 'normal' : 'initial',
+    <Box variant="dataTable.container">
+      <DataTableContext.Provider
+        value={{
+          state,
+          layout,
+          isInResizeMode,
+          setIsInResizeMode,
+          isEmpty,
+          onFocusedResizer,
+          headerMenuOpen,
+          setHeaderMenuOpen,
         }}
-
-      />
-    </DataTableContext.Provider>
+      >
+        <DataTableVirtualizer
+          {...mergedProps}
+          layout={layout}
+          collection={state.collection}
+          renderView={renderView}
+          renderWrapper={renderWrapper}
+          onVisibleRectChange={onVisibleRectChange}
+          domRef={domRef}
+          headerRef={headerRef}
+          bodyRef={bodyRef}
+          isFocusVisible={isFocusVisible}
+          height={props.height}
+          style={{
+            whiteSpace: props.overflowMode === 'wrap' ? 'normal' : 'initial',
+          }}
+        />
+      </DataTableContext.Provider>
+    </Box>
   );
 });
 
@@ -443,7 +445,7 @@ const CenteredWrapper = ({ children }) => {
       }
       variant="dataTable.tableCenteredWrapper"
     >
-      <Box role="rowheader" aria-colspan={state.collection.columns.length}>
+      <Box role="rowheader" aria-colspan={state.collection.columns.length} variant="dataTable.rowHeader">
         {children}
       </Box>
     </Box>

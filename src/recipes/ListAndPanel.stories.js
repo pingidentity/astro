@@ -58,7 +58,6 @@ const sx = {
     py: 'lg',
     bg: 'accent.99',
     height: '900px',
-    overflowY: 'scroll',
   },
   separator: {
     bg: 'accent.90',

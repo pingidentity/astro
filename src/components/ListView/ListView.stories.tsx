@@ -514,7 +514,7 @@ export const InfiniteLoadingList = args => {
   return (
     <Box
       sx={{
-        maxHeight: '400px',
+        height: '400px',
       }}
     >
       <ListView
@@ -551,7 +551,6 @@ InfiniteLoadingList.parameters = {
     },
   },
 };
-
 
 export const MultipleSelection = ({ ...args }) => (
   <ListView {...props} {...args} items={items} selectionMode="multiple">

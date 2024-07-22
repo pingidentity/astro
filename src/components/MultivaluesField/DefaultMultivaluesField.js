@@ -320,8 +320,8 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
       <Badge
         key={item.key}
         role="presentation"
-        variant="selectedItemBadge"
         bg="active"
+        variant="selectedItemBadge"
         label={item.name}
         slots={item.slots}
         {...item.badgeProps}

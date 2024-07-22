@@ -133,6 +133,7 @@ const tableBody = {
 
 const tableMenu = {
   borderRadius: '50px',
+  mr: 'md',
 };
 
 export default {
