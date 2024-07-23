@@ -13,6 +13,7 @@ export interface ListViewProps extends Omit<TreeProps<object>, 'selectionMode'> 
   onFocus?: (event) => void,
   onLoadMore?: () => void,
   'aria-label'?: string,
+  containerProps?: object
 }
 
 export interface ExpandableItemChildrenContainerProps {

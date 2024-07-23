@@ -187,6 +187,7 @@ export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
 export { default as TreeView } from './components/TreeView';
 export * from './components/TreeView';
+export { default as NextGenTheme } from './styles/themes/next-gen';
 
 /* eslint-enable import/export */
 

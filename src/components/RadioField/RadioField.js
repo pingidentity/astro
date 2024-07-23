@@ -71,7 +71,11 @@ const RadioField = forwardRef((props, ref) => {
     <Box variant="forms.radio.outerContainer" {...fieldContainerProps}>
       <Label variant="forms.label.radio" {...fieldLabelProps}>
         <Box {...fieldControlWrapperProps} variant="forms.radio.controlWrapper">
-          <Radio ref={radioFieldRef} {...fieldControlInputProps} variant="forms.radio.base" />
+          <Radio
+            ref={radioFieldRef}
+            {...fieldControlInputProps}
+            variant="forms.radio.base"
+          />
         </Box>
         {label}
       </Label>

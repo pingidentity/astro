@@ -122,14 +122,20 @@ const expandableFocusContainer = {
   },
 };
 
+const expandableItemBody = {
+  px: 'md',
+};
+
 const expandableStyledListItem = {
   display: 'flex',
   padding: '0px 15px 0px 25px',
   flex: '1 1 0px',
-  minHeight: '80px',
   flexGrow: 1,
   justifyContent: 'center',
   bg: 'white',
+  minHeight: '75px',
+  py: 'lg',
+  px: 'md',
   '&.is-hovered': {
     bg: 'accent.99',
     cursor: 'pointer',
@@ -158,6 +164,7 @@ export default {
   styledListItem,
   loaderContainer,
   expandableFocusContainer,
+  expandableItemBody,
   expandableStyledListItem,
   expandableRow,
 };

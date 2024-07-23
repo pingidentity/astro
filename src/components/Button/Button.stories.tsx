@@ -112,8 +112,8 @@ export const TextIconButton = () => (
     </Button>
     <Button mb="sm" variant="primaryWithIcon">
       <Icon
-        icon={PlusIcon}
         mr="xs"
+        icon={PlusIcon}
         color="white"
         size={20}
         title={{ name: 'Add Circle Icon' }}

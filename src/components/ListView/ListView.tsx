@@ -6,6 +6,7 @@ import { useCollator } from '@react-aria/i18n';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
 
+import { Box } from '../../index';
 import { ListViewProps, ListViewState } from '../../types/listView';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import Loader from '../Loader';
@@ -39,6 +40,7 @@ export function useListLayout(state) {
 
 const ListView = forwardRef((props: ListViewProps, ref) => {
   const {
+    containerProps,
     disabledKeys,
     isHoverable = true,
     loadingState,
@@ -123,44 +125,53 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
 
   return (
     <ListViewContext.Provider value={{ state }}>
-      <Virtualizer
-        {...(items ? gridProps : { role: 'presentation' })}
-        onLoadMore={onLoadMore}
-        ref={listViewRef}
-        focusedKey={focusedKey}
-        renderWrapper={renderWrapper}
-        sizeToFit="height"
-        scrollDirection="vertical"
-        layout={layout}
-        isLoading={isLoading}
-        collection={collection}
-        transitionDuration={0}
-        {...others}
-        onFocus={isFocusable ? onFocusCallback : undefined}
-        onScroll={resetHoverState}
-        tabIndex={isFocusable ? 0 : -1}
-        shouldUseVirtualFocus={!isFocusable}
+      <Box
+        variant="listView.container"
+        {...containerProps}
       >
-        {(type, item) => {
-          if (type === 'item') {
-            if (props.selectionMode === 'expansion') {
+        <Virtualizer
+          {...(items ? gridProps : { role: 'presentation' })}
+          onLoadMore={onLoadMore}
+          ref={listViewRef}
+          focusedKey={focusedKey}
+          renderWrapper={renderWrapper}
+          sizeToFit="height"
+          scrollDirection="vertical"
+          layout={layout}
+          isLoading={isLoading}
+          collection={collection}
+          transitionDuration={0}
+          {...others}
+          onFocus={isFocusable ? onFocusCallback : undefined}
+          onScroll={resetHoverState}
+          tabIndex={isFocusable ? 0 : -1}
+          shouldUseVirtualFocus={!isFocusable}
+        >
+          {(type, item) => {
+            if (type === 'item') {
+              if (props.selectionMode === 'expansion') {
+                return (
+                  <ListViewExpandableItem
+                    isHoverable={isHoverable}
+                    isFocusable={isFocusable}
+                    item={item}
+                  />
+                );
+              }
               return (
-                <ListViewExpandableItem
+                <ListViewItem
                   isHoverable={isHoverable}
                   isFocusable={isFocusable}
                   item={item}
                 />
               );
+            } if (type === collectionTypes.LOADER) {
+              return <Loader variant="loader.withinListView" aria-label="Loading more..." />;
             }
-            return (
-              <ListViewItem isHoverable={isHoverable} isFocusable={isFocusable} item={item} />
-            );
-          } if (type === collectionTypes.LOADER) {
-            return <Loader variant="loader.withinListView" aria-label="Loading more..." />;
-          }
-          return null;
-        }}
-      </Virtualizer>
+            return null;
+          }}
+        </Virtualizer>
+      </Box>
     </ListViewContext.Provider>
   );
 });
