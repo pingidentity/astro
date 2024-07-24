@@ -305,6 +305,18 @@ test('tooltip renders on tab\'s hover in `tooltip` mode', async () => {
   }, 0);
 });
 
+test('tooltip does not render on tab\'s hover in `tooltipIsDisabled` mode', async () => {
+  getComponent({ mode: 'tooltipIsDisabled' });
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+  const { tab0 } = getTabs();
+  fireEvent.mouseMove(tab0);
+  fireEvent.mouseEnter(tab0);
+  setTimeout(() => {
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  }, 0);
+});
+
 test('tabs without selected keys show null tab panel content', () => {
   getComponent({ defaultSelectedKey: undefined });
   expect(screen.queryByRole('tabpanel')).not.toHaveTextContent('');

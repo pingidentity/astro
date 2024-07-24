@@ -110,6 +110,19 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
       </>
     );
   }
+
+  if (mode === 'tooltipIsDisabled') {
+    return (
+      <>
+        {itemProps?.separator}
+        <Pressable>
+          <span>
+            {tab}
+          </span>
+        </Pressable>
+      </>
+    );
+  }
   return tab;
 });
 
