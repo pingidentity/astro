@@ -106,6 +106,29 @@ export const Default = args => (
   </Stepper>
 );
 
+export const DisabledToolTips = args => (
+  <Stepper {...args} mode="tooltipIsDisabled">
+    <Item key="step1" textValue="Duis Aute">
+      <Box sx={sx.contentContainer}>
+        <Text fontSize="md" fontWeight="3">Duis Aute</Text>
+        <Text fontSize="md">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
+      </Box>
+    </Item>
+    <Item key="step2" textValue="Lorem Ipsum">
+      <Box sx={sx.contentContainer}>
+        <Text fontSize="md" fontWeight="3">Lorem Ipsum</Text>
+        <Text fontSize="md">Sed ut perspiciatis unde omnis</Text>
+      </Box>
+    </Item>
+    <Item key="step3" textValue="Excepteur Sint">
+      <Box sx={sx.contentContainer}>
+        <Text fontSize="md" fontWeight="3">Excepteur Sint</Text>
+        <Text fontSize="md">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
+      </Box>
+    </Item>
+  </Stepper>
+);
+
 Default.parameters = {
   design: {
     type: 'figma',
