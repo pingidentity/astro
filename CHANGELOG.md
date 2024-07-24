@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.76.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.75.0...@pingux/astro@2.76.0) (2024-07-23)
+
+
+### Bug Fixes
+
+* [UIP-6944] DatePicker has extra spacing ([6bff572](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6bff572b8fd35061b65dea88e9193fa2267f561a))
+
+
+### Features
+
+* [UIP-6975] Next gen theme ([5cd5c81](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5cd5c814958da331abe3921ae255cbac73982293))
+
+
+
+
+
 # [2.75.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.74.0...@pingux/astro@2.75.0) (2024-07-16)
 
 
