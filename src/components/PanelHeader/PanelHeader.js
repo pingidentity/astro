@@ -58,7 +58,7 @@ const PanelHeader = forwardRef(({
       <Box isRow variant="panelHeader.wrapper">
         {renderData}
         {slots?.rightOfData && (
-          <Box isRow variant="panelHeader.rightOfData">
+          <Box isRow variant="panelHeader.rightOfData" sx={{ width: '100%' }}>
             {slots.rightOfData}
           </Box>
         )}
