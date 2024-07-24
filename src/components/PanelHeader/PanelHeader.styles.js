@@ -8,11 +8,13 @@ const container = {
 };
 
 const emptyData = {
+  flexShrink: 0,
   alignItems: 'center',
 };
 
 const data = {
   ...emptyData,
+  flexShrink: 1,
   mr: 'sm',
 };
 

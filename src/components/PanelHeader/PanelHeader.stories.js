@@ -4,6 +4,7 @@ import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Box,
   Breadcrumbs,
   Item,
   PanelHeader,
@@ -110,6 +111,13 @@ export const WithImage = () => (
   />
 );
 
+WithImage.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.withImage,
+  },
+};
+
 export const WithBreadcrumbs = () => {
   const breadcrumbs = (
     <Breadcrumbs icon={ChevronRightIcon}>
@@ -117,14 +125,12 @@ export const WithBreadcrumbs = () => {
         aria-label="Fons Vernall"
         href="https://www.pingidentity.com"
         key="fonsVernallKey"
-        variant="buttons.link"
       >
         Fons Vernall
       </Item>
       <Item
         aria-label="Edit"
         key="editKey"
-        variant="buttons.link"
       >
         Edit
       </Item>
@@ -139,11 +145,35 @@ export const WithBreadcrumbs = () => {
   );
 };
 
-WithImage.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.panelHeader.withImage,
-  },
+export const BreadcrumbsWithExtraLongText = () => {
+  const breadcrumbs = (
+    <Box width="100%">
+      <Breadcrumbs icon={ChevronRightIcon}>
+        <Item
+          aria-label="Lorem Text"
+          href="https://www.pingidentity.com"
+          key="Item1Key"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </Item>
+        <Item
+          aria-label="Lorem Ut"
+          key="Item2Key"
+        >
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco,
+          laboris nisi ut aliquip ex ea commodo consequat incididunt et dolore.
+        </Item>
+      </Breadcrumbs>
+    </Box>
+  );
+
+  return (
+    <PanelHeader
+      data={{ icon: AccountIcon }}
+      slots={{ rightOfData: breadcrumbs }}
+    />
+  );
 };
 
 export const WithExtraLongText = ({ ...args }) => (
