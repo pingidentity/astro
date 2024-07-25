@@ -23,7 +23,7 @@ export interface TabProps extends StyleProps, DOMAttributes, OrientationProps, T
         },
         rendered?: string | ReactNode;
     },
-    mode?: 'default' | 'tooltip' | 'list';
+    mode?: 'default' | 'tooltip' | 'list' | 'tooltipIsDisabled';
     tooltipTriggerProps?: object;
     title?: string;
     textValue?: string;

@@ -54,23 +54,23 @@ const OverlayWrapper = ({ children, isEditPanel }) => {
   const { fields } = personalInfo;
 
   const renderBreadcrumbs = (
-    <Breadcrumbs icon={ChevronRightIcon}>
-      <Item
-        aria-label={personalInfo.label}
-        href="https://www.pingidentity.com"
-        key={personalInfo.key}
-        variant="buttons.link"
-      >
-        {`${fields[0].value} ${fields[1].value}`}
-      </Item>
-      <Item
-        aria-label="Edit"
-        key="editKey"
-        variant="buttons.link"
-      >
-        Edit
-      </Item>
-    </Breadcrumbs>
+    <Box width="100%">
+      <Breadcrumbs icon={ChevronRightIcon}>
+        <Item
+          aria-label={personalInfo.label}
+          href="https://www.pingidentity.com"
+          key={personalInfo.key}
+        >
+          {`${fields[0].value} ${fields[1].value}`}
+        </Item>
+        <Item
+          aria-label="Edit"
+          key="editKey"
+        >
+          Edit
+        </Item>
+      </Breadcrumbs>
+    </Box>
   );
 
   const image = { src: UserImage, alt: 'user image' };
