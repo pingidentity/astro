@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.77.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.76.0...@pingux/astro@2.77.0) (2024-07-25)
+
+
+### Bug Fixes
+
+* [UIP-7007] Astro Stepper add disabled Tooltips ([114eff5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/114eff517a89ca40fffcd1e77a8f12d3995c0be1))
+
+
+### Features
+
+* [UIP-6875] Breadcrumbs text overflow breaks when used in panelheader slot ([cf03bb9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cf03bb95fdf18520d8035921a1d456d739dc6f7c))
+
+
+
+
+
 # [2.76.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.75.0...@pingux/astro@2.76.0) (2024-07-23)
 
 
