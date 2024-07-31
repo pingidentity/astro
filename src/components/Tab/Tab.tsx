@@ -30,7 +30,6 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
     orientation,
     mode,
     slots,
-    tooltipTriggerProps,
   } = props;
 
   const { key, rendered, props: itemProps } = item;
@@ -59,12 +58,11 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
       <Box
         className={classNames}
         variant="tab"
-        // title={itemProps?.titleAttr || undefined}
         {...mergeProps(focusProps, hoverProps, tabProps)}
         {...getPendoID('Tab')}
-        // {...otherItemProps}
         ref={tabRef}
         {...itemProps}
+        title={itemProps?.textValue}
         role="tab"
       >
         <>
@@ -97,7 +95,7 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
     return (
       <>
         {itemProps?.separator}
-        <TooltipTrigger {...tooltipTriggerProps} isOpen={isHovered || isFocusVisible}>
+        <TooltipTrigger {...itemProps?.tooltipTriggerProps} isOpen={isHovered || isFocusVisible}>
           <Pressable>
             <span>
               {tab}

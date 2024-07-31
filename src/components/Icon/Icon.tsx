@@ -16,7 +16,7 @@ const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
 
   const title = props.title || (typeof IconComponent === 'object' && 'type' in IconComponent
     ? { name: IconComponent.type.name }
-    : null
+    : ''
   );
 
   return (
