@@ -179,11 +179,11 @@ const useExpandableListViewItem: UseExpandableListViewItem<object> = <T extends 
   const { classNames } = useStatusClasses(className, {
     isHovered: isSelectable && (item.key === state.hover.hoveredItem),
     isSelected,
+    isExpanded,
     isFocused: isDisabled ? false
       : isFocusVisible
       || (isFocusVisibleWithin && (!isFocusEscaped && !isFocusVisibleContainer)),
   });
-
 
   const { classNames: focusContainerClassName } = useStatusClasses('', {
     isFocused: isFocusVisibleContainer,

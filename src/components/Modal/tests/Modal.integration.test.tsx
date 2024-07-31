@@ -32,8 +32,37 @@ const ComposedComponent = props => {
     </>
   );
 };
+
+const ComposedComponentWithTransition = props => {
+  const { defaultState, modalProps } = props;
+  const state = useModalState(defaultState);
+
+  return (
+    <>
+      <Button onPress={state.open} />
+      {
+        (state.isOpen || state.isTransitioning)
+        && (
+          <OverlayProvider>
+            <Modal
+              isOpen={state.isOpen}
+              onClose={state.close}
+              isDismissable
+              hasCloseButton
+              state={state}
+              {...modalProps}
+            />
+          </OverlayProvider>
+        )
+      }
+    </>
+  );
+};
 const getComposedComponent = (defaultState = {}, modalProps = {}) => (
   render(<ComposedComponent defaultState={defaultState} modalProps={modalProps} />)
+);
+const getComposedComponentWithTransition = (defaultState = {}, modalProps = {}) => (
+  render(<ComposedComponentWithTransition defaultState={defaultState} modalProps={modalProps} />)
 );
 
 test('clicking the trigger should open the modal', () => {
@@ -83,4 +112,12 @@ test('assign aria-hidden to elements outside the modal when the modal is opened'
   // Open the modal
   userEvent.click(screen.getByRole('button'));
   expect(buttonParent).toHaveAttribute('aria-hidden');
+});
+
+test('is-transitioining class is applied', () => {
+  getComposedComponentWithTransition();
+
+  userEvent.click(screen.getByRole('button'));
+
+  expect(screen.getByRole('dialog')).toHaveClass('is-transitioning');
 });

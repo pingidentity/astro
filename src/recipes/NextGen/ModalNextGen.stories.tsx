@@ -23,8 +23,14 @@ export const Default = () => {
         <Button onPress={state.open} aria-label="Open modal">
           Open Modal
         </Button>
-        {state.isOpen && (
-        <Modal isOpen={state.isOpen} onClose={state.close} hasCloseButton contentProps={{ sx: { p: '0px !important' } }}>
+        {(state.isOpen || state.isTransitioning) && (
+        <Modal
+          isOpen={state.isOpen}
+          onClose={state.close}
+          state={state}
+          hasCloseButton
+          contentProps={{ sx: { p: '0px !important' } }}
+        >
           <Box
             sx={{
               p: '1rem 1.5rem',

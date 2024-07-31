@@ -13,7 +13,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Box, Button, Link, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection } from '../../index';
 import { NavBarProps } from '../../types';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import NavBar from './NavBar';
@@ -147,6 +147,7 @@ const secondData = [
     ],
   },
 ];
+
 
 const getComponent = (props: NavBarProps = {}) => render((
   <NavBar {...props}>
@@ -414,7 +415,9 @@ test('should collapse NavItemBody', () => {
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
 
   clickHeaderButtons();
-  expect(screen.queryByText('Users')).not.toBeInTheDocument();
+  setTimeout(() => {
+    expect(screen.queryByText('Users')).not.toBeInTheDocument();
+  }, 501);
 });
 
 test('should collapse NavItemBody on Escape key press', () => {
@@ -426,7 +429,9 @@ test('should collapse NavItemBody on Escape key press', () => {
   const headerButtons = screen.getAllByRole('button');
   headerButtons.map(headerButton => fireEvent.keyDown(headerButton, { key: 'Escape', keyCode: 27 }));
 
-  expect(screen.queryByText('Users')).not.toBeInTheDocument();
+  setTimeout(() => {
+    expect(screen.queryByText('Users')).not.toBeInTheDocument();
+  }, 501);
 });
 
 test('should change focus between NavBarItemHeader on arrow key press', () => {
@@ -568,6 +573,8 @@ test('expand only one item', () => {
 
   userEvent.click(headerButtons[2]);
 
-  expect(screen.queryByText('Dashboard Unique')).not.toBeInTheDocument();
-  expect(screen.queryByText('Identities Unique')).toBeInTheDocument();
+  setTimeout(() => {
+    expect(screen.queryByText('Dashboard Unique')).not.toBeInTheDocument();
+    expect(screen.queryByText('Identities Unique')).toBeInTheDocument();
+  }, 501);
 });

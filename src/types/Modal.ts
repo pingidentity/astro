@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { AstroOverlayTriggerState } from '../hooks/useModalState/useModalState';
+
 import { DOMAttributes } from './shared/dom';
 import { ModalSizeProps } from './shared/style';
 import { TestingAttributes } from './shared/test';
@@ -25,6 +27,7 @@ export interface ModalProps extends DOMAttributes, TestingAttributes {
   role?: 'dialog' | 'alertdialog';
   /** Sets the size of the modal container. */
   size?: ModalSizeProps;
+  state?: AstroOverlayTriggerState;
   /** The title for the modal. */
   title?: ReactNode;
   /**
