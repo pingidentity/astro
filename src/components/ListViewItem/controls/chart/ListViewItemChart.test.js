@@ -24,6 +24,7 @@ const Chart = props => {
         chartLabel="12 wk trend"
         trend="+ 8.6%"
         tooltipText="See Contributing Data"
+        ariaLabel="LoremIpsum"
         {...props}
       />
     </Box>

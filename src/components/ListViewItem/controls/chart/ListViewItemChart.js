@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo } from 'react';
+import React, { forwardRef, useCallback, useEffect, useMemo } from 'react';
 import { useVisuallyHidden } from 'react-aria';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
 import useResizeObserver from 'use-resize-observer';
@@ -22,6 +22,7 @@ const ListViewItemChart = forwardRef((props, ref) => {
     chartDataKey,
     tabletBreakPoint = 605,
     mobileBreakPoint = 350,
+    ariaLabel,
   } = props;
   const { width } = useResizeObserver({ ref: containerRef });
   const { visuallyHiddenProps } = useVisuallyHidden();
@@ -35,6 +36,17 @@ const ListViewItemChart = forwardRef((props, ref) => {
   const hideIfMobile = useCallback(() => isMobile && visuallyHiddenProps, [
     isMobile, visuallyHiddenProps,
   ]);
+
+  useEffect(() => {
+    async function setAriaLabel() {
+      if (containerRef && containerRef.current) {
+        const [rechartsWrapper] = await containerRef.current.getElementsByClassName('recharts-wrapper');
+        rechartsWrapper.setAttribute('aria-label', ariaLabel);
+      }
+    }
+    setAriaLabel();
+  }, [ariaLabel, containerRef]);
+
   return (
     <Box isRow alignItems="center" height={0} mr="md" ref={ref}>
       <Box
@@ -65,9 +77,12 @@ const ListViewItemChart = forwardRef((props, ref) => {
         >
           <Box variant="lisViewItemChart.divider" />
           <Box ml="md">
-            <Box variant="lisViewItemChart.chartContainer">
+            <Box variant="lisViewItemChart.chartContainer" id={ariaLabel}>
               <ResponsiveContainer variant="lisViewItemChart.responsiveContainer">
-                <LineChart data={chartData} variant="lisViewItemChart.chart">
+                <LineChart
+                  data={chartData}
+                  variant="lisViewItemChart.chart"
+                >
                   <Line
                     type="monotone"
                     dataKey={chartDataKey}
