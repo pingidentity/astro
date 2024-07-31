@@ -2,6 +2,11 @@ import { StylePropertyValue } from 'theme-ui';
 
 import { DOMAttributes, StyleProps } from './shared';
 
+type BoxIconTitleProps = {
+    id?: string,
+    name: string,
+}
+
 export interface BoxProps extends StyleProps, DOMAttributes {
   id?: string,
   /** The background color of the box. */
@@ -16,4 +21,5 @@ export interface BoxProps extends StyleProps, DOMAttributes {
   isSelected?: boolean,
   isUnavailable?: boolean,
   hidden?: boolean,
+  title?: string | BoxIconTitleProps,
 }

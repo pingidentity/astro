@@ -3,6 +3,7 @@ import { ThemeUICSSProperties } from 'theme-ui';
 
 import { TestingAttributes } from './shared/test';
 import { DOMAttributes, OrientationProps, StyleProps } from './shared';
+import { TooltipTriggerProps } from './tooltipTrigger';
 
 
 export interface TabProps extends StyleProps, DOMAttributes, OrientationProps, TestingAttributes{
@@ -20,6 +21,7 @@ export interface TabProps extends StyleProps, DOMAttributes, OrientationProps, T
             title: string;
             separator: Element | boolean;
             list: object[],
+            tooltipTriggerProps?: TooltipTriggerProps;
         },
         rendered?: string | ReactNode;
     },
