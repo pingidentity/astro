@@ -37,6 +37,7 @@ export const Default = () => {
         chartLabel="12 wk trend"
         trend="+115.0%"
         tooltipText="See Contributing Data"
+        ariaLabel="LoremIpsum"
       />
     </Box>
   );
