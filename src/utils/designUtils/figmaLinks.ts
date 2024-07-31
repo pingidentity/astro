@@ -114,7 +114,9 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=12726-41720&t=8Wwd3tIBh3GEjCJB-0',
   },
   messages: {
-    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=14579-33504&t=8Wwd3tIBh3GEjCJB-0',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=52857-6582&t=hqi8rId3S2ABv1E0-4',
+    withTextStyling: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=52857-9032&t=LVprZy9fVRpCA9Jd-4',
+    withLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=52857-9074&t=LVprZy9fVRpCA9Jd-4',
   },
   modal: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=7513-27244&t=8Wwd3tIBh3GEjCJB-0',
