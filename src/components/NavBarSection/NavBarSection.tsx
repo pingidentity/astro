@@ -4,6 +4,7 @@ import { useKeyboard } from '@react-aria/interactions';
 
 import { Box, Button, Link, Separator, Text } from '../..';
 import { useNavBarContext } from '../../context/NavBarContext';
+import { useMountTransition, useStatusClasses } from '../../hooks';
 import { NavBarSectionProps, PrimaryItemProps, SectionItemProps } from '../../types/navBar';
 
 import NavBarItemBody from './NavBarItemBody';
@@ -123,6 +124,13 @@ const SectionItem = ({ item, onKeyDown: onKeyDownProp }: SectionItemProps<object
     },
   });
 
+  const isTransitioning = useMountTransition(isExpanded, 300);
+
+  const { classNames } = useStatusClasses('', {
+    isTransitioning,
+    isExpanded,
+  });
+
   return (
     <>
       <Button
@@ -133,11 +141,14 @@ const SectionItem = ({ item, onKeyDown: onKeyDownProp }: SectionItemProps<object
       >
         <NavBarItemHeader item={item!} />
       </Button>
-      {isExpanded
+      {(isExpanded || isTransitioning)
         && (
           <NavBarItemBody
             item={item}
             onKeyDown={onKeyDown}
+            className={classNames}
+            isExpanded={expandedKeys.includes(key)}
+            isTransitioning={isTransitioning}
           />
         )}
     </>

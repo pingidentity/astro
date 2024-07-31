@@ -29,6 +29,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     isOpen,
     role,
     size,
+    state,
     title,
     onClose,
     shouldCloseOnInteractOutside,
@@ -52,9 +53,11 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     ...propsContentProps,
   };
 
+  const shouldShow = state ? state?.isTransitioning || isOpen : isOpen;
+
   const modalState = {
-    isOpen,
     close: onClose,
+    isOpen: shouldShow,
   };
 
   const modalRef = useLocalOrForwardRef<HTMLElement>(ref);
@@ -71,7 +74,17 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
   // Get props for the dialog and its title
   const { dialogProps, titleProps } = useDialog(contentProps, modalRef);
 
-  const { classNames } = useStatusClasses(className, { [`is-${size || 'custom'}`]: size });
+  // this is code to avoid regressions -- implementations that do not use the
+  // useMountTransition hook will not break, because this className gives the
+  // component the styling properties that it needs.
+  const isOpenNoTransition = state?.isTransitioning === undefined && isOpen === true;
+
+  const { classNames } = useStatusClasses(className, {
+    [`is-${size || 'custom'}`]: size,
+    isOpen,
+    isTransitioning: state?.isTransitioning,
+    isOpenNoTransition,
+  });
 
   return (
     <OverlayContainer>
