@@ -44,7 +44,11 @@ export interface NavBarItemBodyProps {
   item?: {
     children?: string[] | object[];
     key?: string;
+    itemHeight?: number
   };
+  isTransitioning: boolean;
+  isExpanded: boolean;
+  className?: string;
   onKeyDown?: (...args: unknown[]) => void;
 }
 

@@ -186,6 +186,7 @@ export const WithCharts = () => {
           chartLabel="12 wk trend"
           trend="+115.0%"
           tooltipText="See Contributing Data"
+          ariaLabel="Kangaroo"
         />
         <ListViewItemSwitchField />
         <ListViewItemMenu>

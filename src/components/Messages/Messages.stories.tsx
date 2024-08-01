@@ -7,6 +7,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Button,
+  Link,
   Messages,
 } from '../../index';
 import { MessageItem, Status } from '../../types';
@@ -50,7 +51,7 @@ export default {
   },
 };
 
-const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
 
 const messages = [
   {
@@ -76,8 +77,10 @@ const messages = [
 
 export const Default = args => (
   <Messages {...args}>
-    <Item key="message1" data-id="message1">{loremText}</Item>
-    <Item key="message2" data-id="message2" status={statuses.SUCCESS}>{loremText}</Item>
+    <Item key="message1" data-id="message1" status={statuses.SUCCESS}>{loremText}</Item>
+    <Item key="message2" data-id="message2" status={statuses.WARNING}>{loremText}</Item>
+    <Item key="message2" data-id="message3" status={statuses.ERROR}>{loremText}</Item>
+    <Item key="message2" data-id="message4">{loremText}</Item>
   </Messages>
 );
 
@@ -179,22 +182,6 @@ ControlledWithButton.parameters = {
     },
   },
 };
-
-export const WithCustomColorsAndIcons = args => (
-  <Messages {...args}>
-    <Item bg="accent.99" color="active" icon={AccountIcon}>{loremText}</Item>
-  </Messages>
-);
-
-// Added to bypass color contrast in safari
-WithCustomColorsAndIcons.parameters = {
-  a11y: {
-    config: {
-      rules: [{ id: 'color-contrast', enabled: false }],
-    },
-  },
-};
-
 
 export const UseReducer = () => {
   // import { messagesReducer as messagesReducerCore } from '@pingux/astro';
@@ -319,20 +306,10 @@ export const WithTextStyling = args => {
     },
     {
       key: 'message2',
-      text: loremText,
-      status: 'success',
-    },
-    {
-      key: 'message3',
-      text: loremText,
-      status: 'warning',
-    },
-    {
-      key: 'message4',
       node: (
         <>
           <b>Lorem Ipsum! </b>
-          {loremText}
+          dolor sit amet, consectetur adipiscing elit
         </>
       ),
       status: 'error',
@@ -348,6 +325,50 @@ export const WithTextStyling = args => {
 
 // Added to bypass color contrast in safari
 WithTextStyling.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.messages.withTextStyling,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const WithLink = args => {
+  return (
+    <Messages {...args}>
+      <Item key="message1">
+        {loremText}
+        {' '}
+        <Link href="https://lorem.ipsum">Learn More</Link>
+      </Item>
+    </Messages>
+  );
+};
+
+// Added to bypass color contrast in safari
+WithLink.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.messages.withLink,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const Customization = args => (
+  <Messages {...args}>
+    <Item bg="accent.99" color="active" icon={AccountIcon}>{loremText}</Item>
+  </Messages>
+);
+
+// Added to bypass color contrast in safari
+Customization.parameters = {
   a11y: {
     config: {
       rules: [{ id: 'color-contrast', enabled: false }],

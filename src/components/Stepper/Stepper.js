@@ -19,6 +19,7 @@ const Stepper = forwardRef((props, ref) => {
     activeStep,
     onStepChange,
     tabListProps,
+    tooltipProps,
     ...others
   } = props;
 
@@ -72,6 +73,7 @@ const Stepper = forwardRef((props, ref) => {
         aria-label={textValue}
         content={item.rendered}
         separator={!isFirst && line}
+        tooltipTriggerProps={tooltipProps}
       />
     );
 
@@ -115,6 +117,7 @@ Stepper.propTypes = {
   onStepChange: PropTypes.func,
   /** A props object that is subsequently spread into the rendered tablist. */
   tabListProps: PropTypes.shape({}),
+  tooltipProps: PropTypes.shape({}),
 };
 
 Stepper.defaultProps = {

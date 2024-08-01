@@ -1,9 +1,16 @@
 import { OverlayTriggerState, useOverlayTriggerState } from 'react-stately';
 
+import useMountTransition from '../useMountTransition';
+
 interface UseModalStateProps {
   isDefaultOpen?: boolean,
   isOpen?: boolean,
   onOpenChange?: (isOpen: boolean) => void,
+  transitionDuration?: number
+}
+
+export interface AstroOverlayTriggerState extends OverlayTriggerState {
+  isTransitioning: boolean
 }
 
 interface UseModalState {
@@ -17,7 +24,7 @@ interface UseModalState {
    *
    * @returns {Object} `{ isOpen: Boolean, open: Function, close: Function, toggle: Function }`
    */
-  (props?: UseModalStateProps): OverlayTriggerState;
+  (props?: UseModalStateProps): AstroOverlayTriggerState;
 }
 
 const useModalState: UseModalState = (props = {}) => {
@@ -25,13 +32,24 @@ const useModalState: UseModalState = (props = {}) => {
     isDefaultOpen,
     isOpen,
     onOpenChange,
+    transitionDuration,
   } = props;
 
-  return useOverlayTriggerState({
+  const state = useOverlayTriggerState({
     defaultOpen: isDefaultOpen,
     isOpen,
     onOpenChange,
   });
+
+  const { isOpen: modalOpen } = state;
+
+  const isTransitioning = useMountTransition(modalOpen, transitionDuration || 300);
+
+  const returnState = {
+    ...state, isTransitioning,
+  };
+
+  return returnState;
 };
 
 export default useModalState;

@@ -28,7 +28,13 @@ const data = [
 const NavBarWithItemBody = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <NavBar>
-      <NavBarItemBody ref={ref} {...props} item={{ children: [<Text>{TEXT}</Text>] }} />
+      <NavBarItemBody
+        isExpanded
+        isTransitioning
+        ref={ref}
+        {...props}
+        item={{ children: [<Text>{TEXT}</Text>] }}
+      />
     </NavBar>
   );
 });
@@ -57,7 +63,11 @@ universalComponentTests({
 
 const getComponent = item => render((
   <NavBar>
-    <NavBarItemBody item={{ children: [item] }} />
+    <NavBarItemBody
+      item={{ children: [item] }}
+      isExpanded
+      isTransitioning
+    />
   </NavBar>
 ));
 

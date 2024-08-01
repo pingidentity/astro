@@ -25,6 +25,16 @@ export default {
         </>
       ),
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
   argTypes: {},
 };

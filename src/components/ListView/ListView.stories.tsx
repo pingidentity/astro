@@ -329,22 +329,22 @@ const CustomText = ({ string, secondString, ...others }: CustomTextProps) => (
 const ExpandableChildren = () => {
   return (
     <Box sx={{ my: 'md' }}>
-      <TextField maxWidth="300px" />
+      <TextField maxWidth="300px" aria-label="Search Environment" />
       <Box sx={{ mt: 'md', gap: 'md' }}>
         {environments.map(env => {
           return (
             <Box key={env.title}>
               <Box isRow>
                 <CustomText key={`${env.title} title`} string={env.title} secondString="Environment" />
-                { env.isLimitedAccess
-                && (
-                <>
-                  <Badge label="Limited Access" bg="white" textColor="text.primary" sx={{ ml: 'xs', border: '1px solid', borderColor: 'neutral.80' }} />
-                  <HelpHint>
-                    Text of the popover right here...
-                  </HelpHint>
-                </>
-                )}
+                {env.isLimitedAccess
+                  && (
+                    <>
+                      <Badge label="Limited Access" bg="white" textColor="text.primary" sx={{ ml: 'xs', border: '1px solid', borderColor: 'neutral.80' }} />
+                      <HelpHint>
+                        Text of the popover right here...
+                      </HelpHint>
+                    </>
+                  )}
               </Box>
               {env.populations?.map(pop => {
                 return (
@@ -593,6 +593,7 @@ export const WithCharts = ({ ...args }) => {
               chartLabel="12 wk trend"
               trend="+115.0%"
               tooltipText="See Contributing Data"
+              ariaLabel={item.name}
             />
             <Controls />
           </ListViewItem>

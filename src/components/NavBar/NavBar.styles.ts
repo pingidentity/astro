@@ -298,7 +298,10 @@ const popUpSectionButton = {
 
 const navBarItemBody = {
   alignItems: 'stretch',
-  mb: 'md',
+  overflow: 'hidden',
+  transition: 'max-height 300ms ease, margin-bottom 300ms ease',
+  height: 'fit-content',
+  marginBottom: 0,
 };
 
 const popUpNavBarItemBody = {

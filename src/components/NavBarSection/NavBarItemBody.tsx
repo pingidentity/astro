@@ -6,7 +6,8 @@ import { useNavBarContext } from '../../context/NavBarContext';
 import { Box, Separator, Text } from '../../index';
 import { ChildItemWrapperProps, NavBarItemBodyProps } from '../../types/navBar';
 
-const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>(({ item, onKeyDown }, ref) => {
+const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>((
+  { item, onKeyDown, className, isExpanded, isTransitioning }, ref) => {
   const state = useNavBarContext();
 
   const renderSubTitle = child => {
@@ -41,8 +42,30 @@ const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>(({ item, onK
       )
   );
 
+  const shouldShowTransition = isExpanded && isTransitioning;
+
+  const getEstimatedHeight = () => {
+    if (item?.children && (typeof item?.children.length) === 'number') {
+      return (item?.itemHeight ? item.itemHeight : 40) * item.children.length;
+    } return null;
+  };
+
+  const estimatedHeight = getEstimatedHeight();
+
   return (
-    <Box variant={state.navStyles.navBarItemBody} ref={ref}>
+    <Box
+      variant={state.navStyles.navBarItemBody}
+      ref={ref}
+      className={className}
+      sx={{
+        maxHeight: '0px',
+        ...((shouldShowTransition) && {
+          marginBottom: 'md',
+          maxHeight: `${estimatedHeight}px`,
+          transition: 'max-height 300ms ease, margin-bottom 300ms ease',
+        }),
+      }}
+    >
       {item?.children && item.children.map(renderChild)}
     </Box>
   );

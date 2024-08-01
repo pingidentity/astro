@@ -164,7 +164,23 @@ export const badges = {
 
 const modal = {
   content: {
+    pt: '15px',
     borderRadius: '4px',
+    opacity: 0,
+    top: '15px',
+    transform: 'translate(0, -50px)',
+    transition: 'opacity 300ms ease, transform 500ms ease-out',
+    '&.is-open-no-transition': {
+      opacity: '100%',
+      transform: 'none',
+    },
+    '&.is-open.is-transitioning': {
+      opacity: '100%',
+      transform: 'none',
+    },
+  },
+  container: {
+    justifyContent: 'start',
   },
 };
 

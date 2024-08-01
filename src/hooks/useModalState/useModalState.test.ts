@@ -10,6 +10,7 @@ test('default return', () => {
     open: expect.any(Function),
     close: expect.any(Function),
     toggle: expect.any(Function),
+    isTransitioning: expect.any(Boolean),
   }));
 });
 
@@ -21,6 +22,7 @@ test('isDefaultOpen returns uncontrolled state', () => {
     open: expect.any(Function),
     close: expect.any(Function),
     toggle: expect.any(Function),
+    isTransitioning: expect.any(Boolean),
   }));
 
   act(() => result.current.close());
@@ -39,6 +41,7 @@ test('isOpen when true returns controlled state', () => {
     open: expect.any(Function),
     close: expect.any(Function),
     toggle: expect.any(Function),
+    isTransitioning: expect.any(Boolean),
   }));
 
   act(() => result.current.close());
@@ -55,6 +58,7 @@ test('isOpen when false returns controlled state', () => {
     open: expect.any(Function),
     close: expect.any(Function),
     toggle: expect.any(Function),
+    isTransitioning: expect.any(Boolean),
   }));
 
   act(() => result.current.open());
@@ -72,6 +76,7 @@ test('onOpenChange callback is triggered', () => {
     open: expect.any(Function),
     close: expect.any(Function),
     toggle: expect.any(Function),
+    isTransitioning: expect.any(Boolean),
   }));
 
   expect(onOpenChange).not.toHaveBeenCalled();
