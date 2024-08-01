@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.78.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.77.0...@pingux/astro@2.78.0) (2024-08-01)
+
+
+### Features
+
+* [UIP-6915] Messages Update to match spec ([2fd72ce](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2fd72cef7594038004adfe448db3c9e9005c7efc))
+* [UIP-6936] accessibility violations found for listview ([67de313](https://gitlab.corp.pingidentity.com/ux/pingux/commit/67de31357f54e32eba0107dbfc3413ee716dbd89))
+* [UIP-6987] in stepper add ability to pass through props for included tooltip trigger ([6c50599](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6c505995b51a12cc160af8dcad98c0c6eb915a51))
+* [UIP-6996] TimeField insufficient color contrast ([675cb51](https://gitlab.corp.pingidentity.com/ux/pingux/commit/675cb51ed8356982bf50861eef07fbe29696c9f6))
+* UIP-7005 Astro Next-Gen transitions ([f6fad61](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f6fad61ff6575242813f87e2f733ebb3574d371e))
+
+
+
+
+
 # [2.77.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.76.0...@pingux/astro@2.77.0) (2024-07-25)
 
 
