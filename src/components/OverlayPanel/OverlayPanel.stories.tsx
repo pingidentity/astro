@@ -426,9 +426,9 @@ export const InnerPanel: StoryFn<OverlayPanelProps> = ({ ...args }: OverlayPanel
     )
   );
 
-  const items = [
-    { id: 1, name: 'Form 1' },
-    { id: 2, name: 'Form 2' },
+  const items: ExampleItemProps[] = [
+    { key: 'Form 1', id: 1, name: 'Form 1' },
+    { key: 'Form 2', id: 2, name: 'Form 2' },
   ];
 
   const outer = (
