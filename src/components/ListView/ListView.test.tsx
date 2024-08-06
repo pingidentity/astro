@@ -1,4 +1,4 @@
-import React, { Key } from 'react';
+import React from 'react';
 import { FocusScope } from 'react-aria';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
@@ -11,14 +11,8 @@ import Button from '../Button';
 import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
+import { ExampleItemProps } from './ListView.stories';
 import { escapeFocusDelegate } from './ListViewFocusWrapper';
-
-interface TestItemProps {
-  key?: Key,
-  name?: string,
-  textValue?: string,
-  id?: string,
-}
 
 const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1' },
@@ -68,7 +62,7 @@ afterAll(() => {
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} items={items}>
-      {(item: TestItemProps) => (
+      {(item: ExampleItemProps) => (
         <Item
           key={item.key}
           textValue={item.name}
@@ -88,7 +82,7 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 
 const getComponentExpandable = (props = {}, { renderFn = render } = {}) => renderFn((
   <ListView {...defaultProps} {...props} items={items}>
-    {(item: TestItemProps) => (
+    {(item: ExampleItemProps) => (
       <Item
         key={item.name}
         textValue={item.name}
@@ -109,7 +103,7 @@ const getComponentEmpty = (props = {}, { renderFn = render } = {}) => renderFn((
 const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => renderFn((
   <FocusScope restoreFocus>
     <ListView {...defaultProps} {...props} items={items}>
-      {(item: TestItemProps) => (
+      {(item: ExampleItemProps) => (
         <Item
           key={item.key}
           textValue={item.name}
@@ -126,7 +120,7 @@ const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => ren
 universalComponentTests({
   renderComponent: props => (
     <ListView {...defaultProps} {...props} items={items}>
-      {(item: TestItemProps) => (
+      {(item: ExampleItemProps) => (
         <Item
           key={item.key}
           textValue={item.name}
