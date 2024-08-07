@@ -206,6 +206,27 @@ const iconButtons = {
   base: {
     ...baseIconButton,
   },
+  nextGen: {
+    ...baseIconButton,
+    ...secondary,
+    path: { fill: 'blue' },
+    '&.is-hovered': {
+      backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
+      path: { fill: 'white' },
+    },
+    '&.is-pressed': {
+      backgroundColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+      borderColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+      path: { fill: 'white' },
+    },
+    maxHeight: '48.5px',
+    maxWidth: '48.5px',
+    width: '48.5px',
+    p: 'sm',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   modalCloseButton,
   badge: {
     deleteButton: {
