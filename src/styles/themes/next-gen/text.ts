@@ -6,10 +6,11 @@ const getFontSize = major => Math.round(
 export const fontSizes = {
   'xs': getFontSize(-2),
   'sm': getFontSize(-1),
-  'md': getFontSize(0),
-  'lg': getFontSize(1),
-  'xl': getFontSize(2),
-  'xx': getFontSize(3),
+  'md': '15px',
+  'lg': '18.75px',
+  'xl': '22.5px',
+  'xx': '26.25px',
+  'xxx': '33.75px',
 };
 
 export const fontWeights = {

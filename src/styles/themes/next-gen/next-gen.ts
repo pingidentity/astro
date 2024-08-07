@@ -7,7 +7,7 @@ import buttons from './variants/button';
 import { text as newText } from './variants/text';
 import variants, { badges } from './variants/variants';
 import forms from './forms';
-import { fontWeights } from './text';
+import { fontSizes, fontWeights } from './text';
 
 import './open_sans.css';
 
@@ -16,6 +16,7 @@ const nextGenTheme = {
   colors,
   buttons,
   forms,
+  fontSizes,
   fontWeights,
   lineHeights: {
     body: '1.5',
