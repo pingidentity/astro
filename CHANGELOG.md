@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.79.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.78.0...@pingux/astro@2.79.0) (2024-08-08)
+
+
+### Features
+
+* [UIP-6940] refactor the list view types ([ce0f6af](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ce0f6af648d72ee610d9f2b1b901fa1d430aeed2))
+* [UIP-6985] combo box aria label not being passed in for recipe ([1f7af10](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1f7af10bc23c7ce050b011072525f969236cf126))
+* [UIP-7047] Add Next Gen Icon Button ([33e97ce](https://gitlab.corp.pingidentity.com/ux/pingux/commit/33e97ce18e58bd95e39f952e92b7e1c690fc4064))
+
+
+
+
+
 # [2.78.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.77.0...@pingux/astro@2.78.0) (2024-08-01)
 
 
