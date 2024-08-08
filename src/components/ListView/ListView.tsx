@@ -11,6 +11,7 @@ import { ListViewProps, ListViewState } from '../../types/listView';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import Loader from '../Loader';
 
+import { ExampleItemProps } from './ListView.stories';
 import { ListViewContext } from './ListViewContext';
 import ListViewExpandableItem from './ListViewExpandableItem';
 import ListViewItem from './ListViewItem';
@@ -30,8 +31,7 @@ export function useListLayout(state) {
     loaderHeight: ROW_HEIGHT,
     placeholderHeight: ROW_HEIGHT,
     collator,
-  }),
-  [collator, state.collection]);
+  }), [collator, state.collection]);
 
   layout.collection = state.collection;
   layout.disabledKeys = state.disabledKeys;
@@ -79,7 +79,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
   const state = useTreeState({
     ...props,
     selectionMode: selectionMode === 'expansion' ? 'single' : selectionMode,
-  }) as ListViewState<object>;
+  }) as ListViewState<ExampleItemProps>;
 
   state.hover = {
     hoveredItem,
@@ -93,7 +93,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
   const layout = useListLayout(state);
 
   const { gridProps } = useGridList({
-    ...props as GridListProps<object>,
+    ...props as GridListProps<ExampleItemProps>,
     isVirtualized: true,
     keyboardDelegate: layout,
   }, state, listViewRef);

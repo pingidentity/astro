@@ -53,7 +53,17 @@ export default {
   },
 };
 
-const items = [
+
+export interface ExampleItemProps {
+  key: Key,
+  name: string,
+  textValue?: string,
+  subtext?: string,
+  id: string | number,
+  hasSeparator?: boolean,
+}
+
+const items: ExampleItemProps[] = [
   { key: 'Aardvark', name: 'Aardvark', id: '1', hasSeparator: false },
   { key: 'Kangaroo', name: 'Kangaroo', id: '2' },
   { key: 'Snake', name: 'Snake', id: '3' },
@@ -310,13 +320,6 @@ interface CustomTextProps {
   sx?: ThemeUICSSObject,
 }
 
-export interface ExampleItemProps {
-  key?: Key,
-  name?: string,
-  textValue?: string,
-  subtext?: string,
-  id?: string,
-}
 
 const CustomText = ({ string, secondString, ...others }: CustomTextProps) => (
   <Text {...others}>
@@ -418,7 +421,7 @@ export const WithExpandableItems = ({ ...args }) => {
 };
 
 export const ControlledExpandableItems = ({ ...args }) => {
-  const [expandedKeys, setExpandedKeys] = useState(['Kangaroo']);
+  const [expandedKeys, setExpandedKeys] = useState<Array<Key>>(['Kangaroo']);
 
   const onExpandedKeyCallback = e => {
     setExpandedKeys(Array.from(e));
@@ -519,7 +522,7 @@ export const InfiniteLoadingList = args => {
     >
       <ListView
         {...actions}
-        items={(list.items as Iterable<object>)}
+        items={(list.items as Iterable<ExampleItemProps>)}
         loadingState={list.loadingState}
         onLoadMore={list.loadMore}
       >

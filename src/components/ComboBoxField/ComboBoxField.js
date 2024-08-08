@@ -62,6 +62,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     menuTrigger,
     shouldFlip: !isNotFlippable,
     direction,
+    label: 'default',
     ...nonAriaProps,
   };
 

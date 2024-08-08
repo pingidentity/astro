@@ -3,9 +3,11 @@ import { FocusManager } from 'react-aria';
 import { TreeProps, TreeState } from 'react-stately';
 import type { GridNode } from '@react-types/grid';
 
+import { ExampleItemProps } from '../components/ListView/ListView.stories';
+
 export type SelectionOptions = 'expansion' | 'single' | 'multiple' | 'none'
 
-export interface ListViewProps extends Omit<TreeProps<object>, 'selectionMode'> {
+export interface ListViewProps extends Omit<TreeProps<ExampleItemProps>, 'selectionMode'> {
   selectionStyle?: string,
   isHoverable?: boolean,
   loadingState?: string,

@@ -77,12 +77,12 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
       <Box {...expandableItemState.gridCellProps}>
         {isExpanded
           && (
-          <ListViewFocusWrapper
-            isFocusEscaped={isFocusEscaped}
-            containerProps={expandableContainerProps}
-          >
-            {item.rendered && item.rendered[1]}
-          </ListViewFocusWrapper>
+            <ListViewFocusWrapper
+              isFocusEscaped={isFocusEscaped}
+              containerProps={expandableContainerProps}
+            >
+              {item.rendered && item.rendered[1]}
+            </ListViewFocusWrapper>
           )}
       </Box>
     </Box>

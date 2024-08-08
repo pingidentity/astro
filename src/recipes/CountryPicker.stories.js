@@ -104,7 +104,6 @@ export const Default = () => {
         onSelectionChange={selectionHandler}
         menuTrigger="focus"
         aria-labelledby="group-label"
-        label=" "
       >
         {item => (
           <Item key={item[0]} textValue={`+${item[1].phone.split(',')[0]}`}>
