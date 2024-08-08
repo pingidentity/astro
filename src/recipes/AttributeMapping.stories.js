@@ -419,12 +419,10 @@ export const EditRow = props => {
           id={`leftInputField ${index}`}
           key={`leftInputField ${index}`}
           labelProps={{
-            'aria-label': 'selection field',
             mb: 0,
           }}
           aria-label="selection field"
           controlProps={{
-            'aria-label': 'selection field',
             sx: editSx.comboBoxField,
           }}
           containerProps={{
@@ -444,12 +442,10 @@ export const EditRow = props => {
           id={`rightInputField ${index}`}
           key={`rightInputField ${index}`}
           labelProps={{
-            'aria-label': 'selection field',
             mb: 0,
           }}
           aria-label="selection field"
           controlProps={{
-            'aria-label': 'selection field',
             sx: editSx.comboBoxField,
           }}
           containerProps={{
