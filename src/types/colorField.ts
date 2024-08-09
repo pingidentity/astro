@@ -41,7 +41,7 @@ export interface ColorFieldProps extends TestingAttributes {
    */
   onChange?: (color: CustomColorProps, event: React.ChangeEvent) => void | undefined;
   /** Color controls what color is active on the color picker. */
-  value?: string,
+  value?: React.InputHTMLAttributes<HTMLInputElement>['value'],
   /** Props object that is spread into the Button element. */
   buttonProps?: ButtonProps,
   status?: Status,
