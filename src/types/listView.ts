@@ -2,6 +2,7 @@ import { Dispatch, Key, ReactNode, SetStateAction } from 'react';
 import { FocusManager } from 'react-aria';
 import { TreeProps, TreeState } from 'react-stately';
 import type { GridNode } from '@react-types/grid';
+import { ThemeUICSSObject } from 'theme-ui';
 
 import { ExampleItemProps } from '../components/ListView/ListView.stories';
 
@@ -15,7 +16,8 @@ export interface ListViewProps extends Omit<TreeProps<ExampleItemProps>, 'select
   onFocus?: (event) => void,
   onLoadMore?: () => void,
   'aria-label'?: string,
-  containerProps?: object
+  containerProps?: object,
+  sx?: ThemeUICSSObject,
 }
 
 export interface ExpandableItemChildrenContainerProps {
@@ -59,7 +61,7 @@ export interface ListViewItemTypesProps {
   hasInsetSeparator?: boolean
 }
 
-export interface ListViewItemTypes<T> extends GridNode<T>{
+export interface ListViewItemTypes<T> extends GridNode<T> {
   props?: ListViewItemTypesProps
 }
 
