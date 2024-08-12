@@ -20,4 +20,6 @@ export interface IconButtonProps extends ThemeUIIconButtonProps, TestingAttribut
     /** Whether the icon button is disabled. */
     isDisabled?: boolean;
     size?: IconSize;
+    isRow?: boolean;
+    'aria-controls'?: string | undefined;
 }

@@ -1,11 +1,11 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import {
-  CollapsiblePanel,
-} from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { CollapsiblePanel } from '../../index';
+import { CollapsiblePanelProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
 
@@ -43,9 +43,11 @@ export default {
     openAriaLabel: 'Open filter menu?',
     closeAriaLabel: 'Close filter menu?',
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<CollapsiblePanelProps<object>> = (
+  args: CollapsiblePanelProps<object>,
+) => (
   <CollapsiblePanel
     {...args}
   />

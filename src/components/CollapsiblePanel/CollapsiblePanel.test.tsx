@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { CollapsiblePanelProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -15,7 +16,7 @@ const defaultProps = {
   selectedFilterCount: 8,
   onSelectionChange,
 };
-const getComponent = (props = {}) => render(
+const getComponent = (props: CollapsiblePanelProps<object> = {}) => render(
   <CollapsiblePanel {...defaultProps} {...props} />,
 );
 
@@ -24,7 +25,10 @@ beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
+    cb(0);
+    return 0;
+  });
 });
 
 afterEach(() => {

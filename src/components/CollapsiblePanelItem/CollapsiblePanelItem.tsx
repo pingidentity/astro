@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton, Text } from '../../index';
+import { CollapsiblePanelItemProps } from '../../types';
 
-const CollapsiblePanelItem = forwardRef((props, ref) => {
-  const { text, icon, isDefaultSelected, onPress } = props;
+const CollapsiblePanelItem = forwardRef<HTMLDivElement, CollapsiblePanelItemProps>((props, ref) => {
+  const { text, icon, isDefaultSelected, onPress, iconProps } = props;
 
   const iconElement = icon && (
     <Icon
@@ -12,6 +12,7 @@ const CollapsiblePanelItem = forwardRef((props, ref) => {
       icon={icon}
       color={isDefaultSelected ? 'neutral.10' : 'active'}
       size={13}
+      {...iconProps}
     />
   );
 
@@ -35,26 +36,6 @@ const CollapsiblePanelItem = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-CollapsiblePanelItem.propTypes = {
-  /**
-     * Display text.
-     */
-  text: PropTypes.string,
-  /**
-     * List icon.
-     */
-  icon: PropTypes.shape({}),
-  /**
-   * Whether the element is default selected
-   * and has to use Icon element instead of IconButton
-   */
-  isDefaultSelected: PropTypes.bool,
-  /**
-   * Handler that is called at the press on icon button
-   */
-  onPress: PropTypes.func,
-};
 
 CollapsiblePanelItem.displayName = 'CollapsiblePanelItem';
 export default CollapsiblePanelItem;
