@@ -16,4 +16,5 @@ export interface InputProps extends StyleProps, DOMAttributes, TestingAttributes
     placeholder?: string,
     /** Styling variant for the input */
     variant?: string,
+    value?: React.InputHTMLAttributes<HTMLInputElement>['value'],
 }

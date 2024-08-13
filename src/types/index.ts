@@ -8,6 +8,7 @@ export * from './buttonBar';
 export * from './calendar';
 export * from './card';
 export * from './checkboxField';
+export * from './collapsiblePanel';
 export * from './colorField';
 export * from './copyText';
 export * from './dataTable';

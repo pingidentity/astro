@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { CollapsiblePanelContainerProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -14,7 +15,7 @@ const collapsiblePanelId = 'collapsible-panel';
 const defaultProps = {
   'data-testid': testId,
 };
-const getComponent = (props = {}) => render(
+const getComponent = (props: CollapsiblePanelContainerProps = {}) => render(
   <CollapsiblePanelContainer {...defaultProps} {...props}>
     <div data-testid={collapsiblePanelId} />
   </CollapsiblePanelContainer>,
@@ -40,15 +41,14 @@ test('custom classname can be passed', () => {
 });
 
 test('shows badge when container is closed', () => {
-  getComponent({ selectedFilterCount: 9, state: { isOpen: false } });
+  getComponent({ selectedFilterCount: 9, isOpen: false });
   const badge = screen.getByTestId(collapsiblePanelBadgeId);
 
   expect(badge).toBeInTheDocument();
 });
 
 test('updates aria label when button is clicked', () => {
-  const state = { isOpen: true };
-  getComponent({ state });
+  getComponent();
   const button = screen.getByTestId(collapsiblePanelButtonId);
   const container = screen.getByTestId(testId);
 
