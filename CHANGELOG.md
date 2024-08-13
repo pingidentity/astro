@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.80.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.79.0...@pingux/astro@2.80.0) (2024-08-13)
+
+
+### Features
+
+* [UIP-6819] CollapsiblePanel convert to TS ([6f654d7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6f654d728a36f3368c38a5a9929443f40f6e3ede))
+* [UIP-7046] Input types do not include support for value ([c3a5ac7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c3a5ac73750636b54a4ba0bbdcfb90f181dd8ae0))
+
+
+
+
+
 # [2.79.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.78.0...@pingux/astro@2.79.0) (2024-08-08)
 
 
