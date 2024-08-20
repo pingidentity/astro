@@ -32,6 +32,7 @@ export * from './menuItem';
 export * from './messages';
 export * from './Modal';
 export * from './navBar';
+export * from './navSideBar';
 export * from './overlayPanel';
 export * from './popoverContainer';
 export * from './popoverMenu';

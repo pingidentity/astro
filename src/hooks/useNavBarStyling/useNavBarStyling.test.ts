@@ -30,7 +30,7 @@ test('default prop returns standard nav variants', () => {
     navBarItemHeaderText: 'variants.navBar.headerText',
     navBarItemButton: 'variants.navBar.itemButton',
     navBarItemLink: 'variants.navBar.itemButton',
-    navBarItem: 'navBar.item',
+    navBarItem: 'variants.navBar.item',
     navBarItemText: 'variants.navBar.headerText',
     navBarItemHeaderListItem: null,
     navBarItemBody: 'variants.navBar.navBarItemBody',

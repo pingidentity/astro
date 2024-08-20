@@ -34,6 +34,7 @@ interface NavBarStyling {
     navBarItemHeaderListItem: string | null;
     navBarItemBody: string;
     navBarItemHeaderIconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xx';
+    navBarItemLinkButtonColor: string | null;
   }
 }
 
@@ -46,6 +47,7 @@ const useNavBarStyling: NavBarStyling = variant => {
         sectionItem: 'variants.navBar.popUpSectionButton',
         navBarItemHeader: 'navBar.popUpItemHeaderContainer',
         navBarItemHeaderText: 'variants.navBar.popUpHeaderText',
+        navBarItemHeaderIcon: 'text.primary',
         navBarItemButton: 'variants.navBar.popUpItemButton',
         navBarItemLink: 'variants.navBar.popUpItemButton',
         navBarItem: 'navBar.popUpItem',
@@ -53,6 +55,9 @@ const useNavBarStyling: NavBarStyling = variant => {
         navBarItemHeaderListItem: 'variants.navBar.popUpItemListItem',
         navBarItemBody: 'variants.navBar.popUpNavBarItemBody',
         navBarItemHeaderIconSize: 'xs',
+        navBarItemLinkButtonColor: null,
+        navBarSectionList: null,
+        navBarItemCustomIcon: null,
       };
     default:
       return {
@@ -63,11 +68,18 @@ const useNavBarStyling: NavBarStyling = variant => {
         navBarItemHeaderText: 'variants.navBar.headerText',
         navBarItemButton: 'variants.navBar.itemButton',
         navBarItemLink: 'variants.navBar.itemButton',
-        navBarItem: 'navBar.item',
+        navBarItem: 'variants.navBar.item',
         navBarItemText: 'variants.navBar.headerText',
         navBarItemHeaderListItem: null,
         navBarItemBody: 'variants.navBar.navBarItemBody',
         navBarItemHeaderIconSize: 'sm',
+        navBarSubTitle: 'variants.navBar.subtitle',
+        navBarItemLinkButtonColor: 'variants.navBar.itemLinkButtonColor',
+        navBarSectionList: 'variants.navBar.sectionList',
+        navBarItemIcon: 'variants.navBar.itemIcon',
+        navBarItemIconSelected: 'variants.navBar.itemIconSelected',
+        navBarItemCustomIcon: 'variants.navBar.itemCustomIcon',
+        navBarItemCustomIconSelected: 'variants.navBar.itemCustomIconSelected',
       };
   }
 };
