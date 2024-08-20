@@ -8,10 +8,10 @@ import { Axis } from './shared';
 import { TooltipProps } from './tooltipTrigger';
 
 interface TooltipWrapperProps extends TooltipProps {
-    isOpen?: boolean;
+  isOpen?: boolean;
 }
 
-export interface HelpHintProps extends DOMAttributes, TestingAttributes{
+export interface HelpHintProps extends DOMAttributes, TestingAttributes {
   /** Props object that is spread directly into the popover element. */
   popoverProps?: PopoverContainerProps;
   /** @ignore Alias for `popoverProps` prop. Exists for backwards-compatibility. */
@@ -26,13 +26,13 @@ export interface HelpHintProps extends DOMAttributes, TestingAttributes{
     * Whether the popover is prevented from flipping directions when insufficient space is
     * available for the given `direction` placement.
   */
-  isNotFlippable?:boolean;
+  isNotFlippable?: boolean;
   /** Alignment of the popover menu relative to the trigger. */
   align?: 'start' | 'end' | 'middle';
   /**
     * Allows to add an arrow to popover container
   */
-  hasNoArrow?:boolean;
+  hasNoArrow?: boolean;
   /** Popover offset relative to its trigger. */
   offset?: number;
   /** Arrow offset relative to the left of the popover.
@@ -46,5 +46,6 @@ export interface HelpHintProps extends DOMAttributes, TestingAttributes{
   /** Children node */
   children?: ReactNode;
   /** Safari compatible flag */
-  isSafariCompatible?:boolean;
+  isSafariCompatible?: boolean;
+  width?: string | number;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { TextFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -13,7 +14,9 @@ const defaultProps = {
   'data-testid': testId,
   label: testLabel,
 };
-const getComponent = (props = {}) => render(<TextField {...defaultProps} {...props} />);
+const getComponent = (props: TextFieldProps = {}) => render(
+  <TextField {...defaultProps} {...props} />,
+);
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <TextField {...defaultProps} {...props} /> });
@@ -49,14 +52,16 @@ test('label will receive gridRow attribute if it will be higher than input', () 
     HTMLElement.prototype,
     'offsetHeight',
   );
-  Object.defineProperties(window.HTMLElement.prototype, {
-    offsetHeight: {
-      get() { return this.tagName === 'LABEL' ? 500 : 100; },
-    },
-  });
-  getComponent();
-  expect(screen.getByText(defaultProps.label)).toHaveStyle('grid-row: 1/5');
-  Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
+  if (originalOffsetHeight) {
+    Object.defineProperties(window.HTMLElement.prototype, {
+      offsetHeight: {
+        get() { return this.tagName === 'LABEL' ? 500 : 100; },
+      },
+    });
+    getComponent();
+    expect(screen.getByText(defaultProps.label)).toHaveStyle('grid-row: 1/5');
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
+  }
 });
 
 test('form wrapper will have default max label column width when no custom width set', () => {

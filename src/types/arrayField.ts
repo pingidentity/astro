@@ -5,7 +5,7 @@ import { LabelProps, Status, ValidPositiveInteger } from '.';
 type RenderFieldFunction = (
   id: string,
   fieldValue: string,
-  onFieldValueChange: (e: React.ChangeEvent<HTMLInputElement> | string, fieldId: string) => void,
+  onFieldValueChange: (e: React.ChangeEvent, fieldId: string) => void,
   onFieldDelete: (fieldId: string) => void,
   isDisabled: boolean,
   otherFieldProps?: Record<string, string>

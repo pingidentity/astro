@@ -119,6 +119,7 @@ const sectionBody = {
 };
 
 const itemButton = {
+  marginY: '2px',
   textDecoration: 'none',
   outline: 'none',
   cursor: 'pointer',
@@ -309,6 +310,40 @@ const popUpNavBarItemBody = {
   mb: 0,
 };
 
+const itemLinkButtonColor = {
+  color: 'white',
+};
+
+const sectionList = {
+  margin: 0,
+  padding: 0,
+  listStyle: 'none',
+};
+
+const itemIcon = {
+  mr: 'sm',
+  color: 'neutral.95',
+  fill: 'neutral.95',
+};
+
+const itemIconSelected = {
+  ...itemIcon,
+  color: 'white',
+  fill: 'white',
+};
+
+const itemCustomIcon = {
+  color: 'neutral.95',
+  fill: 'neutral.95',
+  ml: 'auto',
+};
+
+const itemCustomIconSelected = {
+  ...itemCustomIcon,
+  color: 'white',
+  fill: 'white',
+};
+
 export default {
   container,
   popUpContainer,
@@ -330,4 +365,10 @@ export default {
   popUpItem,
   navBarItemBody,
   popUpNavBarItemBody,
+  itemLinkButtonColor,
+  sectionList,
+  itemIcon,
+  itemIconSelected,
+  itemCustomIcon,
+  itemCustomIconSelected,
 };
