@@ -113,6 +113,8 @@ export { default as NavBar } from './components/NavBar';
 export * from './components/NavBar';
 export { default as NavBarSection } from './components/NavBarSection';
 export * from './components/NavBarSection';
+export { default as NavSideBar } from './components/NavSideBar';
+export * from './components/NavSideBar';
 export { default as NumberField } from './components/NumberField';
 export * from './components/NumberField';
 export { default as OverlayPanel } from './components/OverlayPanel';

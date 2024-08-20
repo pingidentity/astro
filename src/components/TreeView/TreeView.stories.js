@@ -201,8 +201,10 @@ export const AsyncLoading = args => {
       if (isFulfilled) {
         const tempArray = [...loadingNodes];
 
-        tempArray.splice(index, 1, { node: item.node,
-          loadingState: false });
+        tempArray.splice(index, 1, {
+          node: item.node,
+          loadingState: false,
+        });
         setLoadingNodes(tempArray);
       }
     });

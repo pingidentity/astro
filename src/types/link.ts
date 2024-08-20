@@ -25,4 +25,5 @@ export interface LinkProps extends TestingAttributes {
   sx?: ThemeUICSSObject;
   id?: string;
   color?: string;
+  'aria-label'?: string;
 }
