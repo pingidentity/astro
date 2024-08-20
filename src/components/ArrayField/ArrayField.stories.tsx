@@ -88,7 +88,7 @@ export const Uncontrolled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
           <TextField
             aria-label="Text field"
             value={fieldValue}
-            onChange={e => onFieldValueChange(e, id)}
+            onChange={(e: React.ChangeEvent) => onFieldValueChange(e, id)}
             mr="xs"
             slots={
               {

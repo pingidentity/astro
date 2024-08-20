@@ -22,7 +22,7 @@ interface WrapperProps extends BoxProps {
   statusClasses?: { [className: string]: boolean };
 }
 
-interface ContainerProps extends WrapperProps {
+export interface ContainerProps extends WrapperProps {
   isFloatLabelActive?: boolean;
   'data-testid'?: string;
 }
@@ -54,6 +54,7 @@ export interface ControlProps extends React.HTMLAttributes<Element> {
   statusClasses?: { [className: string]: boolean };
   hasAutoFocus?: boolean;
   isDefaultSelected?: boolean;
+  variant?: string;
 }
 
 export interface UseFieldProps<T> {

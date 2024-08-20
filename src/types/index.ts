@@ -45,5 +45,6 @@ export * from './tab';
 export * from './table';
 export * from './tabs';
 export * from './text';
+export * from './textField';
 export * from './timefield';
 export * from './tooltipTrigger';

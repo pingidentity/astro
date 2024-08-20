@@ -1,4 +1,5 @@
 import { RefObject } from 'react';
+import { ThemeUIStyleObject } from 'theme-ui';
 
 import { TestingAttributes } from './shared/test';
 import { IconProps } from './icon';
@@ -27,5 +28,6 @@ export interface CopyTextProps extends HoverProps, TestingAttributes {
 
 export interface CopyButtonProps {
     iconProps?: IconProps,
-    onPress?: () => void
+    onPress?: () => void;
+    sx?: ThemeUIStyleObject;
 }
