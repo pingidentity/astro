@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.81.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.80.0...@pingux/astro@2.81.0) (2024-08-20)
+
+
+### Features
+
+* [UIP-6836] TextField convert to TS ([01f9f4f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/01f9f4f1782aeecb38b3a07bb7670cb534a1a48e))
+* [UIP-6846] NavSideBar component ([f879328](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f879328ea9bddc9a5d45e9af1beb68c4754f1b09))
+
+
+
+
+
 # [2.80.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.79.0...@pingux/astro@2.80.0) (2024-08-13)
 
 
