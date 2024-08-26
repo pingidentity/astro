@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
+import CalendarRangeIcon from '@pingux/mdi-react/CalendarRangeIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Icon,
   Item,
   Section,
   SelectField,
@@ -191,6 +193,29 @@ export const WithNoneOption = () => (
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
     <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
+export const WithSlots = () => (
+  <SelectField
+    slots={{
+      leftOfData: (
+        <Icon
+          icon={CalendarRangeIcon}
+          color="accent.40"
+          mr="xs"
+          title={{ name: 'Calendar Icon' }}
+        />
+      ),
+    }}
+  >
+    <Item key="today">Today</Item>
+    <Item key="fromYesterday">From Yesterday</Item>
+    <Item key="last7days">Last 7 Days</Item>
+    <Item key="last30days">Last 30 Days</Item>
+    <Item key="thisMonth">This Month</Item>
+    <Item key="lastMonth">Last Month</Item>
+    <Item key="customRange">Custom Range</Item>
   </SelectField>
 );
 
