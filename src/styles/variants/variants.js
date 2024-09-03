@@ -6,6 +6,7 @@ import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
 import buttonBar from '../../components/ButtonBar/ButtonBar.styles';
 import calendar from '../../components/Calendar/Calendar.styles';
 import callout from '../../components/Callout/Callout.styles';
+import codeEditor from '../../components/CodeEditor/CodeEditor.styles';
 import codeView from '../../components/CodeView/CodeView.styles';
 import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel.styles';
 import copyText from '../../components/CopyText/CopyText.styles';
@@ -51,6 +52,7 @@ export default {
   calendar,
   rangeCalendar,
   callout,
+  codeEditor,
   codeView,
   collapsiblePanel,
   copyText,
