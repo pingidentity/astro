@@ -49,6 +49,7 @@ export { default as Checkbox } from './components/Checkbox';
 export * from './components/Checkbox';
 export { default as CheckboxField } from './components/CheckboxField';
 export * from './components/CheckboxField';
+export { default as CodeEditor } from './components/CodeEditor';
 export { default as CodeView } from './components/CodeView';
 export { default as CollapsiblePanel } from './components/CollapsiblePanel';
 export * from './components/CollapsiblePanel';
