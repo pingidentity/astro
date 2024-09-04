@@ -88,6 +88,13 @@ SelectField.propTypes = {
    */
   onSelectionChange: PropTypes.func,
   ...inputFieldAttributesBasePropTypes,
+  /** Provides a way to insert markup in specified places. */
+  slots: PropTypes.shape({
+    /** The given node will be inserted before the text in field container. */
+    leftOfData: PropTypes.node,
+    /** The given node will be inserted into the field container. */
+    inContainer: PropTypes.node,
+  }),
   /**
    * Props object passed along to `useSelect` from React Aria, `useSelectState` from React Stately,
    * and/or the visible button representation for the select input.
