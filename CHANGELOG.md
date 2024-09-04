@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.82.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.81.0...@pingux/astro@2.82.0) (2024-09-04)
+
+
+### Features
+
+* [UIP-6844] Add language support to CodeEditor ([046f45e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/046f45ea68ac1e6b5174dc8e2cedcc96af18915c))
+* [UIP-6994] Add with slots story to SelectField ([050e8d9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/050e8d91a944d9a2f459aaedc7569effd4ba40b4))
+
+
+
+
+
 # [2.81.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.80.0...@pingux/astro@2.81.0) (2024-08-20)
 
 
