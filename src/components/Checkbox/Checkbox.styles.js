@@ -12,4 +12,11 @@ export const checkbox = {
     outlineColor: 'focus',
     outlineOffset: '0px',
   },
+  'input ~ &.is-disabled': {
+    color: 'neutral.80',
+  },
+
+  '&.is-disabled': {
+    opacity: '1',
+  },
 };

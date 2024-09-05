@@ -317,3 +317,22 @@ Indeterminate.parameters = {
     },
   },
 };
+
+export const Disabled: StoryFn<CheckboxFieldProps> = () => (
+  <Box>
+    <CheckboxField
+      isDisabled
+      label="Disabled"
+    />
+    <CheckboxField
+      isDisabled
+      isSelected
+      label="Disabled"
+    />
+    <CheckboxField
+      isDisabled
+      isIndeterminate
+      label="Disabled"
+    />
+  </Box>
+);

@@ -67,6 +67,9 @@ label.checkbox = {
   width: 'max-content',
   alignItems: 'center',
   cursor: 'pointer',
+  '& .is-disabled': {
+    opacity: '1',
+  },
 };
 
 label.radioGroup = {
