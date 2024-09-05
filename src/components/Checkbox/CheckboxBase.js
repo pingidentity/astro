@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { omit } from 'lodash';
+import PropTypes from 'prop-types';
 import { Checkbox as ThemeUICheckbox } from 'theme-ui';
 
+import { active, neutral } from '../../styles/colors';
 import Box from '../Box';
 
 /**
@@ -17,21 +19,29 @@ const DefaultCheckbox = forwardRef((props, ref) => (
   />
 ));
 
-const IndeterminateCheckboxIcon = props => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-labelledby="checkbox-icon-title"
-    {...omit(props, 'id', 'aria-checked')}
-  >
-    <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
-    <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill="#4462ED" stroke="#4462ED" />
-    <rect x="6.5" y="11" width="11" height="2" fill="white" />
-  </svg>
-);
+const IndeterminateCheckboxIcon = props => {
+  const color = props.disabled ? neutral[80] : active;
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-labelledby="checkbox-icon-title"
+      {...omit(props, 'id', 'aria-checked')}
+    >
+      <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill={color} stroke={color} />
+      <rect x="6.5" y="11" width="11" height="2" fill="white" />
+    </svg>
+  );
+};
+
+IndeterminateCheckboxIcon.propTypes = {
+  // eslint-disable-next-line react/boolean-prop-naming
+  disabled: PropTypes.bool,
+};
 
 /**
  * Renders a visually hidden default checkbox since the Theme UI checkbox does not support
@@ -49,6 +59,7 @@ const IndeterminateCheckbox = forwardRef((props, ref) => {
         as={IndeterminateCheckboxIcon}
         mr={2}
         {...props}
+        opacity={1}
       />
     </>
   );
