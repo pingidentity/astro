@@ -67,14 +67,16 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
 
   return (
     <Box {...getPendoID(displayName)} {...fieldContainerProps}>
-      <Label variant="forms.label.checkbox" {...fieldLabelProps}>
+      <Box isRow>
         <Checkbox
           ref={checkboxRef}
           aria-describedby={helperText && helperTextId}
           {...fieldControlInputProps}
         />
-        {label}
-      </Label>
+        <Label variant="forms.label.checkbox" {...fieldLabelProps}>
+          {label}
+        </Label>
+      </Box>
       {
         helperText && (
           <FieldHelperText status={status} sx={{ pt: 7 }} id={helperTextId}>
