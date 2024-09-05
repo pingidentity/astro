@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.83.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.82.0...@pingux/astro@2.83.0) (2024-09-05)
+
+
+### Features
+
+* [UIP-7055] change color to disabled checkboxes ([ed391f4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed391f4f36a513442316c9f975ec83c846fe0f7c))
+
+
+
+
+
 # [2.82.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.81.0...@pingux/astro@2.82.0) (2024-09-04)
 
 
