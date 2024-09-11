@@ -6,7 +6,7 @@ export interface MenuProps extends BoxProps, HoverProps {
     title?: string | undefined;
     'aria-label'?: string | undefined;
     isNotFocusedOnHover?: boolean;
-    onAction?: () => void;
+    onAction?: (key?: unknown) => void;
     onSelectionChange?: () => void;
     isSelected?: boolean;
     selectionMode?: 'none' | 'single' | 'multiple';
