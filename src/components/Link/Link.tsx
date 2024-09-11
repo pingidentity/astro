@@ -7,7 +7,7 @@ import { usePropWarning, useStatusClasses } from '../../hooks';
 import { LinkProps } from '../../types';
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
-  const { className, isDisabled, onPress, isSafariCompatible, ...others } = props;
+  const { className, isDisabled, onPress, isSelected, isSafariCompatible, ...others } = props;
 
   const linkRef = useRef<HTMLAnchorElement>(null);
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -18,6 +18,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
   const { hoverProps, isHovered } = useHover(props);
   const { pressProps, isPressed } = usePress({ ref: linkRef });
   const { classNames } = useStatusClasses(className, {
+    isSelected,
     isDisabled,
     isFocused: isFocusVisible,
     isHovered,

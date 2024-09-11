@@ -47,11 +47,12 @@ const buttonBase = {
 const neutral = {
   color: 'gray-600',
   ...buttonBase,
+  ...transitions,
   '&.is-pressed': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    color: 'white',
   },
   '&.is-hovered': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
+    borderColor: 'primary',
   },
 };
 
@@ -173,6 +174,7 @@ const primaryWithIcon = {
 };
 
 const baseIconButton = {
+  cursor: 'pointer',
   transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
   outline: 'none',
   borderRadius: '28px',
@@ -250,6 +252,20 @@ const iconButtons = {
   },
   messageCloseButton: {
     ...baseIconButton,
+  },
+  headerNav: {
+    ...baseIconButton,
+    borderRadius: '4px',
+    path: { fill: 'gray-800' },
+    px: 'md',
+    py: 'sm',
+    width: '56px',
+    '&.is-hovered': {
+      path: { fill: 'gray-500' },
+    },
+    '&.is-pressed': {
+      path: { fill: 'gray-500' },
+    },
   },
 };
 

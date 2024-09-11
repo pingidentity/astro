@@ -34,7 +34,7 @@ const hTags = {
     color: 'text.primary',
     fontFamily: 'standard',
     fontWeight: 1,
-    fontSize: 'sm',
+    fontSize: 'xs',
   },
 };
 
@@ -49,12 +49,19 @@ export const text = {
   },
   placeholder: {
     color: 'text.primary',
+    fontWeight: 1,
   },
   paragraph: {
     lineHeight: 'body',
   },
   listViewItemText: {
     fontWeight: 2,
+  },
+  small: {
+    fontSize: 'sm',
+    color: 'gray-500',
+    fontFamily: 'standard',
+    lineHeight: '1.75rem',
   },
   ...hTags,
 };

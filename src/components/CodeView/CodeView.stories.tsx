@@ -111,10 +111,11 @@ export default {
   },
 } as Meta;
 
-
-export const Default: StoryFn<CodeViewProps> = (args: CodeViewProps) => (
-  <CodeView {...args} />
-);
+export const Default: StoryFn<CodeViewProps> = (args: CodeViewProps) => {
+  return (
+    <CodeView {...args} />
+  );
+};
 
 Default.parameters = {
   design: {
