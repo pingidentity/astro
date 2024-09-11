@@ -18,9 +18,13 @@ export default {
   breakpoints,
   fonts: {
     standard: '"Helvetica Neue", Helvetica, sans-serif',
+    codeView: '"Roboto Mono", "Lucida Console", Courier, monospace',
   },
   fontSizes,
   fontWeights,
+  lineHeights: {
+    md: '1.5',
+  },
   sizes: {
     buttonHeight: 36,
     column: 400,

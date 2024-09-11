@@ -20,6 +20,7 @@ const separator = {
   '& > [role="separator"]': {
     margin: '0px',
   },
+  outline: 'none',
 };
 
 export default {

@@ -18,6 +18,8 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     hasNoCopyButton,
     language,
     Prism: customPrism,
+    /* istanbul ignore next */
+    stylesProp = styles,
     ...others
   } = props;
 
@@ -32,6 +34,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   });
 
   // Get the width for the line number element depending on the total amount of lines
+
   const getLineNoWidth = tokens => tokens.length.toString().length * 12;
 
   const code = children?.trim() || '' as string;
@@ -39,7 +42,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const content = (
     <Highlight
       {...defaultProps}
-      theme={styles.theme as PrismThemeProps}
+      theme={stylesProp.theme as PrismThemeProps}
       code={code}
       language={language as Language}
       Prism={customPrism as PrismProps || Prism as PrismProps}

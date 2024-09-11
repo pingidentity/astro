@@ -124,14 +124,15 @@ const wrapper = {
   pre: {
     backgroundColor: 'transparent',
     m: 0,
-    p: 10,
+    p: 'sm',
     pr: 0,
     height: '100%',
     width: '100%',
     overflowX: 'hidden',
     overflowY: 'auto',
-    fontFamily: 'standard',
-    fontSize: 'sm',
+    fontFamily: 'codeView',
+    fontSize: '13px',
+    lineHeight: 'md',
     '& .token-line': {
       display: 'block',
       alignItems: 'center',
