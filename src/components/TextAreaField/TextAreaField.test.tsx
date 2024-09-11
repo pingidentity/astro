@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { TextAreaFieldProps } from '../../types/TextAreaField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -9,7 +10,7 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 import TextAreaField from '.';
 
 const testId = 'test-textAreaField';
-const defaultProps = {
+const defaultProps: TextAreaFieldProps = {
   'data-testid': testId,
   label: 'testLabel',
 };
@@ -74,7 +75,7 @@ test('label will receive gridRow attribute if it will be higher than textarea', 
   const originalOffsetHeight = Object.getOwnPropertyDescriptor(
     HTMLElement.prototype,
     'offsetHeight',
-  );
+  ) || {};
   Object.defineProperties(window.HTMLElement.prototype, {
     offsetHeight: {
       get() { return this.tagName === 'LABEL' ? 500 : 100; },
