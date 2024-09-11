@@ -23,7 +23,7 @@ export interface MenuItemProps extends BoxProps, TestingAttributes {
   /** Handler that is called when the menu should close after selecting an item. */
   onClose?: () => void;
   /** Handler that is called when the user activates the item. */
-  onAction?: () => void;
+  onAction?: (key?: unknown) => void;
   item?: Node<object>;
   state: TreeState<object>;
   defaultSelectedKey?: string | number
