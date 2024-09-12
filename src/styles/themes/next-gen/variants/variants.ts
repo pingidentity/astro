@@ -221,6 +221,9 @@ const listBox = {
       color: 'text.primary',
       bg: 'lightblue',
       pl: 0,
+      '&.is-focused': {
+        color: 'text.primary',
+      },
     },
   },
 };
