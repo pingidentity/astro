@@ -12,6 +12,7 @@ import {
   Menu,
   OverlayProvider,
   PopoverMenu,
+  Section,
   Text,
 } from '../../index';
 import { PopoverMenuProps } from '../../types';
@@ -87,9 +88,9 @@ export const DefaultOpen: StoryFn = () => (
       <IconButton aria-label="more options" variant="inverted">
         <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>
-      <Menu onAction={action('onAction')} disabledKeys={['duplicate']}>
+      <Menu onAction={action('onAction')} disabledKeys={['disabledItem']}>
         <Item key="edit">Edit</Item>
-        <Item key="duplicate">Duplicate</Item>
+        <Item key="disabledItem">Disabled Item</Item>
         <Item key="delete" textValue="delete">
           <Text color="critical.bright">
             Delete
@@ -183,6 +184,58 @@ export const NotClosedOnSelect: StoryFn = () => (
             Delete
           </Text>
         </Item>
+      </Menu>
+    </PopoverMenu>
+  </OverlayProvider>
+);
+
+export const WithSeparator: StoryFn<PopoverMenuProps> = (args: PopoverMenuProps) => (
+  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+  // readers when an overlay opens.
+  <OverlayProvider>
+    <PopoverMenu {...args}>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
+      <Menu onAction={action('onAction')} disabledKeys={['disabledItem']}>
+        <Section>
+          <Item key="edit">Edit</Item>
+        </Section>
+        <Section>
+          <Item key="disabledItem">Disabled Item</Item>
+          <Item key="delete" textValue="delete">
+            <Text color="critical.bright">
+              Delete
+            </Text>
+          </Item>
+        </Section>
+      </Menu>
+    </PopoverMenu>
+  </OverlayProvider>
+);
+
+export const WithSections: StoryFn<PopoverMenuProps> = (args: PopoverMenuProps) => (
+  // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+  // readers when an overlay opens.
+  <OverlayProvider>
+    <PopoverMenu {...args}>
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
+      <Menu onAction={action('onAction')} disabledKeys={['disabledItem']}>
+        <Section key="section 1" title="Section 1">
+          <Item key="edit">Edit</Item>
+          <Item key="disabledItem">Disabled Item</Item>
+          <Item key="copy">Copy</Item>
+        </Section>
+        <Section key="section 2" title="Section 2">
+          <Item key="duplicate">Duplicate</Item>
+          <Item key="delete" textValue="delete">
+            <Text color="critical.bright">
+              Delete
+            </Text>
+          </Item>
+        </Section>
       </Menu>
     </PopoverMenu>
   </OverlayProvider>

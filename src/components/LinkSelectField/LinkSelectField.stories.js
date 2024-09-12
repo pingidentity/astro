@@ -7,7 +7,7 @@ import {
   Box,
   Item,
   LinkSelectField,
-  Separator,
+  Section,
 } from '../../index';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
@@ -141,11 +141,14 @@ export const Controlled = () => {
 
 export const WithNoneOption = () => (
   <LinkSelectField label="What's your favorite color?">
-    <Item key="none">None</Item>
-    <Item isSeparator textValue="-"><Separator /></Item>
-    <Item key="red">Red</Item>
-    <Item key="blue">Blue</Item>
-    <Item key="yellow">Yellow</Item>
+    <Section>
+      <Item key="none">None</Item>
+    </Section>
+    <Section>
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </Section>
   </LinkSelectField>
 );
 

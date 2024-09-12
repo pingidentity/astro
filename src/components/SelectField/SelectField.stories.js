@@ -9,7 +9,6 @@ import {
   Item,
   Section,
   SelectField,
-  Separator,
 } from '../../index';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
@@ -188,11 +187,14 @@ export const Controlled = () => {
 
 export const WithNoneOption = () => (
   <SelectField label="What's your favorite color?">
-    <Item key="none">None</Item>
-    <Item isSeparator textValue="-"><Separator /></Item>
-    <Item key="red">Red</Item>
-    <Item key="blue">Blue</Item>
-    <Item key="yellow">Yellow</Item>
+    <Section>
+      <Item key="none">None</Item>
+    </Section>
+    <Section>
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </Section>
   </SelectField>
 );
 

@@ -23,6 +23,7 @@ import listViewItem from '../../components/ListViewItem/ListViewItem.styles';
 import loader from '../../components/Loader/Loader.styles';
 import menu from '../../components/Menu/Menu.styles';
 import menuItem from '../../components/MenuItem/MenuItem.styles';
+import menuSection from '../../components/MenuSection/MenuSection.styles';
 import message from '../../components/Messages/Message.styles';
 import modal from '../../components/Modal/Modal.styles';
 import navBar from '../../components/NavBar/NavBar.styles';
@@ -69,6 +70,7 @@ export default {
   loader,
   menu,
   menuItem,
+  menuSection,
   message,
   modal,
   navBar,

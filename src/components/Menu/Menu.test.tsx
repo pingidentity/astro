@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { Item, Menu } from '../../index';
+import { Item, Menu, Section } from '../../index';
 import { MenuProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
@@ -42,6 +42,30 @@ test('should render basic menu with children', () => {
   const menuItems = screen.queryAllByRole('menuitem');
   expect(menuItems).toHaveLength(3);
   expect(menu).toHaveAttribute('aria-orientation', ORIENTATION.VERTICAL);
+});
+
+test('should render sections when sections are passed as Children', () => {
+  const menuSections = [
+    { key: 'menuSection 1', children: defaultItems },
+    { key: 'menuSection 2', children: defaultItems },
+  ];
+  render((
+    <Menu {...defaultProps}>
+      {menuSections.map(section => (
+        <Section {...section}>
+          {section.children.map(item => <Item key={item.id} {...item} />)}
+        </Section>
+      ))}
+    </Menu>
+  ));
+  const menu = screen.queryByRole('menu');
+  expect(menu).toBeInTheDocument();
+
+  const menuSection = screen.queryAllByRole('group');
+  expect(menuSection).toHaveLength(2);
+
+  const menuItems = screen.getAllByRole('menuitem');
+  expect(menuItems).toHaveLength(6);
 });
 
 test('should render items when selectionMode is set to single', () => {

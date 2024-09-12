@@ -22,6 +22,10 @@ const nextGenConvertedComponents = [
   'OverlayPanel',
   'AstroProvider',
   'ListView',
+  'MultivaluesField',
+  'Text',
+  'Link',
+  'Card',
 ];
 
 export default nextGenConvertedComponents;

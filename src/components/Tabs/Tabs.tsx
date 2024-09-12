@@ -85,7 +85,6 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
       <Box {...others}>
         <Box
           variant="tabs"
-          gap="25px"
           isRow={orientation === ORIENTATION.HORIZONTAL}
           {...tabListProps}
           {...raTabListProps}

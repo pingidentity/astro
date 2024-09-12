@@ -221,6 +221,9 @@ const listBox = {
       color: 'text.primary',
       bg: 'lightblue',
       pl: 0,
+      '&.is-focused': {
+        color: 'text.primary',
+      },
     },
   },
 };
@@ -244,11 +247,14 @@ const menuItem = {
       bg: 'lightblue',
     },
   },
+  separator: {
+    my: 'sm',
+  },
 };
 
 const separator = {
   base: {
-    bg: 'gray-200',
+    bg: 'gray-300',
   },
 };
 
@@ -293,7 +299,6 @@ const progressBar = {
   container: {
     ...progressBarContainer,
   },
-
   percentageBar: {
     ...progressBarContainer,
     backgroundColor: 'active',
@@ -301,8 +306,12 @@ const progressBar = {
 };
 
 const listViewItem = {
+  rightOfData: {
+    flexShrink: 4,
+    whiteSpace: 'nowrap',
+  },
   iconContainer: {
-    mr: 'sm',
+    ml: '0px',
   },
   styledListItem: {
     bg: 'white',
@@ -323,8 +332,8 @@ const listViewItem = {
     },
   },
   styledContainer: {
-    py: '1.25rem',
-    px: '1rem',
+    py: '1rem',
+    px: '1.5rem',
     bg: 'transparent',
     '&.is-hovered': {
       bg: 'transparent',
@@ -491,6 +500,32 @@ const dataTable = {
   },
 };
 
+const codeView = {
+  wrapper: {
+    backgroundColor: 'gray-900',
+    borderRadius: '4px',
+    '> button >svg': {
+      color: 'gray-300',
+      path: {
+        fill: 'gray-300',
+      },
+    },
+    '> pre': {
+      p: 'md',
+    },
+  },
+};
+
+const tabs = {
+  gap: '0px',
+};
+
+const menu = {
+  p: 'sm',
+  border: '1px solid',
+  borderColor: 'gray-300',
+};
+
 export default {
   navBar,
   fieldHelperText,
@@ -506,4 +541,7 @@ export default {
   progressBar,
   listView,
   dataTable,
+  codeView,
+  tabs,
+  menu,
 };

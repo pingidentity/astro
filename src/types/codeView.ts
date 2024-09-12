@@ -16,4 +16,5 @@ export interface CodeViewProps extends HoverProps {
   language?: Language;
   Prism?: PrismProps;
   sx?: ThemeUICSSObject
+  stylesProp?: ThemeUICSSObject
 }

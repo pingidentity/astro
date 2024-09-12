@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { LabelModeProps } from '../../types';
 
 interface UseColumnStylesProps {
-  labelMode: LabelModeProps;
+  labelMode?: LabelModeProps;
 }
 
 interface LabelStyleProps {

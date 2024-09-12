@@ -14,13 +14,16 @@ listBox.option = {
   outline: 'none',
   wordBreak: 'break-word',
   cursor: 'pointer',
-  '&.is-selected': {
-    ...text.inputValue,
-    pl: 0,
-  },
   '&.is-focused': {
     color: 'white',
     bg: 'active',
+  },
+  '&.is-selected': {
+    ...text.inputValue,
+    pl: 0,
+    '&.is-focused': {
+      color: 'white',
+    },
   },
   '&.is-condensed': {
     '&.is-selected': {

@@ -39,6 +39,7 @@ export const tabs = {
   borderBottomStyle: 'solid',
   borderBottomColor: 'neutral.90',
   mb: 'lg',
+  gap: '25px',
 };
 
 export const menuTab = {
