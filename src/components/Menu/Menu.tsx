@@ -13,6 +13,7 @@ import { MenuProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import Box from '../Box';
 import MenuItem from '../MenuItem';
+import MenuSection from '../MenuSection';
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   const {
@@ -62,17 +63,32 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
       {...mergeProps(focusProps, menuProps, hoverProps)}
       role="menu"
     >
-      {Array.from(state.collection).map(item => (
-        <MenuItem
-          key={item.key}
-          item={item}
-          state={state}
-          onAction={onAction}
-          isDisabled={isDisabled}
-          isFocusVisible={isFocusVisible}
-          isNotFocusedOnHover={isNotFocusedOnHover}
-        />
-      ))}
+      {Array.from(state.collection).map(element => {
+        if (element.type === 'section') {
+          return (
+            <MenuSection
+              key={element.key}
+              section={element}
+              state={state}
+              onAction={onAction}
+              isDisabled={isDisabled}
+              isFocusVisible={isFocusVisible}
+              isNotFocusedOnHover={isNotFocusedOnHover}
+            />
+          );
+        }
+        return (
+          <MenuItem
+            key={element.key}
+            item={element}
+            state={state}
+            onAction={onAction}
+            isDisabled={isDisabled}
+            isFocusVisible={isFocusVisible}
+            isNotFocusedOnHover={isNotFocusedOnHover}
+          />
+        );
+      })}
     </Box>
   );
 });
