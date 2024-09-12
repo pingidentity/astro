@@ -181,7 +181,7 @@ export const ExpandableAndToggleableIndeterminate: StoryFn<CheckboxFieldProps> =
       <SwitchField
         isSelected={isReadOnly}
         label="Is Read Only"
-        onChange={setIsReadOnly}
+        onChange={() => setIsReadOnly(!isReadOnly)}
         value="my-switch"
       />
       <br />
