@@ -94,7 +94,7 @@ export const Controlled: StoryFn<CheckboxFieldProps> = () => {
   return (
     <CheckboxField
       isSelected={isSelected}
-      onChange={e => setSelected}
+      onChange={selected => setSelected(selected)}
       label="Click me"
     />
   );
