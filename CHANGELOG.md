@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.84.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.83.0...@pingux/astro@2.84.0) (2024-09-12)
+
+
+### Bug Fixes
+
+* [UIP-7076] Menu types do not support the onAction key ([ad28efd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ad28efd206c86eee2d48662ec9ec8c47a4d27288))
+* [UIP-7079] ListBox Option, selection style overrides Hover Style ([e196492](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e196492959130e497afb527f0917f91109a926a0))
+
+
+### Features
+
+* [UIP-6835] TextAreaField convert to typescript ([ec16774](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ec16774e7bdf6af171f7a01db7534b381ca91cbc))
+* [UIP-7061] NextGen Theme fix type and spacing ([9d66336](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9d6633630c8b9fd73d5b0e2d9a0aba55a22e53de))
+* [UIP-7086] add Sections to Astro PopoverMenu ([4a79244](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4a79244eda66c514f6ba83cd9ef75c194f1800b2))
+
+
+
+
+
 # [2.83.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.82.0...@pingux/astro@2.83.0) (2024-09-05)
 
 
