@@ -22,6 +22,7 @@ const nextGenConvertedComponents = [
   'OverlayPanel',
   'AstroProvider',
   'ListView',
+  'Avatar',
   'MultivaluesField',
   'Text',
   'Link',

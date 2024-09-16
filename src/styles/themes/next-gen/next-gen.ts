@@ -6,10 +6,12 @@ import codeView from './codeView/codeView';
 import colors from './colors/colors';
 import buttons from './variants/button';
 import cards from './variants/cards';
+import images from './variants/images';
 import links from './variants/links';
 import { text as newText } from './variants/text';
 import variants, { badges } from './variants/variants';
 import forms from './forms';
+import sizes from './sizes';
 import spacing from './spacing';
 import { fontSizes, fontWeights } from './text';
 
@@ -43,22 +45,13 @@ const nextGenTheme = {
     heading: '"Open Sans", sans-serif',
     codeView: 'Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace',
   },
-  sizes: {
-    container: {
-      xs: ['100%', '540px', '720px', '960px', '1140px', '1540px'],
-      sm: ['100%', '540px', '720px', '960px', '1140px', '1540px'],
-      md: ['100%', '100%', '720px', '960px', '1140px', '1540px'],
-      lg: ['100%', '100%', '100%', '960px', '1140px', '1540px'],
-      xl: ['100%', '100%', '100%', '100%', '1140px', '1540px'],
-      xx: ['100%', '100%', '100%', '100%', '100%', '1540px'],
-      fluid: ['100%', '100%', '100%', '100%', '100%', '100%'],
-    },
-  },
+  sizes,
   badges,
   space: spacing,
   links,
   cards,
   variants,
+  images,
   overrides: {
     codeView,
   },

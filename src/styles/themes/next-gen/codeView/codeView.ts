@@ -96,8 +96,8 @@ const nextGenCodeViewWrapper = {
         wordBreak: 'break-all',
       },
     },
-    fontFamily: 'Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace',
-    lineHeight: 1.75,
+    fontFamily: 'codeView',
+    lineHeight: 'md',
   },
   '&.has-no-copy-button': {
     pre: {

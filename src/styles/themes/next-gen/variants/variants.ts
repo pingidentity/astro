@@ -258,34 +258,49 @@ const separator = {
   },
 };
 
-const avatarBase = {
-  borderRadius: '50%',
-  textAlign: 'center',
-  justifyContent: 'center',
-  fontFamily: 'standard',
-};
 
 const avatar = {
-  xl: {
-    size: '104px',
-    fontSize: 'calc(104px * .4)',
-    ...avatarBase,
+  backgroundColor: 'lightcyan',
+  color: 'darkcyan',
+  cursor: 'pointer',
+  '&.is-orange': {
+    backgroundColor: 'lightorange',
+    color: 'darkorange',
   },
-  lg: {
-    size: '72px',
-    ...avatarBase,
-    fontSize: 'calc(72px * .4)',
+  '&.is-green': {
+    backgroundColor: 'lightgreen',
+    color: 'darkgreen',
   },
-  md: {
-    size: '34px',
-    ...avatarBase,
-    fontSize: 'calc(34px * .4)',
+  '&.is-purple': {
+    backgroundColor: 'lightpurple',
+    color: 'darkpurple',
   },
-  sm: {
-    size: '24px',
-    ...avatarBase,
-    fontSize: 'calc(24px * .4)',
+  '&.is-pink': {
+    backgroundColor: 'lightpink',
+    color: 'darkpink',
   },
+  '&.is-red': {
+    backgroundColor: 'lightred',
+    color: 'darkred',
+  },
+  '&.is-yellow': {
+    backgroundColor: 'lightyellow',
+    color: 'darkyellow',
+  },
+  '&.is-cyan': {
+    backgroundColor: 'lightcyan',
+    color: 'darkcyan',
+  },
+  '&.is-teal': {
+    backgroundColor: 'lightteal',
+    color: 'darkteal',
+  },
+  display: 'flex',
+  borderRadius: '50%',
+  textAlign: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontFamily: 'standard',
 };
 
 const progressBarContainer = {
@@ -332,8 +347,8 @@ const listViewItem = {
     },
   },
   styledContainer: {
-    py: '1rem',
-    px: '1.5rem',
+    py: 'md',
+    px: 'lg',
     bg: 'transparent',
     '&.is-hovered': {
       bg: 'transparent',
@@ -466,8 +481,17 @@ const listView = {
     borderRadius: '16px',
     border: '1px solid',
     borderColor: '#e7eef4',
-    '& > div': {
-      borderRadius: '16px',
+    '& > div > div': {
+      '& > div:first-of-type': {
+        '& > div > div': {
+          borderRadius: '16px 16px 0 0',
+        },
+      },
+      '& > div:last-of-type': {
+        '& > div > div': {
+          borderRadius: ' 0 0 16px 16px',
+        },
+      },
     },
   },
 };

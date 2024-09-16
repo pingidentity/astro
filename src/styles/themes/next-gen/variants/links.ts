@@ -5,14 +5,14 @@ const nextGen = {
   px: 'md',
   textDecoration: 'none',
   borderRadius: '4px',
-  lineHeight: '22.5px',
+  lineHeight: '1.5',
   minHeight: '22.5px',
   fontFamily: 'standard',
   '&.is-hovered': {
-    color: '#155cba',
+    color: 'blue-600',
   },
   '&.is-pressed': {
-    color: '#155cba',
+    color: 'blue-600',
   },
 };
 
@@ -33,7 +33,7 @@ const sideNav = {
     transition: 'background-color .15s ease',
   },
   '&.is-selected': {
-    color: '#155cba',
+    color: 'blue-600',
     '&:before': {
       backgroundColor: 'active_light',
     },
