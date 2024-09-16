@@ -61,7 +61,7 @@ export const text = {
     fontSize: 'sm',
     color: 'gray-500',
     fontFamily: 'standard',
-    lineHeight: '1.75rem',
+    lineHeight: 'md',
   },
   ...hTags,
 };

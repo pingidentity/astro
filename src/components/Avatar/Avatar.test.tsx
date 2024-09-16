@@ -7,8 +7,10 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 
 import Avatar from '.';
 
+const src = faker.image.lorempicsum.imageUrl(150, 150, false, undefined, '1');
+
 const defaultProps: AvatarProps = {
-  src: faker.image.lorempicsum.imageUrl(150, 150, false, undefined, '1'),
+  src,
 };
 
 const getComponent = (props = {}) => render((
@@ -32,4 +34,11 @@ test('an avatar is rendered with custom alt', () => {
   const img = screen.getByRole('img');
 
   expect(img).toHaveAttribute('alt', 'Custom Alt');
+});
+
+test('an avatar is rendered with custom alt', () => {
+  getComponent({ src: undefined, defaultText: 'KL' });
+  const avatar = screen.getByText('KL');
+
+  expect(avatar).toBeInTheDocument();
 });
