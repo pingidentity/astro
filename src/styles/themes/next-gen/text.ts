@@ -1,11 +1,21 @@
+import sizes from './sizes';
+
+const fontSizeBase = 0.9375;
+
 export const fontSizes = {
-  'xs': '0.75rem',
+  avatar: {
+    'sm': `calc(${sizes.avatar.sm} * .4)`,
+    'md': `calc(${sizes.avatar.md} * .4)`,
+    'lg': `calc(${sizes.avatar.lg} * .4)`,
+    'xl': `calc(${sizes.avatar.xl} * .4)`,
+  },
+  'xs': `${fontSizeBase * 0.8}rem`,
   'sm': '0.875rem',
-  'md': '.9375rem',
-  'lg': '1.171875rem',
-  'xl': '1.40625rem',
-  'xx': '1.640625rem',
-  'xxx': '2.109375rem',
+  'md': `${fontSizeBase * 1}rem`,
+  'lg': `${fontSizeBase * 1.25}rem`,
+  'xl': `${fontSizeBase * 1.5}rem`,
+  'xx': `${fontSizeBase * 1.75}rem`,
+  'xxx': `${fontSizeBase * 2.25}rem`,
 };
 
 export const fontWeights = {

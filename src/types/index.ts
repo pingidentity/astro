@@ -44,6 +44,7 @@ export * from './rockerButtonGroup';
 export * from './scrollBox';
 export * from './separator';
 export * from './shared';
+export * from './switchField';
 export * from './tab';
 export * from './table';
 export * from './tabs';

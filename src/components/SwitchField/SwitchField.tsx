@@ -1,61 +1,50 @@
-/* eslint-disable no-unused-vars */
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useSwitch } from 'react-aria';
 import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
+import { ToggleState, ToggleStateOptions } from '@react-stately/toggle';
 import omit from 'lodash/omit';
 
 import { Box, FieldHelperText, Label, Switch } from '../..';
-import { useField, usePropWarning } from '../../hooks';
+import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { UseFieldProps } from '../../hooks/useField/useField';
+import { SwitchFieldProps } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-import { statusDefaultProp } from '../../utils/docUtils/statusProp';
-
-import { switchFieldPropTypes } from './switchFieldAttributes';
+import statuses from '../../utils/devUtils/constants/statuses';
 
 const displayName = 'SwitchField';
 
-const SwitchField = forwardRef((props, ref) => {
+const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) => {
   const {
     label,
     helperText,
     isDefaultSelected,
-    isSelected,
-    onChange,
-    value,
-    name,
-    id,
-    isDisabled = false,
-    isReadOnly = false,
-    isRequired = false,
-    hasAutoFocus = false,
-    onFocus,
-    onBlur,
-    onFocusChange,
-    onKeyDown,
-    onKeyUp,
+    isDisabled,
     status,
     controlProps,
     ...others
   } = props;
 
-  const switchRef = useRef();
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => switchRef.current);
+  const switchRef = useLocalOrForwardRef<HTMLInputElement>(ref);
+
   const state = useToggleState({
     defaultSelected: isDefaultSelected,
     ...props,
-  });
+  } as ToggleStateOptions) as ToggleState;
 
   const { pressProps } = usePress({ isDisabled });
 
   const whitelistedProps = omit(props, Object.keys(others));
+
   const { inputProps } = useSwitch({
     children: label,
     ...whitelistedProps,
-    'aria-label': 'switch-field',
+    'aria-label': others['aria-label'] || 'switch-field',
   }, state, switchRef);
-  const statusClasses = { isSelected: inputProps.checked };
+
+  const statusClasses = { isSelected: inputProps.checked ?? false };
+
   const {
     fieldContainerProps,
     fieldControlInputProps,
@@ -66,7 +55,7 @@ const SwitchField = forwardRef((props, ref) => {
     ...pressProps,
     ...props,
     controlProps: { ...controlProps, ...inputProps },
-  });
+  } as UseFieldProps<SwitchFieldProps>);
 
   const unhandledAriaProps = {
     'aria-controls': others['aria-controls'],
@@ -81,7 +70,7 @@ const SwitchField = forwardRef((props, ref) => {
             ref={switchRef}
             inputProps={fieldControlInputProps}
             {...unhandledAriaProps}
-            {...omit(others, 'data-pendo-id')}
+            {...omit(others, 'data-pendo-id', 'aria-label')}
           />
         </Box>
         {label}
@@ -89,19 +78,18 @@ const SwitchField = forwardRef((props, ref) => {
       {
         helperText
         && (
-        <FieldHelperText status={status}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status}>
+            {helperText}
+          </FieldHelperText>
         )
       }
     </Box>
   );
 });
 
-SwitchField.propTypes = switchFieldPropTypes;
-
 SwitchField.defaultProps = {
-  ...statusDefaultProp,
+  status: statuses.DEFAULT,
+  isDisabled: false,
 };
 
 SwitchField.displayName = displayName;

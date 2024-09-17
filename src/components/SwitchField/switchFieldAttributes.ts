@@ -1,10 +1,5 @@
-import PropTypes from 'prop-types';
-
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { booleanArg, docArgTypes, funcArg } from '../../utils/docUtils/docArgTypes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
 const descriptions = {
   className: 'A list of class names to apply to the input element.',
@@ -128,30 +123,4 @@ export const switchFieldArgs = {
   label: 'Example Label',
   value: 'my-switch',
   status: statuses.DEFAULT,
-};
-
-export const switchFieldPropTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  hasAutoFocus: PropTypes.bool,
-  helperText: PropTypes.node,
-  hintText: PropTypes.string,
-  id: PropTypes.string,
-  isDefaultSelected: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isRequired: PropTypes.bool,
-  isSelected: PropTypes.bool,
-  label: PropTypes.node,
-  name: PropTypes.string,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onFocusChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onKeyUp: PropTypes.func,
-  status: PropTypes.oneOf(Object.values(statuses)),
-  value: PropTypes.string,
-  ...ariaAttributesBasePropTypes,
-  ...inputFieldAttributesBasePropTypes,
-  ...statusPropTypes,
 };

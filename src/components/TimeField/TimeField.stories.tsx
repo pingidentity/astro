@@ -64,9 +64,9 @@ export const ReadOnly: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
 );
 
 export const Required: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
-  <TimeField {...args} aria-label="timefield-default" isRequired label="Example label" />
+  <TimeField {...args} aria-label="timefield-default" isRequired label="Lorem Ipsum" />
 );
 
 export const WithLabel: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
-  <TimeField {...args} label="Loren Ipsum" aria-label="timefield-default" />
+  <TimeField {...args} label="Lorem Ipsum" aria-label="timefield-default" />
 );

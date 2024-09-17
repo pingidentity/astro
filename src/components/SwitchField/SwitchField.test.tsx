@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { SwitchFieldProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -12,7 +13,7 @@ const defaultProps = {
   label: TEST_LABEL,
 };
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: SwitchFieldProps = {}) => render((
   <SwitchField {...defaultProps} {...props} />
 ));
 
