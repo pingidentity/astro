@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.85.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.84.0...@pingux/astro@2.85.0) (2024-09-18)
+
+
+### Features
+
+* [UIP-6834] SwitchField convert to TypeScript ([ce0b1d8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ce0b1d8c1c153cef0e8955814399b610b35e057e))
+* [UIP-7080] Next gen theme additions ([cc74883](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cc74883efc5a69c022119ea61218eda80c7dc0ce))
+* [UIP-7088] fix lorem ipsum text ([f7ce057](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f7ce0570d8a585145562597510dbd47e9472d8fb))
+* [UIP-7117] onChange arg type boolean ([fc27076](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fc27076b53985b5d233a8cc70c85f4b84b79fc33))
+
+
+
+
+
 # [2.84.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.83.0...@pingux/astro@2.84.0) (2024-09-12)
 
 
