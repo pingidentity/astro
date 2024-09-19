@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { merge } from 'theme-ui';
 
 import astroTheme from '../../styles/theme';
+import { openSansFont } from '../../styles/themes/next-gen/fonts/openSans';
 import Box from '../Box';
 
 const pingitoFont = `
@@ -82,6 +83,7 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
       styles={css`
         @import url("https://use.typekit.net/icz8cni.css");
         ${emotionNormalize}
+        ${openSansFont}
         ${isEndUserTheme && pingitoFont}
         * {
           box-sizing: border-box;

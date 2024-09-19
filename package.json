@@ -218,7 +218,7 @@
     "whatwg-fetch": "^3.2.0"
   },
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0"
   }
 }
