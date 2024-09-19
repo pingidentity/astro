@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { SwitchField } from '../../..';
-import { switchFieldPropTypes } from '../../SwitchField/switchFieldAttributes';
+// import { switchFieldPropTypes } from '../../SwitchField/switchFieldAttributes';
 
 /**
  * ListViewItemSwitchField is one of several styled control components that can be used as a child
@@ -26,6 +26,6 @@ const ListViewItemSwitchField = forwardRef((props, ref) => {
 
 ListViewItemSwitchField.displayName = 'ListViewItemSwitchField';
 
-ListViewItemSwitchField.propTypes = switchFieldPropTypes;
+// ListViewItemSwitchField.propTypes = switchFieldPropTypes;
 
 export default ListViewItemSwitchField;
