@@ -1,10 +1,10 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { act } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import PasswordField from '.';
@@ -102,7 +102,7 @@ test('default password field', () => {
 
 test('renders view icon', async () => {
   getComponent();
-  const viewIcon = await screen.findByTestId(defaultProps.viewHiddenIconTestId);
+  const viewIcon = screen.getByTestId(defaultProps.viewHiddenIconTestId);
   expect(viewIcon).toBeInTheDocument();
 });
 
@@ -111,12 +111,12 @@ test('renders view-hidden icon', async () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
 
-  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewIconTestId);
+  const viewHiddenIcon = screen.getByTestId(defaultProps.viewIconTestId);
   expect(viewHiddenIcon).toBeInTheDocument();
 
   userEvent.click(button);
 
-  const viewIcon = await screen.findByTestId(defaultProps.viewHiddenIconTestId);
+  const viewIcon = screen.getByTestId(defaultProps.viewHiddenIconTestId);
   expect(viewIcon).toBeInTheDocument();
 });
 
@@ -125,8 +125,17 @@ test('renders view icon', async () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
 
-  const viewHiddenIcon = await screen.findByTestId(defaultProps.viewIconTestId);
+  const viewHiddenIcon = screen.getByTestId(defaultProps.viewIconTestId);
   expect(viewHiddenIcon).toBeInTheDocument();
+});
+
+test('onPress callback is called when iconButton is pressed', async () => {
+  const onPress = jest.fn();
+  getComponent({ onVisibleChange: onPress });
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+
+  expect(onPress).toHaveBeenCalled();
 });
 
 test('renders password input', () => {

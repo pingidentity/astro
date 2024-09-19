@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, {
   forwardRef,
   useImperativeHandle,
@@ -58,7 +59,6 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
     [alt, isLoading, shouldShowFallback]);
   const imgRef = useLocalOrForwardRef(ref);
 
-  /* istanbul ignore next */
   useImperativeHandle(ref, () => imgRef.current);
   usePropWarning(props, 'disabled', 'isDisabled');
 

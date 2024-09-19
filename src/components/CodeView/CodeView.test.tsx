@@ -39,6 +39,7 @@ beforeEach(() => {
   });
   global.document.execCommand = jest.fn();
   jest.spyOn(document, 'execCommand').mockReturnValue(true);
+  jest.useFakeTimers();
 });
 
 afterEach(() => {
@@ -114,9 +115,15 @@ test('click on copy button copies data to the clipboard', async () => {
 test('after button click, the tooltip renders with the text "Copied!"', async () => {
   getComponent();
   const button = screen.getByLabelText('copy to clipboard');
+  act(() => {
+    userEvent.hover(button);
+  });
+  act(() => { jest.advanceTimersByTime(500); });
+  const tooltip = screen.getByRole('tooltip');
+  expect(tooltip).toBeInTheDocument();
   await act(async () => userEvent.click(button));
-  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+  const newTooltip = await screen.findByRole('tooltip');
+  expect(newTooltip).toHaveTextContent('Copied!');
 });
 
 test('renders CodeView component with default language', () => {

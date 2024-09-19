@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 
 import { LabelModeProps } from '../../types';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
@@ -52,7 +52,7 @@ const defaultProps = {
 } as UseFieldProps<HTMLInputElement>;
 
 test('default useField', () => {
-  renderHook(() => useField({}));
+  renderHook(() => useField(defaultProps));
 });
 
 test('should return props objects for field components', () => {

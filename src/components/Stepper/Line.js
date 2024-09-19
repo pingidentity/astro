@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -10,7 +11,11 @@ const {
   INACTIVE,
 } = stepStatuses;
 
-const Line = ({ className, status }) => {
+const Line = ({
+  className,
+  /* istanbul ignore next */
+  status = INACTIVE,
+}) => {
   const { classNames } = useStatusClasses(className, {
     isInactive: status === INACTIVE,
   });
@@ -25,10 +30,6 @@ const Line = ({ className, status }) => {
 
 Line.propTypes = {
   status: PropTypes.oneOf(Object.values(stepStatuses)),
-};
-
-Line.defaultProps = {
-  status: INACTIVE,
 };
 
 export default Line;

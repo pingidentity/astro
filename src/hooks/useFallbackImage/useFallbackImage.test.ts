@@ -1,4 +1,4 @@
-import { renderHook, RenderHookResult } from '@testing-library/react-hooks';
+import { renderHook, RenderHookResult } from '@testing-library/react';
 
 import { UseFallbackImageProps } from './useFallbackImage';
 import useFallbackImage from '.';
@@ -12,8 +12,10 @@ const defaultProps: UseFallbackImageProps = {
   fallbackImage: 'test-fallback-src',
 };
 
+type HookResult = HTMLImageElement;
+
 test('should return node if all props are correct', () => {
-  const { result }: RenderHookResult<undefined, HTMLImageElement> = renderHook(
+  const { result }: RenderHookResult<HookResult, HTMLImageElement> = renderHook(
     () => useFallbackImage(defaultProps),
   );
   expect(result.current).toBeInstanceOf(HTMLImageElement);

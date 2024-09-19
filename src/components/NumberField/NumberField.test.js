@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { NumberField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-NumberField';
@@ -80,7 +80,9 @@ test('calling onChange with integer when input value changed (controlled state)'
   const numberInput = screen.queryAllByLabelText(testLabel)[1];
   userEvent.clear(numberInput);
   userEvent.type(numberInput, newTestValue.toString());
-  numberInput.blur();
+  act(() => {
+    numberInput.blur();
+  });
   expect(mockOnChange).toHaveBeenCalledWith(newTestValue);
 });
 

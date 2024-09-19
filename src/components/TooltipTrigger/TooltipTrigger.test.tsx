@@ -9,7 +9,7 @@ import {
   TooltipTriggerProps,
 } from '../../index';
 import theme from '../../styles/theme';
-import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 interface getComponentProps extends TooltipTriggerProps {
@@ -23,14 +23,12 @@ const getComponent = ({ buttonProps, ...others }: getComponentProps = {}) => ren
   </TooltipTrigger>
 ));
 
-// Needs to be added to each components test file
-universalComponentTests({
-  renderComponent: props => (
-    <TooltipTrigger {...props}>
-      <Button>Mock Button</Button>
-      <Tooltip>Tooltip Content</Tooltip>
-    </TooltipTrigger>
-  ),
+beforeAll(() => {
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
 });
 
 test('tooltip doesnt show by default and is rendered when trigger is hovered', () => {
@@ -108,7 +106,9 @@ test('tooltip closes after closeDelay when mouse leaves trigger', async () => {
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   fireEvent.mouseLeave(button);
 
-  await waitFor(() => {
+  act(() => { jest.advanceTimersByTime(11); });
+
+  await act(() => {
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   }, { timeout: closeDelay + 1 });
 });
@@ -125,4 +125,14 @@ test('tooltip stays open until closeDelay after mouse leaves trigger', async () 
   await waitFor(() => {
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   }, { timeout: closeDelay - 1 });
+});
+
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => (
+    <TooltipTrigger {...props}>
+      <Button>Mock Button</Button>
+      <Tooltip>Tooltip Content</Tooltip>
+    </TooltipTrigger>
+  ),
 });

@@ -15,10 +15,11 @@ const ExtendedBox = styled(ThemeUIBox)(
 
 const Box = forwardRef<HTMLElement, BoxProps>((props, ref) => {
   const {
+    as = 'div',
     flexDirection,
     gap,
-    isRow,
-    isDisabled,
+    isRow = false,
+    isDisabled = false,
     className,
     fontSize,
     sx,
@@ -52,17 +53,12 @@ const Box = forwardRef<HTMLElement, BoxProps>((props, ref) => {
       flexDirection={fd}
       variant="box.base"
       fontSize={customFontSize}
+      as={as}
       {...others}
       sx={custom}
     />
   );
 });
-
-Box.defaultProps = {
-  as: 'div',
-  isRow: false,
-  isDisabled: false,
-};
 
 Box.displayName = 'Box';
 

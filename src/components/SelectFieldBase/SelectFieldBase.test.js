@@ -264,7 +264,7 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
 });
 
 describe('async loading', () => {
-  test('displays a loader while loading', () => {
+  test('displays a loader while loading', async () => {
     const { rerender } = getComponent({ items: [], isLoading: true });
 
     const button = screen.getByRole('button');
@@ -272,9 +272,9 @@ describe('async loading', () => {
     expect(loader).toHaveAttribute('aria-label', 'Loading in progress');
     expect(loader).not.toHaveAttribute('aria-valuenow');
 
-    getComponent({ items: [] }, { renderFn: rerender });
+    getComponent({ items, isLoading: false }, { renderFn: rerender });
 
-    expect(loader).not.toBeInTheDocument();
+    expect(() => screen.getByRole('alert')).toThrow();
   });
 
   test('displays a loader inside the listbox when loading more', () => {
