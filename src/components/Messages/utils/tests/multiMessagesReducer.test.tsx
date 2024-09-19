@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
-import { act } from 'react-dom/test-utils';
 
-import { render, screen } from '../../../../utils/testUtils/testWrapper';
+import { act, render, screen } from '../../../../utils/testUtils/testWrapper';
 import multiMessagesReducer, {
   addMessage,
   clearMessages,

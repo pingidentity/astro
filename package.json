@@ -80,6 +80,7 @@
     "@react-aria/utils": "^3.16.0",
     "@react-aria/virtualizer": "~3.8.0",
     "@react-aria/visually-hidden": "~3.6.0",
+    "@react-spectrum/test-utils": "^3.0.0-alpha.1",
     "@react-spectrum/utils": "~3.6.1",
     "@react-stately/calendar": "^3.5.0",
     "@react-stately/color": "~3.1.1",
@@ -113,9 +114,8 @@
     "@styled-system/props": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
-    "@testing-library/dom": "^7.24.3",
     "@types/react": "^18.2.18",
-    "@types/react-dom": "16.9.8",
+    "@types/react-dom": "^18",
     "@types/styled-system": "^5.1.16",
     "@typescript/vfs": "^1.5.0",
     "chroma-js": "^2.1.0",
@@ -174,7 +174,7 @@
     "@storybook/react-webpack5": "^7.1.0",
     "@storybook/theming": "^7.1.0",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.0.4",
+    "@testing-library/react": "15.0.6",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^12.8.3",
     "@types/chroma-js": "^2.4.3",
@@ -205,11 +205,11 @@
     "jest-emotion": "^11.0.0",
     "jest-pnp-resolver": "^1.2.2",
     "mutationobserver-shim": "^0.3.7",
-    "react": "^16.8.6",
-    "react-dom": "^16.13.1",
-    "react-is": "^16.13.1",
+    "react": "18",
+    "react-dom": "18",
+    "react-is": "^18",
     "react-json-tree": "^0.17.0",
-    "react-test-renderer": "16.13.1",
+    "react-test-renderer": "^18",
     "storybook": "^7.1.0",
     "storybook-addon-designs": "beta",
     "ts-jest": "^26.1.0",
@@ -218,7 +218,7 @@
     "whatwg-fetch": "^3.2.0"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.13.1"
+    "react": "^18",
+    "react-dom": "^18"
   }
 }

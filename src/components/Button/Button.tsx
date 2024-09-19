@@ -20,7 +20,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     children,
     className,
-    isDisabled,
+    isDisabled = false,
     isLoading,
     onBlur,
     onFocus,
@@ -35,7 +35,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     onPressStart,
     onPressUp,
     tabIndex,
-    variant,
+    variant = 'default',
     ...others
   } = props;
   const buttonRef = useLocalOrForwardRef<HTMLButtonElement>(ref);
@@ -93,11 +93,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     </Pressable>
   );
 });
-
-Button.defaultProps = {
-  isDisabled: false,
-  variant: 'default',
-};
 
 Button.displayName = displayName;
 export default Button;

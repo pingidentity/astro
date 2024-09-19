@@ -440,7 +440,11 @@ test('should change focus between NavBarItemHeader on arrow key press', () => {
   const headerButtons = screen.getAllByRole('button');
 
   expect(headerButtons[0]).toBeInTheDocument();
-  headerButtons[0].focus();
+
+  act(() => {
+    headerButtons[0].focus();
+  });
+
   expect(headerButtons[0]).toHaveClass('is-focused');
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
@@ -465,7 +469,10 @@ test('should not change focus from NavItemBody to NavBarItemHeader on arrow key 
   const headerButtons = screen.getAllByRole('button');
 
   expect(headerButtons[0]).toBeInTheDocument();
-  headerButtons[0].click();
+
+  act(() => {
+    headerButtons[0].click();
+  });
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
   expect(screen.getByTestId('navItemButton')).toHaveClass('is-focused');
@@ -492,7 +499,9 @@ test('should change focus between nav children on arrow key press', () => {
   const button = screen.getByTestId('navButton');
 
   expect(link).toBeInTheDocument();
-  link.focus();
+  act(() => {
+    link.focus();
+  });
   expect(link).toHaveClass('is-focused');
 
   fireEvent.keyDown(link, { key: 'ArrowDown', keyCode: 40 });

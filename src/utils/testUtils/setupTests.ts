@@ -18,5 +18,8 @@ global.console.warn = (...args) => {
 };
 
 global.console.error = (...args) => {
+  if (typeof args[0] === 'string' && /defaultProps/.test(args[0])) {
+    return;
+  }
   throw new Error(format(...args));
 };

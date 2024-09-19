@@ -236,7 +236,9 @@ test('adds focus to input on a single click after onBlur', () => {
   expect(secondInput).not.toHaveFocus();
   userEvent.click(firstInput);
   userEvent.click(secondInput);
-  secondInput.blur();
+  act(() => {
+    secondInput.blur();
+  });
   userEvent.click(secondInput);
   expect(secondInput).toHaveFocus();
 });

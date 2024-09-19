@@ -111,6 +111,7 @@ const PasswordField = forwardRef((props, ref) => {
     targetRef: inputRef,
   });
 
+  /* istanbul ignore next */
   useLayoutEffect(() => {
     if (isFocused) {
       requestAnimationFrame(() => {

@@ -39,6 +39,7 @@ describe('CopyText', () => {
     const mockGetSelection = jest.fn();
     mockGetSelection.mockReturnValue('');
     window.getSelection = mockGetSelection;
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
@@ -157,26 +158,24 @@ describe('CopyText', () => {
     test('after button click, the tooltip renders with the text "Copied!"', async () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
-      fireEvent.click(button);
+      userEvent.click(button);
       expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-      await waitFor(() => {
-        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
-      });
+      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
     });
 
     test('tooltip renders with the text "Copied!" hides after delay', async () => {
-      jest.useRealTimers();
-
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
+      fireEvent.mouseMove(button);
+      fireEvent.mouseEnter(button);
       fireEvent.click(button);
       expect(screen.queryByRole('tooltip')).toBeInTheDocument();
       expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+      act(() => jest.advanceTimersByTime(2000));
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
-
-      jest.useFakeTimers();
+      await act(() => {
+        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
+      }, { timeout: 2000 });
     });
   });
 

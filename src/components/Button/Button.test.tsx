@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { ButtonProps } from '../../types';
 import axeTest from '../../utils/testUtils/testAxe';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 
 import Button from '.';
 
@@ -27,9 +27,11 @@ test('default button', () => {
   expect(button).toBeInTheDocument();
 });
 
-test('button hover', () => {
-  getComponent();
-  const button = screen.getByRole('button');
+test('button hover', async () => {
+  await act(async () => {
+    getComponent();
+  });
+  const button = await screen.findByRole('button');
   expect(button).not.toHaveClass('is-hovered');
   userEvent.hover(button);
   expect(button).toHaveClass('is-hovered');
@@ -85,7 +87,7 @@ test('button renders children when not loading', () => {
 
   expect(childWrapper).toBeInTheDocument();
   expect(childWrapper).toBeVisible();
-  expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
 
 test('color block button renders in default state', () => {

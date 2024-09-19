@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import ImageUploadField from './ImageUploadField';
@@ -60,11 +60,15 @@ test('should render image upload component by default', () => {
 test('should render div with icon when focused', () => {
   getComponent();
   const imageUploadButton = screen.getByTestId(testButtonId);
-  imageUploadButton.focus();
+  act(() => {
+    imageUploadButton.focus();
+  });
   const hoveredPreview = screen.getByTestId('image-upload-hovered-preview');
   expect(hoveredPreview).toBeInstanceOf(HTMLDivElement);
   expect(hoveredPreview).toBeInTheDocument();
-  imageUploadButton.blur();
+  act(() => {
+    imageUploadButton.blur();
+  });
   expect(hoveredPreview).not.toBeInTheDocument();
 });
 
