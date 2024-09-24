@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.87.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.86.0...@pingux/astro@2.87.0) (2024-09-24)
+
+
+### Bug Fixes
+
+* [UIP-7038] Card blocks user interaction ([e1812d7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e1812d721a48abf57f2283b5ce307539588e63d5))
+
+
+### Features
+
+* [UIP-7045] xxs icon size ([6d2687c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6d2687c373302ed1fc072f777daca40da2fcf680))
+* [UIP-7121] SelectField > Helper text Accessibility violations ([f963009](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f963009a208521e05276a173042edb66d8e2dc60))
+* [UIP-7134] Next Gen Theme Improvements ([b514f2c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b514f2c14ab378fbf8a577e1b1a4c11a442f757f))
+
+
+
+
+
 # [2.86.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.85.0...@pingux/astro@2.86.0) (2024-09-24)
 
 
