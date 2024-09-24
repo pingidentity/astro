@@ -21,15 +21,18 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     onPressEnd,
     onPressChange,
     onPressUp,
+    isInteractiveWithin,
     ...others
   } = props;
 
   const cardRef = useLocalOrForwardRef<HTMLElement>(ref);
 
   const { hoverProps, isHovered } = useHover(
-    { onHoverStart,
+    {
+      onHoverStart,
       onHoverChange,
-      onHoverEnd },
+      onHoverEnd,
+    },
   );
   const { focusProps, isFocusVisible } = useFocusRing();
   const { pressProps, isPressed } = usePress({
@@ -40,6 +43,7 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     onPressChange,
     onPressUp,
   });
+
   const {
     focusProps: focusWithinProps, isFocusVisible: isFocusedWithin,
   } = useFocusRing({ within: true });
@@ -52,7 +56,12 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
 
   const ariaLabel = props['aria-label'];
 
-  const mergedProps = mergeProps(others, hoverProps, pressProps, focusProps, focusWithinProps);
+  // TODO: [Astro 3.0.0] Update isInteractiveWithin[default] for this prop to true
+  const mergedProps = mergeProps(
+    others, focusWithinProps, (!isInteractiveWithin ? {
+      ...pressProps, ...hoverProps, ...focusProps,
+    } : {}),
+  );
 
   return (
     <Box
