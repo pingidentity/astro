@@ -7,6 +7,7 @@ import { Virtualizer, VirtualizerItem } from 'listbox-virtualizer';
 
 import { useLocalOrForwardRef } from '../../hooks';
 import { ListBoxProps } from '../../types';
+import Box from '../Box';
 import Loader from '../Loader';
 
 import { Option } from './index';
@@ -134,42 +135,44 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
 
   return (
     <ListBoxContext.Provider value={state}>
-      <Virtualizer
-        {...mergeProps((listBoxProps), others)}
-        autoFocus={hasAutoFocus}
-        style={{ outline: 'none' }}
-        ref={listBoxRef}
-        focusedKey={state?.selectionManager?.focusedKey}
-        sizeToFit="height"
-        scrollDirection="vertical"
-        collection={state.collection}
-        renderWrapper={renderWrapper}
-        transitionDuration={0}
-        layout={layout}
-        isLoading={isLoading}
-        onLoadMore={onLoadMore}
-        shouldUseVirtualFocus={hasVirtualFocus}
-        onScroll={onScroll}
-      >
-        {(type, item) => {
+      <Box variant="listBox.container">
+        <Virtualizer
+          {...mergeProps((listBoxProps), others)}
+          autoFocus={hasAutoFocus}
+          style={{ outline: 'none' }}
+          ref={listBoxRef}
+          focusedKey={state?.selectionManager?.focusedKey}
+          sizeToFit="height"
+          scrollDirection="vertical"
+          collection={state.collection}
+          renderWrapper={renderWrapper}
+          transitionDuration={0}
+          layout={layout}
+          isLoading={isLoading}
+          onLoadMore={onLoadMore}
+          shouldUseVirtualFocus={hasVirtualFocus}
+          onScroll={onScroll}
+        >
+          {(type, item) => {
           // Type can be used like so: https://github.com/adobe/react-spectrum/blob/main/packages/%40react-spectrum/listbox/src/ListBoxBase.tsx#L129
-          if (type === collectionTypes.ITEM) {
-            return (
-              <Option
-                key={item.key}
-                item={item}
-                hasVirtualFocus={hasVirtualFocus}
-                isCondensed={isCondensed}
-              />
-            );
-          } if (type === collectionTypes.LOADER) {
-            return (
-              <Loader variant="loader.withinListbox" aria-label="Loading more..." />
-            );
-          }
-          return null;
-        }}
-      </Virtualizer>
+            if (type === collectionTypes.ITEM) {
+              return (
+                <Option
+                  key={item.key}
+                  item={item}
+                  hasVirtualFocus={hasVirtualFocus}
+                  isCondensed={isCondensed}
+                />
+              );
+            } if (type === collectionTypes.LOADER) {
+              return (
+                <Loader variant="loader.withinListbox" aria-label="Loading more..." />
+              );
+            }
+            return null;
+          }}
+        </Virtualizer>
+      </Box>
     </ListBoxContext.Provider>
   );
 });

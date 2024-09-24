@@ -1,5 +1,7 @@
 import { ThemeUICSSObject } from 'theme-ui';
 
+import { text } from './text';
+
 const defaultFocus = {
   boxShadow: '0 1px 1px rgba(0,0,0,.075), 0 0 0 .0625rem blue',
 };
@@ -22,6 +24,7 @@ export const input: ThemeUICSSObject = {
   borderRadius: '4px',
   fontWeight: 1,
   height: '50px',
+  '&::placeholder': text.placeholder,
 };
 
 input.search = {
