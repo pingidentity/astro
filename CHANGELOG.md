@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.86.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.85.0...@pingux/astro@2.86.0) (2024-09-24)
+
+
+### Features
+
+* [UIP-6993] React 18 Fixes ([2b97ab7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2b97ab76c62975adbe759c32c78aed26f1d0083c))
+* [UIP-6993] Upgrade Astro to React 18 ([92a5c85](https://gitlab.corp.pingidentity.com/ux/pingux/commit/92a5c85768b01def17ecad7f7631d0f8a5021b36))
+
+
+### Reverts
+
+* [UIP-6844] Add language support to CodeEditor ([9cd2098](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9cd2098bcaf03cc520d0359b0e8daf28c4759467))
+
+
+
+
+
 # [2.85.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.84.0...@pingux/astro@2.85.0) (2024-09-18)
 
 
