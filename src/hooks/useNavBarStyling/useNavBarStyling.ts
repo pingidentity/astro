@@ -33,7 +33,7 @@ interface NavBarStyling {
     navBarItemText: string;
     navBarItemHeaderListItem: string | null;
     navBarItemBody: string;
-    navBarItemHeaderIconSize: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xx';
+    navBarItemHeaderIconSize: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xx';
     navBarItemLinkButtonColor: string | null;
   }
 }

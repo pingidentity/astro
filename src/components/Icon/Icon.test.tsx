@@ -45,6 +45,12 @@ test('default icon', () => {
   expect(icon).toBeInTheDocument();
 });
 
+test('icon renders correct xxsmall tshirt size', () => {
+  getComponent({ size: 'xxs' });
+  const xsIcon = screen.getByTestId(testId);
+  expect(xsIcon).toHaveStyleRule('width', '9px');
+});
+
 test('icon renders correct xsmall tshirt size', () => {
   getComponent({ size: 'xs' });
   const xsIcon = screen.getByTestId(testId);

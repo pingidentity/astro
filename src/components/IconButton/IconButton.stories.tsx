@@ -83,6 +83,24 @@ export const Sizes = () => (
     <TableBody sx={{ borderBottom: 'unset' }}>
       <TableRow bg="transparent !important">
         <TableCell width="40%">
+          <Text>XXS | 15px</Text>
+        </TableCell>
+        <TableCell>
+          <Text fontFamily="monospace">
+            {' '}
+            {"<IconButton aria-label='create button' variant='inverted'/>"}
+          </Text>
+          <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xxs'/>"}</Text>
+          <Text fontFamily="monospace">{'</IconButton>'}</Text>
+        </TableCell>
+        <TableCell>
+          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
+            <Icon icon={CreateIcon} size="xxs" title={{ name: 'Create Icon' }} />
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow bg="transparent !important">
+        <TableCell width="40%">
           <Text>XS | 21px</Text>
         </TableCell>
         <TableCell>
@@ -145,6 +163,9 @@ export const CommonlyUsed = () => (
     <Text fontFamily="monospace" mb="md">{"import DeleteIcon from '@pingux/mdi-react/DeleteIcon'; "}</Text>
     <Box isRow gap="md" mb="md">
       <IconButton aria-label="delete">
+        <Icon icon={DeleteIcon} size="xxs" title={{ name: 'Delete Icon' }} />
+      </IconButton>
+      <IconButton aria-label="delete">
         <Icon icon={DeleteIcon} size="xs" title={{ name: 'Delete Icon' }} />
       </IconButton>
       <IconButton aria-label="delete">
@@ -155,6 +176,9 @@ export const CommonlyUsed = () => (
       </IconButton>
     </Box>
     <Box isRow gap="md" mb="xl">
+      <IconButton aria-label="delete" variant="inverted">
+        <Icon icon={DeleteIcon} size="xxs" title={{ name: 'Delete Icon' }} />
+      </IconButton>
       <IconButton aria-label="delete" variant="inverted">
         <Icon icon={DeleteIcon} size="xs" title={{ name: 'Delete Icon' }} />
       </IconButton>
@@ -169,6 +193,9 @@ export const CommonlyUsed = () => (
     <Text fontFamily="monospace" mb="md">{"import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon'; "}</Text>
     <Box isRow gap="md" mb="md">
       <IconButton aria-label="more options">
+        <Icon icon={DotsVerticalIcon} size="xxs" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
+      <IconButton aria-label="more options">
         <Icon icon={DotsVerticalIcon} size="xs" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>
       <IconButton aria-label="more options">
@@ -179,6 +206,9 @@ export const CommonlyUsed = () => (
       </IconButton>
     </Box>
     <Box isRow gap="md" mb="xl">
+      <IconButton aria-label="more options" variant="inverted">
+        <Icon icon={DotsVerticalIcon} size="xxs" title={{ name: 'Dots Vertical Icon' }} />
+      </IconButton>
       <IconButton aria-label="more options" variant="inverted">
         <Icon icon={DotsVerticalIcon} size="xs" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>
@@ -193,6 +223,9 @@ export const CommonlyUsed = () => (
     <Text fontFamily="monospace" mb="md">{"import PlusIcon from '@pingux/mdi-react/PlusIcon'; "}</Text>
     <Box isRow gap="md" mb="md">
       <IconButton aria-label="add">
+        <Icon icon={PlusIcon} size="xxs" title={{ name: 'Plus Icon' }} />
+      </IconButton>
+      <IconButton aria-label="add">
         <Icon icon={PlusIcon} size="xs" title={{ name: 'Plus Icon' }} />
       </IconButton>
       <IconButton aria-label="add">
@@ -203,6 +236,9 @@ export const CommonlyUsed = () => (
       </IconButton>
     </Box>
     <Box isRow gap="md" mb="xl">
+      <IconButton aria-label="add" variant="inverted">
+        <Icon icon={PlusIcon} size="xxs" title={{ name: 'Plus Icon' }} />
+      </IconButton>
       <IconButton aria-label="add" variant="inverted">
         <Icon icon={PlusIcon} size="xs" title={{ name: 'Plus Icon' }} />
       </IconButton>
@@ -218,6 +254,9 @@ export const CommonlyUsed = () => (
     <Text fontFamily="monospace" mb="md">{"import PencilIcon from '@pingux/mdi-react/PencilIcon'; "}</Text>
     <Box isRow gap="md" mb="md">
       <IconButton aria-label="create">
+        <Icon icon={PencilIcon} size="xxs" title={{ name: 'Pencil Icon' }} />
+      </IconButton>
+      <IconButton aria-label="create">
         <Icon icon={PencilIcon} size="xs" title={{ name: 'Pencil Icon' }} />
       </IconButton>
       <IconButton aria-label="create">
@@ -228,6 +267,9 @@ export const CommonlyUsed = () => (
       </IconButton>
     </Box>
     <Box isRow gap="md" mb="xl">
+      <IconButton aria-label="create" variant="inverted">
+        <Icon icon={PencilIcon} size="xxs" title={{ name: 'Pencil Icon' }} />
+      </IconButton>
       <IconButton aria-label="create" variant="inverted">
         <Icon icon={PencilIcon} size="xs" title={{ name: 'Pencil Icon' }} />
       </IconButton>
