@@ -3,7 +3,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import Box from '../Box';
 import Button from '../Button';
+import TextField from '../TextField';
 
 import Card from './Card';
 
@@ -73,4 +75,30 @@ test('allows focus within card', () => {
   expect(card).toHaveClass('is-focused');
   userEvent.tab();
   expect(button).toHaveClass('is-focused');
+});
+
+test('renders Card component with text selection', async () => {
+  const children = (
+    <Box>
+      Select this text.
+      <TextField label="Interactive TextField" />
+    </Box>
+  );
+  getComponent({ isInteractiveWithin: true, children });
+  const card = screen.getByTestId(testId);
+
+  // Programmatically create a range and select it
+  const range = document.createRange();
+  range.selectNodeContents(card);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  // Verify that the selection was successful
+  expect(selection.toString()).toBe('Select this text.Interactive TextField');
+
+  const textField = screen.getByLabelText('Interactive TextField');
+  userEvent.click(textField);
+  userEvent.type(textField, selection.toString());
+  expect(textField).toHaveValue('Select this text.Interactive TextField');
 });
