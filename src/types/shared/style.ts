@@ -28,7 +28,7 @@ export type PanelSize = 'small' | 'medium' | 'large' | 'full' | 'custom';
 
 export type ModalSizeProps = 'extra-small' | 'small' | 'medium' | 'large' | 'full';
 
-type IconTShirtSize = 'xs' | 'sm' | 'md';
+type IconTShirtSize = 'xxs' | 'xs' | 'sm' | 'md';
 type pixelSize = 'em' | 'px' | 'rem'
 
 export type IconSize = IconTShirtSize | number | `${number}${pixelSize}`;

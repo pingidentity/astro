@@ -111,6 +111,17 @@ export const Sizes: StoryFn = () => (
     <TableBody sx={{ borderBottom: 'unset' }}>
       <TableRow height="45px" bg="transparent !important">
         <TableCell>
+          <Text>XXS | 9px</Text>
+        </TableCell>
+        <TableCell>
+          <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="xxs"/>'}</Text>
+        </TableCell>
+        <TableCell>
+          <Icon icon={SearchIcon} size="xxs" title={{ name: 'Search Icon' }} />
+        </TableCell>
+      </TableRow>
+      <TableRow height="45px" bg="transparent !important">
+        <TableCell>
           <Text>XS | 15px</Text>
         </TableCell>
         <TableCell>
