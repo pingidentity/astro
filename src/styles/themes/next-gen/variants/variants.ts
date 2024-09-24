@@ -19,7 +19,8 @@ const fieldHelperText = {
 };
 
 const message = {
-  item: { maxWidth: 400,
+  item: {
+    maxWidth: 400,
     pointerEvents: 'all',
     mb: 'md',
     p: '1.25rem',
@@ -54,7 +55,8 @@ const message = {
     },
     '&.is-error': {
       borderLeftColor: 'red-500',
-    } },
+    },
+  },
 };
 
 const badgeFont = {
@@ -212,7 +214,14 @@ const menuTab = {
 };
 
 const listBox = {
+  container: {
+    px: 'sm',
+    py: 'xs',
+  },
   option: {
+    py: '.75rem',
+    pl: '.75rem',
+    pr: '1rem',
     '&.is-focused': {
       color: 'text.primary',
       bg: 'gray-100',
