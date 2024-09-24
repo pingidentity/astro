@@ -7,4 +7,5 @@ export interface CardProps extends
   BoxProps,
   DOMAttributes {
     tabIndex?: number | string,
+    isInteractiveWithin? : boolean;
   }

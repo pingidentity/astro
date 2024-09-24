@@ -11,6 +11,7 @@ import {
   CardProps,
   SxObject,
   Text,
+  TextField,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
@@ -159,3 +160,18 @@ InteractiveCard.parameters = {
     url: FIGMA_LINKS.card.interactiveCard,
   },
 };
+
+export const WithInteractiveContent = () => (
+  <Card isInteractiveWithin>
+    <Text>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sed ratione,
+      recusandae ipsam explicabo, quasi vel maxime sint harum qui rerum perferendis.
+      Voluptatem nisi eaque, distinctio accusamus nobis voluptas nemo.
+    </Text>
+    <TextField
+      label="Interactive TextField"
+      mt="md"
+      width="300px"
+    />
+  </Card>
+);

@@ -8,6 +8,7 @@ const nextGen = {
   lineHeight: '1.5',
   minHeight: '22.5px',
   fontFamily: 'standard',
+  cursor: 'pointer',
   '&.is-hovered': {
     color: 'blue-600',
   },
@@ -21,6 +22,7 @@ const sideNav = {
   px: '0',
   display: 'block',
   position: 'relative',
+  cursor: 'pointer',
   '&:before': {
     position: 'absolute',
     display: 'block',
