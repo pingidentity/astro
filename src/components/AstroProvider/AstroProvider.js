@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { merge } from 'theme-ui';
 
 import astroTheme from '../../styles/theme';
+import { openSansFont } from '../../styles/themes/next-gen/fonts/openSans';
 import Box from '../Box';
 
 const pingitoFont = `
@@ -76,12 +77,13 @@ const pingitoFont = `
   }
 `;
 
-export const GlobalStyles = ({ isEndUserTheme }) => {
+export const GlobalStyles = ({ isEndUserTheme = false }) => {
   return (
     <Global
       styles={css`
         @import url("https://use.typekit.net/icz8cni.css");
         ${emotionNormalize}
+        ${openSansFont}
         ${isEndUserTheme && pingitoFont}
         * {
           box-sizing: border-box;
@@ -116,16 +118,12 @@ GlobalStyles.propTypes = {
   isEndUserTheme: PropTypes.bool,
 };
 
-GlobalStyles.defaultProps = {
-  isEndUserTheme: false,
-};
-
 /**
  * _Note: For UI Library and Astro CSS conflicts, we supply a theme override located at_
  * `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`
  */
 const AstroProvider = forwardRef((props, ref) => {
-  const { defaultTheme, themeOverrides, children, ...others } = props;
+  const { defaultTheme = astroTheme, themeOverrides = [{}], children, ...others } = props;
 
   // Unfortunately because this is adding styles, we cannot write a proper test for this.
   /* istanbul ignore next */
@@ -157,17 +155,12 @@ AstroProvider.propTypes = {
   defaultTheme: PropTypes.shape({}),
 };
 
-AstroProvider.defaultProps = {
-  defaultTheme: astroTheme,
-  themeOverrides: [{}],
-};
-
 /**
  * Wrapper for the Astro application w/o global styles.
  * It provides the standard background and the Astro theme.
  */
 export const PageWrapper = forwardRef((props, ref) => {
-  const { defaultTheme, themeOverrides, children, ...others } = props;
+  const { defaultTheme = astroTheme, themeOverrides = [{}], children, ...others } = props;
 
   const theme = useMemo(
     () => merge(defaultTheme, ...themeOverrides),
@@ -217,11 +210,6 @@ PageWrapper.propTypes = {
    * Overriding this is an advanced use case so
    * please understand potential reprecussions before editing */
   defaultTheme: PropTypes.shape({}),
-};
-
-PageWrapper.defaultProps = {
-  defaultTheme: astroTheme,
-  themeOverrides: [{}],
 };
 
 export { ThemeProvider };

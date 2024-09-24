@@ -22,10 +22,10 @@ const displayName = 'ColorField';
 
 const ColorField = forwardRef<HTMLInputElement, ColorFieldProps>((props, ref) => {
   const {
-    align,
+    align = 'middle',
     buttonProps,
     controlProps,
-    direction,
+    direction = 'bottom',
     helperText,
     label,
     labelProps,
@@ -144,11 +144,6 @@ const ColorField = forwardRef<HTMLInputElement, ColorFieldProps>((props, ref) =>
     </Box>
   );
 });
-
-ColorField.defaultProps = {
-  align: 'middle',
-  direction: 'bottom',
-};
 
 ColorField.displayName = displayName;
 

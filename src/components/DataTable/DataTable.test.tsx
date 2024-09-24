@@ -2,8 +2,7 @@
 import React from 'react';
 import { useAsyncList } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
-import { act, fireEvent, render, screen, within } from '@testing-library/react';
-import { act as actHooks, renderHook } from '@testing-library/react-hooks';
+import { act, act as actDom, act as actHooks, fireEvent, render, renderHook, screen, within } from '@testing-library/react';
 
 import {
   DataTableBody,
@@ -72,7 +71,7 @@ const getCell = (view, text) => {
   return el;
 };
 
-const focusCell = (tree, text) => act(() => getCell(tree, text).focus());
+const focusCell = (tree, text) => actDom(() => getCell(tree, text).focus());
 const moveFocus = (key, opts = {}) => {
   if (document.activeElement) {
     fireEvent.keyDown(document.activeElement, { key, ...opts });
@@ -177,7 +176,9 @@ describe('Static DataTable', () => {
 
   test('should move focus to the next cell in a row with ArrowRight', () => {
     const view = staticDataTable();
-    focusCell(view, 'USA');
+    act(() => {
+      focusCell(view, 'USA');
+    });
     moveFocus('ArrowRight');
     // eslint-disable-next-line jest-dom/prefer-focus
     expect(document.activeElement).toBe(getCell(view, 320000000));
@@ -185,14 +186,18 @@ describe('Static DataTable', () => {
 
   test('should move focus to the previous cell in a row with ArrowLeft', () => {
     const view = staticDataTable();
-    focusCell(view, 'Asia');
+    act(() => {
+      focusCell(view, 'Asia');
+    });
     moveFocus('ArrowLeft');
     expect(getCell(view, 1398000000)).toHaveFocus();
   });
 
   test('should move focus to the next cell in a row with ArrowUp', () => {
     const view = staticDataTable();
-    focusCell(view, 'China');
+    act(() => {
+      focusCell(view, 'China');
+    });
     moveFocus('ArrowUp');
     // eslint-disable-next-line jest-dom/prefer-focus
     expect(document.activeElement).toBe(getCell(view, 'USA'));
@@ -200,7 +205,9 @@ describe('Static DataTable', () => {
 
   test('should move focus to the previous cell in a row with ArrowDown', () => {
     const view = staticDataTable();
-    focusCell(view, 'Asia');
+    act(() => {
+      focusCell(view, 'Asia');
+    });
     moveFocus('ArrowDown');
     expect(getCell(view, 'Europe')).toHaveFocus();
   });
@@ -303,23 +310,21 @@ describe('Async DataTable', () => {
     const body = screen.getAllByRole('rowgroup')[1];
     const scrollView = body?.parentNode?.parentNode as HTMLElement;
 
-    if (scrollView) {
-      scrollView.scrollTop = 250;
-      fireEvent.scroll(scrollView);
-    }
-    act(() => {
+    scrollView.scrollTop = 250;
+    fireEvent.scroll(scrollView);
+    actDom(() => {
       jest.runAllTimers();
     });
 
     scrollView.scrollTop = 1500;
     fireEvent.scroll(scrollView);
-    act(() => {
+    actDom(() => {
       jest.runAllTimers();
     });
 
     scrollView.scrollTop = 2800;
     fireEvent.scroll(scrollView);
-    act(() => {
+    actDom(() => {
       jest.runAllTimers();
     });
 

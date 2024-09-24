@@ -15,7 +15,7 @@ import sizes from './sizes';
 import spacing from './spacing';
 import { fontSizes, fontWeights } from './text';
 
-import './open_sans.css';
+// import './open_sans.css';
 
 const breakpoints = [
   '0px',

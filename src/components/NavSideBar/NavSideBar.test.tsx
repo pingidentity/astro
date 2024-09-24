@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Box, NavSideBarHeader, NavSideBarItem, NavSideBarSection, NavSideBarSectionItem, Separator } from '../../index';
 import { NavSideBarProps } from '../../types';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import {
@@ -162,7 +162,8 @@ test('should change focus between NavBarItemHeader on arrow key press', () => {
   getComponent();
   const headerButtons = screen.getAllByRole('button');
   expect(headerButtons[0]).toBeInTheDocument();
-  headerButtons[0].focus();
+
+  act(() => { headerButtons[0].focus(); });
   expect(headerButtons[0]).toHaveClass('is-focused');
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
@@ -187,7 +188,8 @@ test('should not change focus from NavItemBody to NavBarItemHeader on up/down ar
   const headerButtons = screen.getAllByRole('button');
 
   expect(headerButtons[1]).toBeInTheDocument();
-  headerButtons[1].click();
+
+  act(() => { headerButtons[1].click(); });
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
   expect(screen.getByTestId('navItemLink')).toHaveClass('is-focused');
@@ -212,7 +214,9 @@ test('should not change focus from NavItemBody to NavBarItemHeader on left/right
   const headerButtons = screen.getAllByRole('button');
 
   expect(headerButtons[1]).toBeInTheDocument();
-  headerButtons[1].click();
+  act(() => {
+    headerButtons[1].click();
+  });
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowRight', keyCode: 39 });
   expect(screen.getByTestId('navItemLink')).toHaveClass('is-focused');
@@ -241,11 +245,11 @@ test('expand only one item', () => {
 
   const headerButtons = screen.getAllByRole('button');
 
-  userEvent.click(headerButtons[1]);
+  act(() => { userEvent.click(headerButtons[1]); });
   expect(screen.queryByText('Group')).toBeInTheDocument();
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 
-  userEvent.click(headerButtons[2]);
+  act(() => { userEvent.click(headerButtons[2]); });
   expect(screen.queryByText('Group')).not.toBeInTheDocument();
   expect(screen.queryByText('Users')).toBeInTheDocument();
 });

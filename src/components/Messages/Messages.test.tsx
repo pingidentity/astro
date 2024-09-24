@@ -1,11 +1,10 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import userEvent from '@testing-library/user-event';
 
 import statuses from '../../utils/devUtils/constants/statuses';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { ARIA_STATUSES } from './Message';

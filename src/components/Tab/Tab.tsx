@@ -6,6 +6,7 @@ import { TabListState } from '@react-stately/tabs';
 
 import {
   Box,
+  Button,
   Text,
   Tooltip,
   TooltipTrigger,
@@ -64,6 +65,7 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
         {...itemProps}
         title={itemProps?.textValue}
         role="tab"
+        data-testid="test-me"
       >
         <>
           {itemProps?.icon}
@@ -104,6 +106,7 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
           <Tooltip>
             {itemProps?.textValue || itemProps?.title}
           </Tooltip>
+
         </TooltipTrigger>
       </>
     );
@@ -124,7 +127,6 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
   return tab;
 });
 
-CollectionTab.displayName = 'CollectionTab';
 
 export const TabLine = props => <Box role="presentation" variant="tabLine" {...props} />;
 

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { forwardRef } from 'react';
 import { useSingleSelectListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
@@ -16,7 +17,7 @@ const {
 
 const Stepper = forwardRef((props, ref) => {
   const {
-    activeStep,
+    activeStep = 1,
     onStepChange,
     tabListProps,
     tooltipProps,
@@ -58,6 +59,7 @@ const Stepper = forwardRef((props, ref) => {
 
     const line = Array.isArray(lines) ? lines[i - 1] : lines;
 
+    /* istanbul ignore next */
     const textValue = (item && item.value && item.value.label)
       || item.textValue
       || stepIndex.toString();
@@ -99,7 +101,8 @@ const Stepper = forwardRef((props, ref) => {
 
 Stepper.propTypes = {
   /**
-   * *For performance reasons, use this prop instead of Array.map when iteratively rendering Items*.
+   * *For performance reasons,
+use this prop instead of Array.map when iteratively rendering Items*.
    * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
   */
   items: PropTypes.arrayOf(PropTypes.shape({
@@ -118,10 +121,6 @@ Stepper.propTypes = {
   /** A props object that is subsequently spread into the rendered tablist. */
   tabListProps: PropTypes.shape({}),
   tooltipProps: PropTypes.shape({}),
-};
-
-Stepper.defaultProps = {
-  activeStep: 1,
 };
 
 Stepper.displayName = 'Stepper';

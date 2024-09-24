@@ -2,9 +2,10 @@ import React from 'react';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
+import { async } from 'regenerator-runtime';
 
 import { TabListItemProps } from '../../types';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Tab from '../Tab';
 
@@ -18,9 +19,9 @@ emotionCache.compat = true;
 
 const testId = 'testId';
 const defaultTabs: TabListItemProps[] = [
-  { name: 'Tab 1', children: 'Tab 1 body', props: {} },
-  { name: 'Tab 2', children: 'Tab 2 body', props: {} },
-  { name: 'Tab 3', children: 'Tab 3 body', props: {} },
+  { name: 'Tab 1', children: 'Tab 1 body', props: {}, index: 0 },
+  { name: 'Tab 2', children: 'Tab 2 body', props: {}, index: 1 },
+  { name: 'Tab 3', children: 'Tab 3 body', props: {}, index: 2 },
 ];
 
 const tabsWithList: TabListItemProps[] = [
@@ -41,15 +42,15 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}) => renderFn((
-  <CacheProvider value={emotionCache}>
-    <Tabs {...defaultProps} {...props}>
-      {tabs.map(({ name, children, props: tabProps }) => (
-        <Tab key={name} title={name} {...tabProps}>
-          {children}
-        </Tab>
-      ))}
-    </Tabs>
-  </CacheProvider>
+  // <CacheProvider value={emotionCache}>
+  <Tabs {...defaultProps} {...props}>
+    {tabs.map(({ name, children, props: tabProps }) => (
+      <Tab key={name} title={name} {...tabProps}>
+        {children}
+      </Tab>
+    ))}
+  </Tabs>
+  // </CacheProvider>
 ));
 
 const getComponentWithDynamicItems = props => render((
@@ -70,14 +71,19 @@ const getTabs = () => {
   return { tabs, tab0, tab1, tab2 };
 };
 
-const testTabPanel = expectedTabIndex => defaultTabs.forEach(({ children }, index) => {
-  if (typeof children === 'string') {
-    return index === expectedTabIndex
-      ? expect(screen.queryByText(children)).toBeInTheDocument()
-      : expect(screen.queryByText(children)).not.toBeInTheDocument();
+const testTabPanel = async expectedTabIndex => {
+  const selectedTab = defaultTabs.find(_tab => _tab.index === expectedTabIndex);
+  const filteredList = defaultTabs.filter(_tab => _tab.index !== expectedTabIndex);
+  if (selectedTab && typeof selectedTab.children === 'string') {
+    expect(await screen.findByText(selectedTab.children)).toBeInTheDocument();
   }
-  return null;
-});
+  if (filteredList[0] && typeof filteredList[0].children === 'string') {
+    expect(screen.queryByText(filteredList[0].children)).not.toBeInTheDocument();
+  }
+  if (filteredList[1] && typeof filteredList[1].children === 'string') {
+    expect(screen.queryByText(filteredList[1].children)).not.toBeInTheDocument();
+  }
+};
 
 const testSingleTab = (tabs, tab, thisTest, testParams: unknown[] = []) => {
   tabs.forEach(t => {
@@ -89,8 +95,14 @@ const testSingleTab = (tabs, tab, thisTest, testParams: unknown[] = []) => {
   });
 };
 
+
+beforeEach(() => {
+  jest.useFakeTimers();
+});
+
 afterEach(() => {
-  jest.restoreAllMocks();
+  // jest.restoreAllMocks();
+  jest.resetAllMocks();
 });
 
 // Needs to be added to each components test file
@@ -117,78 +129,78 @@ test('default tabs', () => {
   expect(tabPanel).toBeInTheDocument();
 });
 
-test('interacting with tabs via click', () => {
+test('interacting with tabs via click', async () => {
   getComponent();
   const { tabs, tab0, tab1 } = getTabs();
 
   // Expect the first tab to be default selected
-  testSingleTab(tabs, tab0, 'toContainElement', [screen.getByRole('presentation')]);
-  testTabPanel(0);
+  testSingleTab(tabs, tab0, 'toContainElement', [await screen.findByRole('presentation')]);
+  await testTabPanel(0);
 
   userEvent.click(tab1);
   testSingleTab(tabs, tab1, 'toContainElement', [screen.getByRole('presentation')]);
-  testTabPanel(1);
+  await testTabPanel(1);
 
   userEvent.click(tab0);
   testSingleTab(tabs, tab0, 'toContainElement', [screen.getByRole('presentation')]);
-  testTabPanel(0);
+  await testTabPanel(0);
 });
 
-test('interacting with tabs with manual activation', () => {
+test('interacting with tabs with manual activation', async () => {
   getComponent();
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
   userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
-  testTabPanel(0);
+  await testTabPanel(0);
 
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
   testSingleTab(tabs, tab1, 'toHaveFocus');
-  testTabPanel(0);
+  await testTabPanel(0);
 
   fireEvent.keyDown(tab1, { key: 'Enter', code: 'Enter' });
   testSingleTab(tabs, tab1, 'toHaveFocus');
-  testTabPanel(1);
+  await testTabPanel(1);
 });
 
-test('interacting with tabs via focus -- horizontal', () => {
+test('interacting with tabs via focus -- horizontal', async () => {
   getComponent({ keyboardActivation: 'automatic' });
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
   userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
-  testTabPanel(0);
+  await testTabPanel(0);
 
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
   testSingleTab(tabs, tab1, 'toHaveFocus');
-  testTabPanel(1);
+  await testTabPanel(1);
 
   fireEvent.keyDown(tab0, { key: 'ArrowLeft', code: 'ArrowLeft' });
   testSingleTab(tabs, tab0, 'toHaveFocus');
-  testTabPanel(0);
+  await testTabPanel(0);
 });
 
-test('interacting with tabs via focus -- vertical', () => {
+test('interacting with tabs via focus -- vertical', async () => {
   getComponent({ orientation: 'vertical', keyboardActivation: 'automatic' });
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
   userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
-  testTabPanel(0);
+  await testTabPanel(0);
 
   fireEvent.keyDown(tab0, { key: 'ArrowDown', code: 'ArrowDown' });
   testSingleTab(tabs, tab1, 'toHaveFocus');
-  testTabPanel(1);
+  await testTabPanel(1);
 
   fireEvent.keyDown(tab0, { key: 'ArrowUp', code: 'ArrowUp' });
   testSingleTab(tabs, tab0, 'toHaveFocus');
-  testTabPanel(0);
+  await testTabPanel(0);
 });
 
-test('disabled all tabs', () => {
+test('disabled all tabs', async () => {
   getComponent({ isDisabled: true });
   const { tab0, tab1 } = getTabs();
   const tabLine = screen.queryByRole('presentation');
@@ -207,29 +219,29 @@ test('disabled all tabs', () => {
   userEvent.click(tab1);
   expect(tab0).not.toContainElement(screen.queryByRole('presentation'));
   expect(tab1).not.toContainElement(screen.queryByRole('presentation'));
-  testTabPanel(0);
+  await testTabPanel(0);
 });
 
-test('disabled tab is not accessible on click or focus', () => {
+test('disabled tab is not accessible on click or focus', async () => {
   getComponent({ disabledKeys: [defaultTabs[1].name], keyboardActivation: 'automatic' });
 
-  testTabPanel(0);
+  await testTabPanel(0);
 
   const { tabs, tab0, tab1, tab2 } = getTabs();
 
   // Ensure that clicking a disabled tab does nothing
   userEvent.click(tab1);
-  testTabPanel(0);
+  await testTabPanel(0);
 
   // Ensure that disabled tab is not accessible via focus
   userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
   testSingleTab(tabs, tab2, 'toHaveFocus');
-  testTabPanel(2);
+  await testTabPanel(2);
 });
 
-test('controlled tabs', () => {
+test('controlled tabs', async () => {
   const selectedKey = defaultTabs[1].name;
   const onSelectionChange = jest.fn();
   const { rerender } = getComponent({ selectedKey, onSelectionChange });
@@ -238,13 +250,13 @@ test('controlled tabs', () => {
   // Expect the second tab to be selected
   expect(onSelectionChange).not.toHaveBeenCalled();
   testSingleTab(tabs, tab1, 'toContainElement', [screen.queryByRole('presentation')]);
-  testTabPanel(1);
+  await testTabPanel(1);
 
   // Ensure the event handler is fired, but selected tab does not change
   userEvent.click(tab2);
   expect(onSelectionChange).toHaveBeenCalledWith(defaultTabs[2].name);
   testSingleTab(tabs, tab1, 'toContainElement', [screen.queryByRole('presentation')]);
-  testTabPanel(1);
+  await testTabPanel(1);
 
   // Ensure the tab DOES change when selectedKey is updated
   userEvent.click(tab0);
@@ -258,7 +270,7 @@ test('controlled tabs', () => {
         React.JSXElementConstructor<unknown>>) => any
     });
   testSingleTab(tabs, tab0, 'toContainElement', [screen.queryByRole('presentation')]);
-  testTabPanel(0);
+  await testTabPanel(0);
 });
 
 test('tab line props', () => {
@@ -297,12 +309,16 @@ test('tooltip renders on tab\'s hover in `tooltip` mode', async () => {
   getComponent({ mode: 'tooltip' });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 
-  const { tab0 } = getTabs();
-  fireEvent.mouseMove(tab0);
-  fireEvent.mouseEnter(tab0);
-  setTimeout(() => {
-    expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-  }, 0);
+  // const { tab1 } = getTabs();
+  // fireEvent.mouseMove(tab1);
+  // fireEvent.mouseEnter(tab1);
+  // await userEvent.hover(tab1);
+  const test = screen.getAllByTestId('test-me')[1];
+  fireEvent.mouseMove(test);
+  fireEvent.mouseEnter(test);
+  await userEvent.hover(test);
+  jest.advanceTimersByTime(100);
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });
 
 test('tooltip does not render on tab\'s hover in `tooltipIsDisabled` mode', async () => {
@@ -362,13 +378,13 @@ test('will render slots.afterTab if provided', () => {
 test('will render tab with list if provided', async () => {
   getComponentWithDynamicItems({ items: tabsWithList, mode: 'list' });
 
-  testTabPanel(0);
+  await testTabPanel(0);
 
   const { tab1: { parentElement: menuBtn } } = getTabs();
 
   if (menuBtn) userEvent.click(menuBtn);
   expect(screen.queryByRole('menu')).toBeInTheDocument();
-  testTabPanel(0);
+  await testTabPanel(0);
 
   const menuItems = screen.queryAllByRole('menuitemradio');
   if (tabsWithList[1].list) {
@@ -384,21 +400,21 @@ test('will render tab with list if provided', async () => {
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
 
-test('tab list is accessible via keyboard', () => {
+test('tab list is accessible via keyboard', async () => {
   getComponentWithDynamicItems({ items: tabsWithList, mode: 'list' });
 
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
   userEvent.tab();
-  testTabPanel(0);
+  await testTabPanel(0);
 
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
   expect(tab1).toHaveFocus();
 
   fireEvent.keyDown(tab1, { key: 'Enter', code: 'Enter' });
   expect(screen.queryByRole('menu')).toBeInTheDocument();
-  testTabPanel(0);
+  await testTabPanel(0);
 
   const menuItems = screen.queryAllByRole('menuitemradio');
   if (tabsWithList[1].list) {

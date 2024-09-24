@@ -32,7 +32,7 @@ export const PopoverWrapper = forwardRef<HTMLElement, PopoverWrapperProps>((prop
   const {
     children,
     className,
-    placement,
+    placement = 'bottom',
     arrowProps,
     arrowCrossOffset,
     isOpen,
@@ -95,10 +95,6 @@ export const PopoverWrapper = forwardRef<HTMLElement, PopoverWrapperProps>((prop
       )
   );
 });
-
-PopoverWrapper.defaultProps = {
-  placement: 'bottom',
-};
 
 export const PopoverArrow: FC<PopoverArrowProps> = props => {
   const {

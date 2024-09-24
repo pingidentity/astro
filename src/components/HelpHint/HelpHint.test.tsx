@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { HelpHint, Link } from '../../index';
 import { HelpHintProps } from '../../types';
-import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'help-hint__button';
@@ -23,8 +23,13 @@ const getComponentWithLink = (props: HelpHintProps = {}) => render(
   </HelpHint>,
 );
 
-// Needs to be added to each components test file
-universalComponentTests({ renderComponent: props => <HelpHint {...defaultProps} {...props} /> });
+beforeAll(() => {
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 test('renders HelpHint component', () => {
   getComponent();
@@ -134,7 +139,9 @@ test('popover closes after closeDelay when mouse leaves trigger', async () => {
   fireEvent.mouseEnter(helpHintButton);
   fireEvent.mouseLeave(helpHintButton);
 
-  await waitFor(() => {
+  act(() => { jest.advanceTimersByTime(11); });
+
+  await act(() => {
     expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   }, { timeout: closeDelay + 1 });
 });
@@ -146,7 +153,12 @@ test('popover automatically closes in 1000ms after mouse leaves trigger', async 
   fireEvent.mouseEnter(helpHintButton);
   fireEvent.mouseLeave(helpHintButton);
 
-  await waitFor(() => {
+  act(() => { jest.advanceTimersByTime(1001); });
+
+  await act(() => {
     expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   }, { timeout: oneSecond + 1 });
 });
+
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <HelpHint {...defaultProps} {...props} /> });

@@ -53,4 +53,5 @@ export interface TabListItemProps {
         role?:string;
     }>;
     props?: object;
+    index?: number,
 }

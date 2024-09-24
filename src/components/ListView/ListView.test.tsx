@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
 
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Button from '../Button';
 import CheckboxField from '../CheckboxField';
@@ -279,7 +279,9 @@ test('list view not receive focus when click on checkbox', () => {
   const checkbox = screen.getAllByTestId('TestID');
 
   expect(listItem[0]).not.toHaveClass('is-focused');
-  checkbox[0].click();
+  act(() => {
+    checkbox[0].click();
+  });
   expect(listItem[0]).not.toHaveClass('is-focused');
 });
 

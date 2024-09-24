@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { useStatusClasses } from '../../hooks';
 import { FieldHelperTextProps } from '../../types';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { statusDefaultProp } from '../../utils/docUtils/statusProp';
 import Text from '../Text';
 
@@ -13,7 +14,13 @@ import Text from '../Text';
  */
 
 const FieldHelperText = forwardRef<HTMLDivElement, FieldHelperTextProps>((props, ref) => {
-  const { className, status, id, ...others } = props;
+  const {
+    className,
+    /* istanbul ignore next */
+    status = statuses.DEFAULT,
+    id,
+    ...others
+  } = props;
   const { classNames } = useStatusClasses(className, {
     [`is-${status}`]: true,
   });
