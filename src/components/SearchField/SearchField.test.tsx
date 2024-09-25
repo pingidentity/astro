@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { SearchFieldProps } from '../../types';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -12,7 +13,7 @@ const defaultProps = {
   'data-testid': testId,
   label: testLabel,
 };
-const getComponent = (props = {}) => render((
+const getComponent = (props:SearchFieldProps = {}) => render((
   <SearchField {...defaultProps} {...props} />
 ));
 
@@ -81,7 +82,7 @@ test('search isRequired', () => {
 });
 
 test('search autoFocus', () => {
-  getComponent({ autoFocus: true });
+  getComponent({ hasAutoFocus: true });
   const search = screen.getByLabelText(testLabel);
   expect(search).toHaveFocus();
 });
@@ -152,7 +153,7 @@ test('search onChange', () => {
 });
 
 test('search excludeFromTabOrder', () => {
-  getComponent({ excludeFromTabOrder: true });
+  getComponent({ isExcludedFromTabOrder: true });
   const search = screen.getByLabelText(testLabel);
   expect(search).toHaveAttribute('tabindex', '-1');
 });

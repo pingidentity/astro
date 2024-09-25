@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Users from '@pingux/mdi-react/AccountGroupIcon';
 import FilterIcon from '@pingux/mdi-react/FilterIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useDebounce } from '../../hooks';
@@ -12,6 +13,7 @@ import {
   SearchField,
   Text,
 } from '../../index';
+import { SearchFieldProps } from '../../types';
 import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 
@@ -67,9 +69,9 @@ export default {
   args: {
     placeholder: 'Search Groups',
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default:StoryFn<SearchFieldProps> = (args:SearchFieldProps) => (
   <SearchField
     {...args}
     icon={SearchIcon}
@@ -77,12 +79,12 @@ export const Default = args => (
   />
 );
 
-export const Controlled = () => {
-  const [value, setValue] = useState('');
+export const Controlled:StoryFn<SearchFieldProps> = () => {
+  const [value, setValue] = useState<string>('');
   return (
     <SearchField
       value={value}
-      onChange={setValue}
+      onChange={val => setValue(val)}
       aria-label="Search Groups"
       placeholder="Search Groups"
       onSubmit={text => alert(text)} // eslint-disable-line no-alert
@@ -90,7 +92,7 @@ export const Controlled = () => {
   );
 };
 
-export const CustomIcon = () => (
+export const CustomIcon:StoryFn<SearchFieldProps> = () => (
   <SearchField
     icon={Users}
     aria-label="Search Users"
@@ -99,7 +101,7 @@ export const CustomIcon = () => (
   />
 );
 
-export const NoClearButton = () => (
+export const NoClearButton:StoryFn<SearchFieldProps> = () => (
   <SearchField
     hasNoClearButton
     aria-label="Search Users"
@@ -108,14 +110,14 @@ export const NoClearButton = () => (
   />
 );
 
-export const ControlledWithDebouncedInput = () => {
+export const ControlledWithDebouncedInput:StoryFn<SearchFieldProps> = () => {
   const [value, setValue] = useState('');
   const debouncedSearchText = useDebounce({ value, delay: 500 });
   return (
     <Box>
       <SearchField
         value={value}
-        onChange={setValue}
+        onChange={val => setValue(val)}
         aria-label="Search Groups"
         placeholder="Search Groups"
         onSubmit={text => alert(text)} // eslint-disable-line no-alert
@@ -125,7 +127,7 @@ export const ControlledWithDebouncedInput = () => {
   );
 };
 
-export const WithFilter = () => {
+export const WithFilter:StoryFn<SearchFieldProps> = () => {
   return (
     <Box p="xx" isRow gap="md">
       <SearchField

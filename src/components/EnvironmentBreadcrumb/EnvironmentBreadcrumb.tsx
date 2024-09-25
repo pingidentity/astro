@@ -276,12 +276,13 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
         >
           <FocusScope restoreFocus autoFocus contain>
             <SearchField
+              value={searchValue}
               aria-describedby={optionsNumberMessageId}
               autocomplete="off"
               placeholder="Search"
               aria-label="Items Search"
               data-testid="Environment-Breadcrumb-Search"
-              onChange={setSearchValue}
+              onChange={val => setSearchValue(val)}
               p="10px"
               {...searchProps}
             />
