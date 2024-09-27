@@ -31,7 +31,7 @@ const TabPanel = forwardRef<HTMLElement, TabPanelProps>(({ state, ...props }, re
   }
 
   return (
-    <Box {...tabPanelProps} {...raTabPanelProps} ref={tabPanelRef} role="tabpanel">
+    <Box {...tabPanelProps} {...raTabPanelProps} ref={tabPanelRef}>
       {children}
     </Box>
   );
@@ -79,7 +79,6 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
     state as TabListState<TabListItemProps>,
     tabListRef as RefObject<HTMLElement>);
 
-
   return (
     <TabsContext.Provider value={state}>
       <Box {...others}>
@@ -89,7 +88,6 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
           {...tabListProps}
           {...raTabListProps}
           ref={tabListRef}
-          role="tablist"
         >
           {Array.from(state.collection)
             .filter(item => !item?.props?.isListItem)

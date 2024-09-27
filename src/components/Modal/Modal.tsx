@@ -102,7 +102,6 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
             {...modalProps}
             ref={modalRef}
             aria-modal
-            role="dialog"
           >
             {
               hasCloseButton

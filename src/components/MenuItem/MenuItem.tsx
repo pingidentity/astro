@@ -84,7 +84,6 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
       data-id={dataId}
       aria-disabled={isDisabled}
       {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps, others)}
-      role={menuItemProps.role}
     >
       {rendered}
     </Box>

@@ -61,7 +61,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
       aria-orientation={ORIENTATION.VERTICAL}
       {...others}
       {...mergeProps(focusProps, menuProps, hoverProps)}
-      role="menu"
     >
       {Array.from(state.collection).map(element => {
         if (element.type === 'section') {

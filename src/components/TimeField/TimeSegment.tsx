@@ -13,7 +13,6 @@ const TimeSegment: React.FC<TimeSegmentProps> = props => {
   const ref = useRef<HTMLElement>(null);
 
   const { segmentProps } = useDateSegment(segment, state, ref);
-  delete segmentProps.role;
 
   const focusManager = useFocusManager();
 
@@ -55,7 +54,7 @@ const TimeSegment: React.FC<TimeSegmentProps> = props => {
   );
 
   return (
-    <Box {...segmentProps} ref={ref} variant="forms.timeField.segment" onKeyUp={handleKeyEvents} role="spinbutton">
+    <Box {...segmentProps} ref={ref} variant="forms.timeField.segment" onKeyUp={handleKeyEvents}>
       {text}
     </Box>
   );
