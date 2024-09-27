@@ -41,6 +41,7 @@ export * from './progressBar';
 export * from './requirementsList';
 export * from './rockerButtonGroup';
 export * from './scrollBox';
+export * from './searchField';
 export * from './separator';
 export * from './shared';
 export * from './switchField';
