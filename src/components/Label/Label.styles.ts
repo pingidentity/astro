@@ -67,8 +67,9 @@ label.checkbox = {
   width: 'max-content',
   alignItems: 'center',
   cursor: 'pointer',
-  '& .is-disabled': {
+  '&.is-disabled': {
     opacity: '1',
+    color: 'rgba(37, 55, 70, 0.5)',
   },
 };
 
