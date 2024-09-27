@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.88.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.87.0...@pingux/astro@2.88.0) (2024-09-27)
+
+
+### Features
+
+* [UIP-6832] SearchField convert to TS ([9ce77e5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9ce77e580880136c156fa9f573663c6f4a27227a))
+* [UIP-7157] CheckboxField fix selecting ([8914429](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8914429704235e40bbdf9ea73517337b1f0862f6))
+
+
+
+
+
 # [2.87.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.86.0...@pingux/astro@2.87.0) (2024-09-24)
 
 
