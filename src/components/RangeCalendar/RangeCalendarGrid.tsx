@@ -32,7 +32,7 @@ const RangeCalendarGrid = (props: RangeCalendarGridProps) => {
   };
 
   return (
-    <Table {...gridProps} role="grid">
+    <Table {...gridProps}>
       <TableHead {...headerProps}>
         <TableRow>
           {weekDays.map((day, index) => (
