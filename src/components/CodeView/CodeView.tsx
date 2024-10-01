@@ -4,8 +4,9 @@ import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
 import Highlight, { defaultProps, Language, Prism } from 'prism-react-renderer';
 
-import { Box, CopyText } from '../..';
+import { Box, CopyText, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
+import codeViewStyle from '../../styles/themes/next-gen/codeView/codeView';
 import { CodeViewProps, PrismProps, PrismThemeProps } from '../../types/codeView';
 
 import styles from './CodeView.styles';
@@ -17,9 +18,10 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     hasLineNumbers,
     hasNoCopyButton,
     language,
+    isNextGen,
     Prism: customPrism,
     /* istanbul ignore next */
-    stylesProp = styles,
+    stylesProp,
     ...others
   } = props;
 
@@ -38,11 +40,12 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const getLineNoWidth = tokens => tokens.length.toString().length * 12;
 
   const code = children?.trim() || '' as string;
+  const codeViewTheme = stylesProp?.theme || (isNextGen ? codeViewStyle.theme : styles.theme);
 
   const content = (
     <Highlight
       {...defaultProps}
-      theme={stylesProp.theme as PrismThemeProps}
+      theme={codeViewTheme as PrismThemeProps}
       code={code}
       language={language as Language}
       Prism={customPrism as PrismProps || Prism as PrismProps}
@@ -70,6 +73,30 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
       )}
     </Highlight>
   );
+
+  if (isNextGen) {
+    return (
+      <Box
+        ref={ref}
+        variant="codeView.wrapper"
+        className={classNames}
+        {...mergeProps(focusProps, hoverProps, others)}
+        role="none"
+      >
+        <Box isRow justifyContent="space-between" alignItems="center" variant="codeView.header">
+          <Text color="gray-300" mb="0" mr="sm" py="sm">{language?.toUpperCase()}</Text>
+          <CopyText
+            ref={ref}
+            mode="rightText"
+            textToCopy={children}
+          >
+            Copy
+          </CopyText>
+        </Box>
+        {content}
+      </Box>
+    );
+  }
 
   if (hasNoCopyButton) {
     return (

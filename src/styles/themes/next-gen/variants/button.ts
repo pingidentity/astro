@@ -1,5 +1,6 @@
 import chroma from 'chroma-js';
 
+import { copyButton } from '../codeView/codeView';
 import colors from '../colors/colors';
 
 const { primary: primaryBlue, critical: criticalRed } = colors;
@@ -256,17 +257,18 @@ const iconButtons = {
   headerNav: {
     ...baseIconButton,
     borderRadius: '4px',
-    path: { fill: 'gray-800' },
+    path: { fill: 'text.primary' },
     px: 'md',
     py: 'sm',
     width: '56px',
     '&.is-hovered': {
-      path: { fill: 'gray-500' },
+      path: { fill: 'text.secondary' },
     },
     '&.is-pressed': {
-      path: { fill: 'gray-500' },
+      path: { fill: 'text.secondary' },
     },
   },
+  copyButton,
 };
 
 const buttons = {

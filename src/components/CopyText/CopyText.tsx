@@ -143,8 +143,9 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
           {...others}
           role="presentation"
         >
-          {content}
+          {mode !== 'rightText' && content}
           <CopyButton onPress={copyToClipboard} {...focusProps} {...iconButtonProps} />
+          {mode === 'rightText' && content}
         </Box>
       </Box>
     </TooltipWrapper>

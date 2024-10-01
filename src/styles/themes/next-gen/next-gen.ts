@@ -8,6 +8,7 @@ import buttons from './variants/button';
 import cards from './variants/cards';
 import images from './variants/images';
 import links from './variants/links';
+import navigationHeader from './variants/navigationHeader';
 import { text as newText } from './variants/text';
 import variants, { badges } from './variants/variants';
 import forms from './forms';
@@ -47,6 +48,7 @@ const nextGenTheme = {
   },
   sizes,
   badges,
+  navigationHeader,
   space: spacing,
   links,
   cards,

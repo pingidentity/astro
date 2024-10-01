@@ -21,7 +21,6 @@ const Separator = forwardRef<HTMLElement, SeparatorProps>((props, ref) => {
       variant="separator.base"
       {...others}
       {...separatorProps}
-      role="separator"
     />
   );
 });

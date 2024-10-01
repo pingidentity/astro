@@ -38,20 +38,16 @@ const ProgressBar = forwardRef<HTMLElement, ProgressBarProps>((props, ref) => {
     labelProps,
   } = useProgressBar(props);
 
-  const { role, ...restLabelProps } = labelProps;
-
-
   const barWidth = calculateBarWidth(value, minValue, maxValue);
 
   const ariaLabel = props['aria-label'];
-
 
   return (
     <Box {...progressBarProps} role="progressbar" aria-labelledby={labelProps.id} aria-label={ariaLabel} gap="2px" ref={progressBarRef}>
       <Box isRow justifyContent="space-between">
         {label
           && (
-            <Text fontSize="xs" fontWeight="3" {...restLabelProps}>
+            <Text fontSize="xs" fontWeight="3" {...labelProps}>
               {label}
             </Text>
           )}
