@@ -18,7 +18,7 @@ export interface TooltipWrapperProps {
 
 export interface CopyTextProps extends HoverProps, TestingAttributes {
     children?: React.ReactNode;
-    mode?: 'text' | 'link' | 'nonClickableContent';
+    mode?: 'text' | 'link' | 'nonClickableContent' | 'rightText';
     textToCopy?: string;
     tooltipText?: string;
     tooltipProps?: TooltipTriggerProps;

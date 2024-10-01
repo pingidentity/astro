@@ -5,37 +5,38 @@ import yourTheme from './AstroTheme';
 import { NextGenTheme } from '../src/index';
 import { withConsole } from '@storybook/addon-console';
 import { AstroProvider } from '../src/index';
-import nextGenConvertedComponents from '../src/styles/themes/next-gen/convertedComponentList'
+import nextGenConvertedComponents, { nextGenComponents } from '../src/styles/themes/next-gen/convertedComponentList'
 import "@storybook/react";
 
 const withThemeProvider = (Story, context) => {
   const storyTitle = context.title.split('/')[1]
   const isStoryInNextGen = nextGenConvertedComponents.includes(storyTitle) || context.title.split('/')[0] === "Next Gen Recipes"
+  const isNextGenComponent = nextGenComponents.includes(storyTitle);
   const selectedTheme = context.parameters.theme || context.globals.theme
-  const showComingSoonMessage = isStoryInNextGen === false && selectedTheme === 'nextGen'
+  const showComingSoonMessage = (!isStoryInNextGen && selectedTheme === 'nextGen') || (isNextGenComponent && selectedTheme === 'light')
 
   const storyTheme = selectedTheme === 'nextGen' ? NextGenTheme : theme;
-  
+
   return (
     <AstroProvider theme={storyTheme} bg="transparent">
       <div style={{ padding: "50px" }}>
         {
           showComingSoonMessage ?
-          <Box
-            sx={{
-              height: '200px',
-              backgroundColor: 'gray-100',
-              border: '1px solid',
-              borderColor: 'gray-300',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
-            <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
-          </Box>
-          :
-          <Story {...context} />
+            <Box
+              sx={{
+                height: '200px',
+                backgroundColor: 'gray-100',
+                border: '1px solid',
+                borderColor: 'gray-300',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
+              <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
+            </Box>
+            :
+            <Story {...context} />
         }
       </div>
     </AstroProvider>

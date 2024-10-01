@@ -1,7 +1,7 @@
 const nextGenCodeViewTheme = {
   plain: {
     color: '#f8f8f2',
-    backgroundColor: '#272822',
+    backgroundColor: '#23282e',
   },
   styles: [
     {
@@ -67,10 +67,12 @@ const nextGenCodeViewTheme = {
     },
   ],
 };
+
 const nextGenCodeViewWrapper = {
-  bg: 'accent.99',
+  backgroundColor: 'gray-900',
   border: '1px solid',
-  borderColor: 'accent.95',
+  borderColor: 'gray-900',
+  borderRadius: '4px',
   width: 400,
   height: 200,
   my: 'xs',
@@ -82,7 +84,7 @@ const nextGenCodeViewWrapper = {
   },
   pre: {
     backgroundColor: 'transparent',
-    padding: '1em',
+    padding: 'md',
     height: '100%',
     width: '100%',
     overflowX: 'hidden',
@@ -121,6 +123,15 @@ const nextGenCodeViewWrapper = {
   },
 };
 
+const nextGenCodeViewHeader = {
+  color: 'gray-300',
+  px: 'md',
+  width: '100%',
+  border: '1px solid',
+  borderColor: 'gray-800',
+  lineHeight: 'body',
+};
+
 const lineNo = {
   display: 'table-cell',
   userSelect: 'none',
@@ -132,8 +143,15 @@ const lineNo = {
   lineHeight: '20px',
 };
 
+export const copyButton = {
+  path: {
+    fill: 'gray-300',
+  },
+};
+
 export default {
   theme: nextGenCodeViewTheme,
   wrapper: nextGenCodeViewWrapper,
   lineNo,
+  header: nextGenCodeViewHeader,
 };
