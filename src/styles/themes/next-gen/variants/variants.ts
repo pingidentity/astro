@@ -1,3 +1,5 @@
+import codeView from '../codeView/codeView';
+
 import buttons from './button';
 
 const fieldHelperText = {
@@ -264,6 +266,9 @@ const menuItem = {
 const separator = {
   base: {
     bg: 'gray-300',
+    '&.is-vertical': {
+      m: '0',
+    },
   },
 };
 
@@ -533,7 +538,7 @@ const dataTable = {
   },
 };
 
-const codeView = {
+/* const codeView = {
   wrapper: {
     backgroundColor: 'gray-900',
     borderRadius: '4px',
@@ -547,7 +552,7 @@ const codeView = {
       p: 'md',
     },
   },
-};
+}; */
 
 const tabs = {
   gap: '0px',

@@ -150,3 +150,10 @@ test('renders CodeView component with highlighted code', () => {
   expect(codeViewElement).toBeInTheDocument();
   expect(codeViewElement).toHaveClass(`language-${language}`);
 });
+
+test('isNextGen prop renders CodeView component with next-gen theme', () => {
+  const children = ' ';
+  getComponent({ children, isNextGen: true, language: 'json' });
+  const codeViewElement = screen.getByTestId(testId);
+  expect(codeViewElement).toHaveTextContent('JSON');
+});

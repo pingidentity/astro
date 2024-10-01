@@ -3,12 +3,12 @@ import { Language, Prism as PrismRR } from 'prism-react-renderer';
 import Prism from 'prismjs';
 import { ThemeUICSSObject } from 'theme-ui';
 
-import { HoverProps } from './shared';
+import { HoverProps, StyleProps } from './shared';
 
 export type PrismProps = typeof PrismRR & typeof Prism;
 export type PrismThemeProps = PrismTheme;
 
-export interface CodeViewProps extends HoverProps {
+export interface CodeViewProps extends HoverProps, StyleProps {
   children?: string;
   className?: string;
   hasLineNumbers?: boolean;
@@ -17,4 +17,5 @@ export interface CodeViewProps extends HoverProps {
   Prism?: PrismProps;
   sx?: ThemeUICSSObject
   stylesProp?: ThemeUICSSObject
+  isNextGen?: boolean;
 }
