@@ -40,6 +40,13 @@ export default {
     // eslint-disable-next-line no-console
     onSelectionChange: console.log,
   },
+  parameters: {
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const testData = [
