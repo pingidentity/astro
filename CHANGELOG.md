@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.89.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.88.0...@pingux/astro@2.89.0) (2024-10-04)
+
+
+### Features
+
+* [UIP-7087] Navigationheader component with next gen styling ([f79a80d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f79a80d595334e5708bd575040ce7f227adb90d3))
+* [UIP-7120] Fix type mismatch for role property ([cf05c3c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cf05c3cee130d8c320183bffc9cba2d6f9e67b18))
+* [UIP-7159] update Docs story code ([a79a9ff](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a79a9ffcd6ab63e0d309c940c54c49bdd703a04d))
+
+
+
+
+
 # [2.88.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.87.0...@pingux/astro@2.88.0) (2024-09-27)
 
 
