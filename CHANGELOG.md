@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.90.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.89.0...@pingux/astro@2.90.0) (2024-10-10)
+
+
+### Features
+
+* [UIP-7160] Create a active Card Variant ([9731b1d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9731b1dbafe303bb7e40a19feeb861e51f907139))
+
+
+
+
+
 # [2.89.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.88.0...@pingux/astro@2.89.0) (2024-10-04)
 
 
