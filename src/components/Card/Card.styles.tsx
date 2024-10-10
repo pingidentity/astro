@@ -1,3 +1,4 @@
+import { checkIcon } from '../../utils/devUtils/constants/images';
 import { defaultFocus } from '../Button/Buttons.styles';
 
 const container = {
@@ -60,6 +61,31 @@ const body = {
   p: 24,
 };
 
+const activeCard = {
+  ...interactive,
+  position: 'relative',
+  cursor: 'pointer',
+  '&.is-selected': {
+    border: '1px solid',
+    borderColor: 'active',
+    ':before': {
+      content: '""',
+      backgroundColor: 'active',
+      backgroundImage: `url(${checkIcon})`,
+      backgroundSize: '16px 16px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center center',
+      transition: 'background-image 0.25s ease-in-out',
+      position: 'absolute',
+      top: '-8px',
+      right: '-8px',
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
+    },
+  },
+};
+
 export default {
   container,
   interactive,
@@ -67,4 +93,5 @@ export default {
   footer,
   flat,
   body,
+  activeCard,
 };

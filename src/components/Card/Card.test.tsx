@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { CardProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Box from '../Box';
 import Button from '../Button';
@@ -16,7 +17,7 @@ const defaultProps = {
   label: 'Test Label',
 };
 
-const getComponent = (props = {}) => render(
+const getComponent = (props:CardProps = {}) => render(
   <Card {...defaultProps} {...props} />,
 );
 // Needs to be added to each components test file
@@ -91,14 +92,30 @@ test('renders Card component with text selection', async () => {
   const range = document.createRange();
   range.selectNodeContents(card);
   const selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
 
-  // Verify that the selection was successful
-  expect(selection.toString()).toBe('Select this text.Interactive TextField');
+  if (selection) {
+    selection.removeAllRanges();
+    selection.addRange(range);
 
-  const textField = screen.getByLabelText('Interactive TextField');
-  userEvent.click(textField);
-  userEvent.type(textField, selection.toString());
-  expect(textField).toHaveValue('Select this text.Interactive TextField');
+    // Verify that the selection was successful
+    const selectedText = selection.toString();
+    expect(selectedText).toBe('Select this text.Interactive TextField');
+
+    // Interact with the TextField
+    const textField = screen.getByLabelText('Interactive TextField');
+    userEvent.click(textField);
+    userEvent.type(textField, selectedText);
+
+    expect(textField).toHaveValue(selectedText);
+  }
+});
+
+
+test('is-select class added when isSelected pass to it', () => {
+  getComponent({ variant: 'cards.activeCard', isSelected: true });
+
+  const card = screen.getByTestId(testId);
+
+  userEvent.click(card);
+  expect(card).toHaveClass('is-selected');
 });
