@@ -16,6 +16,16 @@ const interactive = {
   },
 };
 
+const activeCard = {
+  ...interactive,
+  borderColor: 'border.base',
+  '&.is-hovered': {
+    borderColor: 'active',
+    bg: 'default',
+  },
+};
+
 export default {
   interactive,
+  activeCard,
 };
