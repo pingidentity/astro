@@ -22,6 +22,7 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     onPressChange,
     onPressUp,
     isInteractiveWithin,
+    isSelected,
     ...others
   } = props;
 
@@ -52,6 +53,7 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     isHovered,
     isPressed,
     isFocused: isFocusVisible || isFocusedWithin,
+    isSelected,
   });
 
   const ariaLabel = props['aria-label'];

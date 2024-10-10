@@ -175,3 +175,27 @@ export const WithInteractiveContent = () => (
     />
   </Card>
 );
+
+export const ActiveCard = () => {
+  const sx: ThemeUICSSObject = {
+    alignContent: 'center',
+    height: '221px',
+    justifyContent: 'center',
+    textAlign: 'center',
+    maxWidth: '233px',
+  };
+
+  const [isSelected, setIsSelected] = React.useState(false);
+
+  return (
+    <Card
+      tabIndex="0"
+      variant="cards.activeCard"
+      sx={sx}
+      isSelected={isSelected}
+      onPress={() => setIsSelected(!isSelected)}
+    >
+      Active Card
+    </Card>
+  );
+};
