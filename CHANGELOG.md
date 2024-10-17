@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.91.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.90.0...@pingux/astro@2.91.0) (2024-10-17)
+
+
+### Features
+
+* [UIP-7144] isPressed styling for NextGen components ([ff2ac4d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ff2ac4dd5b6f2404818afff8c8e3188c02ae9013))
+* [UIP-7166] Add Sizes to Modal Variant ([ab7b4af](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ab7b4af624f6a552931b86cbe73b82bf93e66101))
+
+
+
+
+
 # [2.90.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.89.0...@pingux/astro@2.90.0) (2024-10-10)
 
 
