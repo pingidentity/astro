@@ -39,7 +39,7 @@ const Option = forwardRef((props: OptionType, ref) => {
   const optionRef = useRef(null);
   /* istanbul ignore next */
   useImperativeHandle(ref, () => optionRef.current);
-  const { optionProps, isDisabled, isSelected, isFocused, isFocusVisible } = useOption(
+  const { optionProps, isDisabled, isSelected, isFocused, isFocusVisible, isPressed } = useOption(
     {
       key,
       shouldSelectOnPressUp: true,
@@ -66,6 +66,7 @@ const Option = forwardRef((props: OptionType, ref) => {
     isSelected,
     isCondensed,
     isFocusVisible,
+    isPressed,
   });
 
   const updateActiveDescendant = useMultivaluesContext();

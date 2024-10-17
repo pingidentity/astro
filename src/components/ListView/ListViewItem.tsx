@@ -54,6 +54,7 @@ const ListViewItem = props => {
   const {
     rowProps: raRowProps,
     gridCellProps,
+    isPressed,
   } = useGridListItem({
     node: item,
     isVirtualized: true,
@@ -74,6 +75,7 @@ const ListViewItem = props => {
     isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
     hasSeparator,
     hasInsetSeparator,
+    isPressed,
   });
 
   // Whether the current component should have legacy styles removed
