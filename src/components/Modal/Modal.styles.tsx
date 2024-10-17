@@ -26,7 +26,6 @@ const content = {
   pr: 'lg',
   pb: 'lg',
   pl: 'lg',
-  maxWidth: '400px',
   boxShadow: 'standard',
   borderRadius: 3,
   '&.is-extra-small': {
