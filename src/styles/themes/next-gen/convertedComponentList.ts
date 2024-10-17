@@ -28,6 +28,7 @@ const nextGenConvertedComponents = [
   'Text',
   'Link',
   'Card',
+  'ComboBoxField',
   'CodeView',
 ];
 

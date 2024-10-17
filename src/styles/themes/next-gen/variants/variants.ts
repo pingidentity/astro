@@ -267,6 +267,10 @@ const listBox = {
         color: 'text.primary',
       },
     },
+    '&.is-pressed': {
+      color: 'text.primary',
+      bg: 'lightblue',
+    },
   },
 };
 
@@ -390,6 +394,9 @@ const listViewItem = {
       boxShadow: '0 0 0 3px inset #1a73e8',
       bg: 'gray-100',
     },
+    '&.is-pressed': {
+      bg: 'gray-200',
+    },
   },
   styledContainer: {
     py: 'md',
@@ -437,7 +444,7 @@ const navBar = {
       backgroundColor: 'light',
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
+      backgroundColor: 'light',
     },
     '&.is-focused': {
       ...navBarFocus,
@@ -452,7 +459,7 @@ const navBar = {
       backgroundColor: 'light',
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
+      backgroundColor: 'light',
       color: 'text.primary',
     },
     '&.is-selected': {
@@ -593,6 +600,11 @@ const menu = {
   p: 'sm',
   border: '1px solid',
   borderColor: 'gray-300',
+  item: {
+    '&.is-pressed': {
+      bg: 'blue-100',
+    },
+  },
 };
 
 export default {

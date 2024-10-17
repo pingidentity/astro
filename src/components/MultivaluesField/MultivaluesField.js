@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -10,15 +10,8 @@ import CondensedMultivaluesField from './CondensedMultivaluesField';
 import DefaultMultivaluesField from './DefaultMultivaluesField';
 
 const MultivaluesField = forwardRef((props, ref) => {
-  const component = useMemo(() => {
-    switch (props.mode) {
-      case 'condensed':
-        return <CondensedMultivaluesField ref={ref} {...props} />;
-      default:
-        return <DefaultMultivaluesField ref={ref} {...props} />;
-    }
-  }, [props.mode]);
-  return component;
+  const Component = props.mode === 'condensed' ? CondensedMultivaluesField : DefaultMultivaluesField;
+  return <Component ref={ref} {...props} />;
 });
 
 MultivaluesField.propTypes = {
