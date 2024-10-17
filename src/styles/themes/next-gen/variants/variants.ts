@@ -166,14 +166,25 @@ export const badges = {
   badgeDeleteButton,
 };
 
+const modalSize = {
+  xs: ['100%', '300px', '300px', '300px', '300px', '300px'],
+  sm: ['100%', '500px', '500px', '500px', '500px', '500px'],
+  md: ['100%', '500px', '500px', '500px', '800px', '800px'],
+  lg: ['100%', '500px', '500px', '500px', '800px', '1140px'],
+  full: ['100%', '100%', '100%', '100%', '100%', '100%'],
+};
+
 const modal = {
   content: {
     pt: '15px',
     borderRadius: '4px',
     opacity: 0,
-    top: '15px',
+    top: '0',
     transform: 'translate(0, -50px)',
     transition: 'opacity 300ms ease, transform 500ms ease-out',
+    m: ['sm', 'sm', '1.75rem auto'],
+    overflow: 'hidden',
+    maxHeight: 'calc(100vh - 3.5rem)',
     '&.is-open-no-transition': {
       opacity: '100%',
       transform: 'none',
@@ -181,6 +192,26 @@ const modal = {
     '&.is-open.is-transitioning': {
       opacity: '100%',
       transform: 'none',
+    },
+    '&.is-extra-small': {
+      width: '100%',
+      maxWidth: modalSize.xs,
+    },
+    '&.is-small': {
+      width: '100%',
+      maxWidth: modalSize.sm,
+    },
+    '&.is-medium': {
+      width: '100%',
+      maxWidth: modalSize.md,
+    },
+    '&.is-large': {
+      width: '100%',
+      maxWidth: modalSize.lg,
+    },
+    '&.is-full': {
+      width: '100%',
+      maxWidth: modalSize.full,
     },
   },
   container: {
@@ -235,6 +266,10 @@ const listBox = {
       '&.is-focused': {
         color: 'text.primary',
       },
+    },
+    '&.is-pressed': {
+      color: 'text.primary',
+      bg: 'lightblue',
     },
   },
 };
@@ -359,6 +394,9 @@ const listViewItem = {
       boxShadow: '0 0 0 3px inset #1a73e8',
       bg: 'gray-100',
     },
+    '&.is-pressed': {
+      bg: 'gray-200',
+    },
   },
   styledContainer: {
     py: 'md',
@@ -406,7 +444,7 @@ const navBar = {
       backgroundColor: 'light',
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
+      backgroundColor: 'light',
     },
     '&.is-focused': {
       ...navBarFocus,
@@ -421,7 +459,7 @@ const navBar = {
       backgroundColor: 'light',
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
+      backgroundColor: 'light',
       color: 'text.primary',
     },
     '&.is-selected': {
@@ -562,6 +600,11 @@ const menu = {
   p: 'sm',
   border: '1px solid',
   borderColor: 'gray-300',
+  item: {
+    '&.is-pressed': {
+      bg: 'blue-100',
+    },
+  },
 };
 
 export default {

@@ -122,7 +122,7 @@ input.multivaluesWrapper = {
   pl: 12,
   borderRadius: '4px',
   alignItems: 'center',
-  height: '50px',
+  minHeight: '50px',
   '> input': {
     border: 'none',
     flex: 1,
