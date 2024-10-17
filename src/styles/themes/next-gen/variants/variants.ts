@@ -166,14 +166,25 @@ export const badges = {
   badgeDeleteButton,
 };
 
+const modalSize = {
+  xs: ['100%', '300px', '300px', '300px', '300px', '300px'],
+  sm: ['100%', '500px', '500px', '500px', '500px', '500px'],
+  md: ['100%', '500px', '500px', '500px', '800px', '800px'],
+  lg: ['100%', '500px', '500px', '500px', '800px', '1140px'],
+  full: ['100%', '100%', '100%', '100%', '100%', '100%'],
+};
+
 const modal = {
   content: {
     pt: '15px',
     borderRadius: '4px',
     opacity: 0,
-    top: '15px',
+    top: '0',
     transform: 'translate(0, -50px)',
     transition: 'opacity 300ms ease, transform 500ms ease-out',
+    m: ['sm', 'sm', '1.75rem auto'],
+    overflow: 'hidden',
+    maxHeight: 'calc(100vh - 3.5rem)',
     '&.is-open-no-transition': {
       opacity: '100%',
       transform: 'none',
@@ -181,6 +192,26 @@ const modal = {
     '&.is-open.is-transitioning': {
       opacity: '100%',
       transform: 'none',
+    },
+    '&.is-extra-small': {
+      width: '100%',
+      maxWidth: modalSize.xs,
+    },
+    '&.is-small': {
+      width: '100%',
+      maxWidth: modalSize.sm,
+    },
+    '&.is-medium': {
+      width: '100%',
+      maxWidth: modalSize.md,
+    },
+    '&.is-large': {
+      width: '100%',
+      maxWidth: modalSize.lg,
+    },
+    '&.is-full': {
+      width: '100%',
+      maxWidth: modalSize.full,
     },
   },
   container: {

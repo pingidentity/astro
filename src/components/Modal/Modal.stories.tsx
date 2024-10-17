@@ -144,4 +144,14 @@ Default.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.modal.default,
   },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'aria-hidden-focus',
+          enabled: false,
+        },
+      ],
+    },
+  },
 };

@@ -141,6 +141,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
 
 Modal.defaultProps = {
   role: 'dialog',
+  size: 'small',
 };
 
 Modal.displayName = 'Modal';
