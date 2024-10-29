@@ -36,7 +36,7 @@ const interactive = {
   },
 };
 
-const flat = {
+export const flat = {
   ...container,
   p: 0,
   boxShadow: '0 1px 3px 0px rgba(0,0,0, 0.13)',

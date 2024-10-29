@@ -1,5 +1,7 @@
 import { renderHook } from '@testing-library/react';
 
+import { iconWrapperSizes } from '../../utils/devUtils/constants/tShirtSizes';
+
 import useTShirtSize from './useTShirtSize';
 
 describe('useTShirtSize', () => {
@@ -59,6 +61,17 @@ test('returns size value if size is a number value', () => {
   const obj = {
     sizeProps: {
       size: 20,
+    },
+  };
+  expect(result.current).toEqual(obj);
+});
+
+test('using custom sizes, returns size value if size is a string value', () => {
+  const props = { size: '20px', sizes: iconWrapperSizes };
+  const { result } = renderHook(() => useTShirtSize(props));
+  const obj = {
+    sizeProps: {
+      size: '20px',
     },
   };
   expect(result.current).toEqual(obj);

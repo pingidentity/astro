@@ -1,22 +1,22 @@
 import merge from 'deepmerge';
 
+import { themes } from '../../../utils/devUtils/constants/themes';
 import theme from '../../theme.js';
 
 import codeView from './codeView/codeView';
 import colors from './colors/colors';
+import { badges } from './variants/badges';
 import buttons from './variants/button';
 import cards from './variants/cards';
 import images from './variants/images';
 import links from './variants/links';
 import navigationHeader from './variants/navigationHeader';
 import { text as newText } from './variants/text';
-import variants, { badges } from './variants/variants';
+import variants from './variants/variants';
 import forms from './forms';
 import sizes from './sizes';
 import spacing from './spacing';
 import { fontSizes, fontWeights } from './text';
-
-// import './open_sans.css';
 
 const breakpoints = [
   '0px',
@@ -28,7 +28,7 @@ const breakpoints = [
 ];
 
 const nextGenTheme = {
-  name: 'Next Gen',
+  name: themes.NEXT_GEN,
   colors,
   breakpoints,
   buttons,

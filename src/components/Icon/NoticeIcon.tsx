@@ -5,6 +5,7 @@ import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 
 import { Icon } from '../..';
+import useGetTheme from '../../hooks/useGetTheme';
 import { IconProps, Status } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 
@@ -22,11 +23,15 @@ interface NoticeIconProps extends Omit<IconProps, 'icon'> {
 export const NoticeIcon: React.FC<NoticeIconProps> = ({
   status = statuses.DEFAULT,
   ...others
-}) => (
-  <Icon
-    data-testid={noticeIcons[status].testid}
-    title={{ name: noticeIcons[status].name }}
-    icon={noticeIcons[status].icon}
-    {...others}
-  />
-);
+}) => {
+  const { icons } = useGetTheme();
+
+  return (
+    <Icon
+      data-testid={noticeIcons[status].testid}
+      title={{ name: noticeIcons[status].name }}
+      icon={icons[status]}
+      {...others}
+    />
+  );
+};

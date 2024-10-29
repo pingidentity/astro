@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { css, Global } from '@emotion/react';
+import { css, Global, Theme } from '@emotion/react';
 import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from 'theme-ui';
 
@@ -31,17 +31,25 @@ const GlobalTestStyles: React.FC = () => (
 
 interface WrapperProps {
   children: ReactNode;
+  providerTheme: Theme;
 }
 
-const Wrapper: React.FC<WrapperProps> = ({ children }) => (
-  <ThemeProvider theme={theme}>
+const Wrapper: React.FC<WrapperProps> = ({ children, providerTheme }) => (
+  <ThemeProvider theme={providerTheme}>
     <GlobalTestStyles />
     {children}
   </ThemeProvider>
 );
 
-const customRender = (ui: React.ReactElement, options?: RenderOptions) => render(ui,
-  { wrapper: Wrapper as React.FC, ...options },
+const customRender = (ui: React.ReactElement, options?: {providerTheme: Theme}) => render(ui,
+  { wrapper: props => (
+    <Wrapper
+      providerTheme={theme}
+      {...props}
+      {...options}
+    />
+  ),
+  ...options },
 );
 
 // re-export everything -

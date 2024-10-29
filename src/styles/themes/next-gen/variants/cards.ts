@@ -1,8 +1,10 @@
+import { flat } from '../../../../components/Card/Card.styles';
+
 const interactive = {
   boxShadow: 'none',
   borderRadius: '1rem',
   border: '1px solid',
-  borderColor: 'gray-300',
+  borderColor: 'border.base',
   transition: 'border-color .25s ease-in',
   '&.is-focused': {
     outline: '2px solid',
@@ -16,6 +18,27 @@ const interactive = {
   },
 };
 
+const container = {
+  ...flat,
+  p: 'lg',
+};
+
+const dark = {
+  ...flat,
+  border: 'none',
+  backgroundColor: 'card.blue',
+  p: 'lg',
+  gap: 'lg',
+};
+
+const light = {
+  ...flat,
+  border: 'none',
+  backgroundColor: 'card.gray',
+  p: 'lg',
+  gap: 'lg',
+};
+
 const activeCard = {
   ...interactive,
   borderColor: 'border.base',
@@ -27,5 +50,8 @@ const activeCard = {
 
 export default {
   interactive,
+  dark,
+  light,
   activeCard,
+  container,
 };

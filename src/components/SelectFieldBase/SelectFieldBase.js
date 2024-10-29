@@ -1,9 +1,9 @@
 import React, { forwardRef, useMemo } from 'react';
 import { HiddenSelect } from 'react-aria';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
+import useGetTheme from '../../hooks/useGetTheme';
 import { modes } from '../../utils/devUtils/constants/labelModes';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -47,6 +47,9 @@ const SelectFieldBase = forwardRef(({
   ...others
 }, ref) => {
   const { ariaProps } = getAriaAttributeProps(others);
+
+  const { icons } = useGetTheme();
+  const { MenuDown } = icons;
 
   const helperTextId = useMemo(() => uuid(), []);
 

@@ -9,15 +9,15 @@ import { tShirtSizes } from '../../utils/devUtils/constants/tShirtSizes';
  * @returns {Object} `{ sizeProps: Object }`
  */
 
-const useTShirtSize = ({ size }) => {
+const useTShirtSize = ({ size, sizes = tShirtSizes }) => {
   const value = useMemo(() => {
     if (size === undefined) {
       // eslint-disable-next-line no-console
       console.warn('useTShirtSize hook requires a size prop.');
       return undefined;
     }
-    return tShirtSizes?.[size];
-  }, [size]);
+    return sizes?.[size];
+  }, [size, sizes]);
 
   const sizeProps = { size: value ? `${value}px` : size };
   return { sizeProps };

@@ -48,6 +48,7 @@ export const HeaderAndFooter = args => {
   const textStyling = {
     fontSize: 'md',
     fontWeight: 600,
+    color: 'text.secondary',
   };
 
   return (

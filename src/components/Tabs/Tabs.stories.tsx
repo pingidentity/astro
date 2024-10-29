@@ -60,9 +60,9 @@ export default {
 } as Meta;
 
 const tabs: TabListItemProps[] = [
-  { name: 'Tab 1', children: 'Tab 1 body' },
-  { name: 'Tab 2', children: 'Tab 2 body' },
-  { name: 'Tab 3', children: 'Tab 3 body' },
+  { name: 'Tab 1', children: <Text>Tab 1 body</Text> },
+  { name: 'Tab 2', children: <Text>Tab 2 body</Text> },
+  { name: 'Tab 3', children: <Text>Tab 3 body</Text> },
 ];
 
 export const Uncontrolled: StoryFn<TabsProps> = args => (
