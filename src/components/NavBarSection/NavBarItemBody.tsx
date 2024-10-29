@@ -3,12 +3,14 @@ import { useKeyboard } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
 import { useNavBarContext } from '../../context/NavBarContext';
+import useGetTheme from '../../hooks/useGetTheme';
 import { Box, Separator, Text } from '../../index';
 import { ChildItemWrapperProps, NavBarItemBodyProps } from '../../types/navBar';
 
 const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>((
   { item, onKeyDown, className, isExpanded, isTransitioning }, ref) => {
   const state = useNavBarContext();
+  const { styles } = useGetTheme();
 
   const renderSubTitle = child => {
     const { hasSeparator = true, subTitle } = child;
@@ -46,7 +48,8 @@ const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>((
 
   const getEstimatedHeight = () => {
     if (item?.children && (typeof item?.children.length) === 'number') {
-      return (item?.itemHeight ? item.itemHeight : 40) * item.children.length;
+      return (
+        item?.itemHeight ? item.itemHeight : styles.navButtonEstHeight) * item.children.length;
     } return null;
   };
 

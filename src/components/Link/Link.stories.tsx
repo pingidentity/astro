@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Link } from '../../index';
+import { Link, Text } from '../../index';
 import { LinkProps } from '../../types/link';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
@@ -64,9 +64,11 @@ export default {
 
 export const Default: StoryFn<LinkProps> = ({ ...args }) => (
   <div style={{ width: 'max-content' }}>
-    <Link {...args}>Lorem ipsum</Link>
-    {' '}
-    dolor sit amet, consectetur adipiscing elit
+    <Text>
+      <Link {...args}>Lorem ipsum</Link>
+      {' '}
+      dolor sit amet, consectetur adipiscing elit
+    </Text>
   </div>
 );
 

@@ -15,13 +15,13 @@ export const checkbox = {
 
 export const select = {
   borderRadius: '4px',
-  borderColor: 'border.base',
+  borderColor: 'border.input',
   color: 'text.primary',
   height: '50px',
   '&.is-disabled': {
     opacity: 1,
-    borderColor: 'border.base',
-    backgroundColor: 'gray-100',
+    borderColor: 'border.input',
+    backgroundColor: 'disabled',
   },
   currentValue: {
     color: 'text.primary',

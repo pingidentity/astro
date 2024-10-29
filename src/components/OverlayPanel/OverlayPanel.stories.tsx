@@ -327,7 +327,7 @@ export const Expandable: StoryFn = () => {
   );
 
   const footer = (
-    <ButtonBar>
+    <ButtonBar sx={{ backgroundColor: 'background.base' }}>
       <Button
         onPress={onCloseHandler}
         variant="primary"

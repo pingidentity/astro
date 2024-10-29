@@ -1,42 +1,54 @@
 import React from 'react';
 import theme from '../src/styles/theme';
-import { Box, Text } from '../src/index';
+import { AstroProvider, Box, NextGenDarkTheme, NextGenTheme, Text } from '../src/index';
 import yourTheme from './AstroTheme';
-import { NextGenTheme } from '../src/index';
 import { withConsole } from '@storybook/addon-console';
-import { AstroProvider } from '../src/index';
-import nextGenConvertedComponents, { nextGenComponents } from '../src/styles/themes/next-gen/convertedComponentList'
 import "@storybook/react";
+import { themes } from '../src/utils/devUtils/constants/themes';
+import { shouldReturnComingSoon } from '../src/utils/devUtils/shouldReturnComingSoon'
 
 const withThemeProvider = (Story, context) => {
-  const storyTitle = context.title.split('/')[1]
-  const isStoryInNextGen = nextGenConvertedComponents.includes(storyTitle) || context.title.split('/')[0] === "Next Gen Recipes"
-  const isNextGenComponent = nextGenComponents.includes(storyTitle);
   const selectedTheme = context.parameters.theme || context.globals.theme
-  const showComingSoonMessage = (!isStoryInNextGen && selectedTheme === 'nextGen') || (isNextGenComponent && selectedTheme === 'light')
 
-  const storyTheme = selectedTheme === 'nextGen' ? NextGenTheme : theme;
+  // we will be creating a hook in a follow up ticket to this.
+  let storyTheme = theme
+  let style = {padding: '50px'}
+  if (selectedTheme === themes.NEXT_GEN){
+    storyTheme = NextGenTheme
+  }
+  else if (selectedTheme === themes.NEXT_GEN_DARK){
+    storyTheme = NextGenDarkTheme
+    style = {
+      padding: '50px',
+      minHeight: 'calc(100vh - 32px)',
+    }
+  }
 
+  const showComingSoonMessage = shouldReturnComingSoon(
+    context,
+    selectedTheme,
+  )
+  
   return (
-    <AstroProvider theme={storyTheme} bg="transparent">
-      <div style={{ padding: "50px" }}>
+    <AstroProvider theme={storyTheme} bg="background.base">
+      <div style={style} >
         {
           showComingSoonMessage ?
-            <Box
-              sx={{
-                height: '200px',
-                backgroundColor: 'gray-100',
-                border: '1px solid',
-                borderColor: 'gray-300',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
-              <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
-            </Box>
-            :
-            <Story {...context} />
+          <Box
+            sx={{
+              height: '200px',
+              backgroundColor: 'gray-100',
+              border: '1px solid',
+              borderColor: 'border.base',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
+            <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
+          </Box>
+          :
+          <Story {...context} />
         }
       </div>
     </AstroProvider>
@@ -118,8 +130,9 @@ export const globalTypes = {
     toolbar: {
       icon: 'circlehollow',
       items: [
-        { value: 'light', icon: 'circlehollow', title: 'Astro' },
-        { value: 'nextGen', icon: 'circle', title: 'NextGenTheme' },
+        { value: themes.ASTRO, icon: 'circlehollow', title: 'Astro' },
+        { value: themes.NEXT_GEN, icon: 'circle', title: 'NextGenTheme' },
+        { value: themes.NEXT_GEN_DARK, icon: 'stop', title: 'NextGenDarkTheme' },
       ],
       showName: true,
     },

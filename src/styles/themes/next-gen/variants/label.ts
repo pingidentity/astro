@@ -1,7 +1,7 @@
 import { ThemeUICSSObject } from 'theme-ui';
 
 export const label: ThemeUICSSObject = {
-  color: 'gray-900',
+  color: 'text.primary',
   fontSize: '.9375rem',
   '&.is-float-label': {
     fontSize: 'md',

@@ -1,5 +1,7 @@
 import { nextGenColors } from '../tokens/colorTokens';
 
+import { iconWrapper } from './iconWrapper';
+
 const subColors = {
   lightblue: nextGenColors['blue-100'],
   lightindigo: nextGenColors['indigo-100'],
@@ -75,10 +77,14 @@ export const warning = {
 const text = {
   primary: nextGenColors['gray-900'],
   secondary: nextGenColors['gray-500'],
+  message: nextGenColors['gray-700'],
+  fieldHelper: nextGenColors['gray-500'],
 };
 
 const border = {
-  base: nextGenColors['gray-500'],
+  base: nextGenColors['gray-300'],
+  input: nextGenColors['gray-500'],
+  separator: nextGenColors['gray-200'],
 };
 
 const overrides = {
@@ -86,12 +92,25 @@ const overrides = {
     80: '#69788B',
   },
   focus: colorsObject.active,
+  disabled: nextGenColors['gray-100'],
+};
+
+const background = {
+  base: 'white',
+  secondary: nextGenColors['gray-100'],
+  card: nextGenColors['blue-100'],
+};
+
+const card = {
+  blue: nextGenColors['blue-100'],
+  gray: nextGenColors['gray-100'],
 };
 
 const colors = {
   ...subColors,
   ...nextGenColors,
   ...overrides,
+  card,
   critical,
   success,
   warning,
@@ -99,6 +118,8 @@ const colors = {
   border,
   active: colorsObject.blue,
   primary: colorsObject.blue,
+  background,
+  iconWrapper,
 };
 
 export default colors;

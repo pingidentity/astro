@@ -1,7 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { CodeView } from '../..';
+import { CodeView, NextGenTheme } from '../..';
+import theme from '../../styles/theme';
 import { CodeViewProps } from '../../types/codeView';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -12,6 +13,7 @@ const originalClipboard = { ...global.navigator.clipboard };
 
 const defaultProps = {
   'data-testid': testId,
+  theme,
 };
 
 const textValue = `
@@ -28,6 +30,12 @@ const getComponent = (props: CodeViewProps = {}) => render((
     {textValue}
   </CodeView>
 ));
+
+const getComponentNextGen = (props: CodeViewProps = {}) => render((
+  <CodeView {...defaultProps} {...props}>
+    {textValue}
+  </CodeView>
+), { providerTheme: NextGenTheme });
 
 beforeEach(() => {
   const mockClipboard = {
@@ -153,7 +161,7 @@ test('renders CodeView component with highlighted code', () => {
 
 test('isNextGen prop renders CodeView component with next-gen theme', () => {
   const children = ' ';
-  getComponent({ children, isNextGen: true, language: 'json' });
+  getComponentNextGen({ children, language: 'json' });
   const codeViewElement = screen.getByTestId(testId);
-  expect(codeViewElement).toHaveTextContent('JSON');
+  expect(codeViewElement).toHaveClass('is-next-gen');
 });

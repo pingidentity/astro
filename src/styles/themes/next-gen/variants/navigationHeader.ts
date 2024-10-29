@@ -36,7 +36,7 @@ const logoBand = {
 const headerPlaceholder = {
   fontSize: 'lg',
   ml: 'md',
-  color: 'text.primary',
+  color: 'text.secondary',
   lineHeight: 'body',
   fontWeight: '1',
   '&.is-hovered': {
@@ -51,8 +51,8 @@ const navigationHeader = {
   container: {
     fontFamily: 'standard',
     borderBottom: '1px solid',
-    borderColor: 'gray-300',
-    bg: '#fff',
+    borderColor: 'border.base',
+    backgroundColor: 'background.base',
     height: '4.5rem',
     justifyContent: 'center',
   },
@@ -61,8 +61,10 @@ const navigationHeader = {
     maxWidth: '1540px',
     mx: 'auto',
     width: '100%',
+    backgroundColor: 'background.base',
   },
   dropdownMenu: {
+    backgroundColor: 'background.base',
     maxWidth: 'unset',
     p: 'sm',
     '& > li': {

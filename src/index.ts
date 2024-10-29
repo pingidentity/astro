@@ -80,6 +80,8 @@ export { default as IconButton } from './components/IconButton';
 export * from './components/IconButton';
 export { default as IconButtonToggle } from './components/IconButtonToggle';
 export * from './components/IconButtonToggle';
+export { default as IconWrapper } from './components/IconWrapper';
+export * from './components/IconWrapper';
 export { default as Image } from './components/Image';
 export * from './components/Image';
 export { default as ImageUploadField } from './components/ImageUploadField';
@@ -191,10 +193,8 @@ export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
 export { default as TreeView } from './components/TreeView';
 export * from './components/TreeView';
+export { default as NextGenDarkTheme } from './styles/themeOverrides/nextGenDarkMode';
 export { default as NextGenTheme } from './styles/themes/next-gen';
-
-/* eslint-enable import/export */
-
 export * from './types';
 export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
 export { Item, Section, useOverlayTriggerState, useTreeData } from 'react-stately';

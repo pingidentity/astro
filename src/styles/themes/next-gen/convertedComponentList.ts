@@ -28,10 +28,45 @@ const nextGenConvertedComponents = [
   'Text',
   'Link',
   'Card',
+  'IconWrapper',
   'ComboBoxField',
   'CodeView',
+  'Sticker Sheet',
 ];
 
-export const nextGenComponents = ['NavigationHeader'];
+export const componentSpecificNextGenBlacklist = {
+  AstroProvider: [
+    'Default',
+    'With Custom Theme Override',
+  ],
+  Badge: [
+    'Status Badge Variants',
+    'Badge With Left Slot And Icon',
+    'Callout Badges',
+    'Removable',
+  ],
+  Button: [
+    'Color Block Button',
+    'Text Icon Button',
+  ],
+  Messages: [
+    'Customization',
+  ],
+  MultivaluesField: [
+    'Condensed',
+    'Condensed With Section',
+  ],
+  PasswordField: [
+    'Success',
+  ],
+  TextField: [
+    'Success',
+  ],
+  OverlayPanel: [
+    'Expandable',
+  ],
+};
+
+export const nextGenOnlyComponents = ['NavigationHeader'];
 
 export default nextGenConvertedComponents;

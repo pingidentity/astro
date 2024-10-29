@@ -1,13 +1,22 @@
 import codeView from '../codeView/codeView';
 
-import buttons from './button';
+import { avatar } from './avatar';
+import button from './button';
+import iconWrapper from './iconWrapper';
+import { listView, listViewItem } from './listview';
+import { menu, menuItem } from './menu';
+import { message } from './messages';
+import { navBar } from './navbar';
+import { menuTab, tab, tabs } from './tabs';
 
 const fieldHelperText = {
   title: {
-    color: 'text.secondary',
     fontSize: 'sm',
     pt: '0px !important',
     mt: '.25rem',
+    '&.is-default': {
+      color: 'text.fieldHelper',
+    },
     '&.is-error': {
       color: 'critical.dark',
     },
@@ -16,47 +25,6 @@ const fieldHelperText = {
     },
     '&.is-success': {
       color: 'success.dark',
-    },
-  },
-};
-
-const message = {
-  item: {
-    maxWidth: 400,
-    pointerEvents: 'all',
-    mb: 'md',
-    p: '1.25rem',
-    wordBreak: 'break-word',
-    alignItems: 'center',
-    backgroundColor: 'blue-100',
-    borderLeftWidth: '5px',
-    borderLeftStyle: 'solid',
-    borderLeftColor: 'teal-500',
-    color: 'gray-700',
-    fontSize: '15px !important',
-    borderRadius: 4,
-    '&.is-success': {
-      bg: 'green-100',
-      borderLeftColor: 'green-500',
-      color: 'gray-700',
-    },
-    '&.is-warning': {
-      bg: 'warning.light',
-      borderLeftColor: 'yellow-500',
-      color: 'gray-700',
-    },
-    '&.is-error, > .is-error': {
-      bg: 'red-100',
-      color: 'gray-700',
-    },
-    '&.is-error, > button > svg': {
-      color: 'gray-700 !important',
-      path: {
-        fill: 'gray-700',
-      },
-    },
-    '&.is-error': {
-      borderLeftColor: 'red-500',
     },
   },
 };
@@ -82,7 +50,7 @@ const baseBadge = {
 };
 
 export const badgeDeleteButton = {
-  ...buttons.iconButtons.base,
+  ...button.iconButtons.base,
   borderRadius: '50%',
   cursor: 'pointer',
   height: 14,
@@ -219,33 +187,6 @@ const modal = {
   },
 };
 
-const tab = {
-  borderRadius: '2px',
-  pt: '.5rem',
-  '& > span': {
-    px: '1rem',
-    fontSize: '.9375rem',
-  },
-  '&.is-focused': {
-    boxShadow: 'none',
-    outline: '3px solid',
-    outlineColor: 'active',
-    outlineOffset: '1px',
-    '& > span': {
-      outline: 'none',
-    },
-  },
-  '& > div': {
-    borderBottom: '3px solid',
-    borderBottomColor: 'primary',
-    ml: '0px',
-  },
-};
-
-const menuTab = {
-  ml: '0px !important',
-};
-
 const listBox = {
   container: {
     px: 'sm',
@@ -274,82 +215,22 @@ const listBox = {
   },
 };
 
-const menuItem = {
-  item: {
-    bg: 'transparent',
-    padding: '10px 10px',
-    outline: 'none',
-    color: 'text.primary',
-    cursor: 'pointer',
-    '&.is-focused, &.is-selected, &.is-pressed': {
-      bg: 'gray-100',
-      color: 'text.primary',
-      '> *': {
-        color: 'text.primary',
-      },
-    },
-    '&.is-pressed': {
-      color: 'text.primary',
-      bg: 'lightblue',
-    },
-  },
-  separator: {
-    my: 'sm',
-  },
-};
-
 const separator = {
   base: {
-    bg: 'gray-300',
+    bg: 'border.base',
     '&.is-vertical': {
       m: '0',
     },
   },
-};
-
-
-const avatar = {
-  backgroundColor: 'lightcyan',
-  color: 'darkcyan',
-  cursor: 'pointer',
-  '&.is-orange': {
-    backgroundColor: 'lightorange',
-    color: 'darkorange',
+  navBarSeparator: {
+    my: '.5rem',
+    mx: '0px',
+    maxWidth: '236px',
+    backgroundColor: 'border.separator',
   },
-  '&.is-green': {
-    backgroundColor: 'lightgreen',
-    color: 'darkgreen',
+  navBarSubtitleSeparator: {
+    backgroundColor: 'border.separator',
   },
-  '&.is-purple': {
-    backgroundColor: 'lightpurple',
-    color: 'darkpurple',
-  },
-  '&.is-pink': {
-    backgroundColor: 'lightpink',
-    color: 'darkpink',
-  },
-  '&.is-red': {
-    backgroundColor: 'lightred',
-    color: 'darkred',
-  },
-  '&.is-yellow': {
-    backgroundColor: 'lightyellow',
-    color: 'darkyellow',
-  },
-  '&.is-cyan': {
-    backgroundColor: 'lightcyan',
-    color: 'darkcyan',
-  },
-  '&.is-teal': {
-    backgroundColor: 'lightteal',
-    color: 'darkteal',
-  },
-  display: 'flex',
-  borderRadius: '50%',
-  textAlign: 'center',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontFamily: 'standard',
 };
 
 const progressBarContainer = {
@@ -369,194 +250,15 @@ const progressBar = {
   },
 };
 
-const listViewItem = {
-  rightOfData: {
-    flexShrink: 4,
-    whiteSpace: 'nowrap',
-  },
-  iconContainer: {
-    ml: '0px',
-  },
-  styledListItem: {
-    bg: 'white',
-    '&.is-selected': {
-      bg: 'gray-100',
-    },
-    borderBottom: 'none',
-    '&.has-separator': {
-      borderBottom: '1px solid',
-      borderBottomColor: 'gray-200',
-    },
-    '&.is-hovered': {
-      bg: 'gray-100',
-    },
-    '&.is-focused': {
-      boxShadow: '0 0 0 3px inset #1a73e8',
-      bg: 'gray-100',
-    },
-    '&.is-pressed': {
-      bg: 'gray-200',
-    },
-  },
-  styledContainer: {
-    py: 'md',
-    px: 'lg',
-    bg: 'transparent',
-    '&.is-hovered': {
-      bg: 'transparent',
-      cursor: 'pointer',
-    },
-  },
-  expandableStyledListItem: {
-    pr: '1.25rem',
-    pl: 0,
-  },
-  expandableItemBody: {
-    px: '1.5rem',
-  },
-  expandableRow: {
-    '&.has-separator': {
-      borderBottom: '1px solid',
-      borderBottomColor: 'gray-300',
-    },
-  },
-};
-
-const navBarSelected = {
-  backgroundColor: 'lightblue',
-};
-
-const navBarFocus = {
-  outline: '2px solid',
-  outlineColor: 'active',
-  outlineOffset: '-2px',
-};
-
-const navBar = {
-  container: {
-    width: '252px',
-    p: 'sm',
-    backgroundColor: 'white',
-    boxShadow: '0 .5rem 1rem rgba(0, 0, 0, .15)',
-  },
-  sectionButton: {
-    '&.is-hovered': {
-      backgroundColor: 'light',
-    },
-    '&.is-pressed': {
-      backgroundColor: 'light',
-    },
-    '&.is-focused': {
-      ...navBarFocus,
-    },
-  },
-  itemButton: {
-    color: 'text.primary',
-    '&.is-focused': {
-      ...navBarFocus,
-    },
-    '&.is-hovered': {
-      backgroundColor: 'light',
-    },
-    '&.is-pressed': {
-      backgroundColor: 'light',
-      color: 'text.primary',
-    },
-    '&.is-selected': {
-      bg: 'lightblue',
-      color: 'darkblue',
-    },
-  },
-  subtitle: {
-    color: 'text.primary',
-  },
-  headerText: {
-    color: 'text.primary',
-    '.is-selected &': {
-      color: 'darkblue',
-    },
-  },
-  headerNav: {
-    color: 'text.primary',
-    '&.is-hovered': {
-      backgroundColor: 'light',
-    },
-    '&.is-focused': {
-      boxShadow: 'none',
-      WebkitBoxShadow: 'none',
-      MozBoxShadow: 'none',
-    },
-  },
-  item: {
-    px: '1rem',
-    py: '.75rem',
-    color: 'text.primary',
-    '&.is-hovered': {
-      backgroundColor: 'light',
-    },
-    '> div > svg': {
-      fill: 'text.primary',
-    },
-    '&.is-selected': {
-      ...navBarSelected,
-      '> div > svg': {
-        fill: 'darkblue',
-      },
-    },
-    '&.is-focused': {
-      outline: '2px solid',
-      outlineColor: 'active',
-      outlineOffset: '-2px',
-      boxShadow: 'none',
-      WebkitBoxShadow: 'none',
-      MozBoxShadow: 'none',
-    },
-  },
-  itemHeaderContainer: {
-    px: '1rem',
-    py: '.75rem',
-    '&.is-selected': {
-      ...navBarSelected,
-    },
-    backgroundColor: 'transparent',
-    '> svg': {
-      fill: 'text.primary',
-    },
-    '> div > svg': {
-      fill: 'text.primary',
-    },
-  },
-};
-
-const listView = {
-  container: {
-    borderRadius: '16px',
-    border: '1px solid',
-    borderColor: '#e7eef4',
-    '& > div > div': {
-      '& > div:first-of-type': {
-        '& > div > div': {
-          borderRadius: '16px 16px 0 0',
-        },
-      },
-      '& > div:last-of-type': {
-        '& > div > div': {
-          borderRadius: ' 0 0 16px 16px',
-        },
-      },
-    },
-  },
-};
-
 const dataTable = {
   container: {
     border: '1px solid',
-    borderColor: 'gray-300',
+    borderColor: 'border.base',
     borderRadius: '16px',
   },
   tableRow: {
     borderTop: '1px solid',
-    borderTopColor: 'gray-300',
+    borderTopColor: 'border.base',
     borderBottom: '0',
     pl: 'lg',
   },
@@ -576,34 +278,12 @@ const dataTable = {
   },
 };
 
-/* const codeView = {
-  wrapper: {
-    backgroundColor: 'gray-900',
-    borderRadius: '4px',
-    '> button >svg': {
-      color: 'gray-300',
-      path: {
-        fill: 'gray-300',
-      },
-    },
-    '> pre': {
-      p: 'md',
-    },
+const overlayPanel = {
+  container: {
+    backgroundColor: 'background.base',
   },
-}; */
-
-const tabs = {
-  gap: '0px',
-};
-
-const menu = {
-  p: 'sm',
-  border: '1px solid',
-  borderColor: 'gray-300',
-  item: {
-    '&.is-pressed': {
-      bg: 'blue-100',
-    },
+  innerPanel: {
+    backgroundColor: 'background.base',
   },
 };
 
@@ -625,4 +305,6 @@ export default {
   codeView,
   tabs,
   menu,
+  iconWrapper,
+  overlayPanel,
 };

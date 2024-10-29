@@ -6,8 +6,6 @@ import {
   VisuallyHidden,
 } from 'react-aria';
 import { TableStateProps } from 'react-stately';
-import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
-import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
 import {
   useTable,
   useTableCell,
@@ -25,6 +23,7 @@ import {
   useDataTableContext,
 } from '../../context/DataTableContext';
 import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import { Box, BoxProps, DataTableCellProps, DataTableColumnHeader, DataTableHeaderRowProps, DataTableProps, DataTableRowProps, GetDefaultMinWidth, Icon, Loader } from '../../index';
 
 import DataTableVirtualizer from './DataTableVirtualizer';
@@ -288,6 +287,11 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   const { column, isFirst, isLast } = props;
   const ref = useRef(null);
   const { state } = useDataTableContext();
+  const { icons } = useGetTheme();
+  const {
+    MenuUp,
+    MenuDown,
+  } = icons;
   const { columnHeaderProps } = useTableColumnHeader(
     {
       node: column,
@@ -300,9 +304,9 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   const columnProps = column.props;
   const arrowIcon = state.sortDescriptor?.direction === 'ascending'
     && column.key === state.sortDescriptor?.column ? (
-      <Icon size={24} icon={MenuUpIcon} title={{ name: 'Menu Up Icon' }} />
+      <Icon size={24} icon={MenuUp} title={{ name: 'Menu Up Icon' }} />
     ) : (
-      <Icon size={24} icon={MenuDownIcon} color="active" title={{ name: 'Menu Down Icon' }} />
+      <Icon size={24} icon={MenuDown} color="active" title={{ name: 'Menu Down Icon' }} />
     );
   const allProps = [columnHeaderProps];
 

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
-import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import { Box, Icon, Text } from '../../index';
 import { NavBarItemHeaderProps, NavBarPrimaryItemHeaderProps, NavBarSectionItemHeaderProps } from '../../types/navBar';
 
@@ -16,10 +15,12 @@ const NavBarItemHeader = ({ item }: NavBarItemHeaderProps) => {
 };
 
 const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
-  // const { item } = props;
   const { icon, key, className, heading } = item;
 
   const navBarState = useNavBarContext();
+
+  const { icons } = useGetTheme();
+  const { MenuDown, MenuUp } = icons;
 
   const {
     selectedKey,

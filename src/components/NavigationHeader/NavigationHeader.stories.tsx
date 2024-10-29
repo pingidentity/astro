@@ -5,8 +5,9 @@ import WhiteBalanceSunnyIcon from '@pingux/mdi-react/WhiteBalanceSunnyIcon';
 import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Box, Icon, IconButton, IconButtonToggle, Image, Item, Link, Menu, NavigationHeader, OverlayProvider, PopoverMenu, Separator, Text } from '../../index';
-import { pingLogoHorizontal, userImage } from '../../utils/devUtils/constants/images';
+import useGetTheme from '../../hooks/useGetTheme';
+import { Box, Icon, IconButton, IconButtonToggle, Item, Link, Menu, NavigationHeader, OverlayProvider, PopoverMenu, Separator, Text } from '../../index';
+import { userImage } from '../../utils/devUtils/constants/images';
 
 import HeaderAccountMenu from './HeaderAccountMenu';
 import NavigationHeaderReadme from './NavigationHeader.mdx';
@@ -44,8 +45,11 @@ const iconButtonSX = {
 };
 
 const placeholderSeparator = {
-  bg: 'gray-300',
+  bg: 'border.base',
   flexShrink: 0,
+  mr: '0px',
+  ml: '10px',
+  height: '28px',
 };
 
 // Breakpoints for display property
@@ -69,21 +73,19 @@ const userData:userDataProps = {
 export const Default = ({ ...args }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const { icons } = useGetTheme();
+
   return (
     <Box p="0">
       <NavigationHeader {...args} isSticky aria-labelledby="next-gen-header">
-        <Link href="#" variant="navigationHeader.logoBand">
-          <Box isRow alignItems="center" justifyContent="center" py="sm" flex="0 0 auto">
-            <Image
-              src={pingLogoHorizontal}
-              alt="Ping Identity Logo"
-              mr="md"
-              sx={{ height: '24px' }}
-            />
-            <Separator orientation="vertical" sx={placeholderSeparator} style={{ height: '28px', margin: '0' }} />
+
+        <Box isRow alignItems="center" justifyContent="center" py="sm" flex="0 0 auto">
+          {icons.pingLogoHorizontalSmall}
+          <Separator orientation="vertical" sx={placeholderSeparator} style={{ height: '28px', marginLeft: '10px' }} />
+          <Link href="#" variant="navigationHeader.logoBand">
             <Text as="h2" variant="navigationHeader.headerPlaceholder" id="next-gen-header">Marketplace</Text>
-          </Box>
-        </Link>
+          </Link>
+        </Box>
 
         <Box as="ul" isRow alignItems="center" p="0" ml="auto" flex="0 0 auto">
           <Box as="li" display={breakpointDisplaySmall}>

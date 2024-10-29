@@ -33,7 +33,7 @@ const buttonBase = {
   lineHeight: 1.5,
   borderRadius: '1.75rem',
   border: '1px solid',
-  borderColor: 'gray-300',
+  borderColor: 'border.base',
   px: '20px',
   py: '12px',
   height: '48.5px',
@@ -90,7 +90,7 @@ const secondary = {
 const tertiary = {
   ...buttonBase,
   backgroundColor: 'transparent',
-  borderColor: 'gray-300',
+  borderColor: 'border.base',
   color: 'text.secondary',
 };
 
@@ -136,17 +136,18 @@ const critical = {
 const checkboxButton = {
   ...buttonBase,
   backgroundColor: 'transparent',
-  borderColor: 'gray-300',
+  borderColor: 'border.base',
   color: 'text.secondary',
 };
 
 const checkboxActiveButton = {
   ...buttonBase,
-  backgroundColor: 'gray-500',
+  backgroundColor: 'text.primary',
   color: 'white',
 };
 
 const link = {
+  color: 'active',
   transition: 'color, .15s, ease-in-and-out',
   fontSize: 'md',
   textDecoration: 'none',

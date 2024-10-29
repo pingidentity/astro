@@ -6,6 +6,7 @@ import Highlight, { defaultProps, Language, Prism } from 'prism-react-renderer';
 
 import { Box, CopyText, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import codeViewStyle from '../../styles/themes/next-gen/codeView/codeView';
 import { CodeViewProps, PrismProps, PrismThemeProps } from '../../types/codeView';
 
@@ -18,7 +19,6 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     hasLineNumbers,
     hasNoCopyButton,
     language,
-    isNextGen,
     Prism: customPrism,
     /* istanbul ignore next */
     stylesProp,
@@ -27,12 +27,16 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
 
   const { isFocusVisible, focusProps } = useFocusRing();
   const { hoverProps, isHovered } = useHover(props);
+  const theme = useGetTheme();
+  const { themeState } = theme;
+  const { isNextGen } = themeState;
 
   const { classNames } = useStatusClasses(outerClassName, {
     isFocused: isFocusVisible,
     isHovered,
     hasLineNumbers,
     hasNoCopyButton,
+    isNextGen,
   });
 
   // Get the width for the line number element depending on the total amount of lines

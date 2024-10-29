@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { FocusRing, mergeProps } from 'react-aria';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import { PressResponder, useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Loader, TextField } from '../..';
 import { usePropWarning } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
@@ -40,6 +40,9 @@ const ComboBoxInput = forwardRef((props, ref) => {
     containerProps,
     ...mergeProps(inputProps, others),
   };
+
+  const { icons } = useGetTheme();
+  const { MenuDown } = icons;
 
   // istanbul ignore next
   useImperativeHandle(ref, () => inputRef.current);

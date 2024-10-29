@@ -13,6 +13,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { useGetTheme } from '../../hooks';
 import {
   Box,
   Link,
@@ -508,36 +509,39 @@ const thirdData = [
   },
 ];
 
-export const Default: StoryFn<NavBarProps> = () => (
-  <NavBar>
-    <Box padding="md" key="top-logo-parent">
-      <Link
-        aria-label="home link"
-        href="https://pingidentity.com"
-        target="_blank"
+export const Default: StoryFn<NavBarProps> = () => {
+  const { icons } = useGetTheme();
+  return (
+    <NavBar>
+      <Box padding="md" key="top-logo-parent">
+        <Link
+          aria-label="home link"
+          href="https://pingidentity.com"
+          target="_blank"
+        >
+          {icons.pingLogoHorizontalSmall}
+        </Link>
+      </Box>
+      <Separator m={0} backgroundColor="neutral.60" />
+      <Box
+        variant="navBar.sectionContainer"
+        paddingBottom="xl"
+        key="first-section-container"
       >
-        {logo}
-      </Link>
-    </Box>
-    <Separator m={0} backgroundColor="neutral.60" />
-    <Box
-      variant="navBar.sectionContainer"
-      paddingBottom="xl"
-      key="first-section-container"
-    >
-      <NavBarItem
-        data-id="nav-bar-item"
-        icon={GlobeIcon}
-        id="Overview"
-        key="Overview"
-        text="Overview"
-      />
-      <NavBarSection items={data} data-id="nav-bar-section" />
-      <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
-      <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
-    </Box>
-  </NavBar>
-);
+        <NavBarItem
+          data-id="nav-bar-item"
+          icon={GlobeIcon}
+          id="Overview"
+          key="Overview"
+          text="Overview"
+        />
+        <NavBarSection items={data} data-id="nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
+      </Box>
+    </NavBar>
+  );
+};
 
 Default.parameters = {
   design: {
@@ -548,7 +552,7 @@ Default.parameters = {
 
 export const Controlled: StoryFn<NavBarProps> = () => {
   const [selectedKey, setSelectedKey] = useState('Dashboard Link Group');
-
+  const { icons } = useGetTheme();
   const customData = [
     {
       icon: Earth,
@@ -580,7 +584,7 @@ export const Controlled: StoryFn<NavBarProps> = () => {
           href="https://pingidentity.com"
           target="_blank"
         >
-          {logo}
+          {icons.pingLogoHorizontalSmall}
         </Link>
       </Box>
       <Separator m="0" backgroundColor="neutral.60" key="top-separator" />
@@ -604,33 +608,36 @@ export const Controlled: StoryFn<NavBarProps> = () => {
   );
 };
 
-export const AutoCollapse: StoryFn<NavBarProps> = () => (
-  <NavBar isAutoСollapsible>
-    <Box padding="md" key="top-logo-parent">
-      <Link
-        aria-label="home link"
-        href="https://pingidentity.com"
-        target="_blank"
+export const AutoCollapse: StoryFn<NavBarProps> = () => {
+  const { icons } = useGetTheme();
+  return (
+    <NavBar isAutoСollapsible>
+      <Box padding="md" key="top-logo-parent">
+        <Link
+          aria-label="home link"
+          href="https://pingidentity.com"
+          target="_blank"
+        >
+          {icons.pingLogoHorizontalSmall}
+        </Link>
+      </Box>
+      <Separator m={0} backgroundColor="neutral.60" />
+      <Box
+        variant="navBar.sectionContainer"
+        paddingBottom="xl"
+        key="first-section-container"
       >
-        {logo}
-      </Link>
-    </Box>
-    <Separator m={0} backgroundColor="neutral.60" />
-    <Box
-      variant="navBar.sectionContainer"
-      paddingBottom="xl"
-      key="first-section-container"
-    >
-      <NavBarItem
-        data-id="nav-bar-item"
-        icon={GlobeIcon}
-        id="Overview"
-        key="Overview"
-        text="Overview"
-      />
-      <NavBarSection items={data} data-id="nav-bar-section" />
-      <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
-      <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
-    </Box>
-  </NavBar>
-);
+        <NavBarItem
+          data-id="nav-bar-item"
+          icon={GlobeIcon}
+          id="Overview"
+          key="Overview"
+          text="Overview"
+        />
+        <NavBarSection items={data} data-id="nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
+      </Box>
+    </NavBar>
+  );
+};
