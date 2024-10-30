@@ -6,6 +6,7 @@ import {
   VisuallyHidden,
 } from 'react-aria';
 import { TableStateProps } from 'react-stately';
+import { useHover } from '@react-aria/interactions';
 import {
   useTable,
   useTableCell,
@@ -55,7 +56,15 @@ const ROW_HEIGHTS = {
 };
 
 const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
+  const {
+    defaultSelectedKeys = [],
+    selectionMode,
+    selectedKeys,
+    ...others
+  } = props;
+
   const direction = 'ltr';
+
   const {
     onAction,
     scale = 'large',
@@ -79,8 +88,14 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
   const [isInResizeMode, setIsInResizeMode] = useState(false);
   // entering resizing/exiting resizing doesn't trigger a render
   // with table layout, so we need to track it here
+
+  // there appears to be a quirky feature in useTableState where uncontrolled selection
+  // will not work unless the defaultSelectedKeys array is supplied.
   const state = useTableState({
-    ...props,
+    ...others,
+    selectionMode,
+    selectedKeys,
+    defaultSelectedKeys: selectedKeys ? undefined : defaultSelectedKeys,
   } as TableStateProps<object>);
 
   const domRef = useLocalOrForwardRef(ref);
@@ -361,6 +376,11 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
     ref,
   );
 
+  const isSelectable = state.selectionManager.selectionMode !== 'none';
+
+  const isSelected = state.selectionManager.isSelected(item.key);
+  const isDisabled = state.disabledKeys.has(item.key);
+
   const {
     isFocusVisible: isFocusVisibleWithin,
     focusProps: focusWithinProps,
@@ -368,17 +388,25 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
 
   const { isFocusVisible, focusProps } = useFocusRing();
 
-  const props = mergeProps(rowProps, otherProps, focusWithinProps, focusProps);
+  const { hoverProps, isHovered } = useHover({});
+
+  const props = mergeProps(otherProps, focusWithinProps, focusProps, rowProps, hoverProps);
 
   const { classNames } = useStatusClasses('', {
     'is-row-focus-visible': isFocusVisible || isFocusVisibleWithin,
+    isSelectable,
+    isSelected,
+    isHovered,
+    isDisabled,
   });
+
+  const variant = isSelectable ? 'dataTable.selectableTableRow' : 'dataTable.tableRow';
 
   return (
     <Box
       {...props as BoxProps}
       ref={ref}
-      variant="dataTable.tableRow"
+      variant={variant}
       className={classNames}
     >
       {children}

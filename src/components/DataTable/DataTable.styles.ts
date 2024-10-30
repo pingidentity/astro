@@ -55,6 +55,24 @@ const tableRow = {
   },
 };
 
+const selectableTableRow = {
+  ...tableRow,
+  bg: 'accent.99',
+  '&.is-selected': {
+    bg: 'white',
+  },
+  '&.is-hovered': {
+    bg: 'white',
+    cursor: 'pointer',
+  },
+  '&.is-focused': {
+    boxShadow: '0 0 0 1px inset #D033FF',
+  },
+  '&.is-disabled': {
+    opacity: '0.5 !important',
+  },
+};
+
 const tableHeadWrapper = {
   borderLeftWidth: '0px',
   borderLeftStyle: 'solid',
@@ -137,6 +155,7 @@ const tableMenu = {
 };
 
 export default {
+  selectableTableRow,
   tableBody,
   tableHeadWrapper,
   tableCenteredWrapper,
