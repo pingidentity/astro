@@ -57,6 +57,10 @@ export interface DataTableVirtualizerProps<T extends object, V> {
 }
 
 export interface DataTableProps {
+  onSelectedKeyChange?: () => void,
+  selectedKeys?: Key[],
+  defaultSelectedKeys?: Key[],
+  selectionMode?: 'single' | 'none'
   'aria-label'?: string,
   onAction?: () => void,
   density?: 'compact' | 'medium' | 'spacious',
