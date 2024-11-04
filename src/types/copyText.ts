@@ -26,8 +26,6 @@ export interface CopyTextProps extends HoverProps, TestingAttributes {
     iconButtonProps?: Omit<IconButtonProps, 'onPress'>
 }
 
-export interface CopyButtonProps {
+export interface CopyButtonProps extends IconButtonProps {
     iconProps?: IconProps,
-    onPress?: () => void;
-    sx?: ThemeUIStyleObject;
 }
