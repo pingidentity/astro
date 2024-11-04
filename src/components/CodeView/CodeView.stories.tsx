@@ -113,7 +113,7 @@ export default {
 
 export const Default: StoryFn<CodeViewProps> = (args: CodeViewProps) => {
   return (
-    <CodeView {...args} />
+    <CodeView {...args} iconButtonProps={{ 'data-testid': 'custom_data_id' }} />
   );
 };
 

@@ -3,6 +3,7 @@ import { Language, Prism as PrismRR } from 'prism-react-renderer';
 import Prism from 'prismjs';
 import { ThemeUICSSObject } from 'theme-ui';
 
+import { IconButtonProps } from './iconButton';
 import { HoverProps, StyleProps } from './shared';
 
 export type PrismProps = typeof PrismRR & typeof Prism;
@@ -15,7 +16,8 @@ export interface CodeViewProps extends HoverProps, StyleProps {
   hasNoCopyButton?: boolean;
   language?: Language;
   Prism?: PrismProps;
-  sx?: ThemeUICSSObject
-  stylesProp?: ThemeUICSSObject
+  sx?: ThemeUICSSObject;
+  stylesProp?: ThemeUICSSObject;
   isNextGen?: boolean;
+  iconButtonProps?: IconButtonProps;
 }

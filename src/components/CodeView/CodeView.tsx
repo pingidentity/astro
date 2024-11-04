@@ -22,6 +22,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     Prism: customPrism,
     /* istanbul ignore next */
     stylesProp,
+    iconButtonProps,
     ...others
   } = props;
 
@@ -89,6 +90,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
             ref={ref}
             mode="rightText"
             textToCopy={children}
+            iconButtonProps={iconButtonProps}
           >
             Copy
           </CopyText>
@@ -123,6 +125,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
         variant: 'codeView.wrapper',
         ...others,
       }}
+      iconButtonProps={iconButtonProps}
     >
       {content}
     </CopyText>
