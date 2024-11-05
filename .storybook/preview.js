@@ -12,11 +12,11 @@ const withThemeProvider = (Story, context) => {
 
   // we will be creating a hook in a follow up ticket to this.
   let storyTheme = theme
-  let style = {padding: '50px'}
-  if (selectedTheme === themes.NEXT_GEN){
+  let style = { padding: '50px' }
+  if (selectedTheme === themes.NEXT_GEN) {
     storyTheme = NextGenTheme
   }
-  else if (selectedTheme === themes.NEXT_GEN_DARK){
+  else if (selectedTheme === themes.NEXT_GEN_DARK) {
     storyTheme = NextGenDarkTheme
     style = {
       padding: '50px',
@@ -28,27 +28,27 @@ const withThemeProvider = (Story, context) => {
     context,
     selectedTheme,
   )
-  
+
   return (
     <AstroProvider theme={storyTheme} bg="background.base">
       <div style={style} >
         {
           showComingSoonMessage ?
-          <Box
-            sx={{
-              height: '200px',
-              backgroundColor: 'gray-100',
-              border: '1px solid',
-              borderColor: 'border.base',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
-            <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
-          </Box>
-          :
-          <Story {...context} />
+            <Box
+              sx={{
+                height: '200px',
+                backgroundColor: 'gray-100',
+                border: '1px solid',
+                borderColor: 'border.base',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
+              <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
+            </Box>
+            :
+            <Story {...context} />
         }
       </div>
     </AstroProvider>

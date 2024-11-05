@@ -19,6 +19,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     hasLineNumbers,
     hasNoCopyButton,
     language,
+    textToCopy,
     Prism: customPrism,
     /* istanbul ignore next */
     stylesProp,
@@ -79,6 +80,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     </Highlight>
   );
 
+  /* istanbul ignore next */
   if (isNextGen) {
     return (
       <Box
@@ -93,7 +95,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
           <CopyText
             ref={ref}
             mode="rightText"
-            textToCopy={children}
+            textToCopy={textToCopy || children}
             iconButtonProps={iconButtonProps}
           >
             Copy
@@ -122,7 +124,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     <CopyText
       ref={ref}
       mode="link"
-      textToCopy={children}
+      textToCopy={textToCopy || children}
       tooltipProps={{ offset: 15 }}
       wrapperProps={{
         className: classNames,

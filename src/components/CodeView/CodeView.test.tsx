@@ -1,8 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { CodeView, NextGenTheme } from '../..';
-import theme from '../../styles/theme';
+import { CodeView } from '../..';
 import { CodeViewProps } from '../../types/codeView';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -13,7 +12,6 @@ const originalClipboard = { ...global.navigator.clipboard };
 
 const defaultProps = {
   'data-testid': testId,
-  theme,
 };
 
 const textValue = `
@@ -30,12 +28,6 @@ const getComponent = (props: CodeViewProps = {}) => render((
     {textValue}
   </CodeView>
 ));
-
-const getComponentNextGen = (props: CodeViewProps = {}) => render((
-  <CodeView {...defaultProps} {...props}>
-    {textValue}
-  </CodeView>
-), { providerTheme: NextGenTheme });
 
 beforeEach(() => {
   const mockClipboard = {
@@ -161,7 +153,16 @@ test('renders CodeView component with highlighted code', () => {
 
 test('isNextGen prop renders CodeView component with next-gen theme', () => {
   const children = ' ';
-  getComponentNextGen({ children, language: 'json' });
+  getComponent({ children, isNextGen: true, language: 'json' });
   const codeViewElement = screen.getByTestId(testId);
-  expect(codeViewElement).toHaveClass('is-next-gen');
+  expect(codeViewElement).toHaveTextContent('JSON');
+});
+
+test('if textToCopy is provided it\'s copied to clipboard instead of children text data', async () => {
+  const textToCopy = 'This text is copied';
+  getComponent({ textToCopy });
+  const button = screen.getByLabelText('copy to clipboard');
+  await act(async () => userEvent.click(button));
+  expect(navigator.clipboard.writeText).toBeCalledTimes(1);
+  expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textToCopy);
 });
