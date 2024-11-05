@@ -6,6 +6,7 @@ import Highlight, { defaultProps, Language, Prism } from 'prism-react-renderer';
 
 import { Box, CopyText, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import codeViewStyle from '../../styles/themes/next-gen/codeView/codeView';
 import { CodeViewProps, PrismProps, PrismThemeProps } from '../../types/codeView';
 
@@ -18,21 +19,26 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     hasLineNumbers,
     hasNoCopyButton,
     language,
-    isNextGen,
+    textToCopy,
     Prism: customPrism,
     /* istanbul ignore next */
     stylesProp,
+    iconButtonProps,
     ...others
   } = props;
 
   const { isFocusVisible, focusProps } = useFocusRing();
   const { hoverProps, isHovered } = useHover(props);
+  const theme = useGetTheme();
+  const { themeState } = theme;
+  const { isNextGen } = themeState;
 
   const { classNames } = useStatusClasses(outerClassName, {
     isFocused: isFocusVisible,
     isHovered,
     hasLineNumbers,
     hasNoCopyButton,
+    isNextGen,
   });
 
   // Get the width for the line number element depending on the total amount of lines
@@ -74,6 +80,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     </Highlight>
   );
 
+  /* istanbul ignore next */
   if (isNextGen) {
     return (
       <Box
@@ -88,7 +95,8 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
           <CopyText
             ref={ref}
             mode="rightText"
-            textToCopy={children}
+            textToCopy={textToCopy || children}
+            iconButtonProps={iconButtonProps}
           >
             Copy
           </CopyText>
@@ -116,13 +124,14 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     <CopyText
       ref={ref}
       mode="link"
-      textToCopy={children}
+      textToCopy={textToCopy || children}
       tooltipProps={{ offset: 15 }}
       wrapperProps={{
         className: classNames,
         variant: 'codeView.wrapper',
         ...others,
       }}
+      iconButtonProps={iconButtonProps}
     >
       {content}
     </CopyText>

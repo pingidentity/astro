@@ -1,8 +1,9 @@
 /* eslint-disable testing-library/no-node-access */
-import React from 'react';
+import React, { useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { act, act as actDom, act as actHooks, fireEvent, render, renderHook, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import {
   DataTableBody,
@@ -43,19 +44,42 @@ const columns = [
 const rows = [
   {
     id: 2,
+    key: 2,
     country: 'Canada',
     population: 37000000,
     continent: 'North America',
   },
   {
     id: 1,
+    key: 1,
     country: 'USA',
     population: 320000000,
     continent: 'North America',
   },
-  { id: 3, country: 'China', population: 1398000000, continent: 'Asia' },
-  { id: 4, country: 'France', population: 67000000, continent: 'Europe' },
+  { id: 3, key: 3, country: 'China', population: 1398000000, continent: 'Asia' },
+  { id: 4, key: 4, country: 'France', population: 67000000, continent: 'Europe' },
 ];
+
+const ControlledDataTable = props => {
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  return (
+    <DataTable {...props} selectionMode="single" selectedKeys={selectedKeys} onSelectionChange={setSelectedKeys}>
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn>{column.name}</DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  );
+};
+
 
 const getCell = (view, text) => {
   // Find by text, then go up to the element with the cell role.
@@ -174,6 +198,16 @@ describe('Static DataTable', () => {
     expect(cells[7]).toHaveAttribute('aria-colindex', '3');
   });
 
+  test('should select with mouse click', () => {
+    staticDataTable();
+    const thisItem = screen.getAllByRole('row');
+
+    expect(thisItem[2]).not.toHaveClass('is-selected');
+    userEvent.click(thisItem[2]);
+    const updatedItem = screen.queryAllByRole('row')[2];
+    expect(updatedItem).not.toHaveClass('is-selected');
+  });
+
   test('should move focus to the next cell in a row with ArrowRight', () => {
     const view = staticDataTable();
     act(() => {
@@ -210,6 +244,120 @@ describe('Static DataTable', () => {
     });
     moveFocus('ArrowDown');
     expect(getCell(view, 'Europe')).toHaveFocus();
+  });
+});
+
+describe('Selectable DataTable', () => {
+  const testId = 'staticTable';
+
+  const testCallback = jest.fn();
+  const defaultProps = {
+    'aria-label': 'Default table with static content',
+    width: '100%',
+    height: '100%',
+    'data-testid': testId,
+    selectionMode: 'single',
+    defaultSelectedKeys: [1],
+    onSelectionChange: testCallback,
+  };
+
+  const staticDataTable = props => render(
+    <DataTable {...defaultProps} {...props}>
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn>{column.name}</DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => <DataTableCell>{item[columnKey]}</DataTableCell>}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>,
+  );
+
+  test('should change selection on mouse press', () => {
+    staticDataTable({});
+    const thisItem = screen.getAllByRole('row');
+
+    expect(thisItem[1]).not.toHaveClass('is-selected');
+    userEvent.click(thisItem[1]);
+    expect(thisItem[1]).toHaveClass('is-selected');
+    expect(thisItem[1]).toHaveClass('is-selectable');
+  });
+
+  test('defaultSelectedKeys works', () => {
+    staticDataTable({ defaultSelectedKeys: [2] });
+    const thisItem = screen.getAllByRole('row');
+
+    expect(thisItem[1]).toHaveClass('is-selected');
+  });
+
+  test('disabledKeys', () => {
+    staticDataTable({ disabledKeys: [2] });
+    const thisItem = screen.getAllByRole('row');
+    expect(thisItem[1]).not.toHaveClass('is-selected');
+    userEvent.click(thisItem[1]);
+    expect(thisItem[1]).not.toHaveClass('is-selected');
+  });
+
+  test('onSelectedChange callback works as expected', () => {
+    staticDataTable({ disabledKeys: [2] });
+    const thisItem = screen.getAllByRole('row');
+    expect(thisItem[1]).not.toHaveClass('is-selected');
+    userEvent.click(thisItem[1]);
+    expect(testCallback).toHaveBeenCalled();
+    expect(thisItem[1]).not.toHaveClass('is-selected');
+  });
+});
+
+describe('Controlled Selectable DataTable', () => {
+  const testId = 'staticTable';
+  const props = {
+    'aria-label': 'Default table with static content',
+    width: '100%',
+    height: '100%',
+    'data-testid': testId,
+    selectionMode: 'single',
+  };
+
+  test('should select with mouse click', () => {
+    render(<ControlledDataTable {...props} />);
+    const thisItem = screen.getAllByRole('row');
+
+    expect(thisItem[2]).not.toHaveClass('is-selected');
+    userEvent.click(thisItem[2]);
+    const updatedItem = screen.queryAllByRole('row')[2];
+    expect(updatedItem).toHaveClass('is-selected');
+  });
+
+  test('should select with keyboard', () => {
+    render(<ControlledDataTable {...props} />);
+    const thisItem = screen.getAllByRole('row');
+    userEvent.tab();
+
+    expect(thisItem[2]).not.toHaveClass('is-selected');
+    moveFocus('ArrowDown');
+    fireEvent.keyDown(thisItem[2], { key: ' ' });
+    const updatedItem = screen.queryAllByRole('row')[2];
+    expect(updatedItem).toHaveClass('is-selected');
+  });
+
+  test('disabledKeys', () => {
+    const theseProps = {
+      disabledKeys: [2],
+      'aria-label': 'Default table with static content',
+      width: '100%',
+      height: '100%',
+      'data-testid': testId,
+    };
+    render(<ControlledDataTable {...theseProps} />);
+    const thisItem = screen.getAllByRole('row');
+    expect(thisItem[1]).not.toHaveClass('is-selected');
+    userEvent.click(thisItem[1]);
+    expect(thisItem[1]).not.toHaveClass('is-selected');
   });
 });
 

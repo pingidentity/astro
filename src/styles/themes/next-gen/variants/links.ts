@@ -42,7 +42,18 @@ const sideNav = {
   },
 };
 
+const footerLinks = {
+  ...sideNav,
+};
+
+const footerHeader = {
+  ...footerLinks,
+  fontWeight: '2',
+};
+
 export default {
   nextGen,
   sideNav,
+  footerLinks,
+  footerHeader,
 };

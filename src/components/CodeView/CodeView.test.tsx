@@ -157,3 +157,12 @@ test('isNextGen prop renders CodeView component with next-gen theme', () => {
   const codeViewElement = screen.getByTestId(testId);
   expect(codeViewElement).toHaveTextContent('JSON');
 });
+
+test('if textToCopy is provided it\'s copied to clipboard instead of children text data', async () => {
+  const textToCopy = 'This text is copied';
+  getComponent({ textToCopy });
+  const button = screen.getByLabelText('copy to clipboard');
+  await act(async () => userEvent.click(button));
+  expect(navigator.clipboard.writeText).toBeCalledTimes(1);
+  expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textToCopy);
+});

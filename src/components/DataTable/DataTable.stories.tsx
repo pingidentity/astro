@@ -46,6 +46,36 @@ export default {
         disable: true,
       },
     },
+    selectedKeys: {
+      description: 'The array of keys that is currently selected. (Controlled version).',
+      control: {
+        disable: true,
+      },
+    },
+    disabledKeys: {
+      description: 'The array of keys that are unabled to be selected.',
+      control: {
+        disable: true,
+      },
+    },
+    defaultSelectedKeys: {
+      description: 'The array of keys that is selected by default. (Uncontrolled version).',
+      control: {
+        disable: true,
+      },
+    },
+    onSelectionChange: {
+      description: 'A callback function that fires when the selection changes.',
+      control: {
+        disable: true,
+      },
+    },
+    selectionMode: {
+      description: 'Options are "none" and "single". Whether or not the DataTable support selection',
+      control: {
+        disable: true,
+      },
+    },
     width: {
       description: 'Sets the width of the data table.',
       control: {
@@ -438,6 +468,147 @@ Sortable.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+};
+
+
+export const Selection = args => {
+  const columns = [
+    { name: 'Country', key: 'country' },
+    { name: 'Population', key: 'population' },
+    { name: 'Continent', key: 'continent' },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      country: 'USA',
+      population: '320,000,000',
+      continent: 'North America',
+    },
+    {
+      id: 2,
+      country: 'Canada',
+      population: '37,000,000',
+      continent: 'North America',
+    },
+    { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
+    { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
+    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    { id: 6, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
+    { id: 7, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
+  ];
+
+  return (
+    <DataTable
+      {...args}
+      aria-label="Dynamic table"
+      density="compact"
+      scale="medium"
+      selectionMode="single"
+      disabledKeys={[3]}
+      defaultSelectedKeys={[1]}
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn
+            {...getCellProps(column.key, 'center')}
+            minWidth={155}
+          >
+            {column.name}
+
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell
+                {...getCellProps(columnKey, 'left')}
+              >
+                {item[columnKey]}
+              </DataTableCell>
+            )}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  );
+};
+
+export const ControlledSelection = args => {
+  const [selectedKeys, setSelectedKeys] = useState([2]);
+  const columns = [
+    { name: 'Country', key: 'country' },
+    { name: 'Population', key: 'population' },
+    { name: 'Continent', key: 'continent' },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      country: 'USA',
+      population: '320,000,000',
+      continent: 'North America',
+    },
+    {
+      id: 2,
+      country: 'Canada',
+      population: '37,000,000',
+      continent: 'North America',
+    },
+    { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
+    { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
+    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    { id: 6, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
+    { id: 7, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
+  ];
+
+  const list = useAsyncList({
+    async load() {
+      return {
+        items: rows,
+      };
+    },
+  });
+
+  return (
+    <DataTable
+      {...args}
+      aria-label="Dynamic table"
+      density="compact"
+      scale="medium"
+      selectionMode="single"
+      disabledKeys={[3]}
+      selectedKeys={selectedKeys}
+      onSelectionChange={setSelectedKeys}
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn
+            {...getCellProps(column.key, 'center')}
+            minWidth={155}
+          >
+            {column.name}
+
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={list.items}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell
+                {...getCellProps(columnKey, 'left')}
+              >
+                {item[columnKey]}
+              </DataTableCell>
+            )}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  );
 };
 
 export const AsyncLoading = args => {

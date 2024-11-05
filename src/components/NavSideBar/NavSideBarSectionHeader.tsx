@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
-import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import { Box, Button, Icon, Text } from '../../index';
 import { NavSideBarSectionHeaderProps } from '../../types';
 
@@ -17,6 +16,12 @@ const NavSideBarSectionHeader = (props: NavSideBarSectionHeaderProps) => {
     onExpandedChange,
     ...others
   } = props;
+
+  const { icons } = useGetTheme();
+  const {
+    MenuUp,
+    MenuDown,
+  } = icons;
 
   const navBarState = useNavBarContext();
   const { expandedKeys, setExpandedKeys, navStyles, selectedKey } = navBarState;

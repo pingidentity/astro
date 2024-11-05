@@ -1,12 +1,15 @@
+import { themes } from '../utils/devUtils/constants/themes';
+
 import breakpoints from './breakpoints';
 import colors, { accent, focus, line, shadow } from './colors';
 import forms from './forms';
+import sizes from './sizes';
 import spacing from './spacing';
 import { fontSizes, fontWeights, textColors } from './text';
 import { badges, buttons, cards, grids, images, links, text, variants } from './variants';
 
 export default {
-  name: 'Astro',
+  name: themes.ASTRO,
   space: spacing,
   colors: {
     ...colors,
@@ -25,17 +28,7 @@ export default {
   lineHeights: {
     md: '1.5',
   },
-  sizes: {
-    buttonHeight: 36,
-    column: 400,
-    container: {
-      xs: '400px',
-      sm: '550px',
-      md: '800px',
-      lg: '1200px',
-      full: '100%',
-    },
-  },
+  sizes,
   shadows: {
     standard: `0 1px 3px ${shadow}`,
     row: `0 0 9px ${accent[95]}`,

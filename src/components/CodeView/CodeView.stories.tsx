@@ -113,7 +113,7 @@ export default {
 
 export const Default: StoryFn<CodeViewProps> = (args: CodeViewProps) => {
   return (
-    <CodeView {...args} />
+    <CodeView {...args} iconButtonProps={{ 'data-testid': 'custom_data_id' }} />
   );
 };
 
@@ -216,6 +216,18 @@ WithAdditionalLanguage.parameters = {
   docs: {
     storyDescription: 'All available languages are listed [here](https://github.com/PrismJS/prism/tree/master/components).',
   },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const WithChangedCopiedValue: StoryFn<CodeViewProps> = (args: CodeViewProps) => (
+  <CodeView textToCopy="Sed ut perspiciatis" {...args} />
+);
+
+WithChangedCopiedValue.parameters = {
   a11y: {
     config: {
       rules: [{ id: 'color-contrast', enabled: false }],

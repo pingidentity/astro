@@ -6,8 +6,7 @@ import {
   VisuallyHidden,
 } from 'react-aria';
 import { TableStateProps } from 'react-stately';
-import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
-import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
+import { useHover } from '@react-aria/interactions';
 import {
   useTable,
   useTableCell,
@@ -25,6 +24,7 @@ import {
   useDataTableContext,
 } from '../../context/DataTableContext';
 import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
 import { Box, BoxProps, DataTableCellProps, DataTableColumnHeader, DataTableHeaderRowProps, DataTableProps, DataTableRowProps, GetDefaultMinWidth, Icon, Loader } from '../../index';
 
 import DataTableVirtualizer from './DataTableVirtualizer';
@@ -56,7 +56,15 @@ const ROW_HEIGHTS = {
 };
 
 const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
+  const {
+    defaultSelectedKeys = [],
+    selectionMode,
+    selectedKeys,
+    ...others
+  } = props;
+
   const direction = 'ltr';
+
   const {
     onAction,
     scale = 'large',
@@ -80,8 +88,14 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
   const [isInResizeMode, setIsInResizeMode] = useState(false);
   // entering resizing/exiting resizing doesn't trigger a render
   // with table layout, so we need to track it here
+
+  // there appears to be a quirky feature in useTableState where uncontrolled selection
+  // will not work unless the defaultSelectedKeys array is supplied.
   const state = useTableState({
-    ...props,
+    ...others,
+    selectionMode,
+    selectedKeys,
+    defaultSelectedKeys: selectedKeys ? undefined : defaultSelectedKeys,
   } as TableStateProps<object>);
 
   const domRef = useLocalOrForwardRef(ref);
@@ -288,6 +302,11 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   const { column, isFirst, isLast } = props;
   const ref = useRef(null);
   const { state } = useDataTableContext();
+  const { icons } = useGetTheme();
+  const {
+    MenuUp,
+    MenuDown,
+  } = icons;
   const { columnHeaderProps } = useTableColumnHeader(
     {
       node: column,
@@ -300,9 +319,9 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   const columnProps = column.props;
   const arrowIcon = state.sortDescriptor?.direction === 'ascending'
     && column.key === state.sortDescriptor?.column ? (
-      <Icon size={24} icon={MenuUpIcon} title={{ name: 'Menu Up Icon' }} />
+      <Icon size={24} icon={MenuUp} title={{ name: 'Menu Up Icon' }} />
     ) : (
-      <Icon size={24} icon={MenuDownIcon} color="active" title={{ name: 'Menu Down Icon' }} />
+      <Icon size={24} icon={MenuDown} color="active" title={{ name: 'Menu Down Icon' }} />
     );
   const allProps = [columnHeaderProps];
 
@@ -357,6 +376,11 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
     ref,
   );
 
+  const isSelectable = state.selectionManager.selectionMode !== 'none';
+
+  const isSelected = state.selectionManager.isSelected(item.key);
+  const isDisabled = state.disabledKeys.has(item.key);
+
   const {
     isFocusVisible: isFocusVisibleWithin,
     focusProps: focusWithinProps,
@@ -364,17 +388,25 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
 
   const { isFocusVisible, focusProps } = useFocusRing();
 
-  const props = mergeProps(rowProps, otherProps, focusWithinProps, focusProps);
+  const { hoverProps, isHovered } = useHover({});
+
+  const props = mergeProps(otherProps, focusWithinProps, focusProps, rowProps, hoverProps);
 
   const { classNames } = useStatusClasses('', {
     'is-row-focus-visible': isFocusVisible || isFocusVisibleWithin,
+    isSelectable,
+    isSelected,
+    isHovered,
+    isDisabled,
   });
+
+  const variant = isSelectable ? 'dataTable.selectableTableRow' : 'dataTable.tableRow';
 
   return (
     <Box
       {...props as BoxProps}
       ref={ref}
-      variant="dataTable.tableRow"
+      variant={variant}
       className={classNames}
     >
       {children}

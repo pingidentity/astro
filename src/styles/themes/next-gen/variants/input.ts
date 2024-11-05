@@ -7,17 +7,17 @@ const defaultFocus = {
 };
 
 const readOnlyandDisabledStyles = {
-  backgroundColor: 'gray-100',
+  backgroundColor: 'disabled',
   border: '1px solid',
-  borderColor: 'border.base',
+  borderColor: 'border.input',
   opacity: 1,
 };
 
 export const input: ThemeUICSSObject = {
   fontSize: 'md',
   p: '0.75rem',
-  backgroundColor: 'white',
-  borderColor: 'border.base',
+  backgroundColor: 'background.base',
+  borderColor: 'border.input',
   '&.is-focused': {
     ...defaultFocus,
   },
@@ -48,7 +48,7 @@ export const fieldControlWrapper = {
   '> textarea': {
     borderRadius: '4px',
     border: '1px solid',
-    borderColor: 'border.base !important',
+    borderColor: 'border.input !important',
     outline: 'none',
   },
   '&.is-disabled': {
@@ -80,18 +80,18 @@ export const fieldControlWrapper = {
     borderLeftWidth: 1,
     borderRadius: '4px',
     border: '1px solid',
-    borderColor: 'border.base',
+    borderColor: 'border.input',
   },
   '&.is-read-only': {
     '> input': {
       backgroundColor: 'gray-100',
       border: '1px solid',
-      borderColor: 'border.base !important',
+      borderColor: 'border.input !important',
     },
     '> textarea': {
       backgroundColor: 'gray-100',
       border: '1px solid',
-      borderColor: 'border.base !important',
+      borderColor: 'border.input !important',
     },
     '&:after': {
       display: 'none',
@@ -111,7 +111,7 @@ input.fieldControlWrapper = {
 
 input.multivaluesWrapper = {
   ...fieldControlWrapper,
-  borderColor: 'border.base',
+  borderColor: 'border.input',
   borderStyle: 'solid',
   borderWidth: 1,
   flexDirection: 'row !important' as 'row',

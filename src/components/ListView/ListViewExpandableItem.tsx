@@ -1,8 +1,7 @@
 import React, { useContext, useRef } from 'react';
-import MenuDownIcon from '@pingux/mdi-react/MenuDownIcon';
-import MenuUpIcon from '@pingux/mdi-react/MenuUpIcon';
 
 import useExpandableListViewItem from '../../hooks/useExpandableListViewItem/useExpandableListViewItem';
+import useGetTheme from '../../hooks/useGetTheme';
 import { Box, Icon } from '../../index';
 import { ListViewExpandableItemProps } from '../../types/listView';
 
@@ -20,6 +19,9 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
     isFocusable,
     className,
   } = props;
+
+  const { icons } = useGetTheme();
+  const { MenuDown, MenuUp } = icons;
 
   const { state } = useContext(ListViewContext);
 
@@ -69,7 +71,7 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
           {item.rendered && item.rendered[0]}
           <Icon
             sx={{ ml: 'auto' }}
-            icon={isExpanded ? MenuUpIcon : MenuDownIcon}
+            icon={isExpanded ? MenuUp : MenuDown}
             title={{ name: `${key} expand icon button` }}
           />
         </Box>

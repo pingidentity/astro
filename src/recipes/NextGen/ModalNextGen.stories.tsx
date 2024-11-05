@@ -2,11 +2,9 @@ import React from 'react';
 
 import { useModalState } from '../../hooks';
 import {
-  AstroProvider,
   Box,
   Button,
   Modal,
-  NextGenTheme,
   OverlayProvider,
   Text,
 } from '../../index';
@@ -18,12 +16,11 @@ export default {
 export const Default = () => {
   const state = useModalState();
   return (
-    <AstroProvider themeOverrides={[NextGenTheme]}>
-      <OverlayProvider>
-        <Button onPress={state.open} aria-label="Open modal">
-          Open Modal
-        </Button>
-        {(state.isOpen || state.isTransitioning) && (
+    <OverlayProvider>
+      <Button onPress={state.open} aria-label="Open modal">
+        Open Modal
+      </Button>
+      {(state.isOpen || state.isTransitioning) && (
         <Modal
           isOpen={state.isOpen}
           onClose={state.close}
@@ -35,13 +32,14 @@ export const Default = () => {
             sx={{
               p: '1rem 1.5rem',
               borderBottom: '1px solid',
-              borderBottomColor: 'gray-300',
+              borderBottomColor: 'border.base',
+              bg: 'background.base',
             }}
           >
             <Text variant="modalTitle">Modal Title</Text>
           </Box>
           <Box p="1.5rem 1.5rem">
-            <Text>
+            <Text color="text.primary">
               Do you want to continue with this action that you&lsquo;re performing?
             </Text>
           </Box>
@@ -49,7 +47,7 @@ export const Default = () => {
             isRow
             sx={{
               borderTop: '1px solid',
-              borderTopColor: 'gray-300',
+              borderTopColor: 'border.base',
               p: '1rem 1.5rem',
             }}
           >
@@ -82,8 +80,7 @@ export const Default = () => {
             </Box>
           </Box>
         </Modal>
-        )}
-      </OverlayProvider>
-    </AstroProvider>
+      )}
+    </OverlayProvider>
   );
 };
