@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.92.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.91.0...@pingux/astro@2.92.0) (2024-11-05)
+
+
+### Features
+
+* [UIP-7152] Nextgen dark mode ([4f591b3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4f591b3074b447eaa332c492d48d4c947a13a179))
+* [UIP-7171] Codeview add textToCopy prop ([af62703](https://gitlab.corp.pingidentity.com/ux/pingux/commit/af6270366cb3a77bf44288826cc13e635d8c4201))
+* [UIP-7172] CodeView: add iconButtonProps prop ([cdb1e24](https://gitlab.corp.pingidentity.com/ux/pingux/commit/cdb1e2453a3bc54901437ff2e0339830889d3931))
+* [UIP-7177] Add selection to DataTable ([2f22483](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2f224833705e80b7b918fd01ecb677fc24c6e00e))
+
+
+
+
+
 # [2.91.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.90.0...@pingux/astro@2.91.0) (2024-10-17)
 
 
