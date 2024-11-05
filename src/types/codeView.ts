@@ -16,6 +16,7 @@ export interface CodeViewProps extends HoverProps, StyleProps {
   hasNoCopyButton?: boolean;
   language?: Language;
   Prism?: PrismProps;
+  textToCopy?: string;
   sx?: ThemeUICSSObject;
   stylesProp?: ThemeUICSSObject;
   isNextGen?: boolean;

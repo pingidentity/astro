@@ -222,3 +222,15 @@ WithAdditionalLanguage.parameters = {
     },
   },
 };
+
+export const WithChangedCopiedValue: StoryFn<CodeViewProps> = (args: CodeViewProps) => (
+  <CodeView textToCopy="Sed ut perspiciatis" {...args} />
+);
+
+WithChangedCopiedValue.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
