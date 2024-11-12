@@ -24,6 +24,7 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
     labelProps,
     maxSize,
     maxSizeText,
+    slots,
     ...others
   } = props;
 
@@ -102,6 +103,9 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
   const isLimitReached = !!maxSize && (value || fieldValues).length >= maxSize;
   const isDisabled = (value || fieldValues).length === 1;
 
+  // renders of the bottom bar if one or more of the components within it should render
+  const shouldShowBottomBar = !isLimitReached || slots?.left || slots?.right;
+
   const renderedItem = useCallback(
     (id, fieldValue, otherFieldProps, onComponentRender, labelId) => {
       if (onComponentRender) {
@@ -163,7 +167,13 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
           </FieldHelperText>
         )
       }
-      {!isLimitReached
+      {
+        shouldShowBottomBar
+        && (
+        <Box isRow gap="md">
+          {slots?.left
+          && slots?.left}
+          {!isLimitReached
         && (
           <Button
             aria-label="Add field"
@@ -176,6 +186,11 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
             </Text>
           </Button>
         )}
+          {slots?.right
+          && slots?.right}
+        </Box>
+        )
+      }
     </Box>
   );
 });
