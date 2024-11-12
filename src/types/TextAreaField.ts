@@ -1,19 +1,10 @@
 import { ReactNode } from 'react';
 
+import { SharedFieldProps } from './shared/fieldProps';
 import { TestingAttributes } from './shared/test';
-import { Status } from './item';
-import { LabelModeProps } from './label';
 import { ValidPositiveInteger } from './shared';
 
-export interface TextAreaFieldProps extends TestingAttributes{
-  /** The rendered label for the field. */
-  label: string,
-  /** Text rendered below the textarea. */
-  helperText?: string;
-  /** If present this prop will cause a help hint to render in the label of the field. */
-  hintText?: string,
-  /** A string designating whether or not the label is a float label. */
-  labelMode?: LabelModeProps,
+export interface TextAreaFieldProps extends TestingAttributes, SharedFieldProps{
   /** Whether the textarea is unable to be resized. */
   isUnresizable?: boolean,
   /**
@@ -55,6 +46,4 @@ export interface TextAreaFieldProps extends TestingAttributes{
     /** The given node will be inserted into the field container. */
     inContainer: ReactNode,
   },
-  /** Status of the textarea field */
-  status?: Status,
 }

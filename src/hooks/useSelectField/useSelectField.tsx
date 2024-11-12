@@ -9,19 +9,21 @@ import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 import ListBox from '../../components/ListBox/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
-import { Axis, BoxProps, FocusableElement, LabelModeProps, ListBoxProps, Placement, PlacementAxis, ReactRef, StyleProps } from '../../types';
+import { Axis, BoxProps, FocusableElement, LabelModeProps, ListBoxProps, Placement, PlacementAxis, ReactButtonRef, ReactRef, StyleProps } from '../../types';
 import { modes } from '../../utils/devUtils/constants/labelModes';
 import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
-interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
-  children: CollectionChildren<T>
+export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
+  children?: CollectionChildren<T>
   align?: PlacementAxis;
   defaultSelectedKey?: string;
   defaultText?: string;
   direction?: Axis;
   disabledKeys?: Iterable<Key>;
   hasNoEmptySelection?: boolean;
+  hasNoStatusIndicator?: boolean;
+  helperText?: string;
   isDefaultOpen?: boolean;
   isDisabled?: boolean;
   isLoading?: boolean;
@@ -38,15 +40,19 @@ interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   onLoadMore?: () => unknown;
   onOpenChange?: (isOpen: boolean) => unknown;
   onSelectionChange?: (key: Key) => unknown;
-  controlProps?: React.HTMLAttributes<Element>;
+  controlProps?: ControlProps;
   scrollBoxProps?: BoxProps;
   listBoxProps?: ListBoxProps;
   labelProps?: ThemeUILabelProps;
   containerProps?: BoxProps;
-  labelMode: LabelModeProps;
+  labelMode?: LabelModeProps;
 }
 
-interface UseSelectFieldReturnProps<T> {
+interface ControlProps extends React.HTMLAttributes<Element>{
+  'data-testid'?: string;
+}
+
+export interface UseSelectFieldReturnProps<T> {
   columnStyleProps: StyleProps,
   fieldContainerProps: BoxProps,
   fieldControlInputProps: FieldControlInputProps,
@@ -58,7 +64,7 @@ interface UseSelectFieldReturnProps<T> {
   popoverRef: ReactRef,
   state: SelectState<T>,
   triggerProps: AriaButtonProps<'button'>,
-  triggerRef: ReactRef,
+  triggerRef: ReactButtonRef,
   valueProps: DOMAttributes<FocusableElement>,
 }
 
@@ -125,7 +131,7 @@ const useSelectField = <T extends object>(
 
   const popoverRef = useRef() as React.RefObject<HTMLElement>;
   const listBoxRef = useRef() as React.RefObject<HTMLElement>;
-  const triggerRef = useRef() as React.RefObject<HTMLElement>;
+  const triggerRef = useRef() as React.RefObject<HTMLButtonElement>;
   /* istanbul ignore next */
   useImperativeHandle(ref, () => triggerRef.current as HTMLElement);
 
