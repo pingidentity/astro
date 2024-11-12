@@ -2,7 +2,7 @@ import { ThemeUICSSObject } from 'theme-ui';
 
 import { LabelProps, Status, ValidPositiveInteger } from '.';
 
-type RenderFieldFunction = (
+export type RenderFieldFunction = (
   id: string,
   fieldValue: string,
   onFieldValueChange: (e: React.ChangeEvent, fieldId: string) => void,

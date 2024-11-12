@@ -1,4 +1,6 @@
 // Styles for default select and variants go here.
+import { ThemeUICSSObject } from 'theme-ui';
+
 import { text } from '../../styles/variants';
 import { defaultFocus, input } from '../Input/Input.styles';
 
@@ -8,7 +10,7 @@ const activeFloatLabel = {
 };
 
 // Default select
-export const select = {
+export const select: ThemeUICSSObject = {
   ...input,
   display: 'flex',
   alignItems: 'center',

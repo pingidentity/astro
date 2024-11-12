@@ -14,6 +14,9 @@ const defaultProps: TextAreaFieldProps = {
   'data-testid': testId,
   label: 'testLabel',
 };
+
+const label = defaultProps.label as string;
+
 const getComponent = (props = {}) => render(
   <TextAreaField {...defaultProps} {...props} />,
 );
@@ -27,13 +30,13 @@ universalComponentTests({
 
 test('disabled prop disables input', () => {
   getComponent({ isDisabled: true });
-  const textArea = screen.getByLabelText(defaultProps.label);
+  const textArea = screen.getByLabelText(label);
   expect(textArea).toBeDisabled();
 });
 
 test('text area field has focus', () => {
   getComponent();
-  const textArea = screen.getByLabelText(defaultProps.label);
+  const textArea = screen.getByLabelText(label);
 
   userEvent.tab();
   expect(textArea).toHaveFocus();
@@ -42,8 +45,8 @@ test('text area field has focus', () => {
 
 test('disabled prop disables text field label', () => {
   getComponent({ isDisabled: true });
-  const label = screen.getByText(defaultProps.label);
-  expect(label).toHaveClass('is-disabled');
+  const labelDom = screen.getByText(label);
+  expect(labelDom).toHaveClass('is-disabled');
 });
 
 test('text area field with helper text', () => {
@@ -57,15 +60,15 @@ test('float label prop adds float label class', () => {
   const labelMode = 'float';
   const helperText = 'helper text';
   getComponent({ helperText, labelMode });
-  const label = screen.getByText(defaultProps.label);
-  expect(label).toHaveClass('is-float-label');
+  const labelDom = screen.getByText(label);
+  expect(labelDom).toHaveClass('is-float-label');
 });
 
 test('mousemove calls resize event', () => {
   const labelMode = 'float';
   const helperText = 'helper text';
   getComponent({ helperText, labelMode, resizeCallback: mockfunction });
-  const textArea = screen.getByLabelText(defaultProps.label);
+  const textArea = screen.getByLabelText(label);
   fireEvent.mouseMove(textArea);
   fireEvent.mouseMove(textArea);
   expect(mockfunction).toHaveBeenCalledTimes(2);
@@ -82,7 +85,7 @@ test('label will receive gridRow attribute if it will be higher than textarea', 
     },
   });
   getComponent();
-  expect(screen.getByText(defaultProps.label)).toHaveStyle('grid-row: 1/5');
+  expect(screen.getByText(label)).toHaveStyle('grid-row: 1/5');
   Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
 });
 
@@ -96,7 +99,7 @@ test('form wrapper will have default max label column width when no custom width
 test('passing read only prop applys the is-read-only class to the textarea', () => {
   const isReadOnly = true;
   getComponent({ isReadOnly });
-  const textArea = screen.getByLabelText(defaultProps.label);
+  const textArea = screen.getByLabelText(label);
   expect(textArea).toHaveClass('is-read-only');
 });
 

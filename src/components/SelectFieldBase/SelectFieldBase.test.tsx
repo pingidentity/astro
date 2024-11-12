@@ -2,7 +2,9 @@ import React, { forwardRef } from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { useSelectField } from '../../hooks';
+import { UseSelectFieldProps } from '../../hooks/useSelectField/useSelectField';
 import { Item } from '../../index';
+import { SelectFieldBaseProps } from '../../types/selectField';
 import { modes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
@@ -26,8 +28,20 @@ const defaultProps = {
   items,
 };
 
-const SelectFieldWrapper = forwardRef((props, ref) => {
-  const { ...selectFieldProps } = useSelectField(props, ref);
+interface ExampleProps {
+  align: string,
+  direction: string,
+  label: string
+  'data-testid': string,
+  controlProps: {
+    'data-testid': string,
+  }
+  value: string
+  items: { name: string }[]
+}
+
+const SelectFieldWrapper = forwardRef<HTMLDivElement, ExampleProps>((props, ref) => {
+  const { ...selectFieldProps } = useSelectField(props as UseSelectFieldProps<object>, ref);
   return <SelectFieldBase {...props} {...selectFieldProps} />;
 });
 
@@ -48,7 +62,10 @@ beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
+    cb(0);
+    return 0;
+  });
   jest.useFakeTimers();
 });
 
@@ -132,7 +149,9 @@ test('clicking on the visible button opens the popuplist', () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  userEvent.click(button);
+  if (button) {
+    userEvent.click(button);
+  }
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
 });
@@ -147,7 +166,7 @@ test('clicking on an option then renders its text in the button', () => {
   userEvent.click(button);
   const options = screen.queryAllByRole('option');
   userEvent.click(options[0]);
-  expect(button).toHaveTextContent(options[0].textContent);
+  expect(button).toHaveTextContent(items[0].name);
 });
 
 test('hovering an option applies correct styles', () => {
@@ -256,7 +275,10 @@ test('two listbox can not be open at the same time', () => {
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {
   getComponent();
   const button = screen.queryByRole('button');
-  userEvent.click(button);
+  expect(button).toBeInTheDocument();
+  if (button) {
+    userEvent.click(button);
+  }
   const options = screen.queryAllByRole('option');
 
   expect(options).toHaveLength(items.length);
@@ -272,7 +294,11 @@ describe('async loading', () => {
     expect(loader).toHaveAttribute('aria-label', 'Loading in progress');
     expect(loader).not.toHaveAttribute('aria-valuenow');
 
-    getComponent({ items, isLoading: false }, { renderFn: rerender });
+    getComponent({ items, isLoading: false }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
 
     expect(() => screen.getByRole('alert')).toThrow();
   });
@@ -292,7 +318,11 @@ describe('async loading', () => {
     expect(loader).toHaveAttribute('aria-label', 'Loading more...');
     expect(loader).not.toHaveAttribute('aria-valuenow');
 
-    getComponent({ items: newItems }, { renderFn: rerender });
+    getComponent({ items: newItems }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
 
     options = within(listbox).getAllByRole('option');
     expect(options.length).toBe(2);

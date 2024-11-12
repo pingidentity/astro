@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Key, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
 import CalendarRangeIcon from '@pingux/mdi-react/CalendarRangeIcon';
@@ -16,6 +16,18 @@ import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttri
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import SelectFieldReadme from './SelectField.mdx';
+
+export type SelectItemProps = {
+  name?: string
+  id?: string
+  key?: Key
+}
+
+export type SelectSectionProps = {
+  name?: string
+  key?: string,
+  children?: SelectItemProps[]
+}
 
 const animals = [
   { name: 'Aardvark', id: '1' },
@@ -143,9 +155,9 @@ export const Default = args => (
 export const WithSections = args => (
   <OverlayProvider>
     <SelectField items={withSection} {...args}>
-      {section => (
+      {(section: SelectSectionProps) => (
         <Section key={section.key} items={section.children} title={section.name}>
-          {item => <Item key={item.name}>{item.name}</Item>}
+          {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
         </Section>
       )}
     </SelectField>
@@ -155,7 +167,7 @@ export const WithSections = args => (
 export const WithCustomHeight = args => (
   <OverlayProvider>
     <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
     </SelectField>
   </OverlayProvider>
 );
@@ -253,7 +265,7 @@ export const HelperText = () => (
   </SelectField>
 );
 
-const options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
+const options = new Array(200).fill({ key: 'string', name: 'string' }).map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
 export const DynamicItems = () => {
   // options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
   const [items] = useState(options);
@@ -261,7 +273,7 @@ export const DynamicItems = () => {
   return (
     <OverlayProvider>
       <SelectField label="Select an option..." items={items}>
-        {item => <Item key={item.key}>{item.name}</Item>}
+        {(item: SelectItemProps) => <Item key={item.key}>{item.name}</Item>}
       </SelectField>
     </OverlayProvider>
   );
@@ -291,11 +303,11 @@ export const AsyncLoading = () => {
     <OverlayProvider>
       <SelectField
         label="Pick a Pokemon"
-        items={list.items}
+        items={list.items as Iterable<SelectItemProps>}
         isLoading={list.isLoading}
         onLoadMore={list.loadMore}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
       </SelectField>
     </OverlayProvider>
   );

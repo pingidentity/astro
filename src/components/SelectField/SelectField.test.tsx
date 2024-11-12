@@ -7,6 +7,8 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
+import { SelectItemProps, SelectSectionProps } from './SelectField.stories';
+
 const items = [
   { name: 'a' },
   { name: 'b' },
@@ -16,21 +18,21 @@ const items = [
 const withSection = [
   { name: 'Animals',
     key: 'Animals',
-    kids: [
+    children: [
       { name: 'Aardvark' },
       { name: 'Kangaroo' },
       { name: 'Snake' },
     ] },
   { name: 'People',
     key: 'People',
-    kids: [
+    children: [
       { name: 'Michael' },
       { name: 'Dwight' },
       { name: 'Creed' },
     ] },
   { name: null,
     key: 'Fruit',
-    kids: [
+    children: [
       { name: 'Apple' },
       { name: 'Strawberry' },
       { name: 'Blueberry' },
@@ -52,16 +54,16 @@ const defaultProps = {
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <SelectField {...defaultProps} {...props}>
-    {item => <Item key={item.name}>{item.name}</Item>}
+    {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
   </SelectField>
 ));
 
 const getComponentWithSections = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <SelectField {...defaultProps} {...props} items={withSection}>
-      {section => (
-        <Section key={section.key} items={section.kids} title={section.name}>
-          {item => <Item key={item.name}>{item.name}</Item>}
+      {(section: SelectSectionProps) => (
+        <Section key={section.key} items={section.children} title={section.name}>
+          {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
         </Section>
       )}
     </SelectField>
@@ -72,7 +74,7 @@ const getComponentWithSections = (props = {}, { renderFn = render } = {}) => ren
 universalComponentTests({
   renderComponent: props => (
     <SelectField {...defaultProps} {...props}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
     </SelectField>
   ),
 });
@@ -133,4 +135,17 @@ test('a blank title does not render', () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
   expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
+});
+
+test('renders placeholder text', () => {
+  const placeholderText = 'Select an option';
+  getComponent({ placeholder: placeholderText });
+  const placeholder = screen.getByText(placeholderText);
+  expect(placeholder).toBeInTheDocument();
+});
+test('renders default placeholder text', () => {
+  const placeholderText = 'Select';
+  getComponent({ placeholder: placeholderText });
+  const placeholder = screen.getByText(placeholderText);
+  expect(placeholder).toBeInTheDocument();
 });

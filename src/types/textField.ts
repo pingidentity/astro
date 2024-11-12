@@ -2,17 +2,11 @@ import { ThemeUICSSObject } from 'theme-ui';
 
 import { ContainerProps, ControlProps } from '../hooks/useField/useField';
 
+import { SharedFieldProps } from './shared/fieldProps';
 import { HelpHintProps } from './helpHint';
-import { Status } from './item';
-import { LabelModeProps } from './label';
 import { AriaRole, StyleProps, ValidPositiveInteger } from './shared';
 
-export interface TextFieldProps extends StyleProps{
-  helperText?: string;
-  /** The rendered label for the field. */
-  label?: React.ReactNode;
-  /** A string designating whether or not the label is a float label. */
-  labelMode?: LabelModeProps;
+export interface TextFieldProps extends StyleProps, SharedFieldProps{
   /** The unique identifier for the input element. */
   id?: string;
   /** The name for the input element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
@@ -23,8 +17,6 @@ export interface TextFieldProps extends StyleProps{
   defaultValue?: string;
   /** Whether the input element is automatically focused when loaded onto the page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautofocus). */
   hasAutoFocus?: boolean;
-  /** If present this prop will cause a help hint to render in the label of the field. */
-  hintText?: string;
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator?: boolean;
   helpHintProps?: HelpHintProps;
@@ -56,7 +48,6 @@ export interface TextFieldProps extends StyleProps{
   type?: string;
   /** Props object that is spread directly into the input wrapper element. */
   wrapperProps?: Record<string, unknown>
-  status?: Status;
   variant?: string
   controlProps?: ControlProps;
   containerProps?: ContainerProps;
