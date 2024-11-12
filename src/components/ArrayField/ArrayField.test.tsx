@@ -191,3 +191,19 @@ test('displays max size label if provided', () => {
   expect(screen.queryByText('+ Add')).not.toBeInTheDocument();
   expect(screen.getByText(maxSizeText)).toBeInTheDocument();
 });
+
+test('renders left slot content', () => {
+  const leftSlotContent = <div data-testid="left-slot">Left Slot Content</div>;
+  getComponent({ slots: { left: leftSlotContent } });
+  const leftSlot = screen.getByTestId('left-slot');
+  expect(leftSlot).toBeInTheDocument();
+  expect(leftSlot).toHaveTextContent('Left Slot Content');
+});
+
+test('renders right slot content', () => {
+  const rightSlotContent = <div data-testid="right-slot">Right Slot Content</div>;
+  getComponent({ slots: { right: rightSlotContent } });
+  const rightSlot = screen.getByTestId('right-slot');
+  expect(rightSlot).toBeInTheDocument();
+  expect(rightSlot).toHaveTextContent('Right Slot Content');
+});

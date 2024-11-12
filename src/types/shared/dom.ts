@@ -16,3 +16,4 @@ export interface DOMAttributes<T = FocusableElement> extends AriaAttributes, Rea
 }
 
 export type ReactRef = React.Ref<HTMLElement>
+export type ReactButtonRef = React.Ref<HTMLButtonElement>

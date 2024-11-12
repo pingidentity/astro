@@ -8,8 +8,10 @@ import {
   ArrayField,
   ArrayFieldDeleteButton,
   Box,
+  Button,
   Item,
   SelectField,
+  Text,
   TextField,
 } from '../../index';
 import { ArrayFieldProps } from '../../types';
@@ -269,6 +271,69 @@ export const Customizations = ({ ...args }) => {
         hintText: 'Example Hint',
         isRequired: true,
         helpHintProps: { direction: 'top' },
+      }}
+      renderField={
+        (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
+          <Box width="400px">
+            <TextField
+              aria-label="Text field"
+              value={fieldValue}
+              onChange={e => onFieldValueChange(e, id)}
+              mr="xs"
+              slots={{
+                inContainer: (
+                  <ArrayFieldDeleteButton
+                    isDisabled={isDisabled}
+                    onDelete={() => onFieldDelete(id)}
+                  />
+                ),
+              }}
+              {...otherFieldProps}
+            />
+          </Box>
+        )
+      }
+      {...args}
+    />
+  );
+};
+
+export const WithBothSlots = ({ ...args }) => {
+  const LeftSlot = (
+    <Button
+      aria-label="Add field"
+      variant="link"
+      sx={{ width: 'fit-content', mt: 'xs' }}
+    >
+      <Text variant="label" color="active">
+        Left slot
+      </Text>
+    </Button>
+  );
+
+  const RightSlot = (
+    <Button
+      aria-label="Add field"
+      variant="link"
+      sx={{ width: 'fit-content', mt: 'xs' }}
+    >
+      <Text variant="label" color="active">
+        Right slot
+      </Text>
+    </Button>
+  );
+  return (
+    <ArrayField
+      defaultValue={defaultData}
+      sx={{ width: '450px' }}
+      labelProps={{
+        hintText: 'Example Hint',
+        isRequired: true,
+        helpHintProps: { direction: 'top' },
+      }}
+      slots={{
+        left: LeftSlot,
+        right: RightSlot,
       }}
       renderField={
         (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (

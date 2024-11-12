@@ -1,8 +1,9 @@
+import React from 'react';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { LabelProps, Status, ValidPositiveInteger } from '.';
 
-type RenderFieldFunction = (
+export type RenderFieldFunction = (
   id: string,
   fieldValue: string,
   onFieldValueChange: (e: React.ChangeEvent, fieldId: string) => void,
@@ -47,6 +48,11 @@ export interface ArrayFieldProps {
   status?: Status;
   /** Props object that is spread directly into the wrapper rendering the fields. */
   fieldControlWrapperProps?: Record<string, string>;
+  /** slots that render on either the left or right side of the add more button */
+  slots?: {
+    right?: React.ReactNode,
+    left?: React.ReactNode,
+  }
 }
 
 export interface ArrayFieldDeleteButtonProps {
