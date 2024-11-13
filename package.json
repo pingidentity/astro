@@ -17,6 +17,7 @@
     "lib"
   ],
   "scripts": {
+    "install-react-version": "cd ../../ && yarn run install-react-18 && yarn && cd packages/astro && yarn",
     "build": "rm -rf lib && yarn run build:types && yarn run build:cjs && yarn run build:esm && cp README.md ./lib && cp MIGRATION.md ./lib",
     "build-ci": "yarn build",
     "append-version": "node ../../append_current_version.js",
