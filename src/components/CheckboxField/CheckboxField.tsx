@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useMemo } from 'react';
-import { useCheckbox } from 'react-aria';
+import { mergeProps, useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
 import type { ToggleState, ToggleStateOptions } from '@react-stately/toggle';
@@ -18,6 +18,7 @@ const displayName = 'CheckboxField';
 const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, ref) => {
   const {
     label,
+    checkBoxProps,
     controlProps = {},
     hasAutoFocus,
     helperText,
@@ -72,7 +73,7 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
           <Checkbox
             ref={checkboxRef}
             aria-describedby={helperText && helperTextId}
-            {...fieldControlInputProps}
+            {...mergeProps(fieldControlInputProps, checkBoxProps)}
           />
           {label}
         </Label>
