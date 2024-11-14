@@ -29,7 +29,8 @@ const IndeterminateCheckboxIcon = props => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-labelledby="checkbox-icon-title"
-      {...omit(props, 'id', 'aria-checked')}
+      data-testid="checkbox-icon-indeterminate"
+      {...omit(props, 'id', 'aria-checked', 'data-testid')}
     >
       <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
       <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill={color} stroke={color} />
