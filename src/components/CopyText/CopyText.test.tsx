@@ -159,18 +159,21 @@ describe('CopyText', () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
       userEvent.click(button);
-      expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+      await act(async () => {
+        expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+      });
       expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
     });
 
     test('tooltip renders with the text "Copied!" hides after delay', async () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
-      fireEvent.mouseMove(button);
-      fireEvent.mouseEnter(button);
-      fireEvent.click(button);
-      expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+      userEvent.click(button);
+      await act(async () => {
+        expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+      });
       expect(screen.queryByRole('tooltip')).toHaveTextContent('Copied!');
+
       act(() => jest.advanceTimersByTime(2000));
 
       await act(() => {
