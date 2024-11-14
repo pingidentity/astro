@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.93.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.92.0...@pingux/astro@2.93.0) (2024-11-14)
+
+
+### Bug Fixes
+
+* [UIP-6833] SelectField typescript conversion ([9d1cd98](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9d1cd98106d20a298ffa244d0464752d3b9c28f7))
+* [UIP-7164] Add CheckboxField Unit Tests ([d7a6758](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d7a6758ef7b6ecf54a804749aa34a506c52f12f2))
+
+
+### Features
+
+* [UIP-7183] React upgrade for ui library ([ea64dca](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ea64dca5894ba4ccdf7185e7dbb4d6003f030a55))
+* [UIP-7205] Add Slots to ArrayField component ([d541fa6](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d541fa62cf3460c49d0d1680b4299ee3f7c281e0))
+
+
+
+
+
 # [2.92.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.91.0...@pingux/astro@2.92.0) (2024-11-05)
 
 
