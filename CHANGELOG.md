@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.94.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.93.0...@pingux/astro@2.94.0) (2024-11-15)
+
+
+### Features
+
+* [UIP-7191] Update Node to Version 20 ([e7839fb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e7839fb6952676cb9fce2dc5bef2317a611af855))
+
+
+
+
+
 # [2.93.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.92.0...@pingux/astro@2.93.0) (2024-11-14)
 
 
