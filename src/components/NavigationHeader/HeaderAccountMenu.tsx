@@ -1,8 +1,8 @@
 import React from 'react';
-import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import LogoutVariantIcon from '@pingux/mdi-react/LogoutVariantIcon';
 
-import { Avatar, Box, Button, Icon, Item, Link, Menu, OverlayProvider, PopoverMenu, Separator, Text } from '../..';
+import { Avatar, Box, Button, Icon, Item, Menu, OverlayProvider, PopoverMenu, Section, Text } from '../..';
+import useGetTheme from '../../hooks/useGetTheme';
 import { AvatarProps } from '../../types';
 
 import { userDataProps } from './NavigationHeader.stories';
@@ -14,41 +14,44 @@ interface HeaderAccountMenuProps {
 
 const HeaderAccountMenu = (props: HeaderAccountMenuProps) => {
   const { userData, avatarProps } = props;
+  const { image, firstName, lastName, email } = userData || {};
+
+  const { icons } = useGetTheme();
+  const { MenuDown } = icons;
 
   return (
     <OverlayProvider>
       <PopoverMenu>
         <Button variant="navigationHeader.accountButton">
           <Box isRow alignItems="center" gap="xs">
-            <Avatar src={userData?.image} alt="Avatar" aria-label="Avatar" {...avatarProps} />
-            <Icon icon={ChevronDownIcon} size="16px" color="gray-800" />
+            <Avatar src={image} alt="Avatar" aria-label="Avatar" {...avatarProps} />
+            <Icon icon={MenuDown} size="16px" title={{ name: 'Menu Up Icon' }} color="text.primary" />
           </Box>
         </Button>
-        <Menu variant="navigationHeader.dropdownMenu">
-          <Item key="profile">
-            <Link href="#" variant="navigationHeader.dropdownMenuItem">
-              <Box isRow alignItems="center" gap="md">
-                <Avatar src={userData?.image} alt="Avatar" aria-label="Avatar" {...avatarProps} />
+        <Menu p="sm" gap="sm" minWidth="270px">
+          <Section key="profile-section">
+            <Item key="profile" textValue="profile">
+              <Box isRow alignItems="center" gap="md" px="sm" py="xs">
+                <Avatar src={image} alt="Avatar" aria-label="Avatar" {...avatarProps} />
                 <Box ml="0">
-                  <Text as="h5" variant="h5" mb="0">
-                    {userData?.firstName}
+                  <Text as="h5" mb="0" fontWeight="2" color="text.primary">
+                    {firstName}
                     {' '}
-                    { userData?.lastName}
+                    {lastName}
                   </Text>
-                  <Text color="gray-500" fontSize="sm">{ userData?.email }</Text>
+                  <Text color="text.secondary" fontSize="sm">{email}</Text>
                 </Box>
               </Box>
-            </Link>
-          </Item>
-          <Item isSeparator textValue="-" my="sm"><Separator /></Item>
-          <Item key="signOut">
-            <Link color="gray-700" variant="navigationHeader.dropdownMenuItem">
-              <Box isRow alignItems="center">
-                <Icon icon={LogoutVariantIcon} size="18px" mr="sm" />
-                <Text>Sign Out</Text>
+            </Item>
+          </Section>
+          <Section key="signOut-section">
+            <Item key="signOut" textValue="signOut">
+              <Box isRow alignItems="center" px="sm" py="xs">
+                <Icon icon={LogoutVariantIcon} size="18px" title={{ name: 'Sign Out Icon' }} mr="sm" color="text.primary" />
+                <Text color="text.primary">Sign Out</Text>
               </Box>
-            </Link>
-          </Item>
+            </Item>
+          </Section>
         </Menu>
       </PopoverMenu>
     </OverlayProvider>

@@ -262,11 +262,16 @@ const iconButtons = {
     px: 'md',
     py: 'sm',
     width: '56px',
+    height: '40px',
     '&.is-hovered': {
       path: { fill: 'text.secondary' },
     },
     '&.is-pressed': {
       path: { fill: 'text.secondary' },
+    },
+    '&.is-focused': {
+      ...defaultFocus,
+      outlineOffset: '1px',
     },
   },
   copyButton,
