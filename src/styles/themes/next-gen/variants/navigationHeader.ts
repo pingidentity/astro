@@ -1,14 +1,18 @@
 const defaultFocus = {
   outline: '2px solid',
   outlineColor: 'active',
+  outlineOffset: '1px',
 };
 
 const link = {
+  display: 'inline-block',
+  height: '40px',
   fontSize: 'md',
   fontFamily: 'standard',
   py: 'sm',
   px: 'md',
   fontWeight: '1',
+  lineHeight: 'body',
   color: 'text.primary',
   textDecoration: 'none',
   borderRadius: '3px',
@@ -16,7 +20,7 @@ const link = {
     textDecoration: 'none',
     color: 'text.secondary',
   },
-  '&.is-focused': {
+  '&.is-focused, &:focus-visible ': {
     ...defaultFocus,
     textDecoration: 'none',
   },
@@ -28,15 +32,10 @@ const link = {
   },
 };
 
-const logoBand = {
-  ...link,
-  p: 0,
-};
-
 const headerPlaceholder = {
   fontSize: 'lg',
   ml: 'md',
-  color: 'text.secondary',
+  color: 'text.primary',
   lineHeight: 'body',
   fontWeight: '1',
   '&.is-hovered': {
@@ -47,7 +46,6 @@ const headerPlaceholder = {
 const navigationHeader = {
   headerPlaceholder,
   link,
-  logoBand,
   container: {
     fontFamily: 'standard',
     borderBottom: '1px solid',
@@ -67,12 +65,16 @@ const navigationHeader = {
     backgroundColor: 'background.base',
     maxWidth: 'unset',
     p: 'sm',
+    '&:focus': {
+      ...defaultFocus,
+    },
     '& > li': {
       p: '0',
     },
   },
   dropdownMenuItem: {
     ...link,
+    height: 'max-content',
     padding: '.675rem 1rem',
     pr: '2.25rem',
     '&.is-hovered': { textDecoration: 'none' },
@@ -87,7 +89,7 @@ const navigationHeader = {
     cursor: 'pointer',
     p: '0',
     px: 'sm',
-    py: '1px',
+    py: '3px',
     border: 'none',
     borderRadius: '3px',
     bg: 'transparent',
