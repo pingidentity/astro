@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.95.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.94.0...@pingux/astro@2.95.0) (2024-11-21)
+
+
+### Features
+
+* [UIP-7158] Nextgen theme navigationheader focus issues ([4c5ad8d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4c5ad8d855170b877ce04581fc96aac3ace690e1))
+* [UIP-7169] removing deprecated recipes ([39442fc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/39442fc2dac6d788afffca9aeb18b8789d8c59fb))
+
+
+
+
+
 # [2.94.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.93.0...@pingux/astro@2.94.0) (2024-11-15)
 
 
