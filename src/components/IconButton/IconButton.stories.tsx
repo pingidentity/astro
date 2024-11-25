@@ -59,17 +59,44 @@ Default.parameters = {
   },
 };
 
+export const Inverted: StoryFn<IconButtonProps> = (args: IconButtonProps) => (
+  <IconButton aria-label="Plus icon button" {...args} variant="inverted">
+    <Icon icon={PlusIcon} title={{ name: 'Plus Icon' }} />
+  </IconButton>
+);
+
+Inverted.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.iconButton.inverted,
+  },
+};
+
 export const WithTooltip = () => (
   <IconButton aria-label="icon button with tooltip" title="Edit">
     <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
   </IconButton>
 );
 
+WithTooltip.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.iconButton.withTooltip,
+  },
+};
+
 export const Disabled = () => (
   <IconButton aria-label="disabled icon button" isDisabled>
     <Icon icon={CreateIcon} title={{ name: 'Create Icon' }} />
   </IconButton>
 );
+
+Disabled.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.iconButton.disabled,
+  },
+};
 
 export const Sizes = () => (
   <Table>
@@ -156,6 +183,13 @@ export const Sizes = () => (
     </TableBody>
   </Table>
 );
+
+Sizes.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.iconButton.sizes,
+  },
+};
 
 export const CommonlyUsed = () => (
   // please note these are intentionally not mapped for story transparency
@@ -282,3 +316,10 @@ export const CommonlyUsed = () => (
     </Box>
   </>
 );
+
+CommonlyUsed.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.iconButton.commonlyUsed,
+  },
+};
