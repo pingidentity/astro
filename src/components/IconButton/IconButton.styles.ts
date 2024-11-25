@@ -31,12 +31,14 @@ export const base = {
   },
   '&.is-hovered': {
     bg: 'accent.95',
+    boxShadow: 'standard',
   },
   '&.is-pressed': {
     'path': {
       fill: 'white',
     },
     bg: 'active',
+    boxShadow: 'none',
   },
 };
 
@@ -81,6 +83,7 @@ const inverted = {
     bg: 'accent.20',
     borderColor: 'accent.20',
     color: 'white',
+    boxShadow: 'none',
   },
 };
 
