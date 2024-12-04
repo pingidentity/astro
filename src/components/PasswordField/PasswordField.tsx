@@ -1,10 +1,9 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import { useOverlayPosition } from 'react-aria';
 import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
 import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
-import PropTypes from 'prop-types';
 
 import {
   Box,
@@ -16,12 +15,11 @@ import {
   PopoverContainer,
   RequirementsList,
 } from '../..';
-import { useDebounce, useField, useProgressiveState, usePropWarning, useStatusClasses } from '../../hooks';
+import { useDebounce, useField, useLocalOrForwardRef, useProgressiveState, usePropWarning, useStatusClasses } from '../../hooks';
+import { PasswordFieldProps, Requirement, RequirementMessageProps } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+import { statusDefaultProp } from '../../utils/docUtils/statusProp';
 
 const displayName = 'PasswordField';
 
@@ -30,30 +28,24 @@ const ARIA_LABELS_FOR_SHOW_PASSWORD_TOGGLE = {
   SHOW: 'show password',
 };
 
-const RequirementMessage = ({ requirement }) => {
+const RequirementMessage = (props:RequirementMessageProps) => {
+  const { requirement } = props;
   return (
     <>
       {useDebounce({
-        value: `${requirement.name} ${requirement.status === statuses.SUCCESS ? 'success' : 'not met'}`,
+        value: `${requirement.name} ${requirement.status === statuses.SUCCESS ? statuses.SUCCESS : 'not met'}`,
         delay: 100,
       })}
     </>
   );
 };
 
-RequirementMessage.propTypes = {
-  requirement: PropTypes.shape({
-    name: PropTypes.string,
-    status: PropTypes.string,
-  }),
-};
-
-const PasswordField = forwardRef((props, ref) => {
+const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>((props, ref) => {
   const {
     helperText,
     isVisible: isVisibleProp,
     onVisibleChange: onVisibleChangeProp,
-    requirements,
+    requirements = [],
     requirementsListProps,
     slots,
     status,
@@ -64,7 +56,7 @@ const PasswordField = forwardRef((props, ref) => {
 
   const [isTyping, setIsTyping] = useState(false);
 
-  const checkRequirements = () => !requirements.filter(req => req.status === 'default').length > 0;
+  const checkRequirements = () => requirements.filter(req => req.status === 'default').length === 0;
 
   const {
     fieldContainerProps,
@@ -75,19 +67,17 @@ const PasswordField = forwardRef((props, ref) => {
 
   const { isFocused, onChange } = fieldControlInputProps;
 
-  const inputRef = useRef();
-  const popoverRef = useRef();
+  const inputRef = useLocalOrForwardRef<HTMLInputElement>(ref);
+  const popoverRef = useRef(null);
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => inputRef.current);
 
   const [isVisible, setIsShown] = useProgressiveState(
     isVisibleProp,
     isVisibleProp);
 
   // Measure the width of the input to inform the width of the menu (below).
-  const [menuWidth, setMenuWidth] = useState(null);
+  const [menuWidth, setMenuWidth] = useState(0);
 
   const onResize = useCallback(() => {
     /* istanbul ignore next */
@@ -136,9 +126,9 @@ const PasswordField = forwardRef((props, ref) => {
 
   const handleToggleShowPassword = (...args) => {
     setIsShown(!isVisible);
-
+    const params = { ...args };
     if (onVisibleChangeProp) {
-      onVisibleChangeProp(!isVisible, ...args);
+      onVisibleChangeProp(!isVisible, params);
     }
   };
 
@@ -149,7 +139,7 @@ const PasswordField = forwardRef((props, ref) => {
     setIsTyping(true);
     setTimeout(() => {
       setIsTyping(false);
-    }, [300]);
+    }, 300);
   };
 
   return (
@@ -205,7 +195,7 @@ const PasswordField = forwardRef((props, ref) => {
         />
         <VisuallyHidden aria-live="polite" aria-busy={isTyping}>
           Password requirements:
-          {requirements.map(req => (
+          {requirements.map((req:Requirement) => (
             <React.Fragment key={req.name}>
               <RequirementMessage requirement={req} />
             </React.Fragment>
@@ -215,79 +205,6 @@ const PasswordField = forwardRef((props, ref) => {
     </>
   );
 });
-
-PasswordField.propTypes = {
-  /** The rendered label for the field. */
-  label: PropTypes.node,
-  /** Whether or not the password is visible. */
-  isVisible: PropTypes.bool,
-  /** Function that is passed into the IconButton within this component. */
-  onVisibleChange: PropTypes.func,
-  /** Text rendered below the input. */
-  helperText: PropTypes.node,
-  /** The unique identifier for the input element. */
-  id: PropTypes.string,
-  /** The name for the input element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
-  name: PropTypes.string,
-  /**
-   * Callback fired when the value is changed on the input element.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.value` (string).
-   */
-  onChange: PropTypes.func,
-  /** The value for the input element (controlled). */
-  value: PropTypes.string,
-  /** How the input should handle autocompletion according to the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). The `autocomplete` prop is an alias for this. */
-  autoComplete: PropTypes.string,
-  /** @ignore Alias for `autoComplete` prop. Exists for backwards-compatibility. */
-  autocomplete: PropTypes.string,
-  /** A list of class names to apply to the input element. */
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  /** The default value for the input element. */
-  defaultValue: PropTypes.string,
-  /** Whether the input element is automatically focused when loaded onto the page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautofocus). */
-  hasAutoFocus: PropTypes.bool,
-  /** Whether the field is disabled. */
-  isDisabled: PropTypes.bool,
-  /** Whether the input can be selected, but not changed by the user. */
-  isReadOnly: PropTypes.bool,
-  /** Whether the field is required. */
-  isRequired: PropTypes.bool,
-  /** Add max Length to input value */
-  maxLength: PropTypes.number,
-  /**
-   * Callback fired when focus is lost on the input element.
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Callback fired when focus is lost on the input element.
-   */
-  onFocus: PropTypes.func,
-  /** The placeholder text to display in the input element. */
-  placeholder: PropTypes.string,
-  /** Provides a way to insert markup in specified places. */
-  slots: PropTypes.shape({
-    /** The given node will be inserted into the field container. */
-    inContainer: PropTypes.node,
-  }),
-  /** Determines the type of input to use. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). */
-  type: PropTypes.string,
-  /** @ignore Prop that allows testing of the icon button. */
-  viewHiddenIconTestId: PropTypes.string,
-  /** @ignore Prop that allows testing of the icon button. */
-  viewIconTestId: PropTypes.string,
-  /** Array of Requirements and their status. */
-  requirements: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    ...statusPropTypes,
-  })),
-  /** Props object that is spread to the requirements list. */
-  requirementsListProps: PropTypes.shape({}),
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-  ...inputFieldAttributesBasePropTypes,
-};
 
 PasswordField.defaultProps = {
   hasAutoFocus: false,

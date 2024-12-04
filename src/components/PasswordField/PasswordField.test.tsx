@@ -1,10 +1,11 @@
 import React from 'react';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { act } from '../../utils/testUtils/testWrapper';
+import { PasswordFieldProps, Requirement } from '../../types';
+import statuses from '../../utils/devUtils/constants/statuses';
+import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import PasswordField from '.';
@@ -12,67 +13,69 @@ import PasswordField from '.';
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occured with ThemeUI refactor.
 // https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
+
 const emotionCache = createCache({ key: 'password-field-test' });
 emotionCache.compat = true;
 
 const testId = 'test-text-field';
 const testLabel = 'Test Label';
 const helperProp = 'helperText';
-const defaultProps = {
+
+const defaultProps: PasswordFieldProps = {
   'data-testid': testId,
   label: testLabel,
-  helperTest: helperProp,
+  helperText: helperProp,
   viewHiddenIconTestId: 'view-hidden-test-id',
   viewIconTestId: 'view-icon-test-id',
 };
 
-const defaultRequirements = [
+const defaultRequirements: Requirement[] = [
   {
     name: '6 characters',
-    status: 'default',
+    status: statuses.DEFAULT,
   },
   {
     name: '1 UPPERCASE letter',
-    status: 'default',
+    status: statuses.DEFAULT,
   },
   {
     name: '1 lowercase letter',
-    status: 'default',
+    status: statuses.DEFAULT,
   },
   {
     name: '1 number',
-    status: 'default',
+    status: statuses.DEFAULT,
   },
   {
     name: '1 special character',
-    status: 'default',
+    status: statuses.DEFAULT,
   },
 ];
 
-const successfultRequirements = [
+const successfulRequirements: Requirement[] = [
   {
     name: '6 characters',
-    status: 'success',
+    status: statuses.SUCCESS,
   },
   {
     name: '1 UPPERCASE letter',
-    status: 'success',
+    status: statuses.SUCCESS,
   },
   {
     name: '1 lowercase letter',
-    status: 'success',
+    status: statuses.SUCCESS,
   },
   {
     name: '1 number',
-    status: 'success',
+    status: statuses.SUCCESS,
   },
   {
     name: '1 special character',
-    status: 'success',
+    status: statuses.SUCCESS,
   },
 ];
 
-const getComponent = (props = {}) => render(
+const getComponent = (props:PasswordFieldProps = {}) => render(
   <CacheProvider value={emotionCache}>
     <PasswordField {...defaultProps} {...props} />
   </CacheProvider>,
@@ -102,7 +105,7 @@ test('default password field', () => {
 
 test('renders view icon', async () => {
   getComponent();
-  const viewIcon = screen.getByTestId(defaultProps.viewHiddenIconTestId);
+  const viewIcon = screen.getByTestId(defaultProps.viewHiddenIconTestId!);
   expect(viewIcon).toBeInTheDocument();
 });
 
@@ -111,12 +114,12 @@ test('renders view-hidden icon', async () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
 
-  const viewHiddenIcon = screen.getByTestId(defaultProps.viewIconTestId);
+  const viewHiddenIcon = screen.getByTestId(defaultProps.viewIconTestId!);
   expect(viewHiddenIcon).toBeInTheDocument();
 
   userEvent.click(button);
 
-  const viewIcon = screen.getByTestId(defaultProps.viewHiddenIconTestId);
+  const viewIcon = screen.getByTestId(defaultProps.viewHiddenIconTestId!);
   expect(viewIcon).toBeInTheDocument();
 });
 
@@ -125,7 +128,7 @@ test('renders view icon', async () => {
   const button = screen.getByRole('button');
   userEvent.click(button);
 
-  const viewHiddenIcon = screen.getByTestId(defaultProps.viewIconTestId);
+  const viewHiddenIcon = screen.getByTestId(defaultProps.viewIconTestId!);
   expect(viewHiddenIcon).toBeInTheDocument();
 });
 
@@ -141,7 +144,7 @@ test('onPress callback is called when iconButton is pressed', async () => {
 test('renders password input', () => {
   getComponent();
   const input = screen.getByLabelText(testLabel);
-  expect(input.type).toBe('password');
+  expect((input as HTMLInputElement).type).toBe('password');
 });
 
 test('renders helper text', () => {
@@ -153,7 +156,7 @@ test('renders helper text', () => {
 test('clicking icon changes input type', () => {
   getComponent({ isVisible: true });
   const input = screen.getByLabelText(testLabel);
-  expect(input.type).toBe('text');
+  expect((input as HTMLInputElement).type).toBe('text');
 });
 
 test('passing in requirements and focusing renders the requirements popover', () => {
@@ -165,7 +168,7 @@ test('passing in requirements and focusing renders the requirements popover', ()
 });
 
 test('if all requirements are successful, do not render popover', () => {
-  getComponent({ requirements: successfultRequirements });
+  getComponent({ requirements: successfulRequirements });
   const input = screen.getByRole('textbox');
   userEvent.click(input);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
@@ -192,16 +195,53 @@ test('password field with helper text', () => {
 
 test('onChange function receives right text', () => {
   let inputText = '';
-  act(() => {
-    global.setTimeout = jest.fn(cb => cb());
-  });
+
   const testOnChange = e => {
     inputText = e.target.value;
   };
+
   getComponent({ onChange: testOnChange });
 
   const input = screen.getByRole('textbox');
   userEvent.type(input, '12345678');
+  jest.useFakeTimers();
 
   expect(inputText).toBe('12345678');
+});
+
+test('renders left slot content', () => {
+  const leftSlotContent = <div data-testid="in-container-slot">Slot Content</div>;
+  getComponent({ slots: { inContainer: leftSlotContent } });
+  const leftSlot = screen.getByTestId('in-container-slot');
+  expect(leftSlot).toBeInTheDocument();
+  expect(leftSlot).toHaveTextContent('Slot Content');
+});
+
+test('handleInputChange sets isTyping to true and then false after 300ms', async () => {
+  const delay = 300;
+
+  jest.useFakeTimers();
+  getComponent();
+  const input = screen.getByRole('textbox');
+  userEvent.type(input, 'test');
+
+  expect(input).toHaveValue('test');
+  expect((input as HTMLInputElement).type).toBe('password');
+
+  act(() => {
+    jest.advanceTimersByTime(delay);
+  });
+
+  await act(() => {
+    expect(input).toHaveValue('test');
+  }, { timeout: delay + 1 });
+});
+
+test('handleInputChange calls onChange prop', () => {
+  const onChange = jest.fn();
+  getComponent({ onChange });
+  const input = screen.getByRole('textbox');
+  userEvent.type(input, 'test');
+
+  expect(onChange).toHaveBeenCalled();
 });

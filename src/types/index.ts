@@ -36,6 +36,7 @@ export * from './Modal';
 export * from './navBar';
 export * from './navSideBar';
 export * from './overlayPanel';
+export * from './passwordField';
 export * from './popoverContainer';
 export * from './popoverMenu';
 export * from './progressBar';
