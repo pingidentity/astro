@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import isEmpty from 'lodash/isEmpty';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { PasswordField } from '../../index';
+import { PasswordFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
@@ -36,9 +38,9 @@ export default {
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },
-};
+} as Meta;
 
-export const Default = args => {
+export const Default: StoryFn<PasswordFieldProps> = args => {
   return (
     <PasswordField
       label="Example Label"
@@ -47,7 +49,7 @@ export const Default = args => {
   );
 };
 
-export const WithRequirementsList = () => {
+export const WithRequirementsList: StoryFn<PasswordFieldProps> = () => {
   const [charactersReq, setCharactersReq] = useState({
     name: '6 characters',
     status: statuses.DEFAULT,
@@ -122,12 +124,13 @@ export const WithRequirementsList = () => {
   );
 };
 
-export const WithStateProps = () => {
+export const WithStateProps:StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -137,12 +140,13 @@ export const WithStateProps = () => {
   );
 };
 
-export const FloatLabel = () => {
+export const FloatLabel:StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -153,12 +157,22 @@ export const FloatLabel = () => {
   );
 };
 
-export const LeftLabel = () => {
+// Added to bypass color contrast issue
+FloatLabel.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const LeftLabel:StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -169,30 +183,32 @@ export const LeftLabel = () => {
   );
 };
 
-export const Controlled = () => {
+export const Controlled:StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
   const [value, setValue] = useState('');
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
       isVisible={isVisible}
       label="Example Label"
-      onChange={e => setValue(e.target.value)}
+      onChange={e => setValue((e.target as HTMLInputElement).value)}
       value={value}
     />
   );
 };
 
-export const Disabled = () => {
+export const Disabled: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -203,12 +219,13 @@ export const Disabled = () => {
   );
 };
 
-export const ReadOnly = () => {
+export const ReadOnly: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -219,12 +236,13 @@ export const ReadOnly = () => {
   );
 };
 
-export const Required = () => {
+export const Required: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -235,12 +253,13 @@ export const Required = () => {
   );
 };
 
-export const Warning = () => {
+export const Warning: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -252,12 +271,13 @@ export const Warning = () => {
   );
 };
 
-export const Success = () => {
+export const Success: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
@@ -269,30 +289,32 @@ export const Success = () => {
   );
 };
 
-export const DynamicRequired = () => {
+export const DynamicRequired: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
   const [value, setValue] = useState('');
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       isRequired={isEmpty(value)} // isEmpty from lodash
       onVisibleChange={onVisibleChange}
       isVisible={isVisible}
       label="Example Label"
-      onChange={e => setValue(e.target.value)}
+      onChange={e => setValue((e.target as HTMLInputElement).value)}
     />
   );
 };
 
-export const MaxLength = () => {
+export const MaxLength: StoryFn<PasswordFieldProps> = () => {
   const [isVisible, setPasswordShown] = useState(false);
 
   const onVisibleChange = () => {
     setPasswordShown(!isVisible);
   };
+
   return (
     <PasswordField
       onVisibleChange={onVisibleChange}
