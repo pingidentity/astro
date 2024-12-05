@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.96.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.95.0...@pingux/astro@2.96.0) (2024-12-05)
+
+
+### Features
+
+* [UIP-6830] Passwordfield convert to ts ([1da8dc1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1da8dc14d4cf0f99f039406df829f7ba5fb71790))
+* [UIP-7168] IconButton and IconButtonToggle Update to match spec ([c4a714e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c4a714e56eb107013d024f73355bae4fa055190f))
+* [UIP-7238] export IconWrapperProps from index file ([e251e86](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e251e86ea1918eaa03bb7a7d808ff3fe19b0340b))
+
+
+
+
+
 # [2.95.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.94.0...@pingux/astro@2.95.0) (2024-11-21)
 
 
