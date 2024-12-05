@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { useStatusClasses, useTShirtSize } from '../../hooks';
 import { Box, Icon } from '../../index';
-import { IconWrapperProps } from '../../types/iconWrapper';
+import { IconWrapperProps } from '../../types';
 import { iconWrapperSizes } from '../../utils/devUtils/constants/tShirtSizes';
 
 const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
@@ -15,6 +15,7 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
     title,
     className,
     isCircle,
+    sx,
   } = props;
 
   const { sizeProps } = useTShirtSize({ ...{ size, sizes: iconWrapperSizes } });
@@ -29,6 +30,7 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
       variant={`iconWrapper.${size}`}
       sx={{
         backgroundColor: `iconWrapper.wrapper.${color}`,
+        ...sx,
       }}
       className={classNames}
       {...wrapperProps}
