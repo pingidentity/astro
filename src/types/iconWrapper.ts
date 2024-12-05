@@ -1,7 +1,8 @@
 import { BoxProps } from './box';
 import { IconProps, IconTypeExtended } from './icon';
+import { StyleProps } from './shared';
 
-export interface IconWrapperProps {
+export interface IconWrapperProps extends StyleProps {
     icon?: IconTypeExtended,
     iconProps?: IconProps,
     wrapperProps?: BoxProps,

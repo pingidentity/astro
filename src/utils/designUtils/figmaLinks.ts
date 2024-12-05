@@ -93,7 +93,12 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=17916-38366&t=rLZVlRDdR1JhehkH-0',
   },
   iconButton: {
-    default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A2520&t=We3h7LaaFJQnxdSy-1',
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=45365-7042&t=pXTSE3YlGbL0X49N-4',
+    inverted: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58623-6228&t=pXTSE3YlGbL0X49N-4',
+    withTooltip: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58623-6053&t=pXTSE3YlGbL0X49N-4',
+    disabled: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58748-5372&t=pXTSE3YlGbL0X49N-4',
+    sizes: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58748-5412&t=pXTSE3YlGbL0X49N-4',
+    commonlyUsed: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58748-6048&t=pXTSE3YlGbL0X49N-4',
   },
   inlineEditing: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=5244-14864&mode=design&t=1pPbrQvGkdMYBNqk-0',
@@ -175,5 +180,8 @@ export const FIGMA_LINKS = {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-11051&t=OK8Fy4P3se6BKy0F-4',
     withoutButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16196&t=OK8Fy4P3se6BKy0F-4',
     withoutLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16201&t=OK8Fy4P3se6BKy0F-4',
+  },
+  editButton: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58623-6267&t=pXTSE3YlGbL0X49N-4',
   },
 };

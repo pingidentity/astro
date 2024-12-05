@@ -3,6 +3,7 @@ import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, EditButton, Text } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { iconButtonArgTypes } from '../IconButton/iconButtonAttributes';
 
 import { IconSize } from './EditButton';
@@ -47,6 +48,13 @@ export const Default = args => (
     aria-label="edit"
   />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.editButton.default,
+  },
+};
 
 export const WithSizeProp = args => (
   <EditButton
