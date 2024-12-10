@@ -320,3 +320,17 @@ export const WithoutStatusIndicator = () => (
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
+
+export const WithHelpHint = () => (
+  <OverlayProvider>
+    <SelectField
+      width="100%"
+      hintText="Example Hint"
+      label="What's your favorite color?"
+    >
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
+);

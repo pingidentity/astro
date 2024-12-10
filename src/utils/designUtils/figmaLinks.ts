@@ -181,6 +181,9 @@ export const FIGMA_LINKS = {
     withoutButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16196&t=OK8Fy4P3se6BKy0F-4',
     withoutLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16201&t=OK8Fy4P3se6BKy0F-4',
   },
+  tooltipTrigger: {
+    badgeWithTooltip: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=59201-5404&t=wsQsGpX0SmOiAweL-4',
+  },
   editButton: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58623-6267&t=pXTSE3YlGbL0X49N-4',
   },
