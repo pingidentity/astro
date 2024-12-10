@@ -6,12 +6,18 @@ export const container = {
   overflow: 'visible',
   wordBreak: 'break-word',
   display: 'flex',
-
   '.is-right > * > &, .is-left > * > &': {
     maxWidth: '24em',
     maxHeight: '6.5em',
     WebkitLineClamp: '4',
   },
+};
+
+export const badgeTooltipContainer = {
+  ...container,
+  fontSize: 'sm',
+  fontWeight: '1',
+  lineHeight: '15.87px',
 };
 
 const badge = {
@@ -47,6 +53,7 @@ const inline = {
 
 export default {
   container,
+  badgeTooltipContainer,
   badge,
   button,
   inline,

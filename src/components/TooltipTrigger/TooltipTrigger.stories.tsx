@@ -6,6 +6,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Icon, IconButton, Text, Tooltip, TooltipTrigger } from '../../index';
 import { TooltipTriggerProps } from '../../types/tooltipTrigger';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import TooltipTriggerReadme from './TooltipTrigger.mdx';
 
@@ -111,10 +112,17 @@ export const BadgeWithTooltip: StoryFn = () => (
           Some text
         </Text>
       </Button>
-      <Tooltip>Useful tooltip</Tooltip>
+      <Tooltip variant="variants.tooltip.badgeTooltipContainer">Useful tooltip</Tooltip>
     </TooltipTrigger>
   </Box>
 );
+
+BadgeWithTooltip.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.tooltipTrigger.badgeWithTooltip,
+  },
+};
 
 export const TextWithTooltip: StoryFn = () => (
   <Box pl={50}>
