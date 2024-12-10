@@ -11,6 +11,7 @@ export interface SelectFieldProps<T> extends Omit<StyleProps, 'direction'>, UseS
         inContainer?: React.ReactNode,
     }
     'data-testid'?: string;
+    hintText?: string;
 }
 
 export interface SelectFieldBaseProps extends UseSelectFieldReturnProps<object>,
