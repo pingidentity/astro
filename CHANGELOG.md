@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.97.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.96.0...@pingux/astro@2.97.0) (2024-12-10)
+
+
+### Bug Fixes
+
+* [UIP-7252] Add hintText to SelectField ([32590f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/32590f70e58bbe0742b2e52e3a2e2b011f347cfa))
+
+
+### Features
+
+* [UIP-7091] Update Badge with Tooltip styling to match design spec ([30827c4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/30827c4046d04ff9e9f212f13f6bec713714d504))
+
+
+
+
+
 # [2.96.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.95.0...@pingux/astro@2.96.0) (2024-12-05)
 
 
