@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Item, Section, SelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { SelectItemProps, SelectSectionProps } from './SelectField.stories';
@@ -148,4 +148,13 @@ test('renders default placeholder text', () => {
   getComponent({ placeholder: placeholderText });
   const placeholder = screen.getByText(placeholderText);
   expect(placeholder).toBeInTheDocument();
+});
+
+test('should show hintText text if prop is passed', () => {
+  const hintText = 'some hint text';
+  getComponent({ hintText });
+  const helpHintButton = screen.getByTestId('help-hint__button');
+  fireEvent.mouseMove(helpHintButton);
+  fireEvent.mouseEnter(helpHintButton);
+  expect(screen.getByText(hintText)).toBeInTheDocument();
 });
