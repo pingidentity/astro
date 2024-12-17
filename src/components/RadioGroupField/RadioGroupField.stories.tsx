@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RadioField, RadioGroupField } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
@@ -63,6 +64,13 @@ export const Default = args => (
     <RadioField value="C" label="C" />
   </RadioGroupField>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.radioGroup.default,
+  },
+};
 
 export const Controlled = () => {
   const [value, setValue] = useState('A');
