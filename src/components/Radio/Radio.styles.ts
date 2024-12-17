@@ -14,7 +14,9 @@ const base = {
     bg: 'transparent',
     boxSizing: 'border-box',
   },
-  'input ~ &.is-focused': isSafari ? {
+  'input ~ &.is-focused':
+  /* istanbul ignore next */
+  isSafari ? {
     boxShadow: 'none',
     border: '1px solid',
     borderColor: 'focus',
@@ -22,6 +24,7 @@ const base = {
     transform: 'scale(1.1)',
     transformOrigin: 'center',
   }
+  /* istanbul ignore next */
     : focusWithCroppedOutline,
 };
 

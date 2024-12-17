@@ -149,6 +149,9 @@ export const FIGMA_LINKS = {
   popoverMenu: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A3073&t=We3h7LaaFJQnxdSy-1',
   },
+  radioGroup: {
+    default: 'https://embed.figma.com/design/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?m=auto&node-id=3613-12435&embed-host=share',
+  },
   requirementsList: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A4039&t=We3h7LaaFJQnxdSy-1',
   },
