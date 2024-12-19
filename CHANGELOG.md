@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.98.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.97.0...@pingux/astro@2.98.0) (2024-12-19)
+
+
+### Features
+
+* [UIP-6831] Astro RadioField TS conversion ([bc6c5a0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bc6c5a0003eb85aff9132f9f51e17080a946d90a))
+* [UIP-7108] onLoadPrev in ListView ([7660850](https://gitlab.corp.pingidentity.com/ux/pingux/commit/766085015c27038eb8a4d229a4f69b9f0162d981))
+* [UIP-7109] MultiValues onLoadPrev ([3fcca97](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3fcca97a8f2c9475866db3c2de10f3a3a1b88f41))
+
+
+
+
+
 # [2.97.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.96.0...@pingux/astro@2.97.0) (2024-12-10)
 
 
