@@ -18,9 +18,9 @@ const defaultProps = {
 };
 const getComponent = (groupProps = {}, radioProps = []) => render((
   <RadioGroupField {...defaultProps} {...groupProps}>
-    <RadioField value={testValues[0]} label={testValues[0]} {...radioProps[0]} />
-    <RadioField value={testValues[1]} label={testValues[1]} {...radioProps[1]} />
-    <RadioField value={testValues[2]} label={testValues[2]} {...radioProps[2]} />
+    <RadioField value={testValues[0]} label={testValues[0]} />
+    <RadioField value={testValues[1]} label={testValues[1]} />
+    <RadioField value={testValues[2]} label={testValues[2]} />
   </RadioGroupField>
 ));
 

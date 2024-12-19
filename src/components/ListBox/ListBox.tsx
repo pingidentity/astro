@@ -6,7 +6,9 @@ import { ListLayout } from 'listbox-layout';
 import { Virtualizer, VirtualizerItem } from 'listbox-virtualizer';
 
 import { useLocalOrForwardRef } from '../../hooks';
+import useLoadPrev from '../../hooks/useLoadPrev';
 import { ListBoxProps } from '../../types';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import Box from '../Box';
 import Loader from '../Loader';
 
@@ -55,7 +57,9 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     items,
     keyboardDelegate,
     label,
+    loadingState,
     onLoadMore,
+    onLoadPrev,
     onScroll,
     onSelectionChange,
     renderEmptyState,
@@ -132,10 +136,19 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     );
   };
 
+  const memoedLoadMoreProps = useMemo(() => ({
+    isLoading,
+    onLoadPrev,
+    items,
+  }), [isLoading, onLoadPrev, items]);
+
+  useLoadPrev(memoedLoadMoreProps, listBoxRef);
 
   return (
     <ListBoxContext.Provider value={state}>
       <Box variant="listBox.container">
+        {loadingState === loadingStates.LOADING_MORE_PREPEND
+        && <Loader variant="loader.withinListbox" aria-label="Loading more..." />}
         <Virtualizer
           {...mergeProps((listBoxProps), others)}
           autoFocus={hasAutoFocus}

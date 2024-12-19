@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FocusScope } from 'react-aria';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
@@ -32,6 +32,8 @@ const preventDefault = jest.fn();
 const focusNext = jest.fn();
 const focusPrevious = jest.fn();
 const setIsFocusEscaped = jest.fn();
+const onLoadMoreFunc = jest.fn();
+const onLoadPrevFunc = jest.fn();
 
 const testEvent = {
   stopPropagation,
@@ -115,6 +117,42 @@ const getComponentWithCheckbox = (props = {}, { renderFn = render } = {}) => ren
     </ListView>
   </FocusScope>
 ));
+
+const ComponentOnPrevLoad = () => {
+  const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_item, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
+  const [listItems, setListItems] = useState(initialItems);
+
+  const onLoadMore = async () => {
+    onLoadMoreFunc();
+  };
+
+  const onLoadPrev = async () => {
+    onLoadPrevFunc();
+  };
+  return (
+    <ListView
+      {...defaultProps}
+      items={listItems}
+      onLoadMore={onLoadMore}
+      onLoadPrev={onLoadPrev}
+    >
+      {(item: ExampleItemProps) => (
+        <Item
+          key={item.key}
+          textValue={item.name}
+          data-id={item.key}
+        >
+          <h1
+            key={item.key}
+            data-testid={item.name}
+          >
+            {item.name}
+          </h1>
+        </Item>
+      )}
+    </ListView>
+  );
+};
 
 // Needs to be added to each components test file
 universalComponentTests({
@@ -201,6 +239,12 @@ test('clicking an item fires "onSelectionChange" handler and returns Set with ke
 });
 
 test('renders loader, if a loader component is passed in, and state is loading', () => {
+  getComponent({ loadingState: loadingStates.LOADING });
+  const loader = screen.getByRole('alert');
+  expect(loader).toBeInTheDocument();
+});
+
+test('renders top loader, if a loader component is passed in, and state is loading', () => {
   getComponent({ loadingState: loadingStates.LOADING });
   const loader = screen.getByRole('alert');
   expect(loader).toBeInTheDocument();
@@ -440,4 +484,13 @@ test('escape focus delegate calls correct functions if anything else is pressed'
   escapeFocusDelegate({ ...testEvent, keyCode: 4 }, setIsFocusEscaped, focusManager, true);
   expect(focusNext).not.toHaveBeenCalled();
   expect(focusPrevious).not.toHaveBeenCalled();
+});
+
+test('escape focus delegate calls correct functions if anything else is pressed', () => {
+  render(<ComponentOnPrevLoad />);
+  const listView = screen.getAllByRole('grid');
+  fireEvent.scroll(listView[0], { target: { scrollY: 450 } });
+  expect(onLoadMoreFunc).toHaveBeenCalled();
+  fireEvent.scroll(listView[0], { target: { scrollY: 0 } });
+  expect(onLoadPrevFunc).toHaveBeenCalled();
 });

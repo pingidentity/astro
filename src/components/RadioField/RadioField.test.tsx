@@ -1,4 +1,5 @@
 import React from 'react';
+import { RadioGroupState } from 'react-stately';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -17,8 +18,8 @@ const defaultProps = {
   value: testValue,
 };
 const defaultState = {
-  setLastFocusedValue: () => {},
-};
+  setLastFocusedValue: () => jest.fn(),
+} as unknown as RadioGroupState;
 const getComponent = (props = {}, state = defaultState) => render((
   <RadioContext.Provider value={state}>
     <RadioField {...defaultProps} {...props} />
@@ -70,11 +71,14 @@ test('radio with checked content does not display if not checked', () => {
 
 test('radio with checked content displays if checked', () => {
   const testContent = 'test content';
-  getComponent({
-    checkedContent: <div>{testContent}</div>,
-  }, {
+
+  const customState = {
     selectedValue: testValue,
-  });
+  } as RadioGroupState;
+
+  getComponent({ checkedContent: <div>{testContent}</div> },
+    customState,
+  );
   const content = screen.queryByText(testContent);
   expect(content).toBeInTheDocument();
 });
