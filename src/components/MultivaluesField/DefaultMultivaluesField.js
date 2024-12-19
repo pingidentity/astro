@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { usePropWarning } from '../../hooks';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
@@ -33,12 +34,15 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     isRequired,
     items: initialItems,
     label,
+    loadingState,
     mode,
     onBlur,
     onFocus,
     onInputChange,
     onKeyDown,
     onKeyUp,
+    onLoadMore,
+    onLoadPrev,
     onOpenChange,
     onSelectionChange,
     placeholder,
@@ -57,6 +61,12 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [items, setItems] = useState(initialItems);
   const [activeDescendant, setActiveDescendant] = useState('');
+
+  useEffect(() => {
+    if (mode !== 'non-restrictive') {
+      setItems(initialItems);
+    }
+  }, [initialItems]);
 
   const toggleItems = keys => {
     setItems(initialItems.filter(item => !Array.from(keys).includes(item.key)));
@@ -366,6 +376,10 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
           hasVirtualFocus
           hasNoEmptySelection
           state={state}
+          onLoadMore={onLoadMore}
+          onLoadPrev={onLoadPrev}
+          loadingState={loadingState}
+          isLoading={loadingState === loadingStates.LOADING_MORE}
           aria-label="List of options"
         />
       </ScrollBox>

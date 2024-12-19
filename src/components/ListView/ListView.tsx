@@ -6,6 +6,7 @@ import { useCollator } from '@react-aria/i18n';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
 
+import useLoadPrev from '../../hooks/useLoadPrev';
 import { Box } from '../../index';
 import { ListViewProps, ListViewState } from '../../types/listView';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -45,6 +46,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
     isHoverable = true,
     loadingState,
     onLoadMore,
+    onLoadPrev,
     onSelectionChange,
     onExpandedChange,
     expandedKeys,
@@ -123,12 +125,21 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
     state.hover.setHoveredItem(null);
   };
 
+  const memoedLoadMoreProps = useMemo(() => ({
+    isLoading,
+    onLoadPrev,
+    items,
+  }), [isLoading, onLoadPrev, items]);
+  useLoadPrev(memoedLoadMoreProps, listViewRef);
+
   return (
     <ListViewContext.Provider value={{ state }}>
       <Box
         variant="listView.container"
         {...containerProps}
       >
+        {loadingState === loadingStates.LOADING_MORE_PREPEND
+        && <Loader variant="loader.withinListView" aria-label="Loading more..." />}
         <Virtualizer
           {...(items ? gridProps : { role: 'presentation' })}
           onLoadMore={onLoadMore}
