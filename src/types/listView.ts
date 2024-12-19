@@ -15,6 +15,7 @@ export interface ListViewProps extends Omit<TreeProps<ExampleItemProps>, 'select
   selectionMode?: SelectionOptions,
   onFocus?: (event) => void,
   onLoadMore?: () => void,
+  onLoadPrev?: () => void,
   'aria-label'?: string,
   containerProps?: object,
   sx?: ThemeUICSSObject,

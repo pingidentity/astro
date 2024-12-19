@@ -1,4 +1,4 @@
-import React, { Key, useRef, useState } from 'react';
+import React, { Key, useEffect, useRef, useState } from 'react';
 import { Item, useAsyncList } from 'react-stately';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
@@ -22,6 +22,7 @@ import {
   Text,
   TextField,
 } from '../..';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { chartData } from '../ListViewItem/controls/chart/chartData';
 
 import ListViewReadme from './ListView.mdx';
@@ -603,5 +604,61 @@ export const WithCharts = ({ ...args }) => {
         </Item>
       )}
     </ListView>
+  );
+};
+
+
+export const OnLoadPrev = () => {
+  const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
+  const [minNum, setMinNum] = useState(0);
+  const [maxNum, setMaxNum] = useState(10);
+  const [listItems, setListItems] = useState(initialItems);
+  const [loadingState, setLoadingState] = useState(loadingStates.IDLE);
+
+  const onLoadMore = async () => {
+    setLoadingState(loadingStates.LOADING_MORE);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const newItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${maxNum + index}`, key: `name: ${maxNum + index}`, id: maxNum + index }));
+    setMaxNum(maxNum + 10);
+    setListItems([...listItems, ...newItems]);
+    setLoadingState(loadingStates.IDLE);
+  };
+
+  const onLoadPrev = async () => {
+    setLoadingState(loadingStates.LOADING_MORE_PREPEND);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const newItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${minNum - (index + 1)}`, key: `name: ${minNum - (index + 1)}`, id: minNum - (index + 1) }));
+    setMinNum(minNum - 10);
+    setListItems([...newItems, ...listItems]);
+    setLoadingState(loadingStates.IDLE);
+  };
+
+  return (
+    <Box
+      sx={{
+        height: '400px',
+      }}
+    >
+      <ListView
+        {...actions}
+        items={(listItems as Iterable<ExampleItemProps>)}
+        loadingState={loadingState}
+        onLoadMore={onLoadMore}
+        onLoadPrev={onLoadPrev}
+      >
+        {(item: ExampleItemProps) => (
+          <Item key={item.name}>
+            <ListViewItem
+              data={{
+                text: item.name,
+                icon: FormSelectIcon,
+              }}
+            >
+              <Controls />
+            </ListViewItem>
+          </Item>
+        )}
+      </ListView>
+    </Box>
   );
 };
