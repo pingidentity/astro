@@ -9,6 +9,7 @@ import {
   OverlayProvider,
   Section,
 } from '../../index';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -543,5 +544,59 @@ export const CondensedWithSection = args => {
       </MultivaluesField>
     </OverlayProvider>
 
+  );
+};
+
+export const OnLoadPrev = () => {
+  const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
+  const [minNum, setMinNum] = useState(0);
+  const [maxNum, setMaxNum] = useState(10);
+  const [listItems, setListItems] = useState(initialItems);
+  const [isOpen, setIsOpen] = useState(false);
+  const [loadingState, setLoadingState] = useState(loadingStates.IDLE);
+
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  const onLoadMore = async () => {
+    setLoadingState(loadingStates.LOADING_MORE);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const newItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${maxNum + index}`, key: `name: ${maxNum + index}`, id: maxNum + index }));
+    setMaxNum(maxNum + 10);
+    setListItems([...listItems, ...newItems]);
+    setLoadingState(loadingStates.IDLE);
+  };
+
+  const onLoadPrev = async () => {
+    setLoadingState(loadingStates.LOADING_MORE_PREPEND);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const newItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${minNum - (index + 1)}`, key: `name: ${minNum - (index + 1)}`, id: minNum - (index + 1) }));
+    setMinNum(minNum - 10);
+    setListItems([...newItems, ...listItems]);
+    setLoadingState(loadingStates.IDLE);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle('bottom', isOpen, '50%', '50%', '20%')}
+    >
+      <MultivaluesField
+        items={listItems}
+        onOpenChange={onOpenChange}
+        onLoadMore={onLoadMore}
+        onLoadPrev={onLoadPrev}
+        loadingState={loadingState}
+        label="On Load More & Prev"
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
   );
 };

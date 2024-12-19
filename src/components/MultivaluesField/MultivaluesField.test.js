@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { Item, MultivaluesField, OverlayProvider, Section } from '../../index';
@@ -41,6 +41,9 @@ const defaultSectionProps = {
   label: 'Field Label',
 };
 
+const onLoadMoreFunc = jest.fn();
+const onLoadPrevFunc = jest.fn();
+
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <MultivaluesField {...defaultProps} {...props}>
@@ -70,6 +73,36 @@ const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderF
     </MultivaluesField>
   </OverlayProvider>
 ));
+
+const ComponentOnPrevLoad = () => {
+  const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_item, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
+  // eslint-disable-next-line no-unused-vars
+  const [listItems, setListItems] = useState(initialItems);
+
+  const onLoadMore = async () => {
+    onLoadMoreFunc();
+  };
+
+  const onLoadPrev = async () => {
+    onLoadPrevFunc();
+  };
+  return (
+    <OverlayProvider>
+      <MultivaluesField
+        items={listItems}
+        label="Field Label"
+        onLoadMore={onLoadMore}
+        onLoadPrev={onLoadPrev}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
 
 beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
@@ -1030,6 +1063,16 @@ test('should render the separators', () => {
       ));
     }
   });
+});
+
+test('escape focus delegate calls correct functions if anything else is pressed', () => {
+  render(<ComponentOnPrevLoad />);
+  userEvent.tab();
+  const listBox = screen.getAllByRole('listbox');
+  fireEvent.scroll(listBox[0], { target: { scrollY: 450 } });
+  expect(onLoadMoreFunc).toHaveBeenCalled();
+  fireEvent.scroll(listBox[0], { target: { scrollY: 0 } });
+  expect(onLoadPrevFunc).toHaveBeenCalled();
 });
 
 // Needs to be added to each components test file
