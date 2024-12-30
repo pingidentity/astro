@@ -46,4 +46,8 @@ export interface TextAreaFieldProps extends TestingAttributes, SharedFieldProps{
     /** The given node will be inserted into the field container. */
     inContainer: ReactNode,
   },
+  /** The unique identifier for the textarea element. */
+  id?: string;
+  /** The name for the textarea element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea). */
+  name?: string;
 }
