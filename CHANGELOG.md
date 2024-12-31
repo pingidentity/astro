@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.99.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.98.0...@pingux/astro@2.99.0) (2024-12-31)
+
+
+### Features
+
+* [UIP-7167] ListView Update to match spec ([bac1930](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bac19308dda9c60d61f3875f7724ec0f75d0ba03))
+* [UIP-7185] add name and id to TextAreaField ([9b748f0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9b748f0eaa9b5a79e336f626db9ad0bce09832d2))
+
+
+
+
+
 # [2.98.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.97.0...@pingux/astro@2.98.0) (2024-12-19)
 
 
