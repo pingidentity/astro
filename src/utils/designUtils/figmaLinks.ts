@@ -184,6 +184,12 @@ export const FIGMA_LINKS = {
     withoutButton: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16196&t=OK8Fy4P3se6BKy0F-4',
     withoutLink: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=52102-16201&t=OK8Fy4P3se6BKy0F-4',
   },
+  listView: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=57056-5258&t=aeLMWPtVqU6aIeNs-4',
+    withExpandableItems: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58432-5601&t=aeLMWPtVqU6aIeNs-4',
+    withCharts: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=57056-5709&t=aeLMWPtVqU6aIeNs-4',
+    infiniteLoadingList: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58597-316&t=aeLMWPtVqU6aIeNs-4',
+  },
   tooltipTrigger: {
     badgeWithTooltip: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=59201-5404&t=wsQsGpX0SmOiAweL-4',
   },
