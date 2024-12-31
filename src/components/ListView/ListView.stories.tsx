@@ -1,27 +1,22 @@
-import React, { Key, useEffect, useRef, useState } from 'react';
+import React, { Key, useRef, useState } from 'react';
 import { Item, useAsyncList } from 'react-stately';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
-import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
-import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
-  Badge,
   Box,
   Button,
-  HelpHint,
-  Icon,
-  IconButton,
   ListView,
   ListViewItem,
   ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
+  SearchField,
   Text,
-  TextField,
 } from '../..';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { chartData } from '../ListViewItem/controls/chart/chartData';
 
@@ -54,7 +49,6 @@ export default {
   },
 };
 
-
 export interface ExampleItemProps {
   key: Key,
   name: string,
@@ -68,14 +62,6 @@ const items: ExampleItemProps[] = [
   { key: 'Aardvark', name: 'Aardvark', id: '1', hasSeparator: false },
   { key: 'Kangaroo', name: 'Kangaroo', id: '2' },
   { key: 'Snake', name: 'Snake', id: '3' },
-];
-
-const environments = [
-  { title: 'Ping' },
-  { title: 'PingOne' },
-  { title: 'Montana' },
-  { title: 'Europe', populations: ['Spain', 'Switzerland', 'Germany'] },
-  { title: 'Asia', populations: ['Hong Kong'], isLimitedAccess: true },
 ];
 
 const animals = [
@@ -315,51 +301,18 @@ const actions = {
   onLoadMore: action('onLoadMore'),
 };
 
-interface CustomTextProps {
-  string?: string,
-  secondString?: string,
-  sx?: ThemeUICSSObject,
-}
-
-
-const CustomText = ({ string, secondString, ...others }: CustomTextProps) => (
-  <Text {...others}>
-    {string}
-    {' '}
-    <i>{secondString}</i>
-  </Text>
-);
-
 const ExpandableChildren = () => {
   return (
-    <Box sx={{ my: 'md' }}>
-      <TextField maxWidth="300px" aria-label="Search Environment" />
-      <Box sx={{ mt: 'md', gap: 'md' }}>
-        {environments.map(env => {
-          return (
-            <Box key={env.title}>
-              <Box isRow>
-                <CustomText key={`${env.title} title`} string={env.title} secondString="Environment" />
-                {env.isLimitedAccess
-                  && (
-                    <>
-                      <Badge label="Limited Access" bg="white" textColor="text.primary" sx={{ ml: 'xs', border: '1px solid', borderColor: 'neutral.80' }} />
-                      <HelpHint>
-                        Text of the popover right here...
-                      </HelpHint>
-                    </>
-                  )}
-              </Box>
-              {env.populations?.map(pop => {
-                return (
-                  <CustomText key={pop} sx={{ ml: 'sm' }} string={pop} secondString="Population" />
-                );
-              })}
-            </Box>
-          );
-        })}
-        <Button sx={{ alignSelf: 'start' }} variant="link">More Environments</Button>
-      </Box>
+    <Box sx={{ my: 'lg' }}>
+      <SearchField maxWidth="400px" aria-label="Search" placeholder="Search" />
+      <Text sx={{ mt: 'md', fontWeight: '1' }}>
+        Lorem ipsum dolor sit amet consectetur.
+        Viverra nulla nec velit sollicitudin sed nisi mi gravida.
+        Maecenas vestibulum pretium dictum dictum tempus.
+        Sit et rutrum hendrerit facilisi turpis tellus elementum.
+        Egestas consectetur in ac id. Sit aliquam et ut pellentesque in at blandit sed.
+        Sapien morbi cras eleifend lectus.
+      </Text>
     </Box>
   );
 };
@@ -371,9 +324,6 @@ const ExampleContent = contentProps => {
       <Text variant="itemTitle">
         {text}
       </Text>
-      <IconButton aria-label={`${text} information icon`}>
-        <Icon icon={InformationIcon} title={{ name: 'Information Icon' }} />
-      </IconButton>
     </Box>
   );
 };
@@ -398,6 +348,9 @@ export const Default = ({ ...args }) => (
             text: item.name,
             icon: FormSelectIcon,
           }}
+          iconProps={{
+            color: 'text.secondary',
+          }}
         >
           <Controls />
         </ListViewItem>
@@ -405,6 +358,13 @@ export const Default = ({ ...args }) => (
     )}
   </ListView>
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listView.default,
+  },
+};
 
 export const WithExpandableItems = ({ ...args }) => {
   return (
@@ -419,6 +379,13 @@ export const WithExpandableItems = ({ ...args }) => {
       )}
     </ListView>
   );
+};
+
+WithExpandableItems.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listView.withExpandableItems,
+  },
 };
 
 export const ControlledExpandableItems = ({ ...args }) => {
@@ -534,6 +501,9 @@ export const InfiniteLoadingList = args => {
                 text: item.name,
                 icon: FormSelectIcon,
               }}
+              iconProps={{
+                color: 'text.secondary',
+              }}
             >
               <Controls />
             </ListViewItem>
@@ -554,29 +524,16 @@ InfiniteLoadingList.parameters = {
       story: 'Note: Keep in mind the maxHeight may impact when the scroll callback is triggered. If you notice it\'s being called too often, try adjusting that value or loading more objects to prevent this behavior.',
     },
   },
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listView.infiniteLoadingList,
+  },
 };
-
-export const MultipleSelection = ({ ...args }) => (
-  <ListView {...props} {...args} items={items} selectionMode="multiple">
-    {(item: ExampleItemProps) => (
-      <Item key={item.name}>
-        <ListViewItem
-          data={{
-            text: item.name,
-            icon: FormSelectIcon,
-          }}
-        >
-          <Controls />
-        </ListViewItem>
-      </Item>
-    )}
-  </ListView>
-);
 
 export const WithCharts = ({ ...args }) => {
   const chartContainerRef = useRef();
   return (
-    <ListView {...args} items={items} selectionMode="multiple">
+    <ListView {...args} items={items}>
       {(item: ExampleItemProps) => (
         <Item key={item.name}>
           <ListViewItem
@@ -585,6 +542,9 @@ export const WithCharts = ({ ...args }) => {
               text: item.name,
               subtext: item.subtext,
               icon: FormSelectIcon,
+            }}
+            iconProps={{
+              color: 'text.secondary',
             }}
           >
             <ListViewItemChart
@@ -607,6 +567,17 @@ export const WithCharts = ({ ...args }) => {
   );
 };
 
+WithCharts.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listView.withCharts,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'landmark-unique', enabled: false }],
+    },
+  },
+};
 
 export const OnLoadPrev = () => {
   const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
