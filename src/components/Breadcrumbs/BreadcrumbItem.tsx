@@ -46,6 +46,8 @@ const BreadcrumbItem = forwardRef<HTMLElement, breadCrumbItemProps>((props, ref)
     itemRef as RefObject<FocusableElement>);
 
   const BreadcrumbItemElementType = useMemo(() => {
+    if (isCurrent) return Text;
+
     switch (elementType) {
       case ELEMENT_TYPE.BUTTON:
         return Button;
@@ -60,7 +62,7 @@ const BreadcrumbItem = forwardRef<HTMLElement, breadCrumbItemProps>((props, ref)
       default:
         return elementType;
     }
-  }, [elementType]) as ElementType;
+  }, [elementType, isCurrent]) as ElementType;
 
   const onPressHandler = useCallback(() => {
     if (onAction) {
@@ -79,14 +81,18 @@ const BreadcrumbItem = forwardRef<HTMLElement, breadCrumbItemProps>((props, ref)
       elementTypeProps.className = elementTypeProps.className
         ? `${elementTypeProps.className} is-current`
         : 'is-current';
+
+      Reflect.deleteProperty(elementTypeProps, 'onPress');
+      Reflect.deleteProperty(elementTypeProps, 'href');
     }
     return omit(elementTypeProps, 'onClick', 'onKeyDown', 'onKeyUp');
-  }, [elementType, itemProps, others, onPressHandler]);
+  }, [elementType, itemProps, others, onPressHandler, isCurrent, elementsWithOnPressProp]);
 
   const elementVariantProps = elementType !== ELEMENT_TYPE.FRAGMENT && {
     variant: elementType === ELEMENT_TYPE.LINK ? 'variants.breadcrumb.link' : '',
     ref: itemRef,
     ...elementProps,
+    role: isCurrent ? 'text' : 'link',
   };
 
   return (

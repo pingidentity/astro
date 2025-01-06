@@ -133,3 +133,12 @@ test('will render correctly with single child item', () => {
   expect(screen.getByTestId(testId)).toBeInTheDocument();
   expect(screen.getByText(testItemsArr[0])).toBeInTheDocument();
 });
+
+test('will render the last item as a span when isCurrent is true', () => {
+  getComponent();
+  const lastItem = screen.getByText(testItemsArr[testItemsArr.length - 1]);
+
+  expect(lastItem).toBeInstanceOf(HTMLSpanElement);
+  expect(lastItem).toHaveAttribute('aria-current', 'page');
+  expect(lastItem).toHaveAttribute('role', 'text');
+});
