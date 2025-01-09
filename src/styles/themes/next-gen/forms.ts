@@ -1,3 +1,4 @@
+import colors from './colors/colors';
 import { fieldControlWrapper, input } from './variants/input';
 import { label } from './variants/label';
 
@@ -7,9 +8,7 @@ export const checkbox = {
   color: 'text.secondary',
   mr: '8px',
   'input ~ &.is-focused': {
-    outline: '1px solid',
-    outlineColor: '#1a73e8',
-    outlineOffset: '-3px',
+    boxShadow: `inset 0px 0px 0px 1px ${colors.focus}`,
   },
 };
 
