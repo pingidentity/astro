@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.100.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.99.0...@pingux/astro@2.100.0) (2025-01-09)
+
+
+### Features
+
+* [UIP-7195] Breadcrumbs Make the last Breadcrumb Text ([86aadf9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/86aadf9c14b72bb711f8156062accef4034cddc9))
+* [UIP-7197] CheckboxField broken focus ring in Safari ([117286d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/117286d51b4d973cac18ad129e1cdb8aa36836f3))
+* [UIP-7228] PanelHeader Update to match spec ([bbf932f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bbf932f0025586172feeed27c006c2ff939f06ed))
+
+
+
+
+
 # [2.99.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.98.0...@pingux/astro@2.99.0) (2024-12-31)
 
 
