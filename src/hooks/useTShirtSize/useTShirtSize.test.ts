@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react';
 
+import nextGenTShirtSizes from '../../styles/themes/next-gen/customProperties/tShirtSizes';
 import { iconWrapperSizes } from '../../utils/devUtils/constants/tShirtSizes';
 
 import useTShirtSize from './useTShirtSize';
@@ -7,7 +8,7 @@ import useTShirtSize from './useTShirtSize';
 describe('useTShirtSize', () => {
   beforeEach(() => {
     process.env.NODE_ENV = 'development';
-    global.console.warn = () => jest.mock(); // eslint-disable-line no-console
+    global.console.warn = jest.fn(); // eslint-disable-line no-console
   });
 
   afterEach(() => {
@@ -39,6 +40,18 @@ test('returns size value if size is a tshirt value', () => {
   const obj = {
     sizeProps: {
       size: '15px',
+    },
+  };
+  expect(result.current).toEqual(obj);
+});
+
+test('returns size value if size is a t-shirt value', () => {
+  const props = { size: 'icon-500', sizes: nextGenTShirtSizes };
+  const { result } = renderHook(() => useTShirtSize(props));
+
+  const obj = {
+    sizeProps: {
+      size: '3rem',
     },
   };
   expect(result.current).toEqual(obj);

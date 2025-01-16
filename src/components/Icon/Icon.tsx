@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { useTShirtSize } from '../../hooks';
+import { useGetTheme, useTShirtSize } from '../../hooks';
 import { IconProps } from '../../types';
 import Box from '../Box';
 
@@ -10,9 +10,11 @@ const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
     color,
     icon: IconComponent,
     sx,
+    size,
   } = props;
 
-  const { sizeProps } = useTShirtSize(props);
+  const theme = useGetTheme();
+  const { sizeProps } = useTShirtSize({ size, sizes: theme.tShirtSizes });
 
   const title = props.title || (typeof IconComponent === 'object' && 'type' in IconComponent
     ? { name: IconComponent.type.name }

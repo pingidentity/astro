@@ -1,7 +1,9 @@
 import React from 'react';
+import CameraIrisIcon from '@pingux/mdi-react/CameraIrisIcon';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 
-import { Avatar,
+import {
+  Avatar,
   Badge,
   Box,
   Button,
@@ -23,8 +25,9 @@ import { Avatar,
   Tab,
   Tabs,
   Text, TextAreaField,
-  TextField } from '../../../../index';
-import { TabListItemProps } from '../../../../types';
+  TextField,
+} from '../../../../index';
+import { IconSize, TabListItemProps } from '../../../../types';
 import statuses from '../../../../utils/devUtils/constants/statuses';
 
 const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
@@ -71,6 +74,8 @@ const tabs: TabListItemProps[] = [
   { name: 'Tab 3', children: 'Tab 3 body' },
 ];
 
+const iconSizes:IconSize[] = ['icon-100', 'icon-200', 'icon-300', 'icon-400', 'icon-500', 'icon-600', 'icon-700', 'icon-800', 'icon-900'];
+
 const StickerSheetComponent = () => {
   return (
     <Box sx={{ backgroundColor: 'background.base' }} height="100%" p="lg" gap="lg">
@@ -105,6 +110,11 @@ const StickerSheetComponent = () => {
         <Box isRow gap="md" alignContent="center" flexWrap="wrap">
           {avatarColors.map(color => {
             return <IconWrapper title={{ name: 'trash can' }} size="lg" key={color} icon={DeleteIcon} color={color} />;
+          })}
+        </Box>
+        <Box isRow gap="md" alignContent="center" flexWrap="wrap">
+          {iconSizes.map(size => {
+            return <Icon key={size} icon={CameraIrisIcon} size={size} title={{ name: 'Camera' }} />;
           })}
         </Box>
         <Box isRow gap="md" alignContent="center">
