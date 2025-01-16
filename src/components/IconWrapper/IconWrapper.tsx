@@ -1,9 +1,8 @@
 import React, { forwardRef } from 'react';
 
-import { useStatusClasses, useTShirtSize } from '../../hooks';
+import { useGetTheme, useStatusClasses, useTShirtSize } from '../../hooks';
 import { Box, Icon } from '../../index';
 import { IconWrapperProps } from '../../types';
-import { iconWrapperSizes } from '../../utils/devUtils/constants/tShirtSizes';
 
 const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
   const {
@@ -17,8 +16,9 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
     isCircle,
     sx,
   } = props;
+  const theme = useGetTheme();
 
-  const { sizeProps } = useTShirtSize({ ...{ size, sizes: iconWrapperSizes } });
+  const { sizeProps } = useTShirtSize({ size, sizes: theme.iconWrapperSizes });
 
   const { classNames } = useStatusClasses(className, {
     isCircle,
