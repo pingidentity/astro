@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.101.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.100.0...@pingux/astro@2.101.0) (2025-01-16)
+
+
+### Features
+
+* [UIP-7203] Replace useTShirtSize Hook with Themed Values ([401a8e4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/401a8e4a3e84d93b43fdc3650fc682116cf67323))
+
+
+
+
+
 # [2.100.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.99.0...@pingux/astro@2.100.0) (2025-01-09)
 
 
