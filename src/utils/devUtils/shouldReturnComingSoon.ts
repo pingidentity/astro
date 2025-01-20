@@ -20,8 +20,9 @@ export const shouldReturnComingSoon = (
   }
   // if the component has NOT been converted, and the active theme is NextGen
   // return the coming soon message
-  if (isStoryInNextGen === false && (
-    selectedTheme === themes.NEXT_GEN || selectedTheme === themes.NEXT_GEN_DARK)) {
+  if ((isStoryInNextGen === false && isNextGenOnlyComponent === false) && (
+    selectedTheme === themes.NEXT_GEN || selectedTheme === themes.NEXT_GEN_DARK)
+  ) {
     return true;
   }
   // if the component is a NextGen ONLY component, and the selected theme is Astro,

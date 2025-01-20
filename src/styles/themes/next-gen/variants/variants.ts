@@ -7,6 +7,7 @@ import { listView, listViewItem } from './listview';
 import { menu, menuItem } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
+import prompt from './prompt';
 import { menuTab, tab, tabs } from './tabs';
 
 const fieldHelperText = {
@@ -303,6 +304,7 @@ export default {
   listView,
   dataTable,
   codeView,
+  prompt,
   tabs,
   menu,
   iconWrapper,
