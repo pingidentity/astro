@@ -67,6 +67,6 @@ export const componentSpecificNextGenBlacklist = {
   ],
 };
 
-export const nextGenOnlyComponents = ['NavigationHeader'];
+export const nextGenOnlyComponents = ['NavigationHeader', 'Prompt'];
 
 export default nextGenConvertedComponents;
