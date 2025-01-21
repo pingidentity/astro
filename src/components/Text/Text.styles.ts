@@ -132,6 +132,8 @@ export const text = {
   buttonTitle: { ...wordWrap, fontSize: 'xs', fontWeight: 0, color: 'text.primary', fontFamily: 'standard', lineHeight: '13px' },
   buttonSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 3, color: 'text.primary', fontFamily: 'standard', lineHeight: '16px' },
   capsLabel: { ...wordWrap, color: 'text.secondary', textTransform: 'uppercase', fontFamily: 'standard' },
+  colorFieldButtonLabel: { ...wordWrap, fontSize: 'sm', fontWeight: 0, lineHeight: '12.65px', fontFamily: 'standard' },
+  colorFieldButtonColor: { ...wordWrap, fontSize: 'sm', fontWeight: 1, lineHeight: '12.65px', fontFamily: 'standard' },
   environmentBreadcrumb,
   ...hTags,
   ...HTags,

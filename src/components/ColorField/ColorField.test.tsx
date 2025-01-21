@@ -61,3 +61,21 @@ test('clicking within the popover does not close it', () => {
   userEvent.click(screen.getByRole('presentation'));
   expect(screen.getByRole('presentation')).toBeInTheDocument();
 });
+
+test('renders detailed button preview mode correctly', () => {
+  getComponent({ mode: 'detailed-button-preview', value: testColor1 });
+
+  expect(screen.getByText(testLabel)).toBeInTheDocument();
+  expect(screen.getByText(testColor1.toLocaleUpperCase())).toBeInTheDocument();
+});
+
+test('renders MenuUp / MenuDown icon correctly', () => {
+  getComponent({ mode: 'detailed-button-preview', value: testColor1 });
+
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(screen.getByTitle('menu-up')).toBeInTheDocument();
+
+  userEvent.click(button);
+  expect(screen.getByTitle('menu-down')).toBeInTheDocument();
+});
