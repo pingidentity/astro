@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.102.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.101.0...@pingux/astro@2.102.0) (2025-01-21)
+
+
+### Features
+
+* [UIP-7224] SelectField add props that spread directly into the Select component ([0b51696](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0b51696ee602bbd626533e29536d0a4dc034ad18))
+* [UIP-7229] Text Update to match spec ([4a5f596](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4a5f596e0b3e29bfd5d4edf89daa9b5cb5468da9))
+* [UIP-7230] TooltipTrigger Update to match spec ([5453076](https://gitlab.corp.pingidentity.com/ux/pingux/commit/545307671711a6c83f27987bd1aedb7cc6ddf3ac))
+* [UIP-7269] Ai-prompt-component ([d8e2bde](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d8e2bde586182c2b99cf0b625e5b1aebfa1863d3))
+* [UIP-7280] ColorField detailed-preview mode ([a35bce3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a35bce32f92ecd1f554993f0b65974de9de07b17))
+
+
+
+
+
 # [2.101.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.100.0...@pingux/astro@2.101.0) (2025-01-16)
 
 
