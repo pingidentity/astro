@@ -144,8 +144,8 @@ export default {
 
 export const Default = args => (
   <OverlayProvider>
-    <SelectField {...args} width="100%">
-      <Item key="red">Red</Item>
+    <SelectField {...args} width="100%" selectProps={{ 'data-testid': 'select-field' }}>
+      <Item key="red" data-testid="red">Red</Item>
       <Item key="blue">Blue</Item>
       <Item key="yellow">Yellow</Item>
     </SelectField>
@@ -265,7 +265,7 @@ export const HelperText = () => (
   </SelectField>
 );
 
-const options = new Array(200).fill({ key: 'string', name: 'string' }).map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
+const options = new Array(400).fill({ key: 'string', name: 'string' }).map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
 export const DynamicItems = () => {
   // options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
   const [items] = useState(options);
