@@ -47,20 +47,6 @@ export const withDirectionProp: StoryFn = () => (
   </TooltipTrigger>
 );
 
-export const withDelayProp: StoryFn = () => (
-  <TooltipTrigger delay={700}>
-    <Button>Hover Over Me!</Button>
-    <Tooltip>Display with a delay</Tooltip>
-  </TooltipTrigger>
-);
-
-export const withWidthProp: StoryFn = () => (
-  <TooltipTrigger width="200px">
-    <Button>Hover Over Me!</Button>
-    <Tooltip>Custom width display</Tooltip>
-  </TooltipTrigger>
-);
-
 export const withArrowCrossOffsetProp: StoryFn = () => (
   <TooltipTrigger arrowCrossOffset="30px" isOpen>
     <Button>Hover Over Me!</Button>
@@ -74,24 +60,6 @@ export const isOpen: StoryFn = () => (
     <Tooltip>Display by default</Tooltip>
   </TooltipTrigger>
 );
-
-export const Disabled: StoryFn = () => (
-  <TooltipTrigger delay={0} isDisabled>
-    <IconButton aria-label="Earth Icon">
-      <Icon icon={Earth} title={{ name: 'Earth Icon' }} />
-    </IconButton>
-    <Tooltip>
-      Hello World
-    </Tooltip>
-  </TooltipTrigger>
-);
-Disabled.parameters = {
-  docs: {
-    description: {
-      story: 'The tooltip can be disabled without disabling the button press events.',
-    },
-  },
-};
 
 export const IconWithTooltip: StoryFn = () => (
   <Box pl={50}>
@@ -131,4 +99,36 @@ export const TextWithTooltip: StoryFn = () => (
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>
   </Box>
+);
+
+export const Disabled: StoryFn = () => (
+  <TooltipTrigger delay={0} isDisabled>
+    <IconButton aria-label="Earth Icon">
+      <Icon icon={Earth} title={{ name: 'Earth Icon' }} />
+    </IconButton>
+    <Tooltip>
+      Hello World
+    </Tooltip>
+  </TooltipTrigger>
+);
+Disabled.parameters = {
+  docs: {
+    description: {
+      story: 'The tooltip can be disabled without disabling the button press events.',
+    },
+  },
+};
+
+export const withDelayProp: StoryFn = () => (
+  <TooltipTrigger delay={700}>
+    <Button>Hover Over Me!</Button>
+    <Tooltip>Display with a delay</Tooltip>
+  </TooltipTrigger>
+);
+
+export const customWidth: StoryFn = () => (
+  <TooltipTrigger width="200px">
+    <Button>Hover Over Me!</Button>
+    <Tooltip>Custom width display</Tooltip>
+  </TooltipTrigger>
 );
