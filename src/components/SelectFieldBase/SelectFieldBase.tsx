@@ -1,5 +1,4 @@
 import React, { forwardRef, RefObject, useMemo } from 'react';
-import { HiddenSelect } from 'react-aria';
 import { v4 as uuid } from 'uuid';
 
 import useGetTheme from '../../hooks/useGetTheme';
@@ -15,6 +14,8 @@ import Icon from '../Icon';
 import Label from '../Label';
 import Loader from '../Loader';
 import Text from '../Text';
+
+import { HiddenSelect } from './HiddenSelect';
 
 /**
  * Select field (dropdown) that does not rely on native browser or mobile implementations.
@@ -46,6 +47,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
     triggerProps,
     triggerRef,
     valueProps,
+    selectProps,
     ...others
   } = props;
   const { ariaProps } = getAriaAttributeProps(others);
@@ -107,6 +109,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
         label={label}
         name={name}
         isDisabled
+        {...selectProps}
       />
       {trigger || defaultTrigger}
       {overlay}

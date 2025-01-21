@@ -10,6 +10,7 @@ export { default as AccordionGroup } from './components/AccordionGroup';
 export * from './components/AccordionGroup';
 export { default as AccordionItem } from './components/AccordionItem';
 export * from './components/AccordionItem';
+export { default as Prompt } from './components/AIComponents/Prompt';
 export { default as ArrayField } from './components/ArrayField';
 export * from './components/ArrayField';
 export { default as AstroWrapper } from './components/AstroProvider';

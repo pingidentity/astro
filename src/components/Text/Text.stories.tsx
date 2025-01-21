@@ -146,10 +146,10 @@ export const Default: StoryFn = () => {
   };
   const baseAndSubtitleVariants = {
     'Base (default variant of Text)': {
-      weight: fontWeights[1],
+      weight: fontWeights[0],
       fontSize: fontSizes.md,
       color: 'text.primary',
-      example: (<Text variant="base">{'<Text variant="base"/>'}</Text>),
+      example: (<Text variant="base" fontWeight="0">{'<Text variant="base"/>'}</Text>),
     },
     Subtitle: {
       weight: fontWeights[0],
@@ -280,9 +280,9 @@ export const Default: StoryFn = () => {
           {Object.entries(baseAndSubtitleVariants).map(([key, value]) => (
             <TableRow sx={{ backgroundColor: 'transparent !important' }} key={key}>
               <TableCell sx={sx.cell} width="60%"><Text>{key}</Text></TableCell>
-              <TableCell sx={sx.cell} width="25%"><Text>{value.weight}</Text></TableCell>
-              <TableCell sx={sx.cell} width="35%"><Text>{value.fontSize}</Text></TableCell>
-              <TableCell sx={sx.cell} width="45%"><Text>{value.color}</Text></TableCell>
+              <TableCell sx={sx.cell} width="20%"><Text>{value.weight}</Text></TableCell>
+              <TableCell sx={sx.cell} width="30%"><Text>{value.fontSize}</Text></TableCell>
+              <TableCell sx={sx.cell} width="40%"><Text>{value.color}</Text></TableCell>
               <TableCell sx={sx.cell}>{value.example}</TableCell>
             </TableRow>
           ),
@@ -333,7 +333,7 @@ export const Default: StoryFn = () => {
   );
 };
 
-export const WithCustomWidth: StoryFn = () => (
+export const CustomWidth: StoryFn = () => (
   <Box width={200}>
     <Text p="xl">
       superlongtextinonelinewithnowhitespacessoitcanbelongerthatanywidth
@@ -341,7 +341,7 @@ export const WithCustomWidth: StoryFn = () => (
   </Box>
 );
 
-export const TypographyStyleProps: StoryFn = () => {
+export const CustomStyle: StoryFn = () => {
   const textProps: ThemeUICSSObject = {
     fontFamily: 'times',
     fontSize: 'md',
@@ -371,7 +371,7 @@ export const TypographyStyleProps: StoryFn = () => {
   );
 };
 
-TypographyStyleProps.argTypes = {
+CustomStyle.argTypes = {
   variant: {
     control: {
       type: 'none',
