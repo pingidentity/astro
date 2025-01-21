@@ -47,4 +47,12 @@ export interface ColorFieldProps extends TestingAttributes {
   status?: Status,
   controlProps?: ControlProps,
   labelProps?: LabelProps
+  mode?: string
+}
+
+export interface ColorFieldPreviewButtonProps extends ButtonProps {
+  isOpen: boolean,
+  bg: string,
+  label: string | React.ReactNode,
+  colorValue: string
 }

@@ -83,3 +83,25 @@ export const Default: StoryFn<ColorFieldProps> = (args: ColorFieldProps) => {
     </OverlayProvider>
   );
 };
+
+export const DetailedButtonPreview: StoryFn<ColorFieldProps> = (args: ColorFieldProps) => {
+  const [color, setColor] = useState('rgba(127, 0, 127, 1)');
+
+  const handleChange = useCallback((colorVal: CustomColorProps) => {
+    if (typeof colorVal === 'string') {
+      setColor(colorVal);
+    } else if (colorVal.rgb) {
+      const { rgb } = colorVal;
+      const { r, b, g, a } = rgb;
+      setColor(`rgba(${r}, ${g}, ${b}, ${a})`);
+    }
+  }, []);
+
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <OverlayProvider>
+      <ColorField {...args} value={color} onChange={handleChange} mode="detailed-button-preview" />
+    </OverlayProvider>
+  );
+};
