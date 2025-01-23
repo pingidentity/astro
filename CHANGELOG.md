@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.103.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.102.0...@pingux/astro@2.103.0) (2025-01-23)
+
+
+### Features
+
+* [UIP-7254] NavigationHeader fix theme issues ([e888265](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e888265bde6786bdb32261b5f2fcc65dacf0fe41))
+* [UIP-7255] Add open sans font ([123abcb](https://gitlab.corp.pingidentity.com/ux/pingux/commit/123abcb2069726413d11b67cc903aff8088ddf4e))
+
+
+
+
+
 # [2.102.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.101.0...@pingux/astro@2.102.0) (2025-01-21)
 
 
