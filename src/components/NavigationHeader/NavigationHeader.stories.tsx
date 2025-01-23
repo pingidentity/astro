@@ -13,7 +13,7 @@ import HeaderAccountMenu from './HeaderAccountMenu';
 import NavigationHeaderReadme from './NavigationHeader.mdx';
 
 export default {
-  title: 'Components/NavigationHeader',
+  title: 'Experimental/NavigationHeader',
   component: NavigationHeader,
   parameters: {
     docs: {
@@ -63,7 +63,7 @@ export interface userDataProps {
   image?: string;
 }
 
-const userData:userDataProps = {
+const userData: userDataProps = {
   email: 'bjensen@example.com',
   firstName: 'Barbara',
   lastName: 'Jensen',
@@ -118,7 +118,7 @@ export const Default = ({ ...args }) => {
       <NavigationHeader {...args} isSticky aria-labelledby="next-gen-header">
 
         <Box isRow alignItems="center" justifyContent="center" py="xs" flex="0 0 auto">
-          { themeState.isNextGenDark ? whiteLogo : logo }
+          {themeState.isNextGenDark ? whiteLogo : logo}
           <Separator orientation="vertical" sx={placeholderSeparator} style={{ height: '28px', marginLeft: '1rem' }} />
           <Text as="h2" variant="navigationHeader.headerPlaceholder" id="next-gen-header">Marketplace</Text>
         </Box>

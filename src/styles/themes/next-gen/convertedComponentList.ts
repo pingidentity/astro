@@ -32,6 +32,7 @@ const nextGenConvertedComponents = [
   'ComboBoxField',
   'CodeView',
   'Sticker Sheet',
+  'NextGen ListViewItem',
 ];
 
 export const componentSpecificNextGenBlacklist = {

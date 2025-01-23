@@ -126,7 +126,7 @@ export const globalTypes = {
   theme: {
     name: 'Themes',
     description: 'Global theme for components',
-    defaultValue: 'light',
+    defaultValue: themes.ASTRO,
     toolbar: {
       icon: 'circlehollow',
       items: [
