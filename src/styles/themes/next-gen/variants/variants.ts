@@ -8,6 +8,7 @@ import { menu, menuItem } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
 import prompt from './prompt';
+import response from './response';
 import { menuTab, tab, tabs } from './tabs';
 
 const fieldHelperText = {
@@ -309,4 +310,5 @@ export default {
   menu,
   iconWrapper,
   overlayPanel,
+  response,
 };
