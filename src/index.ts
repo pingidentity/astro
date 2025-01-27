@@ -10,6 +10,8 @@ export { default as AccordionGroup } from './components/AccordionGroup';
 export * from './components/AccordionGroup';
 export { default as AccordionItem } from './components/AccordionItem';
 export * from './components/AccordionItem';
+export { default as AIPanel } from './components/AIComponents/AIPanel/AIPanel';
+export { default as AIPanelHeader } from './components/AIComponents/AIPanel/AIPanelHeader';
 export { default as Prompt } from './components/AIComponents/Prompt';
 export { default as Response } from './components/AIComponents/Response';
 export { default as ResponseAttachment } from './components/AIComponents/Response/ResponseAttachment';
