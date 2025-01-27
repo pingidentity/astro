@@ -5,7 +5,7 @@ import isChromatic from 'chromatic/isChromatic';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Image } from '../../index';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
-import { chiefIdentityChampions, pingImg } from '../../utils/devUtils/constants/images';
+import { chiefIdentityChampions, fallbackImg, pingImg } from '../../utils/devUtils/constants/images';
 
 import ImageReadme from './Image.mdx';
 
@@ -68,7 +68,7 @@ export const Disabled: StoryFn = () => <Image src={pingImg} isDisabled alt="Ping
 
 export const FallbackImage: StoryFn = () => (
   <Image
-    fallbackImage={pingImg}
+    fallbackImage={fallbackImg}
     fallbackAlt="Ping Identity"
     src="https://deelay.me/7000/https://picsum.photos/150/150"
     sx={{
