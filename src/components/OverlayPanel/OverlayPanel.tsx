@@ -35,7 +35,6 @@ const OverlayPanel = forwardRef<HTMLDivElement, OverlayPanelProps>((props, ref) 
   });
 
   const handleClose = e => {
-    e.stopPropagation();
     if (e.key === 'Escape') {
       onClose(state, triggerRef, onCloseProp);
     }
