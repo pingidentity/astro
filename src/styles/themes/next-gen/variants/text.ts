@@ -74,5 +74,15 @@ export const text = {
     fontFamily: 'standard',
     lineHeight: 'md',
   },
+  response: {
+    color: 'text.primary',
+    fontFamily: 'standard',
+    fontSize: 'md',
+    display: 'block',
+    lineHeight: '1.6rem',
+    '&.has-bullet': {
+      display: 'list-item',
+    },
+  },
   ...hTags,
 };
