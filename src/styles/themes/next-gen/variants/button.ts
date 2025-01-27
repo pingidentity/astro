@@ -175,6 +175,29 @@ const primaryWithIcon = {
   color: 'white',
 };
 
+const aiChat = {
+  ...withIcon,
+  maxWidth: 'fit-content',
+  gap: 'sm',
+  border: 'none',
+  backgroundColor: 'transparent',
+  color: 'text.primary',
+  path: { fill: 'text.primary' },
+  '&.is-focused': {
+    outline: '2px solid',
+    outlineColor: 'primary',
+    outlineOffset: '3px',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'gray-100',
+    path: { fill: 'dark' },
+  },
+  '&.is-pressed': {
+    backgroundColor: '#d5dfe8 !important',
+    path: { fill: 'dark' },
+  },
+};
+
 const baseIconButton = {
   cursor: 'pointer',
   transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
@@ -292,6 +315,7 @@ const buttons = {
   primaryWithIcon,
   iconButtons,
   modalCloseButton,
+  aiChat,
 };
 
 export default buttons;

@@ -48,6 +48,12 @@ export const text = {
     fontWeight: '1',
     letterSpacing: '1px',
   },
+  suggestion: {
+    fontSize: 'md',
+    fontFamily: 'standard',
+    color: 'text.primary',
+    lineHeight: '24px',
+  },
   modalTitle: {
     fontSize: '20px',
     fontWeight: '2',
@@ -85,4 +91,10 @@ export const text = {
     },
   },
   ...hTags,
+  aiPanelHeader: {
+    fontFamily: 'standard',
+    color: 'text.primary',
+    fontSize: 'lg',
+    fontWeight: 2,
+  },
 };
