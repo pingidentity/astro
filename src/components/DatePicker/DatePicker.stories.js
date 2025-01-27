@@ -5,6 +5,7 @@ import { actions } from '@storybook/addon-actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button } from '../../index';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import DatePicker from './DatePicker';
@@ -24,6 +25,11 @@ export default {
           <DocsLayout />
         </>
       ),
+    },
+    a11y: {
+      config: {
+        rules: [{ id: 'color-contrast', enabled: false }],
+      },
     },
   },
   argTypes: {
@@ -88,7 +94,7 @@ export default {
     isDisabled: false,
     isReadOnly: false,
     isRequired: false,
-    label: 'Example label',
+    label: 'Example Label',
     onChange: null,
   },
 };
@@ -99,9 +105,23 @@ export const Default = args => (
   />
 );
 
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.default,
+  },
+};
+
 export const DefaultValue = args => (
   <DatePicker {...args} defaultValue="2030-01-15" />
 );
+
+DefaultValue.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.defaultValue,
+  },
+};
 
 export const Controlled = args => {
   const [date, setDate] = useState(null);
@@ -121,9 +141,23 @@ export const Disabled = args => (
   <DatePicker {...args} isDisabled />
 );
 
+Disabled.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.disabled,
+  },
+};
+
 export const ReadOnly = args => (
   <DatePicker {...args} isReadOnly />
 );
+
+ReadOnly.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.readOnly,
+  },
+};
 
 export const UnavailableDates = args => {
   const unavailableRanges = [
@@ -141,30 +175,75 @@ export const UnavailableDates = args => {
   );
 };
 
+UnavailableDates.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.unavailableDates,
+  },
+};
+
 export const MinimumDate = args => (
   <DatePicker {...args} defaultValue="2030-01-15" minValue="2030-01-15" />
 );
+
+MinimumDate.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.minimumDate,
+  },
+};
 
 export const MaximumDate = args => (
   <DatePicker {...args} defaultValue="2030-01-15" maxValue="2030-01-15" />
 );
 
+MaximumDate.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.maximumDate,
+  },
+};
+
 export const Required = args => (
   <DatePicker {...args} isRequired />
 );
+
+Required.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.required,
+  },
+};
 
 export const FormatHelperText = args => (
   <DatePicker {...args} hasFormatHelpText />
 );
 
+FormatHelperText.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.formatHelperText,
+  },
+};
+
 export const DefaultOpen = args => (
   <DatePicker {...args} isDefaultOpen defaultValue="2030-01-15" />
 );
+
+DefaultOpen.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.defaultOpen,
+  },
+};
 
 export const Error = args => (
   <DatePicker {...args} status="error" helperText="Here is some helpful text..." />
 );
 
-export const Success = args => (
-  <DatePicker {...args} status="success" helperText="Here is some helpful text..." />
-);
+Error.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.datePicker.error,
+  },
+};

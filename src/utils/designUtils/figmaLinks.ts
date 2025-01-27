@@ -79,6 +79,19 @@ export const FIGMA_LINKS = {
   countryPicker: {
     default: 'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=4568-7532&mode=design&t=eSfQYHRFNPf37J4C-0',
   },
+  datePicker: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=54750-58556&mode=design&t=xKC70FhpRo7cbuqQ-4',
+    defaultValue: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=53997-4894&t=xKC70FhpRo7cbuqQ-4',
+    disabled: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=54750-58557&t=xKC70FhpRo7cbuqQ-4',
+    readOnly: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=54750-58568&t=xKC70FhpRo7cbuqQ-4',
+    required: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=54750-58706&t=xKC70FhpRo7cbuqQ-4',
+    formatHelperText: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=54750-58722&t=xKC70FhpRo7cbuqQ-4',
+    error: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=54752-58829&t=xKC70FhpRo7cbuqQ-4',
+    defaultOpen: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=54752-58855&t=xKC70FhpRo7cbuqQ-4',
+    unavailableDates: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=57486-7296&t=xKC70FhpRo7cbuqQ-4',
+    minimumDate: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=57486-7812&t=xKC70FhpRo7cbuqQ-4',
+    maximumDate: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&mode=design&node-id=57486-7297&t=xKC70FhpRo7cbuqQ-4',
+  },
   dateTimeRangePicker: {
     default: 'https://www.figma.com/design/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=49152-4497&t=n7OkhpTOBBWW4rme-0',
   },
