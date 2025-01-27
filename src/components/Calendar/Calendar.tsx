@@ -98,6 +98,7 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
       role="heading"
       aria-level={3}
       fontWeight={3}
+      flex={1}
     >
       {title}
     </Text>
@@ -112,32 +113,36 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
           ref={previousYearRef}
           onPress={() => handleYearSelection(nav.PREVIOUS)}
           mx="sm"
+          p={0}
           isDisabled={prevButtonProps.isDisabled}
           aria-label="Previous year navigation"
         >
-          <Icon icon={ChevronDoubleLeftIcon} size={18} title={{ name: 'Chevron Double Left Icon' }} />
+          <Icon icon={ChevronDoubleLeftIcon} size={25} title={{ name: 'Chevron Double Left Icon' }} />
         </IconButton>
         <IconButton
           {...prevButtonProps}
           aria-label="Previous month navigation"
+          p={0}
         >
-          <Icon icon={ChevronLeftIcon} size={18} title={{ name: 'Chevron Left Icon' }} />
+          <Icon icon={ChevronLeftIcon} size={25} title={{ name: 'Chevron Left Icon' }} />
         </IconButton>
         {renderTitle}
         <IconButton
           {...nextButtonProps}
+          p={0}
           aria-label="Next month navigation"
         >
-          <Icon icon={ChevronRightIcon} size={18} title={{ name: 'Chevron Right Icon' }} />
+          <Icon icon={ChevronRightIcon} size={25} title={{ name: 'Chevron Right Icon' }} />
         </IconButton>
         <IconButton
           ref={nextYearRef}
           onPress={() => handleYearSelection(nav.NEXT)}
           mx="sm"
+          p={0}
           isDisabled={nextButtonProps.isDisabled}
           aria-label="Next year navigation"
         >
-          <Icon icon={ChevronDoubleRightIcon} size={18} title={{ name: 'Chevron Double Right Icon' }} />
+          <Icon icon={ChevronDoubleRightIcon} size={25} title={{ name: 'Chevron Double Right Icon' }} />
         </IconButton>
       </Box>
       <CalendarGrid state={state} />
