@@ -14,9 +14,9 @@ import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
 
 const ListViewItemEditButton = forwardRef((props, ref) => {
   return (
-    <Box ref={ref}>
+    <Box ref={ref} ml="sm">
       <IconButton {...props}>
-        <Icon icon={CreateIcon} size="sm" />
+        <Icon icon={CreateIcon} size="md" />
       </IconButton>
     </Box>
   );
