@@ -196,4 +196,14 @@ export const FIGMA_LINKS = {
   editButton: {
     default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=58623-6267&t=pXTSE3YlGbL0X49N-4',
   },
+  listViewItem: {
+    default: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688-39754&t=r7CoWppWfQQ6G2t8-4',
+    withSubText: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688-39756&t=r7CoWppWfQQ6G2t8-4',
+    withImage: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44691-39794&t=r7CoWppWfQQ6G2t8-4',
+    withControls: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44691-39816&t=r7CoWppWfQQ6G2t8-4',
+    withRightOfDataSlot: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44693-39854&t=r7CoWppWfQQ6G2t8-4',
+    withLeftOfDataSlot: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44693-39909&t=r7CoWppWfQQ6G2t8-4',
+    withCharts: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44694-39944&t=r7CoWppWfQQ6G2t8-4',
+    withExtraLongText: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44694-40069&t=r7CoWppWfQQ6G2t8-4',
+  },
 };
