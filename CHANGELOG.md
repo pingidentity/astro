@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.104.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.103.0...@pingux/astro@2.104.0) (2025-01-28)
+
+
+### Features
+
+* [UIP-7116] date picker update to match spec ([1e2ee49](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1e2ee49bce1809b352a5719f099f74f558d4e453))
+* [UIP-7193] Image update to match specs ([545fd2b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/545fd2b37febc2640774b1a5460421f4b9ec891c))
+* [UIP-7194] ListViewItem Update to match spec ([725e92f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/725e92f26629fa1cc909306370210a94bd0c004b))
+* [UIP-7268] AI Panel Component ([eb9859f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eb9859f59c9606589666312d2ac679d1a9757c14))
+* [UIP-7270] AI response component ([f9f3ca2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f9f3ca2c5615fd97f4cf52870221b647df3ea98a))
+* [UIP-7273] OverlayPanel Unable to close panel using Enter key on keyboard ([733df5b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/733df5b4c6ff889fe795c86dc9786584ca18180e))
+* [UIP-7350] support specific file types ([6b96bd0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6b96bd015de6e29118e778315e0fe7db66b345a3))
+
+
+
+
+
 # [2.103.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.102.0...@pingux/astro@2.103.0) (2025-01-23)
 
 
