@@ -8,6 +8,7 @@ import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -841,4 +842,15 @@ universalComponentTests({
       <Item key="item" data-id="item">item.name</Item>
     </ComboBoxField>
   ),
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <ComboBoxField {...defaultProps} {...props}>
+      <Item key="item" data-id="item">item.name</Item>
+    </ComboBoxField>
+  ),
+  testValue: items[0].name,
+  testLabel: defaultProps.label,
+  componentType: 'ComboBoxField',
 });

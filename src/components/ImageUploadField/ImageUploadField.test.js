@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import ImageUploadField from './ImageUploadField';
 
@@ -47,6 +48,15 @@ const getComponent = (
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => <ImageUploadField {...defaultProps} {...props} />,
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <ImageUploadField {...defaultProps} {...props} />
+  ),
+  testValue: file,
+  testLabel,
+  componentType: 'ImageUploadField',
 });
 
 

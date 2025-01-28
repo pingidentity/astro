@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { SearchFieldProps } from '../../types';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import SearchField from '.';
 
@@ -16,6 +17,15 @@ const defaultProps = {
 const getComponent = (props:SearchFieldProps = {}) => render((
   <SearchField {...defaultProps} {...props} />
 ));
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <SearchField {...defaultProps} {...props} />
+  ),
+  testValue: 'testvalue',
+  testLabel,
+  componentType: 'SearchField',
+});
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <SearchField {...defaultProps} {...props} /> });

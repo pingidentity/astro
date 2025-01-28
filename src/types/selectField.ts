@@ -24,4 +24,5 @@ export interface SelectFieldBaseProps extends UseSelectFieldReturnProps<object>,
   trigger?: React.ReactNode;
   defaultText?: string;
   selectProps?: Record<string, unknown>;
+  isDisabled?: boolean;
 }

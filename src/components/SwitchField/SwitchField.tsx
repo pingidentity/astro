@@ -22,6 +22,7 @@ const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) 
     isDisabled,
     status,
     controlProps,
+    name,
     ...others
   } = props;
 
@@ -69,6 +70,7 @@ const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) 
           <Switch
             ref={switchRef}
             inputProps={fieldControlInputProps}
+            name={name}
             {...unhandledAriaProps}
             {...omit(others, 'data-pendo-id', 'aria-label')}
           />

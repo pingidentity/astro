@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { TextFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import TextField from '.';
 
@@ -17,6 +18,15 @@ const defaultProps = {
 const getComponent = (props: TextFieldProps = {}) => render(
   <TextField {...defaultProps} {...props} />,
 );
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <TextField {...defaultProps} {...props} />
+  ),
+  testValue: 'testvalue',
+  testLabel,
+  componentType: 'TextField',
+});
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <TextField {...defaultProps} {...props} /> });

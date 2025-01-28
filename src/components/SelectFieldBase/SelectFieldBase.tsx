@@ -35,6 +35,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
     fieldLabelProps,
     helperText,
     isLoadingInitial,
+    isDisabled,
     label,
     labelMode,
     name,
@@ -108,7 +109,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
         triggerRef={triggerRef as RefObject<FocusableElement>}
         label={label}
         name={name}
-        isDisabled
+        isDisabled={isDisabled}
         {...selectProps}
       />
       {trigger || defaultTrigger}
@@ -123,5 +124,6 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
     </Box>
   );
 });
+
 
 export default SelectFieldBase;

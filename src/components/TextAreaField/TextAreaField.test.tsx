@@ -6,6 +6,7 @@ import { TextAreaFieldProps } from '../../types/TextAreaField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import TextAreaField from '.';
 
@@ -26,6 +27,15 @@ const mockfunction = jest.fn();
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => <TextAreaField {...defaultProps} {...props} />,
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <TextAreaField {...defaultProps} {...props} />
+  ),
+  testValue: 'testvalue',
+  testLabel: defaultProps.label,
+  componentType: 'TextAreaField',
 });
 
 test('disabled prop disables input', () => {

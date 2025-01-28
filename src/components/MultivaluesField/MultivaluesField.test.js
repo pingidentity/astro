@@ -5,6 +5,7 @@ import { Item, MultivaluesField, OverlayProvider, Section } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, fireEvent, getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 const items = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
@@ -1084,4 +1085,17 @@ universalComponentTests({
       </MultivaluesField>
     </OverlayProvider>
   ),
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <OverlayProvider>
+      <MultivaluesField {...defaultProps} {...props}>
+        {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
+      </MultivaluesField>
+    </OverlayProvider>
+  ),
+  testValue: items[0].name,
+  testLabel: defaultProps.label,
+  componentType: 'MultivaluesField',
 });

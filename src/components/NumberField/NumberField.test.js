@@ -6,6 +6,7 @@ import { NumberField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 const testId = 'test-NumberField';
 const testLabel = 'test-NumberField-label';
@@ -36,6 +37,15 @@ universalComponentTests({
   renderComponent: props => (
     <NumberField {...defaultProps} {...props} />
   ),
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <NumberField {...defaultProps} {...props} />
+  ),
+  testValue: 5,
+  testLabel,
+  componentType: 'NumberField',
 });
 
 test('renders NumberField component', () => {
