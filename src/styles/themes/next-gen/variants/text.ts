@@ -48,6 +48,12 @@ export const text = {
     fontWeight: '1',
     letterSpacing: '1px',
   },
+  suggestion: {
+    fontSize: 'md',
+    fontFamily: 'standard',
+    color: 'text.primary',
+    lineHeight: '24px',
+  },
   modalTitle: {
     fontSize: '20px',
     fontWeight: '2',
@@ -74,5 +80,21 @@ export const text = {
     fontFamily: 'standard',
     lineHeight: 'md',
   },
+  response: {
+    color: 'text.primary',
+    fontFamily: 'standard',
+    fontSize: 'md',
+    display: 'block',
+    lineHeight: '1.6rem',
+    '&.has-bullet': {
+      display: 'list-item',
+    },
+  },
   ...hTags,
+  aiPanelHeader: {
+    fontFamily: 'standard',
+    color: 'text.primary',
+    fontSize: 'lg',
+    fontWeight: 2,
+  },
 };

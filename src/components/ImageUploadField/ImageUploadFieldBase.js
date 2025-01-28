@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { useVisuallyHidden } from 'react-aria';
 import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
@@ -34,9 +34,9 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
 
   const { visuallyHiddenProps } = useVisuallyHidden();
 
-  const acceptableInputTypes = useMemo(() => `${fileTypes?.join('/*, ')}/*`, [
-    fileTypes,
-  ]);
+  const getAcceptableInputTypes = () => fileTypes
+    .map(type => (type.includes('/') ? type : `${type}/*`))
+    .join(', ');
 
   return (
     <Box variant="forms.input.wrapper" {...fieldContainerProps}>
@@ -48,7 +48,7 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
         <Input
           {...fieldControlInputProps}
           {...visuallyHiddenProps}
-          accept={acceptableInputTypes}
+          accept={getAcceptableInputTypes()}
           data-testid="image-upload-input"
           onChange={handleInputChange}
           ref={inputRef}

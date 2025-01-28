@@ -7,6 +7,10 @@ import { TestingAttributes } from './shared/test';
 import { BoxProps } from './box';
 import { PanelSize } from './shared';
 
+export interface OverlayPanelState extends OverlayTriggerState {
+  isTransitioning?: boolean
+}
+
 
 export interface OverlayPanelProps extends BoxProps, TestingAttributes {
   /** Sets the open state of the menu. */
@@ -22,5 +26,5 @@ export interface OverlayPanelProps extends BoxProps, TestingAttributes {
   triggerRef?: React.RefObject<HTMLButtonElement>,
   /** Inline styling prop for item */
   sx?: ThemeUICSSObject
-  state?: OverlayTriggerState;
+  state?: OverlayPanelState;
 }

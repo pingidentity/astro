@@ -2,6 +2,7 @@ import { defaultFocus } from '../Button/Buttons.styles';
 
 const calendarBody = {
   pb: '10px',
+  px: '1px',
   borderTop: '1px solid',
   borderTopColor: 'neutral.80',
   '& > tr:nth-of-type(odd) ': {
@@ -29,6 +30,8 @@ const calendarButton = {
   },
   '&.is-focused': {
     ...defaultFocus,
+    outlineOffset: '0px',
+    zIndex: 1,
   },
   '&.is-unavailable': {
     backgroundColor: 'neutral.80',

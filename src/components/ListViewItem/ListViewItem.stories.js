@@ -15,6 +15,7 @@ import {
   Separator,
   Text,
 } from '../..';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
 import { chartData } from './controls/chart/chartData';
@@ -59,6 +60,13 @@ export const Default = () => (
   </Wrapper>
 );
 
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.default,
+  },
+};
+
 export const WithSubtext = () => (
   <Wrapper>
     <ListViewItem
@@ -70,6 +78,13 @@ export const WithSubtext = () => (
     />
   </Wrapper>
 );
+
+WithSubtext.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withSubText,
+  },
+};
 
 export const WithImage = () => (
   <Wrapper>
@@ -87,6 +102,13 @@ export const WithImage = () => (
   </Wrapper>
 );
 
+WithImage.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withImage,
+  },
+};
+
 export const WithControls = () => (
   <Wrapper>
     <ListViewItem
@@ -94,7 +116,6 @@ export const WithControls = () => (
         icon: FormSelectIcon,
         text: 'Fons Vernall',
       }}
-      aria-label="Fons Vernall"
     >
       <ListViewItemEditButton aria-label="edit-icon" />
       <ListViewItemSwitchField aria-label="active user" />
@@ -106,6 +127,13 @@ export const WithControls = () => (
     </ListViewItem>
   </Wrapper>
 );
+
+WithControls.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withControls,
+  },
+};
 
 export const WithRightOfDataSlot = () => {
   const renderRightOfData = (
@@ -135,6 +163,13 @@ export const WithRightOfDataSlot = () => {
   );
 };
 
+WithRightOfDataSlot.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withRightOfDataSlot,
+  },
+};
+
 export const WithLeftOfDataSlot = () => {
   const renderLeftOfData = (
     <Box mx="sm" minWidth={35}>
@@ -162,6 +197,13 @@ export const WithLeftOfDataSlot = () => {
       </ListViewItem>
     </Wrapper>
   );
+};
+
+WithLeftOfDataSlot.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withLeftOfDataSlot,
+  },
 };
 
 export const WithCharts = () => {
@@ -199,6 +241,13 @@ export const WithCharts = () => {
   );
 };
 
+WithCharts.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withCharts,
+  },
+};
+
 export const WithExtraLongText = () => {
   const renderRightOfData = (
     <Box isRow gap="sm" mx="sm">
@@ -226,4 +275,11 @@ export const WithExtraLongText = () => {
       </ListViewItem>
     </Wrapper>
   );
+};
+
+WithExtraLongText.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.withExtraLongText,
+  },
 };

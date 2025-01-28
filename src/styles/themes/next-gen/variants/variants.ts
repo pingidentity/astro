@@ -8,6 +8,7 @@ import { menu, menuItem } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
 import prompt from './prompt';
+import response from './response';
 import { menuTab, tab, tabs } from './tabs';
 
 const fieldHelperText = {
@@ -282,6 +283,41 @@ const dataTable = {
 const overlayPanel = {
   container: {
     backgroundColor: 'background.base',
+    border: 'none',
+  },
+  aiPanelContainer: {
+    backgroundColor: 'background.base',
+    border: 'none',
+    borderLeft: 'none',
+    position: 'fixed',
+    overflowY: 'scroll',
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '-2px 0px 2px 1px rgba(37, 55, 70, 0.15)',
+    display: 'flex !important',
+    opacity: 0,
+    right: '-50%',
+    transition: 'all 500ms',
+    maxWidth: '100%',
+    p: 'lg',
+    '&.is-small': {
+      width: '420px',
+    },
+    '&.is-full': {
+      width: 'container.full',
+    },
+    '&.is-open.is-transitioning': {
+      right: 0,
+      opacity: 1,
+    },
+  },
+  body: {
+    gap: 'md',
+    minHeight: '100%',
+    maxWidth: '768px',
+    alignSelf: 'center',
   },
   innerPanel: {
     backgroundColor: 'background.base',
@@ -309,4 +345,5 @@ export default {
   menu,
   iconWrapper,
   overlayPanel,
+  response,
 };
