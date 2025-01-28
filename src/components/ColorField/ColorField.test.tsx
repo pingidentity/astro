@@ -4,13 +4,14 @@ import userEvent from '@testing-library/user-event';
 import { ColorFieldProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import ColorField from './ColorField';
 
 const testId = 'test-colorField';
 const testLabel = 'test-colorField-label';
 const hexLabel = 'hex';
-const testColor1 = '#ffffff';
+const testColor1 = '#FFFFFF';
 const testColor2 = '#fffff1';
 
 const defaultProps = {
@@ -25,6 +26,13 @@ const getComponent = (props: ColorFieldProps = {}) => render(
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <ColorField {...defaultProps} {...props} /> });
+
+universalFieldComponentTests({
+  renderComponent: props => <ColorField {...defaultProps} {...props} />,
+  testValue: testColor1,
+  testLabel,
+  componentType: 'ColorField',
+});
 
 test('renders ColorField component', () => {
   getComponent();

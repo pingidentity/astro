@@ -15,6 +15,7 @@ import {
   within,
 } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 const hiddenStyling = 'border: 0px; clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;';
 
@@ -22,6 +23,16 @@ const unavailableRanges = [
   ['2022-08-01', '2022-08-03'],
   ['2022-08-15', '2022-08-20'],
 ];
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <DatePicker aria-label="datePicker-controlled" {...props} label="test label" />
+  ),
+  testValue: '2022-08-10',
+  testLabel: 'test label',
+  componentType: 'DatePicker',
+});
+
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
   <DatePicker
@@ -46,6 +57,7 @@ const ControlledComponent = () => {
   );
 };
 
+
 const originalGetSelection = window.getSelection;
 
 beforeEach(() => {
@@ -56,8 +68,12 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.resetAllMocks();
+  jest.clearAllMocks();
   window.getSelection = originalGetSelection;
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
 });
 
 test('renders DatePicker component', () => {

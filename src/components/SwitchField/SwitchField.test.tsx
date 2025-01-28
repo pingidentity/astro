@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { SwitchFieldProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import SwitchField from './SwitchField';
 
@@ -16,6 +17,15 @@ const defaultProps = {
 const getComponent = (props: SwitchFieldProps = {}) => render((
   <SwitchField {...defaultProps} {...props} />
 ));
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <SwitchField {...defaultProps} {...props} />
+  ),
+  testValue: 'testvalue',
+  testLabel: defaultProps.label,
+  componentType: 'SwitchField',
+});
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <SwitchField {...defaultProps} {...props} /> });
