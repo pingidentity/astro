@@ -26,7 +26,7 @@ describe('useGetTheme', () => {
       },
     });
     expect(result.current.name).toBe(themes.NEXT_GEN);
-    expect(result.current.themeState).toEqual({ ...baseState, isNextGen: true });
+    expect(result.current.themeState).toEqual({ ...baseState, isOnyx: true });
   });
 });
 
@@ -41,7 +41,7 @@ describe('useGetTheme', () => {
     });
     expect(result.current.name).toBe(themes.NEXT_GEN_DARK);
     expect(result.current.themeState).toEqual({
-      ...baseState, isNextGen: true, isNextGenDark: true,
+      ...baseState, isOnyx: true, isOnyxDark: true,
     });
   });
 });

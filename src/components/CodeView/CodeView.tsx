@@ -31,14 +31,14 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const { hoverProps, isHovered } = useHover(props);
   const theme = useGetTheme();
   const { themeState } = theme;
-  const { isNextGen } = themeState;
+  const { isOnyx } = themeState;
 
   const { classNames } = useStatusClasses(outerClassName, {
     isFocused: isFocusVisible,
     isHovered,
     hasLineNumbers,
     hasNoCopyButton,
-    isNextGen,
+    isOnyx,
   });
 
   // Get the width for the line number element depending on the total amount of lines
@@ -46,7 +46,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const getLineNoWidth = tokens => tokens.length.toString().length * 12;
 
   const code = children?.trim() || '' as string;
-  const codeViewTheme = stylesProp?.theme || (isNextGen ? codeViewStyle.theme : styles.theme);
+  const codeViewTheme = stylesProp?.theme || (isOnyx ? codeViewStyle.theme : styles.theme);
 
   const content = (
     <Highlight
@@ -81,7 +81,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   );
 
   /* istanbul ignore next */
-  if (isNextGen) {
+  if (isOnyx) {
     return (
       <Box
         ref={ref}

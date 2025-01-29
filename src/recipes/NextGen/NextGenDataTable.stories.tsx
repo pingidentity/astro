@@ -3,7 +3,7 @@ import React from 'react';
 import { DataTableNextGenComponent } from '../../styles/themes/next-gen/stories/DataTableNextGenComponent';
 
 export default {
-  title: 'Next Gen Recipes/DataTable',
+  title: 'Onyx Recipes/DataTable',
 };
 
 export const Default = () => {

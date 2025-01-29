@@ -6,7 +6,7 @@ import {
 import { ListViewNextGen } from '../../styles/themes/next-gen/stories/ListViewNextGenComponent';
 
 export default {
-  title: 'Next Gen Recipes/ListView',
+  title: 'Onyx Recipes/ListView',
 };
 
 export const Default = () => {

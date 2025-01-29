@@ -19,6 +19,6 @@ export interface CodeViewProps extends HoverProps, StyleProps {
   textToCopy?: string;
   sx?: ThemeUICSSObject;
   stylesProp?: ThemeUICSSObject;
-  isNextGen?: boolean;
+  isOnyx?: boolean;
   iconButtonProps?: IconButtonProps;
 }
