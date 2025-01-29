@@ -4,7 +4,7 @@ import { AstroProvider, NextGenDarkTheme } from '../../../..';
 import { NavBarNextGenComponent } from '../../../themes/next-gen/stories/NavBarNextGenComponent';
 
 export default {
-  title: 'Chromatic Only NextGen Dark NavBar',
+  title: 'Chromatic Only Onyx Dark NavBar',
 };
 
 export const Default = () => {

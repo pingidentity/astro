@@ -133,8 +133,8 @@ export const globalTypes = {
       icon: 'circlehollow',
       items: [
         { value: themes.ASTRO, icon: 'circlehollow', title: 'Astro' },
-        { value: themes.NEXT_GEN, icon: 'circle', title: 'NextGenTheme' },
-        { value: themes.NEXT_GEN_DARK, icon: 'stop', title: 'NextGenDarkTheme' },
+        { value: themes.NEXT_GEN, icon: 'circle', title: 'Onyx Theme' },
+        { value: themes.NEXT_GEN_DARK, icon: 'stop', title: 'Onyx Dark Theme' },
       ],
       showName: true,
     },

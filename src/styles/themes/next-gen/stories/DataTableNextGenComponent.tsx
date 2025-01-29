@@ -14,7 +14,7 @@ import {
 } from '../../../../index';
 
 export default {
-  title: 'Next Gen Recipes/DataTable',
+  title: 'Onyx Recipes/DataTable',
 };
 
 const getCellProps = (columnKey, align) => ({

@@ -8,8 +8,13 @@ export const shouldReturnComingSoon = (
 ) => {
   const story = context.name;
   const component = context.title.split('/')[1];
-  const isNextGenOnlyComponent = nextGenOnlyComponents.includes(component) || context.title.split('/')[0] === 'Next Gen Recipes';
+  const isNextGenOnlyComponent = nextGenOnlyComponents.includes(component) || context.title.split('/')[0] === 'Onyx Recipes';
   const isStoryInNextGen = nextGenConvertedComponents.includes(component);
+
+  if (isNextGenOnlyComponent
+    && (selectedTheme === themes.NEXT_GEN || selectedTheme === themes.NEXT_GEN_DARK)) {
+    return false;
+  }
 
   // if a specific story has not been converted, return the coming soon message
   if (componentSpecificNextGenBlacklist[component]

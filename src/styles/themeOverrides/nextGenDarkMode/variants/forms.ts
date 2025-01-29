@@ -29,7 +29,7 @@ export const checkbox = {
 
 const selectOption = {
   backgroundColor: 'background.base',
-  color: 'magenta !important',
+  color: 'text.primary',
   px: 'md',
   py: 'sm',
   alignItems: 'center',
