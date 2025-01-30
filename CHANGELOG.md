@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.105.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.104.0...@pingux/astro@2.105.0) (2025-01-30)
+
+
+### Features
+
+* [UIP-7199] Add universal test for field components ([448175f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/448175f2505e2bf7e5da0fd178a72523148ae95f))
+
+
+
+
+
 # [2.104.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.103.0...@pingux/astro@2.104.0) (2025-01-28)
 
 
