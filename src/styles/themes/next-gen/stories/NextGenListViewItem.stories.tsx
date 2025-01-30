@@ -5,8 +5,7 @@ import { Box } from '../../../..';
 import { ListViewItemNextGen } from './ListViewItemNextGen';
 
 export default {
-  title: 'Next Gen Recipes/NextGen ListViewItem',
-  component: 'Tabs',
+  title: 'Onyx Recipes/ListViewItem',
 };
 
 const item = {

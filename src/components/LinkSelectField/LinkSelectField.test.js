@@ -5,6 +5,7 @@ import { Item, LinkSelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 const items = [
   { name: 'a' },
@@ -166,4 +167,15 @@ universalComponentTests({
       {item => <Item key={item.name}>{item.name}</Item>}
     </LinkSelectField>
   ),
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <LinkSelectField {...defaultProps} {...props}>
+      {item => <Item key={item.name}>{item.name}</Item>}
+    </LinkSelectField>
+  ),
+  testValue: items[0].name,
+  testLabel: defaultProps.label,
+  componentType: 'LinkSelectField',
 });

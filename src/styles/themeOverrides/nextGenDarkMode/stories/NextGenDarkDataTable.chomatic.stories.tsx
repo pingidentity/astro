@@ -4,7 +4,7 @@ import { AstroProvider, NextGenDarkTheme } from '../../../..';
 import { DataTableNextGenComponent } from '../../../themes/next-gen/stories/DataTableNextGenComponent';
 
 export default {
-  title: 'Chromatic Only NextGen Dark DataTable',
+  title: 'Chromatic Only Onyx Dark DataTable',
 };
 
 export const Default = () => {

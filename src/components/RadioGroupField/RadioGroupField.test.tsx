@@ -5,6 +5,7 @@ import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 import RadioField from '../RadioField';
 
 import RadioGroupField from '.';
@@ -31,6 +32,18 @@ universalComponentTests({
       <RadioField value={testValues[0]} label={testValues[0]} />
     </RadioGroupField>
   ),
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <RadioGroupField {...defaultProps} {...props}>
+      <RadioField value={testValues[0]} label={testValues[0]} />
+      <RadioField value={testValues[1]} label={testValues[1]} />
+    </RadioGroupField>
+  ),
+  testValue: testValues[0],
+  testLabel,
+  componentType: 'RadioGroupField',
 });
 
 test('default radio group', () => {

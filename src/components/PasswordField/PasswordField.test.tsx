@@ -7,6 +7,7 @@ import { PasswordFieldProps, Requirement } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import PasswordField from '.';
 
@@ -75,19 +76,29 @@ const successfulRequirements: Requirement[] = [
   },
 ];
 
-const getComponent = (props:PasswordFieldProps = {}) => render(
-  <CacheProvider value={emotionCache}>
+
+universalFieldComponentTests({
+  renderComponent: props => (
     <PasswordField {...defaultProps} {...props} />
-  </CacheProvider>,
-);
+  ),
+  testValue: 'testvalue',
+  testLabel,
+  componentType: 'PasswordField',
+});
 
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => <PasswordField {...defaultProps} {...props} />,
 });
 
+const getComponent = (props:PasswordFieldProps = {}) => render(
+  <CacheProvider value={emotionCache}>
+    <PasswordField {...defaultProps} {...props} />
+  </CacheProvider>,
+);
+
 afterEach(() => {
-  jest.resetAllMocks();
+  jest.clearAllMocks();
 });
 
 test('default password field', () => {

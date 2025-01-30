@@ -87,7 +87,7 @@ export const navBar = {
   item: {
     px: '1rem',
     py: '.75rem',
-    color: 'magenta !important',
+    color: 'text.primary',
     fontFamily: 'standard',
     '&.is-hovered': {
       backgroundColor: 'background.hover',

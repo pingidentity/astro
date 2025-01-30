@@ -17,6 +17,10 @@ const nextGen = {
   },
 };
 
+const onyx = {
+  ...nextGen,
+};
+
 const sideNav = {
   ...nextGen,
   px: '0',
@@ -53,6 +57,7 @@ const footerHeader = {
 
 export default {
   nextGen,
+  onyx,
   sideNav,
   footerLinks,
   footerHeader,

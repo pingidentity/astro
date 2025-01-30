@@ -5,6 +5,7 @@ import { CheckboxFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import CheckboxField from '.';
 
@@ -19,6 +20,15 @@ const getComponent = (props: CheckboxFieldProps = {}, { renderFn = render } = {}
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => <CheckboxField {...defaultProps} {...props} />,
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <CheckboxField {...defaultProps} {...props} />
+  ),
+  testValue: 'testvalue',
+  testLabel,
+  componentType: 'CheckboxField',
 });
 
 test('default checkbox', () => {

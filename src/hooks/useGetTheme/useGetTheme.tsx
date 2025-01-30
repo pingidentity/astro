@@ -12,9 +12,9 @@ interface CustomTheme extends Theme {
 }
 
 export const baseState = {
-  isNextGen: false,
+  isOnyx: false,
   isAstro: false,
-  isNextGenDark: false,
+  isOnyxDark: false,
   isCustom: false,
 };
 
@@ -26,17 +26,17 @@ const astroState = {
   ...astroThemeValues,
 };
 
-const nextGenState = {
+const onyxState = {
   themeState: {
-    ...baseState, isNextGen: true,
+    ...baseState, isOnyx: true,
   },
   name: themes.NEXT_GEN,
   ...nextGenThemeValues,
 };
 
-const nextGenDarkState = {
+const onyxDarkState = {
   name: themes.NEXT_GEN_DARK,
-  themeState: { ...baseState, isNextGen: true, isNextGenDark: true },
+  themeState: { ...baseState, isOnyx: true, isOnyxDark: true },
   ...nextGenDarkThemeValues,
 };
 
@@ -50,13 +50,13 @@ const customThemeState = {
 
 const getTheme = theme => {
   if (theme === themes.NEXT_GEN) {
-    return { ...nextGenState };
+    return { ...onyxState };
   }
   if (theme === themes.ASTRO) {
     return { ...astroState };
   }
   if (theme === themes.NEXT_GEN_DARK) {
-    return { ...nextGenDarkState };
+    return { ...onyxDarkState };
   }
   return {
     ...customThemeState,

@@ -6,6 +6,7 @@ import { Item, Section, SelectField } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import { SelectItemProps, SelectSectionProps } from './SelectField.stories';
 
@@ -78,6 +79,18 @@ universalComponentTests({
     </SelectField>
   ),
 });
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <SelectField {...defaultProps} {...props}>
+      {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
+    </SelectField>
+  ),
+  testValue: items[0].name,
+  testLabel: defaultProps.label,
+  componentType: 'SelectField',
+});
+
 
 test('default select field', () => {
   getComponent();

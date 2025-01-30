@@ -5,7 +5,7 @@ import { AstroProvider, NextGenTheme } from '../../../..';
 import StickerSheetComponent from './StickerSheetComponent';
 
 export default {
-  title: 'NextGen Sticker Sheet',
+  title: 'Onyx Sticker Sheet',
 };
 
 export const Default = () => {

@@ -10,7 +10,7 @@ import {
 } from '../../index';
 
 export default {
-  title: 'Next Gen Recipes/Modal',
+  title: 'Onyx Recipes/Modal',
 };
 
 export const Default = () => {

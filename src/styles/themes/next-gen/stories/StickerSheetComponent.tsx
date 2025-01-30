@@ -125,7 +125,7 @@ const StickerSheetComponent = () => {
           <IconButton aria-label="default icon button">
             <Icon icon={DeleteIcon} title={{ name: 'Create Icon' }} />
           </IconButton>
-          <IconButton aria-label="default icon button" variant="nextGen">
+          <IconButton aria-label="default icon button" variant="onyx">
             <Icon icon={DeleteIcon} title={{ name: 'Create Icon' }} />
           </IconButton>
         </Box>

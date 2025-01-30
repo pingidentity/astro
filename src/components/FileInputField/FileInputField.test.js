@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import statuses from '../../utils/devUtils/constants/statuses';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
 import FileInputField from './FileInputField';
 
@@ -51,6 +52,15 @@ const getComponent = props => render(<FileInputField {...defaultProps} {...props
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => <FileInputField {...defaultProps} {...props} />,
+});
+
+universalFieldComponentTests({
+  renderComponent: props => (
+    <FileInputField {...defaultProps} {...props} />
+  ),
+  testValue: testFile,
+  testLabel,
+  componentType: 'FileInputField',
 });
 
 test('should render file input field component by default', () => {

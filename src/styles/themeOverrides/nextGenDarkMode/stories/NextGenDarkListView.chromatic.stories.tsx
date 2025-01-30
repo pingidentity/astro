@@ -4,7 +4,7 @@ import { AstroProvider, NextGenDarkTheme } from '../../../..';
 import { ListViewNextGen } from '../../../themes/next-gen/stories/ListViewNextGenComponent';
 
 export default {
-  title: 'Chromatic Only NextGen Dark ListView',
+  title: 'Chromatic Only Onyx Dark ListView',
 };
 
 export const Default = () => {
