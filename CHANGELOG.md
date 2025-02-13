@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.106.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.105.0...@pingux/astro@2.106.0) (2025-02-13)
+
+
+### Bug Fixes
+
+* [UIP-7341] Astro PanelHeader fix text ([1ef2896](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1ef2896e4718b6b6194e753a6813dff4ca5f18b2))
+
+
+### Features
+
+* [UIP-7196] Overlaypanel update to match specs ([ff65530](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ff655308464a6d74e96dd31f594c0211d053add4))
+* [UIP-7258] Export NavigationHeader & HeaderAccountMenu Component from Index File ([1a2d2bf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1a2d2bf935d3ace8f355197dbf32638e675a3b2d))
+* [UIP-7271] Ai Chat Suggestions ([18148c9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/18148c97c514aa3b48c4237ad1786be87efb1058))
+
+
+
+
+
 # [2.105.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.104.0...@pingux/astro@2.105.0) (2025-01-30)
 
 
