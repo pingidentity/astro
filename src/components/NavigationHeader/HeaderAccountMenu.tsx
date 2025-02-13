@@ -3,17 +3,18 @@ import LogoutVariantIcon from '@pingux/mdi-react/LogoutVariantIcon';
 
 import { Avatar, Box, Button, Icon, Item, Menu, OverlayProvider, PopoverMenu, Section, Text } from '../..';
 import useGetTheme from '../../hooks/useGetTheme';
-import { AvatarProps } from '../../types';
+import { AvatarProps, ButtonProps } from '../../types';
 
 import { userDataProps } from './NavigationHeader.stories';
 
 interface HeaderAccountMenuProps {
   userData?: userDataProps
   avatarProps?: AvatarProps
+  buttonProps?: ButtonProps
 }
 
 const HeaderAccountMenu = (props: HeaderAccountMenuProps) => {
-  const { userData, avatarProps } = props;
+  const { userData, avatarProps, buttonProps } = props;
   const { image, firstName, lastName, email } = userData || {};
 
   const { icons } = useGetTheme();
@@ -22,7 +23,7 @@ const HeaderAccountMenu = (props: HeaderAccountMenuProps) => {
   return (
     <OverlayProvider>
       <PopoverMenu>
-        <Button variant="navigationHeader.accountButton">
+        <Button variant="navigationHeader.accountButton" {...buttonProps}>
           <Box isRow alignItems="center" gap="xs">
             <Avatar src={image} alt="Avatar" aria-label="Avatar" {...avatarProps} />
             <Icon icon={MenuDown} size="16px" title={{ name: 'Menu Up Icon' }} color="text.primary" />

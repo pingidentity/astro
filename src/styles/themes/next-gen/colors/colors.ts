@@ -99,6 +99,7 @@ const background = {
   base: 'white',
   secondary: nextGenColors['gray-100'],
   card: nextGenColors['blue-100'],
+  suggestion: '#ecf0f5',
 };
 
 const card = {
