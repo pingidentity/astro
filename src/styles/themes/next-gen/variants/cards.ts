@@ -48,10 +48,41 @@ const activeCard = {
   },
 };
 
+const baseSuggestion = {
+  backgroundColor: 'light',
+  borderRadius: '4px',
+  p: 'md',
+  '&.is-hovered': {
+    cursor: 'pointer',
+    backgroundColor: 'background.suggestion',
+  },
+  gap: 'md',
+  flexGrow: 1,
+  transition: 'all .2s ease',
+  '&.is-focused': {
+    outline: '2px solid',
+    outlineColor: 'focus',
+    outlineOffset: '0px',
+    backgroundColor: 'background.suggestion',
+  },
+};
+
+const suggestionRow = {
+  ...baseSuggestion,
+  display: 'flex',
+};
+
+const suggestionColumn = {
+  ...baseSuggestion,
+  display: 'flex',
+};
+
 export default {
   interactive,
   dark,
   light,
   activeCard,
   container,
+  suggestionColumn,
+  suggestionRow,
 };

@@ -9,6 +9,8 @@ import { message } from './messages';
 import { navBar } from './navbar';
 import prompt from './prompt';
 import response from './response';
+import suggestion from './suggestion';
+import suggestions from './suggestions';
 import { menuTab, tab, tabs } from './tabs';
 
 const fieldHelperText = {
@@ -345,5 +347,7 @@ export default {
   menu,
   iconWrapper,
   overlayPanel,
+  suggestions,
+  suggestion,
   response,
 };

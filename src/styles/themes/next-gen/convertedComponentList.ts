@@ -68,6 +68,6 @@ export const componentSpecificNextGenBlacklist = {
   ],
 };
 
-export const nextGenOnlyComponents = ['NavigationHeader', 'Prompt', 'AI Panel', 'Response'];
+export const nextGenOnlyComponents = ['NavigationHeader', 'Prompt', 'AI Panel', 'Response', 'Suggestions'];
 
 export default nextGenConvertedComponents;
