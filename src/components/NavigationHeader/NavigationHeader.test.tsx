@@ -5,17 +5,24 @@ import WhiteBalanceSunnyIcon from '@pingux/mdi-react/WhiteBalanceSunnyIcon';
 import userEvent from '@testing-library/user-event';
 
 import { Box, Icon, IconButton, IconButtonToggle, Image, Item, Link, Menu, OverlayProvider, PopoverMenu, Separator, Text } from '../../index';
-import { pingLogoHorizontal } from '../../utils/devUtils/constants/images';
+import { pingLogoHorizontal, userImage } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
-import NavigationHeader from '.';
+import NavigationHeader, { HeaderAccountMenu } from '.';
 
 const breakpointDisplaysXS = ['none', 'none', 'block', 'block', 'block', 'block'];
 const breakpointDisplaySmall = ['none', 'none', 'none', 'none', 'block', 'block'];
 
 const pingLogoAlt = 'Ping Identity Logo';
 const fallbackAlt = 'Fallback Image';
+
+const userData = {
+  email: 'bjensen@example.com',
+  firstName: 'Barbara',
+  lastName: 'Jensen',
+  image: userImage,
+};
 
 const getComponent = (props = {}) => render(
   <NavigationHeader {...props} isSticky aria-labelledby="next-gen-header">
@@ -91,6 +98,34 @@ const getComponent = (props = {}) => render(
             'data-testid': 'theme-toggle-icon-button',
           }}
         />
+      </Box>
+      <Box as="li" display={breakpointDisplaysXS} data-testid="header-account-menu">
+        <HeaderAccountMenu userData={userData} buttonProps={{ 'data-testid': 'user-dropdown-button' }} avatarProps={{ defaultText: 'BJ', size: 'avatar.md', backgroundColor: 'red-100', color: 'red-800' }} />
+      </Box>
+    </Box>
+  </NavigationHeader>,
+);
+
+const getAccountMenuComponent = (props = {}) => render(
+  <NavigationHeader isSticky aria-labelledby="next-gen-header">
+    <Link href="#" variant="navigationHeader.logoBand" data-testid="logo-band">
+      <Box isRow alignItems="center" justifyContent="center" py="sm" flex="0 0 auto">
+        <Image
+          src={pingLogoHorizontal}
+          alt={pingLogoAlt}
+          mr="md"
+          sx={{ height: '24px' }}
+          data-testid="ping-logo"
+          fallbackAlt={fallbackAlt}
+        />
+        <Separator orientation="vertical" style={{ height: '28px', margin: '0' }} />
+        <Text as="h2" variant="navigationHeader.headerPlaceholder" id="next-gen-header">Marketplace</Text>
+      </Box>
+    </Link>
+
+    <Box as="ul" isRow alignItems="center" p="0" ml="auto" flex="0 0 auto">
+      <Box as="li" display={breakpointDisplaysXS} data-testid="header-account-menu">
+        <HeaderAccountMenu {...props} buttonProps={{ 'data-testid': 'user-dropdown-button' }} avatarProps={{ defaultText: 'BJ', size: 'avatar.md', backgroundColor: 'red-100', color: 'red-800' }} />
       </Box>
     </Box>
   </NavigationHeader>,
@@ -172,6 +207,9 @@ universalComponentTests({
             }}
           />
         </Box>
+        <Box as="li" display={breakpointDisplaysXS} data-testid="header-account-menu">
+          <HeaderAccountMenu userData={userData} avatarProps={{ defaultText: 'BJ', size: 'avatar.md', backgroundColor: 'red-100', color: 'red-800' }} />
+        </Box>
       </Box>
     </NavigationHeader>
   ),
@@ -240,4 +278,23 @@ test('should open dropdown menu when clicked', async () => {
 
   const doc = screen.getByText('Doc');
   expect(doc).toBeInTheDocument();
+});
+
+test('should render HeaderAccountMenu component', () => {
+  getAccountMenuComponent();
+  const headerAccountMenuElement = screen.getByTestId('header-account-menu');
+  expect(headerAccountMenuElement).toBeInTheDocument();
+});
+
+test('should render HeaderAccountMenu component with user data', () => {
+  getAccountMenuComponent({ userData });
+  const headerAccountMenuElement = screen.getByTestId('user-dropdown-button');
+  userEvent.click(headerAccountMenuElement);
+  expect(screen.getByText(`${userData.firstName} ${userData.lastName}`)).toBeInTheDocument();
+  expect(screen.getByText(userData.email)).toBeInTheDocument();
+});
+
+test('should render empty HeaderAccountMenu component when userdata is empty', () => {
+  getAccountMenuComponent();
+  expect(screen.getByText('BJ')).toBeInTheDocument();
 });
