@@ -1,0 +1,40 @@
+import React from 'react';
+
+import { AstroWrapper, NextGenTheme } from '../../../index';
+
+import Suggestion from './Suggestion';
+import Suggestions from './Suggestions';
+
+
+export default {
+  title: 'Ai Components/Suggestions',
+  component: Suggestions,
+};
+
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+export const Default = () => {
+  return (
+    <AstroWrapper theme={NextGenTheme}>
+      <Suggestions>
+        <Suggestion text={lorem} />
+        <Suggestion text={lorem} />
+        <Suggestion text={lorem} />
+        <Suggestion text={lorem} />
+      </Suggestions>
+    </AstroWrapper>
+  );
+};
+
+export const FullScreen = () => {
+  return (
+    <AstroWrapper theme={NextGenTheme}>
+      <Suggestions isFullScreen>
+        <Suggestion text={lorem} />
+        <Suggestion text={lorem} />
+        <Suggestion text={lorem} />
+        <Suggestion text={lorem} />
+      </Suggestions>
+    </AstroWrapper>
+  );
+};
