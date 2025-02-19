@@ -7,8 +7,6 @@ import { merge } from 'theme-ui';
 import astroTheme from '../../styles/theme';
 import Box from '../Box';
 
-import '../../open-sans.css';
-
 const pingitoFont = `
   @font-face {
     font-weight: 200;
