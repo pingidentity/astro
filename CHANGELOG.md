@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.107.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.106.0...@pingux/astro@2.107.0) (2025-02-20)
+
+
+### Bug Fixes
+
+* [UIP-7347] Open Sans CSS import causing syntax errors in consuming projects ([ba05303](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ba05303283c51dc507a64ca90035259dec13e3df))
+
+
+### Features
+
+* [UIP-7262] AI PromptInput component ([c3d91ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c3d91ae99ccea56938f63d1ebd6896a2182e0ecd))
+* [UIP-7337] Astro TS Dependencies ([a71077d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a71077d91d220f78dad5b4044da4ba592d04836e))
+* [UIP-7385] MultivaluesField dynamic values ([4d88438](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d884381a0f82d935aad874035867b502dea4018))
+
+
+
+
+
 # [2.106.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.105.0...@pingux/astro@2.106.0) (2025-02-13)
 
 
