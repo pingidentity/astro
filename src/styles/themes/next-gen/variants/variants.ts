@@ -1,3 +1,4 @@
+import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import codeView from '../codeView/codeView';
 
 import { avatar } from './avatar';
@@ -327,6 +328,7 @@ const overlayPanel = {
 };
 
 export default {
+  attachment,
   navBar,
   fieldHelperText,
   message,

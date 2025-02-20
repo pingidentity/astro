@@ -305,6 +305,38 @@ const iconButtons = {
     },
   },
   copyButton,
+  deleteAttachment: {
+    ...baseIconButton,
+    backgroundColor: 'white',
+    border: '1px solid',
+    borderColor: 'gray-300',
+    size: '24px',
+    p: '4px',
+  },
+  inverted: {
+    cursor: 'pointer',
+    transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
+    outline: 'none',
+    path: { fill: 'white' },
+    '&.is-focused': {
+      outline: '2px solid',
+      outlineColor: 'primary',
+      outlineOffset: '3px',
+    },
+    '&.is-pressed': {
+      backgroundColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+      borderColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    },
+    '&.is-hovered': {
+      border: 'none !important',
+      boxShadow: 'none !important',
+      borderColor: 'none !important',
+      backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
+    },
+    '&.is-disabled': {
+      backgroundColor: 'gray-300',
+    },
+  },
 };
 
 const buttons = {

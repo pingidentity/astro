@@ -24,6 +24,7 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
 
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
+import FileSelectIcon from './FileSelectIcon';
 
 const displayName = 'FileInputField';
 
@@ -32,20 +33,24 @@ const FILE_CHANGE_STATUS = {
   DELETED: 'deleted',
 };
 
-const FileInputField = forwardRef(({
-  defaultButtonText,
-  defaultFileList,
-  fileList: uploadedFilesImperative,
-  helperText,
-  isDisabled,
-  isLoading,
-  isMultiple,
-  onFileSelect,
-  onRemove,
-  status,
-  textProps,
-  ...others
-}, ref) => {
+const FileInputField = forwardRef((props, ref) => {
+  const { buttonProps,
+    defaultButtonText,
+    defaultFileList,
+    fileList: uploadedFilesImperative,
+    helperText,
+    iconContainerProps,
+    iconProps,
+    isDisabled,
+    isIconButton,
+    isLoading,
+    isMultiple,
+    label,
+    onFileSelect,
+    onRemove,
+    status,
+    textProps,
+    ...others } = props;
   const [uploadedFiles, setUploadedFiles] = useState(defaultFileList || []);
   const [fileChangeStatus, setFileChangeStatus] = useState(null);
   const [fileChangeMessage, setFileChangeMessage] = useState('');
@@ -63,7 +68,8 @@ const FileInputField = forwardRef(({
   } = useField({
     status,
     isDisabled,
-    ...nonAriaProps,
+    label,
+    ...props,
   });
 
   const helperTextId = uuidv4();
@@ -197,7 +203,7 @@ const FileInputField = forwardRef(({
 
   return (
     <Box fieldContainerProps={fieldContainerProps}>
-      <Label {...fieldLabelProps} />
+      {label && <Label {...fieldLabelProps} />}
       <Box
         variant="forms.fileInputField.wrapper"
         {...getPendoID(displayName)}
@@ -213,7 +219,6 @@ const FileInputField = forwardRef(({
             fieldControlInputProps,
             getInputProps(),
           )}
-          aria-label="File Input"
           multiple={isMultiple}
           onChange={handleOnChange}
           ref={inputRef}
@@ -221,13 +226,26 @@ const FileInputField = forwardRef(({
         />
         {filesListNode}
         {shouldFileSelectRender() && (
-        <FileSelect
-          buttonText={defaultButtonText}
-          handleFileSelect={handleFileSelect}
-          isDisabled={isDisabled || isLoading}
-          textProps={textProps}
-          {...ariaProps}
-        />
+          isIconButton
+            ? (
+              <FileSelectIcon
+                handleFileSelect={handleFileSelect}
+                iconContainerProps={iconContainerProps}
+                buttonProps={buttonProps}
+                iconProps={iconProps}
+                isDisabled={isDisabled || isLoading}
+                {...ariaProps}
+              />
+            )
+            : (
+              <FileSelect
+                buttonText={defaultButtonText}
+                handleFileSelect={handleFileSelect}
+                isDisabled={isDisabled || isLoading}
+                textProps={textProps}
+                {...ariaProps}
+              />
+            )
         )}
         {isLoading && (
         <Loader
