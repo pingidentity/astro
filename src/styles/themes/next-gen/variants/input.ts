@@ -15,6 +15,7 @@ const readOnlyandDisabledStyles = {
 
 export const input: ThemeUICSSObject = {
   fontSize: 'md',
+  fontFamily: 'standard',
   p: '0.75rem',
   backgroundColor: 'background.base',
   borderColor: 'border.input',
@@ -25,6 +26,17 @@ export const input: ThemeUICSSObject = {
   fontWeight: 1,
   height: '50px',
   '&::placeholder': text.placeholder,
+};
+
+input.promptInput = {
+  ...input,
+  pl: '0px',
+  border: 'none',
+  outline: 'none !important',
+  '&.is-focused': {
+    border: 'none !important',
+    outline: 'none !important',
+  },
 };
 
 input.search = {
@@ -107,6 +119,17 @@ export const fieldControlWrapper = {
 
 input.fieldControlWrapper = {
   ...fieldControlWrapper,
+};
+
+input.promptInputWrapper = {
+  ...fieldControlWrapper,
+  border: '1px solid',
+  borderColor: 'border.input',
+  px: '.75rem',
+  borderRadius: '4px',
+  '&.is-focused': {
+    boxShadow: '0 1px 1px rgba(0,0,0,.075), 0 0 0 .0625rem blue',
+  },
 };
 
 input.multivaluesWrapper = {

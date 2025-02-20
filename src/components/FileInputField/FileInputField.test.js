@@ -194,3 +194,9 @@ test('should display helper text if passed', () => {
   getComponent({ helperText: testHelperText });
   expect(screen.getByText(testHelperText)).toBeInTheDocument();
 });
+
+test('should render icon button if isIconButton prop is true', () => {
+  getComponent({ isIconButton: true });
+  const iconButton = screen.getByRole('button', { name: 'Add File Icon' });
+  expect(iconButton).toBeInTheDocument();
+});
