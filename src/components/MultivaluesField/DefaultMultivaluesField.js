@@ -66,7 +66,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     if (mode !== 'non-restrictive') {
       setItems(initialItems);
     }
-  }, [initialItems]);
+  }, [initialItems, mode]);
 
   const toggleItems = keys => {
     setItems(initialItems.filter(item => !Array.from(keys).includes(item.key)));
