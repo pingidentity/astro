@@ -1,9 +1,6 @@
 import React from 'react';
 
-import { AstroWrapper, NextGenTheme } from '../../../index';
-
-import Suggestion from './Suggestion';
-import Suggestions from './Suggestions';
+import { AstroWrapper, NextGenTheme, Suggestion, Suggestions } from '../../../index';
 
 
 export default {
