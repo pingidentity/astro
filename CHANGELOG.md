@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.107.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.107.0...@pingux/astro@2.107.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* [UIP-7440] add Suggestions to top-level index.ts file ([65b2a37](https://gitlab.corp.pingidentity.com/ux/pingux/commit/65b2a3780f9c472e44ee033c5278348731ecb669))
+
+
+
+
+
 # [2.107.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.106.0...@pingux/astro@2.107.0) (2025-02-20)
 
 
