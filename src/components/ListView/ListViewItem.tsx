@@ -58,6 +58,7 @@ const ListViewItem = props => {
   } = useGridListItem({
     node: item,
     isVirtualized: true,
+    shouldSelectOnPressUp: true,
   }, state, rowRef);
 
   const isSelected = state.selectionManager.isSelected(item.key);

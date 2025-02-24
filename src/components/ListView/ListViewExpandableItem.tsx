@@ -60,7 +60,7 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
     <Box {...expandableRowProps}>
       <Box
         {...cellProps}
-        onMouseDown={toggleExpanded}
+        onMouseUp={toggleExpanded}
         isRow
         justifyContent="start"
       >

@@ -371,6 +371,7 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
     {
       node: item,
       isVirtualized: true,
+      shouldSelectOnPressUp: true,
     },
     state,
     ref,
@@ -419,7 +420,7 @@ const TableHeaderRow = ({ item, children, style }:DataTableHeaderRowProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { rowProps } = useTableHeaderRow(
-    { node: item, isVirtualized: true },
+    { node: item, isVirtualized: true, shouldSelectOnPressUp: true },
     state,
     ref,
   );
@@ -441,6 +442,7 @@ const TableCell = ({ cell }: DataTableCellProps) => {
     {
       node: cell,
       isVirtualized: true,
+      shouldSelectOnPressUp: true,
     },
     state,
     ref,

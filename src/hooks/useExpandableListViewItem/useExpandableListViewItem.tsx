@@ -98,6 +98,7 @@ const useExpandableListViewItem: UseExpandableListViewItem<object> = <T extends 
   } = useGridListItem({
     node: item,
     isVirtualized: true,
+    shouldSelectOnPressUp: true,
   }, state, expandableItemRowRef);
 
   // remove row mouse event props
