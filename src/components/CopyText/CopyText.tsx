@@ -123,7 +123,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
         {...others}
       >
         {content}
-        <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip}>
+        <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip} {...tooltipProps}>
           <CopyButton
             onPress={copyToClipboard}
             {...mergeProps(hoverProps, focusProps, iconButtonProps)}
@@ -134,7 +134,12 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
   }
 
   return (
-    <TooltipWrapper isOpen={isTooltipOpen} tooltip={tooltip} targetRef={pressableRef}>
+    <TooltipWrapper
+      isOpen={isTooltipOpen}
+      tooltip={tooltip}
+      targetRef={pressableRef}
+      {...tooltipProps}
+    >
       <Box ref={pressableRef} {...mergeProps(hoverProps, pressableProps)} sx={{ width: 'fit-content' }} role="presentation">
         <Box
           ref={ref}
