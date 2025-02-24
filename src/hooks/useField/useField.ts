@@ -4,6 +4,7 @@ import { useFocusWithin } from '@react-aria/interactions';
 import type { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
+import { ThemeUICSSObject } from 'theme-ui';
 
 import { AriaRole, BoxProps, LabelModeProps, LabelProps, Status, ValidPositiveInteger } from '../../types';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
@@ -55,6 +56,7 @@ export interface ControlProps extends React.HTMLAttributes<Element> {
   hasAutoFocus?: boolean;
   isDefaultSelected?: boolean;
   variant?: string;
+  sx?: ThemeUICSSObject;
 }
 
 export interface UseFieldProps<T> {
