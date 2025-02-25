@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.108.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.107.1...@pingux/astro@2.108.0) (2025-02-25)
+
+
+### Bug Fixes
+
+* [UIP-7427] pass tooltipProps to CopyText ([c6b09ea](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c6b09ea7c3aa6a1c3aa914a98fabc16eeeb0d784))
+
+
+### Features
+
+* [UIP-7218] selection occurs on mouse up ([858a1cf](https://gitlab.corp.pingidentity.com/ux/pingux/commit/858a1cfefa7f42e6875479d59cb9c3d6cc6bc5ac))
+* [UIP-7393] add sx support for field prop objects ([02b40e7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/02b40e75fae68f7d6d3ff7a700564fbb72cb9873))
+
+
+
+
+
 ## [2.107.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.107.0...@pingux/astro@2.107.1) (2025-02-21)
 
 
