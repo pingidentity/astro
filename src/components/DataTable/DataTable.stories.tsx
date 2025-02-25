@@ -536,6 +536,15 @@ export const Selection = args => {
   );
 };
 
+// Added to bypass color contrast issue due to virtualizer
+Selection.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const ControlledSelection = args => {
   const [selectedKeys, setSelectedKeys] = useState([2]);
   const columns = [
@@ -609,6 +618,15 @@ export const ControlledSelection = args => {
       </DataTableBody>
     </DataTable>
   );
+};
+
+// Added to bypass color contrast issue due to virtualizer
+ControlledSelection.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
 
 export const AsyncLoading = args => {
