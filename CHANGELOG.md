@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.108.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.108.0...@pingux/astro@2.108.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* [UIP-7441] fix ImageUploadField fileTypes ([b594058](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b594058e24b7010ae4471b99cc00b2d2cfb0773e))
+
+
+
+
+
 # [2.108.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.107.1...@pingux/astro@2.108.0) (2025-02-25)
 
 
