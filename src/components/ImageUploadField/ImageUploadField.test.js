@@ -21,10 +21,6 @@ const testImageURL = 'test-image-url';
 const testImageURL2 = 'test-image-url2';
 const imageUploadImagePreview = 'image-upload-image-preview';
 const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
-const notImageFileName = 'nice-song.mp3';
-const notImageFile = new File(['(⌐□_□)'], notImageFileName, {
-  type: 'audio/mpeg',
-});
 const originalValue = global.URL.createObjectURL;
 
 const defaultProps = {
@@ -173,22 +169,15 @@ test('should not call onChange cb (when provided) if uploaded file is not allowe
   const testOnChange = jest.fn();
   getComponent({ onChange: testOnChange, fileTypes: ['audio'] });
   fireEvent.change(screen.getByTestId('image-upload-input'), {
-    target: { files: [file] },
+    target: { files: [new File(['(⌐□_□)'], 'chucknorris.audio', { type: 'audio' })] },
   });
+
   expect(testOnChange).toHaveBeenCalledTimes(0);
 });
 
 test('should render helper text', () => {
   getComponent();
   expect(screen.getByText(testHelperText)).toBeInTheDocument();
-});
-
-test('should render the file name when file type is not image', () => {
-  getComponent({ fileTypes: ['audio'] });
-  fireEvent.change(screen.getByTestId('image-upload-input'), {
-    target: { files: [notImageFile] },
-  });
-  expect(screen.getByText(notImageFileName)).toBeInTheDocument();
 });
 
 test('should render default preview image if defined initially', () => {

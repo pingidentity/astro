@@ -140,3 +140,26 @@ export const htmlElements = [
   'wbr',
   'xmp',
 ];
+
+export const supportedImageTypes = [
+  'image',
+  'image/apng',
+  'image/avif',
+  'image/gif',
+  'image/jpeg',
+  'image/png',
+  'image/svg',
+  'image/svg+xml',
+  'image/webp',
+];
+
+export const imageUploadPropTypes = [
+  'application',
+  'application',
+  'audio',
+  'example',
+  'model',
+  'text',
+  'video',
+  ...supportedImageTypes,
+];
