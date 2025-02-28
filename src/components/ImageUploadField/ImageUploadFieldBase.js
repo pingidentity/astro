@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Box, FieldHelperText, Input, Label, PopoverMenu } from '../..';
 import useField from '../../hooks/useField';
+import { imageUploadPropTypes } from '../../utils/devUtils/constants/htmlElements';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
@@ -70,16 +71,7 @@ const ImageUploadFieldBase = forwardRef((props, inputRef) => {
 ImageUploadFieldBase.propTypes = {
   fileName: PropTypes.string,
   fileTypes: PropTypes.arrayOf(
-    PropTypes.oneOf([
-      'application',
-      'audio',
-      'example',
-      'application',
-      'image',
-      'model',
-      'text',
-      'video',
-    ]),
+    PropTypes.oneOf(imageUploadPropTypes),
   ),
   handleInputChange: PropTypes.func,
   handleLabelClick: PropTypes.func,

@@ -1,5 +1,7 @@
 import React, { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 
+import { supportedImageTypes } from '../../utils/devUtils/constants/htmlElements';
+
 interface ImageUploadStateProps {
   previewImage?: string;
   defaultPreviewImage?: string | null;
@@ -46,30 +48,30 @@ const useImageUploadState = (inputRef: RefObject<HTMLInputElement | null>,
   }, [defaultPreviewImage, previewImage, inputRef]);
 
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
-    }
-    const eventFileType = event.target?.files[0]?.type?.split('/')[0];
-    if (fileTypes?.includes(eventFileType)) {
-      if (onChange && typeof onChange === 'function') {
-        onChange(event);
-      }
+    if (!event.target?.files) return;
 
-      // If existing image is not undefined, we rely on consumers to handle this themselves.
-      if (existingImage === undefined) {
-        if (eventFileType === 'image') {
-          setIsImageType(true);
+    const hasCustomFileTypes = fileTypes && fileTypes[0] !== 'image';
+    const currentFileType = event.target?.files[0]?.type;
+    const isSupportedFileType = supportedImageTypes.includes(currentFileType);
 
-          const reader = new FileReader();
-          reader.onload = () => {
-            setPreviewImage(reader.result as string);
-          };
-          reader.readAsDataURL(event.target?.files[0]);
-        } else {
-          setIsImageType(false);
-          setFileName(event.target?.files[0]?.name);
-        }
-      }
+    // If custom file types are provided, only allow those file types
+    if (hasCustomFileTypes && !fileTypes?.includes(currentFileType)) return;
+    // If no custom file types are provided, only allow image file types
+    if (!hasCustomFileTypes && !currentFileType.includes('image')) return;
+
+    if (isSupportedFileType && onChange && typeof onChange === 'function') onChange(event);
+
+    if (isSupportedFileType) {
+      setIsImageType(true);
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(event.target?.files[0]);
+    } else {
+      setIsImageType(false);
+      setFileName(event.target?.files[0]?.name);
     }
   }, []);
 

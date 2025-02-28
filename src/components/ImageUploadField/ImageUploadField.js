@@ -10,6 +10,7 @@ import { v4 as uuid } from 'uuid';
 
 import { Item, Menu } from '../..';
 import { useImageUploadState } from '../../hooks/useImageUploadState';
+import { imageUploadPropTypes } from '../../utils/devUtils/constants/htmlElements';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
@@ -98,16 +99,7 @@ ImageUploadField.propTypes = {
   /** An array of accepted file types.
    * (according to the https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#types ) */
   fileTypes: PropTypes.arrayOf(
-    PropTypes.oneOf([
-      'application',
-      'audio',
-      'example',
-      'application',
-      'image',
-      'model',
-      'text',
-      'video',
-    ]),
+    PropTypes.oneOf(imageUploadPropTypes),
   ),
   /** Text to display after the radio group label. Useful for errors or other info. */
   helperText: PropTypes.node,
