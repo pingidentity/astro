@@ -1,3 +1,5 @@
+import { ThemeUICSSObject } from 'theme-ui';
+
 import { ControlProps } from '../hooks/useField/useField';
 
 import { Status } from './item';
@@ -27,4 +29,5 @@ export interface SwitchFieldProps extends DOMAttributes {
   onFocusChange?: () => void;
   onKeyDown?: () => void;
   onKeyUp?: () => void;
+  sx?: ThemeUICSSObject;
 }
