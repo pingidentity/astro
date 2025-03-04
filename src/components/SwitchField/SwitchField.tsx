@@ -66,7 +66,13 @@ const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) 
   return (
     <Box {...getPendoID(displayName)} {...fieldContainerProps}>
       <Label variant="forms.switch.label" {...fieldLabelProps}>
-        <Box {...fieldControlWrapperProps}>
+        <Box
+          {...fieldControlWrapperProps}
+          sx={{
+            ...fieldControlWrapperProps.sx,
+            flexShrink: 0,
+          }}
+        >
           <Switch
             ref={switchRef}
             inputProps={fieldControlInputProps}
