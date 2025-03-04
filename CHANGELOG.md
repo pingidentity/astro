@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.109.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.108.1...@pingux/astro@2.109.0) (2025-03-04)
+
+
+### Features
+
+* [UIP-7428] Switch Field Overlap and Missing Support sx style Props ([c20254a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c20254a775cfbfeb2e8f9352abaa7acc1c2420e7))
+
+
+
+
+
 ## [2.108.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.108.0...@pingux/astro@2.108.1) (2025-02-28)
 
 
