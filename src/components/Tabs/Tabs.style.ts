@@ -1,4 +1,4 @@
-import { focusWithCroppedOutline, quiet } from '../Button/Buttons.styles';
+import { defaultFocus, quiet } from '../Button/Buttons.styles';
 
 export const tab = {
   pt: 10,
@@ -9,7 +9,8 @@ export const tab = {
   transform: 'translateY(1px)',
   '&.is-focused': {
     '& > span': {
-      ...focusWithCroppedOutline,
+      ...defaultFocus,
+      borderRadius: '4px',
     },
   },
   '&.is-disabled': {
