@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.110.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.109.0...@pingux/astro@2.110.0) (2025-03-11)
+
+
+### Features
+
+* [UIP-7263] tab stories match figma ([c5fd5b1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c5fd5b1ac8d575dc399444c76e88af9730ef04d0))
+* [UIP-7264] Content Title fontSize lg / 17px ([91c8c28](https://gitlab.corp.pingidentity.com/ux/pingux/commit/91c8c28a72d24494689e6759a66d511d0fc91826))
+
+
+
+
+
 # [2.109.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.108.1...@pingux/astro@2.109.0) (2025-03-04)
 
 
