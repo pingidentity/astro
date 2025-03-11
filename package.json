@@ -30,7 +30,7 @@
     "coverage-jenkins": "yarn coverage-ci --maxWorkers=25%",
     "demo": "rm -rf ./demo && storybook build -o demo",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "start": "storybook dev -p 6006",
+    "start": "yarn install-react-version && storybook dev -p 6006",
     "storybook": "yarn start",
     "test": "jest",
     "test-watch": "jest"
