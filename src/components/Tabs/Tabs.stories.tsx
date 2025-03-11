@@ -65,7 +65,7 @@ const tabs: TabListItemProps[] = [
   { name: 'Tab 3', children: <Text>Tab 3 body</Text> },
 ];
 
-export const Uncontrolled: StoryFn<TabsProps> = args => (
+export const Default: StoryFn<TabsProps> = args => (
   <Tabs items={tabs} {...args}>
     <Tab key="tab1" title="Tab 1">
       <Text>This is content for Tab 1</Text>
@@ -84,18 +84,6 @@ export const Controlled: StoryFn = () => {
       onSelectionChange={setCurrentTab}
       items={tabs}
     >
-      {(item: TabListItemProps) => (
-        <Tab key={item.name} title={item.name} textValue={item.name}>
-          {item.children}
-        </Tab>
-      )}
-    </Tabs>
-  );
-};
-
-export const WithTooltips: StoryFn = () => {
-  return (
-    <Tabs mode="tooltip" items={tabs}>
       {(item: TabListItemProps) => (
         <Tab key={item.name} title={item.name} textValue={item.name}>
           {item.children}
@@ -135,32 +123,13 @@ export const DisabledAllTabs: StoryFn = () => (
   </Tabs>
 );
 
-export const CustomTabLine: StoryFn = () => (
-  <Tabs items={tabs}>
-    {(item: TabListItemProps) => (
-      <Tab key={item.name} title={item.name} tabLineProps={{ bg: 'red' }}>
-        {item.children}
-      </Tab>
-    )}
-  </Tabs>
-);
-
-export const TabPanelProps: StoryFn = () => (
-  <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
-    {(item: TabListItemProps) => (
-      <Tab key={item.name} title={item.name}>
-        {item.children}
-      </Tab>
-    )}
-  </Tabs>
-);
 
 export const ContentSlots: StoryFn = () => {
   const beforeTabNode = (
     <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} title={{ name: 'Lock Icon' }} />
   );
   const nodeSx = {
-    marginLeft: 6,
+    marginLeft: 5,
     marginTop: 10,
   };
   const afterTabNode = (
@@ -218,3 +187,23 @@ export const WithList: StoryFn = () => {
     </Tabs>
   );
 };
+
+export const CustomTabLine: StoryFn = () => (
+  <Tabs items={tabs}>
+    {(item: TabListItemProps) => (
+      <Tab key={item.name} title={item.name} tabLineProps={{ bg: 'red' }}>
+        {item.children}
+      </Tab>
+    )}
+  </Tabs>
+);
+
+export const CustomPanelProps: StoryFn = () => (
+  <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
+    {(item: TabListItemProps) => (
+      <Tab key={item.name} title={item.name}>
+        {item.children}
+      </Tab>
+    )}
+  </Tabs>
+);
