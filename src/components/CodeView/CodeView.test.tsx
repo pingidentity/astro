@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { CodeView } from '../..';
 import { CodeViewProps } from '../../types/codeView';
-import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'test-code-sample';
@@ -165,4 +165,40 @@ test('if textToCopy is provided it\'s copied to clipboard instead of children te
   await act(async () => userEvent.click(button));
   expect(navigator.clipboard.writeText).toBeCalledTimes(1);
   expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textToCopy);
+});
+
+it('does not log a warning when the module is found (valid language)', async () => {
+  jest.mock('prismjs/components/prism-javascript', () => ({}), { virtual: true });
+
+  const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    // Intentionally left blank
+  });
+
+  const language = 'jsx';
+  getComponent({ language });
+
+  await waitFor(() => {
+    expect(warnSpy).not.toHaveBeenCalled();
+  });
+
+  warnSpy.mockRestore();
+});
+
+it('does log a warning when the module is not found (invalid language)', async () => {
+  jest.mock('prismjs/components/prism-javascript', () => ({}), { virtual: true });
+
+  const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    // Intentionally left blank
+  });
+
+  const language = 'invalid';
+  getComponent({ language });
+
+  await waitFor(() => {
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Prism language module for "invalid" not found.',
+    );
+  });
+
+  warnSpy.mockRestore();
 });

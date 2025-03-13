@@ -3,8 +3,6 @@ import { Meta, StoryFn } from '@storybook/react';
 import Prism from 'prismjs';
 import { withDesign } from 'storybook-addon-designs';
 
-import 'prismjs/components/prism-powershell';
-
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeView } from '../../index';
 import { CodeViewProps } from '../../types/codeView';
@@ -202,7 +200,7 @@ export const WithAdditionalLanguage: StoryFn = () => {
   h1 {
     color: red;
     margin-left: 40px;
-  } 
+  }
  `.trim();
 
   return (
@@ -228,6 +226,52 @@ export const WithChangedCopiedValue: StoryFn<CodeViewProps> = (args: CodeViewPro
 );
 
 WithChangedCopiedValue.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const WithCustomLanguage: StoryFn = () => {
+  const javaCode = `
+  public class Factorial {
+  public static void main(String[] args) {
+    int num = 5;
+    int factorial = 1;
+    for (int i = 1; i <= num; i++) {
+      factorial *= i;
+    }
+    System.out.println("Factorial of " + num + " is: " + factorial);
+  }
+}
+ `.trim();
+
+  const powershellCode = `
+  Get-Process
+  Get-Process -Name "notepad"
+  Stop-Process -Name "notepad"
+  Get-Service
+  Start-Service -Name "service_name"
+  Get-Date
+  Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+  Get-WmiObject -Class Win32_OperatingSystem
+  $env:COMPUTERNAME
+ `.trim();
+
+  return (
+    <>
+      <CodeView language="java" Prism={Prism}>
+        {javaCode}
+      </CodeView>
+      <CodeView language="powershell" Prism={Prism}>
+        {powershellCode}
+      </CodeView>
+    </>
+  );
+};
+
+WithCustomLanguage.parameters = {
   a11y: {
     config: {
       rules: [{ id: 'color-contrast', enabled: false }],

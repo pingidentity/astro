@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
@@ -11,6 +11,9 @@ import codeViewStyle from '../../styles/themes/next-gen/codeView/codeView';
 import { CodeViewProps, PrismProps, PrismThemeProps } from '../../types/codeView';
 
 import styles from './CodeView.styles';
+
+/* istanbul ignore next */
+(typeof global !== 'undefined' ? global : window).Prism = Prism;
 
 const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const {
@@ -47,6 +50,16 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
 
   const code = children?.trim() || '' as string;
   const codeViewTheme = stylesProp?.theme || (isOnyx ? codeViewStyle.theme : styles.theme);
+
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      require(`prismjs/components/prism-${String(language)}`);
+    } catch (error) {
+      console.warn(`Prism language module for "${String(language)}" not found.`);
+    }
+  }, [language]);
+
 
   const content = (
     <Highlight
@@ -91,7 +104,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
         role="none"
       >
         <Box isRow justifyContent="space-between" alignItems="center" variant="codeView.header">
-          <Text color="gray-300" mb="0" mr="sm" py="sm">{language?.toUpperCase()}</Text>
+          <Text color="gray-300" mb="0" mr="sm" py="sm">{typeof language === 'string' ? language.toUpperCase() : ''}</Text>
           <CopyText
             ref={ref}
             mode="rightText"
