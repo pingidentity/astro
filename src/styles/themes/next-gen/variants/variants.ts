@@ -1,4 +1,5 @@
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
+import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
 
 import { avatar } from './avatar';
@@ -352,4 +353,5 @@ export default {
   suggestions,
   suggestion,
   response,
+  skeleton,
 };

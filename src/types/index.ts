@@ -47,6 +47,7 @@ export * from './scrollBox';
 export * from './searchField';
 export * from './separator';
 export * from './shared';
+export * from './skeleton';
 export * from './switchField';
 export * from './tab';
 export * from './table';

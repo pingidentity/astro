@@ -34,6 +34,7 @@ import rangeCalendar from '../../components/RangeCalendar/RangeCalendar.styles';
 import rockerButton from '../../components/RockerButton/RockerButton.styles';
 import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
 import separator from '../../components/Separator/Separator.styles';
+import skeleton from '../../components/Skeleton/Skeleton.styles';
 import stepper from '../../components/Stepper/Stepper.styles';
 import table from '../../components/Table/Table.styles';
 import * as tab from '../../components/Tabs/Tabs.style';
@@ -80,6 +81,7 @@ export default {
   scrollBox,
   separator,
   stepper,
+  skeleton,
   table,
   timefield,
   timeZone,
