@@ -33,6 +33,7 @@ const nextGenConvertedComponents = [
   'CodeView',
   'Sticker Sheet',
   'NextGen ListViewItem',
+  'Skeleton',
 ];
 
 export const componentSpecificNextGenBlacklist = {

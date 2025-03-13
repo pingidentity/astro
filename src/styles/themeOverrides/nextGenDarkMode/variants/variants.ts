@@ -4,6 +4,7 @@ import { listView, listViewItem } from './lsitview';
 import { menu, menuItem } from './menu';
 import { message } from './message';
 import { navBar } from './navbar';
+import skeleton from './skeleton';
 
 const listBox = {
   container: {
@@ -63,4 +64,5 @@ export default {
   modal,
   tab,
   iconBadge,
+  skeleton,
 };
