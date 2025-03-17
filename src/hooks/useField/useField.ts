@@ -1,4 +1,4 @@
-import React, { Key, useEffect, useState } from 'react';
+import React, { ChangeEvent, Key, useEffect, useState } from 'react';
 import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
 import type { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
@@ -41,7 +41,7 @@ export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
   isIndeterminate?: boolean;
   maxLength?: ValidPositiveInteger;
   name?: string;
-  onChange: (event: CustomChangeEventType | React.ChangeEvent) => void | undefined;
+  onChange: (event: CustomChangeEventType | React.FormEvent<Element>) => void | undefined;
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;
@@ -110,10 +110,13 @@ export interface UseFieldProps<T> {
   /** Handler that is called when the element's selection state changes. */
   onChange?: (e: React.ChangeEvent) => void;
   onClear?: () => void;
+  /** Handler that is called when a file is added or removed. */
+  onFileChange?: (files: File[]) => void;
   /** Handler that is called when the element receives focus. */
   onFocus?: (e: React.FocusEvent) => void;
   /** Handler that is called when the element's focus status changes. */
   onFocusChange?: (isFocused: boolean) => void;
+  onKeyUp?: (e: React.KeyboardEvent) => void;
   onLoadMore?: () => void;
   onOpenChange?: (isOpen: boolean) => unknown;
   onSelectionChange?: (key: string) => void;
@@ -134,8 +137,11 @@ export interface UseFieldProps<T> {
 }
 
 export type CustomChangeEventType = {
+  currentTarget?: {
+    value?: string | number
+  },
   target?: {
-    value: string | number | undefined
+    value?: string | number
   },
   persist?(): void;
 }
@@ -198,9 +204,10 @@ const useField = <T>(props: UseFieldProps<T>) => {
   }, [defaultValue, value, placeholder]);
 
   // Capture value changes so we can apply the has-value class to the container
-  const fieldOnChange = (e: CustomChangeEventType) => {
-    const eventValue = e?.target?.value;
-    if (!!eventValue || eventValue === 0 || !!placeholder || placeholder === 0) {
+  const fieldOnChange = (e: (CustomChangeEventType | React.ChangeEvent<Element>)) => {
+    const eventValue = (e.currentTarget as HTMLInputElement).value;
+    const isZero = !Number.isNaN(Number(eventValue)) && Number(eventValue) === 0;
+    if (!!eventValue || !!placeholder || isZero || !!placeholder || placeholder === 0) {
       setHasValue(true);
     } else {
       setHasValue(false);
