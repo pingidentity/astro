@@ -17,10 +17,9 @@ export default {
 
 export const Default = args => {
   const [value, setValue] = useState('');
-  const [attachments, setAttachments] = useState([]);
+  const [, setAttachments] = useState([]);
 
   const onFileChange = files => {
-    console.log(files);
     setAttachments(files);
   };
 
@@ -28,9 +27,9 @@ export const Default = args => {
     console.log(event);
   };
 
-  const onSubmit = event => {
-    console.log(event);
-    console.log(attachments);
+  const onSubmit = () => {
+    console.log('submit');
+    setValue('');
   };
 
   return (

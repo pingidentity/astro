@@ -1,8 +1,8 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { useField, useLocalOrForwardRef } from '../../../hooks';
-import { FieldControlInputProps, UseFieldProps } from '../../../hooks/useField/useField';
+import { useField, useLocalOrForwardRef, useProgressiveState } from '../../../hooks';
+import { UseFieldProps } from '../../../hooks/useField/useField';
 import { Box, FileInputField, Input } from '../../../index';
 import { FileProps, PromptInputProps } from '../../../types/promptInput';
 import statuses from '../../../utils/devUtils/constants/statuses';
@@ -13,21 +13,22 @@ import PromptUploadButton from './PromptUploadButton';
 const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) => {
   const {
     attachmentProps,
-    onFileChange,
     isFullScreen,
     isLoading,
     fileInputButtonProps,
-    value,
+    value: valueProp,
+    defaultValue: defaultValueProp,
     onCancel,
     onSubmit,
     uploadButtonContainerProps,
     uploadButtonProps,
-    ...others
   } = props;
+  const { onFileChange, ...propsWithoutOnFileChange } = props;
   const firstUpdate = useRef(true);
   const [userFiles, setUserFiles] = useState<FileProps[] | []>([]);
+  const [value, setValue] = useProgressiveState(valueProp, defaultValueProp);
 
-  const handleFileSelect = (event, files) => {
+  const handleFileSelect = (_event, files) => {
     const arrayWithNewFiles = Array.from(files) as FileProps[];
 
     const filesWithIdAndLink = arrayWithNewFiles.map(newFile => {
@@ -61,7 +62,12 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
     fieldContainerProps,
     fieldControlInputProps,
     fieldControlWrapperProps,
-  } = useField(others as UseFieldProps<PromptInputProps>);
+  } = useField({
+    onChange: (e: ChangeEvent<Element>) => {
+      setValue((e as ChangeEvent<HTMLInputElement>).target.value);
+    },
+    ...propsWithoutOnFileChange as UseFieldProps<PromptInputProps>,
+  });
 
   const inputRef = useLocalOrForwardRef<HTMLInputElement>(ref);
 
@@ -99,9 +105,9 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
           </Box>
           <Input
             ref={inputRef}
-            {...fieldControlInputProps as Omit<FieldControlInputProps, 'onChange'>}
             variant="forms.input.promptInput"
             data-testid="prompt-input"
+            {...fieldControlInputProps}
           />
           <PromptUploadButton
             isLoading={isLoading}
@@ -116,5 +122,11 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
     </Box>
   );
 });
+
+PromptInput.defaultProps = {
+  controlProps: {
+    'aria-label': 'chat assistant text input',
+  },
+};
 
 export default PromptInput;

@@ -1,20 +1,23 @@
 import type { PressEvent } from '@react-types/shared';
 
 import { IconTypeExtended } from './icon';
+import { IconButtonProps } from './iconButton';
 import { TextFieldProps } from './textField';
 
-export interface PromptInputProps extends TextFieldProps {
+export interface PromptProps {
     attachmentProps?: object,
-    value: string,
+    value?: string,
     onFileChange?: (files: FileProps[]) => void,
-    onCancel?: (event: PressEvent) => void,
-    onSubmit?: (event: PressEvent) => void,
+    onCancel?: (event: PressEvent | KeyboardEvent) => void,
+    onSubmit?: (event: PressEvent | KeyboardEvent, value?: string) => void,
     isLoading?: boolean,
     uploadButtonContainerProps?: object,
     uploadButtonProps?: object,
     fileInputButtonProps?: object,
     isFullScreen?: boolean,
 }
+
+export interface PromptInputProps extends TextFieldProps, PromptProps {}
 
 export interface AttachmentProps {
     title: string,
@@ -38,10 +41,6 @@ export interface FileProps {
     fileObj: object
 }
 
-export interface PromptUploadButtonProps {
+export interface PromptUploadButtonProps extends PromptProps, Omit<IconButtonProps, 'onSubmit' | 'value'> {
     uploadButtonContainerProps?: object,
-    value: string,
-    isLoading?: boolean,
-    onSubmit?: (event: PressEvent) => void
-    onCancel?: (event: PressEvent) => void
 }

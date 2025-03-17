@@ -1,56 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
-import PaperOutlineIcon from '@pingux/mdi-react/PaperOutlineIcon';
+import userEvent from '@testing-library/user-event';
 
-import { AstroProvider, NextGenTheme } from '../../..';
-import { fireEvent, render, screen } from '../../../utils/testUtils/testWrapper';
+import { PromptInputProps } from '../../../types/promptInput';
+import { render, screen } from '../../../utils/testUtils/testWrapper';
+import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 import { getFileExtension } from '../Attachment/Attachment';
 
 import PromptInput from './PromptInput';
-
-const testFileURL = 'test-file-url';
-const testFileName = 'chucknorris.png';
-const testFile = new File(['(⌐□_□)'], testFileName, {
-  type: 'image/png',
-});
 
 const onSubmitCallback = jest.fn();
 const onCancelCallback = jest.fn();
 const onChangeCallback = jest.fn();
 const onFileChangeCallback = jest.fn();
-
-const PromptInputStory = (props: {isLoading?: boolean, attachmentIcon?: React.ElementType}) => {
-  const [value, setValue] = useState('');
-  return (
-    <AstroProvider themeOverrides={[NextGenTheme]}>
-      <PromptInput
-        placeholder="Enter a prompt here"
-        onChange={e => {
-          setValue((e.target as HTMLInputElement).value);
-          onChangeCallback(e);
-        }}
-        onSubmit={onSubmitCallback}
-        onCancel={onCancelCallback}
-        onFileChange={onFileChangeCallback}
-        value={value}
-        data-testid="testid"
-        label="chat prompt"
-        isLoading={props.isLoading}
-        attachmentProps={{
-          icon: props.attachmentIcon,
-          iconWrapperProps: {
-            'data-testid': 'icon-wrapper',
-          },
-        }}
-        uploadButtonProps={{
-          'data-testid': 'upload button',
-        }}
-      />
-    </AstroProvider>
-  );
+const originalValue = global.URL.createObjectURL;
+const testFileURL = 'test-file-url';
+const testFileName = 'chucknorris.png';
+const testFile = new File(['(⌐□_□)'], testFileName, {
+  type: 'image/png',
+});
+const buttonTestId = 'upload button';
+const testId = 'test-id';
+const testId2 = 'test-id-2';
+const testLabel = 'Test Label';
+const testValue = 'test value';
+const defaultProps = {
+  'data-testid': testId,
+  controlProps: {
+    'aria-label': testLabel,
+  },
 };
 
-const originalValue = global.URL.createObjectURL;
+const getComponent = (props: PromptInputProps = {}) => render(
+  <PromptInput {...defaultProps} {...props} />,
+);
+
+// Needs to be added to each components test file
+universalComponentTests({ renderComponent: props => <PromptInput {...defaultProps} {...props} /> });
 
 beforeAll(() => {
   global.URL.createObjectURL = jest.fn(() => testFileURL);
@@ -64,96 +50,128 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test('prompt is rendered', async () => {
-  render(<PromptInputStory />);
+test('default PromptInput', () => {
+  getComponent();
 
-  const input = screen.getByTestId('testid');
+  const field = screen.getByTestId(testId);
+  const control = screen.getByLabelText(testLabel);
 
-  expect(input).toBeInTheDocument();
+  expect(field).toBeInstanceOf(HTMLDivElement);
+  expect(control).toBeInstanceOf(HTMLInputElement);
+  expect(field).toBeInTheDocument();
+  expect(control).toBeInTheDocument();
 });
 
 test('onChange and value props work correctly', async () => {
-  render(<PromptInputStory />);
+  getComponent({ onChange: onChangeCallback });
 
-  const input = screen.getByTestId('prompt-input');
-  const testValue = 'test input';
+  const control = screen.getByLabelText(testLabel);
+  await userEvent.type(control, testValue);
 
-  fireEvent.change(input, { target: { value: testValue } });
-
-  expect(input).toHaveValue(testValue);
-  expect(onChangeCallback).toHaveBeenCalledTimes(1);
+  expect(control).toHaveValue(testValue);
+  expect(onChangeCallback).toHaveBeenCalledTimes(testValue.length);
 });
 
 test('onSubmit prop works correctly', async () => {
-  render(<PromptInputStory />);
+  getComponent({
+    onSubmit: onSubmitCallback,
+    uploadButtonProps: {
+      'data-testid': buttonTestId,
+    },
+  });
 
-  const input = screen.getByTestId('prompt-input');
-  const button = screen.getByTestId('upload button');
+  const control = screen.getByLabelText(testLabel);
 
-  const testValue = 'test input';
+  // Try to click before entering a value
+  userEvent.click(screen.getByTestId(buttonTestId));
+  expect(screen.getByTestId(buttonTestId)).toBeDisabled();
+  expect(onSubmitCallback).toHaveBeenCalledTimes(0);
 
-  fireEvent.change(input, { target: { value: testValue } });
-  fireEvent.mouseDown(button);
-  fireEvent.mouseUp(button);
-
+  // Enter a value and click
+  await userEvent.type(control, testValue);
+  userEvent.click(screen.getByTestId(buttonTestId));
   expect(onSubmitCallback).toHaveBeenCalledTimes(1);
 });
 
 test('onCancel prop works correctly', async () => {
-  render(<PromptInputStory isLoading />);
+  getComponent({
+    isLoading: true,
+    onCancel: onCancelCallback,
+    uploadButtonProps: {
+      'data-testid': buttonTestId,
+    },
+  });
 
-  const input = screen.getByTestId('prompt-input');
-  const button = screen.getByTestId('upload button');
+  const control = screen.getByLabelText(testLabel);
 
-  const testValue = 'test input';
-
-  fireEvent.change(input, { target: { value: testValue } });
-  fireEvent.mouseDown(button);
-  fireEvent.mouseUp(button);
-
+  // Click the button
+  await userEvent.type(control, testValue);
+  userEvent.click(screen.getByTestId(buttonTestId));
   expect(onCancelCallback).toHaveBeenCalledTimes(1);
 });
 
 test('should add and remove a file attachment', async () => {
-  render(<PromptInputStory attachmentIcon={GlobeIcon} />);
+  getComponent({
+    isLoading: true,
+    onCancel: onCancelCallback,
+    onFileChange: onFileChangeCallback,
+    uploadButtonProps: {
+      'data-testid': buttonTestId,
+    },
+    attachmentProps: {
+      icon: GlobeIcon,
+      iconWrapperProps: {
+        'data-testid': testId2,
+      },
+    },
+  });
 
   const fileInput = screen.getAllByLabelText('add attachment')[0];
 
-  fireEvent.change(fileInput, { target: { files: [testFile] } });
-
+  await userEvent.upload(fileInput, testFile);
   expect(onFileChangeCallback).toHaveBeenCalledTimes(1);
   expect(screen.getByText(testFileName)).toBeInTheDocument();
-  expect(screen.getByTestId('icon-wrapper')).toBeInTheDocument();
+  expect(screen.getByTestId(testId2)).toBeInTheDocument();
 
   const removeButton = screen.getByTestId('remove-attachment');
-  fireEvent.mouseDown(removeButton);
-  fireEvent.mouseUp(removeButton);
+  userEvent.click(removeButton);
 
   expect(onFileChangeCallback).toHaveBeenCalledTimes(2);
 
   expect(screen.queryByText(testFileName)).not.toBeInTheDocument();
-  expect(screen.queryByTestId('icon-wrapper')).not.toBeInTheDocument();
+  expect(screen.queryByTestId(testId2)).not.toBeInTheDocument();
 });
 
 test('should use default icon if no icon is provided', async () => {
-  render(<PromptInputStory />);
+  getComponent({
+    isLoading: true,
+    onCancel: onCancelCallback,
+    onFileChange: onFileChangeCallback,
+    uploadButtonProps: {
+      'data-testid': buttonTestId,
+    },
+    attachmentProps: {
+      icon: GlobeIcon,
+      iconWrapperProps: {
+        'data-testid': testId2,
+      },
+    },
+  });
 
   const fileInput = screen.getAllByLabelText('add attachment')[0];
 
-  fireEvent.change(fileInput, { target: { files: [testFile] } });
-
+  await userEvent.upload(fileInput, testFile);
   expect(onFileChangeCallback).toHaveBeenCalledTimes(1);
   expect(screen.getByText(testFileName)).toBeInTheDocument();
-  expect(screen.getByTestId('icon-wrapper')).toBeInTheDocument();
+  expect(screen.getByTestId(testId2)).toBeInTheDocument();
 
   const removeButton = screen.getByTestId('remove-attachment');
-  fireEvent.mouseDown(removeButton);
-  fireEvent.mouseUp(removeButton);
+  userEvent.click(removeButton);
 
   expect(onFileChangeCallback).toHaveBeenCalledTimes(2);
 
   expect(screen.queryByText(testFileName)).not.toBeInTheDocument();
-  expect(screen.queryByTestId('icon-wrapper')).not.toBeInTheDocument();
+  expect(screen.queryByTestId(testId2)).not.toBeInTheDocument();
 });
 
 test('regex expression', () => {

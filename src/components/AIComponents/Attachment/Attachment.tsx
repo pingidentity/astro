@@ -26,7 +26,7 @@ const Attachment = (props: AttachmentProps) => {
     id,
     containerProps,
     iconWrapperProps,
-    icon = PaperOutlineIcon,
+    icon,
     deleteButtonProps,
   } = props;
 
@@ -71,6 +71,10 @@ const Attachment = (props: AttachmentProps) => {
       </Box>
     </Box>
   );
+};
+
+Attachment.defaultProps = {
+  icon: PaperOutlineIcon,
 };
 
 export default Attachment;
