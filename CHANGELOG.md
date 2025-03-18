@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.111.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.110.0...@pingux/astro@2.111.0) (2025-03-18)
+
+
+### Bug Fixes
+
+* [UIP-7413] Add support for PowerShell and Java ([a6f681b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a6f681b4accaee37500d68bc4379d5c7ab1f428a))
+* [UIP-7458] fix how value is stored and passed through the prompt input component tree ([bfe2380](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bfe2380f4ae7a758098f0e6d44fa67244f9c86b6))
+* [UIP-7473] Add tooltipTrigger props to IconButton ([405e0c8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/405e0c8be931da2e24a0bc63b20112a90f40bc18))
+
+
+### Features
+
+* [UIP-7136] Create skeleton component ([2335bf3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2335bf3660d9d651e19970f945e4b949014279f1))
+
+
+
+
+
 # [2.110.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.109.0...@pingux/astro@2.110.0) (2025-03-11)
 
 
