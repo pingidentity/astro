@@ -16,6 +16,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
   const {
     children,
     className,
+    tooltipTriggerProps,
     title,
     variant,
     onBlur,
@@ -92,7 +93,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
 
   if (title) {
     return (
-      <TooltipTrigger isDisabled={!title}>
+      <TooltipTrigger isDisabled={!title} {...tooltipTriggerProps}>
         {button}
         {title && <Tooltip>{title}</Tooltip>}
       </TooltipTrigger>
