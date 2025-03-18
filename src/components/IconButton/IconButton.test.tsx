@@ -93,6 +93,19 @@ test('tooltip is shown on focus when the prop is passed and not show by default'
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
+test('tooltipTrigger applies nested props correctly', () => {
+  getComponent({
+    title: 'Test Tooltip',
+    tooltipTriggerProps: {
+      direction: 'right',
+    },
+  });
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  userEvent.tab();
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(screen.queryByTestId('popover-container')).toHaveClass('is-right');
+});
+
 test('tooltip is shown on hover when the prop is passed and not show by default', () => {
   getComponent({
     title: 'Test Tooltip',

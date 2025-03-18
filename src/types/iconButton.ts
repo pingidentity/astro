@@ -3,6 +3,7 @@ import { IconButtonProps as ThemeUIIconButtonProps } from 'theme-ui';
 import { TestingAttributes } from './shared/test';
 import { IconTypeExtended } from './icon';
 import { HoverProps, IconSize, PressProps } from './shared';
+import { TooltipTriggerProps } from './tooltipTrigger';
 
 export interface IconButtonProps extends ThemeUIIconButtonProps, TestingAttributes,
     PressProps, HoverProps {
@@ -22,4 +23,5 @@ export interface IconButtonProps extends ThemeUIIconButtonProps, TestingAttribut
     size?: IconSize;
     isRow?: boolean;
     'aria-controls'?: string | undefined;
+    tooltipTriggerProps?: TooltipTriggerProps,
 }

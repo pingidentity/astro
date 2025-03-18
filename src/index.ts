@@ -168,6 +168,8 @@ export { default as SelectField } from './components/SelectField';
 export * from './components/SelectField';
 export { default as Separator } from './components/Separator';
 export * from './components/Separator';
+export { default as Skeleton } from './components/Skeleton';
+export * from './components/Skeleton';
 export { Step, default as Stepper } from './components/Stepper';
 export * from './components/Stepper';
 export { default as Switch } from './components/Switch';

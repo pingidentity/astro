@@ -19,18 +19,19 @@ const PromptUploadButton = (props: PromptUploadButtonProps) => {
     if (isLoading && onCancel) {
       onCancel(e);
     } else if (onSubmit) {
-      onSubmit(e);
+      onSubmit(e, value);
     }
   };
+
   return (
     <Box {...uploadButtonContainerProps}>
       <IconButton
         aria-label="upload chat"
-        isDisabled={!isLoading && value.length === 0}
+        isDisabled={!isLoading && (typeof value === 'undefined' || value?.length === 0)}
         variant="inverted"
-        sx={{ size: '24px' }}
         onPress={onPress}
         {...others}
+        sx={{ size: '24px', ...others?.sx }}
       >
         <Icon size="xs" icon={isLoading ? StopIcon : ArrowUpIcon} />
       </IconButton>

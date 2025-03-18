@@ -37,6 +37,7 @@ export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   name?: string;
   placeholder?: string;
   selectedKey?: string;
+  onKeyUp?: (e: React.KeyboardEvent) => void;
   onLoadMore?: () => unknown;
   onOpenChange?: (isOpen: boolean) => unknown;
   onSelectionChange?: (key: Key) => unknown;

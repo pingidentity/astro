@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.110.0",
+  "version": "2.111.0-alpha.4",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "coverage-jenkins": "yarn coverage-ci --maxWorkers=25%",
     "demo": "rm -rf ./demo && storybook build -o demo",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "start": "storybook dev -p 6006",
+    "start": "yarn install-react-version && storybook dev -p 6006",
     "storybook": "yarn start",
     "test": "jest",
     "test-watch": "jest"

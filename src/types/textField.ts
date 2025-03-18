@@ -26,7 +26,7 @@ export interface TextFieldProps extends StyleProps, SharedFieldProps{
   isReadOnly?: boolean;
   /** Whether the field is required. */
   isRequired?: boolean;
-  onChange?: (e: React.ChangeEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * Callback fired when focus is lost on the input element.
    */

@@ -147,7 +147,11 @@ test('should return isFloatLabelActive class for container', () => {
   expect(result.current.fieldContainerProps.className).toContain('is-float-label-active');
 
   // Does not have the class if the value is invalid
-  act(() => result.current.fieldControlInputProps.onChange({ target: { value: undefined } }));
+  act(() => result.current.fieldControlInputProps.onChange({
+    currentTarget: {
+      value: undefined,
+    },
+  }));
   expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
 
   // Has the class if the container has focus within it
@@ -196,17 +200,21 @@ test('should return hasValue class for container when onChange updates internal 
   expect(result.current.fieldContainerProps.className).not.toContain('has-value');
 
   // 0 should be a valid value
-  act(() => result.current.fieldControlInputProps.onChange({ target: { value: 0 } }));
+  act(() => result.current.fieldControlInputProps.onChange({ currentTarget: { value: 0 } }));
   expect(result.current.fieldContainerProps.className).toContain('has-value');
   numCalls += 1;
 
   // undefined is not a valid value
-  act(() => result.current.fieldControlInputProps.onChange({ target: { value: undefined } }));
+  act(() => result.current.fieldControlInputProps.onChange({
+    currentTarget: {
+      value: undefined,
+    },
+  }));
   expect(result.current.fieldContainerProps.className).not.toContain('has-value');
   numCalls += 1;
 
   // a non-empty string is a valid value
-  act(() => result.current.fieldControlInputProps.onChange({ target: { value: 'a' } }));
+  act(() => result.current.fieldControlInputProps.onChange({ currentTarget: { value: 'a' } }));
   expect(result.current.fieldContainerProps.className).toContain('has-value');
   numCalls += 1;
 
