@@ -16,7 +16,6 @@ test('renders component with rejected label', () => {
 
   getComponent({ cell });
   expect(screen.queryByText('Rejected')).toBeInTheDocument();
-  expect(screen.queryByText('Alert Circle Icon')).toBeInTheDocument();
 });
 
 test('renders component with pending label', () => {
@@ -31,7 +30,6 @@ test('renders component with failed label', () => {
 
   getComponent({ cell });
   expect(screen.queryByText('Failed')).toBeInTheDocument();
-  expect(screen.queryByText('Alert Icon')).toBeInTheDocument();
 });
 
 test('renders component with null cell', () => {

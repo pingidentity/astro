@@ -1,4 +1,5 @@
 import { IconSize, StyleProps } from './shared';
+import { BoxProps } from '.';
 
 export interface LoaderProps extends StyleProps {
   /**
@@ -6,5 +7,6 @@ export interface LoaderProps extends StyleProps {
    * Default color inherits the font color.
   */
   color?: string,
-  size?: IconSize
+  size?: IconSize,
+  dotProps?: BoxProps,
 }
