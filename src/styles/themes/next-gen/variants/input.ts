@@ -24,15 +24,21 @@ export const input: ThemeUICSSObject = {
   },
   borderRadius: '4px',
   fontWeight: 1,
-  height: '50px',
   '&::placeholder': text.placeholder,
 };
 
 input.promptInput = {
   ...input,
+  position: 'absolute',
   pl: '0px',
   border: 'none',
   outline: 'none !important',
+  overflowY: 'hidden',
+  resize: 'none',
+  lineHeight: '24px',
+  minHeight: '26px',
+  height: '26px',
+  p: '0px',
   '&.is-focused': {
     border: 'none !important',
     outline: 'none !important',
@@ -125,8 +131,8 @@ input.promptInputWrapper = {
   ...fieldControlWrapper,
   border: '1px solid',
   borderColor: 'border.input',
-  px: '.75rem',
   borderRadius: '4px',
+  minHeight: '50px',
   '&.is-focused': {
     boxShadow: '0 1px 1px rgba(0,0,0,.075), 0 0 0 .0625rem blue',
   },
@@ -168,4 +174,22 @@ input.multivaluesWrapper = {
 input.numberField = {
   ...input,
   pr: '28px',
+};
+
+input.promptInputRow = {
+  alignItems: 'center',
+  position: 'relative',
+  justifyContent: 'center',
+  flexGrow: '1',
+  overflowX: 'hidden',
+  overflowY: 'auto',
+  py: '12px',
+};
+
+input.promptInputAttachmentWrapper = {
+  gap: '1.5rem',
+  overflowX: 'auto',
+  overflowY: 'hidden',
+  whiteSpace: 'nowrap',
+  px: '.75rem',
 };

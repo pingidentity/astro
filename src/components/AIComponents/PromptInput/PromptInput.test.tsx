@@ -13,6 +13,8 @@ const onSubmitCallback = jest.fn();
 const onCancelCallback = jest.fn();
 const onChangeCallback = jest.fn();
 const onFileChangeCallback = jest.fn();
+const onKeyDownCallback = jest.fn();
+const onKeyUpCallback = jest.fn();
 const originalValue = global.URL.createObjectURL;
 const testFileURL = 'test-file-url';
 const testFileName = 'chucknorris.png';
@@ -57,7 +59,7 @@ test('default PromptInput', () => {
   const control = screen.getByLabelText(testLabel);
 
   expect(field).toBeInstanceOf(HTMLDivElement);
-  expect(control).toBeInstanceOf(HTMLInputElement);
+  expect(control).toBeInstanceOf(HTMLTextAreaElement);
   expect(field).toBeInTheDocument();
   expect(control).toBeInTheDocument();
 });
@@ -91,6 +93,11 @@ test('onSubmit prop works correctly', async () => {
   await userEvent.type(control, testValue);
   userEvent.click(screen.getByTestId(buttonTestId));
   expect(onSubmitCallback).toHaveBeenCalledTimes(1);
+
+  // Type a value and press enter
+  await userEvent.type(control, testValue);
+  await userEvent.type(control, '{enter}');
+  expect(onSubmitCallback).toHaveBeenCalledTimes(2);
 });
 
 test('onCancel prop works correctly', async () => {
@@ -108,6 +115,33 @@ test('onCancel prop works correctly', async () => {
   await userEvent.type(control, testValue);
   userEvent.click(screen.getByTestId(buttonTestId));
   expect(onCancelCallback).toHaveBeenCalledTimes(1);
+
+  // Press enter
+  await userEvent.type(control, testValue);
+  await userEvent.type(control, '{enter}');
+  expect(onCancelCallback).toHaveBeenCalledTimes(2);
+});
+
+test('onKeyDown prop works correctly', async () => {
+  getComponent({
+    onKeyDown: onKeyDownCallback,
+  });
+
+  const control = screen.getByLabelText(testLabel);
+
+  await userEvent.type(control, '{enter}');
+  expect(onKeyDownCallback).toHaveBeenCalled();
+});
+
+test('onKeyUp prop works correctly', async () => {
+  getComponent({
+    onKeyUp: onKeyUpCallback,
+  });
+
+  const control = screen.getByLabelText(testLabel);
+
+  await userEvent.type(control, '{enter}');
+  expect(onKeyUpCallback).toHaveBeenCalled();
 });
 
 test('should add and remove a file attachment', async () => {

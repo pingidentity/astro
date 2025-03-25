@@ -17,7 +17,10 @@ export interface PromptProps {
     isFullScreen?: boolean,
 }
 
-export interface PromptInputProps extends TextFieldProps, PromptProps {}
+export interface PromptInputProps extends TextFieldProps, PromptProps {
+    onKeyUp?: (e: React.KeyboardEvent, value?: string) => void;
+    onKeyDown?: (e: React.KeyboardEvent, value?: string) => void;
+}
 
 export interface AttachmentProps {
     title: string,
