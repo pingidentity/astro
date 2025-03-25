@@ -261,6 +261,13 @@ const iconButtons = {
   onyx: {
     ...onyxIconButton,
   },
+  responseToolbar: {
+    ...baseIconButton,
+    '&.is-not-loaded': {
+      display: 'none',
+    },
+    display: 'inline-flex',
+  },
   modalCloseButton,
   badge: {
     deleteButton: {

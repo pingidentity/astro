@@ -15,6 +15,7 @@ const ResponseAttachment = (props: ResponseAttachmentProps) => {
     className,
     animationIndex,
     shouldStartAnimation,
+    text,
   } = props;
 
   const isLoaded = useRef(false);
@@ -33,7 +34,7 @@ const ResponseAttachment = (props: ResponseAttachmentProps) => {
   return (
     <Box isRow {...wrapperProps} className={classNames} variant="response.attachmentWrapper">
       <Icon color="green" icon={FileTableOutlineIcon} title={{ name: 'attachment icon' }} {...iconProps} />
-      <Text {...textProps}>Attachment text</Text>
+      <Text {...textProps}>{text}</Text>
     </Box>
   );
 };
