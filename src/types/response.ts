@@ -23,7 +23,8 @@ export interface ResponseAttachmentProps extends SharedResponseProps {
     textProps?: TextProps,
     iconProps?: IconProps,
     parentIndex?: number,
-    className?: string
+    className?: string,
+    text: string,
 }
 
 export interface ResponseListProps extends SharedResponseProps, BoxProps {
@@ -32,17 +33,16 @@ export interface ResponseListProps extends SharedResponseProps, BoxProps {
   delay?: number
 }
 
-export interface ResponseProps {
+export interface ResponseProps extends BoxProps{
     containerProps?: BoxProps,
     iconProps?: IconProps,
     textProps?: ResponseTextProps,
     iconWrapperProps?: IconWrapperProps,
     shouldStartAnimation?: boolean,
-    children: ReactNode[],
     delay?: number
 }
 
-export interface ResponseToolbarProps extends SharedResponseProps {
+export interface ResponseToolbarProps extends BoxProps, SharedResponseProps {
     readButtonProps?: IconButtonProps,
     copyButtonProps?: IconButtonProps,
     goodButtonProps?: IconButtonProps,
@@ -50,5 +50,13 @@ export interface ResponseToolbarProps extends SharedResponseProps {
     rephraseButtonProps?: IconButtonProps,
     containerProps?: BoxProps,
     parentIndex?: number,
-    className?: string
+    className?: string,
+    delay?: number,
+    children: ReactNode[],
+}
+
+export interface ResponseToolbarIconProps extends IconButtonProps, SharedResponseProps {
+    delay?: number,
+    parentIndex?: number,
+    iconProps?: IconProps,
 }

@@ -132,6 +132,12 @@ export default {
   },
 };
 
+const getHeaderProps = () => ({
+  sx: {
+    fontWeight: '3',
+  },
+});
+
 const getCellProps = (columnKey, align) => ({
   pr: columnKey !== 'menu' ? 'lg' : 0,
   pl: columnKey === 'timestamp' || columnKey === 'menu' ? 0 : 'lg',
@@ -165,10 +171,7 @@ export const Default = args => {
       timestamp: timestampCell,
       eventType: 'User Access Allowed',
       description: (
-        <>
-          <Box>Passed Role Access</Box>
-          <Box>Control</Box>
-        </>
+        <Box>Passed Role Access Control</Box>
       ),
       status: <DataTableBadge cell="Approved" />,
       userIdentity: 'Vincent Diep',
@@ -179,11 +182,10 @@ export const Default = args => {
       timestamp: timestampCell,
       eventType: 'User Access Denied',
       description: (
-        <>
-          <Box display="block">Passed Role Access</Box>
-          <Box display="block">Control</Box>
-          <Box display="block">Words Words Words Words Words Words Words Words Words Words Words Words Words Words</Box>
-        </>
+        <Box display="-webkit-box" variant="dataTable.truncateText">
+          Passed Role Access Control Words Words Words Words Words Words Words Words
+          Words Words Words Words Words Words
+        </Box>
       ),
       status: <DataTableBadge cell="Rejected" />,
       userIdentity: 'Vincent Diep',
@@ -193,7 +195,12 @@ export const Default = args => {
       id: 3,
       timestamp: timestampCell,
       eventType: 'User Access Allowed',
-      description: 'Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words Words',
+      description: (
+        <Box display="-webkit-box" variant="dataTable.truncateText">
+          Words Words Words Words Words Words Words Words Words Words Words
+          Words Words Words Words Words Words Words Words Words
+        </Box>
+      ),
       status: <DataTableBadge cell="Approved" />,
       userIdentity: 'Vincent Diep',
       menu: <DataTableMenu />,
@@ -203,10 +210,7 @@ export const Default = args => {
       timestamp: timestampCell,
       eventType: 'User Access Allowed',
       description: (
-        <>
-          <Box>Passed Role Access</Box>
-          <Box>Control</Box>
-        </>
+        <Box>Passed Role Access Control</Box>
       ),
       status: <DataTableBadge cell="Approved" />,
       userIdentity: 'Vincent Diep',
@@ -217,10 +221,7 @@ export const Default = args => {
       timestamp: timestampCell,
       eventType: 'User Access Allowed',
       description: (
-        <>
-          <Box>Passed Role Access</Box>
-          <Box>Control</Box>
-        </>
+        <Box>Passed Role Access Control</Box>
       ),
       status: <DataTableBadge cell="Approved" />,
       userIdentity: 'Vincent Diep',
@@ -238,6 +239,7 @@ export const Default = args => {
         {column => (
           <DataTableColumn
             {...getCellProps(column.key, false)}
+            {...getHeaderProps()}
             minWidth={column.key !== 'menu' ? 175 : 32}
             width={column.key !== 'menu' ? '19.4%' : 32}
           >
@@ -293,7 +295,7 @@ export const Dynamic = args => {
     },
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
-    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'North America' },
     { id: 6, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
     { id: 7, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
   ];
@@ -370,7 +372,7 @@ export const Sortable = args => {
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
     { id: 5, country: 'France', population: '67,000,000', continent: 'Europe' },
-    { id: 6, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    { id: 6, country: 'Mexico', population: '126,000,000', continent: 'North America' },
     {
       id: 7,
       country: 'USA',
@@ -493,7 +495,7 @@ export const Selection = args => {
     },
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
-    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'North America' },
     { id: 6, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
     { id: 7, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
   ];
@@ -568,7 +570,7 @@ export const ControlledSelection = args => {
     },
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
-    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'South America' },
+    { id: 5, country: 'Mexico', population: '126,000,000', continent: 'North America' },
     { id: 6, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
     { id: 7, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
   ];
@@ -684,11 +686,11 @@ export const AsyncLoading = args => {
         )}
       </DataTableHeader>
       <DataTableBody
-        items={list.items as Iterable<{name: string}>}
+        items={list.items as Iterable<{ name: string }>}
         loadingState={list.loadingState}
         onLoadMore={list.loadMore}
       >
-        {(item: { name: string}) => (
+        {(item: { name: string }) => (
           <DataTableRow key={item.name}>
             {columnKey => (
               <DataTableCell

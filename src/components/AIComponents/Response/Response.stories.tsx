@@ -12,6 +12,7 @@ import ResponseAttachment from './ResponseAttachment';
 import ResponseList from './ResponseList';
 import ResponseText from './ResponseText';
 import ResponseToolbar from './ResponseToolbar';
+import ResponseToolbarIcon from './ResponseToolbarIcon';
 
 export default {
   title: 'Ai Components/Response',
@@ -21,26 +22,25 @@ export default {
 const testText = 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet';
 
 export const Default = args => {
-  const toolBarProps = { readButtonProps: {
-    title: 'Read aloud',
-    icon: VolumeHighIcon,
-  },
-  copyButtonProps: {
-    title: 'Copy',
-    icon: CopyIcon,
-  },
-  goodButtonProps: {
-    title: 'Good Response',
-    icon: ThumbUpOutlineIcon,
-  },
-  badButtonProps: {
-    title: 'Bad Response',
-    icon: ThumbDownOutlineIcon,
-  },
-  rephraseButtonProps: {
-    title: 'Rephrase Answer',
-    icon: TextIcon,
-  } };
+  const icons = [
+    {
+      title: 'Read aloud',
+      icon: VolumeHighIcon,
+    },
+    {
+      title: 'Copy',
+      icon: CopyIcon,
+    }, {
+      title: 'Good Response',
+      icon: ThumbUpOutlineIcon,
+    }, {
+      title: 'Bad Response',
+      icon: ThumbDownOutlineIcon,
+    }, {
+      title: 'Rephrase Answer',
+      icon: TextIcon,
+    },
+  ];
 
   const delay = 20;
 
@@ -48,7 +48,7 @@ export const Default = args => {
     <AstroWrapper {...args} themeOverrides={[NextGenTheme]}>
       <Response delay={delay}>
         <ResponseText text={testText} />
-        <ResponseAttachment />
+        <ResponseAttachment text="Attachment Text" />
         <ResponseText text={testText} />
         <ResponseText text={testText} />
         <ResponseList>
@@ -58,7 +58,13 @@ export const Default = args => {
           <ResponseText as="li" text="list item 3" />
         </ResponseList>
         <ResponseText text="follow up text" />
-        <ResponseToolbar {...toolBarProps} />
+        <ResponseToolbar>
+          {icons.map(icon => {
+            return (
+              <ResponseToolbarIcon {...icon} />
+            );
+          })}
+        </ResponseToolbar>
       </Response>
     </AstroWrapper>
   );

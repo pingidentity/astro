@@ -33,7 +33,7 @@ const tableCell = {
 
 const tableCellContents = {
   maxHeight: 80,
-  overflow: 'hidden',
+  // overflow: 'hidden',
   display: '-webkit-box !important',
   '-webkit-line-clamp': '4',
   '-webkit-box-orient': 'vertical',
@@ -154,6 +154,14 @@ const tableMenu = {
   mr: 'md',
 };
 
+const truncateText = {
+  whiteSpace: 'normal',
+  WebkitBoxOrient: 'vertical',
+  display: '-webkit-box',
+  WebkitLineClamp: '2',
+  overflow: 'hidden',
+};
+
 export default {
   selectableTableRow,
   tableBody,
@@ -164,4 +172,5 @@ export default {
   tableRow,
   tableHeadCell,
   tableMenu,
+  truncateText,
 };

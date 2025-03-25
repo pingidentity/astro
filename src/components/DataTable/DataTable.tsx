@@ -221,6 +221,8 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
             <Loader
               color="accent.70"
               aria-label={state.collection.size > 0 ? 'loadingMore' : 'loading'}
+              sx={{ gap: '9px' }}
+              dotProps={{ sx: { m: 0 } }}
             />
           </CenteredWrapper>
         );
@@ -317,8 +319,8 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   );
 
   const columnProps = column.props;
-  const arrowIcon = state.sortDescriptor?.direction === 'ascending'
-    && column.key === state.sortDescriptor?.column ? (
+  const arrowIcon = state.sortDescriptor?.direction === 'ascending' && column.key === state.sortDescriptor?.column
+    ? (
       <Icon size={24} icon={MenuUp} title={{ name: 'Menu Up Icon' }} />
     ) : (
       <Icon size={24} icon={MenuDown} color="active" title={{ name: 'Menu Down Icon' }} />
@@ -415,7 +417,7 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
   );
 };
 
-const TableHeaderRow = ({ item, children, style }:DataTableHeaderRowProps) => {
+const TableHeaderRow = ({ item, children, style }: DataTableHeaderRowProps) => {
   const { state } = useDataTableContext();
   const ref = useRef<HTMLDivElement>(null);
 
