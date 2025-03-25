@@ -20,6 +20,7 @@ export { default as ResponseAttachment } from './components/AIComponents/Respons
 export { default as ResponseList } from './components/AIComponents/Response/ResponseList';
 export { default as ResponseText } from './components/AIComponents/Response/ResponseText';
 export { default as ResponseToolbar } from './components/AIComponents/Response/ResponseToolbar';
+export { default as ResponseToolbarIcon } from './components/AIComponents/Response/ResponseToolbarIcon';
 export { default as Suggestions } from './components/AIComponents/Suggestions';
 export { default as Suggestion } from './components/AIComponents/Suggestions/Suggestion';
 export { default as ArrayField } from './components/ArrayField';

@@ -1,9 +1,9 @@
 import React from 'react';
-import AccountGroupIcon from '@pingux/mdi-react/AccountGroupIcon';
-import AccountIcon from '@pingux/mdi-react/AccountIcon';
-import LockIcon from '@pingux/mdi-react/LockIcon';
-import SearchIcon from '@pingux/mdi-react/SearchIcon';
-import TagIcon from '@pingux/mdi-react/TagIcon';
+import CopyIcon from '@pingux/mdi-react/ContentCopyIcon';
+import TextIcon from '@pingux/mdi-react/TextIcon';
+import ThumbDownOutlineIcon from '@pingux/mdi-react/ThumbDownOutlineIcon';
+import ThumbUpOutlineIcon from '@pingux/mdi-react/ThumbUpOutlineIcon';
+import VolumeHighIcon from '@pingux/mdi-react/VolumeHighIcon';
 
 import { act, render, screen } from '../../../utils/testUtils/testWrapper';
 
@@ -12,6 +12,7 @@ import ResponseAttachment from './ResponseAttachment';
 import ResponseList from './ResponseList';
 import ResponseText from './ResponseText';
 import ResponseToolbar from './ResponseToolbar';
+import ResponseToolBarIcon from './ResponseToolbarIcon';
 
 const delay = 100;
 
@@ -24,28 +25,24 @@ const nextText = 'nextText';
 const attachmentWrapperId = 'wrapper-id';
 const toolbarId = 'id';
 
-const customProps = {
-  readButtonProps: {
-    title: 'Read aloud test',
-    icon: AccountGroupIcon,
-  },
-  copyButtonProps: {
-    title: 'Copy test',
-    icon: AccountIcon,
-  },
-  goodButtonProps: {
-    title: 'Good Response test',
-    icon: LockIcon,
-  },
-  badButtonProps: {
-    title: 'Bad Response test',
-    icon: SearchIcon,
-  },
-  rephraseButtonProps: {
-    title: 'Rephrase Answer test',
-    icon: TagIcon,
-  },
-};
+const attachmentText = 'Attachment Text';
+
+const icons = [{
+  title: 'Read aloud test',
+  icon: VolumeHighIcon,
+}, {
+  title: 'Copy test',
+  icon: CopyIcon,
+}, {
+  title: 'Good Response test',
+  icon: ThumbUpOutlineIcon,
+}, {
+  title: 'Bad Response test',
+  icon: ThumbDownOutlineIcon,
+}, {
+  title: 'Rephrase Answer test',
+  icon: TextIcon,
+}];
 
 const defaultProps = {
   containerProps: {
@@ -80,22 +77,22 @@ const getComponentWithList = props => render(
 const getComponentWithToolbar = props => render(
   <Response {...defaultProps} {...props}>
     <ResponseText text={defaultProps.text} />
-    <ResponseToolbar data-testid={toolbarId} />
+    <ResponseToolbar data-testid={toolbarId}>
+      {icons.map(icon => {
+        return (
+          <ResponseToolBarIcon key={icon.title} {...icon} />
+        );
+      })}
+    </ResponseToolbar>
+    <ResponseText text={defaultProps.text} />
   </Response>,
 );
 
 const getComponentWithAttachment = props => render(
   <Response {...defaultProps} {...props}>
     <ResponseText text={defaultProps.text} />
-    <ResponseAttachment wrapperProps={{ 'data-testid': attachmentWrapperId }} />
+    <ResponseAttachment text={attachmentText} wrapperProps={{ 'data-testid': attachmentWrapperId }} />
     <ResponseText text={defaultProps.text} />
-  </Response>,
-);
-
-const getComponentWithToolbarCustomProps = props => render(
-  <Response {...defaultProps} {...props}>
-    <ResponseText text={defaultProps.text} />
-    <ResponseToolbar data-testid={toolbarId} {...customProps} />
   </Response>,
 );
 
@@ -166,50 +163,23 @@ test('ResponseToolbar renders correctly', async () => {
     act(() => { jest.advanceTimersByTime(100); });
   }
   expect(toolbar).not.toHaveClass('is-not-loaded');
+  for (let i = 1; i < icons.length + 1; i += 1) {
+    act(() => { jest.advanceTimersByTime(100); });
+    expect(screen.getByTitle(icons[i - 1].title)).toBeInTheDocument();
+    expect(screen.getByTitle(icons[i - 1].title)).not.toHaveClass('is-not-loaded');
+  }
+  act(() => { jest.advanceTimersByTime(2000); });
 });
 
 test('ResponseAttachment renders correctly', async () => {
   getComponentWithAttachment();
   act(() => { jest.advanceTimersByTime(10); });
 
-  expect(screen.getByText('Attachment text')).toBeInTheDocument();
+  expect(screen.getByText(attachmentText)).toBeInTheDocument();
   const wrapper = screen.getByTestId(attachmentWrapperId);
   expect(wrapper).toHaveClass('is-not-loaded');
   for (let i = 1; i < defaultProps.text.length + 1; i += 1) {
     act(() => { jest.advanceTimersByTime(100); });
   }
   expect(wrapper).not.toHaveClass('is-not-loaded');
-});
-
-test('ResponseAttachment renders correctly, with custom props', async () => {
-  getComponentWithToolbarCustomProps();
-  act(() => { jest.advanceTimersByTime(10); });
-
-  expect(screen.getByTitle('Read aloud test')).toBeInTheDocument();
-  expect(screen.getByTitle('Copy test')).toBeInTheDocument();
-  expect(screen.getByTitle('Good Response test')).toBeInTheDocument();
-  expect(screen.getByTitle('Bad Response test')).toBeInTheDocument();
-  expect(screen.getByTitle('Rephrase Answer test')).toBeInTheDocument();
-});
-
-test('ResponseToolbar conditional rendering of IconButton based on title prop', async () => {
-  render(
-    <Response {...defaultProps}>
-      <ResponseText text={defaultProps.text} />
-      <ResponseToolbar
-        data-testid={toolbarId}
-        readButtonProps={{ title: 'Read aloud' }}
-        copyButtonProps={{ title: '' }}
-        goodButtonProps={{ title: 'Good Response' }}
-        badButtonProps={{ title: '' }}
-        rephraseButtonProps={{ title: 'Rephrase Answer' }}
-      />
-    </Response>,
-  );
-
-  expect(screen.getByTitle('Read aloud')).toBeInTheDocument();
-  expect(screen.queryByTitle('Copy')).not.toBeInTheDocument();
-  expect(screen.getByTitle('Good Response')).toBeInTheDocument();
-  expect(screen.queryByTitle('Bad Response')).not.toBeInTheDocument();
-  expect(screen.getByTitle('Rephrase Answer')).toBeInTheDocument();
 });
