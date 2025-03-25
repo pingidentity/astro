@@ -27,7 +27,7 @@ const PromptUploadButton = (props: PromptUploadButtonProps) => {
     <Box {...uploadButtonContainerProps}>
       <IconButton
         aria-label="upload chat"
-        isDisabled={!isLoading && (typeof value === 'undefined' || value?.length === 0)}
+        isDisabled={!isLoading && (typeof value === 'undefined' || value.length === 0)}
         variant="inverted"
         onPress={onPress}
         {...others}

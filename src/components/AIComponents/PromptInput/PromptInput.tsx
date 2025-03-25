@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 
 import { useField, useLocalOrForwardRef, useProgressiveState } from '../../../hooks';
 import { UseFieldProps } from '../../../hooks/useField/useField';
-import { Box, FileInputField, Input } from '../../../index';
+import { Box, FileInputField, TextArea } from '../../../index';
 import { FileProps, PromptInputProps } from '../../../types/promptInput';
 import statuses from '../../../utils/devUtils/constants/statuses';
 import Attachment, { getFileExtension } from '../Attachment/Attachment';
@@ -22,11 +22,18 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
     onSubmit,
     uploadButtonContainerProps,
     uploadButtonProps,
+    onKeyUp: onKeyUpProp,
+    onKeyDown: onKeyDownProp,
   } = props;
   const { onFileChange, ...propsWithoutOnFileChange } = props;
   const firstUpdate = useRef(true);
   const [userFiles, setUserFiles] = useState<FileProps[] | []>([]);
   const [value, setValue] = useProgressiveState(valueProp, defaultValueProp);
+
+  const countLineBreaks = (str: string) => {
+    const lineBreaks = str.match(/\r\n|\r|\n/g);
+    return lineBreaks ? lineBreaks.length : 0;
+  };
 
   const handleFileSelect = (_event, files) => {
     const arrayWithNewFiles = Array.from(files) as FileProps[];
@@ -58,6 +65,24 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
     setUserFiles(userFiles.filter(_file => _file.id !== id));
   };
 
+  const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (onSubmit && !isLoading) {
+      onSubmit(e as unknown as KeyboardEvent, value);
+      e.stopPropagation();
+      e.preventDefault();
+    } else if (onCancel && isLoading) {
+      onCancel(e as unknown as KeyboardEvent);
+      e.stopPropagation();
+    }
+  };
+
+
+  const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (onKeyUpProp) {
+      onKeyUpProp(e, value);
+    }
+  };
+
   const {
     fieldContainerProps,
     fieldControlInputProps,
@@ -71,13 +96,34 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
 
   const inputRef = useLocalOrForwardRef<HTMLInputElement>(ref);
 
+  useEffect(() => {
+    if (inputRef.current && value) {
+      const lb = countLineBreaks(value);
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `calc(${(lb + 1) * 24}px)`;
+    } else if (value === '') {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = '26px';
+    }
+  }, [value]);
+
+  const onKeyDown = e => {
+    if (onKeyDownProp) {
+      onKeyDownProp(e, value);
+    }
+    if (!e.shiftKey && e.key === 'Enter') {
+      onEnterPress(e);
+    }
+  };
+
+
   return (
     <Box
       variant="forms.input.fieldContainer"
       {...fieldContainerProps}
     >
       <Box variant="forms.input.promptInputWrapper" {...fieldControlWrapperProps}>
-        <Box isRow gap="1.5rem" sx={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: 'nowrap' }}>
+        <Box isRow variant="forms.input.promptInputAttachmentWrapper">
           {userFiles.map(({ name, fileType, id }) => (
             <Attachment
               key={id}
@@ -90,8 +136,11 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
             />
           ))}
         </Box>
-        <Box isRow alignItems="center" justifyContent="center" flexGrow="1">
-          <Box mr="md">
+        <Box
+          isRow
+          variant="forms.input.promptInputRow"
+        >
+          <Box mr="1.5rem" mb="auto" ml=".75rem">
             <FileInputField
               onFileSelect={handleFileSelect}
               onRemove={handleFileRemove}
@@ -103,20 +152,29 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
               {...fileInputButtonProps}
             />
           </Box>
-          <Input
+          <TextArea
             ref={inputRef}
             variant="forms.input.promptInput"
             data-testid="prompt-input"
             {...fieldControlInputProps}
+            onKeyUp={onKeyUp}
+            onKeyDown={onKeyDown}
           />
-          <PromptUploadButton
-            isLoading={isLoading}
-            value={value}
-            onSubmit={onSubmit}
-            onCancel={onCancel}
-            {...uploadButtonProps}
-            uploadButtonContainerProps={uploadButtonContainerProps}
-          />
+          <Box
+            sx={{
+              mx: '.75rem',
+              mb: 'auto',
+            }}
+          >
+            <PromptUploadButton
+              isLoading={isLoading}
+              value={value}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
+              {...uploadButtonProps}
+              uploadButtonContainerProps={uploadButtonContainerProps}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>
