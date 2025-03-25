@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.112.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.111.0...@pingux/astro@2.112.0) (2025-03-25)
+
+
+### Bug Fixes
+
+* [UIP-7487] Response Toolbar refactor ([9a21d2a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9a21d2ab5fc2b8b91849bf00f5081ad7bd058d92))
+* [UIP-7489] Prompt input enter ([e492e18](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e492e187edec939d4061eeaf36f972489acb7059))
+
+
+### Features
+
+* [UIP-7383] DataTable Update to match specs ([7345ae1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7345ae16da5c432d2760a940e4ce0ff8c0ba77c8))
+* [UIP-7503] Add Open Sans and Pingito fonts to CDN ([260293b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/260293b60eb501bbe4ab335200b907a60dd59ef1))
+
+
+
+
+
 # [2.111.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.110.0...@pingux/astro@2.111.0) (2025-03-18)
 
 
