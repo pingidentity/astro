@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.113.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.112.0...@pingux/astro@2.113.0) (2025-03-27)
+
+
+### Features
+
+* [UIP-7395] Update dependencies from beta versions of React-Aria and React Stately packages ([b4cbbb1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b4cbbb188866a15f798d35516f8bb1e5e1a1d397))
+* [UIP-7432] Ai response component markdown support ([04f7348](https://gitlab.corp.pingidentity.com/ux/pingux/commit/04f734848a2e75b2df9f7803f17ccebd9255ccad))
+
+
+
+
+
 # [2.112.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.111.0...@pingux/astro@2.112.0) (2025-03-25)
 
 
