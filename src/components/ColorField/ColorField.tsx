@@ -120,7 +120,7 @@ const ColorField = forwardRef<HTMLInputElement, ColorFieldProps>((props, ref) =>
         ? (
           <ColorFieldPreviewButton
             isOpen={popoverState.isOpen}
-            colorValue={state.colorValue.toString('hex')}
+            colorValue={state.colorValue?.toString('hex')}
             label={label}
             {...mergeProps(defaultButtonProps, buttonProps, ariaProps, triggerProps)}
           />
