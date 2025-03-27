@@ -24,8 +24,6 @@ const withThemeProvider = (Story, context) => {
     }
   }
 
-  console.log(selectedTheme)
-
   const showComingSoonMessage = shouldReturnComingSoon(
     context,
     selectedTheme,

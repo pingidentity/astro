@@ -27,16 +27,16 @@ describe('useTypeAnimation', () => {
   it('should type out text with delay', () => {
     const { result } = renderHook(() => useTypeAnimation(defaultProps));
 
-    expect(result.current).toBe('');
+    expect(result.current.currentText).toBe('');
 
     for (let i = 0; i < text.length; i += 1) {
       act(() => {
         jest.advanceTimersByTime(delay);
       });
-      expect(result.current).toBe(text.slice(0, i + 1));
+      expect(result.current.currentText).toBe(text.slice(0, i + 1));
     }
 
-    expect(result.current).toBe(text);
+    expect(result.current.currentText).toBe(text);
   });
 
   it('should NOT render text when shouldStartAnimation = false', () => {
@@ -44,15 +44,15 @@ describe('useTypeAnimation', () => {
       ...defaultProps, shouldStartAnimation: false,
     }));
 
-    expect(result.current).toBe('');
+    expect(result.current.currentText).toBe('');
 
     for (let i = 0; i < text.length; i += 1) {
       act(() => {
         jest.advanceTimersByTime(delay);
       });
-      expect(result.current).toBe('');
+      expect(result.current.currentText).toBe('');
     }
 
-    expect(result.current).toBe('');
+    expect(result.current.currentText).toBe('');
   });
 });

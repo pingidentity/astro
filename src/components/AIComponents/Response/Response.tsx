@@ -10,21 +10,23 @@ const Response = (props: ResponseProps) => {
     containerProps,
     iconProps,
     iconWrapperProps,
-    delay = 10,
+    delay,
   } = props;
   const [index, setIndex] = useState(0);
+
+  const responseChildren = Children.toArray(children);
 
   return (
     <Box isRow gap="md" {...containerProps}>
       <Box {...iconWrapperProps} variant="response.iconWrapper">
         <Icon
           icon={AutoAwesomeIcon}
+          color="text.primary"
           {...iconProps}
         />
       </Box>
       <Box gap="md">
-        {
-        Children.map(children, (child: React.ReactNode, i) => (
+        { Children.map(responseChildren, (child: React.ReactNode, i) => (
           <>
             {React.cloneElement(child as React.ReactElement, {
               shouldStartAnimation: index === i,
@@ -34,8 +36,7 @@ const Response = (props: ResponseProps) => {
               delay,
             }) }
           </>
-        ))
-          }
+        ))}
       </Box>
     </Box>
   );

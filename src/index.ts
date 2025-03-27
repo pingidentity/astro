@@ -18,6 +18,7 @@ export { default as PromptInput } from './components/AIComponents/PromptInput';
 export { default as Response } from './components/AIComponents/Response';
 export { default as ResponseAttachment } from './components/AIComponents/Response/ResponseAttachment';
 export { default as ResponseList } from './components/AIComponents/Response/ResponseList';
+export { default as ResponseMarkdown } from './components/AIComponents/Response/ResponseMarkdown';
 export { default as ResponseText } from './components/AIComponents/Response/ResponseText';
 export { default as ResponseToolbar } from './components/AIComponents/Response/ResponseToolbar';
 export { default as ResponseToolbarIcon } from './components/AIComponents/Response/ResponseToolbarIcon';

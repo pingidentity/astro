@@ -7,7 +7,7 @@ import { ResponseTextProps } from '../../../types/response';
 
 const ResponseText = (props: ResponseTextProps) => {
   const {
-    delay,
+    delay = 10,
     text,
     shouldStartAnimation,
     setAnimationIndex,
@@ -16,17 +16,22 @@ const ResponseText = (props: ResponseTextProps) => {
     className,
     ...others
   } = props;
+
   const animationProps = {
     delay, text, setAnimationIndex, animationIndex, shouldStartAnimation,
   };
-  const currentText = useTypeAnimation(animationProps);
+  const { currentText } = useTypeAnimation(animationProps);
 
-  const hasBullet = isListItem && currentText.length > 0;
+  const hasBullet = isListItem === true && currentText.length > 0;
 
   const { classNames } = useStatusClasses(className, { hasBullet });
 
+  const renderText = `${currentText}`;
+
   return (
-    <Text {...others} role={isListItem ? 'listitem' : ''} variant="response" className={classNames}>{currentText}</Text>
+    <Text {...others} role={isListItem ? 'listitem' : ''} variant="response" className={classNames}>
+      {renderText}
+    </Text>
   );
 };
 

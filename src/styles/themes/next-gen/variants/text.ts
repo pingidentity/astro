@@ -85,9 +85,13 @@ export const text = {
     fontFamily: 'standard',
     fontSize: 'md',
     display: 'block',
+    whiteSpace: 'pre-wrap',
     lineHeight: '1.6rem',
     '&.has-bullet': {
       display: 'list-item',
+    },
+    '&::marker': {
+      color: 'text.primary',
     },
   },
   ...hTags,

@@ -108,6 +108,7 @@
     "listbox-layout": "npm:@react-stately/layout@3.9.0",
     "listbox-virtualizer": "npm:@react-aria/virtualizer@3.6.0",
     "lodash": "^4.17.21",
+    "markdown-to-jsx": "^7.7.4",
     "moment": "^2.29.4",
     "pluralize": "^8.0.0",
     "prism-react-renderer": "1.2.1",

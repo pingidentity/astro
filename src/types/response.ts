@@ -12,10 +12,25 @@ interface SharedResponseProps {
     setAnimationIndex?: (index: number) => void,
 }
 
-export interface ResponseTextProps extends SharedResponseProps, TextProps {
-    text: string,
+interface SharedWrapperProps {
+    stateIndex: number,
+    isTopLevel?: boolean
+}
+
+interface SharedParentProps {
+    children: ReactNode[]
+    parentIndex?: number,
+    delay?: number
+}
+
+interface SharedTextProps extends TextProps {
+    isListItem?: boolean,
+    parentIndex?: number,
     delay?: number,
-    isListItem?: boolean
+}
+
+export interface ResponseTextProps extends SharedResponseProps, TextProps, SharedTextProps {
+    text: string,
 }
 
 export interface ResponseAttachmentProps extends SharedResponseProps {
@@ -27,10 +42,8 @@ export interface ResponseAttachmentProps extends SharedResponseProps {
     text: string,
 }
 
-export interface ResponseListProps extends SharedResponseProps, BoxProps {
-  children: ReactNode[]
-  parentIndex?: number,
-  delay?: number
+export interface ResponseListProps extends SharedResponseProps, Omit<BoxProps, 'children'>, SharedParentProps {
+
 }
 
 export interface ResponseProps extends BoxProps{
@@ -39,6 +52,7 @@ export interface ResponseProps extends BoxProps{
     textProps?: ResponseTextProps,
     iconWrapperProps?: IconWrapperProps,
     shouldStartAnimation?: boolean,
+    children: ReactNode,
     delay?: number
 }
 
@@ -60,3 +74,33 @@ export interface ResponseToolbarIconProps extends IconButtonProps, SharedRespons
     parentIndex?: number,
     iconProps?: IconProps,
 }
+
+export interface MarkdownListWrapperProps extends ResponseListProps, SharedWrapperProps {}
+
+export interface MarkdownTextWrapperProps extends SharedWrapperProps,
+SharedTextProps, SharedResponseProps {
+    children: ReactNode[] | string[],
+    parentIndex?: number,
+}
+
+export interface MarkdownTextContainerProps extends SharedResponseProps, SharedParentProps {
+    className?: string,
+    as?: string | React.ReactNode | React.ElementType,
+    isListItem?: boolean
+}
+
+export interface MarkdownWrapperProps extends BoxProps, SharedWrapperProps, SharedResponseProps {
+    parentIndex?: number
+}
+
+export type MarkdownContainerProps = BoxProps
+
+export interface ResponseListItemProps extends SharedParentProps, SharedResponseProps {
+    as?: string | React.ReactNode | React.ElementType,
+}
+
+export interface ResponseMarkdownContextValue {
+    delay?: number
+    stateIndex: number
+    setAnimationIndex?: (key: number) => void
+  }
