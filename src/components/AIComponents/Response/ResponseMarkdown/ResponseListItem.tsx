@@ -1,10 +1,9 @@
 import React, { Children, useEffect, useState } from 'react';
 
-import { useStatusClasses } from '../../../hooks';
-import { Box } from '../../../index';
-import { ResponseListProps } from '../../../types/response';
+import { Box } from '../../../../index';
+import { ResponseListItemProps } from '../../../../types/response';
 
-const ResponseList = (props: ResponseListProps) => {
+const ResponseListItem = (props: ResponseListItemProps) => {
   const [index, setIndex] = useState(-1);
   const {
     children,
@@ -12,7 +11,7 @@ const ResponseList = (props: ResponseListProps) => {
     setAnimationIndex,
     shouldStartAnimation,
     delay,
-    as: asProp,
+    as,
   } = props;
 
   useEffect(() => {
@@ -27,33 +26,30 @@ const ResponseList = (props: ResponseListProps) => {
     }
   }, [shouldStartAnimation]);
 
-  const isNumeric = asProp === 'ol';
-
-  const { classNames } = useStatusClasses('', {
-    isNumeric,
-  });
-
   return (
-    <Box
-      as={asProp}
-      variant="response.list"
-      className={classNames}
-      sx={{ pl: 'md', listStyleType: 'disc', listStylePosition: 'inside' }}
-    >
-      {Children.map(children,
+    <Box as={as}>
+      {Children.map(children.slice(0, 1),
         (child: React.ReactNode, i) => React.cloneElement(child as React.ReactElement, {
           shouldStartAnimation: index === i,
           setAnimationIndex: setIndex,
           animationIndex: i,
           delay,
-          isListItem: React.isValidElement(child) && child.props.as && child.props.as !== 'p',
+          isListItem: true,
           parentIndex: index,
-          as: 'li',
+        }),
+      )}
+      {Children.map(children.slice(1, children.length),
+        (child: React.ReactNode, i) => React.cloneElement(child as React.ReactElement, {
+          shouldStartAnimation: index === i + 1,
+          setAnimationIndex: setIndex,
+          animationIndex: i + 1,
+          delay,
+          isListItem: true,
+          parentIndex: index,
         }),
       )}
     </Box>
-
   );
 };
 
-export default ResponseList;
+export default ResponseListItem;

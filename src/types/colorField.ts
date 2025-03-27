@@ -54,5 +54,5 @@ export interface ColorFieldPreviewButtonProps extends ButtonProps {
   isOpen: boolean,
   bg: string,
   label: string | React.ReactNode,
-  colorValue: string
+  colorValue?: string
 }

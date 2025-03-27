@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-
 const useTypeAnimation = (
   { shouldStartAnimation, text, delay, setAnimationIndex, animationIndex }) => {
   const [currentText, setCurrentText] = useState('');
@@ -20,9 +19,9 @@ const useTypeAnimation = (
     return () => null;
   }, [currentIndex, delay, text, shouldStartAnimation, setAnimationIndex, animationIndex]);
 
-  return (
-    currentText
-  );
+  return {
+    currentText,
+  };
 };
 
 export default useTypeAnimation;

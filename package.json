@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.112.0",
+  "version": "2.113.0-alpha.2",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -50,7 +50,7 @@
     "@react-aria/button": "^3.2.1",
     "@react-aria/calendar": "^3.5.7",
     "@react-aria/checkbox": "^3.2.0",
-    "@react-aria/color": "~3.0.0-beta.15",
+    "@react-aria/color": "~3.0.0",
     "@react-aria/combobox": "^3.0.0",
     "@react-aria/datepicker": "^3.10.1",
     "@react-aria/dialog": "^3.1.2",
@@ -77,7 +77,7 @@
     "@react-spectrum/test-utils": "^3.0.0-alpha.1",
     "@react-spectrum/utils": "~3.6.1",
     "@react-stately/calendar": "^3.5.0",
-    "@react-stately/color": "~3.1.1",
+    "@react-stately/color": "~3.8.1",
     "@react-stately/datepicker": "^3.9.4",
     "@react-stately/dnd": "^3.2.6",
     "@react-stately/grid": "~3.3.1",
@@ -108,6 +108,7 @@
     "listbox-layout": "npm:@react-stately/layout@3.9.0",
     "listbox-virtualizer": "npm:@react-aria/virtualizer@3.6.0",
     "lodash": "^4.17.21",
+    "markdown-to-jsx": "^7.7.4",
     "moment": "^2.29.4",
     "pluralize": "^8.0.0",
     "prism-react-renderer": "1.2.1",

@@ -5,8 +5,7 @@ import ThumbDownOutlineIcon from '@pingux/mdi-react/ThumbDownOutlineIcon';
 import ThumbUpOutlineIcon from '@pingux/mdi-react/ThumbUpOutlineIcon';
 import VolumeHighIcon from '@pingux/mdi-react/VolumeHighIcon';
 
-import { AstroWrapper, NextGenTheme } from '../../..';
-
+import Markdown from './ResponseMarkdown/ResponseMarkdown';
 import Response from './Response';
 import ResponseAttachment from './ResponseAttachment';
 import ResponseList from './ResponseList';
@@ -42,30 +41,42 @@ export const Default = args => {
     },
   ];
 
-  const delay = 20;
+  const delay = 40;
 
   return (
-    <AstroWrapper {...args} themeOverrides={[NextGenTheme]}>
-      <Response delay={delay}>
-        <ResponseText text={testText} />
-        <ResponseAttachment text="Attachment Text" />
-        <ResponseText text={testText} />
-        <ResponseText text={testText} />
-        <ResponseList>
-          <ResponseText as="h5" sx={{ fontWeight: 2 }} text="heading" />
-          <ResponseText as="li" text="list item 1" />
-          <ResponseText as="li" text="list item 2" />
-          <ResponseText as="li" text="list item 3" />
-        </ResponseList>
-        <ResponseText text="follow up text" />
-        <ResponseToolbar>
-          {icons.map(icon => {
-            return (
-              <ResponseToolbarIcon {...icon} />
-            );
-          })}
-        </ResponseToolbar>
-      </Response>
-    </AstroWrapper>
+    <Response delay={delay}>
+      <ResponseText text={testText} />
+      <ResponseAttachment text="Attachment Text" />
+      <ResponseText text={testText} />
+      <ResponseText text={testText} />
+      <ResponseList>
+        <ResponseText as="li" text="list item 1" />
+        <ResponseText as="li" text="list item 2" />
+        <ResponseText as="li" text="list item 3" />
+      </ResponseList>
+      <ResponseText text="follow up text" />
+      <ResponseToolbar>
+        {icons.map(icon => (
+          <ResponseToolbarIcon {...icon} />
+        ))}
+      </ResponseToolbar>
+    </Response>
+  );
+};
+
+// eslint-disable-next-line no-useless-escape
+const nestedMarkdown = 'The recent login activity shows successful authentication attempts for the user \"bbludis476@gmail.com\" using the \"BXRetail App\". There were no failed authentication attempts recorded. Here are the details of the successful attempts:\n\n1. **Timestamp:** 2025-02-13T09:25:55.946Z\n   - **User:** bbludis476@gmail.com\n   - **Action:** User Access Allowed\n   - **Status:** SUCCESS\n\n2. **Timestamp:** 2025-02-13T09:25:52.377Z\n   - **User:** bbludis476@gmail.com\n   - **Action:** User Access Allowed\n   - **Status:** SUCCESS';
+
+const italics = '*Italics* bbludis476@gmail.com';
+
+export const MarkdownStory = () => {
+  return (
+    <Response delay={20}>
+      <ResponseText text="Beginning response text" />
+      <Markdown str={nestedMarkdown} />
+      <ResponseText text="Follow up response text " />
+      <Markdown str={italics} />
+      <ResponseText text="Final response text " />
+    </Response>
   );
 };
