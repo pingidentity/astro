@@ -834,6 +834,16 @@ test('in non-restrictive mode the partial string values should be accepted', () 
   expect(input).toHaveValue(value);
 });
 
+test('in condensed mode, hasNoSelectAll hides the select all button', () => {
+  getComponent({ mode: 'condensed', hasNoSelectAll: true });
+
+  userEvent.tab();
+
+  const buttons = screen.getAllByRole('button');
+  const button = buttons[1];
+  expect(button).not.toHaveTextContent('Select All');
+});
+
 test('in condensed mode selects and deselects ', () => {
   getComponent({ mode: 'condensed' });
 
