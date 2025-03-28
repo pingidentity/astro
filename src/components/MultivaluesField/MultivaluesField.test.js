@@ -18,17 +18,17 @@ const withSection = [
     name: 'Animals',
     key: 'Animals',
     children: [
-      { name: 'Option A1' },
-      { name: 'Option A2' },
+      { name: 'Option A1', key: 'Option A1' },
+      { name: 'Option A2', key: 'Option A2' },
     ],
   },
   {
     name: 'People',
     key: 'People',
     children: [
-      { name: 'Option B1' },
-      { name: 'Option B2' },
-      { name: 'Option B3' },
+      { name: 'Option B1', key: 'Option B1' },
+      { name: 'Option B2', key: 'Option B2' },
+      { name: 'Option B3', key: 'Option B3' },
     ],
   },
 ];
@@ -832,6 +832,16 @@ test('in non-restrictive mode the partial string values should be accepted', () 
   userEvent.type(input, '{enter}');
   expect(input).not.toHaveValue('');
   expect(input).toHaveValue(value);
+});
+
+test('in condensed mode, hasNoSelectAll hides the select all button', () => {
+  getComponent({ mode: 'condensed', hasNoSelectAll: true });
+
+  userEvent.tab();
+
+  const buttons = screen.getAllByRole('button');
+  const button = buttons[1];
+  expect(button).not.toHaveTextContent('Select All');
 });
 
 test('in condensed mode selects and deselects ', () => {

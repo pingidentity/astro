@@ -25,6 +25,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     disabledKeys = [],
     containerProps,
     hasAutoFocus,
+    hasNoSelectAll,
     hasNoStatusIndicator,
     helperText,
     inputProps: customInputProps,
@@ -164,7 +165,6 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     if (!isOpen) setActiveDescendant('');
   }, [isOpen]);
 
-
   /* istanbul ignore next */
   const keyDown = e => {
     switch (e.key) {
@@ -208,7 +208,6 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const arrayItems = Array.from(items);
   const itemCount = arrayItems.reduce((count, obj) => count + (
-
     obj.children ? obj.children.length : 1
   ), 0);
 
@@ -234,7 +233,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const handleSelection = () => {
     if (selectedKeysSize < itemCount) {
       const allItemNames = arrayItems.flatMap(obj => (
-        obj.children ? obj.children.map(child => child.name) : obj.name
+        obj.children ? obj.children.map(child => child.key) : obj.key
       ));
       selectionManager.setSelectedKeys(allItemNames);
       setSelectionState('Deselect All');
@@ -246,7 +245,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const listbox = (
     <FocusScope>
-      {filterString === '' && (
+      {(filterString === '' && !hasNoSelectAll) && (
       <Button
         onPress={handleSelection}
         ref={buttonRef}
@@ -281,7 +280,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     </VisuallyHidden>
   );
 
-  // the reason we are using two different visually hiddens, rather than one that updates it's value
+  // the reason we are using two different visually hiddens, rather than one that updates its value
   // is because there are tests that break if an empty visually hidden is rendered in the TextField
   const EmptyVisuallyHidden = () => {
     return (
@@ -358,11 +357,11 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           aria-describedby={selectionManager.selectedKeys.size > 0 ? 'selectedKeysState' : 'emptyKeysState'}
           slots={{
             inContainer: button,
-            beforeInput:
-  <>
-    { checkboxSelected}
-    {selectionManager.selectedKeys.size > 0 && visuallyHidden}
-  </>,
+            beforeInput: (
+              <>
+                { checkboxSelected}
+                {selectionManager.selectedKeys.size > 0 && visuallyHidden}
+              </>),
           }} // eslint-disable-line
           value={filterString}
           helperText={helperText}
@@ -399,6 +398,8 @@ CondensedMultivaluesField.propTypes = {
   disabledKeys: isIterableProp,
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,
+  /** Whether the field has the select all button. */
+  hasNoSelectAll: PropTypes.bool,
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator: PropTypes.bool,
   /** Text rendered below the input. */
