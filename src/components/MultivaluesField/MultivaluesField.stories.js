@@ -168,20 +168,20 @@ const withSection = [
     name: 'Animals',
     key: 'Animals',
     children: [
-      { name: 'Option A1' },
-      { name: 'Option A2' },
-      { name: 'Option A3' },
-      { name: 'Option A4' },
-      { name: 'Option A5' },
+      { name: 'Option A1', key: 'Option A1' },
+      { name: 'Option A2', key: 'Option A2' },
+      { name: 'Option A3', key: 'Option A3' },
+      { name: 'Option A4', key: 'Option A4' },
+      { name: 'Option A5', key: 'Option A5' },
     ],
   },
   {
     name: 'People',
     key: 'People',
     children: [
-      { name: 'Option B1' },
-      { name: 'Option B2' },
-      { name: 'Option B3' },
+      { name: 'Option B1', key: 'Option B1' },
+      { name: 'Option B2', key: 'Option B2' },
+      { name: 'Option B3', key: 'Option B3' },
     ],
   },
 
