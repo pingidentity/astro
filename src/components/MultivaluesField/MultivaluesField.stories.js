@@ -56,6 +56,11 @@ export default {
         type: 'text',
       },
     },
+    hasNoSelectAll: {
+      control: {
+        tyle: 'boolean',
+      },
+    },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,

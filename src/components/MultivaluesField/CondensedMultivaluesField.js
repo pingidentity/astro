@@ -25,6 +25,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     disabledKeys = [],
     containerProps,
     hasAutoFocus,
+    hasNoSelectAll,
     hasNoStatusIndicator,
     helperText,
     inputProps: customInputProps,
@@ -244,7 +245,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const listbox = (
     <FocusScope>
-      {filterString === '' && (
+      {(filterString === '' && !hasNoSelectAll) && (
       <Button
         onPress={handleSelection}
         ref={buttonRef}
@@ -397,6 +398,8 @@ CondensedMultivaluesField.propTypes = {
   disabledKeys: isIterableProp,
   /** Whether the element should receive focus on render. */
   hasAutoFocus: PropTypes.bool,
+  /** Whether the field has the select all button. */
+  hasNoSelectAll: PropTypes.bool,
   /** Whether the field has a status indicator. */
   hasNoStatusIndicator: PropTypes.bool,
   /** Text rendered below the input. */
