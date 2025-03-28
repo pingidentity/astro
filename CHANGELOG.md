@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.114.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.113.0...@pingux/astro@2.114.0) (2025-03-28)
+
+
+### Bug Fixes
+
+* [UIP-7495] Condensed multivaluesfield handleselection uses children name instead of key ([8af752d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8af752d8f98f24596d11ec143cb06260881abe76))
+
+
+### Features
+
+* [UIP-7510] Add Ability to hide select all in Condensed MultiValuesField ([f294a89](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f294a896345f38350e099f513870d1072995cd14))
+
+
+
+
+
 # [2.113.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.112.0...@pingux/astro@2.113.0) (2025-03-27)
 
 
