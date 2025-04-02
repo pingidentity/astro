@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Response" />
+
+# Response
+
+The Response component is used to display animated text responses, lists, and attachments in a conversational UI. It supports progressive rendering of text and nested components like toolbars and attachments.
+
+### Recommended Use
+
+- Use the Response component to display text responses with typing animations.
+- Include lists, toolbars, or attachments as part of the response content.
+
+### Features
+
+- **Typing Animation**: Text is progressively displayed to simulate typing.
+- **Nested Components**: Supports nested lists, toolbars, and attachments.
+- **Customizable**: Delay and animation settings can be adjusted.
+
+### Required Components
+
+This component works with the following subcomponents:
+- [ResponseText](./?path=/docs/components-response-responsetext--docs)
+- [ResponseList](./?path=/docs/components-response-responselist--docs)
+- [ResponseToolbar](./?path=/docs/components-response-responsetoolbar--docs)
+- [ResponseAttachment](./?path=/docs/components-response-responseattachment--docs)
+
+### Example Usage
+
+```jsx
+<Response delay={100}>
+  <ResponseText text="Hello, how can I assist you today?" />
+  <ResponseList as="ul">
+    <ResponseText as="li" text="Option 1: Get help with your account." />
+    <ResponseText as="li" text="Option 2: Learn about our services." />
+  </ResponseList>
+  <ResponseToolbar>
+    <ResponseToolbarIcon title="Copy" icon={CopyIcon} />
+    <ResponseToolbarIcon title="Read Aloud" icon={VolumeHighIcon} />
+  </ResponseToolbar>
+</Response>

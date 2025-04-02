@@ -335,7 +335,7 @@ export const Default: StoryFn = () => {
 
 export const CustomWidth: StoryFn = () => (
   <Box width={200}>
-    <Text p="xl" color="text.secondary">
+    <Text p="xl">
       superlongtextinonelinewithnowhitespacessoitcanbelongerthatanywidth
     </Text>
   </Box>
