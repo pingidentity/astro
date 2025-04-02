@@ -5,8 +5,11 @@ import ThumbDownOutlineIcon from '@pingux/mdi-react/ThumbDownOutlineIcon';
 import ThumbUpOutlineIcon from '@pingux/mdi-react/ThumbUpOutlineIcon';
 import VolumeHighIcon from '@pingux/mdi-react/VolumeHighIcon';
 
+import DocsLayout from '../../../../.storybook/storybookDocsLayout';
+import { Response } from '../../../index';
+
 import Markdown from './ResponseMarkdown/ResponseMarkdown';
-import Response from './Response';
+import ResponseReadme from './Response.mdx';
 import ResponseAttachment from './ResponseAttachment';
 import ResponseList from './ResponseList';
 import ResponseText from './ResponseText';
@@ -16,6 +19,19 @@ import ResponseToolbarIcon from './ResponseToolbarIcon';
 export default {
   title: 'Ai Components/Response',
   component: Response,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <ResponseReadme />
+          <DocsLayout />
+        </>
+      ),
+      source: {
+        type: 'code',
+      },
+    },
+  },
 };
 
 const testText = 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet';
@@ -41,7 +57,7 @@ export const Default = args => {
     },
   ];
 
-  const delay = 40;
+  const delay = 100;
 
   return (
     <Response delay={delay}>
@@ -56,9 +72,11 @@ export const Default = args => {
       </ResponseList>
       <ResponseText text="follow up text" />
       <ResponseToolbar>
-        {icons.map(icon => (
-          <ResponseToolbarIcon {...icon} />
-        ))}
+        {icons.map(icon => {
+          return (
+            <ResponseToolbarIcon {...icon} />
+          );
+        })}
       </ResponseToolbar>
     </Response>
   );
@@ -71,7 +89,7 @@ const italics = '*Italics* bbludis476@gmail.com';
 
 export const MarkdownStory = () => {
   return (
-    <Response delay={20}>
+    <Response delay={100}>
       <ResponseText text="Beginning response text" />
       <Markdown str={nestedMarkdown} />
       <ResponseText text="Follow up response text " />

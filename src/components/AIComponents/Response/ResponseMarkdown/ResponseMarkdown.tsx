@@ -11,6 +11,17 @@ export const ResponseMarkdownContext = createContext<ResponseMarkdownContextValu
   stateIndex: -1,
 });
 
+export const countChildren = _children => {
+  let count = 0;
+  for (let i = 0; i < _children.length; i += 1) {
+    if (typeof (_children[i]) !== 'string') {
+      count += 1;
+    }
+  }
+  return count;
+};
+
+
 const ResponseMarkdown = componentProps => {
   const [index, setIndex] = useState(-1);
   const {
@@ -131,8 +142,10 @@ const ResponseMarkdown = componentProps => {
       },
     } });
 
+  const childrenCount = countChildren(markdown.props.children);
+
   useEffect(() => {
-    if (index === markdown.props.children.length) {
+    if (index === childrenCount) {
       setAnimationIndex(parentIndex + 1);
     }
   }, [index, markdown.props.children.length]);

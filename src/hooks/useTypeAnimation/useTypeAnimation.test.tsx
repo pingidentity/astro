@@ -4,8 +4,9 @@ import useTypeAnimation from './useTypeAnimation';
 
 const setAnimationIndex = jest.fn();
 const animationIndex = 0;
-const text = 'Hello';
+const text = 'Hello World';
 const delay = 100;
+const splitText = text.split(' ');
 
 const defaultProps = {
   text,
@@ -29,11 +30,11 @@ describe('useTypeAnimation', () => {
 
     expect(result.current.currentText).toBe('');
 
-    for (let i = 0; i < text.length; i += 1) {
+    for (let i = 0; i < splitText.length; i += 1) {
       act(() => {
         jest.advanceTimersByTime(delay);
       });
-      expect(result.current.currentText).toBe(text.slice(0, i + 1));
+      expect(result.current.currentText).toBe(splitText.slice(0, i + 1).join(' '));
     }
 
     expect(result.current.currentText).toBe(text);

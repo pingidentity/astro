@@ -53,7 +53,7 @@ const MarkdownTextContainer = (props: MarkdownTextContainerProps) => {
     <Box
       className={classNames}
       variant="response.textWrapper"
-      as={hasNonStringChild ? 'div' : as}
+      as={(hasNonStringChild && as === 'p') ? 'div' : as}
     >
       <Box isRow>
         {Children.map(markdownTextChildren.slice(0, index + 1),
