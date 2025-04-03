@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.115.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.114.0...@pingux/astro@2.115.0) (2025-04-03)
+
+
+### Bug Fixes
+
+* [UIP-7507] Add initial state to messagesReducer ([04fca26](https://gitlab.corp.pingidentity.com/ux/pingux/commit/04fca2621a2f7ce31d1c8372f92066e6a8a02779))
+
+
+### Features
+
+* [UIP-7462] PanelHeader not properly truncating long titles ([5665393](https://gitlab.corp.pingidentity.com/ux/pingux/commit/56653934645b121bc87923ae8956bda161c2f134))
+* [UIP-7479] Ai response loader ([c153cfd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c153cfdb3f7c1b50434f12315d07c89fd958c4f9))
+
+
+
+
+
 # [2.114.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.113.0...@pingux/astro@2.114.0) (2025-03-28)
 
 
