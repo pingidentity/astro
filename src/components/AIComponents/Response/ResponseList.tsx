@@ -12,7 +12,7 @@ const ResponseList = (props: ResponseListProps) => {
     setAnimationIndex,
     shouldStartAnimation,
     delay,
-    as: asProp,
+    as: asProp = 'ul',
   } = props;
 
   useEffect(() => {
@@ -38,7 +38,6 @@ const ResponseList = (props: ResponseListProps) => {
       as={asProp}
       variant="response.list"
       className={classNames}
-      sx={{ pl: 'md', listStyleType: 'disc', listStylePosition: 'inside' }}
     >
       {Children.map(children,
         (child: React.ReactNode, i) => React.cloneElement(child as React.ReactElement, {
@@ -46,7 +45,7 @@ const ResponseList = (props: ResponseListProps) => {
           setAnimationIndex: setIndex,
           animationIndex: i,
           delay,
-          isListItem: React.isValidElement(child) && child.props.as && child.props.as !== 'p',
+          isListItem: React.isValidElement(child) && child.props.as && (child.props.as !== 'p' || child.props.as !== 'span'),
           parentIndex: index,
           as: 'li',
         }),

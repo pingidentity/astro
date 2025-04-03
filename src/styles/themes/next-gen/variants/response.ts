@@ -54,19 +54,23 @@ const list = {
 };
 
 const textWrapper = {
+  height: 'fit-content',
   '&.has-bullet': {
     display: 'list-item !important',
+    height: 'fit-content',
   },
   '&.has-rendered': {
     display: 'list-item',
   },
   '&.has-block': {
+    maxHeight: 'fit-content',
     display: 'block',
   },
   '&::marker': {
     color: 'text.primary',
   },
-  listStylePosition: 'outside',
+  listStylePosition: 'initial',
+  flexDirection: 'row',
 };
 
 export default {

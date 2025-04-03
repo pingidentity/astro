@@ -106,10 +106,12 @@ test('component renders', () => {
 test('delay prop works correctly', async () => {
   getComponent();
 
+  const splitText = defaultProps.text.split(' ');
+
   expect(screen.queryByText(defaultProps.text)).not.toBeInTheDocument();
-  for (let i = 1; i < defaultProps.text.length + 1; i += 1) {
+  for (let i = 1; i < splitText.length + 1; i += 1) {
     act(() => { jest.advanceTimersByTime(100); });
-    expect(screen.queryByText(defaultProps.text.slice(0, i))).toBeInTheDocument();
+    expect(screen.queryByText(splitText.slice(0, i).join(' '))).toBeInTheDocument();
   }
   expect(screen.queryByText(defaultProps.text)).toBeInTheDocument();
 });
@@ -117,15 +119,19 @@ test('delay prop works correctly', async () => {
 test('delay prop works correctly, with list', async () => {
   getComponentWithList();
 
+  const splitText = headingText.split(' ');
+
   expect(screen.queryByText(headingText)).not.toBeInTheDocument();
-  for (let i = 1; i < headingText.length + 1; i += 1) {
+  for (let i = 1; i < splitText.length + 1; i += 1) {
     act(() => { jest.advanceTimersByTime(100); });
-    expect(screen.queryByText(headingText.slice(0, i))).toBeInTheDocument();
+    expect(screen.queryByText(splitText.slice(0, i).join(' '))).toBeInTheDocument();
   }
   expect(screen.queryByText(headingText)).toBeInTheDocument();
 
+  const nextTextSplit = nextText.split(' ');
+
   // advance through the listItems
-  for (let i = 1; i < (listItem1.length * 3) + 1; i += 1) {
+  for (let i = 1; i < 10; i += 1) {
     act(() => { jest.advanceTimersByTime(100); });
   }
   expect(screen.queryByText(nextText)).not.toBeInTheDocument();
@@ -133,7 +139,7 @@ test('delay prop works correctly, with list', async () => {
   // ensure that the subsequent text renders correctly
   for (let i = 1; i < nextText.length + 1; i += 1) {
     act(() => { jest.advanceTimersByTime(100); });
-    expect(screen.queryByText(nextText.slice(0, i))).toBeInTheDocument();
+    expect(screen.queryByText(nextTextSplit.slice(0, i).join(' '))).toBeInTheDocument();
   }
   expect(screen.queryByText(nextText)).toBeInTheDocument();
 });
@@ -148,7 +154,7 @@ test('default delay prop works correctly', async () => {
   expect(screen.queryByText(defaultProps.text)).not.toBeInTheDocument();
   for (let i = 1; i < defaultProps.text.length + 1; i += 1) {
     act(() => { jest.advanceTimersByTime(10); });
-    expect(screen.queryByText(defaultProps.text.slice(0, i))).toBeInTheDocument();
+    expect(screen.queryByText(defaultProps.text.split(' ').slice(0, i).join(' '))).toBeInTheDocument();
   }
   expect(screen.queryByText(defaultProps.text)).toBeInTheDocument();
 });
