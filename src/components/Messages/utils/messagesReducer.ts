@@ -108,7 +108,7 @@ const makeShowMessage = (status: Status, timeout: number) => (text: string) => m
 
 /** Reducer to store a list of messages */
 const messagesReducer = (
-  state: MessagesState,
+  state: MessagesState | [],
   action: MessageActions,
 ) => {
   switch (action.type) {
