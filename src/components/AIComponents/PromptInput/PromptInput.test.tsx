@@ -100,6 +100,18 @@ test('onSubmit prop works correctly', async () => {
   expect(onSubmitCallback).toHaveBeenCalledTimes(2);
 });
 
+
+test('', () => {
+  getComponent({
+    isUploadButtonHidden: true,
+    uploadButtonProps: {
+      'data-testid': buttonTestId,
+    },
+  });
+
+  expect(screen.queryByText(buttonTestId)).not.toBeInTheDocument();
+});
+
 test('onCancel prop works correctly', async () => {
   getComponent({
     isLoading: true,

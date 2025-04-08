@@ -20,6 +20,7 @@ export interface PromptProps {
 export interface PromptInputProps extends TextFieldProps, PromptProps {
     onKeyUp?: (e: React.KeyboardEvent, value?: string) => void;
     onKeyDown?: (e: React.KeyboardEvent, value?: string) => void;
+    isUploadButtonHidden?: boolean;
 }
 
 export interface AttachmentProps {

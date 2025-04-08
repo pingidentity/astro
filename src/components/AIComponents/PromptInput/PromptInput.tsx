@@ -15,6 +15,7 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
     attachmentProps,
     isFullScreen,
     isLoading,
+    isUploadButtonHidden = false,
     fileInputButtonProps,
     value: valueProp,
     defaultValue: defaultValueProp,
@@ -160,6 +161,7 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
             onKeyUp={onKeyUp}
             onKeyDown={onKeyDown}
           />
+          {!isUploadButtonHidden && (
           <Box
             sx={{
               mx: '.75rem',
@@ -175,6 +177,7 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
               uploadButtonContainerProps={uploadButtonContainerProps}
             />
           </Box>
+          )}
         </Box>
       </Box>
     </Box>
