@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 
+import DocsLayout from '../../../../.storybook/storybookDocsLayout';
 import { AstroProvider, Box, NextGenTheme } from '../../..';
 import { booleanArg } from '../../../utils/docUtils/docArgTypes';
 
 import PromptInput from './PromptInput';
+import PromptInputReadMe from './PromptInputReadMe.mdx';
 
 export default {
   title: 'Ai Components/Prompt Input',
   component: PromptInput,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <PromptInputReadMe />
+          <DocsLayout />
+        </>
+      ),
+      source: {
+        type: 'code',
+      },
+    },
+  },
   argTypes: {
     isLoading: {
+      ...booleanArg,
+    },
+    isUploadButtonHidden: {
       ...booleanArg,
     },
   },
