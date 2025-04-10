@@ -4,77 +4,9 @@ import emotionNormalize from 'emotion-normalize';
 import PropTypes from 'prop-types';
 import { merge } from 'theme-ui';
 
+import { openSansFont, pingitoFont } from '../../fonts';
 import astroTheme from '../../styles/theme';
 import Box from '../Box';
-
-const pingitoFont = `
-  @font-face {
-    font-weight: 200;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-Light.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 400;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-Regular.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 600;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-SemiBold.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 700;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-Bold.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 900;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-ExtraBold.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 200;
-    font-style: italic;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-ItalicLight.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 400;
-    font-style: italic;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-Italic.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 600;
-    font-style: italic;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-ItalicSemiBold.ttf");
-    size-adjust: 100%;
-  }
-
-  @font-face {
-    font-weight: 700;
-    font-style: italic;
-    font-family: "pingito";
-    src: url("fonts/pingito/Pingito-ItalicBold.ttf");
-    size-adjust: 100%;
-  }
-`;
 
 export const GlobalStyles = ({ isEndUserTheme = false }) => {
   return (
@@ -82,7 +14,8 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
       styles={css`
         @import url("https://use.typekit.net/icz8cni.css");
         ${emotionNormalize}
-        ${isEndUserTheme && pingitoFont}
+        ${pingitoFont}
+        ${openSansFont}
         * {
           box-sizing: border-box;
         }
