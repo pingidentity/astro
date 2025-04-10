@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.116.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.115.0...@pingux/astro@2.116.0) (2025-04-10)
+
+
+### Bug Fixes
+
+* [UIP-7448] PromptInput add ability to show and hide upload button ([87071ac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/87071ac5e7e6047a4c89553a35048f979dc67c7c))
+* [UIP-7450] Fix Imported Fonts ([767d5d8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/767d5d8a89919ba54843cce52c34b4439c2ca132))
+
+
+### Features
+
+* [UIP-7488] FileUploadField expand fileType flexibility ([d0960c8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d0960c824e2c59de75db275e14d233e102c2fdd3))
+
+
+
+
+
 # [2.115.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.114.0...@pingux/astro@2.115.0) (2025-04-03)
 
 
