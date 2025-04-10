@@ -131,6 +131,7 @@ export const ControlledState = () => {
       sx={fitContentWidthSx}
       status={error && statuses.ERROR}
       helperText={error}
+      isMultiple
     />
   );
 };
@@ -229,5 +230,33 @@ export const WithCustomWidth = () => {
         isMultiple
       />
     </Box>
+  );
+};
+
+export const WithFileTypePdfAndImage = () => {
+  const fileTypes = ['application/pdf', 'image/*'];
+  const [error, setError] = useState();
+
+  const handleFileSelect = (event, files) => {
+    const uploadedFileType = files[0].type;
+
+    const isValidFileType = fileTypes.some(fileType => uploadedFileType.search(fileType) !== -1);
+    if (isValidFileType) {
+      setError(null);
+    } else {
+      setError('Not a valid File Type. Only PDF and Image files are allowed.');
+    }
+  };
+
+  return (
+    <FileInputField
+      label="With File Type"
+      sx={fitContentWidthSx}
+      fileTypes={fileTypes}
+      onFileSelect={handleFileSelect}
+      onRemove={() => setError(null)}
+      status={error && statuses.ERROR}
+      helperText={error}
+    />
   );
 };

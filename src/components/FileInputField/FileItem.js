@@ -13,7 +13,6 @@ const FileItem = props => {
   const {
     downloadLink,
     handleFileDelete,
-    helperTextId,
     id,
     isDisabled,
     name,
@@ -64,7 +63,7 @@ const FileItem = props => {
         aria-label={name}
         data-testid="file-uploaded__download-file-button"
         onPress={handleDownloadPress}
-        aria-describedby={helperTextId}
+        aria-describedby={`file-uploaded__download-link-${id}`}
         aria-live="polite"
       >
         <Text color="active" {...textProps}>
@@ -89,6 +88,7 @@ const FileItem = props => {
         aria-label={`download ${name}`}
         data-testid="file-uploaded__download-link"
         tabIndex={-1}
+        id={`file-uploaded__download-link-${id}`}
       />
     </Box>
   );
