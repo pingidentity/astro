@@ -20,12 +20,19 @@ const testFileURL = 'test-file-url';
 const testFileId = 'test-file-id-1';
 const testFileName = 'chucknorris.png';
 const testFileName2 = 'chucknorris222.png';
+const testFileName3 = 'document.pdf';
+
 const testFile = new File(['(⌐□_□)'], testFileName, {
   type: 'image/png',
 });
 const testFile2 = new File(['(⌐□_□)'], testFileName2, {
   type: 'image/png',
 });
+
+const testFile3 = new File(['(⌐□_□)'], testFileName3, {
+  type: 'application/pdf',
+});
+
 const testFileObject = {
   id: testFileId,
   name: testFileName,
@@ -185,8 +192,7 @@ test('passing helper text should display it and correct aria attributes on input
   expect(helper).toBeInTheDocument();
   expect(helper).toHaveClass(`is-${statuses.ERROR}`);
 
-  const helperTextID = helper.getAttribute('id');
-  expect(screen.getAllByRole('button')[0]).toHaveAttribute('aria-describedby', helperTextID);
+  expect(screen.getAllByRole('button')[0]).toHaveAttribute('aria-describedby', `file-uploaded__download-link-${testFileId}`);
 });
 
 test('should display helper text if passed', () => {
@@ -199,4 +205,20 @@ test('should render icon button if isIconButton prop is true', () => {
   getComponent({ isIconButton: true });
   const iconButton = screen.getByRole('button', { name: 'Add File Icon' });
   expect(iconButton).toBeInTheDocument();
+});
+
+test('File upload should allow only image', () => {
+  const setStateMock = jest.fn();
+  jest.spyOn(React, 'useState').mockImplementation(initialState => [initialState, setStateMock]);
+
+  getComponent({ fileTypes: ['image/*'] });
+
+  const fileUploadFieldInput = screen.getByLabelText(testLabel);
+  userEvent.click(screen.getByTestId(fileSelectTestIdButton));
+  fireEvent.change(fileUploadFieldInput, { target: { files: [testFile3] } });
+
+  const val = screen.queryByText('document');
+  expect(val).not.toBeInTheDocument();
+
+  expect(setStateMock).toHaveBeenCalled();
 });

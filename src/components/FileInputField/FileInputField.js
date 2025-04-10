@@ -50,6 +50,7 @@ const FileInputField = forwardRef((props, ref) => {
     onRemove,
     status,
     textProps,
+    fileTypes,
     ...others } = props;
   const [uploadedFiles, setUploadedFiles] = useState(defaultFileList || []);
   const [fileChangeStatus, setFileChangeStatus] = useState(null);
@@ -106,19 +107,23 @@ const FileInputField = forwardRef((props, ref) => {
     }
 
     let arrayWithNewFiles = Array.from(newFiles);
+
     if (!isMultiple) {
       arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
     }
 
-    const filesWithIdAndLink = arrayWithNewFiles.map(newFile => {
-      return {
-        fileObj: newFile,
-        name: newFile.name,
-        id: uuidv4(),
-        downloadLink: URL.createObjectURL(newFile),
-        status: statuses.DEFAULT,
-      };
-    });
+    const filesWithIdAndLink = arrayWithNewFiles
+      .filter(newFile => !fileTypes
+         || fileTypes.some(fileType => newFile.type.search(fileType) !== -1))
+      .map(newFile => {
+        return {
+          fileObj: newFile,
+          name: newFile.name,
+          id: uuidv4(),
+          downloadLink: URL.createObjectURL(newFile),
+          status: statuses.DEFAULT,
+        };
+      });
 
     if (isMultiple) {
       setUploadedFiles(prevFiles => [...prevFiles, ...filesWithIdAndLink]);
@@ -223,6 +228,7 @@ const FileInputField = forwardRef((props, ref) => {
           onChange={handleOnChange}
           ref={inputRef}
           type="file"
+          accept={fileTypes ? fileTypes?.join(',') : '*'}
         />
         {filesListNode}
         {shouldFileSelectRender() && (
@@ -256,7 +262,7 @@ const FileInputField = forwardRef((props, ref) => {
         )}
       </Box>
       {helperText && (
-      <Box aria-label={helperText}>
+      <Box aria-label={helperText} role="marquee">
         <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>

@@ -1,0 +1,71 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/PromptInput" />
+
+# PromptInput
+
+The `PromptInput` component is used to capture user input in a conversational UI. It supports text input, file attachments, and customizable actions like submission or cancellation.
+
+### Recommended Use
+
+- Use the `PromptInput` component to collect user input in chat-like interfaces.
+- Attach files or documents to the input using the file attachment feature.
+
+### Features
+
+- **Text Input**: Allows users to type text with dynamic height adjustment based on content.
+- **File Attachments**: Supports adding and removing file attachments.
+- **Customizable Actions**: Includes `onSubmit`, `onCancel`, `onKeyDown`, and `onKeyUp` handlers for custom behavior.
+
+### Props
+
+| Prop                  | Type                 | Description                                                                 |
+| --------------------- | -------------------- | --------------------------------------------------------------------------- |
+| `value`               | `string`            | The controlled value of the input.                                          |
+| `defaultValue`        | `string`            | The default value of the input.                                             |
+| `onSubmit`            | `function`          | Callback triggered when the input is submitted.                             |
+| `onCancel`            | `function`          | Callback triggered when the input is canceled.                              |
+| `onKeyDown`           | `function`          | Callback triggered on key down events.                                      |
+| `onKeyUp`             | `function`          | Callback triggered on key up events.                                        |
+| `onFileChange`        | `function`          | Callback triggered when files are added or removed.                         |
+| `attachmentProps`     | `object`            | Props passed to the `Attachment` component for file attachments.            |
+| `fileInputButtonProps`| `object`            | Props passed to the file input button.                                       |
+| `uploadButtonProps`   | `object`            | Props passed to the upload button.                                          |
+| `isLoading`           | `boolean`           | Indicates whether the input is in a loading state.                          |
+
+### Accessibility
+
+This component adheres to accessibility guidelines to ensure a better user experience for all users.
+
+#### Keyboard Navigation
+
+| Keys         | Function                                                                 |
+| ------------ | ----------------------------------------------------------------------- |
+| Tab          | Focuses on the next focusable element within the input.                 |
+| Shift + Tab  | Moves focus to the previous focusable element.                          |
+| Enter        | Submits the input when `onSubmit` is defined.                           |
+| Shift + Enter| Adds a new line to the input.                           |
+| Escape       | Cancels the input when `onCancel` is defined.                           |
+
+#### Screen Readers
+
+- **`aria-label`**: Describes the purpose of the input field.
+- **`aria-disabled`**: Indicates when the input is disabled.
+- **`aria-live`**: Announces changes to the input dynamically.
+
+### Example Usage
+
+```jsx
+<PromptInput
+  value=""
+  onSubmit={(e, value) => console.log('Submitted:', value)}
+  onCancel={(e) => console.log('Canceled')}
+  onFileChange={(files) => console.log('Files:', files)}
+  attachmentProps={{
+    icon: GlobeIcon,
+  }}
+  uploadButtonProps={{
+    'aria-label': 'Upload',
+  }}
+  isLoading={false}
+/>
