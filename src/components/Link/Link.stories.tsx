@@ -51,7 +51,7 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: Object.keys(variants),
+        options: [...Object.keys(variants), 'button'],
       },
     },
   },
