@@ -103,34 +103,38 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
             ref={modalRef}
             aria-modal
           >
-            {
-              hasCloseButton
-              && (
-                closeButton
-                ?? (
-                  <IconButton
-                    aria-label="Close modal window"
-                    data-id="icon-button__close-modal-window"
-                    variant="modalCloseButton"
-                    onPress={onClose}
-                  >
-                    <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
-                  </IconButton>
+            <Box
+              variant="modal.headingContainer"
+            >
+              {
+                hasCloseButton
+                && (
+                  closeButton
+                  ?? (
+                    <IconButton
+                      aria-label="Close modal window"
+                      data-id="icon-button__close-modal-window"
+                      variant="modalCloseButton"
+                      onPress={onClose}
+                    >
+                      <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
+                    </IconButton>
+                  )
                 )
-              )
-            }
-            {
-              title
-              && (
-                <Text
-                  {...titleProps}
-                  variant="variants.modal.title"
-                  role="heading"
-                >
-                  {title}
-                </Text>
-              )
-            }
+              }
+              {
+                title
+                && (
+                  <Text
+                    {...titleProps}
+                    variant="variants.modal.title"
+                    role="heading"
+                  >
+                    {title}
+                  </Text>
+                )
+              }
+            </Box>
             {children}
           </Box>
         </FocusScope>

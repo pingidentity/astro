@@ -28,6 +28,8 @@ const content = {
   pl: 'lg',
   boxShadow: 'standard',
   borderRadius: 3,
+  maxHeight: 'calc(100vh - 80px)', // 100% of the window minus 40px on top and bottom
+  overflowY: 'auto',
   '&.is-extra-small': {
     maxWidth: 'none',
     width: 'container.xs',
@@ -50,6 +52,32 @@ const content = {
   },
 };
 
+const headingContainer = {
+  position: 'sticky',
+  top: '-md',
+  mt: '-md',
+  mb: '-md',
+  mr: '-lg',
+  pt: 'md',
+  pr: 'lg',
+  pb: 'md',
+  background: 'white',
+};
+
+const buttonsContainer = {
+  position: 'sticky',
+  bottom: '-lg',
+  p: 0,
+  mb: '-lg',
+  pb: 'lg',
+  pt: 'lg',
+  background: 'white',
+
+  '& > button': {
+    flexGrow: 0,
+  },
+};
+
 const title = {
   ...text.title,
   mr: 'sm',
@@ -68,6 +96,8 @@ export default {
   closeIcon,
   container,
   content,
+  headingContainer,
+  buttonsContainer,
   title,
   modalCloseButton,
 };
