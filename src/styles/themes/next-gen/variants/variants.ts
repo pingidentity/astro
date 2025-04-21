@@ -157,8 +157,8 @@ const modal = {
     transform: 'translate(0, -50px)',
     transition: 'opacity 300ms ease, transform 500ms ease-out',
     m: ['sm', 'sm', '1.75rem auto'],
-    overflow: 'hidden',
     maxHeight: 'calc(100vh - 3.5rem)',
+    overflowY: 'auto',
     '&.is-open-no-transition': {
       opacity: '100%',
       transform: 'none',

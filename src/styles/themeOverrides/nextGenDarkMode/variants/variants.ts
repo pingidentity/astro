@@ -50,6 +50,12 @@ const modal = {
   content: {
     bg: 'background.base',
   },
+  headingContainer: {
+    bg: 'background.base',
+  },
+  buttonsContainer: {
+    bg: 'background.base',
+  },
 };
 
 export default {
