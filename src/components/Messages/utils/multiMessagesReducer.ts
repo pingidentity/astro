@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid';
 
+import { MessageItem } from '../../../types';
 import statuses from '../../../utils/devUtils/constants/statuses';
 
 import messagesReducer, {
-  Message,
   MessageActions,
 } from './messagesReducer';
 
@@ -39,7 +39,7 @@ export const clearMessages = createMultiple(messagesReducer.actions.clearMessage
 /**
  * Create an action to add a message and then remove it if there's a timeout
  */
-export const showMessage = (container, messageArg: Message, timeout = -1) => dispatch => {
+export const showMessage = (container, messageArg: MessageItem, timeout = -1) => dispatch => {
   const message = { key: uuid(), ...messageArg };
   dispatch(addMessage(container, message));
 
@@ -70,20 +70,22 @@ export interface MultiMessagesReducerState {
 
 export interface MultiMessagesReducerActions {
   container?: string;
-  action: MessageActions;
+  action?: MessageActions;
 }
 
 const multiMessagesReducer = (
   state,
-  { container, ...action },
-) => (
-  container
-    ? {
+  action,
+) => {
+  const { container, ...rest } = action;
+  if (container) {
+    return {
       ...state,
-      [container]: messagesReducer(state[container], action),
-    }
-    : state
-);
+      [container]: messagesReducer(state[container], rest as MessageActions),
+    };
+  }
+  return state;
+};
 
 multiMessagesReducer.actions = {
   removeMessage,

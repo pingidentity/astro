@@ -24,6 +24,7 @@ export interface MessageItem {
   key?: Key;
   props?: MessageItemProps;
   status?: Status;
+  isHidden?: boolean;
 }
 export interface CollectionOptions<T, C extends Collection<Node<T>>> extends Omit<CollectionStateBase<T, C>, 'children'> {
   children?: ReactElement | ReactElement[] | ((item: T) => ReactElement)

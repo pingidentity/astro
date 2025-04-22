@@ -116,7 +116,7 @@ export const Default: StoryFn<ModalProps> = args => {
           <Text pt="lg">
             Do you want to continue with this action that you&lsquo;re performing?
           </Text>
-          <Box isRow pt="lg" mr="auto">
+          <Box isRow pt="lg" variant="modal.buttonsContainer">
             <Button
               variant="primary"
               onPress={state.close}
@@ -154,4 +154,102 @@ Default.parameters = {
       ],
     },
   },
+};
+
+export const LargeContent: StoryFn<ModalProps> = args => {
+  const state = useModalState();
+
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <OverlayProvider>
+      <Button onPress={state.open} aria-label="Open modal">
+        Open Modal
+      </Button>
+      {state.isOpen && (
+        <Modal {...args} isOpen={state.isOpen} onClose={state.close}>
+          <Text pt="lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Text>
+          <Text pt="lg">
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Text>
+          <Text pt="lg">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          </Text>
+          <Text pt="lg">
+            Nisi ut aliquip ex ea commodo consequat.
+          </Text>
+          <Text pt="lg">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+          </Text>
+          <Text pt="lg">
+            Eu fugiat nulla pariatur.
+          </Text>
+          <Text pt="lg">
+            Excepteur sint occaecat cupidatat non proident.
+          </Text>
+          <Text pt="lg">
+            Sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+          <Text pt="lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Text>
+          <Text pt="lg">
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Text>
+          <Text pt="lg">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          </Text>
+          <Text pt="lg">
+            Nisi ut aliquip ex ea commodo consequat.
+          </Text>
+          <Text pt="lg">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+          </Text>
+          <Text pt="lg">
+            Eu fugiat nulla pariatur.
+          </Text>
+          <Text pt="lg">
+            Excepteur sint occaecat cupidatat non proident.
+          </Text>
+          <Text pt="lg">
+            Sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+          <Text pt="lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Text>
+          <Text pt="lg">
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Text>
+          <Text pt="lg">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          </Text>
+          <Text pt="lg">
+            Nisi ut aliquip ex ea commodo consequat.
+          </Text>
+          <Text pt="lg">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+          </Text>
+          <Box isRow variant="modal.buttonsContainer">
+            <Button
+              variant="primary"
+              onPress={state.close}
+              mr="md"
+              aria-label="Continue"
+            >
+              Continue
+            </Button>
+            <Button
+              variant="link"
+              onPress={state.close}
+              aria-label="Cancel"
+            >
+              Cancel
+            </Button>
+          </Box>
+        </Modal>
+      )}
+    </OverlayProvider>
+  );
 };

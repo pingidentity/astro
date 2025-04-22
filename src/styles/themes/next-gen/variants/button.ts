@@ -225,7 +225,7 @@ const baseIconButton = {
 const modalCloseButton = {
   ...baseIconButton,
   position: 'absolute',
-  top: 22,
+  top: 23,
   right: 22,
 };
 

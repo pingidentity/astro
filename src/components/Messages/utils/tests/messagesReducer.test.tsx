@@ -5,6 +5,7 @@ import messagesReducer, {
   addMessage,
   clearMessages,
   hideMessage,
+  MessageActions,
   removeMessage,
   showMessage,
 } from '../messagesReducer';
@@ -36,7 +37,7 @@ const getComponent = (props = {}, renderFn = render) => renderFn(
 );
 
 test('should create an empty state', () => {
-  const state = messagesReducer([], {});
+  const state = messagesReducer([], {} as MessageActions);
   expect(state.length).toBe(0);
 });
 
@@ -67,4 +68,14 @@ test('should show and hide a message', () => {
   expect(screen.queryByTestId(testId)?.children.length).toBe(1);
   act(() => { jest.runAllTimers(); });
   expect(screen.queryByTestId(testId)?.children.length).toBe(0);
+});
+
+test('should initialize the reducer as an empty array', () => {
+  const state = messagesReducer(undefined, {} as MessageActions);
+  expect(state.length).toBe(0);
+});
+
+test('should add message in empty state', () => {
+  const state = messagesReducer(undefined, addMessage({ key: 1, text: 'quatro' }));
+  expect(state.length).toBe(1);
 });

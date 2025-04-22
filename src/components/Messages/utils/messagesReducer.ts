@@ -20,41 +20,36 @@ export const messagesActions = {
   MULTI_SHOW_WARNING_MESSAGE: 'MULTI_SHOW_WARNING_MESSAGE',
 };
 
-export interface Message extends MessageItem {
-  isHidden?: boolean
-}
-
-type MessageAction = {
-  message?: Message;
-  key?: Key;
-}
-
-export interface AddMessageAction extends MessageAction {
+interface AddMessageAction {
   type: typeof messagesActions.ADD_MESSAGE;
+  message: MessageItem;
 }
 
-export interface HideMessageAction extends MessageAction {
+interface HideMessageAction {
   type: typeof messagesActions.HIDE_MESSAGE;
+  key: Key;
 }
 
-export interface RemoveMessageAction extends MessageAction {
+interface RemoveMessageAction {
   type: typeof messagesActions.REMOVE_MESSAGE;
+  key: Key;
 }
 
-export interface ClearMessagesAction extends MessageAction {
-  type?: typeof messagesActions.CLEAR_MESSAGES;
+interface ClearMessagesAction {
+  type: typeof messagesActions.CLEAR_MESSAGES;
 }
 
 export type MessageActions =
-  AddMessageAction | HideMessageAction | RemoveMessageAction | ClearMessagesAction;
-
-export type MessagesState = Message[];
+  | AddMessageAction
+  | HideMessageAction
+  | RemoveMessageAction
+  | ClearMessagesAction;
 
 /**
  * Create an action to add a message
  * The message object to be added
  */
-export const addMessage = (message: Message): AddMessageAction => ({
+export const addMessage = (message: MessageItem): AddMessageAction => ({
   type: messagesActions.ADD_MESSAGE,
   message,
 });
@@ -78,7 +73,7 @@ export const removeMessage = (key: Key): RemoveMessageAction => ({
 /**
  * Create an action to add a message and then remove it if there's a timeout
  */
-export const showMessage = (messageArg: Message, timeout = -1) => (
+export const showMessage = (messageArg: MessageItem, timeout = -1) => (
   dispatch: (action: MessageActions) => void,
 ) => {
   const message = { key: uuid(), ...messageArg };
@@ -107,15 +102,19 @@ const makeShowMessage = (status: Status, timeout: number) => (text: string) => m
 );
 
 /** Reducer to store a list of messages */
-const messagesReducer = (
-  state: MessagesState | [],
+export const messagesReducer = (
+  // eslint-disable-next-line default-param-last
+  state: Array<MessageItem> = [],
   action: MessageActions,
-) => {
+): Array<MessageItem> => {
   switch (action.type) {
-    case messagesActions.ADD_MESSAGE: return [...state, { ...action.message }];
+    case messagesActions.ADD_MESSAGE: {
+      const { message } = action as AddMessageAction;
+      return [...state, { ...(message ?? {}) }];
+    }
     case messagesActions.HIDE_MESSAGE:
       return state.map(search => {
-        if (search.key === action.key) {
+        if ('key' in action && search.key === action.key) {
           return {
             ...search,
             isHidden: true,
@@ -123,8 +122,10 @@ const messagesReducer = (
         }
         return search;
       });
-    case messagesActions.REMOVE_MESSAGE:
-      return state.filter(search => action.key !== search.key);
+    case messagesActions.REMOVE_MESSAGE: {
+      const { key } = action as RemoveMessageAction;
+      return state.filter(search => key !== search.key);
+    }
     case messagesActions.CLEAR_MESSAGES: return [];
     default: return state;
   }

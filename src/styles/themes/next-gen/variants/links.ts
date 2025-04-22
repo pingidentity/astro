@@ -1,3 +1,5 @@
+import buttons from './button';
+
 const nextGen = {
   color: 'gray-800',
   fontSize: 'md',
@@ -55,10 +57,22 @@ const footerHeader = {
   fontWeight: '2',
 };
 
+const button = {
+  ...buttons.default,
+  textDecoration: 'none',
+};
+
+const primaryButton = {
+  ...buttons.primary,
+  textDecoration: 'none',
+};
+
 export default {
   nextGen,
   onyx,
   sideNav,
   footerLinks,
   footerHeader,
+  button,
+  primaryButton,
 };
