@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.117.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.116.0...@pingux/astro@2.117.0) (2025-04-22)
+
+
+### Bug Fixes
+
+* [UIP-7507] Add initial state to messagesReducer ([181962e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/181962e1eaa80fdc543fbca827d483c49d27e471))
+* [UIP-7508] add Onyx Button Link Variant ([779f004](https://gitlab.corp.pingidentity.com/ux/pingux/commit/779f0040ce3587d58f4996a547be5ad9ba3ee018))
+
+
+### Features
+
+* [UIP-7244] Large content Modal ([0392fc5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0392fc5d1ab95e80a59d547e81980896b67a746c))
+
+
+
+
+
 # [2.116.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.115.0...@pingux/astro@2.116.0) (2025-04-10)
 
 
