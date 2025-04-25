@@ -19,6 +19,7 @@ import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusP
 import ListBox from '../ListBox';
 
 const DefaultMultivaluesField = forwardRef((props, ref) => {
+  const { items: initialItems, ...otherProps } = props;
   const {
     defaultSelectedKeys,
     direction,
@@ -32,7 +33,6 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     isNotFlippable,
     isReadOnly,
     isRequired,
-    items: initialItems,
     label,
     loadingState,
     mode,
@@ -51,7 +51,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     scrollBoxProps,
     status,
     ...others
-  } = props;
+  } = otherProps;
   const hasCustomValue = mode === 'non-restrictive';
 
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -77,7 +77,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   const { contains } = useFilter({ sensitivity: 'base' });
 
   const state = useListState({
-    ...props,
+    ...otherProps,
     filter: nodes => Array.from(nodes).filter(
       item => contains(item.textValue, filterString),
     ),
@@ -404,6 +404,24 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     );
   };
 
+  const handleBlur = e => {
+    const relatedTarget = e.relatedTarget || document.activeElement;
+
+    // Relates to [UIP-7515] to check if the
+    // focused element is inside the listbox or input wrapper
+    if (
+      inputWrapperRef.current?.contains(relatedTarget)
+      || listBoxRef.current?.contains(relatedTarget)
+    ) {
+      return;
+    }
+
+    setIsOpen(false);
+    if (filterString !== '') onBlurTextField();
+    if (onBlur) onBlur(e.nativeEvent);
+    if (!hasCustomValue) setFilterString('');
+  };
+
   const inputProps = {
     ...customInputProps,
     controlProps: {
@@ -432,12 +450,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     <MultivaluesContext.Provider value={setActiveDescendant}>
       <Box {...containerProps}>
         <TextField
-          onBlur={e => {
-            setIsOpen(false);
-            if (filterString !== '') onBlurTextField();
-            if (onBlur) onBlur(e.nativeEvent);
-            if (!hasCustomValue) setFilterString('');
-          }}
+          onBlur={handleBlur}
           onChange={e => {
             if (!isOpen) setIsOpen(true);
             setFilterString(e.target.value);
