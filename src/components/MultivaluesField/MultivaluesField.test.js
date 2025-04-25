@@ -160,6 +160,35 @@ test('closes listbox on blur and fires "onBlur"', () => {
   expect(onBlur).toBeCalled();
 });
 
+it('should not close the dropdown if focus moves within the input wrapper or listbox', () => {
+  getComponent();
+
+  const input = screen.getByRole('combobox');
+  fireEvent.focus(input);
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+
+  fireEvent.blur(input, { relatedTarget: input });
+  expect(listbox).toBeInTheDocument();
+
+  fireEvent.blur(input, { relatedTarget: listbox });
+  expect(listbox).toBeInTheDocument();
+});
+
+it('should close the dropdown if focus moves outside the input wrapper and listbox', () => {
+  getComponent();
+
+  const input = screen.getByRole('combobox');
+  fireEvent.focus(input);
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+
+  fireEvent.blur(input, { relatedTarget: document.body });
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+});
+
 test('opening and closing listbox fires "onOpenChange"', () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
