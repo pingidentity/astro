@@ -172,6 +172,7 @@ export { default as Separator } from './components/Separator';
 export * from './components/Separator';
 export { default as Skeleton } from './components/Skeleton';
 export * from './components/Skeleton';
+export { default as SliderField } from './components/SliderField/SliderField';
 export { Step, default as Stepper } from './components/Stepper';
 export * from './components/Stepper';
 export { default as Switch } from './components/Switch';

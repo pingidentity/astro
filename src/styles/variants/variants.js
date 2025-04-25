@@ -35,6 +35,7 @@ import rockerButton from '../../components/RockerButton/RockerButton.styles';
 import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
 import separator from '../../components/Separator/Separator.styles';
 import skeleton from '../../components/Skeleton/Skeleton.styles';
+import slider from '../../components/SliderField/Slider.styles';
 import stepper from '../../components/Stepper/Stepper.styles';
 import table from '../../components/Table/Table.styles';
 import * as tab from '../../components/Tabs/Tabs.style';
@@ -80,6 +81,7 @@ export default {
   rockerButton,
   scrollBox,
   separator,
+  slider,
   stepper,
   skeleton,
   table,

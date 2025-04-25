@@ -19,5 +19,6 @@ export { default as useProgressiveState } from './useProgressiveState';
 export { default as usePropWarning } from './usePropWarning';
 export { default as useRockerButton } from './useRockerButton';
 export { default as useSelectField } from './useSelectField';
+export { default as useSliderField } from './useSliderField';
 export { default as useStatusClasses } from './useStatusClasses';
 export { default as useTShirtSize } from './useTShirtSize';

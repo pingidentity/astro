@@ -63,6 +63,12 @@ const useDefaultProps = componentType => {
 
   const handleChange = jest.fn();
   switch (componentType) {
+    case 'SliderField':
+      return {
+        value,
+        onChange: setValue,
+        name,
+      };
     case 'CheckboxField':
     case 'SwitchField':
       return {
@@ -141,6 +147,11 @@ const getDefaultProps = (componentType, testValue) => {
     case 'CheckboxField':
       return {
         isSelected: true,
+        name,
+        value: testValue,
+      };
+    case 'SliderField':
+      return {
         name,
         value: testValue,
       };
@@ -337,6 +348,8 @@ export const universalFieldComponentTests = ({
         const selected = cells.find(cell => cell.getAttribute('aria-selected') === 'true');
 
         expect(selected?.children[0]).toHaveAttribute('aria-label', 'Wednesday, August 10, 2022 selected');
+      } else if (componentType === 'SliderField') {
+        fireEvent.change(screen.getByRole('slider'), { target: { value: testValue } });
       } else {
         fireEvent.change(screen.getAllByLabelText(testLabel)[0], { target: { value: testValue } });
       }
