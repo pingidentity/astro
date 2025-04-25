@@ -183,7 +183,6 @@ const ComboBoxField = forwardRef((props, ref) => {
       hasNoArrow
       isNonModal
       isOpen={state.isOpen}
-      onClose={state.close}
       placement={placement}
       ref={popoverRef}
       style={style}

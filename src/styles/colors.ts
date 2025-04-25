@@ -46,6 +46,10 @@ const accentLight = 'F7F8FD';
 const accentSteps = 8;
 const accentScale = chroma.scale([accentBase, accentLight]).mode('hsl');
 
+const slider = {
+  track: '#E4E6E9',
+};
+
 export const accent = {
   5: chroma(accentBase).darken(1).hex(),
   10: chroma(accentBase).darken(0.5).hex(),
@@ -119,6 +123,7 @@ const allColors = {
   line,
   button,
   warning,
+  slider,
 };
 
 export default allColors;
