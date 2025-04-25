@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Avatar, Box, Card, Skeleton, Text } from '../../index';
+import { Avatar, Box, Skeleton, Text } from '../../index';
 import { SkeletonProps } from '../../types';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
