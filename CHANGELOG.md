@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.118.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.117.0...@pingux/astro@2.118.0) (2025-04-25)
+
+
+### Features
+
+* [UIP-7449] SliderField component ([dc0b19c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dc0b19c03ac8ac8b30e0f21e14eb1a9cf87a2c42)), closes [#7449](https://gitlab.corp.pingidentity.com/ux/pingux/issues/7449)
+* [UIP-7476] ComboBoxField prevents typing filter if dropdown hovered over by mouse ([921fd2a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/921fd2a1b4f008e89279bbddd5c8293ea3e4336c))
+
+
+
+
+
 # [2.117.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.116.0...@pingux/astro@2.117.0) (2025-04-22)
 
 
