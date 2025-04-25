@@ -42,27 +42,27 @@ const withSection = [
     name: 'Animals',
     key: 'Animals',
     children: [
-      { name: 'Raccoon' },
-      { name: 'Kangaroo' },
-      { name: 'Opossum' },
+      { name: 'Raccoon', key: 'raccoon' },
+      { name: 'Kangaroo', key: 'kangaroo' },
+      { name: 'Opossum', key: 'opossum' },
     ],
   },
   {
     name: 'People',
     key: 'People',
     children: [
-      { name: 'Michael' },
-      { name: 'Dwight' },
-      { name: 'Creed' },
+      { name: 'Michael', key: 'michael' },
+      { name: 'Dwight', key: 'dwight' },
+      { name: 'Creed', key: 'creed' },
     ],
   },
   {
-    name: null,
+    name: 'Fruits',
     key: 'fruit',
     children: [
-      { name: 'Apple' },
-      { name: 'Orange' },
-      { name: 'Banana' },
+      { name: 'Apple', key: 'apple' },
+      { name: 'Orange', key: 'orange' },
+      { name: 'Banana', key: 'banana' },
     ],
   },
 ];
@@ -159,10 +159,18 @@ export const Default = args => (
 
 export const WithSections = args => (
   <OverlayProvider>
-    <ComboBoxField label="Example label" items={withSection} {...args}>
+    <ComboBoxField
+      {...args}
+      label="Example label"
+      defaultItems={withSection}
+    >
       {section => (
-        <Section key={section.key} items={section.children} title={section.name}>
-          {item => <Item key={item.name}>{item.name}</Item>}
+        <Section
+          key={section.key}
+          items={section.children}
+          title={section.name}
+        >
+          {item => <Item key={item.key}>{item.name}</Item>}
         </Section>
       )}
     </ComboBoxField>
@@ -354,7 +362,7 @@ export const WithCustomInputValue = () => (
       defaultItems={items}
       hasCustomValue
     >
-      {item => <Item key={item.id} textValue={item.id}>{item.name}</Item>}
+      {item => <Item key={item.id}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );

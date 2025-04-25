@@ -257,6 +257,37 @@ test('should be able to open and navigate through the listbox by click', () => {
   expect(options[0]).toHaveClass('is-focused');
 });
 
+
+test('should be able to hover list item and filter on input box', async () => {
+  getComponentWithSections({ defaultFilter:
+    (option, inputValue) => option.name.toLowerCase().includes(inputValue.toLowerCase()) });
+  const button = screen.queryByRole('button');
+  const input = screen.queryByRole('combobox');
+  expect(screen.queryByRole('combobox')).toHaveValue('');
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  // Open the list by clicking on the button and ensure first option is not active
+  userEvent.click(button);
+  const options = screen.queryAllByRole('option');
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  // Both dismiss buttons should be available, but the dropdown button should be inaccessible
+  expect(screen.queryAllByRole('button')).toHaveLength(2);
+  expect(options).toHaveLength(9);
+  expect(input).not.toHaveAttribute('aria-activedescendant', options[0].id);
+  options.forEach(opt => expect(opt).not.toHaveClass('is-focused'));
+
+  // Ensure active styles are applied
+  userEvent.hover(options[0]);
+  expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
+  expect(options[0]).toHaveClass('is-focused');
+
+  userEvent.type(input, 'k');
+
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(input).toHaveValue('k');
+});
+
+
 test('should be able to open the listbox by keyboard', () => {
   getComponent();
   const input = screen.getByRole('combobox');
