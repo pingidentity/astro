@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.118.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.0...@pingux/astro@2.118.1) (2025-04-30)
+
+
+### Bug Fixes
+
+* [UIP-7515] MultivaluesField listbox close on hover and list update on selection ([8393b32](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8393b32b691bd61a18183c3ac5921aba71917b5f))
+
+
+
+
+
 # [2.118.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.117.0...@pingux/astro@2.118.0) (2025-04-25)
 
 
