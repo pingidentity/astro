@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.118.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.1...@pingux/astro@2.118.2) (2025-05-07)
+
+
+### Bug Fixes
+
+* [UIP-7573] force squash ([7453d38](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7453d38218cf67a472954b9c134669385750406e))
+
+
+
+
+
 ## [2.118.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.0...@pingux/astro@2.118.1) (2025-04-30)
 
 
