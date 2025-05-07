@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.118.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.1...@pingux/astro@2.118.3) (2025-05-07)
+
+
+### Bug Fixes
+
+* [UIP-7573] add local environment packages to git ignore ([26b20cd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/26b20cdb29d54d219ce364eb33eb91739d36bac2))
+
+
+
+
+
 ## [2.118.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.1...@pingux/astro@2.118.2) (2025-05-07)
 
 
