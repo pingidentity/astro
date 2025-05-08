@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.119.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.3...@pingux/astro@2.119.0) (2025-05-08)
+
+
+### Bug Fixes
+
+* [UIP-7541] Fix Astro fonts issue ([9c96c8e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9c96c8eea89885bb54155e6c2c42a9915ce48472))
+
+
+### Features
+
+* [UIP-7498] Modal Refactor to include Onyx recipe ([a4d80ae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a4d80ae51b79bdb858aa0ca4fbfbfc97c3bb3c52))
+* [UIP-7499] Navbar refactor to include onyx recipe ([4e29531](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4e295315acf9244f14c549344bfdaa9c636fd926))
+* [UIP-7522] Astro pagination component ([78845c1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/78845c18b4f1d09ef0ddef2c123526b204b5f0e1))
+
+
+
+
+
 ## [2.118.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.1...@pingux/astro@2.118.3) (2025-05-07)
 
 
