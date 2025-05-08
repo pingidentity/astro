@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { AstroProvider, NextGenDarkTheme } from '../../../..';
-import { NavBarNextGenComponent } from '../../../themes/next-gen/stories/NavBarNextGenComponent';
+import { AstroProvider, NextGenDarkTheme } from '../../..';
+
+import { NavBarNextGenComponent } from './NavBarNextGenComponent';
 
 export default {
   title: 'Chromatic Only Onyx Dark NavBar',

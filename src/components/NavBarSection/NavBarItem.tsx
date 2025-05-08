@@ -3,7 +3,7 @@ import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
 
 import { useNavBarContext } from '../../context/NavBarContext';
-import { useLocalOrForwardRef, useNavBarPress, useStatusClasses } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, useNavBarPress, useStatusClasses } from '../../hooks';
 import { Box, Icon, Text } from '../../index';
 import { NavBarItemProps } from '../../types/navBar';
 
@@ -54,6 +54,8 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
   });
   const color = isSelected ? 'white' : 'neutral.95';
 
+  const { themeState: { isOnyx } } = useGetTheme();
+
   return (
     <Box
       id={key}
@@ -78,7 +80,7 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
             <Icon
               icon={icon}
               title={{ name: text! }}
-              size="sm"
+              size={isOnyx ? 'icon-200' : 'sm'}
               sx={{
                 mr: 'sm',
                 color,
