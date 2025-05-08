@@ -9,7 +9,7 @@ import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import { type AriaModalOverlayProps, type ModalOverlayAria, useModalOverlay } from '@react-aria/overlays';
 import { type OverlayTriggerState } from '@react-stately/overlays';
 
-import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { ModalProps } from '../../types';
 import Box from '../Box';
 import Icon from '../Icon';
@@ -52,6 +52,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     children,
     ...propsContentProps,
   };
+  const { themeState: { isOnyx } } = useGetTheme();
 
   const shouldShow = state ? state?.isTransitioning || isOpen : isOpen;
 
@@ -85,6 +86,22 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     isTransitioning: state?.isTransitioning,
     isOpenNoTransition,
   });
+
+  const titleContent = title && (
+    isOnyx ? (
+      <Box variant="modal.header">
+        <Text {...titleProps} variant="modalTitle" role="heading">{title}</Text>
+      </Box>
+    ) : (
+      <Text
+        {...titleProps}
+        variant="variants.modal.title"
+        role="heading"
+      >
+        {title}
+      </Text>
+    )
+  );
 
   return (
     <OverlayContainer>
@@ -122,18 +139,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
                   )
                 )
               }
-              {
-                title
-                && (
-                  <Text
-                    {...titleProps}
-                    variant="variants.modal.title"
-                    role="heading"
-                  >
-                    {title}
-                  </Text>
-                )
-              }
+              {titleContent}
             </Box>
             {children}
           </Box>
