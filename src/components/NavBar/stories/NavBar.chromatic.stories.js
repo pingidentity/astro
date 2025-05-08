@@ -8,8 +8,8 @@ import ScaleBalance from '@pingux/mdi-react/ScaleBalanceIcon';
 import TransitConnection from '@pingux/mdi-react/TransitConnectionVariantIcon';
 import ViewDashboard from '@pingux/mdi-react/ViewDashboardIcon';
 
-import { Box, Link, NavBar, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection, Separator } from '../../../index';
-import WithUiLibraryCss from '../withUiLibraryCss';
+import { Box, Link, NavBar, NavBarItem, NavBarItemButton, NavBarItemLink, NavBarSection, Separator } from '../../..';
+import WithUiLibraryCss from '../../../styles/themeOverrides/withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only NavBar',

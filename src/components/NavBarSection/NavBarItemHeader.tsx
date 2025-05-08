@@ -19,7 +19,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
 
   const navBarState = useNavBarContext();
 
-  const { icons } = useGetTheme();
+  const { themeState: { isOnyx }, icons } = useGetTheme();
   const { MenuDown, MenuUp } = icons;
 
   const {
@@ -55,7 +55,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
       {icon && (
         <Icon
           icon={icon}
-          size="sm"
+          size={isOnyx ? 'icon-200' : 'sm'}
           sx={{
             mr: 'sm',
             color: getIconColor(),
@@ -72,7 +72,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         <Icon
           icon={isExpanded ? MenuUp : MenuDown}
-          size={navStyles.navBarItemHeaderIconSize}
+          size={isOnyx ? 'icon-100' : navStyles.navBarItemHeaderIconSize}
           sx={{
             color: getIconColor(),
             fill: getIconColor(),
@@ -88,13 +88,14 @@ const NavBarPrimaryItemHeader = ({ item }: NavBarPrimaryItemHeaderProps) => {
   const { icon, className, heading, customIcon } = item;
   const navBarState = useNavBarContext();
   const { navStyles } = navBarState;
+  const { themeState: { isOnyx } } = useGetTheme();
 
   return (
     <Box variant={navStyles.navBarItemHeader} className={className} isRow data-testid={heading}>
       {icon && (
         <Icon
           icon={icon}
-          size="sm"
+          size={isOnyx ? 'icon-200' : 'sm'}
           sx={{
             mr: 'sm',
             color: 'neutral.95',
@@ -109,7 +110,7 @@ const NavBarPrimaryItemHeader = ({ item }: NavBarPrimaryItemHeaderProps) => {
         {customIcon && (
           <Icon
             icon={customIcon}
-            size="sm"
+            size={isOnyx ? 'icon-200' : 'sm'}
             sx={{
               color: 'neutral.95',
               fill: 'neutral.95',

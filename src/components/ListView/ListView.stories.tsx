@@ -64,7 +64,7 @@ const items: ExampleItemProps[] = [
   { key: 'Snake', name: 'Snake', id: '3' },
 ];
 
-const animals = [
+export const animals = [
   { name: 'Aardvark' },
   { name: 'Albatross' },
   { name: 'Alligator' },

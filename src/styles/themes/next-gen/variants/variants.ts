@@ -150,7 +150,7 @@ const modalSize = {
 
 const modal = {
   content: {
-    pt: '15px',
+    p: 0,
     borderRadius: '4px',
     opacity: 0,
     top: '0',
@@ -190,6 +190,22 @@ const modal = {
   },
   container: {
     justifyContent: 'start',
+  },
+  header: {
+    px: 'lg',
+    py: 'md',
+    borderBottom: '1px solid',
+    borderBottomColor: 'border.base',
+    bg: 'background.base',
+  },
+  footer: {
+    borderTop: '1px solid',
+    borderTopColor: 'border.base',
+    px: 'lg',
+    py: 'md',
+  },
+  buttonsContainer: {
+    bottom: 0,
   },
 };
 
@@ -327,6 +343,7 @@ const overlayPanel = {
     backgroundColor: 'background.base',
   },
 };
+
 
 export default {
   attachment,

@@ -164,6 +164,13 @@ const link = {
   },
 };
 
+const paginationMenu = {
+  ...link,
+  px: '0px',
+  py: '0px',
+  color: 'text.primary',
+};
+
 const withIcon = {
   ...secondary,
   display: 'inline-flex',
@@ -225,8 +232,8 @@ const baseIconButton = {
 const modalCloseButton = {
   ...baseIconButton,
   position: 'absolute',
-  top: 23,
-  right: 22,
+  top: 32,
+  right: 42,
 };
 
 const onyxIconButton = {
@@ -362,6 +369,7 @@ const buttons = {
   iconButtons,
   modalCloseButton,
   aiChat,
+  paginationMenu,
 };
 
 export default buttons;
