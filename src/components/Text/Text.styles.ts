@@ -145,6 +145,7 @@ export const text = {
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', ...textEllipsis },
   listViewItemSubtext: { ...listViewItemSubtext, ...textEllipsis },
   listViewItemText: { ...listViewItemText, ...textEllipsis },
+  modalTitle: { ...wordWrap, fontSize: '20px', fontWeight: 2, color: 'text.primary', fontFamily: 'standard' },
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
   panelHeaderSubtext: { ...listViewItemSubtext, ...textEllipsis },
   panelHeaderText: { ...listViewItemText, ...textEllipsis },

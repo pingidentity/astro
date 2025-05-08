@@ -54,12 +54,6 @@ export const text = {
     color: 'text.primary',
     lineHeight: '24px',
   },
-  modalTitle: {
-    fontSize: '20px',
-    fontWeight: '2',
-    color: 'text.secondary',
-    fontFamily: 'standard',
-  },
   tabLabel: {
     color: 'text.primary',
   },
