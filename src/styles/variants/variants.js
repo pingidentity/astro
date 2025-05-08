@@ -27,6 +27,7 @@ import message from '../../components/Messages/Message.styles';
 import modal from '../../components/Modal/Modal.styles';
 import navBar from '../../components/NavBar/NavBar.styles';
 import overlayPanel from '../../components/OverlayPanel/OverlayPanel.styles';
+import pagination from '../../components/Pagination/Pagination.styles';
 import panelHeader from '../../components/PanelHeader/PanelHeader.styles';
 import popoverMenu from '../../components/PopoverMenu/PopoverMenu.styles';
 import progressBar from '../../components/ProgressBar/ProgressBar.styles';
@@ -75,8 +76,9 @@ export default {
   modal,
   navBar,
   overlayPanel,
-  popoverMenu,
+  pagination,
   panelHeader,
+  popoverMenu,
   progressBar,
   rockerButton,
   scrollBox,

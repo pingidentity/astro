@@ -34,6 +34,7 @@ const nextGenConvertedComponents = [
   'Sticker Sheet',
   'NextGen ListViewItem',
   'Skeleton',
+  'Pagination',
 ];
 
 export const componentSpecificNextGenBlacklist = {
@@ -80,6 +81,13 @@ export const astroBlacklistStory = {
   ],
 };
 
-export const nextGenOnlyComponents = ['NavigationHeader', 'Prompt', 'AI Panel', 'Response', 'Suggestions', 'Prompt Input'];
+export const nextGenOnlyComponents = [
+  'NavigationHeader',
+  'Prompt',
+  'AI Panel',
+  'Response',
+  'Suggestions',
+  'Prompt Input',
+];
 
 export default nextGenConvertedComponents;

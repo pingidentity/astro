@@ -44,6 +44,9 @@ const buttons = {
       color: 'black',
     },
   },
+  paginationMenu: {
+    color: 'text.secondary',
+  },
   neutral: {
     color: 'gray-400',
   },

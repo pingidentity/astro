@@ -1,3 +1,5 @@
+import type { PressEvent, Selection } from '@react-types/shared';
+
 import { BoxProps } from './box';
 import { HoverProps } from './shared';
 

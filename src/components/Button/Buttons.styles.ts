@@ -351,6 +351,11 @@ const exampleText = {
   },
 };
 
+const paginationMenu = {
+  ...link,
+  fontWeight: 0,
+};
+
 export default {
   colorBlock,
   colorBlockPrimary,
@@ -378,6 +383,7 @@ export default {
   inlinePrimaryWithIcon,
   inlineWithIcon,
   link,
+  paginationMenu,
   primary,
   primaryWithIcon,
   quiet,
