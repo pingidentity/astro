@@ -164,6 +164,13 @@ const link = {
   },
 };
 
+const paginationMenu = {
+  ...link,
+  px: '0px',
+  py: '0px',
+  color: 'text.primary',
+};
+
 const withIcon = {
   ...secondary,
   display: 'inline-flex',
@@ -362,6 +369,7 @@ const buttons = {
   iconButtons,
   modalCloseButton,
   aiChat,
+  paginationMenu,
 };
 
 export default buttons;

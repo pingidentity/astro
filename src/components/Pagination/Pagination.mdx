@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Pagination/Pagination" />
+
+# Pagination
+
+The Pagination component allows users to navigate through large datasets by dividing them into smaller, more manageable pages. It provides controls for navigating between pages and selecting the number of items displayed per page.
+
+### Features
+
+- Customizable offset options to control the number of items displayed per page.
+- Next/Previous navigation buttons for seamless page transitions.
+- Works in both controlled and uncontrolled states.
+- Integrates with `PaginationContext` for managing state.
+
+### Required Components
+
+This component requires the following components:
+- `PaginationProvider`
+- `ListView` (optional for displaying paginated data)
+
+### Accessibility
+
+This component adheres to the [WCAG 2.1 - 2.4.4 Link Purpose (In Context)](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html) accessibility guidelines.
+
+#### Keyboard Navigation
+
+| Key           | Functions                          |
+|---------------|-----------------------------------|
+| Tab           | Moves focus between controls.    |
+| Enter         | Activates the focused control.   |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- **`aria-label`**: Provides an accessible name for the pagination controls.
+- **`aria-disabled`**: Indicates when navigation buttons are disabled.
+- **`aria-live`**: Updates screen readers with changes in pagination state.
+
+### Usage
+
+```tsx
+import { Pagination, PaginationProvider } from '@pingux/astro';
+
+<PaginationProvider>
+  <Pagination totalCount={250} />
+  <ListView
+    items={animals.slice(paginationState.firstRenderedIndex, paginationState.lastRenderedIndex).map(item => ({
+      name: item.name,
+      key: item.name,
+      id: item.name,
+    }))}
+  >
+    {(item) => (
+      <Item key={item.name}>
+        <ListViewItem
+          data={{
+            text: item.name,
+            icon: FormSelectIcon,
+          }}
+          iconProps={{
+            color: 'text.secondary',
+          }}
+        />
+      </Item>
+    )}
+  </ListView>
+</PaginationProvider>

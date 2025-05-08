@@ -15,6 +15,8 @@ export { default as useMountTransition } from './useMountTransition';
 export { default as useNavBarPress } from './useNavBarPress';
 export { default as useOverlappingMenuHoverState } from './useOverlappingMenuHoverState';
 export { default as useOverlayPanelState } from './useOverlayPanelState';
+export { default as usePagination } from './usePagination';
+export { default as usePaginationState } from './usePaginationState';
 export { default as useProgressiveState } from './useProgressiveState';
 export { default as usePropWarning } from './usePropWarning';
 export { default as useRockerButton } from './useRockerButton';
