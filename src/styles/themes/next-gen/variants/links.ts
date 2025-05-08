@@ -1,5 +1,10 @@
 import buttons from './button';
 
+const navBarFocus = {
+  outline: '2px solid',
+  outlineColor: 'active',
+};
+
 const nextGen = {
   color: 'gray-800',
   fontSize: 'md',
@@ -67,6 +72,15 @@ const primaryButton = {
   textDecoration: 'none',
 };
 
+const navBarLogoLink = {
+  borderRadius: '4px',
+  px: 'md',
+  py: 'sm',
+  '&.is-focused': {
+    ...navBarFocus,
+  },
+};
+
 export default {
   nextGen,
   onyx,
@@ -75,4 +89,5 @@ export default {
   footerHeader,
   button,
   primaryButton,
+  navBarLogoLink,
 };

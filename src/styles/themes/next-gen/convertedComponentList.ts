@@ -67,6 +67,17 @@ export const componentSpecificNextGenBlacklist = {
   OverlayPanel: [
     'Expandable',
   ],
+  NavBar: [
+    'Default',
+    'Controlled',
+    'Auto Collapse',
+  ],
+};
+
+export const astroBlacklistStory = {
+  NavBar: [
+    'Onyx Default',
+  ],
 };
 
 export const nextGenOnlyComponents = ['NavigationHeader', 'Prompt', 'AI Panel', 'Response', 'Suggestions', 'Prompt Input'];
