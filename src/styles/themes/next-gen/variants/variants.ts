@@ -4,6 +4,7 @@ import codeView from '../codeView/codeView';
 
 import { avatar } from './avatar';
 import button from './button';
+import { dataTable } from './dataTable';
 import iconWrapper from './iconWrapper';
 import { listView, listViewItem } from './listview';
 import { menu, menuItem } from './menu';
@@ -269,34 +270,6 @@ const progressBar = {
   percentageBar: {
     ...progressBarContainer,
     backgroundColor: 'active',
-  },
-};
-
-const dataTable = {
-  container: {
-    border: '1px solid',
-    borderColor: 'border.base',
-    borderRadius: '16px',
-  },
-  tableRow: {
-    borderTop: '1px solid',
-    borderTopColor: 'border.base',
-    borderBottom: '0',
-    pl: 'lg',
-  },
-  tableHeadWrapper: {
-    borderBottom: '0',
-  },
-  tableHeadCell: {
-    pl: 'lg',
-    fontWeight: '2',
-    fontSize: 'md',
-  },
-  rowHeader: {
-    py: '20px !important',
-  },
-  tableCell: {
-    fontSize: 'md',
   },
 };
 

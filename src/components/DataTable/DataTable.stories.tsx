@@ -273,6 +273,118 @@ Default.parameters = {
   },
 };
 
+export const OnyxDefault = args => {
+  const date = '2023-05-03';
+  const time = '07:16:30 pm UTC';
+
+  const timestampCell = (
+    <>
+      <Box>{date}</Box>
+      <Box>{time}</Box>
+    </>
+  );
+
+  const columns = [
+    { name: 'Timestamp', key: 'timestamp' },
+    { name: 'Event Type', key: 'eventType' },
+    { name: 'Description', key: 'description' },
+    { name: 'Status', key: 'status', isSortable: true },
+    { name: 'User Identity', key: 'userIdentity' },
+    { name: 'Menu', key: 'menu' },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: <Box>Passed Role Access Control</Box>,
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 2,
+      timestamp: timestampCell,
+      eventType: 'User Access Denied',
+      description: <Box display="block">Passed Role Access Control</Box>,
+      status: <DataTableBadge cell="Rejected" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 3,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: <Box display="block">Passed Role Access Control</Box>,
+      status: <DataTableBadge cell="Inactive" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 4,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: <Box>Passed Role Access Control</Box>,
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+    {
+      id: 5,
+      timestamp: timestampCell,
+      eventType: 'User Access Allowed',
+      description: <Box>Passed Role Access Control</Box>,
+      status: <DataTableBadge cell="Approved" />,
+      userIdentity: 'Vincent Diep',
+      menu: <DataTableMenu />,
+    },
+  ];
+
+  return (
+    <DataTable
+      {...args}
+      aria-label="Onyx table"
+      height="100%"
+      scale="xl"
+    >
+      <DataTableHeader columns={columns}>
+        {column => (
+          <DataTableColumn
+            {...{
+              hideHeader: column.key === 'menu',
+              minWidth: column.key !== 'menu' ? 175 : 75,
+              width: column.key !== 'menu' ? '19.4%' : 75,
+            }}
+          >
+            {column.name}
+          </DataTableColumn>
+        )}
+      </DataTableHeader>
+      <DataTableBody items={rows}>
+        {item => (
+          <DataTableRow>
+            {columnKey => (
+              <DataTableCell>
+                {item[columnKey]}
+              </DataTableCell>
+            )}
+          </DataTableRow>
+        )}
+      </DataTableBody>
+    </DataTable>
+  );
+};
+
+// Added to bypass color contrast issue due to virtualizer
+OnyxDefault.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const Dynamic = args => {
   const columns = [
     { name: 'Country', key: 'country' },
@@ -322,7 +434,6 @@ export const Dynamic = args => {
             minWidth={155}
           >
             {column.name}
-
           </DataTableColumn>
         )}
       </DataTableHeader>
@@ -363,22 +474,12 @@ export const Sortable = args => {
 
   const rows = [
     { id: 1, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
-    {
-      id: 2,
-      country: 'Canada',
-      population: '37,000,000',
-      continent: 'North America',
-    },
+    { id: 2, country: 'Canada', population: '37,000,000', continent: 'North America' },
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
     { id: 5, country: 'France', population: '67,000,000', continent: 'Europe' },
     { id: 6, country: 'Mexico', population: '126,000,000', continent: 'North America' },
-    {
-      id: 7,
-      country: 'USA',
-      population: '320,000,000',
-      continent: 'North America',
-    },
+    { id: 7, country: 'USA', population: '320,000,000', continent: 'North America' },
   ];
 
   const collator = useCollator({ numeric: true });
@@ -442,7 +543,6 @@ export const Sortable = args => {
             minWidth={155}
           >
             {column.name}
-
           </DataTableColumn>
         )}
       </DataTableHeader>
@@ -472,7 +572,6 @@ Sortable.parameters = {
   },
 };
 
-
 export const Selection = args => {
   const columns = [
     { name: 'Country', key: 'country' },
@@ -481,18 +580,8 @@ export const Selection = args => {
   ];
 
   const rows = [
-    {
-      id: 1,
-      country: 'USA',
-      population: '320,000,000',
-      continent: 'North America',
-    },
-    {
-      id: 2,
-      country: 'Canada',
-      population: '37,000,000',
-      continent: 'North America',
-    },
+    { id: 1, country: 'USA', population: '320,000,000', continent: 'North America' },
+    { id: 2, country: 'Canada', population: '37,000,000', continent: 'North America' },
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
     { id: 5, country: 'Mexico', population: '126,000,000', continent: 'North America' },
@@ -517,7 +606,6 @@ export const Selection = args => {
             minWidth={155}
           >
             {column.name}
-
           </DataTableColumn>
         )}
       </DataTableHeader>
@@ -556,18 +644,8 @@ export const ControlledSelection = args => {
   ];
 
   const rows = [
-    {
-      id: 1,
-      country: 'USA',
-      population: '320,000,000',
-      continent: 'North America',
-    },
-    {
-      id: 2,
-      country: 'Canada',
-      population: '37,000,000',
-      continent: 'North America',
-    },
+    { id: 1, country: 'USA', population: '320,000,000', continent: 'North America' },
+    { id: 2, country: 'Canada', population: '37,000,000', continent: 'North America' },
     { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
     { id: 4, country: 'France', population: '67,000,000', continent: 'Europe' },
     { id: 5, country: 'Mexico', population: '126,000,000', continent: 'North America' },
@@ -601,7 +679,6 @@ export const ControlledSelection = args => {
             minWidth={155}
           >
             {column.name}
-
           </DataTableColumn>
         )}
       </DataTableHeader>
@@ -677,10 +754,7 @@ export const AsyncLoading = args => {
     >
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn
-            {...getCellProps(column.key, false)}
-            minWidth={155}
-          >
+          <DataTableColumn {...getCellProps(column.key, false)} minWidth={155}>
             {column.name}
           </DataTableColumn>
         )}

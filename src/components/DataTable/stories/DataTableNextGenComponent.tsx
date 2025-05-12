@@ -10,12 +10,7 @@ import {
   DataTableHeader,
   DataTableMenu,
   DataTableRow,
-  Text,
-} from '../../../../index';
-
-export default {
-  title: 'Onyx Recipes/DataTable',
-};
+} from '../../..';
 
 const getCellProps = (columnKey, align) => ({
   pr: columnKey !== 'menu' ? 'lg' : 12,
@@ -120,7 +115,7 @@ export const DataTableNextGenComponent = () => {
   return (
     <Box backgroundColor="background.base" p="lg">
       <DataTable
-        aria-label="Static table"
+        aria-label="Onyx table"
         height="100%"
         density="spacious"
         scale="xl"
@@ -129,10 +124,13 @@ export const DataTableNextGenComponent = () => {
           {column => (
             <DataTableColumn
               {...getCellProps(column.key, false)}
-              minWidth={column.key !== 'menu' ? 175 : 50}
-              width={column.key !== 'menu' ? '19.4%' : 50}
+              {...{
+                hideHeader: column.key === 'menu',
+                minWidth: column.key !== 'menu' ? 175 : 50,
+                width: column.key !== 'menu' ? '19.4%' : 50,
+              }}
             >
-              <Text>{column.name}</Text>
+              {column.name}
             </DataTableColumn>
           )}
         </DataTableHeader>

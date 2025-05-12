@@ -68,14 +68,15 @@ export const componentSpecificNextGenBlacklist = {
   OverlayPanel: [
     'Expandable',
   ],
-  NavBar: [
+  DataTable: [
     'Default',
-    'Controlled',
-    'Auto Collapse',
   ],
 };
 
 export const astroBlacklistStory = {
+  DataTable: [
+    'Onyx Default',
+  ],
   NavBar: [
     'Onyx Default',
   ],

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AstroProvider, NextGenTheme } from '../../../..';
+import { AstroProvider, NextGenTheme } from '../../..';
 
 import { DataTableNextGenComponent } from './DataTableNextGenComponent';
 

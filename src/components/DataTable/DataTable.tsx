@@ -102,7 +102,10 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
-  const density = props.density || 'regular';
+  const { themeState: { isOnyx } } = useGetTheme();
+
+  const density = isOnyx ? 'spacious' : (props.density || 'regular');
+
   const columnLayout = useMemo(
     () => new TableColumnLayout({
       getDefaultMinWidth,
@@ -337,7 +340,6 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   return (
     <FocusRing focusRingClass="is-key-focused" focusClass="is-click-focused">
       <Box
-        pl={column.index === 0 ? 0 : 'lg'}
         ref={ref}
         variant="dataTable.tableHeadCell"
         className={classNames}
@@ -457,7 +459,6 @@ const TableCell = ({ cell }: DataTableCellProps) => {
   return (
     <FocusRing focusRingClass="is-key-focused">
       <Box
-        pl={cell.index === 0 ? 0 : 'lg'}
         ref={ref}
         variant="dataTable.tableCell"
         className={classNames}

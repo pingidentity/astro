@@ -3,7 +3,9 @@ import React, { forwardRef } from 'react';
 
 import { Badge, DataTableBadgeProps } from '../../index';
 
-const DataTableBadge = forwardRef<HTMLDivElement, DataTableBadgeProps>(({ cell }, ref) => {
+const DataTableBadge = forwardRef<HTMLDivElement, DataTableBadgeProps>((props, ref) => {
+  const { cell, ...others } = props;
+
   const componentProps = {
     'Pending': {
       badgeProps: {
@@ -25,14 +27,19 @@ const DataTableBadge = forwardRef<HTMLDivElement, DataTableBadgeProps>(({ cell }
         variant: 'healthyStatusBadge',
       },
     },
+    'Inactive': {
+      badgeProps: {
+        variant: 'secondaryStatusBadge',
+      },
+    },
   };
-
 
   return (
     <Badge
       label={cell}
       ref={ref}
       {...(cell && componentProps[cell].badgeProps)}
+      {...others}
     />
   );
 });
