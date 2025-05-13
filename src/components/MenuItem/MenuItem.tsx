@@ -23,7 +23,6 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
     isFocusVisible,
     isNotFocusedOnHover,
     className,
-    onAction,
     state,
   } = props;
 
@@ -46,7 +45,6 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
       key: item?.key,
       'aria-label': item?.['aria-label'],
       isDisabled,
-      onAction,
       isSelected,
       onClose,
       closeOnSelect,

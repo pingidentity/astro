@@ -18,7 +18,6 @@ const MenuSection = forwardRef<HTMLDivElement, MenuSectionProps>((props, ref) =>
   const {
     section,
     state,
-    onAction,
     isDisabled,
     isFocusVisible,
     isNotFocusedOnHover,
@@ -64,7 +63,6 @@ const MenuSection = forwardRef<HTMLDivElement, MenuSectionProps>((props, ref) =>
               key={node.key}
               item={node}
               state={state}
-              onAction={onAction}
               isDisabled={isDisabled}
               isFocusVisible={isFocusVisible}
               isNotFocusedOnHover={isNotFocusedOnHover}

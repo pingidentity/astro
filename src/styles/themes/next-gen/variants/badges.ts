@@ -20,6 +20,78 @@ const baseBadge = {
   },
 };
 
+const primary = {
+  ...baseBadge,
+  backgroundColor: '#eaf1fb !important',
+  '& span': {
+    ...badgeFont,
+    color: '#1967d2',
+  },
+};
+
+const secondary = {
+  ...baseBadge,
+  backgroundColor: '#f6f8fa !important',
+  '& span': {
+    ...badgeFont,
+    color: 'gray-900',
+  },
+};
+
+const success = {
+  ...baseBadge,
+  backgroundColor: '#d3eddf !important',
+  '& span': {
+    ...badgeFont,
+    color: 'success.dark',
+  },
+};
+
+const danger = {
+  ...baseBadge,
+  backgroundColor: '#f8d8d5 !important',
+  '& span': {
+    ...badgeFont,
+    color: 'red-700',
+  },
+};
+
+const warning = {
+  ...baseBadge,
+  backgroundColor: '#fff1da !important',
+  '& span': {
+    ...badgeFont,
+    color: 'yellow-700',
+  },
+};
+
+const dark = {
+  ...baseBadge,
+  backgroundColor: 'black !important',
+  '& span': {
+    ...badgeFont,
+    color: 'white',
+  },
+};
+
+const selectedItemBadge = {
+  ...baseBadge,
+  backgroundColor: '#eaf2fd !important',
+  paddingRight: '0px !important',
+  '& span': {
+    ...badgeFont,
+    fontSize: '14px',
+    color: 'text.primary',
+    fontWeight: 400,
+  },
+};
+
+const readOnlyBadge = {
+  '& span': {
+    fontSize: '14px',
+  },
+};
+
 export const badgeDeleteButton = {
   ...buttons.iconButtons.base,
   borderRadius: '50%',
@@ -29,15 +101,37 @@ export const badgeDeleteButton = {
   width: 14,
 };
 
+const dataTableBadge = {
+  minWidth: '100px',
+  border: 'none',
+};
+
+const activeStatusBadge = {
+  ...primary,
+  ...dataTableBadge,
+};
+
+const warningStatusBadge = {
+  ...warning,
+  ...dataTableBadge,
+};
+
+const criticalStatusBadge = {
+  ...danger,
+  ...dataTableBadge,
+};
+
+const healthyStatusBadge = {
+  ...success,
+  ...dataTableBadge,
+};
+
+const secondaryStatusBadge = {
+  ...secondary,
+  ...dataTableBadge,
+};
+
 export const badges = {
-  primary: {
-    ...baseBadge,
-    backgroundColor: '#eaf1fb !important',
-    '& span': {
-      ...badgeFont,
-      color: '#1967d2',
-    },
-  },
   baseBadge: {
     ...baseBadge,
     backgroundColor: '#eaf1fb !important',
@@ -46,61 +140,18 @@ export const badges = {
       color: '#1967d2',
     },
   },
-  secondary: {
-    ...baseBadge,
-    backgroundColor: '#f6f8fa !important',
-    '& span': {
-      ...badgeFont,
-      color: 'gray-900',
-    },
-  },
-  success: {
-    ...baseBadge,
-    backgroundColor: '#d3eddf !important',
-    '& span': {
-      ...badgeFont,
-      color: 'success.dark',
-    },
-  },
-  danger: {
-    ...baseBadge,
-    backgroundColor: '#f8d8d5 !important',
-    '& span': {
-      ...badgeFont,
-      color: 'red-700',
-    },
-  },
-  warning: {
-    ...baseBadge,
-    backgroundColor: '#fff1da !important',
-    '& span': {
-      ...badgeFont,
-      color: 'yellow-700',
-    },
-  },
-  dark: {
-    ...baseBadge,
-    backgroundColor: 'black !important',
-    '& span': {
-      ...badgeFont,
-      color: 'white',
-    },
-  },
-  selectedItemBadge: {
-    ...baseBadge,
-    backgroundColor: '#eaf2fd !important',
-    paddingRight: '0px !important',
-    '& span': {
-      ...badgeFont,
-      fontSize: '14px',
-      color: 'text.primary',
-      fontWeight: 400,
-    },
-  },
-  readOnlyBadge: {
-    '& span': {
-      fontSize: '14px',
-    },
-  },
+  primary,
+  secondary,
+  success,
+  danger,
+  warning,
+  dark,
+  selectedItemBadge,
+  readOnlyBadge,
+  activeStatusBadge,
+  warningStatusBadge,
+  criticalStatusBadge,
+  healthyStatusBadge,
+  secondaryStatusBadge,
   badgeDeleteButton,
 };

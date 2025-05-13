@@ -125,8 +125,12 @@ test('should fire onAction', () => {
   fireEvent.keyUp(menuItems[0], { key: 'Enter' });
   expect(onAction).toHaveBeenNthCalledWith(1, defaultItems[0].id);
 
+  expect(onAction).toHaveBeenCalledTimes(1);
+
   // Click events
   userEvent.click(menuItems[1]);
+
+  expect(onAction).toHaveBeenCalledTimes(2);
   expect(onAction).toHaveBeenNthCalledWith(2, defaultItems[1].id);
 });
 

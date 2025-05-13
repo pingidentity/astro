@@ -232,6 +232,12 @@ const activeStatusBadge = {
   backgroundColor: '#F7F8FD !important',
 };
 
+const secondaryStatusBadge = {
+  ...statusBadge,
+  borderColor: 'neutral.80',
+  backgroundColor: '#F7F8FD !important',
+};
+
 const invertedRemovableBadge = {
   ...baseBadge,
   height: '21px',
@@ -318,6 +324,7 @@ export default {
   warningCalloutBadge,
   warningStatusBadge,
   healthyStatusBadge,
+  secondaryStatusBadge,
   removableBadge,
   invertedRemovableBadge,
   dataTable,

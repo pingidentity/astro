@@ -71,4 +71,17 @@ export default {
   tab,
   iconBadge,
   skeleton,
+  dataTable: {
+    selectableTableRow: {
+      '&.is-selected': {
+        bg: 'background.hover',
+      },
+      '&.is-hovered': {
+        bg: 'background.hover',
+      },
+      '&.is-focused': {
+        boxShadow: '0 0 0 3px inset #1a73e8',
+      },
+    },
+  },
 };

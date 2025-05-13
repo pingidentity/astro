@@ -1069,14 +1069,28 @@ test('trigger button handles popover open and close in condensed', () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
+test('renders items with duplicate keys', () => {
+  getComponent({ items: items.map(item => ({ ...item, key: 'DUPLICATE_KEY' })), mode: 'condensed' });
+
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
+  const options = screen.getAllByRole('option');
+  expect(options.length).toBe(1);
+});
+
 test('should render items with sections passed in props', () => {
   getSectionsComponent();
+
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   const input = screen.getByRole('combobox');
 
   userEvent.click(input);
+
   expect(screen.getAllByRole('group')).toHaveLength(2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(5);
@@ -1103,6 +1117,32 @@ test('should render the separators', () => {
       ));
     }
   });
+});
+
+test('renders duplicate groups for duplicate keys on items group ', () => {
+  getSectionsComponent({
+    items: withSection.map(item => ({
+      ...item,
+      key: 'DUPLICATE_KEY',
+    })),
+  });
+
+  const input = screen.getByRole('combobox');
+
+  userEvent.click(input);
+  expect(screen.getAllByRole('group')).not.toHaveLength(2);
+});
+
+test('renders with error without key on item groups ', () => {
+  let errorMessage = '';
+  try {
+    getSectionsComponent({
+      items: withSection.map(({ key, ...item }) => item),
+    });
+  } catch (error) {
+    errorMessage = error.message;
+  }
+  expect(errorMessage).toMatch(/No key found for item/);
 });
 
 test('escape focus delegate calls correct functions if anything else is pressed', () => {
