@@ -69,7 +69,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
               key={element.key}
               section={element}
               state={state}
-              onAction={onAction}
               isDisabled={isDisabled}
               isFocusVisible={isFocusVisible}
               isNotFocusedOnHover={isNotFocusedOnHover}
@@ -81,7 +80,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
             key={element.key}
             item={element}
             state={state}
-            onAction={onAction}
             isDisabled={isDisabled}
             isFocusVisible={isFocusVisible}
             isNotFocusedOnHover={isNotFocusedOnHover}
