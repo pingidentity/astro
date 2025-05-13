@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.120.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.119.0...@pingux/astro@2.120.0) (2025-05-13)
+
+
+### Features
+
+* [UIP-7500] Datatable refactor to include onyx recipe ([fed9f71](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fed9f715f246375493f836df1ff05dd55ce6a15e))
+* [UIP-7533] Menu onAction is fired twice ([e67d54f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e67d54f6d7f63d46ec666080c8dccada3ee49069))
+* [UIP-7538] Make unique key be required for MultivaluesField Items ([d985fde](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d985fde6f22dcd4e4fd1185106b8d7db3c6d81ef))
+
+
+
+
+
 # [2.119.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.118.3...@pingux/astro@2.119.0) (2025-05-08)
 
 
