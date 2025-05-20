@@ -6,7 +6,7 @@ import { avatar } from './avatar';
 import button from './button';
 import { dataTable } from './dataTable';
 import iconWrapper from './iconWrapper';
-import { listView, listViewItem } from './listview';
+import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
@@ -317,6 +317,11 @@ const overlayPanel = {
   },
 };
 
+const loader = {
+  withinListView: {
+    color: 'active',
+  },
+};
 
 export default {
   attachment,
@@ -333,6 +338,7 @@ export default {
   listViewItem,
   progressBar,
   listView,
+  lisViewItemChart,
   dataTable,
   codeView,
   prompt,
@@ -344,4 +350,5 @@ export default {
   suggestion,
   response,
   skeleton,
+  loader,
 };

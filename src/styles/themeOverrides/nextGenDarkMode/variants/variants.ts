@@ -1,6 +1,6 @@
 import { avatar } from './avatar';
 import iconBadge from './iconBadge';
-import { listView, listViewItem } from './lsitview';
+import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
 import { message } from './message';
 import { navBar } from './navbar';
@@ -73,6 +73,7 @@ export default {
   menuItem,
   listViewItem,
   listView,
+  lisViewItemChart,
   navBar,
   listBox,
   modal,

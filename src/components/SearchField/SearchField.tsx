@@ -97,14 +97,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>((props, ref) 
             <IconButton
               tabIndex={0}
               onKeyDown={handleKeyDownEvent}
-              sx={{
-                position: 'absolute',
-                top: 8,
-                right: 10,
-                path: {
-                  fill: 'text.secondary',
-                },
-              }}
+              color="text.secondary"
+              variant="searchClearButton"
               {...clearButtonProps}
             >
               <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />

@@ -157,6 +157,10 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
           onScroll={resetHoverState}
           tabIndex={isFocusable ? 0 : -1}
           shouldUseVirtualFocus={!isFocusable}
+          // added to remove the outline when using keyboard navigation encountered during UIP-7501
+          style={{
+            outline: 'none',
+          }}
         >
           {(type, item) => {
             if (type === 'item') {

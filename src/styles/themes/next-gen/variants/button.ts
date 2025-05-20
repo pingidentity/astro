@@ -354,6 +354,18 @@ const iconButtons = {
       backgroundColor: 'gray-300',
     },
   },
+  searchClearButton: {
+    ...baseIconButton,
+    border: 'none',
+    '&.is-hovered': {
+      bg: 'background.hover',
+    },
+    '&.is-pressed': {
+      bg: 'background.hover',
+    },
+    position: 'absolute',
+    right: 10,
+  },
 };
 
 const buttons = {

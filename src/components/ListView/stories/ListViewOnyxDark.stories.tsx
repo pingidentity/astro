@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { AstroProvider, NextGenDarkTheme } from '../../../..';
-import { ListViewNextGen } from '../../../themes/next-gen/stories/ListViewNextGenComponent';
+import { AstroProvider, NextGenDarkTheme } from '../../..';
+
+import { ListViewNextGen } from './ListViewNextGenComponent';
 
 export default {
-  title: 'Chromatic Only Onyx Dark ListView',
+  title: 'Onyx Dark ListView',
 };
 
 export const Default = () => {

@@ -1,5 +1,7 @@
 import React, { Key, useRef, useState } from 'react';
 import { Item, useAsyncList } from 'react-stately';
+import ClockTimeEightOutlineIcon from '@pingux/mdi-react/ClockTimeEightOutlineIcon';
+import CogIcon from '@pingux/mdi-react/CogIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import { action } from '@storybook/addon-actions';
 import isChromatic from 'chromatic/isChromatic';
@@ -8,6 +10,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Button,
+  IconWrapperProps,
   ListView,
   ListViewItem,
   ListViewItemChart,
@@ -17,6 +20,7 @@ import {
   Text,
 } from '../..';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
+import animals from '../../utils/devUtils/constants/animals';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { chartData } from '../ListViewItem/controls/chart/chartData';
 
@@ -56,239 +60,41 @@ export interface ExampleItemProps {
   subtext?: string,
   id: string | number,
   hasSeparator?: boolean,
+  icon?: React.ElementType,
+  iconWrapperProps?: IconWrapperProps
 }
 
 const items: ExampleItemProps[] = [
-  { key: 'Aardvark', name: 'Aardvark', id: '1', hasSeparator: false },
-  { key: 'Kangaroo', name: 'Kangaroo', id: '2' },
-  { key: 'Snake', name: 'Snake', id: '3' },
-];
-
-export const animals = [
-  { name: 'Aardvark' },
-  { name: 'Albatross' },
-  { name: 'Alligator' },
-  { name: 'Alpaca' },
-  { name: 'Ant' },
-  { name: 'Anteater' },
-  { name: 'Antelope' },
-  { name: 'Ape' },
-  { name: 'Armadillo' },
-  { name: 'Donkey' },
-  { name: 'Baboon' },
-  { name: 'Badger' },
-  { name: 'Barracuda' },
-  { name: 'Bat' },
-  { name: 'Bear' },
-  { name: 'Beaver' },
-  { name: 'Bee' },
-  { name: 'Bison' },
-  { name: 'Boar' },
-  { name: 'Buffalo' },
-  { name: 'Butterfly' },
-  { name: 'Camel' },
-  { name: 'Capybara' },
-  { name: 'Caribou' },
-  { name: 'Cassowary' },
-  { name: 'Cat' },
-  { name: 'Caterpillar' },
-  { name: 'Cattle' },
-  { name: 'Chamois' },
-  { name: 'Cheetah' },
-  { name: 'Chicken' },
-  { name: 'Chimpanzee' },
-  { name: 'Chinchilla' },
-  { name: 'Chough' },
-  { name: 'Clam' },
-  { name: 'Cobra' },
-  { name: 'Cockroach' },
-  { name: 'Cod' },
-  { name: 'Cormorant' },
-  { name: 'Coyote' },
-  { name: 'Crab' },
-  { name: 'Crane' },
-  { name: 'Crocodile' },
-  { name: 'Crow' },
-  { name: 'Curlew' },
-  { name: 'Deer' },
-  { name: 'Dinosaur' },
-  { name: 'Dog' },
-  { name: 'Dogfish' },
-  { name: 'Dolphin' },
-  { name: 'Dotterel' },
-  { name: 'Dove' },
-  { name: 'Dragonfly' },
-  { name: 'Duck' },
-  { name: 'Dugong' },
-  { name: 'Dunlin' },
-  { name: 'Eagle' },
-  { name: 'Echidna' },
-  { name: 'Eel' },
-  { name: 'Eland' },
-  { name: 'Elephant' },
-  { name: 'Elk' },
-  { name: 'Emu' },
-  { name: 'Falcon' },
-  { name: 'Ferret' },
-  { name: 'Finch' },
-  { name: 'Fish' },
-  { name: 'Flamingo' },
-  { name: 'Fly' },
-  { name: 'Fox' },
-  { name: 'Frog' },
-  { name: 'Gaur' },
-  { name: 'Gazelle' },
-  { name: 'Gerbil' },
-  { name: 'Giraffe' },
-  { name: 'Gnat' },
-  { name: 'Gnu' },
-  { name: 'Goat' },
-  { name: 'Goldfinch' },
-  { name: 'Goldfish' },
-  { name: 'Goose' },
-  { name: 'Gorilla' },
-  { name: 'Goshawk' },
-  { name: 'Grasshopper' },
-  { name: 'Grouse' },
-  { name: 'Guanaco' },
-  { name: 'Gull' },
-  { name: 'Hamster' },
-  { name: 'Hare' },
-  { name: 'Hawk' },
-  { name: 'Hedgehog' },
-  { name: 'Heron' },
-  { name: 'Herring' },
-  { name: 'Hippopotamus' },
-  { name: 'Hornet' },
-  { name: 'Horse' },
-  { name: 'Human' },
-  { name: 'Hummingbird' },
-  { name: 'Hyena' },
-  { name: 'Ibex' },
-  { name: 'Ibis' },
-  { name: 'Jackal' },
-  { name: 'Jaguar' },
-  { name: 'Jay' },
-  { name: 'Jellyfish' },
-  { name: 'Kangaroo' },
-  { name: 'Kingfisher' },
-  { name: 'Koala' },
-  { name: 'Kookabura' },
-  { name: 'Kouprey' },
-  { name: 'Kudu' },
-  { name: 'Lapwing' },
-  { name: 'Lark' },
-  { name: 'Lemur' },
-  { name: 'Leopard' },
-  { name: 'Lion' },
-  { name: 'Llama' },
-  { name: 'Lobster' },
-  { name: 'Locust' },
-  { name: 'Loris' },
-  { name: 'Louse' },
-  { name: 'Lyrebird' },
-  { name: 'Magpie' },
-  { name: 'Mallard' },
-  { name: 'Manatee' },
-  { name: 'Mandrill' },
-  { name: 'Mantis' },
-  { name: 'Marten' },
-  { name: 'Meerkat' },
-  { name: 'Mink' },
-  { name: 'Mole' },
-  { name: 'Mongoose' },
-  { name: 'Monkey' },
-  { name: 'Moose' },
-  { name: 'Mosquito' },
-  { name: 'Mouse' },
-  { name: 'Mule' },
-  { name: 'Narwhal' },
-  { name: 'Newt' },
-  { name: 'Nightingale' },
-  { name: 'Octopus' },
-  { name: 'Okapi' },
-  { name: 'Opossum' },
-  { name: 'Oryx' },
-  { name: 'Ostrich' },
-  { name: 'Otter' },
-  { name: 'Owl' },
-  { name: 'Oyster' },
-  { name: 'Panther' },
-  { name: 'Parrot' },
-  { name: 'Partridge' },
-  { name: 'Peafowl' },
-  { name: 'Pelican' },
-  { name: 'Penguin' },
-  { name: 'Pheasant' },
-  { name: 'Pig' },
-  { name: 'Pigeon' },
-  { name: 'Pony' },
-  { name: 'Porcupine' },
-  { name: 'Porpoise' },
-  { name: 'Quail' },
-  { name: 'Quelea' },
-  { name: 'Quetzal' },
-  { name: 'Rabbit' },
-  { name: 'Raccoon' },
-  { name: 'Rail' },
-  { name: 'Ram' },
-  { name: 'Rat' },
-  { name: 'Raven' },
-  { name: 'Red deer' },
-  { name: 'Red panda' },
-  { name: 'Reindeer' },
-  { name: 'Rhinoceros' },
-  { name: 'Rook' },
-  { name: 'Salamander' },
-  { name: 'Salmon' },
-  { name: 'Sand Dollar' },
-  { name: 'Sandpiper' },
-  { name: 'Sardine' },
-  { name: 'Scorpion' },
-  { name: 'Seahorse' },
-  { name: 'Seal' },
-  { name: 'Shark' },
-  { name: 'Sheep' },
-  { name: 'Shrew' },
-  { name: 'Skunk' },
-  { name: 'Snail' },
-  { name: 'Snake' },
-  { name: 'Sparrow' },
-  { name: 'Spider' },
-  { name: 'Spoonbill' },
-  { name: 'Squid' },
-  { name: 'Squirrel' },
-  { name: 'Starling' },
-  { name: 'Stingray' },
-  { name: 'Stinkbug' },
-  { name: 'Stork' },
-  { name: 'Swallow' },
-  { name: 'Swan' },
-  { name: 'Tapir' },
-  { name: 'Tarsier' },
-  { name: 'Termite' },
-  { name: 'Tiger' },
-  { name: 'Toad' },
-  { name: 'Trout' },
-  { name: 'Turkey' },
-  { name: 'Turtle' },
-  { name: 'Viper' },
-  { name: 'Vulture' },
-  { name: 'Wallaby' },
-  { name: 'Walrus' },
-  { name: 'Wasp' },
-  { name: 'Weasel' },
-  { name: 'Whale' },
-  { name: 'Wildcat' },
-  { name: 'Wolf' },
-  { name: 'Wolverine' },
-  { name: 'Wombat' },
-  { name: 'Woodcock' },
-  { name: 'Woodpecker' },
-  { name: 'Worm' },
-  { name: 'Wren' },
-  { name: 'Yak' },
-  { name: 'Zebra' },
+  {
+    key: 'Aardvark',
+    name: 'Aardvark',
+    id: '1',
+    icon: CogIcon,
+    iconWrapperProps: {
+      size: 'sm',
+      color: 'blue',
+    },
+  },
+  {
+    key: 'Kangaroo',
+    name: 'Kangaroo',
+    id: '2',
+    icon: ClockTimeEightOutlineIcon,
+    iconWrapperProps: {
+      size: 'sm',
+      color: 'green',
+    },
+  },
+  {
+    key: 'Snake',
+    name: 'Snake',
+    id: '3',
+    icon: FormSelectIcon,
+    iconWrapperProps: {
+      size: 'sm',
+      color: 'indigo',
+    },
+  },
 ];
 
 const props = {
@@ -341,16 +147,17 @@ const Controls = () => (
 
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items}>
-    {(item: ExampleItemProps) => (
+    {(item:ExampleItemProps) => (
       <Item key={item.name}>
         <ListViewItem
           data={{
             text: item.name,
-            icon: FormSelectIcon,
+            icon: item.icon,
           }}
           iconProps={{
             color: 'text.secondary',
           }}
+          iconWrapperProps={item.iconWrapperProps}
         >
           <Controls />
         </ListViewItem>
@@ -371,7 +178,7 @@ export const WithExpandableItems = ({ ...args }) => {
     <ListView {...props} {...args} items={items} selectionMode="expansion">
       {/* The first child inside of <Item> will render as the collapsed content, within the row
           The  Second child will render when expanded. */}
-      {(item: ExampleItemProps) => (
+      {(item:ExampleItemProps) => (
         <Item key={item.name} textValue={item.name}>
           <ExampleContent text={item.name} />
           <ExpandableChildren />
@@ -401,7 +208,7 @@ export const ControlledExpandableItems = ({ ...args }) => {
 
   return (
     <Box>
-      <Button onPress={() => { expandAllKeys(); }}>Expand all</Button>
+      <Button onPress={() => { expandAllKeys(); }} mb="lg">Expand all</Button>
       <ListView
         {...props}
         {...args}
