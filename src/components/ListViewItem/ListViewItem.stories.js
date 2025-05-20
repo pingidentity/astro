@@ -15,6 +15,7 @@ import {
   Separator,
   Text,
 } from '../..';
+import { useGetTheme } from '../../hooks';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
@@ -41,13 +42,24 @@ export default {
   argTypes: listViewItemArgTypes,
 };
 
-const Wrapper = ({ children }) => (
-  <Box sx={{ bg: 'accent.99' }}>
-    <Separator margin={0} />
-    {children}
-    <Separator margin={0} />
-  </Box>
-);
+const Wrapper = ({ children }) => {
+  const { themeState: { isOnyx } } = useGetTheme();
+  return (
+    <Box
+      sx={isOnyx ? {
+        bg: 'transparent',
+        border: '1px solid',
+        borderColor: 'border.base',
+        borderRadius: '1rem',
+        p: '0',
+      } : { bg: 'accent.99' }}
+    >
+      { !isOnyx && <Separator margin={0} /> }
+      {children}
+      { !isOnyx && <Separator margin={0} /> }
+    </Box>
+  );
+};
 
 export const Default = () => (
   <Wrapper>
@@ -55,6 +67,10 @@ export const Default = () => (
       data={{
         icon: AccountIcon,
         text: 'Fons Vernall',
+      }}
+      iconWrapperProps={{
+        size: 'sm',
+        color: 'green',
       }}
     />
   </Wrapper>
@@ -74,6 +90,10 @@ export const WithSubtext = () => (
         icon: AccountIcon,
         subtext: 'rad_developer@pingidentity.com',
         text: 'Fons Vernall',
+      }}
+      iconWrapperProps={{
+        size: 'sm',
+        color: 'pink',
       }}
     />
   </Wrapper>
@@ -116,6 +136,10 @@ export const WithControls = () => (
         icon: FormSelectIcon,
         text: 'Fons Vernall',
       }}
+      iconWrapperProps={{
+        size: 'sm',
+        color: 'orange',
+      }}
     >
       <ListViewItemEditButton aria-label="edit-icon" />
       <ListViewItemSwitchField aria-label="active user" />
@@ -151,6 +175,10 @@ export const WithRightOfDataSlot = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'teal',
+        }}
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>
@@ -185,6 +213,10 @@ export const WithLeftOfDataSlot = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'orange',
+        }}
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
@@ -216,6 +248,10 @@ export const WithCharts = () => {
           text: 'Kangaroo',
           subtext: 'kangaroo@example.com',
           icon: FormSelectIcon,
+        }}
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'purple',
         }}
       >
         <ListViewItemChart
@@ -264,6 +300,10 @@ export const WithExtraLongText = () => {
           icon: AccountIcon,
           text: longText,
           subtext: longText,
+        }}
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'orange',
         }}
         slots={{ rightOfData: renderRightOfData }}
       >

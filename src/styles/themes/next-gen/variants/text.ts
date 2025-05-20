@@ -65,14 +65,26 @@ export const text = {
     lineHeight: 'body',
   },
   listViewItemText: {
-    color: 'text.secondary',
+    fontFamily: 'standard',
+    color: 'text.primary',
     fontWeight: 2,
+    mb: 'xs',
+    fontSize: 'md',
+  },
+  listViewItemSubtext: {
+    fontSize: 'md',
+    lineHeight: 'body',
+    color: 'gray-700',
+  },
+  itemTitle: {
+    fontWeight: 2,
+    color: 'text.primary',
   },
   small: {
     fontSize: 'sm',
-    color: 'text.primary',
     fontFamily: 'standard',
     lineHeight: 'md',
+    color: 'text.primary',
   },
   response: {
     color: 'text.primary',

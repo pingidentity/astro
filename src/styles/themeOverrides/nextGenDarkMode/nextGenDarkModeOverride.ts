@@ -8,6 +8,7 @@ import buttons from './variants/buttons';
 import cards from './variants/cards';
 import forms from './variants/forms';
 import links from './variants/links';
+import { text } from './variants/text';
 import variants from './variants/variants';
 import { colors } from './colors';
 
@@ -19,6 +20,7 @@ const override = {
   badges,
   links,
   cards,
+  text,
   name: themes.NEXT_GEN_DARK,
 };
 

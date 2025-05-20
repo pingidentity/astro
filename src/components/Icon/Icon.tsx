@@ -4,43 +4,44 @@ import { useGetTheme, useTShirtSize } from '../../hooks';
 import { IconProps } from '../../types';
 import Box from '../Box';
 
-
 const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
   const {
     color,
     icon: IconComponent,
     sx,
-    size,
+    size = 'sm',
+    variant,
+    title,
+    ...others
   } = props;
 
   const theme = useGetTheme();
   const { sizeProps } = useTShirtSize({ size, sizes: theme.tShirtSizes });
 
-  const title = props.title || (typeof IconComponent === 'object' && 'type' in IconComponent
-    ? { name: IconComponent.type.name }
-    : ''
+  const resolvedTitle = title ?? (
+    typeof IconComponent === 'object' && 'type' in IconComponent
+      ? { name: IconComponent.type.name }
+      : ''
   );
 
   return (
     <Box
       as={IconComponent}
       ref={ref}
-      title={title}
-      {...props}
-      size={sizeProps.size}
       role="img"
+      title={resolvedTitle}
+      variant={variant}
+      size={sizeProps.size}
       sx={{
         fill: color,
         minWidth: sizeProps.size,
         ...sx,
       }}
+      {...others}
     />
   );
 });
 
-Icon.defaultProps = {
-  size: 20,
-};
 Icon.displayName = 'Icon';
 
 export default Icon;

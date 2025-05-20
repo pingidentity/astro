@@ -34,6 +34,7 @@ const nextGenConvertedComponents = [
   'Sticker Sheet',
   'NextGen ListViewItem',
   'Skeleton',
+  'ListViewItem',
   'Pagination',
 ];
 

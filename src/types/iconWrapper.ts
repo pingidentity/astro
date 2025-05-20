@@ -10,7 +10,7 @@ export interface IconWrapperProps extends StyleProps {
     size: string,
     className?: string,
     isCircle?: boolean,
-    title: {
+    title?: {
         name: string,
         id?: string
     },

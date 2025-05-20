@@ -3,8 +3,10 @@ import { useVisuallyHidden } from 'react-aria';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
 import useResizeObserver from 'use-resize-observer';
 
+import { useGetTheme } from '../../../../hooks';
 import { Box, Button, Text, Tooltip, TooltipTrigger } from '../../../../index';
 import { neutral } from '../../../../styles/colors';
+import { nextGenColors } from '../../../../styles/themes/next-gen/tokens/colorTokens';
 
 import { listViewItemChartPropTypes } from './ListViewItemChartAttributes';
 
@@ -47,6 +49,8 @@ const ListViewItemChart = forwardRef((props, ref) => {
     setAriaLabel();
   }, [ariaLabel, containerRef]);
 
+  const { themeState: { isOnyxDark } } = useGetTheme();
+
   return (
     <Box isRow alignItems="center" height={0} mr="md" ref={ref}>
       <Box
@@ -87,7 +91,7 @@ const ListViewItemChart = forwardRef((props, ref) => {
                     type="monotone"
                     dataKey={chartDataKey}
                     dot={false}
-                    stroke={neutral[20]}
+                    stroke={isOnyxDark ? nextGenColors['gray-100'] : neutral[20]}
                   />
                 </LineChart>
               </ResponsiveContainer>
