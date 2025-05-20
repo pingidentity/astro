@@ -58,7 +58,15 @@ const modal = {
   },
 };
 
+const attachment = {
+  container: {
+    backgroundColor: 'background.secondary',
+    borderColor: 'border.attachment',
+  },
+};
+
 export default {
+  attachment,
   avatar,
   message,
   menu,

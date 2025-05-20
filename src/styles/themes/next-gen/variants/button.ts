@@ -321,11 +321,14 @@ const iconButtons = {
   copyButton,
   deleteAttachment: {
     ...baseIconButton,
-    backgroundColor: 'white',
+    backgroundColor: 'light',
     border: '1px solid',
     borderColor: 'gray-300',
     size: '24px',
     p: '4px',
+    '&.is-hovered': {
+      backgroundColor: '#dde5ec',
+    },
   },
   inverted: {
     cursor: 'pointer',

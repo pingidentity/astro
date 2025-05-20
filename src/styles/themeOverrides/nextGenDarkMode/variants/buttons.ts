@@ -32,6 +32,13 @@ const iconButtons = {
       path: { fill: 'black' },
     },
   },
+  deleteAttachment: {
+    backgroundColor: 'background.secondary',
+    borderColor: 'border.attachment',
+    '&.is-hovered': {
+      backgroundColor: '#0a0b0d',
+    },
+  },
 };
 
 const buttons = {
