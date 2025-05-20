@@ -6,6 +6,8 @@ import { useStatusClasses } from '../../../hooks';
 import { Box, Icon, IconButton, IconWrapper, Text } from '../../../index';
 import { AttachmentProps } from '../../../types/promptInput';
 
+import { fileTypeConfig } from './constants';
+
 export const getFileExtension = (fullString: string) => {
   const fileExtensionPattern = /\.([0-9a-z]+)(?:[?#]|$)/i;
 
@@ -26,11 +28,17 @@ const Attachment = (props: AttachmentProps) => {
     id,
     containerProps,
     iconWrapperProps,
-    icon,
     deleteButtonProps,
   } = props;
 
   const { classNames } = useStatusClasses(className, { isFullScreen });
+
+  const defaultIconProps = {
+    icon: PaperOutlineIcon,
+    color: 'lightBlue',
+  };
+
+  const iconProps = fileTypeConfig[fileType] || defaultIconProps;
 
   return (
     <Box
@@ -41,9 +49,7 @@ const Attachment = (props: AttachmentProps) => {
       <Box isRow alignItems="center" px="lg" py="md">
         <IconWrapper
           isCircle
-          title={{ name: 'File Icon' }}
-          icon={icon}
-          color="red"
+          title={{ name: `${fileType} File Icon` }}
           size="sm"
           wrapperProps={{
             size: '36px',
@@ -52,9 +58,15 @@ const Attachment = (props: AttachmentProps) => {
             p: '9px',
             ...iconWrapperProps,
           }}
+          {...iconProps}
         />
         <Box sx={{ ml: 'md' }}>
-          <Text as="h5" sx={{ fontWeight: 2, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{title}</Text>
+          <Text
+            as="h5"
+            variant="attachmentTitle"
+          >
+            {title}
+          </Text>
           <Text sx={{ textOverflow: 'ellipsis' }} variant="small">{fileType.toLocaleUpperCase()}</Text>
         </Box>
       </Box>
@@ -71,10 +83,6 @@ const Attachment = (props: AttachmentProps) => {
       </Box>
     </Box>
   );
-};
-
-Attachment.defaultProps = {
-  icon: PaperOutlineIcon,
 };
 
 export default Attachment;
