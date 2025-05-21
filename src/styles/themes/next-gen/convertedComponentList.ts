@@ -90,6 +90,7 @@ export const nextGenOnlyComponents = [
   'Response',
   'Suggestions',
   'Prompt Input',
+  'Footer',
 ];
 
 export default nextGenConvertedComponents;

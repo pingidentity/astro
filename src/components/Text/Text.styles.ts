@@ -124,6 +124,14 @@ const HTags = {
   H4: { ...hTags.h4, lineHeight: '16px' },
 };
 
+const copyRightText = {
+  fontSize: 'md',
+  fontFamily: 'standard',
+  color: 'gray-100',
+  lineHeight: 'body',
+  my: 'sm',
+};
+
 const attachmentTitle = {
   ...base,
   ...textEllipsis,
@@ -162,5 +170,6 @@ export const text = {
   tableData: { ...wordWrap, fontSize: 'sm', fontWeight: 1, color: 'text.primary', fontFamily: 'standard' },
   textEllipsis,
   title,
+  copyRightText,
   attachmentTitle,
 };

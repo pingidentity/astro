@@ -12,6 +12,7 @@ import copyText from '../../components/CopyText/CopyText.styles';
 import dataTable from '../../components/DataTable/DataTable.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
+import footer from '../../components/Footer/Footer.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
 import listBox from '../../components/ListBox/ListBox.styles';
@@ -61,6 +62,7 @@ export default {
   dataTable,
   environmentBreadcrumb,
   fieldHelperText,
+  footer,
   helpHint,
   imageUpload,
   listBox,

@@ -43,8 +43,42 @@ const popover = {
   },
 };
 
+const copyRightLink = {
+  fontFamily: 'standard',
+  color: 'gray-100',
+  fontSize: 'md',
+  textDecoration: 'none',
+  borderRadius: '1px',
+  '&.is-hovered': {
+    color: '#c5d2df',
+  },
+};
+
+const footerLink = {
+  fontFamily: 'standard',
+  px: 'md',
+  py: 'sm',
+  fontSize: 'md',
+  color: 'gray-100',
+  textDecoration: 'none',
+  borderRadius: '1px',
+  '&.is-hovered': {
+    color: '#c5d2df',
+  },
+};
+
+const footerEALink = {
+  ...footerLink,
+  display: 'flex',
+  flexShrink: '0',
+  justifyContent: 'center',
+};
+
 export default {
   app,
   popover,
   web,
+  copyRightLink,
+  footerLink,
+  footerEALink,
 };

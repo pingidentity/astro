@@ -82,6 +82,8 @@ export { default as EnvironmentBreadcrumb } from './components/EnvironmentBreadc
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 export { default as FileInputField } from './components/FileInputField';
+export { default as Footer } from './components/Footer';
+export * from './components/Footer';
 export { default as Grid } from './components/Grid';
 export { default as HelpHint } from './components/HelpHint';
 export * from './components/HelpHint';
