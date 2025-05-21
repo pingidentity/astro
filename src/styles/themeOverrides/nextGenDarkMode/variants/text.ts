@@ -12,4 +12,7 @@ export const text = {
     fontWeight: 2,
     color: 'text.secondary',
   },
+  copyRightText: {
+    color: 'gray-400',
+  },
 };

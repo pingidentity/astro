@@ -9,7 +9,7 @@ const transitions = {
   transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
 };
 
-const defaultFocus = {
+export const defaultFocus = {
   outline: '2px solid',
   outlineColor: 'active',
   outlineOffset: '3px',

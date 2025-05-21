@@ -15,6 +15,7 @@ export * from './copyText';
 export * from './dataTable';
 export * from './environmentBreadcrumb';
 export * from './fieldHelperText';
+export * from './footer';
 export * from './grid';
 export * from './helpHint';
 export * from './icon';

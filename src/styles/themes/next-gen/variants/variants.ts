@@ -5,6 +5,7 @@ import codeView from '../codeView/codeView';
 import { avatar } from './avatar';
 import button from './button';
 import { dataTable } from './dataTable';
+import { footer } from './footer';
 import iconWrapper from './iconWrapper';
 import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
@@ -350,5 +351,6 @@ export default {
   suggestion,
   response,
   skeleton,
+  footer,
   loader,
 };

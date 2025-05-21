@@ -26,9 +26,27 @@ const footerHeader = {
   fontWeight: '2',
 };
 
+const copyRightLink = {
+  ...nextGen,
+  color: 'gray-400',
+};
+
+const footerLink = {
+  ...nextGen,
+  color: 'gray-400',
+};
+
+const footerEALink = {
+  ...nextGen,
+  color: 'gray-400',
+};
+
 export default {
   nextGen,
   sideNav,
   footerLinks,
   footerHeader,
+  copyRightLink,
+  footerLink,
+  footerEALink,
 };

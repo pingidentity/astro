@@ -1,4 +1,5 @@
 import { avatar } from './avatar';
+import { footer } from './footer';
 import iconBadge from './iconBadge';
 import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
@@ -80,6 +81,7 @@ export default {
   tab,
   iconBadge,
   skeleton,
+  footer,
   dataTable: {
     selectableTableRow: {
       '&.is-selected': {
