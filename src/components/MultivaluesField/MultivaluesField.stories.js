@@ -552,6 +552,41 @@ export const CondensedWithSection = args => {
   );
 };
 
+export const CondensedWithCustomText = args => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the right place
+      style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
+    >
+      <MultivaluesField
+        items={withSection}
+        {...args}
+        mode="condensed"
+        onOpenChange={onOpenChange}
+        placeholder="Select your animal"
+        selectedOptionText={`${selectedKeys.size} Selected Animals`}
+        onSelectionChange={setSelectedKeys}
+        selectedKeys={selectedKeys}
+      >
+        {section => (
+          <Section key={section.key} items={section.children} title={section.name}>
+            {item => <Item key={item.name}>{item.name}</Item>}
+          </Section>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+
+  );
+};
+
 export const OnLoadPrev = () => {
   const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
   const [minNum, setMinNum] = useState(0);

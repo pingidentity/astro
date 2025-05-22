@@ -45,6 +45,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     onSelectionChange,
     placeholder,
     selectedKeys,
+    selectedOptionText: selectedOptionTextProp,
     scrollBoxProps,
     status,
     ...others
@@ -213,13 +214,13 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const selectedKeysSize = selectionManager.selectedKeys.size;
 
+  const selectedOptionText = selectedOptionTextProp || `${itemCount === selectedKeysSize ? 'All' : selectionManager.state.selectedKeys?.size} Selected`;
+
   const checkboxSelected = (
     selectionManager.state.selectedKeys?.size !== 0
   && (
   <Text color="text.secondary">
-    {itemCount === selectedKeysSize ? 'All' : selectionManager.state.selectedKeys?.size}
-    {' '}
-    Selected
+    {selectedOptionText}
   </Text>
   )
   );
@@ -290,6 +291,8 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     );
   };
 
+  const placeholderText = (selectionManager.state.selectedKeys?.size === 0 ? (placeholder || 'Select') : '');
+
   const inputProps = {
     ...customInputProps,
     controlProps: {
@@ -306,7 +309,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     isReadOnly,
     isRequired,
     label,
-    placeholder: selectionManager.state.selectedKeys?.size === 0 ? 'Select' : '',
+    placeholder: placeholderText,
     wrapperProps: {
       ref: inputWrapperRef,
       variant: 'forms.input.multivaluesWrapper',
