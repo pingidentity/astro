@@ -9,7 +9,7 @@ const transitions = {
   transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
 };
 
-const defaultFocus = {
+export const defaultFocus = {
   outline: '2px solid',
   outlineColor: 'active',
   outlineOffset: '3px',
@@ -321,11 +321,14 @@ const iconButtons = {
   copyButton,
   deleteAttachment: {
     ...baseIconButton,
-    backgroundColor: 'white',
+    backgroundColor: 'light',
     border: '1px solid',
     borderColor: 'gray-300',
     size: '24px',
     p: '4px',
+    '&.is-hovered': {
+      backgroundColor: '#dde5ec',
+    },
   },
   inverted: {
     cursor: 'pointer',
@@ -350,6 +353,18 @@ const iconButtons = {
     '&.is-disabled': {
       backgroundColor: 'gray-300',
     },
+  },
+  searchClearButton: {
+    ...baseIconButton,
+    border: 'none',
+    '&.is-hovered': {
+      bg: 'background.hover',
+    },
+    '&.is-pressed': {
+      bg: 'background.hover',
+    },
+    position: 'absolute',
+    right: 10,
   },
 };
 

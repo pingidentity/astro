@@ -3,6 +3,7 @@ import AlertOutlineIcon from '@pingux/mdi-react/AlertOutlineIcon';
 import CheckCircleOutlineIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import ChevronUpIcon from '@pingux/mdi-react/ChevronUpIcon';
+import DotsHorizontalIcon from '@pingux/mdi-react/DotsHorizontalIcon';
 import InformationOutlineIcon from '@pingux/mdi-react/InformationOutlineIcon';
 
 import { pingLogoHorizontalSmall } from '../../../../utils/devUtils/constants/logos';
@@ -16,4 +17,5 @@ export default {
   [statuses.SUCCESS]: CheckCircleOutlineIcon,
   [statuses.WARNING]: AlertOutlineIcon,
   pingLogoHorizontalSmall,
+  listViewMenu: DotsHorizontalIcon,
 };

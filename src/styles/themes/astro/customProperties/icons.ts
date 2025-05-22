@@ -4,6 +4,7 @@ import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuUp from '@pingux/mdi-react/MenuUpIcon';
+import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 
 import { pingLogoHorizontalSmallWhite } from '../../../../utils/devUtils/constants/logos';
 import statuses from '../../../../utils/devUtils/constants/statuses';
@@ -16,4 +17,5 @@ export default {
   [statuses.SUCCESS]: CheckCircleIcon,
   [statuses.WARNING]: AlertIcon,
   pingLogoHorizontalSmall: pingLogoHorizontalSmallWhite,
+  listViewMenu: MoreVertIcon,
 };

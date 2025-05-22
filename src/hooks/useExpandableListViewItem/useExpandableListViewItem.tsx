@@ -184,14 +184,20 @@ const useExpandableListViewItem: UseExpandableListViewItem<object> = <T extends 
     isFocused: isDisabled ? false
       : isFocusVisible
       || (isFocusVisibleWithin && (!isFocusEscaped && !isFocusVisibleContainer)),
+    isFirstItem: item.index === 0,
+    isLastItem: item.index === state.collection.size - 1,
   });
 
   const { classNames: focusContainerClassName } = useStatusClasses('', {
     isFocused: isFocusVisibleContainer,
+    isFirstItemBody: item.index === 0,
+    isLastItemBody: item.index === state.collection.size - 1,
   });
 
   const { classNames: rowClassName } = useStatusClasses('', {
     hasSeparator,
+    isFirstRow: item.index === 0,
+    isLastRow: item.index === state.collection.size - 1,
   });
 
   const expandableRowProps = {

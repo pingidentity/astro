@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.120.0",
+  "version": "2.121.0-alpha.2",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -42,6 +42,10 @@
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.1.1",
     "@faker-js/faker": "~7.5.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@internationalized/date": "^3.5.3",
     "@internationalized/number": "^3.6.0",
     "@mdx-js/react": "^1.6.22",

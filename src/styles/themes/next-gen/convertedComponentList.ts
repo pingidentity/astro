@@ -34,6 +34,7 @@ const nextGenConvertedComponents = [
   'Sticker Sheet',
   'NextGen ListViewItem',
   'Skeleton',
+  'ListViewItem',
   'Pagination',
 ];
 
@@ -89,6 +90,7 @@ export const nextGenOnlyComponents = [
   'Response',
   'Suggestions',
   'Prompt Input',
+  'Footer',
 ];
 
 export default nextGenConvertedComponents;

@@ -1,4 +1,4 @@
-import buttons from './button';
+import buttons, { defaultFocus } from './button';
 
 const navBarFocus = {
   outline: '2px solid',
@@ -81,6 +81,24 @@ const navBarLogoLink = {
   },
 };
 
+const copyRightLink = {
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const footerLink = {
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
+const footerEALink = {
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
 export default {
   nextGen,
   onyx,
@@ -90,4 +108,7 @@ export default {
   button,
   primaryButton,
   navBarLogoLink,
+  copyRightLink,
+  footerEALink,
+  footerLink,
 };

@@ -16,7 +16,10 @@ const ListViewItemEditButton = forwardRef((props, ref) => {
   return (
     <Box ref={ref} ml="sm">
       <IconButton {...props}>
-        <Icon icon={CreateIcon} size="md" />
+        <Icon
+          icon={CreateIcon}
+          variant="listViewItem.editIcon"
+        />
       </IconButton>
     </Box>
   );

@@ -16,6 +16,7 @@ const border = {
   dark: chroma.mix('#23282e', 'white', 0.25, 'rgb').hex(),
   input: nextGenColors['gray-500'],
   separator: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
+  attachment: '#39414b',
 };
 
 const iconWrapper = {
@@ -28,6 +29,13 @@ const iconWrapper = {
     red: nextGenColors['red-500'],
     yellow: nextGenColors['yellow-500'],
     teal: nextGenColors['teal-500'],
+    blue: nextGenColors['blue-500'],
+    indigo: nextGenColors['indigo-500'],
+    lightBlue: nextGenColors['blue-600'],
+    lightPink: nextGenColors['pink-600'],
+    lightGreen: nextGenColors['green-800'],
+    lightYellow: nextGenColors['yellow-800'],
+    lightIndigo: nextGenColors['indigo-700'],
   },
   icon: {
     orange: 'black',
@@ -38,6 +46,13 @@ const iconWrapper = {
     red: 'black',
     yellow: 'black',
     teal: 'black',
+    blue: 'black',
+    indigo: 'black',
+    lightBlue: nextGenColors['blue-100'],
+    lightPink: nextGenColors['pink-100'],
+    lightGreen: nextGenColors['green-100'],
+    lightYellow: nextGenColors['yellow-100'],
+    lightIndigo: nextGenColors['indigo-100'],
   },
 };
 

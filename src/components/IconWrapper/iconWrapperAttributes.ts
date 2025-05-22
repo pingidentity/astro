@@ -7,6 +7,8 @@ const colorOptions = [
   'yellow',
   'teal',
   'pink',
+  'blue',
+  'indigo',
 ];
 
 const sizes = [

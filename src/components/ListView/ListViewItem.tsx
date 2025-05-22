@@ -77,6 +77,8 @@ const ListViewItem = props => {
     hasSeparator,
     hasInsetSeparator,
     isPressed,
+    isFirstItem: item.index === 0,
+    isLastItem: item.index === state.collection.size - 1,
   });
 
   // Whether the current component should have legacy styles removed
@@ -122,6 +124,7 @@ const ListViewItem = props => {
 
 ListViewItem.propTypes = {
   item: PropTypes.shape({
+    index: PropTypes.number,
     key: PropTypes.string,
     rendered: PropTypes.node,
     props: PropTypes.shape({

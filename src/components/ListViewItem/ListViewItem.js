@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 import { useHover } from '@react-aria/interactions';
 
-import { Box, Icon, Image, Text } from '../..';
-import { useStatusClasses } from '../../hooks';
+import { Box, Icon, IconWrapper, Image, Text } from '../..';
+import { useGetTheme, useStatusClasses } from '../../hooks';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
 import { listViewItemPropTypes } from './listViewItemAttributes';
@@ -15,6 +15,7 @@ const ListViewItem = forwardRef(({
   className,
   data,
   iconProps,
+  iconWrapperProps,
   isHovered,
   isSelected,
   linkProps,
@@ -46,17 +47,29 @@ const ListViewItem = forwardRef(({
     return 'listViewItem.iconWrapper';
   };
 
+  const { themeState: { isOnyx } } = useGetTheme();
 
   const renderIcon = icon && (
-  <Box width="25px" variant="listViewItem.iconContainer">
-    <Icon
-      color="accent.40"
-      icon={icon}
-      size="md"
-      title={{ name: `${text}${LIST_ITEM_ICON}` }}
-      {...iconProps}
-    />
-  </Box>
+    isOnyx ? (
+      <IconWrapper
+        icon={icon}
+        size="sm"
+        title={{ name: `${text}${LIST_ITEM_ICON}` }}
+        isCircle
+        color="cyan"
+        {...iconWrapperProps}
+      />
+    ) : (
+      <Box width="25px" variant="listViewItem.iconContainer">
+        <Icon
+          color="accent.40"
+          icon={icon}
+          size="md"
+          title={{ name: `${text}${LIST_ITEM_ICON}` }}
+          {...iconProps}
+        />
+      </Box>
+    )
   );
 
   const renderImage = !icon && image && (

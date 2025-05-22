@@ -147,6 +147,12 @@ const applicationPortalPinned = {
   },
 };
 
+const searchClearButton = {
+  ...base,
+  position: 'absolute',
+  right: 10,
+};
+
 export default {
   base,
   bidirectional,
@@ -171,4 +177,5 @@ export default {
   // Recipe related variants
   applicationPortal,
   applicationPortalPinned,
+  searchClearButton,
 };

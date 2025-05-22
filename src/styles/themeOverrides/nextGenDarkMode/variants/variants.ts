@@ -1,6 +1,7 @@
 import { avatar } from './avatar';
+import { footer } from './footer';
 import iconBadge from './iconBadge';
-import { listView, listViewItem } from './lsitview';
+import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
 import { message } from './message';
 import { navBar } from './navbar';
@@ -58,19 +59,29 @@ const modal = {
   },
 };
 
+const attachment = {
+  container: {
+    backgroundColor: 'background.secondary',
+    borderColor: 'border.attachment',
+  },
+};
+
 export default {
+  attachment,
   avatar,
   message,
   menu,
   menuItem,
   listViewItem,
   listView,
+  lisViewItemChart,
   navBar,
   listBox,
   modal,
   tab,
   iconBadge,
   skeleton,
+  footer,
   dataTable: {
     selectableTableRow: {
       '&.is-selected': {

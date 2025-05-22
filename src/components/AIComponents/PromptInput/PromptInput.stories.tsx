@@ -51,19 +51,17 @@ export const Default = args => {
   };
 
   return (
-    <AstroProvider themeOverrides={[NextGenTheme]}>
-      <Box maxWidth="768px">
-        <PromptInput
-          {...args}
-          placeholder="Enter a prompt here"
-          onChange={e => setValue((e.target as HTMLInputElement).value)}
-          value={value}
-          aria-label="test"
-          onFileChange={onFileChange}
-          onSubmit={onSubmit}
-          onCancel={onCancel}
-        />
-      </Box>
-    </AstroProvider>
+    <Box maxWidth="768px">
+      <PromptInput
+        {...args}
+        placeholder="Enter a prompt here"
+        onChange={e => setValue((e.target as HTMLInputElement).value)}
+        value={value}
+        aria-label="test"
+        onFileChange={onFileChange}
+        onSubmit={onSubmit}
+        onCancel={onCancel}
+      />
+    </Box>
   );
 };
