@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.121.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.120.0...@pingux/astro@2.121.0) (2025-05-22)
+
+
+### Features
+
+* [UIP-7429] AI prompt input attachments support various icons ([f11539e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f11539eadbad70f65aa3417febcee098657732f5))
+* [UIP-7501] ListView and ListViewItem refactor to include onyx recipe ([9fdb9ec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9fdb9ec0e0db80ea8ae322a0cb662574cd83230f))
+* [UIP-7502] Footer component ([9d71aec](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9d71aec62a1639720082c1763d354a694f28a76b))
+
+
+
+
+
 # [2.120.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.119.0...@pingux/astro@2.120.0) (2025-05-13)
 
 
