@@ -33,17 +33,22 @@ const withSection = [
   },
 ];
 
+const labelText = 'Field Label';
+
 const defaultProps = {
   items,
-  label: 'Field Label',
+  label: labelText,
 };
 const defaultSectionProps = {
   items: withSection,
-  label: 'Field Label',
+  label: labelText,
 };
 
 const onLoadMoreFunc = jest.fn();
 const onLoadPrevFunc = jest.fn();
+
+const placeholder = 'Select Animals';
+const selectedOptionText = 'Animals Selected';
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
@@ -906,6 +911,18 @@ test('in condensed mode selects and deselects ', () => {
     button.click();
   });
   expect(button).toHaveTextContent('Select All');
+});
+
+test('in condensed mode custom text props work ', () => {
+  getComponent({ mode: 'condensed', placeholder: 'Select Animals', selectedOptionText });
+  expect(screen.getByLabelText(labelText)).toHaveAttribute('placeholder', placeholder);
+  userEvent.tab();
+
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const firstOption = options[0];
+  userEvent.click(firstOption);
+  expect(screen.getByText('Animals Selected')).toBeInTheDocument();
 });
 
 test('in condensed mode "onSelectionChange" is called', () => {
