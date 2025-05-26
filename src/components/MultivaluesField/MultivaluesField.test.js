@@ -80,7 +80,7 @@ const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderF
   </OverlayProvider>
 ));
 
-const ComponentOnPrevLoad = () => {
+const ComponentOnPrevLoad = props => {
   const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_item, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
   // eslint-disable-next-line no-unused-vars
   const [listItems, setListItems] = useState(initialItems);
@@ -99,6 +99,7 @@ const ComponentOnPrevLoad = () => {
         label="Field Label"
         onLoadMore={onLoadMore}
         onLoadPrev={onLoadPrev}
+        {...props}
       >
         {item => (
           <Item key={item.key} data-id={item.name} aria-label={item.name}>
@@ -868,6 +869,16 @@ test('in non-restrictive mode the partial string values should be accepted', () 
   expect(input).toHaveValue(value);
 });
 
+test('in condensed mode, onLoadMore and onLoadPrev callbacks are called', () => {
+  render(<ComponentOnPrevLoad mode="condensed" />);
+  userEvent.tab();
+  const listBox = screen.getAllByRole('listbox');
+  fireEvent.scroll(listBox[0], { target: { scrollY: 450 } });
+  expect(onLoadMoreFunc).toHaveBeenCalled();
+  fireEvent.scroll(listBox[0], { target: { scrollY: 0 } });
+  expect(onLoadPrevFunc).toHaveBeenCalled();
+});
+
 test('in condensed mode, hasNoSelectAll hides the select all button', () => {
   getComponent({ mode: 'condensed', hasNoSelectAll: true });
 
@@ -1162,7 +1173,7 @@ test('renders with error without key on item groups ', () => {
   expect(errorMessage).toMatch(/No key found for item/);
 });
 
-test('escape focus delegate calls correct functions if anything else is pressed', () => {
+test('onLoadMore and onLoadPrev callbacks are called', () => {
   render(<ComponentOnPrevLoad />);
   userEvent.tab();
   const listBox = screen.getAllByRole('listbox');

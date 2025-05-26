@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { Box, Button, Icon, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { usePropWarning } from '../../hooks';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
@@ -35,12 +36,15 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     isRequired,
     items,
     label,
+    loadingState,
     mode,
     onBlur,
     onFocus,
     onInputChange,
     onKeyDown,
     onKeyUp,
+    onLoadMore,
+    onLoadPrev,
     onOpenChange,
     onSelectionChange,
     placeholder,
@@ -265,6 +269,10 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           hasAutoFocus={hasAutoFocus}
           hasNoEmptySelection
           state={state}
+          onLoadMore={onLoadMore}
+          onLoadPrev={onLoadPrev}
+          loadingState={loadingState}
+          isLoading={loadingState === loadingStates.LOADING_MORE}
           aria-label="List of options"
           isCondensed={mode === 'condensed'}
           {...overlayProps}
