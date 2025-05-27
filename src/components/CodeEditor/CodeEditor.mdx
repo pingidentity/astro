@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/CodeEditor/CodeEditor" />
+
+# CodeEditor
+
+The Code Editor component is a tool for editing and displaying code snippets in an application. 
+It provides syntax highlighting, shows line numbers, and validates errors in the code.
+In addition, it supports standard IDE keyboard interactions like tab-to-indent.
+
+The CodeEditor component should be used for complex use cases that require an interactive environment, support for various programming languages, functionalities like linting, keyboard interactions, and real-time updates. 
+When code snippets need to be presented in a read-only format, use [CodeView](./?path=/docs/components-codeview--docs).
+
+Languages
+supported languages are categorized into two groups: those with rich IntelliSense and validation capabilities, and those that provide only basic syntax highlighting. Check the list at [monaco-editor](https://github.com/suren-atoyan/monaco-react#:~:text=It%27s%20important%20to%20mention%20that%20according%20to%20monaco%2Deditor%2C%20the%20whole%20supported%20languages%20are%20divided%20into%20two%20groups%3A)
+
+### Required Components
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Enter | Inserts a new line of code |
+| Arrow keys | Move the cursor within the code in the set direction |
+
+#### Screen Readers
+
+The **`aria-live`** attribute is used to announce content changes in a live region.
+
