@@ -11,11 +11,13 @@ import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
+import popoverMenu from './popoverMenu';
 import prompt from './prompt';
 import response from './response';
 import suggestion from './suggestion';
 import suggestions from './suggestions';
 import { menuTab, tab, tabs } from './tabs';
+import tooltip from './tooltip';
 
 const fieldHelperText = {
   title: {
@@ -342,6 +344,7 @@ export default {
   lisViewItemChart,
   dataTable,
   codeView,
+  popoverMenu,
   prompt,
   tabs,
   menu,
@@ -351,6 +354,7 @@ export default {
   suggestion,
   response,
   skeleton,
+  tooltip,
   footer,
   loader,
 };

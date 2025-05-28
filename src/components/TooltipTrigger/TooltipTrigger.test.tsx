@@ -2,8 +2,10 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import {
+  AstroProvider,
   Button,
   ButtonProps,
+  OnyxTheme,
   Tooltip,
   TooltipTrigger,
   TooltipTriggerProps,
@@ -21,6 +23,15 @@ const getComponent = ({ buttonProps, ...others }: getComponentProps = {}) => ren
     <Button {...buttonProps}>Mock Button</Button>
     <Tooltip>Tooltip Content</Tooltip>
   </TooltipTrigger>
+));
+
+const getOnyxComponent = ({ buttonProps, ...others }: getComponentProps = {}) => render((
+  <AstroProvider theme={OnyxTheme}>
+    <TooltipTrigger {...others}>
+      <Button {...buttonProps}>Mock Button</Button>
+      <Tooltip>Tooltip Content</Tooltip>
+    </TooltipTrigger>
+  </AstroProvider>
 ));
 
 beforeAll(() => {
@@ -106,11 +117,11 @@ test('tooltip closes after closeDelay when mouse leaves trigger', async () => {
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   fireEvent.mouseLeave(button);
 
-  act(() => { jest.advanceTimersByTime(11); });
+  act(() => { jest.advanceTimersByTime(300); });
 
   await act(() => {
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-  }, { timeout: closeDelay + 1 });
+  }, { timeout: closeDelay + 301 });
 });
 
 test('tooltip stays open until closeDelay after mouse leaves trigger', async () => {
@@ -125,6 +136,29 @@ test('tooltip stays open until closeDelay after mouse leaves trigger', async () 
   await waitFor(() => {
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   }, { timeout: closeDelay - 1 });
+});
+
+test('tooltip uses mount transition when Onyx theme is applied', () => {
+  getOnyxComponent();
+  const button = screen.getByRole('button');
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+  fireEvent.mouseMove(button);
+  fireEvent.mouseEnter(button);
+
+  // Tooltip should be transitioning
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(screen.queryByRole('presentation')).toHaveClass('is-transitioning');
+
+  // Tooltip should now be fully mounted
+  userEvent.click(button);
+  expect(screen.queryByRole('tooltip')).toBeInTheDocument();
+  expect(screen.queryByRole('presentation')).not.toHaveClass('is-mounted');
+  expect(screen.queryByRole('presentation')).toHaveClass('is-transitioning');
+  act(() => {
+    jest.advanceTimersByTime(201); // Simulate the transition duration
+  });
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });
 
 // Needs to be added to each components test file
