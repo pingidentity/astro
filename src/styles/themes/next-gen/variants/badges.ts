@@ -92,6 +92,15 @@ const readOnlyBadge = {
   },
 };
 
+const info = {
+  ...baseBadge,
+  backgroundColor: '#eaf2fd !important',
+  '& span': {
+    ...badgeFont,
+    color: 'darkblue',
+  },
+};
+
 export const badgeDeleteButton = {
   ...buttons.iconButtons.base,
   borderRadius: '50%',
@@ -134,11 +143,9 @@ const secondaryStatusBadge = {
 export const badges = {
   baseBadge: {
     ...baseBadge,
-    backgroundColor: '#eaf1fb !important',
-    '& span': {
-      ...badgeFont,
-      color: '#1967d2',
-    },
+  },
+  default: {
+    ...baseBadge,
   },
   primary,
   secondary,
@@ -154,4 +161,5 @@ export const badges = {
   healthyStatusBadge,
   secondaryStatusBadge,
   badgeDeleteButton,
+  info,
 };

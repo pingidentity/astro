@@ -107,12 +107,17 @@ const card = {
   gray: nextGenColors['gray-100'],
 };
 
+const badge = {
+  textColor: nextGenColors['gray-900'],
+  background: nextGenColors['gray-100'],
+};
 const tooltip = 'black';
 
 const colors = {
   ...subColors,
   ...nextGenColors,
   ...overrides,
+  badge,
   card,
   critical,
   success,

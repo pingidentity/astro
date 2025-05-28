@@ -20,9 +20,9 @@ const baseBadge = {
 
 const badges = {
   primary: {
-    backgroundColor: '#1a73e8 !important',
+    backgroundColor: '#155CBA !important',
     '& span': {
-      color: 'black',
+      color: 'active_light',
     },
   },
   secondary: {
@@ -34,27 +34,24 @@ const badges = {
     },
   },
   baseBadge: {
-    backgroundColor: '#324054 !important',
-    '& span': {
-      color: 'dark',
-    },
+    ...baseBadge,
   },
   success: {
-    backgroundColor: '#2ed47a !important',
+    backgroundColor: '#0E4326 !important',
     '& span': {
-      color: 'black',
+      color: 'success_light',
     },
   },
   danger: {
-    backgroundColor: '#f7685b !important',
+    backgroundColor: '#83231A !important',
     '& span': {
-      color: 'black',
+      color: 'critical_light',
     },
   },
   warning: {
-    backgroundColor: '#984c0c !important',
+    backgroundColor: '#664A1C !important',
     '& span': {
-      color: 'black',
+      color: 'yellow-100',
     },
   },
   info: {
@@ -66,9 +63,9 @@ const badges = {
     },
   },
   dark: {
-    backgroundColor: '#c0c9d5 !important',
+    backgroundColor: '#F6F8FA !important',
     '& span': {
-      color: 'gray-900',
+      color: 'black',
     },
   },
   selectedItemBadge: {
