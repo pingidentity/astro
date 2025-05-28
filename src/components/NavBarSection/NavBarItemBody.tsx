@@ -48,9 +48,16 @@ const NavBarItemBody = forwardRef<HTMLElement, NavBarItemBodyProps>((
 
   const getEstimatedHeight = () => {
     if (item?.children && (typeof item?.children.length) === 'number') {
-      return (
-        item?.itemHeight ? item.itemHeight : styles.navButtonEstHeight) * item.children.length;
-    } return null;
+      const height = (
+        item?.itemHeight ? item.itemHeight : styles.navButtonEstHeight
+      ) * item.children.length;
+      /*
+        returning Double the max height to address
+        UIP-7608: Ensures the last NavBar item is visible when system scrollbars are always shown
+      */
+      return height * 2;
+    }
+    return null;
   };
 
   const estimatedHeight = getEstimatedHeight();
