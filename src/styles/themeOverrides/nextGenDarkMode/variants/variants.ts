@@ -66,6 +66,12 @@ const attachment = {
   },
 };
 
+const tooltip = {
+  inline: {
+    color: 'blue-400',
+  },
+};
+
 export default {
   attachment,
   avatar,
@@ -82,6 +88,7 @@ export default {
   iconBadge,
   skeleton,
   footer,
+  tooltip,
   dataTable: {
     selectableTableRow: {
       '&.is-selected': {

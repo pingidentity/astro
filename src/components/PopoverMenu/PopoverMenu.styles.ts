@@ -8,24 +8,24 @@ const container = {
   lineHeight: 1.4,
   outline: 'none',
   transitionProperty: 'transform,visibility,opacity',
-  'WebkitBoxShadow': '0px 0px 12px 2px #0000002e',
+  'WebkitBoxShadow': '0px 0px 12px 2pxrgba(158, 134, 134, 0.18)',
   'MozBoxShadow': '0px 0px 12px 2px #0000002e',
   'boxShadow': '0px 0px 12px 2px #0000002e',
 
   '&.is-dark-mode': {
     color: 'white',
-    bg: 'accent.20',
+    bg: 'tooltip',
     '&[data-popover-placement^=top] > [data-popover-arrow="arrow"]:before': {
-      borderTopColor: 'accent.20',
+      borderTopColor: 'tooltip',
     },
     '&[data-popover-placement^=bottom] > [data-popover-arrow="arrow"]:before': {
-      borderBottomColor: 'accent.20',
+      borderBottomColor: 'tooltip',
     },
     '&[data-popover-placement^=left] > [data-popover-arrow="arrow"]:before': {
-      borderLeftColor: 'accent.20',
+      borderLeftColor: 'tooltip',
     },
     '&[data-popover-placement^=right] > [data-popover-arrow="arrow"]:before': {
-      borderRightColor: 'accent.20',
+      borderRightColor: 'tooltip',
     },
   },
 

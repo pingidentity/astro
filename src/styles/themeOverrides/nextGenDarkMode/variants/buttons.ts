@@ -67,6 +67,8 @@ const buttons = {
     },
   },
   default: {
+    borderColor: 'blue-400',
+    color: 'blue-400',
     '&.is-pressed': {
       color: 'black',
     },
