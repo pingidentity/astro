@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.122.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.121.0...@pingux/astro@2.122.0) (2025-05-28)
+
+
+### Bug Fixes
+
+* [UIP-7560] Astro MiultivaluesField custom Placeholder ([91b81fa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/91b81fa20af60ef9a3336bb0ed0b7c9981a87b68))
+* [UIP-7597] Async load condensed multivaluesfield ([2208c0e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2208c0e78029dbf9e42fec6aae4b607abafa5b2b))
+
+
+### Features
+
+* [UIP-7521] Code Editor Component ([bac13d5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bac13d519c6509c859da3508780314b757acb657))
+* [UIP-7525] Astro Onyx Tooltip Trigger Fade Animation ([3fd2d0e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3fd2d0ef969da51d8239315900e3c7d2d4d6cec2))
+
+
+
+
+
 # [2.121.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.120.0...@pingux/astro@2.121.0) (2025-05-22)
 
 
