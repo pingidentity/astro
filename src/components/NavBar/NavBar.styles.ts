@@ -118,6 +118,14 @@ const sectionBody = {
   pl: '0',
 };
 
+const truncateText = {
+  whiteSpace: 'normal',
+  WebkitBoxOrient: 'vertical',
+  display: '-webkit-box',
+  WebkitLineClamp: '3',
+  overflow: 'hidden',
+};
+
 const itemButton = {
   marginY: '2px',
   textDecoration: 'none',
@@ -127,20 +135,19 @@ const itemButton = {
   backgroundColor: 'transparent',
   paddingTop: 'sm',
   paddingBottom: 'sm',
-  display: 'block',
   color: 'neutral.90',
   fontSize: 'md',
   fontWeight: 0,
   flexGrow: '1',
   width: '100%',
   textAlign: 'left',
-  whiteSpace: 'break-spaces',
   overflowWrap: 'break-word',
   maxWidth: '100%',
   wordWrap: 'break-word',
   wordBreak: 'break-word',
   paddingLeft: '45px',
   paddingRight: 'md',
+  ...truncateText,
   '&.is-focused': {
     outline: '1px solid',
     outlineColor: 'focus',
