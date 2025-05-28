@@ -19,6 +19,11 @@ const border = {
   attachment: '#39414b',
 };
 
+const badge = {
+  background: nextGenColors['gray-700'],
+  textColor: nextGenColors['gray-100'],
+};
+
 const iconWrapper = {
   wrapper: {
     orange: nextGenColors['orange-500'],
@@ -95,4 +100,5 @@ export const colors = {
     card: '#1a1e22',
     hover: hoverDark,
   },
+  badge,
 };
