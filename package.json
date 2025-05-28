@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.121.0",
+  "version": "2.122.0-alpha.1",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -49,6 +49,7 @@
     "@internationalized/date": "^3.5.3",
     "@internationalized/number": "^3.6.0",
     "@mdx-js/react": "^1.6.22",
+    "@monaco-editor/react": "4.4.0",
     "@pingux/mdi-react": "^1.2.0",
     "@react-aria/accordion": "~3.0.0-alpha.11",
     "@react-aria/breadcrumbs": "^3.1.4",
@@ -116,6 +117,7 @@
     "lodash": "^4.17.21",
     "markdown-to-jsx": "^7.7.4",
     "moment": "^2.29.4",
+    "monaco-editor": "0.34.1",
     "pluralize": "^8.0.0",
     "prism-react-renderer": "1.2.1",
     "prismjs": "^1.27.0",

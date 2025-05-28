@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { Box, Button, Icon, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { usePropWarning } from '../../hooks';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
@@ -35,16 +36,20 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     isRequired,
     items,
     label,
+    loadingState,
     mode,
     onBlur,
     onFocus,
     onInputChange,
     onKeyDown,
     onKeyUp,
+    onLoadMore,
+    onLoadPrev,
     onOpenChange,
     onSelectionChange,
     placeholder,
     selectedKeys,
+    selectedOptionText: selectedOptionTextProp,
     scrollBoxProps,
     status,
     ...others
@@ -213,13 +218,13 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const selectedKeysSize = selectionManager.selectedKeys.size;
 
+  const selectedOptionText = selectedOptionTextProp || `${itemCount === selectedKeysSize ? 'All' : selectionManager.state.selectedKeys?.size} Selected`;
+
   const checkboxSelected = (
     selectionManager.state.selectedKeys?.size !== 0
   && (
   <Text color="text.secondary">
-    {itemCount === selectedKeysSize ? 'All' : selectionManager.state.selectedKeys?.size}
-    {' '}
-    Selected
+    {selectedOptionText}
   </Text>
   )
   );
@@ -264,6 +269,10 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           hasAutoFocus={hasAutoFocus}
           hasNoEmptySelection
           state={state}
+          onLoadMore={onLoadMore}
+          onLoadPrev={onLoadPrev}
+          loadingState={loadingState}
+          isLoading={loadingState === loadingStates.LOADING_MORE}
           aria-label="List of options"
           isCondensed={mode === 'condensed'}
           {...overlayProps}
@@ -290,6 +299,8 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     );
   };
 
+  const placeholderText = (selectionManager.state.selectedKeys?.size === 0 ? (placeholder || 'Select') : '');
+
   const inputProps = {
     ...customInputProps,
     controlProps: {
@@ -306,7 +317,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     isReadOnly,
     isRequired,
     label,
-    placeholder: selectionManager.state.selectedKeys?.size === 0 ? 'Select' : '',
+    placeholder: placeholderText,
     wrapperProps: {
       ref: inputWrapperRef,
       variant: 'forms.input.multivaluesWrapper',

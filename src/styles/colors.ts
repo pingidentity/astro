@@ -107,6 +107,8 @@ export const text = {
 
 export const shadow = chroma(neutral[10]).alpha(0.25).hex();
 
+const tooltip = accent[20];
+
 const allColors = {
   black,
   white,
@@ -124,6 +126,7 @@ const allColors = {
   button,
   warning,
   slider,
+  tooltip,
 };
 
 export default allColors;

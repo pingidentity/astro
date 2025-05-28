@@ -107,6 +107,8 @@ const card = {
   gray: nextGenColors['gray-100'],
 };
 
+const tooltip = 'black';
+
 const colors = {
   ...subColors,
   ...nextGenColors,
@@ -121,6 +123,7 @@ const colors = {
   primary: colorsObject.blue,
   background,
   iconWrapper,
+  tooltip,
 };
 
 export default colors;

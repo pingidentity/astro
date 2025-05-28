@@ -523,6 +523,51 @@ export const Condensed = args => {
         )}
       </MultivaluesField>
     </OverlayProvider>
+  );
+};
+
+export const CondensedAsyncLoading = args => {
+  const { direction } = args;
+  const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
+  const [maxNum, setMaxNum] = useState(10);
+  const [listItems, setListItems] = useState(initialItems);
+  const [isOpen, setIsOpen] = useState(false);
+  const [loadingState, setLoadingState] = useState(loadingStates.IDLE);
+
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  const onLoadMore = async () => {
+    setLoadingState(loadingStates.LOADING_MORE);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const newItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${maxNum + index}`, key: `name: ${maxNum + index}`, id: maxNum + index }));
+    setMaxNum(maxNum + 10);
+    setListItems([...listItems, ...newItems]);
+    setLoadingState(loadingStates.IDLE);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the right place
+      style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
+    >
+      <MultivaluesField
+        items={listItems}
+        {...args}
+        mode="condensed"
+        onOpenChange={onOpenChange}
+        loadingState={loadingState}
+        onLoadMore={onLoadMore}
+      >
+        {item => (
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
 
   );
 };
@@ -541,6 +586,41 @@ export const CondensedWithSection = args => {
       style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
     >
       <MultivaluesField items={withSection} {...args} mode="condensed" onOpenChange={onOpenChange}>
+        {section => (
+          <Section key={section.key} items={section.children} title={section.name}>
+            {item => <Item key={item.name}>{item.name}</Item>}
+          </Section>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+
+  );
+};
+
+export const CondensedWithCustomText = args => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const { direction } = args;
+
+  const onOpenChange = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the right place
+      style={setOverlayStyle(direction, isOpen, '25%', '25%', '75%')}
+    >
+      <MultivaluesField
+        items={withSection}
+        {...args}
+        mode="condensed"
+        onOpenChange={onOpenChange}
+        placeholder="Select your animal"
+        selectedOptionText={`${selectedKeys.size} Selected Animals`}
+        onSelectionChange={setSelectedKeys}
+        selectedKeys={selectedKeys}
+      >
         {section => (
           <Section key={section.key} items={section.children} title={section.name}>
             {item => <Item key={item.name}>{item.name}</Item>}

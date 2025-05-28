@@ -33,17 +33,22 @@ const withSection = [
   },
 ];
 
+const labelText = 'Field Label';
+
 const defaultProps = {
   items,
-  label: 'Field Label',
+  label: labelText,
 };
 const defaultSectionProps = {
   items: withSection,
-  label: 'Field Label',
+  label: labelText,
 };
 
 const onLoadMoreFunc = jest.fn();
 const onLoadPrevFunc = jest.fn();
+
+const placeholder = 'Select Animals';
+const selectedOptionText = 'Animals Selected';
 
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
@@ -75,7 +80,7 @@ const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderF
   </OverlayProvider>
 ));
 
-const ComponentOnPrevLoad = () => {
+const ComponentOnPrevLoad = props => {
   const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_item, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
   // eslint-disable-next-line no-unused-vars
   const [listItems, setListItems] = useState(initialItems);
@@ -94,6 +99,7 @@ const ComponentOnPrevLoad = () => {
         label="Field Label"
         onLoadMore={onLoadMore}
         onLoadPrev={onLoadPrev}
+        {...props}
       >
         {item => (
           <Item key={item.key} data-id={item.name} aria-label={item.name}>
@@ -863,6 +869,16 @@ test('in non-restrictive mode the partial string values should be accepted', () 
   expect(input).toHaveValue(value);
 });
 
+test('in condensed mode, onLoadMore and onLoadPrev callbacks are called', () => {
+  render(<ComponentOnPrevLoad mode="condensed" />);
+  userEvent.tab();
+  const listBox = screen.getAllByRole('listbox');
+  fireEvent.scroll(listBox[0], { target: { scrollY: 450 } });
+  expect(onLoadMoreFunc).toHaveBeenCalled();
+  fireEvent.scroll(listBox[0], { target: { scrollY: 0 } });
+  expect(onLoadPrevFunc).toHaveBeenCalled();
+});
+
 test('in condensed mode, hasNoSelectAll hides the select all button', () => {
   getComponent({ mode: 'condensed', hasNoSelectAll: true });
 
@@ -906,6 +922,18 @@ test('in condensed mode selects and deselects ', () => {
     button.click();
   });
   expect(button).toHaveTextContent('Select All');
+});
+
+test('in condensed mode custom text props work ', () => {
+  getComponent({ mode: 'condensed', placeholder: 'Select Animals', selectedOptionText });
+  expect(screen.getByLabelText(labelText)).toHaveAttribute('placeholder', placeholder);
+  userEvent.tab();
+
+  const listbox = screen.getByRole('listbox');
+  const options = within(listbox).getAllByRole('option');
+  const firstOption = options[0];
+  userEvent.click(firstOption);
+  expect(screen.getByText('Animals Selected')).toBeInTheDocument();
 });
 
 test('in condensed mode "onSelectionChange" is called', () => {
@@ -1145,7 +1173,7 @@ test('renders with error without key on item groups ', () => {
   expect(errorMessage).toMatch(/No key found for item/);
 });
 
-test('escape focus delegate calls correct functions if anything else is pressed', () => {
+test('onLoadMore and onLoadPrev callbacks are called', () => {
   render(<ComponentOnPrevLoad />);
   userEvent.tab();
   const listBox = screen.getAllByRole('listbox');

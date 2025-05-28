@@ -4,7 +4,7 @@ import { useTooltipTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
 
 import { TooltipContext } from '../../context/TooltipContext/index';
-import { usePropWarning, useStatusClasses } from '../../hooks';
+import { useGetTheme, useMountTransition, usePropWarning, useStatusClasses } from '../../hooks';
 import { DOMAttributes, FocusableElement, Placement, PopoverArrowProps, TooltipTriggerProps } from '../../types';
 import PopoverContainer from '../PopoverContainer';
 
@@ -47,6 +47,12 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
       trigger: triggerAction,
     }, state, tooltipRef);
 
+    const { themeState } = useGetTheme();
+
+    const isTransitioning = useMountTransition(state.isOpen, 200);
+
+    const isOpen = state.isOpen || (themeState.isOnyx && isTransitioning);
+
     const { overlayProps: positionProps, arrowProps, placement } = useOverlayPosition({
       placement: `${direction} ${align}` as Placement,
       targetRef: tooltipRef,
@@ -55,17 +61,19 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
       // Our API preference is for default false so we invert this since it should be default true
       shouldFlip: !isNotFlippable,
       crossOffset,
-      isOpen: state.isOpen,
+      isOpen,
     });
 
     const { classNames } = useStatusClasses(className, {
       [`is-${direction}`]: direction,
       isDarkMode,
+      isTransitioning,
+      isMounted: state.isOpen,
     });
 
     const overlay = (
       <PopoverContainer
-        isOpen={state.isOpen}
+        isOpen={isOpen}
         ref={overlayRef}
         placement={placement}
         arrowProps={arrowProps as PopoverArrowProps}
