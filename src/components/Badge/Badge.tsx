@@ -4,19 +4,18 @@ import { Badge as ThemeUIBadge, ThemeUIStyleObject } from 'theme-ui';
 
 import { Box, Text } from '../..';
 import { BadgeContext } from '../../context/BadgeContext';
-import * as colors from '../../styles/colors';
 import { BadgeProps } from '../../types';
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
     align,
-    bg,
+    bg = 'badge.background',
     children,
-    isUppercase,
+    isUppercase = false,
     label,
     sx,
     slots,
-    textColor,
+    textColor = 'badge.textColor',
     textProps,
     variant,
     ...others
@@ -82,11 +81,5 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     </BadgeContext.Provider>
   );
 });
-
-Badge.defaultProps = {
-  textColor: 'white',
-  bg: colors.neutral[10],
-  isUppercase: false,
-};
 
 export default Badge;

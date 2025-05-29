@@ -107,10 +107,15 @@ export const text = {
 
 export const shadow = chroma(neutral[10]).alpha(0.25).hex();
 
+const badge = {
+  textColor: 'white',
+  background: neutral[10],
+};
 const tooltip = accent[20];
 
 const allColors = {
   black,
+  badge,
   white,
   neutral,
   accent,

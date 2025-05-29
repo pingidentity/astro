@@ -60,7 +60,7 @@ const avatarColors = [
 
 const badges = [
   'primary',
-  'baseBadge',
+  'default',
   'success',
   'danger',
   'warning',

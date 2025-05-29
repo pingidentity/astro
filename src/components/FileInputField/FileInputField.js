@@ -345,6 +345,8 @@ FileInputField.propTypes = {
   onRemove: PropTypes.func,
   /** These props will be spread to the field text component. */
   textProps: PropTypes.shape({}),
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps: PropTypes.shape({}),
   ...statusPropTypes,
   ...ariaAttributesBasePropTypes,
   ...inputFieldAttributesBasePropTypes,

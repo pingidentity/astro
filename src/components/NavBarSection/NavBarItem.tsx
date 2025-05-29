@@ -14,6 +14,7 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
     className,
     id: key,
     onPress: onPressCallback,
+    iconProps,
     ...others
   } = props;
 
@@ -86,6 +87,7 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
                 color,
                 fill: color,
               }}
+              {...iconProps}
             />
           )}
         <Text variant={state.navStyles.navBarItemText}>

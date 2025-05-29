@@ -1,7 +1,7 @@
 import React, { Key } from 'react';
 import { ThemeUICSSObject } from 'theme-ui';
 
-import { IconTypeExtended } from './icon';
+import { IconProps, IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
 
 // export type Key = string | number;
@@ -38,6 +38,7 @@ export interface NavBarItemProps extends StyleProps, DOMAttributes {
   /** Text that will render within the component */
   text?: string;
   className?: string;
+  iconProps?: IconProps,
 }
 
 export interface NavBarItemBodyProps {

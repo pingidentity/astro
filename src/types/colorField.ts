@@ -4,7 +4,7 @@ import { ControlProps } from '../hooks/useField/useField';
 
 import { TestingAttributes } from './shared/test';
 import { Alignment, Axis } from './shared';
-import { ButtonProps, LabelProps, Status } from '.';
+import { ButtonProps, HelpHintProps, LabelProps, Status } from '.';
 
 export type RGBProps = {
   r: number,
@@ -33,6 +33,10 @@ export interface ColorFieldProps extends TestingAttributes {
   direction?: Axis,
   /** Text to display after the Color Field button. Useful for errors or other info. */
   helperText?: React.ReactNode,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps;
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText?: string,
   /** The content to display as the label. */
   label?: React.ReactNode,
   /** Pass a function to call every time the color is changed. [React Color onChange](https://casesandberg.github.io/react-color/#api-onChange)

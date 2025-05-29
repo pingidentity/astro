@@ -40,6 +40,8 @@ const useSliderField = (props: UseSliderFieldProps) => {
     displayValue: displayValueProp,
     formatOptions,
     helperTextProps,
+    helpHintProps,
+    hintText,
     isDisabled,
     isDisplayValueHidden = false,
     isMultiThumb = false,
@@ -163,7 +165,7 @@ const useSliderField = (props: UseSliderFieldProps) => {
 
   const mergedOuputProps = mergeProps(outputProps, raOutputProps, { as: 'output', variant: 'label' });
 
-  const mergedLabelProps = mergeProps(labelProps, raLabelProps);
+  const mergedLabelProps = mergeProps(labelProps, raLabelProps, { hintText });
 
   const labelContainerProps = {
     label,
@@ -173,6 +175,7 @@ const useSliderField = (props: UseSliderFieldProps) => {
     isHorizontal,
     displayValue,
     isVertical,
+    helpHintProps,
     className: labelContainerClassNames,
   };
 

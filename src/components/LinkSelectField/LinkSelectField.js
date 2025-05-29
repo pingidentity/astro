@@ -92,6 +92,8 @@ LinkSelectField.propTypes = {
   hasNoStatusIndicator: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps: PropTypes.shape({}),
   /** If present this prop will cause a help hint to render in the label of the field. */
   hintText: PropTypes.string,
   /** Sets the default open state of the menu. */

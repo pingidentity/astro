@@ -10,7 +10,6 @@ const NavBarItemButton = (props: NavBarItemButtonProps) => {
     className,
     id: key,
     onPress: onPressCallback,
-    sx, // eslint-disable-line react/prop-types
     ...others
   } = props;
 

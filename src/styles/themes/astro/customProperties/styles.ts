@@ -1,3 +1,3 @@
 export default {
-  navButtonEstHeight: 40,
+  navButtonEstHeight: 41,
 };

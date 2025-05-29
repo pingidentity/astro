@@ -11,7 +11,7 @@ import { statusDefaultProp } from '../../utils/docUtils/statusProp';
 const displayName = 'TextField';
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  const { helperText, helpHintProps, slots, status } = props;
+  const { helperText, slots, status } = props;
 
   const {
     fieldContainerProps,
@@ -41,7 +41,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         {...fieldLabelProps}
         ref={labelRef}
         sx={isLabelHigher ? { gridRow: '1/5' } : {}}
-        helpHintProps={helpHintProps}
       />
       <Box variant="forms.input.fieldControlWrapper" {...fieldControlWrapperProps}>
         {slots?.beforeInput}

@@ -1,3 +1,4 @@
+import { focus } from '../../styles/colors';
 import accordionGrid from '../AccordionGridGroup/AccordionGrid.styles';
 import { quiet } from '../Button/Buttons.styles';
 import { wordWrap } from '../Text/Text.styles';
@@ -118,6 +119,14 @@ const sectionBody = {
   pl: '0',
 };
 
+const truncateText = {
+  whiteSpace: 'normal',
+  WebkitBoxOrient: 'vertical',
+  display: '-webkit-box',
+  WebkitLineClamp: '3',
+  overflow: 'hidden',
+};
+
 const itemButton = {
   marginY: '2px',
   textDecoration: 'none',
@@ -127,20 +136,19 @@ const itemButton = {
   backgroundColor: 'transparent',
   paddingTop: 'sm',
   paddingBottom: 'sm',
-  display: 'block',
   color: 'neutral.90',
   fontSize: 'md',
   fontWeight: 0,
   flexGrow: '1',
   width: '100%',
   textAlign: 'left',
-  whiteSpace: 'break-spaces',
   overflowWrap: 'break-word',
   maxWidth: '100%',
   wordWrap: 'break-word',
   wordBreak: 'break-word',
   paddingLeft: '45px',
   paddingRight: 'md',
+  ...truncateText,
   '&.is-focused': {
     outline: '1px solid',
     outlineColor: 'focus',
@@ -194,7 +202,7 @@ const subtitle = {
 const headerText = {
   ...wordWrap,
   whiteSpace: 'break-spaces',
-  lineHeight: 1,
+  lineHeight: 1.15,
   fontSize: 'md',
   fontWeight: 1,
   maxWidth: '150px',
@@ -232,9 +240,9 @@ const headerNav = {
   fontSize: '16px',
   '&.is-focused': {
     outline: 'none',
-    boxShadow: 'focus',
-    WebkitBoxShadow: 'focus',
-    MozBoxShadow: 'focus',
+    boxShadow: `0 0 0 1px ${focus}`,
+    WebkitBoxShadow: `0 0 0 1px ${focus}`,
+    MozBoxShadow: `0 0 0 1px ${focus}`,
   },
   '&.is-hovered': {
     backgroundColor: 'accent.10',

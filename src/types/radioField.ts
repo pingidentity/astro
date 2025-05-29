@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 
+import { HelpHintProps } from './helpHint';
 import { Status } from './item';
 import { DOMAttributes } from './shared';
+
 
 export interface RadioFieldProps extends DOMAttributes {
   /** Content to display when the radio is checked. */
@@ -14,6 +16,8 @@ export interface RadioFieldProps extends DOMAttributes {
   hasAutoFocus?: boolean,
   /** Text rendered below the input. */
   helperText?: ReactNode,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps;
   /** If present this prop will cause a help hint to render in the label of the field. */
   hintText?: string,
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
