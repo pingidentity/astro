@@ -55,7 +55,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
       {icon && (
         <Icon
           icon={icon}
-          size={isOnyx ? 'icon-200' : 'sm'}
+          size={isOnyx ? 'icon-200' : 18}
           sx={{
             mr: 'sm',
             color: getIconColor(),
@@ -95,7 +95,7 @@ const NavBarPrimaryItemHeader = ({ item }: NavBarPrimaryItemHeaderProps) => {
       {icon && (
         <Icon
           icon={icon}
-          size={isOnyx ? 'icon-200' : 'sm'}
+          size={isOnyx ? 'icon-200' : 18}
           sx={{
             mr: 'sm',
             color: 'neutral.95',
@@ -110,7 +110,7 @@ const NavBarPrimaryItemHeader = ({ item }: NavBarPrimaryItemHeaderProps) => {
         {customIcon && (
           <Icon
             icon={customIcon}
-            size={isOnyx ? 'icon-200' : 'sm'}
+            size={isOnyx ? 'icon-200' : 'xs'}
             sx={{
               color: 'neutral.95',
               fill: 'neutral.95',

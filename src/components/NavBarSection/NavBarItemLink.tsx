@@ -33,6 +33,7 @@ const NavBarItemLink = (props: NavBarItemLinkProps) => {
       {...others}
       sx={{
         ...props.sx, // eslint-disable-line react/prop-types
+        fontWeight: 1,
       }}
     />
   );

@@ -21,7 +21,7 @@ export const pingLogoHorizontalSmall = (
 );
 
 export const pingLogoHorizontalSmallWhite = (
-  <svg width="161" height="28" viewBox="0 0 2385 415" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="129" height="23" viewBox="0 0 2385 415" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_10543_71950)">
       <path d="M0 372.674H372.613V0.000147457H0V372.674Z" fill="white" />
       <mask id="mask0_10543_71950" maskUnits="userSpaceOnUse" x="0" y="0" width="2385" height="415">
