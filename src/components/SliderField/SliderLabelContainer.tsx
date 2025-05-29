@@ -11,6 +11,7 @@ const SliderLabelContainer = forwardRef<HTMLDivElement, SliderLabelContainerProp
     isDisplayValueHidden,
     outputProps,
     className,
+    helpHintProps,
   } = props;
 
   return (
@@ -18,7 +19,7 @@ const SliderLabelContainer = forwardRef<HTMLDivElement, SliderLabelContainerProp
       {label
           && (
           <Box sx={{ gap: '0px' }}>
-            <Label {...labelProps} sx={{ mb: '0px' }}>{label}</Label>
+            <Label {...labelProps} sx={{ mb: '0px' }} helpHintProps={helpHintProps}>{label}</Label>
           </Box>
           )}
       {!isDisplayValueHidden && (

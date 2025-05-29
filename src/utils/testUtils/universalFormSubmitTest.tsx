@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Button } from '../../index';
+import { Button, OverlayProvider } from '../../index';
 
 interface ComponentWithFormUncontrolled {
   renderComponent: (props:{
@@ -48,6 +48,14 @@ const mockOnSubmit = jest.fn(e => {
 });
 
 const name = 'testName';
+const helpHintTestId = 'help-hint__button';
+
+const universalProps = {
+  helpHintProps: {
+    direction: 'left',
+  },
+  hintText: 'hint text',
+};
 
 const useDefaultProps = componentType => {
   const [value, setValue] = useState('');
@@ -62,84 +70,90 @@ const useDefaultProps = componentType => {
   };
 
   const handleChange = jest.fn();
-  switch (componentType) {
-    case 'SliderField':
-      return {
-        value,
-        onChange: setValue,
-        name,
-      };
-    case 'CheckboxField':
-    case 'SwitchField':
-      return {
-        value,
-        onChange: setValue,
-        name,
-        isSelected: true,
-      };
-    case 'ComboBoxField':
-    case 'LinkSelectField':
-    case 'SelectField':
-    case 'MultivaluesField':
-      return {
-        selectedKey: value,
-        onSelectionChange: setValue,
-        name,
-      };
-    case 'ColorField':
-      return {
-        value,
-        onChange: handleChange,
-        name,
-      };
-    case 'DatePicker':
-      return {
-        value: new CalendarDate(2022, 8, 10),
-        onChange: setValue,
-        name,
-      };
-    case 'FileInputField':
+  const getSpecificProps = componentName => {
+    switch (componentName) {
+      case 'SliderField':
+        return {
+          value,
+          onChange: setValue,
+          name,
+        };
+      case 'CheckboxField':
+      case 'SwitchField':
+        return {
+          value,
+          onChange: setValue,
+          name,
+          isSelected: true,
+        };
+      case 'ComboBoxField':
+      case 'LinkSelectField':
+      case 'SelectField':
+      case 'MultivaluesField':
+        return {
+          selectedKey: value,
+          onSelectionChange: setValue,
+          name,
+        };
+      case 'ColorField':
+        return {
+          value,
+          onChange: handleChange,
+          name,
+        };
+      case 'DatePicker':
+        return {
+          value: new CalendarDate(2022, 8, 10),
+          onChange: setValue,
+          name,
+        };
+      case 'FileInputField':
+        return {
+          fileList: userFiles,
+          onFileSelect: handleFileSelect,
+          name,
+        };
+      case 'ImageUploadField':
+        return {
+          previewImage: 'https://picsum.photos/id/1025/200/300',
+          onChange: handleChange,
+          name,
+        };
+      case 'NumberField':
+        return {
+          value: 12,
+          onChange: setValue,
+          name,
+        };
+      case 'PasswordField':
+        return {
+          value,
+          onChange: e => setValue(e.target.value),
+          name,
+        };
+      case 'RadioGroupField':
+      case 'SearchField':
+        return {
+          value,
+          onChange: setValue,
+          name,
+        };
+      case 'TextAreaField':
+      case 'TextField':
+        return {
+          value,
+          onChange: e => setValue((e.target as HTMLInputElement).value),
+          name,
+        };
+      default:
+        return {};
+    }
+  };
 
-      return {
-        fileList: userFiles,
-        onFileSelect: handleFileSelect,
-        name,
-      };
-    case 'ImageUploadField':
-      return {
-        previewImage: 'https://picsum.photos/id/1025/200/300',
-        onChange: handleChange,
-        name,
-      };
-    case 'NumberField':
-      return {
-        value: 12,
-        onChange: setValue,
-        name,
-      };
-    case 'PasswordField':
-      return {
-        value,
-        onChange: e => setValue(e.target.value),
-        name,
-      };
-    case 'RadioGroupField':
-    case 'SearchField':
-      return {
-        value,
-        onChange: setValue,
-        name,
-      };
-    case 'TextAreaField':
-    case 'TextField':
-      return {
-        value,
-        onChange: e => setValue((e.target as HTMLInputElement).value),
-        name,
-      };
-    default:
-      return {};
-  }
+  const specificProps = getSpecificProps(componentType);
+  return {
+    ...specificProps,
+  };
 };
 
 const getDefaultProps = (componentType, testValue) => {
@@ -217,10 +231,13 @@ const ComponentWithFormUncontrolled = ({
   const defaultProps = getDefaultProps(componentType, testValue);
   return (
     <form onSubmit={mockOnSubmit} aria-label="Test Form 1">
-      {renderComponent({
-        ...defaultProps,
-        isDisabled,
-      })}
+      <OverlayProvider>
+        {renderComponent({
+          ...defaultProps,
+          ...universalProps,
+          isDisabled,
+        })}
+      </OverlayProvider>
       <Button type="submit">Submit</Button>
     </form>
   );
@@ -292,6 +309,33 @@ export const universalFieldComponentTests = ({
       expect(handleFormSubmit).toHaveBeenCalledWith({
         testName: String(testValue),
       });
+    });
+
+    test('helpHintProps are spread through to the label component', async () => {
+      render(
+        <ComponentWithFormUncontrolled
+          renderComponent={renderComponent}
+          testValue={testValue}
+          componentType={componentType}
+        />,
+      );
+      const helpHintButton = screen.getByTestId(helpHintTestId);
+      if (componentType === 'CheckboxField' || componentType === 'SwitchField') {
+        userEvent.tab();
+        userEvent.tab();
+        userEvent.type(helpHintButton, '{space}');
+      } else {
+        userEvent.hover(helpHintButton);
+      }
+      if (componentType === 'DatePicker') {
+        await waitFor(() => {
+          expect(screen.queryAllByRole('presentation')[1]).toHaveAttribute('data-popover-placement', 'left');
+        }, { timeout: 100 });
+      } else {
+        await waitFor(() => {
+          expect(screen.queryByRole('presentation')).toHaveAttribute('data-popover-placement', 'left');
+        }, { timeout: 100 });
+      }
     });
 
     test('controlled component should have render correct value on submission', async () => {

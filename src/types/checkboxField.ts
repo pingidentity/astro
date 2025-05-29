@@ -1,5 +1,7 @@
 import { UseFieldProps } from '../hooks/useField/useField';
 
+import { HelpHintProps } from './helpHint';
+
 export interface CheckboxFieldProps extends Omit<UseFieldProps<HTMLInputElement>, 'onChange'> {
   /** Handler that is called when a key is pressed. */
   onKeyDown?: () => void;
@@ -9,4 +11,6 @@ export interface CheckboxFieldProps extends Omit<UseFieldProps<HTMLInputElement>
   onChange?: (isSelected: boolean) => void;
   /** props that are spread directly into the checkbox component */
   checkBoxProps?: object
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps
 }

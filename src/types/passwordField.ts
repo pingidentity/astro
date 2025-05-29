@@ -2,7 +2,7 @@ import { UseFieldProps } from '../hooks/useField/useField';
 
 import { TestingAttributes } from './shared/test';
 import { Status } from './item';
-import { Requirement, RequirementsListProps } from '.';
+import { HelpHintProps, Requirement, RequirementsListProps } from '.';
 
 export interface PasswordFieldProps extends UseFieldProps<HTMLInputElement>, TestingAttributes {
   /** The rendered label for the field. */
@@ -36,6 +36,8 @@ export interface PasswordFieldProps extends UseFieldProps<HTMLInputElement>, Tes
   isDisabled?: boolean,
   /** Whether the input can be selected, but not changed by the user. */
   isReadOnly?: boolean,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps;
   /** Whether the field is required. */
   isRequired?: boolean,
   /**

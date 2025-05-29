@@ -5,6 +5,7 @@ import { ThemeUICSSObject } from 'theme-ui';
 
 import { BoxProps } from './box';
 import { FieldHelperTextProps } from './fieldHelperText';
+import { HelpHintProps } from './helpHint';
 import { InputProps } from './input';
 import { Status } from './item';
 import { LabelProps } from './label';
@@ -31,6 +32,7 @@ export interface SliderLabelContainerProps {
     displayValue?: ReactNode,
     label?: ReactNode,
     labelProps?: LabelProps,
+    helpHintProps?: HelpHintProps,
     isDisplayValueHidden?: boolean,
     outputProps?: TextProps,
     className?: string
@@ -54,6 +56,8 @@ export interface SliderFieldProps {
     formatOptions?: Intl.NumberFormatOptions;
     helperText?: string;
     helperTextProps?: FieldHelperTextProps;
+    helpHintProps?: HelpHintProps,
+    hintText?: string,
     isDisabled?: boolean;
     isDisplayValueHidden?: boolean;
     isMultiThumb?: boolean;

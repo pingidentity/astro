@@ -6,7 +6,7 @@ import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import { ThemeUICSSObject } from 'theme-ui';
 
-import { AriaRole, BoxProps, LabelModeProps, LabelProps, Status, ValidPositiveInteger } from '../../types';
+import { AriaRole, BoxProps, HelpHintProps, LabelModeProps, LabelProps, Status, ValidPositiveInteger } from '../../types';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -74,6 +74,8 @@ export interface UseFieldProps<T> {
   /** Whether the element should receive focus on render. */
   hasAutoFocus?: boolean;
   hasNoStatusIndicator?: boolean;
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps;
   /** Text rendered below the input. */
   helperText?: string;
   /** If present this prop will cause a help hint to render in the label of the field. */
@@ -157,6 +159,7 @@ const useField = <T>(props: UseFieldProps<T>) => {
     defaultValue,
     hasAutoFocus,
     hasNoStatusIndicator,
+    helpHintProps,
     hintText,
     id,
     isDefaultSelected,
@@ -334,6 +337,7 @@ const useField = <T>(props: UseFieldProps<T>) => {
     className: labelClasses,
     hintText,
     isRequired,
+    helpHintProps,
     mode: labelMode,
     ...raLabelProps,
     ...labelProps,

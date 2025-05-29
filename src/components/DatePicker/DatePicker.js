@@ -25,6 +25,7 @@ const DatePicker = forwardRef((props, ref) => {
     defaultValue,
     hasAutoFocus,
     helperText,
+    helpHintProps,
     isDefaultOpen,
     isReadOnly,
     maxValue,
@@ -121,6 +122,7 @@ const DatePicker = forwardRef((props, ref) => {
         isOpen={state.isOpen}
         status={status}
         datePickerState={state}
+        helpHintProps={helpHintProps}
       />
       {calendar}
       {helperText && (
@@ -141,6 +143,8 @@ DatePicker.propTypes = {
   hasFormatHelpText: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.string,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps: PropTypes.shape({}),
   /** The element's unique identifier. */
   id: PropTypes.string,
   /**

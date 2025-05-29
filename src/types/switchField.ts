@@ -2,6 +2,7 @@ import { ThemeUICSSObject } from 'theme-ui';
 
 import { ControlProps } from '../hooks/useField/useField';
 
+import { HelpHintProps } from './helpHint';
 import { Status } from './item';
 import { LabelProps } from './label';
 import { DOMAttributes } from './shared';
@@ -30,4 +31,5 @@ export interface SwitchFieldProps extends DOMAttributes {
   onKeyDown?: () => void;
   onKeyUp?: () => void;
   sx?: ThemeUICSSObject;
+  helpHintProps?: HelpHintProps
 }

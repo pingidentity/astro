@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { SharedFieldProps } from './shared/fieldProps';
 import { TestingAttributes } from './shared/test';
+import { HelpHintProps } from './helpHint';
 import { ValidPositiveInteger } from './shared';
 
 export interface TextAreaFieldProps extends TestingAttributes, SharedFieldProps{
@@ -50,4 +51,6 @@ export interface TextAreaFieldProps extends TestingAttributes, SharedFieldProps{
   id?: string;
   /** The name for the textarea element. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea). */
   name?: string;
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps;
 }

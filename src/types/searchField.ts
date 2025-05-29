@@ -3,7 +3,7 @@ import { ThemeUICSSObject } from 'theme-ui';
 import { ControlProps } from '../hooks/useField/useField';
 
 import { StyleProps } from './shared';
-import { IconProps, IconTypeExtended, LabelProps } from '.';
+import { HelpHintProps, IconProps, IconTypeExtended, LabelProps } from '.';
 
 export interface SearchFieldProps extends StyleProps {
   /**
@@ -40,6 +40,10 @@ export interface SearchFieldProps extends StyleProps {
   id?: string;
   /** Whether the input is disabled. */
   isDisabled?: boolean;
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps?: HelpHintProps;
+  /** If present this prop will cause a help hint to render in the label of the field. */
+  hintText?: string,
   /** The content to display as the label. */
   label?: React.ReactNode;
   /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
