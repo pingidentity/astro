@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.123.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.122.0...@pingux/astro@2.123.0) (2025-05-29)
+
+
+### Bug Fixes
+
+* [UIP-7575] Astro badge custom onyx styling ([ae655e2](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ae655e215ea547baa4780b26d9f6b0612010cf87))
+* [UIP-7576] Field components allow helpHintProps to be passed through ([269d4f4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/269d4f45d9436f33446095db84b8da995ed39895))
+* [UIP-7608] astro library nav bar issue ([f301a16](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f301a1681ced7a2c54d6e00aa5e62bc98dccfc45))
+
+
+### Features
+
+* [UIP-7485] NavBar Update to match specs ([d4e7ac4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d4e7ac4cb0b3732f4387c217108d04397b131ba2))
+
+
+
+
+
 # [2.122.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.121.0...@pingux/astro@2.122.0) (2025-05-28)
 
 
