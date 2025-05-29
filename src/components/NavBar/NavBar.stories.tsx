@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 import AccountCheckIcon from '@pingux/mdi-react/AccountCheckOutlineIcon';
 import AccountMultiple from '@pingux/mdi-react/AccountMultipleIcon';
 import AccountMultipleOutlineIcon from '@pingux/mdi-react/AccountMultipleOutlineIcon';
+import ApplicationOutline from '@pingux/mdi-react/ApplicationOutlineIcon';
 import AppsIcon from '@pingux/mdi-react/AppsIcon';
 import CheckCircleOutlineIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import CodeTagsIcon from '@pingux/mdi-react/CodeTagsIcon';
 import CogOutlineIcon from '@pingux/mdi-react/CogOutlineIcon';
+import Connection from '@pingux/mdi-react/ConnectionIcon';
 import Earth from '@pingux/mdi-react/EarthIcon';
-import EmoticonHappy from '@pingux/mdi-react/EmoticonHappyOutlineIcon';
 import FileTreeIcon from '@pingux/mdi-react/FileTreeIcon';
-import Fingerprint from '@pingux/mdi-react/FingerprintIcon';
 import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
+import KeyChain from '@pingux/mdi-react/KeyChainIcon';
 import LayersOutlineIcon from '@pingux/mdi-react/LayersOutlineIcon';
+import MonitorScreenshot from '@pingux/mdi-react/MonitorScreenshotIcon';
 import OpenInNew from '@pingux/mdi-react/OpenInNewIcon';
 import PaletteOutlineIcon from '@pingux/mdi-react/PaletteOutlineIcon';
-import ScaleBalance from '@pingux/mdi-react/ScaleBalanceIcon';
+import Pulse from '@pingux/mdi-react/PulseIcon';
 import ShieldCheckOutlineIcon from '@pingux/mdi-react/ShieldCheckOutlineIcon';
+import ShieldStarOutline from '@pingux/mdi-react/ShieldStarOutlineIcon';
 import ShowChartIcon from '@pingux/mdi-react/ShowChartIcon';
-import TransitConnection from '@pingux/mdi-react/TransitConnectionVariantIcon';
-import ViewDashboard from '@pingux/mdi-react/ViewDashboardIcon';
 import DashboardIcon from '@pingux/mdi-react/ViewDashboardOutlineIcon';
 import ViewGridPlusOutline from '@pingux/mdi-react/ViewGridPlusOutlineIcon';
 import WidgetsOutlineIcon from '@pingux/mdi-react/WidgetsOutlineIcon';
@@ -125,260 +126,229 @@ const Verify = props => (
 
 const data = [
   {
-    'data-id': 'dashboard-data-id',
-    heading: 'Dashboard',
-    icon: ViewDashboard,
-    key: 'Dashboard',
+    'data-id': 'ipsum-data-id',
+    icon: Pulse,
+    key: 'Ipsum',
+    heading: 'Ipsum',
     children: [
       <NavBarItemLink
-        key="Dashboard Link Group"
-        id="Dashboard Link Group"
-        variant="variants.navBar.itemButton"
-        href="https://pingidentity.com/"
-      >
-        Group
-      </NavBarItemLink>,
-      <NavBarItemButton
-        key="Dashboard Link Populations"
-        id="Dashboard Link Populations"
-      >
-        Populations
-      </NavBarItemButton>,
-    ],
-  },
-  {
-    'data-id': 'identities-data-id',
-    icon: AccountMultiple,
-    key: 'Identities',
-    heading: 'Identities',
-    children: [
-      <NavBarItemLink
-        key="Identities Link Users"
-        id="Identities Link Users"
+        key="Ipsum Link Users"
+        id="Ipsum Link Users"
         href="https://pingidentity.com/"
       >
         Users
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Identities Link Groups"
-        id="Identities Link Groups"
+        key="Ipsum Link Groups"
+        id="Ipsum Link Groups"
         href="https://pingidentity.com/"
       >
         Groups
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Identities Link Populations"
-        id="Identities Link Populations"
+        key="Ipsum Link Populations"
+        id="Ipsum Link Populations"
         href="https://pingidentity.com/"
       >
         Populations
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Identities Link Attributes"
-        id="Identities Link Attributes"
+        key="Ipsum Link Attributes"
+        id="Ipsum Link Attributes"
         href="https://pingidentity.com/"
       >
         Attributes
       </NavBarItemLink>,
       <NavBarItemButton
-        key="Identities Link Roles"
-        id="Identities Link Roles"
+        key="Ipsum Link Roles"
+        id="Ipsum Link Roles"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Roles
       </NavBarItemButton>,
     ],
   },
   {
-    'data-id': 'connections-data-id',
-    icon: TransitConnection,
-    key: 'Connections',
-    heading: 'Connections',
+    'data-id': 'dolor-data-id',
+    icon: AccountMultiple,
+    key: 'Dolor',
+    heading: 'Dolor',
     children: [
-      {
-        hasSeparator: false,
-        key: 'Applications',
-        subTitle: 'Applications',
-      },
       <NavBarItemLink
-        key="Connections Applications"
-        id="Connections Applications"
+        key="Dolor Applications"
+        id="Dolor Applications"
         href="https://pingidentity.com/"
       >
         Applications
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections Application Catalog"
-        id="Connections Application Catalog"
+        key="Dolor Application Catalog"
+        id="Dolor Application Catalog"
         href="https://pingidentity.com/"
       >
         Application Catalog
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections Application Portal"
-        id="Connections Application Portal"
+        key="Dolor Application Portal"
+        id="Dolor Application Portal"
         href="https://pingidentity.com/"
       >
         Application Portal
       </NavBarItemLink>,
-      {
-        key: 'Identity Providers',
-        subTitle: 'Identity Providers',
-      },
       <NavBarItemLink
-        key="Connections External IDPs"
-        id="Connections External IDPs"
+        key="Dolor External IDPs"
+        id="Dolor External IDPs"
         href="https://pingidentity.com/"
       >
         External IDPs
       </NavBarItemLink>,
-      {
-        key: 'Ping Products',
-        subTitle: 'Ping Products',
-      },
       <NavBarItemLink
-        key="Connections PingFederate"
-        id="Connections PingFederate"
+        key="Dolor PingFederate"
+        id="Dolor PingFederate"
         href="https://pingidentity.com/"
       >
         PingFederate
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections PingIntelligence"
-        id="Connections PingIntelligence"
+        key="Dolor PingIntelligence"
+        id="Dolor PingIntelligence"
         href="https://pingidentity.com/"
       >
         PingIntelligence
       </NavBarItemLink>,
       <Separator variant="separator.navBarSubtitleSeparator" />,
       <NavBarItemLink
-        key="Connections Provisioning"
-        id="Connections Provisioning"
+        key="Dolor Provisioning"
+        id="Dolor Provisioning"
         href="https://pingidentity.com/"
       >
         Provisioning
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections WebHooks"
-        id="Connections WebHooks"
+        key="Dolor WebHooks"
+        id="Dolor WebHooks"
         href="https://pingidentity.com/"
       >
         WebHooks
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections Gateways"
-        id="Connections Gateways"
+        key="Dolor Gateways"
+        id="Dolor Gateways"
         href="https://pingidentity.com/"
       >
         Gateways
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Connections Certificates & Key Pairs"
-        id="Connections Certificates & Key Pairs"
+        key="Dolor Certificates & Key Pairs"
+        id="Dolor Certificates & Key Pairs"
         href="https://pingidentity.com/"
       >
         Certificates & Key Pairs
       </NavBarItemLink>,
       <NavBarItemButton
-        key="Connections Resources"
-        id="Connections Resources"
+        key="Dolor Resources"
+        id="Dolor Resources"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Resources
       </NavBarItemButton>,
     ],
   },
   {
-    'data-id': 'experiences-data-id',
-    icon: EmoticonHappy,
-    key: 'Experiences',
-    heading: 'Experiences',
+    'data-id': 'sit-data-id',
+    icon: ApplicationOutline,
+    key: 'Sit',
+    heading: 'Sit',
     children: [
-      {
-        hasSeparator: false,
-        key: 'Policies',
-        subTitle: 'Policies',
-      },
       <NavBarItemLink
-        key="Experiences Authentication"
-        id="Experiences Authentication"
+        key="Sit Authentication"
+        id="Sit Authentication"
         href="https://pingidentity.com/"
       >
         Authentication
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences MFA"
-        id="Experiences MFA"
+        key="Sit MFA"
+        id="Sit MFA"
         href="https://pingidentity.com/"
       >
         MFA
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Password"
-        id="Experiences Password"
+        key="Sit Password"
+        id="Sit Password"
         href="https://pingidentity.com/"
       >
         Password
       </NavBarItemLink>,
       <Separator variant="separator.navBarSubtitleSeparator" />,
       <NavBarItemLink
-        key="Experiences Risk"
-        id="Experiences Risk"
+        key="Sit Risk"
+        id="Sit Risk"
         href="https://pingidentity.com/"
       >
         Risk
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Flows"
-        id="Experiences Flows"
+        key="Sit Flows"
+        id="Sit Flows"
         href="https://pingidentity.com/"
       >
         Flows
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Forms"
-        id="Experiences Forms"
+        key="Sit Forms"
+        id="Sit Forms"
         href="https://pingidentity.com/"
       >
         Forms
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Languages"
-        id="Experiences Languages"
+        key="Sit Languages"
+        id="Sit Languages"
         href="https://pingidentity.com/"
       >
         Languages
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Agreements"
-        id="Experiences Agreements"
+        key="Sit Agreements"
+        id="Sit Agreements"
         href="https://pingidentity.com/"
       >
         Agreements
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Branding & Themes"
-        id="Experiences Branding & Themes"
+        key="Sit Branding & Themes"
+        id="Sit Branding & Themes"
         href="https://pingidentity.com/"
       >
         Branding & Themes
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Notifications"
-        id="Experiences Notifications"
+        key="Sit Notifications"
+        id="Sit Notifications"
         href="https://pingidentity.com/"
       >
         Notifications
       </NavBarItemLink>,
       <NavBarItemLink
-        key="Experiences Vanity Domains"
-        id="Experiences Vanity Domains"
+        key="Sit Vanity Domains"
+        id="Sit Vanity Domains"
         href="https://pingidentity.com/"
         onClick={e => e.preventDefault()}
       >
         Vanity Domains
       </NavBarItemLink>,
       <NavBarItemButton
-        key="Experiences Sender"
-        id="Experiences Sender"
+        key="Sit Sender"
+        id="Sit Sender"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Sender
       </NavBarItemButton>,
@@ -388,109 +358,141 @@ const data = [
 
 const secondData = [
   {
-    'data-id': 'da-vinci-data-id',
+    'data-id': 'amet-data-id',
     icon: ViewGridPlusOutline,
-    key: 'DaVinci',
-    heading: 'DaVinci',
+    key: 'Amet',
+    heading: 'Amet',
     customIcon: OpenInNew,
     href: 'https://pingidentity.com/',
+    size: 'xs',
   },
   {
-    'data-id': 'mfa-data-id',
-    icon: Fingerprint,
-    key: 'MFA',
-    heading: 'MFA',
+    'data-id': 'consectur-data-id',
+    icon: CheckCircleOutlineIcon,
+    key: 'Consectur',
+    heading: 'Consectur',
     children: [
       <NavBarItemButton
-        id="MFA Button Users"
-        key="MFA Button Users"
+        id="Consectur Button Users"
+        key="Consectur Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Users
       </NavBarItemButton>,
-      {
-        key: 'PingOne Services',
-        subTitle: 'PingOne Services',
-      },
       <NavBarItemButton
-        key="MFA Button Group"
-        id="MFA Button Group"
+        key="Consectur Button Group"
+        id="Consectur Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Group Test
       </NavBarItemButton>,
     ],
   },
   {
-    'data-id': 'risk-data-id',
-    icon: ScaleBalance,
-    key: 'Risk',
-    heading: 'Risk',
+    'data-id': 'adipiscing-data-id',
+    icon: ShieldStarOutline,
+    key: 'Adipiscing',
+    heading: 'Adipiscing',
     children: [
       <NavBarItemButton
-        key="Risk Button Users"
-        id="Risk Button Users"
+        key="Adipiscing Button Users"
+        id="Adipiscing Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Users
       </NavBarItemButton>,
-      {
-        hasSeparator: false,
-        key: 'PingOne Services',
-        subTitle: 'PingOne Services',
-      },
       <NavBarItemButton
-        key="Risk Button Group"
-        id="Risk Button Group"
+        key="Adipiscing Button Group"
+        id="Adipiscing Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Group
       </NavBarItemButton>,
     ],
   },
   {
-    'data-id': 'verify-data-id',
+    'data-id': 'elit-data-id',
     icon: Verify,
-    key: 'Verify',
-    heading: 'Verify',
+    key: 'Elit',
+    heading: 'Elit',
     children: [
       <NavBarItemButton
-        key="Verify Button Users"
-        id="Verify Button Users"
+        key="Elit Button Users"
+        id="Elit Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Users
       </NavBarItemButton>,
-      {
-        hasSeparator: false,
-        key: 'PingOne Services',
-        subTitle: 'PingOne Services',
-      },
       <NavBarItemButton
-        key="Verify Button Group"
-        id="Verify Button Group"
+        key="Elit Button Group"
+        id="Elit Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Group
       </NavBarItemButton>,
     ],
   },
   {
-    'data-id': 'credentials-data-id',
+    'data-id': 'sed-do-eiusmod-data-id',
     icon: Credentials,
-    key: 'Credentials',
-    heading: 'Credentials',
+    key: 'Sed Do Eiusmod',
+    heading: 'Sed Do Eiusmod',
     children: [
       <NavBarItemButton
-        key="Credentials Button Users"
-        id="Credentials Button Users"
+        key="Sed Do Eiusmod Button Users"
+        id="Sed Do Eiusmod Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Users
       </NavBarItemButton>,
-      {
-        hasSeparator: false,
-        key: 'PingOne Services',
-        subTitle: 'PingOne Services',
-      },
       <NavBarItemButton
-        key="Credentials Button Group"
-        id="Credentials Button Group"
+        key="Sed Do Eiusmod Button Group"
+        id="Sed Do Eiusmod Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Group
+      </NavBarItemButton>,
+    ],
+  },
+  {
+    'data-id': 'tempor-data-id',
+    heading: 'Tempor Incididunt ut Labore et Dolore Magna Aliqua',
+    icon: KeyChain,
+    key: 'tempor',
+    children: [
+      <NavBarItemLink
+        key="tempor Link Group"
+        id="tempor Link Group"
+        variant="variants.navBar.itemButton"
+        href="https://pingidentity.com/"
+
+      >
+        Group
+      </NavBarItemLink>,
+      <NavBarItemButton
+        key="tempor Link Populations"
+        id="tempor Link Populations"
+        sx={{
+          fontWeight: '500',
+        }}
+      >
+        Populations
       </NavBarItemButton>,
     ],
   },
@@ -498,20 +500,78 @@ const secondData = [
 
 const thirdData = [
   {
-    'data-id': 'environment-data-id',
-    icon: Earth,
-    key: 'Environment',
-    heading: 'Environment title that is so long, it wraps',
+    'data-id': 'ut-enim-data-id',
+    icon: Connection,
+    key: 'Ut-Enim',
+    heading: 'Ut Enim',
     children: [
       <NavBarItemButton
-        key="Earth Button Users"
-        id="Earth Button Users"
+        key="Ut Enim Button Users"
+        id="Ut Enim Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Users
       </NavBarItemButton>,
       <NavBarItemButton
-        key="Earth Button Group"
-        id="Earth Button Group"
+        key="Ut Enim Button Group"
+        id="Ut Enim Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
+      >
+        Group
+      </NavBarItemButton>,
+    ],
+  },
+  {
+    'data-id': 'ad-minim-data-id',
+    icon: MonitorScreenshot,
+    key: 'ad-minim',
+    heading: 'Ad Minim',
+    children: [
+      <NavBarItemButton
+        key="Ad Minim Button Users"
+        id="Ad Minim Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
+      >
+        Users
+      </NavBarItemButton>,
+      <NavBarItemButton
+        key="Ad Minim Button Group"
+        id="Ad Minim Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
+      >
+        Group
+      </NavBarItemButton>,
+    ],
+  },
+  {
+    'data-id': 'veniam-data-id',
+    icon: Earth,
+    key: 'Veniam',
+    heading: 'Veniam',
+    children: [
+      <NavBarItemButton
+        key="Veniam Button Users"
+        id="Veniam Button Users"
+        sx={{
+          fontWeight: '500',
+        }}
+      >
+        Users
+      </NavBarItemButton>,
+      <NavBarItemButton
+        key="Veniam Button Group"
+        id="Veniam Button Group"
+        sx={{
+          fontWeight: '500',
+        }}
       >
         Group
       </NavBarItemButton>,
@@ -541,12 +601,15 @@ export const Default: StoryFn<NavBarProps> = () => {
         <NavBarItem
           data-id="nav-bar-item"
           icon={GlobeIcon}
-          id="Overview"
-          key="Overview"
-          text="Overview"
+          id="Lorem"
+          key="Lorem"
+          text="Lorem"
+          iconProps={{
+            size: '18px',
+          }}
         />
         <NavBarSection items={data} data-id="nav-bar-section" />
-        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator data-id="second-nav-bar-section" />
         <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
       </Box>
     </NavBar>
@@ -824,7 +887,7 @@ export const OnyxDefault: StoryFn<NavBarProps> = () => {
 };
 
 export const Controlled: StoryFn<NavBarProps> = () => {
-  const [selectedKey, setSelectedKey] = useState('Dashboard Link Group');
+  const [selectedKey, setSelectedKey] = useState('Lorem Link Group');
   const { icons } = useGetTheme();
   const customData = [
     {
@@ -869,12 +932,15 @@ export const Controlled: StoryFn<NavBarProps> = () => {
         <NavBarItem
           data-id="nav-bar-item"
           icon={GlobeIcon}
-          id="Overview"
-          key="Overview"
-          text="Overview"
+          id="Lorem"
+          key="Lorem"
+          text="Lorem"
+          iconProps={{
+            size: '18px',
+          }}
         />
         <NavBarSection items={data} data-id="first-nav-bar-section" />
-        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator data-id="second-nav-bar-section" />
         <NavBarSection items={customData} data-id="third-nav-bar-section" />
       </Box>
     </NavBar>
@@ -903,12 +969,15 @@ export const AutoCollapse: StoryFn<NavBarProps> = () => {
         <NavBarItem
           data-id="nav-bar-item"
           icon={GlobeIcon}
-          id="Overview"
-          key="Overview"
-          text="Overview"
+          id="Lorem"
+          key="Lorem"
+          text="Lorem"
+          iconProps={{
+            size: '18px',
+          }}
         />
         <NavBarSection items={data} data-id="nav-bar-section" />
-        <NavBarSection items={secondData} hasSeparator title="PingOne Services" data-id="second-nav-bar-section" />
+        <NavBarSection items={secondData} hasSeparator data-id="second-nav-bar-section" />
         <NavBarSection items={thirdData} hasSeparator data-id="third-nav-bar-section" />
       </Box>
     </NavBar>

@@ -1,3 +1,4 @@
+import { focus } from '../../styles/colors';
 import accordionGrid from '../AccordionGridGroup/AccordionGrid.styles';
 import { quiet } from '../Button/Buttons.styles';
 import { wordWrap } from '../Text/Text.styles';
@@ -201,7 +202,7 @@ const subtitle = {
 const headerText = {
   ...wordWrap,
   whiteSpace: 'break-spaces',
-  lineHeight: 1,
+  lineHeight: 1.15,
   fontSize: 'md',
   fontWeight: 1,
   maxWidth: '150px',
@@ -239,9 +240,9 @@ const headerNav = {
   fontSize: '16px',
   '&.is-focused': {
     outline: 'none',
-    boxShadow: 'focus',
-    WebkitBoxShadow: 'focus',
-    MozBoxShadow: 'focus',
+    boxShadow: `0 0 0 1px ${focus}`,
+    WebkitBoxShadow: `0 0 0 1px ${focus}`,
+    MozBoxShadow: `0 0 0 1px ${focus}`,
   },
   '&.is-hovered': {
     backgroundColor: 'accent.10',
