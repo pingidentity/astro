@@ -603,6 +603,21 @@ test('default selected keys', () => {
   expect(secondBadge).toBeInTheDocument();
 });
 
+test('default selected keys are removed from the list', () => {
+  getComponent({ defaultSelectedKeys: [items[1].key, items[2].key] });
+
+  const input = screen.getByRole('combobox');
+  userEvent.click(input);
+
+  const listbox = screen.queryByRole('listbox');
+
+  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  const options = within(listbox).getAllByRole('option');
+  expect(options.length).toBe(1);
+
+  expect(within(options[0]).getByText(items[0].key)).toBeInTheDocument();
+});
+
 test('selected keys', () => {
   getComponent({ selectedKeys: [items[1].key, items[2].key] });
 
@@ -614,6 +629,22 @@ test('selected keys', () => {
   const secondBadge = screen.getByText(items[2].name);
   expect(secondBadge).toBeInTheDocument();
 });
+
+test('selected keys are removed from the list', () => {
+  getComponent({ selectedKeys: [items[1].key, items[2].key] });
+
+  const input = screen.getByRole('combobox');
+  userEvent.click(input);
+
+  const listbox = screen.queryByRole('listbox');
+
+  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  const options = within(listbox).getAllByRole('option');
+  expect(options.length).toBe(1);
+
+  expect(within(options[0]).getByText(items[0].key)).toBeInTheDocument();
+});
+
 
 test('read only keys', () => {
   getComponent({ readOnlyKeys: [items[1].key, items[2].key] });

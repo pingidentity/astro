@@ -151,11 +151,19 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    if (defaultSelectedKeys) selectionManager.setSelectedKeys(defaultSelectedKeys);
+    if (defaultSelectedKeys) {
+      selectionManager.setSelectedKeys(defaultSelectedKeys);
+      setItems(prevItems => prevItems.filter(item => !Array.from(defaultSelectedKeys)
+        .includes(item.key)));
+    }
   }, []);
 
   useEffect(() => {
-    if (selectedKeys) selectionManager.setSelectedKeys(selectedKeys);
+    if (selectedKeys) {
+      selectionManager.setSelectedKeys(selectedKeys);
+      setItems(prevItems => prevItems.filter(item => !Array.from(selectedKeys)
+        .includes(item.key)));
+    }
   }, []);
 
   useEffect(() => {
