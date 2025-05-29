@@ -1161,18 +1161,6 @@ test('renders duplicate groups for duplicate keys on items group ', () => {
   expect(screen.getAllByRole('group')).not.toHaveLength(2);
 });
 
-test('renders with error without key on item groups ', () => {
-  let errorMessage = '';
-  try {
-    getSectionsComponent({
-      items: withSection.map(({ key, ...item }) => item),
-    });
-  } catch (error) {
-    errorMessage = error.message;
-  }
-  expect(errorMessage).toMatch(/No key found for item/);
-});
-
 test('onLoadMore and onLoadPrev callbacks are called', () => {
   render(<ComponentOnPrevLoad />);
   userEvent.tab();

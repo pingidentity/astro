@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { AriaRadioGroupProps } from 'react-aria';
 
 import { SharedFieldProps } from './shared/fieldProps';
+import { HelpHintProps } from './helpHint';
 
 export interface RadioGroupFieldProps extends Omit<AriaRadioGroupProps, 'label'>, SharedFieldProps{
     className?: string
@@ -14,4 +15,5 @@ export interface RadioGroupFieldProps extends Omit<AriaRadioGroupProps, 'label'>
     defaultValue?: string
     orientation?: 'horizontal' | 'vertical'
     onChange?: (value: string) => void
+    helpHintProps?: HelpHintProps
 }

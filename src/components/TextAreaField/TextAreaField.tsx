@@ -11,7 +11,15 @@ import { statusDefaultProp } from '../../utils/docUtils/statusProp';
 const displayName = 'TextAreaField';
 
 const TextAreaField = forwardRef<HTMLInputElement, TextAreaFieldProps>((props, ref) => {
-  const { helperText, isUnresizable, rows, status, slots, resizeCallback, labelMode } = props;
+  const {
+    helperText,
+    isUnresizable,
+    rows,
+    status,
+    slots,
+    resizeCallback,
+    labelMode,
+  } = props;
   const {
     fieldContainerProps,
     fieldControlInputProps,

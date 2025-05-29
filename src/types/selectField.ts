@@ -1,6 +1,7 @@
 import { UseSelectFieldProps, UseSelectFieldReturnProps } from '../hooks/useSelectField/useSelectField';
 
 import { SharedFieldProps } from './shared/fieldProps';
+import { HelpHintProps } from './helpHint';
 import { Status } from './item';
 import { StyleProps } from './shared';
 
@@ -25,4 +26,5 @@ export interface SelectFieldBaseProps extends UseSelectFieldReturnProps<object>,
   defaultText?: string;
   selectProps?: Record<string, unknown>;
   isDisabled?: boolean;
+  helpHintProps?: HelpHintProps
 }

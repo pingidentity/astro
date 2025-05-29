@@ -334,6 +334,8 @@ DateField.propTypes = {
   hasFormatHelpText: PropTypes.bool,
   /** Text rendered below the input. */
   helperText: PropTypes.node,
+  /** Props object that is spread directly into the helphint element. */
+  helpHintProps: PropTypes.shape({}),
   /** Whether the field is disabled. */
   isDisabled: PropTypes.bool,
   /** Whether the overlay is currently open. */
