@@ -50,10 +50,6 @@ export const componentSpecificNextGenBlacklist = {
     'Callout Badges',
     'Removable',
   ],
-  Button: [
-    'Color Block Button',
-    'Text Icon Button',
-  ],
   Messages: [
     'Customization',
   ],

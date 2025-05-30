@@ -3,16 +3,24 @@ import chroma from 'chroma-js';
 import { copyButton } from '../codeView/codeView';
 import colors from '../colors/colors';
 
-const { primary: primaryBlue, critical: criticalRed } = colors;
+const { primary: primaryBlue,
+  active_hover: primaryBlueHover,
+  active_pressed: primaryBluePress,
+  critical_hover: criticalRedHover,
+  critical_pressed: criticalRedPress } = colors;
 
 const transitions = {
   transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
 };
 
+const boxShadowNone = {
+  boxShadow: 'none !important',
+};
+
 export const defaultFocus = {
   outline: '2px solid',
   outlineColor: 'active',
-  outlineOffset: '3px',
+  outlineOffset: '2px',
 };
 
 const buttonBase = {
@@ -43,6 +51,7 @@ const buttonBase = {
   '&.is-focused': {
     ...defaultFocus,
   },
+  '&.is-hovered': boxShadowNone,
 };
 
 const neutral = {
@@ -63,11 +72,18 @@ const primary = {
   backgroundColor: 'primary',
   borderColor: 'primary',
   '&.is-pressed': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
-    borderColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
   },
   '&.is-hovered': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
+    backgroundColor: primaryBlueHover,
+    borderColor: primaryBlueHover,
+    ...boxShadowNone,
+  },
+  '&.is-focused': {
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
+    outline: '2px solid',
   },
 };
 
@@ -77,13 +93,17 @@ const secondary = {
   borderColor: 'primary',
   color: 'primary',
   '&.is-pressed': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
-    borderColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
     color: 'white',
+    path: { fill: 'white' },
   },
   '&.is-hovered': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
+    backgroundColor: primaryBlue,
+    borderColor: primaryBlue,
     color: 'white',
+    path: { fill: 'white' },
+    ...boxShadowNone,
   },
 };
 
@@ -92,6 +112,9 @@ const tertiary = {
   backgroundColor: 'transparent',
   borderColor: 'border.base',
   color: 'text.secondary',
+  '&.is-hovered': {
+    ...boxShadowNone,
+  },
 };
 
 const outlineCritical = {
@@ -116,7 +139,7 @@ const inverse = {
 const critical = {
   ...buttonBase,
   backgroundColor: 'critical.bright',
-  borderColor: 'critical',
+  borderColor: 'critical.bright',
   color: 'white',
   '&.is-focused': {
     ...defaultFocus,
@@ -124,12 +147,72 @@ const critical = {
     backgroundColor: 'critical.dark',
   },
   '&.is-pressed': {
-    backgroundColor: chroma.mix(criticalRed.bright, 'black', 0.125, 'rgb').hex(),
-    borderColor: chroma.mix(criticalRed.bright, 'black', 0.125, 'rgb').hex(),
+    backgroundColor: criticalRedPress,
+    borderColor: criticalRedPress,
   },
   '&.is-hovered': {
-    backgroundColor: chroma.mix(criticalRed.bright, 'black', 0.075, 'rgb').hex(),
+    backgroundColor: criticalRedHover,
+    borderColor: criticalRedHover,
     color: 'white',
+    ...boxShadowNone,
+  },
+};
+
+const inline = {
+  ...buttonBase,
+  display: 'inline-flex',
+  height: '29px',
+  lineHeight: 1,
+  fontSize: 'sm',
+  borderRadius: '15px',
+  border: '1px solid',
+  alignSelf: 'center',
+  paddingTop: '0px',
+  paddingBottom: '0px',
+  backgroundColor: 'transparent',
+  color: primaryBlue,
+  borderColor: primaryBlue,
+  '&.is-pressed': {
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
+    color: 'white',
+  },
+  '&.is-hovered': {
+    backgroundColor: primaryBlue,
+    borderColor: primaryBlue,
+    color: 'white',
+    path: { fill: 'white' },
+    ...boxShadowNone,
+  },
+};
+
+const inlinePrimary = {
+  ...buttonBase,
+  display: 'inline-flex',
+  height: '29px',
+  lineHeight: 1,
+  fontSize: 'sm',
+  borderRadius: '15px',
+  border: '1px solid',
+  alignSelf: 'center',
+  paddingTop: '0px',
+  paddingBottom: '0px',
+  backgroundColor: 'primary',
+  color: 'white',
+  borderColor: 'primary',
+  '&.is-pressed': {
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
+  },
+  '&.is-hovered': {
+    backgroundColor: primaryBlueHover,
+    borderColor: primaryBlueHover,
+    ...boxShadowNone,
+  },
+  '&.is-focused': {
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
+    outline: '2px solid',
   },
 };
 
@@ -174,12 +257,75 @@ const paginationMenu = {
 const withIcon = {
   ...secondary,
   display: 'inline-flex',
+  path: { fill: primaryBlue },
 };
 
 const primaryWithIcon = {
   ...primary,
   display: 'inline-flex',
   color: 'white',
+};
+
+const inlineWithIcon = {
+  ...inline,
+  display: 'inline-flex',
+  path: { fill: primaryBlue },
+};
+
+const inlinePrimaryWithIcon = {
+  ...inlinePrimary,
+  display: 'inline-flex',
+  color: 'white',
+};
+
+const colorBlock = {
+  bg: 'gray-200',
+  borderColor: 'gray-200',
+  borderRadius: '1.75rem',
+  width: 150,
+  height: 50,
+  p: '5px 15px 5px 20px',
+  '&.is-hovered': {
+    bg: 'blue-100',
+    borderColor: 'blue-100',
+    ...boxShadowNone,
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-pressed': {
+    bg: 'blue-100',
+    borderColor: 'blue-100',
+  },
+  '&>svg': {
+    color: 'text.primary',
+    fill: 'text.primary',
+  },
+};
+
+const colorBlockPrimary = {
+  ...colorBlock,
+  bg: primaryBlue,
+  borderColor: primaryBlue,
+  '& span': {
+    color: 'white',
+    textAlign: 'left',
+  },
+  '&.is-hovered': {
+    backgroundColor: primaryBlueHover,
+    borderColor: primaryBlueHover,
+    color: 'white',
+    ...boxShadowNone,
+  },
+  '&.is-pressed': {
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
+  },
+  '&.is-focused': {
+    backgroundColor: primaryBluePress,
+    borderColor: primaryBluePress,
+    outline: '2px solid',
+  },
 };
 
 const aiChat = {
@@ -345,8 +491,8 @@ const iconButtons = {
       borderColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
     },
     '&.is-hovered': {
+      ...boxShadowNone,
       border: 'none !important',
-      boxShadow: 'none !important',
       borderColor: 'none !important',
       backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
     },
@@ -375,12 +521,18 @@ const buttons = {
   tertiary,
   inverse,
   critical,
+  inline,
+  inlinePrimary,
   checkboxButton,
   checkboxActiveButton,
   outlineCritical,
   link,
   withIcon,
   primaryWithIcon,
+  inlineWithIcon,
+  inlinePrimaryWithIcon,
+  colorBlock,
+  colorBlockPrimary,
   iconButtons,
   modalCloseButton,
   aiChat,
