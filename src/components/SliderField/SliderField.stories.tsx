@@ -73,14 +73,15 @@ const loremText = 'Lorem ipsum';
 
 export const Default = ({ ...args }) => {
   return (
-    <SliderField label={loremText} defaultValue={40} {...args} />
+    <SliderField label={loremText} {...args} />
   );
 };
 
-export const Controlled = () => {
-  const [value, setValue] = useState<NumberOrNumberPair>(0);
+export const Controlled = ({ ...args }) => {
+  const [value, setValue] = useState<NumberOrNumberPair>(75);
   return (
     <SliderField
+      {...args}
       value={value}
       onChange={setValue}
       displayValue={`(${value}px)`}
@@ -100,6 +101,9 @@ export const MultiThumb = () => {
     <SliderField
       label={loremText}
       isMultiThumb
+      defaultValue={[100, 180]}
+      maxValue={540}
+      minValue={40}
     />
   );
 };

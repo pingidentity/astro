@@ -8,13 +8,12 @@ const SliderActiveTrack = forwardRef<HTMLDivElement, SliderActiveTrackProps>((pr
     className,
     isHorizontal,
     isMultiThumb,
-    state,
+    length,
     sx,
+    trackStart,
     ...others
   } = props;
 
-  const length = isMultiThumb ? `${state.values[1] - state.values[0]}%` : `${state.values[0]}%`;
-  const trackStart = `${state.values[0]}%`;
   const cssLenProp = isHorizontal ? 'width' : 'height';
   const cssStartProp = isHorizontal ? 'left' : 'top';
 
