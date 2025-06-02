@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import { getLengthValues, getLengthValuesMultiThumb } from '../../hooks/useSliderField/useSliderField';
 import { TextProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -276,5 +277,60 @@ describe('SliderField Component', () => {
 
     const container = screen.getByTestId(sliderTestId);
     expect(container).toHaveStyle({ backgroundColor: 'red', padding: '20px' });
+  });
+});
+
+
+describe('getLengthValues', () => {
+  it('should calculate correct values for a single thumb slider', () => {
+    const minValue = 0;
+    const maxValue = 100;
+    const state = { values: [50] };
+
+    const result = getLengthValues(minValue, maxValue, state);
+
+    expect(result).toEqual({
+      length: '50%',
+      trackStart: '50%',
+    });
+  });
+
+  it('should calculate correct values for a multi-thumb slider', () => {
+    const minValue = 0;
+    const maxValue = 100;
+    const state = { values: [30, 70] };
+
+    const result = getLengthValuesMultiThumb(minValue, maxValue, state);
+
+    expect(result).toEqual({
+      length: '40%',
+      trackStart: '30%',
+    });
+  });
+
+  it('should handle edge cases where values are at the boundaries', () => {
+    const minValue = 0;
+    const maxValue = 100;
+    const state = { values: [0, 100] };
+
+    const result = getLengthValuesMultiThumb(minValue, maxValue, state);
+
+    expect(result).toEqual({
+      length: '100%',
+      trackStart: '0%',
+    });
+  });
+
+  it('should handle cases where minValue and maxValue are not 0 and 100', () => {
+    const minValue = 50;
+    const maxValue = 150;
+    const state = { values: [75, 125] };
+
+    const result = getLengthValuesMultiThumb(minValue, maxValue, state);
+
+    expect(result).toEqual({
+      length: '50%',
+      trackStart: '25%',
+    });
   });
 });

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { mergeProps, useNumberFormatter, useSlider } from 'react-aria';
 import { SliderStateOptions, useSliderState } from 'react-stately';
 import type { AriaSliderProps } from '@react-types/slider';
@@ -29,6 +30,37 @@ export const getDisplayValue = ({
     return `${state.getThumbValueLabel(0)} - ${state.getThumbValueLabel(1)}`;
   }
   return state.getThumbValueLabel(0);
+};
+
+export const getLengthValues = (
+  minValue,
+  maxValue,
+  state,
+) => {
+  const total = maxValue - minValue;
+  const firstValue = ((state.values[0] - minValue) / total) * 100;
+  const length = `${firstValue}%`;
+  const trackStart = `${firstValue}%`;
+  return {
+    length,
+    trackStart,
+  };
+};
+
+export const getLengthValuesMultiThumb = (
+  minValue,
+  maxValue,
+  state,
+) => {
+  const total = maxValue - minValue;
+  const firstValue = ((state.values[0] - minValue) / total) * 100;
+  const secondValue = ((state.values[1] - state.values[0]) / total) * 100;
+  const length = `${secondValue}%`;
+  const trackStart = `${firstValue}%`;
+  return {
+    length,
+    trackStart,
+  };
 };
 
 const useSliderField = (props: UseSliderFieldProps) => {
@@ -89,6 +121,25 @@ const useSliderField = (props: UseSliderFieldProps) => {
 
   const state = useSliderState(sliderStateOptions);
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
+
+  useEffect(() => {
+    if (state.values[0] < minValue) {
+      state.setThumbValue(0, minValue);
+    }
+  }, [minValue, state]);
+
+  useEffect(() => {
+    if (state.values.length === 1) {
+      if (state.values[0] > maxValue) {
+        state.setThumbValue(0, maxValue);
+      }
+    }
+    if (state.values.length === 2) {
+      if (state.values[1] > maxValue) {
+        state.setThumbValue(1, maxValue);
+      }
+    }
+  }, [maxValue, state]);
 
   const thumbOptions = {
     ...thumbProps,
@@ -165,6 +216,10 @@ const useSliderField = (props: UseSliderFieldProps) => {
 
   const mergedLabelProps = mergeProps(labelProps, raLabelProps);
 
+  const trackDisplayValues = isMultiThumb
+    ? getLengthValuesMultiThumb(minValue, maxValue, state)
+    : getLengthValues(minValue, maxValue, state);
+
   const labelContainerProps = {
     label,
     labelProps: mergedLabelProps,
@@ -183,6 +238,7 @@ const useSliderField = (props: UseSliderFieldProps) => {
     isHorizontal,
     isVertical,
     state,
+    ...trackDisplayValues,
   };
 
   const wrapperPropsSpread = {
