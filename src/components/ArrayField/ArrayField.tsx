@@ -11,6 +11,7 @@ import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
   const {
     addButtonLabel,
+    addButtonProps,
     defaultValue,
     fieldControlWrapperProps,
     value,
@@ -180,6 +181,7 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
             variant="link"
             onPress={onFieldAdd}
             sx={{ width: 'fit-content', mt: 'xs' }}
+            {...addButtonProps}
           >
             <Text variant="label" color="active">
               {addButtonLabel}

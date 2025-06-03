@@ -207,3 +207,9 @@ test('renders right slot content', () => {
   expect(rightSlot).toBeInTheDocument();
   expect(rightSlot).toHaveTextContent('Right Slot Content');
 });
+
+test('tooltipTrigger applies nested props correctly', () => {
+  getComponent({ addButtonProps: { 'aria-label': 'add a new field' } });
+
+  expect(screen.queryByRole('button')).toHaveAttribute('aria-label', 'add a new field');
+});
