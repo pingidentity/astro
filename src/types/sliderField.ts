@@ -43,8 +43,10 @@ export interface SliderActiveTrackProps {
     isHorizontal?: boolean,
     isMultiThumb?: boolean,
     isVertical?: boolean,
+    length: string,
     state: SliderState,
     sx?: ThemeUICSSObject | object,
+    trackStart: string,
 }
 
 export interface SliderFieldProps {
