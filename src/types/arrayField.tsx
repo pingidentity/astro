@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeUICSSObject } from 'theme-ui';
 
+import { ButtonProps } from './button';
 import { LabelProps, Status, ValidPositiveInteger } from '.';
 
 export type RenderFieldFunction = (
@@ -52,7 +53,9 @@ export interface ArrayFieldProps {
   slots?: {
     right?: React.ReactNode,
     left?: React.ReactNode,
-  }
+  },
+  /** Props for the Add button */
+  addButtonProps?: ButtonProps;
 }
 
 export interface ArrayFieldDeleteButtonProps {
