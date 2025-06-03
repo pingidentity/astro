@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.124.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.123.0...@pingux/astro@2.124.0) (2025-06-03)
+
+
+### Bug Fixes
+
+* [UIP-7599] Fix Astro SliderField ActiveTrack ([f15ea49](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f15ea496b83768c6a64544dce236350b274db275))
+* [UIP-7600] MultivaluesField selected keys are initially not filtered out ([22e1951](https://gitlab.corp.pingidentity.com/ux/pingux/commit/22e195100daded00a8f0623d55ad7861d9e34dc6))
+
+
+### Features
+
+* [UIP-7544] Button Update to match Figma ([1a0ae52](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1a0ae52060a275bcb867058cc8c524201edfef0b))
+
+
+
+
+
 # [2.123.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.122.0...@pingux/astro@2.123.0) (2025-05-29)
 
 
