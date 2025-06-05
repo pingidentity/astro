@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { RockerButton, RockerButtonGroup } from '../../index';
+import { AstroProvider, NextGenTheme, RockerButton, RockerButtonGroup } from '../..';
 import { RockerButtonGroupProps } from '../../types';
 
 import RockerButtonGroupReadme from './RockerButtonGroup.mdx';
@@ -78,7 +78,7 @@ export const customColors: StoryFn = () => (
       name="and"
       key="and"
       selectedStyles={{
-        bg: '#640099',
+        bg: '#640099 !important',
       }}
     >
       And
@@ -87,7 +87,7 @@ export const customColors: StoryFn = () => (
       name="or"
       key="or"
       selectedStyles={{
-        bg: '#4660A2',
+        bg: '#4660A2 !important',
       }}
     >
       Or
@@ -96,7 +96,7 @@ export const customColors: StoryFn = () => (
       name="maybe"
       key="maybe"
       selectedStyles={{
-        bg: 'decorative.4',
+        bg: '#e30080 !important',
       }}
     >
       Maybe
