@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.125.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.124.0...@pingux/astro@2.125.0) (2025-06-05)
+
+
+### Features
+
+* [UIP-7537] Add Onyx theme styling to RockerButtonGroup ([f9e2258](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f9e2258de3081f8521a178743c8ffc383f3c65a2))
+* [UIP-7641] ArrayField add addButtonProps ([62082f7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/62082f7028ff624da9a18487bec40dd89b2e158c))
+
+
+
+
+
 # [2.124.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.123.0...@pingux/astro@2.124.0) (2025-06-03)
 
 
