@@ -59,6 +59,28 @@ const modal = {
   },
 };
 
+const rockerButton = {
+  innerContainer: {
+    border: 0,
+    boxShadow: 'none',
+    backgroundColor: 'gray-900',
+    'button': {
+      backgroundColor: 'gray-900',
+      color: 'blue-400',
+      '&.is-selected': {
+        color: 'gray-900',
+      },
+      '&.is-hovered': {
+        color: 'gray-900',
+      },
+      '&.is-pressed': {
+        color: 'gray-900',
+      },
+    },
+
+  },
+};
+
 const attachment = {
   container: {
     backgroundColor: 'background.secondary',
@@ -73,6 +95,7 @@ const tooltip = {
 };
 
 export default {
+  rockerButton,
   attachment,
   avatar,
   message,

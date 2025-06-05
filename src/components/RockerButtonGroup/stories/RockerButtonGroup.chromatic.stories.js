@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { RockerButton, RockerButtonGroup } from '../../../index';
-import WithUiLibraryCss from '../withUiLibraryCss';
+import WithUiLibraryCss from '../../../styles/themeOverrides/withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only RockerButtonGroup',
