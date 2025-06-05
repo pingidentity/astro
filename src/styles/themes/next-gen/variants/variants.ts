@@ -320,6 +320,57 @@ const overlayPanel = {
   },
 };
 
+const rockerButton = {
+  innerContainer: {
+    height: 50,
+    boxShadow: 'none',
+    backgroundColor: 'white',
+    borderRadius: '50px',
+    padding: 0,
+    'button': {
+      backgroundColor: 'white',
+      padding: '0px 15px',
+      height: '100%',
+      color: 'active',
+      border: '1px solid',
+      borderColor: 'active',
+      borderRadius: 0,
+      '&.is-selected': {
+        color: 'white',
+        backgroundColor: 'active',
+      },
+      '&.is-hovered': {
+        backgroundColor: '#1462C8 !important',
+        color: 'white',
+      },
+      '&.is-pressed': {
+        backgroundColor: '#135CBC !important',
+        color: 'white',
+      },
+      '&.is-focused': {
+        outline: '2px solid',
+        outlineColor: 'focus',
+        outlineOffset: '2px',
+      },
+    },
+    'button:not(:first-child)': {
+      borderLeft: 0,
+    },
+    'button:first-child': {
+      borderTopLeftRadius: '50px',
+      borderBottomLeftRadius: '50px',
+    },
+    'button:last-child': {
+      borderTopRightRadius: '50px',
+      borderBottomRightRadius: '50px',
+    },
+
+  },
+  thumbSwitch: {
+    textTransform: 'none',
+  },
+};
+
 const loader = {
   withinListView: {
     color: 'active',
@@ -354,6 +405,7 @@ export default {
   suggestion,
   response,
   skeleton,
+  rockerButton,
   tooltip,
   footer,
   loader,

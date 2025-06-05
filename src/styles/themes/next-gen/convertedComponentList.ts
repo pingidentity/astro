@@ -16,6 +16,7 @@ const nextGenConvertedComponents = [
   'MultiValuesField',
   'TextAreaField',
   'RadioGroupField',
+  'RockerButtonGroup',
   'Tabs',
   'ProgressBar',
   'NavBar',
