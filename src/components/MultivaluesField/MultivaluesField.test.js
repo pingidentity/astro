@@ -965,6 +965,36 @@ test('opening and closing listbox fires "onOpenChange" in condensed mode', () =>
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
 
+test('in condensed mode, clicking outside of listbox closes listbox', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ mode: 'condensed', onOpenChange });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenCalledWith(true);
+  userEvent.click(document.body);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenCalledWith(false);
+});
+test('in condensed mode, tabbing outside of listbox closes listbox', () => {
+  const onOpenChange = jest.fn();
+  getComponent({ mode: 'condensed', onOpenChange });
+  const input = screen.getByRole('combobox');
+  userEvent.tab();
+  expect(input).toHaveFocus();
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenCalledWith(true);
+  // one tab to move focus to select all button
+  userEvent.tab();
+  // one tab to move focus to list
+  userEvent.tab();
+  // one tab to move focus beyond lsit
+  userEvent.tab();
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  expect(onOpenChange).toHaveBeenCalledWith(false);
+});
+
 test('selected keys in condensed mode ', () => {
   getComponent({ mode: 'condensed', selectedKeys: [items[1].key, items[2].key] });
 
