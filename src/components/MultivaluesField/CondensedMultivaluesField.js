@@ -209,6 +209,19 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     if (onKeyDown) onKeyDown(e.nativeEvent);
   };
 
+  const handleBlur = e => {
+    const relatedTarget = e.relatedTarget || document.activeElement;
+
+    if (
+      inputWrapperRef.current?.contains(relatedTarget)
+        || listBoxRef.current?.contains(relatedTarget)
+        || buttonRef.current === relatedTarget
+    ) {
+      return;
+    }
+    setIsOpen(false);
+  };
+
   const [selectionState, setSelectionState] = useState('Select All');
 
   const arrayItems = Array.from(items);
@@ -275,6 +288,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           isLoading={loadingState === loadingStates.LOADING_MORE}
           aria-label="List of options"
           isCondensed={mode === 'condensed'}
+          onBlur={e => handleBlur(e)}
           {...overlayProps}
         />
       </ScrollBox>
