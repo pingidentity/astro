@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.126.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.125.0...@pingux/astro@2.126.0) (2025-06-10)
+
+
+### Bug Fixes
+
+* [UIP-7610] MultivaluesField condensed popover fix ([f65f8a8](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f65f8a8314bd4f82a48080618c1df0bcf7a40112))
+
+
+### Features
+
+* [UIP-7601] CodeEditor improvements ([0d3b467](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0d3b467ed3173ac24c5341a3a4c0b5557c44dee9))
+
+
+
+
+
 # [2.125.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.124.0...@pingux/astro@2.125.0) (2025-06-05)
 
 
