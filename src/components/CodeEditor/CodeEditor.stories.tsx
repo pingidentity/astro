@@ -88,7 +88,7 @@ console.log(factorial(5));
 export const TypescriptEditor:StoryFn<CodeEditorProps> = () => {
   return (
     <CodeEditor
-      value={tsCode}
+      defaultValue={tsCode}
       language="typescript"
       height="200px"
     />
@@ -98,7 +98,7 @@ export const TypescriptEditor:StoryFn<CodeEditorProps> = () => {
 export const JavascriptEditor:StoryFn<CodeEditorProps> = () => {
   return (
     <CodeEditor
-      value={jsCode}
+      defaultValue={jsCode}
       language="javascript"
       height="200px"
     />
@@ -108,9 +108,20 @@ export const JavascriptEditor:StoryFn<CodeEditorProps> = () => {
 export const JsonEditor:StoryFn<CodeEditorProps> = () => {
   return (
     <CodeEditor
-      value={jsonCode}
+      defaultValue={jsonCode}
       language="json"
       height="200px"
+    />
+  );
+};
+
+export const ReadOnly:StoryFn<CodeEditorProps> = () => {
+  return (
+    <CodeEditor
+      defaultValue={jsonCode}
+      language="json"
+      height="200px"
+      isReadOnly
     />
   );
 };
