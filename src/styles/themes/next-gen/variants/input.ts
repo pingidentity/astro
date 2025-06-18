@@ -47,6 +47,10 @@ input.promptInput = {
 
 input.search = {
   ...input,
+  height: '50px',
+  pl: '4em !important',
+  pr: 'xl',
+  color: 'font.base',
   '&.is-disabled': {
     ...readOnlyandDisabledStyles,
     '> input': {

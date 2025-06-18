@@ -39,6 +39,12 @@ const iconButtons = {
       backgroundColor: '#0a0b0d',
     },
   },
+  filter: {
+    ...baseIconButton,
+    '&.is-hovered': {
+      backgroundColor: 'gray-700',
+    },
+  },
 };
 
 const buttons = {

@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import Users from '@pingux/mdi-react/AccountGroupIcon';
 import FilterIcon from '@pingux/mdi-react/FilterIcon';
+import FilterVariantIcon from '@pingux/mdi-react/FilterVariantIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { useDebounce } from '../../hooks';
+import { useDebounce, useGetTheme } from '../../hooks';
 import {
   Box,
-  Button,
   Icon,
+  IconButton,
   SearchField,
   Text,
 } from '../../index';
 import { SearchFieldProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 
@@ -67,7 +69,7 @@ export default {
     ...inputFieldAttributeBaseArgTypes,
   },
   args: {
-    placeholder: 'Search Groups',
+    placeholder: 'Search',
   },
 } as Meta;
 
@@ -78,6 +80,13 @@ export const Default:StoryFn<SearchFieldProps> = (args:SearchFieldProps) => (
     onSubmit={text => alert(text)} // eslint-disable-line no-alert
   />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.searchField.onyx,
+  },
+};
 
 export const Controlled:StoryFn<SearchFieldProps> = () => {
   const [value, setValue] = useState<string>('');
@@ -128,16 +137,20 @@ export const ControlledWithDebouncedInput:StoryFn<SearchFieldProps> = () => {
 };
 
 export const WithFilter:StoryFn<SearchFieldProps> = () => {
+  const { themeState: { isOnyx } } = useGetTheme();
   return (
-    <Box p="xx" isRow gap="md">
+    <Box p="xx" isRow gap={isOnyx ? 'lg' : 'md'}>
       <SearchField
         aria-label="search items"
         placeholder="Search"
-        size="container.xs"
+        width="650px"
       />
-      <Button variant="filter" aria-label="filter button">
-        <Icon icon={FilterIcon} />
-      </Button>
+      <IconButton variant="filter" aria-label="filter button">
+        <Icon
+          icon={isOnyx ? FilterVariantIcon : FilterIcon}
+          title={{ name: 'Filter Icon' }}
+        />
+      </IconButton>
     </Box>
   );
 };

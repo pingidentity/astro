@@ -1,8 +1,11 @@
 import { ThemeUICSSObject } from 'theme-ui';
 
+import { text } from './text';
+
 export const input: ThemeUICSSObject = {
   backgroundColor: 'background.base',
   borderColor: 'border.input',
+  '&::placeholder': text.placeholder,
 };
 
 

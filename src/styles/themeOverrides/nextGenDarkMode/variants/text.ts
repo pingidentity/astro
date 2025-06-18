@@ -15,4 +15,8 @@ export const text = {
   copyRightText: {
     color: 'gray-400',
   },
+  placeholder: {
+    color: 'gray-400',
+    fontWeight: 1,
+  },
 };
