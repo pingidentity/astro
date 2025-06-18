@@ -100,5 +100,8 @@ export const colors = {
     card: '#1a1e22',
     hover: hoverDark,
   },
+  font: {
+    base: nextGenColors['gray-100'],
+  },
   badge,
 };

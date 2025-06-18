@@ -74,6 +74,7 @@ input.large = {
 
 input.search = {
   ...input,
+  px: 'xl',
   '&.is-focused': {
     ...defaultFocus,
   },

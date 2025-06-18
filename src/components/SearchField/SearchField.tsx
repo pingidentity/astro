@@ -74,8 +74,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>((props, ref) 
         <Input
           variant="forms.input.search"
           ref={searchRef}
-          pl="xl"
-          pr="xl"
           {...fieldControlInputProps as Omit<FieldControlInputProps, 'onChange'>}
         />
         {

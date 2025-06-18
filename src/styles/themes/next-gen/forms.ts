@@ -31,6 +31,10 @@ export const search = {
   wrapper: {
     opacity: 1,
   },
+  icon: {
+    color: 'font.base',
+    ml: '20px',
+  },
 };
 
 export const comboBox = {

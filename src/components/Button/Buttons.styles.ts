@@ -15,7 +15,7 @@ export const base = {
   ...textVariants.buttonLabel,
 };
 
-const defaultActive = {
+export const defaultActive = {
   bg: 'active',
   border: '1px solid',
   borderColor: 'active',
@@ -26,7 +26,7 @@ const defaultActive = {
   },
 };
 
-const defaultHover = {
+export const defaultHover = {
   bg: 'accent.99',
   border: '1px solid',
   borderColor: 'accent.40',
@@ -236,15 +236,6 @@ const defaultVariant = {
   },
 };
 
-const filter = {
-  ...defaultVariant,
-  px: 'sm',
-  borderColor: 'neutral.80',
-  height: 40,
-  color: 'active',
-  display: 'flex',
-};
-
 const colorBlock = {
   bg: 'neutral.95',
   border: '1px solid',
@@ -376,7 +367,6 @@ export default {
     },
   },
   exampleText,
-  filter,
   headerBar,
   inline,
   inlinePrimary,

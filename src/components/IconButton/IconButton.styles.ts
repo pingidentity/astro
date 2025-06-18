@@ -1,5 +1,5 @@
 import { badgeDeleteButton, deleteButton, invertedBadgeDeleteButton } from '../Badge/Badge.styles';
-import { defaultFocus } from '../Button/Buttons.styles';
+import { defaultActive, defaultFocus, defaultHover } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
 import { containedIcon } from '../DatePicker/DatePicker.styles';
@@ -153,6 +153,35 @@ const searchClearButton = {
   right: 10,
 };
 
+const filter = {
+  ...base,
+  bg: 'white',
+  border: '1px solid',
+  outline: 'none',
+  borderColor: 'neutral.80',
+  borderRadius: '2px',
+  height: '40px',
+  width: '40px',
+  display: 'flex',
+  px: 'sm',
+  alignSelf: 'center',
+  path: {
+    fill: 'active',
+  },
+  '&.is-hovered': {
+    ...defaultHover,
+    path: {
+      fill: 'accent.40',
+    },
+  },
+  '&.is-pressed': {
+    ...defaultActive,
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+};
+
 export default {
   base,
   bidirectional,
@@ -178,4 +207,5 @@ export default {
   applicationPortal,
   applicationPortalPinned,
   searchClearButton,
+  filter,
 };
