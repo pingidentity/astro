@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.127.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.126.0...@pingux/astro@2.127.0) (2025-06-18)
+
+
+### Features
+
+* [UIP-7562] SearchField Update to match specs ([96a1915](https://gitlab.corp.pingidentity.com/ux/pingux/commit/96a19155fe69f600c0c5bea6b9bbe1dfcf7e505d))
+
+
+
+
+
 # [2.126.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.125.0...@pingux/astro@2.126.0) (2025-06-10)
 
 
