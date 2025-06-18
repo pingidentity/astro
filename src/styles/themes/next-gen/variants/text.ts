@@ -58,7 +58,7 @@ export const text = {
     color: 'text.primary',
   },
   placeholder: {
-    color: 'gray-500',
+    color: 'gray-600',
     fontWeight: 1,
   },
   paragraph: {

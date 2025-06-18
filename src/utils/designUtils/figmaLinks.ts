@@ -222,4 +222,7 @@ export const FIGMA_LINKS = {
     withCharts: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44694-39944&t=r7CoWppWfQQ6G2t8-4',
     withExtraLongText: 'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44694-40069&t=r7CoWppWfQQ6G2t8-4',
   },
+  searchField: {
+    onyx: 'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=249-542&p=f&t=ZRXGSYrM1OXJ41QB-0',
+  },
 };

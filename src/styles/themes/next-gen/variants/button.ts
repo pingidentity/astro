@@ -502,7 +502,14 @@ const iconButtons = {
   },
   searchClearButton: {
     ...baseIconButton,
+    width: '20px',
+    height: '20px',
     border: 'none',
+    '& > svg': {
+      minWidth: '18px',
+      width: '18px',
+      height: '18px',
+    },
     '&.is-hovered': {
       bg: 'background.hover',
     },
@@ -510,7 +517,26 @@ const iconButtons = {
       bg: 'background.hover',
     },
     position: 'absolute',
-    right: 10,
+    right: 20,
+  },
+  filter: {
+    ...baseIconButton,
+    bg: 'transparent',
+    border: '2px solid',
+    borderColor: 'transparent',
+    width: '32px',
+    height: '32px',
+    '&.is-hovered': {
+      border: '2px solid',
+      borderColor: 'transparent',
+      backgroundColor: 'gray-100',
+      path: { fill: 'dark' },
+    },
+    '&.is-pressed': {
+      backgroundColor: 'gray-100',
+      borderColor: 'gray-200',
+      path: { fill: 'dark' },
+    },
   },
 };
 

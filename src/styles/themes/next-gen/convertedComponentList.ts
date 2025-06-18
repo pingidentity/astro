@@ -79,6 +79,9 @@ export const astroBlacklistStory = {
   NavBar: [
     'Onyx Default',
   ],
+  SearchField: [
+    'Onyx With Filter',
+  ],
 };
 
 export const nextGenOnlyComponents = [
