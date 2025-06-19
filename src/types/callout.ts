@@ -3,4 +3,5 @@ import { DOMAttributes, StyleProps } from './shared';
 
 export interface CalloutProps extends StyleProps, DOMAttributes {
   status?: Status;
+  icon?: React.ReactNode;
 }
