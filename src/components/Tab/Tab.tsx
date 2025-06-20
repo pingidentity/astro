@@ -64,7 +64,6 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
         ref={tabRef}
         {...itemProps}
         title={itemProps?.textValue}
-        data-testid="test-me"
       >
         <>
           {itemProps?.icon}

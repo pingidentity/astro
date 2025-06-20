@@ -45,7 +45,7 @@ const getComponent = (props = {}, { tabs = defaultTabs, renderFn = render } = {}
   // <CacheProvider value={emotionCache}>
   <Tabs {...defaultProps} {...props}>
     {tabs.map(({ name, children, props: tabProps }) => (
-      <Tab key={name} title={name} {...tabProps}>
+      <Tab key={name} title={name} {...tabProps} data-testid={`testing-${name}`}>
         {children}
       </Tab>
     ))}
@@ -313,7 +313,7 @@ test('tooltip renders on tab\'s hover in `tooltip` mode', async () => {
   // fireEvent.mouseMove(tab1);
   // fireEvent.mouseEnter(tab1);
   // await userEvent.hover(tab1);
-  const test = screen.getAllByTestId('test-me')[1];
+  const test = screen.getByTestId('testing-Tab 2');
   fireEvent.mouseMove(test);
   fireEvent.mouseEnter(test);
   await userEvent.hover(test);

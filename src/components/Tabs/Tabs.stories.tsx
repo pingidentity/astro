@@ -201,7 +201,7 @@ export const CustomTabLine: StoryFn = () => (
 export const CustomPanelProps: StoryFn = () => (
   <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
     {(item: TabListItemProps) => (
-      <Tab key={item.name} title={item.name}>
+      <Tab key={item.name} title={item.name} data-testid={`testing-${item.name}`}>
         {item.children}
       </Tab>
     )}
