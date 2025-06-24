@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.128.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.127.0...@pingux/astro@2.128.0) (2025-06-24)
+
+
+### Bug Fixes
+
+* [UIP-7671] Tab unable to pass data-testid ([1b13eae](https://gitlab.corp.pingidentity.com/ux/pingux/commit/1b13eae5f4a944a915fe45dc0431a8051690da07))
+
+
+### Features
+
+* [UIP-7657] Add ability to pass custom icon to Callout ([c4b6dc1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/c4b6dc1850e8da42b09451fdbb9c038ea1c3de82))
+
+
+
+
+
 # [2.127.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.126.0...@pingux/astro@2.127.0) (2025-06-18)
 
 
