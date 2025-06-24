@@ -1,6 +1,10 @@
 import React from 'react';
+import CheckBoldIcon from '@pingux/mdi-react/CheckBoldIcon';
 import { screen } from '@testing-library/react';
 
+import {
+  Icon,
+} from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -59,5 +63,13 @@ describe('Callout', () => {
     getComponent({ status });
 
     screen.getByTestId(icon);
+  });
+
+  test('renders custom icon', () => {
+    const customIcon = <Icon icon={CheckBoldIcon} size={14} data-testid="iconId" />;
+
+    getComponent({ icon: customIcon });
+
+    expect(screen.getByTestId('iconId')).toBeInTheDocument();
   });
 });

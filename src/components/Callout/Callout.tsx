@@ -27,7 +27,7 @@ const defaultIconProps = {
  */
 
 const Callout = forwardRef<HTMLElement, CalloutProps>(({
-  children, status = statuses.DEFAULT, ...others
+  children, status = statuses.DEFAULT, icon, ...others
 }, ref) => (
   <Box
     ref={ref}
@@ -37,12 +37,14 @@ const Callout = forwardRef<HTMLElement, CalloutProps>(({
     variant={calloutProps[status].variant}
     {...others}
   >
-    <NoticeIcon
-      color={calloutProps[status].color}
-      status={status}
-      aria-label={`${status}-icon`}
-      {...defaultIconProps}
-    />
+    {icon || (
+      <NoticeIcon
+        color={calloutProps[status].color}
+        status={status}
+        aria-label={`${status}-icon`}
+        {...defaultIconProps}
+      />
+    )}
     {children}
   </Box>
 ));

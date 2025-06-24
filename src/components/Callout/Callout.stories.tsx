@@ -1,10 +1,13 @@
 import React from 'react';
+import CheckBoldIcon from '@pingux/mdi-react/CheckBoldIcon';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Box,
   Callout,
+  Icon,
   Link,
   Text,
 } from '../../index';
@@ -134,3 +137,29 @@ Warning.parameters = {
     url: FIGMA_LINKS.callout.warning,
   },
 };
+
+export const WithCustomIcon: StoryFn = () => (
+  <Callout
+    icon={(
+      <Box
+        variant="stepper.step.completed"
+        mx="md"
+        minHeight={25}
+        minWidth={25}
+        height={25}
+        width={25}
+      >
+        <Icon
+          icon={CheckBoldIcon}
+          title={{ name: 'Check Circle Outline Icon' }}
+        />
+      </Box>
+    )}
+  >
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
+    </Text>
+  </Callout>
+);
