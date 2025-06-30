@@ -44,6 +44,7 @@ const popoverContainer = {
   p: '10px',
   fontSize: 'sm',
   fontWeight: 1,
+  fontFamily: 'standard',
 };
 
 export default { hintButton, popoverContainer };

@@ -31,6 +31,17 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Box',
+          'Button',
+          'Card',
+          'Text',
+          'TextField',
+        ],
+      },
+    },
   },
   argTypes: {
     ...cardArgTypes,
@@ -43,6 +54,13 @@ export default {
 export const Default = args => (
   <Card {...args} />
 );
+
+Default.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.card.default,
+  },
+};
 
 export const HeaderAndFooter = args => {
   const textStyling = {
@@ -92,13 +110,6 @@ CardWidth.parameters = {
   },
 };
 
-Default.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.card.default,
-  },
-};
-
 export const CardRow: StoryFn<CardProps> = args => {
   const sx: SxObject = {
     li: {
@@ -133,7 +144,7 @@ CardRow.parameters = {
   },
 };
 
-export const InteractiveCard = () => {
+export const InteractiveCard = args => {
   const sx: ThemeUICSSObject = {
     alignContent: 'center',
     height: '221px',
@@ -144,6 +155,7 @@ export const InteractiveCard = () => {
 
   return (
     <Card
+      {...args}
       onPress={() => console.log('card pressed')}
       onHoverStart={() => console.log('card hovered')}
       tabIndex="0"
@@ -162,8 +174,8 @@ InteractiveCard.parameters = {
   },
 };
 
-export const WithInteractiveContent = () => (
-  <Card isInteractiveWithin>
+export const WithInteractiveContent = args => (
+  <Card isInteractiveWithin {...args}>
     <Text>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sed ratione,
       recusandae ipsam explicabo, quasi vel maxime sint harum qui rerum perferendis.
@@ -177,7 +189,7 @@ export const WithInteractiveContent = () => (
   </Card>
 );
 
-export const ActiveCard = () => {
+export const ActiveCard = args => {
   const sx: ThemeUICSSObject = {
     alignContent: 'center',
     height: '221px',
@@ -190,6 +202,7 @@ export const ActiveCard = () => {
 
   return (
     <Card
+      {...args}
       tabIndex="0"
       variant="cards.activeCard"
       sx={sx}

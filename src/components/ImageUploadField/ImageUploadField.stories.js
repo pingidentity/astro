@@ -23,9 +23,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -96,11 +93,12 @@ export const Default = args => {
   );
 };
 
-export const CustomDefaultImage = () => (
+export const CustomDefaultImage = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
     <ImageUploadField
+      {...args}
       label="Upload Image"
       defaultPreviewImage="https://picsum.photos/id/1056/200/300"
       previewHeight={150}
@@ -109,11 +107,12 @@ export const CustomDefaultImage = () => (
   </OverlayProvider>
 );
 
-export const CustomItemText = () => (
+export const CustomItemText = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
     <ImageUploadField
+      {...args}
       label="Upload Image"
       previewHeight={150}
       previewWidth={150}
@@ -123,11 +122,12 @@ export const CustomItemText = () => (
   </OverlayProvider>
 );
 
-export const ComponentAsDefaultImage = () => (
+export const ComponentAsDefaultImage = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
     <ImageUploadField
+      {...args}
       label="Upload Image with component as default image"
       previewHeight={150}
       previewWidth={150}

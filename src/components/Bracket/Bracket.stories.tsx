@@ -16,9 +16,6 @@ export default {
   component: Bracket,
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <BracketReadme />
@@ -26,13 +23,43 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Bracket'],
+      },
+    },
+  },
+  argTypes: {
+    isLast: {
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the bracket will be displayed as the last one.',
+    },
+    color: {
+      control: {
+        type: 'text',
+      },
+    },
+    variant: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    role: {
+      control: false,
+    },
+    'data-testid': {
+      control: false,
+    },
   },
 } as Meta;
 
-export const Default: StoryFn<BracketProps> = () => {
+export const Default: StoryFn<BracketProps> = args => {
   return (
     <Box p="md" ml="sm">
-      <Bracket />
+      <Bracket {...args} />
     </Box>
   );
 };

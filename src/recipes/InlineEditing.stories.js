@@ -24,6 +24,9 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 export default {
   title: 'Recipes/Inline Editing',
   decorators: [withDesign],
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const EditableAreaContext = createContext();

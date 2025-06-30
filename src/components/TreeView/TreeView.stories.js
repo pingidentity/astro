@@ -16,9 +16,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
     a11y: {
       config: {
@@ -36,6 +33,7 @@ export default {
         ],
       },
     },
+    codesandbox: false,
   },
 };
 
@@ -128,7 +126,6 @@ const initialAsyncItems = [
     items: [],
   },
 ];
-
 
 export const Default = args => {
   const tree = useTreeData({

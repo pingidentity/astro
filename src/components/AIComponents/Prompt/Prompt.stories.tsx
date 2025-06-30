@@ -8,6 +8,9 @@ import Prompt from './Prompt';
 export default {
   title: 'AI Components/Prompt',
   component: Prompt,
+  parameters: {
+    codesandbox: false,
+  },
 } as Meta;
 
 export const Default = () => (

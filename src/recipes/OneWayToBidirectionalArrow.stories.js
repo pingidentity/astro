@@ -16,6 +16,9 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 
 export default {
   title: 'Recipes/One Way to Bidirectional Arrow',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const items = [

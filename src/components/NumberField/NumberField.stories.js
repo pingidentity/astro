@@ -19,9 +19,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -100,8 +97,9 @@ export default {
 
 export const Default = args => <NumberField {...args} />;
 
-export const Decimals = () => (
+export const Decimals = args => (
   <NumberField
+    {...args}
     label="Adjust exposure"
     defaultValue={0}
     formatOptions={{
@@ -118,8 +116,9 @@ export const ControlledState = () => {
   return <NumberField label="Controlled State" value={value} onChange={setValue} />;
 };
 
-export const CurrencyValues = () => (
+export const CurrencyValues = args => (
   <NumberField
+    {...args}
     label="Transaction amount"
     defaultValue={45}
     formatOptions={{
@@ -131,10 +130,11 @@ export const CurrencyValues = () => (
   />
 );
 
-export const DisabledAndReadOnly = () => (
+export const DisabledAndReadOnly = args => (
   <>
-    <NumberField label="Disabled" isDisabled value={25} />
+    <NumberField {...args} label="Disabled" isDisabled value={25} />
     <NumberField
+      {...args}
       label="Read only"
       isReadOnly
       value={32}
@@ -143,20 +143,22 @@ export const DisabledAndReadOnly = () => (
   </>
 );
 
-export const MinimumAndMaximumValues = () => (
-  <NumberField label="Enter your age" minValue={0} />
+export const MinimumAndMaximumValues = args => (
+  <NumberField {...args} label="Enter your age" minValue={0} />
 );
 
-export const StepValues = () => (
+export const StepValues = args => (
   <>
-    <NumberField label="Step" step={10} />
+    <NumberField {...args} label="Step" step={10} />
     <NumberField
+      {...args}
       label="Step + minValue"
       minValue={2}
       step={3}
       containerProps={{ sx: { marginTop: '15px' } }}
     />
     <NumberField
+      {...args}
       label="Step + minValue + maxValue"
       minValue={2}
       maxValue={21}
@@ -167,12 +169,13 @@ export const StepValues = () => (
   </>
 );
 
-export const WithHelperText = () => (
-  <NumberField label="Helper Text" defaultValue={88} helperText="Useful Text" />
+export const WithHelperText = args => (
+  <NumberField {...args} label="Helper Text" defaultValue={88} helperText="Useful Text" />
 );
 
-export const Units = () => (
+export const Units = args => (
   <NumberField
+    {...args}
     label="Package width"
     defaultValue={4}
     formatOptions={{

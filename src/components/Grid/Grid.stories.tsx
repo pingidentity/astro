@@ -19,13 +19,33 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Grid', 'Text'],
+      },
+    },
+  },
+  argTypes: {
+    repeat: {
+      options: ['fit', 'fill'],
+      control: { type: 'select' },
+    },
+    gap: {
+      control: { type: 'number' },
+    },
+    width: {
+      control: false,
+    },
+    columns: {
+      control: false,
+    },
   },
 } as Meta;
 
-export const Default: StoryFn<GridProps> = () => (
+export const Default: StoryFn<GridProps> = args => (
   <>
     <Text mb="sm" fontStyle="italic">Minimum width of child elements at responsive breakpoints</Text>
-    <Grid width={[128, null, 192]}>
+    <Grid width={[128, null, 192]} {...args}>
       <Box bg="accent.90">Box</Box>
       <Box bg="neutral.80">Box</Box>
       <Box bg="accent.90">Box</Box>
@@ -33,7 +53,7 @@ export const Default: StoryFn<GridProps> = () => (
     </Grid>
 
     <Text mt="xl" mb="sm" fontStyle="italic">Defined number of equally-sized columns at responsive breakpoints</Text>
-    <Grid gap={2} columns={[2, null, 4]}>
+    <Grid gap={2} columns={[2, null, 4]} {...args}>
       <Box bg="accent.90">Box</Box>
       <Box bg="neutral.80">Box</Box>
       <Box bg="accent.90">Box</Box>
@@ -41,7 +61,7 @@ export const Default: StoryFn<GridProps> = () => (
     </Grid>
 
     <Text mt="xl" mb="sm" fontStyle="italic">Columns using grid syntax sizing at responsive breakpoints</Text>
-    <Grid gap={2} columns={[2, '1fr 2fr']}>
+    <Grid gap={2} columns={[2, '1fr 2fr']} {...args}>
       <Box bg="accent.90">Box</Box>
       <Box bg="neutral.80">Box</Box>
       <Box bg="accent.90">Box</Box>

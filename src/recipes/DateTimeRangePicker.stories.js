@@ -22,6 +22,9 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 export default {
   title: 'Recipes/DateTimeRangePicker',
   decorators: [withDesign],
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const dropdownItems = [

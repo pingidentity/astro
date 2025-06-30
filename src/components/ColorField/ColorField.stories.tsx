@@ -21,8 +21,10 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['ColorField', 'OverlayProvider'],
       },
     },
   },

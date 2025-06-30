@@ -1,7 +1,8 @@
 const container = {
-  backgroundColor: '#000000',
+  backgroundColor: 'tooltip',
   borderRadius: '4px',
   fontSize: 'xs',
+  fontFamily: 'standard',
 };
 
 export default {

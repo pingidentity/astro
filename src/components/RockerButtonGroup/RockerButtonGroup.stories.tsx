@@ -18,8 +18,13 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'RockerButton',
+          'RockerButtonGroup',
+        ],
       },
     },
   },
@@ -53,6 +58,10 @@ export const Uncontrolled: StoryFn = () => (
   </RockerButtonGroup>
 );
 
+Uncontrolled.parameters = {
+  codesandbox: false,
+};
+
 export const Controlled: StoryFn = () => {
   const [currentTab, setCurrentTab] = useState('and');
   return (
@@ -64,6 +73,10 @@ export const Controlled: StoryFn = () => {
   );
 };
 
+Controlled.parameters = {
+  codesandbox: false,
+};
+
 export const DisabledSingleButton: StoryFn = () => (
   <RockerButtonGroup defaultSelectedKey="or" disabledKeys={['and']}>
     <RockerButton name="and" key="and">And</RockerButton>
@@ -71,6 +84,10 @@ export const DisabledSingleButton: StoryFn = () => (
     <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
   </RockerButtonGroup>
 );
+
+DisabledSingleButton.parameters = {
+  codesandbox: false,
+};
 
 export const customColors: StoryFn = () => (
   <RockerButtonGroup>
@@ -103,3 +120,7 @@ export const customColors: StoryFn = () => (
     </RockerButton>
   </RockerButtonGroup>
 );
+
+customColors.parameters = {
+  codesandbox: false,
+};

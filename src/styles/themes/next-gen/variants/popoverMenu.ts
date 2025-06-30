@@ -1,7 +1,9 @@
 const container = {
   transition: 'opacity 200ms ease',
-  opacity: 0,
-  '&.is-mounted.is-transitioning': {
+  '&.animate': {
+    opacity: 0,
+  },
+  '&.animate.is-mounted.is-transitioning': {
     opacity: '100%',
   },
 };

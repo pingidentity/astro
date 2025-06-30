@@ -22,6 +22,14 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Box', 'Button', 'Icon', 'IconButton', 'Text', 'Tooltip', 'TooltipTrigger',
+        ],
+        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
+      },
+    },
   },
 } as Meta;
 
@@ -33,37 +41,37 @@ export const Default: StoryFn<TooltipTriggerProps> = args => (
   </TooltipTrigger>
 );
 
-export const withAlignProp: StoryFn = () => (
-  <TooltipTrigger align="end">
+export const withAlignProp: StoryFn = args => (
+  <TooltipTrigger {...args} align="end">
     <Button>Hover Over Me!</Button>
     <Tooltip>End aligned</Tooltip>
   </TooltipTrigger>
 );
 
-export const withDirectionProp: StoryFn = () => (
-  <TooltipTrigger direction="right">
+export const withDirectionProp: StoryFn = args => (
+  <TooltipTrigger {...args} direction="right">
     <Button>Hover Over Me!</Button>
     <Tooltip>Display on the right</Tooltip>
   </TooltipTrigger>
 );
 
-export const withArrowCrossOffsetProp: StoryFn = () => (
-  <TooltipTrigger arrowCrossOffset="30px" isOpen>
+export const withArrowCrossOffsetProp: StoryFn = args => (
+  <TooltipTrigger {...args} arrowCrossOffset="30px" isOpen>
     <Button>Hover Over Me!</Button>
     <Tooltip>With arrowCrossOffset=&quot;30px&quot;</Tooltip>
   </TooltipTrigger>
 );
 
-export const isOpen: StoryFn = () => (
-  <TooltipTrigger isOpen>
+export const isOpen: StoryFn = args => (
+  <TooltipTrigger {...args} isOpen>
     <Button>Hover Over Me!</Button>
     <Tooltip>Display by default</Tooltip>
   </TooltipTrigger>
 );
 
-export const IconWithTooltip: StoryFn = () => (
+export const IconWithTooltip: StoryFn = args => (
   <Box pl={50}>
-    <TooltipTrigger>
+    <TooltipTrigger {...args}>
       <IconButton variant="tooltip.button">
         <Icon icon={AccountIcon} title={{ name: 'Account Icon' }} />
       </IconButton>
@@ -72,9 +80,9 @@ export const IconWithTooltip: StoryFn = () => (
   </Box>
 );
 
-export const BadgeWithTooltip: StoryFn = () => (
+export const BadgeWithTooltip: StoryFn = args => (
   <Box pl={50}>
-    <TooltipTrigger>
+    <TooltipTrigger {...args}>
       <Button variant="variants.tooltip.badge" bg="neutral.10">
         <Text variant="label" sx={{ textTransform: 'uppercase' }} color="white">
           Some text
@@ -92,17 +100,17 @@ BadgeWithTooltip.parameters = {
   },
 };
 
-export const TextWithTooltip: StoryFn = () => (
+export const TextWithTooltip: StoryFn = args => (
   <Box pl={50}>
-    <TooltipTrigger>
+    <TooltipTrigger {...args}>
       <Button variant="variants.tooltip.inline">Some text</Button>
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>
   </Box>
 );
 
-export const Disabled: StoryFn = () => (
-  <TooltipTrigger delay={0} isDisabled>
+export const Disabled: StoryFn = args => (
+  <TooltipTrigger {...args} delay={0} isDisabled>
     <IconButton aria-label="Earth Icon">
       <Icon icon={Earth} title={{ name: 'Earth Icon' }} />
     </IconButton>
@@ -119,15 +127,15 @@ Disabled.parameters = {
   },
 };
 
-export const withDelayProp: StoryFn = () => (
-  <TooltipTrigger delay={700}>
+export const withDelayProp: StoryFn = args => (
+  <TooltipTrigger {...args} delay={700}>
     <Button>Hover Over Me!</Button>
     <Tooltip>Display with a delay</Tooltip>
   </TooltipTrigger>
 );
 
-export const customWidth: StoryFn = () => (
-  <TooltipTrigger width="200px">
+export const customWidth: StoryFn = args => (
+  <TooltipTrigger {...args} width="200px">
     <Button>Hover Over Me!</Button>
     <Tooltip>Custom width display</Tooltip>
   </TooltipTrigger>

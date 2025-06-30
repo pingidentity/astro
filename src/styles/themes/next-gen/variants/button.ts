@@ -538,6 +538,12 @@ const iconButtons = {
       path: { fill: 'dark' },
     },
   },
+  hintButton: {
+    bg: 'gray-100',
+    '&.is-hovered': {
+      bg: 'gray-900',
+    },
+  },
 };
 
 const buttons = {

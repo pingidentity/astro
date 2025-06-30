@@ -23,9 +23,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {

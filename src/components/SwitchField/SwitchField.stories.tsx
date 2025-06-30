@@ -27,9 +27,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -59,31 +56,34 @@ export const Controlled: StoryFn<SwitchFieldProps> = () => {
   );
 };
 
-export const DefaultSelected: StoryFn<SwitchFieldProps> = () => (
+export const DefaultSelected: StoryFn<SwitchFieldProps> = args => (
   <SwitchField
+    {...args}
     isDefaultSelected
     label="Default selected"
     value="my-switch"
   />
 );
 
-export const Disabled: StoryFn<SwitchFieldProps> = () => (
+export const Disabled: StoryFn<SwitchFieldProps> = args => (
   <SwitchField
+    {...args}
     isDisabled
     label="Disabled"
     value="my-switch"
   />
 );
 
-export const NoVisibleLabel: StoryFn<SwitchFieldProps> = () => (
+export const NoVisibleLabel: StoryFn<SwitchFieldProps> = args => (
   <SwitchField
+    {...args}
     aria-label="my-label"
     value="my-switch"
   />
 );
 
-export const Required: StoryFn<SwitchFieldProps> = () => (
-  <SwitchField isRequired label="Required" value="my-switch" />
+export const Required: StoryFn<SwitchFieldProps> = args => (
+  <SwitchField {...args} isRequired label="Required" value="my-switch" />
 );
 
 export const WithTooltip: StoryFn<SwitchFieldProps> = () => {

@@ -32,8 +32,20 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Icon',
+          'IconButton',
+          'Item',
+          'Menu',
+          'OverlayProvider',
+          'PopoverMenu',
+          'Section',
+          'Text',
+        ],
+        '@pingux/mdi-react/DotsVerticalIcon': 'DotsVerticalIcon',
       },
     },
   },
@@ -80,11 +92,11 @@ Default.parameters = {
   },
 };
 
-export const DefaultOpen: StoryFn = () => (
+export const DefaultOpen: StoryFn = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
-    <PopoverMenu isDefaultOpen>
+    <PopoverMenu {...args} isDefaultOpen>
       <IconButton aria-label="more options" variant="inverted">
         <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>
@@ -125,11 +137,15 @@ export const Controlled: StoryFn = () => {
   );
 };
 
-export const Placement: StoryFn = () => (
+Controlled.parameters = {
+  codesandbox: false,
+};
+
+export const Placement: StoryFn = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
-    <PopoverMenu direction="left">
+    <PopoverMenu {...args} direction="left">
       <IconButton aria-label="more options" variant="inverted">
         <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>
@@ -146,12 +162,12 @@ export const Placement: StoryFn = () => (
   </OverlayProvider>
 );
 
-export const NotFlippable: StoryFn = () => (
+export const NotFlippable: StoryFn = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
     {/* There is no room on the left so it will flip by default. `isNotFlippable` prevents this. */}
-    <PopoverMenu direction="left" isNotFlippable>
+    <PopoverMenu {...args} direction="left" isNotFlippable>
       <IconButton aria-label="more options" variant="inverted">
         <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>
@@ -168,11 +184,11 @@ export const NotFlippable: StoryFn = () => (
   </OverlayProvider>
 );
 
-export const NotClosedOnSelect: StoryFn = () => (
+export const NotClosedOnSelect: StoryFn = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
-    <PopoverMenu isNotClosedOnSelect>
+    <PopoverMenu {...args} isNotClosedOnSelect>
       <IconButton aria-label="more options" variant="inverted">
         <Icon icon={DotsVerticalIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
       </IconButton>

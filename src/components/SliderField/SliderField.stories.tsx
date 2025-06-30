@@ -70,7 +70,6 @@ export default {
 
 const loremText = 'Lorem ipsum';
 
-
 export const Default = ({ ...args }) => {
   return (
     <SliderField label={loremText} {...args} />
@@ -90,15 +89,16 @@ export const Controlled = ({ ...args }) => {
   );
 };
 
-export const Vertical = () => {
+export const Vertical = args => {
   return (
-    <SliderField label={loremText} orientation="vertical" size="150px" />
+    <SliderField {...args} label={loremText} orientation="vertical" size="150px" />
   );
 };
 
-export const MultiThumb = () => {
+export const MultiThumb = args => {
   return (
     <SliderField
+      {...args}
       label={loremText}
       isMultiThumb
       defaultValue={[100, 180]}

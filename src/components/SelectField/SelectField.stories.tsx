@@ -2,6 +2,7 @@ import React, { Key, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import { useAsyncList } from 'react-stately';
 import CalendarRangeIcon from '@pingux/mdi-react/CalendarRangeIcon';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -88,8 +89,16 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'OverlayProvider',
+          'Icon',
+          'Item',
+          'Section',
+          'SelectField',
+        ],
       },
     },
   },
@@ -140,7 +149,7 @@ export default {
     label: 'Example Label',
     labelMode: Object.values(labelModes)[0],
   },
-};
+} as Meta;
 
 export const Default = args => (
   <OverlayProvider>
@@ -172,13 +181,21 @@ export const WithCustomHeight = args => (
   </OverlayProvider>
 );
 
-export const FloatLabel = () => (
-  <SelectField label="What's your favorite color?" labelMode="float">
+export const FloatLabel = args => (
+  <SelectField {...args} label="What's your favorite color?" labelMode="float">
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
+
+FloatLabel.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 export const Controlled = () => {
   const [selectedKey, setSelectedKey] = useState('yellow');
@@ -197,8 +214,8 @@ export const Controlled = () => {
   );
 };
 
-export const WithNoneOption = () => (
-  <SelectField label="What's your favorite color?">
+export const WithNoneOption = args => (
+  <SelectField {...args} label="What's your favorite color?">
     <Section>
       <Item key="none">None</Item>
     </Section>
@@ -233,28 +250,29 @@ export const WithSlots = () => (
   </SelectField>
 );
 
-export const DisabledField = () => (
-  <SelectField label="What's your favorite color?" isDisabled>
+export const DisabledField = args => (
+  <SelectField {...args} label="What's your favorite color?" isDisabled>
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
 
-export const DisabledOptions = () => (
-  <SelectField label="What's your favorite color?" disabledKeys={['blue']}>
+export const DisabledOptions = args => (
+  <SelectField {...args} label="What's your favorite color?" disabledKeys={['blue']}>
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
 
-export const NoOptionsAvailable = () => (
-  <SelectField label="Select an option..." placeholder="No options available" />
+export const NoOptionsAvailable = args => (
+  <SelectField {...args} label="Select an option..." placeholder="No options available" />
 );
 
-export const HelperText = () => (
+export const HelperText = args => (
   <SelectField
+    {...args}
     status="error"
     helperText="Here is some helpful text..."
     label="What's your favorite color?"
@@ -264,6 +282,14 @@ export const HelperText = () => (
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
+
+HelperText.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 const options = new Array(400).fill({ key: 'string', name: 'string' }).map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
 export const DynamicItems = () => {
@@ -312,8 +338,8 @@ export const AsyncLoading = () => {
     </OverlayProvider>
   );
 };
-export const WithoutStatusIndicator = () => (
-  <SelectField label="What's your favorite color?" hasNoStatusIndicator>
+export const WithoutStatusIndicator = args => (
+  <SelectField {...args} label="What's your favorite color?" hasNoStatusIndicator>
     <Item key="none">None</Item>
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
@@ -321,9 +347,10 @@ export const WithoutStatusIndicator = () => (
   </SelectField>
 );
 
-export const WithHelpHint = () => (
+export const WithHelpHint = args => (
   <OverlayProvider>
     <SelectField
+      {...args}
       width="100%"
       hintText="Example Hint"
       label="What's your favorite color?"

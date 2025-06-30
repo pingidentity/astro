@@ -6,11 +6,11 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   CopyText,
-  CopyTextProps,
   Link,
   Text,
   TextField,
 } from '../../index';
+import { CopyTextProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import CopyTextReadme from './CopyText.mdx';
@@ -34,6 +34,11 @@ export default {
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'CopyText', 'Text', 'Link', 'TextField'],
+      },
     },
   },
   argTypes: {

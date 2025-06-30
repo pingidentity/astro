@@ -50,15 +50,17 @@ export default {
   },
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <BadgeReadme />
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Badge', 'Box', 'Icon', 'IconButton'],
+      },
     },
   },
 };
@@ -91,10 +93,10 @@ Default.parameters = {
   },
 };
 
-export const CountBadge = () => (
+export const CountBadge = args => (
   <Box isRow gap="xs">
-    <Badge label="4" variant="countBadge" />
-    <Badge label="4" variant="countNeutral" />
+    <Badge {...args} label="4" variant="countBadge" />
+    <Badge {...args} label="4" variant="countNeutral" />
   </Box>
 );
 
@@ -105,8 +107,8 @@ CountBadge.parameters = {
   },
 };
 
-export const BadgeWithCustomColors = () => (
-  <Badge label="Custom Colors" bg="green" textColor="#ffffff" />
+export const BadgeWithCustomColors = args => (
+  <Badge {...args} label="Custom Colors" bg="green" textColor="#ffffff" />
 );
 
 export const BadgeWithIcon = () => (
@@ -129,6 +131,10 @@ export const BadgeWithIcon = () => (
   </>
 );
 
+BadgeWithIcon.parameters = {
+  codesandbox: false,
+};
+
 export const BadgeWithLeftSlotAndIcon = () => (
   <Badge label="Badge with Icon Button and Left Slot" bg="white" variant="itemBadgeWithSlot" slots={{ leftIcon: <Icon icon={VariableIcon} size={16} /> }}>
     <IconButton
@@ -140,12 +146,16 @@ export const BadgeWithLeftSlotAndIcon = () => (
   </Badge>
 );
 
+BadgeWithLeftSlotAndIcon.parameters = {
+  codesandbox: false,
+};
+
 export const StatusBadgeVariants = ({ ...args }) => (
   <Box>
-    <Badge variant="criticalStatusBadge" {...args} label="Critical" mb="lg" />
-    <Badge variant="warningStatusBadge" {...args} label="Warning" mb="lg" />
-    <Badge variant="healthyStatusBadge" {...args} label="Healthy" mb="lg" />
-    <Badge variant="activeStatusBadge" {...args} label="Active" />
+    <Badge {...args} variant="criticalStatusBadge" label="Critical" mb="lg" />
+    <Badge {...args} variant="warningStatusBadge" label="Warning" mb="lg" />
+    <Badge {...args} variant="healthyStatusBadge" label="Healthy" mb="lg" />
+    <Badge {...args} variant="activeStatusBadge" label="Active" />
   </Box>
 );
 

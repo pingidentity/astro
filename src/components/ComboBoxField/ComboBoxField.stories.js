@@ -87,9 +87,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -177,6 +174,10 @@ export const WithSections = args => (
   </OverlayProvider>
 );
 
+WithSections.parameters = {
+  codesandbox: false,
+};
+
 export const AsyncLoading = () => {
   // This example uses `useAsyncList` from "@react-stately/data"
   const list = useAsyncList({
@@ -192,7 +193,7 @@ export const AsyncLoading = () => {
       // Otherwise, the cursor is the next URL to load,
       // as returned from the previous page.
       const res = await fetch(
-        cursor || `https://swapi.dev/api/people/?search=${filterText}`,
+        cursor || `https://swapi.py4e.com/api/people/?search=${filterText}`,
         { signal },
       );
       const json = await res.json();

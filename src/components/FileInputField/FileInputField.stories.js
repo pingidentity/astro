@@ -21,9 +21,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -87,15 +84,16 @@ export const Default = args => (
   <FileInputField sx={fitContentWidthSx} {...args} />
 );
 
-export const CustomButtonText = () => (
+export const CustomButtonText = args => (
   <FileInputField
+    {...args}
     defaultButtonText="Original Button Name"
     label="Custom Button Text"
     sx={fitContentWidthSx}
   />
 );
 
-export const ControlledState = () => {
+export const ControlledState = args => {
   const [userFiles, setUserFiles] = useState([]);
   const [error, setError] = useState();
 
@@ -124,6 +122,7 @@ export const ControlledState = () => {
 
   return (
     <FileInputField
+      {...args}
       label="Controlled State With limit on file size upload below 2 mb"
       onFileSelect={handleFileSelect}
       onRemove={handleFileRemove}
@@ -164,8 +163,9 @@ export const DefaultFileListUncontrolled = () => (
   />
 );
 
-export const ErrorStatusSingleFile = () => (
+export const ErrorStatusSingleFile = args => (
   <FileInputField
+    {...args}
     defaultFileList={[
       {
         id: 'test-id3',
@@ -182,8 +182,9 @@ export const ErrorStatusSingleFile = () => (
   />
 );
 
-export const ErrorWithMultipleFiles = () => (
+export const ErrorWithMultipleFiles = args => (
   <FileInputField
+    {...args}
     defaultFileList={[
       {
         id: 'test-id3',
@@ -206,7 +207,7 @@ export const ErrorWithMultipleFiles = () => (
   />
 );
 
-export const WithCustomWidth = () => {
+export const WithCustomWidth = args => {
   const textSx = {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
@@ -216,6 +217,7 @@ export const WithCustomWidth = () => {
   return (
     <Box width={200}>
       <FileInputField
+        {...args}
         defaultButtonText="Long Long Button Text With A Lot of Words In It"
         defaultFileList={[
           {

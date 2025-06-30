@@ -25,8 +25,10 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['EnvironmentBreadcrumb', 'Badge', 'Box', 'Item', 'Section', 'Text'],
       },
     },
   },
@@ -238,9 +240,10 @@ export const WithSections = () => {
   );
 };
 
+WithSections.parameters = { codesandbox: false };
 
-export const OrgLevel = () => (
-  <EnvironmentBreadcrumb name="Organization" />
+export const OrgLevel = args => (
+  <EnvironmentBreadcrumb name="Organization" {...args} />
 );
 
 export const DefaultOpen = () => {
@@ -287,6 +290,8 @@ export const DefaultOpen = () => {
   );
 };
 
+DefaultOpen.parameters = { codesandbox: false };
+
 export const ControlledMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEnvironment, setSelectedEnvironment] = useState(defaultEnvironments[0]);
@@ -332,3 +337,5 @@ export const ControlledMenu = () => {
     </EnvironmentBreadcrumb>
   );
 };
+
+ControlledMenu.parameters = { codesandbox: false };

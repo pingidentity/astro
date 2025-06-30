@@ -22,6 +22,11 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'HelpHint', 'Link', 'Text'],
+      },
+    },
   },
   argTypes: {
     children: {
@@ -49,9 +54,10 @@ Default.parameters = {
   },
 };
 
-export const WithPopoverAndIconButtonProps: StoryFn = () => (
+export const WithPopoverAndIconButtonProps: StoryFn = args => (
   <Box p={100}>
     <HelpHint
+      {...args}
       popoverProps={{ 'data-testid': 'popover-container' }}
       iconButtonProps={{ 'aria-label': 'Help hint' }}
       direction="bottom"
@@ -62,9 +68,9 @@ export const WithPopoverAndIconButtonProps: StoryFn = () => (
   </Box>
 );
 
-export const ContentWithLink: StoryFn = () => (
+export const ContentWithLink: StoryFn = args => (
   <Box p={100}>
-    <HelpHint>
+    <HelpHint {...args}>
       <Text variant="popover">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
       <Link variant="popover" href="https://uilibrary.ping-eng.com/" target="_blank">Learn More</Link>
     </HelpHint>
@@ -84,9 +90,9 @@ export const WithDelay: StoryFn = (args: HelpHintProps) => (
   </Box>
 );
 
-export const Customization: StoryFn = () => (
+export const Customization: StoryFn = args => (
   <Box p={100}>
-    <HelpHint direction="bottom">
+    <HelpHint {...args} direction="bottom">
       Lorem ipsum dolor sit amet,
       consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
     </HelpHint>

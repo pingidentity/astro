@@ -26,8 +26,15 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Box',
+          'Item',
+          'LinkSelectField',
+          'Section',
+        ],
       },
     },
   },
@@ -152,28 +159,29 @@ export const WithNoneOption = () => (
   </LinkSelectField>
 );
 
-export const DisabledField = () => (
-  <LinkSelectField label="What's your favorite color?" isDisabled>
+export const DisabledField = args => (
+  <LinkSelectField {...args} label="What's your favorite color?" isDisabled>
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
     <Item key="yellow">Yellow</Item>
   </LinkSelectField>
 );
 
-export const DisabledOptions = () => (
-  <LinkSelectField label="What's your favorite color?" disabledKeys={['blue']}>
+export const DisabledOptions = args => (
+  <LinkSelectField {...args} label="What's your favorite color?" disabledKeys={['blue']}>
     <Item key="red">Red</Item>
     <Item key="blue">Blue (disabled)</Item>
     <Item key="yellow">Yellow</Item>
   </LinkSelectField>
 );
 
-export const NoOptionsAvailable = () => (
-  <LinkSelectField label="Select an option..." isDisabled defaultText="No options available" />
+export const NoOptionsAvailable = args => (
+  <LinkSelectField {...args} label="Select an option..." isDisabled defaultText="No options available" />
 );
 
-export const HelperText = () => (
+export const HelperText = args => (
   <LinkSelectField
+    {...args}
     status="error"
     helperText="Here is some helpful text..."
     label="What's your favorite color?"
@@ -201,6 +209,7 @@ DynamicItems.parameters = {
   docs: {
     storyDescription: 'If using a long list or one that is dynamically updated, use the `items` prop and a function to render the children. See [the React Stately docs](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections) for more information about this.',
   },
+  codesandbox: false,
 };
 
 export const AsyncLoading = () => {
@@ -230,4 +239,8 @@ export const AsyncLoading = () => {
       </LinkSelectField>
     </OverlayProvider>
   );
+};
+
+AsyncLoading.parameters = {
+  codesandbox: false,
 };

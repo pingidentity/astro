@@ -15,6 +15,9 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 
 export default {
   title: 'Recipes/Trial Experience Buttons',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const sx = {
