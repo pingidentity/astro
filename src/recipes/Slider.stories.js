@@ -10,6 +10,9 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 
 export default {
   title: 'Recipes/Slider',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const sx = {

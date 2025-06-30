@@ -19,9 +19,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
     a11y: {
       config: {
@@ -85,9 +82,10 @@ console.log(factorial(5));
 (a) => {};
 `;
 
-export const TypescriptEditor:StoryFn<CodeEditorProps> = () => {
+export const TypescriptEditor:StoryFn<CodeEditorProps> = args => {
   return (
     <CodeEditor
+      {...args}
       defaultValue={tsCode}
       language="typescript"
       height="200px"
@@ -95,9 +93,10 @@ export const TypescriptEditor:StoryFn<CodeEditorProps> = () => {
   );
 };
 
-export const JavascriptEditor:StoryFn<CodeEditorProps> = () => {
+export const JavascriptEditor:StoryFn<CodeEditorProps> = args => {
   return (
     <CodeEditor
+      {...args}
       defaultValue={jsCode}
       language="javascript"
       height="200px"
@@ -105,9 +104,10 @@ export const JavascriptEditor:StoryFn<CodeEditorProps> = () => {
   );
 };
 
-export const JsonEditor:StoryFn<CodeEditorProps> = () => {
+export const JsonEditor:StoryFn<CodeEditorProps> = args => {
   return (
     <CodeEditor
+      {...args}
       defaultValue={jsonCode}
       language="json"
       height="200px"

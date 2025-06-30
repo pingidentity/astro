@@ -26,9 +26,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -65,8 +62,9 @@ export const Default: StoryFn<TextFieldProps> = ({ variant, ...args }: TextField
   />
 );
 
-export const SmallVariant: StoryFn<TextFieldProps> = () => (
+export const SmallVariant: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     id="small-variant-id"
     name="custom-name"
     label="Example Label"
@@ -74,8 +72,9 @@ export const SmallVariant: StoryFn<TextFieldProps> = () => (
   />
 );
 
-export const FloatLabel: StoryFn<TextFieldProps> = () => (
+export const FloatLabel: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     label="Example Label"
     labelMode="float"
   />
@@ -90,18 +89,21 @@ FloatLabel.parameters = {
   },
 };
 
-export const LeftLabel: StoryFn<TextFieldProps> = () => (
+export const LeftLabel: StoryFn<TextFieldProps> = args => (
   <Box gap="xl" width="100%">
     <TextField
+      {...args}
       helperText="Here is some helpful text..."
       label="Example Label"
       labelMode="left"
     />
     <TextField
+      {...args}
       label="Example Label that is much longer than the previous one"
       labelMode="left"
     />
     <TextField
+      {...args}
       label="Example label with set width"
       labelMode="left"
       containerProps={{ sx: { gridTemplateColumns: '120px auto' } }}
@@ -129,29 +131,33 @@ export const Controlled: StoryFn<TextFieldProps> = () => {
   );
 };
 
-export const Password: StoryFn<TextFieldProps> = () => (
+export const Password: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     label="Example Label"
     type="password"
   />
 );
 
-export const Disabled: StoryFn<TextFieldProps> = () => (
+export const Disabled: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     isDisabled
     label="Example Label"
   />
 );
-export const ReadOnly: StoryFn<TextFieldProps> = () => (
+export const ReadOnly: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     isReadOnly
     label="Example Label"
     value="This is read only"
   />
 );
 
-export const Required: StoryFn<TextFieldProps> = () => (
+export const Required: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     isRequired
     label="Example Label"
   />
@@ -168,32 +174,36 @@ export const DynamicRequired: StoryFn<TextFieldProps> = () => {
   );
 };
 
-export const Error: StoryFn<TextFieldProps> = () => (
+export const Error: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     helperText="Here is some helpful text..."
     label="Example Label"
     status="error"
   />
 );
 
-export const Success: StoryFn<TextFieldProps> = () => (
+export const Success: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     helperText="Here is some helpful text..."
     label="Example Label"
     status="success"
   />
 );
 
-export const Warning: StoryFn<TextFieldProps> = () => (
+export const Warning: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     helperText="Here is some helpful text..."
     label="Example Label"
     status="warning"
   />
 );
 
-export const WithHelpHint: StoryFn<TextFieldProps> = () => (
+export const WithHelpHint: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     id="with-help-hint-id"
     name="custom-name"
     hintText="Example Hint"
@@ -201,8 +211,9 @@ export const WithHelpHint: StoryFn<TextFieldProps> = () => (
   />
 );
 
-export const WithHelpHintCustomWidth: StoryFn<TextFieldProps> = () => (
+export const WithHelpHintCustomWidth: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     id="with-help-hint-id"
     name="custom-name"
     hintText="Example Hint"
@@ -220,15 +231,17 @@ WithHelpHintCustomWidth.parameters = {
   },
 };
 
-export const WithoutStatusIndicator: StoryFn<TextFieldProps> = () => (
+export const WithoutStatusIndicator: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     label="Example Label"
     hasNoStatusIndicator
   />
 );
 
-export const MaxLength: StoryFn<TextFieldProps> = () => (
+export const MaxLength: StoryFn<TextFieldProps> = args => (
   <TextField
+    {...args}
     label="Example label"
     maxLength={9}
   />

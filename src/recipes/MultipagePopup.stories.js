@@ -37,6 +37,7 @@ export default {
       default: 'accent',
       values: [{ name: 'accent', value: 'accent.99' }],
     },
+    codesandbox: false,
   },
 };
 

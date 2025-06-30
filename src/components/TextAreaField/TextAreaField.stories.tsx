@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -25,9 +26,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
     a11y: {
       config: {
@@ -82,7 +80,7 @@ export default {
     label: 'Example Label',
     labelMode: Object.values(labelModes)[0],
   },
-};
+} as Meta;
 
 const IconSlot = (
   <Box isRow>
@@ -99,7 +97,7 @@ export const Default = args => (
   />
 );
 
-export const WithSlots = args => (
+export const WithSlots = () => (
   // This is an example of a slot that can be passed into the component
   // const IconSlot = (
   //   <Box isRow>
@@ -109,15 +107,15 @@ export const WithSlots = args => (
   //   </Box>
   // );
   <TextAreaField
-    {...args}
     slots={{
       inContainer: IconSlot,
     }}
   />
 );
 
-export const FloatLabel = () => (
+export const FloatLabel = args => (
   <TextAreaField
+    {...args}
     label="Example label"
     labelMode="float"
   />
@@ -135,59 +133,67 @@ export const Controlled = () => {
   );
 };
 
-export const Disabled = () => (
+export const Disabled = args => (
   <TextAreaField
+    {...args}
     isDisabled
     label="Example Label"
     value="This is disabled"
   />
 );
-export const ReadOnly = () => (
+export const ReadOnly = args => (
   <TextAreaField
+    {...args}
     isReadOnly
     label="Example Label"
     value="This is read only"
   />
 );
 
-export const Required = () => (
+export const Required = args => (
   <TextAreaField
+    {...args}
     isRequired
     label="Example Label"
   />
 );
 
-export const Rows = () => (
+export const Rows = args => (
   <TextAreaField
+    {...args}
     label="Example label"
     rows={5}
   />
 );
 
-export const Unresizable = () => (
+export const Unresizable = args => (
   <TextAreaField
+    {...args}
     isUnresizable
     label="Example label"
   />
 );
 
-export const Error = () => (
+export const Error = args => (
   <TextAreaField
+    {...args}
     helperText="Here is some helpful text..."
     label="Example Label"
     status="error"
   />
 );
 
-export const WithoutStatusIndicator = () => (
+export const WithoutStatusIndicator = args => (
   <TextAreaField
+    {...args}
     label="Example Label"
     hasNoStatusIndicator
   />
 );
 
-export const MaxLength = () => (
+export const MaxLength = args => (
   <TextAreaField
+    {...args}
     label="Example label"
     maxLength={9}
   />

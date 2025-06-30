@@ -120,6 +120,28 @@ export const parameters = {
       ],
     },
   },
+  codesandbox: {
+    apiToken: process.env.CODESANDBOX_API_TOKEN,
+    dependencies: {
+      "@pingux/astro": "latest",
+      "@pingux/mdi-react": "^1.2.0",
+    },
+    fallbackImport: "@pingux/astro",
+    privacy: "public",
+    provider: `import { AstroProvider } from "@pingux/astro";
+        export default ThemeProvider = ({ children }) => {
+          return (
+            <AstroProvider>
+              <div style={{ padding: '50px' }}>
+                {children}
+              </div>
+            </AstroProvider>
+          )
+        }`,
+    queryParams: {
+      "file": "/src/App.js",
+    },
+  }
 };
 
 export const globalTypes = {

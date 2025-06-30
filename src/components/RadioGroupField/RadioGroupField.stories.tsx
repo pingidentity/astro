@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RadioField, RadioGroupField } from '../../index';
@@ -19,6 +20,14 @@ export default {
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'RadioField',
+          'RadioGroupField',
+        ],
+      },
     },
   },
   argTypes: {
@@ -55,7 +64,7 @@ export default {
     label: 'Pick one',
     defaultValue: 'A',
   },
-};
+} as Meta;
 
 export const Default = args => (
   <RadioGroupField {...args}>
@@ -84,24 +93,25 @@ export const Controlled = () => {
   );
 };
 
-export const Required = () => (
-  <RadioGroupField label="Pick one" isRequired>
+export const Required = args => (
+  <RadioGroupField {...args} label="Pick one" isRequired>
     <RadioField value="A" label="A" />
     <RadioField value="B" label="B" />
     <RadioField value="C" label="C" />
   </RadioGroupField>
 );
 
-export const CheckedContent = () => (
-  <RadioGroupField label="Pick one">
+export const CheckedContent = args => (
+  <RadioGroupField {...args} label="Pick one">
     <RadioField value="A" label="A" checkedContent="You chose A..." />
     <RadioField value="B" label="B" checkedContent="You chose B..." />
     <RadioField value="C" label="C" checkedContent="You chose C..." />
   </RadioGroupField>
 );
 
-export const HelperText = () => (
+export const HelperText = args => (
   <RadioGroupField
+    {...args}
     label="Pick one"
     helperText="Here is some helpful text..."
     status="error"
@@ -121,8 +131,8 @@ HelperText.parameters = {
   },
 };
 
-export const HorizontalOrientation = () => (
-  <RadioGroupField label="Pick one" orientation="horizontal">
+export const HorizontalOrientation = args => (
+  <RadioGroupField {...args} label="Pick one" orientation="horizontal">
     <RadioField value="A" label="Option A" />
     <RadioField value="B" label="Option B" />
     <RadioField value="C" label="Option C" />

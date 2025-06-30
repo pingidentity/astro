@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { action } from '@storybook/addon-actions';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -30,10 +31,8 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
+    codesandbox: false,
   },
   argTypes: {
     density: {
@@ -130,7 +129,7 @@ export default {
     density: 'spacious',
     overflowMode: 'truncate',
   },
-};
+} as Meta;
 
 const getHeaderProps = () => ({
   sx: {
@@ -145,7 +144,7 @@ const getCellProps = (columnKey, align) => ({
   align,
 });
 
-export const Default = args => {
+export const Default = () => {
   const date = '2023-05-03';
   const time = '07:16:30 pm UTC';
 
@@ -231,9 +230,9 @@ export const Default = args => {
 
   return (
     <DataTable
-      {...args}
       aria-label="Static table"
       height="100%"
+      density="spacious"
     >
       <DataTableHeader columns={columns}>
         {column => (
@@ -273,7 +272,7 @@ Default.parameters = {
   },
 };
 
-export const OnyxDefault = args => {
+export const OnyxDefault = () => {
   const date = '2023-05-03';
   const time = '07:16:30 pm UTC';
 
@@ -343,7 +342,6 @@ export const OnyxDefault = args => {
 
   return (
     <DataTable
-      {...args}
       aria-label="Onyx table"
       height="100%"
       scale="xl"

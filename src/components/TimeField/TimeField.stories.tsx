@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { TimeField } from '../../index';
@@ -15,9 +15,6 @@ export default {
       argTypesRegex: '^on.*',
     },
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <TimeFieldReadme />
@@ -37,7 +34,7 @@ export default {
     },
   },
   argTypes: {},
-};
+} as Meta;
 
 export const Default: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
   <TimeField {...args} aria-label="timefield-default" />
@@ -47,12 +44,12 @@ export const DefaultValue: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
   <TimeField {...args} aria-label="timefield-default" defaultValue="12:30" />
 );
 
-export const Controlled: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => {
+export const Controlled: StoryFn<TimeFieldProps> = () => {
   const [time, setTime] = useState('12:30');
 
   const onChangeHandler = value => setTime(value.toString());
 
-  return <TimeField {...args} aria-label="timefield-default" value={time} onChange={onChangeHandler} />;
+  return <TimeField aria-label="timefield-default" value={time} onChange={onChangeHandler} />;
 };
 
 export const Disabled: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (

@@ -28,6 +28,7 @@ module.exports = {
     "@storybook/addon-storysource",
     "@storybook/addon-mdx-gfm",
     "storybook-addon-designs",
+    "@codesandbox/storybook-addon"
   ],
   webpackFinal: async config => {
     return {

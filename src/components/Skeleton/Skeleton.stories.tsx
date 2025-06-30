@@ -22,6 +22,13 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Avatar', 'Box', 'Skeleton', 'Text',
+        ],
+      },
+    },
   },
   argTypes: {
     variant: {
@@ -40,27 +47,27 @@ export const Default: StoryFn<SkeletonProps> = ({ ...args }) => (
   </Box>
 );
 
-export const inferringDimensions = () => {
-  const isLoaded = true;
+export const inferringDimensions = args => {
+  const isLoading = true;
   return (
     <Box width="200px">
       <Box mb="sm" isRow alignItems="center" gap="md">
         {
-          isLoaded && (
-            <Skeleton variant="circular">
+          isLoading && (
+            <Skeleton {...args} variant="circular">
               <Avatar src={pingImg} />
             </Skeleton>
           )
         }
         <Box flex="1 1 0">
-          <Skeleton variant="text">
-            {isLoaded && <Text variant="h1">.</Text>}
+          <Skeleton {...args} variant="text">
+            {isLoading && <Text variant="h1">.</Text>}
           </Skeleton>
         </Box>
       </Box>
       <Box mb="sm">
-        <Skeleton variant="rounded">
-          {isLoaded && <Box height={100} />}
+        <Skeleton {...args} variant="rounded">
+          {isLoading && <Box height={100} />}
         </Skeleton>
       </Box>
     </Box>

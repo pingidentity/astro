@@ -24,6 +24,9 @@ import statuses from '../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Recipes/Attribute Mappings',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const sx = {

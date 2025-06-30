@@ -1,12 +1,11 @@
 import React from 'react';
-import { Item } from 'react-stately';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Box, Breadcrumbs } from '../../index';
+import { Box, Breadcrumbs, Item } from '../../index';
 import { breadCrumbsProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
@@ -18,15 +17,18 @@ export default {
   decorators: [withDesign],
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <BreadcrumbsReadme />
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Breadcrumbs', 'Item'],
+        '@pingux/mdi-react/ChevronRightIcon': 'ChevronRightIcon',
+      },
     },
   },
   argTypes: {
@@ -140,4 +142,5 @@ Overflowing.parameters = {
       rules: [{ id: 'landmark-unique', enabled: false }],
     },
   },
+  codesandbox: false,
 };

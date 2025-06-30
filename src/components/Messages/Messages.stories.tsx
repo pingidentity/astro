@@ -1,12 +1,13 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import { Meta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Box,
   Button,
+  Item,
   Link,
   Messages,
 } from '../../index';
@@ -44,12 +45,15 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Button', 'Item', 'Link', 'Messages'],
+        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
       },
     },
   },
-};
+} as Meta;
 
 const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
 
@@ -104,9 +108,10 @@ DefaultDynamic.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
-export const Controlled = args => {
+export const Controlled = () => {
   const [items, setItems] = useState<MessageItem[]>([]);
 
   useEffect(() => {
@@ -126,7 +131,7 @@ export const Controlled = args => {
   };
 
   return (
-    <Messages {...args} items={items} onClose={removeMessage}>
+    <Messages items={items} onClose={removeMessage}>
       {item => <Item {...item}>{item.text}</Item>}
     </Messages>
   );
@@ -139,9 +144,10 @@ Controlled.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
-export const ControlledWithButton = args => {
+export const ControlledWithButton = () => {
   const [items, setItems] = useState<MessageItem[]>([]);
 
   const addMessage = () => {
@@ -167,7 +173,7 @@ export const ControlledWithButton = args => {
   return (
     <>
       <Button onPress={addMessage}>Click me!</Button>
-      <Messages {...args} items={items} onClose={removeMessage}>
+      <Messages items={items} onClose={removeMessage}>
         {item => <Item {...item}>{item.text}</Item>}
       </Messages>
     </>
@@ -181,6 +187,7 @@ ControlledWithButton.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
 export const UseReducer = () => {
@@ -244,6 +251,7 @@ UseReducer.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
 export const UseReducerWithMultipleContainers = () => {
@@ -296,10 +304,11 @@ UseReducerWithMultipleContainers.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
-export const WithTextStyling = args => {
-  const items = [
+export const WithTextStyling = () => {
+  const items: MessageItem[] = [
     {
       key: 'message1',
       node: <strong>{loremText}</strong>,
@@ -317,7 +326,7 @@ export const WithTextStyling = args => {
   ];
 
   return (
-    <Messages {...args} items={items}>
+    <Messages items={items}>
       {item => <Item {...item}>{item.node || item.text}</Item>}
     </Messages>
   );
@@ -334,6 +343,7 @@ WithTextStyling.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
 export const WithLink = args => {

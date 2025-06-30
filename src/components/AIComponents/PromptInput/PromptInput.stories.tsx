@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../../.storybook/storybookDocsLayout';
-import { AstroProvider, Box, NextGenTheme } from '../../..';
+import { Box } from '../../..';
 import { booleanArg } from '../../../utils/docUtils/docArgTypes';
 
 import PromptInput from './PromptInput';
@@ -18,10 +19,8 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
+    codesandbox: false,
   },
   argTypes: {
     isLoading: {
@@ -31,7 +30,7 @@ export default {
       ...booleanArg,
     },
   },
-};
+} as Meta;
 
 export const Default = args => {
   const [value, setValue] = useState('');

@@ -29,8 +29,20 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Box',
+          'Breadcrumbs',
+          'Item',
+          'PanelHeader',
+          'PanelHeaderCloseButton',
+          'PanelHeaderMenu',
+          'PanelHeaderSwitchField',
+        ],
+        '@pingux/mdi-react/ChevronRightIcon': 'ChevronRightIcon',
+        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
       },
     },
   },
@@ -98,8 +110,9 @@ WithControls.parameters = {
   },
 };
 
-export const WithImage = () => (
+export const WithImage = args => (
   <PanelHeader
+    {...args}
     data={{
       image: {
         src: pingImg,

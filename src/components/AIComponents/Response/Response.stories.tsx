@@ -4,6 +4,7 @@ import TextIcon from '@pingux/mdi-react/TextIcon';
 import ThumbDownOutlineIcon from '@pingux/mdi-react/ThumbDownOutlineIcon';
 import ThumbUpOutlineIcon from '@pingux/mdi-react/ThumbUpOutlineIcon';
 import VolumeHighIcon from '@pingux/mdi-react/VolumeHighIcon';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../../.storybook/storybookDocsLayout';
 import { Response } from '../../../index';
@@ -27,16 +28,14 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
+    codesandbox: false,
   },
-};
+} as Meta;
 
 const testText = 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet';
 
-export const Default = args => {
+export const Default = () => {
   const icons = [
     {
       title: 'Read aloud',

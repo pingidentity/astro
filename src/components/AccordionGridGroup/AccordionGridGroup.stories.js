@@ -97,6 +97,7 @@ export default {
       { label: 'Design', mdx: AccordionGridReadme },
       { label: 'Implementation' },
     ],
+    codesandbox: false,
   },
   argTypes: {
     id: {

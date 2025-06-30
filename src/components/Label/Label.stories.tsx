@@ -30,8 +30,8 @@ export const Default: StoryFn<LabelProps> = (args: LabelProps) => (
   <Label {...args}>This is a label</Label>
 );
 
-export const Float: StoryFn = () => (
-  <Label mode="float">This is a float label</Label>
+export const Float: StoryFn = args => (
+  <Label {...args} mode="float">This is a float label</Label>
 );
 
 export const WithHelpHint: StoryFn<LabelProps> = (args: LabelProps) => (

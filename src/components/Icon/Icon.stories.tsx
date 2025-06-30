@@ -38,8 +38,14 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/mdi-react/AccountGroupIcon': 'AccountGroupIcon',
+        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
+        '@pingux/mdi-react/LockIcon': 'LockIcon',
+        '@pingux/mdi-react/SearchIcon': 'SearchIcon',
+        '@pingux/mdi-react/TagIcon': 'TagIcon',
       },
     },
   },
@@ -76,7 +82,7 @@ Default.parameters = {
   },
 };
 
-export const SVGIcons: StoryFn = () => {
+export const SVGIcons: StoryFn = args => {
   // SVGR can used to convert .svg files to components instead of doing this manually
   const SVGComponent: React.FC<SVGComponentProps> = props => {
     const id = uuid();
@@ -89,9 +95,8 @@ export const SVGIcons: StoryFn = () => {
       </svg>
     );
   };
-  return <Icon icon={SVGComponent} color="active" size="sm" />;
+  return <Icon {...args} icon={SVGComponent} color="active" size="sm" />;
 };
-
 
 const rowHeadings = [
   'SVG Size', 'Code Example', 'Icon Example',
@@ -157,6 +162,9 @@ export const Sizes: StoryFn = () => (
   </Table>
 );
 
+Sizes.parameters = {
+  codesandbox: false,
+};
 
 export const CommonlyUsed: StoryFn = () => (
   <>
@@ -182,3 +190,7 @@ export const CommonlyUsed: StoryFn = () => (
     </Box>
   </>
 );
+
+CommonlyUsed.parameters = {
+  codesandbox: false,
+};

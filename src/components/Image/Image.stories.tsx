@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -20,6 +20,11 @@ export default {
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Button', 'Image'],
+      },
     },
   },
   argTypes: {
@@ -45,14 +50,15 @@ export default {
     as: 'img',
     src: pingImg,
   },
-};
+} as Meta;
 
 export const Default: StoryFn = ({ ...args }) => <Image {...args} alt="Ping identity square logo" />;
 
-export const Avatar: StoryFn = () => <Image src={pingImg} variant="images.avatar" alt="Ping identity round avatar" />;
+export const Avatar: StoryFn = ({ ...args }) => <Image {...args} src={pingImg} variant="images.avatar" alt="Ping identity round avatar" />;
 
-export const CustomSizeAndRadius: StoryFn = () => (
+export const CustomSizeAndRadius: StoryFn = ({ ...args }) => (
   <Image
+    {...args}
     src={chiefIdentityChampions}
     sx={{
       width: '70px',
@@ -64,10 +70,11 @@ export const CustomSizeAndRadius: StoryFn = () => (
   />
 );
 
-export const Disabled: StoryFn = () => <Image src={pingImg} isDisabled alt="Ping identity square logo" />;
+export const Disabled: StoryFn = ({ ...args }) => <Image {...args} src={pingImg} isDisabled alt="Ping identity square logo" />;
 
-export const FallbackImage: StoryFn = () => (
+export const FallbackImage: StoryFn = ({ ...args }) => (
   <Image
+    {...args}
     fallbackImage={fallbackImg}
     fallbackAlt="Ping Identity"
     src="https://deelay.me/7000/https://picsum.photos/150/150"
@@ -95,6 +102,10 @@ export const WithSkeletonLoadSuccess: StoryFn = () => {
       alt="Random image"
     />
   );
+};
+
+WithSkeletonLoadSuccess.parameters = {
+  codesandbox: false,
 };
 
 export const WithSkeletonLoadTimeout: StoryFn = () => {
@@ -133,4 +144,8 @@ export const UpdatingImageSrc: StoryFn = () => {
       />
     </Box>
   );
+};
+
+UpdatingImageSrc.parameters = {
+  codesandbox: false,
 };

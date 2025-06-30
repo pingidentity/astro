@@ -19,8 +19,11 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['IconWrapper'],
+        '@pingux/mdi-react/DeleteIcon': 'DeleteIcon',
       },
     },
   },

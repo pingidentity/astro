@@ -51,10 +51,8 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
+    codesandbox: false,
   },
 } as Meta;
 

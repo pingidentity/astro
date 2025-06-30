@@ -9,6 +9,9 @@ import {
 
 export default {
   title: 'Recipes/Copy to Clipboard',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 export const Default = () => {

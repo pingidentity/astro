@@ -106,6 +106,11 @@ export default {
         ],
       },
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['CodeView'],
+      },
+    },
   },
 } as Meta;
 
@@ -127,8 +132,8 @@ Default.parameters = {
   },
 };
 
-export const WithLineNumbers: StoryFn = () => (
-  <CodeView hasLineNumbers>
+export const WithLineNumbers: StoryFn = args => (
+  <CodeView {...args} hasLineNumbers>
     {/* const code =  `{
         "_links": {
           "self": {
@@ -149,8 +154,8 @@ WithLineNumbers.parameters = {
   },
 };
 
-export const WithCustomSize: StoryFn = () => (
-  <CodeView language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
+export const WithCustomSize: StoryFn = args => (
+  <CodeView {...args} language="jsx" sx={{ width: '100%', height: 300 }} hasNoCopyButton>
     {`
 const BadgeWithIcon = () => (
   <>
@@ -190,7 +195,7 @@ WithCustomSize.parameters = {
   },
 };
 
-export const WithAdditionalLanguage: StoryFn = () => {
+export const WithAdditionalLanguage: StoryFn = args => {
   const cssCode = `
   body {
     margin: 0;
@@ -204,7 +209,7 @@ export const WithAdditionalLanguage: StoryFn = () => {
  `.trim();
 
   return (
-    <CodeView language="css" Prism={Prism}>
+    <CodeView {...args} language="css" Prism={Prism}>
       {cssCode}
     </CodeView>
   );
@@ -219,6 +224,7 @@ WithAdditionalLanguage.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };
 
 export const WithChangedCopiedValue: StoryFn<CodeViewProps> = (args: CodeViewProps) => (
@@ -233,7 +239,7 @@ WithChangedCopiedValue.parameters = {
   },
 };
 
-export const WithCustomLanguage: StoryFn = () => {
+export const WithCustomLanguage: StoryFn = args => {
   const javaCode = `
   public class Factorial {
   public static void main(String[] args) {
@@ -261,10 +267,10 @@ export const WithCustomLanguage: StoryFn = () => {
 
   return (
     <>
-      <CodeView language="java" Prism={Prism}>
+      <CodeView {...args} language="java" Prism={Prism}>
         {javaCode}
       </CodeView>
-      <CodeView language="powershell" Prism={Prism}>
+      <CodeView {...args} language="powershell" Prism={Prism}>
         {powershellCode}
       </CodeView>
     </>
@@ -277,4 +283,5 @@ WithCustomLanguage.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+  codesandbox: false,
 };

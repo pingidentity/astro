@@ -27,8 +27,12 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/mdi-react/AccountGroupIcon': 'GroupIcon',
+        '@pingux/mdi-react/ArrowTopRightThickIcon': 'ArrowIcon',
+        '@pingux/astro': ['Box', 'Icon', 'IconBadge'],
       },
     },
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -30,9 +30,6 @@ export default {
   },
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <ButtonReadme />
@@ -40,8 +37,15 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Button', 'Icon', 'Text'],
+        '@pingux/mdi-react/PlusIcon': 'PlusIcon',
+        '@pingux/mdi-react/CreateIcon': 'CreateIcon',
+      },
+    },
   },
-};
+} as Meta;
 
 export const Default: StoryFn<ButtonProps> = (args: ButtonProps) => (
   <Button {...args} />
@@ -54,8 +58,8 @@ Default.parameters = {
   },
 };
 
-export const Primary = () => (
-  <Button variant="primary">
+export const Primary = args => (
+  <Button {...args} variant="primary">
     Button Text
   </Button>
 );
@@ -67,8 +71,8 @@ Primary.parameters = {
   },
 };
 
-export const Critical = () => (
-  <Button variant="critical">
+export const Critical = args => (
+  <Button {...args} variant="critical">
     Button Text
   </Button>
 );
@@ -80,12 +84,12 @@ Critical.parameters = {
   },
 };
 
-export const InlineButton = () => (
+export const InlineButton = args => (
   <Box>
-    <Button mb="sm" mr="auto" variant="inline">
+    <Button {...args} mb="sm" mr="auto" variant="inline">
       Button Text
     </Button>
-    <Button mb="sm" mr="auto" variant="inlinePrimary">
+    <Button {...args} mb="sm" mr="auto" variant="inlinePrimary">
       Button Text
     </Button>
   </Box>
@@ -98,9 +102,9 @@ InlineButton.parameters = {
   },
 };
 
-export const TextIconButton = () => (
+export const TextIconButton = args => (
   <Box width={20}>
-    <Button mb="sm" variant="withIcon">
+    <Button {...args} mb="sm" variant="withIcon">
       <Icon
         icon={PlusIcon}
         mr="xs"
@@ -110,7 +114,7 @@ export const TextIconButton = () => (
       />
       Button Text
     </Button>
-    <Button mb="sm" variant="primaryWithIcon">
+    <Button {...args} mb="sm" variant="primaryWithIcon">
       <Icon
         mr="xs"
         icon={PlusIcon}
@@ -120,7 +124,7 @@ export const TextIconButton = () => (
       />
       Button Text
     </Button>
-    <Button mb="sm" mr="auto" variant="inlineWithIcon">
+    <Button {...args} mb="sm" mr="auto" variant="inlineWithIcon">
       <Icon
         icon={PlusIcon}
         mr="xs"
@@ -130,7 +134,7 @@ export const TextIconButton = () => (
       />
       Button Text
     </Button>
-    <Button mb="sm" mr="auto" variant="inlinePrimaryWithIcon">
+    <Button {...args} mb="sm" mr="auto" variant="inlinePrimaryWithIcon">
       <Icon
         icon={PlusIcon}
         mr="xs"
@@ -150,8 +154,8 @@ TextIconButton.parameters = {
   },
 };
 
-export const Disabled = () => (
-  <Button isDisabled>
+export const Disabled = args => (
+  <Button {...args} isDisabled>
     Button Text
   </Button>
 );

@@ -40,12 +40,12 @@ Default.parameters = {
   },
 };
 
-export const verticalSeparator = () => (
+export const verticalSeparator = ({ ...args }) => (
   <Box height="50px" flexDirection="row" alignItems="center">
     Lorem ipsum
-    <Separator orientation="vertical" sx={{ mx: '15px !important' }} />
+    <Separator {...args} orientation="vertical" sx={{ mx: '15px !important' }} />
     Lorem ipsum
-    <Separator orientation="vertical" sx={{ mx: '15px !important' }} />
+    <Separator {...args} orientation="vertical" sx={{ mx: '15px !important' }} />
     Lorem ipsum
   </Box>
 );

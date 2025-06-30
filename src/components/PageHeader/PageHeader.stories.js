@@ -17,8 +17,10 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Link', 'PageHeader'],
       },
     },
   },
@@ -53,9 +55,10 @@ Default.parameters = {
   },
 };
 
-export const WithoutButton = () => (
+export const WithoutButton = args => (
   <PageHeader
     title="Lorem ipsum"
+    {...args}
   >
     {description}
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>
@@ -69,10 +72,11 @@ WithoutButton.parameters = {
   },
 };
 
-export const WithoutLink = () => (
+export const WithoutLink = args => (
   <PageHeader
     buttonProps={{ onPress: () => { } }}
     title="Lorem ipsum"
+    {...args}
   >
     {description}
   </PageHeader>
@@ -85,10 +89,11 @@ WithoutLink.parameters = {
   },
 };
 
-export const Customization = () => (
+export const Customization = args => (
   <PageHeader
     buttonProps={{ bg: 'critical.bright' }}
     title="Lorem ipsum"
+    {...args}
   >
     {description}
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>

@@ -14,6 +14,9 @@ import {
 
 export default {
   title: 'Recipes/Scrollable List View',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 export const ScrollableListView = () => {

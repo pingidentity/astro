@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import { Input } from '../../index';
 import { InputProps } from '../../types';
@@ -16,7 +16,7 @@ export default {
   args: {
     placeholder: 'This is a basic input',
   },
-};
+} as Meta;
 
 export const Default: StoryFn<InputProps> = (args: InputProps) => (
   <Input {...args} />

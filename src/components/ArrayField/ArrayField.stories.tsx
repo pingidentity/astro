@@ -23,6 +23,7 @@ export default {
   title: 'Form/ArrayField',
   component: ArrayField,
   parameters: {
+    codesandbox: false,
     actions: {
       argTypesRegex: '^on.*',
     },
@@ -33,9 +34,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -76,6 +74,9 @@ export const Uncontrolled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   return (
     <ArrayField
       defaultValue={defaultData}
+      label="Array field label"
+      helperText="Helper text info..."
+      addButtonLabel="+ Add field"
       labelProps={{
         hintText: 'Example Hint',
         isRequired: true,
@@ -107,7 +108,6 @@ export const Uncontrolled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
         )
       }
       sx={{ width: '400px' }}
-      {...args}
     />
   );
 };
@@ -224,12 +224,12 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
       onChange={handleOnChange}
       onDelete={handleOnDelete}
       sx={{ width: '400px' }}
-      label={args.label}
+      label="Array field label"
     />
   );
 };
 
-export const WithLimitedItemsNumber: StoryFn<ArrayFieldProps> = ({ ...args }) => {
+export const WithLimitedItemsNumber: StoryFn<ArrayFieldProps> = () => {
   return (
     <ArrayField
       defaultValue={defaultData}
@@ -256,12 +256,14 @@ export const WithLimitedItemsNumber: StoryFn<ArrayFieldProps> = ({ ...args }) =>
       }
       sx={{ width: '400px' }}
       maxSize={3}
-      {...args}
+      label="Array field label"
+      helperText="Helper text info..."
+      addButtonLabel="+ Add field"
     />
   );
 };
 
-export const Customizations = ({ ...args }) => {
+export const Customizations = () => {
   return (
     <ArrayField
       fieldControlWrapperProps={{ overflowY: 'scroll', maxHeight: '150px' }}
@@ -293,12 +295,14 @@ export const Customizations = ({ ...args }) => {
           </Box>
         )
       }
-      {...args}
+      label="Array field label"
+      helperText="Helper text info..."
+      addButtonLabel="+ Add field"
     />
   );
 };
 
-export const WithBothSlots = ({ ...args }) => {
+export const WithBothSlots = () => {
   const LeftSlot = (
     <Button
       aria-label="Add field"
@@ -356,7 +360,9 @@ export const WithBothSlots = ({ ...args }) => {
           </Box>
         )
       }
-      {...args}
+      label="Array field label"
+      helperText="Helper text info..."
+      addButtonLabel="+ Add field"
     />
   );
 };

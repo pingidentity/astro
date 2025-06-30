@@ -19,20 +19,20 @@ export const Default: StoryFn<FieldHelperTextProps> = (args: FieldHelperTextProp
   </FieldHelperText>
 );
 
-export const Error = () => (
-  <FieldHelperText status="error">
+export const Error = args => (
+  <FieldHelperText {...args} status="error">
     Look at me!
   </FieldHelperText>
 );
 
-export const Success = () => (
-  <FieldHelperText status="success">
+export const Success = args => (
+  <FieldHelperText {...args} status="success">
     Look at me!
   </FieldHelperText>
 );
 
-export const Warning = () => (
-  <FieldHelperText status="warning">
+export const Warning = args => (
+  <FieldHelperText {...args} status="warning">
     Look at me!
   </FieldHelperText>
 );

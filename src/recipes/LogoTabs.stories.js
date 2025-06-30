@@ -15,6 +15,9 @@ import {
 
 export default {
   title: 'Recipes/Logo Tabs',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const P14CLogo = props => (

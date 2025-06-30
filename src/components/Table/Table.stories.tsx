@@ -27,6 +27,23 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Table',
+          'TableBody',
+          'TableCaption',
+          'TableCell',
+          'TableHead',
+          'TableRow',
+          'Text',
+        ],
+      },
+    },
+    controls: { include: ['id'] },
+  },
+  args: {
+    id: 'table',
   },
 } as Meta;
 
@@ -57,9 +74,9 @@ const objects = [
   },
 ];
 
-export const Default: StoryFn<TableProps> = () => {
+export const Default: StoryFn<TableProps> = args => {
   return (
-    <Table>
+    <Table {...args}>
       <TableCaption>
         <Text fontWeight={3} fontSize="lg">{caption}</Text>
       </TableCaption>
