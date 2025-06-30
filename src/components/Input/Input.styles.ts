@@ -26,7 +26,7 @@ export const input: ThemeUICSSObject = {
   height: '40px',
   textOverflow: 'ellipsis',
   paddingRight: '100px',
-  bg: 'white',
+  bg: 'background.base',
   borderWidth: 1,
   borderStyle: 'solid',
   borderColor: 'neutral.80',

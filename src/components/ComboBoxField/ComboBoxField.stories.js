@@ -192,7 +192,7 @@ export const AsyncLoading = () => {
       // Otherwise, the cursor is the next URL to load,
       // as returned from the previous page.
       const res = await fetch(
-        cursor || `https://swapi.dev/api/people/?search=${filterText}`,
+        cursor || `https://swapi.py4e.com/api/people/?search=${filterText}`,
         { signal },
       );
       const json = await res.json();

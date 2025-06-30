@@ -14,6 +14,14 @@ export const fieldControlWrapper = {
     borderColor: 'border.input',
     backgroundColor: 'background.base',
   },
+  '&.is-read-only': {
+    '> input': {
+      backgroundColor: 'background.base',
+    },
+    '> textarea': {
+      backgroundColor: 'background.base',
+    },
+  },
 };
 
 input.fieldControlWrapper = {

@@ -74,6 +74,7 @@ select.transparent = {
 
 select.arrow = {
   ml: 'auto',
+  pointerEvents: 'none',
   '.is-float-label &': {
     mt: -10,
   },
