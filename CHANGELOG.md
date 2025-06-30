@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.129.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.128.0...@pingux/astro@2.129.0) (2025-06-30)
+
+
+### Bug Fixes
+
+* [UIP-7681]  Selectfield dropdown not opening correctly when clicking on arrow icon ([0b97952](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0b9795231b4967fb3571359c8ff646230bb4cef7))
+
+
+### Features
+
+* [UIP-7591] Add playground to astro and end user storybooks ([17f89b3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/17f89b3dcd98bd3e905cc52086bd0b49d05c9030))
+
+
+
+
+
 # [2.128.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.127.0...@pingux/astro@2.128.0) (2025-06-24)
 
 
