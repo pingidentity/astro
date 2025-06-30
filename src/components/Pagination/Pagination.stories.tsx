@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+import { Meta } from '@storybook/react';
 
 import usePaginationState from '../../hooks/usePaginationState';
 import { Box, Button, Item, ListView, ListViewItem, Pagination, PaginationProvider, ScrollBox } from '../../index';
@@ -15,6 +16,7 @@ export default {
     docs: {
       page: () => <PaginationReadme />,
     },
+    codesandbox: false,
   },
   argTypes: {
     totalCount: {
@@ -40,7 +42,7 @@ export default {
     onPageIndexChange: {},
     onOffsetCountChange: {},
   },
-};
+} as Meta;
 
 const ExampleComponent = () => {
   const { paginationState } = usePaginationState();

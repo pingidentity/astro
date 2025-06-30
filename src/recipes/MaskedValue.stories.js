@@ -35,6 +35,7 @@ export default {
         type: 'code',
       },
     },
+    codesandbox: false,
   },
 };
 

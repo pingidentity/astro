@@ -22,6 +22,11 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Loader'],
+      },
+    },
   },
   argTypes: {
     color: {
@@ -51,8 +56,8 @@ Default.parameters = {
   },
 };
 
-export const CustomColor = () => (
-  <Loader color="neutral.50" />
+export const CustomColor = args => (
+  <Loader {...args} color="neutral.50" />
 );
 
 export const CustomSize = args => (

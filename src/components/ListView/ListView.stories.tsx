@@ -1,24 +1,24 @@
 import React, { Key, useRef, useState } from 'react';
-import { Item, useAsyncList } from 'react-stately';
+import { useAsyncList } from 'react-stately';
 import ClockTimeEightOutlineIcon from '@pingux/mdi-react/ClockTimeEightOutlineIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import { action } from '@storybook/addon-actions';
+import { Meta } from '@storybook/react';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import {
-  Box,
+import { Box,
   Button,
   IconWrapperProps,
+  Item,
   ListView,
   ListViewItem,
   ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
   SearchField,
-  Text,
-} from '../..';
+  Text } from '../..';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import animals from '../../utils/devUtils/constants/animals';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -38,10 +38,8 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
+    codesandbox: false,
   },
   argTypes: {
     ...listViewArgTypes,
@@ -51,7 +49,7 @@ export default {
     // eslint-disable-next-line no-console
     onSelectionChange: console.log,
   },
-};
+} as Meta;
 
 export interface ExampleItemProps {
   key: Key,

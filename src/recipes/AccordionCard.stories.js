@@ -20,6 +20,9 @@ import LaunchStartedExperience from '../utils/devUtils/assets/accordionRecepi/La
 
 export default {
   title: 'Recipes/AccordionCard',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const accordionItemSX = {

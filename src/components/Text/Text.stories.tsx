@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import { withDesign } from 'storybook-addon-designs';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -13,13 +14,14 @@ import {
   TableRow,
   Text,
 } from '../../index';
-import { SxObject } from '../../types';
+import { SxObject, TextProps } from '../../types';
 
 import TextReadme from './Text.mdx';
 
 export default {
   title: 'Components/Text',
   component: Text,
+  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -29,30 +31,39 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Box',
+          'Text',
+          'Separator',
+        ],
+      },
+    },
   },
   argTypes: {
+    as: {
+      control: false,
+    },
+    role: {
+      control: false,
+    },
     variant: {
-      control: {
-        type: 'none',
-      },
+      control: false,
       description: 'Text variant.',
     },
     children: {
-      control: {
-        type: 'none',
-      },
+      control: false,
       description: 'Text value.',
     },
     color: {
       control: {
-        type: 'none',
+        type: 'text',
       },
       description: 'Text color.',
     },
     bg: {
-      control: {
-        type: 'none',
-      },
+      control: false,
       description: 'Background color.',
     },
   },
@@ -108,7 +119,7 @@ const TableData: FC<TableDataProps> = ({ variant, value }) => (
   </TableRow>
 );
 
-export const Default: StoryFn = () => {
+export const Default: StoryFn<TextProps> = () => {
   const fontSizes = {
     xx: '23px (xx)',
     lg: '17px (lg)',
@@ -333,15 +344,19 @@ export const Default: StoryFn = () => {
   );
 };
 
-export const CustomWidth: StoryFn = () => (
+Default.parameters = {
+  codesandbox: false,
+};
+
+export const CustomWidth: StoryFn = args => (
   <Box width={200}>
-    <Text p="xl">
+    <Text p="xl" {...args}>
       superlongtextinonelinewithnowhitespacessoitcanbelongerthatanywidth
     </Text>
   </Box>
 );
 
-export const CustomStyle: StoryFn = () => {
+export const CustomStyle: StoryFn = args => {
   const textProps: ThemeUICSSObject = {
     fontFamily: 'times',
     fontSize: 'md',
@@ -356,13 +371,13 @@ export const CustomStyle: StoryFn = () => {
 
   return (
     <Box p="xx" gap="md">
-      <Text variant="title">
+      <Text {...args} variant="title">
         The Text component allows typography style props to be passed in
         directly.
       </Text>
       <Text {...textProps}>{loremText}</Text>
       <Separator />
-      <Text variant="title">
+      <Text {...args} variant="title">
         Typography styles can also be passed in through the sx prop for the same
         result.
       </Text>

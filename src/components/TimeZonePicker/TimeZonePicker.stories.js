@@ -20,15 +20,16 @@ export default {
   },
 };
 
-export const Default = () => <TimeZonePicker label="Default Example" />;
+export const Default = args => <TimeZonePicker {...args} label="Default Example" />;
 
-export const WithCustomTimeZone = () => {
+export const WithCustomTimeZone = args => {
   const customTimeZone = {
     '(GMT+02:00) Africa/Juba': 'Africa/Juba',
   };
 
   return (
     <TimeZonePicker
+      {...args}
       additionalTimeZones={customTimeZone}
       label="With Custom Time Zone (Africa/Juba)"
     />

@@ -14,6 +14,9 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 
 export default {
   title: 'Recipes/Trial Experience Nav',
+  parameters: {
+    codesandbox: false,
+  },
 };
 
 const ArtIcon = () => (

@@ -1,5 +1,4 @@
 import React, { Key, ReactNode, useState } from 'react';
-import { Item } from 'react-stately';
 import { Meta } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
@@ -10,6 +9,7 @@ import {
   Box,
   Button,
   HelpHint,
+  Item,
   Text,
   TextField,
 } from '../../index';
@@ -46,8 +46,10 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['AccordionGroup', 'Badge', 'Box', 'Button', 'HelpHint', 'Item', 'Text', 'TextField'],
       },
     },
   },
@@ -117,6 +119,7 @@ DifferentLevels.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.accordionGroup.differentLevels,
   },
+  codesandbox: false,
 };
 
 export const Multiple = () => {
@@ -151,6 +154,7 @@ Multiple.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.accordionGroup.multiple,
   },
+  codesandbox: false,
 };
 
 export const ControlledExpanded = () => {
@@ -187,6 +191,10 @@ export const ControlledExpanded = () => {
   );
 };
 
+ControlledExpanded.parameters = {
+  codesandbox: false,
+};
+
 export const UncontrolledExpanded = () => {
   return (
     /*
@@ -208,6 +216,10 @@ export const UncontrolledExpanded = () => {
       )}
     </AccordionGroup>
   );
+};
+
+UncontrolledExpanded.parameters = {
+  codesandbox: false,
 };
 
 export const DisabledState = () => {
@@ -238,6 +250,7 @@ DisabledState.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.accordionGroup.disabledState,
   },
+  codesandbox: false,
 };
 
 export const CustomPresentation = () => {
@@ -272,6 +285,7 @@ CustomPresentation.parameters = {
       story: 'In addition to customizing the theme, prop objects can be passed to certain elements. This allows for simple customization in a pinch. See the source code below for an example.',
     },
   },
+  codesandbox: false,
 };
 
 export const LabelWithBadge = args => {
@@ -296,9 +310,9 @@ export const LabelWithBadge = args => {
   );
 };
 
-export const AccordionWithSlot = args => {
+export const AccordionWithSlot = () => {
   return (
-    <AccordionGroup labelHeadingTag="h3" {...args}>
+    <AccordionGroup labelHeadingTag="h3">
       <Item
         key="accordionKey"
         textValue="accordionKey"
@@ -311,3 +325,5 @@ export const AccordionWithSlot = args => {
     </AccordionGroup>
   );
 };
+
+AccordionWithSlot.parameters = { codesandbox: false };

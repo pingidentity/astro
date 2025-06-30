@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RangeCalendar } from '../../index';
@@ -15,9 +15,6 @@ export default {
   parameters: {
     actions: {
       argTypesRegex: '^on.*',
-    },
-    source: {
-      type: 'code',
     },
     docs: {
       page: () => (
@@ -34,7 +31,7 @@ export default {
   args: {
     defaultFocusedValue: '2030-01-15',
   },
-};
+} as Meta;
 
 export const Default: StoryFn<RangeCalendarProps> = (
   args: RangeCalendarProps,
@@ -42,9 +39,10 @@ export const Default: StoryFn<RangeCalendarProps> = (
   return <RangeCalendar {...args} aria-label="range-calendar" />;
 };
 
-export const DefaultValue: StoryFn<RangeCalendarProps> = () => {
+export const DefaultValue: StoryFn<RangeCalendarProps> = args => {
   return (
     <RangeCalendar
+      {...args}
       aria-label="calendar-with-default-vaue"
       defaultValue={{
         start: '2030-01-15',
@@ -86,25 +84,24 @@ export const UnavailableDates: StoryFn<RangeCalendarProps> = () => {
   );
 };
 
-export const MinimumDate: StoryFn<RangeCalendarProps> = () => {
+export const MinimumDate: StoryFn<RangeCalendarProps> = args => {
   return (
     <RangeCalendar
+      {...args}
       aria-label="range-calendar-component-min-date"
       minValue="2030-01-15"
       defaultValue={{ start: '2030-01-15', end: '2030-01-20' }}
-
-
     />
   );
 };
 
-export const MaximumDate: StoryFn<RangeCalendarProps> = () => {
+export const MaximumDate: StoryFn<RangeCalendarProps> = args => {
   return (
     <RangeCalendar
+      {...args}
       aria-label="range-calendar-component-max-date"
       defaultValue={{ start: '2030-01-12', end: '2030-01-15' }}
       maxValue="2030-01-17"
-
     />
   );
 };

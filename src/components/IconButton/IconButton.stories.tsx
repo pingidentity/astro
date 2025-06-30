@@ -37,8 +37,15 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Icon', 'IconButton', 'Text'],
+        '@pingux/mdi-react/CreateIcon': 'CreateIcon',
+        '@pingux/mdi-react/DeleteIcon': 'DeleteIcon',
+        '@pingux/mdi-react/DotsVerticalIcon': 'DotsVerticalIcon',
+        '@pingux/mdi-react/PencilIcon': 'PencilIcon',
+        '@pingux/mdi-react/PlusIcon': 'PlusIcon',
       },
     },
   },
@@ -72,8 +79,8 @@ Inverted.parameters = {
   },
 };
 
-export const WithTooltip = () => (
-  <IconButton aria-label="icon button with tooltip" title="Edit">
+export const WithTooltip = args => (
+  <IconButton aria-label="icon button with tooltip" title="Edit" {...args}>
     <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
   </IconButton>
 );
@@ -189,6 +196,7 @@ Sizes.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.iconButton.sizes,
   },
+  codesandbox: false,
 };
 
 export const CommonlyUsed = () => (
@@ -322,4 +330,5 @@ CommonlyUsed.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.iconButton.commonlyUsed,
   },
+  codesandbox: false,
 };

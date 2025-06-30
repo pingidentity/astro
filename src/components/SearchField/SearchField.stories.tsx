@@ -32,8 +32,16 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'SearchField',
+          'Button',
+          'Icon',
+          'Box',
+          'Text',
+        ],
       },
     },
   },
@@ -110,8 +118,9 @@ export const CustomIcon:StoryFn<SearchFieldProps> = () => (
   />
 );
 
-export const NoClearButton:StoryFn<SearchFieldProps> = () => (
+export const NoClearButton:StoryFn<SearchFieldProps> = args => (
   <SearchField
+    {...args}
     hasNoClearButton
     aria-label="Search Users"
     placeholder="Search Users"

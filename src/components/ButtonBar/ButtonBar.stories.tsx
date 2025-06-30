@@ -13,15 +13,17 @@ export default {
   component: ButtonBar,
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <ButtonBarReadme />
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Button', 'ButtonBar'],
+      },
     },
   },
   argTypes: {
@@ -59,8 +61,8 @@ Default.parameters = {
   },
 };
 
-export const RightAligned: StoryFn = () => (
-  <ButtonBar align="right">
+export const RightAligned: StoryFn = args => (
+  <ButtonBar {...args} align="right">
     <Button
       variant="link"
       data-id="cancel-button"
@@ -85,8 +87,8 @@ RightAligned.parameters = {
   },
 };
 
-export const Secondary: StoryFn = () => (
-  <ButtonBar>
+export const Secondary: StoryFn = args => (
+  <ButtonBar {...args}>
     <Button
       variant="primary"
       data-id="save-button"
@@ -118,8 +120,8 @@ Secondary.parameters = {
   },
 };
 
-export const SecondaryRightAligned: StoryFn = () => (
-  <ButtonBar align="right">
+export const SecondaryRightAligned: StoryFn = args => (
+  <ButtonBar align="right" {...args}>
     <Button
       variant="link"
       data-id="cancel-button"

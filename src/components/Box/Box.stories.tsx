@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -23,8 +24,10 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Box', 'Image', 'Text'],
       },
     },
   },
@@ -53,7 +56,7 @@ export default {
     gap: '10px',
     as: 'div',
   },
-};
+} as Meta;
 
 export const Default = ({ ...args }) => (
   <Box bg="active" width="100%" p="xl" {...args}>
@@ -154,3 +157,5 @@ export const BoxesWithGaps = () => (
     </Box>
   </Box>
 );
+
+BoxesWithGaps.parameters = { codesandbox: false };

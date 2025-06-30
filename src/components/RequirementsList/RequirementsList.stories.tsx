@@ -22,6 +22,13 @@ export default {
         </>
       ),
     },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'RequirementsList',
+        ],
+      },
+    },
   },
   argTypes: {
     requirements: {

@@ -30,6 +30,7 @@ export default {
         </>
       ),
     },
+    codesandbox: false,
   },
   argTypes: {
     title: {

@@ -16,15 +16,13 @@ export default {
   component: DatePicker,
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <DatePickerReadme />
           <DocsLayout />
         </>
       ),
+      codesandbox: false,
     },
     a11y: {
       config: {
@@ -95,7 +93,7 @@ export default {
     isReadOnly: false,
     isRequired: false,
     label: 'Example Label',
-    onChange: null,
+    onChange: () => {},
   },
 };
 

@@ -27,15 +27,17 @@ export default {
   },
   parameters: {
     docs: {
-      source: {
-        type: 'code',
-      },
       page: () => (
         <>
           <CalloutReadme />
           <DocsLayout />
         </>
       ),
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': ['Callout', 'Link', 'Text'],
+      },
     },
   },
 } as Meta;
@@ -58,8 +60,8 @@ Default.parameters = {
   },
 };
 
-export const ErrorStatus: StoryFn = () => (
-  <Callout status={statuses.ERROR}>
+export const ErrorStatus: StoryFn = args => (
+  <Callout status={statuses.ERROR} {...args}>
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Quisque vitae lacinia diam, nec ullamcorper neque.
@@ -79,8 +81,8 @@ ErrorStatus.parameters = {
 // Avoiding using Error as the function name due to it being a JS built-in method
 ErrorStatus.storyName = 'Error';
 
-export const Success: StoryFn = () => (
-  <Callout status={statuses.SUCCESS}>
+export const Success: StoryFn = args => (
+  <Callout status={statuses.SUCCESS} {...args}>
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Quisque vitae lacinia diam, nec ullamcorper neque.
@@ -121,8 +123,8 @@ WithLink.parameters = {
     url: FIGMA_LINKS.callout.withLink,
   },
 };
-export const Warning: StoryFn = () => (
-  <Callout status={statuses.WARNING}>
+export const Warning: StoryFn = args => (
+  <Callout status={statuses.WARNING} {...args}>
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Quisque vitae lacinia diam, nec ullamcorper neque.

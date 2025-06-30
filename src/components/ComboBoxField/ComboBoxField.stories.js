@@ -87,9 +87,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
-      },
     },
   },
   argTypes: {
@@ -176,6 +173,10 @@ export const WithSections = args => (
     </ComboBoxField>
   </OverlayProvider>
 );
+
+WithSections.parameters = {
+  codesandbox: false,
+};
 
 export const AsyncLoading = () => {
   // This example uses `useAsyncList` from "@react-stately/data"

@@ -21,6 +21,7 @@ export default {
       default: 'accent',
       values: [{ name: 'accent', value: '#F7F8FD' }],
     },
+    codesandbox: false,
   },
 };
 

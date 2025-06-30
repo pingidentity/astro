@@ -1,9 +1,11 @@
 import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { AstroProvider,
+import {
+  AstroProvider,
   Button,
-  Text } from '../../index';
+  Text,
+} from '../../index';
 
 import AstroProviderReadme from './AstroProvider.mdx';
 
@@ -19,6 +21,7 @@ export default {
         </>
       ),
     },
+    codesandbox: false,
   },
   decorators: [
     Story => (

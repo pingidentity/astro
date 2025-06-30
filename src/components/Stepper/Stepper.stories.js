@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { Item } from 'react-stately';
 import CreationOutlineIcon from '@pingux/mdi-react/CreationOutlineIcon';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
-import { Box, Button, OverlayPanel, OverlayProvider, PanelHeader, PanelHeaderCloseButton,
+import { Box, Button, Item, OverlayPanel, OverlayProvider, PanelHeader, PanelHeaderCloseButton,
   Stepper, Text } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
 
@@ -53,8 +52,21 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Box',
+          'Button',
+          'OverlayPanel',
+          'OverlayProvider',
+          'PanelHeader',
+          'PanelHeaderCloseButton',
+          'Stepper',
+          'Text',
+          'Item',
+        ],
+        '@pingux/mdi-react/CreationOutlineIcon': 'CreationOutlineIcon',
       },
     },
   },
@@ -183,6 +195,10 @@ export const ControlledStepper = () => {
   );
 };
 
+ControlledStepper.parameters = {
+  codesandbox: false,
+};
+
 export const Panel = () => {
   const [activeStep, setActiveStep] = useState(1);
 
@@ -244,4 +260,8 @@ export const Panel = () => {
         )}
     </OverlayProvider>
   );
+};
+
+Panel.parameters = {
+  codesandbox: false,
 };

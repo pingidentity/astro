@@ -26,6 +26,7 @@ export default {
         </>
       ),
     },
+    codesandbox: false,
   },
 } as Meta;
 

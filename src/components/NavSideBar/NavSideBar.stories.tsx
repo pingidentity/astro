@@ -43,6 +43,7 @@ export default {
         </>
       ),
     },
+    codesandbox: false,
   },
   argTypes: {
   },

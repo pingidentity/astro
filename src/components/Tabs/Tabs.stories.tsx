@@ -52,8 +52,17 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Badge',
+          'Box',
+          'Icon',
+          'Tab',
+          'Tabs',
+          'Text',
+        ],
       },
     },
   },
@@ -93,6 +102,10 @@ export const Controlled: StoryFn = () => {
   );
 };
 
+Controlled.parameters = {
+  codesandbox: false,
+};
+
 export const Centered: StoryFn = () => (
   <Tabs tabListProps={{ justifyContent: 'center' }} items={tabs}>
     {(item: TabListItemProps) => (
@@ -102,6 +115,8 @@ export const Centered: StoryFn = () => (
     )}
   </Tabs>
 );
+
+Centered.parameters = { codesandbox: false };
 
 export const DisabledSingleTab: StoryFn = () => (
   <Tabs items={tabs} disabledKeys={['Tab 2']}>
@@ -113,6 +128,8 @@ export const DisabledSingleTab: StoryFn = () => (
   </Tabs>
 );
 
+DisabledSingleTab.parameters = { codesandbox: false };
+
 export const DisabledAllTabs: StoryFn = () => (
   <Tabs isDisabled items={tabs}>
     {(item: TabListItemProps) => (
@@ -123,6 +140,7 @@ export const DisabledAllTabs: StoryFn = () => (
   </Tabs>
 );
 
+DisabledAllTabs.parameters = { codesandbox: false };
 
 export const ContentSlots: StoryFn = () => {
   const beforeTabNode = (
@@ -165,6 +183,8 @@ export const ContentSlots: StoryFn = () => {
   );
 };
 
+ContentSlots.parameters = { codesandbox: false };
+
 export const WithList: StoryFn = () => {
   const allTabs = [
     ...tabs,
@@ -188,6 +208,8 @@ export const WithList: StoryFn = () => {
   );
 };
 
+WithList.parameters = { codesandbox: false };
+
 export const CustomTabLine: StoryFn = () => (
   <Tabs items={tabs}>
     {(item: TabListItemProps) => (
@@ -198,6 +220,8 @@ export const CustomTabLine: StoryFn = () => (
   </Tabs>
 );
 
+CustomTabLine.parameters = { codesandbox: false };
+
 export const CustomPanelProps: StoryFn = () => (
   <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
     {(item: TabListItemProps) => (
@@ -207,3 +231,5 @@ export const CustomPanelProps: StoryFn = () => (
     )}
   </Tabs>
 );
+
+CustomPanelProps.parameters = { codesandbox: false };

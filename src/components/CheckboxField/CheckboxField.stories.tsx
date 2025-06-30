@@ -32,8 +32,18 @@ export default {
           <DocsLayout />
         </>
       ),
-      source: {
-        type: 'code',
+    },
+    codesandbox: {
+      mapComponent: {
+        '@pingux/astro': [
+          'Badge',
+          'Box',
+          'CheckboxField',
+          'IconButtonToggle',
+          'Link',
+          'SwitchField',
+          'Text',
+        ],
       },
     },
   },
@@ -82,8 +92,9 @@ export const Default: StoryFn<CheckboxFieldProps> = (args: CheckboxFieldProps) =
   />
 );
 
-export const DefaultSelected: StoryFn<CheckboxFieldProps> = () => (
+export const DefaultSelected: StoryFn<CheckboxFieldProps> = args => (
   <CheckboxField
+    {...args}
     isDefaultSelected
     label="Click me"
   />
@@ -100,8 +111,11 @@ export const Controlled: StoryFn<CheckboxFieldProps> = () => {
   );
 };
 
-export const Required: StoryFn<CheckboxFieldProps> = () => (
+Controlled.parameters = { codesandbox: false };
+
+export const Required: StoryFn<CheckboxFieldProps> = args => (
   <CheckboxField
+    {...args}
     isRequired
     label={(
       <Text>
@@ -113,8 +127,9 @@ export const Required: StoryFn<CheckboxFieldProps> = () => (
   />
 );
 
-export const HelperText: StoryFn<CheckboxFieldProps> = () => (
+export const HelperText: StoryFn<CheckboxFieldProps> = args => (
   <CheckboxField
+    {...args}
     status={statuses.ERROR}
     helperText="Here is some helpful text..."
     label="Click me"
@@ -234,6 +249,8 @@ export const ExpandableAndToggleableIndeterminate: StoryFn<CheckboxFieldProps> =
   );
 };
 
+ExpandableAndToggleableIndeterminate.parameters = { codesandbox: false };
+
 export const Indeterminate: StoryFn<CheckboxFieldProps> = () => {
   // Whether the parent checkbox is indeterminate (default is true for our example)
   const [isIndeterminate, setIsIndeterminate] = useState(true);
@@ -316,20 +333,24 @@ Indeterminate.parameters = {
       story: 'When a `CheckboxField` is indeterminate, it\'s necessary to control the state in order to determine how it should function when pressed. Here is an example of how to do that.',
     },
   },
+  codesandbox: false,
 };
 
-export const Disabled: StoryFn<CheckboxFieldProps> = () => (
+export const Disabled: StoryFn<CheckboxFieldProps> = args => (
   <Box>
     <CheckboxField
+      {...args}
       isDisabled
       label="Disabled"
     />
     <CheckboxField
+      {...args}
       isDisabled
       isSelected
       label="Disabled"
     />
     <CheckboxField
+      {...args}
       isDisabled
       isIndeterminate
       label="Disabled"
