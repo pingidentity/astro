@@ -111,7 +111,7 @@ const badge = {
   textColor: nextGenColors['gray-900'],
   background: nextGenColors['gray-100'],
 };
-const tooltip = 'black';
+const tooltip = nextGenColors['gray-900'];
 
 const colors = {
   ...subColors,

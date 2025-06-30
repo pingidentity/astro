@@ -25,6 +25,7 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
       hasNoArrow,
       targetRef,
       width,
+      shouldAnimate = true,
     } = props;
 
     const [trigger, tooltip] = React.Children.toArray(children);
@@ -51,7 +52,7 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
 
     const isTransitioning = useMountTransition(state.isOpen, 200);
 
-    const isOpen = state.isOpen || (themeState.isOnyx && isTransitioning);
+    const isOpen = state.isOpen || (themeState.isOnyx && shouldAnimate && isTransitioning);
 
     const { overlayProps: positionProps, arrowProps, placement } = useOverlayPosition({
       placement: `${direction} ${align}` as Placement,
@@ -67,6 +68,7 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
     const { classNames } = useStatusClasses(className, {
       [`is-${direction}`]: direction,
       isDarkMode,
+      animate: shouldAnimate,
       isTransitioning,
       isMounted: state.isOpen,
     });

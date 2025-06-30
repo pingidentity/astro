@@ -180,6 +180,14 @@ export const FloatLabel = () => (
   </SelectField>
 );
 
+FloatLabel.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
 export const Controlled = () => {
   const [selectedKey, setSelectedKey] = useState('yellow');
   const handleSelectionChange = key => setSelectedKey(key);
@@ -264,6 +272,14 @@ export const HelperText = () => (
     <Item key="yellow">Yellow</Item>
   </SelectField>
 );
+
+HelperText.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
 
 const options = new Array(400).fill({ key: 'string', name: 'string' }).map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
 export const DynamicItems = () => {

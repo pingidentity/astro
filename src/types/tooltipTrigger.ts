@@ -50,4 +50,7 @@ export interface TooltipTriggerProps extends DOMAttributes, ReactAriaTooltipTrig
 
   /* The ref for the element which the overlay positions itself with respect to. */
   targetRef?: RefObject<FocusableElement | HTMLElement>;
+
+  /* Should have fade in and fade out animation in Onyx and Onyx Dark theme */
+  shouldAnimate?: boolean;
 }
