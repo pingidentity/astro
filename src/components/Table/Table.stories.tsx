@@ -3,13 +3,13 @@ import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  Card,
   Table,
   TableBody,
   TableCaption,
   TableCell,
   TableHead,
   TableRow,
-  Text,
 } from '../../index';
 import { TableProps } from '../../types';
 
@@ -76,30 +76,32 @@ const objects = [
 
 export const Default: StoryFn<TableProps> = args => {
   return (
-    <Table {...args}>
-      <TableCaption>
-        <Text fontWeight={3} fontSize="lg">{caption}</Text>
-      </TableCaption>
-      <TableHead>
-        <TableRow key="head">
-          {headers.map(head => (
-            <TableCell isHeading key={head}>
-              {head}
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {objects.map(object => (
-          <TableRow key={object.date}>
-            {Object.values(object).map(value => (
-              <TableCell key={value}>
-                {value}
+    <Card variant="cards.tableWrapper">
+      <Table {...args}>
+        <TableCaption>
+          {caption}
+        </TableCaption>
+        <TableHead>
+          <TableRow key="head">
+            {headers.map(head => (
+              <TableCell isHeading key={head}>
+                {head}
               </TableCell>
             ))}
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {objects.map(object => (
+            <TableRow key={object.date}>
+              {Object.values(object).map(value => (
+                <TableCell key={value}>
+                  {value}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Card>
   );
 };

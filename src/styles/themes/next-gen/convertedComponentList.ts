@@ -38,6 +38,8 @@ const nextGenConvertedComponents = [
   'TooltipTrigger',
   'ListViewItem',
   'Pagination',
+  'Table',
+  'TableBase',
 ];
 
 export const componentSpecificNextGenBlacklist = {

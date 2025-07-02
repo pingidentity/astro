@@ -100,6 +100,7 @@ const background = {
   secondary: nextGenColors['gray-100'],
   card: nextGenColors['blue-100'],
   suggestion: '#ecf0f5',
+  hover: nextGenColors['gray-100'],
 };
 
 const card = {

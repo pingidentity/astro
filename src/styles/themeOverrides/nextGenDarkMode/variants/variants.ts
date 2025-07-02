@@ -125,4 +125,26 @@ export default {
       },
     },
   },
+  table: {
+    caption: {
+      color: 'text.secondary',
+    },
+    head: {
+      color: 'text.secondary',
+    },
+    data: {
+      color: 'text.secondary',
+    },
+  },
+  tableBase: {
+    caption: {
+      color: 'text.secondary',
+    },
+    head: {
+      color: 'text.secondary',
+    },
+    data: {
+      color: 'text.secondary',
+    },
+  },
 };

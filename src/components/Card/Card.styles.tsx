@@ -86,6 +86,12 @@ const activeCard = {
   },
 };
 
+const tableWrapper = {
+  ...container,
+  padding: 0,
+  boxShadow: 'none',
+};
+
 export default {
   container,
   interactive,
@@ -94,4 +100,5 @@ export default {
   flat,
   body,
   activeCard,
+  tableWrapper,
 };

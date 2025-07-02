@@ -41,6 +41,7 @@ import skeleton from '../../components/Skeleton/Skeleton.styles';
 import slider from '../../components/SliderField/Slider.styles';
 import stepper from '../../components/Stepper/Stepper.styles';
 import table from '../../components/Table/Table.styles';
+import tableBase from '../../components/TableBase/TableBase.styles';
 import * as tab from '../../components/Tabs/Tabs.style';
 import timefield from '../../components/TimeField/TimeField.styles';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
@@ -96,4 +97,5 @@ export default {
   tooltip,
   treeView,
   ...tab,
+  tableBase,
 };

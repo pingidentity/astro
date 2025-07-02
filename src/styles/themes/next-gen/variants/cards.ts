@@ -21,6 +21,7 @@ const interactive = {
 const container = {
   ...flat,
   p: 'lg',
+  borderColor: 'border.base',
 };
 
 const dark = {
@@ -77,6 +78,11 @@ const suggestionColumn = {
   display: 'flex',
 };
 
+const tableWrapper = {
+  ...container,
+  overflowY: 'hidden',
+};
+
 export default {
   interactive,
   dark,
@@ -85,4 +91,5 @@ export default {
   container,
   suggestionColumn,
   suggestionRow,
+  tableWrapper,
 };
