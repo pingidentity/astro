@@ -5,13 +5,13 @@ const head = {
   fontWeight: 500,
   width: '100%',
   flexDirection: 'row !important',
-  p: '10px',
+  p: 'sm',
 };
 
 const data = {
   ...text.tableData,
   width: '100%',
-  p: '10px',
+  p: 'sm',
 };
 
 const body = {
@@ -19,7 +19,7 @@ const body = {
   borderTopColor: 'neutral.40',
   borderBottom: '1px solid',
   borderBottomColor: 'neutral.80',
-  '&& > tr:nth-of-type(odd) ': {
+  '& > tr:nth-of-type(odd)': {
     backgroundColor: 'neutral.95',
   },
 };
@@ -34,9 +34,11 @@ const container = {
 };
 
 const caption = {
+  fontFamily: 'standard',
+  fontSize: 'lg',
+  fontWeight: '2',
+  p: 'sm',
   textAlign: 'left',
-  marginBottom: 'xs',
-  lineHeight: '21px',
 };
 
 export default {

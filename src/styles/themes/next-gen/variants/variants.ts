@@ -16,6 +16,8 @@ import prompt from './prompt';
 import response from './response';
 import suggestion from './suggestion';
 import suggestions from './suggestions';
+import { table } from './table';
+import { tableBase } from './tableBase';
 import { menuTab, tab, tabs } from './tabs';
 import tooltip from './tooltip';
 
@@ -409,4 +411,6 @@ export default {
   tooltip,
   footer,
   loader,
+  table,
+  tableBase,
 };
