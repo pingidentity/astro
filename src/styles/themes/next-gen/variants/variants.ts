@@ -4,6 +4,7 @@ import codeView from '../codeView/codeView';
 
 import { avatar } from './avatar';
 import button from './button';
+import callout from './callout';
 import { dataTable } from './dataTable';
 import { footer } from './footer';
 import iconWrapper from './iconWrapper';
@@ -411,6 +412,7 @@ export default {
   tooltip,
   footer,
   loader,
+  callout,
   table,
   tableBase,
 };
