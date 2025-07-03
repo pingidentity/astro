@@ -4,6 +4,7 @@ import codeView from '../codeView/codeView';
 
 import { avatar } from './avatar';
 import button from './button';
+import callout from './callout';
 import { dataTable } from './dataTable';
 import { footer } from './footer';
 import iconWrapper from './iconWrapper';
@@ -16,6 +17,8 @@ import prompt from './prompt';
 import response from './response';
 import suggestion from './suggestion';
 import suggestions from './suggestions';
+import { table } from './table';
+import { tableBase } from './tableBase';
 import { menuTab, tab, tabs } from './tabs';
 import tooltip from './tooltip';
 
@@ -409,4 +412,7 @@ export default {
   tooltip,
   footer,
   loader,
+  callout,
+  table,
+  tableBase,
 };

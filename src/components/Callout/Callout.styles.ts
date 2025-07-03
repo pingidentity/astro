@@ -1,3 +1,5 @@
+import tShirtSizes from '../../styles/themes/astro/customProperties/tShirtSizes';
+
 const base = {
   alignItems: 'center',
   border: '1px solid',
@@ -5,26 +7,26 @@ const base = {
   fontSize: 'md',
   p: '15px 12px 15px 0',
   width: '600px',
+  '&.is-success, > .is-success': {
+    borderColor: 'success.bright',
+  },
+  '&.is-warning, > .is-warning': {
+    borderColor: 'warning.bright',
+  },
+  '&.is-error, > .is-error': {
+    borderColor: 'critical.bright',
+  },
 };
 
-const error = {
-  ...base,
-  borderColor: 'critical.bright',
-};
-
-const success = {
-  ...base,
-  borderColor: 'success.bright',
-};
-
-const warning = {
-  ...base,
-  borderColor: 'warning.bright',
+const icon = {
+  mr: 'md',
+  ml: 'md',
+  minWidth: `${tShirtSizes.md} !important`,
+  width: `${tShirtSizes.md} !important`,
+  height: `${tShirtSizes.md} !important`,
 };
 
 export default {
   base,
-  error,
-  success,
-  warning,
+  icon,
 };

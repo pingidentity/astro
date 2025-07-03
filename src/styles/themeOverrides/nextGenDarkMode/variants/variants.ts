@@ -1,4 +1,5 @@
 import { avatar } from './avatar';
+import callout from './callout';
 import { footer } from './footer';
 import iconBadge from './iconBadge';
 import { listView, listViewItem, lisViewItemChart } from './listview';
@@ -123,6 +124,29 @@ export default {
       '&.is-focused': {
         boxShadow: '0 0 0 3px inset #1a73e8',
       },
+    },
+  },
+  callout,
+  table: {
+    caption: {
+      color: 'text.secondary',
+    },
+    head: {
+      color: 'text.secondary',
+    },
+    data: {
+      color: 'text.secondary',
+    },
+  },
+  tableBase: {
+    caption: {
+      color: 'text.secondary',
+    },
+    head: {
+      color: 'text.secondary',
+    },
+    data: {
+      color: 'text.secondary',
     },
   },
 };

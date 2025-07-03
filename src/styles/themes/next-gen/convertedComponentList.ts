@@ -38,6 +38,9 @@ const nextGenConvertedComponents = [
   'TooltipTrigger',
   'ListViewItem',
   'Pagination',
+  'Callout',
+  'Table',
+  'TableBase',
 ];
 
 export const componentSpecificNextGenBlacklist = {
@@ -81,6 +84,9 @@ export const astroBlacklistStory = {
   ],
   SearchField: [
     'Onyx With Filter',
+  ],
+  Callout: [
+    'Customizations',
   ],
 };
 

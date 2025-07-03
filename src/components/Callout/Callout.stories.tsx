@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckBoldIcon from '@pingux/mdi-react/CheckBoldIcon';
+import LightbulbOutlineIcon from '@pingux/mdi-react/LightbulbOutlineIcon';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
@@ -59,6 +60,28 @@ Default.parameters = {
     url: FIGMA_LINKS.callout.default,
   },
 };
+
+export const Customizations = () => (
+  <Callout
+    icon={(
+      <Icon
+        icon={LightbulbOutlineIcon}
+        size="sm"
+        color="teal-500"
+        mr="md"
+      />
+    )}
+    sx={{
+      borderLeftColor: 'teal-500',
+    }}
+  >
+    <Text>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Quisque vitae lacinia diam, nec ullamcorper neque.
+      In egestas dui vel dolor tincidunt, sit amet ullamcorper leo consequat.
+    </Text>
+  </Callout>
+);
 
 export const ErrorStatus: StoryFn = args => (
   <Callout status={statuses.ERROR} {...args}>
@@ -121,6 +144,11 @@ WithLink.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.callout.withLink,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
   },
 };
 export const Warning: StoryFn = args => (

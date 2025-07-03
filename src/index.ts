@@ -188,6 +188,8 @@ export { default as Tab } from './components/Tab';
 export * from './components/Tab';
 export { default as Table } from './components/Table';
 export * from './components/Table';
+export * from './components/TableBase';
+export { default as TableBase } from './components/TableBase';
 export { default as TableBody } from './components/TableBody';
 export * from './components/TableBody';
 export { default as TableCaption } from './components/TableCaption';
@@ -222,11 +224,19 @@ export { default as NextGenTheme } from './styles/themes/next-gen';
 export { default as OnyxTheme } from './styles/themes/next-gen';
 export * from './types';
 export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
-export { Item, Section, useOverlayTriggerState, useTreeData } from 'react-stately';
 export {
+  Cell,
+  Column,
   TableBody as DataTableBody,
   Cell as DataTableCell,
   Column as DataTableColumn,
   TableHeader as DataTableHeader,
   Row as DataTableRow,
+  Item,
+  Row,
+  Section,
+  TableBody as TBody,
+  TableHeader as THead,
+  useOverlayTriggerState,
+  useTreeData,
 } from 'react-stately';
