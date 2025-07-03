@@ -1,8 +1,8 @@
 export default {
-  xxs: 9,
-  xs: 15,
-  sm: 20,
-  md: 25,
+  xxs: '9px',
+  xs: '15px',
+  sm: '20px',
+  md: '25px',
 };
 
 export const iconWrapperSizes = {

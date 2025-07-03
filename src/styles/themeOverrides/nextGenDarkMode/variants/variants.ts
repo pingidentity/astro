@@ -1,4 +1,5 @@
 import { avatar } from './avatar';
+import callout from './callout';
 import { footer } from './footer';
 import iconBadge from './iconBadge';
 import { listView, listViewItem, lisViewItemChart } from './listview';
@@ -125,6 +126,7 @@ export default {
       },
     },
   },
+  callout,
   table: {
     caption: {
       color: 'text.secondary',

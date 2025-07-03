@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 
-import { Box, IconSize } from '../..';
+import { Box } from '../..';
+import { useStatusClasses } from '../../hooks';
 import { CalloutProps } from '../../types/callout';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { NoticeIcon } from '../Icon/NoticeIcon';
@@ -8,16 +9,10 @@ import { NoticeIcon } from '../Icon/NoticeIcon';
 export const CALLOUT_TEST_ID = 'CalloutTestId';
 
 const calloutProps = {
-  [statuses.DEFAULT]: { color: 'text.secondary', variant: 'callout.base' },
-  [statuses.ERROR]: { color: 'critical.bright', variant: 'callout.error' },
-  [statuses.SUCCESS]: { color: 'success.bright', variant: 'callout.success' },
-  [statuses.WARNING]: { color: 'warning.bright', variant: 'callout.warning' },
-};
-
-const defaultIconProps = {
-  mr: 'md',
-  ml: 'md',
-  size: 'md' as IconSize,
+  [statuses.DEFAULT]: { color: 'text.secondary' },
+  [statuses.ERROR]: { color: 'critical.bright' },
+  [statuses.SUCCESS]: { color: 'success.bright' },
+  [statuses.WARNING]: { color: 'warning.bright' },
 };
 
 /**
@@ -27,27 +22,40 @@ const defaultIconProps = {
  */
 
 const Callout = forwardRef<HTMLElement, CalloutProps>(({
-  children, status = statuses.DEFAULT, icon, ...others
-}, ref) => (
-  <Box
-    ref={ref}
-    data-testid={CALLOUT_TEST_ID}
-    isRow
-    role="note"
-    variant={calloutProps[status].variant}
-    {...others}
-  >
-    {icon || (
-      <NoticeIcon
-        color={calloutProps[status].color}
-        status={status}
-        aria-label={`${status}-icon`}
-        {...defaultIconProps}
-      />
-    )}
-    {children}
-  </Box>
-));
+  children,
+  status = statuses.DEFAULT,
+  icon,
+  className,
+  iconProps,
+  ...others
+}, ref) => {
+  const { classNames: statusClasses } = useStatusClasses(className, {
+    [`is-${status}`]: true,
+  });
+
+  return (
+    <Box
+      ref={ref}
+      data-testid={CALLOUT_TEST_ID}
+      isRow
+      role="note"
+      variant="callout.base"
+      className={statusClasses}
+      {...others}
+    >
+      {icon || (
+        <NoticeIcon
+          color={calloutProps[status].color}
+          status={status}
+          variant="callout.icon"
+          aria-label={`${status}-icon`}
+          {...iconProps}
+        />
+      )}
+      {children}
+    </Box>
+  );
+});
 
 Callout.displayName = 'Callout';
 
