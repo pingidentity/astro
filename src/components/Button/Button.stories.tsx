@@ -206,3 +206,9 @@ ColorBlockButton.parameters = {
     url: FIGMA_LINKS.button.colorBlockButton,
   },
 };
+
+export const Filter = () => (
+  <Button variant="filter">
+    Filter Text
+  </Button>
+);

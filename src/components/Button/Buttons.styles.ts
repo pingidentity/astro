@@ -236,6 +236,16 @@ const defaultVariant = {
   },
 };
 
+const filter = {
+  ...defaultVariant,
+  px: 'sm',
+  borderColor: 'neutral.80',
+  height: 40,
+  color: 'active',
+  display: 'flex',
+};
+
+
 const colorBlock = {
   bg: 'neutral.95',
   border: '1px solid',
@@ -379,4 +389,5 @@ export default {
   quiet,
   success,
   withIcon,
+  filter,
 };

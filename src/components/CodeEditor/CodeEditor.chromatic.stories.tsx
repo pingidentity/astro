@@ -1,41 +1,13 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react';
 
-import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeEditor } from '../../index';
 import { CodeEditorProps } from '../../types';
 
-import CodeEditorReadme from './CodeEditor.mdx';
-
-
 export default {
-  title: 'Experimental/CodeEditor',
+  title: 'Chromatic Only CodeEditor',
   component: CodeEditor,
-  parameters: {
-    docs: {
-      page: () => (
-        <>
-          <CodeEditorReadme />
-          <DocsLayout />
-        </>
-      ),
-    },
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'color-contrast',
-            enabled: false,
-          },
-          {
-            id: 'aria-roledescription',
-            enabled: false,
-          },
-        ],
-      },
-    },
-    chromatic: { disable: true },
-  },
+
 };
 
 const jsonCode = `{
@@ -90,6 +62,19 @@ export const TypescriptEditor:StoryFn<CodeEditorProps> = args => {
       defaultValue={tsCode}
       language="typescript"
       height="200px"
+      editorOptionsProps={{
+        minimap: { enabled: false },
+        scrollbar: { vertical: 'hidden', horizontal: 'hidden' },
+        renderValidationDecorations: 'off',
+        renderLineHighlight: 'none',
+        cursorStyle: 'block',
+        overviewRulerLanes: 0,
+        hideCursorInOverviewRuler: true,
+        selectionHighlight: false,
+      }}
+      onMount={editor => {
+        editor.layout(); // Force layout stabilization
+      }}
     />
   );
 };
@@ -101,6 +86,19 @@ export const JavascriptEditor:StoryFn<CodeEditorProps> = args => {
       defaultValue={jsCode}
       language="javascript"
       height="200px"
+      editorOptionsProps={{
+        minimap: { enabled: false },
+        scrollbar: { vertical: 'hidden', horizontal: 'hidden' },
+        renderValidationDecorations: 'off',
+        renderLineHighlight: 'none',
+        cursorStyle: 'block',
+        overviewRulerLanes: 0,
+        hideCursorInOverviewRuler: true,
+        selectionHighlight: false,
+      }}
+      onMount={editor => {
+        editor.layout();
+      }}
     />
   );
 };
@@ -112,6 +110,19 @@ export const JsonEditor:StoryFn<CodeEditorProps> = args => {
       defaultValue={jsonCode}
       language="json"
       height="200px"
+      editorOptionsProps={{
+        minimap: { enabled: false },
+        scrollbar: { vertical: 'hidden', horizontal: 'hidden' },
+        renderValidationDecorations: 'off',
+        renderLineHighlight: 'none',
+        cursorStyle: 'block',
+        overviewRulerLanes: 0,
+        hideCursorInOverviewRuler: true,
+        selectionHighlight: false,
+      }}
+      onMount={editor => {
+        editor.layout();
+      }}
     />
   );
 };
@@ -123,6 +134,19 @@ export const ReadOnly:StoryFn<CodeEditorProps> = () => {
       language="json"
       height="200px"
       isReadOnly
+      editorOptionsProps={{
+        minimap: { enabled: false },
+        scrollbar: { vertical: 'hidden', horizontal: 'hidden' },
+        renderValidationDecorations: 'off',
+        renderLineHighlight: 'none',
+        cursorStyle: 'block',
+        overviewRulerLanes: 0,
+        hideCursorInOverviewRuler: true,
+        selectionHighlight: false,
+      }}
+      onMount={editor => {
+        editor.layout();
+      }}
     />
   );
 };

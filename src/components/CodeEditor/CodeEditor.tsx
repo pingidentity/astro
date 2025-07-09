@@ -16,6 +16,8 @@ const CodeEditor = forwardRef<HTMLDivElement, CodeEditorProps>((props, ref) => {
     className,
     isReadOnly,
     iconButtonProps,
+    editorOptionsProps,
+    onMount,
     ...others
   } = props;
 
@@ -82,7 +84,9 @@ const CodeEditor = forwardRef<HTMLDivElement, CodeEditorProps>((props, ref) => {
                 top: 13,
                 bottom: 13,
               },
+              ...editorOptionsProps,
             } as CustomEditorOptions}
+            onMount={onMount}
           />
         </Box>
       </Box>

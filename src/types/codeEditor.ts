@@ -12,6 +12,8 @@ export interface CodeEditorProps extends Omit<DOMAttributes<FocusableElement>, '
   onValidate?: (markers: editor.IMarker[]) => void;
   isReadOnly?: boolean;
   iconButtonProps?: Omit<IconButtonProps, 'onPress'>
+  editorOptionsProps?: monaco.editor.IStandaloneEditorConstructionOptions;
+  onMount?: (codeEditor: monaco.editor.IStandaloneCodeEditor) => void;
 }
 
 export interface CustomEditorOptions extends monaco.editor.IStandaloneEditorConstructionOptions {
