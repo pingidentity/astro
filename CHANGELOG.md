@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.130.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.129.0...@pingux/astro@2.130.0) (2025-07-09)
+
+
+### Bug Fixes
+
+* [UIP-7691] Add filter variant to button ([ade0fe1](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ade0fe1f8e4b626b5e860f622dd875da56dd7d5c))
+* create stable code editor for chromatic ([95cd9d9](https://gitlab.corp.pingidentity.com/ux/pingux/commit/95cd9d97ed4471efca954af4e503ca05a280df97))
+
+
+### Features
+
+* [UIP-7650] Refactor table and its components to use usetable hook ([87995d5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/87995d507a3e87490a6894d779dfb2fe25433714))
+* [UIP-7660] Create Callout Component for Astro Onyx ([34d4f79](https://gitlab.corp.pingidentity.com/ux/pingux/commit/34d4f7948601a290d159757f2dd530766377e7fe))
+
+
+
+
+
 # [2.129.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.128.0...@pingux/astro@2.129.0) (2025-06-30)
 
 
