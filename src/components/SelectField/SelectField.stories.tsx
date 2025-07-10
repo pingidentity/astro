@@ -229,6 +229,7 @@ export const WithNoneOption = args => (
 
 export const WithSlots = () => (
   <SelectField
+    aria-label="with-slots"
     slots={{
       leftOfData: (
         <Icon
