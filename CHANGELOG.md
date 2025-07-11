@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.130.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.0...@pingux/astro@2.130.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* [UIP-7664] Astro SelectField fix warning ([a0d3405](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a0d3405cabfbc447521a6f3ffda164a2e0b9bfd1))
+
+
+
+
+
 # [2.130.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.129.0...@pingux/astro@2.130.0) (2025-07-09)
 
 
