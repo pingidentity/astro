@@ -104,7 +104,9 @@ const useSelectField = <T extends object>(
   // We use falsy booleans as defaults, but React Aria has this as true by default so we need to
   // negate this.
   const shouldFlip = !isNotFlippable;
+  const ariaLabel = props['aria-label'];
   const selectProps = {
+    'aria-label': ariaLabel,
     defaultSelectedKey,
     defaultText,
     disabledKeys,
