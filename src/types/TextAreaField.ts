@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { ContainerProps, ControlProps } from '../hooks/useField/useField';
+
 import { SharedFieldProps } from './shared/fieldProps';
 import { TestingAttributes } from './shared/test';
 import { HelpHintProps } from './helpHint';
@@ -53,4 +55,8 @@ export interface TextAreaFieldProps extends TestingAttributes, SharedFieldProps{
   name?: string;
   /** Props object that is spread directly into the helphint element. */
   helpHintProps?: HelpHintProps;
+  /** Props object that is spread directly into the input wrapper element. */
+  wrapperProps?: Record<string, unknown>
+  controlProps?: ControlProps;
+  containerProps?: ContainerProps;
 }
