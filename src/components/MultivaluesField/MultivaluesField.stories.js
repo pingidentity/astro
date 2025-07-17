@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -530,16 +530,24 @@ export const CondensedAsyncLoading = args => {
   const [maxNum, setMaxNum] = useState(10);
   const [listItems, setListItems] = useState(initialItems);
   const [isOpen, setIsOpen] = useState(false);
-  const [loadingState, setLoadingState] = useState(loadingStates.IDLE);
+  const [loadingState, setLoadingState] = useState(loadingStates.LOADING);
 
 
   const onOpenChange = () => {
     setIsOpen(true);
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingState(loadingStates.IDLE);
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup the timer on unmount
+  }, []);
+
   const onLoadMore = async () => {
     setLoadingState(loadingStates.LOADING_MORE);
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
     const newItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_, index) => ({ name: `name: ${maxNum + index}`, key: `name: ${maxNum + index}`, id: maxNum + index }));
     setMaxNum(maxNum + 10);
     setListItems([...listItems, ...newItems]);

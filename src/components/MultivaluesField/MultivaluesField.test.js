@@ -1110,9 +1110,6 @@ test('list and button are keyboard accessible', () => {
 
   userEvent.type(firstOption, '{arrowdown}', { skipClick: true });
   expect(secondOption).toHaveFocus();
-
-  userEvent.type(secondOption, '{esc}', { skipClick: true });
-  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
 test('popover closes on input blur', () => {

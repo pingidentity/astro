@@ -7,9 +7,9 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
-import { Badge, Box, Icon, IconButton, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+import { Badge, Box, Icon, IconButton, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
-import { usePropWarning } from '../../hooks';
+import { useInputLoader, usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -30,6 +30,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     helperText,
     inputProps: customInputProps,
     isDisabled,
+    isFilteringDisabled,
     isNotFlippable,
     isReadOnly,
     isRequired,
@@ -70,20 +71,22 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   const toggleItems = keys => {
     setItems(initialItems.filter(item => !Array.from(keys).includes(item.key)));
-    setFilterString('');
     if (onSelectionChange) onSelectionChange(keys);
   };
 
   const { contains } = useFilter({ sensitivity: 'base' });
 
+  const defaultFilter = nodes => {
+    const arr = Array.from(nodes).filter(item => contains(item.textValue, filterString));
+    return arr;
+  };
+
   const state = useListState({
     ...otherProps,
-    filter: nodes => Array.from(nodes).filter(
-      item => contains(item.textValue, filterString),
-    ),
     items: items.filter(({ key }) => !readOnlyKeys.includes(key)),
     onSelectionChange: toggleItems,
     selectionMode: 'multiple',
+    ...(!isFilteringDisabled && { filter: defaultFilter }),
   });
 
   const { selectionManager } = state;
@@ -94,6 +97,8 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   );
 
   const close = () => setIsOpen(false);
+
+  const { showLoading } = useInputLoader({ loadingState, inputValue: filterString });
 
   const closeBadgeRefs = useRef([]);
   const inputWrapperRef = useRef();
@@ -215,7 +220,6 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
           const key = selectionManager.focusedKey;
           if (!disabledKeys.includes(key)) {
             selectionManager.toggleSelection(selectionManager.focusedKey);
-            setFilterString('');
           }
         } else if (hasCustomValue && !selectionManager.focusedKey) {
           const key = e.target.value;
@@ -454,6 +458,16 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     status,
   };
 
+  const loader = (
+    <Box isRow variant="forms.comboBox.inputInContainerSlot">
+      {
+        // Render loader after delay if filtering or loading
+        showLoading && (loadingState === loadingStates.LOADING)
+        && <Loader variant="loader.withinInput" />
+      }
+    </Box>
+  );
+
   return (
     <MultivaluesContext.Provider value={setActiveDescendant}>
       <Box {...containerProps}>
@@ -474,6 +488,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
           onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
           aria-describedby={selectionManager.selectedKeys.size > 0 ? 'selectedKeysState' : 'emptyKeysState'}
           slots={{
+            inContainer: loader,
             beforeInput:
   <>
     {
