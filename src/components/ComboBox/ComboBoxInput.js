@@ -1,10 +1,10 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { FocusRing, mergeProps } from 'react-aria';
 import { PressResponder, useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Loader, TextField } from '../..';
-import { usePropWarning } from '../../hooks';
+import { useInputLoader, usePropWarning } from '../../hooks';
 import useGetTheme from '../../hooks/useGetTheme';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
@@ -49,38 +49,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
 
   const { hoverProps, isHovered } = useHover({});
 
-  // START - minimum delay time for loading indicator = 500ms
-  const [showLoading, setShowLoading] = useState(false);
-  const isLoading = loadingState === loadingStates.LOADING
-    || loadingState === loadingStates.FILTERING;
-  const inputValue = inputProps.value;
-  const lastInputValue = useRef(inputValue);
-  const timeout = useRef(null);
-  useEffect(() => {
-    if (isLoading && !showLoading) {
-      if (timeout.current === null) {
-        timeout.current = setTimeout(() => {
-          setShowLoading(true);
-        }, 500);
-      }
-
-      // If user is typing, clear the timer and restart since it is a new request
-      if (inputValue !== lastInputValue.current) {
-        clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => {
-          setShowLoading(true);
-        }, 500);
-      }
-    } else if (!isLoading) {
-      // If loading is no longer happening, clear any timers and hide the loader
-      setShowLoading(false);
-      clearTimeout(timeout.current);
-      timeout.current = null;
-    }
-
-    lastInputValue.current = inputValue;
-  }, [isLoading, showLoading, inputValue]);
-  // END - minimum delay time for loading indicator = 500ms
+  const { showLoading } = useInputLoader({ loadingState, inputValue: inputProps.value });
 
   usePropWarning(props, 'disabled', 'isDisabled');
 
