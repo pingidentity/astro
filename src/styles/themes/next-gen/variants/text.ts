@@ -65,11 +65,12 @@ export const text = {
     lineHeight: 'body',
   },
   listViewItemText: {
+    fontSize: 'md',
     fontFamily: 'standard',
     color: 'text.primary',
     fontWeight: 2,
+    lineHeight: 'body',
     mb: 'xs',
-    fontSize: 'md',
   },
   listViewItemSubtext: {
     fontSize: 'md',
