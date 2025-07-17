@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.130.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.1...@pingux/astro@2.130.2) (2025-07-17)
+
+
+### Bug Fixes
+
+* [UIP-7684] TextAreaField add types ([44de3f3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/44de3f327596c0d0675cfc513f91f0b03d00a158))
+* [UIP-7689] ListView text box is cutting off descenders ([52f9827](https://gitlab.corp.pingidentity.com/ux/pingux/commit/52f98276cd555ddd77882af777ef2630fe05f921))
+* [UIP-7700] MultivaluesField Fixes ([a01565f](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a01565f199fc3df2df7e3bc94d9c8408f9d561d3))
+
+
+
+
+
 ## [2.130.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.0...@pingux/astro@2.130.1) (2025-07-11)
 
 
