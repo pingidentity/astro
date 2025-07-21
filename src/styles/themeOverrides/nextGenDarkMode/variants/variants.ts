@@ -69,13 +69,13 @@ const rockerButton = {
       backgroundColor: 'gray-900',
       color: 'blue-400',
       '&.is-selected': {
-        color: 'gray-900',
+        color: 'black',
       },
       '&.is-hovered': {
-        color: 'gray-900',
+        color: 'black',
       },
       '&.is-pressed': {
-        color: 'gray-900',
+        color: 'black',
       },
     },
 

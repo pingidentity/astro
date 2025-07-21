@@ -7,4 +7,5 @@ export const nextGenThemeValues = {
   icons,
   tShirtSizes,
   iconWrapperSizes,
+  rockerButtonGap: '0px',
 };

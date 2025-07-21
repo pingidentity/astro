@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { AstroProvider, NextGenTheme, RockerButton, RockerButtonGroup } from '../..';
+import { RockerButton, RockerButtonGroup } from '../..';
 import { RockerButtonGroupProps } from '../../types';
 
 import RockerButtonGroupReadme from './RockerButtonGroup.mdx';
@@ -43,7 +43,7 @@ export default {
 } as Meta;
 
 export const Default: StoryFn<RockerButtonGroupProps> = ({ ...args }: RockerButtonGroupProps) => (
-  <RockerButtonGroup {...args}>
+  <RockerButtonGroup {...args} defaultSelectedKeys={['and']}>
     <RockerButton name="and" key="and">And</RockerButton>
     <RockerButton name="or" key="or">Or</RockerButton>
     <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
@@ -63,9 +63,14 @@ Uncontrolled.parameters = {
 };
 
 export const Controlled: StoryFn = () => {
-  const [currentTab, setCurrentTab] = useState('and');
+  const [currentTab, setCurrentTab] = useState(['and']);
+
+  const onSelectionChange = e => {
+    setCurrentTab(e);
+  };
+
   return (
-    <RockerButtonGroup selectedKey={currentTab} onSelectionChange={setCurrentTab}>
+    <RockerButtonGroup selectedKeys={currentTab} onSelectionChange={onSelectionChange}>
       <RockerButton name="and" key="and">And</RockerButton>
       <RockerButton name="or" key="or">Or</RockerButton>
       <RockerButton name="maybe" key="maybe">Maybe</RockerButton>
