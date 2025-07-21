@@ -7,4 +7,5 @@ export const astroThemeValues = {
   styles,
   tShirtSizes,
   iconWrapperSizes,
+  rockerButtonGap: '3px',
 };

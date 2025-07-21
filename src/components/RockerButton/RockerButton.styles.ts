@@ -26,6 +26,7 @@ const thumbSwitch = {
   paddingBottom: '0px',
   textTransform: 'uppercase',
   bg: 'accent.95',
+  pl: '15px',
   '&.is-selected': {
     bg: 'accent.20',
     color: 'white',
@@ -36,6 +37,9 @@ const thumbSwitch = {
   },
   '&.is-hovered': {
     bg: 'white',
+  },
+  '&.is-pressed': {
+    color: 'white',
   },
 };
 
