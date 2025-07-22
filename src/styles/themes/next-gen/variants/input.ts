@@ -14,6 +14,7 @@ const readOnlyandDisabledStyles = {
 };
 
 export const input: ThemeUICSSObject = {
+  height: '50px',
   fontSize: 'md',
   fontFamily: 'standard',
   p: '0.75rem',
@@ -25,6 +26,14 @@ export const input: ThemeUICSSObject = {
   borderRadius: '4px',
   fontWeight: 1,
   '&::placeholder': text.placeholder,
+  '.is-float-label &': {
+    height: '50px',
+  },
+};
+
+input.large = {
+  ...input,
+  height: '4em',
 };
 
 input.promptInput = {
@@ -47,7 +56,6 @@ input.promptInput = {
 
 input.search = {
   ...input,
-  height: '50px',
   pl: '4em !important',
   pr: 'xl',
   color: 'font.base',
