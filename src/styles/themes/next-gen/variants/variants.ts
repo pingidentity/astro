@@ -354,6 +354,8 @@ const rockerButton = {
         outline: '2px solid',
         outlineColor: 'focus',
         outlineOffset: '2px',
+        position: 'relative',
+        zIndex: '1000',
       },
     },
     'button:not(:first-child)': {

@@ -20,7 +20,7 @@ const getComponent = (props = {}, { buttons = testButtons, renderFn = render } =
   <RockerButtonGroup {...defaultProps} {...props} data-id="test-container">
     {buttons.map(button => (
       <RockerButton
-        title={button.name}
+        name={button.name}
         key={button.key}
         selectedStyles={button.selectedStyles}
       />
@@ -33,7 +33,7 @@ universalComponentTests({
   renderComponent: props => (
     <RockerButtonGroup {...props}>
       <RockerButton
-        title={testButtons[0].name}
+        name={testButtons[0].name}
         key={testButtons[0].key}
         selectedStyles={testButtons[0].selectedStyles}
       />
@@ -45,7 +45,7 @@ test('renders rocker container with buttons', () => {
   getComponent();
   const rockerContainer = screen.getByTestId(testId);
   expect(rockerContainer).toBeInTheDocument();
-  const buttons = screen.getAllByRole('button');
+  const buttons = screen.getAllByRole('radio');
   expect(buttons).toHaveLength(3);
 });
 
@@ -74,7 +74,7 @@ test('rockerButton renders selectedStyles prop when selected', () => {
   expect(buttonColorKey).toHaveClass('is-selected');
 });
 
-test('selected button can be changed by keyboard interaction', () => {
+test('selected button can be changed by keyboard interaction', async () => {
   getComponent();
   userEvent.tab();
   const button0 = screen.getByText(testButtons[0].key);
@@ -82,8 +82,14 @@ test('selected button can be changed by keyboard interaction', () => {
   const button1 = screen.getByText(testButtons[1].key);
   expect(button1).not.toHaveClass('is-selected');
   fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
-  expect(screen.getByText(testButtons[1].key)).toHaveClass('is-selected');
-  expect(screen.getByText(testButtons[0].key)).not.toHaveClass('is-selected');
+  fireEvent.keyDown(screen.getByText(testButtons[1].key), { key: 'Enter', code: 'Enter' });
+  fireEvent.keyUp(screen.getByText(testButtons[1].key), { key: 'Enter', code: 'Enter' });
+
+  const updatedButton0 = await screen.findByText(testButtons[0].key);
+  const updatedButton1 = await screen.findByText(testButtons[1].key);
+
+  expect(updatedButton1).toHaveClass('is-selected');
+  expect(updatedButton0).not.toHaveClass('is-selected');
 });
 
 test('rockerButton renders correct darker bg when selectedStyles prop is passed', () => {
@@ -105,6 +111,8 @@ test('rockerButton renders correct bg when selectedStyles prop is css variable',
   getComponent();
   const button1 = screen.getByText(testButtons[1].key);
   fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
+  fireEvent.keyDown(screen.getByText(testButtons[1].key), { key: 'Enter', code: 'Enter' });
+  fireEvent.keyUp(screen.getByText(testButtons[1].key), { key: 'Enter', code: 'Enter' });
   userEvent.hover(button1);
   expect(button1).toHaveClass('is-selected');
   expect(button1).toHaveClass('is-hovered');

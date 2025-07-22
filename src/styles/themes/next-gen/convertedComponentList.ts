@@ -41,6 +41,13 @@ const nextGenConvertedComponents = [
   'Callout',
   'Table',
   'TableBase',
+  'ArrayField',
+  'ColorField',
+  'LinkSelectField',
+  'NumberField',
+  'SwitchField',
+  'Base Components',
+  'SliderField',
 ];
 
 export const componentSpecificNextGenBlacklist = {

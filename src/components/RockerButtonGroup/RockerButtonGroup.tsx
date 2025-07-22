@@ -1,34 +1,57 @@
 import React, {
   forwardRef,
+  useMemo,
 } from 'react';
-import { useTabList } from 'react-aria';
-import { useTabListState } from 'react-stately';
-import { AriaTabListProps } from '@react-aria/tabs';
-import { TabListState, TabListStateOptions } from '@react-stately/tabs';
+import { AriaToggleButtonGroupProps, useToggleButtonGroup } from '@react-aria/button';
+import { ToggleGroupProps, useToggleGroupState } from '@react-stately/toggle';
 
 import { RockerContext } from '../../context/RockerButtonGroupContext';
-import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { RockerButtonGroupProps } from '../../types';
 import Box from '../Box';
-import { CollectionRockerButton } from '../RockerButton';
 
 const RockerButtonGroup = forwardRef<HTMLDivElement, RockerButtonGroupProps>((props, ref) => {
   const {
-    tabListProps, // eslint-disable-line
+    defaultSelectedKey: defaultSelectedKeyProp,
+    defaultSelectedKeys: defaultSelectedKeysProp,
+    disabledKeys,
+    selectedKey: selectedKeyProp,
+    selectedKeys: selectedKeysProp,
+    tabListProps,
     ...others
   } = props;
   const buttonGroupRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  const state = useTabListState(props as TabListStateOptions<object>) as TabListState<object>;
+
+  const selectedKeys = selectedKeysProp || (selectedKeyProp ? [selectedKeyProp] : null);
+  const defaultSelectedKeys = defaultSelectedKeysProp
+  || (defaultSelectedKeyProp ? [defaultSelectedKeyProp] : null);
+
+  const theseProps = {
+    ...others,
+    ...(defaultSelectedKeys && { defaultSelectedKeys }),
+    ...(selectedKeys && { selectedKeys }),
+  };
+
+  const state = useToggleGroupState(theseProps as ToggleGroupProps);
+
   const {
-    tabListProps: raTabListProps,
-  } = useTabList(props as AriaTabListProps<object>, state, buttonGroupRef);
-  // removed tabList role for now as this isn't really the role we are looking for
+    groupProps: raTabListProps,
+  } = useToggleButtonGroup(
+    theseProps as AriaToggleButtonGroupProps, state, buttonGroupRef);
+
   delete raTabListProps.role;
+  delete raTabListProps['data-testid'];
+
+  const contextValue = useMemo(() => (
+    { state, disabledKeys }
+  ), [state, disabledKeys]);
+
+  const { rockerButtonGap } = useGetTheme();
 
   return (
-    <RockerContext.Provider value={state}>
+    <RockerContext.Provider value={contextValue}>
       <Box variant="rockerButton.container" {...others}>
         <Box
           variant="rockerButton.innerContainer"
@@ -37,13 +60,9 @@ const RockerButtonGroup = forwardRef<HTMLDivElement, RockerButtonGroupProps>((pr
           {...raTabListProps}
           ref={buttonGroupRef}
           role="toolbar"
+          gap={rockerButtonGap}
         >
-          {Array.from(state.collection).map(item => (
-            <CollectionRockerButton
-              key={item.key}
-              item={item}
-            />
-          ))}
+          {props.children}
         </Box>
       </Box>
     </RockerContext.Provider>

@@ -69,13 +69,13 @@ const rockerButton = {
       backgroundColor: 'gray-900',
       color: 'blue-400',
       '&.is-selected': {
-        color: 'gray-900',
+        color: 'black',
       },
       '&.is-hovered': {
-        color: 'gray-900',
+        color: 'black',
       },
       '&.is-pressed': {
-        color: 'gray-900',
+        color: 'black',
       },
     },
 
@@ -147,6 +147,22 @@ export default {
     },
     data: {
       color: 'text.secondary',
+    },
+  },
+  fieldHelperText: {
+    title: {
+      '&.is-default': {
+        color: 'text.fieldHelper',
+      },
+      '&.is-error': {
+        color: 'critical.bright',
+      },
+      '&.is-warning': {
+        color: 'warning.bright',
+      },
+      '&.is-success': {
+        color: 'success.bright',
+      },
     },
   },
 };
