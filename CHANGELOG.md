@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.130.3](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.2...@pingux/astro@2.130.3) (2025-07-22)
+
+
+### Bug Fixes
+
+* [	UIP-7683] Update onyx input height ([421712b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/421712b1e2d4398a1df7b6bd2a69daebd7aca879))
+* [UIP-7655] Astro RockerButton refactor ([29b2cd7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/29b2cd7a5897658916df36e28de2d65114465c18))
+
+
+
+
+
 ## [2.130.2](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.1...@pingux/astro@2.130.2) (2025-07-17)
 
 
