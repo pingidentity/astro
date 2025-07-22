@@ -157,7 +157,10 @@ const modalSize = {
 
 const modal = {
   content: {
-    p: 0,
+    boxShadow: '0px 8px 16px 0px rgba(0, 0, 0, 0.5)',
+    px: 'lg',
+    pb: 'lg',
+    pt: 0,
     borderRadius: '4px',
     opacity: 0,
     top: '0',
@@ -199,20 +202,9 @@ const modal = {
     justifyContent: 'start',
   },
   header: {
-    px: 'lg',
-    py: 'md',
-    borderBottom: '1px solid',
-    borderBottomColor: 'border.base',
+    pt: 'lg',
     bg: 'background.base',
-  },
-  footer: {
-    borderTop: '1px solid',
-    borderTopColor: 'border.base',
-    px: 'lg',
-    py: 'md',
-  },
-  buttonsContainer: {
-    bottom: 0,
+    mb: 'lg',
   },
 };
 

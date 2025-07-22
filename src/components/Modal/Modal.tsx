@@ -141,7 +141,9 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
               }
               {titleContent}
             </Box>
-            {children}
+            <Box pt="lg">
+              {children}
+            </Box>
           </Box>
         </FocusScope>
       </Box>

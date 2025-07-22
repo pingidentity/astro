@@ -61,7 +61,7 @@ const headingContainer = {
   pt: 'md',
   pr: 'lg',
   pb: 'md',
-  background: 'white',
+  backgroundColor: 'background.base',
 };
 
 const buttonsContainer = {

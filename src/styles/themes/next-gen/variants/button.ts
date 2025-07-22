@@ -379,7 +379,7 @@ const modalCloseButton = {
   ...baseIconButton,
   position: 'absolute',
   top: 32,
-  right: 42,
+  right: 18,
 };
 
 const onyxIconButton = {
