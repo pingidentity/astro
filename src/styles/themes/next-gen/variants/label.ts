@@ -6,6 +6,7 @@ export const label: ThemeUICSSObject = {
   '&.is-float-label': {
     fontSize: 'md',
     fontWeight: 1,
+    top: '15px',
   },
   '.is-float-label-active &.is-float-label': {
     fontSize: 'sm',

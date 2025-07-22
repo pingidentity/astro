@@ -149,4 +149,20 @@ export default {
       color: 'text.secondary',
     },
   },
+  fieldHelperText: {
+    title: {
+      '&.is-default': {
+        color: 'text.fieldHelper',
+      },
+      '&.is-error': {
+        color: 'critical.bright',
+      },
+      '&.is-warning': {
+        color: 'warning.bright',
+      },
+      '&.is-success': {
+        color: 'success.bright',
+      },
+    },
+  },
 };
