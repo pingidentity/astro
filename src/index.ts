@@ -86,6 +86,7 @@ export { default as FileInputField } from './components/FileInputField';
 export { default as Footer } from './components/Footer';
 export * from './components/Footer';
 export { default as Grid } from './components/Grid';
+export { default as GridList, GridListRow } from './components/GridList';
 export { default as HelpHint } from './components/HelpHint';
 export * from './components/HelpHint';
 export { default as Icon } from './components/Icon';

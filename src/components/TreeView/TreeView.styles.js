@@ -56,6 +56,7 @@ const insertionIndicator = {
   width: '100%',
   outline: '1px solid',
   outlineColor: 'active',
+  mt: '3px',
 };
 
 export default {

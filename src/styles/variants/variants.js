@@ -14,6 +14,7 @@ import dataTable from '../../components/DataTable/DataTable.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
 import footer from '../../components/Footer/Footer.styles';
+import gridList from '../../components/GridList/GridList.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
 import listBox from '../../components/ListBox/ListBox.styles';
@@ -66,6 +67,7 @@ export default {
   environmentBreadcrumb,
   fieldHelperText,
   footer,
+  gridList,
   helpHint,
   imageUpload,
   listBox,
