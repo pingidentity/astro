@@ -1,4 +1,5 @@
 const nextGenConvertedComponents = [
+  'GridList',
   'DataTable',
   'Message',
   'Button',

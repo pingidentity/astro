@@ -1,11 +1,11 @@
 import React from 'react';
+import { useVisuallyHidden } from 'react-aria';
 import { useDropIndicator } from '@react-aria/dnd';
 import PropTypes from 'prop-types';
 
 import {
   Box,
 } from '../..';
-import { useStatusClasses } from '../../hooks';
 
 const InsertionIndicator = props => {
   const insertRef = React.useRef(null);
@@ -14,32 +14,34 @@ const InsertionIndicator = props => {
     dropState: state,
   } = props;
 
+  const { visuallyHiddenProps } = useVisuallyHidden();
+
   const { dropIndicatorProps, isHidden, isDropTarget } = useDropIndicator(
     {
       target,
-      isPresentationOnly: true,
     },
     state,
     { ref: insertRef },
   );
 
-  const { classNames } = useStatusClasses('', {
-    isDropTarget,
-  });
-
   if (isHidden) {
     return null;
   }
 
+  if (!isDropTarget) {
+    return null;
+  }
+
   return (
-    <Box
-      as="li"
-      {...dropIndicatorProps}
-      role="option"
-      ref={insertRef}
-      className={classNames}
-      variant="treeView.insertionIndicator"
-    />
+    <Box role="row" aria-hidden={dropIndicatorProps['aria-hidden']} data-testid="insertion-indicator">
+      <Box
+        role="gridcell"
+        aria-selected="false"
+        variant="treeView.insertionIndicator"
+      >
+        <Box {...visuallyHiddenProps} role="button" {...dropIndicatorProps} ref={insertRef} />
+      </Box>
+    </Box>
   );
 };
 
