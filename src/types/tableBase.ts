@@ -1,53 +1,71 @@
 import { Key, ReactNode } from 'react';
 import type { TableState } from '@react-stately/table';
+import { TableColumnResizeState } from '@react-stately/table';
 import type { GridNode } from '@react-types/grid';
 import type { Node } from '@react-types/shared';
+import type { TableProps } from '@react-types/table';
 
 import { TestingAttributes } from './shared/test';
 import { BoxProps } from './box';
 import { DOMAttributes } from './shared';
 
-export interface TableBaseProp extends BoxProps, TestingAttributes, DOMAttributes{
+export interface BaseProp extends BoxProps, TestingAttributes, DOMAttributes{
 }
 
-export interface TableBaseProps extends TableBaseProp {
+export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<BaseProp, 'children'> {
   'aria-label'?: string;
-  selectedKeys?: Key[],
-  defaultSelectedKeys?: Key[],
-  selectionMode?: 'single' | 'none',
+  selectionMode?: 'none' | 'single' | 'multiple',
+  selectionBehavior?: 'replace' | 'toggle',
+  showSelectionCheckboxes?: boolean;
   'data-testid'?: string;
   caption?: ReactNode | string;
   tableBodyProps?: Record<string, unknown>;
+  isStickyHeader?: boolean;
 }
 
-export interface TableRowGroupProps extends TableBaseProp {
+export interface TableRowGroupProps extends BaseProp{
   type: 'thead' | 'tbody' | 'tfoot';
   children: ReactNode;
   hasCaption?: boolean;
+  isSticky?: boolean;
 }
 
-export interface TableHeaderRowProps extends TableBaseProp {
-  item: Node<object>;
-  state: TableState<object>;
+export interface TableHeaderRowProps<T> extends BaseProp{
+  item: Node<T>;
+  state: TableState<T>;
   children: ReactNode;
   className?: string;
 }
 
-export interface TableColumnHeaderProps extends TableBaseProp {
-  column: GridNode<object>;
-  state: TableState<object>;
+export interface TableColumnHeaderProps<T> extends BaseProp{
+  column: GridNode<T>;
+  state: TableState<T>;
   className?: string;
+  layoutState: TableColumnResizeState<T>;
 }
 
-export interface TableRowProps extends TableBaseProp {
-  item: Node<object>;
-  state: TableState<object>;
+export interface TableRowProps<T> extends BaseProp{
+  item: Node<T>;
+  state: TableState<T>;
   children: ReactNode;
   className?: string;
 }
 
-export interface TableCellProps extends TableBaseProp {
-  cell: GridNode<object>;
-  state: TableState<object>;
+export interface TableCellProps<T> extends BaseProp{
+  cell: GridNode<T>;
+  state: TableState<T>;
   className?: string;
+  layoutState: TableColumnResizeState<T>;
+}
+
+export interface TableCheckboxCellProps<T> extends BaseProp{
+  cell: GridNode<T>;
+  state: TableState<T>;
+  layoutState: TableColumnResizeState<T>;
+}
+
+export interface TableSelectAllCellProps<T> extends BaseProp{
+  column: GridNode<T>;
+  state: TableState<T>;
+  layoutState: TableColumnResizeState<T>;
 }

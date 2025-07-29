@@ -35,6 +35,7 @@ const row = {
 };
 
 const thead = {
+  borderBottomColor: 'border.base',
   backgroundColor: 'background.base',
   '&:not(.has-caption)': {
     '& > tr:first-child': {

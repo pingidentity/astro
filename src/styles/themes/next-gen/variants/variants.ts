@@ -409,4 +409,16 @@ export default {
   callout,
   table,
   tableBase,
+  box: {
+    indeterminateCheckboxIcon: {
+      height: '19.25px',
+      width: '19.25px',
+      '&.is-disabled': {
+        '& rect[id="indeterminate-checkbox-icon-wrapper"]': {
+          fill: 'gray-500',
+          stroke: 'gray-500',
+        },
+      },
+    },
+  },
 };
