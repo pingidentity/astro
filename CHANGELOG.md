@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.131.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.4...@pingux/astro@2.131.0) (2025-07-29)
+
+
+### Features
+
+* [UIP-7621] Astro GridList ([9f53515](https://gitlab.corp.pingidentity.com/ux/pingux/commit/9f5351517befee11fd24c3864e57a1abf0e562b6))
+* [UIP-7712] Add multiselection in new tablebase component ([010ef1e](https://gitlab.corp.pingidentity.com/ux/pingux/commit/010ef1e513a164810351d9d9f7119b77233f6925))
+
+
+
+
+
 ## [2.130.4](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.3...@pingux/astro@2.130.4) (2025-07-24)
 
 **Note:** Version bump only for package @pingux/astro
