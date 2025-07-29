@@ -4,7 +4,6 @@ import { omit } from 'lodash';
 import PropTypes from 'prop-types';
 import { Checkbox as ThemeUICheckbox } from 'theme-ui';
 
-import { active, neutral } from '../../styles/colors';
 import Box from '../Box';
 
 /**
@@ -20,11 +19,8 @@ const DefaultCheckbox = forwardRef((props, ref) => (
 ));
 
 const IndeterminateCheckboxIcon = props => {
-  const color = props.disabled ? neutral[80] : active;
   return (
     <svg
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +29,7 @@ const IndeterminateCheckboxIcon = props => {
       {...omit(props, 'id', 'aria-checked', 'data-testid')}
     >
       <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
-      <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill={color} stroke={color} />
+      <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" id="indeterminate-checkbox-icon-wrapper" />
       <rect x="6.5" y="11" width="11" height="2" fill="white" />
     </svg>
   );
@@ -51,6 +47,7 @@ IndeterminateCheckboxIcon.propTypes = {
 const IndeterminateCheckbox = forwardRef((props, ref) => {
   /* eslint-disable no-param-reassign */
   if (ref?.current) ref.current.indeterminate = true;
+
   return (
     <>
       <VisuallyHidden>
@@ -58,6 +55,7 @@ const IndeterminateCheckbox = forwardRef((props, ref) => {
       </VisuallyHidden>
       <Box
         as={IndeterminateCheckboxIcon}
+        variant="variants.box.indeterminateCheckboxIcon"
         mr={2}
         {...props}
         opacity={1}

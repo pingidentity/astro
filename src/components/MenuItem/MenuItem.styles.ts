@@ -3,6 +3,7 @@ const item = {
   padding: '10px 10px',
   outline: 'none',
   cursor: 'pointer',
+  fontFamily: 'standard',
   '&.is-focused, &.is-selected, &.is-pressed': {
     color: 'white',
     bg: 'active',
