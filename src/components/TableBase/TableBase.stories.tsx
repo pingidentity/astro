@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import type { Selection } from 'react-stately';
 import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -7,12 +8,16 @@ import {
   Card,
   Cell,
   Column,
+  Pagination,
+  PaginationProvider,
   Row,
   TableBase,
   TBody,
+  Text,
   THead,
 } from '../..';
-import { TableProps } from '../../types';
+import { usePaginationState } from '../../hooks';
+import { TableBaseProps } from '../../types/tableBase';
 import { items } from '../../utils/devUtils/constants/items';
 
 import TableReadme from './TableBase.mdx';
@@ -75,92 +80,145 @@ const objects = [
   },
 ];
 
-export const Default: StoryFn<TableProps> = () => {
+const statusVariant = {
+  Pending: 'warningStatusBadge',
+  Failed: 'criticalStatusBadge',
+  Rejected: 'criticalStatusBadge',
+  Active: 'healthyStatusBadge',
+  Inactive: 'secondaryStatusBadge',
+};
+
+export const Default: StoryFn<TableBaseProps<object>> = () => {
   return (
-    <Card variant="cards.tableWrapper">
-      <TableBase
-        caption="Lorem ipsum"
-        aria-label="table"
-      >
-        <THead columns={headers}>
-          {column => (
-            <Column key={column.key}>
-              {column.name}
-            </Column>
-          )}
-        </THead>
-        <TBody items={objects}>
-          {item => (
-            <Row key={item.id}>
-              {columnKey => (
-                <Cell>
-                  {item[columnKey]}
-                </Cell>
-              )}
-            </Row>
-          )}
-        </TBody>
-      </TableBase>
-    </Card>
+    <TableBase caption="Lorem ipsum" aria-label="table">
+      <THead columns={headers}>
+        {column => <Column key={column.key}>{column.name}</Column>}
+      </THead>
+      <TBody items={objects}>
+        {item => (
+          <Row key={item.id}>
+            {columnKey => <Cell>{item[columnKey]}</Cell>}
+          </Row>
+        )}
+      </TBody>
+    </TableBase>
   );
 };
 
-export const Customization: StoryFn<TableProps> = () => {
-  const statusVariant = {
-    'Pending': 'warningStatusBadge',
-    'Failed': 'criticalStatusBadge',
-    'Rejected': 'criticalStatusBadge',
-    'Active': 'healthyStatusBadge',
-    'Inactive': 'secondaryStatusBadge',
-  };
+export const MultiSelection: StoryFn<TableBaseProps<object>> = () => {
+  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(['1', '3']));
 
   return (
-    <Card variant="cards.tableWrapper">
-      <TableBase
-        aria-label="table"
-      >
-        <THead>
-          <Column width={70}>
-            #
-          </Column>
-          <Column>
-            Name
-          </Column>
-          <Column>
-            Email
-          </Column>
-          <Column>
-            Status
-          </Column>
-          <Column>
-            Bio
-          </Column>
-        </THead>
-        <TBody items={items}>
-          {item => (
-            <Row key={item.email}>
-              <Cell>
-                {item.id}
-              </Cell>
-              <Cell {...{ noWrap: true }}>
-                {item.firstName}
-                {' '}
-                {item.lastName}
-              </Cell>
-              <Cell {...{ noWrap: true }}>
-                {item.email}
-              </Cell>
-              <Cell>
-                <Badge variant={statusVariant[item.status]} label={item.status} />
-              </Cell>
-              <Cell>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quo quidem accusantium architecto tempore facere!
-              </Cell>
-            </Row>
-          )}
-        </TBody>
-      </TableBase>
-    </Card>
+    <TableBase
+      caption="Lorem ipsum"
+      aria-label="table"
+      selectionMode="multiple"
+      selectedKeys={selectedKeys}
+      onSelectionChange={setSelectedKeys}
+    >
+      <THead columns={headers}>
+        {column => <Column key={column.key}>{column.name}</Column>}
+      </THead>
+      <TBody items={objects}>
+        {item => (
+          <Row key={item.id}>
+            {columnKey => <Cell>{item[columnKey]}</Cell>}
+          </Row>
+        )}
+      </TBody>
+    </TableBase>
+  );
+};
+
+export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <TableBase
+      aria-label="table"
+      isStickyHeader
+      tableBodyProps={{ style: { height: '300px' } }}
+    >
+      <THead>
+        <Column width={200}>Name</Column>
+        <Column width={300}>Email</Column>
+        <Column width={150}>Status</Column>
+        <Column width="1fr">Bio</Column>
+      </THead>
+      <TBody items={items}>
+        {item => (
+          <Row key={item.email}>
+            <Cell>
+              {`${item.firstName} ${item.lastName}`}
+            </Cell>
+            <Cell>{item.email}</Cell>
+            <Cell>
+              <Badge
+                variant={statusVariant[item.status]}
+                label={item.status}
+              />
+            </Cell>
+            <Cell>
+              <Text variant="textEllipsis">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                quidem accusantium architecto tempore facere!
+              </Text>
+            </Cell>
+          </Row>
+        )}
+      </TBody>
+    </TableBase>
+  );
+};
+
+const ExampleTable = () => {
+  const { paginationState } = usePaginationState();
+  const renderItems = items.slice(
+    paginationState.firstRenderedIndex,
+    paginationState.lastRenderedIndex + 1,
+  );
+
+  return (
+    <TableBase aria-label="table">
+      <THead>
+        <Column width={200}>Name</Column>
+        <Column width={300}>Email</Column>
+        <Column width={150}>Status</Column>
+        <Column width="1fr">Bio</Column>
+      </THead>
+      <TBody items={renderItems}>
+        {item => (
+          <Row key={item.email}>
+            <Cell>
+              {`${item.firstName} ${item.lastName}`}
+            </Cell>
+            <Cell>{item.email}</Cell>
+            <Cell>
+              <Badge variant={statusVariant[item.status]} label={item.status} />
+            </Cell>
+            <Cell>
+              <Text variant="textEllipsis">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                quidem accusantium architecto tempore facere!
+              </Text>
+            </Cell>
+          </Row>
+        )}
+      </TBody>
+    </TableBase>
+  );
+};
+
+export const WithPagination: StoryFn<TableBaseProps<object>> = () => {
+  const [offsetCount, setOffsetCount] = useState(10);
+
+  return (
+    <PaginationProvider>
+      <ExampleTable />
+      <Pagination
+        totalCount={items.length}
+        offsetCount={offsetCount}
+        onOffsetCountChange={setOffsetCount}
+        offsetOptions={[10, 20, 50, 100]}
+      />
+    </PaginationProvider>
   );
 };

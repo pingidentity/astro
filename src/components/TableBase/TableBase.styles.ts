@@ -11,6 +11,7 @@ const container = {
   width: '100%',
   borderSpacing: '0',
   borderCollapse: 'collapse',
+  position: 'relative',
 };
 
 const caption = {
@@ -21,7 +22,16 @@ const caption = {
   textAlign: 'left',
 };
 
-const thead = {};
+const thead = {
+  borderBottom: '1px solid',
+  backgroundColor: 'white',
+  borderBottomColor: 'neutral.40',
+  '&.is-sticky': {
+    position: 'sticky',
+    top: 0,
+    zIndex: 1,
+  },
+};
 
 const head = {
   ...text.label,
@@ -35,10 +45,9 @@ const head = {
 };
 
 const tbody = {
-  borderTop: '1px solid',
-  borderTopColor: 'neutral.40',
   borderBottom: '1px solid',
   borderBottomColor: 'neutral.80',
+  overflow: 'auto',
 };
 
 const row = {
@@ -59,9 +68,6 @@ const row = {
 const data = {
   ...text.tableData,
   p: 'sm',
-  '&.no-wrap': {
-    whiteSpace: 'nowrap',
-  },
   '&.is-focused': {
     ...defaultFocus,
   },
