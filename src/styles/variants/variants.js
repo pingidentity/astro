@@ -40,6 +40,7 @@ import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
 import separator from '../../components/Separator/Separator.styles';
 import skeleton from '../../components/Skeleton/Skeleton.styles';
 import slider from '../../components/SliderField/Slider.styles';
+import statusIcon from '../../components/StatusIcon/StatusIcon.styles';
 import stepper from '../../components/Stepper/Stepper.styles';
 import table from '../../components/Table/Table.styles';
 import tableBase from '../../components/TableBase/TableBase.styles';
@@ -99,5 +100,6 @@ export default {
   tooltip,
   treeView,
   ...tab,
+  statusIcon,
   tableBase,
 };

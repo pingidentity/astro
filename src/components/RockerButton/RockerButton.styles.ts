@@ -16,7 +16,8 @@ const innerContainer = {
 const thumbSwitch = {
   ...base,
   border: '0',
-  display: 'inline-flex',
+  display: 'flex',
+  gap: 'sm',
   height: '26px',
   lineHeight: '26px',
   fontSize: '13px',
@@ -31,6 +32,14 @@ const thumbSwitch = {
     bg: 'accent.20',
     color: 'white',
     zIndex: '1',
+    '& > div.status-icon': {
+      bg: 'white',
+      '& > svg': {
+        path: {
+          fill: 'accent.30',
+        },
+      },
+    },
   },
   '&.is-focused': {
     ...defaultFocus,

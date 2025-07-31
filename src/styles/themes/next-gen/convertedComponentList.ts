@@ -39,6 +39,7 @@ const nextGenConvertedComponents = [
   'TooltipTrigger',
   'ListViewItem',
   'Pagination',
+  'StatusIcon',
   'Callout',
   'Table',
   'TableBase',
@@ -95,6 +96,10 @@ export const astroBlacklistStory = {
   ],
   Callout: [
     'Customizations',
+  ],
+  StatusIcon: [
+    'Default',
+    'In Rocker Button',
   ],
 };
 

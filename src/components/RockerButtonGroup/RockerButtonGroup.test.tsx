@@ -5,17 +5,25 @@ import { RockerButton, RockerButtonGroup } from '../../index';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
-
 const testId = 'testId';
-const testButtons = [
+
+type TestButton = {
+  name: string;
+  key: string;
+  selectedStyles?: { bg: string };
+};
+
+const testButtons: TestButton[] = [
   { name: 'And', key: 'And', selectedStyles: { bg: '#640099' } },
   { name: 'Or', key: 'Or', selectedStyles: { bg: 'accent.30' } },
   { name: 'Maybe?', key: 'Maybe?' },
 ];
+
 const defaultProps = {
   'data-testid': testId,
   defaultSelectedKey: testButtons[0].name,
 };
+
 const getComponent = (props = {}, { buttons = testButtons, renderFn = render } = {}) => renderFn((
   <RockerButtonGroup {...defaultProps} {...props} data-id="test-container">
     {buttons.map(button => (
