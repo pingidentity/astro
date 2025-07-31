@@ -2,16 +2,16 @@ import React from 'react';
 
 import { AstroProvider, NextGenDarkTheme } from '../../..';
 
-import RockerButtonGroupNextGen from './RockerButtonGroupNextGen';
+import NextGenStatusIcon from './NextGenStatusIcon';
 
 export default {
-  title: 'Chromatic Only Onyx Dark RockerButtonGroup',
+  title: 'Chromatic Only Onyx Dark StatusIcon',
 };
 
 export const Default = () => {
   return (
     <AstroProvider themeOverrides={[NextGenDarkTheme]}>
-      <RockerButtonGroupNextGen />
+      <NextGenStatusIcon />
     </AstroProvider>
   );
 };

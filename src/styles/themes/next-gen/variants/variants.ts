@@ -3,7 +3,7 @@ import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
 
 import { avatar } from './avatar';
-import button from './button';
+import button, { defaultFocus } from './button';
 import callout from './callout';
 import { dataTable } from './dataTable';
 import { footer } from './footer';
@@ -317,60 +317,126 @@ const overlayPanel = {
 
 const rockerButton = {
   innerContainer: {
-    height: 50,
     boxShadow: 'none',
-    backgroundColor: 'white',
+    backgroundColor: 'common.background.base',
     borderRadius: '50px',
     padding: 0,
-    'button': {
-      backgroundColor: 'white',
-      padding: '0px 15px',
-      height: '100%',
-      color: 'active',
-      border: '1px solid',
-      borderColor: 'active',
-      borderRadius: 0,
-      '&.is-selected': {
-        color: 'white',
-        backgroundColor: 'active',
-      },
-      '&.is-hovered': {
-        backgroundColor: '#1462C8 !important',
-        color: 'white',
-      },
-      '&.is-pressed': {
-        backgroundColor: '#135CBC !important',
-        color: 'white',
-      },
-      '&.is-focused': {
-        outline: '2px solid',
-        outlineColor: 'focus',
-        outlineOffset: '2px',
-        position: 'relative',
-        zIndex: '1000',
-      },
-    },
-    'button:not(:first-child)': {
-      borderLeft: 0,
-    },
-    'button:first-child': {
-      borderTopLeftRadius: '50px',
-      borderBottomLeftRadius: '50px',
-    },
-    'button:last-child': {
-      borderTopRightRadius: '50px',
-      borderBottomRightRadius: '50px',
-    },
-
+    border: 'none',
   },
   thumbSwitch: {
     textTransform: 'none',
+    backgroundColor: 'common.background.base',
+    padding: 'md',
+    height: '50px',
+    color: 'active',
+    border: '1px solid',
+    borderColor: 'active',
+    borderRadius: 0,
+    '&:not(:last-of-type)': {
+      borderRight: 'none',
+    },
+    '&:first-of-type': {
+      borderTopLeftRadius: '50px',
+      borderBottomLeftRadius: '50px',
+    },
+    '&:last-of-type': {
+      borderTopRightRadius: '50px',
+      borderBottomRightRadius: '50px',
+    },
+    '&.is-selected': {
+      color: 'white',
+      backgroundColor: 'active',
+      '& > div.status-icon': {
+        bg: 'white',
+        '& > svg': {
+          path: {
+            fill: 'active',
+          },
+        },
+      },
+    },
+    '&.is-hovered': {
+      borderColor: '#1462C8',
+      backgroundColor: '#1462C8 !important',
+      color: 'white',
+    },
+    '&.is-pressed': {
+      borderColor: '#135CBC',
+      backgroundColor: '#135CBC !important',
+      color: 'white',
+    },
+    '&.is-focused': {
+      ...defaultFocus,
+      position: 'relative',
+      zIndex: '1000',
+    },
   },
 };
 
 const loader = {
   withinListView: {
     color: 'active',
+  },
+};
+
+const statusIcon = {
+  base: {
+    '&.is-default': {
+      bg: 'gray-100',
+      path: {
+        fill: 'gray-700',
+      },
+    },
+    '&.is-critical': {
+      bg: 'red-100',
+      path: {
+        fill: 'red-700',
+      },
+    },
+    '&.is-warning': {
+      bg: 'yellow-100',
+      path: {
+        fill: 'yellow-800',
+      },
+    },
+    '&.is-info': {
+      bg: 'blue-100',
+      path: {
+        fill: 'blue-600',
+      },
+    },
+    '&.is-major': {
+      bg: 'orange-100',
+      path: {
+        fill: 'orange-700',
+      },
+    },
+    '&.is-minor': {
+      bg: 'yellow-100',
+      path: {
+        fill: 'yellow-800',
+      },
+    },
+    '&.is-warning-neutral': {
+      bg: 'gray-100',
+      path: {
+        fill: 'gray-700',
+      },
+    },
+    '&.is-fatal': {
+      bg: 'gray-700',
+      path: {
+        fill: 'gray-100',
+      },
+    },
+    '&.is-selected.is-selected': {
+      bg: 'white',
+      '& > svg': {
+        path: {
+          fill: 'active',
+        },
+      },
+    },
   },
 };
 
@@ -409,6 +475,7 @@ export default {
   callout,
   table,
   tableBase,
+  statusIcon,
   box: {
     indeterminateCheckboxIcon: {
       height: '19.25px',

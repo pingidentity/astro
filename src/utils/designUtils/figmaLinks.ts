@@ -225,4 +225,8 @@ export const FIGMA_LINKS = {
   searchField: {
     onyx: 'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=249-542&p=f&t=ZRXGSYrM1OXJ41QB-0',
   },
+  statusIcon: {
+    onyx: 'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=1516-84&p=f&t=1IrTSMDCAftH6Roq-0',
+    inRockerButton: 'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=1516-498&t=TcHspIxapoPWqWJC-4',
+  },
 };

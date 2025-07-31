@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AstroProvider, NextGenTheme } from '../../..';
 
-import { Default as RockerButtonGroupNextGen } from './RockerButtonGroup.chromatic.stories';
+import RockerButtonGroupNextGen from './RockerButtonGroupNextGen';
 
 export default {
   title: 'Chromatic Only Onyx RockerButtonGroup',

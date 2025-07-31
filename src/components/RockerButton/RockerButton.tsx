@@ -54,6 +54,7 @@ export const RockerButton = forwardRef<HTMLElement, RockerButtonProps>((props, r
     <FocusRing focusRingClass="is-focused">
       <Box
         as="button"
+        isRow
         className={classNames}
         variant="variants.rockerButton.thumbSwitch"
         ref={rockerButtonRef}
