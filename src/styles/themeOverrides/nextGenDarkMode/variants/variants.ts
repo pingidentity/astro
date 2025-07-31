@@ -62,23 +62,23 @@ const modal = {
 
 const rockerButton = {
   innerContainer: {
-    border: 0,
-    boxShadow: 'none',
-    backgroundColor: 'gray-900',
-    'button': {
-      backgroundColor: 'gray-900',
-      color: 'blue-400',
-      '&.is-selected': {
-        color: 'black',
-      },
-      '&.is-hovered': {
-        color: 'black',
-      },
-      '&.is-pressed': {
-        color: 'black',
+    backgroundColor: 'background.base',
+  },
+  thumbSwitch: {
+    backgroundColor: 'background.base',
+    color: 'blue-400',
+    '&.is-selected': {
+      color: 'black',
+      '& > div.status-icon': {
+        bg: 'black',
       },
     },
-
+    '&.is-hovered': {
+      color: 'black',
+    },
+    '&.is-pressed': {
+      color: 'black',
+    },
   },
 };
 
@@ -92,6 +92,67 @@ const attachment = {
 const tooltip = {
   inline: {
     color: 'blue-400',
+  },
+};
+
+const statusIcon = {
+  base: {
+    '&.is-default': {
+      bg: 'gray-100',
+      path: {
+        fill: 'black',
+      },
+    },
+    '&.is-critical': {
+      bg: 'red-500',
+      path: {
+        fill: 'black',
+      },
+    },
+    '&.is-warning': {
+      bg: 'yellow-500',
+      path: {
+        fill: 'black',
+      },
+    },
+    '&.is-info': {
+      bg: 'blue-500',
+      path: {
+        fill: 'black',
+      },
+    },
+    '&.is-major': {
+      bg: 'orange-500',
+      path: {
+        fill: 'black',
+      },
+    },
+    '&.is-minor': {
+      bg: 'yellow-500',
+      path: {
+        fill: 'black',
+      },
+    },
+    '&.is-warning-neutral': {
+      bg: 'gray-700',
+      path: {
+        fill: 'gray-100',
+      },
+    },
+    '&.is-fatal': {
+      bg: 'gray-100',
+      path: {
+        fill: 'gray-700',
+      },
+    },
+    '&.is-selected.is-selected': {
+      bg: 'black',
+      '& > svg': {
+        path: {
+          fill: 'active',
+        },
+      },
+    },
   },
 };
 
@@ -149,6 +210,7 @@ export default {
       color: 'text.secondary',
     },
   },
+  statusIcon,
   fieldHelperText: {
     title: {
       '&.is-default': {
