@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.132.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.131.0...@pingux/astro@2.132.0) (2025-07-31)
+
+
+### Features
+
+* [UIP-7661] Status Icon Component ([525f716](https://gitlab.corp.pingidentity.com/ux/pingux/commit/525f716df007b62afd9f36953aac392c7cbe38ea))
+
+
+
+
+
 # [2.131.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.130.4...@pingux/astro@2.131.0) (2025-07-29)
 
 
