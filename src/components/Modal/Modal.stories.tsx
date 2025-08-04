@@ -133,7 +133,7 @@ export const Default: StoryFn<ModalProps> = args => {
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
     <OverlayProvider>
-      <Button onPress={state.open} aria-label="Open modal">
+      <Button onPress={state.open} aria-label="Open modal" tabIndex={state.isOpen ? -1 : 0}>
         Open Modal
       </Button>
       {
@@ -158,16 +158,6 @@ Default.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.modal.default,
   },
-  a11y: {
-    config: {
-      rules: [
-        {
-          id: 'aria-hidden-focus',
-          enabled: false,
-        },
-      ],
-    },
-  },
 };
 
 export const LargeContent: StoryFn<ModalProps> = args => {
@@ -177,7 +167,7 @@ export const LargeContent: StoryFn<ModalProps> = args => {
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
     <OverlayProvider>
-      <Button onPress={state.open} aria-label="Open modal">
+      <Button onPress={state.open} aria-label="Open modal" tabIndex={state.isOpen ? -1 : 0}>
         Open Modal
       </Button>
       {state.isOpen && (
@@ -185,6 +175,7 @@ export const LargeContent: StoryFn<ModalProps> = args => {
           {...args}
           isOpen={state.isOpen}
           onClose={state.close}
+          title="Lorem Ipsum"
         >
           <Box gap="lg">
             <Text>
