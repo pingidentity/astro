@@ -36,6 +36,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     children,
     contentProps: propsContentProps,
     containerProps,
+    headerContainerProps,
     ...others
   } = props;
 
@@ -122,6 +123,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
           >
             <Box
               variant="modal.headingContainer"
+              {...headerContainerProps}
             >
               {
                 hasCloseButton
