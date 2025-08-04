@@ -169,11 +169,13 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
     }
 
     if (reusableView.viewType === 'row') {
+      // remove contain style for rows to avoid layout issues in chrome for UIP-7748
+      delete style.contain;
       return (
         <TableRow
           key={reusableView.key}
           item={reusableView.content}
-          style={style}
+          style={{ ...style, contain: 'size style' }}
           hasActions={onAction}
         >
           {renderChildren(children)}
