@@ -29,7 +29,7 @@ const selectableTableRow = {
     bg: 'gray-100',
   },
   '&.is-disabled': {
-    opacity: '0.5 !important',
+    opacity: '0.65 !important',
   },
 };
 

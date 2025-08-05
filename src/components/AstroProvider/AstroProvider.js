@@ -5,10 +5,12 @@ import PropTypes from 'prop-types';
 import { merge } from 'theme-ui';
 
 import { openSansFont, pingitoFont } from '../../fonts';
+import useGetTheme from '../../hooks/useGetTheme';
 import astroTheme from '../../styles/theme';
 import Box from '../Box';
 
 export const GlobalStyles = ({ isEndUserTheme = false }) => {
+  const { themeState: { isOnyx, isOnyxDark } } = useGetTheme();
   return (
     <Global
       styles={css`
@@ -28,7 +30,7 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
           font-family: ${isEndUserTheme && 'pingito, '}"Helvetica Neue", Helvetica, sans-serif;
         }
         .is-disabled {
-          opacity: 0.5;
+          opacity: ${isOnyx || isOnyxDark ? 0.65 : 0.5};
           pointer-events: none;
         }
         [data-live-announcer] {

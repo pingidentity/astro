@@ -60,4 +60,5 @@ export interface ModalProps extends DOMAttributes, TestingAttributes {
   contentProps?: object;
   /** Props object spread directly into the modal container Box. */
   containerProps?: object;
+  headerContainerProps?: object;
 }
