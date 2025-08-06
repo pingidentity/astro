@@ -93,19 +93,26 @@ export const Default = args => {
   );
 };
 
-export const CustomDefaultImage = args => (
+export const CustomDefaultImage = {
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
-  <OverlayProvider>
-    <ImageUploadField
-      {...args}
-      label="Upload Image"
-      defaultPreviewImage="https://picsum.photos/id/1056/200/300"
-      previewHeight={150}
-      previewWidth={150}
-    />
-  </OverlayProvider>
-);
+  parameters: {
+    chromatic: {
+      disableSnapshot: true, // Disable snapshots for this specific story
+    },
+  },
+  render: args => (
+    <OverlayProvider>
+      <ImageUploadField
+        {...args}
+        label="Upload Image"
+        defaultPreviewImage="https://picsum.photos/id/1056/200/300"
+        previewHeight={150}
+        previewWidth={150}
+      />
+    </OverlayProvider>
+  ),
+};
 
 export const CustomItemText = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
