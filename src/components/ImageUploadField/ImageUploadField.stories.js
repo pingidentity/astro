@@ -145,55 +145,65 @@ export const ComponentAsDefaultImage = args => (
   </OverlayProvider>
 );
 
-export const ExistingImage = () => {
-  const [previewImage, setPreviewImage] = useState('https://picsum.photos/id/1025/200/300');
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+export const ExistingImage = {
+  parameters: {
+    chromatic: {
+      disableSnapshot: true, // Disable snapshots for this specific story
+    },
+  },
+  render: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [previewImage, setPreviewImage] = useState('https://picsum.photos/id/1025/200/300');
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [error, setError] = useState(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [isLoading, setIsLoading] = useState(false);
 
-  // When controlling the previewImage yourself, it's important to handle updating the state
-  const handleChange = async e => {
+    // When controlling the previewImage yourself, it's important to handle updating the state
+    const handleChange = async e => {
     // Clear errors
-    setError(undefined);
-    // Turn on loading indicator
-    setIsLoading(true);
+      setError(undefined);
+      // Turn on loading indicator
+      setIsLoading(true);
 
-    // Handle setting the preview image
-    const files = e.target?.files[0];
-    const reader = new FileReader();
-    reader.onload = ({ target: { result } }) => {
-      setPreviewImage(result);
+      // Handle setting the preview image
+      const files = e.target?.files[0];
+      const reader = new FileReader();
+      reader.onload = ({ target: { result } }) => {
+        setPreviewImage(result);
+      };
+
+      try {
+      // Simulate a successful async server call
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        // Trigger the preview image callback
+        reader.readAsDataURL(files);
+      } catch (_error) {
+        setPreviewImage(undefined);
+        setError('There was an error...');
+      }
+
+      // Unset loading indicator
+      setIsLoading(false);
     };
 
-    try {
-      // Simulate a successful async server call
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      // Trigger the preview image callback
-      reader.readAsDataURL(files);
-    } catch (_error) {
-      setPreviewImage(undefined);
-      setError('There was an error...');
-    }
-
-    // Unset loading indicator
-    setIsLoading(false);
-  };
-
-  return (
+    return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
-    <OverlayProvider>
-      <ImageUploadField
-        label="Upload Image"
-        isLoading={isLoading}
-        onChange={handleChange}
-        previewImage={previewImage}
-        previewHeight={150}
-        previewWidth={150}
-        status={error ? 'error' : 'default'}
-        helperText={error}
-      />
-    </OverlayProvider>
-  );
+      <OverlayProvider>
+        <ImageUploadField
+          label="Upload Image"
+          isLoading={isLoading}
+          onChange={handleChange}
+          previewImage={previewImage}
+          previewHeight={150}
+          previewWidth={150}
+          status={error ? 'error' : 'default'}
+          helperText={error}
+        />
+      </OverlayProvider>
+    );
+  },
 };
 
 export const ErrorOnUpload = () => {
