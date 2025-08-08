@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.133.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.132.0...@pingux/astro@2.133.0) (2025-08-08)
+
+
+### Bug Fixes
+
+* [UIP-7698] Change disabled opacity for onyx ([fba376d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fba376deff9af0cee28b9ac1bf182ac81c1f1fdc))
+* [UIP-7748] DataTable is grouping items into rows of pairs ([126386a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/126386ad8a72ef4b71ab686f621d7648fe2b664f))
+* [UIP-7756] fix release tag ([bad3fa7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bad3fa7ee7b4ee453beeec533c09b627326759f9))
+
+
+### Features
+
+* [UIP-7729] UI changes ([8c79d75](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8c79d75a9e5ac016b8fa7b36ba4fefe5889b859f))
+
+
+
+
+
 # [2.132.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.131.0...@pingux/astro@2.132.0) (2025-07-31)
 
 
