@@ -13,6 +13,8 @@ export interface SelectFieldProps<T> extends Omit<StyleProps, 'direction'>, UseS
   }
   'data-testid'?: string;
   hintText?: string;
+  hasClearButton?: boolean;
+  onClear?: () => void;
 }
 
 export interface SelectFieldBaseProps extends UseSelectFieldReturnProps<object>, SharedFieldProps {
@@ -26,5 +28,8 @@ export interface SelectFieldBaseProps extends UseSelectFieldReturnProps<object>,
   defaultText?: string;
   selectProps?: Record<string, unknown>;
   isDisabled?: boolean;
-  helpHintProps?: HelpHintProps
+  helpHintProps?: HelpHintProps;
+  hasClearButton?: boolean;
+  clearButtonProps?: Record<string, unknown>;
+  onClear?: () => void;
 }

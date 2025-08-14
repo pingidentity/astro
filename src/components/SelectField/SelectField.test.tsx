@@ -171,3 +171,13 @@ test('should show hintText text if prop is passed', () => {
   fireEvent.mouseEnter(helpHintButton);
   expect(screen.getByText(hintText)).toBeInTheDocument();
 });
+
+test('should have clear button if hasClearButton prop is true', () => {
+  getComponent({
+    selectedKey: 'a',
+    hasClearButton: true,
+    clearButtonProps: { 'data-testid': 'clear-button' },
+  });
+  const clearButton = screen.getByTestId('clear-button');
+  expect(clearButton).toBeInTheDocument();
+});

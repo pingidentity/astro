@@ -1,9 +1,10 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef } from 'react';
+import CheckIcon from '@pingux/mdi-react/CheckIcon';
 import CircleSmallIcon from '@pingux/mdi-react/CircleSmallIcon';
 import { useOption } from '@react-aria/listbox';
 
 import { useMultivaluesContext } from '../../context/MultivaluesContext';
-import { useStatusClasses } from '../../hooks';
+import { useGetTheme, useStatusClasses } from '../../hooks';
 import { AriaListBoxOptionsType, ListBoxStateType, OptionType } from '../../types';
 import Box from '../Box';
 import Icon from '../Icon';
@@ -60,6 +61,8 @@ const Option = forwardRef((props: OptionType, ref) => {
     }
   };
 
+  const { themeState: { isOnyx } } = useGetTheme();
+
   const { classNames } = useStatusClasses(null, {
     isDisabled: isDisabled || isSeparator,
     isFocused: focused,
@@ -104,8 +107,19 @@ const Option = forwardRef((props: OptionType, ref) => {
           className={classNames}
           variant="listBox.checkboxIcon"
         />
-      ) : (isSelected && <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />)) }
-      { rendered}
+      ) : (
+        (isSelected && !isOnyx) && (
+          <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />
+        )
+      )) }
+      { rendered }
+      {(isSelected && isOnyx) && (
+        <Icon
+          icon={CheckIcon}
+          title={{ name: 'Check Icon' }}
+          color="green-500"
+        />
+      )}
     </Box>
   );
 });
