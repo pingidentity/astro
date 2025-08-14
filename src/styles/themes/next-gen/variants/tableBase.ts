@@ -38,9 +38,9 @@ const thead = {
   borderBottomColor: 'border.base',
   backgroundColor: 'background.base',
   '&:not(.has-caption)': {
+    borderTopLeftRadius: borderRadius,
+    borderTopRightRadius: borderRadius,
     '& > tr:first-child': {
-      borderTopLeftRadius: borderRadius,
-      borderTopRightRadius: borderRadius,
       '& > th:first-of-type': {
         borderTopLeftRadius: borderRadius,
       },
@@ -67,6 +67,8 @@ const tbody = {
   borderTopColor: 'border.base',
   borderBottom: 'unset',
   backgroundColor: 'background.base',
+  borderBottomLeftRadius: borderRadius,
+  borderBottomRightRadius: borderRadius,
   '& > tr:last-child': {
     borderBottom: 'unset',
     borderBottomLeftRadius: borderRadius,

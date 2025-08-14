@@ -1,6 +1,7 @@
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
+import colors from '../colors/colors';
 
 import { avatar } from './avatar';
 import button, { defaultFocus } from './button';
@@ -485,6 +486,9 @@ export default {
           fill: 'gray-500',
           stroke: 'gray-500',
         },
+      },
+      '&.is-focused': {
+        boxShadow: `inset 0px 0px 0px 1px ${colors.focus}`,
       },
     },
   },

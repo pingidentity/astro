@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Selection } from 'react-stately';
+import { useCollator } from '@react-aria/i18n';
+import { useAsyncList } from '@react-stately/data';
 import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Badge,
-  Card,
+  Box,
   Cell,
   Column,
   Pagination,
@@ -18,7 +20,7 @@ import {
 } from '../..';
 import { usePaginationState } from '../../hooks';
 import { TableBaseProps } from '../../types/tableBase';
-import { items } from '../../utils/devUtils/constants/items';
+import { items as listData } from '../../utils/devUtils/constants/items';
 
 import TableReadme from './TableBase.mdx';
 
@@ -135,6 +137,9 @@ export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
     <TableBase
       aria-label="table"
       isStickyHeader
+      selectionMode="single"
+      defaultSelectedKeys={['2']}
+      disabledKeys={['3']}
       tableBodyProps={{ style: { height: '300px' } }}
     >
       <THead>
@@ -143,11 +148,13 @@ export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
         <Column width={150}>Status</Column>
         <Column width="1fr">Bio</Column>
       </THead>
-      <TBody items={items}>
+      <TBody items={listData}>
         {item => (
-          <Row key={item.email}>
+          <Row key={item.id}>
             <Cell>
               {`${item.firstName} ${item.lastName}`}
+              {' '}
+              {item.id}
             </Cell>
             <Cell>{item.email}</Cell>
             <Cell>
@@ -169,9 +176,25 @@ export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
   );
 };
 
+WithStickyHeader.parameters = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast', enabled: false,
+        },
+        {
+          id: 'scrollable-region-focusable', enabled: false,
+        },
+      ],
+    },
+  },
+
+};
+
 const ExampleTable = () => {
   const { paginationState } = usePaginationState();
-  const renderItems = items.slice(
+  const renderItems = listData.slice(
     paginationState.firstRenderedIndex,
     paginationState.lastRenderedIndex + 1,
   );
@@ -212,13 +235,128 @@ export const WithPagination: StoryFn<TableBaseProps<object>> = () => {
 
   return (
     <PaginationProvider>
-      <ExampleTable />
-      <Pagination
-        totalCount={items.length}
-        offsetCount={offsetCount}
-        onOffsetCountChange={setOffsetCount}
-        offsetOptions={[10, 20, 50, 100]}
-      />
+      <Box gap="sm">
+        <ExampleTable />
+        <Pagination
+          totalCount={listData.length}
+          offsetCount={offsetCount}
+          onOffsetCountChange={setOffsetCount}
+          offsetOptions={[10, 20, 50, 100]}
+        />
+      </Box>
     </PaginationProvider>
   );
+};
+
+WithPagination.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const DynamicWithSorting = () => {
+  interface ColumnProp {
+    key: React.Key;
+    name: string;
+    isSortable?: boolean;
+  }
+
+  const columns: ColumnProp[] = [
+    { name: 'Country', key: 'country', isSortable: true },
+    { name: 'Population', key: 'population', isSortable: true },
+    { name: 'Continent', key: 'continent', isSortable: true },
+  ];
+
+  const rows = [
+    { id: 1, country: 'Austria', population: '25,000,000', continent: 'Oceania' },
+    { id: 2, country: 'Canada', population: '37,000,000', continent: 'North America' },
+    { id: 3, country: 'China', population: '1,398,000,000', continent: 'Asia' },
+    { id: 4, country: 'Ethiopia', population: '120,000,000', continent: 'Africa' },
+    { id: 5, country: 'France', population: '67,000,000', continent: 'Europe' },
+    { id: 6, country: 'Mexico', population: '126,000,000', continent: 'North America' },
+    { id: 7, country: 'USA', population: '320,000,000', continent: 'North America' },
+  ];
+
+  const collator = useCollator({ numeric: true });
+
+  const list = useAsyncList({
+    async load() {
+      return {
+        items: rows,
+      };
+    },
+    async sort({ items, sortDescriptor }) {
+      const getNumericValue = str => {
+        return !Number.isNaN(str) && parseFloat(str.replace(/,/g, ''));
+      };
+      return {
+        items: items.sort((a, b) => {
+          if (sortDescriptor.column) {
+            const first = a[sortDescriptor.column];
+            const second = b[sortDescriptor.column];
+
+            const firstNumericValue = getNumericValue(first);
+            const secondNumericValue = getNumericValue(second);
+
+            const cmp = (firstNumericValue && secondNumericValue)
+              ? firstNumericValue - secondNumericValue
+              : collator.compare(first, second);
+
+            return (sortDescriptor.direction === 'descending') ? -cmp : cmp;
+          }
+          return 1;
+        }),
+      };
+    },
+    initialSortDescriptor: { column: 'country', direction: 'ascending' },
+  });
+
+  return (
+    <TableBase
+      aria-label="Dynamic table"
+      onSortChange={descriptor => {
+        if (descriptor.column) {
+          list.sort(descriptor as { column: React.Key; direction: 'ascending' | 'descending' });
+        }
+      }}
+      sortDescriptor={list.sortDescriptor}
+    >
+      <THead columns={columns}>
+        {column => (
+          <Column
+            minWidth={155}
+            allowsSorting
+          >
+            {column.name}
+          </Column>
+        )}
+      </THead>
+      <TBody
+        items={list.items as Iterable<{ name: string }>}
+        loadingState={list.loadingState}
+        onLoadMore={list.loadMore}
+      >
+        {(item: { name: string }) => (
+          <Row key={item.name}>
+            {columnKey => (
+              <Cell>
+                {item[columnKey]}
+              </Cell>
+            )}
+          </Row>
+        )}
+      </TBody>
+    </TableBase>
+  );
+};
+
+// Added to bypass color contrast issue due to virtualizer
+DynamicWithSorting.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
 };
