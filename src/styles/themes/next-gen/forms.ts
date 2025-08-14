@@ -1,4 +1,5 @@
 import colors from './colors/colors';
+import tShirtSizes from './customProperties/tShirtSizes';
 import { fieldControlWrapper, input } from './variants/input';
 import { label } from './variants/label';
 
@@ -24,6 +25,17 @@ export const select = {
   },
   currentValue: {
     color: 'text.primary',
+  },
+  arrow: {
+    width: '20px',
+    height: '20px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& > svg': {
+      minWidth: tShirtSizes.xs,
+      width: tShirtSizes.xs,
+      height: tShirtSizes.xs,
+    },
   },
 };
 

@@ -1,3 +1,4 @@
+import tShirtSizes from '../../styles/themes/astro/customProperties/tShirtSizes';
 import { badgeDeleteButton, deleteButton, invertedBadgeDeleteButton } from '../Badge/Badge.styles';
 import { defaultActive, defaultFocus, defaultHover } from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
@@ -153,6 +154,19 @@ const searchClearButton = {
   right: 10,
 };
 
+const clearSelectionButton = {
+  ...base,
+  width: tShirtSizes.md,
+  height: tShirtSizes.md,
+  position: 'absolute',
+  right: '15px',
+  top: '7px',
+  bg: 'white',
+  '.is-float-label &': {
+    top: '9px',
+  },
+};
+
 const filter = {
   ...base,
   bg: 'white',
@@ -208,4 +222,5 @@ export default {
   applicationPortalPinned,
   searchClearButton,
   filter,
+  clearSelectionButton,
 };

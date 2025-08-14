@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { useSelectField } from '../../hooks';
 import { UseSelectFieldProps } from '../../hooks/useSelectField/useSelectField';
 import { Item } from '../../index';
-import { SelectFieldBaseProps } from '../../types/selectField';
 import { modes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
@@ -27,6 +26,7 @@ const defaultProps = {
   value: testValue,
   items,
 };
+const onClear = jest.fn();
 
 interface ExampleProps {
   align: string,
@@ -387,4 +387,27 @@ universalComponentTests({
       )}
     </SelectFieldWrapper>
   ),
+});
+
+test('should have clear button if hasClearButton prop is true', () => {
+  getComponent({
+    selectedKey: 'a',
+    hasClearButton: true,
+    clearButtonProps: { 'data-testid': 'clear-button' },
+  });
+  const clearButton = screen.getByTestId('clear-button');
+  expect(clearButton).toBeInTheDocument();
+});
+
+test('should have call onClear function', () => {
+  getComponent({
+    selectedKey: 'a',
+    hasClearButton: true,
+    clearButtonProps: { 'data-testid': 'clear-button' },
+    onClear,
+  });
+  const clearButton = screen.getByTestId('clear-button');
+  expect(clearButton).toBeInTheDocument();
+  userEvent.click(clearButton);
+  expect(onClear).toHaveBeenCalledTimes(1);
 });

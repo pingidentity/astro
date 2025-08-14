@@ -16,10 +16,6 @@ const listBox = {
     borderRadius: '4px',
   },
   option: {
-    py: '.75rem',
-    pl: '.75rem',
-    pr: '1rem',
-    bg: 'background.base',
     '&.is-focused': {
       color: 'text.primary',
       bg: 'gray-800',
@@ -27,7 +23,6 @@ const listBox = {
     '&.is-selected': {
       color: 'text.primary',
       bg: 'gray-800',
-      pl: 0,
       '&.is-focused': {
         color: 'text.primary',
       },
