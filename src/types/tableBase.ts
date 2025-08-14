@@ -1,4 +1,4 @@
-import { Key, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import type { TableState } from '@react-stately/table';
 import { TableColumnResizeState } from '@react-stately/table';
 import type { GridNode } from '@react-types/grid';

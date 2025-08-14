@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { useAsyncList } from 'react-stately';
+import { act as actHooks, fireEvent, render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Cell, Column, Row, TBody, THead } from '../../index';
@@ -138,6 +139,12 @@ test('renders table rows', () => {
   });
 });
 
+test('renders sticky header', () => {
+  getComponent({ isStickyHeader: true });
+  const stickyHeader = screen.getAllByRole('rowgroup');
+  expect(stickyHeader[0]).toHaveClass('is-sticky');
+});
+
 test('renders checkbox in case of multi selection', () => {
   getComponent({ selectionMode: 'multiple' });
   const checkboxes = screen.getAllByRole('checkbox');
@@ -266,4 +273,164 @@ test('Arrow Left move the focus to next cell', () => {
   fireEvent.keyDown(tableCells[0], { key: 'ArrowLeft' });
   fireEvent.keyUp(tableCells[0], { key: 'ArrowLeft' });
   expect(rows[1]).toHaveFocus();
+});
+
+describe('Sortable Table with useAsyncList', () => {
+  const dataTestId = 'sortableTable';
+
+  const defaultTableProps = {
+    'aria-label': 'Custom table with sortable content',
+    width: '100%',
+    height: '100%',
+    'data-testid': dataTestId,
+  };
+
+  async function load() {
+    return {
+      items: objects,
+    };
+  }
+
+  async function sort(list) {
+    // eslint-disable-next-line no-param-reassign
+    list.items = list.items.sort((a, b) => {
+      const first = a[list.sortDescriptor.column];
+      const second = b[list.sortDescriptor.column];
+      let cmp = (parseInt(first) || first) < (parseInt(second) || second) // eslint-disable-line
+        ? -1
+        : 1;
+      if (list.sortDescriptor.direction === 'descending') {
+        cmp *= -1;
+      }
+      return cmp;
+    });
+    return list;
+  }
+
+  const sortableDataTable = ({ result }) => render(
+    <TableBase {...defaultTableProps} sortDescriptor={result.current.sortDescriptor}>
+      <THead columns={headers}>
+        {column => (
+          <Column allowsSorting>
+            {column.name}
+          </Column>
+        )}
+      </THead>
+      <TBody items={result.current.items}>
+        {(item: object) => (
+          <Row>
+            {columnKey => (
+              <Cell>{item[columnKey]}</Cell>
+            )}
+          </Row>
+        )}
+      </TBody>
+    </TableBase>,
+  );
+
+  test('sort by country column A => Z', async () => {
+    const { result } = renderHook(() => useAsyncList({
+      load,
+      sort,
+      initialSortDescriptor: { column: 'country', direction: 'ascending' },
+    }));
+
+    await actHooks(async () => {
+      jest.runOnlyPendingTimers();
+    });
+
+    await actHooks(async () => {
+      result.current.sort({ column: 'country', direction: 'ascending' });
+    });
+
+    await actHooks(async () => {
+      jest.runOnlyPendingTimers();
+    });
+
+    sortableDataTable({ result });
+
+    const sortableTable = screen.getByTestId(dataTestId);
+    expect(sortableTable).toBeInTheDocument();
+    expect(sortableTable).toBeVisible();
+
+    expect(sortableTable).toHaveAttribute(
+      'aria-label',
+      'Custom table with sortable content',
+    );
+    expect(sortableTable).toHaveAttribute('data-testid', dataTestId);
+
+    const rowgroups = within(sortableTable).getAllByRole('rowgroup');
+
+    // verify first header column is sorted a -> z
+    const thead = within(rowgroups[0]).getByRole('row');
+    const headerCells = within(thead).getAllByRole('columnheader');
+
+    expect(headerCells[0]).toHaveTextContent('Country');
+    expect(headerCells[0]).toHaveAttribute('aria-sort', 'ascending');
+
+    const tRows = within(rowgroups[1]).getAllByRole('row');
+
+    // verify country column is sorted a -> z
+    expect(tRows).toHaveLength(4);
+    expect(tRows[0]).toHaveAttribute('data-key', '2');
+    expect(tRows[0]).toHaveTextContent('Canada');
+
+    expect(tRows[1]).toHaveAttribute('data-key', '3');
+    expect(tRows[1]).toHaveTextContent('China');
+
+    expect(tRows[2]).toHaveAttribute('data-key', '4');
+    expect(tRows[2]).toHaveTextContent('France');
+
+    expect(tRows[3]).toHaveAttribute('data-key', '1');
+    expect(tRows[3]).toHaveTextContent('USA');
+  });
+
+  test('sort by country column Z => A', async () => {
+    const { result } = renderHook(() => useAsyncList({
+      load,
+      sort,
+      initialSortDescriptor: { column: 'country', direction: 'descending' },
+    }));
+
+    await actHooks(async () => {
+      jest.runOnlyPendingTimers();
+    });
+
+    await actHooks(async () => {
+      result.current.sort({ column: 'country', direction: 'descending' });
+    });
+
+    await actHooks(async () => {
+      jest.runOnlyPendingTimers();
+    });
+
+    sortableDataTable({ result });
+
+    const sortableTable = screen.getByTestId(dataTestId);
+    expect(sortableTable).toBeInTheDocument();
+    expect(sortableTable).toBeVisible();
+
+    expect(sortableTable).toHaveAttribute(
+      'aria-label',
+      'Custom table with sortable content',
+    );
+    expect(sortableTable).toHaveAttribute('data-testid', dataTestId);
+
+    const rowgroups = within(sortableTable).getAllByRole('rowgroup');
+    const tRows = within(rowgroups[1]).getAllByRole('row');
+
+    // verify country column is sorted z -> a
+    expect(tRows).toHaveLength(4);
+    expect(tRows[0]).toHaveAttribute('data-key', '1');
+    expect(tRows[0]).toHaveTextContent('USA');
+
+    expect(tRows[1]).toHaveAttribute('data-key', '4');
+    expect(tRows[1]).toHaveTextContent('France');
+
+    expect(tRows[2]).toHaveAttribute('data-key', '3');
+    expect(tRows[2]).toHaveTextContent('China');
+
+    expect(tRows[3]).toHaveAttribute('data-key', '2');
+    expect(tRows[3]).toHaveTextContent('Canada');
+  });
 });

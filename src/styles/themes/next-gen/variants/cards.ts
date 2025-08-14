@@ -80,7 +80,6 @@ const suggestionColumn = {
 
 const tableWrapper = {
   ...container,
-  overflowY: 'hidden',
 };
 
 export default {

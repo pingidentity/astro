@@ -30,4 +30,6 @@ export default {
   [statusIcon.FATAL]: CloseOctagonOutlineIcon,
   pingLogoHorizontalSmall: pingLogoHorizontalSmallWhite,
   listViewMenu: MoreVertIcon,
+  Ascending: ArrowUpIcon,
+  Descending: ArrowDownIcon,
 };
