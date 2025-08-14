@@ -39,6 +39,9 @@ const head = {
   textAlign: 'left',
   p: 'sm',
   cursor: 'default',
+  '&:focus-visible': {
+    outline: 'none',
+  },
   '&.is-focused': {
     ...defaultFocus,
   },
@@ -54,6 +57,9 @@ const row = {
   '&:nth-of-type(odd) ': {
     bg: 'neutral.95',
   },
+  '&:focus-visible': {
+    outline: 'none',
+  },
   '&.is-focused': {
     ...defaultFocus,
   },
@@ -62,6 +68,12 @@ const row = {
   },
   '&.is-selected': {
     // This is the selected state for the row
+    ...defaultFocus,
+  },
+  '&.is-disabled': {
+    bg: 'neutral.90',
+    opacity: 0.5,
+    cursor: 'not-allowed',
   },
 };
 

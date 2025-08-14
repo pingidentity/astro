@@ -1,19 +1,14 @@
 import React, { forwardRef, RefObject, useMemo } from 'react';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import { v4 as uuid } from 'uuid';
 
+import { Box, Button, FieldHelperText, Icon, IconButton, Label, Loader, Text } from '../..';
 import useGetTheme from '../../hooks/useGetTheme';
 import { FocusableElement } from '../../types';
 import { SelectFieldBaseProps } from '../../types/selectField';
 import { modes } from '../../utils/devUtils/constants/labelModes';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
-import Box from '../Box';
-import Button from '../Button';
-import FieldHelperText from '../FieldHelperText';
-import Icon from '../Icon';
-import Label from '../Label';
-import Loader from '../Loader';
-import Text from '../Text';
 
 import { HiddenSelect } from './HiddenSelect';
 
@@ -49,6 +44,9 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
     triggerRef,
     valueProps,
     selectProps,
+    hasClearButton,
+    clearButtonProps,
+    onClear,
     ...others
   } = props;
   const { ariaProps } = getAriaAttributeProps(others);
@@ -61,8 +59,43 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
 
   const helperTextId = useMemo(() => uuid(), []);
 
+  const handleOnClear = () => {
+    if (onClear) {
+      onClear();
+    }
+    state.setSelectedKey(null);
+  };
+
+  const buttonRendered = !(hasClearButton && state.selectedKey) && (
+    <Box as="span" aria-hidden="true" variant="forms.select.arrow">
+      <Icon
+        icon={state.isOpen ? MenuUp : MenuDown}
+        title={{ name: 'Menu down' }}
+        size="md"
+      />
+    </Box>
+  );
+
+  const clearButton = (hasClearButton && state.selectedKey) && (
+    <IconButton
+      tabIndex={0}
+      as="span"
+      role="button"
+      aria-label="Clear selection"
+      variant="clearSelectionButton"
+      onPress={handleOnClear}
+      color="text.secondary"
+      {...clearButtonProps}
+    >
+      <Icon
+        icon={CloseIcon}
+        title={{ name: 'Clear selection Icon' }}
+      />
+    </IconButton>
+  );
+
   const defaultTrigger = (
-    <Box {...fieldControlWrapperProps} variant="forms.input.fieldControlWrapper">
+    <Box isRow {...fieldControlWrapperProps} variant="forms.input.fieldControlWrapper">
       <Button
         className={fieldControlInputProps.className}
         ref={triggerRef}
@@ -82,14 +115,9 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
           }
         </Box>
         {isLoadingInitial && <Loader variant="loader.withinInput" />}
-        <Box as="span" aria-hidden="true" variant="forms.select.arrow">
-          <Icon
-            icon={state.isOpen ? MenuUp : MenuDown}
-            title={{ name: 'Menu down' }}
-            size="md"
-          />
-        </Box>
+        {buttonRendered}
       </Button>
+      {clearButton}
       {slots?.inContainer}
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { forwardRef, Key, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { forwardRef, Key, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover, usePress } from '@react-aria/interactions';
 import {
@@ -15,8 +15,8 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useTableColumnResizeState, useTableState } from '@react-stately/table';
 import type { GridNode } from '@react-types/grid';
 
-import { Box, Card, CheckboxField } from '../..';
-import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
+import { Box, Card, CheckboxField, Icon, Loader } from '../..';
+import { useGetTheme, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import type {
   TableBaseProps,
   TableCellProps,
@@ -54,7 +54,6 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
   const { gridProps } = useTable(
     {
       ...props,
-      'aria-describedby': props['aria-describedby'] || 'table-caption',
       scrollRef: bodyRef,
     },
     state,
@@ -105,15 +104,14 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
         {...others}
       >
         {caption && (
-        <Box
-          as="caption"
-          display="table-caption"
-          variant="tableBase.caption"
-          textAlign="left"
-          id={props['aria-describedby'] || 'table-caption'}
-        >
-          {caption}
-        </Box>
+          <Box
+            as="caption"
+            display="table-caption"
+            variant="tableBase.caption"
+            textAlign="left"
+          >
+            {caption}
+          </Box>
         )}
         <TableRowGroup type="thead" hasCaption={!!caption} isSticky={isStickyHeader}>
           {collection.headerRows.map(headerRow => (
@@ -147,6 +145,22 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
           ))}
         </TableRowGroup>
         <TableRowGroup ref={bodyRef} type="tbody" {...tableBodyProps}>
+          {
+            collection.size === 0 && (
+              <Box
+                role="row"
+                key="loading"
+                data-testid="loading"
+                as="tr"
+                alignItems="center"
+                justifyContent="center"
+                px="lg"
+                py="md"
+              >
+                <Loader color="active" />
+              </Box>
+            )
+          }
           {Array.from(collection).map(row => (
             <TableRow key={row.key} item={row} state={state}>
               {Array.from(state.collection.getChildren!(row.key)).map(cell => (
@@ -233,23 +247,47 @@ export function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
   );
 
   const { isFocusVisible, focusProps } = useFocusRing();
+
+  const allowsSorting = column.props?.allowsSorting;
+
+  const { icons } = useGetTheme();
+  const { Ascending, Descending } = icons;
+
+  const sortDescriptor = state.sortDescriptor;
+  const arrowIcon = (sortDescriptor?.column === column.key && sortDescriptor?.direction === 'ascending') ? Ascending : Descending;
+
+  const sortIcon = (
+    <Icon
+      icon={arrowIcon}
+      size="xs"
+      aria-hidden="true"
+      title={{
+        name: sortDescriptor?.direction === 'ascending' ? 'Sort ascending' : 'Sort descending',
+      }}
+    />
+  );
+
   const { classNames } = useStatusClasses(className, {
     isFocused: isFocusVisible,
   });
 
   return (
     <Box
+      isRow
       ref={ref}
       as="th"
       variant="tableBase.head"
       className={classNames}
+      alignItems="center"
       sx={{
+        gap: 'sm',
         width: layoutState?.getColumnWidth(column.key),
         ...column.props.sx,
       }}
       {...mergeProps(columnHeaderProps, focusProps, column.props)}
     >
       {column.rendered}
+      {allowsSorting && sortIcon}
     </Box>
   );
 }
@@ -262,6 +300,9 @@ export function TableRow<T>(props: TableRowProps<T>) {
   const { rowProps } = useTableRow({ node: item }, state, ref);
 
   const isSelected = state.selectionManager.isSelected(item.key);
+
+  const isDisabled = state.disabledKeys.has(item.key);
+
   const { isFocusVisible, focusProps } = useFocusRing();
 
   const { hoverProps, isHovered } = useHover({});
@@ -272,6 +313,7 @@ export function TableRow<T>(props: TableRowProps<T>) {
     isHovered,
     isPressed,
     isFocused: isFocusVisible,
+    isDisabled,
   });
 
   return (
@@ -317,7 +359,7 @@ export function TableCell<T>(props: TableCellProps<T>) {
   );
 }
 
-export function TableCheckboxCell<T>(props:TableCheckboxCellProps<T>) {
+export function TableCheckboxCell<T>(props: TableCheckboxCellProps<T>) {
   const { cell, state, layoutState } = props;
   const ref = useRef<HTMLTableCellElement | null>(null);
   const { gridCellProps } = useTableCell({ node: cell }, state, ref);

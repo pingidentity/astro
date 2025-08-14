@@ -2,6 +2,7 @@ import chroma from 'chroma-js';
 
 import { copyButton } from '../codeView/codeView';
 import colors from '../colors/colors';
+import tShirtSizes from '../customProperties/tShirtSizes';
 
 const { primary: primaryBlue,
   active_hover: primaryBlueHover,
@@ -404,6 +405,26 @@ const onyxIconButton = {
   justifyContent: 'center',
 };
 
+const searchClearButton = {
+  ...baseIconButton,
+  width: '20px',
+  height: '20px',
+  border: 'none',
+  position: 'absolute',
+  right: '20px',
+  '& > svg': {
+    minWidth: tShirtSizes.xs,
+    width: tShirtSizes.xs,
+    height: tShirtSizes.xs,
+  },
+  '&.is-hovered': {
+    bg: 'background.hover',
+  },
+  '&.is-pressed': {
+    bg: 'background.hover',
+  },
+};
+
 const iconButtons = {
   base: {
     ...baseIconButton,
@@ -500,25 +521,7 @@ const iconButtons = {
       backgroundColor: 'gray-300',
     },
   },
-  searchClearButton: {
-    ...baseIconButton,
-    width: '20px',
-    height: '20px',
-    border: 'none',
-    '& > svg': {
-      minWidth: '18px',
-      width: '18px',
-      height: '18px',
-    },
-    '&.is-hovered': {
-      bg: 'background.hover',
-    },
-    '&.is-pressed': {
-      bg: 'background.hover',
-    },
-    position: 'absolute',
-    right: 20,
-  },
+  searchClearButton,
   filter: {
     ...baseIconButton,
     bg: 'transparent',
@@ -542,6 +545,15 @@ const iconButtons = {
     bg: 'gray-100',
     '&.is-hovered': {
       bg: 'gray-900',
+    },
+  },
+  clearSelectionButton: {
+    ...searchClearButton,
+    top: '15px',
+    right: '1rem',
+    bg: 'transparent',
+    '.is-float-label &': {
+      top: '12px',
     },
   },
 };

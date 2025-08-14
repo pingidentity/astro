@@ -1,6 +1,7 @@
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
+import colors from '../colors/colors';
 
 import { avatar } from './avatar';
 import button, { defaultFocus } from './button';
@@ -216,7 +217,8 @@ const listBox = {
   option: {
     py: '.75rem',
     pl: '.75rem',
-    pr: '1rem',
+    pr: 'md',
+    justifyContent: 'space-between',
     '&.is-focused': {
       color: 'text.primary',
       bg: 'gray-100',
@@ -224,7 +226,7 @@ const listBox = {
     '&.is-selected': {
       color: 'text.primary',
       bg: 'lightblue',
-      pl: 0,
+      pl: '.75rem',
       '&.is-focused': {
         color: 'text.primary',
       },
@@ -485,6 +487,9 @@ export default {
           fill: 'gray-500',
           stroke: 'gray-500',
         },
+      },
+      '&.is-focused': {
+        boxShadow: `inset 0px 0px 0px 1px ${colors.focus}`,
       },
     },
   },

@@ -362,3 +362,23 @@ export const WithHelpHint = args => (
     </SelectField>
   </OverlayProvider>
 );
+
+export const WithClearButton = args => {
+  const [selectedKey, setSelectedKey] = useState('red');
+  return (
+    <OverlayProvider>
+      <SelectField
+        {...args}
+        width="100%"
+        label="What's your favorite color?"
+        hasClearButton
+        selectedKey={selectedKey}
+        onSelectionChange={setSelectedKey}
+      >
+        <Item key="red">Red</Item>
+        <Item key="blue">Blue</Item>
+        <Item key="yellow">Yellow</Item>
+      </SelectField>
+    </OverlayProvider>
+  );
+};
