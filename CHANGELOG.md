@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.134.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.133.0...@pingux/astro@2.134.0) (2025-08-14)
+
+
+### Features
+
+* [UIP-7627, UIP-7628] Enable clearing selections in selectField component ([eebfa9a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/eebfa9a85dc7a7b94f3d39f5730a09fa8c19260a))
+* [UIP-7773, UIP-7764] Add sorting functionality in tableBase component ([494e52c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/494e52c1bbf145188a2d8ba24032cee07d1e49bb))
+
+
+
+
+
 # [2.133.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.132.0...@pingux/astro@2.133.0) (2025-08-08)
 
 
