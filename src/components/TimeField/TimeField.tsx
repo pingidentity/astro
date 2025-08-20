@@ -41,13 +41,8 @@ const TimeField = forwardRef<HTMLDivElement, TimeFieldProps>((props, ref) => {
     locale,
   } as TimeFieldStateOptions);
 
-  const { classNames } = useStatusClasses(className, {
-    isDisabled,
-    isReadOnly,
-    is24Hour: props.hourCycle === 24,
-  });
 
-  const { fieldProps } = useTimeField(
+  const { fieldProps, isInvalid } = useTimeField(
     { ...props, ...parsedTimes } as AriaTimeFieldProps<TimeValue>,
     state,
     fieldRef,
@@ -60,6 +55,13 @@ const TimeField = forwardRef<HTMLDivElement, TimeFieldProps>((props, ref) => {
     ...others,
     value: state?.value?.toString() || '',
   } as UseFieldProps<TimeFieldProps>);
+
+  const { classNames } = useStatusClasses(className, {
+    isDisabled,
+    isReadOnly,
+    isInvalid,
+    is24Hour: props.hourCycle === 24,
+  });
 
   return (
     <Box
