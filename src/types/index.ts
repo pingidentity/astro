@@ -15,6 +15,7 @@ export * from './colorField';
 export * from './copyText';
 export * from './dataTable';
 export * from './environmentBreadcrumb';
+export * from './expandableText';
 export * from './fieldHelperText';
 export * from './footer';
 export * from './grid';

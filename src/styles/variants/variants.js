@@ -12,6 +12,7 @@ import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel
 import copyText from '../../components/CopyText/CopyText.styles';
 import dataTable from '../../components/DataTable/DataTable.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
+import expandableText from '../../components/ExpandableText/ExpandableText.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
 import footer from '../../components/Footer/Footer.styles';
 import gridList from '../../components/GridList/GridList.styles';
@@ -66,6 +67,7 @@ export default {
   copyText,
   dataTable,
   environmentBreadcrumb,
+  expandableText,
   fieldHelperText,
   footer,
   gridList,
