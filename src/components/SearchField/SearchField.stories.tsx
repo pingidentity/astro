@@ -78,6 +78,7 @@ export default {
   },
   args: {
     placeholder: 'Search',
+    'aria-label': 'Search Field',
   },
 } as Meta;
 
