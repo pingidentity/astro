@@ -139,6 +139,11 @@ input.fieldControlWrapper = {
       opacity: 0.5,
     },
   },
+  '&.is-invalid': {
+    '&:after': {
+      bg: 'critical.bright',
+    },
+  },
   '&.is-read-only': {
     '> input': {
       backgroundColor: 'accent.95',

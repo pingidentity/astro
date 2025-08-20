@@ -18,6 +18,10 @@ const inputField = {
   '&.is-24-hour': {
     minWidth: '0px',
   },
+  '&.is-invalid': {
+    borderColor: 'critical.bright',
+  },
+
 };
 
 const segment = {
