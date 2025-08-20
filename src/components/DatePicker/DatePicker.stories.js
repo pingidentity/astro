@@ -94,6 +94,7 @@ export default {
     isRequired: false,
     label: 'Example Label',
     onChange: () => {},
+    'aria-label': 'Date Picker',
   },
 };
 
