@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.135.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.134.0...@pingux/astro@2.135.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* [UIP-7714] Add label to components with accessibility warnings ([b23ad21](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b23ad2147f4d181828c4bd1784544e368e0a3b04))
+* [UIP-7775] TimeField fix isInvalid prop ([a3dbaee](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a3dbaeee87d7fd318fd26baec2ebba585f2aaa59))
+
+
+### Features
+
+* [UIP-7616] UI changes ([e1e1d25](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e1e1d252c8e5283ece0d71e05a7931c4ddddec5d))
+* [UIP-7701] Expandable text component ([ed93b9b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed93b9bcdc976f7fa15440a7d035d4096966d992))
+
+
+
+
+
 # [2.134.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.133.0...@pingux/astro@2.134.0) (2025-08-14)
 
 
