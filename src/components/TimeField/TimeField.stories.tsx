@@ -67,3 +67,11 @@ export const Required: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
 export const WithLabel: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
   <TimeField {...args} label="Lorem Ipsum" aria-label="timefield-default" />
 );
+
+export const Invalid: StoryFn<TimeFieldProps> = () => {
+  const [time, setTime] = useState('02:30');
+
+  const onChangeHandler = value => setTime(value.toString());
+
+  return <TimeField aria-label="timefield-default" value={time} onChange={onChangeHandler} isInvalid />;
+};

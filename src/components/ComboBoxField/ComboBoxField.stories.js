@@ -143,6 +143,7 @@ export default {
     label: 'Example label',
     defaultItems: items,
     disableKeys: ['Snake'],
+    'aria-label': 'ComboBox Field',
   },
 };
 
