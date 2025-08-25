@@ -75,6 +75,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
         ref={contentRef}
         {...mergeProps(focusProps, pressProps)}
         role="presentation"
+        sx={{ cursor: 'pointer' }}
       >
         {children}
       </Box>
