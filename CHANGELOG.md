@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.136.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.135.0...@pingux/astro@2.136.0) (2025-08-26)
+
+
+### Bug Fixes
+
+* [UIP-7751] RadioGroupField applies focus classes on click ([d409c54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d409c54f038f7bca4b7ab367925d05ed1df37a31))
+
+
+### Features
+
+* [UIP-7713] UI changes ([2c4cb52](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2c4cb5214ed1ccaadbb1b1a38f4d4dc87f89052d))
+
+
+
+
+
 # [2.135.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.134.0...@pingux/astro@2.135.0) (2025-08-21)
 
 
