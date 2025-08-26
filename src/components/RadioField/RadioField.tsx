@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import { useRadio } from 'react-aria';
 import { RadioGroupState } from 'react-stately';
+import { usePress } from '@react-aria/interactions';
 
 import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { UseFieldProps } from '../../hooks/useField/useField';
@@ -65,9 +66,11 @@ const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>((props, ref) =>
     controlProps: { ...controlProps, ...inputProps },
   } as UseFieldProps<object>);
 
+  const { pressProps } = usePress({});
+
   return (
     <Box variant="forms.radio.outerContainer" {...fieldContainerProps}>
-      <Label variant="forms.label.radio" {...fieldLabelProps}>
+      <Label variant="forms.label.radio" {...fieldLabelProps} {...pressProps}>
         <Box {...fieldControlWrapperProps} variant="forms.radio.controlWrapper">
           <Radio
             ref={radioFieldRef}
@@ -80,19 +83,19 @@ const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>((props, ref) =>
       {
         helperText
         && (
-        <FieldHelperText status={status}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status}>
+            {helperText}
+          </FieldHelperText>
         )
       }
       {
         isChecked && (
           checkedContent
-        && (
-        <Box variant="forms.radio.checkedContent">
-          {checkedContent}
-        </Box>
-        )
+          && (
+            <Box variant="forms.radio.checkedContent">
+              {checkedContent}
+            </Box>
+          )
         )
       }
     </Box>
