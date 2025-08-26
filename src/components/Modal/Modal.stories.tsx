@@ -3,13 +3,18 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { useGetTheme, useModalState } from '../../hooks';
+import { useModalState } from '../../hooks';
 import {
   Box,
   Button,
+  Item,
   Modal,
   OverlayProvider,
+  RadioField,
+  RadioGroupField,
+  SelectField,
   Text,
+  TextField,
 } from '../../index';
 import { ModalProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
@@ -263,4 +268,72 @@ export const LargeContent: StoryFn<ModalProps> = args => {
       )}
     </OverlayProvider>
   );
+};
+
+export const WithInputField: StoryFn<ModalProps> = () => {
+  const state = useModalState();
+  return (
+    <OverlayProvider>
+      <Button onPress={state.open} aria-label="Open modal">
+        Open Modal
+      </Button>
+      {state.isOpen && (
+        <Modal
+          isOpen={state.isOpen}
+          onClose={state.close}
+        >
+          <Box gap="lg">
+            <Text>Lorem ipsum dolor sit amet consectetur</Text>
+            <SelectField label="Select an option">
+              <Item>Red</Item>
+              <Item>Green</Item>
+              <Item>Blue</Item>
+            </SelectField>
+            <RadioGroupField label="Pick an option" name="options" defaultValue="option1">
+              <RadioField
+                label="Option 1"
+                value="option1"
+                data-testid="option1"
+              />
+              <RadioField
+                label="Option 2"
+                value="option2"
+                data-testid="option2"
+              />
+              <RadioField
+                label="Option 3"
+                value="option3"
+                data-testid="option3"
+              />
+            </RadioGroupField>
+            <Box isRow variant="modal.buttonsContainer">
+              <Button
+                variant="primary"
+                onPress={state.close}
+                mr="md"
+                aria-label="Continue"
+              >
+                Continue
+              </Button>
+              <Button
+                variant="link"
+                onPress={state.close}
+                aria-label="Cancel"
+              >
+                Cancel
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+      )}
+    </OverlayProvider>
+  );
+};
+
+WithInputField.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'aria-hidden-focus', enabled: false }],
+    },
+  },
 };

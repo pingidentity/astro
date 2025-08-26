@@ -1,3 +1,5 @@
+import { isSafari } from '../../safariAgent.js';
+
 import colors from './colors/colors';
 import tShirtSizes from './customProperties/tShirtSizes';
 import { fieldControlWrapper, input } from './variants/input';
@@ -68,11 +70,22 @@ export const radio = {
   base: {
     color: 'text.secondary',
     mr: '8px',
-    'input ~ &.is-focused': {
-      outline: '1px solid',
-      outlineColor: '#1a73e8',
-      outlineOffset: '-3px',
-    },
+    'input ~ &.is-focused':
+      /* istanbul ignore next */
+      isSafari ? {
+        boxShadow: 'none',
+        border: '1px solid',
+        borderColor: 'focus',
+        boxSizing: 'border-box',
+        transform: 'scale(1.1)',
+        transformOrigin: 'center',
+      }
+      /* istanbul ignore next */
+        : {
+          outline: '1px solid',
+          outlineColor: 'focus',
+          outlineOffset: '1px',
+        },
   },
 };
 
