@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { Modal, OverlayProvider } from '../../../index';
+import { Modal, OverlayProvider, RadioField, RadioGroupField } from '../../../index';
 import { ModalProps } from '../../../types/Modal';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
@@ -10,6 +10,25 @@ import { universalComponentTests } from '../../../utils/testUtils/universalCompo
 const getComponent = (props: ModalProps = {}) => render((
   <OverlayProvider>
     <Modal {...props} />
+  </OverlayProvider>
+));
+
+const getModalWithRadioFieldGroup = (props: ModalProps = {}) => render((
+  <OverlayProvider>
+    <Modal {...props}>
+      <RadioGroupField label="Options" name="options" defaultValue="option1">
+        <RadioField
+          label="Option 1"
+          value="option1"
+          data-testid="option1"
+        />
+        <RadioField
+          label="Option 2"
+          value="option2"
+          data-testid="option2"
+        />
+      </RadioGroupField>
+    </Modal>
   </OverlayProvider>
 ));
 
@@ -171,4 +190,24 @@ test('should render sizes correctly with passed size prop', () => {
   getComponent({ size: 'full' });
   const fModal = screen.getByRole('dialog');
   expect(fModal).toHaveClass('is-full');
+});
+
+test('should not show focus ring (is-focused class) on radio buttons when clicked with mouse', () => {
+  getModalWithRadioFieldGroup();
+
+  const radioA = screen.getByLabelText('Option 1');
+  const radioB = screen.getByLabelText('Option 2');
+  const labelA = screen.getByText('Option 1');
+  const labelB = screen.getByText('Option 2');
+
+  userEvent.click(radioA);
+  expect(radioA).toBeChecked();
+  expect(labelA).toHaveClass('is-checked');
+  expect(labelA).not.toHaveClass('is-focused');
+  expect(labelB).not.toHaveClass('is-focused');
+
+  userEvent.click(radioB);
+  expect(radioB).toBeChecked();
+  expect(labelA).not.toHaveClass('is-focused');
+  expect(labelB).not.toHaveClass('is-focused');
 });
