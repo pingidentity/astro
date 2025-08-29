@@ -121,7 +121,7 @@ export const parameters = {
     },
   },
   codesandbox: {
-    apiToken: process.env.CODESANDBOX_API_TOKEN,
+    // apiToken: process.env.CODESANDBOX_API_TOKEN,
     dependencies: {
       "@pingux/astro": "latest",
       "@pingux/mdi-react": "^1.2.0",

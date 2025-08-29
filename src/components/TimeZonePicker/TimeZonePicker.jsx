@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { Box, ComboBoxField, Item, Text } from '../../index';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
-import defaultTimezones, { usCities } from './timezones.js';
+import defaultTimezones, { usCities } from './timezones.jsx';
 
 const createSearchTags = ({ gmt, gmtLabel, timeZone }) => {
   let additionalTags = '';

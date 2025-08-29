@@ -30,7 +30,7 @@ module.exports = {
     "storybook-addon-designs",
     "@codesandbox/storybook-addon"
   ],
-  webpackFinal: async config => {
+  viteFinal: async config => {
     return {
       ...config,
       resolve: {
@@ -45,7 +45,7 @@ module.exports = {
     };
   },
   framework: {
-    name: "@storybook/react-webpack5",
+    name: "@storybook/react-vite",
     options: {}
   },
   docs: {

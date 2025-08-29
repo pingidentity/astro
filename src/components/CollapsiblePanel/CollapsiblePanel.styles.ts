@@ -1,5 +1,5 @@
 import { defaultFocus, focusWithCroppedOutline, link } from '../Button/Buttons.styles';
-import { square } from '../IconButton/IconButton.styles';
+// import { square } from '../IconButton/IconButton.styles';
 import { wordWrap } from '../Text/Text.styles';
 
 const container = {
@@ -85,7 +85,7 @@ const item = {
 };
 
 export const toggle = {
-  ...square,
+  // ...square,
   bg: 'accent.99',
   borderRadius: '2px',
   height: '40px',

@@ -1,0 +1,34 @@
+{
+  "name": "astro",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/astro/src",
+  "projectType": "library",
+  "tags": ["type:ui"],
+  "// targets": "to see all targets run: nx show project astro --web",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "configFile": "libs/my-lib/vite.config.ts",
+        "outputPath": "dist/libs/astro",
+        "main": "libs/astro/src/index.ts",
+        "tsConfig": "libs/astro/tsconfig.lib.json",
+        "assets": [
+          "libs/astro/*.md",
+          {
+            "input": "libs/astro",
+            "glob": "**/*.scss",
+            "output": "scss"
+          }
+        ]
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "configFile": "libs/astro/vite.config.ts"
+      }
+}
+  }
+}

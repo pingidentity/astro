@@ -32,6 +32,8 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
     onPressChange,
     onPressUp,
     isDisabled,
+    value,
+    onClick,
     ...others
   } = props;
 
@@ -52,6 +54,8 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
     onPressEnd,
     onPressStart,
     onPressUp,
+    value: value ? String(value) : undefined,
+    onClick,
     ...others,
   }, buttonRef);
   const { bg: badgeBg } = useContext(BadgeContext) as BadgeContextProps;

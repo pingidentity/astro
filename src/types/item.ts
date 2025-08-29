@@ -1,5 +1,5 @@
 import { ElementType, Key, ReactNode } from 'react';
-import type { ItemProps } from '@react-types/shared';
+import type { ItemProps as BaseItemProps } from '@react-types/shared';
 
 import { IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
@@ -44,4 +44,5 @@ declare module '@react-types/shared' {
   }
 }
 
+export type ItemProps<T = unknown> = BaseItemProps<T>;
 export default ItemProps;
