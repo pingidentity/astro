@@ -34,7 +34,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     selectionMode,
     selectionBehavior,
     tableBodyProps,
-    showSelectionCheckboxes,
+    hasSelectionCheckboxes,
     isStickyHeader = false,
     ...others
   } = props;
@@ -43,7 +43,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
 
   const state = useTableState({
     ...props,
-    showSelectionCheckboxes: showSelectionCheckboxes || (selectionMode === 'multiple' && selectionBehavior !== 'replace'),
+    showSelectionCheckboxes: hasSelectionCheckboxes || (selectionMode === 'multiple' && selectionBehavior !== 'replace'),
   });
 
   const tableRef = useLocalOrForwardRef(ref);
