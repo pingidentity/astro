@@ -127,6 +127,7 @@ export const CustomOptions = () => {
         currentPageIndex={index}
         offsetOptions={[10, 15, 25, 50, 100]}
         onPageIndexChange={key => { testFunc(key); }}
+        previousButtonProps={{ onPress: () => alert('previous') }}
       />
     </Box>
   );
