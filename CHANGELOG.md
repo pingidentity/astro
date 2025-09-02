@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.137.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.136.0...@pingux/astro@2.137.0) (2025-09-02)
+
+
+### Bug Fixes
+
+* [UIP-7772] add ButtonProps to Pagination ([f93efe4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f93efe42aa495640dc3027b4602ecfba9d0a2106)), closes [#7772](https://gitlab.corp.pingidentity.com/ux/pingux/issues/7772)
+* Update showSelectionCheckboxes to hasSelectionCheckboxes ([f4bb3de](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f4bb3ded41a7e3f98a3317950758cf3bae36c4ba))
+
+
+### Features
+
+* [UIP-7673] Add Badge component status variants to Onyx Dark theme with updated colors ([a2dfaaa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a2dfaaa8cd2c01657af575a61d07299c19257715))
+
+
+
+
+
 # [2.136.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.135.0...@pingux/astro@2.136.0) (2025-08-26)
 
 
