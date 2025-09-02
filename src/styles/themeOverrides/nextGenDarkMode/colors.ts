@@ -9,6 +9,10 @@ export const overrides = {
   disabled: '#30373f',
 };
 
+const font = {
+  base: nextGenColors['gray-100'],
+};
+
 const hoverDark = chroma.mix('#23282e', 'white', 0.04, 'rgb').hex();
 
 const border = {
@@ -20,7 +24,7 @@ const border = {
 };
 
 const badge = {
-  background: nextGenColors['gray-700'],
+  background: nextGenColors['gray-800'],
   textColor: nextGenColors['gray-100'],
 };
 
@@ -100,8 +104,6 @@ export const colors = {
     card: '#1a1e22',
     hover: hoverDark,
   },
-  font: {
-    base: nextGenColors['gray-100'],
-  },
+  font,
   badge,
 };
