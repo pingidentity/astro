@@ -57,12 +57,6 @@ export const componentSpecificNextGenBlacklist = {
     'Default',
     'With Custom Theme Override',
   ],
-  Badge: [
-    'Status Badge Variants',
-    'Badge With Left Slot And Icon',
-    'Callout Badges',
-    'Removable',
-  ],
   Messages: [
     'Customization',
   ],

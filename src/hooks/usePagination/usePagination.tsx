@@ -160,16 +160,16 @@ const usePagination = (props: PaginationProps) => {
 
   const nextButtonPropsSpread = {
     'aria-label': 'Next Page',
-    ...nextButtonProps,
     isDisabled: isLastIndex,
     onPress: nextIndex,
+    ...nextButtonProps,
   };
 
   const previousButtonPropsSpread = {
     'aria-label': 'Previous Page',
-    ...previousButtonProps,
     isDisabled: isFirstIndex,
     onPress: previousIndex,
+    ...previousButtonProps,
   };
 
   const containerProps = {

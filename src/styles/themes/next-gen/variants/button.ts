@@ -405,6 +405,27 @@ const onyxIconButton = {
   justifyContent: 'center',
 };
 
+const badgeDeleteButton = {
+  ...baseIconButton,
+  height: 14,
+  p: 0,
+  width: 14,
+  border: 'none',
+  '&.is-focused': {
+    ...defaultFocus,
+    backgroundColor: 'gray-100',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'gray-100',
+    borderColor: 'gray-200',
+    path: { fill: 'dark' },
+  },
+  '&.is-hovered': {
+    bg: 'transparent',
+  },
+  ...transitions,
+};
+
 const searchClearButton = {
   ...baseIconButton,
   width: '20px',
@@ -546,6 +567,10 @@ const iconButtons = {
     '&.is-hovered': {
       bg: 'gray-900',
     },
+  },
+  badgeDeleteButton,
+  invertedBadgeDeleteButton: {
+    ...badgeDeleteButton,
   },
   clearSelectionButton: {
     ...searchClearButton,

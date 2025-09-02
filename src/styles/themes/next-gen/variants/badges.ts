@@ -1,8 +1,33 @@
 import buttons from './button';
 
 const badgeFont = {
-  fontSize: '11.25px',
+  fontSize: '12px',
   fontWeight: 2,
+};
+
+const badgeIconStyle = {
+  '& span': {
+    ...badgeFont,
+    color: 'inherit',
+  },
+  '& button': {
+    alignSelf: 'center',
+    p: '0',
+    bg: 'transparent',
+    '&.is-hovered': {
+      bg: 'transparent',
+      '& svg': {
+        path: {
+          fill: 'inherit',
+        },
+      },
+    },
+  },
+  '& svg': {
+    path: {
+      fill: 'inherit',
+    },
+  },
 };
 
 const baseBadge = {
@@ -11,67 +36,57 @@ const baseBadge = {
   py: '.25em',
   px: '.4em',
   borderRadius: '4px',
-  fontSize: '11.25px',
+  maxHeight: '18px',
+  minHeight: '18px',
+  fontSize: '12px',
   alignSelf: 'flex-start',
   display: 'inline-flex !important',
   width: 'fit-content',
-  '& span': {
-    ...badgeFont,
-  },
+  color: 'text.primary',
+  ...badgeIconStyle,
 };
+
 
 const primary = {
   ...baseBadge,
-  backgroundColor: '#eaf1fb !important',
-  '& span': {
-    ...badgeFont,
-    color: '#1967d2',
-  },
+  backgroundColor: '#EAF2FD !important',
+  color: 'blue-600',
 };
 
 const secondary = {
   ...baseBadge,
   backgroundColor: '#f6f8fa !important',
-  '& span': {
-    ...badgeFont,
-    color: 'gray-900',
-  },
+  color: 'gray-900',
 };
 
 const success = {
   ...baseBadge,
-  backgroundColor: '#d3eddf !important',
-  '& span': {
-    ...badgeFont,
-    color: 'success.dark',
-  },
+  backgroundColor: '#D3EDDF !important',
+  color: 'success.dark',
 };
 
 const danger = {
   ...baseBadge,
-  backgroundColor: '#f8d8d5 !important',
-  '& span': {
-    ...badgeFont,
-    color: 'red-700',
-  },
+  backgroundColor: '#F8D8D5 !important',
+  color: 'red-700',
 };
 
 const warning = {
   ...baseBadge,
-  backgroundColor: '#fff1da !important',
-  '& span': {
-    ...badgeFont,
-    color: 'yellow-700',
-  },
+  backgroundColor: '#FFF1DA !important',
+  color: 'yellow-800',
 };
 
 const dark = {
   ...baseBadge,
   backgroundColor: 'black !important',
-  '& span': {
-    ...badgeFont,
-    color: 'white',
-  },
+  color: 'white',
+};
+
+const info = {
+  ...baseBadge,
+  backgroundColor: '#EAF2FD !important',
+  color: 'darkblue',
 };
 
 const selectedItemBadge = {
@@ -80,24 +95,36 @@ const selectedItemBadge = {
   paddingRight: '0px !important',
   '& span': {
     ...badgeFont,
-    fontSize: '14px',
     color: 'text.primary',
     fontWeight: 400,
   },
 };
 
 const readOnlyBadge = {
+  ...baseBadge,
+  border: 'none',
   '& span': {
-    fontSize: '14px',
+    ...badgeFont,
+    color: 'text.primary',
+    fontWeight: 2,
   },
 };
 
-const info = {
-  ...baseBadge,
-  backgroundColor: '#eaf2fd !important',
+const readOnlyFieldBadge = {
+  ...readOnlyBadge,
   '& span': {
     ...badgeFont,
-    color: 'darkblue',
+    color: 'white',
+  },
+};
+
+const itemBadgeWithSlot = {
+  ...readOnlyBadge,
+  bg: '#f6f8fa !important',
+  fontWeight: 2,
+  '& span': {
+    ...badgeFont,
+    color: 'text.primary',
   },
 };
 
@@ -140,6 +167,28 @@ const secondaryStatusBadge = {
   ...dataTableBadge,
 };
 
+const countBadge = {
+  ...baseBadge,
+  backgroundColor: '#455469 !important',
+  '& span': {
+    ...badgeFont,
+    color: 'white',
+  },
+};
+
+const countNeutral = {
+  ...secondary,
+};
+
+const invertedRemovableBadge = {
+  ...dark,
+};
+
+const removableBadge = {
+  ...secondary,
+  border: 'none',
+};
+
 export const badges = {
   baseBadge: {
     ...baseBadge,
@@ -148,18 +197,36 @@ export const badges = {
     ...baseBadge,
   },
   primary,
+  countBadge,
+  countNeutral,
   secondary,
   success,
   danger,
   warning,
   dark,
+  info,
   selectedItemBadge,
   readOnlyBadge,
+  readOnlyFieldBadge,
   activeStatusBadge,
   warningStatusBadge,
   criticalStatusBadge,
   healthyStatusBadge,
   secondaryStatusBadge,
   badgeDeleteButton,
-  info,
+  itemBadgeWithSlot,
+  removableBadge,
+  invertedRemovableBadge,
+  errorCalloutBadge: {
+    backgroundColor: 'white !important',
+  },
+  infoCalloutBadge: {
+    backgroundColor: 'white !important',
+  },
+  successCalloutBadge: {
+    backgroundColor: 'white !important',
+  },
+  warningCalloutBadge: {
+    backgroundColor: 'white !important',
+  },
 };

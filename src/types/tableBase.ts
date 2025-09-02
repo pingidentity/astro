@@ -16,7 +16,7 @@ export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<Ba
   'aria-label'?: string;
   selectionMode?: 'none' | 'single' | 'multiple',
   selectionBehavior?: 'replace' | 'toggle',
-  showSelectionCheckboxes?: boolean;
+  hasSelectionCheckboxes?: boolean;
   'data-testid'?: string;
   caption?: ReactNode | string;
   tableBodyProps?: Record<string, unknown>;
