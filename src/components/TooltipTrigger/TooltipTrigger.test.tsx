@@ -119,7 +119,7 @@ test('tooltip closes after closeDelay when mouse leaves trigger', async () => {
 
   act(() => { jest.advanceTimersByTime(300); });
 
-  await act(() => {
+  await waitFor(() => {
     expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   }, { timeout: closeDelay + 301 });
 });

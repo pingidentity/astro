@@ -176,9 +176,9 @@ describe('CopyText', () => {
 
       act(() => jest.advanceTimersByTime(2000));
 
-      await act(() => {
-        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
-      }, { timeout: 2000 });
+    await waitFor(() => {
+      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
+    }, { timeout: 2000 });
     });
   });
 

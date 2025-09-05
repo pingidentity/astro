@@ -141,7 +141,7 @@ test('popover closes after closeDelay when mouse leaves trigger', async () => {
 
   act(() => { jest.advanceTimersByTime(11); });
 
-  await act(() => {
+  await waitFor(() => {
     expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   }, { timeout: closeDelay + 1 });
 });
@@ -155,7 +155,7 @@ test('popover automatically closes in 1000ms after mouse leaves trigger', async 
 
   act(() => { jest.advanceTimersByTime(1001); });
 
-  await act(() => {
+  await waitFor(() => {
     expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   }, { timeout: oneSecond + 1 });
 });

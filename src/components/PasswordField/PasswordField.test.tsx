@@ -5,7 +5,12 @@ import userEvent from '@testing-library/user-event';
 
 import { PasswordFieldProps, Requirement } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { act, render, screen } from '../../utils/testUtils/testWrapper';
+import {
+  act,
+  render,
+  screen,
+  waitFor,
+} from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
@@ -243,9 +248,12 @@ test('handleInputChange sets isTyping to true and then false after 300ms', async
     jest.advanceTimersByTime(delay);
   });
 
-  await act(() => {
-    expect(input).toHaveValue('test');
-  }, { timeout: delay + 1 });
+  await waitFor(
+    () => {
+      expect(input).toHaveValue('test');
+    },
+    { timeout: delay + 1 }
+  );
 });
 
 test('handleInputChange calls onChange prop', () => {

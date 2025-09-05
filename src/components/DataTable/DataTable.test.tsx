@@ -639,12 +639,12 @@ describe('Sortable with useAsyncList', () => {
     const { result } = renderHook(() => useAsyncList({
       load,
       sort,
-      initialSortDescriptor: { direction: 'ascending' },
+      initialSortDescriptor: { column: 'name',direction: 'ascending' },
     }));
 
     expect(load).toHaveBeenCalledTimes(1);
     let args = load.mock.calls[0][0];
-    expect(args.sortDescriptor).toEqual({ direction: 'ascending' });
+    expect(args.sortDescriptor).toEqual({ column: 'name', direction: 'ascending' });
     expect(result.current.items).toEqual([]);
 
     await actHooks(async () => {
@@ -654,7 +654,7 @@ describe('Sortable with useAsyncList', () => {
     expect(result.current.items).toEqual(ITEMS);
 
     await actHooks(async () => {
-      result.current.sort({ column: 'name' });
+      result.current.sort({ column: 'name', direction: 'ascending' });
     });
 
     expect(result.current.items).toEqual(ITEMS);
@@ -734,7 +734,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     });
 
     await actHooks(async () => {
-      result.current.sort({ column: 'country' });
+      result.current.sort({ column: 'country', direction: 'descending' });
     });
 
     await actHooks(async () => {

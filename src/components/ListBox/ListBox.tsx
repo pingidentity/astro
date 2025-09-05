@@ -70,6 +70,8 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,
+    //@ts-ignore
+    linkBehavior,
     ...others
   } = props;
 
