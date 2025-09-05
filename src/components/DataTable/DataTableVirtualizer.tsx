@@ -62,8 +62,8 @@ DataTableVirtualizerProps<object, object>>(({
   const { virtualizerProps } = useVirtualizer(
     {
       scrollToItem(key) {
-        const item = collection.getItem(key) as DataTableItem;
-        state.virtualizer.scrollToItem(key, {
+        const item = collection.getItem(String(key)) as DataTableItem;
+        state.virtualizer.scrollToItem(String(key), {
           duration: 0,
           // Prevent scrolling to the top when clicking on column headers.
           shouldScrollY: item?.type !== 'column',

@@ -364,8 +364,8 @@ export function TableCheckboxCell<T>(props: TableCheckboxCellProps<T>) {
   const ref = useRef<HTMLTableCellElement | null>(null);
   const { gridCellProps } = useTableCell({ node: cell }, state, ref);
   const { checkboxProps } = useTableSelectionCheckbox(
-    { key: cell.parentKey as Key },
-    state,
+    { key: String(cell.parentKey) },
+    state
   );
 
   return (

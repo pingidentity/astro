@@ -1,31 +1,17 @@
+const nxPreset = require('@nx/jest/preset').default;
 module.exports = {
-  rootDir: './',
+  ...nxPreset,
   resolver: require.resolve('jest-pnp-resolver'),
-  testMatch: [
-    '**/**/*.test.(js|ts)?(x)',
-  ],
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/.yarn/',
-    '/lib/',
-    '/dist/',
-  ],
+  testMatch: ['**/**/*.test.(js|ts)?(x)'],
+  testPathIgnorePatterns: ['/node_modules/', '/.yarn/', '/lib/', '/dist/'],
   moduleNameMapper: {
     '^.+\\.(css|scss)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.mdx$': '<rootDir>/__mocks__/mdxMock.js',
     '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
   },
-  modulePathIgnorePatterns: [
-    '/lib/',
-    '/build/',
-    '/dist/',
-  ],
-  setupFiles: [
-    'jest-canvas-mock',
-  ],
-  setupFilesAfterEnv: [
-    '<rootDir>/src/utils/testUtils/setupTests.ts',
-  ],
+  modulePathIgnorePatterns: ['/lib/', '/build/', '/dist/'],
+  setupFiles: [require.resolve('jest-canvas-mock')],
+  setupFilesAfterEnv: ['<rootDir>/src/utils/testUtils/setupTests.ts'],
   coverageThreshold: {
     global: {
       lines: 92,
@@ -58,4 +44,6 @@ module.exports = {
     '\\.jsx?$': ['babel-jest', { rootMode: 'upward' }],
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
+  transformIgnorePatterns: ['/node_modules/(?!(chroma-js)/)'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
 };

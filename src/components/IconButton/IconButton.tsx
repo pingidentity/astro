@@ -2,6 +2,7 @@ import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'reac
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import { IconButton as ThemeUIIconButton } from 'theme-ui';
+import type { FocusableElement } from '@react-types/shared';
 
 import { BadgeContext, BadgeContextProps } from '../../context/BadgeContext';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
@@ -42,22 +43,25 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
   useImperativeHandle(ref, () => buttonRef.current as HTMLButtonElement);
 
   const { isPressed: isPressedFromContext } = usePress({ ref: buttonRef });
-  const { buttonProps, isPressed } = useButton({
-    elementType: 'button',
-    isDisabled,
-    onBlur: onBlur as FocusEventHandler,
-    onFocus: onFocus as FocusEventHandler,
-    onKeyDown,
-    onKeyUp,
-    onPress,
-    onPressChange,
-    onPressEnd,
-    onPressStart,
-    onPressUp,
-    value: value ? String(value) : undefined,
-    onClick,
-    ...others,
-  }, buttonRef);
+  const { buttonProps, isPressed } = useButton(
+    {
+      elementType: 'button',
+      isDisabled,
+      onBlur: onBlur as FocusEventHandler,
+      onFocus: onFocus as FocusEventHandler,
+      onKeyDown,
+      onKeyUp,
+      onPress,
+      onPressChange,
+      onPressEnd,
+      onPressStart,
+      onPressUp,
+      value: value ? String(value) : undefined,
+      onClick: onClick as (e: React.MouseEvent<FocusableElement>) => void,
+      ...others,
+    },
+    buttonRef
+  );
   const { bg: badgeBg } = useContext(BadgeContext) as BadgeContextProps;
   const { hoverProps, isHovered } = useHover({
     onHoverChange,

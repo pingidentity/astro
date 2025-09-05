@@ -108,11 +108,15 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
   layout.isLoading = props.isLoading ? props.isLoading : false;
 
   // Get props for the listbox
-  const { listBoxProps } = useListBox({
-    ...listBoxOptions,
-    keyboardDelegate: layout,
-    isVirtualized: true,
-  }, state, listBoxRef);
+  const { listBoxProps } = useListBox(
+    {
+      ...listBoxOptions,
+      keyboardDelegate: layout as unknown as typeof keyboardDelegate,
+      isVirtualized: true,
+    },
+    state,
+    listBoxRef
+  );
 
   const renderWrapper = (parent, reusableView, children, renderChildren) => {
     if (reusableView.viewType === 'section') {
@@ -154,7 +158,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
           autoFocus={hasAutoFocus}
           style={{ outline: 'none' }}
           ref={listBoxRef}
-          focusedKey={state?.selectionManager?.focusedKey}
+          focusedKey={state?.selectionManager?.focusedKey ?? undefined}
           sizeToFit="height"
           scrollDirection="vertical"
           collection={state.collection}

@@ -125,7 +125,7 @@ const ListViewItem = props => {
 ListViewItem.propTypes = {
   item: PropTypes.shape({
     index: PropTypes.number,
-    key: PropTypes.string,
+    key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     rendered: PropTypes.node,
     props: PropTypes.shape({
       'data-id': PropTypes.string,

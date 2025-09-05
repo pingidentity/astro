@@ -3,8 +3,8 @@ import { AriaButtonProps, DismissButton, FocusScope, useOverlayPosition } from '
 import { AriaSelectOptions, SelectAria, useSelect } from '@react-aria/select';
 import { useResizeObserver } from '@react-aria/utils';
 import { SelectState, useSelectState } from '@react-stately/select';
-import type { CollectionChildren } from '@react-types/shared';
-import { LabelProps as ThemeUILabelProps } from 'theme-ui';
+import type { CollectionChildren, Key as SharedKey } from '@react-types/shared';
+import { LabelProps as ThemeUILabelProps, ThemeUICSSObject } from 'theme-ui';
 
 import ListBox from '../../components/ListBox/ListBox';
 import PopoverContainer from '../../components/PopoverContainer';
@@ -15,12 +15,12 @@ import { FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
 export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
-  children?: CollectionChildren<T>
+  children?: CollectionChildren<T>;
   align?: PlacementAxis;
   defaultSelectedKey?: string;
   defaultText?: string;
   direction?: Axis;
-  disabledKeys?: Iterable<Key>;
+  disabledKeys?: Iterable<SharedKey>;
   hasNoEmptySelection?: boolean;
   hasNoStatusIndicator?: boolean;
   helperText?: string;
@@ -40,7 +40,7 @@ export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   onKeyUp?: (e: React.KeyboardEvent) => void;
   onLoadMore?: () => unknown;
   onOpenChange?: (isOpen: boolean) => unknown;
-  onSelectionChange?: (key: Key) => unknown;
+  onSelectionChange?: (key: SharedKey | null) => void;
   controlProps?: ControlProps;
   scrollBoxProps?: BoxProps;
   listBoxProps?: ListBoxProps;
@@ -255,7 +255,7 @@ const useSelectField = <T extends object>(
       isNonModal
       isOpen={state.isOpen}
       onClose={state.close}
-      placement={placement}
+      placement={placement ?? undefined}
       ref={popoverRef}
       style={style}
     >

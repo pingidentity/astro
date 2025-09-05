@@ -77,7 +77,7 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
       <PopoverContainer
         isOpen={isOpen}
         ref={overlayRef}
-        placement={placement}
+        placement={placement ?? undefined}
         arrowProps={arrowProps as PopoverArrowProps}
         className={classNames}
         hasNoArrow={hasNoArrow}

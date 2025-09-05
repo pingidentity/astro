@@ -2,6 +2,7 @@ import React, { FocusEvent, KeyboardEvent } from 'react';
 import { CalendarDateTime, Time, ZonedDateTime } from '@internationalized/date';
 import type { DateSegment, TimeFieldState } from '@react-stately/datepicker';
 import type { TimeValue } from '@react-types/datepicker';
+import type { FocusableElement } from '@react-types/shared';
 
 import { DOMAttributes, StyleProps } from './shared';
 
@@ -16,7 +17,9 @@ export type MappedTimeValue<T> =
   never;
 
 
-export interface TimeFieldProps extends StyleProps, DOMAttributes{
+export interface TimeFieldProps
+  extends StyleProps,
+    Omit<DOMAttributes<FocusableElement>, 'onChange'> {
   /** Whether to display the time in 12 or 24 hour format. Default is determined by user's locale */
   hourCycle?: HourCycle;
 
@@ -65,7 +68,7 @@ export interface TimeFieldProps extends StyleProps, DOMAttributes{
   validationBehavior?: ValidationBehavior;
 
   /** The content to display as the label. */
-  label?: React.ReactNode,
+  label?: React.ReactNode;
 
   /** Handler that is called when the element receives focus. */
   onFocus?: (e: FocusEvent) => void;

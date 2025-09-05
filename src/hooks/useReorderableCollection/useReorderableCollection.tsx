@@ -5,6 +5,7 @@ import { ListKeyboardDelegate } from '@react-aria/selection';
 import { DraggableCollectionStateOptions, useDraggableCollectionState, useDroppableCollectionState } from '@react-stately/dnd';
 
 import { UseReorderableCollectionProps } from '../../types/dnd';
+import type { KeyboardDelegate } from '@react-types/shared';
 
 const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   const [draggingKey, setDraggingKey] = useState('');
@@ -79,7 +80,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
         }
       },
       dropTargetDelegate: new ListDropTargetDelegate(state.collection, ref),
-      keyboardDelegate,
+      keyboardDelegate: keyboardDelegate as unknown as KeyboardDelegate,
     },
     dropState,
     ref,

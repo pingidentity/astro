@@ -1,5 +1,6 @@
 import { Key } from 'react';
 import { ThemeUICSSObject } from 'theme-ui';
+import type { FocusableElement } from '@react-types/shared';
 
 import { IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
@@ -70,7 +71,7 @@ export interface NavSideBarSectionItemProps {
   onPress?: () => void;
   onKeyDown?: (...args: unknown[]) => void;
   key?: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<FocusableElement>) => void;
   item?: React.ReactElement;
   sx?: ThemeUICSSObject;
   linkProps?: LinkProps;

@@ -147,7 +147,7 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
         isDismissable={isFocusWithinOverlay ? !isOpen : true}
         isNonModal
         onClose={close}
-        placement={placement}
+        placement={placement ?? undefined}
         ref={overlayRef}
         isOpen={isOpen}
         {...mergeProps(

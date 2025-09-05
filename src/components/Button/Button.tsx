@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
 import { Button as ThemeUIButton } from 'theme-ui';
+import type { FocusableElement } from '@react-types/shared';
 
 import {
   useAriaLabelWarning,
@@ -35,6 +36,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     onPressStart,
     onPressUp,
     tabIndex,
+    value,
+    onClick,
     variant = 'default',
     ...others
   } = props;
@@ -44,20 +47,25 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { isFocusVisible, focusProps } = useFocusRing();
   const { isPressed: isPressedFromContext } = usePress({ ref: buttonRef });
 
-  const { buttonProps, isPressed } = useButton({
-    elementType: 'button',
-    isDisabled,
-    onBlur: onBlur as FocusEventHandler,
-    onFocus: onFocus as FocusEventHandler,
-    onKeyDown,
-    onKeyUp,
-    onPress,
-    onPressChange,
-    onPressEnd,
-    onPressStart,
-    onPressUp,
-    ...others,
-  }, buttonRef);
+  const { buttonProps, isPressed } = useButton(
+    {
+      elementType: 'button',
+      isDisabled,
+      onBlur: onBlur as FocusEventHandler,
+      onFocus: onFocus as FocusEventHandler,
+      onKeyDown,
+      onKeyUp,
+      onPress,
+      onPressChange,
+      onPressEnd,
+      onPressStart,
+      onPressUp,
+      value: value ? String(value) : undefined,
+      onClick: onClick as (e: React.MouseEvent<FocusableElement>) => void,
+      ...others,
+    },
+    buttonRef
+  );
 
   const { hoverProps, isHovered } = useHover({
     onHoverChange,
@@ -81,13 +89,25 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         aria-label={ariaLabel}
         className={classNames}
         role="button"
-        sx={isLoading ? { display: 'flex', justifyContent: 'center', alignItems: 'center' } : {}}
+        sx={
+          isLoading
+            ? {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }
+            : {}
+        }
         variant={variant}
         {...getPendoID(displayName)}
         {...others}
         {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
       >
-        {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
+        {isLoading ? (
+          <span style={{ visibility: 'hidden' }}>{children}</span>
+        ) : (
+          children
+        )}
         {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
       </ThemeUIButton>
     </Pressable>

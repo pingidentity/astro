@@ -185,7 +185,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>((props, r
         isDismissable={false}
         isNonModal
         isOpen={isFocused && requirements && Array.isArray(requirements) && !checkRequirements()}
-        placement={placement}
+        placement={placement ?? undefined}
         ref={popoverRef}
         style={style}
       >

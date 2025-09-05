@@ -18,11 +18,5 @@
     "sourceMap": true,
     "skipLibCheck": true
   },
-  "include": ["./src"],
-  "references": [
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ],
-  "extends": "../../tsconfig.base.json"
+  "include": ["./src"]
 }

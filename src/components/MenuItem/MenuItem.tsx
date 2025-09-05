@@ -10,6 +10,7 @@ import { useMenuContext } from '../../context/MenuContext';
 import { useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
 import { MenuItemProps } from '../../types';
 import Box from '../Box';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Menu Item component intended to be used within Menu or PopupMenu.
@@ -42,7 +43,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
 
   const { menuItemProps } = useMenuItem(
     {
-      key: item?.key,
+      key: item?.key ?? uuid(),
       'aria-label': item?.['aria-label'],
       isDisabled,
       isSelected,

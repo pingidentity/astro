@@ -27,7 +27,7 @@ const TextAreaField = forwardRef<HTMLInputElement, TextAreaFieldProps>((props, r
     fieldLabelProps,
   } = useField({ statusClasses: { isUnresizable: !!isUnresizable }, ...props });
 
-  const containerRef = useRef<HTMLElement>();
+  const containerRef = useRef<HTMLElement | null>(null);
   const fieldControlWrapperRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLLabelElement>(null);
   const labelWrapperRef = useRef<HTMLElement>(null);

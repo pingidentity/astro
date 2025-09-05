@@ -296,12 +296,16 @@ const useField = <T>(props: UseFieldProps<T>) => {
     ...containerProps?.statusClasses,
   });
 
+  const baseSx: ThemeUICSSObject = {
+    position: 'relative',
+  };
+
   const fieldContainerProps = {
     ...nonAriaProps,
     ...mergeProps(containerProps, focusWithinProps),
     className: containerClasses,
     sx: {
-      position: 'relative',
+      ...baseSx,
       ...containerProps?.sx,
     },
   };

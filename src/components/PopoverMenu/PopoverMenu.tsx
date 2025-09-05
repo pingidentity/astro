@@ -76,7 +76,7 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
         <PopoverContainer
           isOpen={state.isOpen}
           ref={menuPopoverRef}
-          placement={placement}
+          placement={placement ?? undefined}
           onClose={state.close}
           hasNoArrow={hasNoArrow}
           isDismissable

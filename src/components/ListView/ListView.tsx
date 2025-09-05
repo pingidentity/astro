@@ -144,7 +144,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
           {...(items ? gridProps : { role: 'presentation' })}
           onLoadMore={onLoadMore}
           ref={listViewRef}
-          focusedKey={focusedKey}
+          focusedKey={focusedKey ?? undefined}
           renderWrapper={renderWrapper}
           sizeToFit="height"
           scrollDirection="vertical"

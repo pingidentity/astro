@@ -222,5 +222,32 @@
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0"
+  },
+  "overrides": {
+    "@mdx-js/react": {
+      "react": "^18.3.1"
+    },
+    "@monaco-editor/react": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    },
+    "@react-spectrum/test-utils": {
+      "@testing-library/react": "^15.0.6",
+      "@testing-library/user-event": "^12.8.3",
+      "jest": "^26.0.1"
+    },
+    "@react-spectrum/utils": {
+      "react": "^18.3.1"
+    },
+    "@testing-library/react-hooks": {
+      "@types/react": "^18.3.24",
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1",
+      "react-test-renderer": "^18.3.1"
+    },
+    "theme-ui": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    }
   }
 }

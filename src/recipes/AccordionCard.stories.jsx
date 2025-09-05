@@ -3,7 +3,7 @@ import { Item } from 'react-stately';
 import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import ChevronUpIcon from '@pingux/mdi-react/ChevronUpIcon';
 
-import { textEllipsis } from '../components/Text/Text.styles';
+import { text } from '../components/Text/Text.styles';
 import {
   AccordionGridGroup,
   Box,
@@ -49,7 +49,7 @@ const headerSX = {
   headerTitle: {
     fontSize: 'md',
     fontWeight: 3,
-    ...textEllipsis,
+    ...text.textEllipsis,
   },
   headerItemProps: {
     sx: {
