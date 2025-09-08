@@ -22,7 +22,12 @@ const getComponent = (props = {}, {
   renderFn = render,
 } = {}) => renderFn((
   <Menu {...defaultProps} {...props}>
-    {items.map(li => <Item {...li} sx={{ backgroundColor: 'orange' }} />)}
+    {items.map(li => {
+       const { key, ...itemProps } = li;
+        return (
+          <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }} />
+        );
+    })}
   </Menu>
 ));
 
@@ -30,7 +35,12 @@ const getComponent = (props = {}, {
 universalComponentTests({
   renderComponent: props => (
     <Menu {...defaultProps} {...props}>
-      {defaultMenuItems.map(li => <Item {...li} sx={{ backgroundColor: 'orange' }} />)}
+      {defaultMenuItems.map(li => {
+       const { key, ...itemProps } = li;
+        return (
+          <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }} />
+        );
+    })}
     </Menu>
   ),
 });

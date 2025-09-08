@@ -7,7 +7,6 @@ import Attachment from './Attachment';
 const mockFileName = 'sampleFile';
 
 const defaultProps = {
-  key: 'file_key',
   title: mockFileName,
   fileType: 'PPT',
   removeFile: () => { return false; },
@@ -16,7 +15,7 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}) => render(
-  <Attachment {...defaultProps} {...props} />,
+  <Attachment key={'file_key'} {...defaultProps} {...props} />,
 );
 
 describe('Attachment', () => {

@@ -29,6 +29,20 @@
       "options": {
         "configFile": "libs/astro/vite.config.ts"
       }
-}
+    },
+    "test": {
+     "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/astro"],
+      "options": {
+        "jestConfig": "libs/astro/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["libs/astro/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
   }
 }

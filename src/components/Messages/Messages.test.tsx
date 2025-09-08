@@ -39,7 +39,10 @@ const getComponent = (props = {}, renderFn = render) => renderFn(
 
 const getWithDynamicList = (props = {}, renderFn = render) => renderFn(
   <Messages {...defaultProps} {...props}>
-    {item => <Item {...item}>{item.text}</Item>}
+    {item => {
+    const { key, ...itemProps } = item;
+    return <Item key={key} {...itemProps}>{item.text}</Item>;
+  }}
   </Messages>,
 );
 
@@ -47,7 +50,10 @@ const getWithDynamicList = (props = {}, renderFn = render) => renderFn(
 universalComponentTests({
   renderComponent: props => (
     <Messages {...defaultProps} {...props}>
-      {item => <Item {...item}>{item.text}</Item>}
+       {item => {
+        const { key, ...itemProps } = item;
+        return <Item key={key} {...itemProps}>{item.text}</Item>;
+      }}
     </Messages>
   ),
 });

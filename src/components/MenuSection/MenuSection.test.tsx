@@ -31,11 +31,17 @@ const getComponent = (props = {}, {
   renderFn = render,
 } = {}) => renderFn((
   <Menu {...defaultProps} {...props}>
-    {items.map(section => (
-      <Section {...section}>
-        {section.children.map(li => <Item {...li} />)}
+    {items.map(section => {
+    const { key, children, ...sectionProps } = section;
+    return (
+      <Section key={key} {...sectionProps}>
+        {children.map(li => {
+          const { key, ...itemProps } = li;
+          return <Item key={key} {...itemProps} />;
+        })}
       </Section>
-    ))}
+    );
+  })}
   </Menu>
 ));
 
@@ -43,11 +49,18 @@ const getComponent = (props = {}, {
 universalComponentTests({
   renderComponent: props => (
     <Menu {...defaultProps} {...props}>
-      {defaultMenuSections.map(section => (
-        <Section {...section}>
-          {section.children.map(li => <Item {...li} sx={{ backgroundColor: 'orange' }} />)}
+      {defaultMenuSections.map(section => {
+      const { key, children, ...sectionProps } = section;
+
+      return (
+        <Section key={key} {...sectionProps}>
+            {section.children.map(li => {
+              const { key, ...itemProps } = li;
+              return <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }}/>;
+            })}
         </Section>
-      ))}
+      );
+    })}
     </Menu>
   ),
 });

@@ -47,12 +47,10 @@ test('should respond to keyboard events', () => {
   getComponent();
   const button = screen.getByRole('button');
 
-  fireEvent.keyDown(button, { key: 'Enter', code: 13 });
-  fireEvent.keyUp(button, { key: 'Enter', code: 13 });
+  userEvent.type(button, '{enter}');
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
 
-  fireEvent.keyDown(button, { key: 'Enter', code: 13 });
-  fireEvent.keyUp(button, { key: 'Enter', code: 13 });
+  userEvent.type(button, '{enter}');
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 

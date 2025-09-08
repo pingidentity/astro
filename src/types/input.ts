@@ -17,4 +17,5 @@ export interface InputProps extends StyleProps, DOMAttributes, TestingAttributes
     /** Styling variant for the input */
     variant?: string,
     value?: React.InputHTMLAttributes<HTMLInputElement>['value'],
+    defaultValue?: React.InputHTMLAttributes<HTMLInputElement>['defaultValue'],
 }

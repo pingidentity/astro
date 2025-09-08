@@ -51,11 +51,14 @@ test('should render sections when sections are passed as Children', () => {
   ];
   render((
     <Menu {...defaultProps}>
-      {menuSections.map(section => (
-        <Section {...section}>
-          {section.children.map(item => <Item key={item.id} {...item} />)}
-        </Section>
-      ))}
+      {menuSections.map(section => {
+        const { key, children, ...sectionProps } = section;
+        return (
+          <Section key={key} {...sectionProps}>
+            {children.map(item => <Item key={item.id} {...item} />)}
+          </Section>
+        );
+      })}
     </Menu>
   ));
   const menu = screen.queryByRole('menu');

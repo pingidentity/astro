@@ -43,7 +43,7 @@ const ListViewItemChart = forwardRef((props, ref) => {
     async function setAriaLabel() {
       if (containerRef && containerRef.current) {
         const [rechartsWrapper] = await containerRef.current.getElementsByClassName('recharts-wrapper');
-        rechartsWrapper.setAttribute('aria-label', ariaLabel);
+        rechartsWrapper?.setAttribute('aria-label', ariaLabel);
       }
     }
     setAriaLabel();

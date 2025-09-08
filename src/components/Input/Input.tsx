@@ -25,7 +25,16 @@ const ExtendedInput = styled(ThemeUIInput)(
 );
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { name, placeholder, maxLength, ...others } = props;
+  const { name, placeholder, maxLength, value, defaultValue, ...others } = props;
+
+  const newInputProps: InputProps = {
+    ...others,
+  };
+  if (value !== undefined) {
+    newInputProps.value = value; 
+  } else if (defaultValue !== undefined) {
+    newInputProps.defaultValue = defaultValue;
+  }
 
   return (
     <ExtendedInput
@@ -35,6 +44,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       maxLength={maxLength && maxLength}
       {...getPendoID(displayName)}
       {...others}
+      {...newInputProps}
     />
   );
 });

@@ -1,11 +1,12 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "module": "commonjs",
     "target": "ES5",
     "outDir": "lib/cjs",
     "rootDir": "./src/",
-    "types": ["mdx", "@testing-library/jest-dom", "vite/client", "vitest"],
+    "types": ["mdx", "@testing-library/jest-dom", "vite/client", "vitest", "jest"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,

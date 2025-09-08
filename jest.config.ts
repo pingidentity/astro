@@ -48,3 +48,5 @@ module.exports = {
   transformIgnorePatterns: ['/node_modules/(?!(chroma-js)/)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
 };
+
+export {};
