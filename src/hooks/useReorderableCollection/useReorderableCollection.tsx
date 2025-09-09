@@ -33,7 +33,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   const draggableStateOptions = {
     ...draggableCollectionStateOptions,
     onDragStart: e => {
-      setDraggingKey(e.keys.values().next().value);
+      setDraggingKey(String(e.keys.values().next().value ?? ''));
     },
 
     collection: state.collection,
@@ -80,7 +80,8 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
         }
       },
       dropTargetDelegate: new ListDropTargetDelegate(state.collection, ref),
-      keyboardDelegate: keyboardDelegate as unknown as KeyboardDelegate,
+      //@ts-ignore
+      keyboardDelegate,
     },
     dropState,
     ref,
