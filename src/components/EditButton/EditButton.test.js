@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 
 import { EditButton } from '../../index';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';

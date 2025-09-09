@@ -162,8 +162,7 @@ test('button press uses callback', () => {
   expect(onPress).not.toHaveBeenCalled();
 
   // Hold down the button to see pressed styles
-  fireEvent.mouseDown(selectedItem);
-  fireEvent.mouseUp(selectedItem);
+  userEvent.click(selectedItem);
   expect(onPress).toHaveBeenCalled();
 });
 

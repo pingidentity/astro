@@ -177,11 +177,17 @@ test('allows users to naviagte within rows using arrow keys', () => {
   userEvent.tab();
   expect(buttons[0]).toHaveFocus();
 
-  fireEvent.keyDown(buttons[0], { key: 'Enter' });
-  fireEvent.keyDown(buttons[0], { key: 'ArrowRight' });
+  userEvent.type(buttons[0], '{Enter}');
+  userEvent.type(buttons[0], '{arrowright}');
   expect(buttons[1]).toHaveFocus();
-  fireEvent.keyDown(buttons[0], { key: 'ArrowLeft' });
+  userEvent.type(buttons[1], '{arrowleft}');
   expect(buttons[0]).toHaveFocus();
+
+  // fireEvent.keyDown(buttons[0], { key: 'Enter' });
+  // fireEvent.keyDown(buttons[0], { key: 'ArrowRight' });
+  // expect(buttons[1]).toHaveFocus();
+  // fireEvent.keyDown(buttons[0], { key: 'ArrowLeft' });
+  // expect(buttons[0]).toHaveFocus();
 });
 
 test('disabled keys prop disables an accordion item, and disables focus', () => {
