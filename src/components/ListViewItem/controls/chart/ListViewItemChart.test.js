@@ -38,9 +38,22 @@ const getComponent = (props = {}) => render((
 const { ResizeObserver } = window;
 
 beforeEach(() => {
-  useResizeObserver.mockReturnValue({ width: 800 });
+  useResizeObserver.mockReturnValue({ width: 800, height: 400 });
   jest.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(400);
   jest.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(800);
+
+  Element.prototype.getBoundingClientRect = jest.fn(() => ({
+    width: 800,
+    height: 400,
+    top: 0,
+    left: 0,
+    bottom: 400,
+    right: 800,
+    x: 0,
+    y: 0,
+    toJSON: () => {},
+  }));
+
 
   delete window.ResizeObserver;
   window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -61,7 +74,7 @@ universalComponentTests({ renderComponent: props => <ListViewItemChart {...props
 test('renders ListViewItemChart component', () => {
   getComponent();
 
-  const chart = screen.getByRole('region');
+  const chart = screen.getByText('Avg daily sign-ons:');
   const content = screen.getByText('Past 7 days');
 
   expect(chart).toBeInTheDocument();
@@ -74,7 +87,7 @@ test('renders ListViewItemChart component for tablet', () => {
 
   getComponent();
 
-  const chart = screen.getByRole('region');
+  const chart = screen.getByText('Avg daily sign-ons:');
   const content = screen.getByText('Past 7 days');
 
   expect(chart).toBeInTheDocument();

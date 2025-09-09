@@ -5,6 +5,7 @@ import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import RadioField, { RadioContext } from './RadioField';
+import RadioGroupField from '../RadioGroupField';
 
 const testId = 'test-radio';
 const testLabel = 'Test Label';
@@ -20,10 +21,17 @@ const defaultProps = {
 const defaultState = {
   setLastFocusedValue: () => jest.fn(),
 } as unknown as RadioGroupState;
+
 const getComponent = (props = {}, state = defaultState) => render((
-  <RadioContext.Provider value={state}>
+  <RadioGroupField label="Test Group" name="group">
     <RadioField {...defaultProps} {...props} />
-  </RadioContext.Provider>
+  </RadioGroupField>
+));
+
+const getSelectedComponent = (props = {}, state = defaultState) => render((
+  <RadioGroupField label="Test Group" name="group"  value={testValue}>
+    <RadioField {...defaultProps} {...props} />
+  </RadioGroupField>
 ));
 
 afterEach(() => {
@@ -33,9 +41,9 @@ afterEach(() => {
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (
-    <RadioContext.Provider value={defaultState}>
+   <RadioGroupField label="Test Group" name="group">
       <RadioField {...defaultProps} {...props} />
-    </RadioContext.Provider>
+    </RadioGroupField>
   ),
 });
 
@@ -72,13 +80,7 @@ test('radio with checked content does not display if not checked', () => {
 test('radio with checked content displays if checked', () => {
   const testContent = 'test content';
 
-  const customState = {
-    selectedValue: testValue,
-  } as RadioGroupState;
-
-  getComponent({ checkedContent: <div>{testContent}</div> },
-    customState,
-  );
+  getSelectedComponent({ checkedContent: <div>{testContent}</div> });
   const content = screen.queryByText(testContent);
   expect(content).toBeInTheDocument();
 });

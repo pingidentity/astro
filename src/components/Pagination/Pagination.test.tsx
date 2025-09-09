@@ -173,16 +173,22 @@ describe('Pagination Component', () => {
     // Focus on the next button and press Enter
     userEvent.tab();
     expect(menuButton).toHaveFocus();
-    fireEvent.keyDown(menuButton, { key: 'Enter', code: 13 });
-    fireEvent.keyUp(menuButton, { key: 'Enter', code: 13 });
+    userEvent.type(menuButton, '{enter}');
+    // fireEvent.keyDown(menuButton, { key: 'Enter', code: 13 });
+    // fireEvent.keyUp(menuButton, { key: 'Enter', code: 13 });
     const menuItem = screen.getByText('Show 25 Results');
     expect(menuItem).toBeInTheDocument();
     const menu = screen.getByRole('menu');
     const menutItem = screen.queryAllByRole('menuitemradio')[1];
-    fireEvent.keyDown(menu, { key: 'ArrowDown' });
-    fireEvent.keyUp(menu, { key: 'ArrowDown' });
-    fireEvent.keyDown(menutItem, { key: 'Enter', code: 13 });
-    fireEvent.keyUp(menutItem, { key: 'Enter', code: 13 });
+    
+    
+    userEvent.type(menu, '{arrowdown}');
+    userEvent.type(menutItem, '{enter}');
+
+    // fireEvent.keyDown(menu, { key: 'ArrowDown' });
+    // fireEvent.keyUp(menu, { key: 'ArrowDown' });
+    // fireEvent.keyDown(menutItem, { key: 'Enter', code: 13 });
+    // fireEvent.keyUp(menutItem, { key: 'Enter', code: 13 });
 
     expect(screen.getByText('1-25 of 250')).toBeInTheDocument();
   });

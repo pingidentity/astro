@@ -58,6 +58,6 @@ test('the component accepts IconButton Props', () => {
   // Hold down the button to test is-pressed class
   fireEvent.mouseDown(button);
   expect(button).toHaveClass('is-pressed');
-  fireEvent.mouseUp(button);
+  userEvent.click(button);
   expect(onPress).toHaveBeenCalledTimes(1);
 });

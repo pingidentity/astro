@@ -106,9 +106,10 @@ const ComboBoxInput = forwardRef((props, ref) => {
           slots={{
             inContainer: button,
           }}
+          tabIndex={-1}
         />
       </Box>
-    </FocusRing>
+     </FocusRing>
   );
 });
 

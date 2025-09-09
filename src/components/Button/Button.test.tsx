@@ -51,7 +51,7 @@ test('icon button press', () => {
   expect(button).toHaveClass('is-pressed');
 
   // Finish the click to fire the event handler
-  fireEvent.mouseUp(button);
+  userEvent.click(button);
   expect(button).not.toHaveClass('is-pressed');
   expect(onPress).toHaveBeenCalledTimes(1);
 });
