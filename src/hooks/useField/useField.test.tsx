@@ -155,11 +155,11 @@ test('should return isFloatLabelActive class for container', () => {
   expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
 
   // Has the class if the container has focus within it
-  act(() => result.current.fieldContainerProps.onFocus({}));
+  act(() => result.current.fieldContainerProps.onFocus?.({ currentTarget: { contains: jest.fn() } as unknown as EventTarget } as unknown as React.FocusEvent<HTMLDivElement>));
   expect(result.current.fieldContainerProps.className).toContain('is-float-label');
 
   // Does not have the class if the container loses focus within it
-  act(() => result.current.fieldContainerProps.onBlur({ currentTarget: { contains: jest.fn() } }));
+  act(() => result.current.fieldContainerProps.onBlur?.({ currentTarget: { contains: jest.fn() } as unknown as EventTarget } as unknown as React.FocusEvent<HTMLDivElement>));
   expect(result.current.fieldContainerProps.className).not.toContain('is-float-label-active');
 
   // Has the class if the mode is float and the isFloatLabelActive containerProp is passed in

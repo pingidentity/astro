@@ -152,9 +152,11 @@ export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
         {item => (
           <Row key={item.id}>
             <Cell>
+               <>
               {`${item.firstName} ${item.lastName}`}
               {' '}
               {item.id}
+              </>
             </Cell>
             <Cell>{item.email}</Cell>
             <Cell>
@@ -318,7 +320,7 @@ export const DynamicWithSorting = () => {
       aria-label="Dynamic table"
       onSortChange={descriptor => {
         if (descriptor.column) {
-          list.sort(descriptor as { column: React.Key; direction: 'ascending' | 'descending' });
+          list.sort(descriptor);
         }
       }}
       sortDescriptor={list.sortDescriptor}

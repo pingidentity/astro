@@ -138,6 +138,7 @@ export interface UseFieldProps<T> {
   wrapperProps?: WrapperProps;
 }
 
+
 export type CustomChangeEventType = {
   currentTarget?: {
     value?: string | number
@@ -148,7 +149,14 @@ export type CustomChangeEventType = {
   persist?(): void;
 }
 
-const useField = <T>(props: UseFieldProps<T>) => {
+type UseFieldReturn<T> = {
+  fieldContainerProps: ContainerProps;
+  fieldControlInputProps: FieldControlInputProps;
+  fieldControlWrapperProps: WrapperProps;
+  fieldLabelProps: LabelProps;
+};
+
+const useField = <T>(props: UseFieldProps<T>): UseFieldReturn<T> => {
   const {
     autocomplete,
     autoComplete,

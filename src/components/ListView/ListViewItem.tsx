@@ -69,6 +69,10 @@ const ListViewItem = props => {
     isFocusable ? { ...focusProps, ...focusWithinProps } : {},
     { onPointerLeave: onPointerLeaveFunction },
   );
+  
+  delete mergedProps['aria-posinset'];
+  delete mergedProps['aria-setsize'];
+  delete mergedProps['aria-level'];
 
   const { classNames } = useStatusClasses(className, {
     isHovered: isSelectable && isHoverable && (item.key === state.hover.hoveredItem),
@@ -99,6 +103,7 @@ const ListViewItem = props => {
       {...mergedProps}
       {...rowProps}
       sx={{ outline: 'none' }}
+      data-testid="listview-itemdkgjkdgjldfgk"
     >
       <Box
         as="div"

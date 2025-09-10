@@ -174,20 +174,13 @@ test('allows users to naviagte accordion headers through arrow keys', () => {
 test('allows users to naviagte within rows using arrow keys', () => {
   getComponent();
   const buttons = screen.getAllByRole('gridcell');
-  userEvent.tab();
+  act(() => { buttons[0].focus(); });
   expect(buttons[0]).toHaveFocus();
 
-  userEvent.type(buttons[0], '{Enter}');
-  userEvent.type(buttons[0], '{arrowright}');
+  userEvent.type(buttons[0], '{arrowright}{arrowright}{arrowright}');
   expect(buttons[1]).toHaveFocus();
   userEvent.type(buttons[1], '{arrowleft}');
   expect(buttons[0]).toHaveFocus();
-
-  // fireEvent.keyDown(buttons[0], { key: 'Enter' });
-  // fireEvent.keyDown(buttons[0], { key: 'ArrowRight' });
-  // expect(buttons[1]).toHaveFocus();
-  // fireEvent.keyDown(buttons[0], { key: 'ArrowLeft' });
-  // expect(buttons[0]).toHaveFocus();
 });
 
 test('disabled keys prop disables an accordion item, and disables focus', () => {

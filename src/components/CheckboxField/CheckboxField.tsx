@@ -73,6 +73,7 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
           <Checkbox
             ref={checkboxRef}
             aria-describedby={helperText && helperTextId}
+            aria-checked={isIndeterminate ? 'mixed' : state.isSelected}
             {...mergeProps(fieldControlInputProps, checkBoxProps)}
           />
           {label}

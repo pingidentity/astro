@@ -6,6 +6,7 @@ import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import isChromatic from 'chromatic/isChromatic';
+import { Key as SharedKey } from '@react-types/shared';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box,
@@ -194,14 +195,14 @@ WithExpandableItems.parameters = {
 };
 
 export const ControlledExpandableItems = ({ ...args }) => {
-  const [expandedKeys, setExpandedKeys] = useState<Array<Key>>(['Kangaroo']);
+  const [expandedKeys, setExpandedKeys] = useState<Iterable<SharedKey>>(['Kangaroo']);
 
   const onExpandedKeyCallback = e => {
     setExpandedKeys(Array.from(e));
   };
 
   const expandAllKeys = () => {
-    setExpandedKeys(items.map(_item => _item.key));
+    setExpandedKeys(items.map(_item => _item.key) as Iterable<SharedKey>);
   };
 
   return (
@@ -211,7 +212,7 @@ export const ControlledExpandableItems = ({ ...args }) => {
         {...props}
         {...args}
         items={items}
-        expandedKeys={expandedKeys}
+        expandedKeys={expandedKeys }
         onExpandedChange={onExpandedKeyCallback}
         selectionMode="expansion"
       >

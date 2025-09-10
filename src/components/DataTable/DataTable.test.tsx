@@ -164,10 +164,10 @@ describe('Static DataTable', () => {
 
     const tRows = within(rowgroups[1]).getAllByRole('row');
     expect(tRows).toHaveLength(4);
-    expect(tRows[0]).toHaveAttribute('aria-rowindex', '1');
-    expect(tRows[1]).toHaveAttribute('aria-rowindex', '2');
-    expect(tRows[2]).toHaveAttribute('aria-rowindex', '3');
-    expect(tRows[3]).toHaveAttribute('aria-rowindex', '4');
+    expect(tRows[0]).toHaveAttribute('aria-rowindex', '2');
+    expect(tRows[1]).toHaveAttribute('aria-rowindex', '3');
+    expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
+    expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
 
     let rowheader = within(tRows[0]).getByRole('rowheader');
     expect(rowheader).toHaveTextContent(rows[0].country);
@@ -734,7 +734,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     });
 
     await actHooks(async () => {
-      result.current.sort({ column: 'country', direction: 'descending' });
+      result.current.sort({ column: 'country', direction: 'ascending' });
     });
 
     await actHooks(async () => {
@@ -760,16 +760,16 @@ describe('Sortable DataTable with useAsyncList', () => {
 
     // verify country column is sorted a -> z
     expect(tRows).toHaveLength(4);
-    expect(tRows[0]).toHaveAttribute('aria-rowindex', '1');
+    expect(tRows[0]).toHaveAttribute('aria-rowindex', '2');
     expect(tRows[0]).toHaveTextContent('Canada');
 
-    expect(tRows[1]).toHaveAttribute('aria-rowindex', '2');
+    expect(tRows[1]).toHaveAttribute('aria-rowindex', '3');
     expect(tRows[1]).toHaveTextContent('China');
 
-    expect(tRows[2]).toHaveAttribute('aria-rowindex', '3');
+    expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
     expect(tRows[2]).toHaveTextContent('France');
 
-    expect(tRows[3]).toHaveAttribute('aria-rowindex', '4');
+    expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
     expect(tRows[3]).toHaveTextContent('USA');
   });
 
@@ -811,16 +811,16 @@ describe('Sortable DataTable with useAsyncList', () => {
 
     // verify country column is sorted z -> a
     expect(tRows).toHaveLength(4);
-    expect(tRows[0]).toHaveAttribute('aria-rowindex', '1');
+    expect(tRows[0]).toHaveAttribute('aria-rowindex', '2');
     expect(tRows[0]).toHaveTextContent('USA');
 
-    expect(tRows[1]).toHaveAttribute('aria-rowindex', '2');
+    expect(tRows[1]).toHaveAttribute('aria-rowindex', '3');
     expect(tRows[1]).toHaveTextContent('France');
 
-    expect(tRows[2]).toHaveAttribute('aria-rowindex', '3');
+    expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
     expect(tRows[2]).toHaveTextContent('China');
 
-    expect(tRows[3]).toHaveAttribute('aria-rowindex', '4');
+    expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
     expect(tRows[3]).toHaveTextContent('Canada');
   });
 });

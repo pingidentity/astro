@@ -80,8 +80,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
         }
       },
       dropTargetDelegate: new ListDropTargetDelegate(state.collection, ref),
-      //@ts-ignore
-      keyboardDelegate,
+      keyboardDelegate: keyboardDelegate as unknown as KeyboardDelegate,
     },
     dropState,
     ref,

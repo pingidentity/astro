@@ -208,11 +208,11 @@
     "jest-emotion": "^11.0.0",
     "jest-pnp-resolver": "^1.2.3",
     "mutationobserver-shim": "^0.3.7",
-    "react": "18",
-    "react-dom": "18",
-    "react-is": "^18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "react-json-tree": "^0.17.0",
-    "react-test-renderer": "^18",
+    "react-test-renderer": "^18.2.0",
     "storybook": "^7.1.0",
     "storybook-addon-designs": "beta",
     "ts-jest": "^29.0.0",
@@ -226,28 +226,28 @@
   },
   "overrides": {
     "@mdx-js/react": {
-      "react": "^18.3.1"
+      "react": "^18.2.0"
     },
     "@monaco-editor/react": {
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1"
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
     },
     "@react-spectrum/test-utils": {
       "@testing-library/react": "^15.0.6",
       "@testing-library/user-event": "^12.8.3"
     },
     "@react-spectrum/utils": {
-      "react": "^18.3.1"
+      "react": "^18.2.0"
     },
     "@testing-library/react-hooks": {
       "@types/react": "^18.3.24",
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1",
-      "react-test-renderer": "^18.3.1"
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-test-renderer": "^18.2.0"
     },
     "theme-ui": {
-      "react": "^18.3.1",
-      "react-dom": "^18.3.1"
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
     },
     "@react-spectrum/dnd": {
       "@react-aria/dnd": "3.11.2",
