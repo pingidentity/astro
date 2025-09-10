@@ -26,7 +26,7 @@ const useGridListItem = (props: UseGridListItemProps) => {
   const { dragProps, dragButtonProps } = useDraggableItem({
     hasDragButton: true,
     key: item.key,
-  }, dragState);
+  }, dragState as any);
 
   const { focusProps, isFocusVisible } = useFocusRing();
 

@@ -86,7 +86,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
     ref,
   );
 
-  useDraggableCollection(props, dragState, ref);
+  useDraggableCollection(props, dragState as any, ref);
   return {
     collectionProps,
     dragState,
