@@ -10,7 +10,7 @@
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "configFile": "libs/my-lib/vite.config.ts",
+        "config": "libs/astro/vite.config.ts",
         "outputPath": "dist/libs/astro",
         "main": "libs/astro/src/index.ts",
         "tsConfig": "libs/astro/tsconfig.lib.json",

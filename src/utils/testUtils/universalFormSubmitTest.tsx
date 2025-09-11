@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 import { Button, OverlayProvider } from '../../index';
 
