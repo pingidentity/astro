@@ -1,6 +1,39 @@
 import { defaultFocus, focusWithCroppedOutline, link } from '../Button/Buttons.styles';
-// import { square } from '../IconButton/IconButton.styles';
 import { wordWrap } from '../Text/Text.styles';
+
+const base = {
+  justifyContent: 'center',
+  appearance: 'none',
+  alignItems: 'center',
+  alignSelf: 'baseline',
+  display: 'inline-flex !important',
+  flexGrow: 0,
+  flexShrink: 0,
+  cursor: 'pointer',
+  bg: 'transparent',
+  p: '3px',
+  width: 'inherit',
+  height: 'inherit',
+  path: {
+    fill: 'neutral.40',
+  },
+  outline: 'none',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-hovered': {
+    bg: 'accent.95',
+    boxShadow: 'standard',
+  },
+  '&.is-pressed': {
+    'path': {
+      fill: 'white',
+    },
+    bg: 'active',
+    boxShadow: 'none',
+  },
+  borderRadius: '2px',
+};
 
 const container = {
   pr: 'sm',
@@ -85,7 +118,7 @@ const item = {
 };
 
 export const toggle = {
-  // ...square,
+  ...base,
   bg: 'accent.99',
   borderRadius: '2px',
   height: '40px',
