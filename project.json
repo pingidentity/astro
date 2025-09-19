@@ -11,7 +11,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "config": "libs/astro/vite.config.ts",
-        "outputPath": "dist/libs/astro",
+        "outputPath": "dist/astro",
         "main": "libs/astro/src/index.ts",
         "tsConfig": "libs/astro/tsconfig.lib.json",
         "assets": [

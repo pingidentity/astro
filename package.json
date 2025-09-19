@@ -8,14 +8,19 @@
   },
   "license": "Apache-2.0",
   "author": "ux-development@pingidentity.com",
-  "main": "lib/cjs/index.js",
-  "module": "lib/index.js",
+  "main": "./index.umd.js",
+  "module": "./index.mjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.umd.js",
+      "types": "./index.d.ts"
+    }
+  },
   "directories": {
     "lib": "lib"
   },
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "install-react-version": "cd ../ && npm run install-react-18 && npm && cd packages/astro && npm",
     "build": "rm -rf lib && npm run build:types && npm run build:cjs && npm run build:esm && cp README.md ./lib && cp MIGRATION.md ./lib",
