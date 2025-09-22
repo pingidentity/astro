@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "install-react-version": "cd ../ && npm run install-react-18 && npm && cd packages/astro && npm",
-    "build": "rm -rf lib && npm run build:types && npm run build:cjs && npm run build:esm && cp README.md ./lib && cp MIGRATION.md ./lib",
+    "build": "rm -rf lib && npm run build:cjs && npm run build:esm && cp README.md ./lib && cp MIGRATION.md ./lib",
     "build-ci": "npm build",
     "append-version": "node ../../append_current_version.js",
     "build:types": "tsc",
@@ -48,7 +48,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@internationalized/date": "^3.5.3",
     "@internationalized/number": "^3.6.0",
-    "@mdx-js/react": "^1.6.22",
+    "@mdx-js/react": "^2.0.0",
     "@monaco-editor/react": "4.4.0",
     "@pingux/mdi-react": "^1.2.0",
     "@react-aria/accordion": "~3.0.0-alpha.11",
@@ -149,7 +149,8 @@
     "@codesandbox/storybook-addon": "^0.2.2",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/cache": "^11.4.0",
-    "@emotion/eslint-plugin": "^11.2.0",
+    "@emotion/eslint-plugin": "^11.12.0",
+    "@eslint/eslintrc": "^3.3.1",
     "@nx/jest": "20.0.5",
     "@react-stately/collections": "^3.10.2",
     "@react-types/accordion": "^3.0.0-alpha.18",
@@ -188,20 +189,20 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "@types/uuid": "^8.3.2",
     "@types/whatwg-fetch": "^0.0.33",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-react-docgen": "^4.2.1",
     "babel-plugin-transform-node-env-inline": "^0.4.3",
-    "eslint": "^8.25.0",
+    "eslint": "^9.0.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest-dom": "^4.0.2",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-simple-import-sort": "^8.0.0",
-    "eslint-plugin-testing-library": "^5.7.3",
+    "eslint-plugin-jsx-a11y": "^6.10.1",
+    "eslint-plugin-react": "^7.35.10",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-testing-library": "^7.0.0",
     "jest": "^29.0.0",
     "jest-axe": "^5.0.1",
     "jest-canvas-mock": "^2.3.0",
@@ -216,7 +217,7 @@
     "storybook": "^7.1.0",
     "storybook-addon-designs": "beta",
     "ts-jest": "^29.0.0",
-    "typescript": "~5.2.2",
+    "typescript": "~5.5.2",
     "use-resize-observer": "^8.0.0",
     "whatwg-fetch": "^3.2.0"
   },
@@ -225,8 +226,15 @@
     "react-dom": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0"
   },
   "overrides": {
-    "@mdx-js/react": {
-      "react": "^18.2.0"
+    "@emotion/eslint-plugin": {
+      "eslint": "^9.35.0"
+    },
+    "eslint-config-airbnb": {
+      "eslint": "^9.35.0",
+      "eslint-plugin-react-hooks": "^5.0.0"
+    },
+    "eslint-plugin-jest-dom": {
+      "eslint": "^9.35.0"
     },
     "@monaco-editor/react": {
       "react": "^18.2.0",
