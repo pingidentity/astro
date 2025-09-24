@@ -12,6 +12,7 @@ export default defineConfig({
   plugins: [
     react({
       jsxImportSource: 'react',
+      fastRefresh: false,
       babel: {
         parserOpts: {
           plugins: ['jsx'],
@@ -59,5 +60,59 @@ export default defineConfig({
         },
       }
     },
-  }
+  },
+  test: {
+   watch: false,
+   globals: true,
+   alias: {
+     jest: 'vi',
+     '\\.(css|scss)$': 'vi',
+     '\\.mdx$': 'vi',
+     '\\.svg': 'vi',
+   },
+   environment: 'jsdom',
+   css:true,
+   reporters: ['default'],
+   setupFiles: [ 'src/utils/testUtils/setupTests.ts'],
+   include: ['**/**/*.test.{js,ts,jsx,tsx}'],
+   exclude: [
+     'node_modules',
+     '.yarn',
+     'lib',
+     'dist',
+     '.storybook',
+     '**/*.story.*',
+     '**/*.stories.*',
+     'styles',
+     '**/index.ts',
+     'src/styles',
+     '**/*.styles.js',
+     '**/utils/**',
+     '**/context/**',
+     '**/hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.ts',
+     '**/components/AstroProvider/AstroProvider.js'
+   ],
+  
+   coverage: {
+     include: ['src/**/*.{js,jsx,ts,tsx}'],
+     reportsDirectory: '../../coverage/libs/astro',
+     provider: 'v8',
+     reporter: ['text', 'json', 'html'],
+     exclude: [
+       'src/index.ts',
+       'src/hooks/index.ts',
+       'src/context/*',
+       '**/*.story.*',
+       '**/*.stories.*',
+       'src/styles/**',
+       '**/*.styles.js',
+       'styles/**',
+       'utils/**',
+       'hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.ts',
+       'components/AstroProvider/AstroProvider.js',
+       '.storybook/**',
+     ]
+   },
+ },
+
 });

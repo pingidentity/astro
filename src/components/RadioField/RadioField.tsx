@@ -1,10 +1,8 @@
 import React, {
-  createContext,
   forwardRef,
   useContext,
 } from 'react';
 import { useRadio } from 'react-aria';
-import { RadioGroupState } from 'react-stately';
 
 import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { UseFieldProps } from '../../hooks/useField/useField';
@@ -13,10 +11,8 @@ import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 import Radio from '../Radio';
+import {RadioContext} from '../../context/RadioContext';
 
-const defaultValue = {} as RadioGroupState;
-
-export const RadioContext = createContext<RadioGroupState>(defaultValue);
 
 /**
  * Combines a radio, label, and helper text for a complete, form-ready solution.

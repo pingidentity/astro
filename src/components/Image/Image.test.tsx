@@ -17,6 +17,7 @@ const defaultProps = {
   src: testSrc,
   fallbackImage: testFallbackSrc,
   fallbackAlt: testFallbackAlt,
+  alt: 'Test',
 };
 
 const getComponent = (

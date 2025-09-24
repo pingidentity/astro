@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    // "emitDeclarationOnly": true,
     "isolatedModules": true,
     "strict": true,
     "noImplicitAny": false,

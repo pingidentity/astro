@@ -29,11 +29,11 @@
     "coverage-ci": "npm test --coverage --ci",
     "coverage-jenkins": "npm coverage-ci --maxWorkers=25%",
     "demo": "rm -rf ./demo && storybook build -o demo",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "lint": "eslint .",
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
-    "test": "jest",
-    "test-watch": "jest"
+    "test": "vitest",
+    "test-watch": "vitest --watch"
   },
   "dependencies": {
     "@babel/runtime": "7.16.3",
@@ -49,7 +49,7 @@
     "@internationalized/date": "^3.5.3",
     "@internationalized/number": "^3.6.0",
     "@mdx-js/react": "^1.6.22",
-    "@monaco-editor/react": "4.4.0",
+    "@monaco-editor/react": "4.4.2",
     "@pingux/mdi-react": "^1.2.0",
     "@react-aria/accordion": "~3.0.0-alpha.11",
     "@react-aria/breadcrumbs": "^3.1.4",
@@ -173,7 +173,7 @@
     "@storybook/react-vite": "^7.1.0",
     "@storybook/react-webpack5": "^7.1.0",
     "@storybook/theming": "^7.1.0",
-    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "15.0.6",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^12.8.3",
@@ -218,7 +218,8 @@
     "ts-jest": "^29.0.0",
     "typescript": "~5.2.2",
     "use-resize-observer": "^8.0.0",
-    "whatwg-fetch": "^3.2.0"
+    "whatwg-fetch": "^3.2.0",
+    "raf": "^3.4.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",
@@ -227,10 +228,6 @@
   "overrides": {
     "@mdx-js/react": {
       "react": "^18.2.0"
-    },
-    "@monaco-editor/react": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0"
     },
     "@react-spectrum/test-utils": {
       "@testing-library/react": "^15.0.6",
