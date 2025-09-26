@@ -45,28 +45,28 @@ test('renders label', () => {
 });
 
 
-test('switch toggles on click', () => {
+test('switch toggles on click', async () => {
   const onChange = jest.fn();
   getComponent({ onChange });
   const input = screen.getByRole('switch');
   expect(onChange).not.toHaveBeenCalled();
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(input).toBeChecked();
   expect(onChange).toHaveBeenNthCalledWith(1, true);
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(input).not.toBeChecked();
   expect(onChange).toHaveBeenNthCalledWith(2, false);
 });
 
 
-test('isDisabled disables switch functionality', () => {
+test('isDisabled disables switch functionality', async () => {
   const onChange = jest.fn();
   getComponent({ isDisabled: true, onChange });
 
   const input = screen.getByRole('switch');
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -86,23 +86,23 @@ test('does not have isDisabled styling without isDisabled prop', () => {
   expect(switchComponent).not.toHaveClass('is-disabled');
 });
 
-test('Switch focuses when tabbed to', () => {
+test('Switch focuses when tabbed to', async () => {
   getComponent();
   const input = screen.getByRole('switch');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 });
 
-test('Switch toggles with keyboard', () => {
+test('Switch toggles with keyboard', async () => {
   const onChange = jest.fn();
   getComponent({ onChange });
   const input = screen.getByRole('switch');
   expect(input).not.toHaveFocus();
   expect(onChange).not.toHaveBeenCalled();
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
-  userEvent.type(input, '{space}');
+  await userEvent.type(input, '{space}');
   expect(onChange).toHaveBeenCalled();
 });
 

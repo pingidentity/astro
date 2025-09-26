@@ -33,13 +33,13 @@ test('button hover', async () => {
   });
   const button = await screen.findByRole('button');
   expect(button).not.toHaveClass('is-hovered');
-  userEvent.hover(button);
+  await userEvent.hover(button);
   expect(button).toHaveClass('is-hovered');
-  userEvent.unhover(button);
+  await userEvent.unhover(button);
   expect(button).not.toHaveClass('is-hovered');
 });
 
-test('icon button press', () => {
+test('icon button press', async () => {
   const onPress = jest.fn();
   getComponent({ onPress });
   const button = screen.getByRole('button');
@@ -51,7 +51,7 @@ test('icon button press', () => {
   expect(button).toHaveClass('is-pressed');
 
   // Finish the click to fire the event handler
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(button).not.toHaveClass('is-pressed');
   expect(onPress).toHaveBeenCalledTimes(1);
 });
@@ -90,16 +90,16 @@ test('button renders children when not loading', () => {
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
 
-test('color block button renders in default state', () => {
+test('color block button renders in default state', async () => {
   getComponent({ variant: 'colorBlock' });
   const button = screen.getByRole('button');
   expect(button).toBeInTheDocument();
   expect(button).not.toHaveClass('is-configured');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).toHaveClass('is-focused');
   expect(button).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).not.toHaveClass('is-focused');
   expect(button).not.toHaveFocus();
 });

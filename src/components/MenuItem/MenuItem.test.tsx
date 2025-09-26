@@ -23,10 +23,10 @@ const getComponent = (props = {}, {
 } = {}) => renderFn((
   <Menu {...defaultProps} {...props}>
     {items.map(li => {
-       const { key, ...itemProps } = li;
-        return (
-          <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }} />
-        );
+      const { key, ...itemProps } = li;
+      return (
+        <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }} />
+      );
     })}
   </Menu>
 ));
@@ -36,11 +36,11 @@ universalComponentTests({
   renderComponent: props => (
     <Menu {...defaultProps} {...props}>
       {defaultMenuItems.map(li => {
-       const { key, ...itemProps } = li;
+        const { key, ...itemProps } = li;
         return (
           <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }} />
         );
-    })}
+      })}
     </Menu>
   ),
 });
@@ -54,19 +54,19 @@ test('renders menu with menu items', () => {
   menuItems.forEach(item => expect(item).toBeInTheDocument());
 });
 
-test('applies focus when tabbed to', () => {
+test('applies focus when tabbed to', async () => {
   getComponent();
   const { children: itemText } = defaultMenuItems[0];
   const menuItem = screen.getByText(itemText);
   expect(menuItem).not.toHaveFocus();
   expect(menuItem).not.toHaveClass('is-focused');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(menuItem).toHaveFocus();
   expect(menuItem).toHaveClass('is-focused');
 });
 
-test('can arrow through menuItems', () => {
+test('can arrow through menuItems', async () => {
   getComponent();
 
   const { children: itemText1 } = defaultMenuItems[0];
@@ -76,7 +76,7 @@ test('can arrow through menuItems', () => {
   expect(menuItem1).not.toHaveFocus();
   expect(menuItem1).not.toHaveClass('is-focused');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(menuItem1).toHaveFocus();
   expect(menuItem1).toHaveClass('is-focused');
 
@@ -85,21 +85,21 @@ test('can arrow through menuItems', () => {
   expect(menuItem2).toHaveClass('is-focused');
 });
 
-test('hovering menuItems applies focus class and removes focus style on unhover with "isNotFocusedOnHover"', () => {
+test('hovering menuItems applies focus class and removes focus style on unhover with "isNotFocusedOnHover"', async () => {
   getComponent({ isNotFocusedOnHover: true });
 
   const { children: itemText1 } = defaultMenuItems[0];
   const menuItem1 = screen.getByText(itemText1);
   expect(menuItem1).not.toHaveClass('is-focused');
 
-  userEvent.hover(menuItem1);
+  await userEvent.hover(menuItem1);
   expect(menuItem1).toHaveClass('is-focused');
 
-  userEvent.unhover(menuItem1);
+  await userEvent.unhover(menuItem1);
   expect(menuItem1).not.toHaveClass('is-focused');
 });
 
-test('hovering menuItems applies focus class and leaves focus style on unhover', () => {
+test('hovering menuItems applies focus class and leaves focus style on unhover', async () => {
   getComponent();
 
   const { children: itemText1 } = defaultMenuItems[0];
@@ -109,13 +109,13 @@ test('hovering menuItems applies focus class and leaves focus style on unhover',
   expect(menuItem1).not.toHaveClass('is-focused');
   expect(menuItem2).not.toHaveClass('is-focused');
 
-  userEvent.hover(menuItem1);
+  await userEvent.hover(menuItem1);
   expect(menuItem1).toHaveClass('is-focused');
 
-  userEvent.hover(menuItem2);
+  await userEvent.hover(menuItem2);
   expect(menuItem2).toHaveClass('is-focused');
 
-  userEvent.unhover(menuItem2);
+  await userEvent.unhover(menuItem2);
   expect(menuItem2).toHaveClass('is-focused');
 });
 

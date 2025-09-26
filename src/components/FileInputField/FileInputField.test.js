@@ -87,17 +87,17 @@ test('should render files if they are passed as controlled prop', () => {
   expect(screen.getByText(testFileName)).toBeInTheDocument();
 });
 
-test('should be able to display uploaded file', () => {
+test('should be able to display uploaded file', async () => {
   getComponent();
   const fileUploadFieldInput = screen.getByLabelText(testLabel);
-  userEvent.click(screen.getByTestId(fileSelectTestIdButton));
+  await userEvent.click(screen.getByTestId(fileSelectTestIdButton));
   fireEvent.change(fileUploadFieldInput, {
     target: { files: [testFile] },
   });
   expect(screen.getByText(testFileName)).toBeInTheDocument();
 });
 
-test('should be able to add uploaded file if isMultiple true and file select always present', () => {
+test('should be able to add uploaded file if isMultiple true and file select always present', async () => {
   const testCustomButtonName = 'test Custom Button Name';
   getComponent({
     defaultFileList: [testFileObject],
@@ -105,7 +105,7 @@ test('should be able to add uploaded file if isMultiple true and file select alw
     isMultiple: true,
   });
   const fileUploadFieldInput = screen.getByLabelText(testLabel);
-  userEvent.click(screen.getByTestId(fileSelectTestIdButton));
+  await userEvent.click(screen.getByTestId(fileSelectTestIdButton));
   fireEvent.change(fileUploadFieldInput, {
     target: { files: [testFile2] },
   });
@@ -114,42 +114,42 @@ test('should be able to add uploaded file if isMultiple true and file select alw
   expect(screen.getByText(testCustomButtonName)).toBeInTheDocument();
 });
 
-test('should call onFileSelect if file uploaded', () => {
+test('should call onFileSelect if file uploaded', async () => {
   const mockOnFileSelect = jest.fn();
   getComponent({ onFileSelect: mockOnFileSelect });
   const fileUploadFieldInput = screen.getByLabelText(testLabel);
-  userEvent.click(screen.getByTestId(fileSelectTestIdButton));
+  await userEvent.click(screen.getByTestId(fileSelectTestIdButton));
   fireEvent.change(fileUploadFieldInput, {
     target: { files: [testFile] },
   });
   expect(mockOnFileSelect).toHaveBeenCalledTimes(1);
 });
 
-test('file should have download link as attribute', () => {
+test('file should have download link as attribute', async () => {
   getComponent({ defaultFileList: [testFileObject] });
-  userEvent.click(screen.getByTestId(fileUploadedDownloadTestId));
+  await userEvent.click(screen.getByTestId(fileUploadedDownloadTestId));
   expect(screen.getByTestId(fileUploadedDownloadLinkTestId)).toHaveAttribute(
     'href',
     testFileURL,
   );
 });
 
-test('should remove file if trash icon clicked', () => {
+test('should remove file if trash icon clicked', async () => {
   getComponent({
     defaultFileList: [testFileObject],
   });
   expect(screen.getByText(testFileName)).toBeInTheDocument();
-  userEvent.click(screen.getByTestId(fileUploadedDeleteIconTestId));
+  await userEvent.click(screen.getByTestId(fileUploadedDeleteIconTestId));
   expect(screen.queryByText(testFileName)).not.toBeInTheDocument();
 });
 
-test('should call onRemove if trash icon clicked', () => {
+test('should call onRemove if trash icon clicked', async () => {
   const mockOnRemove = jest.fn();
   getComponent({
     defaultFileList: [{ id: testFileId, name: 'test' }],
     onRemove: mockOnRemove,
   });
-  userEvent.click(screen.getByTestId(fileUploadedDeleteIconTestId));
+  await userEvent.click(screen.getByTestId(fileUploadedDeleteIconTestId));
   expect(mockOnRemove).toHaveBeenCalledTimes(1);
   expect(mockOnRemove).toHaveBeenCalledWith(expect.anything(), testFileId);
 });
@@ -207,14 +207,14 @@ test('should render icon button if isIconButton prop is true', () => {
   expect(iconButton).toBeInTheDocument();
 });
 
-test('File upload should allow only image', () => {
+test('File upload should allow only image', async () => {
   const setStateMock = jest.fn();
   jest.spyOn(React, 'useState').mockImplementation(initialState => [initialState, setStateMock]);
 
   getComponent({ fileTypes: ['image/*'] });
 
   const fileUploadFieldInput = screen.getByLabelText(testLabel);
-  userEvent.click(screen.getByTestId(fileSelectTestIdButton));
+  await userEvent.click(screen.getByTestId(fileSelectTestIdButton));
   fireEvent.change(fileUploadFieldInput, { target: { files: [testFile3] } });
 
   const val = screen.queryByText('document');

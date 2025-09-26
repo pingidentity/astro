@@ -139,14 +139,14 @@ test('renders sections and items within section', () => {
   expect(options.length).toBe(itemsWithSections[0].options.length);
 });
 
-test('should have is-focused class when hover', () => {
+test('should have is-focused class when hover', async () => {
   getSectionsComponent();
   const options = screen.getAllByRole('option');
 
   expect(options[0]).not.toHaveClass('is-focused');
-  userEvent.hover(options[0]);
+  await userEvent.hover(options[0]);
   expect(options[0]).toHaveClass('is-focused');
-  userEvent.hover(options[1]);
+  await userEvent.hover(options[1]);
   expect(options[0]).not.toHaveClass('is-focused');
   expect(options[1]).toHaveClass('is-focused');
 });

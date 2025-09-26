@@ -3,9 +3,9 @@ import { Collection, Node } from 'react-stately';
 import { ListDropTargetDelegate, useDraggableCollection, useDroppableCollection } from '@react-aria/dnd';
 import { ListKeyboardDelegate } from '@react-aria/selection';
 import { DraggableCollectionStateOptions, useDraggableCollectionState, useDroppableCollectionState } from '@react-stately/dnd';
+import type { KeyboardDelegate } from '@react-types/shared';
 
 import { UseReorderableCollectionProps } from '../../types/dnd';
-import type { KeyboardDelegate } from '@react-types/shared';
 
 const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   const [draggingKey, setDraggingKey] = useState('');

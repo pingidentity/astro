@@ -40,9 +40,9 @@ const getComponent = (props = {}, renderFn = render) => renderFn(
 const getWithDynamicList = (props = {}, renderFn = render) => renderFn(
   <Messages {...defaultProps} {...props}>
     {item => {
-    const { key, ...itemProps } = item;
-    return <Item key={key} {...itemProps}>{item.text}</Item>;
-  }}
+      const { key, ...itemProps } = item;
+      return <Item key={key} {...itemProps}>{item.text}</Item>;
+    }}
   </Messages>,
 );
 
@@ -50,7 +50,7 @@ const getWithDynamicList = (props = {}, renderFn = render) => renderFn(
 universalComponentTests({
   renderComponent: props => (
     <Messages {...defaultProps} {...props}>
-       {item => {
+      {item => {
         const { key, ...itemProps } = item;
         return <Item key={key} {...itemProps}>{item.text}</Item>;
       }}
@@ -78,37 +78,37 @@ test('renders Messages component in the default state with dynamic list', () => 
   expect(messages).toBeInTheDocument();
 });
 
-test('click on close button fires `onClose` callback', () => {
+test('click on close button fires `onClose` callback', async () => {
   jest.useRealTimers();
 
   const onClose = jest.fn();
   getComponent({ onClose });
   const buttons = screen.getAllByRole('button');
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
   expect(onClose).toHaveBeenCalled();
 
   jest.useFakeTimers();
 });
 
-test('`onClose` get as first arg key of message', () => {
+test('`onClose` get as first arg key of message', async () => {
   jest.useRealTimers();
 
   const onClose = jest.fn();
   getComponent({ onClose });
   const buttons = screen.getAllByRole('button');
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
   expect(onClose).toHaveBeenCalledWith('message1');
 
   jest.useFakeTimers();
 });
 
-test('click on close button removes message after delay', () => {
+test('click on close button removes message after delay', async () => {
   getComponent();
   const messages = screen.getByTestId(testId);
   expect(messages.childElementCount).toBe(2);
 
   const buttons = screen.getAllByRole('button');
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
   act(() => { jest.runAllTimers(); });
   expect(messages.childElementCount).toBe(1);
 });

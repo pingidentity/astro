@@ -136,17 +136,17 @@ test('passing helper text should display it and correct aria attributes on input
   expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('passing sections, renders separators', () => {
+test('passing sections, renders separators', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryAllByRole('separator')).toHaveLength(2);
 });
 
-test('a blank title does not render', () => {
+test('a blank title does not render', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
 });
 

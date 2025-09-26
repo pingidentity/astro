@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
 import CogsIcon from '@pingux/mdi-react/CogsIcon';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
@@ -370,8 +370,8 @@ export const EditRow = props => {
     index,
     leftValue,
     rightValue,
-    updateRow = () => { },
-    removeRow = () => { },
+    updateRow = () =>  console.log("update row"),
+    removeRow = () => console.log("remove row"),
   } = props;
 
   const leftItems = [

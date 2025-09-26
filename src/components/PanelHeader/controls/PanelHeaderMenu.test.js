@@ -20,15 +20,15 @@ universalComponentTests({
   ),
 });
 
-test('PanelHeaderMenu responds to Menu props', () => {
+test('PanelHeaderMenu responds to Menu props', async () => {
   const onAction = jest.fn();
   getComponent({ onAction });
 
   const menuTrigger = screen.getByRole('button', { name: 'more' });
-  userEvent.click(menuTrigger);
+  await userEvent.click(menuTrigger);
 
   const menuItem = screen.getByRole('menuitem', { name: 'testItem' });
-  userEvent.click(menuItem);
+  await userEvent.click(menuItem);
 
   expect(onAction).toBeCalled();
 });

@@ -31,7 +31,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...others,
   };
   if (value !== undefined) {
-    newInputProps.value = value; 
+    newInputProps.value = value;
   } else if (defaultValue !== undefined) {
     newInputProps.defaultValue = defaultValue;
   }

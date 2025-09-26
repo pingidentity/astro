@@ -70,7 +70,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,
-    //@ts-ignore
+    // @ts-ignore
     linkBehavior,
     ...others
   } = props;
@@ -117,7 +117,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
       isVirtualized: true,
     },
     state,
-    listBoxRef
+    listBoxRef,
   );
 
   const renderWrapper = (parent, reusableView, children, renderChildren) => {

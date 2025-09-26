@@ -153,7 +153,7 @@ const getComponentWithSlot = props => render((
   </AccordionGroup>
 ));
 
-test('button press uses callback', () => {
+test('button press uses callback', async () => {
   const onPress = jest.fn();
   getComponent({ onExpandedChange: onPress });
   const buttons = screen.getAllByRole('button');
@@ -162,18 +162,18 @@ test('button press uses callback', () => {
   expect(onPress).not.toHaveBeenCalled();
 
   // Hold down the button to see pressed styles
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(onPress).toHaveBeenCalled();
 });
 
-test('toggle accordion on mouse click', () => {
+test('toggle accordion on mouse click', async () => {
   getComponent();
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
 });
 
@@ -213,25 +213,25 @@ test('allows users to naviagte accordion headers through arrow keys', () => {
   expect(secondItem).toHaveFocus();
 });
 
-test('allows users to navigate accordion headers through the tab key', () => {
+test('allows users to navigate accordion headers through the tab key', async () => {
   getComponent();
   const buttons = screen.getAllByRole('button');
   const [firstItem, secondItem, thirdItem] = buttons;
-  userEvent.tab();
+  await userEvent.tab();
   expect(firstItem).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(secondItem).toHaveFocus();
-  userEvent.tab({ shift: true });
+  await userEvent.tab({ shift: true });
   expect(firstItem).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(secondItem).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(thirdItem).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(firstItem).not.toHaveFocus();
   expect(secondItem).not.toHaveFocus();
   expect(thirdItem).not.toHaveFocus();
-  userEvent.tab({ shift: true });
+  await userEvent.tab({ shift: true });
   expect(thirdItem).toHaveFocus();
 });
 
@@ -255,20 +255,20 @@ test('expanded keys expands an accordion item', () => {
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
 });
 
-test('input recives focus in expanded accordion item when click', () => {
+test('input recives focus in expanded accordion item when click', async () => {
   getComponentWithInput({ expandedKeys: ['second'] });
   const input = screen.getByTestId('testInput');
   expect(input).not.toHaveFocus();
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(input).toHaveFocus();
 });
 
-test('able to click a textfield that is the rendered child of an accordion', () => {
+test('able to click a textfield that is the rendered child of an accordion', async () => {
   getComponent({ expandedKeys: ['third'] });
   const field = screen.getByTestId('testField');
   const input = screen.getByRole('form');
-  userEvent.click(input);
-  userEvent.type(input, 'banana');
+  await userEvent.click(input);
+  await userEvent.type(input, 'banana');
   expect(field).toHaveClass('has-focus-within');
 });
 
@@ -287,33 +287,33 @@ test('items do not automatically expand if wrapped in an open OverlayPanel', () 
   expect(selectedItem).not.toHaveAttribute('aria-expanded', 'true');
 });
 
-test('accordion is compatible with another component that uses an overlay', () => {
+test('accordion is compatible with another component that uses an overlay', async () => {
   getComponentWithPopover();
   const buttons = screen.getAllByRole('button');
   const popoverButton = screen.getByTestId('popoverbutton');
-  userEvent.click(popoverButton);
+  await userEvent.click(popoverButton);
   const selectedItem = buttons[0];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
 });
 
-test('accordion works if there are multiple, controlled on the same implementation', () => {
+test('accordion works if there are multiple, controlled on the same implementation', async () => {
   getComponentWithMultipleAccordion();
   const buttons = screen.getAllByRole('button');
   const selectedItem = buttons[0];
   const secondSelectedItem = buttons[1];
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedItem).toHaveAttribute('aria-expanded', 'false');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedItem).toHaveAttribute('aria-expanded', 'true');
   expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'false');
-  userEvent.click(secondSelectedItem);
+  await userEvent.click(secondSelectedItem);
   expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'true');
-  userEvent.click(secondSelectedItem);
+  await userEvent.click(secondSelectedItem);
   expect(secondSelectedItem).toHaveAttribute('aria-expanded', 'false');
 });
 

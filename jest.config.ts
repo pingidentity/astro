@@ -1,7 +1,8 @@
 const nxPreset = require('@nx/jest/preset').default;
+
 module.exports = {
   ...nxPreset,
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
   resolver: require.resolve('jest-pnp-resolver'),
   testMatch: ['**/**/*.test.(js|ts)?(x)'],
   testPathIgnorePatterns: ['/node_modules/', '/.yarn/', '/lib/', '/dist/'],

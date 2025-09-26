@@ -103,12 +103,12 @@ test('should render title for sections that have titles', () => {
   expect(screen.getByText('Dashboard')).toBeInTheDocument();
 });
 
-test('should select NavItemLink', () => {
+test('should select NavItemLink', async () => {
   getComponent();
   clickHeaderButtons();
   const link = screen.getByTestId('navItemLink');
   expect(link).toBeInTheDocument();
-  userEvent.click(link);
+  await userEvent.click(link);
   expect(link).toHaveClass('is-selected');
 });
 
@@ -121,22 +121,22 @@ test('should select NavItemLink on space key press', () => {
   expect(link).toHaveClass('is-selected');
 });
 
-test('should select NavItem', () => {
+test('should select NavItem', async () => {
   getComponent();
   let item;
   item = screen.queryByTestId('navItem');
   expect(item).toBeInTheDocument();
-  userEvent.click(item);
+  await userEvent.click(item);
   item = screen.queryByTestId('navItem');
   expect(item).toHaveClass('is-selected');
 });
 
-test('should select NavItemButton', () => {
+test('should select NavItemButton', async () => {
   getComponent();
   clickHeaderButtons();
   const button = screen.getByTestId('navItemButton');
   expect(button).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(button).toHaveClass('is-selected');
 });
 
@@ -245,11 +245,11 @@ test('expand only one item', () => {
 
   const headerButtons = screen.getAllByRole('button');
 
-  act(() => { userEvent.click(headerButtons[1]); });
+  act(async () => { await userEvent.click(headerButtons[1]); });
   expect(screen.queryByText('Group')).toBeInTheDocument();
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 
-  act(() => { userEvent.click(headerButtons[2]); });
+  act(async () => { await userEvent.click(headerButtons[2]); });
   expect(screen.queryByText('Group')).not.toBeInTheDocument();
   expect(screen.queryByText('Users')).toBeInTheDocument();
 });
@@ -260,7 +260,7 @@ test('default expended keys', () => {
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
 });
 
-test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', () => {
+test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', async () => {
   getComponent({ defaultSelectedKey: 'Dashboard Link Populations' });
 
   const child = screen.getByTestId('navItemButton');
@@ -269,7 +269,7 @@ test('when a child is selected, and the parent is collapsed, the parent has the 
 
   const parent = screen.getByTestId('Dashboard');
   expect(parent).not.toHaveClass('is-selected');
-  userEvent.click(parent);
+  await userEvent.click(parent);
 
   const parentDiv = screen.getByTestId('Dashboard').firstElementChild;
   expect(parentDiv).toHaveClass('is-selected');

@@ -95,13 +95,13 @@ test('applies disabled class with disabled prop', () => {
   menuItems.forEach(item => expect(item).toHaveClass('is-disabled'));
 });
 
-test('should be able to navigate through the items with the keyboard', () => {
+test('should be able to navigate through the items with the keyboard', async () => {
   getComponent();
   const menuItems = screen.getAllByRole('menuitem');
   expect(menuItems[0]).not.toHaveFocus();
 
   // Need to tab to them first
-  userEvent.tab();
+  await userEvent.tab();
   expect(menuItems[0]).toHaveFocus();
 
   // Then we can use the arrow keys
@@ -116,14 +116,14 @@ test('should be able to navigate through the items with the keyboard', () => {
   expect(menuItems[2]).toHaveFocus();
 });
 
-test('should fire onAction', () => {
+test('should fire onAction', async () => {
   const onAction = jest.fn();
   getComponent({ onAction });
   const menuItems = screen.getAllByRole('menuitem');
   expect(onAction).not.toHaveBeenCalled();
 
   // Keyboard events
-  userEvent.tab();
+  await userEvent.tab();
   fireEvent.keyDown(menuItems[0], { key: 'Enter' });
   fireEvent.keyUp(menuItems[0], { key: 'Enter' });
   expect(onAction).toHaveBeenNthCalledWith(1, defaultItems[0].id);
@@ -131,37 +131,37 @@ test('should fire onAction', () => {
   expect(onAction).toHaveBeenCalledTimes(1);
 
   // Click events
-  userEvent.click(menuItems[1]);
+  await userEvent.click(menuItems[1]);
 
   expect(onAction).toHaveBeenCalledTimes(2);
   expect(onAction).toHaveBeenNthCalledWith(2, defaultItems[1].id);
 });
 
-test('should not fire onSelectionChange when selectionMode is none', () => {
+test('should not fire onSelectionChange when selectionMode is none', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange });
   const menuItems = screen.getAllByRole('menuitem');
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Keyboard events
-  userEvent.tab();
+  await userEvent.tab();
   fireEvent.keyDown(menuItems[0], { key: 'Enter' });
   fireEvent.keyUp(menuItems[0], { key: 'Enter' });
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Click events
-  userEvent.click(menuItems[1]);
+  await userEvent.click(menuItems[1]);
   expect(onSelectionChange).not.toHaveBeenCalled();
 });
 
-test('should fire onSelectionChange when selectionMode is not none', () => {
+test('should fire onSelectionChange when selectionMode is not none', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange, selectionMode: 'single' });
   const menuItems = screen.getAllByRole('menuitemradio');
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Keyboard events
-  userEvent.tab();
+  await userEvent.tab();
   fireEvent.keyDown(menuItems[0], { key: 'Enter' });
   fireEvent.keyUp(menuItems[0], { key: 'Enter' });
   expect(onSelectionChange).toHaveBeenNthCalledWith(
@@ -170,7 +170,7 @@ test('should fire onSelectionChange when selectionMode is not none', () => {
   );
 
   // Click events
-  userEvent.click(menuItems[1]);
+  await userEvent.click(menuItems[1]);
   expect(onSelectionChange).toHaveBeenNthCalledWith(
     2,
     expect.any(Set),

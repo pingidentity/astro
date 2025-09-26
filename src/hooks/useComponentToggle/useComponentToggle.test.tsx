@@ -64,6 +64,6 @@ test('expect conditional toggling to work', async () => {
   getComponent();
   const component = screen.getByTestId('test-div');
   expect(component).toHaveTextContent('false-string');
-  userEvent.click(component);
+  await userEvent.click(component);
   expect(component).toHaveTextContent('true-string');
 });

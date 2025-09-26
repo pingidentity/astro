@@ -136,11 +136,11 @@ test('renders MultivaluesField component', () => {
   expect(label).toBeInTheDocument();
 });
 
-test('opens listbox on focus and fires "onFocus', () => {
+test('opens listbox on focus and fires "onFocus', async () => {
   const onFocus = jest.fn();
   getComponent({ onFocus });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   expect(screen.getByRole('listbox')).toBeInTheDocument();
@@ -154,8 +154,8 @@ test('closes listbox on blur and fires "onBlur"', () => {
   const onBlur = jest.fn();
   getComponent({ onBlur });
   const input = screen.getByRole('combobox');
-  act(() => {
-    userEvent.tab();
+  act(async () => {
+    await userEvent.tab();
   });
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
@@ -195,11 +195,11 @@ it('should close the dropdown if focus moves outside the input wrapper and listb
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
-test('opening and closing listbox fires "onOpenChange"', () => {
+test('opening and closing listbox fires "onOpenChange"', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
@@ -210,10 +210,10 @@ test('opening and closing listbox fires "onOpenChange"', () => {
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
 
-test('multiple selection is enabled, option disappears after selection', () => {
+test('multiple selection is enabled, option disappears after selection', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
@@ -234,10 +234,10 @@ test('multiple selection is enabled, option disappears after selection', () => {
   expect(secondOption).not.toBeInTheDocument();
 });
 
-test('updates aria attributes on option focus', () => {
+test('updates aria attributes on option focus', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   fireEvent.keyDown(input, { key: 'ArrowDown' });
@@ -247,10 +247,10 @@ test('updates aria attributes on option focus', () => {
   expect(input).toHaveAttribute('aria-controls', listbox.id);
 });
 
-test('updates aria attributes on popover closing after options were focused', () => {
+test('updates aria attributes on popover closing after options were focused', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   fireEvent.keyDown(input, { key: 'ArrowDown' });
@@ -259,15 +259,15 @@ test('updates aria attributes on popover closing after options were focused', ()
   expect(input).toHaveAttribute('aria-expanded', 'true');
   expect(input).toHaveAttribute('aria-controls', listbox.id);
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(input).toHaveAttribute('aria-activedescendant', '');
   expect(input).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('clicking an option renders badge with option name', () => {
+test('clicking an option renders badge with option name', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const options = screen.getAllByRole('option');
@@ -283,10 +283,10 @@ test('clicking an option renders badge with option name', () => {
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
-test('after clicking an option, and then clicking the text input, the listbox remains open', () => {
+test('after clicking an option, and then clicking the text input, the listbox remains open', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const options = screen.getAllByRole('option');
@@ -297,7 +297,7 @@ test('after clicking an option, and then clicking the text input, the listbox re
   expect(firstOption).not.toBeInTheDocument();
 
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
 
@@ -309,7 +309,7 @@ test('no badges are rendered, if nothing is selected', () => {
 test('after clicking an option, and then typing a custom input, the listbox remains open and filters the options', async () => {
   getComponent({ mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const options = screen.getAllByRole('option');
@@ -330,10 +330,10 @@ test('after clicking an option, and then typing a custom input, the listbox rema
   expect(filteredOptions.length).toBe(1);
 });
 
-test('clicking on delete button deletes selection, and re-adds option to list', () => {
+test('clicking on delete button deletes selection, and re-adds option to list', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const options = screen.getAllByRole('option');
@@ -363,11 +363,11 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
   expect(updatedOptions[0]).toHaveTextContent(items[0].name);
 });
 
-test('clicking an option fires "onSelectionChange"', () => {
+test('clicking an option fires "onSelectionChange"', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
@@ -390,12 +390,12 @@ test('clicking an option fires "onSelectionChange"', () => {
   expect(onSelectionChange.mock.calls[1][0].has(items[1].name)).toBeTruthy();
 });
 
-test('changing the input value opens listbox, filters options, and fires "onInputChange"', () => {
+test('changing the input value opens listbox, filters options, and fires "onInputChange"', async () => {
   const onInputChange = jest.fn();
   getComponent({ onInputChange, mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
   const value = 'aa';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
@@ -407,13 +407,13 @@ test('changing the input value opens listbox, filters options, and fires "onInpu
   expect(onInputChange).toHaveBeenCalledWith(value);
 });
 
-test('in non-restrictive mode, a badge gets added if there is input, onBlur', () => {
+test('in non-restrictive mode, a badge gets added if there is input, onBlur', async () => {
   getComponent({ mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
   const value = 'custom';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
-  userEvent.tab();
+  await userEvent.tab();
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
@@ -422,17 +422,17 @@ test('in non-restrictive mode, a badge gets added if there is input, onBlur', ()
   expect(input.value).toBe('');
 });
 
-test('in non-restrictive mode, a badge gets added if there is only one matching filtered option, onBlur', () => {
+test('in non-restrictive mode, a badge gets added if there is only one matching filtered option, onBlur', async () => {
   getComponent({ mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
   const firstOption = options[0];
   const value = 'Aardvark';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
-  userEvent.tab();
+  await userEvent.tab();
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
@@ -446,7 +446,7 @@ test('dropdown with options reappears after entering a custom input', async () =
   const input = screen.getByRole('combobox');
 
   const value1 = 'longstring';
-  userEvent.type(input, value1);
+  await userEvent.type(input, value1);
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
@@ -460,28 +460,28 @@ test('dropdown with options reappears after entering a custom input', async () =
   expect(options2.length).toBe(items.length);
 });
 
-test('changing the input value and hitting enter by default do nothing', () => {
+test('changing the input value and hitting enter by default do nothing', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
 
   const value = 'custom';
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
 
   expect(input).toHaveValue('');
 });
 
-test('changing the input value and hitting enter creates new value in non-restrictive mode', () => {
+test('changing the input value and hitting enter creates new value in non-restrictive mode', async () => {
   getComponent({ mode: 'non-restrictive' });
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
 
   const value = 'custom';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
   expect(input).toHaveValue(value);
 
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, '{enter}');
   expect(input).toHaveValue('');
 
   const badge = screen.queryByText(value);
@@ -490,25 +490,25 @@ test('changing the input value and hitting enter creates new value in non-restri
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
-test('pressing enter, when the input values is an empty string does not add an option, in non-restrictive mode', () => {
+test('pressing enter, when the input values is an empty string does not add an option, in non-restrictive mode', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ mode: 'non-restrictive', onSelectionChange });
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
 
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, '{enter}');
   expect(input).toHaveValue('');
 
   expect(onSelectionChange).toBeCalledTimes(0);
 });
 
-test('in non-restrictive mode "onSelectionChange" returns entered keys', () => {
+test('in non-restrictive mode "onSelectionChange" returns entered keys', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ mode: 'non-restrictive', onSelectionChange });
   const input = screen.getByRole('combobox');
   const value = 'custom';
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
@@ -517,30 +517,30 @@ test('in non-restrictive mode "onSelectionChange" returns entered keys', () => {
   expect(onSelectionChange.mock.calls[0][0].has(value)).toBeTruthy();
 });
 
-test('in non-restrictive mode the same value cannot be applied twice', () => {
+test('in non-restrictive mode the same value cannot be applied twice', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ mode: 'non-restrictive', onSelectionChange });
   const input = screen.getByRole('combobox');
   const value = 'custom';
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
 
   expect(input).toHaveValue('');
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
   expect(input).toHaveValue(value);
   expect(onSelectionChange).toBeCalledTimes(1);
 });
 
-test('in non-restrictive mode the value that was already selected using the list cannot be applied', () => {
+test('in non-restrictive mode the value that was already selected using the list cannot be applied', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ mode: 'non-restrictive', onSelectionChange });
 
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
@@ -553,43 +553,43 @@ test('in non-restrictive mode the value that was already selected using the list
   expect(onSelectionChange.mock.calls[0][0].has(items[0].name)).toBeTruthy();
   onSelectionChange.mockClear();
 
-  userEvent.type(input, items[0].name);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, items[0].name);
+  await userEvent.type(input, '{enter}');
 
   expect(input).toHaveValue(items[0].name);
   expect(onSelectionChange).not.toBeCalled();
 });
 
-test('options can be focused via keyboard', () => {
+test('options can be focused via keyboard', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
   const options = within(listbox).getAllByRole('option');
 
-  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   expect(options[0]).toHaveClass('is-focused');
 
-  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   expect(options[1]).toHaveClass('is-focused');
 });
 
-test('options can be selected via keyboard', () => {
+test('options can be selected via keyboard', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
   const options = within(listbox).getAllByRole('option');
 
-  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   expect(options[0]).toHaveClass('is-focused');
-  userEvent.type(options[0], '{enter}');
+  await userEvent.type(options[0], '{enter}');
   expect(options[0]).not.toBeInTheDocument();
   const badge = screen.getByText(items[0].name);
   expect(badge).toBeInTheDocument();
@@ -609,15 +609,15 @@ test('default selected keys', () => {
   expect(secondBadge).toBeInTheDocument();
 });
 
-test('default selected keys are removed from the list', () => {
+test('default selected keys are removed from the list', async () => {
   getComponent({ defaultSelectedKeys: [items[1].key, items[2].key] });
 
   const input = screen.getByRole('combobox');
-  userEvent.click(input);
+  await userEvent.click(input);
 
   const listbox = screen.queryByRole('listbox');
 
-  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   const options = within(listbox).getAllByRole('option');
   expect(options.length).toBe(1);
 
@@ -636,15 +636,15 @@ test('selected keys', () => {
   expect(secondBadge).toBeInTheDocument();
 });
 
-test('selected keys are removed from the list', () => {
+test('selected keys are removed from the list', async () => {
   getComponent({ selectedKeys: [items[1].key, items[2].key] });
 
   const input = screen.getByRole('combobox');
-  userEvent.click(input);
+  await userEvent.click(input);
 
   const listbox = screen.queryByRole('listbox');
 
-  userEvent.type(listbox, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   const options = within(listbox).getAllByRole('option');
   expect(options.length).toBe(1);
 
@@ -710,7 +710,7 @@ test('read only keys with read only field', () => {
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
-test('popover closes on input blur', () => {
+test('popover closes on input blur', async () => {
   getComponent();
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -718,17 +718,17 @@ test('popover closes on input blur', () => {
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
   expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
-test('form does not submit when adding custom value', () => {
+test('form does not submit when adding custom value', async () => {
   const onFormSubmit = jest.fn();
   getComponentInForm(onFormSubmit, {});
 
@@ -736,14 +736,14 @@ test('form does not submit when adding custom value', () => {
   expect(input).toHaveValue('');
 
   const value = 'custom';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, '{enter}');
   expect(input).toHaveValue('');
   expect(onFormSubmit).not.toHaveBeenCalled();
 });
 
-test('in non-restrictive mode the value should be trimmed', () => {
+test('in non-restrictive mode the value should be trimmed', async () => {
   getComponent({ mode: 'non-restrictive' });
 
   const input = screen.getByRole('combobox');
@@ -751,8 +751,8 @@ test('in non-restrictive mode the value should be trimmed', () => {
 
   const value = 'test ';
   const trimmedValue = 'test';
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
 
   const badge = screen.queryByText(value, {
     normalizer: getDefaultNormalizer({ trim: false }),
@@ -767,10 +767,10 @@ test('in non-restrictive mode the value should be trimmed', () => {
   expect(input).toHaveValue('');
 });
 
-test('deleting a single badge via keyboard moves focus to the input', () => {
+test('deleting a single badge via keyboard moves focus to the input', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
   act(() => {
@@ -780,7 +780,7 @@ test('deleting a single badge via keyboard moves focus to the input', () => {
   const badge = screen.getByText(items[0].name);
   expect(badge).toBeInTheDocument();
 
-  userEvent.tab({ shift: true });
+  await userEvent.tab({ shift: true });
   const { nextSibling: deleteButton } = badge;
   expect(deleteButton).toHaveClass('is-focused');
 
@@ -790,9 +790,9 @@ test('deleting a single badge via keyboard moves focus to the input', () => {
   expect(input).toHaveClass('is-focused');
 });
 
-test('deleting the last badge via keyboard moves focus to the previous badge', () => {
+test('deleting the last badge via keyboard moves focus to the previous badge', async () => {
   getComponent();
-  userEvent.tab();
+  await userEvent.tab();
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
   const secondOption = options[1];
@@ -808,7 +808,7 @@ test('deleting the last badge via keyboard moves focus to the previous badge', (
   expect(badge1).toBeInTheDocument();
   expect(badge2).toBeInTheDocument();
 
-  userEvent.tab({ shift: true });
+  await userEvent.tab({ shift: true });
   const { nextSibling: deleteButton1 } = badge1;
   const { nextSibling: deleteButton2 } = badge2;
   expect(deleteButton2).toHaveClass('is-focused');
@@ -819,65 +819,65 @@ test('deleting the last badge via keyboard moves focus to the previous badge', (
   expect(deleteButton1).toHaveClass('is-focused');
 });
 
-test('pressing Esc should clear the input', () => {
+test('pressing Esc should clear the input', async () => {
   getComponent();
 
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
 
   const value = 'custom';
-  userEvent.type(input, value);
-  userEvent.type(input, '{esc}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{esc}');
 
   expect(screen.queryByText(value)).not.toBeInTheDocument();
   expect(input).toHaveValue('');
   expect(input).toHaveFocus();
 
-  userEvent.type(input, 'Aardvark');
+  await userEvent.type(input, 'Aardvark');
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
 
-test('should clear the input text onBlur', () => {
+test('should clear the input text onBlur', async () => {
   getComponent();
 
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
 
   const value = 'custom';
-  userEvent.type(input, value);
-  userEvent.tab();
+  await userEvent.type(input, value);
+  await userEvent.tab();
 
   expect(screen.queryByText(value)).not.toBeInTheDocument();
   expect(input).toHaveValue('');
 });
 
-test('should clear the input text onBlur and enter when a single filter result is showing', () => {
+test('should clear the input text onBlur and enter when a single filter result is showing', async () => {
   getComponent();
 
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
 
   const value = 'Snake';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
   const options = within(listbox).getAllByRole('option');
   expect(options.length).toBe(1);
 
-  userEvent.tab();
+  await userEvent.tab();
 
   expect(screen.queryByText(value)).not.toBeInTheDocument();
   expect(input).toHaveValue('');
 
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
   expect(options.length).toBe(1);
-  userEvent.type(input, '{enter}', { skipClick: true });
+  await userEvent.type(input, '{enter}', { skipClick: true });
 
   expect(input).toHaveValue('');
 });
 
-test('in non-restrictive mode the partial string values should be accepted', () => {
+test('in non-restrictive mode the partial string values should be accepted', async () => {
   const itemsWithDuplicatePartialString = [
     { id: 1, name: 'echo:read', key: 'echo:read' },
     { id: 2, name: 'echo:write', key: 'echo:write' },
@@ -889,20 +889,20 @@ test('in non-restrictive mode the partial string values should be accepted', () 
   expect(input).toHaveValue('');
 
   const value = 'echo:r';
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
   expect(input).toHaveValue('');
   expect(screen.queryByText(value)).toBeInTheDocument();
 
-  userEvent.type(input, value);
-  userEvent.type(input, '{enter}');
+  await userEvent.type(input, value);
+  await userEvent.type(input, '{enter}');
   expect(input).not.toHaveValue('');
   expect(input).toHaveValue(value);
 });
 
-test('in condensed mode, onLoadMore and onLoadPrev callbacks are called', () => {
+test('in condensed mode, onLoadMore and onLoadPrev callbacks are called', async () => {
   render(<ComponentOnPrevLoad mode="condensed" />);
-  userEvent.tab();
+  await userEvent.tab();
   const listBox = screen.getAllByRole('listbox');
   fireEvent.scroll(listBox[0], { target: { scrollY: 450 } });
   expect(onLoadMoreFunc).toHaveBeenCalled();
@@ -910,20 +910,20 @@ test('in condensed mode, onLoadMore and onLoadPrev callbacks are called', () => 
   expect(onLoadPrevFunc).toHaveBeenCalled();
 });
 
-test('in condensed mode, hasNoSelectAll hides the select all button', () => {
+test('in condensed mode, hasNoSelectAll hides the select all button', async () => {
   getComponent({ mode: 'condensed', hasNoSelectAll: true });
 
-  userEvent.tab();
+  await userEvent.tab();
 
   const buttons = screen.getAllByRole('button');
   const button = buttons[1];
   expect(button).not.toHaveTextContent('Select All');
 });
 
-test('in condensed mode selects and deselects ', () => {
+test('in condensed mode selects and deselects ', async () => {
   getComponent({ mode: 'condensed' });
 
-  userEvent.tab();
+  await userEvent.tab();
 
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
@@ -955,37 +955,37 @@ test('in condensed mode selects and deselects ', () => {
   expect(button).toHaveTextContent('Select All');
 });
 
-test('in condensed mode custom text props work ', () => {
+test('in condensed mode custom text props work ', async () => {
   getComponent({ mode: 'condensed', placeholder: 'Select Animals', selectedOptionText });
   expect(screen.getByLabelText(labelText)).toHaveAttribute('placeholder', placeholder);
-  userEvent.tab();
+  await userEvent.tab();
 
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
   const firstOption = options[0];
-  userEvent.click(firstOption);
+  await userEvent.click(firstOption);
   expect(screen.getByText('Animals Selected')).toBeInTheDocument();
 });
 
-test('in condensed mode "onSelectionChange" is called', () => {
+test('in condensed mode "onSelectionChange" is called', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ mode: 'condensed', onSelectionChange });
   const input = screen.getByRole('combobox');
   const value = 'Aardvark';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
   const option = within(screen.getByRole('listbox')).getByRole('option');
-  userEvent.click(option);
+  await userEvent.click(option);
   expect(screen.getByText('1 Selected')).toBeInTheDocument();
 
   expect(onSelectionChange).toBeCalledTimes(1);
   expect(onSelectionChange.mock.calls[0][0].has(value)).toBeTruthy();
 });
 
-test('opening and closing listbox fires "onOpenChange" in condensed mode', () => {
+test('opening and closing listbox fires "onOpenChange" in condensed mode', async () => {
   const onOpenChange = jest.fn();
   getComponent({ mode: 'condensed', onOpenChange });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
@@ -996,32 +996,32 @@ test('opening and closing listbox fires "onOpenChange" in condensed mode', () =>
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
 
-test('in condensed mode, clicking outside of listbox closes listbox', () => {
+test('in condensed mode, clicking outside of listbox closes listbox', async () => {
   const onOpenChange = jest.fn();
   getComponent({ mode: 'condensed', onOpenChange });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
-test('in condensed mode, tabbing outside of listbox closes listbox', () => {
+test('in condensed mode, tabbing outside of listbox closes listbox', async () => {
   const onOpenChange = jest.fn();
   getComponent({ mode: 'condensed', onOpenChange });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
   // one tab to move focus to select all button
-  userEvent.tab();
+  await userEvent.tab();
   // one tab to move focus to list
-  userEvent.tab();
+  await userEvent.tab();
   // one tab to move focus beyond lsit
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
@@ -1044,13 +1044,13 @@ test('default selected keys in condensed mode ', () => {
   expect(screen.getByText('2 Selected')).toBeInTheDocument();
 });
 
-test('onInputChange is called in condensed mode ', () => {
+test('onInputChange is called in condensed mode ', async () => {
   const onInputChange = jest.fn();
   getComponent({ mode: 'condensed', onInputChange });
 
   const input = screen.getByRole('combobox');
   const value = 'Aardvark';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
@@ -1062,11 +1062,11 @@ test('onInputChange is called in condensed mode ', () => {
   expect(onInputChange).toHaveBeenCalledWith(value);
 });
 
-test('opens listbox on focus and fires "onFocus', () => {
+test('opens listbox on focus and fires "onFocus', async () => {
   const onFocus = jest.fn();
   getComponent({ mode: 'condensed', onFocus });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   expect(screen.getByRole('listbox')).toBeInTheDocument();
@@ -1076,11 +1076,11 @@ test('opens listbox on focus and fires "onFocus', () => {
   expect(onFocus).toBeCalled();
 });
 
-test('closes listbox on blur and fires "onBlur"', () => {
+test('closes listbox on blur and fires "onBlur"', async () => {
   const onBlur = jest.fn();
   getComponent({ mode: 'condensed', onBlur });
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   act(() => {
@@ -1090,10 +1090,10 @@ test('closes listbox on blur and fires "onBlur"', () => {
   expect(onBlur).toBeCalled();
 });
 
-test('list and button are keyboard accessible', () => {
+test('list and button are keyboard accessible', async () => {
   getComponent({ mode: 'condensed' });
 
-  userEvent.tab();
+  await userEvent.tab();
 
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
@@ -1102,17 +1102,17 @@ test('list and button are keyboard accessible', () => {
   const buttons = screen.getAllByRole('button');
   const button = buttons[1];
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).toHaveFocus();
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(firstOption).toHaveFocus();
 
-  userEvent.type(firstOption, '{arrowdown}', { skipClick: true });
+  await userEvent.type(firstOption, '{arrowdown}', { skipClick: true });
   expect(secondOption).toHaveFocus();
 });
 
-test('popover closes on input blur', () => {
+test('popover closes on input blur', async () => {
   getComponent({ mode: 'condensed' });
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -1120,7 +1120,7 @@ test('popover closes on input blur', () => {
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
   const checkboxes = within(listbox).getAllByRole('img');
@@ -1132,34 +1132,34 @@ test('popover closes on input blur', () => {
   });
 
   const value = 'Aardvark';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(input).toHaveValue('');
   expect(listbox).not.toBeInTheDocument();
 });
 
-test('trigger button handles popover open and close in condensed', () => {
+test('trigger button handles popover open and close in condensed', async () => {
   getComponent({ mode: 'condensed' });
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(screen.getAllByRole('button')[0]);
+  await userEvent.click(screen.getAllByRole('button')[0]);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(input).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
 
   fireEvent.click(screen.getAllByRole('button')[0]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
-test('renders items with duplicate keys', () => {
+test('renders items with duplicate keys', async () => {
   getComponent({ items: items.map(item => ({ ...item, key: 'DUPLICATE_KEY' })), mode: 'condensed' });
 
   const input = screen.getByRole('combobox');
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveFocus();
 
   expect(screen.getByRole('listbox')).toBeInTheDocument();
@@ -1167,7 +1167,7 @@ test('renders items with duplicate keys', () => {
   expect(options.length).toBe(1);
 });
 
-test('should render items with sections passed in props', () => {
+test('should render items with sections passed in props', async () => {
   getSectionsComponent();
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -1175,19 +1175,19 @@ test('should render items with sections passed in props', () => {
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
 
   expect(screen.getAllByRole('group')).toHaveLength(2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(5);
 });
 
-test('should render the separators', () => {
+test('should render the separators', async () => {
   getSectionsComponent();
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.queryAllByRole('separator')).toHaveLength(3);
   const groups = screen.getAllByRole('group');
   expect(groups).toHaveLength(2);
@@ -1205,7 +1205,7 @@ test('should render the separators', () => {
   });
 });
 
-test('renders duplicate groups for duplicate keys on items group ', () => {
+test('renders duplicate groups for duplicate keys on items group ', async () => {
   getSectionsComponent({
     items: withSection.map(item => ({
       ...item,
@@ -1215,13 +1215,13 @@ test('renders duplicate groups for duplicate keys on items group ', () => {
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.getAllByRole('group')).not.toHaveLength(2);
 });
 
-test('onLoadMore and onLoadPrev callbacks are called', () => {
+test('onLoadMore and onLoadPrev callbacks are called', async () => {
   render(<ComponentOnPrevLoad />);
-  userEvent.tab();
+  await userEvent.tab();
   const listBox = screen.getAllByRole('listbox');
   fireEvent.scroll(listBox[0], { target: { scrollY: 450 } });
   expect(onLoadMoreFunc).toHaveBeenCalled();

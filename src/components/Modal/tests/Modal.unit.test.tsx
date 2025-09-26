@@ -56,70 +56,70 @@ test('should display title for modal', () => {
   expect(screen.queryByText(title)).toBeInTheDocument();
 });
 
-test('should hide the modal if clicked outside when isDismissable is true', () => {
+test('should hide the modal if clicked outside when isDismissable is true', async () => {
   const onClose = jest.fn();
   getComponent({ isOpen: true, onClose, isDismissable: true });
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
   expect(onClose).not.toHaveBeenCalled();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(onClose).toHaveBeenCalledTimes(1);
 });
 
-test('should not hide the modal if clicked outside when isDismissable is false', () => {
+test('should not hide the modal if clicked outside when isDismissable is false', async () => {
   const onClose = jest.fn();
   getComponent({ isOpen: true, onClose });
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
   expect(onClose).not.toHaveBeenCalled();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(onClose).not.toHaveBeenCalledTimes(1);
 });
 
-test('should hide the overlay when clicking outside if shouldCloseOnInteractOutside returns true', () => {
+test('should hide the overlay when clicking outside if shouldCloseOnInteractOutside returns true', async () => {
   const onClose = jest.fn();
   const shouldCloseOnInteractOutside = target => target === document.body;
   getComponent({ isOpen: true, isDismissable: true, onClose, shouldCloseOnInteractOutside });
   expect(onClose).not.toHaveBeenCalled();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(onClose).toHaveBeenCalledTimes(1);
 });
 
-test('should not hide the overlay when clicking outside if shouldCloseOnInteractOutside returns false', () => {
+test('should not hide the overlay when clicking outside if shouldCloseOnInteractOutside returns false', async () => {
   const onClose = jest.fn();
   const shouldCloseOnInteractOutside = target => target !== document.body;
   getComponent({ isOpen: true, isDismissable: true, onClose, shouldCloseOnInteractOutside });
   expect(onClose).not.toHaveBeenCalled();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(onClose).not.toHaveBeenCalledTimes(1);
 });
 
-test('should hide the overlay when pressing the escape key', () => {
+test('should hide the overlay when pressing the escape key', async () => {
   const onClose = jest.fn();
   // isDismissable does not need to be true here
   getComponent({ isOpen: true, onClose });
   const modal = screen.getByRole('dialog');
   expect(onClose).not.toHaveBeenCalled();
 
-  userEvent.type(modal, '{esc}');
+  await userEvent.type(modal, '{esc}');
   expect(onClose).toHaveBeenCalledTimes(1);
 });
 
-test('should only hide the top-most overlay', () => {
+test('should only hide the top-most overlay', async () => {
   const onCloseFirst = jest.fn();
   const onCloseSecond = jest.fn();
   getComponent({ isOpen: true, onClose: onCloseFirst, isDismissable: true });
   const { unmount } = getComponent({ isOpen: true, onClose: onCloseSecond, isDismissable: true });
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(onCloseSecond).toHaveBeenCalledTimes(1);
   expect(onCloseFirst).not.toHaveBeenCalled();
 
   unmount();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(onCloseFirst).toHaveBeenCalledTimes(1);
 });
 

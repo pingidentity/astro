@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import { CalendarDate } from '@internationalized/date';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import '@testing-library/jest-dom';
 
 import { Button, OverlayProvider } from '../../index';
@@ -322,11 +323,11 @@ export const universalFieldComponentTests = ({
       );
       const helpHintButton = screen.getByTestId(helpHintTestId);
       if (componentType === 'CheckboxField' || componentType === 'SwitchField') {
-        userEvent.tab();
-        userEvent.tab();
-        userEvent.type(helpHintButton, '{space}');
+        await userEvent.tab();
+        await userEvent.tab();
+        await userEvent.type(helpHintButton, '{space}');
       } else {
-        userEvent.hover(helpHintButton);
+        await userEvent.hover(helpHintButton);
       }
       if (componentType === 'DatePicker') {
         await waitFor(() => {
@@ -348,7 +349,7 @@ export const universalFieldComponentTests = ({
       );
 
       if (componentType === 'FileInputField') {
-        userEvent.click(screen.getByTestId('file-input-field__file-select'));
+        await userEvent.click(screen.getByTestId('file-input-field__file-select'));
 
         fireEvent.change(screen.getByLabelText('file-input-test-label'), {
           target: { files: [testValue] },
@@ -387,7 +388,7 @@ export const universalFieldComponentTests = ({
         fireEvent.change(screen.getByRole('textbox'), { target: { value: testValue } });
       } else if (componentType === 'DatePicker') {
         const iconButton = screen.queryAllByRole('button');
-        userEvent.click(iconButton[0]);
+        await userEvent.click(iconButton[0]);
 
         const cells = screen.getAllByRole('gridcell');
         const selected = cells.find(cell => cell.getAttribute('aria-selected') === 'true');

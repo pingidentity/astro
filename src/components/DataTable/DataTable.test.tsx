@@ -198,12 +198,12 @@ describe('Static DataTable', () => {
     expect(cells[7]).toHaveAttribute('aria-colindex', '3');
   });
 
-  test('should select with mouse click', () => {
+  test('should select with mouse click', async () => {
     staticDataTable();
     const thisItem = screen.getAllByRole('row');
 
     expect(thisItem[2]).not.toHaveClass('is-selected');
-    userEvent.click(thisItem[2]);
+    await userEvent.click(thisItem[2]);
     const updatedItem = screen.queryAllByRole('row')[2];
     expect(updatedItem).not.toHaveClass('is-selected');
   });
@@ -278,12 +278,12 @@ describe('Selectable DataTable', () => {
     </DataTable>,
   );
 
-  test('should change selection on mouse press', () => {
+  test('should change selection on mouse press', async () => {
     staticDataTable({});
     const thisItem = screen.getAllByRole('row');
 
     expect(thisItem[1]).not.toHaveClass('is-selected');
-    userEvent.click(thisItem[1]);
+    await userEvent.click(thisItem[1]);
     expect(thisItem[1]).toHaveClass('is-selected');
     expect(thisItem[1]).toHaveClass('is-selectable');
   });
@@ -295,19 +295,19 @@ describe('Selectable DataTable', () => {
     expect(thisItem[1]).toHaveClass('is-selected');
   });
 
-  test('disabledKeys', () => {
+  test('disabledKeys', async () => {
     staticDataTable({ disabledKeys: [2] });
     const thisItem = screen.getAllByRole('row');
     expect(thisItem[1]).not.toHaveClass('is-selected');
-    userEvent.click(thisItem[1]);
+    await userEvent.click(thisItem[1]);
     expect(thisItem[1]).not.toHaveClass('is-selected');
   });
 
-  test('onSelectedChange callback works as expected', () => {
+  test('onSelectedChange callback works as expected', async () => {
     staticDataTable({ disabledKeys: [2] });
     const thisItem = screen.getAllByRole('row');
     expect(thisItem[1]).not.toHaveClass('is-selected');
-    userEvent.click(thisItem[1]);
+    await userEvent.click(thisItem[1]);
     expect(testCallback).toHaveBeenCalled();
     expect(thisItem[1]).not.toHaveClass('is-selected');
   });
@@ -323,20 +323,20 @@ describe('Controlled Selectable DataTable', () => {
     selectionMode: 'single',
   };
 
-  test('should select with mouse click', () => {
+  test('should select with mouse click', async () => {
     render(<ControlledDataTable {...props} />);
     const thisItem = screen.getAllByRole('row');
 
     expect(thisItem[2]).not.toHaveClass('is-selected');
-    userEvent.click(thisItem[2]);
+    await userEvent.click(thisItem[2]);
     const updatedItem = screen.queryAllByRole('row')[2];
     expect(updatedItem).toHaveClass('is-selected');
   });
 
-  test('should select with keyboard', () => {
+  test('should select with keyboard', async () => {
     render(<ControlledDataTable {...props} />);
     const thisItem = screen.getAllByRole('row');
-    userEvent.tab();
+    await userEvent.tab();
 
     expect(thisItem[2]).not.toHaveClass('is-selected');
     moveFocus('ArrowDown');
@@ -345,7 +345,7 @@ describe('Controlled Selectable DataTable', () => {
     expect(updatedItem).toHaveClass('is-selected');
   });
 
-  test('disabledKeys', () => {
+  test('disabledKeys', async () => {
     const theseProps = {
       disabledKeys: [2],
       'aria-label': 'Default table with static content',
@@ -356,7 +356,7 @@ describe('Controlled Selectable DataTable', () => {
     render(<ControlledDataTable {...theseProps} />);
     const thisItem = screen.getAllByRole('row');
     expect(thisItem[1]).not.toHaveClass('is-selected');
-    userEvent.click(thisItem[1]);
+    await userEvent.click(thisItem[1]);
     expect(thisItem[1]).not.toHaveClass('is-selected');
   });
 });
@@ -639,7 +639,7 @@ describe('Sortable with useAsyncList', () => {
     const { result } = renderHook(() => useAsyncList({
       load,
       sort,
-      initialSortDescriptor: { column: 'name',direction: 'ascending' },
+      initialSortDescriptor: { column: 'name', direction: 'ascending' },
     }));
 
     expect(load).toHaveBeenCalledTimes(1);

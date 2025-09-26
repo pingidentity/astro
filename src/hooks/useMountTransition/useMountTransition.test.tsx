@@ -64,12 +64,12 @@ const ControlledWithTransition = () => {
   );
 };
 
-test('default return', () => {
+test('default return', async () => {
   render(<ControlledWithTransition />);
   const button = screen.getByTestId(buttonTestId);
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.getByTestId(overlayTestId)).toHaveClass('is-transitioning');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.getByTestId(overlayTestId)).toHaveClass('is-transitioning');
   setTimeout(() => {
     expect(screen.getByTestId(overlayTestId)).not.toHaveClass('is-transitioning');

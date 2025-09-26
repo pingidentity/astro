@@ -44,11 +44,11 @@ test('disabled prop disables input', () => {
   expect(textArea).toBeDisabled();
 });
 
-test('text area field has focus', () => {
+test('text area field has focus', async () => {
   getComponent();
   const textArea = screen.getByLabelText(label);
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(textArea).toHaveFocus();
   expect(textArea).toHaveClass('is-focused');
 });

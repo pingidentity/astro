@@ -24,13 +24,13 @@ const getComponent = (props: PopoverMenuProps = {}) => render((
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-test('renders a popover menu when trigger is clicked', () => {
+test('renders a popover menu when trigger is clicked', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
   expect(screen.queryByRole('presentation')).toBeVisible();
   expect(screen.queryByRole('presentation')).toHaveStyle({ top: '5px' });
@@ -38,87 +38,87 @@ test('renders a popover menu when trigger is clicked', () => {
   expect(screen.queryAllByRole('button')).toHaveLength(3);
   expect(screen.queryByRole('menu')).toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
 
-test('should respond to keyboard events', () => {
+test('should respond to keyboard events', async () => {
   getComponent();
   const button = screen.getByRole('button');
 
-  userEvent.type(button, '{enter}');
+  await userEvent.type(button, '{enter}');
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
 
-  userEvent.type(button, '{enter}');
+  await userEvent.type(button, '{enter}');
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 
-test('renders the correct popover menu placement', () => {
+test('renders the correct popover menu placement', async () => {
   getComponent({ direction: 'right' });
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.getByRole('presentation')).toHaveAttribute('data-popover-placement', 'right');
 });
 
-test('should close when a menu item is selected', () => {
+test('should close when a menu item is selected', async () => {
   getComponent();
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
   const menuItem = screen.getAllByRole('menuitem')[0];
 
   // Click the item and ensure the popover closes
-  userEvent.click(menuItem);
+  await userEvent.click(menuItem);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 
-test('should not close when a menu item is selected when isNotClosedOnSelect is true', () => {
+test('should not close when a menu item is selected when isNotClosedOnSelect is true', async () => {
   getComponent({ isNotClosedOnSelect: true });
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
   const menuItem = screen.getAllByRole('menuitem')[0];
 
   // Click the item and ensure the popover does not close
-  userEvent.click(menuItem);
+  await userEvent.click(menuItem);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
 });
 
-test('should be open when isDefaultOpen is true', () => {
+test('should be open when isDefaultOpen is true', async () => {
   getComponent({ isDefaultOpen: true });
   const button = screen.getAllByRole('button')[0];
 
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 
-test('should be open when isOpen is true and not react to attempts to close it', () => {
+test('should be open when isOpen is true and not react to attempts to close it', async () => {
   getComponent({ isOpen: true });
   const button = screen.getAllByRole('button')[0];
 
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
 });
 
-test('should respond to onOpenChange', () => {
+test('should respond to onOpenChange', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
   const button = screen.getByRole('button');
 
   expect(onOpenChange).not.toHaveBeenCalled();
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 });
 
-test('two menus can not be open at the same time', () => {
+test('two menus can not be open at the same time', async () => {
   render((
     <>
       <PopoverMenu>
@@ -144,31 +144,31 @@ test('two menus can not be open at the same time', () => {
 
   const [button1, button2] = screen.getAllByRole('button');
 
-  userEvent.click(button1);
+  await userEvent.click(button1);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   expect(screen.queryAllByRole('menuitem')).toHaveLength(2);
   expect(screen.queryByRole('menuitem', { name: 'A' })).toBeInTheDocument();
 
-  userEvent.click(button2);
+  await userEvent.click(button2);
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 
-  userEvent.click(button2);
+  await userEvent.click(button2);
   expect(screen.queryByRole('presentation')).toBeInTheDocument();
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   expect(screen.queryAllByRole('menuitem')).toHaveLength(3);
   expect(screen.queryByRole('menuitem', { name: 'C' })).toBeInTheDocument();
 });
 
-test('holds a pressed state for menu trigger when isOpen is true', () => {
+test('holds a pressed state for menu trigger when isOpen is true', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   expect(button).not.toHaveClass('is-pressed');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   expect(button).toHaveClass('is-pressed');
 });

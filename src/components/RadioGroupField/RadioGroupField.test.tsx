@@ -57,13 +57,13 @@ test('default radio group', () => {
   expect(group).toHaveAttribute('aria-orientation', ORIENTATION.VERTICAL);
 });
 
-test('radio group onChange', () => {
+test('radio group onChange', async () => {
   const onChange = jest.fn();
   getComponent({ onChange });
   const radios = screen.getAllByRole('radio');
   expect(onChange).not.toHaveBeenCalled();
 
-  userEvent.click(radios[0]);
+  await userEvent.click(radios[0]);
   expect(onChange).toHaveBeenNthCalledWith(1, testValues[0]);
 });
 
@@ -74,13 +74,13 @@ test('radio group only allows one checked option', async () => {
   const labelA = screen.getByText(testValues[0]);
   const labelB = screen.getByText(testValues[1]);
 
-  userEvent.click(radioA);
+  await userEvent.click(radioA);
   expect(radioA).toBeChecked();
   expect(labelA).toHaveClass('is-checked');
   expect(radioB).not.toBeChecked();
   expect(labelB).not.toHaveClass('is-checked');
 
-  userEvent.click(radioB);
+  await userEvent.click(radioB);
   expect(radioA).not.toBeChecked();
   expect(labelA).not.toHaveClass('is-checked');
   expect(radioB).toBeChecked();
@@ -88,25 +88,25 @@ test('radio group only allows one checked option', async () => {
   expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
 });
 
-test('value for controlled radio group', () => {
+test('value for controlled radio group', async () => {
   getComponent({ value: testValues[0] });
   const radios = screen.getAllByRole('radio');
   expect(radios[0]).toBeChecked();
 
   // Ensure it is controlled.
-  userEvent.click(radios[1]);
+  await userEvent.click(radios[1]);
   expect(radios[0]).toBeChecked();
   expect(radios[1]).not.toBeChecked();
   expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);
 });
 
-test('defaultValue for uncontrolled radio group', () => {
+test('defaultValue for uncontrolled radio group', async () => {
   getComponent({ defaultValue: testValues[0] });
   const radios = screen.getAllByRole('radio');
   expect(radios[0]).toBeChecked();
 
   // Ensure it is uncontrolled.
-  userEvent.click(radios[1]);
+  await userEvent.click(radios[1]);
   expect(radios[0]).not.toBeChecked();
   expect(radios[1]).toBeChecked();
   expect(screen.queryAllByRole('radio', { checked: true }).length).toBe(1);

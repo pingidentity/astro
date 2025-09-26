@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
-import { Button as ThemeUIButton } from 'theme-ui';
 import type { FocusableElement } from '@react-types/shared';
+import { Button as ThemeUIButton } from 'theme-ui';
 
 import {
   useAriaLabelWarning,
@@ -64,7 +64,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       onClick: onClick as (e: React.MouseEvent<FocusableElement>) => void,
       ...others,
     },
-    buttonRef
+    buttonRef,
   );
 
   const { hoverProps, isHovered } = useHover({
@@ -92,10 +92,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         sx={
           isLoading
             ? {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }
             : {}
         }
         variant={variant}

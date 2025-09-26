@@ -52,7 +52,7 @@ test('tooltip doesnt show by default and is rendered when trigger is hovered', (
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
-test('renders a tooltip when trigger is focused with keyboard', () => {
+test('renders a tooltip when trigger is focused with keyboard', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
@@ -60,7 +60,7 @@ test('renders a tooltip when trigger is focused with keyboard', () => {
   expect(button).not.toHaveFocus();
   expect(button).not.toHaveStyle(`box-shadow: ${theme.shadows.focus}`);
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).toHaveFocus();
 });
 
@@ -70,7 +70,7 @@ test('renders tooltip by default with isOpen prop', () => {
   expect(tooltip).toBeInTheDocument();
 });
 
-test('trigger press events work when a tooltip is displayed', () => {
+test('trigger press events work when a tooltip is displayed', async () => {
   const onPress = jest.fn();
   getComponent({ buttonProps: { onPress } });
   const button = screen.getByRole('button');
@@ -81,13 +81,13 @@ test('trigger press events work when a tooltip is displayed', () => {
   fireEvent.mouseEnter(button);
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onPress).toHaveBeenCalledTimes(1);
   // Tooltip is dismissed when a click event happens
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });
 
-test('trigger press events work when a tooltip is disabled', () => {
+test('trigger press events work when a tooltip is disabled', async () => {
   const onPress = jest.fn();
   getComponent({ isDisabled: true, buttonProps: { onPress } });
   const button = screen.getByRole('button');
@@ -98,7 +98,7 @@ test('trigger press events work when a tooltip is disabled', () => {
   fireEvent.mouseEnter(button);
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
@@ -138,7 +138,7 @@ test('tooltip stays open until closeDelay after mouse leaves trigger', async () 
   }, { timeout: closeDelay - 1 });
 });
 
-test('tooltip uses mount transition when Onyx theme is applied', () => {
+test('tooltip uses mount transition when Onyx theme is applied', async () => {
   getOnyxComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
@@ -151,7 +151,7 @@ test('tooltip uses mount transition when Onyx theme is applied', () => {
   expect(screen.queryByRole('presentation')).toHaveClass('is-transitioning');
 
   // Tooltip should now be fully mounted
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByRole('presentation')).not.toHaveClass('is-mounted');
   expect(screen.queryByRole('presentation')).toHaveClass('is-transitioning');

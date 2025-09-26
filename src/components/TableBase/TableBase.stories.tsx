@@ -152,10 +152,10 @@ export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
         {item => (
           <Row key={item.id}>
             <Cell>
-               <>
-              {`${item.firstName} ${item.lastName}`}
-              {' '}
-              {item.id}
+              <>
+                {`${item.firstName} ${item.lastName}`}
+                {' '}
+                {item.id}
               </>
             </Cell>
             <Cell>{item.email}</Cell>

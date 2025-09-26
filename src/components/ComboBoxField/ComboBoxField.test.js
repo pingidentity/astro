@@ -183,49 +183,49 @@ test('renders ComboBoxField component', () => {
   expect(button).toBeInTheDocument();
 });
 
-test('should not allow custom value by default', () => {
+test('should not allow custom value by default', async () => {
   getComponent();
   const input = screen.queryByRole('combobox');
   expect(input).toHaveValue('');
 
   // type something
-  userEvent.type(input, 'custom');
+  await userEvent.type(input, 'custom');
   // blur input
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).not.toHaveValue('custom');
   expect(input).toHaveValue('');
 });
 
-test('should allow custom value when prop is set', () => {
+test('should allow custom value when prop is set', async () => {
   getComponent({ hasCustomValue: true });
   const input = screen.queryByRole('combobox');
   expect(input).toHaveValue('');
 
   // type something
-  userEvent.type(input, 'custom');
+  await userEvent.type(input, 'custom');
   // blur input
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveValue('custom');
 });
 
-test('should disable options based on disabledKeys prop', () => {
+test('should disable options based on disabledKeys prop', async () => {
   getComponent({ disabledKeys: [items[0].id] });
   const input = screen.queryByRole('combobox');
   const button = screen.queryByRole('button');
 
   // Open the list by clicking on the button and ensure first option is not active
-  userEvent.click(button);
+  await userEvent.click(button);
   const options = screen.queryAllByRole('option');
   expect(options).toHaveLength(items.length);
   expect(options[0]).toHaveAttribute('aria-disabled', 'true');
   expect(options[0]).toHaveClass('is-disabled');
 
   // Expect pointer events to not work
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
   expect(input).not.toHaveValue(items[0].name);
 });
 
-test('should be able to open and navigate through the listbox by click', () => {
+test('should be able to open and navigate through the listbox by click', async () => {
   getComponent();
   const button = screen.queryByRole('button');
   const input = screen.queryByRole('combobox');
@@ -233,7 +233,7 @@ test('should be able to open and navigate through the listbox by click', () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Open the list by clicking on the button and ensure first option is not active
-  userEvent.click(button);
+  await userEvent.click(button);
   const options = screen.queryAllByRole('option');
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   // Both dismiss buttons should be available, but the dropdown button should be inaccessible
@@ -243,17 +243,17 @@ test('should be able to open and navigate through the listbox by click', () => {
   options.forEach(opt => expect(opt).not.toHaveClass('is-focused'));
 
   // Ensure active styles are applied
-  userEvent.hover(options[0]);
+  await userEvent.hover(options[0]);
   expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
   expect(options[0]).toHaveClass('is-focused');
 
   // Ensure option selection works
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(input).toHaveValue(items[0].name);
 
   // Option stays focused when the overlay is re-opened
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(options[0]).toHaveClass('is-focused');
 });
 
@@ -267,7 +267,7 @@ test('should be able to hover list item and filter on input box', async () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Open the list by clicking on the button and ensure first option is not active
-  userEvent.click(button);
+  await userEvent.click(button);
   const options = screen.queryAllByRole('option');
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   // Both dismiss buttons should be available, but the dropdown button should be inaccessible
@@ -277,26 +277,26 @@ test('should be able to hover list item and filter on input box', async () => {
   options.forEach(opt => expect(opt).not.toHaveClass('is-focused'));
 
   // Ensure active styles are applied
-  userEvent.hover(options[0]);
+  await userEvent.hover(options[0]);
   expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
   expect(options[0]).toHaveClass('is-focused');
 
-  userEvent.type(input, 'k');
+  await userEvent.type(input, 'k');
 
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(input).toHaveValue('k');
 });
 
 
-test('should be able to open the listbox by keyboard', () => {
+test('should be able to open the listbox by keyboard', async () => {
   getComponent();
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue('');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Open the list by hitting the down arrow key and ensure first option is active
-  userEvent.tab();
-  userEvent.type(input, '{arrowdown}', { skipClick: true });
+  await userEvent.tab();
+  await userEvent.type(input, '{arrowdown}', { skipClick: true });
   const options = screen.queryAllByRole('option');
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(options).toHaveLength(items.length);
@@ -304,61 +304,61 @@ test('should be able to open the listbox by keyboard', () => {
   expect(options[0]).toHaveClass('is-focused');
 
   // Ensure option selection works
-  userEvent.type(input, '{enter}', { skipClick: true });
+  await userEvent.type(input, '{enter}', { skipClick: true });
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('combobox')).toHaveValue(items[0].name);
 });
 
-test('should open list on focus when menuTrigger is set to use focus', () => {
+test('should open list on focus when menuTrigger is set to use focus', async () => {
   getComponent({ menuTrigger: 'focus' });
   const input = screen.getByRole('combobox');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Open the list by focusing with tab
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 
   // blur
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   // focus with click
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 });
 
-test('should open list on click after selection when menuTrigger is set to use focus', () => {
+test('should open list on click after selection when menuTrigger is set to use focus', async () => {
   getComponent({ menuTrigger: 'focus' });
   const input = screen.getByRole('combobox');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
-  userEvent.click(screen.queryAllByRole('option')[0]);
+  await userEvent.click(screen.queryAllByRole('option')[0]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(input).toHaveFocus();
 
   // Need to click away first, then click back
-  userEvent.click(document.body);
-  userEvent.click(input);
+  await userEvent.click(document.body);
+  await userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
 
-test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+test('Item accepts a data-id and the data-id can be found in the DOM', async () => {
   getComponent();
   const button = screen.queryByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   const options = screen.queryAllByRole('option');
 
   expect(options).toHaveLength(items.length);
   expect(options[0]).toHaveAttribute('data-id', items[0].name);
 });
 
-test('should invoke onInputChange', () => {
+test('should invoke onInputChange', async () => {
   const inputValue = 'blah';
   const onInputChange = jest.fn();
   getComponent({ inputValue, onInputChange });
@@ -366,14 +366,14 @@ test('should invoke onInputChange', () => {
   expect(input).toHaveValue(inputValue);
   expect(onInputChange).not.toHaveBeenCalled();
 
-  userEvent.type(input, 'a');
+  await userEvent.type(input, 'a');
   const newValue = `${inputValue}a`;
   expect(onInputChange).toHaveBeenNthCalledWith(1, newValue);
   // Should not have the new value since we did not update the prop and re-render
   expect(input).not.toHaveValue(newValue);
 });
 
-test('should invoke onOpenChange on button click', () => {
+test('should invoke onOpenChange on button click', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange, menuTrigger: 'manual' });
   const button = screen.queryByRole('button');
@@ -382,11 +382,11 @@ test('should invoke onOpenChange on button click', () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on button click
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
-test('should invoke onOpenChange on input change', () => {
+test('should invoke onOpenChange on input change', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange, menuTrigger: 'input' });
   const input = screen.queryByRole('combobox');
@@ -395,11 +395,11 @@ test('should invoke onOpenChange on input change', () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on input change (default menuTrigger)
-  userEvent.type(input, 'a');
+  await userEvent.type(input, 'a');
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'input');
 });
 
-test('should invoke onOpenChange on keyboard arrow down', () => {
+test('should invoke onOpenChange on keyboard arrow down', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange, menuTrigger: 'manual' });
   const input = screen.queryByRole('combobox');
@@ -408,11 +408,11 @@ test('should invoke onOpenChange on keyboard arrow down', () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on keyboard interaction
-  userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input, '{arrowdown}');
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
-test('should invoke onOpenChange on keyboard arrow up', () => {
+test('should invoke onOpenChange on keyboard arrow up', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange, menuTrigger: 'manual' });
   const input = screen.queryByRole('combobox');
@@ -421,11 +421,11 @@ test('should invoke onOpenChange on keyboard arrow up', () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on keyboard interaction
-  userEvent.type(input, '{arrowup}');
+  await userEvent.type(input, '{arrowup}');
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
-test('should invoke onSelectionChange when selection is made', () => {
+test('should invoke onSelectionChange when selection is made', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange });
   const input = screen.queryByRole('combobox');
@@ -433,36 +433,36 @@ test('should invoke onSelectionChange when selection is made', () => {
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Should fire on item selection click
-  userEvent.click(button);
-  userEvent.click(screen.queryAllByRole('option')[2]);
+  await userEvent.click(button);
+  await userEvent.click(screen.queryAllByRole('option')[2]);
   expect(onSelectionChange).toHaveBeenNthCalledWith(1, items[2].id);
 
   // Should fire when input is cleared
-  userEvent.clear(input);
+  await userEvent.clear(input);
   expect(onSelectionChange).toHaveBeenNthCalledWith(2, null);
 
   // Should fire on keyboard interaction
-  userEvent.type(input, '{arrowdown}{enter}');
+  await userEvent.type(input, '{arrowdown}{enter}');
   expect(onSelectionChange).toHaveBeenNthCalledWith(3, items[0].id);
 
   // Total number of calls
   expect(onSelectionChange).toHaveBeenCalledTimes(3);
 });
 
-test('should use default contains filtering', () => {
+test('should use default contains filtering', async () => {
   getComponent();
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
-  userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input, '{arrowdown}');
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 
   // Should list all options on default contains filter
-  userEvent.type(input, 'k');
+  await userEvent.type(input, 'k');
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 
   // Should list no options when none match
-  userEvent.type(input, 'z');
+  await userEvent.type(input, 'z');
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
@@ -472,12 +472,12 @@ test('should be able to use controlled filtering', async () => {
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
-  userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input, '{arrowdown}');
   options = await screen.findAllByRole('option');
   expect(options).toHaveLength(items.length);
 
   // Should only list the second option
-  userEvent.type(input, 'k');
+  await userEvent.type(input, 'k');
   options = await screen.findAllByRole('option');
   expect(options[0]).toHaveTextContent(items[1].name);
 });
@@ -489,12 +489,12 @@ test('should be able to use custom default filtering', async () => {
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
-  userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input, '{arrowdown}');
   options = await screen.findAllByRole('option');
   expect(options).toHaveLength(items.length);
 
   // Should only list the second option
-  userEvent.type(input, 'K');
+  await userEvent.type(input, 'K');
   options = await screen.findAllByRole('option');
   expect(options[0]).toHaveTextContent(items[1].name);
 });
@@ -507,14 +507,14 @@ test('should show in input "textValue" if provided', async () => {
 
   const input = screen.queryByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
   const options = await screen.findAllByRole('option');
 
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
   expect(input).toHaveValue(newItems[0].textValue);
 
   // Check that on clicking again "textValue" still returning
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
   expect(input).toHaveValue(newItems[0].textValue);
 });
 
@@ -529,11 +529,11 @@ test('option list should be opened on scroll input value', async () => {
   getComponent({ defaultItems: otherItems });
   const input = screen.queryByRole('combobox');
 
-  userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input, '{arrowdown}');
   options = screen.queryAllByRole('option');
   expect(options).toHaveLength(otherItems.length);
 
-  userEvent.type(input, 'This is very very very long item name');
+  await userEvent.type(input, 'This is very very very long item name');
   fireEvent.scroll(input, { target: { scrollX: 10 } });
   options = screen.queryAllByRole('option');
   expect(options.length).toBe(1);
@@ -571,7 +571,7 @@ describe('loadingState', () => {
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
 
-  test('it should not render a loader until a delay of 500ms passes (loadingState: loading)', () => {
+  test('it should not render a loader until a delay of 500ms passes (loadingState: loading)', async () => {
     getComponent({ loadingState: loadingStates.LOADING });
     const input = screen.getByRole('combobox');
 
@@ -583,11 +583,11 @@ describe('loadingState', () => {
 
     const button = screen.getByRole('button');
 
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
   });
 
-  test('it should not render a loader until a delay of 500ms passes and the menu is open (loadingState: filtering)', () => {
+  test('it should not render a loader until a delay of 500ms passes and the menu is open (loadingState: filtering)', async () => {
     getComponent({ loadingState: loadingStates.FILTERING });
     const input = screen.getByRole('combobox');
 
@@ -596,17 +596,17 @@ describe('loadingState', () => {
 
     const button = screen.getByRole('button');
 
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
   });
 
-  test('hides the loader when loadingState changes to a non-loading state', () => {
+  test('hides the loader when loadingState changes to a non-loading state', async () => {
     const { rerender } = getComponent({ loadingState: loadingStates.FILTERING });
     const input = screen.getByRole('combobox');
     const button = screen.getByRole('button');
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    userEvent.click(button);
+    await userEvent.click(button);
     act(() => { jest.advanceTimersByTime(500); });
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
@@ -616,19 +616,19 @@ describe('loadingState', () => {
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
 
-  test('combobox should hide the loader when the menu closes', () => {
+  test('combobox should hide the loader when the menu closes', async () => {
     getComponent({ loadingState: loadingStates.FILTERING });
     const input = screen.getByRole('combobox');
     const button = screen.getByRole('button');
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    userEvent.click(button);
+    await userEvent.click(button);
     act(() => { jest.advanceTimersByTime(500); });
     const listbox = screen.getByRole('listbox');
     expect(listbox).toBeVisible();
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(() => screen.getByRole('progressbar')).toThrow();
     expect(() => screen.getByRole('listbox')).toThrow();
   });
@@ -657,14 +657,14 @@ describe('loadingState', () => {
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
   });
 
-  test('combobox should reset the 500ms loader delay timer when input text changes', () => {
+  test('combobox should reset the 500ms loader delay timer when input text changes', async () => {
     getComponent({ loadingState: loadingStates.LOADING, menuTrigger: 'manual' });
     const input = screen.getByRole('combobox');
 
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    userEvent.type(input, 'O');
+    await userEvent.type(input, 'O');
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
 
@@ -672,13 +672,13 @@ describe('loadingState', () => {
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
   });
 
-  test('should render the loader in the listbox when loadingState="loadingMore"', () => {
+  test('should render the loader in the listbox when loadingState="loadingMore"', async () => {
     getComponent({ loadingState: loadingStates.LOADING_MORE });
     const button = screen.getByRole('button');
 
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    userEvent.click(button);
+    await userEvent.click(button);
 
     const listbox = screen.getByRole('listbox');
     expect(listbox).toBeVisible();
@@ -689,7 +689,7 @@ describe('loadingState', () => {
   });
 });
 
-test('two listbox can not be open at the same time', () => {
+test('two listbox can not be open at the same time', async () => {
   getComponent();
   getComponent({ items: [{ name: 'Tango', id: '4' }, { name: 'Foxtrot', id: '5' }] });
 
@@ -698,38 +698,38 @@ test('two listbox can not be open at the same time', () => {
 
   const [button1, button2] = screen.getAllByRole('button');
 
-  userEvent.click(button1);
+  await userEvent.click(button1);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
   expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
 
   // first click closes first popover, second click opens the second popover
-  userEvent.click(button2);
+  await userEvent.click(button2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(2);
   expect(screen.queryByRole('option', { name: 'Tango' })).toBeInTheDocument();
 });
 
-test('should handle selecting custom option', () => {
+test('should handle selecting custom option', async () => {
   getComponent({ hasCustomValue: true });
 
   const input = screen.queryByRole('combobox');
   expect(input).toHaveValue('');
 
   // type something
-  userEvent.type(input, 'custom');
+  await userEvent.type(input, 'custom');
 
   // set input value as selected
-  userEvent.type(input, '{enter}', { skipClick: true });
+  await userEvent.type(input, '{enter}', { skipClick: true });
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('combobox')).toHaveValue('custom');
 
   // blur input
-  userEvent.tab();
+  await userEvent.tab();
   expect(input).toHaveValue('custom');
 });
 
-test('onSelectionChange works properly with custom value', () => {
+test('onSelectionChange works properly with custom value', async () => {
   const onSelectionChange = jest.fn();
   getComponent({ hasCustomValue: true, onSelectionChange, onInputChange: onSelectionChange });
 
@@ -738,15 +738,15 @@ test('onSelectionChange works properly with custom value', () => {
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Should fire when input value was typed, and enter was pressed
-  userEvent.type(input, 'custom{enter}');
+  await userEvent.type(input, 'custom{enter}');
   expect(onSelectionChange).toHaveBeenCalledWith('custom');
 
   // Should fire when input is cleared
-  userEvent.type(input, '{selectall}{backspace}{enter}');
+  await userEvent.type(input, '{selectall}{backspace}{enter}');
   expect(onSelectionChange).toHaveBeenCalledWith('');
 });
 
-test('add option shows when "hasAddOption" is provided', () => {
+test('add option shows when "hasAddOption" is provided', async () => {
   render(<ComboBoxWithAddOption />);
 
   const input = screen.queryByRole('combobox');
@@ -755,7 +755,7 @@ test('add option shows when "hasAddOption" is provided', () => {
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   const inputValue = 'New value';
-  userEvent.type(input, inputValue);
+  await userEvent.type(input, inputValue);
   expect(input).toHaveValue(inputValue);
 
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
@@ -766,20 +766,20 @@ test('add option shows when "hasAddOption" is provided', () => {
   expect(option).toHaveTextContent(`ADD: ${inputValue}`);
 });
 
-test('if "hasAddOption" is provided, then custom value is added to listbox on blur', () => {
+test('if "hasAddOption" is provided, then custom value is added to listbox on blur', async () => {
   render(<ComboBoxWithAddOption />);
 
   const input = screen.queryByRole('combobox');
   const inputValue = 'New value';
-  userEvent.type(input, inputValue);
+  await userEvent.type(input, inputValue);
   expect(input).toHaveValue(inputValue);
 
   // blur input
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(input).toHaveValue(inputValue);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
@@ -801,7 +801,7 @@ test('passing helper text should display it and correct aria attributes on input
   expect(input).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('popover closes on input blur', () => {
+test('popover closes on input blur', async () => {
   getComponent();
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -809,28 +809,28 @@ test('popover closes on input blur', () => {
 
   const input = screen.getByRole('combobox');
 
-  userEvent.click(input);
+  await userEvent.click(input);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
   expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
 
-test('passing sections, renders separators', () => {
+test('passing sections, renders separators', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryAllByRole('separator')).toHaveLength(4);
 });
 
-test('a blank title does not render', () => {
+test('a blank title does not render', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
 });
 
@@ -858,10 +858,10 @@ describe('when isReadOnly is true', () => {
     expect(screen.getByRole('combobox', { name: defaultProps.label })).toHaveValue(TEST_DEFAULT_INPUT_VALUE);
   });
 
-  test('the dropdown does not open when clicked', () => {
+  test('the dropdown does not open when clicked', async () => {
     getComponent(testProp);
 
-    userEvent.click(screen.getByRole('combobox', { name: defaultProps.label }));
+    await userEvent.click(screen.getByRole('combobox', { name: defaultProps.label }));
 
     expect(screen.queryByRole('listbox', { name: 'Test Label Suggestions' })).not.toBeInTheDocument();
   });

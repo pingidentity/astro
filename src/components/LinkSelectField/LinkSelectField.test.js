@@ -95,35 +95,35 @@ test('should disable the label and control when isDisabled is true', () => {
   expect(screen.getByTestId(controlTestId)).toHaveClass('is-disabled');
 });
 
-test('clicking on the visible button opens the popuplist', () => {
+test('clicking on the visible button opens the popuplist', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
 });
 
-test('onOpenChange prop for field', () => {
+test('onOpenChange prop for field', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
   const button = screen.getByRole('button');
   expect(onOpenChange).not.toHaveBeenCalled();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 });
 
-test('selectedKey for controlled select field', () => {
+test('selectedKey for controlled select field', async () => {
   getComponent({ selectedKey: 'b' });
   const button = screen.getByRole('button');
   expect(button).toHaveTextContent('Select');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryAllByRole('option')[0]).not.toHaveClass('is-selected');
   expect(screen.queryAllByRole('option')[1]).toHaveClass('is-selected');
   expect(screen.queryAllByRole('option')[2]).not.toHaveClass('is-selected');

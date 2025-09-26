@@ -48,26 +48,26 @@ describe('ListItem', () => {
       onHoverTest = jest.fn();
     });
 
-    test('it calls the onHoverChange callback', () => {
+    test('it calls the onHoverChange callback', async () => {
       getComponent({ onHoverChange: onHoverTest });
 
-      userEvent.hover(screen.getByTestId(TEST_ID));
+      await userEvent.hover(screen.getByTestId(TEST_ID));
       expect(onHoverTest).toHaveBeenCalled();
     });
 
-    test('it calls the onHoverStart callback', () => {
+    test('it calls the onHoverStart callback', async () => {
       getComponent({ onHoverStart: onHoverTest });
 
-      userEvent.hover(screen.getByTestId(TEST_ID));
+      await userEvent.hover(screen.getByTestId(TEST_ID));
       expect(onHoverTest).toHaveBeenCalled();
     });
 
-    test('it calls the onHoverEnd callback when unhovered', () => {
+    test('it calls the onHoverEnd callback when unhovered', async () => {
       getComponent({ onHoverEnd: onHoverTest });
 
       const listItem = screen.getByTestId(TEST_ID);
-      userEvent.hover(listItem);
-      userEvent.unhover(listItem);
+      await userEvent.hover(listItem);
+      await userEvent.unhover(listItem);
 
       expect(onHoverTest).toHaveBeenCalled();
     });

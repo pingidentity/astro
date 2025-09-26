@@ -291,14 +291,14 @@ test('TreeView component does load', () => {
   expect(element).toBeInTheDocument();
 });
 
-test('Can select an Item using the mouse', () => {
+test('Can select an Item using the mouse', async () => {
   render(<TreeViewComponent data={data} />);
   const element = screen.queryByRole('treegrid');
   expect(element).toBeInTheDocument();
 
   const peopleElement = screen.queryByText('Single Item');
   expect(peopleElement).not.toHaveClass('is-selected');
-  userEvent.click(peopleElement);
+  await userEvent.click(peopleElement);
   expect(peopleElement).toHaveClass('is-selected');
   fireEvent.click(peopleElement);
   expect(peopleElement).not.toHaveClass('is-selected');
@@ -317,7 +317,7 @@ test('Renders both Sections and Items', () => {
   expect(allListItems).toHaveLength(3);
 });
 
-test('Can expand an Item using the mouse', () => {
+test('Can expand an Item using the mouse', async () => {
   render(<TreeViewComponent data={data} />);
 
   // The children of collapsed sections will not
@@ -327,31 +327,31 @@ test('Can expand an Item using the mouse', () => {
   // Clicking the dropdown icon, renders the children
   // of the collapsed section.
   const buttons = screen.queryAllByRole('button');
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
   expect(screen.queryByText(data[0].items[0].title)).toBeInTheDocument();
 });
 
-test('Focus moves using keyboard', () => {
+test('Focus moves using keyboard', async () => {
   render(<TreeViewComponent data={data} />);
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByText('Policies')).toHaveClass('is-focused');
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByText('Policies')).not.toHaveClass('is-focused');
   expect(screen.queryAllByRole('button')[0]).toHaveClass('is-focused');
 });
 
-test('onExpandedChange change prop calls when used', () => {
+test('onExpandedChange change prop calls when used', async () => {
   const onPress = jest.fn();
   render(<TreeViewComponent data={data} onExpandedChange={onPress} />);
   expect(onPress).not.toHaveBeenCalled();
 
   const buttons = screen.queryAllByRole('button');
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
 
   expect(onPress).toHaveBeenCalled();
 });
 
-test('disabledKeys prop disables items in the tree -- rendering them unclickable', () => {
+test('disabledKeys prop disables items in the tree -- rendering them unclickable', async () => {
   render(<TreeViewComponent data={data} disabledKeys={['Single Item']} />);
 
   const listItems = screen.queryAllByRole('row');
@@ -361,7 +361,7 @@ test('disabledKeys prop disables items in the tree -- rendering them unclickable
   expect(thisItem).toHaveAttribute('aria-disabled', 'true');
 
 
-  userEvent.click(thisItem);
+  await userEvent.click(thisItem);
 
   expect(thisItem).not.toHaveClass('is-selected');
   expect(thisItem).toHaveAttribute('aria-selected', 'false');
@@ -374,11 +374,11 @@ describe('loadingState', () => {
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
-  test('should render loader if tree item is expanded', () => {
+  test('should render loader if tree item is expanded', async () => {
     render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item1', loadingState: true }]} />);
 
     const buttons = screen.queryAllByRole('button');
-    userEvent.click(buttons[0]);
+    await userEvent.click(buttons[0]);
     const listItems = screen.getAllByRole('row');
     const thisItem = listItems[0];
     const loader = within(thisItem).getByRole('alert');
@@ -401,16 +401,16 @@ describe('loadingState', () => {
     render(<AsyncTreeViewComponent loadingNodes={[{ node: 'Item1', loadingState: true }, { node: 'Item2', loadingState: true }, { node: 'Item4', loadingState: false }]} />);
 
     const buttons = screen.queryAllByRole('button');
-    userEvent.click(buttons[0]);
-    userEvent.click(buttons[1]);
-    userEvent.click(buttons[2]);
+    await userEvent.click(buttons[0]);
+    await userEvent.click(buttons[1]);
+    await userEvent.click(buttons[2]);
 
     const loader = screen.getAllByRole('alert');
     expect(loader).toHaveLength(2);
   });
 });
 
-test('displays correct aria attributes', () => {
+test('displays correct aria attributes', async () => {
   render(<TreeViewComponent data={data} />);
 
   const listItems = screen.getAllByRole('row');
@@ -421,7 +421,7 @@ test('displays correct aria attributes', () => {
   expect(lastTreeItem).toHaveAttribute('aria-setsize', '3');
 
   const buttons = screen.queryAllByRole('button');
-  userEvent.click(buttons[1]);
+  await userEvent.click(buttons[1]);
 
   const expandedItems = screen.getAllByRole('row');
   const nestedItem = expandedItems[2];
@@ -453,12 +453,12 @@ test('onKeyDown calls passed in prop call back function', () => {
   expect(callback).toHaveBeenCalled();
 });
 
-test('onKeyDown does not call passed in prop call back function', () => {
+test('onKeyDown does not call passed in prop call back function', async () => {
   const callback = jest.fn();
   render(<TreeViewComponent data={data} />);
   const listItems = screen.queryAllByRole('row');
   const thisItem = listItems[2];
-  userEvent.type(thisItem, '{arrowleft}');
+  await userEvent.type(thisItem, '{arrowleft}');
 
   expect(callback).not.toHaveBeenCalled();
 });

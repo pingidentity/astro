@@ -25,25 +25,25 @@ test('a link is rendered', () => {
   expect(link).toBeInTheDocument();
 });
 
-test('link shows hover status', () => {
+test('link shows hover status', async () => {
   // Needs href to have a tabindex
   getComponent();
   const link = screen.getByTestId(testId);
   expect(link).not.toHaveClass('is-hovered');
-  userEvent.hover(link);
+  await userEvent.hover(link);
   expect(link).toHaveClass('is-hovered');
-  userEvent.unhover(link);
+  await userEvent.unhover(link);
 });
 
-test('link shows focus status', () => {
+test('link shows focus status', async () => {
   // Needs href to have a tabindex
   getComponent({ href: 'blah' });
   const link = screen.getByTestId(testId);
   expect(link).not.toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(link).toHaveFocus();
   expect(link).toHaveClass('is-focused');
-  userEvent.tab();
+  await userEvent.tab();
   expect(link).not.toHaveFocus();
   expect(link).not.toHaveClass('is-focused');
 });
@@ -55,11 +55,11 @@ test('link shows disabled status', () => {
   expect(link).toHaveClass('is-disabled');
 });
 
-test('link removes onPointer events when isSafariCompatible', () => {
+test('link removes onPointer events when isSafariCompatible', async () => {
   const onPointerEvents = jest.fn();
 
   getComponent({ href: 'blah', isSafariCompatible: true, onPointerDown: () => onPointerEvents, onPointerUp: () => onPointerEvents });
   const link = screen.getByTestId(testId);
-  userEvent.click(link);
+  await userEvent.click(link);
   expect(onPointerEvents).not.toHaveBeenCalled();
 });

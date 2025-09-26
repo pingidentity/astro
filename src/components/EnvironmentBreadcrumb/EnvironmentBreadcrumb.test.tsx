@@ -139,10 +139,10 @@ test('should display name', () => {
   expect(screen.getByText(testName)).toBeInTheDocument();
 });
 
-test('should spread props into popover container', () => {
+test('should spread props into popover container', async () => {
   getComponent({ ...popoverProps, isDefaultOpen: true });
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
 
   expect(screen.queryByTestId('popover-container')).toHaveStyle('max-width: 100px');
 });
@@ -152,21 +152,21 @@ test('should display selectedItem', () => {
   expect(screen.getByText(testSelectedItem)).toBeInTheDocument();
 });
 
-test('should call onNamePress when name pressed', () => {
+test('should call onNamePress when name pressed', async () => {
   const onNamePressMock = jest.fn();
   getComponent({ onNamePress: onNamePressMock });
   expect(onNamePressMock).not.toHaveBeenCalled();
 
-  userEvent.click(screen.getByText(testName));
+  await userEvent.click(screen.getByText(testName));
   expect(onNamePressMock).toHaveBeenCalledTimes(1);
 });
 
-test('should not call onNamePress when current env button pressed', () => {
+test('should not call onNamePress when current env button pressed', async () => {
   const onNamePressMock = jest.fn();
   getComponent({ onNamePress: onNamePressMock });
   expect(onNamePressMock).not.toHaveBeenCalled();
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(onNamePressMock).not.toHaveBeenCalled();
 });
 
@@ -175,26 +175,26 @@ test('should render items passed in props', async () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
 });
 
-test('should render items with sections passed in props', () => {
+test('should render items with sections passed in props', async () => {
   getSectionsComponent();
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(screen.getAllByRole('group')).toHaveLength(2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(6);
 });
 
-test('should render the separators', () => {
+test('should render the separators', async () => {
   getSectionsComponent();
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(screen.queryAllByRole('separator')).toHaveLength(3);
   const groups = screen.getAllByRole('group');
   expect(groups).toHaveLength(2);
@@ -212,49 +212,49 @@ test('should render the separators', () => {
   });
 });
 
-test('should call onSelectionChange when env clicked', () => {
+test('should call onSelectionChange when env clicked', async () => {
   const onSelectionChangeMock = jest.fn();
   getComponent({ onSelectionChange: onSelectionChangeMock });
   expect(onSelectionChangeMock).not.toHaveBeenCalled();
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(screen.getByText(items[0].name)).toBeInTheDocument();
-  userEvent.click(screen.getByText(items[0].name));
+  await userEvent.click(screen.getByText(items[0].name));
   expect(onSelectionChangeMock).toHaveBeenNthCalledWith(1, items[0].name);
 });
 
-test('should disable item if his hey passed in the disabledKeys prop', () => {
+test('should disable item if his hey passed in the disabledKeys prop', async () => {
   getComponent({ disabledKeys: ['a'] });
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(screen.getByText(items[0].name)).toHaveClass('is-disabled');
 });
 
-test('should call onPopoverOpen if it is passed in the props', () => {
+test('should call onPopoverOpen if it is passed in the props', async () => {
   const onPopoverOpenMock = jest.fn();
   getComponent({ onPopoverOpen: onPopoverOpenMock });
   expect(onPopoverOpenMock).not.toHaveBeenCalled();
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
 
   expect(onPopoverOpenMock).toHaveBeenCalled();
 });
 
-test('should call onPopoverClose if it is passed in the props', () => {
+test('should call onPopoverClose if it is passed in the props', async () => {
   const onPopoverCloseMock = jest.fn();
   getComponent({ onPopoverClose: onPopoverCloseMock });
   expect(onPopoverCloseMock).not.toHaveBeenCalled();
-  userEvent.click(screen.getByText(testSelectedItem));
-  userEvent.click(screen.getByText(testName));
+  await userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testName));
   expect(onPopoverCloseMock).toHaveBeenCalled();
 });
 
-test('should close popover when other component clicked', () => {
+test('should close popover when other component clicked', async () => {
   getComponent();
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
 
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
 
-  userEvent.click(screen.getByText(testName));
+  await userEvent.click(screen.getByText(testName));
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryAllByRole('option')).not.toHaveLength(3);
 });
@@ -265,30 +265,30 @@ test('should render current env node if passed in props', () => {
   expect(screen.getByTestId(testSelectedItemId)).toBeInTheDocument();
 });
 
-test('should show empty state in search if there are no results', () => {
+test('should show empty state in search if there are no results', async () => {
   const testEmptySearchText = 'testEmptySearchText';
   getComponent({ emptySearchText: testEmptySearchText });
-  userEvent.click(screen.getByText(testSelectedItem));
-  userEvent.type(screen.getByRole('searchbox'), '111');
+  await userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.type(screen.getByRole('searchbox'), '111');
   expect(screen.getByText(testEmptySearchText)).toBeInTheDocument();
 });
 
-test('should be open when isDefaultOpen is true', () => {
+test('should be open when isDefaultOpen is true', async () => {
   getComponent({ isDefaultOpen: true });
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryAllByRole('option')).not.toHaveLength(3);
 });
 
-test('should respond to onOpenChange', () => {
+test('should respond to onOpenChange', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
   expect(onOpenChange).not.toHaveBeenCalled();
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 });
 
@@ -299,34 +299,34 @@ test('should add data-ids to environment button and org button', () => {
   expect(screen.getByText(testName)).toHaveAttribute('data-id', breadCrumbDataIds.orgButton);
 });
 
-test('should add data-id to dropdown list', () => {
+test('should add data-id to dropdown list', async () => {
   getComponent();
 
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
 
   expect(screen.getByRole('listbox', { name: 'Items List' })).toHaveAttribute('data-id', breadCrumbDataIds.dropdownList);
 });
 
-test('should hide section title if no search results within it', () => {
+test('should hide section title if no search results within it', async () => {
   getSectionsComponent();
 
   // Open popover
-  userEvent.click(screen.getByText(testSelectedItem));
+  await userEvent.click(screen.getByText(testSelectedItem));
   // Search for option exclusive to only one section
-  userEvent.type(screen.getByRole('searchbox'), 'Bar1');
+  await userEvent.type(screen.getByRole('searchbox'), 'Bar1');
 
   // 'Heading 1' should not be rendered, but 'Heading 2' should be
   expect(screen.queryByText(itemsWithSections[0].name)).not.toBeInTheDocument();
   expect(screen.queryByText(itemsWithSections[1].name)).toBeInTheDocument();
 });
 
-test('should reflect the selection change when env is clicked', () => {
+test('should reflect the selection change when env is clicked', async () => {
   const onSelectionChangeMock = jest.fn();
   getSectionsComponent({ isDefaultOpen: true, onSelectionChange: onSelectionChangeMock });
 
   const itemOpt = itemsWithSections[1].options;
   if (Array.isArray(itemOpt)) {
-    userEvent.click(screen.getByText(itemOpt[1].name));
+    await userEvent.click(screen.getByText(itemOpt[1].name));
     expect(onSelectionChangeMock).toHaveBeenNthCalledWith(
       1,
       `${itemsWithSections[1].name}-${itemOpt[1].name}`,

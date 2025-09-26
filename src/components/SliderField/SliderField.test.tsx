@@ -118,13 +118,13 @@ describe('SliderField Component', () => {
     expect(onChangeEndMock).toHaveBeenCalled();
   });
 
-  test('handles keyboard functionality', () => {
+  test('handles keyboard functionality', async () => {
     const onChangeMock = jest.fn();
     getComponent({ label: 'Keyboard Slider', onChange: onChangeMock, defaultValue: 50, step: 10 });
 
     const slider = screen.getByRole('slider');
     let output = screen.getByTestId(outputId);
-    userEvent.tab();
+    await userEvent.tab();
 
     fireEvent.keyDown(slider, { key: 'ArrowRight' });
     fireEvent.keyUp(slider, { key: 'ArrowRight' });
@@ -151,7 +151,7 @@ describe('SliderField Component', () => {
     expect(output).toHaveTextContent('100');
   });
 
-  test('handles minValue and maxValue', () => {
+  test('handles minValue and maxValue', async () => {
     const onChangeMock = jest.fn();
     getComponent({
       label: 'Keyboard Slider',
@@ -164,7 +164,7 @@ describe('SliderField Component', () => {
 
     const slider = screen.getByRole('slider');
     let output = screen.getByTestId(outputId);
-    userEvent.tab();
+    await userEvent.tab();
 
     fireEvent.keyDown(slider, { key: 'Home' });
     fireEvent.keyUp(slider, { key: 'Home' });
@@ -179,13 +179,13 @@ describe('SliderField Component', () => {
     expect(output).toHaveTextContent('190');
   });
 
-  test('handles vertical slider keyboard functionality', () => {
+  test('handles vertical slider keyboard functionality', async () => {
     const onChangeMock = jest.fn();
     getComponent({ label: 'Vertical Slider', onChange: onChangeMock, defaultValue: 50, step: 10, orientation: 'vertical' });
 
     const slider = screen.getByRole('slider');
     let output = screen.getByTestId(outputId);
-    userEvent.tab();
+    await userEvent.tab();
 
     fireEvent.keyDown(slider, { key: 'ArrowUp' });
     fireEvent.keyUp(slider, { key: 'ArrowUp' });
@@ -218,7 +218,7 @@ describe('SliderField Component', () => {
     expect(onChangeMock).toHaveBeenCalledWith([30, 70]);
   });
 
-  test('adds custom class names to trackProps and activeTrackProps', () => {
+  test('adds custom class names to trackProps and activeTrackProps', async () => {
     const trackClassName = 'custom-track-class';
     const activeTrackClassName = 'custom-active-track-class';
 
@@ -232,7 +232,7 @@ describe('SliderField Component', () => {
     const activeTrack = screen.getByTestId(activeTrackId);
     const slider = screen.getByRole('slider');
 
-    userEvent.tab();
+    await userEvent.tab();
 
     fireEvent.keyDown(slider, { key: 'ArrowRight' });
     fireEvent.keyUp(slider, { key: 'ArrowRight' });
@@ -243,7 +243,7 @@ describe('SliderField Component', () => {
     expect(activeTrack).toHaveClass(activeTrackClassName);
   });
 
-  test('adds custom class names to labelProps and wrapperProps', () => {
+  test('adds custom class names to labelProps and wrapperProps', async () => {
     getComponent({
       labelProps,
       wrapperProps,
@@ -253,7 +253,7 @@ describe('SliderField Component', () => {
     const label = screen.getByText('Slider Field');
     const wrapper = screen.getByTestId(wrapperId);
 
-    userEvent.tab();
+    await userEvent.tab();
 
     expect(label).toBeInTheDocument();
     expect(label).toHaveClass(labelClassName);

@@ -47,17 +47,17 @@ test('shows badge when container is closed', () => {
   expect(badge).toBeInTheDocument();
 });
 
-test('updates aria label when button is clicked', () => {
+test('updates aria label when button is clicked', async () => {
   getComponent();
   const button = screen.getByTestId(collapsiblePanelButtonId);
   const container = screen.getByTestId(testId);
 
-  userEvent.click(button);
+  await userEvent.click(button);
 
   expect(button).toHaveAttribute('aria-label', 'Close filter menu?');
   expect(container).toHaveClass('is-open');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(button).toHaveAttribute('aria-label', 'Open filter menu?');
   expect(container).not.toHaveClass('is-open');
 });
@@ -69,14 +69,14 @@ test('shows children when isOpen is true', () => {
   expect(collapsiblePanel).toBeInTheDocument();
 });
 
-test('should hide children when pressing the escape key', () => {
+test('should hide children when pressing the escape key', async () => {
   getComponent();
   const button = screen.getByTestId(collapsiblePanelButtonId);
   const container = screen.getByTestId(testId);
 
-  userEvent.click(button);
+  await userEvent.click(button);
 
   expect(container).toHaveClass('is-open');
-  userEvent.type(button, '{esc}');
+  await userEvent.type(button, '{esc}');
   expect(container).not.toHaveClass('is-open');
 });

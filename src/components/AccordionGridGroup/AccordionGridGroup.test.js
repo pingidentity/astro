@@ -108,7 +108,7 @@ const getComponentWithTextFields = (props = {}) => render((
   </AccordionGridGroup>
 ));
 
-test('button press uses callback', () => {
+test('button press uses callback', async () => {
   const onPress = jest.fn();
   getComponent({ onSelectionChange: onPress });
   const buttons = screen.getAllByRole('gridcell');
@@ -117,20 +117,20 @@ test('button press uses callback', () => {
   expect(onPress).not.toHaveBeenCalled();
 
   // Hold down the button to see pressed styles
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(onPress).toHaveBeenCalled();
 });
 
-test('toggle accordion on mouse click', () => {
+test('toggle accordion on mouse click', async () => {
   getComponent();
   const buttons = screen.getAllByRole('gridcell');
   const selectedItem = buttons[0];
   const row = screen.getAllByRole('row');
   const selectedRow = row[0];
   expect(selectedRow).toHaveAttribute('aria-selected', 'false');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedRow).toHaveAttribute('aria-selected', 'true');
-  userEvent.click(selectedItem);
+  await userEvent.click(selectedItem);
   expect(selectedRow).toHaveAttribute('aria-selected', 'false');
 });
 
@@ -171,15 +171,15 @@ test('allows users to naviagte accordion headers through arrow keys', () => {
   expect(buttons[2]).toHaveFocus();
 });
 
-test('allows users to naviagte within rows using arrow keys', () => {
+test('allows users to naviagte within rows using arrow keys', async () => {
   getComponent();
   const buttons = screen.getAllByRole('gridcell');
   act(() => { buttons[0].focus(); });
   expect(buttons[0]).toHaveFocus();
 
-  userEvent.type(buttons[0], '{arrowright}{arrowright}{arrowright}');
+  await userEvent.type(buttons[0], '{arrowright}{arrowright}{arrowright}');
   expect(buttons[1]).toHaveFocus();
-  userEvent.type(buttons[1], '{arrowleft}');
+  await userEvent.type(buttons[1], '{arrowleft}');
   expect(buttons[0]).toHaveFocus();
 });
 
@@ -208,7 +208,7 @@ test('items do not automatically expand if wrapped in an open OverlayPanel', () 
   expect(selectedRow).not.toHaveAttribute('aria-selected', 'true');
 });
 
-test('adds focus to inputs', () => {
+test('adds focus to inputs', async () => {
   getComponentWithTextFields();
   const firstInput = screen.getAllByRole('gridcell')[0];
   const secondInput = screen.getAllByRole('gridcell')[1];
@@ -216,50 +216,50 @@ test('adds focus to inputs', () => {
   expect(firstInput).not.toHaveFocus();
   expect(secondInput).not.toHaveFocus();
 
-  userEvent.click(firstInput);
+  await userEvent.click(firstInput);
 
   expect(firstInput).toHaveFocus();
   expect(secondInput).not.toHaveFocus();
 
-  userEvent.click(secondInput);
+  await userEvent.click(secondInput);
 
   expect(firstInput).not.toHaveFocus();
   expect(secondInput).toHaveFocus();
 });
 
-test('adds focus to input on a single click after onBlur', () => {
+test('adds focus to input on a single click after onBlur', async () => {
   getComponentWithTextFields();
   const firstInput = screen.getAllByRole('gridcell')[0];
   const secondInput = screen.getAllByRole('gridcell')[1];
 
   expect(secondInput).not.toHaveFocus();
-  userEvent.click(firstInput);
-  userEvent.click(secondInput);
+  await userEvent.click(firstInput);
+  await userEvent.click(secondInput);
   act(() => {
     secondInput.blur();
   });
-  userEvent.click(secondInput);
+  await userEvent.click(secondInput);
   expect(secondInput).toHaveFocus();
 });
 
-test('native keyboard navigation mode toggle open/close item body', () => {
+test('native keyboard navigation mode toggle open/close item body', async () => {
   getComponentWithTextFields();
   const firstItemHeader = screen.getAllByRole('gridcell')[0];
 
   expect(firstItemHeader).not.toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(firstItemHeader).toHaveFocus();
 
   expect(firstItemHeader).not.toHaveClass('is-selected');
-  userEvent.type(firstItemHeader, '{Enter}');
+  await userEvent.type(firstItemHeader, '{Enter}');
   expect(firstItemHeader).toHaveClass('is-selected');
 
   const firstInput = screen.getByLabelText('label 1');
 
   expect(firstInput).not.toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(firstInput).toHaveFocus();
 
-  userEvent.type(firstInput, '{arrowup}');
+  await userEvent.type(firstInput, '{arrowup}');
   expect(firstInput).toHaveFocus();
 });

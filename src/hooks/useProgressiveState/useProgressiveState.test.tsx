@@ -26,23 +26,23 @@ const TestComponent = ({
 const getComponent = (props = {}) => render(<TestComponent {...props} />);
 
 describe('State Utils', () => {
-  it('should update the state when no prop is provided', () => {
+  it('should update the state when no prop is provided', async () => {
     getComponent();
     const component = screen.getByRole('button');
     expect(component).toHaveTextContent('0');
-    userEvent.click(component);
+    await userEvent.click(component);
     expect(component).toHaveTextContent('1');
-    userEvent.click(component);
+    await userEvent.click(component);
     expect(component).toHaveTextContent('2');
   });
 
-  it('should not update the state when a prop is provided', () => {
+  it('should not update the state when a prop is provided', async () => {
     getComponent({ count: 5 });
     const component = screen.getByRole('button');
     expect(component).toHaveTextContent('5');
-    userEvent.click(component);
+    await userEvent.click(component);
     expect(component).toHaveTextContent('5');
-    userEvent.click(component);
+    await userEvent.click(component);
     expect(component).toHaveTextContent('5');
   });
 

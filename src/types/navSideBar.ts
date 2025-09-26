@@ -1,6 +1,6 @@
 import { Key } from 'react';
-import { ThemeUICSSObject } from 'theme-ui';
 import type { FocusableElement } from '@react-types/shared';
+import { ThemeUICSSObject } from 'theme-ui';
 
 import { IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';

@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import {
-  type AriaPositionProps, type OverlayTriggerAria, type OverlayTriggerProps, FocusScope, mergeProps,
-  PositionAria,
+  type AriaPositionProps, FocusScope, mergeProps,
+  type OverlayTriggerAria, type OverlayTriggerProps, PositionAria,
   useOverlayPosition, useOverlayTrigger,
 } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
