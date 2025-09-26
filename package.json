@@ -32,8 +32,8 @@
     "lint": "eslint .",
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
-    "test": "vitest",
-    "test-watch": "vitest --watch"
+    "test": "vitest --run --detectOpenHandles",
+    "test-watch": "vitest"
   },
   "dependencies": {
     "@babel/runtime": "7.16.3",
@@ -218,8 +218,7 @@
     "ts-jest": "^29.0.0",
     "typescript": "~5.2.2",
     "use-resize-observer": "^8.0.0",
-    "whatwg-fetch": "^3.2.0",
-    "raf": "^3.4.0"
+    "whatwg-fetch": "^3.2.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",

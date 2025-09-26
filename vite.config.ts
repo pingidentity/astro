@@ -65,14 +65,13 @@ export default defineConfig({
    watch: false,
    globals: true,
    alias: {
-     jest: 'vi',
-     '\\.(css|scss)$': 'vi',
-     '\\.mdx$': 'vi',
-     '\\.svg': 'vi',
+    '^.+\\.(css|scss)$': path.resolve(__dirname,'__mocks__/styleMock.js'),
+    '^.+\\.mdx$': path.resolve(__dirname,'__mocks__/mdxMock.js'),
+    '\\.svg': path.resolve(__dirname,'__mocks__/svgrMock.js'),
    },
    environment: 'jsdom',
    css:true,
-   reporters: ['default'],
+   reporters: ['default', 'hanging-process'],
    setupFiles: [ 'src/utils/testUtils/setupTests.ts'],
    include: ['**/**/*.test.{js,ts,jsx,tsx}'],
    exclude: [

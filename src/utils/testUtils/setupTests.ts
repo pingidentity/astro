@@ -6,8 +6,9 @@ import { format } from 'util';
 import 'mutationobserver-shim';
 import 'whatwg-fetch';
 import 'regenerator-runtime';
-import { beforeAll, afterAll, vi } from 'vitest';
+import { afterEach, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest'
+import { cleanup } from '@testing-library/react';
 
 expect.extend(toHaveNoViolations);
 expect.extend(matchers);
@@ -27,3 +28,7 @@ global.console.error = (...args) => {
 };
 
 (globalThis as any).jest = vi;
+
+afterEach(() => {
+  cleanup();
+});

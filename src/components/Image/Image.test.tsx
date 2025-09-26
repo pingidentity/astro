@@ -34,10 +34,12 @@ universalComponentTests({
 
 let fallbackImageObj: UseFallbackImageProps | null = null;
 
-jest.mock('../../hooks/useFallbackImage', () => props => {
-  fallbackImageObj = { ...props };
-  return [];
-});
+vi.mock('../../hooks/useFallbackImage', () => ({
+  default: props => {
+    fallbackImageObj = { ...props };
+    return [];
+  },
+}));
 
 test('an image is rendered', () => {
   getComponent();

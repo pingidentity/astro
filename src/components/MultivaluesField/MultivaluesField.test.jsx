@@ -589,7 +589,7 @@ test('options can be selected via keyboard', () => {
 
   userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   expect(options[0]).toHaveClass('is-focused');
-  userEvent.type(options[0], '{enter}');
+  userEvent.type(options[0], '{enter}', { skipClick: true });
   expect(options[0]).not.toBeInTheDocument();
   const badge = screen.getByText(items[0].name);
   expect(badge).toBeInTheDocument();

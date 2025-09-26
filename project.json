@@ -34,8 +34,8 @@
      "executor": "@nx/vite:test",
      "outputs": ["{workspaceRoot}/coverage/libs/astro"],
      "options": {
+       "watch": false, 
        "config": "libs/astro/vite.config.ts",
-       "passWithNoTests": true,
        "reporters": ["default"]
      }
    },
