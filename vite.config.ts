@@ -72,7 +72,7 @@ export default defineConfig({
    environment: 'jsdom',
    css:true,
    isolate: true,
-  pool: 'forks',
+   pool: 'forks',
    reporters: ['default', 'hanging-process'],
    setupFiles: [ 'src/utils/testUtils/setupTests.ts'],
    include: ['**/**/*.test.{js,ts,jsx,tsx}'],
