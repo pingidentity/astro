@@ -32,8 +32,8 @@
     "lint": "eslint .",
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
-    "test": "vitest --run --detectOpenHandles",
-    "test-watch": "vitest"
+    "test": "vitest",
+    "test-watch": "vitest watch"
   },
   "dependencies": {
     "@babel/runtime": "7.16.3",

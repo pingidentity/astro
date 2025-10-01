@@ -71,6 +71,8 @@ export default defineConfig({
    },
    environment: 'jsdom',
    css:true,
+   isolate: true,
+  pool: 'forks',
    reporters: ['default', 'hanging-process'],
    setupFiles: [ 'src/utils/testUtils/setupTests.ts'],
    include: ['**/**/*.test.{js,ts,jsx,tsx}'],
@@ -96,7 +98,7 @@ export default defineConfig({
      include: ['src/**/*.{js,jsx,ts,tsx}'],
      reportsDirectory: '../../coverage/libs/astro',
      provider: 'v8',
-     reporter: ['text', 'json', 'html'],
+     reporter: ['html'],
      exclude: [
        'src/index.ts',
        'src/hooks/index.ts',
