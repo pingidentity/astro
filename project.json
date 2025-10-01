@@ -39,9 +39,10 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
+     "executor": "@nx/eslint:lint",
+      "outputs": ["{workspaceRoot}/lint/libs/astro"],
       "options": {
-        "lintFilePatterns": ["libs/astro/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/astro/**/*.ts", "libs/astro/**/*.tsx"]
       }
     }
   }

@@ -370,8 +370,8 @@ export const EditRow = props => {
     index,
     leftValue,
     rightValue,
-    updateRow = () =>  console.log("update row"),
-    removeRow = () => console.log("remove row"),
+    updateRow = () => console.log('update row'),
+    removeRow = () => console.log('remove row'),
   } = props;
 
   const leftItems = [

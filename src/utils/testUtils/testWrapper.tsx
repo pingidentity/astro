@@ -1,6 +1,6 @@
+import React, { ReactNode } from 'react';
 import { css, Global, Theme } from '@emotion/react';
 import { render, RenderOptions } from '@testing-library/react';
-import React, { ReactNode } from 'react';
 import { ThemeProvider } from 'theme-ui';
 
 import theme from '../../styles/theme';

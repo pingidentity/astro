@@ -11,7 +11,7 @@ const reactHooks = require('eslint-plugin-react-hooks');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
 const testingLibrary = require('eslint-plugin-testing-library');
 const tseslint = require('typescript-eslint');
-const baseConfig = require('../../eslint.config.js');
+const baseConfig = require('../../eslint.config');
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -130,13 +130,30 @@ module.exports = [
       ],
       'no-promise-executor-return': 'off',
       'react/jsx-no-constructed-context-values': 'warn',
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
       'no-unused-vars': 'off',
-
+      'simple-import-sort/exports': 'error',
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            // Packages `react` related packages come first.
+            ['^react', '^@?\\w'],
+            // Internal packages.
+            ['^(@|components)(/.*|$)'],
+            // Side effect imports.
+            ['^\\u0000'],
+            // Parent imports. Put `..` last.
+            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+            // Other relative imports. Put same-folder imports and `.` last.
+            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+            // Style imports.
+            ['^.+\\.?(css)$'],
+          ],
+        },
+      ],
     },
-
   },
+
   {
     files: ['libs/astro/**/*.ts', 'libs/astro/**/*.tsx', 'libs/astro/**/*.d.ts'],
     languageOptions: {
@@ -165,38 +182,6 @@ module.exports = [
     },
     rules: {
       'react/prop-types': 'off',
-    },
-  },
-  {
-    files: [
-      'libs/astro/**/*.js',
-      'libs/astro/**/*.jsx',
-      'libs/astro/**/*.ts',
-      'libs/astro/**/*.tsx',
-    ],
-    plugins: {
-      'simple-import-sort': simpleImportSort,
-    },
-    rules: {
-      'simple-import-sort/imports': [
-        'error',
-        {
-          groups: [
-            // Packages `react` related packages come first.
-            ['^react', '^@?\\w'],
-            // Internal packages.
-            ['^(@|components)(/.*|$)'],
-            // Side effect imports.
-            ['^\\u0000'],
-            // Parent imports. Put `..` last.
-            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-            // Other relative imports. Put same-folder imports and `.` last.
-            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-            // Style imports.
-            ['^.+\\.?(css)$'],
-          ],
-        },
-      ],
     },
   },
 ];
