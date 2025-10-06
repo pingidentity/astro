@@ -39,17 +39,17 @@ module.exports = [
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: babelParser,
-      globals: Object.fromEntries(
-        Object.entries({
-          ...globals.browser,
+      globals: {
           ...globals.jest,
           ...globals.jasmine,
+          ...globals.node,
+          ...globals.browser,
           React: 'readonly',
           NodeJS: 'readonly',
           VoidFunction: 'readonly',
           FrameRequestCallback: 'readonly',
-        }).map(([key, value]) => [key.trim(), value]),
-      ),
+          HTMLOrSVGElement: 'readonly',
+      },
       parserOptions: {
         requireConfigFile: false,
         babelOptions: {
@@ -68,22 +68,12 @@ module.exports = [
       'react-hooks': reactHooks,
       'simple-import-sort': simpleImportSort,
     },
-    settings: {
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
-      },
-    },
 
     rules: {
       '@emotion/pkg-renaming': 'error',
       'arrow-body-style': 'off',
       'arrow-parens': ['error', 'as-needed'],
       'import/extensions': 'off',
-      'import/no-extraneous-dependencies': ['error', {
-        devDependencies: true,
-      }],
       'import/prefer-default-export': 'off',
       'jsx-a11y/label-has-for': 'off',
       'jsx-a11y/label-has-associated-control': [2, {
@@ -151,6 +141,10 @@ module.exports = [
           ],
         },
       ],
+      "import/no-extraneous-dependencies": ["error", {
+        devDependencies: true,
+        packageDir: [__dirname, './'],
+      }]
     },
   },
 

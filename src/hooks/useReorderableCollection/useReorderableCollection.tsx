@@ -85,7 +85,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
     dropState,
     ref,
   );
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useDraggableCollection(props, dragState as any, ref);
   return {
     collectionProps,

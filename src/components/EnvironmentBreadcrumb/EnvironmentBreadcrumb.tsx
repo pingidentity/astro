@@ -133,7 +133,9 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
       children: children!,
       disabledKeys: imperativeDisabledKeys,
       items,
-      filter: imperativeItemsFilter || filterNodesWithChildren as (nodes: Iterable<Node<EnvironmentItemProps>>) => Iterable<Node<EnvironmentItemProps>>,
+      filter: imperativeItemsFilter || filterNodesWithChildren as (
+        nodes: Iterable<Node<EnvironmentItemProps>>
+      ) => Iterable<Node<EnvironmentItemProps>>,
       onSelectionChange: handleSelectionChange,
       selectedKeys,
       selectionMode: 'single',

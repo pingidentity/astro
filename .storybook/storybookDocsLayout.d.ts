@@ -1,2 +1,4 @@
+import type { JSX } from 'react';
+
 export default DocsLayout;
-declare function DocsLayout(): any;
+declare function DocsLayout(): JSX.Element;

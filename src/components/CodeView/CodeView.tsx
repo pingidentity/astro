@@ -85,9 +85,12 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
                     {i + 1}
                   </Box>
                 )}
-                {line.map((token, key) => {
-                  const { key: tokenKey, ...otherProps } = getTokenProps({ token, key });
-                  return <span {...otherProps} key={key || tokenKey} />;
+                {line.map((token, tokenIndex) => {
+                  const {
+                    key: tokenKey,
+                    ...otherProps
+                  } = getTokenProps({ token, key: tokenIndex });
+                  return <span {...otherProps} key={tokenIndex || tokenKey} />;
                 })}
               </Box>
             );
