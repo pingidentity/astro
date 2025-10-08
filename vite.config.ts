@@ -76,24 +76,6 @@ export default defineConfig({
    reporters: ['default', 'hanging-process'],
    setupFiles: [ 'src/utils/testUtils/setupTests.ts'],
    include: ['**/**/*.test.{js,ts,jsx,tsx}'],
-   exclude: [
-     'node_modules',
-     '.yarn',
-     'lib',
-     'dist',
-     '.storybook',
-     '**/*.story.*',
-     '**/*.stories.*',
-     'styles',
-     '**/index.ts',
-     'src/styles',
-     '**/*.styles.js',
-     '**/utils/**',
-     '**/context/**',
-     '**/hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.ts',
-     '**/components/AstroProvider/AstroProvider.js'
-   ],
-  
    coverage: {
      include: ['src/**/*.{js,jsx,ts,tsx}'],
      reportsDirectory: '../../coverage/libs/astro',
@@ -124,11 +106,8 @@ export default defineConfig({
        '**/styles/**',
        'src/utils/**',
        '**/utils/**',
-       'src/hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.ts',
-       'src/components/AstroProvider/AstroProvider.js',
        '.storybook/**',
      ]
    },
  },
-
 });

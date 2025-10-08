@@ -2,12 +2,11 @@ import { matchers } from '@emotion/jest';
 import { toHaveNoViolations } from 'jest-axe';
 import { format } from 'util';
 
-// import '@testing-library/jest-dom/extend-expect';
 import 'mutationobserver-shim';
 import 'whatwg-fetch';
 import 'regenerator-runtime';
 import { afterEach, vi } from 'vitest';
-import '@testing-library/jest-dom/vitest'
+import '@testing-library/jest-dom'
 import { cleanup } from '@testing-library/react';
 
 expect.extend(toHaveNoViolations);

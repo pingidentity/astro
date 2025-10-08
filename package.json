@@ -25,15 +25,15 @@
     "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files",
     "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/ --extensions \".ts,.tsx,.js\" --copy-files",
     "chromatic": "npx chromatic",
-    "coverage": "npm test --coverage",
-    "coverage-ci": "npm test --coverage --ci",
+    "coverage": "npx nx test --coverage",
+    "coverage-ci": "npx nx test --coverage --ci",
     "coverage-jenkins": "npm coverage-ci --maxWorkers=25%",
     "demo": "rm -rf ./demo && storybook build -o demo",
     "lint": "eslint .",
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
     "test": "vitest",
-    "test-watch": "vitest watch"
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@babel/runtime": "7.16.3",
