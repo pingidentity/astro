@@ -44,5 +44,6 @@
         "lintFilePatterns": ["libs/astro/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  }
+  },
+  "publish": false
 }
