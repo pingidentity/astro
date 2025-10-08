@@ -27,10 +27,12 @@ const getComponent = (props = {}) => render((
 ));
 
 let fallbackImageObj = null;
-jest.mock('../../hooks/useFallbackImage', () => props => {
-  fallbackImageObj = { ...props };
-  return [];
-});
+vi.mock('../../hooks/useFallbackImage', () => ({
+  default: props => {
+    fallbackImageObj = { ...props };
+    return [];
+  },
+}));
 
 // Needs to be added to each components test file
 universalComponentTests({

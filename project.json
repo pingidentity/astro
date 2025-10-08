@@ -31,13 +31,16 @@
       }
     },
     "test": {
-     "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/astro"],
-      "options": {
-        "jestConfig": "libs/astro/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
+     "executor": "@nx/vite:test",
+     "outputs": ["{workspaceRoot}/coverage/libs/astro"],
+     "cache": true,
+     "options": {
+       "watch": false, 
+       "config": "libs/astro/vite.config.ts",
+       "reporters": ["default"]
+     }
+   },
+
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {

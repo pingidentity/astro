@@ -68,13 +68,13 @@ describe('Skeleton component', () => {
   test('when variant is passed', () => {
     getComponent({ width: '40px', height: '40px', variant: 'circular' });
     const skeleton = screen.getByTestId(testId);
-    expect(skeleton).toHaveStyle('border-radius: 50%');
+    expect(skeleton).toHaveClass('is-circular');
   });
 
   test('when style object is passed', () => {
-    getComponent({ width: '40px', height: '40px', variant: 'circular', sx: { bg: 'red' } });
+    getComponent({ width: '40px', height: '40px', variant: 'circular', sx: { backgroundColor: 'rgb(255, 0, 0)' } });
     const skeleton = screen.getByTestId(testId);
-    expect(skeleton).toHaveStyle('background: red');
+    expect(skeleton).toHaveStyle('background: rgb(255, 0, 0)');
   });
 
   test('when fontSize is passed', () => {

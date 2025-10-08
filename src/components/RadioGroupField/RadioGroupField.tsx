@@ -8,7 +8,7 @@ import { usePropWarning, useStatusClasses } from '../../hooks';
 import { RadioGroupFieldProps } from '../../types/radioGroupField';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-import { RadioContext } from '../RadioField';
+import { RadioContext } from '../../context/RadioContext';
 
 const displayName = 'RadioGroupField';
 
