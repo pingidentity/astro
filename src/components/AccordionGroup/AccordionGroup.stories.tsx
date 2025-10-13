@@ -17,7 +17,7 @@ import ItemProps from '../../types/item';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { validHeadingTags } from '../AccordionItem/AccordionItem';
 
-import AccordionReadme from './AccordionGroup';
+import AccordionReadme from './AccordionGroup.mdx';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },

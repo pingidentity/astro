@@ -40,15 +40,16 @@ module.exports = [
       sourceType: 'module',
       parser: babelParser,
       globals: {
-          ...globals.jest,
-          ...globals.jasmine,
-          ...globals.node,
-          ...globals.browser,
-          React: 'readonly',
-          NodeJS: 'readonly',
-          VoidFunction: 'readonly',
-          FrameRequestCallback: 'readonly',
-          HTMLOrSVGElement: 'readonly',
+        ...globals.jest,
+        ...globals.jasmine,
+        ...globals.node,
+        ...globals.browser,
+        React: 'readonly',
+        NodeJS: 'readonly',
+        VoidFunction: 'readonly',
+        FrameRequestCallback: 'readonly',
+        HTMLOrSVGElement: 'readonly',
+        JSX: 'readonly',
       },
       parserOptions: {
         requireConfigFile: false,
@@ -141,10 +142,10 @@ module.exports = [
           ],
         },
       ],
-      "import/no-extraneous-dependencies": ["error", {
+      'import/no-extraneous-dependencies': ['error', {
         devDependencies: true,
         packageDir: [__dirname, './'],
-      }]
+      }],
     },
   },
 
