@@ -125,65 +125,65 @@ describe('Pagination Component', () => {
     expect(changeFunction).not.toHaveBeenCalled();
   });
 
-  it('should call nextButtonProps.onClick when next button is clicked', () => {
+  it('should call nextButtonProps.onClick when next button is clicked', async () => {
     getComponent();
     const nextButton = screen.getByTestId(nextButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(() => {
-      userEvent.click(nextButton);
+    await act(async () => {
+      await userEvent.click(nextButton);
     });
     expect(changeFunction).toHaveBeenCalledTimes(1);
   });
 
-  it('should not call change function when prev button is clicked, on first page', () => {
+  it('should not call change function when prev button is clicked, on first page', async () => {
     getComponent();
     const previousButton = screen.getByTestId(prevButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(() => {
-      userEvent.click(previousButton);
+    await act(async () => {
+      await userEvent.click(previousButton);
     });
     expect(changeFunction).not.toHaveBeenCalled();
   });
 
-  it('should not call change function when next button is clicked, on last page', () => {
+  it('should not call change function when next button is clicked, on last page', async () => {
     getComponent({ currentPageIndex: 24 });
     const nextButton = screen.getByTestId(nextButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(() => {
-      userEvent.click(nextButton);
+    await act(async () => {
+      await userEvent.click(nextButton);
     });
     expect(changeFunction).not.toHaveBeenCalled();
   });
 
-  it('should call change function when prev button is clicked', () => {
+  it('should call change function when prev button is clicked', async () => {
     getComponent({ currentPageIndex: 24 });
     const previousButton = screen.getByTestId(prevButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(() => {
-      userEvent.click(previousButton);
+    await act(async () => {
+      await userEvent.click(previousButton);
     });
     expect(changeFunction).toHaveBeenCalledTimes(1);
   });
 
-  it('should change offset using keyboard', () => {
+  it('should change offset using keyboard', async () => {
     getComponent();
 
     const menuButton = screen.getByTestId(offsetButtonId);
 
     // Focus on the next button and press Enter
-    userEvent.tab();
+    await userEvent.tab();
     expect(menuButton).toHaveFocus();
-    userEvent.type(menuButton, '{enter}');
+    await userEvent.type(menuButton, '{enter}');
     // fireEvent.keyDown(menuButton, { key: 'Enter', code: 13 });
     // fireEvent.keyUp(menuButton, { key: 'Enter', code: 13 });
     const menuItem = screen.getByText('Show 25 Results');
     expect(menuItem).toBeInTheDocument();
     const menu = screen.getByRole('menu');
     const menutItem = screen.queryAllByRole('menuitemradio')[1];
-    
-    
-    userEvent.type(menu, '{arrowdown}');
-    userEvent.type(menutItem, '{enter}');
+
+
+    await userEvent.type(menu, '{arrowdown}');
+    await userEvent.type(menutItem, '{enter}');
 
     // fireEvent.keyDown(menu, { key: 'ArrowDown' });
     // fireEvent.keyUp(menu, { key: 'ArrowDown' });
@@ -193,7 +193,7 @@ describe('Pagination Component', () => {
     expect(screen.getByText('1-25 of 250')).toBeInTheDocument();
   });
 
-  it('should navigate using keyboard keys', () => {
+  it('should navigate using keyboard keys', async () => {
     getComponent();
 
     const nextButton = screen.getByTestId(nextButtonId);
@@ -201,27 +201,27 @@ describe('Pagination Component', () => {
     const menuButton = screen.getByTestId(offsetButtonId);
 
     // Focus on the next button and press Enter
-    userEvent.tab();
+    await userEvent.tab();
     expect(menuButton).toHaveFocus();
-    userEvent.tab();
+    await userEvent.tab();
     expect(nextButton).toHaveFocus();
     fireEvent.keyDown(nextButton, { key: 'Enter', code: 13 });
     fireEvent.keyUp(nextButton, { key: 'Enter', code: 13 });
 
     expect(screen.getByText('11-20 of 250')).toBeInTheDocument();
 
-    userEvent.tab({ shift: true });
+    await userEvent.tab({ shift: true });
     expect(previousButton).toHaveFocus();
   });
 
-  it('clicking the next button changes the rendered page index string', () => {
+  it('clicking the next button changes the rendered page index string', async () => {
     render(<CustomComponents />);
 
     const nextButton = screen.getByTestId(nextButtonId);
 
     expect(screen.getByText('Current Page Index: 0')).toBeInTheDocument();
 
-    userEvent.click(nextButton);
+    await userEvent.click(nextButton);
     expect(screen.getByText('Current Page Index: 1')).toBeInTheDocument();
   });
 

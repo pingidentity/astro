@@ -23,7 +23,7 @@ const getComponent = (props: CalendarProps = {}, { renderFn = render } = {}) => 
 // Needs to be added to each components test file.
 universalComponentTests({ renderComponent: props => <Calendar {...props} /> });
 
-test('renders calendar component', () => {
+test('renders calendar component', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const heading = screen.queryByRole('heading');
@@ -52,11 +52,11 @@ test('renders calendar component', () => {
   const hiddenButton = screen.queryAllByRole('button').filter(button => button.getAttribute('aria-label') === 'Next')[0];
   expect(hiddenButton).toHaveAttribute('tabindex', '-1');
 
-  userEvent.click(hiddenButton);
+  await userEvent.click(hiddenButton);
   expect(heading).toHaveTextContent('September 2022');
 });
 
-test('should able to navigate to previous and next year and month', () => {
+test('should able to navigate to previous and next year and month', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const buttons = screen.queryAllByRole('button');
@@ -65,23 +65,23 @@ test('should able to navigate to previous and next year and month', () => {
   expect(heading).toHaveTextContent('August 2022');
 
   // navigation to previous year
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
   expect(heading).toHaveTextContent('August 2021');
 
   // navigation to next year
-  userEvent.click(buttons[3]);
+  await userEvent.click(buttons[3]);
   expect(heading).toHaveTextContent('August 2022');
 
   // navigation to previous month
-  userEvent.click(buttons[1]);
+  await userEvent.click(buttons[1]);
   expect(heading).toHaveTextContent('July 2022');
 
   // navigation to next month
-  userEvent.click(buttons[2]);
+  await userEvent.click(buttons[2]);
   expect(heading).toHaveTextContent('August 2022');
 });
 
-test('should render disabled previous, disabled next and current date gridcell for a month', () => {
+test('should render disabled previous, disabled next and current date gridcell for a month', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   expect(screen.queryAllByRole('gridcell')).toHaveLength(35);
@@ -95,7 +95,7 @@ test('should render disabled previous, disabled next and current date gridcell f
   const nextDate = dates[1];
 
   expect(currentDate).toHaveAttribute('aria-label', 'Monday, August 1, 2022');
-  userEvent.click(currentDate);
+  await userEvent.click(currentDate);
   expect(currentDate).toHaveClass('is-selected');
 
   expect(nextDate).toHaveAttribute('aria-label', 'Thursday, September 1, 2022');
@@ -109,30 +109,30 @@ test('when a date is selected it should have the class is-selected with controll
   expect(selectedDate).toHaveClass('is-selected');
 });
 
-test('should be able to select dates', () => {
+test('should be able to select dates', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const dateButtons = screen.queryAllByRole('button');
   expect(dateButtons).toHaveLength(36);
   expect(dateButtons[4]).toHaveAttribute('aria-label', 'Monday, August 1, 2022');
-  userEvent.click(dateButtons[4]);
+  await userEvent.click(dateButtons[4]);
   expect(dateButtons[4]).toHaveClass('is-selected');
 });
 
-test('should be able to navigate to previous month dates without selection', () => {
+test('should be able to navigate to previous month dates without selection', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const disabledGridCells = screen.queryAllByRole('gridcell').filter(cell => cell.getAttribute('aria-disabled') !== 'false');
   const previousDate = disabledGridCells[0];
 
   expect(within(previousDate).getByText(31)).toHaveAttribute('aria-label', 'Sunday, July 31, 2022');
-  userEvent.click(previousDate);
+  await userEvent.click(previousDate);
 
   const selectedMonth = screen.queryByRole('grid');
   expect(selectedMonth).toHaveAttribute('aria-label', 'July 2022');
 });
 
-test('should be able to navigate to next month dates without selection', () => {
+test('should be able to navigate to next month dates without selection', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const disabledGridCells = screen.queryAllByRole('gridcell').filter(cell => cell.getAttribute('aria-disabled') !== 'false');
@@ -140,7 +140,7 @@ test('should be able to navigate to next month dates without selection', () => {
   const NextDate = disabledGridCells[34];
 
   expect(within(NextDate).getByText(3)).toHaveAttribute('aria-label', 'Saturday, September 3, 2022');
-  userEvent.click(NextDate);
+  await userEvent.click(NextDate);
 
   const selectedMonth = screen.queryByRole('grid');
   expect(selectedMonth).toHaveAttribute('aria-label', 'September 2022');
@@ -188,59 +188,59 @@ test('allows users to select and navigate through calendar items', () => {
   expect(buttons[4]).toHaveFocus();
 });
 
-test('readonly calendar', () => {
+test('readonly calendar', async () => {
   getComponent({ isReadOnly: true });
 
   expect(screen.queryByRole('grid')).toHaveAttribute('aria-readonly', 'true');
   const dateButtons = screen.queryAllByRole('button');
 
-  userEvent.click(dateButtons[4]);
+  await userEvent.click(dateButtons[4]);
   expect(dateButtons[4]).not.toHaveClass('is-selected');
 });
 
-test('disabled calendar date', () => {
+test('disabled calendar date', async () => {
   getComponent({ isDisabled: true });
 
   expect(screen.queryByRole('grid')).toHaveAttribute('aria-disabled', 'true');
   const dateButtons = screen.queryAllByRole('button');
-  userEvent.click(dateButtons[4]);
+  await userEvent.click(dateButtons[4]);
   expect(dateButtons[4]).toHaveAttribute('aria-disabled', 'true');
   expect(dateButtons[4]).toHaveClass('is-disabled');
 });
 
-test('dates before minimum date cannot be selected', () => {
+test('dates before minimum date cannot be selected', async () => {
   const onChange = jest.fn();
   getComponent({ onChange, minValue: '2022-08-02', defaultValue: '2022-08-10' });
 
   const dateButtons = screen.queryAllByRole('button');
 
-  userEvent.click(dateButtons[1]);
+  await userEvent.click(dateButtons[1]);
   expect(screen.queryByRole('heading')).toHaveTextContent('August 2022');
 
-  userEvent.click(dateButtons[2]);
+  await userEvent.click(dateButtons[2]);
   expect(dateButtons[3]).not.toHaveClass('is-selected');
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('dates past maximum date cannot be selected', () => {
+test('dates past maximum date cannot be selected', async () => {
   const onChange = jest.fn();
   getComponent({ onChange, maxValue: '2022-08-04', defaultValue: '2022-08-03' });
 
   const dateButtons = screen.queryAllByRole('button');
 
-  userEvent.click(dateButtons[2]);
+  await userEvent.click(dateButtons[2]);
   expect(screen.queryByRole('heading')).toHaveTextContent('August 2022');
 
-  userEvent.click(dateButtons[10]);
+  await userEvent.click(dateButtons[10]);
   expect(dateButtons[10]).not.toHaveClass('is-selected');
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('unavailable dates cannot be picked', () => {
+test('unavailable dates cannot be picked', async () => {
   getComponent({ isDateUnavailable, defaultValue: '2022-08-05' });
 
   const dateButtons = screen.queryAllByRole('button');
-  userEvent.click(dateButtons[4]);
+  await userEvent.click(dateButtons[4]);
   expect(dateButtons[4]).not.toHaveClass('is-selected');
 
   const gridCells = screen.getAllByRole('gridcell').filter(cell => cell.getAttribute('aria-disabled') !== 'true');
@@ -250,7 +250,7 @@ test('unavailable dates cannot be picked', () => {
   expect(cells.length).toBe(9);
 
   const disabledDate = screen.getByText(16);
-  userEvent.click(disabledDate);
+  await userEvent.click(disabledDate);
   expect(disabledDate).toHaveAttribute('aria-disabled', 'true');
   expect(disabledDate).not.toHaveClass('is-selected');
   expect(disabledDate).toHaveClass('is-unavailable');

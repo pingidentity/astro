@@ -31,16 +31,16 @@ test('input type as password', () => {
   expect(input).toHaveAttribute('type', 'password');
 });
 
-test('maxlength field with a set maxlength', () => {
+test('maxlength field with a set maxlength', async () => {
   getComponent({ maxLength: 3 });
   const input = screen.getByTestId(testId) as HTMLInputElement;
-  userEvent.type(input, 'banana');
+  await userEvent.type(input, 'banana');
   expect(input.value.length).toBe(3);
 });
 
-test('maxlength field is not set as undefined', () => {
+test('maxlength field is not set as undefined', async () => {
   getComponent({ maxLength: undefined });
   const input = screen.getByTestId(testId) as HTMLInputElement;
-  userEvent.type(input, 'banana');
+  await userEvent.type(input, 'banana');
   expect(input.value.length).toBe(6);
 });

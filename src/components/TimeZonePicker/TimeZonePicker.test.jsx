@@ -54,27 +54,27 @@ test('renders ComboBoxField component', () => {
   expect(button).toBeInTheDocument();
 });
 
-test('search is working correctly', () => {
+test('search is working correctly', async () => {
   getComponent();
   const input = screen.queryByRole('combobox');
-  userEvent.type(input, testTimeZoneApia);
+  await userEvent.type(input, testTimeZoneApia);
   expect(screen.getByText(testTimeZoneApia)).toBeInTheDocument();
 });
 
-test('custom timezone can be added', () => {
+test('custom timezone can be added', async () => {
   getComponent({
     additionalTimeZones: { '(GMT+02:00) Africa/Juba': testTimeZoneJuba },
   });
   const input = screen.queryByRole('combobox');
-  userEvent.type(input, testTimeZoneJuba);
+  await userEvent.type(input, testTimeZoneJuba);
   expect(screen.getByText(testTimeZoneJuba)).toBeInTheDocument();
 });
 
-test('shows custom empty search state text when no items are found', () => {
+test('shows custom empty search state text when no items are found', async () => {
   const testEmptyText = 'test empty text';
   getComponent({ emptySearchText: testEmptyText });
   const input = screen.queryByRole('combobox');
-  userEvent.type(input, 'awdasrf213');
+  await userEvent.type(input, 'awdasrf213');
   expect(screen.getByText(testEmptyText)).toBeInTheDocument();
 });
 

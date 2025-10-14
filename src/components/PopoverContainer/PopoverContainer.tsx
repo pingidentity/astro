@@ -27,7 +27,7 @@ const PopoverContainer = forwardRef<HTMLElement, PopoverContainerProps>((props, 
   );
 });
 
-// eslint-disable-next-line max-len
+
 export const PopoverWrapper = forwardRef<HTMLElement, PopoverWrapperProps>((props, ref) => {
   const {
     children,

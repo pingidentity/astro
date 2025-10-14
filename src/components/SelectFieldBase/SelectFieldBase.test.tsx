@@ -96,12 +96,11 @@ test('default select field', () => {
   expect(visibleLabel).toBeInTheDocument();
 
   // jest-dom .toBeVisible does not take into account aria-hidden
-  /* eslint-disable testing-library/no-node-access */
+
   expect(hiddenInput.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleInput.closest('[aria-hidden="true"]')).toBeNull();
   expect(hiddenLabel.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleLabel.closest('[aria-hidden="true"]')).toBeNull();
-  /* eslint-enable testing-library/no-node-access */
 });
 
 test('control props work for visible button control', () => {
@@ -131,82 +130,82 @@ test('select field with helper text', () => {
   expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
 });
 
-test("label floats after user's interacting", () => {
+test("label floats after user's interacting", async () => {
   getComponent({ labelMode: modes.FLOAT, value: '' });
   const textAreaContainer = screen.getByTestId(testId);
   expect(textAreaContainer).not.toHaveClass('is-float-label-active');
-  userEvent.tab();
+  await userEvent.tab();
   expect(textAreaContainer).toHaveClass('is-float-label');
 });
 
-test('clicking on the visible button opens the popuplist', () => {
+test('clicking on the visible button opens the popuplist', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   if (button) {
-    userEvent.click(button);
+    await userEvent.click(button);
   }
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
 });
 
-test('clicking on an option then renders its text in the button', () => {
+test('clicking on an option then renders its text in the button', async () => {
   const defaultText = 'click me';
   const placeholder = null;
   getComponent({ defaultText, placeholder });
   const button = screen.getByRole('button');
   expect(button).toHaveTextContent(defaultText);
 
-  userEvent.click(button);
+  await userEvent.click(button);
   const options = screen.queryAllByRole('option');
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
   expect(button).toHaveTextContent(items[0].name);
 });
 
-test('hovering an option applies correct styles', () => {
+test('hovering an option applies correct styles', async () => {
   getComponent();
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   const options = screen.queryAllByRole('option');
   expect(options[0]).not.toHaveClass('is-focused');
-  userEvent.hover(options[0]);
+  await userEvent.hover(options[0]);
   expect(options[0]).toHaveClass('is-focused');
 });
 
-test('onOpenChange prop for field', () => {
+test('onOpenChange prop for field', async () => {
   const onOpenChange = jest.fn();
   getComponent({ onOpenChange });
   const button = screen.getByRole('button');
   expect(onOpenChange).not.toHaveBeenCalled();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true);
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onOpenChange).toHaveBeenNthCalledWith(2, false);
 });
 
-test('onSelectionChange prop for field', () => {
+test('onSelectionChange prop for field', async () => {
   getComponent({ onSelectionChange });
   const button = screen.getByRole('button');
   expect(onSelectionChange).not.toHaveBeenCalled();
 
-  userEvent.click(button);
-  userEvent.click(screen.queryAllByRole('option')[0]);
+  await userEvent.click(button);
+  await userEvent.click(screen.queryAllByRole('option')[0]);
   expect(onSelectionChange).toHaveBeenNthCalledWith(1, 'a');
-  userEvent.click(button);
-  userEvent.click(screen.queryAllByRole('option')[1]);
+  await userEvent.click(button);
+  await userEvent.click(screen.queryAllByRole('option')[1]);
   expect(onSelectionChange).toHaveBeenNthCalledWith(2, 'b');
 });
 
-test('selectedKey for controlled select field', () => {
+test('selectedKey for controlled select field', async () => {
   getComponent({ selectedKey: 'b' });
   const button = screen.getByRole('button');
   expect(button).toHaveTextContent('b');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryAllByRole('option')[0]).not.toHaveClass('is-selected');
   expect(screen.queryAllByRole('option')[1]).toHaveClass('is-selected');
   expect(screen.queryAllByRole('option')[2]).not.toHaveClass('is-selected');
@@ -219,30 +218,30 @@ test('isRequired prop for select field', () => {
   expect(visibleLabel).toHaveTextContent('testLabel');
 });
 
-test('clicking the visually hidden dismiss buttons close the listbox popup', () => {
+test('clicking the visually hidden dismiss buttons close the listbox popup', async () => {
   getComponent({ isDefaultOpen: true });
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
   // Click first dismiss button
-  userEvent.click(screen.getAllByLabelText('Dismiss')[0]);
+  await userEvent.click(screen.getAllByLabelText('Dismiss')[0]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Click second dismiss button
   getComponent({ isDefaultOpen: true });
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  userEvent.click(screen.getAllByLabelText('Dismiss')[1]);
+  await userEvent.click(screen.getAllByLabelText('Dismiss')[1]);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
-test('clicking outside of the listbox popup closes it', () => {
+test('clicking outside of the listbox popup closes it', async () => {
   getComponent({ isDefaultOpen: true });
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
-  userEvent.click(global.document.body);
+  await userEvent.click(global.document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
-test('two listbox can not be open at the same time', () => {
+test('two listbox can not be open at the same time', async () => {
   getComponent({ items: [{ name: 'Alpha' }, { name: 'Bravo' }] });
   getComponent({ items: [{ name: 'Whiskey' }, { name: 'Tango' }, { name: 'Foxtrot' }] });
   const selectfields = screen.getAllByTestId(testId);
@@ -253,27 +252,27 @@ test('two listbox can not be open at the same time', () => {
 
   const [button1, button2] = screen.getAllByRole('button');
 
-  userEvent.click(button1);
+  await userEvent.click(button1);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(2);
   expect(screen.queryByRole('option', { name: 'Alpha' })).toBeInTheDocument();
 
-  userEvent.click(button2);
+  await userEvent.click(button2);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  userEvent.click(button2);
+  await userEvent.click(button2);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
   expect(screen.queryByRole('option', { name: 'Whiskey' })).toBeInTheDocument();
 });
 
-test('Item accepts a data-id and the data-id can be found in the DOM', () => {
+test('Item accepts a data-id and the data-id can be found in the DOM', async () => {
   getComponent();
   const button = screen.queryByRole('button');
   expect(button).toBeInTheDocument();
   if (button) {
-    userEvent.click(button);
+    await userEvent.click(button);
   }
   const options = screen.queryAllByRole('option');
 
@@ -299,12 +298,12 @@ describe('async loading', () => {
     expect(() => screen.getByRole('alert')).toThrow();
   });
 
-  test('displays a loader inside the listbox when loading more', () => {
+  test('displays a loader inside the listbox when loading more', async () => {
     const newItems = [{ name: 'Foo' }, { name: 'Bar' }];
     const { rerender } = getComponent({ items: newItems, isLoading: true });
 
     const button = screen.getByRole('button');
-    userEvent.click(button);
+    await userEvent.click(button);
 
     const listbox = screen.getByRole('listbox');
     let options = within(listbox).getAllByRole('option');
@@ -354,7 +353,7 @@ test('passing helper text should display it and correct aria attributes on input
   expect(visibleInput).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('popover closes on button blur', () => {
+test('popover closes on button blur', async () => {
   getComponent();
 
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -362,12 +361,12 @@ test('popover closes on button blur', () => {
 
   const button = screen.getByRole('button');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(screen.queryAllByRole('option')).toHaveLength(3);
   expect(screen.queryByRole('option', { name: 'a' })).toBeInTheDocument();
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
@@ -395,7 +394,7 @@ test('should have clear button if hasClearButton prop is true', () => {
   expect(clearButton).toBeInTheDocument();
 });
 
-test('should have call onClear function', () => {
+test('should have call onClear function', async () => {
   getComponent({
     selectedKey: 'a',
     hasClearButton: true,
@@ -404,6 +403,6 @@ test('should have call onClear function', () => {
   });
   const clearButton = screen.getByTestId('clear-button');
   expect(clearButton).toBeInTheDocument();
-  userEvent.click(clearButton);
+  await userEvent.click(clearButton);
   expect(onClear).toHaveBeenCalledTimes(1);
 });

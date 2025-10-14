@@ -62,22 +62,22 @@ test('renders component in the default state', () => {
   expect(container).toBeInTheDocument();
 });
 
-test('copy button is hovered and renders tooltip via mouse', () => {
+test('copy button is hovered and renders tooltip via mouse', async () => {
   getComponent();
   const copyBtn = screen.getByLabelText('copy to clipboard');
   expect(copyBtn).not.toHaveFocus();
-  userEvent.hover(copyBtn);
+  await userEvent.hover(copyBtn);
   expect(copyBtn).toHaveClass('is-hovered');
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
 });
 
-test('copy button is focused and renders tooltip via keyboard', () => {
+test('copy button is focused and renders tooltip via keyboard', async () => {
   getComponent();
   const copyBtn = screen.getByLabelText('copy to clipboard');
   expect(copyBtn).not.toHaveFocus();
-  userEvent.tab();
-  userEvent.tab();
+  await userEvent.tab();
+  await userEvent.tab();
   expect(copyBtn).toHaveFocus();
   expect(copyBtn).toHaveClass('is-focused');
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
@@ -115,10 +115,10 @@ test('click on copy button copies data to the clipboard', async () => {
 test('after button click, the tooltip renders with the text "Copied!"', async () => {
   getComponent();
   const button = screen.getByLabelText('copy to clipboard');
-  act(() => {
-    userEvent.hover(button);
+  await act(async () => {
+    await userEvent.hover(button);
   });
-  act(() => { jest.advanceTimersByTime(500); });
+  await act(() => { jest.advanceTimersByTime(500); });
   const tooltip = screen.getByRole('tooltip');
   expect(tooltip).toBeInTheDocument();
   await act(async () => userEvent.click(button));

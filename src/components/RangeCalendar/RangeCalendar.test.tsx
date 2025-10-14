@@ -50,7 +50,7 @@ test('renders calendar range component', () => {
   expect(calendarCells).toHaveLength(70);
 });
 
-test('should able to navigate to previous and next month', () => {
+test('should able to navigate to previous and next month', async () => {
   getComponent();
 
   const buttons = screen.getAllByRole('button');
@@ -59,26 +59,26 @@ test('should able to navigate to previous and next month', () => {
   expect(heading).toHaveTextContent('Calendar Range, August to September 2022');
 
   // navigation to previous month
-  userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
   expect(heading).toHaveTextContent('Calendar Range, July to August 2022');
 
   // navigation to next month
-  userEvent.click(buttons[1]);
+  await userEvent.click(buttons[1]);
   expect(heading).toHaveTextContent('Calendar Range, August to September 2022');
 
   // navigation to next month
-  userEvent.click(buttons[1]);
+  await userEvent.click(buttons[1]);
   expect(heading).toHaveTextContent('Calendar Range, September to October 2022');
 });
 
-test('should be able to select a range of dates', () => {
+test('should be able to select a range of dates', async () => {
   getComponent();
   const calendarCells = screen.queryAllByRole('gridcell');
   const startCell = calendarCells[7];
   const endCell = calendarCells[13];
 
-  userEvent.click(startCell);
-  userEvent.click(endCell);
+  await userEvent.click(startCell);
+  await userEvent.click(endCell);
 
   const selectedCells = screen.getAllByRole('gridcell', { selected: true });
   expect(selectedCells).toHaveLength(7);
@@ -115,7 +115,7 @@ test('allows users to select and navigate through calendar items', () => {
   expect(buttons[5]).toHaveFocus();
 });
 
-test('readonly calendar', () => {
+test('readonly calendar', async () => {
   getComponent({ isReadOnly: true });
 
   const calendars = screen.queryAllByRole('grid');
@@ -125,12 +125,12 @@ test('readonly calendar', () => {
   });
 
   const buttons = screen.queryAllByRole('button');
-  userEvent.click(buttons[12]);
+  await userEvent.click(buttons[12]);
 
   expect(buttons[12]).not.toHaveClass('is-selected');
 });
 
-test('dates before minimum date cannot be selected', () => {
+test('dates before minimum date cannot be selected', async () => {
   const onChange = jest.fn();
   const defaultValue = {
     start: '2022-08-10',
@@ -139,13 +139,13 @@ test('dates before minimum date cannot be selected', () => {
   getComponent({ onChange, minValue: '2022-08-06', defaultValue });
 
   const buttons = screen.queryAllByRole('button');
-  userEvent.click(buttons[2]);
+  await userEvent.click(buttons[2]);
 
   expect(buttons[2]).not.toHaveClass('is-selected');
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('dates past maxiumum date cannot be selected', () => {
+test('dates past maxiumum date cannot be selected', async () => {
   const onChange = jest.fn();
   const defaultValue = {
     start: new CalendarDate(2022, 8, 10),
@@ -154,7 +154,7 @@ test('dates past maxiumum date cannot be selected', () => {
   getComponent({ onChange, maxValue: '2022-08-20', defaultValue });
 
   const buttons = screen.queryAllByRole('button');
-  userEvent.click(buttons[55]);
+  await userEvent.click(buttons[55]);
 
   expect(buttons[55]).not.toHaveClass('is-selected');
   expect(onChange).not.toHaveBeenCalled();

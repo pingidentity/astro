@@ -1,8 +1,8 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useButton, useFocusRing } from 'react-aria';
 import { Pressable, useHover, usePress } from '@react-aria/interactions';
-import { IconButton as ThemeUIIconButton } from 'theme-ui';
 import type { FocusableElement } from '@react-types/shared';
+import { IconButton as ThemeUIIconButton } from 'theme-ui';
 
 import { BadgeContext, BadgeContextProps } from '../../context/BadgeContext';
 import { useAriaLabelWarning, useStatusClasses } from '../../hooks';
@@ -60,7 +60,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) =
       onClick: onClick as (e: React.MouseEvent<FocusableElement>) => void,
       ...others,
     },
-    buttonRef
+    buttonRef,
   );
   const { bg: badgeBg } = useContext(BadgeContext) as BadgeContextProps;
   const { hoverProps, isHovered } = useHover({

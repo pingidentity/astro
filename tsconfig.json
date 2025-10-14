@@ -11,6 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
+    //removing emitDeclarationOnly cause we are using vite-plugin-dts to generate declaration files
     "isolatedModules": true,
     "strict": true,
     "noImplicitAny": false,

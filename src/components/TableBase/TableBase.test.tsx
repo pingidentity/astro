@@ -151,20 +151,20 @@ test('renders checkbox in case of multi selection', () => {
   expect(checkboxes).toHaveLength(objects.length + 1);
 });
 
-test('should change selection on mouse press', () => {
+test('should change selection on mouse press', async () => {
   getComponent({ selectionMode: 'multiple' });
   const rows = screen.getAllByRole('row');
 
   expect(rows[1]).not.toHaveClass('is-selected');
-  userEvent.click(rows[1]);
+  await userEvent.click(rows[1]);
   expect(rows[1]).toHaveClass('is-selected');
 });
 
 test('should change select all checkbox on mouse press', () => {
   getComponent({ selectionMode: 'multiple' });
   const rows = screen.getAllByRole('row');
-  rows.forEach(element => {
-    userEvent.click(element);
+  rows.forEach(async element => {
+    await userEvent.click(element);
   });
   const headerCheckbox = screen.getByTestId('select-all-checkbox');
   expect(headerCheckbox).toBeChecked();
@@ -188,17 +188,17 @@ test('should checked checkboxes if selected keys are provided', () => {
   expect(headerCheckbox).toBePartiallyChecked();
 });
 
-test('tab key should focus on the first cell of the first row', () => {
+test('tab key should focus on the first cell of the first row', async () => {
   getComponent();
   const rows = screen.getAllByRole('row');
-  userEvent.tab();
+  await userEvent.tab();
   expect(rows[1]).toHaveFocus();
 });
 
-test('Arrow Down key should focus the next row', () => {
+test('Arrow Down key should focus the next row', async () => {
   getComponent();
   const rows = screen.getAllByRole('row');
-  userEvent.tab();
+  await userEvent.tab();
   expect(rows[1]).toHaveFocus();
 
   fireEvent.keyDown(rows[1], { key: 'ArrowDown' });
@@ -210,10 +210,10 @@ test('Arrow Down key should focus the next row', () => {
   expect(rows[3]).toHaveFocus();
 });
 
-test('Arrow Up key should focus the next row', () => {
+test('Arrow Up key should focus the next row', async () => {
   getComponent();
   const rows = screen.getAllByRole('row');
-  userEvent.tab();
+  await userEvent.tab();
   expect(rows[1]).toHaveFocus();
 
   fireEvent.keyDown(rows[1], { key: 'ArrowUp' });
@@ -223,13 +223,13 @@ test('Arrow Up key should focus the next row', () => {
   expect(columnheader[0]).toHaveFocus();
 });
 
-test('Arrow Right move the focus to next cell', () => {
+test('Arrow Right move the focus to next cell', async () => {
   getComponent();
   const rows = screen.getAllByRole('row');
   const firstRow = screen.getAllByRole('row')[1];
   const tableCells = firstRow.querySelectorAll('td');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(rows[1]).toHaveFocus();
 
   fireEvent.keyDown(rows[1], { key: 'ArrowRight' });
@@ -249,13 +249,13 @@ test('Arrow Right move the focus to next cell', () => {
   expect(rows[1]).toHaveFocus();
 });
 
-test('Arrow Left move the focus to next cell', () => {
+test('Arrow Left move the focus to next cell', async () => {
   getComponent();
   const rows = screen.getAllByRole('row');
   const firstRow = screen.getAllByRole('row')[1];
   const tableCells = firstRow.querySelectorAll('td');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(rows[1]).toHaveFocus();
 
   fireEvent.keyDown(rows[1], { key: 'ArrowLeft' });

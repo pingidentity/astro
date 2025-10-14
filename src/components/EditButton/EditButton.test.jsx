@@ -51,7 +51,7 @@ test('the component displays the correct icon size', () => {
   expect(svg).toHaveAttribute('height', '22px');
 });
 
-test('the component accepts IconButton Props', () => {
+test('the component accepts IconButton Props', async () => {
   const onPress = jest.fn();
   getComponent({ onPress });
   const button = screen.getByRole('button');
@@ -59,6 +59,6 @@ test('the component accepts IconButton Props', () => {
   // Hold down the button to test is-pressed class
   fireEvent.mouseDown(button);
   expect(button).toHaveClass('is-pressed');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onPress).toHaveBeenCalledTimes(1);
 });

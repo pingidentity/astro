@@ -137,11 +137,11 @@ test('interacting with tabs via click', async () => {
   testSingleTab(tabs, tab0, 'toContainElement', [await screen.findByRole('presentation')]);
   await testTabPanel(0);
 
-  userEvent.click(tab1);
+  await userEvent.click(tab1);
   testSingleTab(tabs, tab1, 'toContainElement', [screen.getByRole('presentation')]);
   await testTabPanel(1);
 
-  userEvent.click(tab0);
+  await userEvent.click(tab0);
   testSingleTab(tabs, tab0, 'toContainElement', [screen.getByRole('presentation')]);
   await testTabPanel(0);
 });
@@ -151,7 +151,7 @@ test('interacting with tabs with manual activation', async () => {
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
-  userEvent.tab();
+  await userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
   await testTabPanel(0);
 
@@ -169,7 +169,7 @@ test('interacting with tabs via focus -- horizontal', async () => {
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
-  userEvent.tab();
+  await userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
   await testTabPanel(0);
 
@@ -187,7 +187,7 @@ test('interacting with tabs via focus -- vertical', async () => {
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
-  userEvent.tab();
+  await userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
   await testTabPanel(0);
 
@@ -216,7 +216,7 @@ test('disabled all tabs', async () => {
   expect(tabLine).not.toBeInTheDocument();
 
   // Ensure that clicking a tab does nothing
-  userEvent.click(tab1);
+  await userEvent.click(tab1);
   expect(tab0).not.toContainElement(screen.queryByRole('presentation'));
   expect(tab1).not.toContainElement(screen.queryByRole('presentation'));
   await testTabPanel(0);
@@ -230,11 +230,11 @@ test('disabled tab is not accessible on click or focus', async () => {
   const { tabs, tab0, tab1, tab2 } = getTabs();
 
   // Ensure that clicking a disabled tab does nothing
-  userEvent.click(tab1);
+  await userEvent.click(tab1);
   await testTabPanel(0);
 
   // Ensure that disabled tab is not accessible via focus
-  userEvent.tab();
+  await userEvent.tab();
   testSingleTab(tabs, tab0, 'toHaveFocus');
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
   testSingleTab(tabs, tab2, 'toHaveFocus');
@@ -253,13 +253,13 @@ test('controlled tabs', async () => {
   await testTabPanel(1);
 
   // Ensure the event handler is fired, but selected tab does not change
-  userEvent.click(tab2);
+  await userEvent.click(tab2);
   expect(onSelectionChange).toHaveBeenCalledWith(defaultTabs[2].name);
   testSingleTab(tabs, tab1, 'toContainElement', [screen.queryByRole('presentation')]);
   await testTabPanel(1);
 
   // Ensure the tab DOES change when selectedKey is updated
-  userEvent.click(tab0);
+  await userEvent.click(tab0);
   expect(onSelectionChange).toHaveBeenCalledWith(defaultTabs[0].name);
 
   getComponent({ selectedKey: defaultTabs[0].name, onSelectionChange },
@@ -338,12 +338,12 @@ test('tabs without selected keys show null tab panel content', () => {
   expect(screen.queryByRole('tabpanel')).not.toHaveTextContent('');
 });
 
-test('hover tab style', () => {
+test('hover tab style', async () => {
   getComponent();
 
   const { tab0 } = getTabs();
   expect(tab0).not.toHaveClass('is-hovered');
-  userEvent.hover(tab0);
+  await userEvent.hover(tab0);
   expect(tab0).toHaveClass('is-hovered');
 });
 
@@ -382,7 +382,7 @@ test('will render tab with list if provided', async () => {
 
   const { tab1: { parentElement: menuBtn } } = getTabs();
 
-  if (menuBtn) userEvent.click(menuBtn);
+  if (menuBtn) await userEvent.click(menuBtn);
   expect(screen.queryByRole('menu')).toBeInTheDocument();
   await testTabPanel(0);
 
@@ -392,7 +392,7 @@ test('will render tab with list if provided', async () => {
   }
   expect(menuItems[0]).not.toHaveFocus();
 
-  userEvent.click(menuItems[0]);
+  await userEvent.click(menuItems[0]);
   if (tabsWithList[1].list) {
     const { children: firstListItemContent } = tabsWithList[1].list[0];
     expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
@@ -406,7 +406,7 @@ test('tab list is accessible via keyboard', async () => {
   const { tabs, tab0, tab1 } = getTabs();
   tabs.forEach(tab => expect(tab).not.toHaveFocus());
 
-  userEvent.tab();
+  await userEvent.tab();
   await testTabPanel(0);
 
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });

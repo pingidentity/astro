@@ -291,7 +291,7 @@ test('should render title for itemBodies that have subTitles', () => {
   expect(screen.getByText('PingOne Services')).toBeInTheDocument();
 });
 
-test('should select NavItemLink', () => {
+test('should select NavItemLink', async () => {
   getComponent();
 
   clickHeaderButtons();
@@ -299,11 +299,11 @@ test('should select NavItemLink', () => {
   const link = screen.getByTestId('navItemLink');
 
   expect(link).toBeInTheDocument();
-  userEvent.click(link);
+  await userEvent.click(link);
   expect(link).toHaveClass('is-selected');
 });
 
-test('controlled: should select NavItemLink', () => {
+test('controlled: should select NavItemLink', async () => {
   render(<ControlledComponent />);
   let link;
 
@@ -312,7 +312,7 @@ test('controlled: should select NavItemLink', () => {
   link = screen.queryByTestId('navItemLink');
 
   expect(link).toBeInTheDocument();
-  userEvent.click(link);
+  await userEvent.click(link);
 
   link = screen.queryByTestId('navItemLink');
   expect(link).toHaveClass('is-selected');
@@ -346,53 +346,53 @@ test('controlled: should select NavItemLink on space key press', () => {
   expect(link).toHaveClass('is-selected');
 });
 
-test('should select NavItem', () => {
+test('should select NavItem', async () => {
   render(<ControlledComponent />);
   let item;
 
   item = screen.queryByTestId('navItem');
 
   expect(item).toBeInTheDocument();
-  userEvent.click(item);
+  await userEvent.click(item);
   item = screen.queryByTestId('navItem');
   expect(item).toHaveClass('is-selected');
 });
 
-test('should select NavItem', () => {
+test('should select NavItem', async () => {
   getComponent();
 
   const item = screen.getByTestId('navItem');
 
   expect(item).toBeInTheDocument();
-  userEvent.click(item);
+  await userEvent.click(item);
   expect(item).toHaveClass('is-selected');
 });
 
-test('controlled: should select NavItem', () => {
+test('controlled: should select NavItem', async () => {
   render(<ControlledComponent />);
   let item;
 
   item = screen.queryByTestId('navItem');
 
   expect(item).toBeInTheDocument();
-  userEvent.click(item);
+  await userEvent.click(item);
 
   item = screen.queryByTestId('navItem');
   expect(item).toHaveClass('is-selected');
 });
 
-test('should select NavItemButton', () => {
+test('should select NavItemButton', async () => {
   getComponent();
 
   clickHeaderButtons();
 
   const button = screen.getByTestId('navItemButton');
   expect(button).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(button).toHaveClass('is-selected');
 });
 
-test('controlled: should select NavItemButton', () => {
+test('controlled: should select NavItemButton', async () => {
   render(<ControlledComponent />);
   let button;
 
@@ -400,7 +400,7 @@ test('controlled: should select NavItemButton', () => {
 
   button = screen.queryByTestId('navItemButton');
   expect(button).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
 
   button = screen.queryByTestId('navItemButton');
   expect(button).toHaveClass('is-selected');
@@ -543,7 +543,7 @@ test('passing in a string into defaultSelectedKeys makes the key selected by def
   expect(child).toHaveClass('is-selected');
 });
 
-test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', () => {
+test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', async () => {
   getComponent({ defaultSelectedKey: 'Credentials Button Users' });
 
   const child = screen.getByTestId('navItemButton');
@@ -552,35 +552,35 @@ test('when a child is selected, and the parent is collapsed, the parent has the 
 
   const parent = screen.queryByTestId(SECTION_BUTTON_DATA_ID);
   expect(parent).not.toHaveClass('is-selected');
-  userEvent.click(parent!);
+  await userEvent.click(parent!);
   const parentDiv = screen.queryByTestId('Overview');
   expect(parentDiv).toHaveClass('is-selected');
 });
 
-test('controlled version: items can be updated.', () => {
+test('controlled version: items can be updated.', async () => {
   render(<ControlledComponent />);
 
   const button = screen.getByTestId('test-button');
   const thisitem = screen.getByTestId('Environment title that is so long, it wraps');
   expect(thisitem).toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.queryByTestId('Environment title that is so long, it wraps')).not.toBeInTheDocument();
 });
 
-test('expand only one item', () => {
+test('expand only one item', async () => {
   getComponent({ isAutoСollapsible: true });
 
   expect(screen.queryByText('Dashboard Unique')).not.toBeInTheDocument();
   expect(screen.queryByText('Identities Unique')).not.toBeInTheDocument();
 
   const headerButtons = screen.getAllByRole('button');
-  userEvent.click(headerButtons[1]);
+  await userEvent.click(headerButtons[1]);
 
   expect(screen.queryByText('Dashboard Unique')).toBeInTheDocument();
   expect(screen.queryByText('Identities Unique')).not.toBeInTheDocument();
 
-  userEvent.click(headerButtons[2]);
+  await userEvent.click(headerButtons[2]);
 
   setTimeout(() => {
     expect(screen.queryByText('Dashboard Unique')).not.toBeInTheDocument();

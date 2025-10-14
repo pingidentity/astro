@@ -3,9 +3,9 @@ import { RadioGroupState } from 'react-stately';
 
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import RadioGroupField from '../RadioGroupField';
 
 import RadioField, { RadioContext } from './RadioField';
-import RadioGroupField from '../RadioGroupField';
 
 const testId = 'test-radio';
 const testLabel = 'Test Label';
@@ -29,7 +29,7 @@ const getComponent = (props = {}, state = defaultState) => render((
 ));
 
 const getSelectedComponent = (props = {}, state = defaultState) => render((
-  <RadioGroupField label="Test Group" name="group"  value={testValue}>
+  <RadioGroupField label="Test Group" name="group" value={testValue}>
     <RadioField {...defaultProps} {...props} />
   </RadioGroupField>
 ));
@@ -41,7 +41,7 @@ afterEach(() => {
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (
-   <RadioGroupField label="Test Group" name="group">
+    <RadioGroupField label="Test Group" name="group">
       <RadioField {...defaultProps} {...props} />
     </RadioGroupField>
   ),

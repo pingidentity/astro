@@ -53,25 +53,25 @@ test('renders NumberField component', () => {
   expect(screen.queryAllByLabelText(testLabel)[0]).toBeInTheDocument();
 });
 
-test('arrow up is adding step to the number value', () => {
+test('arrow up is adding step to the number value', async () => {
   const mockOnChange = jest.fn();
   getComponent({
     onChange: mockOnChange,
     value: testValue,
     step: testStep,
   });
-  userEvent.click(screen.getByLabelText(incrementAriaLabel));
+  await userEvent.click(screen.getByLabelText(incrementAriaLabel));
   expect(mockOnChange).toHaveBeenCalledWith(testValue + testStep);
 });
 
-test('arrow down is subtract step to the number value', () => {
+test('arrow down is subtract step to the number value', async () => {
   const mockOnChange = jest.fn();
   getComponent({
     onChange: mockOnChange,
     value: testValue,
     step: testStep,
   });
-  userEvent.click(screen.getByLabelText(decrementAriaLabel));
+  await userEvent.click(screen.getByLabelText(decrementAriaLabel));
   expect(mockOnChange).toHaveBeenCalledWith(testValue - testStep);
 });
 
@@ -83,13 +83,13 @@ test('value can be set from outside (controlled state)', () => {
   expect(screen.queryAllByLabelText(testLabel)[1]).toHaveValue('11');
 });
 
-test('calling onChange with integer when input value changed (controlled state)', () => {
+test('calling onChange with integer when input value changed (controlled state)', async () => {
   const mockOnChange = jest.fn();
   const newTestValue = 123;
   getComponent({ onChange: mockOnChange });
   const numberInput = screen.queryAllByLabelText(testLabel)[1];
-  userEvent.clear(numberInput);
-  userEvent.type(numberInput, newTestValue.toString());
+  await userEvent.clear(numberInput);
+  await userEvent.type(numberInput, newTestValue.toString());
   act(() => {
     numberInput.blur();
   });
@@ -109,19 +109,19 @@ test('should show helper text if appropriate prop passed', () => {
   expect(fieldHelperText).toHaveClass(`is-${statuses.ERROR}`);
 });
 
-test('should be able to be focused via keyboard', () => {
+test('should be able to be focused via keyboard', async () => {
   getComponent();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryAllByLabelText(testLabel)[1]).toHaveFocus();
 });
 
-test('should be able to interact with the keyboard', () => {
+test('should be able to interact with the keyboard', async () => {
   getComponent();
-  userEvent.tab();
+  await userEvent.tab();
   const numberInput = screen.queryAllByLabelText(testLabel)[1];
-  userEvent.type(numberInput, '{arrowup}');
+  await userEvent.type(numberInput, '{arrowup}');
   expect(numberInput).toHaveValue((testValue + 1).toString());
-  userEvent.type(numberInput, '{arrowdown}{arrowdown}');
+  await userEvent.type(numberInput, '{arrowdown}{arrowdown}');
   expect(numberInput).toHaveValue((testValue - 1).toString());
 });
 
@@ -134,13 +134,13 @@ test('should show hintText text if prop is passed', () => {
   expect(screen.getByText(hintText)).toBeInTheDocument();
 });
 
-test('increment and decrement buttons should be able to be focused via keyboard', () => {
+test('increment and decrement buttons should be able to be focused via keyboard', async () => {
   getComponent();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryAllByLabelText(testLabel)[1]).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.getByLabelText('arrow-up')).toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.getByLabelText('arrow-down')).toHaveFocus();
 });
 
@@ -150,9 +150,9 @@ test('number field input receiving name attribute', () => {
   expect(screen.queryAllByLabelText(testLabel)[1]).toHaveAttribute('name', testName);
 });
 
-test('number field can be focused', () => {
+test('number field can be focused', async () => {
   getComponent();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryAllByLabelText(testLabel)[1]).toHaveClass('is-focused');
 });
 

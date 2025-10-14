@@ -81,7 +81,7 @@ test('should render div with icon when focused', () => {
 test('should upload a file', async () => {
   getComponent();
   const imageUploadButton = screen.getByTestId(testButtonId);
-  userEvent.click(imageUploadButton);
+  await userEvent.click(imageUploadButton);
   const imageUploadInput = screen.getByTestId('image-upload-input');
   fireEvent.change(imageUploadInput, {
     target: { files: [file] },
@@ -94,7 +94,7 @@ test('should upload a file', async () => {
 test('should upload a file if label clicked', async () => {
   getComponent();
   const imageUploadLabel = screen.getByText(testLabel);
-  userEvent.click(imageUploadLabel);
+  await userEvent.click(imageUploadLabel);
   const imageUploadInput = screen.getByTestId('image-upload-input');
   fireEvent.change(imageUploadInput, {
     target: { files: [file] },
@@ -114,7 +114,7 @@ test('should show the menu if image preview is clicked when preview image exists
   expect(imagePreview).toHaveAttribute('src');
 
   // Click on the image preview button
-  userEvent.click(screen.getByRole('button'));
+  await userEvent.click(screen.getByRole('button'));
   expect(screen.getByText('Upload New Image')).toBeInTheDocument();
   expect(screen.getByText('Remove Image')).toBeInTheDocument();
 });
@@ -129,8 +129,8 @@ test('should change image if the corresponding menu option clicked', async () =>
   expect(imagePreview).toHaveAttribute('src');
 
   global.URL.createObjectURL.mockImplementationOnce(() => testImageURL2);
-  userEvent.click(screen.getByTestId(testButtonId));
-  userEvent.click(screen.getByText('Upload New Image'));
+  await userEvent.click(screen.getByTestId(testButtonId));
+  await userEvent.click(screen.getByText('Upload New Image'));
   fireEvent.change(screen.getByTestId('image-upload-input'), {
     target: { files: [file] },
   });
@@ -156,11 +156,11 @@ test('should call onRemove cb (when provided) when a file is uploaded', async ()
     target: { files: [file] },
   });
   const imagePreview = await screen.findByTestId(imageUploadImagePreview);
-  userEvent.click(screen.getByTestId(testButtonId));
+  await userEvent.click(screen.getByTestId(testButtonId));
   expect(
     await screen.findByTestId(imageUploadImagePreview),
   ).toBeInTheDocument();
-  userEvent.click(screen.getByText('Remove Image'));
+  await userEvent.click(screen.getByText('Remove Image'));
   expect(imagePreview).not.toBeInTheDocument();
   expect(testOnRemove).toHaveBeenCalledTimes(1);
 });
@@ -216,7 +216,7 @@ test('should render loader if isLoading prop is true', () => {
   expect(screen.queryByRole('alert')).toBeInTheDocument();
 });
 
-test('should render image preview and menu when previewImage prop is supplied', () => {
+test('should render image preview and menu when previewImage prop is supplied', async () => {
   getComponent({ previewImage: 'test' });
   expect(screen.queryByTestId(imageUploadImagePreview)).toBeInTheDocument();
   expect(screen.queryByTestId(imageUploadImagePreview)).toHaveAttribute(
@@ -226,7 +226,7 @@ test('should render image preview and menu when previewImage prop is supplied', 
   expect(
     screen.queryByTestId(imageUploadNoImagePreview),
   ).not.toBeInTheDocument();
-  userEvent.click(screen.getByTestId(testButtonId));
+  await userEvent.click(screen.getByTestId(testButtonId));
   expect(screen.getByText('Upload New Image')).toBeInTheDocument();
   expect(screen.getByText('Remove Image')).toBeInTheDocument();
 });
@@ -241,7 +241,7 @@ test('loader size can be changed via the prop', () => {
 test('should show the menu if label clicked when preview image exists', async () => {
   getComponent();
   const imageUploadButton = screen.getByTestId(testButtonId);
-  userEvent.click(imageUploadButton);
+  await userEvent.click(imageUploadButton);
   fireEvent.change(screen.getByTestId('image-upload-input'), {
     target: { files: [file] },
   });
@@ -273,7 +273,7 @@ test('should show the menu if label clicked when preview image exists with custo
   expect(imagePreview).toHaveAttribute('src');
 
   // Click on the image preview button
-  userEvent.click(screen.getByRole('button'));
+  await userEvent.click(screen.getByRole('button'));
   expect(screen.getByText(customUploadProp)).toBeInTheDocument();
   expect(screen.getByText(customRemoveProp)).toBeInTheDocument();
 });
@@ -295,7 +295,7 @@ test('should implement popover menu props', async () => {
   expect(imagePreview).toHaveAttribute('src');
 
   // Click on the image preview button
-  userEvent.click(screen.getByRole('button'));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(screen.getByRole('presentation')).toBeInTheDocument();
   expect(screen.getByRole('presentation')).toBeVisible();

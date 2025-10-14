@@ -187,11 +187,11 @@ test('navigating the list using the keyboard causes the isSelected and isFocused
   const listView = screen.getByTestId(testId);
   // Open the list arrow down to the second option,
   // and ensure that it is focused, and then selected after enter is pressed
-  userEvent.tab();
-  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  await userEvent.tab();
+  await userEvent.type(listView, '{arrowdown}', { skipClick: true });
   const options = screen.getAllByRole('gridcell');
   expect(options[1]).toHaveClass('is-focused');
-  userEvent.type(listView, '{enter}', { skipClick: true });
+  await userEvent.type(listView, '{enter}', { skipClick: true });
   const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).toHaveClass('is-selected');
 });
@@ -201,8 +201,8 @@ test('navigating to a disabled key will not apply the isFocused class', async ()
   const listView = screen.getByTestId(testId);
   // Open the list arrow down to the second option,
   // and ensure that it is focused, and then selected after enter is pressed
-  userEvent.tab();
-  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  await userEvent.tab();
+  await userEvent.type(listView, '{arrowdown}', { skipClick: true });
   const options = screen.getAllByRole('gridcell');
   expect(options[1]).not.toHaveClass('is-focused');
 });
@@ -212,8 +212,8 @@ test('navigating to a disabled key will not apply the isFocused class', async ()
   const listView = screen.getByTestId(testId);
   // Open the list arrow down to the second option,
   // and ensure that it is focused, and then selected after enter is pressed
-  userEvent.tab();
-  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  await userEvent.tab();
+  await userEvent.type(listView, '{arrowdown}', { skipClick: true });
   const options = screen.getAllByRole('gridcell');
   expect(options[1]).not.toHaveClass('is-focused');
 });
@@ -221,7 +221,7 @@ test('navigating to a disabled key will not apply the isFocused class', async ()
 test('clicking an item on the list selects the item', async () => {
   getComponent();
   const options = screen.getByTestId(items[1].name);
-  userEvent.click(options);
+  await userEvent.click(options);
   const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).toHaveClass('is-selected');
 });
@@ -232,7 +232,7 @@ test('clicking an item fires "onSelectionChange" handler and returns Set with ke
   const onSelectionChange = jest.fn();
   getComponent({ onSelectionChange });
   const option1 = screen.getByTestId(items[1].name);
-  userEvent.click(option1);
+  await userEvent.click(option1);
   expect(onSelectionChange).toHaveBeenCalled();
   const selectedItems = onSelectionChange.mock.calls[0][0];
   expect(_.isEqual(expectedResult, selectedItems)).toBeTruthy();
@@ -250,12 +250,12 @@ test('renders top loader, if a loader component is passed in, and state is loadi
   expect(loader).toBeInTheDocument();
 });
 
-test('renders loader, if a loader component is passed in, and state is loading', () => {
+test('renders loader, if a loader component is passed in, and state is loading', async () => {
   getComponent({ loadingState: loadingStates.LOADING });
   const listView = screen.getByTestId(testId);
-  userEvent.tab();
+  await userEvent.tab();
 
-  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listView, '{arrowdown}', { skipClick: true });
 
   const loaders = screen.getAllByRole('alert');
   expect(loaders).toHaveLength(2);
@@ -289,7 +289,7 @@ test('Item accepts a data-id and the data-id can be found in the DOM', () => {
 test('selectionMode "none" disallows to select item', async () => {
   getComponent({ selectionMode: 'none' });
   const option1 = screen.getByTestId(items[1].name);
-  userEvent.click(option1);
+  await userEvent.click(option1);
   const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).not.toHaveClass('is-selected');
 });
@@ -297,9 +297,9 @@ test('selectionMode "none" disallows to select item', async () => {
 test('selectionMode "multiple" allows to select more than one item', async () => {
   getComponent({ selectionMode: 'multiple' });
   const option1 = screen.getByTestId(items[1].name);
-  userEvent.click(option1);
+  await userEvent.click(option1);
   const option2 = screen.getByTestId(items[2].name);
-  userEvent.click(option2);
+  await userEvent.click(option2);
   const updatedOption = await screen.findAllByRole('gridcell');
   expect(updatedOption[1]).toHaveClass('is-selected');
   expect(updatedOption[2]).toHaveClass('is-selected');
@@ -309,9 +309,9 @@ test('when user navigates with tab and arrows keys, onFocus is called and the is
   const onFocus = jest.fn();
   getComponent({ onFocus });
   const listView = screen.getByTestId(testId);
-  userEvent.tab();
+  await userEvent.tab();
   expect(onFocus).toHaveBeenCalled();
-  userEvent.type(listView, '{arrowdown}', { skipClick: true });
+  await userEvent.type(listView, '{arrowdown}', { skipClick: true });
   const options = screen.getAllByRole('gridcell');
   expect(options[1]).toHaveClass('is-focused');
   expect(onFocus).toHaveBeenCalled();
@@ -329,18 +329,18 @@ test('list view not receive focus when click on checkbox', () => {
   expect(listItem[0]).not.toHaveClass('is-focused');
 });
 
-test('list view reset hover on item when scroll', () => {
+test('list view reset hover on item when scroll', async () => {
   getComponent();
   const listView = screen.getAllByRole('grid');
   const listItem = screen.getAllByRole('gridcell');
 
   expect(listItem[0]).not.toHaveClass('is-hovered');
-  userEvent.hover(listItem[0]);
+  await userEvent.hover(listItem[0]);
   expect(listItem[0]).toHaveClass('is-hovered');
 
   fireEvent.scroll(listView[0], { target: { scrollY: 100 } });
   expect(listItem[0]).not.toHaveClass('is-hovered');
-  userEvent.hover(listItem[1]);
+  await userEvent.hover(listItem[1]);
   expect(listItem[0]).not.toHaveClass('is-hovered');
 });
 
@@ -351,27 +351,27 @@ test('list view expandable reset hover on item when scroll', async () => {
   const listRow = screen.getAllByRole('row');
 
   expect(listItem[0]).not.toHaveClass('is-hovered');
-  userEvent.hover(listRow[0]);
-  userEvent.hover(listRow[1]);
+  await userEvent.hover(listRow[0]);
+  await userEvent.hover(listRow[1]);
   expect(listItem[0]).not.toHaveClass('is-hovered');
 });
 
-test('list view item should not receive focus when selectionMode is "none"', () => {
+test('list view item should not receive focus when selectionMode is "none"', async () => {
   const onFocus = jest.fn();
   getComponent({ onFocus, selectionMode: 'none' });
   const options = screen.getAllByRole('gridcell');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(onFocus).not.toHaveBeenCalled();
   expect(options[0]).not.toHaveClass('is-focused');
 });
 
-test('list view item should receive focus when selectionMode is default or a value other than "none"', () => {
+test('list view item should receive focus when selectionMode is default or a value other than "none"', async () => {
   const onFocus = jest.fn();
   getComponent({ onFocus });
   const options = screen.getAllByRole('gridcell');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(onFocus).toHaveBeenCalled();
   expect(options[0]).toHaveClass('is-focused');
 });
@@ -382,13 +382,13 @@ test('selectionMode "expanded" cells render expandable list items, and can be ex
 
   expect(options[0]).toHaveAttribute('aria-expanded', 'false');
 
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
 
   const updatedOptions = await screen.findAllByRole('gridcell');
 
   expect(updatedOptions[0]).toHaveAttribute('aria-expanded', 'true');
 
-  userEvent.click(options[0]);
+  await userEvent.click(options[0]);
 
   const updatedOptions1 = await screen.findAllByRole('gridcell');
 
@@ -400,46 +400,46 @@ test('should navigate to expandable listitems with keyboard ', async () => {
   const option = screen.getAllByRole('gridcell')[0];
   const row = screen.getAllByRole('row')[0];
 
-  userEvent.tab();
-  userEvent.type(option, '{enter}', { skipClick: true });
-  userEvent.type(option, '{arrowright}', { skipClick: true });
+  await userEvent.tab();
+  await userEvent.type(option, '{enter}', { skipClick: true });
+  await userEvent.type(option, '{arrowright}', { skipClick: true });
 
   const focusContainer = screen.getAllByTestId('focuscontainer')[0];
   expect(focusContainer).toHaveClass('is-focused');
 
-  userEvent.type(row, '{arrowright}', { skipClick: true });
-  userEvent.type(row, '{arrowright}', { skipClick: true });
+  await userEvent.type(row, '{arrowright}', { skipClick: true });
+  await userEvent.type(row, '{arrowright}', { skipClick: true });
 
-  userEvent.type(option, '{arrowleft}', { skipClick: true });
-  userEvent.type(option, '{arrowleft}', { skipClick: true });
+  await userEvent.type(option, '{arrowleft}', { skipClick: true });
+  await userEvent.type(option, '{arrowleft}', { skipClick: true });
 
-  userEvent.type(focusContainer, '{enter}', { skipClick: true });
+  await userEvent.type(focusContainer, '{enter}', { skipClick: true });
 
   const button = await screen.findByRole('button');
   expect(button).toHaveClass('is-focused');
 
-  userEvent.type(row, '{esc}', { skipClick: true });
+  await userEvent.type(row, '{esc}', { skipClick: true });
 });
 
 test('should navigate to expandable container ', async () => {
   getComponentExpandable({ selectionMode: 'expansion' });
   const option = screen.getAllByRole('gridcell')[0];
 
-  userEvent.tab();
-  userEvent.type(option, '{enter}', { skipClick: true });
-  userEvent.type(option, '{arrowright}', { skipClick: true });
+  await userEvent.tab();
+  await userEvent.type(option, '{enter}', { skipClick: true });
+  await userEvent.type(option, '{arrowright}', { skipClick: true });
 
-  userEvent.type(option, '{arrowleft}', { skipClick: true });
-
-  expect(option).toHaveClass('is-focused');
-
-  userEvent.type(option, '{arrowright}', { skipClick: true });
-  userEvent.type(option, '{arrowright}', { skipClick: true });
+  await userEvent.type(option, '{arrowleft}', { skipClick: true });
 
   expect(option).toHaveClass('is-focused');
 
-  userEvent.type(option, '{arrowleft}', { skipClick: true });
-  userEvent.type(option, '{arrowleft}', { skipClick: true });
+  await userEvent.type(option, '{arrowright}', { skipClick: true });
+  await userEvent.type(option, '{arrowright}', { skipClick: true });
+
+  expect(option).toHaveClass('is-focused');
+
+  await userEvent.type(option, '{arrowleft}', { skipClick: true });
+  await userEvent.type(option, '{arrowleft}', { skipClick: true });
   expect(option).toHaveClass('is-focused');
 
   fireEvent.keyDown(option, { key: 'ArrowLeft' });

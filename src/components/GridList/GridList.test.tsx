@@ -42,11 +42,11 @@ describe('GridList Component', () => {
     expect(rows).toHaveLength(items.length);
   });
 
-  test('handles keyboard navigation', () => {
+  test('handles keyboard navigation', async () => {
     getDefaultComponent();
     const rows = screen.getAllByRole('row');
 
-    userEvent.tab();
+    await userEvent.tab();
     expect(rows[0]).toHaveClass('is-focused');
 
     fireEvent.keyDown(rows[0], { key: 'ArrowDown' });
@@ -63,15 +63,15 @@ describe('GridList Component', () => {
     const rows = screen.getAllByRole('row');
     const list = screen.getByRole('grid');
     const buttons = screen.getAllByRole('button');
-    userEvent.tab();
+    await userEvent.tab();
 
     fireEvent.keyDown(rows[0], { key: 'ArrowRight' });
     fireEvent.keyUp(rows[0], { key: 'ArrowRight' });
     fireEvent.keyDown(buttons[0], { key: 'Enter' });
     fireEvent.keyUp(buttons[0], { key: 'Enter' });
     const insertionIndicator = await screen.findByTestId('insertion-indicator');
-    userEvent.type(list, '{arrowdown}');
-    userEvent.type(insertionIndicator, '{enter}');
+    await userEvent.type(list, '{arrowdown}');
+    await userEvent.type(insertionIndicator, '{enter}');
     expect(onReorder).toHaveBeenCalled();
   });
 
@@ -82,16 +82,16 @@ describe('GridList Component', () => {
     const rows = screen.getAllByRole('row');
     const list = screen.getByRole('grid');
     const buttons = screen.getAllByRole('button');
-    userEvent.tab();
+    await userEvent.tab();
 
     fireEvent.keyDown(rows[0], { key: 'ArrowRight' });
     fireEvent.keyUp(rows[0], { key: 'ArrowRight' });
     fireEvent.keyDown(buttons[0], { key: 'Enter' });
     fireEvent.keyUp(buttons[0], { key: 'Enter' });
     const insertionIndicator = await screen.findByTestId('insertion-indicator');
-    userEvent.type(list, '{arrowdown}');
-    userEvent.type(list, '{arrowdown}');
-    userEvent.type(insertionIndicator, '{enter}');
+    await userEvent.type(list, '{arrowdown}');
+    await userEvent.type(list, '{arrowdown}');
+    await userEvent.type(insertionIndicator, '{enter}');
     expect(onReorder).toHaveBeenCalled();
   });
 });

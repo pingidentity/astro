@@ -12,12 +12,12 @@ const getComponent = (props = {}) => render((
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <ListViewItemEditButton {...props} /> });
 
-test('ListViewItemEditButton responds to IconButton props', () => {
+test('ListViewItemEditButton responds to IconButton props', async () => {
   const onPress = jest.fn();
   getComponent({ onPress });
 
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
 
   expect(onPress).toBeCalled();
 });

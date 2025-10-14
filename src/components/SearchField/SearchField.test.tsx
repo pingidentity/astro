@@ -40,34 +40,34 @@ test('default search field', () => {
   expect(label).toBeInTheDocument();
 });
 
-test('default search clear', () => {
+test('default search clear', async () => {
   getComponent();
   const search = screen.getByLabelText(testLabel);
 
   expect(search).toHaveValue('');
-  userEvent.type(search, testLabel);
+  await userEvent.type(search, testLabel);
   expect(search).toHaveValue(testLabel);
-  userEvent.type(search, '{esc}');
+  await userEvent.type(search, '{esc}');
   expect(search).toHaveValue('');
 });
 
-test('search onClear', () => {
+test('search onClear', async () => {
   const onClear = jest.fn();
   getComponent({ onClear });
   const search = screen.getByLabelText(testLabel);
 
   expect(onClear).not.toHaveBeenCalled();
-  userEvent.type(search, `${testLabel}{esc}`);
+  await userEvent.type(search, `${testLabel}{esc}`);
   expect(onClear).toHaveBeenCalledWith();
 });
 
-test('search onSubmit', () => {
+test('search onSubmit', async () => {
   const onSubmit = jest.fn();
   getComponent({ onSubmit });
   const search = screen.getByLabelText(testLabel);
 
   expect(onSubmit).not.toHaveBeenCalled();
-  userEvent.type(search, `${testLabel}{enter}`);
+  await userEvent.type(search, `${testLabel}{enter}`);
   expect(onSubmit).toHaveBeenCalledWith(testLabel);
 });
 
@@ -97,7 +97,7 @@ test('search autoFocus', () => {
   expect(search).toHaveFocus();
 });
 
-test('search focus events', () => {
+test('search focus events', async () => {
   const onBlur = jest.fn();
   const onFocus = jest.fn();
   getComponent({ onBlur, onFocus });
@@ -106,16 +106,16 @@ test('search focus events', () => {
   expect(onBlur).not.toHaveBeenCalled();
   expect(onFocus).not.toHaveBeenCalled();
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(search).toHaveFocus();
   expect(onFocus).toHaveBeenCalled();
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(search).not.toHaveFocus();
   expect(onBlur).toHaveBeenCalled();
 });
 
-test('search keyboard events', () => {
+test('search keyboard events', async () => {
   const onKeyDown = jest.fn();
   const onKeyUp = jest.fn();
   getComponent({ onKeyDown, onKeyUp });
@@ -124,7 +124,7 @@ test('search keyboard events', () => {
   expect(onKeyDown).not.toHaveBeenCalled();
   expect(onKeyUp).not.toHaveBeenCalled();
 
-  userEvent.type(screen.getByLabelText(testLabel), testLabel);
+  await userEvent.type(screen.getByLabelText(testLabel), testLabel);
   expect(onKeyUp).toHaveBeenCalled();
 });
 
@@ -134,31 +134,31 @@ test('search placeholder', () => {
   expect(search).toHaveAttribute('placeholder', testLabel);
 });
 
-test('controlled search field', () => {
+test('controlled search field', async () => {
   getComponent({ value: testLabel });
   const search = screen.getByLabelText(testLabel);
   expect(search).toHaveValue(testLabel);
 
-  userEvent.type(search, '--2');
+  await userEvent.type(search, '--2');
   expect(search).not.toHaveValue(`${testLabel}--2`);
 });
 
-test('uncontrolled search field', () => {
+test('uncontrolled search field', async () => {
   getComponent({ defaultValue: testLabel });
   const search = screen.getByLabelText(testLabel);
   expect(search).toHaveValue(testLabel);
 
-  userEvent.type(search, '--2');
+  await userEvent.type(search, '--2');
   expect(search).toHaveValue(`${testLabel}--2`);
 });
 
-test('search onChange', () => {
+test('search onChange', async () => {
   const onChange = jest.fn();
   getComponent({ onChange });
   const search = screen.getByLabelText(testLabel);
   expect(onChange).not.toHaveBeenCalled();
 
-  userEvent.type(search, '-');
+  await userEvent.type(search, '-');
   expect(onChange).toHaveBeenNthCalledWith(1, '-');
 });
 
@@ -184,10 +184,10 @@ test('clear button should be present by default ', () => {
   expect(screen.getByRole('button')).toBeInTheDocument();
 });
 
-test('clear button should be keyboard accessible', () => {
+test('clear button should be keyboard accessible', async () => {
   getComponent();
   const search = screen.getByLabelText(testLabel);
-  userEvent.type(search, 'clear');
+  await userEvent.type(search, 'clear');
   expect(search).toHaveValue('clear');
 
   const clearButton = screen.getByRole('button');

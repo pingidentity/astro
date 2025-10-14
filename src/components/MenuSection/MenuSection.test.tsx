@@ -32,16 +32,16 @@ const getComponent = (props = {}, {
 } = {}) => renderFn((
   <Menu {...defaultProps} {...props}>
     {items.map(section => {
-    const { key, children, ...sectionProps } = section;
-    return (
-      <Section key={key} {...sectionProps}>
-        {children.map(li => {
-          const { key, ...itemProps } = li;
-          return <Item key={key} {...itemProps} />;
-        })}
-      </Section>
-    );
-  })}
+      const { key, children, ...sectionProps } = section;
+      return (
+        <Section key={key} {...sectionProps}>
+          {children.map(li => {
+            const { key: itemKey, ...itemProps } = li;
+            return <Item key={itemKey} {...itemProps} />;
+          })}
+        </Section>
+      );
+    })}
   </Menu>
 ));
 
@@ -50,17 +50,17 @@ universalComponentTests({
   renderComponent: props => (
     <Menu {...defaultProps} {...props}>
       {defaultMenuSections.map(section => {
-      const { key, children, ...sectionProps } = section;
+        const { key, children, ...sectionProps } = section;
 
-      return (
-        <Section key={key} {...sectionProps}>
+        return (
+          <Section key={key} {...sectionProps}>
             {section.children.map(li => {
-              const { key, ...itemProps } = li;
-              return <Item key={key} {...itemProps} sx={{ backgroundColor: 'orange' }}/>;
+              const { key: sectionItemKey, ...itemProps } = li;
+              return <Item key={sectionItemKey} {...itemProps} sx={{ backgroundColor: 'orange' }} />;
             })}
-        </Section>
-      );
-    })}
+          </Section>
+        );
+      })}
     </Menu>
   ),
 });

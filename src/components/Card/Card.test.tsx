@@ -39,7 +39,7 @@ test('renders children within Card component', () => {
   expect(mockedChildren).toBeInTheDocument();
 });
 
-test('card allows hover, focus, and press events', () => {
+test('card allows hover, focus, and press events', async () => {
   const children = (
     <Button />
   );
@@ -50,18 +50,18 @@ test('card allows hover, focus, and press events', () => {
   const card = screen.getByTestId(testId);
 
   expect(card).not.toHaveClass('is-hovered');
-  userEvent.hover(card);
+  await userEvent.hover(card);
   expect(card).toHaveClass('is-hovered');
 
-  userEvent.click(card);
+  await userEvent.click(card);
   expect(onPress).toHaveBeenCalled();
 
   expect(card).not.toHaveClass('is-focused');
-  userEvent.tab();
+  await userEvent.tab();
   expect(card).toHaveClass('is-focused');
 });
 
-test('allows focus within card', () => {
+test('allows focus within card', async () => {
   const children = (
     <Button />
   );
@@ -71,10 +71,10 @@ test('allows focus within card', () => {
   const card = screen.getByTestId(testId);
 
   expect(button).not.toHaveClass('is-focused');
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).not.toHaveClass('is-focused');
   expect(card).toHaveClass('is-focused');
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).toHaveClass('is-focused');
 });
 
@@ -103,19 +103,19 @@ test('renders Card component with text selection', async () => {
 
     // Interact with the TextField
     const textField = screen.getByLabelText('Interactive TextField');
-    userEvent.click(textField);
-    userEvent.type(textField, selectedText);
+    await userEvent.click(textField);
+    await userEvent.type(textField, selectedText);
 
     expect(textField).toHaveValue(selectedText);
   }
 });
 
 
-test('is-select class added when isSelected pass to it', () => {
+test('is-select class added when isSelected pass to it', async () => {
   getComponent({ variant: 'cards.activeCard', isSelected: true });
 
   const card = screen.getByTestId(testId);
 
-  userEvent.click(card);
+  await userEvent.click(card);
   expect(card).toHaveClass('is-selected');
 });

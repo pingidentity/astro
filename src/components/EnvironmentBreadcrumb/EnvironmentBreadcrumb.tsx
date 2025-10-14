@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react';
 import {
-  type AriaPositionProps, type OverlayTriggerAria, type OverlayTriggerProps, FocusScope, mergeProps,
-  PositionAria,
+  type AriaPositionProps, FocusScope, mergeProps,
+  type OverlayTriggerAria, type OverlayTriggerProps, PositionAria,
   useOverlayPosition, useOverlayTrigger,
 } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
@@ -133,7 +133,9 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
       children: children!,
       disabledKeys: imperativeDisabledKeys,
       items,
-      filter: imperativeItemsFilter || filterNodesWithChildren as (nodes: Iterable<Node<EnvironmentItemProps>>) => Iterable<Node<EnvironmentItemProps>>,
+      filter: imperativeItemsFilter || filterNodesWithChildren as (
+        nodes: Iterable<Node<EnvironmentItemProps>>
+      ) => Iterable<Node<EnvironmentItemProps>>,
       onSelectionChange: handleSelectionChange,
       selectedKeys,
       selectionMode: 'single',
@@ -150,7 +152,7 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
       // variable is not isListEmpty because checks below if(isListHasItems) is clearer
       // to read than if(!isListEmpty) IMO
       let isListHasItems = false;
-      // eslint-disable-next-line consistent-return
+
       (function f(listState: ListState<EnvironmentItemProps> | Node<EnvironmentItemProps>) {
         // if the list has items - we don't need to go deeper into the recursion
         if (isListHasItems) {

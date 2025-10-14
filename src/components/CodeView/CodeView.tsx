@@ -73,9 +73,9 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
         <Box as="pre" className={className} style={style} tabIndex="0">
           {tokens.map((line, i) => {
             const { key, ...lineProps } = getLineProps({ line, key: i });
-            return(
-            <Box key={key} isRow {...lineProps}>
-              {hasLineNumbers
+            return (
+              <Box key={key} isRow {...lineProps}>
+                {hasLineNumbers
                 && (
                   <Box
                     as="span"
@@ -85,12 +85,16 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
                     {i + 1}
                   </Box>
                 )}
-               {line.map((token, key) => {
-                const { key : tokenKey, ...otherProps } = getTokenProps({ token, key });
-                return <span {...otherProps} key={key || tokenKey}/>;
-              })}
-            </Box>
-          )})}
+                {line.map((token, tokenIndex) => {
+                  const {
+                    key: tokenKey,
+                    ...otherProps
+                  } = getTokenProps({ token, key: tokenIndex });
+                  return <span {...otherProps} key={tokenIndex || tokenKey} />;
+                })}
+              </Box>
+            );
+          })}
         </Box>
       )}
     </Highlight>

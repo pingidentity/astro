@@ -1,11 +1,12 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import 'jest-canvas-mock';
+
 import { ColorFieldProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
-import 'jest-canvas-mock'
 
 import ColorField from './ColorField';
 
@@ -47,27 +48,27 @@ test('button will have provided color background', () => {
   expect(button).toHaveStyle(`background-color: ${testColor1}`);
 });
 
-test('will call onChange with arguments if provided', () => {
+test('will call onChange with arguments if provided', async () => {
   const testOnChange = jest.fn();
   getComponent({ onChange: testOnChange, value: testColor1 });
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   const hexInput = screen.getByLabelText(hexLabel);
-  userEvent.clear(hexInput);
-  userEvent.type(hexInput, testColor2);
+  await userEvent.clear(hexInput);
+  await userEvent.type(hexInput, testColor2);
   expect(testOnChange).toHaveBeenCalled();
 });
 
-test('clicking within the popover does not close it', () => {
+test('clicking within the popover does not close it', async () => {
   const testOnChange = jest.fn();
   getComponent({ onChange: testOnChange, value: testColor1 });
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   // should be open now
   const hexLabelElement = screen.queryByText(hexLabel);
   expect(hexLabelElement).toBeInTheDocument();
   // click the popover container, which has caused closing in regressions
-  userEvent.click(screen.getByRole('presentation'));
+  await userEvent.click(screen.getByRole('presentation'));
   expect(screen.getByRole('presentation')).toBeInTheDocument();
 });
 
@@ -78,13 +79,13 @@ test('renders detailed button preview mode correctly', () => {
   expect(screen.getByText(testColor1.toLocaleUpperCase())).toBeInTheDocument();
 });
 
-test('renders MenuUp / MenuDown icon correctly', () => {
+test('renders MenuUp / MenuDown icon correctly', async () => {
   getComponent({ mode: 'detailed-button-preview', value: testColor1 });
 
   const button = screen.getByRole('button');
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.getByTitle('menu-up')).toBeInTheDocument();
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(screen.getByTitle('menu-down')).toBeInTheDocument();
 });

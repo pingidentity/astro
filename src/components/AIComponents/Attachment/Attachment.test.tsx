@@ -15,7 +15,7 @@ const defaultProps = {
 };
 
 const getComponent = (props = {}) => render(
-  <Attachment key={'file_key'} {...defaultProps} {...props} />,
+  <Attachment key="file_key" {...defaultProps} {...props} />,
 );
 
 describe('Attachment', () => {

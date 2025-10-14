@@ -65,12 +65,12 @@ const getComposedComponentWithTransition = (defaultState = {}, modalProps = {}) 
   render(<ComposedComponentWithTransition defaultState={defaultState} modalProps={modalProps} />)
 );
 
-test('clicking the trigger should open the modal', () => {
+test('clicking the trigger should open the modal', async () => {
   getComposedComponent();
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
   // Open it with the button trigger
-  userEvent.click(screen.getByRole('button'));
+  await userEvent.click(screen.getByRole('button'));
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
 });
 
@@ -85,11 +85,11 @@ test('keyboard interaction with the trigger should open the modal', () => {
   expect(screen.queryByRole('dialog')).toBeInTheDocument();
 });
 
-test('close button should close the modal', () => {
+test('close button should close the modal', async () => {
   getComposedComponent({ isDefaultOpen: true });
 
   // Target the close button
-  userEvent.click(screen.queryAllByRole('button')[0]);
+  await userEvent.click(screen.queryAllByRole('button')[0]);
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
 
@@ -102,7 +102,7 @@ test('keyboard interactions on the close button should close the modal', () => {
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
 
-test('assign aria-hidden to elements outside the modal when the modal is opened', () => {
+test('assign aria-hidden to elements outside the modal when the modal is opened', async () => {
   getComposedComponent();
   const button = screen.getByRole('button');
   const buttonParent = button.closest('div');
@@ -110,14 +110,14 @@ test('assign aria-hidden to elements outside the modal when the modal is opened'
   expect(buttonParent).not.toHaveAttribute('aria-hidden');
 
   // Open the modal
-  userEvent.click(screen.getByRole('button'));
+  await userEvent.click(screen.getByRole('button'));
   expect(buttonParent).toHaveAttribute('aria-hidden');
 });
 
-test('is-transitioining class is applied', () => {
+test('is-transitioining class is applied', async () => {
   getComposedComponentWithTransition();
 
-  userEvent.click(screen.getByRole('button'));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(screen.getByRole('dialog')).toHaveClass('is-transitioning');
 });

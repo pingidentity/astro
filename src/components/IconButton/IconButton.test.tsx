@@ -33,17 +33,17 @@ test('default icon button', () => {
   expect(button).toBeInTheDocument();
 });
 
-test('icon button hover', () => {
+test('icon button hover', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(button).not.toHaveClass('is-hovered');
-  userEvent.hover(button);
+  await userEvent.hover(button);
   expect(button).toHaveClass('is-hovered');
-  userEvent.unhover(button);
+  await userEvent.unhover(button);
   expect(button).not.toHaveClass('is-hovered');
 });
 
-test('icon button press', () => {
+test('icon button press', async () => {
   const onPress = jest.fn();
   getComponent({ onPress });
   const button = screen.getByRole('button');
@@ -54,7 +54,7 @@ test('icon button press', () => {
   expect(button).toHaveClass('is-pressed');
 
   // Finish the click to fire the event handler
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(button).not.toHaveClass('is-pressed');
   expect(onPress).toHaveBeenCalledTimes(1);
 });
@@ -73,27 +73,27 @@ test('keyboard icon button press', () => {
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 
-test('button focus', () => {
+test('button focus', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(button).not.toHaveFocus();
   expect(button).not.toHaveClass('is-focused');
 
-  userEvent.tab();
+  await userEvent.tab();
   expect(button).toHaveFocus();
   expect(button).toHaveClass('is-focused');
 });
 
-test('tooltip is shown on focus when the prop is passed and not show by default', () => {
+test('tooltip is shown on focus when the prop is passed and not show by default', async () => {
   getComponent({
     title: 'Test Tooltip',
   });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
-test('tooltipTrigger applies nested props correctly', () => {
+test('tooltipTrigger applies nested props correctly', async () => {
   getComponent({
     title: 'Test Tooltip',
     tooltipTriggerProps: {
@@ -101,7 +101,7 @@ test('tooltipTrigger applies nested props correctly', () => {
     },
   });
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
   expect(screen.queryByTestId('popover-container')).toHaveClass('is-right');
 });
@@ -117,11 +117,11 @@ test('tooltip is shown on hover when the prop is passed and not show by default'
   expect(screen.queryByRole('tooltip')).toBeInTheDocument();
 });
 
-test('tooltip is not shown on hover or focus when prop is not passed', () => {
+test('tooltip is not shown on hover or focus when prop is not passed', async () => {
   getComponent();
   const button = screen.getByRole('button');
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
-  userEvent.tab();
+  await userEvent.tab();
   expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
   fireEvent.mouseMove(button);
   fireEvent.mouseEnter(button);

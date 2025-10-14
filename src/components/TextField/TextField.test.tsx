@@ -110,15 +110,15 @@ test('text aria container have class name when placeholder is provided', () => {
   expect(textAreaContainer.className).toMatch('has-value');
 });
 
-test('text aria container have class name when placeholder is provided and value was entered and then removed', () => {
+test('text aria container have class name when placeholder is provided and value was entered and then removed', async () => {
   const labelMode = 'float';
   getComponent({ labelMode, placeholder: 'text' });
   const textAreaContainer = screen.getByTestId(testId);
   const inputControl = screen.getByLabelText(testLabel);
   expect(textAreaContainer).toHaveClass('has-value');
-  userEvent.type(inputControl, 'test text{enter}');
+  await userEvent.type(inputControl, 'test text{enter}');
   expect(textAreaContainer).toHaveClass('has-value');
-  userEvent.clear(inputControl);
+  await userEvent.clear(inputControl);
   expect(textAreaContainer).toHaveClass('has-value');
 });
 

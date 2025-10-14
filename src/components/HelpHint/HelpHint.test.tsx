@@ -69,10 +69,10 @@ test('keeps the popover open if the popover is hovered', async () => {
 test('popover without focusable children should open onPress and disappear in 1000ms after blur', async () => {
   getComponent();
   const helpHintButton = screen.getByTestId(testId);
-  userEvent.tab();
+  await userEvent.tab();
   expect(helpHintButton).toHaveFocus();
-  userEvent.type(helpHintButton, '{enter}', { skipClick: true });
-  userEvent.tab();
+  await userEvent.type(helpHintButton, '{enter}', { skipClick: true });
+  await userEvent.tab();
 
   await waitFor(() => {
     expect(screen.queryByRole('presentation')).toBeInTheDocument();
@@ -86,9 +86,9 @@ test('popover without focusable children should open onPress and disappear in 10
 test('popover with focusable children should open onPress and focus the first focusable child', async () => {
   getComponentWithLink();
   const helpHintButton = screen.getByTestId(testId);
-  userEvent.tab();
+  await userEvent.tab();
   expect(helpHintButton).toHaveFocus();
-  userEvent.type(helpHintButton, '{enter}', { skipClick: true });
+  await userEvent.type(helpHintButton, '{enter}', { skipClick: true });
 
   await waitFor(() => {
     expect(screen.queryByRole('presentation')).toBeInTheDocument();

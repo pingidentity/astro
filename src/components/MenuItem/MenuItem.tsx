@@ -5,12 +5,12 @@ import React, {
 import { mergeProps, useMenuItem } from 'react-aria';
 import { Node, TreeState } from 'react-stately';
 import { useFocus, useHover, usePress } from '@react-aria/interactions';
+import { v4 as uuid } from 'uuid';
 
 import { useMenuContext } from '../../context/MenuContext';
 import { useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
 import { MenuItemProps } from '../../types';
 import Box from '../Box';
-import { v4 as uuid } from 'uuid';
 
 /**
  * Menu Item component intended to be used within Menu or PopupMenu.

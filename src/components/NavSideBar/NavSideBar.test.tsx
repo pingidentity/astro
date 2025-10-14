@@ -103,12 +103,12 @@ test('should render title for sections that have titles', () => {
   expect(screen.getByText('Dashboard')).toBeInTheDocument();
 });
 
-test('should select NavItemLink', () => {
+test('should select NavItemLink', async () => {
   getComponent();
   clickHeaderButtons();
   const link = screen.getByTestId('navItemLink');
   expect(link).toBeInTheDocument();
-  userEvent.click(link);
+  await userEvent.click(link);
   expect(link).toHaveClass('is-selected');
 });
 
@@ -121,22 +121,22 @@ test('should select NavItemLink on space key press', () => {
   expect(link).toHaveClass('is-selected');
 });
 
-test('should select NavItem', () => {
+test('should select NavItem', async () => {
   getComponent();
   let item;
   item = screen.queryByTestId('navItem');
   expect(item).toBeInTheDocument();
-  userEvent.click(item);
+  await userEvent.click(item);
   item = screen.queryByTestId('navItem');
   expect(item).toHaveClass('is-selected');
 });
 
-test('should select NavItemButton', () => {
+test('should select NavItemButton', async () => {
   getComponent();
   clickHeaderButtons();
   const button = screen.getByTestId('navItemButton');
   expect(button).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(button).toHaveClass('is-selected');
 });
 
@@ -158,12 +158,12 @@ test('should collapse NavItemBody on Escape key press', () => {
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 });
 
-test('should change focus between NavBarItemHeader on arrow key press', () => {
+test('should change focus between NavBarItemHeader on arrow key press', async () => {
   getComponent();
   const headerButtons = screen.getAllByRole('button');
   expect(headerButtons[0]).toBeInTheDocument();
 
-  act(() => { headerButtons[0].focus(); });
+  await act(() => { headerButtons[0].focus(); });
   expect(headerButtons[0]).toHaveClass('is-focused');
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
@@ -182,14 +182,14 @@ test('should change focus between NavBarItemHeader on arrow key press', () => {
   expect(headerButtons[0]).toHaveClass('is-focused');
 });
 
-test('should not change focus from NavItemBody to NavBarItemHeader on up/down arrow key press', () => {
+test('should not change focus from NavItemBody to NavBarItemHeader on up/down arrow key press', async () => {
   getComponent();
 
   const headerButtons = screen.getAllByRole('button');
 
   expect(headerButtons[1]).toBeInTheDocument();
 
-  act(() => { headerButtons[1].click(); });
+  await act(() => { headerButtons[1].click(); });
 
   fireEvent.keyDown(headerButtons[0], { key: 'ArrowDown', keyCode: 40 });
   expect(screen.getByTestId('navItemLink')).toHaveClass('is-focused');
@@ -208,13 +208,13 @@ test('should not change focus from NavItemBody to NavBarItemHeader on up/down ar
   expect(document.activeElement).toHaveTextContent('Populations');
 });
 
-test('should not change focus from NavItemBody to NavBarItemHeader on left/right arrow key press', () => {
+test('should not change focus from NavItemBody to NavBarItemHeader on left/right arrow key press', async () => {
   getComponent();
 
   const headerButtons = screen.getAllByRole('button');
 
   expect(headerButtons[1]).toBeInTheDocument();
-  act(() => {
+  await act(() => {
     headerButtons[1].click();
   });
 
@@ -238,18 +238,18 @@ test('passing in a string into defaultSelectedKeys makes the key selected by def
   expect(child).toHaveClass('is-selected');
 });
 
-test('expand only one item', () => {
+test('expand only one item', async () => {
   getComponent({ isAutoСollapsible: true });
   expect(screen.queryByText('Group')).not.toBeInTheDocument();
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 
   const headerButtons = screen.getAllByRole('button');
 
-  act(() => { userEvent.click(headerButtons[1]); });
+  await userEvent.click(headerButtons[1]);
   expect(screen.queryByText('Group')).toBeInTheDocument();
   expect(screen.queryByText('Users')).not.toBeInTheDocument();
 
-  act(() => { userEvent.click(headerButtons[2]); });
+  await userEvent.click(headerButtons[2]);
   expect(screen.queryByText('Group')).not.toBeInTheDocument();
   expect(screen.queryByText('Users')).toBeInTheDocument();
 });
@@ -260,7 +260,7 @@ test('default expended keys', () => {
   expect(screen.getByTestId('navItemButton')).toBeInTheDocument();
 });
 
-test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', () => {
+test('when a child is selected, and the parent is collapsed, the parent has the is-selected class', async () => {
   getComponent({ defaultSelectedKey: 'Dashboard Link Populations' });
 
   const child = screen.getByTestId('navItemButton');
@@ -269,7 +269,7 @@ test('when a child is selected, and the parent is collapsed, the parent has the 
 
   const parent = screen.getByTestId('Dashboard');
   expect(parent).not.toHaveClass('is-selected');
-  userEvent.click(parent);
+  await userEvent.click(parent);
 
   const parentDiv = screen.getByTestId('Dashboard').firstElementChild;
   expect(parentDiv).toHaveClass('is-selected');

@@ -3,9 +3,9 @@ import { Collection, Node } from 'react-stately';
 import { ListDropTargetDelegate, useDraggableCollection, useDroppableCollection } from '@react-aria/dnd';
 import { ListKeyboardDelegate } from '@react-aria/selection';
 import { DraggableCollectionStateOptions, useDraggableCollectionState, useDroppableCollectionState } from '@react-stately/dnd';
+import type { KeyboardDelegate } from '@react-types/shared';
 
 import { UseReorderableCollectionProps } from '../../types/dnd';
-import type { KeyboardDelegate } from '@react-types/shared';
 
 const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   const [draggingKey, setDraggingKey] = useState('');
@@ -64,7 +64,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   // not having this be an any would require bumping the react-aria global version.
   // not sure we want to do that at this time.
   const keyboardDelegate = new ListKeyboardDelegate(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     state.collection as Collection<Node<object>>,
     state.disabledKeys,
     ref);
@@ -85,7 +85,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
     dropState,
     ref,
   );
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useDraggableCollection(props, dragState as any, ref);
   return {
     collectionProps,

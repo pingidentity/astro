@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 
+import { useStatusClasses } from '../../hooks';
 import { Box } from '../../index';
 import { ButtonBarProps } from '../../types';
-import { useStatusClasses } from '../../hooks';
 
 const ButtonBar = forwardRef<HTMLDivElement, ButtonBarProps>((props, ref) => {
   const {

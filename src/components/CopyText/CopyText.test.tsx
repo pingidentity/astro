@@ -89,11 +89,11 @@ describe('CopyText', () => {
       expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
     });
 
-    test('copy button is focused with keyboard', () => {
+    test('copy button is focused with keyboard', async () => {
       getComponent();
       const copyBtn = screen.getByLabelText('copy to clipboard');
       expect(copyBtn).not.toHaveFocus();
-      userEvent.tab();
+      await userEvent.tab();
       expect(copyBtn).toHaveFocus();
       expect(copyBtn).toHaveClass('is-focused');
     });
@@ -141,7 +141,7 @@ describe('CopyText', () => {
         writable: true,
       });
       jest.spyOn(document, 'execCommand').mockReturnValue(false);
-      jest.spyOn(console, 'error').mockImplementation(() => { return false; }); // eslint-disable-line no-console
+      jest.spyOn(console, 'error').mockImplementation(() => { return false; });
 
       getComponent();
 
@@ -158,7 +158,7 @@ describe('CopyText', () => {
     test('after button click, the tooltip renders with the text "Copied!"', async () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
-      userEvent.click(button);
+      await userEvent.click(button);
       await act(async () => {
         expect(screen.queryByRole('tooltip')).toBeInTheDocument();
       });
@@ -168,7 +168,7 @@ describe('CopyText', () => {
     test('tooltip renders with the text "Copied!" hides after delay', async () => {
       getComponent();
       const button = screen.getByLabelText('copy to clipboard');
-      userEvent.click(button);
+      await userEvent.click(button);
       await act(async () => {
         expect(screen.queryByRole('tooltip')).toBeInTheDocument();
       });
@@ -176,9 +176,9 @@ describe('CopyText', () => {
 
       act(() => jest.advanceTimersByTime(2000));
 
-    await waitFor(() => {
-      expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
-    }, { timeout: 2000 });
+      await waitFor(() => {
+        expect(screen.queryByRole('tooltip')).toHaveTextContent('Copy to clipboard');
+      }, { timeout: 2000 });
     });
   });
 
@@ -221,12 +221,12 @@ describe('CopyText', () => {
       expect(screen.queryByRole('tooltip')).toBeInTheDocument();
     });
 
-    test('copy button is focused with keyboard', () => {
+    test('copy button is focused with keyboard', async () => {
       getComponent();
       const copyBtn = screen.getByLabelText('copy to clipboard');
       expect(copyBtn).not.toHaveFocus();
-      userEvent.tab();
-      userEvent.tab();
+      await userEvent.tab();
+      await userEvent.tab();
       expect(copyBtn).toHaveFocus();
       expect(copyBtn).toHaveClass('is-focused');
     });

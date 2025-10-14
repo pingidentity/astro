@@ -12,12 +12,12 @@ const getComponent = (props = {}) => render((
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <ListViewItemSwitchField {...props} /> });
 
-test('ListViewItemSwitchField responds to SwitchFiled props', () => {
+test('ListViewItemSwitchField responds to SwitchFiled props', async () => {
   const onChange = jest.fn();
   getComponent({ onChange });
 
   const switchField = screen.getByRole('switch');
-  userEvent.click(switchField);
+  await userEvent.click(switchField);
 
   expect(onChange).toBeCalled();
 });

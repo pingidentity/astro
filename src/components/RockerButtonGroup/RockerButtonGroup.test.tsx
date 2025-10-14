@@ -84,7 +84,7 @@ test('rockerButton renders selectedStyles prop when selected', () => {
 
 test('selected button can be changed by keyboard interaction', async () => {
   getComponent();
-  userEvent.tab();
+  await userEvent.tab();
   const button0 = screen.getByText(testButtons[0].key);
   expect(button0).toHaveClass('is-selected');
   const button1 = screen.getByText(testButtons[1].key);
@@ -100,12 +100,12 @@ test('selected button can be changed by keyboard interaction', async () => {
   expect(updatedButton0).not.toHaveClass('is-selected');
 });
 
-test('rockerButton renders correct darker bg when selectedStyles prop is passed', () => {
+test('rockerButton renders correct darker bg when selectedStyles prop is passed', async () => {
   getComponent();
   const button0 = screen.getByText(testButtons[0].key);
   expect(button0).toHaveClass('is-selected');
   expect(button0).toHaveStyle('background-color: #640099');
-  userEvent.hover(button0);
+  await userEvent.hover(button0);
   expect(button0).toHaveClass('is-selected');
   expect(button0).toHaveClass('is-hovered');
   expect(button0).toHaveStyle('background-color: #590089');
@@ -115,13 +115,13 @@ test('rockerButton renders correct darker bg when selectedStyles prop is passed'
   expect(button0).toHaveStyle('background-color: #4d0077');
 });
 
-test('rockerButton renders correct bg when selectedStyles prop is css variable', () => {
+test('rockerButton renders correct bg when selectedStyles prop is css variable', async () => {
   getComponent();
   const button1 = screen.getByText(testButtons[1].key);
   fireEvent.keyDown(screen.getByText(testButtons[0].key), { key: 'ArrowRight', code: 'ArrowRight' });
   fireEvent.keyDown(screen.getByText(testButtons[1].key), { key: 'Enter', code: 'Enter' });
   fireEvent.keyUp(screen.getByText(testButtons[1].key), { key: 'Enter', code: 'Enter' });
-  userEvent.hover(button1);
+  await userEvent.hover(button1);
   expect(button1).toHaveClass('is-selected');
   expect(button1).toHaveClass('is-hovered');
   expect(button1).toHaveStyle('background-color: #364872');

@@ -23,9 +23,9 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     onHoverChange,
     onHoverEnd,
     onHoverStart,
-    // eslint-disable-next-line no-unused-vars
+
     onSelectionChange,
-    // eslint-disable-next-line no-unused-vars
+
     selectionMode = 'none',
     ...others
   } = props;

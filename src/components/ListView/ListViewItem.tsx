@@ -69,7 +69,7 @@ const ListViewItem = props => {
     isFocusable ? { ...focusProps, ...focusWithinProps } : {},
     { onPointerLeave: onPointerLeaveFunction },
   );
-  
+
   delete mergedProps['aria-posinset'];
   delete mergedProps['aria-setsize'];
   delete mergedProps['aria-level'];

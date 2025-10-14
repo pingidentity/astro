@@ -32,7 +32,7 @@ const NavBarItemLink = (props: NavBarItemLinkProps) => {
       color={isSelected ? 'white' : undefined}
       {...others}
       sx={{
-        ...props.sx, // eslint-disable-line react/prop-types
+        ...props.sx,
         fontWeight: 1,
       }}
     />

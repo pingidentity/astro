@@ -3,10 +3,10 @@ import { useAsyncList } from 'react-stately';
 import ClockTimeEightOutlineIcon from '@pingux/mdi-react/ClockTimeEightOutlineIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+import type { Key as SharedKey } from '@react-types/shared';
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import isChromatic from 'chromatic/isChromatic';
-import { Key as SharedKey } from '@react-types/shared';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box,
@@ -212,7 +212,7 @@ export const ControlledExpandableItems = ({ ...args }) => {
         {...props}
         {...args}
         items={items}
-        expandedKeys={expandedKeys }
+        expandedKeys={expandedKeys}
         onExpandedChange={onExpandedKeyCallback}
         selectionMode="expansion"
       >

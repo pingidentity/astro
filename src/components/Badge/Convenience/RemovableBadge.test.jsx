@@ -29,10 +29,10 @@ test('renders inverted RemovableBadge component', () => {
   expect(badge).toBeInTheDocument();
 });
 
-test('click on close button triggers onClose function', () => {
+test('click on close button triggers onClose function', async () => {
   const closeFunc = jest.fn();
   getComponent({ id: 'test', onClose: closeFunc });
   const closeButton = screen.getByRole('button');
-  userEvent.click(closeButton);
+  await userEvent.click(closeButton);
   expect(closeFunc).toBeCalledWith('test');
 });

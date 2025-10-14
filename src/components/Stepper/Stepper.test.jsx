@@ -86,12 +86,12 @@ const getTabs = () => {
   return { tabs, tab0, tab1, tab2 };
 };
 
-test('click should fire `onStepChange` handler', () => {
+test('click should fire `onStepChange` handler', async () => {
   const onStepChange = jest.fn();
 
   getComponent({ onStepChange });
   const { tab1 } = getTabs();
-  userEvent.click(tab1);
+  await userEvent.click(tab1);
   expect(onStepChange).toHaveBeenCalledWith(2);
 });
 

@@ -109,7 +109,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           tabIndex={-1}
         />
       </Box>
-     </FocusRing>
+    </FocusRing>
   );
 });
 

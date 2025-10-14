@@ -76,7 +76,7 @@ afterAll(() => {
   jest.restoreAllMocks();
 });
 
-test('renders DatePicker component', () => {
+test('renders DatePicker component', async () => {
   const labelText = 'test label';
   getComponent({ label: labelText });
 
@@ -89,7 +89,7 @@ test('renders DatePicker component', () => {
   expect(label).toBeInTheDocument();
   expect(hiddenInput).toBeInTheDocument();
   expect(button).toBeInTheDocument();
-  userEvent.click(button);
+  await userEvent.click(button);
 
   expect(screen.queryByTestId('popover-container')).toBeInTheDocument();
 
@@ -99,7 +99,7 @@ test('renders DatePicker component', () => {
   expect(hiddenInput).toHaveAttribute('tabindex', '-1');
 });
 
-test('should allow user to input dates', () => {
+test('should allow user to input dates', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
   const hiddenInput = screen.queryByTestId('date-field');
@@ -122,7 +122,7 @@ test('should allow user to input dates', () => {
     fireEvent.keyDown(year, { key: 'ArrowUp' });
   }
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   expect(screen.queryByRole('heading')).toHaveTextContent('March 2025');
   expect(screen.queryByTestId('date-field')).toHaveValue('2025-03-12');
@@ -131,10 +131,10 @@ test('should allow user to input dates', () => {
   expect(selectedDate[1]).toHaveClass('is-selected');
 });
 
-test('should be able to open and navigate through the calendar by click', () => {
+test('should be able to open and navigate through the calendar by click', async () => {
   getComponent({ defaultValue: '2022-08-10' });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   const calendar = screen.queryByTestId('popover-container');
   expect(calendar).toBeInTheDocument();
@@ -143,24 +143,24 @@ test('should be able to open and navigate through the calendar by click', () => 
   const title = screen.queryByRole('heading');
 
   expect(title).toHaveTextContent('August 2022');
-  userEvent.click(buttons[2]);
+  await userEvent.click(buttons[2]);
   expect(title).toHaveTextContent('July 2022');
-  userEvent.click(buttons[3]);
+  await userEvent.click(buttons[3]);
   expect(title).toHaveTextContent('August 2022');
-  userEvent.click(screen.queryByTestId('date-field'));
+  await userEvent.click(screen.queryByTestId('date-field'));
   expect(calendar).not.toBeInTheDocument();
 });
 
-test('should be able to select dates', () => {
+test('should be able to select dates', async () => {
   const onChange = jest.fn();
   getComponent({ defaultValue: '2022-08-10', onChange });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   const dateButtons = screen.queryAllByRole('button');
   expect(dateButtons).toHaveLength(37);
   expect(dateButtons[5]).toHaveAttribute('aria-label', 'Monday, August 1, 2022');
-  userEvent.click(dateButtons[5]);
+  await userEvent.click(dateButtons[5]);
   expect(onChange).toHaveBeenCalled();
 
   const inputButtons = screen.queryAllByRole('spinbutton');
@@ -210,7 +210,7 @@ test('allows users to open calendar item with enter / space key', () => {
   expect(title).toHaveTextContent('August 2022');
 });
 
-test('allows users to select and navigate through the date picker', () => {
+test('allows users to select and navigate through the date picker', async () => {
   const onChange = jest.fn();
   getComponent({ defaultValue: '2023-01-01', onChange });
 
@@ -218,32 +218,32 @@ test('allows users to select and navigate through the date picker', () => {
   expect(screen.queryByTestId('popover-container')).not.toBeInTheDocument();
 
   // year segment
-  userEvent.tab();
+  await userEvent.tab();
   // month segment
-  userEvent.tab();
+  await userEvent.tab();
   // day segment
-  userEvent.tab();
+  await userEvent.tab();
   // button
-  userEvent.tab();
+  await userEvent.tab();
   expect(iconButton).toHaveFocus();
 
-  userEvent.type(iconButton, '{enter}', { skipClick: true });
+  await userEvent.type(iconButton, '{enter}', { skipClick: true });
   expect(screen.queryByTestId('popover-container')).toBeInTheDocument();
 
   const buttons = screen.queryAllByRole('button');
   expect(buttons[5]).toHaveFocus();
 
-  userEvent.type(buttons[5], '{arrowright}', { skipClick: true });
+  await userEvent.type(buttons[5], '{arrowright}', { skipClick: true });
   expect(buttons[6]).toHaveFocus();
-  userEvent.type(buttons[6], '{arrowleft}', { skipClick: true });
+  await userEvent.type(buttons[6], '{arrowleft}', { skipClick: true });
   expect(buttons[5]).toHaveFocus();
 
-  userEvent.type(buttons[5], '{arrowdown}', { skipClick: true });
+  await userEvent.type(buttons[5], '{arrowdown}', { skipClick: true });
   expect(buttons[12]).toHaveFocus();
-  userEvent.type(buttons[12], '{arrowup}', { skipClick: true });
+  await userEvent.type(buttons[12], '{arrowup}', { skipClick: true });
   expect(buttons[5]).toHaveFocus();
 
-  userEvent.type(buttons[5], '{enter}', { skipClick: true });
+  await userEvent.type(buttons[5], '{enter}', { skipClick: true });
   expect(screen.queryByTestId('popover-container')).not.toBeInTheDocument();
   expect(onChange).toHaveBeenNthCalledWith(1, parseDate('2023-01-01'));
   // FIXME: The icon button should now have focus, but the test below won't currently pass
@@ -251,90 +251,90 @@ test('allows users to select and navigate through the date picker', () => {
   // expect(iconButton).toHaveFocus();
 });
 
-test('date picker with controlled value to change default value and clear any selection', () => {
+test('date picker with controlled value to change default value and clear any selection', async () => {
   render(<ControlledComponent />);
 
   const iconButton = screen.queryAllByRole('button');
-  userEvent.click(iconButton[0]);
+  await userEvent.click(iconButton[0]);
   const selectedDate = screen.queryByText(12);
-  userEvent.click(selectedDate);
+  await userEvent.click(selectedDate);
 
-  userEvent.click(document.body);
+  await userEvent.click(document.body);
   const buttons = screen.queryAllByRole('button');
   const changeButton = buttons[1];
   const clearButton = buttons[2];
   const inputSegments = screen.queryAllByRole('spinbutton');
   const day = inputSegments[2];
 
-  userEvent.click(changeButton);
+  await userEvent.click(changeButton);
   expect(day).toHaveTextContent(10);
 
-  userEvent.click(clearButton);
+  await userEvent.click(clearButton);
   expect(day).toHaveTextContent('dd');
 });
 
-test('readonly datepicker', () => {
+test('readonly datepicker', async () => {
   getComponent({ isReadOnly: true, defaultValue: '2022-08-10' });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   expect(screen.queryByRole('grid')).not.toBeInTheDocument();
   expect(screen.queryByTestId('date-field')).toHaveAttribute('readonly');
 });
 
-test('disabled datepicker', () => {
+test('disabled datepicker', async () => {
   getComponent({ isDisabled: true });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   expect(screen.queryByRole('grid')).not.toBeInTheDocument();
   expect(screen.queryByTestId('date-field')).toBeDisabled();
 });
 
-test('dates before minimum date cannot be selected', () => {
+test('dates before minimum date cannot be selected', async () => {
   const onChange = jest.fn();
   getComponent({ onChange, minValue: '2022-08-02', defaultValue: '2022-08-10' });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   const dateButtons = screen.queryAllByRole('button');
 
-  userEvent.click(dateButtons[1]);
+  await userEvent.click(dateButtons[1]);
   expect(screen.queryByRole('heading')).toHaveTextContent('August 2022');
 
-  userEvent.click(dateButtons[5]);
+  await userEvent.click(dateButtons[5]);
   expect(screen.queryByTestId('date-field')).not.toHaveValue('2022-08-01');
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('dates past maximum date cannot be selected', () => {
+test('dates past maximum date cannot be selected', async () => {
   const onChange = jest.fn();
   getComponent({ onChange, maxValue: '2022-08-04', defaultValue: '2022-08-01' });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   const dateButtons = screen.queryAllByRole('button');
-  userEvent.click(dateButtons[3]);
+  await userEvent.click(dateButtons[3]);
   expect(screen.queryByRole('heading')).toHaveTextContent('August 2022');
 
-  userEvent.click(dateButtons[9]);
+  await userEvent.click(dateButtons[9]);
   expect(screen.queryByTestId('date-field')).not.toHaveValue('2022-08-05');
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('unavailable dates cannot be picked', () => {
+test('unavailable dates cannot be picked', async () => {
   getComponent({ unavailableRanges, defaultValue: '2022-08-10' });
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   const dateButtons = screen.queryAllByRole('button');
-  userEvent.click(dateButtons[5]);
+  await userEvent.click(dateButtons[5]);
 
   const input = screen.queryByTestId('date-field');
   expect(input).not.toHaveValue('2022-08-01');
 
   const disabledDate = screen.queryByText(16);
-  userEvent.click(disabledDate);
+  await userEvent.click(disabledDate);
   expect(disabledDate).toHaveClass('is-unavailable');
   expect(input).not.toHaveValue('2022-08-16');
 });
@@ -355,19 +355,19 @@ test('passing hasFormatHelpText should display it', () => {
   expect(fieldHelperText).toHaveTextContent('yyyy / mm / dd');
 });
 
-test('popover closes on select', () => {
+test('popover closes on select', async () => {
   getComponent();
 
   // check the popover is not open yet
   expect(screen.queryByTestId('popover-container')).not.toBeInTheDocument();
 
   // click the calendar button to open the popover
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
   expect(screen.queryByTestId('popover-container')).toBeInTheDocument();
 
   // select a date so the popover closes
   const dateButtons = screen.queryAllByRole('button');
-  userEvent.click(dateButtons[9]);
+  await userEvent.click(dateButtons[9]);
   expect(screen.queryByTestId('popover-container')).not.toBeInTheDocument();
 });
 
@@ -439,7 +439,7 @@ test('dateField should reject invalid pasted values', async () => {
   // close button should dismiss the reject message
   const closeButton = within(errorMessage).getByRole('button');
   expect(closeButton).toBeInTheDocument();
-  userEvent.click(closeButton);
+  await userEvent.click(closeButton);
   expect(errorMessage).not.toBeInTheDocument();
 
   fireEvent(month, invalidPaste);
@@ -690,16 +690,16 @@ test('segment focus should move to previous if all are empty for day segment', (
   expect(month).toHaveFocus();
 });
 
-test('should add the correct number of padded 0 to year, month and day', () => {
+test('should add the correct number of padded 0 to year, month and day', async () => {
   getComponent({ defaultValue: '0009-08-02' });
   expect(screen.queryByTestId('date-field')).toHaveValue('0009-08-02');
 
-  userEvent.click(screen.queryByRole('button'));
+  await userEvent.click(screen.queryByRole('button'));
 
   const dateButtons = screen.queryAllByRole('button');
 
   expect(dateButtons[5]).toHaveAttribute('aria-label', 'Saturday, August 1, 9');
-  userEvent.click(dateButtons[5]);
+  await userEvent.click(dateButtons[5]);
 
   expect(screen.queryByTestId('date-field')).toHaveValue('0009-08-01');
 });

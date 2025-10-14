@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import { useRadio } from 'react-aria';
 
+import { RadioContext } from '../../context/RadioContext';
 import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { UseFieldProps } from '../../hooks/useField/useField';
 import { RadioFieldProps } from '../../types/radioField';
@@ -11,7 +12,6 @@ import Box from '../Box';
 import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 import Radio from '../Radio';
-import {RadioContext} from '../../context/RadioContext';
 
 
 /**

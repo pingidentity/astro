@@ -58,7 +58,7 @@ test('when there are no buttonProps, it does not render a button', () => {
   expect(button).not.toBeInTheDocument();
 });
 
-test('when the button is pressed, it calls the onPress callback', () => {
+test('when the button is pressed, it calls the onPress callback', async () => {
   const onPress = jest.fn();
   const customButtonProps = { bg: '#000000' };
 
@@ -66,6 +66,6 @@ test('when the button is pressed, it calls the onPress callback', () => {
   const button = screen.getByRole('button');
   expect(button).toHaveStyle('background: #000000');
 
-  userEvent.click(button);
+  await userEvent.click(button);
   expect(onPress).toHaveBeenCalled();
 });

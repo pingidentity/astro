@@ -85,13 +85,13 @@ test('onSubmit prop works correctly', async () => {
   const control = screen.getByLabelText(testLabel);
 
   // Try to click before entering a value
-  userEvent.click(screen.getByTestId(buttonTestId));
+  await userEvent.click(screen.getByTestId(buttonTestId));
   expect(screen.getByTestId(buttonTestId)).toBeDisabled();
   expect(onSubmitCallback).toHaveBeenCalledTimes(0);
 
   // Enter a value and click
   await userEvent.type(control, testValue);
-  userEvent.click(screen.getByTestId(buttonTestId));
+  await userEvent.click(screen.getByTestId(buttonTestId));
   expect(onSubmitCallback).toHaveBeenCalledTimes(1);
 
   // Type a value and press enter
@@ -125,7 +125,7 @@ test('onCancel prop works correctly', async () => {
 
   // Click the button
   await userEvent.type(control, testValue);
-  userEvent.click(screen.getByTestId(buttonTestId));
+  await userEvent.click(screen.getByTestId(buttonTestId));
   expect(onCancelCallback).toHaveBeenCalledTimes(1);
 
   // Press enter
@@ -180,7 +180,7 @@ test('should add and remove a file attachment', async () => {
   expect(screen.getByTestId(testId2)).toBeInTheDocument();
 
   const removeButton = screen.getByTestId('remove-attachment');
-  userEvent.click(removeButton);
+  await userEvent.click(removeButton);
 
   expect(onFileChangeCallback).toHaveBeenCalledTimes(2);
 
@@ -212,7 +212,7 @@ test('should use default icon if no icon is provided', async () => {
   expect(screen.getByTestId(testId2)).toBeInTheDocument();
 
   const removeButton = screen.getByTestId('remove-attachment');
-  userEvent.click(removeButton);
+  await userEvent.click(removeButton);
 
   expect(onFileChangeCallback).toHaveBeenCalledTimes(2);
 

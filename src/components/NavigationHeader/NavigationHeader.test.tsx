@@ -240,31 +240,31 @@ test('renders NavigationHeader component with link', () => {
   expect(screen.getByLabelText('Reports')).toBeInTheDocument();
 });
 
-test('renders NavigationHeader component with theme toggle icon button', () => {
+test('renders NavigationHeader component with theme toggle icon button', async () => {
   getComponent();
   const themeIcon = screen.getByTestId('theme-toggle-icon-button');
   expect(themeIcon).toBeInTheDocument();
   expect(screen.getByText('MoonWaningCrescentIcon')).toBeInTheDocument();
-  userEvent.click(themeIcon);
+  await userEvent.click(themeIcon);
   expect(screen.getByText('WhiteBalanceSunnyIcon')).toBeInTheDocument();
 });
 
-test('should have is-focused class when focus', () => {
+test('should have is-focused class when focus', async () => {
   getComponent({ isSticky: true });
   const logoBand = screen.getByTestId('logo-band');
   expect(logoBand).not.toHaveFocus();
-  userEvent.tab();
+  await userEvent.tab();
   expect(logoBand).toHaveFocus();
   expect(logoBand).toHaveClass('is-focused');
-  userEvent.tab();
+  await userEvent.tab();
   expect(logoBand).not.toHaveClass('is-focused');
   expect(logoBand).not.toHaveFocus();
 });
 
-test('should open dropdown menu when clicked', () => {
+test('should open dropdown menu when clicked', async () => {
   getComponent();
   const helpSupport = screen.getByTestId('help-support-button');
-  userEvent.click(helpSupport);
+  await userEvent.click(helpSupport);
   const menuItem = screen.getByText('Help & Support');
   expect(menuItem).toBeInTheDocument();
 });
@@ -272,7 +272,7 @@ test('should open dropdown menu when clicked', () => {
 test('should open dropdown menu when clicked', async () => {
   getComponent();
   const helpSupport = screen.getByTestId('help-support-button');
-  userEvent.click(helpSupport);
+  await userEvent.click(helpSupport);
   const menuItem = screen.getByText('Help & Support');
   expect(menuItem).toBeInTheDocument();
 
@@ -286,10 +286,10 @@ test('should render HeaderAccountMenu component', () => {
   expect(headerAccountMenuElement).toBeInTheDocument();
 });
 
-test('should render HeaderAccountMenu component with user data', () => {
+test('should render HeaderAccountMenu component with user data', async () => {
   getAccountMenuComponent({ userData });
   const headerAccountMenuElement = screen.getByTestId('user-dropdown-button');
-  userEvent.click(headerAccountMenuElement);
+  await userEvent.click(headerAccountMenuElement);
   expect(screen.getByText(`${userData.firstName} ${userData.lastName}`)).toBeInTheDocument();
   expect(screen.getByText(userData.email)).toBeInTheDocument();
 });

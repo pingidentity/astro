@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  Subtitle,
+  ArgsTable,
   Description,
   Primary,
-  ArgsTable,
-  Stories,
   PRIMARY_STORY,
+  Stories,
+  Subtitle,
 } from '@storybook/addon-docs';
 
 const DocsLayout = () => {
