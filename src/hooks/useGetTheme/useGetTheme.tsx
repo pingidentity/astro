@@ -1,4 +1,3 @@
-/* eslint-disable no-else-return */
 import { useEffect, useState } from 'react';
 import { Theme, useTheme } from '@emotion/react';
 

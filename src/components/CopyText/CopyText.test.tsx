@@ -141,7 +141,7 @@ describe('CopyText', () => {
         writable: true,
       });
       jest.spyOn(document, 'execCommand').mockReturnValue(false);
-      jest.spyOn(console, 'error').mockImplementation(() => { return false; }); // eslint-disable-line no-console
+      jest.spyOn(console, 'error').mockImplementation(() => { return false; });
 
       getComponent();
 

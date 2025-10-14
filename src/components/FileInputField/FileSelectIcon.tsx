@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { mergeProps } from 'react-aria';
 import AddIcon from '@pingux/mdi-react/AddIcon';

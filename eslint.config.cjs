@@ -50,6 +50,7 @@ module.exports = [
         FrameRequestCallback: 'readonly',
         HTMLOrSVGElement: 'readonly',
         JSX: 'readonly',
+        vi: 'readonly',
       },
       parserOptions: {
         requireConfigFile: false,

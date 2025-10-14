@@ -84,19 +84,19 @@ test('justify-content right when align prop set to right', () => {
   getComponent({ align: 'right' });
   const element = screen.getByTestId(testId);
 
-  expect(element).toHaveStyleRule('justify-content', 'right');
+  expect(element).toHaveClass('is-aligned-right');
 });
 
 test('justify-content left when align prop is set to left', () => {
   getComponent({ align: 'left' });
   const element = screen.getByTestId(testId);
 
-  expect(element).toHaveStyleRule('justify-content', 'left');
+  expect(element).toHaveClass('is-aligned-left');
 });
 
 test('justify-content left when align prop is excluded', () => {
   getComponent();
   const element = screen.getByTestId(testId);
 
-  expect(element).toHaveStyleRule('justify-content', 'left');
+  expect(element).toHaveClass('is-aligned-left');
 });

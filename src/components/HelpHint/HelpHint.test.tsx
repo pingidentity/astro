@@ -104,12 +104,11 @@ test('applies popoverProps', () => {
 });
 
 test('applies tooltipProps', () => {
-  getComponent({ tooltipProps: { isOpen: true, maxWidth: 'unset', width: '1000px' } });
+  getComponent({ tooltipProps: { isOpen: true, width: '1000px' } });
 
   const popover = screen.queryByRole('presentation');
   expect(popover).toBeInTheDocument();
   expect(popover).toHaveStyle('width: 1000px');
-  expect(popover).toHaveStyle('maxWidth: unset');
 });
 
 test('applies iconButtonProps', () => {

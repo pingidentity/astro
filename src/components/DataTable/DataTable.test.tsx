@@ -1,4 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
 import React, { useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
@@ -152,7 +151,7 @@ describe('Static DataTable', () => {
     expect(headers[1]).toHaveAttribute('aria-colindex', '2');
     expect(headers[2]).toHaveAttribute('aria-colindex', '3');
 
-    // eslint-disable-next-line no-unused-vars, no-restricted-syntax
+    // eslint-disable-next-line no-restricted-syntax
     for (const header of headers) {
       expect(header).not.toHaveAttribute('aria-sort');
       expect(header).not.toHaveAttribute('aria-describedby');

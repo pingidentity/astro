@@ -276,7 +276,8 @@ describe('SliderField Component', () => {
     getComponent({ sx: customStyles });
 
     const container = screen.getByTestId(sliderTestId);
-    expect(container).toHaveStyle({ backgroundColor: 'red', padding: '20px' });
+    expect(container).toHaveStyleRule('background-color', 'red');
+    expect(container).toHaveStyleRule('padding', '20px');
   });
 });
 

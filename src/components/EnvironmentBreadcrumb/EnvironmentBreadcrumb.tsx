@@ -152,7 +152,7 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
       // variable is not isListEmpty because checks below if(isListHasItems) is clearer
       // to read than if(!isListEmpty) IMO
       let isListHasItems = false;
-      // eslint-disable-next-line consistent-return
+
       (function f(listState: ListState<EnvironmentItemProps> | Node<EnvironmentItemProps>) {
         // if the list has items - we don't need to go deeper into the recursion
         if (isListHasItems) {

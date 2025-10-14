@@ -30,7 +30,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
     isDisabled,
     src,
     alt,
-    // eslint-disable-next-line react/prop-types
+
     sx,
     fallbackAlt,
     ...others

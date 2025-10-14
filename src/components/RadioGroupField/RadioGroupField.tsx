@@ -4,11 +4,11 @@ import { RadioGroupState, useRadioGroupState } from 'react-stately';
 import { v4 as uuid } from 'uuid';
 
 import { Box, FieldHelperText, Label } from '../..';
+import { RadioContext } from '../../context/RadioContext';
 import { usePropWarning, useStatusClasses } from '../../hooks';
 import { RadioGroupFieldProps } from '../../types/radioGroupField';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-import { RadioContext } from '../RadioField';
 
 const displayName = 'RadioGroupField';
 

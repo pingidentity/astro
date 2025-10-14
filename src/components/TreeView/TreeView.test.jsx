@@ -566,6 +566,11 @@ test('insertItem is called', () => {
 });
 
 test('insertItem is called, but does not call toggle key', () => {
+  const stateExpanded = {
+    expandedKeys: new Set(['Expanded']),
+    toggleKey: toggleStateKey,
+  };
+
   dropItem({ ...expandedEventTarget, dropPosition: 'on' }, tree, stateExpanded, exampleItem);
 
   expect(treeMove).toHaveBeenCalled();

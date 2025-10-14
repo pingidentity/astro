@@ -62,10 +62,6 @@ beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
-    cb(0);
-    return 0;
-  });
   jest.useFakeTimers();
 });
 
@@ -100,12 +96,11 @@ test('default select field', () => {
   expect(visibleLabel).toBeInTheDocument();
 
   // jest-dom .toBeVisible does not take into account aria-hidden
-  /* eslint-disable testing-library/no-node-access */
+
   expect(hiddenInput.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleInput.closest('[aria-hidden="true"]')).toBeNull();
   expect(hiddenLabel.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleLabel.closest('[aria-hidden="true"]')).toBeNull();
-  /* eslint-enable testing-library/no-node-access */
 });
 
 test('control props work for visible button control', () => {

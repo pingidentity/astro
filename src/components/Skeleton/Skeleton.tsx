@@ -43,6 +43,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>((props, ref) => {
 
   const { classNames } = useStatusClasses(className, {
     isPulsate: animation === 'pulsate',
+    isCircular: variant === 'circular',
   });
 
   const inferrerDimensions = hasChildren ? {

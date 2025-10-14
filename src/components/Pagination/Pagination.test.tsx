@@ -125,41 +125,41 @@ describe('Pagination Component', () => {
     expect(changeFunction).not.toHaveBeenCalled();
   });
 
-  it('should call nextButtonProps.onClick when next button is clicked', () => {
+  it('should call nextButtonProps.onClick when next button is clicked', async () => {
     getComponent();
     const nextButton = screen.getByTestId(nextButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(async () => {
+    await act(async () => {
       await userEvent.click(nextButton);
     });
     expect(changeFunction).toHaveBeenCalledTimes(1);
   });
 
-  it('should not call change function when prev button is clicked, on first page', () => {
+  it('should not call change function when prev button is clicked, on first page', async () => {
     getComponent();
     const previousButton = screen.getByTestId(prevButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(async () => {
+    await act(async () => {
       await userEvent.click(previousButton);
     });
     expect(changeFunction).not.toHaveBeenCalled();
   });
 
-  it('should not call change function when next button is clicked, on last page', () => {
+  it('should not call change function when next button is clicked, on last page', async () => {
     getComponent({ currentPageIndex: 24 });
     const nextButton = screen.getByTestId(nextButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(async () => {
+    await act(async () => {
       await userEvent.click(nextButton);
     });
     expect(changeFunction).not.toHaveBeenCalled();
   });
 
-  it('should call change function when prev button is clicked', () => {
+  it('should call change function when prev button is clicked', async () => {
     getComponent({ currentPageIndex: 24 });
     const previousButton = screen.getByTestId(prevButtonId);
     expect(changeFunction).not.toHaveBeenCalled();
-    act(async () => {
+    await act(async () => {
       await userEvent.click(previousButton);
     });
     expect(changeFunction).toHaveBeenCalledTimes(1);

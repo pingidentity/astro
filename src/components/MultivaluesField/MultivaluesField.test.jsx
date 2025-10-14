@@ -116,7 +116,6 @@ beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
-  jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => cb());
   jest.useFakeTimers();
 });
 
@@ -150,18 +149,19 @@ test('opens listbox on focus and fires "onFocus', async () => {
   expect(onFocus).toBeCalled();
 });
 
-test('closes listbox on blur and fires "onBlur"', () => {
+test('closes listbox on blur and fires "onBlur"', async () => {
   const onBlur = jest.fn();
   getComponent({ onBlur });
   const input = screen.getByRole('combobox');
-  act(async () => {
-    await userEvent.tab();
-  });
+  await userEvent.tab();
+
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  act(() => {
+  await act(() => {
     input.blur();
   });
+
+
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onBlur).toBeCalled();
 });
@@ -203,9 +203,10 @@ test('opening and closing listbox fires "onOpenChange"', async () => {
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
-  act(() => {
+  await act(() => {
     input.blur();
   });
+
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
@@ -221,15 +222,12 @@ test('multiple selection is enabled, option disappears after selection', async (
 
   const options = within(listbox).getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
+
   expect(firstOption).not.toBeInTheDocument();
 
   const secondOption = options[1];
-  act(() => {
-    secondOption.click();
-  });
+  await userEvent.click(secondOption);
 
   expect(secondOption).not.toBeInTheDocument();
 });
@@ -272,9 +270,8 @@ test('clicking an option renders badge with option name', async () => {
 
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
+
   expect(firstOption).not.toBeInTheDocument();
 
   const badge = screen.getByText(items[0].name);
@@ -291,9 +288,7 @@ test('after clicking an option, and then clicking the text input, the listbox re
 
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
   expect(firstOption).not.toBeInTheDocument();
 
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
@@ -314,9 +309,7 @@ test('after clicking an option, and then typing a custom input, the listbox rema
 
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
   expect(firstOption).not.toBeInTheDocument();
   await userEvent.clear(input);
 
@@ -338,23 +331,20 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
 
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
   expect(firstOption).not.toBeInTheDocument();
 
   const badge = screen.getByText(items[0].name);
   expect(badge).toBeInTheDocument();
   const { nextSibling: deleteButton } = badge;
-  act(() => {
-    deleteButton.click();
-  });
+  await userEvent.click(deleteButton);
   expect(badge).not.toBeInTheDocument();
 
-  act(() => {
+  await act(() => {
     input.blur();
   });
-  act(() => {
+
+  await act(() => {
     input.focus();
   });
 
@@ -374,15 +364,11 @@ test('clicking an option fires "onSelectionChange"', async () => {
 
   const options = within(listbox).getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
   expect(firstOption).not.toBeInTheDocument();
 
   const secondOption = options[1];
-  act(() => {
-    secondOption.click();
-  });
+  await userEvent.click(secondOption);
   expect(secondOption).not.toBeInTheDocument();
 
   expect(onSelectionChange).toBeCalledTimes(2);
@@ -546,9 +532,7 @@ test('in non-restrictive mode the value that was already selected using the list
   const listbox = screen.getByRole('listbox');
   const options = within(listbox).getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
 
   expect(onSelectionChange.mock.calls[0][0].has(items[0].name)).toBeTruthy();
   onSelectionChange.mockClear();
@@ -773,9 +757,7 @@ test('deleting a single badge via keyboard moves focus to the input', async () =
   await userEvent.tab();
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
 
   const badge = screen.getByText(items[0].name);
   expect(badge).toBeInTheDocument();
@@ -796,12 +778,8 @@ test('deleting the last badge via keyboard moves focus to the previous badge', a
   const options = screen.getAllByRole('option');
   const firstOption = options[0];
   const secondOption = options[1];
-  act(() => {
-    firstOption.click();
-  });
-  act(() => {
-    secondOption.click();
-  });
+  await userEvent.click(firstOption);
+  await userEvent.click(secondOption);
 
   const badge1 = screen.getByText(items[0].name);
   const badge2 = screen.getByText(items[1].name);
@@ -931,27 +909,19 @@ test('in condensed mode selects and deselects ', async () => {
   const buttons = screen.getAllByRole('button');
   const button = buttons[1];
   expect(button).toHaveTextContent('Select All');
-  act(() => {
-    button.click();
-  });
-
+  await userEvent.click(button);
   expect(button).toHaveTextContent('Deselect All');
 
   expect(screen.getByText('All Selected')).toBeInTheDocument();
 
-  act(() => {
-    firstOption.click();
-  });
+  await userEvent.click(firstOption);
   expect(button).toHaveTextContent('Select All');
   expect(screen.getByText('2 Selected')).toBeInTheDocument();
 
-  act(() => {
-    button.click();
-  });
+  await userEvent.click(firstOption);
+
   expect(button).toHaveTextContent('Deselect All');
-  act(() => {
-    button.click();
-  });
+  await userEvent.click(button);
   expect(button).toHaveTextContent('Select All');
 });
 
@@ -989,9 +959,10 @@ test('opening and closing listbox fires "onOpenChange" in condensed mode', async
   expect(input).toHaveFocus();
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(true);
-  act(() => {
+  await act(() => {
     input.blur();
   });
+
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onOpenChange).toHaveBeenCalledWith(false);
 });
@@ -1086,6 +1057,7 @@ test('closes listbox on blur and fires "onBlur"', async () => {
   act(() => {
     input.blur();
   });
+
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onBlur).toBeCalled();
 });
@@ -1127,9 +1099,7 @@ test('popover closes on input blur', async () => {
   expect(checkboxes.length).toBe(3);
 
   const secondOption = options[1];
-  act(() => {
-    secondOption.click();
-  });
+  await userEvent.click(secondOption);
 
   const value = 'Aardvark';
   await userEvent.type(input, value);

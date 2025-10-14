@@ -114,12 +114,11 @@ test('default select field', () => {
   expect(visibleLabel).toBeInTheDocument();
 
   // jest-dom .toBeVisible does not take into account aria-hidden
-  /* eslint-disable testing-library/no-node-access */
+
   expect(hiddenInput.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleInput.closest('[aria-hidden="true"]')).toBeNull();
   expect(hiddenLabel.closest('[aria-hidden="true"]')).not.toBeNull();
   expect(visibleLabel.closest('[aria-hidden="true"]')).toBeNull();
-  /* eslint-enable testing-library/no-node-access */
 });
 
 test('passing helper text should display it and correct aria attributes on input', () => {

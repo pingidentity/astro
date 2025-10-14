@@ -10,18 +10,23 @@ function generateUniqueMessage() {
   return message;
 }
 
+let originalEnv;
+let spy;
+
 beforeEach(() => {
+  originalEnv = process.env.NODE_ENV;
   process.env.NODE_ENV = 'development';
-  global.console.warn = () => jest.mock(); // eslint-disable-line no-console
+  vi.spyOn(console, 'warn').mockImplementation(() => undefined);
 });
 
 afterEach(() => {
   process.env.NODE_ENV = 'test';
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
+  vi.clearAllTimers();
 });
 
 test('default useDeprecationWarning', () => {
-  const spy = jest.spyOn(console, 'warn');
+  const spy = vi.spyOn(console, 'warn');
   expect(spy).not.toHaveBeenCalled();
   renderHook(() => useDeprecationWarning());
   expect(spy).toHaveBeenCalledTimes(1);
@@ -29,7 +34,7 @@ test('default useDeprecationWarning', () => {
 
 test('useDeprecationWarning with string', () => {
   const string = generateUniqueMessage();
-  const spy = jest.spyOn(console, 'warn');
+  const spy = vi.spyOn(console, 'warn');
   expect(spy).not.toHaveBeenCalled();
   renderHook(() => useDeprecationWarning(string));
   expect(spy).toHaveBeenNthCalledWith(1,
@@ -41,7 +46,7 @@ test('useDeprecationWarning with string', () => {
 });
 
 test('useDeprecationWarning by default ignores duplicated messages', () => {
-  const spy = jest.spyOn(console, 'warn');
+  const spy = vi.spyOn(console, 'warn');
   const message = generateUniqueMessage();
   renderHook(() => useDeprecationWarning(message));
   renderHook(() => useDeprecationWarning(message));
@@ -49,7 +54,7 @@ test('useDeprecationWarning by default ignores duplicated messages', () => {
 });
 
 test('useDeprecationWarning shows same message for few times if explicitly allowed', () => {
-  const spy = jest.spyOn(console, 'warn');
+  const spy = vi.spyOn(console, 'warn');
   const message = generateUniqueMessage();
   renderHook(() => useDeprecationWarning(message, { onlyOnce: false }));
   renderHook(() => useDeprecationWarning(message, { onlyOnce: false }));
@@ -57,7 +62,7 @@ test('useDeprecationWarning shows same message for few times if explicitly allow
 });
 
 test('shows message after isActive is flipped from false to true', () => {
-  const spy = jest.spyOn(console, 'warn');
+  const spy = vi.spyOn(console, 'warn');
   const message = generateUniqueMessage();
   const { rerender } = renderHook(
     ([...args]) => useDeprecationWarning(...args),

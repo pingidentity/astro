@@ -64,7 +64,7 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   // not having this be an any would require bumping the react-aria global version.
   // not sure we want to do that at this time.
   const keyboardDelegate = new ListKeyboardDelegate(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     state.collection as Collection<Node<object>>,
     state.disabledKeys,
     ref);

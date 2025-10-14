@@ -115,10 +115,10 @@ test('click on copy button copies data to the clipboard', async () => {
 test('after button click, the tooltip renders with the text "Copied!"', async () => {
   getComponent();
   const button = screen.getByLabelText('copy to clipboard');
-  act(async () => {
+  await act(async () => {
     await userEvent.hover(button);
   });
-  act(() => { jest.advanceTimersByTime(500); });
+  await act(() => { jest.advanceTimersByTime(500); });
   const tooltip = screen.getByRole('tooltip');
   expect(tooltip).toBeInTheDocument();
   await act(async () => userEvent.click(button));

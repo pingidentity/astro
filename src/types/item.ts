@@ -7,7 +7,7 @@ import { DOMAttributes, StyleProps } from './shared';
 export type Status = 'default' | 'error' | 'success' | 'warning';
 
 declare module '@react-types/shared' {
-  // eslint-disable-next-line no-shadow, @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ItemProps<T> extends StyleProps, DOMAttributes {
     /** The rendered label for the item. */
     label?: string | ReactNode;

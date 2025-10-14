@@ -1,6 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import 'jest-canvas-mock';
+
 import { ColorFieldProps } from '../../types';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';

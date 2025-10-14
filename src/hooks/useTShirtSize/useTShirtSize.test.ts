@@ -8,7 +8,7 @@ import useTShirtSize from './useTShirtSize';
 describe('useTShirtSize', () => {
   beforeEach(() => {
     process.env.NODE_ENV = 'development';
-    global.console.warn = jest.fn(); // eslint-disable-line no-console
+    global.console.warn = jest.fn();
   });
 
   afterEach(() => {
