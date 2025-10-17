@@ -68,7 +68,7 @@ export interface UseFieldProps<T> {
   containerProps?: ContainerProps;
   controlProps?: ControlProps;
   defaultText?: string;
-  defaultValue?: string | number;
+  defaultValue?: string | number | undefined | null;
   direction?: string;
   disabledKeys?: string[] | Iterable<Key>;
   /** Whether the element should receive focus on render. */

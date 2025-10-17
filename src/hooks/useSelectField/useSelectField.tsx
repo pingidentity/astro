@@ -11,7 +11,7 @@ import PopoverContainer from '../../components/PopoverContainer';
 import ScrollBox from '../../components/ScrollBox';
 import { Axis, BoxProps, FocusableElement, LabelModeProps, ListBoxProps, Placement, PlacementAxis, ReactButtonRef, ReactRef, StyleProps } from '../../types';
 import { modes } from '../../utils/devUtils/constants/labelModes';
-import { FieldControlInputProps } from '../useField/useField';
+import { CustomChangeEventType, FieldControlInputProps } from '../useField/useField';
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
 export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
@@ -47,10 +47,16 @@ export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   labelProps?: ThemeUILabelProps;
   containerProps?: BoxProps;
   labelMode?: LabelModeProps;
+  onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key| null) =>
+    void | undefined;
+  value?: string | number | undefined;
 }
 
 interface ControlProps extends React.HTMLAttributes<Element>{
   'data-testid'?: string;
+  defaultValue?: string | number | undefined;
+  onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key| null) =>
+    void | undefined;
 }
 
 export interface UseSelectFieldReturnProps<T> {
@@ -130,8 +136,7 @@ const useSelectField = <T extends object>(
     children,
   };
 
-  // Create state based on the incoming props
-  // @ts-expect-error testing
+  // Create state based on the incoming prop
   const state = useSelectState(selectProps) as SelectState<T>;
 
   const popoverRef = useRef() as React.RefObject<HTMLElement>;
@@ -147,7 +152,6 @@ const useSelectField = <T extends object>(
 
   // Get props for child elements from useSelect
   const { labelProps, triggerProps, valueProps, menuProps } = useSelect(
-    // @ts-expect-error testing
     selectProps,
     state,
     triggerRef,
@@ -167,7 +171,6 @@ const useSelectField = <T extends object>(
     fieldControlInputProps,
     fieldControlWrapperProps,
     fieldLabelProps,
-    // @ts-expect-error testing
   } = useField({
     ...props,
     placeholder: props.labelMode === modes.FLOAT ? '' : placeholder,
