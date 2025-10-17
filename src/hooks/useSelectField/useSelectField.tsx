@@ -129,7 +129,9 @@ const useSelectField = <T extends object>(
     ...controlProps,
     children,
   };
+
   // Create state based on the incoming props
+  // @ts-expect-error testing
   const state = useSelectState(selectProps) as SelectState<T>;
 
   const popoverRef = useRef() as React.RefObject<HTMLElement>;
@@ -145,6 +147,7 @@ const useSelectField = <T extends object>(
 
   // Get props for child elements from useSelect
   const { labelProps, triggerProps, valueProps, menuProps } = useSelect(
+    // @ts-expect-error testing
     selectProps,
     state,
     triggerRef,
@@ -164,6 +167,7 @@ const useSelectField = <T extends object>(
     fieldControlInputProps,
     fieldControlWrapperProps,
     fieldLabelProps,
+    // @ts-expect-error testing
   } = useField({
     ...props,
     placeholder: props.labelMode === modes.FLOAT ? '' : placeholder,
