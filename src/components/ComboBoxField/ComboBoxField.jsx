@@ -116,7 +116,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     if (shouldShowAddOption) state.selectionManager.setFocusedKey(addOption);
   }, [shouldShowAddOption, inputValue, addOption, state.isOpen]);
 
-  const { buttonProps, inputProps, listBoxProps, labelProps } = useComboBox(
+  const { buttonProps, inputProps, listBoxProps, labelProps, } = useComboBox(
     {
       ...comboBoxOptions,
       buttonRef,
@@ -129,6 +129,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const {
     shouldFocusOnHover,
     shouldSelectOnPressUp,
+    ['UNSTABLE_itemBehavior']: action,
     ...otherListBoxProps
   } = listBoxProps;
 
