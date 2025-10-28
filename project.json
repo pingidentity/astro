@@ -6,7 +6,14 @@
   "tags": ["type:ui"],
   "// targets": "to see all targets run: nx show project astro --web",
   "targets": {
-    "build": {
+    "build-cjs": {
+      "executor": "nx:run-commands",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "command": "vite build --config libs/astro/vite.config-cjs.ts"
+      }
+    },
+    "build-umd": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -24,6 +31,16 @@
         ]
       }
     },
+    "build": {
+     "executor": "nx:run-commands",
+     "options": {
+       "commands": [
+         { "command": "nx run astro:build-umd" },
+         { "command": "nx run astro:build-cjs" }
+       ],
+       "parallel": false
+     }
+   },
     "serve": {
       "executor": "@nx/vite:dev-server",
       "options": {

@@ -16,6 +16,11 @@
       "import": "./index.mjs",
       "require": "./index.umd.js",
       "types": "./index.d.ts"
+    },
+    "./lib/cjs/hooks": {
+      "import": "./lib/cjs/hooks/hook.js",
+      "require": "./lib/cjs/hooks/hook.umd.cjs",
+      "types": "./lib/cjs/hooks/index.d.ts"
     }
   },
   "directories": {
