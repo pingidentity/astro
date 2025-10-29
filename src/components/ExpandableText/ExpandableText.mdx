@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/ExpandableText/ExpandableText" />
+
+# ExpandableText
+
+ExpandableText  is used to manage long texts by truncating them based on max lines. 
+It allows collapse and expand the text to view in full.
+
+### Required components
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the button. |
+| Tab | Focuses the button and follows the page tab sequence. |
+
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- The trigger button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
+- The button uses, **`aria-controls`** which references the iD of the collapsible region.

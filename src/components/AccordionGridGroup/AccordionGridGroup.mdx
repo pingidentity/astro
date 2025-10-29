@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/AccordionGridGroup/AccordionGridGroup" />
+
+# AccordionGridGroup
+
+The AccordionGrid component combines the look and functionality of a grid with that of an accordion, and is a composite component with two children:
+- The header, which controls the expansion of the body.
+- The body, which renders the content.
+
+The purpose of this component is to allow keyboard interaction with the children passed into the body and header. Use it to pass complex or focusable components into an accordion component. 
+It should have clear, concise labels, and should not be used for small amounts of static text. Use [Box](./?path=/story/components-box--default) instead.
+
+### Required components
+
+This component requires the Header, Body and Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | When focus is on the header panel of a collapsed section, these keys toggle the component. |
+| Tab | Moves focus to the next focusable component. All focusable components in the accordion are included in the page tab sequence.|
+| Shift + Tab | Moves focus to the previous focusable component. All focusable components in the accordion are included in the page tab sequence. |
+| Arrow Keys | All components are accessible using arrow keys. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The accordion grid item header button uses the **`aria-selected`** attribute to indicate the selection state of the row.
+- The accordion header button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
+- The **`aria-multiselectable`** attribute indicates that the user can toggle numerous items from the grid. 
+- The grid uses the **`aria-label`** attribute to provide an accessible name.

@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/CheckboxField/CheckboxField" />
+
+# CheckboxField
+
+This component combines Checkbox, Label, and HelperText for a complete, form-ready solution. 
+CheckboxFields are shown as square boxes that users can select or deselect to indicate true or false and should:
+- Have short, concise, clear labels.
+- Be used in multi-selection lists.
+- Be used for options that can be toggled on or off.
+
+These fields should not be used to select from mutually exclusive options. 
+Use the [RadioGroupField](./?path=/story/form-radiogroupfield--default) instead.
+
+The CheckboxField component uses [useCheckbox](https://react-spectrum.adobe.com/react-aria/useCheckbox.html) from React Aria and
+[useToggleState](https://react-spectrum.adobe.com/react-stately/useToggleState.html) from React Stately.
+
+### Required Components
+
+This component can be used independently and does not require additional components.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | ---- |
+| Space | When focused, toggles the check box on and off. |
+| Tab | Moves focus to the next focusable component and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-checked`** attribute is used to indicate the current checked status.
+- The **`aria-labelledby`** attribute is provided with the label ID to reference it.
+- The **`aria-hidden`** attribute is used to hide its content from assistive technology.

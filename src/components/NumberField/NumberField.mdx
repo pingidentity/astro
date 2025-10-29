@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/NumberField/NumberField" />
+
+# NumberField
+ 
+This component is a variation of an input field that only accepts numeric values, and can be incremented and decremented using stepper buttons. 
+It uses the [useNumberField](https://react-spectrum.adobe.com/react-aria/useNumberField.html) component from React Aria and the [useNumberFieldState](https://react-spectrum.adobe.com/react-stately/useNumberFieldState.html) component from React Stately.
+
+The NumberFields should:
+- Be used when the users may not know exact values and need to adjust it relative to its current state.
+- Set a common default value when possible for proper context. For example, travel companies put the default number of passengers to 1. The default value is easily modified by typing into the field. 
+- Use formatOptions props to include unit symbols, as appropriate.
+- Have a clear and concise label to specify what value the user should enter.
+
+This component should not be used with other digit-based values like date, telephone, and Zip code.
+
+### Required components
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | The input is focusable using the Tab key and follows the page tab sequence. |
+| Arrow keys | Can be used to increment or decrement the numbers displayed in the field. |
+| Shift + Tab | Moves focus to the previous focusable component.|
+| Stepper buttons | Pressing and holding the stepper buttons allows continuous increments or decrements. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- The input component uses the **`aria-labelledby`** attribute to reference the label.
+- The two icon buttons each use the **`aria-controls`** attribute with the input ID and the **`aria-label`** attribute to provide an accessible name.

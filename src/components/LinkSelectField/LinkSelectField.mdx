@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/LinkSelectField/LinkSelectField" />
+
+# LinkSelectField
+
+The LinkSelectField component collects information from a dropdown menu of options using [useSelect](https://react-spectrum.adobe.com/react-aria/useSelect.html) from React Aria and 
+[useSelectState](https://react-spectrum.adobe.com/react-stately/useSelectState.html) from React Stately. 
+It does not rely on native browser or mobile implementations.
+
+This component should be used to limit the options available to users. 
+It should not be used:
+- When there are fewer than 3 options for the user to choose from: 
+  - Use the [RadioGroupField](./?path=/docs/form-radiogroupfield--default) if users must choose 1 option. 
+  - Use the [CheckBoxField](./?path=/docs/form-checkboxfield--default) if users can choose more than 1 option. 
+- If the exact input value is important to specify, use the [TextField](./?path=/docs/form-textfield--default).
+
+### Required components
+
+This component requires the OverlayProvider and Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html). 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Space or Enter | When the trigger is focused, the menu opens or closes. When the menu item is focused, it selects the listbox option. |
+| Arrow keys | Can be used to move the selection in the listbox. |
+| Shift + Tab | Moves focus to the previous focusable component.|
+| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first item in the listbox. |
+| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last item in the listbox. |
+| Esc | Pressing the escape key closes the popover menu and adds focus to the previously focused component.|
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The trigger button uses the **`aria-expanded`** attribute to indicate the expansion or collapse of the popover menu, the  **`aria-label`** attribute to provide an accessible name, and the  **`aria-labelledby`** attribute to reference the label.
+- The **`aria-haspopup`** attribute indicates the type of popup content as a listbox.
+- A visually hidden DismissButton is added for screen reader users to close the overlay in the absence of a dismiss button.
+- The listbox in the popover uses the **`aria-labelledby`** attribute, which also references the label.
+- Each option uses the **`aria-selected`** attribute to indicate the selection state,  **`aria-posinset`** to give the option’s position in the current set of list items, and  **`aria-setsize`** to define the current set of options. 
+- The **`aria-disabled`** attribute value is “False” for each option, by default.

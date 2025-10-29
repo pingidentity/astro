@@ -1,0 +1,2481 @@
+Copyright 2021
+
+[ui-library-astro : latest]
+
+Phase: DEVELOPMENT
+Distribution: EXTERNAL
+
+Components: 
+
+@babel/code-frame 7.12.13 : MIT License
+@babel/helper-module-imports 7.12.13 : MIT License
+@babel/helper-plugin-utils 7.13.0 : MIT License
+@babel/helper-validator-identifier 7.12.11 : MIT License
+@babel/highlight 7.13.8 : MIT License
+@babel/plugin-syntax-jsx 7.12.13 : MIT License
+@babel/runtime 7.13.8 : MIT License
+@babel/runtime 7.15.3 : MIT License
+@babel/types 7.13.0 : MIT License
+@emotion/babel-plugin 11.3.0 : MIT License
+@emotion/cache 10.0.29 : MIT License
+@emotion/cache 11.1.3 : MIT License
+@emotion/core 10.1.1 : MIT License
+@emotion/css 10.0.27 : MIT License
+@emotion/hash 0.8.0 : MIT License
+@emotion/is-prop-valid 0.8.8 : MIT License
+@emotion/is-prop-valid 1.1.0 : MIT License
+@emotion/memoize 0.7.4 : MIT License
+@emotion/memoize 0.7.5 : MIT License
+@emotion/react 11.1.5 : MIT License
+@emotion/serialize 0.11.16 : MIT License
+@emotion/serialize 1.0.0 : MIT License
+@emotion/serialize 1.0.2 : MIT License
+@emotion/sheet 0.9.4 : MIT License
+@emotion/sheet 1.0.1 : MIT License
+@emotion/styled 10.0.27 : MIT License
+@emotion/styled 11.3.0 : MIT License
+@emotion/styled-base 10.0.31 : MIT License
+@emotion/stylis 0.8.5 : MIT License
+@emotion/unitless 0.7.5 : MIT License
+@emotion/utils 0.11.3 : MIT License
+@emotion/utils 1.0.0 : MIT License
+@emotion/weak-memoize 0.2.5 : MIT License
+@formatjs/ecma402-abstract 1.9.3 : MIT License
+@formatjs/ecma402-abstract 1.9.4 : MIT License
+@formatjs/ecma402-abstract 1.9.6 : MIT License
+@formatjs/ecma402-abstract 1.9.8 : MIT License
+@formatjs/fast-memoize 1.1.1 : ISC License
+@formatjs/fast-memoize 1.1.2 : ISC License
+@formatjs/fast-memoize 1.2.0 : ISC License
+@formatjs/icu-messageformat-parser 2.0.11 : MIT License
+@formatjs/icu-messageformat-parser 2.0.6 : MIT License
+@formatjs/icu-messageformat-parser 2.0.7 : MIT License
+@formatjs/icu-messageformat-parser 2.0.9 : MIT License
+@formatjs/icu-skeleton-parser 1.2.10 : MIT License
+@formatjs/icu-skeleton-parser 1.2.12 : MIT License
+@formatjs/icu-skeleton-parser 1.2.7 : MIT License
+@formatjs/icu-skeleton-parser 1.2.8 : MIT License
+@formatjs/intl-localematcher 0.2.19 : MIT License
+@formatjs/intl-localematcher 0.2.20 : MIT License
+@icons/material 0.2.4 : MIT License
+@internationalized/message 3.0.0 : Apache License 2.0
+@internationalized/message 3.0.0-alpha.0 : Apache License 2.0
+@internationalized/message 3.0.1 : Apache License 2.0
+@internationalized/message 3.0.2 : Apache License 2.0
+@internationalized/number 3.0.0 : Apache License 2.0
+@internationalized/number 3.0.0-alpha.0 : Apache License 2.0
+@internationalized/number 3.0.1 : Apache License 2.0
+@internationalized/number 3.0.2 : Apache License 2.0
+@internationalized/number 3.0.3 : Apache License 2.0
+@mdx-js/react 1.6.22 : MIT License
+@popperjs/core 2.8.6 : MIT License
+@react-aria/accordion 3.0.0-alpha.1 : Apache License 2.0
+@react-aria/breadcrumbs 3.1.5 : Apache License 2.0
+@react-aria/button 3.3.1 : Apache License 2.0
+@react-aria/button 3.3.2 : Apache License 2.0
+@react-aria/checkbox 3.2.1 : Apache License 2.0
+@react-aria/color 3.0.0-beta.3 : Apache License 2.0
+@react-aria/combobox 3.0.0 : Apache License 2.0
+@react-aria/dialog 3.1.2 : Apache License 2.0
+@react-aria/focus 3.2.3 : Apache License 2.0
+@react-aria/focus 3.3.0 : Apache License 2.0
+@react-aria/focus 3.4.0 : Apache License 2.0
+@react-aria/focus 3.4.1 : Apache License 2.0
+@react-aria/focus 3.5.0 : Apache License 2.0
+@react-aria/grid 3.0.0 : Apache License 2.0
+@react-aria/i18n 3.3.0 : Apache License 2.0
+@react-aria/i18n 3.3.1 : Apache License 2.0
+@react-aria/i18n 3.3.2 : Apache License 2.0
+@react-aria/interactions 3.4.0 : Apache License 2.0
+@react-aria/interactions 3.5.0 : Apache License 2.0
+@react-aria/interactions 3.5.1 : Apache License 2.0
+@react-aria/interactions 3.6.0 : Apache License 2.0
+@react-aria/label 3.1.1 : Apache License 2.0
+@react-aria/label 3.1.2 : Apache License 2.0
+@react-aria/label 3.1.3 : Apache License 2.0
+@react-aria/link 3.1.2 : Apache License 2.0
+@react-aria/link 3.1.4 : Apache License 2.0
+@react-aria/listbox 3.3.0 : Apache License 2.0
+@react-aria/live-announcer 3.0.0 : Apache License 2.0
+@react-aria/live-announcer 3.0.1 : Apache License 2.0
+@react-aria/menu 3.1.4 : Apache License 2.0
+@react-aria/menu 3.2.2 : Apache License 2.0
+@react-aria/overlays 3.6.3 : Apache License 2.0
+@react-aria/overlays 3.7.0 : Apache License 2.0
+@react-aria/overlays 3.7.1 : Apache License 2.0
+@react-aria/overlays 3.7.2 : Apache License 2.0
+@react-aria/progress 3.1.1 : Apache License 2.0
+@react-aria/radio 3.1.3 : Apache License 2.0
+@react-aria/searchfield 3.1.1 : Apache License 2.0
+@react-aria/select 3.3.0 : Apache License 2.0
+@react-aria/selection 3.3.2 : Apache License 2.0
+@react-aria/selection 3.5.0 : Apache License 2.0
+@react-aria/selection 3.5.1 : Apache License 2.0
+@react-aria/selection 3.6.0 : Apache License 2.0
+@react-aria/separator 3.1.1 : Apache License 2.0
+@react-aria/slider 3.0.3 : Apache License 2.0
+@react-aria/spinbutton 3.0.1 : Apache License 2.0
+@react-aria/ssr 3.0.1 : Apache License 2.0
+@react-aria/ssr 3.0.2 : Apache License 2.0
+@react-aria/ssr 3.0.3 : Apache License 2.0
+@react-aria/ssr 3.1.0 : Apache License 2.0
+@react-aria/switch 3.1.1 : Apache License 2.0
+@react-aria/tabs 3.0.1 : Apache License 2.0
+@react-aria/textfield 3.2.2 : Apache License 2.0
+@react-aria/textfield 3.3.0 : Apache License 2.0
+@react-aria/textfield 3.3.1 : Apache License 2.0
+@react-aria/toggle 3.1.2 : Apache License 2.0
+@react-aria/tooltip 3.1.2 : Apache License 2.0
+@react-aria/utils 3.8.0 : Apache License 2.0
+@react-aria/utils 3.8.1 : Apache License 2.0
+@react-aria/utils 3.8.2 : Apache License 2.0
+@react-aria/utils 3.9.0 : Apache License 2.0
+@react-aria/virtualizer 3.3.3 : Apache License 2.0
+@react-aria/visually-hidden 3.2.1 : Apache License 2.0
+@react-aria/visually-hidden 3.2.2 : Apache License 2.0
+@react-aria/visually-hidden 3.2.3 : Apache License 2.0
+@react-spectrum/provider 3.2.2 : Apache License 2.0
+@react-spectrum/utils 3.6.1 : Apache License 2.0
+@react-spectrum/utils 3.6.2 : Apache License 2.0
+@react-stately/checkbox 3.0.1 : Apache License 2.0
+@react-stately/collections 3.3.0 : Apache License 2.0
+@react-stately/collections 3.3.2 : Apache License 2.0
+@react-stately/collections 3.3.3 : Apache License 2.0
+@react-stately/color 3.0.0-beta.3 : Apache License 2.0
+@react-stately/combobox 3.0.0 : Apache License 2.0
+@react-stately/data 3.4.0 : Apache License 2.0
+@react-stately/grid 3.0.0 : Apache License 2.0
+@react-stately/layout 3.2.2 : Apache License 2.0
+@react-stately/layout 3.3.1 : Apache License 2.0
+@react-stately/list 3.2.2 : Apache License 2.0
+@react-stately/list 3.2.3 : Apache License 2.0
+@react-stately/list 3.3.0 : Apache License 2.0
+@react-stately/menu 3.2.1 : Apache License 2.0
+@react-stately/menu 3.2.2 : Apache License 2.0
+@react-stately/overlays 3.1.1 : Apache License 2.0
+@react-stately/overlays 3.1.2 : Apache License 2.0
+@react-stately/overlays 3.1.3 : Apache License 2.0
+@react-stately/radio 3.3.0 : Apache License 2.0
+@react-stately/radio 3.3.2 : Apache License 2.0
+@react-stately/searchfield 3.1.1 : Apache License 2.0
+@react-stately/select 3.1.1 : Apache License 2.0
+@react-stately/select 3.1.2 : Apache License 2.0
+@react-stately/selection 3.3.0 : Apache License 2.0
+@react-stately/selection 3.6.0 : Apache License 2.0
+@react-stately/selection 3.6.1 : Apache License 2.0
+@react-stately/selection 3.7.0 : Apache License 2.0
+@react-stately/slider 3.0.3 : Apache License 2.0
+@react-stately/tabs 3.0.1 : Apache License 2.0
+@react-stately/toggle 3.2.1 : Apache License 2.0
+@react-stately/toggle 3.2.2 : Apache License 2.0
+@react-stately/tooltip 3.0.4 : Apache License 2.0
+@react-stately/tree 3.1.2 : Apache License 2.0
+@react-stately/tree 3.1.4 : Apache License 2.0
+@react-stately/utils 3.2.1 : Apache License 2.0
+@react-stately/utils 3.2.2 : Apache License 2.0
+@react-stately/virtualizer 3.1.4 : Apache License 2.0
+@react-stately/virtualizer 3.1.5 : Apache License 2.0
+@react-types/accordion 3.0.0-alpha.0 : Apache License 2.0
+@react-types/breadcrumbs 3.2.1 : Apache License 2.0
+@react-types/button 3.3.1 : Apache License 2.0
+@react-types/button 3.4.0 : Apache License 2.0
+@react-types/button 3.4.1 : Apache License 2.0
+@react-types/checkbox 3.2.2 : Apache License 2.0
+@react-types/checkbox 3.2.3 : Apache License 2.0
+@react-types/color 3.0.0-beta.2 : Apache License 2.0
+@react-types/combobox 3.0.0 : Apache License 2.0
+@react-types/dialog 3.3.0 : Apache License 2.0
+@react-types/grid 3.0.0 : Apache License 2.0
+@react-types/grid 3.0.0-alpha.0 : Apache License 2.0
+@react-types/grid 3.0.0-beta.0 : Apache License 2.0
+@react-types/label 3.4.0 : Apache License 2.0
+@react-types/label 3.4.1 : Apache License 2.0
+@react-types/link 3.1.1 : Apache License 2.0
+@react-types/link 3.1.3 : Apache License 2.0
+@react-types/listbox 3.2.0 : Apache License 2.0
+@react-types/menu 3.1.1 : Apache License 2.0
+@react-types/menu 3.2.0 : Apache License 2.0
+@react-types/numberfield 3.0.1 : Apache License 2.0
+@react-types/overlays 3.4.0 : Apache License 2.0
+@react-types/overlays 3.5.0 : Apache License 2.0
+@react-types/overlays 3.5.1 : Apache License 2.0
+@react-types/progress 3.1.1 : Apache License 2.0
+@react-types/provider 3.3.2 : Apache License 2.0
+@react-types/radio 3.1.1 : Apache License 2.0
+@react-types/radio 3.1.2 : Apache License 2.0
+@react-types/searchfield 3.1.1 : Apache License 2.0
+@react-types/select 3.2.0 : Apache License 2.0
+@react-types/shared 3.4.0 : Apache License 2.0
+@react-types/shared 3.6.0 : Apache License 2.0
+@react-types/shared 3.7.0 : Apache License 2.0
+@react-types/shared 3.7.1 : Apache License 2.0
+@react-types/shared 3.8.0 : Apache License 2.0
+@react-types/shared 3.9.0 : Apache License 2.0
+@react-types/slider 3.0.2 : Apache License 2.0
+@react-types/switch 3.1.1 : Apache License 2.0
+@react-types/table 3.0.0-alpha.0 : Apache License 2.0
+@react-types/table 3.0.0-beta.1 : Apache License 2.0
+@react-types/tabs 3.0.1 : Apache License 2.0
+@react-types/textfield 3.2.2 : Apache License 2.0
+@react-types/textfield 3.2.3 : Apache License 2.0
+@react-types/tooltip 3.1.1 : Apache License 2.0
+@rebass/forms 4.0.6 : MIT License
+@styled-system/background 5.1.2 : MIT License
+@styled-system/border 5.1.5 : MIT License
+@styled-system/color 5.1.2 : MIT License
+@styled-system/core 5.1.2 : MIT License
+@styled-system/css 5.1.5 : MIT License
+@styled-system/flexbox 5.1.2 : MIT License
+@styled-system/grid 5.1.2 : MIT License
+@styled-system/layout 5.1.2 : MIT License
+@styled-system/position 5.1.2 : MIT License
+@styled-system/prop-types 5.1.5 : MIT License
+@styled-system/props 5.1.5 : MIT License
+@styled-system/shadow 5.1.2 : MIT License
+@styled-system/should-forward-prop 5.1.5 : MIT License
+@styled-system/space 5.1.2 : MIT License
+@styled-system/theme-get 5.1.2 : MIT License
+@styled-system/typography 5.1.2 : MIT License
+@styled-system/variant 5.1.5 : MIT License
+@theme-ui/color-modes 0.10.0 : MIT License
+@theme-ui/components 0.10.0 : MIT License
+@theme-ui/core 0.10.0 : MIT License
+@theme-ui/css 0.10.0 : MIT License
+@theme-ui/mdx 0.10.0 : MIT License
+@theme-ui/parse-props 0.10.0 : MIT License
+@theme-ui/theme-provider 0.10.0 : MIT License
+@tippyjs/react 4.2.0 : MIT License
+@types/parse-json 4.0.0 : MIT License
+@types/styled-system 5.1.12 : MIT License
+@wojtekmaj/date-utils 1.0.3 : MIT License
+Chalk 2.4.2 : MIT License
+Chroma.js v2.1.0 : (Apache License 2.0 AND BSD 3-clause "New" or "Revised" License)
+Lodash 4.17.21 : MIT License
+Qix-/color-convert 1.9.3 : MIT License
+React from Facebook 16.13.1 : MIT License
+TinyColor 1.4.2 : MIT License
+ansi-styles 3.2.1 : MIT License
+babel-plugin-macros 2.8.0 : MIT License
+babel-plugin-syntax-jsx 6.18.0 : MIT License
+browserify/resolve v1.20.0 : MIT License
+callsites 3.1.0 : MIT License
+classnames 2.2.6 : MIT License
+clsx 1.1.1 : MIT License
+convert-source-map v1.7.0 : MIT License
+cosmiconfig 6.0.0 : MIT License
+cross-env 6.0.3 : MIT License
+csstype 2.6.16 : MIT License
+csstype 3.0.7 : MIT License
+csstype 3.0.8 : MIT License
+deep_merge v4.2.2 : MIT License
+dom-helpers 3.4.0 : MIT License
+emotion-normalize 11.0.1 : MIT License
+emotion-utils 10.2.2 : MIT License
+escape-string-regexp 1.0.5 : MIT License
+escape-string-regexp v4.0.0 : MIT License
+find-root 1.1.0 : MIT License
+function-bind 1.1.1 : MIT License
+get-user-locale 1.4.0 : MIT License
+has 1.0.3 : MIT License
+has-flag 3.0.0 : MIT License
+hoist-non-react-statics v3.3.2 : BSD 3-clause "New" or "Revised" License
+import-fresh 3.3.0 : MIT License
+intl-messageformat 2.2.0 : BSD 3-clause "New" or "Revised" License
+intl-messageformat 9.6.18 : BSD 3-clause "New" or "Revised" License
+intl-messageformat 9.7.1 : BSD 3-clause "New" or "Revised" License
+intl-messageformat 9.8.2 : BSD 3-clause "New" or "Revised" License
+intl-messageformat 9.9.1 : BSD 3-clause "New" or "Revised" License
+intl-messageformat-parser 1.4.0 : BSD 3-clause "New" or "Revised" License
+is-arrayish 0.2.1 : MIT License
+is-core-module 2.2.0 : MIT License
+isexe 2.0.0 : ISC License
+js-tokens 4.0.0 : MIT License
+json-parse-even-better-errors 2.3.1 : MIT License
+kk-color-name 1.1.3 : MIT License
+lines-and-columns 1.1.6 : MIT License
+lodash.once 4.1.1 : MIT License
+loose-envify 1.4.0 : MIT License
+material-colors 1.2.6 : ISC License
+mdi-react 7.4.0 : (MIT License AND SIL Open Font License 1.1)
+merge-class-names 1.4.2 : MIT License
+moment/moment 2.29.1 : MIT License
+node-cross-spawn 7.0.3 : MIT License
+node-error-ex 1.3.2 : MIT License
+node-uuid 8.3.2 : MIT License
+object-assign 4.1.1 : MIT License
+parent-module 1.0.1 : MIT License
+parse-json v5.2.0 : MIT License
+path-key 3.1.1 : MIT License
+path-parse 1.0.6 : MIT License
+path-type 4.0.0 : MIT License
+prop-types 15.7.2 : MIT License
+react-calendar 3.4.0 : MIT License
+react-color 2.19.3 : MIT License
+react-shapebase 1.0.23 : MIT License
+reactcss 1.2.3 : MIT License
+rebass 4.0.7 : MIT License
+reflexbox 4.0.6 : MIT License
+regenerator-runtime 0.13.7 : MIT License
+resolve-from 4.0.0 : MIT License
+safe-buffer 5.1.2 : MIT License
+shebang-command 2.0.0 : MIT License
+shebang-regex 3.0.0 : MIT License
+sindresorhus/supports-color 5.5.0 : MIT License
+source-map 0.5.7 : BSD 3-clause "New" or "Revised" License
+styled-system 5.1.5 : MIT License
+stylis v4.0.7 : MIT License
+theme-ui 0.10.0 : MIT License
+tippy.js 6.2.7 : MIT License
+to-fast-properties 2.0.0 : MIT License
+tslib 2.1.0 : BSD Zero Clause License
+which 2.0.2 : ISC License
+yaml 1.10.0 : ISC License
+
+
+Copyright Text: 
+
+@babel/code-frame 7.12.13 npmjs:@babel/code-frame/7.12.13
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/helper-module-imports 7.12.13 npmjs:@babel/helper-module-imports/7.12.13
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/helper-plugin-utils 7.13.0 npmjs:@babel/helper-plugin-utils/7.13.0
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/helper-validator-identifier 7.12.11 npmjs:@babel/helper-validator-identifier/7.12.11
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/highlight 7.13.8 npmjs:@babel/highlight/7.13.8
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/plugin-syntax-jsx 7.12.13 npmjs:@babel/plugin-syntax-jsx/7.12.13
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/runtime 7.13.8 npmjs:@babel/runtime/7.13.8
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@babel/types 7.13.0 npmjs:@babel/types/7.13.0
+	Copyright (c) 2014-present Sebastian McKenzie and other contributors
+@emotion/babel-plugin 11.3.0 npmjs:@emotion/babel-plugin/11.3.0
+	Copyright (c) Emotion team and other contributors
+@emotion/cache 10.0.29 npmjs:@emotion/cache/10.0.29
+	Copyright (c) Emotion team and other contributors
+@emotion/cache 11.1.3 npmjs:@emotion/cache/11.1.3
+	Copyright (c) Emotion team and other contributors
+@emotion/core 10.1.1 npmjs:@emotion/core/10.1.1
+	Copyright (c) Emotion team and other contributors
+@emotion/css 10.0.27 npmjs:@emotion/css/10.0.27
+	Copyright (c) Emotion team and other contributors
+@emotion/hash 0.8.0 npmjs:@emotion/hash/0.8.0
+	Copyright (c) Emotion team and other contributors
+@emotion/is-prop-valid 0.8.8 npmjs:@emotion/is-prop-valid/0.8.8
+	Copyright (c) Emotion team and other contributors
+@emotion/is-prop-valid 1.1.0 npmjs:@emotion/is-prop-valid/1.1.0
+	Copyright (c) Emotion team and other contributors
+@emotion/memoize 0.7.4 npmjs:@emotion/memoize/0.7.4
+	Copyright (c) Emotion team and other contributors
+@emotion/memoize 0.7.5 npmjs:@emotion/memoize/0.7.5
+	Copyright (c) Emotion team and other contributors
+@emotion/react 11.1.5 npmjs:@emotion/react/11.1.5
+	Copyright (c) Emotion team and other contributors
+@emotion/serialize 0.11.16 npmjs:@emotion/serialize/0.11.16
+	Copyright (c) Emotion team and other contributors
+@emotion/serialize 1.0.0 npmjs:@emotion/serialize/1.0.0
+	Copyright (c) Emotion team and other contributors
+@emotion/serialize 1.0.2 npmjs:@emotion/serialize/1.0.2
+	Copyright (c) Emotion team and other contributors
+@emotion/sheet 1.0.1 npmjs:@emotion/sheet/1.0.1
+	Copyright (c) Emotion team and other contributors
+@emotion/styled 10.0.27 npmjs:@emotion/styled/10.0.27
+	Copyright (c) Emotion team and other contributors
+@emotion/styled 11.3.0 npmjs:@emotion/styled/11.3.0
+	Copyright (c) Emotion team and other contributors
+@emotion/styled-base 10.0.31 npmjs:@emotion/styled-base/10.0.31
+	Copyright (c) Emotion team and other contributors
+@emotion/stylis 0.8.5 npmjs:@emotion/stylis/0.8.5
+	Copyright (c) Emotion team and other contributors
+@emotion/utils 0.11.3 npmjs:@emotion/utils/0.11.3
+	Copyright (c) Emotion team and other contributors
+@emotion/utils 1.0.0 npmjs:@emotion/utils/1.0.0
+	Copyright (c) Emotion team and other contributors
+@emotion/weak-memoize 0.2.5 npmjs:@emotion/weak-memoize/0.2.5
+	Copyright (c) Emotion team and other contributors
+@formatjs/fast-memoize 1.1.1 npmjs:@formatjs/fast-memoize/1.1.1
+	Copyright (c) 2021 FormatJS
+@internationalized/message 3.0.0-alpha.0 npmjs:@internationalized/message/3.0.0-alpha.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@internationalized/message 3.0.0 npmjs:@internationalized/message/3.0.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@internationalized/number 3.0.0-alpha.0 npmjs:@internationalized/number/3.0.0-alpha.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@internationalized/number 3.0.0 npmjs:@internationalized/number/3.0.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@mdx-js/react 1.6.22 npmjs:@mdx-js/react/1.6.22
+	Copyright (c) 2017-2018 Compositor and Vercel, Inc.
+@popperjs/core 2.8.6 npmjs:@popperjs/core/2.8.6
+	Copyright (c) 2019 Federico Zivolo
+@react-aria/accordion 3.0.0-alpha.1 npmjs:@react-aria/accordion/3.0.0-alpha.1
+	Copyright 2019 Adobe
+@react-aria/button 3.3.1 npmjs:@react-aria/button/3.3.1
+	Copyright 2019 Adobe
+@react-aria/button 3.3.2 npmjs:@react-aria/button/3.3.2
+	Copyright 2019 Adobe
+@react-aria/checkbox 3.2.1 npmjs:@react-aria/checkbox/3.2.1
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/dialog 3.1.2 npmjs:@react-aria/dialog/3.1.2
+	Copyright 2019 Adobe
+@react-aria/focus 3.2.3 npmjs:@react-aria/focus/3.2.3
+	Copyright 2019 Adobe
+@react-aria/focus 3.3.0 npmjs:@react-aria/focus/3.3.0
+	Copyright 2019 Adobe
+	Copyright 2021 Adobe. All rights reserved
+@react-aria/i18n 3.3.0 npmjs:@react-aria/i18n/3.3.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/i18n 3.3.1 npmjs:@react-aria/i18n/3.3.1
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/interactions 3.4.0 npmjs:@react-aria/interactions/3.4.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/label 3.1.1 npmjs:@react-aria/label/3.1.1
+	Copyright 2019 Adobe
+@react-aria/label 3.1.2 npmjs:@react-aria/label/3.1.2
+	Copyright 2019 Adobe
+@react-aria/link 3.1.2 npmjs:@react-aria/link/3.1.2
+	Copyright 2019 Adobe
+@react-aria/live-announcer 3.0.0 npmjs:@react-aria/live-announcer/3.0.0
+	Copyright 2019 Adobe
+@react-aria/menu 3.1.4 npmjs:@react-aria/menu/3.1.4
+	Copyright 2019 Adobe
+@react-aria/overlays 3.6.3 npmjs:@react-aria/overlays/3.6.3
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/progress 3.1.1 npmjs:@react-aria/progress/3.1.1
+	Copyright 2019 Adobe
+@react-aria/radio 3.1.3 npmjs:@react-aria/radio/3.1.3
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/searchfield 3.1.1 npmjs:@react-aria/searchfield/3.1.1
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/select 3.3.0 npmjs:@react-aria/select/3.3.0
+	Copyright 2019 Adobe
+@react-aria/selection 3.3.2 npmjs:@react-aria/selection/3.3.2
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/separator 3.1.1 npmjs:@react-aria/separator/3.1.1
+	Copyright 2019 Adobe
+@react-aria/ssr 3.0.1 npmjs:@react-aria/ssr/3.0.1
+	Copyright 2019 Adobe
+@react-aria/ssr 3.0.2 npmjs:@react-aria/ssr/3.0.2
+	Copyright 2019 Adobe
+@react-aria/switch 3.1.1 npmjs:@react-aria/switch/3.1.1
+	Copyright 2019 Adobe
+@react-aria/textfield 3.2.2 npmjs:@react-aria/textfield/3.2.2
+	Copyright 2019 Adobe
+@react-aria/textfield 3.3.0 npmjs:@react-aria/textfield/3.3.0
+	Copyright 2019 Adobe
+@react-aria/toggle 3.1.2 npmjs:@react-aria/toggle/3.1.2
+	Copyright 2019 Adobe
+@react-aria/tooltip 3.1.2 npmjs:@react-aria/tooltip/3.1.2
+	Copyright 2019 Adobe
+@react-aria/utils 3.8.0 npmjs:@react-aria/utils/3.8.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/virtualizer 3.3.3 npmjs:@react-aria/virtualizer/3.3.3
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-aria/visually-hidden 3.2.1 npmjs:@react-aria/visually-hidden/3.2.1
+	Copyright 2019 Adobe
+@react-aria/visually-hidden 3.2.2 npmjs:@react-aria/visually-hidden/3.2.2
+	Copyright 2019 Adobe
+@react-stately/checkbox 3.0.1 npmjs:@react-stately/checkbox/3.0.1
+	Copyright 2019 Adobe
+@react-stately/collections 3.3.0 npmjs:@react-stately/collections/3.3.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/collections 3.3.2 npmjs:@react-stately/collections/3.3.2
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/data 3.4.0 npmjs:@react-stately/data/3.4.0
+	Copyright 2019 Adobe
+@react-stately/layout 3.2.2 npmjs:@react-stately/layout/3.2.2
+	Copyright 2019 Adobe
+@react-stately/list 3.2.2 npmjs:@react-stately/list/3.2.2
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/list 3.2.3 npmjs:@react-stately/list/3.2.3
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/menu 3.2.1 npmjs:@react-stately/menu/3.2.1
+	Copyright 2019 Adobe
+@react-stately/menu 3.2.2 npmjs:@react-stately/menu/3.2.2
+	Copyright 2019 Adobe
+@react-stately/overlays 3.1.1 npmjs:@react-stately/overlays/3.1.1
+	Copyright 2019 Adobe
+@react-stately/overlays 3.1.2 npmjs:@react-stately/overlays/3.1.2
+	Copyright 2019 Adobe
+@react-stately/radio 3.3.0 npmjs:@react-stately/radio/3.3.0
+	Copyright 2019 Adobe
+@react-stately/searchfield 3.1.1 npmjs:@react-stately/searchfield/3.1.1
+	Copyright 2019 Adobe
+@react-stately/select 3.1.1 npmjs:@react-stately/select/3.1.1
+	Copyright 2019 Adobe
+@react-stately/select 3.1.2 npmjs:@react-stately/select/3.1.2
+	Copyright 2019 Adobe
+@react-stately/selection 3.3.0 npmjs:@react-stately/selection/3.3.0
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/toggle 3.2.1 npmjs:@react-stately/toggle/3.2.1
+	Copyright 2019 Adobe
+@react-stately/toggle 3.2.2 npmjs:@react-stately/toggle/3.2.2
+	Copyright 2019 Adobe
+@react-stately/tooltip 3.0.4 npmjs:@react-stately/tooltip/3.0.4
+	Copyright 2019 Adobe
+@react-stately/tree 3.1.2 npmjs:@react-stately/tree/3.1.2
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/tree 3.1.4 npmjs:@react-stately/tree/3.1.4
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/utils 3.2.1 npmjs:@react-stately/utils/3.2.1
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-stately/virtualizer 3.1.4 npmjs:@react-stately/virtualizer/3.1.4
+	Copyright 2019 Adobe
+	Copyright 2020 Adobe. All rights reserved
+@react-types/accordion 3.0.0-alpha.0 npmjs:@react-types/accordion/3.0.0-alpha.0
+	Copyright 2019 Adobe
+@react-types/button 3.3.1 npmjs:@react-types/button/3.3.1
+	Copyright 2019 Adobe
+@react-types/checkbox 3.2.2 npmjs:@react-types/checkbox/3.2.2
+	Copyright 2019 Adobe
+@react-types/dialog 3.3.0 npmjs:@react-types/dialog/3.3.0
+	Copyright 2019 Adobe
+@react-types/grid 3.0.0-alpha.0 npmjs:@react-types/grid/3.0.0-alpha.0
+	Copyright 2019 Adobe
+@react-types/label 3.4.0 npmjs:@react-types/label/3.4.0
+	Copyright 2019 Adobe
+@react-types/link 3.1.1 npmjs:@react-types/link/3.1.1
+	Copyright 2019 Adobe
+@react-types/menu 3.1.1 npmjs:@react-types/menu/3.1.1
+	Copyright 2019 Adobe
+@react-types/overlays 3.4.0 npmjs:@react-types/overlays/3.4.0
+	Copyright 2019 Adobe
+@react-types/progress 3.1.1 npmjs:@react-types/progress/3.1.1
+	Copyright 2019 Adobe
+@react-types/radio 3.1.1 npmjs:@react-types/radio/3.1.1
+	Copyright 2019 Adobe
+@react-types/searchfield 3.1.1 npmjs:@react-types/searchfield/3.1.1
+	Copyright 2019 Adobe
+@react-types/select 3.2.0 npmjs:@react-types/select/3.2.0
+	Copyright 2019 Adobe
+@react-types/shared 3.4.0 npmjs:@react-types/shared/3.4.0
+	Copyright 2019 Adobe
+@react-types/shared 3.6.0 npmjs:@react-types/shared/3.6.0
+	Copyright 2019 Adobe
+@react-types/switch 3.1.1 npmjs:@react-types/switch/3.1.1
+	Copyright 2019 Adobe
+@react-types/table 3.0.0-alpha.0 npmjs:@react-types/table/3.0.0-alpha.0
+	Copyright 2019 Adobe
+@react-types/textfield 3.2.2 npmjs:@react-types/textfield/3.2.2
+	Copyright 2019 Adobe
+@react-types/tooltip 3.1.1 npmjs:@react-types/tooltip/3.1.1
+	Copyright 2019 Adobe
+@rebass/forms 4.0.6 npmjs:@rebass/forms/4.0.6
+	Copyright (c) 2015
+@styled-system/background 5.1.2 npmjs:@styled-system/background/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/border 5.1.5 npmjs:@styled-system/border/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/color 5.1.2 npmjs:@styled-system/color/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/core 5.1.2 npmjs:@styled-system/core/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/css 5.1.5 npmjs:@styled-system/css/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/flexbox 5.1.2 npmjs:@styled-system/flexbox/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/grid 5.1.2 npmjs:@styled-system/grid/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/layout 5.1.2 npmjs:@styled-system/layout/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/position 5.1.2 npmjs:@styled-system/position/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/prop-types 5.1.5 npmjs:@styled-system/prop-types/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/props 5.1.5 npmjs:@styled-system/props/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/shadow 5.1.2 npmjs:@styled-system/shadow/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/should-forward-prop 5.1.5 npmjs:@styled-system/should-forward-prop/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/space 5.1.2 npmjs:@styled-system/space/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/theme-get 5.1.2 npmjs:@styled-system/theme-get/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/typography 5.1.2 npmjs:@styled-system/typography/5.1.2
+	Copyright (c) 2017-2018 Brent Jackson
+@styled-system/variant 5.1.5 npmjs:@styled-system/variant/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+@tippyjs/react 4.2.0 npmjs:@tippyjs/react/4.2.0
+	Copyright (c) 2018 atomiks
+@types/parse-json 4.0.0 npmjs:@types/parse-json/4.0.0
+	Copyright (c) Microsoft Corporation. All rights reserved
+@wojtekmaj/date-utils 1.0.3 npmjs:@wojtekmaj/date-utils/1.0.3
+	Copyright (c) 2019 Wojciech Maj
+Chalk 2.4.2 npmjs:chalk/2.4.2
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Lodash 4.17.21 npmjs:lodash-es/4.17.21
+	Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters */export { default as add } from './add.js';export { default as after } from './after.js';export { default as ary } from './ary
+	Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters */import array from './array.js';import collection from './collection.js';import date from './date.js';import func from './fun
+	Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+	Copyright OpenJS Foundation and other contributors <https://openjsf.org/> * Released under MIT license <https://lodash.com/license> * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	copyright Jeremy Ashkenas,DocumentCloud and Investigative Reporters & Editors <http://underscorejs.org/>
+Lodash 4.17.21 npmjs:lodash/4.17.21
+	Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters */(function(){function n(n,t,r){switch(r.length){case 0:return n.call(t);case 1:return n.call(t,r[0]);case 2:return n.call(t,r[0]
+	Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters */;(function() {
+	Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+	Copyright OpenJS Foundation and other contributors <https://openjsf.org/> * Released under MIT license <https://lodash.com/license> * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	copyright Jeremy Ashkenas,DocumentCloud and Investigative Reporters & Editors <http://underscorejs.org/>
+Qix-/color-convert 1.9.3 npmjs:color-convert/1.9.3
+	Copyright &copy; 2011-2016, Heather Arthur and Josh Junon. Licensed under the
+	Copyright (c) 2011-2016 Heather Arthur <fayearthur@gmail.com>
+React from Facebook 16.13.1 npmjs:react-is/16.13.1
+	Copyright (c) Facebook, Inc. and its affiliates.
+	Copyright (c) Facebook, Inc. and its affiliates. * * This source code is licensed under the MIT license found in the * LICENSE file in the root directory of this source tree.
+TinyColor 1.4.2 npmjs:tinycolor2/1.4.2
+	Copyright (c) 2008 Ariel Flesler - aflesler(at)gmail(dot)com * http://flesler.blogspot.com Licensed under BSD * (http://www.opensource.org/licenses/bsd-license.php) Date: 5/15/2008 * * @projectDes
+	Copyright (c), Brian Grinstead, http://briangrinstead.com
+	Copyright 2012 jQuery Foundation and other contributors * Released under the MIT license. * http://jquery.org/license */
+ansi-styles 3.2.1 npmjs:ansi-styles/3.2.1
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+babel-plugin-macros 2.8.0 npmjs:babel-plugin-macros/2.8.0
+	Copyright (c) 2017 Kent C. Dodds
+browserify/resolve v1.20.0 npmjs:resolve/1.20.0
+	Copyright (c) 2012 James Halliday
+callsites 3.1.0 npmjs:callsites/3.1.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+classnames 2.2.6 npmjs:classnames/2.2.6
+	Copyright (c) 2017 Jed Watson
+	Copyright (c) 2017 Jed Watson.
+	Copyright (c) 2017 Jed Watson.  Licensed under the MIT License (MIT), see  http://jedwatson.github.io/classnames*//* global define */
+clsx 1.1.1 npmjs:clsx/1.1.1
+	Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (lukeed.com)
+	Â© [Luke Edwards
+cosmiconfig 6.0.0 npmjs:cosmiconfig/6.0.0
+	Copyright (c) 2015 David Clark
+cross-env 6.0.3 npmjs:cross-env/6.0.3
+	Copyright (c) 2017 Kent C. Dodds
+csstype 2.6.16 npmjs:csstype/2.6.16
+	Copyright (c) 2017-2018 Fredrik Nicol
+csstype 3.0.7 npmjs:csstype/3.0.7
+	Copyright (c) 2017-2018 Fredrik Nicol
+	Â©Öµnï¿½ï¿½kï¿½Yï¿½vï¿½ï¿½\45Jï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½Xï¿½*ï¿½ï¿½ï¿½;È(ï¿½ï¿½zï¿½*ï¿½j.ï¿½Õï¿½ï¿½Ãï¿½ï¿½@ï¿½ï¿½\>ï¿½a~ï¿½ï¿½ï¿½ï¿½=$?ï¿½Xbï¿½	ï¿½"ï¿½=ï¿½ï¿½G3/ï¿½	?ï¿½hyvï¿½E ï¿½Y'ï¿½ï¿
+csstype 3.0.8 npmjs:csstype/3.0.8
+	Copyright (c) 2017-2018 Fredrik Nicol
+deep_merge v4.2.2 npmjs:deepmerge/4.2.2
+	Copyright (c) 2012 James Halliday, Josh Duff, and other contributors
+dom-helpers 3.4.0 npmjs:dom-helpers/3.4.0
+	Copyright (c) 2015 Jason Quense
+	Copyright 2013-2014, Facebook, Inc. * All rights reserved
+	Copyright 2014-2015, Facebook, Inc. * All rights reserved
+emotion-normalize 11.0.1 npmjs:emotion-normalize/11.0.1
+	Copyright (c) 2017 Infinum
+emotion-utils 10.2.2 npmjs:babel-plugin-emotion/10.2.2
+	Copyright (c) Emotion team and other contributors
+escape-string-regexp 1.0.5 npmjs:escape-string-regexp/1.0.5
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)Permission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation f
+	Â© [Sindre Sorhus
+	Â© [Sindre Sorhus  "readmeFilename": "readme.md",  "bugs": {    "url": "https://github.com/sindresorhus/escape-string-regexp/issues"  },  "homepage": "https://github.com/sindresorhus/escape-strin
+	Â© [Sindre Sorhus  "readmeFilename": "readme.md",  "bugs": {    "url": "https://github.com/sindresorhus/escape-string-regexp/issues"  },  "homepage": "https://github.com/sindresorhus/escape-strin
+	Â© [Sindre Sorhus  "readmeFilename": "readme.md",  "bugs": {    "url": "https://github.com/sindresorhus/escape-string-regexp/issues"  },  "homepage": "https://github.com/sindresorhus/escape-strin
+	Â© [Sindre Sorhus  "readmeFilename": "readme.md",  "bugs": {    "url": "https://github.com/sindresorhus/escape-string-regexp/issues"  },  "homepage": "https://github.com/sindresorhus/escape-strin
+	Â© [Sindre Sorhus  "readmeFilename": "readme.md",  "repository": {    "type": "git",    "url": "git+https://github.com/sindresorhus/escape-string-regexp.git"  },  "scripts": {    "test": "xo &&
+	Â© [Sindre Sorhus
+escape-string-regexp v4.0.0 npmjs:escape-string-regexp/4.0.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+find-root 1.1.0 npmjs:find-root/1.1.0
+	Copyright Â© 2017 jsdnxx
+function-bind 1.1.1 npmjs:function-bind/1.1.1
+	Copyright (c) 2013 Raynos.
+get-user-locale 1.4.0 npmjs:get-user-locale/1.4.0
+	Copyright (c) 2018-2019 Wojciech Maj
+has 1.0.3 npmjs:has/1.0.3
+	Copyright (c) 2013 Thiago de Arruda
+has-flag 3.0.0 npmjs:has-flag/3.0.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+hoist-non-react-statics v3.3.2 npmjs:hoist-non-react-statics/3.3.2
+	Copyright (c) 2015, Yahoo----------------------------------------------------
+	Copyright 2015, Yahoo	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.	 */	var REACT_STATICS = {	  childContextTypes: true,	  contextType: true,	  c
+	Copyright 2015, Yahoo * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms. */import { ForwardRef, Memo, isMemo } from 'react-is';
+	Copyright 2015, Yahoo * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms. */var REACT_STATICS = {  childContextTypes: true,  contextType: true,  context
+	copyright information.
+import-fresh 3.3.0 npmjs:import-fresh/3.3.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+intl-messageformat 2.2.0 npmjs:intl-messageformat/2.2.0
+	Copyright (c) 2012, Andreas Lind PetersenAll rights reserved
+	Copyright (c) 2014, YahooCopyrights licensed under the New BSD License.See the accompanying LICENSE file for terms.*/
+	Copyright 2013 Andy Earnshaw, MIT License
+	Copyright 2013 Andy Earnshaw, MIT License
+	Copyright 2013 YahooAll rights reserved
+	copyright information.
+intl-messageformat-parser 1.4.0 npmjs:intl-messageformat-parser/1.4.0
+	Copyright 2014 Alex Sexton
+	Copyright 2014 YahooAll rights reserved
+	copyright information.
+is-arrayish 0.2.1 npmjs:is-arrayish/0.2.1
+	Copyright (c) 2015 JD Ballard
+	Â©ï¿½fì«³ï¿½Í§aï¿½ï¿½ï¿½>ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½lï¿½aï¿½ï¿½ï¿½tï¿½ï¿½:%|ï¿½ï¿½=ï¿½Äï¿½ï¿½x0ï¿½TLcY{B|+ï¿½ï¿½hoï¿½åÝï¿½ï¿½ï¿½ï¿½cÇï¿½ï¿½N2ï¿½ï¿½Y9]ï¿½Eï¿½ï¿½񔌜ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½(ï¿
+is-core-module 2.2.0 npmjs:is-core-module/2.2.0
+	Copyright (c) 2014 Dave Justice
+isexe 2.0.0 npmjs:isexe/2.0.0
+	Copyright (c) Isaac Z. Schlueter and Contributors
+js-tokens 4.0.0 npmjs:js-tokens/4.0.0
+	Copyright (c) 2014, 2015, 2016, 2017, 2018 Simon Lydell
+	Copyright 2014, 2015, 2016, 2017, 2018 Simon Lydell// License: MIT. (See LICENSE.)
+json-parse-even-better-errors 2.3.1 npmjs:json-parse-even-better-errors/2.3.1
+	Copyright 2017 Kat March
+	Copyright npm, Inc.
+kk-color-name 1.1.3 npmjs:color-name/1.1.3
+	Copyright (c) 2015 Dmitry IvanovPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the So
+lines-and-columns 1.1.6 npmjs:lines-and-columns/1.1.6
+	Copyright (c) 2015 Brian Donovan
+lodash.once 4.1.1 npmjs:lodash.once/4.1.1
+	Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters */
+	Copyright jQuery Foundation and other contributors <https://jquery.org/>
+	Copyright jQuery Foundation and other contributors <https://jquery.org/> * Released under MIT license <https://lodash.com/license> * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+	copyright Jeremy Ashkenas,DocumentCloud and Investigative Reporters & Editors <http://underscorejs.org/>
+loose-envify 1.4.0 npmjs:loose-envify/1.4.0
+	Copyright (c) 2015 Andres Suarez <zertosh@gmail.com>
+material-colors 1.2.6 npmjs:material-colors/1.2.6
+	Copyright 2014 Shuhei Kagawa
+mdi-react 7.4.0 npmjs:mdi-react/7.4.0
+	Copyright (c) 2014, Austin Andrews (http://materialdesignicons.com/),with Reserved Font Name Material Design Icons.
+	Copyright (c) 2014, Google (http://www.google.com/design/)uses the license at https://github.com/google/material-design-icons/blob/master/LICENSE
+	Copyright (c) 2016-2019 Levin Rickert
+moment/moment 2.29.1 npmjs:moment/2.29.1
+	Copyright (c) JS Foundation and other contributors
+node-cross-spawn 7.0.3 npmjs:cross-spawn/7.0.3
+	Copyright (c) 2018 Made With MOXY Lda <hello@moxy.studio>
+node-error-ex 1.3.2 npmjs:error-ex/1.3.2
+	Copyright (c) 2015 JD Ballard
+node-uuid 8.3.2 npmjs:uuid/8.3.2
+	Copyright (C) Paul Johnston 1999 - 2009 * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet * Distributed under the BSD License * See http://pajhome.org.uk/crypt/md5 for more info. */
+	Copyright (C) Paul Johnston 1999 - 2009 * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet * Distributed under the BSD License * See http://pajhome.org.uk/crypt/md5 for more info. */
+	Copyright (c) 2010-2020 Robert Kieffer and other contributors
+	Copyright 2011, Sebastian Tschan * https://blueimp.net * * Licensed under the MIT license:
+object-assign 4.1.1 npmjs:object-assign/4.1.1
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+parent-module 1.0.1 npmjs:parent-module/1.0.1
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+parse-json v5.2.0 npmjs:parse-json/5.2.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+path-parse 1.0.6 npmjs:path-parse/1.0.6
+	Copyright (c) 2015 Javier Blanco
+	Â© [Javier Blanco
+path-type 4.0.0 npmjs:path-type/4.0.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+prop-types 15.7.2 npmjs:prop-types/15.7.2
+	Copyright (c) 2013-present, Facebook, Inc.
+	Copyright (c) 2013-present, Facebook, Inc. * * This source code is licensed under the MIT license found in the * LICENSE file in the root directory of this source tree.
+	Copyright (c) Facebook, Inc. and its affiliates. * * This source code is licensed under the MIT license found in the * LICENSE file in the root directory of this source tree.
+react-calendar 3.4.0 npmjs:react-calendar/3.4.0
+	Copyright (c) 2017
+react-color 2.19.3 npmjs:react-color/2.19.3
+	Copyright (c) 2015 Case Sandberg
+react-shapebase 1.0.23 npmjs:react-shapebase/1.0.23
+	Copyright (c) 2018 Teddy Andersson
+reactcss 1.2.3 npmjs:reactcss/1.2.3
+	Copyright (c) 2015 Case Sandberg
+rebass 4.0.7 npmjs:rebass/4.0.7
+	Copyright (c) 2015
+reflexbox 4.0.6 npmjs:reflexbox/4.0.6
+	Copyright (c) 2015
+regenerator-runtime 0.13.7 npmjs:regenerator-runtime/0.13.7
+	Copyright (c) 2014-present, Facebook, Inc.
+	Copyright (c) 2014-present, Facebook, Inc. * * This source code is licensed under the MIT license found in the * LICENSE file in the root directory of this source tree.
+resolve-from 4.0.0 npmjs:resolve-from/4.0.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+safe-buffer 5.1.2 npmjs:safe-buffer/5.1.2
+	Copyright (c) Feross Aboukhadijeh
+shebang-command 2.0.0 npmjs:shebang-command/2.0.0
+	Copyright (c) Kevin M
+shebang-regex 3.0.0 npmjs:shebang-regex/3.0.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+	Â© [Sindre Sorhus
+sindresorhus/supports-color 5.5.0 npmjs:supports-color/5.5.0
+	Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+source-map 0.5.7 npmjs:source-map/0.5.7
+	Copyright (c) 2009-2011, Mozilla Foundation and contributorsAll rights reserved
+	Copyright 2009-2011 Mozilla Foundation and contributors	 * Licensed under the New BSD license. See LICENSE.txt or:
+	Copyright 2009-2011 Mozilla Foundation and contributors * Licensed under the New BSD license. See LICENSE.txt or:
+	Copyright 2011 Mozilla Foundation and contributors	 * Licensed under the New BSD license. See LICENSE or:
+	Copyright 2011 Mozilla Foundation and contributors * Licensed under the New BSD license. See LICENSE or:
+	Copyright 2011 The Closure Compiler Authors. All rights reserved
+	Copyright 2011 The Closure Compiler Authors. All rights reserved
+	Copyright 2014 Mozilla Foundation and contributors	 * Licensed under the New BSD license. See LICENSE or:
+	Copyright 2014 Mozilla Foundation and contributors * Licensed under the New BSD license. See LICENSE or:
+styled-system 5.1.5 npmjs:styled-system/5.1.5
+	Copyright (c) 2017-2018 Brent Jackson
+stylis v4.0.7 npmjs:stylis/4.0.7
+	Copyright (c) 2016-present Sultan Tarimo
+tippy.js 6.2.7 npmjs:tippy.js/6.2.7
+	Copyright (c) 2017-present atomiks
+to-fast-properties 2.0.0 npmjs:to-fast-properties/2.0.0
+	Copyright (c) 2014 Petka Antonov              2015 Sindre Sorhus
+	Â© Petka Antonov, John-David Dalton, Sindre Sorhus
+tslib 2.1.0 npmjs:tslib/2.1.0
+	Copyright (c) Microsoft Corporation.Permission to use, copy, modify, and/or distribute this software for anypurpose with or without fee is hereby granted.
+which 2.0.2 npmjs:which/2.0.2
+	Copyright (c) Isaac Z. Schlueter and Contributors
+yaml 1.10.0 npmjs:yaml/1.10.0
+	Copyright 2018 Eemeli Aro <eemeli@gmail.com>
+
+
+Licenses: 
+
+Apache License 2.0
+(@internationalized/message 3.0.0, @internationalized/message 3.0.0-alpha.0, @internationalized/message 3.0.1, @internationalized/message 3.0.2, @internationalized/number 3.0.0, @internationalized/number 3.0.0-alpha.0, @internationalized/number 3.0.1, @internationalized/number 3.0.2, @internationalized/number 3.0.3, @react-aria/accordion 3.0.0-alpha.1, @react-aria/breadcrumbs 3.1.5, @react-aria/button 3.3.1, @react-aria/button 3.3.2, @react-aria/checkbox 3.2.1, @react-aria/color 3.0.0-beta.3, @react-aria/combobox 3.0.0, @react-aria/dialog 3.1.2, @react-aria/focus 3.2.3, @react-aria/focus 3.3.0, @react-aria/focus 3.4.0, @react-aria/focus 3.4.1, @react-aria/focus 3.5.0, @react-aria/grid 3.0.0, @react-aria/i18n 3.3.0, @react-aria/i18n 3.3.1, @react-aria/i18n 3.3.2, @react-aria/interactions 3.4.0, @react-aria/interactions 3.5.0, @react-aria/interactions 3.5.1, @react-aria/interactions 3.6.0, @react-aria/label 3.1.1, @react-aria/label 3.1.2, @react-aria/label 3.1.3, @react-aria/link 3.1.2, @react-aria/link 3.1.4, @react-aria/listbox 3.3.0, @react-aria/live-announcer 3.0.0, @react-aria/live-announcer 3.0.1, @react-aria/menu 3.1.4, @react-aria/menu 3.2.2, @react-aria/overlays 3.6.3, @react-aria/overlays 3.7.0, @react-aria/overlays 3.7.1, @react-aria/overlays 3.7.2, @react-aria/progress 3.1.1, @react-aria/radio 3.1.3, @react-aria/searchfield 3.1.1, @react-aria/select 3.3.0, @react-aria/selection 3.3.2, @react-aria/selection 3.5.0, @react-aria/selection 3.5.1, @react-aria/selection 3.6.0, @react-aria/separator 3.1.1, @react-aria/slider 3.0.3, @react-aria/spinbutton 3.0.1, @react-aria/ssr 3.0.1, @react-aria/ssr 3.0.2, @react-aria/ssr 3.0.3, @react-aria/ssr 3.1.0, @react-aria/switch 3.1.1, @react-aria/tabs 3.0.1, @react-aria/textfield 3.2.2, @react-aria/textfield 3.3.0, @react-aria/textfield 3.3.1, @react-aria/toggle 3.1.2, @react-aria/tooltip 3.1.2, @react-aria/utils 3.8.0, @react-aria/utils 3.8.1, @react-aria/utils 3.8.2, @react-aria/utils 3.9.0, @react-aria/virtualizer 3.3.3, @react-aria/visually-hidden 3.2.1, @react-aria/visually-hidden 3.2.2, @react-aria/visually-hidden 3.2.3, @react-spectrum/provider 3.2.2, @react-spectrum/utils 3.6.1, @react-spectrum/utils 3.6.2, @react-stately/checkbox 3.0.1, @react-stately/collections 3.3.0, @react-stately/collections 3.3.2, @react-stately/collections 3.3.3, @react-stately/color 3.0.0-beta.3, @react-stately/combobox 3.0.0, @react-stately/data 3.4.0, @react-stately/grid 3.0.0, @react-stately/layout 3.2.2, @react-stately/layout 3.3.1, @react-stately/list 3.2.2, @react-stately/list 3.2.3, @react-stately/list 3.3.0, @react-stately/menu 3.2.1, @react-stately/menu 3.2.2, @react-stately/overlays 3.1.1, @react-stately/overlays 3.1.2, @react-stately/overlays 3.1.3, @react-stately/radio 3.3.0, @react-stately/radio 3.3.2, @react-stately/searchfield 3.1.1, @react-stately/select 3.1.1, @react-stately/select 3.1.2, @react-stately/selection 3.3.0, @react-stately/selection 3.6.0, @react-stately/selection 3.6.1, @react-stately/selection 3.7.0, @react-stately/slider 3.0.3, @react-stately/tabs 3.0.1, @react-stately/toggle 3.2.1, @react-stately/toggle 3.2.2, @react-stately/tooltip 3.0.4, @react-stately/tree 3.1.2, @react-stately/tree 3.1.4, @react-stately/utils 3.2.1, @react-stately/utils 3.2.2, @react-stately/virtualizer 3.1.4, @react-stately/virtualizer 3.1.5, @react-types/accordion 3.0.0-alpha.0, @react-types/breadcrumbs 3.2.1, @react-types/button 3.3.1, @react-types/button 3.4.0, @react-types/button 3.4.1, @react-types/checkbox 3.2.2, @react-types/checkbox 3.2.3, @react-types/color 3.0.0-beta.2, @react-types/combobox 3.0.0, @react-types/dialog 3.3.0, @react-types/grid 3.0.0, @react-types/grid 3.0.0-alpha.0, @react-types/grid 3.0.0-beta.0, @react-types/label 3.4.0, @react-types/label 3.4.1, @react-types/link 3.1.1, @react-types/link 3.1.3, @react-types/listbox 3.2.0, @react-types/menu 3.1.1, @react-types/menu 3.2.0, @react-types/numberfield 3.0.1, @react-types/overlays 3.4.0, @react-types/overlays 3.5.0, @react-types/overlays 3.5.1, @react-types/progress 3.1.1, @react-types/provider 3.3.2, @react-types/radio 3.1.1, @react-types/radio 3.1.2, @react-types/searchfield 3.1.1, @react-types/select 3.2.0, @react-types/shared 3.4.0, @react-types/shared 3.6.0, @react-types/shared 3.7.0, @react-types/shared 3.7.1, @react-types/shared 3.8.0, @react-types/shared 3.9.0, @react-types/slider 3.0.2, @react-types/switch 3.1.1, @react-types/table 3.0.0-alpha.0, @react-types/table 3.0.0-beta.1, @react-types/tabs 3.0.1, @react-types/textfield 3.2.2, @react-types/textfield 3.2.3, @react-types/tooltip 3.1.1, Chroma.js v2.1.0)
+
+Apache License
+Version 2.0, January 2004
+=========================
+
+
+http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+"License" shall mean the terms and conditions for use, reproduction, and
+distribution as defined by Sections 1 through 9 of this document.
+
+"Licensor" shall mean the copyright owner or entity authorized by the copyright
+owner that is granting the License.
+
+"Legal Entity" shall mean the union of the acting entity and all other entities
+that control, are controlled by, or are under common control with that entity.
+For the purposes of this definition, "control" means (i) the power, direct or
+indirect, to cause the direction or management of such entity, whether by
+contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the
+outstanding shares, or (iii) beneficial ownership of such entity.
+
+"You" (or "Your") shall mean an individual or Legal Entity exercising permissions
+granted by this License.
+
+"Source" form shall mean the preferred form for making modifications, including
+but not limited to software source code, documentation source, and configuration
+files.
+
+"Object" form shall mean any form resulting from mechanical transformation or
+translation of a Source form, including but not limited to compiled object code,
+generated documentation, and conversions to other media types.
+
+"Work" shall mean the work of authorship, whether in Source or Object form, made
+available under the License, as indicated by a copyright notice that is included
+in or attached to the work (an example is provided in the Appendix below).
+
+"Derivative Works" shall mean any work, whether in Source or Object form, that is
+based on (or derived from) the Work and for which the editorial revisions,
+annotations, elaborations, or other modifications represent, as a whole, an
+original work of authorship. For the purposes of this License, Derivative Works
+shall not include works that remain separable from, or merely link (or bind by
+name) to the interfaces of, the Work and Derivative Works thereof.
+
+"Contribution" shall mean any work of authorship, including the original version
+of the Work and any modifications or additions to that Work or Derivative Works
+thereof, that is intentionally submitted to Licensor for inclusion in the Work by
+the copyright owner or by an individual or Legal Entity authorized to submit on
+behalf of the copyright owner. For the purposes of this definition, "submitted"
+means any form of electronic, verbal, or written communication sent to the
+Licensor or its representatives, including but not limited to communication on
+electronic mailing lists, source code control systems, and issue tracking systems
+that are managed by, or on behalf of, the Licensor for the purpose of discussing
+and improving the Work, but excluding communication that is conspicuously marked
+or otherwise designated in writing by the copyright owner as "Not a
+Contribution."
+
+"Contributor" shall mean Licensor and any individual or Legal Entity on behalf of
+whom a Contribution has been received by Licensor and subsequently incorporated
+within the Work.
+
+2. Grant of Copyright License. Subject to the terms and conditions of this
+License, each Contributor hereby grants to You a perpetual, worldwide,
+non-exclusive, no-charge, royalty-free, irrevocable copyright license to
+reproduce, prepare Derivative Works of, publicly display, publicly perform,
+sublicense, and distribute the Work and such Derivative Works in Source or Object
+form.
+
+3. Grant of Patent License. Subject to the terms and conditions of this License,
+each Contributor hereby grants to You a perpetual, worldwide, non-exclusive,
+no-charge, royalty-free, irrevocable (except as stated in this section) patent
+license to make, have made, use, offer to sell, sell, import, and otherwise
+transfer the Work, where such license applies only to those patent claims
+licensable by such Contributor that are necessarily infringed by their
+Contribution(s) alone or by combination of their Contribution(s) with the Work to
+which such Contribution(s) was submitted. If You institute patent litigation
+against any entity (including a cross-claim or counterclaim in a lawsuit)
+alleging that the Work or a Contribution incorporated within the Work constitutes
+direct or contributory patent infringement, then any patent licenses granted to
+You under this License for that Work shall terminate as of the date such
+litigation is filed.
+
+4. Redistribution. You may reproduce and distribute copies of the Work or
+Derivative Works thereof in any medium, with or without modifications, and in
+Source or Object form, provided that You meet the following conditions:
+
+  a. You must give any other recipients of the Work or Derivative Works a copy of
+    this License; and
+
+  b. You must cause any modified files to carry prominent notices stating that
+    You changed the files; and
+
+  c. You must retain, in the Source form of any Derivative Works that You
+    distribute, all copyright, patent, trademark, and attribution notices from
+    the Source form of the Work, excluding those notices that do not pertain to
+    any part of the Derivative Works; and
+
+  d. If the Work includes a "NOTICE" text file as part of its distribution, then
+    any Derivative Works that You distribute must include a readable copy of the
+    attribution notices contained within such NOTICE file, excluding those
+    notices that do not pertain to any part of the Derivative Works, in at least
+    one of the following places: within a NOTICE text file distributed as part of
+    the Derivative Works; within the Source form or documentation, if provided
+    along with the Derivative Works; or, within a display generated by the
+    Derivative Works, if and wherever such third-party notices normally appear.
+    The contents of the NOTICE file are for informational purposes only and do
+    not modify the License. You may add Your own attribution notices within
+    Derivative Works that You distribute, alongside or as an addendum to the
+    NOTICE text from the Work, provided that such additional attribution notices
+    cannot be construed as modifying the License.
+
+You may add Your own copyright statement to Your modifications and may provide
+additional or different license terms and conditions for use, reproduction, or
+distribution of Your modifications, or for any such Derivative Works as a whole,
+provided Your use, reproduction, and distribution of the Work otherwise complies
+with the conditions stated in this License.
+
+5. Submission of Contributions. Unless You explicitly state otherwise, any
+Contribution intentionally submitted for inclusion in the Work by You to the
+Licensor shall be under the terms and conditions of this License, without any
+additional terms or conditions. Notwithstanding the above, nothing herein shall
+supersede or modify the terms of any separate license agreement you may have
+executed with Licensor regarding such Contributions.
+
+6. Trademarks. This License does not grant permission to use the trade names,
+trademarks, service marks, or product names of the Licensor, except as required
+for reasonable and customary use in describing the origin of the Work and
+reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty. Unless required by applicable law or agreed to in
+writing, Licensor provides the Work (and each Contributor provides its
+Contributions) on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+either express or implied, including, without limitation, any warranties or
+conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+PARTICULAR PURPOSE. You are solely responsible for determining the
+appropriateness of using or redistributing the Work and assume any risks
+associated with Your exercise of permissions under this License.
+
+8. Limitation of Liability. In no event and under no legal theory, whether in
+tort (including negligence), contract, or otherwise, unless required by
+applicable law (such as deliberate and grossly negligent acts) or agreed to in
+writing, shall any Contributor be liable to You for damages, including any
+direct, indirect, special, incidental, or consequential damages of any character
+arising as a result of this License or out of the use or inability to use the
+Work (including but not limited to damages for loss of goodwill, work stoppage,
+computer failure or malfunction, or any and all other commercial damages or
+losses), even if such Contributor has been advised of the possibility of such
+damages.
+
+9. Accepting Warranty or Additional Liability. While redistributing the Work or
+Derivative Works thereof, You may choose to offer, and charge a fee for,
+acceptance of support, warranty, indemnity, or other liability obligations and/or
+rights consistent with this License. However, in accepting such obligations, You
+may act only on Your own behalf and on Your sole responsibility, not on behalf of
+any other Contributor, and only if You agree to indemnify, defend, and hold each
+Contributor harmless for any liability incurred by, or claims asserted against,
+such Contributor by reason of your accepting any such warranty or additional
+liability.
+
+END OF TERMS AND CONDITIONS
+
+APPENDIX: How to apply the Apache License to your work
+
+To apply the Apache License to your work, attach the following boilerplate
+notice, with the fields enclosed by brackets "[]" replaced with your own
+identifying information. (Don't include the brackets!) The text should be
+enclosed in the appropriate comment syntax for the file format. We also recommend
+that a file or class name and description of purpose be included on the same
+"printed page" as the copyright notice for easier identification within
+third-party archives.
+
+  Copyright [yyyy] [name of copyright owner] Licensed under the Apache License,
+  Version 2.0 (the "License"); you may not use this file except in compliance
+  with the License. You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+  or agreed to in writing, software distributed under the License is
+  distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied. See the License for the specific language
+  governing permissions and limitations under the License.
+
+---
+
+BSD 3-clause "New" or "Revised" License
+(Chroma.js v2.1.0, hoist-non-react-statics v3.3.2, intl-messageformat 9.6.18, intl-messageformat 9.7.1, intl-messageformat 9.8.2, intl-messageformat 9.9.1)
+
+Copyright (c) <YEAR>, <OWNER>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+  * Neither the name of the <ORGANIZATION> nor the names of its contributors may
+    be used to endorse or promote products derived from this software without
+    specific prior written permission.
+
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+---
+
+BSD 3-clause "New" or "Revised" License
+(intl-messageformat 2.2.0)
+
+Copyright 2013 Yahoo! Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+    * Neither the name of the Yahoo! Inc. nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
+
+---
+
+BSD 3-clause "New" or "Revised" License
+(intl-messageformat-parser 1.4.0)
+
+Copyright 2014 Yahoo! Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+    * Neither the name of the Yahoo! Inc. nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
+
+---
+
+BSD 3-clause "New" or "Revised" License
+(source-map 0.5.7)
+
+License: BSD-3-clause
+
+Files: debian/*
+Copyright: 2014 Leo Iannacone <l3on@ubuntu.com>
+License: BSD-3-clause
+
+License: BSD-3-clause
+
+Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the University nor the names of its
+    contributors may be used to endorse or promote products derived from
+    this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE HOLDERS OR
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
+
+---
+
+BSD Zero Clause License
+(tslib 2.1.0)
+
+BSD Zero Clause License
+=======================
+
+Copyright (C) 2006 by Rob Landley <rob@landley.net>
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
+
+---
+
+ISC License
+(yaml 1.10.0)
+
+Copyright 2018 Eemeli Aro <eemeli@gmail.com>
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE
+
+---
+
+ISC License
+(which 2.0.2)
+
+Files: *
+Copyright: Isaac Z. Schlueter and Contributors
+License: ISC
+
+Files: debian/*
+Copyright: 2012, Jérémy Lal <kapouer@melix.org>
+ 2019, Xavier Guimard <yadd@debian.org>
+License: ISC
+
+License: ISC
+
+Permission to use, copy, modify, and/or distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE
+
+---
+
+ISC License
+(material-colors 1.2.6)
+
+ISC License
+
+Copyright 2014 Shuhei Kagawa
+
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE
+
+---
+
+ISC License
+(@formatjs/fast-memoize 1.1.1, @formatjs/fast-memoize 1.1.2, @formatjs/fast-memoize 1.2.0)
+
+ISC License (ISCL)
+==================
+
+Copyright (c) 4-digit year, Company or Person's Name
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
+
+---
+
+ISC License
+(isexe 2.0.0)
+
+The ISC License
+
+Copyright (c) Isaac Z. Schlueter and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE
+
+---
+
+MIT License
+(@rebass/forms 4.0.6, rebass 4.0.7, reflexbox 4.0.6)
+
+# The MIT License (MIT)
+Copyright (c) 2015 – 2019 Brent Jackson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(@styled-system/background 5.1.2, @styled-system/border 5.1.5, @styled-system/color 5.1.2, @styled-system/core 5.1.2, @styled-system/css 5.1.5, @styled-system/flexbox 5.1.2, @styled-system/grid 5.1.2, @styled-system/layout 5.1.2, @styled-system/position 5.1.2, @styled-system/prop-types 5.1.5, @styled-system/props 5.1.5, @styled-system/shadow 5.1.2, @styled-system/should-forward-prop 5.1.5, @styled-system/space 5.1.2, @styled-system/theme-get 5.1.2, @styled-system/typography 5.1.2, @styled-system/variant 5.1.5, styled-system 5.1.5)
+
+# The MIT License (MIT)
+Copyright (c) 2017-2018 Brent Jackson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(Chalk 2.4.2)
+
+2016, Mathias Behrle <mbehrle@debian.org>
+           2017, Paolo Greppi <paolo.greppi@libpf.com>
+License: Expat
+
+License: Expat
+
+Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE
+
+---
+
+MIT License
+(lodash.once 4.1.1)
+
+====
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(Qix-/color-convert 1.9.3)
+
+Copyright (c) 2011-2016 Heather Arthur <fayearthur@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(has 1.0.3)
+
+Copyright (c) 2013 Thiago de Arruda
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(moment/moment 2.29.1)
+
+Copyright (c) JS Foundation and other contributors
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(TinyColor 1.4.2)
+
+Copyright (c), Brian Grinstead, http://briangrinstead.com
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(convert-source-map v1.7.0)
+
+Copyright 2013 Thorsten Lorenz. 
+All rights reserved.
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(json-parse-even-better-errors 2.3.1)
+
+Copyright 2017 Kat Marchán
+Copyright npm, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(find-root 1.1.0)
+
+Copyright © 2017 jsdnxx
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(function-bind 1.1.1)
+
+License: Expat
+
+License: Expat
+
+Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE
+
+---
+
+MIT License
+(loose-envify 1.4.0)
+
+License: Expat
+
+Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE
+
+---
+
+MIT License
+(@types/parse-json 4.0.0)
+
+MIT License
+
+
+
+    Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+
+   
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE
+
+---
+
+MIT License
+(prop-types 15.7.2)
+
+MIT License
+
+Copyright (c) 2013-present, Facebook, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(regenerator-runtime 0.13.7)
+
+MIT License
+
+Copyright (c) 2014-present, Facebook, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(tippy.js 6.2.7)
+
+MIT License
+
+Copyright (c) 2017-present atomiks
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(@tippyjs/react 4.2.0)
+
+MIT License
+
+Copyright (c) 2018 atomiks
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(get-user-locale 1.4.0)
+
+MIT License
+
+Copyright (c) 2018-2019 Wojciech Maj
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(@wojtekmaj/date-utils 1.0.3)
+
+MIT License
+
+Copyright (c) 2019 Wojciech Maj
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(@emotion/cache 10.0.29, @emotion/core 10.1.1, @emotion/css 10.0.27, @emotion/hash 0.8.0, @emotion/is-prop-valid 0.8.8, @emotion/memoize 0.7.4, @emotion/serialize 0.11.16, @emotion/serialize 1.0.0, @emotion/styled 10.0.27, @emotion/styled-base 10.0.31, @emotion/stylis 0.8.5, @emotion/utils 0.11.3, @emotion/utils 1.0.0, @emotion/weak-memoize 0.2.5)
+
+MIT License
+
+Copyright (c) Emotion team and other contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(React from Facebook 16.13.1)
+
+MIT License
+
+Copyright (c) Facebook, Inc. and its affiliates.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(shebang-command 2.0.0)
+
+MIT License
+
+Copyright (c) Kevin Mårtensson <kevinmartensson@gmail.com> (github.com/kevva)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(clsx 1.1.1)
+
+MIT License
+
+Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (lukeed.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(escape-string-regexp v4.0.0)
+
+MIT License
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(ansi-styles 3.2.1, callsites 3.1.0, has-flag 3.0.0, parent-module 1.0.1, path-key 3.1.1, path-type 4.0.0, resolve-from 4.0.0, shebang-regex 3.0.0, sindresorhus/supports-color 5.5.0)
+
+MIT License
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(to-fast-properties 2.0.0)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(@babel/code-frame 7.12.13, @babel/helper-module-imports 7.12.13, @babel/helper-plugin-utils 7.13.0, @babel/helper-validator-identifier 7.12.11, @babel/highlight 7.13.8, @babel/plugin-syntax-jsx 7.12.13, @babel/runtime 7.13.8, @babel/runtime 7.15.3, @babel/types 7.13.0, @emotion/babel-plugin 11.3.0, @emotion/cache 11.1.3, @emotion/is-prop-valid 1.1.0, @emotion/memoize 0.7.5, @emotion/react 11.1.5, @emotion/serialize 1.0.2, @emotion/sheet 0.9.4, @emotion/sheet 1.0.1, @emotion/styled 11.3.0, @emotion/unitless 0.7.5, @formatjs/ecma402-abstract 1.9.3, @formatjs/ecma402-abstract 1.9.4, @formatjs/ecma402-abstract 1.9.6, @formatjs/ecma402-abstract 1.9.8, @formatjs/icu-messageformat-parser 2.0.11, @formatjs/icu-messageformat-parser 2.0.6, @formatjs/icu-messageformat-parser 2.0.7, @formatjs/icu-messageformat-parser 2.0.9, @formatjs/icu-skeleton-parser 1.2.10, @formatjs/icu-skeleton-parser 1.2.12, @formatjs/icu-skeleton-parser 1.2.7, @formatjs/icu-skeleton-parser 1.2.8, @formatjs/intl-localematcher 0.2.19, @formatjs/intl-localematcher 0.2.20, @icons/material 0.2.4, @mdx-js/react 1.6.22, @popperjs/core 2.8.6, @theme-ui/color-modes 0.10.0, @theme-ui/components 0.10.0, @theme-ui/core 0.10.0, @theme-ui/css 0.10.0, @theme-ui/mdx 0.10.0, @theme-ui/parse-props 0.10.0, @theme-ui/theme-provider 0.10.0, @types/styled-system 5.1.12, Lodash 4.17.21, babel-plugin-syntax-jsx 6.18.0, browserify/resolve v1.20.0, csstype 2.6.16, csstype 3.0.7, csstype 3.0.8, emotion-normalize 11.0.1, emotion-utils 10.2.2, import-fresh 3.3.0, is-core-module 2.2.0, merge-class-names 1.4.2, node-uuid 8.3.2, parse-json v5.2.0, react-calendar 3.4.0, react-shapebase 1.0.23, stylis v4.0.7, theme-ui 0.10.0)
+
+The MIT License
+===============
+
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in the
+Software without restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+MIT License
+(deep_merge v4.2.2)
+
+The MIT License (MIT)
+
+Copyright (c) 2012 James Halliday, Josh Duff, and other contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(js-tokens 4.0.0)
+
+The MIT License (MIT)
+
+Copyright (c) 2014, 2015, 2016, 2017, 2018 Simon Lydell
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(lines-and-columns 1.1.6)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Brian Donovan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(react-color 2.19.3, reactcss 1.2.3)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Case Sandberg
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(cosmiconfig 6.0.0)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 David Clark
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(kk-color-name 1.1.3)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Dmitry Ivanov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+---
+
+MIT License
+(dom-helpers 3.4.0)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Jason Quense
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(path-parse 1.0.6)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Javier Blanco
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(is-arrayish 0.2.1, node-error-ex 1.3.2)
+
+The MIT License (MIT)
+
+Copyright (c) 2015 JD Ballard
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(mdi-react 7.4.0)
+
+The MIT License (MIT)
+
+Copyright (c) 2016-2019 Levin Rickert
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(classnames 2.2.6)
+
+The MIT License (MIT)
+
+Copyright (c) 2017 Jed Watson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(node-cross-spawn 7.0.3)
+
+The MIT License (MIT)
+
+Copyright (c) 2018 Made With MOXY Lda <hello@moxy.studio>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(safe-buffer 5.1.2)
+
+The MIT License (MIT)
+
+Copyright (c) Feross Aboukhadijeh
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(escape-string-regexp 1.0.5)
+
+The MIT License (MIT)
+
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE
+
+---
+
+MIT License
+(babel-plugin-macros 2.8.0, cross-env 6.0.3)
+
+The MIT License (MIT)
+Copyright (c) 2017 Kent C. Dodds
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE
+
+---
+
+MIT License
+(object-assign 4.1.1)
+
+Upstream-Contact: https://github.com/sindresorhus/object-assign/issues
+Source: https://github.com/sindresorhus/object-assign#readme
+
+Files: *
+Copyright: Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+License: Expat
+
+Files: debian/*
+Copyright: 2016, Sruthi Chandran <srud@disroot.org>
+License: Expat
+
+License: Expat
+
+Permission is hereby granted, free of charge, to any person
+ obtaining a copy of this software and associated documentation files
+ (the "Software"), to deal in the Software without restriction,
+ including without limitation the rights to use, copy, modify, merge,
+ publish, distribute, sublicense, and/or sell copies of the Software,
+ and to permit persons to whom the Software is furnished to do so,
+ subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be
+ included in all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE
+
+---
+
+SIL Open Font License 1.1
+(mdi-react 7.4.0)
+
+SIL OPEN FONT LICENSE
+=====================
+
+Version 1.1 - 26 February 2007
+
+
+PREAMBLE
+
+The goals of the Open Font License (OFL) are to stimulate worldwide development
+of collaborative font projects, to support the font creation efforts of academic
+and linguistic communities, and to provide a free and open framework in which
+fonts may be shared and improved in partnership with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and redistributed
+freely as long as they are not sold by themselves. The fonts, including any
+derivative works, can be bundled, embedded, redistributed and/or sold with any
+software provided that any reserved names are not used by derivative works. The
+fonts and derivatives, however, cannot be released under any other type of
+license. The requirement for fonts to remain under this license does not apply to
+any document created using the fonts or their derivatives.
+
+
+DEFINITIONS
+
+"Font Software" refers to the set of files released by the Copyright Holder(s)
+under this license and clearly marked as such. This may include source files,
+build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the copyright
+statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting, or
+substituting — in part or in whole — any of the components of the Original
+Version, by changing formats or by porting the Font Software to a new
+environment.
+
+"Author" refers to any designer, engineer, programmer, technical writer or other
+person who contributed to the Font Software.
+
+
+PERMISSION & CONDITIONS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+the Font Software, to use, study, copy, merge, embed, modify, redistribute, and
+sell modified and unmodified copies of the Font Software, subject to the
+following conditions:
+
+1) Neither the Font Software nor any of its individual components, in Original or
+Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy contains the
+above copyright notice and this license. These can be included either as
+stand-alone text files, human-readable headers or in the appropriate
+machine-readable metadata fields within text or binary files as long as those
+fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font Name(s)
+unless explicit written permission is granted by the corresponding Copyright
+Holder. This restriction only applies to the primary font name as presented to
+the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font Software
+shall not be used to promote, endorse or advertise any Modified Version, except
+to acknowledge the contribution(s) of the Copyright Holder(s) and the Author(s)
+or with their explicit written permission.
+
+5) The Font Software, modified or unmodified, in part or in whole, must be
+distributed entirely under this license, and must not be distributed under any
+other license. The requirement for fonts to remain under this license does not
+apply to any document created using the Font Software.
+
+
+TERMINATION
+
+This license becomes null and void if any of the above conditions are not met.
+
+
+DISCLAIMER
+
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR
+OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL,
+OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER
+DEALINGS IN THE FONT SOFTWARE.
+

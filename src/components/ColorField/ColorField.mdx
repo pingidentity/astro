@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/ColorField/ColorField" />
+
+# ColorField
+
+The ColorField component allows users to pick a color from a color swatch and use that color. 
+The colors must use the same color naming conventions, such as HEX, RBBA, and HSLA. 
+Pick one convention and stick with it.
+
+This component uses [useColorField](https://react-spectrum.adobe.com/react-aria/useColorField.html) from React Aria, 
+[useColorFieldState](https://react-spectrum.adobe.com/react-stately/useColorFieldState.html) from React Stately 
+and [React Color](https://casesandberg.github.io/react-color/) as a color picker.
+
+### Required Components
+
+This component is built using [useOverLayTrigger](https://react-spectrum.adobe.com/react-aria/useOverlayTrigger.html), and requires the 
+react-aria [OverlayProvider](https://react-spectrum.adobe.com/react-aria/useOverlayTrigger.html#:~:text=contained%20in%20an-,OverlayProvider,-%2C%20which%20is%20used), which is exported from Astro.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | ---- |
+| Tab |Focuses the color swatch and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter | Opens the color swatch when it is focused. Once opened, the focus moves to the input field and is locked inside the ColorPicker Overlay. |
+| Esc | When the picker is open, pressing the escape key closes the overlay and focuses on the previously focused component. |
+| Up and Down Arrows | Using the up and down arrows on any of the RGBA inputs adjusts the value of the input in focus.
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The trigger button uses the **`aria-expanded`** attribute to indicate the expansion and collapse of Sketch Picker.
+- When expanded, **`aria-controls`** is added to the button pointing to the Sketch Picker.
+- The visibly hidden input uses the **`aria-labelledby`** attribute supplied with label ID.

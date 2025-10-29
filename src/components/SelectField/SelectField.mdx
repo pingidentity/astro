@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/SelectField/SelectField" />
+
+# SelectField
+
+The component allows items to be selected from a drop-down list and displayed in the field.
+It is a variation of the [LinkSelectField](./?path=/docs/form-linkselectfield--default) component that uses [useSelect](https://react-spectrum.adobe.com/react-aria/useSelect.html) from React Aria and [useSelectState](https://react-spectrum.adobe.com/react-stately/useSelectState.html) from React Stately and does not rely on native browsers or mobile implementations.
+
+The SelectField component should be used to present choices between mutually exclusive options.
+
+It shouldn’t be used:
+- When there are fewer than three options. Use the [RadioGroupField](./?path=/docs/form-radiogroupfield--default) component instead. 
+- If the user input can't be predicted using the preset values and the exact input value is important to specify, use the [TextField](./?path=/docs/form-textfield--default) component instead.
+- For large complex lists. The user should be able to easily scan and navigate the list. 
+If the list is large, use the [ComboBoxField](./?path=/docs/form-comboboxfield--default) component instead.
+
+### Required components
+
+This component requires the OverlayProvider and Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component.|
+| Space or Enter | Pressing Space or Enter when the trigger button is focused opens or closes the menu. Pressing Space or Enter when the menu item is focused selects the listbox option. |
+| Arrow keys | Can be used to move through the listbox selection. |
+| Typing in input field | Adds focus to it and opens the popover. |
+| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first item in the listbox. |
+| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last item in the listbox. |
+| Esc | Pressing the escape key closes the popover menu and adds focus to the input.|
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- The trigger button uses the **`aria-labelledby`** attribute to reference the label ID, the **`aria-expanded`** attribute to indicate the expansion or collapse of the popover, 
+- The **`aria-haspopup`** attribute indicates the type of popup content as a listbox. Once expanded, the **`aria-controls`** attribute is added to the button pointing to the popover. 
+- The component uses the **`aria-invalid`** attribute to detect incorrect values or status errors, and is set to “False” by default.
+- The listbox uses the **`aria-labelledby`** attribute pointing to the label ID.
+- Each option in the list uses the **`aria-selected`** attribute to indicate the selection state, **`aria-posinset`** to give the option’s position in the current set of list items, and **`aria-setsize`** to define the current set of options. The default **`aria-disabled`** value is false for each option.

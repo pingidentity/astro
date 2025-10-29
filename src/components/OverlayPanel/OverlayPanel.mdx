@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/OverlayPanel/OverlayPanel" />
+
+# OverlayPanel
+
+OverlayPanel is a generic container component that can overlay other components on a page. 
+In Astro, this component is used to display detailed information and present modal interactions.
+
+**Note**: The way the OverlayPanel displays in Firefox browser differs from other browsers. This is a Storybook-only issue and will not affect the way it works in your application, but test your application in Chrome or Safari.
+
+This component should:
+- Be used to show content that is too long to put in a popover or modal.
+- Show content related to the state of the main view.
+
+This component should not:
+- Be overused, as it disrupts the user’s workflow.
+- Cover content that is contextually relevant to the overlay being displayed.
+
+### Required Components
+
+This component requires the OverlayProvider component.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Key | Functions |
+| ---- | ---- |
+| Tab | The trigger is focusable using the Tab key and follows the page tab sequence. |
+| Space or Enter | Opens or closes the panel when the trigger is focused. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Esc | Pressing the escape key closes the overlay and focuses on the previous focusable component. |
+
+#### Screen Readers
+
+The trigger button uses the **`aria-expanded`** attribute to indicate the expansion and collapse of content.

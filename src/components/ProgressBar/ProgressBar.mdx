@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Experimental/ProgressBar/ProgressBar" />
+
+# ProgressBar
+
+The ProgressBar component shows progression that can be calculated against a certain goal, such as loading or percent completion of a task.
+
+This component should be:
+- Used to show a determinate loading state.
+- When trying to communicate progression in steps.
+
+It should not be used: 
+- When the wait time for a process is unknown. If it is unknown, use [Loader](./?path=/story/components-loader--default) component instead.
+
+### Required components
+
+This component can be used independently and does not require additional components.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA ProgressBar](https://w3c.github.io/aria/#progressbar) accessibility guidelines.
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The progressBar uses the **`aria-valuemin`** and **`aria-valuemax`** to indicate the minimum and maximum progress indicator values. If they are missing, they default to 0 and 100 respectively. 
+- The progressBar uses the **`aria-valuenow`** attribute to indicate the current value of the progressbar.
+- If the progressbar is describing the loading progress of a particular region of a page, authors SHOULD both use **`aria-describedby`** to reference the progressbar status, and set the **`aria-busy`** attribute to true on the region until it is finished loading. It is not possible for the user to alter the value of a progressbar because it is always read-only
+
+### Determinate vs Indeterminate usage
+
+- If the progress to be indicated is determinate, use the ProgressBar component.
+- If the progress to be indicated is indeterminate, use the [Loader](./?path=/story/components-loader--default) component instead.

@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/CollapsiblePanel/CollapsiblePanel" />
+
+# CollapsiblePanel
+
+CollapsiblePanel provides users with the ability to expand and collapse content as needed while saving horizontal space, and shouldn’t be used with invisible triggers.
+
+### Required Components
+
+This component can be used independently and does not require additional components.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Expands or collapses the content when the trigger is focused. |
+| Tab | Focuses the trigger button and the panel content. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Esc | Pressing the escape key closes the panel when it is expanded. |
+
+#### Screen Readers
+This component uses the **`aria-rowcount`** and **`aria-columncount`** attributes to indicate the total number of rows and columns in the grid structure.
+
+

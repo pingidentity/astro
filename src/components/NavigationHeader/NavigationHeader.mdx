@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Experimental/NavigationHeader/NavigationHeader" />
+
+# NavigationHeader
+The NavigationHeader component is designed to help users navigate to different pages. 
+It incorporates several child components, including Link, Image, Avatar, and PopUp, allowing for a customizable and functional navigation experience.
+
+### Required components
+This component can be used independently and does not require additional components.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Navigation](https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Key            | Functions                                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Tab            | Focuses item and follows the page tab sequence.                                                    |
+| Shift + Tab    | Moves focus to the previous focusable component.                                                         |
+| Space or Enter | Pressing Space or Enter on a focused trigger opens or closes the dropdown menu and selects the MenuItems it is focused on. |
+| Arrow keys     | Moves the selection through the popover.                                                                          |
+| Esc            | Pressing the escape key closes the popover and focuses on the previous focusable component.                       |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- Each Link component uses the **`aria-label`** attribute to provide an accessible name.

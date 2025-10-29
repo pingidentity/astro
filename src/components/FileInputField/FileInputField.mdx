@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/FileInputField/FileInputField" />
+
+# FileInputField
+
+The FileInputField component allows users to upload files by clicking the button or dragging and dropping the files to a specific location. 
+We use [react-dropzone](https://react-dropzone.js.org/) for the drag-and-drop functionality.
+
+This component should have clear, concise file names and labels that guide users through the upload process, and should not allow users to upload executable files, such as .exe, .bin, .app files.
+
+### Required Components
+
+This component can be used independently and does not require additional components.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | ---- |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter | Selects the component when it is focused. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- This component uses the **`aria-label`** to provide an accessible name and has **`aria-labelledby`** attribute, supplied with the label ID.
+- Upon uploading the file, the Button component, with the name of the uploaded file, displays with **`aria-describedby`** attribute, which references the helpText if passed along. 
+- The delete button has an **`aria-label`** to provide an accessible name.

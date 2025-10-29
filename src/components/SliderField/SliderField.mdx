@@ -1,0 +1,127 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/SliderField" />
+
+# SliderField
+
+The `SliderField` component is used to allow users to select a value from a range by dragging a thumb along a track. It supports both horizontal and vertical orientations, multi-thumb sliders, and provides a customizable display value.
+
+### Recommended Use
+
+- Use the `SliderField` component for selecting numeric values within a defined range.
+- Display the current value dynamically as the user interacts with the slider.
+- Use multi-thumb sliders for selecting a range of values.
+
+### Features
+
+- **Horizontal and Vertical Orientations**: Supports both orientations for flexible UI design.
+- **Multi-Thumb Sliders**: Allows selecting a range of values.
+- **Customizable Display Value**: Allows dynamic display of the current value.
+- **Keyboard Accessibility**: Fully accessible with keyboard navigation.
+- **Customizable Tracks and Thumbs**: Add custom class names or styles to `trackProps` and `activeTrackProps`.
+
+### Props
+
+| Prop                  | Type                 | Description                                                                 |
+| --------------------- | -------------------- | --------------------------------------------------------------------------- |
+| `activeTrackProps`    | `object`            | Props passed to the active track element.                                   |
+| `autoFocus`           | `boolean`           | Automatically focuses the slider when it is rendered.                       |
+| `className`           | `string`            | Additional class names for custom styling.                                  |
+| `defaultValue`        | `number` `[number, number]` | The default value of the slider.                                            |
+| `displayValue`        | `string`            | Custom display value for the slider.                                        |
+| `formatOptions`       | `Intl.NumberFormatOptions` | Options for formatting the display value.                                   |
+| `helperText`          | `string`            | Text displayed below the slider for additional context.                     |
+| `helperTextProps`     | `object`            | Props passed to the helper text element.                                    |
+| `isDisabled`          | `boolean`           | Disables the slider.                                                        |
+| `isDisplayValueHidden`| `boolean`           | Hides the display value if set to `true`.                                   |
+| `isMultiThumb`        | `boolean`           | Enables multi-thumb slider functionality.                                   |
+| `label`               | `string` `ReactNode` | Label for the slider.                                                       |
+| `maxValue`            | `number`            | Maximum value of the slider.                                                |
+| `minValue`            | `number`            | Minimum value of the slider.                                                |
+| `name`                | `string`            | Name of the slider input.                                                   |
+| `onBlur`              | `function`          | Callback triggered when the slider loses focus.                             |
+| `onChange`            | `function`          | Callback triggered when the slider value changes.                           |
+| `onChangeEnd`         | `function`          | Callback triggered when the slider interaction ends.                        |
+| `onFocus`             | `function`          | Callback triggered when the slider gains focus.                             |
+| `onFocusChange`       | `function`          | Callback triggered when the focus state changes.                            |
+| `onKeyDown`           | `function`          | Callback triggered on key down events.                                      |
+| `onKeyUp`             | `function`          | Callback triggered on key up events.                                        |
+| `orientation`         | `'horizontal' 'vertical'` | Orientation of the slider.                                            |
+| `step`                | `number`            | Step size for the slider.                                                   |
+| `thumbProps`          | `object`            | Props passed to the slider thumb.                                           |
+| `trackProps`          | `object`            | Props passed to the track element.                                          |
+| `value`               | `number` `[number, number]` | Controlled value of the slider.                                     |
+
+### Accessibility
+
+This component adheres to accessibility guidelines to ensure a better user experience for all users.
+
+#### Keyboard Navigation
+
+| Keys         | Function                                                                 |
+| ------------ | ----------------------------------------------------------------------- |
+| Tab          | Moves focus to the slider.                                              |
+| Arrow Keys   | Adjusts the slider value incrementally.                                  |
+| Home         | Moves the slider to the minimum value.                                  |
+| End          | Moves the slider to the maximum value.                                  |
+
+#### Screen Readers
+
+- **`aria-valuenow`**: Announces the current value of the slider.
+- **`aria-valuemin` and `aria-valuemax`**: Define the minimum and maximum values of the slider.
+- **`aria-orientation`**: Indicates whether the slider is horizontal or vertical.
+
+### Example Usage
+
+#### Single Thumb Slider
+
+```jsx
+<SliderField
+  label="Volume"
+  defaultValue={50}
+  minValue={0}
+  maxValue={100}
+  step={1}
+  onChange={(value) => console.log('Value:', value)}
+/>
+```
+
+#### Multi-Thumb Slider
+
+```jsx
+<SliderField
+  label="Range"
+  isMultiThumb
+  defaultValue={[20, 80]}
+  minValue={0}
+  maxValue={100}
+  step={5}
+  onChange={(value) => console.log('Range:', value)}
+/>
+```
+
+#### Custom Tracks and Thumbs
+
+```jsx
+<SliderField
+  label="Custom Slider"
+  trackProps={{ className: 'custom-track' }}
+  activeTrackProps={{ className: 'custom-active-track' }}
+  thumbProps={{ className: 'custom-thumb' }}
+  defaultValue={50}
+  minValue={0}
+  maxValue={100}
+/>
+```
+
+#### Vertical Slider
+
+```jsx
+<SliderField
+  label="Vertical Slider"
+  orientation="vertical"
+  defaultValue={50}
+  minValue={0}
+  maxValue={100}
+/>
+```

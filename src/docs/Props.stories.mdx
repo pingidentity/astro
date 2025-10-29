@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Docs/Props" />
+
+## Understanding Astro Props
+
+Most of the Astro components can be customized through props which are documented in there respective component examples. If you want to pass your own custom props to an Astro component many components have wrapperProps, containerProps, and controlProps designed just for this.
+
+- **containerProps:** an object that gets spread to the outermost container commonly used for passing styles
+- **wrapperProps:** an object that gets spread to the container directly wrapping and input field
+- **controlProps:** an object that gets spread to an input field
+
+```
+const ExampleComponent = ({
+ containerProps,
+ controlProps,
+ wrapperProps,
+}) => (
+   <ContainerBox {...containerProps}>
+     <Box {...wrapperProps}>
+       <input type="text" {...controlProps} />
+     </Box>
+   </ContainerBox>
+ );
+};
+```
+
+Most of the Field/Input components have the following props, see the individual component for more details: 
+- `isDisabled`
+- `isOpen`
+- `isReadOnly`
+- `isRequired`
+- `onChange`
+- `onFocus`
+- `onFocusChange`

@@ -1,0 +1,84 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+import useOverlayPanelState, { DummyComponent } from '../../hooks/useOverlayPanelState/useOverlayPanelState';
+
+<Meta title="Docs/Hooks/useOverlayPanelState" />
+
+# useOverlayPanelState
+
+A hook that manages and supplies state intended for Astro-UI's `OverlayPanel` component.
+
+## Overview
+
+This hook utilizes React Stately's [useOverlayTriggerState](https://react-spectrum.adobe.com/react-stately/useOverlayTriggerState.html) hook to generate the necessary state management for
+a `OverlayPanel` component with minimal modifications.
+
+## Usage
+
+To use this hook, import it from `@pingux/astro/lib/hooks`.
+
+`import { useOverlayPanelState } from "@pingux/astro/lib/hooks";`
+
+## API
+
+<br />
+
+### useOverlayPanelState([props]) => result
+
+<br />
+
+#### props
+
+Type: `Object` Default: `{}`
+
+* **isDefaultOpen**
+
+  Type: `boolean`
+
+  Whether the overlay panel is open by default (uncontrolled).
+
+* **isOpen**
+
+  Type: `boolean`
+
+  Whether the overlay panel is currently open (controlled).
+
+* **onOpenChange**
+
+  Type: `Function`
+
+  Handler that is called when the open state changes. `(isOpen: boolean) => void`
+
+#### result
+
+Type: `Object`
+
+* **isOpen**
+
+  Type: `boolean`
+
+  Whether the overlay panel is currently open.
+
+* **open**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to `true`.
+
+* **close**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to `false`.
+
+* **toggle**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to the opposite of what it just was.
+
+
+## Example
+
+See the [Overlay Panel docs](./?path=/story/components-overlaypanel--default) for an example of how to 
+implement this hook.

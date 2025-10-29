@@ -1,0 +1,396 @@
+import React, { Key, useCallback, useEffect, useState } from 'react';
+import { OverlayProvider } from 'react-aria';
+import CalendarRangeIcon from '@pingux/mdi-react/CalendarRangeIcon';
+import { Meta } from '@storybook/react';
+
+import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { getAllUsers } from '../../api/users';
+import {
+  Icon,
+  Item,
+  Section,
+  SelectField,
+} from '../../index';
+import { LIMIT } from '../../mocks/constants';
+import { UserType } from '../../mocks/types/users';
+import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
+
+import SelectFieldReadme from './SelectField.mdx';
+
+export type SelectItemProps = {
+  name?: string
+  id?: string
+  key?: Key
+}
+
+export type SelectSectionProps = {
+  name?: string
+  key?: string,
+  children?: SelectItemProps[]
+}
+
+const animals = [
+  { name: 'Aardvark', id: '1' },
+  { name: 'Kangaroo', id: '2' },
+  { name: 'Snake', id: '3' },
+  { name: 'Snail', id: '4' },
+  { name: 'Slug', id: '5' },
+  { name: 'Crow', id: '6' },
+  { name: 'Dog', id: '7' },
+  { name: 'Crab', id: '8' },
+  { name: 'Fish', id: '9' },
+  { name: 'Turtle', id: '10' },
+  { name: 'Mouse', id: '11' },
+  { name: 'Banana', id: '12' },
+  { name: 'Shark', id: '13' },
+  { name: 'Gorilla', id: '14' },
+  { name: 'Goat', id: '15' },
+];
+
+const withSection = [
+  {
+    name: 'Animals',
+    key: 'Animals',
+    children: [
+      { name: 'Aardvark' },
+      { name: 'Kangaroo' },
+      { name: 'Snake' },
+    ],
+  },
+  {
+    name: 'People',
+    key: 'People',
+    children: [
+      { name: 'Michael' },
+      { name: 'Dwight' },
+      { name: 'Creed' },
+    ],
+  },
+  {
+    name: null,
+    key: 'Fruit',
+    children: [
+      { name: 'Apple' },
+      { name: 'Strawberry' },
+      { name: 'Blueberry' },
+    ],
+  },
+];
+
+export default {
+  title: 'Form/SelectField',
+  component: SelectField,
+  parameters: {
+    docs: {
+      page: () => (
+        <>
+          <SelectFieldReadme />
+          <DocsLayout />
+        </>
+      ),
+    },
+  },
+  argTypes: {
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {},
+    defaultText: {},
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    hintText: {
+      control: {
+        type: 'text',
+      },
+    },
+    labelMode: {
+      control: {
+        type: 'select',
+        options: Object.values(labelModes),
+      },
+    },
+    defaultSelectedKey: {},
+    disabledKeys: {},
+    name: {},
+    align: {},
+    direction: {},
+    hasNoEmptySelection: {},
+    isDefaultOpen: {},
+    isDisabled: {},
+    isOpen: {},
+    isRequired: {},
+    selectedKey: {
+      control: {
+        type: 'none',
+      },
+    },
+    ...statusArgTypes,
+    ...ariaAttributeBaseArgTypes,
+    ...inputFieldAttributeBaseArgTypes,
+  },
+  args: {
+    label: 'Example Label',
+    labelMode: Object.values(labelModes)[0],
+  },
+} as Meta;
+
+export const Default = args => (
+  <OverlayProvider>
+    <SelectField {...args} width="100%" selectProps={{ 'data-testid': 'select-field' }}>
+      <Item key="red" data-testid="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
+);
+
+export const WithSections = args => (
+  <OverlayProvider>
+    <SelectField items={withSection} {...args}>
+      {(section: SelectSectionProps) => (
+        <Section key={section.key} items={section.children} title={section.name}>
+          {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
+        </Section>
+      )}
+    </SelectField>
+  </OverlayProvider>
+);
+
+export const WithCustomHeight = args => (
+  <OverlayProvider>
+    <SelectField label="Example label" items={animals} scrollBoxProps={{ maxHeight: '75px' }} {...args}>
+      {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
+    </SelectField>
+  </OverlayProvider>
+);
+
+export const FloatLabel = args => (
+  <SelectField {...args} label="What's your favorite color?" labelMode="float">
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
+FloatLabel.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const Controlled = () => {
+  const [selectedKey, setSelectedKey] = useState('yellow');
+  const handleSelectionChange = key => setSelectedKey(key);
+
+  return (
+    <SelectField
+      selectedKey={selectedKey}
+      onSelectionChange={handleSelectionChange}
+      label="What's your favorite color?"
+    >
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  );
+};
+
+export const WithNoneOption = args => (
+  <SelectField {...args} label="What's your favorite color?">
+    <Section>
+      <Item key="none">None</Item>
+    </Section>
+    <Section>
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </Section>
+  </SelectField>
+);
+
+export const WithSlots = () => (
+  <SelectField
+    aria-label="with-slots"
+    slots={{
+      leftOfData: (
+        <Icon
+          icon={CalendarRangeIcon}
+          color="accent.40"
+          mr="xs"
+          title={{ name: 'Calendar Icon' }}
+        />
+      ),
+    }}
+  >
+    <Item key="today">Today</Item>
+    <Item key="fromYesterday">From Yesterday</Item>
+    <Item key="last7days">Last 7 Days</Item>
+    <Item key="last30days">Last 30 Days</Item>
+    <Item key="thisMonth">This Month</Item>
+    <Item key="lastMonth">Last Month</Item>
+    <Item key="customRange">Custom Range</Item>
+  </SelectField>
+);
+
+export const DisabledField = args => (
+  <SelectField {...args} label="What's your favorite color?" isDisabled>
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
+export const DisabledOptions = args => (
+  <SelectField {...args} label="What's your favorite color?" disabledKeys={['blue']}>
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
+export const NoOptionsAvailable = args => (
+  <SelectField {...args} label="Select an option..." placeholder="No options available" />
+);
+
+export const HelperText = args => (
+  <SelectField
+    {...args}
+    status="error"
+    helperText="Here is some helpful text..."
+    label="What's your favorite color?"
+  >
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
+HelperText.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+const options = new Array(400).fill({ key: 'string', name: 'string' }).map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
+export const DynamicItems = () => {
+  // options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
+  const [items] = useState(options);
+
+  return (
+    <OverlayProvider>
+      <SelectField label="Select an option..." items={items}>
+        {(item: SelectItemProps) => <Item key={item.key}>{item.name}</Item>}
+      </SelectField>
+    </OverlayProvider>
+  );
+};
+DynamicItems.parameters = {
+  docs: {
+    storyDescription: 'If using a long list or one that is dynamically updated, use the `items` prop and a function to render the children. See [the React Stately docs](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections) for more information about this.',
+  },
+};
+
+export const AsyncLoading = () => {
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(LIMIT);
+  const [dataSize, setDataSize] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchData = useCallback(async currentLimit => {
+    try {
+      const response = await getAllUsers(currentLimit);
+      const json = await response.json();
+
+      if (response.ok) {
+        setData(json.body._embedded.users || []);
+        setDataSize(json.body.count);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handleLoadMore = () => {
+    if (limit >= dataSize) return;
+    setIsLoading(true);
+    setLimit(prevLimit => prevLimit + LIMIT);
+  };
+
+  useEffect(() => {
+    fetchData(limit);
+  }, [fetchData, limit]);
+
+  return (
+    <OverlayProvider>
+      <SelectField
+        label="Pick a User"
+        items={data as Iterable<UserType>}
+        isLoading={isLoading}
+        onLoadMore={handleLoadMore}
+      >
+        {(item => {
+          const user = item as UserType;
+          return <Item key={user.id}>{user.name.given}</Item>;
+        })}
+      </SelectField>
+    </OverlayProvider>
+  );
+};
+
+export const WithoutStatusIndicator = args => (
+  <SelectField {...args} label="What's your favorite color?" hasNoStatusIndicator>
+    <Item key="none">None</Item>
+    <Item key="red">Red</Item>
+    <Item key="blue">Blue</Item>
+    <Item key="yellow">Yellow</Item>
+  </SelectField>
+);
+
+export const WithHelpHint = args => (
+  <OverlayProvider>
+    <SelectField
+      {...args}
+      width="100%"
+      hintText="Example Hint"
+      label="What's your favorite color?"
+    >
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
+);
+
+export const WithClearButton = args => {
+  const [selectedKey, setSelectedKey] = useState('red');
+  return (
+    <OverlayProvider>
+      <SelectField
+        {...args}
+        width="100%"
+        label="What's your favorite color?"
+        hasClearButton
+        selectedKey={selectedKey}
+        onSelectionChange={setSelectedKey}
+      >
+        <Item key="red">Red</Item>
+        <Item key="blue">Blue</Item>
+        <Item key="yellow">Yellow</Item>
+      </SelectField>
+    </OverlayProvider>
+  );
+};

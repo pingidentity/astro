@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/DataTable/DataTable" />
+
+# DataTable
+
+DataTables are containers that display data in rows, columns, and cells, which allows users to quickly scan, sort, and compare information. This component was inspired by [TableView](https://react-spectrum.adobe.com/react-spectrum/TableView.html)
+from React Spectrum and build using [useTableState](https://react-spectrum.adobe.com/react-stately/useTableState.html)
+from React Stately.
+
+Columns are defined within the DataTableHeader component with the DataTableColumn component, and rows are defined within the DataTableBody component with the DataTableRow component. 
+Rows contain DataTableCell components that correspond to each column.
+
+DataTables should:
+- Contain vertically aligned content.
+- Use multiple heading rows for higher-level column groupings.
+- Use column dividers sparingly.
+
+They should not use different indicators to represent empty fields.
+
+### Required Components
+
+This component requires these additional React Spectrum components:
+- [TableHeader](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=defined%20using%20the-,TableHeader,-%2C%20Column%2C) aliased DataTableHeader
+- [Column](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=the%20TableHeader%2C-,Column,-%2C%20TableBody%2C) aliased DataTableColumn
+- [Cell](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=Row%2C%20and-,Cell,-components%2C%20which%20support) aliased DataTableCell
+- [Row](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20TableBody%2C-,Row,-%2C%20and%20Cell%20components) aliased DataTableRow
+- [TableBody](https://react-spectrum.adobe.com/react-aria/useTable.html#:~:text=%2C%20Column%2C-,TableBody,-%2C%20Row%2C%20and) aliased DataTableBody
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Moves focus to the next focusable component. All focusable components in the table are included in the page tab sequence. | 
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter  | Focuses the component and triggers an action if one is associated with it. |
+| Arrow keys | Can be used to navigate between the components in the table. |
+| Focus on a row and scroll down | Shifts the focus to the entire table, not the previously focused row. |
+| Home or page up | Shifts the focus to the first row. |
+| End or page down | Shifts the focus to the last visible row. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute is used to provide an accessible name.
+- The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure. 
+- The DataTableHeader uses the **`aria-rowindex`** attribute and DataTableColumn uses the **`aria-colindex`** attribute to enumerate the header row and columns. 
+- In the body component, the DataTableRow uses the **`aria-labelledby`** attribute and the grid ID to identify the component and the **`aria-rowindex`** attribute is passed to each row.
+- Each DataTableCell uses the **`aria-colindex`** attribute to enumerate the columns within each row.
+

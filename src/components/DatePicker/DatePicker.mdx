@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/DatePicker/DatePicker" />
+
+# DatePicker
+
+Date pickers allow users to select specific past, present, or future dates. 
+This component combines the [Calendar](./?path=/docs/components-calendar--default) component with the DateField component and can be localized to meet your needs. 
+
+This component is built on [useDatePicker](https://react-spectrum.adobe.com/react-aria/useDatePicker.html) from React Aria 
+and [useDatePickerState](https://react-spectrum.adobe.com/react-stately/useDatePickerState.html) from React Stately. 
+
+Properties not specified are passed to the underlying DateField component.
+
+### Required components 
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA DatePicker](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Opens the popover when the trigger is focused, selects the date when a date is focused, and navigates to the calendar pages when the navigational buttons are focused. |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Pressing Home:(Fn + Right Arrow Key) Or Control or Command + Home | Shifts the focus to the first calendar date. |
+| Pressing Home:(Fn + left Arrow Key) Or Control or Command + End | Shifts the focus to the last calendar date. |
+| Up and down Arrow keys | When segments are focused, it increments and decrements dates starting from the present day. |
+| Left and right arrows | Moves focus between segments. |
+| Page up | Changes the grid of dates to the previous month. |
+| Page down | Changes the grid of dates to the next month. |
+| Shift + page up | Changes the grid of dates to the same month in the previous year. |
+| Shift+ page down | Changes the grid of dates to the same month in the next year. |
+| Esc | Closes the overlay and shifts focus to the trigger. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+
+- The hidden input, DateField, and all three spin buttons have an **`aria-labelledby`** attribute pointing to the label ID, along with the **`aria-label`** attribute for an accessible name.
+- Each spin button has the **`aria-valuenow`** attribute that defines the current value and it is always used with its text alternative, **`aria-valuetext`**. 
+The spin buttons also have the **`aria-valuemin`** and **`aria-valuemax`** attributes to specify the minimum and maximum values allowed for a range widget.
+- The **`aria-selected`** attribute is added to the grid cell when a date is selected, and **`aria-disabled`** is set to “false” by default.

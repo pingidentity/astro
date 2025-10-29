@@ -1,0 +1,59 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import useDebounce from '../../hooks/useDebounce/useDebounce';
+
+<Meta title="Docs/Hooks/useDebounce" />
+
+# useDebounce
+
+A hook that provides a simple way to debounce updates to a variable.
+
+## Overview
+
+This hook can be used to debounce a value so it is only updated after a certain amount of time has passed. 
+This can be particularly useful for any action involving a network request after a user types, such as searching.
+
+## Usage
+
+To use this hook, import it from `@pingux/astro/lib/hooks`.
+
+`import { useDebounce } from "@pingux/astro/lib/hooks";`
+
+## API
+
+<br />
+
+### useDebounce([props]) => result
+
+<br />
+
+#### props
+
+Type: `Object` Default: `{}`
+
+* **value**
+
+  Type: `unknown`
+
+  The value to be updated after a period of time has passed.
+
+* **delay**
+
+  Type: `number`
+
+  The amount of time (in milliseconds) to debounce.
+
+#### result
+
+Type: `any`
+
+The updated value after `delay` milliseconds have passed with no additional updates.
+
+
+## Example
+
+`const [searchTerm, setSearchTerm] = useState(null);`
+
+`const debouncedSearchTerm = useDebounce({ searchTerm, value: 500 });`
+
+`debouncedSearchTerm` will only be updated after 500 milliseconds have passed since `searchTerm` was updated without
+an additional update.

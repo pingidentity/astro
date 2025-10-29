@@ -1,0 +1,83 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import useModalState, { DummyComponent } from '../../hooks/useModalState/useModalState';
+
+<Meta title="Docs/Hooks/useModalState" />
+
+# useModalState
+
+A hook that manages and supplies state intended for Astro-UI's `Modal` component.
+
+## Overview
+
+This hook utilizes React Stately's [useOverlayTriggerState](https://react-spectrum.adobe.com/react-stately/useOverlayTriggerState.html) hook to generate the necessary state management for
+a `Modal` component with minimal modifications.
+
+## Usage
+
+To use this hook, import it from `@pingux/astro/lib/hooks`.
+
+`import { useModalState } from "@pingux/astro/lib/hooks";`
+
+## API
+
+<br />
+
+### useModalState([props]) => result
+
+<br />
+
+#### props
+
+Type: `Object` Default: `{}`
+
+* **isDefaultOpen**
+
+  Type: `boolean`
+
+  Whether the modal is open by default (uncontrolled).
+
+* **isOpen**
+
+  Type: `boolean`
+
+  Whether the modal is currently open (controlled).
+
+* **onOpenChange**
+
+  Type: `Function`
+
+  Handler that is called when the open state changes. `(isOpen: boolean) => void`
+
+#### result
+
+Type: `Object`
+
+* **isOpen**
+
+  Type: `boolean`
+
+  Whether the modal is currently open.
+
+* **open**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to `true`.
+
+* **close**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to `false`.
+  
+* **toggle**
+
+  Type: `Function`
+
+  Sets the returned `isOpen` to the opposite of what it just was.
+
+
+## Example
+
+See the [entire Modal source code](./?path=/story/components-modal--default) for an example of how to implement this hook.
+To view a story's entire source code, enable 'Show-addons' in the Storybook ellipsis menu in the lefthand navigation, and click the Story tab.

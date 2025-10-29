@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/ArrayField/ArrayField" />
+
+# ArrayField
+
+The component displays array collections to provide useful functions and optimizations for arrays.
+
+ArrayField should:
+- Be used for dynamic-sized arrays/lists.
+- Be used with common array/list manipulations.
+- Be used to create an instance or collect information.
+
+### Required Components
+
+This component requires the appropriate field component ([TextField](./?path=/story/form-textfield--default) or [SelectField](./?path=/story/form-selectfield--default)) and the ArrayFieldDeleteButton. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | ---- |
+| Space or Enter | When focused, selects the item. |
+| Tab | Moves focus to the next focusable component and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The input uses the **`aria-invalid`** attribute to alert users that the values entered are not in the expected format.
+- The field and buttons use the **`aria-label`** attribute to provide accessible names.

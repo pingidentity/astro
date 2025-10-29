@@ -1,0 +1,47 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Components/Stepper/Stepper" />
+
+# Stepper
+
+The Stepper component acts as a wrapper for individual step components.
+It is used to display progress through a sequence of logical and numbered steps, usually within a configuration wizard.
+
+This component should be used:
+
+- To reveal or hide sections of content.
+- For progressive disclosure.
+
+It shouldn’t have more than 6 steps or be used as a replacement for a static label or text.
+
+### Required Components
+
+This component requires the Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html) and [Text](./?path=/docs/components-text--default) components.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Stepper](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys                                                 | Function                                                                              |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Tab                                                  | The field is focusable using the Tab key and follows the page tab sequence.           |
+| Arrow keys                                           | When this field is focused, the arrow keys can be used to navigate through the steps. |
+| Shift + Tab                                          | Moves focus to the previous focusable component.                                      |
+| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first step.                                                   |
+| End(Fn + Left Arrow Key) Or Control/Command + End    | Shifts the focus to the last step.                                                    |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+
+- The **`aria-orientation`** attribute indicates whether the orientation is horizontal, vertical, unknown, or ambiguous.
+- Each step uses the **`aria-selected`** attribute to indicate the selection status, and the **`aria-control`** attribute is supplied with the associated panel ID that displays the content.
+- Each step uses the **`aria-labelledby`** with the label ID to reference it.
+
+#### Usage
+
+- The stepper component is always center-aligned in its context, whether it's in a page, a panel, or a popup.

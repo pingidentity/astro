@@ -1,0 +1,126 @@
+{
+    "env": {
+        "browser": true,
+        "jest": true,
+        "jasmine": true
+    },
+    "parser": "@babel/eslint-parser",
+    "extends": ["airbnb", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
+    "rules": {
+        "@emotion/pkg-renaming": "error",
+        "arrow-body-style": 0,
+        "arrow-parens": ["error", "as-needed"],
+        "import/extensions": 0,
+        "import/no-extraneous-dependencies": ["error", {
+            "devDependencies": true
+        }],
+        "import/prefer-default-export": 0,
+        "jsx-a11y/label-has-for": 0,
+        "jsx-a11y/label-has-associated-control": [2, {
+            "labelAttributes": ["label"]
+        }],
+        "jsx-a11y/anchor-is-valid": [2,
+            {
+                "components": [] // Our Link component auto-switches to a button when necessary
+            }
+        ],
+        "no-underscore-dangle": 0,
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 0, "maxEOF": 0 }],
+        "prefer-destructuring": 0,
+        // See UIP-4486 for more info on why instanceOf is forbidden
+        "react/forbid-prop-types": ["error", { "forbid": ["any", "array", "object", "instanceOf"] }],
+        "react/jsx-filename-extension": 0,
+        "react/jsx-first-prop-new-line": ["error", "multiline"],
+        "react/prop-types": ["error", { "ignore": ["children", "className"]}],
+        "react/require-default-props": 0,
+        "react/no-multi-comp": 0,
+        "react/boolean-prop-naming": ["error", { "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+" }],
+        "function-paren-newline": 0,
+        "quote-props": 0,
+        "object-curly-newline": ["error", { "consistent": true }],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn", 
+        "react/jsx-props-no-spreading": 0,
+        "react/function-component-definition": 0,
+        "react/destructuring-assignment": 0, 
+        "no-restricted-exports": 0,
+        "react/no-unstable-nested-components": 0,
+        "import/no-cycle": 0,
+        "testing-library/prefer-presence-queries": 0,
+        "react/button-has-type": 1,
+        "react/no-unused-prop-types": 0,
+        "testing-library/no-node-access": 0,
+        "testing-library/no-unnecessary-act": 1,
+        "react/no-unknown-property": 0,
+        "no-promise-executor-return": 0,
+        "react/jsx-no-constructed-context-values": 1,
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".mdx", ".ts", ".tsx"]
+            }
+        }
+    },
+    "overrides": [
+        {
+            "files": [ "src/**/*.js", "src/**/*.jsx" ]
+        },
+        {
+            "files": ["src/**/*.stories.js", "src/**/*.story.js", "src/**/*.stories.jsx", "src/**/*.story.jsx"],
+            "rules": {
+                "react/prop-types": 0
+            }
+        },
+        {
+          "files": [ "src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts" ],
+          "parser": "@typescript-eslint/parser",
+           "parserOptions": {
+            "project": ["./tsconfig.json"],
+            "sourceType": "module"
+          },
+          "plugins": ["@typescript-eslint"],
+          "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+          "rules": {
+            "no-use-before-define": 0,
+            "@typescript-eslint/no-explicit-any": "error",
+            "@typescript-eslint/naming-convention": ["error",
+              {
+                "selector": "variable",
+                "types": ["boolean"],
+                "format": ["PascalCase", "camelCase"],
+                "prefix": ["is", "has", "should"]
+              }
+            ]
+          }
+        },
+          // override "simple-import-sort" config
+    {
+        "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+        "rules": {
+          "simple-import-sort/imports": [
+            "error",
+            {
+              "groups": [
+                // Packages `react` related packages come first.
+                ["^react", "^@?\\w"],
+                // Internal packages.
+                ["^(@|components)(/.*|$)"],
+                // Side effect imports.
+                ["^\\u0000"],
+                // Parent imports. Put `..` last.
+                ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                // Other relative imports. Put same-folder imports and `.` last.
+                ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+                // Style imports.
+                ["^.+\\.?(css)$"]
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "plugins": ["@emotion", "testing-library", "jest-dom", "react-hooks", "simple-import-sort"]
+}

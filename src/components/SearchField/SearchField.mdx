@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/SearchField/SearchField" />
+
+# SearchField
+
+The SearchField component renders a search field with associated controls, including visual elements and keyboard interaction handlers.
+It is built with [useSearchField](https://react-spectrum.adobe.com/react-aria/useSearchField.html) from React Aria and [useSearchFieldState](https://react-spectrum.adobe.com/react-stately/useSearchFieldState.html) from React Stately.
+
+This component should be:
+- Used for searching and filtering.
+- Limited to a single use per page.
+
+It shouldn’t:
+- Use important information as placeholders. Once the search term is entered, the placeholder is no longer visible.
+- Be used if all the information is easily accessible and within view.
+
+### Required components
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Enter or Space | Once the user starts typing, the previously hidden clear button can be focused and selected by pressing the Enter or Space key. |
+| Esc and Enter | The field can be cleared by pressing the Escape key and handles submit events on Enter. |

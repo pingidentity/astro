@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Calendar/Calendar" />
+
+# Calendar
+
+The calendar component displays months in a grid-like view and gives users the ability to quickly go through months and years to select a specific date.
+
+This component is built on [useCalendar](https://react-spectrum.adobe.com/react-aria/useCalendar.html#usecalendar-1), [useCalendarGrid](https://react-spectrum.adobe.com/react-aria/useCalendar.html#usecalendargrid), and 
+[useCalendarCell](https://react-spectrum.adobe.com/react-aria/useCalendar.html#usecalendarcell) from React Aria, and [useCalendarState](https://react-spectrum.adobe.com/react-stately/useCalendarState.html) from React Stately.
+
+### Required components 
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the date when a date is focused, and navigates to the calendar pages when the navigational buttons are focused. |
+| Tab | Components in the calendar are focusable and follow the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Pressing Home:(Fn + Right Arrow Key) Or Control or Command + Home | Shifts the focus to the first calendar date. |
+| Pressing End:(Fn + left Arrow Key) Or Control or Command + End | Shifts the focus to the last calendar date. |
+| Arrow key | Navigates up, down, right, and left across the calendar. |
+| Page up | Changes the grid of dates to the previous month. |
+| Page down | Changes the grid of dates to the next month. |
+| Shift + page up | Changes the grid of dates to the same month in the previous year. |
+| Shift+ page down | Changes the grid of dates to the same month in the next year. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute is used to provide an accessible name.
+- In each data cell, the **`aria-selected`** attribute is set to “true” when a date is selected, and **`aria-disabled`** is set to “false” by default.

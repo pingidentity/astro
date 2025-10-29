@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Menu/Menu" />
+
+# Menu
+
+The Menu component is intended to be used as a wrapper for MenuItems. It is based on the [useMenu](https://react-spectrum.adobe.com/react-aria/useMenu.html) 
+React Aria component, and is often used in a [PopoverMenu](./?path=/story/components-popovermenu--default).
+
+Menus should:
+- Only contain the most relevant categories for a quick scan.
+- Be used to view actions and not content.
+
+Menus shouldn’t:
+- Display more than 5 items to easily interpret the scope of actions.
+- Include ellipses (…) in menu item names. An ellipsis indicates that the user action prompt opens a new window.
+
+### Required Components
+
+This component requires the Item component, which is exported within Astro, but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Menu](https://www.w3.org/WAI/tutorials/menus/) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Key | Functions |
+| ---- | ---- |
+| Space or Enter | Selects the menu item. |
+| Tab | Focuses the menu item and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Home(Fn + Right Arrow Key) Or Control/Command + Home| Shifts the focus to the first row. |
+| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last visible row. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute is used to provide an accessible name.
+- Each menu option has the default **`aria-disabled`** value as “False.” 
+- The **`aria-orientation`** attribute indicates whether the menu is horizontally or vertically oriented, or undefined.

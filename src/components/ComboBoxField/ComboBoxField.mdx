@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/ComboBoxField/ComboBoxField" />
+
+# ComboBoxField
+
+The ComboBoxField combines the features of a textbox and a listbox. 
+This component provides a more compact way to present a list of choices, as the list is hidden until you click the drop-down arrow.
+A combo box also gives you the ability to enter a value that is not in the list.
+
+Use this component for large complex lists, ideally sorted. Do not use this component:
+- If the list will never have more than 6 items.
+- With small lists where one option is pre-selected by default. Use the [RadioGroupField](./?path=/docs/form-radiogroupfield--default) instead.
+
+This component uses [useComboBox](https://react-spectrum.adobe.com/react-aria/useComboBox.html) from React
+Aria and [useComboBoxState](https://react-spectrum.adobe.com/react-stately/useComboBoxState.html)
+from React Stately.
+
+### Required Components
+
+This component is built using [useOverLayTrigger](https://react-spectrum.adobe.com/react-aria/useOverlayTrigger.html), and requires the 
+react-aria [OverlayProvider](https://react-spectrum.adobe.com/react-aria/useOverlayTrigger.html#:~:text=contained%20in%20an-,OverlayProvider,-%2C%20which%20is%20used), 
+exported from Astro and Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA ComboBox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | ---- |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter | Selects the component when it is focused. |
+| Down arrow | Opens the popover if it isn’t already open.  |
+| Up and down arrows | Can be used to move through the selection in the popover. |
+| Typing in input field | Adds focus to it and opens the popover. |
+| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first item in the listbox. |
+| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last item in the listbox. |
+| Esc | Pressing the escape key closes the overlay and adds focus to the previously focused component. |
+
+#### Screen Readers
+This component uses the following attributes to assist screen readers:
+
+Input:
+- The input uses **`aria-expanded`** to indicate the expansion/collapse of the listbox. 
+- When expanded **`aria-controls`** is added to the input pointing to the ListBox.
+- The input has **`aria-labelledby`** supplied with label ID and **`aria-activedescendent`** identifies the currently focused option from the list. 
+- The label uses **`aria-hidden`** to hide its content from assistive technology.
+- The **`aria-autocomplete`** list model displays all the possible values in the pop-up list.
+- The Input has **`aria-invalid`** set to true when the entered value does not conform to the expected format.
+
+Button:
+- The trigger button uses **`aria-expanded`** to indicate the expansion/collapse of content.
+- The attribute **`aria-haspopup`** has “True” set as the value, which indicates that the type of popup content is a Listbox. 
+- The button and label ID are supplied to **`aria-labelledby`** to reference it.
+- When expanded **`aria-controls`** is added to the input pointing to the listbox.
+
+Option:
+- The ListBox has the label and its ID supplied to **`aria-labelledby`** and **`aria-label`** provides an accessible name to the component.
+- Each ListBox option has the default **`aria-disabled`** set as false and **`aria-selected`** to indicate the currently selected option.
+- The **`aria-posinset`** attribute defines an element's number or position in the current set of list items.
+- The **`aria-setsize`** attribute defines the number of items in the current set of list items.
