@@ -36,11 +36,17 @@ const rightOfData = {
   alignSelf: 'center',
 };
 
+const iconWrapper = {
+  width: '25px',
+  mx: 'md',
+};
+
 export default {
   container,
   controls,
   data,
   emptyData,
+  iconWrapper,
   rightOfData,
   wrapper,
 };

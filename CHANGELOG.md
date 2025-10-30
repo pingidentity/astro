@@ -3,6 +3,256 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.148.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.147.0...@pingux/astro@2.148.0) (2025-10-29)
+
+
+### Bug Fixes
+
+* [UIP-7839] popover fix ([4965d2a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4965d2af03aa6f18cf9f50c040c10a0cfd73cf64))
+* [UIP-7848] fix GridList types ([0d8b85b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0d8b85bedf502ef8ec202b4b3e5da4f49c2ae2c1))
+* [UIP-7899] fix Modal with PopoverMenu story ([f9c4611](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f9c46112138a9d8159cae845d421e4b3ef5d845c))
+
+
+### Features
+
+* [UIP-7815] Add modal convenience components fix scrolling ([a346602](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a346602e040b2da287a54e25f31cdfc37ae04633))
+* [UIP-7832] issue on Onyx Dark Onyx Theme in multivaluesfield component ([4d15254](https://gitlab.corp.pingidentity.com/ux/pingux/commit/4d15254b148f27479436bf597d046e85f9666292))
+
+
+
+
+
+# [2.147.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.146.0...@pingux/astro@2.147.0) (2025-10-24)
+
+
+### Bug Fixes
+
+* [UIP-7825] Add generic type for listViewItem ([dfe4fbc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dfe4fbc6d82684051f089abd5fc15b5aad5be9d9))
+* [UIP-7885] Mock Service Worker Error in Prod ([59c9192](https://gitlab.corp.pingidentity.com/ux/pingux/commit/59c91925c044594395a669b2101e0ae207b5cae8))
+
+
+
+
+
+# [2.146.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.145.0...@pingux/astro@2.146.0) (2025-10-21)
+
+
+### Bug Fixes
+
+* [UIP-7863] Fix SearchFieldProps for autocomplete mode ([0bccf8b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0bccf8bfe79cd629f7660654bc8faf7e60aae733))
+
+
+### Features
+
+* [UIP-7795] Astro Onyx Theme Avatar improvements ([b63af9c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b63af9c59a2dcf65e7088b417ecef2e8377ceaa9))
+
+
+
+
+
+# [2.145.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.144.1...@pingux/astro@2.145.0) (2025-10-16)
+
+
+### Bug Fixes
+
+* [UIP-7819] Remove default color from IconWrapper ([3a60669](https://gitlab.corp.pingidentity.com/ux/pingux/commit/3a6066976853713c6587b6e07aeb7a44717f9435))
+* [UIP-7834] Fix No Data Async Stories ([8e2ba06](https://gitlab.corp.pingidentity.com/ux/pingux/commit/8e2ba06039ef0a1943bf03b6bb28d818633fe0f0))
+
+
+### Features
+
+* [UIP-7870] SearchField popup closes on hover over items when used in Modal ([5ba1418](https://gitlab.corp.pingidentity.com/ux/pingux/commit/5ba1418b78103ac297d1e869901d12948b91d210))
+
+
+
+
+
+## [2.144.1](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.144.0...@pingux/astro@2.144.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* [UIP-7821] fix styling for Onyx OverlayPanel ([2123580](https://gitlab.corp.pingidentity.com/ux/pingux/commit/212358080f9aeb0153c4aa9eacd5d851af43a53e))
+* [UIP-7854] SelectField dropdown is not closing without selecting any value ([947f2bc](https://gitlab.corp.pingidentity.com/ux/pingux/commit/947f2bcaa0d5249d621c123fcdd1b8c36dec6774))
+
+
+
+
+
+# [2.144.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.143.0...@pingux/astro@2.144.0) (2025-10-09)
+
+
+### Bug Fixes
+
+* [UIP-7816] Codeview passing defaultvalue breaks component ([d4a8792](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d4a87927d987dbd9656ff6b49bf4b1c411228143))
+
+
+### Features
+
+* [UIP-7792] Eslint boolean prop naming ([66a7b20](https://gitlab.corp.pingidentity.com/ux/pingux/commit/66a7b20c12658e341c5655eb0bb66ac56efb659e))
+* [UIP-7813] DatePicker Add ability pass width prop ([a26b911](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a26b911722e5a3fbb40ba9f43741bda32e6640a1))
+
+
+
+
+
+# [2.143.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.142.0...@pingux/astro@2.143.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* [UIP-7818] Onyx theme Messages component move to Left ([910d555](https://gitlab.corp.pingidentity.com/ux/pingux/commit/910d555c083676d79074f42ee274c678a0ba7102))
+* [UIP-7840] Fix Onyx Dark Card Focus ([fe696c7](https://gitlab.corp.pingidentity.com/ux/pingux/commit/fe696c7624489ea8a3c18ce64ad883279b31cc2d))
+
+
+### Features
+
+* [UIP-7732] Onyx theme improvements ([f52fbf3](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f52fbf3404ef1fee3ea0d1561aa98770a4f3c629))
+* [UIP-7786] Tablebase improvements ([50b3512](https://gitlab.corp.pingidentity.com/ux/pingux/commit/50b351239be4cc16c18d50e9ffc21334a65f8b9d))
+* [UIP-7831] Searchfield overlay with options ([6343565](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6343565f385c74934fa3f4d9f3703680ce069e2c))
+
+
+
+
+
+# [2.142.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.141.0...@pingux/astro@2.142.0) (2025-09-25)
+
+
+### Bug Fixes
+
+* [UIP-7800] UI Changes ([f550a82](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f550a82d295502d9a9aa4acc57821ca6e3b65ec6))
+
+
+### Features
+
+* [UIP-7806] Messages transitioning from Astro to Onyx flickering ([7d9f840](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7d9f840a0d3ed227f3a025fc16a028a2b0c7a409))
+
+
+
+
+
+# [2.141.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.140.0...@pingux/astro@2.141.0) (2025-09-18)
+
+
+### Bug Fixes
+
+* [UIP-7692] DateRangeCalendar Safari loses track of the begin date when changing the months ([6ab7b7b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/6ab7b7bda8182c5dbd6fdf1a95c37c5cf413503e))
+
+
+### Features
+
+* [UIP-7737] UI Changes ([893de32](https://gitlab.corp.pingidentity.com/ux/pingux/commit/893de32377e669c28d2bd47c437fc072b73859e5))
+
+
+
+
+
+# [2.140.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.139.0...@pingux/astro@2.140.0) (2025-09-16)
+
+
+### Bug Fixes
+
+* [UIP-7771] Selectfield within modal is noninteractive ([08fd0f0](https://gitlab.corp.pingidentity.com/ux/pingux/commit/08fd0f0cb9ce15d6984c2cdc11c10b6060aa8ea0))
+
+
+### Features
+
+* [UIP-7780] Create reusable mock api for async stories ([2884fde](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2884fde7debbc229c3f1dca91709f3ec5aed7ec1))
+* [UIP-7782] Astro GridList props can be spread into GridListCell and GridListRow ([e8345ac](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e8345ac70f4026a360059fa7fe1d151f8ba9185b))
+* [UIP-7785] Add containerProps to DataTable wrapper and fix sort icon ([34a340c](https://gitlab.corp.pingidentity.com/ux/pingux/commit/34a340c2355ec48a4383a247b9baa32ea1dde82c))
+* [UIP-7788] Adding vertical orientation to tabs ([0ec68b5](https://gitlab.corp.pingidentity.com/ux/pingux/commit/0ec68b59c4b92bcf5cc8b994edbeb5cbc52d5546))
+* [UIP-7812] Add vertical orientation to Stepper ([ebe1056](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ebe1056925aa5c06e474af92af11f739ed067863))
+
+
+
+
+
+# [2.139.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.138.0...@pingux/astro@2.139.0) (2025-09-11)
+
+
+### Bug Fixes
+
+* [UIP-7767] Multivalues All Selected custom filter fix ([b6d1c8a](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b6d1c8abc3f240983862b262de479c4ca8e63f55))
+* [UIP-7809] fix modal spacing ([dbf0916](https://gitlab.corp.pingidentity.com/ux/pingux/commit/dbf09169e19490684c4816dada8d8f8b64c06544))
+
+
+### Features
+
+* [UIP-7570] Astro UI Issue with highlighted rows on DataTableRows ([bbb4908](https://gitlab.corp.pingidentity.com/ux/pingux/commit/bbb490890e3bbdb29a3cb8990f368c6f8e73ba48))
+* [UIP-7779] Create servererrorboundary component and documentation ([a72b06d](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a72b06d953b87a258ce67a4921ca97eb118014ca))
+
+
+
+
+
+# [2.138.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.137.0...@pingux/astro@2.138.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* [UIP-7658] Messages update to match specs ([08e40dd](https://gitlab.corp.pingidentity.com/ux/pingux/commit/08e40dd5f211e82224f123d701cb505b78c17f54))
+
+
+### Features
+
+* [UIP-7606] UI changes ([7863b03](https://gitlab.corp.pingidentity.com/ux/pingux/commit/7863b033b40e6d2e86a1d7625d6a39bc3cdfe71d))
+* [UIP-7787] Remove codesandbox playground from astro storybooks ([19b88fa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/19b88fa71d7a038fff21be4207a4a63640cba1fb))
+
+
+
+
+
+# [2.137.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.136.0...@pingux/astro@2.137.0) (2025-09-02)
+
+
+### Bug Fixes
+
+* [UIP-7772] add ButtonProps to Pagination ([f93efe4](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f93efe42aa495640dc3027b4602ecfba9d0a2106)), closes [#7772](https://gitlab.corp.pingidentity.com/ux/pingux/issues/7772)
+* Update showSelectionCheckboxes to hasSelectionCheckboxes ([f4bb3de](https://gitlab.corp.pingidentity.com/ux/pingux/commit/f4bb3ded41a7e3f98a3317950758cf3bae36c4ba))
+
+
+### Features
+
+* [UIP-7673] Add Badge component status variants to Onyx Dark theme with updated colors ([a2dfaaa](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a2dfaaa8cd2c01657af575a61d07299c19257715))
+
+
+
+
+
+# [2.136.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.135.0...@pingux/astro@2.136.0) (2025-08-26)
+
+
+### Bug Fixes
+
+* [UIP-7751] RadioGroupField applies focus classes on click ([d409c54](https://gitlab.corp.pingidentity.com/ux/pingux/commit/d409c54f038f7bca4b7ab367925d05ed1df37a31))
+
+
+### Features
+
+* [UIP-7713] UI changes ([2c4cb52](https://gitlab.corp.pingidentity.com/ux/pingux/commit/2c4cb5214ed1ccaadbb1b1a38f4d4dc87f89052d))
+
+
+
+
+
+# [2.135.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.134.0...@pingux/astro@2.135.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* [UIP-7714] Add label to components with accessibility warnings ([b23ad21](https://gitlab.corp.pingidentity.com/ux/pingux/commit/b23ad2147f4d181828c4bd1784544e368e0a3b04))
+* [UIP-7775] TimeField fix isInvalid prop ([a3dbaee](https://gitlab.corp.pingidentity.com/ux/pingux/commit/a3dbaeee87d7fd318fd26baec2ebba585f2aaa59))
+
+
+### Features
+
+* [UIP-7616] UI changes ([e1e1d25](https://gitlab.corp.pingidentity.com/ux/pingux/commit/e1e1d252c8e5283ece0d71e05a7931c4ddddec5d))
+* [UIP-7701] Expandable text component ([ed93b9b](https://gitlab.corp.pingidentity.com/ux/pingux/commit/ed93b9bcdc976f7fa15440a7d035d4096966d992))
+
+
+
+
+
 # [2.134.0](https://gitlab.corp.pingidentity.com/ux/pingux/compare/@pingux/astro@2.133.0...@pingux/astro@2.134.0) (2025-08-14)
 
 

@@ -27,7 +27,7 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
           margin: 0;
           background: white;
           min-height: 100%;
-          font-family: ${isEndUserTheme && 'pingito, '}"Helvetica Neue", Helvetica, sans-serif;
+          font-family: ${isEndUserTheme && 'pingito, '} ${isOnyx && 'Open Sans, '} "Helvetica Neue", Helvetica, sans-serif;
         }
         .is-disabled {
           opacity: ${isOnyx || isOnyxDark ? 0.65 : 0.5};

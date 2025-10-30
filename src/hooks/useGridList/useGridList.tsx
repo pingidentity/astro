@@ -9,15 +9,15 @@ import useReorderableCollection from '../useReorderableCollection';
 const useGridList = (props: UseGridListProps) => {
   const {
     acceptedDragTypes,
-    allowDuplicateSelectionEvents,
-    autoFocus,
+    shouldAllowDuplicateSelectionEvents,
+    hasAutoFocus,
     children,
     collection,
     defaultSelectedKeys,
     disabledBehavior,
     disabledKeys,
-    disallowEmptySelection,
-    disallowTypeAhead,
+    shouldDisallowEmptySelection,
+    shouldDisallowTypeAhead,
     escapeKeyBehavior,
     filter,
     getDropOperation,
@@ -91,13 +91,13 @@ const useGridList = (props: UseGridListProps) => {
   } as ListOptions<object>;
 
   const listStateOptions = {
-    allowDuplicateSelectionEvents,
+    shouldAllowDuplicateSelectionEvents,
     children,
     collection,
     defaultSelectedKeys,
     disabledBehavior,
     disabledKeys,
-    disallowEmptySelection,
+    disallowEmptySelection: shouldDisallowEmptySelection,
     filter,
     onSelectionChange,
     selectedKeys,
@@ -109,12 +109,12 @@ const useGridList = (props: UseGridListProps) => {
   const state = useListState({ ...listStateOptions, items: list.items }) as ListState<object>;
 
   const gridOptions = {
-    autoFocus,
+    autoFocus: hasAutoFocus,
     defaultSelectedKeys,
     disabledBehavior,
     disabledKeys,
-    disallowEmptySelection,
-    disallowTypeAhead,
+    disallowEmptySelection: shouldDisallowEmptySelection,
+    disallowTypeAhead: shouldDisallowTypeAhead,
     escapeKeyBehavior,
     items: list.items,
     keyboardDelegate,
@@ -132,7 +132,7 @@ const useGridList = (props: UseGridListProps) => {
     'aria-label': 'Reorderable list',
     disabledBehavior,
     shouldFocusWrap: true,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   }, state as any, ref);
 
   const dndOptions = {

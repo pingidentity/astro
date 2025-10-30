@@ -30,9 +30,6 @@ const defaultBadge = {
   backgroundColor: 'white !important',
   outline: '1px solid',
   outlineColor: 'neutral.80',
-  '& span': {
-    color: 'text.primary',
-  },
 };
 
 const multivaluesBadge = {
@@ -50,6 +47,7 @@ const multivaluesBadge = {
 
 const selectedItemBadge = {
   ...multivaluesBadge,
+  bg: '#4462ED !important',
   py: 3,
   pr: 0,
   my: 3,
@@ -66,11 +64,14 @@ const itemBadgeWithSlot = {
   ...readOnlyBadge,
   p: 3,
   my: 0,
-  backgroundColor: 'white',
+  bg: 'white !important',
   '& span': {
     color: 'text.primary',
     mr: '2px',
     lineHeight: '16px',
+  },
+  '& svg': {
+    fill: 'neutral.10',
   },
   maxHeight: '22px',
 };
@@ -116,7 +117,7 @@ export const badgeDeleteButton = {
     },
   },
   '&.is-pressed': {
-    'path': {
+    path: {
       fill: 'white',
     },
     bg: '#4462ED !important',
@@ -166,12 +167,12 @@ const convenienceDefault = {
   backgroundColor: '#4462ED !important',
   '& span': {
     fontWeight: 1,
+    color: 'white',
   },
 };
 
 const calloutBadge = {
   ...baseBadge,
-  height: '21px',
   backgroundColor: '#FFF !important',
   border: 'solid 1px',
   '& span': {
@@ -202,7 +203,6 @@ const infoCalloutBadge = {
 const statusBadge = {
   ...baseBadge,
   border: 'solid 1px',
-  height: '21px',
   '& span': {
     color: 'text.primary',
   },
@@ -240,7 +240,6 @@ const secondaryStatusBadge = {
 
 const invertedRemovableBadge = {
   ...baseBadge,
-  height: '21px',
   '& span': {
     color: 'white',
   },

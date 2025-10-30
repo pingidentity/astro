@@ -2,24 +2,29 @@ import React, { forwardRef } from 'react';
 import { Avatar as ThemeUIAvatar, Box } from 'theme-ui';
 
 import { useStatusClasses } from '../../hooks';
+import sizes from '../../styles/themes/next-gen/sizes';
 import { AvatarProps } from '../../types/avatar';
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
   const {
     alt = 'Avatar',
-    defaultText,
+    defaultText = 'AA',
     color,
     className,
-    size,
+    size = 'sm',
     src,
     sx,
+    children,
+    isSquare,
     ...others
   } = props;
 
   const { classNames } = useStatusClasses(className, {
-    [`is-${color}`]: true,
+    [`is-${color}`]: color,
+    [`size-${size}`]: size,
+    [`font-size-${size}`]: size,
+    'is-square': isSquare,
   });
-
 
   if (src) {
     return (
@@ -29,6 +34,8 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
         src={src}
         sx={{
           size,
+          width: sizes.avatar[size],
+          height: sizes.avatar[size],
           ...sx,
         }}
         {...others}
@@ -47,7 +54,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
       }}
       {...others}
     >
-      {defaultText}
+      {children || defaultText}
     </Box>
   );
 });

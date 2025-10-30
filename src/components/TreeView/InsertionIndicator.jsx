@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import {
   Box,
 } from '../..';
-// test
 
 const InsertionIndicator = props => {
   const insertRef = React.useRef(null);

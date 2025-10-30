@@ -39,6 +39,16 @@ const tabLabel = {
   },
 };
 
+const stepperLabel = {
+  ...base,
+  fontSize: '14px',
+  fontWeight: '500',
+  display: 'flex',
+  ml: '14px',
+  color: 'neutral.30',
+  cursor: 'pointer',
+};
+
 const environmentBreadcrumb = {
   ...base,
   fontSize: 'sm',
@@ -161,6 +171,7 @@ export const text = {
   listViewItemText: { ...listViewItemText, ...textEllipsis },
   modalTitle: { ...wordWrap, fontSize: '20px', fontWeight: 2, color: 'text.primary', fontFamily: 'standard', width: 'calc(100% - 22px)' },
   placeholder: { fontWeight: -1, color: 'text.secondary', fontFamily: 'standard' },
+  pageHeaderBody: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   panelHeaderSubtext: { ...listViewItemSubtext, ...textEllipsis },
   panelHeaderText: { ...listViewItemText, ...textEllipsis },
   sectionTitle,
@@ -172,4 +183,8 @@ export const text = {
   title,
   copyRightText,
   attachmentTitle,
+  messagesText: {
+    ...base,
+  },
+  stepperLabel,
 };

@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
 import PropTypes from 'prop-types';
 
+import { useGetTheme } from '../../hooks';
 import { Box, Icon, IconButton, Text } from '../../index';
 
 const PageHeader = forwardRef(({
@@ -13,6 +14,8 @@ const PageHeader = forwardRef(({
   const linkStyles = {
     ' > a': { fontSize: 'sm' },
   };
+
+  const { pageHeaderTitleMargin } = useGetTheme();
 
   const renderButton = buttonProps && (
     <IconButton
@@ -27,13 +30,13 @@ const PageHeader = forwardRef(({
 
   return (
     <Box ref={ref} {...other}>
-      <Box isRow mb="xs">
+      <Box isRow mb={pageHeaderTitleMargin}>
         <Text as="h1" variant="H1">
           {title}
         </Text>
         {renderButton}
       </Box>
-      <Text variant="bodyWeak" sx={linkStyles}>{children}</Text>
+      <Text variant="pageHeaderBody" sx={linkStyles}>{children}</Text>
     </Box>
   );
 });

@@ -22,11 +22,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Loader'],
-      },
-    },
   },
   argTypes: {
     color: {
@@ -62,4 +57,12 @@ export const CustomColor = args => (
 
 export const CustomSize = args => (
   <Loader {...args} size={32} />
+);
+
+export const Circular = args => (
+  <Loader {...args} size={120} isCircle />
+);
+
+export const CustomCircular = args => (
+  <Loader {...args} size="lg" isCircle strokeColor="magenta" />
 );

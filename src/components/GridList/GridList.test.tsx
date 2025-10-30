@@ -37,7 +37,7 @@ describe('GridList Component', () => {
   });
 
   test('renders GridListRow for each item', () => {
-    getDefaultComponent();
+    getDefaultComponent({});
     const rows = screen.getAllByRole('row');
     expect(rows).toHaveLength(items.length);
   });
@@ -93,5 +93,29 @@ describe('GridList Component', () => {
     await userEvent.type(list, '{arrowdown}');
     await userEvent.type(insertionIndicator, '{enter}');
     expect(onReorder).toHaveBeenCalled();
+  });
+
+  test('renders GridList with containerProps', () => {
+    getDefaultComponent({
+      containerProps: { sx: { background: 'red' } },
+    });
+    const list = screen.getByRole('grid');
+    expect(list).toHaveStyle('background: red');
+  });
+
+  test('renders GridList with rowProps', () => {
+    getDefaultComponent({
+      rowProps: { sx: { background: 'red' } },
+    });
+    const rows = screen.getAllByRole('row');
+    expect(rows[0]).toHaveStyle('background: red');
+  });
+
+  test('renders GridList with cellProps', () => {
+    getDefaultComponent({
+      cellProps: { sx: { background: 'red' } },
+    });
+    const gridCells = screen.getAllByRole('gridcell');
+    expect(gridCells[0]).toHaveStyle('background: red');
   });
 });

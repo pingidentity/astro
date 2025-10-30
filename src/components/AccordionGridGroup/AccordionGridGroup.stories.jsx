@@ -4,6 +4,7 @@ import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { useGetTheme } from '../../hooks';
 import {
   AccordionGridGroup,
   Badge,
@@ -97,7 +98,6 @@ export default {
       { label: 'Design', mdx: AccordionGridReadme },
       { label: 'Implementation' },
     ],
-    codesandbox: false,
   },
   argTypes: {
     id: {
@@ -172,6 +172,45 @@ const Header = props => {
   );
 };
 
+const HeaderOnyx = props => {
+  const { item } = props;
+
+  return (
+    <Box isRow sx={{ flexGrow: 1 }}>
+      <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
+        <Text as="h5" variant="h5" alignSelf="center">{item.name}</Text>
+      </Box>
+      <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
+        <Box isRow alignSelf="center" gap="sm">
+          <Badge
+            label={`${item.organizations.length} Organizations`}
+            bg="twoTone.bg.green"
+            textColor="twoTone.text.green"
+          />
+          <Badge
+            label="2 Environment"
+            bg="twoTone.bg.indigo"
+            textColor="twoTone.text.indigo"
+          />
+          <Badge
+            label="2 Population"
+            bg="twoTone.bg.yellow"
+            textColor="twoTone.text.yellow"
+          />
+        </Box>
+        <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
+          <IconButton aria-label="create-icon" sx={{ mr: '4px' }}>
+            <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
+          </IconButton>
+          <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }}>
+            <Icon icon={MoreVertIcon} size="sm" title={{ name: 'Vertical Lines Icon' }} />
+          </IconButton>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
 const Body = props => {
   const { item } = props;
   return (
@@ -179,7 +218,6 @@ const Body = props => {
       <Box sx={{ flexGrow: 1, width: 'calc(50% - 20px)' }}>
         <Link
           aria-label="permissions"
-          variant="link"
           sx={{ marginTop: '15px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textDecoration: 'none' }}
           href="https://www.pingidentity.com"
           target="_blank"
@@ -204,44 +242,51 @@ const Body = props => {
   );
 };
 
-export const Default = () => (
+export const Default = () => {
+  const { themeState } = useGetTheme();
+  const { isOnyx } = themeState;
+  return (
   // See story source for info about the data used
-  <>
-    <Text sx={{ fontWeight: 3, fontSize: '13px' }}>
-      Role
-    </Text>
-    <Separator sx={{ mb: 0 }} />
-    <AccordionGridGroup
-      items={data}
-      defaultSelectedKeys={['Environment']}
-    >
-      {item => (
-        <Item
-          key={item.key}
-          textValue={item.name}
-        >
-          <Header item={item} />
-          <Body item={item} />
-          {/* Code that removes the seperator
+    <>
+      <Text sx={{ fontWeight: 3, fontSize: 'sm' }}>
+        Role
+      </Text>
+      <Separator sx={{ mb: 0 }} />
+      <AccordionGridGroup
+        items={data}
+        defaultSelectedKeys={['Environment']}
+      >
+        {item => (
+          <Item
+            key={item.key}
+            textValue={item.name}
+          >
+            {isOnyx ? <HeaderOnyx item={item} /> : <Header item={item} />}
+            <Body item={item} />
+            {/* Code that removes the seperator
             from the last item */}
-          {
+            {
             item.key !== 'Organization'
               ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
               : null
           }
-        </Item>
-      )}
-    </AccordionGridGroup>
-  </>
-);
+          </Item>
+        )}
+      </AccordionGridGroup>
+    </>
+  );
+};
 
 export const Controlled = () => {
   const [selectedKeys, setSelectedKeys] = useState(['Client']);
 
+  const { themeState } = useGetTheme();
+  const { isOnyx } = themeState;
+
   return (
     // See story source for info about the data used
     <>
-      <Text sx={{ fontWeight: 3, fontSize: '13px' }}>
+      <Text sx={{ fontWeight: 3, fontSize: 'sm' }}>
         Role
       </Text>
       <Separator sx={{ mb: 0 }} />
@@ -255,7 +300,7 @@ export const Controlled = () => {
             key={item.key}
             textValue={item.name}
           >
-            <Header item={item} />
+            {isOnyx ? <HeaderOnyx item={item} /> : <Header item={item} />}
             <Body item={item} />
             {/* Code that removes the seperator
             from the last item */}

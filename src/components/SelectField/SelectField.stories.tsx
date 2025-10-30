@@ -1,16 +1,18 @@
-import React, { Key, useState } from 'react';
+import React, { Key, useCallback, useEffect, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
-import { useAsyncList } from 'react-stately';
 import CalendarRangeIcon from '@pingux/mdi-react/CalendarRangeIcon';
 import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { getAllUsers } from '../../api/users';
 import {
   Icon,
   Item,
   Section,
   SelectField,
 } from '../../index';
+import { LIMIT } from '../../mocks/constants';
+import { UserType } from '../../mocks/types/users';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
@@ -89,17 +91,6 @@ export default {
           <DocsLayout />
         </>
       ),
-    },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'OverlayProvider',
-          'Icon',
-          'Item',
-          'Section',
-          'SelectField',
-        ],
-      },
     },
   },
   argTypes: {
@@ -312,29 +303,49 @@ DynamicItems.parameters = {
 };
 
 export const AsyncLoading = () => {
-  // This example uses `useAsyncList` from "@react-stately/data"
-  const list = useAsyncList({
-    async load({ signal, cursor }) {
-      const res = await fetch(cursor || 'https://pokeapi.co/api/v2/pokemon', { signal });
-      const json = await res.json();
-      // The API is too fast sometimes, so make it take longer so we can see the spinner
-      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
-      return {
-        items: json.results,
-        cursor: json.next,
-      };
-    },
-  });
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(LIMIT);
+  const [dataSize, setDataSize] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchData = useCallback(async currentLimit => {
+    try {
+      const response = await getAllUsers(currentLimit);
+      const json = await response.json();
+
+      if (response.ok) {
+        setData(json.body._embedded.users || []);
+        setDataSize(json.body.count);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handleLoadMore = () => {
+    if (limit >= dataSize) return;
+    setIsLoading(true);
+    setLimit(prevLimit => prevLimit + LIMIT);
+  };
+
+  useEffect(() => {
+    fetchData(limit);
+  }, [fetchData, limit]);
 
   return (
     <OverlayProvider>
       <SelectField
-        label="Pick a Pokemon"
-        items={list.items as Iterable<SelectItemProps>}
-        isLoading={list.isLoading}
-        onLoadMore={list.loadMore}
+        label="Pick a User"
+        items={data as Iterable<UserType>}
+        isLoading={isLoading}
+        onLoadMore={handleLoadMore}
       >
-        {(item: SelectItemProps) => <Item key={item.name}>{item.name}</Item>}
+        {(item => {
+          const user = item as UserType;
+          return <Item key={user.id}>{user.name.given}</Item>;
+        })}
       </SelectField>
     </OverlayProvider>
   );

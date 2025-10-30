@@ -38,7 +38,6 @@ export default {
         type: 'code',
       },
     },
-    codesandbox: false,
   },
   argTypes: listViewItemArgTypes,
 };

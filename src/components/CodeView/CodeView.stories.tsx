@@ -106,11 +106,6 @@ export default {
         ],
       },
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['CodeView'],
-      },
-    },
   },
 } as Meta;
 
@@ -224,7 +219,6 @@ WithAdditionalLanguage.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const WithChangedCopiedValue: StoryFn<CodeViewProps> = (args: CodeViewProps) => (
@@ -283,5 +277,4 @@ WithCustomLanguage.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };

@@ -1,12 +1,24 @@
 import React, { ChangeEvent, Key, useEffect, useState } from 'react';
 import { mergeProps, useFocusRing, useLabel } from 'react-aria';
 import { useFocusWithin } from '@react-aria/interactions';
-import type { AriaLabelingProps, CollectionChildren, DOMProps } from '@react-types/shared';
+import type {
+  AriaLabelingProps,
+  CollectionChildren,
+  DOMProps,
+} from '@react-types/shared';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import { ThemeUICSSObject } from 'theme-ui';
 
-import { AriaRole, BoxProps, HelpHintProps, LabelModeProps, LabelProps, Status, ValidPositiveInteger } from '../../types';
+import {
+  AriaRole,
+  BoxProps,
+  HelpHintProps,
+  LabelModeProps,
+  LabelProps,
+  Status,
+  ValidPositiveInteger,
+} from '../../types';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -31,7 +43,7 @@ export interface ContainerProps extends WrapperProps {
 export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
   autoComplete?: string;
   autoCorrect?: string;
-  autoFocus?: boolean;
+  hasAutoFocus?: boolean;
   className?: string;
   defaultSelected?: boolean;
   defaultValue?: string | number;
@@ -41,7 +53,9 @@ export interface FieldControlInputProps extends AriaLabelingProps, DOMProps {
   isIndeterminate?: boolean;
   maxLength?: ValidPositiveInteger;
   name?: string;
-  onChange: (event: CustomChangeEventType | React.FormEvent<Element>) => void | undefined;
+  onChange: (
+    event: CustomChangeEventType | React.FormEvent<Element>
+  ) => void | undefined;
   placeholder?: string;
   readOnly?: boolean;
   required?: boolean;
@@ -90,7 +104,7 @@ export interface UseFieldProps<T> {
   /**
    * Indeterminism is presentational only. The indeterminate visual representation remains until
    * this prop is set to false regardless of user interaction.
-  */
+   */
   isIndeterminate?: boolean;
   /** Whether the input can be selected, but not changed by the user. */
   isReadOnly?: boolean;
@@ -138,25 +152,17 @@ export interface UseFieldProps<T> {
   wrapperProps?: WrapperProps;
 }
 
-
 export type CustomChangeEventType = {
   currentTarget?: {
-    value?: string | number
-  },
+    value?: string | number;
+  };
   target?: {
-    value?: string | number
-  },
+    value?: string | number;
+  };
   persist?(): void;
-}
-
-type UseFieldReturn<T> = {
-  fieldContainerProps: ContainerProps;
-  fieldControlInputProps: FieldControlInputProps;
-  fieldControlWrapperProps: WrapperProps;
-  fieldLabelProps: LabelProps;
 };
 
-const useField = <T>(props: UseFieldProps<T>): UseFieldReturn<T> => {
+const useField = <T>(props: UseFieldProps<T>) => {
   const {
     autocomplete,
     autoComplete,
@@ -215,10 +221,18 @@ const useField = <T>(props: UseFieldProps<T>): UseFieldReturn<T> => {
   }, [defaultValue, value, placeholder]);
 
   // Capture value changes so we can apply the has-value class to the container
-  const fieldOnChange = (e: (CustomChangeEventType | React.ChangeEvent<Element>)) => {
+  const fieldOnChange = (
+    e: CustomChangeEventType | React.ChangeEvent<Element>,
+  ) => {
     const eventValue = (e.currentTarget as HTMLInputElement).value;
     const isZero = !Number.isNaN(Number(eventValue)) && Number(eventValue) === 0;
-    if (!!eventValue || !!placeholder || isZero || !!placeholder || placeholder === 0) {
+    if (
+      !!eventValue
+      || !!placeholder
+      || isZero
+      || !!placeholder
+      || placeholder === 0
+    ) {
       setHasValue(true);
     } else {
       setHasValue(false);
@@ -289,31 +303,33 @@ const useField = <T>(props: UseFieldProps<T>): UseFieldReturn<T> => {
   );
 
   // Handle focus within and value state for the container. These are needed for float labels.
-  const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
-  const isFloatLabel = labelMode === labelModes.FLOAT || labelProps?.labelMode === labelModes.FLOAT;
+  const { focusWithinProps } = useFocusWithin({
+    onFocusWithinChange: setFocusWithin,
+  });
+  const isFloatLabel = labelMode === labelModes.FLOAT
+    || labelProps?.labelMode === labelModes.FLOAT;
   const isLeftLabel = labelMode === labelModes.LEFT || labelProps?.labelMode === labelModes.LEFT;
   const isFloatLabelActive = isFloatLabel && (hasValue || containerProps?.isFloatLabelActive);
-  const { classNames: containerClasses } = useStatusClasses(containerProps?.className, {
-    'field-container': true, // generates 'field-container' class
-    hasValue,
-    hasFocusWithin,
-    isLeftLabel,
-    isFloatLabel,
-    isFloatLabelActive,
-    ...statusClasses,
-    ...containerProps?.statusClasses,
-  });
-
-  const baseSx: ThemeUICSSObject = {
-    position: 'relative',
-  };
+  const { classNames: containerClasses } = useStatusClasses(
+    containerProps?.className,
+    {
+      'field-container': true, // generates 'field-container' class
+      hasValue,
+      hasFocusWithin,
+      isLeftLabel,
+      isFloatLabel,
+      isFloatLabelActive,
+      ...statusClasses,
+      ...containerProps?.statusClasses,
+    },
+  );
 
   const fieldContainerProps = {
     ...nonAriaProps,
     ...mergeProps(containerProps, focusWithinProps),
     className: containerClasses,
     sx: {
-      ...baseSx,
+      position: 'relative',
       ...containerProps?.sx,
     },
   };
@@ -341,7 +357,11 @@ const useField = <T>(props: UseFieldProps<T>): UseFieldReturn<T> => {
     value,
     ...ariaProps,
     ...raFieldProps,
-    ...mergeProps({ onBlur, onFocus }, omit(controlProps, 'data-testid'), focusProps) as object,
+    ...(mergeProps(
+      { onBlur, onFocus },
+      omit(controlProps, 'data-testid'),
+      focusProps,
+    ) as object),
   } as FieldControlInputProps;
 
   const fieldLabelProps = {

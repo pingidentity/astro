@@ -31,17 +31,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Box',
-          'Button',
-          'Card',
-          'Text',
-          'TextField',
-        ],
-      },
-    },
   },
   argTypes: {
     ...cardArgTypes,
@@ -66,7 +55,6 @@ export const HeaderAndFooter = args => {
   const textStyling = {
     fontSize: 'md',
     fontWeight: 600,
-    color: 'text.secondary',
   };
 
   return (
@@ -161,6 +149,7 @@ export const InteractiveCard = args => {
       tabIndex="0"
       variant="cards.interactive"
       sx={sx}
+      isInteractiveWithin={false}
     >
       Interactive Card
     </Card>
@@ -189,7 +178,7 @@ export const WithInteractiveContent = args => (
   </Card>
 );
 
-export const ActiveCard = args => {
+export const RadioGroupCard = args => {
   const sx: ThemeUICSSObject = {
     alignContent: 'center',
     height: '221px',
@@ -208,6 +197,7 @@ export const ActiveCard = args => {
       sx={sx}
       isSelected={isSelected}
       onPress={() => setIsSelected(!isSelected)}
+      isInteractiveWithin={false}
     >
       Active Card
     </Card>

@@ -46,6 +46,20 @@ const defaultProps = {
   },
 };
 
+const nextButtonFunction = jest.fn();
+const prevButtonFunction = jest.fn();
+
+const buttonProps = {
+  nextButtonProps: {
+    'data-testid': nextButtonId,
+    onPress: nextButtonFunction,
+  },
+  previousButtonProps: {
+    'data-testid': prevButtonId,
+    onPress: prevButtonFunction,
+  },
+};
+
 universalComponentTests({ renderComponent: props => <Pagination {...props} {...defaultProps} /> });
 
 const ExampleComponent = () => {
@@ -223,6 +237,20 @@ describe('Pagination Component', () => {
 
     await userEvent.click(nextButton);
     expect(screen.getByText('Current Page Index: 1')).toBeInTheDocument();
+  });
+
+  it('clicking the next, and prev button uses the next or prev button callbacks', async () => {
+    getComponent({ ...buttonProps, currentPageIndex: 2 });
+
+    const nextButton = screen.getByTestId(nextButtonId);
+
+    await userEvent.click(nextButton);
+    expect(nextButtonFunction).toHaveBeenCalled();
+
+    const prevButton = screen.getByTestId(prevButtonId);
+
+    await userEvent.click(prevButton);
+    expect(prevButtonFunction).toHaveBeenCalled();
   });
 
 

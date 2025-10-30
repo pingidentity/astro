@@ -16,17 +16,15 @@ export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<Ba
   'aria-label'?: string;
   selectionMode?: 'none' | 'single' | 'multiple',
   selectionBehavior?: 'replace' | 'toggle',
-  showSelectionCheckboxes?: boolean;
+  hasSelectionCheckboxes?: boolean;
   'data-testid'?: string;
   caption?: ReactNode | string;
-  tableBodyProps?: Record<string, unknown>;
   isStickyHeader?: boolean;
 }
 
 export interface TableRowGroupProps extends BaseProp{
-  type: 'thead' | 'tbody' | 'tfoot';
+  type: 'thead' | 'tbody';
   children: ReactNode;
-  hasCaption?: boolean;
   isSticky?: boolean;
 }
 
@@ -68,4 +66,8 @@ export interface TableSelectAllCellProps<T> extends BaseProp{
   column: GridNode<T>;
   state: TableState<T>;
   layoutState: TableColumnResizeState<T>;
+}
+
+export interface TableCaptionProps {
+  caption: string | React.ReactNode;
 }

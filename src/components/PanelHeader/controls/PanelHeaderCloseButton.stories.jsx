@@ -15,7 +15,6 @@ export default {
         type: 'code',
       },
     },
-    codesandbox: false,
   },
   argTypes: iconButtonArgTypes,
 };

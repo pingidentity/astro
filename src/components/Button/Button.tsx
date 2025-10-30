@@ -89,25 +89,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         aria-label={ariaLabel}
         className={classNames}
         role="button"
-        sx={
-          isLoading
-            ? {
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }
-            : {}
-        }
+        sx={isLoading ? { display: 'flex', justifyContent: 'center', alignItems: 'center' } : {}}
         variant={variant}
         {...getPendoID(displayName)}
         {...others}
         {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
       >
-        {isLoading ? (
-          <span style={{ visibility: 'hidden' }}>{children}</span>
-        ) : (
-          children
-        )}
+        {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
         {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
       </ThemeUIButton>
     </Pressable>

@@ -22,11 +22,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'HelpHint', 'Link', 'Text'],
-      },
-    },
   },
   argTypes: {
     children: {

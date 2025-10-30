@@ -53,25 +53,23 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Badge',
-          'Box',
-          'Icon',
-          'Tab',
-          'Tabs',
-          'Text',
-        ],
-      },
-    },
   },
 } as Meta;
 
 const tabs: TabListItemProps[] = [
-  { name: 'Tab 1', children: <Text>Tab 1 body</Text> },
-  { name: 'Tab 2', children: <Text>Tab 2 body</Text> },
-  { name: 'Tab 3', children: <Text>Tab 3 body</Text> },
+  { name: 'Overview', children: <Text>Tab 3 body</Text> },
+  { name: 'Configuration', children: <Text>Tab 3 body</Text> },
+  { name: 'Resources', children: <Text>Tab 3 body</Text> },
+  { name: 'Policies', children: <Text>Tab 3 body</Text> },
+  { name: 'Attribute Mappings', children: <Text>Tab 3 body</Text> },
+  { name: 'Access', children: <Text>Tab 3 body</Text> },
+  { name: 'Integration', children: <Text>Tab 3 body</Text> },
+];
+
+const customTabs = [
+  { name: 'Details', children: <Text>Tab 1 body</Text>, isRequired: true },
+  { name: 'First Factor', children: <Text>Tab 2 body</Text> },
+  { name: 'MFA & Risk', children: <Text>Tab 3 body</Text> },
 ];
 
 export const Default: StoryFn<TabsProps> = args => (
@@ -88,22 +86,20 @@ export const Default: StoryFn<TabsProps> = args => (
 export const Controlled: StoryFn = () => {
   const [currentTab, setCurrentTab] = useState(tabs[0].name);
   return (
-    <Tabs
-      selectedKey={currentTab}
-      onSelectionChange={setCurrentTab}
-      items={tabs}
-    >
-      {(item: TabListItemProps) => (
-        <Tab key={item.name} title={item.name} textValue={item.name}>
-          {item.children}
-        </Tab>
-      )}
-    </Tabs>
+    <Box sx={{ maxWidth: '500px' }}>
+      <Tabs
+        selectedKey={currentTab}
+        onSelectionChange={setCurrentTab}
+        items={tabs}
+      >
+        {(item: TabListItemProps) => (
+          <Tab key={item.name} title={item.name} textValue={item.name}>
+            {item.children}
+          </Tab>
+        )}
+      </Tabs>
+    </Box>
   );
-};
-
-Controlled.parameters = {
-  codesandbox: false,
 };
 
 export const Centered: StoryFn = () => (
@@ -116,8 +112,6 @@ export const Centered: StoryFn = () => (
   </Tabs>
 );
 
-Centered.parameters = { codesandbox: false };
-
 export const DisabledSingleTab: StoryFn = () => (
   <Tabs items={tabs} disabledKeys={['Tab 2']}>
     {(item: TabListItemProps) => (
@@ -128,8 +122,6 @@ export const DisabledSingleTab: StoryFn = () => (
   </Tabs>
 );
 
-DisabledSingleTab.parameters = { codesandbox: false };
-
 export const DisabledAllTabs: StoryFn = () => (
   <Tabs isDisabled items={tabs}>
     {(item: TabListItemProps) => (
@@ -139,8 +131,6 @@ export const DisabledAllTabs: StoryFn = () => (
     )}
   </Tabs>
 );
-
-DisabledAllTabs.parameters = { codesandbox: false };
 
 export const ContentSlots: StoryFn = () => {
   const beforeTabNode = (
@@ -183,8 +173,6 @@ export const ContentSlots: StoryFn = () => {
   );
 };
 
-ContentSlots.parameters = { codesandbox: false };
-
 export const WithList: StoryFn = () => {
   const allTabs = [
     ...tabs,
@@ -208,8 +196,6 @@ export const WithList: StoryFn = () => {
   );
 };
 
-WithList.parameters = { codesandbox: false };
-
 export const CustomTabLine: StoryFn = () => (
   <Tabs items={tabs}>
     {(item: TabListItemProps) => (
@@ -219,8 +205,6 @@ export const CustomTabLine: StoryFn = () => (
     )}
   </Tabs>
 );
-
-CustomTabLine.parameters = { codesandbox: false };
 
 export const CustomPanelProps: StoryFn = () => (
   <Tabs tabPanelProps={{ color: 'green', fontWeight: 500 }} items={tabs}>
@@ -233,3 +217,24 @@ export const CustomPanelProps: StoryFn = () => (
 );
 
 CustomPanelProps.parameters = { codesandbox: false };
+
+export const VerticalOrientation: StoryFn<TabsProps> = args => (
+  <Tabs
+    items={customTabs}
+    {...args}
+    orientation="vertical"
+    tabPanelProps={{ sx: { m: '24px' } }}
+    tabListProps={{ sx: { width: '209px' } }}
+  >
+    {(item: TabListItemProps) => (
+      <Tab
+        key={item.name}
+        title={item.name}
+        data-testid={`testing-${item.name}`}
+        isRequired={item?.isRequired}
+      >
+        {item.children}
+      </Tab>
+    )}
+  </Tabs>
+);

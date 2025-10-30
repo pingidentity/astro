@@ -252,7 +252,7 @@ test('should show the menu if label clicked when preview image exists', async ()
   // Click on the image preview button
   const imageUploadLabel = screen.getByText(testLabel);
   fireEvent.click(imageUploadLabel);
-  expect((screen.getAllByRole('button'))[0]).toHaveAttribute('aria-expanded', 'true');
+  expect((screen.getAllByRole('button', { hidden: true }))[0]).toHaveAttribute('aria-expanded', 'true');
   expect(screen.getByRole('menu')).toBeInTheDocument();
   expect(screen.getByText('Upload New Image')).toBeInTheDocument();
   expect(screen.getByText('Remove Image')).toBeInTheDocument();

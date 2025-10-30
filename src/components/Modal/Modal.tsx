@@ -16,6 +16,8 @@ import Icon from '../Icon';
 import IconButton from '../IconButton';
 import Text from '../Text';
 
+import ModalHeader from './ModalHeader';
+
 const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
   const {
     className,
@@ -88,7 +90,11 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     isOpenNoTransition,
   });
 
-  const titleContent = title && (
+  const [header, ...siblings] = React.Children.toArray(children);
+
+  const hasHeaderContent = React.isValidElement(header) && header.type === ModalHeader;
+
+  const titleContent = !hasHeaderContent && title && (
     isOnyx ? (
       <Box variant="modal.header">
         <Text {...titleProps} variant="modalTitle" role="heading">{title}</Text>
@@ -121,31 +127,29 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
             ref={modalRef}
             aria-modal
           >
-            <Box
-              variant="modal.headingContainer"
-              {...headerContainerProps}
-            >
-              {
-                hasCloseButton
-                && (
-                  closeButton
-                  ?? (
-                    <IconButton
-                      aria-label="Close modal window"
-                      data-id="icon-button__close-modal-window"
-                      variant="modalCloseButton"
-                      onPress={onClose}
-                    >
-                      <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
-                    </IconButton>
-                  )
-                )
-              }
-              {titleContent}
-            </Box>
-            <Box pt="lg">
-              {children}
-            </Box>
+            {titleContent && (
+              <Box
+                variant="modal.headingContainer"
+                {...headerContainerProps}
+              >
+                {hasCloseButton
+                  && (
+                    closeButton
+                    ?? (
+                      <IconButton
+                        aria-label="Close modal window"
+                        data-id="icon-button__close-modal-window"
+                        variant="modalCloseButton"
+                        onPress={onClose}
+                      >
+                        <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
+                      </IconButton>
+                    )
+                  )}
+                {titleContent}
+              </Box>
+            )}
+            {isOnyx ? children : <Box pt="md" px="lg">{children}</Box>}
           </Box>
         </FocusScope>
       </Box>

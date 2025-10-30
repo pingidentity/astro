@@ -1,13 +1,11 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
-import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useGridCell } from '@react-aria/grid';
 import { useHover, usePress } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
-import { useStatusClasses } from '../../hooks';
+import { useGetTheme, useStatusClasses } from '../../hooks';
 import Box from '../Box';
 import Icon from '../Icon';
 
@@ -26,6 +24,9 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
   const { state } = useAccordionGridContext();
   const cellRef = useRef();
+
+  const { icons } = useGetTheme();
+  const { MenuDown, MenuUp } = icons;
 
   /* istanbul ignore next */
   useImperativeHandle(ref, () => cellRef.current);
@@ -100,7 +101,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
           hasCaret
           && (
             <Box isRow alignItems="center" sx={{ mr: '0px' }}>
-              <Icon icon={isSelected ? upArrow : downArrow} size={20} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+              <Icon color="text.primary" icon={isSelected ? upArrow : downArrow} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
             </Box>
           )
         }

@@ -53,6 +53,12 @@ describe('CodeEditor', () => {
     expect(screen.getByText('Editor Language: javascript, Code:console.log("Hello, World!");')).toBeInTheDocument();
   });
 
+  it('renders with null/undefined', () => {
+    render(<CodeEditor />);
+    expect(screen.getByTestId('mock-monaco-editor')).toBeInTheDocument();
+    expect(screen.getByText('Editor Language: undefined, Code:')).toBeInTheDocument();
+  });
+
   it('calls onChange when code changes', () => {
     const value = 'console.log("Hello, World!");';
 

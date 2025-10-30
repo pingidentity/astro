@@ -31,23 +31,23 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
 
   const isExpanded = expandedKeys.includes(key);
   const array = item?.children && item.children.map(i => i.key);
-  const childSelected = array && array.includes(navBarState.selectedKey);
+  const isChildSelected = array && array.includes(navBarState.selectedKey);
 
   useEffect(() => {
-    if (childSelected && isExpanded === false) {
+    if (isChildSelected && isExpanded === false) {
       setExpandedKeys([...expandedKeys, key]);
     }
   }, [selectedKey]);
 
   const { classNames } = useStatusClasses(className, {
-    isSelected: childSelected && !isExpanded,
+    isSelected: isChildSelected && !isExpanded,
   });
 
   const getIconColor = () => {
     if (navStyles.navBarItemHeader === 'navBar.popUpItemHeaderContainer') {
-      return childSelected && !isExpanded ? 'white' : 'text.primary';
+      return isChildSelected && !isExpanded ? 'white' : 'text.primary';
     }
-    return childSelected && !isExpanded ? 'white' : 'neutral.95';
+    return isChildSelected && !isExpanded ? 'white' : 'neutral.95';
   };
 
   return (

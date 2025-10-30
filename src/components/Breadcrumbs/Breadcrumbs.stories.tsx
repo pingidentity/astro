@@ -24,12 +24,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Breadcrumbs', 'Item'],
-        '@pingux/mdi-react/ChevronRightIcon': 'ChevronRightIcon',
-      },
-    },
   },
   argTypes: {
     icon: {
@@ -142,5 +136,4 @@ Overflowing.parameters = {
       rules: [{ id: 'landmark-unique', enabled: false }],
     },
   },
-  codesandbox: false,
 };

@@ -20,7 +20,7 @@ import Box from '../Box';
 const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
   const {
     item,
-    isDisabled: propIsDisabled,
+    isDisabled: isPropDisabled,
     isFocusVisible,
     isNotFocusedOnHover,
     className,
@@ -29,12 +29,12 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
 
   const {
     onClose,
-    closeOnSelect,
+    shouldCloseOnSelect,
   } = useMenuContext();
 
   const { key, rendered, props: itemProps } = item as Node<object>;
   const { isSeparator, isPressed: propIsPressed, 'data-id': dataId, ...others } = itemProps;
-  const isDisabled = propIsDisabled || state.disabledKeys.has(key);
+  const isDisabled = isPropDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectionManager.isSelected(key);
 
   usePropWarning(props, 'disabled', 'isDisabled');
@@ -48,7 +48,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
       isDisabled,
       isSelected,
       onClose,
-      closeOnSelect,
+      closeOnSelect: shouldCloseOnSelect,
     },
     state as TreeState<object>,
     menuItemRef,

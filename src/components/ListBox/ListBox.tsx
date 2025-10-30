@@ -72,6 +72,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     'aria-details': ariaDetails,
     // @ts-expect-error  linkBehavior not in ListBoxProps
     linkBehavior,
+    shouldShowSelectedOption,
     ...others
   } = props;
 
@@ -154,7 +155,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     <ListBoxContext.Provider value={state}>
       <Box variant="listBox.container">
         {loadingState === loadingStates.LOADING_MORE_PREPEND
-        && <Loader variant="loader.withinListbox" aria-label="Loading more..." />}
+          && <Loader variant="loader.withinListbox" aria-label="Loading more..." />}
         <Virtualizer
           {...mergeProps((listBoxProps), others)}
           autoFocus={hasAutoFocus}
@@ -173,7 +174,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
           onScroll={onScroll}
         >
           {(type, item) => {
-          // Type can be used like so: https://github.com/adobe/react-spectrum/blob/main/packages/%40react-spectrum/listbox/src/ListBoxBase.tsx#L129
+            // Type can be used like so: https://github.com/adobe/react-spectrum/blob/main/packages/%40react-spectrum/listbox/src/ListBoxBase.tsx#L129
             if (type === collectionTypes.ITEM) {
               return (
                 <Option
@@ -181,6 +182,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
                   item={item}
                   hasVirtualFocus={hasVirtualFocus}
                   isCondensed={isCondensed}
+                  shouldShowSelectedOption={shouldShowSelectedOption}
                 />
               );
             } if (type === collectionTypes.LOADER) {

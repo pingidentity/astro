@@ -3,7 +3,7 @@ export const message = {
     backgroundColor: 'background.secondary',
     color: 'white !important',
     '> span': {
-      color: 'text.message',
+      color: 'white !important',
     },
     '&.is-success': {
       bg: 'background.secondary',
@@ -40,6 +40,12 @@ export const message = {
       },
     },
     '&.is-success, > button > svg': {
+      color: 'white !important',
+      path: {
+        fill: 'text.message',
+      },
+    },
+    '&.is-default, > button > svg': {
       color: 'white !important',
       path: {
         fill: 'text.message',

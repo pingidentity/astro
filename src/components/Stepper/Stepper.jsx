@@ -3,11 +3,14 @@ import React, { forwardRef } from 'react';
 import { useSingleSelectListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
-import { Step, Tab, Tabs } from '../..';
+import { Box, Step, Tab, Tabs, Text } from '../..';
+import { useStatusClasses } from '../../hooks';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
 
 import Line from './Line';
 import { stepStatuses } from './Stepper.constants';
+import { verticalLine } from './Stepper.styles';
 
 const {
   ACTIVE,
@@ -21,6 +24,8 @@ const Stepper = forwardRef((props, ref) => {
     onStepChange,
     tabListProps,
     tooltipProps,
+    orientation,
+    className,
     ...others
   } = props;
 
@@ -41,23 +46,46 @@ const Stepper = forwardRef((props, ref) => {
     }
   };
 
+  const { classNames } = useStatusClasses(className, {
+    'is-vertical': orientation === ORIENTATION.VERTICAL,
+    'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
+  });
+
   const steps = Array.from(state.collection);
-  const lines = steps.map((_v, i) => <Line status={getStatus(i + 2)} />);
+  const lines = steps.map((_v, i) => <Line className={classNames} status={getStatus(i + 2)} />);
 
   let isFirst = true; // make sure not to insert until there's at least one non-null child
 
   const render = steps.map((item, i) => {
     const stepIndex = i + 1;
     const stepStatus = getStatus(stepIndex);
+    const line = Array.isArray(lines) ? lines[i - 1] : lines;
+    const defaultIndicator = <Box variant="forms.label.indicator">*</Box>;
     const step = (
       <Step
         key={item.key}
         value={stepIndex}
         status={stepStatus}
+        className={classNames}
+        orientation={orientation}
       />
     );
+    const verticalStep = (
+      <Box isRow>
+        <Step
+          key={item.key}
+          value={stepIndex}
+          status={stepStatus}
+          className={classNames}
+          orientation={orientation}
+        />
+        <Text variant="stepperLabel">
+          {item.textValue}
+          {item?.props?.isRequired && defaultIndicator}
+        </Text>
+      </Box>
+    );
 
-    const line = Array.isArray(lines) ? lines[i - 1] : lines;
 
     /* istanbul ignore next */
     const textValue = (item && item.value && item.value.label)
@@ -69,13 +97,18 @@ const Stepper = forwardRef((props, ref) => {
         key={stepIndex}
         variant="stepper.tab"
         tabLineProps={{ display: 'none' }}
-        tabLabelProps={{ variant: 'stepper.tabLabel' }}
+        tabLabelProps={{
+          variant: 'stepper.tabLabel',
+        }}
         textValue={textValue}
-        title={step}
+        title={orientation === ORIENTATION.VERTICAL ? verticalStep : step}
         aria-label={textValue}
         content={item.rendered}
-        separator={!isFirst && line}
+        separator={!isFirst && orientation === ORIENTATION.HORIZONTAL && (!isFirst && line)}
         tooltipTriggerProps={tooltipProps}
+        sx={
+          i !== steps.length - 1 && orientation === ORIENTATION.VERTICAL && verticalLine
+        }
       />
     );
 
@@ -88,10 +121,15 @@ const Stepper = forwardRef((props, ref) => {
     <Tabs
       ref={ref}
       variant="stepper.wrapper"
-      tabListProps={{ variant: 'stepper.tabs', gap: '0', ...tabListProps }}
+      tabListProps={{
+        variant: 'stepper.tabs',
+        gap: '0',
+        ...tabListProps,
+      }}
       onSelectionChange={onStepChangeHandler}
       selectedKey={activeStep?.toString()}
       mode="tooltip"
+      orientation={orientation}
       {...others}
     >
       {render}
@@ -121,7 +159,15 @@ use this prop instead of Array.map when iteratively rendering Items*.
   /** A props object that is subsequently spread into the rendered tablist. */
   tabListProps: PropTypes.shape({}),
   tooltipProps: PropTypes.shape({}),
+  orientation: PropTypes.oneOf([
+    'vertical',
+    'horizontal',
+  ]),
+
 };
 
 Stepper.displayName = 'Stepper';
+Stepper.defaultProps = {
+  orientation: 'horizontal',
+};
 export default Stepper;

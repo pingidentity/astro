@@ -22,14 +22,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Box', 'Button', 'Icon', 'IconButton', 'Text', 'Tooltip', 'TooltipTrigger',
-        ],
-        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
-      },
-    },
   },
 } as Meta;
 

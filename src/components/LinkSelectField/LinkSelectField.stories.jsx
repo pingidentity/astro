@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
-import { useAsyncList } from 'react-stately';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { getAllUsers } from '../../api/users';
 import {
   Box,
   Item,
   LinkSelectField,
   Section,
 } from '../../index';
+import { LIMIT } from '../../mocks/constants';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -26,16 +27,6 @@ export default {
           <DocsLayout />
         </>
       ),
-    },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Box',
-          'Item',
-          'LinkSelectField',
-          'Section',
-        ],
-      },
     },
   },
   argTypes: {
@@ -209,38 +200,50 @@ DynamicItems.parameters = {
   docs: {
     storyDescription: 'If using a long list or one that is dynamically updated, use the `items` prop and a function to render the children. See [the React Stately docs](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections) for more information about this.',
   },
-  codesandbox: false,
 };
 
 export const AsyncLoading = () => {
-  // This example uses `useAsyncList` from "@react-stately/data"
-  const list = useAsyncList({
-    async load({ signal, cursor }) {
-      const res = await fetch(cursor || 'https://pokeapi.co/api/v2/pokemon', { signal });
-      const json = await res.json();
-      // The API is too fast sometimes, so make it take longer so we can see the spinner
-      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
-      return {
-        items: json.results,
-        cursor: json.next,
-      };
-    },
-  });
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(LIMIT);
+  const [dataSize, setDataSize] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = useCallback(async currentLimit => {
+    try {
+      const response = await getAllUsers(currentLimit);
+      const json = await response.json();
+
+      if (response.ok) {
+        setData(json.body._embedded.users || []);
+        setDataSize(json.body.count);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setLoading(false);
+    }
+  }, []);
+
+  const handleLoadMore = () => {
+    if (limit >= dataSize) return;
+    setLoading(true);
+    setLimit(prevLimit => prevLimit + LIMIT);
+  };
+
+  useEffect(() => {
+    fetchData(limit);
+  }, [fetchData, limit]);
 
   return (
     <OverlayProvider>
       <LinkSelectField
-        label="Pick a Pokemon"
-        items={list.items}
-        isLoading={list.isLoading}
-        onLoadMore={list.loadMore}
+        label="Pick a User"
+        items={data}
+        isLoading={loading}
+        onLoadMore={handleLoadMore}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {item => <Item key={item.id}>{item.name.given}</Item>}
       </LinkSelectField>
     </OverlayProvider>
   );
-};
-
-AsyncLoading.parameters = {
-  codesandbox: false,
 };

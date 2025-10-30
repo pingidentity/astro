@@ -1,3 +1,5 @@
+import { colors } from '../colors';
+
 import { avatar } from './avatar';
 import callout from './callout';
 import { footer } from './footer';
@@ -12,7 +14,7 @@ const listBox = {
   container: {
     backgroundColor: 'background.base',
     border: '1px solid',
-    borderColor: 'border.input',
+    borderColor: 'transparent',
     borderRadius: '4px',
   },
   option: {
@@ -48,9 +50,26 @@ const modal = {
     bg: 'background.base',
   },
   headingContainer: {
+    borderBottom: '1px solid',
+    borderBottomColor: 'border.base',
     bg: 'background.base',
   },
-  buttonsContainer: {
+  header: {
+    borderBottom: '1px solid',
+    borderBottomColor: 'border.base',
+    bg: 'background.base',
+  },
+  body: {
+    bg: 'background.base',
+  },
+  footer: {
+    borderTop: '1px solid',
+    borderTopColor: 'border.base',
+    bg: 'background.base',
+  },
+  footerContainer: {
+    borderTop: '1px solid',
+    borderTopColor: 'border.base',
     bg: 'background.base',
   },
 };
@@ -169,6 +188,12 @@ export default {
   skeleton,
   footer,
   tooltip,
+  popoverMenu: {
+    container: {
+      background: '#23282e',
+      border: '1px solid #69788B',
+    },
+  },
   dataTable: {
     selectableTableRow: {
       '&.is-selected': {
@@ -198,6 +223,11 @@ export default {
     caption: {
       color: 'text.secondary',
     },
+    thead: {
+      '&.is-sticky': {
+        boxShadow: `0 1px 0 ${colors.border.base}`,
+      },
+    },
     head: {
       color: 'text.secondary',
     },
@@ -220,6 +250,12 @@ export default {
       '&.is-success': {
         color: 'success.bright',
       },
+    },
+  },
+  overlayPanel: {
+    container: {
+      border: '1px solid border.separator',
+      boxShadow: 'none',
     },
   },
 };

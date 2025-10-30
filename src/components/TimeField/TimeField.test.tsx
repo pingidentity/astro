@@ -84,6 +84,13 @@ test('renders TimeField component with isReadOnly', () => {
   });
 });
 
+test('renders TimeField component with isInvalid', () => {
+  getComponent({ isInvalid: true });
+  const timeSegments = screen.getAllByRole('spinbutton');
+  timeSegments.forEach(segment => {
+    expect(segment).toHaveAttribute('aria-invalid', 'true');
+  });
+});
 
 test('should handle autofocus when deleting segments from left to right', () => {
   const defaultValue = new Time(12, 30);

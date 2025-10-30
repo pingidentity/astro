@@ -1,3 +1,5 @@
+import colors from '../colors/colors';
+
 import { defaultFocus as baseFocus } from './button';
 
 const borderRadius = '16px';
@@ -5,6 +7,37 @@ const borderRadius = '16px';
 const defaultFocus = {
   ...baseFocus,
   outlineOffset: '-2px',
+};
+
+const container = {
+  '& > thead > tr': {
+    '& > th:first-of-type': {
+      borderTopLeftRadius: borderRadius,
+    },
+    '& > th:last-of-type': {
+      borderTopRightRadius: borderRadius,
+    },
+  },
+  '& > tbody > tr:last-child': {
+    borderBottom: 'unset',
+    borderBottomLeftRadius: borderRadius,
+    borderBottomRightRadius: borderRadius,
+    '& > td:first-of-type': {
+      borderBottomLeftRadius: borderRadius,
+    },
+    '& > td:last-of-type': {
+      borderBottomRightRadius: borderRadius,
+    },
+  },
+  '&.has-caption > thead > tr:first-of-type > th': {
+    borderRadius: '0',
+  },
+  '&.has-pagination > tbody > tr:last-child': {
+    borderRadius: 0,
+    '& > td': {
+      borderRadius: 0,
+    },
+  },
 };
 
 const caption = {
@@ -37,17 +70,8 @@ const row = {
 const thead = {
   borderBottomColor: 'border.base',
   backgroundColor: 'background.base',
-  '&:not(.has-caption)': {
-    borderTopLeftRadius: borderRadius,
-    borderTopRightRadius: borderRadius,
-    '& > tr:first-child': {
-      '& > th:first-of-type': {
-        borderTopLeftRadius: borderRadius,
-      },
-      '& > th:last-of-type': {
-        borderTopRightRadius: borderRadius,
-      },
-    },
+  '&.is-sticky': {
+    boxShadow: `0 1px 0 ${colors.border.base}`,
   },
 };
 
@@ -69,17 +93,6 @@ const tbody = {
   backgroundColor: 'background.base',
   borderBottomLeftRadius: borderRadius,
   borderBottomRightRadius: borderRadius,
-  '& > tr:last-child': {
-    borderBottom: 'unset',
-    borderBottomLeftRadius: borderRadius,
-    borderBottomRightRadius: borderRadius,
-    '& > td:first-of-type': {
-      borderBottomLeftRadius: borderRadius,
-    },
-    '& > td:last-of-type': {
-      borderBottomRightRadius: borderRadius,
-    },
-  },
 };
 
 const data = {
@@ -89,6 +102,7 @@ const data = {
 };
 
 export const tableBase = {
+  container,
   caption,
   row,
   thead,

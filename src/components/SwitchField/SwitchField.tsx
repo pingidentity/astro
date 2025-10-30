@@ -44,7 +44,9 @@ const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) 
     'aria-label': others['aria-label'] || 'switch-field',
   }, state, switchRef);
 
-  const statusClasses = { isSelected: inputProps.checked ?? false };
+  const isSelected = inputProps.checked ?? false;
+
+  const statusClasses = { isSelected };
 
   const {
     fieldContainerProps,
@@ -64,7 +66,7 @@ const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) 
   };
 
   return (
-    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
+    <Box {...getPendoID(displayName)} {...fieldContainerProps} alignSelf="top" alignItems="start">
       <Label variant="forms.switch.label" {...fieldLabelProps}>
         <Box
           {...fieldControlWrapperProps}
@@ -75,6 +77,7 @@ const SwitchField = forwardRef<HTMLInputElement, SwitchFieldProps>((props, ref) 
         >
           <Switch
             ref={switchRef}
+            isSelected={isSelected}
             inputProps={fieldControlInputProps}
             name={name}
             {...unhandledAriaProps}

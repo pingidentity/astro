@@ -1,4 +1,4 @@
-import React, { forwardRef, Key, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, Key, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover, usePress } from '@react-aria/interactions';
 import {
@@ -8,17 +8,19 @@ import {
   useTableHeaderRow,
   useTableRow,
   useTableRowGroup,
-  useTableSelectAllCheckbox, useTableSelectionCheckbox,
+  useTableSelectAllCheckbox,
+  useTableSelectionCheckbox,
 } from '@react-aria/table';
 import { mergeProps, useResizeObserver } from '@react-aria/utils';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useTableColumnResizeState, useTableState } from '@react-stately/table';
 import type { GridNode } from '@react-types/grid';
 
-import { Box, Card, CheckboxField, Icon, Loader } from '../..';
+import { Box, CheckboxField, Icon, Loader, Text } from '../..';
 import { useGetTheme, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import type {
   TableBaseProps,
+  TableCaptionProps,
   TableCellProps,
   TableCheckboxCellProps,
   TableColumnHeaderProps,
@@ -33,28 +35,30 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     caption,
     selectionMode,
     selectionBehavior,
-    tableBodyProps,
-    showSelectionCheckboxes,
+    hasSelectionCheckboxes,
     isStickyHeader = false,
+    className,
     ...others
   } = props;
+
+  const tableRef = useLocalOrForwardRef(ref);
+  const headerRef = useRef(null);
+  const scrollRef = useRef(null);
+  const bodyRef = useRef(null);
 
   const [tableWidth, setTableWidth] = useState(0);
 
   const state = useTableState({
     ...props,
-    showSelectionCheckboxes: showSelectionCheckboxes || (selectionMode === 'multiple' && selectionBehavior !== 'replace'),
+    showSelectionCheckboxes: hasSelectionCheckboxes || (selectionMode === 'multiple' && selectionBehavior !== 'replace'),
   });
-
-  const tableRef = useLocalOrForwardRef(ref);
-  const bodyRef = useRef<HTMLTableSectionElement | null>(null);
 
   const { collection } = state;
 
   const { gridProps } = useTable(
     {
       ...props,
-      scrollRef: bodyRef,
+      scrollRef,
     },
     state,
     tableRef,
@@ -69,9 +73,9 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
 
   const getDefaultMinWidth = useCallback((node: GridNode<object>) => {
     if (node.props.isSelectionCell) {
-      return 50;
+      return 70;
     }
-    return 70;
+    return 100;
   }, []);
 
   const layoutState = useTableColumnResizeState(
@@ -94,35 +98,36 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     onResize: () => setTableWidth(tableRef.current.clientWidth),
   });
 
+  const { classNames } = useStatusClasses(className, {
+    'has-caption': !!caption,
+  });
+
   return (
-    <Card variant="cards.tableWrapper">
+    <Box ref={scrollRef}>
       <Box
         as="table"
+        display="table"
         variant="tableBase.container"
+        className={classNames}
         ref={tableRef}
         {...gridProps}
         {...others}
       >
         {caption && (
-          <Box
-            as="caption"
-            display="table-caption"
-            variant="tableBase.caption"
-            textAlign="left"
-          >
-            {caption}
-          </Box>
+          <TableCaption caption={caption} />
         )}
-        <TableRowGroup type="thead" hasCaption={!!caption} isSticky={isStickyHeader}>
+        <TableRowGroup
+          ref={headerRef}
+          type="thead"
+          isSticky={isStickyHeader}
+        >
           {collection.headerRows.map(headerRow => (
             <TableHeaderRow
               key={headerRow.key}
               item={headerRow}
               state={state}
             >
-              {Array.from(
-                state.collection.getChildren?.(headerRow.key) || [],
-              ).map(column => (
+              {Array.from(headerRow.childNodes).map(column => (
                 column.props.isSelectionCell
                   ? (
                     <TableSelectAllCell
@@ -144,14 +149,18 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
             </TableHeaderRow>
           ))}
         </TableRowGroup>
-        <TableRowGroup ref={bodyRef} type="tbody" {...tableBodyProps}>
+        <TableRowGroup
+          ref={bodyRef}
+          type="tbody"
+          {...collection.body.props}
+        >
           {
             collection.size === 0 && (
               <Box
+                as="tr"
                 role="row"
                 key="loading"
                 data-testid="loading"
-                as="tr"
                 alignItems="center"
                 justifyContent="center"
                 px="lg"
@@ -161,9 +170,9 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
               </Box>
             )
           }
-          {Array.from(collection).map(row => (
+          {Array.from(collection.body.childNodes).map(row => (
             <TableRow key={row.key} item={row} state={state}>
-              {Array.from(state.collection.getChildren!(row.key)).map(cell => (
+              {Array.from(collection.getChildren!(row.key)).map(cell => (
                 cell.props.isSelectionCell
                   ? (
                     <TableCheckboxCell
@@ -186,28 +195,47 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
           ))}
         </TableRowGroup>
       </Box>
-    </Card>
+    </Box>
   );
 });
 
-export default TableBase;
+const TableCaption = forwardRef<HTMLElement, TableCaptionProps>((props, ref) => {
+  const { caption, ...others } = props;
 
-export const TableRowGroup = forwardRef<
+  if (!caption) {
+    return null;
+  }
+
+  return (
+    <Box
+      as="caption"
+      display="table-caption"
+      ref={ref}
+      variant="tableBase.caption"
+      textAlign="left"
+      {...others}
+    >
+      {caption}
+    </Box>
+  );
+});
+
+const TableRowGroup = forwardRef<
   HTMLTableSectionElement,
   TableRowGroupProps
 >((props, ref) => {
-  const { type, children, hasCaption, className, isSticky, ...others } = props;
+  const { type, children, className, isSticky, ...others } = props;
   const { rowGroupProps } = useTableRowGroup();
 
   const { classNames } = useStatusClasses(className, {
-    hasCaption,
     isSticky: isSticky && type === 'thead',
   });
 
   return (
     <Box
-      ref={ref}
       as={type}
+      display={type === 'thead' ? 'table-header-group' : 'table-row-group'}
+      ref={ref}
       className={classNames}
       variant={`tableBase.${type}`}
       {...rowGroupProps}
@@ -218,7 +246,7 @@ export const TableRowGroup = forwardRef<
   );
 });
 
-export function TableHeaderRow<T>(props: TableHeaderRowProps<T>) {
+function TableHeaderRow<T>(props: TableHeaderRowProps<T>) {
   const { item, state, children } = props;
   const ref = useRef<HTMLTableRowElement | null>(null);
   const { rowProps } = useTableHeaderRow({ node: item }, state, ref);
@@ -226,7 +254,7 @@ export function TableHeaderRow<T>(props: TableHeaderRowProps<T>) {
   return (
     <Box
       as="tr"
-      isRow
+      display="table-row"
       {...rowProps}
       ref={ref}
     >
@@ -235,7 +263,7 @@ export function TableHeaderRow<T>(props: TableHeaderRowProps<T>) {
   );
 }
 
-export function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
+function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
   const { column, state, className, layoutState } = props;
 
   const ref = useRef<HTMLTableCellElement | null>(null);
@@ -273,26 +301,26 @@ export function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
 
   return (
     <Box
-      isRow
-      ref={ref}
       as="th"
+      display="table-cell"
+      ref={ref}
       variant="tableBase.head"
       className={classNames}
-      alignItems="center"
       sx={{
-        gap: 'sm',
         width: layoutState?.getColumnWidth(column.key),
         ...column.props.sx,
       }}
       {...mergeProps(columnHeaderProps, focusProps, column.props)}
     >
-      {column.rendered}
-      {allowsSorting && sortIcon}
+      <Box isRow gap="sm" alignItems="center">
+        <Text>{column.rendered}</Text>
+        {allowsSorting && sortIcon}
+      </Box>
     </Box>
   );
 }
 
-export function TableRow<T>(props: TableRowProps<T>) {
+function TableRow<T>(props: TableRowProps<T>) {
   const { item, state, children, className } = props;
 
   const ref = useRef<HTMLTableRowElement | null>(null);
@@ -319,7 +347,7 @@ export function TableRow<T>(props: TableRowProps<T>) {
   return (
     <Box
       as="tr"
-      isRow
+      display="table-row"
       className={classNames}
       variant="tableBase.row"
       {...mergeProps(rowProps, focusProps, hoverProps, pressProps)}
@@ -330,7 +358,7 @@ export function TableRow<T>(props: TableRowProps<T>) {
   );
 }
 
-export function TableCell<T>(props: TableCellProps<T>) {
+function TableCell<T>(props: TableCellProps<T>) {
   const { cell, state, className, layoutState } = props;
 
   const ref = useRef<HTMLTableCellElement | null>(null);
@@ -345,6 +373,7 @@ export function TableCell<T>(props: TableCellProps<T>) {
   return (
     <Box
       as="td"
+      display="table-cell"
       variant="tableBase.data"
       ref={ref}
       className={classNames}
@@ -355,28 +384,6 @@ export function TableCell<T>(props: TableCellProps<T>) {
       {...mergeProps(gridCellProps, focusProps, cell.props)}
     >
       {cell.rendered}
-    </Box>
-  );
-}
-
-export function TableCheckboxCell<T>(props: TableCheckboxCellProps<T>) {
-  const { cell, state, layoutState } = props;
-  const ref = useRef<HTMLTableCellElement | null>(null);
-  const { gridCellProps } = useTableCell({ node: cell }, state, ref);
-  const { checkboxProps } = useTableSelectionCheckbox(
-    { key: String(cell.parentKey) },
-    state,
-  );
-
-  return (
-    <Box
-      as="td"
-      variant="tableBase.data"
-      width={layoutState?.getColumnWidth((cell.column as GridNode<T>).key)}
-      {...gridCellProps}
-      ref={ref}
-    >
-      <CheckboxField {...checkboxProps} />
     </Box>
   );
 }
@@ -394,8 +401,11 @@ function TableSelectAllCell<T>(props: TableSelectAllCellProps<T>) {
   return (
     <Box
       as="th"
+      display="table-cell"
       variant="tableBase.head"
-      width={layoutState?.getColumnWidth(column.key)}
+      sx={{
+        width: layoutState?.getColumnWidth(column.key),
+      }}
       {...columnHeaderProps}
       ref={ref}
     >
@@ -412,3 +422,31 @@ function TableSelectAllCell<T>(props: TableSelectAllCellProps<T>) {
     </Box>
   );
 }
+
+function TableCheckboxCell<T>(props: TableCheckboxCellProps<T>) {
+  const { cell, state, layoutState } = props;
+  const ref = useRef<HTMLTableCellElement | null>(null);
+  const { gridCellProps } = useTableCell({ node: cell }, state, ref);
+  const { checkboxProps } = useTableSelectionCheckbox(
+    { key: String(cell.parentKey) },
+    state,
+  );
+
+  return (
+    <Box
+      as="td"
+      display="table-cell"
+      variant="tableBase.data"
+      sx={{
+        width: layoutState?.getColumnWidth((cell.column as GridNode<T>).key),
+        ...cell.props.sx,
+      }}
+      {...gridCellProps}
+      ref={ref}
+    >
+      <CheckboxField {...checkboxProps} />
+    </Box>
+  );
+}
+
+export default TableBase;

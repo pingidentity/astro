@@ -168,6 +168,7 @@ describe('Static DataTable', () => {
     expect(tRows[2]).toHaveAttribute('aria-rowindex', '4');
     expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
 
+
     let rowheader = within(tRows[0]).getByRole('rowheader');
     expect(rowheader).toHaveTextContent(rows[0].country);
     expect(rowheader).toHaveAttribute('aria-colindex', '1');
@@ -638,12 +639,12 @@ describe('Sortable with useAsyncList', () => {
     const { result } = renderHook(() => useAsyncList({
       load,
       sort,
-      initialSortDescriptor: { column: 'name', direction: 'ascending' },
+      initialSortDescriptor: { direction: 'ascending' },
     }));
 
     expect(load).toHaveBeenCalledTimes(1);
     let args = load.mock.calls[0][0];
-    expect(args.sortDescriptor).toEqual({ column: 'name', direction: 'ascending' });
+    expect(args.sortDescriptor).toEqual({ direction: 'ascending' });
     expect(result.current.items).toEqual([]);
 
     await actHooks(async () => {
@@ -653,7 +654,7 @@ describe('Sortable with useAsyncList', () => {
     expect(result.current.items).toEqual(ITEMS);
 
     await actHooks(async () => {
-      result.current.sort({ column: 'name', direction: 'ascending' });
+      result.current.sort({ column: 'name' });
     });
 
     expect(result.current.items).toEqual(ITEMS);
@@ -733,7 +734,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     });
 
     await actHooks(async () => {
-      result.current.sort({ column: 'country', direction: 'ascending' });
+      result.current.sort({ column: 'country' });
     });
 
     await actHooks(async () => {
@@ -769,6 +770,7 @@ describe('Sortable DataTable with useAsyncList', () => {
     expect(tRows[2]).toHaveTextContent('France');
 
     expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
+
     expect(tRows[3]).toHaveTextContent('USA');
   });
 
@@ -821,6 +823,7 @@ describe('Sortable DataTable with useAsyncList', () => {
 
     expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
     expect(tRows[3]).toHaveTextContent('Canada');
+
   });
 });
 

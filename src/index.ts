@@ -80,6 +80,7 @@ export { default as DatePicker } from './components/DatePicker';
 export { default as DateField } from './components/DatePicker/DateField';
 export { default as EditButton } from './components/EditButton';
 export { default as EnvironmentBreadcrumb } from './components/EnvironmentBreadcrumb';
+export { default as ExpandableText } from './components/ExpandableText';
 export { default as FieldHelperText } from './components/FieldHelperText';
 export * from './components/FieldHelperText';
 export { default as FileInputField } from './components/FileInputField';
@@ -176,6 +177,8 @@ export { default as SelectField } from './components/SelectField';
 export * from './components/SelectField';
 export { default as Separator } from './components/Separator';
 export * from './components/Separator';
+export { default as ServerErrorBoundary } from './components/ServerErrorBoundary';
+export * from './components/ServerErrorBoundary';
 export { default as Skeleton } from './components/Skeleton';
 export * from './components/Skeleton';
 export { default as SliderField } from './components/SliderField/SliderField';
@@ -226,7 +229,11 @@ export { default as OnyxDarkTheme } from './styles/themeOverrides/nextGenDarkMod
 export { default as NextGenTheme } from './styles/themes/next-gen';
 export { default as OnyxTheme } from './styles/themes/next-gen';
 export * from './types';
-export { OverlayProvider, useOverlayPosition, useOverlayTrigger } from 'react-aria';
+export {
+  OverlayProvider,
+  useOverlayPosition,
+  useOverlayTrigger,
+} from 'react-aria';
 export {
   Cell,
   Column,

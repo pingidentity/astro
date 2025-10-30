@@ -1,7 +1,7 @@
 {
   "name": "@pingux/astro",
-  "version": "2.134.0",
   "private": true, 
+  "version": "2.148.0",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -80,7 +80,7 @@
     "@react-aria/list": "^3.0.0-beta.0",
     "@react-aria/listbox": "~3.10.2",
     "@react-aria/live-announcer": "~3.1.1",
-    "@react-aria/overlays": "^3.7.0",
+    "@react-aria/overlays": "^3.28.0",
     "@react-aria/progress": "^3.4.9",
     "@react-aria/select": "^3.14.5",
     "@react-aria/selection": "~3.10.1",
@@ -108,6 +108,7 @@
     "@react-stately/toggle": "^3.8.5",
     "@react-stately/tree": "^3.7.4",
     "@react-stately/virtualizer": "~3.6.5",
+    "@react-types/combobox": "^3.13.8",
     "@react-types/slider": "^3.7.9",
     "@storybook/addon-actions": "^7.1.0",
     "@storybook/api": "^7.1.0",
@@ -227,11 +228,19 @@
     "use-resize-observer": "^8.0.0",
     "vite-plugin-dts": "~3.8.1",
     "whatwg-fetch": "^3.2.0",
-    "vitest": "^1.3.1"
+    "vitest": "^1.3.1",
+    "babel-loader": "^8.1.0",
+    "msw": "^2.11.3",
+    "msw-storybook-addon": "^2.0.5"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   },
   "overrides": {
     "@emotion/eslint-plugin": {

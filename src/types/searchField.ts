@@ -1,3 +1,5 @@
+import React, { Key, ReactNode } from 'react';
+import type { CollectionChildren } from '@react-types/shared';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { ControlProps } from '../hooks/useField/useField';
@@ -5,7 +7,9 @@ import { ControlProps } from '../hooks/useField/useField';
 import { StyleProps } from './shared';
 import { HelpHintProps, IconProps, IconTypeExtended, LabelProps } from '.';
 
-export interface SearchFieldProps extends StyleProps {
+type Mode = 'default' | 'autocomplete';
+
+interface SearchFieldCommonProps extends StyleProps {
   /**
      * @ignore
      * Identifies the currently active element when DOM focus is on a composite widget, textbox,
@@ -43,7 +47,7 @@ export interface SearchFieldProps extends StyleProps {
   /** Props object that is spread directly into the helphint element. */
   helpHintProps?: HelpHintProps;
   /** If present this prop will cause a help hint to render in the label of the field. */
-  hintText?: string,
+  hintText?: string;
   /** The content to display as the label. */
   label?: React.ReactNode;
   /** The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). */
@@ -174,4 +178,22 @@ export interface SearchFieldProps extends StyleProps {
   labelProps?: LabelProps;
   size?: string;
   sx?: ThemeUICSSObject;
+  mode?: Mode;
+}
+
+interface SearchAutoCompleteProps<T> extends SearchFieldCommonProps {
+  mode: Exclude<Mode, 'default'>;
+  defaultItems?: Iterable<T>;
+  children?: CollectionChildren<T>;
+  onSelectionChange?: (key: Key) => void;
+}
+
+export type SearchFieldProps<T> = SearchFieldCommonProps | SearchAutoCompleteProps<T>;
+
+export interface SearchItem extends StyleProps {
+  key?: Key;
+  name?: string;
+  href?: string;
+  title?: ReactNode | string;
+  'aria-label'?: string;
 }

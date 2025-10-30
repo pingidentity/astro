@@ -66,7 +66,7 @@ export const getLengthValuesMultiThumb = (
 const useSliderField = (props: UseSliderFieldProps) => {
   const {
     activeTrackProps,
-    autoFocus,
+    hasAutoFocus,
     className,
     defaultValue: defaultValueProp,
     displayValue: displayValueProp,
@@ -145,7 +145,7 @@ const useSliderField = (props: UseSliderFieldProps) => {
 
   const thumbOptions = {
     ...thumbProps,
-    autoFocus,
+    hasAutoFocus,
     isDisabled,
     name,
     onBlur,

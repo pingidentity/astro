@@ -11,7 +11,7 @@ export const avatar = {
     color: 'black',
   },
   '&.is-purple': {
-    backgroundColor: 'purple',
+    backgroundColor: 'purple-400',
     color: 'black',
   },
   '&.is-pink': {
@@ -32,6 +32,14 @@ export const avatar = {
   },
   '&.is-teal': {
     backgroundColor: 'teal',
+    color: 'black',
+  },
+  '&.is-blue': {
+    backgroundColor: 'blue',
+    color: 'black',
+  },
+  '&.is-indigo': {
+    backgroundColor: 'indigo',
     color: 'black',
   },
   display: 'flex',

@@ -2,6 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useOverlayPosition, useTooltipTrigger } from 'react-aria';
 import { useTooltipTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
+import { useLayoutEffect } from '@react-aria/utils';
 
 import { TooltipContext } from '../../context/TooltipContext/index';
 import { useGetTheme, useMountTransition, usePropWarning, useStatusClasses } from '../../hooks';
@@ -54,16 +55,25 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
 
     const isOpen = state.isOpen || (themeState.isOnyx && shouldAnimate && isTransitioning);
 
-    const { overlayProps: positionProps, arrowProps, placement } = useOverlayPosition({
-      placement: `${direction} ${align}` as Placement,
-      targetRef: tooltipRef,
-      overlayRef,
-      offset,
-      // Our API preference is for default false so we invert this since it should be default true
-      shouldFlip: !isNotFlippable,
-      crossOffset,
-      isOpen,
-    });
+    const
+      { overlayProps: positionProps, arrowProps, placement, updatePosition } = useOverlayPosition({
+        placement: `${direction} ${align}` as Placement,
+        targetRef: tooltipRef,
+        overlayRef,
+        offset,
+        // Our API preference is for default false so we invert this since it should be default true
+        shouldFlip: !isNotFlippable,
+        crossOffset,
+        isOpen,
+      });
+
+    useLayoutEffect(() => {
+      if (isOpen) {
+        requestAnimationFrame(() => {
+          setTimeout(() => { updatePosition(); }, 200);
+        });
+      }
+    }, [isOpen, updatePosition]);
 
     const { classNames } = useStatusClasses(className, {
       [`is-${direction}`]: direction,

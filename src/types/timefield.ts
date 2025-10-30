@@ -10,16 +10,15 @@ export type HourCycle = 12 | 24;
 export type Granularity = 'hour' | 'minute' | 'second';
 export type ValidationBehavior = 'native' | 'aria';
 
-export type MappedTimeValue<T> =
-  T extends ZonedDateTime ? ZonedDateTime :
-  T extends CalendarDateTime ? CalendarDateTime :
-  T extends Time ? Time :
-  never;
+export type MappedTimeValue<T> = T extends ZonedDateTime
+  ? ZonedDateTime
+  : T extends CalendarDateTime
+  ? CalendarDateTime
+  : T extends Time
+  ? Time
+  : never;
 
-
-export interface TimeFieldProps
-  extends StyleProps,
-    Omit<DOMAttributes<FocusableElement>, 'onChange'> {
+export interface TimeFieldProps extends StyleProps, DOMAttributes {
   /** Whether to display the time in 12 or 24 hour format. Default is determined by user's locale */
   hourCycle?: HourCycle;
 
@@ -52,7 +51,7 @@ export interface TimeFieldProps
   isInvalid?: boolean;
 
   /** Whether the element should receive focus on render. */
-  autoFocus?: boolean;
+  hasAutoFocus?: boolean;
 
   /** The current value (controlled). */
   value?: TimeValue | string | null;
