@@ -235,7 +235,7 @@ test('loader size can be changed via the prop', () => {
   const testLoaderSize = 17;
   getComponent({ isLoading: true, loaderSize: testLoaderSize });
   expect(screen.getByTestId('image-preview-button__loader')).toHaveStyle({
-    'font-size': `${testLoaderSize}px`,
+    'height': `${testLoaderSize}px`,
   });
 });
 test('should show the menu if label clicked when preview image exists', async () => {
