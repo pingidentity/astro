@@ -2,8 +2,9 @@ import { Key, ReactNode } from 'react';
 import { ComboBoxState, ListState, Node } from 'react-stately';
 import { AriaListBoxOptions, AriaOptionProps } from '@react-aria/listbox';
 import { VirtualizerItemOptions } from '@react-aria/virtualizer';
+import { SelectState } from '@react-stately/select';
 import { ReusableView } from '@react-stately/virtualizer';
-import type { CollectionChildren, FocusStrategy } from '@react-types/shared';
+import type { CollectionChildren, FocusStrategy, Key as SharedKey } from '@react-types/shared';
 
 import { BoxProps } from './box';
 import { loadingState, StyleProps } from './shared';
@@ -19,7 +20,7 @@ export interface ListStateType extends ListState<object> {
 export type ListBoxStateType = ListStateType | ComboBoxStateType;
 
 interface ListBoxItemType extends Node<unknown> {
-  key: Key;
+  key: SharedKey;
 }
 
 export interface ListBoxProps extends AriaListBoxOptions<object> {
@@ -34,7 +35,7 @@ export interface ListBoxProps extends AriaListBoxOptions<object> {
   onLoadMore?: () => void;
   onLoadPrev?: () => void;
   onScroll?: () => void;
-  state: ListBoxStateType;
+  state: ListBoxStateType | SelectState<object, 'single'> | ComboBoxState<object>;
   renderEmptyState?: React.ReactNode;
   variant?: string;
   children?: CollectionChildren<object>;

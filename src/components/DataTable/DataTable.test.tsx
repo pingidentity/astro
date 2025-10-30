@@ -823,7 +823,6 @@ describe('Sortable DataTable with useAsyncList', () => {
 
     expect(tRows[3]).toHaveAttribute('aria-rowindex', '5');
     expect(tRows[3]).toHaveTextContent('Canada');
-
   });
 });
 

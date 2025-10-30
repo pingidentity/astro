@@ -8,4 +8,5 @@ export interface CardProps extends
   DOMAttributes {
     tabIndex?: number | string,
     isInteractiveWithin? : boolean;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   }

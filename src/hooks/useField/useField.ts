@@ -162,6 +162,7 @@ export type CustomChangeEventType = {
   persist?(): void;
 };
 
+
 const useField = <T>(props: UseFieldProps<T>) => {
   const {
     autocomplete,
@@ -324,12 +325,17 @@ const useField = <T>(props: UseFieldProps<T>) => {
     },
   );
 
+  const baseSx: ThemeUICSSObject = {
+    position: 'relative',
+  };
+
+
   const fieldContainerProps = {
     ...nonAriaProps,
     ...mergeProps(containerProps, focusWithinProps),
     className: containerClasses,
     sx: {
-      position: 'relative',
+      ...baseSx,
       ...containerProps?.sx,
     },
   };

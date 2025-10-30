@@ -164,7 +164,7 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
           focusedKey={state?.selectionManager?.focusedKey ?? undefined}
           sizeToFit="height"
           scrollDirection="vertical"
-          collection={state.collection}
+          collection={state?.collection}
           renderWrapper={renderWrapper}
           transitionDuration={0}
           layout={layout}

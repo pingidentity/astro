@@ -5,11 +5,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import type {
-  AriaComboBoxOptions,
+import type { AriaComboBoxOptions,
+  AriaListBoxOptions,
   AriaSearchFieldProps,
-  SearchFieldAria,
-} from 'react-aria';
+  SearchFieldAria } from 'react-aria';
 import { DismissButton, FocusScope, useComboBox, useFilter, useSearchField } from 'react-aria';
 import type { ComboBoxStateOptions, SearchFieldState } from 'react-stately';
 import { useComboBoxState, useSearchFieldState } from 'react-stately';
@@ -78,7 +77,12 @@ export const SearchAutoComplete = forwardRef<
   );
   delete inputProps['data-testid'];
 
-  const { shouldFocusOnHover, shouldSelectOnPressUp, ['UNSTABLE_itemBehavior']: action, ...otherListBoxProps } = listBoxProps;
+  const { shouldFocusOnHover, shouldSelectOnPressUp, 'UNSTABLE_itemBehavior': action, ...otherListBoxProps } = listBoxProps as typeof listBoxProps & {
+  shouldFocusOnHover?: boolean;
+  shouldSelectOnPressUp?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  'UNSTABLE_itemBehavior'?: any;
+  };
 
   const searchProps = {
     label: props.label,

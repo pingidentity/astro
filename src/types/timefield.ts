@@ -18,7 +18,9 @@ export type MappedTimeValue<T> = T extends ZonedDateTime
   ? Time
   : never;
 
-export interface TimeFieldProps extends StyleProps, DOMAttributes {
+export interface TimeFieldProps
+  extends StyleProps,
+    Omit<DOMAttributes<FocusableElement>, 'onChange'> {
   /** Whether to display the time in 12 or 24 hour format. Default is determined by user's locale */
   hourCycle?: HourCycle;
 
@@ -51,7 +53,7 @@ export interface TimeFieldProps extends StyleProps, DOMAttributes {
   isInvalid?: boolean;
 
   /** Whether the element should receive focus on render. */
-  hasAutoFocus?: boolean;
+  autoFocus?: boolean;
 
   /** The current value (controlled). */
   value?: TimeValue | string | null;

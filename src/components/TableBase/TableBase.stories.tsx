@@ -326,7 +326,7 @@ export const DynamicWithSorting = () => {
         aria-label="Dynamic table"
         onSortChange={descriptor => {
           if (descriptor.column) {
-            list.sort(descriptor );
+            list.sort(descriptor);
           }
         }}
         sortDescriptor={list.sortDescriptor}

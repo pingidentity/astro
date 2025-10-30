@@ -57,7 +57,7 @@ const Option = forwardRef((props: OptionType, ref) => {
 
   const setFocusOnHover = () => {
     if (!hasFocus && !isCondensed) {
-      state.selectionManager.setFocusedKey(item.key);
+      state.selectionManager.setFocusedKey(String(item.key));
     }
   };
 
