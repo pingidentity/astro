@@ -4,6 +4,8 @@
     "jsx": "react-jsx",
     "module": "commonjs",
     "target": "ES5",
+    "outDir": "../../dist/astro/lib/cjs",
+    "rootDir": "./src/",
     "types": ["mdx", "@testing-library/jest-dom", "vite/client", "vitest", "jest", "vitest/globals"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

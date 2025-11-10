@@ -6,14 +6,14 @@
   "tags": ["type:ui"],
   "// targets": "to see all targets run: nx show project astro --web",
   "targets": {
-    "build-cjs": {
+    "build-babel": {
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "command": "vite build --config libs/astro/vite.config-cjs.ts"
+        "command": "rm -rf ../../dist/astro/lib && tsc --project ./libs/astro/tsconfig.lib.json --emitDeclarationOnly && BABEL_ENV=cjs babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir ../../dist/astro/lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files && BABEL_ENV=esm babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir ../../dist/astro/lib/ --extensions \".ts,.tsx,.js\" --copy-files && cp libs/astro/README.md ../../dist/astro/lib && cp libs/astro/MIGRATION.md ../../dist/astro/lib"
       }
     },
-    "build-umd": {
+    "build-vite": {
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -35,8 +35,8 @@
      "executor": "nx:run-commands",
      "options": {
        "commands": [
-         { "command": "nx run astro:build-umd" },
-         { "command": "nx run astro:build-cjs" }
+         { "command": "nx run astro:build-vite" },
+         { "command": "nx run astro:build-babel" }
        ],
        "parallel": false
      }
