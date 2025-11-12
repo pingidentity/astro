@@ -10,37 +10,9 @@
       "executor": "nx:run-commands",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "command": "rm -rf ../../dist/astro/lib && tsc --project ./libs/astro/tsconfig.lib.json --emitDeclarationOnly && BABEL_ENV=cjs babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir ../../dist/astro/lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files && BABEL_ENV=esm babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir ../../dist/astro/lib/ --extensions \".ts,.tsx,.js\" --copy-files && cp libs/astro/README.md ../../dist/astro/lib && cp libs/astro/MIGRATION.md ../../dist/astro/lib"
+        "command": "rm -rf .lib && tsc --project ./libs/astro/tsconfig.json --emitDeclarationOnly && BABEL_ENV=cjs babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir .lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files && BABEL_ENV=esm babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir .lib/ --extensions \".ts,.tsx,.js\" --copy-files && cp libs/astro/README.md .lib && cp libs/astro/MIGRATION.md .lib"
       }
     },
-    "build-vite": {
-      "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "config": "libs/astro/vite.config.ts",
-        "outputPath": "dist/astro",
-        "main": "libs/astro/src/index.ts",
-        "tsConfig": "libs/astro/tsconfig.lib.json",
-        "assets": [
-          "libs/astro/*.md",
-          {
-            "input": "libs/astro",
-            "glob": "**/*.scss",
-            "output": "scss"
-          }
-        ]
-      }
-    },
-    "build": {
-     "executor": "nx:run-commands",
-     "options": {
-       "commands": [
-         { "command": "nx run astro:build-vite" },
-         { "command": "nx run astro:build-babel" }
-       ],
-       "parallel": false
-     }
-   },
     "serve": {
       "executor": "@nx/vite:dev-server",
       "options": {
