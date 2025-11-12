@@ -76,6 +76,9 @@ export default defineConfig({
     reporters: ['default', 'hanging-process'],
     setupFiles: ['src/utils/testUtils/setupTests.ts'],
     include: ['**/**/*.test.{js,ts,jsx,tsx}'],
+    exclude: [
+      'lib',
+    ],
     coverage: {
       include: ['src/**/*.{js,jsx,ts,tsx}'],
       reportsDirectory: '../../coverage/libs/astro',
