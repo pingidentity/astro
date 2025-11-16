@@ -6,13 +6,6 @@
   "tags": ["type:ui"],
   "// targets": "to see all targets run: nx show project astro --web",
   "targets": {
-    "build-babel": {
-      "executor": "nx:run-commands",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "command": "rm -rf .lib && tsc --project ./libs/astro/tsconfig.json --emitDeclarationOnly && BABEL_ENV=cjs babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir .lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files && BABEL_ENV=esm babel --config-file ./libs/astro/babel.config.js libs/astro/src --out-dir .lib/ --extensions \".ts,.tsx,.js\" --copy-files && cp libs/astro/README.md .lib && cp libs/astro/MIGRATION.md .lib"
-      }
-    },
     "serve": {
       "executor": "@nx/vite:dev-server",
       "options": {
