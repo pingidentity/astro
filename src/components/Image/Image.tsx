@@ -36,7 +36,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
     ...others
   } = props;
   const [isLoading, setIsLoading] = useState(true);
-  const [loadedSuccessfully, setLoadedSuccessfully] = useState(false);
+  const [isLoadedSuccessfully, setIsLoadedSuccessfully] = useState(false);
   const [shouldShowFallback, setShouldShowFallback] = useState(false);
   // we need to use useRef here with useState so it will be updated in setTimeout and onload
   // https://github.com/facebook/react/issues/14010#issuecomment-433788147
@@ -46,7 +46,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
     isLoadingRef.current = newState;
   };
 
-  const shouldUseFallbackProps = (!loadedSuccessfully && !isLoadingRef?.current)
+  const shouldUseFallbackProps = (!isLoadedSuccessfully && !isLoadingRef?.current)
     || shouldShowFallback;
 
   const setImgAttribute = (attribute, fallbackAttribute) => {
@@ -79,7 +79,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
   const onImageLoad = () => {
     if (isLoadingRef?.current) {
       setIsLoadingWithRef(false);
-      setLoadedSuccessfully(true);
+      setIsLoadedSuccessfully(true);
     }
   };
 
@@ -144,7 +144,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
     />
   );
 
-  if (isLoading || (!loadedSuccessfully && !fallbackImage)) {
+  if (isLoading || (!isLoadedSuccessfully && !fallbackImage)) {
     return <Skeleton />;
   }
 

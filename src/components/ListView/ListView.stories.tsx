@@ -9,8 +9,10 @@ import { Meta } from '@storybook/react';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Box,
+import {
+  Box,
   Button,
+  IconWrapper,
   IconWrapperProps,
   Item,
   ListView,
@@ -19,7 +21,8 @@ import { Box,
   ListViewItemMenu,
   ListViewItemSwitchField,
   SearchField,
-  Text } from '../..';
+  Text,
+} from '../..';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import animals from '../../utils/devUtils/constants/animals';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -40,7 +43,6 @@ export default {
         </>
       ),
     },
-    codesandbox: false,
   },
   argTypes: {
     ...listViewArgTypes,
@@ -108,7 +110,7 @@ const actions = {
 
 const ExpandableChildren = () => {
   return (
-    <Box sx={{ my: 'lg' }}>
+    <Box sx={{ my: '20px' }}>
       <SearchField maxWidth="400px" aria-label="Search" placeholder="Search" />
       <Text sx={{ mt: 'md', fontWeight: '1' }}>
         Lorem ipsum dolor sit amet consectetur.
@@ -123,9 +125,16 @@ const ExpandableChildren = () => {
 };
 
 const ExampleContent = contentProps => {
-  const { text } = contentProps;
+  const { text, icon } = contentProps;
   return (
-    <Box isRow sx={{ alignItems: 'center' }}>
+    <Box isRow sx={{ alignItems: 'center' }} gap="md">
+      <IconWrapper
+        icon={icon}
+        size="sm"
+        title={{ name: `${text}}` }}
+        isCircle
+        color="cyan"
+      />
       <Text variant="itemTitle">
         {text}
       </Text>
@@ -134,19 +143,19 @@ const ExampleContent = contentProps => {
 };
 
 const Controls = () => (
-  <>
+  <Box gap="md" isRow alignItems="center">
     <ListViewItemSwitchField />
     <ListViewItemMenu>
       <Item key="enable">Enable user</Item>
       <Item key="disable">Disable user</Item>
       <Item key="delete">Delete user</Item>
     </ListViewItemMenu>
-  </>
+  </Box>
 );
 
 export const Default = ({ ...args }) => (
   <ListView {...props} {...args} items={items}>
-    {(item:ExampleItemProps) => (
+    {item => (
       <Item key={item.name}>
         <ListViewItem
           data={{
@@ -177,9 +186,9 @@ export const WithExpandableItems = ({ ...args }) => {
     <ListView {...props} {...args} items={items} selectionMode="expansion">
       {/* The first child inside of <Item> will render as the collapsed content, within the row
           The  Second child will render when expanded. */}
-      {(item:ExampleItemProps) => (
+      {(item: ExampleItemProps) => (
         <Item key={item.name} textValue={item.name}>
-          <ExampleContent text={item.name} />
+          <ExampleContent text={item.name} icon={item.icon} />
           <ExpandableChildren />
         </Item>
       )}
@@ -218,7 +227,7 @@ export const ControlledExpandableItems = ({ ...args }) => {
       >
         {(item: ExampleItemProps) => (
           <Item key={item.name} textValue={item.name}>
-            <ExampleContent text={item.name} />
+            <ExampleContent text={item.name} icon={item.icon} />
             <ExpandableChildren />
           </Item>
         )}
@@ -257,12 +266,12 @@ export const InfiniteLoadingList = args => {
         fetch(cursor || `https://swapi.dev/api/people/?search=${filterText}`, {
           signal,
         }),
-        new Promise((_resolve, reject) => setTimeout(() => reject(new Error('timeout')), 3000),
+        new Promise((_resolve, reject) => setTimeout(() => reject(new Error('timeout')), 8000),
         ),
       ]) as Response;
       const json = await res.json();
       // The API is too fast sometimes, so make it take longer so we can see the loader
-      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+      await new Promise(resolve => setTimeout(resolve, cursor ? 8000 : 8000));
 
       return {
         items: json.results,
@@ -297,7 +306,7 @@ export const InfiniteLoadingList = args => {
       <ListView
         {...actions}
         items={(list.items as Iterable<ExampleItemProps>)}
-        loadingState={list.loadingState}
+        loadingState="loadingMore"
         onLoadMore={list.loadMore}
       >
         {(item: ExampleItemProps) => (
@@ -309,6 +318,9 @@ export const InfiniteLoadingList = args => {
               }}
               iconProps={{
                 color: 'text.secondary',
+              }}
+              iconWrapperProps={{
+                color: 'cyan',
               }}
             >
               <Controls />
@@ -351,6 +363,9 @@ export const WithCharts = ({ ...args }) => {
             }}
             iconProps={{
               color: 'text.secondary',
+            }}
+            iconWrapperProps={{
+              color: 'cyan',
             }}
           >
             <ListViewItemChart
@@ -429,6 +444,9 @@ export const OnLoadPrev = () => {
               data={{
                 text: item.name,
                 icon: FormSelectIcon,
+              }}
+              iconWrapperProps={{
+                color: 'cyan',
               }}
             >
               <Controls />

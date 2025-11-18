@@ -23,7 +23,6 @@ export default {
   title: 'Form/ArrayField',
   component: ArrayField,
   parameters: {
-    codesandbox: false,
     actions: {
       argTypesRegex: '^on.*',
     },

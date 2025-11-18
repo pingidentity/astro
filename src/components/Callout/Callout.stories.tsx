@@ -35,11 +35,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Callout', 'Link', 'Text'],
-      },
-    },
   },
 } as Meta;
 
@@ -168,16 +163,27 @@ Warning.parameters = {
   },
 };
 
+const iconContainer = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 25,
+  height: 25,
+  minWidth: 25,
+  minHeight: 25,
+  borderStyle: 'solid',
+  borderRadius: '50%',
+  backgroundColor: 'active',
+  borderColor: 'active',
+  color: 'text.primaryLight',
+  mx: 'md',
+};
+
 export const WithCustomIcon: StoryFn = () => (
   <Callout
     icon={(
       <Box
-        variant="stepper.step.completed"
-        mx="md"
-        minHeight={25}
-        minWidth={25}
-        height={25}
-        width={25}
+        sx={iconContainer}
       >
         <Icon
           icon={CheckBoldIcon}

@@ -22,11 +22,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['CollapsiblePanel'],
-      },
-    },
   },
   argTypes: {
     listTitle: {},
@@ -52,6 +47,8 @@ export const Default: StoryFn<CollapsiblePanelProps<object>> = (
 ) => (
   <CollapsiblePanel
     {...args}
+    listTitle="Panel Title"
+    selectedFilterCount={1000}
   />
 );
 

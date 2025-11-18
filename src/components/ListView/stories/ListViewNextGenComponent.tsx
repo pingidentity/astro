@@ -130,6 +130,9 @@ export const ListViewNextGen = () => {
                 iconProps={{
                   color: 'text.secondary',
                 }}
+                iconWrapperProps={{
+                  color: 'cyan',
+                }}
               >
                 <ListViewItemChart
                   containerRef={chartContainerRef}

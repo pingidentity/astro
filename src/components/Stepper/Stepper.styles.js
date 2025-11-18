@@ -9,21 +9,51 @@ const tabs = {
   outline: 'none',
   borderBottom: 'none',
   mb: 0,
-  width: '100%',
   justifyContent: 'center',
+  '&.is-horizontal': {
+    width: '100%',
+  },
+  '&.is-vertical': {
+    minWidth: '217px',
+    borderRight: '1px solid #e4e6e9',
+  },
+};
+
+export const verticalLine = {
+  '&:before': {
+    position: 'absolute',
+    content: '""',
+    borderLeft: '2px solid',
+    borderLeftColor: 'neutral.80',
+    left: '27px',
+    top: '28px',
+    height: '26px',
+  },
 };
 
 const tab = {
-  mb: 0,
-  mr: 0,
-  outline: 'none',
-  '&.is-focused': {
-    borderRadius: '50%',
-    ...defaultFocus,
+  '&.is-horizontal': {
+    mb: 0,
+    mr: 0,
+    outline: 'none',
+    '&.is-focused': {
+      borderRadius: '50%',
+      ...defaultFocus,
+    },
+    '&:not(:first-of-type)': {
+      flex: 1,
+      maxWidth: 122,
+    },
   },
-  '&:not(:first-of-type)': {
-    flex: 1,
-    maxWidth: 122,
+  '&.is-vertical': {
+    position: 'relative',
+    height: '42px',
+    width: '100%',
+    py: '12px',
+    px: '20px',
+    ':focus-visible:not(.is-focused)': {
+      outline: 'none',
+    },
   },
 };
 
@@ -37,19 +67,20 @@ const outerWrapper = {
 
 /** Step styles */
 const stepBase = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   width: 32,
   height: 32,
   minWidth: 32,
   minHeight: 32,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
   borderWidth: 1,
   borderStyle: 'solid',
   borderRadius: '50%',
   fontSize: '17px',
   fontWeight: 3,
   cursor: 'pointer',
+  fontFamily: 'standard',
   '&[aria-expanded="true"]': {
     backgroundColor: 'active',
     borderColor: 'active',
@@ -57,24 +88,55 @@ const stepBase = {
   },
 };
 
+const stepBaseVertical = {
+  ...stepBase,
+  width: 16,
+  height: 16,
+  minWidth: 16,
+  minHeight: 16,
+
+};
+
 const step = {
   active: {
-    backgroundColor: 'accent.99',
-    borderColor: 'active',
-    color: 'active',
-    ...stepBase,
+    '&.is-horizontal': {
+      backgroundColor: 'accent.99',
+      borderColor: 'active',
+      color: 'active',
+      ...stepBase,
+    },
+    '&.is-vertical': {
+      ...stepBaseVertical,
+      backgroundColor: '#fff',
+      border: '4px solid',
+      borderColor: 'active',
+    },
   },
   completed: {
-    backgroundColor: 'active',
-    borderColor: 'active',
-    color: 'text.primaryLight',
-    ...stepBase,
+    '&.is-horizontal': {
+      backgroundColor: 'active',
+      borderColor: 'active',
+      color: 'text.primaryLight',
+      ...stepBase,
+    },
+    '&.is-vertical': {
+      backgroundColor: 'active',
+      borderColor: 'transparent',
+      ...stepBaseVertical,
+    },
   },
   inactive: {
-    backgroundColor: 'white',
-    borderColor: 'neutral.80',
-    color: 'neutral.40',
-    ...stepBase,
+    '&.is-horizontal': {
+      backgroundColor: 'white',
+      borderColor: 'neutral.80',
+      color: 'neutral.40',
+      ...stepBase,
+    },
+    '&.is-vertical': {
+      ...stepBaseVertical,
+      backgroundColor: '#caced3',
+      border: '4px solid #fff',
+    },
   },
 };
 

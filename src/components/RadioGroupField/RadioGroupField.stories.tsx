@@ -21,14 +21,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'RadioField',
-          'RadioGroupField',
-        ],
-      },
-    },
   },
   argTypes: {
     label: {

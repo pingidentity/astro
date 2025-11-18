@@ -43,7 +43,7 @@ export const thumb = {
   transitionTimingFunction: 'ease-out',
   transitionDuration: '0.1s',
   transform: 'translateX(0)',
-  'label.is-selected &': {
+  '&.is-selected': {
     transform: 'translateX(20px)',
     borderColor: 'active',
   },

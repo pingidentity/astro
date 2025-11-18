@@ -2,10 +2,12 @@ import AlertCircleOutlineIcon from '@pingux/mdi-react/AlertCircleOutlineIcon';
 import AlertOutlineIcon from '@pingux/mdi-react/AlertOutlineIcon';
 import ArrowDownIcon from '@pingux/mdi-react/ArrowDownIcon';
 import ArrowUpIcon from '@pingux/mdi-react/ArrowUpIcon';
+import DefaultCircle from '@pingux/mdi-react/CheckboxBlankCircleOutlineIcon';
 import CheckCircleOutlineIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import ChevronUpIcon from '@pingux/mdi-react/ChevronUpIcon';
 import CloseOctagonOutlineIcon from '@pingux/mdi-react/CloseOctagonOutlineIcon';
+import CreateOutlineIcon from '@pingux/mdi-react/CreateOutlineIcon';
 import DotsHorizontalIcon from '@pingux/mdi-react/DotsHorizontalIcon';
 import InformationOutlineIcon from '@pingux/mdi-react/InformationOutlineIcon';
 
@@ -13,6 +15,11 @@ import { pingLogoHorizontalSmall } from '../../../../utils/devUtils/constants/lo
 import statuses, { statusIcon } from '../../../../utils/devUtils/constants/statuses';
 
 export default {
+  ErrorCircle: AlertCircleOutlineIcon,
+  WarningIcon: AlertOutlineIcon,
+  DefaultCircle,
+  SuccessCircle: CheckCircleOutlineIcon,
+  CreateIcon: CreateOutlineIcon,
   MenuDown: ChevronDownIcon,
   MenuUp: ChevronUpIcon,
   [statuses.DEFAULT]: InformationOutlineIcon,

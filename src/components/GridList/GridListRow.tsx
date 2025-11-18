@@ -12,7 +12,8 @@ const GridListRow = forwardRef<HTMLElement, GridListRowProps>((props, ref) => {
   const rowRef = useLocalOrForwardRef<HTMLElement>(ref);
   const buttonRef = React.useRef(null);
   const cellRef = React.useRef(null);
-  const { dragState, dropState, isReorderable, item, state } = props;
+  const { rowProps: customRowProps, cellProps,
+    dragState, dropState, isReorderable, item, state } = props;
   const {
     rowProps,
     gridCellProps,
@@ -40,29 +41,31 @@ const GridListRow = forwardRef<HTMLElement, GridListRowProps>((props, ref) => {
         variant="gridList.rowContainer"
         isRow
         ref={rowRef}
+        {...customRowProps}
+        flexGrow="1"
       >
         {isReorderable
           && (
-          <Box isRow sx={{ alignItems: 'center', mr: 'xs' }}>
-            <IconButton ref={buttonRef} {...buttonProps} sx={{ pointerEvents: 'none' }}>
-              <Icon icon={DragIcon} />
-            </IconButton>
-          </Box>
+            <Box isRow sx={{ alignItems: 'center', mr: 'xs' }}>
+              <IconButton ref={buttonRef} {...buttonProps} sx={{ pointerEvents: 'none' }}>
+                <Icon icon={DragIcon} />
+              </IconButton>
+            </Box>
           )}
-        <Box {...gridCellProps} isRow sx={{ alignItems: 'center' }}>
+        <Box {...gridCellProps} isRow alignItems="center" {...cellProps}>
           {item.rendered}
         </Box>
       </Box>
 
       {state.collection.getKeyAfter(item.key) == null
-          && (
-            <InsertionIndicator
-              key={`${item.key}-after`}
-              target={{ type: 'item', key: item.key, dropPosition: 'after' }}
-              dropState={dropState}
-              collectionRef={colRef}
-            />
-          )}
+        && (
+          <InsertionIndicator
+            key={`${item.key}-after`}
+            target={{ type: 'item', key: item.key, dropPosition: 'after' }}
+            dropState={dropState}
+            collectionRef={colRef}
+          />
+        )}
     </>
   );
 });

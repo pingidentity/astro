@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Cell, Column, Row, TableBase, TBody, THead } from '../../..';
+import { Card, Cell, Column, Row, TableBase, TBody, THead } from '../../..';
 
 const NextGenTableBase = () => {
   const headers = [
@@ -47,29 +47,31 @@ const NextGenTableBase = () => {
   ];
 
   return (
-    <TableBase
-      caption="Lorem ipsum"
-      aria-label="table"
-    >
-      <THead columns={headers}>
-        {column => (
-          <Column key={column.key}>
-            {column.name}
-          </Column>
-        )}
-      </THead>
-      <TBody items={objects}>
-        {item => (
-          <Row key={item.id}>
-            {columnKey => (
-              <Cell>
-                {item[columnKey]}
-              </Cell>
-            )}
-          </Row>
-        )}
-      </TBody>
-    </TableBase>
+    <Card variant="cards.tableWrapper" overflow="unset">
+      <TableBase
+        caption="Lorem ipsum"
+        aria-label="table"
+      >
+        <THead columns={headers}>
+          {column => (
+            <Column key={column.key}>
+              {column.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={objects}>
+          {item => (
+            <Row key={item.id}>
+              {columnKey => (
+                <Cell>
+                  {item[columnKey]}
+                </Cell>
+              )}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
   );
 };
 

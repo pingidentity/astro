@@ -1,10 +1,10 @@
 import React from 'react';
-import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
 import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { useGetTheme } from '../../hooks';
 import {
   Box,
   Button,
@@ -36,13 +36,6 @@ export default {
           <DocsLayout />
         </>
       ),
-    },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Button', 'Icon', 'Text'],
-        '@pingux/mdi-react/PlusIcon': 'PlusIcon',
-        '@pingux/mdi-react/CreateIcon': 'CreateIcon',
-      },
     },
   },
 } as Meta;
@@ -170,6 +163,10 @@ Disabled.parameters = {
 export const ColorBlockButton = args => {
   // Change `isConfigured` property in storybook controls
   const { isConfigured, ...props } = args;
+
+  const { icons } = useGetTheme();
+
+  const { CreateIcon } = icons;
 
   return (
     <Box>

@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 
+import { useGetTheme } from '../../hooks';
 import { Box } from '../../index';
 import { IconBadgeProps } from '../../types';
 
@@ -14,6 +15,8 @@ const IconBadge = forwardRef<HTMLElement, IconBadgeProps>((props, ref) => {
   } = props;
 
   const [firstIcon, secondIcon] = React.Children.toArray(children);
+
+  const { iconBadgeCircleColor } = useGetTheme();
 
   return (
     <Box
@@ -41,7 +44,7 @@ const IconBadge = forwardRef<HTMLElement, IconBadgeProps>((props, ref) => {
           width: `${circleSize}px`,
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: circleColor,
+          backgroundColor: circleColor || iconBadgeCircleColor,
         }}
       >
         {secondIcon}
@@ -49,9 +52,5 @@ const IconBadge = forwardRef<HTMLElement, IconBadgeProps>((props, ref) => {
     </Box>
   );
 });
-
-IconBadge.defaultProps = {
-  circleColor: 'white',
-};
 
 export default IconBadge;

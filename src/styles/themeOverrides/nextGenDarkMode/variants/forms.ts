@@ -27,6 +27,15 @@ export const checkbox = {
   color: 'text.primary',
 };
 
+const label = {
+  radioGroup: {
+    color: 'white',
+  },
+  radio: {
+    color: 'white',
+  },
+};
+
 const selectOption = {
   backgroundColor: 'background.base',
   color: 'text.primary',
@@ -44,14 +53,24 @@ const selectOption = {
   },
 };
 
+const switchable = {
+  thumb: {
+    '&.is-selected': {
+      bg: 'black',
+    },
+  },
+};
+
 export default {
   input,
   checkbox,
   radio,
+  label,
   select: {
     ...select,
     option: {
       ...selectOption,
     },
   },
+  switch: switchable,
 };

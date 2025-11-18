@@ -29,6 +29,7 @@ export type PanelSize = 'small' | 'medium' | 'large' | 'full' | 'custom';
 export type ModalSizeProps = 'extra-small' | 'small' | 'medium' | 'large' | 'full';
 
 type IconTShirtSize = 'xxs' | 'xs' | 'sm' | 'md';
+type LoaderTShirtSize = 'sm' | 'md' | 'lg';
 
 type IconSizeRange = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type NextGenIconTShirtSize = `icon-${IconSizeRange}`;
@@ -36,6 +37,7 @@ type NextGenIconTShirtSize = `icon-${IconSizeRange}`;
 type pixelSize = 'em' | 'px' | 'rem'
 
 export type IconSize = IconTShirtSize| NextGenIconTShirtSize | number | `${number}${pixelSize}`;
+export type LoaderSize = LoaderTShirtSize | number | `${number}${pixelSize}`;
 
 export type overflowWrap = 'normal' | 'break-word' | 'anywhere' | 'inherit' | 'initial' | 'revert' | 'revert-layer' | 'unset';
 export type wordBreak = 'normal' | 'break-all' | 'keep-all' | 'break-word' | 'initial' | 'inherit';

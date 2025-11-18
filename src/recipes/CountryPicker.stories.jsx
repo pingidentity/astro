@@ -14,9 +14,6 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 export default {
   title: 'Recipes/Country Picker',
   decorators: [withDesign],
-  parameters: {
-    codesandbox: false,
-  },
 };
 
 const validatePhoneNumber = str => {

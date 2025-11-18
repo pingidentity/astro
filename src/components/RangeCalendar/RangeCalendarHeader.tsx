@@ -22,7 +22,14 @@ const RangeCalendarHeader: React.FC<RangeCalendarHeaderProps> = props => {
 
   // to remove warning for unknown event handler property `onFocusChange`.
   delete prevButtonProps.onFocusChange;
-  delete nextButtonProps.onFocusChange;
+  // Removes warning without Safari losing Spectrum’s focus management
+  const { onFocusChange, ...otherNextButtonProps } = nextButtonProps;
+
+  /* istanbul ignore next */
+  const nextButtonFocusProps = {
+    onFocus: () => onFocusChange?.(true),
+    onBlur: () => onFocusChange?.(false),
+  };
 
   return (
     <Box variant="rangeCalendar.calendarHeaderContainer" isRow>
@@ -68,7 +75,8 @@ const RangeCalendarHeader: React.FC<RangeCalendarHeaderProps> = props => {
           style={{ position: 'absolute', right: '10px' }}
         >
           <IconButton
-            {...nextButtonProps}
+            {...otherNextButtonProps}
+            {...nextButtonFocusProps}
             aria-label="Next month navigation"
           >
             <Icon icon={ChevronRightIcon} size={25} title={{ name: 'Chevron Right Icon' }} />

@@ -8,7 +8,7 @@ import { ListLayout } from '@react-stately/layout';
 
 import useLoadPrev from '../../hooks/useLoadPrev';
 import { Box } from '../../index';
-import { ListViewProps, ListViewState } from '../../types/listView';
+import { ListViewItemTypes, ListViewProps, ListViewState } from '../../types/listView';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import Loader from '../Loader';
 
@@ -39,7 +39,7 @@ export function useListLayout(state) {
   return layout;
 }
 
-const ListView = forwardRef((props: ListViewProps, ref) => {
+const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>, ref) => {
   const {
     containerProps,
     disabledKeys,
@@ -81,7 +81,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
   const state = useTreeState({
     ...props,
     selectionMode: selectionMode === 'expansion' ? 'single' : selectionMode,
-  }) as ListViewState<ExampleItemProps>;
+  }) as ListViewState<T>;
 
   state.hover = {
     hoveredItem,
@@ -169,7 +169,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
                   <ListViewExpandableItem
                     isHoverable={isHoverable}
                     isFocusable={isFocusable}
-                    item={item}
+                    item={item as ListViewItemTypes<T>}
                   />
                 );
               }
@@ -177,7 +177,7 @@ const ListView = forwardRef((props: ListViewProps, ref) => {
                 <ListViewItem
                   isHoverable={isHoverable}
                   isFocusable={isFocusable}
-                  item={item}
+                  item={item as ListViewItemTypes<T>}
                 />
               );
             } if (type === collectionTypes.LOADER) {

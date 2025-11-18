@@ -23,11 +23,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Bracket'],
-      },
-    },
   },
   argTypes: {
     isLast: {

@@ -9,7 +9,7 @@ export const fontSizes = {
     'lg': `calc(${sizes.avatar.lg} * .4)`,
     'xl': `calc(${sizes.avatar.xl} * .4)`,
   },
-  'xs': `${fontSizeBase * 0.8}rem`,
+  'xs': '11px',
   'sm': '0.875rem',
   'md': `${fontSizeBase * 1}rem`,
   'lg': `${fontSizeBase * 1.25}rem`,
@@ -21,7 +21,7 @@ export const fontSizes = {
 export const fontWeights = {
   [-1]: 300,
   0: 400,
-  1: 400,
+  1: 500,
   2: 600,
-  3: 600,
+  3: 700,
 };

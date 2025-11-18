@@ -6,6 +6,7 @@ import { TreeState } from '@react-stately/tree';
 import type { AriaAccordionProps } from '@react-types/accordion';
 
 import { AccordionContext } from '../../context/AccordionContext';
+import { useGetTheme } from '../../hooks';
 import { Box } from '../../index';
 import { BoxProps } from '../../types/box';
 import AccordionItem from '../AccordionItem';
@@ -23,10 +24,12 @@ interface AccordionProps extends Omit<TreeProps<object>, 'onExpandedChange'> {
 
 const AccordionGroup = forwardRef((props: AccordionProps, ref) => {
   const {
-    labelHeadingTag = 'span',
+    labelHeadingTag,
     onExpandedChange,
     ...others
   } = props;
+
+  const { accordionItemDefaultLabelTag } = useGetTheme();
 
   const state = useTreeState(props as TreeProps<object>) as TreeState<object>;
   const accordionRef = useRef(null);
@@ -63,7 +66,7 @@ const AccordionGroup = forwardRef((props: AccordionProps, ref) => {
             data-id={item['data-id']}
             item={item}
             key={item.key}
-            labelHeadingTag={labelHeadingTag}
+            labelHeadingTag={labelHeadingTag || accordionItemDefaultLabelTag}
           >
             {item.props.children}
           </AccordionItem>

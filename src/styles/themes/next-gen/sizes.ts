@@ -1,8 +1,15 @@
 const avatar = {
   sm: '24px',
-  md: '34px',
+  md: '32px',
   lg: '72px',
   xl: '104px',
+};
+
+const avatarFontSize = {
+  sm: '9.6px',
+  md: '13.6px',
+  lg: '28.8px',
+  xl: '41.6px',
 };
 
 const iconBadge = {
@@ -26,6 +33,7 @@ const icons = {
 
 export default {
   avatar,
+  avatarFontSize,
   container,
   iconBadge,
   icons,

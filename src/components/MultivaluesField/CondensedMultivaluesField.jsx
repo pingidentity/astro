@@ -1,7 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { DismissButton, FocusScope, mergeProps, useOverlayPosition } from 'react-aria';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
-import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useFilter } from '@react-aria/i18n';
 import { useFocusWithin } from '@react-aria/interactions';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
@@ -11,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
-import { useInputLoader, usePropWarning } from '../../hooks';
+import { useGetTheme, useInputLoader, usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -63,15 +61,24 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const [filterString, setFilterString] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [hasFocusWithin, setFocusWithin] = useState(false);
-
+  const [initialItems, setInitialItems] = useState([]);
   const [activeDescendant, setActiveDescendant] = useState('');
 
   const inputWrapperRef = useRef();
   const inputRef = useRef();
   const buttonRef = useRef();
 
+  const { icons } = useGetTheme();
+  const {
+    MenuDown,
+    MenuUp,
+  } = icons;
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
-  const { showLoading } = useInputLoader({ loadingState, inputValue: filterString });
+  const { isLoading } = useInputLoader({ loadingState, inputValue: filterString });
+
+  useEffect(() => {
+    setInitialItems(Array.from(items));
+  }, []);
 
   const toggleItems = keys => {
     if (onSelectionChange) onSelectionChange(keys);
@@ -233,7 +240,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const [selectionState, setSelectionState] = useState('Select All');
 
   const arrayItems = Array.from(items);
-  const itemCount = arrayItems.reduce((count, obj) => count + (
+  const itemCount = initialItems.reduce((count, obj) => count + (
     obj.children ? obj.children.length : 1
   ), 0);
 
@@ -275,7 +282,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
       <Button
         onPress={handleSelection}
         ref={buttonRef}
-        variant="link"
+        variant="listBoxLink"
         mt="sm"
         ml="14px"
         sx={{ fontWeight: '400' }}
@@ -360,7 +367,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
       // Render loader after delay if filtering or loading
-      showLoading && (isOpen || loadingState === loadingStates.LOADING)
+      isLoading && (isOpen || loadingState === loadingStates.LOADING)
       && <Loader variant="loader.withinInput" />
     }
       <Box as="button" variant="forms.comboBox.button" tabIndex={-1} onClick={handleButtonPress} sx={{ border: 'none' }}>

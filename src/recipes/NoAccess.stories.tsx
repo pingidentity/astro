@@ -12,9 +12,6 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 export default {
   title: 'Recipes/No Access',
   decorators: [withDesign],
-  parameters: {
-    codesandbox: false,
-  },
 } as Meta;
 
 export const Default = () => {

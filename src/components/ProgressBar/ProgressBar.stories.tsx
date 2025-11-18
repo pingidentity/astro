@@ -35,7 +35,7 @@ export default {
         disable: true,
       },
     },
-    showValueLabel: {
+    shouldShowValueLabel: {
       table: {
         disable: true,
       },

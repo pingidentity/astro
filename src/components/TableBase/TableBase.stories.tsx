@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { Selection } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
@@ -8,11 +8,13 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Badge,
   Box,
+  Card,
   Cell,
   Column,
   Pagination,
   PaginationProvider,
   Row,
+  SearchField,
   TableBase,
   TBody,
   Text,
@@ -92,18 +94,20 @@ const statusVariant = {
 
 export const Default: StoryFn<TableBaseProps<object>> = () => {
   return (
-    <TableBase caption="Lorem ipsum" aria-label="table">
-      <THead columns={headers}>
-        {column => <Column key={column.key}>{column.name}</Column>}
-      </THead>
-      <TBody items={objects}>
-        {item => (
-          <Row key={item.id}>
-            {columnKey => <Cell>{item[columnKey]}</Cell>}
-          </Row>
-        )}
-      </TBody>
-    </TableBase>
+    <Card variant="cards.tableWrapper">
+      <TableBase caption="Lorem ipsum" aria-label="table">
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={objects}>
+          {item => (
+            <Row key={item.id}>
+              {columnKey => <Cell>{item[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
   );
 };
 
@@ -111,70 +115,68 @@ export const MultiSelection: StoryFn<TableBaseProps<object>> = () => {
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(['1', '3']));
 
   return (
-    <TableBase
-      caption="Lorem ipsum"
-      aria-label="table"
-      selectionMode="multiple"
-      selectedKeys={selectedKeys}
-      onSelectionChange={setSelectedKeys}
-    >
-      <THead columns={headers}>
-        {column => <Column key={column.key}>{column.name}</Column>}
-      </THead>
-      <TBody items={objects}>
-        {item => (
-          <Row key={item.id}>
-            {columnKey => <Cell>{item[columnKey]}</Cell>}
-          </Row>
-        )}
-      </TBody>
-    </TableBase>
+    <Card variant="cards.tableWrapper">
+      <TableBase
+        caption="Lorem ipsum"
+        aria-label="table"
+        selectionMode="multiple"
+        selectedKeys={selectedKeys}
+        onSelectionChange={setSelectedKeys}
+      >
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={objects}>
+          {item => (
+            <Row key={item.id}>
+              {columnKey => <Cell>{item[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
   );
 };
 
 export const WithStickyHeader: StoryFn<TableBaseProps<object>> = () => {
   return (
-    <TableBase
-      aria-label="table"
-      isStickyHeader
-      selectionMode="single"
-      defaultSelectedKeys={['2']}
-      disabledKeys={['3']}
-      tableBodyProps={{ style: { height: '300px' } }}
-    >
-      <THead>
-        <Column width={200}>Name</Column>
-        <Column width={300}>Email</Column>
-        <Column width={150}>Status</Column>
-        <Column width="1fr">Bio</Column>
-      </THead>
-      <TBody items={listData}>
-        {item => (
-          <Row key={item.id}>
-            <Cell>
-              <>
+    <Card variant="cards.tableWrapper" height="400px">
+      <TableBase
+        aria-label="table"
+        isStickyHeader
+        selectionMode="single"
+        defaultSelectedKeys={['2']}
+        disabledKeys={['3']}
+      >
+        <THead>
+          <Column minWidth={200}>Name</Column>
+          <Column minWidth={300}>Email</Column>
+          <Column minWidth={150}>Status</Column>
+          <Column>Bio</Column>
+        </THead>
+        <TBody items={listData}>
+          {item => (
+            <Row key={item.id}>
+              <Cell>
                 {`${item.firstName} ${item.lastName}`}
-                {' '}
-                {item.id}
-              </>
-            </Cell>
-            <Cell>{item.email}</Cell>
-            <Cell>
-              <Badge
-                variant={statusVariant[item.status]}
-                label={item.status}
-              />
-            </Cell>
-            <Cell>
-              <Text variant="textEllipsis">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-                quidem accusantium architecto tempore facere!
-              </Text>
-            </Cell>
-          </Row>
-        )}
-      </TBody>
-    </TableBase>
+              </Cell>
+              <Cell>{item.email}</Cell>
+              <Cell>
+                <Badge
+                  variant={statusVariant[item.status]}
+                  label={item.status}
+                />
+              </Cell>
+              <Cell>
+                <Text variant="textEllipsis">
+                  Lorem ipsum dolor sit amet.
+                </Text>
+              </Cell>
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
   );
 };
 
@@ -202,12 +204,12 @@ const ExampleTable = () => {
   );
 
   return (
-    <TableBase aria-label="table">
+    <TableBase aria-label="table" className="has-pagination">
       <THead>
-        <Column width={200}>Name</Column>
-        <Column width={300}>Email</Column>
-        <Column width={150}>Status</Column>
-        <Column width="1fr">Bio</Column>
+        <Column minWidth={200}>Name</Column>
+        <Column minWidth={300}>Email</Column>
+        <Column minWidth={150}>Status</Column>
+        <Column>Bio</Column>
       </THead>
       <TBody items={renderItems}>
         {item => (
@@ -221,8 +223,7 @@ const ExampleTable = () => {
             </Cell>
             <Cell>
               <Text variant="textEllipsis">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-                quidem accusantium architecto tempore facere!
+                Lorem ipsum dolor sit amet.
               </Text>
             </Cell>
           </Row>
@@ -236,17 +237,21 @@ export const WithPagination: StoryFn<TableBaseProps<object>> = () => {
   const [offsetCount, setOffsetCount] = useState(10);
 
   return (
-    <PaginationProvider>
-      <Box gap="sm">
-        <ExampleTable />
-        <Pagination
-          totalCount={listData.length}
-          offsetCount={offsetCount}
-          onOffsetCountChange={setOffsetCount}
-          offsetOptions={[10, 20, 50, 100]}
-        />
-      </Box>
-    </PaginationProvider>
+    <Card variant="cards.tableWrapper">
+      <PaginationProvider>
+        <Box variant="cards.body" overflow="auto" p="0">
+          <ExampleTable />
+        </Box>
+        <Box variant="cards.footer">
+          <Pagination
+            totalCount={listData.length}
+            offsetCount={offsetCount}
+            onOffsetCountChange={setOffsetCount}
+            offsetOptions={[10, 20, 50, 100]}
+          />
+        </Box>
+      </PaginationProvider>
+    </Card>
   );
 };
 
@@ -316,41 +321,43 @@ export const DynamicWithSorting = () => {
   });
 
   return (
-    <TableBase
-      aria-label="Dynamic table"
-      onSortChange={descriptor => {
-        if (descriptor.column) {
-          list.sort(descriptor);
-        }
-      }}
-      sortDescriptor={list.sortDescriptor}
-    >
-      <THead columns={columns}>
-        {column => (
-          <Column
-            minWidth={155}
-            allowsSorting
-          >
-            {column.name}
-          </Column>
-        )}
-      </THead>
-      <TBody
-        items={list.items as Iterable<{ name: string }>}
-        loadingState={list.loadingState}
-        onLoadMore={list.loadMore}
+    <Card variant="cards.tableWrapper">
+      <TableBase
+        aria-label="Dynamic table"
+        onSortChange={descriptor => {
+          if (descriptor.column) {
+            list.sort(descriptor);
+          }
+        }}
+        sortDescriptor={list.sortDescriptor}
       >
-        {(item: { name: string }) => (
-          <Row key={item.name}>
-            {columnKey => (
-              <Cell>
-                {item[columnKey]}
-              </Cell>
-            )}
-          </Row>
-        )}
-      </TBody>
-    </TableBase>
+        <THead columns={columns}>
+          {column => (
+            <Column
+              minWidth={155}
+              allowsSorting
+            >
+              {column.name}
+            </Column>
+          )}
+        </THead>
+        <TBody
+          items={list.items as Iterable<{ name: string }>}
+          loadingState={list.loadingState}
+          onLoadMore={list.loadMore}
+        >
+          {(item: { name: string }) => (
+            <Row key={item.name}>
+              {columnKey => (
+                <Cell>
+                  {item[columnKey]}
+                </Cell>
+              )}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
   );
 };
 

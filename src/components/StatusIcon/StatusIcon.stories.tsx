@@ -33,20 +33,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'RockerButton',
-          'RockerButtonGroup',
-          'StatusIcon',
-          'Table',
-          'TableBody',
-          'TableCell',
-          'TableRow',
-          'Text',
-        ],
-      },
-    },
   },
 } as Meta;
 

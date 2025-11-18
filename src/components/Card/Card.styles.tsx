@@ -90,6 +90,9 @@ const tableWrapper = {
   ...container,
   padding: 0,
   boxShadow: 'none',
+  overflow: 'auto',
+  scrollPaddingTop: '50px',
+  scrollPaddingBottom: '20px',
 };
 
 export default {

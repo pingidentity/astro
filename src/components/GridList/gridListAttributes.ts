@@ -6,7 +6,8 @@ export const gridListArgTypes = {
     },
   },
   selectedKeys: {
-    description: 'The array of keys that is currently selected. (Controlled version).',
+    description:
+      'The array of keys that is currently selected. (Controlled version).',
     control: {
       disable: true,
     },
@@ -18,7 +19,8 @@ export const gridListArgTypes = {
     },
   },
   defaultSelectedKeys: {
-    description: 'The array of keys that is selected by default. (Uncontrolled version).',
+    description:
+      'The array of keys that is selected by default. (Uncontrolled version).',
     control: {
       disable: true,
     },
@@ -29,13 +31,13 @@ export const gridListArgTypes = {
       disable: true,
     },
   },
-  allowDuplicateSelectionEvents: {
+  shouldAllowDuplicateSelectionEvents: {
     description: 'Whether duplicate selection events are allowed.',
     control: {
       type: 'boolean',
     },
   },
-  autoFocus: {
+  hasAutoFocus: {
     description: 'Whether the grid should automatically focus on mount.',
     control: {
       type: 'boolean',
@@ -60,13 +62,13 @@ export const gridListArgTypes = {
       options: ['all', 'selection'],
     },
   },
-  disallowEmptySelection: {
+  shouldDisallowEmptySelection: {
     description: 'Whether empty selection is disallowed.',
     control: {
       type: 'boolean',
     },
   },
-  disallowTypeAhead: {
+  shouldDisallowTypeAhead: {
     description: 'Whether type-ahead functionality is disabled.',
     control: {
       type: 'boolean',
@@ -130,7 +132,8 @@ export const gridListArgTypes = {
     },
   },
   onAction: {
-    description: 'A callback function that fires when an action is performed on an item.',
+    description:
+      'A callback function that fires when an action is performed on an item.',
     control: {
       disable: true,
     },
@@ -156,7 +159,8 @@ export const gridListArgTypes = {
     },
   },
   shouldFocusWrap: {
-    description: 'Whether focus should wrap around when navigating with the keyboard.',
+    description:
+      'Whether focus should wrap around when navigating with the keyboard.',
     control: {
       type: 'boolean',
     },

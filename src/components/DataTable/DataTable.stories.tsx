@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { getAllUsers } from '../../api/users';
 import {
   Box,
   DataTable,
@@ -16,6 +17,10 @@ import {
   DataTableMenu,
   DataTableRow,
 } from '../../index';
+import { LIMIT } from '../../mocks/constants';
+import { UserType } from '../../mocks/types/users';
+import { loadingState, SortDescriptor as TableSortDescriptor } from '../../types';
+import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import DataTableReadme from './DataTable.mdx';
@@ -32,7 +37,6 @@ export default {
         </>
       ),
     },
-    codesandbox: false,
   },
   argTypes: {
     density: {
@@ -462,7 +466,7 @@ Dynamic.parameters = {
 };
 
 export const Sortable = args => {
-  const [firstSortFlag, setFirstSortFlag] = useState(true);
+  const [hasFirstSortFlag, setFirstSortFlag] = useState(true);
 
   const columns = [
     { name: 'Country', key: 'country', isSortable: true },
@@ -515,14 +519,14 @@ export const Sortable = args => {
   });
 
   useEffect(() => {
-    if (firstSortFlag && !list.isLoading && list.items.length > 0) {
+    if (hasFirstSortFlag && !list.isLoading && list.items.length > 0) {
       list.sort({
         column: 'country',
         direction: 'ascending',
       });
       setFirstSortFlag(false);
     }
-  }, [firstSortFlag, list, list.isLoading, list.items]);
+  }, [hasFirstSortFlag, list, list.isLoading, list.items]);
 
   return (
     <DataTable
@@ -707,40 +711,59 @@ ControlledSelection.parameters = {
 };
 
 export const AsyncLoading = args => {
-  /**
-   * isChromatic checks if the code is running in Chromatic environment
-   * @returns {Boolean}
-   * Source: https://www.chromatic.com/docs/ischromatic
-   * */
-
   const columns = [
-    { name: 'Name', key: 'name' },
-    { name: 'Height', key: 'height' },
-    { name: 'Mass', key: 'mass' },
-    { name: 'Birth Year', key: 'birth_year' },
+    { name: 'Name', key: 'name', isSortable: false },
+    { name: 'Username', key: 'username', isSortable: true },
+    { name: 'Email', key: 'email', isSortable: true },
+    { name: 'Updated At', key: 'updatedAt', isSortable: true },
   ];
 
-  const list = useAsyncList({
-    async load({ signal, cursor }) {
-      if (cursor) {
-        // eslint-disable-next-line no-param-reassign
-        cursor = cursor.replace(/^http:\/\//i, 'https://');
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(LIMIT);
+  const [dataSize, setDataSize] = useState(0);
+  const [loading, setLoading] = useState<loadingState>(loadingStates.LOADING);
+  const [sortDescriptor, setSortDescriptor] = useState<TableSortDescriptor | undefined>(undefined);
+
+  const fetchData = useCallback(async (currentLimit: number) => {
+    try {
+      const response = await getAllUsers(currentLimit, '', 3000);
+      const json = await response.json();
+
+      if (response.ok) {
+        setData(json.body._embedded.users || []);
+        setDataSize(json.body.count);
       }
+      setLoading(loadingStates.IDLE);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setLoading(loadingStates.ERROR);
+    }
+  }, []);
 
-      const res = await fetch(
-        cursor || 'https://swapi.py4e.com/api/people/?search=',
-        { signal },
-      );
-      const json = await res.json();
+  const handleLoadMore = () => {
+    if (limit >= dataSize) return;
+    setLoading(loadingStates.LOADING_MORE);
+    setLimit(prev => prev + LIMIT);
+  };
 
-      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+  useEffect(() => {
+    fetchData(limit);
+  }, [fetchData, limit]);
 
-      return {
-        items: json.results,
-        cursor: json.next,
-      };
-    },
-  });
+  const handleSortChange = (descriptor: TableSortDescriptor) => {
+    const { direction = 'ascending', column = 'username' } = descriptor;
+
+    const sorted = data.slice().sort((a, b) => {
+      let cmp = a[column] < b[column] ? -1 : 1;
+      if (direction === 'descending') {
+        cmp *= -1;
+      }
+      return cmp;
+    });
+
+    setData([...sorted]);
+    setSortDescriptor(descriptor);
+  };
 
   return (
     <DataTable
@@ -749,28 +772,39 @@ export const AsyncLoading = args => {
       onAction={action('onAction')}
       density="compact"
       scale="medium"
+      sortDescriptor={sortDescriptor}
+      onSortChange={handleSortChange}
     >
       <DataTableHeader columns={columns}>
         {column => (
-          <DataTableColumn {...getCellProps(column.key, false)} minWidth={155}>
+          <DataTableColumn
+            {...getCellProps(column.key, false)}
+            minWidth={155}
+            allowsSorting={column.isSortable}
+          >
             {column.name}
           </DataTableColumn>
         )}
       </DataTableHeader>
       <DataTableBody
-        items={list.items as Iterable<{ name: string }>}
-        loadingState={list.loadingState}
-        onLoadMore={list.loadMore}
+        items={data as Iterable<UserType>}
+        loadingState={loading}
+        onLoadMore={handleLoadMore}
       >
-        {(item: { name: string }) => (
-          <DataTableRow key={item.name}>
-            {columnKey => (
-              <DataTableCell
-                {...getCellProps(columnKey, false)}
-              >
-                {item[columnKey]}
-              </DataTableCell>
-            )}
+        {(item: UserType) => (
+          <DataTableRow key={item.id}>
+            <DataTableCell {...getCellProps('name', false)}>
+              {`${item.name.given} ${item.name.family}`}
+            </DataTableCell>
+            <DataTableCell {...getCellProps('username', false)}>
+              {item.username}
+            </DataTableCell>
+            <DataTableCell {...getCellProps('email', false)}>
+              {item.email}
+            </DataTableCell>
+            <DataTableCell {...getCellProps('updatedAt', false)}>
+              {new Date(item.updatedAt).toLocaleDateString()}
+            </DataTableCell>
           </DataTableRow>
         )}
       </DataTableBody>

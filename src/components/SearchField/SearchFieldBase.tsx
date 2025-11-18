@@ -1,0 +1,109 @@
+import React, { forwardRef } from 'react';
+import type { AriaSearchFieldProps, SearchFieldAria } from 'react-aria';
+import { useSearchField } from 'react-aria';
+import type { SearchFieldProps as UseSearchFieldProps, SearchFieldState } from 'react-stately';
+import { useSearchFieldState } from 'react-stately';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
+
+import { Box, Icon, IconButton, Input, Label } from '../..';
+import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { FieldControlInputProps, UseFieldProps } from '../../hooks/useField/useField';
+import { SearchFieldProps, SearchItem } from '../../types';
+import { getPendoID } from '../../utils/devUtils/constants/pendoID';
+
+const displayName = 'SearchField';
+
+export const SearchFieldBase = forwardRef<
+  HTMLInputElement, SearchFieldProps<SearchItem>
+>((props, ref) => {
+  const {
+    autocomplete,
+    hasAutoFocus,
+    hasNoClearButton,
+    icon,
+    isExcludedFromTabOrder,
+    label,
+    controlProps,
+    iconProps,
+    labelProps,
+  } = props;
+
+  usePropWarning(props, 'disabled', 'isDisabled');
+  const searchRef = useLocalOrForwardRef<HTMLInputElement>(ref);
+
+  const state: SearchFieldState = useSearchFieldState(props as UseSearchFieldProps);
+
+  const {
+    labelProps: raLabelProps,
+    inputProps: raInputProps,
+    clearButtonProps,
+  }: SearchFieldAria = useSearchField({
+    autoComplete: autocomplete,
+    autoFocus: hasAutoFocus,
+    excludeFromTabOrder: isExcludedFromTabOrder,
+    ...props,
+  } as AriaSearchFieldProps, state, searchRef);
+
+  const {
+    fieldContainerProps,
+    fieldControlInputProps,
+    fieldControlWrapperProps,
+    fieldLabelProps,
+  } = useField({
+    ...props,
+    labelProps: {
+      ...labelProps,
+      ...raLabelProps,
+    },
+    controlProps: {
+      ...controlProps,
+      ...raInputProps,
+    },
+  } as UseFieldProps<SearchFieldProps<SearchItem>>);
+
+  const handleKeyDownEvent = e => {
+    const key = e.key;
+    if (key === 'Enter' || key === ' ') {
+      state.setValue('');
+    }
+  };
+
+  return (
+    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
+      {label && <Label {...fieldLabelProps} />}
+      <Box variant="forms.search.wrapper" {...fieldControlWrapperProps}>
+        <Input
+          variant="forms.input.search"
+          ref={searchRef}
+          {...fieldControlInputProps as Omit<FieldControlInputProps, 'onChange'>}
+        />
+        {
+          icon
+          && (
+            <Icon
+              icon={icon}
+              variant="forms.search.icon"
+              title={{ name: 'Search Icon' }}
+              {...iconProps}
+            />
+          )
+        }
+        {
+          !hasNoClearButton
+          && state.value !== ''
+          && (
+            <IconButton
+              tabIndex={0}
+              onKeyDown={handleKeyDownEvent}
+              color="text.secondary"
+              variant="searchClearButton"
+              {...clearButtonProps}
+            >
+              <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
+            </IconButton>
+          )
+        }
+      </Box>
+    </Box>
+  );
+});

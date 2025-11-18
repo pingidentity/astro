@@ -33,21 +33,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Icon',
-          'IconButton',
-          'Item',
-          'Menu',
-          'OverlayProvider',
-          'PopoverMenu',
-          'Section',
-          'Text',
-        ],
-        '@pingux/mdi-react/DotsVerticalIcon': 'DotsVerticalIcon',
-      },
-    },
   },
   argTypes: {
     align: {},
@@ -135,10 +120,6 @@ export const Controlled: StoryFn = () => {
       </PopoverMenu>
     </OverlayProvider>
   );
-};
-
-Controlled.parameters = {
-  codesandbox: false,
 };
 
 export const Placement: StoryFn = args => (

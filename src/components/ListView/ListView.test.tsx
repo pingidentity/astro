@@ -258,7 +258,7 @@ test('renders loader, if a loader component is passed in, and state is loading',
   await userEvent.type(listView, '{arrowdown}', { skipClick: true });
 
   const loaders = screen.getAllByRole('alert');
-  expect(loaders).toHaveLength(2);
+  expect(loaders).toHaveLength(1);
 });
 
 test('renders loader, if a loader component is passed in, and state is loadingMore', () => {

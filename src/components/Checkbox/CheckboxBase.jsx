@@ -36,8 +36,10 @@ const IndeterminateCheckboxIcon = props => {
 };
 
 IndeterminateCheckboxIcon.propTypes = {
+  // TODO: [Astro 3.0.0] Remove this boolean in favor of the proper naming convention - isDisabled
   // eslint-disable-next-line react/boolean-prop-naming
   disabled: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };
 
 /**

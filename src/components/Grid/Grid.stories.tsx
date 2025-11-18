@@ -19,11 +19,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Grid', 'Text'],
-      },
-    },
   },
   argTypes: {
     repeat: {

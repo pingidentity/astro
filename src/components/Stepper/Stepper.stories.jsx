@@ -53,27 +53,17 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Box',
-          'Button',
-          'OverlayPanel',
-          'OverlayProvider',
-          'PanelHeader',
-          'PanelHeaderCloseButton',
-          'Stepper',
-          'Text',
-          'Item',
-        ],
-        '@pingux/mdi-react/CreationOutlineIcon': 'CreationOutlineIcon',
-      },
-    },
   },
 };
 
 const steps = [
   { label: 'Duis Aute', children: 'Quis autem vel eum iure reprehenderit qui in ea voluptate', title: 'Duis Aute', name: 'step1' },
+  { label: 'Lorem Ipsum', children: 'Sed ut perspiciatis unde omnis', title: 'Lorem Ipsum', name: 'step2' },
+  { label: 'Excepteur Sint', children: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam', title: 'Excepteur Sint', name: 'step3' },
+];
+
+const customSteps = [
+  { label: 'Duis Aute', children: 'Quis autem vel eum iure reprehenderit qui in ea voluptate', title: 'Duis Aute', name: 'step1', isRequired: true },
   { label: 'Lorem Ipsum', children: 'Sed ut perspiciatis unde omnis', title: 'Lorem Ipsum', name: 'step2' },
   { label: 'Excepteur Sint', children: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam', title: 'Excepteur Sint', name: 'step3' },
 ];
@@ -92,6 +82,11 @@ const sx = {
   },
   buttonStyle: {
     margin: '50px 0px',
+  },
+  verticalContentContainer: {
+    marginTop: 'lg',
+    ml: 'lg',
+    gap: 'sm',
   },
 };
 
@@ -195,10 +190,6 @@ export const ControlledStepper = () => {
   );
 };
 
-ControlledStepper.parameters = {
-  codesandbox: false,
-};
-
 export const Panel = () => {
   const [activeStep, setActiveStep] = useState(1);
 
@@ -262,6 +253,27 @@ export const Panel = () => {
   );
 };
 
-Panel.parameters = {
-  codesandbox: false,
+
+export const VerticalStepper = () => {
+  const [activeStep, setActiveStep] = useState(2);
+
+
+  return (
+    <Stepper
+      items={customSteps}
+      activeStep={activeStep}
+      onStepChange={setActiveStep}
+      orientation="vertical"
+      mode="tooltipIsDisabled"
+    >
+      {item => (
+        <Item key={item.name} textValue={item.title} isRequired={item?.isRequired}>
+          <Box sx={sx.verticalContentContainer}>
+            <Text fontSize="md">{item.children}</Text>
+          </Box>
+        </Item>
+      )}
+    </Stepper>
+
+  );
 };

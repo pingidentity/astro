@@ -7,7 +7,7 @@ import { TestingAttributes } from './shared/test';
 import { DOMAttributes, OrientationProps, StyleProps } from './shared';
 
 export interface TabsProps extends StyleProps, TestingAttributes, OrientationProps {
-     /** The default tab key to be selected. (uncontrolled) */
+  /** The default tab key to be selected. (uncontrolled) */
   defaultSelectedKey?: string;
   /** Array of keys to disable within the tab list. */
   disabledKeys?: string[];
@@ -18,8 +18,8 @@ export interface TabsProps extends StyleProps, TestingAttributes, OrientationPro
   /**
    * *For performance reasons, use this prop instead of Array.map when iteratively rendering Items*.
    * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
-  */
-  items?: Array<TabListItemProps>,
+   */
+  items?: Array<TabListItemProps>;
   /** Whether the entire tablist is disabled. */
   isDisabled?: boolean;
   /** Handler that is called when the selected tab has changed. */
@@ -29,8 +29,9 @@ export interface TabsProps extends StyleProps, TestingAttributes, OrientationPro
   /** Props object that is spread directly into all of the tab panel wrapper elements. */
   tabPanelProps?: object;
   /** Whether tabs are activated automatically on focus or manually¸ */
-  keyboardActivation?: 'automatic' |'manual';
-  children?: CollectionChildren<object>
+  keyboardActivation?: 'automatic' | 'manual';
+  children?: CollectionChildren<object>;
+  className?: string;
 }
 
 export interface AriaTabListOptions<T> extends Omit<AriaTabListProps<T>, 'children'> {
@@ -44,14 +45,15 @@ export interface TabPanelProps extends StyleProps, DOMAttributes{
 }
 
 export interface TabListItemProps {
-    name?: string;
-    children?: ReactNode | string;
-    list?: Array<{
-        key?: string | number;
-        name: string;
-        children: string;
-        role?:string;
-    }>;
-    props?: object;
-    index?: number,
+  name?: string;
+  children?: ReactNode | string;
+  list?: Array<{
+    key?: string | number;
+    name: string;
+    children: string;
+    role?: string;
+  }>;
+  props?: object;
+  index?: number;
+  isRequired?: boolean;
 }

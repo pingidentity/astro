@@ -31,11 +31,6 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
   const [userFiles, setUserFiles] = useState<FileProps[] | []>([]);
   const [value, setValue] = useProgressiveState(valueProp, defaultValueProp);
 
-  const countLineBreaks = (str: string) => {
-    const lineBreaks = str.match(/\r\n|\r|\n/g);
-    return lineBreaks ? lineBreaks.length : 0;
-  };
-
   const handleFileSelect = (_event, files) => {
     const arrayWithNewFiles = Array.from(files) as FileProps[];
 
@@ -99,9 +94,8 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
 
   useEffect(() => {
     if (inputRef.current && value) {
-      const lb = countLineBreaks(value);
       inputRef.current.style.height = 'auto';
-      inputRef.current.style.height = `calc(${(lb + 1) * 24}px)`;
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     } else if (value === '') {
       inputRef.current.style.height = 'auto';
       inputRef.current.style.height = '26px';
@@ -116,7 +110,6 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
       onEnterPress(e);
     }
   };
-
 
   return (
     <Box
@@ -157,26 +150,27 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
             ref={inputRef}
             variant="forms.input.promptInput"
             data-testid="prompt-input"
+            rows={1}
             {...fieldControlInputProps}
             onKeyUp={onKeyUp}
             onKeyDown={onKeyDown}
           />
           {!isUploadButtonHidden && (
-          <Box
-            sx={{
-              mx: '.75rem',
-              mb: 'auto',
-            }}
-          >
-            <PromptUploadButton
-              isLoading={isLoading}
-              value={value}
-              onSubmit={onSubmit}
-              onCancel={onCancel}
-              {...uploadButtonProps}
-              uploadButtonContainerProps={uploadButtonContainerProps}
-            />
-          </Box>
+            <Box
+              sx={{
+                mx: '.75rem',
+                mb: 'auto',
+              }}
+            >
+              <PromptUploadButton
+                isLoading={isLoading}
+                value={value}
+                onSubmit={onSubmit}
+                onCancel={onCancel}
+                {...uploadButtonProps}
+                uploadButtonContainerProps={uploadButtonContainerProps}
+              />
+            </Box>
           )}
         </Box>
       </Box>

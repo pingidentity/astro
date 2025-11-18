@@ -18,11 +18,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Link', 'PageHeader'],
-      },
-    },
   },
   argTypes: {
     title: {

@@ -12,6 +12,7 @@ import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel
 import copyText from '../../components/CopyText/CopyText.styles';
 import dataTable from '../../components/DataTable/DataTable.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
+import expandableText from '../../components/ExpandableText/ExpandableText.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
 import footer from '../../components/Footer/Footer.styles';
 import gridList from '../../components/GridList/GridList.styles';
@@ -38,6 +39,7 @@ import rangeCalendar from '../../components/RangeCalendar/RangeCalendar.styles';
 import rockerButton from '../../components/RockerButton/RockerButton.styles';
 import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
 import separator from '../../components/Separator/Separator.styles';
+import serverErrorBoundary from '../../components/ServerErrorBoundary/ServerErrorBoundary.styles';
 import skeleton from '../../components/Skeleton/Skeleton.styles';
 import slider from '../../components/SliderField/Slider.styles';
 import statusIcon from '../../components/StatusIcon/StatusIcon.styles';
@@ -66,6 +68,7 @@ export default {
   copyText,
   dataTable,
   environmentBreadcrumb,
+  expandableText,
   fieldHelperText,
   footer,
   gridList,
@@ -91,6 +94,7 @@ export default {
   rockerButton,
   scrollBox,
   separator,
+  serverErrorBoundary,
   slider,
   stepper,
   skeleton,

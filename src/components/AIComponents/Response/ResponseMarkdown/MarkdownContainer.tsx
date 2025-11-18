@@ -35,9 +35,9 @@ const MarkdownContainer = (props: MarkdownContainerProps) => {
 
   const containerChildren = Children.toArray(children);
 
-  const containsBlocks = checkContainsBlocks(containerChildren);
+  const hasBlocks = checkContainsBlocks(containerChildren);
 
-  if (containsBlocks) {
+  if (hasBlocks) {
     return (
       <Box {...others}>
         {Children.map(containerChildren,

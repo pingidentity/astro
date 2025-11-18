@@ -33,6 +33,8 @@ const DatePicker = forwardRef((props, ref) => {
     status,
     value,
     unavailableRanges,
+    fieldControlProps,
+    calendarWrapperProps,
   } = props;
 
   const groupRef = useRef();
@@ -102,7 +104,7 @@ const DatePicker = forwardRef((props, ref) => {
         contain
         restoreFocus
       >
-        <Calendar {...calendarProps} />
+        <Calendar {...calendarProps} calendarWrapperProps={calendarWrapperProps} />
       </FocusScope>
     </PopoverContainer>
   );
@@ -116,6 +118,7 @@ const DatePicker = forwardRef((props, ref) => {
         buttonProps={buttonProps}
         fieldProps={fieldProps}
         groupProps={omit(groupProps, 'data-pendo-id')}
+        fieldControlProps={fieldControlProps}
         groupRef={groupRef}
         helperText={helperText}
         labelProps={labelProps}
@@ -186,6 +189,10 @@ DatePicker.propTypes = {
   status: PropTypes.oneOf(Object.values(statuses)),
   /** The ranges of unavailable dates passed  */
   unavailableRanges: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  /** Props object that spread into date segment wrapper element. */
+  fieldControlProps: PropTypes.shape({}),
+  /** Props object that spread into calendar element. */
+  calendarWrapperProps: PropTypes.shape({}),
 };
 
 DateField.defaultProps = {

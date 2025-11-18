@@ -22,7 +22,6 @@ export default {
           <DocsLayout />
         </>
       ),
-      codesandbox: false,
     },
     a11y: {
       config: {
@@ -94,6 +93,7 @@ export default {
     isRequired: false,
     label: 'Example Label',
     onChange: () => {},
+    'aria-label': 'Date Picker',
   },
 };
 
@@ -245,3 +245,23 @@ Error.parameters = {
     url: FIGMA_LINKS.datePicker.error,
   },
 };
+
+export const CustomWidth = args => (
+  <DatePicker
+    {...args}
+    fieldControlProps={{
+      sx: {
+        width: '500px',
+      },
+    }}
+    calendarWrapperProps={{
+      sx: {
+        maxWidth: '500px',
+        width: '400px',
+        '&  tr': {
+          gap: '20px',
+        },
+      },
+    }}
+  />
+);

@@ -9,6 +9,7 @@ const defaultFocus = {
 
 const container = {
   width: '100%',
+  height: '100%',
   borderSpacing: '0',
   borderCollapse: 'collapse',
   position: 'relative',
@@ -30,6 +31,7 @@ const thead = {
     position: 'sticky',
     top: 0,
     zIndex: 1,
+    boxShadow: '0 1px 0 #68747f',
   },
 };
 
@@ -50,7 +52,8 @@ const head = {
 const tbody = {
   borderBottom: '1px solid',
   borderBottomColor: 'neutral.80',
-  overflow: 'auto',
+  overflowX: 'auto',
+  scrollPaddingBottom: '20px',
 };
 
 const row = {
@@ -68,7 +71,6 @@ const row = {
   },
   '&.is-selected': {
     // This is the selected state for the row
-    ...defaultFocus,
   },
   '&.is-disabled': {
     bg: 'neutral.90',

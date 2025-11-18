@@ -10,12 +10,13 @@ export type HourCycle = 12 | 24;
 export type Granularity = 'hour' | 'minute' | 'second';
 export type ValidationBehavior = 'native' | 'aria';
 
-export type MappedTimeValue<T> =
-  T extends ZonedDateTime ? ZonedDateTime :
-  T extends CalendarDateTime ? CalendarDateTime :
-  T extends Time ? Time :
-  never;
-
+export type MappedTimeValue<T> = T extends ZonedDateTime
+  ? ZonedDateTime
+  : T extends CalendarDateTime
+  ? CalendarDateTime
+  : T extends Time
+  ? Time
+  : never;
 
 export interface TimeFieldProps
   extends StyleProps,

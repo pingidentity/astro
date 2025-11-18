@@ -49,7 +49,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
 
   const { hoverProps, isHovered } = useHover({});
 
-  const { showLoading } = useInputLoader({ loadingState, inputValue: inputProps.value });
+  const { isLoading } = useInputLoader({ loadingState, inputValue: inputProps.value });
 
   usePropWarning(props, 'disabled', 'isDisabled');
 
@@ -57,7 +57,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
     <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
         // Render loader after delay if filtering or loading
-        showLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING)
+        isLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING)
         && <Loader variant="loader.withinInput" />
       }
       <PressResponder preventFocusOnPress isPressed={isOpen}>

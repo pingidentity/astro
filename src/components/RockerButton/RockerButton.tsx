@@ -37,16 +37,18 @@ export const RockerButton = forwardRef<HTMLElement, RockerButtonProps>((props, r
   const {
     buttonProps: rockerButtonProps,
     isSelected,
-    isDisabled: raIsDisabled,
+    isDisabled: isRaDisabled,
     isPressed,
-  } = useToggleButtonGroupItem({ id,
+  } = useToggleButtonGroupItem({
+    id,
     ...props,
-    isDisabled: isDisabled || disabledKeys?.includes(id) }, state, rockerButtonRef);
+    isDisabled: isDisabled || disabledKeys?.includes(id),
+  }, state, rockerButtonRef);
 
   const { classNames } = useStatusClasses(className, {
     isHovered,
     isPressed,
-    isDisabled: raIsDisabled,
+    isDisabled: isRaDisabled,
     isSelected,
   });
 

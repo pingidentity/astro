@@ -2,7 +2,7 @@ import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import { act } from '@testing-library/react';
 
-import { PanelHeader, PanelHeaderSwitchField } from '../../index';
+import { AstroProvider, OnyxTheme, PanelHeader, PanelHeaderSwitchField } from '../../index';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -33,6 +33,12 @@ vi.mock('../../hooks/useFallbackImage', () => ({
     return [];
   },
 }));
+const getComponentOnyx = (props = {}) => render((
+  <AstroProvider themeOverrides={[OnyxTheme]}>
+    <PanelHeader {...defaultProps} {...props} />
+  </AstroProvider>
+));
+
 
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <PanelHeader {...defaultProps} {...props} /> });
@@ -88,4 +94,23 @@ test('renders rightOfData slot', () => {
   } });
 
   screen.getByText(TEST_TEXT);
+});
+
+test('renders leftOfData slot', () => {
+  const TEST_TEXT = 'test text';
+
+  getComponent({ slots: {
+    leftOfData: <div>{TEST_TEXT}</div>,
+  } });
+
+  screen.getByText(TEST_TEXT);
+});
+
+test('renders onyx components', () => {
+  getComponentOnyx();
+  const image = screen.getByRole('img');
+
+  expect(image.tagName.toLowerCase()).toBe('img');
+  expect(image).toHaveAttribute('src', pingImg);
+  expect(image).toHaveAttribute('alt', 'Avatar');
 });
