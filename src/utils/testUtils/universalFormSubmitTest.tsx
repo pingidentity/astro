@@ -355,7 +355,7 @@ export const universalFieldComponentTests = ({
           target: { files: [testValue] },
         });
 
-        fireEvent.submit(screen.getByRole('form', { name: /test form 2/i }));
+        fireEvent.submit(screen.getByRole('form', { hidden: true, name: /test form 2/i }));
 
         expect(handleFormSubmit).toHaveBeenCalledWith({
           testName: expect.any(File),
@@ -369,7 +369,7 @@ export const universalFieldComponentTests = ({
           target: { files: [testValue] },
         });
 
-        fireEvent.submit(screen.getByRole('form', { name: /test form 2/i }));
+        fireEvent.submit(screen.getByRole('form', { hidden: true, name: /test form 2/i }));
 
         expect(handleFormSubmit).toHaveBeenCalledWith({
           testName: expect.any(File),
@@ -400,7 +400,7 @@ export const universalFieldComponentTests = ({
         fireEvent.change(screen.getAllByLabelText(testLabel)[0], { target: { value: testValue } });
       }
 
-      fireEvent.submit(screen.getByRole('form', { name: /test form 2/i }));
+      fireEvent.submit(screen.getByRole('form', { hidden: true, name: /test form 2/i }));
 
       expect(handleFormSubmit).toHaveBeenCalledWith({
         testName: String(testValue),

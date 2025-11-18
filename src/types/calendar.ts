@@ -79,6 +79,8 @@ export interface CalendarProps extends Omit<CalendarBaseProps, 'onChange'> {
   value?: DateValue | string;
     /** Handler that is called when the value changes. */
   onChange?: (value: MappedDateValue<DateValue>) => void;
+  /** Props object that spread into calendar element. */
+  calendarWrapperProps?: BoxProps;
 }
 
 export interface RangeCalendarProps extends Omit<CalendarBaseProps, 'onChange'> {

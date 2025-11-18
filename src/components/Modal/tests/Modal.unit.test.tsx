@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { Modal, OverlayProvider } from '../../../index';
+import { Button, Item, Menu, Modal, OverlayProvider, PopoverMenu, RadioField, RadioGroupField, Text } from '../../../index';
 import { ModalProps } from '../../../types/Modal';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
@@ -10,6 +10,48 @@ import { universalComponentTests } from '../../../utils/testUtils/universalCompo
 const getComponent = (props: ModalProps = {}) => render((
   <OverlayProvider>
     <Modal {...props} />
+  </OverlayProvider>
+));
+
+const getModalWithRadioFieldGroup = (props: ModalProps = {}) => render((
+  <OverlayProvider>
+    <Modal {...props}>
+      <RadioGroupField label="Options" name="options" defaultValue="option1">
+        <RadioField
+          label="Option 1"
+          value="option1"
+          data-testid="option1"
+        />
+        <RadioField
+          label="Option 2"
+          value="option2"
+          data-testid="option2"
+        />
+      </RadioGroupField>
+    </Modal>
+  </OverlayProvider>
+));
+
+const buttonText = 'Click me';
+const onAction = jest.fn();
+const option1 = 'option1';
+
+const getModalWithPopoverMenu = (props: ModalProps = {}) => render((
+  <OverlayProvider>
+    <Modal {...props}>
+      <PopoverMenu>
+        <Button>{buttonText}</Button>
+        <Menu onAction={onAction}>
+          <Item key="edit">{option1}</Item>
+          <Item key="duplicate">Duplicate</Item>
+          <Item key="delete" textValue="delete">
+            <Text color="critical.bright">
+              Delete
+            </Text>
+          </Item>
+        </Menu>
+      </PopoverMenu>
+    </Modal>
   </OverlayProvider>
 ));
 
@@ -124,25 +166,25 @@ test('should only hide the top-most overlay', async () => {
 });
 
 test('should render a close button if hasCloseButton is true', () => {
-  getComponent({ hasCloseButton: true });
+  getComponent({ title: 'Lorem Ipsum', hasCloseButton: true });
   expect(screen.queryByRole('button')).toBeInTheDocument();
 });
 
 test('should render a custom close button if hasCloseButton is true and custom button is provided', () => {
   const MyButton = () => <div data-testid="test" />;
-  getComponent({ hasCloseButton: true, closeButton: <MyButton /> });
+  getComponent({ title: 'Lorem Ipsum', hasCloseButton: true, closeButton: <MyButton /> });
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
   expect(screen.queryByTestId('test')).toBeInTheDocument();
 });
 
 test('shouldn\'t auto focus the first tabbable element', () => {
-  getComponent({ hasCloseButton: true });
+  getComponent({ title: 'Lorem Ipsum', hasCloseButton: true });
   const button = screen.queryByRole('button');
   expect(button).not.toHaveFocus();
 });
 
 test('should auto focus the first tabbable element if "hasAutoFocus" is true', () => {
-  getComponent({ hasCloseButton: true, hasAutoFocus: true });
+  getComponent({ title: 'Lorem Ipsum', hasCloseButton: true, hasAutoFocus: true });
   const button = screen.queryByRole('button');
   expect(button).toHaveFocus();
 });
@@ -171,4 +213,35 @@ test('should render sizes correctly with passed size prop', () => {
   getComponent({ size: 'full' });
   const fModal = screen.getByRole('dialog');
   expect(fModal).toHaveClass('is-full');
+});
+
+test('should not show focus ring (is-focused class) on radio buttons when clicked with mouse', async () => {
+  getModalWithRadioFieldGroup();
+
+  const radioA = screen.getByLabelText('Option 1');
+  const radioB = screen.getByLabelText('Option 2');
+  const labelA = screen.getByText('Option 1');
+  const labelB = screen.getByText('Option 2');
+
+  await userEvent.click(radioA);
+  expect(radioA).toBeChecked();
+  expect(labelA).toHaveClass('is-checked');
+  expect(labelA).not.toHaveClass('is-focused');
+  expect(labelB).not.toHaveClass('is-focused');
+
+  await userEvent.click(radioB);
+  expect(radioB).toBeChecked();
+  expect(labelA).not.toHaveClass('is-focused');
+  expect(labelB).not.toHaveClass('is-focused');
+});
+
+test('popover menu onAction is called when menu is inside modal', async () => {
+  getModalWithPopoverMenu();
+  const button = screen.getByText(buttonText);
+
+  await userEvent.click(button);
+  const option1Text = await screen.findByText(option1);
+
+  await userEvent.click(option1Text);
+  expect(onAction).toHaveBeenCalled();
 });

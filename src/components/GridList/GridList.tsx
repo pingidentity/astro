@@ -1,24 +1,29 @@
-import React, { useRef } from 'react';
+import React, { Key, useRef } from 'react';
 import { mergeProps } from 'react-aria';
+import { Collection } from 'react-stately';
+import type { Node } from '@react-types/shared';
 
 import useGridList from '../../hooks/useGridList';
 import { Box } from '../../index';
+import { GridListProps } from '../../types/gridList';
 
 import GridListRow from './GridListRow';
 
-const GridList = props => {
+const GridList = (props: GridListProps) => {
   const ref = useRef<HTMLUListElement | null>(null);
+
+  const { containerProps, rowProps, cellProps, ...others } = props;
 
   const {
     collectionProps,
     gridListItemProps,
     gridProps,
     state,
-  } = useGridList({ ...props, ref });
+  } = useGridList({ ...others, ref });
 
   return (
     <Box
-      {...mergeProps(gridProps, collectionProps)}
+      {...mergeProps(gridProps, collectionProps, containerProps)}
       ref={ref}
       className="list"
       variant="gridList.container"
@@ -29,6 +34,8 @@ const GridList = props => {
           <GridListRow
             key={item.key}
             item={item}
+            rowProps={rowProps}
+            cellProps={cellProps}
             {...gridListItemProps}
           />
         );

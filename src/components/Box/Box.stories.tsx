@@ -25,11 +25,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Image', 'Text'],
-      },
-    },
   },
   argTypes: {
     bg: {
@@ -157,5 +152,3 @@ export const BoxesWithGaps = () => (
     </Box>
   </Box>
 );
-
-BoxesWithGaps.parameters = { codesandbox: false };

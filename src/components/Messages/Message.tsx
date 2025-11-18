@@ -15,8 +15,20 @@ export const ARIA_STATUSES = {
 
 const CloseButton = ({ color, ...others }: CloseButtonProps) => {
   return (
-    <IconButton aria-label="Close" {...others}>
-      <Icon color={color} icon={CloseIcon} sx={{ path: { fill: color } }} title={{ name: 'Close Icon' }} />
+    <IconButton
+      aria-label="Close"
+      {...others}
+    >
+      <Icon
+        color={color}
+        icon={CloseIcon}
+        sx={{
+          path: {
+            fill: color,
+          },
+        }}
+        title={{ name: 'Close Icon' }}
+      />
     </IconButton>
   );
 };
@@ -111,6 +123,7 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(({ className, item, onC
             className={statusClasses}
             color={color}
             mr="md"
+            variant="messagesText"
           >
             {children}
           </Text>

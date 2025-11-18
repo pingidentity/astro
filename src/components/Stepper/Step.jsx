@@ -4,6 +4,7 @@ import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
 import { Box, Icon } from '../../index';
+import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
 import { stepStatuses } from './Stepper.constants';
 
@@ -13,25 +14,28 @@ const {
 } = stepStatuses;
 
 const Step = forwardRef((props, ref) => {
-  const { status, value } = props;
+  const { status, value, className, orientation } = props;
   const { hoverProps, isHovered } = useHover(props);
+
+  const stepValue = orientation !== ORIENTATION.VERTICAL && value;
 
   return (
     <Box
       variant={`stepper.step.${status}`}
       ref={ref}
       {...hoverProps}
+      className={className}
     >
       {status === COMPLETED && !isHovered
         ? (
           <Icon
             icon={CheckBoldIcon}
-            size={23}
+            size="sm"
             color="text.primaryLight"
             title={{ name: 'Check Bold Icon' }}
           />
         )
-        : value}
+        : stepValue}
     </Box>
   );
 });
@@ -39,6 +43,11 @@ const Step = forwardRef((props, ref) => {
 Step.propTypes = {
   status: PropTypes.oneOf(Object.values(stepStatuses)),
   value: PropTypes.number,
+  orientation: PropTypes.oneOf([
+    ORIENTATION.VERTICAL,
+    ORIENTATION.HORIZONTAL,
+  ]),
+
 };
 
 Step.defaultProps = {

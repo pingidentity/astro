@@ -1,5 +1,6 @@
 import chroma from 'chroma-js';
 
+import { white } from '../../colors';
 import { nextGenColors } from '../../themes/next-gen/tokens/colorTokens';
 
 export const overrides = {
@@ -7,6 +8,12 @@ export const overrides = {
     90: '#455469',
   },
   disabled: '#30373f',
+};
+
+const font = {
+  base: nextGenColors['gray-100'],
+  light: nextGenColors['gray-400'],
+  link: nextGenColors['blue-400'],
 };
 
 const hoverDark = chroma.mix('#23282e', 'white', 0.04, 'rgb').hex();
@@ -20,12 +27,12 @@ const border = {
 };
 
 const badge = {
-  background: nextGenColors['gray-700'],
+  background: nextGenColors['gray-800'],
   textColor: nextGenColors['gray-100'],
 };
 
-const iconWrapper = {
-  wrapper: {
+const twoTone = {
+  bg: {
     orange: nextGenColors['orange-500'],
     cyan: nextGenColors['cyan-500'],
     green: nextGenColors['green-500'],
@@ -35,12 +42,36 @@ const iconWrapper = {
     yellow: nextGenColors['yellow-500'],
     teal: nextGenColors['teal-500'],
     blue: nextGenColors['blue-500'],
+    white,
     indigo: nextGenColors['indigo-500'],
     lightBlue: nextGenColors['blue-600'],
     lightPink: nextGenColors['pink-600'],
     lightGreen: nextGenColors['green-800'],
     lightYellow: nextGenColors['yellow-800'],
     lightIndigo: nextGenColors['indigo-700'],
+  },
+  text: {
+    orange: 'black',
+    cyan: 'black',
+    green: 'black',
+    purple: 'black',
+    pink: 'black',
+    red: 'black',
+    yellow: 'black',
+    teal: 'black',
+    blue: 'black',
+    indigo: 'black',
+    lightBlue: 'black',
+    lightPink: 'black',
+    lightGreen: 'black',
+    lightYellow: 'black',
+    lightIndigo: 'black',
+  },
+};
+
+const iconWrapper = {
+  wrapper: {
+    ...twoTone.bg,
   },
   icon: {
     orange: 'black',
@@ -65,6 +96,7 @@ export const colors = {
   border,
   iconWrapper,
   ...overrides,
+  twoTone,
   light: nextGenColors['gray-900'],
   secondary: nextGenColors['gray-400'],
   dark: nextGenColors['gray-400'],
@@ -100,8 +132,6 @@ export const colors = {
     card: '#1a1e22',
     hover: hoverDark,
   },
-  font: {
-    base: nextGenColors['gray-100'],
-  },
+  font,
   badge,
 };

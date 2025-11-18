@@ -1,6 +1,7 @@
 import { nextGenColors } from '../tokens/colorTokens';
 
 import { iconWrapper } from './iconWrapper';
+import twoTone from './twoTone';
 
 const subColors = {
   lightblue: nextGenColors['blue-100'],
@@ -60,9 +61,10 @@ const colorsObject = {
 
 export const critical = {
   bright: colorsObject.red,
-  dark: nextGenColors['red-600'],
-  light: colorsObject.red,
+  dark: nextGenColors['red-700'],
+  light: nextGenColors['red-100'],
 };
+
 export const success = {
   bright: nextGenColors['green-600'],
   dark: nextGenColors['green-800'],
@@ -72,6 +74,12 @@ export const warning = {
   bright: colorsObject.yellow,
   dark: nextGenColors['yellow-800'],
   light: nextGenColors['yellow-100'],
+};
+
+export const info = {
+  bright: colorsObject.blue,
+  dark: nextGenColors['blue-600'],
+  light: nextGenColors['blue-100'],
 };
 
 const text = {
@@ -85,6 +93,7 @@ const border = {
   base: nextGenColors['gray-300'],
   input: nextGenColors['gray-500'],
   separator: nextGenColors['gray-200'],
+  hairline: '#e7eef4',
 };
 
 const overrides = {
@@ -109,9 +118,10 @@ const card = {
 };
 
 const badge = {
-  textColor: nextGenColors['gray-900'],
+  textColor: nextGenColors.font.base,
   background: nextGenColors['gray-100'],
 };
+
 const tooltip = nextGenColors['gray-900'];
 
 const colors = {
@@ -123,6 +133,7 @@ const colors = {
   critical,
   success,
   warning,
+  info,
   text,
   border,
   active: colorsObject.blue,
@@ -130,6 +141,7 @@ const colors = {
   background,
   iconWrapper,
   tooltip,
+  twoTone,
 };
 
 export default colors;

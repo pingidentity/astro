@@ -14,22 +14,16 @@ const container = {
   background: '#00000040',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  overflowY: 'auto',
 };
 
 const content = {
-  position: 'relative',
   outline: 'none',
   background: 'white',
   color: 'black',
-  pt: 'md',
-  pr: 'lg',
-  pb: 'lg',
-  pl: 'lg',
   boxShadow: 'standard',
   borderRadius: 3,
-  maxHeight: 'calc(100vh - 80px)', // 100% of the window minus 40px on top and bottom
-  overflowY: 'auto',
+  margin: 'auto',
   '&.is-extra-small': {
     maxWidth: 'none',
     width: 'container.xs',
@@ -53,29 +47,47 @@ const content = {
 };
 
 const headingContainer = {
-  position: 'sticky',
-  top: '-md',
-  mt: '-md',
-  mb: '-md',
-  mr: '-lg',
-  pt: 'md',
-  pr: 'lg',
-  pb: 'md',
+  position: 'relative',
   backgroundColor: 'background.base',
+  px: 'lg',
+  py: 'md',
 };
 
-const buttonsContainer = {
-  position: 'sticky',
-  bottom: '-lg',
-  p: 0,
-  mb: '-lg',
-  pb: 'lg',
-  pt: 'lg',
-  background: 'white',
+const header = {
+  position: 'relative',
+  backgroundColor: 'background.base',
+  pb: 'md',
+};
 
+const body = {
+};
+
+export const closeButton = {
+  position: 'absolute',
+  top: 0,
+  right: -14,
+  alignSelf: 'auto',
+  width: '22px',
+  height: '22px',
+};
+
+const bodyContainer = {
+  px: 'lg',
+};
+
+const footer = {
+  py: 'lg',
+  background: 'white',
   '& > button': {
     flexGrow: 0,
   },
+};
+
+const buttonsContainer = {
+  p: 0,
+  pb: 'lg',
+  pt: 'lg',
+  background: 'white',
 };
 
 const title = {
@@ -88,6 +100,7 @@ export const modalCloseButton = {
   position: 'absolute',
   top: 14,
   right: 10,
+  alignSelf: 'auto',
   width: '22px',
   height: '22px',
 };
@@ -97,7 +110,12 @@ export default {
   container,
   content,
   headingContainer,
-  buttonsContainer,
+  bodyContainer,
   title,
   modalCloseButton,
+  buttonsContainer,
+  header,
+  body,
+  footer,
+  closeButton,
 };

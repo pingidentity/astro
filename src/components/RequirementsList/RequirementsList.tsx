@@ -1,10 +1,7 @@
 import React, { forwardRef } from 'react';
-import ErrorCircle from '@pingux/mdi-react/AlertCircleIcon';
-import WarningIcon from '@pingux/mdi-react/AlertOutlineIcon';
-import DefaultCircle from '@pingux/mdi-react/CheckboxBlankCircleOutlineIcon';
-import SuccessCircle from '@pingux/mdi-react/CheckCircleIcon';
 import kebabCase from 'lodash/kebabCase';
 
+import { useGetTheme } from '../../hooks';
 import { RequirementsListProps } from '../../types';
 import Box from '../Box';
 import Icon from '../Icon';
@@ -15,6 +12,15 @@ const RequirementsList = forwardRef<HTMLElement, RequirementsListProps>((props, 
     requirements,
     ...others
   } = props;
+
+  const { icons } = useGetTheme();
+
+  const {
+    SuccessCircle,
+    ErrorCircle,
+    WarningIcon,
+    DefaultCircle,
+  } = icons;
 
   const statusIconRender = (status, key) => {
     switch (status) {

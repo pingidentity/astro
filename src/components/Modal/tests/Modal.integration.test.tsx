@@ -86,15 +86,16 @@ test('keyboard interaction with the trigger should open the modal', () => {
 });
 
 test('close button should close the modal', async () => {
-  getComposedComponent({ isDefaultOpen: true });
+  getComposedComponent({ isDefaultOpen: true }, { title: 'Lorem Ipsum' });
 
   // Target the close button
   await userEvent.click(screen.queryAllByRole('button')[0]);
+
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
 
 test('keyboard interactions on the close button should close the modal', () => {
-  getComposedComponent({ isDefaultOpen: true });
+  getComposedComponent({ isDefaultOpen: true }, { title: 'Lorem Ipsum' });
 
   // Target the close button
   fireEvent.keyDown(screen.queryAllByRole('button')[0], { key: 'Enter', code: 13 });

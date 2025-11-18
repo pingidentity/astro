@@ -4,10 +4,10 @@ import { AriaSelectOptions, SelectAria, useSelect } from '@react-aria/select';
 import { useResizeObserver } from '@react-aria/utils';
 import { SelectState, useSelectState } from '@react-stately/select';
 import type { CollectionChildren, Key as SharedKey } from '@react-types/shared';
-import { LabelProps as ThemeUILabelProps, ThemeUICSSObject } from 'theme-ui';
+import { LabelProps as ThemeUILabelProps } from 'theme-ui';
 
 import ListBox from '../../components/ListBox/ListBox';
-import PopoverContainer from '../../components/PopoverContainer';
+import Popover from '../../components/Popover/Popover';
 import ScrollBox from '../../components/ScrollBox';
 import { Axis, BoxProps, FocusableElement, LabelModeProps, ListBoxProps, Placement, PlacementAxis, ReactButtonRef, ReactRef, StyleProps } from '../../types';
 import { modes } from '../../utils/devUtils/constants/labelModes';
@@ -15,7 +15,7 @@ import { CustomChangeEventType, FieldControlInputProps } from '../useField/useFi
 import { useColumnStyles, useDeprecationWarning, useField } from '..';
 
 export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
-  children?: CollectionChildren<T>;
+  children?: CollectionChildren<T>
   align?: PlacementAxis;
   defaultSelectedKey?: string;
   defaultText?: string;
@@ -49,10 +49,10 @@ export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   labelMode?: LabelModeProps;
   onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key| null) =>
     void | undefined;
-  value?: string | number | undefined;
+  value?: string | number | undefined
 }
 
-interface ControlProps extends React.HTMLAttributes<Element>{
+interface ControlProps extends React.HTMLAttributes<Element> {
   'data-testid'?: string;
   defaultValue?: string | number | undefined;
   onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key| null) =>
@@ -86,8 +86,8 @@ const useSelectField = <T extends object>(
     defaultText,
     direction,
     disabledKeys,
-    hasNoEmptySelection: disallowEmptySelection,
-    isDefaultOpen: defaultOpen,
+    hasNoEmptySelection,
+    isDefaultOpen,
     isDisabled,
     isLoading,
     isNotFlippable,
@@ -129,14 +129,13 @@ const useSelectField = <T extends object>(
     onLoadMore,
     onOpenChange,
     onSelectionChange,
-    defaultOpen, // must match React Aria API
-    disallowEmptySelection, // must match React Aria API
+    defaultOpen: isDefaultOpen, // must match React Aria API
+    disallowEmptySelection: hasNoEmptySelection, // must match React Aria API
     shouldFlip, // must match React Aria API
     ...controlProps,
     children,
   };
-
-  // Create state based on the incoming prop
+  // Create state based on the incoming props
   const state = useSelectState(selectProps) as SelectState<T>;
 
   const popoverRef = useRef() as React.RefObject<HTMLElement>;
@@ -237,6 +236,8 @@ const useSelectField = <T extends object>(
   // trigger when the popup is closed. In addition, add hidden
   // <DismissButton> components at the start and end of the list
   // to allow screen reader users to dismiss the popup easily.
+
+  /* istanbul ignore next */
   const listbox = (
     <FocusScope restoreFocus>
       <DismissButton onDismiss={() => state.close()} />
@@ -255,21 +256,21 @@ const useSelectField = <T extends object>(
     </FocusScope>
   );
 
+  /*
+    Removed the isNonModal prop from Popover as per UIP-7854,
+    to ensure the dropdown closes when clicking outside.
+  */
+
   const overlay = (
-    <PopoverContainer
-      hasNoArrow
-      isDismissable
-      isNonModal
-      isOpen={state.isOpen}
-      onClose={state.close}
-      placement={placement ?? undefined}
-      ref={popoverRef}
+    <Popover
+      triggerRef={triggerRef}
       style={style}
+      state={state}
     >
       <ScrollBox {...scrollBoxProps}>
         {listbox}
       </ScrollBox>
-    </PopoverContainer>
+    </Popover>
   );
 
   return {

@@ -1015,7 +1015,24 @@ test('default selected keys in condensed mode ', () => {
   expect(screen.getByText('2 Selected')).toBeInTheDocument();
 });
 
-test('onInputChange is called in condensed mode ', async () => {
+test('when filtered to one item in condensed mode, it still shows the correct amount of selected items ', () => {
+  const onInputChange = jest.fn();
+  getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key], onInputChange });
+
+  const input = screen.getByRole('combobox');
+  const value = 'Aardvark';
+  userEvent.type(input, value);
+
+  const listbox = screen.getByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+
+  const options = within(listbox).getAllByRole('option');
+  expect(options.length).toBe(1);
+
+  expect(screen.getByText('2 Selected')).toBeInTheDocument();
+});
+
+test('onInputChange is called in condensed mode ', async() => {
   const onInputChange = jest.fn();
   getComponent({ mode: 'condensed', onInputChange });
 
@@ -1057,7 +1074,6 @@ test('closes listbox on blur and fires "onBlur"', async () => {
   act(() => {
     input.blur();
   });
-
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(onBlur).toBeCalled();
 });

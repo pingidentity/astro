@@ -4,8 +4,10 @@ import MinusIcon from '@pingux/mdi-react/MinusIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Box, GridList, Icon, IconButton, Menu, OverlayProvider, PopoverMenu, Text,
-  TextField } from '../../index';
+import {
+  Box, GridList, Icon, IconButton, Menu, OverlayProvider, PopoverMenu, Text,
+  TextField,
+} from '../../index';
 
 import GridListReadme from './GridList.mdx';
 import { gridListArgTypes } from './gridListAttributes';
@@ -38,13 +40,13 @@ const items = [
   { name: 'zebra', key: 'zebra' },
 ];
 
-const ExampleComponent = ({ label }: {label: string, key: Key}) => {
+const ExampleComponent = ({ label }: { label: string, key: Key }) => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Box isRow sx={{ alignItems: 'center' }} gap="sm">
-      <TextField aria-label={label} ref={ref} defaultValue={label} data-testid={`${label}-text-field`} />
+    <Box isRow sx={{ alignItems: 'center' }} gap="sm" flexGrow="1">
+      <TextField aria-label={label} ref={ref} defaultValue={label} data-testid={`${label}-text-field`} flexGrow="1" />
       <Box isRow sx={{ alignItems: 'center' }} gap="md">
         <IconButton aria-label="delete row">
           <Icon icon={MinusIcon} title={{ name: 'delete icon' }} />
@@ -55,7 +57,7 @@ const ExampleComponent = ({ label }: {label: string, key: Key}) => {
         <OverlayProvider>
           <PopoverMenu isOpen={isOpen} onOpenChange={setIsOpen}>
             <IconButton aria-label="more options" variant="inverted">
-              <Icon icon={MinusIcon} size="md" title={{ name: 'Dots Vertical Icon' }} />
+              <Icon icon={MinusIcon} title={{ name: 'Dots Vertical Icon' }} />
             </IconButton>
             <Menu>
               <Item key="edit">Edit</Item>
@@ -75,7 +77,14 @@ const ExampleComponent = ({ label }: {label: string, key: Key}) => {
 
 export const Default = args => {
   return (
-    <GridList items={items} isReorderable keyboardNavigationBehavior="tab" {...args}>
+    <GridList
+      items={items}
+      isReorderable
+      keyboardNavigationBehavior="tab"
+      rowProps={{ sx: { flexGrow: 1 } }}
+      cellProps={{ sx: { flexGrow: 1 } }}
+      {...args}
+    >
       {item => (
         <Item textValue={item.name} key={item.name} data-id={item.name}>
           <ExampleComponent

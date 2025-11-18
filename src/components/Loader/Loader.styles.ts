@@ -75,7 +75,27 @@ const dotRight = {
   animation: `${wait} 0.4s, ${pulse} ${animationSettings} 0.4s`,
 };
 
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const circleContainer = {
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const circleSpinner = {
+  animation: `${spin} .75s linear infinite`,
+};
+
 export default {
+  circleContainer,
+  circleSpinner,
   dotLeft,
   dotCenter,
   dotRight,

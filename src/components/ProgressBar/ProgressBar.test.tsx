@@ -51,8 +51,8 @@ test('renders value as custom valueLabel instead of percentage', () => {
   expect(valueLabel).toBeInTheDocument();
 });
 
-test('does not render value when showValueLabel is false', () => {
-  getComponent({ value: 25, showValueLabel: false });
+test('does not render value when shouldShowValueLabel is false', () => {
+  getComponent({ value: 25, shouldShowValueLabel: false });
   const valueLabel = screen.queryByText('25%');
   expect(valueLabel).not.toBeInTheDocument();
 });

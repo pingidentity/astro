@@ -139,6 +139,11 @@ input.fieldControlWrapper = {
       opacity: 0.5,
     },
   },
+  '&.is-invalid': {
+    '&:after': {
+      bg: 'critical.bright',
+    },
+  },
   '&.is-read-only': {
     '> input': {
       backgroundColor: 'accent.95',
@@ -224,6 +229,10 @@ input.multivaluesWrapper = {
   },
   [`&.is-${statuses.WARNING}::after`]: {
     bg: 'warning.bright',
+  },
+  '&.is-read-only': {
+    boxShadow: 'inset 0 0 0 100px #e5e9f8',
+    border: 'none',
   },
 };
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
 import { Box, Button, Icon, Loader, Text } from '../..';
-import { usePropWarning, useSelectField } from '../../hooks';
+import { useGetTheme, usePropWarning, useSelectField } from '../../hooks';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
@@ -18,6 +18,8 @@ const displayName = 'LinkSelectField';
 const LinkSelectField = forwardRef((props, ref) => {
   const { placeholder, isDisabled, status, helperText } = props;
   const { ariaProps } = getAriaAttributeProps(props);
+  const { themeState } = useGetTheme();
+  const { isOnyx } = themeState;
 
   const helperTextId = uuid();
 
@@ -49,7 +51,7 @@ const LinkSelectField = forwardRef((props, ref) => {
       {...ariaProps}
       aria-describedby={helperText && helperTextId}
     >
-      <Text variant="label" color="active">{placeholder}</Text>
+      <Text variant="label" color={isOnyx ? 'font.link' : 'active'}>{placeholder}</Text>
       <Box isRow>
         {isLoadingInitial && <Loader variant="loader.withinInput" />}
         <Box as="span" aria-hidden="true" variant="forms.select.arrow">
@@ -67,7 +69,6 @@ const LinkSelectField = forwardRef((props, ref) => {
       <VisuallyHidden aria-live="polite" id={helperTextId}>{helperText}</VisuallyHidden>
     </Button>
   );
-
   return (
     <SelectFieldBase
       {...props}

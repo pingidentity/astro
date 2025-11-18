@@ -63,11 +63,11 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
         variant={variant ? fixedVariant : 'baseBadge'}
       >
         {slots?.leftIcon
-        && (
-        <Box mr="xs">
-          {slots.leftIcon}
-        </Box>
-        )}
+          && (
+            <Box mr="xs">
+              {slots.leftIcon}
+            </Box>
+          )}
         <Text
           variant="label"
           color={textColor}

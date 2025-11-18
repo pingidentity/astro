@@ -7,13 +7,14 @@ const interactive = {
   borderColor: 'border.base',
   transition: 'border-color .25s ease-in',
   '&.is-focused': {
+    backgroundColor: 'background.base',
     outline: '2px solid',
     outlineColor: 'focus',
     outlineOffset: '0px',
   },
   '&.is-hovered': {
     outline: 'none',
-    borderColor: 'blue',
+    borderColor: 'focus',
     bg: 'default',
   },
 };
@@ -22,6 +23,7 @@ const container = {
   ...flat,
   p: 'lg',
   borderColor: 'border.base',
+  lineHeight: 1.6,
 };
 
 const dark = {

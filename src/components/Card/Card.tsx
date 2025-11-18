@@ -21,7 +21,7 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     onPressEnd,
     onPressChange,
     onPressUp,
-    isInteractiveWithin,
+    isInteractiveWithin = true,
     isSelected,
     ...others
   } = props;
@@ -58,7 +58,6 @@ const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
 
   const ariaLabel = props['aria-label'];
 
-  // TODO: [Astro 3.0.0] Update isInteractiveWithin[default] for this prop to true
   const mergedProps = mergeProps(
     others, focusWithinProps, (!isInteractiveWithin ? {
       ...pressProps, ...hoverProps, ...focusProps,

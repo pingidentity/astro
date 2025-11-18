@@ -11,10 +11,11 @@ import {
   Box,
   Icon,
   IconButton,
+  Item,
   SearchField,
   Text,
 } from '../../index';
-import { SearchFieldProps } from '../../types';
+import { SearchFieldProps, SearchItem } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
@@ -32,17 +33,6 @@ export default {
           <DocsLayout />
         </>
       ),
-    },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'SearchField',
-          'Button',
-          'Icon',
-          'Box',
-          'Text',
-        ],
-      },
     },
   },
   argTypes: {
@@ -78,14 +68,17 @@ export default {
   },
   args: {
     placeholder: 'Search',
+    'aria-label': 'Search Field',
   },
 } as Meta;
 
-export const Default:StoryFn<SearchFieldProps> = (args:SearchFieldProps) => (
+export const Default: StoryFn<SearchFieldProps<SearchItem>> = (
+  args: SearchFieldProps<SearchItem>,
+) => (
   <SearchField
     {...args}
     icon={SearchIcon}
-    onSubmit={text => alert(text)} // eslint-disable-line no-alert
+    onSubmit={text => alert(text)}
   />
 );
 
@@ -96,7 +89,7 @@ Default.parameters = {
   },
 };
 
-export const Controlled:StoryFn<SearchFieldProps> = () => {
+export const Controlled: StoryFn<SearchFieldProps<SearchItem>> = () => {
   const [value, setValue] = useState<string>('');
   return (
     <SearchField
@@ -109,7 +102,7 @@ export const Controlled:StoryFn<SearchFieldProps> = () => {
   );
 };
 
-export const CustomIcon:StoryFn<SearchFieldProps> = () => (
+export const CustomIcon: StoryFn<SearchFieldProps<SearchItem>> = () => (
   <SearchField
     icon={Users}
     aria-label="Search Users"
@@ -118,7 +111,7 @@ export const CustomIcon:StoryFn<SearchFieldProps> = () => (
   />
 );
 
-export const NoClearButton:StoryFn<SearchFieldProps> = args => (
+export const NoClearButton: StoryFn<SearchFieldProps<SearchItem>> = args => (
   <SearchField
     {...args}
     hasNoClearButton
@@ -128,7 +121,7 @@ export const NoClearButton:StoryFn<SearchFieldProps> = args => (
   />
 );
 
-export const ControlledWithDebouncedInput:StoryFn<SearchFieldProps> = () => {
+export const ControlledWithDebouncedInput: StoryFn<SearchFieldProps<SearchItem>> = () => {
   const [value, setValue] = useState('');
   const debouncedSearchText = useDebounce({ value, delay: 500 });
   return (
@@ -145,7 +138,7 @@ export const ControlledWithDebouncedInput:StoryFn<SearchFieldProps> = () => {
   );
 };
 
-export const WithFilter:StoryFn<SearchFieldProps> = () => {
+export const WithFilter: StoryFn<SearchFieldProps<SearchItem>> = () => {
   const { themeState: { isOnyx } } = useGetTheme();
   return (
     <Box p="xx" isRow gap={isOnyx ? 'lg' : 'md'}>
@@ -160,6 +153,39 @@ export const WithFilter:StoryFn<SearchFieldProps> = () => {
           title={{ name: 'Filter Icon' }}
         />
       </IconButton>
+    </Box>
+  );
+};
+
+export const ControlledWithPopover: StoryFn<SearchFieldProps<SearchItem>> = () => {
+  const [value, setValue] = useState('');
+  const items = [
+    { key: 'apple', name: 'Apple' },
+    { key: 'banana', name: 'Banana' },
+    { key: 'blueberry', name: 'Blueberry' },
+  ];
+
+  return (
+    <Box>
+      <SearchField
+        mode="autocomplete"
+        defaultItems={items}
+        value={value}
+        onChange={val => {
+          setValue(val);
+        }}
+        aria-label="Search Groups"
+        placeholder="Search"
+        onSubmit={text => alert(text)}
+        onClear={() => { setValue(''); }}
+      >
+        {item => (
+          <Item key={item.key} textValue={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </SearchField>
+      <Text mt="xs">{`value: ${value}`}</Text>
     </Box>
   );
 };

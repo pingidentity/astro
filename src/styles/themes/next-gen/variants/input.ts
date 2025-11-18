@@ -114,14 +114,14 @@ export const fieldControlWrapper = {
   },
   '&.is-read-only': {
     '> input': {
-      backgroundColor: 'gray-100',
+      backgroundColor: 'disabled',
       border: '1px solid',
-      borderColor: 'border.input !important',
+      borderColor: 'border.input',
     },
     '> textarea': {
-      backgroundColor: 'gray-100',
+      backgroundColor: 'disabled',
       border: '1px solid',
-      borderColor: 'border.input !important',
+      borderColor: 'border.input',
     },
     '&:after': {
       display: 'none',
@@ -152,7 +152,6 @@ input.promptInputWrapper = {
 
 input.multivaluesWrapper = {
   ...fieldControlWrapper,
-  borderColor: 'border.input',
   borderStyle: 'solid',
   borderWidth: 1,
   flexDirection: 'row !important' as 'row',
@@ -180,6 +179,18 @@ input.multivaluesWrapper = {
   },
   '&.is-error': {
     borderColor: 'critical.dark',
+  },
+  '&.is-read-only': {
+    alignItems: 'center',
+    boxShadow: 'inset 0 0 0 100px #F6F8FA',
+    border: '1px solid',
+    borderColor: 'gray-900',
+    '> input': {
+      backgroundColor: 'background.secondary',
+    },
+    '&:after': {
+      display: 'none',
+    },
   },
 };
 

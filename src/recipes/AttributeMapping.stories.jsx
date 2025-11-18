@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AlertCircleIcon from '@pingux/mdi-react/AlertCircleIcon';
 import CogsIcon from '@pingux/mdi-react/CogsIcon';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
@@ -24,9 +24,6 @@ import statuses from '../utils/devUtils/constants/statuses';
 
 export default {
   title: 'Recipes/Attribute Mappings',
-  parameters: {
-    codesandbox: false,
-  },
 };
 
 const sx = {
@@ -370,8 +367,8 @@ export const EditRow = props => {
     index,
     leftValue,
     rightValue,
-    updateRow = () => console.log('update row'),
-    removeRow = () => console.log('remove row'),
+    updateRow = () => { },
+    removeRow = () => { },
   } = props;
 
   const leftItems = [

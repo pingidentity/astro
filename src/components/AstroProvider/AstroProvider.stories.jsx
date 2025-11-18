@@ -21,7 +21,6 @@ export default {
         </>
       ),
     },
-    codesandbox: false,
   },
   decorators: [
     Story => (

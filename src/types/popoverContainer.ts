@@ -1,3 +1,6 @@
+import type { OverlayTriggerState } from 'react-stately';
+import type { AriaPopoverProps, Placement } from '@react-aria/overlays';
+
 import { TestingAttributes } from './shared/test';
 import { DOMAttributes, Modify, StyleProps } from './shared';
 
@@ -25,4 +28,20 @@ TestingAttributes {
 
 export interface PopoverWrapperProps extends PopoverContainerProps {
   isOpen?: boolean,
+}
+
+export interface PopoverProps extends Omit<AriaPopoverProps, 'popoverRef'> {
+  children?: React.ReactNode;
+  state: OverlayTriggerState;
+  direction?: PopoverPlacement
+  className?: string;
+  popoverRef?: React.RefObject<HTMLDivElement>;
+  style?: React.CSSProperties;
+  width?: string | number;
+  'data-testid'?: string;
+  hasNoArrow?: boolean;
+  arrowProps?: PopoverArrowProps,
+  arrowCrossOffset?: string,
+  isDismissable?: boolean,
+  role?: string
 }

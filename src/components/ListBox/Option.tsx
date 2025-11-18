@@ -30,7 +30,7 @@ const CheckedIcon = prop => (
 );
 
 const Option = forwardRef((props: OptionType, ref) => {
-  const { item, hasVirtualFocus, isCondensed, ...others } = props;
+  const { item, hasVirtualFocus, isCondensed, shouldShowSelectedOption, ...others } = props;
 
   const { key, props: itemProps, rendered, 'aria-label': ariaLabel } = item;
 
@@ -53,11 +53,11 @@ const Option = forwardRef((props: OptionType, ref) => {
     optionRef,
   );
 
-  const focused = isFocused || state?.selectionManager?.focusedKey === item.key;
+  const hasFocus = isFocused || state?.selectionManager?.focusedKey === item.key;
 
   const setFocusOnHover = () => {
-    if (!focused && !isCondensed) {
-      state.selectionManager.setFocusedKey(item.key.toString());
+    if (!hasFocus && !isCondensed) {
+      state.selectionManager.setFocusedKey(String(item.key));
     }
   };
 
@@ -65,8 +65,8 @@ const Option = forwardRef((props: OptionType, ref) => {
 
   const { classNames } = useStatusClasses(null, {
     isDisabled: isDisabled || isSeparator,
-    isFocused: focused,
-    isSelected,
+    isFocused: hasFocus,
+    isSelected: shouldShowSelectedOption ? isSelected : false,
     isCondensed,
     isFocusVisible,
     isPressed,
@@ -98,30 +98,40 @@ const Option = forwardRef((props: OptionType, ref) => {
       {...others}
       aria-label={ariaLabel}
     >
-      { (isCondensed ? (
-        <Icon
-          icon={isSelected ? CheckedIcon : UncheckedIcon}
-          color="active"
-          size="24px"
-          mr="xs"
-          className={classNames}
-          variant="listBox.checkboxIcon"
-        />
+      {isCondensed ? (
+        <Box isRow alignItems="center" flex="1">
+          <Icon
+            icon={isSelected ? CheckedIcon : UncheckedIcon}
+            color="active"
+            size="24px"
+            mr="xs"
+            className={classNames}
+            variant="listBox.checkboxIcon"
+          />
+          {rendered}
+        </Box>
       ) : (
-        (isSelected && !isOnyx) && (
-          <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />
-        )
-      )) }
-      { rendered }
-      {(isSelected && isOnyx) && (
-        <Icon
-          icon={CheckIcon}
-          title={{ name: 'Check Icon' }}
-          color="green-500"
-        />
+        <>
+          {(isSelected && !isOnyx && shouldShowSelectedOption) && <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />}
+          {rendered}
+        </>
       )}
+
+      {
+        (isSelected && isOnyx && shouldShowSelectedOption) && (
+          <Icon
+            icon={CheckIcon}
+            title={{ name: 'Check Icon' }}
+            color="green-500"
+          />
+        )
+      }
     </Box>
   );
 });
+
+Option.defaultProps = {
+  shouldShowSelectedOption: true,
+};
 
 export default Option;

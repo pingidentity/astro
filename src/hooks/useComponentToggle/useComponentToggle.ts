@@ -17,13 +17,13 @@ interface UseComponentToggle {
    * @returns {Object} `{ isOpen: Boolean, open: Function, close: Function, toggle: Function }`
    * @returns {Object} `{ handleConditionChange: Function, renderedComponent: Component, }`
    */
-  (props: ComponentToggleProps): ComponentToggleResult
+  (props: ComponentToggleProps): ComponentToggleResult;
 }
 
 export interface ComponentToggleProps {
   ComponentToRenderIfTrue: React.ReactNode;
   ComponentToRenderIfFalse: React.ReactNode;
-  condition: boolean;
+  isToggled: boolean;
   onConditionChange?: (newCondition: boolean, ...args: unknown[]) => void;
 }
 
@@ -36,20 +36,20 @@ const useComponentToggle: UseComponentToggle = props => {
   const {
     ComponentToRenderIfTrue,
     ComponentToRenderIfFalse,
-    condition,
+    isToggled,
     onConditionChange,
   } = props;
 
-  const [isToggled, setIsToggled] = useProgressiveState(
-    condition,
-    false);
+  const [isToggledState, setIsToggled] = useProgressiveState(isToggled, false);
 
-  const RenderedComponent = isToggled ? ComponentToRenderIfTrue : ComponentToRenderIfFalse;
+  const RenderedComponent = isToggledState
+    ? ComponentToRenderIfTrue
+    : ComponentToRenderIfFalse;
 
   const handleConditionChange = (...args: unknown[]) => {
-    setIsToggled(!isToggled);
+    setIsToggled(!isToggledState);
     if (onConditionChange) {
-      onConditionChange(!isToggled, ...args);
+      onConditionChange(!isToggledState, ...args);
     }
   };
 

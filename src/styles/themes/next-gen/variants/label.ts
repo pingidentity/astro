@@ -2,7 +2,7 @@ import { ThemeUICSSObject } from 'theme-ui';
 
 export const label: ThemeUICSSObject = {
   color: 'text.primary',
-  fontSize: '.9375rem',
+  fontSize: 'md',
   '&.is-float-label': {
     fontSize: 'md',
     fontWeight: 1,
@@ -14,7 +14,7 @@ export const label: ThemeUICSSObject = {
   },
   opacity: 1,
   checkbox: {
-    fontSize: '.9375rem',
+    fontSize: 'md',
     display: 'inline-flex !important',
     div: {
       flexShrink: 0,
@@ -24,6 +24,8 @@ export const label: ThemeUICSSObject = {
     cursor: 'pointer',
   },
   radioGroup: {
-    fontSize: '.9375rem',
+    color: 'text.primary',
+    fontSize: 'md',
+    mb: 'md',
   },
 };

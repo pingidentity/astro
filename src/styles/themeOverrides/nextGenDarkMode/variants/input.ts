@@ -8,19 +8,10 @@ export const input: ThemeUICSSObject = {
   '&::placeholder': text.placeholder,
 };
 
-
 export const fieldControlWrapper = {
   '> textarea': {
     borderColor: 'border.input',
     backgroundColor: 'background.base',
-  },
-  '&.is-read-only': {
-    '> input': {
-      backgroundColor: 'background.base',
-    },
-    '> textarea': {
-      backgroundColor: 'background.base',
-    },
   },
 };
 
@@ -30,6 +21,18 @@ input.fieldControlWrapper = {
 
 input.multivaluesWrapper = {
   backgroundColor: 'background.base',
+  '&.is-read-only': {
+    boxShadow: 'inset 0 0 0 100px #30373f',
+    border: '1px solid',
+    borderColor: 'border.input',
+    '> input': {
+      backgroundColor: 'disabled',
+    },
+  },
+};
+
+input.promptInput = {
+  color: 'gray-100',
 };
 
 input.search = {

@@ -1,12 +1,20 @@
 import tShirtSizes from '../../styles/themes/astro/customProperties/tShirtSizes';
-import { badgeDeleteButton, deleteButton, invertedBadgeDeleteButton } from '../Badge/Badge.styles';
-import { defaultActive, defaultFocus, defaultHover } from '../Button/Buttons.styles';
+import {
+  badgeDeleteButton,
+  deleteButton,
+  invertedBadgeDeleteButton,
+} from '../Badge/Badge.styles';
+import {
+  defaultActive,
+  defaultFocus,
+  defaultHover,
+} from '../Button/Buttons.styles';
 import { toggle } from '../CollapsiblePanel/CollapsiblePanel.styles';
 import { copyButton } from '../CopyText/CopyText.styles';
 import { containedIcon } from '../DatePicker/DatePicker.styles';
 import { hintButton } from '../HelpHint/HelpHint.styles';
 import { messageCloseButton } from '../Messages/Message.styles';
-import { modalCloseButton } from '../Modal/Modal.styles';
+import { closeButton, modalCloseButton } from '../Modal/Modal.styles';
 import { button } from '../TooltipTrigger/Tooltip.styles';
 
 export const base = {
@@ -35,7 +43,7 @@ export const base = {
     boxShadow: 'standard',
   },
   '&.is-pressed': {
-    'path': {
+    path: {
       fill: 'white',
     },
     bg: 'active',
@@ -68,7 +76,7 @@ const inverted = {
   ...base,
   bg: 'active',
   borderColor: 'active',
-  'path': {
+  path: {
     fill: 'white',
   },
   '&.is-hovered': {
@@ -116,12 +124,12 @@ const applicationPortal = {
     ...defaultFocus,
   },
   '&.is-hovered': {
-    'path': {
+    path: {
       fill: 'active',
     },
   },
   '&.is-pressed': {
-    'path': {
+    path: {
       fill: 'active',
     },
   },
@@ -129,7 +137,7 @@ const applicationPortal = {
 
 const applicationPortalPinned = {
   ...base,
-  'path': {
+  path: {
     fill: 'success.bright',
   },
   background: 'transparent',
@@ -137,12 +145,12 @@ const applicationPortalPinned = {
     ...defaultFocus,
   },
   '&.is-hovered': {
-    'path': {
+    path: {
       fill: 'active',
     },
   },
   '&.is-pressed': {
-    'path': {
+    path: {
       fill: 'active',
     },
   },
@@ -209,6 +217,7 @@ export default {
   inverted,
   messageCloseButton: { ...base, ...messageCloseButton },
   modalCloseButton: { ...base, ...modalCloseButton },
+  modalHeaderCloseButton: { ...base, ...closeButton },
   invertedBadgeDeleteButton,
   invertedSquare,
   square,

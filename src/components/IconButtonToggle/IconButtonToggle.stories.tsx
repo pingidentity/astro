@@ -21,13 +21,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['IconButtonToggle'],
-        '@pingux/mdi-react/EyeOffOutlineIcon': 'EyeOffIcon',
-        '@pingux/mdi-react/EyeOutlineIcon': 'EyeIcon',
-      },
-    },
   },
 } as Meta;
 

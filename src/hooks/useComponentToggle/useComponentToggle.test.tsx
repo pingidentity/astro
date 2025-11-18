@@ -5,20 +5,20 @@ import userEvent from '@testing-library/user-event';
 import useComponentToggle from './useComponentToggle';
 
 const callback = jest.fn();
-const condition = false;
+const isToggled = false;
 const defaultProps = {
-  condition,
+  isToggled,
   onConditionChange: callback,
   ComponentToRenderIfTrue: <span>true-string</span>,
   ComponentToRenderIfFalse: <span>false-string</span>,
 };
 
 const TestComponent = () => {
-  const [thisCondition, setCondition] = useState(false);
+  const [isToggledState, setIsToggledState] = useState(false);
 
   const conditionalRenderProps = {
-    condition: thisCondition,
-    onConditionChange: setCondition,
+    isToggled: isToggledState,
+    onConditionChange: setIsToggledState,
     ComponentToRenderIfTrue: <span>true-string</span>,
     ComponentToRenderIfFalse: <span>false-string</span>,
     onConditionChangeProp: callback,

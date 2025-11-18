@@ -41,7 +41,23 @@ const footerEALink = {
   color: 'gray-400',
 };
 
+const app = {
+  color: 'blue-400',
+  '&.is-hovered': {
+    textDecoration: 'underline',
+    color: 'blue-300',
+  },
+  '&.is-pressed': {
+    color: 'blue-300',
+    textDecoration: 'underline',
+  },
+  '&.is-visited': {
+    color: 'purple-100',
+  },
+};
+
 export default {
+  app,
   nextGen,
   sideNav,
   footerLinks,

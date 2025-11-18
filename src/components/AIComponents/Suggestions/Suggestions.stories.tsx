@@ -6,7 +6,6 @@ import { AstroWrapper, NextGenTheme, Suggestion, Suggestions } from '../../../in
 export default {
   title: 'Ai Components/Suggestions',
   component: Suggestions,
-  codesandbox: false,
 } as Meta;
 
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';

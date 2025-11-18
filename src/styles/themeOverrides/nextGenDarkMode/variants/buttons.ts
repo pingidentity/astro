@@ -10,20 +10,49 @@ const baseIconButton = {
     outlineOffset: '3px',
   },
   '&.is-hovered': {
-    path: { fill: chroma.mix(nextGenColors['gray-400'], 'black', 0.15, 'rgb').hex() },
+    path: {
+      fill: chroma.mix(nextGenColors['gray-400'], 'black', 0.15, 'rgb').hex(),
+    },
     backgroundColor: 'transparent',
   },
   '&.is-pressed': {
     backgroundColor: 'gray-800',
     borderColor: 'gray-900',
-    path: { fill: chroma.mix(nextGenColors['gray-400'], 'black', 0.15, 'rgb').hex() },
+    path: {
+      fill: chroma.mix(nextGenColors['gray-400'], 'black', 0.15, 'rgb').hex(),
+    },
   },
+};
+
+const hintButton = {
+  ...baseIconButton,
+};
+
+const modalCloseButton = {
+  ...baseIconButton,
 };
 
 const iconButtons = {
   base: {
     ...baseIconButton,
   },
+  inverted: {
+    ...baseIconButton,
+    borderColor: 'transparent !important',
+    path: {
+      fill: 'black',
+    },
+    '&.is-pressed': {
+      backgroundColor: chroma.mix('white', 'black', 0.125, 'rgb').hex(),
+      borderColor: chroma.mix('white', 'black', 0.125, 'rgb').hex(),
+    },
+    '&.is-hovered': {
+      border: 'none !important',
+      borderColor: 'none !important',
+      backgroundColor: 'white',
+    },
+  },
+  hintButton,
   nextGen: {
     '&.is-hovered': {
       path: { fill: 'black' },
@@ -43,6 +72,18 @@ const iconButtons = {
     ...baseIconButton,
     '&.is-hovered': {
       backgroundColor: 'gray-700',
+    },
+  },
+  modalCloseButton: {
+    ...baseIconButton,
+  },
+  modalHeaderCloseButton: {
+    ...baseIconButton,
+  },
+  messageCloseButton: {
+    ...baseIconButton,
+    '&.is-hovered': {
+      backgroundColor: '#455469',
     },
   },
 };
@@ -206,11 +247,21 @@ const buttons = {
     },
     '&.is-focused': {
       textDecoration: 'underline',
-      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.30, 'rgb').hex(),
+      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.3, 'rgb').hex(),
       outline: 'none',
     },
   },
   iconButtons,
+  modalCloseButton,
+  listBoxLink: {
+    color: 'blue-400',
+    '&.is-pressed': {
+      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.45, 'rgb').hex(),
+    },
+    '&.is-focused': {
+      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.3, 'rgb').hex(),
+    },
+  },
 };
 
 export default buttons;

@@ -47,11 +47,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['AccordionGroup', 'Badge', 'Box', 'Button', 'HelpHint', 'Item', 'Text', 'TextField'],
-      },
-    },
   },
   argTypes: {
     id: {
@@ -82,7 +77,7 @@ export default {
 
 export const Default = args => {
   return (
-    <AccordionGroup labelHeadingTag="h3" {...args}>
+    <AccordionGroup {...args}>
       <Item key="accordionKey" textValue="accordionKey" label="Accordion Label" data-id="accordionItem">
         <Text>Render me!</Text>
       </Item>
@@ -119,7 +114,6 @@ DifferentLevels.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.accordionGroup.differentLevels,
   },
-  codesandbox: false,
 };
 
 export const Multiple = () => {
@@ -134,7 +128,6 @@ export const Multiple = () => {
     <AccordionGroup
       defaultExpandedKeys={['t2']}
       items={itemArray}
-      labelHeadingTag="h3"
     >
       {item => (
         <Item
@@ -154,7 +147,6 @@ Multiple.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.accordionGroup.multiple,
   },
-  codesandbox: false,
 };
 
 export const ControlledExpanded = () => {
@@ -191,10 +183,6 @@ export const ControlledExpanded = () => {
   );
 };
 
-ControlledExpanded.parameters = {
-  codesandbox: false,
-};
-
 export const UncontrolledExpanded = () => {
   return (
     /*
@@ -216,10 +204,6 @@ export const UncontrolledExpanded = () => {
       )}
     </AccordionGroup>
   );
-};
-
-UncontrolledExpanded.parameters = {
-  codesandbox: false,
 };
 
 export const DisabledState = () => {
@@ -250,7 +234,6 @@ DisabledState.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.accordionGroup.disabledState,
   },
-  codesandbox: false,
 };
 
 export const CustomPresentation = () => {
@@ -285,7 +268,6 @@ CustomPresentation.parameters = {
       story: 'In addition to customizing the theme, prop objects can be passed to certain elements. This allows for simple customization in a pinch. See the source code below for an example.',
     },
   },
-  codesandbox: false,
 };
 
 export const LabelWithBadge = args => {
@@ -325,5 +307,3 @@ export const AccordionWithSlot = () => {
     </AccordionGroup>
   );
 };
-
-AccordionWithSlot.parameters = { codesandbox: false };

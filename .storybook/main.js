@@ -1,15 +1,14 @@
 const path = require('path');
 const fs = require('fs');
-
 function getPackageDir(filepath) {
   let currDir = path.dirname(require.resolve(filepath));
   while (true) {
-    if (fs.existsSync(path.join(currDir, 'package.json'))) {
+    if (fs.existsSync(path.join(currDir, "package.json"))) {
       return currDir;
     }
     const {
       dir,
-      root,
+      root
     } = path.parse(currDir);
     if (dir === root) {
       throw new Error(`Could not find package.json in the parent directories starting from ${filepath}.`);
@@ -52,4 +51,5 @@ module.exports = {
   docs: {
     autodocs: true,
   },
+  staticDirs: ['../public'],
 };

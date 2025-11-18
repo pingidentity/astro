@@ -20,12 +20,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['IconWrapper'],
-        '@pingux/mdi-react/DeleteIcon': 'DeleteIcon',
-      },
-    },
   },
   argTypes: {
     ...iconWrapperArgTypes,

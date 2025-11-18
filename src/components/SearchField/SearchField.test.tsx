@@ -1,7 +1,8 @@
 import React from 'react';
+import { Item } from '@react-stately/collections';
 import userEvent from '@testing-library/user-event';
 
-import { SearchFieldProps } from '../../types';
+import { SearchFieldProps, SearchItem } from '../../types';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
@@ -9,13 +10,22 @@ import { universalFieldComponentTests } from '../../utils/testUtils/universalFor
 import SearchField from '.';
 
 const testId = 'test-radio-group';
+const testValue = 'Option';
 const testLabel = 'Test Label';
 const defaultProps = {
   'data-testid': testId,
   label: testLabel,
 };
-const getComponent = (props:SearchFieldProps = {}) => render((
+const getComponent = (props: SearchFieldProps<SearchItem> = {}) => render((
   <SearchField {...defaultProps} {...props} />
+));
+
+const getAutocompleteComponent = (props: SearchFieldProps<SearchItem> = {}) => render((
+  <SearchField {...defaultProps} {...props}>
+    <Item key="1">Option 1</Item>
+    <Item key="2">Option 2</Item>
+    <Item key="3">Option 3</Item>
+  </SearchField>
 ));
 
 universalFieldComponentTests({
@@ -204,4 +214,103 @@ test('clear button should be keyboard accessible', async () => {
 test('clear button should not be present is hasNoClearButton=true ', () => {
   getComponent({ value: 'test-value', hasNoClearButton: true });
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
+});
+
+describe('Autocomplete mode', () => {
+  beforeAll(() => {
+    jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
+    jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
+    jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
+      cb(0);
+      return 0;
+    });
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('default autocomplete search field', () => {
+    getAutocompleteComponent({ mode: 'autocomplete' });
+    const search = screen.getByLabelText(testLabel);
+    const label = screen.getByText(testLabel);
+    expect(search).toBeInstanceOf(HTMLInputElement);
+    expect(label).toBeInstanceOf(HTMLLabelElement);
+    expect(search).toBeInTheDocument();
+    expect(label).toBeInTheDocument();
+  });
+
+  test('autocomplete options appear on user input', async () => {
+    getAutocompleteComponent({ mode: 'autocomplete' });
+    const control = screen.getByLabelText(testLabel);
+    await userEvent.type(control, testValue);
+    expect(control).toHaveValue(testValue);
+    expect(screen.queryByText('Option 1')).toBeInTheDocument();
+    expect(screen.queryByText('Option 2')).toBeInTheDocument();
+    expect(screen.queryByText('Option 3')).toBeInTheDocument();
+
+    fireEvent.change(control, { target: { value: '3' } });
+    expect(screen.queryByText('Option 1')).not.toBeInTheDocument();
+    expect(screen.queryByText('Option 2')).not.toBeInTheDocument();
+    expect(screen.queryByText('Option 3')).toBeInTheDocument();
+  });
+
+  test('Allow custom values', async () => {
+    const onSubmit = jest.fn();
+    getAutocompleteComponent({ mode: 'autocomplete', onSubmit });
+    const control = screen.getByLabelText(testLabel);
+    await userEvent.type(control, 'Custom Value{enter}');
+    expect(onSubmit).toHaveBeenCalledWith('Custom Value');
+  });
+
+  test('clear button works in autocomplete mode', async () => {
+    getAutocompleteComponent({ mode: 'autocomplete' });
+    const search = screen.getByLabelText(testLabel);
+    await userEvent.type(search, 'clear');
+    expect(search).toHaveValue('clear');
+
+    const clearButton = screen.getByRole('button');
+    expect(clearButton).toHaveAttribute('tabindex', '0');
+
+    act(() => { clearButton.focus(); });
+    expect(clearButton).toHaveFocus();
+
+    fireEvent.keyDown(clearButton, { key: 'Enter' });
+    fireEvent.keyUp(clearButton, { key: 'Enter' });
+    expect(search).toHaveValue('');
+  });
+
+  test('Down arrow key open listbox popup', () => {
+    getAutocompleteComponent({ mode: 'autocomplete' });
+    const search = screen.getByLabelText(testLabel);
+    act(() => { search.focus(); });
+    expect(search).toHaveFocus();
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+    fireEvent.keyDown(search, { key: 'ArrowDown' });
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    expect(screen.getByText('Option 1')).toBeInTheDocument();
+  });
+
+  test("No popup when there aren't any options", async () => {
+    getAutocompleteComponent({ mode: 'autocomplete' });
+    const search = screen.getByLabelText(testLabel);
+    act(() => { search.focus(); });
+    expect(search).toHaveFocus();
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+    await userEvent.type(search, 'xyz');
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    expect(screen.queryByText('Option 1')).not.toBeInTheDocument();
+    expect(search).toHaveValue('xyz');
+  });
 });

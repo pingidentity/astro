@@ -83,7 +83,17 @@ console.log(factorial(5));
 (a) => {};
 `;
 
-export const TypescriptEditor:StoryFn<CodeEditorProps> = args => {
+export const Default: StoryFn<CodeEditorProps> = args => {
+  return (
+    <CodeEditor
+      {...args}
+      height="200px"
+      language="Default"
+    />
+  );
+};
+
+export const TypescriptEditor: StoryFn<CodeEditorProps> = args => {
   return (
     <CodeEditor
       {...args}
@@ -94,7 +104,7 @@ export const TypescriptEditor:StoryFn<CodeEditorProps> = args => {
   );
 };
 
-export const JavascriptEditor:StoryFn<CodeEditorProps> = args => {
+export const JavascriptEditor: StoryFn<CodeEditorProps> = args => {
   return (
     <CodeEditor
       {...args}
@@ -105,7 +115,7 @@ export const JavascriptEditor:StoryFn<CodeEditorProps> = args => {
   );
 };
 
-export const JsonEditor:StoryFn<CodeEditorProps> = args => {
+export const JsonEditor: StoryFn<CodeEditorProps> = args => {
   return (
     <CodeEditor
       {...args}
@@ -116,7 +126,7 @@ export const JsonEditor:StoryFn<CodeEditorProps> = args => {
   );
 };
 
-export const ReadOnly:StoryFn<CodeEditorProps> = () => {
+export const ReadOnly: StoryFn<CodeEditorProps> = () => {
   return (
     <CodeEditor
       defaultValue={jsonCode}

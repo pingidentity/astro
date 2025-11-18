@@ -17,7 +17,7 @@ const defaultProps = {
   label: 'Test Label',
 };
 
-const getComponent = (props:CardProps = {}) => render(
+const getComponent = (props: CardProps = {}) => render(
   <Card {...defaultProps} {...props} />,
 );
 // Needs to be added to each components test file
@@ -45,7 +45,7 @@ test('card allows hover, focus, and press events', async () => {
   );
   const onPress = jest.fn();
 
-  getComponent({ children, onPress, tabIndex: 0 });
+  getComponent({ children, onPress, tabIndex: 0, isInteractiveWithin: false });
 
   const card = screen.getByTestId(testId);
 

@@ -33,19 +33,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Badge',
-          'Box',
-          'CheckboxField',
-          'IconButtonToggle',
-          'Link',
-          'SwitchField',
-          'Text',
-        ],
-      },
-    },
   },
   argTypes: {
     label: {
@@ -110,8 +97,6 @@ export const Controlled: StoryFn<CheckboxFieldProps> = () => {
     />
   );
 };
-
-Controlled.parameters = { codesandbox: false };
 
 export const Required: StoryFn<CheckboxFieldProps> = args => (
   <CheckboxField
@@ -249,8 +234,6 @@ export const ExpandableAndToggleableIndeterminate: StoryFn<CheckboxFieldProps> =
   );
 };
 
-ExpandableAndToggleableIndeterminate.parameters = { codesandbox: false };
-
 export const Indeterminate: StoryFn<CheckboxFieldProps> = () => {
   // Whether the parent checkbox is indeterminate (default is true for our example)
   const [isIndeterminate, setIsIndeterminate] = useState(true);
@@ -333,7 +316,6 @@ Indeterminate.parameters = {
       story: 'When a `CheckboxField` is indeterminate, it\'s necessary to control the state in order to determine how it should function when pressed. Here is an example of how to do that.',
     },
   },
-  codesandbox: false,
 };
 
 export const Disabled: StoryFn<CheckboxFieldProps> = args => (

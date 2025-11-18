@@ -2,12 +2,11 @@ import { OverlayTriggerState, useOverlayTriggerState } from 'react-stately';
 
 import useMountTransition from '../useMountTransition';
 
-
 interface UseOverlayPanelStateProps {
-  isDefaultOpen?: boolean,
-  isOpen?: boolean,
-  onOpenChange?: (isOpen: boolean) => void,
-  transitionDuration?: number,
+  isDefaultOpen?: boolean;
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+  transitionDuration?: number;
 }
 
 export interface UseOverlayPanelReturnState extends OverlayTriggerState {
@@ -18,7 +17,7 @@ export interface UseOverlayPanelStateReturnOnClose {
   (
     stateProp?: OverlayTriggerState,
     triggerRef?: React.RefObject<HTMLButtonElement>,
-    onCloseProp?: VoidFunction,
+    onCloseProp?: VoidFunction
   ): void;
 }
 
@@ -57,13 +56,15 @@ const useOverlayPanelState: UseOverlayPanelState = (props = {}) => {
     onOpenChange,
   });
 
-  const {
-    isOpen: panelOpen,
-  } = state;
+  const { isOpen: isPanelOpen } = state;
 
-  const isTransitioning = useMountTransition(panelOpen, transitionDuration);
+  const isTransitioning = useMountTransition(isPanelOpen, transitionDuration);
 
-  const onClose: UseOverlayPanelStateReturnOnClose = (stateProp, triggerRef, onCloseProp) => {
+  const onClose: UseOverlayPanelStateReturnOnClose = (
+    stateProp,
+    triggerRef,
+    onCloseProp,
+  ) => {
     if (stateProp) {
       stateProp.close();
     }

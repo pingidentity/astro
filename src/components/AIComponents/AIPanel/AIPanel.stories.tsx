@@ -21,9 +21,6 @@ import AIPanelHeader from './AIPanelHeader';
 export default {
   component: AIPanel,
   title: 'AI Components/AI Panel',
-  parameters: {
-    codesandbox: false,
-  },
 } as Meta;
 
 const AIMenuPopover = () => {

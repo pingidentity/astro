@@ -1,7 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import { mergeProps, useButton } from 'react-aria';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
-import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { AccordionItemAriaProps, useAccordionItem } from '@react-aria/accordion';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover } from '@react-aria/interactions';
@@ -10,7 +8,7 @@ import type { Node } from '@react-types/shared';
 import { Button as ThemeUIButton } from 'theme-ui';
 
 import { AccordionContext } from '../../context/AccordionContext';
-import { useStatusClasses } from '../../hooks';
+import { useGetTheme, useStatusClasses } from '../../hooks';
 import { Box, Icon, Text } from '../../index';
 import { hoveredState } from '../AccordionGroup/Accordion.styles';
 
@@ -37,6 +35,9 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
     regionProps = {},
     ...others
   } = item.props;
+
+  const { icons, accordionItemMarginLeft } = useGetTheme();
+  const { MenuUp, MenuDown } = icons;
 
   const state = useContext(AccordionContext) as TreeState<object>;
 
@@ -96,8 +97,8 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
           >
             {item.props.label}
           </Text>
-          <Box as="span" ml="5px">
-            <Icon icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+          <Box as="span" ml={accordionItemMarginLeft}>
+            <Icon color="text.primary" icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
           </Box>
         </ThemeUIButton>
         {item.props.slots?.postHeading
