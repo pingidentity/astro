@@ -9,27 +9,19 @@
   },
   "license": "Apache-2.0",
   "author": "ux-development@pingidentity.com",
-  "main": "./index.umd.js",
-  "module": "./index.mjs",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.umd.js",
-      "types": "./index.d.ts"
-    }
-  },
+  "main": "lib/cjs/index.js",
+  "module": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "install-react-version": "cd ../ && npm run install-react-18 && npm && cd packages/astro && npm",
-    "build": "rm -rf lib && npm run build:cjs && npm run build:esm && cp README.md ./lib && cp MIGRATION.md ./lib",
+    "build": "rm -rf ../../dist/astro && npm run build:types && npm run build:cjs && npm run build:esm && cp README.md ../../dist/astro/lib && cp MIGRATION.md ../../dist/astro/lib && cp package.json ../../dist/astro",
     "build-ci": "npm build",
     "append-version": "node ../../append_current_version.js",
-    "build:types": "tsc",
-    "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files",
-    "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir lib/ --extensions \".ts,.tsx,.js\" --copy-files",
+    "build:types": "tsc --project ./tsconfig.lib.json --emitDeclarationOnly",
+    "build:cjs": "BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir ../../dist/astro/lib/cjs --extensions \".ts,.tsx,.js\"  --copy-files",
+    "build:esm": "BABEL_ENV=esm babel --config-file ./babel.config.js ./src --out-dir ../../dist/astro/lib --extensions \".ts,.tsx,.js\" --copy-files",
     "chromatic": "npx chromatic",
     "coverage": "npx nx test --coverage",
     "coverage-ci": "npx nx test --coverage --ci",
