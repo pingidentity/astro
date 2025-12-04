@@ -24,4 +24,5 @@ export const menuItem = {
 
 export const menu = {
   backgroundColor: '#23282e',
+  borderColor: 'border.attachment',
 };

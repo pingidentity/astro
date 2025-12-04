@@ -194,7 +194,6 @@ export default {
   popoverMenu: {
     container: {
       background: '#23282e',
-      border: '1px solid #69788B',
     },
   },
   dataTable: {
