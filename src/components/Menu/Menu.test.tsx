@@ -181,5 +181,5 @@ test('props passed through others are passed to menu', () => {
   getComponent({ sx: { bg: 'red' } });
   const menu = screen.queryByRole('menu');
   expect(menu).toBeInTheDocument();
-  expect(menu).toHaveStyle('background-color: rgb(255, 0, 0)');
+  expect(menu).toHaveStyle('background-color: red');
 });

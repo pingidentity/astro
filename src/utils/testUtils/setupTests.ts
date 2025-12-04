@@ -1,7 +1,6 @@
 import { matchers } from '@emotion/jest';
 import { toHaveNoViolations } from 'jest-axe';
 import { format } from 'util';
-import { afterEach, vi } from 'vitest';
 
 import 'mutationobserver-shim';
 import 'whatwg-fetch';
@@ -24,6 +23,3 @@ global.console.error = (...args) => {
   }
   throw new Error(format(...args));
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-(globalThis as any).jest = vi;
