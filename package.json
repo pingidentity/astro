@@ -29,8 +29,8 @@
     "demo": "rm -rf ./demo && storybook build -o demo",
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
-    "test": "nx vitest",
-    "test:watch": "nx vitest watch"
+    "test": "jest",
+    "test:watch": "jest watch"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.22.15",

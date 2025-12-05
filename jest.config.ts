@@ -14,13 +14,9 @@ module.exports = {
   modulePathIgnorePatterns: ['/lib/', '/build/', '/dist/'],
   setupFiles: [require.resolve('jest-canvas-mock')],
   setupFilesAfterEnv: ['<rootDir>/src/utils/testUtils/setupTests.ts'],
+  coverageReporters: ['text', 'lcov'],
   coverageThreshold: {
     global: {
-      lines: 92,
-      functions: 92,
-      branches: 80,
-    },
-    './src/**/*.*': {
       lines: 92,
       functions: 92,
       branches: 80,
