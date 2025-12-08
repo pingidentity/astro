@@ -28,9 +28,6 @@ import { placeholder } from '../utils/devUtils/constants/images';
 
 export default {
   title: 'Recipes/Data Visualization with Filtering',
-  parameters: {
-    codesandbox: false,
-  },
 };
 
 const columns = [

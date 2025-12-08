@@ -22,11 +22,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['ColorField', 'OverlayProvider'],
-      },
-    },
   },
   argTypes: {
     value: {

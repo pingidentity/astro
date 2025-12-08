@@ -60,6 +60,7 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
     defaultSelectedKeys = [],
     selectionMode,
     selectedKeys,
+    containerProps,
     ...others
   } = props;
 
@@ -113,27 +114,28 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
     [getDefaultMinWidth],
   );
 
-  const layout = useMemo(() => new TableLayout({
-    // If props.rowHeight is auto,
-    // then use estimated heights based on scale, otherwise use fixed heights.
-    rowHeight: props.overflowMode === 'wrap'
-      ? null
-      : ROW_HEIGHTS[density][scale],
-    estimatedRowHeight: props.overflowMode === 'wrap'
-      ? ROW_HEIGHTS[density][scale]
-      : null,
-    headingHeight: props.overflowMode === 'wrap'
-      ? undefined
-      : DEFAULT_HEADER_HEIGHT[scale],
-    estimatedHeadingHeight: props.overflowMode === 'wrap'
-      ? DEFAULT_HEADER_HEIGHT[scale]
-      : undefined,
-    columnLayout,
-    initialCollection: state.collection,
-  }),
-  // don't recompute when state.collection changes, only used for initial value
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [props.overflowMode, scale, density, columnLayout],
+  const layout = useMemo(
+    () => new TableLayout({
+      // If props.rowHeight is auto,
+      // then use estimated heights based on scale, otherwise use fixed heights.
+      rowHeight: props.overflowMode === 'wrap'
+        ? null
+        : ROW_HEIGHTS[density][scale],
+      estimatedRowHeight: props.overflowMode === 'wrap'
+        ? ROW_HEIGHTS[density][scale]
+        : null,
+      headingHeight: props.overflowMode === 'wrap'
+        ? undefined
+        : DEFAULT_HEADER_HEIGHT[scale],
+      estimatedHeadingHeight: props.overflowMode === 'wrap'
+        ? DEFAULT_HEADER_HEIGHT[scale]
+        : undefined,
+      columnLayout,
+      initialCollection: state.collection,
+    }),
+    // don't recompute when state.collection changes, only used for initial value
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props.overflowMode, scale, density, columnLayout],
   );
 
   const { gridProps } = useTable({
@@ -142,7 +144,7 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
     layout,
     onRowAction: onAction,
   }, state, domRef);
-  const [headerMenuOpen, setHeaderMenuOpen] = useState(false);
+  const [isHeaderMenuOpen, setIsHeaderMenuOpen] = useState(false);
 
   // This overrides collection view's renderWrapper to support DOM hierarchy.
   const renderWrapper = (parent, reusableView, children, renderChildren) => {
@@ -261,7 +263,7 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
   );
 
   return (
-    <Box variant="dataTable.container">
+    <Box variant="dataTable.container" {...containerProps}>
       <DataTableContext.Provider
         value={{
           state,
@@ -270,8 +272,8 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
           setIsInResizeMode,
           isEmpty,
           onFocusedResizer,
-          headerMenuOpen,
-          setHeaderMenuOpen,
+          headerMenuOpen: isHeaderMenuOpen,
+          setHeaderMenuOpen: setIsHeaderMenuOpen,
         }}
       >
         <DataTableVirtualizer
@@ -309,10 +311,10 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   const { column, isFirst, isLast } = props;
   const ref = useRef(null);
   const { state } = useDataTableContext();
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
   const {
-    MenuUp,
-    MenuDown,
+    Ascending,
+    Descending,
   } = icons;
   const { columnHeaderProps } = useTableColumnHeader(
     {
@@ -324,11 +326,12 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
   );
 
   const columnProps = column.props;
+  const iconSize = isOnyx ? 16 : 24;
   const arrowIcon = state.sortDescriptor?.direction === 'ascending' && column.key === state.sortDescriptor?.column
     ? (
-      <Icon size={24} icon={MenuUp} title={{ name: 'Menu Up Icon' }} />
+      <Icon size={iconSize} icon={Ascending} title={{ name: 'Menu Up Icon' }} />
     ) : (
-      <Icon size={24} icon={MenuDown} color="active" title={{ name: 'Menu Down Icon' }} />
+      <Icon size={iconSize} icon={Descending} color="active" title={{ name: 'Menu Down Icon' }} />
     );
   const allProps = [columnHeaderProps];
 
@@ -388,19 +391,14 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
   const isSelected = state.selectionManager.isSelected(item.key);
   const isDisabled = state.disabledKeys.has(item.key);
 
-  const {
-    isFocusVisible: isFocusVisibleWithin,
-    focusProps: focusWithinProps,
-  } = useFocusRing({ within: true });
-
   const { isFocusVisible, focusProps } = useFocusRing();
 
   const { hoverProps, isHovered } = useHover({});
 
-  const props = mergeProps(otherProps, focusWithinProps, focusProps, rowProps, hoverProps);
+  const props = mergeProps(otherProps, focusProps, rowProps, hoverProps);
 
   const { classNames } = useStatusClasses('', {
-    'is-row-focus-visible': isFocusVisible || isFocusVisibleWithin,
+    'is-row-focus-visible': isFocusVisible,
     isSelectable,
     isSelected,
     isHovered,
@@ -410,14 +408,16 @@ const TableRow = ({ item, children, hasActions, ...otherProps }: DataTableRowPro
   const variant = isSelectable ? 'dataTable.selectableTableRow' : 'dataTable.tableRow';
 
   return (
-    <Box
-      {...props as BoxProps}
-      ref={ref}
-      variant={variant}
-      className={classNames}
-    >
-      {children}
-    </Box>
+    <FocusRing focusRingClass="is-row-focus-visible">
+      <Box
+        {...props as BoxProps}
+        ref={ref}
+        variant={variant}
+        className={classNames}
+      >
+        {children}
+      </Box>
+    </FocusRing>
   );
 };
 

@@ -28,13 +28,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/mdi-react/AccountGroupIcon': 'GroupIcon',
-        '@pingux/mdi-react/ArrowTopRightThickIcon': 'ArrowIcon',
-        '@pingux/astro': ['Box', 'Icon', 'IconBadge'],
-      },
-    },
   },
 } as Meta;
 
@@ -44,13 +37,13 @@ export const Default: StoryFn<IconBadgeProps> = args => (
       <Icon
         icon={GroupIcon}
         size="25px"
-        color="accent.40"
+        color="badge.iconBadgeFill"
         title={{ name: 'Group Icon' }}
       />
       <Icon
         icon={ArrowIcon}
         size="13px"
-        color="accent.40"
+        color="badge.iconBadgeFill"
         title={{ name: 'Arrow Icon' }}
       />
     </IconBadge>

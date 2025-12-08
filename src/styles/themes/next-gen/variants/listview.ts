@@ -107,7 +107,7 @@ export const listView = {
   container: {
     borderRadius,
     border: '1px solid',
-    borderColor: '#e7eef4',
+    borderColor: 'border.hairline',
   },
 };
 

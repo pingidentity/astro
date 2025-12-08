@@ -1,15 +1,13 @@
 import React, { forwardRef, useRef } from 'react';
-import { DismissButton, FocusScope, useMenuTrigger, useOverlayPosition } from 'react-aria';
+import { DismissButton, FocusScope, OverlayContainer, useMenuTrigger } from 'react-aria';
 import { useMenuTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
 
 import { MenuContext } from '../../context/MenuContext';
-import { useLocalOrForwardRef } from '../../hooks';
 import { Placement, PopoverMenuProps } from '../../types';
-import PopoverContainer from '../PopoverContainer';
+import Popover from '../Popover/Popover';
 
 const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) => {
-  const menuPopoverRef = useLocalOrForwardRef<HTMLDivElement>(ref);
   const triggerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLElement>(null);
 
@@ -36,26 +34,13 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
 
   const { menuTriggerProps, menuProps } = useMenuTrigger({}, state, triggerRef);
 
-  const { overlayProps: positionProps, placement } = useOverlayPosition({
-    targetRef: triggerRef,
-    overlayRef: menuPopoverRef,
-    scrollRef: menuRef,
-    offset: 5,
-    placement: `${direction} ${align}` as Placement | undefined,
-    // Our API preference is for default false so we invert this since it should be default true
-    shouldFlip: !isNotFlippable,
-    isOpen: state.isOpen,
-    onClose: state.close,
-    shouldUpdatePosition: true,
-  });
-
   /* eslint-disable react/jsx-no-constructed-context-values */
   const menuContext = {
     ...menuProps,
     ref: menuRef,
     onClose: state.close,
     // Our API preference is for default false so we invert this since it should be default true
-    closeOnSelect: !isNotClosedOnSelect,
+    shouldCloseOnSelect: !isNotClosedOnSelect,
     autoFocus: state.focusStrategy || true,
   };
 
@@ -67,26 +52,29 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
     </FocusScope>
   );
 
+  const placement = `${direction} ${align}` as Placement | undefined;
+
   return (
     <>
       <PressResponder {...menuTriggerProps} ref={triggerRef} isPressed={state.isOpen}>
         {menuTrigger}
       </PressResponder>
       <MenuContext.Provider value={menuContext}>
-        <PopoverContainer
-          isOpen={state.isOpen}
-          ref={menuPopoverRef}
-          placement={placement ?? undefined}
-          onClose={state.close}
-          hasNoArrow={hasNoArrow}
-          isDismissable
-          isNonModal
-          {...positionProps}
-          {...menuProps}
-          role="dialog"
-        >
-          {contents}
-        </PopoverContainer>
+        <OverlayContainer>
+          <Popover
+            placement={placement}
+            hasNoArrow={hasNoArrow}
+            {...menuProps}
+            data-popover-placement={direction}
+            data-testid="popover-container"
+            role="presentation"
+            triggerRef={triggerRef}
+            state={state}
+            direction={direction}
+          >
+            {contents}
+          </Popover>
+        </OverlayContainer>
       </MenuContext.Provider>
     </>
   );

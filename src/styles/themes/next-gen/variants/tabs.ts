@@ -1,5 +1,7 @@
 export const tabs = {
-  gap: '0px',
+  '&.is-horizontal': {
+    gap: '0px',
+  },
 };
 
 export const menuTab = {

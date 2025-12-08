@@ -35,11 +35,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'CopyText', 'Text', 'Link', 'TextField'],
-      },
-    },
   },
   argTypes: {
     mode: {

@@ -1,7 +1,7 @@
 import merge from 'deepmerge';
 
 import { themes } from '../../../utils/devUtils/constants/themes';
-import theme from '../../theme.js';
+import theme from '../../theme';
 
 import codeView from './codeView/codeView';
 import colors from './colors/colors';
@@ -36,7 +36,7 @@ const nextGenTheme = {
   fontSizes,
   fontWeights,
   lineHeights: {
-    body: '1.5',
+    body: '1.6',
     md: '1.75',
   },
   text: newText,

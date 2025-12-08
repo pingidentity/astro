@@ -75,6 +75,7 @@ export default {
   },
   args: {
     label: 'Field Label',
+    'aria-label': 'File Input Field',
   },
 };
 

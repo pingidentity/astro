@@ -6,7 +6,6 @@ import { TabListState } from '@react-stately/tabs';
 
 import {
   Box,
-  Button,
   Text,
   Tooltip,
   TooltipTrigger,
@@ -24,19 +23,13 @@ import { TabsContext } from '../Tabs';
  */
 
 export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
-  const {
-    className,
-    item,
-    isDisabled: tabsDisabled,
-    orientation,
-    mode,
-    slots,
-  } = props;
+  const { className, item, isDisabled: isTabsDisabled,
+    isRequired, orientation, mode, slots } = props;
 
   const { key, rendered, props: itemProps } = item;
 
   const state = useContext(TabsContext) as TabListState<object>;
-  const isDisabled = tabsDisabled || itemProps?.isDisabled || state.disabledKeys.has(key);
+  const isDisabled = isTabsDisabled || itemProps?.isDisabled || state.disabledKeys.has(key);
   const isSelected = state.selectedKey === key;
   const { isFocusVisible, focusProps } = useFocusRing();
   const { hoverProps, isHovered } = useHover({});
@@ -53,6 +46,8 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
   const tabRef = useLocalOrForwardRef<HTMLElement>(ref);
   const { tabProps } = useTab({ key, isDisabled }, state, tabRef);
 
+  const defaultIndicator = <Box variant="forms.label.indicator">*</Box>;
+
   const tab = (
     <Box isRow>
       {slots?.beforeTab}
@@ -64,11 +59,17 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
         ref={tabRef}
         {...itemProps}
         title={itemProps?.textValue}
+        width="100%"
       >
         <>
           {itemProps?.icon}
-          <Text variant="tabLabel" {...itemProps?.tabLabelProps}>
+          <Text
+            variant="tabLabel"
+            display="flex"
+            {...itemProps?.tabLabelProps}
+          >
             {rendered}
+            {isRequired && defaultIndicator}
           </Text>
           {isSelected && !isDisabled && <TabLine {...itemProps?.tabLineProps} />}
         </>

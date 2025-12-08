@@ -25,9 +25,6 @@ import {
 
 export default {
   title: 'Recipes/CollapsiblePanel with List',
-  parameters: {
-    codesandbox: false,
-  },
 };
 
 const data = [

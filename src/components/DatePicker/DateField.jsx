@@ -59,6 +59,7 @@ const DateField = forwardRef((props, ref) => {
     minValue,
     maxValue,
     unavailableRanges,
+    fieldControlProps,
     ...other
   } = props;
 
@@ -260,6 +261,7 @@ const DateField = forwardRef((props, ref) => {
           isRow
           variant="forms.datePicker.inputField"
           {...dateFieldProps}
+          {...fieldControlProps}
           ref={fieldRef}
           className={classNames}
         >
@@ -360,6 +362,8 @@ DateField.propTypes = {
   unavailableRanges: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   /** Props object that is spread directly into the input wrapper element. */
   wrapperProps: PropTypes.shape({}),
+  /** Props object that spread into date segment wrapper element. */
+  fieldControlProps: PropTypes.shape({}),
 };
 
 DateField.defaultProps = {

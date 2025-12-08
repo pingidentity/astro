@@ -1,10 +1,12 @@
 import React, {
+  createContext,
   forwardRef,
   useContext,
 } from 'react';
 import { useRadio } from 'react-aria';
+import { RadioGroupState } from 'react-stately';
+import { usePress } from '@react-aria/interactions';
 
-import { RadioContext } from '../../context/RadioContext';
 import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { UseFieldProps } from '../../hooks/useField/useField';
 import { RadioFieldProps } from '../../types/radioField';
@@ -13,6 +15,9 @@ import FieldHelperText from '../FieldHelperText';
 import Label from '../Label';
 import Radio from '../Radio';
 
+const defaultValue = {} as RadioGroupState;
+
+export const RadioContext = createContext<RadioGroupState>(defaultValue);
 
 /**
  * Combines a radio, label, and helper text for a complete, form-ready solution.
@@ -26,7 +31,7 @@ const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>((props, ref) =>
     controlProps,
     hasAutoFocus,
     helperText,
-    isDisabled: radioDisabled,
+    isDisabled: isRadioDisabled,
     label,
     status,
   } = props;
@@ -35,8 +40,8 @@ const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>((props, ref) =>
   const radioFieldRef = useLocalOrForwardRef<HTMLInputElement>(ref);
 
   const state = useContext(RadioContext);
-  const { isDisabled: groupDisabled } = state;
-  const isDisabled = radioDisabled || groupDisabled;
+  const { isDisabled: isGroupDisabled } = state;
+  const isDisabled = isRadioDisabled || isGroupDisabled;
   const { inputProps } = useRadio(
     {
       children: label,
@@ -61,9 +66,11 @@ const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>((props, ref) =>
     controlProps: { ...controlProps, ...inputProps },
   } as UseFieldProps<object>);
 
+  const { pressProps } = usePress({});
+
   return (
     <Box variant="forms.radio.outerContainer" {...fieldContainerProps}>
-      <Label variant="forms.label.radio" {...fieldLabelProps}>
+      <Label variant="forms.label.radio" {...fieldLabelProps} {...pressProps}>
         <Box {...fieldControlWrapperProps} variant="forms.radio.controlWrapper">
           <Radio
             ref={radioFieldRef}
@@ -76,19 +83,19 @@ const RadioField = forwardRef<HTMLInputElement, RadioFieldProps>((props, ref) =>
       {
         helperText
         && (
-        <FieldHelperText status={status}>
-          {helperText}
-        </FieldHelperText>
+          <FieldHelperText status={status}>
+            {helperText}
+          </FieldHelperText>
         )
       }
       {
         isChecked && (
           checkedContent
-        && (
-        <Box variant="forms.radio.checkedContent">
-          {checkedContent}
-        </Box>
-        )
+          && (
+            <Box variant="forms.radio.checkedContent">
+              {checkedContent}
+            </Box>
+          )
         )
       }
     </Box>

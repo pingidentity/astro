@@ -27,7 +27,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
     wrapperProps,
     iconButtonProps,
     ...others } = props;
-  const value = textToCopy || (mode === 'link' ? (children as ReactElement).props.href : (children as ReactElement).props.children);
+  const value = textToCopy || (mode === 'link' ? (children as ReactElement)?.props?.href : (children as ReactElement).props?.children);
 
   const [isCopied, setIsCopied] = useState(false);
 
@@ -75,6 +75,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
         ref={contentRef}
         {...mergeProps(focusProps, pressProps)}
         role="presentation"
+        sx={{ cursor: 'pointer' }}
       >
         {children}
       </Box>
@@ -119,6 +120,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
         ref={ref}
         isRow
         variant="copyText.copy"
+        justifyContent={content ? 'start' : 'end'}
         {...wrapperProps}
         {...others}
       >
@@ -147,6 +149,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
           variant="copyText.copy"
           {...others}
           role="presentation"
+          gap="sm"
         >
           {mode !== 'rightText' && content}
           <CopyButton onPress={copyToClipboard} {...focusProps} {...iconButtonProps} />

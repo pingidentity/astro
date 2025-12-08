@@ -144,9 +144,11 @@ const lineNo = {
 };
 
 export const copyButton = {
+  mx: 'sm',
   path: {
-    fill: 'gray-300',
+    fill: 'text.primary',
   },
+  border: 'none !important',
 };
 
 export default {

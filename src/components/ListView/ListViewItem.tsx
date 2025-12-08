@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { mergeProps, useFocusRing, useGridListItem } from 'react-aria';
+import { FocusRing, mergeProps, useFocusRing, useGridListItem } from 'react-aria';
 import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
@@ -31,7 +31,6 @@ const ListViewItem = props => {
 
   const {
     isFocusVisible: isFocusVisibleWithin,
-    focusProps: focusWithinProps,
   } = useFocusRing({ within: true });
 
   const { focusProps, isFocusVisible } = useFocusRing();
@@ -45,10 +44,10 @@ const ListViewItem = props => {
       state.hover.setHoveredItem(item.key);
     },
     onHoverEnd:
-    /* istanbul ignore next */
-    () => {
-      onPointerLeaveFunction();
-    },
+      /* istanbul ignore next */
+      () => {
+        onPointerLeaveFunction();
+      },
   });
 
   const {
@@ -66,7 +65,7 @@ const ListViewItem = props => {
   const mergedProps = mergeProps(
     raRowProps,
     hoverProps,
-    isFocusable ? { ...focusProps, ...focusWithinProps } : {},
+    isFocusable ? { ...focusProps } : {},
     { onPointerLeave: onPointerLeaveFunction },
   );
 
@@ -74,15 +73,16 @@ const ListViewItem = props => {
   delete mergedProps['aria-setsize'];
   delete mergedProps['aria-level'];
 
+
   const { classNames } = useStatusClasses(className, {
     isHovered: isSelectable && isHoverable && (item.key === state.hover.hoveredItem),
     isSelected,
-    isFocused: isDisabled ? false : isFocusVisible || isFocusVisibleWithin,
+    isFocused: isDisabled ? false : isFocusVisible,
     hasSeparator,
     hasInsetSeparator,
     isPressed,
     isFirstItem: item.index === 0,
-    isLastItem: item.index === state.collection.size - 1,
+    isLastItem: item.index === state.collection.size - 1 && !state.isLoading,
   });
 
   // Whether the current component should have legacy styles removed
@@ -103,26 +103,27 @@ const ListViewItem = props => {
       {...mergedProps}
       {...rowProps}
       sx={{ outline: 'none' }}
-      data-testid="listview-itemdkgjkdgjldfgk"
     >
-      <Box
-        as="div"
-        variant={listItemVariant}
-        {...gridCellProps}
-        isFocused={isDisabled ? false : isFocusVisible}
-        isDisabled={isDisabled}
-        isSelected={isSelected}
-        className={classNames}
-        data-id={dataId}
-        {...listItemProps}
-      >
-        {item.rendered}
-        {state.isLoading && isFocusVisibleWithin && (
-          <Box variant="listViewItem.loaderContainer">
-            <Loader color="neutral.50" />
-          </Box>
-        )}
-      </Box>
+      <FocusRing focusRingClass="is-focussed">
+        <Box
+          as="div"
+          variant={listItemVariant}
+          {...gridCellProps}
+          isFocused={isDisabled ? false : isFocusVisible}
+          isDisabled={isDisabled}
+          isSelected={isSelected}
+          className={classNames}
+          data-id={dataId}
+          {...listItemProps}
+        >
+          {item.rendered}
+          {state.isLoading && isFocusVisibleWithin && (
+            <Box variant="listViewItem.loaderContainer">
+              <Loader color="neutral.50" />
+            </Box>
+          )}
+        </Box>
+      </FocusRing>
     </Box>
   );
 };

@@ -8,7 +8,7 @@ import languageMapping from '../../utils/devUtils/constants/languageMapping';
 
 const CodeEditor = forwardRef<HTMLDivElement, CodeEditorProps>((props, ref) => {
   const {
-    defaultValue,
+    defaultValue = '\n',
     language,
     onChange,
     onValidate,

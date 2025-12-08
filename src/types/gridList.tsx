@@ -17,8 +17,17 @@ import {
   DroppableCollectionStateOptions,
 } from './dnd';
 
-export interface GridListProps extends SharedGridProps {
+export interface GridListProps {
     isReorderable?: boolean;
+    rowProps?: object,
+    cellProps?: object,
+    containerProps?: object,
+    items: Iterable<object>;
+    children?: React.ReactNode;
+    keyboardNavigationBehavior?: 'arrow' | 'tab';
+    onAction?: (key: Key) => void;
+    onSelectionChange?: (keys: Selection) => void;
+    collection?: Collection<Node<object>>;
 }
 
 export type GridListRowProps = SharedGridListItemProps;
@@ -30,8 +39,7 @@ export interface GridRowProps {
 export interface ReorderableProps extends
     DraggableCollectionStateOptions,
     DroppableCollectionOptions,
-    DroppableCollectionStateOptions
-    {
+    DroppableCollectionStateOptions {
 }
 
 interface SharedGridListItemProps {
@@ -43,25 +51,21 @@ interface SharedGridListItemProps {
     state: ListState<object>;
 }
 
-interface SharedGridProps {
-    isReorderable?: boolean;
-}
-
 export interface UseGridListItemProps extends SharedGridListItemProps {
     cellRef: React.Ref<HTMLDivElement>;
     ref: RefObject<HTMLElement>;
 }
 
 export interface UseGridListProps extends ReorderableProps {
-    allowDuplicateSelectionEvents?: boolean;
-    autoFocus?: boolean | FocusStrategy;
+    shouldAllowDuplicateSelectionEvents?: boolean;
+    hasAutoFocus?: boolean | FocusStrategy;
     children?: React.ReactNode;
-    collection: Collection<Node<object>>;
+    collection?: Collection<Node<object>>;
     defaultSelectedKeys?: Iterable<Key> | 'all';
     disabledBehavior?: DisabledBehavior;
     disabledKeys?: Iterable<Key>;
-    disallowEmptySelection?: boolean;
-    disallowTypeAhead?: boolean;
+    shouldDisallowEmptySelection?: boolean;
+    shouldDisallowTypeAhead?: boolean;
     escapeKeyBehavior?: 'clearSelection' | 'none';
     filter?: (item: object, filterText: string) => boolean;
     getKey?: (item: object) => Key;

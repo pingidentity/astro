@@ -220,6 +220,10 @@ export const link = {
   },
 };
 
+const listBoxLink = {
+  ...link,
+};
+
 const defaultVariant = {
   ...base,
   bg: 'white',
@@ -383,6 +387,7 @@ export default {
   inlinePrimaryWithIcon,
   inlineWithIcon,
   link,
+  listBoxLink,
   paginationMenu,
   primary,
   primaryWithIcon,

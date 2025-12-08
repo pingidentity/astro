@@ -33,5 +33,4 @@ const DataTableMultiLine = forwardRef<HTMLDivElement, DataTableMultiLineProps>((
   </>
 ));
 
-
 export default DataTableMultiLine;

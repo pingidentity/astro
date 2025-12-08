@@ -24,11 +24,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Link', 'Text'],
-      },
-    },
   },
   argTypes: {
     href: {

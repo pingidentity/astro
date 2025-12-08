@@ -3,6 +3,7 @@ import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
 import colors from '../colors/colors';
 
+import accordion from './accordion';
 import { avatar } from './avatar';
 import button, { defaultFocus } from './button';
 import callout from './callout';
@@ -13,9 +14,11 @@ import { listView, listViewItem, lisViewItemChart } from './listview';
 import { menu, menuItem } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
+import panelHeader from './panelHeader';
 import popoverMenu from './popoverMenu';
 import prompt from './prompt';
 import response from './response';
+import stepper from './stepper';
 import suggestion from './suggestion';
 import suggestions from './suggestions';
 import { table } from './table';
@@ -43,26 +46,6 @@ const fieldHelperText = {
   },
 };
 
-const badgeFont = {
-  fontSize: '11.25px',
-  fontWeight: 2,
-};
-
-const baseBadge = {
-  alignItems: 'center',
-  justifyContent: 'center',
-  py: '.25em',
-  px: '.4em',
-  borderRadius: '4px',
-  fontSize: '11.25px',
-  alignSelf: 'flex-start',
-  display: 'inline-flex !important',
-  width: 'fit-content',
-  '& span': {
-    ...badgeFont,
-  },
-};
-
 export const badgeDeleteButton = {
   ...button.iconButtons.base,
   borderRadius: '50%',
@@ -70,82 +53,6 @@ export const badgeDeleteButton = {
   height: 14,
   p: 0,
   width: 14,
-};
-
-export const badges = {
-  primary: {
-    ...baseBadge,
-    backgroundColor: '#eaf1fb !important',
-    '& span': {
-      ...badgeFont,
-      color: '#1967d2',
-    },
-  },
-  baseBadge: {
-    ...baseBadge,
-    backgroundColor: '#eaf1fb !important',
-    '& span': {
-      ...badgeFont,
-      color: '#1967d2',
-    },
-  },
-  secondary: {
-    ...baseBadge,
-    backgroundColor: '#f6f8fa !important',
-    '& span': {
-      ...badgeFont,
-      color: 'gray-900',
-    },
-  },
-  success: {
-    ...baseBadge,
-    backgroundColor: '#d3eddf !important',
-    '& span': {
-      ...badgeFont,
-      color: 'success.dark',
-    },
-  },
-  danger: {
-    ...baseBadge,
-    backgroundColor: '#f8d8d5 !important',
-    '& span': {
-      ...badgeFont,
-      color: 'red-700',
-    },
-  },
-  warning: {
-    ...baseBadge,
-    backgroundColor: '#fff1da !important',
-    '& span': {
-      ...badgeFont,
-      color: 'yellow-700',
-    },
-  },
-  dark: {
-    ...baseBadge,
-    backgroundColor: 'black !important',
-    '& span': {
-      ...badgeFont,
-      color: 'white',
-    },
-  },
-  selectedItemBadge: {
-    ...baseBadge,
-    backgroundColor: '#eaf2fd !important',
-    paddingRight: '0px !important',
-    '& span': {
-      ...badgeFont,
-      fontSize: '14px',
-      color: 'text.primary',
-      fontWeight: 400,
-    },
-  },
-  readOnlyBadge: {
-    '& span': {
-      fontSize: '14px',
-    },
-  },
-  badgeDeleteButton,
 };
 
 const modalSize = {
@@ -159,17 +66,10 @@ const modalSize = {
 const modal = {
   content: {
     boxShadow: '0px 8px 16px 0px rgba(0, 0, 0, 0.5)',
-    px: 'lg',
-    pb: 'lg',
-    pt: 0,
-    borderRadius: '4px',
+    borderRadius: '1em',
     opacity: 0,
-    top: '0',
-    transform: 'translate(0, -50px)',
     transition: 'opacity 300ms ease, transform 500ms ease-out',
     m: ['sm', 'sm', '1.75rem auto'],
-    maxHeight: 'calc(100vh - 3.5rem)',
-    overflowY: 'auto',
     '&.is-open-no-transition': {
       opacity: '100%',
       transform: 'none',
@@ -199,13 +99,35 @@ const modal = {
       maxWidth: modalSize.full,
     },
   },
-  container: {
-    justifyContent: 'start',
+  headingContainer: {
+    borderBottom: '1px solid',
+    borderBottomColor: 'gray-200',
+    bg: 'background.base',
+    borderRadius: '1em 1em 0px 0px',
   },
   header: {
-    pt: 'lg',
-    bg: 'background.base',
-    mb: 'lg',
+    borderBottom: '1px solid',
+    borderBottomColor: 'gray-200',
+    borderRadius: '1em 1em 0px 0px',
+    px: 'lg',
+    py: 'md',
+  },
+  bodyContainer: {
+    p: 'lg',
+  },
+  body: {
+    p: 'lg',
+  },
+  footer: {
+    borderTop: '1px solid',
+    borderTopColor: 'gray-200',
+    borderRadius: '0px 0px 1em 1em',
+    p: 'lg',
+  },
+  footerContainer: {
+    borderTop: '1px solid',
+    borderTopColor: 'gray-200',
+    borderRadius: '0px 0px 1em 1em',
   },
 };
 
@@ -234,6 +156,16 @@ const listBox = {
     '&.is-pressed': {
       color: 'text.primary',
       bg: 'lightblue',
+    },
+    '&.is-condensed': {
+      pl: 'md',
+      bg: 'background.base',
+      '&.is-selected': {
+        bg: 'background.base',
+      },
+      '&.is-focused': {
+        bg: 'background.base',
+      },
     },
   },
 };
@@ -276,7 +208,7 @@ const progressBar = {
 const overlayPanel = {
   container: {
     backgroundColor: 'background.base',
-    border: 'none',
+    borderColor: 'border.hairline',
   },
   aiPanelContainer: {
     backgroundColor: 'background.base',
@@ -313,6 +245,17 @@ const overlayPanel = {
     alignSelf: 'center',
   },
   innerPanel: {
+    backgroundColor: 'background.base',
+  },
+};
+
+const buttonBar = {
+  container: {
+    gap: 'sm',
+    backgroundColor: 'background.base',
+  },
+  justifyRightContainer: {
+    gap: 'sm',
     backgroundColor: 'background.base',
   },
 };
@@ -378,6 +321,17 @@ const rockerButton = {
 const loader = {
   withinListView: {
     color: 'active',
+    py: 'sm',
+  },
+  circleSpinner: {
+    borderColor: 'background.base',
+  },
+};
+
+const breadcrumb = {
+  link: {
+    fontWeight: 2,
+    fontSize: 'lg',
   },
 };
 
@@ -443,41 +397,10 @@ const statusIcon = {
 };
 
 export default {
+  accordion,
   attachment,
-  navBar,
-  fieldHelperText,
-  message,
-  modal,
-  tab,
-  menuTab,
-  listBox,
-  separator,
-  menuItem,
   avatar,
-  listViewItem,
-  progressBar,
-  listView,
-  lisViewItemChart,
-  dataTable,
-  codeView,
-  popoverMenu,
-  prompt,
-  tabs,
-  menu,
-  iconWrapper,
-  overlayPanel,
-  suggestions,
-  suggestion,
-  response,
-  skeleton,
-  rockerButton,
-  tooltip,
-  footer,
-  loader,
-  callout,
-  table,
-  tableBase,
-  statusIcon,
+  breadcrumb,
   box: {
     indeterminateCheckboxIcon: {
       height: '19.25px',
@@ -493,4 +416,40 @@ export default {
       },
     },
   },
+  buttonBar,
+  callout,
+  codeView,
+  dataTable,
+  fieldHelperText,
+  footer,
+  iconWrapper,
+  listBox,
+  listView,
+  listViewItem,
+  lisViewItemChart,
+  loader,
+  menu,
+  menuItem,
+  menuTab,
+  message,
+  modal,
+  navBar,
+  overlayPanel,
+  panelHeader,
+  popoverMenu,
+  progressBar,
+  prompt,
+  response,
+  rockerButton,
+  separator,
+  skeleton,
+  stepper,
+  suggestion,
+  suggestions,
+  statusIcon,
+  tab,
+  table,
+  tableBase,
+  tabs,
+  tooltip,
 };

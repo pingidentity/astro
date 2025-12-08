@@ -46,12 +46,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Button', 'Item', 'Link', 'Messages'],
-        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
-      },
-    },
   },
 } as Meta;
 
@@ -108,7 +102,6 @@ DefaultDynamic.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const Controlled = () => {
@@ -144,7 +137,6 @@ Controlled.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const ControlledWithButton = () => {
@@ -187,7 +179,6 @@ ControlledWithButton.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const UseReducer = () => {
@@ -251,7 +242,6 @@ UseReducer.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const UseReducerWithMultipleContainers = () => {
@@ -304,7 +294,6 @@ UseReducerWithMultipleContainers.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const WithTextStyling = () => {
@@ -343,7 +332,6 @@ WithTextStyling.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
-  codesandbox: false,
 };
 
 export const WithLink = args => {

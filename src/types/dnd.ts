@@ -92,6 +92,8 @@ export interface GridListRowProps {
   isReorderable?: boolean;
   item: Node<object>;
   state: ListState<object>;
+  rowProps?: object;
+  cellProps?: object;
 }
 
 export interface UseReorderableCollectionProps {

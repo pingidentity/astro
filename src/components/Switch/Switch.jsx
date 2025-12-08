@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { VisuallyHidden } from 'react-aria';
 import PropTypes from 'prop-types';
 
+import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 
 /**
@@ -12,9 +13,11 @@ import Box from '../Box';
  * **Note: Requires a label. It's recommended to use `SwitchField` for a complete solution.**
  */
 const Switch = forwardRef((props, ref) => {
-  const { inputProps } = props;
+  const { inputProps, isSelected } = props;
+
+  const { classNames } = useStatusClasses('', { isSelected });
   return (
-    <Box variant="forms.switch.container" {...props}>
+    <Box className={classNames} variant="forms.switch.container" {...props}>
       <VisuallyHidden>
         <Box
           as="input"
@@ -22,8 +25,8 @@ const Switch = forwardRef((props, ref) => {
           ref={ref}
         />
       </VisuallyHidden>
-      <Box variant="forms.switch.thumbContainer">
-        <Box variant="forms.switch.thumb" />
+      <Box className={classNames} variant="forms.switch.thumbContainer">
+        <Box className={classNames} variant="forms.switch.thumb" />
       </Box>
     </Box>
   );
@@ -31,6 +34,7 @@ const Switch = forwardRef((props, ref) => {
 
 Switch.propTypes = {
   inputProps: PropTypes.shape({}),
+  isSelected: PropTypes.bool,
 };
 
 Switch.displayName = 'Switch';

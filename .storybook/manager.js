@@ -1,5 +1,4 @@
 import { addons } from '@storybook/addons';
-
 import yourTheme from './AstroTheme';
 
 // NOTE: Storybook 6.5 shows @emotion/react multiple instances warning in the console, this is a
@@ -13,7 +12,7 @@ const CSS_TO_HIDE_CHROMATIC_ONLY_SECTION_FROM_SIDEBAR = `
 const head = document.head || document.getElementsByTagName('head')[0];
 const style = document.createElement('style');
 head.appendChild(style);
-style.appendChild(document.createTextNode(CSS_TO_HIDE_CHROMATIC_ONLY_SECTION_FROM_SIDEBAR));
+style.appendChild(document.createTextNode(CSS_TO_HIDE_CHROMATIC_ONLY_SECTION_FROM_SIDEBAR)); 
 
 addons.setConfig({
   theme: yourTheme,

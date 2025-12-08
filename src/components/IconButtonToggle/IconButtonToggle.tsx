@@ -20,7 +20,7 @@ const IconButtonToggle = forwardRef<HTMLButtonElement, IconButtonToggleProps>((p
   const conditionalRenderProps = {
     ComponentToRenderIfTrue: toggledIcon,
     ComponentToRenderIfFalse: defaultIcon,
-    condition: isToggled,
+    isToggled,
     onConditionChange: onToggle,
   };
 

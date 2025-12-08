@@ -21,11 +21,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Box', 'Button', 'Image'],
-      },
-    },
   },
   argTypes: {
     isDisabled: {},
@@ -104,10 +99,6 @@ export const WithSkeletonLoadSuccess: StoryFn = () => {
   );
 };
 
-WithSkeletonLoadSuccess.parameters = {
-  codesandbox: false,
-};
-
 export const WithSkeletonLoadTimeout: StoryFn = () => {
   return (
     <Image
@@ -144,8 +135,4 @@ export const UpdatingImageSrc: StoryFn = () => {
       />
     </Box>
   );
-};
-
-UpdatingImageSrc.parameters = {
-  codesandbox: false,
 };

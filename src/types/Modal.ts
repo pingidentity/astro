@@ -36,6 +36,8 @@ export interface ModalProps extends DOMAttributes, TestingAttributes {
    * `() => void`
    */
   onClose?: () => void;
+  onSubmit?: () => void;
+  onCancel?: () => void;
   /**
    * When a user interacts with the argument element outside of the overlay ref, return true if
    * onClose should be called. This gives you a chance to filter out interaction with elements that
@@ -62,3 +64,22 @@ export interface ModalProps extends DOMAttributes, TestingAttributes {
   containerProps?: object;
   headerContainerProps?: object;
 }
+
+export type ModalHeaderProps = {
+  titleProps?: object;
+  containerProps?: object;
+  closeButton?: ReactNode;
+  hasCloseButton?: boolean;
+  onClose?: () => void;
+  title?: ReactNode;
+  hasNoSeparator?: boolean;
+};
+
+export type ModalFooterProps = {
+  onSubmit?: () => void;
+  onCancel?: () => void;
+  children?: ReactNode;
+  footerProps?: object;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
+};

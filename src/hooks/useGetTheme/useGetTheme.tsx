@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { Theme, useTheme } from '@emotion/react';
 
 import { nextGenDarkThemeValues } from '../../styles/themeOverrides/nextGenDarkMode/customProperties';
@@ -7,7 +7,7 @@ import { nextGenThemeValues } from '../../styles/themes/next-gen/customPropertie
 import { themes } from '../../utils/devUtils/constants/themes';
 
 interface CustomTheme extends Theme {
-    name: string
+  name: string
 }
 
 export const baseState = {
@@ -47,30 +47,21 @@ const customThemeState = {
   ...astroThemeValues,
 };
 
-const getTheme = theme => {
-  if (theme === themes.NEXT_GEN) {
+const useGetTheme = () => {
+  const theme = useTheme() as CustomTheme;
+
+  if (theme.name === themes.NEXT_GEN) {
     return { ...onyxState };
   }
-  if (theme === themes.ASTRO) {
+  if (theme.name === themes.ASTRO) {
     return { ...astroState };
   }
-  if (theme === themes.NEXT_GEN_DARK) {
+  if (theme.name === themes.NEXT_GEN_DARK) {
     return { ...onyxDarkState };
   }
   return {
     ...customThemeState,
   };
-};
-
-const useGetTheme = () => {
-  const theme = useTheme() as CustomTheme;
-  const [themeObject, setThemeObject] = useState(getTheme(theme.name));
-
-  useEffect(() => {
-    setThemeObject(getTheme(theme.name));
-  }, [theme.name]);
-
-  return themeObject;
 };
 
 export default useGetTheme;

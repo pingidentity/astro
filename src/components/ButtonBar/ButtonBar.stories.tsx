@@ -20,11 +20,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': ['Button', 'ButtonBar'],
-      },
-    },
   },
   argTypes: {
     align: {

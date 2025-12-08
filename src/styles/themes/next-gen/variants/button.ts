@@ -4,14 +4,17 @@ import { copyButton } from '../codeView/codeView';
 import colors from '../colors/colors';
 import tShirtSizes from '../customProperties/tShirtSizes';
 
-const { primary: primaryBlue,
+const {
+  primary: primaryBlue,
   active_hover: primaryBlueHover,
   active_pressed: primaryBluePress,
   critical_hover: criticalRedHover,
-  critical_pressed: criticalRedPress } = colors;
+  critical_pressed: criticalRedPress,
+} = colors;
 
 const transitions = {
-  transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
+  transition:
+    'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
 };
 
 const boxShadowNone = {
@@ -28,13 +31,13 @@ const buttonBase = {
   ...transitions,
   alignItems: 'center',
   justifyContent: 'center',
+  flexShrink: 0,
   minWidth: 'min-content',
   cursor: 'pointer',
   display: 'block',
   maxWidth: '100%',
   fontFamily: 'standard',
   fontSize: '.9375rem',
-  flexGrow: '1',
   fontWeight: 400,
   textAlign: 'center',
   verticalAlign: 'middle',
@@ -45,6 +48,7 @@ const buttonBase = {
   borderColor: 'border.base',
   px: '20px',
   py: '12px',
+  maxHeight: '48.5px',
   height: '48.5px',
   '&.is-disabled': {
     opacity: 0.65,
@@ -354,10 +358,11 @@ const aiChat = {
 
 const baseIconButton = {
   cursor: 'pointer',
-  transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
+  transition:
+    'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
   outline: 'none',
   borderRadius: '28px',
-  border: '2px solid',
+  border: '1px solid',
   borderColor: 'transparent',
   path: { fill: 'dark' },
   '&.is-focused': {
@@ -378,9 +383,6 @@ const baseIconButton = {
 
 const modalCloseButton = {
   ...baseIconButton,
-  position: 'absolute',
-  top: 32,
-  right: 18,
 };
 
 const onyxIconButton = {
@@ -403,6 +405,40 @@ const onyxIconButton = {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
+};
+
+const hintButton = {
+  backgroundColor: 'transparent',
+  path: { fill: 'dark' },
+  '&.is-focused': {
+    outline: '2px solid',
+    outlineColor: 'primary',
+    outlineOffset: '3px',
+  },
+  '&.is-hovered': {
+    backgroundColor: 'gray-100',
+    path: { fill: 'dark' },
+  },
+};
+const badgeDeleteButton = {
+  ...baseIconButton,
+  height: 14,
+  p: 0,
+  width: 14,
+  border: 'none',
+  '&.is-focused': {
+    ...defaultFocus,
+    backgroundColor: 'gray-100',
+  },
+  '&.is-pressed': {
+    backgroundColor: 'gray-100',
+    borderColor: 'gray-200',
+    path: { fill: 'dark' },
+  },
+  '&.is-hovered': {
+    bg: 'transparent',
+  },
+  ...transitions,
 };
 
 const searchClearButton = {
@@ -443,6 +479,12 @@ const iconButtons = {
     display: 'inline-flex',
   },
   modalCloseButton,
+  modalHeaderCloseButton: {
+    ...modalCloseButton,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    right: '16px',
+  },
   badge: {
     deleteButton: {
       ...baseIconButton,
@@ -465,6 +507,17 @@ const iconButtons = {
   },
   messageCloseButton: {
     ...baseIconButton,
+    minWidth: '28px',
+    width: '28px',
+    height: '28px',
+    '& > svg': {
+      minWidth: '18px',
+      width: '18px',
+      height: '18px',
+      path: {
+        fill: '#455469 !important',
+      },
+    },
   },
   headerNav: {
     ...baseIconButton,
@@ -499,7 +552,8 @@ const iconButtons = {
   },
   inverted: {
     cursor: 'pointer',
-    transition: 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
+    transition:
+      'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out',
     outline: 'none',
     path: { fill: 'white' },
     '&.is-focused': {
@@ -542,10 +596,29 @@ const iconButtons = {
     },
   },
   hintButton: {
-    bg: 'gray-100',
-    '&.is-hovered': {
-      bg: 'gray-900',
-    },
+    ...hintButton,
+  },
+};
+
+const listBoxLink = {
+  color: 'active',
+  transition: 'color, .15s, ease-in-and-out',
+  fontSize: 'md',
+  textDecoration: 'none',
+  px: 'md',
+  pt: 'md',
+  '&.is-pressed': {
+    textDecoration: 'underline',
+    outline: 'none',
+    color: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+  },
+  '&.is-focused': {
+    textDecoration: 'underline',
+    outline: 'none',
+  },
+  badgeDeleteButton,
+  invertedBadgeDeleteButton: {
+    ...badgeDeleteButton,
   },
   clearSelectionButton: {
     ...searchClearButton,
@@ -571,6 +644,7 @@ const buttons = {
   checkboxActiveButton,
   outlineCritical,
   link,
+  listBoxLink,
   withIcon,
   primaryWithIcon,
   inlineWithIcon,

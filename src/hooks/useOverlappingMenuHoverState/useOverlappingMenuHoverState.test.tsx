@@ -64,7 +64,7 @@ describe('useOverlappingMenuHoverState', () => {
       it('it should be hovered', async () => {
         getComponent();
 
-        await userEvent.hover(screen.getByRole('listitem'));
+        await userEvent.hover(screen.getByRole('listitem', { hidden: true }));
 
         screen.getByText(IS_HOVERED);
       });
@@ -88,7 +88,7 @@ describe('useOverlappingMenuHoverState', () => {
 
         await userEvent.click(screen.getByRole('button'));
 
-        await userEvent.unhover(screen.getByRole('listitem'));
+        await userEvent.unhover(screen.getByRole('listitem', { hidden: true }));
 
         expect(screen.queryByText(IS_HOVERED)).not.toBeInTheDocument();
       });
@@ -115,7 +115,7 @@ describe('useOverlappingMenuHoverState', () => {
         await userEvent.click(screen.getByRole('button'));
 
         await userEvent.hover(screen.getByRole('menu'));
-        await userEvent.hover(screen.getByRole('listitem'));
+        await userEvent.hover(screen.getByRole('listitem', { hidden: true }));
 
         screen.getByText(IS_HOVERED);
       });
@@ -141,8 +141,8 @@ describe('useOverlappingMenuHoverState', () => {
         await userEvent.click(screen.getByRole('button'));
 
         await userEvent.hover(screen.getByRole('menu'));
-        await userEvent.hover(screen.getByRole('listitem'));
-        await userEvent.unhover(screen.getByRole('listitem'));
+        await userEvent.hover(screen.getByRole('listitem', { hidden: true }));
+        await userEvent.unhover(screen.getByRole('listitem', { hidden: true }));
 
         expect(screen.queryByText(IS_HOVERED)).not.toBeInTheDocument();
       });

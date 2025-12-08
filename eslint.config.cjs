@@ -34,6 +34,9 @@ module.exports = [
     },
   }),
   {
+    ignores: ['**/lib'],
+  },
+  {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     languageOptions: {
       ecmaVersion: 'latest',

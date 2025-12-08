@@ -27,25 +27,25 @@ const NavSideBarSectionHeader = (props: NavSideBarSectionHeaderProps) => {
   const { expandedKeys, setExpandedKeys, navStyles, selectedKey } = navBarState;
   const isExpanded = expandedKeys.includes(id);
 
-  const childSelected = Array.isArray(items) && items.map(i => i.key).includes(selectedKey);
+  const isChildSelected = Array.isArray(items) && items.map(i => i.key).includes(selectedKey);
 
   useEffect(() => {
-    if (childSelected && isExpanded === false) {
+    if (isChildSelected && isExpanded === false) {
       setExpandedKeys([...expandedKeys, id]);
     }
   }, []);
 
   const { classNames } = useStatusClasses(className, {
-    isSelected: childSelected && !isExpanded,
+    isSelected: isChildSelected && !isExpanded,
   });
 
-  const variant = childSelected && !isExpanded
+  const variant = isChildSelected && !isExpanded
     ? navStyles.navBarItemIcon
     : navStyles.navBarItemIconSelected;
 
   const handleButtonPress = () => {
     onExpandedChange(!isExpanded);
-    if (childSelected && isExpanded === false) {
+    if (isChildSelected && isExpanded === false) {
       setExpandedKeys([...expandedKeys, id]);
     }
   };

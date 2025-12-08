@@ -25,7 +25,7 @@ export const Default = args => (
 
 const getComponent = (props: CodeViewProps = {}) => render((
   <CodeView {...defaultProps} {...props}>
-    {textValue}
+    {'children' in props ? props.children : textValue}
   </CodeView>
 ));
 
@@ -127,11 +127,21 @@ test('after button click, the tooltip renders with the text "Copied!"', async ()
 });
 
 test('renders CodeView component with default language', () => {
-  const children = ' ';
+  const children = '{}';
   getComponent({ children });
   const codeViewElement = screen.getByTestId(testId).querySelector('pre');
   expect(codeViewElement).toBeInTheDocument();
   expect(codeViewElement).toHaveClass('language-json');
+});
+
+test('renders CodeView component with null/undefined', () => {
+  const children = undefined;
+  getComponent({ children });
+  screen.getByRole('button', {
+    name: /copy to clipboard/i,
+  });
+  const codeViewElement = screen.getByTestId(testId).querySelector('pre');
+  expect(codeViewElement).not.toBeInTheDocument();
 });
 
 test('renders CodeView component with highlighted code', () => {
@@ -152,10 +162,11 @@ test('renders CodeView component with highlighted code', () => {
 });
 
 test('isOnyx prop renders CodeView component with next-gen theme', () => {
-  const children = ' ';
+  const children = '{}';
   getComponent({ children, isOnyx: true, language: 'json' });
-  const codeViewElement = screen.getByTestId(testId);
-  expect(codeViewElement).toHaveTextContent('JSON');
+  const codeViewElement = screen.getByTestId(testId).querySelector('pre');
+  expect(codeViewElement).toBeInTheDocument();
+  expect(codeViewElement).toHaveClass('language-json');
 });
 
 test('if textToCopy is provided it\'s copied to clipboard instead of children text data', async () => {

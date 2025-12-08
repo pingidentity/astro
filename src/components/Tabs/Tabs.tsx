@@ -7,7 +7,7 @@ import { useTabListState } from 'react-stately';
 import { AriaTabPanelProps, TabListAria, TabPanelAria } from '@react-aria/tabs';
 import { TabListState, TabListStateOptions } from '@react-stately/tabs';
 
-import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
 import { AriaTabListOptions, TabListItemProps, TabPanelProps, TabsProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import Box from '../Box';
@@ -16,7 +16,7 @@ import { CollectionTab } from '../Tab';
 export const TabsContext = React.createContext({});
 
 const TabPanel = forwardRef<HTMLElement, TabPanelProps>(({ state, ...props }, ref) => {
-  const { children, tabPanelProps } = props;
+  const { children, tabPanelProps, className } = props;
 
   const tabPanelRef = useLocalOrForwardRef<HTMLElement>(ref);
 
@@ -26,12 +26,19 @@ const TabPanel = forwardRef<HTMLElement, TabPanelProps>(({ state, ...props }, re
 
   if (state?.selectedItem?.props?.isListItem) {
     const parentTab = tabPanelRef.current?.previousElementSibling?.querySelector(
-      `[name="${state?.selectedItem?.props?.parentName}"]`);
+      `[name="${state?.selectedItem?.props?.parentName}"]`,
+    );
     raTabPanelProps['aria-labelledby'] = parentTab?.id;
   }
 
   return (
-    <Box {...tabPanelProps} {...raTabPanelProps} ref={tabPanelRef}>
+    <Box
+      {...tabPanelProps}
+      {...raTabPanelProps}
+      ref={tabPanelRef}
+      className={className}
+      variant="tabPanelBody"
+    >
       {children}
     </Box>
   );
@@ -46,6 +53,7 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
     mode,
     tabListProps,
     tabPanelProps,
+    className,
     ...others
   } = props;
 
@@ -79,15 +87,24 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
     state as TabListState<TabListItemProps>,
     tabListRef as RefObject<HTMLElement>);
 
+  const { classNames } = useStatusClasses(className, {
+    'is-vertical': orientation === ORIENTATION.VERTICAL,
+    'is-horizontal': orientation === ORIENTATION.HORIZONTAL,
+  });
+
   return (
     <TabsContext.Provider value={state}>
-      <Box {...others}>
+      <Box
+        {...others}
+        isRow={orientation === ORIENTATION.VERTICAL}
+      >
         <Box
           variant="tabs"
           isRow={orientation === ORIENTATION.HORIZONTAL}
           {...tabListProps}
           {...raTabListProps}
           ref={tabListRef}
+          className={classNames}
         >
           {Array.from(state.collection)
             .filter(item => !item?.props?.isListItem)
@@ -96,6 +113,7 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
                 key={item.key}
                 item={item}
                 isDisabled={isDisabled}
+                isRequired={item?.props?.isRequired}
                 orientation={orientation}
                 mode={mode}
                 slots={item?.props?.slots}
@@ -106,6 +124,7 @@ const Tabs = forwardRef<HTMLElement, TabsProps>((props, ref) => {
           key={state.selectedItem?.key}
           state={state}
           tabPanelProps={tabPanelProps}
+          className={classNames}
         >
           {state.selectedItem?.props.children || state.selectedItem?.props.content}
         </TabPanel>

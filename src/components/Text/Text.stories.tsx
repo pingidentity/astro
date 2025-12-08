@@ -5,7 +5,9 @@ import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  AstroProvider,
   Box,
+  OnyxTheme,
   Separator,
   Table,
   TableBody,
@@ -30,15 +32,6 @@ export default {
           <DocsLayout />
         </>
       ),
-    },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Box',
-          'Text',
-          'Separator',
-        ],
-      },
     },
   },
   argTypes: {
@@ -257,6 +250,249 @@ export const Default: StoryFn<TextProps> = () => {
 
   return (
     <>
+      <Table mb="xx">
+        <TableHeading title="Heading" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(headingVariants).map(([key, value]) => (
+            <TableData variant={key} value={value} key={key} />
+          ),
+          )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHead>
+          <TableRow key="head">
+            <TableCell sx={sx.cell} isHeading width="60%">
+              Base and Subtitle
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading width="20%">
+              Weight
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading width="30%">
+              Size
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading width="40%">
+              Color
+            </TableCell>
+            <TableCell sx={sx.cell} isHeading>
+              Example
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(baseAndSubtitleVariants).map(([key, value]) => (
+            <TableRow sx={{ backgroundColor: 'transparent !important' }} key={key}>
+              <TableCell sx={sx.cell} width="60%"><Text>{key}</Text></TableCell>
+              <TableCell sx={sx.cell} width="20%"><Text>{value.weight}</Text></TableCell>
+              <TableCell sx={sx.cell} width="30%"><Text>{value.fontSize}</Text></TableCell>
+              <TableCell sx={sx.cell} width="40%"><Text>{value.color}</Text></TableCell>
+              <TableCell sx={sx.cell}>{value.example}</TableCell>
+            </TableRow>
+          ),
+          )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="Large" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(largeVariants).map(([key, value]) => (
+            <TableData variant={key} value={value} key={key} />
+          ),
+          )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="Medium" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(mediumVariants).map(([key, value]) => (
+            <TableData variant={key} value={value} key={key} />
+          ),
+          )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="Small" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(smallVariants).map(([key, value]) => (
+            <TableData variant={key} value={value} key={key} />
+          ),
+          )}
+        </TableBody>
+      </Table>
+
+      <Table mb="xx">
+        <TableHeading title="XSmall" />
+        <TableBody sx={sx.tableBody}>
+          {Object.entries(xsmallVariants).map(([key, value]) => (
+            <TableData variant={key} value={value} key={key} />
+          ),
+          )}
+        </TableBody>
+      </Table>
+    </>
+  );
+};
+
+export const Onyx: StoryFn<TextProps> = () => {
+  const fontSizesOnyx = {
+    xxx: '33.8px (xxx)',
+    xl: '22.5px (xl)',
+    lg: '18.8px (lg)',
+    md: '15px (md)',
+    sm: '12px (sm)',
+    xs: '11px (xs)',
+    h2: '26.3px (h2)',
+  };
+  const fontWeightsOnyx = {
+    '-1': '300 (-1)',
+    '0': '400 (0)',
+    '1': '500 (1)',
+    '2': '600 (2)',
+    '3': '700 (3)',
+  };
+  const headingVariants = {
+    H1: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.xxx,
+      example: (<Text variant="H1" as="h1">{'<Text variant="H1" as="H1"/>'}</Text>),
+    },
+    H2: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.h2,
+      example: (<Text variant="H2" as="h2">{'<Text variant="H2" as="H2"/>'}</Text>),
+    },
+    H3: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.xl,
+      example: (<Text variant="H3" as="h3">{'<Text variant="H3" as="H3"/>'}</Text>),
+    },
+    H4: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.lg,
+      example: (<Text variant="H4" as="h4">{'<Text variant="H4" as="H4"/>'}</Text>),
+    },
+    H5: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.md,
+      example: (<Text variant="H5" as="h5">{'<Text variant="H5" as="H5"/>'}</Text>),
+    },
+    H6: {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.sm,
+      example: (<Text variant="H6" as="h6">{'<Text variant="H6" as="H6"/>'}</Text>),
+    },
+  };
+  const baseAndSubtitleVariants = {
+    'Base (default variant of Text)': {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.md,
+      color: 'text.primary',
+      example: (<Text variant="base" fontWeight="0">{'<Text variant="base"/>'}</Text>),
+    },
+    Subtitle: {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.sm,
+      color: 'text.secondary',
+      example: (<Text variant="subtitle">{'<Text variant="subtitle"/>'}</Text>),
+    },
+  };
+  const largeVariants = {
+    Bold: {
+      weight: fontWeightsOnyx[3],
+      fontSize: fontSizesOnyx.lg,
+      example: (<Text fontSize="lg" fontWeight="3">{'<Text fontSize="lg" fontWeight="3">'}</Text>),
+    },
+    Semibold: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.lg,
+      example: (<Text fontSize="lg" fontWeight="2">{'<Text fontSize="lg" fontWeight="2">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.lg,
+      example: (<Text fontSize="lg" fontWeight="0">{'<Text fontSize="lg" fontWeight="0">'}</Text>),
+    },
+    Light: {
+      weight: fontWeightsOnyx[-1],
+      fontSize: fontSizesOnyx.lg,
+      example: (<Text fontSize="lg" fontWeight="0">{'<Text fontSize="lg" fontWeight="0">'}</Text>),
+    },
+  };
+  const mediumVariants = {
+    Bold: {
+      weight: fontWeightsOnyx[3],
+      fontSize: fontSizesOnyx.md,
+      example: (<Text fontSize="md" fontWeight="3">{'<Text fontSize="md" fontWeight="3">'}</Text>),
+    },
+    Semibold: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.md,
+      example: (<Text fontSize="md" fontWeight="2">{'<Text fontSize="md" fontWeight="2">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.md,
+      example: (<Text fontSize="md" fontWeight="0">{'<Text fontSize="md" fontWeight="0">'}</Text>),
+    },
+    Light: {
+      weight: fontWeightsOnyx[-1],
+      fontSize: fontSizesOnyx.md,
+      example: (<Text fontSize="md" fontWeight="-1">{'<Text fontSize="md" fontWeight="-1">'}</Text>),
+    },
+  };
+  const smallVariants = {
+    Bold: {
+      weight: fontWeightsOnyx[3],
+      fontSize: fontSizesOnyx.sm,
+      example: (<Text fontSize="sm" fontWeight="3">{'<Text fontSize="sm" fontWeight="3">'}</Text>),
+    },
+    Semibold: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.sm,
+      example: (<Text fontSize="sm" fontWeight="2">{'<Text fontSize="sm" fontWeight="2">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.sm,
+      example: (<Text fontSize="sm" fontWeight="0">{'<Text fontSize="sm" fontWeight="0">'}</Text>),
+
+    },
+    Light: {
+      weight: fontWeightsOnyx[-1],
+      fontSize: fontSizesOnyx.sm,
+      example: (<Text fontSize="sm" fontWeight="-1">{'<Text fontSize="sm" fontWeight="-1">'}</Text>),
+
+    },
+  };
+  const xsmallVariants = {
+    Bold: {
+      weight: fontWeightsOnyx[3],
+      fontSize: fontSizesOnyx.xs,
+      example: (<Text fontSize="xs" fontWeight="3">{'<Text fontSize="xs" fontWeight="3">'}</Text>),
+    },
+    Semibold: {
+      weight: fontWeightsOnyx[2],
+      fontSize: fontSizesOnyx.xs,
+      example: (<Text fontSize="xs" fontWeight="2">{'<Text fontSize="xs" fontWeight="2">'}</Text>),
+    },
+    Regular: {
+      weight: fontWeightsOnyx[0],
+      fontSize: fontSizesOnyx.xs,
+      example: (<Text fontSize="xs" fontWeight="0">{'<Text fontSize="xs" fontWeight="0">'}</Text>),
+    },
+    Light: {
+      weight: fontWeightsOnyx[-1],
+      fontSize: fontSizesOnyx.xs,
+      example: (<Text fontSize="xs" fontWeight="-1">{'<Text fontSize="xs" fontWeight="-1">'}</Text>),
+    },
+  };
+
+  return (
+    < >
       <Table mb="xx">
         <TableHeading title="Heading" />
         <TableBody sx={sx.tableBody}>

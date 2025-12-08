@@ -1,66 +1,69 @@
 import React from 'react';
-import { withConsole } from '@storybook/addon-console';
-
-import '@storybook/react';
-
-import { AstroProvider, Box, NextGenDarkTheme, NextGenTheme, Text } from '../src/index';
 import theme from '../src/styles/theme';
-import { themes } from '../src/utils/devUtils/constants/themes';
-import { shouldReturnComingSoon } from '../src/utils/devUtils/shouldReturnComingSoon';
-
+import { AstroProvider, Box, NextGenDarkTheme, NextGenTheme, Text } from '../src/index';
 import yourTheme from './AstroTheme';
+import { withConsole } from '@storybook/addon-console';
+import "@storybook/react";
+import { themes } from '../src/utils/devUtils/constants/themes';
+import { shouldReturnComingSoon } from '../src/utils/devUtils/shouldReturnComingSoon'
+import { initialize, mswDecorator, mswLoader } from 'msw-storybook-addon'
+import { handlers } from '../src/mocks/handlers';
+
+initialize({ onUnhandledRequest: 'warn' });
 
 const withThemeProvider = (Story, context) => {
-  const selectedTheme = context.parameters.theme || context.globals.theme;
+  const selectedTheme = context.parameters.theme || context.globals.theme
 
   // we will be creating a hook in a follow up ticket to this.
-  let storyTheme = theme;
-  let style = { padding: '50px' };
+  let storyTheme = theme
+  let style = { padding: '50px' }
   if (selectedTheme === themes.NEXT_GEN) {
-    storyTheme = NextGenTheme;
-  } else if (selectedTheme === themes.NEXT_GEN_DARK) {
-    storyTheme = NextGenDarkTheme;
+    storyTheme = NextGenTheme
+  }
+  else if (selectedTheme === themes.NEXT_GEN_DARK) {
+    storyTheme = NextGenDarkTheme
     style = {
       padding: '50px',
       minHeight: 'calc(100vh - 32px)',
-    };
+    }
   }
 
   const showComingSoonMessage = shouldReturnComingSoon(
     context,
     selectedTheme,
-  );
+  )
 
   return (
     <AstroProvider theme={storyTheme} bg="background.base">
-      <div style={style}>
+      <div style={style} >
         {
-          showComingSoonMessage
-            ? (
-              <Box
-                sx={{
-                  height: '200px',
-                  backgroundColor: 'gray-100',
-                  border: '1px solid',
-                  borderColor: 'border.base',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
-                <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
-              </Box>
-            )
-            : <Story {...context} />
+          showComingSoonMessage ?
+            <Box
+              sx={{
+                height: '200px',
+                backgroundColor: 'gray-100',
+                border: '1px solid',
+                borderColor: 'border.base',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
+              <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
+            </Box>
+            :
+            <Story {...context} />
         }
       </div>
     </AstroProvider>
-  );
-};
+  )
+}
 
 const withConsoleAddon = (storyFn, context) => withConsole()(storyFn)(context);
 
-export const decorators = [withThemeProvider, withConsoleAddon];
+export const decorators = [mswDecorator, withThemeProvider, withConsoleAddon];
+
+export const loaders = [mswLoader];
 
 export const parameters = {
   a11y: {
@@ -69,9 +72,12 @@ export const parameters = {
     options: {},
     manual: true,
   },
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  actions: { argTypesRegex: "^on[A-Z].*" },
   docs: {
     theme: yourTheme,
+  },
+  msw: {
+    handlers,
   },
   options: {
     storySort: {
@@ -85,7 +91,7 @@ export const parameters = {
             'Astro Theme',
             'Custom Themes',
             'Styling Guideline',
-            'Astro Nano Theme',
+            'Astro Nano Theme'
           ],
           'Utils',
           'Hooks',
@@ -119,30 +125,8 @@ export const parameters = {
         [
           'Overview',
           '*',
-        ],
+        ]
       ],
-    },
-  },
-  codesandbox: {
-    // apiToken: process.env.CODESANDBOX_API_TOKEN,
-    dependencies: {
-      '@pingux/astro': 'latest',
-      '@pingux/mdi-react': '^1.2.0',
-    },
-    fallbackImport: '@pingux/astro',
-    privacy: 'public',
-    provider: `import { AstroProvider } from "@pingux/astro";
-        export default ThemeProvider = ({ children }) => {
-          return (
-            <AstroProvider>
-              <div style={{ padding: '50px' }}>
-                {children}
-              </div>
-            </AstroProvider>
-          )
-        }`,
-    queryParams: {
-      'file': '/src/App.js',
     },
   },
 };
@@ -162,4 +146,4 @@ export const globalTypes = {
       showName: true,
     },
   },
-};
+}

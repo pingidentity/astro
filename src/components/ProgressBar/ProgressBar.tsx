@@ -24,7 +24,7 @@ export const calculateBarWidth = (value: number, minValue: number, maxValue: num
 const ProgressBar = forwardRef<HTMLElement, ProgressBarProps>((props, ref) => {
   const {
     label = '',
-    showValueLabel = true,
+    shouldShowValueLabel = true,
     value,
     minValue = 0,
     maxValue = 100,
@@ -51,7 +51,7 @@ const ProgressBar = forwardRef<HTMLElement, ProgressBarProps>((props, ref) => {
               {label}
             </Text>
           )}
-        {showValueLabel
+        {shouldShowValueLabel
           && (
             <Text fontSize="xs" fontWeight="3">
               {progressBarProps['aria-valuetext']}

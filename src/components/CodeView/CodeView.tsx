@@ -60,8 +60,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     }
   }, [language]);
 
-
-  const content = (
+  const content = code ? (
     <Highlight
       {...defaultProps}
       theme={codeViewTheme as PrismThemeProps}
@@ -98,7 +97,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
         </Box>
       )}
     </Highlight>
-  );
+  ) : '';
 
   /* istanbul ignore next */
   if (isOnyx) {

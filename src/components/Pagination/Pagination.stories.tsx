@@ -16,7 +16,6 @@ export default {
     docs: {
       page: () => <PaginationReadme />,
     },
-    codesandbox: false,
   },
   argTypes: {
     totalCount: {
@@ -49,8 +48,10 @@ const ExampleComponent = () => {
   return (
     <ScrollBox maxHeight="400px">
       <ListView
-        items={animals.slice(paginationState.firstRenderedIndex,
-          paginationState.lastRenderedIndex + 1).map(_item => (
+        items={animals.slice(
+          paginationState.firstRenderedIndex,
+          paginationState.lastRenderedIndex + 1,
+        ).map(_item => (
           {
             name: _item.name,
             key: _item.name,
@@ -127,6 +128,7 @@ export const CustomOptions = () => {
         currentPageIndex={index}
         offsetOptions={[10, 15, 25, 50, 100]}
         onPageIndexChange={key => { testFunc(key); }}
+        previousButtonProps={{ onPress: () => alert('previous') }}
       />
     </Box>
   );

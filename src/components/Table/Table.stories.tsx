@@ -27,19 +27,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/astro': [
-          'Table',
-          'TableBody',
-          'TableCaption',
-          'TableCell',
-          'TableHead',
-          'TableRow',
-          'Text',
-        ],
-      },
-    },
     controls: { include: ['id'] },
   },
   args: {

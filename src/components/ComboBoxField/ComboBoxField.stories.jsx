@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { useAsyncList } from 'react-stately';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import { action } from '@storybook/addon-actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { getAllUsers } from '../../api/users';
 import { ComboBoxField,
   Item,
   OverlayProvider,
   Section } from '../../index';
+import { LIMIT } from '../../mocks/constants';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
@@ -143,6 +144,7 @@ export default {
     label: 'Example label',
     defaultItems: items,
     disableKeys: ['Snake'],
+    'aria-label': 'ComboBox Field',
   },
 };
 
@@ -174,51 +176,57 @@ export const WithSections = args => (
   </OverlayProvider>
 );
 
-WithSections.parameters = {
-  codesandbox: false,
-};
-
 export const AsyncLoading = () => {
-  // This example uses `useAsyncList` from "@react-stately/data"
-  const list = useAsyncList({
-    async load({ signal, cursor, filterText }) {
-      if (cursor) {
-        // eslint-disable-next-line
-        cursor = cursor.replace(/^http:\/\//i, 'https://');
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(LIMIT);
+  const [dataSize, setDataSize] = useState(0);
+  const [loading, setLoading] = useState(loadingStates.LOADING);
+  const [filterText, setFilterText] = useState('');
+
+  const fetchData = useCallback(async (currentLimit, searchText) => {
+    try {
+      const response = await getAllUsers(currentLimit, searchText);
+      const json = await response.json();
+      if (response.ok) {
+        setData(json.body._embedded.users || []);
+        setDataSize(json.body.count);
+      } else {
+        setData([]);
       }
+      setLoading(loadingStates.IDLE);
+    } catch (error) {
+      console.error('Fetch error:', error);
+      setLoading(loadingStates.ERROR);
+    }
+  }, []);
 
-      // If no cursor is available, then we're loading the first page,
-      // filtering the results returned via a query string that
-      // mirrors the ComboBox input text.
-      // Otherwise, the cursor is the next URL to load,
-      // as returned from the previous page.
-      const res = await fetch(
-        cursor || `https://swapi.py4e.com/api/people/?search=${filterText}`,
-        { signal },
-      );
-      const json = await res.json();
-      // The API is too fast sometimes, so make it take longer so we can see the loader
-      await new Promise(resolve => setTimeout(resolve, cursor ? 2000 : 3000));
+  const handleLoadMore = () => {
+    if (loading !== loadingStates.IDLE || limit >= dataSize) return;
+    setLoading(loadingStates.LOADING_MORE);
+    setLimit(prev => prev + LIMIT);
+  };
 
-      return {
-        items: json.results,
-        cursor: json.next,
-      };
-    },
-  });
+  const handleSearch = searchText => {
+    setLoading(loadingStates.FILTERING);
+    setFilterText(searchText);
+  };
+
+  useEffect(() => {
+    fetchData(limit, filterText);
+  }, [fetchData, limit, filterText]);
 
   return (
     <OverlayProvider>
       <ComboBoxField
         {...actions}
         label="Example label"
-        items={list.items}
-        inputValue={list.filterText}
-        onInputChange={list.setFilterText}
-        loadingState={list.loadingState}
-        onLoadMore={list.loadMore}
+        items={data}
+        inputValue={filterText}
+        onInputChange={handleSearch}
+        loadingState={loading}
+        onLoadMore={handleLoadMore}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {item => <Item key={item.name.given}>{item.name.given}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );

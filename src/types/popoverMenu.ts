@@ -12,7 +12,7 @@ export interface PopoverMenuProps {
   isDefaultOpen?: boolean;
   /** Whether the popover is prevented from closing when a selection is made. */
   isNotClosedOnSelect?: boolean;
-  closeOnSelect?: boolean;
+  shouldCloseOnSelect?: boolean;
   /**
    * Whether the popover is prevented from flipping directions when insufficient space is
    * available for the given `direction` placement.

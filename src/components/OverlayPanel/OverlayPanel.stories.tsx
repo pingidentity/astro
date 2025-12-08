@@ -52,7 +52,6 @@ export default {
         </>
       ),
     },
-    codesandbox: false,
   },
 } as Meta;
 
@@ -82,33 +81,33 @@ export const Default: StoryFn<OverlayPanelProps> = ({ ...args }: OverlayPanelPro
           Open Panel
         </Button>
         {(state.isOpen || state.isTransitioning)
-        && (
-          <OverlayPanel
-            isOpen={state.isOpen}
-            isTransitioning={state.isTransitioning}
-            state={state}
-            {...args}
-            triggerRef={triggerRef}
-            sx={{
-              p: 0,
-            }}
-          >
-            <PanelHeader
-              data={{
-                icon: AccountIcon,
-                text: 'Fons Vernall',
-                subtext: 'rad_developer@pingidentity.com',
+          && (
+            <OverlayPanel
+              isOpen={state.isOpen}
+              isTransitioning={state.isTransitioning}
+              state={state}
+              {...args}
+              triggerRef={triggerRef}
+              sx={{
+                p: 0,
               }}
             >
-              <PanelHeaderCloseButton onPress={() => { onClose(state, triggerRef); }} />
-            </PanelHeader>
-            <Box sx={{ p: 25 }}>
-              <Text>
-                Children render here.
-              </Text>
-            </Box>
-          </OverlayPanel>
-        )}
+              <PanelHeader
+                data={{
+                  icon: AccountIcon,
+                  text: 'Fons Vernall',
+                  subtext: 'rad_developer@pingidentity.com',
+                }}
+              >
+                <PanelHeaderCloseButton onPress={() => { onClose(state, triggerRef); }} />
+              </PanelHeader>
+              <Box sx={{ p: 25 }}>
+                <Text>
+                  Children render here.
+                </Text>
+              </Box>
+            </OverlayPanel>
+          )}
       </Box>
     </OverlayProvider>
   );
@@ -160,38 +159,38 @@ export const Expandable: StoryFn = () => {
           Open Panel
         </Button>
         {(state.isOpen || state.isTransitioning)
-        && (
-          <OverlayPanel
-            isTransitioning={state.isTransitioning}
-            isOpen={state.isOpen}
-            state={state}
-            triggerRef={triggerRef}
-            sx={sx.overlayPanel}
-            size={isExpanded ? 'full' : 'medium'}
-          >
-            <PanelHeader
-              data={{
-                icon: AccountIcon,
-                text: 'Fons Vernall',
-                subtext: 'rad_developer@pingidentity.com',
-              }}
+          && (
+            <OverlayPanel
+              isTransitioning={state.isTransitioning}
+              isOpen={state.isOpen}
+              state={state}
+              triggerRef={triggerRef}
+              sx={sx.overlayPanel}
+              size={isExpanded ? 'full' : 'medium'}
             >
-              <IconButton
-                aria-label="expand-icon"
-                size={20}
-                onPress={() => setIsExpanded(!isExpanded)}
+              <PanelHeader
+                data={{
+                  icon: AccountIcon,
+                  text: 'Fons Vernall',
+                  subtext: 'rad_developer@pingidentity.com',
+                }}
               >
-                {isExpanded ? <ArrowCollapse /> : <ArrowTopRightBottomLeft />}
-              </IconButton>
-              <PanelHeaderCloseButton onPress={() => { onCloseFunction(); }} />
-            </PanelHeader>
-            <Box sx={{ p: 25 }}>
-              <Text>
-                Children render here
-              </Text>
-            </Box>
-          </OverlayPanel>
-        )}
+                <IconButton
+                  aria-label="expand-icon"
+                  size={20}
+                  onPress={() => setIsExpanded(!isExpanded)}
+                >
+                  {isExpanded ? <ArrowCollapse /> : <ArrowTopRightBottomLeft />}
+                </IconButton>
+                <PanelHeaderCloseButton onPress={() => { onCloseFunction(); }} />
+              </PanelHeader>
+              <Box sx={{ p: 25 }}>
+                <Text>
+                  Children render here
+                </Text>
+              </Box>
+            </OverlayPanel>
+          )}
       </Box>
     </OverlayProvider>
   );
@@ -323,30 +322,30 @@ export const Customization: StoryFn = () => {
           Open Panel
         </Button>
         {(state.isOpen || state.isTransitioning)
-        && (
-          <OverlayPanel
-            isTransitioning={state.isTransitioning}
-            isOpen={state.isOpen}
-            state={state}
-            triggerRef={triggerRef}
-            sx={{ width: '720px', p: 0 }}
-          >
-            <PanelHeader
-              data={{
-                icon: AccountIcon,
-                text: 'Fons Vernall',
-                subtext: 'rad_developer@pingidentity.com',
-              }}
+          && (
+            <OverlayPanel
+              isTransitioning={state.isTransitioning}
+              isOpen={state.isOpen}
+              state={state}
+              triggerRef={triggerRef}
+              sx={{ width: '720px', p: 0 }}
             >
-              <PanelHeaderCloseButton onPress={() => { onClose(state, triggerRef); }} />
-            </PanelHeader>
-            <Box sx={{ p: 25 }}>
-              <Text>
-                Children render here.
-              </Text>
-            </Box>
-          </OverlayPanel>
-        )}
+              <PanelHeader
+                data={{
+                  icon: AccountIcon,
+                  text: 'Fons Vernall',
+                  subtext: 'rad_developer@pingidentity.com',
+                }}
+              >
+                <PanelHeaderCloseButton onPress={() => { onClose(state, triggerRef); }} />
+              </PanelHeader>
+              <Box sx={{ p: 25 }}>
+                <Text>
+                  Children render here.
+                </Text>
+              </Box>
+            </OverlayPanel>
+          )}
       </Box>
     </OverlayProvider>
   );

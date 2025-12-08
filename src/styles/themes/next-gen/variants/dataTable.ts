@@ -44,6 +44,11 @@ export const dataTable = {
     px: 'lg',
     fontWeight: '2',
     fontSize: 'md',
+    '&.is-column-sortable': {
+      'svg': {
+        fill: 'font.light',
+      },
+    },
     '&.is-first-column': {
       borderTopLeftRadius: '16px',
     },

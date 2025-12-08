@@ -2,13 +2,14 @@ import { Dispatch, Key, ReactNode, SetStateAction } from 'react';
 import { FocusManager } from 'react-aria';
 import { TreeProps, TreeState } from 'react-stately';
 import type { GridNode } from '@react-types/grid';
+import type { CollectionChildren } from '@react-types/shared';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { ExampleItemProps } from '../components/ListView/ListView.stories';
 
 export type SelectionOptions = 'expansion' | 'single' | 'multiple' | 'none'
 
-export interface ListViewProps extends Omit<TreeProps<ExampleItemProps>, 'selectionMode'> {
+export interface ListViewProps<T extends ExampleItemProps> extends Omit<TreeProps<T>, 'selectionMode'> {
   selectionStyle?: string,
   isHoverable?: boolean,
   loadingState?: string,

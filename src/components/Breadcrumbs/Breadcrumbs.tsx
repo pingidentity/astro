@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import { AriaBreadcrumbsProps, BreadcrumbsAria, mergeProps, useBreadcrumbs } from 'react-aria';
 
-import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { Box, Icon } from '../../index';
 import { breadCrumbsProps } from '../../types';
 
@@ -12,6 +12,8 @@ import BreadcrumbItem from './BreadcrumbItem';
 
 const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
   const { children, icon, iconProps, onAction, ...others } = props;
+
+  const { breadcrumbIconSize, breadcrumbIconMargin } = useGetTheme();
 
   // the following filters undefined values passed as a child
   const filteredChildren = Array.isArray(children)
@@ -43,10 +45,11 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
         {icon && !isCurrentItem && (
           <Icon
             aria-hidden="true"
-            mx={5}
-            size="xs"
+            mx={breadcrumbIconMargin}
+            size={breadcrumbIconSize}
             title={{ name: 'Breadcrumb Separator' }}
             {...iconProps}
+            color="text.primary"
             icon={icon}
           />
         )}

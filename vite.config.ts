@@ -33,20 +33,20 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: './dist/astro',
+    outDir: '../../dist/astro',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     lib: {
-      // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: {
+        index: 'src/index.ts',
+        hooks: 'src/hooks/index.ts',
+      },
       name: 'astro',
-      fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
-      formats: ['es', 'umd'],
+      formats: ['es', 'cjs'],
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
@@ -76,6 +76,9 @@ export default defineConfig({
     reporters: ['default', 'hanging-process'],
     setupFiles: ['src/utils/testUtils/setupTests.ts'],
     include: ['**/**/*.test.{js,ts,jsx,tsx}'],
+    exclude: [
+      'lib',
+    ],
     coverage: {
       include: ['src/**/*.{js,jsx,ts,tsx}'],
       reportsDirectory: '../../coverage/libs/astro',

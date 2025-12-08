@@ -110,6 +110,9 @@ export const shadow = chroma(neutral[10]).alpha(0.25).hex();
 const badge = {
   textColor: 'white',
   background: neutral[10],
+  readOnly: 'white',
+  iconBadge: 'white',
+  iconBadgeFill: accent[40],
 };
 const tooltip = accent[20];
 

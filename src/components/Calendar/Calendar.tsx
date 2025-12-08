@@ -24,6 +24,7 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
     maxValue,
     minValue,
     value,
+    calendarWrapperProps,
   } = props;
   const { locale } = useLocale();
 
@@ -104,7 +105,7 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
     </Text>
   );
   return (
-    <Box {...calendarProps} ref={calenderRef} variant="calendar.calendarContainer" role="group">
+    <Box {...calendarProps} {...calendarWrapperProps} ref={calenderRef} variant="calendar.calendarContainer" role="group">
       <VisuallyHidden aria-live="assertive">
         <Text>{title}</Text>
       </VisuallyHidden>

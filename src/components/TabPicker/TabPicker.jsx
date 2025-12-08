@@ -138,7 +138,7 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
           />
         </Box>
       </Pressable>
-      <Menu onAction={setSelectedItem} selectionMode="single" selectedKeys={[selectionManager.focusedKey]} ref={menuRef}>
+      <Menu onAction={setSelectedItem} selectionMode="single" selectedKeys={[selectionManager.focusedKey]} ref={menuRef} className={className}>
         {items.map(tab => <Tab role={tab.role} key={tab.key}>{tab.name}</Tab>)}
       </Menu>
     </PopoverMenu>

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import { Badge, Box, Icon, IconButton, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
-import { useInputLoader, usePropWarning } from '../../hooks';
+import { useGetTheme, useInputLoader, usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
@@ -63,6 +63,9 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   const [items, setItems] = useState(initialItems);
   const [activeDescendant, setActiveDescendant] = useState('');
 
+  const { themeState } = useGetTheme();
+  const { isOnyx } = themeState;
+
   useEffect(() => {
     if (mode !== 'non-restrictive') {
       setItems(initialItems);
@@ -98,7 +101,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   const close = () => setIsOpen(false);
 
-  const { showLoading } = useInputLoader({ loadingState, inputValue: filterString });
+  const { isLoading } = useInputLoader({ loadingState, inputValue: filterString });
 
   const closeBadgeRefs = useRef([]);
   const inputWrapperRef = useRef();
@@ -278,6 +281,18 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     }
   };
 
+  const readOnlyFieldBadge = (key, name) => {
+    return (
+      <Badge
+        key={key}
+        label={name}
+        variant="readOnlyFieldBadge"
+        bg="gray-700"
+        tabIndex={0}
+      />
+    );
+  };
+
   const readOnlyTextItem = (key, name) => {
     return (
       <Text
@@ -308,11 +323,23 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
         }
         return null;
       })
-      : initialItems.map(item => {
-        return (
-          readOnlyTextItem(item.key, item.name)
+      : (initialItems.map(item => {
+        return (readOnlyTextItem(item.key, item.name)
         );
       })
+      )
+    )
+  );
+
+  const onyxReadOnlyInputEntry = (
+    isReadOnly && (
+    <Box isRow gap="xs">
+      {initialItems.map(item => {
+        return (
+          readOnlyFieldBadge(item.key, item.name)
+        );
+      })}
+    </Box>
     )
   );
 
@@ -326,8 +353,6 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
               key={item.key}
               label={item.name}
               variant="readOnlyBadge"
-              bg="white"
-              textProps={{ sx: { color: 'text.primary', tabIndex: '-1' } }}
               as="li"
               tabIndex={0}
             />
@@ -342,7 +367,6 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
       <Badge
         key={item.key}
         role="presentation"
-        bg="active"
         variant="selectedItemBadge"
         label={item.name}
         slots={item.slots}
@@ -357,7 +381,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
           aria-describedby="selectedKeysState"
           {...item.buttonProps}
         >
-          <Icon icon={Clear} color="white" size={14} title={{ name: 'Clear Icon' }} />
+          <Icon icon={Clear} size={14} title={{ name: 'Clear Icon' }} />
         </IconButton>
       </Badge>
     </Box>
@@ -436,6 +460,11 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   const inputProps = {
     ...customInputProps,
+    containerProps: {
+      ...containerProps,
+      variant: 'forms.input.multivaluesFieldContainer',
+    },
+
     controlProps: {
       'aria-activedescendant': activeDescendant,
       'aria-controls': listBoxRef.current?.id,
@@ -453,7 +482,6 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     wrapperProps: {
       ref: inputWrapperRef,
       variant: 'forms.input.multivaluesWrapper',
-      sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },
     },
     status,
   };
@@ -462,7 +490,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
         // Render loader after delay if filtering or loading
-        showLoading && (loadingState === loadingStates.LOADING)
+        isLoading && (loadingState === loadingStates.LOADING)
         && <Loader variant="loader.withinInput" />
       }
     </Box>
@@ -470,7 +498,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   return (
     <MultivaluesContext.Provider value={setActiveDescendant}>
-      <Box {...containerProps}>
+      <Box {...containerProps} id="cont">
         <TextField
           onBlur={handleBlur}
           onChange={e => {
@@ -508,7 +536,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
         </Box>
       )
     }
-    {readOnlyInputEntry}
+    {isOnyx ? onyxReadOnlyInputEntry : readOnlyInputEntry}
     {selectionManager.selectedKeys.size > 0 && visuallyHidden}
   </>,
           }} // eslint-disable-line

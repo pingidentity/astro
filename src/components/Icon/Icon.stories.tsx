@@ -39,15 +39,6 @@ export default {
         </>
       ),
     },
-    codesandbox: {
-      mapComponent: {
-        '@pingux/mdi-react/AccountGroupIcon': 'AccountGroupIcon',
-        '@pingux/mdi-react/AccountIcon': 'AccountIcon',
-        '@pingux/mdi-react/LockIcon': 'LockIcon',
-        '@pingux/mdi-react/SearchIcon': 'SearchIcon',
-        '@pingux/mdi-react/TagIcon': 'TagIcon',
-      },
-    },
   },
   argTypes: {
     icon: {
@@ -95,7 +86,7 @@ export const SVGIcons: StoryFn = args => {
       </svg>
     );
   };
-  return <Icon {...args} icon={SVGComponent} color="active" size="sm" />;
+  return <Icon {...args} icon={SVGComponent} color="magenta !important" size="sm" />;
 };
 
 const rowHeadings = [
@@ -162,10 +153,6 @@ export const Sizes: StoryFn = () => (
   </Table>
 );
 
-Sizes.parameters = {
-  codesandbox: false,
-};
-
 export const CommonlyUsed: StoryFn = () => (
   <>
     <Box isRow gap="md" mb="xs">
@@ -190,7 +177,3 @@ export const CommonlyUsed: StoryFn = () => (
     </Box>
   </>
 );
-
-CommonlyUsed.parameters = {
-  codesandbox: false,
-};

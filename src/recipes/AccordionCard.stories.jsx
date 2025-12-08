@@ -3,7 +3,7 @@ import { Item } from 'react-stately';
 import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import ChevronUpIcon from '@pingux/mdi-react/ChevronUpIcon';
 
-import { text } from '../components/Text/Text.styles';
+import { textEllipsis } from '../components/Text/Text.styles';
 import {
   AccordionGridGroup,
   Box,
@@ -20,9 +20,6 @@ import LaunchStartedExperience from '../utils/devUtils/assets/accordionRecepi/La
 
 export default {
   title: 'Recipes/AccordionCard',
-  parameters: {
-    codesandbox: false,
-  },
 };
 
 const accordionItemSX = {
@@ -49,7 +46,7 @@ const headerSX = {
   headerTitle: {
     fontSize: 'md',
     fontWeight: 3,
-    ...text.textEllipsis,
+    ...textEllipsis,
   },
   headerItemProps: {
     sx: {

@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { useGetTheme } from '../../hooks';
 import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 import { Box, TextField } from '../../index';
 import { TextFieldProps } from '../../types';
@@ -262,7 +263,17 @@ export const WithSlots: StoryFn<TextFieldProps> = () => {
     top: '5px',
     height: '32px',
   };
+
+  const onyxButtonSx: ThemeUICSSObject = {
+    position: 'absolute',
+    right: 0,
+    top: '9px',
+    height: '32px',
+  };
   const containerSx = { sx: { '& input': { paddingRight: '40px' } } };
+
+  const { themeState } = useGetTheme();
+  const { isOnyx } = themeState;
 
   return (
     <>
@@ -276,7 +287,7 @@ export const WithSlots: StoryFn<TextFieldProps> = () => {
           inContainer: (
             <CopyButton
               onPress={copyAddressesToClipboard}
-              sx={buttonSx}
+              sx={isOnyx ? onyxButtonSx : buttonSx}
               iconProps={{ sx: { path: { fill: 'active' } } }}
             />
           ),
@@ -293,7 +304,7 @@ export const WithSlots: StoryFn<TextFieldProps> = () => {
           inContainer: (
             <CopyButton
               onPress={copyJsonToClipboard}
-              sx={buttonSx}
+              sx={isOnyx ? onyxButtonSx : buttonSx}
               iconProps={{ sx: { path: { fill: 'active' } } }}
             />
           ),

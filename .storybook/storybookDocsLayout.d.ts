@@ -1,4 +1,3 @@
-import type { JSX } from 'react';
-
 export default DocsLayout;
-declare function DocsLayout(): JSX.Element;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare function DocsLayout(): any;
