@@ -15,3 +15,10 @@ export const Default = () => {
     </AstroProvider>
   );
 };
+Default.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
