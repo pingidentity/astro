@@ -86,6 +86,8 @@ const SearchNav = forwardRef<HTMLElement, SearchNavProps>((props, ref) => {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const measurementRefs = useRef<Record<Key, HTMLDivElement | null>>({});
 
   const tabListRef = useLocalOrForwardRef<HTMLElement>(ref);
@@ -220,6 +222,8 @@ const SearchNav = forwardRef<HTMLElement, SearchNavProps>((props, ref) => {
             <Text
               key={`hidden-${item.key}`}
               ref={(el: HTMLDivElement | null) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 measurementRefs.current[item.key] = el;
               }}
             >
