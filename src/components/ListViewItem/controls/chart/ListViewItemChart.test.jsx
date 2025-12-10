@@ -1,4 +1,5 @@
 import React from 'react';
+import useResizeObserver from 'use-resize-observer';
 
 import { render, screen } from '../../../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../../../utils/testUtils/universalComponentTest';
@@ -7,11 +8,7 @@ import Box from '../../../Box/Box';
 import { chartData } from './chartData';
 import ListViewItemChart from './ListViewItemChart';
 
-vi.mock('use-resize-observer', () => ({
-  default: vi.fn(),
-}));
-
-import useResizeObserver from 'use-resize-observer';
+jest.mock('use-resize-observer');
 
 const Chart = props => {
   const ref = React.useRef();

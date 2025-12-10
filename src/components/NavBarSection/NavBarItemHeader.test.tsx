@@ -34,9 +34,9 @@ const mockTheme = {
   },
 };
 
-vi.mock('../../hooks/useGetTheme', () => ({
+jest.mock('../../hooks/useGetTheme', () => ({
   __esModule: true,
-  default: vi.fn(),
+  default: jest.fn(),
 }));
 
 const NavBarWithSection = React.forwardRef<HTMLUListElement>((props, ref) => {

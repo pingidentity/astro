@@ -62,6 +62,10 @@ beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
   window.HTMLElement.prototype.scrollIntoView = jest.fn();
   jest.spyOn(window.screen, 'width', 'get').mockImplementation(() => 1024);
+  jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb: FrameRequestCallback) => {
+    cb(0);
+    return 0;
+  });
   jest.useFakeTimers();
 });
 

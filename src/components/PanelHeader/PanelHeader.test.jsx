@@ -27,12 +27,10 @@ const getComponent = (props = {}) => render((
 ));
 
 let fallbackImageObj = null;
-vi.mock('../../hooks/useFallbackImage', () => ({
-  default: props => {
-    fallbackImageObj = { ...props };
-    return [];
-  },
-}));
+jest.mock('../../hooks/useFallbackImage', () => props => {
+  fallbackImageObj = { ...props };
+  return [];
+});
 const getComponentOnyx = (props = {}) => render((
   <AstroProvider themeOverrides={[OnyxTheme]}>
     <PanelHeader {...defaultProps} {...props} />
