@@ -5,13 +5,18 @@ import { ThemeProvider } from 'theme-ui';
 
 import theme from '../../styles/theme';
 
-
-const globalTestStyles = `
-  .is-disabled {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-`;
+const GlobalTestStyles: React.FC = () => (
+  <Global
+    styles={
+      css`
+        .is-disabled {
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      `
+    }
+  />
+);
 
 /**
  * TODO: Change Jest config so this doesn't have to be imported relatively...
@@ -31,7 +36,7 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children, providerTheme }) => (
   <ThemeProvider theme={providerTheme}>
-    <Global styles={globalTestStyles} />
+    <GlobalTestStyles />
     {children}
   </ThemeProvider>
 );

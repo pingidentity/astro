@@ -29,7 +29,7 @@ universalComponentTests({
   ),
 });
 
-vi.mock('@monaco-editor/react', () => {
+jest.mock('@monaco-editor/react', () => {
   return {
     __esModule: true,
     default: ({ language, defaultValue, onChange }) => (

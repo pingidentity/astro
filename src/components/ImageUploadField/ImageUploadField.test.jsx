@@ -10,9 +10,9 @@ import ImageUploadField from './ImageUploadField';
 
 const imageUploadNoImagePreview = 'image-upload-no-image-preview';
 
-vi.mock('../Image', () => ({
-  Image: props => <img alt="mock" {...props} />,
-}));
+jest.mock('../Image', () => props => (
+  <img alt="mock" {...props} />
+));
 
 const testLabel = 'test-label';
 const testButtonId = 'image-preview-button';

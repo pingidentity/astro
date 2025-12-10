@@ -116,7 +116,7 @@ const subtitle = {
   fontWeight: 0,
 };
 
-const textEllipsis = {
+export const textEllipsis = {
   textOverflow: 'ellipsis',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
