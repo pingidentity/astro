@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { AstroOverlayTriggerState } from '../hooks/useModalState/useModalState';
 
 import { DOMAttributes } from './shared/dom';
-import { ModalSizeProps } from './shared/style';
+import { ModalSizeProps, StyleProps } from './shared/style';
 import { TestingAttributes } from './shared/test';
 
 export interface ModalProps extends DOMAttributes, TestingAttributes {
@@ -65,7 +65,7 @@ export interface ModalProps extends DOMAttributes, TestingAttributes {
   headerContainerProps?: object;
 }
 
-export type ModalHeaderProps = {
+export interface ModalHeaderProps extends StyleProps {
   titleProps?: object;
   containerProps?: object;
   closeButton?: ReactNode;
@@ -73,7 +73,7 @@ export type ModalHeaderProps = {
   onClose?: () => void;
   title?: ReactNode;
   hasNoSeparator?: boolean;
-};
+}
 
 export type ModalFooterProps = {
   onSubmit?: () => void;

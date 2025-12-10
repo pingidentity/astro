@@ -34,6 +34,7 @@ const ColorField = forwardRef<HTMLInputElement, ColorFieldProps>((props, ref) =>
     onChange: imperativeOnChange,
     status,
     mode,
+    shouldDisableAlpha = false,
   } = props;
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(props);
 
@@ -161,11 +162,12 @@ const ColorField = forwardRef<HTMLInputElement, ColorFieldProps>((props, ref) =>
         {...positionProps}
         role="presentation"
       >
-        <FocusScope restoreFocus contain autoFocus>
+        <FocusScope restoreFocus autoFocus>
           <SketchPicker
             width={sizeValues.width}
             color={getRgbaFromState(state)}
             onChange={handleColorChange}
+            disableAlpha={shouldDisableAlpha}
           />
         </FocusScope>
       </PopoverContainer>

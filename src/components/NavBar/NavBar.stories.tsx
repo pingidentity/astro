@@ -580,7 +580,9 @@ const thirdData = [
 ];
 
 export const Default: StoryFn<NavBarProps> = () => {
-  const { icons } = useGetTheme();
+  const { icons, themeState } = useGetTheme();
+  const { isOnyx } = themeState;
+
   return (
     <NavBar>
       <Box padding="md" key="top-logo-parent">
@@ -592,7 +594,7 @@ export const Default: StoryFn<NavBarProps> = () => {
           {icons.pingLogoHorizontalSmall}
         </Link>
       </Box>
-      <Separator m={0} backgroundColor="neutral.60" />
+      { !isOnyx ? <Separator m={0} backgroundColor="neutral.60" /> : <Box />}
       <Box
         variant="navBar.sectionContainer"
         paddingBottom="xl"
@@ -889,6 +891,9 @@ export const OnyxDefault: StoryFn<NavBarProps> = () => {
 export const Controlled: StoryFn<NavBarProps> = () => {
   const [selectedKey, setSelectedKey] = useState('Lorem Link Group');
   const { icons } = useGetTheme();
+  const { themeState } = useGetTheme();
+  const { isOnyx } = themeState;
+
   const customData = [
     {
       icon: Earth,
@@ -923,7 +928,7 @@ export const Controlled: StoryFn<NavBarProps> = () => {
           {icons.pingLogoHorizontalSmall}
         </Link>
       </Box>
-      <Separator m="0" backgroundColor="neutral.60" key="top-separator" />
+      { !isOnyx ? <Separator m="0" backgroundColor="neutral.60" key="top-separator" /> : <Box /> }
       <Box
         variant="navBar.sectionContainer"
         paddingBottom="xl"
@@ -948,7 +953,9 @@ export const Controlled: StoryFn<NavBarProps> = () => {
 };
 
 export const AutoCollapse: StoryFn<NavBarProps> = () => {
-  const { icons } = useGetTheme();
+  const { icons, themeState } = useGetTheme();
+  const { isOnyx } = themeState;
+
   return (
     <NavBar isAutoСollapsible>
       <Box padding="md" key="top-logo-parent">
@@ -960,7 +967,7 @@ export const AutoCollapse: StoryFn<NavBarProps> = () => {
           {icons.pingLogoHorizontalSmall}
         </Link>
       </Box>
-      <Separator m={0} backgroundColor="neutral.60" />
+      { !isOnyx ? <Separator m={0} backgroundColor="neutral.60" /> : <Box />}
       <Box
         variant="navBar.sectionContainer"
         paddingBottom="xl"

@@ -20,6 +20,8 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
     state,
   } = props;
 
+  const { onDragStart } = draggableCollectionStateOptions;
+
   const { onReorder } = useDroppableCollectionOptions;
 
   const onDropFunction = e => {
@@ -33,7 +35,10 @@ const useReorderableCollection = (props: UseReorderableCollectionProps) => {
   const draggableStateOptions = {
     ...draggableCollectionStateOptions,
     onDragStart: e => {
-      setDraggingKey(String(e.keys.values().next().value ?? ''));
+      setDraggingKey(e.keys.values().next().value);
+      if (onDragStart) {
+        onDragStart(e);
+      }
     },
 
     collection: state.collection,

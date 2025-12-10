@@ -136,8 +136,8 @@ test('select field with helper text', () => {
   expect(fieldHelperText[1]).toHaveClass(`is-${statuses.ERROR}`);
 });
 
-test('displays a loader while loading', () => {
-  const { rerender } = getComponent({ items: [], isLoading: true });
+test('displays a inline loader while loading', () => {
+  const { rerender } = getComponent({ items: [], isLoading: true, hasInlineLoader: true });
 
   const button = screen.getByRole('button');
   const loader = within(button).getByRole('alert');

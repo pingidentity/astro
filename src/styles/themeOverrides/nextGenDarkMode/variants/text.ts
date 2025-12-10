@@ -1,6 +1,21 @@
 export const text = {
+  listViewItemExpandedText: {
+    color: 'gray-100',
+  },
   listViewItemText: {
     color: 'text.secondary',
+  },
+  searchNavTabLabel: {
+    color: 'gray-400',
+    '.is-selected &, .is-hovered &': {
+      color: 'white',
+    },
+    '.is-selected &': {
+      color: 'white',
+    },
+    '.is-disabled &': {
+      color: 'neutral.80',
+    },
   },
   listViewItemTextSelected: {
     color: 'gray-100',

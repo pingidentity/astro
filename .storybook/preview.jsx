@@ -34,7 +34,7 @@ const withThemeProvider = (Story, context) => {
   )
 
   return (
-    <AstroProvider theme={storyTheme} bg="background.base">
+    <AstroProvider theme={storyTheme} bg="backgroundBase">
       <div style={style} >
         {
           showComingSoonMessage ?

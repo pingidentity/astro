@@ -142,11 +142,11 @@ function rgbToHsl(rgb) {
     h = ((g - b) / delta) % 6;
   } else if (cmax === g) {
     // Green is max
-    // eslint-disable-next-line no-mixed-operators
+
     h = (b - r) / delta + 2;
   } else {
     // Blue is max
-    // eslint-disable-next-line no-mixed-operators
+
     h = (r - g) / delta + 4;
   }
 
@@ -159,7 +159,7 @@ function rgbToHsl(rgb) {
   l = (cmax + cmin) / 2;
 
   // Calculate saturation
-  // eslint-disable-next-line no-mixed-operators
+
   s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
 
   // Multiply l and s by 100
@@ -172,21 +172,21 @@ const matchers = {
   'RGB Average Diff': referenceValue => entry => {
     const rgb1 = hexToRgb(entry);
     const rgb2 = hexToRgb(referenceValue);
-    // eslint-disable-next-line no-mixed-operators
+
     return (Math.abs(rgb1[0] - rgb2[0])
-      // eslint-disable-next-line no-mixed-operators
+
       + Math.abs(rgb1[1] - rgb2[1])
-      // eslint-disable-next-line no-mixed-operators
+
       + Math.abs(rgb1[2] - rgb2[2])) / (3 * 256);
   },
   'RGB distance': referenceValue => entry => {
     const rgb1 = hexToRgb(entry);
     const rgb2 = hexToRgb(referenceValue);
-    // eslint-disable-next-line no-mixed-operators
+
     return Math.sqrt((rgb1[0] - rgb2[0]) ** 2
-      // eslint-disable-next-line no-mixed-operators
+
       + (rgb1[1] - rgb2[1]) ** 2
-      // eslint-disable-next-line no-mixed-operators
+
       + (rgb1[2] - rgb2[2]) ** 2) / (3 * 256);
   },
   'By Hue Difference': referenceValue => entry => {

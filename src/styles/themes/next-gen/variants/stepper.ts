@@ -27,7 +27,7 @@ const step = {
   active: {
     backgroundColor: 'active',
     borderColor: 'active',
-    color: 'background.base',
+    color: 'backgroundBase',
     ...stepBase,
     '&:before': {
       content: '""',
@@ -38,7 +38,7 @@ const step = {
       position: 'absolute',
       borderRadius: '100%',
       borderStyle: 'solid',
-      borderColor: 'background.base',
+      borderColor: 'backgroundBase',
       borderWidth: '2px',
     },
   },
@@ -47,7 +47,7 @@ const step = {
     borderColor: 'active',
   },
   inactive: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     borderColor: 'blue-200',
     color: 'active',
     ...stepBase,

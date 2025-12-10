@@ -58,7 +58,8 @@ describe('GridList Component', () => {
 
   test('handles drag and drop functionality', async () => {
     const onReorder = jest.fn();
-    getDefaultComponent({ isReorderable: true, onReorder });
+    const onDragStart = jest.fn();
+    getDefaultComponent({ isReorderable: true, onReorder, onDragStart });
 
     const rows = screen.getAllByRole('row');
     const list = screen.getByRole('grid');

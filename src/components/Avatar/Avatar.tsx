@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 import { Avatar as ThemeUIAvatar, Box } from 'theme-ui';
 
 import { useStatusClasses } from '../../hooks';
-import sizes from '../../styles/themes/next-gen/sizes';
 import { AvatarProps } from '../../types/avatar';
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
@@ -16,30 +15,32 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
     sx,
     children,
     isSquare,
+    isLogo,
     ...others
   } = props;
 
   const { classNames } = useStatusClasses(className, {
     [`is-${color}`]: color,
     [`size-${size}`]: size,
-    [`font-size-${size}`]: size,
+    [`font-size-${size}`]: src ? false : size,
     'is-square': isSquare,
+    'is-image': src,
+    'is-logo': isLogo,
   });
 
   if (src) {
     return (
-      <ThemeUIAvatar
-        ref={ref}
-        alt={alt}
-        src={src}
-        sx={{
-          size,
-          width: sizes.avatar[size],
-          height: sizes.avatar[size],
-          ...sx,
-        }}
-        {...others}
-      />
+      <Box
+        variant="avatar"
+        className={classNames}
+      >
+        <ThemeUIAvatar
+          ref={ref}
+          alt={alt}
+          src={src}
+          {...others}
+        />
+      </Box>
     );
   }
 
@@ -58,7 +59,6 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
     </Box>
   );
 });
-
 
 Avatar.displayName = 'Avatar';
 

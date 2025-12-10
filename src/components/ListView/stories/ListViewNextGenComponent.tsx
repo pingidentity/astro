@@ -59,7 +59,7 @@ export const ListViewNextGen = () => {
   );
 
   return (
-    <Box backgroundColor="background.base" p="lg">
+    <Box backgroundColor="backgroundBase" p="lg">
       <Box height="400px" mb="xl">
         <Text as="h2" mb="md">ListView</Text>
         <ListView items={items} selectionMode="single">

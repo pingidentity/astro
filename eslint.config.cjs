@@ -34,7 +34,7 @@ module.exports = [
     },
   }),
   {
-    ignores: ['**/lib'],
+    ignores: ['**/lib', '**/demo'],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

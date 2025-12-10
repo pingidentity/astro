@@ -12,7 +12,7 @@ export const navBar = {
   container: {
     width: '252px',
     p: 'sm',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     boxShadow: '0 .5rem 1rem rgba(0, 0, 0, .15)',
   },
   sectionButton: {

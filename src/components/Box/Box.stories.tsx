@@ -61,6 +61,13 @@ export const Default = ({ ...args }) => (
   </Box>
 );
 
+export const BackgroundColors = () => (
+  <Box width="100%" p="xl" bg="blue" gap="xs">
+    <Box width={190} height={45} bg="backgroundBase" />
+    <Box width={190} height={45} bg="backgroundSecondary" />
+  </Box>
+);
+
 export const Disabled = ({ ...args }) => (
   <Box
     bg="white"

@@ -112,7 +112,7 @@ const ExpandableChildren = () => {
   return (
     <Box sx={{ my: '20px' }}>
       <SearchField maxWidth="400px" aria-label="Search" placeholder="Search" />
-      <Text sx={{ mt: 'md', fontWeight: '1' }}>
+      <Text variant="listViewItemExpandedText">
         Lorem ipsum dolor sit amet consectetur.
         Viverra nulla nec velit sollicitudin sed nisi mi gravida.
         Maecenas vestibulum pretium dictum dictum tempus.
@@ -127,7 +127,7 @@ const ExpandableChildren = () => {
 const ExampleContent = contentProps => {
   const { text, icon } = contentProps;
   return (
-    <Box isRow sx={{ alignItems: 'center' }} gap="md">
+    <Box isRow sx={{ alignItems: 'center' }} gap="lg">
       <IconWrapper
         icon={icon}
         size="sm"
@@ -135,7 +135,7 @@ const ExampleContent = contentProps => {
         isCircle
         color="cyan"
       />
-      <Text variant="itemTitle">
+      <Text variant="listViewItemText" sx={{ my: 'auto' }}>
         {text}
       </Text>
     </Box>

@@ -78,7 +78,7 @@ const iconSizes:IconSize[] = ['icon-100', 'icon-200', 'icon-300', 'icon-400', 'i
 
 const StickerSheetComponent = () => {
   return (
-    <Box sx={{ backgroundColor: 'background.base' }} height="100%" p="lg" gap="lg">
+    <Box sx={{ backgroundColor: 'backgroundBase' }} height="100%" p="lg" gap="lg">
       <Box p="lg">
         <MultivaluesField items={items} label="Multivalues">
           {item => (

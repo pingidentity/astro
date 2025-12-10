@@ -16,7 +16,7 @@ import SelectFieldBase from '../SelectFieldBase';
 const displayName = 'LinkSelectField';
 
 const LinkSelectField = forwardRef((props, ref) => {
-  const { placeholder, isDisabled, status, helperText } = props;
+  const { placeholder, isDisabled, status, helperText, hasInlineLoader } = props;
   const { ariaProps } = getAriaAttributeProps(props);
   const { themeState } = useGetTheme();
   const { isOnyx } = themeState;
@@ -53,7 +53,7 @@ const LinkSelectField = forwardRef((props, ref) => {
     >
       <Text variant="label" color={isOnyx ? 'font.link' : 'active'}>{placeholder}</Text>
       <Box isRow>
-        {isLoadingInitial && <Loader variant="loader.withinInput" />}
+        {hasInlineLoader && isLoadingInitial && <Loader variant="loader.withinInput" />}
         <Box as="span" aria-hidden="true" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
@@ -142,6 +142,8 @@ LinkSelectField.propTypes = {
    * (key: Key) => any
    */
   onSelectionChange: PropTypes.func,
+  /** Display an inline loader inside the select trigger while loading. */
+  hasInlineLoader: PropTypes.bool,
   ...statusPropTypes,
   ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,

@@ -1,10 +1,12 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Loader } from '../../index';
+import { Loader } from '../..';
 import { flatColorList } from '../../styles/colors';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import type { LoaderProps } from '../../types';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { sizeArgTypes } from '../../utils/docUtils/iconSizeProps';
 
 import LoaderReadme from './Loader.mdx';
@@ -38,9 +40,9 @@ export default {
   args: {
     color: 'active',
   },
-};
+} as Meta;
 
-export const Default = args => (
+export const Default: StoryFn<LoaderProps> = args => (
   <Loader {...args} />
 );
 
@@ -51,18 +53,18 @@ Default.parameters = {
   },
 };
 
-export const CustomColor = args => (
+export const CustomColor: StoryFn<LoaderProps> = args => (
   <Loader {...args} color="neutral.50" />
 );
 
-export const CustomSize = args => (
+export const CustomSize: StoryFn<LoaderProps> = args => (
   <Loader {...args} size={32} />
 );
 
-export const Circular = args => (
+export const Circular: StoryFn<LoaderProps> = args => (
   <Loader {...args} size={120} isCircle />
 );
 
-export const CustomCircular = args => (
+export const CustomCircular: StoryFn<LoaderProps> = args => (
   <Loader {...args} size="lg" isCircle strokeColor="magenta" />
 );

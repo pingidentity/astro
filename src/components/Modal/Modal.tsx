@@ -92,9 +92,9 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
 
   const [header, ...siblings] = React.Children.toArray(children);
 
-  const hasHeaderContent = React.isValidElement(header) && header.type === ModalHeader;
+  const hasHeaderConvenienceComponent = React.isValidElement(header) && header.type === ModalHeader;
 
-  const titleContent = !hasHeaderContent && title && (
+  const titleContent = !hasHeaderConvenienceComponent && title && (
     isOnyx ? (
       <Box variant="modal.header">
         <Text {...titleProps} variant="modalTitle" role="heading">{title}</Text>
@@ -149,7 +149,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
                 {titleContent}
               </Box>
             )}
-            {isOnyx ? children : <Box pt="md" px="lg">{children}</Box>}
+            {isOnyx ? children : <Box pt="md" px="lg" pb="lg">{children}</Box>}
           </Box>
         </FocusScope>
       </Box>

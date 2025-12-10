@@ -1,13 +1,15 @@
 const container = {
-  bg: 'background.base',
+  bg: 'backgroundBase',
   border: 'none',
-  minHeight: 72,
-  maxHeight: 72,
+  pt: 'lg',
+  px: 'lg',
+  pb: 'md',
 };
 
 const controls = {
+  gap: '12px',
   alignSelf: 'start',
-  pt: 'xs',
+  mr: '0',
 };
 
 const wrapper = {

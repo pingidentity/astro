@@ -34,6 +34,7 @@ const wrapper = {
 
 const rightOfData = {
   alignSelf: 'center',
+  mr: 'md',
 };
 
 const iconWrapper = {

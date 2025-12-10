@@ -16,6 +16,7 @@ const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>((props, ref) => {
     containerProps,
     titleProps,
     hasNoSeparator,
+    ...rest
   } = props;
 
   const titleContent = typeof title === 'string' && title ? (
@@ -32,8 +33,9 @@ const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>((props, ref) => {
       alignItems="center"
       as="header"
       ref={ref}
-      sx={{ borderBottomWidth: hasNoSeparator ? '0px' : '1px' }}
+      sx={{ borderBottomWidth: hasNoSeparator ? '0px' : '1px', ...rest.sx }}
       {...containerProps}
+      {...rest}
     >
       {titleContent}
       {

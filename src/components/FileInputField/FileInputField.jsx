@@ -33,6 +33,18 @@ const FILE_CHANGE_STATUS = {
   DELETED: 'deleted',
 };
 
+const getFileExtension = file => {
+  const extension = file.name.split('.')[file.name.split('.').length - 1];
+  return `.${extension}`;
+};
+
+export const filterFileTypes = ({ arrayWithNewFiles, fileTypes }) => arrayWithNewFiles
+  .filter(newFile => (!fileTypes?.length
+      || fileTypes.includes(getFileExtension(newFile))
+      || fileTypes.some(fileType => newFile.type.search(fileType) !== -1)
+  ));
+
+
 const FileInputField = forwardRef((props, ref) => {
   const { buttonProps,
     defaultButtonText,
@@ -112,9 +124,7 @@ const FileInputField = forwardRef((props, ref) => {
       arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
     }
 
-    const filesWithIdAndLink = arrayWithNewFiles
-      .filter(newFile => !fileTypes
-         || fileTypes.some(fileType => newFile.type.search(fileType) !== -1))
+    const filesWithIdAndLink = filterFileTypes({ arrayWithNewFiles, fileTypes })
       .map(newFile => {
         return {
           fileObj: newFile,
@@ -255,7 +265,7 @@ const FileInputField = forwardRef((props, ref) => {
         )}
         {isLoading && (
         <Loader
-          color="active"
+          variant="loader.withinInput"
           sx={{ position: 'absolute' }}
           data-testid="file-input-field__loader"
         />

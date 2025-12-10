@@ -37,6 +37,8 @@ const nextGenTheme = {
   fontWeights,
   lineHeights: {
     body: '1.6',
+    xs: '1.2',
+    sm: '1.4',
     md: '1.75',
   },
   text: newText,
@@ -45,6 +47,9 @@ const nextGenTheme = {
     body: '"Open Sans", sans-serif',
     heading: '"Open Sans", sans-serif',
     codeView: 'Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace',
+  },
+  shadows: {
+    standard: '0 1px 3px 0 rgba(0, 0, 0, 0.13)',
   },
   sizes,
   badges,

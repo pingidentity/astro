@@ -278,3 +278,17 @@ WithCustomLanguage.parameters = {
     },
   },
 };
+
+export const Light: StoryFn<CodeViewProps> = (args: CodeViewProps) => {
+  return (
+    <CodeView variant="light" {...args} />
+  );
+};
+
+Light.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};

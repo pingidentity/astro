@@ -1,10 +1,13 @@
+import { colors } from '../colors';
+
+
 export const listViewItem = {
   styledListItem: {
     '&.has-separator': {
       borderBottom: '1px solid',
-      borderBottomColor: 'border.base',
+      borderBottomColor: 'border.attachment',
     },
-    bg: 'background.base',
+    bg: 'backgroundBase',
     '&.is-selected': {
       bg: 'background.hover',
     },
@@ -28,13 +31,19 @@ export const listViewItem = {
     },
   },
   expandIcon: {
-    color: 'gray-400',
+    color: 'gray-100',
+    fill: `${colors.secondary} !important`,
+  },
+  expandableRow: {
+    '&.has-separator': {
+      borderBottomColor: 'border.attachment',
+    },
   },
 };
 
 export const listView = {
   container: {
-    borderColor: 'border.base',
+    borderColor: 'border.attachment',
   },
 };
 

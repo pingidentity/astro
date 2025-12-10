@@ -1,13 +1,23 @@
 const avatar = {
   sm: '24px',
   md: '32px',
+  xmd: '44px',
   lg: '72px',
   xl: '104px',
+};
+
+const avatarLogo = {
+  sm: '14px',
+  md: '20px',
+  xmd: '24px',
+  lg: '44px',
+  xl: '54px',
 };
 
 const avatarFontSize = {
   sm: '9.6px',
   md: '13.6px',
+  xmd: '18px',
   lg: '28.8px',
   xl: '41.6px',
 };
@@ -33,6 +43,7 @@ const icons = {
 
 export default {
   avatar,
+  avatarLogo,
   avatarFontSize,
   container,
   iconBadge,

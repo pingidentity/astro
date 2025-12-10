@@ -21,7 +21,7 @@ const ListViewItemMenu = forwardRef(({ children, iconButtonProps, ...others }, r
       <IconButton aria-label="more" ref={ref} {...iconButtonProps}>
         <Icon
           icon={listViewMenu}
-          variant="listViewItem.menuIcon"
+          size="md"
           title={{ name: 'Menu Icon' }}
         />
       </IconButton>

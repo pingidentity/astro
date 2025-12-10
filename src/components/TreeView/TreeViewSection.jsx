@@ -203,7 +203,7 @@ const TreeViewSection = forwardRef((props, ref) => {
             }}
           >
             <VisuallyHidden aria-live="polite">{loaderState === false && (isExpanded && items.length > 0 ? ' Loading successful' : 'Loading unsuccessful')}</VisuallyHidden>
-            { loaderState ? <Loader color="active" ml="31px" />
+            { loaderState ? <Loader variant="loader.withinInput" ml="31px" />
               : (Array.from(items).map((_item, _index) => (
                 SectionOrItemRender(
                   // _item.value.items?.length > 0 || _item.value.items,

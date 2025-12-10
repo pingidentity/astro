@@ -6,7 +6,7 @@ import statuses from '../../utils/devUtils/constants/statuses';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
-import FileInputField from './FileInputField';
+import FileInputField, { filterFileTypes } from './FileInputField';
 
 const fileInputFieldTestId = 'file-input-test-id';
 const testLabel = 'file-input-test-label';
@@ -23,7 +23,7 @@ const testFileName2 = 'chucknorris222.png';
 const testFileName3 = 'document.pdf';
 
 const testFile = new File(['(⌐□_□)'], testFileName, {
-  type: 'image/png',
+  type: 'text/plain',
 });
 const testFile2 = new File(['(⌐□_□)'], testFileName2, {
   type: 'image/png',
@@ -221,4 +221,43 @@ test('File upload should allow only image', async () => {
   expect(val).not.toBeInTheDocument();
 
   expect(setStateMock).toHaveBeenCalled();
+});
+
+describe('filterFileTypes', () => {
+  it('returns a list of files', () => {
+    const results = filterFileTypes({ arrayWithNewFiles: [testFile, testFile2] });
+
+    expect(results.length).toBe(2);
+  });
+
+  it('filters file types', () => {
+    const results = filterFileTypes({
+      arrayWithNewFiles: [{ name: 'shark', type: 'text/plain' }, { name: 'shark', type: 'image/png' }],
+      fileTypes: ['text/plain'],
+    });
+
+    expect(results.length).toBe(1);
+  });
+
+  it('filters file image types', () => {
+    const results = filterFileTypes({
+      arrayWithNewFiles: [{ name: 'shark', type: 'text/plain' }, { name: 'shark', type: 'image/png' }],
+      fileTypes: ['image'],
+    });
+
+    expect(results.length).toBe(1);
+  });
+
+  it('filters custom file types', () => {
+    const results = filterFileTypes({
+      arrayWithNewFiles: [
+        { name: 'shark', type: '.p8' },
+        { name: 'shark', type: '.xml' },
+        { name: 'shark', type: '.xml' },
+      ],
+      fileTypes: ['.p8'],
+    });
+
+    expect(results.length).toBe(1);
+  });
 });

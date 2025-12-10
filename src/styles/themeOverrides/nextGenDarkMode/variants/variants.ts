@@ -12,7 +12,7 @@ import skeleton from './skeleton';
 
 const listBox = {
   container: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     border: '1px solid',
     borderColor: 'transparent',
     borderRadius: '4px',
@@ -47,39 +47,42 @@ const tab = {
 
 const modal = {
   content: {
-    bg: 'background.base',
+    bg: 'backgroundBase',
   },
   headingContainer: {
     borderBottom: '1px solid',
     borderBottomColor: 'border.base',
-    bg: 'background.base',
+    bg: 'backgroundBase',
   },
   header: {
     borderBottom: '1px solid',
     borderBottomColor: 'border.base',
-    bg: 'background.base',
+    bg: 'backgroundBase',
   },
   body: {
-    bg: 'background.base',
+    bg: 'backgroundBase',
   },
   footer: {
     borderTop: '1px solid',
     borderTopColor: 'border.base',
-    bg: 'background.base',
+    bg: 'backgroundBase',
   },
   footerContainer: {
     borderTop: '1px solid',
     borderTopColor: 'border.base',
-    bg: 'background.base',
+    bg: 'backgroundBase',
+  },
+  buttonsContainer: {
+    bg: 'backgroundBase',
   },
 };
 
 const rockerButton = {
   innerContainer: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
   thumbSwitch: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     color: 'blue-400',
     '&.is-selected': {
       color: 'black',
@@ -98,7 +101,7 @@ const rockerButton = {
 
 const attachment = {
   container: {
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'backgroundSecondary',
     borderColor: 'border.attachment',
   },
 };
@@ -256,6 +259,14 @@ export default {
     container: {
       border: '1px solid border.separator',
       boxShadow: 'none',
+    },
+  },
+  breadcrumb: {
+    link: {
+      color: 'blue-400',
+      '&.is-current': {
+        color: 'text.secondary',
+      },
     },
   },
 };

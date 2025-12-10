@@ -5,17 +5,18 @@ import { IconProps } from '../../types';
 import Box from '../Box';
 
 const Icon = forwardRef<HTMLElement, IconProps>((props, ref) => {
+  const theme = useGetTheme();
+
   const {
     color,
     icon: IconComponent,
     sx,
-    size = 'sm',
+    size = theme.defaultIconSize,
     variant,
     title,
     ...others
   } = props;
 
-  const theme = useGetTheme();
   const { sizeProps } = useTShirtSize({ size, sizes: theme.tShirtSizes });
 
   const { defaultIconColor } = theme;

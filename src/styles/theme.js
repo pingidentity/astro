@@ -13,7 +13,6 @@ export default {
   space: spacing,
   colors: {
     ...colors,
-    background: accent[99],
   },
   borders: {
     separator: `1px solid ${line.hairline}`,

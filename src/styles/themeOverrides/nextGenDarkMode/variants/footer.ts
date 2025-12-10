@@ -1,5 +1,5 @@
 const container = {
-  backgroundColor: 'background.secondary',
+  backgroundColor: 'backgroundSecondary',
 };
 
 export const footer = {

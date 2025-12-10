@@ -1,4 +1,4 @@
-import { IconSize } from '../../../../types';
+import { IconSize, LoaderSize } from '../../../../types';
 
 import icons from './icons';
 import styles from './styles';
@@ -15,8 +15,10 @@ const pageHeaderTitleMargin = 'xs';
 const activeColor = '#4462ED';
 const backgroundBaseColor = 'white';
 const defaultLoaderSize = 16;
+const buttonLoaderSize = '0.5em' as LoaderSize;
 const iFrameContentDivBackgroundColor = '#F7F8FD';
 const defaultIconColor = 'currentColor';
+const defaultIconSize = 'sm' as IconSize;
 
 export const astroThemeValues = {
   accordionItemDefaultLabelTag,
@@ -36,4 +38,6 @@ export const astroThemeValues = {
   accordionItemMarginLeft,
   defaultLoaderSize,
   defaultIconColor,
+  defaultIconSize,
+  buttonLoaderSize,
 };

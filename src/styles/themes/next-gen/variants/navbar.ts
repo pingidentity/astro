@@ -1,5 +1,5 @@
 export const navBarSelected = {
-  backgroundColor: 'lightblue',
+  backgroundColor: 'blue-100',
   boxShadow: 'none',
 };
 
@@ -14,7 +14,7 @@ export const navBar = {
     fontFamily: 'standard',
     width: '252px',
     p: 'sm',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     boxShadow: '0 .5rem 1rem rgba(0, 0, 0, .15)',
   },
   sectionContainer: {
@@ -37,6 +37,8 @@ export const navBar = {
     paddingLeft: '53px',
     color: 'gray-700',
     borderRadius: '4px',
+    fontWeight: 0,
+    fontSize: 'sm',
     '&.is-focused': {
       ...navBarFocus,
     },
@@ -48,7 +50,7 @@ export const navBar = {
       color: 'gray-700',
     },
     '&.is-selected': {
-      bg: 'lightblue',
+      bg: 'blue-100',
       boxShadow: 'none',
       color: 'darkblue',
     },
@@ -57,7 +59,9 @@ export const navBar = {
     color: 'gray-700',
   },
   headerText: {
-    color: 'text.primary',
+    color: 'gray-700',
+    fontWeight: 0,
+    fontSize: 'sm',
     ml: 'sm',
     '.is-selected &': {
       color: 'darkblue',

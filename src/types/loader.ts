@@ -12,4 +12,5 @@ export interface LoaderProps extends StyleProps {
   progress?: number,
   strokeColor?: string,
   strokeBaseColor?: string,
+  isCircle?: boolean,
 }

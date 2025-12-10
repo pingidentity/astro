@@ -37,3 +37,7 @@ These keys provide additional functionality to the component.
 This component uses the following attributes to assist screen readers:
 - The input component uses the **`aria-labelledby`** attribute to reference the label.
 - The two icon buttons each use the **`aria-controls`** attribute with the input ID and the **`aria-label`** attribute to provide an accessible name.
+
+#### Note
+
+For NumberField, the onChange callback is triggered when the increment and decrement buttons are pressed, or upon focus shifting away from the input after typing a value with the keyboard. This is because of internal validation which needs to occur when typing. (Source: [React Aria NumberField](https://react-spectrum.adobe.com/react-aria/useNumberField.html#controlled))

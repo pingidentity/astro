@@ -107,6 +107,7 @@ export default {
   },
   args: {
     hasCloseButton: true,
+    hasAutoFocus: true,
   },
 } as Meta;
 
@@ -125,7 +126,7 @@ export const Default: StoryFn<ModalProps> = args => {
           <Modal
             {...args}
             isOpen={state.isOpen}
-            state={state}
+            onClose={state.close}
           >
             <ModalHeader
               hasCloseButton
@@ -370,6 +371,7 @@ export const WithInputField: StoryFn<ModalProps> = () => {
         <Modal
           isOpen={state.isOpen}
           onClose={state.close}
+          hasAutoFocus
         >
           <ModalBody>
             <Box gap="lg" pt={isOnyx ? '' : 'lg'}>
@@ -424,6 +426,14 @@ export const WithInputField: StoryFn<ModalProps> = () => {
   );
 };
 
+WithInputField.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'aria-hidden-focus', enabled: false }],
+    },
+  },
+};
+
 export const WithPopoverMenu: StoryFn<ModalProps> = () => {
   const state = useModalState();
   return (
@@ -436,13 +446,9 @@ export const WithPopoverMenu: StoryFn<ModalProps> = () => {
           isOpen={state.isOpen}
           onClose={state.close}
         >
-          <ModalHeader
-            hasCloseButton
-            onClose={state.close}
-            title="Lorem Ipsum"
-          />
           <ModalBody>
             <Box gap="lg">
+              <Text>Lorem ipsum dolor sit amet consectetur</Text>
               <PopoverMenu>
                 <Button>Click me</Button>
                 <Menu onAction={() => console.log('on action')}>
@@ -457,17 +463,8 @@ export const WithPopoverMenu: StoryFn<ModalProps> = () => {
               </PopoverMenu>
             </Box>
           </ModalBody>
-          <ModalFooter onSubmit={state.close} onCancel={state.close} />
         </Modal>
       )}
     </OverlayProvider>
   );
-};
-
-WithInputField.parameters = {
-  a11y: {
-    config: {
-      rules: [{ id: 'aria-hidden-focus', enabled: false }],
-    },
-  },
 };

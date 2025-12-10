@@ -18,7 +18,7 @@ export const input: ThemeUICSSObject = {
   fontSize: 'md',
   fontFamily: 'standard',
   p: '0.75rem',
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   borderColor: 'border.input',
   '&.is-focused': {
     ...defaultFocus,
@@ -186,7 +186,7 @@ input.multivaluesWrapper = {
     border: '1px solid',
     borderColor: 'gray-900',
     '> input': {
-      backgroundColor: 'background.secondary',
+      backgroundColor: 'backgroundSecondary',
     },
     '&:after': {
       display: 'none',
@@ -215,4 +215,27 @@ input.promptInputAttachmentWrapper = {
   overflowY: 'hidden',
   whiteSpace: 'nowrap',
   px: '.75rem',
+};
+
+input.dropDownContentRight = {
+  background: 'inherit',
+  '& button': {
+    borderRadius: '0px 4px 4px 0px !important',
+    '&.is-focused': {
+      outline: '2px solid',
+      outlineOffset: '2px',
+      outlineColor: 'gray-700',
+    },
+  },
+};
+
+input.dropDownContentLeft = {
+  '& button': {
+    borderRadius: '4px 0px 0px 4px !important',
+    '&.is-focused': {
+      outline: '2px solid',
+      outlineOffset: '2px',
+      outlineColor: 'gray-700',
+    },
+  },
 };

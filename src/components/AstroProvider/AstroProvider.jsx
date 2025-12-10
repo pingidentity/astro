@@ -69,7 +69,7 @@ const AstroProvider = forwardRef((props, ref) => {
   return (
     <ThemeProvider theme={theme} {...others}>
       <GlobalStyles isEndUserTheme={isEndUserTheme} />
-      <Box ref={ref} bg="background" height="100%" {...props}>
+      <Box ref={ref} bg="backgroundBase" height="100%" {...props}>
         {children}
       </Box>
     </ThemeProvider>

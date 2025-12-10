@@ -113,6 +113,7 @@ export const text = {
   },
   tabLabel: {
     color: 'text.primary',
+    wordBreak: 'normal',
   },
   placeholder: {
     color: 'gray-600',
@@ -126,8 +127,12 @@ export const text = {
     fontFamily: 'standard',
     color: 'text.primary',
     fontWeight: 2,
+    lineHeight: 'sm',
+  },
+  listViewItemExpandedText: {
+    mt: 'md',
+    fontWeight: 0,
     lineHeight: 'body',
-    mb: 'xs',
   },
   listViewItemSubtext: {
     fontSize: 'md',
@@ -170,6 +175,8 @@ export const text = {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
+    color: 'font.base',
+    lineHeight: 'xs',
   },
   messagesText: {
     '&.is-success, &.is-warning, &.is-error, &.is-default': {
@@ -180,5 +187,10 @@ export const text = {
         color: 'gray-700',
       },
     },
+  },
+  panelHeaderSubtext: {
+    fontSize: 'md',
+    lineHeight: 'body',
+    color: 'font.light',
   },
 };

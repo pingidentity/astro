@@ -41,7 +41,7 @@ const container = {
 };
 
 const caption = {
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   px: 'lg',
   color: 'text.primary',
   borderBottom: '1px solid',
@@ -60,7 +60,7 @@ const row = {
     bg: 'background.hover',
   },
   '&:nth-of-type(odd)': {
-    bg: 'background.base',
+    bg: 'backgroundBase',
     '&.is-hovered': {
       bg: 'background.hover',
     },
@@ -69,7 +69,7 @@ const row = {
 
 const thead = {
   borderBottomColor: 'border.base',
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   '&.is-sticky': {
     boxShadow: `0 1px 0 ${colors.border.base}`,
   },
@@ -90,7 +90,7 @@ const head = {
 const tbody = {
   borderTopColor: 'border.base',
   borderBottom: 'unset',
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   borderBottomLeftRadius: borderRadius,
   borderBottomRightRadius: borderRadius,
 };

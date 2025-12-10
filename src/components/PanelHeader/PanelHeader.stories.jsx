@@ -40,7 +40,7 @@ export const Default = ({ ...args }) => (
     data={{
       icon: AccountIcon,
       text: 'Fons Vernall',
-      avatarDefualtText: 'FV',
+      avatarDefaultText: 'FV',
     }}
   />
 );
@@ -59,7 +59,7 @@ export const WithSubtext = ({ ...args }) => (
       icon: AccountIcon,
       subtext: 'rad_developer@pingidentity.com',
       text: 'Fons Vernall',
-      avatarDefualtText: 'FV',
+      avatarDefaultText: 'FV',
     }}
   />
 );
@@ -78,7 +78,7 @@ export const WithControls = ({ ...args }) => (
       icon: AccountIcon,
       text: 'Fons Vernall',
       subtext: 'rad_developer@pingidentity.com',
-      avatarDefualtText: 'FV',
+      avatarDefaultText: 'FV',
     }}
   >
     <PanelHeaderSwitchField />
@@ -106,7 +106,7 @@ export const WithImage = args => (
         src: pingImg,
         alt: 'Ping Identity Logo',
         'aria-label': 'Ping Identity Logo',
-        avatarDefualtText: 'FV',
+        avatarDefaultText: 'FV',
       },
       text: 'Fons Vernall',
     }}
@@ -182,7 +182,7 @@ export const WithExtraLongText = ({ ...args }) => (
   <PanelHeader
     {...args}
     data={{
-      avatarDefualtText: 'FV',
+      avatarDefaultText: 'FV',
       icon: AccountIcon,
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
       subtext: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',

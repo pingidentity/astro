@@ -176,7 +176,9 @@ const lineNo = {
 };
 
 export default {
-  theme,
-  wrapper,
-  lineNo,
+  default: {
+    theme,
+    wrapper,
+    lineNo,
+  },
 };

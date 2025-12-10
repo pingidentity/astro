@@ -19,4 +19,6 @@ export interface IconButtonToggleProps extends TestingAttributes {
   onToggle?: () => void,
   /** Content will be displayed in a tooltip on hover or focus. */
   title?: string,
+   /** The styling variation of the element. */
+  variant?: string,
 }

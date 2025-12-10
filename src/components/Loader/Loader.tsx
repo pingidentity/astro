@@ -11,6 +11,7 @@ const Loader = forwardRef<HTMLDivElement, LoaderProps>((props, ref) => {
     progress = 75,
     strokeColor,
     strokeBaseColor,
+    size: loaderSize,
     ...others
   } = props;
 
@@ -72,7 +73,7 @@ const Loader = forwardRef<HTMLDivElement, LoaderProps>((props, ref) => {
     <Box
       ref={ref}
       isRow
-      fontSize={size}
+      fontSize={loaderSize}
       variant="loader.container"
       role="alert"
       aria-live="assertive"

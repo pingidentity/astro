@@ -18,7 +18,7 @@ const PanelHeader = forwardRef(({
   subtextProps,
   ...others
 }, ref) => {
-  const { icon, image, subtext, text, avatarDefualtText } = data;
+  const { icon, image, subtext, text, avatarDefaultText } = data;
 
   const { themeState } = useGetTheme();
 
@@ -38,7 +38,15 @@ const PanelHeader = forwardRef(({
   );
 
   const renderAvatar = (
-    <Avatar src={image?.src} size="avatar.lg" defaultText={avatarDefualtText} mr="md" {...avatarProps} />
+    <Avatar
+      color="green"
+      src={image?.src}
+      isSquare={!!image?.src}
+      size="avatar.lg"
+      defaultText={avatarDefaultText}
+      mr="lg"
+      {...avatarProps}
+    />
   );
 
   const renderImage = !icon && image && (
@@ -82,10 +90,12 @@ const PanelHeader = forwardRef(({
   const renderData = (
     <Box isRow variant={text || subtext ? 'panelHeader.data' : 'panelHeader.emptyData'}>
       {renderLeftContent()}
-      <Box {...headerWrapperPropsSpread}>
-        {text && (<Text {...headerPropsSpread} variant="panelHeaderText">{text}</Text>)}
-        {subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
-      </Box>
+      {(text || subtext) && (
+        <Box {...headerWrapperPropsSpread}>
+          {text && (<Text {...headerPropsSpread} variant="panelHeaderText">{text}</Text>)}
+          {subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
+        </Box>
+      )}
     </Box>
   );
 

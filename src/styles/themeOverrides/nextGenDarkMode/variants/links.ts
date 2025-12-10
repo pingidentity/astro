@@ -45,13 +45,15 @@ const app = {
   color: 'blue-400',
   '&.is-hovered': {
     textDecoration: 'underline',
+    textDecorationColor: 'blue-300',
     color: 'blue-300',
   },
   '&.is-pressed': {
     color: 'blue-300',
+    textDecorationColor: 'blue-300',
     textDecoration: 'underline',
   },
-  '&.is-visited': {
+  '&:visited': {
     color: 'purple-100',
   },
 };

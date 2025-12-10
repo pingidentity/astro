@@ -2,7 +2,7 @@ import tShirtSizes from '../customProperties/tShirtSizes';
 
 const base = {
   width: '100%',
-  backgroundColor: 'background.secondary',
+  backgroundColor: 'light',
   lineHeight: 'md',
   p: 'md',
   border: 'none',

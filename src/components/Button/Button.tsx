@@ -6,6 +6,7 @@ import { Button as ThemeUIButton } from 'theme-ui';
 
 import {
   useAriaLabelWarning,
+  useGetTheme,
   useLocalOrForwardRef,
   usePropWarning,
   useStatusClasses,
@@ -83,6 +84,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const ariaLabel = props['aria-label'];
   useAriaLabelWarning('Button', ariaLabel, variant === 'filter');
 
+  const { buttonLoaderSize } = useGetTheme();
+
   return (
     <Pressable ref={buttonRef}>
       <ThemeUIButton
@@ -96,7 +99,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
       >
         {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
-        {isLoading && <Loader size="0.5em" sx={{ position: 'absolute' }} />}
+        {isLoading && (
+          <Loader
+            size={buttonLoaderSize}
+            sx={{ position: 'absolute' }}
+          />
+        )}
       </ThemeUIButton>
     </Pressable>
   );

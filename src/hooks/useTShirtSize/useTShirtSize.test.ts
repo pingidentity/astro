@@ -51,7 +51,7 @@ test('returns size value if size is a t-shirt value', () => {
 
   const obj = {
     sizeProps: {
-      size: '3rem',
+      size: '48px',
     },
   };
   expect(result.current).toEqual(obj);
@@ -88,4 +88,33 @@ test('using custom sizes, returns size value if size is a string value', () => {
     },
   };
   expect(result.current).toEqual(obj);
+});
+
+test('returns size directly if size key is not found in sizes', () => {
+  const props = { size: 'unknown-size' };
+  const { result } = renderHook(() => useTShirtSize(props));
+
+  expect(result.current).toEqual({
+    sizeProps: { size: 'unknown-size' },
+  });
+});
+
+test('returns value if size value includes rem', () => {
+  const customSizes = { sm: '1.5rem' };
+  const props = { size: 'sm', sizes: customSizes };
+  const { result } = renderHook(() => useTShirtSize(props));
+
+  expect(result.current).toEqual({
+    sizeProps: { size: '1.5rem' },
+  });
+});
+
+test('returns size with px when numeric value found in sizes', () => {
+  const customSizes = { sm: 8 };
+  const props = { size: 'sm', sizes: customSizes };
+  const { result } = renderHook(() => useTShirtSize(props));
+
+  expect(result.current).toEqual({
+    sizeProps: { size: '8px' },
+  });
 });

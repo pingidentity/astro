@@ -1,3 +1,6 @@
+import type { IconSize } from '../../../../types';
+import { LoaderSize } from '../../../../types';
+
 import customSizes from './customSizes';
 import icons from './icons';
 import styles from './styles';
@@ -9,6 +12,8 @@ const activeColor = '#1a73e8';
 const backgroundBaseColor = 'white';
 const iFrameContentDivBackgroundColor = backgroundBaseColor;
 const defaultIconColor = 'gray-800';
+const defaultIconSize = 'md' as IconSize;
+const buttonLoaderSize = 'sm' as LoaderSize;
 
 export const nextGenThemeValues = {
   activeColor,
@@ -22,5 +27,7 @@ export const nextGenThemeValues = {
   accordionItemDefaultLabelTag,
   iFrameContentDivBackgroundColor,
   rockerButtonGap: '0px',
+  defaultIconSize,
+  buttonLoaderSize,
   ...customSizes,
 };

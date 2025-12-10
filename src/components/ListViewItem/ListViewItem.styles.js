@@ -156,16 +156,6 @@ const expandIcon = {
   color: 'gray-900',
 };
 
-const editIcon = {
-  width: '25px !important',
-  height: '25px !important',
-};
-
-const menuIcon = {
-  width: '25px !important',
-  height: '25px !important',
-};
-
 export default {
   container,
   controls,
@@ -182,6 +172,4 @@ export default {
   expandableStyledListItem,
   expandableRow,
   expandIcon,
-  editIcon,
-  menuIcon,
 };

@@ -59,7 +59,7 @@ export const Default: StoryFn<AvatarProps> = ({ ...args }) => (
   <Avatar {...args} />
 );
 
-export const WithSizeVariation: StoryFn<AvatarProps> = () => (
+export const SizeVariation: StoryFn<AvatarProps> = () => (
   <Box isRow gap="sm" alignItems="center">
     <Avatar size="sm" color="green" />
     <Avatar size="md" color="green" />
@@ -68,7 +68,7 @@ export const WithSizeVariation: StoryFn<AvatarProps> = () => (
   </Box>
 );
 
-export const WithColorVariation: StoryFn<AvatarProps> = () => (
+export const ColorVariation: StoryFn<AvatarProps> = () => (
   <Box isRow gap="sm" alignItems="center">
     <Avatar color="green" />
     <Avatar color="purple" />
@@ -83,7 +83,7 @@ export const WithColorVariation: StoryFn<AvatarProps> = () => (
   </Box>
 );
 
-export const WithIconVariation: StoryFn<AvatarProps> = () => (
+export const IconVariation: StoryFn<AvatarProps> = () => (
   <Avatar color="green">
     <IconWrapper
       icon={CogOutlineIcon}
@@ -94,10 +94,25 @@ export const WithIconVariation: StoryFn<AvatarProps> = () => (
   </Avatar>
 );
 
-export const WithImageVariation: StoryFn<AvatarProps> = ({ ...args }) => (
+export const ImageVariation: StoryFn<AvatarProps> = ({ ...args }) => (
   <Avatar {...args} />
 );
 
-export const WithSquareVariation: StoryFn<AvatarProps> = () => (
-  <Avatar color="green" isSquare />
+export const SquareVariation: StoryFn<AvatarProps> = () => (
+  <Box isRow gap="sm" alignItems="center">
+    <Avatar color="green" isSquare />
+    <Avatar color="green" isSquare size="xmd" />
+    <Avatar color="green" isSquare size="lg" />
+    <Avatar color="green" isSquare size="xl" />
+  </Box>
+);
+
+
+export const LogoVariation: StoryFn<AvatarProps> = args => (
+  <Box isRow gap="sm" alignItems="center">
+    <Avatar {...args} isSquare isLogo />
+    <Avatar {...args} isSquare size="xmd" isLogo />
+    <Avatar {...args} isSquare size="lg" isLogo />
+    <Avatar {...args} isSquare size="xl" isLogo />
+  </Box>
 );

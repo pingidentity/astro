@@ -139,7 +139,13 @@ const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>
         {...containerProps}
       >
         {loadingState === loadingStates.LOADING_MORE_PREPEND
-        && <Loader variant="loader.withinListView" aria-label="Loading more..." />}
+        && (
+          <Loader
+            variant="loader.withinListView"
+            aria-label="Loading more..."
+            sx={{ paddingTop: 'md', paddingBottom: 'md' }}
+          />
+        )}
         <Virtualizer
           {...(items ? gridProps : { role: 'presentation' })}
           onLoadMore={onLoadMore}
@@ -180,8 +186,16 @@ const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>
                   item={item as ListViewItemTypes<T>}
                 />
               );
-            } if (type === collectionTypes.LOADER) {
-              return <Loader variant="loader.withinListView" aria-label="Loading more..." />;
+            }
+
+            if (type === collectionTypes.LOADER) {
+              return (
+                <Loader
+                  variant="loader.withinListView"
+                  aria-label="Loading more..."
+                  sx={{ paddingTop: 'md', paddingBottom: 'md' }}
+                />
+              );
             }
             return null;
           }}

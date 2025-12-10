@@ -5,6 +5,26 @@ const navBarFocus = {
   outlineColor: 'active',
 };
 
+const app = {
+  lineHeight: '160%',
+  '&.is-hovered': {
+    color: 'blue-600',
+    textDecorationColor: 'blue-600',
+  },
+  '&.is-focused': {
+    ...navBarFocus,
+    borderRadius: '2px',
+  },
+  '&.is-pressed': {
+    color: 'blue-600',
+    textDecorationColor: 'blue-600',
+  },
+  '&:visited': {
+    color: 'purple-700',
+    textDecoration: 'underline',
+  },
+};
+
 const nextGen = {
   color: 'gray-800',
   fontSize: 'md',
@@ -100,6 +120,7 @@ const footerEALink = {
 };
 
 export default {
+  app,
   nextGen,
   onyx,
   sideNav,
