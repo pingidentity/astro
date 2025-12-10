@@ -50,6 +50,10 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
     expandableItemState,
   } = useExpandableListViewItem(hookProps);
 
+  delete expandableRowProps['aria-posinset'];
+  delete expandableRowProps['aria-setsize'];
+  delete expandableRowProps['aria-level'];
+
   const {
     isExpanded,
     toggleExpanded,
