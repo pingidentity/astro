@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Experimental/Footer/Footer" />
+
+# Footer
+
+The Footer component is primarily to navigate legal and social links.
+This component is built to have the CopyrightText, FooterNav component passed into it. Inside the FooterNav, the FooterNavItem is passed.
+
+### Required Components
+
+This component requires these components:
+- CopyrightText
+- FooterNav
+- FooterNavItem
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Key | Functions |
+| ---- | ---- |
+| Tab | All of the content in the Footer is focusable. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- Each Link component uses the **`aria-label`** attribute to provide an accessible name.
+- The Icon uses the **`aria-hidden`** attribute to hide its content from assistive technology.

@@ -1,0 +1,174 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Docs/Theme/Astro Nano Theme" />
+
+# Astro Nano Theme
+
+The Astro Nano Theme extends styles from the base Astro Theme with new variants and modifications to some of the base variants.    
+
+## Modified Astro Variants
+
+### Cards
+```
+{
+    container: {
+        alignItems: "stretch",
+        bg: "white",
+        borderRadius: 4,
+        boxShadow: ['none', 'standard'],
+        flexGrow: [1, 0],
+        maxWidth: "480px",
+        my: "auto",
+        py: [0, 'xl'],
+        width: ['100%', '450px']
+    },
+    cardBody: {
+        flexGrow: [1, 0],
+    },
+}
+```
+
+### Buttons
+
+#### Default
+```
+{
+    borderRadius: 4,
+    color: "active",
+    fontWeight: 400,
+    height: "50px",
+    &:focus-visible: {
+        boxShadow: 'none', 
+        outline: '1px solid #000000', 
+        outlineColor: 'active',
+        outlineOffset: 2 
+    },
+    &.is-pressed: {
+        bg: 'activeDarker'
+    },
+    &.is-hovered: {
+        bg: 'activeDark',
+        boxShadow: 'none', 
+        color: 'white'
+    }
+}
+```
+
+#### Primary
+```
+{
+    borderRadius: 4,
+    fontWeight: 400,
+    height: "50px",
+    &:focus-visible: {
+        boxShadow: 'none', 
+        outline: '1px solid #000000', 
+        outlineColor: 'active',
+        outlineOffset: 2 
+    },
+    &.is-pressed: {
+        bg: 'activeDarker'
+    },
+    &.is-hovered: {
+        bg: 'activeDark',
+        boxShadow: 'none', 
+        color: 'white'
+    }
+}
+```
+
+### Colors  
+Astro nano introduces two new colors, `activeDark: "#154dd3"` and `activeDarker: "#0039ba"`.
+
+### Font Sizes
+
+Font sizes in Astro Nano use the font sizes from the Astro theme and scales them by 1.2. Astro nano also introduces a new font size, `xxx: "48px"`.
+
+### Forms
+
+#### Input
+```
+{
+    borderRadius: 4,
+    height: "50px",
+    &:focus: {
+        borderColor: 'active', 
+        outline: '4px solid #000000', 
+        outlineColor: 
+        'accent.90'
+    }
+}
+```
+
+### Links
+```
+{
+    "&.is-hovered": {
+        color: "activeDark"
+     },
+    "&.is-pressed": {
+        color: "activeDarker"
+    }
+}
+```
+
+### Text
+
+#### Label
+`color: "text.primary"`
+
+#### Title
+`fontWeight: 600`
+
+## Variants Introduced in Astro Nano
+
+### Card Body
+`flexGrow: [1, 0]`
+
+### Wrapper
+```
+{
+    alignItems: "center",
+    justifyContent: "space-between",
+    bg: ["white", "accent.99"],
+    py: "lg",
+    gap: "lg",
+    overflow: "auto",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+}
+```
+
+### Forms.Input
+
+#### Primary
+```
+{
+    borderRadius,
+    fontSize: "xxx",
+    borderColor: "neutral.60",
+    height: "75px",
+    textAlign: "center",
+    letterSpacing: "12px",
+    fontWeight: "bold",
+    "&:focus": {
+        borderColor: "active",
+        outline: "4px solid #000000",
+        outlineColor: "accent.90"
+    }
+}
+```
+
+### Text
+
+#### Footer
+Footer is a text variant only included in Astro Nano. 
+```
+{
+    color: 'text.secondary', 
+    fontSize: 'xs'
+}
+```

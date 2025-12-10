@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/RadioGroupField/RadioGroupField" />
+
+# RadioGroupField
+
+The RadioGroupField component allows users to select a single option from a list of mutually exclusive options. 
+This component uses [useRadioGroup](https://react-spectrum.adobe.com/react-aria/useRadioGroup.html) from React Aria and [useRadioGroupState](https://react-spectrum.adobe.com/react-stately/useRadioGroupState.html) from React Stately.
+
+RadioGroupField should:
+- Offer at least two choices.
+- Have a clear label describing the context.
+- Include a None option, when appropriate.
+
+RadioGroupField shouldn’t be used to change state or set off an action. Nor should it be used to display a list of more than 6 options. If that’s the case, use the [SelectField](./?path=/story/form-selectfield--default) instead.
+
+### Required components
+
+This component requires the RadioField component.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA RadioGroup](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Arrow Keys | Once focused, the radio button can be selected using any of the arrow keys. |
+| Space | If the radio button is focused, pressing space selects or deselects it. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The **`aria-labelledby`** attribute is used to reference the label, and the **`aria-orientation`**  attribute is set to “Vertical” by default.
+- Each radio input also uses the **`aria-labelledby`** attribute pointing to its label.

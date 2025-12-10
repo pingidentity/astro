@@ -1,0 +1,94 @@
+{
+  "commitMessagePrefix": "chore: ",
+  "draftPR": true,
+  "labels": ["astro"],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "commitBody": "BREAKING CHANGE: Major update",
+      "description": "Trigger breaking release for major updates",
+      "groupName": "react-aria, react-spectrum, and react-stately packages",
+      "matchPackagePatterns": ["^@react-aria", "^@react-spectrum", "^@react-stately"],
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "description": "Trigger feature release for minor updates",
+      "groupName": "react-aria, react-spectrum, and react-stately packages",
+      "matchPackagePatterns": ["^@react-aria", "^@react-spectrum", "^@react-stately"],
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "description": "Trigger fix release for patch updates",
+      "groupName": "react-aria, react-spectrum, and react-stately packages",
+      "matchPackagePatterns": ["^@react-aria", "^@react-spectrum", "^@react-stately"],
+      "matchUpdateTypes": ["patch", "digest"]
+    },
+    {
+      "commitBody": "BREAKING CHANGE: Major update",
+      "description": "Trigger breaking release for major updates",
+      "groupName": "babel packages",
+      "matchPackagePatterns": ["^@babel", "^babel"],
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "description": "Trigger feature release for minor updates",
+      "groupName": "babel packages",
+      "matchPackagePatterns": ["^@babel", "^babel"],
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "description": "Trigger fix release for patch updates",
+      "groupName": "babel packages",
+      "matchPackagePatterns": ["^@babel", "^babel"],
+      "matchUpdateTypes": ["patch", "digest"]
+    },
+    {
+      "commitBody": "BREAKING CHANGE: Major or minor update",
+      "description": "Trigger feature release for major and minor updates",
+      "groupName": "emotion packages",
+      "matchPackagePatterns": ["^@emotion", "^emotion"],
+      "matchUpdateTypes": ["major", "minor"]
+    },
+    {
+      "description": "Trigger fix release for patch updates",
+      "groupName": "emotion packages",
+      "matchPackagePatterns": ["^@emotion", "^emotion"],
+      "matchUpdateTypes": ["patch", "digest"]
+    },
+    {
+      "groupName": "eslint packages",
+      "matchPackagePatterns": ["^eslint"]
+    },
+    {
+      "commitBody": "BREAKING CHANGE: Major update",
+      "description": "Trigger feature release for major updates",
+      "matchPackagePatterns": ["^react"],
+      "groupName": "react packages",
+      "matchUpdateTypes": ["major"]
+    },
+    {
+      "description": "Trigger feature release for minor updates",
+      "matchPackagePatterns": ["^react"],
+      "groupName": "react packages",
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "description": "Trigger fix release for patch updates",
+      "matchPackagePatterns": ["^react"],
+      "groupName": "react packages",
+      "matchUpdateTypes": ["patch", "digest"]
+    },
+    {
+      "matchPackagePatterns": ["^@storybook"],
+      "groupName": "storybook packages"
+    },
+    {
+      "matchPackagePatterns": ["^@testing-library"],
+      "groupName": "testing library packages"
+    }
+  ],
+  "semanticCommits": "enabled",
+  "updateLockFiles": true
+} 

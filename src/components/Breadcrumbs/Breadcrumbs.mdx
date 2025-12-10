@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Breadcrumbs/Breadcrumbs" />
+
+# Breadcrumbs
+
+Breadcrumbs display a hierarchy of links to the current page or resource in an application. They are effective in products and experiences that have a large amount of content organized in a hierarchy of more than two levels. 
+They take up little space but still provide context for the user’s place in the navigation hierarchy, but should be treated as secondary navigation and never entirely replace the primary navigation.
+
+There are two different types of breadcrumbs:
+- **Location-based**: Illustrate the hierarchy and show users where they are within that hierarchy.
+- **Path-based**: Show the steps the user took to get to the current page, rather than reflecting the site’s information architecture.
+
+It is built on React Aria [useBreadcrumbs](https://react-spectrum.adobe.com/react-aria/useBreadcrumbs.html) from React-Aria.
+
+### Required components
+
+This component requires Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Breadcrumbs](https://www.w3.org/WAI/ARIA/apg/example-index/breadcrumb/index.html) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the item and navigates to the associated location. |
+| Tab | Moves focus to the next focusable component and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The Breadcrumbs and BreadcrumbItems components use the **`aria-label`** attribute to provide an accessible name.
+- The Icon component uses the **`aria-hidden`** attribute to hide its content from assistive technology.
+- The last BreadcrumbItem component uses the **`aria-current`** attribute to indicate that the user is currently viewing that page.

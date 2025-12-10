@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Experimental/PanelHeader" />
+
+# PanelHeader
+
+The PanelHeader component allows for easy creation of header items within a panel. It comes with pre-defined styles that match Ping specs. You can utilize the `data` prop to pass in text, subtext, image and an mdi or svg icon.
+
+### Recommended Use
+This component is intended to be used as a header within a panel.
+
+#### Icons and Images
+Add an icon by passing an mdi or svg icon to the `data.icon` prop.
+
+Add an image by passing an object with a `src` key to the `data.image` prop. `alt` and `aria-label` keys are supported but not required.
+
+If both an icon and an image are provided the icon will be rendered.
+
+#### Children
+To add action controls, include control elements as `{children}`. All elements passed in this way will be right-justified and center-aligned. You can use the following pre-styled control components to easily match Ping specs:
+- [PanelHeaderCloseButton](./?path=/docs/components-panelheader-controls-panelheaderclosebutton--docs)
+- [PanelHeaderMenu](./?path=/docs/components-panelheader-controls-panelheadermenu--docs)
+- [PanelHeaderSwitchField](./?path=/docs/components-panelheader-controls-panelheaderswitchfield--docs)
+
+### Note:
+Components styled to match design specs may be updated over time as design specs change. Be aware that styles within this component may undergo minor adjustments over time to stay in sync with the latest design specifications.

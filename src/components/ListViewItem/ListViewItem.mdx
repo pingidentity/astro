@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Experimental/ListViewItem" />
+
+# ListViewItem
+
+The ListViewItem allows easy creation of list items. Styles have been included to match Ping specs. Use the data prop to pass in text, subtext and an image, mdi or svg icon.
+
+### Recommended Use
+This component is intended to be used inside a ListView component. See the [ListAndPanel](./?path=/docs/recipes-listandpanel--docs) and [ScrollableListView](./?path=/docs/recipes-scrollablelistview--docs)
+recipes for a more detailed examples.
+
+#### Commonly Used Components
+There are a few commonly used components we've created which have the correct styling pre-applied and we recommend you use these over their defaults. These go into the children of the ListViewItem component. These components are:
+* `ListViewItemSwitchField` - Use in place of SwitchField. This control is used to activate / deactivate an item in a list. Apply an aria-label to this component which describes the action when used, e.g. `aria-label={item.isActive ? 'deactivate item' : 'activate item'}` .
+
+* `ListViewItemEditButton` - Use in place of IconButton when editing is a primary action.
+
+* `ListViewItemMenu` - Use in place of Menu. This control is used to offer a popup menu of several actions which are less important / less commonly used.
+
+#### Icons and Images
+Add an icon by passing an mdi or svg icon to the `data.icon` prop. Default size is 25px.
+
+Add an image by passing an object with a `src` key to the `data.image` prop. `alt` and `aria-label` keys are supported but not required. Default size is 35px.
+
+If both an icon and an image are provided the icon will be rendered.
+
+For other Icon or Image sizes use slots with `rightOfData`.
+
+#### Slots
+The slots prop has been provided for added flexibility. Use the `rightOfData` slot to add icons, badges or other elements to the right of the data
+section. Use the `leftOfData` slot to add elements to the left of the data element. Note that when the
+leftOfData slot is used, it will prevent an icon in the `data.icon` prop from rendering and remove all margins/padding on the left of the data.
+
+#### Children
+To add action controls, pass control elements as `{children}`. All elements passed in this way will be right justified and center aligned. Use one of the following
+styled control components to easily match Ping specs.
+- [ListViewItemEditButton](./?path=/docs/components-listviewitem-controls-listviewitemeditbutton--docs)
+- [ListViewItemMenu](./?path=/docs/components-listviewitem-controls-listviewitemmenu--docs)
+- [ListViewItemSwitchField](./?path=/docs/components-listviewitem-controls-listviewitemswitchfield--docs)
+- [ListViewItemChart](./?path=/docs/components-listviewitem-controls-listviewitemchart--docs)
+
+### Note:
+The nature of components that have been styled to match design specs is that as design specs are updated, so will the matching component. Be aware that styles 
+inside this component may be adjusted in small ways over time.

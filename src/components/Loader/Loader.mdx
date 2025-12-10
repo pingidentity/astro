@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Loader/Loader" />
+
+# Loader
+
+The Loader component provides users information about the loading or computing processes that are occurring. 
+
+This component should be:
+- Used to show an indeterminate state.
+- Restricted to a single use per view to avoid unnecessary disruption.
+
+It should not be used: 
+- When the wait time for a process is known. If it is known, use [ProgressBar](./?path=/story/expirimental-progressbar--default) component instead.
+- When trying to communicate progression in steps.
+
+The Loader component is based on the [useProgressBar](https://react-spectrum.adobe.com/react-aria/useProgressBar.html) React Aria component.
+
+### Required Components
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute is used to provide an accessible name.
+- The **`aria-live`** attribute is used to announce content changes in a live region.
+
+### Determinate vs Indeterminate usage
+
+- If the progress to be indicated is determinate, use [ProgressBar](./?path=/story/experimental-progressbar--default) component instead.
+- If the progress to be indicated is indeterminate, use the Loader Component

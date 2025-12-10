@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Button/Button" />
+
+# Button
+
+Buttons are used to trigger actions or events and can contain an icon or a text label. The style used depends on its type:
+
+-  **Primary buttons**: Indicate the call to action on the page. Primary buttons should only appear once per screen (not including the application header, modal dialog, or side panel).
+-  **Secondary buttons**: Secondary buttons, the default, often have text labels and can only be used in conjunction with a primary button. As part of a pair, the secondary button’s function is to perform the negative action of the set, such as “Cancel” or “Back.”
+-  **Tertiary buttons**: Indicate that lower-priority tasks can be accomplished, and are often used in sections of the UI that have less space, such as cards, lists, or tables.
+-  **Danger buttons**: Use these buttons for:
+
+   - Dangerous actions, such as those that lose or destroy data.
+   - Primary danger buttons should only be used when the dangerous action is the most likely action, such as the affirmative Delete action in a deletion confirmation dialog.
+   - Secondary and tertiary variants can also be used for actions related to current errors, such as resolving them or viewing their details.
+
+This component is built on [Button from Theme-UI](https://theme-ui.com/components/button)
+
+### Required components 
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Button](https://www.w3.org/TR/wai-aria-practices-1.1/examples/button/button.html) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the button. |
+| Tab | Focuses the button and follows the page tab sequence. |
+
+#### Screen readers.
+
+This component uses the **`aria-label`** attribute to provide an accessible name.
+

@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/TextField/TextField" />
+
+# TextField
+
+The component combines a text input, label, and helper text to enter, read or edit data.
+
+TextField should be used:
+- To enter no more than a single line of text.
+- To input unique information known only to the user and is difficult to predict with preset options.
+- When the data can be entered easily in a free format rather than using complex controls.
+- WithSlots props to insert extra UI elements.
+
+TextField shouldn’t be used to collect text longer than a single line. Use the [TextAreaField](./?path=/docs/form-textareafield--default) component instead.
+
+### Required components
+
+This component can be used independently and does not require additional components. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+
+#### Screen readers
+
+This component uses the **`aria-labelledby`** attribute pointing to the label, and the **`aria-invalid`** attribute to detect incorrect values or status errors, which is set to “False” by default.

@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Messages/Messages" />
+
+# Messages
+
+Use this component to display warning or alert messages, which often highlight an imminent problem or confirm a risky action. 
+
+These messages should:
+- Capture the user’s attention at the right time.
+- Clearly explain the reason for the warning or alert and the actions the user needs to take.
+- Explain what will happen if they don’t act, using the appropriate sense of urgency.
+- Be short. Limit the number of alerts to one per component.
+
+See our [Warning and alert messages writing guidelines](https://pingidentity.atlassian.net/wiki/spaces/CCC/pages/21137295/Warning+and+alert+messages) for additional information. 
+
+### Required Components
+
+This component requires the Item component, which is exported within Astro, but originates from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Key | Functions |
+| ---- | ---- |
+| Tab | Focuses the IconButton within the message and follows the page tab sequence. |
+| Space or Enter | Selects the button when it is focused. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+
+#### Screen Readers
+
+The **`aria-live`** attribute is used to announce content changes in a live region.

@@ -1,0 +1,64 @@
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Docs/Utils/MessagesReducer" />
+
+# Messages Reducer
+
+<br />
+
+## Usage
+
+To use Messages Reducer, import it from `@pingux/astro`.
+
+`import { messagesReducer, multiMessagesReducer } from '@pingux/astro';`
+
+<br />
+
+## Overview
+
+`messagesReducer` provides a reducer to store a list of messages.
+
+`messagesReducer.actions` provides actions that can be dispatched to the reducer. By default the next actions are available:
+
+* **addMessage**
+
+Create an action to add a message
+
+`addMessage(message: {key: string, text: string, status: string})`
+
+* **removeMessage**
+
+Create an action to remove a message by key
+
+`removeMessage(key: string)`
+
+* **showMessage**
+
+Create an action to add a message and then remove it if there's a timeout
+
+`showMessage(message: {key: string, text: string, status: string}, timeout: number)`
+
+* **clearMessages**
+
+Create an action to clear all messages
+
+`clearMessages()`
+
+<br />
+
+## Example
+
+See the [Messages with Reducer](./?path=/story/components-messages--use-reducer) for an example of implementation.
+
+<br />
+
+## Multiple messages reducer
+
+`multiMessagesReducer` is used for storing messages in different containers.
+
+`multiMessagesReducer.actions` utilizes the same actions as `messagesReducer`, only needs to provide container name, as a first argument, e.g.:
+
+`addMessage(container: string, message: {key: string, text: string, status: string})`
+
+See the [story](./?path=/story/components-messages--use-reducer-with-multiple-containers) for an example of implementation.

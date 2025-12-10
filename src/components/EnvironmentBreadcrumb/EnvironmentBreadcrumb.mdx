@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/EnvironmentBreadcrumb/EnvironmentBreadcrumb" />
+
+# EnvironmentBreadcrumb
+
+EnvironmentBreadcrumb shows users where they are within the environment hierarchy. 
+They take up little space but still provide context for the user’s place in the hierarchy, but should be treated as secondary navigation and never entirely replace the primary navigation.
+
+### Required components
+
+This component requires the [Badge](./?path=/docs/components-badge--default),
+[Box](./?path=/story/components-box--default), [Text](./?path=/docs/components-text--default) components and  
+Item from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter  | Selects the breadcrumb item. |
+| Tab | Focuses the breadcrumb item and follows the page tab sequence. | 
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Arrow keys | Can be used to navigate between the items in the dropdown list. |
+| Esc | Closes the popover when it is expanded. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- Each breadcrumb item uses an **`aria-label`** attribute to provide an accessible name.
+- The trigger button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
+- When expanded, **`aria-controls`** is added to the button pointing to the pop-up content.
+- The **`aria-haspopup`** attribute describes the type of content presented.

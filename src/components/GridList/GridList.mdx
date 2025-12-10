@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/GridList" />
+
+# GridList
+
+The `GridList` component is used to display a list of items in a grid-like structure. It supports features like reordering, keyboard navigation, and drag-and-drop functionality.
+
+This component should:
+- Be used to display items in a structured grid format.
+- Support reordering and drag-and-drop functionality for enhanced interactivity.
+
+It shouldn’t be used for simple lists that do not require grid-like behavior or advanced interactions.
+
+### Required Components
+
+This component requires [Item].
+
+---
+
+## Accessibility
+
+This component adheres to the [WAI-ARIA Grid](https://www.w3.org/WAI/ARIA/apg/patterns/grid/) accessibility guidelines.
+
+### Keyboard Navigation
+
+These keys provide additional functionality to the component:
+
+| Key Combination | Functionality                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Tab`           | Moves focus to the next focusable element, within the row. (keyboardNavigationBehavior="tab")                    |
+| `Shift + Tab`   | Moves focus to the previous focusable element, within the row. (keyboardNavigationBehavior="tab")                |
+| `Arrow Keys`    | Navigates between items in the grid. (Up/Down in all modes, Left/Right in keyboardNavigationBehavior="arrow")    |
+| `Home`          | Moves focus to the first row in the grid.                                                                        |
+| `End`           | Moves focus to the last row in the grid.                                                                         |
+
+### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`role="grid"`** attribute is used to indicate the grid structure.
+- The **`aria-label`** attribute provides an accessible name for the grid.
+- The **`role="row"`** attribute is used to indicate the row structure.
+- The **`role="gridcell"`** attribute is used to indicate the cell structure.
+- The **`aria-selected`** attribute indicates whether an item is selected.
+- The **`draggable`** attribute indicates whether an item is draggable.
+
+---
+
+## Examples
+
+### Default GridList
+
+```tsx
+import { GridList, Item } from '@pingux/astro';
+
+const items = [
+  { name: 'Item 1', key: 'item1' },
+  { name: 'Item 2', key: 'item2' },
+  { name: 'Item 3', key: 'item3' },
+];
+
+<GridList items={items}>
+  {item => (
+    <Item key={item.key} textValue={item.name}>
+      {item.name}
+    </Item>
+  )}
+</GridList>;

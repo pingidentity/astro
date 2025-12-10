@@ -1,0 +1,149 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Docs/Welcome" />
+
+# Welcome to Astro
+
+<br />
+
+## Introduction
+
+Astro is a lightweight, composable, and themeable React component library. Astro was created to help developers and designers create consistent, user-friendly, and accessible UIs across all Ping products.
+
+<br />
+
+## Getting Started
+
+<br />
+
+### Installing
+
+To consume Astro within your own project, install it via NPM or Yarn.
+
+NPM: 
+`npm install @pingux/astro`
+
+Yarn: 
+`yarn add @pingux/astro`
+
+### Requirements
+
+- Node: 18+
+- React: 16.8+
+
+### Usage
+
+All apps should be wrapped in an `<AstroProvider>` for full functionality and styling.
+
+```
+import { AstroProvider } from ‘@pingux/astro’;
+
+<AstroProvider>
+  <App />
+</AstroProvider>
+```
+
+### Running Storybook Locally
+
+Astro uses [Storybook](https://storybook.js.org/) for component documentation. Once Astro has been cloned, run the following commands to start a local Storybook server:
+
+`yarn && yarn start`
+
+The Storybook server defaults to `https://localhost:6006`. This port can be customized by running the command start -p 9009. For example, this will start Storybook on port 9009. More information on customizing Storybook CLI options can be found at the [Storybook docs](https://storybook.js.org/docs/react/api/cli-options). 
+
+Component prop documentation is available under the “documentation” tab per each component story. Most props can be toggled and configured for preview purposes within the prop table.
+For example, to view the disabled button styling, navigate to the Button story’s props table, locate the “isDisabled” prop, and toggle to “true”. This change allows you to preview the disabled button’s styling and functionality.
+
+There are two options to view the source code for stories within Storybook:
+- While on the "Documentation" tab, click the tab below the rendered story labelled "Show Code". This option may not show the entire source code for a story.
+- To view the entire source code of a story:
+    - Click the ellipsis menu next to the version number located at the top of the navigation menu. 
+    - Click "Show Addons" or ensure this option has been previously enabled.
+    - Navigate to a story's "Canvas" tab. Select "Story" from the now displaying add-on panel. More information on this add-on can be found here: [Story Source Add-on](https://storybook.js.org/addons/@storybook/addon-storysource#displaying-full-source)
+
+
+
+
+## Libraries used within Astro
+
+<br />
+
+- [React Aria](https://react-spectrum.adobe.com/react-aria/index.html) / [React Stately](https://react-spectrum.adobe.com/react-stately/index.html) / [React Spectrum](https://react-spectrum.adobe.com/react-spectrum/index.html)
+- [ThemeUI](https://theme-ui.com/)
+- [Styled System](https://styled-system.com/)
+
+<br />
+
+## Components
+
+<br />
+
+Astro is a library of small composable components that can be combined in many ways to create many more complex components. You can read more about the composition model in the [React Docs](https://reactjs.org/docs/composition-vs-inheritance.html). 
+
+Beyond the composable components, Astro also has form components to be used for gathering user input. Form components consist of field components and base components. Field components are composed from base components which are the building blocks used to compose form inputs.
+
+<br />
+
+## Understanding Astro Props
+
+<br />
+
+Most Astro components can be customized through props, find [more details here](./?path=/story/docs-props--page). 
+
+<br />
+
+## Theming
+
+<br />
+
+You can customize the base Astro theme by [creating theme overrides](./?path=/docs/docs-theme-custom-themes--page). 
+You can find the default [Astro theme here](./?path=/docs/docs-theme-astro-theme--page).
+
+<br />
+
+## Styling
+
+<br />
+
+Astro uses [styled-system,](https://styled-system.com/table/) a javascript dependency that facilitates the building of custom UI components by adding constraint-based style props based on scales defined in the theme. This can be used to quickly add custom styling to components.
+
+The Ping UX Dev team follows best practices related to styling as outlined in the [Styling Guidelines](./?path=/story/docs-theme-styling-guideline--page). These best practices encourage the separation of component code from styling code. This practice removes the custom styles that are applied in StoryBook code examples. If you want to see how the Astro team applies custom styles to our recipes you can find the entire story code file in the Story section of the Addons panel. 
+- Select **Show Addons** in the Storybook menu, located in the left navigation panel at the top beside the “@pingux/astro” title (it’s a circle with 3 dots).
+- Inside the **Addon panel** that pops up, select the **Story panel** to see the full code file.
+
+<br />
+
+## Development Notes
+
+<br />
+
+There is currently a [known conflict](https://github.com/adobe/react-spectrum/issues/779) between React.StrictMode and react-spectrum. The current recommended solution is to avoid using StrictMode in your apps. In the latest versions of Create React App the app is wrapped in StrictMode by default, this should be removed if you’re using any of the react-spectrum or pingux libraries. We will monitor this issue and make updates when possible.
+
+<br />
+
+## Help
+
+<br />
+
+For assistance with the Astro library reach out to the Astro team on Slack
+- #ui-astro
+- #ux-forum
+
+<br />
+
+
+## Browser Compatibility
+
+<br />
+
+Astro fully supports the following browsers and versions:
+
+| Browser     | Version     |
+| ----------- | ----------- |
+| Chrome      | 80+         |
+| Firefox     | 76+         |
+| Safari      | 12+         |
+| Edge        | 44+         |
+
+
+Support for IE11 is left up to developers and is not tested by the Astro team. Polyfills are necessary for full functionality.

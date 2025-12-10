@@ -1,0 +1,116 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Docs/Theme/Styling Guideline" />
+
+# Styling Guidelines
+
+<br />
+
+## Sx prop
+
+The majority of Astro components are built using `<Box>` from Theme UI as their foundation. Therefore, the `sx` prop can be passed directly to these components. More information about how the sx prop works can be found on the [ThemeUI site](https://theme-ui.com/sx-prop/).
+There are a few different approaches developers can take for adding custom styles utilizing the SX prop which are listed below. Each approach comes with different benefits and caveats. 
+
+It is always best practice to check if a styling variant exists before adding custom styling. It is rare that a style included within the Astro Design System does not have a matching style variant in the Astro Component Library.
+If you often find yourself reusing the same custom styles often, 
+reach out to the UX Dev team (via slack channel : #ui-astro) to discuss having the styles added as a reusable component variant.
+<br />
+
+### Passing inline styles to the Sx prop
+
+**Example:** 
+
+`<Box sx={{marginRight: ‘sm’}} />`
+
+**This approach works best for**
+
+- Small style adjustments
+- Adding or overwriting less than 3 additional styles to a component
+- Overwriting specific styles that have been passed in through a custom theme
+
+**Considerations**
+
+- Styles passed through the sx prop are not maintained by the library, so if a theme change occurs, these inline styles with not be adjusted accordingly. 
+- Styles passed through the sx prop are not reusable unless saved as an object.
+
+<br />
+
+### Passing a style object to the sx prop
+
+**Example:** 
+```
+const ExampleStoryComponent = () => {
+  const sx = {
+    boxOne: {
+      bg: 'blue',
+      height: '35px',
+      fontSize: 3,
+      p: 'md',
+    },
+    boxTwo: {
+      bg: 'red',
+      height: '10px',
+      fontSize: 2,
+      s: 'sm',
+    },
+  };
+
+  return (
+    <>
+      <BoxOne sx={sx.boxOne} />
+      <BoxTwo sx={sx.boxTwo} />
+    </>
+  );
+};
+```
+
+**This approach works best for**
+
+- Applying the same styles to multiple components
+- Adding 3 or greater additional styles
+- Cleaner code presentation; separating style from logic
+- Overwriting multiple styles that have been passed in through a custom theme
+- Added maintainability
+
+**Considerations**
+
+- Style objects passed through the sx prop are not maintained by the library, so if a theme change occurs, these inline styles with not be adjusted accordingly. 
+
+<br/>
+
+### Dos & Don’ts for SX Prop
+
+Astro components have been built using [Theme UI](https://theme-ui.com/guides/variants) which enables the use of variants.
+Using pre-existing variants to match design mocks is considered the best pratice as these styles are maintained by the library and match the Astro Design System.
+
+If a component has variants, they can be found in that individual component's documentation table within Storybook. You can also find the full list of Astro theme variants and pre-defined design tokens here:
+
+- [Astro Base Theme](./?path=/docs/docs-theme-astro-theme--page)
+- [Container Sizes](./?path=/story/docs-design-container-sizes--container-sizes)
+- [Spacing Sizes](./?path=/story/docs-design-spacing--spacing)
+- [Typography](./?path=/story/docs-design-typography--typography-tokens)
+- [Colors](./?path=/story/docs-design-color-schema--colors)
+
+If the pre-existing variants don’t meet your needs, and you wish to apply styling using [Theme UI](https://theme-ui.com/sx-prop)'s Sx prop, the following are best practices for applying CSS rules to children components and elements.
+
+- When possible pass styles directly to a components sx prop either inline or via an object as mentioned in the above sections. In composed components, [controlProps or containerProps](./?path=/story/docs-props--page) may help you more
+accurately target elements.
+- If you can’t style a component directly through the sx prop, try to use [CSS selectors to style select elements](https://www.w3schools.com/cssref/css_selectors.php). Please avoid targeting aria attributes or other attributes that are likely to change or be translated.
+- If you can’t target an element for styling with the above suggestions, do not hesitate to reach out to the UX development team and they will assess the best approach, be it adding a theme variant or adding a dedicated prop.
+
+<br />
+
+## Custom Themes
+	
+**When to create a custom theme?**<br />
+Custom themes are ideal for adding styles to components consistently throughout your app. You can learn more about creating a custom theme and pre-existing themes available to you [here](./?path=/docs/docs-theme-custom-themes--page).
+
+**This approach works best for**
+- Applying styling changes to components consistently throughout an application
+
+**Considerations**
+- Unless you’re using a custom theme exported by the Astro library, your custom themes will not be maintained by the library. 
+- If you create a theme or theme adjustments that you believe could be beneficial to others, please let the UX Dev team know. Several developers have contributed to the UiLibraryOverride and EndUser themes.
+This helps us keep styling consistent across products.
+- Keep in mind, similar to inline hierarchical CSS, if styles are passed in through the SX prop, 
+they will overwrite your custom theme styling. 

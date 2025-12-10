@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/AccordionGroup/AccordionGroup" />
+
+# AccordionGroup
+
+Accordions are for grouping big chunks of content into easier-to-scan headers, which the user can expand when they want to read what is associated with that header.
+
+Accordions should be used:
+- To organize related information.
+- To shorten pages and reduce scrolling when it’s not crucial that users review the content.
+- When white space is at a minimum and content cannot be displayed all at once. 
+- With Slots props to insert extra UI elements next to headings.
+
+Accordions should not have focusable items as children.
+
+AccordianItem labels should not include interactive elements.
+
+It is built on React Aria [useAccordion](https://reactspectrum.blob.core.windows.net/reactspectrum/d77b35e970e5549f66b47a83f07423f5c93b7297/docs/react-aria/useAccordion.html).
+
+### Required components
+
+This component requires Item originating from [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html).
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | When focus is on the accordion header of a collapsed section, these keys expand the section. |
+| Tab | Moves focus to the next focusable component. All focusable components in the accordion are included in the page tab sequence.|
+| Shift + Tab | Moves focus to the previous focusable component. All focusable components in the accordion are included in the page tab sequence. |
+
+#### Slots
+
+The slots prop has been provided for added flexibility. Use the **`postHeading`** slot to add helpHint or icon elements next to the heading
+section. Keep in mind that this component is best suited for specific designs necessitates its use.
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- The accordion header button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
+- When expanded, the **`aria-controls`** attribute is added to the button pointing to the content. The button uses **`aria-label`** to provide an accessible name. 
+- The **`aria-labelledby`** attribute is added to the entire accordion component, which is supplied with the button ID.  

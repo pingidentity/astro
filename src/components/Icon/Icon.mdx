@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Icon/Icon" />
+
+# Icon
+
+Icons are small images that represent concepts or capabilities that often provide information or lead users to other pages within the application. 
+
+Icon should be:
+- Centrally aligned when used in a group with an appropriate amount of space between them.
+- Paired with text or a tooltip when its intention is not immediately evident. 
+- Relatively sized when used with text.
+
+Icon shouldn’t:
+- Include letters in the icon design.
+- Be randomly scaled to fit the layout.
+
+Regarding sizing, this component uses the **1em x 1em** container by default and maintains the aspect ratios. You can:
+
+- Use SVGR to import SVG files as React components and then pass them into icon components. 
+- Use the theme to color the icon.
+  
+  **Note**: Ensure that the dimensions in Webpack configuration file are set to false, or the icon cannot be resized using the size property. 
+  See [SVGR docs](https://react-svgr.com/docs/options/#dimensions) for more information. 
+- Import icons from the [Material UI Icon Library](https://materialdesignicons.com/)
+
+It is built on top of the [Box from Theme-UI](https://theme-ui.com/components/box/) and uses the available [props from Theme-UI](https://theme-ui.com/sx-prop).
+
+### Required Components
+
+This component can be used independently and does not require additional components.
+
+### Accessibility
+
+#### Labelling
+
+The Icon component accepts the title prop:
+`title={{ id: 'unique id', name: 'short description of the icon'}}`.
+The `name` will be passed inside `<title>` element of the SVG.
+The `id` is optional. If not specified, it will be generated automatically.
+This is needed to make SVG icon accessible.
+
+#### Screen Readers
+
+If the icon has a title associated with it, the **`aria-labelledby`** attribute is used to provide the label ID.
+
+
+
+

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "target": "ES5",
+    "outDir": "lib/cjs",
+    "rootDir": "./src/",
+    "types": [
+      "mdx",
+      "@testing-library/jest-dom"
+    ],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+  },
+  "include": [
+    "./src"
+  ]
+}

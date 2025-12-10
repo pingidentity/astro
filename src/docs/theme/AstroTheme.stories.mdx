@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+import { JSONTree } from 'react-json-tree';
+import ThemeView from './ThemeView';
+
+<Meta title="Docs/Theme/Astro Theme" />
+
+# Theme Overview
+Astro utilizes [Theme UI](https://theme-ui.com/) to apply styles consistently using their
+[theme specification](https://theme-ui.com/theme-spec). This allows us to specify reusable colors,
+font sizes, component variants, and so much more. This document will focus on how we structure
+our theme object to align with the Theme UI paradigm and is meant to serve as a reference for any
+developers wishing to add or edit the theme.
+
+# Theme Values
+
+This is the raw theme object that is passed in the AstroProvider. Its values can be referenced in `styled-system` properties. See [https://styled-system.com/table](https://styled-system.com/table) for details.
+
+For example, to set a background color on a `Box` component, you can reference one of the keys under the `colors` section. Like: `bg="black"`, `bg="accent.20"`, `bg="decorative.4"`, or `bg="critical.bright"`.
+
+<ThemeView />

@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/CodeView/CodeView" />
+
+# CodeView
+
+This component is used for code syntax highlighting and is built on [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer).
+It should contain the language title and be formatted with indentations, line breaks, and comments, and should not contain complex code snippets. 
+
+The CodeView component should be used for code snippets that need to be presented in a read-only format. 
+For more complex use cases that require an interactive environment, support for various programming languages, functionalities like linting, keyboard interactions, and real-time updates, use [CodeEditor](./?path=/docs/experimental-codeeditor--docs).
+
+### Required Components
+
+This component requires the [Text](./?path=/docs/components-text--default) component. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Space or Enter | Selects the CopyButton inside the CodeView component. |
+| Tab | Focuses the CopyButton inside the CodeView component. |

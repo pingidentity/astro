@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Components/PopoverMenu/PopoverMenu" />
+
+# PopoverMenu
+
+The PopoverMenu component serves as a wrapper for the Menu component and the associated trigger.
+It links the Menu's open state to the trigger's press state to provide the necessary overlay context.
+It primarily uses the [useMenuTrigger](https://react-spectrum.adobe.com/react-aria/useMenuTrigger.html) from React Aria
+and [useMenuTriggerState](https://react-spectrum.adobe.com/react-stately/useMenuTriggerState.html) from React Stately.
+
+The PopoverMenu should:
+
+- Be triggered by a [Button](./?path=/docs/components-button--default) or [IconButton](./?path=/docs/components-iconbutton--default).
+- Include actionable labels, such as view, edit, and delete.
+
+The PopoverMenu shouldn’t:
+
+- Have more than five options.
+- Have a disabled menu item, because there is no way of explaining why it is disabled.
+
+### Required Components
+
+This component requires these components:
+
+- OverlayProvider
+- [Button](./?path=/docs/components-button--default)
+- [Menu](./?path=/docs/components-menu--default)
+- Item: This component originates from the [react-stately/collections](https://react-spectrum.adobe.com/react-stately/collections.html) and is exported within Astro.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Key            | Functions                                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Tab            | The trigger and menu items are focusable using the Tab key.                                                       |
+| Shift + Tab    | Moves focus to the previous focusable component.                                                                  |
+| Space or Enter | Pressing Space or Enter on a focused trigger opens or closes the menu and selects the MenuItems it is focused on. |
+| Arrow keys     | Moves the selection through the popover.                                                                          |
+| Esc            | Pressing the escape key closes the popover and focuses on the previous focusable component.                       |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+
+- The **`aria-haspopup`** attribute is set to “True” to indicate that this component contains popover content.
+- The trigger uses the **`aria-expanded`** attribute to indicate when the content expands and collapses.
+- The menu ID is supplied to the **`aria-controls`** attribute pointing to the content.
+- The **`aria-orientation`** attribute indicates whether the orientation is horizontal, vertical, unknown, or ambiguous.
+- The default **`aria-disabled`** attribute is set to “False” by default.
+- The button ID is supplied to the **`aria-labelledby`** attribute to reference it.

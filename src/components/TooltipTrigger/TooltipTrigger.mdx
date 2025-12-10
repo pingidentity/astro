@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/TooltipTrigger/TooltipTrigger" />
+
+# TooltipTrigger
+
+The TooltipTrigger is a composed component that displays additional information on hover, click or focus. 
+This component is typically used as a design fallback for contextual information that may be hard to convey otherwise. It can also be disabled without disabling button-press events.
+
+This component should provide useful, supplementary information or clarification regarding the element it points to. 
+It shouldn’t contain essential content, error or feedback messages, or action items.
+
+Tooltips cannot contain interactive content (links, buttons) according to the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/).
+
+### Required Components
+
+This component requires the [Button](./?path=/docs/components-button--default) and Tooltip components.
+
+### Accessibility
+
+#### Screen Readers
+
+The trigger button uses the **`aria-describedby`** attribute with the tooltip container ID to announce the screen reader content when it becomes visible.

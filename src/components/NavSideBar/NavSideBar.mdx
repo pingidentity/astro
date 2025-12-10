@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/NavSideBar/NavSideBar" />
+
+# NavSideBar
+
+The NavSideBar component is primarily to navigate within apps.
+This component is built to have the NavSideBarSection component passed into it. Inside the NavSideBarSection, the NavSideBarSectionItem is passed.
+
+The NavSideBar should:
+- Be visually separate from the content.
+- Have descriptive titles describing the destination, action item or category.
+- Group navigation items into sections based on related categories.
+- Order content logically for a natural progression.
+
+### Required Components
+
+This component requires these components:
+- NavSideBarHeader
+- NavSideBarItem
+- NavSideBarSectionItem
+- NavSideBarSection
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Key | Functions |
+| ---- | ---- |
+| Tab | All of the content in the NavSideBar is focusable. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter | Toggles the component when the accordion is focused. |
+| Arrow keys | All components within the NavSideBar are accessible using arrow keys. |
+| Esc | Pressing the escape key when the accordion is open and focused collapses the component. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+- Each Link component uses the **`aria-label`** attribute to provide an accessible name.
+- The Icon uses the **`aria-hidden`** attribute to hide its content from assistive technology.

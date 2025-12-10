@@ -1,0 +1,126 @@
+import React, { useEffect } from 'react';
+
+import { useNavBarContext } from '../../context/NavBarContext';
+import { useStatusClasses } from '../../hooks';
+import useGetTheme from '../../hooks/useGetTheme';
+import { Box, Icon, Text } from '../../index';
+import { NavBarItemHeaderProps, NavBarPrimaryItemHeaderProps, NavBarSectionItemHeaderProps } from '../../types/navBar';
+
+const NavBarItemHeader = ({ item }: NavBarItemHeaderProps) => {
+  const { children, href } = item;
+
+  return !children && href
+    ? <NavBarPrimaryItemHeader item={item} />
+    : <NavBarSectionItemHeader item={item} />;
+};
+
+const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
+  const { icon, key, className, heading } = item;
+
+  const navBarState = useNavBarContext();
+
+  const { themeState: { isOnyx }, icons } = useGetTheme();
+  const { MenuDown, MenuUp } = icons;
+
+  const {
+    selectedKey,
+    setExpandedKeys,
+    expandedKeys,
+    navStyles,
+  } = navBarState;
+
+  const isExpanded = expandedKeys.includes(key);
+  const array = item?.children && item.children.map(i => i.key);
+  const isChildSelected = array && array.includes(navBarState.selectedKey);
+
+  useEffect(() => {
+    if (isChildSelected && isExpanded === false) {
+      setExpandedKeys([...expandedKeys, key]);
+    }
+  }, [selectedKey]);
+
+  const { classNames } = useStatusClasses(className, {
+    isSelected: isChildSelected && !isExpanded,
+  });
+
+  const getIconColor = () => {
+    if (navStyles.navBarItemHeader === 'navBar.popUpItemHeaderContainer') {
+      return isChildSelected && !isExpanded ? 'white' : 'text.primary';
+    }
+    return isChildSelected && !isExpanded ? 'white' : 'neutral.95';
+  };
+
+  return (
+    <Box variant={navStyles.navBarItemHeader} className={classNames} isRow data-testid={heading}>
+      {icon && (
+        <Icon
+          icon={icon}
+          size={isOnyx ? 'icon-200' : 18}
+          sx={{
+            mr: 'sm',
+            color: getIconColor(),
+            fill: getIconColor(),
+          }}
+          aria-hidden="true"
+        />
+      )}
+      <Text
+        variant={navStyles.navBarItemHeaderText}
+      >
+        {heading}
+      </Text>
+      <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
+        <Icon
+          icon={isExpanded ? MenuUp : MenuDown}
+          size={isOnyx ? 'icon-100' : navStyles.navBarItemHeaderIconSize}
+          sx={{
+            color: getIconColor(),
+            fill: getIconColor(),
+          }}
+          title={{ name: isExpanded ? 'Menu up' : 'Menu down' }}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+const NavBarPrimaryItemHeader = ({ item }: NavBarPrimaryItemHeaderProps) => {
+  const { icon, className, heading, customIcon } = item;
+  const navBarState = useNavBarContext();
+  const { navStyles } = navBarState;
+  const { themeState: { isOnyx } } = useGetTheme();
+
+  return (
+    <Box variant={navStyles.navBarItemHeader} className={className} isRow data-testid={heading}>
+      {icon && (
+        <Icon
+          icon={icon}
+          size={isOnyx ? 'icon-200' : 18}
+          sx={{
+            mr: 'sm',
+            color: 'neutral.95',
+            fill: 'neutral.95',
+          }}
+          title={{ name: `${heading} Icon` }}
+          aria-hidden="true"
+        />
+      )}
+      <Text variant={navStyles.navBarItemHeaderText}>{heading}</Text>
+      <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
+        {customIcon && (
+          <Icon
+            icon={customIcon}
+            size={isOnyx ? 'icon-200' : 'xs'}
+            sx={{
+              color: 'neutral.95',
+              fill: 'neutral.95',
+            }}
+            title={{ name: 'Action Icon' }}
+          />
+        )}
+      </Box>
+    </Box>
+  );
+};
+
+export default NavBarItemHeader;

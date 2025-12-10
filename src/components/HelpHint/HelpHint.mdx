@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/HelpHint/HelpHint" />
+
+# HelpHint
+
+HelpHints display information intended to help users enter, select or provide the appropriate information in a field. This component can be customized, and consists of the [TooltipTrigger](./?path=/docs/components-tooltiptrigger--default) and [IconButton](./?path=/docs/components-iconbutton--default).
+
+When implementing this component, use short, clear language and a text size relative to the trigger button. They should not block important information when the popover displays, nor should it be used to communicate important information.
+
+### Required Components
+
+This component can be used independently and does not require additional components.
+
+### Accessibility
+This component adheres to [WAI-ARIA Button](https://www.w3.org/TR/wai-aria-practices-1.1/examples/button/button.html) accessibility guidelines.
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Aria Attribute | Role |
+| ---- | ---- |
+| Space or Enter | Selects the help hint. |
+| Tab | Focuses the help hint and follows the page tab sequence. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The trigger button uses **`aria-expanded`** to indicate the expansion and collapse of the popover.
+- The **`aria-live`** attribute announces the dynamic changes in live region content.
+

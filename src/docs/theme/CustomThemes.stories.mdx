@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Docs/Theme/Custom Themes" />
+
+# Custom Themes
+<br/>
+
+## Creating Theme Overrides
+
+The Astro component library ships with [a default theme](./?path=/docs/docs-theme-astro-theme--page) based on Ping's 
+Astro design system. To extend, modify, or replace the theme to change the visual look 
+of components then there are two options:
+
+1. `themeOverrides` - this prop on the `AstroProvider` component facilitates extending and modifying the base theme. 
+See AstroProvider custom theme story for more information.
+The `themeOverrides` prop uses [the merge function from ThemeUI](https://theme-ui.com/guides/merging-themes/).
+With this approach, only variants that you specifically target within your new theme will be changed, 
+but those not targeted will still inherit styles from the default theme. If you are attempting to keep the majority of styling from the 
+Astro Design System (and therefore base astroTheme), but wish to override a few global styles, this is the favored approach. 
+
+2. `defaultTheme` - this is another prop on the `AstroProvider` component, 
+but this _replaces_ the base theme with the object passed in. We discourage using this in most situations.
+
+
+To assist in customizing the theme, Astro includes the following objects:
+- astroTheme - The base Astro theme, includes all styles from the Astro design system: `@pingux/astro/lib/styles/theme`
+- endUserTheme - An alternative theme which matches Ping's End User library styling: `@pingux/astro/lib/styles/themes/end-user`
+- overrideUILib - An override object to address conflicting styles between Astro and Ping's UI Library CSS: `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride`
+
+
+
+
+## How to Customize Astro Styles
+
+Components typically use a custom variant to apply styles. See the [Astro Theme](./?path=/docs/docs-theme-astro-theme--page) documentation for more information on this. To override these styles, 
+the variant included within the component will need to be targeted. For example, to override the border color on all primary buttons, 
+search within the /theme file for the button structure. Within this file, `buttons` is not nested within another object so,
+the theme structure is straight forward and would look like:
+
+```
+const myThemeOverride = {
+    buttons: {
+        primary: {
+            borderColor: 'red',
+        }
+    }
+}
+```
+
+Some components and their variants are nested, for example components within /Forms. To change the hovered border color on a TextArea component, the following would be added to myThemeOverride.
+
+
+```
+const myThemeOverride = {
+    forms: {
+        textarea: {
+            '&:hover': {
+                borderColor: 'red',
+            }
+        }
+    },
+    buttons: {
+        primary: {
+            borderColor: 'red',
+        }
+    }
+}
+```
+
+These overrides can then be passed to the `themeOverrides` prop on the `AstroProvider` as mentioned above.

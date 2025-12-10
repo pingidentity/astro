@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/ImageUploadField/ImageUploadField" />
+
+# ImageUploadField
+
+The ImageUploadField component is a variation of the [FileInputField](./?path=/docs/form-fileinputfield--default) used for uploading images. 
+
+### Required components
+
+This component requires the OverlayProvider component. 
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Focuses the field and follows the page tab sequence. |
+| Space or Enter | When the trigger is focused, the file browser opens. When the menu item is focused, it triggers an action. |
+| Down arrow | After uploading, pressing the Down arrow with a focused trigger opens the popover menu. |
+| Arrow keys | Can be used to move the selection in the popover. |
+| Shift + Tab | Moves focus to the previous focusable component.|
+| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first item in the listbox. |
+| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last item in the listbox. |
+| Esc | Pressing the escape key closes the popover menu and adds focus to the trigger. |
+
+#### Screen readers
+
+This component uses the following attributes to assist screen readers:
+
+- The input uses the **`aria-labelledby`** attribute to reference the label.
+- The trigger button uses the **`aria-label`** attribute to provide an accessible name.
+- The **`aria-expanded`** attribute is used to indicate the expansion or collapse of the popover.
+- The **`aria-haspopup`** attribute indicates the type of popup content as a menu. Once expanded, **`aria-controls`** is added to the button pointing to the popover. 
+- The menu uses vertical **`aria-orientation`** by default, and each menu item has a “False” **`aria-disabled`** value. 

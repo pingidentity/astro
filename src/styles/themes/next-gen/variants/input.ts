@@ -1,0 +1,241 @@
+import { ThemeUICSSObject } from 'theme-ui';
+
+import { text } from './text';
+
+const defaultFocus = {
+  boxShadow: '0 1px 1px rgba(0,0,0,.075), 0 0 0 .0625rem blue',
+};
+
+const readOnlyandDisabledStyles = {
+  backgroundColor: 'disabled',
+  border: '1px solid',
+  borderColor: 'border.input',
+  opacity: 1,
+};
+
+export const input: ThemeUICSSObject = {
+  height: '50px',
+  fontSize: 'md',
+  fontFamily: 'standard',
+  p: '0.75rem',
+  backgroundColor: 'backgroundBase',
+  borderColor: 'border.input',
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  borderRadius: '4px',
+  fontWeight: 1,
+  '&::placeholder': text.placeholder,
+  '.is-float-label &': {
+    height: '50px',
+  },
+};
+
+input.large = {
+  ...input,
+  height: '4em',
+};
+
+input.promptInput = {
+  ...input,
+  position: 'absolute',
+  pl: '0px',
+  border: 'none',
+  outline: 'none !important',
+  overflowY: 'hidden',
+  resize: 'none',
+  lineHeight: '24px',
+  minHeight: '26px',
+  height: '26px',
+  p: '0px',
+  '&.is-focused': {
+    border: 'none !important',
+    outline: 'none !important',
+  },
+};
+
+input.search = {
+  ...input,
+  pl: '4em !important',
+  pr: 'xl',
+  color: 'font.base',
+  '&.is-disabled': {
+    ...readOnlyandDisabledStyles,
+    '> input': {
+      ...readOnlyandDisabledStyles,
+    },
+  },
+};
+
+input.containedIcon = {
+  position: 'absolute',
+  right: 0,
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+};
+
+export const fieldControlWrapper = {
+  '> textarea': {
+    borderRadius: '4px',
+    border: '1px solid',
+    borderColor: 'border.input !important',
+    outline: 'none',
+  },
+  '&.is-disabled': {
+    '> label': {
+      opacity: 1,
+    },
+    // Override global opacity for disabled items because the children will handle their own opacity
+    // and it will otherwise stack the opacity effect.
+    opacity: 1,
+    '> input': {
+      fontWeight: 400,
+      ...readOnlyandDisabledStyles,
+    },
+    '> textarea': {
+      fontWeight: 400,
+      ...readOnlyandDisabledStyles,
+    },
+    '&:after': {
+      display: 'none',
+    },
+  },
+  '&:after': {
+    display: 'none',
+  },
+  '& > input': {
+    borderLeftWidth: 1,
+  },
+  '> button': {
+    borderLeftWidth: 1,
+    borderRadius: '4px',
+    border: '1px solid',
+    borderColor: 'border.input',
+  },
+  '&.is-read-only': {
+    '> input': {
+      backgroundColor: 'disabled',
+      border: '1px solid',
+      borderColor: 'border.input',
+    },
+    '> textarea': {
+      backgroundColor: 'disabled',
+      border: '1px solid',
+      borderColor: 'border.input',
+    },
+    '&:after': {
+      display: 'none',
+    },
+  },
+  '&.is-focused': {
+    '> textarea': {
+      outline: 'none',
+      ...defaultFocus,
+    },
+  },
+};
+
+input.fieldControlWrapper = {
+  ...fieldControlWrapper,
+};
+
+input.promptInputWrapper = {
+  ...fieldControlWrapper,
+  border: '1px solid',
+  borderColor: 'border.input',
+  borderRadius: '4px',
+  minHeight: '50px',
+  '&.is-focused': {
+    boxShadow: '0 1px 1px rgba(0,0,0,.075), 0 0 0 .0625rem blue',
+  },
+};
+
+input.multivaluesWrapper = {
+  ...fieldControlWrapper,
+  borderStyle: 'solid',
+  borderWidth: 1,
+  flexDirection: 'row !important' as 'row',
+  flexWrap: 'wrap',
+  pt: 6,
+  pr: 10,
+  pb: 5,
+  pl: 12,
+  borderRadius: '4px',
+  alignItems: 'center',
+  minHeight: '50px',
+  '> input': {
+    border: 'none',
+    flex: 1,
+    height: 27,
+    lineHeight: '100%',
+    p: 5,
+    '&.is-focused': {
+      boxShadow: 'none',
+      outline: 'none',
+    },
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+  },
+  '&.is-error': {
+    borderColor: 'critical.dark',
+  },
+  '&.is-read-only': {
+    alignItems: 'center',
+    boxShadow: 'inset 0 0 0 100px #F6F8FA',
+    border: '1px solid',
+    borderColor: 'gray-900',
+    '> input': {
+      backgroundColor: 'backgroundSecondary',
+    },
+    '&:after': {
+      display: 'none',
+    },
+  },
+};
+
+input.numberField = {
+  ...input,
+  pr: '28px',
+};
+
+input.promptInputRow = {
+  alignItems: 'center',
+  position: 'relative',
+  justifyContent: 'center',
+  flexGrow: '1',
+  overflowX: 'hidden',
+  overflowY: 'auto',
+  py: '12px',
+};
+
+input.promptInputAttachmentWrapper = {
+  gap: '1.5rem',
+  overflowX: 'auto',
+  overflowY: 'hidden',
+  whiteSpace: 'nowrap',
+  px: '.75rem',
+};
+
+input.dropDownContentRight = {
+  background: 'inherit',
+  '& button': {
+    borderRadius: '0px 4px 4px 0px !important',
+    '&.is-focused': {
+      outline: '2px solid',
+      outlineOffset: '2px',
+      outlineColor: 'gray-700',
+    },
+  },
+};
+
+input.dropDownContentLeft = {
+  '& button': {
+    borderRadius: '4px 0px 0px 4px !important',
+    '&.is-focused': {
+      outline: '2px solid',
+      outlineOffset: '2px',
+      outlineColor: 'gray-700',
+    },
+  },
+};

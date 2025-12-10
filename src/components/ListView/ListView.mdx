@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/ListView/ListView" />
+
+# ListView
+
+ListViews are used to display a list of items. Users can select, view, or edit items in this list.
+This virtualized component supports asynchronous data in infinitely scrollable lists. 
+
+This component should:
+- Be used to list items that contain a significant amount of information within them.
+- Be able to access ListItem information.
+
+It shouldn’t be used to list items that only have a single piece of information.
+
+### Required Components
+
+This component requires [ListViewItem](./?path=/docs/components-listviewitem--docs).
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA ListBox](https://www.w3.org/WAI/ARIA/apg/patterns/listbox/) accessibility guidelines. 
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component. 
+
+| Key | Functions |
+| ---- | ---- |
+| Space or Enter | Selects the item. |
+| Tab | Focuses item and follows the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Arrow keys | Can be used to move the selection in the menu.  |
+| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first row. |
+| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last visible row. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute is used to provide an accessible name.
+- The **`aria-rowcount`**  and **`aria-columncount`**  attributes are used to indicate the total number of rows and columns in the grid structure. 
+- The **`aria-multiselectable`**  attribute is used to indicate that users can toggle between items in the grid. 
+- Each ListViewItem uses the **`aria-rowindex`**  attribute, which defines a component's position in the total number of rows. 
+- Each item also uses the aria-label, **`aria-colindex`**  attributes to indicate the component’s column position and aria-selected to indicate the currently selected state.
+
+#### NOTES:
+- See the [ListAndPanel](./?path=/docs/recipes-listandpanel--docs) and [ScrollableListView](./?path=/docs/recipes-scrollablelistview--docs) recipes for more detailed examples.
+
+#### KNOWN ISSUES:
+Error Message: **`ResizeObserver loop completed with undelivered notifications.`**
+
+The ListView's ResizeObserver exhibits a rendering bug specifically in development mode. This issue originates from @react-aria/virtualizer and is expected to be resolved upon upgrading to React 18. 
+
+Refer to issue [!1924](https://github.com/adobe/react-spectrum/issues/1924) for further details.
+
+To address this issue, add the following CSS code to hide the error:
+
+`#webpack-dev-server-client-overlay {
+    display: none !important;
+}`
+
+
+
+
+
