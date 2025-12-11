@@ -31,6 +31,7 @@ export default {
     chromatic: {
       delay: 1000,
     },
+    layout: 'fullscreen',
   },
   argTypes: {
     label: {
