@@ -111,7 +111,7 @@
     "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "chroma-js": "^2.1.0",
-    "chromatic": "^6.7.0",
+    "chromatic": "^6.5.3",
     "classnames": "^2.2.6",
     "countries-list": "^2.6.1",
     "deepmerge": "^4.3.1",

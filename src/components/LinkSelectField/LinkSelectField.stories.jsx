@@ -28,10 +28,10 @@ export default {
         </>
       ),
     },
-    chromatic: {
-      delay: 1000,
-    },
     layout: 'fullscreen',
+    chromatic: {
+      viewports: [1168],
+    },
   },
   argTypes: {
     label: {
