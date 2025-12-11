@@ -12,6 +12,7 @@ export default defineConfig({
   plugins: [
     react({
       jsxImportSource: 'react',
+      fastRefresh: false,
       babel: {
         parserOpts: {
           plugins: ['jsx'],
@@ -25,6 +26,9 @@ export default defineConfig({
       tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
     }),
   ],
+  server: {
+    hmr: false,
+  },
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],

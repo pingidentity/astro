@@ -28,6 +28,9 @@ export default {
         </>
       ),
     },
+    chromatic: {
+      delay: 1000,
+    },
   },
   argTypes: {
     label: {
@@ -116,9 +119,6 @@ LeftLabel.parameters = {
   docs: {
     description: {
       story: 'Users are able to override the default 40% column width when using left label by providing a new gridTemplatesColumn value, as shown in the example below.',
-    },
-    chromatic: {
-      delay: 1000,
     },
   },
 };
