@@ -21,7 +21,7 @@ const head = {
 const body = {
   borderTopColor: 'border.base',
   borderBottom: 'unset',
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   borderBottomLeftRadius: '16px',
   borderBottomRightRadius: '16px',
   '&& > tr:not(:last-child)': {
@@ -29,7 +29,7 @@ const body = {
     borderBottomColor: 'border.base',
   },
   '&& > tr:nth-of-type(odd) ': {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
   '&& > tr:last-child': {
     borderBottomLeftRadius: '16px',

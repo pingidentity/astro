@@ -23,6 +23,7 @@ const Box = forwardRef<HTMLElement, BoxProps>((props, ref) => {
     className,
     fontSize,
     sx,
+    variant = 'box.base',
     ...others
   } = props;
   const fd = flexDirection || isRow ? 'row' : 'column';
@@ -51,7 +52,7 @@ const Box = forwardRef<HTMLElement, BoxProps>((props, ref) => {
       ref={ref}
       display="flex"
       flexDirection={fd}
-      variant="box.base"
+      variant={variant}
       fontSize={customFontSize}
       as={as}
       {...others}

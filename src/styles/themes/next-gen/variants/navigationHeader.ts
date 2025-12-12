@@ -50,7 +50,7 @@ const navigationHeader = {
     fontFamily: 'standard',
     borderBottom: '1px solid',
     borderColor: 'border.base',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     height: '4.5rem',
     justifyContent: 'center',
   },
@@ -59,10 +59,10 @@ const navigationHeader = {
     maxWidth: '1540px',
     mx: 'auto',
     width: '100%',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
   dropdownMenu: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     maxWidth: 'unset',
     p: 'sm',
     '&:focus': {

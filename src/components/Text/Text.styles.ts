@@ -18,7 +18,7 @@ export const wordWrap = {
   wordBreak: 'break-word' as wordBreak,
 };
 
-const tabLabel = {
+export const tabLabel = {
   ...base,
   ...wordWrap,
   fontSize: 'sm',
@@ -33,6 +33,27 @@ const tabLabel = {
   '.is-selected &': {
     color: 'active',
     mb: 8,
+  },
+  '.is-disabled &': {
+    color: 'neutral.80',
+  },
+};
+
+export const searchNavTabLabel = {
+  ...base,
+  whiteSpace: 'nowrap',
+  fontSize: 'sm',
+  fontWeight: 1,
+  mb: 'sm',
+  px: 'sm',
+  lineHeight: '16px',
+  color: 'neutral.40',
+  height: '100%',
+  '.is-selected &, .is-hovered &': {
+    color: 'active',
+  },
+  '.is-selected &': {
+    color: 'active',
   },
   '.is-disabled &': {
     color: 'neutral.80',
@@ -148,6 +169,13 @@ const attachmentTitle = {
   fontWeight: 2,
 };
 
+const listViewItemExpandedText = {
+  mt: 'md',
+  fontWeight: 1,
+  fontSize: 'md',
+  color: 'text.primary',
+};
+
 export const text = {
   base,
   bodyStrong,
@@ -167,6 +195,7 @@ export const text = {
   label: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard', fontWeight: 1 },
   listTitle: { ...wordWrap, fontSize: 'md', fontWeight: 1, color: 'text.primary', ...textEllipsis },
   listSubtitle: { ...wordWrap, fontSize: 'sm', fontWeight: 0, color: 'text.secondary', ...textEllipsis },
+  listViewItemExpandedText,
   listViewItemSubtext: { ...listViewItemSubtext, ...textEllipsis },
   listViewItemText: { ...listViewItemText, ...textEllipsis },
   modalTitle: { ...wordWrap, fontSize: '20px', fontWeight: 2, color: 'text.primary', fontFamily: 'standard', width: 'calc(100% - 22px)' },
@@ -174,6 +203,7 @@ export const text = {
   pageHeaderBody: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   panelHeaderSubtext: { ...listViewItemSubtext, ...textEllipsis },
   panelHeaderText: { ...listViewItemText, ...textEllipsis },
+  searchNavTabLabel,
   sectionTitle,
   subtitle,
   tabLabel,

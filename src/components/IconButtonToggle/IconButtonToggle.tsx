@@ -15,6 +15,7 @@ const IconButtonToggle = forwardRef<HTMLButtonElement, IconButtonToggleProps>((p
     isToggled,
     onToggle,
     title,
+    variant,
   } = props;
 
   const conditionalRenderProps = {
@@ -36,6 +37,7 @@ const IconButtonToggle = forwardRef<HTMLButtonElement, IconButtonToggleProps>((p
       onPress={handleConditionChange}
       ref={ref}
       title={title}
+      variant={variant}
       {...buttonProps}
     >
       <Icon icon={RenderedComponent as IconTypeExtended} {...iconProps} />

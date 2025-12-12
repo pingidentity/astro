@@ -76,7 +76,7 @@ const bodyContainer = {
 };
 
 const footer = {
-  py: 'lg',
+  pt: 'lg',
   background: 'white',
   '& > button': {
     flexGrow: 0,
@@ -85,7 +85,6 @@ const footer = {
 
 const buttonsContainer = {
   p: 0,
-  pb: 'lg',
   pt: 'lg',
   background: 'white',
 };

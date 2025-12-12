@@ -18,7 +18,7 @@ export const tab = {
     cursor: 'default',
   },
   '&.is-selected.is-vertical': {
-    bg: 'accent.95',
+    bg: 'accent.99',
   },
   '& > svg': {
     flexShrink: 0,
@@ -36,7 +36,7 @@ export const tab = {
     '&.is-selected': {
       borderLeft: '3px solid',
       borderLeftColor: 'active',
-      bg: 'accent.95',
+      bg: 'accent.99',
       '& > span': {
         p: '0',
         color: 'active',

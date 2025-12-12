@@ -8,6 +8,9 @@ export const listViewItem = {
   iconContainer: {
     ml: '0',
   },
+  iconWrapper: {
+    ml: 'lg',
+  },
   imageWrapper: {
     ml: 'md',
   },
@@ -49,7 +52,8 @@ export const listViewItem = {
   },
   expandableStyledListItem: {
     px: 'lg',
-    bg: 'background.base',
+    py: 0,
+    bg: 'backgroundBase',
     '&.is-first-item': {
       borderTopLeftRadius: borderRadius,
       borderTopRightRadius: borderRadius,
@@ -86,8 +90,7 @@ export const listViewItem = {
   },
   expandableRow: {
     '&.has-separator': {
-      borderBottom: '1px solid',
-      borderBottomColor: 'border.base',
+      borderBottomColor: 'gray-200',
     },
     '&.has-separator.is-last-row': {
       border: 'none',
@@ -101,6 +104,10 @@ export const listViewItem = {
     width: '1.5rem !important',
     height: '1.5rem !important',
   },
+  loaderContainer: {
+    pt: 'md',
+    pb: 'md',
+  },
 };
 
 export const listView = {
@@ -113,19 +120,23 @@ export const listView = {
 
 export const lisViewItemChart = {
   title: {
-    color: 'gray-900',
+    color: 'gray-600',
+    fontSize: 'tiny',
   },
   count: {
-    color: 'gray-900',
+    color: 'gray-600',
+    fontSize: 'xl',
   },
   countLabel: {
-    color: 'gray-900',
+    color: 'gray-600',
+    fontSize: 'tiny',
   },
   chartLabel: {
-    color: 'gray-900',
+    color: 'gray-600',
+    fontSize: 'tiny',
   },
   trend: {
-    color: 'gray-900',
+    color: 'gray-600',
   },
   chartButton: {
     color: 'gray-900',

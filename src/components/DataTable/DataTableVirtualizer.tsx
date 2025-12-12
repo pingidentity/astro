@@ -153,7 +153,6 @@ DataTableVirtualizerProps<object, object>>(({
         onScrollStart={state.startScrolling}
         onScrollEnd={state.endScrolling}
         onScroll={onScroll}
-        tabIndex={0}
       >
         {state.visibleViews[1] as ReactNode}
       </ScrollView>

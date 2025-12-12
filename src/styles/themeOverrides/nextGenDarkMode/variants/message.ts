@@ -1,30 +1,30 @@
 export const message = {
   item: {
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'light',
     color: 'white !important',
     '> span': {
       color: 'white !important',
     },
     '&.is-success': {
-      bg: 'background.secondary',
+      bg: 'light',
       borderLeftColor: 'green-500',
       color: 'text.message',
     },
     '&.is-success, > .is-success': {
-      bg: 'background.secondary',
+      bg: 'light',
       color: 'text.message',
     },
     '&.is-warning': {
-      bg: 'background.secondary',
+      bg: 'light',
       borderLeftColor: 'yellow-500',
       color: 'text.message',
     },
     '&.is-warning, > .is-warning': {
-      bg: 'background.secondary',
+      bg: 'light',
       color: 'text.message',
     },
     '&.is-error, > .is-error': {
-      bg: 'background.secondary',
+      bg: 'light',
       color: 'text.message',
     },
     '&.is-error, > button > svg': {

@@ -119,7 +119,7 @@ const ListViewItem = props => {
           {item.rendered}
           {state.isLoading && isFocusVisibleWithin && (
             <Box variant="listViewItem.loaderContainer">
-              <Loader color="neutral.50" />
+              <Loader variant="loader.withinListView" />
             </Box>
           )}
         </Box>

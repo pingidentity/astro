@@ -1,7 +1,7 @@
 const nextGenCodeViewTheme = {
   plain: {
-    color: '#f8f8f2',
-    backgroundColor: '#23282e',
+    color: '#999999',
+    backgroundColor: 'codeEditor.backgroundColor',
   },
   styles: [
     {
@@ -69,9 +69,9 @@ const nextGenCodeViewTheme = {
 };
 
 const nextGenCodeViewWrapper = {
-  backgroundColor: 'gray-900',
+  backgroundColor: 'codeEditor.backgroundColor',
   border: '1px solid',
-  borderColor: 'gray-900',
+  borderColor: 'codeEditor.headerColor',
   borderRadius: '4px',
   width: 400,
   height: 200,
@@ -124,11 +124,12 @@ const nextGenCodeViewWrapper = {
 };
 
 const nextGenCodeViewHeader = {
-  color: 'gray-300',
+  backgroundColor: 'codeEditor.headerColor',
+  color: 'font.reverse',
   px: 'md',
   width: '100%',
-  border: '1px solid',
-  borderColor: 'gray-800',
+  borderBottom: '1px solid',
+  borderBottomColor: 'gray-800',
   lineHeight: 'body',
 };
 
@@ -139,21 +140,113 @@ const lineNo = {
   m: '0 10px 0 0',
   bg: 'accent.30',
   minWidth: 26,
-  color: 'white',
+  color: '#93A1A1',
   lineHeight: '20px',
+  backgroundColor: 'transparent',
 };
 
 export const copyButton = {
-  mx: 'sm',
-  path: {
-    fill: 'text.primary',
+  default: {
+    mx: 'sm',
+    path: {
+      fill: 'font.reverse',
+    },
+    border: 'none !important',
   },
-  border: 'none !important',
+  light: {
+    mx: 'sm',
+    path: {
+      fill: '#23282f',
+    },
+    border: 'none !important',
+  },
 };
 
-export default {
+const codeView = {
   theme: nextGenCodeViewTheme,
   wrapper: nextGenCodeViewWrapper,
   lineNo,
   header: nextGenCodeViewHeader,
+  copyButton,
+};
+
+const light = {
+  ...codeView,
+  theme: {
+    ...nextGenCodeViewTheme,
+    styles: [
+      ...nextGenCodeViewTheme.styles,
+      {
+        types: ['comment', 'prolog', 'doctype', 'cdata'],
+        style: {
+          color: '#94a0a0',
+        },
+      },
+      {
+        types: ['deleted', 'property', 'tag', 'boolean', 'number', 'constant', 'symbol'],
+        style: {
+          color: '#99329f',
+        },
+      },
+      {
+        types: ['inserted', 'selector', 'string', 'char', 'builtin', 'inserted', 'attr-name'],
+        style: {
+          color: '#63a058',
+        },
+      },
+      {
+        types: ['operator', 'entity', 'url', 'language-css', 'style'],
+        style: {
+          color: '#a67f35',
+          background: 'transparent',
+        },
+      },
+      {
+        types: ['atrule', 'attr-value', 'keyword'],
+        style: {
+          color: '#99329f',
+        },
+      },
+      {
+        types: ['function'],
+        style: {
+          color: '#4e76ea',
+        },
+      },
+      {
+        types: ['regex', 'important', 'variable'],
+        style: {
+          color: '#f07178',
+        },
+      },
+      {
+        types: ['important', 'bold'],
+        style: {
+          fontWeight: 'bold',
+        },
+      },
+      {
+        types: ['entity'],
+        style: {
+          cursor: 'help',
+        },
+      },
+    ],
+  },
+  wrapper: {
+    ...nextGenCodeViewWrapper,
+    backgroundColor: '#f7f8fa',
+    borderColor: '#f7f8fa',
+  },
+  header: {
+    ...nextGenCodeViewHeader,
+    backgroundColor: '#f7f8fa',
+    borderBottomColor: '#e6edf5',
+    color: '#23282f',
+  },
+};
+
+export default {
+  default: codeView,
+  light,
 };

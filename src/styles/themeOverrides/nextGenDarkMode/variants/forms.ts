@@ -1,7 +1,7 @@
 import { input } from './input';
 
 export const select = {
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   borderRadius: '4px',
   border: '.5px solid',
   borderColor: '#69788B !important',
@@ -37,7 +37,7 @@ const label = {
 };
 
 const selectOption = {
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   color: 'text.primary',
   px: 'md',
   py: 'sm',

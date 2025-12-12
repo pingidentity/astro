@@ -6,14 +6,14 @@ const container = {
 };
 
 const withinInput = {
-  color: 'neutral.60',
+  color: 'active',
   fontSize: '6px',
   alignItems: 'center',
   marginRight: 'xs',
 };
 
 const withinListbox = {
-  color: 'neutral.60',
+  color: 'active',
   fontSize: '6px',
   padding: 'md',
   alignItems: 'center',
@@ -21,7 +21,15 @@ const withinListbox = {
 };
 
 const withinListView = {
-  color: 'neutral.60',
+  color: 'active',
+  height: '100%',
+  padding: 'md',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const withinDataTable = {
+  color: 'active',
   padding: 'md',
   alignItems: 'center',
   justifyContent: 'center',
@@ -103,4 +111,5 @@ export default {
   withinInput,
   withinListbox,
   withinListView,
+  withinDataTable,
 };

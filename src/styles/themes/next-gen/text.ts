@@ -10,6 +10,7 @@ export const fontSizes = {
     'xl': `calc(${sizes.avatar.xl} * .4)`,
   },
   'xs': '11px',
+  'tiny': '12px',
   'sm': '0.875rem',
   'md': `${fontSizeBase * 1}rem`,
   'lg': `${fontSizeBase * 1.25}rem`,

@@ -113,7 +113,7 @@ export const DataTableNextGenComponent = () => {
   ];
 
   return (
-    <Box backgroundColor="background.base" p="lg">
+    <Box backgroundColor="backgroundBase" p="lg">
       <DataTable
         aria-label="Onyx table"
         height="100%"

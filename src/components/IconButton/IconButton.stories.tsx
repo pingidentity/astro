@@ -8,6 +8,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { useGetTheme } from '../../hooks';
 import {
   Box,
   Icon,
@@ -71,7 +72,7 @@ Inverted.parameters = {
 
 export const WithTooltip = args => (
   <IconButton aria-label="icon button with tooltip" title="Edit" {...args}>
-    <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
+    <Icon icon={CreateIcon} title={{ name: 'Create Icon' }} />
   </IconButton>
 );
 
@@ -95,91 +96,116 @@ Disabled.parameters = {
   },
 };
 
-export const Sizes = () => (
-  <Table>
-    <TableHead>
-      <TableRow key="head">
-        <TableCell isHeading width="40%">Icon & Button Size</TableCell>
-        <TableCell isHeading>Code Example</TableCell>
-        <TableCell isHeading>Icon Example</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody sx={{ borderBottom: 'unset' }}>
-      <TableRow bg="transparent !important">
-        <TableCell width="40%">
-          <Text>XXS | 15px</Text>
-        </TableCell>
-        <TableCell>
-          <Text fontFamily="monospace">
-            {' '}
-            {"<IconButton aria-label='create button' variant='inverted'/>"}
-          </Text>
-          <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xxs'/>"}</Text>
-          <Text fontFamily="monospace">{'</IconButton>'}</Text>
-        </TableCell>
-        <TableCell>
-          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
-            <Icon icon={CreateIcon} size="xxs" title={{ name: 'Create Icon' }} />
-          </IconButton>
-        </TableCell>
-      </TableRow>
-      <TableRow bg="transparent !important">
-        <TableCell width="40%">
-          <Text>XS | 21px</Text>
-        </TableCell>
-        <TableCell>
-          <Text fontFamily="monospace">
-            {' '}
-            {"<IconButton aria-label='create button' variant='inverted'/>"}
-          </Text>
-          <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xs'/>"}</Text>
-          <Text fontFamily="monospace">{'</IconButton>'}</Text>
-        </TableCell>
-        <TableCell>
-          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
-            <Icon icon={CreateIcon} size="xs" title={{ name: 'Create Icon' }} />
-          </IconButton>
-        </TableCell>
-      </TableRow>
-      <TableRow bg="transparent !important">
-        <TableCell width="40%">
-          <Text>SM | 26px</Text>
-        </TableCell>
-        <TableCell>
-          <Text fontFamily="monospace">
-            {' '}
-            {"<IconButton aria-label='create button' variant='inverted'/>"}
-          </Text>
-          <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='sm'/>"}</Text>
-          <Text fontFamily="monospace">{'</IconButton>'}</Text>
-        </TableCell>
-        <TableCell>
-          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
-            <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
-          </IconButton>
-        </TableCell>
-      </TableRow>
-      <TableRow bg="transparent !important">
-        <TableCell width="40%">
-          <Text>MD | 31px</Text>
-        </TableCell>
-        <TableCell>
-          <Text fontFamily="monospace">
-            {' '}
-            {"<IconButton aria-label='create button' variant='inverted'/>"}
-          </Text>
-          <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='md'/>"}</Text>
-          <Text fontFamily="monospace">{'</IconButton>'}</Text>
-        </TableCell>
-        <TableCell>
-          <IconButton aria-label="create button" variant="inverted" sx={{ width: 'unset' }}>
-            <Icon icon={CreateIcon} size="md" title={{ name: 'Create Icon' }} />
-          </IconButton>
-        </TableCell>
-      </TableRow>
-    </TableBody>
-  </Table>
-);
+export const Sizes = () => {
+  const { themeState: { isOnyx } } = useGetTheme();
+  return (
+    <Table>
+      <TableHead>
+        <TableRow key="head">
+          <TableCell isHeading width="40%">Icon & Button Size</TableCell>
+          <TableCell isHeading>Code Example</TableCell>
+          <TableCell isHeading>Icon Example</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody sx={{ borderBottom: 'unset' }}>
+        <TableRow bg="transparent !important">
+          <TableCell width="40%">
+            <Text>
+              XXS |
+              {' '}
+              {isOnyx ? '18px' : '15px'}
+            </Text>
+          </TableCell>
+          <TableCell>
+            <Text fontFamily="monospace">
+              {' '}
+              {"<IconButton aria-label='create button' variant='inverted'/>"}
+            </Text>
+            <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xxs'/>"}</Text>
+            <Text fontFamily="monospace">{'</IconButton>'}</Text>
+          </TableCell>
+          <TableCell>
+            <Box>
+              <IconButton aria-label="create button" variant="inverted">
+                <Icon icon={CreateIcon} size="xxs" title={{ name: 'Create Icon' }} />
+              </IconButton>
+            </Box>
+          </TableCell>
+        </TableRow>
+        <TableRow bg="transparent !important">
+          <TableCell width="40%">
+            <Text>
+              XS |
+              {' '}
+              {isOnyx ? '22px' : '21px'}
+            </Text>
+          </TableCell>
+          <TableCell>
+            <Text fontFamily="monospace">
+              {' '}
+              {"<IconButton aria-label='create button' variant='inverted'/>"}
+            </Text>
+            <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='xs'/>"}</Text>
+            <Text fontFamily="monospace">{'</IconButton>'}</Text>
+          </TableCell>
+          <TableCell>
+            <Box>
+              <IconButton aria-label="create button" variant="inverted">
+                <Icon icon={CreateIcon} size="xs" title={{ name: 'Create Icon' }} />
+              </IconButton>
+            </Box>
+          </TableCell>
+        </TableRow>
+        <TableRow bg="transparent !important">
+          <TableCell width="40%">
+            <Text>
+              SM | 26px
+            </Text>
+          </TableCell>
+          <TableCell>
+            <Text fontFamily="monospace">
+              {' '}
+              {"<IconButton aria-label='create button' variant='inverted'/>"}
+            </Text>
+            <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='sm'/>"}</Text>
+            <Text fontFamily="monospace">{'</IconButton>'}</Text>
+          </TableCell>
+          <TableCell>
+            <Box>
+              <IconButton aria-label="create button" variant="inverted">
+                <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
+              </IconButton>
+            </Box>
+          </TableCell>
+        </TableRow>
+        <TableRow bg="transparent !important">
+          <TableCell width="40%">
+            <Text>
+              MD |
+              {' '}
+              {isOnyx ? '32px' : '31px'}
+            </Text>
+          </TableCell>
+          <TableCell>
+            <Text fontFamily="monospace">
+              {' '}
+              {"<IconButton aria-label='create button' variant='inverted'/>"}
+            </Text>
+            <Text fontFamily="monospace">{"<Icon icon={CreateIcon} size='md'/>"}</Text>
+            <Text fontFamily="monospace">{'</IconButton>'}</Text>
+          </TableCell>
+          <TableCell>
+            <Box>
+              <IconButton aria-label="create button" variant="inverted">
+                <Icon icon={CreateIcon} size="md" title={{ name: 'Create Icon' }} />
+              </IconButton>
+            </Box>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+};
 
 Sizes.parameters = {
   design: {

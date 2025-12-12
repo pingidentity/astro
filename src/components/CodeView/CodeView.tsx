@@ -27,6 +27,8 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     /* istanbul ignore next */
     stylesProp,
     iconButtonProps,
+    /* istanbul ignore next */
+    variant = 'default',
     ...others
   } = props;
 
@@ -49,7 +51,8 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
   const getLineNoWidth = tokens => tokens.length.toString().length * 12;
 
   const code = children?.trim() || '' as string;
-  const codeViewTheme = stylesProp?.theme || (isOnyx ? codeViewStyle.theme : styles.theme);
+  const codeViewTheme = stylesProp?.theme || (isOnyx ? codeViewStyle[variant].theme
+    : styles[variant].theme);
 
   useEffect(() => {
     try {
@@ -78,7 +81,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
                 && (
                   <Box
                     as="span"
-                    variant="codeView.lineNo"
+                    variant={`codeView.${variant}.lineNo`}
                     sx={{ minWidth: getLineNoWidth(tokens) }}
                   >
                     {i + 1}
@@ -104,21 +107,19 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     return (
       <Box
         ref={ref}
-        variant="codeView.wrapper"
+        variant={`codeView.${variant}.wrapper`}
         className={classNames}
         {...mergeProps(focusProps, hoverProps, others)}
         role="none"
       >
-        <Box isRow justifyContent="space-between" alignItems="center" variant="codeView.header">
-          <Text color="gray-300" mb="0" mr="sm" py="sm">{typeof language === 'string' ? language.toUpperCase() : ''}</Text>
+        <Box isRow justifyContent="space-between" alignItems="center" variant={`codeView.${variant}.header`}>
+          <Text variant={`codeView.${variant}.header.color`} mb="0" mr="sm" py="sm">{typeof language === 'string' ? language.toUpperCase() : ''}</Text>
           <CopyText
             ref={ref}
             mode="rightText"
             textToCopy={textToCopy || children}
-            iconButtonProps={iconButtonProps}
-          >
-            Copy
-          </CopyText>
+            iconButtonProps={{ ...iconButtonProps, variant }}
+          />
         </Box>
         {content}
       </Box>
@@ -129,7 +130,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     return (
       <Box
         ref={ref}
-        variant="codeView.wrapper"
+        variant={`codeView.${variant}.wrapper`}
         className={classNames}
         {...mergeProps(focusProps, hoverProps, others)}
         role="none"
@@ -147,7 +148,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
       tooltipProps={{ offset: 15 }}
       wrapperProps={{
         className: classNames,
-        variant: 'codeView.wrapper',
+        variant: `codeView.${variant}.wrapper`,
         ...others,
       }}
       iconButtonProps={iconButtonProps}

@@ -104,13 +104,12 @@ const overrides = {
   disabled: nextGenColors['gray-100'],
 };
 
-const background = {
-  base: 'white',
-  secondary: nextGenColors['gray-100'],
-  card: nextGenColors['blue-100'],
-  suggestion: '#ecf0f5',
-  hover: nextGenColors['gray-100'],
-};
+const background = nextGenColors['blue-100'];
+const backgroundBase = 'white';
+const backgroundSecondary = nextGenColors['gray-100'];
+const backgroundCard = nextGenColors['blue-100'];
+const backgroundSuggestion = '#ecf0f5';
+const backgroundHover = nextGenColors['gray-100'];
 
 const card = {
   blue: nextGenColors['blue-100'],
@@ -122,7 +121,12 @@ const badge = {
   background: nextGenColors['gray-100'],
 };
 
-const tooltip = nextGenColors['gray-900'];
+const codeEditor = {
+  backgroundColor: nextGenColors['gray-900'],
+  headerColor: nextGenColors['gray-900'],
+};
+
+const tooltip = 'black';
 
 const colors = {
   ...subColors,
@@ -139,8 +143,14 @@ const colors = {
   active: colorsObject.blue,
   primary: colorsObject.blue,
   background,
+  backgroundBase,
+  backgroundSecondary,
+  backgroundCard,
+  backgroundSuggestion,
+  backgroundHover,
   iconWrapper,
   tooltip,
+  codeEditor,
   twoTone,
 };
 

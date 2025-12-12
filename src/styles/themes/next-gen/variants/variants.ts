@@ -1,10 +1,10 @@
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
-import colors from '../colors/colors';
 
 import accordion from './accordion';
 import { avatar } from './avatar';
+import { box } from './box';
 import button, { defaultFocus } from './button';
 import callout from './callout';
 import { dataTable } from './dataTable';
@@ -18,6 +18,7 @@ import panelHeader from './panelHeader';
 import popoverMenu from './popoverMenu';
 import prompt from './prompt';
 import response from './response';
+import searchNav from './searchNav';
 import stepper from './stepper';
 import suggestion from './suggestion';
 import suggestions from './suggestions';
@@ -102,10 +103,11 @@ const modal = {
   headingContainer: {
     borderBottom: '1px solid',
     borderBottomColor: 'gray-200',
-    bg: 'background.base',
+    bg: 'backgroundBase',
     borderRadius: '1em 1em 0px 0px',
   },
   header: {
+    bg: 'backgroundBase',
     borderBottom: '1px solid',
     borderBottomColor: 'gray-200',
     borderRadius: '1em 1em 0px 0px',
@@ -159,12 +161,12 @@ const listBox = {
     },
     '&.is-condensed': {
       pl: 'md',
-      bg: 'background.base',
+      bg: 'backgroundBase',
       '&.is-selected': {
-        bg: 'background.base',
+        bg: 'backgroundBase',
       },
       '&.is-focused': {
-        bg: 'background.base',
+        bg: 'backgroundBase',
       },
     },
   },
@@ -207,11 +209,11 @@ const progressBar = {
 
 const overlayPanel = {
   container: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     borderColor: 'border.hairline',
   },
   aiPanelContainer: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     border: 'none',
     borderLeft: 'none',
     position: 'fixed',
@@ -245,32 +247,32 @@ const overlayPanel = {
     alignSelf: 'center',
   },
   innerPanel: {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
 };
 
 const buttonBar = {
   container: {
     gap: 'sm',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
   justifyRightContainer: {
     gap: 'sm',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
 };
 
 const rockerButton = {
   innerContainer: {
     boxShadow: 'none',
-    backgroundColor: 'common.background.base',
+    backgroundColor: 'common.backgroundBase',
     borderRadius: '50px',
     padding: 0,
     border: 'none',
   },
   thumbSwitch: {
     textTransform: 'none',
-    backgroundColor: 'common.background.base',
+    backgroundColor: 'common.backgroundBase',
     padding: 'md',
     height: '50px',
     color: 'active',
@@ -324,7 +326,7 @@ const loader = {
     py: 'sm',
   },
   circleSpinner: {
-    borderColor: 'background.base',
+    borderColor: 'backgroundBase',
   },
 };
 
@@ -401,21 +403,7 @@ export default {
   attachment,
   avatar,
   breadcrumb,
-  box: {
-    indeterminateCheckboxIcon: {
-      height: '19.25px',
-      width: '19.25px',
-      '&.is-disabled': {
-        '& rect[id="indeterminate-checkbox-icon-wrapper"]': {
-          fill: 'gray-500',
-          stroke: 'gray-500',
-        },
-      },
-      '&.is-focused': {
-        boxShadow: `inset 0px 0px 0px 1px ${colors.focus}`,
-      },
-    },
-  },
+  box,
   buttonBar,
   callout,
   codeView,
@@ -441,6 +429,7 @@ export default {
   prompt,
   response,
   rockerButton,
+  searchNav,
   separator,
   skeleton,
   stepper,

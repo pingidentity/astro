@@ -4,10 +4,10 @@ const interactive = {
   boxShadow: 'none',
   borderRadius: '1rem',
   border: '1px solid',
-  borderColor: 'border.base',
+  borderColor: 'gray-200',
   transition: 'border-color .25s ease-in',
   '&.is-focused': {
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
     outline: '2px solid',
     outlineColor: 'focus',
     outlineOffset: '0px',
@@ -22,8 +22,15 @@ const interactive = {
 const container = {
   ...flat,
   p: 'lg',
-  borderColor: 'border.base',
-  lineHeight: 1.6,
+  borderColor: 'gray-200',
+  lineHeight: 'body',
+  boxShadow: 'none',
+};
+
+const withShadow = {
+  ...container,
+  boxShadow: 'standard',
+  backgroundColor: 'backgroundBase',
 };
 
 const dark = {
@@ -44,7 +51,7 @@ const light = {
 
 const activeCard = {
   ...interactive,
-  borderColor: 'border.base',
+  borderColor: 'gray-200',
   '&.is-hovered': {
     borderColor: 'active',
     bg: 'default',
@@ -93,4 +100,8 @@ export default {
   suggestionColumn,
   suggestionRow,
   tableWrapper,
+  withShadow,
+  flat: {
+    boxShadow: 'none',
+  },
 };

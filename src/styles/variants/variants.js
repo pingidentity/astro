@@ -38,6 +38,7 @@ import progressBar from '../../components/ProgressBar/ProgressBar.styles';
 import rangeCalendar from '../../components/RangeCalendar/RangeCalendar.styles';
 import rockerButton from '../../components/RockerButton/RockerButton.styles';
 import scrollBox from '../../components/ScrollBox/ScrollBox.styles';
+import searchNav from '../../components/SearchNav/SearchNav.styles';
 import separator from '../../components/Separator/Separator.styles';
 import serverErrorBoundary from '../../components/ServerErrorBoundary/ServerErrorBoundary.styles';
 import skeleton from '../../components/Skeleton/Skeleton.styles';
@@ -93,6 +94,7 @@ export default {
   progressBar,
   rockerButton,
   scrollBox,
+  searchNav,
   separator,
   serverErrorBoundary,
   slider,

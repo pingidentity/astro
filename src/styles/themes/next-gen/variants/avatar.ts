@@ -52,6 +52,10 @@ export const avatar = {
     width: sizes.avatar.md,
     height: sizes.avatar.md,
   },
+  '&.size-xmd': {
+    width: sizes.avatar.xmd,
+    height: sizes.avatar.xmd,
+  },
   '&.size-lg': {
     width: sizes.avatar.lg,
     height: sizes.avatar.lg,
@@ -66,6 +70,9 @@ export const avatar = {
   '&.font-size-md': {
     fontSize: sizes.avatarFontSize.md,
   },
+  '&.font-size-xmd': {
+    fontSize: sizes.avatarFontSize.xmd,
+  },
   '&.font-size-lg': {
     fontSize: sizes.avatarFontSize.lg,
   },
@@ -74,6 +81,85 @@ export const avatar = {
   },
   '&.is-square': {
     borderRadius: '4px',
+  },
+  '&.is-square.size-lg': {
+    borderRadius: '8px',
+  },
+  '&.is-square.size-xl': {
+    borderRadius: '16px',
+  },
+  '&.is-logo': {
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'gray-200',
+    backgroundColor: 'transparent',
+    '&.size-sm': {
+      img: {
+        width: sizes.avatarLogo.sm,
+        height: sizes.avatarLogo.sm,
+        borderRadius: '0px',
+      },
+    },
+    '&.size-md': {
+      img: {
+        width: sizes.avatarLogo.md,
+        height: sizes.avatarLogo.md,
+        borderRadius: '0px',
+      },
+    },
+    '&.size-xmd': {
+      img: {
+        width: sizes.avatarLogo.xmd,
+        height: sizes.avatarLogo.xmd,
+        borderRadius: '0px',
+      },
+    },
+    '&.size-lg': {
+      img: {
+        width: sizes.avatarLogo.lg,
+        height: sizes.avatarLogo.lg,
+        borderRadius: '0px',
+      },
+    },
+    '&.size-xl': {
+      img: {
+        width: sizes.avatarLogo.xl,
+        height: sizes.avatarLogo.xl,
+        borderRadius: '0px',
+      },
+    },
+  },
+  '&.is-image:not(.is-logo)': {
+    '&.size-sm': {
+      img: {
+        width: sizes.avatar.sm,
+        height: sizes.avatar.sm,
+      },
+    },
+    '&.size-md': {
+      img: {
+        width: sizes.avatar.md,
+        height: sizes.avatar.md,
+      },
+    },
+    '&.size-xmd': {
+      img: {
+        width: sizes.avatar.xmd,
+        height: sizes.avatar.xmd,
+      },
+    },
+    '&.size-lg': {
+      img: {
+        width: sizes.avatar.lg,
+        height: sizes.avatar.lg,
+      },
+    },
+    '&.size-xl': {
+      img: {
+        width: sizes.avatar.xl,
+        height: sizes.avatar.xl,
+      },
+    },
   },
   display: 'flex',
   borderRadius: '50%',

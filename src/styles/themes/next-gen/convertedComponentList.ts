@@ -51,6 +51,7 @@ const nextGenConvertedComponents = [
   'RequirementsList',
   'RockerButtonGroup',
   'SearchField',
+  'SearchNav',
   'SelectField',
   'Skeleton',
   'SliderField',
@@ -74,6 +75,7 @@ const nextGenConvertedComponents = [
   'SliderField',
   'ServerErrorBoundary',
   'Avatar',
+  'Box',
 ];
 
 export const componentSpecificNextGenBlacklist = {
@@ -88,19 +90,42 @@ export const componentSpecificNextGenBlacklist = {
 };
 
 export const astroBlacklistStory = {
-  DataTable: ['Onyx Default'],
-  NavBar: ['Onyx Default'],
-  SearchField: ['Onyx With Filter'],
-  Callout: ['Customizations'],
-  StatusIcon: ['Default', 'In Rocker Button'],
-  Avatar: [
-    'With Size Variation',
-    'With Color Variation',
-    'With Icon Variation',
-    'With Square Variation',
+  DataTable: [
+    'Onyx Default',
   ],
-  Text: ['Onyx'],
-  Loader: ['Circular', 'CustomCircular'],
+  NavBar: [
+    'Onyx Default',
+  ],
+  SearchField: [
+    'Onyx With Filter',
+  ],
+  Callout: [
+    'Customizations',
+  ],
+  CodeView: [
+    'Light',
+  ],
+  StatusIcon: [
+    'Default',
+    'In Rocker Button',
+  ],
+  Avatar: [
+    'Size Variation',
+    'Color Variation',
+    'Icon Variation',
+    'Square Variation',
+    'Logo Variation',
+  ],
+  Text: [
+    'Onyx',
+  ],
+  Loader: [
+    'Circular',
+    'Custom Circular',
+  ],
+  Card: [
+    'With Shadow',
+  ],
 };
 
 export const nextGenOnlyComponents = [
@@ -111,6 +136,7 @@ export const nextGenOnlyComponents = [
   'Suggestions',
   'Prompt Input',
   'Footer',
+  'Onyx Input Patterns',
 ];
 
 export default nextGenConvertedComponents;

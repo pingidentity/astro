@@ -42,6 +42,10 @@ export const avatar = {
     backgroundColor: 'indigo',
     color: 'black',
   },
+  '&.is-logo': {
+    borderColor: 'border.attachment',
+    backgroundColor: 'white',
+  },
   display: 'flex',
   borderRadius: '50%',
   textAlign: 'center',

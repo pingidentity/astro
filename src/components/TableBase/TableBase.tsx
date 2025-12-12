@@ -166,7 +166,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
                 px="lg"
                 py="md"
               >
-                <Loader color="active" />
+                <Loader variant="loader.withinDataTable" />
               </Box>
             )
           }

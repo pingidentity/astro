@@ -24,11 +24,24 @@ const border = {
   input: nextGenColors['gray-500'],
   separator: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
   attachment: '#39414b',
+  hairline: '#737577',
 };
 
 const badge = {
   background: nextGenColors['gray-800'],
   textColor: nextGenColors['gray-100'],
+};
+
+const background = {
+  base: nextGenColors['gray-900'],
+  secondary: '#1a1e22',
+  card: '#1a1e22',
+  hover: hoverDark,
+};
+
+const codeEditor = {
+  backgroundColor: background.secondary,
+  headerColor: nextGenColors['gray-900'],
 };
 
 const twoTone = {
@@ -92,12 +105,18 @@ const iconWrapper = {
   },
 };
 
+const backgroundBase = nextGenColors['gray-900'];
+const backgroundSecondary = nextGenColors['gray-900'];
+const backgroundCard = '#1a1e22';
+const backgroundSuggestion = '#ecf0f5';
+const backgroundHover = hoverDark;
+
 export const colors = {
   border,
   iconWrapper,
   ...overrides,
   twoTone,
-  light: nextGenColors['gray-900'],
+  light: '#1A1E22',
   secondary: nextGenColors['gray-400'],
   dark: nextGenColors['gray-400'],
   lightblue: nextGenColors['blue-600'],
@@ -126,12 +145,13 @@ export const colors = {
     message: 'white',
     fieldHelper: nextGenColors['gray-400'],
   },
-  background: {
-    base: nextGenColors['gray-900'],
-    secondary: '#1a1e22',
-    card: '#1a1e22',
-    hover: hoverDark,
-  },
+  background,
+  backgroundBase,
+  backgroundSecondary,
+  backgroundCard,
+  backgroundSuggestion,
+  backgroundHover,
   font,
   badge,
+  codeEditor,
 };

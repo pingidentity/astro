@@ -226,10 +226,8 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>((props, ref) => {
         return (
           <CenteredWrapper>
             <Loader
-              color="accent.70"
               aria-label={state.collection.size > 0 ? 'loadingMore' : 'loading'}
-              sx={{ gap: '9px' }}
-              dotProps={{ sx: { m: 0 } }}
+              variant="loader.withinDataTable"
             />
           </CenteredWrapper>
         );

@@ -105,6 +105,10 @@ export const text = {
   active,
 };
 
+const background = accent[99];
+const backgroundBase = '#ffffff';
+const backgroundSecondary = accent[99];
+
 export const shadow = chroma(neutral[10]).alpha(0.25).hex();
 
 const badge = {
@@ -116,9 +120,17 @@ const badge = {
 };
 const tooltip = accent[20];
 
+const border = {
+  hairline: '#E7EEF4',
+};
+
 const allColors = {
   black,
+  background,
+  backgroundBase,
+  backgroundSecondary,
   badge,
+  border,
   white,
   neutral,
   accent,

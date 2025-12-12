@@ -4,23 +4,14 @@ import { nextGenColors } from '../../../themes/next-gen/tokens/colorTokens';
 
 const baseIconButton = {
   path: { fill: 'dark' },
-  '&.is-focused': {
-    outline: '2px solid',
-    outlineColor: 'primary',
-    outlineOffset: '3px',
-  },
   '&.is-hovered': {
-    path: {
-      fill: chroma.mix(nextGenColors['gray-400'], 'black', 0.15, 'rgb').hex(),
-    },
-    backgroundColor: 'transparent',
+    path: { fill: 'gray-400' },
+    backgroundColor: 'background.secondary',
   },
   '&.is-pressed': {
     backgroundColor: 'gray-800',
     borderColor: 'gray-900',
-    path: {
-      fill: chroma.mix(nextGenColors['gray-400'], 'black', 0.15, 'rgb').hex(),
-    },
+    path: { fill: 'gray-400' },
   },
 };
 
@@ -37,32 +28,27 @@ const iconButtons = {
     ...baseIconButton,
   },
   inverted: {
-    ...baseIconButton,
-    borderColor: 'transparent !important',
     path: {
       fill: 'black',
     },
     '&.is-pressed': {
       backgroundColor: chroma.mix('white', 'black', 0.125, 'rgb').hex(),
-      borderColor: chroma.mix('white', 'black', 0.125, 'rgb').hex(),
     },
     '&.is-hovered': {
-      border: 'none !important',
-      borderColor: 'none !important',
       backgroundColor: 'white',
     },
   },
-  hintButton,
-  nextGen: {
+  searchClearButton: {
     '&.is-hovered': {
-      path: { fill: 'black' },
+      backgroundColor: 'background.secondary',
     },
     '&.is-pressed': {
-      path: { fill: 'black' },
+      backgroundColor: 'background.secondary',
     },
   },
+  hintButton,
   deleteAttachment: {
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'backgroundSecondary',
     borderColor: 'border.attachment',
     '&.is-hovered': {
       backgroundColor: '#0a0b0d',
@@ -84,6 +70,16 @@ const iconButtons = {
     ...baseIconButton,
     '&.is-hovered': {
       backgroundColor: '#455469',
+    },
+  },
+};
+
+const searchNavTabLabel = {
+  color: 'gray-400',
+  '&.is-hovered': {
+    color: 'white',
+    '& > svg': {
+      fill: 'white',
     },
   },
 };
@@ -252,6 +248,7 @@ const buttons = {
     },
   },
   iconButtons,
+  searchNavTabLabel,
   modalCloseButton,
   listBoxLink: {
     color: 'blue-400',

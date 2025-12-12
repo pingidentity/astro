@@ -83,6 +83,9 @@ export const Default = args => {
       keyboardNavigationBehavior="tab"
       rowProps={{ sx: { flexGrow: 1 } }}
       cellProps={{ sx: { flexGrow: 1 } }}
+      onDragStart={event => console.log('start', event.keys)}
+      onDragEnd={event => console.log('end', event)}
+      onReorder={event => console.log('reorder', event)}
       {...args}
     >
       {item => (

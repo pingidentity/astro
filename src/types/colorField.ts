@@ -31,6 +31,8 @@ export interface ColorFieldProps extends TestingAttributes {
   align?: Alignment,
   /** Where the popover menu opens relative to its trigger. */
   direction?: Axis,
+  /** Disable alpha (opacity) slider in color picker */
+  shouldDisableAlpha?: boolean,
   /** Text to display after the Color Field button. Useful for errors or other info. */
   helperText?: React.ReactNode,
   /** Props object that is spread directly into the helphint element. */

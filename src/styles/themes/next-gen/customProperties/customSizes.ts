@@ -2,7 +2,7 @@ import { IconSize } from '../../../../types';
 
 const copyButtonSize = 'sm' as IconSize;
 const breadcrumbIconSize = 'sm' as IconSize;
-const breadcrumbIconMargin = 'sm';
+const breadcrumbIconMargin = 'md';
 const accordionItemMarginLeft = 'md';
 const pageHeaderTitleMargin = 'md';
 const defaultLoaderSize = 32;

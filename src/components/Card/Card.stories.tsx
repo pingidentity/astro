@@ -203,3 +203,9 @@ export const RadioGroupCard = args => {
     </Card>
   );
 };
+
+export const WithShadow = args => (
+  <Box bg="backgroundSecondary" p="40px">
+    <Card {...args} variant="cards.withShadow" />
+  </Box>
+);

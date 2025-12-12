@@ -48,6 +48,11 @@ Default.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.pageHeader.default,
   },
+  a11y: {
+    config: {
+      rules: [{ id: 'link-in-text-block', enabled: false }],
+    },
+  },
 };
 
 export const WithoutButton = args => (
@@ -64,6 +69,11 @@ WithoutButton.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.pageHeader.withoutButton,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'link-in-text-block', enabled: false }],
+    },
   },
 };
 
@@ -94,3 +104,15 @@ export const Customization = args => (
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>
   </PageHeader>
 );
+
+Customization.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.pageHeader.withoutButton,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'link-in-text-block', enabled: false }],
+    },
+  },
+};

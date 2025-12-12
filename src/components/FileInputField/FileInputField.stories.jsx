@@ -263,3 +263,10 @@ export const WithFileTypePdfAndImage = () => {
     />
   );
 };
+
+export const WithCustomFileTypes = () => (
+  <FileInputField
+    fileTypes={['.p8']}
+    sx={fitContentWidthSx}
+  />
+);

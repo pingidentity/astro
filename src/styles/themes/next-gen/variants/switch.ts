@@ -2,7 +2,7 @@ export const switchable = {
   container: {
     minWidth: '32px',
     color: 'neutral.80',
-    bg: 'backgorund.base',
+    bg: 'background.base',
     border: '1px solid',
     borderColor: 'neutral.80',
     borderRadius: 9999,
@@ -14,7 +14,7 @@ export const switchable = {
   thumbContainer: {
     bg: 'transparent',
     border: 'none',
-    maxWidth: 24,
+    width: '32px',
     height: 16,
     py: '3px',
     px: '3px',

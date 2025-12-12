@@ -61,7 +61,6 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const [filterString, setFilterString] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [hasFocusWithin, setFocusWithin] = useState(false);
-  const [initialItems, setInitialItems] = useState([]);
   const [activeDescendant, setActiveDescendant] = useState('');
 
   const inputWrapperRef = useRef();
@@ -75,10 +74,6 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   } = icons;
   const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
   const { isLoading } = useInputLoader({ loadingState, inputValue: filterString });
-
-  useEffect(() => {
-    setInitialItems(Array.from(items));
-  }, []);
 
   const toggleItems = keys => {
     if (onSelectionChange) onSelectionChange(keys);
@@ -228,7 +223,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
     if (
       inputWrapperRef.current?.contains(relatedTarget)
-        || listBoxRef.current?.contains(relatedTarget)
+        || popoverRef.current?.contains(relatedTarget)
         || buttonRef.current === relatedTarget
     ) {
       return;
@@ -240,7 +235,8 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const [selectionState, setSelectionState] = useState('Select All');
 
   const arrayItems = Array.from(items);
-  const itemCount = initialItems.reduce((count, obj) => count + (
+
+  const itemCount = arrayItems.reduce((count, obj) => count + (
     obj.children ? obj.children.length : 1
   ), 0);
 

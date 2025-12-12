@@ -10,7 +10,7 @@ const header = {
   flexShrink: 0,
   wordBreak: 'inherit',
   whiteSpace: 'nowrap',
-  bg: 'background.base',
+  bg: 'backgroundBase',
   flexGrow: 1,
   fontWeight: 700,
   border: '1px solid transparent',

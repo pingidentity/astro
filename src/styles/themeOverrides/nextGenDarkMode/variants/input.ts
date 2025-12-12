@@ -3,7 +3,7 @@ import { ThemeUICSSObject } from 'theme-ui';
 import { text } from './text';
 
 export const input: ThemeUICSSObject = {
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   borderColor: 'border.input',
   '&::placeholder': text.placeholder,
 };
@@ -11,7 +11,7 @@ export const input: ThemeUICSSObject = {
 export const fieldControlWrapper = {
   '> textarea': {
     borderColor: 'border.input',
-    backgroundColor: 'background.base',
+    backgroundColor: 'backgroundBase',
   },
 };
 
@@ -20,7 +20,7 @@ input.fieldControlWrapper = {
 };
 
 input.multivaluesWrapper = {
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   '&.is-read-only': {
     boxShadow: 'inset 0 0 0 100px #30373f',
     border: '1px solid',

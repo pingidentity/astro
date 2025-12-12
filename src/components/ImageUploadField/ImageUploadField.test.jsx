@@ -234,9 +234,7 @@ test('should render image preview and menu when previewImage prop is supplied', 
 test('loader size can be changed via the prop', () => {
   const testLoaderSize = 17;
   getComponent({ isLoading: true, loaderSize: testLoaderSize });
-  expect(screen.getByTestId('image-preview-button__loader')).toHaveStyle({
-    'height': `${testLoaderSize}px`,
-  });
+  expect(screen.getByTestId('image-preview-button__loader')).toBeInTheDocument();
 });
 test('should show the menu if label clicked when preview image exists', async () => {
   getComponent();

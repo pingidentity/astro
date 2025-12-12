@@ -1,4 +1,4 @@
-import { text as textVariants } from '../Text/Text.styles';
+import { searchNavTabLabel, text as textVariants } from '../Text/Text.styles';
 
 export const base = {
   cursor: 'pointer',
@@ -361,6 +361,24 @@ const paginationMenu = {
   fontWeight: 0,
 };
 
+const tabLabelButton = {
+  ...searchNavTabLabel,
+  backgroundColor: 'transparent',
+  mb: '10px',
+  p: '0px',
+  borderImage: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  '&.is-hovered': {
+    color: 'active',
+    cursor: 'pointer',
+  },
+  '&.is-focused': {
+    ...defaultFocus,
+    borderRadius: '4px',
+  },
+};
+
 export default {
   colorBlock,
   colorBlockPrimary,
@@ -395,4 +413,5 @@ export default {
   success,
   withIcon,
   filter,
+  searchNavTabLabel: tabLabelButton,
 };

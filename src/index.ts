@@ -173,6 +173,8 @@ export { default as ScrollBox } from './components/ScrollBox';
 export * from './components/ScrollBox';
 export { default as SearchField } from './components/SearchField';
 export * from './components/SearchField';
+export { default as SearchNav } from './components/SearchNav';
+export * from './components/SearchNav';
 export { default as SelectField } from './components/SelectField';
 export * from './components/SelectField';
 export { default as Separator } from './components/Separator';

@@ -209,3 +209,9 @@ export const Filter = () => (
     Filter Text
   </Button>
 );
+
+export const WithLoading = args => (
+  <Button {...args} isLoading>
+    Save
+  </Button>
+);

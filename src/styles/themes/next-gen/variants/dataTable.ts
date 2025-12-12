@@ -17,7 +17,7 @@ const tableRow = {
 
 const selectableTableRow = {
   ...tableRow,
-  bg: 'background.base',
+  bg: 'backgroundBase',
   '&.is-hovered': {
     bg: 'gray-100',
   },

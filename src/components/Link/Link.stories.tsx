@@ -77,4 +77,9 @@ Default.parameters = {
     type: 'figma',
     url: FIGMA_LINKS.link.default,
   },
+  a11y: {
+    config: {
+      rules: [{ id: 'link-in-text-block', enabled: false }],
+    },
+  },
 };
