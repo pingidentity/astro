@@ -28,6 +28,7 @@ export default {
         </>
       ),
     },
+    layout: 'fullscreen',
   },
   argTypes: {
     label: {

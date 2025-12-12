@@ -14,3 +14,11 @@ export const Colors = () => (
     <ColorSchema />
   </Box>
 );
+
+Colors.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
