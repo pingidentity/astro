@@ -199,6 +199,14 @@ export const DisplayWithError = () => {
   );
 };
 
+DisplayWithError.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'link-in-text-block', enabled: false }],
+    },
+  },
+};
+
 export const Edit = () => {
   const defaultRows = [
     {

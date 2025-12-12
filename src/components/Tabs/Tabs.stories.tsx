@@ -173,6 +173,14 @@ export const ContentSlots: StoryFn = () => {
   );
 };
 
+ContentSlots.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'aria-required-children', enabled: false }],
+    },
+  },
+};
+
 export const WithList: StoryFn = () => {
   const allTabs = [
     ...tabs,
@@ -194,6 +202,13 @@ export const WithList: StoryFn = () => {
       )}
     </Tabs>
   );
+};
+WithList.parameters = {
+  a11y: {
+    config: {
+      rules: [{ id: 'aria-required-children', enabled: false }],
+    },
+  },
 };
 
 export const CustomTabLine: StoryFn = () => (

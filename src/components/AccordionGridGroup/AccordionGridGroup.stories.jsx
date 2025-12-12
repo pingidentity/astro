@@ -265,11 +265,13 @@ export const Default = () => {
             <Body item={item} />
             {/* Code that removes the seperator
             from the last item */}
-            {
+            <Box role="cell">
+              {
             item.key !== 'Organization'
               ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
               : null
           }
+            </Box>
           </Item>
         )}
       </AccordionGridGroup>
@@ -304,11 +306,13 @@ export const Controlled = () => {
             <Body item={item} />
             {/* Code that removes the seperator
             from the last item */}
-            {
+            <Box role="cell">
+              {
               item.key !== 'Organization'
                 ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
                 : null
             }
+            </Box>
           </Item>
         )}
       </AccordionGridGroup>

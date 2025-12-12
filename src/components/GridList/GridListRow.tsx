@@ -44,7 +44,8 @@ const GridListRow = forwardRef<HTMLElement, GridListRowProps>((props, ref) => {
         {...customRowProps}
         flexGrow="1"
       >
-        {isReorderable
+        <Box {...gridCellProps} isRow alignItems="center" {...cellProps}>
+          {isReorderable
           && (
             <Box isRow sx={{ alignItems: 'center', mr: 'xs' }}>
               <IconButton ref={buttonRef} {...buttonProps} sx={{ pointerEvents: 'none' }}>
@@ -52,7 +53,6 @@ const GridListRow = forwardRef<HTMLElement, GridListRowProps>((props, ref) => {
               </IconButton>
             </Box>
           )}
-        <Box {...gridCellProps} isRow alignItems="center" {...cellProps}>
           {item.rendered}
         </Box>
       </Box>
