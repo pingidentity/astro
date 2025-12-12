@@ -28,10 +28,7 @@ export default {
         </>
       ),
     },
-    layout: 'fullscreen',
-    chromatic: {
-      viewports: [1200],
-    },
+    layout: 'padded',
   },
   argTypes: {
     label: {
