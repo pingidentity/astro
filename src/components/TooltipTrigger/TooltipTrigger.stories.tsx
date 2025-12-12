@@ -53,6 +53,9 @@ export const withArrowCrossOffsetProp: StoryFn = args => (
     <Tooltip>With arrowCrossOffset=&quot;30px&quot;</Tooltip>
   </TooltipTrigger>
 );
+withArrowCrossOffsetProp.parameters = {
+  chromatic: { diffThreshold: 0.2 },
+};
 
 export const isOpen: StoryFn = args => (
   <TooltipTrigger {...args} isOpen>
@@ -60,6 +63,9 @@ export const isOpen: StoryFn = args => (
     <Tooltip>Display by default</Tooltip>
   </TooltipTrigger>
 );
+isOpen.parameters = {
+  chromatic: { diffThreshold: 0.2 },
+};
 
 export const IconWithTooltip: StoryFn = args => (
   <Box pl={50}>

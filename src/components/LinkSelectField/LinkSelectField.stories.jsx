@@ -28,7 +28,7 @@ export default {
         </>
       ),
     },
-    layout: 'padded',
+    layout: 'fullscreen',
   },
   argTypes: {
     label: {
