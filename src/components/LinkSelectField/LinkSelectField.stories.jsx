@@ -30,7 +30,7 @@ export default {
     },
     layout: 'fullscreen',
     chromatic: {
-      viewports: [1168],
+      viewports: [1200],
     },
   },
   argTypes: {
