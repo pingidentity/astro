@@ -26,7 +26,8 @@ const AccordionGridItem = props => {
 
   const { state } = useAccordionGridContext();
 
-  // Treat first cell as a row, fixes focus and keyboard interactions
+  // Treat first cell as a row,
+  // fixes focus and keyboard interactions
   const isDisabled = state.disabledKeys.has(cellNode.key);
   const isSelected = state.selectionManager.isSelected(cellNode.key);
 
