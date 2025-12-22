@@ -5,7 +5,7 @@ HOSTING_PROJECT_BASE:=${HOSTING_PROJECT_BASE}astro/
 # Only needs to be run once, leaving as an example
 initial-upload-and-version:
 	set -eo;\
-	yarn run demo;\
+	npm run demo;\
 	cp -rf src demo;\
 
 	# tar the demo
@@ -34,7 +34,7 @@ initial-upload-and-version:
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) rm -f ${HOSTING_PROJECT_BASE}${LIB_VERSION}.tar.gz;\
 
 	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE}versions.json ./;\
-	yarn run append-version
+	npm run append-version
 	scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} ./versions.json $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS):${HOSTING_PROJECT_BASE}versions-$(UUID).json;\
 	ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${PRIVATE_SSH_KEY_PATH} $(HOSTING_SERVER_USERNAME)@$(HOSTING_SERVER_ADDRESS) mv ${HOSTING_PROJECT_BASE}versions-$(UUID).json ${HOSTING_PROJECT_BASE}versions.json;\
 
