@@ -1,3 +1,496 @@
+## 2.157.0 (2025-12-23)
+
+### 🚀 Features
+
+- [UIP-7627, UIP-7628] Enable clearing selections in selectField component
+- [UIP-7773, UIP-7764] Add sorting functionality in tableBase component
+- [UIP-7729] UI changes
+- [UIP-7661] Status Icon Component
+- [UIP-7712] Add multiselection in new tablebase component
+- [UIP-7621] Astro GridList
+- [UIP-7660] Create Callout Component for Astro Onyx
+- [UIP-7650] Refactor table and its components to use usetable hook
+- [UIP-7591] Add playground to astro and end user storybooks
+- [UIP-7657] Add ability to pass custom icon to Callout
+- [UIP-7562] SearchField Update to match specs
+- [UIP-7601] CodeEditor improvements
+- [UIP-7537] Add Onyx theme styling to RockerButtonGroup
+- [UIP-7641] ArrayField add addButtonProps
+- [UIP-7544] Button Update to match Figma
+- [UIP-7485] NavBar Update to match specs
+- [UIP-7525] Astro Onyx Tooltip Trigger Fade Animation
+- [UIP-7521] Code Editor Component
+- [UIP-7502] Footer component
+- [UIP-7501] ListView and ListViewItem refactor to include onyx recipe
+- [UIP-7429] AI prompt input attachments support various icons
+- **onyx-tokens:** add onyx-tokens as a util library and wire up bundling with Vite
+- [UIP-7533] Menu onAction is fired twice
+- [UIP-7538] Make unique key be required for MultivaluesField Items
+- [UIP-7500] Datatable refactor to include onyx recipe
+- [UIP-7522] Astro pagination component
+- [UIP-7499] Navbar refactor to include onyx recipe
+- [UIP-7498] Modal Refactor to include Onyx recipe
+- [UIP-7449] SliderField component
+- [UIP-7244] Large content Modal
+- [UIP-7479] Ai response loader
+- [UIP-7432] Ai response component markdown support
+- [UIP-7395] Update dependencies from beta versions of React-Aria and React Stately packages
+- [UIP-7383] DataTable Update to match specs
+- [UIP-7503] Add Open Sans and Pingito fonts to CDN
+- [UIP-7136] Create skeleton component
+- [UIP-7263] tab stories match figma
+- [UIP-7428] Switch Field Overlap and Missing Support sx style Props
+- [UIP-7218] selection occurs on mouse up
+- [UIP-7393] add sx support for field prop objects
+- [UIP-7337] Astro TS Dependencies
+- [UIP-7262] AI PromptInput component
+- [UIP-7271] Ai Chat Suggestions
+- [UIP-7258] Export NavigationHeader & HeaderAccountMenu Component from Index File
+- [UIP-7196] Overlaypanel update to match specs
+- [UIP-7199] Add universal test for field components
+- [UIP-7194] ListViewItem Update to match spec
+- [UIP-7268] AI Panel Component
+- [UIP-7273] OverlayPanel Unable to close panel using Enter key on keyboard
+- [UIP-7270] AI response component
+- [UIP-7193] Image update to match specs
+- [UIP-7116] date picker update to match spec
+- [UIP-7254] NavigationHeader fix theme issues
+- [UIP-7280] ColorField detailed-preview mode
+- [UIP-7224] SelectField add props that spread directly into the Select component
+- [UIP-7230] TooltipTrigger Update to match spec
+- [UIP-7269] Ai-prompt-component
+- [UIP-7229] Text Update to match spec
+- [UIP-7203] Replace useTShirtSize Hook with Themed Values
+- [UIP-7197] CheckboxField broken focus ring in Safari
+- [UIP-7195] Breadcrumbs Make the last Breadcrumb Text
+- [UIP-7167] ListView Update to match spec
+- [UIP-7185] add name and id to TextAreaField
+- [UIP-7109] MultiValues onLoadPrev
+- [UIP-7108] onLoadPrev in ListView
+- [UIP-6831] Astro RadioField TS conversion
+- [UIP-7091] Update Badge with Tooltip styling to match design spec
+- [UIP-7238] export IconWrapperProps from index file
+- [UIP-6830] Passwordfield convert to ts
+- [UIP-7168] IconButton and IconButtonToggle Update to match spec
+- [UIP-7158] Nextgen theme navigationheader focus issues
+- refining monorepo structure and package outputs
+- [UIP-7191] Update Node to Version 20
+- [UIP-7183] React upgrade for ui library
+- [UIP-7205] Add Slots to ArrayField component
+- [UIP-7171] Codeview add textToCopy prop
+- [UIP-7172] CodeView: add iconButtonProps prop
+- [UIP-7177] Add selection to DataTable
+- [UIP-7152] Nextgen dark mode
+- [UIP-7144] isPressed styling for NextGen components
+- [UIP-7166] Add Sizes to Modal Variant
+- [UIP-7160] Create a active Card Variant
+- [UIP-7087] Navigationheader component with next gen styling
+- [UIP-7120] Fix type mismatch for role property
+- [UIP-7157] CheckboxField fix selecting
+- [UIP-6832] SearchField convert to TS
+- [UIP-7134] Next Gen Theme Improvements
+- [UIP-7121] SelectField > Helper text Accessibility violations
+- [UIP-7045] xxs icon size
+- [UIP-6993] React 18 Fixes
+- [UIP-6993] Upgrade Astro to React 18
+- [UIP-7080] Next gen theme additions
+- [UIP-7117] onChange arg type boolean
+- [UIP-7088] fix lorem ipsum text
+- [UIP-6834] SwitchField convert to TypeScript
+- [UIP-7086] add Sections to Astro PopoverMenu
+- [UIP-7061] NextGen Theme fix type and spacing
+- [UIP-6835] TextAreaField convert to typescript
+- [UIP-7055] change color to disabled checkboxes
+- [UIP-6844] Add language support to CodeEditor
+- [UIP-6846] NavSideBar component
+- [UIP-6836] TextField convert to TS
+- [UIP-6819] CollapsiblePanel convert to TS
+- [UIP-7046] Input types do not include support for value
+- [UIP-7047] Add Next Gen Icon Button
+- [UIP-6940] refactor the list view types
+- [UIP-6936] accessibility violations found for listview
+- [UIP-6987] in stepper add ability to pass through props for included tooltip trigger
+- [UIP-6915] Messages Update to match spec
+- [UIP-6996] TimeField insufficient color contrast
+- UIP-7005 Astro Next-Gen transitions
+- [UIP-6875] Breadcrumbs text overflow breaks when used in panelheader slot
+- [UIP-6975] Next gen theme
+- [UIP-6983] requirement list update to match spec
+- [UIP-6982] caret in combo box is black
+- [UIP-6973] Add Card Variants
+- [UIP-6976] rocker button update to match spec
+- [UIP-6907] PopoverMenu Update to match spec
+- [UIP-6984] Update ScrollBox to match specs
+- [UIP-6933] environment breadcrumb update to match spec
+- [UIP-6905] CopyText Update to match spec
+- [UIP-6932] Checkbox multiselect list
+- [UIP-6942] "DateTimeRangePicker"
+- [UIP-6941] "Timefield component"
+- [UIP-6931] RangeCalendar
+- [UIP-6978] Add Grid component
+- [UIP-6897] Accessibility violations found for Tab lists
+- [UIP-6870] PageHeader Update to match spec
+- [UIP-6863] LinkSelectField Console error
+- [UIP-6824] CheckboxField convert to TS
+- [UIP-6853] table update to match specs
+- [UIP-6825] ColorField convert to TS
+- [UIP-6862] HelpHint icon has static id and aria-labelledby
+- [UIP-6823] ArrayField convert to TS
+- [UIP-6860] CopyText fix multiple confirmation messages
+- [UIP-6845] ListView throws error
+- [UIP-6841] Recipe for Accordion Card
+- [UIP-6910] Create new recipe for access feedback
+- [UIP-6851] Separator update to match specs
+- [UIP-6818] CodeView convert to TypeScript
+- [UIP-6764] Progressbar component
+- [UIP-6822] Tabs convert to typescript
+- [UIP-6843] Stepper update to match specs
+- [UIP-6842] Link update to match specs
+- [UIP-6821] EnvironmentalBreadcrumb convert to TypeScript
+- [UIP-6839] HelpHint-add-Customization-story
+- [UIP-6838] HelpHint update stories text to Lorem Ipsum
+- [UIP-6778] Messages convert to TS New
+- [UIP-6850] Breadcrumbs not matching  design
+- [UIP-6858] Add initial pendo data id attribute to interactive components
+- [UIP-6769] Calendar convert to TypeScript
+- [UIP-6777] Modal convert to typescript
+- [UIP-6782] IconButtonToggle convert to TS
+- [UIP-6766] CopyText convert to TS
+- [UIP-6686] Label convert to TS
+- [UIP-6790] Pingito font in Astro
+- [UIP-6757] Astro ListBox TS conversion
+- [UIP-6741] Astro Expandable ListViewItem component
+- [UIP-6773] Breadcrumbs convert to TypeScript
+- [UIP-6806] add primaryWithIcon Button variant
+- [UIP-6779] Menu convert to TS
+- [UIP-6770] RequirementsList convert to TypeScript
+- [UIP-6767] Scrollbox convert to typescript
+- [UIP-6725] HelpHint convert to TypeScript
+- [UIP-6794] Accordion post heading slot
+- [UIP-6768] RockerButtonGroup convert to TypeScript
+- [UIP-6772] PopoverMenu convert to TS
+- [UIP-6774] OverlayPanel convert to TS
+- [UIP-6771] ButtonBar convert to TS
+- [UIP-6776] Astro Accordion Group ts conversion
+- [UIP-6781] ListItem convert to TS
+- [UIP-6670] add Card width story
+- [UIP-6724] IconButton convert to TypeScript
+- [UIP-6727]: FieldHelperText convert to TypeScript
+- [UIP-6723] TooltipTrigger convert to TS
+- [UIP-6689]: Table: convert to TypeScript
+- [UIP-6685] convert Image to TS
+- [UIP-6684] Convert IconBadge to TS
+- [UIP-6729]: Bracket convert to TypeScript
+- [UIP-6688]: Separator convert to TypeScript
+- [UIP-6687] Link: rewrite to TS
+- [UIP-6472] Astro TreeView Drag and Drop
+- [UIP-6679] Avatar: rewrite to TS
+- [UIP-6682] Callout: rewrite to TS
+- [UIP-6669] update Button hover styles
+- [UIP-6680]: Badge: convert to typescript
+- [UIP-6638] useColumnStyles convert to typescript
+- [UIP-6652] convert useOverlappingMenuHoverState to TS
+- [UIP-6651]: useNavBarStyling: update to typescript
+- [UIP-6601]: Add overflowing text story for Breadcrumbs
+- [UIP-6654] convert useProgressiveState to TS
+- [UIP-6657] convert useSelectField to typescript
+- [UIP-6655] covert usePropWarning to TS
+- [UIP-6653] Convert useOverlayPanelState to TS
+- [UIP-6650] covert useNavBarPress to ts
+- [UIP-6647] useLabelHeight convert to typescript
+- [UIP-6644] convert useField to typescript
+- [UIP-6659]: useStatusClasses: update to typescript
+- [UIP-6649] Convert useMountTransition to TS
+- [UIP-6471] Astro TreeView Keyboard Delegate
+- [UIP-6648] useModalState convert to typescript
+- [UIP-6646]: useImageUploadState: update to typescript
+- [UIP-6661]: testUtils: update to typescript
+- [UIP-6662]: figmaLinks: update to typescript
+- [UIP-6639]: useComponentToggle: convert to typescript
+- [UIP-6643]: useFallbackImage: update to typescript
+- [UIP-6641] convert useDebounce to typescript
+- [UIP-6609]: Convert Button to TypeScript
+- [UIP-6589] create convenience component RemovableBadge
+- [UIP-6640] convert useCopyToClipboard to typescript
+- [UIP-6363]: create panel content recipe
+- [UIP-6637] useAriaLabelWarning typescript conversion
+- [UIP-6605]: add right of data slot for With Breadcrumb story
+- [UIP-6612] update Bracket stories to match specs
+- [UIP-6570] AccordionGroupItem label can be a react node
+- [UIP-6363]: add panel content recipe
+- [UIP-6556] add special Badge types
+- [UIP-6583]: AccordionGroup: add header tag to label
+- [UIP-6335] Astro DataTable epic merge
+- [UIP-6581] AstroWrapper renamed to AstroProvider
+- [UIP-6527]: move PageHeader out of experimental
+- [UIP-6561]: PanelHeader: move out of experimental
+- [UIP-6470] Astro TreeView component
+- [UIP-6560]: ButtonBar: move out of experimental
+- [UIP-6438] PanelHeader add support for images
+- [UIP-6434] add ListViewItemChart component
+- [UIP-6500]: ListViewItem: move out of experimental
+- [UIP-6398] init typescript in Astro
+- [UIP-6401] Experimental PanelHeader
+- [UIP-6353]: Add ListViewItem
+- [UIP-6359] Astro SaveBar Component
+- [UIP-6353]: Add StyledListItem
+- [UIP-6327] default figma URLs for astro stories
+- [UIP-6262] TextField Custom Tooltip Width
+- [UIP-5588] Add DatePicker component
+- [UIP-6243] Icon - Add Associated Title
+- [UIP-5969] Add component overview page Card-Icon
+- [UIP-6028] Adding Patterns to Storybook
+- [UIP-5983] setup chromatic only stories
+- [UIP-5968] Add component overview page AccordionGrid-button
+- [UIP-5938] Update astro nano theme to support v2
+- [UIP-5911]: Add Bulletin component
+- [UIP-5880] UiLibraryOverride theme - resolve navBar style conflicts
+- [UIP-5490] Add DataTable component
+- [UIP-5599] Override Theme Additions
+- [UIP-5433] add accessible list and panel
+- [UIP-5373] ListView A11Y Improvement
+- [UIP-5367] EnvironmentBreadcrumbs A11Y Improvement
+- [UIP-5350] Astro nano theme
+- [UIP-5401] Add initial Slider recipe
+- [UIP-5334] add container widths to box
+- [UIP-5028] UI Library Global Styles Override
+- [UIP-5292] Update Astro version in Schema Form
+- [UIP-5276] Add TimeZonePicker component
+- [UIP-5163] Tab with Popover menu
+- [UIP-5162] Add MultiselectFilter component
+- [UIP-5228] Add Storysource and Console addons to Astro
+- [UIP-5135] Function to generate mock data
+- [UIP-5067] CodeView component
+- [UIP-4918] Add File Input
+- [UIP-4993] Add useDebounce hook
+- [UIP-4858] Multivalues Component
+- [UIP-4758] Accordion Grid Component
+- [UIP-4658] add Row Line Chart Recipe
+- [UIP-4835] Number Field Component
+- [UIP-4841] Add NOTICE file
+- [UIP-4733] Add Apache 2.0 License
+- [UIP-4897] Clarify Deprecated Components within Storybook
+- [UIP-4819] Disallow copy/paste
+- [UIP-4696] Add Jest Axe matcher and automated accessibility tests
+- [UIP-4659] LinkSelectField
+- [UIP-4149] add Breadcrumbs component
+- [UIP-4537] Virtualized ListView component
+- [UIP-4617] Date Picker Recipe
+- [UIP-4481] add color input component
+- [UIP-4264] Astro Message
+- [UIP-4467] Image upload component
+- [UIP-4569] Replace Rebass.js package with Theme UI
+- [UIP-4430] Table component
+- [UIP-4539] Overlay panel component
+- [UIP-4429] Array input recipe
+- [UIP-4468] Stepper component
+- UIP-4427 "Astro accordion component"
+- [UIP-4441] Add Storybook controls for all astro components
+- [UIP-4500] Scroll callbacks for listbox and add loaders to async state for SelectField and ComboBoxField
+- [UIP-4147] Icon button independent component
+- [UIP-4413] Tooltip Component
+- [UIP-4451] Country picker recipe
+
+### 🩹 Fixes
+
+- correct astro version and add jsx extension to build
+- correct base compare and test npm prerelease
+- upgrade astro patch version to test dry-run
+- accessibility issue
+- add fullscreen and diff threshold
+- try padded
+- change to 1200 viewport
+- add viewport and chromatic downgrade
+- upgrade chromatic and add layout
+- force chromatic update
+- add delay to top param
+- add chromatic delay
+- data table accessibility violation
+- resolve accesibility issue
+- add ts-ignore for ts error
+- add code coverage
+- test failure
+- add jest config and test fix
+- add babel output to dist astro
+- ignore build files from test
+- add ignore pattern in eslint config
+- commit package.json
+- changes for build using babel
+- remove develop from prerelease stage
+- adding vite multi-entry
+- MR feedback
+- test cases
+- resolve ts errors and some test fixes
+- add a new vite config and multi entry for hooks
+- output path for vite build
+- add autoformat
+- mdx declarration file fix
+- bumping up to match the correct version
+- adding nx to test script
+- MR feedback
+- upgrade eslint to 9
+- linting tasks
+- lint fix
+- eslint wip
+- moving to vitest
+- ci try adding npmignore..
+- collapsible panel
+- ts errors
+- update ts
+- tests
+- some fixes
+- **astro:** test case fix
+- **astro:** fixing a few tests
+- **astro:** fix some tests
+- **astro:** ts error fixes
+- [UIP-7756] fix release tag
+- [UIP-7748] DataTable is grouping items into rows of pairs
+- [UIP-7698] Change disabled opacity for onyx
+- [	UIP-7683] Update onyx input height
+- [UIP-7655] Astro RockerButton refactor
+- [UIP-7700] MultivaluesField Fixes
+- [UIP-7689] ListView text box is cutting off descenders
+- [UIP-7684] TextAreaField add types
+- [UIP-7664] Astro SelectField fix warning
+- create stable code editor for chromatic
+- [UIP-7691] Add filter variant to button
+- [UIP-7681]  Selectfield dropdown not opening correctly when clicking on arrow icon
+- [UIP-7671] Tab unable to pass data-testid
+- [UIP-7599] Fix Astro SliderField ActiveTrack
+- [UIP-7576] Field components allow helpHintProps to be passed through
+- [UIP-7608] astro library nav bar issue
+- [UIP-7575] Astro badge custom onyx styling
+- [UIP-7541] Fix Astro fonts issue
+- [UIP-7573] add local environment packages to git ignore
+- [UIP-7508] add Onyx Button Link Variant
+- [UIP-7507] Add initial state to messagesReducer
+- [UIP-7448] PromptInput add ability to show and hide upload button
+- [UIP-7507] Add initial state to messagesReducer
+- [UIP-7489] Prompt input enter
+- [UIP-7487] Response Toolbar refactor
+- [UIP-7473] Add tooltipTrigger props to IconButton
+- [UIP-7458] fix how value is stored and passed through the prompt input component tree
+- [UIP-7413] Add support for PowerShell and Java
+- [UIP-7441] fix ImageUploadField fileTypes
+- [UIP-7427] pass tooltipProps to CopyText
+- [UIP-7440] add Suggestions to top-level index.ts file
+- [UIP-7341] Astro PanelHeader fix text
+- [UIP-7252] Add hintText to SelectField
+- [UIP-7164] Add CheckboxField Unit Tests
+- [UIP-6833] SelectField typescript conversion
+- [UIP-7038] Card blocks user interaction
+- [UIP-7079] ListBox Option, selection style overrides Hover Style
+- [UIP-7076] Menu types do not support the onAction key
+- [UIP-7007] Astro Stepper add disabled Tooltips
+- await EnvironmentalBreadcrumb universal tests
+- usage of useFakeTimer and useRealTimer
+- [UIP-6820] DataTable Convert to Typescript
+- [UIP-6878] UILibraryOverride-styles-for-numberField-passwordField-searchField
+- [UIP-6856] Inconsistent ComboBoxField ListItem sizing
+- [UIP-6780] ListView TypeScript conversion
+- [UIP-6812] Selecting checkbox when clicking outside
+- [UIP-6775] NavBar convert to TS
+- bump versions
+- bump version from failed release
+- [UIP-6087] FileInputField upload and delete accessibility improvement
+- [UIP-6759] Add link content to aria-label for Callout
+- [UIP-6660] callout update to match figma specs
+- [UIP-6569] remove proxima font files and updated font stacks
+- [UIP-6698]: Calendar organize stories and fix figma links
+- [UIP-6711]: Icon: replace axeTest with universalComponentTest
+- [UIP-6509] Astro Messages close with Keyboard
+- fix renovate json typo
+- [UIP-6511] Replace ChromePicker with SketchPicker
+- [UIP-6559] Move editButton out of experimental
+- [UIP-6414] add Loader to ListViewItem for keyboaard users
+- [UIP-5724] Fix empty svg title tag
+- [UIP-6453] aligns textarea with float label
+- [UIP-6458]: MultivaluesField-fix-filtering
+- [UIP-6532] typescript error on Item
+- [UIP-6439] ListViewItem move styles into variants
+- [UIP-6406] Add content with link story
+- Update license text in readme
+- Update package.json to rev version of Astro package:
+- Add imports for Meta component to DatePicker and Calendar mdx files
+- [UIP-6391] check for navigator before accessing it
+- [UIP-6188] Icon: add title prop to all icons and import them from @pingux/mdi-react package
+- [UIP-6307] Multivalues Screenreader Issue
+- [UIP-6310] Astro Date Picker Fix Focus Style
+- [UIP-5768] Last selected calendar remains highlighted in external app
+- [UIP-6306] Replace broken links on AccordionGroup components
+- UIP-6214 RadioGroupField Safari Focus Outline Improvement
+- [UIP-6238] link to example for useModalState hook
+- [UIP-6201] FilterButton:  add ui library styles override
+- [UIP-6220] Down grade @emotion/react and @emotion/styled to 11.1.1
+- [UIP-6197] uiLibraryOverride fix ThemeProvider
+- [UIP-5746] "Update enduser theme in astro for v2 changes"
+- [UIP-6152] UI Library overrides doesn't override hover for some buttons
+- [UIP-6181] DataTable error
+- [UIP-6103] ListViewItem: fix border bottom color
+- [UIP-5827] Input components refactor prop spreading
+- [UIP-5748] Update theme overrides for v2 theme changes
+- [UIP-5906] EnvironmentBreadcrumb gray border
+- [UIP-5698] uiLibraryOverride Theme Link and Icon Button Update
+- [UIP-5781] Styling regression fix
+- Hotfix to address React Spectrum build error happening for some users
+- [UIP-5557] Updates to bidirectional arrow recipe
+- [UIP-5508] Add environment breadcrumb to ui overrides theme
+- [UIP-5405] Rename MultiSelectFilter component
+- [UIP-5348] NumberField keyboard interactions not working in external projects
+- [UIP-5351] CodeView cannot import additional language
+- [UIP-5281] NavBar improvements and design review changes
+- Applying changes to updated packages for so the version fixes are applied
+- [UIP-5170] Fix broken RockerButtonGroup and incorrect deps in yarn.lock
+- Update dependencies for fbjs, lodash, and prism-react-renderer
+- [UIP-5183] Link has incorrect styling
+- [UIP-5224] Remove .css file dependency for CodeView component
+- [UIP-5016] OverlayPanel focus improvements
+- [UIP-5064] Upgrade lodash version to 4.17.21
+- ⚠️  [UIP-4912] Update Jenkins container names to match k8s config
+- [UIP-4922] OverlayPanel Custom Width Variant
+- Storybook source code not displaying for many components
+- [UIP-4644] OverlayPanel Improvements
+- [UIP-4783] add custom styling to tooltip
+- [UIP-4732] Resolve Emotion 11 conflicts
+- [UIP-4642] Combobox dependency and loader height issues
+- [UIP-4478] Multiple Overlays Open Simultaneously
+- UIP-4587: Add useSyncRef util from React Aria to address ref syncing issue
+
+### 🔥 Performance
+
+- [UIP-4470] ListBox virtualization for SelectField and ComboBoxField components
+
+### ⚠️  Breaking Changes
+
+- The actual breaking change is committed in 7152c372fbfcb3bb6b76f3dbe2537c349359729e but Lerna doesn't respect just the ! for major version changes
+
+### ❤️  Thank You
+
+- Ajith M
+- akeohanePing
+- Allegra Weldon
+- An Soo Chang
+- Andrew Keohane
+- Cameron Keif
+- Eli Cooper
+- Elijah Cooper
+- Illia Lukashchuk
+- James Robertson
+- Jeremy Bissonnette
+- Julius Williams
+- Kiran Gupta
+- Mariia Yevdokymova
+- Maya De La Rosa
+- Nyssa Shepherd
+- Oscar Kwan
+- Pankaj Chhangwani
+- Ridhisha Dangol
+- Samantha Tucker
+- Samantha Velasquez
+- Vadym Topchieiev
+- vadymtopchieiev
+- Volodymyr Svirhun
+
 ## 2.156.0 (2025-12-22)
 
 ### 🚀 Features
