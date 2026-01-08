@@ -9,6 +9,7 @@ import { menu, menuItem } from './menu';
 import { message } from './message';
 import { navBar } from './navbar';
 import skeleton from './skeleton';
+import stepper from './stepper';
 
 const listBox = {
   container: {
@@ -189,6 +190,7 @@ export default {
   tab,
   iconBadge,
   skeleton,
+  stepper,
   footer,
   tooltip,
   popoverMenu: {
