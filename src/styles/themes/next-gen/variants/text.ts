@@ -86,17 +86,6 @@ const buttonSubtitle = {
   fontWeight: 2,
 };
 
-const stepperTabContent = {
-  fontSize: 'md',
-  color: 'font.base',
-  lineHeight: 'body',
-};
-
-const stepperTabContentHeader = {
-  ...hTags.H2,
-  color: 'font.base',
-};
-
 export const text = {
   base: {
     lineHeight: 'body',
@@ -204,6 +193,4 @@ export const text = {
     lineHeight: 'body',
     color: 'font.light',
   },
-  stepperTabContent,
-  stepperTabContentHeader,
 };

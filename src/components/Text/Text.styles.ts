@@ -176,15 +176,6 @@ const listViewItemExpandedText = {
   color: 'text.primary',
 };
 
-const stepperTabContent = {
-  fontSize: 'md',
-};
-
-const stepperTabContentHeader = {
-  fontSize: 'lg',
-  fontWeight: 3,
-};
-
 export const text = {
   base,
   bodyStrong,
@@ -226,6 +217,4 @@ export const text = {
     ...base,
   },
   stepperLabel,
-  stepperTabContent,
-  stepperTabContentHeader,
 };

@@ -94,20 +94,20 @@ export const Default = args => (
   <Stepper {...args}>
     <Item key="step1" textValue="Duis Aute">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Duis Aute</Text>
-        <Text variant="stepperTabContent">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
+        <Text fontSize="lg" fontWeight="3">Duis Aute</Text>
+        <Text fontSize="md">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
       </Box>
     </Item>
     <Item key="step2" textValue="Lorem Ipsum">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Lorem Ipsum</Text>
-        <Text variant="stepperTabContent">Sed ut perspiciatis unde omnis</Text>
+        <Text fontSize="lg" fontWeight="3">Lorem Ipsum</Text>
+        <Text fontSize="md">Sed ut perspiciatis unde omnis</Text>
       </Box>
     </Item>
     <Item key="step3" textValue="Excepteur Sint">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Excepteur Sint</Text>
-        <Text variant="stepperTabContent">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
+        <Text fontSize="lg" fontWeight="3">Excepteur Sint</Text>
+        <Text fontSize="md">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
       </Box>
     </Item>
   </Stepper>
@@ -117,20 +117,20 @@ export const DisabledToolTips = args => (
   <Stepper {...args} mode="tooltipIsDisabled">
     <Item key="step1" textValue="Duis Aute">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Duis Aute</Text>
-        <Text variant="stepperTabContent">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
+        <Text fontSize="lg" fontWeight="3">Duis Aute</Text>
+        <Text fontSize="md">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
       </Box>
     </Item>
     <Item key="step2" textValue="Lorem Ipsum">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Lorem Ipsum</Text>
-        <Text variant="stepperTabContent">Sed ut perspiciatis unde omnis</Text>
+        <Text fontSize="lg" fontWeight="3">Lorem Ipsum</Text>
+        <Text fontSize="md">Sed ut perspiciatis unde omnis</Text>
       </Box>
     </Item>
     <Item key="step3" textValue="Excepteur Sint">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Excepteur Sint</Text>
-        <Text variant="stepperTabContent">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
+        <Text fontSize="lg" fontWeight="3">Excepteur Sint</Text>
+        <Text fontSize="md">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
       </Box>
     </Item>
   </Stepper>
@@ -151,20 +151,20 @@ export const WithCustomTooltip = args => (
   >
     <Item key="step1" textValue="Duis Aute">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Duis Aute</Text>
-        <Text variant="stepperTabContent">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
+        <Text fontSize="lg" fontWeight="3">Duis Aute</Text>
+        <Text fontSize="md">Quis autem vel eum iure reprehenderit qui in ea voluptate</Text>
       </Box>
     </Item>
     <Item key="step2" textValue="Lorem Ipsum">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Lorem Ipsum</Text>
-        <Text variant="stepperTabContent">Sed ut perspiciatis unde omnis</Text>
+        <Text fontSize="lg" fontWeight="3">Lorem Ipsum</Text>
+        <Text fontSize="md">Sed ut perspiciatis unde omnis</Text>
       </Box>
     </Item>
     <Item key="step3" textValue="Excepteur Sint">
       <Box sx={sx.contentContainer}>
-        <Text variant="stepperTabContentHeader">Excepteur Sint</Text>
-        <Text variant="stepperTabContent">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
+        <Text fontSize="lg" fontWeight="3">Excepteur Sint</Text>
+        <Text fontSize="md">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam</Text>
       </Box>
     </Item>
   </Stepper>
@@ -181,8 +181,8 @@ export const ControlledStepper = () => {
       {item => (
         <Item key={item.name} textValue={item.title}>
           <Box sx={sx.contentContainer}>
-            <Text variant="stepperTabContentHeader">{item.title}</Text>
-            <Text variant="stepperTabContent">{item.children}</Text>
+            <Text fontSize="lg" fontWeight="3">{item.title}</Text>
+            <Text fontSize="md">{item.children}</Text>
           </Box>
         </Item>
       )}
@@ -241,8 +241,8 @@ export const Panel = () => {
                 textValue={item.title}
               >
                 <Box sx={sx.contentContainer}>
-                  <Text variant="stepperTabContentHeader">{item.title}</Text>
-                  <Text variant="stepperTabContent">{item.children}</Text>
+                  <Text fontSize="lg" fontWeight="3">{item.title}</Text>
+                  <Text fontSize="md">{item.children}</Text>
                 </Box>
               </Item>
             )}
@@ -269,7 +269,7 @@ export const VerticalStepper = () => {
       {item => (
         <Item key={item.name} textValue={item.title} isRequired={item?.isRequired}>
           <Box sx={sx.verticalContentContainer}>
-            <Text variant="stepperTabContent">{item.children}</Text>
+            <Text fontSize="md">{item.children}</Text>
           </Box>
         </Item>
       )}
