@@ -1,63 +1,66 @@
 import React from 'react';
-import theme from '../src/styles/theme';
-import { AstroProvider, Box, NextGenDarkTheme, NextGenTheme, Text } from '../src/index';
-import yourTheme from './AstroTheme';
 import { withConsole } from '@storybook/addon-console';
-import "@storybook/react";
-import { themes } from '../src/utils/devUtils/constants/themes';
-import { shouldReturnComingSoon } from '../src/utils/devUtils/shouldReturnComingSoon'
-import { initialize, mswDecorator, mswLoader } from 'msw-storybook-addon'
-import { handlers } from '../src/mocks/handlers';
+import { initialize, mswDecorator, mswLoader } from 'msw-storybook-addon';
 
-initialize({ onUnhandledRequest: 'warn' });
+import '@storybook/react';
+
+import { AstroProvider, Box, NextGenDarkTheme, NextGenTheme, Text } from '../src/index';
+import { handlers } from '../src/mocks/handlers';
+import theme from '../src/styles/theme';
+import { themes } from '../src/utils/devUtils/constants/themes';
+import { shouldReturnComingSoon } from '../src/utils/devUtils/shouldReturnComingSoon';
+
+import yourTheme from './AstroTheme';
+
+initialize();
 
 const withThemeProvider = (Story, context) => {
-  const selectedTheme = context.parameters.theme || context.globals.theme
+  const selectedTheme = context.parameters.theme || context.globals.theme;
 
   // we will be creating a hook in a follow up ticket to this.
-  let storyTheme = theme
-  let style = { padding: '50px' }
+  let storyTheme = theme;
+  let style = { padding: '50px' };
   if (selectedTheme === themes.NEXT_GEN) {
-    storyTheme = NextGenTheme
-  }
-  else if (selectedTheme === themes.NEXT_GEN_DARK) {
-    storyTheme = NextGenDarkTheme
+    storyTheme = NextGenTheme;
+  } else if (selectedTheme === themes.NEXT_GEN_DARK) {
+    storyTheme = NextGenDarkTheme;
     style = {
       padding: '50px',
       minHeight: 'calc(100vh - 32px)',
-    }
+    };
   }
 
   const showComingSoonMessage = shouldReturnComingSoon(
     context,
     selectedTheme,
-  )
+  );
 
   return (
     <AstroProvider theme={storyTheme} bg="backgroundBase">
-      <div style={style} >
+      <div style={style}>
         {
-          showComingSoonMessage ?
-            <Box
-              sx={{
-                height: '200px',
-                backgroundColor: 'gray-100',
-                border: '1px solid',
-                borderColor: 'border.base',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
-              <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
-            </Box>
-            :
-            <Story {...context} />
+          showComingSoonMessage
+            ? (
+              <Box
+                sx={{
+                  height: '200px',
+                  backgroundColor: 'gray-100',
+                  border: '1px solid',
+                  borderColor: 'border.base',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Text as="h2" fontFamily="standard" marginBottom="10px">No Component Found</Text>
+                <Text fontFamily="standard">A Themed version of this component has not yet been completed</Text>
+              </Box>
+            )
+            : <Story {...context} />
         }
       </div>
     </AstroProvider>
-  )
-}
+  );
+};
 
 const withConsoleAddon = (storyFn, context) => withConsole()(storyFn)(context);
 
@@ -72,7 +75,7 @@ export const parameters = {
     options: {},
     manual: true,
   },
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   docs: {
     theme: yourTheme,
   },
@@ -91,7 +94,7 @@ export const parameters = {
             'Astro Theme',
             'Custom Themes',
             'Styling Guideline',
-            'Astro Nano Theme'
+            'Astro Nano Theme',
           ],
           'Utils',
           'Hooks',
@@ -125,7 +128,7 @@ export const parameters = {
         [
           'Overview',
           '*',
-        ]
+        ],
       ],
     },
   },
@@ -146,4 +149,4 @@ export const globalTypes = {
       showName: true,
     },
   },
-}
+};
