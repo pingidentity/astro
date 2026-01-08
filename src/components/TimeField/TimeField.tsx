@@ -24,6 +24,8 @@ const TimeField = forwardRef<HTMLDivElement, TimeFieldProps>((props, ref) => {
   const timeFieldRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   const fieldRef = useRef<HTMLElement>(null);
+  console.log('🚀 ~ fieldRef:', fieldRef);
+  const test = 'hello';
   const labelRef = useRef<HTMLLabelElement>(null);
 
   const parsedTimes = {
