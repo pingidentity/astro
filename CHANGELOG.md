@@ -1,3 +1,18 @@
+## 2.160.0 (2026-01-09)
+
+### 🚀 Features
+
+- [UIP-8003] Stepper Onyx Specs
+
+### 🩹 Fixes
+
+- test git prerelease for changed projects
+
+### ❤️  Thank You
+
+- Eli Cooper
+- Ridhisha Dangol
+
 ## 2.159.0 (2026-01-08)
 
 ### 🚀 Features
