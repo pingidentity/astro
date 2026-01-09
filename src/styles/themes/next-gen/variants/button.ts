@@ -130,14 +130,14 @@ const tertiary = {
   '&.is-focused': {
     ...defaultFocus,
     outlineColor: 'gray-700',
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'backgroundSecondary',
   },
   '&.is-pressed': {
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'backgroundSecondary',
     color: 'font.base',
   },
   '&.is-hovered': {
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'backgroundSecondary',
     color: 'font.base',
     ...boxShadowNone,
   },

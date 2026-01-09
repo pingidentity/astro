@@ -48,6 +48,7 @@ const nextGenConvertedComponents = [
   'ProgressBar',
   'RadioField',
   'RadioGroupField',
+  'RangeCalendar',
   'RequirementsList',
   'RockerButtonGroup',
   'SearchField',

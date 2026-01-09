@@ -19,6 +19,7 @@ const buttonLoaderSize = '0.5em' as LoaderSize;
 const iFrameContentDivBackgroundColor = '#F7F8FD';
 const defaultIconColor = 'currentColor';
 const defaultIconSize = 'sm' as IconSize;
+const calendarIconSize = 25 as IconSize;
 
 export const astroThemeValues = {
   accordionItemDefaultLabelTag,
@@ -39,5 +40,6 @@ export const astroThemeValues = {
   defaultLoaderSize,
   defaultIconColor,
   defaultIconSize,
+  calendarIconSize,
   buttonLoaderSize,
 };

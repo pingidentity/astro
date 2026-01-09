@@ -6,7 +6,7 @@ const baseIconButton = {
   path: { fill: 'dark' },
   '&.is-hovered': {
     path: { fill: 'gray-400' },
-    backgroundColor: 'background.secondary',
+    backgroundColor: 'backgroundSecondary',
   },
   '&.is-pressed': {
     backgroundColor: 'gray-800',
@@ -40,10 +40,10 @@ const iconButtons = {
   },
   searchClearButton: {
     '&.is-hovered': {
-      backgroundColor: 'background.secondary',
+      backgroundColor: 'backgroundSecondary',
     },
     '&.is-pressed': {
-      backgroundColor: 'background.secondary',
+      backgroundColor: 'backgroundSecondary',
     },
   },
   hintButton,

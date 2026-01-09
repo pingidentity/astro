@@ -17,6 +17,7 @@ import { navBar } from './navbar';
 import panelHeader from './panelHeader';
 import popoverMenu from './popoverMenu';
 import prompt from './prompt';
+import rangeCalendar from './rangeCalendar';
 import response from './response';
 import searchNav from './searchNav';
 import stepper from './stepper';
@@ -427,6 +428,7 @@ export default {
   popoverMenu,
   progressBar,
   prompt,
+  rangeCalendar,
   response,
   rockerButton,
   searchNav,
