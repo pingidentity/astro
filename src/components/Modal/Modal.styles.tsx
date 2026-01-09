@@ -48,14 +48,14 @@ const content = {
 
 const headingContainer = {
   position: 'relative',
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   px: 'lg',
   py: 'md',
 };
 
 const header = {
   position: 'relative',
-  backgroundColor: 'background.base',
+  backgroundColor: 'backgroundBase',
   pb: 'md',
 };
 

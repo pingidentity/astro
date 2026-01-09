@@ -20,7 +20,7 @@ const hoverDark = chroma.mix('#23282e', 'white', 0.04, 'rgb').hex();
 
 const border = {
   base: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
-  dark: chroma.mix('#23282e', 'white', 0.25, 'rgb').hex(),
+  dark: '#46505C',
   input: nextGenColors['gray-500'],
   separator: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
   attachment: '#39414b',
@@ -37,11 +37,6 @@ const background = {
   secondary: '#1a1e22',
   card: '#1a1e22',
   hover: hoverDark,
-};
-
-const codeEditor = {
-  backgroundColor: background.secondary,
-  headerColor: nextGenColors['gray-900'],
 };
 
 const twoTone = {
@@ -110,6 +105,11 @@ const backgroundSecondary = nextGenColors['gray-900'];
 const backgroundCard = '#1a1e22';
 const backgroundSuggestion = '#ecf0f5';
 const backgroundHover = hoverDark;
+
+const codeEditor = {
+  backgroundColor: backgroundSecondary,
+  headerColor: nextGenColors['gray-900'],
+};
 
 export const colors = {
   border,

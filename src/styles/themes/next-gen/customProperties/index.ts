@@ -14,6 +14,7 @@ const iFrameContentDivBackgroundColor = backgroundBaseColor;
 const defaultIconColor = 'gray-800';
 const defaultIconSize = 'md' as IconSize;
 const buttonLoaderSize = 'sm' as LoaderSize;
+const calendarIconSize = 'sm' as IconSize;
 
 export const nextGenThemeValues = {
   activeColor,
@@ -28,6 +29,7 @@ export const nextGenThemeValues = {
   iFrameContentDivBackgroundColor,
   rockerButtonGap: '0px',
   defaultIconSize,
+  calendarIconSize,
   buttonLoaderSize,
   ...customSizes,
 };

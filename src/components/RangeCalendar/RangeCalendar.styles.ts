@@ -65,6 +65,8 @@ const calendarButton = {
 };
 
 const calendarCell = {
+  alignItems: 'center',
+  justifyContent: 'center',
   cursor: 'default',
   textAlign: 'center',
   position: 'relative',
@@ -83,6 +85,11 @@ const columnHeader = {
   fontWeight: 1,
   width: '40px',
   height: '40px',
+};
+
+const calendarRow = {
+  width: '100%',
+  flexDirection: 'row !important',
 };
 
 const calendarHeaderContainer = {
@@ -106,6 +113,7 @@ const calendarContainer = {
   textAlign: 'center',
 };
 
+
 export default {
   calendarBody,
   calendarButton,
@@ -114,4 +122,5 @@ export default {
   calendarHeader,
   calendarHeaderContainer,
   columnHeader,
+  calendarRow,
 };

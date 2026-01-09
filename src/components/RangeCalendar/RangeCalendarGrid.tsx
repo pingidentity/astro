@@ -44,7 +44,7 @@ const RangeCalendarGrid = (props: RangeCalendarGridProps) => {
       </TableHead>
       <TableBody variant="rangeCalendar.calendarBody">
         {Array.from(Array(weeksInMonth).keys()).map(weekIndex => (
-          <TableRow key={weekIndex}>
+          <TableRow key={weekIndex} variant="rangeCalendar.calendarRow">
             {getDatesInWeek(weekIndex, startDate).map(date => (
               date?.day
               && (

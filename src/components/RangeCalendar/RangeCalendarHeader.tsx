@@ -4,6 +4,7 @@ import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
 import { useDateFormatter } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 
+import { useGetTheme } from '../../hooks';
 import { Box, Icon, IconButton, Text } from '../../index';
 import { RangeCalendarHeaderProps } from '../../types';
 
@@ -31,20 +32,23 @@ const RangeCalendarHeader: React.FC<RangeCalendarHeaderProps> = props => {
     onBlur: () => onFocusChange?.(false),
   };
 
+  const { calendarIconSize } = useGetTheme();
+
   return (
     <Box variant="rangeCalendar.calendarHeaderContainer" isRow>
       <VisuallyHidden aria-live="assertive">
         <Text>{calendarProps['aria-label']}</Text>
       </VisuallyHidden>
-      <Box isRow variant="rangeCalendar.calendarHeader">
+      <Box isRow variant="rangeCalendar.calendarHeader" color="magenta">
         <Box
           style={{ position: 'absolute', left: '10px' }}
         >
           <IconButton
             {...prevButtonProps}
             aria-label="Previous month navigation"
+            color="pink"
           >
-            <Icon icon={ChevronLeftIcon} size={25} title={{ name: 'Chevron Left Icon' }} />
+            <Icon icon={ChevronLeftIcon} size={calendarIconSize} title={{ name: 'Chevron Left Icon' }} />
           </IconButton>
         </Box>
         <Text
@@ -79,7 +83,7 @@ const RangeCalendarHeader: React.FC<RangeCalendarHeaderProps> = props => {
             {...nextButtonFocusProps}
             aria-label="Next month navigation"
           >
-            <Icon icon={ChevronRightIcon} size={25} title={{ name: 'Chevron Right Icon' }} />
+            <Icon icon={ChevronRightIcon} size={calendarIconSize} title={{ name: 'Chevron Right Icon' }} />
           </IconButton>
         </Box>
       </Box>

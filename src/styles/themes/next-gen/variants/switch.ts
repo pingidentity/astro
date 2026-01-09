@@ -2,7 +2,7 @@ export const switchable = {
   container: {
     minWidth: '32px',
     color: 'neutral.80',
-    bg: 'background.base',
+    bg: 'backgroundBase',
     border: '1px solid',
     borderColor: 'neutral.80',
     borderRadius: 9999,
