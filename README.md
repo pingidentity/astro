@@ -14,7 +14,7 @@ Yarn:
 
 ## Requirements
 
-- Node: 18+
+- Node: 20+
 - React: 16.8+
 
 ## Usage
@@ -33,7 +33,7 @@ import { AstroProvider } from '@pingux/astro';
 
 Astro uses [Storybook](https://storybook.js.org/) for component documentation. Once Astro has been cloned, run the following commands to start a local Storybook server:
 
-`yarn start`
+`npx nx start`
 
 The Storybook server defaults to `https://localhost:6006`. This port can be customized by running the command start -p 9009. For example, this will start Storybook on port 9009. More information on customizing Storybook CLI options can be found at https://storybook.js.org/docs/react/api/cli-options. 
 
@@ -41,19 +41,23 @@ Component prop documentation is available under the "documentation" tab per each
 
 For example, to view the disabled button styling, navigate to the Button story’s props table, locate the "isDisabled" prop, and toggle to "true". This change allows you to preview the disabled button’s styling and functionality.
 
-## Yarn
-We use a modern version of [Yarn](https://yarnpkg.com/getting-started) for package management with the [Plug'n'Play](https://yarnpkg.com/features/pnp) feature enabled. This allows for a [Zero Install](https://yarnpkg.com/features/zero-installs) approach to be used.
+To create a production bundle:
 
-## Enabling TypeScript in VSCode
+```sh
+npx nx build astro
+```
 
-To run TypeScript properly, there are a couple of steps to run first:
+To run linting:
 
-1. Run `yarn dlx @yarnpkg/sdks vscode` and reload the window to configure vscode for TypeScript. 
-2. Open a TypeScript file in VSCode and open the command palette with `cmd + shift + p`.
-    
-    a. Search for "TypeScript: Select TypeScript Version..."
-    
-    b. Choose "Use Workspace Version"
+```sh
+npx nx lint astro
+```
+
+To run unit tests:
+
+```sh
+npx nx test astro
+```
 
 ## Browser Compatibility
 
