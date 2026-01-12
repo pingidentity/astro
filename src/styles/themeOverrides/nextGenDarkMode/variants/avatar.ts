@@ -1,5 +1,4 @@
 export const avatar = {
-  backgroundColor: 'cyan',
   color: 'black',
   cursor: 'pointer',
   '&.is-orange': {

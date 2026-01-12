@@ -13,7 +13,7 @@ import {
   PanelHeaderSwitchField,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
-import { pingImg } from '../../utils/devUtils/constants/images';
+import { pingImg, userImagePanelHeader } from '../../utils/devUtils/constants/images';
 import { SharedItemArgTypes } from '../ListViewItem/listViewItemAttributes';
 
 import PanelHeaderReadMe from './PanelHeader.mdx';
@@ -103,13 +103,14 @@ export const WithImage = args => (
     {...args}
     data={{
       image: {
-        src: pingImg,
+        src: userImagePanelHeader,
         alt: 'Ping Identity Logo',
         'aria-label': 'Ping Identity Logo',
-        avatarDefaultText: 'FV',
       },
+      avatarDefaultText: 'FV',
       text: 'Fons Vernall',
     }}
+    avatarProps={{ size: 'lg' }}
   />
 );
 
@@ -117,6 +118,28 @@ WithImage.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.panelHeader.withImage,
+  },
+};
+
+export const WithAvatar = args => (
+  <PanelHeader
+    {...args}
+    data={{
+      image: {
+        src: pingImg,
+        alt: 'Ping Identity Logo',
+        'aria-label': 'Ping Identity Logo',
+      },
+      text: 'Fons Vernall',
+    }}
+    avatarProps={{ size: 'lg', isLogo: true }}
+  />
+);
+
+WithAvatar.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.panelHeader.WithAvatar,
   },
 };
 
@@ -143,7 +166,9 @@ export const WithBreadcrumbs = () => {
     <PanelHeader
       data={{ icon: AccountIcon }}
       slots={{ rightOfData: breadcrumbs }}
-    />
+    >
+      <PanelHeaderCloseButton />
+    </PanelHeader>
   );
 };
 
@@ -174,7 +199,9 @@ export const BreadcrumbsWithExtraLongText = () => {
     <PanelHeader
       data={{ icon: AccountIcon }}
       slots={{ rightOfData: breadcrumbs }}
-    />
+    >
+      <PanelHeaderCloseButton />
+    </PanelHeader>
   );
 };
 
