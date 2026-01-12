@@ -265,14 +265,14 @@ const buttonBar = {
 const rockerButton = {
   innerContainer: {
     boxShadow: 'none',
-    backgroundColor: 'common.backgroundBase',
+    backgroundColor: 'backgroundBase',
     borderRadius: '50px',
     padding: 0,
     border: 'none',
   },
   thumbSwitch: {
     textTransform: 'none',
-    backgroundColor: 'common.backgroundBase',
+    backgroundColor: 'backgroundBase',
     padding: 'md',
     height: '50px',
     color: 'active',
