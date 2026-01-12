@@ -212,6 +212,7 @@ export const text = {
   pageHeaderBody: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   panelHeaderSubtext: { ...listViewItemSubtext, ...textEllipsis },
   panelHeaderText: { ...listViewItemText, ...textEllipsis },
+  requirementsListText: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   searchNavTabLabel,
   sectionTitle,
   subtitle,

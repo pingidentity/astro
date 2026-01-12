@@ -205,6 +205,12 @@ export const text = {
     color: 'font.light',
     marginTop: '0px !important',
   },
+  requirementsListText: {
+    color: 'font.base',
+    fontSize: 'md',
+    fontWeight: 0,
+    lineHeight: 'body',
+  },
   stepperTabContent,
   stepperTabContentHeader,
 };

@@ -13,7 +13,8 @@ const RequirementsList = forwardRef<HTMLElement, RequirementsListProps>((props, 
     ...others
   } = props;
 
-  const { icons } = useGetTheme();
+  const { icons, themeState } = useGetTheme();
+  const { isOnyx } = themeState;
 
   const {
     SuccessCircle,
@@ -31,7 +32,7 @@ const RequirementsList = forwardRef<HTMLElement, RequirementsListProps>((props, 
       case 'error':
         return <Icon title={{ id: key, name: 'Error Status Icon' }} icon={ErrorCircle} color="critical.bright" mr="sm" size="sm" data-testid={`status-icon__${status}`} />;
       default:
-        return <Icon title={{ id: key, name: 'Empty Status Icon' }} icon={DefaultCircle} color="neutral.40" mr="sm" size="sm" data-testid={`status-icon__${status}`} />;
+        return <Icon title={{ id: key, name: 'Empty Status Icon' }} icon={DefaultCircle} color={isOnyx ? 'common.dark' : 'neutral.40'} mr="sm" size="sm" data-testid={`status-icon__${status}`} />;
     }
   };
 
@@ -40,7 +41,7 @@ const RequirementsList = forwardRef<HTMLElement, RequirementsListProps>((props, 
     return (
       <Box role="listitem" isRow key={req.name} alignItems="center" width="100%" as="li">
         {statusIconRender(req.status, kebabCase(req.name))}
-        <Text variant="bodyWeak">{req.name}</Text>
+        <Text variant="requirementsListText">{req.name}</Text>
       </Box>
     );
   };
