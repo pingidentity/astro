@@ -33,12 +33,13 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
       <Box
         variant="avatar"
         className={classNames}
+        {...others}
       >
         <ThemeUIAvatar
           ref={ref}
           alt={alt}
           src={src}
-          {...others}
+          size={size}
         />
       </Box>
     );

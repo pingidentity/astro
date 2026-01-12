@@ -192,5 +192,6 @@ export const text = {
     fontSize: 'md',
     lineHeight: 'body',
     color: 'font.light',
+    marginTop: '0px !important',
   },
 };
