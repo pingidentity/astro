@@ -1,5 +1,8 @@
+import spacing from '../spacing';
+
 const line = {
-  mr: 'xs',
+  mx: `${spacing.xs} !important`,
+  maxWidth: '82px',
   borderBottomWidth: '2px',
   borderBottomColor: 'active',
   '&.is-inactive': {
@@ -25,21 +28,24 @@ const tab = {
 
 const step = {
   active: {
-    backgroundColor: 'active',
-    borderColor: 'active',
-    color: 'backgroundBase',
-    ...stepBase,
-    '&:before': {
-      content: '""',
-      height: '24px',
-      width: '24px',
-      top: 0,
-      left: 0,
-      position: 'absolute',
-      borderRadius: '100%',
-      borderStyle: 'solid',
-      borderColor: 'backgroundBase',
-      borderWidth: '2px',
+    '&.is-horizontal': {
+      backgroundColor: 'active',
+      borderColor: 'active',
+      color: 'white',
+      ...stepBase,
+      '&:before': {
+        content: '""',
+        height: '24px',
+        width: '24px',
+        top: 0,
+        left: 0,
+        position: 'absolute',
+        borderRadius: '100%',
+        borderStyle: 'solid',
+        borderColor: 'backgroundBase',
+        borderWidth: '2px',
+        zIndex: 0,
+      },
     },
   },
   completed: {
@@ -47,10 +53,12 @@ const step = {
     borderColor: 'active',
   },
   inactive: {
-    backgroundColor: 'backgroundBase',
-    borderColor: 'blue-200',
-    color: 'active',
-    ...stepBase,
+    '&.is-horizontal': {
+      backgroundColor: 'backgroundBase',
+      borderColor: 'blue-200',
+      color: 'active',
+      ...stepBase,
+    },
   },
 };
 

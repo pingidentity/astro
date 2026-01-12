@@ -8,7 +8,7 @@ const wrapper = {
 const tabs = {
   outline: 'none',
   borderBottom: 'none',
-  mb: 0,
+  mb: 'lg',
   justifyContent: 'center',
   '&.is-horizontal': {
     width: '100%',
