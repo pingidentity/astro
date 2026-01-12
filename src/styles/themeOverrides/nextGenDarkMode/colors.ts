@@ -100,6 +100,10 @@ const iconWrapper = {
   },
 };
 
+const common = {
+  dark: '#C0C9D5',
+};
+
 const backgroundBase = nextGenColors['gray-900'];
 const backgroundSecondary = nextGenColors['gray-900'];
 const backgroundCard = '#1a1e22';
@@ -154,4 +158,5 @@ export const colors = {
   font,
   badge,
   codeEditor,
+  common,
 };

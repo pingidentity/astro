@@ -116,6 +116,7 @@ export const nextGenColors = {
     },
     'border': '#69788B',
     'hairline': '#e7eef4',
+    'dark': '#324054',
   },
   'font': {
     'base': '#23282e',
