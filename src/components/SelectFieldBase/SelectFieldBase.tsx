@@ -52,6 +52,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
   const { ariaProps } = getAriaAttributeProps(others);
 
   const { icons } = useGetTheme();
+
   const {
     MenuDown,
     MenuUp,

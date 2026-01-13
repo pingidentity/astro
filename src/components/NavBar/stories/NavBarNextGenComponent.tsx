@@ -1,17 +1,4 @@
 import React from 'react';
-import AccountCheckIcon from '@pingux/mdi-react/AccountCheckOutlineIcon';
-import AccountMultipleOutlineIcon from '@pingux/mdi-react/AccountMultipleOutlineIcon';
-import AppsIcon from '@pingux/mdi-react/AppsIcon';
-import CheckCircleOutlineIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
-import CodeTagsIcon from '@pingux/mdi-react/CodeTagsIcon';
-import CogOutlineIcon from '@pingux/mdi-react/CogOutlineIcon';
-import FileTreeIcon from '@pingux/mdi-react/FileTreeIcon';
-import LayersOutlineIcon from '@pingux/mdi-react/LayersOutlineIcon';
-import PaletteOutlineIcon from '@pingux/mdi-react/PaletteOutlineIcon';
-import ShieldCheckOutlineIcon from '@pingux/mdi-react/ShieldCheckOutlineIcon';
-import ShowChartIcon from '@pingux/mdi-react/ShowChartIcon';
-import DashboardIcon from '@pingux/mdi-react/ViewDashboardOutlineIcon';
-import WidgetsOutlineIcon from '@pingux/mdi-react/WidgetsOutlineIcon';
 
 import {
   Box,
@@ -24,13 +11,18 @@ import {
 import { useGetTheme } from '../../../hooks';
 
 export const NavBarNextGenComponent = () => {
+  const { icons } = useGetTheme();
   const firstSectionData = [
     {
       'data-id': 'dashboard-data-id',
       heading: 'Monitoring',
-      icon: ShowChartIcon,
+      icon: icons.monitoringIcon,
       key: 'Monitoring',
       children: [
+        {
+          hasSeparator: false,
+          subTitle: 'Dashboards',
+        },
         <NavBarItemButton
           key="Dashboards"
           id="Dashboards"
@@ -48,7 +40,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Directory-data-id',
       heading: 'Directory',
-      icon: AccountMultipleOutlineIcon,
+      icon: icons.mdiAccountMultiple,
       key: 'Directory',
       children: [
         <NavBarItemButton
@@ -68,7 +60,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Applications-data-id',
       heading: 'Applications',
-      icon: AppsIcon,
+      icon: icons.applicationsIcon,
       key: 'Applications',
       children: [
         <NavBarItemButton
@@ -91,7 +83,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Authentication-data-id',
       heading: 'Authentication',
-      icon: CheckCircleOutlineIcon,
+      icon: icons.authenticationIcon,
       key: 'Authentication',
       children: [
         <NavBarItemButton
@@ -111,7 +103,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Threat Protection-data-id',
       heading: 'Threat Protection',
-      icon: ShieldCheckOutlineIcon,
+      icon: icons.shieldStar,
       key: 'Threat Protection',
       children: [
         <NavBarItemButton
@@ -131,7 +123,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Threat Protection-data-id',
       heading: 'Identity Verification',
-      icon: LayersOutlineIcon,
+      icon: icons.p1verify,
       key: 'Identity Verification',
       children: [
         <NavBarItemButton
@@ -144,8 +136,8 @@ export const NavBarNextGenComponent = () => {
     },
     {
       'data-id': 'Digital Credentials-data-id',
-      heading: 'Digital Credentials',
-      icon: CodeTagsIcon,
+      heading: 'Digital Credentials Title That Is So Long It Wraps',
+      icon: icons.mdiShoCard,
       key: 'Digital Credentials',
       children: [
         <NavBarItemButton
@@ -159,7 +151,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Authorization-data-id',
       heading: 'Authorization',
-      icon: AccountCheckIcon,
+      icon: icons.PingAuthorize,
       key: 'Authorization',
       children: [
         <NavBarItemButton
@@ -182,7 +174,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Integrations-data-id',
       heading: 'Integrations',
-      icon: WidgetsOutlineIcon,
+      icon: icons.integrationsIcon,
       key: 'Integrations',
       children: [
         <NavBarItemButton
@@ -202,7 +194,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'User Experience-data-id',
       heading: 'User Experience',
-      icon: PaletteOutlineIcon,
+      icon: icons.userExperienceIcon,
       key: 'User Experience',
       children: [
         <NavBarItemButton
@@ -222,7 +214,7 @@ export const NavBarNextGenComponent = () => {
     {
       'data-id': 'Settings-data-id',
       heading: 'Settings',
-      icon: CogOutlineIcon,
+      icon: icons.mdiEarth,
       key: 'Settings',
       children: [
         <NavBarItemButton
@@ -241,8 +233,6 @@ export const NavBarNextGenComponent = () => {
     },
   ];
 
-  const { icons } = useGetTheme();
-
   return (
     <NavBar>
       <Box padding="md" key="top-logo-parent">
@@ -255,7 +245,14 @@ export const NavBarNextGenComponent = () => {
       >
         <NavBarItem
           data-id="nav-bar-item"
-          icon={DashboardIcon}
+          icon={icons.mdiPlayCircleIcon}
+          id="GettingStarted"
+          key="GettingStarted"
+          text="Getting Started"
+        />
+        <NavBarItem
+          data-id="nav-bar-item"
+          icon={icons.overviewIcon}
           id="Overview"
           key="Overview"
           text="Overview"
@@ -264,7 +261,7 @@ export const NavBarNextGenComponent = () => {
         <Separator variant="separator.navBarSeparator" />
         <NavBarItem
           data-id="nav-bar-item"
-          icon={FileTreeIcon}
+          icon={icons.daVinci}
           id="DaVinci"
           key="DaVinci"
           text="DaVinci"

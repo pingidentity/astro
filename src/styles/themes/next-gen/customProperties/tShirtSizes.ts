@@ -12,6 +12,7 @@ export default {
   'icon-700': '72px',
   'icon-800': '84px',
   'icon-900': '96px',
+  xsm: '16px',
 };
 
 export const iconWrapperSizes = {

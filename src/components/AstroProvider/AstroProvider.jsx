@@ -60,10 +60,15 @@ const AstroProvider = forwardRef((props, ref) => {
 
   // Unfortunately because this is adding styles, we cannot write a proper test for this.
   /* istanbul ignore next */
-  const theme = useMemo(
-    () => merge(defaultTheme, ...themeOverrides),
-    [defaultTheme, themeOverrides],
-  );
+
+  const theme = useMemo(() => {
+  // Use .reduce() to iteratively merge each override object
+    return themeOverrides.reduce((accumulatedTheme, currentOverride) => {
+    // This line runs for every item in the array
+      return merge(accumulatedTheme, currentOverride);
+    }, defaultTheme); // The defaultTheme is the starting point
+  }, [defaultTheme, themeOverrides]);
+
   const isEndUserTheme = theme && theme.name === 'End User';
 
   return (

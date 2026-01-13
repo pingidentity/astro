@@ -3,6 +3,7 @@ import { merge } from 'theme-ui';
 import { themes } from '../../../utils/devUtils/constants/themes';
 import NextGenTheme from '../../themes/next-gen';
 
+import icons from './customProperties/icons';
 import badges from './variants/badges';
 import buttons from './variants/buttons';
 import cards from './variants/cards';
@@ -13,6 +14,7 @@ import variants from './variants/variants';
 import { colors } from './colors';
 
 const override = {
+  icons,
   forms,
   colors,
   variants,
