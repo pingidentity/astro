@@ -3,6 +3,7 @@ export const tShirtSizes = {
   xs: 15,
   sm: 20,
   md: 25,
+  xsm: 20,
 };
 
 export const iconWrapperSizes = {

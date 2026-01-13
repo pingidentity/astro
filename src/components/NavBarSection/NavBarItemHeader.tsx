@@ -72,7 +72,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         <Icon
           icon={isExpanded ? MenuUp : MenuDown}
-          size={isOnyx ? 'icon-100' : navStyles.navBarItemHeaderIconSize}
+          size="xsm"
           sx={{
             color: getIconColor(),
             fill: getIconColor(),

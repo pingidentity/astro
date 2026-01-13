@@ -5,6 +5,7 @@ import theme from '../../theme';
 
 import codeView from './codeView/codeView';
 import colors from './colors/colors';
+import icons from './customProperties/icons';
 import { badges } from './variants/badges';
 import buttons from './variants/button';
 import cards from './variants/cards';
@@ -42,6 +43,7 @@ const nextGenTheme = {
     md: '1.75',
   },
   text: newText,
+  icons,
   fonts: {
     standard: '"Open Sans", sans-serif',
     body: '"Open Sans", sans-serif',

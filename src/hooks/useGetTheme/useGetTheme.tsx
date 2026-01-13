@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Theme, useTheme } from '@emotion/react';
 
 import { nextGenDarkThemeValues } from '../../styles/themeOverrides/nextGenDarkMode/customProperties';
@@ -50,18 +50,23 @@ const customThemeState = {
 const useGetTheme = () => {
   const theme = useTheme() as CustomTheme;
 
-  if (theme.name === themes.NEXT_GEN) {
-    return { ...onyxState };
-  }
-  if (theme.name === themes.ASTRO) {
-    return { ...astroState };
-  }
-  if (theme.name === themes.NEXT_GEN_DARK) {
-    return { ...onyxDarkState };
-  }
-  return {
-    ...customThemeState,
-  };
+  const memoizedTheme = useMemo(() => {
+    if (theme.name === themes.NEXT_GEN) {
+      return { ...onyxState, ...theme };
+    }
+    if (theme.name === themes.ASTRO) {
+      return { ...astroState, ...theme };
+    }
+    if (theme.name === themes.NEXT_GEN_DARK) {
+      return { ...onyxDarkState, ...theme };
+    }
+    return {
+      ...customThemeState,
+      ...theme,
+    };
+  }, [theme]);
+
+  return memoizedTheme;
 };
 
 export default useGetTheme;

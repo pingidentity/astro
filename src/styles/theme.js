@@ -1,5 +1,6 @@
 import { themes } from '../utils/devUtils/constants/themes';
 
+import icons from './themes/astro/customProperties/icons';
 import breakpoints from './breakpoints';
 import colors, { accent, focus, line, shadow } from './colors';
 import forms from './forms';
@@ -24,6 +25,7 @@ export default {
   },
   fontSizes,
   fontWeights,
+  icons,
   lineHeights: {
     md: '1.5',
   },
