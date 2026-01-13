@@ -176,6 +176,15 @@ const listViewItemExpandedText = {
   color: 'text.primary',
 };
 
+const stepperTabContent = {
+  fontSize: 'md',
+};
+
+const stepperTabContentHeader = {
+  fontSize: 'lg',
+  fontWeight: 3,
+};
+
 export const text = {
   base,
   bodyStrong,
@@ -203,6 +212,7 @@ export const text = {
   pageHeaderBody: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   panelHeaderSubtext: { ...listViewItemSubtext, ...textEllipsis },
   panelHeaderText: { ...listViewItemText, ...textEllipsis },
+  requirementsListText: { ...wordWrap, fontSize: 'sm', color: 'text.secondary', fontFamily: 'standard' },
   searchNavTabLabel,
   sectionTitle,
   subtitle,
@@ -217,4 +227,6 @@ export const text = {
     ...base,
   },
   stepperLabel,
+  stepperTabContent,
+  stepperTabContentHeader,
 };

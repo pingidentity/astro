@@ -66,7 +66,7 @@ export const critical = {
 };
 
 export const success = {
-  bright: nextGenColors['green-600'],
+  bright: nextGenColors['green-500'],
   dark: nextGenColors['green-800'],
   light: nextGenColors['green-100'],
 };

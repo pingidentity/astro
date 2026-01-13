@@ -250,6 +250,7 @@ export const FIGMA_LINKS = {
       'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39662&mode=dev',
     withImage:
       'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39682&mode=dev',
+    withAvatar: 'https://www.figma.com/design/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=4470-24174&m=dev',
     withExtraLongText:
       'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39713&mode=dev',
   },

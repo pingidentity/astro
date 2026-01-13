@@ -4,7 +4,7 @@ import { Avatar } from '../../../index';
 
 const AvatarNextGen = () => {
   return (
-    <Avatar />
+    <Avatar color="cyan" />
   );
 };
 

@@ -28,7 +28,7 @@ export type PanelSize = 'small' | 'medium' | 'large' | 'full' | 'custom';
 
 export type ModalSizeProps = 'extra-small' | 'small' | 'medium' | 'large' | 'full';
 
-type IconTShirtSize = 'xxs' | 'xs' | 'sm' | 'md';
+type IconTShirtSize = 'xxs' | 'xs' | 'xsm' | 'sm' | 'md';
 type LoaderTShirtSize = 'sm' | 'md' | 'lg';
 
 type IconSizeRange = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;

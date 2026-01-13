@@ -1,6 +1,7 @@
 export default {
   xxs: '9px',
   xs: '15px',
+  xsm: '20px',
   sm: '20px',
   md: '25px',
 };

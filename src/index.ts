@@ -228,6 +228,7 @@ export * from './components/TreeView';
 export { PaginationContext } from './context/PaginationContext';
 export { default as NextGenDarkTheme } from './styles/themeOverrides/nextGenDarkMode';
 export { default as OnyxDarkTheme } from './styles/themeOverrides/nextGenDarkMode';
+export { default as OnyxSideNavOverride } from './styles/themeOverrides/onyxSideNav';
 export { default as NextGenTheme } from './styles/themes/next-gen';
 export { default as OnyxTheme } from './styles/themes/next-gen';
 export * from './types';

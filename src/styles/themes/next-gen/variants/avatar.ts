@@ -1,8 +1,6 @@
 import sizes from '../sizes';
 
 export const avatar = {
-  backgroundColor: 'lightcyan',
-  color: 'darkcyan',
   cursor: 'pointer',
   '&.is-orange': {
     backgroundColor: 'lightorange',

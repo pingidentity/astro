@@ -39,6 +39,7 @@ export const navBar = {
     borderRadius: '4px',
     fontWeight: 0,
     fontSize: 'sm',
+    lineHeight: '160%',
     '&.is-focused': {
       ...navBarFocus,
     },
@@ -62,6 +63,7 @@ export const navBar = {
     color: 'gray-700',
     fontWeight: 0,
     fontSize: 'sm',
+    lineHeight: '160%',
     ml: 'sm',
     '.is-selected &': {
       color: 'darkblue',
