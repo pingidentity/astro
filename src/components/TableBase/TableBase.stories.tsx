@@ -369,3 +369,22 @@ DynamicWithSorting.parameters = {
     },
   },
 };
+
+export const WithLastColumnSticky: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <Card variant="cards.tableWrapper" className="last-column-sticky">
+      <TableBase caption="Lorem ipsum" aria-label="table" isLastColumnSticky>
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={objects}>
+          {item => (
+            <Row key={item.id}>
+              {columnKey => <Cell>{item[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
+};

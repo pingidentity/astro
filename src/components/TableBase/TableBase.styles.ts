@@ -5,6 +5,7 @@ const defaultFocus = {
   outlineStyle: 'solid',
   outlineColor: 'focus',
   outlineOffset: '-1px',
+  zIndex: 2,
 };
 
 const container = {
@@ -13,6 +14,46 @@ const container = {
   borderSpacing: '0',
   borderCollapse: 'collapse',
   position: 'relative',
+  '&.is-last-column-sticky': {
+    'thead tr th:last-of-type': {
+      position: 'sticky',
+      right: 0,
+      backgroundColor: 'white',
+      zIndex: 2,
+      '&.is-focused': {
+        borderStyle: 'solid',
+        borderColor: 'transparent',
+        borderWidth: '2px',
+      },
+    },
+    'tbody tr': {
+      '&.is-focused td:last-of-type': {
+        borderStyle: 'solid',
+        borderColor: 'transparent',
+        borderWidth: '4px 2px',
+      },
+      '&:nth-of-type(odd) td:last-of-type': {
+        position: 'sticky',
+        right: 0,
+        backgroundColor: 'inherit',
+        '&.is-focused': {
+          borderStyle: 'solid',
+          borderColor: 'transparent',
+          borderWidth: '2px',
+        },
+      },
+      '&:nth-of-type(even) td:last-of-type': {
+        position: 'sticky',
+        right: 0,
+        backgroundColor: 'white',
+        '&.is-focused': {
+          borderStyle: 'solid',
+          borderColor: 'transparent',
+          borderWidth: '2px',
+        },
+      },
+    },
+  },
 };
 
 const caption = {
@@ -30,7 +71,7 @@ const thead = {
   '&.is-sticky': {
     position: 'sticky',
     top: 0,
-    zIndex: 1,
+    zIndex: 2,
     boxShadow: '0 1px 0 #68747f',
   },
 };
@@ -57,8 +98,8 @@ const tbody = {
 };
 
 const row = {
-  '&:nth-of-type(odd) ': {
-    bg: 'neutral.95',
+  '&:nth-of-type(odd)': {
+    backgroundColor: 'neutral.95',
   },
   '&:focus-visible': {
     outline: 'none',
@@ -76,6 +117,9 @@ const row = {
     bg: 'neutral.90',
     opacity: 0.5,
     cursor: 'not-allowed',
+    '& > td:last-of-type': {
+      backgroundColor: 'neutral.90',
+    },
   },
 };
 

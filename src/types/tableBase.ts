@@ -20,6 +20,7 @@ export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<Ba
   'data-testid'?: string;
   caption?: ReactNode | string;
   isStickyHeader?: boolean;
+  isLastColumnSticky?: boolean;
 }
 
 export interface TableRowGroupProps extends BaseProp{

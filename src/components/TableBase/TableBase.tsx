@@ -30,6 +30,30 @@ import type {
   TableSelectAllCellProps,
 } from '../../types/tableBase';
 
+const useHandleFocusRef = ref => {
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const handleFocus = () => {
+      const container = el.closest('.last-column-sticky');
+      if (!container) return;
+
+      const cellRect = el.getBoundingClientRect();
+      const contRect = container.getBoundingClientRect();
+
+      container.scrollLeft = cellRect.left + contRect.width;
+    };
+
+    el.addEventListener('focus', handleFocus);
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      el.removeEventListener('focus', handleFocus);
+    };
+  }, []);
+};
+
 const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, ref) => {
   const {
     caption,
@@ -38,6 +62,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     hasSelectionCheckboxes,
     isStickyHeader = false,
     className,
+    isLastColumnSticky,
     ...others
   } = props;
 
@@ -100,6 +125,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
 
   const { classNames } = useStatusClasses(className, {
     'has-caption': !!caption,
+    'is-last-column-sticky': isLastColumnSticky,
   });
 
   return (
@@ -238,6 +264,7 @@ const TableRowGroup = forwardRef<
       ref={ref}
       className={classNames}
       variant={`tableBase.${type}`}
+      tabIndex="0"
       {...rowGroupProps}
       {...others}
     >
@@ -298,6 +325,8 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
   const { classNames } = useStatusClasses(className, {
     isFocused: isFocusVisible,
   });
+
+  useHandleFocusRef(ref);
 
   return (
     <Box
@@ -369,6 +398,8 @@ function TableCell<T>(props: TableCellProps<T>) {
   const { classNames } = useStatusClasses(className, {
     isFocused: isFocusVisible,
   });
+
+  useHandleFocusRef(ref);
 
   return (
     <Box
