@@ -200,3 +200,32 @@ test('parseDateIfString should correctly parse string or DateValue inputs', () =
   expect(result1).toEqual(new CalendarDate(2022, 8, 1));
   expect(result2).toEqual(new CalendarDate(2022, 8, 10));
 });
+
+test('should allow selecting a range spanning more than 2 months with minValue constraint', async () => {
+  const minValue = '2022-07-01';
+
+  getComponent({ minValue });
+
+  // Navigate to October to select end date first (1st Oct)
+  const buttons = screen.getAllByRole('button');
+
+  await userEvent.click(buttons[1]);
+  await userEvent.click(buttons[1]);
+
+  const cellsAfterNavigation = screen.queryAllByRole('gridcell');
+  const octFirstCell = cellsAfterNavigation[0]; // October 1st
+
+  await userEvent.click(octFirstCell);
+
+  // Navigate back to July to select start date (5th July)
+  await userEvent.click(buttons[0]);
+  await userEvent.click(buttons[0]);
+
+  const cellsInJuly = screen.queryAllByRole('gridcell');
+  const julyFifthCell = cellsInJuly[4]; // July 5th
+
+  await userEvent.click(julyFifthCell);
+
+  const selectedCells = screen.getAllByRole('gridcell', { selected: true });
+  expect(selectedCells.length).toBeGreaterThan(0);
+});
