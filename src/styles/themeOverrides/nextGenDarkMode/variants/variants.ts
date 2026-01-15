@@ -226,6 +226,18 @@ export default {
     },
   },
   tableBase: {
+    container: {
+      '&.is-last-column-sticky': {
+        'thead tr th:last-of-type': {
+          backgroundColor: 'backgroundBase',
+        },
+        'tbody tr': {
+          '&:nth-of-type(even) td:last-of-type': {
+            backgroundColor: 'backgroundBase',
+          },
+        },
+      },
+    },
     caption: {
       color: 'text.secondary',
     },

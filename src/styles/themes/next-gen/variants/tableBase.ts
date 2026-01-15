@@ -22,6 +22,10 @@ const container = {
     borderBottom: 'unset',
     borderBottomLeftRadius: borderRadius,
     borderBottomRightRadius: borderRadius,
+    '&.is-focused': {
+      borderBottomLeftRadius: '12px',
+      borderBottomRightRadius: '12px',
+    },
     '& > td:first-of-type': {
       borderBottomLeftRadius: borderRadius,
     },
@@ -58,11 +62,17 @@ const row = {
   },
   '&.is-hovered': {
     bg: 'background.hover',
+    '& > td:last-of-type': {
+      bg: 'background.hover',
+    },
   },
   '&:nth-of-type(odd)': {
     bg: 'backgroundBase',
     '&.is-hovered': {
       bg: 'background.hover',
+    },
+    '& > td:last-of-type': {
+      bg: 'backgroundBase',
     },
   },
 };
@@ -85,6 +95,9 @@ const head = {
   '&.is-focused': {
     ...defaultFocus,
   },
+  '&:last-of-type': {
+    backgroundColor: 'backgroundBase',
+  },
 };
 
 const tbody = {
@@ -99,6 +112,10 @@ const data = {
   ...head,
   py: 'md',
   fontWeight: '1',
+  '&:last-of-type': {
+    backgroundColor: 'backgroundBase',
+    zIndex: 1,
+  },
 };
 
 export const tableBase = {
