@@ -408,7 +408,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
       <ScrollBox {...scrollBoxProps}>
         <ListBox
           ref={listBoxRef}
-          hasAutoFocus={hasAutoFocus}
+          hasAutoFocus
           hasVirtualFocus
           hasNoEmptySelection
           state={state}
@@ -539,7 +539,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     {isOnyx ? onyxReadOnlyInputEntry : readOnlyInputEntry}
     {selectionManager.selectedKeys.size > 0 && visuallyHidden}
   </>,
-          }} // eslint-disable-line
+          }}
           value={filterString}
           helperText={helperText}
           aria-invalid={status === 'error' && true}

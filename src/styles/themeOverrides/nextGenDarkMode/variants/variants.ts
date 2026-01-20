@@ -31,6 +31,9 @@ const listBox = {
         color: 'text.primary',
       },
     },
+    '&.is-focus-visible': {
+      zIndex: 1,
+    },
   },
 };
 

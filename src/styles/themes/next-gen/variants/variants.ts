@@ -147,13 +147,23 @@ const listBox = {
     '&.is-focused': {
       color: 'text.primary',
       bg: 'gray-100',
+      borderRadius: '4px',
+    },
+    '&.is-focus-visible': {
+      boxShadow: 'inset 0 0 0 1px #1a73e8',
+      borderRadius: '4px',
+      zIndex: 1,
     },
     '&.is-selected': {
       color: 'text.primary',
       bg: 'lightblue',
       pl: '.75rem',
+      borderRadius: '4px',
       '&.is-focused': {
         color: 'text.primary',
+      },
+      '&.is-focus-visible': {
+        bg: 'lightblue',
       },
     },
     '&.is-pressed': {
