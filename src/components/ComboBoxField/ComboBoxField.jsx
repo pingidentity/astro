@@ -47,6 +47,8 @@ const ComboBoxField = forwardRef((props, ref) => {
     defaultFilter,
     status,
     helperText,
+    renderEmptyState,
+    allowsEmptyCollection,
     ...others
   } = props;
   const { nonAriaProps } = getAriaAttributeProps(others);
@@ -63,6 +65,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     shouldFlip: !isNotFlippable,
     direction,
     label: 'default',
+    allowsEmptyCollection,
     ...nonAriaProps,
   };
 
@@ -129,7 +132,7 @@ const ComboBoxField = forwardRef((props, ref) => {
   const {
     shouldFocusOnHover,
     shouldSelectOnPressUp,
-    ['UNSTABLE_itemBehavior']: action,
+    'UNSTABLE_itemBehavior': action,
     ...otherListBoxProps
   } = listBoxProps;
 
@@ -201,6 +204,7 @@ const ComboBoxField = forwardRef((props, ref) => {
             onLoadMore={onLoadMore}
             isFocusedOnHover={shouldFocusOnHover}
             isSelectedOnPressUp={shouldSelectOnPressUp}
+            renderEmptyState={renderEmptyState}
             {...otherListBoxProps}
           />
         </ScrollBox>
