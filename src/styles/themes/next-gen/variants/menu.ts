@@ -4,23 +4,54 @@ export const menu = {
   borderColor: 'border.base',
 };
 
+export const menuSection = {
+  sectionTitle: {
+    fontWeight: '1',
+    fontSize: 'tiny',
+    lineHeight: 'md',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    height: 'unset',
+    py: 'sm',
+    px: '12px',
+    color: 'font.light',
+    ml: 0,
+  },
+};
+
 export const menuItem = {
   item: {
     bg: 'transparent',
-    padding: '10px 10px',
+    padding: '12px 12px',
     outline: 'none',
-    color: 'text.primary',
+    color: 'gray-700',
+    fontSize: 'md',
+    lineHeight: 'body',
     cursor: 'pointer',
-    '&.is-focused, &.is-selected, &.is-pressed': {
+    borderRadius: '4px',
+    '&.is-hovered': {
       bg: 'gray-100',
-      color: 'text.primary',
+      color: '#121518',
       '> *': {
-        color: 'text.primary',
+        color: '#121518',
       },
     },
-    '&.is-pressed': {
-      color: 'text.primary',
+    '&.is-focused': {
+      bg: 'gray-100',
+      color: '#121518',
+      outline: '1px solid',
+      outlineOffset: '1px',
+      outlineColor: 'primary',
+      '> *': {
+        color: '#121518',
+      },
+    },
+    '&.is-pressed, &.is-selected': {
       bg: 'lightblue',
+      color: '#121518',
+      '> *': {
+        color: '#121518',
+      },
     },
   },
   separator: {

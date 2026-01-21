@@ -60,6 +60,7 @@ const icons = {
   daVinci: FileTreeIcon,
   DefaultCircle,
   Descending: ArrowDownIcon,
+  popoverMenuIcon: DotsHorizontalIcon,
   ErrorCircle: AlertCircleOutlineIcon,
   integrationsIcon: WidgetsOutlineIcon,
   listViewMenu: DotsHorizontalIcon,
