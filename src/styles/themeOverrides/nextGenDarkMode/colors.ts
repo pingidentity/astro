@@ -158,5 +158,8 @@ export const colors = {
   font,
   badge,
   codeEditor,
+  critical: {
+    dark: nextGenColors['red-100'],
+  },
   common,
 };

@@ -11,7 +11,7 @@ import { dataTable } from './dataTable';
 import { footer } from './footer';
 import iconWrapper from './iconWrapper';
 import { listView, listViewItem, lisViewItemChart } from './listview';
-import { menu, menuItem } from './menu';
+import { menu, menuItem, menuSection } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
 import panelHeader from './panelHeader';
@@ -429,6 +429,7 @@ export default {
   loader,
   menu,
   menuItem,
+  menuSection,
   menuTab,
   message,
   modal,

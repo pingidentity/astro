@@ -33,7 +33,7 @@ const MenuSection = forwardRef<HTMLDivElement, MenuSectionProps>((props, ref) =>
   return (
     <>
       {section.key !== state.collection.getFirstKey() && (
-        <Separator as="li" p={0} m={0} />
+        <Separator as="li" p={0} my="sm" mx="0" />
       )}
       <Box
         as="li"

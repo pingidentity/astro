@@ -1,20 +1,33 @@
 export const menuItem = {
   item: {
     bg: 'transparent',
-    padding: '10px 10px',
+    padding: '12px 12px',
     outline: 'none',
     color: 'gray-400',
     cursor: 'pointer',
-    '&.is-focused, &.is-selected, &.is-pressed': {
-      bg: 'gray-800',
-      color: 'text.primary',
+    '&.is-hovered': {
+      bg: '#2C323A',
+      color: 'gray-200',
       '> *': {
-        color: 'text.primary',
+        color: 'gray-200',
       },
     },
-    '&.is-pressed': {
+    '&.is-focused': {
+      bg: '#2C323A',
+      color: 'gray-200',
+      outline: '1px solid',
+      outlineOffset: '1px',
+      outlineColor: 'primary',
+      '> *': {
+        color: 'gray-200',
+      },
+    },
+    '&.is-selected, &.is-pressed': {
       color: 'text.secondary',
       bg: 'gray-800',
+      '> *': {
+        color: 'gray-200',
+      },
     },
   },
   separator: {

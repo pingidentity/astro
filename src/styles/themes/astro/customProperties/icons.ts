@@ -63,6 +63,7 @@ export default {
   daVinci: DaVinci,
   DefaultCircle,
   Descending: MenuDown,
+  popoverMenuIcon: MoreVertIcon,
   ErrorCircle: AlertCircleIcon,
   integrationsIcon: ConnectionIcon,
   listViewMenu: MoreVertIcon,

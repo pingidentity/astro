@@ -1,14 +1,16 @@
 import React, {
   forwardRef,
-  useState,
 } from 'react';
 import { mergeProps, useMenuItem } from 'react-aria';
 import { Node, TreeState } from 'react-stately';
-import { useFocus, useHover, usePress } from '@react-aria/interactions';
+import CheckIcon from '@pingux/mdi-react/CheckIcon';
+import { useFocusRing } from '@react-aria/focus';
+import { useHover, usePress } from '@react-aria/interactions';
 import { v4 as uuid } from 'uuid';
 
+import { Icon } from '../..';
 import { useMenuContext } from '../../context/MenuContext';
-import { useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
 import { MenuItemProps } from '../../types';
 import Box from '../Box';
 
@@ -21,7 +23,6 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
   const {
     item,
     isDisabled: isPropDisabled,
-    isFocusVisible,
     isNotFocusedOnHover,
     className,
     state,
@@ -54,19 +55,21 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
     menuItemRef,
   );
 
-  const [isFocused, setFocused] = useState(false);
   const { pressProps, isPressed } = usePress({
     ref: menuItemRef,
     isDisabled,
     isPressed: propIsPressed,
   });
-  const { focusProps } = useFocus({ onFocusChange: setFocused });
+
+  const { focusProps, isFocusVisible } = useFocusRing();
   const { hoverProps, isHovered } = useHover({ isDisabled });
+
   const { classNames } = useStatusClasses(className, {
-    isFocused: isFocused || (isHovered && !isFocusVisible),
+    isFocused: isFocusVisible && !isNotFocusedOnHover,
     isDisabled,
     isSelected,
     isPressed,
+    isHovered,
   });
 
   if (isNotFocusedOnHover) {
@@ -74,9 +77,14 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
     delete menuItemProps.onPointerLeave;
   }
 
+  const { themeState: { isOnyx } } = useGetTheme();
+
   return (
     <Box
       as="li"
+      isRow
+      alignItems="center"
+      justifyContent="space-between"
       className={classNames}
       ref={menuItemRef}
       variant={isSeparator ? 'menuItem.separator' : 'menuItem.item'}
@@ -85,6 +93,14 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
       {...mergeProps(pressProps, hoverProps, focusProps, menuItemProps, others)}
     >
       {rendered}
+      {isSelected && isOnyx && (
+        <Icon
+          icon={CheckIcon}
+          title={{ name: 'Check Icon' }}
+          color="success.bright"
+          size="sm"
+        />
+      )}
     </Box>
   );
 });
