@@ -1,48 +1,26 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
+import React, { forwardRef,
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
-} from 'react';
+  useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Box, ComboBoxField, Item, Text } from '../../index';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
+import { getGmtAndOffset } from './helper';
 import defaultTimezones, { usCities } from './timezones';
 
-const createSearchTags = ({ gmt, gmtLabel, timeZone }) => {
+const createSearchTags = ({ gmt, timeZone }) => {
+  const normalizedTz = timeZone.replace(/_/g, ' ');
   let additionalTags = '';
-  const americaTimeZone = timeZone.includes('America') && timeZone.substring(8);
-  if (usCities.includes(americaTimeZone)) {
-    additionalTags = `US ${americaTimeZone}`;
+  if (timeZone.includes('America')) {
+    const city = timeZone.split('/')[1];
+    if (usCities.includes(city)) {
+      additionalTags = `US ${city}`;
+    }
   }
-  return `${gmt} ${gmtLabel} ${timeZone} ${timeZone?.replace(
-    /_/g,
-    ' ',
-  )} ${additionalTags}`;
-};
-
-const getLocaleTime = ({ timeZone, locales, localeOptions }) => {
-  const date = new Date();
-  return date.toLocaleTimeString(locales, {
-    timeZone,
-    ...localeOptions,
-  });
-};
-
-const getTimezoneOffset = timeZone => {
-  const now = new Date();
-  const tzString = now.toLocaleString('en-US', { timeZone });
-  const localString = now.toLocaleString('en-US');
-  const diff = (Date.parse(localString) - Date.parse(tzString)) / 3600000;
-  const offset = -(diff + (now.getTimezoneOffset() / 60));
-  const formattedString = `${offset}:00`;
-
-  return offset > 0 ? `+${formattedString}` : formattedString;
+  return `${gmt} ${timeZone} ${normalizedTz} ${additionalTags}`.toUpperCase();
 };
 
 const TimeZonePicker = forwardRef((props, ref) => {
@@ -53,111 +31,108 @@ const TimeZonePicker = forwardRef((props, ref) => {
     localeOptions,
     ...otherProps
   } = props;
+
   const [search, setSearch] = useState('');
-  const [timeUpdate, setTimeUpdate] = useState(true);
-  const [timeZones, setTimeZones] = useState([]);
-  const extendedTimeZonesList = additionalTimeZones
-    ? { ...defaultTimezones, ...additionalTimeZones }
-    : defaultTimezones;
+  const [selectedKey, setSelectedKey] = useState('');
 
   const timeZonePickerRef = useRef();
   /* istanbul ignore next */
   useImperativeHandle(ref, () => timeZonePickerRef.current);
 
-  useEffect(() => {
-    if (timeUpdate) {
-      const createTimeZoneTimes = () => Object.entries(extendedTimeZonesList).map(item => {
-        const gmt = `GMT${getTimezoneOffset(item[1])}`;
-        const gmtLabel = item[0].substring(12);
-        const timeZone = item[1]?.replace(/_/g, ' ');
-        const time = getLocaleTime({
-          timeZone: item[1],
-          locales,
-          localeOptions,
-        });
-        const searchTags = createSearchTags({ gmt, gmtLabel, timeZone });
-        return {
-          gmt,
-          timeZone,
-          time,
-          searchTags,
-        };
-      });
+  const allTimeZones = useMemo(() => {
+    const sourceList = additionalTimeZones
+      ? { ...defaultTimezones, ...additionalTimeZones }
+      : defaultTimezones;
 
-      setTimeZones(createTimeZoneTimes());
-      setTimeUpdate(false);
+    return Object.entries(sourceList).map(([label, tzValue]) => {
+      const { gmt, numericOffset } = getGmtAndOffset(tzValue);
+      const displayTz = tzValue.replace(/_/g, ' ');
+
+      return {
+        key: `${displayTz} ${gmt}`,
+        id: tzValue,
+        label,
+        timeZone: displayTz,
+        gmt,
+        numericOffset,
+        searchTags: createSearchTags({ gmt, timeZone: tzValue }),
+      };
+    }).sort((a, b) => a.numericOffset - b.numericOffset);
+  }, [additionalTimeZones]);
+
+  const filteredItems = useMemo(() => {
+    const selectedItem = allTimeZones.find(tz => tz.key === selectedKey);
+    const isExactMatch = selectedItem && selectedItem.key === search;
+
+    if (!search || isExactMatch) {
+      return allTimeZones;
     }
-  }, [extendedTimeZonesList, locales, localeOptions, timeUpdate]);
 
-  const filterTimezones = useCallback(
-    timeZonesList => {
-      return timeZonesList.filter(({ searchTags }) => {
-        return searchTags.toUpperCase().indexOf(search.toUpperCase()) > -1;
-      });
-    },
-    [search],
-  );
+    const upperSearch = search.toUpperCase();
+    return allTimeZones.filter(tz => tz.searchTags.includes(upperSearch));
+  }, [search, selectedKey, allTimeZones]);
 
-  const filteredTimezones = useMemo(() => filterTimezones(timeZones), [
-    filterTimezones,
-    timeZones,
-  ]);
+  const timeData = useMemo(() => {
+    const now = new Date();
+    const map = new Map();
+    allTimeZones.forEach(tz => {
+      map.set(tz.id, now.toLocaleTimeString(locales, {
+        timeZone: tz.id,
+        ...localeOptions,
+      }));
+    });
+    return map;
+  }, [allTimeZones, locales, localeOptions]);
 
-  const sortByGMT = (a, b) => {
-    const aNum = parseFloat(a.gmt.split('GMT')[1].split(':')[0]);
-    const bNum = parseFloat(b.gmt.split('GMT')[1].split(')')[0]);
-
-    return aNum - bNum;
-  };
-
-  const checkIsSelectedItem = () => {
-    return timeZones.filter(tz => tz.timeZone === search).length > 0;
-  };
-
-  const renderTimeZones = timeZonesToRender => {
-    return timeZonesToRender.sort(sortByGMT).map(({ gmt, time, timeZone }) => (
-      <Item key={timeZone} data-id={timeZone} textValue={timeZone}>
-        <Box flexDirection="row" justifyContent="space-between" width="100%">
-          <Box flexDirection="row">
-            <Text variant="variants.timeZone.item.title">{timeZone}</Text>
-            <Text variant="variants.timeZone.item.subTitle">{gmt}</Text>
-          </Box>
-          <Box>
-            <Text variant="variants.timeZone.item.time">{time}</Text>
-          </Box>
-        </Box>
-      </Item>
-    ));
-  };
-
-  const items = useMemo(() => {
-    if (filteredTimezones.length === 0) {
-      return <Item key={emptySearchText}>{emptySearchText}</Item>;
+  const onInputChange = value => {
+    setSearch(value);
+    if (value === '') {
+      setSelectedKey(null);
     }
-    return renderTimeZones(checkIsSelectedItem() ? timeZones : filteredTimezones);
-  }, [emptySearchText, filteredTimezones, search, timeZones]);
+  };
 
-  const comboBoxFieldProps = useMemo(
-    () => ({
-      containerProps: { sx: { width: 400, fontSize: 'md' } },
-      onInputChange: setSearch,
-      items: filteredTimezones,
-      ref: timeZonePickerRef,
-      onOpenChange: isOpen => setTimeUpdate(isOpen),
-      disabledKeys: [{ emptySearchText }],
-      ...otherProps,
-    }),
-    [emptySearchText, filteredTimezones, otherProps],
-  );
+  const onSelectionChange = key => {
+    if (!key) return;
+    const selectedItem = allTimeZones.find(item => item.key === key);
+    if (selectedItem) {
+      setSearch(selectedItem.key);
+      setSelectedKey(key);
+    }
+  };
 
   return (
     <ComboBoxField
       {...getPendoID('TimeZonePicker')}
-      {...comboBoxFieldProps}
-      disabledKeys={[emptySearchText]}
+      {...otherProps}
+      ref={timeZonePickerRef}
+      items={filteredItems}
+      inputValue={search}
+      selectedKey={selectedKey}
+      onInputChange={onInputChange}
+      onSelectionChange={onSelectionChange}
       menuTrigger="input"
+      disabledKeys={[emptySearchText]}
+      containerProps={{ sx: { width: 400, fontSize: 'md' } }}
+      allowsEmptyCollection
+      renderEmptyState={() => (
+        <span>
+          {emptySearchText}
+        </span>
+      )}
     >
-      {items}
+      {item => (
+        <Item key={`${item.key}`} textValue={`${item.key}`}>
+          <Box flexDirection="row" justifyContent="space-between" width="100%">
+            <Box flexDirection="row">
+              <Text variant="variants.timeZone.item.title">{item.timeZone}</Text>
+              <Text variant="variants.timeZone.item.subTitle">{item.gmt}</Text>
+            </Box>
+            <Box>
+              <Text variant="variants.timeZone.item.time">{timeData.get(item.id)}</Text>
+            </Box>
+          </Box>
+        </Item>
+      )}
     </ComboBoxField>
   );
 });

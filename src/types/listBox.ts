@@ -36,7 +36,7 @@ export interface ListBoxProps extends AriaListBoxOptions<object> {
   onLoadPrev?: () => void;
   onScroll?: () => void;
   state: ListBoxStateType | SelectState<object, 'single'> | ComboBoxState<object>;
-  renderEmptyState?: React.ReactNode;
+  renderEmptyState?: () => ReactNode,
   variant?: string;
   children?: CollectionChildren<object>;
   isCondensed?: boolean;

@@ -18,12 +18,14 @@ const items = [
 ];
 
 const itemsWithSections = [
-  { name: 'Heading 1',
+  {
+    name: 'Heading 1',
     options: [
       { name: 'Foo' },
       { name: 'Bar' },
       { name: 'Baz' },
-    ] },
+    ],
+  },
 ];
 
 const defaultProps = {
@@ -149,4 +151,14 @@ test('should have is-focused class when hover', async () => {
   await userEvent.hover(options[1]);
   expect(options[0]).not.toHaveClass('is-focused');
   expect(options[1]).toHaveClass('is-focused');
+});
+
+test('should render empty state when no items', () => {
+  getComponent({
+    items: [],
+    renderEmptyState: () => <div data-testid="empty-state">No items</div>,
+  });
+  const emptyState = screen.getByTestId('empty-state');
+  expect(emptyState).toBeInTheDocument();
+  expect(emptyState).toHaveTextContent('No items');
 });
