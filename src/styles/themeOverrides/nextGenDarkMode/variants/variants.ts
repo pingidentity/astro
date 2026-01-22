@@ -20,15 +20,22 @@ const listBox = {
     borderRadius: '4px',
   },
   option: {
+    color: 'gray-400',
     '&.is-focused': {
-      color: 'text.primary',
-      bg: 'gray-800',
+      color: 'gray-200',
+      bg: '#2C323A',
     },
     '&.is-selected': {
-      color: 'text.primary',
-      bg: 'gray-800',
+      color: 'gray-200',
+      bg: '#2C323A',
       '&.is-focused': {
-        color: 'text.primary',
+        color: 'gray-200',
+      },
+    },
+    '&.is-condensed': {
+      color: 'gray-400',
+      '&.is-focused': {
+        color: 'gray-200',
       },
     },
     '&.is-focus-visible': {

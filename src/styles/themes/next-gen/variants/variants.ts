@@ -144,8 +144,11 @@ const listBox = {
     pl: '.75rem',
     pr: 'md',
     justifyContent: 'space-between',
+    borderRadius: '4px',
+    lineHeight: 'body',
+    color: 'gray-700',
     '&.is-focused': {
-      color: 'text.primary',
+      color: 'font.hover',
       bg: 'gray-100',
       borderRadius: '4px',
     },
@@ -173,13 +176,24 @@ const listBox = {
     '&.is-condensed': {
       pl: 'md',
       bg: 'backgroundBase',
+      color: 'gray-700',
       '&.is-selected': {
         bg: 'backgroundBase',
       },
       '&.is-focused': {
         bg: 'backgroundBase',
+        color: 'font.hover',
       },
     },
+  },
+  sectionTitle: {
+    color: 'font.light',
+    fontWeight: '1',
+    fontSize: 'tiny',
+    lineHeight: 'xs',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    ml: 'md',
   },
 };
 
