@@ -19,6 +19,7 @@ const buttonLoaderSize = '0.5em' as LoaderSize;
 const iFrameContentDivBackgroundColor = '#F7F8FD';
 const defaultIconColor = 'currentColor';
 const defaultIconSize = 'sm' as IconSize;
+const linkSelectFieldWidth = '10em';
 const calendarIconSize = 25 as IconSize;
 
 export const astroThemeValues = {
@@ -42,4 +43,11 @@ export const astroThemeValues = {
   defaultIconSize,
   calendarIconSize,
   buttonLoaderSize,
+  badgeStyles: {
+    blueBg: '#4462ed',
+    greyBg: '#253746',
+    blueText: '#FFFFFF',
+    greyText: '#FFFFFF',
+  },
+  linkSelectFieldWidth,
 };

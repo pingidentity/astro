@@ -1,4 +1,5 @@
 const container = {
+  minWidth: '150px',
   transition: 'opacity 200ms ease',
   '&.animate': {
     opacity: 0,

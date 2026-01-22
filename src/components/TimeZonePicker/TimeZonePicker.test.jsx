@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import exp from 'constants';
 
 import { OverlayProvider, TimeZonePicker } from '../../index';
 import { render, screen } from '../../utils/testUtils/testWrapper';
@@ -81,4 +82,18 @@ test('shows custom empty search state text when no items are found', async () =>
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => <TimeZonePicker {...defaultProps} {...props} />,
+});
+
+test('selecting a timezone updates the input value', async () => {
+  getComponent();
+  const input = screen.queryByRole('combobox');
+  await userEvent.type(input, 'America/New York');
+
+  expect(input).toHaveValue('America/New York');
+  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+
+  const option = screen.getByRole('option', { key: 'America/New York GMT-05:00' });
+  expect(option).toBeInTheDocument();
+  await userEvent.click(option);
+  expect(input).toHaveValue('America/New York GMT-05:00');
 });

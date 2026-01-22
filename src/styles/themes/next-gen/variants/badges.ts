@@ -1,8 +1,8 @@
 import buttons from './button';
 
 const badgeFont = {
-  fontSize: '12px',
-  fontWeight: 2,
+  fontSize: 'tiny',
+  fontWeight: '2',
 };
 
 const badgeIconStyle = {
@@ -33,11 +33,11 @@ const baseBadge = {
   alignItems: 'center',
   justifyContent: 'center',
   py: '.25em',
-  px: '.4em',
+  px: '.34em',
   borderRadius: '4px',
   maxHeight: '18px',
   minHeight: '18px',
-  fontSize: '12px',
+  fontSize: 'tiny',
   alignSelf: 'flex-start',
   display: 'inline-flex !important',
   width: 'fit-content',
@@ -94,17 +94,18 @@ const selectedItemBadge = {
   '& span': {
     ...badgeFont,
     color: 'text.primary',
-    fontWeight: 400,
   },
 };
 
 const readOnlyBadge = {
   ...baseBadge,
-  border: 'none',
+  border: '1px solid',
+  borderColor: 'border.hairline',
+  backgroundColor: '#FFFFFF !important',
   '& span': {
     ...badgeFont,
     color: 'text.primary',
-    fontWeight: 2,
+    lineHeight: 'xs',
   },
 };
 
@@ -112,20 +113,20 @@ const readOnlyFieldBadge = {
   ...readOnlyBadge,
   '& span': {
     ...badgeFont,
-    color: 'white',
+    color: 'text.primary',
+    lineHeight: 'xs',
   },
 };
 
 const itemBadgeWithSlot = {
-  ...readOnlyBadge,
-  bg: '#EAF2FD !important',
-  fontWeight: 2,
+  ...selectedItemBadge,
+  border: 'none',
   '& span': {
     ...badgeFont,
     color: 'text.primary',
   },
   '& svg': {
-    fill: 'gray-900',
+    fill: 'text.primary',
   },
 };
 

@@ -23,9 +23,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
     onHoverChange,
     onHoverEnd,
     onHoverStart,
-
     onSelectionChange,
-
     selectionMode = 'none',
     ...others
   } = props;

@@ -11,7 +11,7 @@ import { dataTable } from './dataTable';
 import { footer } from './footer';
 import iconWrapper from './iconWrapper';
 import { listView, listViewItem, lisViewItemChart } from './listview';
-import { menu, menuItem } from './menu';
+import { menu, menuItem, menuSection } from './menu';
 import { message } from './messages';
 import { navBar } from './navbar';
 import panelHeader from './panelHeader';
@@ -144,16 +144,29 @@ const listBox = {
     pl: '.75rem',
     pr: 'md',
     justifyContent: 'space-between',
+    borderRadius: '4px',
+    lineHeight: 'body',
+    color: 'gray-700',
     '&.is-focused': {
-      color: 'text.primary',
+      color: 'font.hover',
       bg: 'gray-100',
+      borderRadius: '4px',
+    },
+    '&.is-focus-visible': {
+      boxShadow: 'inset 0 0 0 1px #1a73e8',
+      borderRadius: '4px',
+      zIndex: 1,
     },
     '&.is-selected': {
       color: 'text.primary',
       bg: 'lightblue',
       pl: '.75rem',
+      borderRadius: '4px',
       '&.is-focused': {
         color: 'text.primary',
+      },
+      '&.is-focus-visible': {
+        bg: 'lightblue',
       },
     },
     '&.is-pressed': {
@@ -163,13 +176,24 @@ const listBox = {
     '&.is-condensed': {
       pl: 'md',
       bg: 'backgroundBase',
+      color: 'gray-700',
       '&.is-selected': {
         bg: 'backgroundBase',
       },
       '&.is-focused': {
         bg: 'backgroundBase',
+        color: 'font.hover',
       },
     },
+  },
+  sectionTitle: {
+    color: 'font.light',
+    fontWeight: '1',
+    fontSize: 'tiny',
+    lineHeight: 'xs',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    ml: 'md',
   },
 };
 
@@ -419,6 +443,7 @@ export default {
   loader,
   menu,
   menuItem,
+  menuSection,
   menuTab,
   message,
   modal,

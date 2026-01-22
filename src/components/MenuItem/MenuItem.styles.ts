@@ -4,7 +4,7 @@ const item = {
   outline: 'none',
   cursor: 'pointer',
   fontFamily: 'standard',
-  '&.is-focused, &.is-selected, &.is-pressed': {
+  '&.is-focused, &.is-selected, &.is-pressed, &.is-hovered': {
     color: 'white',
     bg: 'active',
     '> *': {

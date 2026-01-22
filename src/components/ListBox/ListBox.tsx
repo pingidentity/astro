@@ -151,6 +151,23 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
 
   useLoadPrev(memoedLoadMoreProps, listBoxRef);
 
+  const EmptyState = () => {
+    const emptyState = renderEmptyState ? renderEmptyState() : null;
+    if (emptyState == null) {
+      return null;
+    }
+    return (
+      <Box
+        as="li"
+        isRow
+        role="option"
+        variant="listBox.option"
+      >
+        {emptyState}
+      </Box>
+    );
+  };
+
   return (
     <ListBoxContext.Provider value={state}>
       <Box variant="listBox.container">
@@ -188,6 +205,10 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
             } if (type === collectionTypes.LOADER) {
               return (
                 <Loader variant="loader.withinListbox" aria-label="Loading more..." />
+              );
+            } if (type === collectionTypes.PLACEHOLDER) {
+              return (
+                <EmptyState />
               );
             }
             return null;

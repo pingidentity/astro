@@ -1,4 +1,4 @@
-export const focusBoxShadow = '0 0 0 3px inset #1a73e8';
+export const focusBoxShadow = '0 0 0 2px inset #1a73e8';
 export const borderRadius = '16px';
 
 export const listViewItem = {

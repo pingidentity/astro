@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
-import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
+import ClockOutlineIcon from '@pingux/mdi-react/ClockOutlineIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -9,7 +9,6 @@ import {
   Box,
   ListViewItem,
   ListViewItemChart,
-  ListViewItemEditButton,
   ListViewItemMenu,
   ListViewItemSwitchField,
   Separator,
@@ -17,7 +16,7 @@ import {
 } from '../..';
 import { useGetTheme } from '../../hooks';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { pingImg } from '../../utils/devUtils/constants/images';
+import { userImagePanelHeader } from '../../utils/devUtils/constants/images';
 
 import { chartData } from './controls/chart/chartData';
 import ListViewItemReadMe from './ListViewItem.mdx';
@@ -70,7 +69,7 @@ export const Default = () => (
       }}
       iconWrapperProps={{
         size: 'sm',
-        color: 'green',
+        color: 'blue',
       }}
     />
   </Wrapper>
@@ -93,7 +92,7 @@ export const WithSubtext = () => (
       }}
       iconWrapperProps={{
         size: 'sm',
-        color: 'pink',
+        color: 'blue',
       }}
     />
   </Wrapper>
@@ -111,7 +110,7 @@ export const WithImage = () => (
     <ListViewItem
       data={{
         image: {
-          src: pingImg,
+          src: userImagePanelHeader,
           alt: 'avatar',
           'aria-label': 'avatar',
         },
@@ -133,15 +132,14 @@ export const WithControls = () => (
   <Wrapper>
     <ListViewItem
       data={{
-        icon: FormSelectIcon,
+        icon: AccountIcon,
         text: 'Fons Vernall',
       }}
       iconWrapperProps={{
         size: 'sm',
-        color: 'orange',
+        color: 'blue',
       }}
     >
-      <ListViewItemEditButton aria-label="edit-icon" />
       <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
         <Item key="enable">Enable user</Item>
@@ -160,10 +158,12 @@ WithControls.parameters = {
 };
 
 export const WithRightOfDataSlot = () => {
+  const { badgeStyles: { blueBg, greyBg, blueText, greyText } } = useGetTheme();
+
   const renderRightOfData = (
     <Box isRow gap="sm" ml="sm">
-      <Badge label="Label" />
-      <Badge label="Label" bg="active" />
+      <Badge label="Label" textColor={greyText} bg={greyBg} sx={{ minWidth: 'unset' }} />
+      <Badge label="Label" textColor={blueText} bg={blueBg} sx={{ minWidth: 'unset' }} />
     </Box>
   );
 
@@ -177,7 +177,7 @@ export const WithRightOfDataSlot = () => {
         }}
         iconWrapperProps={{
           size: 'sm',
-          color: 'teal',
+          color: 'blue',
         }}
         slots={{ rightOfData: renderRightOfData }}
       >
@@ -200,8 +200,8 @@ WithRightOfDataSlot.parameters = {
 
 export const WithLeftOfDataSlot = () => {
   const renderLeftOfData = (
-    <Box mx="sm" minWidth={35}>
-      <Text pr={3} variant="H3">Ping</Text>
+    <Box pr="md" pl="lg" minWidth={35}>
+      <Text pr={3} variant="H3" fontSize="md" fontWeight="3">Ping</Text>
     </Box>
   );
 
@@ -247,11 +247,11 @@ export const WithCharts = () => {
         data={{
           text: 'Kangaroo',
           subtext: 'kangaroo@example.com',
-          icon: FormSelectIcon,
+          icon: ClockOutlineIcon,
         }}
         iconWrapperProps={{
           size: 'sm',
-          color: 'purple',
+          color: 'green',
         }}
       >
         <ListViewItemChart
@@ -285,12 +285,15 @@ WithCharts.parameters = {
 };
 
 export const WithExtraLongText = () => {
+  const { badgeStyles: { blueBg, greyBg, blueText, greyText } } = useGetTheme();
+
   const renderRightOfData = (
     <Box isRow gap="sm" mx="sm">
-      <Badge label="Label" />
-      <Badge label="Label" bg="active" />
+      <Badge label="Label" textColor={greyText} bg={greyBg} sx={{ minWidth: 'unset' }} />
+      <Badge label="Label" textColor={blueText} bg={blueBg} sx={{ minWidth: 'unset' }} />
     </Box>
   );
+
   const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
 
   return (
@@ -303,7 +306,7 @@ export const WithExtraLongText = () => {
         }}
         iconWrapperProps={{
           size: 'sm',
-          color: 'orange',
+          color: 'blue',
         }}
         slots={{ rightOfData: renderRightOfData }}
       >
