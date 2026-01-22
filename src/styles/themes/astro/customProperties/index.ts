@@ -43,5 +43,11 @@ export const astroThemeValues = {
   defaultIconSize,
   calendarIconSize,
   buttonLoaderSize,
+  badgeStyles: {
+    blueBg: '#4462ed',
+    greyBg: '#253746',
+    blueText: '#FFFFFF',
+    greyText: '#FFFFFF',
+  },
   linkSelectFieldWidth,
 };

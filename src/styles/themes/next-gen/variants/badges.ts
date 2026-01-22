@@ -33,7 +33,7 @@ const baseBadge = {
   alignItems: 'center',
   justifyContent: 'center',
   py: '.25em',
-  px: '.4em',
+  px: '.34em',
   borderRadius: '4px',
   maxHeight: '18px',
   minHeight: '18px',
