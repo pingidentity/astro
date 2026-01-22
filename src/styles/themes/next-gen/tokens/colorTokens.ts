@@ -123,6 +123,7 @@ export const nextGenColors = {
     'link': '#1a73e8',
     'label': '#5e6d82',
     'reverse': '#ffffff',
+    'hover': '#121518',
   },
   'active': '#1a73e8',
   'active_hover': '#1462C8',

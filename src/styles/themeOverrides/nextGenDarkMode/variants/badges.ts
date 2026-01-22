@@ -71,12 +71,33 @@ const countNeutral = {
   },
 };
 
-const itemBadgeWithSlot = {
-  bg: '#455469 !important',
-  fontWeight: 2,
+const readOnlyBadge = {
+  color: 'gray-100',
+  backgroundColor: '#23282E !important',
+  borderColor: 'border.attachment',
   '& span': {
     color: 'gray-100',
   },
+};
+
+const readOnlyFieldBadge = {
+  color: 'gray-100',
+  backgroundColor: '#23282E !important',
+  borderColor: 'border.attachment',
+  '& span': {
+    color: 'gray-100',
+  },
+};
+
+const selectedItemBadge = {
+  backgroundColor: '#155CBA !important',
+  '& span': {
+    color: 'gray-100',
+  },
+};
+
+const itemBadgeWithSlot = {
+  ...selectedItemBadge,
   '& svg': {
     path: {
       fill: 'gray-100',
@@ -98,24 +119,11 @@ const badges = {
   criticalStatusBadge,
   healthyStatusBadge,
   secondaryStatusBadge,
-  readOnlyFieldBadge: {
-    backgroundColor: '#F6F8FA !important',
-    '& span': {
-      color: 'black',
-    },
-  },
-  selectedItemBadge: {
-    backgroundColor: '#1a73e8 !important',
-    paddingRight: '0px !important',
-    pl: '10px',
-    '& span': {
-      fontSize: '14px',
-      color: 'gray-400',
-      fontWeight: 400,
-    },
-  },
   countBadge,
   countNeutral,
+  selectedItemBadge,
+  readOnlyBadge,
+  readOnlyFieldBadge,
   itemBadgeWithSlot,
   errorCalloutBadge: {
     backgroundColor: '#23282e !important',
