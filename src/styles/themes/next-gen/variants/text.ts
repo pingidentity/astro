@@ -148,7 +148,8 @@ export const text = {
   listViewItemSubtext: {
     fontSize: 'md',
     lineHeight: 'body',
-    color: 'gray-700',
+    color: 'font.light',
+    mt: 0,
   },
   itemTitle: {
     fontWeight: 2,

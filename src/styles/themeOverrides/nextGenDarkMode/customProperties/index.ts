@@ -12,4 +12,10 @@ export const nextGenDarkThemeValues = {
   iFrameContentDivBackgroundColor,
   icons,
   defaultIconColor,
+  badgeStyles: {
+    blueBg: '#1A73E8',
+    greyBg: '#F6F8FA',
+    blueText: '#000000',
+    greyText: '#000000',
+  },
 };
