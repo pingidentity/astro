@@ -16,9 +16,9 @@ import SelectFieldBase from '../SelectFieldBase';
 const displayName = 'LinkSelectField';
 
 const LinkSelectField = forwardRef((props, ref) => {
-  const { placeholder, isDisabled, status, helperText, hasInlineLoader } = props;
+  const { placeholder, isDisabled, status, helperText, hasInlineLoader, popoverWidth } = props;
   const { ariaProps } = getAriaAttributeProps(props);
-  const { themeState } = useGetTheme();
+  const { linkSelectFieldWidth, themeState } = useGetTheme();
   const { isOnyx } = themeState;
 
   const helperTextId = uuid();
@@ -26,7 +26,7 @@ const LinkSelectField = forwardRef((props, ref) => {
   usePropWarning(props, 'disabled', 'isDisabled');
   const { ...selectFieldProps } = useSelectField({
     listboxStyle: {
-      width: '10em',
+      width: popoverWidth || linkSelectFieldWidth,
     },
     ...props,
     // Need this for not applying is-default class
@@ -144,6 +144,8 @@ LinkSelectField.propTypes = {
   onSelectionChange: PropTypes.func,
   /** Display an inline loader inside the select trigger while loading. */
   hasInlineLoader: PropTypes.bool,
+  /** Width of the popover menu. Accepts any valid CSS unit. */
+  popoverWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ...statusPropTypes,
   ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,
