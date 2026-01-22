@@ -14,6 +14,7 @@ const iFrameContentDivBackgroundColor = backgroundBaseColor;
 const defaultIconColor = 'gray-800';
 const defaultIconSize = 'md' as IconSize;
 const buttonLoaderSize = 'sm' as LoaderSize;
+const linkSelectFieldWidth = '12em';
 const calendarIconSize = 'sm' as IconSize;
 
 export const nextGenThemeValues = {
@@ -31,5 +32,6 @@ export const nextGenThemeValues = {
   defaultIconSize,
   calendarIconSize,
   buttonLoaderSize,
+  linkSelectFieldWidth,
   ...customSizes,
 };

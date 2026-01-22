@@ -247,3 +247,21 @@ export const AsyncLoading = () => {
     </OverlayProvider>
   );
 };
+
+export const WithPopoverWidth = args => (
+  <OverlayProvider>
+    <LinkSelectField {...args} width="100%" popoverWidth="20rem">
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Extra long goes here</Item>
+    </LinkSelectField>
+  </OverlayProvider>
+);
+
+WithPopoverWidth.parameters = {
+  docs: {
+    description: {
+      story: 'The `popoverWidth` prop can be used to set a custom width for the dropdown/popover.',
+    },
+  },
+};
