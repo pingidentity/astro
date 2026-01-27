@@ -42,4 +42,10 @@ export const text = {
     },
 
   },
+  pageHeaderBody: {
+    color: 'text.secondary',
+  },
+  pageHeaderTitle: {
+    color: 'gray-100',
+  },
 };

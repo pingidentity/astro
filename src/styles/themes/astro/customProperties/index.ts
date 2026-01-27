@@ -12,6 +12,8 @@ const iconBadgeCircleColor = 'white';
 const rockerButtonGap = '3px';
 const accordionItemMarginLeft = 'sm';
 const pageHeaderTitleMargin = 'xs';
+const pageHeaderAddIconMargin = 'sm';
+const pageHeaderAddIconSize = 'sm' as IconSize;
 const activeColor = '#4462ED';
 const backgroundBaseColor = 'white';
 const defaultLoaderSize = 16;
@@ -34,6 +36,8 @@ export const astroThemeValues = {
   iFrameContentDivBackgroundColor,
   copyButtonSize,
   pageHeaderTitleMargin,
+  pageHeaderAddIconMargin,
+  pageHeaderAddIconSize,
   breadcrumbIconSize,
   breadcrumbIconMargin,
   rockerButtonGap,

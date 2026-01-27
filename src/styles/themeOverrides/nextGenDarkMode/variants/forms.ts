@@ -28,6 +28,7 @@ export const checkbox = {
 };
 
 const label = {
+  color: 'gray-100',
   radioGroup: {
     color: 'white',
   },

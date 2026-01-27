@@ -35,7 +35,7 @@ for previewing layouts and visual mockups. `;
 export const Default = args => (
   <PageHeader
     buttonProps={{ onPress: () => { } }}
-    title="Lorem ipsum"
+    title="Lorem Ipsum"
     {...args}
   >
     {description}
@@ -57,7 +57,7 @@ Default.parameters = {
 
 export const WithoutButton = args => (
   <PageHeader
-    title="Lorem ipsum"
+    title="Lorem Ipsum"
     {...args}
   >
     {description}
@@ -80,7 +80,7 @@ WithoutButton.parameters = {
 export const WithoutLink = args => (
   <PageHeader
     buttonProps={{ onPress: () => { } }}
-    title="Lorem ipsum"
+    title="Lorem Ipsum"
     {...args}
   >
     {description}
@@ -97,7 +97,7 @@ WithoutLink.parameters = {
 export const Customization = args => (
   <PageHeader
     buttonProps={{ bg: 'critical.bright' }}
-    title="Lorem ipsum"
+    title="Lorem Ipsum"
     {...args}
   >
     {description}
