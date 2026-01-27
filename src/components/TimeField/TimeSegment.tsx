@@ -55,7 +55,7 @@ const TimeSegment: React.FC<TimeSegmentProps> = props => {
 
   return (
     <Box {...segmentProps} ref={ref} variant="forms.timeField.segment" onKeyUp={handleKeyEvents}>
-      {text}
+      {text.trim()}
     </Box>
   );
 };

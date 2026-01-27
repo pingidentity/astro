@@ -77,6 +77,7 @@ const nextGenConvertedComponents = [
   'ServerErrorBoundary',
   'Avatar',
   'Box',
+  'TimeField',
 ];
 
 export const componentSpecificNextGenBlacklist = {
