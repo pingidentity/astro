@@ -15,23 +15,23 @@ const PageHeader = forwardRef(({
     ' > a': { fontSize: 'sm' },
   };
 
-  const { pageHeaderTitleMargin } = useGetTheme();
+  const { pageHeaderTitleMargin, pageHeaderAddIconMargin, pageHeaderAddIconSize } = useGetTheme();
 
   const renderButton = buttonProps && (
     <IconButton
       aria-label="icon button"
-      ml="sm"
+      ml={pageHeaderAddIconMargin}
       variant="inverted"
       {...buttonProps}
     >
-      <Icon icon={PlusIcon} size="sm" />
+      <Icon icon={PlusIcon} size={pageHeaderAddIconSize} />
     </IconButton>
   );
 
   return (
     <Box ref={ref} {...other}>
-      <Box isRow mb={pageHeaderTitleMargin}>
-        <Text as="h1" variant="H1">
+      <Box isRow mb={pageHeaderTitleMargin} alignItems="center">
+        <Text as="h1" variant="pageHeaderTitle">
           {title}
         </Text>
         {renderButton}

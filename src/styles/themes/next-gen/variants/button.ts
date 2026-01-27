@@ -386,6 +386,7 @@ const baseIconButtonStyle = {
   border: 'none',
   cursor: 'pointer',
   boxShadow: 'none !important',
+  alignSelf: 'center',
 };
 
 const baseIconButton = {

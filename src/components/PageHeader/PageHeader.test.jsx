@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import * as themeHook from '../../hooks';
 import { Link, PageHeader } from '../../index';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -68,4 +69,28 @@ test('when the button is pressed, it calls the onPress callback', async () => {
 
   await userEvent.click(button);
   expect(onPress).toHaveBeenCalled();
+});
+
+
+test('for default theme, it applies correct styles', () => {
+  getComponent();
+
+  const button = screen.getByRole('button', {
+    name: /icon button/i,
+  });
+  expect(button).toHaveStyleRule('margin-left', '10px');
+});
+
+test('for onyx theme, it applies correct styles', () => {
+  jest.spyOn(themeHook, 'useGetTheme').mockReturnValue({
+    pageHeaderTitleMargin: 'md',
+    pageHeaderAddIconMargin: 'md',
+    pageHeaderAddIconSize: 'md',
+  });
+
+  getComponent();
+  const button = screen.getByRole('button', {
+    name: /icon button/i,
+  });
+  expect(button).toHaveStyleRule('margin-left', '15px');
 });
