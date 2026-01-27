@@ -93,6 +93,41 @@ export const radio = {
   },
 };
 
+export const timeField = {
+  inputField: {
+    ...input,
+    color: 'font.base',
+    alignItems: 'center',
+    justifyContent: 'center',
+    lineHeight: 'body',
+    minWidth: '105px',
+    '&:focus-within:not(.is-read-only)': {
+      borderColor: 'focus',
+      outline: '1px solid',
+      outlineColor: 'focus',
+      outlineOffset: '0px',
+    },
+    '&.is-read-only': {
+      border: '1px solid',
+      borderColor: 'border.input',
+      backgroundColor: 'disabled',
+    },
+    '&.is-disabled': {
+      opacity: 1,
+      border: '1px solid',
+      borderColor: 'border.input',
+      backgroundColor: 'disabled',
+    },
+  },
+  segment: {
+    px: '2px',
+    textTransform: 'uppercase',
+    '&:empty': {
+      px: 0,
+    },
+  },
+};
+
 export default {
   input,
   label,
@@ -103,4 +138,5 @@ export default {
   search,
   switch: switchable,
   numberField,
+  timeField,
 };

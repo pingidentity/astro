@@ -21,13 +21,12 @@ const inputField = {
   '&.is-invalid': {
     borderColor: 'critical.bright',
   },
-
 };
 
 const segment = {
   '&:focus-visible': {
     outline: '1px solid',
-    outlineColor: 'active',
+    outlineColor: 'focus',
     borderRadius: 4,
   },
 };
