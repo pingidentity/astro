@@ -104,8 +104,9 @@ export const text = {
   buttonSubtitle,
   buttonTitle,
   pageHeaderBody: {
-    lineHeight: '150%',
+    lineHeight: 'body',
     color: 'text.primary',
+    fontSize: 'md',
   },
   sideNavHeader: {
     py: 'sm',
@@ -205,6 +206,11 @@ export const text = {
     lineHeight: 'body',
     color: 'font.light',
     marginTop: '0px !important',
+  },
+  pageHeaderTitle: {
+    lineHeight: 'xs',
+    fontSize: 'xxx',
+    fontWeight: 2,
   },
   requirementsListText: {
     color: 'font.base',

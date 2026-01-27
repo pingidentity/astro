@@ -4,7 +4,9 @@ const copyButtonSize = 'sm' as IconSize;
 const breadcrumbIconSize = 'sm' as IconSize;
 const breadcrumbIconMargin = 'md';
 const accordionItemMarginLeft = 'md';
-const pageHeaderTitleMargin = 'md';
+const pageHeaderTitleMargin = 'sm';
+const pageHeaderAddIconMargin = 'md';
+const pageHeaderAddIconSize = 'md';
 const defaultLoaderSize = 32;
 
 export default {
@@ -13,5 +15,7 @@ export default {
   breadcrumbIconMargin,
   accordionItemMarginLeft,
   pageHeaderTitleMargin,
+  pageHeaderAddIconMargin,
+  pageHeaderAddIconSize,
   defaultLoaderSize,
 };
