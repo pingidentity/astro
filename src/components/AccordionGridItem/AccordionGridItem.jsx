@@ -61,7 +61,7 @@ const AccordionGridItem = props => {
   return (
     <Box
       as="div"
-      tabindex="0"
+      tabIndex="0"
       {...mergeProps(rowProps, others)}
       aria-selected={isSelected}
       aria-expanded={isSelected}
