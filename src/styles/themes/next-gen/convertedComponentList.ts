@@ -89,9 +89,13 @@ export const componentSpecificNextGenBlacklist = {
   DataTable: ['Default'],
   Text: ['Default'],
   Tabs: ['Vertical Orientation'],
+  AccordionGridGroup: ['Default', 'Accordion With Inputs', 'Controlled'],
 };
 
 export const astroBlacklistStory = {
+  AccordionGridGroup: [
+    'Onyx Default',
+  ],
   DataTable: [
     'Onyx Default',
   ],

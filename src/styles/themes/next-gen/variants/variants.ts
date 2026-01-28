@@ -3,6 +3,7 @@ import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
 
 import accordion from './accordion';
+import accordionGrid from './accordionGrid';
 import { avatar } from './avatar';
 import { box } from './box';
 import button, { defaultFocus } from './button';
@@ -425,6 +426,7 @@ const statusIcon = {
 
 export default {
   accordion,
+  accordionGrid,
   attachment,
   avatar,
   breadcrumb,

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Item } from 'react-stately';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
+import DotsHorizontalIcon from '@pingux/mdi-react/DotsHorizontalIcon';
 import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { useGetTheme } from '../../hooks';
 import {
   AccordionGridGroup,
   Badge,
   Box,
+  Card,
   Icon,
   IconButton,
   Link,
@@ -33,8 +34,7 @@ const data = [
       },
       {
         name: 'Boston (Environment)',
-        populations: [
-        ],
+        populations: [],
       },
     ],
   },
@@ -51,7 +51,63 @@ const data = [
       },
       {
         name: 'Boston (Environment)',
+        populations: [],
+      },
+    ],
+  },
+  {
+    name: 'Organization Admin',
+    key: 'Organization',
+    organizations: [
+      {
+        name: 'Montana (Environment)',
         populations: [
+          'Administrators (Population)',
+          'Other Population (Population)',
+        ],
+      },
+      {
+        name: 'Boston (Environment)',
+        populations: [],
+      },
+    ],
+  },
+];
+
+const onyxData = [
+  {
+    name: 'Client Application Developer',
+    key: 'Client',
+    organizations: [
+      {
+        name: 'Montana (Environment)',
+        populations: [
+          'Administrators (Population)',
+          'Other Population (Population)',
+        ],
+      },
+      {
+        name: 'Boston (Environment)',
+        populations: [],
+      },
+    ],
+  },
+  {
+    name: 'Environment Admin',
+    key: 'Environment',
+    organizations: [
+      {
+        name: 'Montana (Environment)',
+        populations: [
+          'Administrators (Population)',
+          'Other Population (Population)',
+        ],
+      },
+      {
+        name: 'Montana (Environment)',
+        populations: [
+          'Administrators (Population)',
+          'Other Population (Population)',
         ],
       },
     ],
@@ -69,8 +125,7 @@ const data = [
       },
       {
         name: 'Boston (Environment)',
-        populations: [
-        ],
+        populations: [],
       },
     ],
   },
@@ -106,7 +161,8 @@ export default {
       },
     },
     disabledKeys: {
-      description: 'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. Array of keys.',
+      description:
+        'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. Array of keys.',
     },
     selectedKeys: {
       control: {
@@ -138,7 +194,18 @@ const Header = props => {
   return (
     <Box isRow sx={{ flexGrow: 1 }}>
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
-        <Text sx={{ fontWeight: 3, textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} variant="itemTitle" alignSelf="center">{item.name}</Text>
+        <Text
+          sx={{
+            fontWeight: 3,
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+          }}
+          variant="itemTitle"
+          alignSelf="center"
+        >
+          {item.name}
+        </Text>
       </Box>
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
         <Badge
@@ -163,8 +230,12 @@ const Header = props => {
           <IconButton aria-label="create-icon" sx={{ mr: '4px' }}>
             <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
           </IconButton>
-          <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }}>
-            <Icon icon={MoreVertIcon} size="sm" title={{ name: 'Vertical Lines Icon' }} />
+          <IconButton aria-label="horizontal-lines-icon" sx={{ mr: '4px' }}>
+            <Icon
+              icon={MoreVertIcon}
+              size="sm"
+              title={{ name: 'Horizontal Lines Icon' }}
+            />
           </IconButton>
         </Box>
       </Box>
@@ -178,7 +249,9 @@ const HeaderOnyx = props => {
   return (
     <Box isRow sx={{ flexGrow: 1 }}>
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
-        <Text as="h5" variant="h5" alignSelf="center">{item.name}</Text>
+        <Text as="h5" variant="h5" alignSelf="center" color="font.base">
+          {item.name}
+        </Text>
       </Box>
       <Box isRow alignSelf="center" sx={{ flexGrow: 1, width: '50%' }}>
         <Box isRow alignSelf="center" gap="sm">
@@ -200,10 +273,20 @@ const HeaderOnyx = props => {
         </Box>
         <Box isRow alignSelf="center" sx={{ ml: 'auto' }}>
           <IconButton aria-label="create-icon" sx={{ mr: '4px' }}>
-            <Icon icon={CreateIcon} size="sm" title={{ name: 'Create Icon' }} />
+            <Icon
+              icon={CreateIcon}
+              size="md"
+              color="font.base"
+              title={{ name: 'Create Icon' }}
+            />
           </IconButton>
           <IconButton aria-label="vertical-lines-icon" sx={{ mr: '4px' }}>
-            <Icon icon={MoreVertIcon} size="sm" title={{ name: 'Vertical Lines Icon' }} />
+            <Icon
+              icon={DotsHorizontalIcon}
+              size="md"
+              color="font.base"
+              title={{ name: 'Vertical Lines Icon' }}
+            />
           </IconButton>
         </Box>
       </Box>
@@ -218,7 +301,13 @@ const Body = props => {
       <Box sx={{ flexGrow: 1, width: 'calc(50% - 20px)' }}>
         <Link
           aria-label="permissions"
-          sx={{ marginTop: '15px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textDecoration: 'none' }}
+          sx={{
+            marginTop: '15px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            textDecoration: 'none',
+          }}
           href="https://www.pingidentity.com"
           target="_blank"
         >
@@ -228,9 +317,27 @@ const Body = props => {
       <Box sx={{ flexGrow: 1, width: '50%' }}>
         {item.organizations.map(org => (
           <Box key={`box${org.name}`} sx={{ marginTop: '15px', mb: '15px' }}>
-            <Text sx={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }} key={`text${org.name}`}>{org.name}</Text>
+            <Text
+              sx={{
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+              }}
+              key={`text${org.name}`}
+            >
+              {org.name}
+            </Text>
             {org.populations.map(pop => (
-              <Text key={pop} sx={{ marginLeft: 'md', mt: '10px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+              <Text
+                key={pop}
+                sx={{
+                  marginLeft: 'md',
+                  mt: '10px',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                }}
+              >
                 {pop}
                 )
               </Text>
@@ -242,35 +349,87 @@ const Body = props => {
   );
 };
 
-export const Default = () => {
-  const { themeState } = useGetTheme();
-  const { isOnyx } = themeState;
+const BodyOnyx = props => {
+  const { item } = props;
   return (
-  // See story source for info about the data used
+    <Card>
+      <Box gap="md">
+        {item.organizations.map(org => (
+          <Box key={`box${org.name}`}>
+            <Text
+              color="font.base"
+              sx={{
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+              }}
+              key={`text${org.name}`}
+            >
+              {org.name}
+            </Text>
+            {org.populations.map(pop => (
+              <Text
+                color="font.base"
+                key={pop}
+                sx={{
+                  marginLeft: 'md',
+                  mt: '10px',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                }}
+              >
+                {pop}
+              </Text>
+            ))}
+          </Box>
+        ))}
+      </Box>
+    </Card>
+  );
+};
+
+export const Default = () => {
+  return (
+    // See story source for info about the data used
     <>
-      <Text sx={{ fontWeight: 3, fontSize: 'sm' }}>
-        Role
-      </Text>
+      <Text sx={{ fontWeight: 3, fontSize: 'sm' }}>Role</Text>
       <Separator sx={{ mb: 0 }} />
-      <AccordionGridGroup
-        items={data}
-        defaultSelectedKeys={['Environment']}
-      >
+      <AccordionGridGroup items={data} defaultSelectedKeys={['Environment']}>
         {item => (
-          <Item
-            key={item.key}
-            textValue={item.name}
-          >
-            {isOnyx ? <HeaderOnyx item={item} /> : <Header item={item} />}
+          <Item key={item.key} textValue={item.name}>
+            <Header item={item} />
             <Body item={item} />
             {/* Code that removes the seperator
             from the last item */}
             <Box role="cell">
-              {
-            item.key !== 'Organization'
-              ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
-              : null
-          }
+              {item.key !== 'Organization' ? (
+                <Separator sx={{ m: 0, bg: 'neutral.90' }} />
+              ) : null}
+            </Box>
+          </Item>
+        )}
+      </AccordionGridGroup>
+    </>
+  );
+};
+
+export const OnyxDefault = () => {
+  return (
+    // See story source for info about the data used
+    <>
+      <Separator color="border.base" sx={{ mb: 0 }} />
+      <AccordionGridGroup items={onyxData} defaultSelectedKeys={['Environment']}>
+        {item => (
+          <Item key={item.key} textValue={item.name}>
+            <HeaderOnyx item={item} />
+            <BodyOnyx item={item} />
+            {/* Code that removes the seperator
+            from the last item */}
+            <Box role="cell">
+              {item.key !== 'Organization' ? (
+                <Separator color="border.base" sx={{ m: 0 }} />
+              ) : null}
             </Box>
           </Item>
         )}
@@ -282,15 +441,10 @@ export const Default = () => {
 export const Controlled = () => {
   const [selectedKeys, setSelectedKeys] = useState(['Client']);
 
-  const { themeState } = useGetTheme();
-  const { isOnyx } = themeState;
-
   return (
     // See story source for info about the data used
     <>
-      <Text sx={{ fontWeight: 3, fontSize: 'sm' }}>
-        Role
-      </Text>
+      <Text sx={{ fontWeight: 3, fontSize: 'sm' }}>Role</Text>
       <Separator sx={{ mb: 0 }} />
       <AccordionGridGroup
         items={data}
@@ -298,20 +452,15 @@ export const Controlled = () => {
         onSelectionChange={setSelectedKeys}
       >
         {item => (
-          <Item
-            key={item.key}
-            textValue={item.name}
-          >
-            {isOnyx ? <HeaderOnyx item={item} /> : <Header item={item} />}
+          <Item key={item.key} textValue={item.name}>
+            <Header item={item} />
             <Body item={item} />
             {/* Code that removes the seperator
             from the last item */}
             <Box role="cell">
-              {
-              item.key !== 'Organization'
-                ? <Separator sx={{ m: 0, bg: 'neutral.90' }} />
-                : null
-            }
+              {item.key !== 'Organization' ? (
+                <Separator sx={{ m: 0, bg: 'neutral.90' }} />
+              ) : null}
             </Box>
           </Item>
         )}
@@ -322,7 +471,11 @@ export const Controlled = () => {
 
 export const AccordionWithInputs = () => {
   return (
-    <AccordionGridGroup items={data} defaultSelectedKeys={['Organization']} navigationMode="native">
+    <AccordionGridGroup
+      items={data}
+      defaultSelectedKeys={['Organization']}
+      navigationMode="native"
+    >
       {item => (
         <Item key={item.key}>
           <Text
