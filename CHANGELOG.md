@@ -1,3 +1,7 @@
+## 2.166.0 (2026-01-29)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
 ## 2.165.0 (2026-01-27)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
