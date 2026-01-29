@@ -294,4 +294,11 @@ export default {
       },
     },
   },
+  accordionGrid: {
+    header: {
+      '&.is-hovered': {
+        backgroundColor: '#2C323A',
+      },
+    },
+  },
 };
