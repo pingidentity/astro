@@ -45,7 +45,7 @@ export const searchNavTabLabel = {
   fontSize: 'sm',
   fontWeight: 1,
   mb: 'sm',
-  px: 'sm',
+  px: 'md',
   lineHeight: '16px',
   color: 'neutral.40',
   height: '100%',

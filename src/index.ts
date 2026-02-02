@@ -174,6 +174,7 @@ export * from './components/ScrollBox';
 export { default as SearchField } from './components/SearchField';
 export * from './components/SearchField';
 export { default as SearchNav } from './components/SearchNav';
+export { default as NavList } from './components/SearchNav';
 export * from './components/SearchNav';
 export { default as SelectField } from './components/SelectField';
 export * from './components/SelectField';
