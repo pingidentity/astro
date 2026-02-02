@@ -30,9 +30,9 @@ const MoreItemsPopover = (props: MoreItemsPopoverProps) => {
     <Box
       role="listitem"
       variant="searchNav.tab"
+      pt="0px"
       isRow
       alignItems="center"
-      ml="sm"
       {...tabProps}
     >
       <PopoverMenu {...popoverProps} isOpen={isOpen} onOpenChange={setIsOpen}>

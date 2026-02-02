@@ -1,7 +1,7 @@
 import { defaultFocus } from '../Button/Buttons.styles';
 
 const tab = {
-  pt: 'md',
+  pt: 'sm',
   cursor: 'pointer',
   alignItems: 'center',
   display: 'inline-flex',
@@ -11,10 +11,14 @@ const tab = {
   position: 'relative',
   zIndex: '2',
   '&.is-focused': {
+    boxShadow: 'none',
+    outline: '3px solid',
+    outlineColor: 'active',
+    outlineOffset: '1px',
     '& > span': {
-      ...defaultFocus,
-      borderRadius: '4px',
+      outline: 'none',
     },
+    borderRadius: '4px',
   },
   '&.is-disabled': {
     cursor: 'default',

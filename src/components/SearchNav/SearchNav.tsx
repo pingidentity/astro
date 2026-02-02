@@ -9,7 +9,7 @@ import { SearchNavProps } from '../../types/searchNav';
 import MoreItemsPopover from './MoreItemsPopover';
 import SearchNavTab from './SearchNavTab';
 
-const TAB_MARGIN_WIDTH = 10; // Example constant value
+const TAB_MARGIN_WIDTH = 32; // Example constant value
 const MORE_BUTTON_WIDTH = 60;
 
 /**

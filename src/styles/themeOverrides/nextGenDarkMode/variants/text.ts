@@ -6,6 +6,7 @@ export const text = {
     color: 'text.secondary',
   },
   searchNavTabLabel: {
+    px: 'lg',
     color: 'gray-400',
     '.is-selected &, .is-hovered &': {
       color: 'white',
