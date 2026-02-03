@@ -24,6 +24,9 @@ const navBar = {
     backgroundColor: 'white',
     boxShadow: '0 .5rem 1rem rgba(0, 0, 0, .15)',
   },
+  logoParent: {
+    p: '8px',
+  },
   sectionContainer: {
     pt: '0',
   },
