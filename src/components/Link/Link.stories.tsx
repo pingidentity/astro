@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Link, Text } from '../../index';
+import { Box, Button, Link, Text } from '../../index';
 import { LinkProps } from '../../types/link';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
@@ -70,6 +70,23 @@ export const Default: StoryFn<LinkProps> = ({ ...args }) => (
       dolor sit amet, consectetur adipiscing elit
     </Text>
   </div>
+);
+
+export const SkipToMain: StoryFn<LinkProps> = () => (
+  <Box gap="md">
+    <Link
+      variant="skip"
+      sx={{ '&.is-focused': { top: '100px' } }}
+      href="#main"
+    >
+      Skip to main content
+    </Link>
+    <Box id="main">
+      <Text>
+        Click inside the story, and move focus using the tab key to see the skip link in action.
+      </Text>
+    </Box>
+  </Box>
 );
 
 Default.parameters = {
