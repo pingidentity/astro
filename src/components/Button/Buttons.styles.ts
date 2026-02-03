@@ -364,8 +364,10 @@ const paginationMenu = {
 const tabLabelButton = {
   ...searchNavTabLabel,
   backgroundColor: 'transparent',
-  mb: '10px',
-  p: '0px',
+  mb: '0px',
+  px: 'md',
+  pt: '10px',
+  pb: '9px',
   borderImage: 'none',
   display: 'inline-flex',
   alignItems: 'center',
@@ -374,7 +376,10 @@ const tabLabelButton = {
     cursor: 'pointer',
   },
   '&.is-focused': {
-    ...defaultFocus,
+    boxShadow: 'none',
+    outline: '3px solid',
+    outlineColor: 'active',
+    outlineOffset: '1px',
     borderRadius: '4px',
   },
 };

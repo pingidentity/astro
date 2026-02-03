@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 
-import { Box, Text } from '../../index';
-
-import SearchNav from './SearchNav';
+import { Box, NavList, Text } from '../../index';
 
 export default {
-  title: 'Components/SearchNav',
+  title: 'Components/NavList',
 };
 
 const items = [
@@ -27,7 +25,7 @@ export const Default = () => {
 
   return (
     <Box maxWidth="600px">
-      <SearchNav
+      <NavList
         items={items}
         selectedKey={selectedKey}
         setSelectedKey={e => setSelectedKeyCallback(e)}

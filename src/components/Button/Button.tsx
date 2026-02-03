@@ -87,7 +87,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { buttonLoaderSize } = useGetTheme();
 
   return (
-    <Pressable ref={buttonRef}>
+    <Pressable
+      ref={buttonRef}
+      {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
+    >
       <ThemeUIButton
         aria-label={ariaLabel}
         className={classNames}
@@ -96,7 +99,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         variant={variant}
         {...getPendoID(displayName)}
         {...others}
-        {...mergeProps({ ...buttonProps, tabIndex }, hoverProps, focusProps)}
       >
         {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
         {isLoading && (

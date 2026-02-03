@@ -74,8 +74,30 @@ const footerEALink = {
   justifyContent: 'center',
 };
 
+const skip = {
+  position: 'absolute',
+  p: 'sm',
+  color: 'white',
+  maxWidth: 'fit-content',
+  bg: 'black',
+  borderRadius: '3px',
+  textDecoration: 'none',
+  zIndex: '5',
+  top: '-100px',
+  transition: 'top 0.2s ease-in-out',
+  left: '20px',
+  '&.is-focused': {
+    outline: '2px solid',
+    outlineColor: 'active',
+    outlineOffset: '0px',
+    top: '10px',
+  },
+
+};
+
 export default {
   app,
+  skip,
   popover,
   web,
   copyRightLink,

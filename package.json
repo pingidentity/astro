@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.166.0",
+  "version": "2.166.1-alpha.6",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "install-react-version": "cd ../ && npm run install-react-18 && npm && cd packages/astro && npm",
-    "build": "rm -rf ../../dist/astro && npm run build:types && npm run build:cjs && npm run build:esm && cp README.md ../../dist/astro/lib && cp MIGRATION.md ../../dist/astro/lib && cp package.json ../../dist/astro",
+    "build": "rm -rf ../../dist/astro && npm run build:types && npm run build:cjs && npm run build:esm && cp README.md ../../dist/astro && cp MIGRATION.md ../../dist/astro/lib && cp package.json ../../dist/astro",
     "build-ci": "npm build",
     "append-version": "node ../../append_current_version.js",
     "build:types": "tsc --project ./tsconfig.lib.json --emitDeclarationOnly",

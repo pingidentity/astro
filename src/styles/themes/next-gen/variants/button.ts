@@ -28,7 +28,9 @@ export const defaultFocus = {
 };
 
 const searchNavTabLabel = {
-  marginBottom: '9px',
+  mb: '0px',
+  pb: '9px',
+  pt: 'sm',
   color: 'neutral.40',
   '&.is-hovered': {
     '& > svg': {
