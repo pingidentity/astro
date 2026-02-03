@@ -119,8 +119,16 @@ const footerEALink = {
   },
 };
 
+const skip = {
+  py: 'sm',
+  px: 'md',
+  height: '40px',
+  lineHeight: '24px',
+};
+
 export default {
   app,
+  skip,
   nextGen,
   onyx,
   sideNav,
