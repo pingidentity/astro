@@ -7,6 +7,7 @@ import { useGetTheme, useModalState } from '../../hooks';
 import {
   Box,
   Button,
+  ComboBoxField,
   Item,
   Menu,
   Modal,
@@ -110,6 +111,13 @@ export default {
     hasAutoFocus: true,
   },
 } as Meta;
+
+
+const items = [
+  { key: 'apple', name: 'Apple' },
+  { key: 'banana', name: 'Banana' },
+  { key: 'blueberry', name: 'Blueberry' },
+];
 
 export const Default: StoryFn<ModalProps> = args => {
   const state = useModalState();
@@ -356,12 +364,6 @@ export const WithInputField: StoryFn<ModalProps> = () => {
 
   const [value, setValue] = useState('');
 
-  const items = [
-    { key: 'apple', name: 'Apple' },
-    { key: 'banana', name: 'Banana' },
-    { key: 'blueberry', name: 'Blueberry' },
-  ];
-
   return (
     <OverlayProvider>
       <Button onPress={state.open} aria-label="Open modal">
@@ -461,6 +463,33 @@ export const WithPopoverMenu: StoryFn<ModalProps> = () => {
                   </Item>
                 </Menu>
               </PopoverMenu>
+            </Box>
+          </ModalBody>
+        </Modal>
+      )}
+    </OverlayProvider>
+  );
+};
+
+export const WithComboBoxField: StoryFn<ModalProps> = () => {
+  const state = useModalState();
+
+  return (
+    <OverlayProvider>
+      <Button onPress={state.open} aria-label="Open modal">
+        Open Modal
+      </Button>
+      {state.isOpen && (
+        <Modal
+          isOpen={state.isOpen}
+          onClose={state.close}
+        >
+          <ModalBody>
+            <Box gap="lg">
+              <Text>Lorem ipsum dolor sit amet consectetur</Text>
+              <ComboBoxField items={items} label="ComboBox Label" placeholder="Select an item">
+                {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+              </ComboBoxField>
             </Box>
           </ModalBody>
         </Modal>

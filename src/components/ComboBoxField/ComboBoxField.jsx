@@ -20,7 +20,7 @@ import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/
 import { statusPropTypes } from '../../utils/docUtils/statusProp';
 import ComboBoxInput from '../ComboBox';
 import ListBox from '../ListBox';
-import PopoverContainer from '../PopoverContainer';
+import Popover from '../Popover';
 import ScrollBox from '../ScrollBox';
 
 const displayName = 'ComboBoxField';
@@ -183,13 +183,14 @@ const ComboBoxField = forwardRef((props, ref) => {
   };
 
   const listBox = !isReadOnly && (
-    <PopoverContainer
+    <Popover
       hasNoArrow
       isNonModal
       isOpen={state.isOpen}
-      placement={placement}
-      ref={popoverRef}
       style={style}
+      state={state}
+      triggerRef={inputRef}
+      popoverRef={popoverRef}
     >
       <FocusScope>
         <DismissButton onDismiss={state.close} />
@@ -210,7 +211,7 @@ const ComboBoxField = forwardRef((props, ref) => {
         </ScrollBox>
         <DismissButton onDismiss={state.close} />
       </FocusScope>
-    </PopoverContainer>
+    </Popover>
   );
 
   return (
