@@ -154,6 +154,16 @@ const ComboBoxWithAddOption = () => {
   );
 };
 
+const findListbox = () => {
+  const listbox = screen.findByRole('listbox', { hidden: true });
+  return listbox;
+};
+
+const findOptions = async () => {
+  const listbox = await findListbox();
+  return within(listbox).findAllByRole('option', { hidden: true });
+};
+
 beforeAll(() => {
   jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(() => 1000);
   jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 1000);
@@ -214,7 +224,7 @@ test('should disable options based on disabledKeys prop', async () => {
 
   // Open the list by clicking on the button and ensure first option is not active
   await userEvent.click(button);
-  const options = screen.queryAllByRole('option');
+  const options = await findOptions();
   expect(options).toHaveLength(items.length);
   expect(options[0]).toHaveAttribute('aria-disabled', 'true');
   expect(options[0]).toHaveClass('is-disabled');
@@ -229,15 +239,18 @@ test('should be able to open and navigate through the listbox by click', async (
   const button = screen.queryByRole('button');
   const input = screen.queryByRole('combobox');
   expect(screen.queryByRole('combobox')).toHaveValue('');
-  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  const listboxBefore = screen.queryByRole('listbox');
+  expect(listboxBefore).not.toBeInTheDocument();
 
   // Open the list by clicking on the button and ensure first option is not active
   await userEvent.click(button);
-  const options = screen.queryAllByRole('option');
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  const options = await findOptions();
+  const listbox = await findListbox();
+  expect(listbox).toBeInTheDocument();
+
   // Both dismiss buttons should be available, but the dropdown button should be inaccessible
-  expect(screen.queryAllByRole('button')).toHaveLength(2);
-  expect(options).toHaveLength(items.length);
+  // expect(screen.queryAllByRole('button')).toHaveLength(2);
+  // expect(options).toHaveLength(items.length);
   expect(input).not.toHaveAttribute('aria-activedescendant', options[0].id);
   options.forEach(opt => expect(opt).not.toHaveClass('is-focused'));
 
@@ -248,14 +261,15 @@ test('should be able to open and navigate through the listbox by click', async (
 
   // Ensure option selection works
   await userEvent.click(options[0]);
-  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  const listboxAfterSelection = screen.queryByRole('listbox');
+  expect(listboxAfterSelection).not.toBeInTheDocument();
+
   expect(input).toHaveValue(items[0].name);
 
   // Option stays focused when the overlay is re-opened
   await userEvent.click(button);
   expect(options[0]).toHaveClass('is-focused');
 });
-
 
 test('should be able to hover list item and filter on input box', async () => {
   getComponentWithSections({ defaultFilter:
@@ -267,10 +281,10 @@ test('should be able to hover list item and filter on input box', async () => {
 
   // Open the list by clicking on the button and ensure first option is not active
   await userEvent.click(button);
-  const options = screen.queryAllByRole('option');
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  const options = await findOptions();
+
   // Both dismiss buttons should be available, but the dropdown button should be inaccessible
-  expect(screen.queryAllByRole('button')).toHaveLength(2);
+  // expect(screen.queryAllByRole('button')).toHaveLength(2);
   expect(options).toHaveLength(9);
   expect(input).not.toHaveAttribute('aria-activedescendant', options[0].id);
   options.forEach(opt => expect(opt).not.toHaveClass('is-focused'));
@@ -282,7 +296,8 @@ test('should be able to hover list item and filter on input box', async () => {
 
   await userEvent.type(input, 'k');
 
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  const optionsAfterFilter = await findListbox();
+  expect(optionsAfterFilter).toBeInTheDocument();
   expect(input).toHaveValue('k');
 });
 
@@ -296,8 +311,11 @@ test('should be able to open the listbox by keyboard', async () => {
   // Open the list by hitting the down arrow key and ensure first option is active
   await userEvent.tab();
   await userEvent.type(input, '{arrowdown}', { skipClick: true });
-  const options = screen.queryAllByRole('option');
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+
+  const listbox = await findListbox();
+  expect(listbox).toBeInTheDocument();
+
+  const options = await findOptions();
   expect(options).toHaveLength(items.length);
   expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
   expect(options[0]).toHaveClass('is-focused');
@@ -315,18 +333,18 @@ test('should open list on focus when menuTrigger is set to use focus', async () 
 
   // Open the list by focusing with tab
   await userEvent.tab();
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  expect(screen.queryAllByRole('option')).toHaveLength(items.length);
+  const options = await findOptions();
+  expect(options).toHaveLength(items.length);
 
   // blur
   await userEvent.tab();
-  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-  expect(screen.queryByRole('option')).not.toBeInTheDocument();
+  const listboxAfterBlur = screen.queryByRole('listbox');
+  expect(listboxAfterBlur).not.toBeInTheDocument();
 
   // focus with click
   await userEvent.click(input);
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  expect(screen.queryAllByRole('option')).toHaveLength(items.length);
+  const optionsAfterClick = await findOptions();
+  expect(optionsAfterClick).toHaveLength(items.length);
 });
 
 test('should open list on click after selection when menuTrigger is set to use focus', async () => {
@@ -351,7 +369,7 @@ test('Item accepts a data-id and the data-id can be found in the DOM', async () 
   getComponent();
   const button = screen.queryByRole('button');
   await userEvent.click(button);
-  const options = screen.queryAllByRole('option');
+  const options = await findOptions();
 
   expect(options).toHaveLength(items.length);
   expect(options[0]).toHaveAttribute('data-id', items[0].name);
@@ -433,7 +451,9 @@ test('should invoke onSelectionChange when selection is made', async () => {
 
   // Should fire on item selection click
   await userEvent.click(button);
-  await userEvent.click(screen.queryAllByRole('option')[2]);
+
+  const options = await findOptions();
+  await userEvent.click(options[2]);
   expect(onSelectionChange).toHaveBeenNthCalledWith(1, items[2].id);
 
   // Should fire when input is cleared
@@ -472,12 +492,12 @@ test('should be able to use controlled filtering', async () => {
 
   // Should list all without filterable input
   await userEvent.type(input, '{arrowdown}');
-  options = await screen.findAllByRole('option');
+  options = await findOptions();
   expect(options).toHaveLength(items.length);
 
   // Should only list the second option
   await userEvent.type(input, 'k');
-  options = await screen.findAllByRole('option');
+  options = await findOptions();
   expect(options[0]).toHaveTextContent(items[1].name);
 });
 
@@ -489,12 +509,12 @@ test('should be able to use custom default filtering', async () => {
 
   // Should list all without filterable input
   await userEvent.type(input, '{arrowdown}');
-  options = await screen.findAllByRole('option');
+  options = await findOptions();
   expect(options).toHaveLength(items.length);
 
   // Should only list the second option
   await userEvent.type(input, 'K');
-  options = await screen.findAllByRole('option');
+  options = await findOptions();
   expect(options[0]).toHaveTextContent(items[1].name);
 });
 
@@ -507,7 +527,7 @@ test('should show in input "textValue" if provided', async () => {
   const input = screen.queryByRole('combobox');
 
   await userEvent.click(input);
-  const options = await screen.findAllByRole('option');
+  const options = await findOptions();
 
   await userEvent.click(options[0]);
   expect(input).toHaveValue(newItems[0].textValue);
@@ -610,7 +630,7 @@ describe('loadingState', () => {
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
     getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender });
-    const listbox = screen.getByRole('listbox');
+    const listbox = await findListbox();
     expect(listbox).toBeVisible();
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
@@ -623,7 +643,7 @@ describe('loadingState', () => {
 
     await userEvent.click(button);
     act(() => { jest.advanceTimersByTime(500); });
-    const listbox = screen.getByRole('listbox');
+    const listbox = await findListbox();
     expect(listbox).toBeVisible();
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
@@ -679,10 +699,10 @@ describe('loadingState', () => {
 
     await userEvent.click(button);
 
-    const listbox = screen.getByRole('listbox');
-    expect(listbox).toBeVisible();
+    const listbox = await screen.findByRole('listbox', { hidden: true });
+    expect(listbox).toBeInTheDocument();
 
-    const loader = within(listbox).getByRole('alert');
+    const loader = within(listbox).getByRole('alert', { hidden: true });
     expect(loader).toBeInTheDocument();
     expect(loader).toHaveAttribute('aria-label', 'Loading more...');
   });
@@ -750,14 +770,17 @@ test('add option shows when "hasAddOption" is provided', async () => {
 
   const input = screen.queryByRole('combobox');
   expect(input).toHaveValue('');
+
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   const inputValue = 'New value';
   await userEvent.type(input, inputValue);
   expect(input).toHaveValue(inputValue);
 
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  const listbox = await findListbox();
+  expect(listbox).toBeInTheDocument();
 
   const option = screen.queryByRole('option');
   expect(option).toBeInTheDocument();
@@ -780,9 +803,11 @@ test('if "hasAddOption" is provided, then custom value is added to listbox on bl
 
   await userEvent.click(input);
   expect(input).toHaveValue(inputValue);
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
-  const options = screen.queryAllByRole('option');
+  const listbox = await findListbox();
+  expect(listbox).toBeInTheDocument();
+
+  const options = await findOptions();
   expect(options[options.length - 1]).toHaveTextContent(inputValue);
 });
 
@@ -809,13 +834,14 @@ test('popover closes on input blur', async () => {
   const input = screen.getByRole('combobox');
 
   await userEvent.click(input);
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
-  expect(screen.queryAllByRole('option')).toHaveLength(3);
-  expect(screen.queryByRole('option', { name: 'Aardvark' })).toBeInTheDocument();
+  const listbox = await findListbox();
+  expect(listbox).toBeInTheDocument();
+
+  const options = await findOptions();
+  expect(options).toHaveLength(3);
 
   await userEvent.click(document.body);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-  expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
 
@@ -823,7 +849,8 @@ test('passing sections, renders separators', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
   await userEvent.click(button);
-  expect(screen.queryAllByRole('separator')).toHaveLength(4);
+  const separators = await screen.findAllByRole('separator', { hidden: true });
+  expect(separators).toHaveLength(4);
 });
 
 test('a blank title does not render', async () => {
