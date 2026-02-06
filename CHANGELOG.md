@@ -1,3 +1,13 @@
+## 2.169.0-alpha.0 (2026-02-06)
+
+### 🚀 Features
+
+- stable release update
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.168.0-alpha.0 (2026-02-06)
 
 ### 🚀 Features
