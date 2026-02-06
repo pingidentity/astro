@@ -1,3 +1,17 @@
+## 2.168.0 (2026-02-06)
+
+### 🚀 Features
+
+- test by adding back alpha release
+
+### 🩹 Fixes
+
+- add jenkins stage
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.167.0 (2026-02-03)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
