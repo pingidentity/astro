@@ -1,3 +1,13 @@
+## 2.167.2-alpha.0 (2026-02-06)
+
+### 🩹 Fixes
+
+- [UIP-8086] Fix package.lock
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.167.1-alpha.0 (2026-02-06)
 
 ### 🩹 Fixes
