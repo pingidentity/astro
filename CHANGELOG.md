@@ -1,3 +1,13 @@
+## 2.167.1-alpha.0 (2026-02-06)
+
+### 🩹 Fixes
+
+- [UIP-8063] Use conventional commit
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.168.0 (2026-02-06)
 
 ### 🚀 Features
