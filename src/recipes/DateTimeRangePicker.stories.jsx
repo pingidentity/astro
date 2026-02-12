@@ -18,7 +18,6 @@ import { Box,
   TimeField } from '../index';
 import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
-
 export default {
   title: 'Recipes/DateTimeRangePicker',
   decorators: [withDesign],
@@ -88,10 +87,7 @@ export const Default = () => {
             onClose={modalState.close}
             hasCloseButton
             title="Custom Date and Time Range"
-            contentProps={{
-              maxWidth: '636px',
-              width: '100%',
-            }}
+            size="medium"
           >
             <Box gap="lg" mt="lg">
               <Box minHeight="358px">
