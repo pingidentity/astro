@@ -1,3 +1,13 @@
+## 2.170.0-alpha.0 (2026-02-12)
+
+### 🚀 Features
+
+- [UIP-8093] Popover shift to top corner
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.169.1-alpha.0 (2026-02-12)
 
 ### 🩹 Fixes
