@@ -1,3 +1,13 @@
+## 2.169.1-alpha.0 (2026-02-12)
+
+### 🩹 Fixes
+
+- [UIP-8041] Datetimerangepicker the calendar is spilling out from the modal
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.169.0 (2026-02-06)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
