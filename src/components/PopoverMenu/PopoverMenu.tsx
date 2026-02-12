@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, ReactElement, useRef } from 'react';
 import { DismissButton, FocusScope, OverlayContainer, useMenuTrigger } from 'react-aria';
 import { useMenuTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
@@ -33,6 +33,12 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
   const state = useMenuTriggerState(menuTriggerState);
 
   const { menuTriggerProps, menuProps } = useMenuTrigger({}, state, triggerRef);
+  const trigger = React.isValidElement(menuTrigger)
+    ? React.cloneElement(menuTrigger as React.ReactElement, {
+      ...menuTriggerProps,
+      ref: triggerRef,
+    })
+    : menuTrigger;
 
   /* eslint-disable react/jsx-no-constructed-context-values */
   const menuContext = {
@@ -57,7 +63,7 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
   return (
     <>
       <PressResponder {...menuTriggerProps} ref={triggerRef} isPressed={state.isOpen}>
-        {menuTrigger}
+        {trigger}
       </PressResponder>
       <MenuContext.Provider value={menuContext}>
         <OverlayContainer>

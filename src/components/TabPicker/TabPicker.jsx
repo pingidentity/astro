@@ -114,6 +114,11 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
         selectionManager.setFocusedKey(prevKey);
         break;
       }
+      case 'Enter': {
+        e.preventDefault();
+        setIsOpen(!isOpen);
+        break;
+      }
       default:
         break;
     }

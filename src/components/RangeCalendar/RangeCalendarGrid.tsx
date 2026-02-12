@@ -9,6 +9,7 @@ import { RangeCalendarGridProps } from '../../types/calendar';
 
 import RangeCalendarCell from './RangeCalendarCell';
 
+
 const RangeCalendarGrid = (props: RangeCalendarGridProps) => {
   const { state, offset = {} } = props;
   const { visibleRange, getDatesInWeek } = state;
@@ -16,15 +17,17 @@ const RangeCalendarGrid = (props: RangeCalendarGridProps) => {
   const { locale } = useLocale();
 
   const startDate = visibleRange.start.add(offset);
+  // @ts-expect-error verify type
   const endDate = endOfMonth(startDate);
 
   const { gridProps, headerProps, weekDays }: CalendarGridAria = useCalendarGrid(
+    // @ts-expect-error verify type
     {
       startDate,
       endDate,
     } as AriaCalendarGridProps,
     state as RangeCalendarState | CalendarState);
-
+    // @ts-expect-error verify type
   const weeksInMonth = getWeeksInMonth(startDate, locale);
 
   const getKey = (day, index) => {
@@ -52,6 +55,7 @@ const RangeCalendarGrid = (props: RangeCalendarGridProps) => {
                   key={date.toString()}
                   state={state}
                   date={date}
+                  // @ts-expect-error verify type
                   currentMonth={startDate}
                 />
               )

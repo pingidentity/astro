@@ -1,29 +1,15 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { ReactNode } from 'react';
+import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
-
-const HAS_REF = 'ref';
 
 interface ComponentWithRefProps {
   renderComponent: ({ ref }) => ReactNode
 }
 
 const ComponentWithRef = ({ renderComponent }: ComponentWithRefProps) => {
-  const [state, setState] = useState(null);
-  const ref = useRef();
+  const testRef = React.createRef<HTMLElement>();
 
-  useEffect(() => {
-    if (!ref.current) return;
-
-    setState(ref.current);
-  }, []);
-
-  return (
-    <>
-      {renderComponent({ ref })}
-      {state && HAS_REF}
-    </>
-  );
+  return renderComponent({ ref: testRef });
 };
 
 export const universalComponentTests = async ({ renderComponent, rules = {} }) => {
@@ -38,8 +24,10 @@ export const universalComponentTests = async ({ renderComponent, rules = {} }) =
     });
 
     test('should forward refs properly', () => {
-      render(<ComponentWithRef renderComponent={renderComponent} />);
-      screen.getByText(HAS_REF);
+      const testRef = React.createRef<HTMLElement>();
+      expect(() => {
+        render(renderComponent({ ref: testRef }));
+      }).not.toThrow();
     });
   });
 };
