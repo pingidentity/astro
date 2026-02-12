@@ -23,6 +23,7 @@ const CalendarGrid = (props: CalendarGridProps) => {
 
   const { gridProps, headerProps, weekDays }: CalendarGridAria = useCalendarGrid(
     props as AriaCalendarGridProps, state as CalendarState | RangeCalendarState);
+    // @ts-expect-error verify type
   const weeksInMonth = getWeeksInMonth(visibleRange.start as DateValue, locale);
 
   const getKey = (day, index) => {

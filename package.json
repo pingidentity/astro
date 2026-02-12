@@ -60,7 +60,7 @@
     "@react-aria/grid": "~3.4.1",
     "@react-aria/gridlist": "^3.7.4",
     "@react-aria/i18n": "~3.6.0",
-    "@react-aria/interactions": "~3.11.0",
+    "@react-aria/interactions": "3.21.0",
     "@react-aria/label": "^3.1.0",
     "@react-aria/link": "^3.1.1",
     "@react-aria/list": "^3.0.0-beta.0",
@@ -252,6 +252,19 @@
     "theme-ui": {
       "react": "^18.2.0",
       "react-dom": "^18.2.0"
+    },
+     "@react-aria/interactions": "3.21.0",
+    "react-aria": {
+      "@react-aria/interactions": "3.21.0"
+    },
+    "@react-aria/focus": {
+      "@react-aria/interactions": "3.21.0"
+    },
+    "@react-aria/grid": {
+      "@react-aria/interactions": "3.21.0"
+    },
+    "@react-aria/selection": {
+      "@react-aria/interactions": "3.21.0"
     }
   }
 }
