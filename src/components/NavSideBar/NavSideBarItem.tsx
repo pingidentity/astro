@@ -3,15 +3,16 @@ import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover, usePress } from '@react-aria/interactions';
 
 import { useNavBarContext } from '../../context/NavBarContext';
-import { useLocalOrForwardRef, useNavBarPress, useStatusClasses } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, useNavBarPress, useStatusClasses } from '../../hooks';
 import { Box, Button, Icon, Link, Text } from '../../index';
 import { NavSideBarItemProps } from '../../types';
 
 const NavSideBarItem = (props: NavSideBarItemProps) => {
   const { children, linkProps } = props;
+  console.log(props);
   if (linkProps && linkProps?.href) {
     return (
-      <Link {...linkProps}>
+      <Link {...linkProps} sx={{ textDecoration: 'none !important' }}>
         <ChildWrapper {...props}>
           {children}
         </ChildWrapper>
@@ -57,6 +58,8 @@ const ChildWrapper = forwardRef<HTMLElement, NavSideBarItemProps>((props, ref) =
 
   const { pressProps, isPressed } = usePress({ ref: navItemRef, onPress: onNavPress });
 
+  const { navBarIconSize } = useGetTheme();
+
   const mergedProps = mergeProps(
     pressProps,
     hoverProps,
@@ -71,6 +74,8 @@ const ChildWrapper = forwardRef<HTMLElement, NavSideBarItemProps>((props, ref) =
     isSelected,
     isFocused: isFocusVisible,
   });
+
+  console.log(state.navStyles.navBarItem);
 
   return (
     <Box
@@ -88,7 +93,7 @@ const ChildWrapper = forwardRef<HTMLElement, NavSideBarItemProps>((props, ref) =
         <Icon
           icon={icon}
           title={{ name: children as string }}
-          size={state.navStyles.navBarItemHeaderIconSize}
+          size={navBarIconSize}
           variant={isSelected
             ? state.navStyles.navBarItemIconSelected
             : state.navStyles.navBarItemIcon}
@@ -101,7 +106,7 @@ const ChildWrapper = forwardRef<HTMLElement, NavSideBarItemProps>((props, ref) =
       {customIcon && (
         <Icon
           icon={customIcon}
-          size={state.navStyles.navBarItemHeaderIconSize}
+          size={navBarIconSize}
           variant={isSelected
             ? state.navStyles.navBarItemCustomIconSelected
             : state.navStyles.navBarItemCustomIcon}
