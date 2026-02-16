@@ -1,14 +1,18 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import { Avatar as ThemeUIAvatar, Box } from 'theme-ui';
 
 import { useStatusClasses } from '../../hooks';
 import { AvatarProps } from '../../types/avatar';
+
+import { avatarColors } from './constants';
+import getColorFromUUID from './getColorFromUuid';
 
 const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
   const {
     alt = 'Avatar',
     defaultText = 'AA',
     color,
+    colorId,
     className,
     size = 'sm',
     src,
@@ -19,8 +23,16 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
     ...others
   } = props;
 
+  // this will use color prop if provided,
+  // else will map colorId to a color, else defaults to 'green'
+  const finalColor = useMemo(() => {
+    if (color) return color;
+    if (colorId) return getColorFromUUID(colorId, avatarColors);
+    return 'green';
+  }, [color, colorId, avatarColors]);
+
   const { classNames } = useStatusClasses(className, {
-    [`is-${color}`]: color,
+    [`is-${finalColor}`]: finalColor,
     [`size-${size}`]: size,
     [`font-size-${size}`]: src ? false : size,
     'is-square': isSquare,
