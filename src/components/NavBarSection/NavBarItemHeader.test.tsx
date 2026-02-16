@@ -82,6 +82,6 @@ describe('NavItemHeader', () => {
     getComponent();
     const icon = screen.getByTestId('Dashboard').querySelector('svg');
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveAttribute('width', 'icon-200');
+    expect(icon).toHaveAttribute('width', '18');
   });
 });

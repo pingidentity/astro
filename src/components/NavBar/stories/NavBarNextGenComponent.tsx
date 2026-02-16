@@ -84,6 +84,7 @@ export const NavBarNextGenComponent = () => {
       'data-id': 'Authentication-data-id',
       heading: 'Authentication',
       icon: icons.authenticationIcon,
+      title: 'Policies',
       key: 'Authentication',
       children: [
         <NavBarItemButton
@@ -92,6 +93,11 @@ export const NavBarNextGenComponent = () => {
         >
           Authentication Policies
         </NavBarItemButton>,
+        {
+          hasSeparator: false,
+          subTitle: 'Applications',
+        },
+        <Separator key="separator" variant="separator.navBarSubtitleSeparator" />,
         <NavBarItemButton
           key="Password-Policies"
           id="Password-Policies"
