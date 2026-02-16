@@ -1,3 +1,13 @@
+## 2.171.0-alpha.0 (2026-02-16)
+
+### 🚀 Features
+
+- [UIP-8078] Avatar fix colors
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.170.1-alpha.0 (2026-02-16)
 
 ### 🩹 Fixes
