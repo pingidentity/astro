@@ -128,58 +128,56 @@ const statusIcon = {
   base: {
     '&.is-default': {
       bg: 'gray-100',
-      path: {
-        fill: 'black',
+      span: {
+        color: 'black',
       },
     },
     '&.is-critical': {
       bg: 'red-500',
-      path: {
-        fill: 'black',
+      span: {
+        color: 'black',
       },
     },
     '&.is-warning': {
       bg: 'yellow-500',
-      path: {
-        fill: 'black',
+      span: {
+        color: 'black',
       },
     },
     '&.is-info': {
       bg: 'blue-500',
-      path: {
-        fill: 'black',
+      span: {
+        color: 'black',
       },
     },
     '&.is-major': {
       bg: 'orange-500',
-      path: {
-        fill: 'black',
+      span: {
+        color: 'black',
       },
     },
     '&.is-minor': {
       bg: 'yellow-500',
-      path: {
-        fill: 'black',
+      span: {
+        color: 'black',
       },
     },
     '&.is-warning-neutral': {
       bg: 'gray-700',
-      path: {
-        fill: 'gray-100',
+      span: {
+        color: 'gray-100',
       },
     },
     '&.is-fatal': {
       bg: 'gray-100',
-      path: {
-        fill: 'gray-700',
+      span: {
+        color: 'gray-700',
       },
     },
     '&.is-selected.is-selected': {
       bg: 'black',
-      '& > svg': {
-        path: {
-          fill: 'active',
-        },
+      span: {
+        color: 'active',
       },
     },
   },

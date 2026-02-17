@@ -211,6 +211,9 @@ const navBar = {
     '> div > svg': {
       fill: '#455469',
     },
+    '> span.material-symbols-outlined': {
+      color: '#455469',
+    }
   },
   navBarItemBody: {
     mb: '0px !important',

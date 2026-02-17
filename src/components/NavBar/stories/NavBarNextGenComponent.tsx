@@ -12,6 +12,7 @@ import { useGetTheme } from '../../../hooks';
 
 export const NavBarNextGenComponent = () => {
   const { icons } = useGetTheme();
+
   const firstSectionData = [
     {
       'data-id': 'dashboard-data-id',
