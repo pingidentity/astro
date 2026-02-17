@@ -1,6 +1,7 @@
 import {
   ReactNode,
 } from 'react';
+import type { MaterialSymbol } from '@material-symbols/font-400';
 
 import { TestingAttributes } from './shared/test';
 import { DOMAttributes, IconSize, StyleProps } from './shared';
@@ -30,8 +31,9 @@ export interface IconProps extends StyleProps, DOMAttributes, TestingAttributes 
     name: string,
   }
   /** The icon to render. */
-  icon?: IconTypeExtended,
+  icon?: IconTypeExtended | MaterialSymbol;
   size?: IconSize;
   /** A theme-aware prop to set the icon's color. */
   color?: string,
+  hasFill?: boolean;
 }

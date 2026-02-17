@@ -21,6 +21,7 @@ const nextGenConvertedComponents = [
   'GridList',
   'HelpHint',
   'Icon',
+  'MaterialSymbolIcon',
   'IconBadge',
   'IconButton',
   'IconWrapper',
@@ -122,16 +123,10 @@ export const astroBlacklistStory = {
     'Square Variation',
     'Logo Variation',
   ],
-  Text: [
-    'Onyx',
-  ],
-  Loader: [
-    'Circular',
-    'Custom Circular',
-  ],
-  Card: [
-    'With Shadow',
-  ],
+  Text: ['Onyx'],
+  Loader: ['Circular', 'Custom Circular'],
+  Card: ['With Shadow'],
+  MaterialSymbolIcon: ['Default', 'Sizes', 'Commonly Used'],
 };
 
 export const nextGenOnlyComponents = [
