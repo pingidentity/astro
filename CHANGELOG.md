@@ -1,3 +1,18 @@
+## 2.172.0-alpha.0 (2026-02-18)
+
+### 🚀 Features
+
+- [UIP-8012] Update Onyx theme to include Material Symbols icons
+
+### 🩹 Fixes
+
+- [UIP-8111] Astro build failure
+
+### ❤️  Thank You
+
+- Ajith M
+- Ridhisha Dangol
+
 ## 2.171.0-alpha.0 (2026-02-16)
 
 ### 🚀 Features
