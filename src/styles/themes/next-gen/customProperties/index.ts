@@ -22,9 +22,11 @@ const badgeStyles = {
 };
 const linkSelectFieldWidth = '12em';
 const calendarIconSize = 'sm' as IconSize;
+const navBarIconSize = '20px' as IconSize;
 
 export const nextGenThemeValues = {
   activeColor,
+  navBarIconSize,
   backgroundBaseColor,
   styles,
   icons,

@@ -19,7 +19,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
 
   const navBarState = useNavBarContext();
 
-  const { themeState: { isOnyx }, icons } = useGetTheme();
+  const { icons, navBarIconSize } = useGetTheme();
   const { MenuDown, MenuUp } = icons;
 
   const {
@@ -55,7 +55,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
       {icon && (
         <Icon
           icon={icon}
-          size={isOnyx ? 'icon-200' : 18}
+          size={navBarIconSize || 18}
           sx={{
             mr: 'sm',
             color: getIconColor(),

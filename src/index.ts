@@ -1,6 +1,7 @@
 // NOTE: Named exports must be unique across files, otherwise collisions will occur.
 
 /* eslint-disable import/export */
+import '@material-symbols/font-400';
 
 export { default as AccordionGridGroup } from './components/AccordionGridGroup';
 export * from './components/AccordionGridGroup';

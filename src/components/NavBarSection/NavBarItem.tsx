@@ -55,7 +55,7 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
   });
   const color = isSelected ? 'white' : 'neutral.95';
 
-  const { themeState: { isOnyx } } = useGetTheme();
+  const { navBarIconSize } = useGetTheme();
 
   return (
     <Box
@@ -81,7 +81,7 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
             <Icon
               icon={icon}
               title={{ name: text! }}
-              size={isOnyx ? 'icon-200' : 'sm'}
+              size={navBarIconSize || 18}
               sx={{
                 mr: 'sm',
                 color,

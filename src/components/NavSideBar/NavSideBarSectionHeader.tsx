@@ -17,7 +17,7 @@ const NavSideBarSectionHeader = (props: NavSideBarSectionHeaderProps) => {
     ...others
   } = props;
 
-  const { icons } = useGetTheme();
+  const { icons, navBarIconSize } = useGetTheme();
   const {
     MenuUp,
     MenuDown,
@@ -66,7 +66,7 @@ const NavSideBarSectionHeader = (props: NavSideBarSectionHeaderProps) => {
         {icon && (
           <Icon
             icon={icon}
-            size={navStyles.navBarItemHeaderIconSize}
+            size={navBarIconSize}
             variant={variant}
             aria-hidden="true"
           />
@@ -77,7 +77,7 @@ const NavSideBarSectionHeader = (props: NavSideBarSectionHeaderProps) => {
         <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
           <Icon
             icon={isExpanded ? MenuUp : MenuDown}
-            size={navStyles.navBarItemHeaderIconSize}
+            size={navBarIconSize}
             variant={variant}
             mr="0"
             title={{ name: isExpanded ? 'Menu up' : 'Menu down' }}

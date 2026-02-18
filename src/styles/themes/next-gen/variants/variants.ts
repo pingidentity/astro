@@ -1,3 +1,5 @@
+import { fontSize } from 'styled-system';
+
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
@@ -321,10 +323,8 @@ const rockerButton = {
       backgroundColor: 'active',
       '& > div.status-icon': {
         bg: 'white',
-        '& > svg': {
-          path: {
-            fill: 'active',
-          },
+        span: {
+          color: 'active',
         },
       },
     },
@@ -367,58 +367,64 @@ const statusIcon = {
   base: {
     '&.is-default': {
       bg: 'gray-100',
-      path: {
-        fill: 'gray-700',
+      span: {
+        fontSize: 'md',
+        color: 'gray-700',
       },
     },
     '&.is-critical': {
       bg: 'red-100',
-      path: {
-        fill: 'red-700',
+      span: {
+        fontSize: 'md',
+        color: 'red-700',
       },
     },
     '&.is-warning': {
       bg: 'yellow-100',
-      path: {
-        fill: 'yellow-800',
+      span: {
+        fontSize: 'md',
+        color: 'yellow-800',
       },
     },
     '&.is-info': {
       bg: 'blue-100',
-      path: {
-        fill: 'blue-600',
+      span: {
+        fontSize: 'md',
+        color: 'blue-600',
       },
     },
     '&.is-major': {
       bg: 'orange-100',
-      path: {
-        fill: 'orange-700',
+      span: {
+        fontSize: 'md',
+        color: 'orange-700',
       },
     },
     '&.is-minor': {
       bg: 'yellow-100',
-      path: {
-        fill: 'yellow-800',
+      span: {
+        fontSize: 'md',
+        color: 'yellow-800',
       },
     },
     '&.is-warning-neutral': {
       bg: 'gray-100',
-      path: {
-        fill: 'gray-700',
+      span: {
+        fontSize: 'md',
+        color: 'gray-700',
       },
     },
     '&.is-fatal': {
       bg: 'gray-700',
-      path: {
-        fill: 'gray-100',
+      span: {
+        fontSize: 'md',
+        color: 'gray-100',
       },
     },
     '&.is-selected.is-selected': {
       bg: 'white',
-      '& > svg': {
-        path: {
-          fill: 'active',
-        },
+      span: {
+        color: 'active',
       },
     },
   },

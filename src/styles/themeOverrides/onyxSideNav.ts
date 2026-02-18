@@ -22,7 +22,8 @@ const navBar = {
     width: '230px',
     p: '8px',
     backgroundColor: 'white',
-    boxShadow: '0 .5rem 1rem rgba(0, 0, 0, .15)',
+    boxShadow: '0 2px 11px rgba(0, 0, 0, .13)',
+    zIndex: 2,
   },
   logoParent: {
     p: '8px',
@@ -38,7 +39,7 @@ const navBar = {
       backgroundColor: '#f6f8fa',
     },
     '&.is-pressed': {
-      backgroundColor: '#e5e9f8',
+      backgroundColor: '#EDEFF1',
     },
     '&.is-focused': {
       ...navBarFocus,
@@ -54,7 +55,7 @@ const navBar = {
         backgroundColor: '#f6f8fa',
       },
       '&.is-pressed': {
-        backgroundColor: '#e5e9f8',
+        backgroundColor: '#EDEFF1',
       },
       '&.is-focused': {
         ...navBarFocus,
@@ -92,7 +93,7 @@ const navBar = {
         border: 'none',
       },
       '&.is-pressed': {
-        backgroundColor: '#e5e9f8',
+        backgroundColor: '#EDEFF1',
         color: '#455469',
       },
       '&.is-selected': {
@@ -111,7 +112,7 @@ const navBar = {
       border: 'none',
     },
     '&.is-pressed': {
-      backgroundColor: '#e5e9f8',
+      backgroundColor: '#EDEFF1',
       color: '#455469',
     },
     '&.is-selected': {
@@ -126,6 +127,7 @@ const navBar = {
     textTransform: 'uppercase',
     fontSize: '12px',
     letterSpacing: '1px',
+    lineHeight: '140%',
   },
   headerText: {
     color: '#455469',
@@ -155,6 +157,7 @@ const navBar = {
     py: '.75rem',
     color: '#455469',
     borderRadius: '4px',
+    textDecoration: 'none',
     mb: '2px',
     '&.is-hovered': {
       backgroundColor: '#f6f8fa',
@@ -162,12 +165,18 @@ const navBar = {
     '> div > svg': {
       fill: '#455469',
     },
+    '> svg': {
+      fill: '#455469',
+    },
     '&.is-pressed': {
-      backgroundColor: '#e5e9f8',
+      backgroundColor: '#EDEFF1',
     },
     '&.is-selected': {
       ...navBarSelected,
       '> div > svg': {
+        fill: 'accent.40',
+      },
+      '> svg': {
         fill: 'accent.40',
       },
     },
@@ -202,6 +211,9 @@ const navBar = {
     '> div > svg': {
       fill: '#455469',
     },
+    '> span.material-symbols-outlined': {
+      color: '#455469',
+    },
   },
   navBarItemBody: {
     mb: '0px !important',
@@ -214,6 +226,11 @@ const separator = {
     mx: '0px',
     maxWidth: '236px',
     backgroundColor: '#e7eef4',
+  },
+  navBarSubtitleSeparator: {
+    backgroundColor: '#e7eef4',
+    mx: '0px',
+    my: '10px',
   },
 };
 
@@ -236,4 +253,5 @@ export default {
     md: 25,
     'xsm': 16,
   },
+  navBarIconSize: '20px',
 };

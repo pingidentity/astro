@@ -23,9 +23,11 @@ const defaultIconColor = 'currentColor';
 const defaultIconSize = 'sm' as IconSize;
 const linkSelectFieldWidth = '10em';
 const calendarIconSize = 25 as IconSize;
+const navBarIconSize = 18 as IconSize;
 
 export const astroThemeValues = {
   accordionItemDefaultLabelTag,
+  navBarIconSize,
   activeColor,
   backgroundBaseColor,
   icons,

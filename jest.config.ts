@@ -10,6 +10,7 @@ module.exports = {
     '^.+\\.(css|scss)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.mdx$': '<rootDir>/__mocks__/mdxMock.js',
     '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
+    '^@material-symbols/.*$': '<rootDir>/__mocks__/fileMock.js',
   },
   modulePathIgnorePatterns: ['/lib/', '/build/', '/dist/'],
   setupFiles: [require.resolve('jest-canvas-mock')],
