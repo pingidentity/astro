@@ -213,7 +213,7 @@ const navBar = {
     },
     '> span.material-symbols-outlined': {
       color: '#455469',
-    }
+    },
   },
   navBarItemBody: {
     mb: '0px !important',

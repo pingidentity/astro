@@ -31,7 +31,7 @@ export interface IconProps extends StyleProps, DOMAttributes, TestingAttributes 
     name: string,
   }
   /** The icon to render. */
-  icon?: IconTypeExtended | MaterialSymbol;
+  icon?: IconTypeExtended | MaterialSymbol | string;
   size?: IconSize;
   /** A theme-aware prop to set the icon's color. */
   color?: string,

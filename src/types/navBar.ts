@@ -1,9 +1,9 @@
 import React, { Key } from 'react';
+import type { MaterialSymbol } from '@material-symbols/font-400';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { IconProps, IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
-import type { MaterialSymbol } from '@material-symbols/font-400';
 
 // export type Key = string | number;
 
@@ -33,7 +33,7 @@ export interface NavBarItemProps extends StyleProps, DOMAttributes {
   /**  Handler that is called when the press is released over the target. */
   onPress?: () => void;
   /** The icon to render in between each node. */
-  icon?: IconTypeExtended | MaterialSymbol;
+  icon?: IconTypeExtended | MaterialSymbol | string;
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id?: string;
   /** Text that will render within the component */
