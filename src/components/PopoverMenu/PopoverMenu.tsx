@@ -1,5 +1,5 @@
 import React, { forwardRef, ReactElement, useRef } from 'react';
-import { DismissButton, FocusScope, OverlayContainer, useMenuTrigger } from 'react-aria';
+import { DismissButton, FocusScope, mergeProps, OverlayContainer, useMenuTrigger } from 'react-aria';
 import { useMenuTriggerState } from 'react-stately';
 import { PressResponder } from '@react-aria/interactions';
 
@@ -35,7 +35,7 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
   const { menuTriggerProps, menuProps } = useMenuTrigger({}, state, triggerRef);
   const trigger = React.isValidElement(menuTrigger)
     ? React.cloneElement(menuTrigger as React.ReactElement, {
-      ...menuTriggerProps,
+      ...mergeProps(menuTrigger.props, menuTriggerProps),
       ref: triggerRef,
     })
     : menuTrigger;
