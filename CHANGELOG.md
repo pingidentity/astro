@@ -1,3 +1,13 @@
+## 2.173.0-alpha.0 (2026-02-24)
+
+### 🚀 Features
+
+- [UIP-8042] ListViewItem: Add Expandable story
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.172.1-alpha.0 (2026-02-24)
 
 ### 🩹 Fixes
