@@ -1,16 +1,20 @@
 import React, { useRef } from 'react';
 import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import AccountOutlineIcon from '@pingux/mdi-react/AccountOutlineIcon';
 import ClockOutlineIcon from '@pingux/mdi-react/ClockOutlineIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
   Badge,
   Box,
+  IconWrapper,
+  ListView,
   ListViewItem,
   ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
+  SearchField,
   Separator,
   Text,
 } from '../..';
@@ -324,5 +328,60 @@ WithExtraLongText.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.listViewItem.withExtraLongText,
+  },
+};
+
+export const WithExpandableItem = () => (
+  <ListView
+    items={[{
+      key: 'Fons Vernall',
+      name: 'Fons Vernall',
+      subtext: 'rad_developer@pingidentity.com',
+      id: '1',
+      icon: AccountOutlineIcon,
+    }]}
+    selectionMode="expansion"
+  >
+    {
+      item => (
+        <Item key={item.key} textValue={item.name}>
+          <Box isRow sx={{ alignItems: 'center' }} gap="lg">
+            <IconWrapper
+              icon={item.icon}
+              size="sm"
+              title={{ name: item.name }}
+              isCircle
+              color="blue"
+            />
+            <Box>
+              <Text variant="listViewItemText">
+                {item.name}
+              </Text>
+              <Text variant="listViewItemSubtext">
+                {item.subtext}
+              </Text>
+            </Box>
+          </Box>
+          <Box sx={{ my: '20px' }}>
+            <SearchField maxWidth="400px" aria-label="Search" placeholder="Search" />
+            <Text variant="listViewItemExpandedText">
+              Lorem ipsum dolor sit amet consectetur.
+              Viverra nulla nec velit sollicitudin sed nisi mi gravida.
+              Maecenas vestibulum pretium dictum dictum tempus.
+              Sit et rutrum hendrerit facilisi turpis tellus elementum.
+              Egestas consectetur in ac id. Sit aliquam et ut pellentesque in at blandit sed.
+              Sapien morbi cras eleifend lectus.
+            </Text>
+          </Box>
+        </Item>
+      )
+    }
+  </ListView>
+);
+
+WithExpandableItem.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.default,
   },
 };

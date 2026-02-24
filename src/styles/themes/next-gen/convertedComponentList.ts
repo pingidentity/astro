@@ -123,10 +123,24 @@ export const astroBlacklistStory = {
     'Square Variation',
     'Logo Variation',
   ],
-  Text: ['Onyx'],
-  Loader: ['Circular', 'Custom Circular'],
-  Card: ['With Shadow'],
-  MaterialSymbolIcon: ['Default', 'Sizes', 'Commonly Used'],
+  Text: [
+    'Onyx',
+  ],
+  Loader: [
+    'Circular',
+    'Custom Circular',
+  ],
+  Card: [
+    'With Shadow',
+  ],
+  ListViewItem: [
+    'With Expandable Item',
+  ],
+  MaterialSymbolIcon: [
+    'Default',
+    'Sizes',
+    'Commonly Used',
+  ],
 };
 
 export const nextGenOnlyComponents = [

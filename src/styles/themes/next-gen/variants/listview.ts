@@ -61,7 +61,7 @@ export const listViewItem = {
     '&.is-last-item': {
       borderBottomLeftRadius: borderRadius,
       borderBottomRightRadius: borderRadius,
-      '&.is-hovered, &.is-expanded': {
+      '&.is-expanded.is-hovered, &.is-expanded.is-expanded': {
         borderBottomLeftRadius: '0',
         borderBottomRightRadius: '0',
       },
