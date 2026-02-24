@@ -1,3 +1,13 @@
+## 2.172.1-alpha.0 (2026-02-24)
+
+### 🩹 Fixes
+
+- [UIP-8105] ImageUploadField opens on press
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.172.0 (2026-02-18)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
