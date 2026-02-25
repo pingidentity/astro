@@ -2,7 +2,7 @@ import React, {
   forwardRef,
   useContext,
 } from 'react';
-import { FocusRing } from 'react-aria';
+import { useFocusRing } from 'react-aria';
 import { useToggleButtonGroupItem } from '@react-aria/button';
 import { useHover } from '@react-aria/interactions';
 import { mergeProps } from '@react-aria/utils';
@@ -45,37 +45,39 @@ export const RockerButton = forwardRef<HTMLElement, RockerButtonProps>((props, r
     isDisabled: isDisabled || disabledKeys?.includes(id),
   }, state, rockerButtonRef);
 
+  const { isFocusVisible, focusProps } = useFocusRing();
+
   const { classNames } = useStatusClasses(className, {
     isHovered,
     isPressed,
     isDisabled: isRaDisabled,
     isSelected,
+    isFocused: isFocusVisible,
   });
 
   return (
-    <FocusRing focusRingClass="is-focused">
-      <Box
-        as="button"
-        isRow
-        className={classNames}
-        variant="variants.rockerButton.thumbSwitch"
-        ref={rockerButtonRef}
-        sx={{
-          '&.is-selected': {
-            ...selectedStyles,
-          },
-          '&.is-selected.is-hovered': {
-            bg: getDarkerColor(backgroundHexColor as string, 0.2),
-          },
-          '&.is-pressed': {
-            bg: getDarkerColor(backgroundHexColor as string, 0.4),
-          },
-        }}
-        {...mergeProps(hoverProps, rockerButtonProps)}
-      >
-        {children || name}
-      </Box>
-    </FocusRing>
+    <Box
+      as="button"
+      isRow
+      className={classNames}
+      variant="variants.rockerButton.thumbSwitch"
+      ref={rockerButtonRef}
+      sx={{
+        '&.is-selected': {
+          ...selectedStyles,
+        },
+        '&.is-selected.is-hovered': {
+          bg: getDarkerColor(backgroundHexColor as string, 0.2),
+        },
+        '&.is-pressed': {
+          bg: getDarkerColor(backgroundHexColor as string, 0.4),
+        },
+      }}
+      {...mergeProps(hoverProps, rockerButtonProps)}
+      {...focusProps}
+    >
+      {children || name}
+    </Box>
   );
 });
 
