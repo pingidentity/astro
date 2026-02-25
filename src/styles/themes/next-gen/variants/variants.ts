@@ -338,7 +338,7 @@ const rockerButton = {
       backgroundColor: '#135CBC !important',
       color: 'white',
     },
-    '&.is-focused': {
+    '&.is-focused:focus': {
       ...defaultFocus,
       position: 'relative',
       zIndex: '1000',

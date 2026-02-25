@@ -41,7 +41,7 @@ const thumbSwitch = {
       },
     },
   },
-  '&.is-focused': {
+  '&.is-focused:focus': {
     ...defaultFocus,
   },
   '&.is-hovered': {
