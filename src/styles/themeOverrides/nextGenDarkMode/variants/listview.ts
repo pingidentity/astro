@@ -1,5 +1,6 @@
-import { colors } from '../colors';
+import { astroTokensDark } from '@pingux/onyx-tokens';
 
+import { colors } from '../colors';
 
 export const listViewItem = {
   styledListItem: {
@@ -31,7 +32,7 @@ export const listViewItem = {
     },
   },
   expandIcon: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
     fill: `${colors.secondary} !important`,
   },
   expandableRow: {
@@ -49,21 +50,21 @@ export const listView = {
 
 export const lisViewItemChart = {
   title: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   count: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   countLabel: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   chartLabel: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   trend: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   chartButton: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
 };

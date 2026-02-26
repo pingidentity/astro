@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import spacing from '../spacing';
 
 const line = {
@@ -7,7 +9,7 @@ const line = {
   borderBottomColor: 'active',
   '&.is-inactive': {
     borderBottomStyle: 'solid',
-    borderBottomColor: 'blue-200',
+    borderBottomColor: astroTokens.color.blue[200],
   },
 };
 
@@ -55,7 +57,7 @@ const step = {
   inactive: {
     '&.is-horizontal': {
       backgroundColor: 'backgroundBase',
-      borderColor: 'blue-200',
+      borderColor: astroTokens.color.blue[200],
       color: 'active',
       ...stepBase,
     },

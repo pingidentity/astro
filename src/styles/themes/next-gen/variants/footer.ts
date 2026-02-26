@@ -1,7 +1,9 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 const container = {
   fontFamily: 'standard',
   justifyContent: 'center',
-  backgroundColor: 'gray-800',
+  backgroundColor: astroTokens.color.gray[800],
 };
 
 const wrapper = {

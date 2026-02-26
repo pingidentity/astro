@@ -14,7 +14,7 @@ export type IconTypeExtended = ReactNode & {
   type: {
     name: string;
   };
-} | React.ElementType
+} | React.ElementType | string;
 
 
 export interface IconProps extends StyleProps, DOMAttributes, TestingAttributes {
@@ -31,7 +31,7 @@ export interface IconProps extends StyleProps, DOMAttributes, TestingAttributes 
     name: string,
   }
   /** The icon to render. */
-  icon?: IconTypeExtended | MaterialSymbol | string;
+  icon?: IconTypeExtended | MaterialSymbol;
   size?: IconSize;
   /** A theme-aware prop to set the icon's color. */
   color?: string,

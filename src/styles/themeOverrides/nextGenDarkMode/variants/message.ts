@@ -1,3 +1,5 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 export const message = {
   item: {
     backgroundColor: 'light',
@@ -7,7 +9,7 @@ export const message = {
     },
     '&.is-success': {
       bg: 'light',
-      borderLeftColor: 'green-500',
+      borderLeftColor: astroTokensDark.color.green[500],
       color: 'text.message',
     },
     '&.is-success, > .is-success': {
@@ -16,7 +18,7 @@ export const message = {
     },
     '&.is-warning': {
       bg: 'light',
-      borderLeftColor: 'yellow-500',
+      borderLeftColor: astroTokensDark.color.yellow[500],
       color: 'text.message',
     },
     '&.is-warning, > .is-warning': {
@@ -52,7 +54,7 @@ export const message = {
       },
     },
     '&.is-error': {
-      borderLeftColor: 'red-500',
+      borderLeftColor: astroTokensDark.color.red[500],
     },
   },
 };

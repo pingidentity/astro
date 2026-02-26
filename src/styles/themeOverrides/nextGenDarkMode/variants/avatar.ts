@@ -1,3 +1,5 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 export const avatar = {
   color: 'black',
   cursor: 'pointer',
@@ -10,7 +12,7 @@ export const avatar = {
     color: 'black',
   },
   '&.is-purple': {
-    backgroundColor: 'purple-400',
+    backgroundColor: astroTokensDark.color.purple[400],
     color: 'black',
   },
   '&.is-pink': {

@@ -1,3 +1,5 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 import { colors } from '../colors';
 
 import { avatar } from './avatar';
@@ -20,22 +22,22 @@ const listBox = {
     borderRadius: '4px',
   },
   option: {
-    color: 'gray-400',
+    color: astroTokensDark.color.gray[400],
     '&.is-focused': {
-      color: 'gray-200',
+      color: astroTokensDark.color.gray[200],
       bg: '#2C323A',
     },
     '&.is-selected': {
-      color: 'gray-200',
+      color: astroTokensDark.color.gray[200],
       bg: '#2C323A',
       '&.is-focused': {
-        color: 'gray-200',
+        color: astroTokensDark.color.gray[200],
       },
     },
     '&.is-condensed': {
-      color: 'gray-400',
+      color: astroTokensDark.color.gray[400],
       '&.is-focused': {
-        color: 'gray-200',
+        color: astroTokensDark.color.gray[200],
       },
     },
     '&.is-focus-visible': {
@@ -95,7 +97,7 @@ const rockerButton = {
   },
   thumbSwitch: {
     backgroundColor: 'backgroundBase',
-    color: 'blue-400',
+    color: astroTokensDark.color.blue[400],
     '&.is-selected': {
       color: 'black',
       '& > div.status-icon': {
@@ -120,58 +122,58 @@ const attachment = {
 
 const tooltip = {
   inline: {
-    color: 'blue-400',
+    color: astroTokensDark.color.blue[400],
   },
 };
 
 const statusIcon = {
   base: {
     '&.is-default': {
-      bg: 'gray-100',
+      bg: astroTokensDark.color.gray[100],
       span: {
         color: 'black',
       },
     },
     '&.is-critical': {
-      bg: 'red-500',
+      bg: astroTokensDark.color.red[500],
       span: {
         color: 'black',
       },
     },
     '&.is-warning': {
-      bg: 'yellow-500',
+      bg: astroTokensDark.color.yellow[500],
       span: {
         color: 'black',
       },
     },
     '&.is-info': {
-      bg: 'blue-500',
+      bg: astroTokensDark.color.blue[500],
       span: {
         color: 'black',
       },
     },
     '&.is-major': {
-      bg: 'orange-500',
+      bg: astroTokensDark.color.orange[500],
       span: {
         color: 'black',
       },
     },
     '&.is-minor': {
-      bg: 'yellow-500',
+      bg: astroTokensDark.color.yellow[500],
       span: {
         color: 'black',
       },
     },
     '&.is-warning-neutral': {
-      bg: 'gray-700',
+      bg: astroTokensDark.color.gray[700],
       span: {
-        color: 'gray-100',
+        color: astroTokensDark.color.gray[100],
       },
     },
     '&.is-fatal': {
-      bg: 'gray-100',
+      bg: astroTokensDark.color.gray[100],
       span: {
-        color: 'gray-700',
+        color: astroTokensDark.color.gray[700],
       },
     },
     '&.is-selected.is-selected': {

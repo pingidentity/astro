@@ -1,3 +1,4 @@
+import { astroTokens } from '@pingux/onyx-tokens';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { text } from './text';
@@ -7,14 +8,14 @@ const defaultFocus = {
 };
 
 const readOnlyandDisabledStyles = {
-  backgroundColor: 'disabled',
+  backgroundColor: astroTokens.color.input['readonly-bg'],
   border: '1px solid',
-  borderColor: 'border.input',
+  borderColor: astroTokens.color.input.border,
   opacity: 1,
 };
 
 export const input: ThemeUICSSObject = {
-  height: '50px',
+  height: astroTokens.size.input.height,
   fontSize: 'md',
   fontFamily: 'standard',
   p: '0.75rem',
@@ -23,11 +24,11 @@ export const input: ThemeUICSSObject = {
   '&.is-focused': {
     ...defaultFocus,
   },
-  borderRadius: '4px',
+  borderRadius: astroTokens.radius.input,
   fontWeight: 1,
   '&::placeholder': text.placeholder,
   '.is-float-label &': {
-    height: '50px',
+    height: astroTokens.size.input.height,
   },
 };
 
@@ -76,7 +77,7 @@ input.containedIcon = {
 
 export const fieldControlWrapper = {
   '> textarea': {
-    borderRadius: '4px',
+    borderRadius: astroTokens.radius.input,
     border: '1px solid',
     borderColor: 'border.input !important',
     outline: 'none',
@@ -108,20 +109,20 @@ export const fieldControlWrapper = {
   },
   '> button': {
     borderLeftWidth: 1,
-    borderRadius: '4px',
+    borderRadius: astroTokens.radius.input,
     border: '1px solid',
-    borderColor: 'border.input',
+    borderColor: astroTokens.color.input.border,
   },
   '&.is-read-only': {
     '> input': {
-      backgroundColor: 'disabled',
+      backgroundColor: astroTokens.color.input['readonly-bg'],
       border: '1px solid',
-      borderColor: 'border.input',
+      borderColor: astroTokens.color.input.border,
     },
     '> textarea': {
-      backgroundColor: 'disabled',
+      backgroundColor: astroTokens.color.input['readonly-bg'],
       border: '1px solid',
-      borderColor: 'border.input',
+      borderColor: astroTokens.color.input.border,
     },
     '&:after': {
       display: 'none',
@@ -142,9 +143,9 @@ input.fieldControlWrapper = {
 input.promptInputWrapper = {
   ...fieldControlWrapper,
   border: '1px solid',
-  borderColor: 'border.input',
-  borderRadius: '4px',
-  minHeight: '50px',
+  borderColor: astroTokens.color.input.border,
+  borderRadius: astroTokens.radius.input,
+  minHeight: astroTokens.size.input.height,
   '&.is-focused': {
     boxShadow: '0 1px 1px rgba(0,0,0,.075), 0 0 0 .0625rem blue',
   },
@@ -160,9 +161,9 @@ input.multivaluesWrapper = {
   pr: 10,
   pb: 5,
   pl: 12,
-  borderRadius: '4px',
+  borderRadius: astroTokens.radius.input,
   alignItems: 'center',
-  minHeight: '50px',
+  minHeight: astroTokens.size.input.height,
   '> input': {
     border: 'none',
     flex: 1,
@@ -224,7 +225,7 @@ input.dropDownContentRight = {
     '&.is-focused': {
       outline: '2px solid',
       outlineOffset: '2px',
-      outlineColor: 'gray-700',
+      outlineColor: astroTokens.color['gray-700'],
     },
   },
 };
@@ -235,7 +236,7 @@ input.dropDownContentLeft = {
     '&.is-focused': {
       outline: '2px solid',
       outlineOffset: '2px',
-      outlineColor: 'gray-700',
+      outlineColor: astroTokens.color['gray-700'],
     },
   },
 };

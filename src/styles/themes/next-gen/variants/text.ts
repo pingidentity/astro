@@ -1,30 +1,35 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
+// @ts-expect-error - font-size is in default tokens but not in the type definition
+const fontSizes = astroTokens.default['font-size'];
+
 const hTags = {
   H1: {
-    fontSize: 'xxx',
+    fontSize: fontSizes.h1,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   H2: {
-    fontSize: 'xx',
+    fontSize: fontSizes.h2,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   H3: {
-    fontSize: 'xl',
+    fontSize: fontSizes.h3,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   H4: {
-    fontSize: 'lg',
+    fontSize: fontSizes.h4,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   H5: {
-    fontSize: 'md',
+    fontSize: fontSizes.h5,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
@@ -34,35 +39,35 @@ const hTags = {
     color: 'text.primary',
     fontFamily: 'standard',
     fontWeight: 1,
-    fontSize: 'xs',
+    fontSize: fontSizes.h6,
     letterSpacing: '1px',
   },
   h1: {
-    fontSize: 'xxx',
+    fontSize: fontSizes.h1,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   h2: {
-    fontSize: 'xx',
+    fontSize: fontSizes.h2,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   h3: {
-    fontSize: 'xl',
+    fontSize: fontSizes.h3,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   h4: {
-    fontSize: 'lg',
+    fontSize: fontSizes.h4,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
   },
   h5: {
-    fontSize: 'md',
+    fontSize: fontSizes.h5,
     fontWeight: 2,
     color: 'text.primary',
     fontFamily: 'standard',
@@ -72,7 +77,7 @@ const hTags = {
     color: 'text.primary',
     fontFamily: 'standard',
     fontWeight: 1,
-    fontSize: 'xs',
+    fontSize: fontSizes.h6,
     letterSpacing: '1px',
   },
 };
@@ -128,7 +133,7 @@ export const text = {
     wordBreak: 'normal',
   },
   placeholder: {
-    color: 'gray-600',
+    color: astroTokens.color.gray[600],
     fontWeight: 1,
   },
   paragraph: {
@@ -193,11 +198,11 @@ export const text = {
   },
   messagesText: {
     '&.is-success, &.is-warning, &.is-error, &.is-default': {
-      color: 'gray-700',
+      color: astroTokens.color.gray[700],
       '& > a': {
         fontWeight: '600',
         textDecoration: 'underline',
-        color: 'gray-700',
+        color: astroTokens.color.gray[700],
       },
     },
   },

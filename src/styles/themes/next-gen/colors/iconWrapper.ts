@@ -1,5 +1,3 @@
-import { nextGenColors } from '../tokens/colorTokens';
-
 import twoTone from './twoTone';
 
 export const iconWrapper = {

@@ -1,16 +1,11 @@
+import { astroTokens } from '@pingux/onyx-tokens';
 import chroma from 'chroma-js';
 
 import { copyButton } from '../codeView/codeView';
-import colors from '../colors/colors';
 import tShirtSizes from '../customProperties/tShirtSizes';
 
 import { commonContentProps } from './box';
 
-const { primary: primaryBlue,
-  active_hover: primaryBlueHover,
-  active_pressed: primaryBluePress,
-  critical_hover: criticalRedHover,
-  critical_pressed: criticalRedPress } = colors;
 
 const transitions = {
   transition:
@@ -58,8 +53,8 @@ const buttonBase = {
   borderRadius: '1.75rem',
   border: '1px solid',
   borderColor: 'border.base',
-  px: '20px',
-  py: '12px',
+  px: astroTokens.spacing.button['padding-x'],
+  py: astroTokens.spacing.button['padding-y'],
   maxHeight: '48.5px',
   height: '48.5px',
   '&.is-disabled': {
@@ -89,17 +84,17 @@ const primary = {
   backgroundColor: 'primary',
   borderColor: 'primary',
   '&.is-pressed': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
   },
   '&.is-hovered': {
-    backgroundColor: primaryBlueHover,
-    borderColor: primaryBlueHover,
+    backgroundColor: astroTokens.color.button.primary.hover.bg,
+    borderColor: astroTokens.color.button.primary.hover.border,
     ...boxShadowNone,
   },
   '&.is-focused': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
     outline: '2px solid',
   },
 };
@@ -107,17 +102,17 @@ const primary = {
 const secondary = {
   ...buttonBase,
   backgroundColor: 'transparent',
-  borderColor: 'primary',
-  color: 'primary',
+  borderColor: astroTokens.color.primary,
+  color: astroTokens.color.primary,
   '&.is-pressed': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
     color: 'white',
     path: { fill: 'white' },
   },
   '&.is-hovered': {
-    backgroundColor: primaryBlue,
-    borderColor: primaryBlue,
+    backgroundColor: astroTokens.color.button.primary.hover.bg,
+    borderColor: astroTokens.color.button.primary.hover.border,
     color: 'white',
     path: { fill: 'white' },
     ...boxShadowNone,
@@ -128,7 +123,7 @@ const tertiary = {
   ...buttonBase,
   backgroundColor: 'transparent',
   borderColor: 'border.base',
-  color: 'font.base',
+  color: astroTokens.color.font.base,
   '&.is-focused': {
     ...defaultFocus,
     outlineColor: 'gray-700',
@@ -136,11 +131,11 @@ const tertiary = {
   },
   '&.is-pressed': {
     backgroundColor: 'backgroundSecondary',
-    color: 'font.base',
+    color: astroTokens.color.font.base,
   },
   '&.is-hovered': {
     backgroundColor: 'backgroundSecondary',
-    color: 'font.base',
+    color: astroTokens.color.font.base,
     ...boxShadowNone,
   },
 };
@@ -175,12 +170,12 @@ const critical = {
     backgroundColor: 'critical.dark',
   },
   '&.is-pressed': {
-    backgroundColor: criticalRedPress,
-    borderColor: criticalRedPress,
+    backgroundColor: astroTokens.color.button.critical.press,
+    borderColor: astroTokens.color.button.critical.press,
   },
   '&.is-hovered': {
-    backgroundColor: criticalRedHover,
-    borderColor: criticalRedHover,
+    backgroundColor: astroTokens.color.button.critical.hover,
+    borderColor: astroTokens.color.button.critical.hover,
     color: 'white',
     ...boxShadowNone,
   },
@@ -198,16 +193,16 @@ const inline = {
   paddingTop: '0px',
   paddingBottom: '0px',
   backgroundColor: 'transparent',
-  color: primaryBlue,
-  borderColor: primaryBlue,
+  color: astroTokens.color.primary,
+  borderColor: astroTokens.color.primary,
   '&.is-pressed': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
     color: 'white',
   },
   '&.is-hovered': {
-    backgroundColor: primaryBlue,
-    borderColor: primaryBlue,
+    backgroundColor: astroTokens.color.primary,
+    borderColor: astroTokens.color.primary,
     color: 'white',
     path: { fill: 'white' },
     ...boxShadowNone,
@@ -229,17 +224,17 @@ const inlinePrimary = {
   color: 'white',
   borderColor: 'primary',
   '&.is-pressed': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
   },
   '&.is-hovered': {
-    backgroundColor: primaryBlueHover,
-    borderColor: primaryBlueHover,
+    backgroundColor: astroTokens.color.button.primary.hover,
+    borderColor: astroTokens.color.button.primary.hover,
     ...boxShadowNone,
   },
   '&.is-focused': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
     outline: '2px solid',
   },
 };
@@ -262,12 +257,12 @@ const link = {
   transition: 'color, .15s, ease-in-and-out',
   fontSize: 'md',
   textDecoration: 'none',
-  px: '1.25rem',
-  py: '.75rem',
+  px: astroTokens.spacing.button['padding-x'],
+  py: astroTokens.spacing.button['padding-y'],
   '&.is-pressed': {
     textDecoration: 'underline',
     outline: 'none',
-    color: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    color: chroma.mix(astroTokens.color.primary, 'black', 0.125, 'rgb').hex(),
   },
   '&.is-focused': {
     textDecoration: 'underline',
@@ -285,7 +280,7 @@ const paginationMenu = {
 const withIcon = {
   ...secondary,
   display: 'inline-flex',
-  path: { fill: primaryBlue },
+  path: { fill: astroTokens.color.primary },
 };
 
 const primaryWithIcon = {
@@ -297,7 +292,7 @@ const primaryWithIcon = {
 const inlineWithIcon = {
   ...inline,
   display: 'inline-flex',
-  path: { fill: primaryBlue },
+  path: { fill: astroTokens.color.primary },
 };
 
 const inlinePrimaryWithIcon = {
@@ -307,23 +302,23 @@ const inlinePrimaryWithIcon = {
 };
 
 const colorBlock = {
-  bg: 'gray-200',
-  borderColor: 'gray-200',
+  bg: astroTokens.color.gray[200],
+  borderColor: astroTokens.color.gray[200],
   borderRadius: '1.75rem',
   width: 150,
   height: 50,
   p: '5px 15px 5px 20px',
   '&.is-hovered': {
-    bg: 'blue-100',
-    borderColor: 'blue-100',
+    bg: astroTokens.color.blue[100],
+    borderColor: astroTokens.color.blue[100],
     ...boxShadowNone,
   },
   '&.is-focused': {
     ...defaultFocus,
   },
   '&.is-pressed': {
-    bg: 'blue-100',
-    borderColor: 'blue-100',
+    bg: astroTokens.color.blue[100],
+    borderColor: astroTokens.color.blue[100],
   },
   '&>svg': {
     color: 'text.primary',
@@ -333,25 +328,25 @@ const colorBlock = {
 
 const colorBlockPrimary = {
   ...colorBlock,
-  bg: primaryBlue,
-  borderColor: primaryBlue,
+  bg: astroTokens.color.primary,
+  borderColor: astroTokens.color.primary,
   '& span': {
     color: 'white',
     textAlign: 'left',
   },
   '&.is-hovered': {
-    backgroundColor: primaryBlueHover,
-    borderColor: primaryBlueHover,
+    backgroundColor: astroTokens.color.button.primary.hover,
+    borderColor: astroTokens.color.button.primary.hover,
     color: 'white',
     ...boxShadowNone,
   },
   '&.is-pressed': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
   },
   '&.is-focused': {
-    backgroundColor: primaryBluePress,
-    borderColor: primaryBluePress,
+    backgroundColor: astroTokens.color.button.primary.press,
+    borderColor: astroTokens.color.button.primary.press,
     outline: '2px solid',
   },
 };
@@ -370,7 +365,7 @@ const aiChat = {
     outlineOffset: '3px',
   },
   '&.is-hovered': {
-    backgroundColor: 'gray-100',
+    backgroundColor: astroTokens.color.gray[100],
     path: { fill: 'dark' },
   },
   '&.is-pressed': {
@@ -411,13 +406,13 @@ const invertedIconButton = {
   ...baseIconButtonStyle,
   '&.is-hovered': {
     boxShadow: 'none !important',
-    backgroundColor: 'blue-600',
+    backgroundColor: astroTokens.color.blue[600],
   },
   '&.is-pressed': {
-    backgroundColor: 'blue-600',
+    backgroundColor: astroTokens.color.blue[600],
   },
   '&.is-disabled': {
-    backgroundColor: 'gray-300',
+    backgroundColor: astroTokens.color.gray[300],
   },
   '&.is-focused': {
     ...defaultFocus,
@@ -435,11 +430,11 @@ const onyxIconButton = {
   alignItems: 'center',
   justifyContent: 'center',
   '&.is-hovered': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.075, 'rgb').hex(),
+    backgroundColor: chroma.mix(astroTokens.color.primary, 'black', 0.075, 'rgb').hex(),
     path: { fill: 'white' },
   },
   '&.is-pressed': {
-    backgroundColor: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    backgroundColor: chroma.mix(astroTokens.color.primary, 'black', 0.125, 'rgb').hex(),
     path: { fill: 'white' },
   },
   '&.is-focused': {
@@ -451,7 +446,7 @@ const hintButton = {
   backgroundColor: 'transparent',
   path: { fill: 'dark' },
   '&.is-hovered': {
-    backgroundColor: 'gray-100',
+    backgroundColor: astroTokens.color.gray[100],
     path: { fill: 'dark' },
   },
   '&.is-focused': {
@@ -468,7 +463,7 @@ const badgeDeleteButton = {
     ...defaultFocus,
   },
   '&.is-pressed': {
-    backgroundColor: 'gray-100',
+    backgroundColor: astroTokens.color.gray[100],
     path: { fill: 'dark' },
   },
   '&.is-hovered': {
@@ -524,10 +519,10 @@ const iconButtons = {
       width: 14,
       '&.is-focused': {
         ...defaultFocus,
-        backgroundColor: 'gray-100',
+        backgroundColor: astroTokens.color.gray[100],
       },
       '&.is-pressed': {
-        backgroundColor: 'gray-100',
+        backgroundColor: astroTokens.color.gray[100],
         path: { fill: 'dark' },
       },
       ...transitions,
@@ -569,11 +564,11 @@ const iconButtons = {
     height: '32px',
     '&.is-hovered': {
       boxShadow: 'none !important',
-      backgroundColor: 'gray-100',
+      backgroundColor: astroTokens.color.gray[100],
       path: { fill: 'dark' },
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-100',
+      backgroundColor: astroTokens.color.gray[100],
       path: { fill: 'dark' },
     },
   },
@@ -584,7 +579,8 @@ const iconButtons = {
     ...baseIconButton,
     ...commonContentProps,
     right: 0,
-    padding: '12px 20px',
+    py: astroTokens.spacing.button['padding-y'],
+    px: astroTokens.spacing.button['padding-x'],
     border: '0px solid !important',
     '&:hover, &.is-pressed': {
       background: 'transparent',
@@ -593,7 +589,7 @@ const iconButtons = {
     '&.is-focused': {
       outline: '2px solid',
       outlineOffset: '2px',
-      outlineColor: 'gray-700',
+      outlineColor: astroTokens.color.gray[700],
     },
   },
 };
@@ -608,7 +604,7 @@ const listBoxLink = {
   '&.is-pressed': {
     textDecoration: 'underline',
     outline: 'none',
-    color: chroma.mix(primaryBlue, 'black', 0.125, 'rgb').hex(),
+    color: chroma.mix(astroTokens.color.primary, 'black', 0.125, 'rgb').hex(),
   },
   '&.is-focused': {
     textDecoration: 'underline',
@@ -633,12 +629,13 @@ const ButtonInputGroupContentRight = {
   ...tertiary,
   ...commonContentProps,
   right: 0,
-  padding: '12px 20px',
+  py: astroTokens.spacing.button['padding-y'],
+  px: astroTokens.spacing.button['padding-x'],
   borderRadius: '0px 4px 4px 0px !important',
   borderWidth: '0px !important',
   borderLeftWidth: '1px !important',
   borderRightWidth: '1px !important',
-  borderLeftColor: 'gray-500',
+  borderLeftColor: astroTokens.color.gray[500],
 };
 
 const buttons = {

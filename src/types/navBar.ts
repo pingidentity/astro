@@ -33,7 +33,7 @@ export interface NavBarItemProps extends StyleProps, DOMAttributes {
   /**  Handler that is called when the press is released over the target. */
   onPress?: () => void;
   /** The icon to render in between each node. */
-  icon?: IconTypeExtended | MaterialSymbol | string;
+  icon?: IconTypeExtended | MaterialSymbol;
   /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
   id?: string;
   /** Text that will render within the component */

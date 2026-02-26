@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 const calendarBody = {
   py: 'sm',
   borderTop: '1px solid',
@@ -48,17 +50,17 @@ const calendarButton = {
     outlineOffset: '2px',
   },
   '&.is-unavailable': {
-    backgroundColor: 'gray-300',
+    backgroundColor: astroTokens.color.gray[300],
     color: 'text.primary',
   },
   '&:not(.is-outside-visible-range)&.is-extreme&:not(.is-completely-disabled)': {
-    backgroundColor: 'gray-300',
+    backgroundColor: astroTokens.color.gray[300],
     color: 'text.primary',
     opacity: 1,
   },
   '&.is-disabled': {
     '&.is-hovered': {
-      color: 'gray-900',
+      color: astroTokens.color.gray[900],
       backgroundColor: 'unset',
     },
   },
