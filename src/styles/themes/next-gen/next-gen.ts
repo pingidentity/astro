@@ -1,3 +1,4 @@
+import { astroTokens } from '@pingux/onyx-tokens';
 import merge from 'deepmerge';
 
 import { themes } from '../../../utils/devUtils/constants/themes';
@@ -37,7 +38,8 @@ const nextGenTheme = {
   fontSizes,
   fontWeights,
   lineHeights: {
-    body: '1.6',
+    // @ts-expect-error - line-height is in default tokens but not in the type definition
+    body: astroTokens.default['line-height'].base,
     xs: '1.2',
     sm: '1.4',
     md: '1.75',
@@ -51,7 +53,7 @@ const nextGenTheme = {
     codeView: 'Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace',
   },
   shadows: {
-    standard: '0 1px 3px 0 rgba(0, 0, 0, 0.13)',
+    standard: `0 ${astroTokens.spacing.card.shadow.y} ${astroTokens.spacing.card.shadow.blur} 0 rgba(0, 0, 0, 0.13)`,
   },
   sizes,
   badges,

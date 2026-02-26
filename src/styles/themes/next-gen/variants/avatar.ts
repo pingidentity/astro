@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import sizes from '../sizes';
 
 export const avatar = {
@@ -89,7 +91,7 @@ export const avatar = {
   '&.is-logo': {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'gray-200',
+    borderColor: astroTokens.color.gray[200],
     backgroundColor: 'transparent',
     '&.size-sm': {
       img: {

@@ -1,12 +1,12 @@
 import React, { forwardRef, useCallback, useEffect, useMemo } from 'react';
 import { useVisuallyHidden } from 'react-aria';
+import { astroTokens } from '@pingux/onyx-tokens';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
 import useResizeObserver from 'use-resize-observer';
 
 import { useGetTheme } from '../../../../hooks';
 import { Box, Button, Text, Tooltip, TooltipTrigger } from '../../../../index';
 import { neutral } from '../../../../styles/colors';
-import { nextGenColors } from '../../../../styles/themes/next-gen/tokens/colorTokens';
 
 import { listViewItemChartPropTypes } from './ListViewItemChartAttributes';
 
@@ -91,7 +91,7 @@ const ListViewItemChart = forwardRef((props, ref) => {
                     type="monotone"
                     dataKey={chartDataKey}
                     dot={false}
-                    stroke={isOnyxDark ? nextGenColors['gray-100'] : neutral[20]}
+                    stroke={isOnyxDark ? astroTokens.color.gray[100] : neutral[20]}
                   />
                 </LineChart>
               </ResponsiveContainer>

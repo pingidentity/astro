@@ -1,9 +1,11 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 const scale = {
-  xs: '.25rem',
-  sm: '.5rem',
-  md: '1rem',
-  lg: '1.5rem',
-  xl: '3rem',
+  xs: astroTokens.spacing.xs,
+  sm: astroTokens.spacing.sm,
+  md: astroTokens.spacing.md,
+  lg: astroTokens.spacing.lg,
+  xl: astroTokens.spacing.xl,
   xx: '4rem',
 };
 

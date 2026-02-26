@@ -1,12 +1,14 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 import { input } from './input';
 
 export const select = {
   backgroundColor: 'backgroundBase',
-  borderRadius: '4px',
+  borderRadius: astroTokensDark.radius.input,
   border: '.5px solid',
   borderColor: '#69788B !important',
   color: 'text.primary',
-  height: '50px',
+  height: astroTokensDark.size.input.height,
   '&.is-disabled': {
     opacity: 1,
     borderColor: 'border.input',
@@ -28,7 +30,7 @@ export const checkbox = {
 };
 
 const label = {
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
   radioGroup: {
     color: 'white',
   },

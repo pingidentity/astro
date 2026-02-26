@@ -31,5 +31,12 @@
     "jest.config.ts",
     "vite.config.ts",
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "src/**/*.js", 
+    "src/**/*.jsx", 
+    "src/**/*.ts", 
+    "src/**/*.tsx",
+    "../onyx-tokens/build/**/*.ts",
+    "../onyx-tokens/build/**/*.json"
+  ]
 }

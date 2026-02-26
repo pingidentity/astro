@@ -1,3 +1,5 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 const baseBadge = {
   color: 'badge.textColor',
 };
@@ -9,7 +11,7 @@ const primary = {
 
 const secondary = {
   backgroundColor: '#324054 !important',
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
 };
 
 const success = {
@@ -29,12 +31,12 @@ const warning = {
 
 const info = {
   backgroundColor: '#324054 !important',
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
 };
 
 const dark = {
   backgroundColor: '#c0c9d5 !important',
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
 };
 
 const activeStatusBadge = {
@@ -72,27 +74,27 @@ const countNeutral = {
 };
 
 const readOnlyBadge = {
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
   backgroundColor: '#23282E !important',
   borderColor: 'border.attachment',
   '& span': {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
 };
 
 const readOnlyFieldBadge = {
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
   backgroundColor: '#23282E !important',
   borderColor: 'border.attachment',
   '& span': {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
 };
 
 const selectedItemBadge = {
   backgroundColor: '#155CBA !important',
   '& span': {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
 };
 
@@ -100,7 +102,7 @@ const itemBadgeWithSlot = {
   ...selectedItemBadge,
   '& svg': {
     path: {
-      fill: 'gray-100',
+      fill: astroTokensDark.color.gray[100],
     },
   },
 };

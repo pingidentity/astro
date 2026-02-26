@@ -1,10 +1,14 @@
+import { astroTokens } from '@pingux/onyx-tokens';
 import { ThemeUICSSObject } from 'theme-ui';
+
+// @ts-expect-error - font-size is in default tokens but not in the type definition
+const fontSizes = astroTokens.default['font-size'];
 
 export const label: ThemeUICSSObject = {
   color: 'text.primary',
-  fontSize: 'md',
+  fontSize: fontSizes.label,
   '&.is-float-label': {
-    fontSize: 'md',
+    fontSize: fontSizes.label,
     fontWeight: 1,
     top: '15px',
   },
@@ -14,7 +18,7 @@ export const label: ThemeUICSSObject = {
   },
   opacity: 1,
   checkbox: {
-    fontSize: 'md',
+    fontSize: fontSizes.label,
     display: 'inline-flex !important',
     div: {
       flexShrink: 0,
@@ -25,7 +29,7 @@ export const label: ThemeUICSSObject = {
   },
   radioGroup: {
     color: 'text.primary',
-    fontSize: 'md',
+    fontSize: fontSizes.label,
     mb: 'md',
   },
 };

@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import { isSafari } from '../../safariAgent.js';
 
 import colors from './colors/colors';
@@ -17,10 +19,10 @@ export const checkbox = {
 };
 
 export const select = {
-  borderRadius: '4px',
+  borderRadius: astroTokens.radius.input,
   borderColor: 'border.input',
   color: 'text.primary',
-  height: '50px',
+  height: astroTokens.size.input.height,
   '&.is-disabled': {
     opacity: 1,
     borderColor: 'border.input',
@@ -56,7 +58,7 @@ export const comboBox = {
   input: {
     borderStyle: 'solid',
     borderWidth: '1px',
-    borderRadius: '4px',
+    borderRadius: astroTokens.radius.input,
     height: '50px',
   },
   button: {

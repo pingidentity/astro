@@ -1,8 +1,11 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import buttons from './button';
 
 const badgeFont = {
-  fontSize: 'tiny',
-  fontWeight: '2',
+  fontSize: astroTokens.size.badge,
+  // @ts-expect-error - font-weight is in default tokens but not in the type definition
+  fontWeight: astroTokens.default['font-weight'].badge,
 };
 
 const badgeIconStyle = {
@@ -32,8 +35,8 @@ const badgeIconStyle = {
 const baseBadge = {
   alignItems: 'center',
   justifyContent: 'center',
-  py: '.25em',
-  px: '.34em',
+  py: astroTokens.spacing.badge['padding-y'],
+  px: astroTokens.spacing.badge['padding-x'],
   borderRadius: '4px',
   maxHeight: '18px',
   minHeight: '18px',
@@ -48,13 +51,13 @@ const baseBadge = {
 const primary = {
   ...baseBadge,
   backgroundColor: '#EAF2FD !important',
-  color: 'blue-600',
+  color: astroTokens.color.blue[600],
 };
 
 const secondary = {
   ...baseBadge,
   backgroundColor: '#f6f8fa !important',
-  color: 'gray-900',
+  color: astroTokens.color.gray[900],
 };
 
 const success = {
@@ -66,13 +69,13 @@ const success = {
 const danger = {
   ...baseBadge,
   backgroundColor: '#F8D8D5 !important',
-  color: 'red-700',
+  color: astroTokens.color.red[700],
 };
 
 const warning = {
   ...baseBadge,
   backgroundColor: '#FFF1DA !important',
-  color: 'yellow-800',
+  color: astroTokens.color.yellow[800],
 };
 
 const dark = {

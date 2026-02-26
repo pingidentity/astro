@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 export const menu = {
   p: 'sm',
   border: '1px solid',
@@ -24,20 +26,20 @@ export const menuItem = {
     bg: 'transparent',
     padding: '12px 12px',
     outline: 'none',
-    color: 'gray-700',
+    color: astroTokens.color.gray[700],
     fontSize: 'md',
     lineHeight: 'body',
     cursor: 'pointer',
     borderRadius: '4px',
     '&.is-hovered': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
       color: '#121518',
       '> *': {
         color: '#121518',
       },
     },
     '&.is-focused': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
       color: '#121518',
       outline: '1px solid',
       outlineOffset: '1px',

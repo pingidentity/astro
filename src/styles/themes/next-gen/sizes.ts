@@ -1,9 +1,13 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
+// @ts-expect-error - font-size is in default tokens but not in the type definition
+const fontSizes = astroTokens.default['font-size'];
 const avatar = {
-  sm: '24px',
+  sm: `${astroTokens.size.avatar.sm}px`,
   md: '32px',
   xmd: '44px',
-  lg: '72px',
-  xl: '104px',
+  lg: `${astroTokens.size.avatar.lg}px`,
+  xl: `${astroTokens.size.avatar.xl}px`,
 };
 
 const avatarLogo = {
@@ -15,11 +19,11 @@ const avatarLogo = {
 };
 
 const avatarFontSize = {
-  sm: '9.6px',
-  md: '13.6px',
+  sm: fontSizes.avatar.sm,
+  md: fontSizes.avatar.md,
   xmd: '18px',
-  lg: '28.8px',
-  xl: '41.6px',
+  lg: fontSizes.avatar.lg,
+  xl: fontSizes.avatar.xl,
 };
 
 const iconBadge = {

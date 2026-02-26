@@ -1,3 +1,6 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+import { fontSize } from 'styled-system';
+
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
@@ -59,10 +62,10 @@ export const badgeDeleteButton = {
 };
 
 const modalSize = {
-  xs: ['100%', '300px', '300px', '300px', '300px', '300px'],
-  sm: ['100%', '500px', '500px', '500px', '500px', '500px'],
-  md: ['100%', '500px', '500px', '500px', '800px', '800px'],
-  lg: ['100%', '500px', '500px', '500px', '800px', '1140px'],
+  xs: ['100%', astroTokens.size.modal.sm, astroTokens.size.modal.sm, astroTokens.size.modal.sm, astroTokens.size.modal.sm, astroTokens.size.modal.sm],
+  sm: ['100%', astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.md],
+  md: ['100%', astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.lg, astroTokens.size.modal.lg],
+  lg: ['100%', astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.md, astroTokens.size.modal.lg, astroTokens.size.modal.xl],
   full: ['100%', '100%', '100%', '100%', '100%', '100%'],
 };
 
@@ -104,7 +107,7 @@ const modal = {
   },
   headingContainer: {
     borderBottom: '1px solid',
-    borderBottomColor: 'gray-200',
+    borderBottomColor: astroTokens.color.gray[200],
     bg: 'backgroundBase',
     borderRadius: '1em 1em 0px 0px',
   },
@@ -336,7 +339,7 @@ const rockerButton = {
       backgroundColor: '#135CBC !important',
       color: 'white',
     },
-    '&.is-focused': {
+    '&.is-focused:focus': {
       ...defaultFocus,
       position: 'relative',
       zIndex: '1000',
@@ -364,59 +367,59 @@ const breadcrumb = {
 const statusIcon = {
   base: {
     '&.is-default': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
       span: {
         fontSize: 'md',
-        color: 'gray-700',
+        color: astroTokens.color.gray[700],
       },
     },
     '&.is-critical': {
-      bg: 'red-100',
+      bg: astroTokens.color.red[100],
       span: {
         fontSize: 'md',
-        color: 'red-700',
+        color: astroTokens.color.red[700],
       },
     },
     '&.is-warning': {
-      bg: 'yellow-100',
+      bg: astroTokens.color.yellow[100],
       span: {
         fontSize: 'md',
-        color: 'yellow-800',
+        color: astroTokens.color.yellow[800],
       },
     },
     '&.is-info': {
-      bg: 'blue-100',
+      bg: astroTokens.color.blue[100],
       span: {
         fontSize: 'md',
-        color: 'blue-600',
+        color: astroTokens.color.blue[600],
       },
     },
     '&.is-major': {
-      bg: 'orange-100',
+      bg: astroTokens.color.orange[100],
       span: {
         fontSize: 'md',
-        color: 'orange-700',
+        color: astroTokens.color.orange[700],
       },
     },
     '&.is-minor': {
-      bg: 'yellow-100',
+      bg: astroTokens.color.yellow[100],
       span: {
         fontSize: 'md',
-        color: 'yellow-800',
+        color: astroTokens.color.yellow[800],
       },
     },
     '&.is-warning-neutral': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
       span: {
         fontSize: 'md',
-        color: 'gray-700',
+        color: astroTokens.color.gray[700],
       },
     },
     '&.is-fatal': {
-      bg: 'gray-700',
+      bg: astroTokens.color.gray[700],
       span: {
         fontSize: 'md',
-        color: 'gray-100',
+        color: astroTokens.color.gray[100],
       },
     },
     '&.is-selected.is-selected': {

@@ -1,10 +1,12 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import { flat } from '../../../../components/Card/Card.styles';
 
 const interactive = {
   boxShadow: 'none',
   borderRadius: '1rem',
   border: '1px solid',
-  borderColor: 'gray-200',
+  borderColor: astroTokens.color.gray[200],
   transition: 'border-color .25s ease-in',
   '&.is-focused': {
     backgroundColor: 'backgroundBase',
@@ -22,7 +24,7 @@ const interactive = {
 const container = {
   ...flat,
   p: 'lg',
-  borderColor: 'gray-200',
+  borderColor: astroTokens.color.gray[200],
   lineHeight: 'body',
   boxShadow: 'none',
 };
@@ -51,7 +53,7 @@ const light = {
 
 const activeCard = {
   ...interactive,
-  borderColor: 'gray-200',
+  borderColor: astroTokens.color.gray[200],
   '&.is-hovered': {
     borderColor: 'active',
     bg: 'default',
