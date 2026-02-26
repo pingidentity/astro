@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 export const focusBoxShadow = '0 0 0 2px inset #1a73e8';
 export const borderRadius = '16px';
 
@@ -17,19 +19,19 @@ export const listViewItem = {
   styledListItem: {
     bg: 'white',
     '&.is-selected': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
     },
     borderBottom: 'none',
     '&.has-separator': {
       borderBottom: '1px solid',
-      borderBottomColor: 'gray-200',
+      borderBottomColor: astroTokens.color.gray[200],
     },
     '&.is-hovered': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
     },
     '&.is-focused': {
       boxShadow: focusBoxShadow,
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
     },
     '&.is-first-item': {
       borderTopLeftRadius: borderRadius,
@@ -67,14 +69,14 @@ export const listViewItem = {
       },
     },
     '&.is-hovered': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
     },
     '&.is-selected': {
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
     },
     '&.is-focused': {
       boxShadow: focusBoxShadow,
-      bg: 'gray-100',
+      bg: astroTokens.color.gray[100],
     },
   },
   expandableItemBody: {
@@ -90,7 +92,7 @@ export const listViewItem = {
   },
   expandableRow: {
     '&.has-separator': {
-      borderBottomColor: 'gray-200',
+      borderBottomColor: astroTokens.color.gray[200],
     },
     '&.has-separator.is-last-row': {
       border: 'none',
@@ -120,25 +122,25 @@ export const listView = {
 
 export const lisViewItemChart = {
   title: {
-    color: 'gray-600',
+    color: astroTokens.color.gray[600],
     fontSize: 'tiny',
   },
   count: {
-    color: 'gray-600',
+    color: astroTokens.color.gray[600],
     fontSize: 'xl',
   },
   countLabel: {
-    color: 'gray-600',
+    color: astroTokens.color.gray[600],
     fontSize: 'tiny',
   },
   chartLabel: {
-    color: 'gray-600',
+    color: astroTokens.color.gray[600],
     fontSize: 'tiny',
   },
   trend: {
-    color: 'gray-600',
+    color: astroTokens.color.gray[600],
   },
   chartButton: {
-    color: 'gray-900',
+    color: astroTokens.color.gray[900],
   },
 };

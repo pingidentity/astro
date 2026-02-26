@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import buttons, { defaultFocus } from './button';
 
 const navBarFocus = {
@@ -8,19 +10,19 @@ const navBarFocus = {
 const app = {
   lineHeight: '160%',
   '&.is-hovered': {
-    color: 'blue-600',
-    textDecorationColor: 'blue-600',
+    color: astroTokens.color.blue[600],
+    textDecorationColor: astroTokens.color.blue[600],
   },
   '&.is-focused': {
     ...navBarFocus,
     borderRadius: '2px',
   },
   '&.is-pressed': {
-    color: 'blue-600',
-    textDecorationColor: 'blue-600',
+    color: astroTokens.color.blue[600],
+    textDecorationColor: astroTokens.color.blue[600],
   },
   '&:visited': {
-    color: 'purple-700',
+    color: astroTokens.color.purple[700],
     textDecoration: 'underline',
   },
 };
@@ -37,10 +39,10 @@ const nextGen = {
   fontFamily: 'standard',
   cursor: 'pointer',
   '&.is-hovered': {
-    color: 'blue-600',
+    color: astroTokens.color.blue[600],
   },
   '&.is-pressed': {
-    color: 'blue-600',
+    color: astroTokens.color.blue[600],
   },
 };
 
@@ -66,7 +68,7 @@ const sideNav = {
     transition: 'background-color .15s ease',
   },
   '&.is-selected': {
-    color: 'blue-600',
+    color: astroTokens.color.blue[600],
     '&:before': {
       backgroundColor: 'active_light',
     },

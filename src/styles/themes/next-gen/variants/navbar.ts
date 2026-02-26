@@ -1,5 +1,10 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
+// @ts-expect-error - font-size is in default tokens but not in the type definition
+const fontSizes = astroTokens.default['font-size'];
+
 export const navBarSelected = {
-  backgroundColor: 'blue-100',
+  backgroundColor: astroTokens.color['nav-bar-item'].selected.bg,
   boxShadow: 'none',
 };
 
@@ -26,7 +31,7 @@ export const navBar = {
       backgroundColor: 'light',
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
+      backgroundColor: astroTokens.color.gray[200],
     },
     '&.is-focused': {
       ...navBarFocus,
@@ -35,10 +40,10 @@ export const navBar = {
   itemButton: {
     py: '.75rem',
     paddingLeft: '53px',
-    color: 'gray-700',
+    color: astroTokens.color.gray[700],
     borderRadius: '4px',
     fontWeight: 0,
-    fontSize: 'sm',
+    fontSize: fontSizes['nav-bar-item'],
     lineHeight: '160%',
     '&.is-focused': {
       ...navBarFocus,
@@ -47,22 +52,22 @@ export const navBar = {
       backgroundColor: 'light',
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
-      color: 'gray-700',
+      backgroundColor: astroTokens.color.gray[200],
+      color: astroTokens.color.gray[700],
     },
     '&.is-selected': {
-      bg: 'blue-100',
+      bg: astroTokens.color.blue[100],
       boxShadow: 'none',
       color: 'darkblue',
     },
   },
   subtitle: {
-    color: 'gray-700',
+    color: astroTokens.color.gray[700],
   },
   headerText: {
-    color: 'gray-700',
+    color: astroTokens.color.gray[700],
     fontWeight: 0,
-    fontSize: 'sm',
+    fontSize: fontSizes['nav-bar-item'],
     lineHeight: '160%',
     ml: 'sm',
     '.is-selected &': {
@@ -84,16 +89,16 @@ export const navBar = {
   item: {
     px: '1rem',
     py: '.75rem',
-    color: 'gray-700',
+    color: astroTokens.color.gray[700],
     borderRadius: '4px',
     '&.is-hovered': {
-      backgroundColor: 'light',
+      backgroundColor: astroTokens.color['nav-bar-item'].hover.bg,
     },
     '> div > svg': {
-      fill: 'gray-700',
+      fill: astroTokens.color.gray[700],
     },
     '&.is-pressed': {
-      backgroundColor: 'gray-200',
+      backgroundColor: astroTokens.color.gray[200],
     },
     '&.is-selected': {
       ...navBarSelected,
@@ -120,10 +125,10 @@ export const navBar = {
     },
     backgroundColor: 'transparent',
     '> svg': {
-      fill: 'gray-700',
+      fill: astroTokens.color.gray[700],
     },
     '> div > svg': {
-      fill: 'gray-700',
+      fill: astroTokens.color.gray[700],
     },
   },
   navBarItemBody: {

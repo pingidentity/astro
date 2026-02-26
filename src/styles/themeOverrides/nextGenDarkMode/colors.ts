@@ -1,7 +1,7 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
 import chroma from 'chroma-js';
 
 import { white } from '../../colors';
-import { nextGenColors } from '../../themes/next-gen/tokens/colorTokens';
 
 export const overrides = {
   neutral: {
@@ -11,9 +11,9 @@ export const overrides = {
 };
 
 const font = {
-  base: nextGenColors['gray-100'],
-  light: nextGenColors['gray-400'],
-  link: nextGenColors['blue-400'],
+  base: astroTokensDark.color.gray[100],
+  light: astroTokensDark.color.gray[400],
+  link: astroTokensDark.color.blue[400],
 };
 
 const hoverDark = chroma.mix('#23282e', 'white', 0.04, 'rgb').hex();
@@ -21,19 +21,19 @@ const hoverDark = chroma.mix('#23282e', 'white', 0.04, 'rgb').hex();
 const border = {
   base: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
   dark: '#46505C',
-  input: nextGenColors['gray-500'],
+  input: astroTokensDark.color.gray[500],
   separator: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
   attachment: '#39414b',
   hairline: '#737577',
 };
 
 const badge = {
-  background: nextGenColors['gray-800'],
-  textColor: nextGenColors['gray-100'],
+  background: astroTokensDark.color.gray[800],
+  textColor: astroTokensDark.color.gray[100],
 };
 
 const background = {
-  base: nextGenColors['gray-900'],
+  base: astroTokensDark.color.gray[900],
   secondary: '#1a1e22',
   card: '#1a1e22',
   hover: hoverDark,
@@ -41,22 +41,22 @@ const background = {
 
 const twoTone = {
   bg: {
-    orange: nextGenColors['orange-500'],
-    cyan: nextGenColors['cyan-500'],
-    green: nextGenColors['green-500'],
-    purple: nextGenColors['purple-500'],
-    pink: nextGenColors['pink-500'],
-    red: nextGenColors['red-500'],
-    yellow: nextGenColors['yellow-500'],
-    teal: nextGenColors['teal-500'],
-    blue: nextGenColors['blue-500'],
+    orange: astroTokensDark.color.orange[500],
+    cyan: astroTokensDark.color.cyan[500],
+    green: astroTokensDark.color.green[500],
+    purple: astroTokensDark.color.purple[500],
+    pink: astroTokensDark.color.pink[500],
+    red: astroTokensDark.color.red[500],
+    yellow: astroTokensDark.color.yellow[500],
+    teal: astroTokensDark.color.teal[500],
+    blue: astroTokensDark.color.blue[500],
     white,
-    indigo: nextGenColors['indigo-500'],
-    lightBlue: nextGenColors['blue-600'],
-    lightPink: nextGenColors['pink-600'],
-    lightGreen: nextGenColors['green-800'],
-    lightYellow: nextGenColors['yellow-800'],
-    lightIndigo: nextGenColors['indigo-700'],
+    indigo: astroTokensDark.color.indigo[500],
+    lightBlue: astroTokensDark.color.blue[600],
+    lightPink: astroTokensDark.color.pink[600],
+    lightGreen: astroTokensDark.color.green[800],
+    lightYellow: astroTokensDark.color.yellow[800],
+    lightIndigo: astroTokensDark.color.indigo[700],
   },
   text: {
     orange: 'black',
@@ -92,11 +92,11 @@ const iconWrapper = {
     teal: 'black',
     blue: 'black',
     indigo: 'black',
-    lightBlue: nextGenColors['blue-100'],
-    lightPink: nextGenColors['pink-100'],
-    lightGreen: nextGenColors['green-100'],
-    lightYellow: nextGenColors['yellow-100'],
-    lightIndigo: nextGenColors['indigo-100'],
+    lightBlue: astroTokensDark.color.blue[100],
+    lightPink: astroTokensDark.color.pink[100],
+    lightGreen: astroTokensDark.color.green[100],
+    lightYellow: astroTokensDark.color.yellow[100],
+    lightIndigo: astroTokensDark.color.indigo[100],
   },
 };
 
@@ -104,15 +104,15 @@ const common = {
   dark: '#C0C9D5',
 };
 
-const backgroundBase = nextGenColors['gray-900'];
-const backgroundSecondary = nextGenColors['gray-900'];
+const backgroundBase = astroTokensDark.color.gray[900];
+const backgroundSecondary = astroTokensDark.color.gray[900];
 const backgroundCard = '#1a1e22';
 const backgroundSuggestion = '#ecf0f5';
 const backgroundHover = hoverDark;
 
 const codeEditor = {
   backgroundColor: backgroundSecondary,
-  headerColor: nextGenColors['gray-900'],
+  headerColor: astroTokensDark.color.gray[900],
 };
 
 export const colors = {
@@ -121,33 +121,33 @@ export const colors = {
   ...overrides,
   twoTone,
   light: '#1A1E22',
-  secondary: nextGenColors['gray-400'],
-  dark: nextGenColors['gray-400'],
-  lightblue: nextGenColors['blue-600'],
-  lightindigo: nextGenColors['indigo-700'],
-  lightpurple: nextGenColors['purple-500'],
-  lightpink: nextGenColors['pink-600'],
-  lightred: nextGenColors['red-700'],
-  lightorange: nextGenColors['orange-700'],
-  lightyellow: nextGenColors['yellow-800'],
-  lightgreen: nextGenColors['green-800'],
-  lightteal: nextGenColors['teal-700'],
-  lightcyan: nextGenColors['cyan-800'],
-  darkblue: nextGenColors['blue-100'],
-  darkindigo: nextGenColors['indigo-100'],
-  darkpurple: nextGenColors['purple-100'],
-  darkpink: nextGenColors['pink-100'],
-  darkred: nextGenColors['red-100'],
-  darkorange: nextGenColors['orange-100'],
-  darkyellow: nextGenColors['yellow-100'],
-  darkgreen: nextGenColors['green-100'],
-  darkteal: nextGenColors['teal-100'],
-  darkcyan: nextGenColors['cyan-100'],
+  secondary: astroTokensDark.color.gray[400],
+  dark: astroTokensDark.color.gray[400],
+  lightblue: astroTokensDark.color.blue[600],
+  lightindigo: astroTokensDark.color.indigo[700],
+  lightpurple: astroTokensDark.color.purple[500],
+  lightpink: astroTokensDark.color.pink[600],
+  lightred: astroTokensDark.color.red[700],
+  lightorange: astroTokensDark.color.orange[700],
+  lightyellow: astroTokensDark.color.yellow[800],
+  lightgreen: astroTokensDark.color.green[800],
+  lightteal: astroTokensDark.color.teal[700],
+  lightcyan: astroTokensDark.color.cyan[800],
+  darkblue: astroTokensDark.color.blue[100],
+  darkindigo: astroTokensDark.color.indigo[100],
+  darkpurple: astroTokensDark.color.purple[100],
+  darkpink: astroTokensDark.color.pink[100],
+  darkred: astroTokensDark.color.red[100],
+  darkorange: astroTokensDark.color.orange[100],
+  darkyellow: astroTokensDark.color.yellow[100],
+  darkgreen: astroTokensDark.color.green[100],
+  darkteal: astroTokensDark.color.teal[100],
+  darkcyan: astroTokensDark.color.cyan[100],
   text: {
-    primary: nextGenColors['gray-400'],
-    secondary: nextGenColors['gray-100'],
+    primary: astroTokensDark.color.gray[400],
+    secondary: astroTokensDark.color.gray[100],
     message: 'white',
-    fieldHelper: nextGenColors['gray-400'],
+    fieldHelper: astroTokensDark.color.gray[400],
   },
   background,
   backgroundBase,
@@ -159,7 +159,7 @@ export const colors = {
   badge,
   codeEditor,
   critical: {
-    dark: nextGenColors['red-100'],
+    dark: astroTokensDark.color.red[100],
   },
   common,
 };

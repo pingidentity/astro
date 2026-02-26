@@ -1,17 +1,17 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
 import chroma from 'chroma-js';
 
-import { nextGenColors } from '../../../themes/next-gen/tokens/colorTokens';
 
 const baseIconButton = {
   path: { fill: 'dark' },
   '&.is-hovered': {
-    path: { fill: 'gray-400' },
+    path: { fill: astroTokensDark.color.gray[400] },
     backgroundColor: 'backgroundSecondary',
   },
   '&.is-pressed': {
-    backgroundColor: 'gray-800',
-    borderColor: 'gray-900',
-    path: { fill: 'gray-400' },
+    backgroundColor: astroTokensDark.color.gray[800],
+    borderColor: astroTokensDark.color.gray[900],
+    path: { fill: astroTokensDark.color.gray[400] },
   },
 };
 
@@ -57,7 +57,7 @@ const iconButtons = {
   filter: {
     ...baseIconButton,
     '&.is-hovered': {
-      backgroundColor: 'gray-700',
+      backgroundColor: astroTokensDark.color.gray[700],
     },
   },
   modalCloseButton: {
@@ -69,13 +69,13 @@ const iconButtons = {
   messageCloseButton: {
     ...baseIconButton,
     '&.is-hovered': {
-      backgroundColor: '#455469',
+      backgroundColor: astroTokensDark.color.gray.light,
     },
   },
 };
 
 const searchNavTabLabel = {
-  color: 'gray-400',
+  color: astroTokensDark.color.gray[400],
   '&.is-hovered': {
     color: 'white',
     '& > svg': {
@@ -98,7 +98,7 @@ const buttons = {
     color: 'text.secondary',
   },
   neutral: {
-    color: 'gray-400',
+    color: astroTokensDark.color.gray[400],
   },
   critical: {
     color: 'black',
@@ -110,8 +110,8 @@ const buttons = {
     },
   },
   inline: {
-    color: 'blue-400',
-    borderColor: 'blue-400',
+    color: astroTokensDark.color.blue[400],
+    borderColor: astroTokensDark.color.blue[400],
     '&.is-hovered': {
       backgroundColor: 'active_hover',
       color: 'black',
@@ -132,8 +132,8 @@ const buttons = {
     },
   },
   withIcon: {
-    color: 'blue-400',
-    borderColor: 'blue-400',
+    color: astroTokensDark.color.blue[400],
+    borderColor: astroTokensDark.color.blue[400],
     '&.is-hovered': {
       backgroundColor: 'active_hover',
       borderColor: 'blue',
@@ -159,8 +159,8 @@ const buttons = {
     },
   },
   inlineWithIcon: {
-    color: 'blue-400',
-    borderColor: 'blue-400',
+    color: astroTokensDark.color.blue[400],
+    borderColor: astroTokensDark.color.blue[400],
     '&.is-hovered': {
       color: 'black',
       backgroundColor: 'active_hover',
@@ -186,19 +186,19 @@ const buttons = {
     },
   },
   colorBlock: {
-    bg: 'gray-200',
-    borderColor: 'gray-200',
+    bg: astroTokensDark.color.gray[200],
+    borderColor: astroTokensDark.color.gray[200],
     path: { fill: 'black' },
     '& span': {
       color: 'black',
     },
     '&.is-hovered': {
-      bg: 'blue-100',
-      borderColor: 'blue-100',
+      bg: astroTokensDark.color.blue[100],
+      borderColor: astroTokensDark.color.blue[100],
     },
     '&.is-pressed': {
-      bg: 'blue-100',
-      borderColor: 'blue-100',
+      bg: astroTokensDark.color.blue[100],
+      borderColor: astroTokensDark.color.blue[100],
     },
     '&>svg': {
       color: 'black',
@@ -222,8 +222,8 @@ const buttons = {
     },
   },
   default: {
-    color: 'blue-400',
-    borderColor: 'blue-400',
+    color: astroTokensDark.color.blue[400],
+    borderColor: astroTokensDark.color.blue[400],
     '&.is-pressed': {
       color: 'black',
       borderColor: 'blue',
@@ -235,15 +235,15 @@ const buttons = {
     },
   },
   link: {
-    color: 'blue-400',
+    color: astroTokensDark.color.blue[400],
     '&.is-pressed': {
       textDecoration: 'underline',
       outline: 'none',
-      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.45, 'rgb').hex(),
+      color: chroma.mix(astroTokensDark.color.blue[500], 'white', 0.45, 'rgb').hex(),
     },
     '&.is-focused': {
       textDecoration: 'underline',
-      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.3, 'rgb').hex(),
+      color: chroma.mix(astroTokensDark.color.blue[500], 'white', 0.3, 'rgb').hex(),
       outline: 'none',
     },
   },
@@ -251,12 +251,12 @@ const buttons = {
   searchNavTabLabel,
   modalCloseButton,
   listBoxLink: {
-    color: 'blue-400',
+    color: astroTokensDark.color.blue[400],
     '&.is-pressed': {
-      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.45, 'rgb').hex(),
+      color: chroma.mix(astroTokensDark.color.blue[500], 'white', 0.45, 'rgb').hex(),
     },
     '&.is-focused': {
-      color: chroma.mix(nextGenColors['blue-500'], 'white', 0.3, 'rgb').hex(),
+      color: chroma.mix(astroTokensDark.color.blue[500], 'white', 0.3, 'rgb').hex(),
     },
   },
 };

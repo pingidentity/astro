@@ -1,4 +1,5 @@
-import tShirtSizes from '../customProperties/tShirtSizes';
+import { astroTokens } from '@pingux/onyx-tokens';
+
 
 const base = {
   width: '100%',
@@ -28,9 +29,9 @@ const base = {
 const icon = {
   ml: '0',
   mr: 'md',
-  minWidth: `${tShirtSizes.sm} !important`,
-  width: `${tShirtSizes.sm} !important`,
-  height: `${tShirtSizes.sm} !important`,
+  minWidth: `${astroTokens.size.alert.icon}px !important`,
+  width: `${astroTokens.size.alert.icon}px !important`,
+  height: `${astroTokens.size.alert.icon}px !important`,
 };
 
 export default {

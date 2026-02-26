@@ -1,3 +1,4 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { text } from './text';
@@ -17,6 +18,11 @@ export const fieldControlWrapper = {
 
 input.fieldControlWrapper = {
   ...fieldControlWrapper,
+  '&.is-disabled': {
+    '> input': {
+      backgroundColor: 'disabled',
+    },
+  },
 };
 
 input.multivaluesWrapper = {
@@ -32,7 +38,7 @@ input.multivaluesWrapper = {
 };
 
 input.promptInput = {
-  color: 'gray-100',
+  color: astroTokensDark.color.gray[100],
 };
 
 input.search = {

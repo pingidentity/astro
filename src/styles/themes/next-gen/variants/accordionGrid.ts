@@ -1,10 +1,12 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 const header = {
   px: 'lg',
   py: 'md',
   minHeight: '75px',
   border: 'none',
   '&.is-hovered': {
-    backgroundColor: 'gray-100',
+    backgroundColor: astroTokens.color.gray[100],
   },
   '&.is-focused': {
     outline: '2px solid',

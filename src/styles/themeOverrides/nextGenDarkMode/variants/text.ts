@@ -1,13 +1,15 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 export const text = {
   listViewItemExpandedText: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   listViewItemText: {
     color: 'text.secondary',
   },
   searchNavTabLabel: {
     px: 'lg',
-    color: 'gray-400',
+    color: astroTokensDark.color.gray[400],
     '.is-selected &, .is-hovered &': {
       color: 'white',
     },
@@ -19,20 +21,20 @@ export const text = {
     },
   },
   listViewItemTextSelected: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
   listViewItemSubtext: {
-    color: 'gray-400',
+    color: astroTokensDark.color.gray[400],
   },
   itemTitle: {
     fontWeight: 2,
     color: 'text.secondary',
   },
   copyRightText: {
-    color: 'gray-400',
+    color: astroTokensDark.color.gray[400],
   },
   placeholder: {
-    color: 'gray-400',
+    color: astroTokensDark.color.gray[400],
     fontWeight: 1,
   },
   messagesText: {
@@ -47,6 +49,6 @@ export const text = {
     color: 'text.secondary',
   },
   pageHeaderTitle: {
-    color: 'gray-100',
+    color: astroTokensDark.color.gray[100],
   },
 };

@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 const container = {
   border: '1px solid',
   borderColor: 'border.base',
@@ -19,14 +21,14 @@ const selectableTableRow = {
   ...tableRow,
   bg: 'backgroundBase',
   '&.is-hovered': {
-    bg: 'gray-100',
+    bg: astroTokens.color.gray[100],
   },
   '&.is-selected': {
-    bg: 'gray-100',
+    bg: astroTokens.color.gray[100],
   },
   '&.is-focused': {
     boxShadow: '0 0 0 3px inset #1a73e8',
-    bg: 'gray-100',
+    bg: astroTokens.color.gray[100],
   },
   '&.is-disabled': {
     opacity: '0.65 !important',

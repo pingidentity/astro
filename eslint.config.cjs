@@ -110,6 +110,7 @@ module.exports = [
       'no-restricted-exports': 'off',
       'react/no-unstable-nested-components': 'off',
       'import/no-cycle': 'off',
+      'import/no-unresolved': ['error', { ignore: ['^@pingux/onyx-tokens$'] }],
       'testing-library/prefer-presence-queries': 'off',
       'react/button-has-type': 'warn',
       'react/no-unused-prop-types': 'off',
