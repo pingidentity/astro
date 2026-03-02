@@ -22,6 +22,7 @@ const badgeStyles = {
 };
 const linkSelectFieldWidth = '12em';
 const calendarIconSize = 'sm' as IconSize;
+const badgeTextFontSize = '75%';
 const navBarIconSize = '20px' as IconSize;
 
 export const nextGenThemeValues = {
@@ -41,6 +42,7 @@ export const nextGenThemeValues = {
   calendarIconSize,
   buttonLoaderSize,
   badgeStyles,
+  badgeTextFontSize,
   linkSelectFieldWidth,
   ...customSizes,
 };

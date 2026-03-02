@@ -24,6 +24,7 @@ const defaultIconSize = 'sm' as IconSize;
 const linkSelectFieldWidth = '10em';
 const calendarIconSize = 25 as IconSize;
 const navBarIconSize = 18 as IconSize;
+const badgeTextFontSize = '';
 
 export const astroThemeValues = {
   accordionItemDefaultLabelTag,
@@ -56,4 +57,5 @@ export const astroThemeValues = {
     greyText: '#FFFFFF',
   },
   linkSelectFieldWidth,
+  badgeTextFontSize,
 };

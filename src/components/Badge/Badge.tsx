@@ -4,6 +4,7 @@ import { Badge as ThemeUIBadge, ThemeUIStyleObject } from 'theme-ui';
 
 import { Box, Text } from '../..';
 import { BadgeContext } from '../../context/BadgeContext';
+import { useGetTheme } from '../../hooks';
 import { BadgeProps } from '../../types';
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
@@ -20,6 +21,8 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     variant,
     ...others
   } = props;
+
+  const { badgeTextFontSize } = useGetTheme();
 
   const badgeSx = {
     ...(isUppercase && {
@@ -71,7 +74,10 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
         <Text
           variant="label"
           color={textColor}
-          sx={isUppercase ? { textTransform: 'uppercase', fontSize: '11px' } : {}}
+          sx={{
+            fontSize: badgeTextFontSize || '',
+            ...(isUppercase ? { textTransform: 'uppercase', fontSize: '11px' } : {}),
+          }}
           {...textProps}
         >
           {label}
