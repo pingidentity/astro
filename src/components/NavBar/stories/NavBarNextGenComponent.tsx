@@ -6,6 +6,7 @@ import {
   NavBarItem,
   NavBarItemButton,
   NavBarSection,
+  NavSideBarItem,
   Separator,
 } from '../../..';
 import { useGetTheme } from '../../../hooks';
@@ -257,13 +258,16 @@ export const NavBarNextGenComponent = () => {
           key="GettingStarted"
           text="Getting Started"
         />
-        <NavBarItem
-          data-id="nav-bar-item"
+        <NavSideBarItem
+          key="Overview"
           icon={icons.overviewIcon}
           id="Overview"
-          key="Overview"
-          text="Overview"
-        />
+          linkProps={{
+            href: 'https://www.pingidentity.com', target: '_blank',
+          }}
+        >
+          Overview
+        </NavSideBarItem>
         <NavBarSection items={firstSectionData} data-id="nav-bar-section" />
         <Separator variant="separator.navBarSeparator" />
         <NavBarItem

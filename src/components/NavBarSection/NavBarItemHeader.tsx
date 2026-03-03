@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHover } from '@react-aria/interactions';
 
 import { useNavBarContext } from '../../context/NavBarContext';
 import { useStatusClasses } from '../../hooks';
@@ -33,6 +34,8 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
   const array = item?.children && item.children.map(i => i.key);
   const isChildSelected = array && array.includes(navBarState.selectedKey);
 
+  const { hoverProps, isHovered } = useHover({});
+
   useEffect(() => {
     if (isChildSelected && isExpanded === false) {
       setExpandedKeys([...expandedKeys, key]);
@@ -41,6 +44,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
 
   const { classNames } = useStatusClasses(className, {
     isSelected: isChildSelected && !isExpanded,
+    isHovered,
   });
 
   const getIconColor = () => {
@@ -51,7 +55,13 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
   };
 
   return (
-    <Box variant={navStyles.navBarItemHeader} className={classNames} isRow data-testid={heading}>
+    <Box
+      {...hoverProps}
+      variant={navStyles.navBarItemHeader}
+      className={classNames}
+      isRow
+      data-testid={heading}
+    >
       {icon && (
         <Icon
           icon={icon}

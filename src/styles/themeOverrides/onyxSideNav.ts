@@ -1,5 +1,6 @@
 import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import ChevronUpIcon from '@pingux/mdi-react/ChevronUpIcon';
+import { borderRadius } from 'styled-system';
 
 import { OnyxTheme } from '../..';
 import { pingLogoHorizontalSmall } from '../../utils/devUtils/constants/logos';
@@ -165,6 +166,10 @@ const navBar = {
     '> div > svg': {
       fill: '#455469',
     },
+    '> div > span': {
+      color: '#455469',
+      fill: '#455469',
+    },
     '> svg': {
       fill: '#455469',
     },
@@ -176,8 +181,18 @@ const navBar = {
       '> div > svg': {
         fill: 'accent.40',
       },
+      '> div > span': {
+        color: 'accent.40',
+      },
+      '> span': {
+        color: 'accent.40',
+        fill: 'accent.40',
+      },
       '> svg': {
         fill: 'accent.40',
+      },
+      '&.is-hovered': {
+        backgroundColor: '#f6f8fa',
       },
     },
     '&.is-focused': {
@@ -195,6 +210,9 @@ const navBar = {
     px: '1rem',
     borderRadius: '4px',
     py: '.75rem',
+    '&.is-hovered': {
+      backgroundColor: '#f6f8fa',
+    },
     '&.is-selected': {
       ...navBarSelected,
       '> svg': {
@@ -202,6 +220,9 @@ const navBar = {
       },
       '> div > svg': {
         fill: '#4462ED !important',
+      },
+      '&.is-hovered': {
+        backgroundColor: '#f6f8fa',
       },
     },
     backgroundColor: 'transparent',
@@ -234,10 +255,25 @@ const separator = {
   },
 };
 
+const navItemLink = {
+  borderRadius: '4px',
+  '&.is-focused': {
+    outline: '2px solid',
+    outlineColor: 'active',
+    outlineOffset: '-2px',
+    boxShadow: 'none',
+    WebkitBoxShadow: 'none',
+    MozBoxShadow: 'none',
+  },
+};
+
 export default {
   variants: {
     navBar,
     separator,
+  },
+  links: {
+    navItem: { ...navItemLink },
   },
   icons: {
     ...icons,
