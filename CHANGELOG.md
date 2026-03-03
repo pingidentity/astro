@@ -1,3 +1,13 @@
+## 2.174.2-alpha.0 (2026-03-03)
+
+### 🩹 Fixes
+
+- [UIP-8109] Allow numberField to accept dashes
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.174.1-alpha.0 (2026-03-02)
 
 ### 🩹 Fixes
