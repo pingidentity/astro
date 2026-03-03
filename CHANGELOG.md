@@ -1,3 +1,13 @@
+## 2.175.0-alpha.0 (2026-03-03)
+
+### 🚀 Features
+
+- [UIP-8104] fix nav styling
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.174.2-alpha.0 (2026-03-03)
 
 ### 🩹 Fixes
