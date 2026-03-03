@@ -36,6 +36,9 @@ const itemHeaderContainer = {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
   },
+  '&.is-hovered': {
+    bg: 'accent.10',
+  },
 };
 
 const popUpItemHeaderContainer = {
@@ -153,12 +156,12 @@ const itemButton = {
     outline: '1px solid',
     outlineColor: 'focus',
   },
-  '&.is-hovered': {
-    bg: 'accent.10',
-  },
   '&.is-selected': {
     bg: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
+  },
+  '&.is-hovered': {
+    bg: 'accent.10',
   },
   '&.is-pressed': {
     bg: 'accent.5',
@@ -224,6 +227,10 @@ const popUpHeaderText = {
   },
 };
 
+const logoParent = {
+  p: 'md',
+};
+
 const headerNav = {
   cursor: 'pointer',
   minHeight: '40px',
@@ -259,6 +266,12 @@ const item = {
   '&.is-selected': {
     backgroundColor: 'accent.5',
     boxShadow: 'inset 2px 0 0 0 white',
+    '&.is-hovered': {
+      backgroundColor: 'accent.10',
+    },
+  },
+  '&.is-hovered': {
+    backgroundColor: 'accent.10',
   },
 };
 
@@ -279,7 +292,7 @@ const sectionButton = {
     outlineColor: 'focus',
   },
   '&.is-hovered': {
-    backgroundColor: 'accent.10',
+    backgroundColor: 'accent.10 ',
   },
   '&.is-pressed': {
     backgroundColor: 'accent.5',
@@ -352,6 +365,11 @@ const itemCustomIconSelected = {
   fill: 'white',
 };
 
+const sideNavItem = {
+  ...item,
+  p: 0,
+};
+
 export default {
   container,
   popUpContainer,
@@ -375,6 +393,8 @@ export default {
   popUpNavBarItemBody,
   itemLinkButtonColor,
   sectionList,
+  sideNavItem,
+  logoParent,
   itemIcon,
   itemIconSelected,
   itemCustomIcon,
