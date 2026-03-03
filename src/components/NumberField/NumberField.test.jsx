@@ -193,5 +193,17 @@ test('should extract numeric value from currency format and pass it to aria-valu
     },
   });
 
-  expect(screen.getByRole('spinbutton')).toHaveAttribute('aria-valuenow', String(numericValue.toFixed(2)));
+  expect(screen.getByRole('spinbutton')).toHaveAttribute('aria-valuenow', String(numericValue));
+});
+
+it('allows typing a negative sign', async () => {
+  const numericValue = 45;
+  getComponent({
+    defaultValue: numericValue,
+  });
+  const numberInput = screen.queryAllByLabelText(testLabel)[1];
+  await userEvent.clear(numberInput);
+  await userEvent.type(numberInput, '-45');
+
+  expect(numberInput).toHaveValue('-45');
 });

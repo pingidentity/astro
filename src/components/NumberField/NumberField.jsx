@@ -86,10 +86,7 @@ const NumberField = forwardRef((props, ref) => {
 
   const inputPropsValue = inputProps.value || 0;
 
-  // extract numeric value in case input value use units like '4 inches' or 'USD 45.00'
-  // aria-valuenow accept only number value type
-  const inputPropsNumericValue = typeof inputPropsValue === 'string'
-    ? inputPropsValue.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)[0] : inputPropsValue;
+  const inputPropsNumericValue = state.numberValue;
 
   return (
     <Box {...getPendoID('NumberField')} {...fieldContainerProps}>
