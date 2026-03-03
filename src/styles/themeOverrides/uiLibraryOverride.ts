@@ -216,6 +216,7 @@ const variants = {
     sectionButton: {
       ...theme.variants.navBar.sectionButton,
       height: 'unset',
+      fontWeight: '500',
       minHeight: '36px',
       '&:not(.disabled):hover': {
         ...theme.variants.navBar.sectionButton,
@@ -227,11 +228,17 @@ const variants = {
     itemButton: {
       height: 'unset',
       ...theme.variants.navBar.itemButton,
+      fontWeight: '500',
       '&:not(.disabled):hover': {
         ...theme.variants.navBar.itemButton,
+        fontWeight: '500',
       },
       ':focus': {
         border: 'none',
+      },
+      ':hover': {
+        color: 'neutral.90',
+        fontWeight: '500',
       },
     },
   },

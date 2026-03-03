@@ -1,3 +1,4 @@
+import { focus } from '../../styles/colors';
 import { focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 const app = {
@@ -18,6 +19,15 @@ const app = {
   },
   '&.is-disabled': {
     pointerEvents: 'none',
+  },
+};
+
+const navItem = {
+  '&.is-focused': {
+    outline: 'none',
+    boxShadow: `0 0 0 1px ${focus}`,
+    WebkitBoxShadow: `0 0 0 1px ${focus}`,
+    MozBoxShadow: `0 0 0 1px ${focus}`,
   },
 };
 
@@ -103,4 +113,5 @@ export default {
   copyRightLink,
   footerLink,
   footerEALink,
+  navItem,
 };

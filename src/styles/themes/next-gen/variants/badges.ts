@@ -3,9 +3,7 @@ import { astroTokens } from '@pingux/onyx-tokens';
 import buttons from './button';
 
 const badgeFont = {
-  fontSize: astroTokens.size.badge,
-  // @ts-expect-error - font-weight is in default tokens but not in the type definition
-  fontWeight: astroTokens.default['font-weight'].badge,
+  fontWeight: '2',
 };
 
 const badgeIconStyle = {
@@ -35,12 +33,9 @@ const badgeIconStyle = {
 const baseBadge = {
   alignItems: 'center',
   justifyContent: 'center',
-  py: astroTokens.spacing.badge['padding-y'],
-  px: astroTokens.spacing.badge['padding-x'],
+  padding: '.25em .4em',
   borderRadius: '4px',
-  maxHeight: '18px',
-  minHeight: '18px',
-  fontSize: 'tiny',
+  fontSize: 'unset',
   alignSelf: 'flex-start',
   display: 'inline-flex !important',
   width: 'fit-content',

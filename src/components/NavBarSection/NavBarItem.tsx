@@ -48,10 +48,10 @@ const NavBarItem = forwardRef<HTMLElement, NavBarItemProps>((props, ref) => {
   );
 
   const { classNames } = useStatusClasses(className, {
-    isPressed,
-    isHovered,
     isSelected,
+    isHovered,
     isFocused: isFocusVisible,
+    isPressed,
   });
   const color = isSelected ? 'white' : 'neutral.95';
 

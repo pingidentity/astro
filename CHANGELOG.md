@@ -1,3 +1,33 @@
+## 2.175.0-alpha.0 (2026-03-03)
+
+### 🚀 Features
+
+- [UIP-8104] fix nav styling
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.174.2-alpha.0 (2026-03-03)
+
+### 🩹 Fixes
+
+- [UIP-8109] Allow numberField to accept dashes
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.174.1-alpha.0 (2026-03-02)
+
+### 🩹 Fixes
+
+- [UIP-8083] Badge Update padding based font size based parent container
+
+### ❤️  Thank You
+
+- Ajith M
+
 ## 2.174.0 (2026-02-26)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

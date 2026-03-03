@@ -19,7 +19,6 @@ export const navBar = {
     '&.is-focused': {
       ...navBarFocus,
     },
-
     '&.is-pressed': {
       backgroundColor: 'background.hover',
       color: 'white',
@@ -87,13 +86,13 @@ export const navBar = {
   item: {
     px: '1rem',
     py: '.75rem',
-    color: 'text.primary',
+    color: 'textPrimary',
     fontFamily: 'standard',
     '&.is-hovered': {
       backgroundColor: 'background.hover',
     },
     '> div > svg': {
-      fill: 'text.primary',
+      fill: 'textPrimary',
     },
     '&.is-selected': {
       ...navBarSelected,

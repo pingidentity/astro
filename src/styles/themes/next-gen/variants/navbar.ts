@@ -15,6 +15,14 @@ export const navBarFocus = {
 };
 
 export const navBar = {
+  itemIcon: {
+    color: 'blue',
+    fill: 'blue',
+  },
+  itemIconSelected: {
+    color: 'darkblue',
+    fill: 'darkblue',
+  },
   container: {
     fontFamily: 'standard',
     width: '252px',
@@ -97,6 +105,9 @@ export const navBar = {
     '> div > svg': {
       fill: astroTokens.color.gray[700],
     },
+    '> div > span': {
+      color: 'gray-700',
+    },
     '&.is-pressed': {
       backgroundColor: astroTokens.color.gray[200],
     },
@@ -104,6 +115,12 @@ export const navBar = {
       ...navBarSelected,
       '> div > svg': {
         fill: 'darkblue',
+      },
+      '> div > span': {
+        color: 'darkblue',
+      },
+      '&.is-hovered': {
+        backgroundColor: 'light',
       },
     },
     '&.is-focused': {
@@ -122,6 +139,18 @@ export const navBar = {
     py: '.75rem',
     '&.is-selected': {
       ...navBarSelected,
+      '> svg': {
+        fill: 'darkblue',
+      },
+      '> div > svg': {
+        fill: 'darkblue',
+      },
+      '> div > span': {
+        color: 'darkblue',
+      },
+    },
+    '&.is-hovered': {
+      backgroundColor: 'light',
     },
     backgroundColor: 'transparent',
     '> svg': {

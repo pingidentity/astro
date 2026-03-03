@@ -128,10 +128,20 @@ const skip = {
   lineHeight: '24px',
 };
 
+const navItem = {
+  boxShadow: 'none !important',
+  '&.is-focused': {
+    ...navBarFocus,
+    borderRadius: '4px',
+    outlineOffset: '-2px',
+  },
+};
+
 export default {
   app,
   skip,
   nextGen,
+  navItem,
   onyx,
   sideNav,
   footerLinks,

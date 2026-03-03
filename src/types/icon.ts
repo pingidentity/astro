@@ -2,6 +2,7 @@ import {
   ReactNode,
 } from 'react';
 import type { MaterialSymbol } from '@material-symbols/font-400';
+import type { MdiReactIconComponentType } from '@pingux/mdi-react';
 
 import { TestingAttributes } from './shared/test';
 import { DOMAttributes, IconSize, StyleProps } from './shared';
@@ -14,7 +15,7 @@ export type IconTypeExtended = ReactNode & {
   type: {
     name: string;
   };
-} | React.ElementType | string;
+} | React.ElementType | MaterialSymbol | string | MdiReactIconComponentType;
 
 
 export interface IconProps extends StyleProps, DOMAttributes, TestingAttributes {
@@ -31,7 +32,7 @@ export interface IconProps extends StyleProps, DOMAttributes, TestingAttributes 
     name: string,
   }
   /** The icon to render. */
-  icon?: IconTypeExtended | MaterialSymbol;
+  icon?: IconTypeExtended | MaterialSymbol | string | MdiReactIconComponentType;
   size?: IconSize;
   /** A theme-aware prop to set the icon's color. */
   color?: string,

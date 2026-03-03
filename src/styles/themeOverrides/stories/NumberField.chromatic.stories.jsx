@@ -9,4 +9,4 @@ export default {
   decorators: [WithUiLibraryCss],
 };
 
-export const Default = () => <NumberField />;
+export const Default = () => <NumberField label="Example Label" defaultValue={17} />;

@@ -9,10 +9,9 @@ import { NavSideBarItemProps } from '../../types';
 
 const NavSideBarItem = (props: NavSideBarItemProps) => {
   const { children, linkProps } = props;
-  console.log(props);
   if (linkProps && linkProps?.href) {
     return (
-      <Link {...linkProps} sx={{ textDecoration: 'none !important' }}>
+      <Link {...linkProps} sx={{ textDecoration: 'none !important', outlineOffset: 'unset' }} variant="navItem">
         <ChildWrapper {...props}>
           {children}
         </ChildWrapper>
@@ -75,12 +74,11 @@ const ChildWrapper = forwardRef<HTMLElement, NavSideBarItemProps>((props, ref) =
     isFocused: isFocusVisible,
   });
 
-  console.log(state.navStyles.navBarItem);
-
   return (
     <Box
       id={key}
       variant={state.navStyles.navBarItem}
+      mb="0px"
       isRow
       alignItems="center"
       className={classNames}
