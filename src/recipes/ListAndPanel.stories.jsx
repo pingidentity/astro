@@ -137,8 +137,10 @@ const title = (
         <Icon icon={PlusIcon} size="sm" />
       </IconButton>
     </Box>
-    <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px">
-      {description}
+    <Text>
+      <Text fontSize="sm" color="text.secondary" fontWeight={0} width="800px" display="contents">
+        {description}
+      </Text>
       <Link href="https://uilibrary.ping-eng.com/" sx={{ fontSize: '13px' }}> Learn more</Link>
     </Text>
   </Box>

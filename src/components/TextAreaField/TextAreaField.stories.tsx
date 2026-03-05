@@ -97,7 +97,7 @@ export const Default = args => (
   />
 );
 
-export const WithSlots = () => (
+export const WithSlots = args => (
   // This is an example of a slot that can be passed into the component
   // const IconSlot = (
   //   <Box isRow>
@@ -107,6 +107,7 @@ export const WithSlots = () => (
   //   </Box>
   // );
   <TextAreaField
+    {...args}
     slots={{
       inContainer: IconSlot,
     }}

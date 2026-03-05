@@ -46,6 +46,7 @@ export const ScrollableListView = () => {
   return (
     <Box>
       <SearchField
+        label="Search"
         value={value}
         onChange={onChangeInput}
       />
