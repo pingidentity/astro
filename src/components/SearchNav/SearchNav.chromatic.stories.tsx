@@ -36,6 +36,19 @@ export const Default = () => {
           {items.find(item => item.key === selectedKey)?.children}
         </Box>
       </Box>
+    </Box>
+  );
+};
+
+export const MediumWidth = () => {
+  const [selectedKey, setSelectedKey] = useState('Access');
+
+  const setSelectedKeyCallback = e => {
+    setSelectedKey(e);
+  };
+
+  return (
+    <Box gap="md">
       <Box maxWidth="400px">
         <SearchNav
           items={items}
@@ -46,6 +59,19 @@ export const Default = () => {
           {items.find(item => item.key === selectedKey)?.children}
         </Box>
       </Box>
+    </Box>
+  );
+};
+
+export const SmallWidth = () => {
+  const [selectedKey, setSelectedKey] = useState('Access');
+
+  const setSelectedKeyCallback = e => {
+    setSelectedKey(e);
+  };
+
+  return (
+    <Box gap="md">
       <Box maxWidth="200px">
         <SearchNav
           items={items}

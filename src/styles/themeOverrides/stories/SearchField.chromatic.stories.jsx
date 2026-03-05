@@ -12,6 +12,7 @@ export default {
 
 export const Default = () => (
   <SearchField
+    label="Example"
     icon={SearchIcon}
     onSubmit={text => alert(text)} // eslint-disable-line no-alert
   />
