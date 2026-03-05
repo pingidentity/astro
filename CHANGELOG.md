@@ -1,3 +1,13 @@
+## 2.176.0-alpha.0 (2026-03-05)
+
+### 🚀 Features
+
+- [UIP-8059] Add custom backgroundSecondary options Storybook Backgrounds addon
+
+### ❤️  Thank You
+
+- Ajith M
+
 ## 2.175.1-alpha.0 (2026-03-05)
 
 ### 🩹 Fixes
