@@ -1,3 +1,23 @@
+## 2.176.0-alpha.0 (2026-03-05)
+
+### 🚀 Features
+
+- [UIP-8059] Add custom backgroundSecondary options Storybook Backgrounds addon
+
+### ❤️  Thank You
+
+- Ajith M
+
+## 2.175.1-alpha.0 (2026-03-05)
+
+### 🩹 Fixes
+
+- [UIP-8106] OverlayPanel conflict with Onyx-Wrapper
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.175.0 (2026-03-03)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

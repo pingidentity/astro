@@ -26,7 +26,7 @@ const withThemeProvider = (Story, context) => {
     storyTheme = NextGenDarkTheme;
     style = {
       padding: '50px',
-      minHeight: 'calc(100vh - 32px)',
+      minHeight: '100vh',
     };
   }
 
@@ -131,6 +131,10 @@ export const parameters = {
         ],
       ],
     },
+  },
+  layout: 'fullscreen',
+  backgrounds: {
+    disable: true,
   },
 };
 

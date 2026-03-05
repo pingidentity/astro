@@ -22,7 +22,9 @@ import AccordionReadme from './AccordionGroup.mdx';
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },
   { key: 't2', label: 'Second Accordion', children: <Text variant="base" lineHeight={1.2}>Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section. Content for the second section.</Text> },
-  { key: 't3', label: 'Third Accordion', children: <TextField /> },
+  { key: 't3',
+    label: 'Third Accordion',
+    children: <TextField label="Label" /> },
 ];
 
 const itemArrayDisabled = [
