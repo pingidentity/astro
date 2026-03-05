@@ -271,7 +271,7 @@ const overlayPanel = {
   body: {
     gap: 'md',
     minHeight: '100%',
-    maxWidth: '768px',
+    maxWidth: '100%',
     alignSelf: 'center',
   },
   innerPanel: {
