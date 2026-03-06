@@ -1,3 +1,15 @@
+## 2.177.0-alpha.0 (2026-03-06)
+
+### 🚀 Features
+
+- [UIP-8153] Sort git tag for stable release
+- [UIP-8140] Add Jira mcp server
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+- Ridhisha Dangol
+
 ## 2.176.0-alpha.0 (2026-03-05)
 
 ### 🚀 Features
