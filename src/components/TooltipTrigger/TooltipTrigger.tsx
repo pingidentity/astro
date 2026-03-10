@@ -38,6 +38,12 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
 
     const tooltipRef = targetRef || tooltipTriggerRef;
 
+    const triggerElement = React.isValidElement(trigger)
+      ? React.cloneElement(trigger as React.ReactElement, {
+        ref: tooltipRef,
+      })
+      : trigger;
+
     usePropWarning(props, 'disabled', 'isDisabled');
     /* istanbul ignore next */
     useImperativeHandle<
@@ -105,7 +111,7 @@ const TooltipTrigger = forwardRef<FocusableElement, TooltipTriggerProps>(
     return (
       <>
         <PressResponder {...triggerProps} ref={tooltipTriggerRef}>
-          {trigger}
+          {triggerElement}
         </PressResponder>
         <TooltipContext.Provider value={state}>
           {overlay}
