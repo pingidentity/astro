@@ -1,3 +1,13 @@
+## 2.177.2-alpha.0 (2026-03-10)
+
+### 🩹 Fixes
+
+- [UIP-8126] Enforce Conventional Commit
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.177.1-alpha.0 (2026-03-10)
 
 ### 🩹 Fixes
