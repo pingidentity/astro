@@ -1,3 +1,16 @@
+## 2.177.1-alpha.0 (2026-03-10)
+
+### 🩹 Fixes
+
+- [UXE-8154] Update timezone test case due to daylight saving change
+- [UIP-8130] Astro compatibility with node 14
+- [UIP-8094] Codeview copy button tooltip position is incorrect
+
+### ❤️  Thank You
+
+- Kiran Gupta
+- Ridhisha Dangol
+
 ## 2.177.0 (2026-03-06)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
