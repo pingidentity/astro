@@ -1,10 +1,18 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import exp from 'constants';
 
 import { OverlayProvider, TimeZonePicker } from '../../index';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+
+import { getGmtAndOffset } from './helper';
+
+jest.mock('./helper', () => ({
+  getGmtAndOffset: jest.fn().mockReturnValue({
+    gmt: 'GMT-00:00',
+    numericOffset: 0,
+  }),
+}));
 
 const testTimeZoneJuba = 'Africa/Juba';
 const testTimeZoneApia = 'Pacific/Apia';
@@ -40,24 +48,26 @@ afterAll(() => {
   jest.restoreAllMocks();
 });
 
+// Needs to be added to each components test file
+universalComponentTests({
+  renderComponent: props => <TimeZonePicker {...defaultProps} {...props} />,
+});
+
 test('renders ComboBoxField component', () => {
   getComponent();
-  const input = screen.queryByRole('combobox');
+  const input = screen.getByRole('combobox');
   const label = screen.getByText(defaultProps.label);
-  const button = screen.queryByRole('button');
-  expect(input).toBeInTheDocument();
+  const button = screen.getByRole('button');
   expect(screen.queryAllByLabelText(defaultProps.label)).toEqual([
     input,
     button,
   ]);
-  expect(label).toBeInTheDocument();
   expect(label).toHaveTextContent(defaultProps.label);
-  expect(button).toBeInTheDocument();
 });
 
 test('search is working correctly', async () => {
   getComponent();
-  const input = screen.queryByRole('combobox');
+  const input = screen.getByRole('combobox');
   await userEvent.type(input, testTimeZoneApia);
   expect(screen.getByText(testTimeZoneApia)).toBeInTheDocument();
 });
@@ -66,7 +76,7 @@ test('custom timezone can be added', async () => {
   getComponent({
     additionalTimeZones: { '(GMT+02:00) Africa/Juba': testTimeZoneJuba },
   });
-  const input = screen.queryByRole('combobox');
+  const input = screen.getByRole('combobox');
   await userEvent.type(input, testTimeZoneJuba);
   expect(screen.getByText(testTimeZoneJuba)).toBeInTheDocument();
 });
@@ -74,26 +84,24 @@ test('custom timezone can be added', async () => {
 test('shows custom empty search state text when no items are found', async () => {
   const testEmptyText = 'test empty text';
   getComponent({ emptySearchText: testEmptyText });
-  const input = screen.queryByRole('combobox');
+  const input = screen.getByRole('combobox');
   await userEvent.type(input, 'awdasrf213');
   expect(screen.getByText(testEmptyText)).toBeInTheDocument();
 });
 
-// Needs to be added to each components test file
-universalComponentTests({
-  renderComponent: props => <TimeZonePicker {...defaultProps} {...props} />,
-});
-
 test('selecting a timezone updates the input value', async () => {
+  const timezone = 'America/New York';
+  const gmtAndOffset = getGmtAndOffset(timezone);
+  const expectedOptionText = `${timezone} ${gmtAndOffset.gmt}`;
+
   getComponent();
-  const input = screen.queryByRole('combobox');
-  await userEvent.type(input, 'America/New York');
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, timezone);
 
-  expect(input).toHaveValue('America/New York');
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(input).toHaveValue(timezone);
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
 
-  const option = screen.getByRole('option', { key: 'America/New York GMT-05:00' });
-  expect(option).toBeInTheDocument();
+  const option = screen.getByRole('option', { key: expectedOptionText });
   await userEvent.click(option);
-  expect(input).toHaveValue('America/New York GMT-05:00');
+  expect(input).toHaveValue(expectedOptionText);
 });
