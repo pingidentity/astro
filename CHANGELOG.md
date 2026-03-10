@@ -1,3 +1,7 @@
+## 2.177.2 (2026-03-10)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
 ## 2.177.2-alpha.0 (2026-03-10)
 
 ### 🩹 Fixes
