@@ -46,7 +46,6 @@
     "@material-symbols/font-400": "^0.40.2",
     "@mdx-js/react": "^2.0.0",
     "@monaco-editor/react": "4.4.2",
-    "@nx/vite": "20.0.5",
     "@pingux/mdi-react": "^1.2.0",
     "@pingux/onyx-tokens": "^0.18.0",
     "@react-aria/accordion": "~3.0.0-alpha.11",
