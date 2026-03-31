@@ -1,3 +1,13 @@
+## 2.177.4-alpha.0 (2026-03-31)
+
+### 🩹 Fixes
+
+- update npm release command to specify projects for better targeting
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.177.3-alpha.0 (2026-03-31)
 
 ### 🩹 Fixes
