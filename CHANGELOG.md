@@ -1,3 +1,13 @@
+## 2.177.3-alpha.0 (2026-03-31)
+
+### 🩹 Fixes
+
+- [UXE-8164] Chromatic build
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.177.2 (2026-03-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
