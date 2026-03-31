@@ -215,6 +215,7 @@ const variants = {
   navBar: {
     sectionButton: {
       ...theme.variants.navBar.sectionButton,
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif !important',
       height: 'unset',
       fontWeight: '500',
       minHeight: '36px',
@@ -228,6 +229,7 @@ const variants = {
     itemButton: {
       height: 'unset',
       ...theme.variants.navBar.itemButton,
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif !important',
       fontWeight: '500',
       '&:not(.disabled):hover': {
         ...theme.variants.navBar.itemButton,
