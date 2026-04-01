@@ -122,7 +122,10 @@ const attachment = {
 
 const tooltip = {
   inline: {
-    color: astroTokensDark.color.blue[400],
+    color: astroTokensDark.color.font.link,
+    '&.is-hovered': {
+      color: astroTokensDark.color.blue[300],
+    },
   },
 };
 

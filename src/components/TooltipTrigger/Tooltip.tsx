@@ -20,7 +20,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((props, ref) => {
     <Text
       ref={tooltipRef}
       variant="variants.tooltip.container"
-      p="sm"
       {...(tooltipProps as DOMAttributes)}
       {...others}
     >
