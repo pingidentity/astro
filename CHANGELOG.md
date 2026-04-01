@@ -1,3 +1,13 @@
+## 2.177.5-alpha.0 (2026-04-01)
+
+### 🩹 Fixes
+
+- update astro token
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.177.4-alpha.0 (2026-03-31)
 
 ### 🩹 Fixes
