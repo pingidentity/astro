@@ -6,6 +6,7 @@ export const container = {
   overflow: 'visible',
   wordBreak: 'break-word',
   display: 'flex',
+  p: 'sm',
   '.is-right > * > &, .is-left > * > &': {
     maxWidth: '24em',
     maxHeight: '6.5em',
@@ -32,11 +33,7 @@ const badge = {
 export const button = {
   cursor: 'default',
   '&.is-hovered, &.is-pressed': {
-    backgroundColor: 'inherit',
     cursor: 'default',
-    path: {
-      fill: 'neutral.20',
-    },
   },
 };
 
