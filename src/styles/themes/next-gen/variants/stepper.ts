@@ -11,6 +11,16 @@ const line = {
     borderBottomStyle: 'solid',
     borderBottomColor: astroTokens.color.blue[200],
   },
+  '&.is-default': {
+    width: '2px',
+    height: '44px',
+    maxHeight: '44px',
+    borderBottomWidth: 0,
+    borderRightWidth: '2px',
+    borderRightStyle: 'solid',
+    borderRightColor: astroTokens.color.blue[200],
+    my: 'xs',
+  },
 };
 
 const stepBase = {
@@ -61,6 +71,12 @@ const step = {
       color: 'active',
       ...stepBase,
     },
+  },
+  default: {
+    backgroundColor: 'backgroundBase',
+    borderColor: astroTokens.color.blue[200],
+    color: 'active',
+    ...stepBase,
   },
 };
 

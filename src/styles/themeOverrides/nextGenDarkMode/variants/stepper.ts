@@ -9,6 +9,9 @@ const step = {
       backgroundColor: 'black',
     },
   },
+  default: {
+    backgroundColor: 'black',
+  },
 };
 
 
