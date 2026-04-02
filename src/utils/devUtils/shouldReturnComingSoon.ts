@@ -2,6 +2,7 @@ import nextGenConvertedComponents, {
   astroBlacklistStory,
   componentSpecificNextGenBlacklist,
   nextGenOnlyComponents,
+  onyxOnlyRecipes,
 } from '../../styles/themes/next-gen/convertedComponentList';
 
 import { themes } from './constants/themes';
@@ -14,6 +15,14 @@ export const shouldReturnComingSoon = (
   const component = context.title.split('/')[1];
   const isNextGenOnlyComponent = nextGenOnlyComponents.includes(component) || context.title.split('/')[0] === 'Onyx Recipes';
   const isStoryInNextGen = nextGenConvertedComponents.includes(component);
+  const isRecipes = context.title.split('/')[0] === 'Recipes';
+  const isRecipeInNextGen = onyxOnlyRecipes.includes(component);
+
+  // if the story is a recipe, and it exists in both Astro and NextGen,
+  // show the story regardless of the selected theme
+  if (isRecipes && isRecipeInNextGen) {
+    return false;
+  }
 
   if (isNextGenOnlyComponent
     && (selectedTheme === themes.NEXT_GEN || selectedTheme === themes.NEXT_GEN_DARK)) {
@@ -35,6 +44,7 @@ export const shouldReturnComingSoon = (
       selectedTheme === themes.NEXT_GEN || selectedTheme === themes.NEXT_GEN_DARK)) {
     return true;
   }
+
   // if the component has NOT been converted, and the active theme is NextGen
   // return the coming soon message
   if ((isStoryInNextGen === false && isNextGenOnlyComponent === false) && (
@@ -42,6 +52,7 @@ export const shouldReturnComingSoon = (
   ) {
     return true;
   }
+
   // if the component is a NextGen ONLY component, and the selected theme is Astro,
   // return the coming soon message
   if (isNextGenOnlyComponent && (
