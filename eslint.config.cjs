@@ -167,6 +167,8 @@ module.exports = [
       'no-use-before-define': 'off',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-useless-constructor': 'error',
+      // TypeScript type checking covers undefined identifiers; disable ESLint's no-undef
+      'no-undef': 'off',
     },
   },
   {
