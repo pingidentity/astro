@@ -1,3 +1,13 @@
+## 2.177.9-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UIP-8127] SelectField dropdown position incorrect on scroll
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.177.8-alpha.0 (2026-04-02)
 
 ### 🩹 Fixes
