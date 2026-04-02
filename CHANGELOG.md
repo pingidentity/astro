@@ -1,3 +1,13 @@
+## 2.178.3-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8181] Remove Typekit.net Call
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
 ## 2.178.2-alpha.0 (2026-04-02)
 
 ### 🩹 Fixes
