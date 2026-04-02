@@ -1,3 +1,13 @@
+## 2.177.8-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8141] Rockerbuttongroup field breaking fix
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.177.7-alpha.0 (2026-04-01)
 
 ### 🩹 Fixes
