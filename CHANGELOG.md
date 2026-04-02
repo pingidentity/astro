@@ -1,3 +1,13 @@
+## 2.178.2-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8174] TimeZonePicker needs to display a pre-selected default value
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.178.1-alpha.0 (2026-04-02)
 
 ### 🩹 Fixes
