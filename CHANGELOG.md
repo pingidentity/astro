@@ -1,3 +1,13 @@
+## 2.178.1-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8092] disable no-undef for TypeScript files
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.178.0-alpha.0 (2026-04-02)
 
 ### 🚀 Features
