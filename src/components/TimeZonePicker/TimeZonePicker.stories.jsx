@@ -22,6 +22,19 @@ export default {
 
 export const Default = args => <TimeZonePicker {...args} label="Default Example" />;
 
+export const Controlled = args => {
+  const [selectedTimeZone, setSelectedTimeZone] = React.useState('Pacific/Apia GMT+13:00');
+
+  return (
+    <TimeZonePicker
+      {...args}
+      label="Controlled Example"
+      selectedKey={selectedTimeZone}
+      onSelectionChange={key => setSelectedTimeZone(key)}
+    />
+  );
+};
+
 export const WithCustomTimeZone = args => {
   const customTimeZone = {
     '(GMT+02:00) Africa/Juba': 'Africa/Juba',
