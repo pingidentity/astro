@@ -740,11 +740,11 @@ export const AsyncLoading = args => {
     }
   }, []);
 
-  const handleLoadMore = () => {
-    if (limit >= dataSize) return;
+  const handleLoadMore = useCallback(() => {
+    if (loading !== loadingStates.IDLE || limit >= dataSize) return;
     setLoading(loadingStates.LOADING_MORE);
     setLimit(prev => prev + LIMIT);
-  };
+  }, [loading, limit, dataSize]);
 
   useEffect(() => {
     fetchData(limit);
@@ -772,6 +772,7 @@ export const AsyncLoading = args => {
       onAction={action('onAction')}
       density="compact"
       scale="medium"
+      height={300}
       sortDescriptor={sortDescriptor}
       onSortChange={handleSortChange}
     >

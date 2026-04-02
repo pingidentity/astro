@@ -138,6 +138,12 @@ const step = {
       border: '4px solid #fff',
     },
   },
+  default: {
+    backgroundColor: 'accent.99',
+    borderColor: 'active',
+    color: 'active',
+    ...stepBase,
+  },
 };
 
 /** Line styles */
@@ -151,6 +157,14 @@ const line = {
   '&.is-inactive': {
     borderBottomStyle: 'dashed',
     borderBottomColor: 'neutral.80',
+  },
+  '&.is-default': {
+    width: 1,
+    height: '90px',
+    maxHeight: '90px',
+    borderRightWidth: 1,
+    borderRightStyle: 'solid',
+    borderRightColor: 'active',
   },
 };
 

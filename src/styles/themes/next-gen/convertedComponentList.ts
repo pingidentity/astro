@@ -154,4 +154,8 @@ export const nextGenOnlyComponents = [
   'Onyx Input Patterns',
 ];
 
+export const onyxOnlyRecipes = [
+  'Vertical Onyx Stepper',
+];
+
 export default nextGenConvertedComponents;

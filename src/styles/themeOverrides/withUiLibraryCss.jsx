@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ThemeProvider } from '@emotion/react';
+import { css, Global, ThemeProvider } from '@emotion/react';
 import { merge } from 'theme-ui';
 
 import astroTheme from '../theme';
@@ -25,6 +25,13 @@ const WithUiLibraryCss = Story => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Global
+        styles={css`
+          body {
+            font-family: "Helvetica Neue", Helvetica, sans-serif !important;
+          }
+        `}
+      />
       <Story />
     </ThemeProvider>
   );

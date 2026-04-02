@@ -47,7 +47,7 @@ export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
   labelProps?: ThemeUILabelProps;
   containerProps?: BoxProps;
   labelMode?: LabelModeProps;
-  onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key| null) =>
+  onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key | null) =>
     void | undefined;
   value?: string | number | undefined
 }
@@ -55,7 +55,7 @@ export interface UseSelectFieldProps<T> extends AriaSelectOptions<T> {
 interface ControlProps extends React.HTMLAttributes<Element> {
   'data-testid'?: string;
   defaultValue?: string | number | undefined;
-  onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key| null) =>
+  onChange?: (value: CustomChangeEventType | React.FormEvent<Element> | Key | null) =>
     void | undefined;
 }
 
@@ -138,7 +138,7 @@ const useSelectField = <T extends object>(
   // Create state based on the incoming props
   const state = useSelectState(selectProps) as SelectState<T>;
 
-  const popoverRef = useRef() as React.RefObject<HTMLElement>;
+  const popoverRef = useRef() as React.RefObject<HTMLDivElement>;
   const listBoxRef = useRef() as React.RefObject<HTMLElement>;
   const triggerRef = useRef() as React.RefObject<HTMLButtonElement>;
   /* istanbul ignore next */
@@ -191,6 +191,7 @@ const useSelectField = <T extends object>(
     shouldFlip: !isNotFlippable,
     isOpen: state.isOpen,
     onClose: state.close,
+    offset: 5,
   });
 
   // Update position once the ListBox has rendered. This ensures that
@@ -263,6 +264,7 @@ const useSelectField = <T extends object>(
 
   const overlay = (
     <Popover
+      popoverRef={popoverRef}
       triggerRef={triggerRef}
       style={style}
       state={state}

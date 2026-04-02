@@ -14,6 +14,8 @@ export const label: ThemeUICSSObject = {
   display: 'block',
   mb: 'xs',
   alignItems: 'center',
+  // added to override text-transform from being set to uppercase when used with ui-library
+  textTransform: 'inherit',
   '&.is-float-label': {
     textOverflow: 'ellipsis',
     display: 'flex',
@@ -44,7 +46,6 @@ export const label: ThemeUICSSObject = {
 };
 
 // Variants below
-
 label.indicator = {
   color: 'critical.bright',
   ml: 5,
@@ -55,6 +56,7 @@ label.radio = {
   cursor: 'pointer',
   alignItems: 'center',
   mb: 'xs',
+  textTransform: 'inherit',
 };
 
 // NOTE: ThemeUI label adds 'flex' after other styles, so we have to use !important to override it
@@ -67,6 +69,7 @@ label.checkbox = {
   width: 'max-content',
   alignItems: 'center',
   cursor: 'pointer',
+  textTransform: 'inherit',
   '&.is-disabled': {
     opacity: '1',
     color: 'rgba(37, 55, 70, 0.5)',
@@ -76,4 +79,5 @@ label.checkbox = {
 label.radioGroup = {
   ...label,
   fontWeight: 1,
+  textTransform: 'inherit',
 };

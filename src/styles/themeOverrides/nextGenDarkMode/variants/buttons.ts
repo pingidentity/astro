@@ -72,6 +72,15 @@ const iconButtons = {
       backgroundColor: astroTokensDark.color.gray.light,
     },
   },
+  tooltip: {
+    button: {
+      ...baseIconButton,
+      '&.is-hovered': {
+        path: { fill: astroTokensDark.color.gray[400] },
+        backgroundColor: astroTokensDark.color.common.light,
+      },
+    },
+  },
 };
 
 const searchNavTabLabel = {

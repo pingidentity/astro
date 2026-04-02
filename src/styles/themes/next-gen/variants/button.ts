@@ -592,6 +592,15 @@ const iconButtons = {
       outlineColor: astroTokens.color.gray[700],
     },
   },
+  tooltip: {
+    button: {
+      ...baseIconButton,
+      '&.is-hovered': {
+        path: { fill: 'dark' },
+        backgroundColor: astroTokens.color.common.light,
+      },
+    },
+  },
 };
 
 const listBoxLink = {

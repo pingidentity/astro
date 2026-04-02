@@ -65,7 +65,7 @@ export const PopoverWrapper = forwardRef<HTMLElement, PopoverWrapperProps>((prop
 
   return (
     isOpen
-      && (
+    && (
       <Box
         {...mergeProps(others, overlayProps, modalProps)}
         variant="popoverMenu.container"
@@ -92,7 +92,7 @@ export const PopoverWrapper = forwardRef<HTMLElement, PopoverWrapperProps>((prop
             )
         }
       </Box>
-      )
+    )
   );
 });
 

@@ -1,3 +1,113 @@
+## 2.178.3-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8181] Remove Typekit.net Call
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
+## 2.178.2-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8174] TimeZonePicker needs to display a pre-selected default value
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.178.1-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8092] disable no-undef for TypeScript files
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.178.0-alpha.0 (2026-04-02)
+
+### 🚀 Features
+
+- [UIP-8139] Create recipe for numbered vertical component similar to Astro Stepper
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.177.9-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UIP-8127] SelectField dropdown position incorrect on scroll
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.177.8-alpha.0 (2026-04-02)
+
+### 🩹 Fixes
+
+- [UXE-8141] Rockerbuttongroup field breaking fix
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.177.7-alpha.0 (2026-04-01)
+
+### 🩹 Fixes
+
+- [UXE-8157] fixed label text-transform css
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.177.6-alpha.0 (2026-04-01)
+
+### 🩹 Fixes
+
+- [UIP-8084] TooltipTrigger Update to match specs
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.177.5-alpha.0 (2026-04-01)
+
+### 🩹 Fixes
+
+- update astro token
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.177.4-alpha.0 (2026-03-31)
+
+### 🩹 Fixes
+
+- update npm release command to specify projects for better targeting
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.177.3-alpha.0 (2026-03-31)
+
+### 🩹 Fixes
+
+- [UXE-8164] Chromatic build
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.177.2 (2026-03-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

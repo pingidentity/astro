@@ -1,9 +1,11 @@
 import React from 'react';
-import AccountIcon from '@pingux/mdi-react/AccountIcon';
+import AccountOutlineIcon from '@pingux/mdi-react/AccountOutlineIcon';
 import Earth from '@pingux/mdi-react/EarthIcon';
+import { astroTokens, astroTokensDark } from '@pingux/onyx-tokens';
 import { Meta, StoryFn } from '@storybook/react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
+import { useGetTheme } from '../../hooks';
 import { Box, Button, Icon, IconButton, Text, Tooltip, TooltipTrigger } from '../../index';
 import { TooltipTriggerProps } from '../../types/tooltipTrigger';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
@@ -71,25 +73,46 @@ export const IconWithTooltip: StoryFn = args => (
   <Box pl={50}>
     <TooltipTrigger {...args}>
       <IconButton variant="tooltip.button">
-        <Icon icon={AccountIcon} title={{ name: 'Account Icon' }} />
+        <Icon icon={AccountOutlineIcon} title={{ name: 'Account Icon' }} />
       </IconButton>
       <Tooltip>Useful tooltip</Tooltip>
     </TooltipTrigger>
   </Box>
 );
 
-export const BadgeWithTooltip: StoryFn = args => (
-  <Box pl={50}>
-    <TooltipTrigger {...args}>
-      <Button variant="variants.tooltip.badge" bg="neutral.10">
-        <Text variant="label" sx={{ textTransform: 'uppercase' }} color="white">
-          Some text
-        </Text>
-      </Button>
-      <Tooltip variant="variants.tooltip.badgeTooltipContainer">Useful tooltip</Tooltip>
-    </TooltipTrigger>
-  </Box>
-);
+export const BadgeWithTooltip: StoryFn = args => {
+  const { themeState: { isAstro, isOnyxDark } } = useGetTheme();
+
+  const getBackground = () => {
+    if (isAstro) {
+      return 'neutral.10';
+    }
+    return isOnyxDark ? astroTokens.color.gray.light : astroTokens.color.gray.dark;
+  };
+
+  const getTextColor = () => {
+    if (isAstro) {
+      return 'white';
+    }
+    return isOnyxDark ? astroTokensDark.color.font.reverse : astroTokens.color.font.reverse;
+  };
+
+  return (
+    <Box pl={50}>
+      <TooltipTrigger {...args}>
+        <Button
+          variant="variants.tooltip.badge"
+          bg={getBackground()}
+        >
+          <Text variant="label" sx={isAstro ? { textTransform: 'uppercase' } : {}} color={getTextColor()}>
+            Some Text
+          </Text>
+        </Button>
+        <Tooltip variant="variants.tooltip.badgeTooltipContainer">Useful tooltip</Tooltip>
+      </TooltipTrigger>
+    </Box>
+  );
+};
 
 BadgeWithTooltip.parameters = {
   design: {
