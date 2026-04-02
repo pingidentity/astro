@@ -1,4 +1,5 @@
 import React, { forwardRef,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -29,11 +30,21 @@ const TimeZonePicker = forwardRef((props, ref) => {
     emptySearchText,
     locales,
     localeOptions,
+    selectedKey: selectedKeyProp,
+    onSelectionChange: onSelectionChangeProp,
+    inputValue: inputValueProp,
+    onInputChange: onInputChangeProp,
     ...otherProps
   } = props;
 
-  const [search, setSearch] = useState('');
-  const [selectedKey, setSelectedKey] = useState('');
+  const isSelectionControlled = selectedKeyProp !== undefined;
+  const isInputControlled = inputValueProp !== undefined;
+
+  const [internalInputValue, setInternalInputValue] = useState(selectedKeyProp || '');
+  const [internalSelectedKey, setInternalSelectedKey] = useState(selectedKeyProp || '');
+
+  const inputValue = isInputControlled ? inputValueProp : internalInputValue;
+  const selectedKey = isSelectionControlled ? selectedKeyProp : internalSelectedKey;
 
   const timeZonePickerRef = useRef();
   /* istanbul ignore next */
@@ -60,17 +71,31 @@ const TimeZonePicker = forwardRef((props, ref) => {
     }).sort((a, b) => a.numericOffset - b.numericOffset);
   }, [additionalTimeZones]);
 
+  // Sync internal input value when controlled selectedKey changes externally
+  useEffect(() => {
+    if (isSelectionControlled) {
+      if (selectedKeyProp) {
+        const item = allTimeZones.find(tz => tz.key === selectedKeyProp);
+        if (item && !isInputControlled) {
+          setInternalInputValue(item.key);
+        }
+      } else if (!isInputControlled) {
+        setInternalInputValue('');
+      }
+    }
+  }, [selectedKeyProp, isSelectionControlled, isInputControlled, allTimeZones]);
+
   const filteredItems = useMemo(() => {
     const selectedItem = allTimeZones.find(tz => tz.key === selectedKey);
-    const isExactMatch = selectedItem && selectedItem.key === search;
+    const isExactMatch = selectedItem && selectedItem.key === inputValue;
 
-    if (!search || isExactMatch) {
+    if (!inputValue || isExactMatch) {
       return allTimeZones;
     }
 
-    const upperSearch = search.toUpperCase();
+    const upperSearch = inputValue.toUpperCase();
     return allTimeZones.filter(tz => tz.searchTags.includes(upperSearch));
-  }, [search, selectedKey, allTimeZones]);
+  }, [inputValue, selectedKey, allTimeZones]);
 
   const timeData = useMemo(() => {
     const now = new Date();
@@ -85,18 +110,30 @@ const TimeZonePicker = forwardRef((props, ref) => {
   }, [allTimeZones, locales, localeOptions]);
 
   const onInputChange = value => {
-    setSearch(value);
-    if (value === '') {
-      setSelectedKey(null);
+    if (!isInputControlled) {
+      setInternalInputValue(value);
     }
+    if (value === '') {
+      if (!isSelectionControlled) {
+        setInternalSelectedKey(null);
+      }
+      onSelectionChangeProp?.(null);
+    }
+    onInputChangeProp?.(value);
   };
 
   const onSelectionChange = key => {
     if (!key) return;
     const selectedItem = allTimeZones.find(item => item.key === key);
     if (selectedItem) {
-      setSearch(selectedItem.key);
-      setSelectedKey(key);
+      if (!isInputControlled) {
+        setInternalInputValue(selectedItem.key);
+      }
+      if (!isSelectionControlled) {
+        setInternalSelectedKey(key);
+      }
+      onSelectionChangeProp?.(key);
+      onInputChangeProp?.(selectedItem.key);
     }
   };
 
@@ -106,7 +143,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
       {...otherProps}
       ref={timeZonePickerRef}
       items={filteredItems}
-      inputValue={search}
+      inputValue={inputValue}
       selectedKey={selectedKey}
       onInputChange={onInputChange}
       onSelectionChange={onSelectionChange}
@@ -154,6 +191,14 @@ TimeZonePicker.propTypes = {
   ]),
   /** Custom options to use when generating the time format. See [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString#using_options) for more info. */
   localeOptions: PropTypes.shape({}),
+  /** The key of the currently selected item (controlled). */
+  selectedKey: PropTypes.string,
+  /** Handler called when the selection changes. Receives the selected key. */
+  onSelectionChange: PropTypes.func,
+  /** The current input value (controlled). */
+  inputValue: PropTypes.string,
+  /** Handler called when the input value changes. */
+  onInputChange: PropTypes.func,
 };
 
 TimeZonePicker.defaultProps = {
