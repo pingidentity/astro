@@ -1,3 +1,13 @@
+## 2.178.0-alpha.0 (2026-04-02)
+
+### 🚀 Features
+
+- [UIP-8139] Create recipe for numbered vertical component similar to Astro Stepper
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.177.9-alpha.0 (2026-04-02)
 
 ### 🩹 Fixes
