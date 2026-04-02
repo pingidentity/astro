@@ -14,7 +14,6 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
   return (
     <Global
       styles={css`
-        @import url("https://use.typekit.net/icz8cni.css");
         ${emotionNormalize}
         ${pingitoFont}
         ${openSansFont}
@@ -109,8 +108,6 @@ export const PageWrapper = forwardRef((props, ref) => {
     <ThemeProvider ref={ref} theme={theme} {...others}>
       <Global
         styles={css`
-          @import url("https://use.typekit.net/icz8cni.css");
-
           [data-tippy-root] {
             max-width: calc(100vw - 10px);
           }
