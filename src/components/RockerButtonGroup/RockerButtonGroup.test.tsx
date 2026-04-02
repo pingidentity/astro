@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { RockerButton, RockerButtonGroup } from '../../index';
-import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
+import { RockerButtonGroupProps } from '../../types';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 const testId = 'testId';
@@ -35,6 +36,70 @@ const getComponent = (props = {}, { buttons = testButtons, renderFn = render } =
     ))}
   </RockerButtonGroup>
 ));
+
+const ControlledWithSelectedKey = (
+  {
+    selectedKey: initialKey,
+    onSelectionChange: onSelectionChangeProp,
+    ...props
+  }: RockerButtonGroupProps,
+) => {
+  const [selectedKey, setSelectedKey] = useState(initialKey);
+
+  const handleSelectionChange = (key: string) => {
+    setSelectedKey(key);
+    onSelectionChangeProp?.(key);
+  };
+
+  return (
+    <RockerButtonGroup
+      selectedKey={selectedKey}
+      onSelectionChange={handleSelectionChange}
+      {...props}
+      data-id="test-container"
+    >
+      {testButtons.map(button => (
+        <RockerButton
+          name={button.name}
+          key={button.key}
+          selectedStyles={button.selectedStyles}
+        />
+      ))}
+    </RockerButtonGroup>
+  );
+};
+
+const ControlledWithSelectedKeys = (
+  {
+    selectedKeys: initialKeys,
+    onSelectionChange: onSelectionChangeProp,
+    ...props
+  }: RockerButtonGroupProps,
+) => {
+  const [selectedKeys, setSelectedKeys] = useState(initialKeys);
+
+  const handleSelectionChange = (keys: string[]) => {
+    setSelectedKeys(keys);
+    onSelectionChangeProp?.(keys);
+  };
+
+  return (
+    <RockerButtonGroup
+      selectedKeys={selectedKeys}
+      onSelectionChange={handleSelectionChange}
+      {...props}
+      data-id="test-container"
+    >
+      {testButtons.map(button => (
+        <RockerButton
+          name={button.name}
+          key={button.key}
+          selectedStyles={button.selectedStyles}
+        />
+      ))}
+    </RockerButtonGroup>
+  );
+};
 
 // Needs to be added to each components test file
 universalComponentTests({
@@ -129,4 +194,47 @@ test('rockerButton renders correct bg when selectedStyles prop is css variable',
   expect(button1).toHaveClass('is-selected');
   expect(button1).toHaveClass('is-pressed');
   expect(button1).toHaveStyle('background-color: #2e3e63');
+});
+
+test('should call onSelectionChange callback when selectedKey prop is provided', async () => {
+  const onSelectionChange = jest.fn();
+  render(<ControlledWithSelectedKey selectedKey="Or" onSelectionChange={onSelectionChange} />);
+
+  const button0 = screen.getByRole('radio', { name: testButtons[0].key });
+  const button1 = screen.getByRole('radio', { name: testButtons[1].key });
+  const button2 = screen.getByRole('radio', { name: testButtons[2].key });
+
+  expect(button0).not.toHaveClass('is-selected');
+  expect(button1).toHaveClass('is-selected');
+  expect(button2).not.toHaveClass('is-selected');
+
+  await act(async () => userEvent.click(button0));
+  expect(onSelectionChange).toHaveBeenCalledWith(testButtons[0].key);
+  expect(button0).toHaveClass('is-selected');
+
+  await act(async () => userEvent.click(button2));
+  expect(onSelectionChange).toHaveBeenCalledWith(testButtons[2].key);
+  expect(button2).toHaveClass('is-selected');
+});
+
+
+test('should call onSelectionChange callback when selectedKeys prop is provided', async () => {
+  const onSelectionChange = jest.fn();
+  render(<ControlledWithSelectedKeys selectedKeys={['Or']} onSelectionChange={onSelectionChange} />);
+
+  const button0 = screen.getByRole('radio', { name: testButtons[0].key });
+  const button1 = screen.getByRole('radio', { name: testButtons[1].key });
+  const button2 = screen.getByRole('radio', { name: testButtons[2].key });
+
+  expect(button0).not.toHaveClass('is-selected');
+  expect(button1).toHaveClass('is-selected');
+  expect(button2).not.toHaveClass('is-selected');
+
+  await act(async () => userEvent.click(button0));
+  expect(onSelectionChange).toHaveBeenCalledWith([testButtons[0].key]);
+  expect(button0).toHaveClass('is-selected');
+
+  await act(async () => userEvent.click(button2));
+  expect(onSelectionChange).toHaveBeenCalledWith([testButtons[2].key]);
+  expect(button2).toHaveClass('is-selected');
 });

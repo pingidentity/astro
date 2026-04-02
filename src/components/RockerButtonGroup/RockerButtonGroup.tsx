@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   useMemo,
 } from 'react';
+import { Key } from 'react-stately';
 import { AriaToggleButtonGroupProps, useToggleButtonGroup } from '@react-aria/button';
 import { ToggleGroupProps, useToggleGroupState } from '@react-stately/toggle';
 
@@ -18,20 +19,36 @@ const RockerButtonGroup = forwardRef<HTMLDivElement, RockerButtonGroupProps>((pr
     selectedKey: selectedKeyProp,
     selectedKeys: selectedKeysProp,
     tabListProps,
+    onSelectionChange,
     ...others
   } = props;
   const buttonGroupRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   usePropWarning(props, 'disabled', 'isDisabled');
 
+  const isUsingSingleKeyAPI = selectedKeyProp !== undefined
+    || defaultSelectedKeyProp !== undefined;
+
   const selectedKeys = selectedKeysProp || (selectedKeyProp ? [selectedKeyProp] : null);
   const defaultSelectedKeys = defaultSelectedKeysProp
-  || (defaultSelectedKeyProp ? [defaultSelectedKeyProp] : null);
+    || (defaultSelectedKeyProp ? [defaultSelectedKeyProp] : null);
+
+  const handleSelectionChange = (keys: Set<Key>) => {
+    if (!onSelectionChange) return;
+
+    if (isUsingSingleKeyAPI) {
+      const firstKey = Array.from(keys)[0] as string;
+      onSelectionChange(firstKey);
+    } else {
+      onSelectionChange(Array.from(keys) as string[]);
+    }
+  };
 
   const theseProps = {
     ...others,
     ...(defaultSelectedKeys && { defaultSelectedKeys }),
     ...(selectedKeys && { selectedKeys }),
+    ...(onSelectionChange && { onSelectionChange: handleSelectionChange }),
   };
 
   const state = useToggleGroupState(theseProps as ToggleGroupProps);
