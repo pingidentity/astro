@@ -1,3 +1,13 @@
+## 2.179.0-alpha.0 (2026-04-03)
+
+### 🚀 Features
+
+- [UXE-8187] Avatar add null handling and a warning for colorId
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.178.4-alpha.0 (2026-04-03)
 
 ### 🩹 Fixes
