@@ -26,9 +26,6 @@ const navBar = {
     boxShadow: '0 2px 11px rgba(0, 0, 0, .13)',
     zIndex: 2,
   },
-  logoParent: {
-    p: '8px',
-  },
   sectionContainer: {
     pt: '0',
   },
@@ -274,6 +271,15 @@ export default {
   },
   links: {
     navItem: { ...navItemLink },
+    pingLogo: {
+      padding: '15px',
+      borderRadius: '4px',
+      '&.is-focused': {
+        outline: '2px solid',
+        outlineColor: 'active',
+        outlineOffset: '-2px',
+      },
+    },
   },
   icons: {
     ...icons,
