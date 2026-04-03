@@ -1,3 +1,14 @@
+## 2.180.0-alpha.0 (2026-04-03)
+
+### 🚀 Features
+
+- [UIP-8046] Combine version and publish stage with correct astro token
+- [UIP-8046] Combine version and publish stage
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.179.0-alpha.0 (2026-04-03)
 
 ### 🚀 Features
