@@ -102,12 +102,17 @@ const skip = {
     outlineOffset: '0px',
     top: '10px',
   },
+};
 
+const pingLogo = {
+  ...app,
+  padding: '15px',
 };
 
 export default {
   app,
   skip,
+  pingLogo,
   popover,
   web,
   copyRightLink,

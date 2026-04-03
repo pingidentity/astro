@@ -227,10 +227,6 @@ const popUpHeaderText = {
   },
 };
 
-const logoParent = {
-  p: 'md',
-};
-
 const headerNav = {
   cursor: 'pointer',
   minHeight: '40px',
@@ -394,7 +390,6 @@ export default {
   itemLinkButtonColor,
   sectionList,
   sideNavItem,
-  logoParent,
   itemIcon,
   itemIconSelected,
   itemCustomIcon,
