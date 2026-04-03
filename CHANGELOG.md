@@ -1,3 +1,13 @@
+## 2.181.0-alpha.0 (2026-04-03)
+
+### 🚀 Features
+
+- [UIP-8107] Icon Component Issues with Onyx light and Onyx Dark theme
+
+### ❤️  Thank You
+
+- Ajith M
+
 ## 2.180.1-alpha.0 (2026-04-03)
 
 ### 🩹 Fixes
