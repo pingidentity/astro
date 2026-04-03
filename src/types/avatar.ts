@@ -11,7 +11,7 @@ export interface AvatarProps extends ThemeUIAvatarProps {
   defaultText?: string;
   size?: string;
   color?: string;
-  colorId?: string;
+  colorId?: string | null;
   isSquare?: boolean;
   isLogo?: boolean;
   'data-testid'?: string;

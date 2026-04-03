@@ -23,13 +23,21 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
     ...others
   } = props;
 
-  // this will use color prop if provided,
-  // else will map colorId to a color, else defaults to 'green'
+  const safeColorId = colorId || '_INTERNAL_DEFAULT_ID_';
+
+  if (process.env.NODE_ENV !== 'production') {
+    if (!src && !color && !colorId) {
+      console.warn(
+        "[Astro] Avatar: No 'src', 'color', or 'colorId' provided. "
+        + 'The component is falling back to a default generated color.',
+      );
+    }
+  }
+
   const finalColor = useMemo(() => {
     if (color) return color;
-    if (colorId) return getColorFromUUID(colorId, avatarColors);
-    return 'green';
-  }, [color, colorId, avatarColors]);
+    return getColorFromUUID(safeColorId, avatarColors);
+  }, [color, safeColorId]);
 
   const { classNames } = useStatusClasses(className, {
     [`is-${finalColor}`]: finalColor,

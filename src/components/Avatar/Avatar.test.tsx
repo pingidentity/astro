@@ -43,10 +43,12 @@ test('an avatar is rendered with custom alt', () => {
 });
 
 test('an avatar is rendered with custom alt', () => {
+  const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
   getComponent({ src: undefined, defaultText: 'KL' });
   const avatar = screen.getByText('KL');
 
   expect(avatar).toBeInTheDocument();
+  warnSpy.mockRestore();
 });
 
 describe('getColorFromUUID', () => {
@@ -106,6 +108,52 @@ describe('getColorFromUUID', () => {
     const avatar = screen.getByTestId(datatestId);
 
     expect(avatar).toHaveClass('is-green');
+  });
+});
+
+describe('Avatar fallback behavior', () => {
+  test('warns in development when no src, color, or colorId is provided', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+    getComponent({ src: undefined });
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("No 'src', 'color', or 'colorId' provided"),
+    );
+    warnSpy.mockRestore();
+  });
+
+  test('does not crash when colorId is null', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+    getComponent({ src: undefined, colorId: null });
+    const avatar = screen.getByTestId(datatestId);
+    const classList = Array.from(avatar.classList);
+    const colorClass = classList.find(cls => cls.startsWith('is-'));
+
+    expect(colorClass).toBeDefined();
+    warnSpy.mockRestore();
+  });
+
+  test('two avatars with missing colorId get the same color class', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+    const { unmount } = render(<Avatar data-testid="avatar-1" />);
+    const avatar1 = screen.getByTestId('avatar-1');
+    const colorClass1 = Array.from(avatar1.classList).find(cls => cls.startsWith('is-'));
+    unmount();
+
+    render(<Avatar data-testid="avatar-2" />);
+    const avatar2 = screen.getByTestId('avatar-2');
+    const colorClass2 = Array.from(avatar2.classList).find(cls => cls.startsWith('is-'));
+
+    expect(colorClass1).toBe(colorClass2);
+    warnSpy.mockRestore();
+  });
+
+  test('does not warn when color prop is provided', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+    getComponent({ src: undefined, color: 'blue' });
+
+    expect(warnSpy).not.toHaveBeenCalled();
+    warnSpy.mockRestore();
   });
 });
 
