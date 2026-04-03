@@ -105,45 +105,45 @@ export const Sizes: StoryFn = () => (
       </TableRow>
     </TableHead>
     <TableBody sx={{ borderBottom: 'unset' }}>
-      <TableRow height="45px" bg="transparent !important">
+      <TableRow height="auto" bg="transparent !important">
         <TableCell>
           <Text>XXS | 9px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="xxs"/>'}</Text>
+          <Text fontFamily="monospace">{'<Icon icon={SearchIcon} size="xxs"/>'}</Text>
         </TableCell>
         <TableCell>
           <Icon icon={SearchIcon} size="xxs" title={{ name: 'Search Icon' }} />
         </TableCell>
       </TableRow>
-      <TableRow height="45px" bg="transparent !important">
+      <TableRow height="auto" bg="transparent !important">
         <TableCell>
           <Text>XS | 15px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="xs"/>'}</Text>
+          <Text fontFamily="monospace">{'<Icon icon={SearchIcon} size="xs"/>'}</Text>
         </TableCell>
         <TableCell>
           <Icon icon={SearchIcon} size="xs" title={{ name: 'Search Icon' }} />
         </TableCell>
       </TableRow>
-      <TableRow height="45px" bg="transparent !important">
+      <TableRow height="auto" bg="transparent !important">
         <TableCell>
           <Text>SM | 20px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="sm"/>'}</Text>
+          <Text fontFamily="monospace">{'<Icon icon={SearchIcon} size="sm"/>'}</Text>
         </TableCell>
         <TableCell>
           <Icon icon={SearchIcon} size="sm" title={{ name: 'Search Icon' }} />
         </TableCell>
       </TableRow>
-      <TableRow height="45px" bg="transparent !important">
+      <TableRow height="auto" bg="transparent !important">
         <TableCell>
           <Text>MD | 25px</Text>
         </TableCell>
         <TableCell>
-          <Text fontFamily="monospace">{'<Icon icon={SearchIcon}/> size="md"/>'}</Text>
+          <Text fontFamily="monospace">{'<Icon icon={SearchIcon} size="md"/>'}</Text>
         </TableCell>
         <TableCell>
           <Icon icon={SearchIcon} size="md" title={{ name: 'Search Icon' }} />
