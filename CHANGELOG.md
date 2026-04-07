@@ -1,3 +1,13 @@
+## 2.181.2-alpha.0 (2026-04-07)
+
+### 🩹 Fixes
+
+- correct typos in comments and documentation
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.181.1-alpha.0 (2026-04-06)
 
 ### 🩹 Fixes
