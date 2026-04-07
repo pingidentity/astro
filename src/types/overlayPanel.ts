@@ -19,7 +19,7 @@ export interface OverlayPanelProps extends BoxProps, TestingAttributes {
   size?: PanelSize,
   /** Callback function that runs when the esc key is used to close the OverlayPanel. */
   onClose?: UseOverlayPanelStateReturnOnClose;
-  /** Boolean that determines whether or not the css transition is occuring. */
+  /** Boolean that determines whether or not the css transition is occurring. */
   isTransitioning?: boolean,
   /** Ref that is connected to the button that triggers the overlay state.
    Focus will return to this ref when the keyboard is used to close the OverlayPanel. */
