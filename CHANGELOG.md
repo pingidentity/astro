@@ -1,3 +1,13 @@
+## 2.181.3-alpha.0 (2026-04-07)
+
+### 🩹 Fixes
+
+- update NPM publish to publish Astro
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.181.2 (2026-04-07)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
