@@ -9,7 +9,7 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 import Box from '.';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
-// Failure occured with ThemeUI refactor.
+// Failure occurred with ThemeUI refactor.
 // https://github.com/emotion-js/emotion/issues/1105#issuecomment-557726922
 const emotionCache = createCache({ key: 'box-test' });
 emotionCache.compat = true;

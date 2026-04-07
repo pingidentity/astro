@@ -1,3 +1,74 @@
+## 2.181.2-alpha.0 (2026-04-07)
+
+### 🩹 Fixes
+
+- correct typos in comments and documentation
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.181.1-alpha.0 (2026-04-06)
+
+### 🩹 Fixes
+
+- remove project references  in release scripts
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.181.0-alpha.0 (2026-04-03)
+
+### 🚀 Features
+
+- [UIP-8107] Icon Component Issues with Onyx light and Onyx Dark theme
+
+### ❤️  Thank You
+
+- Ajith M
+
+## 2.180.1-alpha.0 (2026-04-03)
+
+### 🩹 Fixes
+
+- [UIP-8121] Implement dependency audit changes
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.180.0-alpha.0 (2026-04-03)
+
+### 🚀 Features
+
+- [UIP-8046] Combine version and publish stage with correct astro token
+- [UIP-8046] Combine version and publish stage
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.179.0-alpha.0 (2026-04-03)
+
+### 🚀 Features
+
+- [UXE-8187] Avatar add null handling and a warning for colorId
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.178.4-alpha.0 (2026-04-03)
+
+### 🩹 Fixes
+
+- [UXE-8163] Fix Skip Link ui-lib style collisions
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.178.3 (2026-04-02)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

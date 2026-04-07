@@ -47,7 +47,7 @@ describe('useLoadPrev', () => {
     fireEvent.scroll(listView, { target: { scrollY: 450 } });
     fireEvent.scroll(listView, { target: { scrollY: 0 } });
     expect(onLoadPrev).toHaveBeenCalledTimes(1);
-    // will call becuase props have changed.
+    // will call because props have changed.
     rerender(<TestComponent items={[1, 2, 3, 4, 5]} />);
     fireEvent.scroll(listView, { target: { scrollY: 450 } });
     fireEvent.scroll(listView, { target: { scrollY: 0 } });

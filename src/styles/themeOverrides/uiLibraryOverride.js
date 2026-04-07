@@ -170,6 +170,35 @@ const links = {
       ...theme.links.app,
     },
   },
+  skip: {
+    '&:hover': {
+      color: 'white',
+      textDecoration: 'none',
+      '&:focus': {
+        outline: '2px solid',
+        outlineColor: 'active',
+        color: 'white',
+        textDecoration: 'none',
+      },
+    },
+    '&:visited': {
+      color: 'white',
+      textDecoration: 'none',
+    },
+    '&.is-pressed': {
+      color: 'white',
+      textDecoration: 'none',
+    },
+  },
+  pingLogo: {
+    '&:hover': {
+      '&.is-focused': {
+        outline: '2px solid',
+        outlineColor: 'active',
+        outlineOffset: '-2px',
+      },
+    },
+  },
 };
 
 const variants = {
