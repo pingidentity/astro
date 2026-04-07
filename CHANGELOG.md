@@ -1,3 +1,13 @@
+## 2.181.4-alpha.0 (2026-04-07)
+
+### 🩹 Fixes
+
+- [UXE-8048] Remove sequential requirement
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.181.3-alpha.0 (2026-04-07)
 
 ### 🩹 Fixes
