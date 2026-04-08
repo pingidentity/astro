@@ -1,3 +1,13 @@
+## 2.181.7-alpha.0 (2026-04-08)
+
+### 🩹 Fixes
+
+- correct spelling of calendarRef
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.181.6 (2026-04-08)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
