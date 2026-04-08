@@ -28,7 +28,7 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
   } = props;
   const { locale } = useLocale();
 
-  const calenderRef = useLocalOrForwardRef<HTMLDivElement>(ref);
+  const calendarRef = useLocalOrForwardRef<HTMLDivElement>(ref);
 
   const parsedDates = {
     value: (typeof value === 'string' && parseDate(value)) || value,
@@ -107,7 +107,7 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
     </Text>
   );
   return (
-    <Box {...calendarProps} {...calendarWrapperProps} ref={calenderRef} variant="calendar.calendarContainer" role="group">
+    <Box {...calendarProps} {...calendarWrapperProps} ref={calendarRef} variant="calendar.calendarContainer" role="group">
       <VisuallyHidden aria-live="assertive">
         <Text>{title}</Text>
       </VisuallyHidden>
