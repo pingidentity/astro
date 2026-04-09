@@ -1,3 +1,13 @@
+## 2.181.9-alpha.0 (2026-04-09)
+
+### 🩹 Fixes
+
+- correct typo in documentation for Astro props
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.181.8 (2026-04-09)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
