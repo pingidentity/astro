@@ -1,3 +1,13 @@
+## 2.182.0-alpha.0 (2026-04-10)
+
+### 🚀 Features
+
+- [UXE-8167] Update search field styles onyx
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
 ## 2.181.9 (2026-04-09)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
