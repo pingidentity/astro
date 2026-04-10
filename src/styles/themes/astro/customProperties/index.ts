@@ -1,3 +1,4 @@
+import { hoveredState } from '../../../../components/AccordionGroup/Accordion.styles';
 import { IconSize, LoaderSize } from '../../../../types';
 
 import icons from './icons';
@@ -27,6 +28,7 @@ const navBarIconSize = 18 as IconSize;
 const badgeTextFontSize = '';
 
 export const astroThemeValues = {
+  accordionHoveredState: hoveredState,
   accordionItemDefaultLabelTag,
   navBarIconSize,
   activeColor,

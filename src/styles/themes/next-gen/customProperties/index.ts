@@ -6,13 +6,20 @@ import icons from './icons';
 import styles from './styles';
 import tShirtSizes, { iconWrapperSizes } from './tShirtSizes';
 
+const accordionHoveredState = {
+  '&.is-hovered': {
+    color: 'active',
+    textDecoration: 'underline',
+  },
+};
+
 const accordionItemDefaultLabelTag = 'h2';
 const iconBadgeCircleColor = 'badge.iconBadge';
 const activeColor = '#1a73e8';
 const backgroundBaseColor = 'white';
 const iFrameContentDivBackgroundColor = backgroundBaseColor;
 const defaultIconColor = 'gray-800';
-const defaultIconSize = 'md' as IconSize;
+const defaultIconSize = 'sm' as IconSize;
 const buttonLoaderSize = 'sm' as LoaderSize;
 const badgeStyles = {
   blueBg: '#EAF2FD',
@@ -26,6 +33,7 @@ const badgeTextFontSize = '75%';
 const navBarIconSize = '20px' as IconSize;
 
 export const nextGenThemeValues = {
+  accordionHoveredState,
   activeColor,
   navBarIconSize,
   backgroundBaseColor,

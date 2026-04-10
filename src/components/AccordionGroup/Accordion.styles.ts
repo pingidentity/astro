@@ -34,7 +34,6 @@ export const hoveredState = {
   '&.is-hovered': {
     color: 'active',
   },
-
 };
 
 const header = {

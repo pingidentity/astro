@@ -10,7 +10,6 @@ import { Button as ThemeUIButton } from 'theme-ui';
 import { AccordionContext } from '../../context/AccordionContext';
 import { useGetTheme, useStatusClasses } from '../../hooks';
 import { Box, Icon, Text } from '../../index';
-import { hoveredState } from '../AccordionGroup/Accordion.styles';
 
 export const validHeadingTags = ['h1', 'h2', 'h3', 'h4'];
 
@@ -36,7 +35,7 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
     ...others
   } = item.props;
 
-  const { icons, accordionItemMarginLeft } = useGetTheme();
+  const { icons, accordionItemMarginLeft, accordionHoveredState } = useGetTheme();
   const { MenuUp, MenuDown } = icons;
 
   const state = useContext(AccordionContext) as TreeState<object>;
@@ -93,12 +92,17 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
             as={validLabelHeadingTag}
             className={buttonClasses}
             variant={validLabelHeadingTag}
-            sx={hoveredState}
+            sx={accordionHoveredState}
           >
             {item.props.label}
           </Text>
           <Box as="span" ml={accordionItemMarginLeft}>
-            <Icon color="text.primary" icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+            <Icon
+              color="font.base"
+              icon={isOpen ? MenuUp : MenuDown}
+              size="sm"
+              title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }}
+            />
           </Box>
         </ThemeUIButton>
         {item.props.slots?.postHeading
