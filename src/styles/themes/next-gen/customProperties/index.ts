@@ -12,7 +12,7 @@ const activeColor = '#1a73e8';
 const backgroundBaseColor = 'white';
 const iFrameContentDivBackgroundColor = backgroundBaseColor;
 const defaultIconColor = 'gray-800';
-const defaultIconSize = 'md' as IconSize;
+const defaultIconSize = 'sm' as IconSize;
 const buttonLoaderSize = 'sm' as LoaderSize;
 const badgeStyles = {
   blueBg: '#EAF2FD',

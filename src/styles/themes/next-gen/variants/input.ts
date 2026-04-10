@@ -58,7 +58,9 @@ input.promptInput = {
 input.search = {
   ...input,
   pl: '4em !important',
-  pr: 'xl',
+  pr: `${astroTokens.spacing['md-l']}px !important`,
+  py: '13px !important',
+  lineHeight: 'body',
   color: 'font.base',
   '&.is-disabled': {
     ...readOnlyandDisabledStyles,

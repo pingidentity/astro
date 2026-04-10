@@ -64,11 +64,18 @@ const switchable = {
   },
 };
 
+const search = {
+  icon: {
+    fill: `${astroTokensDark.color.font.base} !important`,
+  },
+};
+
 export default {
   input,
   checkbox,
   radio,
   label,
+  search,
   select: {
     ...select,
     option: {
