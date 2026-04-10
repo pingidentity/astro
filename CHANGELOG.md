@@ -1,3 +1,13 @@
+## 2.182.1-alpha.0 (2026-04-10)
+
+### 🩹 Fixes
+
+- [UXE-8165] AccordionGroup design fix
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.182.0-alpha.0 (2026-04-10)
 
 ### 🚀 Features
