@@ -3,15 +3,19 @@ const accordion = {
     borderBottom: '1px solid',
     borderBottomColor: 'border.base',
   },
-  pb: 'lg',
+  pb: 'md',
+  mb: 'md',
+  mt: '0px',
 };
 
 const body = {
-  py: 'sm',
+  pt: 'md',
 };
 
 const header = {
-  p: 'sm',
+  '&.is-focused': {
+    borderRadius: '2px',
+  },
 };
 
 export default {
