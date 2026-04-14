@@ -2,6 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
+    "composite": false,
+    "rootDir": "src",
+    "paths": {},
     "types": [
       "node",
       "vite/client"
@@ -33,8 +36,6 @@
     "src/**/*.js", 
     "src/**/*.jsx", 
     "src/**/*.ts", 
-    "src/**/*.tsx",
-    "../onyx-tokens/build/**/*.ts",
-    "../onyx-tokens/build/**/*.json"
+    "src/**/*.tsx"
   ]
 }
