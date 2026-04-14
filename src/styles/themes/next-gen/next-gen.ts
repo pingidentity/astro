@@ -38,7 +38,6 @@ const nextGenTheme = {
   fontSizes,
   fontWeights,
   lineHeights: {
-    // @ts-expect-error - line-height is in default tokens but not in the type definition
     body: astroTokens.default['line-height'].base,
     xs: '1.2',
     sm: '1.4',
