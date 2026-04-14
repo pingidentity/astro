@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import { ButtonProps } from './button';
+import { IconProps } from './icon';
 import { PopoverMenuProps } from './popoverMenu';
 
 type PaginationState = {
@@ -44,6 +45,8 @@ export interface PaginationProps {
     previousButtonProps?: ButtonProps,
     setCurrentPageIndex?: () => void,
     totalCount: number,
+    previousButtonIconProps?: IconProps,
+    nextButtonIconProps?: IconProps,
 }
 
 export interface RangeSelectPopoverProps extends PopoverMenuProps {
