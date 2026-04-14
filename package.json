@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.182.1",
+  "version": "2.182.3-alpha.0",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -10,6 +10,7 @@
   "author": "ux-development@pingidentity.com",
   "main": "lib/cjs/index.js",
   "module": "lib/index.js",
+  "types": "lib/cjs/index.d.ts",
   "directories": {
     "lib": "lib"
   },

@@ -1,3 +1,23 @@
+## 2.182.3-alpha.0 (2026-04-14)
+
+### 🩹 Fixes
+
+- [UXE-8171] Fix Typescript Cannot Resolve Astro and Types Error
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
+## 2.182.2-alpha.0 (2026-04-14)
+
+### 🩹 Fixes
+
+- [UXE-8192] Add title to next and previous icon in pagination
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.182.1 (2026-04-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

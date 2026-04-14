@@ -1,7 +1,6 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 import { ThemeUICSSObject } from 'theme-ui';
 
-// @ts-expect-error - font-size is in default tokens but not in the type definition
 const fontSizes = astroTokens.default['font-size'];
 
 export const label: ThemeUICSSObject = {
