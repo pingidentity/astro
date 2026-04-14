@@ -81,7 +81,12 @@ const ExampleComponent = () => {
 export const Default = args => {
   return (
     <Box sx={{ maxWidth: '350px', gap: 'sm' }}>
-      <Pagination totalCount={250} {...args} />
+      <Pagination
+        totalCount={250}
+        nextButtonIconProps={{ title: { name: 'Next' } }}
+        previousButtonIconProps={{ title: { name: 'Previous' } }}
+        {...args}
+      />
     </Box>
   );
 };
