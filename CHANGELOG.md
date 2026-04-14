@@ -1,3 +1,13 @@
+## 2.182.3-alpha.0 (2026-04-14)
+
+### 🩹 Fixes
+
+- [UXE-8171] Fix Typescript Cannot Resolve Astro and Types Error
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
 ## 2.182.2-alpha.0 (2026-04-14)
 
 ### 🩹 Fixes
