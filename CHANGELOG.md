@@ -1,3 +1,13 @@
+## 2.183.0-alpha.0 (2026-04-15)
+
+### 🚀 Features
+
+- [UXE-8090] Add a script for external application testing
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.182.3 (2026-04-14)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
