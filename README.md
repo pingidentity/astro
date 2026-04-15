@@ -102,6 +102,10 @@ You will need to have the monorepo open at the root directory in VS Code for lin
 Note: To make linting and highlighting work with Yarn 2, `yarn dlx @yarnpkg/sdks vscode` needs to be run in the root directory of the monorepo. If any changes are made to any 
 ESLint packages or versions these features may stop working. Run this command again to solve the issue. Be sure to commit the changes so others don't run into the same issue. 
 
+## Testing Local Changes in an External App
+
+See the [Testing Local Changes in an External App](../../README.md#testing-local-changes-in-an-external-app) section in the root README for step-by-step instructions.
+
 ## Licensing
 
 This project is licensed under the Apache 2.0 license. See the [LICENSE](LICENSE) file for more information.
