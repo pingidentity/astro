@@ -1,3 +1,13 @@
+## 2.187.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-8253] fix Onyx Badge
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.186.0-alpha.0 (2026-04-16)
 
 ### 🚀 Features
