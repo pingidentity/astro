@@ -1,3 +1,13 @@
+## 2.186.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-7820] Add onyx combobox variants
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
 ## 2.185.0-alpha.0 (2026-04-16)
 
 ### 🚀 Features
