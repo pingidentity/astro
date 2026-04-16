@@ -39,7 +39,6 @@ const PanelHeader = forwardRef(({
 
   const renderAvatar = (
     <Avatar
-      color={image?.src ? false : 'green'}
       src={image?.src}
       isSquare={!!image?.src}
       size="avatar.lg"

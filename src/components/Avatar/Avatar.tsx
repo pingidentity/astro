@@ -23,7 +23,7 @@ const Avatar = forwardRef<HTMLImageElement, AvatarProps>((props, ref) => {
     ...others
   } = props;
 
-  const safeColorId = colorId || '_INTERNAL_DEFAULT_ID_';
+  const safeColorId = colorId || (defaultText && defaultText !== 'AA' ? defaultText : '_INTERNAL_DEFAULT_ID_');
 
   if (process.env.NODE_ENV !== 'production') {
     if (!src && !color && !colorId) {
