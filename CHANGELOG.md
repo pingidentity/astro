@@ -1,3 +1,13 @@
+## 2.185.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-8254] Avatar Fixes
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.184.0-alpha.0 (2026-04-16)
 
 ### 🚀 Features
