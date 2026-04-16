@@ -1,6 +1,8 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
 const container = {
+  minWidth: '150px',
+  boxShadow: '0px 8px 16px 0px rgba(0, 0, 0, 0.176)',
   transition: 'opacity 200ms ease',
   '&.animate': {
     opacity: 0,
@@ -29,6 +31,7 @@ const container = {
 
 const arrow = {
   color: 'white',
+  fontSize: 'sm',
   '&:before': {
     content: '""',
     position: 'absolute',

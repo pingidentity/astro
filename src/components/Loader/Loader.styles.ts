@@ -15,7 +15,7 @@ const withinInput = {
 const withinListbox = {
   color: 'active',
   fontSize: '6px',
-  padding: 'md',
+  padding: 'sm',
   alignItems: 'center',
   justifyContent: 'center',
 };

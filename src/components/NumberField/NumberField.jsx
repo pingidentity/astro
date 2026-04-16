@@ -16,7 +16,7 @@ import {
   Input,
   Label,
 } from '../..';
-import { useField, usePropWarning } from '../../hooks';
+import { useField, useGetTheme, usePropWarning } from '../../hooks';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
@@ -25,6 +25,7 @@ import { statusPropTypes } from '../../utils/docUtils/statusProp';
 const NumberField = forwardRef((props, ref) => {
   const { helperText, status } = props;
   const { locale } = useLocale();
+  const { themeState: { isOnyx } } = useGetTheme();
 
   const state = useNumberFieldState({ ...props, locale });
 
@@ -54,10 +55,10 @@ const NumberField = forwardRef((props, ref) => {
   const ControlArrows = (
     <Box variant="forms.numberField.arrows">
       <IconButton {...incrementButtonProps} ref={decRef} tabIndex="0" p={0}>
-        <Icon icon={MenuUp} size={18} title={{ name: 'Menu Up Icon' }} />
+        <Icon icon={MenuUp} size={isOnyx ? 'sm' : 18} title={{ name: 'Menu Up Icon' }} />
       </IconButton>
       <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="0" p={0}>
-        <Icon icon={MenuDown} size={18} title={{ name: 'Menu Down Icon' }} />
+        <Icon icon={MenuDown} size={isOnyx ? 'sm' : 18} title={{ name: 'Menu Down Icon' }} />
       </IconButton>
     </Box>
   );

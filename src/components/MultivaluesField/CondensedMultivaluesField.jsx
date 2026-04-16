@@ -67,7 +67,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const inputRef = useRef();
   const buttonRef = useRef();
 
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
   const {
     MenuDown,
     MenuUp,
@@ -367,7 +367,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
       && <Loader variant="loader.withinInput" />
     }
       <Box as="button" variant="forms.comboBox.button" tabIndex={-1} onClick={handleButtonPress} sx={{ border: 'none' }}>
-        <Icon icon={isOpen ? MenuUp : MenuDown} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+        <Icon icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
       </Box>
     </Box>
   );

@@ -25,7 +25,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
   const { state } = useAccordionGridContext();
   const cellRef = useRef();
 
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
   const { MenuDown, MenuUp } = icons;
 
   /* istanbul ignore next */
@@ -101,7 +101,7 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
           hasCaret
           && (
             <Box isRow alignItems="center" sx={{ mr: '0px' }}>
-              <Icon color="text.primary" icon={isSelected ? upArrow : downArrow} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+              <Icon color="text.primary" icon={isSelected ? upArrow : downArrow} {...(isOnyx && { size: 'sm' })} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
             </Box>
           )
         }

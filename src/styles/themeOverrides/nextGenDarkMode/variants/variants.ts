@@ -18,7 +18,7 @@ const listBox = {
   container: {
     backgroundColor: 'backgroundBase',
     border: '1px solid',
-    borderColor: 'transparent',
+    borderColor: 'border.attachment',
     borderRadius: '4px',
   },
   option: {
