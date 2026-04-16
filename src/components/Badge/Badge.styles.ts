@@ -171,6 +171,8 @@ const convenienceDefault = {
   },
 };
 
+const selected = convenienceDefault;
+
 const calloutBadge = {
   ...baseBadge,
   backgroundColor: '#FFF !important',
@@ -317,6 +319,7 @@ export default {
   itemBadgeWithSlot,
   multivaluesBadge,
   readOnlyBadge,
+  selected,
   selectedItemBadge,
   invertedBadgeDeleteButton,
   successCalloutBadge,
