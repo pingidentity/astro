@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.182.3",
+  "version": "2.187.0-alpha.0",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
@@ -30,7 +30,8 @@
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
     "test": "jest",
-    "test:watch": "jest watch"
+    "test:watch": "jest watch",
+    "publish:local": "npm i && npx nx build && cd ../../dist/astro && sh -c 'TAR=$(npm pack); printf \"%s\\n\" \"$PWD/$TAR\" | pbcopy; echo \"Packed: $PWD/$TAR\"'"
   },
   "dependencies": {
     "@babel/runtime": "7.16.3",

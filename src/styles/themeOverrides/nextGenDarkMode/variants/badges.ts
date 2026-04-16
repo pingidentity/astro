@@ -1,42 +1,59 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 
 const baseBadge = {
-  color: 'badge.textColor',
+  '& span': {
+    color: 'badge.textColor',
+  },
 };
 
 const primary = {
   backgroundColor: '#1a73e8 !important',
-  color: 'black',
+
+  '& span': {
+    color: 'black',
+  },
 };
 
 const secondary = {
   backgroundColor: '#324054 !important',
-  color: astroTokensDark.color.gray[100],
+  '& span': {
+    color: astroTokensDark.color.gray[100],
+  },
 };
 
 const success = {
   backgroundColor: '#22a75f !important',
-  color: 'black',
+  '& span': {
+    color: 'black',
+  },
 };
 
 const danger = {
   backgroundColor: '#da3a2b !important',
-  color: 'black',
+  '& span': {
+    color: 'black',
+  },
 };
 
 const warning = {
   backgroundColor: '#ffb946 !important',
-  color: 'black',
+  '& span': {
+    color: 'black',
+  },
 };
 
 const info = {
   backgroundColor: '#324054 !important',
-  color: astroTokensDark.color.gray[100],
+  '& span': {
+    color: astroTokensDark.color.gray[100],
+  },
 };
 
 const dark = {
   backgroundColor: '#c0c9d5 !important',
-  color: astroTokensDark.color.gray[100],
+  '& span': {
+    color: astroTokensDark.color.gray[100],
+  },
 };
 
 const activeStatusBadge = {
@@ -117,6 +134,7 @@ const badges = {
   info,
   dark,
   activeStatusBadge,
+  selected: activeStatusBadge,
   warningStatusBadge,
   criticalStatusBadge,
   healthyStatusBadge,

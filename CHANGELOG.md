@@ -1,3 +1,53 @@
+## 2.187.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-8253] fix Onyx Badge
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.186.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-7820] Add onyx combobox variants
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
+## 2.185.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-8254] Avatar Fixes
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.184.0-alpha.0 (2026-04-16)
+
+### 🚀 Features
+
+- [UXE-8255] fix iconbutton hover
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.183.0-alpha.0 (2026-04-15)
+
+### 🚀 Features
+
+- [UXE-8090] Add a script for external application testing
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.182.3 (2026-04-14)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

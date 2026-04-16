@@ -41,7 +41,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
     ...mergeProps(inputProps, others),
   };
 
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
   const { MenuDown } = icons;
 
   // istanbul ignore next
@@ -58,7 +58,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
       {
         // Render loader after delay if filtering or loading
         isLoading && (isOpen || menuTrigger === 'manual' || loadingState === loadingStates.LOADING)
-        && <Loader variant="loader.withinInput" />
+        && <Loader variant="loader.withinInput" {...(isOnyx && { size: 'sm' })} />
       }
       <PressResponder preventFocusOnPress isPressed={isOpen}>
         <Button
@@ -70,7 +70,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
         >
           <Icon
             icon={MenuDown}
-            size="md"
+            size={isOnyx ? 'sm' : 'md'}
             sx={isOpen ? { transform: 'rotate(180deg)' } : null}
             title={{ name: 'Menu Down' }}
           />

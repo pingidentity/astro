@@ -6,6 +6,8 @@ const fontSizes = astroTokens.default['font-size'];
 export const label: ThemeUICSSObject = {
   color: 'text.primary',
   fontSize: fontSizes.label,
+  mb: 'sm',
+  fontWeight: 'body',
   '&.is-float-label': {
     fontSize: fontSizes.label,
     fontWeight: 1,

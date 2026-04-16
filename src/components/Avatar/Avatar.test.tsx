@@ -22,7 +22,7 @@ const defaultProps: AvatarProps = {
 const getComponent = (props = {}) => render((
   <Avatar {...defaultProps} {...props} />
 ));
-// Needs to be added to each components test file
+
 universalComponentTests({
   renderComponent: (props: AvatarProps) => <Avatar {...defaultProps} {...props} />,
 });
@@ -42,7 +42,7 @@ test('an avatar is rendered with custom alt', () => {
   expect(img).toHaveAttribute('alt', 'Custom Alt');
 });
 
-test('an avatar is rendered with custom alt', () => {
+test('an avatar is rendered with initials', () => {
   const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
   getComponent({ src: undefined, defaultText: 'KL' });
   const avatar = screen.getByText('KL');
@@ -71,8 +71,6 @@ describe('getColorFromUUID', () => {
     const colorA = getColorFromUUID('id-1', colors);
     const colorB = getColorFromUUID('id-2', colors);
 
-    // While collisions are mathematically possible, for 2 items in a 10-item list,
-    // these specific IDs yield different results in FNV-1a.
     expect(colorA).not.toBe(colorB);
   });
 
@@ -84,7 +82,6 @@ describe('getColorFromUUID', () => {
     getComponent({ color: 'blue', colorId: 'some-id' });
     const avatar = screen.getByTestId(datatestId);
 
-    // Checking for 'is-blue'
     expect(avatar).toHaveClass('is-blue');
   });
 
@@ -93,9 +90,6 @@ describe('getColorFromUUID', () => {
     getComponent({ colorId: uuid });
 
     const avatar = screen.getByTestId(datatestId);
-
-    // We check that it has *a* class starting with 'is-'
-    // and specifically isn't the default 'is-green'
     const classList = Array.from(avatar.classList);
     const colorClass = classList.find(cls => cls.startsWith('is-'));
 
@@ -162,28 +156,47 @@ describe('getColorFromUUID Distribution', () => {
     const iterations = 10000;
     const distribution: Record<string, number> = {};
 
-    // Initialize counts
     colors.forEach(c => {
       distribution[c] = 0;
     });
 
-    // Generate and hash
     for (let i = 0; i < iterations; i += 1) {
-      // Use the imported randomUUID function directly
       const uuid = randomUUID();
       const selectedColor = getColorFromUUID(uuid, colors);
       distribution[selectedColor] += 1;
     }
 
     const expectedMean = iterations / colors.length;
-    // 15% variance is a safe threshold for 10k iterations
     const allowedVariance = 0.15;
 
     colors.forEach(color => {
       const count = distribution[color];
-      // Assert that each color is roughly 10% of the total
       expect(count).toBeGreaterThan(expectedMean * (1 - allowedVariance));
       expect(count).toBeLessThan(expectedMean * (1 + allowedVariance));
     });
+  });
+});
+
+describe('Color Selection Logic', () => {
+  const getResolvedId = (colorId, defaultText) => colorId || (defaultText && defaultText !== 'AA' ? defaultText : '_INTERNAL_DEFAULT_ID_');
+
+  test('should use colorId if it is provided', () => {
+    expect(getResolvedId('custom-id', 'BB')).toBe('custom-id');
+  });
+
+  test('should use defaultText if colorId is missing and text is not "AA"', () => {
+    expect(getResolvedId(null, 'BB')).toBe('BB');
+  });
+
+  test('should use hardcoded string if colorId is missing and text is "AA"', () => {
+    expect(getResolvedId(undefined, 'AA')).toBe('_INTERNAL_DEFAULT_ID_');
+  });
+
+  test('should use hardcoded string if both colorId and defaultText are null', () => {
+    expect(getResolvedId(null, null)).toBe('_INTERNAL_DEFAULT_ID_');
+  });
+
+  test('should use hardcoded string if colorId is missing and defaultText is empty string', () => {
+    expect(getResolvedId(null, '')).toBe('_INTERNAL_DEFAULT_ID_');
   });
 });

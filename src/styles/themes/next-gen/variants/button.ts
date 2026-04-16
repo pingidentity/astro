@@ -390,11 +390,11 @@ const baseIconButton = {
   ...baseIconButtonStyle,
   path: { fill: 'dark' },
   '&.is-hovered': {
-    backgroundColor: 'background.hover',
+    backgroundColor: astroTokens.color.gray[100],
     path: { fill: 'dark' },
   },
   '&.is-pressed': {
-    backgroundColor: 'background.hover',
+    backgroundColor: astroTokens.color.gray[100],
     path: { fill: 'dark' },
   },
   '&.is-focused': {

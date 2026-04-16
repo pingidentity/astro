@@ -51,7 +51,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
   } = props;
   const { ariaProps } = getAriaAttributeProps(others);
 
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
 
   const {
     MenuDown,
@@ -72,7 +72,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
       <Icon
         icon={state.isOpen ? MenuUp : MenuDown}
         title={{ name: 'Menu down' }}
-        size="md"
+        size={isOnyx ? 'sm' : 'md'}
       />
     </Box>
   );

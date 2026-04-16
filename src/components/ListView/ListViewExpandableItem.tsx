@@ -20,7 +20,7 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
     className,
   } = props;
 
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
   const { MenuDown, MenuUp } = icons;
 
   const { state } = useContext(ListViewContext);
@@ -78,6 +78,7 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
             icon={isExpanded ? MenuUp : MenuDown}
             variant="listViewItem.expandIcon"
             title={{ name: `${key} expand icon button` }}
+            {...(isOnyx && { size: 'sm' })}
           />
         </Box>
       </Box>
