@@ -20,7 +20,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
 
   const navBarState = useNavBarContext();
 
-  const { icons, navBarIconSize } = useGetTheme();
+  const { icons, navBarIconSize, themeState: { isOnyx } } = useGetTheme();
   const { MenuDown, MenuUp } = icons;
 
   const {
@@ -82,7 +82,7 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
       <Box isRow alignItems="center" sx={{ ml: 'auto' }}>
         <Icon
           icon={isExpanded ? MenuUp : MenuDown}
-          size="xsm"
+          size={isOnyx ? 'sm' : 'xsm'}
           sx={{
             color: getIconColor(),
             fill: getIconColor(),

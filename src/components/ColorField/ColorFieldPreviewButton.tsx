@@ -12,7 +12,7 @@ const ColorFieldPreviewButton = forwardRef<HTMLButtonElement, ColorFieldPreviewB
     colorValue,
     ...others
   } = props;
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyx } } = useGetTheme();
   const {
     MenuUp,
     MenuDown,
@@ -29,7 +29,7 @@ const ColorFieldPreviewButton = forwardRef<HTMLButtonElement, ColorFieldPreviewB
           <Text variant="colorFieldButtonColor">{colorValue}</Text>
         </Box>
         <Box sx={{ ml: 'auto' }} flexGrow="1">
-          <Icon ml="auto" title={{ name: isOpen ? 'menu-up' : 'menu-down' }} icon={isOpen ? MenuUp : MenuDown} />
+          <Icon ml="auto" title={{ name: isOpen ? 'menu-up' : 'menu-down' }} icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} />
         </Box>
       </Box>
     </Button>

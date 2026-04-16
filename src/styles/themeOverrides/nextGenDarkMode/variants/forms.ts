@@ -1,5 +1,6 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 
+import comboBox from './comboBox';
 import { input } from './input';
 
 export const select = {
@@ -83,4 +84,5 @@ export default {
     },
   },
   switch: switchable,
+  comboBox,
 };

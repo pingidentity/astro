@@ -103,7 +103,6 @@ const Option = forwardRef((props: OptionType, ref) => {
           <Icon
             icon={isSelected ? CheckedIcon : UncheckedIcon}
             color="active"
-            size="24px"
             mr="xs"
             className={classNames}
             variant="listBox.checkboxIcon"
@@ -123,6 +122,7 @@ const Option = forwardRef((props: OptionType, ref) => {
             icon={CheckIcon}
             title={{ name: 'Check Icon' }}
             color="green-500"
+            size={isOnyx ? 'xsm' : 'md'}
           />
         )
       }

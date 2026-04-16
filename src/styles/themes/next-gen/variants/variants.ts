@@ -33,7 +33,7 @@ import tooltip from './tooltip';
 
 const fieldHelperText = {
   title: {
-    fontSize: 'sm',
+    fontSize: 'small',
     pt: '0px !important',
     mt: '.25rem',
     '&.is-default': {
@@ -161,7 +161,7 @@ const listBox = {
       zIndex: 1,
     },
     '&.is-selected': {
-      color: 'text.primary',
+      color: 'black',
       bg: 'lightblue',
       pl: '.75rem',
       borderRadius: '4px',
@@ -191,18 +191,21 @@ const listBox = {
   },
   sectionTitle: {
     color: 'font.light',
-    fontWeight: '1',
+    fontWeight: '0',
     fontSize: 'tiny',
     lineHeight: 'xs',
     textTransform: 'uppercase',
     letterSpacing: '1px',
-    ml: 'md',
+    pl: 'xs',
+    ml: 'sm',
+    py: 'sm',
   },
 };
 
 const separator = {
   base: {
     bg: 'border.base',
+    my: 'sm',
     '&.is-vertical': {
       m: '0',
     },
