@@ -33,7 +33,7 @@ const badgeIconStyle = {
 const baseBadge = {
   alignItems: 'center',
   justifyContent: 'center',
-  padding: '.25em .4em',
+  padding: '2.81px 4px',
   borderRadius: '4px',
   fontSize: 'unset',
   alignSelf: 'flex-start',
@@ -46,43 +46,64 @@ const baseBadge = {
 const primary = {
   ...baseBadge,
   backgroundColor: '#EAF2FD !important',
-  color: astroTokens.color.blue[600],
+  '& span': {
+    ...badgeFont,
+    color: astroTokens.color.blue[600],
+  },
 };
 
 const secondary = {
   ...baseBadge,
   backgroundColor: '#f6f8fa !important',
-  color: astroTokens.color.gray[900],
+  '& span': {
+    ...badgeFont,
+    color: astroTokens.color.gray[900],
+  },
 };
 
 const success = {
   ...baseBadge,
+  '& span': {
+    ...badgeFont,
+    color: astroTokens.color.green[800],
+  },
   backgroundColor: '#D3EDDF !important',
-  color: 'success.dark',
 };
 
 const danger = {
   ...baseBadge,
   backgroundColor: '#F8D8D5 !important',
-  color: astroTokens.color.red[700],
+  '& span': {
+    ...badgeFont,
+    color: astroTokens.color.red[700],
+  },
 };
 
 const warning = {
   ...baseBadge,
   backgroundColor: '#FFF1DA !important',
-  color: astroTokens.color.yellow[800],
+  '& span': {
+    ...badgeFont,
+    color: astroTokens.color.yellow[800],
+  },
 };
 
 const dark = {
   ...baseBadge,
   backgroundColor: 'black !important',
-  color: 'white',
+  '& span': {
+    ...badgeFont,
+    color: 'white',
+  },
 };
 
 const info = {
   ...baseBadge,
   backgroundColor: '#EAF2FD !important',
-  color: 'darkblue',
+  '& span': {
+    ...badgeFont,
+    color: 'darkblue',
+  },
 };
 
 const selectedItemBadge = {
@@ -143,28 +164,28 @@ const dataTableBadge = {
 };
 
 const activeStatusBadge = {
+  border: 'none',
   ...primary,
-  ...dataTableBadge,
 };
 
 const warningStatusBadge = {
+  border: 'none',
   ...warning,
-  ...dataTableBadge,
 };
 
 const criticalStatusBadge = {
+  border: 'none',
   ...danger,
-  ...dataTableBadge,
 };
 
 const healthyStatusBadge = {
+  border: 'none',
   ...success,
-  ...dataTableBadge,
 };
 
 const secondaryStatusBadge = {
+  border: 'none',
   ...secondary,
-  ...dataTableBadge,
 };
 
 const countBadge = {
@@ -190,6 +211,7 @@ const removableBadge = {
 };
 
 export const badges = {
+  dataTableBadge,
   baseBadge: {
     ...baseBadge,
   },
@@ -206,6 +228,7 @@ export const badges = {
   dark,
   info,
   selectedItemBadge,
+  selected: activeStatusBadge,
   readOnlyBadge,
   readOnlyFieldBadge,
   activeStatusBadge,

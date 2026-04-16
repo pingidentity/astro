@@ -161,11 +161,12 @@ export const BadgeWithLeftSlotAndIcon = () => (
 );
 
 export const StatusBadgeVariants = ({ ...args }) => (
-  <Box>
-    <Badge {...args} variant="criticalStatusBadge" label="Critical" mb="lg" />
-    <Badge {...args} variant="warningStatusBadge" label="Warning" mb="lg" />
-    <Badge {...args} variant="healthyStatusBadge" label="Healthy" mb="lg" />
+  <Box gap="md">
+    <Badge {...args} variant="criticalStatusBadge" label="Critical" />
+    <Badge {...args} variant="warningStatusBadge" label="Warning" />
+    <Badge {...args} variant="healthyStatusBadge" label="Healthy" />
     <Badge {...args} variant="activeStatusBadge" label="Active" />
+    <Badge {...args} variant="selected" label="Selected" />
   </Box>
 );
 
