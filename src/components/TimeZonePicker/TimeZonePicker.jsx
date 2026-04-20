@@ -28,8 +28,10 @@ const TimeZonePicker = forwardRef((props, ref) => {
   const {
     additionalTimeZones,
     emptySearchText,
+    items: itemsProp,
     locales,
     localeOptions,
+    timezoneFormat,
     selectedKey: selectedKeyProp,
     onSelectionChange: onSelectionChangeProp,
     inputValue: inputValueProp,
@@ -51,12 +53,16 @@ const TimeZonePicker = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => timeZonePickerRef.current);
 
   const allTimeZones = useMemo(() => {
+    if (itemsProp) {
+      return itemsProp;
+    }
+
     const sourceList = additionalTimeZones
       ? { ...defaultTimezones, ...additionalTimeZones }
       : defaultTimezones;
 
     return Object.entries(sourceList).map(([label, tzValue]) => {
-      const { gmt, numericOffset } = getGmtAndOffset(tzValue);
+      const { gmt, numericOffset } = getGmtAndOffset(tzValue, timezoneFormat);
       const displayTz = tzValue.replace(/_/g, ' ');
 
       return {
@@ -69,7 +75,7 @@ const TimeZonePicker = forwardRef((props, ref) => {
         searchTags: createSearchTags({ gmt, timeZone: tzValue }),
       };
     }).sort((a, b) => a.numericOffset - b.numericOffset);
-  }, [additionalTimeZones]);
+  }, [additionalTimeZones, timezoneFormat, itemsProp]);
 
   // Sync internal input value when controlled selectedKey changes externally
   useEffect(() => {
@@ -101,10 +107,14 @@ const TimeZonePicker = forwardRef((props, ref) => {
     const now = new Date();
     const map = new Map();
     allTimeZones.forEach(tz => {
-      map.set(tz.id, now.toLocaleTimeString(locales, {
-        timeZone: tz.id,
-        ...localeOptions,
-      }));
+      try {
+        map.set(tz.id, now.toLocaleTimeString(locales, {
+          timeZone: tz.id,
+          ...localeOptions,
+        }));
+      } catch (e) {
+        map.set(tz.id, '');
+      }
     });
     return map;
   }, [allTimeZones, locales, localeOptions]);
@@ -199,6 +209,26 @@ TimeZonePicker.propTypes = {
   inputValue: PropTypes.string,
   /** Handler called when the input value changes. */
   onInputChange: PropTypes.func,
+  /**
+   * The format to use for timezone offset display.
+   * - `'gmt'` (default): Display offsets as GMT (e.g., GMT-08:00)
+   * - `'utc'`: Display offsets as UTC (e.g., UTC-08:00)
+   */
+  timezoneFormat: PropTypes.oneOf(['gmt', 'utc']),
+  /**
+   * Custom items to render instead of the default timezone list. When provided, the component
+   * uses these items directly. Each item should have the shape:
+   * `{ key: string, id: string, label: string, timeZone: string, gmt: string, numericOffset: number, searchTags: string }`
+   */
+  items: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    timeZone: PropTypes.string.isRequired,
+    gmt: PropTypes.string.isRequired,
+    numericOffset: PropTypes.number.isRequired,
+    searchTags: PropTypes.string.isRequired,
+  })),
 };
 
 TimeZonePicker.defaultProps = {
@@ -209,6 +239,7 @@ TimeZonePicker.defaultProps = {
     hour: '2-digit',
     minute: '2-digit',
   },
+  timezoneFormat: 'gmt',
 };
 
 export default TimeZonePicker;
