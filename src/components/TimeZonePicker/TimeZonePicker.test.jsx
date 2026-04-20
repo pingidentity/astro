@@ -255,3 +255,92 @@ test('displays pre-selected value with controlled inputValue', () => {
   const input = screen.getByRole('combobox');
   expect(input).toHaveValue(expectedOptionText);
 });
+
+// timezoneFormat prop tests
+
+test('defaults to GMT format when timezoneFormat is not provided', async () => {
+  getComponent();
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'America/New York');
+  expect(screen.getByText('GMT-00:00')).toBeInTheDocument();
+});
+
+test('renders items with GMT prefix when timezoneFormat="gmt"', async () => {
+  getComponent({ timezoneFormat: 'gmt' });
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'America/New York');
+  expect(screen.getByText('GMT-00:00')).toBeInTheDocument();
+});
+
+test('renders items with UTC prefix when timezoneFormat="utc"', async () => {
+  getGmtAndOffset.mockReturnValue({
+    gmt: 'UTC-00:00',
+    numericOffset: 0,
+  });
+
+  getComponent({ timezoneFormat: 'utc' });
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'America/New York');
+  expect(screen.getByText('UTC-00:00')).toBeInTheDocument();
+});
+
+test('selection callback returns key with UTC prefix when timezoneFormat="utc"', async () => {
+  getGmtAndOffset.mockReturnValue({
+    gmt: 'UTC-00:00',
+    numericOffset: 0,
+  });
+
+  const onSelectionChange = jest.fn();
+  const timezone = 'America/New York';
+
+  getComponent({ timezoneFormat: 'utc', onSelectionChange });
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, timezone);
+
+  const expectedKey = `${timezone} UTC-00:00`;
+  const option = screen.getByRole('option', { key: expectedKey });
+  await userEvent.click(option);
+  expect(onSelectionChange).toHaveBeenCalledWith(expectedKey);
+});
+
+test('renders only custom items when items prop is provided', async () => {
+  const customItems = [
+    {
+      key: 'Europe/London CUS+00:00',
+      id: 'Europe/London',
+      label: 'Custom London',
+      timeZone: 'Europe/London',
+      gmt: 'CUS+00:00',
+      numericOffset: 0,
+      searchTags: 'CUS+00:00 EUROPE/LONDON CUSTOM LONDON',
+    },
+  ];
+
+  getComponent({ items: customItems });
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'London');
+
+  expect(screen.getByText('Europe/London')).toBeInTheDocument();
+  expect(screen.getByText('CUS+00:00')).toBeInTheDocument();
+});
+
+test('does not render default timezones when items prop is provided', async () => {
+  const customItems = [
+    {
+      key: 'Europe/London CUS+00:00',
+      id: 'Europe/London',
+      label: 'Custom London',
+      timeZone: 'Europe/London',
+      gmt: 'CUS+00:00',
+      numericOffset: 0,
+      searchTags: 'CUS+00:00 EUROPE/LONDON CUSTOM LONDON',
+    },
+  ];
+
+  getComponent({ items: customItems });
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'Pacific/Apia');
+
+  // Should show empty state since default timezones are not loaded
+  expect(screen.getByText('No Search Result')).toBeInTheDocument();
+});
