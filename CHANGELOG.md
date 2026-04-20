@@ -1,3 +1,13 @@
+## 2.188.0-alpha.0 (2026-04-20)
+
+### 🚀 Features
+
+- [UXE-8194] Support UTC and custom timezone formatting out of the box for TimeZonePicker
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.187.0 (2026-04-16)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
