@@ -1,3 +1,18 @@
+## 2.190.0-alpha.0 (2026-04-21)
+
+### 🚀 Features
+
+- [UIP-8191] Page scroll not working opening dropdown from SelectField
+
+### 🩹 Fixes
+
+- storybook version mismatch with addons
+
+### ❤️  Thank You
+
+- Ajith M
+- Ridhisha Dangol
+
 ## 2.189.0-alpha.0 (2026-04-21)
 
 ### 🚀 Features
