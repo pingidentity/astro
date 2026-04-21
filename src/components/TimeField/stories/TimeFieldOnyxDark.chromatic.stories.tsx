@@ -6,6 +6,7 @@ import OnyxTimeField from './OnyxTimeField';
 
 export default {
   title: 'Onyx Dark TimeField',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

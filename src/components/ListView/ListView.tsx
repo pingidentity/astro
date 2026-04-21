@@ -12,10 +12,10 @@ import { ListViewItemTypes, ListViewProps, ListViewState } from '../../types/lis
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import Loader from '../Loader';
 
-import { ExampleItemProps } from './ListView.stories';
 import { ListViewContext } from './ListViewContext';
 import ListViewExpandableItem from './ListViewExpandableItem';
 import ListViewItem from './ListViewItem';
+import { ExampleItemProps } from './ListViewTypes';
 
 export const collectionTypes = {
   ITEM: 'item',

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { ColorField, OverlayProvider } from '../../index';
@@ -40,14 +40,10 @@ export default {
       },
     },
     buttonProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     containerProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

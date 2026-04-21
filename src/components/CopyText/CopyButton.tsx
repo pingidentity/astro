@@ -11,7 +11,7 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>((props, ref) =
   const { iconProps, variant = 'default', ...others } = props;
   const { copyButtonSize, themeState } = useGetTheme();
   /* istanbul ignore next */
-  const themeVariant = !themeState.isOnyx ? 'copyButton' : `copyButton.${variant}`;
+  const themeVariant = !themeState.isOnyxDark ? 'copyButton' : `copyButton.${variant}`;
 
   return (
     <IconButton

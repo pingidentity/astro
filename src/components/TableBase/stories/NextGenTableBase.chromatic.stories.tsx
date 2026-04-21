@@ -6,6 +6,7 @@ import NextGenTableBase from './NextGenTableBase';
 
 export default {
   title: 'Chromatic Only Onyx TableBase',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

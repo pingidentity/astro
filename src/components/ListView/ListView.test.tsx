@@ -11,8 +11,8 @@ import Button from '../Button';
 import CheckboxField from '../CheckboxField';
 
 import ListView from './ListView';
-import { ExampleItemProps } from './ListView.stories';
 import { escapeFocusDelegate } from './ListViewFocusWrapper';
+import { ExampleItemProps } from './ListViewTypes';
 
 const items = [
   { key: 'Aardvark', name: 'Aardvark', id: '1' },

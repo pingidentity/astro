@@ -1,8 +1,7 @@
 import React from 'react';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
-import { action } from '@storybook/addon-actions';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Breadcrumbs, Item } from '../../index';
@@ -14,7 +13,6 @@ import BreadcrumbsReadme from './Breadcrumbs.mdx';
 export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -27,16 +25,12 @@ export default {
   },
   argTypes: {
     icon: {
-      control: {
-        type: 'none',
-      },
+      control: false,
       description:
         'The icon to render. List of icons at https://materialdesignicons.com/',
     },
     iconProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
 

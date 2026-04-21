@@ -15,6 +15,7 @@ import TextField from '../../../../components/TextField';
 
 export default {
   title: 'Form/Onyx Input Patterns',
+  tags: ['!dev', '!autodocs'],
   component: TextField,
 };
 

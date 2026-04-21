@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import usePaginationState from '../../hooks/usePaginationState';
 import { Box, Button, Item, ListView, ListViewItem, Pagination, PaginationProvider, ScrollBox } from '../../index';
 import animals from '../../utils/devUtils/constants/animals';
-import { ExampleItemProps } from '../ListView/ListView.stories';
+import { ExampleItemProps } from '../ListView/ListViewTypes';
 
 import PaginationReadme from './Pagination.mdx';
 

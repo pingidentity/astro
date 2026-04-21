@@ -6,6 +6,7 @@ import { DataTableNextGenComponent } from './DataTableNextGenComponent';
 
 export default {
   title: 'Chromatic Only Onyx Dark DataTable',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

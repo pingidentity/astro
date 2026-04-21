@@ -7,7 +7,7 @@ import { Box, CollapsiblePanelContainer, ListView, Text } from '../..';
 import { useStatusClasses } from '../../hooks';
 import { CollapsiblePanelProps } from '../../types';
 import CollapsiblePanelBadge from '../CollapsiblePanelContainer/CollapsiblePanelBadge';
-import { ExampleItemProps } from '../ListView/ListView.stories';
+import { ExampleItemProps } from '../ListView/ListViewTypes';
 
 const CollapsiblePanel = forwardRef<HTMLDivElement, CollapsiblePanelProps<object>>(
   (props, ref) => {

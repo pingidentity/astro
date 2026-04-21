@@ -1,6 +1,5 @@
 import React, { Key, ReactNode, useState } from 'react';
-import { Meta } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -36,7 +35,6 @@ const itemArrayDisabled = [
 export default {
   title: 'Components/AccordionGroup',
   component: AccordionGroup,
-  decorators: [withDesign],
   parameters: {
     actions: {
       argTypesRegex: '^on.*',
@@ -61,14 +59,10 @@ export default {
     },
     defaultExpandedKeys: {},
     expandedKeys: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     labelHeadingTag: {
       control: 'radio',

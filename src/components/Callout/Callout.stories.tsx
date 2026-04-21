@@ -1,8 +1,7 @@
 import React from 'react';
 import CheckBoldIcon from '@pingux/mdi-react/CheckBoldIcon';
 import LightbulbOutlineIcon from '@pingux/mdi-react/LightbulbOutlineIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -22,7 +21,6 @@ import CalloutReadme from './Callout.mdx';
 export default {
   title: 'Components/Callout',
   component: Callout,
-  decorators: [withDesign],
   argTypes: {
     ...statusArgTypes,
   },

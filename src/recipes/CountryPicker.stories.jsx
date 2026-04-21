@@ -1,8 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import { countries as countriesObj } from 'countries-list';
-import { withDesign } from 'storybook-addon-designs';
-
 import {
   Box,
   ComboBoxField,
@@ -13,7 +11,6 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 export default {
   title: 'Recipes/Country Picker',
-  decorators: [withDesign],
 };
 
 const validatePhoneNumber = str => {

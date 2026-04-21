@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
 import { chain } from '@react-aria/utils';
-import { actions } from '@storybook/addon-actions';
+import { actions } from 'storybook/actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button } from '../../index';

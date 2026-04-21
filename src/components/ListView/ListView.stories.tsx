@@ -4,9 +4,10 @@ import ClockTimeEightOutlineIcon from '@pingux/mdi-react/ClockTimeEightOutlineIc
 import CogIcon from '@pingux/mdi-react/CogIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 import type { Key as SharedKey } from '@react-types/shared';
-import { action } from '@storybook/addon-actions';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import isChromatic from 'chromatic/isChromatic';
+import { action } from 'storybook/actions';
+import { fn } from 'storybook/test';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -30,6 +31,7 @@ import { chartData } from '../ListViewItem/controls/chart/chartData';
 
 import ListViewReadme from './ListView.mdx';
 import { listViewArgTypes } from './listViewAttributes';
+import { ExampleItemProps } from './ListViewTypes';
 
 export default {
   title: 'Components/ListView',
@@ -51,19 +53,11 @@ export default {
     disabledKeys: ['Snake'],
     // eslint-disable-next-line no-console
     onSelectionChange: console.log,
+    onBlur: fn(),
+    onFocus: fn(),
+    onLoadMore: fn(),
   },
 } as Meta;
-
-export interface ExampleItemProps {
-  key: Key,
-  name: string,
-  textValue?: string,
-  subtext?: string,
-  id: string | number,
-  hasSeparator?: boolean,
-  icon?: React.ElementType,
-  iconWrapperProps?: IconWrapperProps
-}
 
 const items: ExampleItemProps[] = [
   {

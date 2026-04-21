@@ -9,8 +9,6 @@ import { useFocusRing } from 'react-aria';
 import CheckIcon from '@pingux/mdi-react/CheckIcon';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import { usePress } from '@react-aria/interactions';
-import { withDesign } from 'storybook-addon-designs';
-
 import { useStatusClasses } from '../hooks';
 import {
   Box,
@@ -23,7 +21,6 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 export default {
   title: 'Recipes/Inline Editing',
-  decorators: [withDesign],
 };
 
 const EditableAreaContext = createContext();

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Loader } from '../..';
@@ -14,7 +13,6 @@ import LoaderReadme from './Loader.mdx';
 export default {
   title: 'Components/Loader',
   component: Loader,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

@@ -5,6 +5,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only NumberField',
+  tags: ['!dev', '!autodocs'],
   component: NumberField,
   decorators: [WithUiLibraryCss],
 };

@@ -1,11 +1,12 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { StoryFn } from '@storybook/react-vite';
 
 import { CodeEditor } from '../../index';
 import { CodeEditorProps } from '../../types';
 
 export default {
   title: 'Chromatic Only CodeEditor',
+  tags: ['!dev', '!autodocs'],
   component: CodeEditor,
 
 };

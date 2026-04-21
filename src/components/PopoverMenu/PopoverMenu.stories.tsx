@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useGetTheme } from '../../hooks';
@@ -23,7 +22,6 @@ import PopoverMenuReadme from './PopoverMenu.mdx';
 export default {
   title: 'Components/PopoverMenu',
   component: PopoverMenu,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -42,9 +40,7 @@ export default {
     isNotFlippable: {},
     isOpen: {
       onClick: { action: 'clicked' },
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
 } as Meta;

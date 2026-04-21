@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { Selection } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {

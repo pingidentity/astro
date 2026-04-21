@@ -6,6 +6,7 @@ import PanelHeaderComponent from './OnyxPanelHeaderComponent';
 
 export default {
   title: 'Chromatic Only Onyx Dark Panel Header',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

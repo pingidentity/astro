@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react';
 import CreationOutlineIcon from '@pingux/mdi-react/CreationOutlineIcon';
-import { withDesign } from 'storybook-addon-designs';
-
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
 import { Box, Button, Item, OverlayPanel, OverlayProvider, PanelHeader, PanelHeaderCloseButton,
@@ -14,7 +12,6 @@ import StepperReadme from './Stepper.mdx';
 export default {
   title: 'Components/Stepper',
   component: Stepper,
-  decorators: [withDesign],
   argTypes: {
     activeStep: {
       control: {
@@ -28,14 +25,10 @@ export default {
       },
     },
     onStepChange: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   args: {

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import Prism from 'prismjs';
-import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeView } from '../../index';
@@ -66,7 +65,6 @@ const code = `{
 export default {
   title: 'Components/CodeView',
   component: CodeView,
-  decorators: [withDesign],
   argTypes: {
     children: {
       table: {

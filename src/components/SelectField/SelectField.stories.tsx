@@ -1,7 +1,7 @@
 import React, { Key, useCallback, useEffect, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import CalendarRangeIcon from '@pingux/mdi-react/CalendarRangeIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { getAllUsers } from '../../api/users';
@@ -20,13 +20,13 @@ import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import SelectFieldReadme from './SelectField.mdx';
 
-export type SelectItemProps = {
+type SelectItemProps = {
   name?: string
   id?: string
   key?: Key
 }
 
-export type SelectSectionProps = {
+type SelectSectionProps = {
   name?: string
   key?: string,
   children?: SelectItemProps[]
@@ -128,9 +128,7 @@ export default {
     isOpen: {},
     isRequired: {},
     selectedKey: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { getAllUsers } from '../../api/users';
@@ -119,24 +119,16 @@ export default {
       },
     },
     selectedKey: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     inputValue: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     isOpen: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...ariaAttributeBaseArgTypes,
   },

@@ -6,6 +6,7 @@ import RockerButtonGroupNextGen from './RockerButtonGroupNextGen';
 
 export default {
   title: 'Chromatic Only Onyx RockerButtonGroup',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

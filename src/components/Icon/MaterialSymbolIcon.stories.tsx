@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -17,17 +16,14 @@ import { IconProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { sizeArgTypes } from '../../utils/docUtils/iconSizeProps';
 
-import IconReadme from './IconSymbol.mdx';
-
 export default {
   title: 'Components/MaterialSymbolIcon',
   component: Icon,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
         <>
-          <IconReadme />
+          {/* <IconReadme /> */}
           <DocsLayout />
         </>
       ),
@@ -36,7 +32,7 @@ export default {
   argTypes: {
     icon: {
       control: {
-        type: { name: 'string' },
+        type: 'text',
       },
       description: 'The font icon to render. List of font icons at https://marella.github.io/material-symbols/demo/',
     },

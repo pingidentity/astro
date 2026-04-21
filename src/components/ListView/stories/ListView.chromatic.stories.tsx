@@ -8,6 +8,7 @@ import {
 
 export default {
   title: 'Onyx ListView',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

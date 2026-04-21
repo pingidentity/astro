@@ -165,14 +165,10 @@ export default {
         'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. Array of keys.',
     },
     selectedKeys: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
 };
@@ -188,7 +184,7 @@ const badgeSx = {
   },
 };
 
-const Header = props => {
+function Header(props) {
   const { item } = props;
 
   return (
@@ -241,9 +237,9 @@ const Header = props => {
       </Box>
     </Box>
   );
-};
+}
 
-const HeaderOnyx = props => {
+function HeaderOnyx(props) {
   const { item } = props;
 
   return (
@@ -292,9 +288,9 @@ const HeaderOnyx = props => {
       </Box>
     </Box>
   );
-};
+}
 
-const Body = props => {
+function Body(props) {
   const { item } = props;
   return (
     <Box isRow>
@@ -347,9 +343,9 @@ const Body = props => {
       </Box>
     </Box>
   );
-};
+}
 
-const BodyOnyx = props => {
+function BodyOnyx(props) {
   const { item } = props;
   return (
     <Card>
@@ -387,9 +383,9 @@ const BodyOnyx = props => {
       </Box>
     </Card>
   );
-};
+}
 
-export const Default = () => {
+export function Default() {
   return (
     // See story source for info about the data used
     <>
@@ -412,9 +408,9 @@ export const Default = () => {
       </AccordionGridGroup>
     </>
   );
-};
+}
 
-export const OnyxDefault = () => {
+export function OnyxDefault() {
   return (
     // See story source for info about the data used
     <>
@@ -436,9 +432,9 @@ export const OnyxDefault = () => {
       </AccordionGridGroup>
     </>
   );
-};
+}
 
-export const Controlled = () => {
+export function Controlled() {
   const [selectedKeys, setSelectedKeys] = useState(['Client']);
 
   return (
@@ -467,9 +463,9 @@ export const Controlled = () => {
       </AccordionGridGroup>
     </>
   );
-};
+}
 
-export const AccordionWithInputs = () => {
+export function AccordionWithInputs() {
   return (
     <AccordionGridGroup
       items={data}
@@ -499,4 +495,4 @@ export const AccordionWithInputs = () => {
       )}
     </AccordionGridGroup>
   );
-};
+}

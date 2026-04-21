@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -18,6 +18,8 @@ export default {
   title: 'Components/EnvironmentBreadcrumb',
   component: EnvironmentBreadcrumb,
   parameters: {
+    actions: { argTypesRegex: null },
+    test: { disable: true },
     docs: {
       page: () => (
         <>

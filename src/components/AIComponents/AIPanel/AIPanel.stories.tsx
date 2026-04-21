@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import AutoAwesomeIcon from '@pingux/mdi-react/AutoAwesomeOutlineIcon';
 import DotsIcon from '@pingux/mdi-react/DotsHorizontalIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import { useOverlayPanelState } from '../../../hooks';
 import {

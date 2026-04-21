@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -68,9 +68,7 @@ export default {
     autocomplete: {},
     className: {},
     value: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

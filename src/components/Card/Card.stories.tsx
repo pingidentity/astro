@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -21,7 +20,6 @@ import { cardArgTypes } from './cardAttributes';
 export default {
   title: 'Components/Card',
   component: Card,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
