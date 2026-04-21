@@ -6,6 +6,7 @@ import OnyxTimeField from './OnyxTimeField';
 
 export default {
   title: 'Onyx TimeField',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

@@ -4,8 +4,7 @@ import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import LockIcon from '@pingux/mdi-react/LockIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
 import TagIcon from '@pingux/mdi-react/TagIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -29,7 +28,6 @@ import IconReadme from './Icon.mdx';
 export default {
   title: 'Components/Icon',
   component: Icon,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -42,9 +40,7 @@ export default {
   },
   argTypes: {
     icon: {
-      control: {
-        type: 'none',
-      },
+      control: false,
       description: 'The icon to render. List of icons at https://materialdesignicons.com/',
     },
     ...sizeArgTypes,
@@ -98,7 +94,7 @@ export const Sizes: StoryFn = () => (
     <TableHead>
       <TableRow key="head">
         {rowHeadings.map(head => (
-          <TableCell isHeading key={head}>
+          <TableCell isHeading key={head} maxWidth={head === 'SVG Size' ? '150px' : 'unset'}>
             {head}
           </TableCell>
         ))}
@@ -106,7 +102,7 @@ export const Sizes: StoryFn = () => (
     </TableHead>
     <TableBody sx={{ borderBottom: 'unset' }}>
       <TableRow height="auto" bg="transparent !important">
-        <TableCell>
+        <TableCell maxWidth="150px">
           <Text>XXS | 9px</Text>
         </TableCell>
         <TableCell>
@@ -117,7 +113,7 @@ export const Sizes: StoryFn = () => (
         </TableCell>
       </TableRow>
       <TableRow height="auto" bg="transparent !important">
-        <TableCell>
+        <TableCell maxWidth="150px">
           <Text>XS | 15px</Text>
         </TableCell>
         <TableCell>
@@ -128,7 +124,7 @@ export const Sizes: StoryFn = () => (
         </TableCell>
       </TableRow>
       <TableRow height="auto" bg="transparent !important">
-        <TableCell>
+        <TableCell maxWidth="150px">
           <Text>SM | 20px</Text>
         </TableCell>
         <TableCell>
@@ -139,7 +135,7 @@ export const Sizes: StoryFn = () => (
         </TableCell>
       </TableRow>
       <TableRow height="auto" bg="transparent !important">
-        <TableCell>
+        <TableCell maxWidth="150px">
           <Text>MD | 25px</Text>
         </TableCell>
         <TableCell>

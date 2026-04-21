@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
-import { action } from '@storybook/addon-actions';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { getAllUsers } from '../../api/users';

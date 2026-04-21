@@ -36,24 +36,16 @@ export default {
     mode: {},
     placeholder: {},
     defaultSelectedKeys: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     disabledKeys: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     selectedKeys: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     helperText: {
       control: {

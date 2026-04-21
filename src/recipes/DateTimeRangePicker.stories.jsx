@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Time } from '@internationalized/date';
 import CalendarIcon from '@pingux/mdi-react/CalendarIcon';
-import { withDesign } from 'storybook-addon-designs';
-
 import { useModalState } from '../hooks';
 import { Box,
   Button,
@@ -20,7 +18,6 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 export default {
   title: 'Recipes/DateTimeRangePicker',
-  decorators: [withDesign],
 };
 
 const dropdownItems = [

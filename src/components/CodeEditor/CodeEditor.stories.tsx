@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn } from '@storybook/react';
+import { StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CodeEditor } from '../../index';
@@ -12,6 +12,8 @@ export default {
   title: 'Experimental/CodeEditor',
   component: CodeEditor,
   parameters: {
+    actions: { argTypesRegex: null },
+    test: { disable: true },
     docs: {
       page: () => (
         <>

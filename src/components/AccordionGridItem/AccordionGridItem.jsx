@@ -32,11 +32,13 @@ const AccordionGridItem = props => {
   const isSelected = state.selectionManager.isSelected(cellNode.key);
 
   // Sync selection between the first cell and the row
+  const isRowSelected = state.selectionManager.isSelected(item.key);
   useEffect(() => {
-    if (isSelected !== state.selectionManager.isSelected(item.key)) {
+    if (isSelected !== isRowSelected) {
       state.selectionManager.toggleSelection(item.key);
     }
-  }, [isSelected, state.selectionManager, item.key]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSelected, isRowSelected, item.key]);
 
   const rowRef = useRef();
   const cellRef = useRef();

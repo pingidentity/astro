@@ -1,28 +1,28 @@
-import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs';
-import useModalState, { DummyComponent } from '../../hooks/useModalState/useModalState';
+import { Meta, Title, ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
+import useOverlayPanelState, { DummyComponent } from '../../hooks/useOverlayPanelState/useOverlayPanelState';
 
-<Meta title="Docs/Hooks/useModalState" />
+<Meta title="Docs/Hooks/useOverlayPanelState" />
 
-# useModalState
+# useOverlayPanelState
 
-A hook that manages and supplies state intended for Astro-UI's `Modal` component.
+A hook that manages and supplies state intended for Astro-UI's `OverlayPanel` component.
 
 ## Overview
 
 This hook utilizes React Stately's [useOverlayTriggerState](https://react-spectrum.adobe.com/react-stately/useOverlayTriggerState.html) hook to generate the necessary state management for
-a `Modal` component with minimal modifications.
+a `OverlayPanel` component with minimal modifications.
 
 ## Usage
 
 To use this hook, import it from `@pingux/astro/lib/hooks`.
 
-`import { useModalState } from "@pingux/astro/lib/hooks";`
+`import { useOverlayPanelState } from "@pingux/astro/lib/hooks";`
 
 ## API
 
 <br />
 
-### useModalState([props]) => result
+### useOverlayPanelState([props]) => result
 
 <br />
 
@@ -34,13 +34,13 @@ Type: `Object` Default: `{}`
 
   Type: `boolean`
 
-  Whether the modal is open by default (uncontrolled).
+  Whether the overlay panel is open by default (uncontrolled).
 
 * **isOpen**
 
   Type: `boolean`
 
-  Whether the modal is currently open (controlled).
+  Whether the overlay panel is currently open (controlled).
 
 * **onOpenChange**
 
@@ -56,7 +56,7 @@ Type: `Object`
 
   Type: `boolean`
 
-  Whether the modal is currently open.
+  Whether the overlay panel is currently open.
 
 * **open**
 
@@ -69,7 +69,7 @@ Type: `Object`
   Type: `Function`
 
   Sets the returned `isOpen` to `false`.
-  
+
 * **toggle**
 
   Type: `Function`
@@ -79,5 +79,5 @@ Type: `Object`
 
 ## Example
 
-See the [entire Modal source code](./?path=/story/components-modal--default) for an example of how to implement this hook.
-To view a story's entire source code, enable 'Show-addons' in the Storybook ellipsis menu in the lefthand navigation, and click the Story tab.
+See the [Overlay Panel docs](./?path=/story/components-overlaypanel--default) for an example of how to 
+implement this hook.

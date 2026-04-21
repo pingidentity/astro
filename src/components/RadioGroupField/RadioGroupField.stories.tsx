@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RadioField, RadioGroupField } from '../../index';
@@ -45,9 +45,7 @@ export default {
     name: {},
     id: {},
     value: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

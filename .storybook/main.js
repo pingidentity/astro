@@ -1,55 +1,52 @@
-const path = require('path');
-const fs = require('fs');
-function getPackageDir(filepath) {
-  let currDir = path.dirname(require.resolve(filepath));
-  while (true) {
-    if (fs.existsSync(path.join(currDir, "package.json"))) {
-      return currDir;
-    }
-    const {
-      dir,
-      root
-    } = path.parse(currDir);
-    if (dir === root) {
-      throw new Error(`Could not find package.json in the parent directories starting from ${filepath}.`);
-    }
-    currDir = dir;
-  }
-}
-module.exports = {
-  stories: ['../@(src|stories)/**/*.@(story|stories).@(ts|tsx|js|jsx|mdx)'],
-  addons: ['@storybook/addon-a11y',
-    {
-      name: '@storybook/addon-docs',
-      options: {},
-    },
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-storysource',
-    '@storybook/addon-mdx-gfm',
-    'storybook-addon-designs',
-    '@codesandbox/storybook-addon',
+/** @type { import('@storybook/react-vite').StorybookConfig } */
+const config = {
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
+  addons: [
+    '@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-designs',
   ],
+
   viteFinal: async config => {
     return {
       ...config,
+      plugins: [
+        ...(config.plugins || []),
+        {
+          name: 'fix-mdx-react-shim',
+          enforce: 'pre',
+          resolveId(source) {
+            if (source.includes('mdx-react-shim.js') && source.startsWith('file://')) {
+              return new URL(source).pathname;
+            }
+            return null;
+          },
+        },
+      ],
       resolve: {
         ...config.resolve,
         alias: {
-          ...config.resolve.alias,
-          '@emotion/core': getPackageDir('@emotion/react'),
-          '@emotion/styled': getPackageDir('@emotion/styled'),
-          'emotion-theming': getPackageDir('@emotion/react'),
+          ...config.resolve?.alias,
         },
       },
     };
   },
+
+  build: {
+    test: {
+      disableMDXjsx: true,
+    },
+  },
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: true,
-  },
+
   staticDirs: ['../public'],
+
+  docs: {
+    autodocs: 'tag',
+  },
 };
+
+export default config;

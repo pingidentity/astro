@@ -4,6 +4,7 @@ import { Box, SearchNav, Text } from '../../index';
 
 export default {
   title: 'Chromatic Only Search Nav Responsive',
+  tags: ['!dev', '!autodocs'],
 };
 
 const items = [

@@ -5,6 +5,7 @@ import StickerSheetComponent from '../../../themes/next-gen/stories/StickerSheet
 
 export default {
   title: 'Onyx Dark Sticker Sheet',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

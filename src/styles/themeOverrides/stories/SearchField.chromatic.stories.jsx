@@ -6,6 +6,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only SearchField',
+  tags: ['!dev', '!autodocs'],
   component: SearchField,
   decorators: [WithUiLibraryCss],
 };

@@ -6,6 +6,7 @@ import StickerSheetComponent from './StickerSheetComponent';
 
 export default {
   title: 'Onyx Sticker Sheet',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

@@ -6,6 +6,7 @@ import { FooterNextGenComponent } from './FooterNextGenComponent';
 
 export default {
   title: 'Chromatic Only Onyx Footer',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

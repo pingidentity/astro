@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ListViewState } from '../../types/listView';
 
-import { ExampleItemProps } from './ListView.stories';
+import { ExampleItemProps } from './ListViewTypes';
 
 interface ListViewContextType<T> {
   state: ListViewState<T>

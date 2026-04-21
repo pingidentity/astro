@@ -5,6 +5,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only AccordionGroup',
+  tags: ['!dev', '!autodocs'],
   component: AccordionGroup,
   decorators: [WithUiLibraryCss],
 };

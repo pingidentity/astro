@@ -6,6 +6,7 @@ import NextGenStatusIcon from './NextGenStatusIcon';
 
 export default {
   title: 'Chromatic Only Onyx Dark StatusIcon',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

@@ -6,6 +6,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only IconButton',
+  tags: ['!dev', '!autodocs'],
   component: IconButton,
   decorators: [WithUiLibraryCss],
 };

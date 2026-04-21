@@ -41,6 +41,7 @@ export interface ListBoxProps extends AriaListBoxOptions<object> {
   children?: CollectionChildren<object>;
   isCondensed?: boolean;
   shouldShowSelectedOption?: boolean;
+  linkBehavior?: string;
 }
 
 export interface OptionType {

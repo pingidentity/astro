@@ -2,7 +2,7 @@ import React from 'react';
 import HelpCircleOutlineIcon from '@pingux/mdi-react/HelpCircleOutlineIcon';
 import MoonWaningCrescentIcon from '@pingux/mdi-react/MoonWaningCrescentIcon';
 import WhiteBalanceSunnyIcon from '@pingux/mdi-react/WhiteBalanceSunnyIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import useGetTheme from '../../hooks/useGetTheme';
@@ -11,6 +11,7 @@ import { userImage } from '../../utils/devUtils/constants/images';
 
 import HeaderAccountMenu from './HeaderAccountMenu';
 import NavigationHeaderReadme from './NavigationHeader.mdx';
+import { userDataProps } from './NavigationHeaderTypes';
 
 export default {
   title: 'Experimental/NavigationHeader',
@@ -27,9 +28,7 @@ export default {
   },
   argTypes: {
     src: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
 } as Meta;
@@ -52,13 +51,6 @@ const placeholderSeparator = {
 // Breakpoints for display property
 const breakpointDisplaysXS = ['none', 'none', 'block', 'block', 'block', 'block'];
 const breakpointDisplaySmall = ['none', 'none', 'none', 'none', 'block', 'block'];
-
-export interface userDataProps {
-  email: string;
-  firstName: string;
-  lastName: string;
-  image?: string;
-}
 
 const userData: userDataProps = {
   email: 'bjensen@example.com',
