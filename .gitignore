@@ -2,5 +2,6 @@ build
 dist
 lib
 demo
+cdn
 .env
 coverage
