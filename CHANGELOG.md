@@ -1,3 +1,13 @@
+## 2.188.1-alpha.0 (2026-04-21)
+
+### 🩹 Fixes
+
+- [UXE-8129] Automate updates to the hosted Onyx JSON theme
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.188.0-alpha.0 (2026-04-20)
 
 ### 🚀 Features
