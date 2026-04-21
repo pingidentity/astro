@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DismissButton, Overlay, usePopover } from '@react-aria/overlays';
+import { DismissButton, Overlay, useOverlay, usePopover } from '@react-aria/overlays';
 
 import { useStatusClasses } from '../../hooks';
 import { PopoverProps } from '../../types';
@@ -20,6 +20,8 @@ const Popover = (props: PopoverProps) => {
     isNonModal,
     hasNoArrow,
     width,
+    isDismissable,
+    isNotClosedOnBlur,
     ...others
   } = props;
 
@@ -35,6 +37,16 @@ const Popover = (props: PopoverProps) => {
   const { isOpen } = state;
   const { classNames } = useStatusClasses(className, { isOpen });
 
+  const { overlayProps } = useOverlay(
+    {
+      isOpen,
+      onClose: state.close,
+      isDismissable,
+      shouldCloseOnBlur: !isNotClosedOnBlur,
+    },
+    popoverRef,
+  );
+
   if (!isOpen) {
     return null;
   }
@@ -49,6 +61,7 @@ const Popover = (props: PopoverProps) => {
         role="presentation"
         width={width}
         {...popoverProps}
+        {...overlayProps}
         {...others}
       >
         {children}

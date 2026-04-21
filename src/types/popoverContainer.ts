@@ -43,5 +43,6 @@ export interface PopoverProps extends Omit<AriaPopoverProps, 'popoverRef'> {
   arrowProps?: PopoverArrowProps,
   arrowCrossOffset?: string,
   isDismissable?: boolean,
-  role?: string
+  role?: string,
+  isNotClosedOnBlur?: boolean,
 }
