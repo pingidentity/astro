@@ -1,3 +1,13 @@
+## 2.189.0-alpha.0 (2026-04-21)
+
+### 🚀 Features
+
+- [UXE-8095] Storybook10 upgrade
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.188.1-alpha.0 (2026-04-21)
 
 ### 🩹 Fixes
