@@ -4,7 +4,7 @@ import TextIcon from '@pingux/mdi-react/TextIcon';
 import ThumbDownOutlineIcon from '@pingux/mdi-react/ThumbDownOutlineIcon';
 import ThumbUpOutlineIcon from '@pingux/mdi-react/ThumbUpOutlineIcon';
 import VolumeHighIcon from '@pingux/mdi-react/VolumeHighIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../../.storybook/storybookDocsLayout';
 import { Response } from '../../../index';

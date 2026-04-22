@@ -5,6 +5,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only Button',
+  tags: ['!dev', '!autodocs'],
   component: Button,
   decorators: [WithUiLibraryCss],
 };

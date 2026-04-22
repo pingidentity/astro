@@ -53,12 +53,19 @@ const TestComponent = (props: object) => {
   );
 };
 
-let resizeObserverCallback: ((entries: { contentRect: { width: number } }[]) => void) | null = null;
+let resizeObserverCallbacks: ((entries: { contentRect: { width: number } }[]) => void)[] = [];
+
+const triggerResizeObservers = (width: number) => {
+  resizeObserverCallbacks.forEach(cb => cb([{ contentRect: { width } }]));
+};
 
 // Mock the global ResizeObserver
 class MockResizeObserver {
+  callback;
+
   constructor(callback) {
-    resizeObserverCallback = callback;
+    this.callback = callback;
+    resizeObserverCallbacks.push(callback);
   }
 
   observe = jest.fn();
@@ -77,6 +84,7 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
+  resizeObserverCallbacks = [];
   mockContainerWidth = 1000; // Default large container width
 
   // Mock offsetWidth to return different values for container and children
@@ -303,9 +311,7 @@ test('resizing container to be very small hides all but one tab', async () => {
   // This tells the component the container dimensions have changed.
 
   act(() => {
-    if (resizeObserverCallback) {
-      resizeObserverCallback([{ contentRect: { width: mockContainerWidth } }]);
-    }
+    triggerResizeObservers(mockContainerWidth);
   });
 
 
@@ -337,9 +343,7 @@ test('resizing container to be very small hides all but one tab', async () => {
   mockContainerWidth = 628;
 
   act(() => {
-    if (resizeObserverCallback) {
-      resizeObserverCallback([{ contentRect: { width: mockContainerWidth } }]);
-    }
+    triggerResizeObservers(mockContainerWidth);
   });
 
 
@@ -393,14 +397,8 @@ test('recalculates visible items when More button causes an item to be hidden', 
 
   // Manually trigger the ResizeObserver/LayoutEffect calculation
   act(() => {
-    if (resizeObserverCallback) {
-      resizeObserverCallback([{ contentRect: { width: mockContainerWidth } }]);
-      jest.advanceTimersByTime(100);
-    } else {
-      act(() => {
-        jest.advanceTimersByTime(100);
-      });
-    }
+    triggerResizeObservers(mockContainerWidth);
+    jest.advanceTimersByTime(100);
   });
 
   // Wait for the state update (numVisibleItems = 2)
@@ -441,9 +439,7 @@ test('covers adjustment logic when More button overflows last item', async () =>
 
   // Manually trigger the ResizeObserver calculation
   act(() => {
-    if (resizeObserverCallback) {
-      resizeObserverCallback([{ contentRect: { width: mockContainerWidth } }]);
-    }
+    triggerResizeObservers(mockContainerWidth);
     jest.advanceTimersByTime(100);
   });
 

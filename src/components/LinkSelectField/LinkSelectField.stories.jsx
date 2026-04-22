@@ -58,9 +58,7 @@ export default {
     isOpen: {},
     isRequired: {},
     selectedKey: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

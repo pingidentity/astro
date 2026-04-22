@@ -5,6 +5,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only EnvironmentBreadcrumb',
+  tags: ['!dev', '!autodocs'],
   component: EnvironmentBreadcrumb,
   decorators: [WithUiLibraryCss],
 };

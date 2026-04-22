@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -23,7 +22,6 @@ import TextReadme from './Text.mdx';
 export default {
   title: 'Components/Text',
   component: Text,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -624,28 +622,18 @@ export const CustomStyle: StoryFn = args => {
 
 CustomStyle.argTypes = {
   variant: {
-    control: {
-      type: 'none',
-    },
+    control: false,
   },
   children: {
-    control: {
-      type: 'none',
-    },
+    control: false,
   },
   color: {
-    control: {
-      type: 'none',
-    },
+    control: false,
   },
   bg: {
-    control: {
-      type: 'none',
-    },
+    control: false,
   },
   tabPanelProps: {
-    control: {
-      type: 'none',
-    },
+    control: false,
   },
 };

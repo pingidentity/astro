@@ -44,7 +44,6 @@ const RangeCalendar = forwardRef<HTMLDivElement, RangeCalendarProps>((props, ref
     maxValue: maxValue && parseDateIfString(maxValue),
     minValue: minValue && parseDateIfString(minValue),
   };
-  // @ts-expect-error verify type
   const state: RangeCalendarState = useRangeCalendarState({
     autoFocus: hasAutoFocus,
     ...props,
@@ -56,7 +55,6 @@ const RangeCalendar = forwardRef<HTMLDivElement, RangeCalendarProps>((props, ref
   } as RangeCalendarStateOptions);
 
   const { calendarProps, prevButtonProps, nextButtonProps } = useRangeCalendar(
-    // @ts-expect-error verify type
     { ...props, ...parsedDates } as AriaRangeCalendarProps<DateValue>,
     state,
     calenderRangeRef,

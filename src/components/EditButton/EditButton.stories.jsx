@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { withDesign } from 'storybook-addon-designs';
-
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, EditButton, Text } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
@@ -14,7 +12,6 @@ const { variant, ...other } = iconButtonArgTypes;
 export default {
   title: 'components/IconButton/Convenience/EditButton',
   component: EditButton,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

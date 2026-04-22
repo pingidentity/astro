@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import MenuRight from '@pingux/mdi-react/MenuRightIcon';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {

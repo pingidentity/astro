@@ -11,12 +11,11 @@ const reactHooks = require('eslint-plugin-react-hooks');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
 const testingLibrary = require('eslint-plugin-testing-library');
 const tseslint = require('typescript-eslint');
-const baseConfig = require('../../eslint.config');
+const baseConfig = require('../../eslint.config.cjs');
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   resolvePluginsRelativeTo: __dirname,
-
 });
 
 module.exports = [
@@ -61,7 +60,6 @@ module.exports = [
           presets: ['@babel/preset-react'],
         },
       },
-
     },
     plugins: {
       react,
@@ -73,7 +71,6 @@ module.exports = [
       'react-hooks': reactHooks,
       'simple-import-sort': simpleImportSort,
     },
-
     rules: {
       '@emotion/pkg-renaming': 'error',
       'arrow-body-style': 'off',
@@ -86,13 +83,12 @@ module.exports = [
       }],
       'jsx-a11y/anchor-is-valid': [2,
         {
-          components: [], // Our Link component auto-switches to a button when necessary
+          components: [],
         },
       ],
       'no-underscore-dangle': 'off',
       'no-multiple-empty-lines': ['error', { max: 2, maxBOF: 0, maxEOF: 0 }],
       'prefer-destructuring': 'off',
-      // See UIP-4486 for more info on why instanceOf is forbidden
       'react/forbid-prop-types': ['error', { forbid: ['any', 'array', 'object', 'instanceOf'] }],
       'react/jsx-filename-extension': 'off',
       'react/jsx-first-prop-new-line': ['error', 'multiline'],
@@ -110,7 +106,7 @@ module.exports = [
       'no-restricted-exports': 'off',
       'react/no-unstable-nested-components': 'off',
       'import/no-cycle': 'off',
-      'import/no-unresolved': ['error', { ignore: ['^@pingux/onyx-tokens$'] }],
+      'import/no-unresolved': ['error', { ignore: ['^@pingux/onyx-tokens$', '^@storybook/', '^storybook/'] }],
       'testing-library/prefer-presence-queries': 'off',
       'react/button-has-type': 'warn',
       'react/no-unused-prop-types': 'off',
@@ -132,17 +128,11 @@ module.exports = [
         'error',
         {
           groups: [
-            // Packages `react` related packages come first.
             ['^react', '^@?\\w'],
-            // Internal packages.
             ['^(@|components)(/.*|$)'],
-            // Side effect imports.
             ['^\\u0000'],
-            // Parent imports. Put `..` last.
             ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-            // Other relative imports. Put same-folder imports and `.` last.
             ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-            // Style imports.
             ['^.+\\.?(css)$'],
           ],
         },
@@ -153,9 +143,8 @@ module.exports = [
       }],
     },
   },
-
   {
-    files: ['libs/astro/**/*.ts', 'libs/astro/**/*.tsx', 'libs/astro/**/*.d.ts'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -173,11 +162,13 @@ module.exports = [
   },
   {
     files: [
-      'libs/astro/**/*.stories.js',
-      'libs/astro/**/*.story.js',
-      'libs/astro/**/*.stories.jsx',
-      'libs/astro/**/*.story.jsx',
-      'libs/astro/**/*.stories.hidden.js',
+      '**/*.stories.js',
+      '**/*.story.js',
+      '**/*.stories.jsx',
+      '**/*.story.jsx',
+      '**/*.stories.tsx',
+      '**/*.story.tsx',
+      '**/*.stories.hidden.js',
     ],
     plugins: {
       react,

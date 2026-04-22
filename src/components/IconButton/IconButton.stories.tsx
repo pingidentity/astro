@@ -4,8 +4,7 @@ import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon';
 import PencilIcon from '@pingux/mdi-react/PencilIcon';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useGetTheme } from '../../hooks';
@@ -29,7 +28,6 @@ import { iconButtonArgs, iconButtonArgTypes } from './iconButtonAttributes';
 export default {
   title: 'Components/IconButton',
   component: IconButton,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

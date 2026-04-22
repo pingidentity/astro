@@ -1,21 +1,21 @@
 import React from 'react';
-import {
-  ArgsTable,
+import { Controls,
   Description,
   Primary,
-  PRIMARY_STORY,
   Stories,
   Subtitle,
-} from '@storybook/addon-docs';
+  Title } from '@storybook/addon-docs/blocks';
 
 const DocsLayout = () => {
   return (
     <>
+      <Title />
       <Subtitle />
       <Description />
       <Primary />
-      <ArgsTable story={PRIMARY_STORY} />
-      <Stories />
+      <Controls />
+
+      <Stories includePrimary={false} />
     </>
   );
 };

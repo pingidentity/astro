@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Link, Text } from '../../index';
@@ -14,7 +13,6 @@ import variants from './Link.styles';
 export default {
   title: 'Components/Link',
   component: Link,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -39,14 +37,12 @@ export default {
     },
     as: {
       control: {
-        type: 'none',
-        options: htmlElements,
+        type: 'select',
       },
+      options: htmlElements,
     },
     target: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     variant: {
       control: {

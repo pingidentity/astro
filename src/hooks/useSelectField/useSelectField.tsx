@@ -268,6 +268,8 @@ const useSelectField = <T extends object>(
       triggerRef={triggerRef}
       style={style}
       state={state}
+      isNonModal
+      isDismissable
     >
       <ScrollBox {...scrollBoxProps}>
         {listbox}

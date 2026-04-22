@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import ArrowCollapse from '@pingux/mdi-react/ArrowCollapseIcon';
 import ArrowTopRightBottomLeft from '@pingux/mdi-react/ArrowTopRightBottomLeftIcon';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';

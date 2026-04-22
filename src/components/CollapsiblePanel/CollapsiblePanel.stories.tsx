@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { CollapsiblePanel } from '../../index';
@@ -12,7 +11,6 @@ import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
 export default {
   title: 'Components/CollapsiblePanel',
   component: CollapsiblePanel,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -30,9 +28,7 @@ export default {
     isDefaultOpen: {},
     isOpen: {
       onClick: { action: 'clicked' },
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   args: {

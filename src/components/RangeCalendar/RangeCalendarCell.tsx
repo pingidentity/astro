@@ -49,11 +49,9 @@ const RangeCalendarCell = forwardRef<HTMLDivElement, RangeCalendarCellProps>(
     // The start and end date of the selected range will have
     // an emphasized appearance.
     const isSelectionStart = highlightedRange
-    // @ts-expect-error verify type
       ? isSameDay(date as DateValue, highlightedRange.start)
       : isSelected;
     const isSelectionEnd = highlightedRange
-    // @ts-expect-error verify type
       ? isSameDay(date as DateValue, highlightedRange.end)
       : isSelected;
 

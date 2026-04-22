@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, HelpHint, Link, Text } from '../../index';
@@ -12,7 +11,6 @@ import HelpHintReadme from './HelpHint.mdx';
 export default {
   title: 'Components/HelpHint',
   component: HelpHint,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

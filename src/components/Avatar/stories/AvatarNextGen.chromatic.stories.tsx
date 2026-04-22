@@ -6,6 +6,7 @@ import AvatarNextGen from './AvatarNextGen';
 
 export default {
   title: 'Chromatic Only Onyx Avatar',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

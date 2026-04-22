@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../../.storybook/storybookDocsLayout';
 import {
@@ -12,7 +11,6 @@ import {
 export default {
   title: 'Components/Modal/Convenience/ModalBody',
   component: ModalBody,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

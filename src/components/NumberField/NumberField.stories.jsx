@@ -38,9 +38,7 @@ export default {
       },
     },
     value: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     step: {
       control: {
@@ -48,14 +46,10 @@ export default {
       },
     },
     defaultValue: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     formatOptions: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     placeholder: {
       control: {
@@ -63,24 +57,16 @@ export default {
       },
     },
     decrementAriaLabel: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     incrementAriaLabel: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     minValue: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     maxValue: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Pressable } from '@react-aria/interactions';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {

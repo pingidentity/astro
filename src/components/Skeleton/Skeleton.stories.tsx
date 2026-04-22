@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Avatar, Box, Skeleton, Text } from '../../index';
@@ -12,7 +11,6 @@ import SkeletonReadme from './Skeleton.mdx';
 export default {
   title: 'Components/Skeleton',
   component: Skeleton,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -25,9 +23,7 @@ export default {
   },
   argTypes: {
     variant: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
 } as Meta;

@@ -13,6 +13,7 @@ import WithUiLibraryCss from '../../../styles/themeOverrides/withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only NavBar',
+  tags: ['!dev', '!autodocs'],
   component: NavBar,
   decorators: [WithUiLibraryCss],
 };

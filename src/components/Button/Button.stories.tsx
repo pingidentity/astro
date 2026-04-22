@@ -1,7 +1,6 @@
 import React from 'react';
 import PlusIcon from '@pingux/mdi-react/PlusIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useGetTheme } from '../../hooks';
@@ -20,7 +19,6 @@ import { buttonArgTypes } from './buttonAttributes';
 export default {
   title: 'Components/Button',
   component: Button,
-  decorators: [withDesign],
   argTypes: {
     ...buttonArgTypes,
   },

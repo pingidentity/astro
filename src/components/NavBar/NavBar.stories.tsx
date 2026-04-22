@@ -23,7 +23,7 @@ import ShowChartIcon from '@pingux/mdi-react/ShowChartIcon';
 import DashboardIcon from '@pingux/mdi-react/ViewDashboardOutlineIcon';
 import ViewGridPlusOutline from '@pingux/mdi-react/ViewGridPlusOutlineIcon';
 import WidgetsOutlineIcon from '@pingux/mdi-react/WidgetsOutlineIcon';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {

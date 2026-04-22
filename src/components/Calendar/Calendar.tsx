@@ -38,7 +38,6 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
     minValue: (typeof minValue === 'string' && parseDate(minValue)) || minValue,
   };
 
-  // @ts-expect-error verify type
   const state: CalendarState = useCalendarState({
     autoFocus: hasAutoFocus,
     ...props,
@@ -48,7 +47,6 @@ const Calendar = forwardRef<HTMLDivElement, CalendarProps>((props, ref) => {
   } as CalendarStateOptions);
 
   const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(
-    // @ts-expect-error verify type
     { ...props, ...parsedDates } as AriaCalendarProps<DateValue>,
     state,
   ) as CalendarAria;

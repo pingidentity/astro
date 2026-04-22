@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -33,7 +32,6 @@ import NavSideBarSubTitle from './NavSideBarSubTitle';
 export default {
   title: 'Experimental/NavSideBar',
   component: NavSideBar,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

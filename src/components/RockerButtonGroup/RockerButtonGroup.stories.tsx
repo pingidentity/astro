@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RockerButton, RockerButtonGroup } from '../..';
@@ -24,9 +24,7 @@ export default {
     isDisabled: {},
     defaultSelectedKey: {},
     selectedKey: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   args: {

@@ -55,19 +55,13 @@ export default {
       },
     },
     fileList: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     defaultFileList: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     textProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,

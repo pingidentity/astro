@@ -6,6 +6,7 @@ import { CalloutNextGenComponent } from './CalloutNextGenComponent';
 
 export default {
   title: 'Chromatic Only Onyx Callout',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {
