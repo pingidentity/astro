@@ -1,3 +1,13 @@
+## 2.190.2-alpha.0 (2026-04-22)
+
+### 🩹 Fixes
+
+- comment out automate updates to the hosted Onyx JSON theme
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.190.1-alpha.0 (2026-04-21)
 
 ### 🩹 Fixes
