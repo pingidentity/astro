@@ -5,6 +5,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only Link',
+  tags: ['!dev', '!autodocs'],
   component: Link,
   decorators: [WithUiLibraryCss],
 };

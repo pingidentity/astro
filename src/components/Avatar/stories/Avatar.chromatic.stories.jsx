@@ -6,6 +6,7 @@ import AvatarNextGen from './AvatarNextGen';
 
 export default {
   title: 'Chromatic Only Avatar',
+  tags: ['!dev', '!autodocs'],
   decorators: [WithUiLibraryCss],
 };
 

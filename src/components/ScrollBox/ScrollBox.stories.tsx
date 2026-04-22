@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, ScrollBox } from '../../index';
@@ -12,7 +11,6 @@ import ScrollBoxReadme from './ScrollBox.mdx';
 export default {
   title: 'Components/ScrollBox',
   component: ScrollBox,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

@@ -3,7 +3,6 @@ import Clear from '@pingux/mdi-react/CloseIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
 import PencilOutlineIcon from '@pingux/mdi-react/PencilOutlineIcon';
 import PlusCircleMultipleOutlineIcon from '@pingux/mdi-react/PlusCircleMultipleOutlineIcon';
-import { withDesign } from 'storybook-addon-designs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useGetTheme } from '../../hooks';
@@ -21,7 +20,6 @@ import BadgeReadme from './Badge.mdx';
 export default {
   title: 'Components/Badge',
   component: Badge,
-  decorators: [withDesign],
   argTypes: {
     bg: {
       control: {

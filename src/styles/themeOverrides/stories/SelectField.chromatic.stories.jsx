@@ -6,6 +6,7 @@ import WithUiLibraryCss from '../withUiLibraryCss';
 
 export default {
   title: 'Chromatic Only SelectField',
+  tags: ['!dev', '!autodocs'],
   component: SelectField,
   decorators: [WithUiLibraryCss],
 };

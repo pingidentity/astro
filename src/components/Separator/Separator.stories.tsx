@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Separator } from '../../index';
@@ -12,7 +11,6 @@ import SeparatorReadme from './Separator.mdx';
 export default {
   title: 'Components/Separator',
   component: Separator,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

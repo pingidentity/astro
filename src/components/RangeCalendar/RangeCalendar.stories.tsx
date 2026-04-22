@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RangeCalendar } from '../../index';

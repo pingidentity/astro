@@ -6,6 +6,7 @@ import RockerButtonGroupNextGen from './RockerButtonGroupNextGen';
 
 export default {
   title: 'Chromatic Only RockerButtonGroup',
+  tags: ['!dev', '!autodocs'],
   decorators: [WithUiLibraryCss],
 };
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import GroupIcon from '@pingux/mdi-react/AccountGroupIcon';
 import ArrowIcon from '@pingux/mdi-react/ArrowTopRightThickIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -18,7 +17,6 @@ import IconBadgeReadme from './IconBadge.mdx';
 export default {
   title: 'Components/IconBadge',
   component: IconBadge,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

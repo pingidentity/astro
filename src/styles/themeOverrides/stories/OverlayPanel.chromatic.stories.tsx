@@ -12,6 +12,7 @@ import { Box,
 
 export default {
   title: 'Chromatic Only OverlayPanel',
+  tags: ['!dev', '!autodocs'],
   component: OverlayPanel,
 };
 

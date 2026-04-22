@@ -3,7 +3,7 @@ import Users from '@pingux/mdi-react/AccountGroupIcon';
 import FilterIcon from '@pingux/mdi-react/FilterIcon';
 import FilterVariantIcon from '@pingux/mdi-react/FilterVariantIcon';
 import SearchIcon from '@pingux/mdi-react/SearchIcon';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useDebounce, useGetTheme } from '../../hooks';
@@ -44,9 +44,7 @@ export default {
     placeholder: {},
     defaultValue: {},
     icon: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     isDisabled: {},
     hasAutoFocus: {},
@@ -59,9 +57,7 @@ export default {
       table: ariaAttributeBaseDocSettings.table,
     },
     value: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,

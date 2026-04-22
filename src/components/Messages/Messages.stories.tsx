@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
-import { Meta } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -24,17 +23,12 @@ import MessagesReadme from './Messages.mdx';
 export default {
   title: 'Components/Messages',
   component: Messages,
-  decorators: [withDesign],
   argTypes: {
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     onClose: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   parameters: {

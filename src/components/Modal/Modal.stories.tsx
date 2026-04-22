@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useGetTheme, useModalState } from '../../hooks';
@@ -31,7 +30,6 @@ import ModalReadme from './Modal.mdx';
 export default {
   title: 'Components/Modal',
   component: Modal,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -86,24 +84,16 @@ export default {
       },
     },
     closeButton: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     isOpen: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     contentProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     containerProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   args: {

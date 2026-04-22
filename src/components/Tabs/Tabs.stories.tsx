@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LockIcon from '@pingux/mdi-react/LockIcon';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -24,27 +24,21 @@ export default {
     mode: {},
     defaultSelectedKey: {},
     selectedKey: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     tabListProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     tabPanelProps: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     items: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   parameters: {
+    actions: { argTypesRegex: null },
+    test: { disable: true },
     docs: {
       page: () => (
         <>

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 
 import { Box } from '../index';
 
 export default {
   title: 'Recipes/Vertical Onyx Stepper',
-  decorators: [withDesign],
   parameters: {
     design: {
       type: 'figma',

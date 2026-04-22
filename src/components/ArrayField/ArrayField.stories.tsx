@@ -1,6 +1,6 @@
 import React from 'react';
 import { OverlayProvider } from 'react-aria';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';

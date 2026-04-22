@@ -5,7 +5,7 @@ import type { GridNode } from '@react-types/grid';
 import type { CollectionChildren } from '@react-types/shared';
 import { ThemeUICSSObject } from 'theme-ui';
 
-import { ExampleItemProps } from '../components/ListView/ListView.stories';
+import { ExampleItemProps } from '../components/ListView/ListViewTypes';
 
 export type SelectionOptions = 'expansion' | 'single' | 'multiple' | 'none'
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import CogOutlineIcon from '@pingux/mdi-react/CogOutlineIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Avatar, Box, IconWrapper } from '../../index';
@@ -13,7 +12,6 @@ import AvatarReadme from './Avatar.mdx';
 export default {
   title: 'Components/Avatar',
   component: Avatar,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (
@@ -26,9 +24,7 @@ export default {
   },
   argTypes: {
     src: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     size: {
       control: {

@@ -1,7 +1,6 @@
 import React from 'react';
 import AlertCircleOutlineIcon from '@pingux/mdi-react/AlertCircleOutlineIcon';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, ServerErrorBoundary, Text } from '../../index';
@@ -13,7 +12,6 @@ import ServerErrorBoundaryReadme from './ServerErrorBoundary.mdx';
 export default {
   title: 'Components/ServerErrorBoundary',
   component: ServerErrorBoundary,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

@@ -1,8 +1,7 @@
 import React from 'react';
 import AlertCircle from '@pingux/mdi-react/AlertCircleIcon';
 import LockIcon from '@pingux/mdi-react/LockIcon';
-import { Meta } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta } from '@storybook/react-vite';
 
 import {
   Box, Icon, Link, Text,
@@ -11,7 +10,6 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 
 export default {
   title: 'Recipes/No Access',
-  decorators: [withDesign],
 } as Meta;
 
 export const Default = () => {

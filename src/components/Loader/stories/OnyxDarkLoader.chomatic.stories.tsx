@@ -6,6 +6,7 @@ import { LoaderOnyxComponent } from './LoaderOnyxComponent';
 
 export default {
   title: 'Chromatic Only Onyx Dark Loader',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

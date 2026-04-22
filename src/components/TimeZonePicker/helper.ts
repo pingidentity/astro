@@ -1,4 +1,4 @@
-export const getOffSetString = timeZone => {
+export const getOffSetString = (timeZone, format = 'gmt') => {
   // Use Intl.DateTimeFormat to get the GMT offset string
   const parts = new Intl.DateTimeFormat('en-US', {
     timeZone,
@@ -6,13 +6,17 @@ export const getOffSetString = timeZone => {
   }).formatToParts(new Date());
 
   // Extract the GMT offset part
-  const offsetString = parts.find(p => p.type === 'timeZoneName')?.value || 'GMT+00:00';
+  let offsetString = parts.find(p => p.type === 'timeZoneName')?.value || 'GMT+00:00';
 
-  if (offsetString !== 'GMT') {
-    return offsetString;
+  if (offsetString === 'GMT') {
+    offsetString = 'GMT+00:00';
   }
 
-  return 'GMT+00:00';
+  if (format === 'utc') {
+    return offsetString.replace('GMT', 'UTC');
+  }
+
+  return offsetString;
 };
 
 export const getNumericOffset = offsetString => {
@@ -28,14 +32,15 @@ export const getNumericOffset = offsetString => {
   return 0;
 };
 
-export const getGmtAndOffset = timeZone => {
+export const getGmtAndOffset = (timeZone, format = 'gmt') => {
   try {
-    const offsetString = getOffSetString(timeZone);
+    const offsetString = getOffSetString(timeZone, format);
     const numericOffset = getNumericOffset(offsetString);
 
-    // Return both the GMT string and numeric offset
+    // Return both the offset string and numeric offset
     return { gmt: offsetString, numericOffset };
   } catch (e) {
-    return { gmt: 'GMT+00:00', numericOffset: 0 };
+    const fallbackPrefix = format === 'utc' ? 'UTC' : 'GMT';
+    return { gmt: `${fallbackPrefix}+00:00`, numericOffset: 0 };
   }
 };

@@ -5,7 +5,7 @@ import { Avatar, Box, Button, Icon, Item, Menu, OverlayProvider, PopoverMenu, Se
 import useGetTheme from '../../hooks/useGetTheme';
 import { AvatarProps, ButtonProps } from '../../types';
 
-import { userDataProps } from './NavigationHeader.stories';
+import { userDataProps } from './NavigationHeaderTypes';
 
 interface HeaderAccountMenuProps {
   userData?: userDataProps

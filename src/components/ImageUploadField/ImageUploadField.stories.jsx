@@ -52,14 +52,10 @@ export default {
       },
     },
     onChange: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     onRemove: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     previewHeight: {
       control: {

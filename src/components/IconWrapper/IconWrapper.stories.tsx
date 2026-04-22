@@ -1,6 +1,6 @@
 import React from 'react';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { IconWrapper } from '../../index';

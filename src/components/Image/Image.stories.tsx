@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -25,20 +25,16 @@ export default {
   argTypes: {
     isDisabled: {},
     variant: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
     as: {
       control: {
-        type: 'none',
-        options: htmlElements,
+        type: 'select',
       },
+      options: htmlElements,
     },
     src: {
-      control: {
-        type: 'none',
-      },
+      control: false,
     },
   },
   args: {

@@ -21,6 +21,16 @@ describe('TimeZonePicker helpers', () => {
       const result = getOffSetString('UTC');
       expect(result).toBe('GMT+00:00');
     });
+
+    test('returns UTC offset string when format is utc', () => {
+      const result = getOffSetString('America/New_York', 'utc');
+      expect(result).toMatch(/UTC[+-]\d{2}:\d{2}/);
+    });
+
+    test('returns UTC+00:00 for UTC timezone with utc format', () => {
+      const result = getOffSetString('UTC', 'utc');
+      expect(result).toBe('UTC+00:00');
+    });
   });
 
   describe('getNumericOffset', () => {
@@ -78,6 +88,22 @@ describe('TimeZonePicker helpers', () => {
       const result = getGmtAndOffset('Asia/Kolkata');
       expect(result.gmt).toMatch(/GMT\+05:30/);
       expect(result.numericOffset).toBe(5.5);
+    });
+
+    test('returns UTC string when format is utc', () => {
+      const result = getGmtAndOffset('America/New_York', 'utc');
+      expect(result.gmt).toMatch(/UTC[+-]\d{2}:\d{2}/);
+      expect(typeof result.numericOffset).toBe('number');
+    });
+
+    test('returns UTC+00:00 for UTC timezone with utc format', () => {
+      const result = getGmtAndOffset('UTC', 'utc');
+      expect(result).toEqual({ gmt: 'UTC+00:00', numericOffset: 0 });
+    });
+
+    test('returns UTC+00:00 and 0 for invalid timezone with utc format', () => {
+      const result = getGmtAndOffset('Invalid/Timezone', 'utc');
+      expect(result).toEqual({ gmt: 'UTC+00:00', numericOffset: 0 });
     });
   });
 });

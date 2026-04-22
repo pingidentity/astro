@@ -2,8 +2,7 @@ import React from 'react';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, CopyrightText, Footer, FooterNav, FooterNavItem, Image, Link } from '../..';
@@ -15,7 +14,6 @@ import FooterReadme from './Footer.mdx';
 export default {
   title: 'Experimental/Footer',
   component: Footer,
-  decorators: [withDesign],
   parameters: {
     layout: 'fullscreen',
     docs: {

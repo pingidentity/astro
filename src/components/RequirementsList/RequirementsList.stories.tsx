@@ -1,6 +1,5 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RequirementsList } from '../../index';
@@ -12,7 +11,6 @@ import RequirementsListReadme from './RequirementsList.mdx';
 export default {
   title: 'Components/RequirementsList',
   component: RequirementsList,
-  decorators: [withDesign],
   parameters: {
     docs: {
       page: () => (

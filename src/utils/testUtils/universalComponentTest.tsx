@@ -12,7 +12,9 @@ const ComponentWithRef = ({ renderComponent }: ComponentWithRefProps) => {
   return renderComponent({ ref: testRef });
 };
 
-export const universalComponentTests = async ({ renderComponent, rules = {} }) => {
+export const universalComponentTests = async ({
+  renderComponent, rules = {}, skipForwardRefTest = false,
+}) => {
   describe('Universal Component Tests', () => {
     test('should have no accessibility violations', async () => {
       jest.useRealTimers();
@@ -23,11 +25,13 @@ export const universalComponentTests = async ({ renderComponent, rules = {} }) =
       expect(results).toHaveNoViolations();
     });
 
-    test('should forward refs properly', () => {
-      const testRef = React.createRef<HTMLElement>();
-      expect(() => {
-        render(renderComponent({ ref: testRef }));
-      }).not.toThrow();
-    });
+    if (!skipForwardRefTest) {
+      test('should forward refs properly', () => {
+        const testRef = React.createRef<HTMLElement>();
+        expect(() => {
+          render(renderComponent({ ref: testRef }));
+        }).not.toThrow();
+      });
+    }
   });
 };

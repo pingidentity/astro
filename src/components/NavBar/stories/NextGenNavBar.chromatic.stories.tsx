@@ -6,6 +6,7 @@ import { NavBarNextGenComponent } from './NavBarNextGenComponent';
 
 export default {
   title: 'Chromatic Only Onyx NavBar',
+  tags: ['!dev', '!autodocs'],
 };
 
 export const Default = () => {

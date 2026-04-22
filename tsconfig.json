@@ -1,8 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "5.0",
     "jsx": "react-jsx",
-    "module": "commonjs",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "target": "ES5",
     "outDir": "../../dist/astro/lib/cjs",
     "types": ["mdx", "@testing-library/jest-dom", "vite/client", "vitest", "jest", "vitest/globals"],

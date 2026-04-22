@@ -70,7 +70,6 @@ const ListBox = forwardRef((props: ListBoxProps, ref) => {
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-details': ariaDetails,
-    // @ts-expect-error  linkBehavior not in ListBoxProps
     linkBehavior,
     shouldShowSelectedOption,
     ...others

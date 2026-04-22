@@ -2,7 +2,7 @@ import React from 'react';
 import AccountOutlineIcon from '@pingux/mdi-react/AccountOutlineIcon';
 import Earth from '@pingux/mdi-react/EarthIcon';
 import { astroTokens, astroTokensDark } from '@pingux/onyx-tokens';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useGetTheme } from '../../hooks';

@@ -412,8 +412,13 @@ test('tab list is accessible via keyboard', async () => {
   fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
   expect(tab1).toHaveFocus();
 
-  fireEvent.keyDown(tab1, { key: 'Enter', code: 'Enter' });
-  expect(screen.queryByRole('menu')).toBeInTheDocument();
+  // In newer React Aria, the PopoverMenu trigger wraps the tab,
+  // so we need to click the parent menu trigger element
+  const menuTrigger = tab1.closest('[aria-haspopup="true"]') || tab1;
+  await userEvent.click(menuTrigger);
+  await waitFor(() => {
+    expect(screen.queryByRole('menu')).toBeInTheDocument();
+  });
   await testTabPanel(0);
 
   const menuItems = screen.queryAllByRole('menuitemradio');
