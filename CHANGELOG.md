@@ -1,3 +1,13 @@
+## 2.190.4-alpha.0 (2026-04-23)
+
+### 🩹 Fixes
+
+- [UXE-8213] Refactor release version handling to use scripts
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.190.3-alpha.0 (2026-04-23)
 
 ### 🩹 Fixes
