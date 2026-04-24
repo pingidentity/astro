@@ -1,3 +1,23 @@
+## 2.190.4-alpha.0 (2026-04-23)
+
+### 🩹 Fixes
+
+- [UXE-8213] Refactor release version handling to use scripts
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.190.3-alpha.0 (2026-04-23)
+
+### 🩹 Fixes
+
+- [UXE-8214] Refactor release loop guard
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.190.2 (2026-04-22)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
