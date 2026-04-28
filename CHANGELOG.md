@@ -1,3 +1,13 @@
+## 2.192.0-alpha.0 (2026-04-28)
+
+### 🚀 Features
+
+- [UXE-8169] Icon/Icon Badge Onyx Updates
+
+### ❤️  Thank You
+
+- Nyssa Shepherd
+
 ## 2.191.1-alpha.0 (2026-04-28)
 
 ### 🩹 Fixes
