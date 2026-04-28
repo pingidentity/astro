@@ -3,6 +3,7 @@ import { astroTokens } from '@pingux/onyx-tokens';
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
+import sizes from '../sizes';
 
 import accordion from './accordion';
 import accordionGrid from './accordionGrid';
@@ -102,6 +103,11 @@ const modal = {
     '&.is-full': {
       width: '100%',
       maxWidth: modalSize.full,
+    },
+    '&.is-not-full-page': {
+      position: 'relative',
+      margin: '4.75rem 0px',
+      left: sizes.sideNav.halfWidth, // 115,
     },
   },
   headingContainer: {

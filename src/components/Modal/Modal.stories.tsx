@@ -487,3 +487,42 @@ export const WithComboBoxField: StoryFn<ModalProps> = () => {
     </OverlayProvider>
   );
 };
+
+
+export const WithNotFullPage: StoryFn<ModalProps> = args => {
+  const state = useModalState();
+
+  return (
+    // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
+    // readers when an overlay opens.
+    <OverlayProvider>
+      <Button onPress={state.open} aria-label="Open modal" tabIndex={state.isOpen ? -1 : 0}>
+        Open Modal
+      </Button>
+      {
+        (state.isOpen || state.isTransitioning) && (
+          <Modal
+            {...args}
+            isOpen={state.isOpen}
+            onClose={state.close}
+            isNotFullPage
+          >
+            <ModalHeader
+              hasCloseButton
+              onClose={state.close}
+              title="Continue"
+            />
+            <ModalBody>
+              <Box>
+                <Text>
+                  Do you want to continue with this action that you&lsquo;re performing?
+                </Text>
+              </Box>
+            </ModalBody>
+            <ModalFooter onSubmit={state.close} onCancel={state.close} primaryButtonText="Continue" />
+          </Modal>
+        )
+      }
+    </OverlayProvider>
+  );
+};

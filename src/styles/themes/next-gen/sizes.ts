@@ -1,5 +1,12 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
+const sidenavWidth = 230;
+const halfSidenavWidth = sidenavWidth / 2;
+
+const sideNav = {
+  halfWidth: `${halfSidenavWidth}px`,
+};
+
 const fontSizes = astroTokens.default['font-size'];
 const avatar = {
   sm: `${astroTokens.size.avatar.sm}px`,
@@ -51,4 +58,5 @@ export default {
   container,
   iconBadge,
   icons,
+  sideNav,
 };
