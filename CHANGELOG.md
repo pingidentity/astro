@@ -1,3 +1,13 @@
+## 2.192.1-alpha.0 (2026-04-28)
+
+### 🩹 Fixes
+
+- [UXE-8269] onyx multivalues fix
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.192.0-alpha.0 (2026-04-28)
 
 ### 🚀 Features
