@@ -1,3 +1,13 @@
+## 2.191.0-alpha.0 (2026-04-28)
+
+### 🚀 Features
+
+- [UIP-8260] Fix Modal Positioning and Implement isFullPage Prop in Onyx Theme
+
+### ❤️  Thank You
+
+- Ajith M
+
 ## 2.190.4 (2026-04-24)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
