@@ -141,6 +141,7 @@ export const astroBlacklistStory = {
     'Sizes',
     'Commonly Used',
   ],
+  Modal: ['With Full Page'],
 };
 
 export const nextGenOnlyComponents = [
