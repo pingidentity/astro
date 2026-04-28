@@ -74,7 +74,7 @@ const tabs: TabListItemProps[] = [
   { name: 'Tab 3', children: 'Tab 3 body' },
 ];
 
-const iconSizes:IconSize[] = ['icon-100', 'icon-200', 'icon-300', 'icon-400', 'icon-500', 'icon-600', 'icon-700', 'icon-800', 'icon-900'];
+const iconSizes:IconSize[] = ['icon-50', 'icon-100', 'icon-200', 'icon-300', 'icon-400', 'icon-500', 'icon-600', 'icon-700', 'icon-800', 'icon-900'];
 
 const StickerSheetComponent = () => {
   return (

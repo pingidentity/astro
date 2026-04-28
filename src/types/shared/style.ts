@@ -31,7 +31,7 @@ export type ModalSizeProps = 'extra-small' | 'small' | 'medium' | 'large' | 'ful
 type IconTShirtSize = 'xxs' | 'xs' | 'xsm' | 'sm' | 'md';
 type LoaderTShirtSize = 'sm' | 'md' | 'lg';
 
-type IconSizeRange = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+type IconSizeRange = 50 |100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type NextGenIconTShirtSize = `icon-${IconSizeRange}`;
 
 type pixelSize = 'em' | 'px' | 'rem'
