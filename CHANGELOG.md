@@ -1,3 +1,13 @@
+## 2.191.1-alpha.0 (2026-04-28)
+
+### 🩹 Fixes
+
+- [UXE-8268] allow color hashing in iconwrapper, enable in listview
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.191.0-alpha.0 (2026-04-28)
 
 ### 🚀 Features
