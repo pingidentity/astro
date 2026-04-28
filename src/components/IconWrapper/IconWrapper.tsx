@@ -1,8 +1,10 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { useGetTheme, useStatusClasses, useTShirtSize } from '../../hooks';
 import { Box, Icon } from '../../index';
 import { IconWrapperProps } from '../../types';
+import { avatarColors } from '../Avatar/constants';
+import getColorFromUUID from '../Avatar/getColorFromUuid';
 
 const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
   const {
@@ -14,9 +16,26 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
     title,
     className,
     isCircle,
+    colorId,
     sx,
   } = props;
   const theme = useGetTheme();
+
+  const safeColorId = colorId || '_INTERNAL_DEFAULT_ID_';
+
+  if (process.env.NODE_ENV !== 'production') {
+    if (!color && !colorId) {
+      console.warn(
+        "[Astro] IconWrapper: No 'color' or 'colorId' provided. "
+        + 'The component is falling back to a default generated color.',
+      );
+    }
+  }
+
+  const finalColor = useMemo(() => {
+    if (color) return color;
+    return getColorFromUUID(safeColorId, avatarColors);
+  }, [color, safeColorId]);
 
   const { sizeProps } = useTShirtSize({ size, sizes: theme.iconWrapperSizes });
 
@@ -29,7 +48,7 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
       ref={ref}
       variant={`iconWrapper.${size}`}
       sx={{
-        backgroundColor: `iconWrapper.wrapper.${color}`,
+        backgroundColor: `iconWrapper.wrapper.${finalColor}`,
         ...sx,
       }}
       className={classNames}
@@ -39,7 +58,7 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
         icon={icon}
         size={sizeProps.size}
         title={title}
-        color={`iconWrapper.icon.${color}`}
+        color={`iconWrapper.icon.${finalColor}`}
         {...iconProps}
       />
     </Box>

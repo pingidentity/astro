@@ -14,6 +14,7 @@ const defaultProps = {
   title: { name: 'earth icon' },
   icon: Earth,
   size: 'md',
+  colorId: 'test-color-id',
 };
 
 const getComponent = () => render((

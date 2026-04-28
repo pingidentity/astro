@@ -306,15 +306,13 @@ export const InfiniteLoadingList = args => {
         {(item: ExampleItemProps) => (
           <Item key={item.name}>
             <ListViewItem
+              id={item.name}
               data={{
                 text: item.name,
                 icon: FormSelectIcon,
               }}
               iconProps={{
                 color: 'text.secondary',
-              }}
-              iconWrapperProps={{
-                color: 'cyan',
               }}
             >
               <Controls />
