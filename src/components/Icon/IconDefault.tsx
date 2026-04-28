@@ -19,7 +19,7 @@ const IconDefault = forwardRef<HTMLElement, IconProps>((props, ref) => {
 
   const { sizeProps } = useTShirtSize({ size, sizes: theme.tShirtSizes });
 
-  const { defaultIconColor } = theme;
+  const { defaultIconColor, themeState: { isOnyx } } = theme;
 
   const resolvedTitle = title ?? (
     typeof IconComponent === 'object' && 'type' in IconComponent
@@ -38,6 +38,7 @@ const IconDefault = forwardRef<HTMLElement, IconProps>((props, ref) => {
       sx={{
         fill: color || defaultIconColor,
         minWidth: sizeProps.size,
+        ...(isOnyx && { height: sizeProps.size, minHeight: sizeProps.size }),
         ...sx,
       }}
       {...others}

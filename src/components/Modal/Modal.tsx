@@ -39,6 +39,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     contentProps: propsContentProps,
     containerProps,
     headerContainerProps,
+    isNotFullPage,
     ...others
   } = props;
 
@@ -88,6 +89,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>((props, ref) => {
     isOpen,
     isTransitioning: state?.isTransitioning,
     isOpenNoTransition,
+    isNotFullPage,
   });
 
   const [header, ...siblings] = React.Children.toArray(children);

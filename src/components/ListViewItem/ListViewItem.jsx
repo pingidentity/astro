@@ -56,7 +56,7 @@ const ListViewItem = forwardRef(({
         size="sm"
         title={{ name: `${text}${LIST_ITEM_ICON}` }}
         isCircle
-        color="white"
+        colorId={others.id}
         {...iconWrapperProps}
       />
     ) : (

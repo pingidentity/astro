@@ -63,6 +63,7 @@ export interface ModalProps extends DOMAttributes, TestingAttributes {
   /** Props object spread directly into the modal container Box. */
   containerProps?: object;
   headerContainerProps?: object;
+  isNotFullPage?: boolean;
 }
 
 export interface ModalHeaderProps extends StyleProps {

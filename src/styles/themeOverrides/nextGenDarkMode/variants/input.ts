@@ -35,6 +35,13 @@ input.multivaluesWrapper = {
       backgroundColor: 'disabled',
     },
   },
+  '&.is-disabled': {
+    backgroundColor: 'disabled',
+    '> input': {
+      backgroundColor: 'disabled',
+      border: 'none',
+    },
+  },
 };
 
 input.promptInput = {

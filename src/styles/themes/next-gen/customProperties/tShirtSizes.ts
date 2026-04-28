@@ -1,4 +1,5 @@
 export default {
+  'icon-50': '10px',
   xxs: '10px',
   'icon-100': '14px',
   xs: '14px',
