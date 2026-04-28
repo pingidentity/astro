@@ -37,7 +37,7 @@
     "build-theme-json": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node scripts/buildLatestOnyxThemeForCDN.ts",
+        "command": "node libs/astro/buildThemeJson.ts",
         "cwd": ""
       }
     }
