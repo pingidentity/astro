@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as themeHook from '../../hooks';
 import { Link, PageHeader } from '../../index';
+import theme from '../../styles/theme';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -82,7 +83,8 @@ test('for default theme, it applies correct styles', () => {
 });
 
 test('for onyx theme, it applies correct styles', () => {
-  jest.spyOn(themeHook, 'useGetTheme').mockReturnValue({
+  jest.spyOn(themeHook, 'useGetTheme').mockReturnValueOnce({
+    ...theme,
     pageHeaderTitleMargin: 'md',
     pageHeaderAddIconMargin: 'md',
     pageHeaderAddIconSize: 'md',
