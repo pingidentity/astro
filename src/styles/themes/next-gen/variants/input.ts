@@ -195,6 +195,13 @@ input.multivaluesWrapper = {
       display: 'none',
     },
   },
+  '&.is-disabled': {
+    backgroundColor: 'disabled',
+    '> input': {
+      backgroundColor: 'disabled',
+      border: 'none',
+    },
+  },
 };
 
 input.numberField = {
