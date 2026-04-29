@@ -42,6 +42,9 @@ const listBox = {
     },
     '&.is-focus-visible': {
       zIndex: 1,
+      outline: '1px solid #ffffff',
+      outlineOffset: '-1px',
+      boxShadow: `inset 0 0 0 2px ${astroTokensDark.color.blue[500]}`,
     },
   },
 };
@@ -188,6 +191,15 @@ const statusIcon = {
   },
 };
 
+const environmentBreadcrumb = {
+  button: {
+    current: {
+      color: astroTokensDark.color.gray[100],
+      fontWeight: 2,
+    },
+  },
+};
+
 export default {
   rockerButton,
   rangeCalendar,
@@ -201,6 +213,7 @@ export default {
   lisViewItemChart,
   navBar,
   listBox,
+  environmentBreadcrumb,
   modal,
   tab,
   iconBadge,
@@ -211,6 +224,8 @@ export default {
   popoverMenu: {
     container: {
       background: '#23282e',
+      border: '1px solid',
+      borderColor: '#39414B',
     },
   },
   dataTable: {

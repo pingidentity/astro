@@ -12,6 +12,7 @@ import { box } from './box';
 import button, { defaultFocus } from './button';
 import callout from './callout';
 import { dataTable } from './dataTable';
+import environmentBreadcrumb from './environmentBreadcrumb';
 import { footer } from './footer';
 import iconWrapper from './iconWrapper';
 import { listView, listViewItem, lisViewItemChart } from './listview';
@@ -450,6 +451,7 @@ export default {
   callout,
   codeView,
   dataTable,
+  environmentBreadcrumb,
   fieldHelperText,
   footer,
   iconWrapper,

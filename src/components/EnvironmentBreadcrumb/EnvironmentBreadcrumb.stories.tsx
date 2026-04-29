@@ -10,7 +10,7 @@ import {
   Section,
   Text,
 } from '../../index';
-import { EnvironmentBreadcrumbProps, EnvironmentItemProps } from '../../types';
+import { EnvironmentBreadcrumbProps, EnvironmentItemProps } from '../../types/environmentBreadcrumb';
 
 import EnvironmentBreadcrumbReadme from './EnvironmentBreadcrumb.mdx';
 
@@ -81,7 +81,13 @@ export const Default: StoryFn<EnvironmentBreadcrumbProps<EnvironmentItemProps>> 
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
+        <Badge
+          label="Sandbox"
+          variant="environmentBadge"
+          bg="environmentBadge.background"
+          textColor="magenta"
+          align="right"
+        />
       ) : null}
     </Box>
   );
@@ -106,9 +112,10 @@ export const Default: StoryFn<EnvironmentBreadcrumbProps<EnvironmentItemProps>> 
           {name}
           {isSandbox ? (
             <Badge
-              label="SANDBOX"
+              label="Sandbox"
               variant="environmentBadge"
-              bg="neutral.40"
+              bg="environmentBadge.background"
+              textColor="environmentBadge.text"
               align="right"
             />
           ) : null}
@@ -191,7 +198,13 @@ export const WithSections = () => {
     <Box isRow key={selectedKey}>
       <Text color="inherit">{selectedEnvironment?.name}</Text>
       {selectedEnvironment?.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
+        <Badge
+          label="Sandbox"
+          variant="environmentBadge"
+          bg="environmentBadge.background"
+          textColor="environmentBadge.text"
+          align="right"
+        />
       ) : null}
     </Box>
   );
@@ -222,9 +235,10 @@ export const WithSections = () => {
                 {itemName}
                 {isSandbox ? (
                   <Badge
-                    label="SANDBOX"
+                    label="Sandbox"
                     variant="environmentBadge"
-                    bg="neutral.40"
+                    bg="environmentBadge.background"
+                    textColor="environmentBadge.text"
                     align="right"
                   />
                 ) : null}
@@ -248,7 +262,12 @@ export const DefaultOpen = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
+        <Badge
+          label="Sandbox"
+          variant="environmentBadge"
+          bg="environmentBadge.background"
+          textColor="environmentBadge.text"
+        />
       ) : null}
     </Box>
   );
@@ -273,10 +292,10 @@ export const DefaultOpen = () => {
           {name}
           {isSandbox ? (
             <Badge
-              label="SANDBOX"
+              label="Sandbox"
               variant="environmentBadge"
-              bg="neutral.40"
-              align="right"
+              bg="environmentBadge.background"
+              textColor="environmentBadge.text"
             />
           ) : null}
         </Item>
@@ -293,7 +312,12 @@ export const ControlledMenu = () => {
     <Box isRow key={selectedEnvironment.name}>
       <Text color="inherit">{selectedEnvironment.name}</Text>
       {selectedEnvironment.isSandbox ? (
-        <Badge label="SANDBOX" variant="environmentBadge" bg="neutral.40" />
+        <Badge
+          label="Sandbox"
+          variant="environmentBadge"
+          bg="environmentBadge.background"
+          textColor="environmentBadge.text"
+        />
       ) : null}
     </Box>
   );
@@ -319,10 +343,10 @@ export const ControlledMenu = () => {
           {name}
           {isSandbox ? (
             <Badge
-              label="SANDBOX"
+              label="Sandbox"
               variant="environmentBadge"
-              bg="neutral.40"
-              align="right"
+              bg="environmentBadge.background"
+              textColor="environmentBadge.text"
             />
           ) : null}
         </Item>
