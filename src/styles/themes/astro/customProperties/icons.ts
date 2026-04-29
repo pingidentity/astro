@@ -20,6 +20,7 @@ import Earth from '@pingux/mdi-react/EarthIcon';
 import EmoticonHappy from '@pingux/mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from '@pingux/mdi-react/FingerprintIcon';
 import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
+import HomeIcon from '@pingux/mdi-react/HomeIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import InformationOutlineIcon from '@pingux/mdi-react/InformationOutlineIcon';
 import KeyChainVariant from '@pingux/mdi-react/KeyChainVariantIcon';
@@ -86,6 +87,7 @@ export default {
   p1verify: Verify,
   pam: PamIcon,
   PingAuthorize: KeyChainVariant,
+  HomeIcon,
   pingLogoHorizontalSmall: pingLogoHorizontalSmallWhite,
   protect: Protect,
   rocketLaunchIcon: RocketLaunchIcon,

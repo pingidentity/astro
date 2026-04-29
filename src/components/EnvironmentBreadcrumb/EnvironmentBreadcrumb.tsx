@@ -12,10 +12,7 @@ import {
   useOverlayPosition, useOverlayTrigger,
 } from 'react-aria';
 import { useOverlayTriggerState } from 'react-stately';
-import ArrowDropDownIcon from '@pingux/mdi-react/ArrowDropDownIcon';
-import ArrowDropUpIcon from '@pingux/mdi-react/ArrowDropUpIcon';
 import ChevronRightIcon from '@pingux/mdi-react/ChevronRightIcon';
-import HomeIcon from '@pingux/mdi-react/HomeIcon';
 import { useFilter } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { type ListProps, type ListState, useListState } from '@react-stately/list';
@@ -23,7 +20,7 @@ import { OverlayTriggerState } from '@react-stately/overlays';
 import type { Node } from '@react-types/shared';
 import { v4 as uuid } from 'uuid';
 
-import { useDebounce, useLocalOrForwardRef } from '../../hooks';
+import { useDebounce, useGetTheme, useLocalOrForwardRef } from '../../hooks';
 import {
   Breadcrumbs,
   Button,
@@ -66,6 +63,9 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
       selectedItem,
       ...others
     } = props;
+
+    const { icons } = useGetTheme();
+    const { MenuDown, MenuUp, HomeIcon } = icons;
 
     const optionsNumberMessageId = useMemo(() => uuid(), []);
 
@@ -261,8 +261,10 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
         >
           {selectedItem}
           <Icon
-            icon={popoverState.isOpen ? ArrowDropUpIcon : ArrowDropDownIcon}
+            icon={popoverState.isOpen ? MenuUp : MenuDown}
             title={{ name: popoverState.isOpen ? 'Arrow Drop Up Icon' : 'Arrow Drop Down Icon' }}
+            size="xs"
+            ml="xs"
           />
         </Button>
         <PopoverContainer
@@ -322,8 +324,8 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
         ref={breadcrumbsRef}
         onAction={handleOnAction}
         iconProps={{
-          color: 'neutral.70',
-          mx: 5,
+          color: 'font.base',
+          mx: 3,
           size: 'xs',
           icon: ChevronRightIcon,
 
@@ -338,7 +340,7 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
           data-id={breadCrumbDataIds.orgButton}
           elementType="Button"
         >
-          <Icon icon={HomeIcon} mr={7} title={{ name: 'Home Icon' }} />
+          <Icon icon={HomeIcon} mr={7} title={{ name: 'Home Icon' }} size="sm" />
           {name}
         </Item>
         {selectedItem && (

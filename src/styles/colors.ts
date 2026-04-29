@@ -124,6 +124,11 @@ const border = {
   hairline: '#E7EEF4',
 };
 
+const environmentBadge = {
+  text: badge.textColor,
+  background: neutral[40],
+};
+
 const allColors = {
   black,
   background,
@@ -147,6 +152,7 @@ const allColors = {
   warning,
   slider,
   tooltip,
+  environmentBadge,
 };
 
 export default allColors;

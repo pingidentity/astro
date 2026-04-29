@@ -31,6 +31,7 @@ const icons = {
   Descending: 'arrow_downward',
   popoverMenuIcon: 'more_horiz',
   ErrorCircle: 'error',
+  HomeIcon: 'home',
   integrationsIcon: 'widgets',
   listViewMenu: 'more_horiz',
   mdiAccountCog: 'manage_accounts',

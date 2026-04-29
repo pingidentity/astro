@@ -210,6 +210,11 @@ const removableBadge = {
   border: 'none',
 };
 
+const environmentBadge = {
+  backgroundColor: '#EAF2FD',
+  color: `${astroTokens.color.blue[600]}`,
+};
+
 export const badges = {
   dataTableBadge,
   baseBadge: {
@@ -239,6 +244,7 @@ export const badges = {
   badgeDeleteButton,
   itemBadgeWithSlot,
   removableBadge,
+  environmentBadge,
   invertedRemovableBadge,
   errorCalloutBadge: {
     backgroundColor: 'white !important',

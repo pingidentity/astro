@@ -129,6 +129,11 @@ const codeEditor = {
 
 const tooltip = 'black';
 
+const environmentBadge = {
+  text: astroTokens.color.blue[500],
+  background: astroTokens.color.blue[100],
+};
+
 const colors = {
   ...subColors,
   ...nextGenColors,
@@ -151,6 +156,7 @@ const colors = {
   backgroundHover,
   iconWrapper,
   tooltip,
+  environmentBadge,
   codeEditor,
   twoTone,
 };
