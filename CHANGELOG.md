@@ -1,3 +1,13 @@
+## 2.193.1-alpha.0 (2026-04-29)
+
+### 🩹 Fixes
+
+- [UXE-8166] EnvironmentBreadcrumb-design-fixes
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.193.0 (2026-04-28)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
