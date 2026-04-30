@@ -1,3 +1,13 @@
+## 2.194.0-alpha.0 (2026-04-30)
+
+### 🚀 Features
+
+- [UXE-8273] add onyx overrides and add to onyx wrapper
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.193.2-alpha.0 (2026-04-30)
 
 ### 🩹 Fixes
