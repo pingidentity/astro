@@ -174,7 +174,11 @@ const ComboBoxField = forwardRef((props, ref) => {
     onResize,
   });
 
-  useLayoutEffect(onResize, [onResize]);
+  // Re-measure synchronously (before paint) whenever the menu opens or closes,
+  // so the Popover renders with the correct width on the first frame.
+  // Without state.isOpen in deps, width updates rely solely on ResizeObserver
+  // which fires asynchronously after paint, causing a visible flicker.
+  useLayoutEffect(onResize, [onResize, state.isOpen]);
 
   const style = {
     ...overlayProps.style,
