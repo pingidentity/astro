@@ -39,6 +39,11 @@ const background = {
   hover: hoverDark,
 };
 
+const environmentBadge = {
+  text: 'black',
+  background: astroTokensDark.color.blue[500],
+};
+
 const twoTone = {
   bg: {
     orange: astroTokensDark.color.orange[500],
@@ -149,6 +154,7 @@ export const colors = {
     message: 'white',
     fieldHelper: astroTokensDark.color.gray[400],
   },
+  environmentBadge,
   background,
   backgroundBase,
   backgroundSecondary,

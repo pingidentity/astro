@@ -860,6 +860,63 @@ test('a blank title does not render', async () => {
   expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
 });
 
+test('popover width re-measures when the menu opens to prevent flickering', async () => {
+  // Simulate a scenario like the Country Picker recipe where the input wrapper
+  // starts narrow (110px) and expands to full width when the menu opens.
+  let mockWidth = 110;
+  const offsetWidthSpy = jest.spyOn(window.HTMLElement.prototype, 'offsetWidth', 'get')
+    .mockImplementation(() => mockWidth);
+
+  getComponent();
+
+  // Simulate the wrapper expanding before the menu opens
+  // (e.g., parent CSS changes from width: 110px to width: 100%)
+  mockWidth = 500;
+
+  const button = screen.queryByRole('button');
+  await userEvent.click(button);
+
+  const listbox = await findListbox();
+  // The popover container receives the inline style with width/minWidth.
+  // Without the fix, menuWidth would be stale (110) because useLayoutEffect
+  // only ran on mount. With the fix, it re-measures on state.isOpen change.
+  const popoverContainer = listbox.closest('[role="presentation"]');
+  expect(popoverContainer).toHaveStyle({ width: '500px', 'min-width': '500px' });
+
+  offsetWidthSpy.mockRestore();
+});
+
+test('popover width stays in sync when closing and reopening at different widths', async () => {
+  let mockWidth = 500;
+  const offsetWidthSpy = jest.spyOn(window.HTMLElement.prototype, 'offsetWidth', 'get')
+    .mockImplementation(() => mockWidth);
+
+  getComponent();
+
+  const button = screen.queryByRole('button');
+
+  // Open the menu at 500px
+  await userEvent.click(button);
+  let listbox = await findListbox();
+  let popoverContainer = listbox.closest('[role="presentation"]');
+  expect(popoverContainer).toHaveStyle({ width: '500px' });
+
+  // Close the menu
+  await userEvent.click(button);
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  // Simulate wrapper shrinking back
+  mockWidth = 300;
+
+  // Reopen — width should reflect the new measurement
+  await userEvent.click(button);
+  listbox = await findListbox();
+  popoverContainer = listbox.closest('[role="presentation"]');
+  expect(popoverContainer).toHaveStyle({ width: '300px', 'min-width': '300px' });
+
+  offsetWidthSpy.mockRestore();
+});
+
 describe('when isReadOnly is true', () => {
   const testProp = { isReadOnly: true };
 

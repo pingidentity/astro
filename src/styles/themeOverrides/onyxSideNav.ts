@@ -1,8 +1,6 @@
 import ChevronDownIcon from '@pingux/mdi-react/ChevronDownIcon';
 import ChevronUpIcon from '@pingux/mdi-react/ChevronUpIcon';
-import { borderRadius } from 'styled-system';
 
-import { OnyxTheme } from '../..';
 import { pingLogoHorizontalSmall } from '../../utils/devUtils/constants/logos';
 import icons from '../themes/next-gen/customProperties/icons';
 
