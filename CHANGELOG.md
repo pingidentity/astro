@@ -1,3 +1,13 @@
+## 2.193.2-alpha.0 (2026-04-30)
+
+### 🩹 Fixes
+
+- [UIP-8186] update Country Picker recipe
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.193.1-alpha.0 (2026-04-29)
 
 ### 🩹 Fixes
