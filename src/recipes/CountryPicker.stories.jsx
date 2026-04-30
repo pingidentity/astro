@@ -26,7 +26,6 @@ const sx = {
   },
   comboBoxFieldWrapperOpen: {
     position: 'absolute',
-    transition: '0.2s width ease',
     width: '100%',
   },
   comboBoxFieldWrapperClose: {
