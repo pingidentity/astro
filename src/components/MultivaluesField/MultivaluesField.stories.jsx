@@ -160,6 +160,13 @@ const itemsWithSlots = [
   },
 ];
 
+const longLabelItems = [
+  { id: 1, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,', key: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' },
+  { id: 2, name: 'Quisque vitae lacinia diam, nec ullamcorper neque.', key: 'Quisque vitae lacinia diam, nec ullamcorper neque.' },
+  { id: 3, name: 'In egestas dui vel dolor tincidunt, sit amet ullamcorper', key: 'In egestas dui vel dolor tincidunt, sit amet ullamcorper' },
+  { id: 4, name: 'Short name', key: 'Short name' },
+];
+
 const setOverlayStyle = (direction, isOpen, mr, ml, mt) => {
   return {
     marginRight: direction === 'right' && isOpen ? mr : 0,
@@ -661,3 +668,23 @@ export const OnLoadPrev = () => {
     </OverlayProvider>
   );
 };
+
+export const LongLabels = () => (
+  <OverlayProvider>
+    <MultivaluesField
+      items={longLabelItems}
+      label="Example label"
+      defaultSelectedKeys={[
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+        'Quisque vitae lacinia diam, nec ullamcorper neque.',
+        'In egestas dui vel dolor tincidunt, sit amet ullamcorper',
+      ]}
+    >
+      {item => (
+        <Item key={item.key} aria-label={item.name}>
+          {item.name}
+        </Item>
+      )}
+    </MultivaluesField>
+  </OverlayProvider>
+);
