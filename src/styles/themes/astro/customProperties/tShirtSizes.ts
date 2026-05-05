@@ -7,7 +7,9 @@ export default {
 };
 
 export const iconWrapperSizes = {
+  xs: 12,
   sm: 18,
   md: 24,
   lg: 48,
+  xl: 96,
 };

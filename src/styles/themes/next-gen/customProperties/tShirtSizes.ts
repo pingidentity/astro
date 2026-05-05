@@ -1,3 +1,5 @@
+import sizes from '../sizes';
+
 export default {
   'icon-50': '10px',
   xxs: '10px',
@@ -17,7 +19,9 @@ export default {
 };
 
 export const iconWrapperSizes = {
-  sm: 18,
-  md: 24,
-  lg: 48,
+  xs: sizes.avatarFontSize.xs,
+  sm: sizes.avatarFontSize.sm,
+  md: sizes.avatarFontSize.md,
+  lg: sizes.avatarFontSize.lg,
+  xl: sizes.avatarFontSize.xl,
 };

@@ -8,13 +8,6 @@ const sideNav = {
 };
 
 const fontSizes = astroTokens.default['font-size'];
-const avatar = {
-  sm: `${astroTokens.size.avatar.sm}px`,
-  md: '32px',
-  xmd: '44px',
-  lg: `${astroTokens.size.avatar.lg}px`,
-  xl: `${astroTokens.size.avatar.xl}px`,
-};
 
 const avatarLogo = {
   sm: '14px',
@@ -24,7 +17,17 @@ const avatarLogo = {
   xl: '54px',
 };
 
+const avatar = {
+  xs: `${astroTokens.size.avatar.xs}px`,
+  sm: `${astroTokens.size.avatar.sm}px`,
+  md: `${astroTokens.size.avatar.md}px`,
+  xmd: '44px',
+  lg: `${astroTokens.size.avatar.lg}px`,
+  xl: `${astroTokens.size.avatar.xl}px`,
+};
+
 const avatarFontSize = {
+  xs: fontSizes.avatar.xs,
   sm: fontSizes.avatar.sm,
   md: fontSizes.avatar.md,
   xmd: '18px',
