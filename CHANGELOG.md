@@ -1,3 +1,13 @@
+## 2.194.1-alpha.0 (2026-05-05)
+
+### 🩹 Fixes
+
+- [UIP-8238] Iconwrapper update sizes to use avatarfontsize tokens
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.194.0 (2026-04-30)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
