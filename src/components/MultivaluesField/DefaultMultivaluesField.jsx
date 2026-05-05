@@ -1,13 +1,12 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
-import Clear from '@pingux/mdi-react/CloseIcon';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
-import { Badge, Box, Icon, IconButton, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+import { Badge, Box, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { useGetTheme, useInputLoader, usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -16,6 +15,7 @@ import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+import BadgeLabelTooltip from './BadgeLabelTooltip';
 import ListBox from '../ListBox';
 
 const DefaultMultivaluesField = forwardRef((props, ref) => {
@@ -363,28 +363,13 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   );
 
   const multivaluesFieldBadge = (item, index) => (
-    <Box as="li" key={`li ${item.key}`}>
-      <Badge
-        key={item.key}
-        role="presentation"
-        variant="selectedItemBadge"
-        label={item.name}
-        slots={item.slots}
-        {...item.badgeProps}
-      >
-        <IconButton
-          aria-label={`delete ${item.name}`}
-          data-item={item.name}
-          onPress={e => deleteItem(item.key, e)}
-          ref={el => closeBadgeRefs.current[index] = el} // eslint-disable-line
-          variant="badge.deleteButton"
-          aria-describedby="selectedKeysState"
-          {...item.buttonProps}
-        >
-          <Icon icon={Clear} size={14} title={{ name: 'Clear Icon' }} />
-        </IconButton>
-      </Badge>
-    </Box>
+    <BadgeLabelTooltip
+      key={`tooltip-${item.key}`}
+      item={item}
+      index={index}
+      deleteItem={deleteItem}
+      closeBadgeRefs={closeBadgeRefs}
+    />
   );
 
   const selectedItems = (
