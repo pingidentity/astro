@@ -51,6 +51,14 @@ const selectedItemBadge = {
   py: 3,
   pr: 0,
   my: 3,
+  maxWidth: '200px',
+  '& span': {
+    mr: '5px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    flex: '1 1 0%',
+  },
 };
 
 const readOnlyBadge = {

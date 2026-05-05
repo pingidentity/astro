@@ -33,6 +33,11 @@ const withSection = [
   },
 ];
 
+const longLabelItems = [
+  { id: 10, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,', key: 'LongLabelItem' },
+  { id: 11, name: 'Short', key: 'ShortLabelItem' },
+];
+
 const labelText = 'Field Label';
 
 const defaultProps = {
@@ -80,9 +85,23 @@ const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderF
   </OverlayProvider>
 ));
 
+
+const getLongLabelComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+  <OverlayProvider>
+    <MultivaluesField
+      items={longLabelItems}
+      label="Field Label"
+      defaultSelectedKeys={['LongLabelItem', 'ShortLabelItem']}
+      {...props}
+    >
+      {item => <Item key={item.key}>{item.name}</Item>}
+    </MultivaluesField>
+  </OverlayProvider>
+));
+
 const ComponentOnPrevLoad = props => {
   const initialItems = new Array(10).fill({ key: 'string', name: 'string' }).map((_item, index) => ({ name: `name: ${index}`, key: `name: ${index}`, id: index }));
-  // eslint-disable-next-line no-unused-vars
+
   const [listItems, setListItems] = useState(initialItems);
 
   const onLoadMore = async () => {
@@ -645,12 +664,12 @@ test('read only keys', () => {
   const firstBadge = screen.getByText(items[1].name);
   const { nextSibling: deleteButton1 } = firstBadge;
   expect(firstBadge).toBeInTheDocument();
-  expect(deleteButton1).toBeNull();
+  expect(deleteButton1).not.toBeInTheDocument();
 
   const secondBadge = screen.getByText(items[2].name);
   expect(secondBadge).toBeInTheDocument();
   const { nextSibling: deleteButton2 } = firstBadge;
-  expect(deleteButton2).toBeNull();
+  expect(deleteButton2).not.toBeInTheDocument();
 });
 
 test('passing helper text should display it and correct aria attributes on input', () => {
@@ -1015,13 +1034,13 @@ test('default selected keys in condensed mode ', () => {
   expect(screen.getByText('2 Selected')).toBeInTheDocument();
 });
 
-test('when filtered to one item in condensed mode, it still shows the correct amount of selected items ', () => {
+test('when filtered to one item in condensed mode, it still shows the correct amount of selected items ', async () => {
   const onInputChange = jest.fn();
   getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key], onInputChange });
 
   const input = screen.getByRole('combobox');
   const value = 'Aardvark';
-  userEvent.type(input, value);
+  await userEvent.type(input, value);
 
   const listbox = screen.getByRole('listbox');
   expect(listbox).toBeInTheDocument();
@@ -1032,7 +1051,7 @@ test('when filtered to one item in condensed mode, it still shows the correct am
   expect(screen.getByText('2 Selected')).toBeInTheDocument();
 });
 
-test('onInputChange is called in condensed mode ', async() => {
+test('onInputChange is called in condensed mode ', async () => {
   const onInputChange = jest.fn();
   getComponent({ mode: 'condensed', onInputChange });
 
@@ -1213,6 +1232,42 @@ test('onLoadMore and onLoadPrev callbacks are called', async () => {
   expect(onLoadMoreFunc).toHaveBeenCalled();
   fireEvent.scroll(listBox[0], { target: { scrollY: 0 } });
   expect(onLoadPrevFunc).toHaveBeenCalled();
+});
+
+test('selected badge with a long label renders a tooltip with the full text on hover', () => {
+  getLongLabelComponent();
+  const badge = screen.getByText('Lorem ipsum dolor sit amet, consectetur adipiscing elit,');
+  expect(badge).toBeInTheDocument();
+
+  fireEvent.mouseMove(badge);
+  fireEvent.mouseEnter(badge);
+
+  const tooltip = screen.getByRole('tooltip');
+  expect(tooltip).toBeInTheDocument();
+  expect(tooltip).toHaveTextContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit,');
+});
+
+test('selected badge with a short label does not show a tooltip on hover', () => {
+  getLongLabelComponent();
+  const badge = screen.getByText('Short');
+  expect(badge).toBeInTheDocument();
+
+  fireEvent.mouseMove(badge);
+  fireEvent.mouseEnter(badge);
+
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+});
+
+test('hovering delete button does not show tooltip for long label badge', () => {
+  getLongLabelComponent();
+
+  const deleteButton = screen.getByLabelText('delete Lorem ipsum dolor sit amet, consectetur adipiscing elit,');
+  expect(deleteButton).toBeInTheDocument();
+
+  fireEvent.mouseMove(deleteButton);
+  fireEvent.mouseEnter(deleteButton);
+
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
 });
 
 // Needs to be added to each components test file
