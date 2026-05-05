@@ -1,3 +1,13 @@
+## 2.195.0-alpha.0 (2026-05-05)
+
+### 🚀 Features
+
+- [UXE-8257] Tooltip for long text in MultivaluesField
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.194.1-alpha.0 (2026-05-05)
 
 ### 🩹 Fixes
