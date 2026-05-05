@@ -52,6 +52,8 @@ const IconWrapper = forwardRef<HTMLElement, IconWrapperProps>((props, ref) => {
         ...sx,
       }}
       className={classNames}
+      justifyContent="center"
+      alignItems="center"
       {...wrapperProps}
     >
       <Icon
