@@ -55,10 +55,10 @@ const NumberField = forwardRef((props, ref) => {
   const ControlArrows = (
     <Box variant="forms.numberField.arrows">
       <IconButton {...incrementButtonProps} ref={decRef} tabIndex="0" p={0}>
-        <Icon icon={MenuUp} size={isOnyx ? 'sm' : 18} title={{ name: 'Menu Up Icon' }} />
+        <Icon icon={MenuUp} size={isOnyx ? 'sm' : 18} title={{ name: '' }} aria-hidden="true" />
       </IconButton>
       <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="0" p={0}>
-        <Icon icon={MenuDown} size={isOnyx ? 'sm' : 18} title={{ name: 'Menu Down Icon' }} />
+        <Icon icon={MenuDown} size={isOnyx ? 'sm' : 18} title={{ name: '' }} aria-hidden="true" />
       </IconButton>
     </Box>
   );
