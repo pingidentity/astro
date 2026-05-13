@@ -71,7 +71,7 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
     <Box as="span" aria-hidden="true" variant="forms.select.arrow">
       <Icon
         icon={state.isOpen ? MenuUp : MenuDown}
-        title={{ name: 'Menu down' }}
+        title={{ name: '' }}
         size={isOnyx ? 'sm' : 'md'}
       />
     </Box>
