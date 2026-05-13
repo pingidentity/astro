@@ -1,3 +1,13 @@
+## 2.196.0-alpha.0 (2026-05-13)
+
+### 🚀 Features
+
+- [UIP-8230] Presentational menu arrow icons should have no aria label applied
+
+### ❤️  Thank You
+
+- Ajith M
+
 ## 2.195.0 (2026-05-05)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
