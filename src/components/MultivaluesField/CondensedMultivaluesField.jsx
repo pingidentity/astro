@@ -367,7 +367,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
       && <Loader variant="loader.withinInput" />
     }
       <Box as="button" variant="forms.comboBox.button" tabIndex={-1} onClick={handleButtonPress} sx={{ border: 'none' }}>
-        <Icon icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+        <Icon icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} title={{ name: '' }} aria-hidden="true" />
       </Box>
     </Box>
   );
@@ -404,7 +404,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
                 { checkboxSelected}
                 {selectionManager.selectedKeys.size > 0 && visuallyHidden}
               </>),
-          }} // eslint-disable-line
+          }}
           value={filterString}
           helperText={helperText}
           aria-invalid={status === 'error' && true}
