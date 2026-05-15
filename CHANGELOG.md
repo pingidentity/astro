@@ -1,3 +1,13 @@
+## 2.197.0-alpha.0 (2026-05-15)
+
+### 🚀 Features
+
+- [UXE-8217] Onyx codemod scaffolding
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.196.0 (2026-05-13)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
