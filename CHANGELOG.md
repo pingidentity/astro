@@ -1,3 +1,13 @@
+## 2.197.2-alpha.0 (2026-05-28)
+
+### 🩹 Fixes
+
+- [UXE-8288] Update npm caching
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.197.1-alpha.0 (2026-05-21)
 
 ### 🩹 Fixes
