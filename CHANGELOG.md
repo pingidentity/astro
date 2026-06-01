@@ -1,3 +1,13 @@
+## 2.197.3-alpha.0 (2026-06-01)
+
+### 🩹 Fixes
+
+- [UIP-8321] Presentational menu arrow icons should have no aria-label applied
+
+### ❤️  Thank You
+
+- Ajith M
+
 ## 2.197.2-alpha.0 (2026-05-28)
 
 ### 🩹 Fixes
