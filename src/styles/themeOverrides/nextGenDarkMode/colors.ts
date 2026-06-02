@@ -149,8 +149,8 @@ export const colors = {
   darkteal: astroTokensDark.color.teal[100],
   darkcyan: astroTokensDark.color.cyan[100],
   text: {
-    primary: astroTokensDark.color.gray[400],
-    secondary: astroTokensDark.color.gray[100],
+    primary: astroTokensDark.color.font.base,
+    secondary: astroTokensDark.color.font.light,
     message: 'white',
     fieldHelper: astroTokensDark.color.gray[400],
   },
