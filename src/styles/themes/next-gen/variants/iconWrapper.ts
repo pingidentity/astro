@@ -1,6 +1,8 @@
 import sizes from '../sizes';
 
 const circle = {
+  justifyContent: 'center',
+  alignItems: 'center',
   '&.is-circle': {
     borderRadius: '50%',
   },
