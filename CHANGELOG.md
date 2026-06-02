@@ -1,3 +1,13 @@
+## 2.198.0-alpha.0 (2026-06-02)
+
+### 🚀 Features
+
+- [UXE-8205] Fix color tokens in onyx text variants
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.197.5-alpha.0 (2026-06-02)
 
 ### 🩹 Fixes
