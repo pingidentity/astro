@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import CloseIcon from '@pingux/mdi-react/CloseIcon';
 
+import { useGetTheme } from '../../hooks';
 import { ModalHeaderProps } from '../../types/Modal';
 import Box from '../Box';
 import Icon from '../Icon';
@@ -16,14 +17,28 @@ const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>((props, ref) => {
     containerProps,
     titleProps,
     hasNoSeparator,
+    closeButtonProps,
     ...rest
   } = props;
 
+  const { icons, modalCloseIconSize } = useGetTheme();
+  const { ModalCloseIcon } = icons;
+
   const titleContent = typeof title === 'string' && title ? (
     <Box flex="1">
-      <Text {...titleProps} variant="modalTitle" role="heading" aria-level={1}>{title}</Text>
+      <Text
+        as="h3"
+        {...titleProps}
+        variant="modalTitle"
+        role="heading"
+        aria-level={1}
+      >
+        {title}
+      </Text>
     </Box>
-  ) : title;
+  ) : (
+    title
+  );
 
   return (
     <Box
@@ -38,22 +53,22 @@ const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>((props, ref) => {
       {...rest}
     >
       {titleContent}
-      {
-        hasCloseButton
-        && (
-          closeButton
-          ?? (
-            <IconButton
-              aria-label="Close modal window"
-              data-id="icon-button__close-modal-window"
-              variant="modalHeaderCloseButton"
-              onPress={onClose}
-            >
-              <Icon icon={CloseIcon} title={{ name: 'Close Icon' }} />
-            </IconButton>
-          )
-        )
-      }
+      {hasCloseButton
+        && (closeButton ?? (
+          <IconButton
+            aria-label="Close modal window"
+            data-id="icon-button__close-modal-window"
+            variant="modalHeaderCloseButton"
+            onPress={onClose}
+            {...closeButtonProps}
+          >
+            <Icon
+              icon={ModalCloseIcon}
+              title={{ name: 'Close Icon' }}
+              size={modalCloseIconSize}
+            />
+          </IconButton>
+        ))}
     </Box>
   );
 });

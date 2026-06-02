@@ -26,6 +26,7 @@ const linkSelectFieldWidth = '10em';
 const calendarIconSize = 25 as IconSize;
 const navBarIconSize = 18 as IconSize;
 const badgeTextFontSize = '';
+const modalCloseIconSize = 'sm' as IconSize;
 
 export const astroThemeValues = {
   accordionHoveredState: hoveredState,
@@ -60,4 +61,5 @@ export const astroThemeValues = {
   },
   linkSelectFieldWidth,
   badgeTextFontSize,
+  modalCloseIconSize,
 };

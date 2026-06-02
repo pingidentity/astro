@@ -67,8 +67,6 @@ export const closeButton = {
   top: 0,
   right: -14,
   alignSelf: 'auto',
-  width: '22px',
-  height: '22px',
 };
 
 const bodyContainer = {
