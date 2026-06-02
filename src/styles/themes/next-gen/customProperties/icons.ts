@@ -61,6 +61,7 @@ const icons = {
   SuccessCircle: 'check_circle',
   userExperienceIcon: 'palette',
   WarningIcon: 'warning',
+  ModalCloseIcon: 'close',
 };
 
 export default icons;

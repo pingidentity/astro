@@ -5,6 +5,7 @@ import { AstroOverlayTriggerState } from '../hooks/useModalState/useModalState';
 import { DOMAttributes } from './shared/dom';
 import { ModalSizeProps, StyleProps } from './shared/style';
 import { TestingAttributes } from './shared/test';
+import { IconButtonProps } from './iconButton';
 
 export interface ModalProps extends DOMAttributes, TestingAttributes {
   /** Used in tandem with `hasCloseButton` to customize how the close button is rendered. */
@@ -74,6 +75,7 @@ export interface ModalHeaderProps extends StyleProps {
   onClose?: () => void;
   title?: ReactNode;
   hasNoSeparator?: boolean;
+  closeButtonProps?: IconButtonProps;
 }
 
 export type ModalFooterProps = {

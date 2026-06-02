@@ -115,6 +115,7 @@ const stepperTabContentHeader = {
 
 const modalTitle = {
   ...hTags.H3,
+  lineHeight: '2rem',
 };
 
 export const text = {
