@@ -1,3 +1,13 @@
+## 2.198.1-alpha.0 (2026-06-02)
+
+### 🩹 Fixes
+
+- [UXE-8337] Update Avatar size in PanelHeader
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.198.0-alpha.0 (2026-06-02)
 
 ### 🚀 Features
