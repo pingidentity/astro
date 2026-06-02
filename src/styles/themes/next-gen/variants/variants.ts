@@ -136,6 +136,8 @@ const modal = {
     borderTopColor: 'gray-200',
     borderRadius: '0px 0px 1em 1em',
     p: 'lg',
+    flexDirection: 'row-reverse !important',
+
   },
   footerContainer: {
     borderTop: '1px solid',
