@@ -3,7 +3,6 @@ import { astroTokens } from '@pingux/onyx-tokens';
 export const message = {
   wrapper: {
     gap: 'md',
-    right: 'unset',
   },
   item: {
     maxWidth: 400,

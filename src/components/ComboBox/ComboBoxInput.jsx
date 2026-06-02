@@ -72,7 +72,8 @@ const ComboBoxInput = forwardRef((props, ref) => {
             icon={MenuDown}
             size={isOnyx ? 'sm' : 'md'}
             sx={isOpen ? { transform: 'rotate(180deg)' } : null}
-            title={{ name: 'Menu Down' }}
+            title={{ name: '' }}
+            aria-hidden="true"
           />
         </Button>
       </PressResponder>

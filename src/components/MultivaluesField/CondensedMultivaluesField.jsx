@@ -366,8 +366,8 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
       isLoading && (isOpen || loadingState === loadingStates.LOADING)
       && <Loader variant="loader.withinInput" />
     }
-      <Box as="button" variant="forms.comboBox.button" tabIndex={-1} onClick={handleButtonPress} sx={{ border: 'none' }}>
-        <Icon icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} title={{ name: '' }} aria-hidden="true" />
+      <Box as="button" variant="forms.comboBox.button" tabIndex={-1} onClick={handleButtonPress} sx={{ border: 'none' }} title={{ name: '' }}>
+        <Icon icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })}  aria-hidden="true" />
       </Box>
     </Box>
   );

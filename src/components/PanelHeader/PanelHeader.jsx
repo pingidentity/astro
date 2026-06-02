@@ -41,9 +41,9 @@ const PanelHeader = forwardRef(({
     <Avatar
       src={image?.src}
       isSquare={!!image?.src}
-      size="avatar.lg"
+      size="sm"
       defaultText={avatarDefaultText}
-      mr="lg"
+      mr="md"
       {...avatarProps}
     />
   );

@@ -39,7 +39,7 @@ const nextGenTheme = {
   fontWeights,
   lineHeights: {
     body: astroTokens.default['line-height'].base,
-    xs: '1.2',
+    xs: astroTokens.default['line-height'].xs,
     sm: '1.4',
     md: '1.75',
   },

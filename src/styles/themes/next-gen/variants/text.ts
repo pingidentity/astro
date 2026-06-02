@@ -113,10 +113,16 @@ const stepperTabContentHeader = {
   color: 'font.base',
 };
 
+const modalTitle = {
+  ...hTags.H3,
+  lineHeight: '2rem',
+};
+
 export const text = {
   base: {
     lineHeight: 'body',
   },
+  modalTitle,
   buttonSubtitle,
   buttonTitle,
   pageHeaderBody: {

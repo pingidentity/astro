@@ -16,7 +16,14 @@ import SelectFieldBase from '../SelectFieldBase';
 const displayName = 'LinkSelectField';
 
 const LinkSelectField = forwardRef((props, ref) => {
-  const { placeholder, isDisabled, status, helperText, hasInlineLoader, popoverWidth } = props;
+  const {
+    placeholder,
+    isDisabled, status, helperText,
+    iconProps,
+    hasInlineLoader,
+    popoverWidth,
+    triggerProps,
+  } = props;
   const { ariaProps } = getAriaAttributeProps(props);
   const { linkSelectFieldWidth, themeState } = useGetTheme();
   const { isOnyx } = themeState;
@@ -36,7 +43,7 @@ const LinkSelectField = forwardRef((props, ref) => {
     fieldControlInputProps,
     isLoadingInitial,
     state,
-    triggerProps,
+    triggerProps: raTriggerProps,
     triggerRef,
   } = selectFieldProps;
 
@@ -48,6 +55,7 @@ const LinkSelectField = forwardRef((props, ref) => {
       tabIndex={isDisabled ? -1 : 0}
       {...getPendoID(displayName)}
       {...triggerProps}
+      {...raTriggerProps}
       {...ariaProps}
       aria-describedby={helperText && helperTextId}
     >
@@ -58,6 +66,7 @@ const LinkSelectField = forwardRef((props, ref) => {
           <Icon
             icon={MenuDown}
             title={{ name: 'Menu Down Icon' }}
+            {...iconProps}
             sx={
               state.isOpen
                 ? { transform: 'rotate(180deg)' }

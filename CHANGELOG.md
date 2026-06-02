@@ -1,3 +1,93 @@
+## 2.198.2-alpha.0 (2026-06-02)
+
+### 🩹 Fixes
+
+- [UXE-8322] Update skip-ci status
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.198.1-alpha.0 (2026-06-02)
+
+### 🩹 Fixes
+
+- [UXE-8337] Update Avatar size in PanelHeader
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.198.0-alpha.0 (2026-06-02)
+
+### 🚀 Features
+
+- [UXE-8205] Fix color tokens in onyx text variants
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.197.5-alpha.0 (2026-06-02)
+
+### 🩹 Fixes
+
+- [UIP-8336] Onyx Modal Fixes
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.197.4-alpha.0 (2026-06-02)
+
+### 🩹 Fixes
+
+- [UXE-8311] Onyx style fixes
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.197.3-alpha.0 (2026-06-01)
+
+### 🩹 Fixes
+
+- [UIP-8321] Presentational menu arrow icons should have no aria-label applied
+
+### ❤️  Thank You
+
+- Ajith M
+
+## 2.197.2-alpha.0 (2026-05-28)
+
+### 🩹 Fixes
+
+- [UXE-8288] Update npm caching
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.197.1-alpha.0 (2026-05-21)
+
+### 🩹 Fixes
+
+- [UXE-8293] Improve release pipeline
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.197.0-alpha.0 (2026-05-15)
+
+### 🚀 Features
+
+- [UXE-8217] Onyx codemod scaffolding
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.196.0 (2026-05-13)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

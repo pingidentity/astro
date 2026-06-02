@@ -1,7 +1,4 @@
-import { astroTokens, astroTokensDark } from '@pingux/onyx-tokens';
-
-import theme from './nextGenDarkMode';
-
+import theme from '../themes/next-gen';
 
 const buttons = {
   critical: {
@@ -94,7 +91,6 @@ const buttons = {
       },
     },
   },
-  // not sure what this references
   filter: {
     '&:not(.disabled):hover': {
       borderColor: 'accent.40',
@@ -113,31 +109,35 @@ const forms = {
       outline: '1px solid',
       outlineColor: 'accent.60',
       outlineOffset: '0px',
-      borderColor: `${astroTokens.color.blue[500]} !important`,
+      borderColor: '#4462ED !important',
     },
     numberField: {
       ...theme.input,
       ...theme.numberFieldStyles,
       '&[type=text]': {
         ...theme.text.inputValue,
-        borderColor: astroTokensDark.color.gray[500],
+        backgroundColor: 'white',
+        borderColor: 'neutral.80',
       },
       '&[type=text]:focus': {
-        borderColor: `${astroTokens.color.blue[500]} !important`,
+        outline: '1px solid',
+        outlineColor: 'accent.60',
+        outlineOffset: '0px',
+        borderColor: '#4462ED !important',
       },
     },
   },
   select: {
     '&:not(.disabled):hover': {
       ...theme.text.inputValue,
-      borderColor: astroTokensDark.color.gray[500],
+      borderColor: 'neutral.80',
     },
   },
   search: {
     wrapper: {
       '& input[type=search]': {
         ...theme.text.inputValue,
-        borderColor: astroTokensDark.color.gray[500],
+        borderColor: 'neutral.80',
         fontSize: '15px',
         bg: 'white',
         '::placeholder': {
@@ -147,7 +147,10 @@ const forms = {
         },
       },
       '& input[type=search]:focus': {
-        borderColor: `${astroTokens.color.blue[500]} !important`,
+        outline: '1px solid',
+        outlineColor: 'accent.60',
+        outlineOffset: '0px',
+        borderColor: '#4462ED !important',
       },
     },
   },
@@ -222,7 +225,7 @@ const variants = {
         color: 'white',
       },
       ':not(.is-selected):hover': {
-        color: 'white',
+        color: 'accent.30',
       },
     },
   },

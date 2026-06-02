@@ -13,6 +13,7 @@ import DefaultCircle from '@pingux/mdi-react/CheckboxBlankCircleOutlineIcon';
 import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
 import CheckCircleOutlineIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import Clipboard from '@pingux/mdi-react/ClipboardIcon';
+import CloseIcon from '@pingux/mdi-react/CloseIcon';
 import CloseOctagonOutlineIcon from '@pingux/mdi-react/CloseOctagonOutlineIcon';
 import ConnectionIcon from '@pingux/mdi-react/ConnectionIcon';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
@@ -96,4 +97,5 @@ export default {
   SuccessCircle: CheckCircleIcon,
   userExperienceIcon: MonitorScreenshotIcon,
   WarningIcon,
+  ModalCloseIcon: CloseIcon,
 };

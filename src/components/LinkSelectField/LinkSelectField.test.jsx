@@ -159,6 +159,18 @@ test('passing helper text should display it and correct aria attributes on input
   expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
 });
 
+test('iconProps are spread to the icon element', () => {
+  const iconTestId = 'custom-icon';
+  getComponent({ iconProps: { 'data-testid': iconTestId } });
+  expect(screen.getByTestId(iconTestId)).toBeInTheDocument();
+});
+
+test('triggerProps are spread to the trigger button', () => {
+  getComponent({ triggerProps: { 'data-custom': 'custom-trigger' } });
+  const button = screen.getByRole('button');
+  expect(button).toHaveAttribute('data-custom', 'custom-trigger');
+});
+
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (

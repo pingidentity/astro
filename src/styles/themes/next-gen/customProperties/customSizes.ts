@@ -8,6 +8,7 @@ const pageHeaderTitleMargin = 'sm';
 const pageHeaderAddIconMargin = 'md';
 const pageHeaderAddIconSize = 'md';
 const defaultLoaderSize = 32;
+const modalCloseIconSize = 'md' as IconSize;
 
 export default {
   copyButtonSize,
@@ -18,4 +19,5 @@ export default {
   pageHeaderAddIconMargin,
   pageHeaderAddIconSize,
   defaultLoaderSize,
+  modalCloseIconSize,
 };
