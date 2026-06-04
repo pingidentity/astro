@@ -1,3 +1,13 @@
+## 2.198.4-alpha.0 (2026-06-04)
+
+### 🩹 Fixes
+
+- [UXE-8289] Update help icon
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.198.3-alpha.0 (2026-06-04)
 
 ### 🩹 Fixes
