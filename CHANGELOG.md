@@ -1,3 +1,13 @@
+## 2.198.3-alpha.0 (2026-06-04)
+
+### 🩹 Fixes
+
+- [UXE-8279] Update popover scrolling
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.198.2 (2026-06-02)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
