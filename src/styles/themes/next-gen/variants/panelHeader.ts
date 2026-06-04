@@ -12,12 +12,7 @@ const controls = {
   mr: '0',
 };
 
-const wrapper = {
-  mr: 'md',
-};
-
 export default {
   container,
   controls,
-  wrapper,
 };
