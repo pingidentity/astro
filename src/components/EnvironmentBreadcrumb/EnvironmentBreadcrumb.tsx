@@ -287,7 +287,7 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
               aria-label="Items Search"
               data-testid="Environment-Breadcrumb-Search"
               onChange={val => setSearchValue(val)}
-              p="10px"
+              p="sm"
               {...searchProps}
             />
             <VisuallyHidden role="alert" aria-live="polite" aria-busy={isTyping} id={optionsNumberMessageId}>

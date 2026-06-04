@@ -146,13 +146,15 @@ const modal = {
 
 const listBox = {
   container: {
-    px: 'sm',
+    pl: 'sm',
+    pr: 0,
     py: 'xs',
   },
   option: {
     py: '.75rem',
     pl: '.75rem',
     pr: 'md',
+    mr: 'sm',
     justifyContent: 'space-between',
     borderRadius: '4px',
     lineHeight: 'body',
