@@ -443,6 +443,9 @@ const onyxIconButton = {
 };
 
 const hintButton = {
+  maxWidth: 'unset',
+  maxHeight: 'unset',
+  borderRadius: '28px',
   backgroundColor: 'transparent',
   path: { fill: 'dark' },
   '&.is-hovered': {
