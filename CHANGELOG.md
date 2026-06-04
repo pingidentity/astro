@@ -1,3 +1,13 @@
+## 2.198.5-alpha.0 (2026-06-04)
+
+### 🩹 Fixes
+
+- [UXE-8362] Fix margin on PanelWrapper
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.198.4-alpha.0 (2026-06-04)
 
 ### 🩹 Fixes
