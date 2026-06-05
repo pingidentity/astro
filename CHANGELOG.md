@@ -1,3 +1,13 @@
+## 2.199.1-alpha.0 (2026-06-05)
+
+### 🩹 Fixes
+
+- [UXE-8342] swap @material-symbols/font-400 to material-symbols package, set optical size to 24
+
+### ❤️  Thank You
+
+- Elijah Cooper
+
 ## 2.199.0-alpha.0 (2026-06-05)
 
 ### 🚀 Features
