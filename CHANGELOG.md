@@ -1,3 +1,13 @@
+## 2.198.8-alpha.0 (2026-06-05)
+
+### 🩹 Fixes
+
+- update git add command
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.198.5 (2026-06-04)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
