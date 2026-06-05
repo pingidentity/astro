@@ -1,8 +1,8 @@
 import {
   ReactNode,
 } from 'react';
-import type { MaterialSymbol } from '@material-symbols/font-400';
 import type { MdiReactIconComponentType } from '@pingux/mdi-react';
+import type { MaterialSymbol } from 'material-symbols';
 
 import { TestingAttributes } from './shared/test';
 import { DOMAttributes, IconSize, StyleProps } from './shared';

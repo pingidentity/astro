@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 
-import { tShirtSizes } from '../devUtils/constants/tShirtSizes';
-
+const iconSizes = ['xxs', 'xs', 'sm', 'md'] as const;
 
 export const sizeArgTypes = {
   size: {
-    control: 'select',
-    description: `The size of the icon container. If given a number value, it will be converted to pixels. 
-    Tshirt sizing is recommended and can be passed to the size prop as "xxs", "xs", "sm" , "md" 
-    rendering 9, 15, 20, and 25 pixel svg containers.`,
+    control: { type: 'select' },
+    options: iconSizes,
+    description: 'The size of the icon. Accepts a t-shirt size ("xxs", "xs", "sm", "md") or a number value in pixels. Rendered pixel size may vary by theme.',
+    table: {
+      type: { summary: iconSizes.map(k => `"${k}"`).join(' | ') },
+    },
   },
 };
 
 export const sizePropTypes = {
-  size: PropTypes.oneOf(Object.keys(tShirtSizes)),
+  size: PropTypes.oneOf([...iconSizes]),
 };

@@ -10,7 +10,7 @@ module.exports = {
     '^.+\\.(css|scss)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.mdx$': '<rootDir>/__mocks__/mdxMock.js',
     '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
-    '^@material-symbols/.*$': '<rootDir>/__mocks__/fileMock.js',
+    '^material-symbols.*$': '<rootDir>/__mocks__/fileMock.js',
     '^@pingux/onyx-tokens$': '<rootDir>/../onyx-tokens/build/index.ts',
   },
   modulePathIgnorePatterns: ['/lib/', '/build/', '/dist/'],
