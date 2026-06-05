@@ -58,7 +58,13 @@ test('color prop', () => {
 test('hasFill prop', () => {
   getComponent({ hasFill: true });
   const icon = screen.getByTestId(testId);
-  expect(icon).toHaveStyle("font-variation-settings: 'FILL' 1");
+  expect(icon).toHaveStyle("font-variation-settings: 'FILL' 1,'opsz' 24");
+});
+
+test('no hasFill prop', () => {
+  getComponent({ hasFill: false });
+  const icon = screen.getByTestId(testId);
+  expect(icon).toHaveStyle("font-variation-settings: 'FILL' 0,'opsz' 24");
 });
 
 test('title prop', () => {
