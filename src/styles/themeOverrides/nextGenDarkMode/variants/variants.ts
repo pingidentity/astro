@@ -17,9 +17,7 @@ import stepper from './stepper';
 const listBox = {
   container: {
     backgroundColor: 'backgroundBase',
-    border: '1px solid',
-    borderColor: 'border.attachment',
-    borderRadius: '4px',
+    borderRadius: astroTokensDark.radius.md,
   },
   option: {
     color: astroTokensDark.color.gray[400],

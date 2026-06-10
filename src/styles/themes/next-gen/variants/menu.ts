@@ -2,8 +2,6 @@ import { astroTokens } from '@pingux/onyx-tokens';
 
 export const menu = {
   p: 'sm',
-  border: '1px solid',
-  borderColor: 'border.base',
 };
 
 export const menuSection = {

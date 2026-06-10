@@ -2,12 +2,12 @@ const base = {
   bg: 'neutral.80',
   width: '100%',
   height: '1px',
-  my: '5px',
+  my: 'xs',
   flexShrink: 0,
   '&.is-vertical': {
     width: '1px',
     height: '100%',
-    mx: '5px',
+    mx: 'xs',
   },
 };
 

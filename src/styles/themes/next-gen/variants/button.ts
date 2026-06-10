@@ -253,7 +253,7 @@ const checkboxActiveButton = {
 };
 
 const link = {
-  color: 'active',
+  color: astroTokens.color.font.link,
   transition: 'color, .15s, ease-in-and-out',
   fontSize: 'md',
   textDecoration: 'none',
@@ -267,6 +267,28 @@ const link = {
   '&.is-focused': {
     textDecoration: 'underline',
     outline: 'none',
+  },
+};
+
+const selectLink = {
+  ...link,
+  textDecoration: 'none',
+  px: '0',
+  '&.is-hovered': {
+    textDecoration: 'none',
+  },
+  '&.is-pressed': {
+    textDecoration: 'none',
+  },
+  '&.is-focused': {
+    textDecoration: 'none',
+    outline: 'none',
+    'span.link-select-field-placeholder': {
+      textDecoration: 'underline',
+    },
+    'span.material-symbols-outlined': {
+      textDecoration: 'none',
+    },
   },
 };
 
@@ -676,6 +698,7 @@ const buttons = {
   aiChat,
   paginationMenu,
   ButtonInputGroupContentRight,
+  selectLink,
 };
 
 export default buttons;
