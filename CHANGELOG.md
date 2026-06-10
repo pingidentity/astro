@@ -1,3 +1,13 @@
+## 2.200.0-alpha.0 (2026-06-10)
+
+### 🚀 Features
+
+- [UXE-8295] Update LinkSelectField to match Onyx specs
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.199.1-alpha.0 (2026-06-05)
 
 ### 🩹 Fixes
