@@ -27,7 +27,7 @@ const badgeStyles = {
   blueText: '#155CBA',
   greyText: '#FFFFFF',
 };
-const linkSelectFieldWidth = '12em';
+const linkSelectFieldWidth = '200px';
 const calendarIconSize = 'sm' as IconSize;
 const badgeTextFontSize = '75%';
 const navBarIconSize = '20px' as IconSize;

@@ -185,6 +185,19 @@ const stepperTabContentHeader = {
   fontWeight: 3,
 };
 
+const label = {
+  ...wordWrap,
+  fontSize: 'sm',
+  color: 'text.secondary',
+  fontFamily: 'standard',
+  fontWeight: 1,
+};
+
+const linkSelectFieldLabel = {
+  ...label,
+  color: 'active',
+};
+
 export const text = {
   base,
   bodyStrong,
@@ -249,13 +262,7 @@ export const text = {
     color: 'text.secondary',
     fontFamily: 'standard',
   },
-  label: {
-    ...wordWrap,
-    fontSize: 'sm',
-    color: 'text.secondary',
-    fontFamily: 'standard',
-    fontWeight: 1,
-  },
+  label,
   listTitle: {
     ...wordWrap,
     fontSize: 'md',
@@ -331,4 +338,5 @@ export const text = {
   },
   stepperTabContent,
   stepperTabContentHeader,
+  linkSelectFieldLabel,
 };

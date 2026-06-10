@@ -118,6 +118,10 @@ const modalTitle = {
   lineHeight: '2rem',
 };
 
+const label = {
+  fontSize: fontSizes.label,
+};
+
 export const text = {
   base: {
     lineHeight: 'body',
@@ -242,4 +246,9 @@ export const text = {
   },
   stepperTabContent,
   stepperTabContentHeader,
+  label,
+  linkSelectFieldLabel: {
+    ...label,
+    color: astroTokens.color.font.link,
+  },
 };

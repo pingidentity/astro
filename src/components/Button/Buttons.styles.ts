@@ -220,6 +220,17 @@ export const link = {
   },
 };
 
+export const selectLink = {
+  ...link,
+  textDecoration: 'none',
+  '&.is-hovered': {
+    textDecoration: 'none',
+  },
+  '&.is-pressed': {
+    textDecoration: 'none',
+  },
+};
+
 const listBoxLink = {
   ...link,
 };
@@ -419,4 +430,5 @@ export default {
   withIcon,
   filter,
   searchNavTabLabel: tabLabelButton,
+  selectLink,
 };

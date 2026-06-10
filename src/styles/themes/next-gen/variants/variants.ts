@@ -148,34 +148,32 @@ const modal = {
 
 const listBox = {
   container: {
-    pl: 'sm',
-    pr: 0,
-    py: 'xs',
+    p: astroTokens.spacing.sm,
   },
   option: {
-    py: '.75rem',
-    pl: '.75rem',
-    pr: 'md',
-    mr: 'sm',
+    py: astroTokens.spacing['md-s'],
+    pl: astroTokens.spacing['md-s'],
+    pr: astroTokens.spacing.md,
     justifyContent: 'space-between',
-    borderRadius: '4px',
+    borderRadius: astroTokens.radius.md,
     lineHeight: 'body',
     color: 'gray-700',
     '&.is-focused': {
       color: 'font.hover',
       bg: 'gray-100',
-      borderRadius: '4px',
+      borderRadius: astroTokens.radius.md,
     },
     '&.is-focus-visible': {
       boxShadow: 'inset 0 0 0 1px #1a73e8',
-      borderRadius: '4px',
+      borderRadius: astroTokens.radius.md,
       zIndex: 1,
     },
     '&.is-selected': {
+      fontWeight: '0',
       color: 'black',
       bg: 'lightblue',
       pl: '.75rem',
-      borderRadius: '4px',
+      borderRadius: astroTokens.radius.md,
       '&.is-focused': {
         color: 'text.primary',
       },
@@ -188,7 +186,7 @@ const listBox = {
       bg: 'lightblue',
     },
     '&.is-condensed': {
-      pl: 'md',
+      pl: astroTokens.spacing.md,
       bg: 'backgroundBase',
       color: 'gray-700',
       '&.is-selected': {

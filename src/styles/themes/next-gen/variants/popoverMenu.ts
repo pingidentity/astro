@@ -3,8 +3,11 @@ import { astroTokens } from '@pingux/onyx-tokens';
 const container = {
   minWidth: '150px',
   maxWidth: '260px',
-  boxShadow: '0px 8px 16px 0px rgba(0, 0, 0, 0.176)',
+  boxShadow: '0px 8px 16px 0px rgba(0, 0, 0, 0.18)',
   transition: 'opacity 200ms ease',
+  border: '1px solid',
+  borderColor: astroTokens.color.common.border,
+  borderRadius: astroTokens.radius.md,
   '&.animate': {
     opacity: 0,
   },

@@ -1,3 +1,43 @@
+## 2.200.0-alpha.0 (2026-06-10)
+
+### 🚀 Features
+
+- [UXE-8295] Update LinkSelectField to match Onyx specs
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.199.1-alpha.0 (2026-06-05)
+
+### 🩹 Fixes
+
+- [UXE-8342] swap @material-symbols/font-400 to material-symbols package, set optical size to 24
+
+### ❤️  Thank You
+
+- Elijah Cooper
+
+## 2.199.0-alpha.0 (2026-06-05)
+
+### 🚀 Features
+
+- [UXE-8325] Prep Onyx Token for open source
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.198.8-alpha.0 (2026-06-05)
+
+### 🩹 Fixes
+
+- update git add command
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.198.5 (2026-06-04)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

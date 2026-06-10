@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { VisuallyHidden } from 'react-aria';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
@@ -8,9 +7,15 @@ import { Box, Button, Icon, Loader, Text } from '../..';
 import { useGetTheme, usePropWarning, useSelectField } from '../../hooks';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import {
+  ariaAttributesBasePropTypes,
+  getAriaAttributeProps,
+} from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+import {
+  statusDefaultProp,
+  statusPropTypes,
+} from '../../utils/docUtils/statusProp';
 import SelectFieldBase from '../SelectFieldBase';
 
 const displayName = 'LinkSelectField';
@@ -18,27 +23,36 @@ const displayName = 'LinkSelectField';
 const LinkSelectField = forwardRef((props, ref) => {
   const {
     placeholder,
-    isDisabled, status, helperText,
+    isDisabled,
+    status,
+    helperText,
     iconProps,
     hasInlineLoader,
     popoverWidth,
     triggerProps,
   } = props;
   const { ariaProps } = getAriaAttributeProps(props);
-  const { linkSelectFieldWidth, themeState } = useGetTheme();
-  const { isOnyx } = themeState;
+  const {
+    themeState: { isOnyx },
+    linkSelectFieldWidth,
+    linkSelectFieldIcon,
+    icons: { MenuDown },
+  } = useGetTheme();
 
   const helperTextId = uuid();
 
   usePropWarning(props, 'disabled', 'isDisabled');
-  const { ...selectFieldProps } = useSelectField({
-    listboxStyle: {
-      width: popoverWidth || linkSelectFieldWidth,
+  const { ...selectFieldProps } = useSelectField(
+    {
+      listboxStyle: {
+        width: popoverWidth || linkSelectFieldWidth,
+      },
+      ...props,
+      // Need this for not applying is-default class
+      status: status === statuses.DEFAULT ? null : status,
     },
-    ...props,
-    // Need this for not applying is-default class
-    status: status === statuses.DEFAULT ? null : status,
-  }, ref);
+    ref,
+  );
   const {
     fieldControlInputProps,
     isLoadingInitial,
@@ -51,7 +65,7 @@ const LinkSelectField = forwardRef((props, ref) => {
     <Button
       className={fieldControlInputProps.className}
       ref={triggerRef}
-      variant="link"
+      variant="selectLink"
       tabIndex={isDisabled ? -1 : 0}
       {...getPendoID(displayName)}
       {...triggerProps}
@@ -59,32 +73,37 @@ const LinkSelectField = forwardRef((props, ref) => {
       {...ariaProps}
       aria-describedby={helperText && helperTextId}
     >
-      <Text variant="label" color={isOnyx ? 'font.link' : 'active'}>{placeholder}</Text>
+      <Text
+        variant="linkSelectFieldLabel"
+        className="link-select-field-placeholder"
+      >
+        {placeholder}
+      </Text>
       <Box isRow>
-        {hasInlineLoader && isLoadingInitial && <Loader variant="loader.withinInput" />}
+        {hasInlineLoader && isLoadingInitial && (
+          <Loader variant="loader.withinInput" />
+        )}
         <Box as="span" aria-hidden="true" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
-            title={{ name: 'Menu Down Icon' }}
+            title={{ name: '' }}
+            color={isOnyx ? 'font.link' : 'active'}
+            size={linkSelectFieldIcon}
             {...iconProps}
-            sx={
-              state.isOpen
-                ? { transform: 'rotate(180deg)' }
-                : null
-            }
+            sx={{
+              transform: state.isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 150ms ease',
+              ...iconProps?.sx,
+            }}
           />
         </Box>
       </Box>
-      <VisuallyHidden aria-live="polite" id={helperTextId}>{helperText}</VisuallyHidden>
+      <VisuallyHidden aria-live="polite" id={helperTextId}>
+        {helperText}
+      </VisuallyHidden>
     </Button>
   );
-  return (
-    <SelectFieldBase
-      {...props}
-      {...selectFieldProps}
-      trigger={trigger}
-    />
-  );
+  return <SelectFieldBase {...props} {...selectFieldProps} trigger={trigger} />;
 });
 
 LinkSelectField.propTypes = {

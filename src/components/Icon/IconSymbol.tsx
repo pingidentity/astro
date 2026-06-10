@@ -28,7 +28,7 @@ const IconSymbol = forwardRef<HTMLElement, IconProps>((props, ref) => {
         ...rest.sx,
         color,
         fontSize: sizeProps.size,
-        fontVariationSettings: hasFill ? "'FILL' 1" : "'FILL' 0",
+        fontVariationSettings: hasFill ? "'FILL' 1, 'opsz' 24" : "'FILL' 0, 'opsz' 24",
       }}
     >
       {icon as string}

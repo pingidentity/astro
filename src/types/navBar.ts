@@ -1,5 +1,5 @@
 import React, { Key } from 'react';
-import type { MaterialSymbol } from '@material-symbols/font-400';
+import type { MaterialSymbol } from 'material-symbols';
 import { ThemeUICSSObject } from 'theme-ui';
 
 import { IconProps, IconTypeExtended } from './icon';

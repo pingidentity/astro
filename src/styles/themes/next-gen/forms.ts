@@ -32,10 +32,9 @@ export const select = {
     color: 'text.primary',
   },
   arrow: {
-    width: '20px',
-    height: '20px',
     alignItems: 'center',
     justifyContent: 'center',
+    ml: 'xs',
     '& > svg': {
       minWidth: tShirtSizes.xs,
       width: tShirtSizes.xs,
