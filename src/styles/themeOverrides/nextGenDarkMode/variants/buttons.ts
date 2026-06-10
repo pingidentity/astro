@@ -244,7 +244,7 @@ const buttons = {
     },
   },
   link: {
-    color: astroTokensDark.color.blue[400],
+    color: astroTokensDark.color.font.link,
     '&.is-pressed': {
       textDecoration: 'underline',
       outline: 'none',

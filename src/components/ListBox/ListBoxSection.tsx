@@ -43,7 +43,7 @@ const ListBoxSection = (props: ListBoxSectionProps) => {
         style={layoutInfoToStyle(header.layoutInfo as LayoutInfo, direction)}
       >
         {item.key !== state.collection.getFirstKey()
-          && <Separator mt="0px" />}
+          && <Separator />}
         {item.rendered
           && (
           <Box
