@@ -26,7 +26,7 @@
     "coverage": "npm test --coverage",
     "coverage-ci": "npm test --coverage --ci",
     "coverage-jenkins": "npm coverage-ci --maxWorkers=25%",
-    "demo": "rm -rf ./demo && storybook build -o demo",
+    "demo": "rm -rf ./demo && storybook build --stats-json -o demo",
     "start": " storybook dev -p 6006",
     "storybook": "npm start",
     "test": "jest",
