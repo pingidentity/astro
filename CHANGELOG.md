@@ -1,3 +1,13 @@
+## 2.200.1-alpha.0 (2026-06-12)
+
+### 🩹 Fixes
+
+- [UXE-8396] Update chromatic script for Turbosnap
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.200.0 (2026-06-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
