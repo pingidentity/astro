@@ -1293,3 +1293,25 @@ universalFieldComponentTests({
   testLabel: defaultProps.label,
   componentType: 'MultivaluesField',
 });
+
+test('in condensed mode, arrow icon SVG has aria-hidden="true" to be hidden from screen readers', () => {
+  getComponent({ mode: 'condensed' });
+  // The presentational arrow icon (MenuDown/MenuUp) in the condensed mode trigger
+  // button receives aria-hidden="true" via props, making it invisible to screen
+  // readers. Scope the query to the trigger button (tabIndex=-1) to avoid
+  // accidentally matching any other aria-hidden SVG added in future.
+  const arrowIconSvg = document.querySelector('button[tabindex="-1"] svg[aria-hidden="true"]');
+  expect(arrowIconSvg).toBeInTheDocument();
+  expect(arrowIconSvg).toHaveAttribute('aria-hidden', 'true');
+});
+
+test('in condensed mode, arrow icon SVG has an empty title element so no tooltip is shown', () => {
+  getComponent({ mode: 'condensed' });
+  // title={{ name: '' }} renders an empty SVG <title> element, suppressing
+  // the browser-native tooltip that would otherwise appear on hover.
+  const arrowIconSvg = document.querySelector('button[tabindex="-1"] svg[aria-hidden="true"]');
+  expect(arrowIconSvg).toBeInTheDocument();
+  const titleElement = arrowIconSvg.querySelector('title');
+  expect(titleElement).toBeInTheDocument();
+  expect(titleElement).toHaveTextContent('');
+});

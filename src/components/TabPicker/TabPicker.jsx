@@ -139,7 +139,8 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
           <Icon
             color={isTabFocused || classNames.includes('is-hovered') ? 'active' : 'neutral.40'}
             icon={isOpen ? ArrowDropUpIcon : ArrowDropDownIcon}
-            title={{ name: isOpen ? 'Arrow Drop Up Icon' : 'Arrow Drop Down Icon' }}
+            title={{ name: '' }}
+            aria-hidden="true"
           />
         </Box>
       </Pressable>

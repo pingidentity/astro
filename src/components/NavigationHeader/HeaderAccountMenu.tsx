@@ -26,7 +26,7 @@ const HeaderAccountMenu = (props: HeaderAccountMenuProps) => {
         <Button variant="navigationHeader.accountButton" {...buttonProps}>
           <Box isRow alignItems="center" gap="xs">
             <Avatar src={image} alt="Avatar" aria-label="Avatar" {...avatarProps} />
-            <Icon icon={MenuDown} size="16px" title={{ name: 'Menu Up Icon' }} color="text.primary" />
+            <Icon icon={MenuDown} size="16px" title={{ name: '' }} aria-hidden="true" color="text.primary" />
           </Box>
         </Button>
         <Menu p="sm" gap="sm" minWidth="270px">

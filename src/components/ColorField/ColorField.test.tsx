@@ -79,13 +79,22 @@ test('renders detailed button preview mode correctly', () => {
   expect(screen.getByText(testColor1.toLocaleUpperCase())).toBeInTheDocument();
 });
 
-test('renders MenuUp / MenuDown icon correctly', async () => {
+test('renders MenuUp / MenuDown icon with aria-hidden="true" so screen readers skip it', async () => {
   getComponent({ mode: 'detailed-button-preview', value: testColor1 });
 
   const button = screen.getByRole('button');
-  await userEvent.click(button);
-  expect(screen.getByTitle('menu-up')).toBeInTheDocument();
+
+  // Before opening: the closed-state icon (MenuDown) is rendered inside a
+  // role="presentation" box and must carry aria-hidden="true".
+  const closedIcon = document.querySelector('[role="presentation"] svg[aria-hidden="true"]');
+  expect(closedIcon).toBeInTheDocument();
+  expect(closedIcon).toHaveAttribute('aria-hidden', 'true');
 
   await userEvent.click(button);
-  expect(screen.getByTitle('menu-down')).toBeInTheDocument();
+
+  // After opening: the open-state icon (MenuUp) replaces MenuDown and must also
+  // carry aria-hidden="true".
+  const openIcon = document.querySelector('[role="presentation"] svg[aria-hidden="true"]');
+  expect(openIcon).toBeInTheDocument();
+  expect(openIcon).toHaveAttribute('aria-hidden', 'true');
 });

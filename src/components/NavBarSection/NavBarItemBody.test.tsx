@@ -14,6 +14,7 @@ const TEXT = 'text';
 const data = [
   {
     key: 'Dashboard',
+    heading: 'Dashboard',
     children: [
       'Users',
       'Group',

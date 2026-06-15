@@ -68,11 +68,12 @@ const SelectFieldBase = forwardRef<HTMLSelectElement, SelectFieldBaseProps>((
   };
 
   const buttonRendered = !(hasClearButton && state.selectedKey) && (
-    <Box as="span" aria-hidden="true" variant="forms.select.arrow">
+    <Box as="span" role="presentation" variant="forms.select.arrow">
       <Icon
         icon={state.isOpen ? MenuUp : MenuDown}
         title={{ name: '' }}
         size={isOnyx ? 'sm' : 'md'}
+        aria-hidden="true"
       />
     </Box>
   );

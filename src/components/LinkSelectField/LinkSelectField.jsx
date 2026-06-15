@@ -83,12 +83,13 @@ const LinkSelectField = forwardRef((props, ref) => {
         {hasInlineLoader && isLoadingInitial && (
           <Loader variant="loader.withinInput" />
         )}
-        <Box as="span" aria-hidden="true" variant="forms.select.arrow">
+        <Box as="span" role="presentation" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
             title={{ name: '' }}
             color={isOnyx ? 'font.link' : 'active'}
             size={linkSelectFieldIcon}
+            aria-hidden="true"
             {...iconProps}
             sx={{
               transform: state.isOpen ? 'rotate(180deg)' : 'rotate(0deg)',

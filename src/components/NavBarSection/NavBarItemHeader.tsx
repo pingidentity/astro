@@ -87,7 +87,8 @@ const NavBarSectionItemHeader = ({ item }: NavBarSectionItemHeaderProps) => {
             color: getIconColor(),
             fill: getIconColor(),
           }}
-          title={{ name: isExpanded ? 'Menu up' : 'Menu down' }}
+          title={{ name: '' }}
+          aria-hidden="true"
         />
       </Box>
     </Box>
