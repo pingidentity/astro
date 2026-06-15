@@ -1,3 +1,13 @@
+## 2.200.2-alpha.0 (2026-06-15)
+
+### 🩹 Fixes
+
+- [UXE-8339] Update TextAreaField border
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.200.1-alpha.0 (2026-06-12)
 
 ### 🩹 Fixes
