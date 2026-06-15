@@ -29,7 +29,8 @@ const CustomPopoverMenu = () => {
             size="xs"
             color="neutral.30"
             sx={isOpen ? { transform: 'rotate(180deg)' } : null}
-            title={{ name: 'Menu Down Icon' }}
+            title={{ name: '' }}
+            aria-hidden="true"
           />
         </IconButton>
         <Menu>

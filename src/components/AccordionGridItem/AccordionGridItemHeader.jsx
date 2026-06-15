@@ -101,7 +101,13 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
           hasCaret
           && (
             <Box isRow alignItems="center" sx={{ mr: '0px' }}>
-              <Icon color="text.primary" icon={isSelected ? upArrow : downArrow} {...(isOnyx && { size: 'sm' })} title={{ name: isSelected ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+              <Icon
+                color="text.primary"
+                icon={isSelected ? upArrow : downArrow}
+                {...(isOnyx && { size: 'sm' })}
+                aria-hidden="true"
+                title={{ name: '' }}
+              />
             </Box>
           )
         }

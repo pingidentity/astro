@@ -80,8 +80,8 @@ const NavSideBarSectionHeader = (props: NavSideBarSectionHeaderProps) => {
             size={navBarIconSize}
             variant={variant}
             mr="0"
-            title={{ name: isExpanded ? 'Menu up' : 'Menu down' }}
-            aria-label={isExpanded ? 'menu up' : 'menu down'}
+            title={{ name: '' }}
+            aria-hidden="true"
           />
         </Box>
       </Box>

@@ -284,7 +284,7 @@ const CustomPopover = () => {
           <Text color="neutral.30" fontSize="md" fontWeight={1} mx={7} variant="textEllipsis">
             Explore
           </Text>
-          <Icon icon={state.isOpen ? MenuUpIcon : MenuDownIcon} mr="sm" size="sm" title={{ name: state.isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }} />
+          <Icon icon={state.isOpen ? MenuUpIcon : MenuDownIcon} mr="sm" size="sm" title={{ name: '' }} aria-hidden="true" />
         </Box>
       </Button>
       <PopoverContainer

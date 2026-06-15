@@ -325,11 +325,15 @@ const TableColumnHeader = (props: DataTableColumnHeader) => {
 
   const columnProps = column.props;
   const iconSize = isOnyx ? 16 : 24;
+  // Sort-direction icons are purely presentational; aria-sort on the <th> conveys
+  // sort state to screen readers. Pass aria-hidden="true" to remove the SVG from
+  // the accessibility tree, and title={{ name: '' }} to suppress the browser-native
+  // hover tooltip that the MDI icon package would otherwise generate.
   const arrowIcon = state.sortDescriptor?.direction === 'ascending' && column.key === state.sortDescriptor?.column
     ? (
-      <Icon size={iconSize} icon={Ascending} title={{ name: 'Menu Up Icon' }} />
+      <Icon size={iconSize} icon={Ascending} aria-hidden="true" title={{ name: '' }} />
     ) : (
-      <Icon size={iconSize} icon={Descending} color="active" title={{ name: 'Menu Down Icon' }} />
+      <Icon size={iconSize} icon={Descending} color="active" aria-hidden="true" title={{ name: '' }} />
     );
   const allProps = [columnHeaderProps];
 
