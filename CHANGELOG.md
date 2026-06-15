@@ -1,3 +1,13 @@
+## 2.200.3-alpha.0 (2026-06-15)
+
+### 🩹 Fixes
+
+- [UIP-8230] Presentational menu arrow icons should have no aria label applied
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.200.2-alpha.0 (2026-06-15)
 
 ### 🩹 Fixes
