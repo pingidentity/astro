@@ -1,3 +1,13 @@
+## 2.200.4-alpha.0 (2026-06-15)
+
+### 🩹 Fixes
+
+- [UXE-8340] Center Icons in IconWrapper
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.200.3-alpha.0 (2026-06-15)
 
 ### 🩹 Fixes
