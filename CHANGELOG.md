@@ -1,3 +1,13 @@
+## 2.201.0-alpha.0 (2026-06-16)
+
+### 🚀 Features
+
+- [UXE-8395] Publish onyx-tokens to NPM
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.200.5 (2026-06-16)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
