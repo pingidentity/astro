@@ -262,9 +262,10 @@ const EnvironmentBreadcrumb = forwardRef<HTMLElement,
           {selectedItem}
           <Icon
             icon={popoverState.isOpen ? MenuUp : MenuDown}
-            title={{ name: popoverState.isOpen ? 'Arrow Drop Up Icon' : 'Arrow Drop Down Icon' }}
+            title={{ name: '' }}
             size="xs"
             ml="xs"
+            aria-hidden="true"
           />
         </Button>
         <PopoverContainer

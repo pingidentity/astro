@@ -1,4 +1,12 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { DismissButton, FocusScope, useOverlayPosition } from 'react-aria';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
@@ -6,7 +14,15 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
-import { Badge, Box, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+import {
+  Badge,
+  Box,
+  Loader,
+  PopoverContainer,
+  ScrollBox,
+  Text,
+  TextField,
+} from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { useGetTheme, useInputLoader, usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -14,9 +30,13 @@ import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
-import BadgeLabelTooltip from './BadgeLabelTooltip';
+import {
+  statusDefaultProp,
+  statusPropTypes,
+} from '../../utils/docUtils/statusProp';
 import ListBox from '../ListBox';
+
+import BadgeLabelTooltip from './BadgeLabelTooltip';
 
 const DefaultMultivaluesField = forwardRef((props, ref) => {
   const { items: initialItems, ...otherProps } = props;
@@ -73,14 +93,17 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   }, [initialItems, mode]);
 
   const toggleItems = keys => {
-    setItems(initialItems.filter(item => !Array.from(keys).includes(item.key)));
+    setItems(
+      initialItems.filter(item => !Array.from(keys).includes(item.key)),
+    );
     if (onSelectionChange) onSelectionChange(keys);
   };
 
   const { contains } = useFilter({ sensitivity: 'base' });
 
   const defaultFilter = nodes => {
-    const arr = Array.from(nodes).filter(item => contains(item.textValue, filterString));
+    const arr = Array.from(nodes).filter(item => contains(item.textValue, filterString),
+    );
     return arr;
   };
 
@@ -101,7 +124,10 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   const close = () => setIsOpen(false);
 
-  const { isLoading } = useInputLoader({ loadingState, inputValue: filterString });
+  const { isLoading } = useInputLoader({
+    loadingState,
+    inputValue: filterString,
+  });
 
   const closeBadgeRefs = useRef([]);
   const inputWrapperRef = useRef();
@@ -161,16 +187,18 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   useEffect(() => {
     if (defaultSelectedKeys) {
       selectionManager.setSelectedKeys(defaultSelectedKeys);
-      setItems(prevItems => prevItems.filter(item => !Array.from(defaultSelectedKeys)
-        .includes(item.key)));
+      setItems(prevItems => prevItems.filter(
+        item => !Array.from(defaultSelectedKeys).includes(item.key),
+      ),
+      );
     }
   }, []);
 
   useEffect(() => {
     if (selectedKeys) {
       selectionManager.setSelectedKeys(selectedKeys);
-      setItems(prevItems => prevItems.filter(item => !Array.from(selectedKeys)
-        .includes(item.key)));
+      setItems(prevItems => prevItems.filter(item => !Array.from(selectedKeys).includes(item.key)),
+      );
     }
   }, []);
 
@@ -187,9 +215,10 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     if (state.selectionManager.isSelected(key)) {
       return;
     }
-    selectionManager.setSelectedKeys(
-      [...Array.from(selectionManager.state.selectedKeys), key],
-    );
+    selectionManager.setSelectedKeys([
+      ...Array.from(selectionManager.state.selectedKeys),
+      key,
+    ]);
     setCustomItems([...customItems, { id: key, key, name: key }]);
     setFilterString('');
   };
@@ -226,7 +255,9 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
           }
         } else if (hasCustomValue && !selectionManager.focusedKey) {
           const key = e.target.value;
-          if (key === '') { return; }
+          if (key === '') {
+            return;
+          }
           addNewBadgeFromInput(e.target.value);
         } else if (hasCustomValue && filteredItems.length === 1) {
           selectTheOnlyFilteredItem();
@@ -274,7 +305,8 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     if (activeBadgesKeys.length > 1) {
       const badgeIndex = activeBadgesKeys.findIndex(item => item === key);
       const nextFocusBadgeIndex = badgeIndex === activeBadgesKeys.length - 1
-        ? badgeIndex - 1 : badgeIndex;
+        ? badgeIndex - 1
+        : badgeIndex;
       closeBadgeRefs.current[nextFocusBadgeIndex].focus();
     } else {
       inputRef.current.focus();
@@ -314,53 +346,45 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     );
   };
 
-  const readOnlyInputEntry = (
-    isReadOnly && (readOnlyKeys.length
+  const readOnlyInputEntry = isReadOnly
+    && (readOnlyKeys.length
       ? readOnlyKeys.map(key => {
-        const item = [...initialItems, ...customItems].find(el => el.key === key);
+        const item = [...initialItems, ...customItems].find(
+          el => el.key === key,
+        );
         if (item) {
-          return (readOnlyTextItem(item.key, item.name));
+          return readOnlyTextItem(item.key, item.name);
         }
         return null;
       })
-      : (initialItems.map(item => {
-        return (readOnlyTextItem(item.key, item.name)
-        );
-      })
-      )
-    )
-  );
+      : initialItems.map(item => {
+        return readOnlyTextItem(item.key, item.name);
+      }));
 
-  const onyxReadOnlyInputEntry = (
-    isReadOnly && (
+  const onyxReadOnlyInputEntry = isReadOnly && (
     <Box isRow gap="xs">
       {initialItems.map(item => {
-        return (
-          readOnlyFieldBadge(item.key, item.name)
-        );
+        return readOnlyFieldBadge(item.key, item.name);
       })}
     </Box>
-    )
   );
 
-  const readOnlyItems = (
-    !isReadOnly && readOnlyKeys
-      .map(key => {
-        const item = initialItems.find(el => el.key === key);
-        if (item) {
-          return (
-            <Badge
-              key={item.key}
-              label={item.name}
-              variant="readOnlyBadge"
-              as="li"
-              tabIndex={0}
-            />
-          );
-        }
-        return null;
-      })
-  );
+  const readOnlyItems = !isReadOnly
+    && readOnlyKeys.map(key => {
+      const item = initialItems.find(el => el.key === key);
+      if (item) {
+        return (
+          <Badge
+            key={item.key}
+            label={item.name}
+            variant="readOnlyBadge"
+            as="li"
+            tabIndex={0}
+          />
+        );
+      }
+      return null;
+    });
 
   const multivaluesFieldBadge = (item, index) => (
     <BadgeLabelTooltip
@@ -374,16 +398,15 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   const selectedItems = (
     <>
-      {Array.from(selectionManager.selectedKeys)
-        .map((key, i) => {
-          const item = [...initialItems, ...customItems].find(el => el.key === key);
-          if (item) {
-            return (
-              multivaluesFieldBadge(item, i)
-            );
-          }
-          return null;
-        })}
+      {Array.from(selectionManager.selectedKeys).map((key, i) => {
+        const item = [...initialItems, ...customItems].find(
+          el => el.key === key,
+        );
+        if (item) {
+          return multivaluesFieldBadge(item, i);
+        }
+        return null;
+      })}
     </>
   );
 
@@ -419,9 +442,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
   // is because there are tests that break if an empty visually hidden is rendered in the TextField
   const EmptyVisuallyHidden = () => {
     return (
-      <VisuallyHidden id="emptyKeysState">
-        Nothing Selected
-      </VisuallyHidden>
+      <VisuallyHidden id="emptyKeysState">Nothing Selected</VisuallyHidden>
     );
   };
 
@@ -475,8 +496,9 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
         // Render loader after delay if filtering or loading
-        isLoading && (loadingState === loadingStates.LOADING)
-        && <Loader variant="loader.withinInput" />
+        isLoading && loadingState === loadingStates.LOADING && (
+          <Loader variant="loader.withinInput" />
+        )
       }
     </Box>
   );
@@ -499,31 +521,30 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
           }}
           onKeyDown={keyDown}
           onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-          aria-describedby={selectionManager.selectedKeys.size > 0 ? 'selectedKeysState' : 'emptyKeysState'}
+          aria-describedby={
+            selectionManager.selectedKeys.size > 0
+              ? 'selectedKeysState'
+              : 'emptyKeysState'
+          }
           slots={{
             inContainer: loader,
-            beforeInput:
-  <>
-    {
-      readOnlyItems
-      && (
-        <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
-          {readOnlyItems}
-        </Box>
-      )
-    }
-    {' '}
-    {
-      selectedItems
-      && (
-        <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
-          {selectedItems}
-        </Box>
-      )
-    }
-    {isOnyx ? onyxReadOnlyInputEntry : readOnlyInputEntry}
-    {selectionManager.selectedKeys.size > 0 && visuallyHidden}
-  </>,
+            beforeInput: (
+              <>
+                {readOnlyItems && (
+                  <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
+                    {readOnlyItems}
+                  </Box>
+                )}
+                {' '}
+                {selectedItems && (
+                  <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
+                    {selectedItems}
+                  </Box>
+                )}
+                {isOnyx ? onyxReadOnlyInputEntry : readOnlyInputEntry}
+                {selectionManager.selectedKeys.size > 0 && visuallyHidden}
+              </>
+            ),
           }}
           value={filterString}
           helperText={helperText}
@@ -615,10 +636,10 @@ DefaultMultivaluesField.propTypes = {
    */
   onKeyDown: PropTypes.func,
   /**
-  * Handler that is called when a key is released.
-  *
-  * `(e: KeyboardEvent) => void`
-  */
+   * Handler that is called when a key is released.
+   *
+   * `(e: KeyboardEvent) => void`
+   */
   onKeyUp: PropTypes.func,
   /**
    * Method that is called when the open state of the menu changes.
@@ -643,7 +664,11 @@ DefaultMultivaluesField.propTypes = {
   // /** Props object that is spread directly into the ScrollBox element. */
   /** @ignore */
   scrollBoxProps: PropTypes.shape({
-    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
+    maxHeight: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.number,
+    ]),
   }),
   ...statusPropTypes,
   ...ariaAttributesBasePropTypes,

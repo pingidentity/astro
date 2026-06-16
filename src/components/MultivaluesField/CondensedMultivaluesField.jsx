@@ -1,5 +1,17 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { DismissButton, FocusScope, mergeProps, useOverlayPosition } from 'react-aria';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import {
+  DismissButton,
+  FocusScope,
+  mergeProps,
+  useOverlayPosition,
+} from 'react-aria';
 import { useFilter } from '@react-aria/i18n';
 import { useFocusWithin } from '@react-aria/interactions';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
@@ -7,7 +19,16 @@ import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
 import PropTypes from 'prop-types';
 
-import { Box, Button, Icon, Loader, PopoverContainer, ScrollBox, Text, TextField } from '../..';
+import {
+  Box,
+  Button,
+  Icon,
+  Loader,
+  PopoverContainer,
+  ScrollBox,
+  Text,
+  TextField,
+} from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { useGetTheme, useInputLoader, usePropWarning } from '../../hooks';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
@@ -15,7 +36,10 @@ import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import { isIterableProp } from '../../utils/devUtils/props/isIterable';
 import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+import {
+  statusDefaultProp,
+  statusPropTypes,
+} from '../../utils/docUtils/statusProp';
 import ListBox from '../ListBox';
 
 const CondensedMultivaluesField = forwardRef((props, ref) => {
@@ -67,13 +91,18 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const inputRef = useRef();
   const buttonRef = useRef();
 
-  const { icons, themeState: { isOnyx } } = useGetTheme();
   const {
-    MenuDown,
-    MenuUp,
-  } = icons;
-  const { focusWithinProps } = useFocusWithin({ onFocusWithinChange: setFocusWithin });
-  const { isLoading } = useInputLoader({ loadingState, inputValue: filterString });
+    icons,
+    themeState: { isOnyx },
+  } = useGetTheme();
+  const { MenuDown, MenuUp } = icons;
+  const { focusWithinProps } = useFocusWithin({
+    onFocusWithinChange: setFocusWithin,
+  });
+  const { isLoading } = useInputLoader({
+    loadingState,
+    inputValue: filterString,
+  });
 
   const toggleItems = keys => {
     if (onSelectionChange) onSelectionChange(keys);
@@ -91,10 +120,12 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
       const childNodes = Array.from(nodeItem.childNodes).filter(f);
       // Don't return sections without children, see UIP-5951
-      return childNodes.length !== 0 && {
-        ...nodeItem,
-        childNodes,
-      };
+      return (
+        childNodes.length !== 0 && {
+          ...nodeItem,
+          childNodes,
+        }
+      );
     });
 
     // we are filtering null items here since we were not able to filter them in previous function
@@ -223,8 +254,8 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
     if (
       inputWrapperRef.current?.contains(relatedTarget)
-        || popoverRef.current?.contains(relatedTarget)
-        || buttonRef.current === relatedTarget
+      || popoverRef.current?.contains(relatedTarget)
+      || buttonRef.current === relatedTarget
     ) {
       return;
     }
@@ -236,21 +267,22 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const arrayItems = Array.from(items);
 
-  const itemCount = arrayItems.reduce((count, obj) => count + (
-    obj.children ? obj.children.length : 1
-  ), 0);
+  const itemCount = arrayItems.reduce(
+    (count, obj) => count + (obj.children ? obj.children.length : 1),
+    0,
+  );
 
   const selectedKeysSize = selectionManager.selectedKeys.size;
 
-  const selectedOptionText = selectedOptionTextProp || `${itemCount === selectedKeysSize ? 'All' : selectionManager.state.selectedKeys?.size} Selected`;
+  const selectedOptionText = selectedOptionTextProp
+    || `${
+      itemCount === selectedKeysSize
+        ? 'All'
+        : selectionManager.state.selectedKeys?.size
+    } Selected`;
 
-  const checkboxSelected = (
-    selectionManager.state.selectedKeys?.size !== 0
-  && (
-  <Text color="text.secondary">
-    {selectedOptionText}
-  </Text>
-  )
+  const checkboxSelected = selectionManager.state.selectedKeys?.size !== 0 && (
+    <Text color="text.secondary">{selectedOptionText}</Text>
   );
 
   useEffect(() => {
@@ -274,17 +306,17 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const listbox = (
     <FocusScope>
-      {(filterString === '' && !hasNoSelectAll) && (
-      <Button
-        onPress={handleSelection}
-        ref={buttonRef}
-        variant="listBoxLink"
-        mt="sm"
-        ml="14px"
-        sx={{ fontWeight: '400' }}
-      >
-        {selectionState}
-      </Button>
+      {filterString === '' && !hasNoSelectAll && (
+        <Button
+          onPress={handleSelection}
+          ref={buttonRef}
+          variant="listBoxLink"
+          mt="sm"
+          ml="14px"
+          sx={{ fontWeight: '400' }}
+        >
+          {selectionState}
+        </Button>
       )}
       <DismissButton onDismiss={close} />
       <ScrollBox {...scrollBoxProps}>
@@ -323,7 +355,9 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     );
   };
 
-  const placeholderText = (selectionManager.state.selectedKeys?.size === 0 ? (placeholder || 'Select') : '');
+  const placeholderText = selectionManager.state.selectedKeys?.size === 0
+    ? placeholder || 'Select'
+    : '';
 
   const inputProps = {
     ...customInputProps,
@@ -345,7 +379,10 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     wrapperProps: {
       ref: inputWrapperRef,
       variant: 'forms.input.multivaluesWrapper',
-      sx: isReadOnly && { boxShadow: 'inset 0 0 0 100px #e5e9f8', border: 'none' },
+      sx: isReadOnly && {
+        boxShadow: 'inset 0 0 0 100px #e5e9f8',
+        border: 'none',
+      },
     },
     status,
   };
@@ -362,12 +399,25 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const button = (
     <Box isRow variant="forms.comboBox.inputInContainerSlot">
       {
-      // Render loader after delay if filtering or loading
-      isLoading && (isOpen || loadingState === loadingStates.LOADING)
-      && <Loader variant="loader.withinInput" />
-    }
-      <Box as="button" variant="forms.comboBox.button" tabIndex={-1} onClick={handleButtonPress} sx={{ border: 'none' }} title={{ name: '' }}>
-        <Icon icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })}  aria-hidden="true" />
+        // Render loader after delay if filtering or loading
+        isLoading && (isOpen || loadingState === loadingStates.LOADING) && (
+          <Loader variant="loader.withinInput" />
+        )
+      }
+      <Box
+        as="button"
+        variant="forms.comboBox.button"
+        tabIndex={-1}
+        onClick={handleButtonPress}
+        sx={{ border: 'none' }}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+      >
+        <Icon
+          icon={isOpen ? MenuUp : MenuDown}
+          {...(isOnyx && { size: 'sm' })}
+          title={{ name: '' }}
+          aria-hidden="true"
+        />
       </Box>
     </Box>
   );
@@ -377,7 +427,9 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
       <Box {...mergeProps(containerProps, focusWithinProps)}>
         <TextField
           onBlur={e => {
-            const blurIntoPopover = popoverRef.current?.contains(e.relatedTarget);
+            const blurIntoPopover = popoverRef.current?.contains(
+              e.relatedTarget,
+            );
             if (blurIntoPopover) {
               return;
             }
@@ -396,14 +448,19 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           }}
           onKeyDown={keyDown}
           onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
-          aria-describedby={selectionManager.selectedKeys.size > 0 ? 'selectedKeysState' : 'emptyKeysState'}
+          aria-describedby={
+            selectionManager.selectedKeys.size > 0
+              ? 'selectedKeysState'
+              : 'emptyKeysState'
+          }
           slots={{
             inContainer: button,
             beforeInput: (
               <>
-                { checkboxSelected}
+                {checkboxSelected}
                 {selectionManager.selectedKeys.size > 0 && visuallyHidden}
-              </>),
+              </>
+            ),
           }}
           value={filterString}
           helperText={helperText}
@@ -498,10 +555,10 @@ CondensedMultivaluesField.propTypes = {
    */
   onKeyDown: PropTypes.func,
   /**
-  * Handler that is called when a key is released.
-  *
-  * `(e: KeyboardEvent) => void`
-  */
+   * Handler that is called when a key is released.
+   *
+   * `(e: KeyboardEvent) => void`
+   */
   onKeyUp: PropTypes.func,
   /**
    * Method that is called when the open state of the menu changes.
@@ -526,7 +583,11 @@ CondensedMultivaluesField.propTypes = {
   // /** Props object that is spread directly into the ScrollBox element. */
   /** @ignore */
   scrollBoxProps: PropTypes.shape({
-    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
+    maxHeight: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.number,
+    ]),
   }),
   ...statusPropTypes,
   ...ariaAttributesBasePropTypes,

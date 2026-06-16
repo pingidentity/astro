@@ -329,15 +329,11 @@ export const universalFieldComponentTests = ({
       } else {
         await userEvent.hover(helpHintButton);
       }
-      if (componentType === 'DatePicker') {
-        await waitFor(() => {
-          expect(screen.queryAllByRole('presentation')[1]).toHaveAttribute('data-popover-placement', 'left');
-        }, { timeout: 100 });
-      } else {
-        await waitFor(() => {
-          expect(screen.queryByRole('presentation')).toHaveAttribute('data-popover-placement', 'left');
-        }, { timeout: 100 });
-      }
+      await waitFor(() => {
+        const presentationEls = screen.queryAllByRole('presentation');
+        const popover = presentationEls.find(el => el.hasAttribute('data-popover-placement'));
+        expect(popover).toHaveAttribute('data-popover-placement', 'left');
+      }, { timeout: 100 });
     });
 
     test('controlled component should have render correct value on submission', async () => {

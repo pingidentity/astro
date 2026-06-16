@@ -8,6 +8,12 @@ const circle = {
   },
 };
 
+const centered = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
 const iconWrapper = {
   xs: {
     borderRadius: '.25rem',
@@ -16,6 +22,7 @@ const iconWrapper = {
     height: sizes.avatar.xs,
     width: sizes.avatar.xs,
     fontSize: sizes.avatarFontSize.xs,
+    ...centered,
     ...circle,
   },
   sm: {
@@ -25,6 +32,7 @@ const iconWrapper = {
     height: sizes.avatar.sm,
     width: sizes.avatar.sm,
     fontSize: sizes.avatarFontSize.sm,
+    ...centered,
     ...circle,
   },
   md: {
@@ -34,6 +42,7 @@ const iconWrapper = {
     height: sizes.avatar.md,
     width: sizes.avatar.md,
     fontSize: sizes.avatarFontSize.md,
+    ...centered,
     ...circle,
   },
   lg: {
@@ -43,6 +52,7 @@ const iconWrapper = {
     height: sizes.avatar.lg,
     width: sizes.avatar.lg,
     fontSize: sizes.avatarFontSize.lg,
+    ...centered,
     ...circle,
   },
   xl: {
@@ -52,6 +62,7 @@ const iconWrapper = {
     height: sizes.avatar.xl,
     width: sizes.avatar.xl,
     fontSize: sizes.avatarFontSize.xl,
+    ...centered,
     ...circle,
   },
 };

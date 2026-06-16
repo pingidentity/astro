@@ -1,7 +1,7 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 
 import comboBox from './comboBox';
-import { input } from './input';
+import { fieldControlWrapper, input } from './input';
 
 export const select = {
   backgroundColor: 'backgroundBase',
@@ -71,6 +71,24 @@ const search = {
   },
 };
 
+const numberField = {
+  arrowsWrapper: {
+    ...fieldControlWrapper,
+    '&.is-disabled': {
+      '> input': {
+        backgroundColor: astroTokensDark.color.input['readonly-bg'],
+        borderColor: astroTokensDark.color.input.border,
+      },
+    },
+    '&.is-read-only': {
+      '> input': {
+        backgroundColor: astroTokensDark.color.input['readonly-bg'],
+        borderColor: astroTokensDark.color.input.border,
+      },
+    },
+  },
+};
+
 export default {
   input,
   checkbox,
@@ -85,4 +103,5 @@ export default {
   },
   switch: switchable,
   comboBox,
+  numberField,
 };

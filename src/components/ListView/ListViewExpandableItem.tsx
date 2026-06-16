@@ -77,7 +77,8 @@ const ListViewExpandableItem = (props: ListViewExpandableItemProps<unknown>) => 
             sx={{ ml: 'auto' }}
             icon={isExpanded ? MenuUp : MenuDown}
             variant="listViewItem.expandIcon"
-            title={{ name: `${key} expand icon button` }}
+            title={{ name: '' }}
+            aria-hidden="true"
             {...(isOnyx && { size: 'sm' })}
           />
         </Box>

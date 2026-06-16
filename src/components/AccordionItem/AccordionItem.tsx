@@ -96,12 +96,13 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
           >
             {item.props.label}
           </Text>
-          <Box as="span" ml={accordionItemMarginLeft}>
+          <Box as="span" ml={accordionItemMarginLeft} role="presentation">
             <Icon
               color="font.base"
               icon={isOpen ? MenuUp : MenuDown}
               size="sm"
-              title={{ name: isOpen ? 'Menu Up Icon' : 'Menu Down Icon' }}
+              aria-hidden="true"
+              title={{ name: '' }}
             />
           </Box>
         </ThemeUIButton>

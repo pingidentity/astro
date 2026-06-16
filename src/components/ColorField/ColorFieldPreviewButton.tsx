@@ -28,8 +28,8 @@ const ColorFieldPreviewButton = forwardRef<HTMLButtonElement, ColorFieldPreviewB
           <Text variant="colorFieldButtonLabel">{label}</Text>
           <Text variant="colorFieldButtonColor">{colorValue}</Text>
         </Box>
-        <Box sx={{ ml: 'auto' }} flexGrow="1">
-          <Icon ml="auto" title={{ name: isOpen ? 'menu-up' : 'menu-down' }} icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} />
+        <Box sx={{ ml: 'auto' }} flexGrow="1" role="presentation">
+          <Icon ml="auto" title={{ name: '' }} icon={isOpen ? MenuUp : MenuDown} {...(isOnyx && { size: 'sm' })} aria-hidden="true" />
         </Box>
       </Box>
     </Button>

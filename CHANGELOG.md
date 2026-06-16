@@ -1,3 +1,53 @@
+## 2.200.5-alpha.0 (2026-06-16)
+
+### 🩹 Fixes
+
+- [UXE-8296] Numberfield update
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.200.4-alpha.0 (2026-06-15)
+
+### 🩹 Fixes
+
+- [UXE-8340] Center Icons in IconWrapper
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.200.3-alpha.0 (2026-06-15)
+
+### 🩹 Fixes
+
+- [UIP-8230] Presentational menu arrow icons should have no aria label applied
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.200.2-alpha.0 (2026-06-15)
+
+### 🩹 Fixes
+
+- [UXE-8339] Update TextAreaField border
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.200.1-alpha.0 (2026-06-12)
+
+### 🩹 Fixes
+
+- [UXE-8396] Update chromatic script for Turbosnap
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.200.0 (2026-06-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

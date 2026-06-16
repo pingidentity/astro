@@ -81,7 +81,7 @@ export const fieldControlWrapper = {
   '> textarea': {
     borderRadius: astroTokens.radius.input,
     border: '1px solid',
-    borderColor: 'border.input !important',
+    borderColor: 'border.input',
     outline: 'none',
   },
   '&.is-disabled': {
