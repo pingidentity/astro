@@ -8,6 +8,7 @@ const pageHeaderTitleMargin = 'sm';
 const pageHeaderAddIconMargin = 'md';
 const pageHeaderAddIconSize = 'md';
 const defaultLoaderSize = 32;
+const numberFieldArrowSize = 'xs' as IconSize;
 const modalCloseIconSize = 'md' as IconSize;
 const linkSelectFieldIcon = 'sm' as IconSize;
 
@@ -20,6 +21,7 @@ export default {
   pageHeaderAddIconMargin,
   pageHeaderAddIconSize,
   defaultLoaderSize,
+  numberFieldArrowSize,
   modalCloseIconSize,
   linkSelectFieldIcon,
 };

@@ -25,6 +25,7 @@ const defaultIconSize = 'sm' as IconSize;
 const linkSelectFieldWidth = '10em';
 const calendarIconSize = 25 as IconSize;
 const navBarIconSize = 18 as IconSize;
+const numberFieldArrowSize = 18 as IconSize;
 const badgeTextFontSize = '';
 const modalCloseIconSize = 'sm' as IconSize;
 const linkSelectFieldIcon = 'sm' as IconSize;
@@ -61,6 +62,7 @@ export const astroThemeValues = {
     greyText: '#FFFFFF',
   },
   linkSelectFieldWidth,
+  numberFieldArrowSize,
   badgeTextFontSize,
   modalCloseIconSize,
   linkSelectFieldIcon,

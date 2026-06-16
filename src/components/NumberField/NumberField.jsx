@@ -1,8 +1,6 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { mergeProps, useNumberField } from 'react-aria';
 import { useNumberFieldState } from 'react-stately';
-import MenuDown from '@pingux/mdi-react/MenuDownIcon';
-import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import { useLocale } from '@react-aria/i18n';
 import omit from 'lodash/omit';
 import PropTypes from 'prop-types';
@@ -25,7 +23,8 @@ import { statusPropTypes } from '../../utils/docUtils/statusProp';
 const NumberField = forwardRef((props, ref) => {
   const { helperText, status } = props;
   const { locale } = useLocale();
-  const { themeState: { isOnyx } } = useGetTheme();
+  const { icons, numberFieldArrowSize, themeState: { isOnyx } } = useGetTheme();
+  const { MenuDown, MenuUp } = icons;
 
   const state = useNumberFieldState({ ...props, locale });
 
@@ -54,11 +53,11 @@ const NumberField = forwardRef((props, ref) => {
 
   const ControlArrows = (
     <Box variant="forms.numberField.arrows">
-      <IconButton {...incrementButtonProps} ref={decRef} tabIndex="0" p={0}>
-        <Icon icon={MenuUp} size={isOnyx ? 'sm' : 18} title={{ name: '' }} aria-hidden="true" />
+      <IconButton {...incrementButtonProps} ref={decRef} tabIndex="0" p={!isOnyx && 0}>
+        <Icon icon={MenuUp} size={numberFieldArrowSize} title={{ name: '' }} aria-hidden="true" />
       </IconButton>
-      <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="0" p={0}>
-        <Icon icon={MenuDown} size={isOnyx ? 'sm' : 18} title={{ name: '' }} aria-hidden="true" />
+      <IconButton {...decrementButtonProps} ref={incrRef} tabIndex="0" p={!isOnyx && 0}>
+        <Icon icon={MenuDown} size={numberFieldArrowSize} title={{ name: '' }} aria-hidden="true" />
       </IconButton>
     </Box>
   );
