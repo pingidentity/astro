@@ -54,4 +54,13 @@ export const text = {
   linkSelectFieldLabel: {
     color: astroTokensDark.color.font.link,
   },
+  tabLabel: {
+    color: astroTokensDark.color.font.base,
+    '.is-selected &': {
+      color: astroTokensDark.color.font.link,
+    },
+    '.is-selected &, .is-hovered &': {
+      color: astroTokensDark.color.font.link,
+    },
+  },
 };

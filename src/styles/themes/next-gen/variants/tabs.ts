@@ -10,16 +10,15 @@ export const menuTab = {
 
 export const tab = {
   borderRadius: '2px',
-  pt: '.5rem',
   '& > span': {
-    px: '1rem',
-    fontSize: '.9375rem',
+    px: 'md',
+    fontSize: 'md',
   },
   '&.is-focused': {
     boxShadow: 'none',
-    outline: '3px solid',
+    outline: '1px solid',
     outlineColor: 'active',
-    outlineOffset: '1px',
+    outlineOffset: '0px',
     '& > span': {
       outline: 'none',
     },
@@ -29,4 +28,8 @@ export const tab = {
     borderBottomColor: 'primary',
     ml: '0px',
   },
+};
+
+export const tabLine = {
+  height: '3px',
 };

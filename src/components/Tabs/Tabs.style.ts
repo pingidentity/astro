@@ -1,8 +1,6 @@
-import { borderRadius } from '../../styles/themes/next-gen/variants/listview';
 import { defaultFocus, quiet } from '../Button/Buttons.styles';
 
 export const tab = {
-  pt: 10,
   cursor: 'pointer',
   alignItems: 'center',
   display: 'inline-flex',

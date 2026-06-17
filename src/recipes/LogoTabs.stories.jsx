@@ -67,7 +67,7 @@ const sx = {
   },
   separator: {
     position: 'absolute',
-    top: '25%',
+    top: '18%',
     backgroundColor: 'accent.70',
   },
   logoTabsStyling: {
