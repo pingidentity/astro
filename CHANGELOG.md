@@ -1,3 +1,13 @@
+## 2.201.1-alpha.0 (2026-06-17)
+
+### 🩹 Fixes
+
+- [UXE-8341] Onyx uiLibrary theme override
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.201.0-alpha.0 (2026-06-16)
 
 ### 🚀 Features
