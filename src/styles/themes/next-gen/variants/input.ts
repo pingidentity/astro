@@ -57,6 +57,8 @@ input.promptInput = {
 
 input.search = {
   ...input,
+  borderRadius: astroTokens.radius.input,
+  height: astroTokens.size.input.height,
   pl: '4em !important',
   pr: `${astroTokens.spacing['md-l']}px !important`,
   py: '13px !important',
