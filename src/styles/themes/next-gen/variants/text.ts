@@ -150,8 +150,18 @@ export const text = {
     lineHeight: '24px',
   },
   tabLabel: {
-    color: 'text.primary',
+    color: astroTokens.color.font.base,
     wordBreak: 'normal',
+    lineHeight: 'body',
+    mb: 'sm',
+    mt: 'sm',
+    '.is-selected &': {
+      color: astroTokens.color.font.link,
+      mb: 'sm',
+    },
+    '.is-selected &, .is-hovered &': {
+      color: astroTokens.color.font.link,
+    },
   },
   placeholder: {
     color: astroTokens.color.gray[600],

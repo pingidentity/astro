@@ -47,18 +47,7 @@ const listBox = {
   },
 };
 
-const tab = {
-  '&.is-selected': {
-    '& > span': {
-      color: 'text.secondary',
-    },
-  },
-  '&.is-hovered': {
-    '& > span': {
-      color: 'text.secondary',
-    },
-  },
-};
+const tab = {};
 
 const modal = {
   content: {
