@@ -1,3 +1,13 @@
+## 2.201.2-alpha.0 (2026-06-17)
+
+### 🩹 Fixes
+
+- [UXE-8332] Text inside of onyx tab component must be vertically centered
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.201.1-alpha.0 (2026-06-17)
 
 ### 🩹 Fixes
