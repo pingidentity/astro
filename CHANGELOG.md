@@ -1,3 +1,43 @@
+## 2.202.0-alpha.0 (2026-06-18)
+
+### 🚀 Features
+
+- [UXE-8371] remove style codemode
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.201.2-alpha.0 (2026-06-17)
+
+### 🩹 Fixes
+
+- [UXE-8332] Text inside of onyx tab component must be vertically centered
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.201.1-alpha.0 (2026-06-17)
+
+### 🩹 Fixes
+
+- [UXE-8341] Onyx uiLibrary theme override
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.201.0-alpha.0 (2026-06-16)
+
+### 🚀 Features
+
+- [UXE-8395] Publish onyx-tokens to NPM
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.200.5 (2026-06-16)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

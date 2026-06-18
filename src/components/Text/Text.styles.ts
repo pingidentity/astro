@@ -24,6 +24,7 @@ export const tabLabel = {
   fontSize: 'sm',
   fontWeight: 1,
   mb: 'sm',
+  mt: 'sm',
   lineHeight: '16px',
   color: 'neutral.40',
   height: '100%',

@@ -3,14 +3,8 @@ import LockIcon from '@pingux/mdi-react/LockIcon';
 import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import {
-  Badge,
-  Box,
-  Icon,
-  Tab,
-  Tabs,
-  Text,
-} from '../../index';
+import { useGetTheme } from '../../hooks';
+import { Badge, Box, Icon, Tab, Tabs, Text } from '../../index';
 import { TabListItemProps, TabsProps } from '../../types';
 
 import TabsReadme from './Tabs.mdx';
@@ -127,8 +121,16 @@ export const DisabledAllTabs: StoryFn = () => (
 );
 
 export const ContentSlots: StoryFn = () => {
+  const {
+    themeState: { isOnyx },
+  } = useGetTheme();
+
   const beforeTabNode = (
-    <Icon icon={LockIcon} sx={{ marginTop: 10, marginRight: 5 }} title={{ name: 'Lock Icon' }} />
+    <Icon
+      icon={LockIcon}
+      sx={{ marginTop: isOnyx ? 'md' : 'sm', marginRight: 'xs' }}
+      title={{ name: 'Lock Icon' }}
+    />
   );
   const nodeSx = {
     marginLeft: 5,

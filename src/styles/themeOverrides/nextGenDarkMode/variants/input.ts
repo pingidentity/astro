@@ -50,4 +50,7 @@ input.promptInput = {
 
 input.search = {
   ...input,
+  borderRadius: astroTokensDark.radius.input,
+  height: astroTokensDark.size.input.height,
+
 };
