@@ -1,3 +1,13 @@
+## 2.202.0-alpha.0 (2026-06-18)
+
+### 🚀 Features
+
+- [UXE-8371] remove style codemode
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.201.2-alpha.0 (2026-06-17)
 
 ### 🩹 Fixes
