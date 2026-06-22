@@ -1,3 +1,13 @@
+## 2.202.2-alpha.0 (2026-06-22)
+
+### 🩹 Fixes
+
+- [UXE-8294] ImageUploadField update to match spec
+
+### ❤️  Thank You
+
+- Elijah Cooper
+
 ## 2.202.1-alpha.0 (2026-06-22)
 
 ### 🩹 Fixes
