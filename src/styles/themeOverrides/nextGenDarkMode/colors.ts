@@ -151,6 +151,7 @@ export const colors = {
   text: {
     primary: astroTokensDark.color.font.base,
     secondary: astroTokensDark.color.font.light,
+    error: astroTokensDark.color.font.error,
     message: 'white',
     fieldHelper: astroTokensDark.color.gray[400],
   },

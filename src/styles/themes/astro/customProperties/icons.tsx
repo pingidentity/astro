@@ -8,6 +8,7 @@ import WarningIcon from '@pingux/mdi-react/AlertOutlineIcon';
 import ApplicationOutlineIcon from '@pingux/mdi-react/ApplicationOutlineIcon';
 import ArrowDownIcon from '@pingux/mdi-react/ArrowDownIcon';
 import ArrowUpIcon from '@pingux/mdi-react/ArrowUpIcon';
+import CameraAltIcon from '@pingux/mdi-react/CameraAltIcon';
 import ChatIcon from '@pingux/mdi-react/ChatIcon';
 import DefaultCircle from '@pingux/mdi-react/CheckboxBlankCircleOutlineIcon';
 import CheckCircleIcon from '@pingux/mdi-react/CheckCircleIcon';
@@ -22,6 +23,7 @@ import EmoticonHappy from '@pingux/mdi-react/EmoticonHappyOutlineIcon';
 import Fingerprint from '@pingux/mdi-react/FingerprintIcon';
 import GlobeIcon from '@pingux/mdi-react/GlobeIcon';
 import HomeIcon from '@pingux/mdi-react/HomeIcon';
+import ImageFilterHdrIcon from '@pingux/mdi-react/ImageFilterHdrIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import InformationOutlineIcon from '@pingux/mdi-react/InformationOutlineIcon';
 import KeyChainVariant from '@pingux/mdi-react/KeyChainVariantIcon';
@@ -107,6 +109,8 @@ export default {
   SuccessCircle: CheckCircleIcon,
   userExperienceIcon: MonitorScreenshotIcon,
   WarningIcon,
+  CameraOutlineIcon: CameraAltIcon,
+  ImageOutlineIcon: ImageFilterHdrIcon,
   helpHint: HelpIcon,
   ModalCloseIcon: CloseIcon,
 };

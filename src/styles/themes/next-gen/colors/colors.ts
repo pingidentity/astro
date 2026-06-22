@@ -86,6 +86,7 @@ export const info = {
 const text = {
   primary: astroTokens.color.font.base,
   secondary: astroTokens.color.font.light,
+  error: astroTokens.color.font.error,
   message: astroTokens.color.gray[700],
   fieldHelper: astroTokens.color.font.light,
 };

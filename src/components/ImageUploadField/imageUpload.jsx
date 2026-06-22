@@ -17,6 +17,9 @@ const hoveredPreview = {
   },
 };
 
+const noImagePreview = {
+  fill: '#98a0a8 !important',
+};
 
 const button = {
   ...base,
@@ -36,4 +39,5 @@ const button = {
 export default {
   hoveredPreview,
   button,
+  noImagePreview,
 };
