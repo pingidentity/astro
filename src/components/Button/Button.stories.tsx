@@ -213,3 +213,9 @@ export const WithLoading = args => (
     Save
   </Button>
 );
+
+export const LinkButton = () => (
+  <Button variant="link">
+    Link Button
+  </Button>
+);
