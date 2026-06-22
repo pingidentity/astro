@@ -61,6 +61,8 @@ const icons = {
   SuccessCircle: 'check_circle',
   userExperienceIcon: 'palette',
   WarningIcon: 'warning',
+  CameraOutlineIcon: 'photo_camera',
+  ImageOutlineIcon: 'image',
   helpHint: 'help_outline',
   ModalCloseIcon: 'close',
 };

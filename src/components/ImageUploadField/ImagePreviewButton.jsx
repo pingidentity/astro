@@ -4,11 +4,10 @@ import React, {
   useRef,
 } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
-import CameraAltIcon from '@pingux/mdi-react/CameraAltIcon';
-import ImageFilterHdrIcon from '@pingux/mdi-react/ImageFilterHdrIcon';
 import { useHover } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
+import { useGetTheme } from '../../hooks';
 import { Box, Button, Icon, Image } from '../../index';
 import Loader from '../Loader';
 
@@ -32,11 +31,13 @@ const ImagePreviewButton = forwardRef((props, ref) => {
 
   const { focusProps, isFocusVisible } = useFocusRing();
   const { hoverProps, isHovered } = useHover(props);
+  const { icons } = useGetTheme();
+  const { ImageOutlineIcon, CameraOutlineIcon } = icons;
 
   const noImagePreview = defaultPreviewNode || (
     <Icon
-      icon={ImageFilterHdrIcon}
-      color="neutral.60"
+      icon={ImageOutlineIcon}
+      variant="imageUpload.noImagePreview"
       size={24}
       data-testid="image-upload-no-image-preview"
       title={{ name: 'Image Filter Hdr Icon' }}
@@ -78,7 +79,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
       data-testid="image-upload-hovered-preview"
     >
       <Icon
-        icon={CameraAltIcon}
+        icon={CameraOutlineIcon}
         color={isFocusVisible || isMenuOpen ? 'active' : 'white'}
         size={24}
         sx={{ zIndex: 1 }}

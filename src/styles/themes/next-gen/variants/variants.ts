@@ -42,7 +42,7 @@ const fieldHelperText = {
       color: 'text.fieldHelper',
     },
     '&.is-error': {
-      color: 'critical.dark',
+      color: 'text.error',
     },
     '&.is-warning': {
       color: 'warning.bright',
@@ -442,6 +442,22 @@ const statusIcon = {
   },
 };
 
+const imageUpload = {
+  button: {
+    border: '1px solid',
+    borderColor: 'common.border',
+    backgroundColor: 'gray-100',
+  },
+  noImagePreview: {
+    color: `${astroTokens.color.gray[900]} !important`,
+  },
+  hoveredPreview: {
+    shaded: {
+      opacity: 0.5,
+    },
+  },
+};
+
 export default {
   accordion,
   accordionGrid,
@@ -489,4 +505,5 @@ export default {
   tableBase,
   tabs,
   tooltip,
+  imageUpload,
 };
