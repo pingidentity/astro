@@ -257,8 +257,8 @@ const link = {
   transition: 'color, .15s, ease-in-and-out',
   fontSize: 'md',
   textDecoration: 'none',
-  px: astroTokens.spacing.button['padding-x'],
-  py: astroTokens.spacing.button['padding-y'],
+  px: '0px',
+  py: '0px',
   '&.is-pressed': {
     textDecoration: 'underline',
     outline: 'none',
