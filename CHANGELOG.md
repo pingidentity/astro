@@ -1,3 +1,13 @@
+## 2.202.1-alpha.0 (2026-06-22)
+
+### 🩹 Fixes
+
+- [UXE-8331] Remove px and py on link button variant
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.202.0 (2026-06-18)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
