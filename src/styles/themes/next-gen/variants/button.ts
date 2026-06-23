@@ -270,6 +270,15 @@ const link = {
   },
 };
 
+const criticalLink = {
+  ...link,
+  color: 'critical.bright',
+  '&.is-pressed': {
+    textDecoration: 'underline',
+    outline: 'none',
+  },
+};
+
 const selectLink = {
   ...link,
   textDecoration: 'none',
@@ -686,6 +695,7 @@ const buttons = {
   searchNavTabLabel,
   outlineCritical,
   link,
+  criticalLink,
   listBoxLink,
   withIcon,
   primaryWithIcon,
