@@ -1,3 +1,13 @@
+## 2.204.0-alpha.0 (2026-06-23)
+
+### 🚀 Features
+
+- [UXE-7814] add iconProps and trigger props
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.203.0-alpha.0 (2026-06-23)
 
 ### 🚀 Features
