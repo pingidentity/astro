@@ -23,7 +23,7 @@ export interface TabsProps extends StyleProps, TestingAttributes, OrientationPro
   /** Whether the entire tablist is disabled. */
   isDisabled?: boolean;
   /** Handler that is called when the selected tab has changed. */
-  onSelectionChange?: Dispatch<SetStateAction<string | undefined>>;
+  onSelectionChange?: (key: string) => void;
   /** A props object that is subsequently spread into the rendered tablist. */
   tabListProps?: object;
   /** Props object that is spread directly into all of the tab panel wrapper elements. */
