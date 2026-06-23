@@ -1,3 +1,13 @@
+## 2.203.0-alpha.0 (2026-06-23)
+
+### 🚀 Features
+
+- [UXE-8338] Add criticalLink button variant
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.202.2-alpha.0 (2026-06-22)
 
 ### 🩹 Fixes
