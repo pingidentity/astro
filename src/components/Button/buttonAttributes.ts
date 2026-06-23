@@ -5,6 +5,7 @@ import { onPressArgTypes } from '../../utils/docUtils/pressAttributes';
 // add designer approved variants for devs to use here
 const variantOptions = [
   'critical',
+  'criticalLink',
   'default',
   'inline',
   'inlinePrimary',

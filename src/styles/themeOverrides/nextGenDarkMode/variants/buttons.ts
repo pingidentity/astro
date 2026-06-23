@@ -256,6 +256,19 @@ const buttons = {
       outline: 'none',
     },
   },
+  criticalLink: {
+    color: astroTokensDark.color.red[400],
+    '&.is-pressed': {
+      textDecoration: 'underline',
+      outline: 'none',
+      color: chroma.mix(astroTokensDark.color.red[500], 'white', 0.45, 'rgb').hex(),
+    },
+    '&.is-focused': {
+      textDecoration: 'underline',
+      color: chroma.mix(astroTokensDark.color.red[500], 'white', 0.3, 'rgb').hex(),
+      outline: 'none',
+    },
+  },
   iconButtons,
   searchNavTabLabel,
   modalCloseButton,
