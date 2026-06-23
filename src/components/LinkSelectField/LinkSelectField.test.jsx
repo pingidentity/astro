@@ -1,4 +1,5 @@
 import React from 'react';
+import EarthIcon from '@pingux/mdi-react/EarthIcon';
 import userEvent from '@testing-library/user-event';
 
 import { Item, LinkSelectField } from '../../index';
@@ -159,16 +160,34 @@ test('passing helper text should display it and correct aria attributes on input
   expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', helperTextID);
 });
 
-test('iconProps are spread to the icon element', () => {
-  const iconTestId = 'custom-icon';
-  getComponent({ iconProps: { 'data-testid': iconTestId } });
-  expect(screen.getByTestId(iconTestId)).toBeInTheDocument();
+test('iconProps data-testid is applied to the inner Icon element', () => {
+  getComponent({ iconProps: { 'data-testid': 'custom-icon', sx: { color: 'red' } } });
+  const icon = screen.getByTestId('custom-icon');
+  expect(icon).toBeInTheDocument();
+  expect(icon).toBeInstanceOf(SVGSVGElement);
 });
 
-test('triggerProps are spread to the trigger button', () => {
-  getComponent({ triggerProps: { 'data-custom': 'custom-trigger' } });
+test('iconProps with a custom icon renders the substitute icon without throwing', () => {
+  getComponent({ iconProps: { icon: EarthIcon } });
+  // The default trigger button is still present when only iconProps is provided
   const button = screen.getByRole('button');
-  expect(button).toHaveAttribute('data-custom', 'custom-trigger');
+  expect(button).toBeInTheDocument();
+});
+
+test('trigger prop replaces the default Button trigger', () => {
+  getComponent({ trigger: <button type="button" data-testid="custom-trigger">Custom</button> });
+  expect(screen.getByTestId('custom-trigger')).toBeInTheDocument();
+  // The default Button trigger (identified by its pendo data attribute) should not be rendered
+  expect(document.querySelector('[data-pendo-id="LinkSelectField"]')).not.toBeInTheDocument();
+});
+
+test('default render is unchanged when neither iconProps nor trigger is provided', () => {
+  getComponent();
+  // The default trigger button is present via getByRole
+  const button = screen.getByRole('button');
+  expect(button).toBeInTheDocument();
+  // The default button has the pendo ID set by the component
+  expect(document.querySelector('[data-pendo-id="LinkSelectField"]')).toBeInTheDocument();
 });
 
 // Needs to be added to each components test file

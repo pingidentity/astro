@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
+import EarthIcon from '@pingux/mdi-react/EarthIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { getAllUsers } from '../../api/users';
 import {
   Box,
+  Button,
   Item,
   LinkSelectField,
   Section,
@@ -59,6 +61,14 @@ export default {
     isRequired: {},
     selectedKey: {
       control: false,
+    },
+    iconProps: {
+      control: false,
+      description: 'Props object spread into the Icon inside the default trigger button. Supports icon, title, size, color, sx, and other IconProps. The sx prop is merged with the rotation style.',
+    },
+    trigger: {
+      control: false,
+      description: 'A ReactNode that replaces the default Button trigger entirely. When provided, the local Button element is not rendered.',
     },
     ...statusArgTypes,
     ...ariaAttributeBaseArgTypes,
@@ -260,6 +270,48 @@ WithPopoverWidth.parameters = {
   docs: {
     description: {
       story: 'The `popoverWidth` prop can be used to set a custom width for the dropdown/popover.',
+    },
+  },
+};
+
+export const WithIconProps = () => (
+  <OverlayProvider>
+    <LinkSelectField
+      label="What's your favorite color?"
+      iconProps={{ icon: EarthIcon, sx: { color: 'accent.40' } }}
+    >
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </LinkSelectField>
+  </OverlayProvider>
+);
+
+WithIconProps.parameters = {
+  docs: {
+    description: {
+      story: 'Use the `iconProps` prop to customize the icon inside the default trigger button. Here a different icon and custom `sx` color are passed via `iconProps`.',
+    },
+  },
+};
+
+export const WithCustomTrigger = () => (
+  <OverlayProvider>
+    <LinkSelectField
+      label="What's your favorite color?"
+      trigger={<Button variant="primary">Open menu</Button>}
+    >
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </LinkSelectField>
+  </OverlayProvider>
+);
+
+WithCustomTrigger.parameters = {
+  docs: {
+    description: {
+      story: 'Use the `trigger` prop to supply a fully custom ReactNode trigger, replacing the default `Button` element entirely.',
     },
   },
 };
