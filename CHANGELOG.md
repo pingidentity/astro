@@ -1,3 +1,13 @@
+## 2.205.0-alpha.0 (2026-06-23)
+
+### 🚀 Features
+
+- [UXE-6786] Stepper: convert to TypeScript
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.204.0-alpha.0 (2026-06-23)
 
 ### 🚀 Features
