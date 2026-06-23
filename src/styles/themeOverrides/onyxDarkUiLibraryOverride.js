@@ -139,7 +139,9 @@ const forms = {
         ...theme.text.inputValue,
         borderColor: astroTokensDark.color.gray[500],
         fontSize: '15px',
-        bg: 'white',
+        bg: astroTokensDark.color.gray[900],
+        height: '50px',
+        borderRadius: '4px',
         '::placeholder': {
           ...theme.text.placeholder,
           fontStyle: 'unset',
