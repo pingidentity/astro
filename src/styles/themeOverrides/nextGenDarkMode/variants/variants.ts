@@ -275,7 +275,7 @@ export default {
         color: 'text.fieldHelper',
       },
       '&.is-error': {
-        color: 'critical.bright',
+        color: 'text.error',
       },
       '&.is-warning': {
         color: 'warning.bright',
@@ -304,6 +304,14 @@ export default {
       '&.is-hovered': {
         backgroundColor: '#2C323A',
       },
+    },
+  },
+  imageUpload: {
+    button: {
+      background: 'transparent',
+    },
+    noImagePreview: {
+      color: `${astroTokensDark.color.gray[100]} !important`,
     },
   },
 };

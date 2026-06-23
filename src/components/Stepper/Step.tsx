@@ -1,21 +1,27 @@
 import React, { forwardRef } from 'react';
 import CheckBoldIcon from '@pingux/mdi-react/CheckBoldIcon';
 import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 
 import { Box, Icon } from '../../index';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 
-import { stepStatuses } from './Stepper.constants';
+import { StepStatus, stepStatuses } from './Stepper.constants';
 
 const {
   COMPLETED,
   INACTIVE,
 } = stepStatuses;
 
-const Step = forwardRef((props, ref) => {
-  const { status, value, className, orientation } = props;
-  const { hoverProps, isHovered } = useHover(props);
+interface StepProps {
+  status?: StepStatus;
+  value?: number;
+  className?: string;
+  orientation?: 'vertical' | 'horizontal';
+}
+
+const Step = forwardRef<HTMLElement, StepProps>((props, ref) => {
+  const { status = INACTIVE, value = 0, className, orientation } = props;
+  const { hoverProps, isHovered } = useHover({});
 
   const stepValue = orientation !== ORIENTATION.VERTICAL && value;
 
@@ -40,19 +46,6 @@ const Step = forwardRef((props, ref) => {
   );
 });
 
-Step.propTypes = {
-  status: PropTypes.oneOf(Object.values(stepStatuses)),
-  value: PropTypes.number,
-  orientation: PropTypes.oneOf([
-    ORIENTATION.VERTICAL,
-    ORIENTATION.HORIZONTAL,
-  ]),
-
-};
-
-Step.defaultProps = {
-  status: INACTIVE,
-  value: 0,
-};
+Step.displayName = 'Step';
 
 export default Step;

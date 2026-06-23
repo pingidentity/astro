@@ -1,3 +1,53 @@
+## 2.205.0-alpha.0 (2026-06-23)
+
+### 🚀 Features
+
+- [UXE-6786] Stepper: convert to TypeScript
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.204.0-alpha.0 (2026-06-23)
+
+### 🚀 Features
+
+- [UXE-7814] add iconProps and trigger props
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.203.0-alpha.0 (2026-06-23)
+
+### 🚀 Features
+
+- [UXE-8338] Add criticalLink button variant
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.202.2-alpha.0 (2026-06-22)
+
+### 🩹 Fixes
+
+- [UXE-8294] ImageUploadField update to match spec
+
+### ❤️  Thank You
+
+- Elijah Cooper
+
+## 2.202.1-alpha.0 (2026-06-22)
+
+### 🩹 Fixes
+
+- [UXE-8331] Remove px and py on link button variant
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.202.0 (2026-06-18)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

@@ -220,6 +220,11 @@ export const link = {
   },
 };
 
+export const criticalLink = {
+  ...link,
+  color: 'critical.bright',
+};
+
 export const selectLink = {
   ...link,
   textDecoration: 'none',
@@ -421,6 +426,7 @@ export default {
   inlinePrimaryWithIcon,
   inlineWithIcon,
   link,
+  criticalLink,
   listBoxLink,
   paginationMenu,
   primary,

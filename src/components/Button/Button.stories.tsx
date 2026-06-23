@@ -75,6 +75,12 @@ Critical.parameters = {
   },
 };
 
+export const CriticalLink = args => (
+  <Button {...args} variant="criticalLink">
+    Button Text
+  </Button>
+);
+
 export const InlineButton = args => (
   <Box>
     <Button {...args} mb="sm" mr="auto" variant="inline">
@@ -211,5 +217,11 @@ export const Filter = () => (
 export const WithLoading = args => (
   <Button {...args} isLoading>
     Save
+  </Button>
+);
+
+export const LinkButton = () => (
+  <Button variant="link">
+    Link Button
   </Button>
 );

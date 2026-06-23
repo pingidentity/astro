@@ -52,6 +52,7 @@ export * from './separator';
 export * from './ServerErrorBoundary';
 export * from './shared';
 export * from './skeleton';
+export * from './Stepper';
 export * from './switchField';
 export * from './tab';
 export * from './table';

@@ -1,12 +1,14 @@
 /* istanbul ignore file */
 import React, { forwardRef } from 'react';
+import type { SingleSelectListProps } from '@react-stately/list';
 import { useSingleSelectListState } from '@react-stately/list';
-import PropTypes from 'prop-types';
 
-import { Box, Step, Tab, Tabs, Text } from '../..';
-import { useStatusClasses } from '../../hooks';
+import { Box, Step, Tabs, Text } from '../..';
+import { useLocalOrForwardRef, useStatusClasses } from '../../hooks';
+import { StepperProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import isValidPositiveInt from '../../utils/devUtils/props/isValidPositiveInt';
+import Tab from '../Tab';
 
 import Line from './Line';
 import { stepStatuses } from './Stepper.constants';
@@ -18,7 +20,7 @@ const {
   INACTIVE,
 } = stepStatuses;
 
-const Stepper = forwardRef((props, ref) => {
+const Stepper = forwardRef<HTMLElement, StepperProps>((props, ref) => {
   const {
     activeStep = 1,
     onStepChange,
@@ -29,9 +31,17 @@ const Stepper = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const state = useSingleSelectListState(props);
+  const stepperRef = useLocalOrForwardRef<HTMLElement>(ref);
 
-  const getStatus = i => {
+  if (process.env.NODE_ENV !== 'production' && props.activeStep !== undefined) {
+    const validationError = isValidPositiveInt({ activeStep: props.activeStep }, 'activeStep', 'Stepper');
+    if (validationError) {
+      console.error(validationError.message);
+    }
+  }
+  const state = useSingleSelectListState(props as SingleSelectListProps<object>);
+
+  const getStatus = (i: number) => {
     if (i === activeStep) {
       return ACTIVE;
     } if (i < activeStep) {
@@ -40,9 +50,9 @@ const Stepper = forwardRef((props, ref) => {
     return INACTIVE;
   };
 
-  const onStepChangeHandler = key => {
+  const onStepChangeHandler = (key: React.Key) => {
     if (onStepChange) {
-      onStepChange(+key);
+      onStepChange(Number(key));
     }
   };
 
@@ -86,14 +96,15 @@ const Stepper = forwardRef((props, ref) => {
       </Box>
     );
 
-
     /* istanbul ignore next */
-    const textValue = (item && item.value && item.value.label)
+    const textValue = (item && item.value && (item.value as { label?: string }).label)
       || item.textValue
       || stepIndex.toString();
 
+    const TabItem = Tab as React.ElementType;
+
     const container = (
-      <Tab
+      <TabItem
         key={stepIndex}
         variant="stepper.tab"
         tabLineProps={{ display: 'none' }}
@@ -107,7 +118,7 @@ const Stepper = forwardRef((props, ref) => {
         separator={!isFirst && orientation === ORIENTATION.HORIZONTAL && (!isFirst && line)}
         tooltipTriggerProps={tooltipProps}
         sx={
-          i !== steps.length - 1 && orientation === ORIENTATION.VERTICAL && verticalLine
+          i !== steps.length - 1 && orientation === ORIENTATION.VERTICAL ? verticalLine : undefined
         }
       />
     );
@@ -119,7 +130,7 @@ const Stepper = forwardRef((props, ref) => {
 
   return (
     <Tabs
-      ref={ref}
+      ref={stepperRef}
       variant="stepper.wrapper"
       tabListProps={{
         variant: 'stepper.tabs',
@@ -136,35 +147,6 @@ const Stepper = forwardRef((props, ref) => {
     </Tabs>
   );
 });
-
-Stepper.propTypes = {
-  /**
-   * *For performance reasons,
-use this prop instead of Array.map when iteratively rendering Items*.
-   * For use with [dynamic collections](https://react-spectrum.adobe.com/react-stately/collections.html#dynamic-collections).
-  */
-  items: PropTypes.arrayOf(PropTypes.shape({
-    /** The primary option for the tooltip label. */
-    label: PropTypes.string,
-    children: PropTypes.node,
-    name: PropTypes.string,
-  })),
-  /** The number of the current step (using one-based indexing) */
-  activeStep: isValidPositiveInt,
-  /**
-  * Handler that is called when the current step changes
-  * `(index: number) => void`
-  */
-  onStepChange: PropTypes.func,
-  /** A props object that is subsequently spread into the rendered tablist. */
-  tabListProps: PropTypes.shape({}),
-  tooltipProps: PropTypes.shape({}),
-  orientation: PropTypes.oneOf([
-    'vertical',
-    'horizontal',
-  ]),
-
-};
 
 Stepper.displayName = 'Stepper';
 Stepper.defaultProps = {

@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 import CreationOutlineIcon from '@pingux/mdi-react/CreationOutlineIcon';
+
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { useOverlayPanelState } from '../../hooks';
 import { Box, Button, Item, OverlayPanel, OverlayProvider, PanelHeader, PanelHeaderCloseButton,
   Stepper, Text } from '../../index';
-import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import StepperReadme from './Stepper.mdx';
 
@@ -187,7 +188,7 @@ export const Panel = () => {
   const [activeStep, setActiveStep] = useState(1);
 
   const { state, onClose } = useOverlayPanelState();
-  const triggerRef = useRef < HTMLButtonElement > (null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const onCloseHandler = () => onClose(state, triggerRef);
 

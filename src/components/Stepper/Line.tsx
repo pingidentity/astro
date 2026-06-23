@@ -1,21 +1,25 @@
 /* istanbul ignore file */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { useStatusClasses } from '../../hooks';
 import Box from '../Box';
 
-import { stepStatuses } from './Stepper.constants';
+import { StepStatus, stepStatuses } from './Stepper.constants';
 
 const {
   INACTIVE,
 } = stepStatuses;
 
+interface LineProps {
+  className?: string;
+  status?: StepStatus;
+}
+
 const Line = ({
   className,
   /* istanbul ignore next */
   status = INACTIVE,
-}) => {
+}: LineProps) => {
   const { classNames } = useStatusClasses(className, {
     isInactive: status === INACTIVE,
   });
@@ -26,10 +30,6 @@ const Line = ({
       className={classNames}
     />
   );
-};
-
-Line.propTypes = {
-  status: PropTypes.oneOf(Object.values(stepStatuses)),
 };
 
 export default Line;

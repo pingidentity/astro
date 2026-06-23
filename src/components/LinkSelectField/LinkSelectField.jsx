@@ -26,10 +26,11 @@ const LinkSelectField = forwardRef((props, ref) => {
     isDisabled,
     status,
     helperText,
-    iconProps,
     hasInlineLoader,
     popoverWidth,
+    iconProps,
     triggerProps,
+    trigger: triggerProp,
   } = props;
   const { ariaProps } = getAriaAttributeProps(props);
   const {
@@ -61,7 +62,8 @@ const LinkSelectField = forwardRef((props, ref) => {
     triggerRef,
   } = selectFieldProps;
 
-  const trigger = (
+  const { sx: iconPropsSx, ...restIconProps } = iconProps || {};
+  const triggerNode = (
     <Button
       className={fieldControlInputProps.className}
       ref={triggerRef}
@@ -86,16 +88,16 @@ const LinkSelectField = forwardRef((props, ref) => {
         <Box as="span" role="presentation" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
+            title={{ name: 'Menu Down Icon' }}
+            sx={{
+              ...(state.isOpen ? { transform: 'rotate(180deg)' } : null),
+              ...iconPropsSx,
+            }}
+            {...restIconProps}
             title={{ name: '' }}
             color={isOnyx ? 'font.link' : 'active'}
             size={linkSelectFieldIcon}
             aria-hidden="true"
-            {...iconProps}
-            sx={{
-              transform: state.isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 150ms ease',
-              ...iconProps?.sx,
-            }}
           />
         </Box>
       </Box>
@@ -104,7 +106,13 @@ const LinkSelectField = forwardRef((props, ref) => {
       </VisuallyHidden>
     </Button>
   );
-  return <SelectFieldBase {...props} {...selectFieldProps} trigger={trigger} />;
+  return (
+    <SelectFieldBase
+      {...props}
+      {...selectFieldProps}
+      trigger={triggerProp || triggerNode}
+    />
+  );
 });
 
 LinkSelectField.propTypes = {
@@ -173,8 +181,19 @@ LinkSelectField.propTypes = {
   onSelectionChange: PropTypes.func,
   /** Display an inline loader inside the select trigger while loading. */
   hasInlineLoader: PropTypes.bool,
+  /**
+   * Props object that is spread directly into the Icon inside the default trigger button.
+   * Supports all IconProps (icon, title, size, color, sx, etc.).
+   * The sx prop is merged with the rotation style.
+   */
+  iconProps: PropTypes.shape({}),
   /** Width of the popover menu. Accepts any valid CSS unit. */
   popoverWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * A ReactNode that replaces the default Button trigger entirely.
+   * When provided, the local Button element is not rendered.
+   */
+  trigger: PropTypes.node,
   ...statusPropTypes,
   ...inputFieldAttributesBasePropTypes,
   ...ariaAttributesBasePropTypes,
