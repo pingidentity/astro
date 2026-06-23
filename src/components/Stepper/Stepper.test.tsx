@@ -4,6 +4,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 
+import { StepperItemProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import Text from '../Text';
@@ -16,7 +17,7 @@ import Stepper from './Stepper';
 const emotionCache = createCache({ key: 'stepper-test' });
 emotionCache.compat = true;
 
-const steps = [
+const steps: StepperItemProps[] = [
   { label: 'Name', children: 'Step 1', name: 'step1' },
   { label: 'Object', children: 'Step 2', name: 'step2' },
   { label: 'Content', children: 'Step 3', name: 'step3' },
@@ -24,20 +25,24 @@ const steps = [
 
 const testId = 'test-stepper';
 
-const defaultProps = {
+const defaultProps : StepperProps = {
   'data-testid': testId,
   activeStep: 1,
   items: steps,
 };
 
+// StepperProps.children is ReactNode (from BoxProps), but Stepper also accepts a render-prop
+// function via react-stately's collection mechanism. We cast to silence the assignability error.
+const stepperChildren = ({ name, children }: StepperItemProps) => (
+  <Item key={name || (children as string)} textValue={name || (children as string)}>
+    <Text>{children}</Text>
+  </Item>
+);
+
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
   <CacheProvider value={emotionCache}>
-    <Stepper {...defaultProps} {...props}>
-      {({ name, children }) => (
-        <Item key={name || children} textValue={name || children}>
-          <Text>{children}</Text>
-        </Item>
-      )}
+    <Stepper {...(defaultProps)} {...(props)}>
+      {(stepperChildren as unknown) as React.ReactNode}
     </Stepper>
   </CacheProvider>,
 );
@@ -45,12 +50,8 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn(
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (
-    <Stepper {...defaultProps} {...props}>
-      {({ name, children }) => (
-        <Item key={name || children} textValue={name || children}>
-          <Text>{children}</Text>
-        </Item>
-      )}
+    <Stepper {...(defaultProps)} {...(props)}>
+      {(stepperChildren as unknown) as React.ReactNode}
     </Stepper>
   ),
 });
@@ -103,7 +104,7 @@ test('tooltip renders expected content based on props', async () => {
   fireEvent.mouseEnter(tab0);
   setTimeout(() => {
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-    expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].label);
+    expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].label ?? '');
   }, 0);
 
   // Should render textValue
@@ -112,13 +113,17 @@ test('tooltip renders expected content based on props', async () => {
     delete copy.label;
     return copy;
   });
-  getComponent({ items: stepsWithoutLabels }, { renderFn: rerender });
+  getComponent({ items: stepsWithoutLabels }, { renderFn: rerender } as {
+    renderFn: (ui: React.ReactElement<unknown, string |
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      React.JSXElementConstructor<unknown>>) => any
+  });
   ({ tab0 } = getTabs());
   fireEvent.mouseMove(tab0);
   fireEvent.mouseEnter(tab0);
   setTimeout(() => {
     expect(screen.queryByRole('tooltip')).toBeInTheDocument();
-    expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].name);
+    expect(screen.queryByRole('tooltip')).toHaveTextContent(steps[0].name!);
   }, 0);
 
   // Should render index
@@ -127,7 +132,11 @@ test('tooltip renders expected content based on props', async () => {
     delete copy.name;
     return copy;
   });
-  getComponent({ items: stepsWithNeither }, { renderFn: rerender });
+  getComponent({ items: stepsWithNeither }, { renderFn: rerender } as {
+    renderFn: (ui: React.ReactElement<unknown, string |
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      React.JSXElementConstructor<unknown>>) => any
+  });
   ({ tab0 } = getTabs());
   fireEvent.mouseMove(tab0);
   fireEvent.mouseEnter(tab0);
