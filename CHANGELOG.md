@@ -1,3 +1,13 @@
+## 2.206.0-alpha.0 (2026-06-24)
+
+### 🚀 Features
+
+- [UXE-7705] Push Astro and Onyx-tokens to Github
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.205.0 (2026-06-23)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
