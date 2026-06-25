@@ -75,6 +75,7 @@ const bodyContainer = {
 
 const footer = {
   pt: 'lg',
+  gap: 'md',
   background: 'white',
   '& > button': {
     flexGrow: 0,
