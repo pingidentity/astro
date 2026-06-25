@@ -1,3 +1,13 @@
+## 2.206.2-alpha.0 (2026-06-25)
+
+### 🩹 Fixes
+
+- [UXE-8438] Astro ButtonBar fix spacing
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.206.1-alpha.0 (2026-06-24)
 
 ### 🩹 Fixes
