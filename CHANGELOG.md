@@ -1,3 +1,13 @@
+## 2.207.0-alpha.0 (2026-07-02)
+
+### 🚀 Features
+
+- [UXE-8267] Tablebase functionality changes
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.206.2 (2026-06-25)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

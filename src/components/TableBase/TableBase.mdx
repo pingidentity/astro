@@ -3,29 +3,62 @@ import * as TableBaseStories from './TableBase.stories';
 
 <Meta of={TableBaseStories} isTemplate />
 
-# Table
+# TableBase
 
-Data tables display information in a grid-like format of rows and columns. 
-They organize information in a way that’s easy to scan so that users can look for patterns and develop insights from data. 
+Data tables display information in a grid-like format of rows and columns.
+They organize information in a way that's easy to scan so that users can look for patterns and develop insights from data.
 
-Column header names describe the type of content displayed in each column. 
+Column header names describe the type of content displayed in each column.
 Each row contains data related to a single entity.
 
-Tables should:
+TableBase should:
 - Have consistently aligned content.
 - Use multiple heading rows for higher-level grouping of the columns.
 - Use column dividers sparingly.
 
-Tables shouldn’t use different indicators to represent empty fields.
+This basic component is rendered as an HTML `<table>`, which accepts the `<TBody>` component and the `<THead>` as children.
 
-This basic component is rendered as an HTML `<table>`, which accepts the `<TableBody>` component and the `<TableHead>` as children.
+### When to Use
+
+Use TableBase when you need a fully custom table implementation that goes beyond what higher-level table components provide. Common use cases include:
+
+- Sticky columns (e.g., pinning the last column during horizontal scroll)
+- Custom row or column grouping
+- Non-standard selection behaviors
+- Bespoke cell rendering or layout that requires direct control over the table structure
+
+TableBase is the lowest-level table primitive in Astro and gives you direct access to the underlying React Aria/Stately table hooks. Use it when you need that level of control.
 
 ### Required Components
 
-This component requires these additional components: 
+This component requires these additional components:
 
-- TableCaption
-- TableHead
-- TableRow
-- TableCell
-- TableBody
+- **TableCaption** — renders an accessible `<caption>` element for the table
+- **THead** — wraps the header section (`<thead>`)
+  - **Column** — defines each column header cell (`<th>`)
+- **TBody** — wraps the body section (`<tbody>`)
+  - **Row** — defines each data row (`<tr>`)
+    - **Cell** — defines each data cell (`<td>`)
+
+### Accessibility
+
+#### Keyboard Navigation
+
+These keys provide additional functionality to the component.
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Moves focus to the next focusable component. All focusable components in the table are included in the page tab sequence. |
+| Shift + Tab | Moves focus to the previous focusable component. |
+| Space or Enter | Focuses the component and triggers an action if one is associated with it. |
+| Arrow keys | Can be used to navigate between the components in the table. |
+| Home or Page Up | Shifts the focus to the first row. |
+| End or Page Down | Shifts the focus to the last visible row. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- The **`aria-label`** attribute should be provided on the `TableBase` to give the table an accessible name. When a visible `TableCaption` is present, use **`aria-labelledby`** to associate the caption with the table instead.
+- The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure.
+- Each `Row` uses the **`aria-rowindex`** attribute to enumerate its position within the table.
+- Each `Column` and `Cell` uses the **`aria-colindex`** attribute to enumerate its position within its row.

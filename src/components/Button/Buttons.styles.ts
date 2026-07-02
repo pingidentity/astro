@@ -437,4 +437,16 @@ export default {
   filter,
   searchNavTabLabel: tabLabelButton,
   selectLink,
+  tableHeaderButton: {
+    fontSize: 'md',
+    fontWeight: '1',
+    color: 'text.primary',
+    lineHeight: 'body',
+    backgroundColor: 'transparent',
+    borderRadius: '0px',
+    textAlign: 'left',
+    '&.is-focused': {
+      ...defaultFocus,
+    },
+  },
 };

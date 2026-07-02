@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import { text } from '../Text/Text.styles';
 
 const defaultFocus = {
@@ -6,6 +8,37 @@ const defaultFocus = {
   outlineColor: 'focus',
   outlineOffset: '-1px',
   zIndex: 2,
+};
+
+// Pseudo-element styles for the sticky last column separator and shadow.
+// Using ::after/::before instead of border-left + box-shadow because:
+//   - border-collapse:collapse absorbs border-left (invisible until adjacent cell scrolls away)
+//   - overflow:auto on the scroll container clips outward box-shadow
+// Pseudo-elements live inside the sticky cell's stacking context and render
+// within the visible viewport, so neither constraint applies.
+const stickyColumnSeparator = {
+  // 1px left border line — unaffected by border-collapse
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: '1px',
+    backgroundColor: astroTokens.color.common.border,
+    pointerEvents: 'none',
+  },
+  // drop shadow extending left into the scrolling area — unaffected by overflow clipping
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: '-6px',
+    width: '6px',
+    background: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 0.13))',
+    pointerEvents: 'none',
+  },
 };
 
 const container = {
@@ -20,6 +53,7 @@ const container = {
       right: 0,
       backgroundColor: 'white',
       zIndex: 2,
+      ...stickyColumnSeparator,
       '&.is-focused': {
         borderStyle: 'solid',
         borderColor: 'transparent',
@@ -35,7 +69,9 @@ const container = {
       '&:nth-of-type(odd) td:last-of-type': {
         position: 'sticky',
         right: 0,
+        zIndex: 1,
         backgroundColor: 'inherit',
+        ...stickyColumnSeparator,
         '&.is-focused': {
           borderStyle: 'solid',
           borderColor: 'transparent',
@@ -45,7 +81,9 @@ const container = {
       '&:nth-of-type(even) td:last-of-type': {
         position: 'sticky',
         right: 0,
+        zIndex: 1,
         backgroundColor: 'white',
+        ...stickyColumnSeparator,
         '&.is-focused': {
           borderStyle: 'solid',
           borderColor: 'transparent',
@@ -87,6 +125,20 @@ const head = {
   },
   '&.is-focused': {
     ...defaultFocus,
+  },
+};
+
+const resizer = {
+  cursor: 'col-resize',
+  display: 'inline-block',
+  width: '2px',
+  height: '100%',
+  backgroundColor: 'neutral.10',
+  position: 'absolute',
+  right: '0px',
+  top: '0',
+  '&.is-focused': {
+    backgroundColor: 'focus',
   },
 };
 
@@ -139,4 +191,5 @@ export default {
   data,
   head,
   row,
+  resizer,
 };

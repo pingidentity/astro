@@ -2,6 +2,7 @@ import React from 'react';
 import { useAsyncList } from 'react-stately';
 import { act as actHooks, fireEvent, render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
 import { Cell, Column, Row, TBody, THead } from '../../index';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -81,7 +82,6 @@ const getComponent = (props = {}) => render(
   </TableBase>,
 );
 
-// Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (
     <TableBase {...defaultProps} {...props}>
@@ -158,6 +158,119 @@ test('should change selection on mouse press', async () => {
   expect(rows[1]).not.toHaveClass('is-selected');
   await userEvent.click(rows[1]);
   expect(rows[1]).toHaveClass('is-selected');
+});
+
+test('should NOT change selection on row body click when hasSelectionCheckboxes is true', async () => {
+  getComponent({ selectionMode: 'multiple', hasSelectionCheckboxes: true });
+  const rows = screen.getAllByRole('row');
+  // Click on a cell (the actual user target) — cell-level stopPropagation prevents
+  // the row's press handler from firing, so no selection is triggered.
+  const firstBodyRowCells = rows[1].querySelectorAll('td');
+
+  expect(rows[1]).not.toHaveClass('is-selected');
+  await userEvent.click(firstBodyRowCells[1]);
+  expect(rows[1]).not.toHaveClass('is-selected');
+});
+
+test('should change selection via checkbox when hasSelectionCheckboxes is true', async () => {
+  getComponent({ selectionMode: 'multiple', hasSelectionCheckboxes: true });
+  const rows = screen.getAllByRole('row');
+  const firstRowCheckbox = within(rows[1]).getByRole('checkbox');
+
+  expect(rows[1]).not.toHaveClass('is-selected');
+  await userEvent.click(firstRowCheckbox);
+  expect(rows[1]).toHaveClass('is-selected');
+});
+
+test('mousedown on a cell does not bubble to row via React synthetic event', () => {
+  // Verify that the cell-level stopPropagation approach prevents the row's React
+  // onMouseDown handler from firing. We test this with a simple isolated component
+  // that matches the structure used in TableCell (mergeProps with stopPropagation).
+  // The full integration is covered by the hasSelectionCheckboxes test above.
+  const rowSpy = jest.fn();
+  render(
+    <table>
+      <tbody>
+        <tr data-testid="test-row" onMouseDown={rowSpy}>
+          <td
+            data-testid="test-cell"
+            {...{ onMouseDown: (e: React.MouseEvent) => e.stopPropagation() }}
+          >
+            cell content
+          </td>
+        </tr>
+      </tbody>
+    </table>,
+  );
+  fireEvent.mouseDown(screen.getByTestId('test-cell'));
+  // The row's React onMouseDown should not have fired because stopPropagation
+  // was called on the td's synthetic onMouseDown handler.
+  expect(rowSpy).not.toHaveBeenCalled();
+});
+
+test('should toggle selection on Enter key when row is focused', async () => {
+  getComponent({ selectionMode: 'multiple' });
+  const rows = screen.getAllByRole('row');
+
+  await userEvent.tab();
+  expect(rows[1]).toHaveFocus();
+  expect(rows[1]).not.toHaveClass('is-selected');
+
+  fireEvent.keyDown(rows[1], { key: 'Enter' });
+  expect(rows[1]).toHaveClass('is-selected');
+
+  fireEvent.keyDown(rows[1], { key: 'Enter' });
+  expect(rows[1]).not.toHaveClass('is-selected');
+});
+
+test('Enter key should toggle selection on focused row with checkboxes', async () => {
+  getComponent({ selectionMode: 'multiple' });
+  const rows = screen.getAllByRole('row');
+
+  await userEvent.tab();
+  expect(rows[1]).toHaveFocus();
+  expect(rows[1]).not.toHaveClass('is-selected');
+
+  fireEvent.keyDown(rows[1], { key: 'Enter' });
+  expect(rows[1]).toHaveClass('is-selected');
+});
+
+test('Enter key should not change selection when selectionMode is none', async () => {
+  getComponent();
+  const rows = screen.getAllByRole('row');
+
+  await userEvent.tab();
+  expect(rows[1]).toHaveFocus();
+  expect(rows[1]).not.toHaveClass('is-selected');
+
+  fireEvent.keyDown(rows[1], { key: 'Enter' });
+  expect(rows[1]).not.toHaveClass('is-selected');
+});
+
+test('Enter key should toggle a row checkbox when the checkbox input is focused', () => {
+  getComponent({ selectionMode: 'multiple' });
+  const rows = screen.getAllByRole('row');
+  const checkboxes = screen.getAllByRole('checkbox');
+
+  expect(rows[1]).not.toHaveClass('is-selected');
+  // focus() triggers React Aria focus state updates and must be wrapped in act
+  actHooks(() => { checkboxes[1].focus(); });
+  fireEvent.keyDown(checkboxes[1], { key: 'Enter' });
+  expect(rows[1]).toHaveClass('is-selected');
+
+  fireEvent.keyDown(checkboxes[1], { key: 'Enter' });
+  expect(rows[1]).not.toHaveClass('is-selected');
+});
+
+test('Enter key should toggle select-all checkbox when it is focused', () => {
+  getComponent({ selectionMode: 'multiple' });
+  const rows = screen.getAllByRole('row');
+  const selectAllCheckbox = screen.getByTestId('select-all-checkbox');
+
+  rows.slice(1).forEach(row => expect(row).not.toHaveClass('is-selected'));
+  actHooks(() => { selectAllCheckbox.focus(); });
+  fireEvent.keyDown(selectAllCheckbox, { key: 'Enter' });
+  rows.slice(1).forEach(row => expect(row).toHaveClass('is-selected'));
 });
 
 test('should change select all checkbox on mouse press', () => {
@@ -273,6 +386,223 @@ test('Arrow Left move the focus to next cell', async () => {
   fireEvent.keyDown(tableCells[0], { key: 'ArrowLeft' });
   fireEvent.keyUp(tableCells[0], { key: 'ArrowLeft' });
   expect(rows[1]).toHaveFocus();
+});
+
+describe('Resizable columns', () => {
+  const resizableHeaders = [
+    { key: 'name', name: 'Name' },
+    { key: 'value', name: 'Value' },
+  ];
+
+  const resizableObjects = [
+    { key: '1', name: 'Alpha', value: '10' },
+    { key: '2', name: 'Beta', value: '20' },
+  ];
+
+  test('renders resize slider input for a resizable column', () => {
+    render(
+      <TableBase aria-label="resizable table">
+        <THead columns={resizableHeaders}>
+          {head => (
+            <Column key={head.key} allowsResizing>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={resizableObjects}>
+          {row => (
+            <Row key={row.key}>
+              {columnKey => <Cell>{row[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+
+    // Each resizable column renders a visually-hidden <input type="range">
+    // accessible as role="slider" with an aria-label containing the column name
+    const slider = screen.getByRole('slider', { name: /Name column width/i });
+    expect(slider).toBeInTheDocument();
+    expect(screen.getByRole('slider', { name: /Value column width/i })).toBeInTheDocument();
+  });
+
+  test('resizable table has no accessibility violations', async () => {
+    jest.useRealTimers();
+    const { container } = render(
+      <TableBase aria-label="resizable table">
+        <THead columns={resizableHeaders}>
+          {head => (
+            <Column key={head.key} allowsResizing>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={resizableObjects}>
+          {row => (
+            <Row key={row.key}>
+              {columnKey => <Cell>{row[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+    const results = await axe(container);
+    jest.useFakeTimers();
+    expect(results).toHaveNoViolations();
+  });
+
+  test('does not render resize slider input for a non-resizable column', () => {
+    render(
+      <TableBase aria-label="non-resizable table">
+        <THead columns={resizableHeaders}>
+          {head => (
+            <Column key={head.key}>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={resizableObjects}>
+          {row => (
+            <Row key={row.key}>
+              {columnKey => <Cell>{row[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+
+    expect(screen.queryByRole('slider')).not.toBeInTheDocument();
+  });
+
+  describe('keyboard resizing', () => {
+    const getResizableWithCallbacks = (props = {}) => render(
+      <TableBase aria-label="resizable table" {...props}>
+        <THead columns={resizableHeaders}>
+          {head => (
+            <Column key={head.key} allowsResizing>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={resizableObjects}>
+          {row => (
+            <Row key={row.key}>
+              {columnKey => <Cell>{row[columnKey]}</Cell>}
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+
+    test('Enter on resizer input starts resize and calls onResizeStart', () => {
+      const onResizeStart = jest.fn();
+      getResizableWithCallbacks({ onResizeStart });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      expect(onResizeStart).toHaveBeenCalledTimes(1);
+    });
+
+    test('ArrowRight during active resize calls onResize', () => {
+      const onResize = jest.fn();
+      getResizableWithCallbacks({ onResize });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      expect(onResize).toHaveBeenCalledTimes(1);
+    });
+
+    test('ArrowLeft during active resize calls onResize', () => {
+      const onResize = jest.fn();
+      getResizableWithCallbacks({ onResize });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: 'ArrowLeft' });
+      expect(onResize).toHaveBeenCalledTimes(1);
+    });
+
+    test('multiple ArrowRight presses each call onResize', () => {
+      const onResize = jest.fn();
+      getResizableWithCallbacks({ onResize });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      expect(onResize).toHaveBeenCalledTimes(3);
+    });
+
+    test('Escape ends resize and calls onResizeEnd', () => {
+      const onResizeEnd = jest.fn();
+      getResizableWithCallbacks({ onResizeEnd });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: 'Escape' });
+      expect(onResizeEnd).toHaveBeenCalledTimes(1);
+    });
+
+    test('Space ends resize and calls onResizeEnd', () => {
+      const onResizeEnd = jest.fn();
+      getResizableWithCallbacks({ onResizeEnd });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: ' ' });
+      expect(onResizeEnd).toHaveBeenCalledTimes(1);
+    });
+
+    test('second Enter ends resize and calls onResizeEnd', () => {
+      const onResizeEnd = jest.fn();
+      getResizableWithCallbacks({ onResizeEnd });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      expect(onResizeEnd).toHaveBeenCalledTimes(1);
+    });
+
+    test('ArrowRight before resize starts does not call onResize', () => {
+      const onResize = jest.fn();
+      getResizableWithCallbacks({ onResize });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      expect(onResize).not.toHaveBeenCalled();
+    });
+
+    test('onResize is not called after resize ends', () => {
+      const onResize = jest.fn();
+      getResizableWithCallbacks({ onResize });
+
+      const slider = screen.getByRole('slider', { name: /Name column width/i });
+      actHooks(() => { slider.focus(); });
+
+      fireEvent.keyDown(slider, { key: 'Enter' });
+      fireEvent.keyDown(slider, { key: 'Escape' });
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      expect(onResize).not.toHaveBeenCalled();
+    });
+  });
 });
 
 describe('Sortable Table with useAsyncList', () => {

@@ -14,7 +14,6 @@ import {
   Pagination,
   PaginationProvider,
   Row,
-  SearchField,
   TableBase,
   TBody,
   Text,
@@ -27,7 +26,7 @@ import { items as listData } from '../../utils/devUtils/constants/items';
 import TableReadme from './TableBase.mdx';
 
 export default {
-  title: 'Experimental/Table',
+  title: 'Components/TableBase',
   component: TableBase,
   parameters: {
     docs: {
@@ -368,6 +367,56 @@ DynamicWithSorting.parameters = {
       rules: [{ id: 'color-contrast', enabled: false }],
     },
   },
+};
+
+export const WithResizableColumns: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <Card variant="cards.tableWrapper">
+      <TableBase caption="Lorem ipsum" aria-label="table">
+        <THead>
+          <Column minWidth={100} allowsResizing>Type</Column>
+          <Column minWidth={100} allowsResizing>Date</Column>
+          <Column minWidth={100}>Additional Grant</Column>
+          <Column minWidth={100}>Total Grant</Column>
+        </THead>
+        <TBody items={objects}>
+          {item => (
+            <Row key={item.id}>
+              <Cell>{item.type}</Cell>
+              <Cell>{item.date}</Cell>
+              <Cell>{item.additional_grant}</Cell>
+              <Cell>{item.total_grant}</Cell>
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
+};
+
+export const WithMinMaxColumnWidth: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <Card variant="cards.tableWrapper">
+      <TableBase caption="Lorem ipsum" aria-label="table">
+        <THead>
+          <Column minWidth={80} maxWidth={200}>Type</Column>
+          <Column minWidth={120} maxWidth={300}>Date</Column>
+          <Column minWidth={100} maxWidth={180}>Additional Grant</Column>
+          <Column minWidth={100} maxWidth={180}>Total Grant</Column>
+        </THead>
+        <TBody items={objects}>
+          {item => (
+            <Row key={item.id}>
+              <Cell>{item.type}</Cell>
+              <Cell>{item.date}</Cell>
+              <Cell>{item.additional_grant}</Cell>
+              <Cell>{item.total_grant}</Cell>
+            </Row>
+          )}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
 };
 
 export const WithLastColumnSticky: StoryFn<TableBaseProps<object>> = () => {

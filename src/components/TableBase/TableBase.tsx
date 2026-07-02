@@ -1,10 +1,11 @@
-import React, { forwardRef, Key, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { useFocusRing } from '@react-aria/focus';
 import { useHover, usePress } from '@react-aria/interactions';
 import {
   useTable,
   useTableCell,
   useTableColumnHeader,
+  useTableColumnResize,
   useTableHeaderRow,
   useTableRow,
   useTableRowGroup,
@@ -19,6 +20,7 @@ import type { GridNode } from '@react-types/grid';
 import { Box, CheckboxField, Icon, Loader, Text } from '../..';
 import { useGetTheme, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import type {
+  ResizerProps,
   TableBaseProps,
   TableCaptionProps,
   TableCellProps,
@@ -63,6 +65,9 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     isStickyHeader = false,
     className,
     isLastColumnSticky,
+    onResizeStart,
+    onResize,
+    onResizeEnd,
     ...others
   } = props;
 
@@ -169,6 +174,9 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
                       column={column}
                       state={state}
                       layoutState={layoutState}
+                      onResizeStart={onResizeStart}
+                      onResize={onResize}
+                      onResizeEnd={onResizeEnd}
                     />
                   )
               ))}
@@ -197,8 +205,13 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
             )
           }
           {Array.from(collection.body.childNodes).map(row => (
-            <TableRow key={row.key} item={row} state={state}>
-              {Array.from(collection.getChildren!(row.key)).map(cell => (
+            <TableRow
+              key={row.key}
+              item={row}
+              state={state}
+              hasSelectionCheckboxes={hasSelectionCheckboxes}
+            >
+              {Array.from(collection.getChildren?.(row.key) ?? []).map(cell => (
                 cell.props.isSelectionCell
                   ? (
                     <TableCheckboxCell
@@ -290,8 +303,48 @@ function TableHeaderRow<T>(props: TableHeaderRowProps<T>) {
   );
 }
 
+function Resizer<T>(props: ResizerProps<T>) {
+  const { column, layoutState, triggerRef, onResizeStart, onResize, onResizeEnd } = props;
+  const ref = useRef<HTMLInputElement | null>(null);
+  const { resizerProps, inputProps } = useTableColumnResize(
+    {
+      column,
+      'aria-label': `${column.textValue} column width`,
+      triggerRef,
+      onResizeStart,
+      onResize,
+      onResizeEnd,
+    },
+    layoutState,
+    ref,
+  );
+  const { isFocusVisible, focusProps } = useFocusRing();
+
+  // The input must be nested inside the Box that carries resizerProps so that
+  // keyboard events fired on the input (Enter to start resize, Escape/Tab to
+  // end it) bubble up to the element with the keyboard handlers.
+
+  const { classNames } = useStatusClasses('', {
+    isFocused: isFocusVisible,
+  });
+
+  return (
+    <Box
+      role="presentation"
+      variant="tableBase.resizer"
+      className={classNames}
+      {...resizerProps}
+    >
+      <input
+        ref={ref}
+        {...mergeProps(inputProps, focusProps)}
+      />
+    </Box>
+  );
+}
+
 function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
-  const { column, state, className, layoutState } = props;
+  const { column, state, className, layoutState, onResizeStart, onResize, onResizeEnd } = props;
 
   const ref = useRef<HTMLTableCellElement | null>(null);
 
@@ -301,15 +354,19 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
     ref,
   );
 
-  const { isFocusVisible, focusProps } = useFocusRing();
+  // within: true catches keyboard focus on the resizer <input> child so the
+  // <th> shows its focus ring even when the child is the active element.
+  const { isFocusVisible, focusProps } = useFocusRing({ within: true });
 
   const allowsSorting = column.props?.allowsSorting;
+  const allowsResizing = column.props?.allowsResizing;
 
   const { icons } = useGetTheme();
   const { Ascending, Descending } = icons;
 
   const sortDescriptor = state.sortDescriptor;
-  const arrowIcon = (sortDescriptor?.column === column.key && sortDescriptor?.direction === 'ascending') ? Ascending : Descending;
+  const isSortedAscending = sortDescriptor?.column === column.key && sortDescriptor?.direction === 'ascending';
+  const arrowIcon = isSortedAscending ? Ascending : Descending;
 
   const sortIcon = (
     <Icon
@@ -317,7 +374,7 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
       size="xs"
       aria-hidden="true"
       title={{
-        name: sortDescriptor?.direction === 'ascending' ? 'Sort ascending' : 'Sort descending',
+        name: isSortedAscending ? 'Sort ascending' : 'Sort descending',
       }}
     />
   );
@@ -337,6 +394,7 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
       className={classNames}
       sx={{
         width: layoutState?.getColumnWidth(column.key),
+        position: 'relative',
         ...column.props.sx,
       }}
       {...mergeProps(columnHeaderProps, focusProps, column.props)}
@@ -345,12 +403,21 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
         <Text>{column.rendered}</Text>
         {allowsSorting && sortIcon}
       </Box>
+      {allowsResizing && (
+        <Resizer
+          column={column}
+          layoutState={layoutState}
+          onResizeStart={onResizeStart}
+          onResize={onResize}
+          onResizeEnd={onResizeEnd}
+        />
+      )}
     </Box>
   );
 }
 
 function TableRow<T>(props: TableRowProps<T>) {
-  const { item, state, children, className } = props;
+  const { item, state, children, className, hasSelectionCheckboxes } = props;
 
   const ref = useRef<HTMLTableRowElement | null>(null);
 
@@ -363,7 +430,26 @@ function TableRow<T>(props: TableRowProps<T>) {
   const { isFocusVisible, focusProps } = useFocusRing();
 
   const { hoverProps, isHovered } = useHover({});
-  const { pressProps, isPressed } = usePress({ ref });
+
+  // allowTextSelectionOnPress: true prevents the press handler from suppressing
+  // native text-selection drags (user-select: none is not applied on pointer down).
+  // When hasSelectionCheckboxes is true, isDisabled: true disables the visual
+  // isPressed state — selection is handled solely by the checkbox cells.
+  const { pressProps, isPressed } = usePress({
+    ref,
+    allowTextSelectionOnPress: true,
+    isDisabled: !!hasSelectionCheckboxes,
+  });
+
+  // React Aria's useSelectableItem only maps Space to selection (not Enter).
+  // Enter is reserved for "action" which is unused here, so we manually toggle
+  // selection on Enter to match expected keyboard behavior.
+  const enterKeyProps = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== 'Enter') return;
+    if (isDisabled || state.selectionManager.selectionMode === 'none') return;
+    e.preventDefault();
+    state.selectionManager.toggleSelection(item.key);
+  }, [isDisabled, item.key, state.selectionManager]);
 
   const { classNames } = useStatusClasses(className, {
     isSelected,
@@ -379,7 +465,7 @@ function TableRow<T>(props: TableRowProps<T>) {
       display="table-row"
       className={classNames}
       variant="tableBase.row"
-      {...mergeProps(rowProps, focusProps, hoverProps, pressProps)}
+      {...mergeProps(rowProps, focusProps, hoverProps, pressProps, { onKeyDown: enterKeyProps })}
       ref={ref}
     >
       {children}
@@ -401,6 +487,11 @@ function TableCell<T>(props: TableCellProps<T>) {
 
   useHandleFocusRef(ref);
 
+  // Prevents pointer events reaching the row's press handler, allowing native text-selection drags.
+  const stopPointerPropagation = useCallback((e: React.SyntheticEvent) => {
+    e.stopPropagation();
+  }, []);
+
   return (
     <Box
       as="td"
@@ -412,12 +503,29 @@ function TableCell<T>(props: TableCellProps<T>) {
         width: layoutState?.getColumnWidth((cell.column as GridNode<T>).key),
         ...cell.props.sx,
       }}
-      {...mergeProps(gridCellProps, focusProps, cell.props)}
+      {...mergeProps(
+        { onPointerDown: stopPointerPropagation, onMouseDown: stopPointerPropagation },
+        gridCellProps,
+        focusProps,
+        cell.props,
+      )}
     >
       {cell.rendered}
     </Box>
   );
 }
+
+// Native checkboxes only toggle on Space, not Enter. This handler makes Enter
+// behave the same as Space by calling the checkbox's onChange callback.
+const handleCheckboxEnterKey = (
+  onChange: ((v: boolean) => void) | undefined,
+  isSelected: boolean | undefined,
+) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    onChange?.(!isSelected);
+  }
+};
 
 function TableSelectAllCell<T>(props: TableSelectAllCellProps<T>) {
   const { column, state, layoutState } = props;
@@ -446,6 +554,7 @@ function TableSelectAllCell<T>(props: TableSelectAllCellProps<T>) {
           <CheckboxField
             checkBoxProps={{
               'data-testid': 'select-all-checkbox',
+              onKeyDown: handleCheckboxEnterKey(checkboxProps.onChange, checkboxProps.isSelected),
             }}
             {...checkboxProps}
           />
@@ -475,7 +584,12 @@ function TableCheckboxCell<T>(props: TableCheckboxCellProps<T>) {
       {...gridCellProps}
       ref={ref}
     >
-      <CheckboxField {...checkboxProps} />
+      <CheckboxField
+        checkBoxProps={{
+          onKeyDown: handleCheckboxEnterKey(checkboxProps.onChange, checkboxProps.isSelected),
+        }}
+        {...checkboxProps}
+      />
     </Box>
   );
 }
