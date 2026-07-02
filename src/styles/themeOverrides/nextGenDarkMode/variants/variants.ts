@@ -245,10 +245,15 @@ export default {
       '&.is-last-column-sticky': {
         'thead tr th:last-of-type': {
           backgroundColor: 'backgroundBase',
+          '&::after': { backgroundColor: astroTokensDark.color.common['border-dark'] },
         },
         'tbody tr': {
+          '&:nth-of-type(odd) td:last-of-type': {
+            '&::after': { backgroundColor: astroTokensDark.color.common['border-dark'] },
+          },
           '&:nth-of-type(even) td:last-of-type': {
             backgroundColor: 'backgroundBase',
+            '&::after': { backgroundColor: astroTokensDark.color.common['border-dark'] },
           },
         },
       },
@@ -266,6 +271,9 @@ export default {
     },
     data: {
       color: 'text.secondary',
+    },
+    resizer: {
+      backgroundColor: astroTokensDark.color.common['border-dark'],
     },
   },
   statusIcon,

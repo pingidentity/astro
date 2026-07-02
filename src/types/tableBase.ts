@@ -1,18 +1,20 @@
-import { ReactNode } from 'react';
+import { ReactNode, RefObject } from 'react';
 import type { TableState } from '@react-stately/table';
 import { TableColumnResizeState } from '@react-stately/table';
 import type { GridNode } from '@react-types/grid';
-import type { Node } from '@react-types/shared';
-import type { TableProps } from '@react-types/table';
+import type { FocusableElement, Key, Node } from '@react-types/shared';
+import type { ColumnSize, TableProps } from '@react-types/table';
 
 import { TestingAttributes } from './shared/test';
 import { BoxProps } from './box';
 import { DOMAttributes } from './shared';
 
+export type ResizeHandler = (widths: Map<Key, ColumnSize>) => void;
+
 export interface BaseProp extends BoxProps, TestingAttributes, DOMAttributes{
 }
 
-export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<BaseProp, 'children'> {
+export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<BaseProp, 'children' | 'onResize'> {
   'aria-label'?: string;
   selectionMode?: 'none' | 'single' | 'multiple',
   selectionBehavior?: 'replace' | 'toggle',
@@ -21,6 +23,9 @@ export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<Ba
   caption?: ReactNode | string;
   isStickyHeader?: boolean;
   isLastColumnSticky?: boolean;
+  onResizeStart?: ResizeHandler;
+  onResize?: ResizeHandler;
+  onResizeEnd?: ResizeHandler;
 }
 
 export interface TableRowGroupProps extends BaseProp{
@@ -36,11 +41,23 @@ export interface TableHeaderRowProps<T> extends BaseProp{
   className?: string;
 }
 
-export interface TableColumnHeaderProps<T> extends BaseProp{
+export interface ResizerProps<T> {
+  column: GridNode<T>;
+  layoutState: TableColumnResizeState<T>;
+  triggerRef?: RefObject<FocusableElement | null>;
+  onResizeStart?: (widths: Map<Key, ColumnSize>) => void;
+  onResize?: (widths: Map<Key, ColumnSize>) => void;
+  onResizeEnd?: (widths: Map<Key, ColumnSize>) => void;
+}
+
+export interface TableColumnHeaderProps<T> extends Omit<BaseProp, 'onResize'> {
   column: GridNode<T>;
   state: TableState<T>;
   className?: string;
   layoutState: TableColumnResizeState<T>;
+  onResizeStart?: ResizeHandler;
+  onResize?: ResizeHandler;
+  onResizeEnd?: ResizeHandler;
 }
 
 export interface TableRowProps<T> extends BaseProp{
@@ -48,6 +65,7 @@ export interface TableRowProps<T> extends BaseProp{
   state: TableState<T>;
   children: ReactNode;
   className?: string;
+  hasSelectionCheckboxes?: boolean;
 }
 
 export interface TableCellProps<T> extends BaseProp{

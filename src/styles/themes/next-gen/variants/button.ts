@@ -709,6 +709,11 @@ const buttons = {
   paginationMenu,
   ButtonInputGroupContentRight,
   selectLink,
+  tableHeaderButton: {
+    '&.is-focused': {
+      ...defaultFocus,
+    },
+  },
 };
 
 export default buttons;

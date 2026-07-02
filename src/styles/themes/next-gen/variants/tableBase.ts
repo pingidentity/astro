@@ -1,3 +1,5 @@
+import { astroTokens } from '@pingux/onyx-tokens';
+
 import colors from '../colors/colors';
 
 import { defaultFocus as baseFocus } from './button';
@@ -85,6 +87,10 @@ const thead = {
   },
 };
 
+const resizer = {
+  backgroundColor: astroTokens.color.common['border-dark'],
+};
+
 const head = {
   px: 'lg',
   py: 'sm',
@@ -126,4 +132,5 @@ export const tableBase = {
   head,
   tbody,
   data,
+  resizer,
 };
