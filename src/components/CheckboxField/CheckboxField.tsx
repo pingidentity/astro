@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useMemo } from 'react';
+import React, { forwardRef, useEffect, useMemo, useRef } from 'react';
 import { mergeProps, useCheckbox } from 'react-aria';
 import { useToggleState } from 'react-stately';
 import { usePress } from '@react-aria/interactions';
@@ -42,13 +42,27 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
   const checkboxRef = useLocalOrForwardRef<HTMLInputElement>(ref);
 
   const { pressProps: containerPressProps } = usePress({ ...props, ref: checkboxRef });
+  // usePress onKeyDown registers a global keyup listener and when isIndeterminate changes during
+  // a press, usePress creates a new state machine instance but old global keyup
+  // listener never fires cleanly and the state machine gets out of sync, causing
+  // subsequent Space presses to be ignored. The checkbox input already handles Space natively.
+  const { onKeyDown: _kd, onKeyUp: _ku, ...safeContainerPressProps } = containerPressProps;
+
+  const prevIsIndeterminate = useRef(isIndeterminate);
 
   useEffect(() => {
     if (checkboxRef.current && isIndeterminate) {
       checkboxRef.current.indeterminate = true;
     } else if (checkboxRef.current && !isIndeterminate) {
       checkboxRef.current.indeterminate = false;
+
+      // Restore focus to the new input when the transition  from indeterminate to default
+      // occurs and focus has landed on <body> (meaning it was on the old input before the swap).
+      if (prevIsIndeterminate.current && document.activeElement === document.body) {
+        checkboxRef.current.focus();
+      }
     }
+    prevIsIndeterminate.current = isIndeterminate;
   }, [isIndeterminate]);
 
   const { inputProps } = useCheckbox(checkboxProps as AriaCheckboxProps, state, checkboxRef);
@@ -58,7 +72,7 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
     fieldControlInputProps,
     fieldLabelProps,
   } = useField({
-    ...containerPressProps,
+    ...safeContainerPressProps,
     ...props,
     statusClasses: { isIndeterminate },
     controlProps: { ...controlProps, ...inputProps },

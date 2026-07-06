@@ -88,13 +88,11 @@ const LinkSelectField = forwardRef((props, ref) => {
         <Box as="span" role="presentation" variant="forms.select.arrow">
           <Icon
             icon={MenuDown}
-            title={{ name: 'Menu Down Icon' }}
             sx={{
               ...(state.isOpen ? { transform: 'rotate(180deg)' } : null),
               ...iconPropsSx,
             }}
             {...restIconProps}
-            title={{ name: '' }}
             color={isOnyx ? 'font.link' : 'active'}
             size={linkSelectFieldIcon}
             aria-hidden="true"

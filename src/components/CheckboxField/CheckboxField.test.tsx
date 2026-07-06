@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { CheckboxFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { render, screen } from '../../utils/testUtils/testWrapper';
+import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
@@ -202,4 +202,55 @@ test('indeterminate checkbox, clicking svg', async () => {
 
   expect(input).not.toHaveAttribute('aria-checked', 'mixed');
   expect(label).not.toHaveClass('is-indeterminate');
+});
+
+test('controlled indeterminate checkbox retains focus and toggles correctly across keyboard Space presses', async () => {
+  const onChange = jest.fn();
+  const IndeterminateParent = () => {
+    const [isIndeterminate, setIsIndeterminate] = React.useState(true);
+    const [isSelected, setIsSelected] = React.useState(false);
+    const handleChange = (selected: boolean) => {
+      onChange(selected);
+      setIsIndeterminate(false);
+      setIsSelected(selected);
+    };
+    return (
+      <CheckboxField
+        label={testLabel}
+        isIndeterminate={isIndeterminate}
+        isSelected={isSelected}
+        onChange={handleChange}
+      />
+    );
+  };
+  render(<IndeterminateParent />);
+
+  // Initial: indeterminate
+  expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'mixed');
+
+  // First Space: focus the input, then simulate Space press
+  const input = screen.getByRole('checkbox');
+  act(() => { input.focus(); });
+  expect(input).toHaveFocus();
+
+  // Simulate keyboard Space: keydown triggers native change on checkbox, then keyup
+  fireEvent.keyDown(input, { key: ' ', code: 'Space', charCode: 32 });
+  fireEvent.click(input); // keyboard Space on checkbox fires a click event in browsers
+  fireEvent.keyUp(input, { key: ' ', code: 'Space', charCode: 32 });
+  expect(onChange).toHaveBeenNthCalledWith(1, true);
+  // Re-query after re-render: isIndeterminate=false now
+  expect(screen.getByRole('checkbox')).not.toHaveAttribute('aria-checked', 'mixed');
+  expect(screen.getByRole('checkbox')).toBeChecked();
+
+  // After the indeterminate->checked transition, the input should still have focus
+  // (the old IndeterminateCheckbox input was unmounted, so focus may be lost)
+  expect(screen.getByRole('checkbox')).toHaveFocus();
+
+  // Second Space: checked -> unchecked
+  const input2 = screen.getByRole('checkbox');
+  fireEvent.keyDown(input2, { key: ' ', code: 'Space', charCode: 32 });
+  fireEvent.click(input2);
+  fireEvent.keyUp(input2, { key: ' ', code: 'Space', charCode: 32 });
+  expect(onChange).toHaveBeenNthCalledWith(2, false);
+  expect(screen.getByRole('checkbox')).not.toBeChecked();
 });
