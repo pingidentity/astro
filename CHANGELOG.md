@@ -1,3 +1,13 @@
+## 2.207.1-alpha.0 (2026-07-06)
+
+### 🩹 Fixes
+
+- [UXE-8410] CheckboxField focus restoration on Space key
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.207.0 (2026-07-02)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
