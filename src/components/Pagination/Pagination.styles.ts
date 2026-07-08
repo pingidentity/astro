@@ -6,7 +6,7 @@ const container = {
   flexGrow: 1,
 };
 const iconWrapper = {
-  ml: 'md',
+  ml: 'lg',
 };
 
 const wrapper = {

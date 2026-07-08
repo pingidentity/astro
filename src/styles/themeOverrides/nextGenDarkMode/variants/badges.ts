@@ -124,6 +124,49 @@ const itemBadgeWithSlot = {
   },
 };
 
+const tableBaseBadgeSpanStyle = {
+  fontSize: '11.25px',
+  lineHeight: '1',
+};
+
+const tableBaseBadge = {
+  active: {
+    backgroundColor: `${astroTokensDark.color.blue[500]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokensDark.color.black,
+    },
+  },
+  warning: {
+    backgroundColor: `${astroTokensDark.color.yellow[500]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokensDark.color.black,
+    },
+  },
+  critical: {
+    backgroundColor: `${astroTokensDark.color.red[500]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokensDark.color.black,
+    },
+  },
+  healthy: {
+    backgroundColor: `${astroTokensDark.color.green[500]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokensDark.color.black,
+    },
+  },
+  secondary: {
+    backgroundColor: `${astroTokensDark.color.gray[500]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokensDark.color.black,
+    },
+  },
+};
+
 const badges = {
   baseBadge,
   primary,
@@ -169,6 +212,7 @@ const badges = {
       color: 'font.base',
     },
   },
+  tableBaseBadge,
 };
 
 

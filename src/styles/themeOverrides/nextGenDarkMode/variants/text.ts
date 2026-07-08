@@ -51,6 +51,9 @@ export const text = {
   pageHeaderTitle: {
     color: astroTokensDark.color.gray[100],
   },
+  headText: {
+    color: astroTokensDark.color.font.base,
+  },
   linkSelectFieldLabel: {
     color: astroTokensDark.color.font.link,
   },

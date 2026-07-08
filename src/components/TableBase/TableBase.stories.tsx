@@ -84,11 +84,11 @@ const objects = [
 ];
 
 const statusVariant = {
-  Pending: 'warningStatusBadge',
-  Failed: 'criticalStatusBadge',
-  Rejected: 'criticalStatusBadge',
-  Active: 'healthyStatusBadge',
-  Inactive: 'secondaryStatusBadge',
+  Pending: 'tableBaseBadge.secondary',
+  Failed: 'tableBaseBadge.critical',
+  Rejected: 'tableBaseBadge.critical',
+  Active: 'tableBaseBadge.healthy',
+  Inactive: 'tableBaseBadge.secondary',
 };
 
 export const Default: StoryFn<TableBaseProps<object>> = () => {
@@ -271,8 +271,8 @@ export const DynamicWithSorting = () => {
 
   const columns: ColumnProp[] = [
     { name: 'Country', key: 'country', isSortable: true },
-    { name: 'Population', key: 'population', isSortable: true },
-    { name: 'Continent', key: 'continent', isSortable: true },
+    { name: 'Population', key: 'population', isSortable: false },
+    { name: 'Continent', key: 'continent', isSortable: false },
   ];
 
   const rows = [
@@ -334,7 +334,7 @@ export const DynamicWithSorting = () => {
           {column => (
             <Column
               minWidth={155}
-              allowsSorting
+              allowsSorting={column.isSortable}
             >
               {column.name}
             </Column>

@@ -52,7 +52,7 @@ const nextGenTheme = {
     codeView: 'Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace',
   },
   shadows: {
-    standard: `0 ${astroTokens.spacing.card.shadow.y} ${astroTokens.spacing.card.shadow.blur} 0 rgba(0, 0, 0, 0.13)`,
+    standard: `0 ${astroTokens.spacing.card.shadow.y}px ${astroTokens.spacing.card.shadow.blur}px 0 rgba(0, 0, 0, 0.13)`,
   },
   sizes,
   badges,
