@@ -1,7 +1,5 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 
-import { colors } from '../colors';
-
 import { avatar } from './avatar';
 import callout from './callout';
 import { footer } from './footer';
@@ -259,18 +257,41 @@ export default {
       },
     },
     caption: {
-      color: 'text.secondary',
+      color: astroTokensDark.color.font.base,
+      borderBottomColor: astroTokensDark.color.common.border,
     },
     thead: {
+      borderBottomColor: astroTokensDark.color.common.border,
       '&.is-sticky': {
-        boxShadow: `0 1px 0 ${colors.border.base}`,
+        boxShadow: `0 1px 0 ${astroTokensDark.color.common.border}`,
+      },
+    },
+    tbody: {
+      borderTopColor: astroTokensDark.color.common.border,
+    },
+    row: {
+      borderBottomColor: astroTokensDark.color.common.border,
+      '&.is-hovered': {
+        bg: astroTokensDark.color['table-row'].hover.bg,
+        '& > td:last-of-type': {
+          bg: astroTokensDark.color['table-row'].hover.bg,
+        },
+      },
+      '&:nth-of-type(odd)': {
+        bg: astroTokensDark.color.common.bg.base,
+        '&.is-hovered': {
+          bg: astroTokensDark.color['table-row'].hover.bg,
+        },
+        '& > td:last-of-type': {
+          bg: astroTokensDark.color.common.bg.base,
+        },
       },
     },
     head: {
-      color: 'text.secondary',
+      color: astroTokensDark.color.font.base,
     },
     data: {
-      color: 'text.secondary',
+      color: astroTokensDark.color.font.base,
     },
     resizer: {
       backgroundColor: astroTokensDark.color.common['border-dark'],

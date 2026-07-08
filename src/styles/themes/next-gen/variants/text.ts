@@ -256,6 +256,12 @@ export const text = {
   },
   stepperTabContent,
   stepperTabContentHeader,
+  headText: {
+    fontSize: 'md',
+    fontWeight: '2',
+    color: astroTokens.color.font.base,
+    lineHeight: 'xs',
+  },
   label,
   linkSelectFieldLabel: {
     ...label,

@@ -188,6 +188,60 @@ const secondaryStatusBadge = {
   ...secondary,
 };
 
+const tableBaseBadgeBaseStyle = {
+  ...baseBadge,
+  minWidth: '100px',
+  border: 'none',
+};
+
+const tableBaseBadgeSpanStyle = {
+  fontSize: '11.25px',
+  lineHeight: '1',
+};
+
+const tableBaseBadge = {
+  active: {
+    ...tableBaseBadgeBaseStyle,
+    backgroundColor: `${astroTokens.color.blue[100]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokens.color.blue[600],
+    },
+  },
+  warning: {
+    ...tableBaseBadgeBaseStyle,
+    backgroundColor: `${astroTokens.color.yellow[100]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokens.color.blue[600],
+    },
+  },
+  critical: {
+    ...tableBaseBadgeBaseStyle,
+    backgroundColor: `${astroTokens.color.red[100]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokens.color.red[800],
+    },
+  },
+  healthy: {
+    ...tableBaseBadgeBaseStyle,
+    backgroundColor: `${astroTokens.color.green[100]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokens.color.green[800],
+    },
+  },
+  secondary: {
+    ...tableBaseBadgeBaseStyle,
+    backgroundColor: `${astroTokens.color.gray[100]} !important`,
+    '& > span': {
+      ...tableBaseBadgeSpanStyle,
+      color: astroTokens.color.gray[800],
+    },
+  },
+};
+
 const countBadge = {
   ...baseBadge,
   backgroundColor: '#455469 !important',
@@ -258,4 +312,5 @@ export const badges = {
   warningCalloutBadge: {
     backgroundColor: 'white !important',
   },
+  tableBaseBadge,
 };

@@ -83,6 +83,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>((props, ref) => {
             <Icon
               icon={ChevronLeftIcon}
               title={{ name: 'Previous' }}
+              size="md"
               {...previousButtonIconProps}
             />
           </IconButton>
@@ -90,6 +91,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>((props, ref) => {
             <Icon
               icon={ChevronRightIcon}
               title={{ name: 'Next' }}
+              size="md"
               {...nextButtonIconProps}
             />
           </IconButton>
