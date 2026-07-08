@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ExpandableTextStories from './ExpandableText.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={ExpandableTextStories} isTemplate />
 
@@ -14,18 +16,10 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter | Selects the button. |
-| Tab | Focuses the button and follows the page tab sequence. |
-
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-- The trigger button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
-- The button uses, **`aria-controls`** which references the iD of the collapsible region.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.spaceEnterSelectsButton,
+  KeyboardRows.tabFocusesButton,
+]} screenReaderRows={[
+  ScreenReaderRows.triggerAriaExpandedExpandCollapse,
+  'The button uses, **`aria-controls`** which references the iD of the collapsible region.',
+]} />

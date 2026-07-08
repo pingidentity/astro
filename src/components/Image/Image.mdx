@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ImageStories from './Image.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={ImageStories} isTemplate />
 
@@ -21,9 +22,8 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`alt`** attribute specifies an alternate text for the image.
+<AccessibilityTable screenReaderRows={[
+  'The **`alt`** attribute specifies an alternate text for the image.',
+]} />
 
 

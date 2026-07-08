@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as CopyTextStories from './CopyText.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={CopyTextStories} isTemplate />
 
@@ -14,11 +16,7 @@ This component requires the [Text](./?path=/docs/components-text--default) compo
 
 ### Accessibility
 
-#### Keyboard Navigation
- 
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter | Selects the button. |
-| Tab | Focuses the button and follows the page tab sequence.|
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.spaceEnterSelectsButton,
+  KeyboardRows.tabFocusesButton,
+]} />

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as CheckboxFieldStories from './CheckboxField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={CheckboxFieldStories} isTemplate />
 
@@ -25,19 +27,12 @@ This component can be used independently and does not require additional compone
 
 This component should adhere to the [WAI-ARIA Checkbox](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/) accessibility guidelines.
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys | Functions |
-| ---- | ---- |
-| Space | When focused, toggles the check box on and off. |
-| Tab | Moves focus to the next focusable component and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`aria-checked`** attribute is used to indicate the current checked status.
-- The **`aria-labelledby`** attribute is provided with the label ID to reference it.
-- The **`aria-hidden`** attribute is used to hide its content from assistive technology.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space', description: 'When focused, toggles the check box on and off.' },
+  KeyboardRows.tabNextFocusableComponent,
+  KeyboardRows.shiftTabFocusPrevious,
+]} screenReaderRows={[
+  'The **`aria-checked`** attribute is used to indicate the current checked status.',
+  'The **`aria-labelledby`** attribute is provided with the label ID to reference it.',
+  'The **`aria-hidden`** attribute is used to hide its content from assistive technology.',
+]} />

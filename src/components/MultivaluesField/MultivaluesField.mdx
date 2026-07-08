@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as MultivaluesFieldStories from './MultivaluesField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={MultivaluesFieldStories} isTemplate />
 
@@ -23,26 +25,18 @@ This component requires the OverlayProvider and Item originating from [react-sta
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | Focuses the field and follows the page tab sequence. |
-| Space or Enter | Opens or closes the menu when the input is focused. |
-| Arrow keys | Moves through the list popover. |
-| Shift + Tab | Moves focus to the previous focusable component.|
-|  | To allow multiple selections, the user making a selection does not close the menu. However, clicking outside of the listbox or pressing Tab with an open popover does. |
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-
-- The input uses the **`aria-expanded`** attribute to show the expansion and collapse of the popover, the **`aria-invalid`** attribute set to “True” when an incorrect value or status error occurs, and the **`aria-labelledby`** attribute is used to reference the label.
-- The list box **`aria-multiselectable`** attribute is set to “True” by default. 
-- Each option uses the **`aria-selected`** attribute to indicate the state of selection, **`aria-posinset`** to give the option position in the current set of list items, and the **`aria-setsize`** attribute to define the current set of options. 
-- The **`aria-disabled`** attribute is set to “False” for each option by default.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabFocusesField,
+  { key: 'Space or Enter', description: 'Opens or closes the menu when the input is focused.' },
+  { key: 'Arrow keys', description: 'Moves through the list popover.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: '', description: 'To allow multiple selections, the user making a selection does not close the menu. However, clicking outside of the listbox or pressing Tab with an open popover does.' },
+]} screenReaderRows={[
+  'The input uses the **`aria-expanded`** attribute to show the expansion and collapse of the popover, the **`aria-invalid`** attribute set to “True” when an incorrect value or status error occurs, and the **`aria-labelledby`** attribute is used to reference the label.',
+  'The list box **`aria-multiselectable`** attribute is set to “True” by default. ',
+  'Each option uses the **`aria-selected`** attribute to indicate the state of selection, **`aria-posinset`** to give the option position in the current set of list items, and the **`aria-setsize`** attribute to define the current set of options. ',
+  'The **`aria-disabled`** attribute is set to “False” for each option by default.',
+]} />
 
 ### Children
 

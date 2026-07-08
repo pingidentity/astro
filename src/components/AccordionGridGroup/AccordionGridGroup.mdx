@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as AccordionGridGroupStories from './AccordionGridGroup.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={AccordionGridGroupStories} isTemplate />
 
@@ -20,22 +22,14 @@ This component requires the Header, Body and Item originating from [react-statel
 
 This component should adhere to the [WAI-ARIA Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/examples/accordion) accessibility guidelines.
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter | When focus is on the header panel of a collapsed section, these keys toggle the component. |
-| Tab | Moves focus to the next focusable component. All focusable components in the accordion are included in the page tab sequence.|
-| Shift + Tab | Moves focus to the previous focusable component. All focusable components in the accordion are included in the page tab sequence. |
-| Arrow Keys | All components are accessible using arrow keys. |
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-
-- The accordion grid item header button uses the **`aria-selected`** attribute to indicate the selection state of the row.
-- The accordion header button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
-- The **`aria-multiselectable`** attribute indicates that the user can toggle numerous items from the grid. 
-- The grid uses the **`aria-label`** attribute to provide an accessible name.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'When focus is on the header panel of a collapsed section, these keys toggle the component.' },
+  KeyboardRows.tabAccordionFocusable,
+  KeyboardRows.shiftTabAccordionFocusPrevious,
+  { key: 'Arrow Keys', description: 'All components are accessible using arrow keys.' },
+]} screenReaderRows={[
+  'The accordion grid item header button uses the **`aria-selected`** attribute to indicate the selection state of the row.',
+  ScreenReaderRows.accordionAriaExpanded,
+  'The **`aria-multiselectable`** attribute indicates that the user can toggle numerous items from the grid.',
+  'The grid uses the **`aria-label`** attribute to provide an accessible name.',
+]} />

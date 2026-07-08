@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as DataTableStories from './DataTable.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={DataTableStories} isTemplate />
 
@@ -30,26 +32,19 @@ This component requires these additional React Spectrum components:
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | Moves focus to the next focusable component. All focusable components in the table are included in the page tab sequence. | 
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Space or Enter  | Focuses the component and triggers an action if one is associated with it. |
-| Arrow keys | Can be used to navigate between the components in the table. |
-| Focus on a row and scroll down | Shifts the focus to the entire table, not the previously focused row. |
-| Home or page up | Shifts the focus to the first row. |
-| End or page down | Shifts the focus to the last visible row. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`aria-label`** attribute is used to provide an accessible name.
-- The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure. 
-- The DataTableHeader uses the **`aria-rowindex`** attribute and DataTableColumn uses the **`aria-colindex`** attribute to enumerate the header row and columns. 
-- In the body component, the DataTableRow uses the **`aria-labelledby`** attribute and the grid ID to identify the component and the **`aria-rowindex`** attribute is passed to each row.
-- Each DataTableCell uses the **`aria-colindex`** attribute to enumerate the columns within each row.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'Moves focus to the next focusable component. All focusable components in the table are included in the page tab sequence.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Space or Enter', description: 'Focuses the component and triggers an action if one is associated with it.' },
+  { key: 'Arrow keys', description: 'Can be used to navigate between the components in the table.' },
+  { key: 'Focus on a row and scroll down', description: 'Shifts the focus to the entire table, not the previously focused row.' },
+  { key: 'Home or page up', description: 'Shifts the focus to the first row.' },
+  { key: 'End or page down', description: 'Shifts the focus to the last visible row.' },
+]} screenReaderRows={[
+  ScreenReaderRows.ariaLabelAccessibleName,
+  'The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure.',
+  'The DataTableHeader uses the **`aria-rowindex`** attribute and DataTableColumn uses the **`aria-colindex`** attribute to enumerate the header row and columns.',
+  'In the body component, the DataTableRow uses the **`aria-labelledby`** attribute and the grid ID to identify the component and the **`aria-rowindex`** attribute is passed to each row.',
+  'Each DataTableCell uses the **`aria-colindex`** attribute to enumerate the columns within each row.',
+]} />
 

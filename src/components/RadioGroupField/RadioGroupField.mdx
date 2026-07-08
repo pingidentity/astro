@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as RadioGroupFieldStories from './RadioGroupField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={RadioGroupFieldStories} isTemplate />
 
@@ -23,20 +25,12 @@ This component requires the RadioField component.
 
 This component should adhere to the [WAI-ARIA RadioGroup](https://www.w3.org/WAI/ARIA/apg/patterns/radio/) accessibility guidelines.
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Arrow Keys | Once focused, the radio button can be selected using any of the arrow keys. |
-| Space | If the radio button is focused, pressing space selects or deselects it. |
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-
-- The **`aria-labelledby`** attribute is used to reference the label, and the **`aria-orientation`**  attribute is set to “Vertical” by default.
-- Each radio input also uses the **`aria-labelledby`** attribute pointing to its label.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabField,
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Arrow Keys', description: 'Once focused, the radio button can be selected using any of the arrow keys.' },
+  { key: 'Space', description: 'If the radio button is focused, pressing space selects or deselects it.' },
+]} screenReaderRows={[
+  'The **`aria-labelledby`** attribute is used to reference the label, and the **`aria-orientation`**  attribute is set to “Vertical” by default.',
+  'Each radio input also uses the **`aria-labelledby`** attribute pointing to its label.',
+]} />

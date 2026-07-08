@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as TooltipTriggerStories from './TooltipTrigger.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={TooltipTriggerStories} isTemplate />
 
@@ -19,6 +20,6 @@ This component requires the [Button](./?path=/docs/components-button--default) a
 
 ### Accessibility
 
-#### Screen Readers
-
-The trigger button uses the **`aria-describedby`** attribute with the tooltip container ID to announce the screen reader content when it becomes visible.
+<AccessibilityTable screenReaderRows={[
+  'The trigger button uses the **`aria-describedby`** attribute with the tooltip container ID to announce the screen reader content when it becomes visible.',
+]} />

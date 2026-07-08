@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as TimeFieldStories from './TimeField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={TimeFieldStories} isTemplate />
 
@@ -16,21 +18,13 @@ and [useTimeFieldState](https://react-spectrum.adobe.com/react-stately/useTimeFi
 
 This component can be used independently and does not require additional components. 
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | Focuses the field and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Up and down Arrow keys | When segments are focused, it increments and decrements time values |
-| Left and right arrows | Moves focus between segments. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-
-- The **`aria-label`** attribute is used to provide an accessible name.
-- The hidden input, TimeField, and all spin buttons have an **`aria-labelledby`** attribute pointing to the label ID, along with the **`aria-label`** attribute for an accessible name.
-- Each spin button has an **`aria-valuenow`**, **`aria-valuemin`**, and **`aria-valuemax`** to represent the current value, minimum allowed value, and maximum allowed value.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabFocusesField,
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Up and down Arrow keys', description: 'When segments are focused, it increments and decrements time values.' },
+  { key: 'Left and right arrows', description: 'Moves focus between segments.' },
+]} screenReaderRows={[
+  ScreenReaderRows.ariaLabelAccessibleName,
+  'The hidden input, TimeField, and all spin buttons have an **`aria-labelledby`** attribute pointing to the label ID, along with the **`aria-label`** attribute for an accessible name.',
+  'Each spin button has an **`aria-valuenow`**, **`aria-valuemin`**, and **`aria-valuemax`** to represent the current value, minimum allowed value, and maximum allowed value.',
+]} />

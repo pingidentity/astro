@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ModalStories from './Modal.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={ModalStories} isTemplate />
 
@@ -39,25 +41,22 @@ This component requires the OverlayProvider and [Button](./?path=/docs/component
 
 This component should adhere to the [WAI-ARIA Modal](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/) accessibility guidelines.
 
-#### Keyboard Navigation
+<AccessibilityTable
+  keyboardRows={[
+    { key: 'Tab', description: 'The trigger component and the content in the modal are focusable using the Tab key.' },
+    { key: '', description: 'When a modal opens, focus moves to an element contained in the modal, which is usually the first focusable element. If the first focusable element does not make sense, tabindex=”-1” should be added to a static element at the top of the modal, which could be the panel title.' },
+    { key: 'Space or Enter', description: 'Opens the modal when the trigger is focused. Once opened, the focus is locked inside the modal.' },
+    KeyboardRows.shiftTabFocusPrevious,
+    { key: 'Esc', description: 'Pressing the escape key closes the modal and adds focus to the previously focused component.' },
+  ]}
+  screenReaderRows={[
+    'The button uses the **`aria-label`** attribute to provide an accessible name.',
+    'The **`aria-labelledby`** attribute is supplied with label ID.',
+    'The **`aria-modal`** attribute allows the assistive technologies to inform users that the ability to interact with or access other content on the page requires the modal dialog to be closed.',
+  ]}
+/>
 
-These keys provide additional functionality to the component. 
-
-| Key | Functions |
-| ---- | ---- |
-| Tab | The trigger component and the content in the modal are focusable using the Tab key.   |
-|  | When a modal opens, focus moves to an element contained in the modal, which is usually the first focusable element. If the first focusable element does not make sense, tabindex=”-1” should be added to a static element at the top of the modal, which could be the panel title. |
-| Space or Enter | Opens the modal when the trigger is focused. Once opened, the focus is locked inside the modal. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Esc | Pressing the escape key closes the modal and adds focus to the previously focused component. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The button uses the **`aria-label`** attribute to provide an accessible name.
-- The **`aria-labelledby`** attribute is supplied with label ID.
-- The **`aria-modal`** attribute allows the assistive technologies to inform users that the ability to interact with or access other content on the page requires the modal dialog to be closed.
-
+{/* Non-standard section: '#### Note' contains AutoFocus implementation guidance. Flagged for future migration. */}
 #### Note
 
 AutoFocus is not enabled by default. To ensure accessibility and expected keyboard navigation support set the `hasAutoFocus` prop to true.

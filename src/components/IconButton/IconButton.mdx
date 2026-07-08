@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as IconButtonStories from './IconButton.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={IconButtonStories} isTemplate />
 
@@ -22,13 +23,9 @@ This component requires the [Icon](./?path=/story/components-icon--default) comp
 ### Accessibility
 This component adheres to [WAI-ARIA Button](https://www.w3.org/TR/wai-aria-practices-1.1/examples/button/button.html) accessibility guidelines.
 
-#### Keyboard Navigation
-
-| Key | Functions |
-| ---- | ---- |
-| Space or Enter | Selects the icon button. |
-| Tab | Focuses the icon button and follows the page tab sequence. |
-
-#### Screen Readers
-
-This component uses the **`aria-label`** to provide an accessible name.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'Selects the icon button.' },
+  { key: 'Tab', description: 'Focuses the icon button and follows the page tab sequence.' },
+]} screenReaderRows={[
+  'This component uses the **`aria-label`** to provide an accessible name.',
+]} />

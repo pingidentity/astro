@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as CardStories from './Card.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={CardStories} isTemplate />
 
@@ -23,14 +25,10 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the Interactive Card components.
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter | Selects the button. |
-| Tab | Focuses the button and follows the page tab sequence.|
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.spaceEnterSelectsButton,
+  KeyboardRows.tabFocusesButton,
+]} keyboardDescription="These keys provide additional functionality to the Interactive Card components." />
 
 ### Note
 

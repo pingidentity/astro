@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as IconStories from './Icon.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={IconStories} isTemplate />
 
@@ -33,6 +34,7 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
+{/* Non-standard section: '#### Labelling' documents SVG title prop usage, not covered by AccessibilityTable API. Flagged for future migration. */}
 #### Labelling
 
 The Icon component accepts the title prop:
@@ -41,9 +43,9 @@ The `name` will be passed inside `<title>` element of the SVG.
 The `id` is optional. If not specified, it will be generated automatically.
 This is needed to make SVG icon accessible.
 
-#### Screen Readers
-
-If the icon has a title associated with it, the **`aria-labelledby`** attribute is used to provide the label ID.
+<AccessibilityTable screenReaderRows={[
+  'If the icon has a title associated with it, the **`aria-labelledby`** attribute is used to provide the label ID.',
+]} />
 
 
 

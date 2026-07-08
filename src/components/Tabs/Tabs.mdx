@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as TabsStories from './Tabs.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={TabsStories} isTemplate />
 
@@ -21,21 +23,14 @@ This component requires the Tab component.
 
 This component should adhere to the [WAI-ARIA Tabs](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) accessibility guidelines. 
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Function |
-| ---- | ---- |
-| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
-| Arrow keys | When a tab is focused, tabs can be navigated using the left and right arrow keys. |
-| Shift + Tab | Moves focus to the previous focusable component.  |
-| Home(Fn + Right Arrow Key) Or Control/Command + Home| Shifts the focus to the first tab. |
-| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last tab. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`aria-orientation`** attribute indicates whether the orientation is horizontal, vertical, unknown, or ambiguous. 
-- Each tab uses the **`aria-selected`** attribute to indicate the selection status, and the **`aria-control`** attribute is supplied with the associated panel ID that displays the content.
-- Each tab uses the **`aria-labelledby`** with the label ID to reference it.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabField,
+  { key: 'Arrow keys', description: 'When a tab is focused, tabs can be navigated using the left and right arrow keys.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Home(Fn + Right Arrow Key) Or Control/Command + Home', description: 'Shifts the focus to the first tab.' },
+  { key: 'End(Fn + Left Arrow Key) Or Control/Command + End', description: 'Shifts the focus to the last tab.' },
+]} screenReaderRows={[
+  ScreenReaderRows.ariaOrientationWithTrailingSpace,
+  'Each tab uses the **`aria-selected`** attribute to indicate the selection status, and the **`aria-control`** attribute is supplied with the associated panel ID that displays the content.',
+  'Each tab uses the **`aria-labelledby`** with the label ID to reference it.',
+]} />
