@@ -1,3 +1,13 @@
+## 2.208.1-alpha.0 (2026-07-08)
+
+### 🩹 Fixes
+
+- [UXE-8391] add AccessibilityTable shared JSX component for Storybook MDX
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.208.0-alpha.0 (2026-07-08)
 
 ### 🚀 Features
