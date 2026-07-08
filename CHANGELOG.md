@@ -1,3 +1,13 @@
+## 2.208.0-alpha.0 (2026-07-08)
+
+### 🚀 Features
+
+- [UIP-8297] TableBase Update to match spec
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.207.1-alpha.0 (2026-07-06)
 
 ### 🩹 Fixes
