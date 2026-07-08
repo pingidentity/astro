@@ -1,5 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import * as StepperStories from './Stepper.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={StepperStories} isTemplate />
 
@@ -23,26 +25,22 @@ This component requires the Item originating from [react-stately/collections](ht
 
 This component should adhere to the [WAI-ARIA Stepper](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) accessibility guidelines.
 
-#### Keyboard Navigation
+<AccessibilityTable
+  keyboardRows={[
+    KeyboardRows.tabField,
+    { key: 'Arrow keys', description: 'When this field is focused, the arrow keys can be used to navigate through the steps.' },
+    KeyboardRows.shiftTabFocusPrevious,
+    { key: 'Home(Fn + Right Arrow Key) Or Control/Command + Home', description: 'Shifts the focus to the first step.' },
+    { key: 'End(Fn + Left Arrow Key) Or Control/Command + End', description: 'Shifts the focus to the last step.' },
+  ]}
+  screenReaderRows={[
+    ScreenReaderRows.ariaOrientationNoTrailingSpace,
+    'Each step uses the **`aria-selected`** attribute to indicate the selection status, and the **`aria-control`** attribute is supplied with the associated panel ID that displays the content.',
+    'Each step uses the **`aria-labelledby`** with the label ID to reference it.',
+  ]}
+/>
 
-These keys provide additional functionality to the component.
-
-| Keys                                                 | Function                                                                              |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Tab                                                  | The field is focusable using the Tab key and follows the page tab sequence.           |
-| Arrow keys                                           | When this field is focused, the arrow keys can be used to navigate through the steps. |
-| Shift + Tab                                          | Moves focus to the previous focusable component.                                      |
-| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first step.                                                   |
-| End(Fn + Left Arrow Key) Or Control/Command + End    | Shifts the focus to the last step.                                                    |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-
-- The **`aria-orientation`** attribute indicates whether the orientation is horizontal, vertical, unknown, or ambiguous.
-- Each step uses the **`aria-selected`** attribute to indicate the selection status, and the **`aria-control`** attribute is supplied with the associated panel ID that displays the content.
-- Each step uses the **`aria-labelledby`** with the label ID to reference it.
-
+{/* Non-standard section: '#### Usage' contains layout guidance. Flagged for future migration. */}
 #### Usage
 
 - The stepper component is always center-aligned in its context, whether it's in a page, a panel, or a popup.

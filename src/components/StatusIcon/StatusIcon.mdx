@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as StatusIconStories from './StatusIcon.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={StatusIconStories} isTemplate />
 
@@ -15,6 +16,6 @@ It is built on top of the [Box from Theme-UI](https://theme-ui.com/components/bo
 
 This component can be used independently and does not require additional components.
 
-#### Screen Readers
-
-If the icon has a title associated with it, the **`aria-labelledby`** attribute is used to provide the label ID.
+<AccessibilityTable screenReaderRows={[
+  'If the icon has a title associated with it, the **`aria-labelledby`** attribute is used to provide the label ID.',
+]} />

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as SliderFieldStories from './SliderField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={SliderFieldStories} isTemplate />
 
@@ -57,20 +58,16 @@ The `SliderField` component is used to allow users to select a value from a rang
 
 This component adheres to accessibility guidelines to ensure a better user experience for all users.
 
-#### Keyboard Navigation
-
-| Keys         | Function                                                                 |
-| ------------ | ----------------------------------------------------------------------- |
-| Tab          | Moves focus to the slider.                                              |
-| Arrow Keys   | Adjusts the slider value incrementally.                                  |
-| Home         | Moves the slider to the minimum value.                                  |
-| End          | Moves the slider to the maximum value.                                  |
-
-#### Screen Readers
-
-- **`aria-valuenow`**: Announces the current value of the slider.
-- **`aria-valuemin` and `aria-valuemax`**: Define the minimum and maximum values of the slider.
-- **`aria-orientation`**: Indicates whether the slider is horizontal or vertical.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'Moves focus to the slider.' },
+  { key: 'Arrow Keys', description: 'Adjusts the slider value incrementally.' },
+  { key: 'Home', description: 'Moves the slider to the minimum value.' },
+  { key: 'End', description: 'Moves the slider to the maximum value.' },
+]} screenReaderRows={[
+  '**`aria-valuenow`**: Announces the current value of the slider.',
+  '**`aria-valuemin` and `aria-valuemax`**: Define the minimum and maximum values of the slider.',
+  '**`aria-orientation`**: Indicates whether the slider is horizontal or vertical.',
+]} />
 
 ### Example Usage
 

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as EnvironmentBreadcrumbStories from './EnvironmentBreadcrumb.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={EnvironmentBreadcrumbStories} isTemplate />
 
@@ -16,22 +18,15 @@ Item from [react-stately/collections](https://react-spectrum.adobe.com/react-sta
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter  | Selects the breadcrumb item. |
-| Tab | Focuses the breadcrumb item and follows the page tab sequence. | 
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Arrow keys | Can be used to navigate between the items in the dropdown list. |
-| Esc | Closes the popover when it is expanded. |
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-- Each breadcrumb item uses an **`aria-label`** attribute to provide an accessible name.
-- The trigger button uses the **`aria-expanded`** attribute to indicate when the content expands and collapses. 
-- When expanded, **`aria-controls`** is added to the button pointing to the pop-up content.
-- The **`aria-haspopup`** attribute describes the type of content presented.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'Selects the breadcrumb item.' },
+  { key: 'Tab', description: 'Focuses the breadcrumb item and follows the page tab sequence.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Arrow keys', description: 'Can be used to navigate between the items in the dropdown list.' },
+  { key: 'Esc', description: 'Closes the popover when it is expanded.' },
+]} screenReaderRows={[
+  'Each breadcrumb item uses an **`aria-label`** attribute to provide an accessible name.',
+  ScreenReaderRows.triggerAriaExpandedExpandCollapse,
+  'When expanded, **`aria-controls`** is added to the button pointing to the pop-up content.',
+  'The **`aria-haspopup`** attribute describes the type of content presented.',
+]} />

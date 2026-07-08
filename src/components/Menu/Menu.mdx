@@ -1,4 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta title="Components/Menu/Menu" />
 
@@ -23,21 +25,14 @@ This component requires the Item component, which is exported within Astro, but 
 
 This component should adhere to the [WAI-ARIA Menu](https://www.w3.org/WAI/tutorials/menus/) accessibility guidelines. 
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Key | Functions |
-| ---- | ---- |
-| Space or Enter | Selects the menu item. |
-| Tab | Focuses the menu item and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Home(Fn + Right Arrow Key) Or Control/Command + Home| Shifts the focus to the first row. |
-| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last visible row. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`aria-label`** attribute is used to provide an accessible name.
-- Each menu option has the default **`aria-disabled`** value as “False.” 
-- The **`aria-orientation`** attribute indicates whether the menu is horizontally or vertically oriented, or undefined.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'Selects the menu item.' },
+  { key: 'Tab', description: 'Focuses the menu item and follows the page tab sequence.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  KeyboardRows.homeFirstRow,
+  KeyboardRows.endLastVisibleRow,
+]} screenReaderRows={[
+  ScreenReaderRows.ariaLabelAccessibleName,
+  'Each menu option has the default **`aria-disabled`** value as “False.” ',
+  'The **`aria-orientation`** attribute indicates whether the menu is horizontally or vertically oriented, or undefined.',
+]} />

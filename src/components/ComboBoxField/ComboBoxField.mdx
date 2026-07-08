@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ComboBoxFieldStories from './ComboBoxField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={ComboBoxFieldStories} isTemplate />
 
@@ -27,21 +29,17 @@ exported from Astro and Item originating from [react-stately/collections](https:
 
 This component should adhere to the [WAI-ARIA ComboBox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) accessibility guidelines.
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | ---- |
-| Tab | Focuses the field and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Space or Enter | Selects the component when it is focused. |
-| Down arrow | Opens the popover if it isn’t already open.  |
-| Up and down arrows | Can be used to move through the selection in the popover. |
-| Typing in input field | Adds focus to it and opens the popover. |
-| Home(Fn + Right Arrow Key) Or Control/Command + Home | Shifts the focus to the first item in the listbox. |
-| End(Fn + Left Arrow Key) Or Control/Command + End | Shifts the focus to the last item in the listbox. |
-| Esc | Pressing the escape key closes the overlay and adds focus to the previously focused component. |
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabFocusesField,
+  KeyboardRows.shiftTabFocusPrevious,
+  KeyboardRows.spaceEnterSelectsComponent,
+  { key: 'Down arrow', description: "Opens the popover if it isn’t already open." },
+  { key: 'Up and down arrows', description: 'Can be used to move through the selection in the popover.' },
+  KeyboardRows.typingOpenPopover,
+  KeyboardRows.homeFirstListboxItem,
+  KeyboardRows.endLastListboxItem,
+  { key: 'Esc', description: 'Pressing the escape key closes the overlay and adds focus to the previously focused component.' }
+]} />
 
 #### Screen Readers
 This component uses the following attributes to assist screen readers:

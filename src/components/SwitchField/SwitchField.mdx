@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as SwitchFieldStories from './SwitchField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={SwitchFieldStories} isTemplate />
 
@@ -21,17 +23,10 @@ This component can be used independently and does not require additional compone
 
 This component should adhere to the [WAI-ARIA Switch](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) accessibility guidelines. 
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | The field is focusable using the Tab key and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component.|
-| Space | When focused, Space toggles the switched field. |
-
-#### Screen readers
-
-The hidden input uses the **`aria-labelledby`** attribute to associate the label, the **`aria-label`** attribute to provide an accessible name, 
-and the **`aria-checked`** attribute for the switched state.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabField,
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Space', description: 'When focused, Space toggles the switched field.' },
+]} screenReaderRows={[
+  'The hidden input uses the **`aria-labelledby`** attribute to associate the label, the **`aria-label`** attribute to provide an accessible name, and the **`aria-checked`** attribute for the switched state.',
+]} />

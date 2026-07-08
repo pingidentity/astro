@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as OverlayPanelStories from './OverlayPanel.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={OverlayPanelStories} isTemplate />
 
@@ -24,17 +26,11 @@ This component requires the OverlayProvider component.
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Key | Functions |
-| ---- | ---- |
-| Tab | The trigger is focusable using the Tab key and follows the page tab sequence. |
-| Space or Enter | Opens or closes the panel when the trigger is focused. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Esc | Pressing the escape key closes the overlay and focuses on the previous focusable component. |
-
-#### Screen Readers
-
-The trigger button uses the **`aria-expanded`** attribute to indicate the expansion and collapse of content.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'The trigger is focusable using the Tab key and follows the page tab sequence.' },
+  { key: 'Space or Enter', description: 'Opens or closes the panel when the trigger is focused.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Esc', description: 'Pressing the escape key closes the overlay and focuses on the previous focusable component.' },
+]} screenReaderRows={[
+  'The trigger button uses the **`aria-expanded`** attribute to indicate the expansion and collapse of content.',
+]} />

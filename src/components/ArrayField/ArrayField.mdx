@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ArrayFieldStories from './ArrayField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={ArrayFieldStories} isTemplate />
 
@@ -18,18 +20,11 @@ This component requires the appropriate field component ([TextField](./?path=/st
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys | Functions |
-| ---- | ---- |
-| Space or Enter | When focused, selects the item. |
-| Tab | Moves focus to the next focusable component and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The input uses the **`aria-invalid`** attribute to alert users that the values entered are not in the expected format.
-- The field and buttons use the **`aria-label`** attribute to provide accessible names.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'When focused, selects the item.' },
+  KeyboardRows.tabNextFocusableComponent,
+  KeyboardRows.shiftTabFocusPrevious,
+]} screenReaderRows={[
+  'The input uses the **`aria-invalid`** attribute to alert users that the values entered are not in the expected format.',
+  'The field and buttons use the **`aria-label`** attribute to provide accessible names.',
+]} />

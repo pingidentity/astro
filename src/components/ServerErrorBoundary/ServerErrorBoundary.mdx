@@ -1,5 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import * as ServerErrorBoundaryStories from './ServerErrorBoundary.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={ServerErrorBoundaryStories} isTemplate />
 
@@ -15,11 +17,7 @@ This component can be used independently and does not require additional compone
 
 This component should adhere to the [WAI-ARIA Button](https://www.w3.org/TR/wai-aria-practices-1.1/examples/button/button.html) accessibility guidelines.
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys           | Functions                                             |
-| -------------- | ----------------------------------------------------- |
-| Space or Enter | Selects the button.                                   |
-| Tab            | Focuses the button and follows the page tab sequence. |
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.spaceEnterSelectsButton,
+  KeyboardRows.tabFocusesButton,
+]} />

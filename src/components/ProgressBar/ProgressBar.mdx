@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ProgressBarStories from './ProgressBar.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={ProgressBarStories} isTemplate />
 
@@ -22,13 +23,11 @@ This component can be used independently and does not require additional compone
 
 This component should adhere to the [WAI-ARIA ProgressBar](https://w3c.github.io/aria/#progressbar) accessibility guidelines.
 
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-
-- The progressBar uses the **`aria-valuemin`** and **`aria-valuemax`** to indicate the minimum and maximum progress indicator values. If they are missing, they default to 0 and 100 respectively. 
-- The progressBar uses the **`aria-valuenow`** attribute to indicate the current value of the progressbar.
-- If the progressbar is describing the loading progress of a particular region of a page, authors SHOULD both use **`aria-describedby`** to reference the progressbar status, and set the **`aria-busy`** attribute to true on the region until it is finished loading. It is not possible for the user to alter the value of a progressbar because it is always read-only
+<AccessibilityTable screenReaderRows={[
+  'The progressBar uses the **`aria-valuemin`** and **`aria-valuemax`** to indicate the minimum and maximum progress indicator values. If they are missing, they default to 0 and 100 respectively. ',
+  'The progressBar uses the **`aria-valuenow`** attribute to indicate the current value of the progressbar.',
+  'If the progressbar is describing the loading progress of a particular region of a page, authors SHOULD both use **`aria-describedby`** to reference the progressbar status, and set the **`aria-busy`** attribute to true on the region until it is finished loading. It is not possible for the user to alter the value of a progressbar because it is always read-only',
+]} />
 
 ### Determinate vs Indeterminate usage
 

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as NumberFieldStories from './NumberField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={NumberFieldStories} isTemplate />
 
@@ -22,23 +24,20 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Keyboard Navigation
+<AccessibilityTable
+  keyboardRows={[
+    KeyboardRows.tabInput,
+    { key: 'Arrow keys', description: 'Can be used to increment or decrement the numbers displayed in the field.' },
+    KeyboardRows.shiftTabFocusPrevious,
+    { key: 'Stepper buttons', description: 'Pressing and holding the stepper buttons allows continuous increments or decrements.' },
+  ]}
+  screenReaderRows={[
+    'The input component uses the **`aria-labelledby`** attribute to reference the label.',
+    'The two icon buttons each use the **`aria-controls`** attribute with the input ID and the **`aria-label`** attribute to provide an accessible name.',
+  ]}
+/>
 
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | The input is focusable using the Tab key and follows the page tab sequence. |
-| Arrow keys | Can be used to increment or decrement the numbers displayed in the field. |
-| Shift + Tab | Moves focus to the previous focusable component.|
-| Stepper buttons | Pressing and holding the stepper buttons allows continuous increments or decrements. |
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-- The input component uses the **`aria-labelledby`** attribute to reference the label.
-- The two icon buttons each use the **`aria-controls`** attribute with the input ID and the **`aria-label`** attribute to provide an accessible name.
-
+{/* Non-standard section: '#### Note' documents onChange callback behaviour. Flagged for future migration. */}
 #### Note
 
 For NumberField, the onChange callback is triggered when the increment and decrement buttons are pressed, or upon focus shifting away from the input after typing a value with the keyboard. This is because of internal validation which needs to occur when typing. (Source: [React Aria NumberField](https://react-spectrum.adobe.com/react-aria/useNumberField.html#controlled))
