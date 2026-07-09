@@ -189,6 +189,9 @@ const listBox = {
       pl: astroTokens.spacing.md,
       bg: 'backgroundBase',
       color: 'gray-700',
+      '&:not(.is-selected)': {
+        pr: '32px',
+      },
       '&.is-selected': {
         bg: 'backgroundBase',
       },
