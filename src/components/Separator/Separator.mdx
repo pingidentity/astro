@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as SeparatorStories from './Separator.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={SeparatorStories} isTemplate />
 
@@ -15,6 +16,6 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Screen Readers
-
-The **`aria-orientation`** attribute indicates whether the  orientation is horizontal, vertical, unknown, or ambiguous
+<AccessibilityTable screenReaderRows={[
+  'The **`aria-orientation`** attribute indicates whether the  orientation is horizontal, vertical, unknown, or ambiguous',
+]} />

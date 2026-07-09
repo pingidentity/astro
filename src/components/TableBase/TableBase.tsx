@@ -400,7 +400,12 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
       {...mergeProps(columnHeaderProps, focusProps, column.props)}
     >
       <Box isRow gap="sm" alignItems="center">
-        <Text>{column.rendered}</Text>
+        <Text
+          as="h4"
+          variant="headText"
+        >
+          {column.rendered}
+        </Text>
         {allowsSorting && sortIcon}
       </Box>
       {allowsResizing && (

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as BadgeStories from './Badge.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={BadgeStories} isTemplate />
 
@@ -15,11 +17,7 @@ This component can be used independently, and does not require additional compon
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-Badge itself is not focusable. However, when components are added to it, these keys provide additional functionality.
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter | Selects the component. |
-| Tab | Focuses the component and follows the page tab sequence. |
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.spaceEnterSelectsComponentSimple,
+  KeyboardRows.tabFocusesComponent,
+]} keyboardDescription="Badge itself is not focusable. However, when components are added to it, these keys provide additional functionality." />

@@ -1,7 +1,5 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
-import colors from '../colors/colors';
-
 import { defaultFocus as baseFocus } from './button';
 
 const borderRadius = '16px';
@@ -49,41 +47,42 @@ const container = {
 const caption = {
   backgroundColor: 'backgroundBase',
   px: 'lg',
-  color: 'text.primary',
+  color: astroTokens.color.font.base,
   borderBottom: '1px solid',
-  borderBottomColor: 'border.base',
+  borderBottomColor: astroTokens.color.common.border,
   borderTopLeftRadius: borderRadius,
   borderTopRightRadius: borderRadius,
 };
 
 const row = {
   borderBottom: '1px solid',
-  borderBottomColor: 'border.base',
+  borderBottomColor: astroTokens.color.common.border,
   '&.is-focused': {
     ...defaultFocus,
   },
   '&.is-hovered': {
-    bg: 'background.hover',
+    bg: astroTokens.color['table-row'].hover.bg,
     '& > td:last-of-type': {
-      bg: 'background.hover',
+      bg: astroTokens.color['table-row'].hover.bg,
     },
   },
   '&:nth-of-type(odd)': {
-    bg: 'backgroundBase',
+    bg: astroTokens.color.common.bg.base,
     '&.is-hovered': {
-      bg: 'background.hover',
+      bg: astroTokens.color['table-row'].hover.bg,
     },
     '& > td:last-of-type': {
-      bg: 'backgroundBase',
+      bg: astroTokens.color.common.bg.base,
     },
   },
 };
 
 const thead = {
-  borderBottomColor: 'border.base',
+  borderBottomColor: astroTokens.color.common.border,
   backgroundColor: 'backgroundBase',
   '&.is-sticky': {
-    boxShadow: `0 1px 0 ${colors.border.base}`,
+    border: 'none',
+    boxShadow: `0 1px 0 ${astroTokens.color.common.border}`,
   },
 };
 
@@ -94,10 +93,6 @@ const resizer = {
 const head = {
   px: 'lg',
   py: 'sm',
-  fontSize: 'md',
-  fontWeight: '2',
-  color: 'text.primary',
-  lineHeight: 'body',
   '&.is-focused': {
     ...defaultFocus,
   },
@@ -107,7 +102,7 @@ const head = {
 };
 
 const tbody = {
-  borderTopColor: 'border.base',
+  borderTopColor: astroTokens.color.common.border,
   borderBottom: 'unset',
   backgroundColor: 'backgroundBase',
   borderBottomLeftRadius: borderRadius,
@@ -117,7 +112,7 @@ const tbody = {
 const data = {
   ...head,
   py: 'md',
-  fontWeight: '1',
+  fontWeight: '0',
   '&:last-of-type': {
     backgroundColor: 'backgroundBase',
     zIndex: 1,

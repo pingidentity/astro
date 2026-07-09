@@ -91,6 +91,7 @@ const suggestionColumn = {
 
 const tableWrapper = {
   ...container,
+  boxShadow: 'standard',
 };
 
 export default {

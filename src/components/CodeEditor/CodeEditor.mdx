@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as CodeEditorStories from './CodeEditor.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={CodeEditorStories} isTemplate />
 
@@ -21,16 +23,9 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | --------- |
-| Enter | Inserts a new line of code |
-| Arrow keys | Move the cursor within the code in the set direction |
-
-#### Screen Readers
-
-The **`aria-live`** attribute is used to announce content changes in a live region.
-
+<AccessibilityTable keyboardRows={[
+  { key: 'Enter', description: 'Inserts a new line of code' },
+  { key: 'Arrow keys', description: 'Move the cursor within the code in the set direction' },
+]} screenReaderRows={[
+  ScreenReaderRows.ariaLiveAnnounce,
+]} />

@@ -19,6 +19,7 @@ const DefaultCheckbox = forwardRef((props, ref) => (
 ));
 
 const IndeterminateCheckboxIcon = props => {
+  console.log('🚀 ~ IndeterminateCheckboxIcon ~ props:', props);
   return (
     <svg
       viewBox="0 0 24 24"
@@ -26,7 +27,7 @@ const IndeterminateCheckboxIcon = props => {
       xmlns="http://www.w3.org/2000/svg"
       aria-labelledby="checkbox-icon-title"
       data-testid="checkbox-icon-indeterminate"
-      {...omit(props, 'id', 'aria-checked', 'data-testid')}
+      {...omit(props, 'id', 'aria-checked', 'data-testid', 'onFocus')}
     >
       <title id="checkbox-icon-title">Indeterminate Checkbox Icon</title>
       <rect x="3.5" y="3.5" width="17" height="17" rx="1.5" id="indeterminate-checkbox-icon-wrapper" />
@@ -61,6 +62,7 @@ const IndeterminateCheckbox = forwardRef((props, ref) => {
         mr={2}
         {...props}
         opacity={1}
+        tabIndex={-1}
       />
     </>
   );

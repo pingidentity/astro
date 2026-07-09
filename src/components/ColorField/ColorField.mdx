@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ColorFieldStories from './ColorField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={ColorFieldStories} isTemplate />
 
@@ -20,21 +22,14 @@ react-aria [OverlayProvider](https://react-spectrum.adobe.com/react-aria/useOver
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys | Functions |
-| ---- | ---- |
-| Tab |Focuses the color swatch and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Space or Enter | Opens the color swatch when it is focused. Once opened, the focus moves to the input field and is locked inside the ColorPicker Overlay. |
-| Esc | When the picker is open, pressing the escape key closes the overlay and focuses on the previously focused component. |
-| Up and Down Arrows | Using the up and down arrows on any of the RGBA inputs adjusts the value of the input in focus.
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The trigger button uses the **`aria-expanded`** attribute to indicate the expansion and collapse of Sketch Picker.
-- When expanded, **`aria-controls`** is added to the button pointing to the Sketch Picker.
-- The visibly hidden input uses the **`aria-labelledby`** attribute supplied with label ID.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'Focuses the color swatch and follows the page tab sequence.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Space or Enter', description: 'Opens the color swatch when it is focused. Once opened, the focus moves to the input field and is locked inside the ColorPicker Overlay.' },
+  { key: 'Esc', description: 'When the picker is open, pressing the escape key closes the overlay and focuses on the previously focused component.' },
+  { key: 'Up and Down Arrows', description: 'Using the up and down arrows on any of the RGBA inputs adjusts the value of the input in focus.' },
+]} screenReaderRows={[
+  'The trigger button uses the **`aria-expanded`** attribute to indicate the expansion and collapse of Sketch Picker.',
+  'When expanded, **`aria-controls`** is added to the button pointing to the Sketch Picker.',
+  'The visibly hidden input uses the **`aria-labelledby`** attribute supplied with label ID.',
+]} />

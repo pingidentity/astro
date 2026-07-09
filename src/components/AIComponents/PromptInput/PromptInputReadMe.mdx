@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as PromptInputStories from './PromptInput.stories';
+import AccessibilityTable from '../../../utils/docUtils/AccessibilityTable';
 
 <Meta of={PromptInputStories} isTemplate />
 
@@ -38,21 +39,17 @@ The `PromptInput` component is used to capture user input in a conversational UI
 
 This component adheres to accessibility guidelines to ensure a better user experience for all users.
 
-#### Keyboard Navigation
-
-| Keys         | Function                                                                 |
-| ------------ | ----------------------------------------------------------------------- |
-| Tab          | Focuses on the next focusable element within the input.                 |
-| Shift + Tab  | Moves focus to the previous focusable element.                          |
-| Enter        | Submits the input when `onSubmit` is defined.                           |
-| Shift + Enter| Adds a new line to the input.                           |
-| Escape       | Cancels the input when `onCancel` is defined.                           |
-
-#### Screen Readers
-
-- **`aria-label`**: Describes the purpose of the input field.
-- **`aria-disabled`**: Indicates when the input is disabled.
-- **`aria-live`**: Announces changes to the input dynamically.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'Focuses on the next focusable element within the input.' },
+  { key: 'Shift + Tab', description: 'Moves focus to the previous focusable element.' },
+  { key: 'Enter', description: 'Submits the input when `onSubmit` is defined.' },
+  { key: 'Shift + Enter', description: 'Adds a new line to the input.' },
+  { key: 'Escape', description: 'Cancels the input when `onCancel` is defined.' },
+]} screenReaderRows={[
+  '**`aria-label`**: Describes the purpose of the input field.',
+  '**`aria-disabled`**: Indicates when the input is disabled.',
+  '**`aria-live`**: Announces changes to the input dynamically.',
+]} />
 
 ### Example Usage
 

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as FileInputFieldStories from './FileInputField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={FileInputFieldStories} isTemplate />
 
@@ -16,19 +18,12 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Keys | Functions |
-| ---- | ---- |
-| Tab | Focuses the field and follows the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Space or Enter | Selects the component when it is focused. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- This component uses the **`aria-label`** to provide an accessible name and has **`aria-labelledby`** attribute, supplied with the label ID.
-- Upon uploading the file, the Button component, with the name of the uploaded file, displays with **`aria-describedby`** attribute, which references the helpText if passed along. 
-- The delete button has an **`aria-label`** to provide an accessible name.
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabFocusesField,
+  KeyboardRows.shiftTabFocusPrevious,
+  KeyboardRows.spaceEnterSelectsComponent,
+]} screenReaderRows={[
+  'This component uses the **`aria-label`** to provide an accessible name and has **`aria-labelledby`** attribute, supplied with the label ID.',
+  'Upon uploading the file, the Button component, with the name of the uploaded file, displays with **`aria-describedby`** attribute, which references the helpText if passed along.',
+  'The delete button has an **`aria-label`** to provide an accessible name.',
+]} />

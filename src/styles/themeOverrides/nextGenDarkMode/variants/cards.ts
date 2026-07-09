@@ -1,3 +1,5 @@
+import { astroTokensDark } from '@pingux/onyx-tokens';
+
 const cards = {
   dark: {
     border: '1px solid',
@@ -24,6 +26,9 @@ const cards = {
   },
   activeCard: {
     borderColor: 'border.attachment',
+  },
+  tableWrapper: {
+    borderColor: astroTokensDark.color.common.border,
   },
 };
 export default cards;

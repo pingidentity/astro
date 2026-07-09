@@ -1,4 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta title="Components/Calendar/Calendar" />
 
@@ -15,25 +17,18 @@ This component can be used independently and does not require additional compone
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys | Functions |
-| ---- | --------- |
-| Space or Enter | Selects the date when a date is focused, and navigates to the calendar pages when the navigational buttons are focused. |
-| Tab | Components in the calendar are focusable and follow the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Pressing Home:(Fn + Right Arrow Key) Or Control or Command + Home | Shifts the focus to the first calendar date. |
-| Pressing End:(Fn + left Arrow Key) Or Control or Command + End | Shifts the focus to the last calendar date. |
-| Arrow key | Navigates up, down, right, and left across the calendar. |
-| Page up | Changes the grid of dates to the previous month. |
-| Page down | Changes the grid of dates to the next month. |
-| Shift + page up | Changes the grid of dates to the same month in the previous year. |
-| Shift+ page down | Changes the grid of dates to the same month in the next year. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`aria-label`** attribute is used to provide an accessible name.
-- In each data cell, the **`aria-selected`** attribute is set to “true” when a date is selected, and **`aria-disabled`** is set to “false” by default.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'Selects the date when a date is focused, and navigates to the calendar pages when the navigational buttons are focused.' },
+  KeyboardRows.tabCalendar,
+  KeyboardRows.shiftTabFocusPrevious,
+  KeyboardRows.homeFirstCalendarDate,
+  { key: 'Pressing End:(Fn + left Arrow Key) Or Control or Command + End', description: 'Shifts the focus to the last calendar date.' },
+  { key: 'Arrow key', description: 'Navigates up, down, right, and left across the calendar.' },
+  KeyboardRows.pageUpPreviousMonth,
+  KeyboardRows.pageDownNextMonth,
+  KeyboardRows.shiftPageUpPreviousYear,
+  KeyboardRows.shiftPageDownNextYear,
+]} screenReaderRows={[
+  ScreenReaderRows.ariaLabelAccessibleName,
+  'In each data cell, the **`aria-selected`** attribute is set to “true” when a date is selected, and **`aria-disabled`** is set to “false” by default.',
+]} />

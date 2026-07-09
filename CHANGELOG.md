@@ -1,3 +1,53 @@
+## 2.208.3-alpha.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- [UXE-8462] fix multivalues option spacing
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.208.2-alpha.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- [UXE-8460] multivalues fix prop spreading
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.208.1-alpha.0 (2026-07-08)
+
+### 🩹 Fixes
+
+- [UXE-8391] add AccessibilityTable shared JSX component for Storybook MDX
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.208.0-alpha.0 (2026-07-08)
+
+### 🚀 Features
+
+- [UIP-8297] TableBase Update to match spec
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
+## 2.207.1-alpha.0 (2026-07-06)
+
+### 🩹 Fixes
+
+- [UXE-8410] CheckboxField focus restoration on Space key
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.207.0 (2026-07-02)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as FooterStories from './Footer.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows, ScreenReaderRows } from '../../utils/docUtils/accessibilityTableConstants';
 
 <Meta of={FooterStories} isTemplate />
 
@@ -15,17 +17,10 @@ This component requires these components:
 - FooterNav
 - FooterNavItem
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Key | Functions |
-| ---- | ---- |
-| Tab | All of the content in the Footer is focusable. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-
-#### Screen readers
-
-This component uses the following attributes to assist screen readers:
-- Each Link component uses the **`aria-label`** attribute to provide an accessible name.
-- The Icon uses the **`aria-hidden`** attribute to hide its content from assistive technology.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'All of the content in the Footer is focusable.' },
+  KeyboardRows.shiftTabFocusPrevious,
+]} screenReaderRows={[
+  ScreenReaderRows.eachLinkAriaLabel,
+  ScreenReaderRows.iconAriaHidden,
+]} />

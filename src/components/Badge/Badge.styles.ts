@@ -311,6 +311,24 @@ const dataTable = {
   },
 };
 
+const tableBaseBadge = {
+  active: {
+    ...infoCalloutBadge,
+  },
+  warning: {
+    ...warningStatusBadge,
+  },
+  critical: {
+    ...criticalStatusBadge,
+  },
+  healthy: {
+    ...healthyStatusBadge,
+  },
+  secondary: {
+    ...secondaryStatusBadge,
+  },
+};
+
 export default {
   activeStatusBadge,
   badgeDeleteButton,
@@ -338,4 +356,5 @@ export default {
   removableBadge,
   invertedRemovableBadge,
   dataTable,
+  tableBaseBadge,
 };

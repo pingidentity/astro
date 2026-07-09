@@ -57,6 +57,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
     label,
     loadingState,
     mode,
+    multivaluesProps,
     onBlur,
     onFocus,
     onInputChange,
@@ -505,7 +506,7 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
 
   return (
     <MultivaluesContext.Provider value={setActiveDescendant}>
-      <Box {...containerProps} id="cont">
+      <Box {...multivaluesProps} >
         <TextField
           onBlur={handleBlur}
           onChange={e => {

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as HelpHintStories from './HelpHint.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={HelpHintStories} isTemplate />
 
@@ -16,18 +17,11 @@ This component can be used independently and does not require additional compone
 ### Accessibility
 This component adheres to [WAI-ARIA Button](https://www.w3.org/TR/wai-aria-practices-1.1/examples/button/button.html) accessibility guidelines.
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component. 
-
-| Aria Attribute | Role |
-| ---- | ---- |
-| Space or Enter | Selects the help hint. |
-| Tab | Focuses the help hint and follows the page tab sequence. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The trigger button uses **`aria-expanded`** to indicate the expansion and collapse of the popover.
-- The **`aria-live`** attribute announces the dynamic changes in live region content.
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'Selects the help hint.' },
+  { key: 'Tab', description: 'Focuses the help hint and follows the page tab sequence.' },
+]} screenReaderRows={[
+  'The trigger button uses **`aria-expanded`** to indicate the expansion and collapse of the popover.',
+  'The **`aria-live`** attribute announces the dynamic changes in live region content.',
+]} />
 
