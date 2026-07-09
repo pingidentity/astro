@@ -1,3 +1,13 @@
+## 2.208.3-alpha.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- [UXE-8462] fix multivalues option spacing
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.208.2-alpha.0 (2026-07-09)
 
 ### 🩹 Fixes
