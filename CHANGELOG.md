@@ -1,3 +1,13 @@
+## 2.208.2-alpha.0 (2026-07-09)
+
+### 🩹 Fixes
+
+- [UXE-8460] multivalues fix prop spreading
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.208.1-alpha.0 (2026-07-08)
 
 ### 🩹 Fixes
