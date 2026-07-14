@@ -1,3 +1,13 @@
+## 2.208.4-alpha.0 (2026-07-14)
+
+### 🩹 Fixes
+
+- [UXE-8392] Add argTypes to AI component stories (AIPanel, Prompt, Response, Suggestions)
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.208.3 (2026-07-09)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
