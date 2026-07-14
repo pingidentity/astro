@@ -128,6 +128,7 @@ const useDefaultProps = componentType => {
           name,
         };
       case 'PasswordField':
+      case 'PhoneNumberField':
         return {
           value,
           onChange: e => setValue(e.target.value),
@@ -207,6 +208,7 @@ const getDefaultProps = (componentType, testValue) => {
         name,
       };
     case 'PasswordField':
+    case 'PhoneNumberField':
     case 'ComboBoxField':
     case 'NumberField':
     case 'MultivaluesField':
@@ -381,6 +383,8 @@ export const universalFieldComponentTests = ({
       } else if (componentType === 'RadioGroupField') {
         fireEvent.click(screen.getByLabelText(testValue));
       } else if (componentType === 'PasswordField') {
+        fireEvent.change(screen.getByRole('textbox'), { target: { value: testValue } });
+      } else if (componentType === 'PhoneNumberField') {
         fireEvent.change(screen.getByRole('textbox'), { target: { value: testValue } });
       } else if (componentType === 'DatePicker') {
         const iconButton = screen.queryAllByRole('button');
