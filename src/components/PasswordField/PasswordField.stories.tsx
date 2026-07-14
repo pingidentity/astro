@@ -35,7 +35,7 @@ export default {
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },
-} as Meta;
+} satisfies Meta<typeof PasswordField>;
 
 export const Default: StoryFn<PasswordFieldProps> = args => {
   return (

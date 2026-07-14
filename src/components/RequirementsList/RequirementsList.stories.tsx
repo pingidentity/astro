@@ -37,7 +37,7 @@ export default {
       { 'name': 'Requirement 4', 'status': 'success' },
     ],
   },
-} as Meta;
+} satisfies Meta<typeof RequirementsList>;
 
 export const Default: StoryFn<RequirementsListProps> = (
   { label, requirements }: RequirementsListProps,

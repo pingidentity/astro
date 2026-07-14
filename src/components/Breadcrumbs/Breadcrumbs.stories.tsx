@@ -34,7 +34,7 @@ export default {
     },
   },
 
-} as Meta;
+} satisfies Meta<typeof Breadcrumbs>;
 
 export const Default: StoryFn<breadCrumbsProps> = args => {
   const onAction = key => action(`onPress ${key}`);

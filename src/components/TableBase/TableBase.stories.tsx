@@ -24,6 +24,7 @@ import { TableBaseProps } from '../../types/tableBase';
 import { items as listData } from '../../utils/devUtils/constants/items';
 
 import TableReadme from './TableBase.mdx';
+import { tableBaseArgTypes } from './tableBaseAttributes';
 
 export default {
   title: 'Components/TableBase',
@@ -38,7 +39,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: tableBaseArgTypes as unknown as Meta<typeof TableBase>['argTypes'],
+} satisfies Meta<typeof TableBase>;
 
 const headers = [
   {

@@ -16,6 +16,7 @@ import {
 } from '../..';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { statusIcon } from '../../utils/devUtils/constants/statuses';
+import { booleanArg } from '../../utils/docUtils/docArgTypes';
 
 import StatusIconReadme from './StatusIcon.mdx';
 
@@ -32,7 +33,22 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: {
+    status: {
+      description: 'The severity status that determines which icon and color are rendered.',
+      control: { type: 'select' },
+      options: Object.values(statusIcon),
+    },
+    isSelected: {
+      ...booleanArg,
+      description: 'Whether the icon is rendered in its selected (inverted) visual state.',
+    },
+    iconProps: {
+      description: 'Props passed to the underlying icon element.',
+      control: { disable: true },
+    },
+  },
+} satisfies Meta<typeof StatusIcon>;
 
 const sx = {
   tableHead: {

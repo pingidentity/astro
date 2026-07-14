@@ -48,7 +48,7 @@ export default {
     title: 'Continue',
     hasCloseButton: true,
   },
-} as Meta;
+} satisfies Meta<typeof NavSideBar>;
 
 export const Default: StoryFn<NavSideBarProps> = (args: NavSideBarProps) => {
   return (

@@ -4,10 +4,10 @@ import isChromatic from 'chromatic/isChromatic';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Image } from '../../index';
-import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 import { chiefIdentityChampions, fallbackImg, pingImg } from '../../utils/devUtils/constants/images';
 
 import ImageReadme from './Image.mdx';
+import { imageArgTypes } from './imageAttributes';
 
 export default {
   title: 'Components/Image',
@@ -22,26 +22,12 @@ export default {
       ),
     },
   },
-  argTypes: {
-    isDisabled: {},
-    variant: {
-      control: false,
-    },
-    as: {
-      control: {
-        type: 'select',
-      },
-      options: htmlElements,
-    },
-    src: {
-      control: false,
-    },
-  },
+  argTypes: imageArgTypes as unknown as Meta<typeof Image>['argTypes'],
   args: {
     as: 'img',
     src: pingImg,
   },
-} as Meta;
+} satisfies Meta<typeof Image>;
 
 export const Default: StoryFn = ({ ...args }) => <Image {...args} alt="Ping identity square logo" />;
 

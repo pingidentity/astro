@@ -25,7 +25,13 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: {
+    children: {
+      control: undefined,
+      description: 'Content rendered inside the footer.',
+    },
+  },
+} satisfies Meta<typeof Footer>;
 
 const legalLinks = [
   {

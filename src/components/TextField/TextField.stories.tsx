@@ -51,7 +51,7 @@ export default {
   args: {
     labelMode: Object.values(labelModes)[0],
   },
-} as Meta;
+} satisfies Meta<typeof TextField>;
 
 export const Default: StoryFn<TextFieldProps> = ({ variant, ...args }: TextFieldProps) => (
   <TextField

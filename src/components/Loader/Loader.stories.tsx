@@ -38,7 +38,7 @@ export default {
   args: {
     color: 'active',
   },
-} as Meta;
+} satisfies Meta<typeof Loader>;
 
 export const Default: StoryFn<LoaderProps> = args => (
   <Loader {...args} />

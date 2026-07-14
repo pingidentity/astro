@@ -8,28 +8,12 @@ import { Badge, Box, Icon, Tab, Tabs, Text } from '../../index';
 import { TabListItemProps, TabsProps } from '../../types';
 
 import TabsReadme from './Tabs.mdx';
+import { tabsArgTypes } from './tabsAttributes';
 
 export default {
   title: 'Components/Tabs',
   component: Tabs,
-  argTypes: {
-    isDisabled: {},
-    orientation: {},
-    mode: {},
-    defaultSelectedKey: {},
-    selectedKey: {
-      control: false,
-    },
-    tabListProps: {
-      control: false,
-    },
-    tabPanelProps: {
-      control: false,
-    },
-    items: {
-      control: false,
-    },
-  },
+  argTypes: tabsArgTypes as unknown as Meta<typeof Tabs>['argTypes'],
   parameters: {
     actions: { argTypesRegex: null },
     test: { disable: true },
@@ -42,7 +26,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} satisfies Meta<typeof Tabs>;
 
 const tabs: TabListItemProps[] = [
   { name: 'Overview', children: <Text>Tab 3 body</Text> },

@@ -18,6 +18,7 @@ import { PopoverMenuProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import PopoverMenuReadme from './PopoverMenu.mdx';
+import { popoverMenuArgTypes } from './popoverMenuAttributes';
 
 export default {
   title: 'Components/PopoverMenu',
@@ -32,18 +33,8 @@ export default {
       ),
     },
   },
-  argTypes: {
-    align: {},
-    direction: {},
-    isDefaultOpen: {},
-    isNotClosedOnSelect: {},
-    isNotFlippable: {},
-    isOpen: {
-      onClick: { action: 'clicked' },
-      control: false,
-    },
-  },
-} as Meta;
+  argTypes: popoverMenuArgTypes as unknown as Meta<typeof PopoverMenu>['argTypes'],
+} satisfies Meta<typeof PopoverMenu>;
 
 export const Default: StoryFn<PopoverMenuProps> = (args: PopoverMenuProps) => {
   const { themeState: { isOnyx }, icons: { popoverMenuIcon } } = useGetTheme();

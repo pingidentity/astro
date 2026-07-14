@@ -36,7 +36,7 @@ export default {
   args: {
     children: 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut at enim nunc. Cras congue consequat odio, ac sodales lacus imperdiet quis. In id ex eu lorem sollicitudin hendrerit feugiat ultrices elit. Curabitur imperdiet libero vitae luctus blandit. Ut ac dignissim tortor. Pellentesque convallis eu metus vitae mollis. Donec sapien felis, laoreet eu egestas eu, blandit quis tellus. Donec luctus suscipit nibh, et tincidunt nisl facilisis ut. Mauris molestie purus at lectus venenatis, ac ultrices felis ultrices.',
   },
-} as Meta;
+} satisfies Meta<typeof Card>;
 
 export const Default = args => (
   <Card {...args} />

@@ -46,7 +46,7 @@ export default {
     size: 'md',
     title: { name: 'Search Icon' },
   },
-} as Meta;
+} satisfies Meta<typeof Icon>;
 
 export const Default: StoryFn<IconProps> = (args: IconProps) => (
   <Icon {...args} />

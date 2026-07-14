@@ -11,7 +11,7 @@ export default {
   argTypes: {
     ...statusArgTypes,
   },
-} as Meta;
+} satisfies Meta<typeof FieldHelperText>;
 
 export const Default: StoryFn<FieldHelperTextProps> = (args: FieldHelperTextProps) => (
   <FieldHelperText {...args}>

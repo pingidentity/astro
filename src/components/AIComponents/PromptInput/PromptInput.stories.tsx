@@ -29,7 +29,7 @@ export default {
       ...booleanArg,
     },
   },
-} as Meta;
+} satisfies Meta<typeof PromptInput>;
 
 export const Default = args => {
   const [value, setValue] = useState('');

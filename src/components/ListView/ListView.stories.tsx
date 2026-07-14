@@ -57,7 +57,7 @@ export default {
     onFocus: fn(),
     onLoadMore: fn(),
   },
-} as Meta;
+} satisfies Meta<typeof ListView>;
 
 const items: ExampleItemProps[] = [
   {

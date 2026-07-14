@@ -51,7 +51,7 @@ export default {
     gap: '10px',
     as: 'div',
   },
-} as Meta;
+} satisfies Meta<typeof Box>;
 
 export const Default = ({ ...args }) => (
   <Box bg="active" width="100%" p="xl" {...args}>

@@ -17,10 +17,9 @@ import {
 } from '../../index';
 import { SearchFieldProps, SearchItem } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { ariaAttributeBaseArgTypes, ariaAttributeBaseDocSettings } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 
 import SearchFieldReadme from './SearchField.mdx';
+import { searchFieldArgTypes } from './searchFieldAttributes';
 
 export default {
   title: 'Form/SearchField',
@@ -35,38 +34,12 @@ export default {
       ),
     },
   },
-  argTypes: {
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    placeholder: {},
-    defaultValue: {},
-    icon: {
-      control: false,
-    },
-    isDisabled: {},
-    hasAutoFocus: {},
-    hasNoClearButton: {},
-    autoComplete: {},
-    iconProps: {},
-    name: {},
-    id: {},
-    'aria-autocomplete': {
-      table: ariaAttributeBaseDocSettings.table,
-    },
-    value: {
-      control: false,
-    },
-    ...ariaAttributeBaseArgTypes,
-    ...inputFieldAttributeBaseArgTypes,
-  },
+  argTypes: { ...searchFieldArgTypes },
   args: {
     placeholder: 'Search',
     'aria-label': 'Search Field',
   },
-} as Meta;
+} satisfies Meta<typeof SearchField>;
 
 export const Default: StoryFn<SearchFieldProps<SearchItem>> = (
   args: SearchFieldProps<SearchItem>,

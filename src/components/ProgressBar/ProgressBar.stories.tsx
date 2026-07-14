@@ -5,6 +5,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { ProgressBar, ProgressBarProps } from '../../index';
 
 import ProgressBarReadMe from './ProgressBar.mdx';
+import { progressBarArgTypes } from './progressBarAttributes';
 
 export default {
   title: 'Experimental/ProgressBar',
@@ -19,34 +20,8 @@ export default {
       ),
     },
   },
-  argTypes: {
-    isIndeterminate: {
-      table: {
-        disable: true,
-      },
-    },
-    'data-testid': {
-      table: {
-        disable: true,
-      },
-    },
-    label: {
-      table: {
-        disable: true,
-      },
-    },
-    shouldShowValueLabel: {
-      table: {
-        disable: true,
-      },
-    },
-    valueLabel: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-} as Meta;
+  argTypes: progressBarArgTypes as unknown as Meta<typeof ProgressBar>['argTypes'],
+} satisfies Meta<typeof ProgressBar>;
 
 export const Default: StoryFn<ProgressBarProps> = (args: ProgressBarProps) => {
   return <ProgressBar {...args} value={25} aria-label="Progress Bar" />;

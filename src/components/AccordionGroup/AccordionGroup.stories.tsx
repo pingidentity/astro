@@ -14,9 +14,9 @@ import {
 } from '../../index';
 import ItemProps from '../../types/item';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { validHeadingTags } from '../AccordionItem/AccordionItem';
 
 import AccordionReadme from './AccordionGroup.mdx';
+import { accordionGroupArgTypes } from './accordionGroupAttributes';
 
 const itemArray = [
   { key: 't1', label: 'First Accordion', children: <Button sx={{ width: 'fit-content' }}>Secondary Button</Button> },
@@ -32,7 +32,7 @@ const itemArrayDisabled = [
   { key: 't3', label: 'Accordion Disabled', children: <Text>Hi</Text> },
 ];
 
-export default {
+const meta: Meta<typeof AccordionGroup> = {
   title: 'Components/AccordionGroup',
   component: AccordionGroup,
   parameters: {
@@ -48,28 +48,10 @@ export default {
       ),
     },
   },
-  argTypes: {
-    id: {
-      control: {
-        type: 'text',
-      },
-    },
-    disabledKeys: {
-      description: 'The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. Array of keys.',
-    },
-    defaultExpandedKeys: {},
-    expandedKeys: {
-      control: false,
-    },
-    items: {
-      control: false,
-    },
-    labelHeadingTag: {
-      control: 'radio',
-      options: validHeadingTags,
-    },
-  },
-} as Meta;
+  argTypes: accordionGroupArgTypes as Meta<typeof AccordionGroup>['argTypes'],
+};
+
+export default meta;
 
 export const Default = args => {
   return (

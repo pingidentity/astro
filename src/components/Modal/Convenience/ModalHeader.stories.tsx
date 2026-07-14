@@ -8,6 +8,8 @@ import {
 } from '../../../index';
 import { ModalHeaderProps } from '../../../types/Modal';
 
+import { modalHeaderArgTypes } from './modalHeaderAttributes';
+
 export default {
   title: 'Components/Modal/Convenience/ModalHeader',
   component: ModalHeader,
@@ -18,7 +20,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: { ...modalHeaderArgTypes },
+} satisfies Meta<typeof ModalHeader>;
 
 export const Default: StoryFn<ModalHeaderProps> = () => {
   const state = useModalState();
