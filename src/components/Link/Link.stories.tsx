@@ -5,10 +5,9 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button, Link, Text } from '../../index';
 import { LinkProps } from '../../types/link';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { htmlElements } from '../../utils/devUtils/constants/htmlElements';
 
 import LinkReadme from './Link.mdx';
-import variants from './Link.styles';
+import { linkArgTypes } from './linkAttributes';
 
 export default {
   title: 'Components/Link',
@@ -23,40 +22,13 @@ export default {
       ),
     },
   },
-  argTypes: {
-    href: {
-      control: {
-        type: 'text',
-      },
-    },
-    isDisabled: {},
-    isSafariCompatible: {
-      table: {
-        disable: true,
-      },
-    },
-    as: {
-      control: {
-        type: 'select',
-      },
-      options: htmlElements,
-    },
-    target: {
-      control: false,
-    },
-    variant: {
-      control: {
-        type: 'select',
-        options: [...Object.keys(variants), 'button'],
-      },
-    },
-  },
+  argTypes: linkArgTypes as unknown as Meta<typeof Link>['argTypes'],
   args: {
     href: 'https://uilibrary.ping-eng.com/',
     as: 'a',
     target: '_blank',
   },
-} as Meta;
+} satisfies Meta<typeof Link>;
 
 export const Default: StoryFn<LinkProps> = ({ ...args }) => (
   <div style={{ width: 'max-content' }}>

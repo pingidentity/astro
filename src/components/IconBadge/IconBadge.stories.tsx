@@ -12,6 +12,7 @@ import {
 } from '../../index';
 import { IconBadgeProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import IconBadgeReadme from './IconBadge.mdx';
 
@@ -28,7 +29,22 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: {
+    baseSize: {
+      description: 'The size of the base icon; number values are converted to pixels.',
+      control: { type: 'text' },
+    },
+    circleColor: {
+      description: 'Color applied to the circular background; defaults to white.',
+      control: { type: 'text' },
+    },
+    circleSize: {
+      description: 'The size of the icon rendered inside the circle; number values are converted to pixels.',
+      control: { type: 'number' },
+    },
+    ...ariaAttributeBaseArgTypes,
+  } as unknown as Meta<typeof IconBadge>['argTypes'],
+} satisfies Meta<typeof IconBadge>;
 
 export const Default: StoryFn<IconBadgeProps> = args => {
   const { themeState: { isOnyx, isOnyxDark } } = useGetTheme();

@@ -4,11 +4,9 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { ColorField, OverlayProvider } from '../../index';
 import { ColorFieldProps, CustomColorProps } from '../../types';
-import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import ColorFieldReadme from './ColorField.mdx';
+import { colorFieldArgTypes } from './colorFieldAttributes';
 
 export default {
   title: 'Form/ColorField',
@@ -23,37 +21,12 @@ export default {
       ),
     },
   },
-  argTypes: {
-    value: {
-      control: {
-        type: 'text',
-      },
-    },
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    helperText: {
-      control: {
-        type: 'text',
-      },
-    },
-    buttonProps: {
-      control: false,
-    },
-    containerProps: {
-      control: false,
-    },
-    ...statusArgTypes,
-    ...ariaAttributeBaseArgTypes,
-    ...inputFieldAttributeBaseArgTypes,
-  },
+  argTypes: { ...colorFieldArgTypes },
   args: {
     label: 'Color Field',
     buttonProps: { sx: { width: 40, height: 30 } },
   },
-} as Meta;
+} satisfies Meta<typeof ColorField>;
 
 export const Default: StoryFn<ColorFieldProps> = (args: ColorFieldProps) => {
   const [color, setColor] = useState('rgba(127, 0, 127, 1)');

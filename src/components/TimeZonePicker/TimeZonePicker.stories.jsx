@@ -2,6 +2,7 @@ import React from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { TimeZonePicker } from '../../index';
+import { funcArg } from '../../utils/docUtils/docArgTypes';
 
 import TimeZonePickerReadme from './TimeZonePicker.mdx';
 
@@ -16,6 +17,40 @@ export default {
           <DocsLayout />
         </>
       ),
+    },
+  },
+  argTypes: {
+    selectedKey: {
+      description: 'The key of the currently selected time zone item (controlled).',
+      control: { type: 'text' },
+    },
+    inputValue: {
+      description: 'The current value of the search input field (controlled).',
+      control: { type: 'text' },
+    },
+    emptySearchText: {
+      description: 'Text displayed when the search query returns no results.',
+      control: { type: 'text' },
+    },
+    locales: {
+      description: 'Locale string or array of locale strings used to format time zone display names.',
+      control: { type: 'text' },
+    },
+    onSelectionChange: {
+      ...funcArg,
+      description: 'Callback invoked when the selected time zone changes.',
+    },
+    onInputChange: {
+      ...funcArg,
+      description: 'Callback invoked when the search input value changes.',
+    },
+    additionalTimeZones: {
+      description: 'An object mapping custom display labels to IANA time zone identifiers to include alongside the default list.',
+      control: { type: null },
+    },
+    localeOptions: {
+      description: 'Options object passed to Intl.DateTimeFormat for locale-sensitive time zone name formatting.',
+      control: { type: null },
     },
   },
 };

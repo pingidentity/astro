@@ -6,6 +6,7 @@ import { Box, Grid, Text } from '../../index';
 import { GridProps } from '../../types';
 
 import GridReadme from './Grid.mdx';
+import { gridArgTypes } from './gridAttributes';
 
 export default {
   title: 'Components/Grid',
@@ -20,22 +21,8 @@ export default {
       ),
     },
   },
-  argTypes: {
-    repeat: {
-      options: ['fit', 'fill'],
-      control: { type: 'select' },
-    },
-    gap: {
-      control: { type: 'number' },
-    },
-    width: {
-      control: false,
-    },
-    columns: {
-      control: false,
-    },
-  },
-} as Meta;
+  argTypes: gridArgTypes as unknown as Meta<typeof Grid>['argTypes'],
+} satisfies Meta<typeof Grid>;
 
 export const Default: StoryFn<GridProps> = args => (
   <>

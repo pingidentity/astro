@@ -29,7 +29,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} satisfies Meta<typeof EnvironmentBreadcrumb>;
 
 const defaultEnvironments: EnvironmentItemProps[] = [
   { name: 'Default' },

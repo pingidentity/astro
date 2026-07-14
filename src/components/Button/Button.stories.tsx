@@ -36,7 +36,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} satisfies Meta<typeof Button>;
 
 export const Default: StoryFn<ButtonProps> = (args: ButtonProps) => (
   <Button {...args} />

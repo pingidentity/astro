@@ -32,7 +32,7 @@ export default {
   args: {
     children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
   },
-} as Meta;
+} satisfies Meta<typeof HelpHint>;
 
 export const Default: StoryFn<HelpHintProps> = (args: HelpHintProps) => (
   <Box p={100}>

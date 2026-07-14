@@ -41,7 +41,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} satisfies Meta<typeof Messages>;
 
 const loremText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
 

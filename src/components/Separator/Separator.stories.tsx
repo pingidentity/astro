@@ -5,6 +5,7 @@ import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Separator } from '../../index';
 import { SeparatorProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import SeparatorReadme from './Separator.mdx';
 
@@ -21,7 +22,14 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: {
+    orientation: {
+      control: { type: 'select', description: 'Sets the orientation of the separator line.' },
+      options: ['horizontal', 'vertical'],
+    },
+    ...ariaAttributeBaseArgTypes,
+  } as unknown as Meta<typeof Separator>['argTypes'],
+} satisfies Meta<typeof Separator>;
 
 export const Default: StoryFn<SeparatorProps> = ({ ...args }) => (
   <Box width="400px">

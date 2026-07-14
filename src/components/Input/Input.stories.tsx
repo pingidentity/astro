@@ -4,19 +4,16 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import { Input } from '../../index';
 import { InputProps } from '../../types';
 
+import { inputArgTypes } from './inputAttributes';
+
 export default {
   title: 'Form/Base Components/Input',
   component: Input,
-  argTypes: {
-    placeholder: {},
-    type: {},
-    name: {},
-    id: {},
-  },
+  argTypes: { ...inputArgTypes },
   args: {
     placeholder: 'This is a basic input',
   },
-} as Meta;
+} satisfies Meta<typeof Input>;
 
 export const Default: StoryFn<InputProps> = (args: InputProps) => (
   <Input {...args} />

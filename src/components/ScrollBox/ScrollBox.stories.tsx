@@ -31,7 +31,7 @@ export default {
   args: {
     maxHeight: '100px',
   },
-} as Meta;
+} satisfies Meta<typeof ScrollBox>;
 
 export const Default: StoryFn<ScrollBoxProps> = args => (
   <ScrollBox maxHeight="100px" {...args}>

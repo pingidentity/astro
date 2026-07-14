@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Item, TreeView, useTreeData } from '../../index';
+import { funcArg } from '../../utils/docUtils/docArgTypes';
 
 import TreeViewReadMe from './TreeView.mdx';
 
@@ -32,6 +33,48 @@ export default {
           },
         ],
       },
+    },
+  },
+  argTypes: {
+    onExpandedChange: {
+      ...funcArg,
+      description: 'Callback invoked when the set of expanded tree nodes changes.',
+    },
+    onKeyDown: {
+      ...funcArg,
+      description: 'Callback invoked when a key is pressed while the tree has focus.',
+    },
+    onDragStart: {
+      ...funcArg,
+      description: 'Callback invoked when a drag operation on a tree item starts.',
+    },
+    onDrop: {
+      ...funcArg,
+      description: 'Callback invoked when an item is dropped onto the tree.',
+    },
+    pageLength: {
+      description: 'Number of items to move focus by when Page Up or Page Down is pressed.',
+      control: { type: 'number' },
+    },
+    'aria-label': {
+      description: 'Defines an accessible label for the tree.',
+      control: { type: 'text' },
+    },
+    tree: {
+      description: 'The tree data object returned by useTreeData, used to manage tree state.',
+      control: { type: null },
+    },
+    items: {
+      description: 'The iterable list of top-level tree items to render.',
+      control: { type: null },
+    },
+    disabledKeys: {
+      description: 'Keys of items that are disabled and cannot be interacted with.',
+      control: { type: null },
+    },
+    loadingNodes: {
+      description: 'Array of node loading state objects indicating which nodes are currently loading children.',
+      control: { type: null },
     },
   },
 };

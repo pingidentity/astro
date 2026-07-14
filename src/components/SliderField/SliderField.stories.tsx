@@ -6,6 +6,7 @@ import { Label, SliderField } from '../../index';
 import { NumberOrNumberPair } from '../../types/sliderField';
 
 import SliderFieldReadme from './SliderField.mdx';
+import { sliderFieldArgTypes } from './sliderFieldAttributes';
 
 export default {
   title: 'Form/SliderField',
@@ -20,44 +21,7 @@ export default {
       ),
     },
   },
-  argTypes: {
-    defaultValue: {
-      control: {
-        type: 'number',
-      },
-    },
-    orientation: {
-      control: {
-        type: 'select',
-        options: ['vertical', 'horizontal'],
-      },
-    },
-    step: {
-      control: {
-        type: 'number',
-      },
-    },
-    minValue: {
-      control: {
-        type: 'number',
-      },
-    },
-    maxValue: {
-      control: {
-        type: 'number',
-      },
-    },
-    helperText: {
-      control: {
-        type: 'text',
-      },
-    },
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-  },
+  argTypes: sliderFieldArgTypes as unknown as Meta<typeof SliderField>['argTypes'],
   args: {
     defaultValue: 40,
     step: 10,
@@ -66,7 +30,7 @@ export default {
     label: 'Lorem ipsum',
     helperText: 'Lorem ipsum...',
   },
-} as Meta;
+} satisfies Meta<typeof SliderField>;
 
 const loremText = 'Lorem ipsum';
 

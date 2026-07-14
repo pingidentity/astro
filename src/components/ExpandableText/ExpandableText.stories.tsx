@@ -6,6 +6,7 @@ import { ExpandableText } from '../../index';
 import { ExpandableTextProps } from '../../types';
 
 import ExpandableTextReadMe from './ExpandableText.mdx';
+import { expandableTextArgTypes } from './expandableTextAttributes';
 
 
 export default {
@@ -21,9 +22,8 @@ export default {
       ),
     },
   },
-
-
-} as Meta;
+  argTypes: { ...expandableTextArgTypes },
+} satisfies Meta<typeof ExpandableText>;
 
 export const Default: StoryFn<ExpandableTextProps> = (args: ExpandableTextProps) => (
   <ExpandableText maxLines={5} data-testid="test-field">

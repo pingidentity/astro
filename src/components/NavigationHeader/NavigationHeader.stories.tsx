@@ -31,7 +31,7 @@ export default {
       control: false,
     },
   },
-} as Meta;
+} satisfies Meta<typeof NavigationHeader>;
 
 const iconButtonSX = {
   minWidth: '56px',

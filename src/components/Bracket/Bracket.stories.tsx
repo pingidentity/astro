@@ -10,6 +10,7 @@ import { BracketProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import BracketReadme from './Bracket.mdx';
+import { bracketArgTypes } from './bracketAttributes';
 
 export default {
   title: 'Components/Bracket',
@@ -24,32 +25,8 @@ export default {
       ),
     },
   },
-  argTypes: {
-    isLast: {
-      control: {
-        type: 'boolean',
-      },
-      description: 'If true, the bracket will be displayed as the last one.',
-    },
-    color: {
-      control: {
-        type: 'text',
-      },
-    },
-    variant: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-    role: {
-      control: false,
-    },
-    'data-testid': {
-      control: false,
-    },
-  },
-} as Meta;
+  argTypes: bracketArgTypes as unknown as Meta<typeof Bracket>['argTypes'],
+} satisfies Meta<typeof Bracket>;
 
 export const Default: StoryFn<BracketProps> = args => {
   return (

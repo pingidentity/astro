@@ -6,6 +6,7 @@ import { TimeField } from '../../index';
 import { TimeFieldProps } from '../../types';
 
 import TimeFieldReadme from './TimeField.mdx';
+import { timeFieldArgTypes } from './timeFieldAttributes';
 
 export default {
   title: 'Experimental/TimeField',
@@ -33,8 +34,8 @@ export default {
       },
     },
   },
-  argTypes: {},
-} as Meta;
+  argTypes: timeFieldArgTypes as unknown as Meta<typeof TimeField>['argTypes'],
+} satisfies Meta<typeof TimeField>;
 
 export const Default: StoryFn<TimeFieldProps> = (args: TimeFieldProps) => (
   <TimeField {...args} aria-label="timefield-default" />

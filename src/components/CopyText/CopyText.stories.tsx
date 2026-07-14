@@ -39,7 +39,7 @@ export default {
       control: 'none',
     },
   },
-} as Meta;
+} satisfies Meta<typeof CopyText>;
 
 export const Default: StoryFn<CopyTextProps> = (args: CopyTextProps) => (
   <CopyText {...args}>

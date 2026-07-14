@@ -30,7 +30,7 @@ export default {
     size: 'sm',
     title: { name: 'delete Icon' },
   },
-} as Meta;
+} satisfies Meta<typeof IconWrapper>;
 
 export const Default = args => {
   return <IconWrapper {...args} />;
