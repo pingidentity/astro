@@ -254,6 +254,10 @@ export const FIGMA_LINKS = {
     withExtraLongText:
       'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=44688%3A39713&mode=dev',
   },
+  phoneNumberField: {
+    default:
+      'https://www.figma.com/design/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=8496-31873',
+  },
   popoverMenu: {
     default:
       'https://www.figma.com/file/Oa6VYtJcUJzEJuuRp0p4ls/Astro?type=design&node-id=0%3A3073&t=We3h7LaaFJQnxdSy-1',

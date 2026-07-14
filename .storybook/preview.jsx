@@ -64,7 +64,7 @@ const preview = {
     msw: { handlers },
     options: {
       storySort: {
-        order: ['Docs', ['Welcome', 'Props', 'Theme', ['Astro Theme', 'Custom Themes', 'Styling Guideline', 'Astro Nano Theme'], 'Utils', 'Hooks', 'Design', 'Design Patterns'], 'Components', 'Form', ['ArrayField', 'CheckboxField', 'ColorField', 'ComboBoxField', 'DatePicker', 'FileInputField', 'ImageUploadField', 'LinkSelectField', 'MultivaluesField', 'NumberField', 'PasswordField', 'RadioGroupField', 'SearchField', 'SelectField', 'SwitchField', 'TextAreaField', 'TextField', 'TimeZonePicker', 'Base Components'], 'Experimental', ['Overview', '*']],
+        order: ['Docs', ['Welcome', 'Props', 'Theme', ['Astro Theme', 'Custom Themes', 'Styling Guideline', 'Astro Nano Theme'], 'Utils', 'Hooks', 'Design', 'Design Patterns'], 'Components', 'Form', ['ArrayField', 'CheckboxField', 'ColorField', 'ComboBoxField', 'DatePicker', 'FileInputField', 'ImageUploadField', 'LinkSelectField', 'MultivaluesField', 'NumberField', 'PasswordField', 'PhoneNumberField', 'RadioGroupField', 'SearchField', 'SelectField', 'SwitchField', 'TextAreaField', 'TextField', 'TimeZonePicker', 'Base Components'], 'Experimental', ['Overview', '*']],
       },
     },
   },

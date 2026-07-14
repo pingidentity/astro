@@ -46,6 +46,7 @@ const nextGenConvertedComponents = [
   'Pagination',
   'PanelHeader',
   'PasswordField',
+  'PhoneNumberField',
   'PopoverMenu',
   'ProgressBar',
   'RadioField',

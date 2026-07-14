@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as PhoneNumberFieldStories from './PhoneNumberField.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
+
+<Meta of={PhoneNumberFieldStories} isTemplate />
+
+# PhoneNumberField
+
+The PhoneNumberField component combines a country selector with a phone number input, providing a complete, form-ready solution for collecting international phone numbers. The country selector is an accessible combo box that filters all countries from the `countries-list` package, and the phone input validates that only numeric characters (with an optional leading `+`) are entered.
+
+### Required components
+
+This component requires the following dependency to be present in the project:
+
+- **`countries-list ^2.6.1`** — provides the full list of countries and their dial codes used to populate the country selector dropdown.
+
+The `ComboBoxField` component (from the Astro design system) is used internally for the country selector. No additional external setup is needed beyond having `countries-list` installed.
+
+### Accessibility
+
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'Moves focus between the country selector trigger and the phone number input, following the page tab sequence.' },
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Arrow Down / Arrow Up', description: 'When the country selector dropdown is open, moves focus through the list of countries.' },
+  { key: 'Enter', description: 'Selects the currently focused country in the dropdown and closes the selector.' },
+  { key: 'Escape', description: 'Closes the country selector dropdown without changing the selection.' },
+]} screenReaderRows={[
+  'The phone number input uses the **`aria-labelledby`** attribute to reference the field label ID, associating the visible label with the input.',
+  'The country selector combo box uses the **`aria-label`** attribute (value: `"Country Picker"`) to provide an accessible name for the combo box trigger, since its visible content is the dial code rather than a descriptive label.',
+  'The **`aria-invalid`** attribute is set on the phone input when the field has an error status.',
+]} />
