@@ -26,7 +26,7 @@ export default {
       control: false,
     },
   },
-} as Meta;
+} satisfies Meta<typeof Skeleton>;
 
 export const Default: StoryFn<SkeletonProps> = ({ ...args }) => (
   <Box width="200px">

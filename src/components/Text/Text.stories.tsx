@@ -18,6 +18,7 @@ import {
 import { SxObject, TextProps } from '../../types';
 
 import TextReadme from './Text.mdx';
+import { textArgTypes } from './textAttributes';
 
 export default {
   title: 'Components/Text',
@@ -32,33 +33,8 @@ export default {
       ),
     },
   },
-  argTypes: {
-    as: {
-      control: false,
-    },
-    role: {
-      control: false,
-    },
-    variant: {
-      control: false,
-      description: 'Text variant.',
-    },
-    children: {
-      control: false,
-      description: 'Text value.',
-    },
-    color: {
-      control: {
-        type: 'text',
-      },
-      description: 'Text color.',
-    },
-    bg: {
-      control: false,
-      description: 'Background color.',
-    },
-  },
-} as Meta;
+  argTypes: textArgTypes as unknown as Meta<typeof Text>['argTypes'],
+} satisfies Meta<typeof Text>;
 
 const sx: SxObject = {
   cell: {

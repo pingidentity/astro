@@ -8,6 +8,8 @@ import {
   Text,
 } from '../../../index';
 
+import { modalBodyArgTypes } from './modalBodyAttributes';
+
 export default {
   title: 'Components/Modal/Convenience/ModalBody',
   component: ModalBody,
@@ -18,7 +20,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: { ...modalBodyArgTypes },
+} satisfies Meta<typeof ModalBody>;
 
 export const Default: StoryFn<{
   children?: ReactNode;

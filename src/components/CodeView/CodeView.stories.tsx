@@ -105,7 +105,7 @@ export default {
       },
     },
   },
-} as Meta;
+} satisfies Meta<typeof CodeView>;
 
 export const Default: StoryFn<CodeViewProps> = (args: CodeViewProps) => {
   return (

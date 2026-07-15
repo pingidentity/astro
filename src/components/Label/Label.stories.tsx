@@ -5,26 +5,16 @@ import { Label } from '../../index';
 import { LabelProps } from '../../types';
 import { modes } from '../../utils/devUtils/constants/labelModes';
 
+import { labelArgTypes } from './labelAttributes';
+
 export default {
   title: 'Form/Base Components/Label',
   component: Label,
-  argTypes: {
-    mode: {
-      control: {
-        type: 'select',
-        options: modes,
-      },
-    },
-    isDisabled: {},
-    isRequired: {},
-    requiredIndicator: {
-      control: 'none',
-    },
-  },
+  argTypes: labelArgTypes as unknown as Meta<typeof Label>['argTypes'],
   args: {
     mode: modes.DEFAULT,
   },
-} as Meta;
+} satisfies Meta<typeof Label>;
 
 export const Default: StoryFn<LabelProps> = (args: LabelProps) => (
   <Label {...args}>This is a label</Label>

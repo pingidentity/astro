@@ -8,6 +8,7 @@ import { AvatarProps } from '../../types/avatar';
 import { pingImg } from '../../utils/devUtils/constants/images';
 
 import AvatarReadme from './Avatar.mdx';
+import { avatarArgTypes } from './avatarAttributes';
 
 export default {
   title: 'Components/Avatar',
@@ -22,33 +23,11 @@ export default {
       ),
     },
   },
-  argTypes: {
-    src: {
-      control: false,
-    },
-    size: {
-      control: {
-        type: 'text',
-      },
-      description: 'Size of the avatar. Can be a string. like 50px',
-    },
-    alt: {
-      control: {
-        type: 'text',
-      },
-      description: 'Alternative text for the image.',
-    },
-    defaultText: {
-      control: {
-        type: 'text',
-      },
-      description: 'Default text to be displayed when src is not available.',
-    },
-  },
+  argTypes: avatarArgTypes as unknown as Meta<typeof Avatar>['argTypes'],
   args: {
     src: pingImg,
   },
-} as Meta;
+} satisfies Meta<typeof Avatar>;
 
 
 export const Default: StoryFn<AvatarProps> = ({ ...args }) => (

@@ -4,10 +4,9 @@ import { Meta } from '@storybook/react-vite';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RadioField, RadioGroupField } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
-import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import RadioGroupFieldReadme from './RadioGroupField.mdx';
+import { radioGroupFieldArgTypes } from './radioGroupFieldAttributes';
 
 export default {
   title: 'Form/RadioGroupField',
@@ -22,39 +21,12 @@ export default {
       ),
     },
   },
-  argTypes: {
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    helperText: {
-      control: {
-        type: 'text',
-      },
-    },
-    hintText: {
-      control: {
-        type: 'text',
-      },
-    },
-    defaultValue: {},
-    orientation: {},
-    isDisabled: {},
-    isRequired: {},
-    name: {},
-    id: {},
-    value: {
-      control: false,
-    },
-    ...statusArgTypes,
-    ...ariaAttributeBaseArgTypes,
-  },
+  argTypes: { ...radioGroupFieldArgTypes },
   args: {
     label: 'Pick one',
     defaultValue: 'A',
   },
-} as Meta;
+} satisfies Meta<typeof RadioGroupField>;
 
 export const Default = args => (
   <RadioGroupField {...args}>

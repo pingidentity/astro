@@ -12,6 +12,7 @@ import { Response } from '../../../index';
 import Markdown from './ResponseMarkdown/ResponseMarkdown';
 import ResponseReadme from './Response.mdx';
 import ResponseAttachment from './ResponseAttachment';
+import { responseArgTypes } from './responseAttributes';
 import ResponseList from './ResponseList';
 import ResponseText from './ResponseText';
 import ResponseToolbar from './ResponseToolbar';
@@ -30,7 +31,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: responseArgTypes as unknown as Meta<typeof Response>['argTypes'],
+} satisfies Meta<typeof Response>;
 
 const testText = 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet';
 

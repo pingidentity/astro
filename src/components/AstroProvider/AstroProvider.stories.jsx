@@ -29,6 +29,20 @@ export default {
       </div>
     ),
   ],
+  argTypes: {
+    themeOverrides: {
+      description: 'Array of theme override objects merged on top of the default Astro theme.',
+      control: { type: null },
+    },
+    defaultTheme: {
+      description: 'The base theme object to use as the default instead of the built-in Astro theme.',
+      control: { type: null },
+    },
+    children: {
+      description: 'Content rendered inside the theme provider context.',
+      control: { type: null },
+    },
+  },
 };
 
 export const Default = () => {

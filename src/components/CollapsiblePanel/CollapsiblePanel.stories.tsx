@@ -7,6 +7,7 @@ import { CollapsiblePanelProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import CollapsiblePanelReadme from './CollapsiblePanel.mdx';
+import { collapsiblePanelArgTypes } from './collapsiblePanelAttributes';
 
 export default {
   title: 'Components/CollapsiblePanel',
@@ -21,22 +22,13 @@ export default {
       ),
     },
   },
-  argTypes: {
-    listTitle: {},
-    openAriaLabel: {},
-    closeAriaLabel: {},
-    isDefaultOpen: {},
-    isOpen: {
-      onClick: { action: 'clicked' },
-      control: false,
-    },
-  },
+  argTypes: { ...collapsiblePanelArgTypes },
   args: {
     listTitle: '',
     openAriaLabel: 'Open filter menu?',
     closeAriaLabel: 'Close filter menu?',
   },
-} as Meta;
+} satisfies Meta<typeof CollapsiblePanel>;
 
 export const Default: StoryFn<CollapsiblePanelProps<object>> = (
   args: CollapsiblePanelProps<object>,

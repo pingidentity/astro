@@ -15,11 +15,9 @@ import {
 } from '../../index';
 import { CheckboxFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import CheckboxFieldReadme from './CheckboxField.mdx';
+import { checkboxFieldArgTypes } from './checkboxFieldAttributes';
 
 export default {
   title: 'Form/CheckboxField',
@@ -34,44 +32,11 @@ export default {
       ),
     },
   },
-  argTypes: {
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    helperText: {
-      control: {
-        type: 'text',
-      },
-    },
-    hintText: {
-      control: {
-        type: 'text',
-      },
-    },
-    name: {},
-    id: {
-      control: {
-        type: 'text',
-      },
-    },
-    value: {},
-    isRequired: {},
-    isDisabled: {},
-    isReadOnly: {},
-    hasAutoFocus: {},
-    isIndeterminate: {},
-    isDefaultSelected: {},
-    isSelected: {},
-    ...statusArgTypes,
-    ...ariaAttributeBaseArgTypes,
-    ...inputFieldAttributeBaseArgTypes,
-  },
+  argTypes: { ...checkboxFieldArgTypes },
   args: {
     label: 'Click me!',
   },
-} as Meta;
+} satisfies Meta<typeof CheckboxField>;
 
 export const Default: StoryFn<CheckboxFieldProps> = (args: CheckboxFieldProps) => (
   <CheckboxField

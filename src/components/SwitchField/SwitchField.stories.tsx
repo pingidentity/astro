@@ -36,7 +36,7 @@ export default {
     ...inputFieldAttributeBaseArgTypes,
   },
   args: switchFieldArgs,
-} as Meta;
+} satisfies Meta<typeof SwitchField>;
 
 export const Default: StoryFn<SwitchFieldProps> = args => (
   <SwitchField

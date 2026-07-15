@@ -8,6 +8,7 @@ import { ServerErrorBoundaryProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import ServerErrorBoundaryReadme from './ServerErrorBoundary.mdx';
+import { serverErrorBoundaryArgTypes } from './serverErrorBoundaryAttributes';
 
 export default {
   title: 'Components/ServerErrorBoundary',
@@ -22,10 +23,11 @@ export default {
       ),
     },
   },
+  argTypes: serverErrorBoundaryArgTypes as unknown as Meta<typeof ServerErrorBoundary>['argTypes'],
   args: {
     hasServerError: true,
   },
-} as Meta;
+} satisfies Meta<typeof ServerErrorBoundary>;
 
 export const Default: StoryFn<ServerErrorBoundaryProps> = ({ ...args }) => (
   <ServerErrorBoundary {...args}>

@@ -8,6 +8,7 @@ import { IconButtonToggle } from '../../index';
 import { IconButtonToggleProps } from '../../types';
 
 import IconButtonToggleReadme from './IconButtonToggle.mdx';
+import { iconButtonToggleArgTypes } from './iconButtonToggleAttributes';
 
 export default {
   title: 'Components/IconButtonToggle',
@@ -22,7 +23,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: iconButtonToggleArgTypes as unknown as Meta<typeof IconButtonToggle>['argTypes'],
+} satisfies Meta<typeof IconButtonToggle>;
 
 export const Default: StoryFn<IconButtonToggleProps> = (args: IconButtonToggleProps) => (
   <IconButtonToggle {...args} toggledIcon={EyeIcon} defaultIcon={EyeOffIcon} buttonProps={{ 'aria-label': 'eye icon' }} />

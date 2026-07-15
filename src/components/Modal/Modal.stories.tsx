@@ -23,9 +23,9 @@ import {
 } from '../../index';
 import { ModalProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { modalSizes } from '../../utils/devUtils/constants/modalSizes';
 
 import ModalReadme from './Modal.mdx';
+import { modalArgTypes } from './modalAttributes';
 
 export default {
   title: 'Components/Modal',
@@ -40,67 +40,12 @@ export default {
       ),
     },
   },
-  argTypes: {
-    title: {
-      control: {
-        type: 'text',
-      },
-    },
-    role: {},
-    id: {
-      control: {
-        type: 'text',
-      },
-    },
-    size: {
-      control: {
-        type: 'select',
-        options: modalSizes,
-      },
-    },
-    hasCloseButton: {
-    },
-    isClosedOnBlur: {},
-    isDismissable: {},
-    isKeyboardDismissDisabled: {},
-    'aria-label': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-labelledby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-describedby': {
-      control: {
-        type: 'text',
-      },
-    },
-    'aria-details': {
-      control: {
-        type: 'text',
-      },
-    },
-    closeButton: {
-      control: false,
-    },
-    isOpen: {
-      control: false,
-    },
-    contentProps: {
-      control: false,
-    },
-    containerProps: {
-      control: false,
-    },
-  },
+  argTypes: { ...modalArgTypes },
   args: {
     hasCloseButton: true,
     hasAutoFocus: true,
   },
-} as Meta;
+} satisfies Meta<typeof Modal>;
 
 
 const items = [

@@ -11,6 +11,7 @@ import { TooltipTriggerProps } from '../../types/tooltipTrigger';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import TooltipTriggerReadme from './TooltipTrigger.mdx';
+import { tooltipTriggerArgTypes } from './tooltipTriggerAttributes';
 
 export default {
   title: 'Components/TooltipTrigger',
@@ -25,7 +26,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: tooltipTriggerArgTypes as unknown as Meta<typeof TooltipTrigger>['argTypes'],
+} satisfies Meta<typeof TooltipTrigger>;
 
 export const Default: StoryFn<TooltipTriggerProps> = args => (
   <TooltipTrigger {...args}>

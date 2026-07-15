@@ -152,6 +152,8 @@ export { default as PanelHeaderMenu } from './components/PanelHeader/controls/Pa
 export { default as PanelHeaderSwitchField } from './components/PanelHeader/controls/PanelHeaderSwitchField';
 export { default as PasswordField } from './components/PasswordField';
 export * from './components/PasswordField';
+export { default as PhoneNumberField } from './components/PhoneNumberField';
+export * from './components/PhoneNumberField';
 export { default as PopoverContainer } from './components/PopoverContainer';
 export * from './components/PopoverContainer';
 export { default as PopoverMenu } from './components/PopoverMenu';

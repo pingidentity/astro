@@ -53,7 +53,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} satisfies Meta<typeof OverlayPanel>;
 
 export const Default: StoryFn<OverlayPanelProps> = ({ ...args }: OverlayPanelProps) => {
   const { state, onClose } = useOverlayPanelState();

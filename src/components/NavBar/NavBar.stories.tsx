@@ -41,6 +41,7 @@ import { NavBarProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import NavBarReadme from './NavBar.mdx';
+import { navBarArgTypes } from './navBarAttributes';
 
 export default {
   component: NavBar,
@@ -53,6 +54,7 @@ export default {
   ],
   subcomponents: { NavBarSection, NavBarItemLink, NavBarItemButton },
   title: 'Components/NavBar',
+  argTypes: { ...navBarArgTypes },
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -64,7 +66,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} as Meta<NavBarProps>;
 
 const Credentials = props => (
   <svg

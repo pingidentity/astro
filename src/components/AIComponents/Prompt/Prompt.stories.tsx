@@ -8,7 +8,13 @@ import Prompt from './Prompt';
 export default {
   title: 'AI Components/Prompt',
   component: Prompt,
-} as Meta;
+  argTypes: {
+    children: {
+      description: 'Content rendered inside the prompt container.',
+      control: false,
+    },
+  },
+} satisfies Meta<typeof Prompt>;
 
 export const Default = () => (
   <Prompt>

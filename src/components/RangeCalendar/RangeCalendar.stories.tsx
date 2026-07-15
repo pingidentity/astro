@@ -5,9 +5,9 @@ import { Meta, StoryFn } from '@storybook/react-vite';
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { RangeCalendar } from '../../index';
 import { RangeCalendarProps, StringOrRangeValue } from '../../types';
-import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import RangeCalendarReadme from './RangeCalendar.mdx';
+import { rangeCalendarArgTypes } from './rangeCalendarAttributes';
 
 export default {
   title: 'Experimental/RangeCalendar',
@@ -25,13 +25,11 @@ export default {
       ),
     },
   },
-  argTypes: {
-    ...ariaAttributeBaseArgTypes,
-  },
+  argTypes: rangeCalendarArgTypes as unknown as Meta<typeof RangeCalendar>['argTypes'],
   args: {
     defaultFocusedValue: '2030-01-15',
   },
-} as Meta;
+} satisfies Meta<typeof RangeCalendar>;
 
 export const Default: StoryFn<RangeCalendarProps> = (
   args: RangeCalendarProps,

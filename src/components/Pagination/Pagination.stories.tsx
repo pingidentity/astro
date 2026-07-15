@@ -8,6 +8,7 @@ import animals from '../../utils/devUtils/constants/animals';
 import { ExampleItemProps } from '../ListView/ListViewTypes';
 
 import PaginationReadme from './Pagination.mdx';
+import { paginationArgTypes } from './paginationAttributes';
 
 export default {
   title: 'Components/Pagination',
@@ -17,31 +18,8 @@ export default {
       page: () => <PaginationReadme />,
     },
   },
-  argTypes: {
-    totalCount: {
-      control: {
-        type: 'number',
-      },
-    },
-    currentPageIndex: {
-      control: {
-        type: 'number',
-      },
-    },
-    offsetCount: {
-      control: {
-        type: 'number',
-      },
-    },
-    offsetOptions: {
-      control: {
-        type: 'array',
-      },
-    },
-    onPageIndexChange: {},
-    onOffsetCountChange: {},
-  },
-} as Meta;
+  argTypes: paginationArgTypes as unknown as Meta<typeof Pagination>['argTypes'],
+} satisfies Meta<typeof Pagination>;
 
 const ExampleComponent = () => {
   const { paginationState } = usePaginationState();

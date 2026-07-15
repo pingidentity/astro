@@ -30,7 +30,7 @@ export default {
   args: {
     isDisabled: false,
   },
-} as Meta;
+} satisfies Meta<typeof RockerButtonGroup>;
 
 export const Default: StoryFn<RockerButtonGroupProps> = ({ ...args }: RockerButtonGroupProps) => (
   <RockerButtonGroup {...args} defaultSelectedKeys={['and']}>

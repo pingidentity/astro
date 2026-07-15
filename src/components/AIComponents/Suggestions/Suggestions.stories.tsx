@@ -2,11 +2,18 @@ import React from 'react';
 import { Meta } from '@storybook/react-vite';
 
 import { AstroWrapper, NextGenTheme, Suggestion, Suggestions } from '../../../index';
+import { booleanArg } from '../../../utils/docUtils/docArgTypes';
 
 export default {
   title: 'Ai Components/Suggestions',
   component: Suggestions,
-} as Meta;
+  argTypes: {
+    isFullScreen: {
+      ...booleanArg,
+      description: 'Whether the suggestions panel is displayed in full-screen mode.',
+    },
+  },
+} satisfies Meta<typeof Suggestions>;
 
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 

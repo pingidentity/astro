@@ -34,7 +34,7 @@ export default {
       ),
     },
   },
-} as Meta;
+} satisfies Meta<typeof Callout>;
 
 // main
 export const Default: StoryFn<CalloutProps> = args => (

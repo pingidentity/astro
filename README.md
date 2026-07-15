@@ -102,6 +102,14 @@ You will need to have the monorepo open at the root directory in VS Code for lin
 Note: To make linting and highlighting work with Yarn 2, `yarn dlx @yarnpkg/sdks vscode` needs to be run in the root directory of the monorepo. If any changes are made to any 
 ESLint packages or versions these features may stop working. Run this command again to solve the issue. Be sure to commit the changes so others don't run into the same issue. 
 
+### Storybook MCP Server
+
+Astro's Storybook includes [`@storybook/addon-mcp`](https://storybook.js.org/docs/ai/mcp/overview), which exposes an MCP (Model Context Protocol) server so AI coding agents can query accurate, up-to-date documentation about Astro's components while you're developing.
+
+While Storybook is running locally on the default port, the MCP server is available at `http://localhost:6006/mcp`. After the next Chromatic publish (this happens automatically on merges to `develop`/`main` via the existing CI pipeline), the same MCP server becomes available at the published Chromatic build URL with `/mcp` appended, e.g. `https://www.chromatic.com/builds?appId=61323e1122472a003ab11df0/mcp`.
+
+This endpoint is intentionally unauthenticated and publicly accessible, per product approval.
+
 ## Testing Local Changes in an External App
 
 See the [Testing Local Changes in an External App](../../README.md#testing-local-changes-in-an-external-app) section in the root README for step-by-step instructions.

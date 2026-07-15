@@ -16,12 +16,14 @@ import {
 } from '../../../index';
 
 import AIPanel from './AIPanel';
+import { aiPanelArgTypes } from './aiPanelAttributes';
 import AIPanelHeader from './AIPanelHeader';
 
 export default {
   component: AIPanel,
   title: 'AI Components/AI Panel',
-} as Meta;
+  argTypes: aiPanelArgTypes as unknown as Meta<typeof AIPanel>['argTypes'],
+} satisfies Meta<typeof AIPanel>;
 
 const AIMenuPopover = () => {
   const [isOpen, setIsOpen] = useState(false);

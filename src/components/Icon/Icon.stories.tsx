@@ -57,7 +57,7 @@ export default {
     icon: SearchIcon,
     size: 'sm',
   },
-} as Meta;
+} satisfies Meta<typeof Icon>;
 
 export const Default: StoryFn<IconProps> = (args: IconProps) => {
   const { themeState: { isOnyx } } = useGetTheme();

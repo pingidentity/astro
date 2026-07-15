@@ -15,9 +15,9 @@ import {
   TextField,
 } from '../../index';
 import { ArrayFieldProps } from '../../types';
-import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import ArrayFieldReadme from './ArrayField.mdx';
+import { arrayFieldArgTypes } from './arrayFieldAttributes';
 
 export default {
   title: 'Form/ArrayField',
@@ -35,24 +35,7 @@ export default {
       ),
     },
   },
-  argTypes: {
-    label: {
-      control: { type: 'text' },
-    },
-    helperText: {
-      control: { type: 'text' },
-    },
-    addButtonLabel: {
-      control: { type: 'text' },
-    },
-    maxSize: {
-      control: { type: 'text' },
-    },
-    maxSizeText: {
-      control: { type: 'text' },
-    },
-    ...ariaAttributeBaseArgTypes,
-  },
+  argTypes: { ...arrayFieldArgTypes },
   args: {
     label: 'Array field label',
     helperText: 'Helper text info...',

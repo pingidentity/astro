@@ -8,6 +8,8 @@ import {
 } from '../../../index';
 import { ModalFooterProps } from '../../../types/Modal';
 
+import { modalFooterArgTypes } from './modalFooterAttributes';
+
 export default {
   title: 'Components/Modal/Convenience/ModalFooter',
   component: ModalFooter,
@@ -18,7 +20,8 @@ export default {
       ),
     },
   },
-} as Meta;
+  argTypes: { ...modalFooterArgTypes },
+} satisfies Meta<typeof ModalFooter>;
 
 export const Default: StoryFn<ModalFooterProps> = () => {
   const state = useModalState();

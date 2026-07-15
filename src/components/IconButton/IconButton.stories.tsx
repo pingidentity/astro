@@ -40,7 +40,7 @@ export default {
   },
   argTypes: iconButtonArgTypes,
   args: iconButtonArgs,
-} as Meta;
+} satisfies Meta<typeof IconButton>;
 
 export const Default: StoryFn<IconButtonProps> = (args: IconButtonProps) => (
   <IconButton aria-label="default icon button" {...args}>

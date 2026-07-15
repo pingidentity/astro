@@ -12,6 +12,7 @@ import {
   TableRow,
 } from '../../index';
 import { TableProps } from '../../types';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import TableReadme from './Table.mdx';
 
@@ -27,12 +28,18 @@ export default {
         </>
       ),
     },
-    controls: { include: ['id'] },
   },
   args: {
     id: 'table',
   },
-} as Meta;
+  argTypes: {
+    id: {
+      description: 'Unique HTML id attribute applied to the table element.',
+      control: { type: 'text' },
+    },
+    ...ariaAttributeBaseArgTypes,
+  } as unknown as Meta<typeof Table>['argTypes'],
+} satisfies Meta<typeof Table>;
 
 const caption = 'Lorem Ipsum';
 

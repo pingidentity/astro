@@ -14,11 +14,9 @@ import {
 import { LIMIT } from '../../mocks/constants';
 import { UserType } from '../../mocks/types/users';
 import { modes as labelModes } from '../../utils/devUtils/constants/labelModes';
-import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import SelectFieldReadme from './SelectField.mdx';
+import { selectFieldArgTypes } from './selectFieldAttributes';
 
 type SelectItemProps = {
   name?: string
@@ -93,52 +91,12 @@ export default {
       ),
     },
   },
-  argTypes: {
-    label: {
-      control: {
-        type: 'text',
-      },
-    },
-    placeholder: {},
-    defaultText: {},
-    helperText: {
-      control: {
-        type: 'text',
-      },
-    },
-    hintText: {
-      control: {
-        type: 'text',
-      },
-    },
-    labelMode: {
-      control: {
-        type: 'select',
-        options: Object.values(labelModes),
-      },
-    },
-    defaultSelectedKey: {},
-    disabledKeys: {},
-    name: {},
-    align: {},
-    direction: {},
-    hasNoEmptySelection: {},
-    isDefaultOpen: {},
-    isDisabled: {},
-    isOpen: {},
-    isRequired: {},
-    selectedKey: {
-      control: false,
-    },
-    ...statusArgTypes,
-    ...ariaAttributeBaseArgTypes,
-    ...inputFieldAttributeBaseArgTypes,
-  },
+  argTypes: { ...selectFieldArgTypes },
   args: {
     label: 'Example Label',
     labelMode: Object.values(labelModes)[0],
   },
-} as Meta;
+} satisfies Meta<typeof SelectField>;
 
 export const Default = args => (
   <OverlayProvider>
