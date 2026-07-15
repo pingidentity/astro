@@ -1,3 +1,7 @@
+## 2.210.0 (2026-07-15)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
 ## 2.210.0-alpha.0 (2026-07-15)
 
 ### 🚀 Features
