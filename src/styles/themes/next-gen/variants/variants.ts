@@ -254,6 +254,7 @@ const overlayPanel = {
   container: {
     backgroundColor: 'backgroundBase',
     borderColor: 'border.hairline',
+    p: 0,
   },
   aiPanelContainer: {
     backgroundColor: 'backgroundBase',
@@ -284,7 +285,6 @@ const overlayPanel = {
     },
   },
   body: {
-    gap: 'md',
     minHeight: '100%',
     maxWidth: '100%',
     alignSelf: 'center',
