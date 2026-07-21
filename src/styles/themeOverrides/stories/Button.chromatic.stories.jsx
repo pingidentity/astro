@@ -33,3 +33,7 @@ export const Primary = () => (
 export const Link = () => (
   <Button variant="link">Button Text</Button>
 );
+
+export const CriticalLink = () => (
+  <Button variant="criticalLink">Button Text</Button>
+);
