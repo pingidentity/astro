@@ -1,3 +1,13 @@
+## 2.210.2-alpha.0 (2026-07-21)
+
+### 🩹 Fixes
+
+- [UXE-8484] Add CritcalLink variant to overrides
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.210.1-alpha.0 (2026-07-16)
 
 ### 🩹 Fixes
