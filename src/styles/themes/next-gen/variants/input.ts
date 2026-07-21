@@ -60,7 +60,7 @@ input.search = {
   borderRadius: astroTokens.radius.input,
   height: astroTokens.size.input.height,
   pl: '4em !important',
-  pr: `${astroTokens.spacing['md-l']}px !important`,
+  pr: '20px !important',
   py: '13px !important',
   lineHeight: 'body',
   color: 'font.base',

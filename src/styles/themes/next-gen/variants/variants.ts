@@ -151,8 +151,8 @@ const listBox = {
     p: astroTokens.spacing.sm,
   },
   option: {
-    py: astroTokens.spacing['md-s'],
-    pl: astroTokens.spacing['md-s'],
+    py: 12,
+    pl: 12,
     pr: astroTokens.spacing.md,
     justifyContent: 'space-between',
     borderRadius: astroTokens.radius.md,
