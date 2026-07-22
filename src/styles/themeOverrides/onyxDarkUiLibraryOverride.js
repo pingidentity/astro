@@ -68,6 +68,26 @@ const buttons = {
       borderColor: 'transparent',
     },
   },
+  criticalLink: {
+    '&': theme.buttons.criticalLink,
+    '&:hover': theme.buttons.criticalLink,
+    '&:not(.disabled):hover': {
+      color: 'critical.bright',
+      borderColor: 'transparent',
+    },
+    '&.is-pressed': {
+      borderColor: 'transparent',
+    },
+    '&:active': {
+      borderColor: 'transparent',
+    },
+    '&:focus': {
+      borderColor: 'transparent',
+    },
+    '&.is-focused': {
+      borderColor: 'transparent',
+    },
+  },
   iconButtons: {
     ...theme.buttons.iconButtons,
     base: {

@@ -151,8 +151,8 @@ const listBox = {
     p: astroTokens.spacing.sm,
   },
   option: {
-    py: astroTokens.spacing['md-s'],
-    pl: astroTokens.spacing['md-s'],
+    py: 12,
+    pl: 12,
     pr: astroTokens.spacing.md,
     justifyContent: 'space-between',
     borderRadius: astroTokens.radius.md,
@@ -254,6 +254,7 @@ const overlayPanel = {
   container: {
     backgroundColor: 'backgroundBase',
     borderColor: 'border.hairline',
+    p: 0,
   },
   aiPanelContainer: {
     backgroundColor: 'backgroundBase',
@@ -284,7 +285,6 @@ const overlayPanel = {
     },
   },
   body: {
-    gap: 'md',
     minHeight: '100%',
     maxWidth: '100%',
     alignSelf: 'center',

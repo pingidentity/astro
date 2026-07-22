@@ -1,3 +1,4 @@
+import { critical } from '../colors';
 import theme from '../theme';
 
 const buttons = {
@@ -62,6 +63,24 @@ const buttons = {
     'body &:hover': theme.buttons.link,
     '&:not(.disabled):hover': {
       color: 'active',
+      borderColor: 'transparent',
+    },
+  },
+  criticalLink: {
+    '&:not(.disabled):hover': {
+      color: critical.bright,
+      borderColor: 'transparent',
+    },
+    '&.is-pressed': {
+      borderColor: 'transparent',
+    },
+    '&:active': {
+      borderColor: 'transparent',
+    },
+    '&:focus': {
+      borderColor: 'transparent',
+    },
+    '&.is-focused': {
       borderColor: 'transparent',
     },
   },
