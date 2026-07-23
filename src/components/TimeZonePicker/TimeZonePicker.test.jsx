@@ -344,3 +344,78 @@ test('does not render default timezones when items prop is provided', async () =
   // Should show empty state since default timezones are not loaded
   expect(screen.getByText('No Search Result')).toBeInTheDocument();
 });
+
+test('controlled selectedKey cleared to null clears the input value', () => {
+  const selectedKey = 'America/New York GMT-00:00';
+  const { rerender } = getComponent({ selectedKey });
+
+  const input = screen.getByRole('combobox');
+  expect(input).toHaveValue(selectedKey);
+
+  getComponent({ selectedKey: null }, { renderFn: rerender });
+  expect(input).toHaveValue('');
+});
+
+test('invalid timezone id in custom items renders without throwing and shows empty time', async () => {
+  const customItems = [
+    {
+      key: 'Invalid/Timezone GMT-00:00',
+      id: 'Invalid/Timezone',
+      label: 'Invalid Timezone',
+      timeZone: 'Invalid/Timezone',
+      gmt: 'GMT-00:00',
+      numericOffset: 0,
+      searchTags: 'GMT-00:00 INVALID/TIMEZONE',
+    },
+  ];
+
+  getComponent({ items: customItems });
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'Invalid');
+
+  expect(screen.getByText('Invalid/Timezone')).toBeInTheDocument();
+  expect(screen.getByText('GMT-00:00')).toBeInTheDocument();
+  // The catch block (source line 116) sets timeData.get(tz.id) to '' for invalid timezone ids.
+  // Time strings produced by toLocaleTimeString with hour12:true (the default) include AM/PM.
+  // GMT offsets (e.g. "GMT-00:00") do not, so this regex distinguishes the two.
+  expect(screen.queryByText(/\d{1,2}:\d{2}\s+(AM|PM)/i)).not.toBeInTheDocument();
+});
+
+test('US city name search returns matching US timezone results', async () => {
+  getComponent();
+  const input = screen.getByRole('combobox');
+  await userEvent.type(input, 'Los Angeles');
+
+  expect(screen.getByText('America/Los Angeles')).toBeInTheDocument();
+});
+
+test('locales prop is accepted and the component renders without error', () => {
+  getComponent({ locales: 'en-GB' });
+  expect(screen.getByRole('combobox')).toBeInTheDocument();
+});
+
+test('localeOptions prop is accepted and the component renders without error', () => {
+  getComponent({ localeOptions: { hour12: false, hour: '2-digit', minute: '2-digit' } });
+  expect(screen.getByRole('combobox')).toBeInTheDocument();
+});
+
+test('pressing ArrowDown opens the dropdown listbox', async () => {
+  getComponent();
+  const input = screen.getByRole('combobox');
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  await userEvent.tab();
+  await userEvent.type(input, '{arrowdown}', { skipClick: true });
+
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
+});
+
+test('clicking the button opens the dropdown listbox', async () => {
+  getComponent();
+  expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+  const button = screen.getByRole('button');
+  await userEvent.click(button);
+
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
+});
