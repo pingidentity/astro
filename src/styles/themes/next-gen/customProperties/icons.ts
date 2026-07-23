@@ -63,7 +63,7 @@ const icons = {
   WarningIcon: 'warning',
   CameraOutlineIcon: 'photo_camera',
   ImageOutlineIcon: 'image',
-  helpHint: 'help_outline',
+  helpHint: 'info',
   ModalCloseIcon: 'close',
 };
 
