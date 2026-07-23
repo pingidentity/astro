@@ -461,6 +461,12 @@ const imageUpload = {
   },
 };
 
+const helpHint = {
+  popoverContainer: {
+    fontWeight: 0,
+  },
+};
+
 export default {
   accordion,
   accordionGrid,
@@ -475,6 +481,7 @@ export default {
   environmentBreadcrumb,
   fieldHelperText,
   footer,
+  helpHint,
   iconWrapper,
   listBox,
   listView,
