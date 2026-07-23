@@ -95,10 +95,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         aria-label={ariaLabel}
         className={classNames}
         role="button"
-        sx={isLoading ? { display: 'flex', justifyContent: 'center', alignItems: 'center' } : {}}
         variant={variant}
         {...getPendoID(displayName)}
         {...others}
+        sx={{
+          ...(isLoading
+            ? {
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+            }
+            : {}),
+          ...((others as { sx?: object }).sx ?? {}),
+        }}
       >
         {isLoading ? <span style={{ visibility: 'hidden' }}>{children}</span> : children}
         {isLoading && (

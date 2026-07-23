@@ -80,6 +80,33 @@ test('button loading hides children and shows loader', () => {
   expect(screen.getByRole('alert')).toBeInTheDocument();
 });
 
+test('button loading with consumer sx still centers loader inside button', () => {
+  const textContent = "I'ma button";
+  getComponent({
+    isLoading: true,
+    children: textContent,
+    sx: { backgroundColor: 'red' },
+  });
+
+  // Loader (role="alert") is still rendered — consumer sx did not clobber the loading structure.
+  const loader = screen.getByRole('alert');
+  expect(loader).toBeInTheDocument();
+
+  // Hidden children wrapper is still rendered so layout width is preserved.
+  const childWrapper = screen.getByText(textContent);
+  expect(childWrapper).toBeInTheDocument();
+  expect(childWrapper).not.toBeVisible();
+
+  // Loading + positioning styles remain applied on top of the consumer's sx.
+  const button = screen.getByRole('button');
+  expect(button).toHaveStyle({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  });
+});
+
 test('button renders children when not loading', () => {
   const textContent = "I'ma button";
   getComponent({ children: textContent });
