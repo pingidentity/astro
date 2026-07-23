@@ -1,3 +1,13 @@
+## 2.210.4-alpha.0 (2026-07-23)
+
+### 🩹 Fixes
+
+- [UXE-8426] Update HelpHint icon for Onyx theme
+
+### ❤️  Thank You
+
+- Kiran Gupta
+
 ## 2.210.3 (2026-07-22)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
