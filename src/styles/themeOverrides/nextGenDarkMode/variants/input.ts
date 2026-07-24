@@ -44,6 +44,10 @@ input.multivaluesWrapper = {
   },
 };
 
+input.small = {
+  ...input,
+};
+
 input.promptInput = {
   color: astroTokensDark.color.gray[100],
 };
