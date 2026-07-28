@@ -77,6 +77,7 @@ const PopoverMenu = forwardRef<HTMLDivElement, PopoverMenuProps>((props, ref) =>
             triggerRef={triggerRef}
             state={state}
             direction={direction}
+            offset={5}
           >
             {contents}
           </Popover>

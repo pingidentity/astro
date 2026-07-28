@@ -22,13 +22,14 @@ const Popover = (props: PopoverProps) => {
     width,
     isDismissable,
     isNotClosedOnBlur,
+    offset,
     ...others
   } = props;
 
   const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
-      offset: 5,
+      offset: offset ?? 0,
       popoverRef,
     },
     state,

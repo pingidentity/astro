@@ -195,6 +195,7 @@ const ComboBoxField = forwardRef((props, ref) => {
       state={state}
       triggerRef={inputRef}
       popoverRef={popoverRef}
+      offset={5}
     >
       <FocusScope>
         <DismissButton onDismiss={state.close} />
