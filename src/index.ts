@@ -225,6 +225,7 @@ export * from './components/TextField';
 export { default as TimeField } from './components/TimeField';
 export * from './components/TimeField';
 export { default as TimeZonePicker } from './components/TimeZonePicker';
+export { default as timezones } from './components/TimeZonePicker/timezones';
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
 export { default as TreeView } from './components/TreeView';
