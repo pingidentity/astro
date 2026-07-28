@@ -56,4 +56,10 @@ describe('Popover', () => {
     expect(screen.getByTestId('popover').parentElement?.querySelector('div')).toBeTruthy();
     expect(screen.getByTestId('popover')).toBeInTheDocument();
   });
+
+  test('accepts an offset prop and renders children correctly', () => {
+    getComponent({ state: mockState(true), offset: 0 });
+    expect(screen.getByTestId('popover')).toBeInTheDocument();
+    expect(screen.getByTestId('popover-children')).toBeInTheDocument();
+  });
 });
