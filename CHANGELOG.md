@@ -1,3 +1,17 @@
+## 2.211.0-alpha.0 (2026-07-28)
+
+### 🚀 Features
+
+- **astro:** export timezones from TimeZonePicker
+
+### 🩹 Fixes
+
+- **astro:** make Popover offset configurable and fix SelectField double-gap
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.210.6-alpha.0 (2026-07-24)
 
 ### 🩹 Fixes
