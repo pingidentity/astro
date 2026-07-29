@@ -175,6 +175,55 @@ const forms = {
       },
     },
   },
+  comboBox: {
+    container: {
+      '& input[type=text]': {
+        ...theme.text.inputValue,
+        borderColor: astroTokens.color.input.border,
+        borderRadius: astroTokens.radius.input,
+        height: astroTokens.size.input.height,
+        fontSize: '15px',
+        bg: 'white',
+        '::placeholder': {
+          ...theme.text.placeholder,
+          fontStyle: 'unset',
+          fontSize: '15px',
+        },
+      },
+      '& input[type=text]:focus': {
+        outline: '1px solid',
+        outlineColor: astroTokens.color.blue[500],
+        outlineOffset: '0px',
+        borderColor: `${astroTokens.color.blue[500]} !important`,
+      },
+      '&.is-focused input[type=text]': {
+        outline: '1px solid',
+        outlineColor: astroTokens.color.blue[500],
+        outlineOffset: '0px',
+        borderColor: `${astroTokens.color.blue[500]} !important`,
+      },
+      '& input[type=text].is-read-only, & input[type=text][readonly]': {
+        backgroundColor: astroTokens.color.input['readonly-bg'],
+        borderColor: astroTokens.color.input.border,
+      },
+      '& input[type=text].is-disabled, & input[type=text][disabled]': {
+        backgroundColor: astroTokens.color.input['readonly-bg'],
+        borderColor: astroTokens.color.input.border,
+        opacity: 1,
+      },
+    },
+    button: {
+      border: 'none !important',
+      bg: 'transparent',
+      '&:not(.disabled):hover': {
+        border: 'none !important',
+        bg: 'transparent',
+      },
+      '&:focus': {
+        border: 'none !important',
+      },
+    },
+  },
   label: {
     'body &': {
       textTransform: 'none',

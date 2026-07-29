@@ -16,7 +16,7 @@ import {
   Image,
   ImageUploadField,
   Item,
-  NoticeIcon,
+  LabelValuePairs,
   OverlayPanel,
   OverlayProvider,
   PanelHeader,
@@ -31,7 +31,6 @@ import {
 } from '../index';
 import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks.ts';
 import UserImage from '../utils/devUtils/assets/UserImage.png';
-import statuses from '../utils/devUtils/constants/statuses';
 
 import { colorBlockButtons, editData, personalData } from './items';
 
@@ -51,7 +50,7 @@ const OverlayWrapper = ({ children, isEditPanel }) => {
   const triggerRef = useRef();
 
   const { personalInfo } = personalData;
-  const { fields } = personalInfo;
+  const { givenName, familyName } = personalInfo;
 
   const renderBreadcrumbs = (
     <Box width="100%">
@@ -61,7 +60,7 @@ const OverlayWrapper = ({ children, isEditPanel }) => {
           href="https://www.pingidentity.com"
           key={personalInfo.key}
         >
-          {`${fields[0].value} ${fields[1].value}`}
+          {`${givenName} ${familyName}`}
         </Item>
         <Item
           aria-label="Edit"
@@ -80,8 +79,8 @@ const OverlayWrapper = ({ children, isEditPanel }) => {
   } : {
     data: {
       image,
-      text: `${fields[0].value} ${fields[1].value}`,
-      subtext: `${fields[0].value.toLowerCase()}${fields[1].value.toLowerCase()}`,
+      text: `${givenName} ${familyName}`,
+      subtext: `${givenName.toLowerCase()}${familyName.toLowerCase()}`,
     },
   };
 
@@ -137,10 +136,10 @@ export const DisplayPanel = () => {
                 ? (
                   <Box isRow gap="md">
                     <Image src={UserImage} alt="user" />
-                    <LabelValuePairs fields={personalData[item].fields} />
+                    <LabelValuePairs>{personalData[item].rows}</LabelValuePairs>
                   </Box>
                 )
-                : <LabelValuePairs fields={personalData[item].fields} />}
+                : <LabelValuePairs>{personalData[item].rows}</LabelValuePairs>}
               {personalData[item].badges && (
                 <Box isRow gap="sm">
                   {personalData[item].badges.map(badge => (
@@ -205,30 +204,6 @@ export const ColorBlockButton = ({ buttonData = colorBlockButtons[0] }) => (
     </Box>
     <Icon icon={PencilIcon} title={{ name: 'Create Icon' }} />
   </Button>
-);
-
-export const LabelValuePairs = ({ fields = personalData.contactInfo.fields }) => (
-  <Box gap="md" maxWidth="675px">
-    {fields.map(({ label, value, isVerified }) => (
-      <Box gap="xs" key={`${label}-key`}>
-        <Text variant="h4">{label}</Text>
-        <Box isRow gap="md">
-          <Text>{value}</Text>
-          {isVerified && (
-            <Box isRow gap="xs">
-              <NoticeIcon
-                color="success.dark"
-                status={statuses.SUCCESS}
-                aria-label={`${statuses.SUCCESS}-icon`}
-                size="xs"
-              />
-              <Text variant="listSubtitle" color="success.dark">Verified</Text>
-            </Box>
-          )}
-        </Box>
-      </Box>
-    ))}
-  </Box>
 );
 
 export const EditPanel = () => (

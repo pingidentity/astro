@@ -193,6 +193,7 @@ export const SearchAutoComplete = forwardRef<
           state={comboBoxState}
           isNonModal
           width={popoverWidth}
+          offset={5}
         >
           <ScrollBox maxHeight={200}>
             <FocusScope restoreFocus>

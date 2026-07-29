@@ -191,7 +191,7 @@ const useSelectField = <T extends object>(
     shouldFlip: !isNotFlippable,
     isOpen: state.isOpen,
     onClose: state.close,
-    offset: 5,
+    offset: 1,
   });
 
   // Update position once the ListBox has rendered. This ensures that
