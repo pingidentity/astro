@@ -1,3 +1,13 @@
+## 2.212.0-alpha.0 (2026-07-29)
+
+### 🚀 Features
+
+- [UXE-8363] Add LabelValuePairs types and constants scaffolding
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.211.0-alpha.0 (2026-07-28)
 
 ### 🚀 Features
