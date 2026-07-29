@@ -173,6 +173,49 @@ const forms = {
       },
     },
   },
+  comboBox: {
+    container: {
+      '& input[type=text]': {
+        ...theme.text.inputValue,
+        borderColor: astroTokensDark.color.gray[500],
+        borderRadius: astroTokens.radius.input,
+        height: astroTokens.size.input.height,
+        fontSize: '15px',
+        bg: astroTokensDark.color.gray[900],
+        '::placeholder': {
+          ...theme.text.placeholder,
+          fontStyle: 'unset',
+          fontSize: '15px',
+        },
+      },
+      '& input[type=text]:focus': {
+        borderColor: `${astroTokens.color.blue[500]} !important`,
+      },
+      '&.is-focused input[type=text]': {
+        borderColor: `${astroTokens.color.blue[500]} !important`,
+      },
+      '& input[type=text].is-read-only, & input[type=text][readonly]': {
+        backgroundColor: astroTokensDark.color.input['readonly-bg'],
+        borderColor: astroTokensDark.color.gray[500],
+      },
+      '& input[type=text].is-disabled, & input[type=text][disabled]': {
+        backgroundColor: astroTokensDark.color.input['readonly-bg'],
+        borderColor: astroTokensDark.color.gray[500],
+        opacity: 1,
+      },
+    },
+    button: {
+      border: 'none !important',
+      bg: 'transparent',
+      '&:not(.disabled):hover': {
+        border: 'none !important',
+        bg: 'transparent',
+      },
+      '&:focus': {
+        border: 'none !important',
+      },
+    },
+  },
   label: {
     'body &': {
       textTransform: 'none',
