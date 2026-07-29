@@ -29,6 +29,7 @@ export * from './iconWrapper';
 export * from './input';
 export * from './item';
 export * from './label';
+export * from './labelValuePairs';
 export * from './link';
 export * from './listBox';
 export * from './listItem';

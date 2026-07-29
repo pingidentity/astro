@@ -18,6 +18,7 @@ import footer from '../../components/Footer/Footer.styles';
 import gridList from '../../components/GridList/GridList.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
+import labelValuePairs from '../../components/LabelValuePairs/LabelValuePairs.styles';
 import listBox from '../../components/ListBox/ListBox.styles';
 import listItem from '../../components/ListItem/ListItem.styles';
 import listView from '../../components/ListView/ListView.styles';
@@ -75,6 +76,7 @@ export default {
   gridList,
   helpHint,
   imageUpload,
+  labelValuePairs,
   listBox,
   listItem,
   listView,

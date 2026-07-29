@@ -80,6 +80,7 @@ const nextGenConvertedComponents = [
   'Avatar',
   'Box',
   'TimeField',
+  'LabelValuePairs',
 ];
 
 export const componentSpecificNextGenBlacklist = {

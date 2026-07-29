@@ -187,6 +187,10 @@ export const FIGMA_LINKS = {
     default:
       'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=5244-14864&mode=design&t=1pPbrQvGkdMYBNqk-0',
   },
+  labelValuePairs: {
+    default:
+      'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?node-id=43431%3A4249&mode=dev',
+  },
   link: {
     default:
       'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=8708-29543&t=8Wwd3tIBh3GEjCJB-0',

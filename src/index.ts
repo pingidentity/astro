@@ -110,6 +110,8 @@ export { default as Input } from './components/Input';
 export * from './components/Input';
 export { default as Label } from './components/Label';
 export * from './components/Label';
+export { default as LabelValuePairs } from './components/LabelValuePairs';
+export * from './components/LabelValuePairs';
 export { default as Link } from './components/Link';
 export * from './components/Link';
 export { default as LinkSelectField } from './components/LinkSelectField';
