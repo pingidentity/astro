@@ -1,3 +1,13 @@
+## 2.212.1-alpha.0 (2026-07-29)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8682] add ComboBox to Onyx UI Library overrides
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.212.0-alpha.0 (2026-07-29)
 
 ### 🚀 Features
