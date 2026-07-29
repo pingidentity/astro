@@ -2,8 +2,24 @@ import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import FormSelectIcon from '@pingux/mdi-react/FormSelectIcon';
 
-import { CheckboxField } from '../index';
+import { Box, CheckboxField, NoticeIcon, Pair, PairLabel, PairValue, Text, ValueTypes } from '../index';
 import UserImage from '../utils/devUtils/assets/UserImage.png';
+import statuses from '../utils/devUtils/constants/statuses';
+
+const VerifiedValue = ({ value }) => (
+  <Box isRow gap="md">
+    <Text>{value}</Text>
+    <Box isRow gap="xs">
+      <NoticeIcon
+        color="success.dark"
+        status={statuses.SUCCESS}
+        aria-label={`${statuses.SUCCESS}-icon`}
+        size="xs"
+      />
+      <Text variant="listSubtitle" color="success.dark">Verified</Text>
+    </Box>
+  </Box>
+);
 
 export const items = [
   {
@@ -86,45 +102,83 @@ export const items = [
   },
 ];
 
+const H4Label = ({ children }) => (<PairLabel textProps={{ as: 'h3' }}>{children}</PairLabel>);
 export const personalData = {
   contactInfo: {
     label: 'Contact Info',
     key: 'contactInfoKey',
-    fields: [
-      { label: 'Email', value: 'ednepomuceno@pingidentity.com', isVerified: true },
-      { label: 'Primary', value: '+1 767-777-3333' },
-      { label: 'Address', value: '1234 W California St, Denver CO 80101' },
-    ],
+    rows: (
+      <>
+        <Pair>
+          <H4Label>Email</H4Label>
+          <PairValue valueType={ValueTypes.ELEMENT}>
+            <VerifiedValue value="ednepomuceno@pingidentity.com" />
+          </PairValue>
+        </Pair>
+        <Pair>
+          <H4Label>Primary</H4Label>
+          <PairValue>+1 767-777-3333</PairValue>
+        </Pair>
+        <Pair>
+          <H4Label>Address</H4Label>
+          <PairValue>1234 W California St, Denver CO 80101</PairValue>
+        </Pair>
+      </>
+    ),
   },
   personalInfo: {
     label: 'Personal Info',
     key: 'personalInfoKey',
     image: UserImage,
-    fields: [
-      { label: 'Given Name', value: 'Ed' },
-      { label: 'Famile Name', value: 'Nepomuceno' },
-    ],
+    givenName: 'Ed',
+    familyName: 'Nepomuceno',
+    rows: (
+      <>
+        <Pair>
+          <H4Label>Given Name</H4Label>
+          <PairValue>Ed</PairValue>
+        </Pair>
+        <Pair>
+          <H4Label>Famile Name</H4Label>
+          <PairValue>Nepomuceno</PairValue>
+        </Pair>
+      </>
+    ),
   },
   companyInfo: {
     label: 'Company Info',
     key: 'companyInfoKey',
-    fields: [
-      { label: 'Tile', value: 'Interaction Designer' },
-    ],
+    rows: (
+      <Pair>
+        <H4Label>Tile</H4Label>
+        <PairValue>Interaction Designer</PairValue>
+      </Pair>
+    ),
   },
   customAttributes: {
     label: 'Custom Attributes',
     key: 'customAttributesKey',
-    fields: [
-      { label: 'T-Shirt Size', value: 'Large' },
-      { label: 'Example Multi-Value Attribute', value: 'value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,value,' },
-    ],
+    rows: (
+      <>
+        <Pair>
+          <H4Label>T-Shirt Size</H4Label>
+          <PairValue>Large</PairValue>
+        </Pair>
+        <Pair>
+          <H4Label>Example Multi-Value Attribute</H4Label>
+          <PairValue>
+            value,value,value,value,value,value,value,value,value,value,
+            value,value,value,value,value,value,value,value,value,
+          </PairValue>
+        </Pair>
+      </>
+    ),
   },
   jsonAttributes: {
     label: 'JSON Attributes',
     key: 'jsonAttributesKey',
     badges: ['Address', 'Contact', 'Another Json'],
-    fields: [],
+    rows: null,
   },
 };
 

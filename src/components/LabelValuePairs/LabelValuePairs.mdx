@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as LabelValuePairsStories from './LabelValuePairs.stories';
+
+<Meta of={LabelValuePairsStories} isTemplate />
+
+# LabelValuePairs
+
+LabelValuePairs renders a vertical list of labelled key/value rows. It is intended for read-only detail views such as slide-over panels, summary tabs, and profile pages.
+
+Pairs are composed from child components. Each pair supports four value display modes, an optional help hint tooltip, a secondary sub-label, and an optional inline label icon or action element. Pairs with a falsy value are suppressed unless the pair is in a loading state.
+
+```jsx
+import { Icon, LabelValuePairs, Pair, PairLabel, PairValue, PairSubvalue } from '@pingux/astro';
+
+<LabelValuePairs>
+  <Pair>
+    <PairLabel helpHint="...">
+      Username
+      <Icon aria-hidden="true" title={{ name: '' }} icon={InformationIcon} />
+    </PairLabel>
+    <PairSubvalue>Optional secondary text</PairSubvalue>
+    <PairValue valueType={ValueTypes.COPYABLE}>jsmith</PairValue>
+  </Pair>
+</LabelValuePairs>
+```
+
+### Required Components
+
+`LabelValuePairs` is a public composition API, not a standalone data-driven component. Each pair must be composed from these building blocks, available both as named exports (`Pair`, `PairLabel`, `PairValue`, `PairSubvalue`) and, equivalently, as static properties on the parent (`LabelValuePairs.Row`, `.Label`, `.Value`, `.Subvalue`):
+
+- **`Pair`** — wraps one labelled entry. Expects a `PairLabel`, optionally a `PairSubvalue`, and a `PairValue` as children. Suppresses itself (renders nothing) when its `PairValue` child's content is falsy and not loading.
+- **`PairLabel`** — the pair's heading text, rendered as an `<h5>`. Accepts an optional `helpHint` prop. Its first child is the label text; an optional second child renders alongside it as an icon or action element (e.g. an `Icon` or `IconButton`).
+- **`PairValue`** — the pair's value content. Accepts `valueType` (see Value Types below) and `isLoading`.
+- **`PairSubvalue`** — optional secondary text rendered beneath the label.
+
+### Value Types
+
+Use the exported `ValueTypes` constant to select the display mode for a `PairValue`'s content.
+
+| `valueType` | Behavior |
+| ---- | --------- |
+| _(omitted)_ | Renders the value as plain `Text`. |
+| `ValueTypes.COPYABLE` | Wraps the value in `CopyText`, adding a copy-to-clipboard button. |
+| `ValueTypes.MASKED` | Displays bullet characters by default. An eye toggle reveals or hides the real value. |
+| `ValueTypes.ELEMENT` | Renders `Value`'s children directly as a React node — use for custom content. |
+
+### Loading State
+
+Set `isLoading` on `PairValue` to replace the value area with a skeleton placeholder. The pair still renders its label normally, and it renders even when `PairValue` has no children — useful when data is being fetched.
+
+### Accessibility
+
+This component adheres to standard heading and landmark semantics.
+
+#### Keyboard Navigation
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Moves focus through interactive elements: copy buttons, masked value toggles, and help hint triggers. |
+| Space or Enter | Activates the focused button (copy, show/hide, or help hint). |
+| Escape | Closes an open help hint popover. |
+
+#### Screen Readers
+
+This component uses the following attributes to assist screen readers:
+- Each label heading is rendered as an **`<h5>`** element, preserving document outline semantics.
+- The `helpHint` trigger button uses **`aria-label`** derived from the row label (e.g. `"Client ID help hint"`).
+- The masked value toggle uses **`aria-label="Show content"`** or **`"Hide content"`** to reflect the current state.
+- Loading rows use **`role="alert"`** and **`aria-live="assertive"`** on the skeleton container so screen readers announce when content becomes available.

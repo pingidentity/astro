@@ -18,6 +18,7 @@ import {
   IconButton,
   Image,
   ImageUploadField,
+  LabelValuePairs,
   Link,
   ListView,
   ListViewItem,
@@ -39,7 +40,7 @@ import { FIGMA_LINKS } from '../utils/designUtils/figmaLinks';
 import UserImage from '../utils/devUtils/assets/UserImage.png';
 
 import { colorBlockButtons, editData, items, personalData } from './items';
-import { AddAttributeButton, ColorBlockButton, LabelValuePairs } from './PanelContent.stories';
+import { AddAttributeButton, ColorBlockButton } from './PanelContent.stories';
 
 export default {
   title: 'Recipes/List And Panel',
@@ -70,17 +71,6 @@ const sx = {
     position: 'absolute',
     top: 0,
     right: 0,
-  },
-  itemLabel: {
-    fontSize: 'sm',
-    fontWeight: 3,
-    lineHeight: '16px',
-    mb: 'xs',
-  },
-  itemValue: {
-    fontWeight: 0,
-    lineHeight: '18px',
-    mb: 'md',
   },
   panelHeader: {
     container: {
@@ -205,10 +195,10 @@ export const ListAndPanel = () => {
                   ? (
                     <Box isRow gap="md">
                       <Image src={UserImage} alt="user" />
-                      <LabelValuePairs fields={personalData[item].fields} />
+                      <LabelValuePairs>{personalData[item].rows}</LabelValuePairs>
                     </Box>
                   )
-                  : <LabelValuePairs fields={personalData[item].fields} />}
+                  : <LabelValuePairs>{personalData[item].rows}</LabelValuePairs>}
                 {personalData[item].badges && (
                   <Box isRow gap="sm">
                     {personalData[item].badges.map(badge => (
