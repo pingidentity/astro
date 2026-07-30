@@ -1,3 +1,13 @@
+## 2.213.1-alpha.0 (2026-07-30)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8666] replace PopoverContainer with Popover in MultivaluesField and DatePicker
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.213.0-alpha.0 (2026-07-30)
 
 ### 🚀 Features
