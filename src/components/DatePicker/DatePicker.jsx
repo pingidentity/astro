@@ -2,13 +2,13 @@ import React, { forwardRef, useRef } from 'react';
 import { parseDate } from '@internationalized/date';
 import { useDatePicker } from '@react-aria/datepicker';
 import { FocusScope } from '@react-aria/focus';
-import { useOverlayPosition } from '@react-aria/overlays';
 import { mergeProps } from '@react-aria/utils';
 import { useDatePickerState } from '@react-stately/datepicker';
 import { omit } from 'lodash/object';
 import PropTypes from 'prop-types';
 
-import { Calendar, FieldHelperText, PopoverContainer } from '../../index';
+import { Calendar, FieldHelperText } from '../../index';
+import Popover from '../Popover/Popover';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { isDateWithinRanges } from '../../utils/devUtils/props/isDateWithinRanges';
@@ -78,35 +78,29 @@ const DatePicker = forwardRef((props, ref) => {
     groupRef,
   );
 
-  const { overlayProps: positionProps } = useOverlayPosition({
-    targetRef: groupRef,
-    overlayRef: popoverRef,
-    offset: 15,
-    crossOffset: 40,
-    isOpen: state.isOpen,
-    onClose: state.setOpen,
-    shouldUpdatePosition: true,
-  });
-
   const calendar = !isReadOnly && (
-    <PopoverContainer
+    <Popover
       hasNoArrow
       isDismissable
       isNonModal
-      ref={popoverRef}
-      isOpen={state.isOpen}
-      onClose={state.setOpen}
+      popoverRef={popoverRef}
+      triggerRef={groupRef}
+      state={state}
+      offset={15}
+      crossOffset={40}
+      data-testid="popover-container"
       overflow="auto"
-      {...mergeProps(dialogProps, positionProps)}
     >
       <FocusScope
         autoFocus
         contain
         restoreFocus
       >
-        <Calendar {...calendarProps} calendarWrapperProps={calendarWrapperProps} />
+        <div {...dialogProps}>
+          <Calendar {...calendarProps} calendarWrapperProps={calendarWrapperProps} />
+        </div>
       </FocusScope>
-    </PopoverContainer>
+    </Popover>
   );
 
   return (

@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -10,7 +11,6 @@ import {
   DismissButton,
   FocusScope,
   mergeProps,
-  useOverlayPosition,
 } from 'react-aria';
 import { useFilter } from '@react-aria/i18n';
 import { useFocusWithin } from '@react-aria/interactions';
@@ -24,7 +24,6 @@ import {
   Button,
   Icon,
   Loader,
-  PopoverContainer,
   ScrollBox,
   Text,
   TextField,
@@ -41,6 +40,7 @@ import {
   statusPropTypes,
 } from '../../utils/docUtils/statusProp';
 import ListBox from '../ListBox';
+import Popover from '../Popover/Popover';
 
 const CondensedMultivaluesField = forwardRef((props, ref) => {
   const {
@@ -155,28 +155,6 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const listBoxRef = useRef();
   const popoverRef = useRef();
 
-  const { overlayProps, placement, updatePosition } = useOverlayPosition({
-    isOpen,
-    onClose: close,
-    offset: 1,
-    overlayRef: popoverRef,
-    placement: `${direction} end`,
-    scrollRef: listBoxRef,
-    shouldFlip: !isNotFlippable,
-    targetRef: inputWrapperRef,
-  });
-
-  // Update position once the ListBox has rendered. This ensures that
-  // it flips properly when it doesn't fit in the available space.
-  /* istanbul ignore next */
-  useLayoutEffect(() => {
-    if (isOpen) {
-      requestAnimationFrame(() => {
-        updatePosition();
-      });
-    }
-  }, [isOpen, selectionManager.selectedKeys, updatePosition]);
-
   // Measure the width of the input to inform the width of the menu (below).
   const [menuWidth, setMenuWidth] = useState(null);
 
@@ -194,11 +172,15 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   useLayoutEffect(onResize, [onResize]);
 
-  const style = {
-    ...overlayProps.style,
+  const menuWidthSx = {
     width: menuWidth,
     minWidth: menuWidth,
   };
+
+  const popoverState = useMemo(
+    () => ({ isOpen: !state.collection.size ? false : isOpen, close }),
+    [state.collection.size, isOpen, close],
+  );
 
   useEffect(() => {
     if (defaultSelectedKeys) selectionManager.setSelectedKeys(defaultSelectedKeys);
@@ -331,7 +313,6 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           isLoading={loadingState === loadingStates.LOADING_MORE}
           aria-label="List of options"
           isCondensed={mode === 'condensed'}
-          {...overlayProps}
         />
       </ScrollBox>
       <DismissButton onDismiss={close} />
@@ -469,18 +450,20 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           {...others}
           {...inputProps}
         />
-        <PopoverContainer
+        <Popover
           hasNoArrow
           isNonModal
-          isOpen={!state.collection.size ? false : isOpen}
-          onClose={close}
-          placement={placement}
-          ref={popoverRef}
-          style={style}
+          popoverRef={popoverRef}
+          triggerRef={inputWrapperRef}
+          state={popoverState}
+          placement={`${direction} end`}
+          shouldFlip={!isNotFlippable}
+          scrollRef={listBoxRef}
+          sx={menuWidthSx}
           onBlur={e => handleBlur(e)}
         >
           {listbox}
-        </PopoverContainer>
+        </Popover>
         <EmptyVisuallyHidden />
       </Box>
     </MultivaluesContext.Provider>

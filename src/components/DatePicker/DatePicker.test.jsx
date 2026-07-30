@@ -158,7 +158,7 @@ test('should be able to select dates', async () => {
   await userEvent.click(screen.queryByRole('button'));
 
   const dateButtons = screen.queryAllByRole('button');
-  expect(dateButtons).toHaveLength(37);
+  expect(dateButtons).toHaveLength(38);
   expect(dateButtons[5]).toHaveAttribute('aria-label', 'Monday, August 1, 2022');
   await userEvent.click(dateButtons[5]);
   expect(onChange).toHaveBeenCalled();

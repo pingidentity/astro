@@ -18,16 +18,16 @@ const listBox = {
     borderRadius: astroTokensDark.radius.md,
   },
   option: {
-    color: astroTokensDark.color.gray[400],
+    color: astroTokensDark.color.common.menu.item.text,
     '&.is-focused': {
-      color: astroTokensDark.color.gray[200],
+      color: astroTokensDark.color.common.menu.item.hover.text,
       bg: '#2C323A',
     },
     '&.is-selected': {
-      color: astroTokensDark.color.gray[200],
+      color: astroTokensDark.color.common.menu.item.selected.text,
       bg: '#2C323A',
       '&.is-focused': {
-        color: astroTokensDark.color.gray[200],
+        color: astroTokensDark.color.common.menu.item.selected.text,
       },
     },
     '&.is-condensed': {
@@ -304,7 +304,7 @@ export default {
         color: 'text.fieldHelper',
       },
       '&.is-error': {
-        color: 'text.error',
+        color: 'critical.bright',
       },
       '&.is-warning': {
         color: 'warning.bright',
