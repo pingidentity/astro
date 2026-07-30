@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { Item, MultivaluesField, OverlayProvider, Section } from '../../index';
+import { Button, DatePicker, Item, Modal, MultivaluesField, OverlayProvider, Section } from '../../index';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, fireEvent, getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -1314,4 +1314,91 @@ test('in condensed mode, arrow icon SVG has an empty title element so no tooltip
   const titleElement = arrowIconSvg.querySelector('title');
   expect(titleElement).toBeInTheDocument();
   expect(titleElement).toHaveTextContent('');
+});
+
+test('MultivaluesField and DatePicker popovers open correctly when inside a Modal (UXE-8666)', async () => {
+  const multivaluesFieldItems = [
+    { id: 1, key: 'Aardvark', name: 'Aardvark' },
+    { id: 2, key: 'Kangaroo', name: 'Kangaroo' },
+    { id: 3, key: 'Snake', name: 'Snake' },
+  ];
+
+  const ModalApp = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedKeys, setSelectedKeys] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    return (
+      <>
+        <Button onPress={() => setIsOpen(true)}>Launch Modal</Button>
+        {isOpen && (
+          <Modal title="test" isOpen={isOpen} onClose={() => setIsOpen(false)} hasCloseButton isDismissable>
+            <MultivaluesField
+              label="Test Multivalues"
+              items={multivaluesFieldItems}
+              selectedKeys={selectedKeys}
+              onSelectionChange={keys => setSelectedKeys(Array.from(keys).map(k => k.toString()))}
+              mode="non-restrictive"
+            >
+              {item => <Item key={item.key} data-id={item.name} aria-label={item.name}>{item.name}</Item>}
+            </MultivaluesField>
+            <DatePicker label="Select a date" value={selectedDate} onChange={setSelectedDate} />
+          </Modal>
+        )}
+      </>
+    );
+  };
+
+  render(
+    <OverlayProvider>
+      <ModalApp />
+    </OverlayProvider>,
+  );
+
+  await userEvent.click(screen.getByRole('button', { name: 'Launch Modal' }));
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+  // MultivaluesField: focus opens the listbox
+  const combobox = screen.getByRole('combobox');
+  await act(async () => { combobox.focus(); });
+  await act(async () => {});
+
+  const listbox = screen.queryByRole('listbox');
+  expect(listbox).toBeInTheDocument();
+
+  /* eslint-disable testing-library/no-node-access */
+  let node = listbox;
+  while (node && node !== document.body) {
+    expect(node).not.toHaveAttribute('aria-hidden', 'true');
+    node = node.parentElement;
+  }
+  /* eslint-enable testing-library/no-node-access */
+
+  // Click an option — verify it is selectable (option disappears and a badge appears)
+  await userEvent.click(screen.getByRole('option', { name: 'Aardvark' }));
+  expect(screen.getByText('Aardvark')).toBeInTheDocument();
+
+  // Close the listbox before opening DatePicker
+  await act(async () => { combobox.blur(); });
+
+  // DatePicker: click the calendar button to open the popover
+  await userEvent.click(screen.getByRole('button', { name: /calendar/i }));
+  await act(async () => {});
+
+  const datepickerPopover = screen.queryByTestId('popover-container');
+  expect(datepickerPopover).toBeInTheDocument();
+
+  /* eslint-disable testing-library/no-node-access */
+  node = datepickerPopover;
+  while (node && node !== document.body) {
+    expect(node).not.toHaveAttribute('aria-hidden', 'true');
+    node = node.parentElement;
+  }
+  /* eslint-enable testing-library/no-node-access */
+
+  // Click a calendar date — verify the date field updates
+  const dateButtons = screen.getAllByRole('button');
+  const firstAvailableDate = dateButtons.find(btn => btn.getAttribute('aria-label')?.match(/\w+day,/));
+  await userEvent.click(firstAvailableDate);
+  expect(screen.queryByTestId('date-field')).not.toHaveValue('');
 });
