@@ -282,6 +282,7 @@ const criticalLink = {
 const selectLink = {
   ...link,
   textDecoration: 'none',
+  fontWeight: 400,
   px: '0',
   '&.is-hovered': {
     textDecoration: 'none',
