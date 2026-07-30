@@ -42,7 +42,7 @@ const fieldHelperText = {
       color: 'text.fieldHelper',
     },
     '&.is-error': {
-      color: 'text.error',
+      color: 'critical.bright',
     },
     '&.is-warning': {
       color: 'warning.bright',
@@ -151,15 +151,15 @@ const listBox = {
     p: astroTokens.spacing.sm,
   },
   option: {
-    py: 12,
-    pl: 12,
+    py: astroTokens.spacing['md-s'],
+    pl: astroTokens.spacing['md-s'],
     pr: astroTokens.spacing.md,
     justifyContent: 'space-between',
     borderRadius: astroTokens.radius.md,
     lineHeight: 'body',
-    color: 'gray-700',
+    color: astroTokens.color.common.menu.item.text,
     '&.is-focused': {
-      color: 'font.hover',
+      color: astroTokens.color.common.menu.item.hover.text,
       bg: 'gray-100',
       borderRadius: astroTokens.radius.md,
     },
@@ -169,13 +169,13 @@ const listBox = {
       zIndex: 1,
     },
     '&.is-selected': {
+      color: astroTokens.color.common.menu.item.selected.text,
       fontWeight: '0',
-      color: 'black',
       bg: 'lightblue',
       pl: '.75rem',
       borderRadius: astroTokens.radius.md,
       '&.is-focused': {
-        color: 'text.primary',
+        color: astroTokens.color.common.menu.item.selected.text,
       },
       '&.is-focus-visible': {
         bg: 'lightblue',
@@ -217,7 +217,7 @@ const listBox = {
 const separator = {
   base: {
     bg: 'border.base',
-    my: 'sm',
+    my: 'md',
     '&.is-vertical': {
       m: '0',
     },

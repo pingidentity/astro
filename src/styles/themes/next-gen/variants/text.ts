@@ -266,5 +266,6 @@ export const text = {
   linkSelectFieldLabel: {
     ...label,
     color: astroTokens.color.font.link,
+    fontWeight: 0,
   },
 };
