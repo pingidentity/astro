@@ -1,3 +1,17 @@
+## 2.214.0 (2026-07-31)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.214.0-alpha.0 (2026-07-31)
+
+### 🚀 Features
+
+- **astro:** add materialSymbolsOutlinedFont to fonts.ts
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.213.1 (2026-07-30)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
