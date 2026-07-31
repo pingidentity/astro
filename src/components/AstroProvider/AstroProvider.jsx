@@ -4,7 +4,7 @@ import emotionNormalize from 'emotion-normalize';
 import PropTypes from 'prop-types';
 import { merge } from 'theme-ui';
 
-import { openSansFont, pingitoFont } from '../../fonts';
+import { materialSymbolsOutlinedFont, openSansFont, pingitoFont } from '../../fonts';
 import useGetTheme from '../../hooks/useGetTheme';
 import astroTheme from '../../styles/theme';
 import Box from '../Box';
@@ -17,6 +17,7 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
         ${emotionNormalize}
         ${pingitoFont}
         ${openSansFont}
+        ${materialSymbolsOutlinedFont}
         * {
           box-sizing: border-box;
         }
