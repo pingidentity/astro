@@ -1,8 +1,6 @@
 // NOTE: Named exports must be unique across files, otherwise collisions will occur.
 
 /* eslint-disable import/export */
-import 'material-symbols/outlined.css';
-
 export { default as AccordionGridGroup } from './components/AccordionGridGroup';
 export * from './components/AccordionGridGroup';
 export { default as AccordionGridItem } from './components/AccordionGridItem';
