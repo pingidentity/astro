@@ -205,6 +205,19 @@ export const BreadcrumbsWithExtraLongText = () => {
   );
 };
 
+export const WithCopyableSubtext = ({ ...args }) => (
+  <PanelHeader
+    {...args}
+    isCopyable
+    data={{
+      icon: AccountIcon,
+      subtext: 'rad_developer@pingidentity.com',
+      text: 'Fons Vernall',
+      avatarDefaultText: 'FV',
+    }}
+  />
+);
+
 export const WithExtraLongText = ({ ...args }) => (
   <PanelHeader
     {...args}

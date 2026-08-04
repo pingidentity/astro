@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useGetTheme } from '../../hooks';
-import { Avatar, Box, Icon, Image, Text } from '../../index';
+import { Avatar, Box, CopyText, Icon, Image, Text } from '../../index';
 import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
@@ -14,6 +14,7 @@ const PanelHeader = forwardRef(({
   data,
   headerProps,
   headerWrapperProps,
+  isCopyable,
   slots,
   subtextProps,
   ...others
@@ -92,7 +93,14 @@ const PanelHeader = forwardRef(({
       {(text || subtext) && (
         <Box {...headerWrapperPropsSpread}>
           {text && (<Text {...headerPropsSpread} variant="panelHeaderText">{text}</Text>)}
-          {subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
+          {subtext && isCopyable
+            ? (
+              <CopyText mode="nonClickableContent" textToCopy={subtext}>
+                <Text variant="panelHeaderSubtext">{subtext}</Text>
+              </CopyText>
+            )
+            : subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)
+          }
         </Box>
       )}
     </Box>
@@ -122,6 +130,7 @@ const PanelHeader = forwardRef(({
 
 PanelHeader.propTypes = {
   ...SharedItemPropTypes,
+  isCopyable: PropTypes.bool,
   slots: PropTypes.shape({
     rightOfData: PropTypes.node,
   }),

@@ -1,5 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { FocusScope } from 'react-aria';
+import { setInteractionModality } from '@react-aria/interactions';
 
 import { Box } from '../..';
 import { useLocalOrForwardRef, useOverlayPanelState, useStatusClasses } from '../../hooks';
@@ -21,6 +22,12 @@ const OverlayPanel = forwardRef<HTMLDivElement, OverlayPanelProps>((props, ref) 
   const { onClose } = useOverlayPanelState();
 
   const overlayPanelRef = useLocalOrForwardRef<HTMLDivElement>(ref);
+
+  useEffect(() => {
+    if (isOpen) {
+      setInteractionModality('keyboard');
+    }
+  }, [isOpen]);
 
   // this is code to avoid regressions -- implementations that do not use the
   // useMountTransition hook will not break, because this className gives the

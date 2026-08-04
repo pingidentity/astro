@@ -15,7 +15,7 @@ export const fontSizes = {
   },
   'xs': '11px',
   'tiny': `${fontSize.tiny}px`,
-  'sm': `${fontSize.small || fontSize.sm}px`,
+  'sm': `${fontSize.small}px`,
   'small': `${fontSize.small}px`,
   'md': `${fontSizeBase * 1}rem`,
   'lg': `${fontSizeBase * 1.25}rem`,
