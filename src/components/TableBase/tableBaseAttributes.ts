@@ -39,4 +39,8 @@ export const tableBaseArgTypes = {
     ...funcArg,
     description: 'Callback invoked when the selection state changes.',
   },
+  onRowAction: {
+    ...funcArg,
+    description: 'Callback fired when a row is pressed (pointer or Enter key), receiving the key of the pressed row.',
+  },
 };
