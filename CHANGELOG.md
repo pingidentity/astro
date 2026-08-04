@@ -1,3 +1,33 @@
+## 2.217.0-alpha.0 (2026-08-04)
+
+### 🚀 Features
+
+- **astro:** [UXE-8610] add isCopyable prop to PanelHeader and export CopyButton
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.216.0-alpha.0 (2026-08-04)
+
+### 🚀 Features
+
+- [UXE-8406] TableBase should support props for loadingState and emptyState rendering
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.215.0-alpha.0 (2026-08-04)
+
+### 🚀 Features
+
+- **astro:** add onRowAction support to TableBase
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.214.0 (2026-07-31)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

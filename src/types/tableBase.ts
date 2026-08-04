@@ -7,7 +7,7 @@ import type { ColumnSize, TableProps } from '@react-types/table';
 
 import { TestingAttributes } from './shared/test';
 import { BoxProps } from './box';
-import { DOMAttributes } from './shared';
+import { DOMAttributes, loadingState } from './shared';
 
 export type ResizeHandler = (widths: Map<Key, ColumnSize>) => void;
 
@@ -23,9 +23,12 @@ export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<Ba
   caption?: ReactNode | string;
   isStickyHeader?: boolean;
   isLastColumnSticky?: boolean;
+  loadingState?: loadingState;
+  renderEmptyState?: () => ReactNode;
   onResizeStart?: ResizeHandler;
   onResize?: ResizeHandler;
   onResizeEnd?: ResizeHandler;
+  onRowAction?: (key: Key) => void;
 }
 
 export interface TableRowGroupProps extends BaseProp{
@@ -66,6 +69,10 @@ export interface TableRowProps<T> extends BaseProp{
   children: ReactNode;
   className?: string;
   hasSelectionCheckboxes?: boolean;
+  hasActions?: boolean;
+  isActiveRow?: boolean;
+  registerRef?: (key: Key, el: HTMLElement | null) => void;
+  onRowFocus?: (key: Key) => void;
 }
 
 export interface TableCellProps<T> extends BaseProp{
@@ -73,6 +80,7 @@ export interface TableCellProps<T> extends BaseProp{
   state: TableState<T>;
   className?: string;
   layoutState: TableColumnResizeState<T>;
+  hasActions?: boolean;
 }
 
 export interface TableCheckboxCellProps<T> extends BaseProp{
@@ -89,4 +97,12 @@ export interface TableSelectAllCellProps<T> extends BaseProp{
 
 export interface TableCaptionProps {
   caption: string | React.ReactNode;
+}
+
+export interface TableBaseEmptyStateProps extends BoxProps {
+  defaultIcon?: React.ElementType;
+  headerLabel?: string;
+  descriptionLabel?: string;
+  addButtonLabel?: string;
+  onAddButtonPress?: () => void;
 }

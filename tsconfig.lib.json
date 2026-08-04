@@ -7,7 +7,9 @@
     "moduleResolution": "bundler",
     "composite": false,
     "rootDir": "src",
-    "paths": {},
+    "paths": {
+      "@pingux/onyx-tokens": ["../onyx-tokens/build/index.d.ts"]
+    },
     "types": [
       "node",
       "vite/client"
