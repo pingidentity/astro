@@ -1,6 +1,7 @@
 import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import { act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { AstroProvider, OnyxTheme, PanelHeader, PanelHeaderSwitchField } from '../../index';
 import { pingImg } from '../../utils/devUtils/constants/images';
@@ -55,6 +56,65 @@ describe('PanelHeader', () => {
     getComponent({ children: <PanelHeaderSwitchField /> });
 
     screen.getByRole('switch');
+  });
+
+  describe('isCopyable', () => {
+    const originalClipboard = { ...global.navigator.clipboard };
+
+    beforeEach(() => {
+      const mockClipboard = {
+        writeText: jest.fn(),
+      };
+      Object.defineProperty(window, 'navigator', {
+        value: {
+          clipboard: mockClipboard,
+        },
+        configurable: true,
+      });
+    });
+
+    afterEach(() => {
+      Object.defineProperty(window, 'navigator', {
+        value: {
+          clipboard: originalClipboard,
+        },
+        configurable: true,
+      });
+      jest.resetAllMocks();
+    });
+
+    test('renders copy button when isCopyable is true and subtext is present', () => {
+      render(<PanelHeader {...defaultProps} isCopyable />);
+      expect(screen.getByRole('button', { name: 'copy to clipboard' })).toBeInTheDocument();
+    });
+
+    test('does not render copy button when isCopyable is omitted and subtext is present', () => {
+      render(<PanelHeader {...defaultProps} />);
+      expect(screen.queryByRole('button', { name: 'copy to clipboard' })).not.toBeInTheDocument();
+    });
+
+    test('does not render copy button when isCopyable is false and subtext is present', () => {
+      render(<PanelHeader {...defaultProps} isCopyable={false} />);
+      expect(screen.queryByRole('button', { name: 'copy to clipboard' })).not.toBeInTheDocument();
+    });
+
+    test('does not render copy button when isCopyable is true and subtext is absent', () => {
+      const propsWithoutSubtext = {
+        data: {
+          text: 'testText',
+        },
+      };
+      render(<PanelHeader {...propsWithoutSubtext} isCopyable />);
+      expect(screen.queryByRole('button', { name: 'copy to clipboard' })).not.toBeInTheDocument();
+    });
+
+    test('clicking copy button calls navigator.clipboard.writeText with the subtext value', async () => {
+      render(<PanelHeader {...defaultProps} isCopyable />);
+      const copyButton = screen.getByRole('button', { name: 'copy to clipboard' });
+      await act(async () => userEvent.click(copyButton));
+      expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
+      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(defaultProps.data.subtext);
+    });
   });
 });
 
