@@ -202,6 +202,7 @@ export { default as Table } from './components/Table';
 export * from './components/Table';
 export * from './components/TableBase';
 export { default as TableBase } from './components/TableBase';
+export { default as TableBaseEmptyState } from './components/TableBase/TableBaseEmptyState';
 export { default as TableBody } from './components/TableBody';
 export * from './components/TableBody';
 export { default as TableCaption } from './components/TableCaption';

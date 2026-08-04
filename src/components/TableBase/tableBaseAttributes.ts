@@ -31,6 +31,16 @@ export const tableBaseArgTypes = {
     description: 'Defines an accessible label for the table element.',
     control: { type: 'text' },
   },
+  loadingState: {
+    control: { type: 'select' },
+    options: ['error', 'filtering', 'idle', 'loading', 'loadingMore', 'sorting'],
+  },
+  renderEmptyState: {
+    control: false,
+  },
+  children: {
+    control: false,
+  },
   onSortChange: {
     ...funcArg,
     description: 'Callback invoked when the sort descriptor changes.',
@@ -43,4 +53,13 @@ export const tableBaseArgTypes = {
     ...funcArg,
     description: 'Callback fired when a row is pressed (pointer or Enter key), receiving the key of the pressed row.',
   },
+};
+
+export const tableBaseArgs = {
+  'aria-label': 'table',
+  caption: 'Lorem ipsum',
+  selectionMode: 'none',
+  isStickyHeader: false,
+  isLastColumnSticky: false,
+  hasSelectionCheckboxes: false,
 };
