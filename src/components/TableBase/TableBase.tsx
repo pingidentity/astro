@@ -33,6 +33,55 @@ import type {
   TableSelectAllCellProps,
 } from '../../types/tableBase';
 
+import TableBaseEmptyState from './TableBaseEmptyState';
+
+// Strips react-stately collection props that must not reach the DOM tbody element.
+const omitTableBodyProps = ({
+  children,
+  items,
+  renderEmptyState,
+  loadingState,
+  ...rest
+}) => rest;
+
+const LOADING_STATES = new Set(['loading', 'sorting']);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const BoxCell = (props: any) => <Box as="td" display="table-cell" {...props} />;
+
+interface LoadingOrEmptyStateProps {
+  loadingState: string | undefined;
+  collectionSize: number;
+  colSpan: number;
+  renderEmptyState?: () => React.ReactNode;
+}
+
+function LoadingOrEmptyState({
+  loadingState,
+  collectionSize,
+  colSpan,
+  renderEmptyState,
+}: LoadingOrEmptyStateProps) {
+  if (collectionSize > 0) return null;
+
+  if (loadingState && LOADING_STATES.has(loadingState)) {
+    return (
+      <Box as="tr" display="table-row">
+        <BoxCell colSpan={colSpan}>
+          <Loader variant="loader.withinDataTable" />
+        </BoxCell>
+      </Box>
+    );
+  }
+  return (
+    <Box as="tr" display="table-row">
+      <BoxCell colSpan={colSpan} sx={{ textAlign: 'center' }}>
+        {renderEmptyState?.() ?? <TableBaseEmptyState />}
+      </BoxCell>
+    </Box>
+  );
+}
+
 const useHandleFocusRef = ref => {
   React.useEffect(() => {
     const el = ref.current;
@@ -66,6 +115,8 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     isStickyHeader = false,
     className,
     isLastColumnSticky,
+    loadingState,
+    renderEmptyState,
     onResizeStart,
     onResize,
     onResizeEnd,
@@ -252,24 +303,14 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
         <TableRowGroup
           ref={bodyRef}
           type="tbody"
-          {...collection.body.props}
+          {...omitTableBodyProps(collection.body.props)}
         >
-          {
-            collection.size === 0 && (
-              <Box
-                as="tr"
-                role="row"
-                key="loading"
-                data-testid="loading"
-                alignItems="center"
-                justifyContent="center"
-                px="lg"
-                py="md"
-              >
-                <Loader variant="loader.withinDataTable" />
-              </Box>
-            )
-          }
+          <LoadingOrEmptyState
+            loadingState={loadingState}
+            collectionSize={collection.size}
+            colSpan={collection.columns.length}
+            renderEmptyState={renderEmptyState}
+          />
           {Array.from(collection.body.childNodes).map(row => (
             <TableRow
               key={row.key}

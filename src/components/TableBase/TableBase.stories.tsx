@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
-import type { Selection } from 'react-stately';
+import type { Key, Selection } from 'react-stately';
 import { useCollator } from '@react-aria/i18n';
 import { useAsyncList } from '@react-stately/data';
-import type { Key } from '@react-types/shared';
-import { Meta, StoryFn } from '@storybook/react-vite';
+import { Meta, StoryFn, StoryObj } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -20,6 +19,7 @@ import {
   PanelHeaderCloseButton,
   Row,
   TableBase,
+  TableBaseEmptyState,
   TBody,
   Text,
   THead,
@@ -29,11 +29,13 @@ import { TableBaseProps } from '../../types/tableBase';
 import { items as listData } from '../../utils/devUtils/constants/items';
 
 import TableReadme from './TableBase.mdx';
-import { tableBaseArgTypes } from './tableBaseAttributes';
+import { tableBaseArgs, tableBaseArgTypes } from './tableBaseAttributes';
 
 export default {
   title: 'Components/TableBase',
   component: TableBase,
+  argTypes: tableBaseArgTypes as unknown as Meta<typeof TableBase>['argTypes'],
+  args: { ...tableBaseArgs },
   parameters: {
     docs: {
       page: () => (
@@ -44,7 +46,6 @@ export default {
       ),
     },
   },
-  argTypes: tableBaseArgTypes as unknown as Meta<typeof TableBase>['argTypes'],
 } satisfies Meta<typeof TableBase>;
 
 const headers = [
@@ -98,23 +99,26 @@ const statusVariant = {
   Inactive: 'tableBaseBadge.secondary',
 };
 
-export const Default: StoryFn<TableBaseProps<object>> = () => {
-  return (
-    <Card variant="cards.tableWrapper">
-      <TableBase caption="Lorem ipsum" aria-label="table">
-        <THead columns={headers}>
-          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
-        </THead>
-        <TBody items={objects}>
-          {item => (
-            <Row key={item.id}>
-              {columnKey => <Cell>{item[columnKey]}</Cell>}
-            </Row>
-          )}
-        </TBody>
-      </TableBase>
-    </Card>
-  );
+export const Default: StoryObj<TableBaseProps<object>> = {
+  render: (args: TableBaseProps<object>) => {
+    const isEmpty = args.loadingState === 'loading' || args.loadingState === 'sorting';
+    return (
+      <Card variant="cards.tableWrapper">
+        <TableBase {...args}>
+          <THead columns={headers}>
+            {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+          </THead>
+          <TBody items={isEmpty ? [] : objects}>
+            {item => (
+              <Row key={item.id}>
+                {columnKey => <Cell>{item[columnKey]}</Cell>}
+              </Row>
+            )}
+          </TBody>
+        </TableBase>
+      </Card>
+    );
+  },
 };
 
 export const MultiSelection: StoryFn<TableBaseProps<object>> = () => {
@@ -439,6 +443,89 @@ export const WithLastColumnSticky: StoryFn<TableBaseProps<object>> = () => {
               {columnKey => <Cell>{item[columnKey]}</Cell>}
             </Row>
           )}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
+};
+
+export const WithLoadingState: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <Card variant="cards.tableWrapper">
+      <TableBase caption="Lorem ipsum" aria-label="table" loadingState="loading">
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={[]}>
+          {() => <Row key="unused">{() => <Cell>Hello 0</Cell>}</Row>}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
+};
+
+export const WithEmptyState: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <Card variant="cards.tableWrapper">
+      <TableBase
+        caption="Custom empty state"
+        aria-label="table with custom empty state"
+        renderEmptyState={() => <div>No data available</div>}
+      >
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={[]}>
+          {() => <Row key="unused">{() => <Cell>Hello 2</Cell>}</Row>}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
+};
+
+export const DefaultEmptyState: StoryFn<TableBaseProps<object>> = () => {
+  return (
+    <Card variant="cards.tableWrapper">
+      <TableBase
+        caption="Default empty state"
+        aria-label="table with default empty state"
+      >
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={[]}>
+          {() => <Row key="unused">{() => <Cell>Hello 1</Cell>}</Row>}
+        </TBody>
+      </TableBase>
+    </Card>
+  );
+};
+
+export const DefaultEmptyStateWithButton: StoryFn<TableBaseProps<object>> = () => {
+  const handleAddItem = () => {
+    // eslint-disable-next-line no-console
+    console.log('Add button clicked!');
+  };
+
+  return (
+    <Card variant="cards.tableWrapper">
+      <TableBase
+        caption="Empty state with action button"
+        aria-label="table with empty state and action button"
+        renderEmptyState={() => (
+          <TableBaseEmptyState
+            headerLabel="No items available"
+            descriptionLabel="Click the button below to add a new item"
+            addButtonLabel="Add Item"
+            onAddButtonPress={handleAddItem}
+          />
+        )}
+      >
+        <THead columns={headers}>
+          {column => <Column key={column.key} minWidth={200}>{column.name}</Column>}
+        </THead>
+        <TBody items={[]}>
+          {() => <Row key="unused">{() => <Cell>Hello 3</Cell>}</Row>}
         </TBody>
       </TableBase>
     </Card>

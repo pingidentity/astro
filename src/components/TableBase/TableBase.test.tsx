@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAsyncList } from 'react-stately';
+import type { LoadingState } from '@react-types/shared';
 import { act as actHooks, fireEvent, render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
@@ -386,6 +387,134 @@ test('Arrow Left move the focus to next cell', async () => {
   fireEvent.keyDown(tableCells[0], { key: 'ArrowLeft' });
   fireEvent.keyUp(tableCells[0], { key: 'ArrowLeft' });
   expect(rows[1]).toHaveFocus();
+});
+
+const renderWithLoadingState = (loadingState?: LoadingState) => render(
+  <TableBase aria-label="table" loadingState={loadingState}>
+    <THead columns={headers}>
+      {head => (
+        <Column key={head.key}>
+          {head.name}
+        </Column>
+      )}
+    </THead>
+    <TBody items={[]}>
+      {() => (
+        <Row>
+          <Cell>A</Cell>
+          <Cell>B</Cell>
+          <Cell>C</Cell>
+        </Row>
+      )}
+    </TBody>
+  </TableBase>,
+);
+
+describe('Loading state', () => {
+  test('renders Loader when loadingState is "loading"', () => {
+    renderWithLoadingState('loading');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+  });
+
+  test('renders Loader when loadingState is "sorting"', () => {
+    renderWithLoadingState('sorting');
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+  });
+
+  test('does not render Loader when loadingState is absent', () => {
+    renderWithLoadingState();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  test('does not render Loader when loadingState is "loadingMore", renders empty state instead (Constraint #6)', () => {
+    renderWithLoadingState('loadingMore');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(screen.getByText('No items exist')).toBeInTheDocument();
+  });
+});
+
+describe('Empty state', () => {
+  test('renders default empty state when items is empty and no loadingState', () => {
+    render(
+      <TableBase aria-label="table">
+        <THead columns={headers}>
+          {head => (
+            <Column key={head.key}>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={[]}>
+          {() => (
+            <Row>
+              <Cell />
+              <Cell />
+              <Cell />
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+    expect(screen.getByText('No items exist')).toBeInTheDocument();
+  });
+
+  test('renders custom renderEmptyState and not default empty state', () => {
+    render(
+      <TableBase
+        aria-label="table"
+        renderEmptyState={() => <div>Custom</div>}
+      >
+        <THead columns={headers}>
+          {head => (
+            <Column key={head.key}>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={[]}>
+          {() => (
+            <Row>
+              <Cell />
+              <Cell />
+              <Cell />
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+    expect(screen.getByText('Custom')).toBeInTheDocument();
+    expect(screen.queryByText('No items exist')).not.toBeInTheDocument();
+  });
+
+  test('renders Loader and not empty state when loadingState is "loading" and items is empty', () => {
+    render(
+      <TableBase
+        aria-label="table"
+        loadingState="loading"
+        renderEmptyState={() => <div>Custom</div>}
+      >
+        <THead columns={headers}>
+          {head => (
+            <Column key={head.key}>
+              {head.name}
+            </Column>
+          )}
+        </THead>
+        <TBody items={[]}>
+          {() => (
+            <Row>
+              <Cell />
+              <Cell />
+              <Cell />
+            </Row>
+          )}
+        </TBody>
+      </TableBase>,
+    );
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.queryByText('Custom')).not.toBeInTheDocument();
+    expect(screen.queryByText('No items exist')).not.toBeInTheDocument();
+  });
 });
 
 describe('Resizable columns', () => {
