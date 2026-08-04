@@ -26,6 +26,7 @@ export interface TableBaseProps<T extends object> extends TableProps<T>, Omit<Ba
   onResizeStart?: ResizeHandler;
   onResize?: ResizeHandler;
   onResizeEnd?: ResizeHandler;
+  onRowAction?: (key: Key) => void;
 }
 
 export interface TableRowGroupProps extends BaseProp{
@@ -66,6 +67,10 @@ export interface TableRowProps<T> extends BaseProp{
   children: ReactNode;
   className?: string;
   hasSelectionCheckboxes?: boolean;
+  hasActions?: boolean;
+  isActiveRow?: boolean;
+  registerRef?: (key: Key, el: HTMLElement | null) => void;
+  onRowFocus?: (key: Key) => void;
 }
 
 export interface TableCellProps<T> extends BaseProp{
@@ -73,6 +78,7 @@ export interface TableCellProps<T> extends BaseProp{
   state: TableState<T>;
   className?: string;
   layoutState: TableColumnResizeState<T>;
+  hasActions?: boolean;
 }
 
 export interface TableCheckboxCellProps<T> extends BaseProp{

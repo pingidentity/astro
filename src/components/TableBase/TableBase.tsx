@@ -16,6 +16,7 @@ import { mergeProps, useResizeObserver } from '@react-aria/utils';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useTableColumnResizeState, useTableState } from '@react-stately/table';
 import type { GridNode } from '@react-types/grid';
+import type { Key } from '@react-types/shared';
 
 import { Box, CheckboxField, Icon, Loader, Text } from '../..';
 import { useGetTheme, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
@@ -68,6 +69,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     onResizeStart,
     onResize,
     onResizeEnd,
+    onRowAction,
     ...others
   } = props;
 
@@ -75,8 +77,71 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
   const headerRef = useRef(null);
   const scrollRef = useRef(null);
   const bodyRef = useRef(null);
+  // Map of row key -> <tr> DOM element, used to focus the clicked row after onRowAction fires.
+  const rowRefMap = useRef<Map<Key, HTMLElement>>(new Map());
+  // Guard flag: set to true just before onRowAction fires so the subsequent blur
+  // event (caused by an OverlayPanel FocusScope stealing focus) does not clear
+  // activeRowKey prematurely. Resets to false after the blur handler runs.
+  const actionJustFired = useRef(false);
 
   const [tableWidth, setTableWidth] = useState(0);
+  const [activeRowKey, setActiveRowKey] = useState<Key | null>(null);
+
+  const registerRowRef = useCallback((key: Key, el: HTMLElement | null) => {
+    if (el) {
+      rowRefMap.current.set(key, el);
+    } else {
+      rowRefMap.current.delete(key);
+    }
+  }, []);
+
+  const wrappedOnRowAction = useCallback((key: Key) => {
+    // Toggle off if clicking the already-active row
+    setActiveRowKey(prev => (prev === key ? null : key));
+    // Signal that a row action just fired so handleTableBlur skips the clear.
+    // This prevents OverlayPanel's FocusScope autoFocus from triggering a false
+    // positive blur that would remove the active-row highlight.
+    actionJustFired.current = true;
+    onRowAction?.(key);
+    // Move DOM focus to the clicked row's <tr> so React Aria can handle arrow-key
+    // navigation from that row after a mouse click.
+    const rowEl = rowRefMap.current.get(key);
+    if (rowEl) {
+      rowEl.focus();
+    }
+    // Reset the guard after the current event loop tick so any FocusScope
+    // autoFocus steal (which fires synchronously) is absorbed, but subsequent
+    // genuine blur events (Tab away, click outside) are not.
+    setTimeout(() => { actionJustFired.current = false; }, 0);
+  }, [onRowAction]);
+
+  // Called when any row receives focus. If the newly focused row is different
+  // from the active row (set by a click), clear activeRowKey so arrow-key
+  // navigation does not leave stale active-row highlights on multiple rows.
+  // Skip when actionJustFired is true — that focus event is the programmatic
+  // rowEl.focus() inside wrappedOnRowAction, not user navigation.
+  const handleRowFocus = useCallback((key: Key) => {
+    if (actionJustFired.current) return;
+    setActiveRowKey(prev => (prev !== null && prev !== key ? null : prev));
+  }, []);
+
+  // Clear activeRowKey when focus leaves the table entirely.
+  // Skip the clear if a row action just fired (e.g. OverlayPanel FocusScope
+  // autoFocus stealing focus) — that is not a genuine focus-out.
+  const handleTableBlur = useCallback((e: React.FocusEvent<HTMLElement>) => {
+    if (actionJustFired.current) {
+      actionJustFired.current = false;
+      return;
+    }
+    const relatedTarget = e.relatedTarget as Node | null;
+    const scrollEl = scrollRef.current as HTMLElement | null;
+    const focusMovedOutside = !relatedTarget
+      || !scrollEl
+      || !scrollEl.contains(relatedTarget);
+    if (focusMovedOutside) {
+      setActiveRowKey(null);
+    }
+  }, []);
 
   const state = useTableState({
     ...props,
@@ -89,6 +154,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
     {
       ...props,
       scrollRef,
+      onRowAction: onRowAction ? wrappedOnRowAction : undefined,
     },
     state,
     tableRef,
@@ -134,7 +200,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
   });
 
   return (
-    <Box ref={scrollRef}>
+    <Box ref={scrollRef} onBlur={handleTableBlur}>
       <Box
         as="table"
         display="table"
@@ -210,6 +276,10 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
               item={row}
               state={state}
               hasSelectionCheckboxes={hasSelectionCheckboxes}
+              hasActions={!!onRowAction}
+              isActiveRow={row.key === activeRowKey}
+              registerRef={registerRowRef}
+              onRowFocus={handleRowFocus}
             >
               {Array.from(collection.getChildren?.(row.key) ?? []).map(cell => (
                 cell.props.isSelectionCell
@@ -227,6 +297,7 @@ const TableBase = forwardRef<HTMLTableElement, TableBaseProps<object>>((props, r
                       cell={cell}
                       state={state}
                       layoutState={layoutState}
+                      hasActions={!!onRowAction}
                     />
                   )
               ))}
@@ -422,11 +493,22 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
 }
 
 function TableRow<T>(props: TableRowProps<T>) {
-  const { item, state, children, className, hasSelectionCheckboxes } = props;
+  const {
+    item, state, children, className, hasSelectionCheckboxes, hasActions, isActiveRow, registerRef,
+    onRowFocus,
+  } = props;
 
   const ref = useRef<HTMLTableRowElement | null>(null);
 
-  const { rowProps } = useTableRow({ node: item }, state, ref);
+  // Register this row's DOM element so wrappedOnRowAction can focus it programmatically.
+  const setRef = useCallback((el: HTMLTableRowElement | null) => {
+    (ref as React.MutableRefObject<HTMLTableRowElement | null>).current = el;
+    registerRef?.(item.key, el);
+  }, [item.key, registerRef]);
+
+  const { rowProps } = useTableRow(
+    { node: item }, state, ref as React.RefObject<HTMLTableRowElement>,
+  );
 
   const isSelected = state.selectionManager.isSelected(item.key);
 
@@ -456,12 +538,19 @@ function TableRow<T>(props: TableRowProps<T>) {
     state.selectionManager.toggleSelection(item.key);
   }, [isDisabled, item.key, state.selectionManager]);
 
+  const rowFocusProps = useCallback((e: React.FocusEvent) => {
+    if (e.currentTarget === e.target) {
+      onRowFocus?.(item.key);
+    }
+  }, [item.key, onRowFocus]);
+
   const { classNames } = useStatusClasses(className, {
     isSelected,
     isHovered,
     isPressed,
-    isFocused: isFocusVisible,
+    isFocused: isFocusVisible || !!isActiveRow,
     isDisabled,
+    'has-actions': hasActions,
   });
 
   return (
@@ -470,8 +559,17 @@ function TableRow<T>(props: TableRowProps<T>) {
       display="table-row"
       className={classNames}
       variant="tableBase.row"
-      {...mergeProps(rowProps, focusProps, hoverProps, pressProps, { onKeyDown: enterKeyProps })}
-      ref={ref}
+      {...mergeProps(
+        rowProps,
+        focusProps,
+        hoverProps,
+        pressProps,
+        {
+          onKeyDown: enterKeyProps,
+          onFocus: rowFocusProps,
+        })
+      }
+      ref={setRef}
     >
       {children}
     </Box>
@@ -479,7 +577,7 @@ function TableRow<T>(props: TableRowProps<T>) {
 }
 
 function TableCell<T>(props: TableCellProps<T>) {
-  const { cell, state, className, layoutState } = props;
+  const { cell, state, className, layoutState, hasActions } = props;
 
   const ref = useRef<HTMLTableCellElement | null>(null);
 
@@ -493,9 +591,15 @@ function TableCell<T>(props: TableCellProps<T>) {
   useHandleFocusRef(ref);
 
   // Prevents pointer events reaching the row's press handler, allowing native text-selection drags.
+  // Skipped when the table has row actions so that clicks on cells bubble up
+  // and trigger onRowAction.
   const stopPointerPropagation = useCallback((e: React.SyntheticEvent) => {
     e.stopPropagation();
   }, []);
+
+  const pointerBlockers = hasActions
+    ? {}
+    : { onPointerDown: stopPointerPropagation, onMouseDown: stopPointerPropagation };
 
   return (
     <Box
@@ -509,7 +613,7 @@ function TableCell<T>(props: TableCellProps<T>) {
         ...cell.props.sx,
       }}
       {...mergeProps(
-        { onPointerDown: stopPointerPropagation, onMouseDown: stopPointerPropagation },
+        pointerBlockers,
         gridCellProps,
         focusProps,
         cell.props,

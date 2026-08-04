@@ -162,6 +162,9 @@ const row = {
   '&.is-hovered': {
     // This is the hover state for the row
   },
+  '&.has-actions.is-hovered:not(.is-disabled)': {
+    cursor: 'pointer',
+  },
   '&.is-selected': {
     // This is the selected state for the row
   },

@@ -1,10 +1,16 @@
 import React from 'react';
+import { setInteractionModality } from '@react-aria/interactions';
 
 import { OverlayPanelProps } from '../../types';
 import { fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import OverlayPanel from './OverlayPanel';
+
+jest.mock('@react-aria/interactions', () => ({
+  ...jest.requireActual('@react-aria/interactions'),
+  setInteractionModality: jest.fn(),
+}));
 
 const testId = 'test-overlayPanel';
 const defaultProps: OverlayPanelProps = {
@@ -124,4 +130,37 @@ test('triggerRef.current.focus() does not fire when key other than esc is presse
     charCode: 65,
   });
   expect(focusFunction).not.toHaveBeenCalled();
+});
+
+test('sets interaction modality to keyboard when panel opens', () => {
+  getComponent({ isOpen: true, children: <div>Test</div> });
+  expect(setInteractionModality).toHaveBeenCalledWith('keyboard');
+});
+
+test('does not set interaction modality to keyboard when panel is closed', () => {
+  (setInteractionModality as jest.Mock).mockClear();
+  getComponent({ isOpen: false, children: <div>Test</div> });
+  expect(setInteractionModality).not.toHaveBeenCalledWith('keyboard');
+});
+
+test('sets interaction modality to keyboard when panel transitions from closed to open', () => {
+  const { rerender } = getComponent({ isOpen: false, children: <div>Test</div> });
+  (setInteractionModality as jest.Mock).mockClear();
+
+  rerender(<OverlayPanel {...defaultProps} isOpen><div>Test</div></OverlayPanel>);
+
+  expect(setInteractionModality).toHaveBeenCalledWith('keyboard');
+});
+
+test('sets interaction modality to keyboard on re-open after close', () => {
+  const { rerender } = getComponent({ isOpen: true, children: <div>Test</div> });
+  (setInteractionModality as jest.Mock).mockClear();
+
+  // Close the panel
+  rerender(<OverlayPanel {...defaultProps} isOpen={false}><div>Test</div></OverlayPanel>);
+  expect(setInteractionModality).not.toHaveBeenCalledWith('keyboard');
+
+  // Re-open — modality must be forced to keyboard again
+  rerender(<OverlayPanel {...defaultProps} isOpen><div>Test</div></OverlayPanel>);
+  expect(setInteractionModality).toHaveBeenCalledWith('keyboard');
 });
