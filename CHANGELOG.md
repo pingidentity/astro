@@ -1,3 +1,13 @@
+## 2.216.0-alpha.0 (2026-08-04)
+
+### 🚀 Features
+
+- [UXE-8406] TableBase should support props for loadingState and emptyState rendering
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.215.0-alpha.0 (2026-08-04)
 
 ### 🚀 Features
