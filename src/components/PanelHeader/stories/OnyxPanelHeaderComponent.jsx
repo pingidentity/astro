@@ -96,6 +96,17 @@ const PanelHeaderComponent = () => {
         <PanelHeaderCloseButton />
       </PanelHeader>
 
+      {/* Panel Header with Copyable Subtext */}
+      <PanelHeader
+        isCopyable
+        data={{
+          icon: AccountIcon,
+          subtext: 'rad_developer@pingidentity.com',
+          text: 'Fons Vernall',
+          avatarDefaultText: 'FV',
+        }}
+      />
+
       {/* Panel Header with long text and subtext */}
       <PanelHeader
         data={{

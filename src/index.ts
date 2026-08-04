@@ -73,6 +73,7 @@ export * from './components/CollapsiblePanelItem';
 export { default as ColorField } from './components/ColorField';
 export { default as ComboBoxField } from './components/ComboBoxField';
 export { default as CopyText } from './components/CopyText';
+export { default as CopyButton } from './components/CopyText/CopyButton';
 export { default as DataTable } from './components/DataTable';
 export * from './components/DataTable';
 export { default as DatePicker } from './components/DatePicker';
