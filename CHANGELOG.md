@@ -1,3 +1,13 @@
+## 2.215.0-alpha.0 (2026-08-04)
+
+### 🚀 Features
+
+- **astro:** add onRowAction support to TableBase
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.214.0 (2026-07-31)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
