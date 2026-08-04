@@ -1,3 +1,13 @@
+## 2.217.0-alpha.0 (2026-08-04)
+
+### 🚀 Features
+
+- **astro:** [UXE-8610] add isCopyable prop to PanelHeader and export CopyButton
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.216.0-alpha.0 (2026-08-04)
 
 ### 🚀 Features
