@@ -1,3 +1,9 @@
+## 2.217.1 (2026-08-04)
+
+### 🧱 Updated Dependencies
+
+- Updated onyx-tokens to 0.41.1
+
 ## 2.217.0-alpha.0 (2026-08-04)
 
 ### 🚀 Features
