@@ -110,6 +110,12 @@ test('triggerRef.current.focus() fires when provided', () => {
   expect(focusFunction).toHaveBeenCalled();
 });
 
+test('focusScopeProps are forwarded to FocusScope', () => {
+  getComponent({ children: <div>Test</div>, focusScopeProps: { contain: true } });
+  const overlayPanel = screen.getByTestId(testId);
+  expect(overlayPanel).toBeInTheDocument();
+});
+
 test('triggerRef.current.focus() does not fire when key other than esc is pressed', () => {
   const onClose = jest.fn();
   const focusFunction = jest.fn();
