@@ -1,3 +1,4 @@
+import { FocusScopeProps } from 'react-aria';
 import { OverlayTriggerState } from 'react-stately';
 import { ThemeUICSSObject } from 'theme-ui';
 
@@ -27,4 +28,7 @@ export interface OverlayPanelProps extends BoxProps, TestingAttributes {
   /** Inline styling prop for item */
   sx?: ThemeUICSSObject
   state?: OverlayPanelState;
+  /** Props object that is spread into the internal FocusScope.
+   * Useful for controlling focus with greater precision. */
+  focusScopeProps?: Omit<FocusScopeProps, 'children'>;
 }
