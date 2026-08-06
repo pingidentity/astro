@@ -16,6 +16,7 @@ const OverlayPanel = forwardRef<HTMLDivElement, OverlayPanelProps>((props, ref) 
     state,
     size,
     triggerRef,
+    focusScopeProps,
     ...others
   } = props;
 
@@ -48,7 +49,7 @@ const OverlayPanel = forwardRef<HTMLDivElement, OverlayPanelProps>((props, ref) 
   };
 
   return (
-    <FocusScope autoFocus>
+    <FocusScope autoFocus {...focusScopeProps}>
       <Box
         variant="overlayPanel.container"
         ref={overlayPanelRef}

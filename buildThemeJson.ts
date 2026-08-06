@@ -35,6 +35,20 @@ Module._resolveFilename = function (request, parent, isMain, options) {
   }
   return originalResolveFilename.call(this, request, parent, isMain, options);
 };
+
+// The built output lives in dist/, outside libs/astro, so Node's upward
+// node_modules walk from a dist file reaches the workspace root but never
+// libs/astro/node_modules — where npm installs any astro dependency it can't
+// hoist. Add libs/astro's own lookup paths so its dependency tree resolves.
+const astroNodeModulePaths = Module._nodeModulePaths(__dirname);
+const originalResolveLookupPaths = Module._resolveLookupPaths;
+Module._resolveLookupPaths = function (request, parent) {
+  const lookupPaths = originalResolveLookupPaths.call(this, request, parent);
+  const isBareSpecifier = !request.startsWith('.') && !path.isAbsolute(request);
+  if (!isBareSpecifier || !lookupPaths) return lookupPaths;
+  return [...lookupPaths, ...astroNodeModulePaths];
+};
+
 require.extensions['.css'] = function () { /* empty */ };
 
 const { NextGenTheme, NextGenDarkTheme } = require('../../dist/astro/lib/cjs');
