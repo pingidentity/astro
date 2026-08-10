@@ -149,6 +149,26 @@ test('should call onChange cb (when provided) when a file is uploaded', () => {
   expect(testOnChange).toHaveBeenCalledTimes(1);
 });
 
+test('should call onChange cb and render preview when a .ico file with type image/vnd.microsoft.icon is uploaded', async () => {
+  const testOnChange = jest.fn();
+  getComponent({ onChange: testOnChange });
+  fireEvent.change(screen.getByTestId('image-upload-input'), {
+    target: { files: [new File(['(⌐□_□)'], 'favicon.ico', { type: 'image/vnd.microsoft.icon' })] },
+  });
+  expect(testOnChange).toHaveBeenCalledTimes(1);
+  expect(await screen.findByTestId(imageUploadImagePreview)).toBeInTheDocument();
+});
+
+test('should call onChange cb and render preview when a .ico file with type image/x-icon is uploaded', async () => {
+  const testOnChange = jest.fn();
+  getComponent({ onChange: testOnChange });
+  fireEvent.change(screen.getByTestId('image-upload-input'), {
+    target: { files: [new File(['(⌐□_□)'], 'favicon.ico', { type: 'image/x-icon' })] },
+  });
+  expect(testOnChange).toHaveBeenCalledTimes(1);
+  expect(await screen.findByTestId(imageUploadImagePreview)).toBeInTheDocument();
+});
+
 test('should call onRemove cb (when provided) when a file is uploaded', async () => {
   const testOnRemove = jest.fn();
   getComponent({ onRemove: testOnRemove });

@@ -150,7 +150,9 @@ export const supportedImageTypes = [
   'image/png',
   'image/svg',
   'image/svg+xml',
+  'image/vnd.microsoft.icon',
   'image/webp',
+  'image/x-icon',
 ];
 
 export const imageUploadPropTypes = [
