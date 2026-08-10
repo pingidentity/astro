@@ -23,6 +23,11 @@ input.fieldControlWrapper = {
       backgroundColor: 'disabled',
     },
   },
+  '&.is-read-only': {
+    '> input': {
+      backgroundColor: 'disabled',
+    },
+  },
 };
 
 input.multivaluesWrapper = {

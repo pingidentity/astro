@@ -34,6 +34,8 @@ export default {
 export const Default: StoryFn<PhoneNumberFieldProps> = args => (
   <PhoneNumberField
     label="Phone Number"
+    defaultCountryValue="US"
+    value="2025550177"
     {...args}
   />
 );
@@ -46,8 +48,8 @@ Default.parameters = {
 };
 
 export const Controlled: StoryFn<PhoneNumberFieldProps> = () => {
-  const [value, setValue] = useState('');
-  const [countryValue, setCountryValue] = useState<string | undefined>(undefined);
+  const [value, setValue] = useState('2025550177');
+  const [countryValue, setCountryValue] = useState<string | undefined>('US');
 
   return (
     <PhoneNumberField
