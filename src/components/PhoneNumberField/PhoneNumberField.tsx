@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import { countries as countriesObj } from 'countries-list';
 import { v4 as uuid } from 'uuid';
@@ -48,10 +48,6 @@ interface CountryFieldState {
   isOpen: boolean;
 }
 
-const closedState = (selectedKey: string | null): Partial<CountryFieldState> => {
-  const dialCode = selectedKey ? toDialCode(selectedKey) : '';
-  return { isOpen: false, inputValue: dialCode, searchValue: dialCode, items: allCountries };
-};
 
 const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((props, ref) => {
   const {
@@ -59,7 +55,6 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
     defaultCountryValue,
     helperText,
     isReadOnly,
-    labelMode,
     onCountryChange,
     status,
     ...others
@@ -70,9 +65,9 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
     fieldControlInputProps,
     fieldControlWrapperProps,
     fieldLabelProps,
-  } = useField({ status, isReadOnly, labelMode, ...others });
+  } = useField({ status, isReadOnly, ...others });
 
-  const { onChange } = fieldControlInputProps;
+  const { onChange, value: fieldValue } = fieldControlInputProps;
   const inputRef = useLocalOrForwardRef<HTMLInputElement>(ref);
 
   const helperTextId = uuid();
@@ -80,6 +75,12 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
   usePropWarning(props, 'disabled', 'isDisabled');
 
   const { contains } = useFilter({ sensitivity: 'base' });
+
+  const [phoneNumber, setPhoneNumber] = useState(() => String(fieldValue ?? ''));
+
+  useEffect(() => {
+    if (fieldValue !== undefined) setPhoneNumber(String(fieldValue));
+  }, [fieldValue]);
 
   const [fieldState, setFieldState] = useState<CountryFieldState>(() => {
     const key = countryValue ?? defaultCountryValue;
@@ -116,7 +117,7 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
       : allCountries;
 
     setFieldState(prev => ({
-      ...prev, inputValue: value, selectedKey: null, searchValue: value, items: newItems,
+      ...prev, inputValue: value, searchValue: value, items: newItems,
     }));
   }, [contains]);
 
@@ -134,26 +135,33 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
   }, [onCountryChange]);
 
   const onOpenChangeHandler = useCallback((open: boolean) => {
-    if (!open || isReadOnly) {
-      setFieldState(prev => ({ ...prev, ...closedState(prev.selectedKey) }));
-    } else {
+    if (isReadOnly) return;
+    if (open) {
       setFieldState(prev => ({ ...prev, isOpen: true, items: allCountries }));
+    } else {
+      setFieldState(prev => {
+        if (!prev.selectedKey) return { ...prev, isOpen: false, items: allCountries };
+        const dialCode = toDialCode(prev.selectedKey);
+        return {
+          ...prev, isOpen: false, inputValue: dialCode, searchValue: dialCode, items: allCountries,
+        };
+      });
     }
   }, [isReadOnly]);
 
   const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!onChange) return;
     if (validatePhoneNumber(e.target.value)) {
+      setPhoneNumber(e.target.value);
       onChange(e);
-    } else if (inputRef.current) {
-      inputRef.current.value = '';
     }
-  }, [inputRef, onChange]);
+  }, [onChange]);
 
   const commitPaste = useCallback((raw: string) => {
     if (!inputRef.current || !onChange) return;
     const { countryKey, localNumber } = parsePaste(raw);
     if (countryKey) selectionHandler(countryKey);
+    setPhoneNumber(localNumber);
     inputRef.current.value = localNumber;
     const event = { target: inputRef.current, currentTarget: inputRef.current };
     onChange(event as React.ChangeEvent<HTMLInputElement>);
@@ -178,7 +186,14 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
     zIndex: 1,
     ...(fieldState.isOpen
       ? { width: '100%' }
-      : { transition: '0.2s width ease', width: '110px' }),
+      : {
+        transition: '0.2s width ease',
+        width: '110px',
+        '& input': {
+          borderTopRightRadius: '0 !important',
+          borderBottomRightRadius: '0 !important',
+        },
+      }),
   };
 
   const countryLabel = (c: { name: string; native: string; phone: string }) => `${c.name}${c.name !== c.native ? ` (${c.native})` : ''} +${c.phone.split(',')[0]}`;
@@ -216,15 +231,12 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
             </Item>
           )}
         </ComboBoxField>
-        <Box
-          sx={{
-            ml: '110px', width: '100%', visibility: fieldState.isOpen ? 'hidden' : undefined,
-          }}
-        >
-
+        <Box sx={{ ml: '110px', width: 'calc(100% - 110px)', visibility: fieldState.isOpen ? 'hidden' : undefined, '& input': { borderTopLeftRadius: '0 !important', borderBottomLeftRadius: '0 !important', borderLeft: 0 } }}>
           <Input
             ref={inputRef}
             {...fieldControlInputProps}
+            type="tel"
+            value={phoneNumber}
             aria-describedby={[helperText && helperTextId, fieldControlInputProps['aria-describedby']].join(fieldControlInputProps['aria-describedby'] ? ' ' : '') || undefined}
             onChange={handlePhoneChange}
             onPaste={handlePhonePaste}
