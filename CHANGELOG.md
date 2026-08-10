@@ -1,3 +1,24 @@
+## 2.218.0-alpha.0 (2026-08-10)
+
+### 🚀 Features
+
+- [UXE-8613] Improve PhoneNumberField
+- **astro:** add .ico MIME type support to ImageUploadField
+- **astro:** [UXE-8408] Add focusScopeProps to OverlayPanel
+
+### 🩹 Fixes
+
+- bump astro versions
+- onyx PairLabel = h5
+- **astro:** [UXE-8929] resolve astro deps from libs/astro in theme-json build
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+- Kunal
+- Nyssa Shepherd
+- Ridhisha Dangol
+
 ## 2.217.1 (2026-08-04)
 
 ### 🧱 Updated Dependencies
