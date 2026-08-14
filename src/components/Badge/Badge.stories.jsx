@@ -9,6 +9,7 @@ import { useGetTheme } from '../../hooks';
 import {
   Badge,
   Box,
+  DefaultBadge,
   Icon,
   IconButton,
 } from '../../index';
@@ -175,26 +176,12 @@ StatusBadgeVariants.parameters = {
   },
 };
 
-export const BadgeWithHelpHint = ({ ...args }) => (
-  <Badge
-    {...args}
-    label="Default"
-    isUppercase
-    helpHint="The default population is assigned to new users when no other population is specified."
-  />
-);
-
-export const BadgeWithHelpHintCustomization = ({ ...args }) => (
-  <Badge
-    {...args}
-    label="Default"
-    isUppercase
-    helpHint="This hint opens to the right of the badge, with a light background."
-    helpHintProps={{
-      direction: 'right',
-      align: 'middle',
-      offset: 8,
-      isDarkMode: false,
-    }}
-  />
+export const Customizations = () => (
+  <Box isRow gap="lg">
+    <DefaultBadge
+      label="Customized Hint"
+      helpHint="This hint opens to the right of the badge, with a light background."
+      helpHintProps={{ direction: 'right' }}
+    />
+  </Box>
 );
