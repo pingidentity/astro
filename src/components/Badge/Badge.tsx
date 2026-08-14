@@ -7,11 +7,15 @@ import { BadgeContext } from '../../context/BadgeContext';
 import { useGetTheme } from '../../hooks';
 import { BadgeProps } from '../../types';
 
+import BadgeHelpHint from './BadgeHelpHint';
+
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
     align,
     bg = 'badge.background',
     children,
+    helpHint,
+    helpHintProps,
     isUppercase = false,
     label,
     sx,
@@ -39,7 +43,8 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     bg: bg as ResponsiveValue<string>,
     isUppercase,
     label,
-    ref: ref as React.Ref<HTMLDivElement>,
+    // When a help hint is present, BadgeHelpHint owns the badge ref so it can position the tooltip.
+    ...(!helpHint && { ref: ref as React.Ref<HTMLDivElement> }),
     textColor,
     sx: badgeSx as ThemeUIStyleObject,
     ...others,
@@ -59,31 +64,41 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
 
   const fixedVariant = (variant && oldVariantPaths.includes(variant)) ? `variants.${variant}` : variant;
 
+  const badge = (
+    <ThemeUIBadge
+      {...badgeProps}
+      variant={variant ? fixedVariant : 'baseBadge'}
+    >
+      {slots?.leftIcon
+        && (
+          <Box mr="xs">
+            {slots.leftIcon}
+          </Box>
+        )}
+      <Text
+        variant="label"
+        color={textColor}
+        sx={{
+          fontSize: badgeTextFontSize || '',
+          ...(isUppercase ? { textTransform: 'uppercase', fontSize: '11px' } : {}),
+        }}
+        {...textProps}
+      >
+        {label}
+      </Text>
+      {children}
+    </ThemeUIBadge>
+  );
+
   return (
     <BadgeContext.Provider value={{ bg }}>
-      <ThemeUIBadge
-        {...badgeProps}
-        variant={variant ? fixedVariant : 'baseBadge'}
-      >
-        {slots?.leftIcon
-          && (
-            <Box mr="xs">
-              {slots.leftIcon}
-            </Box>
-          )}
-        <Text
-          variant="label"
-          color={textColor}
-          sx={{
-            fontSize: badgeTextFontSize || '',
-            ...(isUppercase ? { textTransform: 'uppercase', fontSize: '11px' } : {}),
-          }}
-          {...textProps}
-        >
-          {label}
-        </Text>
-        {children}
-      </ThemeUIBadge>
+      {helpHint
+        ? (
+          <BadgeHelpHint hint={helpHint} ref={ref} {...helpHintProps}>
+            {badge}
+          </BadgeHelpHint>
+        )
+        : badge}
     </BadgeContext.Provider>
   );
 });
