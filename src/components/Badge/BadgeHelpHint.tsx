@@ -6,7 +6,7 @@ import { useHelpHintPopover, useLocalOrForwardRef } from '../../hooks';
 import { BadgeHelpHintProps } from '../../types';
 
 interface BadgeHelpHintTriggerProps extends BadgeHelpHintProps {
-  hint: React.ReactNode;
+  hint: string;
   children: ReactElement;
 }
 

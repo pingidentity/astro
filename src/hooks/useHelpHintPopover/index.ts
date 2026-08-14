@@ -1,2 +1,2 @@
 export { default } from './useHelpHintPopover';
-export * from './useHelpHintPopover.types';
+export * from './useHelpHintPopover';

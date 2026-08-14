@@ -30,8 +30,8 @@ export interface BadgeProps extends DOMAttributes {
   };
   /** The label of the badge. */
   label?: React.ReactNode;
-  /** Hint content shown in a tooltip. When provided, the badge itself is the tooltip trigger. */
-  helpHint?: React.ReactNode;
+  /** Hint text shown in a tooltip. When provided, the badge itself is the tooltip trigger. */
+  helpHint?: string;
   /** Props object used to customize the help hint tooltip. */
   helpHintProps?: BadgeHelpHintProps;
   /** Props object that is spread directly into the text. */

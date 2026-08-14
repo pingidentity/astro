@@ -8,14 +8,32 @@ import { FocusRingAria } from '@react-aria/focus';
 import { FocusWithinResult, HoverProps, HoverResult, useHover } from '@react-aria/interactions';
 import { OverlayTriggerState } from '@react-stately/overlays';
 
+import { Axis, DOMAttributes, PopoverContainerProps } from '../../types';
 import useStatusClasses from '../useStatusClasses';
 
-import { UseHelpHintPopoverOptions, UseHelpHintPopoverResult } from './useHelpHintPopover.types';
+export interface UseHelpHintPopoverOptions {
+  align?: 'start' | 'end' | 'middle';
+  className?: string;
+  closeDelay?: number;
+  crossOffset?: number;
+  direction?: Axis;
+  isDarkMode?: boolean;
+  isNotFlippable?: boolean;
+  isTriggerPressable?: boolean;
+  offset?: number;
+  shouldOpenOnTriggerFocus?: boolean;
+}
 
-/**
- * Wires up the hover / focus driven popover shared by help hint triggers, and returns the props
- * to spread onto the trigger element and its PopoverContainer.
- */
+export interface UseHelpHintPopoverResult {
+  close: () => void;
+  isFocusVisible: boolean;
+  isOpen: boolean;
+  open: () => void;
+  overlayRef: RefObject<HTMLElement>;
+  popoverContainerProps: PopoverContainerProps;
+  triggerProps: DOMAttributes;
+}
+
 const useHelpHintPopover = <T extends HTMLElement>(
   triggerRef: RefObject<T>,
   options: UseHelpHintPopoverOptions = {},
@@ -54,8 +72,6 @@ const useHelpHintPopover = <T extends HTMLElement>(
     triggerRef,
   );
 
-  // Set a timeout to close the overlay upon hover / focus loss,
-  // but keep it open if the trigger or overlay are hovered again before it closes.
   useEffect(() => {
     let timeout;
     const isHovered = isTriggerHovered || isOverlayHovered;
@@ -94,7 +110,6 @@ const useHelpHintPopover = <T extends HTMLElement>(
 
   const { classNames } = useStatusClasses(className, { isDarkMode });
 
-  // A non-pressable trigger, such as a plain div, would warn about the unknown onPress handler.
   const { onPress, ...pressFreeTriggerProps } = triggerProps;
 
   return {
