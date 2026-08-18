@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { NumberField } from '../../index';
+import { NumberFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -15,7 +16,7 @@ const testStep = 1;
 const incrementAriaLabel = 'arrow-up';
 const decrementAriaLabel = 'arrow-down';
 
-const defaultProps = {
+const defaultProps: NumberFieldProps = {
   defaultValue: testValue,
   step: testStep,
   'data-testid': testId,
@@ -25,7 +26,7 @@ const defaultProps = {
   decrementAriaLabel,
 };
 
-const getComponent = (props = {}) => render(
+const getComponent = (props: NumberFieldProps = {}) => render(
   <NumberField
     {...defaultProps}
     {...props}
