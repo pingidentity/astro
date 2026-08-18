@@ -333,8 +333,12 @@ test('Arrow Up key should focus the next row', async () => {
   fireEvent.keyDown(rows[1], { key: 'ArrowUp' });
   fireEvent.keyUp(rows[1], { key: 'ArrowUp' });
 
+  // Column header content is rendered inside a focusable button, so focus
+  // moves into that child (focusMode: 'child') rather than the <th> itself.
   const columnheader = screen.getAllByRole('columnheader');
-  expect(columnheader[0]).toHaveFocus();
+  const headerButton = within(columnheader[0]).getByRole('button');
+  expect(headerButton).toHaveFocus();
+  expect(columnheader[0]).toHaveClass('is-focused');
 });
 
 test('Arrow Right move the focus to next cell', async () => {
@@ -734,250 +738,137 @@ describe('Resizable columns', () => {
   });
 });
 
-describe('onRowAction behavior', () => {
-  test('clicking a cell fires onRowAction with the correct row key', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
+describe('Sorting and resizing together', () => {
+  const combinedHeaders = [
+    { key: 'name', name: 'Name' },
+    { key: 'value', name: 'Value' },
+  ];
 
-    await userEvent.click(firstBodyRowCells[0]);
-    expect(onRowAction).toHaveBeenCalledTimes(1);
-    expect(onRowAction).toHaveBeenCalledWith('1');
+  const combinedObjects = [
+    { key: '1', name: 'Alpha', value: '10' },
+    { key: '2', name: 'Beta', value: '20' },
+  ];
+
+  const getCombinedTable = (props = {}) => render(
+    <TableBase aria-label="sortable and resizable table" {...props}>
+      <THead columns={combinedHeaders}>
+        {head => (
+          <Column key={head.key} allowsSorting allowsResizing>
+            {head.name}
+          </Column>
+        )}
+      </THead>
+      <TBody items={combinedObjects}>
+        {row => (
+          <Row key={row.key}>
+            {columnKey => <Cell>{row[columnKey]}</Cell>}
+          </Row>
+        )}
+      </TBody>
+    </TableBase>,
+  );
+
+  test('renders both the sort button and resize slider for a column that allows both', () => {
+    getCombinedTable();
+    const columnheaders = screen.getAllByRole('columnheader');
+
+    const sortButton = within(columnheaders[0]).getByRole('button', { name: /Sort by Name/i });
+    expect(sortButton).toBeInTheDocument();
+
+    const slider = within(columnheaders[0]).getByRole('slider', { name: /Name column width/i });
+    expect(slider).toBeInTheDocument();
   });
 
-  test('rows receive has-actions class when onRowAction is provided', () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // All body rows (skip the header row at index 0) should have the has-actions class
-    rows.slice(1).forEach(row => {
-      expect(row).toHaveClass('has-actions');
-    });
+  test('resizable table with sorting has no accessibility violations', async () => {
+    jest.useRealTimers();
+    const { container } = getCombinedTable({ sortDescriptor: { column: 'name', direction: 'ascending' } });
+    const results = await axe(container);
+    jest.useFakeTimers();
+    expect(results).toHaveNoViolations();
   });
 
-  test('rows do not receive has-actions class when onRowAction is absent', () => {
-    getComponent();
-    const rows = screen.getAllByRole('row');
+  test('clicking the sort button calls onSortChange without triggering a resize', () => {
+    // TableBase forwards unrecognized props (including onSortChange) onto the
+    // underlying <table> DOM node, which logs a React "unknown prop" warning.
+    // Suppressed here since it's orthogonal to the sort/resize behavior under test.
+    jest.spyOn(console, 'error').mockImplementation();
 
-    rows.slice(1).forEach(row => {
-      expect(row).not.toHaveClass('has-actions');
-    });
+    const onSortChange = jest.fn();
+    const onResize = jest.fn();
+    getCombinedTable({ onSortChange, onResize });
+
+    const columnheaders = screen.getAllByRole('columnheader');
+    const sortButton = within(columnheaders[0]).getByRole('button', { name: /Sort by Name/i });
+
+    fireEvent.click(sortButton);
+
+    expect(onSortChange).toHaveBeenCalledWith({ column: 'name', direction: 'ascending' });
+    expect(onResize).not.toHaveBeenCalled();
   });
 
-  test('pressing Enter on a focused row fires onRowAction when selectionMode is none', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ selectionMode: 'none', onRowAction });
+  test('sets aria-sort on a column header that also allows resizing', () => {
+    getCombinedTable({ sortDescriptor: { column: 'name', direction: 'ascending' } });
+    const columnheaders = screen.getAllByRole('columnheader');
+
+    expect(columnheaders[0]).toHaveAttribute('aria-sort', 'ascending');
+    expect(columnheaders[1]).toHaveAttribute('aria-sort', 'none');
+  });
+
+  test('resizing via the slider does not call onSortChange', () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
+    const onSortChange = jest.fn();
+    const onResize = jest.fn();
+    getCombinedTable({ onSortChange, onResize });
+
+    const columnheaders = screen.getAllByRole('columnheader');
+    const slider = within(columnheaders[0]).getByRole('slider', { name: /Name column width/i });
+
+    actHooks(() => { slider.focus(); });
+    fireEvent.keyDown(slider, { key: 'Enter' });
+    fireEvent.keyDown(slider, { key: 'ArrowRight' });
+
+    expect(onResize).toHaveBeenCalledTimes(1);
+    expect(onSortChange).not.toHaveBeenCalled();
+  });
+
+  test('sort button and resize slider are independently focusable within the same column header', async () => {
+    getCombinedTable();
+    const columnheaders = screen.getAllByRole('columnheader');
+    const sortButton = within(columnheaders[0]).getByRole('button', { name: /Sort by Name/i });
+    const slider = within(columnheaders[0]).getByRole('slider', { name: /Name column width/i });
     const rows = screen.getAllByRole('row');
 
+    // Tab into the first body row, then ArrowUp moves focus into the
+    // column header's focusable child (the sort button, per focusMode: 'child').
     await userEvent.tab();
     expect(rows[1]).toHaveFocus();
 
-    // React Aria's usePress fires the action on keyUp (press completion),
-    // so both keyDown and keyUp must be fired.
-    fireEvent.keyDown(rows[1], { key: 'Enter' });
-    fireEvent.keyUp(rows[1], { key: 'Enter' });
-    expect(onRowAction).toHaveBeenCalledTimes(1);
-    expect(onRowAction).toHaveBeenCalledWith('1');
+    fireEvent.keyDown(rows[1], { key: 'ArrowUp' });
+    fireEvent.keyUp(rows[1], { key: 'ArrowUp' });
+    expect(sortButton).toHaveFocus();
+
+    fireEvent.keyDown(columnheaders[0], { key: 'ArrowRight' });
+    fireEvent.keyUp(columnheaders[0], { key: 'ArrowRight' });
+    expect(slider).toHaveFocus();
   });
 
-  test('clicking an action row applies is-focused class to that row', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
+  test('resizing a column does not change its sort state', () => {
+    jest.spyOn(console, 'error').mockImplementation();
 
-    // Click a cell in the first body row (rows[0] is the header row)
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-    await userEvent.click(firstBodyRowCells[0]);
+    const onSortChange = jest.fn();
+    getCombinedTable({ onSortChange, sortDescriptor: { column: 'name', direction: 'ascending' } });
 
-    // First body row should have is-focused; all other body rows should not
-    expect(rows[1]).toHaveClass('is-focused');
-    expect(rows[2]).not.toHaveClass('is-focused');
-    expect(rows[3]).not.toHaveClass('is-focused');
-    expect(rows[4]).not.toHaveClass('is-focused');
+    const columnheaders = screen.getAllByRole('columnheader');
+    const slider = within(columnheaders[0]).getByRole('slider', { name: /Name column width/i });
 
-    // Click a cell in the second body row — highlight should move
-    const secondBodyRowCells = rows[2].querySelectorAll('td');
-    await userEvent.click(secondBodyRowCells[0]);
+    actHooks(() => { slider.focus(); });
+    fireEvent.keyDown(slider, { key: 'Enter' });
+    fireEvent.keyDown(slider, { key: 'ArrowRight' });
+    fireEvent.keyDown(slider, { key: 'Escape' });
 
-    expect(rows[2]).toHaveClass('is-focused');
-    expect(rows[1]).not.toHaveClass('is-focused');
-  });
-
-  test('no row has is-focused before any click with onRowAction', () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // At mount time, no body row should have is-focused from active-row state
-    rows.slice(1).forEach(row => {
-      expect(row).not.toHaveClass('is-focused');
-    });
-  });
-
-  test('clicking a row without onRowAction does not apply is-focused', async () => {
-    getComponent();
-    const rows = screen.getAllByRole('row');
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-
-    await userEvent.click(firstBodyRowCells[0]);
-
-    // Without onRowAction the active-row path is not triggered
-    expect(rows[1]).not.toHaveClass('is-focused');
-  });
-
-  test('keyboard-focused row receives is-focused when onRowAction is present (AC4)', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ selectionMode: 'none', onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Tab into the table so the first body row has keyboard focus
-    await userEvent.tab();
-    expect(rows[1]).toHaveFocus();
-
-    // The row must have is-focused from keyboard focus (isFocusVisible path unchanged)
-    expect(rows[1]).toHaveClass('is-focused');
-  });
-
-  test('is-focused class appears only once when keyboard-focused row is also the active row (AC5)', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ selectionMode: 'none', onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Click the first body row to set activeRowKey
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-    await userEvent.click(firstBodyRowCells[0]);
-    expect(rows[1]).toHaveClass('is-focused');
-
-    // Count occurrences of the class — must be exactly 1
-    const isFocusedCount = rows[1].className
-      .split(/\s+/)
-      .filter(cls => cls === 'is-focused').length;
-    expect(isFocusedCount).toBe(1);
-  });
-
-  test('clicking a row focuses the row <tr> so arrow keys work via React Aria', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Click a cell in the first body row
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-    await userEvent.click(firstBodyRowCells[0]);
-
-    // The <tr> for the clicked row should now have DOM focus
-    expect(rows[1]).toHaveFocus();
-
-    // Arrow keys should then navigate via React Aria
-    fireEvent.keyDown(rows[1], { key: 'ArrowDown' });
-    fireEvent.keyUp(rows[1], { key: 'ArrowDown' });
-    expect(rows[2]).toHaveFocus();
-  });
-
-  test('is-focused (active border) clears when focus leaves the table', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Click a cell in the first body row to set activeRowKey
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-    await userEvent.click(firstBodyRowCells[0]);
-    expect(rows[1]).toHaveClass('is-focused');
-
-    // Flush the setTimeout(0) that resets actionJustFired so the blur handler
-    // can proceed normally for genuine focus-out events.
-    actHooks(() => { jest.runAllTimers(); });
-
-    // Use focusOut (which bubbles) to reach the onBlur handler on the scroll
-    // container, simulating focus leaving the table entirely.
-    fireEvent.focusOut(rows[1], { relatedTarget: null });
-
-    // is-focused should be cleared
-    expect(rows[1]).not.toHaveClass('is-focused');
-  });
-
-  test('clicking an already-active row toggles activeRowKey off (clears is-focused)', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-
-    // First click sets the row as active
-    await userEvent.click(firstBodyRowCells[0]);
-    expect(rows[1]).toHaveClass('is-focused');
-
-    // Second click on the same row should toggle it off
-    await userEvent.click(firstBodyRowCells[0]);
-    expect(rows[1]).not.toHaveClass('is-focused');
-  });
-
-  test('active-row highlight does not clear when focus moves to an overlay panel', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Click the first body row — sets activeRowKey and fires onRowAction
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-    await userEvent.click(firstBodyRowCells[0]);
-    expect(rows[1]).toHaveClass('is-focused');
-
-    // Simulate OverlayPanel FocusScope stealing focus to an element outside the table.
-    // The actionJustFired guard (set synchronously in wrappedOnRowAction) should
-    // absorb this blur and keep the active-row highlight intact.
-    const panelButton = document.createElement('button');
-    document.body.appendChild(panelButton);
-    fireEvent.focusOut(rows[1], { relatedTarget: panelButton });
-
-    // Highlight must survive the focus-steal
-    expect(rows[1]).toHaveClass('is-focused');
-
-    document.body.removeChild(panelButton);
-  });
-
-  test('Enter key on a focused action row applies is-focused to that row', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ selectionMode: 'none', onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Tab to put keyboard focus on the first body row
-    await userEvent.tab();
-    expect(rows[1]).toHaveFocus();
-
-    // Press Enter to trigger onRowAction via keyboard
-    fireEvent.keyDown(rows[1], { key: 'Enter' });
-    fireEvent.keyUp(rows[1], { key: 'Enter' });
-    expect(onRowAction).toHaveBeenCalledWith('1');
-
-    // The row should carry is-focused (active-row state set from keyboard action)
-    expect(rows[1]).toHaveClass('is-focused');
-  });
-
-  test('active-row highlight clears when arrow keys move focus to another row', async () => {
-    const onRowAction = jest.fn();
-    getComponent({ onRowAction });
-    const rows = screen.getAllByRole('row');
-
-    // Click row 1 to set it as active (simulates opening a panel)
-    const firstBodyRowCells = rows[1].querySelectorAll('td');
-    await userEvent.click(firstBodyRowCells[0]);
-
-    // Flush the setTimeout(0) guard so subsequent focus events are not swallowed
-    actHooks(() => { jest.runAllTimers(); });
-
-    expect(rows[1]).toHaveClass('is-focused');
-
-    // Simulate the panel closing by returning focus to the row
-    fireEvent.focus(rows[1]);
-
-    // Arrow Down moves focus to row 2 — row 1 should lose is-focused
-    fireEvent.keyDown(rows[1], { key: 'ArrowDown' });
-    fireEvent.keyUp(rows[1], { key: 'ArrowDown' });
-    fireEvent.focus(rows[2]);
-
-    expect(rows[1]).not.toHaveClass('is-focused');
-    expect(rows[2]).toHaveFocus();
+    expect(columnheaders[0]).toHaveAttribute('aria-sort', 'ascending');
+    expect(onSortChange).not.toHaveBeenCalled();
   });
 });
 

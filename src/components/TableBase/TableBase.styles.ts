@@ -125,6 +125,9 @@ const head = {
   },
   '&.is-focused': {
     ...defaultFocus,
+    '& .resizer': {
+      backgroundColor: 'focus',
+    },
   },
 };
 
@@ -134,12 +137,36 @@ const resizer = {
   width: '2px',
   height: '100%',
   backgroundColor: 'neutral.10',
+  boxSizing: 'content-box',
+  paddingLeft: '0.25rem',
+  paddingRight: '0.25rem',
+  backgroundClip: 'content-box',
   position: 'absolute',
-  right: '0px',
+  right: '-0.25rem',
   top: '0',
   '&.is-focused': {
-    backgroundColor: 'focus',
+    ...defaultFocus,
   },
+  '&.is-resizing': {
+    backgroundColor: 'focus',
+    outline: '0px',
+  },
+};
+
+// Resets native <button> chrome so the sort trigger reads as plain header
+// text/icon, matching `head`'s typography, while remaining its own
+// focusable, activatable element (a sibling to the resizer, not a
+// descendant of it, or vice versa).
+const sortButton = {
+  ...text.label,
+  fontWeight: 500,
+  appearance: 'none',
+  background: 'none',
+  border: 'none',
+  padding: 0,
+  margin: 0,
+  cursor: 'pointer',
+  textAlign: 'left',
 };
 
 const tbody = {
@@ -195,4 +222,5 @@ export default {
   head,
   row,
   resizer,
+  sortButton,
 };

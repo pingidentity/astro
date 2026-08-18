@@ -22,4 +22,5 @@ export interface BoxProps extends StyleProps, DOMAttributes {
   isUnavailable?: boolean,
   hidden?: boolean,
   title?: string | BoxIconTitleProps,
+  type?: string,
 }
