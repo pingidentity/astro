@@ -418,7 +418,7 @@ function TableHeaderRow<T>(props: TableHeaderRowProps<T>) {
 function Resizer<T>(props: ResizerProps<T>) {
   const { column, layoutState, triggerRef, onResizeStart, onResize, onResizeEnd } = props;
   const ref = useRef<HTMLInputElement | null>(null);
-  const { resizerProps, inputProps } = useTableColumnResize(
+  const { resizerProps, inputProps, isResizing } = useTableColumnResize(
     {
       column,
       'aria-label': `${column.textValue} column width`,
@@ -436,8 +436,9 @@ function Resizer<T>(props: ResizerProps<T>) {
   // keyboard events fired on the input (Enter to start resize, Escape/Tab to
   // end it) bubble up to the element with the keyboard handlers.
 
-  const { classNames } = useStatusClasses('', {
+  const { classNames } = useStatusClasses('resizer', {
     isFocused: isFocusVisible,
+    isResizing,
   });
 
   return (
@@ -509,9 +510,18 @@ function TableColumnHeader<T>(props: TableColumnHeaderProps<T>) {
         position: 'relative',
         ...column.props.sx,
       }}
-      {...mergeProps(columnHeaderProps, focusProps, column.props)}
+      {...mergeProps(columnHeaderProps, column.props)}
     >
-      <Box isRow gap="sm" alignItems="center">
+      <Box
+        as="button"
+        type="button"
+        isRow
+        gap="sm"
+        alignItems="center"
+        variant="tableBase.sortButton"
+        aria-label={`Sort by ${column.textValue}`}
+        {...mergeProps(focusProps)}
+      >
         <Text
           as="h4"
           variant="headText"
