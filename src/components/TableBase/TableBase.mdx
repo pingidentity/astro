@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as TableBaseStories from './TableBase.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
 
 <Meta of={TableBaseStories} isTemplate />
 
@@ -42,23 +43,16 @@ This component requires these additional components:
 
 ### Accessibility
 
-#### Keyboard Navigation
-
-These keys provide additional functionality to the component.
-
-| Keys | Functions |
-| ---- | --------- |
-| Tab | Moves focus to the next focusable component. All focusable components in the table are included in the page tab sequence. |
-| Shift + Tab | Moves focus to the previous focusable component. |
-| Space or Enter | Focuses the component and triggers an action if one is associated with it. |
-| Arrow keys | Can be used to navigate between the components in the table. |
-| Home or Page Up | Shifts the focus to the first row. |
-| End or Page Down | Shifts the focus to the last visible row. |
-
-#### Screen Readers
-
-This component uses the following attributes to assist screen readers:
-- The **`aria-label`** attribute should be provided on the `TableBase` to give the table an accessible name. When a visible `TableCaption` is present, use **`aria-labelledby`** to associate the caption with the table instead.
-- The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure.
-- Each `Row` uses the **`aria-rowindex`** attribute to enumerate its position within the table.
-- Each `Column` and `Cell` uses the **`aria-colindex`** attribute to enumerate its position within its row.
+<AccessibilityTable keyboardRows={[
+  { key: 'Tab', description: 'Moves focus into the table (from outside) or out of the table (to the next focusable element after it). The table is a single stop in the page tab sequence — Tab does not move focus between rows or cells within the table.' },
+  { key: 'Shift + Tab', description: 'Moves focus out of the table to the previous focusable element (or into the table from after it).' },
+  { key: 'Space or Enter', description: 'Triggers an action on the focused component, such as toggling row selection or sorting a column.' },
+  { key: 'Arrow keys', description: 'Moves focus between rows and cells within the table.' },
+  { key: 'Home or Page Up', description: 'Shifts the focus to the first row.' },
+  { key: 'End or Page Down', description: 'Shifts the focus to the last visible row.' },
+]} screenReaderRows={[
+  'The **`aria-label`** attribute should be provided on the `TableBase` to give the table an accessible name. When a visible `TableCaption` is present, use **`aria-labelledby`** to associate the caption with the table instead.',
+  'The **`aria-rowcount`** and **`aria-columncount`** attributes are used to indicate the total number of rows and columns in the grid structure.',
+  'Each `Row` uses the **`aria-rowindex`** attribute to enumerate its position within the table.',
+  'Each `Column` and `Cell` uses the **`aria-colindex`** attribute to enumerate its position within its row.',
+]} />

@@ -1,3 +1,20 @@
+## 2.219.0-alpha.0 (2026-08-18)
+
+### 🚀 Features
+
+- **astro:** [UXE-6829] convert NumberField component to TypeScript
+- **astro:** add helpHint tooltip support to Badge
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8458] make TableBase sort and resize controls independently accessible
+
+### ❤️  Thank You
+
+- Eshant Monga
+- Jeremy Bissonnette
+- Kunal
+
 ## 2.218.0 (2026-08-11)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
