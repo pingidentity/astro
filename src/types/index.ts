@@ -41,6 +41,7 @@ export * from './messages';
 export * from './Modal';
 export * from './navBar';
 export * from './navSideBar';
+export * from './numberField';
 export * from './overlayPanel';
 export * from './passwordField';
 export * from './phoneNumberField';

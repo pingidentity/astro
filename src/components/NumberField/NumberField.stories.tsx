@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { NumberField } from '../../index';
+import { NumberFieldProps } from '../../types';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -79,11 +81,11 @@ export default {
     decrementAriaLabel: 'decrement-button',
     incrementAriaLabel: 'increment-button',
   },
-};
+} satisfies Meta<typeof NumberField>;
 
-export const Default = args => <NumberField {...args} />;
+export const Default: StoryFn<NumberFieldProps> = args => <NumberField {...args} />;
 
-export const Decimals = args => (
+export const Decimals: StoryFn<NumberFieldProps> = args => (
   <NumberField
     {...args}
     label="Adjust exposure"
@@ -96,13 +98,13 @@ export const Decimals = args => (
   />
 );
 
-export const ControlledState = () => {
+export const ControlledState: StoryFn<NumberFieldProps> = () => {
   const [value, setValue] = useState(12);
 
   return <NumberField label="Controlled State" value={value} onChange={setValue} />;
 };
 
-export const CurrencyValues = args => (
+export const CurrencyValues: StoryFn<NumberFieldProps> = args => (
   <NumberField
     {...args}
     label="Transaction amount"
@@ -116,7 +118,7 @@ export const CurrencyValues = args => (
   />
 );
 
-export const DisabledAndReadOnly = args => (
+export const DisabledAndReadOnly: StoryFn<NumberFieldProps> = args => (
   <>
     <NumberField {...args} label="Disabled" isDisabled value={25} />
     <NumberField
@@ -129,11 +131,11 @@ export const DisabledAndReadOnly = args => (
   </>
 );
 
-export const MinimumAndMaximumValues = args => (
+export const MinimumAndMaximumValues: StoryFn<NumberFieldProps> = args => (
   <NumberField {...args} label="Enter your age" minValue={0} />
 );
 
-export const StepValues = args => (
+export const StepValues: StoryFn<NumberFieldProps> = args => (
   <>
     <NumberField {...args} label="Step" step={10} />
     <NumberField
@@ -155,11 +157,11 @@ export const StepValues = args => (
   </>
 );
 
-export const WithHelperText = args => (
+export const WithHelperText: StoryFn<NumberFieldProps> = args => (
   <NumberField {...args} label="Helper Text" defaultValue={88} helperText="Useful Text" />
 );
 
-export const Units = args => (
+export const Units: StoryFn<NumberFieldProps> = args => (
   <NumberField
     {...args}
     label="Package width"

@@ -1,3 +1,5 @@
+import { ThemeUICSSObject } from 'theme-ui';
+
 import statuses from '../../utils/devUtils/constants/statuses';
 import { input } from '../Input/Input.styles';
 
@@ -16,11 +18,11 @@ const noDefaultArrows = {
   },
 };
 
-const arrowsWrapper = {
+const arrowsWrapper: ThemeUICSSObject = {
   display: 'flex',
   justifyContent: 'center',
   position: 'relative',
-  ...input.fieldControlWrapper,
+  ...(input.fieldControlWrapper as object),
   [`&.is-${statuses.ERROR}::after`]: {
     bg: 'critical.bright',
   },
@@ -32,7 +34,7 @@ const arrowsWrapper = {
   },
 };
 
-const arrows = {
+const arrows: ThemeUICSSObject = {
   position: 'absolute',
   right: '10px',
 };
