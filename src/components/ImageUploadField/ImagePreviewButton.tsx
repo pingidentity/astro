@@ -1,17 +1,26 @@
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import React, { forwardRef } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
 import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 
-import { useGetTheme } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef } from '../../hooks';
 import { Box, Button, Icon, Image } from '../../index';
+import { LoaderSize } from '../../types';
 import Loader from '../Loader';
 
-const ImagePreviewButton = forwardRef((props, ref) => {
+interface ImagePreviewButtonProps {
+  defaultPreviewImage?: string;
+  defaultPreviewNode?: React.ReactNode;
+  isImageType?: boolean;
+  isLoading?: boolean;
+  isMenuOpen?: boolean;
+  loaderSize?: string | number;
+  onPress?: () => void;
+  previewImage?: string;
+  previewWidth?: number;
+  widthHeightSx: { height: number | string; width: number | string };
+}
+
+const ImagePreviewButton = forwardRef<HTMLButtonElement, ImagePreviewButtonProps>((props, ref) => {
   const {
     defaultPreviewImage,
     defaultPreviewNode,
@@ -25,12 +34,10 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const buttonRef = useRef();
-  /* istanbul ignore next */
-  useImperativeHandle(ref, () => buttonRef.current);
+  const buttonRef = useLocalOrForwardRef<HTMLButtonElement>(ref);
 
   const { focusProps, isFocusVisible } = useFocusRing();
-  const { hoverProps, isHovered } = useHover(props);
+  const { hoverProps, isHovered } = useHover({});
   const { icons } = useGetTheme();
   const { ImageOutlineIcon, CameraOutlineIcon } = icons;
 
@@ -61,7 +68,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     >
       <Loader
         color={isFocusVisible || isMenuOpen ? 'active' : 'white'}
-        size={loaderSize}
+        size={loaderSize as LoaderSize}
         sx={{ zIndex: 1 }}
         data-testid="image-preview-button__loader"
       />
@@ -93,7 +100,7 @@ const ImagePreviewButton = forwardRef((props, ref) => {
   );
 
   return (
-    <Box tabindex={0} sx={widthHeightSx} {...hoverProps}>
+    <Box tabIndex={0} sx={widthHeightSx} {...hoverProps}>
       <Button
         ref={buttonRef}
         variant="variants.imageUpload.button"
@@ -109,21 +116,6 @@ const ImagePreviewButton = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-ImagePreviewButton.propTypes = {
-  defaultPreviewImage: PropTypes.string,
-  defaultPreviewNode: PropTypes.node,
-  isImageType: PropTypes.bool,
-  isLoading: PropTypes.bool,
-  isMenuOpen: PropTypes.bool,
-  loaderSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  previewImage: PropTypes.string,
-  previewWidth: PropTypes.number,
-  widthHeightSx: PropTypes.shape({
-    height: PropTypes.number,
-    width: PropTypes.number,
-  }),
-};
 
 ImagePreviewButton.displayName = 'ImagePreviewButton';
 export default ImagePreviewButton;
