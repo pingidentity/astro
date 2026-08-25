@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -6,6 +7,7 @@ import {
   ImageUploadField,
   OverlayProvider,
 } from '../../index';
+import { ImageUploadFieldProps } from '../../types';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -77,9 +79,9 @@ export default {
     previewHeight: 50,
     previewWidth: 50,
   },
-};
+} satisfies Meta<typeof ImageUploadField>;
 
-export const Default = args => {
+export const Default: StoryFn<ImageUploadFieldProps> = args => {
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.
@@ -89,7 +91,7 @@ export const Default = args => {
   );
 };
 
-export const CustomDefaultImage = {
+export const CustomDefaultImage: StoryObj<ImageUploadFieldProps> = {
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   parameters: {
@@ -110,7 +112,7 @@ export const CustomDefaultImage = {
   ),
 };
 
-export const CustomItemText = args => (
+export const CustomItemText: StoryFn<ImageUploadFieldProps> = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -125,7 +127,7 @@ export const CustomItemText = args => (
   </OverlayProvider>
 );
 
-export const ComponentAsDefaultImage = args => (
+export const ComponentAsDefaultImage: StoryFn<ImageUploadFieldProps> = args => (
   // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
   // readers when an overlay opens.
   <OverlayProvider>
@@ -141,7 +143,7 @@ export const ComponentAsDefaultImage = args => (
   </OverlayProvider>
 );
 
-export const ExistingImage = {
+export const ExistingImage: StoryObj<ImageUploadFieldProps> = {
   parameters: {
     chromatic: {
       disableSnapshot: true, // Disable snapshots for this specific story
@@ -151,7 +153,7 @@ export const ExistingImage = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [previewImage, setPreviewImage] = useState('https://picsum.photos/id/1025/200/300');
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isLoading, setIsLoading] = useState(false);
 
@@ -202,10 +204,10 @@ export const ExistingImage = {
   },
 };
 
-export const ErrorOnUpload = () => {
+export const ErrorOnUpload: StoryFn<ImageUploadFieldProps> = () => {
   const [shouldError, setShouldError] = useState(true);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [error, setError] = useState(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const errorRef = useRef(shouldError);
 
@@ -257,7 +259,7 @@ export const ErrorOnUpload = () => {
   );
 };
 
-export const CustomizePopoverMenu = args => {
+export const CustomizePopoverMenu: StoryFn<ImageUploadFieldProps> = args => {
   return (
     // Application must be wrapped in an OverlayProvider so that it can be hidden from screen
     // readers when an overlay opens.

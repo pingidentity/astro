@@ -26,6 +26,7 @@ export * from './iconBadge';
 export * from './iconButton';
 export * from './iconButtonToggle';
 export * from './iconWrapper';
+export * from './imageUploadField';
 export * from './input';
 export * from './item';
 export * from './label';
