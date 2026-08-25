@@ -1,19 +1,19 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import { useFocusManager } from 'react-aria';
 import { useDateSegment } from '@react-aria/datepicker';
-import PropTypes from 'prop-types';
 
 import { Box } from '../../index';
+import { DateSegmentProps } from '../../types';
 
 /**
  * Each editable segment of date.
  */
-const DateSegment = forwardRef((props, ref) => {
+const DateSegment = forwardRef<HTMLElement, DateSegmentProps>((props, ref) => {
   const { isLocalEnUS, segment, state, handlePaste, segments, segmentIndex } = props;
 
-  const segmentRef = useRef();
+  const segmentRef = useRef<HTMLElement>(null);
   // istanbul ignore next
-  useImperativeHandle(ref, () => segmentRef.current);
+  useImperativeHandle(ref, () => segmentRef.current as HTMLElement);
 
   const { text, isPlaceholder, type } = segment;
   const { segmentProps } = useDateSegment(segment, state, segmentRef);
@@ -55,6 +55,24 @@ const DateSegment = forwardRef((props, ref) => {
     [focusManager, segment, isPlaceholder],
   );
 
+  let displayText = text;
+
+  if (text === '/') {
+    displayText = '-';
+  } else {
+    let padLength = 0;
+
+    if (isLocalEnUS) {
+      if (type === 'year') {
+        padLength = 4;
+      } else {
+        padLength = 2;
+      }
+    }
+
+    displayText = text.padStart(padLength, '0');
+  }
+
   return (
     <Box
       {...segmentProps}
@@ -63,37 +81,9 @@ const DateSegment = forwardRef((props, ref) => {
       onKeyUp={handleKeyEvents}
       onPaste={handlePaste}
     >
-      {text === '/' ? '-' : text.padStart(isLocalEnUS && (type === 'year' ? 4 : 2), 0)}
+      {displayText}
     </Box>
   );
 });
-
-DateSegment.propTypes = {
-  /** slot for input that indicates each date segment */
-  segment: PropTypes.shape({
-    isPlaceholder: PropTypes.bool,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
-    value: PropTypes.number,
-    type: PropTypes.string,
-  }),
-  /** index value of each segment */
-  segmentIndex: PropTypes.number,
-  /** An array of segments */
-  segments: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string,
-    }),
-  ),
-  /** state returned by useDateField */
-  state: PropTypes.shape({}),
-  /**
-   * Handler that is called when a paste event is called.
-   * (e: PasteEvent) => void
-   */
-  handlePaste: PropTypes.func,
-  /** checks if the current locale is en-US */
-  isLocalEnUS: PropTypes.bool,
-};
 
 export default DateSegment;

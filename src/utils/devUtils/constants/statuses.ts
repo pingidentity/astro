@@ -3,7 +3,7 @@ const statuses = {
   ERROR: 'error',
   SUCCESS: 'success',
   WARNING: 'warning',
-};
+} as const;
 
 export const statusIcon = {
   DEFAULT: 'default',
@@ -14,6 +14,6 @@ export const statusIcon = {
   INFO: 'info',
   WARNING: 'warning',
   FATAL: 'fatal',
-};
+} as const;
 
 export default statuses;

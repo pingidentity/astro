@@ -14,10 +14,11 @@ import CalendarIcon from '@pingux/mdi-react/CalendarIcon';
 import { useDateField } from '@react-aria/datepicker';
 import { useLocale } from '@react-aria/i18n';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
+import type { DateSegment as DateSegmentType } from '@react-stately/datepicker';
 import { useDateFieldState } from '@react-stately/datepicker';
-import PropTypes from 'prop-types';
 
 import { useField, useStatusClasses } from '../../hooks';
+import { FieldControlInputProps, UseFieldProps } from '../../hooks/useField/useField';
 import {
   Box,
   FieldHelperText,
@@ -27,6 +28,7 @@ import {
   Label,
   Messages,
 } from '../../index';
+import { DateFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 
 import DateSegment from './DateSegment';
@@ -41,7 +43,7 @@ const ARIA_LABELS_CALENDAR_BUTTON_EXPANSION = {
   CLOSE: 'Close the Calendar Popover',
 };
 
-const DateField = forwardRef((props, ref) => {
+const DateField = forwardRef<HTMLInputElement, DateFieldProps>((props, ref) => {
   const {
     buttonProps,
     className,
@@ -50,27 +52,29 @@ const DateField = forwardRef((props, ref) => {
     groupRef,
     hasFormatHelpText,
     helperText,
-    isDisabled,
+    isDisabled = false,
     isOpen,
-    isReadOnly,
-    isRequired,
-    status,
+    isReadOnly = false,
+    isRequired = false,
+    isQuiet = false,
+    status = statuses.DEFAULT,
     datePickerState,
     minValue,
     maxValue,
     unavailableRanges,
     fieldControlProps,
+    hasAutoFocus = false,
     ...other
   } = props;
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const fieldRef = useRef();
-  const inputRef = useRef();
-  const labelRef = useRef();
+  const fieldRef = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
 
   // istanbul ignore next
-  useImperativeHandle(ref, () => inputRef.current);
+  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
   const { locale } = useLocale();
 
@@ -87,7 +91,7 @@ const DateField = forwardRef((props, ref) => {
   });
 
   const { segments } = state;
-  const { setValue } = datePickerState;
+  const { setValue } = datePickerState || ({} as NonNullable<typeof datePickerState>);
 
   const { fieldProps: dateFieldProps } = useDateField({ ...fieldProps }, state, fieldRef);
 
@@ -103,8 +107,8 @@ const DateField = forwardRef((props, ref) => {
     fieldLabelProps,
   } = useField({
     ...others,
-    value: state.value || '',
-  });
+    value: (state.value ? String(state.value) : '') as string,
+  } as UseFieldProps<DateFieldProps>);
 
   const toggleCalendarButtonAriaLabel = isOpen
     ? ARIA_LABELS_CALENDAR_BUTTON_EXPANSION.OPEN
@@ -133,7 +137,7 @@ const DateField = forwardRef((props, ref) => {
   /**
    * Reordering segments object for YYYY-MM-DD format
    */
-  const enUSSegments = [];
+  const enUSSegments: DateSegmentType[] = [];
 
   if (locale === 'en-US') {
     do {
@@ -175,26 +179,26 @@ const DateField = forwardRef((props, ref) => {
 
       let isNextAvailableDate;
       const handleSetDateValue = isDate => {
-        setValue(isDate);
+        if (setValue) setValue(isDate);
       };
 
       if (isLocalEnUS && !isDisabled && !isReadOnly) {
         try {
           if (copiedValue.match(/^\d{4}-\d{2}-\d{2}$/) !== null) {
             const DateProps = {
-              isMinValue: minValue && parseDate(minValue),
-              isMaxValue: maxValue && parseDate(maxValue),
+              isMinValue: minValue && parseDate(minValue as string),
+              isMaxValue: maxValue && parseDate(maxValue as string),
               isValidDate: parseDate(copiedValue),
             };
 
             // pastes the min/max/isNextAvailable date if the pasted value is
             // min date, beyond max date or is an unavailable date.
 
-            if (DateProps.isValidDate <= DateProps.isMinValue) {
+            if (DateProps.isMinValue && DateProps.isValidDate <= DateProps.isMinValue) {
               return handleSetDateValue(DateProps.isMinValue);
             }
 
-            if (DateProps.isValidDate >= DateProps.isMaxValue) {
+            if (DateProps.isMaxValue && DateProps.isValidDate >= DateProps.isMaxValue) {
               return handleSetDateValue(DateProps.isMaxValue);
             }
 
@@ -249,10 +253,9 @@ const DateField = forwardRef((props, ref) => {
           <VisuallyHidden>
             <Input
               ref={inputRef}
-              tabIndex={-1}
               type="date/text"
               data-testid="date-field"
-              {...fieldControlInputProps}
+              {...({ tabIndex: -1, ...fieldControlInputProps } as Omit<FieldControlInputProps, 'onChange'>)}
               aria-labelledby={labelRef?.current?.id}
             />
           </VisuallyHidden>
@@ -310,69 +313,5 @@ const DateField = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-DateField.propTypes = {
-  /** Prop to provide a custom default date (uncontrolled) */
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Prop to provide a default date (controlled) */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Props object that is spread directly into the calendar button element. */
-  buttonProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the root (top-level) element. */
-  containerProps: PropTypes.shape({}),
-  /** state management for a date picker component */
-  datePickerState: PropTypes.shape({
-    setValue: PropTypes.func,
-  }),
-  /** @ignore Props object that is spread directly into the segmented date field. */
-  fieldProps: PropTypes.shape({}),
-  /** @ignore Props passed to the box surrounding the input, button, and helper text. */
-  groupProps: PropTypes.shape({}),
-  /** @ignore Ref which is passed to the role="group" element. */
-  groupRef: PropTypes.shape({}),
-  /** Whether the input element is automatically focused when loaded onto the page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautofocus). */
-  hasAutoFocus: PropTypes.bool,
-  /** Text rendered below the input displaying the expected date format for the user's locale. */
-  hasFormatHelpText: PropTypes.bool,
-  /** Text rendered below the input. */
-  helperText: PropTypes.node,
-  /** Props object that is spread directly into the helphint element. */
-  helpHintProps: PropTypes.shape({}),
-  /** Whether the field is disabled. */
-  isDisabled: PropTypes.bool,
-  /** Whether the overlay is currently open. */
-  isOpen: PropTypes.bool,
-  /** Whether the input can be selected, but not changed by the user. */
-  isReadOnly: PropTypes.bool,
-  /** Whether the field is required. */
-  isRequired: PropTypes.bool,
-  /** Whether the field is quiet. */
-  isQuiet: PropTypes.bool,
-  /** Props object that is spread directly into the label element. */
-  labelProps: PropTypes.shape({}),
-  /** The maximum allowed date that a user may select. */
-  maxValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** The minimum allowed date that a user may select. */
-  minValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /** Handler that is called when the element's selection state changes. */
-  onChange: PropTypes.func,
-  /** Determines the input status indicator and helper text styling. */
-  status: PropTypes.oneOf(Object.values(statuses)),
-  /** The ranges of unavailable dates passed  */
-  unavailableRanges: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  /** Props object that is spread directly into the input wrapper element. */
-  wrapperProps: PropTypes.shape({}),
-  /** Props object that spread into date segment wrapper element. */
-  fieldControlProps: PropTypes.shape({}),
-};
-
-DateField.defaultProps = {
-  hasAutoFocus: false,
-  isDisabled: false,
-  isQuiet: false,
-  isReadOnly: false,
-  isRequired: false,
-  status: statuses.DEFAULT,
-};
 
 export default DateField;
