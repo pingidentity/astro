@@ -1,9 +1,11 @@
 import { defaultFocus, input } from '../Input/Input.styles';
 
 const inSlotContainer = {
-  ...input.fieldControlWrapper,
+  ...(input.fieldControlWrapper as object),
   position: 'relative',
-  width: 'fit-content',
+  // Override the parent fieldContainer's '> .is-default { width: 100% }' rule
+  // because it has higher specificity.
+  width: 'fit-content !important',
 };
 
 const inputField = {

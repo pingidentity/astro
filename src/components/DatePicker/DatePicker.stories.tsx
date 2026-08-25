@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { parseDate } from '@internationalized/date';
 import { chain } from '@react-aria/utils';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { actions } from 'storybook/actions';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, Button } from '../../index';
+import type { DatePickerProps, DateValue } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import DatePicker from './DatePicker';
 import DatePickerReadme from './DatePicker.mdx';
+
+type DatePickerStoryArgs = DatePickerProps & Pick<React.AriaAttributes, 'aria-label'>;
 
 export default {
   title: 'Form/DatePicker',
@@ -92,12 +96,12 @@ export default {
     isReadOnly: false,
     isRequired: false,
     label: 'Example Label',
-    onChange: () => {},
+    onChange: () => undefined,
     'aria-label': 'Date Picker',
   },
-};
+} satisfies Meta<typeof DatePicker>;
 
-export const Default = args => (
+export const Default: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker
     {...args}
   />
@@ -110,7 +114,7 @@ Default.parameters = {
   },
 };
 
-export const DefaultValue = args => (
+export const DefaultValue: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} defaultValue="2030-01-15" />
 );
 
@@ -121,12 +125,12 @@ DefaultValue.parameters = {
   },
 };
 
-export const Controlled = args => {
-  const [date, setDate] = useState(null);
+export const Controlled: StoryFn<DatePickerStoryArgs> = args => {
+  const [date, setDate] = useState<DateValue | null>(null);
 
   return (
     <>
-      <DatePicker {...args} value={date} onChange={chain(setDate, actions('onChange'))} />
+      <DatePicker {...args} value={date ?? undefined} onChange={chain(setDate, actions('onChange'))} />
       <Box isRow mt="sm">
         <Button mr="sm" onPress={() => setDate(parseDate('2022-08-10'))}>Change value</Button>
         <Button onPress={() => setDate(null)}>Clear</Button>
@@ -135,7 +139,7 @@ export const Controlled = args => {
   );
 };
 
-export const Disabled = args => (
+export const Disabled: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} isDisabled />
 );
 
@@ -146,7 +150,7 @@ Disabled.parameters = {
   },
 };
 
-export const ReadOnly = args => (
+export const ReadOnly: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} isReadOnly />
 );
 
@@ -157,8 +161,8 @@ ReadOnly.parameters = {
   },
 };
 
-export const UnavailableDates = args => {
-  const unavailableRanges = [
+export const UnavailableDates: StoryFn<DatePickerStoryArgs> = args => {
+  const unavailableRanges: [string, string][] = [
     ['2030-07-28', '2030-08-03'],
     ['2030-08-11', '2030-08-17'],
     ['2030-08-25', '2030-08-31'],
@@ -180,7 +184,7 @@ UnavailableDates.parameters = {
   },
 };
 
-export const MinimumDate = args => (
+export const MinimumDate: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} defaultValue="2030-01-15" minValue="2030-01-15" />
 );
 
@@ -191,7 +195,7 @@ MinimumDate.parameters = {
   },
 };
 
-export const MaximumDate = args => (
+export const MaximumDate: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} defaultValue="2030-01-15" maxValue="2030-01-15" />
 );
 
@@ -202,7 +206,7 @@ MaximumDate.parameters = {
   },
 };
 
-export const Required = args => (
+export const Required: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} isRequired />
 );
 
@@ -213,7 +217,7 @@ Required.parameters = {
   },
 };
 
-export const FormatHelperText = args => (
+export const FormatHelperText: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} hasFormatHelpText />
 );
 
@@ -224,7 +228,7 @@ FormatHelperText.parameters = {
   },
 };
 
-export const DefaultOpen = args => (
+export const DefaultOpen: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} isDefaultOpen defaultValue="2030-01-15" />
 );
 
@@ -235,7 +239,7 @@ DefaultOpen.parameters = {
   },
 };
 
-export const Error = args => (
+export const Error: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker {...args} status="error" helperText="Here is some helpful text..." />
 );
 
@@ -246,7 +250,7 @@ Error.parameters = {
   },
 };
 
-export const CustomWidth = args => (
+export const CustomWidth: StoryFn<DatePickerStoryArgs> = args => (
   <DatePicker
     {...args}
     fieldControlProps={{
