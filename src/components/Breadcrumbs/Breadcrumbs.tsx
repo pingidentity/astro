@@ -1,6 +1,7 @@
 import React, {
   forwardRef,
   useCallback,
+  useState,
 } from 'react';
 import { AriaBreadcrumbsProps, BreadcrumbsAria, mergeProps, useBreadcrumbs } from 'react-aria';
 
@@ -13,7 +14,7 @@ import BreadcrumbItem from './BreadcrumbItem';
 const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
   const { children, icon, iconProps, onAction, ...others } = props;
 
-  const { breadcrumbIconSize, breadcrumbIconMargin } = useGetTheme();
+  const { breadcrumbIconSize } = useGetTheme();
 
   // the following filters undefined values passed as a child
   const filteredChildren = Array.isArray(children)
@@ -24,6 +25,8 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
 
   const breadcrumbsRef = useLocalOrForwardRef<HTMLElement>(ref);
 
+  const [hoveredKey, setHoveredKey] = useState<React.Key | null>(null);
+
   usePropWarning(props, 'disabled', 'isDisabled');
 
   const createBreadcrumb = useCallback((child, idx?: number) => {
@@ -31,13 +34,22 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
       ? idx === (React.Children.toArray(children).length - 1)
       : true;
 
+    const handleTooltipHoverChange = (isHovering: boolean) => {
+      setHoveredKey(prevKey => {
+        if (isHovering) return child.key;
+        return prevKey === child.key ? null : prevKey;
+      });
+    };
+
     return (
       <React.Fragment key={`li-${child.key}`}>
         <BreadcrumbItem
           actionKey={child.key}
           data-id={child['data-id']}
           isCurrent={isCurrentItem}
+          isTooltipOpen={hoveredKey === child.key}
           onAction={onAction}
+          onTooltipHoverChange={handleTooltipHoverChange}
           {...child.props}
         >
           {child.props.children}
@@ -45,7 +57,6 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
         {icon && !isCurrentItem && (
           <Icon
             aria-hidden="true"
-            mx={breadcrumbIconMargin}
             size={breadcrumbIconSize}
             title={{ name: 'Breadcrumb Separator' }}
             {...iconProps}
@@ -55,10 +66,17 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
         )}
       </React.Fragment>
     );
-  }, [(Array.isArray(children) && children.length), filteredChildren, icon, iconProps, onAction]);
+  }, [
+    (Array.isArray(children) && children.length),
+    filteredChildren,
+    icon,
+    iconProps,
+    onAction,
+    hoveredKey,
+  ]);
 
   return (
-    <nav aria-label="Breadcrumb">
+    <Box as="nav" aria-label="Breadcrumb" sx={{ display: 'flex', minWidth: 0, width: '100%' }}>
       <Box
         as="ol"
         isRow
@@ -70,7 +88,7 @@ const Breadcrumbs = forwardRef<HTMLElement, breadCrumbsProps>((props, ref) => {
           ? filteredChildren.map(createBreadcrumb)
           : createBreadcrumb(children)}
       </Box>
-    </nav>
+    </Box>
   );
 });
 

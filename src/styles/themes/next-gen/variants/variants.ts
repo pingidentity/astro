@@ -373,6 +373,9 @@ const loader = {
 };
 
 const breadcrumb = {
+  containerOl: {
+    gap: 'md',
+  },
   link: {
     fontWeight: 2,
     fontSize: 'lg',

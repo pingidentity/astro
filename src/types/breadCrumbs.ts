@@ -32,4 +32,10 @@ export interface breadCrumbItemProps extends BoxProps, TestingAttributes {
   isDisabled?: boolean;
   onAction?: (key: unknown) => void;
   onPress?: () => void;
+  /** Whether this item's tooltip is the one currently open,
+   * coordinated by the parent Breadcrumbs. */
+  isTooltipOpen?: boolean;
+  /** Notifies the parent Breadcrumbs when this item's hover state changes,
+   * so only one tooltip is open at a time. */
+  onTooltipHoverChange?: (isHovering: boolean) => void;
 }

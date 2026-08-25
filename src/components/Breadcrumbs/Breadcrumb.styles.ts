@@ -18,17 +18,24 @@ const link = {
 const containerOl = {
   alignItems: 'center',
   minHeight: 42,
+  minWidth: 0,
+  maxWidth: 'fit-content',
   paddingInlineStart: 'unset',
+  gap: 'xs',
   'a.is-hovered.is-current ': {
     textDecoration: 'none',
   },
 };
 
 const containerLi = {
-  flex: '0 1000000 auto',
+  flex: '1 2 auto',
+  textWrap: 'nowrap',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
   minWidth: breadcrumbMinWidth,
   '&.is-current': {
-    flex: '0 1 auto',
+    flex: '2 1 auto',
+    overflow: 'visible',
   },
 };
 

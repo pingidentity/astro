@@ -5,6 +5,7 @@ const container = {
   borderBottomStyle: 'solid',
   justifyContent: 'center',
   minHeight: 60,
+  overflow: 'hidden',
 };
 
 const emptyData = {
@@ -34,6 +35,8 @@ const wrapper = {
 
 const rightOfData = {
   alignSelf: 'center',
+  flex: '1 1 0',
+  minWidth: 0,
   mr: 'md',
 };
 
