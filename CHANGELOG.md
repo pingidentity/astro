@@ -1,3 +1,21 @@
+## 2.220.0-alpha.0 (2026-08-25)
+
+### 🚀 Features
+
+- bump astro version
+- **astro:** [UXE-6826] convert DatePicker component and dependencies to TypeScript
+- **astro:** convert ImageUploadField component to TypeScript (UXE-6828)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8703] fix breadcrumb overflow behavior
+
+### ❤️  Thank You
+
+- Eshant Monga
+- Kunal
+- Ridhisha Dangol
+
 ## 2.219.0 (2026-08-18)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
