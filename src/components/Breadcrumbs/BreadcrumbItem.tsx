@@ -7,6 +7,7 @@ import React, {
   useMemo,
 } from 'react';
 import { AriaBreadcrumbItemProps, BreadcrumbItemAria, mergeProps, useBreadcrumbItem } from 'react-aria';
+import { Pressable, useHover } from '@react-aria/interactions';
 import { omit } from 'lodash/object';
 
 import { useLocalOrForwardRef, usePropWarning } from '../../hooks';
@@ -16,6 +17,8 @@ import {
   IconButton,
   Link,
   Text,
+  Tooltip,
+  TooltipTrigger,
 } from '../../index';
 import { breadCrumbItemProps, FocusableElement } from '../../types';
 
@@ -34,10 +37,13 @@ const BreadcrumbItem = forwardRef<HTMLElement, breadCrumbItemProps>((props, ref)
     onAction,
     actionKey,
     isCurrent,
+    isTooltipOpen,
+    onTooltipHoverChange,
     ...others
   } = props;
 
   const itemRef = useLocalOrForwardRef<HTMLElement>(ref);
+  const { hoverProps } = useHover({ onHoverChange: onTooltipHoverChange });
 
   usePropWarning(props, 'disabled', 'isDisabled');
 
@@ -95,15 +101,29 @@ const BreadcrumbItem = forwardRef<HTMLElement, breadCrumbItemProps>((props, ref)
     role: isCurrent ? 'text' : 'link',
   };
 
+  const isFragment = elementType === ELEMENT_TYPE.FRAGMENT;
+
   return (
     <Box
       as="li"
       className={isCurrent ? 'is-current' : ''}
       variant="variants.breadcrumb.containerLi"
+      {...(!isFragment && hoverProps)}
     >
-      <BreadcrumbItemElementType {...elementVariantProps}>
-        {children}
-      </BreadcrumbItemElementType>
+      {isFragment ? (
+        <BreadcrumbItemElementType {...elementVariantProps}>
+          {children}
+        </BreadcrumbItemElementType>
+      ) : (
+        <TooltipTrigger direction="top" isOpen={isTooltipOpen} targetRef={itemRef}>
+          <Pressable>
+            <BreadcrumbItemElementType {...elementVariantProps}>
+              {children}
+            </BreadcrumbItemElementType>
+          </Pressable>
+          <Tooltip>{children}</Tooltip>
+        </TooltipTrigger>
+      )}
     </Box>
   );
 });
