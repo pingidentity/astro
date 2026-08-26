@@ -317,7 +317,11 @@ const rockerButton = {
   thumbSwitch: {
     textTransform: 'none',
     backgroundColor: 'backgroundBase',
-    padding: 'md',
+    px: '20px',
+    py: '12px',
+    fontSize: 'md',
+    fontWeight: 0,
+    lineHeight: 'body',
     height: '50px',
     color: 'active',
     border: '1px solid',
