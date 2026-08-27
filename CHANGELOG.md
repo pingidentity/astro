@@ -1,3 +1,9 @@
+## 2.221.1 (2026-08-27)
+
+### 🧱 Updated Dependencies
+
+- Updated onyx-tokens to 0.41.3
+
 ## 2.220.0 (2026-08-25)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
