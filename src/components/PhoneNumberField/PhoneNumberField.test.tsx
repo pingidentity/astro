@@ -1,5 +1,12 @@
 import React from 'react';
-import { createEvent, fireEvent, render, screen } from '@testing-library/react';
+import {
+  createEvent,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { PhoneNumberFieldProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -42,6 +49,62 @@ test('default render has label, phone input, and country combobox', () => {
   expect(screen.getByText(testLabel)).toBeInstanceOf(HTMLLabelElement);
   expect(screen.getByRole('textbox')).toBeInTheDocument();
   expect(screen.getByRole('combobox')).toBeInTheDocument();
+});
+
+test('telephone input receives focus after tabbing from country picker', async () => {
+  getComponent();
+  const countryPicker = screen.getByRole('combobox', { name: 'Country Picker' });
+  const phoneInput = screen.getByRole('textbox');
+
+  await userEvent.tab();
+  expect(countryPicker).toHaveFocus();
+
+  await userEvent.tab();
+  expect(phoneInput).toHaveFocus();
+  expect(phoneInput).toHaveClass('is-focused');
+});
+
+test('narrow country picker stays accessible and locally constrained when opened', async () => {
+  const narrowAvailableWidth = 480;
+  const offsetWidthSpy = jest.spyOn(window.HTMLElement.prototype, 'offsetWidth', 'get')
+    .mockImplementation(function getOffsetWidth() {
+      return this.querySelector('input') ? narrowAvailableWidth : 0;
+    });
+  const clientWidthSpy = jest.spyOn(window.HTMLElement.prototype, 'clientWidth', 'get')
+    .mockReturnValue(narrowAvailableWidth);
+  const clientHeightSpy = jest.spyOn(window.HTMLElement.prototype, 'clientHeight', 'get')
+    .mockReturnValue(1000);
+
+  try {
+    getComponent({ sx: { width: `${narrowAvailableWidth}px` } });
+    const countryPicker = screen.getByRole('combobox', { name: 'Country Picker' });
+
+    await userEvent.click(countryPicker);
+
+    const listbox = await screen.findByRole('listbox');
+    const options = within(listbox).getAllByRole('option', { hidden: true });
+    const popover = listbox.closest('[role="presentation"]');
+    const scrollBox = listbox.parentElement?.parentElement;
+
+    expect(countryPicker).toHaveAttribute('aria-expanded', 'true');
+    expect(options.length).toBeGreaterThan(0);
+    expect(popover).toHaveStyle({ width: `${narrowAvailableWidth}px` });
+    expect(popover).not.toHaveStyle({ 'min-width': '280px' });
+    expect(scrollBox).toHaveStyle({ 'min-width': '0' });
+    expect(scrollBox).toHaveStyleRule('width', '100%', {
+      media: 'screen and (max-width: 500px)',
+    });
+    expect(scrollBox).toHaveStyleRule('max-width', '100%', {
+      media: 'screen and (max-width: 500px)',
+    });
+    expect(scrollBox).toHaveStyleRule('overflow-x', 'hidden', {
+      media: 'screen and (max-width: 500px)',
+    });
+  } finally {
+    offsetWidthSpy.mockRestore();
+    clientWidthSpy.mockRestore();
+    clientHeightSpy.mockRestore();
+  }
 });
 
 test('typing a non-numeric character does not update phone input value', () => {
