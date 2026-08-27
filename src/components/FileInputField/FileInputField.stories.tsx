@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { v4 as uuidv4 } from 'uuid';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, FileInputField } from '../../index';
+import { FileInputFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
@@ -71,15 +73,15 @@ export default {
     label: 'Field Label',
     'aria-label': 'File Input Field',
   },
-};
+} satisfies Meta<typeof FileInputField>;
 
 const fitContentWidthSx = { width: 'fit-content' };
 
-export const Default = args => (
+export const Default: StoryFn<FileInputFieldProps> = args => (
   <FileInputField sx={fitContentWidthSx} {...args} />
 );
 
-export const CustomButtonText = args => (
+export const CustomButtonText: StoryFn<FileInputFieldProps> = args => (
   <FileInputField
     {...args}
     defaultButtonText="Original Button Name"
@@ -88,31 +90,32 @@ export const CustomButtonText = args => (
   />
 );
 
-export const ControlledState = args => {
-  const [userFiles, setUserFiles] = useState([]);
-  const [error, setError] = useState();
+export const ControlledState: StoryFn<FileInputFieldProps> = args => {
+  const [userFiles, setUserFiles] = useState<FileInputFieldProps['fileList']>([]);
+  const [error, setError] = useState<string | undefined>();
 
-  const handleFileSelect = (event, files) => {
-    // this is approximate conversion just for an example
-    const uploadedFileSizeMb = files[0].size / 1e6;
+  const handleFileSelect = (
+    event: React.ChangeEvent<HTMLInputElement> | React.DragEvent,
+    files: FileList | File[],
+  ) => {
+    const uploadedFileSizeMb = (files[0] as File).size / 1e6;
     if (uploadedFileSizeMb > 2) {
       setError('Only files under 2 MB can be uploaded.');
     } else {
       setUserFiles([
         {
           id: uuidv4(),
-          name: files[0].name,
+          name: (files[0] as File).name,
           downloadLink: 'link for testing purposes',
         },
       ]);
-      setError(null);
+      setError(undefined);
     }
   };
 
-  // you would want to handle this differently in case you have multiple files
   const handleFileRemove = () => {
     setUserFiles([]);
-    setError(null);
+    setError(undefined);
   };
 
   return (
@@ -123,14 +126,14 @@ export const ControlledState = args => {
       onRemove={handleFileRemove}
       fileList={userFiles}
       sx={fitContentWidthSx}
-      status={error && statuses.ERROR}
+      status={error ? statuses.ERROR : undefined}
       helperText={error}
       isMultiple
     />
   );
 };
 
-export const DefaultFileListUncontrolled = () => (
+export const DefaultFileListUncontrolled: StoryFn<FileInputFieldProps> = () => (
   <FileInputField
     defaultFileList={[
       {
@@ -158,7 +161,7 @@ export const DefaultFileListUncontrolled = () => (
   />
 );
 
-export const ErrorStatusSingleFile = args => (
+export const ErrorStatusSingleFile: StoryFn<FileInputFieldProps> = args => (
   <FileInputField
     {...args}
     defaultFileList={[
@@ -177,7 +180,7 @@ export const ErrorStatusSingleFile = args => (
   />
 );
 
-export const ErrorWithMultipleFiles = args => (
+export const ErrorWithMultipleFiles: StoryFn<FileInputFieldProps> = args => (
   <FileInputField
     {...args}
     defaultFileList={[
@@ -202,7 +205,7 @@ export const ErrorWithMultipleFiles = args => (
   />
 );
 
-export const WithCustomWidth = args => {
+export const WithCustomWidth: StoryFn<FileInputFieldProps> = args => {
   const textSx = {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
@@ -230,16 +233,18 @@ export const WithCustomWidth = args => {
   );
 };
 
-export const WithFileTypePdfAndImage = () => {
+export const WithFileTypePdfAndImage: StoryFn<FileInputFieldProps> = () => {
   const fileTypes = ['application/pdf', 'image/*'];
-  const [error, setError] = useState();
+  const [error, setError] = useState<string | undefined>();
 
-  const handleFileSelect = (event, files) => {
-    const uploadedFileType = files[0].type;
-
+  const handleFileSelect = (
+    _event: React.ChangeEvent<HTMLInputElement> | React.DragEvent,
+    files: FileList | File[],
+  ) => {
+    const uploadedFileType = (files[0] as File).type;
     const isValidFileType = fileTypes.some(fileType => uploadedFileType.search(fileType) !== -1);
     if (isValidFileType) {
-      setError(null);
+      setError(undefined);
     } else {
       setError('Not a valid File Type. Only PDF and Image files are allowed.');
     }
@@ -251,14 +256,14 @@ export const WithFileTypePdfAndImage = () => {
       sx={fitContentWidthSx}
       fileTypes={fileTypes}
       onFileSelect={handleFileSelect}
-      onRemove={() => setError(null)}
-      status={error && statuses.ERROR}
+      onRemove={() => setError(undefined)}
+      status={error ? statuses.ERROR : undefined}
       helperText={error}
     />
   );
 };
 
-export const WithCustomFileTypes = () => (
+export const WithCustomFileTypes: StoryFn<FileInputFieldProps> = () => (
   <FileInputField
     fileTypes={['.p8']}
     sx={fitContentWidthSx}

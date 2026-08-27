@@ -61,6 +61,10 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
     setUserFiles(userFiles.filter(_file => _file.id !== id));
   };
 
+  const handleFileRemoveFromField = (_e: React.SyntheticEvent, id: string) => {
+    handleFileRemove(id);
+  };
+
   const onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (onSubmit && !isLoading) {
       onSubmit(e as unknown as KeyboardEvent, value);
@@ -137,7 +141,7 @@ const PromptInput = forwardRef<HTMLInputElement, PromptInputProps>((props, ref) 
           <Box mr="1.5rem" mb="auto" ml=".75rem">
             <FileInputField
               onFileSelect={handleFileSelect}
-              onRemove={handleFileRemove}
+              onRemove={handleFileRemoveFromField}
               fileList={[]}
               isIconButton
               buttonProps={{ sx: { size: '24px', padding: '0px' } }}

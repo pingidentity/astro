@@ -54,7 +54,7 @@ afterAll(() => {
   global.URL.createObjectURL = originalValue;
 });
 
-const getComponent = props => render(<FileInputField {...defaultProps} {...props} />);
+const getComponent = (props = {}) => render(<FileInputField {...defaultProps} {...props} />);
 
 // Needs to be added to each components test file
 universalComponentTests({
@@ -209,7 +209,8 @@ test('should render icon button if isIconButton prop is true', () => {
 
 test('File upload should allow only image', async () => {
   const setStateMock = jest.fn();
-  jest.spyOn(React, 'useState').mockImplementation(initialState => [initialState, setStateMock]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (jest.spyOn(React, 'useState') as any).mockImplementation((initialState: any) => [initialState, setStateMock]);
 
   getComponent({ fileTypes: ['image/*'] });
 
@@ -232,7 +233,7 @@ describe('filterFileTypes', () => {
 
   it('filters file types', () => {
     const results = filterFileTypes({
-      arrayWithNewFiles: [{ name: 'shark', type: 'text/plain' }, { name: 'shark', type: 'image/png' }],
+      arrayWithNewFiles: [{ name: 'shark', type: 'text/plain' }, { name: 'shark', type: 'image/png' }] as File[],
       fileTypes: ['text/plain'],
     });
 
@@ -241,7 +242,7 @@ describe('filterFileTypes', () => {
 
   it('filters file image types', () => {
     const results = filterFileTypes({
-      arrayWithNewFiles: [{ name: 'shark', type: 'text/plain' }, { name: 'shark', type: 'image/png' }],
+      arrayWithNewFiles: [{ name: 'shark', type: 'text/plain' }, { name: 'shark', type: 'image/png' }] as File[],
       fileTypes: ['image'],
     });
 
@@ -254,7 +255,7 @@ describe('filterFileTypes', () => {
         { name: 'shark', type: '.p8' },
         { name: 'shark', type: '.xml' },
         { name: 'shark', type: '.xml' },
-      ],
+      ] as File[],
       fileTypes: ['.p8'],
     });
 

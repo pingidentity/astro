@@ -19,6 +19,7 @@ export * from './datePicker';
 export * from './environmentBreadcrumb';
 export * from './expandableText';
 export * from './fieldHelperText';
+export * from './fileInputField';
 export * from './footer';
 export * from './grid';
 export * from './helpHint';
