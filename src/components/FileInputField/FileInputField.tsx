@@ -8,19 +8,18 @@ import React, {
   useState,
 } from 'react';
 import { mergeProps, useVisuallyHidden, VisuallyHidden } from 'react-aria';
-import { useDropzone } from 'react-dropzone';
+import { DropEvent, useDropzone } from 'react-dropzone';
 import pluralize from 'pluralize';
-import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Box, FieldHelperText, Input, Label, Loader } from '../..';
 import useField from '../../hooks/useField';
+import { UseFieldProps } from '../../hooks/useField/useField';
 import useStatusClasses from '../../hooks/useStatusClasses';
+import { FileInputFieldProps } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import { statusDefaultProp, statusPropTypes } from '../../utils/docUtils/statusProp';
+import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 
 import FileItem from './FileItem';
 import FileSelect from './FileSelect';
@@ -31,23 +30,30 @@ const displayName = 'FileInputField';
 const FILE_CHANGE_STATUS = {
   ADDED: 'added',
   DELETED: 'deleted',
-};
+} as const;
 
-const getFileExtension = file => {
+type FileChangeStatusState = {
+  fileCount: number;
+  status: string;
+} | null;
+
+const getFileExtension = (file: File) => {
   const extension = file.name.split('.')[file.name.split('.').length - 1];
   return `.${extension}`;
 };
 
-export const filterFileTypes = ({ arrayWithNewFiles, fileTypes }) => arrayWithNewFiles
+export const filterFileTypes = (
+  { arrayWithNewFiles, fileTypes }: { arrayWithNewFiles: File[]; fileTypes?: string[] },
+) => arrayWithNewFiles
   .filter(newFile => (!fileTypes?.length
       || fileTypes.includes(getFileExtension(newFile))
       || fileTypes.some(fileType => newFile.type.search(fileType) !== -1)
   ));
 
 
-const FileInputField = forwardRef((props, ref) => {
+const FileInputField = forwardRef<HTMLInputElement, FileInputFieldProps>((props, ref) => {
   const { buttonProps,
-    defaultButtonText,
+    defaultButtonText = 'Select a file',
     defaultFileList,
     fileList: uploadedFilesImperative,
     helperText,
@@ -60,17 +66,17 @@ const FileInputField = forwardRef((props, ref) => {
     label,
     onFileSelect,
     onRemove,
-    status,
+    status = 'default',
     textProps,
     fileTypes,
     ...others } = props;
   const [uploadedFiles, setUploadedFiles] = useState(defaultFileList || []);
-  const [fileChangeStatus, setFileChangeStatus] = useState(null);
+  const [fileChangeStatus, setFileChangeStatus] = useState<FileChangeStatusState>(null);
   const [fileChangeMessage, setFileChangeMessage] = useState('');
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => inputRef.current);
+  useImperativeHandle(ref, () => inputRef.current!);
 
   const { ariaProps, nonAriaProps } = getAriaAttributeProps(others);
   const {
@@ -83,14 +89,15 @@ const FileInputField = forwardRef((props, ref) => {
     isDisabled,
     label,
     ...props,
-  });
+  } as UseFieldProps<unknown>);
 
-  const helperTextId = uuidv4();
+  const helperTextId = useMemo(() => uuidv4(), []);
 
   const { visuallyHiddenProps } = useVisuallyHidden();
 
   const handleFileSelect = useCallback(() => {
-    inputRef.current.value = null;
+    if (!inputRef.current) return;
+    inputRef.current.value = '';
     inputRef.current.click();
   }, [inputRef]);
 
@@ -99,7 +106,7 @@ const FileInputField = forwardRef((props, ref) => {
     // update/delete file status update on Safari
 
     if (status === statuses.ERROR) {
-      setFileChangeMessage(helperText);
+      setFileChangeMessage(typeof helperText === 'string' ? helperText : '');
     } else if (fileChangeStatus) {
       setFileChangeMessage(
         `${pluralize('file', fileChangeStatus.fileCount, true)} ${fileChangeStatus.status} successfully`,
@@ -109,7 +116,10 @@ const FileInputField = forwardRef((props, ref) => {
     setFileChangeStatus(null);
   }, [fileChangeStatus, helperText, status]);
 
-  const handleFileUpload = (event, newFiles) => {
+  const handleFileUpload = (
+    event: React.ChangeEvent<HTMLInputElement> | React.DragEvent,
+    newFiles: FileList | File[],
+  ) => {
     if (status === statuses.ERROR) {
       setFileChangeMessage('');
     }
@@ -118,7 +128,7 @@ const FileInputField = forwardRef((props, ref) => {
       onFileSelect(event, newFiles);
     }
 
-    let arrayWithNewFiles = Array.from(newFiles);
+    let arrayWithNewFiles = Array.from(newFiles) as File[];
 
     if (!isMultiple) {
       arrayWithNewFiles = arrayWithNewFiles.slice(0, 1);
@@ -144,8 +154,8 @@ const FileInputField = forwardRef((props, ref) => {
     setFileChangeStatus({ fileCount: filesWithIdAndLink.length, status: FILE_CHANGE_STATUS.ADDED });
   };
 
-  const onDrop = (acceptedFiles, fileRejections, event) => {
-    handleFileUpload(event, acceptedFiles);
+  const onDrop = (acceptedFiles: File[], fileRejections: unknown, event: DropEvent) => {
+    handleFileUpload(event as React.DragEvent, acceptedFiles);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -154,12 +164,18 @@ const FileInputField = forwardRef((props, ref) => {
     disabled: isDisabled || isLoading,
   });
 
-  const handleOnChange = event => {
-    handleFileUpload(event, event.target.files);
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleFileUpload(event, event.target.files!);
   };
 
+  const mergedInputProps: React.InputHTMLAttributes<HTMLInputElement> = mergeProps(
+    visuallyHiddenProps,
+    fieldControlInputProps,
+    getInputProps(),
+  );
+
   const filesListNode = useMemo(() => {
-    const handleFileDelete = (e, fileId) => {
+    const handleFileDelete = (e: React.SyntheticEvent, fileId: string) => {
       setFileChangeMessage('');
 
       if (onRemove) {
@@ -217,7 +233,7 @@ const FileInputField = forwardRef((props, ref) => {
   }, [uploadedFiles, uploadedFilesImperative, isMultiple]);
 
   return (
-    <Box fieldContainerProps={fieldContainerProps}>
+    <Box {...{ fieldContainerProps } as object}>
       {label && <Label {...fieldLabelProps} />}
       <Box
         variant="forms.fileInputField.wrapper"
@@ -229,11 +245,7 @@ const FileInputField = forwardRef((props, ref) => {
         role="none"
       >
         <Input
-          {...mergeProps(
-            visuallyHiddenProps,
-            fieldControlInputProps,
-            getInputProps(),
-          )}
+          {...mergedInputProps}
           multiple={isMultiple}
           onChange={handleOnChange}
           ref={inputRef}
@@ -246,10 +258,9 @@ const FileInputField = forwardRef((props, ref) => {
             ? (
               <FileSelectIcon
                 handleFileSelect={handleFileSelect}
-                iconContainerProps={iconContainerProps}
-                buttonProps={buttonProps}
-                iconProps={iconProps}
-                isDisabled={isDisabled || isLoading}
+                iconContainerProps={iconContainerProps ?? {}}
+                buttonProps={{ ...buttonProps, isDisabled: isDisabled || isLoading }}
+                iconProps={iconProps ?? {}}
                 {...ariaProps}
               />
             )
@@ -272,7 +283,7 @@ const FileInputField = forwardRef((props, ref) => {
         )}
       </Box>
       {helperText && (
-      <Box aria-label={helperText} role="marquee">
+      <Box aria-label={typeof helperText === 'string' ? helperText : undefined} role="marquee">
         <FieldHelperText status={status} id={helperTextId}>
           {helperText}
         </FieldHelperText>
@@ -292,79 +303,5 @@ const FileInputField = forwardRef((props, ref) => {
 );
 
 FileInputField.displayName = displayName;
-
-FileInputField.propTypes = {
-  /** The rendered label for the field. */
-  label: PropTypes.node,
-  /** Text rendered below the input. */
-  helperText: PropTypes.node,
-  /** Default button text that will be changed on the file name once file is uploaded */
-  defaultButtonText: PropTypes.string,
-  /** Defines whether input can accept multiple files or not */
-  isMultiple: PropTypes.bool,
-  /** Determines whether the loading indicator is shown. */
-  isLoading: PropTypes.bool,
-  /** Whether the field is disabled. */
-  isDisabled: PropTypes.bool,
-  /** Array of objects for uploaded files.
-   * Objects should have the following structure:
-   *
-   * {
-   *
-   *  fileObj: File object (optional),
-   *
-   *  id: file id (required - will be returned on delete),
-   *
-   *  name: file name that will be displayed (required - will be displayed),
-   *
-   *  downloadLink: link for the file download (optional),
-   *
-   *  status: file status (if error - icon of the
-   *  component will be red icon and warning sign)(optional),
-   *
-   * }
-   * */
-  fileList: PropTypes.arrayOf(
-    PropTypes.shape({
-      fileObj: PropTypes.shape({}),
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      downloadLink: PropTypes.string,
-      ...statusPropTypes,
-    }),
-  ),
-  /** Default array of objects for uploaded files. */
-  defaultFileList: PropTypes.arrayOf(
-    PropTypes.shape({
-      fileObj: PropTypes.shape({}),
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      downloadLink: PropTypes.string,
-      ...statusPropTypes,
-    }),
-  ),
-  /** The handler that is called when the input files is uploaded.
-   *
-   * `(event, files) => void`
-   * */
-  onFileSelect: PropTypes.func,
-  /** The handler that is called when an uploaded file got removed.
-   *
-   * `(fileId) => void`
-   * */
-  onRemove: PropTypes.func,
-  /** These props will be spread to the field text component. */
-  textProps: PropTypes.shape({}),
-  /** Props object that is spread directly into the helphint element. */
-  helpHintProps: PropTypes.shape({}),
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-  ...inputFieldAttributesBasePropTypes,
-};
-
-FileInputField.defaultProps = {
-  defaultButtonText: 'Select a file',
-  ...statusDefaultProp,
-};
 
 export default FileInputField;

@@ -3,13 +3,14 @@ import { useVisuallyHidden } from 'react-aria';
 import ErrorIcon from '@pingux/mdi-react/AlertCircleIcon';
 import DeleteIcon from '@pingux/mdi-react/DeleteIcon';
 import InsertDriveFileIcon from '@pingux/mdi-react/InsertDriveFileIcon';
-import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, IconButton, Text } from '../../index';
+import { FileItemProps, IconProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
-const FileItem = props => {
+type IconPropsWithDisabled = Partial<IconProps> & { isDisabled?: boolean };
+
+const FileItem: React.FC<FileItemProps> = props => {
   const {
     downloadLink,
     handleFileDelete,
@@ -24,7 +25,7 @@ const FileItem = props => {
     handleFileDelete,
   ]);
   const { visuallyHiddenProps } = useVisuallyHidden();
-  const downloadRef = useRef();
+  const downloadRef = useRef<HTMLAnchorElement>(null);
 
   const getFileIconProps = useCallback(() => {
     switch (status) {
@@ -45,7 +46,9 @@ const FileItem = props => {
   }, [status]);
 
   const handleDownloadPress = () => {
-    downloadRef.current.click();
+    if (downloadRef.current) {
+      downloadRef.current.click();
+    }
   };
 
   return (
@@ -53,8 +56,7 @@ const FileItem = props => {
       <Icon
         size={15}
         data-testid="file-uploaded__file-icon"
-        {...getFileIconProps()}
-        isDisabled={isDisabled}
+        {...({ ...getFileIconProps(), isDisabled } as IconPropsWithDisabled)}
       />
       <Button
         variant="forms.fileInputField.button"
@@ -77,9 +79,10 @@ const FileItem = props => {
         onPress={handleDeleteButtonPress}
         sx={{ alignSelf: 'auto' }}
       >
-        <Icon icon={DeleteIcon} size={15} isDisabled={isDisabled} title={{ name: 'Delete Icon' }} />
+        <Icon
+          {...({ icon: DeleteIcon, size: 15, isDisabled, title: { name: 'Delete Icon' } } as IconPropsWithDisabled)}
+        />
       </IconButton>
-      {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
       <a
         href={downloadLink}
         {...visuallyHiddenProps}
@@ -95,13 +98,3 @@ const FileItem = props => {
 };
 
 export default FileItem;
-
-FileItem.propTypes = {
-  downloadLink: PropTypes.string,
-  handleFileDelete: PropTypes.func,
-  id: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  name: PropTypes.string,
-  textProps: PropTypes.shape({}),
-  ...statusPropTypes,
-};

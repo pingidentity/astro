@@ -196,6 +196,15 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
       }),
   };
 
+  const countryPickerScrollBoxSx = {
+    minWidth: 0,
+    '@media screen and (max-width: 500px)': {
+      width: '100%',
+      maxWidth: '100%',
+      overflowX: 'hidden',
+    },
+  };
+
   const countryLabel = (c: { name: string; native: string; phone: string }) => `${c.name}${c.name !== c.native ? ` (${c.native})` : ''} +${c.phone.split(',')[0]}`;
 
   return (
@@ -216,7 +225,7 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
           wrapperProps={{ sx: comboBoxWrapperSx }}
           controlProps={{ 'aria-label': 'Country Picker', onPaste: handleComboBoxPaste }}
           containerProps={{ sx: { '> label': { mb: 0 } } }}
-          scrollBoxProps={{ maxHeight: '215px', sx: { minWidth: '280px' } }}
+          scrollBoxProps={{ maxHeight: '215px', sx: countryPickerScrollBoxSx }}
           items={fieldState.items}
           inputValue={currentCountryInputValue}
           selectedKey={currentSelectedKey}
@@ -231,7 +240,16 @@ const PhoneNumberField = forwardRef<HTMLInputElement, PhoneNumberFieldProps>((pr
             </Item>
           )}
         </ComboBoxField>
-        <Box sx={{ ml: '110px', width: 'calc(100% - 110px)', visibility: fieldState.isOpen ? 'hidden' : undefined, '& input': { borderTopLeftRadius: '0 !important', borderBottomLeftRadius: '0 !important', borderLeft: 0 } }}>
+        <Box
+          className={fieldControlInputProps.className?.includes('is-focused') ? 'phone-number-field__input-focused' : undefined}
+          sx={{
+            ml: '109px',
+            width: 'calc(100% - 109px)',
+            visibility: fieldState.isOpen ? 'hidden' : undefined,
+            '&.phone-number-field__input-focused': { ml: '111px' },
+            '& input': { borderTopLeftRadius: '0 !important', borderBottomLeftRadius: '0 !important' },
+          }}
+        >
           <Input
             ref={inputRef}
             {...fieldControlInputProps}
