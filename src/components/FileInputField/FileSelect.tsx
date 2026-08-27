@@ -1,10 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Button, Text } from '../..';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
+import { FileSelectProps } from '../../types';
+import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 
-const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...others }) => {
+const FileSelect: React.FC<FileSelectProps> = ({
+  buttonText,
+  handleFileSelect,
+  isDisabled,
+  textProps,
+  ...others
+}) => {
   const { ariaProps } = getAriaAttributeProps(others);
 
   return (
@@ -26,11 +32,3 @@ const FileSelect = ({ buttonText, handleFileSelect, isDisabled, textProps, ...ot
 };
 
 export default FileSelect;
-
-FileSelect.propTypes = {
-  buttonText: PropTypes.string,
-  handleFileSelect: PropTypes.func,
-  isDisabled: PropTypes.bool,
-  textProps: PropTypes.shape({}),
-  ...ariaAttributesBasePropTypes,
-};
