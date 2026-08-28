@@ -1,3 +1,13 @@
+## 2.221.3-alpha.0 (2026-08-28)
+
+### 🩹 Fixes
+
+- update stepper file spelling
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.221.2-alpha.0 (2026-08-28)
 
 ### 🩹 Fixes
