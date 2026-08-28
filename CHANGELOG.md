@@ -1,3 +1,13 @@
+## 2.221.2-alpha.0 (2026-08-28)
+
+### 🩹 Fixes
+
+- [UXE-9014] Update alpha and stable release processes to handle dependency update
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.221.1 (2026-08-27)
 
 ### 🧱 Updated Dependencies
