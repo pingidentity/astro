@@ -1,6 +1,11 @@
 // This test exercises the repository-root release script from the Astro package.
+import * as fs from 'node:fs';
+import * as os from 'node:os';
+import * as path from 'node:path';
+
 /* eslint-disable @nx/enforce-module-boundaries, import/no-relative-packages */
 import {
+  assertDistManifestVersions,
   calculatePlannedVersions,
   type PackageManifest,
   type ProjectVersionData,
@@ -285,6 +290,65 @@ describe('updateDependencyRanges', () => {
     expect(result.manifest).toEqual(expectedManifest);
     expect(result.changes).toEqual(expectedChanges);
     expect(result.manifest).not.toHaveProperty(omittedField);
+  });
+});
+
+describe('assertDistManifestVersions', () => {
+  // node:fs is mocked module-wide for the release script assertions, so the
+  // setup helpers use the real filesystem functions directly.
+  const realFs = jest.requireActual('node:fs') as typeof fs;
+  const distPackageJson = (projectName: string, version: string | undefined) => {
+    const distDir = path.join(process.cwd(), 'dist', projectName);
+    const manifestPath = path.join(distDir, 'package.json');
+    realFs.mkdirSync(distDir, { recursive: true });
+    realFs.writeFileSync(
+      manifestPath,
+      JSON.stringify({ name: `@pingux/${projectName}`, version }),
+      'utf8',
+    );
+    return manifestPath;
+  };
+
+  let tempDirs: string[] = [];
+
+  const useTempCwd = () => {
+    const tempDir = realFs.mkdtempSync(path.join(os.tmpdir(), 'stable-release-dist-'));
+    tempDirs.push(tempDir);
+    jest.spyOn(process, 'cwd').mockReturnValue(tempDir);
+    return tempDir;
+  };
+
+  afterEach(() => {
+    tempDirs.forEach(tempDir => realFs.rmSync(tempDir, { recursive: true, force: true }));
+    tempDirs = [];
+    jest.restoreAllMocks();
+  });
+
+  test('passes when every dist manifest matches the expected version', () => {
+    useTempCwd();
+    distPackageJson('astro', '2.221.2');
+    distPackageJson('onyx-tokens', '0.41.4');
+
+    expect(() => assertDistManifestVersions({
+      astro: '2.221.2',
+      'onyx-tokens': '0.41.4',
+    }),
+    ).not.toThrow();
+  });
+
+  test('throws when a dist manifest is missing, stale, or unversioned', () => {
+    useTempCwd();
+    distPackageJson('astro', '2.221.3-alpha.0');
+    distPackageJson('onyx-tokens', undefined);
+
+    expect(() => assertDistManifestVersions({ astro: '2.221.2' }),
+    ).toThrow('dist manifest is 2.221.3-alpha.0 but the release version is 2.221.2');
+
+    expect(() => assertDistManifestVersions({ 'onyx-tokens': '0.41.4' }),
+    ).toThrow('dist manifest is missing a version but the release version is 0.41.4');
+
+    expect(() => assertDistManifestVersions({ 'onyx-wrapper': '0.41.3' }),
+    ).toThrow(/missing .*dist\/onyx-wrapper\/package\.json/);
   });
 });
 
