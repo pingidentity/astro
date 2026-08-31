@@ -1,3 +1,14 @@
+## 2.221.6-alpha.0 (2026-08-31)
+
+### 🩹 Fixes
+
+- npm errror
+- stable release issue
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.221.5-alpha.0 (2026-08-30)
 
 ### 🩹 Fixes

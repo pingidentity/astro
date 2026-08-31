@@ -1,6 +1,6 @@
 {
   "name": "@pingux/astro",
-  "version": "2.221.5-alpha.0",
+  "version": "2.221.6-alpha.0",
   "description": "React component library for Ping Identity's design system",
   "repository": {
     "type": "git",
