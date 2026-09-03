@@ -10,6 +10,7 @@ export const select = {
   borderColor: '#69788B !important',
   color: 'text.primary',
   height: astroTokensDark.size.input.height,
+  pr: astroTokensDark.spacing.input['padding-x'],
   '&.is-disabled': {
     opacity: 1,
     borderColor: 'border.input',
