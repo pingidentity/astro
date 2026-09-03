@@ -99,8 +99,7 @@ const PanelHeader = forwardRef(({
                 <Text variant="panelHeaderSubtext">{subtext}</Text>
               </CopyText>
             )
-            : subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)
-          }
+            : subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
         </Box>
       )}
     </Box>
