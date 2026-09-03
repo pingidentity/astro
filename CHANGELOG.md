@@ -1,3 +1,13 @@
+## 2.221.7-alpha.0 (2026-09-03)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8934] position Onyx field carets 12px from input edge
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.221.6 (2026-09-01)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
