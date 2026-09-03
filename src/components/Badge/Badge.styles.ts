@@ -1,4 +1,4 @@
-import { focusWithCroppedOutline } from '../Button/Buttons.styles';
+import { defaultFocus, focusWithCroppedOutline } from '../Button/Buttons.styles';
 
 export const baseBadge = {
   cursor: 'default',
@@ -10,6 +10,12 @@ export const baseBadge = {
   display: 'inline-flex !important',
   borderRadius: '5px',
   fontWeight: 1,
+  '&:focus-visible, &.is-focus-visible, &.is-focused': {
+    ...defaultFocus,
+    outlineStyle: 'solid',
+    outlineColor: 'focus',
+    boxShadow: '0 0 0 1px background',
+  },
   '& button': {
     backgroundColor: 'transparent',
     marginLeft: 'xs',
