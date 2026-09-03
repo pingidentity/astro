@@ -1,3 +1,13 @@
+## 2.223.0-alpha.0 (2026-09-03)
+
+### 🚀 Features
+
+- [UXE-8983] add helpHint prop top Badge
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.222.0-alpha.0 (2026-09-03)
 
 ### 🚀 Features
