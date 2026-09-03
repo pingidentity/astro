@@ -1,3 +1,13 @@
+## 2.222.0-alpha.0 (2026-09-03)
+
+### 🚀 Features
+
+- [UXE-8982] add slots.rightOfTitle to PageHeader
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.221.7-alpha.0 (2026-09-03)
 
 ### 🩹 Fixes
