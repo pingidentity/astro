@@ -23,6 +23,7 @@ export const select = {
   borderColor: 'border.input',
   color: 'text.primary',
   height: astroTokens.size.input.height,
+  pr: astroTokens.spacing.input['padding-x'],
   '&.is-disabled': {
     opacity: 1,
     borderColor: 'border.input',
@@ -62,6 +63,9 @@ export const comboBox = {
   },
   button: {
     border: 'none !important',
+  },
+  inputInContainerSlot: {
+    right: astroTokens.spacing.input['padding-x'],
   },
 };
 
