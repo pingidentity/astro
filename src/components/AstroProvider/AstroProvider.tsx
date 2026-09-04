@@ -1,15 +1,15 @@
 import React, { forwardRef, useMemo } from 'react';
-import { css, Global, ThemeProvider } from '@emotion/react';
+import { css, Global, ThemeProvider, ThemeProviderProps } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
-import PropTypes from 'prop-types';
 import { merge } from 'theme-ui';
 
 import { materialSymbolsOutlinedFont, openSansFont, pingitoFont } from '../../fonts';
 import useGetTheme from '../../hooks/useGetTheme';
 import astroTheme from '../../styles/theme';
+import { AstroProviderProps, BoxProps, GlobalStylesProps, PageWrapperProps } from '../../types';
 import Box from '../Box';
 
-export const GlobalStyles = ({ isEndUserTheme = false }) => {
+export const GlobalStyles = ({ isEndUserTheme = false }: GlobalStylesProps) => {
   const { themeState: { isOnyx, isOnyxDark } } = useGetTheme();
   return (
     <Global
@@ -47,15 +47,11 @@ export const GlobalStyles = ({ isEndUserTheme = false }) => {
   );
 };
 
-GlobalStyles.propTypes = {
-  isEndUserTheme: PropTypes.bool,
-};
-
 /**
  * _Note: For UI Library and Astro CSS conflicts, we supply a theme override located at_
  * `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`
  */
-const AstroProvider = forwardRef((props, ref) => {
+const AstroProvider = forwardRef<HTMLElement, AstroProviderProps>((props, ref) => {
   const { defaultTheme = astroTheme, themeOverrides = [{}], children, ...others } = props;
 
   // Unfortunately because this is adding styles, we cannot write a proper test for this.
@@ -74,39 +70,39 @@ const AstroProvider = forwardRef((props, ref) => {
   return (
     <ThemeProvider theme={theme} {...others}>
       <GlobalStyles isEndUserTheme={isEndUserTheme} />
-      <Box ref={ref} bg="backgroundBase" height="100%" {...props}>
+      <Box ref={ref} bg="backgroundBase" height="100%" {...(props as BoxProps)}>
         {children}
       </Box>
     </ThemeProvider>
   );
 });
 
-AstroProvider.propTypes = {
-  /** Array of theme objects which will be merged with the default theme.
-   * In the case of clashes, these will take priority.
-   * Useful for customizing the default variants, adding new ones,
-   *  or overriding other theme values. */
-  themeOverrides: PropTypes.arrayOf(PropTypes.shape({})),
-  /** The default theme applied to the Astro components.
-   * Overriding this is an advanced use case so
-   * please understand potential reprecussions before editing */
-  defaultTheme: PropTypes.shape({}),
-};
-
 /**
  * Wrapper for the Astro application w/o global styles.
  * It provides the standard background and the Astro theme.
  */
-export const PageWrapper = forwardRef((props, ref) => {
+export const PageWrapper = forwardRef<HTMLElement, PageWrapperProps>((props, ref) => {
   const { defaultTheme = astroTheme, themeOverrides = [{}], children, ...others } = props;
 
   const theme = useMemo(
-    () => merge(defaultTheme, ...themeOverrides),
+    () => themeOverrides.reduce(
+      (accumulatedTheme, currentOverride) => merge(accumulatedTheme, currentOverride),
+      defaultTheme,
+    ),
     [defaultTheme, themeOverrides],
   );
 
+  // Emotion's ThemeProvider does not accept refs (pre-existing runtime no-op); the
+  // ref is still passed at runtime to preserve the existing call shape, and the
+  // element is cast so the no-op ref forwarding path typechecks.
+  const ThemeProviderWithRef = ThemeProvider as unknown as React.ForwardRefExoticComponent<
+    ThemeProviderProps & React.RefAttributes<HTMLElement>
+  >;
+
+  const BoxWithCss = Box as React.ElementType;
+
   return (
-    <ThemeProvider ref={ref} theme={theme} {...others}>
+    <ThemeProviderWithRef ref={ref} theme={theme} {...others}>
       <Global
         styles={css`
           [data-tippy-root] {
@@ -114,7 +110,7 @@ export const PageWrapper = forwardRef((props, ref) => {
           }
         `}
       />
-      <Box
+      <BoxWithCss
         css={css`
           ${emotionNormalize}
 
@@ -128,25 +124,13 @@ export const PageWrapper = forwardRef((props, ref) => {
             }
           }
         `}
-        {...props}
+        {...(props as BoxProps)}
       >
         {children}
-      </Box>
-    </ThemeProvider>
+      </BoxWithCss>
+    </ThemeProviderWithRef>
   );
 });
-
-PageWrapper.propTypes = {
-  /** Array of theme objects which will be merged with the default theme.
-   * In the case of clashes, these will take priority.
-   * Useful for customizing the default variants, adding new ones,
-   *  or overriding other theme values. */
-  themeOverrides: PropTypes.arrayOf(PropTypes.shape({})),
-  /** The default theme applied to the Astro components.
-   * Overriding this is an advanced use case so
-   * please understand potential reprecussions before editing */
-  defaultTheme: PropTypes.shape({}),
-};
 
 export { ThemeProvider };
 export default AstroProvider;

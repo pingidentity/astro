@@ -1,5 +1,6 @@
 export * from './accessibilityTable';
 export * from './arrayField';
+export * from './AstroProvider';
 export * from './avatar';
 export * from './badge';
 export * from './box';
