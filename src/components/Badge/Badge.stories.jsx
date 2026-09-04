@@ -9,11 +9,13 @@ import { useGetTheme } from '../../hooks';
 import {
   Badge,
   Box,
+  DefaultBadge,
   Icon,
   IconButton,
 } from '../../index';
 import { flatColorList } from '../../styles/colors';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { docArgTypes } from '../../utils/docUtils/docArgTypes.js';
 
 import BadgeReadme from './Badge.mdx';
 
@@ -41,6 +43,22 @@ export default {
     isUppercase: {
       control: {
         type: 'boolean',
+      },
+    },
+    helpHint: {
+      control: {
+        type: docArgTypes.text,
+      },
+      table: {
+        type: { summary: docArgTypes.string },
+      },
+    },
+    helpHintProps: {
+      control: {
+        type: docArgTypes.object,
+      },
+      table: {
+        type: { summary: 'BadgeHelpHintProps' },
       },
     },
   },
@@ -174,3 +192,13 @@ StatusBadgeVariants.parameters = {
     url: FIGMA_LINKS.badge.statusVariants,
   },
 };
+
+export const Customizations = () => (
+  <Box isRow gap="lg">
+    <DefaultBadge
+      label="Customized Hint"
+      helpHint="This hint opens to the right of the badge, with a light background."
+      helpHintProps={{ direction: 'right' }}
+    />
+  </Box>
+);
