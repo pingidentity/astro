@@ -3,7 +3,13 @@ import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AstroProvider, OnyxTheme, PanelHeader, PanelHeaderSwitchField } from '../../index';
+import {
+  AstroProvider,
+  OnyxDarkTheme,
+  OnyxTheme,
+  PanelHeader,
+  PanelHeaderSwitchField,
+} from '../../index';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -32,8 +38,8 @@ jest.mock('../../hooks/useFallbackImage', () => props => {
   fallbackImageObj = { ...props };
   return [];
 });
-const getComponentOnyx = (props = {}) => render((
-  <AstroProvider themeOverrides={[OnyxTheme]}>
+const getComponentOnyx = (props = {}, theme = OnyxTheme) => render((
+  <AstroProvider themeOverrides={[theme]}>
     <PanelHeader {...defaultProps} {...props} />
   </AstroProvider>
 ));
@@ -164,7 +170,41 @@ test('renders leftOfData slot', () => {
   screen.getByText(TEST_TEXT);
 });
 
-test('renders onyx components', () => {
+test.each([
+  ['Onyx light', OnyxTheme],
+  ['Onyx dark', OnyxDarkTheme],
+])('renders an 18px icon in %s PanelHeader avatars', (_, theme) => {
+  getComponentOnyx({
+    data: {
+      text: 'testText',
+      icon: AccountIcon,
+      avatarDefaultText: 'AA',
+    },
+    avatarProps: { color: 'green' },
+    iconProps: { 'data-testid': 'panel-header-icon' },
+  }, theme);
+
+  const icon = screen.getByRole('img', { name: `${defaultProps.data.text}${PANEL_HEADER_ICON}` });
+
+  expect(icon).toHaveStyleRule('width', '18px');
+  expect(icon).toHaveStyleRule('height', '18px');
+  expect(icon).toHaveAttribute('data-testid', 'panel-header-icon');
+});
+
+test('forwards iconProps to the Onyx avatar icon', () => {
+  getComponentOnyx({
+    data: {
+      text: 'testText',
+      icon: AccountIcon,
+    },
+    avatarProps: { color: 'green' },
+    iconProps: { 'aria-label': 'custom panel icon' },
+  });
+
+  expect(screen.getByLabelText('custom panel icon')).toBeInTheDocument();
+});
+
+test('renders image avatars in Onyx', () => {
   getComponentOnyx();
   const image = screen.getByRole('img');
 

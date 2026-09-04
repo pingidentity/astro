@@ -14,6 +14,7 @@ const PanelHeader = forwardRef(({
   data,
   headerProps,
   headerWrapperProps,
+  iconProps,
   isCopyable,
   slots,
   subtextProps,
@@ -46,7 +47,16 @@ const PanelHeader = forwardRef(({
       defaultText={avatarDefaultText}
       mr="md"
       {...avatarProps}
-    />
+    >
+      {icon && !image?.src && (
+        <Icon
+          icon={icon}
+          size="sm"
+          title={{ name: `${text}${PANEL_HEADER_ICON}` }}
+          {...iconProps}
+        />
+      )}
+    </Avatar>
   );
 
   const renderImage = !icon && image && (
@@ -131,6 +141,7 @@ const PanelHeader = forwardRef(({
 PanelHeader.propTypes = {
   ...SharedItemPropTypes,
   isCopyable: PropTypes.bool,
+  iconProps: PropTypes.object,
   slots: PropTypes.shape({
     rightOfData: PropTypes.node,
   }),
