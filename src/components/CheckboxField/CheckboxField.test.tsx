@@ -1,6 +1,9 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+import astroTheme from '../../styles/theme';
+import onyxDarkTheme from '../../styles/themeOverrides/nextGenDarkMode';
+import onyxTheme from '../../styles/themes/next-gen';
 import { CheckboxFieldProps } from '../../types';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
@@ -202,6 +205,27 @@ test('indeterminate checkbox, clicking svg', async () => {
 
   expect(input).not.toHaveAttribute('aria-checked', 'mixed');
   expect(label).not.toHaveClass('is-indeterminate');
+});
+
+test.each([
+  ['Astro', astroTheme],
+  ['Onyx', onyxTheme],
+  ['Onyx dark', onyxDarkTheme],
+])('%s checkbox receives focus when tabbed to', async (_themeName, providerTheme) => {
+  render(
+    <>
+      <button type="button">Before checkbox</button>
+      <CheckboxField {...defaultProps} />
+    </>,
+    { providerTheme },
+  );
+
+  const input = screen.getByRole('checkbox');
+  await userEvent.tab();
+  expect(screen.getByRole('button', { name: 'Before checkbox' })).toHaveFocus();
+  await userEvent.tab();
+  expect(input).toHaveFocus();
+  expect(input.closest('label')).toHaveClass('is-focused');
 });
 
 test('controlled indeterminate checkbox retains focus and toggles correctly across keyboard Space presses', async () => {

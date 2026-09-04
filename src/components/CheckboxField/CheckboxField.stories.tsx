@@ -257,7 +257,7 @@ export const Indeterminate: StoryFn<CheckboxFieldProps> = () => {
     <>
       <CheckboxField
         label="Fruit Salad Recipe"
-        isIndeterminate={isIndeterminate}
+        isIndeterminate
         isSelected={isCompleted}
         onChange={handleParentCheckboxChange}
       />

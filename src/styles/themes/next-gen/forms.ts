@@ -8,13 +8,29 @@ import { fieldControlWrapper, input } from './variants/input';
 import { label } from './variants/label';
 import { switchable } from './variants/switch';
 
+export const checkboxField = {
+  container: {
+    mb: 'xs',
+  },
+};
+
 export const checkbox = {
-  height: '19.25px',
-  width: '19.25px',
-  color: 'text.secondary',
+  height: '16px',
+  width: '16px',
+  borderRadius: astroTokens.radius.checkbox.radius,
+  color: colors.neutral['80'],
   mr: '8px',
-  'input ~ &.is-focused': {
-    boxShadow: `inset 0px 0px 0px 1px ${colors.focus}`,
+  'input:checked ~ &': {
+    color: 'active',
+  },
+  // The input is visually hidden; use the focus state propagated to the label for the outline.
+  '.is-focused &': {
+    outline: '2px solid',
+    outlineColor: colors.focus,
+    outlineOffset: '2px',
+  },
+  'input:disabled ~ &': {
+    opacity: 0.5,
   },
 };
 
@@ -132,6 +148,7 @@ export const timeField = {
 export default {
   input,
   label,
+  checkboxField,
   checkbox,
   comboBox,
   select,
