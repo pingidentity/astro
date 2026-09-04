@@ -1,3 +1,13 @@
+## 2.223.1-alpha.0 (2026-09-04)
+
+### 🩹 Fixes
+
+- [UXE-9020] Avatar Icon Sizing fix
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.223.0-alpha.0 (2026-09-03)
 
 ### 🚀 Features
