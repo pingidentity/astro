@@ -28,7 +28,22 @@ export const radio = {
 };
 
 export const checkbox = {
-  color: 'text.primary',
+  color: astroTokensDark.color.gray[500],
+  '& rect[id="unchecked-bg"]': {
+    fill: astroTokensDark.color.gray[900],
+  },
+  'input:checked ~ &': {
+    color: 'primary',
+  },
+  // The input is visually hidden; use the focus state propagated to the label for the outline.
+  '.is-focused &': {
+    outline: '2px solid',
+    outlineColor: astroTokensDark.color.blue[400],
+    outlineOffset: '2px',
+  },
+  'input:disabled ~ &': {
+    opacity: 0.5,
+  },
 };
 
 const label = {
@@ -38,6 +53,11 @@ const label = {
   },
   radio: {
     color: 'white',
+  },
+  checkbox: {
+    '&.is-disabled': {
+      color: astroTokensDark.color.gray[100],
+    },
   },
 };
 

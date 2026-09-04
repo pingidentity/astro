@@ -7,7 +7,7 @@ import type { AriaCheckboxProps } from '@react-types/checkbox';
 import { v4 as uuid } from 'uuid';
 
 import { Box, Checkbox, FieldHelperText, Label } from '../..';
-import { useField, useLocalOrForwardRef, usePropWarning } from '../../hooks';
+import { useField, useGetTheme, useLocalOrForwardRef, usePropWarning } from '../../hooks';
 import { UseFieldProps } from '../../hooks/useField/useField';
 import { CheckboxFieldProps } from '../../types';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
@@ -67,6 +67,8 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
 
   const { inputProps } = useCheckbox(checkboxProps as AriaCheckboxProps, state, checkboxRef);
 
+  const { themeState: { isOnyx } } = useGetTheme();
+
   const {
     fieldContainerProps,
     fieldControlInputProps,
@@ -81,7 +83,11 @@ const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>((props, r
   const helperTextId = useMemo(() => uuid(), []);
 
   return (
-    <Box {...getPendoID(displayName)} {...fieldContainerProps}>
+    <Box
+      {...getPendoID(displayName)}
+      {...fieldContainerProps}
+      variant={(isOnyx && 'forms.checkboxField.container') || undefined}
+    >
       <Box isRow>
         <Label variant="forms.label.checkbox" {...fieldLabelProps}>
           <Checkbox
