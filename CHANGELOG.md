@@ -1,3 +1,13 @@
+## 2.223.2-alpha.0 (2026-09-04)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8365] fix CheckboxField visual inconsistencies in Onyx theme
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.223.1-alpha.0 (2026-09-04)
 
 ### 🩹 Fixes
