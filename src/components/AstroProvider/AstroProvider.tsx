@@ -92,10 +92,7 @@ export const PageWrapper = forwardRef<HTMLElement, PageWrapperProps>((props, ref
     [defaultTheme, themeOverrides],
   );
 
-  // Emotion's ThemeProvider does not accept refs (pre-existing runtime no-op); the
-  // ref is still passed at runtime to preserve the existing call shape, and the
-  // element is cast so the no-op ref forwarding path typechecks.
-  const ThemeProviderWithRef = ThemeProvider as unknown as React.ForwardRefExoticComponent<
+  const ThemeProviderWithRef = ThemeProvider as React.ForwardRefExoticComponent<
     ThemeProviderProps & React.RefAttributes<HTMLElement>
   >;
 
