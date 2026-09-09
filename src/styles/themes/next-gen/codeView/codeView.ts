@@ -146,6 +146,9 @@ const lineNo = {
 };
 
 export const copyButton = {
+  path: {
+    fill: 'text.primary',
+  },
   default: {
     mx: 'sm',
     path: {
