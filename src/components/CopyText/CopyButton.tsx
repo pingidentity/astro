@@ -20,7 +20,7 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>((props, ref) =
       variant={themeVariant}
       {...others}
     >
-      <Icon icon={ContentCopy} size={copyButtonSize} color="text.secondary" title={{ name: 'Content Copy Icon' }} {...iconProps} />
+      <Icon icon={ContentCopy} size={copyButtonSize} title={{ name: 'Content Copy Icon' }} {...iconProps} />
     </IconButton>
   );
 });
