@@ -1,3 +1,23 @@
+## 2.223.3-alpha.0 (2026-09-09)
+
+### 🩹 Fixes
+
+- add git tag check and verify versioning
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.223.2-alpha.0 (2026-09-04)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8365] fix CheckboxField visual inconsistencies in Onyx theme
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.223.1-alpha.0 (2026-09-04)
 
 ### 🩹 Fixes
