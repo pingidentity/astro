@@ -1,3 +1,13 @@
+## 2.223.4-alpha.0 (2026-09-09)
+
+### 🩹 Fixes
+
+- [UXE-9022] Fix label value pair
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.223.3-alpha.0 (2026-09-09)
 
 ### 🩹 Fixes
