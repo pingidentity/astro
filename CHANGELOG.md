@@ -1,3 +1,54 @@
+## 2.226.1-alpha.0 (2026-09-10)
+
+### 🩹 Fixes
+
+- temporarily disbale dependency check
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.226.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- bump version
+- [UXE-8984] Codeview fix onyx copy button color add control bar slot
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.225.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- [UXE-8988] fix Status badges
+
+### 🩹 Fixes
+
+- update package versions
+
+### ❤️  Thank You
+
+- Andrew Keohane
+- Ridhisha Dangol
+
+## 2.224.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- [UXE-8471] Add hintText to AccordionItem
+
+### 🩹 Fixes
+
+- **astro:** update HelpHint Onyx hover focus styles
+
+### ❤️  Thank You
+
+- Andrew Keohane
+- Kunal
+
 ## 2.223.4 (2026-09-09)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

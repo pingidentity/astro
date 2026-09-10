@@ -1,8 +1,15 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { CodeView } from '../..';
-import { CodeViewProps } from '../../types/codeView';
+import {
+  AstroProvider,
+  CodeView,
+  CodeViewProps,
+  NextGenDarkTheme,
+  NextGenTheme,
+  OnyxTheme,
+} from '../..';
+import { copyButton } from '../../styles/themes/next-gen/codeView/codeView';
 import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -27,6 +34,22 @@ const getComponent = (props: CodeViewProps = {}) => render((
   <CodeView {...defaultProps} {...props}>
     {'children' in props ? props.children : textValue}
   </CodeView>
+));
+
+const getOnyxComponent = (props: CodeViewProps = {}) => render((
+  <AstroProvider theme={OnyxTheme}>
+    <CodeView {...defaultProps} {...props}>
+      {'children' in props ? props.children : textValue}
+    </CodeView>
+  </AstroProvider>
+));
+
+const getOnyxStyledComponent = (theme, variant) => render((
+  <AstroProvider theme={theme}>
+    <CodeView {...defaultProps} language="json" variant={variant}>
+      const value = 1;
+    </CodeView>
+  </AstroProvider>
 ));
 
 beforeEach(() => {
@@ -167,6 +190,66 @@ test('isOnyx prop renders CodeView component with next-gen theme', () => {
   const codeViewElement = screen.getByTestId(testId).querySelector('pre');
   expect(codeViewElement).toBeInTheDocument();
   expect(codeViewElement).toHaveClass('language-json');
+});
+
+test.each(['default', 'light'])('renders the Onyx control-bar slot before the copy button for the %s variant', variant => {
+  getOnyxComponent({
+    children: 'const value = 1;',
+    language: 'json',
+    variant,
+    slots: {
+      controlBar: <button type="button">Control bar</button>,
+    },
+  });
+
+  const languageLabel = screen.getByText('JSON', { exact: true });
+  const controlBar = screen.getByRole('button', { name: 'Control bar' });
+  const copyControl = screen.getByRole('button', { name: 'copy to clipboard' });
+
+  const documentOrder = Array.from(document.querySelectorAll('*'));
+  expect(documentOrder.indexOf(languageLabel)).toBeLessThan(documentOrder.indexOf(controlBar));
+  expect(documentOrder.indexOf(controlBar)).toBeLessThan(documentOrder.indexOf(copyControl));
+});
+
+test.each(['default', 'light'])('does not render an Onyx control-bar slot when omitted for the %s variant', variant => {
+  getOnyxComponent({
+    children: 'const value = 1;',
+    language: 'json',
+    variant,
+  });
+
+  expect(screen.getByText('JSON', { exact: true })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'copy to clipboard' })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'Control bar' })).not.toBeInTheDocument();
+});
+
+test.each(['default', 'light'])('honors hasNoCopyButton in the Onyx header for the %s variant', variant => {
+  getOnyxComponent({
+    children: 'const value = 1;',
+    language: 'json',
+    variant,
+    hasNoCopyButton: true,
+  });
+
+  expect(screen.getByText('JSON', { exact: true })).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: 'copy to clipboard' })).not.toBeInTheDocument();
+});
+
+test('uses the intended Onyx color tokens for CodeView copy-button variants', () => {
+  expect(copyButton.default.path.fill).toBe('white');
+  expect(copyButton.light.path.fill).toBe('black');
+});
+
+test.each([
+  ['NEXT_GEN', NextGenTheme, 'default', '#ffffff'],
+  ['NEXT_GEN', NextGenTheme, 'light', '#000'],
+  ['NEXT_GEN_DARK', NextGenDarkTheme, 'default', '#ffffff'],
+  ['NEXT_GEN_DARK', NextGenDarkTheme, 'light', '#000'],
+])('renders the intended copy-icon path for %s %s CodeView', (_themeName, theme, variant, fill) => {
+  getOnyxStyledComponent(theme, variant);
+
+  expect(screen.getByRole('button', { name: 'copy to clipboard' }))
+    .toHaveStyleRule('fill', fill, { target: 'path' });
 });
 
 test('if textToCopy is provided it\'s copied to clipboard instead of children text data', async () => {
