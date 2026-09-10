@@ -1,3 +1,18 @@
+## 2.225.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- [UXE-8988] fix Status badges
+
+### 🩹 Fixes
+
+- update package versions
+
+### ❤️  Thank You
+
+- Andrew Keohane
+- Ridhisha Dangol
+
 ## 2.224.0-alpha.0 (2026-09-10)
 
 ### 🚀 Features
