@@ -1,3 +1,14 @@
+## 2.226.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- bump version
+- [UXE-8984] Codeview fix onyx copy button color add control bar slot
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.225.0-alpha.0 (2026-09-10)
 
 ### 🚀 Features
