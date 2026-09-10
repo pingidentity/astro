@@ -27,6 +27,7 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
     /* istanbul ignore next */
     stylesProp,
     iconButtonProps,
+    slots,
     /* istanbul ignore next */
     variant = 'default',
     ...others
@@ -114,12 +115,15 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
       >
         <Box isRow justifyContent="space-between" alignItems="center" variant={`codeView.${variant}.header`}>
           <Text variant={`codeView.${variant}.header.color`} mb="0" mr="sm" py="sm">{typeof language === 'string' ? language.toUpperCase() : ''}</Text>
-          <CopyText
-            ref={ref}
-            mode="rightText"
-            textToCopy={textToCopy || children}
-            iconButtonProps={{ ...iconButtonProps, variant }}
-          />
+          {slots?.controlBar}
+          {!hasNoCopyButton && (
+            <CopyText
+              ref={ref}
+              mode="rightText"
+              textToCopy={textToCopy || children}
+              iconButtonProps={{ ...iconButtonProps, variant }}
+            />
+          )}
         </Box>
         {content}
       </Box>

@@ -27,4 +27,7 @@ export interface CodeViewProps extends HoverProps, StyleProps {
   stylesProp?: ThemeUICSSObject;
   isOnyx?: boolean;
   iconButtonProps?: IconButtonProps;
+  slots?: {
+    controlBar?: React.ReactNode;
+  };
 }
