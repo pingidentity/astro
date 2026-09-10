@@ -1,7 +1,11 @@
 import React from 'react';
+import AlertCircleIcon from '@pingux/mdi-react/AlertCircleOutlineIcon';
+import AlertIcon from '@pingux/mdi-react/AlertOutlineIcon';
+import CheckCircleIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import Clear from '@pingux/mdi-react/CloseIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
 import PencilOutlineIcon from '@pingux/mdi-react/PencilOutlineIcon';
+import InformationCircleIcon from '@pingux/mdi-react/InformationCircleOutlineIcon';
 import PlusCircleMultipleOutlineIcon from '@pingux/mdi-react/PlusCircleMultipleOutlineIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -176,15 +180,30 @@ export const BadgeWithLeftSlotAndIcon = () => (
   </Badge>
 );
 
-export const StatusBadgeVariants = ({ ...args }) => (
-  <Box gap="md">
-    <Badge {...args} variant="criticalStatusBadge" label="Critical" />
-    <Badge {...args} variant="warningStatusBadge" label="Warning" />
-    <Badge {...args} variant="healthyStatusBadge" label="Healthy" />
-    <Badge {...args} variant="activeStatusBadge" label="Active" />
-    <Badge {...args} variant="selected" label="Selected" />
-  </Box>
-);
+export const StatusBadgeVariants = () => {
+  const statusBadges = [
+    ['criticalStatusBadge', 'Critical', AlertCircleIcon],
+    ['warningStatusBadge', 'Warning', AlertIcon],
+    ['healthyStatusBadge', 'Healthy', CheckCircleIcon],
+    ['activeStatusBadge', 'Active', InformationCircleIcon],
+    ['secondaryStatusBadge', 'Secondary', InformationCircleIcon],
+  ];
+
+  return (
+    <Box gap="md">
+      {statusBadges.map(([variant, label, icon]) => (
+        <Box key={variant} isRow alignItems="center" gap="md">
+          <Badge
+            variant={variant}
+            label={label}
+            slots={{ leftIcon: <Icon icon={icon} size="xs" /> }}
+          />
+          <Badge variant={variant} label={label} />
+        </Box>
+      ))}
+    </Box>
+  );
+};
 
 StatusBadgeVariants.parameters = {
   design: {

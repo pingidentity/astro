@@ -58,22 +58,42 @@ const dark = {
 
 const activeStatusBadge = {
   ...primary,
+  '& svg': {
+    color: 'inherit',
+    path: { fill: 'black' },
+  },
 };
 
 const warningStatusBadge = {
   ...warning,
+  '& svg': {
+    color: 'inherit',
+    path: { fill: 'black' },
+  },
 };
 
 const criticalStatusBadge = {
   ...danger,
+  '& svg': {
+    color: 'inherit',
+    path: { fill: 'black' },
+  },
 };
 
 const healthyStatusBadge = {
   ...success,
+  '& svg': {
+    color: 'inherit',
+    path: { fill: 'black' },
+  },
 };
 
 const secondaryStatusBadge = {
   ...secondary,
+  '& svg': {
+    color: 'inherit',
+    path: { fill: astroTokensDark.color.gray[100] },
+  },
 };
 
 const countBadge = {
