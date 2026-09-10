@@ -1,3 +1,13 @@
+## 2.226.1-alpha.0 (2026-09-10)
+
+### 🩹 Fixes
+
+- temporarily disbale dependency check
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.226.0-alpha.0 (2026-09-10)
 
 ### 🚀 Features
