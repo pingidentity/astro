@@ -285,3 +285,17 @@ export const AccordionWithSlot = () => {
     </AccordionGroup>
   );
 };
+
+export const AccordionWithHintText = () => (
+  <AccordionGroup labelHeadingTag="h3">
+    <Item
+      key="accordionKey"
+      textValue="accordionKey"
+      label="Accordion Label"
+      data-id="accordionItem"
+      hintText="Additional information about this accordion section."
+    >
+      <Text>Render me!</Text>
+    </Item>
+  </AccordionGroup>
+);
