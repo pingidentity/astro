@@ -9,6 +9,7 @@ const badgeFont = {
 const badgeIconStyle = {
   '& span': {
     ...badgeFont,
+    color: 'inherit',
   },
   '& button': {
     alignSelf: 'center',
@@ -24,6 +25,7 @@ const badgeIconStyle = {
     },
   },
   '& svg': {
+    color: 'inherit',
     path: {
       fill: 'inherit',
     },
@@ -166,26 +168,56 @@ const dataTableBadge = {
 const activeStatusBadge = {
   border: 'none',
   ...primary,
+  '& svg': {
+    color: 'inherit',
+    path: {
+      fill: 'blue-600',
+    },
+  },
 };
 
 const warningStatusBadge = {
   border: 'none',
   ...warning,
+  '& svg': {
+    color: 'inherit',
+    path: {
+      fill: 'yellow-800',
+    },
+  },
 };
 
 const criticalStatusBadge = {
-  border: 'none',
   ...danger,
+  border: 'none',
+  '& svg': {
+    color: 'inherit',
+    path: {
+      fill: 'red-700',
+    },
+  },
 };
 
 const healthyStatusBadge = {
-  border: 'none',
   ...success,
+  border: 'none',
+  '& svg': {
+    color: 'inherit',
+    path: {
+      fill: 'success.dark',
+    },
+  },
 };
 
 const secondaryStatusBadge = {
-  border: 'none',
   ...secondary,
+  border: 'none',
+  '& svg': {
+    color: 'inherit',
+    path: {
+      fill: 'gray-900',
+    },
+  },
 };
 
 const tableBaseBadgeBaseStyle = {

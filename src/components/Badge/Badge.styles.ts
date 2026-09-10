@@ -222,6 +222,9 @@ const statusBadge = {
   '& span': {
     color: 'text.primary',
   },
+  '& svg': {
+    color: 'text.primary',
+  },
 };
 
 const criticalStatusBadge = {
