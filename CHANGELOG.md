@@ -1,3 +1,18 @@
+## 2.224.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- [UXE-8471] Add hintText to AccordionItem
+
+### 🩹 Fixes
+
+- **astro:** update HelpHint Onyx hover focus styles
+
+### ❤️  Thank You
+
+- Andrew Keohane
+- Kunal
+
 ## 2.223.4 (2026-09-09)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
