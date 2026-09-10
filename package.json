@@ -46,7 +46,7 @@
     "@internationalized/number": "^3.6.0",
     "@monaco-editor/react": "4.4.2",
     "@pingux/mdi-react": "^1.2.0",
-    "@pingux/onyx-tokens": "^0.41.9",
+    "@pingux/onyx-tokens": "^0.42.0-alpha.0",
     "@react-aria/accordion": "~3.0.0-alpha.11",
     "@react-aria/breadcrumbs": "^3.1.4",
     "@react-aria/button": "^3.13.2",
