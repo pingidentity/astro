@@ -1,8 +1,9 @@
 import React, { forwardRef, ReactNode, useEffect } from 'react';
 import { FocusScope, mergeProps } from 'react-aria';
+import { astroTokens, astroTokensDark } from '@pingux/onyx-tokens';
 
 import { Box, Icon, IconButton, PopoverContainer } from '../..';
-import { useGetTheme, useHelpHintPopover, useLocalOrForwardRef } from '../../hooks';
+import { useGetTheme, useHelpHintPopover, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
 import { isSafari } from '../../styles/safariAgent';
 import { HelpHintProps } from '../../types';
 
@@ -25,7 +26,7 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
     ...others
   } = props;
 
-  const { icons } = useGetTheme();
+  const { icons, themeState: { isOnyxDark } } = useGetTheme();
 
   const triggerRef = useLocalOrForwardRef<HTMLButtonElement>(ref);
 
@@ -50,6 +51,10 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
     triggerRef?.current.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }, [isOpen, triggerRef]);
 
+  const { classNames } = useStatusClasses(className, {
+    isDarkMode,
+  });
+
   const addIsSafariCompatiblePropToLinkChildren = (element: ReactNode) => {
     if (element) {
       return React.Children.map(element, (child: ReactNode) => {
@@ -63,7 +68,6 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
     }
     return undefined;
   };
-
   return (
     <Box {...others} ref={ref}>
       <IconButton
@@ -71,6 +75,13 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
         aria-label="label help hint"
         data-testid="help-hint__button"
         variant="hintButton"
+        sx={{
+          '&.is-hovered, &.is-focused': {
+            backgroundColor: isOnyxDark
+              ? astroTokensDark.color.common.light
+              : astroTokens.color.common.light,
+          },
+        }}
         {...mergeProps(triggerProps, iconButtonProps || {})}
       >
         <Icon icon={icons.helpHint} />
@@ -78,6 +89,8 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
       <PopoverContainer
         {...mergeProps(popoverContainerProps, popoverProps || tooltipProps || {})}
         arrowCrossOffset={arrowCrossOffset}
+        className={classNames}
+        direction={direction}
         arrowProps={{ width: '8px', height: '4px' }}
         hasNoArrow={hasNoArrow}
         ref={overlayRef}
