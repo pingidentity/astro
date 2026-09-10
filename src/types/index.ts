@@ -11,6 +11,7 @@ export * from './calendar';
 export * from './card';
 export * from './checkboxField';
 export * from './codeEditor';
+export * from './codeView';
 export * from './collapsiblePanel';
 export * from './colorField';
 export * from './copyText';

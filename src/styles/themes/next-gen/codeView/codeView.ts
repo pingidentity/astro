@@ -152,14 +152,14 @@ export const copyButton = {
   default: {
     mx: 'sm',
     path: {
-      fill: 'font.reverse',
+      fill: 'white',
     },
     border: 'none !important',
   },
   light: {
     mx: 'sm',
     path: {
-      fill: '#23282f',
+      fill: 'black',
     },
     border: 'none !important',
   },
