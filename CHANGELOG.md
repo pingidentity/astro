@@ -1,3 +1,13 @@
+## 2.226.2-alpha.0 (2026-09-15)
+
+### 🩹 Fixes
+
+- [UXE-9075] Fix ListViewItem onyx styles
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.226.1 (2026-09-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
