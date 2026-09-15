@@ -45,6 +45,36 @@ export const listViewItem = {
       },
     },
   },
+  container: {
+    p: 0,
+    bg: 'white',
+    '&.is-selected': {
+      bg: astroTokens.color.gray[100],
+    },
+    borderBottom: 'none',
+    '&.has-separator': {
+      borderBottom: '1px solid',
+      borderBottomColor: astroTokens.color.gray[200],
+    },
+    '&.is-hovered': {
+      bg: astroTokens.color.gray[100],
+    },
+    '&.is-focused': {
+      boxShadow: focusBoxShadow,
+      bg: astroTokens.color.gray[100],
+    },
+    '&.is-first-item': {
+      borderTopLeftRadius: borderRadius,
+      borderTopRightRadius: borderRadius,
+    },
+    '&.is-last-item': {
+      borderBottomLeftRadius: borderRadius,
+      borderBottomRightRadius: borderRadius,
+      '&.has-separator': {
+        border: 'none',
+      },
+    },
+  },
   styledContainer: {
     bg: 'transparent',
     '&.is-hovered': {
