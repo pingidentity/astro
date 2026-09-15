@@ -1,3 +1,18 @@
+## 2.228.0-alpha.0 (2026-09-15)
+
+### 🚀 Features
+
+- **astro:** [UXE-8942] AstroProvider: convert component folder to TypeScript
+
+### 🩹 Fixes
+
+- comment edit
+
+### ❤️  Thank You
+
+- kunalm
+- Ridhisha Dangol
+
 ## 2.227.0-alpha.0 (2026-09-15)
 
 ### 🚀 Features
