@@ -3,6 +3,7 @@ import { Item } from 'react-stately';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 import DotsHorizontalIcon from '@pingux/mdi-react/DotsHorizontalIcon';
 import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
+import type { Selection } from '@react-types/shared';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -435,7 +436,7 @@ export function OnyxDefault() {
 }
 
 export function Controlled() {
-  const [selectedKeys, setSelectedKeys] = useState(['Client']);
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(['Client']));
 
   return (
     // See story source for info about the data used

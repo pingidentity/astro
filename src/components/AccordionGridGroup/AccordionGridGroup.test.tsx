@@ -9,6 +9,7 @@ import {
   Text,
   TextField,
 } from '../../index';
+import { AccordionGridGroupProps } from '../../types';
 import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -22,7 +23,7 @@ const defaultProps = {
 // Needs to be added to each components test file
 universalComponentTests({ renderComponent: props => <AccordionGridGroup {...props} /> });
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: Partial<AccordionGridGroupProps> = {}) => render((
   <AccordionGridGroup {...defaultProps} {...props}>
     <Item key="first" textValue="Duplicate">
       <Box>
@@ -57,7 +58,7 @@ const getComponent = (props = {}) => render((
   </AccordionGridGroup>
 ));
 
-const getComponentInOverlayPanel = (props = {}) => render((
+const getComponentInOverlayPanel = (props: Partial<AccordionGridGroupProps> = {}) => render((
   <OverlayPanel isOpen>
     <AccordionGridGroup {...defaultProps} {...props}>
       <Item key="first" textValue="Duplicate">
@@ -94,7 +95,7 @@ const getComponentInOverlayPanel = (props = {}) => render((
   </OverlayPanel>
 ));
 
-const getComponentWithTextFields = (props = {}) => render((
+const getComponentWithTextFields = (props: Partial<AccordionGridGroupProps> = {}) => render((
   <AccordionGridGroup {...defaultProps} {...props} navigationMode="native">
     <Item key="first" textValue="Duplicate">
       <Text>

@@ -1,3 +1,38 @@
+## 2.228.0-alpha.0 (2026-09-15)
+
+### 🚀 Features
+
+- **astro:** [UXE-8942] AstroProvider: convert component folder to TypeScript
+
+### 🩹 Fixes
+
+- comment edit
+
+### ❤️  Thank You
+
+- kunalm
+- Ridhisha Dangol
+
+## 2.227.0-alpha.0 (2026-09-15)
+
+### 🚀 Features
+
+- **astro:** [UXE-8941] AccordionGridGroup/AccordionGridItem: convert to TypeScript
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.226.2-alpha.0 (2026-09-15)
+
+### 🩹 Fixes
+
+- [UXE-9075] Fix ListViewItem onyx styles
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.226.1 (2026-09-10)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

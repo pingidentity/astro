@@ -37,7 +37,7 @@ module.exports = {
     // FIXME: upgrade RTL to v14 (UIP-6248), then fix test in useOverlappingMenuHoverState.test.js,
     // then remove this once test is fixed
     '/hooks/useOverlappingMenuHoverState/useOverlappingMenuHoverState.ts',
-    '/components/AstroProvider/AstroProvider.js',
+    '/components/AstroProvider/AstroProvider.tsx',
   ],
   transform: {
     '\\.jsx?$': ['babel-jest', { rootMode: 'upward' }],

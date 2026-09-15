@@ -15,7 +15,7 @@ const getComponent = () => render(<Box {...defaultProps} />, { wrapper: PageWrap
 // Need to be added to each test file to test accessibility using axe.
 axeTest(getComponent);
 
-// NOTE: This will fail if in the AstroProvider test file...
+// NOTE: This will fail if in the AstroProvider test file.
 // Probably something to do with Jest / RTL
 test('should provide theme styling through PageWrapper', () => {
   getComponent();
