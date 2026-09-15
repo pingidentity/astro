@@ -2,13 +2,16 @@ import React, { forwardRef } from 'react';
 import { mergeProps } from 'react-aria';
 import { useGridCell } from '@react-aria/grid';
 import { useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
+import type { GridState } from '@react-stately/grid';
+import type { GridCollection } from '@react-types/grid';
+import type { FocusableElement, Key } from '@react-types/shared';
 
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import { useStatusClasses } from '../../hooks';
+import { AccordionGridItemBodyProps } from '../../types';
 import Box from '../Box';
 
-const AccordionGridItemBody = forwardRef((props, ref) => {
+const AccordionGridItemBody = forwardRef<HTMLElement, AccordionGridItemBodyProps>((props, ref) => {
   const {
     item,
     className,
@@ -18,19 +21,27 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const { state } = useAccordionGridContext();
+  const { state } = useAccordionGridContext() as {
+    state: GridState<object, GridCollection<object>>
+  };
+  /* @react-aria/grid's hooks resolve a newer `@react-stately/grid` than the direct
+   * dependency (their `GridState.disabledKeys` uses @react-types/shared's `Key`, which
+   * omits `bigint`), so the state needs a widening cast before the hook calls. */
+  const gridState = state as Omit<
+    GridState<object, GridCollection<object>>, 'disabledKeys'
+  > & { disabledKeys: Set<Key> };
 
-  const cellNode = [...item.childNodes][1];
+  const cellNode = Array.from(item!.childNodes)[1];
 
   const { gridCellProps } = useGridCell({
     node: cellNode,
     focusMode: 'cell',
     shouldSelectOnPressUp: true,
-  }, state, ref);
+  }, gridState, ref as React.RefObject<FocusableElement>);
 
   /* istanbul ignore next */
   gridCellProps.onClick = e => {
-    e.target.focus();
+    (e.target as HTMLElement).focus();
   };
 
   // Add the cell's key to the disabled keys array,
@@ -73,14 +84,5 @@ const AccordionGridItemBody = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-AccordionGridItemBody.propTypes = {
-  isSelected: PropTypes.bool,
-  'aria-label': PropTypes.string,
-  item: PropTypes.shape({
-    childNodes: PropTypes.arrayOf(PropTypes.shape({})),
-  }),
-  navigationMode: PropTypes.string,
-};
 
 export default AccordionGridItemBody;
