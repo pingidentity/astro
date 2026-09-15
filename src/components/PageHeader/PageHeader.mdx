@@ -15,5 +15,8 @@ Pass `buttonProps` to add actions and customizations to the '+' button. Omit `bu
 ### Children
 Text and Links passed as children will be styled to match Ping specs.
 
+### Slots
+Pass `slots.rightOfTitle` to render a custom element (e.g. an overflow menu `IconButton`) to the right of the title/add button. This renders after the add button if `buttonProps` is provided, otherwise it renders immediately after the title.
+
 ### Note:
 Components styled to match design specs may be updated over time as design specs change. Be aware that styles within this component may undergo minor adjustments over time to stay in sync with the latest design specifications.

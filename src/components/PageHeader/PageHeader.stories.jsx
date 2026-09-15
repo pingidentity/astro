@@ -1,7 +1,8 @@
 import React from 'react';
+import DotsVerticalIcon from '@pingux/mdi-react/DotsVerticalIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { Link, PageHeader } from '../../index';
+import { Icon, IconButton, Link, PageHeader } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 
 import PageHeaderReadMe from './PageHeader.mdx';
@@ -94,11 +95,17 @@ WithoutLink.parameters = {
   },
 };
 
-export const Customization = args => (
+export const Customization = () => (
   <PageHeader
     buttonProps={{ bg: 'critical.bright' }}
     title="Lorem Ipsum"
-    {...args}
+    slots={{
+      rightOfTitle: (
+        <IconButton aria-label="overflow menu" onPress={() => { }}>
+          <Icon icon={DotsVerticalIcon} size="sm" />
+        </IconButton>
+      ),
+    }}
   >
     {description}
     <Link href="https://uilibrary.ping-eng.com/">Learn more</Link>

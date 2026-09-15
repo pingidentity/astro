@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import * as themeHook from '../../hooks';
-import { Link, PageHeader } from '../../index';
+import { IconButton, Link, PageHeader } from '../../index';
 import theme from '../../styles/theme';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -28,7 +28,19 @@ const getComponent = (props = defaultProps) => render(
 // Needs to be added to each components test file
 universalComponentTests({
   renderComponent: props => (
-    <PageHeader title="Title of the Page" {...props}>some test  </PageHeader>
+    <PageHeader
+      title="Title of the Page"
+      slots={{
+        rightOfTitle: (
+          <IconButton aria-label="overflow menu">
+            <span>...</span>
+          </IconButton>
+        ),
+      }}
+      {...props}
+    >
+      some test
+    </PageHeader>
   ),
 });
 
@@ -80,6 +92,46 @@ test('for default theme, it applies correct styles', () => {
     name: /icon button/i,
   });
   expect(button).toHaveStyleRule('margin-left', '10px');
+});
+
+test('renders slots.rightOfTitle when provided', async () => {
+  const onPress = jest.fn();
+  getComponent({
+    ...defaultProps,
+    slots: {
+      rightOfTitle: (
+        <IconButton aria-label="overflow menu" onPress={onPress}>
+          <span>...</span>
+        </IconButton>
+      ),
+    },
+  });
+
+  const overflowButton = screen.getByRole('button', { name: 'overflow menu' });
+  expect(overflowButton).toBeInTheDocument();
+
+  await userEvent.tab();
+  await userEvent.tab();
+  expect(overflowButton).toHaveFocus();
+
+  await userEvent.click(overflowButton);
+  expect(onPress).toHaveBeenCalled();
+});
+
+test('renders slots.rightOfTitle when there is no add button', () => {
+  getComponent({
+    title: 'test-title',
+    slots: {
+      rightOfTitle: (
+        <IconButton aria-label="overflow menu">
+          <span>...</span>
+        </IconButton>
+      ),
+    },
+  });
+
+  const overflowButton = screen.getByRole('button', { name: 'overflow menu' });
+  expect(overflowButton).toBeInTheDocument();
 });
 
 test('for onyx theme, it applies correct styles', () => {

@@ -9,7 +9,8 @@ import { Button as ThemeUIButton } from 'theme-ui';
 
 import { AccordionContext } from '../../context/AccordionContext';
 import { useGetTheme, useStatusClasses } from '../../hooks';
-import { Box, Icon, Text } from '../../index';
+import { Box, HelpHint, Icon, Text } from '../../index';
+import type { HelpHintProps } from '../../types';
 
 export const validHeadingTags = ['h1', 'h2', 'h3', 'h4'];
 
@@ -21,6 +22,8 @@ interface AccordionItemProps<T> {
   'data-id'?: string,
   children: React.ReactNode,
   buttonProps?: object,
+  hintText?: React.ReactNode,
+  hintTextProps?: HelpHintProps,
   slots?: {
     postHeading: React.ReactNode,
   },
@@ -31,6 +34,8 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
   const {
     containerProps = {},
     buttonProps = {},
+    hintText,
+    hintTextProps,
     regionProps = {},
     ...others
   } = item.props;
@@ -106,6 +111,7 @@ const AccordionItem = (props: AccordionItemProps<object>) => {
             />
           </Box>
         </ThemeUIButton>
+        {hintText && <HelpHint {...hintTextProps}>{hintText}</HelpHint>}
         {item.props.slots?.postHeading
           && (
             item.props.slots?.postHeading

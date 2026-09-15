@@ -2,7 +2,13 @@ import React from 'react';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import { act } from '@testing-library/react';
 
-import { ListViewItem, ListViewItemSwitchField } from '../..';
+import {
+  AstroProvider,
+  ListViewItem,
+  ListViewItemSwitchField,
+  OnyxDarkTheme,
+  OnyxTheme,
+} from '../..';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -24,6 +30,12 @@ const defaultProps = {
 
 const getComponent = (props = {}) => render((
   <ListViewItem {...defaultProps} {...props} />
+));
+
+const getComponentOnyx = (theme = OnyxTheme, props = {}) => render((
+  <AstroProvider themeOverrides={[theme]}>
+    <ListViewItem {...defaultProps} {...props} />
+  </AstroProvider>
 ));
 
 let fallbackImageObj = null;
@@ -61,6 +73,18 @@ describe('ListViewItem', () => {
     } });
 
     screen.getByText(TEST_TEXT);
+  });
+
+  test.each([
+    ['Onyx light', OnyxTheme],
+    ['Onyx dark', OnyxDarkTheme],
+  ])('renders an 18px icon in %s ListViewItem', (_, theme) => {
+    getComponentOnyx(theme, { id: 'test-id', iconWrapperProps: { color: 'green' } });
+
+    const icon = screen.getByRole('img', { name: `${defaultProps.data.text}${LIST_ITEM_ICON}` });
+
+    expect(icon).toHaveStyleRule('width', '18px');
+    expect(icon).toHaveStyleRule('height', '18px');
   });
 
   test('renders icon if both icon and image are passed', () => {

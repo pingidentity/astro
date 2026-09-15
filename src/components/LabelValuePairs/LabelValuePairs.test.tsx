@@ -1,8 +1,11 @@
 import React from 'react';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
+import { astroTokens, astroTokensDark } from '@pingux/onyx-tokens';
 import userEvent from '@testing-library/user-event';
 
-import { Icon } from '../../index';
+import {
+  AstroProvider, Icon, OnyxDarkTheme, OnyxTheme,
+} from '../../index';
 import { act, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -14,6 +17,19 @@ const originalClipboard = { ...global.navigator.clipboard };
 
 const getComponent = (children: React.ReactNode) => render(
   <LabelValuePairs>{children}</LabelValuePairs>,
+);
+
+const getThemedComponent = (theme: typeof OnyxTheme, children: React.ReactNode) => render(
+  <AstroProvider themeOverrides={[theme]}>
+    <LabelValuePairs>{children}</LabelValuePairs>
+  </AstroProvider>,
+);
+
+const valuePair = (
+  <Pair>
+    <PairLabel>Username</PairLabel>
+    <PairValue>jsmith</PairValue>
+  </Pair>
 );
 
 // Needs to be added to each components test file
@@ -29,14 +45,23 @@ universalComponentTests({
 });
 
 test('renders a row for each field with a value', () => {
-  getComponent(
-    <Pair>
-      <PairLabel>Username</PairLabel>
-      <PairValue>jsmith</PairValue>
-    </Pair>,
-  );
+  getComponent(valuePair);
   expect(screen.getByText('Username')).toBeInTheDocument();
   expect(screen.getByText('jsmith')).toBeInTheDocument();
+});
+
+describe('value color', () => {
+  test('uses the primary Onyx light text color', () => {
+    getThemedComponent(OnyxTheme, valuePair);
+
+    expect(screen.getByText('jsmith')).toHaveStyleRule('color', astroTokens.color.font.base);
+  });
+
+  test('uses the primary Onyx dark text color', () => {
+    getThemedComponent(OnyxDarkTheme, valuePair);
+
+    expect(screen.getByText('jsmith')).toHaveStyleRule('color', astroTokensDark.color.font.base);
+  });
 });
 
 test('rows with falsy value are not rendered unless isLoading is true', () => {

@@ -1,7 +1,11 @@
 import React from 'react';
+import AlertCircleIcon from '@pingux/mdi-react/AlertCircleOutlineIcon';
+import AlertIcon from '@pingux/mdi-react/AlertOutlineIcon';
+import CheckCircleIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import Clear from '@pingux/mdi-react/CloseIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
 import PencilOutlineIcon from '@pingux/mdi-react/PencilOutlineIcon';
+import InformationCircleIcon from '@pingux/mdi-react/InformationCircleOutlineIcon';
 import PlusCircleMultipleOutlineIcon from '@pingux/mdi-react/PlusCircleMultipleOutlineIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -9,11 +13,13 @@ import { useGetTheme } from '../../hooks';
 import {
   Badge,
   Box,
+  DefaultBadge,
   Icon,
   IconButton,
 } from '../../index';
 import { flatColorList } from '../../styles/colors';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
+import { docArgTypes } from '../../utils/docUtils/docArgTypes.js';
 
 import BadgeReadme from './Badge.mdx';
 
@@ -41,6 +47,22 @@ export default {
     isUppercase: {
       control: {
         type: 'boolean',
+      },
+    },
+    helpHint: {
+      control: {
+        type: docArgTypes.text,
+      },
+      table: {
+        type: { summary: docArgTypes.string },
+      },
+    },
+    helpHintProps: {
+      control: {
+        type: docArgTypes.object,
+      },
+      table: {
+        type: { summary: 'BadgeHelpHintProps' },
       },
     },
   },
@@ -158,15 +180,30 @@ export const BadgeWithLeftSlotAndIcon = () => (
   </Badge>
 );
 
-export const StatusBadgeVariants = ({ ...args }) => (
-  <Box gap="md">
-    <Badge {...args} variant="criticalStatusBadge" label="Critical" />
-    <Badge {...args} variant="warningStatusBadge" label="Warning" />
-    <Badge {...args} variant="healthyStatusBadge" label="Healthy" />
-    <Badge {...args} variant="activeStatusBadge" label="Active" />
-    <Badge {...args} variant="selected" label="Selected" />
-  </Box>
-);
+export const StatusBadgeVariants = () => {
+  const statusBadges = [
+    ['criticalStatusBadge', 'Critical', AlertCircleIcon],
+    ['warningStatusBadge', 'Warning', AlertIcon],
+    ['healthyStatusBadge', 'Healthy', CheckCircleIcon],
+    ['activeStatusBadge', 'Active', InformationCircleIcon],
+    ['secondaryStatusBadge', 'Secondary', InformationCircleIcon],
+  ];
+
+  return (
+    <Box gap="md">
+      {statusBadges.map(([variant, label, icon]) => (
+        <Box key={variant} isRow alignItems="center" gap="md">
+          <Badge
+            variant={variant}
+            label={label}
+            slots={{ leftIcon: <Icon icon={icon} size="xs" /> }}
+          />
+          <Badge variant={variant} label={label} />
+        </Box>
+      ))}
+    </Box>
+  );
+};
 
 StatusBadgeVariants.parameters = {
   design: {
@@ -174,3 +211,13 @@ StatusBadgeVariants.parameters = {
     url: FIGMA_LINKS.badge.statusVariants,
   },
 };
+
+export const Customizations = () => (
+  <Box isRow gap="lg">
+    <DefaultBadge
+      label="Customized Hint"
+      helpHint="This hint opens to the right of the badge, with a light background."
+      helpHintProps={{ direction: 'right' }}
+    />
+  </Box>
+);

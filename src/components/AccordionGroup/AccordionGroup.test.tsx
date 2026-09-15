@@ -147,11 +147,32 @@ const getComponentWithMultipleAccordion = () => render((
 
 const getComponentWithSlot = props => render((
   <AccordionGroup {...defaultProps} {...props}>
-    <Item key="first" textValue="Duplicate" data-id="first" label="Accordion item" slots={props.slots}>
+    <Item
+      key="first"
+      textValue="Duplicate"
+      data-id="first"
+      label="Accordion item"
+      slots={props.slots}
+      hintText={props.hintText}
+      hintTextProps={props.hintTextProps}
+    >
       <Text>Render me!</Text>
     </Item>
   </AccordionGroup>
 ));
+
+const getComponentWithHint = () => render(
+  <AccordionGroup {...defaultProps}>
+    <Item
+      key="hint"
+      textValue="Hint item"
+      label="Hint item"
+      hintText="Hint content"
+    >
+      <Text>Hint body</Text>
+    </Item>
+  </AccordionGroup>,
+);
 
 test('button press uses callback', async () => {
   const onPress = jest.fn();
@@ -358,4 +379,28 @@ test('when labelHeadingTag is uppercase, the label is rendered', () => {
 test('renders Accordion component with slot', () => {
   getComponentWithSlot({ slots: { postHeading: <HelpHint data-testid="helpHint">Text of the popover right here...</HelpHint> } });
   expect(screen.getByTestId('helpHint')).toBeInTheDocument();
+});
+
+test('renders hintText outside the accordion button', () => {
+  getComponentWithHint();
+
+  const button = screen.getByRole('button', { name: 'Hint item' });
+  const hintButton = screen.getByTestId('help-hint__button');
+  expect(hintButton).toBeInTheDocument();
+  expect(button).not.toContainElement(hintButton);
+});
+
+test('supports hintTextProps and postHeading independently', () => {
+  getComponentWithSlot({
+    slots: { postHeading: <span data-testid="post-heading">Post heading</span> },
+    hintText: 'Hint content',
+    hintTextProps: {
+      iconButtonProps: { 'aria-label': 'section help' },
+      popoverProps: { isOpen: true },
+    },
+  });
+
+  expect(screen.getByRole('button', { name: 'section help' })).toBeInTheDocument();
+  expect(screen.getByText('Hint content')).toBeInTheDocument();
+  expect(screen.getByTestId('post-heading')).toBeInTheDocument();
 });

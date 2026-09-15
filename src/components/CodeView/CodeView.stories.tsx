@@ -1,11 +1,17 @@
 import React from 'react';
+import DotsHorizontalIcon from '@pingux/mdi-react/DotsHorizontalIcon';
 import { Meta, StoryFn } from '@storybook/react-vite';
 import Prism from 'prismjs';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
-import { CodeView } from '../../index';
+import {
+  CodeView,
+  Icon,
+  IconButton,
+} from '../../index';
 import { CodeViewProps } from '../../types/codeView';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
+import { themes } from '../../utils/devUtils/constants/themes';
 
 import CodeViewReadme from './CodeView.mdx';
 
@@ -78,6 +84,15 @@ export default {
     Prism: {
       control: 'none',
     },
+    slots: {
+      control: false,
+      description: 'Optional slots. `controlBar` renders custom controls between the language label and copy button in the Onyx header.',
+      table: {
+        type: {
+          summary: '{ controlBar?: React.ReactNode }',
+        },
+      },
+    },
   },
   args: {
     children: code,
@@ -117,6 +132,37 @@ Default.parameters = {
   design: {
     type: 'figma',
     url: FIGMA_LINKS.codeView.default,
+  },
+  a11y: {
+    config: {
+      rules: [{ id: 'color-contrast', enabled: false }],
+    },
+  },
+};
+
+export const WithSlots: StoryFn<CodeViewProps> = () => (
+  <CodeView
+    language="json"
+    slots={{
+      controlBar: (
+
+        <IconButton
+          aria-label="Open code actions"
+          title="Open code actions"
+          sx={{ width: 'fit-content', flexShrink: 0 }}
+        >
+          <Icon icon={DotsHorizontalIcon} title={{ name: 'Code actions' }} />
+        </IconButton>
+      ),
+    }}
+  >
+    {code}
+  </CodeView>
+);
+
+WithSlots.parameters = {
+  docs: {
+    storyDescription: 'Adds an accessible custom control between the language label and the copy button in the Onyx header through slots.controlBar.',
   },
   a11y: {
     config: {

@@ -8,6 +8,7 @@ import { Box, Icon, IconButton, Text } from '../../index';
 const PageHeader = forwardRef(({
   buttonProps,
   children,
+  slots,
   title,
   ...other
 }, ref) => {
@@ -20,7 +21,7 @@ const PageHeader = forwardRef(({
   const renderButton = buttonProps && (
     <IconButton
       aria-label="icon button"
-      ml={pageHeaderAddIconMargin}
+      mx={pageHeaderAddIconMargin}
       variant="inverted"
       {...buttonProps}
     >
@@ -35,6 +36,7 @@ const PageHeader = forwardRef(({
           {title}
         </Text>
         {renderButton}
+        {slots?.rightOfTitle}
       </Box>
       <Text variant="pageHeaderBody" sx={linkStyles}>{children}</Text>
     </Box>
@@ -46,6 +48,10 @@ PageHeader.propTypes = {
   title: PropTypes.string,
   /** Props object that is spread into the Button element. */
   buttonProps: PropTypes.shape({}),
+  /** Slots for rendering custom elements within the PageHeader. */
+  slots: PropTypes.shape({
+    rightOfTitle: PropTypes.node,
+  }),
 };
 
 export default PageHeader;

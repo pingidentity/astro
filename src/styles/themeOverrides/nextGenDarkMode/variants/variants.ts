@@ -1,6 +1,7 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 
 import { avatar } from './avatar';
+import { box } from './box';
 import callout from './callout';
 import { footer } from './footer';
 import iconBadge from './iconBadge';
@@ -186,6 +187,7 @@ const environmentBreadcrumb = {
 };
 
 export default {
+  box,
   rockerButton,
   rangeCalendar,
   attachment,

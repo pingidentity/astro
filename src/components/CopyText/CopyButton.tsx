@@ -11,7 +11,7 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>((props, ref) =
   const { iconProps, variant = 'default', ...others } = props;
   const { copyButtonSize, themeState } = useGetTheme();
   /* istanbul ignore next */
-  const themeVariant = !themeState.isOnyxDark ? 'copyButton' : `copyButton.${variant}`;
+  const themeVariant = themeState.isOnyx ? `copyButton.${variant}` : 'copyButton';
 
   return (
     <IconButton
@@ -20,7 +20,7 @@ const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>((props, ref) =
       variant={themeVariant}
       {...others}
     >
-      <Icon icon={ContentCopy} size={copyButtonSize} color="text.secondary" title={{ name: 'Content Copy Icon' }} {...iconProps} />
+      <Icon icon={ContentCopy} size={copyButtonSize} title={{ name: 'Content Copy Icon' }} {...iconProps} />
     </IconButton>
   );
 });

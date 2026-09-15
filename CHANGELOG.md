@@ -1,3 +1,132 @@
+## 2.226.1 (2026-09-10)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.226.1-alpha.0 (2026-09-10)
+
+### 🩹 Fixes
+
+- temporarily disbale dependency check
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.226.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- bump version
+- [UXE-8984] Codeview fix onyx copy button color add control bar slot
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.225.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- [UXE-8988] fix Status badges
+
+### 🩹 Fixes
+
+- update package versions
+
+### ❤️  Thank You
+
+- Andrew Keohane
+- Ridhisha Dangol
+
+## 2.224.0-alpha.0 (2026-09-10)
+
+### 🚀 Features
+
+- [UXE-8471] Add hintText to AccordionItem
+
+### 🩹 Fixes
+
+- **astro:** update HelpHint Onyx hover focus styles
+
+### ❤️  Thank You
+
+- Andrew Keohane
+- Kunal
+
+## 2.223.4 (2026-09-09)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.223.4-alpha.0 (2026-09-09)
+
+### 🩹 Fixes
+
+- [UXE-9022] Fix label value pair
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.223.3-alpha.0 (2026-09-09)
+
+### 🩹 Fixes
+
+- add git tag check and verify versioning
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.223.2-alpha.0 (2026-09-04)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8365] fix CheckboxField visual inconsistencies in Onyx theme
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.223.1-alpha.0 (2026-09-04)
+
+### 🩹 Fixes
+
+- [UXE-9020] Avatar Icon Sizing fix
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.223.0-alpha.0 (2026-09-03)
+
+### 🚀 Features
+
+- [UXE-8983] add helpHint prop top Badge
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.222.0-alpha.0 (2026-09-03)
+
+### 🚀 Features
+
+- [UXE-8982] add slots.rightOfTitle to PageHeader
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.221.7-alpha.0 (2026-09-03)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-8934] position Onyx field carets 12px from input edge
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.221.6 (2026-09-01)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

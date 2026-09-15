@@ -1,6 +1,7 @@
 import { ElementType, Key, ReactNode } from 'react';
 import type { ItemProps as BaseItemProps } from '@react-types/shared';
 
+import type { HelpHintProps } from './helpHint';
 import { IconTypeExtended } from './icon';
 import { DOMAttributes, StyleProps } from './shared';
 
@@ -17,6 +18,10 @@ declare module '@react-types/shared' {
     containerProps?: StyleProps;
     /** Props for the accordion item button element. */
     buttonProps?: StyleProps;
+    /** Contextual help content displayed beside the accordion heading. */
+    hintText?: ReactNode;
+    /** Props passed to the contextual help hint. */
+    hintTextProps?: HelpHintProps;
     /** Props for the tab line element. */
     tabLineProps?: StyleProps;
     /** Whether the item has a separator */

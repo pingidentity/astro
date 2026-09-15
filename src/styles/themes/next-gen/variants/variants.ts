@@ -34,6 +34,14 @@ import { tableBase } from './tableBase';
 import { menuTab, tab, tabs } from './tabs';
 import tooltip from './tooltip';
 
+const onyxLabelValuePairs = {
+  ...labelValuePairs,
+  value: {
+    ...labelValuePairs.value,
+    color: 'text.primary',
+  },
+};
+
 const fieldHelperText = {
   title: {
     fontSize: 'small',
@@ -491,7 +499,7 @@ export default {
   footer,
   helpHint,
   iconWrapper,
-  labelValuePairs,
+  labelValuePairs: onyxLabelValuePairs,
   listBox,
   listView,
   listViewItem,

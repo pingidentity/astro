@@ -58,6 +58,7 @@ const ListViewItem = forwardRef(({
         isCircle
         colorId={others.id}
         {...iconWrapperProps}
+        iconProps={{ size: 'sm', ...iconProps, ...iconWrapperProps?.iconProps }}
       />
     ) : (
       <Box width="25px" variant="listViewItem.iconContainer">
