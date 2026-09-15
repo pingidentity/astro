@@ -1,3 +1,13 @@
+## 2.227.0-alpha.0 (2026-09-15)
+
+### 🚀 Features
+
+- **astro:** [UXE-8941] AccordionGridGroup/AccordionGridItem: convert to TypeScript
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.226.2-alpha.0 (2026-09-15)
 
 ### 🩹 Fixes
