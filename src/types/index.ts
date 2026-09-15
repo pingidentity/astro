@@ -1,4 +1,6 @@
 export * from './accessibilityTable';
+export * from './AccordionGridGroup';
+export * from './AccordionGridItem';
 export * from './arrayField';
 export * from './avatar';
 export * from './badge';

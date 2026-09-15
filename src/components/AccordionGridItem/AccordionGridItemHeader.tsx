@@ -2,14 +2,20 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { mergeProps, useFocusRing } from 'react-aria';
 import { useGridCell } from '@react-aria/grid';
 import { useHover, usePress } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
+import type { GridState } from '@react-stately/grid';
+import type { GridCollection } from '@react-types/grid';
+import type { FocusableElement, Key } from '@react-types/shared';
 
 import { useAccordionGridContext } from '../../context/AccordionGridContext';
 import { useGetTheme, useStatusClasses } from '../../hooks';
+import { AccordionGridItemHeaderProps } from '../../types';
 import Box from '../Box';
 import Icon from '../Icon';
 
-const AccordionGridItemHeader = forwardRef((props, ref) => {
+const AccordionGridItemHeader = forwardRef<
+  HTMLElement,
+  AccordionGridItemHeaderProps
+>((props, ref) => {
   const {
     item,
     className,
@@ -22,22 +28,30 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
     ...others
   } = props;
 
-  const { state } = useAccordionGridContext();
-  const cellRef = useRef();
+  const { state } = useAccordionGridContext() as {
+    state: GridState<object, GridCollection<object>>
+  };
+  /* @react-aria/grid's hooks resolve a newer `@react-stately/grid` than the direct
+   * dependency (their `GridState.disabledKeys` uses @react-types/shared's `Key`, which
+   * omits `bigint`), so the state needs a widening cast before the hook calls. */
+  const gridState = state as Omit<
+    GridState<object, GridCollection<object>>, 'disabledKeys'
+  > & { disabledKeys: Set<Key> };
+  const cellRef = useRef<HTMLElement>(null);
 
   const { icons, themeState: { isOnyx } } = useGetTheme();
   const { MenuDown, MenuUp } = icons;
 
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => cellRef.current);
+  useImperativeHandle(ref, () => cellRef.current as HTMLElement);
 
-  const cellNode = [...item.childNodes][0];
+  const cellNode = Array.from(item!.childNodes)[0];
 
   const { gridCellProps } = useGridCell({
     node: cellNode,
     focusMode: 'cell',
     shouldSelectOnPressUp: true,
-  }, state, cellRef);
+  }, gridState, cellRef);
 
   const { hoverProps, isHovered } = useHover({});
   const { pressProps, isPressed } = usePress({ ref: cellRef });
@@ -66,9 +80,9 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
   const ariaLabel = props['aria-label'];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e: React.KeyboardEvent<FocusableElement>) => {
     if (e.key === 'Enter') {
-      state.selectionManager.toggleSelection(e.target.dataset.key);
+      state.selectionManager.toggleSelection((e.target as HTMLElement).dataset.key as Key);
     }
   };
 
@@ -118,22 +132,6 @@ const AccordionGridItemHeader = forwardRef((props, ref) => {
 
 AccordionGridItemHeader.defaultProps = {
   hasCaret: true,
-};
-
-AccordionGridItemHeader.propTypes = {
-  'aria-label': PropTypes.string,
-  isSelected: PropTypes.bool,
-  hasCaret: PropTypes.bool,
-  customDownArrow: PropTypes.node,
-  customUpArrow: PropTypes.node,
-  item: PropTypes.shape({
-    key: PropTypes.string,
-    childNodes: PropTypes.arrayOf(PropTypes.shape({})),
-    props: PropTypes.shape({
-      isPressed: PropTypes.bool,
-    }),
-  }),
-  navigationMode: PropTypes.string,
 };
 
 export default AccordionGridItemHeader;
