@@ -1,3 +1,13 @@
+## 2.228.1-alpha.0 (2026-09-16)
+
+### 🩹 Fixes
+
+- add version sorting configuration for git
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.228.0-alpha.0 (2026-09-15)
 
 ### 🚀 Features
