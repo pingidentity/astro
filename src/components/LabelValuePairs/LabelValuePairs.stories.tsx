@@ -134,7 +134,7 @@ export const WithLabelIcon: StoryFn = args => {
       <Pair>
         <PairLabel>
           Status
-          <Box isRow gap="xs" alignItems="center">
+          <Box isRow ml="xs" gap="xs" alignItems="center">
             {icon}
             <Text variant="listSubtitle" color={isOnyx ? 'darkgreen' : 'green'}>Verified</Text>
           </Box>
