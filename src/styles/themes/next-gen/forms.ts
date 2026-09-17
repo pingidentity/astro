@@ -1,5 +1,6 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
+import checkboxFieldGroup from '../../../components/CheckboxFieldGroup/CheckboxFieldGroup.styles';
 import { isSafari } from '../../safariAgent.js';
 
 import colors from './colors/colors';
@@ -175,6 +176,7 @@ export default {
   label,
   checkboxField,
   checkbox,
+  checkboxFieldGroup,
   comboBox,
   select,
   radio,

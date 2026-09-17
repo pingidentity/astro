@@ -48,6 +48,15 @@ const label = {
   radio: {
     color: astroTokensDark.color.input.text,
   },
+  checkboxFieldGroup: {
+    color: 'text.primary',
+  },
+  checkboxFieldGroupItem: {
+    color: 'text.primary',
+    '&.is-disabled, &.is-read-only': {
+      color: 'text.primary',
+    },
+  },
   checkbox: {
     '&.is-disabled': {
       color: astroTokensDark.color.gray[100],
