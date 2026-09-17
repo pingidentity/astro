@@ -11,9 +11,16 @@ const descriptions = {
   isPanelHeader: 'A boolean that will adapt the styling of ListIteme to be used as the PanelHeader',
   slots: 'Provides a way to insert markup in specified places.',
   linkProps: 'When present, provides meta click functionality',
+  colorId: 'Identifier used to deterministically derive the avatar color when no explicit color is set.',
 };
 
 export const SharedItemArgTypes = {
+  colorId: {
+    description: descriptions.colorId,
+    control: {
+      type: 'text',
+    },
+  },
   data: {
     description: descriptions.data,
     type: { summary: '{ icon, image, text, subtext }' },
@@ -53,6 +60,7 @@ export const listViewItemArgTypes = {
 
 export const SharedItemPropTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  colorId: PropTypes.string,
   data: PropTypes.shape({
     icon: PropTypes.elementType,
     image: PropTypes.shape({

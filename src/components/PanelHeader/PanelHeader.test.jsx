@@ -206,9 +206,14 @@ test('forwards iconProps to the Onyx avatar icon', () => {
 
 test('renders image avatars in Onyx', () => {
   getComponentOnyx();
+  act(() => {
+    fallbackImageObj.onImageLoad();
+  });
+
   const image = screen.getByRole('img');
 
   expect(image.tagName.toLowerCase()).toBe('img');
   expect(image).toHaveAttribute('src', pingImg);
-  expect(image).toHaveAttribute('alt', 'Avatar');
+  expect(image).toHaveAttribute('alt', 'avatar');
+  expect(image).toHaveAttribute('aria-label', 'avatar');
 });
