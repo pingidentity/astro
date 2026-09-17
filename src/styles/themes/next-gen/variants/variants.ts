@@ -44,7 +44,7 @@ const onyxLabelValuePairs = {
 
 const fieldHelperText = {
   title: {
-    fontSize: 'small',
+    fontSize: 'md',
     pt: '0px !important',
     mt: '.25rem',
     '&.is-default': {
@@ -61,6 +61,7 @@ const fieldHelperText = {
     },
   },
 };
+
 
 export const badgeDeleteButton = {
   ...button.iconButtons.base,
