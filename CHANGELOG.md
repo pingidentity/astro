@@ -1,3 +1,13 @@
+## 2.228.3-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9095, UXE-9089] round data.image via images.avatar variant
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.228.2-alpha.0 (2026-09-17)
 
 ### 🩹 Fixes
