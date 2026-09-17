@@ -1,3 +1,13 @@
+## 2.228.2-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- [UXE-8981] update onyx HelpHint
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.228.1 (2026-09-16)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
