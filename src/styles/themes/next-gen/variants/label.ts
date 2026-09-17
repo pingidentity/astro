@@ -31,6 +31,10 @@ export const label: ThemeUICSSObject = {
   radioGroup: {
     color: 'text.primary',
     fontSize: fontSizes.label,
-    mb: 'md',
+    mb: 'sm',
   },
+};
+
+label.indicator = {
+  fontWeight: 0,
 };

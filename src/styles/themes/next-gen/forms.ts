@@ -93,8 +93,17 @@ export const numberField = {
 
 export const radio = {
   base: {
-    color: 'text.secondary',
-    mr: '8px',
+    color: 'border.input',
+    mr: 'md',
+    height: 24,
+    width: 24,
+    // Horizontal RadioGroup uses a tighter icon-to-label gap per the Onyx spec
+    '.is-horizontal &': {
+      mr: 'sm',
+    },
+    'input:checked ~ &': {
+      color: 'active',
+    },
     'input ~ &.is-focused':
       /* istanbul ignore next */
       isSafari ? {
@@ -112,6 +121,18 @@ export const radio = {
           outlineOffset: '1px',
         },
   },
+  outerContainer: {
+    '.is-horizontal &': {
+      mr: 'lg',
+    },
+  },
+  checkedContent: {
+    pl: '40px',
+  },
+};
+
+export const radioGroupWrapper = {
+  rowGap: 'xs',
 };
 
 export const timeField = {
@@ -157,6 +178,7 @@ export default {
   comboBox,
   select,
   radio,
+  radioGroupWrapper,
   search,
   switch: switchable,
   numberField,

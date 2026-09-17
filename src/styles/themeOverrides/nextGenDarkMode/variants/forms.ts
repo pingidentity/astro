@@ -21,12 +21,6 @@ export const select = {
   },
 };
 
-export const radio = {
-  base: {
-    color: 'text.primary',
-  },
-};
-
 export const checkbox = {
   color: astroTokensDark.color.gray[500],
   '& rect[id="unchecked-bg"]': {
@@ -49,10 +43,10 @@ export const checkbox = {
 const label = {
   color: astroTokensDark.color.gray[100],
   radioGroup: {
-    color: 'white',
+    color: astroTokensDark.color.input.text,
   },
   radio: {
-    color: 'white',
+    color: astroTokensDark.color.input.text,
   },
   checkbox: {
     '&.is-disabled': {
@@ -113,7 +107,6 @@ const numberField = {
 export default {
   input,
   checkbox,
-  radio,
   label,
   search,
   select: {
