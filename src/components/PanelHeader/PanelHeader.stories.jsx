@@ -13,7 +13,7 @@ import {
   PanelHeaderSwitchField,
 } from '../../index';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks.ts';
-import { pingImg, userImagePanelHeader } from '../../utils/devUtils/constants/images';
+import { pingImg, userImage } from '../../utils/devUtils/constants/images';
 import { SharedItemArgTypes } from '../ListViewItem/listViewItemAttributes';
 
 import PanelHeaderReadMe from './PanelHeader.mdx';
@@ -37,6 +37,7 @@ export default {
 export const Default = ({ ...args }) => (
   <PanelHeader
     {...args}
+    colorId="1111111111111111"
     data={{
       icon: AccountIcon,
       text: 'Fons Vernall',
@@ -103,14 +104,13 @@ export const WithImage = args => (
     {...args}
     data={{
       image: {
-        src: userImagePanelHeader,
+        src: userImage,
         alt: 'Ping Identity Logo',
         'aria-label': 'Ping Identity Logo',
       },
       avatarDefaultText: 'FV',
       text: 'Fons Vernall',
     }}
-    avatarProps={{ size: 'lg' }}
   />
 );
 
@@ -132,7 +132,7 @@ export const WithAvatar = args => (
       },
       text: 'Fons Vernall',
     }}
-    avatarProps={{ size: 'lg', isLogo: true }}
+    avatarProps={{ isLogo: true }}
   />
 );
 

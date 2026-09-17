@@ -1,3 +1,43 @@
+## 2.229.0-alpha.0 (2026-09-17)
+
+### 🚀 Features
+
+- [UXE-8935] Add CheckboxFieldGroup component
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.228.4-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- [UXE-8686] Align RadioGroupField with Onyx light-mode spec
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.228.3-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9095, UXE-9089] round data.image via images.avatar variant
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.228.2-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- [UXE-8981] update onyx HelpHint
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.228.1 (2026-09-16)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

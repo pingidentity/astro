@@ -1,6 +1,7 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
+import checkboxFieldGroup from '../../../../components/CheckboxFieldGroup/CheckboxFieldGroup.styles';
 import labelValuePairs from '../../../../components/LabelValuePairs/LabelValuePairs.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
@@ -44,7 +45,7 @@ const onyxLabelValuePairs = {
 
 const fieldHelperText = {
   title: {
-    fontSize: 'small',
+    fontSize: 'md',
     pt: '0px !important',
     mt: '.25rem',
     '&.is-default': {
@@ -61,6 +62,7 @@ const fieldHelperText = {
     },
   },
 };
+
 
 export const badgeDeleteButton = {
   ...button.iconButtons.base,
@@ -492,6 +494,7 @@ export default {
   box,
   buttonBar,
   callout,
+  checkboxFieldGroup,
   codeView,
   dataTable,
   environmentBreadcrumb,

@@ -87,6 +87,14 @@ describe('ListViewItem', () => {
     expect(icon).toHaveStyleRule('height', '18px');
   });
 
+  test('passes colorId to the avatar', () => {
+    getComponentOnyx(OnyxTheme, { colorId: 'my-color-id' });
+
+    const avatar = screen.getByRole('img', { name: `${defaultProps.data.text}${LIST_ITEM_ICON}` }).parentElement;
+
+    expect(avatar).toBeInTheDocument();
+  });
+
   test('renders icon if both icon and image are passed', () => {
     getComponent();
 

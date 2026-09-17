@@ -10,5 +10,6 @@ export interface ExampleItemProps {
   id: string | number,
   hasSeparator?: boolean,
   icon?: React.ElementType,
-  iconWrapperProps?: IconWrapperProps
+  iconWrapperProps?: IconWrapperProps,
+  image?: { src: string, alt: string, 'aria-label': string }
 }

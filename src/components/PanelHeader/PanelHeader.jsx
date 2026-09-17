@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useGetTheme } from '../../hooks';
-import { Avatar, Box, CopyText, Icon, Image, Text } from '../../index';
+import { Avatar, Box, CopyText, Icon, IconWrapper, Image, Text } from '../../index';
 import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
@@ -11,6 +11,7 @@ const PanelHeader = forwardRef(({
   avatarProps,
   children,
   className,
+  colorId,
   data,
   headerProps,
   headerWrapperProps,
@@ -39,24 +40,39 @@ const PanelHeader = forwardRef(({
     </Box>
   );
 
+  const renderOnyxIcon = icon && (
+    <Box mr="md">
+      <IconWrapper
+        icon={icon}
+        size="sm"
+        title={{ name: `${text}${PANEL_HEADER_ICON}` }}
+        isCircle
+        colorId={colorId || avatarDefaultText}
+        {...avatarProps}
+        iconProps={{ size: 'sm', ...iconProps }}
+      />
+    </Box>
+  );
+
   const renderAvatar = (
     <Avatar
-      src={image?.src}
-      isSquare={!!image?.src}
       size="sm"
+      colorId={colorId}
       defaultText={avatarDefaultText}
       mr="md"
       {...avatarProps}
-    >
-      {icon && !image?.src && (
-        <Icon
-          icon={icon}
-          size="sm"
-          title={{ name: `${text}${PANEL_HEADER_ICON}` }}
-          {...iconProps}
-        />
-      )}
-    </Avatar>
+    />
+  );
+
+  const renderOnyxImage = !icon && image?.src && (
+    <Box mr="md">
+      <Image
+        src={image.src}
+        alt={image.alt}
+        aria-label={image['aria-label']}
+        variant="images.avatar"
+      />
+    </Box>
   );
 
   const renderImage = !icon && image && (
@@ -75,6 +91,8 @@ const PanelHeader = forwardRef(({
     }
 
     if (isOnyx) {
+      if (icon) return renderOnyxIcon;
+      if (image?.src) return renderOnyxImage;
       return renderAvatar;
     }
 
@@ -109,7 +127,7 @@ const PanelHeader = forwardRef(({
                 <Text variant="panelHeaderSubtext">{subtext}</Text>
               </CopyText>
             )
-            : subtext && (<Text variant="panelHeaderSubtext">{subtext}</Text>)}
+            : subtext && (<Text variant="panelHeaderSubtext" {...subtextProps}>{subtext}</Text>)}
         </Box>
       )}
     </Box>
@@ -139,6 +157,7 @@ const PanelHeader = forwardRef(({
 
 PanelHeader.propTypes = {
   ...SharedItemPropTypes,
+  colorId: PropTypes.string,
   isCopyable: PropTypes.bool,
   iconProps: PropTypes.object,
   slots: PropTypes.shape({

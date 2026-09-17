@@ -12,6 +12,7 @@ const nextGenConvertedComponents = [
   'Callout',
   'Card',
   'CheckboxField',
+  'CheckboxFieldGroup',
   'CodeView',
   'ColorField',
   'ComboBoxField',

@@ -13,6 +13,7 @@ export * from './buttonBar';
 export * from './calendar';
 export * from './card';
 export * from './checkboxField';
+export * from './checkboxFieldGroup';
 export * from './codeEditor';
 export * from './codeView';
 export * from './collapsiblePanel';
