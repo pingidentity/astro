@@ -1,3 +1,13 @@
+## 2.228.4-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- [UXE-8686] Align RadioGroupField with Onyx light-mode spec
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.228.3-alpha.0 (2026-09-17)
 
 ### 🩹 Fixes
