@@ -1,3 +1,13 @@
+## 2.229.0-alpha.0 (2026-09-17)
+
+### 🚀 Features
+
+- [UXE-8935] Add CheckboxFieldGroup component
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.228.4-alpha.0 (2026-09-17)
 
 ### 🩹 Fixes
