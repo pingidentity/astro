@@ -84,7 +84,7 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
         }}
         {...mergeProps(triggerProps, iconButtonProps || {})}
       >
-        <Icon icon={icons.helpHint} />
+        <Icon icon={icons.helpHint} size="xs" />
       </IconButton>
       <PopoverContainer
         {...mergeProps(popoverContainerProps, popoverProps || tooltipProps || {})}

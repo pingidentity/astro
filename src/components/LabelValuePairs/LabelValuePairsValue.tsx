@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from 'react';
 import EyeOffIcon from '@pingux/mdi-react/EyeOffOutlineIcon';
 import EyeIcon from '@pingux/mdi-react/EyeOutlineIcon';
 
+import { useGetTheme } from '../../hooks';
 import {
   Box,
   CopyText,
@@ -30,8 +31,11 @@ interface MaskedValueProps {
 }
 
 const ValueText = ({ children, ...others }) => (
-  <Text variant="variants.labelValuePairs.value" {...others}>{children}</Text>
+  <Text variant="variants.labelValuePairs.value" {...others}>
+    {children}
+  </Text>
 );
+
 
 const MaskedValue = ({
   value, containerProps, textProps, iconProps, iconButtonProps,

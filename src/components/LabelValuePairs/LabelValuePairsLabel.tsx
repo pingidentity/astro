@@ -23,7 +23,7 @@ const PairLabel = forwardRef<HTMLElement, LabelValuePairsLabelProps>((props, ref
 
   const defaultTextProps = isOnyx ? { variant: H5, as: H5 } : { variant: H4, as: H4 };
   return (
-    <Box ref={ref} isRow alignItems="center" gap="sm" {...others} {...containerProps}>
+    <Box ref={ref} isRow alignItems="center" {...others} {...containerProps}>
       <Text {...defaultTextProps} {...textProps}>{label}</Text>
       {icon}
       {helpHint && (
