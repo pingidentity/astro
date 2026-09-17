@@ -17,6 +17,8 @@ export * from './codeEditor';
 export * from './codeView';
 export * from './collapsiblePanel';
 export * from './colorField';
+export * from './ComboBox';
+export * from './ComboBoxField';
 export * from './copyText';
 export * from './dataTable';
 export * from './datePicker';

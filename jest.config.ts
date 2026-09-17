@@ -32,6 +32,7 @@ module.exports = {
     '.(story|stories).(js|jsx|mdx|ts|tsx)',
     '<rootDir>/src/styles/',
     '.styles.js',
+    '.styles.ts',
     '/styles/',
     '/utils/',
     // FIXME: upgrade RTL to v14 (UIP-6248), then fix test in useOverlappingMenuHoverState.test.js,
