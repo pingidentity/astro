@@ -23,6 +23,7 @@ const ListViewItem = forwardRef(({
   onHoverEnd,
   onHoverStart,
   slots,
+  colorId,
   ...others
 }, ref) => {
   const { icon, image, subtext, text } = data;
@@ -56,7 +57,7 @@ const ListViewItem = forwardRef(({
         size="sm"
         title={{ name: `${text}${LIST_ITEM_ICON}` }}
         isCircle
-        colorId={others.id}
+        colorId={colorId || others.id}
         {...iconWrapperProps}
         iconProps={{ size: 'sm', ...iconProps, ...iconWrapperProps?.iconProps }}
       />
@@ -74,13 +75,24 @@ const ListViewItem = forwardRef(({
   );
 
   const renderImage = !icon && image && (
-  <Box width="35px">
-    <Image
-      src={image.src}
-      alt={image.alt}
-      aria-label={image['aria-label']}
-    />
-  </Box>
+    isOnyx ? (
+      <Box variant="listViewItem.imageContainer">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          aria-label={image['aria-label']}
+          variant="images.avatar"
+        />
+      </Box>
+    ) : (
+      <Box width="35px">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          aria-label={image['aria-label']}
+        />
+      </Box>
+    )
   );
 
   const renderData = (

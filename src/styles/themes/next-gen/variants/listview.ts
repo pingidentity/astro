@@ -1,5 +1,7 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
+import sizes from '../sizes';
+
 export const focusBoxShadow = '0 0 0 2px inset #1a73e8';
 export const borderRadius = '16px';
 
@@ -13,8 +15,11 @@ export const listViewItem = {
   iconWrapper: {
     ml: 'lg',
   },
+  imageContainer: {
+    width: sizes.avatar.sm,
+  },
   imageWrapper: {
-    ml: 'md',
+    ml: 'lg',
   },
   styledListItem: {
     bg: 'white',
