@@ -1,3 +1,13 @@
+## 2.229.1-alpha.0 (2026-09-18)
+
+### 🩹 Fixes
+
+- **astro:** correct Onyx badge label, capitalization, and removable icon styling
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.229.0 (2026-09-17)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
