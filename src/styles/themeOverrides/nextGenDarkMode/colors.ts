@@ -1,5 +1,6 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 import chroma from 'chroma-js';
+import { fontWeight } from 'styled-system';
 
 import { white } from '../../colors';
 

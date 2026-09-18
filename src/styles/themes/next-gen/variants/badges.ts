@@ -42,6 +42,7 @@ const baseBadge = {
   display: 'inline-flex !important',
   width: 'fit-content',
   color: 'text.primary',
+  backgroundColor: 'gray.100',
   ...badgeIconStyle,
 };
 
@@ -286,9 +287,27 @@ const countBadge = {
 const countNeutral = {
   ...secondary,
 };
-
+// #23282e
 const invertedRemovableBadge = {
-  ...dark,
+  ...baseBadge,
+  backgroundColor: `${astroTokens.color.gray[900]} !important`,
+  '& span': {
+    color: astroTokens.color.gray[100],
+  },
+  '& svg': {
+    path: {
+      fill: astroTokens.color.gray[100],
+    },
+  },
+  '& button.is-hovered': {
+    backgroundColor: astroTokens.color.gray[100],
+  },
+  '& button.is-hovered svg path': {
+    fill: 'dark',
+  },
+  '& button.is-pressed svg path': {
+    fill: astroTokens.color.gray[100],
+  },
 };
 
 const removableBadge = {
@@ -332,17 +351,20 @@ export const badges = {
   removableBadge,
   environmentBadge,
   invertedRemovableBadge,
+  convenienceDefault: {
+    ...primary,
+  },
   errorCalloutBadge: {
-    backgroundColor: 'white !important',
+    ...criticalStatusBadge,
   },
   infoCalloutBadge: {
-    backgroundColor: 'white !important',
+    ...activeStatusBadge,
   },
   successCalloutBadge: {
-    backgroundColor: 'white !important',
+    ...healthyStatusBadge,
   },
   warningCalloutBadge: {
-    backgroundColor: 'white !important',
+    ...warningStatusBadge,
   },
   tableBaseBadge,
 };

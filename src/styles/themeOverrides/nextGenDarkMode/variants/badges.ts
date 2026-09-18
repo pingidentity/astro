@@ -144,6 +144,32 @@ const itemBadgeWithSlot = {
   },
 };
 
+const removableBadge = {
+  backgroundColor: `${astroTokensDark.color.gray[700]} !important`,
+  '& span': {
+    color: astroTokensDark.color.gray[100],
+  },
+  '& svg': {
+    color: astroTokensDark.color.gray[100],
+    path: {
+      fill: astroTokensDark.color.gray[100],
+    },
+  },
+};
+
+const invertedRemovableBadge = {
+  backgroundColor: `${astroTokensDark.color.gray[100]} !important`,
+  '& span': {
+    color: astroTokensDark.color.gray[700],
+  },
+  '& svg': {
+    color: astroTokensDark.color.gray[700],
+    path: {
+      fill: astroTokensDark.color.gray[700],
+    },
+  },
+};
+
 const tableBaseBadgeSpanStyle = {
   fontSize: '11.25px',
   lineHeight: '1',
@@ -189,6 +215,12 @@ const tableBaseBadge = {
 
 const badges = {
   baseBadge,
+  convenienceDefault: {
+    backgroundColor: `${astroTokensDark.color.gray.light} !important`,
+    '& span': {
+      color: astroTokensDark.color.font.base,
+    },
+  },
   primary,
   secondary,
   success,
@@ -208,29 +240,19 @@ const badges = {
   readOnlyBadge,
   readOnlyFieldBadge,
   itemBadgeWithSlot,
+  removableBadge,
+  invertedRemovableBadge,
   errorCalloutBadge: {
-    backgroundColor: '#23282e !important',
-    '& span': {
-      color: 'font.base',
-    },
+    ...criticalStatusBadge,
   },
   infoCalloutBadge: {
-    backgroundColor: '#23282e !important',
-    '& span': {
-      color: 'font.base',
-    },
+    ...activeStatusBadge,
   },
   successCalloutBadge: {
-    backgroundColor: '#23282e !important',
-    '& span': {
-      color: 'font.base',
-    },
+    ...healthyStatusBadge,
   },
   warningCalloutBadge: {
-    backgroundColor: '#23282e !important',
-    '& span': {
-      color: 'font.base',
-    },
+    ...warningStatusBadge,
   },
   tableBaseBadge,
 };
