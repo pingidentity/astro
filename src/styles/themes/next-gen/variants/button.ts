@@ -563,6 +563,18 @@ const iconButtons = {
       ...transitions,
     },
   },
+  invertedBadgeDeleteButton: {
+    ...badgeDeleteButton,
+    path: { fill: 'white' },
+    '&.is-hovered': {
+      bg: 'transparent',
+      path: { fill: 'white' },
+    },
+    '&.is-pressed': {
+      bg: 'transparent',
+      path: { fill: 'white' },
+    },
+  },
   messageCloseButton: {
     ...baseIconButton,
     minWidth: '28px',
@@ -655,9 +667,6 @@ const listBoxLink = {
     outline: 'none',
   },
   badgeDeleteButton,
-  invertedBadgeDeleteButton: {
-    ...badgeDeleteButton,
-  },
   clearSelectionButton: {
     ...searchClearButton,
     top: '15px',

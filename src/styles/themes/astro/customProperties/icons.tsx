@@ -113,4 +113,8 @@ export default {
   ImageOutlineIcon: ImageFilterHdrIcon,
   helpHint: HelpIcon,
   ModalCloseIcon: CloseIcon,
+  errorCalloutBadge: AlertCircleIcon,
+  infoCalloutBadge: InformationIcon,
+  successCalloutBadge: CheckCircleIcon,
+  warningCalloutBadge: AlertIcon,
 };

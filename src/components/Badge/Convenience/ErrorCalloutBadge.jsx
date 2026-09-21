@@ -1,15 +1,17 @@
 import React from 'react';
-import AlertCircle from '@pingux/mdi-react/AlertCircleIcon';
 
 import { Badge, Icon } from '../../..';
+import { useGetTheme } from '../../../hooks';
 
 const ErrorCalloutBadge = React.forwardRef((props, ref) => {
+  const { icons } = useGetTheme();
+
   return (
     <Badge
       ref={ref}
       variant="errorCalloutBadge"
       slots={{
-        leftIcon: <Icon icon={AlertCircle} size={15} color="critical.bright" />,
+        leftIcon: <Icon icon={icons.errorCalloutBadge} size="xs" />,
       }}
       {...props}
     />

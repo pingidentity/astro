@@ -63,6 +63,17 @@ const iconButtons = {
   modalCloseButton: {
     ...baseIconButton,
   },
+  invertedBadgeDeleteButton: {
+    path: { fill: astroTokensDark.color.gray[700] },
+    '&.is-hovered': {
+      bg: 'transparent',
+      path: { fill: astroTokensDark.color.gray[700] },
+    },
+    '&.is-pressed': {
+      bg: 'transparent',
+      path: { fill: astroTokensDark.color.gray[700] },
+    },
+  },
   modalHeaderCloseButton: {
     ...baseIconButton,
   },

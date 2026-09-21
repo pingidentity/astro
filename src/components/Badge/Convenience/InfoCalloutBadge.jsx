@@ -1,15 +1,17 @@
 import React from 'react';
-import Information from '@pingux/mdi-react/InformationIcon';
 
 import { Badge, Icon } from '../../..';
+import { useGetTheme } from '../../../hooks';
 
 const InfoCalloutBadge = React.forwardRef((props, ref) => {
+  const { icons } = useGetTheme();
+
   return (
     <Badge
       ref={ref}
       variant="infoCalloutBadge"
       slots={{
-        leftIcon: <Icon icon={Information} size={15} color="text.secondary" />,
+        leftIcon: <Icon icon={icons.infoCalloutBadge} size="xs" />,
       }}
       {...props}
     />
