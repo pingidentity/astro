@@ -110,8 +110,8 @@ const ComboBoxInput = forwardRef<HTMLInputElement, ComboBoxInputProps>((props, r
             variant: 'forms.comboBox.input',
             ...controlProps,
           }}
-          {...({ tabIndex: -1 } as object)}
-          {...({ statusClasses: { isHovered } } as object)}
+          tabIndex={-1}
+          statusClasses={{ isHovered }}
           ref={inputRef as React.Ref<HTMLInputElement>}
           slots={{
             inContainer: button,

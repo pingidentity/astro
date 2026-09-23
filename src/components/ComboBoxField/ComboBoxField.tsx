@@ -209,7 +209,6 @@ const ComboBoxField = forwardRef(<T extends object>(
     <Popover
       hasNoArrow
       isNonModal
-      {...({ isOpen: state.isOpen })}
       style={style}
       state={state}
       triggerRef={inputRef}

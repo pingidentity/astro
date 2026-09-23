@@ -55,4 +55,8 @@ export interface TextFieldProps extends StyleProps, SharedFieldProps{
   maxLength?: ValidPositiveInteger;
   role?: AriaRole;
   sx?: ThemeUICSSObject;
+  /** Tab index applied to the field container. */
+  tabIndex?: string | number;
+  /** Additional status classes to apply to the field's class names (e.g. `isHovered`). */
+  statusClasses?: { [className: string]: boolean };
 }
