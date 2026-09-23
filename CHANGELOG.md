@@ -1,3 +1,13 @@
+## 2.229.2-alpha.0 (2026-09-23)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9077] set dropdown option padding in Onyx listBox variant
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.229.1 (2026-09-21)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
