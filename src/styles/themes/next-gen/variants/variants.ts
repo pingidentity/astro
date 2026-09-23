@@ -9,6 +9,7 @@ import sizes from '../sizes';
 
 import accordion from './accordion';
 import accordionGrid from './accordionGrid';
+import arrayField from './arrayField';
 import { avatar } from './avatar';
 import { box } from './box';
 import button, { defaultFocus } from './button';
@@ -488,6 +489,7 @@ const helpHint = {
 export default {
   accordion,
   accordionGrid,
+  arrayField,
   attachment,
   avatar,
   breadcrumb,

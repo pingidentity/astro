@@ -4,6 +4,7 @@ import chroma from 'chroma-js';
 import { copyButton } from '../codeView/codeView';
 import tShirtSizes from '../customProperties/tShirtSizes';
 
+import { arrayFieldDeleteButton } from './arrayFieldDeleteButton';
 import { commonContentProps } from './box';
 
 
@@ -529,6 +530,9 @@ const iconButtons = {
   },
   onyx: {
     ...onyxIconButton,
+  },
+  arrayField: {
+    deleteButton: arrayFieldDeleteButton.deleteButton,
   },
   responseToolbar: {
     ...baseIconButton,

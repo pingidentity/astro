@@ -1,5 +1,6 @@
 import accordionGrid from '../../components/AccordionGridGroup/AccordionGrid.styles';
 import accordion from '../../components/AccordionGroup/Accordion.styles';
+import arrayField from '../../components/ArrayField/ArrayField.styles';
 import box from '../../components/Box/Box.styles';
 import bracket from '../../components/Bracket/Bracket.styles';
 import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
@@ -58,6 +59,7 @@ import treeView from '../../components/TreeView/TreeView.styles';
 export default {
   accordion,
   accordionGrid,
+  arrayField,
   box,
   bracket,
   breadcrumb,
