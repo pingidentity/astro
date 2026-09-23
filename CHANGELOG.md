@@ -1,3 +1,13 @@
+## 2.229.3-alpha.0 (2026-09-23)
+
+### 🩹 Fixes
+
+- **astro:** align ArrayField with Onyx specification
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.229.2-alpha.0 (2026-09-23)
 
 ### 🩹 Fixes
