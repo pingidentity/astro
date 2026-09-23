@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PlusCircleMultipleOutlineIcon from '@pingux/mdi-react/PlusCircleMultipleOutlineIcon';
 import { useFilter } from '@react-aria/i18n';
 
@@ -189,6 +189,29 @@ export const Default = args => {
       style={setOverlayStyle(direction, isOpen, '50%', '50%', '20%')}
     >
       <MultivaluesField items={items} {...args} onOpenChange={onOpenChange}>
+        {item => (
+          <Item key={item.key} data-id={item.name} aria-label={item.name}>
+            {item.name}
+          </Item>
+        )}
+      </MultivaluesField>
+    </OverlayProvider>
+  );
+};
+
+export const DefaultOpen = () => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  return (
+    <OverlayProvider
+      // note: spacing for demo purpose only so that the select list renders in the correct place
+      style={setOverlayStyle('bottom', true, '50%', '50%', '20%')}
+    >
+      <MultivaluesField items={items} label="Field Label" ref={inputRef}>
         {item => (
           <Item key={item.key} data-id={item.name} aria-label={item.name}>
             {item.name}

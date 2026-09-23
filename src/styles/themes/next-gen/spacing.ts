@@ -7,6 +7,7 @@ const scale = {
   lg: astroTokens.spacing.lg,
   xl: astroTokens.spacing.xl,
   xx: '4rem',
+  'md-s': '12px',
 };
 
 export default scale;

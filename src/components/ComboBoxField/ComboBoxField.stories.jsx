@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import { action } from 'storybook/actions';
 
@@ -147,6 +147,28 @@ export const Default = args => (
     </ComboBoxField>
   </OverlayProvider>
 );
+
+export const DefaultOpen = () => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  return (
+    <OverlayProvider>
+      <ComboBoxField
+        {...actions}
+        label="Example label"
+        defaultItems={items}
+        menuTrigger="focus"
+        ref={inputRef}
+      >
+        {item => <Item key={item.name}>{item.name}</Item>}
+      </ComboBoxField>
+    </OverlayProvider>
+  );
+};
 
 export const WithSections = args => (
   <OverlayProvider>

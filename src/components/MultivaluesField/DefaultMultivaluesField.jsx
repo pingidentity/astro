@@ -98,6 +98,13 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
       initialItems.filter(item => !Array.from(keys).includes(item.key)),
     );
     if (onSelectionChange) onSelectionChange(keys);
+    // Selecting an option removes it from the list, unmounting its row while
+    // focusedKey still points at it — the virtualizer then holds DOM focus on
+    // the listbox, so a subsequent outside click never blurs the input and the
+    // listbox stays open. Clear the stale focus and return it to the input,
+    // matching the post-selection focus state of the Astro theme (UXE-9077).
+    selectionManager.setFocusedKey(null);
+    inputRef.current?.focus();
   };
 
   const { contains } = useFilter({ sensitivity: 'base' });
