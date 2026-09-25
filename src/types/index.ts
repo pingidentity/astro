@@ -21,6 +21,7 @@ export * from './colorField';
 export * from './copyText';
 export * from './dataTable';
 export * from './datePicker';
+export * from './emptyState';
 export * from './environmentBreadcrumb';
 export * from './expandableText';
 export * from './fieldHelperText';

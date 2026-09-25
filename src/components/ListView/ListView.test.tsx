@@ -4,6 +4,8 @@ import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
 
+import onyxDarkTheme from '../../styles/themeOverrides/nextGenDarkMode';
+import onyxTheme from '../../styles/themes/next-gen';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { act, fireEvent, render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -276,6 +278,63 @@ test('renders neither loader nor item if the component is given no items nor a l
   getComponentEmpty();
   expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
   expect(screen.queryByRole('gridcell')).not.toBeInTheDocument();
+});
+
+test.each([
+  ['Onyx', onyxTheme],
+  ['Onyx dark', onyxDarkTheme],
+])('empty ListView renders the default EmptyState in the %s theme', (_themeName, providerTheme) => {
+  getComponentEmpty({}, { renderFn: ui => render(ui, { providerTheme }) });
+  expect(screen.getByText('No items exist')).toBeInTheDocument();
+  expect(screen.queryByRole('button')).not.toBeInTheDocument();
+});
+
+test('empty ListView renders nothing in the Astro theme', () => {
+  getComponentEmpty();
+  expect(screen.queryByText('No items exist')).not.toBeInTheDocument();
+});
+
+test('empty ListView renders the custom renderEmptyState in the Astro theme', () => {
+  getComponentEmpty({
+    renderEmptyState: () => <div data-testid="custom-empty">No items</div>,
+  });
+  expect(screen.getByTestId('custom-empty')).toBeInTheDocument();
+});
+
+test.each([
+  ['Onyx', onyxTheme],
+  ['Onyx dark', onyxDarkTheme],
+])('renderEmptyState takes priority over the default EmptyState in the %s theme', (_themeName, providerTheme) => {
+  getComponentEmpty(
+    { renderEmptyState: () => <div data-testid="custom-empty">No items</div> },
+    { renderFn: ui => render(ui, { providerTheme }) },
+  );
+  expect(screen.getByTestId('custom-empty')).toBeInTheDocument();
+  expect(screen.queryByText('No items exist')).not.toBeInTheDocument();
+});
+
+test('populated ListView renders its items in the Onyx theme', () => {
+  getComponent({}, { renderFn: ui => render(ui, { providerTheme: onyxTheme }) });
+  const options = screen.getAllByRole('gridcell');
+  expect(options).toHaveLength(items.length);
+  expect(options[0]).toHaveAttribute('data-id', items[0].name);
+});
+
+test('loading ListView does not render the default EmptyState in the Onyx theme', () => {
+  getComponentEmpty(
+    { loadingState: loadingStates.LOADING },
+    { renderFn: ui => render(ui, { providerTheme: onyxTheme }) },
+  );
+  expect(screen.getByRole('alert')).toBeInTheDocument();
+  expect(screen.queryByText('No items exist')).not.toBeInTheDocument();
+});
+
+test('loading ListView does not render renderEmptyState', () => {
+  getComponentEmpty({
+    loadingState: loadingStates.LOADING,
+    renderEmptyState: () => <div data-testid="custom-empty">No items</div>,
+  });
+  expect(screen.queryByTestId('custom-empty')).not.toBeInTheDocument();
 });
 
 test('Item accepts a data-id and the data-id can be found in the DOM', () => {

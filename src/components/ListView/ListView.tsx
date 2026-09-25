@@ -6,10 +6,12 @@ import { useCollator } from '@react-aria/i18n';
 import { Virtualizer, VirtualizerItem } from '@react-aria/virtualizer';
 import { ListLayout } from '@react-stately/layout';
 
+import { useGetTheme } from '../../hooks';
 import useLoadPrev from '../../hooks/useLoadPrev';
 import { Box } from '../../index';
 import { ListViewItemTypes, ListViewProps, ListViewState } from '../../types/listView';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import EmptyState from '../EmptyState';
 import Loader from '../Loader';
 
 import { ListViewContext } from './ListViewContext';
@@ -26,11 +28,13 @@ export const collectionTypes = {
 export function useListLayout(state) {
   const ROW_HEIGHT = 81;
   const collator = useCollator({ usage: 'search', sensitivity: 'base' });
+  // placeholderHeight is intentionally omitted: ListLayout falls back to the
+  // full visible height for the empty-state placeholder, so the EmptyState
+  // can fill and center within the list instead of being clipped to a row.
   const layout = useMemo(() => new ListLayout({
     estimatedRowHeight: ROW_HEIGHT,
     estimatedHeadingHeight: 26,
     loaderHeight: ROW_HEIGHT,
-    placeholderHeight: ROW_HEIGHT,
     collator,
   }), [collator, state.collection]);
 
@@ -55,10 +59,12 @@ const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>
     selectionStyle,
     items,
     onFocus,
+    renderEmptyState,
     ...others
   } = props;
 
   const [hoveredItem, setHoveredItem] = useState<Key | null>(null);
+  const { themeState: { isOnyx } } = useGetTheme();
 
   const isLoading = (
     loadingState === loadingStates.LOADING_MORE || loadingState === loadingStates.LOADING
@@ -72,6 +78,17 @@ const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>
       parent={parent}
     />
   );
+
+  const renderEmpty = () => {
+    // A loading state takes precedence over the empty state. The layout
+    // emits a loader node before the placeholder, so this is a defensive
+    // guard only.
+    /* istanbul ignore if */
+    if (isLoading) return null;
+    if (renderEmptyState) return renderEmptyState();
+    // Default empty state is rendered in the Onyx theme only.
+    return isOnyx ? <EmptyState /> : null;
+  };
 
   const listViewRef = useRef(null);
 
@@ -163,9 +180,13 @@ const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>
           onScroll={resetHoverState}
           tabIndex={isFocusable ? 0 : -1}
           shouldUseVirtualFocus={!isFocusable}
-          // added to remove the outline when using keyboard navigation encountered during UIP-7501
+          // added to remove the outline when using keyboard navigation encountered during UIP-7501.
+          // height: '100%' gives the scroll container a definite height even when
+          // the collection is empty, so the virtualizer's visibleRect is non-zero
+          // and the empty-state placeholder (sized to visibleRect.height) renders.
           style={{
             outline: 'none',
+            height: '100%',
           }}
         >
           {(type, item) => {
@@ -196,6 +217,9 @@ const ListView = forwardRef(<T extends ExampleItemProps>(props: ListViewProps<T>
                   sx={{ paddingTop: 'md', paddingBottom: 'md' }}
                 />
               );
+            }
+            if (type === collectionTypes.PLACEHOLDER) {
+              return renderEmpty();
             }
             return null;
           }}
