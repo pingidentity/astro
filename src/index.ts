@@ -81,6 +81,8 @@ export * from './components/DataTable';
 export { default as DatePicker } from './components/DatePicker';
 export { default as DateField } from './components/DatePicker/DateField';
 export { default as EditButton } from './components/EditButton';
+export { default as EmptyState } from './components/EmptyState';
+export * from './components/EmptyState';
 export { default as EnvironmentBreadcrumb } from './components/EnvironmentBreadcrumb';
 export { default as ExpandableText } from './components/ExpandableText';
 export { default as FieldHelperText } from './components/FieldHelperText';

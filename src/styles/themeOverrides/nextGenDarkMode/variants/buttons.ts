@@ -177,6 +177,9 @@ const buttons = {
       color: 'black',
       path: { fill: 'black' },
     },
+    '> span': {
+      color: 'black',
+    },
   },
   inlineWithIcon: {
     color: astroTokensDark.color.blue[400],

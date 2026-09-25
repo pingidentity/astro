@@ -37,9 +37,9 @@ export default {
   },
   argTypes: { ...arrayFieldArgTypes },
   args: {
-    label: 'Array field label',
+    label: 'Array Field Label',
     helperText: 'Helper text info...',
-    addButtonLabel: '+ Add field',
+    addButtonLabel: '+ Add Field',
   },
 } as Meta;
 
@@ -56,9 +56,9 @@ export const Uncontrolled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   return (
     <ArrayField
       defaultValue={defaultData}
-      label="Array field label"
+      label="Array Field Label"
       helperText="Helper text info..."
-      addButtonLabel="+ Add field"
+      addButtonLabel="+ Add Field"
       labelProps={{
         hintText: 'Example Hint',
         isRequired: true,
@@ -71,10 +71,9 @@ export const Uncontrolled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
           id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
         ) => (
           <TextField
-            aria-label="Text field"
+            aria-label="Text Field"
             value={fieldValue}
             onChange={(e: React.ChangeEvent) => onFieldValueChange(e, id)}
-            mr="xs"
             slots={
               {
                 inContainer: (
@@ -98,42 +97,37 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   const defaultDataSelectField = [
     {
       id: uuid(),
-      fieldValue: 'red',
+      value: 'The value of the input',
       onComponentRender: (
-        id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+        id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, labelId, otherFieldProps,
       ) => (
-        <OverlayProvider>
-          <SelectField
-            defaultSelectedKey={fieldValue}
-            onSelectionChange={e => onFieldValueChange(e, id)}
-            width="100%"
-            slots={{
-              inContainer: (
-                <ArrayFieldDeleteButton
-                  isDisabled={isDisabled}
-                  onDelete={() => onFieldDelete(id)}
-                />
-              ),
-            }}
-            {...otherFieldProps}
-            listBoxProps={{ 'aria-labelledby': otherFieldProps }}
-          >
-            <Item key="red">Red</Item>
-            <Item key="blue">Blue</Item>
-            <Item key="yellow">Yellow</Item>
-          </SelectField>
-        </OverlayProvider>
+        <TextField
+          aria-label="Text Field"
+          value={fieldValue}
+          onChange={e => onFieldValueChange(e, id)}
+          width="100%"
+          slots={{
+            inContainer: (
+              <ArrayFieldDeleteButton
+                isDisabled={isDisabled}
+                onDelete={() => onFieldDelete(id)}
+              />
+            ),
+          }}
+          {...otherFieldProps}
+        />
       ),
     },
     {
       id: uuid(),
-      fieldValue: 'black',
+      value: 'red',
       onComponentRender: (
-        id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+        id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, labelId, otherFieldProps,
       ) => (
         <OverlayProvider>
           <SelectField
-            defaultSelectedKey={fieldValue}
+            aria-label="Select Field"
+            selectedKey={fieldValue}
             onSelectionChange={key => onFieldValueChange(key, id)}
             width="100%"
             slots={{
@@ -145,27 +139,28 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
               ),
             }}
             {...otherFieldProps}
-            listBoxProps={{ 'aria-labelledby': otherFieldProps }}
+            listBoxProps={{ 'aria-labelledby': labelId }}
           >
-            <Item key="orange">Orange</Item>
-            <Item key="purple">Purple</Item>
-            <Item key="black">Black</Item>
+            <Item key="red">Red</Item>
+            <Item key="blue">Blue</Item>
+            <Item key="yellow">Yellow</Item>
           </SelectField>
         </OverlayProvider>
       ),
     },
   ];
 
-  const defaultEmptyField = {
+  const defaultEmptyField = () => ({
     id: uuid(),
-    fieldValue: 'blue',
+    value: 'blue',
     onComponentRender: (
-      id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+      id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, labelId, otherFieldProps,
     ) => (
       <OverlayProvider>
         <SelectField
-          defaultSelectedKey={fieldValue}
-          onSelectionChange={e => onFieldValueChange(e, id)}
+          aria-label="Select Field"
+          selectedKey={fieldValue}
+          onSelectionChange={key => onFieldValueChange(key, id)}
           width="100%"
           slots={{
             inContainer: (
@@ -173,7 +168,7 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
             ),
           }}
           {...otherFieldProps}
-          listBoxProps={{ 'aria-labelledby': otherFieldProps }}
+          listBoxProps={{ 'aria-labelledby': labelId }}
         >
           <Item key="blue">Blue</Item>
           <Item key="teal">Teal</Item>
@@ -181,7 +176,7 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
         </SelectField>
       </OverlayProvider>
     ),
-  };
+  });
 
   const [fieldValues, setFieldValues] = React.useState(defaultDataSelectField);
 
@@ -190,7 +185,7 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   };
 
   const handleOnAdd = () => {
-    setFieldValues(oldValues => [...oldValues, defaultEmptyField]);
+    setFieldValues(oldValues => [...oldValues, defaultEmptyField()]);
   };
 
   const handleOnDelete = fieldId => {
@@ -201,12 +196,12 @@ export const Controlled: StoryFn<ArrayFieldProps> = ({ ...args }) => {
   return (
     <ArrayField
       value={fieldValues}
-      helperText="Here is some helpful text..."
       onAdd={handleOnAdd}
       onChange={handleOnChange}
       onDelete={handleOnDelete}
       sx={{ width: '400px' }}
-      label="Array field label"
+      label="Array Field Label"
+      addButtonLabel="+ Add Field"
     />
   );
 };
@@ -218,10 +213,9 @@ export const WithLimitedItemsNumber: StoryFn<ArrayFieldProps> = () => {
       renderField={
         (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
           <TextField
-            aria-label="Text field"
+            aria-label="Text Field"
             value={fieldValue}
             onChange={e => onFieldValueChange(e, id)}
-            mr="xs"
             slots={
               {
                 inContainer: (
@@ -237,12 +231,61 @@ export const WithLimitedItemsNumber: StoryFn<ArrayFieldProps> = () => {
         )
       }
       sx={{ width: '400px' }}
-      maxSize={3}
-      label="Array field label"
+      maxSize={2}
+      label="Array Field Label"
       helperText="Helper text info..."
-      addButtonLabel="+ Add field"
+      addButtonLabel="+ Add Field"
     />
   );
+};
+
+export const Error: StoryFn<ArrayFieldProps> = ({ status, helperText, ...args }) => {
+  return (
+    <ArrayField
+      {...args}
+      defaultValue={defaultData}
+      status={status}
+      helperText={helperText}
+      label="Array Field Label"
+      addButtonLabel="+ Add Field"
+      labelProps={{
+        hintText: 'Example Hint',
+        isRequired: true,
+        helpHintProps: {
+          direction: 'top',
+        },
+      }}
+      renderField={
+        (
+          id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps,
+        ) => (
+          <TextField
+            aria-label="Text Field"
+            status={status}
+            value={fieldValue}
+            onChange={(e: React.ChangeEvent) => onFieldValueChange(e, id)}
+            slots={
+              {
+                inContainer: (
+                  <ArrayFieldDeleteButton
+                    isDisabled={isDisabled}
+                    onDelete={() => onFieldDelete(id)}
+                  />
+                ),
+              }
+            }
+            {...otherFieldProps}
+          />
+        )
+      }
+      sx={{ width: '400px' }}
+    />
+  );
+};
+
+Error.args = {
+  status: 'error',
+  helperText: 'Helper text info...',
 };
 
 export const Customizations = () => {
@@ -260,10 +303,9 @@ export const Customizations = () => {
         (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
           <Box width="400px">
             <TextField
-              aria-label="Text field"
+              aria-label="Text Field"
               value={fieldValue}
               onChange={e => onFieldValueChange(e, id)}
-              mr="xs"
               slots={{
                 inContainer: (
                   <ArrayFieldDeleteButton
@@ -277,9 +319,9 @@ export const Customizations = () => {
           </Box>
         )
       }
-      label="Array field label"
+      label="Array Field Label"
       helperText="Helper text info..."
-      addButtonLabel="+ Add field"
+      addButtonLabel="+ Add Field"
     />
   );
 };
@@ -287,24 +329,24 @@ export const Customizations = () => {
 export const WithBothSlots = () => {
   const LeftSlot = (
     <Button
-      aria-label="Add field"
+      aria-label="Left Slot"
       variant="link"
-      sx={{ width: 'fit-content', mt: 'xs' }}
+      sx={{ width: 'fit-content' }}
     >
-      <Text variant="label" color="active">
-        Left slot
+      <Text sx={{ variant: 'variants.arrayField.addButtonText' }}>
+        Left Slot
       </Text>
     </Button>
   );
 
   const RightSlot = (
     <Button
-      aria-label="Add field"
+      aria-label="Right Slot"
       variant="link"
-      sx={{ width: 'fit-content', mt: 'xs' }}
+      sx={{ width: 'fit-content' }}
     >
-      <Text variant="label" color="active">
-        Right slot
+      <Text sx={{ variant: 'variants.arrayField.addButtonText' }}>
+        Right Slot
       </Text>
     </Button>
   );
@@ -325,10 +367,9 @@ export const WithBothSlots = () => {
         (id, fieldValue, onFieldValueChange, onFieldDelete, isDisabled, otherFieldProps) => (
           <Box width="400px">
             <TextField
-              aria-label="Text field"
+              aria-label="Text Field"
               value={fieldValue}
               onChange={e => onFieldValueChange(e, id)}
-              mr="xs"
               slots={{
                 inContainer: (
                   <ArrayFieldDeleteButton
@@ -342,9 +383,9 @@ export const WithBothSlots = () => {
           </Box>
         )
       }
-      label="Array field label"
+      label="Array Field Label"
       helperText="Helper text info..."
-      addButtonLabel="+ Add field"
+      addButtonLabel="+ Add Field"
     />
   );
 };

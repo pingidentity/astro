@@ -362,4 +362,8 @@ export const FIGMA_LINKS = {
     inRockerButton:
       'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=1516-498&t=TcHspIxapoPWqWJC-4',
   },
+  emptyState: {
+    default:
+      'https://www.figma.com/design/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=8811-16278&p=f&t=VSDkruj7jVEtiNhl-0',
+  },
 };

@@ -1,3 +1,43 @@
+## 2.231.0-alpha.0 (2026-09-25)
+
+### 🚀 Features
+
+- **astro:** [UXE-8467] update Tabs specs and add scrollable content story
+
+### ❤️  Thank You
+
+- Eshant Monga
+
+## 2.230.0-alpha.0 (2026-09-25)
+
+### 🚀 Features
+
+- [UXE-9074] Empty State
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.229.3-alpha.0 (2026-09-23)
+
+### 🩹 Fixes
+
+- **astro:** align ArrayField with Onyx specification
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.229.2-alpha.0 (2026-09-23)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9077] set dropdown option padding in Onyx listBox variant
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.229.1 (2026-09-21)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

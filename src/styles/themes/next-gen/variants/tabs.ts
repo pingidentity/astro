@@ -1,7 +1,14 @@
 export const tabs = {
+  mb: 'md',
   '&.is-horizontal': {
     gap: '0px',
   },
+};
+
+export const tabPickerExpandIcon = {
+  ml: 'sm',
+  width: '16px',
+  height: '16px',
 };
 
 export const menuTab = {
@@ -13,12 +20,15 @@ export const tab = {
   '& > span': {
     px: 'md',
     fontSize: 'md',
+    mb: 'sm',
+    mt: 'sm',
+    minWidth: 0,
   },
   '&.is-focused': {
     boxShadow: 'none',
     outline: '1px solid',
     outlineColor: 'active',
-    outlineOffset: '0px',
+    outlineOffset: '1px',
     '& > span': {
       outline: 'none',
     },
