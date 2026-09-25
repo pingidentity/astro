@@ -2,6 +2,7 @@ import { astroTokens } from '@pingux/onyx-tokens';
 
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
 import checkboxFieldGroup from '../../../../components/CheckboxFieldGroup/CheckboxFieldGroup.styles';
+import emptyState from '../../../../components/EmptyState/EmptyState.styles';
 import labelValuePairs from '../../../../components/LabelValuePairs/LabelValuePairs.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
@@ -499,6 +500,7 @@ export default {
   checkboxFieldGroup,
   codeView,
   dataTable,
+  emptyState,
   environmentBreadcrumb,
   fieldHelperText,
   footer,

@@ -13,6 +13,7 @@ import codeView from '../../components/CodeView/CodeView.styles';
 import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel.styles';
 import copyText from '../../components/CopyText/CopyText.styles';
 import dataTable from '../../components/DataTable/DataTable.styles';
+import emptyState from '../../components/EmptyState/EmptyState.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
 import expandableText from '../../components/ExpandableText/ExpandableText.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
@@ -73,6 +74,7 @@ export default {
   collapsiblePanel,
   copyText,
   dataTable,
+  emptyState,
   environmentBreadcrumb,
   expandableText,
   fieldHelperText,

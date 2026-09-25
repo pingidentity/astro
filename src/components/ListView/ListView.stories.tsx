@@ -11,8 +11,10 @@ import { fn } from 'storybook/test';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  AstroProvider,
   Box,
   Button,
+  EmptyState,
   IconWrapper,
   Item,
   ListView,
@@ -20,6 +22,7 @@ import {
   ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
+  NextGenTheme,
   SearchField,
   Text,
 } from '../..';
@@ -460,6 +463,53 @@ export const OnLoadPrev = () => {
           </Item>
         )}
       </ListView>
+    </Box>
+  );
+};
+
+export const OnyxDefaultEmptyState = () => {
+  return (
+    <Box height="300px">
+      <ListView
+        items={[]}
+        aria-label="Empty Onyx ListView"
+      />
+    </Box>
+  );
+};
+
+export const AstroEmptyList = () => {
+  return (
+    <Box height="300px">
+      <ListView
+        items={[]}
+        aria-label="Empty Astro ListView"
+      />
+    </Box>
+  );
+};
+
+export const CustomRenderEmptyState = () => {
+  return (
+    <Box height="300px">
+      <ListView
+        items={[]}
+        aria-label="ListView with a custom empty state"
+        renderEmptyState={() => (
+          <EmptyState
+            heading="No results"
+            description="Try adjusting your search."
+          >
+            <Button
+              variant="primary"
+              sx={{ mt: 'md' }}
+              onPress={() => action('Add Item pressed')()}
+            >
+              Add Item
+            </Button>
+          </EmptyState>
+        )}
+      />
     </Box>
   );
 };

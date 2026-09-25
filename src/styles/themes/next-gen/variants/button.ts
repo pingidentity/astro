@@ -320,6 +320,9 @@ const primaryWithIcon = {
   ...primary,
   display: 'inline-flex',
   color: 'white',
+  '> span': {
+    color: 'white',
+  },
 };
 
 const inlineWithIcon = {

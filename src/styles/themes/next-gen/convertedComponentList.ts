@@ -94,6 +94,9 @@ export const componentSpecificNextGenBlacklist = {
   Text: ['Default'],
   Tabs: ['Vertical Orientation'],
   AccordionGridGroup: ['Default', 'Accordion With Inputs', 'Controlled'],
+  ListView: [
+    'Astro Empty List',
+  ],
 };
 
 export const astroBlacklistStory = {
@@ -136,6 +139,9 @@ export const astroBlacklistStory = {
   Card: [
     'With Shadow',
   ],
+  ListView: [
+    'Onyx Default Empty State', 'Custom Render Empty State',
+  ],
   ListViewItem: [
     'With Expandable Item',
   ],
@@ -156,6 +162,7 @@ export const nextGenOnlyComponents = [
   'Prompt Input',
   'Footer',
   'Onyx Input Patterns',
+  'EmptyState',
 ];
 
 export const onyxOnlyRecipes = [
