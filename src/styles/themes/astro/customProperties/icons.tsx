@@ -7,6 +7,8 @@ import AlertIcon from '@pingux/mdi-react/AlertIcon';
 import WarningIcon from '@pingux/mdi-react/AlertOutlineIcon';
 import ApplicationOutlineIcon from '@pingux/mdi-react/ApplicationOutlineIcon';
 import ArrowDownIcon from '@pingux/mdi-react/ArrowDownIcon';
+import ArrowDropDownIcon from '@pingux/mdi-react/ArrowDropDownIcon';
+import ArrowDropUpIcon from '@pingux/mdi-react/ArrowDropUpIcon';
 import ArrowUpIcon from '@pingux/mdi-react/ArrowUpIcon';
 import CameraAltIcon from '@pingux/mdi-react/CameraAltIcon';
 import ChatIcon from '@pingux/mdi-react/ChatIcon';
@@ -94,6 +96,8 @@ export default {
   mdiWeb: GlobeIcon,
   MenuDown,
   MenuUp,
+  tabPickerDown: ArrowDropDownIcon,
+  tabPickerUp: ArrowDropUpIcon,
   monitoringIcon: PulseIcon,
   openInNew: OpenInNew,
   overviewIcon: WebIcon,
