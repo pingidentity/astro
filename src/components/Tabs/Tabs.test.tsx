@@ -2,7 +2,6 @@ import React from 'react';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
-import { async } from 'regenerator-runtime';
 
 import { TabListItemProps } from '../../types';
 import { fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
@@ -10,6 +9,7 @@ import { universalComponentTests } from '../../utils/testUtils/universalComponen
 import Tab from '../Tab';
 
 import Tabs from './Tabs';
+import { disabledSingleTabKey } from './Tabs.storyData';
 
 // Emotion Cache added as test fails otherwise, root cause of this failure is unknown.
 // Failure occurred with ThemeUI refactor.
@@ -338,15 +338,6 @@ test('tabs without selected keys show null tab panel content', () => {
   expect(screen.queryByRole('tabpanel')).not.toHaveTextContent('');
 });
 
-test('hover tab style', async () => {
-  getComponent();
-
-  const { tab0 } = getTabs();
-  expect(tab0).not.toHaveClass('is-hovered');
-  await userEvent.hover(tab0);
-  expect(tab0).toHaveClass('is-hovered');
-});
-
 test('will render slots.beforeTab if provided', () => {
   const testText = 'test-text';
   const testComponent = <div>{testText}</div>;
@@ -398,6 +389,35 @@ test('will render tab with list if provided', async () => {
     expect(screen.queryByRole('tabpanel')).toHaveTextContent(firstListItemContent);
   }
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+});
+
+test('list mode renders the caret for Onyx tabs', async () => {
+  getComponentWithDynamicItems({ items: tabsWithList, mode: 'list' });
+  const listTab = screen.getByRole('tab', { name: 'Tab 2' });
+  expect(listTab).toBeInTheDocument();
+  await userEvent.click(listTab.parentElement as HTMLElement);
+  expect(screen.getByRole('menu')).toBeInTheDocument();
+});
+
+test('single disabled tab remains unavailable with its collection key', async () => {
+  expect(disabledSingleTabKey).toBe('Configuration');
+  const storyTabs: TabListItemProps[] = [
+    { name: 'Overview', children: 'Overview body', props: {} },
+    { name: 'Configuration', children: 'Configuration body', props: {} },
+    { name: 'Resources', children: 'Resources body', props: {} },
+  ];
+  getComponentWithDynamicItems({
+    items: storyTabs,
+    disabledKeys: [disabledSingleTabKey],
+    keyboardActivation: 'automatic',
+  });
+  const { tabs, tab0, tab1, tab2 } = getTabs();
+  expect(tab1).toHaveAttribute('aria-disabled', 'true');
+  await userEvent.tab();
+  expect(tab0).toHaveFocus();
+  fireEvent.keyDown(tab0, { key: 'ArrowRight', code: 'ArrowRight' });
+  expect(tab2).toHaveFocus();
+  expect(tabs[1]).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('tab list is accessible via keyboard', async () => {

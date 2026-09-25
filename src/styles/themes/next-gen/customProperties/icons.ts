@@ -51,6 +51,8 @@ const icons = {
   mdiWeb: 'globe',
   MenuDown: 'keyboard_arrow_down',
   MenuUp: 'keyboard_arrow_up',
+  tabPickerDown: 'keyboard_arrow_down',
+  tabPickerUp: 'keyboard_arrow_up',
   monitoringIcon: ShowChartIcon,
   openInNew: 'open_in_new',
   overviewIcon: 'dashboard',

@@ -6,8 +6,6 @@ import React, {
   useState,
 } from 'react';
 import { Item as Tab } from 'react-stately';
-import ArrowDropDownIcon from '@pingux/mdi-react/ArrowDropDownIcon';
-import ArrowDropUpIcon from '@pingux/mdi-react/ArrowDropUpIcon';
 import { Pressable } from '@react-aria/interactions';
 import PropTypes from 'prop-types';
 
@@ -18,13 +16,17 @@ import {
   PopoverMenu,
   Text,
 } from '../..';
-import { useStatusClasses } from '../../hooks';
+import { useGetTheme, useStatusClasses } from '../../hooks';
 import { TabLine } from '../Tab';
 
 /* istanbul ignore next */
 const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(state.selectedKey);
+  const {
+    icons: { tabPickerDown, tabPickerUp },
+    themeState: { isOnyx },
+  } = useGetTheme();
 
   const selectionManager = state.selectionManager;
   const [focusedItem, setFocusedItem] = useState(selectionManager.focusedKey);
@@ -47,7 +49,6 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
   const { classNames } = useStatusClasses(className, {
     isSelected: isListItemSelected,
   });
-
   const menuRef = useRef();
 
   const handleSelectedItem = currentItem => {
@@ -138,9 +139,11 @@ const TabPicker = forwardRef(({ className, items, state, item, ...others }, ref)
           </Box>
           <Icon
             color={isTabFocused || classNames.includes('is-hovered') ? 'active' : 'neutral.40'}
-            icon={isOpen ? ArrowDropUpIcon : ArrowDropDownIcon}
+            icon={isOpen ? tabPickerUp : tabPickerDown}
+            variant={isOnyx ? 'tabPickerExpandIcon' : undefined}
             title={{ name: '' }}
             aria-hidden="true"
+            size={isOnyx ? 16 : undefined}
           />
         </Box>
       </Pressable>

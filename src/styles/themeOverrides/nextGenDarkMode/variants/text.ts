@@ -59,8 +59,11 @@ export const text = {
   },
   tabLabel: {
     color: astroTokensDark.color.font.base,
-    '.is-selected &': {
-      color: astroTokensDark.color.font.link,
+    fontWeight: 0,
+    lineHeight: 'sm',
+    wordBreak: 'break-word' as const,
+    '.is-disabled &': {
+      opacity: 0.65,
     },
     '.is-selected &, .is-hovered &': {
       color: astroTokensDark.color.font.link,

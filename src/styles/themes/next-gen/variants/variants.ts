@@ -34,7 +34,7 @@ import suggestion from './suggestion';
 import suggestions from './suggestions';
 import { table } from './table';
 import { tableBase } from './tableBase';
-import { menuTab, tab, tabs } from './tabs';
+import { menuTab, tab, tabPickerExpandIcon, tabs } from './tabs';
 import tooltip from './tooltip';
 
 const onyxLabelValuePairs = {
@@ -516,6 +516,7 @@ export default {
   menuItem,
   menuSection,
   menuTab,
+  tabPickerExpandIcon,
   message,
   modal,
   navBar,

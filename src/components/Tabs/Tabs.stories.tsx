@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LockIcon from '@pingux/mdi-react/LockIcon';
+import LockOutlineIcon from '@pingux/mdi-react/LockOutlineIcon';
 import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
@@ -8,6 +9,7 @@ import { Badge, Box, Icon, Tab, Tabs, Text } from '../../index';
 import { TabListItemProps, TabsProps } from '../../types';
 
 import TabsReadme from './Tabs.mdx';
+import { disabledSingleTabKey } from './Tabs.storyData';
 import { tabsArgTypes } from './tabsAttributes';
 
 export default {
@@ -57,12 +59,54 @@ export const Default: StoryFn<TabsProps> = args => (
 
 export const Controlled: StoryFn = () => {
   const [currentTab, setCurrentTab] = useState(tabs[0].name);
+  const controlledTabs = tabs.map((tab, index) => (index === 1
+    ? { ...tab, name: 'Configuration with a deliberately long label that wraps' }
+    : tab));
+
   return (
     <Box sx={{ maxWidth: '500px' }}>
       <Tabs
         selectedKey={currentTab}
         onSelectionChange={setCurrentTab}
-        items={tabs}
+        items={controlledTabs}
+      >
+        {(item: TabListItemProps) => (
+          <Tab key={item.name} title={item.name} textValue={item.name}>
+            {item.children}
+          </Tab>
+        )}
+      </Tabs>
+    </Box>
+  );
+};
+
+export const ScrollableContent: StoryFn = () => {
+  const scrollableTabs = tabs.map(tab => ({
+    ...tab,
+    children: (
+      <Box>
+        <Text>
+          {tab.name}
+          {' content'}
+        </Text>
+        <Text>
+          This panel contains additional content to demonstrate scrolling within the tab body.
+        </Text>
+        <Box sx={{ height: '300px' }} />
+      </Box>
+    ),
+  }));
+
+  return (
+    <Box sx={{ maxWidth: '500px' }}>
+      <Tabs
+        items={scrollableTabs}
+        tabPanelProps={{
+          sx: {
+            maxHeight: '200px',
+            overflowY: 'auto',
+          },
+        }}
       >
         {(item: TabListItemProps) => (
           <Tab key={item.name} title={item.name} textValue={item.name}>
@@ -85,7 +129,7 @@ export const Centered: StoryFn = () => (
 );
 
 export const DisabledSingleTab: StoryFn = () => (
-  <Tabs items={tabs} disabledKeys={['Tab 2']}>
+  <Tabs items={tabs} disabledKeys={[disabledSingleTabKey]}>
     {(item: TabListItemProps) => (
       <Tab key={item.name} title={item.name}>
         {item.children}
@@ -105,27 +149,29 @@ export const DisabledAllTabs: StoryFn = () => (
 );
 
 export const ContentSlots: StoryFn = () => {
-  const {
-    themeState: { isOnyx },
-  } = useGetTheme();
-
+  const { themeState: { isOnyx } } = useGetTheme();
   const beforeTabNode = (
     <Icon
-      icon={LockIcon}
-      sx={{ marginTop: isOnyx ? 'md' : 'sm', marginRight: 'xs' }}
+      icon={isOnyx ? LockOutlineIcon : LockIcon}
+      size={isOnyx ? 24 : undefined}
+      sx={{
+        // alignSelf: 'center',
+        marginTop: isOnyx ? undefined : 'sm',
+        marginRight: isOnyx ? undefined : 'xs',
+      }}
       title={{ name: 'Lock Icon' }}
     />
   );
-  const nodeSx = {
-    marginLeft: 5,
-    marginTop: 10,
-  };
   const afterTabNode = (
     <Box>
       <Badge
         variant="countNeutral"
-        sx={nodeSx}
+        sx={{
+          marginTop: isOnyx ? undefined : 'sm',
+          marginLeft: isOnyx ? undefined : 'xs',
+        }}
         label="14"
+        aria-label="Count 14"
       />
     </Box>
   );
