@@ -1,3 +1,13 @@
+## 2.230.0-alpha.0 (2026-09-25)
+
+### 🚀 Features
+
+- [UXE-9074] Empty State
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
 ## 2.229.3-alpha.0 (2026-09-23)
 
 ### 🩹 Fixes
