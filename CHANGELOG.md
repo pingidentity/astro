@@ -1,3 +1,13 @@
+## 2.231.0-alpha.0 (2026-09-25)
+
+### 🚀 Features
+
+- **astro:** [UXE-8467] update Tabs specs and add scrollable content story
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.230.0-alpha.0 (2026-09-25)
 
 ### 🚀 Features
