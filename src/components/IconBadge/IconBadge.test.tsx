@@ -1,11 +1,14 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 
 import {
   Icon,
   IconBadge,
 } from '../../index';
+import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
+import getColorFromUUID from '../Avatar/getColorFromUuid';
+
+import { injectTwotoneColor, resolveTwotonePath } from './IconBadge';
 
 const testId = 'test-icon';
 
@@ -63,4 +66,58 @@ test('iconbadge borderRadius renders correctly', () => {
   const icons = screen.getAllByRole('img');
   const secondIcon = icons[1].closest('span');
   expect(secondIcon).toHaveStyle(`border-radius: ${circleSize / 2}px`);
+});
+
+describe('resolveTwotonePath', () => {
+  const colorNames = ['orange', 'cyan', 'green'];
+
+  test('returns a path factory for a valid colorId', () => {
+    const path = resolveTwotonePath('uuid-1', colorNames);
+    expect(path).not.toBeNull();
+    expect(path('text')).toBe(`twoTone.text.${getColorFromUUID('uuid-1', colorNames)}`);
+    expect(path('secondary')).toBe(`twoTone.secondary.${getColorFromUUID('uuid-1', colorNames)}`);
+    expect(path('bg')).toBe(`twoTone.bg.${getColorFromUUID('uuid-1', colorNames)}`);
+  });
+
+  test('returns the same color for the same colorId', () => {
+    const firstPath = resolveTwotonePath('uuid-1', colorNames);
+    const secondPath = resolveTwotonePath('uuid-1', colorNames);
+    expect(firstPath('text')).toBe(secondPath('text'));
+  });
+
+  test('returns null when colorId is missing', () => {
+    expect(resolveTwotonePath(undefined, colorNames)).toBeNull();
+    expect(resolveTwotonePath('', colorNames)).toBeNull();
+  });
+
+  test('returns null when twotone color names are missing', () => {
+    expect(resolveTwotonePath('uuid-1', undefined)).toBeNull();
+  });
+});
+
+describe('injectTwotoneColor', () => {
+  const colorNames = ['orange', 'cyan', 'green'];
+  const twotonePath = resolveTwotonePath('uuid-1', colorNames);
+
+  test('injects a twotone color into an icon without a color prop', () => {
+    const icon = <Icon icon={ThisIcon} />;
+    const result = injectTwotoneColor(icon, 'text', twotonePath);
+    expect(result).toHaveProperty('props.color', twotonePath('text'));
+  });
+
+  test('does not override an existing color prop', () => {
+    const icon = <Icon icon={ThisIcon} color="accent.40" />;
+    const result = injectTwotoneColor(icon, 'text', twotonePath);
+    expect(result).toHaveProperty('props.color', 'accent.40');
+  });
+
+  test('returns the icon unchanged when the twotone path is null', () => {
+    const icon = <Icon icon={ThisIcon} />;
+    expect(injectTwotoneColor(icon, 'text', null)).toBe(icon);
+  });
+
+  test('returns non-element children unchanged', () => {
+    expect(injectTwotoneColor('text', 'text', twotonePath)).toBe('text');
+    expect(injectTwotoneColor(null, 'text', twotonePath)).toBeNull();
+  });
 });

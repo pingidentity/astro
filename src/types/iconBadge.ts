@@ -20,4 +20,10 @@ export interface IconBadgeProps extends UpdatedStyleProps, DOMAttributes {
    * When given a number value, it will be converted to pixels.
    */
   circleSize?: number | undefined | 0;
+  /**
+   * A unique id used to deterministically assign a twotone color to the
+   * child icons (Onyx themes only). Resolved with the same FNV-1a hashing
+   * approach as IconWrapper and Avatar.
+   */
+  colorId?: string;
 }

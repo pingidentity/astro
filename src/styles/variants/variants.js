@@ -20,6 +20,7 @@ import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.st
 import footer from '../../components/Footer/Footer.styles';
 import gridList from '../../components/GridList/GridList.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
+import iconBadge from '../../components/IconBadge/IconBadge.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
 import labelValuePairs from '../../components/LabelValuePairs/LabelValuePairs.styles';
 import listBox from '../../components/ListBox/ListBox.styles';
@@ -81,6 +82,7 @@ export default {
   footer,
   gridList,
   helpHint,
+  iconBadge,
   imageUpload,
   labelValuePairs,
   listBox,

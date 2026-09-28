@@ -1,5 +1,6 @@
 import type { IconSize } from '../../../../types';
 import { LoaderSize } from '../../../../types';
+import { twotoneColorNames } from '../colors/twoTone';
 
 import customSizes from './customSizes';
 import icons from './icons';
@@ -14,7 +15,7 @@ const accordionHoveredState = {
 };
 
 const accordionItemDefaultLabelTag = 'h2';
-const iconBadgeCircleColor = 'badge.iconBadge';
+const iconBadgeCircleColor = 'backgroundBase';
 const activeColor = '#1a73e8';
 const backgroundBaseColor = 'white';
 const iFrameContentDivBackgroundColor = backgroundBaseColor;
@@ -41,6 +42,7 @@ export const nextGenThemeValues = {
   icons,
   tShirtSizes,
   iconBadgeCircleColor,
+  iconBadgeTwotoneColorNames: twotoneColorNames,
   iconWrapperSizes,
   defaultIconColor,
   accordionItemDefaultLabelTag,

@@ -167,7 +167,7 @@ export const FIGMA_LINKS = {
   },
   iconBadge: {
     default:
-      'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=17916-38366&t=rLZVlRDdR1JhehkH-0',
+      'https://www.figma.com/design/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=11396-16337',
   },
   iconButton: {
     default:
