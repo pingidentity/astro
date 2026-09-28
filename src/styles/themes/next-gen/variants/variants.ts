@@ -65,6 +65,19 @@ const fieldHelperText = {
   },
 };
 
+const iconBadge = {
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '50%',
+  },
+  badgeCircle: {
+    bottom: '-2px',
+    height: '10px',
+    width: '10px',
+    borderRadius: '50%',
+  },
+};
 
 export const badgeDeleteButton = {
   ...button.iconButtons.base,
@@ -505,6 +518,7 @@ export default {
   fieldHelperText,
   footer,
   helpHint,
+  iconBadge,
   iconWrapper,
   labelValuePairs: onyxLabelValuePairs,
   listBox,
