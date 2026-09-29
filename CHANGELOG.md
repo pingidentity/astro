@@ -1,3 +1,13 @@
+## 2.233.0-alpha.0 (2026-09-29)
+
+### 🚀 Features
+
+- **astro:** [UXE-8944] Checkbox: convert component folder to TypeScript
+
+### ❤️  Thank You
+
+- Kunal
+
 ## 2.232.0-alpha.0 (2026-09-28)
 
 ### 🚀 Features
