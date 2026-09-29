@@ -1,3 +1,23 @@
+## 2.233.0-alpha.0 (2026-09-29)
+
+### 🚀 Features
+
+- **astro:** [UXE-8944] Checkbox: convert component folder to TypeScript
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.232.0-alpha.0 (2026-09-28)
+
+### 🚀 Features
+
+- [UXE-9147] add IconBadge colorId prop and Onyx twotone secondary styling
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.231.0 (2026-09-25)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

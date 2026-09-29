@@ -35,6 +35,25 @@ const twoTone = {
     lightYellow: astroTokens.color.yellow[800],
     lightIndigo: astroTokens.color.indigo[700],
   },
+  secondary: {
+    orange: astroTokens.color.orange[800],
+    cyan: astroTokens.color.cyan[800],
+    green: astroTokens.color.green[800],
+    purple: astroTokens.color.purple[800],
+    pink: astroTokens.color.pink[800],
+    red: astroTokens.color.red[800],
+    yellow: astroTokens.color.yellow[800],
+    teal: astroTokens.color.teal[800],
+    blue: astroTokens.color.blue[600],
+    indigo: astroTokens.color.indigo[700],
+    lightBlue: astroTokens.color.blue[500],
+    lightPink: astroTokens.color.pink[600],
+    lightGreen: astroTokens.color.green[800],
+    lightYellow: astroTokens.color.yellow[800],
+    lightIndigo: astroTokens.color.indigo[700],
+  },
 };
+
+export const twotoneColorNames: string[] = Object.keys(twoTone.text);
 
 export default twoTone;

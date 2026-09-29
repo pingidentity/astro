@@ -12,4 +12,8 @@ The component follows the same pattern as icons. Check [Icon](./?path=/docs/comp
 
 ### Required Components
 
-This component requires the [Icon](./?path=/story/components-icon--default) component. 
+This component requires the [Icon](./?path=/story/components-icon--default) component.
+
+### colorId (Onyx themes)
+
+On Onyx and Onyx dark themes, pass a `colorId` to have the child icons colored with the Onyx twotone palette: the base icon container is filled with `color/twotone/<color>/bg`, the base icon uses `color/twotone/<color>/text`, and the small badge icon uses `color/twotone/<color>/secondary`. The color is assigned deterministically from the id with the same FNV-1a hashing approach as [IconWrapper](./?path=/docs/components-iconwrapper--default) and Avatar. A `color` already set on a child icon takes precedence. See the `Onyx Color Variants` story for the full palette in both themes. 
