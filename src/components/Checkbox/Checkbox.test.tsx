@@ -1,17 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
+import { CheckboxProps } from '../../types';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import Checkbox from './Checkbox';
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: Partial<CheckboxProps> = {}) => render((
   <Checkbox {...props} />
 ));
 
 // Needs to be added to each components test file
 universalComponentTests({
-  renderComponent: props => <Checkbox {...props} />,
+  renderComponent: (props: Partial<CheckboxProps>) => <Checkbox {...props} />,
   // Checkbox label is provided by CheckboxField
   rules: {
     'label': { enabled: false },

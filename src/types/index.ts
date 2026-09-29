@@ -12,6 +12,7 @@ export * from './button';
 export * from './buttonBar';
 export * from './calendar';
 export * from './card';
+export * from './Checkbox';
 export * from './checkboxField';
 export * from './checkboxFieldGroup';
 export * from './codeEditor';
