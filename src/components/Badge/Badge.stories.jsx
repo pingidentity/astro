@@ -4,8 +4,8 @@ import AlertIcon from '@pingux/mdi-react/AlertOutlineIcon';
 import CheckCircleIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import Clear from '@pingux/mdi-react/CloseIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
-import PencilOutlineIcon from '@pingux/mdi-react/PencilOutlineIcon';
 import InformationCircleIcon from '@pingux/mdi-react/InformationCircleOutlineIcon';
+import PencilOutlineIcon from '@pingux/mdi-react/PencilOutlineIcon';
 import PlusCircleMultipleOutlineIcon from '@pingux/mdi-react/PlusCircleMultipleOutlineIcon';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';

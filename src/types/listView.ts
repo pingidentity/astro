@@ -20,6 +20,9 @@ export interface ListViewProps<T extends ExampleItemProps> extends Omit<TreeProp
   'aria-label'?: string,
   containerProps?: object,
   sx?: ThemeUICSSObject,
+  /** Optional custom empty state. Called when the list has no items and is
+   *  not loading. Return null to render nothing. */
+  renderEmptyState?: () => ReactNode,
 }
 
 export interface ExpandableItemChildrenContainerProps {

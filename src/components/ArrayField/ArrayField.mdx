@@ -16,7 +16,11 @@ ArrayField should:
 
 ### Required Components
 
-This component requires the appropriate field component ([TextField](./?path=/story/form-textfield--default) or [SelectField](./?path=/story/form-selectfield--default)) and the ArrayFieldDeleteButton. 
+This component requires the appropriate field component ([TextField](./?path=/story/form-textfield--default) or [SelectField](./?path=/story/form-selectfield--default)) and the ArrayFieldDeleteButton.
+
+The `label` and `helperText` props describe the array as a whole. `helperText` is array-level guidance, not helper text for an individual child field. ArrayField renders the helper and maximum-size message after the child rows and before the Add Field control.
+
+The examples use compact rows without repeated visible child labels. Every child control still has an explicit accessible name, and every delete control has a name that describes its action. When supplying a custom `renderField` or `onComponentRender`, preserve an accessible name with `aria-label`, `aria-labelledby`, or a visible label even when omitting a repeated label for layout.
 
 ### Accessibility
 

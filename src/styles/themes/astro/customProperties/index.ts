@@ -1,5 +1,6 @@
 import { hoveredState } from '../../../../components/AccordionGroup/Accordion.styles';
 import { IconSize, LoaderSize } from '../../../../types';
+import { twotoneColorNames } from '../../next-gen/colors/twoTone';
 
 import icons from './icons';
 import styles from './styles';
@@ -10,6 +11,7 @@ const breadcrumbIconMargin = 5;
 const breadcrumbIconSize = 'xs' as IconSize;
 const accordionItemDefaultLabelTag = 'span';
 const iconBadgeCircleColor = 'white';
+const iconBadgeTwotoneColorNames = twotoneColorNames;
 const rockerButtonGap = '3px';
 const accordionItemMarginLeft = 'sm';
 const pageHeaderTitleMargin = 'xs';
@@ -40,6 +42,7 @@ export const astroThemeValues = {
   styles,
   tShirtSizes,
   iconBadgeCircleColor,
+  iconBadgeTwotoneColorNames,
   iconWrapperSizes,
   iFrameContentDivBackgroundColor,
   copyButtonSize,

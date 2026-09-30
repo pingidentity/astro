@@ -4,6 +4,7 @@ import chroma from 'chroma-js';
 import { copyButton } from '../codeView/codeView';
 import tShirtSizes from '../customProperties/tShirtSizes';
 
+import { arrayFieldDeleteButton } from './arrayFieldDeleteButton';
 import { commonContentProps } from './box';
 
 
@@ -319,6 +320,9 @@ const primaryWithIcon = {
   ...primary,
   display: 'inline-flex',
   color: 'white',
+  '> span': {
+    color: 'white',
+  },
 };
 
 const inlineWithIcon = {
@@ -530,6 +534,9 @@ const iconButtons = {
   onyx: {
     ...onyxIconButton,
   },
+  arrayField: {
+    deleteButton: arrayFieldDeleteButton.deleteButton,
+  },
   responseToolbar: {
     ...baseIconButton,
     '&.is-not-loaded': {
@@ -561,6 +568,18 @@ const iconButtons = {
         path: { fill: 'dark' },
       },
       ...transitions,
+    },
+  },
+  invertedBadgeDeleteButton: {
+    ...badgeDeleteButton,
+    path: { fill: 'white' },
+    '&.is-hovered': {
+      bg: 'transparent',
+      path: { fill: 'white' },
+    },
+    '&.is-pressed': {
+      bg: 'transparent',
+      path: { fill: 'white' },
     },
   },
   messageCloseButton: {
@@ -655,9 +674,6 @@ const listBoxLink = {
     outline: 'none',
   },
   badgeDeleteButton,
-  invertedBadgeDeleteButton: {
-    ...badgeDeleteButton,
-  },
   clearSelectionButton: {
     ...searchClearButton,
     top: '15px',

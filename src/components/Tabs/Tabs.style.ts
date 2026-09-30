@@ -85,9 +85,15 @@ export const tabs = {
   '&.is-horizontal': {
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: 'neutral.90',
+    borderBottomColor: 'border.hairline',
     gap: 'lg',
   },
+};
+
+export const tabPickerExpandIcon = {
+  ml: '8px',
+  width: '16px',
+  height: '16px',
 };
 
 export const menuTab = {

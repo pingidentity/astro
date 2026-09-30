@@ -1,8 +1,30 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { useGetTheme } from '../../hooks';
 import { Box } from '../../index';
 import { IconBadgeProps } from '../../types';
+import getColorFromUUID from '../Avatar/getColorFromUuid';
+
+export const resolveTwotonePath = (
+  colorId?: string,
+  twotoneColorNames?: string[],
+) => {
+  if (!colorId || !twotoneColorNames) return null;
+  const twotoneColor = getColorFromUUID(colorId, twotoneColorNames);
+  return (slot: string) => `twoTone.${slot}.${twotoneColor}`;
+};
+
+export const injectTwotoneColor = (
+  icon: React.ReactNode,
+  slot: string,
+  twotonePath: ReturnType<typeof resolveTwotonePath>,
+) => {
+  if (!twotonePath || !React.isValidElement(icon)) return icon;
+  if ('color' in icon.props) return icon;
+  return React.cloneElement(icon as React.ReactElement, {
+    color: twotonePath(slot),
+  });
+};
 
 const IconBadge = forwardRef<HTMLElement, IconBadgeProps>((props, ref) => {
   const {
@@ -11,43 +33,47 @@ const IconBadge = forwardRef<HTMLElement, IconBadgeProps>((props, ref) => {
     circleColor,
     baseSize,
     circleSize,
+    colorId,
     ...others
   } = props;
 
   const [firstIcon, secondIcon] = React.Children.toArray(children);
 
-  const { iconBadgeCircleColor } = useGetTheme();
+  const { iconBadgeCircleColor, iconBadgeTwotoneColorNames } = useGetTheme();
+
+  const twotonePath = resolveTwotonePath(colorId, iconBadgeTwotoneColorNames);
+  const baseIcon = injectTwotoneColor(firstIcon, 'text', twotonePath);
+  const badgeIcon = injectTwotoneColor(secondIcon, 'secondary', twotonePath);
 
   return (
     <Box
       ref={ref}
       as="span"
+      variant="iconBadge.container"
       sx={{
-        position: 'relative',
-        height: `${baseSize}px`,
-        width: `${baseSize}px`,
-        display: 'flex',
-        alignItems: 'top',
+        ...(baseSize !== undefined && {
+          height: `${baseSize}px`,
+          width: `${baseSize}px`,
+        }),
+        ...(twotonePath && { backgroundColor: twotonePath('bg') }),
         ...sx,
       }}
       {...others}
     >
-      {firstIcon}
+      {baseIcon}
       <Box
         as="span"
+        variant="iconBadge.badgeCircle"
         sx={{
-          position: 'absolute',
-          bottom: '-5.5px',
-          right: '1px',
-          borderRadius: `${circleSize !== undefined && circleSize / 2}px`,
-          height: `${circleSize}px`,
-          width: `${circleSize}px`,
-          alignItems: 'center',
-          justifyContent: 'center',
+          ...(circleSize !== undefined && {
+            height: `${circleSize}px`,
+            width: `${circleSize}px`,
+            borderRadius: `${circleSize / 2}px`,
+          }),
           backgroundColor: circleColor || iconBadgeCircleColor,
         }}
       >
-        {secondIcon}
+        {badgeIcon}
       </Box>
     </Box>
   );

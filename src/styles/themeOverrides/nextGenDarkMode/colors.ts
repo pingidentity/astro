@@ -1,5 +1,6 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 import chroma from 'chroma-js';
+import { fontWeight } from 'styled-system';
 
 import { white } from '../../colors';
 
@@ -79,6 +80,23 @@ const twoTone = {
     lightGreen: 'black',
     lightYellow: 'black',
     lightIndigo: 'black',
+  },
+  secondary: {
+    orange: astroTokensDark.color.orange[500],
+    cyan: astroTokensDark.color.cyan[500],
+    green: astroTokensDark.color.green[500],
+    purple: astroTokensDark.color.purple[500],
+    pink: astroTokensDark.color.pink[500],
+    red: astroTokensDark.color.red[500],
+    yellow: astroTokensDark.color.yellow[500],
+    teal: astroTokensDark.color.teal[500],
+    blue: astroTokensDark.color.blue[500],
+    indigo: astroTokensDark.color.indigo[500],
+    lightBlue: astroTokensDark.color.blue[600],
+    lightPink: astroTokensDark.color.pink[600],
+    lightGreen: astroTokensDark.color.green[800],
+    lightYellow: astroTokensDark.color.yellow[800],
+    lightIndigo: astroTokensDark.color.indigo[700],
   },
 };
 

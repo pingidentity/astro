@@ -1,3 +1,129 @@
+## 2.233.0 (2026-09-29)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.233.0-alpha.0 (2026-09-29)
+
+### 🚀 Features
+
+- **astro:** [UXE-8944] Checkbox: convert component folder to TypeScript
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.232.0-alpha.0 (2026-09-28)
+
+### 🚀 Features
+
+- [UXE-9147] add IconBadge colorId prop and Onyx twotone secondary styling
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.231.0 (2026-09-25)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.231.0-alpha.0 (2026-09-25)
+
+### 🚀 Features
+
+- **astro:** [UXE-8467] update Tabs specs and add scrollable content story
+
+### ❤️  Thank You
+
+- Eshant Monga
+
+## 2.230.0-alpha.0 (2026-09-25)
+
+### 🚀 Features
+
+- [UXE-9074] Empty State
+
+### ❤️  Thank You
+
+- Andrew Keohane
+
+## 2.229.3-alpha.0 (2026-09-23)
+
+### 🩹 Fixes
+
+- **astro:** align ArrayField with Onyx specification
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.229.2-alpha.0 (2026-09-23)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9077] set dropdown option padding in Onyx listBox variant
+
+### ❤️  Thank You
+
+- Kunal
+
+## 2.229.1 (2026-09-21)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.229.1-alpha.0 (2026-09-18)
+
+### 🩹 Fixes
+
+- **astro:** correct Onyx badge label, capitalization, and removable icon styling
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.229.0 (2026-09-17)
+
+This was a version bump only for astro to align it with other projects, there were no code changes.
+
+## 2.229.0-alpha.0 (2026-09-17)
+
+### 🚀 Features
+
+- [UXE-8935] Add CheckboxFieldGroup component
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.228.4-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- [UXE-8686] Align RadioGroupField with Onyx light-mode spec
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
+## 2.228.3-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9095, UXE-9089] round data.image via images.avatar variant
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.228.2-alpha.0 (2026-09-17)
+
+### 🩹 Fixes
+
+- [UXE-8981] update onyx HelpHint
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.228.1 (2026-09-16)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

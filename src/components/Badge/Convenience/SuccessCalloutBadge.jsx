@@ -1,15 +1,17 @@
 import React from 'react';
-import CheckCircle from '@pingux/mdi-react/CheckCircleIcon';
 
 import { Badge, Icon } from '../../..';
+import { useGetTheme } from '../../../hooks';
 
 const SuccessCalloutBadge = React.forwardRef((props, ref) => {
+  const { icons } = useGetTheme();
+
   return (
     <Badge
       ref={ref}
       variant="successCalloutBadge"
       slots={{
-        leftIcon: <Icon icon={CheckCircle} size={15} color="success.bright" />,
+        leftIcon: <Icon icon={icons.successCalloutBadge} size="xs" />,
       }}
       {...props}
     />

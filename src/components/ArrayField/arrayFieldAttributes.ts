@@ -1,4 +1,5 @@
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
+import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 export const arrayFieldArgTypes = {
   label: {
@@ -16,5 +17,6 @@ export const arrayFieldArgTypes = {
   maxSizeText: {
     control: { type: 'text' },
   },
+  ...statusArgTypes,
   ...ariaAttributeBaseArgTypes,
 };

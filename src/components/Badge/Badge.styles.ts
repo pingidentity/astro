@@ -199,21 +199,33 @@ const calloutBadge = {
 const errorCalloutBadge = {
   ...calloutBadge,
   borderColor: 'critical.bright',
+  '& svg': {
+    color: 'critical.bright',
+  },
 };
 
 const warningCalloutBadge = {
   ...calloutBadge,
-  borderColor: '#E86900',
+  borderColor: 'warning.bright',
+  '& svg': {
+    color: 'warning.bright',
+  },
 };
 
 const successCalloutBadge = {
   ...calloutBadge,
   borderColor: 'success.bright',
+  '& svg': {
+    color: 'success.bright',
+  },
 };
 
 const infoCalloutBadge = {
   ...calloutBadge,
   borderColor: 'text.secondary',
+  '& svg': {
+    color: 'text.secondary',
+  },
 };
 
 const statusBadge = {

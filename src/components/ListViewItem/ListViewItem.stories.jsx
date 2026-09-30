@@ -20,7 +20,7 @@ import {
 } from '../..';
 import { useGetTheme } from '../../hooks';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
-import { userImagePanelHeader } from '../../utils/devUtils/constants/images';
+import { userImage } from '../../utils/devUtils/constants/images';
 
 import { chartData } from './controls/chart/chartData';
 import ListViewItemReadMe from './ListViewItem.mdx';
@@ -71,10 +71,7 @@ export const Default = () => (
         icon: AccountIcon,
         text: 'Fons Vernall',
       }}
-      iconWrapperProps={{
-        size: 'sm',
-        color: 'blue',
-      }}
+      colorId="11111111111"
     />
   </Wrapper>
 );
@@ -114,7 +111,7 @@ export const WithImage = () => (
     <ListViewItem
       data={{
         image: {
-          src: userImagePanelHeader,
+          src: userImage,
           alt: 'avatar',
           'aria-label': 'avatar',
         },

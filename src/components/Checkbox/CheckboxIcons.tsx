@@ -1,7 +1,6 @@
 import React from 'react';
 import { omit } from 'lodash';
-import PropTypes from 'prop-types';
-import { ThemeUICSSObject } from 'theme-ui';
+import { ThemeUICSSObject, ThemeUIStyleObject } from 'theme-ui';
 
 import { BoxProps } from '../../types';
 import Box from '../Box';
@@ -39,10 +38,6 @@ export const AstroIndeterminateCheckboxIcon = (props: IconProps) => (
     <rect x="6.5" y="11" width="11" height="2" fill="white" />
   </BoxAsSvg>
 );
-
-AstroIndeterminateCheckboxIcon.propTypes = {
-  isDisabled: PropTypes.bool,
-};
 
 export const OnyxCheckedIcon = () => (
   <>
@@ -90,14 +85,10 @@ export const OnyxIndeterminateCheckboxIcon = (props: IconProps) => (
   </BoxAsSvg>
 );
 
-OnyxIndeterminateCheckboxIcon.propTypes = {
-  isDisabled: PropTypes.bool,
-};
-
 interface OnyxDefaultCheckboxIconProps {
   isChecked: boolean;
   variant?: string;
-  sx?: ThemeUICSSObject;
+  sx?: ThemeUIStyleObject;
 }
 
 export const OnyxDefaultCheckboxIcon = ({
@@ -119,9 +110,3 @@ export const OnyxDefaultCheckboxIcon = ({
     {isChecked ? <OnyxCheckedIcon /> : <OnyxUncheckedIcon />}
   </BoxAsSvg>
 );
-
-OnyxDefaultCheckboxIcon.propTypes = {
-  isChecked: PropTypes.bool,
-  variant: PropTypes.string,
-  sx: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.func]),
-};

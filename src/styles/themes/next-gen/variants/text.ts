@@ -151,10 +151,14 @@ export const text = {
   },
   tabLabel: {
     color: astroTokens.color.font.base,
-    wordBreak: 'normal',
-    lineHeight: 'body',
+    fontWeight: 0,
+    wordBreak: 'break-word' as const,
+    lineHeight: 'sm',
     mb: 'sm',
     mt: 'sm',
+    '.is-disabled &': {
+      opacity: 0.65,
+    },
     '.is-selected &': {
       color: astroTokens.color.font.link,
       mb: 'sm',

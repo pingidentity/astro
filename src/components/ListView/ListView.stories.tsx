@@ -1,4 +1,4 @@
-import React, { Key, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useAsyncList } from 'react-stately';
 import ClockTimeEightOutlineIcon from '@pingux/mdi-react/ClockTimeEightOutlineIcon';
 import CogIcon from '@pingux/mdi-react/CogIcon';
@@ -11,21 +11,24 @@ import { fn } from 'storybook/test';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
+  AstroProvider,
   Box,
   Button,
+  EmptyState,
   IconWrapper,
-  IconWrapperProps,
   Item,
   ListView,
   ListViewItem,
   ListViewItemChart,
   ListViewItemMenu,
   ListViewItemSwitchField,
+  NextGenTheme,
   SearchField,
   Text,
 } from '../..';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import animals from '../../utils/devUtils/constants/animals';
+import { userImage } from '../../utils/devUtils/constants/images';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { chartData } from '../ListViewItem/controls/chart/chartData';
 
@@ -63,7 +66,7 @@ const items: ExampleItemProps[] = [
   {
     key: 'Aardvark',
     name: 'Aardvark',
-    id: '1',
+    id: '11111111111',
     icon: CogIcon,
     iconWrapperProps: {
       size: 'sm',
@@ -73,7 +76,7 @@ const items: ExampleItemProps[] = [
   {
     key: 'Kangaroo',
     name: 'Kangaroo',
-    id: '2',
+    id: '1111111',
     icon: ClockTimeEightOutlineIcon,
     iconWrapperProps: {
       size: 'sm',
@@ -88,6 +91,20 @@ const items: ExampleItemProps[] = [
     iconWrapperProps: {
       size: 'sm',
       color: 'indigo',
+    },
+  },
+];
+
+const defaultStoryItems = [
+  ...items,
+  {
+    key: 'Panda',
+    name: 'Panda',
+    id: '4',
+    image: {
+      src: userImage,
+      alt: 'avatar',
+      'aria-label': 'avatar',
     },
   },
 ];
@@ -122,13 +139,15 @@ const ExampleContent = contentProps => {
   const { text, icon } = contentProps;
   return (
     <Box isRow sx={{ alignItems: 'center' }} gap="lg">
-      <IconWrapper
-        icon={icon}
-        size="sm"
-        title={{ name: `${text}}` }}
-        isCircle
-        color="cyan"
-      />
+      {icon && (
+        <IconWrapper
+          icon={icon}
+          size="sm"
+          title={{ name: `${text}}` }}
+          isCircle
+          color="cyan"
+        />
+      )}
       <Text variant="listViewItemText" sx={{ my: 'auto' }}>
         {text}
       </Text>
@@ -148,18 +167,16 @@ const Controls = () => (
 );
 
 export const Default = ({ ...args }) => (
-  <ListView {...props} {...args} items={items}>
+  <ListView {...props} {...args} items={defaultStoryItems}>
     {item => (
       <Item key={item.name}>
         <ListViewItem
           data={{
             text: item.name,
             icon: item.icon,
+            image: item.image,
           }}
-          iconProps={{
-            color: 'text.secondary',
-          }}
-          iconWrapperProps={item.iconWrapperProps}
+          colorId={item.id}
         >
           <Controls />
         </ListViewItem>
@@ -446,6 +463,53 @@ export const OnLoadPrev = () => {
           </Item>
         )}
       </ListView>
+    </Box>
+  );
+};
+
+export const OnyxDefaultEmptyState = () => {
+  return (
+    <Box height="300px">
+      <ListView
+        items={[]}
+        aria-label="Empty Onyx ListView"
+      />
+    </Box>
+  );
+};
+
+export const AstroEmptyList = () => {
+  return (
+    <Box height="300px">
+      <ListView
+        items={[]}
+        aria-label="Empty Astro ListView"
+      />
+    </Box>
+  );
+};
+
+export const CustomRenderEmptyState = () => {
+  return (
+    <Box height="300px">
+      <ListView
+        items={[]}
+        aria-label="ListView with a custom empty state"
+        renderEmptyState={() => (
+          <EmptyState
+            heading="No results"
+            description="Try adjusting your search."
+          >
+            <Button
+              variant="primary"
+              sx={{ mt: 'md' }}
+              onPress={() => action('Add Item pressed')()}
+            >
+              Add Item
+            </Button>
+          </EmptyState>
+        )}
+      />
     </Box>
   );
 };

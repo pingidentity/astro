@@ -108,6 +108,16 @@ export const Default = args => (
   </OverlayProvider>
 );
 
+export const DefaultOpen = () => (
+  <OverlayProvider>
+    <SelectField width="100%" isDefaultOpen label="Example Label">
+      <Item key="red">Red</Item>
+      <Item key="blue">Blue</Item>
+      <Item key="yellow">Yellow</Item>
+    </SelectField>
+  </OverlayProvider>
+);
+
 export const WithSections = args => (
   <OverlayProvider>
     <SelectField items={withSection} {...args}>

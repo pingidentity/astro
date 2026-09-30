@@ -32,6 +32,15 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
   const valueRef = React.useRef(value);
   valueRef.current = value;
 
+  // The helper and maximum feedback texts live outside the field list, so the
+  // list needs explicit aria-describedby/labelledby references to them (part
+  // of the UXE-8465 helper-text acceptance criteria). Aria attributes may
+  // arrive from both the component props and fieldControlWrapperProps, so the
+  // id lists are merged instead of overwritten.
+  const arrayFieldId = React.useRef(uuid()).current;
+  const helperTextId = `${arrayFieldId}-helper`;
+  const maxSizeTextId = `${arrayFieldId}-max-size`;
+
   const onAddRef = React.useRef(onAdd);
   onAddRef.current = onAdd;
 
@@ -144,34 +153,53 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
       <Label {...raLabelProps} {...mergeProps(labelProps, raLabelProps, { children: label })} />
       <Box as="ul" pl="0" {...ariaProps} {...fieldControlWrapperProps}>
         {(value || fieldValues).map(
-          ({ id, onComponentRender, fieldValue, ...otherFieldProps }: FieldValue) => {
+          (
+            {
+              id,
+              onComponentRender,
+              value: rowValue,
+              fieldValue: legacyFieldValue,
+              ...otherFieldProps
+            }: FieldValue,
+          ) => {
+            const normalizedValue = rowValue ?? legacyFieldValue ?? '';
+
             return (
-              <Box as="li" mb="xs" key={id}>
-                {renderedItem(id, fieldValue, otherFieldProps, onComponentRender, raLabelProps?.id)}
+              <Box as="li" variant="arrayField.listItem" key={id}>
+                {renderedItem(
+                  id,
+                  normalizedValue,
+                  otherFieldProps,
+                  onComponentRender,
+                  raLabelProps?.id,
+                )}
               </Box>
             );
           })}
       </Box>
       {
-        helperText
+        (helperText || isLimitReached)
         && (
-          <FieldHelperText status={status}>
-            {helperText}
-          </FieldHelperText>
-        )
-      }
-      {
-        isLimitReached
-        && (
-          <FieldHelperText status={statuses.DEFAULT}>
-            {maxSizeText || `Maximum ${maxSize} items.`}
-          </FieldHelperText>
+          <Box variant="arrayField.helperTextContainer">
+            {helperText
+            && (
+              <FieldHelperText status={status} id={helperTextId}>
+                {helperText}
+              </FieldHelperText>
+            )}
+            {isLimitReached
+            && (
+              <FieldHelperText status={statuses.DEFAULT} id={maxSizeTextId}>
+                {maxSizeText || `Maximum ${maxSize} items.`}
+              </FieldHelperText>
+            )}
+          </Box>
         )
       }
       {
         shouldShowBottomBar
         && (
-        <Box isRow gap="md">
+        <Box isRow gap="md" variant="arrayField.bottomBar">
           {slots?.left
           && slots?.left}
           {!isLimitReached
@@ -180,10 +208,10 @@ const ArrayField = forwardRef<HTMLDivElement, ArrayFieldProps>((props, ref) => {
             aria-label="Add field"
             variant="link"
             onPress={onFieldAdd}
-            sx={{ width: 'fit-content', mt: 'xs' }}
+            sx={{ variant: 'variants.arrayField.addButton' }}
             {...addButtonProps}
           >
-            <Text variant="label" color="active">
+            <Text sx={{ variant: 'variants.arrayField.addButtonText' }}>
               {addButtonLabel}
             </Text>
           </Button>

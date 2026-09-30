@@ -1,5 +1,7 @@
 import { astroTokensDark } from '@pingux/onyx-tokens';
 
+import { colors } from '../colors';
+
 import { avatar } from './avatar';
 import { box } from './box';
 import callout from './callout';
@@ -46,7 +48,11 @@ const listBox = {
   },
 };
 
-const tab = {};
+const tab = {
+  '&.is-selected > span': {
+    color: 'link',
+  },
+};
 
 const modal = {
   content: {
@@ -203,6 +209,10 @@ export default {
   environmentBreadcrumb,
   modal,
   tab,
+  tabPickerExpandIcon: {
+    color: astroTokensDark.color.gray[100],
+    fill: `${colors.secondary} !important`,
+  },
   iconBadge,
   skeleton,
   stepper,

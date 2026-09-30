@@ -1,5 +1,7 @@
 import React, { forwardRef } from 'react';
 
+import { CheckboxProps } from '../../types';
+
 import CheckboxBase from './CheckboxBase';
 
 /**
@@ -8,7 +10,9 @@ import CheckboxBase from './CheckboxBase';
  *
  * **Note: Requires a label. It's recommended to use `CheckboxField` for a complete solution.**
  */
-const Checkbox = forwardRef((props, ref) => <CheckboxBase ref={ref} {...props} />);
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => (
+  <CheckboxBase ref={ref} {...props} />
+));
 
 Checkbox.displayName = 'Checkbox';
 

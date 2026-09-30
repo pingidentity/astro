@@ -1,4 +1,5 @@
 import tShirtSizes from '../../styles/themes/astro/customProperties/tShirtSizes';
+import { arrayFieldDeleteButton } from '../ArrayField/ArrayFieldDeleteButton.styles';
 import {
   badgeDeleteButton,
   deleteButton,
@@ -207,6 +208,9 @@ const filter = {
 export default {
   base,
   bidirectional,
+  arrayField: {
+    deleteButton: arrayFieldDeleteButton.deleteButton,
+  },
   badge: { deleteButton },
   badgeDeleteButton,
   copyButton,

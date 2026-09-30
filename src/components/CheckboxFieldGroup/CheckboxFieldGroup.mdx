@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as CheckboxFieldGroupStories from './CheckboxFieldGroup.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
+
+<Meta of={CheckboxFieldGroupStories} isTemplate />
+
+# CheckboxFieldGroup
+
+`CheckboxFieldGroup` combines a labelled React Aria checkbox group with independently selectable `CheckboxFieldGroupItem` children. Use it when users can choose more than one value from a related set of options.
+
+The group owns the selected string array. Use `defaultValue` for an uncontrolled group, or `value` with `onChange` for a controlled group.
+
+```tsx
+import { CheckboxFieldGroup, CheckboxFieldGroupItem } from '@pingux/astro';
+
+<CheckboxFieldGroup label="Notification channels" defaultValue={['email']}>
+  <CheckboxFieldGroupItem value="email" label="Email" />
+  <CheckboxFieldGroupItem value="sms" label="SMS" />
+  <CheckboxFieldGroupItem value="push" label="Push notification" />
+</CheckboxFieldGroup>;
+```
+
+## Required child API
+
+Every option must be a `CheckboxFieldGroupItem` with a unique string `value` and an accessible `label`. Do not use raw `Checkbox` children: they do not consume the group's React Stately selection context.
+
+### `CheckboxFieldGroup`
+
+The group API includes:
+
+- `label`, `helperText`, and `errorMessage` for field content and validation feedback.
+- `value` / `defaultValue` and `onChange` for controlled or uncontrolled selected string arrays.
+- `orientation` for vertical (default) or horizontal layout.
+- `name` and `form` for native input metadata.
+- `isRequired`, `isDisabled`, `isReadOnly`, and `isInvalid` for validation and interaction state.
+
+### `CheckboxFieldGroupItem`
+
+Each item accepts:
+
+- `value` and `label` for group selection and accessible naming.
+- `helperText` for item-specific description.
+- `isDisabled` and `isReadOnly`, combined with the group state.
+- `isIndeterminate` for a mixed visual presentation; the item value still participates in group selection when toggled.
+- `controlProps` / `checkBoxProps` for the input or checkbox visual primitive.
+- `hasAutoFocus` to focus the item on initial render.
+
+## Accessibility and keyboard behavior
+
+The group uses React Aria's [`useCheckboxGroup`](https://react-spectrum.adobe.com/react-aria/useCheckboxGroup.html) and each child uses [`useCheckboxGroupItem`](https://react-spectrum.adobe.com/react-aria/useCheckboxGroupItem). The wrapper has `role="group"`; its visible label supplies the accessible group name, and helper/error content is connected through generated description and error IDs. Each item remains an independently named checkbox, with group validation and descriptions propagated to its native input.
+
+<AccessibilityTable keyboardRows={[
+  KeyboardRows.tabField,
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Space', description: 'Toggles the focused checkbox item.' },
+]} screenReaderRows={[
+  'The group uses **`role="group"`** and **`aria-labelledby`** to expose its visible label.',
+  'Each item is a checkbox with its own accessible label and checked state.',
+  'Helper and error content is referenced through **`aria-describedby`** and React Aria validation metadata.',
+]} />
+
+Tab and Shift+Tab move between checkbox items in normal page order. Space toggles the focused item. Disabled items cannot be focused or changed. Read-only items remain focusable so their selection can be inspected, but Space and pointer interaction do not change selection.
+
+## Indeterminate presentation
+
+`isIndeterminate` is a mixed visual/native presentation; it does not create a second selection model. The item's ordinary `value` still participates in the group's selected string array and `onChange` when the item is toggled, so callers should clear or update `isIndeterminate` as appropriate after handling the partial state.
+
+The component inherits the active Astro, Onyx, or Onyx Dark theme's checkbox and field tokens.

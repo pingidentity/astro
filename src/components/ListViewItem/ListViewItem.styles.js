@@ -103,6 +103,13 @@ const imageWrapper = {
   ml: 'sm',
 };
 
+const imageContainer = {
+  width: '35px',
+  flexShrink: 0,
+  display: 'flex',
+  justifyContent: 'center',
+};
+
 const leftOfDataWrapper = {
   ...iconWrapper,
   ml: 0,
@@ -160,6 +167,7 @@ export default {
   container,
   controls,
   iconWrapper,
+  imageContainer,
   imageWrapper,
   leftOfDataWrapper,
   linkedViewContainer,

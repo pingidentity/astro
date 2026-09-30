@@ -1,22 +1,26 @@
 import accordionGrid from '../../components/AccordionGridGroup/AccordionGrid.styles';
 import accordion from '../../components/AccordionGroup/Accordion.styles';
+import arrayField from '../../components/ArrayField/ArrayField.styles';
 import box from '../../components/Box/Box.styles';
 import bracket from '../../components/Bracket/Bracket.styles';
 import breadcrumb from '../../components/Breadcrumbs/Breadcrumb.styles';
 import buttonBar from '../../components/ButtonBar/ButtonBar.styles';
 import calendar from '../../components/Calendar/Calendar.styles';
 import callout from '../../components/Callout/Callout.styles';
+import checkboxFieldGroup from '../../components/CheckboxFieldGroup/CheckboxFieldGroup.styles';
 import codeEditor from '../../components/CodeEditor/CodeEditor.styles';
 import codeView from '../../components/CodeView/CodeView.styles';
 import collapsiblePanel from '../../components/CollapsiblePanel/CollapsiblePanel.styles';
 import copyText from '../../components/CopyText/CopyText.styles';
 import dataTable from '../../components/DataTable/DataTable.styles';
+import emptyState from '../../components/EmptyState/EmptyState.styles';
 import environmentBreadcrumb from '../../components/EnvironmentBreadcrumb/EnvironmentalBreadcrumb.styles';
 import expandableText from '../../components/ExpandableText/ExpandableText.styles';
 import fieldHelperText from '../../components/FieldHelperText/FieldHelperText.styles';
 import footer from '../../components/Footer/Footer.styles';
 import gridList from '../../components/GridList/GridList.styles';
 import helpHint from '../../components/HelpHint/HelpHint.styles';
+import iconBadge from '../../components/IconBadge/IconBadge.styles';
 import imageUpload from '../../components/ImageUploadField/imageUpload';
 import labelValuePairs from '../../components/LabelValuePairs/LabelValuePairs.styles';
 import listBox from '../../components/ListBox/ListBox.styles';
@@ -57,6 +61,7 @@ import treeView from '../../components/TreeView/TreeView.styles';
 export default {
   accordion,
   accordionGrid,
+  arrayField,
   box,
   bracket,
   breadcrumb,
@@ -64,17 +69,20 @@ export default {
   calendar,
   rangeCalendar,
   callout,
+  checkboxFieldGroup,
   codeEditor,
   codeView,
   collapsiblePanel,
   copyText,
   dataTable,
+  emptyState,
   environmentBreadcrumb,
   expandableText,
   fieldHelperText,
   footer,
   gridList,
   helpHint,
+  iconBadge,
   imageUpload,
   labelValuePairs,
   listBox,

@@ -95,7 +95,7 @@ test('renders DatePicker component', async () => {
   expect(screen.queryByTestId('popover-container')).toBeInTheDocument();
 
   // Ensure it is visibly hidden and not keyboard accessible
-  /* eslint-disable testing-library/no-node-access */
+
   expect(hiddenInput!.closest(`[style="${hiddenStyling}"]`)).not.toBeNull();
   expect(hiddenInput).toHaveAttribute('tabindex', '-1');
 });

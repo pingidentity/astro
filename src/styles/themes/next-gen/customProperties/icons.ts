@@ -1,5 +1,9 @@
 import React from 'react';
+import AlertCircleOutlineIcon from '@pingux/mdi-react/AlertCircleOutlineIcon';
+import AlertOutlineIcon from '@pingux/mdi-react/AlertOutlineIcon';
+import CheckCircleOutlineIcon from '@pingux/mdi-react/CheckCircleOutlineIcon';
 import EmoticonHappy from '@pingux/mdi-react/EmoticonHappyOutlineIcon';
+import InformationCircleOutlineIcon from '@pingux/mdi-react/InformationCircleOutlineIcon';
 import Settings from '@pingux/mdi-react/SettingsOutlineIcon';
 import ShieldStarOutlineIcon from '@pingux/mdi-react/ShieldStarOutlineIcon';
 import ShowChartIcon from '@pingux/mdi-react/ShowChartIcon';
@@ -47,6 +51,8 @@ const icons = {
   mdiWeb: 'globe',
   MenuDown: 'keyboard_arrow_down',
   MenuUp: 'keyboard_arrow_up',
+  tabPickerDown: 'keyboard_arrow_down',
+  tabPickerUp: 'keyboard_arrow_up',
   monitoringIcon: ShowChartIcon,
   openInNew: 'open_in_new',
   overviewIcon: 'dashboard',
@@ -65,6 +71,10 @@ const icons = {
   ImageOutlineIcon: 'image',
   helpHint: 'info',
   ModalCloseIcon: 'close',
+  errorCalloutBadge: AlertCircleOutlineIcon,
+  infoCalloutBadge: InformationCircleOutlineIcon,
+  successCalloutBadge: CheckCircleOutlineIcon,
+  warningCalloutBadge: AlertOutlineIcon,
 };
 
 export default icons;

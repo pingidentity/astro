@@ -1,6 +1,8 @@
 import { astroTokens } from '@pingux/onyx-tokens';
 
 import attachment from '../../../../components/AIComponents/Attachment/Attachment.styles';
+import checkboxFieldGroup from '../../../../components/CheckboxFieldGroup/CheckboxFieldGroup.styles';
+import emptyState from '../../../../components/EmptyState/EmptyState.styles';
 import labelValuePairs from '../../../../components/LabelValuePairs/LabelValuePairs.styles';
 import skeleton from '../../../../components/Skeleton/Skeleton.styles';
 import codeView from '../codeView/codeView';
@@ -8,6 +10,7 @@ import sizes from '../sizes';
 
 import accordion from './accordion';
 import accordionGrid from './accordionGrid';
+import arrayField from './arrayField';
 import { avatar } from './avatar';
 import { box } from './box';
 import button, { defaultFocus } from './button';
@@ -31,7 +34,7 @@ import suggestion from './suggestion';
 import suggestions from './suggestions';
 import { table } from './table';
 import { tableBase } from './tableBase';
-import { menuTab, tab, tabs } from './tabs';
+import { menuTab, tab, tabPickerExpandIcon, tabs } from './tabs';
 import tooltip from './tooltip';
 
 const onyxLabelValuePairs = {
@@ -44,7 +47,7 @@ const onyxLabelValuePairs = {
 
 const fieldHelperText = {
   title: {
-    fontSize: 'small',
+    fontSize: 'md',
     pt: '0px !important',
     mt: '.25rem',
     '&.is-default': {
@@ -59,6 +62,20 @@ const fieldHelperText = {
     '&.is-success': {
       color: 'success.dark',
     },
+  },
+};
+
+const iconBadge = {
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '50%',
+  },
+  badgeCircle: {
+    bottom: '-2px',
+    height: '10px',
+    width: '10px',
+    borderRadius: '50%',
   },
 };
 
@@ -160,8 +177,8 @@ const listBox = {
     p: astroTokens.spacing.sm,
   },
   option: {
-    py: astroTokens.spacing['md-s'],
-    pl: astroTokens.spacing['md-s'],
+    py: 'md-s',
+    pl: 'md-s',
     pr: astroTokens.spacing.md,
     justifyContent: 'space-between',
     borderRadius: astroTokens.radius.md,
@@ -486,18 +503,22 @@ const helpHint = {
 export default {
   accordion,
   accordionGrid,
+  arrayField,
   attachment,
   avatar,
   breadcrumb,
   box,
   buttonBar,
   callout,
+  checkboxFieldGroup,
   codeView,
   dataTable,
+  emptyState,
   environmentBreadcrumb,
   fieldHelperText,
   footer,
   helpHint,
+  iconBadge,
   iconWrapper,
   labelValuePairs: onyxLabelValuePairs,
   listBox,
@@ -509,6 +530,7 @@ export default {
   menuItem,
   menuSection,
   menuTab,
+  tabPickerExpandIcon,
   message,
   modal,
   navBar,

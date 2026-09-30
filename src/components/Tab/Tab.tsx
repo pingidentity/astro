@@ -10,12 +10,14 @@ import {
   Tooltip,
   TooltipTrigger,
 } from '../..';
-import { useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
+import { useGetTheme, useLocalOrForwardRef, usePropWarning, useStatusClasses } from '../../hooks';
 import { TabProps } from '../../types';
 import ORIENTATION from '../../utils/devUtils/constants/orientation';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 import TabPicker from '../TabPicker';
 import { TabsContext } from '../Tabs';
+
+import { getSlotText } from './getSlotText';
 
 /**
  * Tab control for dividing up closely-related content.
@@ -26,6 +28,7 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
   const { className, item, isDisabled: isTabsDisabled,
     isRequired, orientation, mode, slots } = props;
 
+  const { themeState: { isOnyx } } = useGetTheme();
   const { key, rendered, props: itemProps } = item;
 
   const state = useContext(TabsContext) as TabListState<object>;
@@ -48,9 +51,19 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
 
   const defaultIndicator = <Box variant="forms.label.indicator">*</Box>;
 
+  const onyxSlot = (slot: React.ReactNode, isCount = false) => {
+    if (!React.isValidElement(slot)) return slot;
+    const count = getSlotText(slot.props.children ?? slot.props.label);
+    const ariaLabel = slot.props['aria-label'] || (isCount && count ? `Count ${count}` : undefined);
+    return React.cloneElement(slot, {
+      ...(isCount && ariaLabel ? { 'aria-label': ariaLabel } : {}),
+      ...(isCount ? {} : { size: 24, sx: { alignSelf: 'center', ...slot.props.sx }, style: { alignSelf: 'center', ...slot.props.style } }),
+    });
+  };
+
   const tab = (
     <Box isRow>
-      {slots?.beforeTab}
+      {!isOnyx && slots?.beforeTab}
       <Box
         className={classNames}
         variant="tab"
@@ -67,14 +80,17 @@ export const CollectionTab = forwardRef<HTMLElement, TabProps>((props, ref) => {
             variant="tabLabel"
             display="flex"
             {...itemProps?.tabLabelProps}
+            sx={{ gap: isOnyx ? 'sm' : undefined }}
           >
+            {isOnyx && slots?.beforeTab && onyxSlot(slots.beforeTab)}
             {rendered}
             {isRequired && defaultIndicator}
+            {isOnyx && slots?.afterTab && onyxSlot(slots.afterTab, true)}
           </Text>
           {isSelected && !isDisabled && <TabLine {...itemProps?.tabLineProps} />}
         </>
       </Box>
-      {slots?.afterTab}
+      {!isOnyx && slots?.afterTab}
     </Box>
   );
 

@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as EmptyStateStories from './EmptyState.stories';
+
+<Meta of={EmptyStateStories} isTemplate />
+
+# EmptyState
+
+`EmptyState` communicates when a list, table, or other region has no content to
+show. It supports two usage modes, selected purely by which props are supplied:
+
+- **No results** (a search or filter returned nothing): icon + heading +
+  optional description, no call to action.
+- **Genuinely empty** (no items exist yet): icon + heading + optional
+  description + a call-to-action button, rendered only when both `buttonLabel`
+  and `onButtonPress` are supplied.
+
+Both modes are also the default empty state of `ListView` in the Onyx theme.
+The legacy Astro theme's `ListView` continues to render nothing when empty.
+
+### Required Components
+
+This component can be used independently and does not require additional components.
+
+### Overriding the built-ins
+
+- Pass `icon` (an MDI component or Material Symbol string) to replace the default icon.
+- Pass `children` to replace the built-in call-to-action button with any custom node.
+- `iconProps`, `headerProps`, and `buttonProps` are spread onto the underlying `Icon`,
+  heading `Text`, and `Button` after the defaults, so consumer props win. Note that a
+  consumer-supplied `sx` replaces (rather than merges with) the built-in `sx`.
+
+### Accessibility
+
+#### Keyboard Navigation
+
+| Keys | Functions |
+| ---- | --------- |
+| Tab | Moves focus to the call-to-action button, when rendered, following the page tab sequence. |
+
+#### Screen Readers
+
+- The icon is decorative by default and carries an accessible title ("Empty state icon").
+- The heading renders as an `h4` heading element.
+- The call-to-action button is a standard focusable button announced by its label.

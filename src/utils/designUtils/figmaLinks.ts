@@ -167,7 +167,7 @@ export const FIGMA_LINKS = {
   },
   iconBadge: {
     default:
-      'https://www.figma.com/file/bpbEw54gTTcdIiZs4PKK1p/Astro-Specs?type=design&node-id=17916-38366&t=rLZVlRDdR1JhehkH-0',
+      'https://www.figma.com/design/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=11396-16337',
   },
   iconButton: {
     default:
@@ -361,5 +361,9 @@ export const FIGMA_LINKS = {
     onyx: 'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=1516-84&p=f&t=1IrTSMDCAftH6Roq-0',
     inRockerButton:
       'https://www.figma.com/file/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=1516-498&t=TcHspIxapoPWqWJC-4',
+  },
+  emptyState: {
+    default:
+      'https://www.figma.com/design/XDGxYAgQkcHDVjyu8OGrBv/Onyx-Specs?node-id=8811-16278&p=f&t=VSDkruj7jVEtiNhl-0',
   },
 };
