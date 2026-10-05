@@ -1,3 +1,13 @@
+## 2.234.0-alpha.0 (2026-10-05)
+
+### 🚀 Features
+
+- [UXE-8464] Update RangeCalendar Onyx variant to match revised specs
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.233.0 (2026-09-29)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
