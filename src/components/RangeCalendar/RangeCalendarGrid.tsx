@@ -36,7 +36,7 @@ const RangeCalendarGrid = (props: RangeCalendarGridProps) => {
       <TableHead {...headerProps}>
         <TableRow>
           {weekDays.map((day, index) => (
-            <TableCell isHeading variant="rangeCalendar.columnHeader" key={getKey(day, index)} role="columnheader">
+            <TableCell isHeading isDisabled={state.isDisabled} variant="rangeCalendar.columnHeader" key={getKey(day, index)} role="columnheader">
               {day}
             </TableCell>
           ))}

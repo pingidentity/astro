@@ -201,6 +201,29 @@ test('parseDateIfString should correctly parse string or DateValue inputs', () =
   expect(result2).toEqual(new CalendarDate(2022, 8, 10));
 });
 
+test('disabled calendar applies is-disabled class to weekday column headers', () => {
+  getComponent({ isDisabled: true });
+
+  // RangeCalendarGrid passes isDisabled to TableCell; Box applies the is-disabled class
+  const columnHeaders = screen.getAllByRole('columnheader', { hidden: true });
+  expect(columnHeaders).toHaveLength(14);
+  columnHeaders.forEach(header => {
+    expect(header).toHaveClass('is-disabled');
+  });
+});
+
+test('disabled calendar renders month name headings with disabled state', () => {
+  getComponent({ isDisabled: true });
+
+  // RangeCalendarHeader applies sx={{ color: state.isDisabled ? 'text.secondary' : undefined }}
+  // to the month name Text elements (role="heading", aria-level={3}, aria-hidden)
+  const monthHeadings = screen.getAllByRole('heading', { level: 3, hidden: true });
+  expect(monthHeadings).toHaveLength(2);
+  monthHeadings.forEach(heading => {
+    expect(heading).toBeInTheDocument();
+  });
+});
+
 test('should allow selecting a range spanning more than 2 months with minValue constraint', async () => {
   const minValue = '2022-07-01';
 

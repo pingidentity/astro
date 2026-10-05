@@ -3,7 +3,7 @@ import { astroTokens } from '@pingux/onyx-tokens';
 const calendarBody = {
   py: 'sm',
   borderTop: '1px solid',
-  borderTopColor: 'border.base',
+  borderTopColor: 'border.separator',
   backgroundColor: 'backgroundBase',
   '& > tr:nth-of-type(odd) ': {
     backgroundColor: 'backgroundBase',
@@ -70,8 +70,19 @@ const calendarCell = {
   height: '36px',
 };
 
+const calendarHeaderContainer = {
+  mt: 0,
+  height: '26px',
+  mb: 'md',
+  width: '100%',
+};
+
 const columnHeader = {
   color: 'text.primary',
+  fontWeight: 0,
+  '&.is-disabled': {
+    opacity: 0.65,
+  },
 };
 
 const calendarContainer = {
@@ -79,10 +90,10 @@ const calendarContainer = {
   textAlign: 'center',
   color: 'backgroundBase',
   border: '1px solid',
-  borderColor: 'border.base',
+  borderColor: 'border.hairline',
   boxShadow: 'standard',
   borderRadius: '16px',
-  p: 'sm',
+  p: 'md',
 };
 
 const calendarRow = {
@@ -94,6 +105,7 @@ export default {
   calendarButton,
   calendarCell,
   calendarContainer,
+  calendarHeaderContainer,
   columnHeader,
   calendarRow,
 };

@@ -25,7 +25,7 @@ const border = {
   input: astroTokensDark.color.gray[500],
   separator: chroma.mix('#23282e', 'white', 0.15, 'rgb').hex(),
   attachment: '#39414b',
-  hairline: '#737577',
+  hairline: astroTokensDark.color.common.border,
 };
 
 const badge = {
