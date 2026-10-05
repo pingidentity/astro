@@ -68,7 +68,7 @@ const RangeCalendar = forwardRef<HTMLDivElement, RangeCalendarProps>((props, ref
         prevButtonProps={prevButtonProps}
         nextButtonProps={nextButtonProps}
       />
-      <Box isRow gap="26px">
+      <Box isRow gap="lg">
         <RangeCalendarGrid state={state} />
         <RangeCalendarGrid state={state} offset={{ months: 1 }} />
       </Box>
