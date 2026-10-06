@@ -21,4 +21,6 @@ export type TableRowProps = TableChildrenProp;
 export interface TableCellProps extends StyleProps, DOMAttributes, TestingAttributes {
     /** Determines whether or not the html rendered is a th or td element. */
     isHeading?: boolean
+    /** Applies disabled styling to the cell. */
+    isDisabled?: boolean
 }
