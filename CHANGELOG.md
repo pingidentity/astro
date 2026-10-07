@@ -1,3 +1,13 @@
+## 2.234.1-alpha.0 (2026-10-07)
+
+### 🩹 Fixes
+
+- Chromatic update to v16
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.234.0-alpha.0 (2026-10-05)
 
 ### 🚀 Features
