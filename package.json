@@ -183,7 +183,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-react-docgen": "^4.2.1",
     "babel-plugin-transform-node-env-inline": "^0.4.3",
-    "chromatic": "^15.2.0",
+    "chromatic": "^16.10.1",
     "eslint": "^9.0.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.31.0",
