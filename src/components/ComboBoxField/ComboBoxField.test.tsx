@@ -10,6 +10,17 @@ import { act, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
+type ComboItemProps = {
+  name?: string
+  id?: string
+}
+
+type ComboSectionProps = {
+  name?: string | null
+  key?: string,
+  kids?: ComboItemProps[]
+}
+
 const items = [
   { name: 'Aardvark', id: '1' },
   { name: 'Kangaroo', id: '2' },
@@ -54,7 +65,9 @@ const defaultProps = {
 const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props}>
-      {item => <Item {...item} key={item.id} data-id={item.name}>{item.name}</Item>}
+      {(item: ComboItemProps) => (
+        <Item {...item} key={item.id} data-id={item.name}>{item.name}</Item>
+      )}
     </ComboBoxField>
   </OverlayProvider>
 ));
@@ -62,9 +75,9 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
 const getComponentWithSections = (props = {}, { renderFn = render } = {}) => renderFn((
   <OverlayProvider>
     <ComboBoxField {...defaultProps} {...props} items={withSection}>
-      {section => (
+      {(section: ComboSectionProps) => (
         <Section key={section.key} items={section.kids} title={section.name}>
-          {item => <Item key={item.name}>{item.name}</Item>}
+          {(item: ComboItemProps) => <Item key={item.name}>{item.name}</Item>}
         </Section>
       )}
     </ComboBoxField>
@@ -74,7 +87,11 @@ const getComponentWithSections = (props = {}, { renderFn = render } = {}) => ren
 const ComboBoxWithCustomFilter = () => {
   const { startsWith } = useFilter({ sensitivity: 'base' });
 
-  const [fieldState, setFieldState] = useState({
+  const [fieldState, setFieldState] = useState<{
+    inputValue: string | undefined;
+    selectedKey: string | null;
+    itemsList: typeof items;
+  }>({
     inputValue: '',
     selectedKey: '',
     itemsList: items,
@@ -83,9 +100,9 @@ const ComboBoxWithCustomFilter = () => {
   const onSelectionChange = key => {
     const selectedItem = items.filter(({ id }) => id === key);
     setFieldState({
-      inputValue: selectedItem?.name,
+      inputValue: (selectedItem as unknown as { name?: string })?.name,
       selectedKey: key,
-      itemsList: items.filter(item => startsWith(item.name, selectedItem?.name ?? ''),
+      itemsList: items.filter(item => startsWith(item.name, (selectedItem as unknown as { name?: string })?.name ?? ''),
       ),
     });
   };
@@ -111,7 +128,6 @@ const ComboBoxWithCustomFilter = () => {
   return (
     <OverlayProvider>
       <ComboBoxField
-        label="Example label"
         items={fieldState.itemsList}
         inputValue={fieldState.inputValue}
         selectedKey={fieldState.selectedKey}
@@ -120,14 +136,14 @@ const ComboBoxWithCustomFilter = () => {
         onOpenChange={onOpenChange}
         {...defaultProps}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: ComboItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
 };
 
 const ComboBoxWithAddOption = () => {
-  const [options, setOptions] = useState(items);
+  const [options, setOptions] = useState<Array<{ key?: string; name: string }>>(items);
   const [inputValue, setInputValue] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
 
@@ -149,7 +165,7 @@ const ComboBoxWithAddOption = () => {
       onSelectionChange={onSelectionChange}
       hasAddOption
     >
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: ComboItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   );
 };
@@ -198,7 +214,7 @@ test('should not allow custom value by default', async () => {
   expect(input).toHaveValue('');
 
   // type something
-  await userEvent.type(input, 'custom');
+  await userEvent.type(input!, 'custom');
   // blur input
   await userEvent.tab();
   expect(input).not.toHaveValue('custom');
@@ -211,7 +227,7 @@ test('should allow custom value when prop is set', async () => {
   expect(input).toHaveValue('');
 
   // type something
-  await userEvent.type(input, 'custom');
+  await userEvent.type(input!, 'custom');
   // blur input
   await userEvent.tab();
   expect(input).toHaveValue('custom');
@@ -223,7 +239,7 @@ test('should disable options based on disabledKeys prop', async () => {
   const button = screen.queryByRole('button');
 
   // Open the list by clicking on the button and ensure first option is not active
-  await userEvent.click(button);
+  await userEvent.click(button!);
   const options = await findOptions();
   expect(options).toHaveLength(items.length);
   expect(options[0]).toHaveAttribute('aria-disabled', 'true');
@@ -243,7 +259,7 @@ test('should be able to open and navigate through the listbox by click', async (
   expect(listboxBefore).not.toBeInTheDocument();
 
   // Open the list by clicking on the button and ensure first option is not active
-  await userEvent.click(button);
+  await userEvent.click(button!);
   const options = await findOptions();
   const listbox = await findListbox();
   expect(listbox).toBeInTheDocument();
@@ -267,7 +283,7 @@ test('should be able to open and navigate through the listbox by click', async (
   expect(input).toHaveValue(items[0].name);
 
   // Option stays focused when the overlay is re-opened
-  await userEvent.click(button);
+  await userEvent.click(button!);
   expect(options[0]).toHaveClass('is-focused');
 });
 
@@ -280,7 +296,7 @@ test('should be able to hover list item and filter on input box', async () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Open the list by clicking on the button and ensure first option is not active
-  await userEvent.click(button);
+  await userEvent.click(button!);
   const options = await findOptions();
 
   // Both dismiss buttons should be available, but the dropdown button should be inaccessible
@@ -294,7 +310,7 @@ test('should be able to hover list item and filter on input box', async () => {
   expect(input).toHaveAttribute('aria-activedescendant', options[0].id);
   expect(options[0]).toHaveClass('is-focused');
 
-  await userEvent.type(input, 'k');
+  await userEvent.type(input!, 'k');
 
   const optionsAfterFilter = await findListbox();
   expect(optionsAfterFilter).toBeInTheDocument();
@@ -310,7 +326,7 @@ test('should be able to open the listbox by keyboard', async () => {
 
   // Open the list by hitting the down arrow key and ensure first option is active
   await userEvent.tab();
-  await userEvent.type(input, '{arrowdown}', { skipClick: true });
+  await userEvent.type(input!, '{arrowdown}', { skipClick: true });
 
   const listbox = await findListbox();
   expect(listbox).toBeInTheDocument();
@@ -321,7 +337,7 @@ test('should be able to open the listbox by keyboard', async () => {
   expect(options[0]).toHaveClass('is-focused');
 
   // Ensure option selection works
-  await userEvent.type(input, '{enter}', { skipClick: true });
+  await userEvent.type(input!, '{enter}', { skipClick: true });
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('combobox')).toHaveValue(items[0].name);
 });
@@ -342,7 +358,7 @@ test('should open list on focus when menuTrigger is set to use focus', async () 
   expect(listboxAfterBlur).not.toBeInTheDocument();
 
   // focus with click
-  await userEvent.click(input);
+  await userEvent.click(input!);
   const optionsAfterClick = await findOptions();
   expect(optionsAfterClick).toHaveLength(items.length);
 });
@@ -352,7 +368,7 @@ test('should open list on click after selection when menuTrigger is set to use f
   const input = screen.getByRole('combobox');
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
-  await userEvent.click(input);
+  await userEvent.click(input!);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 
   await userEvent.click(screen.queryAllByRole('option')[0]);
@@ -361,14 +377,14 @@ test('should open list on click after selection when menuTrigger is set to use f
 
   // Need to click away first, then click back
   await userEvent.click(document.body);
-  await userEvent.click(input);
+  await userEvent.click(input!);
   expect(screen.queryByRole('listbox')).toBeInTheDocument();
 });
 
 test('Item accepts a data-id and the data-id can be found in the DOM', async () => {
   getComponent();
   const button = screen.queryByRole('button');
-  await userEvent.click(button);
+  await userEvent.click(button!);
   const options = await findOptions();
 
   expect(options).toHaveLength(items.length);
@@ -383,7 +399,7 @@ test('should invoke onInputChange', async () => {
   expect(input).toHaveValue(inputValue);
   expect(onInputChange).not.toHaveBeenCalled();
 
-  await userEvent.type(input, 'a');
+  await userEvent.type(input!, 'a');
   const newValue = `${inputValue}a`;
   expect(onInputChange).toHaveBeenNthCalledWith(1, newValue);
   // Should not have the new value since we did not update the prop and re-render
@@ -399,7 +415,7 @@ test('should invoke onOpenChange on button click', async () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on button click
-  await userEvent.click(button);
+  await userEvent.click(button!);
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
@@ -412,7 +428,7 @@ test('should invoke onOpenChange on input change', async () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on input change (default menuTrigger)
-  await userEvent.type(input, 'a');
+  await userEvent.type(input!, 'a');
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'input');
 });
 
@@ -425,7 +441,7 @@ test('should invoke onOpenChange on keyboard arrow down', async () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on keyboard interaction
-  await userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input!, '{arrowdown}');
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
@@ -438,7 +454,7 @@ test('should invoke onOpenChange on keyboard arrow up', async () => {
   expect(onOpenChange).not.toHaveBeenCalled();
 
   // Should fire on keyboard interaction
-  await userEvent.type(input, '{arrowup}');
+  await userEvent.type(input!, '{arrowup}');
   expect(onOpenChange).toHaveBeenNthCalledWith(1, true, 'manual');
 });
 
@@ -450,18 +466,18 @@ test('should invoke onSelectionChange when selection is made', async () => {
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Should fire on item selection click
-  await userEvent.click(button);
+  await userEvent.click(button!);
 
   const options = await findOptions();
   await userEvent.click(options[2]);
   expect(onSelectionChange).toHaveBeenNthCalledWith(1, items[2].id);
 
   // Should fire when input is cleared
-  await userEvent.clear(input);
+  await userEvent.clear(input!);
   expect(onSelectionChange).toHaveBeenNthCalledWith(2, null);
 
   // Should fire on keyboard interaction
-  await userEvent.type(input, '{arrowdown}{enter}');
+  await userEvent.type(input!, '{arrowdown}{enter}');
   expect(onSelectionChange).toHaveBeenNthCalledWith(3, items[0].id);
 
   // Total number of calls
@@ -473,15 +489,15 @@ test('should use default contains filtering', async () => {
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
-  await userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input!, '{arrowdown}');
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 
   // Should list all options on default contains filter
-  await userEvent.type(input, 'k');
+  await userEvent.type(input!, 'k');
   expect(screen.queryAllByRole('option')).toHaveLength(items.length);
 
   // Should list no options when none match
-  await userEvent.type(input, 'z');
+  await userEvent.type(input!, 'z');
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 });
 
@@ -491,12 +507,12 @@ test('should be able to use controlled filtering', async () => {
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
-  await userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input!, '{arrowdown}');
   options = await findOptions();
   expect(options).toHaveLength(items.length);
 
   // Should only list the second option
-  await userEvent.type(input, 'k');
+  await userEvent.type(input!, 'k');
   options = await findOptions();
   expect(options[0]).toHaveTextContent(items[1].name);
 });
@@ -508,12 +524,12 @@ test('should be able to use custom default filtering', async () => {
   const input = screen.queryByRole('combobox');
 
   // Should list all without filterable input
-  await userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input!, '{arrowdown}');
   options = await findOptions();
   expect(options).toHaveLength(items.length);
 
   // Should only list the second option
-  await userEvent.type(input, 'K');
+  await userEvent.type(input!, 'K');
   options = await findOptions();
   expect(options[0]).toHaveTextContent(items[1].name);
 });
@@ -526,7 +542,7 @@ test('should show in input "textValue" if provided', async () => {
 
   const input = screen.queryByRole('combobox');
 
-  await userEvent.click(input);
+  await userEvent.click(input!);
   const options = await findOptions();
 
   await userEvent.click(options[0]);
@@ -548,12 +564,12 @@ test('option list should be opened on scroll input value', async () => {
   getComponent({ defaultItems: otherItems });
   const input = screen.queryByRole('combobox');
 
-  await userEvent.type(input, '{arrowdown}');
+  await userEvent.type(input!, '{arrowdown}');
   options = screen.queryAllByRole('option');
   expect(options).toHaveLength(otherItems.length);
 
-  await userEvent.type(input, 'This is very very very long item name');
-  fireEvent.scroll(input, { target: { scrollX: 10 } });
+  await userEvent.type(input!, 'This is very very very long item name');
+  fireEvent.scroll(input!, { target: { scrollX: 10 } });
   options = screen.queryAllByRole('option');
   expect(options.length).toBe(1);
   expect(options[0]).toHaveTextContent(otherItems[3].name);
@@ -570,7 +586,11 @@ describe('loadingState', () => {
     // First time load will show progress bar so user can know that items are being fetched
     expect(screen.getByRole('alert')).toBeInTheDocument();
 
-    getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender });
+    getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
 
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
@@ -583,10 +603,18 @@ describe('loadingState', () => {
     act(() => { jest.advanceTimersByTime(500); });
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
-    getComponent({ loadingState: loadingStates.FILTERING, menuTrigger: 'manual' }, { renderFn: rerender });
+    getComponent({ loadingState: loadingStates.FILTERING, menuTrigger: 'manual' }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
-    getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender });
+    getComponent({ loadingState: loadingStates.FILTERING }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
 
@@ -602,7 +630,7 @@ describe('loadingState', () => {
 
     const button = screen.getByRole('button');
 
-    await userEvent.click(button);
+    await userEvent.click(button!);
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
   });
 
@@ -615,7 +643,7 @@ describe('loadingState', () => {
 
     const button = screen.getByRole('button');
 
-    await userEvent.click(button);
+    await userEvent.click(button!);
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
   });
 
@@ -625,11 +653,15 @@ describe('loadingState', () => {
     const button = screen.getByRole('button');
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    await userEvent.click(button);
+    await userEvent.click(button!);
     act(() => { jest.advanceTimersByTime(500); });
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
-    getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender });
+    getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
     const listbox = await findListbox();
     expect(listbox).toBeVisible();
     expect(() => screen.getByRole('progressbar')).toThrow();
@@ -641,13 +673,13 @@ describe('loadingState', () => {
     const button = screen.getByRole('button');
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    await userEvent.click(button);
+    await userEvent.click(button!);
     act(() => { jest.advanceTimersByTime(500); });
     const listbox = await findListbox();
     expect(listbox).toBeVisible();
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
 
-    await userEvent.click(button);
+    await userEvent.click(button!);
     expect(() => screen.getByRole('progressbar')).toThrow();
     expect(() => screen.getByRole('listbox')).toThrow();
   });
@@ -658,7 +690,11 @@ describe('loadingState', () => {
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender });
+    getComponent({ loadingState: loadingStates.IDLE }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
   });
@@ -670,7 +706,11 @@ describe('loadingState', () => {
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    getComponent({ loadingState: loadingStates.FILTERING, menuTrigger: 'manual' }, { renderFn: rerender });
+    getComponent({ loadingState: loadingStates.FILTERING, menuTrigger: 'manual' }, { renderFn: rerender } as {
+      renderFn: (ui: React.ReactElement<unknown, string |
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        React.JSXElementConstructor<unknown>>) => any
+    });
     expect(() => screen.getByRole('progressbar')).toThrow();
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => within(input).getByRole('progressbar')).toBeTruthy();
@@ -683,7 +723,7 @@ describe('loadingState', () => {
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    await userEvent.type(input, 'O');
+    await userEvent.type(input!, 'O');
     act(() => { jest.advanceTimersByTime(250); });
     expect(() => screen.getByRole('progressbar')).toThrow();
 
@@ -697,7 +737,7 @@ describe('loadingState', () => {
 
     expect(() => screen.getByRole('progressbar')).toThrow();
 
-    await userEvent.click(button);
+    await userEvent.click(button!);
 
     const listbox = await screen.findByRole('listbox', { hidden: true });
     expect(listbox).toBeInTheDocument();
@@ -736,10 +776,10 @@ test('should handle selecting custom option', async () => {
   expect(input).toHaveValue('');
 
   // type something
-  await userEvent.type(input, 'custom');
+  await userEvent.type(input!, 'custom');
 
   // set input value as selected
-  await userEvent.type(input, '{enter}', { skipClick: true });
+  await userEvent.type(input!, '{enter}', { skipClick: true });
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('combobox')).toHaveValue('custom');
 
@@ -757,11 +797,11 @@ test('onSelectionChange works properly with custom value', async () => {
   expect(onSelectionChange).not.toHaveBeenCalled();
 
   // Should fire when input value was typed, and enter was pressed
-  await userEvent.type(input, 'custom{enter}');
+  await userEvent.type(input!, 'custom{enter}');
   expect(onSelectionChange).toHaveBeenCalledWith('custom');
 
   // Should fire when input is cleared
-  await userEvent.type(input, '{selectall}{backspace}{enter}');
+  await userEvent.type(input!, '{selectall}{backspace}{enter}');
   expect(onSelectionChange).toHaveBeenCalledWith('');
 });
 
@@ -776,7 +816,7 @@ test('add option shows when "hasAddOption" is provided', async () => {
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
   const inputValue = 'New value';
-  await userEvent.type(input, inputValue);
+  await userEvent.type(input!, inputValue);
   expect(input).toHaveValue(inputValue);
 
   const listbox = await findListbox();
@@ -793,7 +833,7 @@ test('if "hasAddOption" is provided, then custom value is added to listbox on bl
 
   const input = screen.queryByRole('combobox');
   const inputValue = 'New value';
-  await userEvent.type(input, inputValue);
+  await userEvent.type(input!, inputValue);
   expect(input).toHaveValue(inputValue);
 
   // blur input
@@ -801,7 +841,7 @@ test('if "hasAddOption" is provided, then custom value is added to listbox on bl
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   expect(screen.queryByRole('option')).not.toBeInTheDocument();
 
-  await userEvent.click(input);
+  await userEvent.click(input!);
   expect(input).toHaveValue(inputValue);
 
   const listbox = await findListbox();
@@ -833,7 +873,7 @@ test('popover closes on input blur', async () => {
 
   const input = screen.getByRole('combobox');
 
-  await userEvent.click(input);
+  await userEvent.click(input!);
   const listbox = await findListbox();
   expect(listbox).toBeInTheDocument();
 
@@ -848,7 +888,7 @@ test('popover closes on input blur', async () => {
 test('passing sections, renders separators', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
-  await userEvent.click(button);
+  await userEvent.click(button!);
   const separators = await screen.findAllByRole('separator', { hidden: true });
   expect(separators).toHaveLength(4);
 });
@@ -856,7 +896,7 @@ test('passing sections, renders separators', async () => {
 test('a blank title does not render', async () => {
   getComponentWithSections();
   const button = screen.getByRole('button');
-  await userEvent.click(button);
+  await userEvent.click(button!);
   expect(screen.queryByText('Fruit')).not.toBeInTheDocument();
 });
 
@@ -874,7 +914,7 @@ test('popover width re-measures when the menu opens to prevent flickering', asyn
   mockWidth = 500;
 
   const button = screen.queryByRole('button');
-  await userEvent.click(button);
+  await userEvent.click(button!);
 
   const listbox = await findListbox();
   // The popover container receives the inline style with width/minWidth.
@@ -896,20 +936,20 @@ test('popover width stays in sync when closing and reopening at different widths
   const button = screen.queryByRole('button');
 
   // Open the menu at 500px
-  await userEvent.click(button);
+  await userEvent.click(button!);
   let listbox = await findListbox();
   let popoverContainer = listbox.closest('[role="presentation"]');
   expect(popoverContainer).toHaveStyle({ width: '500px' });
 
   // Close the menu
-  await userEvent.click(button);
+  await userEvent.click(button!);
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
   // Simulate wrapper shrinking back
   mockWidth = 300;
 
   // Reopen — width should reflect the new measurement
-  await userEvent.click(button);
+  await userEvent.click(button!);
   listbox = await findListbox();
   popoverContainer = listbox.closest('[role="presentation"]');
   expect(popoverContainer).toHaveStyle({ width: '300px', 'min-width': '300px' });
@@ -918,7 +958,7 @@ test('popover width stays in sync when closing and reopening at different widths
 });
 
 describe('when isReadOnly is true', () => {
-  const testProp = { isReadOnly: true };
+  const testProp: { isReadOnly: boolean, defaultInputValue?: string } = { isReadOnly: true };
 
   const TEST_DEFAULT_INPUT_VALUE = 'test default input value';
 

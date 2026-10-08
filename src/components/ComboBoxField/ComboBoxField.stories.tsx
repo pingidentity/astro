@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { Key, useCallback, useEffect, useRef, useState } from 'react';
 import { useFilter } from '@react-aria/i18n';
 import { action } from 'storybook/actions';
 
@@ -13,6 +13,18 @@ import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 
 import ComboBoxFieldReadme from './ComboBoxField.mdx';
+
+type StoryItemProps = {
+  name?: string
+  id?: string
+  key?: Key
+}
+
+type StorySectionProps = {
+  name?: string
+  key?: string,
+  children?: StoryItemProps[]
+}
 
 const items = [
   { name: 'Aardvark', id: '1' },
@@ -143,7 +155,7 @@ export default {
 export const Default = args => (
   <OverlayProvider>
     <ComboBoxField {...actions} {...args}>
-      {item => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name} data-id={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -177,13 +189,13 @@ export const WithSections = args => (
       label="Example label"
       defaultItems={withSection}
     >
-      {section => (
+      {(section: StorySectionProps) => (
         <Section
           key={section.key}
           items={section.children}
           title={section.name}
         >
-          {item => <Item key={item.key}>{item.name}</Item>}
+          {(item: StoryItemProps) => <Item key={item.key}>{item.name}</Item>}
         </Section>
       )}
     </ComboBoxField>
@@ -240,7 +252,9 @@ export const AsyncLoading = () => {
         loadingState={loading}
         onLoadMore={handleLoadMore}
       >
-        {item => <Item key={item.name.given}>{item.name.given}</Item>}
+        {(item: { name?: { given?: string } }) => (
+          <Item key={item.name?.given}>{item.name?.given}</Item>
+        )}
       </ComboBoxField>
     </OverlayProvider>
   );
@@ -258,7 +272,7 @@ export const ControlledInput = () => {
         inputValue={inputValue}
         onInputChange={setInputValue}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
@@ -277,7 +291,7 @@ export const ControlledMenu = () => {
         isOpen={isOpen}
         onOpenChange={setIsOpen}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
@@ -295,7 +309,7 @@ export const ControlledSelection = () => {
         selectedKey={selectedKey}
         onSelectionChange={setSelectedKey}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
@@ -305,7 +319,11 @@ export const ControlledFiltering = () => {
   // import { useFilter } from '@react-aria/i18n'
   const { startsWith } = useFilter({ sensitivity: 'base' });
 
-  const [fieldState, setFieldState] = useState({
+  const [fieldState, setFieldState] = useState<{
+    inputValue: string | undefined;
+    selectedKey: string | null;
+    itemsList: typeof items;
+  }>({
     inputValue: '',
     selectedKey: '',
     itemsList: items,
@@ -314,9 +332,9 @@ export const ControlledFiltering = () => {
   const onSelectionChange = key => {
     const selectedItem = items.filter(({ id }) => id === key);
     setFieldState({
-      inputValue: selectedItem?.name,
+      inputValue: (selectedItem as unknown as { name?: string })?.name,
       selectedKey: key,
-      itemsList: items.filter(item => startsWith(item.name, selectedItem?.name ?? ''),
+      itemsList: items.filter(item => startsWith(item.name, (selectedItem as unknown as { name?: string })?.name ?? ''),
       ),
     });
   };
@@ -351,7 +369,7 @@ export const ControlledFiltering = () => {
         onSelectionChange={onSelectionChange}
         onOpenChange={onOpenChange}
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
@@ -372,7 +390,7 @@ export const ControlledWithCustomValue = () => {
         onSelectionChange={setInputValue}
         hasCustomValue
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
@@ -385,7 +403,7 @@ export const WithCustomInputValue = () => (
       defaultItems={items}
       hasCustomValue
     >
-      {item => <Item key={item.id}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.id}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -393,7 +411,7 @@ export const WithCustomInputValue = () => (
 export const AllowCustomValue = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} hasCustomValue {...actions}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -406,7 +424,7 @@ export const DisabledKeys = () => (
       disabledKeys={['Aardvark']}
       {...actions}
     >
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -419,7 +437,7 @@ export const FocusMenuTrigger = () => (
       menuTrigger="focus"
       {...actions}
     >
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -427,7 +445,7 @@ export const FocusMenuTrigger = () => (
 export const Disabled = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} isDisabled {...actions}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -441,7 +459,7 @@ export const HelperText = () => (
       status="error"
       {...actions}
     >
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -449,7 +467,7 @@ export const HelperText = () => (
 export const ReadOnly = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} isReadOnly {...actions}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -457,7 +475,7 @@ export const ReadOnly = () => (
 export const Required = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} isRequired {...actions}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -465,7 +483,7 @@ export const Required = () => (
 export const WithoutStatusIndicator = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={items} hasNoStatusIndicator {...actions}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -473,7 +491,7 @@ export const WithoutStatusIndicator = () => (
 export const WithCustomHeight = () => (
   <OverlayProvider>
     <ComboBoxField label="Example label" defaultItems={animals} scrollBoxProps={{ maxHeight: '75px' }} {...actions}>
-      {item => <Item key={item.name}>{item.name}</Item>}
+      {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
     </ComboBoxField>
   </OverlayProvider>
 );
@@ -484,14 +502,14 @@ export const CustomDefaultFilter = () => {
   return (
     <OverlayProvider>
       <ComboBoxField label="Example label" defaultItems={animals} defaultFilter={startsWith} {...actions}>
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
 };
 
 export const ControlledWithAddOption = () => {
-  const [options, setOptions] = useState(items);
+  const [options, setOptions] = useState<Array<{ key?: string; name: string }>>(items);
   const [inputValue, setInputValue] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
 
@@ -516,7 +534,7 @@ export const ControlledWithAddOption = () => {
         onSelectionChange={onSelectionChange}
         hasAddOption
       >
-        {item => <Item key={item.name}>{item.name}</Item>}
+        {(item: StoryItemProps) => <Item key={item.name}>{item.name}</Item>}
       </ComboBoxField>
     </OverlayProvider>
   );
