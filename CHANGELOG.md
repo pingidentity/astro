@@ -1,3 +1,13 @@
+## 2.235.0-alpha.0 (2026-10-08)
+
+### 🚀 Features
+
+- **astro:** [UXE-8945] ComboBox/ComboBoxField: convert to TypeScript
+
+### ❤️  Thank You
+
+- kunalm
+
 ## 2.234.1 (2026-10-07)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
