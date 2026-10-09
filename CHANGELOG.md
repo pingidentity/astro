@@ -1,3 +1,13 @@
+## 2.236.0-alpha.0 (2026-10-09)
+
+### 🚀 Features
+
+- **astro:** [UXE-8699] add Tree component based on React Aria Components
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.235.0-alpha.0 (2026-10-08)
 
 ### 🚀 Features
