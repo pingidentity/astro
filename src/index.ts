@@ -234,6 +234,9 @@ export { default as TimeZonePicker } from './components/TimeZonePicker';
 export { default as timezones } from './components/TimeZonePicker/timezones';
 export { default as TooltipTrigger } from './components/TooltipTrigger';
 export * from './components/TooltipTrigger';
+export {
+  Tree, TreeItem, TreeItemContent, TreeLoadMoreItem, useDragAndDrop, useTreeDragAndDrop,
+} from './components/Tree';
 export { default as TreeView } from './components/TreeView';
 export * from './components/TreeView';
 export { PaginationContext } from './context/PaginationContext';

@@ -1,6 +1,4 @@
-import classnames from 'classnames';
-import kebabCase from 'lodash/kebabCase';
-import mapKeys from 'lodash/mapKeys';
+import getStatusClasses from '../../utils/getStatusClasses';
 
 interface UseStatusClasses {
   /**
@@ -21,13 +19,8 @@ interface UseStatusClasses {
 const useStatusClasses: UseStatusClasses = (
   defaultClass,
   statuses = {},
-) => {
-  const kebabStatuses = mapKeys(statuses, (_v, k) => kebabCase(k));
-  const classNames = classnames(defaultClass, kebabStatuses);
-
-  return {
-    classNames,
-  };
-};
+) => ({
+  classNames: getStatusClasses(defaultClass, statuses),
+});
 
 export default useStatusClasses;

@@ -14,6 +14,7 @@ import { navBar } from './navbar';
 import rangeCalendar from './rangeCalendar';
 import skeleton from './skeleton';
 import stepper from './stepper';
+import tree from './tree';
 
 const listBox = {
   container: {
@@ -355,4 +356,5 @@ export default {
       color: `${astroTokensDark.color.gray[100]} !important`,
     },
   },
+  tree,
 };

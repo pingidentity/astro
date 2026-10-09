@@ -5,6 +5,7 @@ interface UseCircularLoaderProps {
    size?: LoaderSize;
    mode?: string,
    progress?: number,
+   isCircle?: boolean,
    isAstro: boolean,
    defaultLoaderSize: number,
 }
@@ -16,10 +17,10 @@ export const circularSizes = {
 };
 
 const useCircularLoader = (props: UseCircularLoaderProps) => {
-  const { mode, size, isAstro, defaultLoaderSize, progress = 75, ...others } = props;
+  const { mode, size, isCircle, isAstro, defaultLoaderSize, progress = 75, ...others } = props;
   const { sizeProps } = useTShirtSize({ size: size || defaultLoaderSize, sizes: circularSizes });
 
-  if (mode === 'dots' || isAstro) {
+  if (!isCircle && (mode === 'dots' || isAstro)) {
     return {
       size: size || defaultLoaderSize,
       isCircle: false,

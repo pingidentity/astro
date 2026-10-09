@@ -56,6 +56,7 @@ import * as tab from '../../components/Tabs/Tabs.style';
 import timefield from '../../components/TimeField/TimeField.styles';
 import timeZone from '../../components/TimeZonePicker/TimeZone.styles';
 import tooltip from '../../components/TooltipTrigger/Tooltip.styles';
+import tree from '../../components/Tree/Tree.styles';
 import treeView from '../../components/TreeView/TreeView.styles';
 
 export default {
@@ -114,6 +115,7 @@ export default {
   timefield,
   timeZone,
   tooltip,
+  tree,
   treeView,
   ...tab,
   statusIcon,

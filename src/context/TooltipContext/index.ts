@@ -5,6 +5,7 @@ export const TooltipContext = createContext<TooltipTriggerState>({
   isOpen: false,
   open: () => undefined,
   close: () => undefined,
+  shouldSkipAnimation: false,
 });
 /* istanbul ignore next */
 export const useTooltipContext = () => useContext(TooltipContext);
