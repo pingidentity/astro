@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as TreeStories from './Tree.stories';
+import AccessibilityTable from '../../utils/docUtils/AccessibilityTable';
+import { KeyboardRows } from '../../utils/docUtils/accessibilityTableConstants';
+
+<Meta of={TreeStories} isTemplate />
+
+# Tree
+
+The Tree component displays hierarchical data in an expandable, collapsible tree structure. Users can expand and collapse levels, select one or many items, and — optionally — reorder and re-parent items with drag and drop.
+
+A Tree should:
+- Be used for data with a clear parent/child relationship, such as environments, regions, folders, or organization structures.
+- Be used when users need to navigate a nested structure that is deeper than a flat list.
+
+A Tree shouldn't:
+- Be used for flat data — use a [ListView](./?path=/docs/components-listview--docs) instead.
+- Be used for navigation that fits a menu or breadcrumbs.
+- Expose too many levels of depth; keep nesting shallow enough to stay scannable.
+
+### Required Components
+
+This component can be used with `TreeItem`, `TreeItemContent`, and `TreeLoadMoreItem` from this package. A chevron and expand/collapse behavior are provided by default. `TreeItem` children render as row content directly; place them inside `TreeItemContent` only when you need its render props or its built-in folder/file and lock icons.
+
+### Authoring Modes
+
+- **Static**: declare `TreeItem` children directly in JSX (see the *Static Nested Tree* story). Best for small, fixed trees.
+- **Dynamic**: pass a nested array via the `items` prop and render nodes with a recursive render function (see the *Dynamic Recursive Tree* story). Best for trees backed by data.
+
+### Accessibility
+
+This component should adhere to the [WAI-ARIA Tree View](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/) accessibility guidelines.
+
+<AccessibilityTable keyboardRows={[
+  { key: 'Space or Enter', description: 'When focused, selects the item (with selectionMode enabled) or toggles expand/collapse.' },
+  KeyboardRows.tabFocusesItem,
+  KeyboardRows.shiftTabFocusPrevious,
+  { key: 'Right Arrow', description: 'Expands a collapsed parent item, or moves focus to its first child when expanded.' },
+  { key: 'Left Arrow', description: 'Collapses an expanded parent item, or moves focus to its parent when collapsed.' },
+  { key: 'Down / Up Arrow', description: 'Moves focus to the next or previous visible item.' },
+  {
+    key: 'Home (Fn + Right Arrow Key) Or Control/Command + Home',
+    description: 'Shifts the focus to the first item in the tree.',
+  },
+  {
+    key: 'End (Fn + Left Arrow Key) Or Control/Command + End',
+    description: 'Shifts the focus to the last item in the tree.',
+  },
+]} screenReaderRows={[
+  'The Tree uses the **`role="tree"`** attribute with each TreeItem using **`role="treeitem"`**.',
+  'Parent items use the **`aria-expanded`** attribute to indicate whether they are expanded or collapsed.',
+  'Selected items use the **`aria-selected`** attribute; disabled items use **`aria-disabled`**.',
+  'The Tree requires an **`aria-label`** to provide an accessible name.',
+]} />
+
+### Keyboard Drag and Drop
+
+When drag and drop is enabled, the drag handle is focusable. Press **Enter** to start a drag session, use the arrow keys to move the drop target, then press **Enter** to drop or **Escape** to cancel.

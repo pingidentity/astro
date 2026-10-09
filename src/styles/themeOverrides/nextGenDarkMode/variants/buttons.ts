@@ -295,6 +295,21 @@ const buttons = {
       color: chroma.mix(astroTokensDark.color.blue[500], 'white', 0.3, 'rgb').hex(),
     },
   },
+  treeChevron: {
+    path: {
+      fill: astroTokensDark.color.common.menu.item.text,
+    },
+    '&:hover': {
+      '& svg': {
+        fill: astroTokensDark.color.common.menu.item.hover.text,
+      },
+    },
+    '&.is-focused': {
+      outline: '2px solid',
+      outlineColor: astroTokensDark.color.primary,
+      outlineOffset: '2px',
+    },
+  },
 };
 
 export default buttons;

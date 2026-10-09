@@ -731,6 +731,19 @@ const buttons = {
       ...defaultFocus,
     },
   },
+  treeChevron: {
+    path: {
+      fill: astroTokens.color.gray[500],
+    },
+    '&:hover': {
+      '& svg': {
+        fill: astroTokens.color['nav-bar-item'].selected.text,
+      },
+    },
+    '&.is-focused': {
+      ...defaultFocus,
+    },
+  },
 };
 
 export default buttons;

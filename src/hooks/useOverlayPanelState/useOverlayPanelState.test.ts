@@ -13,6 +13,8 @@ test('default useOverlayPanelState', () => {
       isTransitioning: expect.any(Boolean),
       setOpen: expect.any(Function),
       isOpen: expect.any(Boolean),
+      point: null,
+      setPoint: expect.any(Function),
     },
     onClose: expect.any(Function),
     isTransitioning: expect.any(Boolean),
