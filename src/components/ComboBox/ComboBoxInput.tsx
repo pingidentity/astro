@@ -1,16 +1,17 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
+import type { AriaButtonProps } from 'react-aria';
 import { FocusRing, mergeProps } from 'react-aria';
 import { PressResponder, useHover } from '@react-aria/interactions';
-import PropTypes from 'prop-types';
 
 import { Box, Button, Icon, Loader, TextField } from '../..';
 import { useInputLoader, usePropWarning } from '../../hooks';
 import useGetTheme from '../../hooks/useGetTheme';
+import { ComboBoxInputProps } from '../../types';
+import type { BoxProps } from '../../types/box';
+import type { TextFieldProps } from '../../types/textField';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
-import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
 
-const ComboBoxInput = forwardRef((props, ref) => {
+const ComboBoxInput = forwardRef<HTMLInputElement, ComboBoxInputProps>((props, ref) => {
   const {
     controlProps,
     containerProps,
@@ -34,22 +35,29 @@ const ComboBoxInput = forwardRef((props, ref) => {
     ...others
   } = props;
 
+  const { hoverProps, isHovered } = useHover({});
+
   const textFieldProps = {
     isDisabled,
     isReadOnly,
     containerProps,
     ...mergeProps(inputProps, others),
-  };
+  } as TextFieldProps;
 
   const { icons, themeState: { isOnyx } } = useGetTheme();
   const { MenuDown } = icons;
 
   // istanbul ignore next
-  useImperativeHandle(ref, () => inputRef.current);
+  useImperativeHandle(
+    ref,
+    () => (inputRef as React.RefObject<HTMLInputElement>).current as HTMLInputElement,
+  );
 
-  const { hoverProps, isHovered } = useHover({});
-
-  const { isLoading } = useInputLoader({ loadingState, inputValue: inputProps.value });
+  const { isLoading } = useInputLoader({
+    loadingState: loadingState as string,
+    // eslint-disable-next-line max-len
+    inputValue: (inputProps as React.InputHTMLAttributes<HTMLInputElement> | undefined)?.value as string,
+  });
 
   usePropWarning(props, 'disabled', 'isDisabled');
 
@@ -63,7 +71,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
       <PressResponder preventFocusOnPress isPressed={isOpen}>
         <Button
           variant="forms.comboBox.button"
-          {...triggerProps}
+          {...triggerProps as AriaButtonProps}
           ref={triggerRef}
           isDisabled={isDisabled || isReadOnly}
           tabIndex={-1}
@@ -71,7 +79,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
           <Icon
             icon={MenuDown}
             size={isOnyx ? 'sm' : 'md'}
-            sx={isOpen ? { transform: 'rotate(180deg)' } : null}
+            sx={isOpen ? { transform: 'rotate(180deg)' } : undefined}
             title={{ name: '' }}
             aria-hidden="true"
           />
@@ -93,7 +101,7 @@ const ComboBoxInput = forwardRef((props, ref) => {
         style={style}
         variant="forms.comboBox.container"
         {...hoverProps}
-        {...wrapperProps}
+        {...(wrapperProps as BoxProps)}
       >
         <TextField
           {...textFieldProps}
@@ -102,43 +110,16 @@ const ComboBoxInput = forwardRef((props, ref) => {
             variant: 'forms.comboBox.input',
             ...controlProps,
           }}
+          tabIndex={-1}
           statusClasses={{ isHovered }}
-          ref={inputRef}
+          ref={inputRef as React.Ref<HTMLInputElement>}
           slots={{
             inContainer: button,
           }}
-          tabIndex={-1}
         />
       </Box>
     </FocusRing>
   );
 });
-
-ComboBoxInput.propTypes = {
-  containerProps: PropTypes.shape({}),
-  controlProps: PropTypes.shape({}),
-  hasAutoFocus: PropTypes.bool,
-  helperText: PropTypes.node,
-  inputProps: PropTypes.shape({ value: PropTypes.string }),
-  inputRef: PropTypes.shape({}),
-  inputWrapperRef: PropTypes.shape({}),
-  isDisabled: PropTypes.bool,
-  isOpen: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  label: PropTypes.node,
-  labelProps: PropTypes.shape({}),
-  loadingState: PropTypes.oneOf(Object.values(loadingStates)),
-  menuTrigger: PropTypes.oneOf(['focus', 'input', 'manual']),
-  onInputChange: PropTypes.func,
-  onLoadMore: PropTypes.func,
-  onOpenChange: PropTypes.func,
-  onSelectionChange: PropTypes.func,
-  style: PropTypes.shape({}),
-  triggerProps: PropTypes.shape({}),
-  triggerRef: PropTypes.shape({}),
-  wrapperProps: PropTypes.shape({}),
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-};
 
 export default ComboBoxInput;

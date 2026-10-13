@@ -1,23 +1,26 @@
 import React, {
   forwardRef,
+  Key,
   useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
+import type { AriaComboBoxOptions, AriaListBoxOptions, ComboBoxAria } from 'react-aria';
 import { DismissButton, FocusScope, useComboBox, useOverlayPosition } from 'react-aria';
+import type { ComboBoxStateOptions } from 'react-stately';
 import { useComboBoxState } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
-import PropTypes from 'prop-types';
+import type { Placement } from '@react-types/overlays';
 
 import { usePropWarning } from '../../hooks';
+import { ComboBoxFieldProps } from '../../types';
+import type { ScrollBoxProps } from '../../types/scrollBox';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import { ariaAttributesBasePropTypes, getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
-import { statusPropTypes } from '../../utils/docUtils/statusProp';
+import { getAriaAttributeProps } from '../../utils/docUtils/ariaAttributes';
 import ComboBoxInput from '../ComboBox';
 import ListBox from '../ListBox';
 import Popover from '../Popover';
@@ -25,7 +28,18 @@ import ScrollBox from '../ScrollBox';
 
 const displayName = 'ComboBoxField';
 
-const ComboBoxField = forwardRef((props, ref) => {
+interface ComboBoxFieldFC {
+  <T extends object>(
+    props: ComboBoxFieldProps<T> & React.RefAttributes<HTMLInputElement>,
+  ): React.ReactElement | null;
+  displayName?: string;
+  defaultProps?: Partial<ComboBoxFieldProps> | undefined;
+}
+
+const ComboBoxField = forwardRef(<T extends object>(
+  props: ComboBoxFieldProps<T>,
+  ref: React.ForwardedRef<HTMLInputElement>,
+) => {
   const {
     hasAutoFocus,
     hasAddOption,
@@ -69,22 +83,22 @@ const ComboBoxField = forwardRef((props, ref) => {
     ...nonAriaProps,
   };
 
-  const popoverRef = useRef();
-  const buttonRef = useRef();
-  const listBoxRef = useRef();
-  const inputRef = useRef();
-  const inputWrapperRef = useRef();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const listBoxRef = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
 
   usePropWarning(props, 'disabled', 'isDisabled');
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => inputRef.current);
+  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
   const shouldShowAddOption = hasAddOption && inputValue && selectedKey !== inputValue;
   const addOption = `ADD: ${inputValue}`;
 
-  const getItemsArr = initialArr => {
+  const getItemsArr = (initialArr: Iterable<T> | undefined) => {
     if (initialArr && shouldShowAddOption) {
-      return [...initialArr, { name: addOption, key: addOption }];
+      return [...Array.from(initialArr), { name: addOption, key: addOption }];
     }
     return initialArr;
   };
@@ -93,13 +107,13 @@ const ComboBoxField = forwardRef((props, ref) => {
   const items = getItemsArr(initialItems);
 
   /* istanbul ignore next */
-  const onSelectionChangeHandler = key => {
+  const onSelectionChangeHandler = (key: Key | null) => {
     let newVal = key || selectedKey || '';
-    const arrayOfValues = Array.from(items || defaultItems);
+    const arrayOfValues = Array.from((items || defaultItems) as Iterable<T>);
 
     if (hasAddOption && selectedKey !== inputValue
-      && arrayOfValues[arrayOfValues.length - 1].key === key) {
-      newVal = inputValue;
+      && (arrayOfValues[arrayOfValues.length - 1] as { key?: Key }).key === key) {
+      newVal = inputValue as unknown as Key;
     }
     if (onSelectionChange) onSelectionChange(newVal);
   };
@@ -113,7 +127,7 @@ const ComboBoxField = forwardRef((props, ref) => {
       ? onSelectionChangeHandler
       : onSelectionChange,
     defaultFilter: (typeof defaultFilter !== 'undefined' ? defaultFilter : contains),
-  });
+  } as ComboBoxStateOptions<object>);
 
   useEffect(() => {
     if (shouldShowAddOption) state.selectionManager.setFocusedKey(addOption);
@@ -126,7 +140,7 @@ const ComboBoxField = forwardRef((props, ref) => {
       popoverRef,
       listBoxRef,
       inputRef,
-    },
+    } as AriaComboBoxOptions<object>,
     state,
   );
   const {
@@ -134,14 +148,19 @@ const ComboBoxField = forwardRef((props, ref) => {
     shouldSelectOnPressUp,
     'UNSTABLE_itemBehavior': action,
     ...otherListBoxProps
-  } = listBoxProps;
+  } = listBoxProps as typeof listBoxProps & {
+  shouldFocusOnHover?: boolean;
+  shouldSelectOnPressUp?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  'UNSTABLE_itemBehavior'?: any;
+  };
 
   const { overlayProps, placement, updatePosition } = useOverlayPosition({
     offset: 1,
     targetRef: inputWrapperRef,
     overlayRef: popoverRef,
     scrollRef: listBoxRef,
-    placement: `${direction} end`,
+    placement: `${direction} end` as Placement,
     shouldFlip: !isNotFlippable,
     isOpen: state.isOpen,
     onClose: state.close,
@@ -160,7 +179,7 @@ const ComboBoxField = forwardRef((props, ref) => {
 
 
   // Measure the width of the input to inform the width of the menu (below).
-  const [menuWidth, setMenuWidth] = useState(null);
+  const [menuWidth, setMenuWidth] = useState<number | null>(null);
 
   const onResize = useCallback(() => {
     /* istanbul ignore next */
@@ -184,7 +203,7 @@ const ComboBoxField = forwardRef((props, ref) => {
     ...overlayProps.style,
     width: menuWidth,
     minWidth: menuWidth,
-  };
+  } as React.CSSProperties;
 
   const listBox = !isReadOnly && (
     <Popover
@@ -199,11 +218,11 @@ const ComboBoxField = forwardRef((props, ref) => {
     >
       <FocusScope>
         <DismissButton onDismiss={state.close} />
-        <ScrollBox {...scrollBoxProps}>
+        <ScrollBox {...(scrollBoxProps as ScrollBoxProps)}>
           <ListBox
             ref={listBoxRef}
             hasNoEmptySelection
-            hasAutoFocus={state.focusStrategy || true}
+            hasAutoFocus={(state.focusStrategy || true) as boolean}
             state={state}
             hasVirtualFocus
             isLoading={loadingState === loadingStates.LOADING_MORE}
@@ -237,130 +256,7 @@ const ComboBoxField = forwardRef((props, ref) => {
       {listBox}
     </>
   );
-});
-
-ComboBoxField.propTypes = {
-  /* Whether or not adding new options to the list is enabled. */
-  hasAddOption: PropTypes.bool,
-  /** Whether the ComboBox allows a non-item matching input value to be set. */
-  hasCustomValue: PropTypes.bool,
-  /** Whether the collection allows empty selection. */
-  hasNoEmptySelection: PropTypes.bool,
-  /**
-   * The item keys that are disabled. These items cannot be selected, focused, or otherwise
-   * interacted with.
-   */
-  disabledKeys: isIterableProp,
-  /** The interaction required to display the ComboBox menu. */
-  menuTrigger: PropTypes.oneOf(['focus', 'input', 'manual']),
-  /**
-   * Whether the ComboBox menu is prevented from flipping directions when insufficient space is
-   * available for the given `direction` placement.
-   */
-  isNotFlippable: PropTypes.bool,
-  /** Where the ComboBox menu opens relative to its trigger. */
-  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /** Text rendered below the input. */
-  helperText: PropTypes.node,
-  /** The initial selected key in the collection (uncontrolled). */
-  defaultSelectedKey: PropTypes.string,
-  /** The currently selected key in the collection (controlled). */
-  selectedKey: PropTypes.string,
-  /**
-   * Handler that is called when the selection changes.
-   *
-   * `(key: Key) => any`
-   */
-  onSelectionChange: PropTypes.func,
-  /** The list of ComboBox items (uncontrolled). */
-  defaultItems: isIterableProp,
-  /** The list of ComboBox items (controlled). */
-  items: isIterableProp,
-  /**
-   * Method that is called when the open state of the menu changes.
-   * Returns the new open state and the action that caused the opening of the menu.
-   *
-   * `(isOpen: boolean, menuTrigger: MenuTriggerAction) => void`
-   */
-  onOpenChange: PropTypes.func,
-  loadingState: PropTypes.oneOf(Object.values(loadingStates)),
-  onLoadMore: PropTypes.func,
-  /** The default value of the ComboBox input (uncontrolled). */
-  defaultInputValue: PropTypes.string,
-  /** The value of the ComboBox input (controlled). */
-  inputValue: PropTypes.string,
-  /**
-   * Handler that is called when the ComboBox input value changes.
-   *
-   * `(value: string) => void`
-   */
-  onInputChange: PropTypes.func,
-  /** Whether user input is required on the input before form submission. */
-  isRequired: PropTypes.bool,
-  /** Whether the input is disabled. */
-  isDisabled: PropTypes.bool,
-  /** Whether the input can be selected but not changed by the user. */
-  isReadOnly: PropTypes.bool,
-  /** The rendered label for the field. */
-  label: PropTypes.node,
-  /** Temporary text that occupies the text input when it is empty. */
-  placeholder: PropTypes.string,
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string,
-  /** Whether the element should receive focus on render. */
-  hasAutoFocus: PropTypes.bool,
-  /** Whether the field has a status indicator. */
-  hasNoStatusIndicator: PropTypes.bool,
-  /**
-   * Handler that is called when the element receives focus.
-   *
-   * `(e: FocusEvent) => void`
-   */
-  onFocus: PropTypes.func,
-  /**
-   * Handler that is called when the element loses focus.
-   *
-   * `(e: FocusEvent) => void`
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Handler that is called when the element's focus status changes.
-   *
-   * `(isFocused: boolean) => void`
-   */
-  onFocusChange: PropTypes.func,
-  /**
-   * Handler that is called when a key is pressed.
-   *
-   * `(e: KeyboardEvent) => void`
-   */
-  onKeyDown: PropTypes.func,
-  /**
-   * Handler that is called when a key is released.
-   *
-   * `(e: KeyboardEvent) => void`
-   */
-  onKeyUp: PropTypes.func,
-  /**
-   * Handler that determines the default filtering for items. If undefined, `contains` from
-   * [useFilter](https://react-spectrum.adobe.com/react-aria/useFilter.html) is used.
-   *
-   * `(option: string, inputValue: string) => boolean`
-   */
-  defaultFilter: PropTypes.func,
-  // /** Props object that is spread directly into the ScrollBox element. */
-  /** @ignore */
-  scrollBoxProps: PropTypes.shape({
-
-    maxHeight: PropTypes.string,
-  }),
-  /** Props object that is spread directly into the ComboBoxInput element. */
-  controlProps: PropTypes.shape({
-    onClick: PropTypes.func,
-  }),
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-};
+}) as unknown as ComboBoxFieldFC;
 
 ComboBoxField.defaultProps = {
   menuTrigger: 'focus',

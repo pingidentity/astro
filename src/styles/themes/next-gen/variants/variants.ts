@@ -36,6 +36,7 @@ import { table } from './table';
 import { tableBase } from './tableBase';
 import { menuTab, tab, tabPickerExpandIcon, tabs } from './tabs';
 import tooltip from './tooltip';
+import tree from './tree';
 
 const onyxLabelValuePairs = {
   ...labelValuePairs,
@@ -554,5 +555,6 @@ export default {
   tableBase,
   tabs,
   tooltip,
+  tree,
   imageUpload,
 };

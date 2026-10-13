@@ -45,4 +45,5 @@ export interface PopoverProps extends Omit<AriaPopoverProps, 'popoverRef'> {
   isDismissable?: boolean,
   role?: string,
   isNotClosedOnBlur?: boolean,
+  isOpen?: boolean,
 }

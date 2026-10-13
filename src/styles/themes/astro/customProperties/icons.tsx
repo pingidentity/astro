@@ -29,7 +29,9 @@ import ImageFilterHdrIcon from '@pingux/mdi-react/ImageFilterHdrIcon';
 import InformationIcon from '@pingux/mdi-react/InformationIcon';
 import InformationOutlineIcon from '@pingux/mdi-react/InformationOutlineIcon';
 import KeyChainVariant from '@pingux/mdi-react/KeyChainVariantIcon';
+import LockIcon from '@pingux/mdi-react/LockIcon';
 import MenuDown from '@pingux/mdi-react/MenuDownIcon';
+import MenuRight from '@pingux/mdi-react/MenuRightIcon';
 import MenuUp from '@pingux/mdi-react/MenuUpIcon';
 import MonitorScreenshotIcon from '@pingux/mdi-react/MonitorScreenshotIcon';
 import MoreVertIcon from '@pingux/mdi-react/MoreVertIcon';
@@ -94,7 +96,9 @@ export default {
   mdiTransitConnectionVariant: TransitConnection,
   mdiViewDashboard: ViewDashboard,
   mdiWeb: GlobeIcon,
+  Lock: LockIcon,
   MenuDown,
+  MenuRight,
   MenuUp,
   tabPickerDown: ArrowDropDownIcon,
   tabPickerUp: ArrowDropUpIcon,

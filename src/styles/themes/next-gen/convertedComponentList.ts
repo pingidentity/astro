@@ -70,6 +70,7 @@ const nextGenConvertedComponents = [
   'TextAreaField',
   'TextField',
   'TooltipTrigger',
+  'Tree',
   'ArrayField',
   'ColorField',
   'LinkSelectField',

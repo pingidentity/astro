@@ -138,9 +138,15 @@ const codeEditor = {
   headerColor: astroTokensDark.color.gray[900],
 };
 
+// Icon/glyph color when it sits on a primary-colored surface (e.g. the Tree's
+// folder circle is primary blue in dark mode; a selected row's descendant
+// recolor would otherwise paint the glyph the same primary color).
+const iconOnPrimary = '#ffffff';
+
 export const colors = {
   border,
   iconWrapper,
+  iconOnPrimary,
   ...overrides,
   twoTone,
   light: '#1A1E22',
