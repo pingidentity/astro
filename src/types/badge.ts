@@ -19,6 +19,8 @@ export type BadgeHelpHintProps = Pick<HelpHintProps,
 >;
 
 export interface BadgeProps extends DOMAttributes {
+  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
+  id?: string;
   /** The text color of the badge. */
   textColor?: string | object;
   /** The background color of the box. */
@@ -44,4 +46,21 @@ export interface BadgeProps extends DOMAttributes {
   variant?: string,
   /** Inline styling prop for item */
   sx?: ThemeUICSSObject
+}
+
+export type BadgeConvenienceProps = Omit<BadgeProps, 'variant' | 'slots'>;
+
+export type CalloutBadgeProps = BadgeConvenienceProps;
+
+export type DefaultBadgeProps = BadgeConvenienceProps;
+
+export interface RemovableBadgeProps extends BadgeConvenienceProps {
+  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
+  id?: string;
+  /** Defines style of RemovableBadge */
+  isInverted?: boolean;
+  /** The label of the RemovableBadge. */
+  label?: string;
+  /** The function to close the RemovableBadge */
+  onClose?: (id: string) => void;
 }

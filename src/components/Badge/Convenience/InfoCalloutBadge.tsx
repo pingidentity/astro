@@ -2,8 +2,9 @@ import React from 'react';
 
 import { Badge, Icon } from '../../..';
 import { useGetTheme } from '../../../hooks';
+import { CalloutBadgeProps } from '../../../types';
 
-const InfoCalloutBadge = React.forwardRef((props, ref) => {
+const InfoCalloutBadge = React.forwardRef<HTMLDivElement, CalloutBadgeProps>((props, ref) => {
   const { icons } = useGetTheme();
 
   return (

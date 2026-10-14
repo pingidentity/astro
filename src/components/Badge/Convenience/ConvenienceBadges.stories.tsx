@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 import { v4 as uuid } from 'uuid';
 
 import DocsLayout from '../../../../.storybook/storybookDocsLayout';
@@ -11,7 +12,12 @@ import {
   SuccessCalloutBadge,
   WarningCalloutBadge,
 } from '../../../index';
-import { FIGMA_LINKS } from '../../../utils/designUtils/figmaLinks.ts';
+import {
+  CalloutBadgeProps,
+  DefaultBadgeProps,
+  RemovableBadgeProps,
+} from '../../../types';
+import { FIGMA_LINKS } from '../../../utils/designUtils/figmaLinks';
 
 export default {
   title: 'Components/Badge/Convenience',
@@ -39,9 +45,9 @@ export default {
       ),
     },
   },
-};
+} satisfies Meta<typeof DefaultBadge>;
 
-export const Default = ({ ...args }) => (
+export const Default: StoryFn<DefaultBadgeProps> = ({ ...args }) => (
   <DefaultBadge {...args} />
 );
 
@@ -52,7 +58,7 @@ Default.parameters = {
   },
 };
 
-export const CalloutBadges = ({ ...args }) => (
+export const CalloutBadges: StoryFn<CalloutBadgeProps> = ({ ...args }) => (
   <Box gap="lg">
     <ErrorCalloutBadge label="You’ve Got Problems" {...args} />
     <WarningCalloutBadge label="You’ve Got Issues" {...args} />
@@ -73,10 +79,10 @@ const badges = [
   { key: 'b2', id: uuid(), label: 'Inverted Removable Badge', isInverted: true },
 ];
 
-export const Removable = ({ ...args }) => {
+export const Removable: StoryFn<RemovableBadgeProps> = ({ ...args }) => {
   const [items, setItems] = useState(badges);
 
-  const closeBadgeHandler = id => {
+  const closeBadgeHandler = (id: string) => {
     setItems(items.filter((item => item.id !== id)));
   };
 
