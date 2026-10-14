@@ -1,3 +1,13 @@
+## 2.237.0-alpha.0 (2026-10-14)
+
+### 🚀 Features
+
+- **astro:** [UXE-8943] convert Badge Convenience components to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.236.0 (2026-10-13)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
