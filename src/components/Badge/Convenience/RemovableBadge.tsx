@@ -1,10 +1,10 @@
 import React from 'react';
 import Clear from '@pingux/mdi-react/CloseIcon';
-import PropTypes from 'prop-types';
 
 import { Badge, Icon, IconButton } from '../../../index';
+import { RemovableBadgeProps } from '../../../types';
 
-const RemovableBadge = React.forwardRef((props, ref) => {
+const RemovableBadge = React.forwardRef<HTMLDivElement, RemovableBadgeProps>((props, ref) => {
   const {
     id,
     isInverted,
@@ -35,16 +35,5 @@ const RemovableBadge = React.forwardRef((props, ref) => {
     </Badge>
   );
 });
-
-RemovableBadge.propTypes = {
-  /** The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). */
-  id: PropTypes.string,
-  /** Defines style of RemovableBadge */
-  isInverted: PropTypes.bool,
-  /** The label of the RemovableBadge. */
-  label: PropTypes.string,
-  /** The function to close the RemovableBadge */
-  onClose: PropTypes.func,
-};
 
 export default RemovableBadge;

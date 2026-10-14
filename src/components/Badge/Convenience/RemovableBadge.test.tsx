@@ -3,15 +3,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { RemovableBadge } from '../../..';
+import { RemovableBadgeProps } from '../../../types';
 
 const testId = 'test-separator';
 
-const defaultProps = {
+const defaultProps: Partial<RemovableBadgeProps> = {
   'data-testid': testId,
   label: 'Test Label',
 };
 
-const getComponent = (props = {}) => render(
+const getComponent = (props: Partial<RemovableBadgeProps> = {}) => render(
   <RemovableBadge {...defaultProps} {...props} />,
 );
 
