@@ -8,32 +8,33 @@ import {
   SuccessCalloutBadge,
   WarningCalloutBadge,
 } from '../../..';
+import { BadgeConvenienceProps } from '../../../types';
 import axeTest from '../../../utils/testUtils/testAxe';
 
 const testId = 'test-separator';
 
-const defaultProps = {
+const defaultProps: Partial<BadgeConvenienceProps> = {
   'data-testid': testId,
   label: 'Test Label',
 };
 
-const getDefaultBadgeComponent = (props = {}) => render(
+const getDefaultBadgeComponent = (props: Partial<BadgeConvenienceProps> = {}) => render(
   <DefaultBadge {...defaultProps} {...props} />,
 );
 
-const getErrorCalloutBadgeComponent = (props = {}) => render(
+const getErrorCalloutBadgeComponent = (props: Partial<BadgeConvenienceProps> = {}) => render(
   <ErrorCalloutBadge {...defaultProps} {...props} />,
 );
 
-const getInfoCalloutBadgeComponent = (props = {}) => render(
+const getInfoCalloutBadgeComponent = (props: Partial<BadgeConvenienceProps> = {}) => render(
   <InfoCalloutBadge {...defaultProps} {...props} />,
 );
 
-const getSuccessCalloutBadgeComponent = (props = {}) => render(
+const getSuccessCalloutBadgeComponent = (props: Partial<BadgeConvenienceProps> = {}) => render(
   <SuccessCalloutBadge {...defaultProps} {...props} />,
 );
 
-const getWarningCalloutBadgeComponent = (props = {}) => render(
+const getWarningCalloutBadgeComponent = (props: Partial<BadgeConvenienceProps> = {}) => render(
   <WarningCalloutBadge {...defaultProps} {...props} />,
 );
 
