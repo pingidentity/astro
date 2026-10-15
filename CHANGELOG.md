@@ -1,3 +1,13 @@
+## 2.237.1-alpha.0 (2026-10-15)
+
+### 🩹 Fixes
+
+- [UXE-8472] SwitchField update to match specs
+
+### ❤️  Thank You
+
+- Ridhisha Dangol
+
 ## 2.237.0-alpha.0 (2026-10-14)
 
 ### 🚀 Features
