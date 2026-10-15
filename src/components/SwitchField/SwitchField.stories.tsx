@@ -77,7 +77,7 @@ export const Disabled: StoryFn<SwitchFieldProps> = args => (
 export const NoVisibleLabel: StoryFn<SwitchFieldProps> = args => (
   <SwitchField
     {...args}
-    aria-label="my-label"
+    aria-label="Non-visible-label"
     value="my-switch"
   />
 );

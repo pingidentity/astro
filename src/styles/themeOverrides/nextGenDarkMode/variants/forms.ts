@@ -82,9 +82,13 @@ const selectOption = {
 };
 
 const switchable = {
+  container: {
+    borderColor: 'gray-800',
+    backgroundColor: 'gray-900',
+  },
   thumb: {
     '&.is-selected': {
-      bg: 'black',
+      bg: 'white',
     },
   },
 };
