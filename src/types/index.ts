@@ -24,6 +24,7 @@ export * from './ComboBoxField';
 export * from './copyText';
 export * from './dataTable';
 export * from './datePicker';
+export * from './EditButton';
 export * from './emptyState';
 export * from './environmentBreadcrumb';
 export * from './expandableText';
