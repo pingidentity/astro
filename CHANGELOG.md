@@ -1,3 +1,13 @@
+## 2.238.0-alpha.0 (2026-10-19)
+
+### 🚀 Features
+
+- **astro:** [UXE-8946] converted EditButton to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.237.1 (2026-10-15)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
