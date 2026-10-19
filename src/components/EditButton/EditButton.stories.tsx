@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { Box, EditButton, Text } from '../../index';
+import { EditButtonProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { iconButtonArgTypes } from '../IconButton/iconButtonAttributes';
 
@@ -33,14 +35,15 @@ export default {
         type: 'select',
         options: Object.keys(IconSize),
       },
-      description: `The size of the icon container.
-        T-shirt sizing is recommended and can be passed to the size prop as "sm" , "md" and "lg"
-        rendering 10, 15, and 20 pixel svg containers.`,
+      description: `
+    The size of the icon container.
+    T-shirt sizing is recommended and can be passed to the size prop as "sm" , "md" and
+    "lg" rendering 10, 15, and 20 pixel svg containers.`,
     },
   },
-};
+} satisfies Meta<typeof EditButton>;
 
-export const Default = args => (
+export const Default: StoryFn<EditButtonProps> = args => (
   <EditButton
     {...args}
     aria-label="edit"
@@ -54,7 +57,7 @@ Default.parameters = {
   },
 };
 
-export const WithSizeProp = args => (
+export const WithSizeProp: StoryFn<EditButtonProps> = args => (
   <EditButton
     {...args}
     size="lg"
@@ -62,7 +65,7 @@ export const WithSizeProp = args => (
   />
 );
 
-export const WithButtonProp = args => {
+export const WithButtonProp: StoryFn<EditButtonProps> = args => {
   const [text, setText] = useState('I am a Text');
   return (
     <Box

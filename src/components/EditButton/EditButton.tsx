@@ -1,18 +1,17 @@
 import React, { forwardRef } from 'react';
 import PencilIcon from '@pingux/mdi-react/PencilIcon';
-import PropTypes from 'prop-types';
 
 import { Box, Icon, IconButton } from '../../index';
-import { iconButtonPropTypes } from '../IconButton/iconButtonAttributes';
+import { EditButtonProps } from '../../types';
 
 export const IconSize = {
   sm: 10,
   md: 15,
   lg: 20,
-};
+} as const;
 
-const EditButton = forwardRef((props, ref) => {
-  const { size, ...other } = props;
+const EditButton = forwardRef<HTMLElement, EditButtonProps>((props, ref) => {
+  const { size = 'md', ...other } = props;
 
   return (
     <Box ref={ref}>
@@ -23,23 +22,13 @@ const EditButton = forwardRef((props, ref) => {
       >
         <Icon
           icon={PencilIcon}
-          size={IconSize[size] || size}
+          size={IconSize[size as keyof typeof IconSize] || size}
           title={{ name: 'Pencil Icon' }}
         />
       </IconButton>
     </Box>
   );
 });
-
-EditButton.propTypes = {
-  ...iconButtonPropTypes,
-  /**  Determines the icon size */
-  size: PropTypes.string,
-};
-
-EditButton.defaultProps = {
-  size: 'md',
-};
 
 EditButton.displayName = 'EditButton';
 export default EditButton;
