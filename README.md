@@ -73,6 +73,27 @@ Astro fully supports the following browsers and versions:
 
 Support for IE11 is left up to developers and is not tested by the Astro team. Polyfills are necessary for full functionality.
 
+Astro's build compiles for the browsers in the package's `browserslist` field, which mirrors the
+[PingOne Browser Support Matrix](https://pingidentity.atlassian.net/wiki/spaces/P14C/pages/36250720/Browser+Support+Matrix)
+(latest-2 of Chrome, Firefox, Edge and Safari, plus recent iOS and Android). Note that some
+runtime dependencies (e.g. React Aria) ship modern JavaScript in their own builds; consumers
+who need to support older browsers than Astro targets must transpile their dependencies
+themselves.
+
+## Packaging and Tree-Shaking
+
+The published package declares `"sideEffects": false` so bundlers can drop unused components.
+To keep that contract valid:
+
+- Never add bare side-effect imports (e.g. `import './foo'`) or CSS-file imports to shipped
+  source. Styling is CSS-in-JS via theme objects; there are no CSS files to import.
+- Global registration, module-scope DOM access, and `injectGlobal` at import time are also
+  off-limits in shipped source.
+- Deep imports are supported under `@pingux/astro/lib/*` (e.g.
+  `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`).
+- The build prunes tests, stories, mdx docs, and Storybook-only trees from the package (see
+  `prune-package.sh`); nothing a consumer can import is removed.
+
 ## Changelog
 
 Astro’s [changelog](CHANGELOG.md) notes all features and bug fixes within each release. Refactors and documentation updates are not included within the changelog.
