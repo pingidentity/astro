@@ -73,12 +73,11 @@ Astro fully supports the following browsers and versions:
 
 Support for IE11 is left up to developers and is not tested by the Astro team. Polyfills are necessary for full functionality.
 
-Astro's build compiles for the browsers in the package's `browserslist` field, which mirrors the
-[PingOne Browser Support Matrix](https://pingidentity.atlassian.net/wiki/spaces/P14C/pages/36250720/Browser+Support+Matrix)
-(latest-2 of Chrome, Firefox, Edge and Safari, plus recent iOS and Android). Note that some
-runtime dependencies (e.g. React Aria) ship modern JavaScript in their own builds; consumers
-who need to support older browsers than Astro targets must transpile their dependencies
-themselves.
+Astro's build compiles for the browsers in the package's `browserslist` field — currently the
+latest two versions of Chrome, Firefox, Edge and Safari, plus recent iOS and Android. Note
+that some runtime dependencies (e.g. React Aria) ship modern JavaScript in their own builds;
+consumers who need to support older browsers than Astro targets must transpile their
+dependencies themselves.
 
 ## Packaging and Tree-Shaking
 
