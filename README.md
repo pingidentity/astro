@@ -86,13 +86,20 @@ The published package declares `"sideEffects": false` so bundlers can drop unuse
 To keep that contract valid:
 
 - Never add bare side-effect imports (e.g. `import './foo'`) or CSS-file imports to shipped
-  source. Styling is CSS-in-JS via theme objects; there are no CSS files to import.
+  source. Styling is CSS-in-JS via theme objects; there are no CSS files to import. Enforced
+  by `import/no-unassigned-import` in the root `eslint.config.cjs` (test, story, and mock
+  files are exempt).
 - Global registration, module-scope DOM access, and `injectGlobal` at import time are also
   off-limits in shipped source.
+- Import lodash per method (e.g. `import omit from 'lodash/omit'`), never from the
+  `lodash` barrel. Enforced by `no-restricted-imports` in the root `eslint.config.cjs`.
+  Code executed directly by raw Node ESM (e.g. onyx-tokens' style-dictionary formatters)
+  must use the explicit extension: `lodash/omit.js`.
 - Deep imports are supported under `@pingux/astro/lib/*` (e.g.
   `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`).
 - The build prunes tests, stories, mdx docs, and Storybook-only trees from the package (see
-  `prune-package.sh`); nothing a consumer can import is removed.
+  `prune-package.sh`); nothing a consumer can import is removed. The script's pruning rules
+  are covered by `prune-package.test.js`.
 
 ## Changelog
 
