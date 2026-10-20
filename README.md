@@ -136,7 +136,7 @@ ESLint packages or versions these features may stop working. Run this command ag
 
 Astro's Storybook includes [`@storybook/addon-mcp`](https://storybook.js.org/docs/ai/mcp/overview), which exposes an MCP (Model Context Protocol) server so AI coding agents can query accurate, up-to-date documentation about Astro's components while you're developing.
 
-While Storybook is running locally on the default port, the MCP server is available at `http://localhost:6006/mcp`. After the next Chromatic publish (this happens automatically on merges to `develop`/`main` via the existing CI pipeline), the same MCP server becomes available at the published Chromatic build URL with `/mcp` appended, e.g. `https://www.chromatic.com/builds?appId=61323e1122472a003ab11df0/mcp`.
+While Storybook is running locally on the default port, the MCP server is available at `http://localhost:6006/mcp`. The published Storybook (deployed automatically on merges to `develop`/`main` via the existing CI pipeline) exposes the same server at [`https://storybook.pingidentity.design/mcp`](https://storybook.pingidentity.design/mcp).
 
 This endpoint is intentionally unauthenticated and publicly accessible, per product approval.
 
