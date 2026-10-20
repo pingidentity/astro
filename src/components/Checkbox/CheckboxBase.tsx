@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import { Checkbox as ThemeUICheckbox, ThemeUICSSObject } from 'theme-ui';
 
 import useGetTheme from '../../hooks/useGetTheme';
