@@ -97,9 +97,11 @@ To keep that contract valid:
   must use the explicit extension: `lodash/omit.js`.
 - Deep imports are supported under `@pingux/astro/lib/*` (e.g.
   `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`).
-- The build prunes tests, stories, mdx docs, and Storybook-only trees from the package (see
-  `prune-package.sh`); nothing a consumer can import is removed. The script's pruning rules
-  are covered by `prune-package.test.js`.
+- The build prunes tests, stories, mdx docs, Storybook-only trees, and
+  `lib/utils/testUtils` from the package (see `prune-package.sh`); nothing a
+  consumer can import is removed. (`lib/utils/docUtils` stays: despite the
+  name, shipped components import its `PropTypes` shapes at runtime.) The
+  script's pruning rules are covered by `prune-package.test.js`.
 
 ## Changelog
 

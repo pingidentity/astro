@@ -5,9 +5,10 @@
 # so the mdx and whole Storybook-only trees are removed here instead.
 #
 # Everything pruned is dev-only: nothing under src/components, src/context,
-# src/hooks, src/styles, src/types, src/utils, or the root barrel imports
-# from src/api, src/docs, src/experimental, src/mocks, src/patterns,
-# src/recipes, or src/release.
+# src/hooks, src/styles, src/types, or the rest of src/utils is touched,
+# and the root barrel imports from src/api, src/docs, src/experimental,
+# src/mocks, src/patterns, src/recipes, or src/release. src/utils/testUtils
+# is the one utils exception: only test files import it.
 #
 # PRUNE_DIST_DIR overrides the package directory (used by prune-package.test.js);
 # it must point at the directory containing lib/.
@@ -15,8 +16,8 @@ set -e
 
 DIST="${PRUNE_DIST_DIR:-"$(cd "$(dirname "$0")" && pwd)/../../dist/astro"}"
 
-for tree in lib/cjs/api lib/cjs/docs lib/cjs/experimental lib/cjs/mocks lib/cjs/patterns lib/cjs/recipes lib/cjs/release \
-            lib/api lib/docs lib/experimental lib/mocks lib/patterns lib/recipes lib/release; do
+for tree in lib/cjs/api lib/cjs/docs lib/cjs/experimental lib/cjs/mocks lib/cjs/patterns lib/cjs/recipes lib/cjs/release lib/cjs/utils/testUtils \
+            lib/api lib/docs lib/experimental lib/mocks lib/patterns lib/recipes lib/release lib/utils/testUtils; do
   rm -rf "$DIST/$tree"
 done
 

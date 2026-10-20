@@ -16,6 +16,11 @@ function makeFakeDist(root) {
     'lib/cjs/components/Box/Box.js',
     'lib/styles/themes/next-gen.js',
     'lib/utils/devUtils/constants/variants.js',
+    // docUtils is imported at runtime by shipped components (propTypes and
+    // defaultProps spread at module scope), so it must survive the prune.
+    'lib/utils/docUtils/statusProp.js',
+    'lib/utils/docUtils/ariaAttributes.js',
+    'lib/cjs/utils/docUtils/statusProp.js',
     'lib/types/index.d.ts',
     'README.md',
     'package.json',
@@ -29,6 +34,10 @@ function makeFakeDist(root) {
     'lib/experimental/Widget.js',
     'lib/mocks/handlers.js',
     'lib/release/stableRelease.js',
+    // testUtils: only test files import it (jest reads it from src/)
+    'lib/utils/testUtils/testWrapper.js',
+    'lib/utils/testUtils/setupTests.js',
+    'lib/cjs/utils/testUtils/testWrapper.js',
     'lib/cjs/patterns/SaveBarPattern.js',
     'lib/cjs/recipes/SomeRecipe.js',
     'lib/cjs/docs/index.js',
