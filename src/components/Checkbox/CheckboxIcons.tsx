@@ -1,5 +1,5 @@
 import React from 'react';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import { ThemeUICSSObject, ThemeUIStyleObject } from 'theme-ui';
 
 import { BoxProps } from '../../types';
