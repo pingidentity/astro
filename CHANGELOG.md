@@ -1,3 +1,13 @@
+## 2.240.0-alpha.0 (2026-10-22)
+
+### 🚀 Features
+
+- **astro:** [UXE-8947] convert LinkSelectField to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.239.0-alpha.0 (2026-10-21)
 
 ### 🚀 Features
