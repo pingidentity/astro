@@ -99,8 +99,6 @@
     "@react-aria/utils": "^3.16.0",
     "@react-aria/virtualizer": "~3.8.0",
     "@react-aria/visually-hidden": "~3.6.0",
-    "@react-spectrum/test-utils": "^3.0.0-alpha.1",
-    "@react-spectrum/utils": "~3.6.1",
     "@react-stately/calendar": "^3.5.0",
     "@react-stately/color": "~3.8.1",
     "@react-stately/data": "^3.13.1",
@@ -260,13 +258,6 @@
     },
     "eslint-plugin-jest-dom": {
       "eslint": "^9.35.0"
-    },
-    "@react-spectrum/test-utils": {
-      "@testing-library/react": "^15.0.6",
-      "@testing-library/user-event": "^12.8.3"
-    },
-    "@react-spectrum/utils": {
-      "react": "^18.2.0"
     },
     "theme-ui": {
       "react": "^18.2.0",
