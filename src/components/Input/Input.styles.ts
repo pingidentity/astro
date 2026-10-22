@@ -184,7 +184,7 @@ input.multivaluesWrapper = {
   flexDirection: 'row !important' as 'row',
   flexWrap: 'wrap',
   pt: 6,
-  pr: 10,
+  pr: 12,
   pb: 5,
   pl: 12,
   borderRadius: '2px',

@@ -111,27 +111,36 @@ const countNeutral = {
 };
 
 const readOnlyBadge = {
-  color: astroTokensDark.color.gray[100],
-  backgroundColor: '#23282E !important',
+  color: astroTokensDark.color.gray[600],
+  backgroundColor: 'white !important',
   borderColor: 'border.attachment',
   '& span': {
-    color: astroTokensDark.color.gray[100],
+    fontWeight: 0,
+    color: astroTokensDark.color.gray[600],
+    fontSize: astroTokensDark.default['font-size'].small,
+    lineHeight: '18px',
   },
 };
 
 const readOnlyFieldBadge = {
-  color: astroTokensDark.color.gray[100],
-  backgroundColor: '#23282E !important',
-  borderColor: 'border.attachment',
+  ...readOnlyBadge,
   '& span': {
-    color: astroTokensDark.color.gray[100],
+    fontWeight: 0,
+    color: astroTokensDark.color.gray[600],
   },
 };
 
+// Onyx dark selected-tag spec: neutral surface, not the light-theme blue (UXE-8463 QA)
 const selectedItemBadge = {
-  backgroundColor: '#155CBA !important',
+  backgroundColor: '#2C323A !important',
   '& span': {
-    color: astroTokensDark.color.gray[100],
+    color: astroTokensDark.color.gray[200],
+  },
+  '& svg': {
+    color: astroTokensDark.color.gray[200],
+    path: {
+      fill: astroTokensDark.color.gray[200],
+    },
   },
 };
 
@@ -139,7 +148,7 @@ const itemBadgeWithSlot = {
   ...selectedItemBadge,
   '& svg': {
     path: {
-      fill: astroTokensDark.color.gray[100],
+      fill: astroTokensDark.color.gray[200],
     },
   },
 };

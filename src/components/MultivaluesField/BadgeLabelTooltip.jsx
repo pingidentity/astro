@@ -41,7 +41,7 @@ const BadgeLabelTooltip = ({ item, index, deleteItem, closeBadgeRefs }) => {
             aria-describedby="selectedKeysState"
             {...item.buttonProps}
           >
-            <Icon icon={Clear} size={14} title={{ name: 'Clear Icon' }} />
+            <Icon color="text.primary" icon={Clear} size={14} title={{ name: 'Clear Icon' }} />
           </IconButton>
         </Badge>
         <Tooltip variant="variants.tooltip.badgeTooltipContainer">{item.name}</Tooltip>

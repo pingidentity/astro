@@ -527,7 +527,11 @@ const DefaultMultivaluesField = forwardRef((props, ref) => {
                 )}
                 {' '}
                 {selectedItems && (
-                  <Box as="ul" isRow sx={{ p: 0, flexWrap: 'wrap' }}>
+                  <Box
+                    as="ul"
+                    isRow
+                    sx={{ p: 0, flexWrap: 'wrap', ...(isOnyx && { columnGap: 'xs', rowGap: 'xs' }) }}
+                  >
                     {selectedItems}
                   </Box>
                 )}
