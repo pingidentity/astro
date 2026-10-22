@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { OverlayProvider } from 'react-aria';
 import EarthIcon from '@pingux/mdi-react/EarthIcon';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { getAllUsers } from '../../api/users';
@@ -12,6 +13,7 @@ import {
   Section,
 } from '../../index';
 import { LIMIT } from '../../mocks/constants';
+import { LinkSelectFieldProps } from '../../types/linkSelectField';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
@@ -77,9 +79,9 @@ export default {
   args: {
     label: 'What\'s your favourite color?',
   },
-};
+} satisfies Meta<typeof LinkSelectField>;
 
-export const Default = args => (
+export const Default: StoryFn<LinkSelectFieldProps> = args => (
   <OverlayProvider>
     <LinkSelectField {...args} width="100%">
       <Item key="red">Red</Item>
@@ -89,7 +91,7 @@ export const Default = args => (
   </OverlayProvider>
 );
 
-export const LeftLabel = () => (
+export const LeftLabel: StoryFn<LinkSelectFieldProps> = () => (
   <Box gap="xl" width="100%">
     <LinkSelectField
       helperText="Here is some helpful text..."
@@ -128,9 +130,9 @@ LeftLabel.parameters = {
   },
 };
 
-export const Controlled = () => {
+export const Controlled: StoryFn<LinkSelectFieldProps> = () => {
   const [selectedKey, setSelectedKey] = useState('yellow');
-  const handleSelectionChange = key => setSelectedKey(key);
+  const handleSelectionChange = (key: React.Key | null) => setSelectedKey(key);
 
   return (
     <LinkSelectField
@@ -145,7 +147,7 @@ export const Controlled = () => {
   );
 };
 
-export const WithNoneOption = () => (
+export const WithNoneOption: StoryFn<LinkSelectFieldProps> = () => (
   <LinkSelectField label="What's your favorite color?">
     <Section>
       <Item key="none">None</Item>
@@ -158,7 +160,7 @@ export const WithNoneOption = () => (
   </LinkSelectField>
 );
 
-export const DisabledField = args => (
+export const DisabledField: StoryFn<LinkSelectFieldProps> = args => (
   <LinkSelectField {...args} label="What's your favorite color?" isDisabled>
     <Item key="red">Red</Item>
     <Item key="blue">Blue</Item>
@@ -166,7 +168,7 @@ export const DisabledField = args => (
   </LinkSelectField>
 );
 
-export const DisabledOptions = args => (
+export const DisabledOptions: StoryFn<LinkSelectFieldProps> = args => (
   <LinkSelectField {...args} label="What's your favorite color?" disabledKeys={['blue']}>
     <Item key="red">Red</Item>
     <Item key="blue">Blue (disabled)</Item>
@@ -174,11 +176,11 @@ export const DisabledOptions = args => (
   </LinkSelectField>
 );
 
-export const NoOptionsAvailable = args => (
+export const NoOptionsAvailable: StoryFn<LinkSelectFieldProps> = args => (
   <LinkSelectField {...args} label="Select an option..." isDisabled defaultText="No options available" />
 );
 
-export const HelperText = args => (
+export const HelperText: StoryFn<LinkSelectFieldProps> = args => (
   <LinkSelectField
     {...args}
     status="error"
@@ -192,7 +194,7 @@ export const HelperText = args => (
 );
 
 const options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
-export const DynamicItems = () => {
+export const DynamicItems: StoryFn<LinkSelectFieldProps> = () => {
   // options = new Array(200).fill().map((_, i) => ({ key: `option-${i}`, name: `Option ${i}` }));
   const [items] = useState(options);
 
@@ -210,7 +212,7 @@ DynamicItems.parameters = {
   },
 };
 
-export const AsyncLoading = () => {
+export const AsyncLoading: StoryFn<LinkSelectFieldProps> = () => {
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(LIMIT);
   const [dataSize, setDataSize] = useState(0);
@@ -256,7 +258,7 @@ export const AsyncLoading = () => {
   );
 };
 
-export const WithPopoverWidth = args => (
+export const WithPopoverWidth: StoryFn<LinkSelectFieldProps> = args => (
   <OverlayProvider>
     <LinkSelectField {...args} width="100%" popoverWidth="20rem">
       <Item key="red">Red</Item>
@@ -274,7 +276,7 @@ WithPopoverWidth.parameters = {
   },
 };
 
-export const WithIconProps = () => (
+export const WithIconProps: StoryFn<LinkSelectFieldProps> = () => (
   <OverlayProvider>
     <LinkSelectField
       label="What's your favorite color?"
@@ -295,7 +297,7 @@ WithIconProps.parameters = {
   },
 };
 
-export const WithCustomTrigger = () => (
+export const WithCustomTrigger: StoryFn<LinkSelectFieldProps> = () => (
   <OverlayProvider>
     <LinkSelectField
       label="What's your favorite color?"

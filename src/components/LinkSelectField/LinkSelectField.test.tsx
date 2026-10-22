@@ -3,6 +3,7 @@ import EarthIcon from '@pingux/mdi-react/EarthIcon';
 import userEvent from '@testing-library/user-event';
 
 import { Item, LinkSelectField } from '../../index';
+import { LinkSelectFieldProps } from '../../types/linkSelectField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
@@ -16,7 +17,7 @@ const items = [
 const testId = 'test-dropdown';
 const controlTestId = `${testId}-input`;
 const testValue = 'test';
-const defaultProps = {
+const defaultProps: Partial<LinkSelectFieldProps> = {
   label: 'testLabel',
   'data-testid': testId,
   controlProps: {
@@ -26,7 +27,10 @@ const defaultProps = {
   items,
 };
 
-const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+const getComponent = (
+  props: Partial<LinkSelectFieldProps> = {},
+  { renderFn = render } = {},
+) => renderFn((
   <LinkSelectField {...defaultProps} {...props}>
     {item => <Item key={item.name}>{item.name}</Item>}
   </LinkSelectField>
