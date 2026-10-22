@@ -28,7 +28,7 @@ export const checkbox = {
   '.is-focused &': {
     outline: '2px solid',
     outlineColor: colors.focus,
-    outlineOffset: '2px',
+    outlineOffset: '0px',
   },
   'input:disabled ~ &': {
     opacity: 0.5,

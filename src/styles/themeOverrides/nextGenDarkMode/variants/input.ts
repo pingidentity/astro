@@ -32,6 +32,7 @@ input.fieldControlWrapper = {
 
 input.multivaluesWrapper = {
   backgroundColor: 'backgroundBase',
+  rowGap: 'xs',
   '&.is-read-only': {
     boxShadow: 'inset 0 0 0 100px #30373f',
     border: '1px solid',

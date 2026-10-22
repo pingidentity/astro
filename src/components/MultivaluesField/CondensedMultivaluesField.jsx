@@ -293,9 +293,13 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           onPress={handleSelection}
           ref={buttonRef}
           variant="listBoxLink"
-          mt="sm"
-          ml="14px"
-          sx={{ fontWeight: '400' }}
+          sx={{
+            fontWeight: '400',
+            width: '100%',
+            justifyContent: 'flex-start',
+            pl: 'lg',
+            pr: 'md',
+          }}
         >
           {selectionState}
         </Button>
@@ -395,7 +399,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
       >
         <Icon
           icon={isOpen ? MenuUp : MenuDown}
-          {...(isOnyx && { size: 'sm' })}
+          {...(isOnyx && { size: 'md' })}
           title={{ name: '' }}
           aria-hidden="true"
         />

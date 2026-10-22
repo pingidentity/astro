@@ -35,7 +35,7 @@ export const text = {
   },
   placeholder: {
     color: astroTokensDark.color.gray[400],
-    fontWeight: 1,
+    fontWeight: 400,
   },
   messagesText: {
     '&.is-success, &.is-warning, &.is-error, &.is-default': {

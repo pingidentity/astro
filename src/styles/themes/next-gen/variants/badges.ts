@@ -112,10 +112,24 @@ const info = {
 const selectedItemBadge = {
   ...baseBadge,
   backgroundColor: '#eaf2fd !important',
-  paddingRight: '0px !important',
+  pt: 'xs',
+  pb: 'xs',
+  m: 0,
+  mr: 0,
+  my: 0,
+  pr: 'sm',
+  pl: 'sm',
+  maxWidth: 'none',
   '& span': {
     ...badgeFont,
+    fontWeight: 0,
     color: 'text.primary',
+    fontSize: astroTokens.default['font-size'].small,
+    lineHeight: '18px',
+    mr: 0,
+  },
+  '& button': {
+    ml: 'sm',
   },
 };
 
@@ -125,18 +139,20 @@ const readOnlyBadge = {
   borderColor: 'border.hairline',
   backgroundColor: '#FFFFFF !important',
   '& span': {
-    ...badgeFont,
-    color: 'text.primary',
-    lineHeight: 'xs',
+    fontWeight: 0,
+    color: astroTokens.color.gray[600],
+    fontSize: astroTokens.default['font-size'].small,
+    lineHeight: '18px',
   },
 };
 
 const readOnlyFieldBadge = {
   ...readOnlyBadge,
   '& span': {
-    ...badgeFont,
-    color: 'text.primary',
-    lineHeight: 'xs',
+    fontWeight: 0,
+    color: astroTokens.color.gray[600],
+    fontSize: astroTokens.default['font-size'].small,
+    lineHeight: '18px',
   },
 };
 

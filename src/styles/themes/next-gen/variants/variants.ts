@@ -179,12 +179,15 @@ const listBox = {
   },
   option: {
     py: 'md-s',
-    pl: 'md-s',
+    pl: astroTokens.spacing.md,
     pr: astroTokens.spacing.md,
     justifyContent: 'space-between',
     borderRadius: astroTokens.radius.md,
     lineHeight: 'body',
     color: astroTokens.color.common.menu.item.text,
+    '&.is-disabled': {
+      color: astroTokens.color.gray[700],
+    },
     '&.is-focused': {
       color: astroTokens.color.common.menu.item.hover.text,
       bg: 'gray-100',

@@ -7,6 +7,7 @@ import { useMultivaluesContext } from '../../context/MultivaluesContext';
 import { useGetTheme, useStatusClasses } from '../../hooks';
 import { AriaListBoxOptionsType, ListBoxStateType, OptionType } from '../../types';
 import Box from '../Box';
+import { OnyxDefaultCheckboxIcon } from '../Checkbox/CheckboxIcons';
 import Icon from '../Icon';
 
 import { ListBoxContext } from './ListBoxContext';
@@ -95,18 +96,34 @@ const Option = forwardRef((props: OptionType, ref) => {
       {...others}
       aria-label={ariaLabel}
     >
-      {isCondensed ? (
+      {isCondensed && (isOnyx ? (
+        <OnyxDefaultCheckboxIcon
+          isChecked={isSelected}
+          sx={{
+            mr: 'sm',
+            color: isSelected ? 'primary' : 'gray-500',
+            '&.is-disabled': { color: 'gray-400' },
+            '&.is-focused, &.is-focus-visible': {
+              outline: '2px solid',
+              outlineColor: 'focus',
+            },
+          }}
+        />
+      ) : (
+        <Icon
+          icon={isSelected ? CheckedIcon : UncheckedIcon}
+          color="active"
+          mr="sm"
+          className={classNames}
+          variant="listBox.checkboxIcon"
+        />
+      ))}
+      {isCondensed && (
         <Box isRow alignItems="center" flex="1">
-          <Icon
-            icon={isSelected ? CheckedIcon : UncheckedIcon}
-            color="active"
-            mr="xs"
-            className={classNames}
-            variant="listBox.checkboxIcon"
-          />
           {rendered}
         </Box>
-      ) : (
+      )}
+      {!isCondensed && (
         <>
           {(isSelected && !isOnyx && shouldShowSelectedOption) && <Icon icon={CircleSmallIcon} title={{ name: 'Circle Small Icon' }} />}
           {rendered}
