@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FocusScope } from 'react-aria';
 import { Item } from 'react-stately';
 import userEvent from '@testing-library/user-event';
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 import onyxDarkTheme from '../../styles/themeOverrides/nextGenDarkMode';
 import onyxTheme from '../../styles/themes/next-gen';
@@ -237,7 +237,7 @@ test('clicking an item fires "onSelectionChange" handler and returns Set with ke
   await userEvent.click(option1);
   expect(onSelectionChange).toHaveBeenCalled();
   const selectedItems = onSelectionChange.mock.calls[0][0];
-  expect(_.isEqual(expectedResult, selectedItems)).toBeTruthy();
+  expect(isEqual(expectedResult, selectedItems)).toBeTruthy();
 });
 
 test('renders loader, if a loader component is passed in, and state is loading', () => {

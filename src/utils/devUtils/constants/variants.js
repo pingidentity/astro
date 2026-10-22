@@ -1,4 +1,6 @@
-import { fromPairs, snakeCase, toUpper } from 'lodash';
+import fromPairs from 'lodash/fromPairs';
+import snakeCase from 'lodash/snakeCase';
+import toUpper from 'lodash/toUpper';
 
 import buttons from '../../../components/Button/Buttons.styles';
 import { text } from '../../../components/Text/Text.styles';

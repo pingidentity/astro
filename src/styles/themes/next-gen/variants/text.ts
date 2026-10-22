@@ -169,7 +169,7 @@ export const text = {
   },
   placeholder: {
     color: astroTokens.color.gray[600],
-    fontWeight: 1,
+    fontWeight: 400,
   },
   paragraph: {
     lineHeight: 'body',

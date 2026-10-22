@@ -190,6 +190,7 @@ export const colors = {
   badge,
   codeEditor,
   critical: {
+    bright: astroTokensDark.color.red[300],
     dark: astroTokensDark.color.red[100],
   },
   common,

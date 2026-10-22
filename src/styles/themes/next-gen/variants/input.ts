@@ -161,8 +161,9 @@ input.multivaluesWrapper = {
   borderWidth: 1,
   flexDirection: 'row !important' as 'row',
   flexWrap: 'wrap',
+  rowGap: 'xs',
   pt: 6,
-  pr: 10,
+  pr: 12,
   pb: 5,
   pl: 12,
   borderRadius: astroTokens.radius.input,
@@ -173,7 +174,7 @@ input.multivaluesWrapper = {
     flex: 1,
     height: 27,
     lineHeight: '100%',
-    p: 5,
+    p: 0,
     '&.is-focused': {
       boxShadow: 'none',
       outline: 'none',
@@ -183,7 +184,7 @@ input.multivaluesWrapper = {
     ...defaultFocus,
   },
   '&.is-error': {
-    borderColor: 'critical.dark',
+    borderColor: astroTokens.color.red.base,
   },
   '&.is-read-only': {
     alignItems: 'center',

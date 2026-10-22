@@ -73,6 +73,35 @@ Astro fully supports the following browsers and versions:
 
 Support for IE11 is left up to developers and is not tested by the Astro team. Polyfills are necessary for full functionality.
 
+Astro's build compiles for the browsers in the package's `browserslist` field — currently the
+latest two versions of Chrome, Firefox, Edge and Safari, plus recent iOS and Android. Note
+that some runtime dependencies (e.g. React Aria) ship modern JavaScript in their own builds;
+consumers who need to support older browsers than Astro targets must transpile their
+dependencies themselves.
+
+## Packaging and Tree-Shaking
+
+The published package declares `"sideEffects": false` so bundlers can drop unused components.
+To keep that contract valid:
+
+- Never add bare side-effect imports (e.g. `import './foo'`) or CSS-file imports to shipped
+  source. Styling is CSS-in-JS via theme objects; there are no CSS files to import. Enforced
+  by `import/no-unassigned-import` in the root `eslint.config.cjs` (test, story, and mock
+  files are exempt).
+- Global registration, module-scope DOM access, and `injectGlobal` at import time are also
+  off-limits in shipped source.
+- Import lodash per method (e.g. `import omit from 'lodash/omit'`), never from the
+  `lodash` barrel. Enforced by `no-restricted-imports` in the root `eslint.config.cjs`.
+  Code executed directly by raw Node ESM (e.g. onyx-tokens' style-dictionary formatters)
+  must use the explicit extension: `lodash/omit.js`.
+- Deep imports are supported under `@pingux/astro/lib/*` (e.g.
+  `@pingux/astro/lib/styles/themeOverrides/uiLibraryOverride.js`).
+- The build prunes tests, stories, mdx docs, Storybook-only trees, and
+  `lib/utils/testUtils` from the package (see `prune-package.sh`); nothing a
+  consumer can import is removed. (`lib/utils/docUtils` stays: despite the
+  name, shipped components import its `PropTypes` shapes at runtime.) The
+  script's pruning rules are covered by `prune-package.test.js`.
+
 ## Changelog
 
 Astro’s [changelog](CHANGELOG.md) notes all features and bug fixes within each release. Refactors and documentation updates are not included within the changelog.
@@ -106,7 +135,7 @@ ESLint packages or versions these features may stop working. Run this command ag
 
 Astro's Storybook includes [`@storybook/addon-mcp`](https://storybook.js.org/docs/ai/mcp/overview), which exposes an MCP (Model Context Protocol) server so AI coding agents can query accurate, up-to-date documentation about Astro's components while you're developing.
 
-While Storybook is running locally on the default port, the MCP server is available at `http://localhost:6006/mcp`. After the next Chromatic publish (this happens automatically on merges to `develop`/`main` via the existing CI pipeline), the same MCP server becomes available at the published Chromatic build URL with `/mcp` appended, e.g. `https://www.chromatic.com/builds?appId=61323e1122472a003ab11df0/mcp`.
+While Storybook is running locally on the default port, the MCP server is available at `http://localhost:6006/mcp`. The published Storybook (deployed automatically on merges to `develop`/`main` via the existing CI pipeline) exposes the same server at [`https://storybook.pingidentity.design/mcp`](https://storybook.pingidentity.design/mcp).
 
 This endpoint is intentionally unauthenticated and publicly accessible, per product approval.
 

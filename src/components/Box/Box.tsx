@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import styled from '@emotion/styled';
-import { toNumber } from 'lodash';
+import toNumber from 'lodash/toNumber';
 import { flexbox, layout, typography } from 'styled-system';
 import { Box as ThemeUIBox } from 'theme-ui';
 

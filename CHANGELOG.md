@@ -1,3 +1,40 @@
+## 2.241.0-alpha.0 (2026-10-22)
+
+### 🚀 Features
+
+- **astro:** [UXE-8463] update MultivaluesField to match Onyx specs
+
+### ❤️  Thank You
+
+- Eshant Monga
+
+## 2.240.0-alpha.0 (2026-10-22)
+
+### 🚀 Features
+
+- **astro:** [UXE-8947] convert LinkSelectField to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
+## 2.239.0-alpha.0 (2026-10-21)
+
+### 🚀 Features
+
+- **astro:** prune lib/utils/testUtils from the published package
+- **eslint:** enforce tree-shaking contract with lint rules
+- **astro:** add browserslist targeting the PingOne browser support matrix
+- **astro:** enable tree-shaking and prune package payload
+
+### 🩹 Fixes
+
+- **onyx-tokens:** ship type declarations and token JSON in published package
+
+### ❤️  Thank You
+
+- Elijah Cooper
+
 ## 2.238.0 (2026-10-21)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

@@ -23,6 +23,9 @@ const listBox = {
   },
   option: {
     color: astroTokensDark.color.common.menu.item.text,
+    '&.is-disabled': {
+      color: astroTokensDark.color.gray[400],
+    },
     '&.is-focused': {
       color: astroTokensDark.color.common.menu.item.hover.text,
       bg: '#2C323A',
