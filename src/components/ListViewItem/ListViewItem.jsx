@@ -1,11 +1,10 @@
 import React, { forwardRef } from 'react';
 import { useHover } from '@react-aria/interactions';
 
-import { Box, Icon, Image, Text } from '../..';
+import { Box, Icon, IconWrapper, Image, Text } from '../..';
 import { useGetTheme, useStatusClasses } from '../../hooks';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
-import ItemAvatar from './ItemAvatar';
 import { listViewItemPropTypes } from './listViewItemAttributes';
 
 export const LIST_ITEM_ICON = '-list-item-icon';
@@ -25,12 +24,9 @@ const ListViewItem = forwardRef(({
   onHoverStart,
   slots,
   colorId,
-  avatarProps,
-  avatarInitials,
-  isIconRound,
   ...others
 }, ref) => {
-  const { icon, image, subtext, text, avatarDefaultText } = data;
+  const { icon, image, subtext, text } = data;
 
   const shouldUseDefaultHover = isHovered === undefined;
 
@@ -56,15 +52,14 @@ const ListViewItem = forwardRef(({
 
   const renderIcon = icon && (
     isOnyx ? (
-      <ItemAvatar
+      <IconWrapper
         icon={icon}
+        size="sm"
         title={{ name: `${text}${LIST_ITEM_ICON}` }}
-        colorId={colorId}
-        avatarDefaultText={avatarDefaultText}
-        avatarInitials={avatarInitials}
-        isIconRound={isIconRound}
-        avatarProps={avatarProps}
-        iconProps={iconProps}
+        isCircle
+        colorId={colorId || others.id}
+        {...iconWrapperProps}
+        iconProps={{ size: 'sm', ...iconProps, ...iconWrapperProps?.iconProps }}
       />
     ) : (
       <Box width="25px" variant="listViewItem.iconContainer">
@@ -100,21 +95,9 @@ const ListViewItem = forwardRef(({
     )
   );
 
-  const renderNoIconAvatar = isOnyx && !icon && !image
-    && (avatarInitials || avatarDefaultText) && (
-      <ItemAvatar
-        title={{ name: `${text}${LIST_ITEM_ICON}` }}
-        colorId={colorId}
-        avatarDefaultText={avatarDefaultText}
-        avatarInitials={avatarInitials}
-        isIconRound={isIconRound}
-        avatarProps={avatarProps}
-      />
-  );
-
   const renderData = (
     <Box isRow alignItems="center">
-      { slots?.leftOfData || renderIcon || renderImage || renderNoIconAvatar }
+      { slots?.leftOfData || renderIcon || renderImage }
       <Box variant={getWrapperVariant()}>
         {text && (
           <Text variant="listViewItemText">

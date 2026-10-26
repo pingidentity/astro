@@ -11,11 +11,7 @@ const descriptions = {
   isPanelHeader: 'A boolean that will adapt the styling of ListIteme to be used as the PanelHeader',
   slots: 'Provides a way to insert markup in specified places.',
   linkProps: 'When present, provides meta click functionality',
-  colorId: 'When the value exactly matches a two-tone color name (for example cyan or lightBlue), the avatar renders with that color. Any other value falls back to deterministic color interpolation seeded by the value.',
-  isIconRound: 'Renders the icon avatar round instead of square. Defaults to false.',
-  avatarInitials: 'Initials rendered inside the avatar in place of the icon.',
-  avatarProps: 'Props forwarded to the underlying avatar element. children is managed by the component.',
-  avatarDefaultText: 'Text used to seed avatar color interpolation when colorId is not provided.',
+  colorId: 'Identifier used to deterministically derive the avatar color when no explicit color is set.',
 };
 
 export const SharedItemArgTypes = {
@@ -25,25 +21,9 @@ export const SharedItemArgTypes = {
       type: 'text',
     },
   },
-  isIconRound: {
-    ...booleanArg,
-    description: descriptions.isIconRound,
-  },
-  avatarInitials: {
-    description: descriptions.avatarInitials,
-    control: {
-      type: 'text',
-    },
-  },
-  avatarProps: {
-    description: descriptions.avatarProps,
-    control: {
-      type: 'object',
-    },
-  },
   data: {
     description: descriptions.data,
-    type: { summary: '{ icon, image, text, subtext, avatarDefaultText }' },
+    type: { summary: '{ icon, image, text, subtext }' },
     control: {
       type: 'none',
     },
@@ -81,9 +61,6 @@ export const listViewItemArgTypes = {
 export const SharedItemPropTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   colorId: PropTypes.string,
-  avatarProps: PropTypes.object,
-  isIconRound: PropTypes.bool,
-  avatarInitials: PropTypes.string,
   data: PropTypes.shape({
     icon: PropTypes.elementType,
     image: PropTypes.shape({
@@ -93,7 +70,6 @@ export const SharedItemPropTypes = {
     }),
     subtext: PropTypes.string,
     text: PropTypes.string,
-    avatarDefaultText: PropTypes.string,
   }),
 };
 

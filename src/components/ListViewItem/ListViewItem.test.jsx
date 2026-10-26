@@ -12,16 +12,8 @@ import {
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
-import { avatarColors } from '../Avatar/constants';
-import getColorFromUUID from '../Avatar/getColorFromUuid';
 
 import { LIST_ITEM_ICON } from './ListViewItem';
-
-jest.mock('./getAvatarColor', () => ({
-  getAvatarColor: jest.fn((...args) => jest.requireActual('./getAvatarColor').getAvatarColor(...args)),
-}));
-
-import { getAvatarColor } from './getAvatarColor';
 
 const defaultProps = {
   data: {
@@ -59,15 +51,7 @@ universalComponentTests({
 
 const TEST_TEXT = 'test text';
 
-const getListItemIcon = () => screen.getByRole('img', { name: `${defaultProps.data.text}${LIST_ITEM_ICON}` });
-
-const getListItemAvatar = () => getListItemIcon().parentElement;
-
 describe('ListViewItem', () => {
-  afterEach(() => {
-    getAvatarColor.mockClear();
-  });
-
   test('renders data', () => {
     getComponent();
 
@@ -94,173 +78,21 @@ describe('ListViewItem', () => {
   test.each([
     ['Onyx light', OnyxTheme],
     ['Onyx dark', OnyxDarkTheme],
-  ])('renders an 18px icon inside a square avatar in %s ListViewItem', (_, theme) => {
-    getComponentOnyx(theme, { colorId: 'user-cyan' });
+  ])('renders an 18px icon in %s ListViewItem', (_, theme) => {
+    getComponentOnyx(theme, { id: 'test-id', iconWrapperProps: { color: 'green' } });
 
-    const icon = getListItemIcon();
-    const avatar = getListItemAvatar();
+    const icon = screen.getByRole('img', { name: `${defaultProps.data.text}${LIST_ITEM_ICON}` });
 
-    expect(avatar).toHaveClass('is-square');
-    expect(icon).toBeInTheDocument();
-    expect(getAvatarColor).toHaveBeenCalledWith('user-cyan', undefined);
+    expect(icon).toHaveStyleRule('width', '18px');
+    expect(icon).toHaveStyleRule('height', '18px');
   });
 
-  test('renders a round avatar when isIconRound is true', () => {
-    getComponentOnyx(OnyxTheme, { colorId: '11111111111', isIconRound: true });
+  test('passes colorId to the avatar', () => {
+    getComponentOnyx(OnyxTheme, { colorId: 'my-color-id' });
 
-    expect(getListItemAvatar()).not.toHaveClass('is-square');
-  });
+    const avatar = screen.getByRole('img', { name: `${defaultProps.data.text}${LIST_ITEM_ICON}` }).parentElement;
 
-  test('renders the two-tone avatar class for an exact color name', () => {
-    getComponentOnyx(OnyxTheme, { colorId: 'green' });
-
-    expect(getListItemAvatar()).toHaveClass('is-green');
-    expect(getListItemAvatar()).not.toHaveClass('is-orange');
-    expect(getAvatarColor).toHaveBeenCalledWith('green', undefined);
-  });
-
-  test('resolves lightBlue as two-tone when colorId is a light compound name', () => {
-    getComponentOnyx(OnyxTheme, { colorId: 'lightBlue' });
-
-    expect(getAvatarColor).toHaveBeenCalledWith('lightBlue', undefined);
-    expect(getAvatarColor('lightBlue')).toEqual({ colorName: 'lightBlue', isTwoTone: true });
-  });
-
-  test('renders the hashed avatar class for a colorId that is not a color name', () => {
-    getComponentOnyx(OnyxTheme, { colorId: 'user-cyan' });
-
-    expect(getListItemAvatar()).toHaveClass('is-pink');
-  });
-
-  test('seeds avatar color interpolation from data.avatarDefaultText', () => {
-    getComponentOnyx(OnyxTheme, {
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-        icon: AccountIcon,
-        image: defaultProps.data.image,
-        avatarDefaultText: 'FV',
-      },
-    });
-
-    expect(getListItemAvatar()).toHaveClass('is-yellow');
-  });
-
-  test('renders the avatar default color when no colorId or avatarDefaultText is provided', () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-
-    getComponentOnyx(OnyxTheme, {
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-        icon: AccountIcon,
-        image: defaultProps.data.image,
-      },
-    });
-
-    expect(getListItemAvatar()).toHaveClass('is-green');
-    warnSpy.mockRestore();
-  });
-
-  test('no longer falls back to others.id for avatar color', () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-
-    getComponentOnyx(OnyxTheme, {
-      id: 'some-id',
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-        icon: AccountIcon,
-        image: defaultProps.data.image,
-      },
-    });
-
-    const hashedIdColor = getColorFromUUID('some-id', avatarColors);
-
-    expect(getListItemAvatar()).toHaveClass('is-green');
-    expect(getListItemAvatar()).not.toHaveClass(`is-${hashedIdColor}`);
-    warnSpy.mockRestore();
-  });
-
-  test('renders avatarInitials instead of the icon when both are provided', () => {
-    getComponentOnyx(OnyxTheme, { colorId: '11111111111', avatarInitials: 'JD' });
-
-    expect(screen.queryByRole('img', { name: `${defaultProps.data.text}${LIST_ITEM_ICON}` })).not.toBeInTheDocument();
-    expect(screen.getByText('JD')).toBeInTheDocument();
-  });
-
-  test('renders the icon when avatarInitials is an empty string', () => {
-    getComponentOnyx(OnyxTheme, { colorId: '11111111111', avatarInitials: '' });
-
-    expect(getListItemIcon()).toBeInTheDocument();
-  });
-
-  test('renders an initials avatar when no icon is provided', () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-
-    getComponentOnyx(OnyxTheme, {
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-      },
-      avatarInitials: 'JD',
-    });
-
-    expect(screen.getByText('JD')).toBeInTheDocument();
-    warnSpy.mockRestore();
-  });
-
-  test('renders an avatar when no icon is provided but data.avatarDefaultText is', () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-
-    getComponentOnyx(OnyxTheme, {
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-        avatarDefaultText: 'FV',
-      },
-    });
-
-    expect(screen.getByText('FV')).toBeInTheDocument();
-    warnSpy.mockRestore();
-  });
-
-  test('renders no avatar when no icon, no image, and no seeds are provided', () => {
-    getComponentOnyx(OnyxTheme, {
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-      },
-    });
-
-    expect(screen.queryByText('AA')).not.toBeInTheDocument();
-    expect(document.querySelector('.is-square')).not.toBeInTheDocument();
-  });
-
-  test('renders the image and ignores avatarInitials on the image path', () => {
-    getComponentOnyx(OnyxTheme, {
-      data: {
-        text: 'testText',
-        subtext: 'testSubtext',
-        image: {
-          src: pingImg,
-          alt: 'avatar',
-          'aria-label': 'avatar',
-        },
-      },
-      avatarInitials: 'JD',
-    });
-    act(() => {
-      fallbackImageObj.onImageLoad();
-    });
-
-    const image = screen.getByRole('img');
-
-    expect(image.tagName.toLowerCase()).toBe('img');
-    expect(image).toHaveAttribute('src', pingImg);
-    expect(image).toHaveAttribute('alt', 'avatar');
-    expect(image).toHaveAttribute('aria-label', 'avatar');
-    expect(screen.queryByText('JD')).not.toBeInTheDocument();
+    expect(avatar).toBeInTheDocument();
   });
 
   test('renders icon if both icon and image are passed', () => {

@@ -83,47 +83,6 @@ Default.parameters = {
   },
 };
 
-export const IsRound = () => (
-  <Wrapper>
-    <ListViewItem
-      data={{
-        icon: AccountIcon,
-        text: 'Fons Vernall',
-      }}
-      isIconRound
-      colorId="11111111111"
-    />
-  </Wrapper>
-);
-
-IsRound.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.listViewItem.default,
-  },
-};
-
-export const WithAvatarInitials = () => (
-  <Wrapper>
-    <ListViewItem
-      data={{
-        icon: AccountIcon,
-        text: 'Fons Vernall',
-      }}
-      isIconRound
-      avatarInitials="FV"
-      colorId="11111111111"
-    />
-  </Wrapper>
-);
-
-WithAvatarInitials.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.listViewItem.default,
-  },
-};
-
 export const WithSubtext = () => (
   <Wrapper>
     <ListViewItem
@@ -132,7 +91,10 @@ export const WithSubtext = () => (
         subtext: 'rad_developer@pingidentity.com',
         text: 'Fons Vernall',
       }}
-      colorId="11111111111"
+      iconWrapperProps={{
+        size: 'sm',
+        color: 'blue',
+      }}
     />
   </Wrapper>
 );
@@ -174,7 +136,10 @@ export const WithControls = () => (
         icon: AccountIcon,
         text: 'Fons Vernall',
       }}
-      colorId="11111111111"
+      iconWrapperProps={{
+        size: 'sm',
+        color: 'blue',
+      }}
     >
       <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
@@ -211,7 +176,10 @@ export const WithRightOfDataSlot = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
-        colorId="11111111111"
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'blue',
+        }}
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>
@@ -246,7 +214,10 @@ export const WithLeftOfDataSlot = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
-        colorId="11111111111"
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'orange',
+        }}
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
@@ -279,7 +250,10 @@ export const WithCharts = () => {
           subtext: 'kangaroo@example.com',
           icon: ClockOutlineIcon,
         }}
-        colorId="11111111111"
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'green',
+        }}
       >
         <ListViewItemChart
           containerRef={containerRef}
@@ -331,7 +305,10 @@ export const WithExtraLongText = () => {
           text: longText,
           subtext: longText,
         }}
-        colorId="11111111111"
+        iconWrapperProps={{
+          size: 'sm',
+          color: 'blue',
+        }}
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>

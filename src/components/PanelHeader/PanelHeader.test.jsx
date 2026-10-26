@@ -14,22 +14,7 @@ import { pingImg } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
-import { getAvatarColor } from '../ListViewItem/getAvatarColor';
 import { PANEL_HEADER_ICON } from './PanelHeader';
-
-jest.mock('../ListViewItem/getAvatarColor', () => ({
-  getAvatarColor: jest.fn((...args) => jest.requireActual('../ListViewItem/getAvatarColor').getAvatarColor(...args)),
-}));
-
-beforeEach(() => {
-  getAvatarColor.mockImplementation((...args) => jest
-    .requireActual('../ListViewItem/getAvatarColor')
-    .getAvatarColor(...args));
-});
-
-afterEach(() => {
-  getAvatarColor.mockClear();
-});
 
 const defaultProps = {
   data: {
@@ -185,10 +170,6 @@ test('renders leftOfData slot', () => {
   screen.getByText(TEST_TEXT);
 });
 
-const getPanelHeaderIcon = () => screen.getByRole('img', { name: `${defaultProps.data.text}${PANEL_HEADER_ICON}` });
-
-const getPanelHeaderAvatar = () => getPanelHeaderIcon().parentElement;
-
 test.each([
   ['Onyx light', OnyxTheme],
   ['Onyx dark', OnyxDarkTheme],
@@ -204,12 +185,10 @@ test.each([
   }, theme);
 
   const icon = screen.getByRole('img', { name: `${defaultProps.data.text}${PANEL_HEADER_ICON}` });
-  const avatar = icon.parentElement;
 
-  expect(avatar).toHaveClass('is-square');
-  expect(icon).toBeInTheDocument();
+  expect(icon).toHaveStyleRule('width', '18px');
+  expect(icon).toHaveStyleRule('height', '18px');
   expect(icon).toHaveAttribute('data-testid', 'panel-header-icon');
-  expect(getAvatarColor).toHaveBeenCalledWith(undefined, 'AA');
 });
 
 test('forwards iconProps to the Onyx avatar icon', () => {
@@ -225,139 +204,6 @@ test('forwards iconProps to the Onyx avatar icon', () => {
   expect(screen.getByLabelText('custom panel icon')).toBeInTheDocument();
 });
 
-test('renders a round avatar when isIconRound is true', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-    isIconRound: true,
-  });
-
-  expect(getPanelHeaderAvatar()).not.toHaveClass('is-square');
-});
-
-test('renders the two-tone avatar class for an exact color name', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-    colorId: 'green',
-  });
-
-  expect(getPanelHeaderAvatar()).toHaveClass('is-green');
-  expect(getPanelHeaderAvatar()).not.toHaveClass('is-orange');
-  expect(getAvatarColor).toHaveBeenCalledWith('green', 'FV');
-});
-
-test('resolves lightBlue as two-tone when colorId is a light compound name', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-    colorId: 'lightBlue',
-  });
-
-  expect(getAvatarColor).toHaveBeenCalledWith('lightBlue', 'FV');
-  expect(getAvatarColor('lightBlue')).toEqual({ colorName: 'lightBlue', isTwoTone: true });
-});
-
-test('renders the hashed avatar class for a colorId that is not a color name', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-    colorId: 'user-cyan',
-  });
-
-  expect(getPanelHeaderAvatar()).toHaveClass('is-pink');
-});
-
-test('seeds avatar color interpolation from data.avatarDefaultText', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-  });
-
-  expect(getPanelHeaderAvatar()).toHaveClass('is-yellow');
-});
-
-test('renders the avatar default color when no colorId or avatarDefaultText is provided', () => {
-  const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
-
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-    },
-  });
-
-  expect(getPanelHeaderAvatar()).toHaveClass('is-green');
-  warnSpy.mockRestore();
-});
-
-test('renders avatarInitials instead of the icon when both are provided', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-    avatarInitials: 'FV',
-  });
-
-  expect(screen.queryByRole('img', { name: `${defaultProps.data.text}${PANEL_HEADER_ICON}` })).not.toBeInTheDocument();
-  expect(screen.getByText('FV')).toBeInTheDocument();
-});
-
-test('renders the icon when avatarInitials is an empty string', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      icon: AccountIcon,
-      avatarDefaultText: 'FV',
-    },
-    avatarInitials: '',
-  });
-
-  expect(getPanelHeaderIcon()).toBeInTheDocument();
-});
-
-test('renders a square no-icon avatar under Onyx', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      avatarDefaultText: 'FV',
-    },
-  });
-
-  const initials = screen.getByText('FV');
-
-  expect(initials).toHaveClass('is-square');
-});
-
-test('renders an initials avatar when no icon is provided', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      avatarDefaultText: 'FV',
-    },
-    avatarInitials: 'JD',
-  });
-
-  expect(screen.getByText('JD')).toBeInTheDocument();
-});
-
 test('renders image avatars in Onyx', () => {
   getComponentOnyx();
   act(() => {
@@ -370,30 +216,4 @@ test('renders image avatars in Onyx', () => {
   expect(image).toHaveAttribute('src', pingImg);
   expect(image).toHaveAttribute('alt', 'avatar');
   expect(image).toHaveAttribute('aria-label', 'avatar');
-});
-
-test('renders the image and ignores avatarInitials on the image path in Onyx', () => {
-  getComponentOnyx({
-    data: {
-      text: 'testText',
-      subtext: 'testSubtext',
-      image: {
-        src: pingImg,
-        alt: 'avatar',
-        'aria-label': 'avatar',
-      },
-    },
-    avatarInitials: 'JD',
-  });
-  act(() => {
-    fallbackImageObj.onImageLoad();
-  });
-
-  const image = screen.getByRole('img');
-
-  expect(image.tagName.toLowerCase()).toBe('img');
-  expect(image).toHaveAttribute('src', pingImg);
-  expect(image).toHaveAttribute('alt', 'avatar');
-  expect(image).toHaveAttribute('aria-label', 'avatar');
-  expect(screen.queryByText('JD')).not.toBeInTheDocument();
 });

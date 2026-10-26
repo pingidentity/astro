@@ -53,47 +53,6 @@ Default.parameters = {
   },
 };
 
-export const IsRound = ({ ...args }) => (
-  <PanelHeader
-    {...args}
-    isIconRound
-    colorId="1111111111111111"
-    data={{
-      icon: AccountIcon,
-      text: 'Fons Vernall',
-      avatarDefaultText: 'FV',
-    }}
-  />
-);
-
-IsRound.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.panelHeader.default,
-  },
-};
-
-export const WithAvatarInitials = ({ ...args }) => (
-  <PanelHeader
-    {...args}
-    isIconRound
-    avatarInitials="FV"
-    colorId="1111111111111111"
-    data={{
-      icon: AccountIcon,
-      text: 'Fons Vernall',
-      avatarDefaultText: 'FV',
-    }}
-  />
-);
-
-WithAvatarInitials.parameters = {
-  design: {
-    type: 'figma',
-    url: FIGMA_LINKS.panelHeader.default,
-  },
-};
-
 export const WithSubtext = ({ ...args }) => (
   <PanelHeader
     {...args}
