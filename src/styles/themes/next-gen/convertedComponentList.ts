@@ -145,6 +145,12 @@ export const astroBlacklistStory = {
   ],
   ListViewItem: [
     'With Expandable Item',
+    'Is Round',
+    'With Avatar Initials',
+  ],
+  PanelHeader: [
+    'Is Round',
+    'With Avatar Initials',
   ],
   MaterialSymbolIcon: [
     'Default',

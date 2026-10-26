@@ -2,13 +2,16 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { useGetTheme } from '../../hooks';
-import { Avatar, Box, CopyText, Icon, IconWrapper, Image, Text } from '../../index';
+import { Box, CopyText, Icon, Image, Text } from '../../index';
+import ItemAvatar from '../ListViewItem/ItemAvatar';
 import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
 
 const PanelHeader = forwardRef(({
   avatarProps,
+  avatarInitials,
+  isIconRound,
   children,
   className,
   colorId,
@@ -42,26 +45,30 @@ const PanelHeader = forwardRef(({
 
   const renderOnyxIcon = icon && (
     <Box mr="md">
-      <IconWrapper
+      <ItemAvatar
         icon={icon}
-        size="sm"
         title={{ name: `${text}${PANEL_HEADER_ICON}` }}
-        isCircle
-        colorId={colorId || avatarDefaultText}
-        {...avatarProps}
-        iconProps={{ size: 'sm', ...iconProps }}
+        colorId={colorId}
+        avatarDefaultText={avatarDefaultText}
+        avatarInitials={avatarInitials}
+        isIconRound={isIconRound}
+        avatarProps={avatarProps}
+        iconProps={iconProps}
       />
     </Box>
   );
 
   const renderAvatar = (
-    <Avatar
-      size="sm"
-      colorId={colorId}
-      defaultText={avatarDefaultText}
-      mr="md"
-      {...avatarProps}
-    />
+    <Box mr="md">
+      <ItemAvatar
+        title={{ name: `${text}${PANEL_HEADER_ICON}` }}
+        colorId={colorId}
+        avatarDefaultText={avatarDefaultText}
+        avatarInitials={avatarInitials}
+        isIconRound={isIconRound}
+        avatarProps={avatarProps}
+      />
+    </Box>
   );
 
   const renderOnyxImage = !icon && image?.src && (
