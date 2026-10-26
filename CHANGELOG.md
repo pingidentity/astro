@@ -1,3 +1,13 @@
+## 2.242.0-alpha.0 (2026-10-26)
+
+### 🚀 Features
+
+- **astro:** align ListViewItem and PanelHeader icon/avatar/color API under Onyx theme
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.241.0 (2026-10-22)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
