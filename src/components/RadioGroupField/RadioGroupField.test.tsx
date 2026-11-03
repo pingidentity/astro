@@ -154,3 +154,18 @@ test('passing helper text should display it and correct aria attributes on input
   const helperTextID = helper.getAttribute('id');
   expect(screen.getByTestId('radioGroupWrapper')).toHaveAttribute('aria-labelledby', helperTextID);
 });
+
+test('empty label does not render label element', () => {
+  const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+  const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+  try {
+    getComponent({ label: '' });
+    const group = screen.getByRole('radiogroup');
+    expect(group).toBeInTheDocument();
+    expect(screen.queryByText(testLabel)).not.toBeInTheDocument();
+    expect(group.querySelector(':scope > label')).toBeNull();
+  } finally {
+    warnSpy.mockRestore();
+    errorSpy.mockRestore();
+  }
+});

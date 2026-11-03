@@ -47,16 +47,20 @@ const RadioGroupField = forwardRef<HTMLDivElement, RadioGroupFieldProps>((props,
       {...unhandledAriaProps}
       {...radioGroupProps}
     >
-      <Label
-        isDisabled={isDisabled}
-        hintText={hintText}
-        isRequired={isRequired}
-        variant="forms.label.radioGroup"
-        {...labelProps}
-        helpHintProps={helpHintProps}
-      >
-        {label}
-      </Label>
+      {
+        label && (
+          <Label
+            isDisabled={isDisabled}
+            hintText={hintText}
+            isRequired={isRequired}
+            variant="forms.label.radioGroup"
+            {...labelProps}
+            helpHintProps={helpHintProps}
+          >
+            {label}
+          </Label>
+        )
+      }
       <Box
         variant="forms.radioGroupWrapper"
         isRow={orientation === ORIENTATION.HORIZONTAL}
