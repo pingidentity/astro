@@ -1,3 +1,17 @@
+## 2.242.1-alpha.0 (2026-11-03)
+
+### 🩹 Fixes
+
+- update package.lock file
+- **astro:** [UXE-8991] conditionally render RadioGroupField label only when provided
+- **astro:** [uxe-9185] make CopyButton visible on Onyx theme when no variant is passed
+
+### ❤️  Thank You
+
+- Eshant Monga
+- Jeremy Bissonnette
+- Ridhisha Dangol
+
 ## 2.242.0-alpha.0 (2026-10-26)
 
 ### 🚀 Features
