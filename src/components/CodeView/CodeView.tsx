@@ -121,7 +121,8 @@ const CodeView = forwardRef<HTMLDivElement, CodeViewProps>((props, ref) => {
               ref={ref}
               mode="rightText"
               textToCopy={textToCopy || children}
-              iconButtonProps={{ ...iconButtonProps, variant }}
+              iconProps={{ sx: { '&& path': { fill: variant === 'light' ? 'black' : 'white' } } }}
+              iconButtonProps={iconButtonProps}
             />
           )}
         </Box>

@@ -146,23 +146,11 @@ const lineNo = {
 };
 
 export const copyButton = {
+  mx: 'sm',
   path: {
     fill: 'text.primary',
   },
-  default: {
-    mx: 'sm',
-    path: {
-      fill: 'white',
-    },
-    border: 'none !important',
-  },
-  light: {
-    mx: 'sm',
-    path: {
-      fill: 'black',
-    },
-    border: 'none !important',
-  },
+  border: 'none !important',
 };
 
 const codeView = {
