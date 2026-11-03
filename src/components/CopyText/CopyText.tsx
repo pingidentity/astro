@@ -26,6 +26,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
     tooltipProps,
     wrapperProps,
     iconButtonProps,
+    iconProps,
     ...others } = props;
   const value = textToCopy || (mode === 'link' ? (children as ReactElement)?.props?.href : (children as ReactElement).props?.children);
 
@@ -108,7 +109,12 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
           role="presentation"
         >
           {content}
-          <CopyButton onPress={copyToClipboard} {...focusProps} {...iconButtonProps} />
+          <CopyButton
+            onPress={copyToClipboard}
+            {...focusProps}
+            iconProps={iconProps}
+            {...iconButtonProps}
+          />
         </Box>
       </TooltipWrapper>
     );
@@ -129,6 +135,7 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
           <CopyButton
             onPress={copyToClipboard}
             {...mergeProps(hoverProps, focusProps, iconButtonProps)}
+            iconProps={iconProps}
           />
         </TooltipWrapper>
       </Box>
@@ -152,7 +159,12 @@ const CopyText = forwardRef<HTMLDivElement, CopyTextProps>((props, ref) => {
           gap="sm"
         >
           {mode !== 'rightText' && content}
-          <CopyButton onPress={copyToClipboard} {...focusProps} {...iconButtonProps} />
+          <CopyButton
+            onPress={copyToClipboard}
+            {...focusProps}
+            iconProps={iconProps}
+            {...iconButtonProps}
+          />
           {mode === 'rightText' && content}
         </Box>
       </Box>

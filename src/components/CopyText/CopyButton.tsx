@@ -7,17 +7,14 @@ import Icon from '../Icon';
 import IconButton from '../IconButton';
 
 const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>((props, ref) => {
-  /* istanbul ignore next */
-  const { iconProps, variant = 'default', ...others } = props;
-  const { copyButtonSize, themeState } = useGetTheme();
-  /* istanbul ignore next */
-  const themeVariant = themeState.isOnyx ? `copyButton.${variant}` : 'copyButton';
+  const { iconProps, ...others } = props;
+  const { copyButtonSize } = useGetTheme();
 
   return (
     <IconButton
       ref={ref}
       aria-label="copy to clipboard"
-      variant={themeVariant}
+      variant="copyButton"
       {...others}
     >
       <Icon icon={ContentCopy} size={copyButtonSize} title={{ name: 'Content Copy Icon' }} {...iconProps} />
