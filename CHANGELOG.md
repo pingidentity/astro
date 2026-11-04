@@ -1,3 +1,13 @@
+## 2.243.0-alpha.0 (2026-11-04)
+
+### 🚀 Features
+
+- **astro:** [UXE-8949] convert MultivaluesField to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.242.1-alpha.0 (2026-11-03)
 
 ### 🩹 Fixes
