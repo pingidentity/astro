@@ -53,6 +53,7 @@ export * from './menuItem';
 export * from './menuSection';
 export * from './messages';
 export * from './Modal';
+export * from './MultivaluesField';
 export * from './navBar';
 export * from './navSideBar';
 export * from './numberField';
