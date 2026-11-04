@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
+import type { Key } from '@react-types/shared';
 import userEvent from '@testing-library/user-event';
 
 import { Button, DatePicker, Item, Modal, MultivaluesField, OverlayProvider, Section } from '../../index';
+import type { DateValue } from '../../types';
+import { MultivaluesFieldItem, MultivaluesFieldProps } from '../../types/MultivaluesField';
 import statuses from '../../utils/devUtils/constants/statuses';
 import { act, fireEvent, getDefaultNormalizer, render, screen, within } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 import { universalFieldComponentTests } from '../../utils/testUtils/universalFormSubmitTest';
 
-const items = [
+const items: MultivaluesFieldItem[] = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
   { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
   { id: 3, name: 'Snake', key: 'Snake' },
 ];
 
-const withSection = [
+const withSection: MultivaluesFieldItem[] = [
   {
     name: 'Animals',
     key: 'Animals',
@@ -33,7 +36,7 @@ const withSection = [
   },
 ];
 
-const longLabelItems = [
+const longLabelItems: MultivaluesFieldItem[] = [
   { id: 10, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,', key: 'LongLabelItem' },
   { id: 11, name: 'Short', key: 'ShortLabelItem' },
 ];
@@ -55,7 +58,10 @@ const onLoadPrevFunc = jest.fn();
 const placeholder = 'Select Animals';
 const selectedOptionText = 'Animals Selected';
 
-const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+const getComponent = (
+  props: Partial<MultivaluesFieldProps> = {},
+  { renderFn = render } = {},
+) => renderFn((
   <OverlayProvider>
     <MultivaluesField {...defaultProps} {...props}>
       {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
@@ -63,7 +69,11 @@ const getComponent = (props = {}, { renderFn = render } = {}) => renderFn((
   </OverlayProvider>
 ));
 
-const getComponentInForm = (onFormSubmit, props = {}, { renderFn = render } = {}) => renderFn((
+const getComponentInForm = (
+  onFormSubmit: React.FormEventHandler,
+  props: Partial<MultivaluesFieldProps> = {},
+  { renderFn = render } = {},
+) => renderFn((
   <OverlayProvider>
     <form onSubmit={onFormSubmit}>
       <MultivaluesField {...defaultProps} {...props}>
@@ -73,7 +83,10 @@ const getComponentInForm = (onFormSubmit, props = {}, { renderFn = render } = {}
   </OverlayProvider>
 ));
 
-const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+const getSectionsComponent = (
+  props: Partial<MultivaluesFieldProps> = {},
+  { renderFn = render } = {},
+) => renderFn((
   <OverlayProvider>
     <MultivaluesField {...defaultSectionProps} {...props} mode="condensed">
       {section => (
@@ -86,7 +99,10 @@ const getSectionsComponent = (props = {}, { renderFn = render } = {}) => renderF
 ));
 
 
-const getLongLabelComponent = (props = {}, { renderFn = render } = {}) => renderFn((
+const getLongLabelComponent = (
+  props: Partial<MultivaluesFieldProps> = {},
+  { renderFn = render } = {},
+) => renderFn((
   <OverlayProvider>
     <MultivaluesField
       items={longLabelItems}
@@ -154,7 +170,7 @@ test('renders MultivaluesField component', () => {
   expect(label).toBeInTheDocument();
 });
 
-test('opens listbox on focus and fires "onFocus', async () => {
+test('opens listbox on focus and fires "onFocus"', async () => {
   const onFocus = jest.fn();
   getComponent({ onFocus });
   const input = screen.getByRole('combobox');
@@ -164,7 +180,7 @@ test('opens listbox on focus and fires "onFocus', async () => {
   expect(screen.getByRole('listbox')).toBeInTheDocument();
   const options = screen.getAllByRole('option');
   expect(options.length).toBe(items.length);
-  expect(options[0]).toHaveTextContent(items[0].name);
+  expect(options[0]).toHaveTextContent(items[0].name!);
   expect(onFocus).toBeCalled();
 });
 
@@ -293,9 +309,9 @@ test('clicking an option renders badge with option name', async () => {
 
   expect(firstOption).not.toBeInTheDocument();
 
-  const badge = screen.getByText(items[0].name);
+  const badge = screen.getByText(items[0].name!);
   expect(badge).toBeInTheDocument();
-  const { parentElement: badgeContainer } = badge;
+  const { parentElement: badgeContainer } = badge as HTMLElement & { parentElement: Element };
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
@@ -317,7 +333,7 @@ test('after clicking an option, and then clicking the text input, the listbox re
 
 test('no badges are rendered, if nothing is selected', () => {
   getComponent({ isReadOnly: false });
-  expect(screen.queryByRole('presentation')).not.toBeInTheDocument(0);
+  expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
 });
 
 test('after clicking an option, and then typing a custom input, the listbox remains open and filters the options', async () => {
@@ -338,7 +354,7 @@ test('after clicking an option, and then typing a custom input, the listbox rema
   const listbox = screen.queryByRole('listbox');
   expect(listbox).toBeInTheDocument();
 
-  const filteredOptions = within(listbox).getAllByRole('option');
+  const filteredOptions = within(listbox as HTMLElement).getAllByRole('option');
   expect(filteredOptions.length).toBe(1);
 });
 
@@ -353,9 +369,9 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
   await userEvent.click(firstOption);
   expect(firstOption).not.toBeInTheDocument();
 
-  const badge = screen.getByText(items[0].name);
+  const badge = screen.getByText(items[0].name!);
   expect(badge).toBeInTheDocument();
-  const { nextSibling: deleteButton } = badge;
+  const { nextSibling: deleteButton } = badge as HTMLElement & { nextSibling: Element };
   await userEvent.click(deleteButton);
   expect(badge).not.toBeInTheDocument();
 
@@ -369,7 +385,7 @@ test('clicking on delete button deletes selection, and re-adds option to list', 
 
   const updatedOptions = screen.getAllByRole('option');
   expect(updatedOptions[0]).toBeInTheDocument();
-  expect(updatedOptions[0]).toHaveTextContent(items[0].name);
+  expect(updatedOptions[0]).toHaveTextContent(items[0].name!);
 });
 
 test('clicking an option fires "onSelectionChange"', async () => {
@@ -391,7 +407,7 @@ test('clicking an option fires "onSelectionChange"', async () => {
   expect(secondOption).not.toBeInTheDocument();
 
   expect(onSelectionChange).toBeCalledTimes(2);
-  expect(onSelectionChange.mock.calls[0][0].has(items[0].name)).toBeTruthy();
+  expect(onSelectionChange.mock.calls[0][0].has(items[0].name!)).toBeTruthy();
   expect(onSelectionChange.mock.calls[1][0].has(items[1].name)).toBeTruthy();
 });
 
@@ -422,9 +438,9 @@ test('in non-restrictive mode, a badge gets added if there is input, onBlur', as
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
-  const { parentElement: badgeContainer } = badge;
+  const { parentElement: badgeContainer } = badge as HTMLElement & { parentElement: Element };
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
-  expect(input.value).toBe('');
+  expect((input as HTMLInputElement).value).toBe('');
 });
 
 test('in non-restrictive mode, a badge gets added if there is only one matching filtered option, onBlur', async () => {
@@ -441,7 +457,7 @@ test('in non-restrictive mode, a badge gets added if there is only one matching 
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
-  const { parentElement: badgeContainer } = badge;
+  const { parentElement: badgeContainer } = badge as HTMLElement & { parentElement: Element };
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
   expect(firstOption).not.toBeInTheDocument();
 });
@@ -491,7 +507,7 @@ test('changing the input value and hitting enter creates new value in non-restri
 
   const badge = screen.queryByText(value);
   expect(badge).toBeInTheDocument();
-  const { parentElement: badgeContainer } = badge;
+  const { parentElement: badgeContainer } = badge as HTMLElement & { parentElement: Element };
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
@@ -553,10 +569,10 @@ test('in non-restrictive mode the value that was already selected using the list
   const firstOption = options[0];
   await userEvent.click(firstOption);
 
-  expect(onSelectionChange.mock.calls[0][0].has(items[0].name)).toBeTruthy();
+  expect(onSelectionChange.mock.calls[0][0].has(items[0].name!)).toBeTruthy();
   onSelectionChange.mockClear();
 
-  await userEvent.type(input, items[0].name);
+  await userEvent.type(input, items[0].name!);
   await userEvent.type(input, '{enter}');
 
   expect(input).toHaveValue(items[0].name);
@@ -594,81 +610,81 @@ test('options can be selected via keyboard', async () => {
   expect(options[0]).toHaveClass('is-focused');
   await userEvent.type(options[0], '{enter}');
   expect(options[0]).not.toBeInTheDocument();
-  const badge = screen.getByText(items[0].name);
+  const badge = screen.getByText(items[0].name!);
   expect(badge).toBeInTheDocument();
-  const { parentElement: badgeContainer } = badge;
+  const { parentElement: badgeContainer } = badge as HTMLElement & { parentElement: Element };
   expect(badgeContainer).toHaveAttribute('role', 'presentation');
 });
 
 test('default selected keys', () => {
-  getComponent({ defaultSelectedKeys: [items[1].key, items[2].key] });
+  getComponent({ defaultSelectedKeys: [items[1].key, items[2].key] as Key[] });
 
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstBadge = screen.getByText(items[1].name);
+  const firstBadge = screen.getByText(items[1].name!);
   expect(firstBadge).toBeInTheDocument();
-  const secondBadge = screen.getByText(items[2].name);
+  const secondBadge = screen.getByText(items[2].name!);
   expect(secondBadge).toBeInTheDocument();
 });
 
 test('default selected keys are removed from the list', async () => {
-  getComponent({ defaultSelectedKeys: [items[1].key, items[2].key] });
+  getComponent({ defaultSelectedKeys: [items[1].key, items[2].key] as Key[] });
 
   const input = screen.getByRole('combobox');
   await userEvent.click(input);
 
-  const listbox = screen.queryByRole('listbox');
+  const listbox = screen.queryByRole('listbox') as HTMLElement;
 
   await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   const options = within(listbox).getAllByRole('option');
   expect(options.length).toBe(1);
 
-  expect(within(options[0]).getByText(items[0].key)).toBeInTheDocument();
+  expect(within(options[0]).getByText(items[0].key as string)).toBeInTheDocument();
 });
 
 test('selected keys', () => {
-  getComponent({ selectedKeys: [items[1].key, items[2].key] });
+  getComponent({ selectedKeys: [items[1].key, items[2].key] as Key[] });
 
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstBadge = screen.getByText(items[1].name);
+  const firstBadge = screen.getByText(items[1].name!);
   expect(firstBadge).toBeInTheDocument();
-  const secondBadge = screen.getByText(items[2].name);
+  const secondBadge = screen.getByText(items[2].name!);
   expect(secondBadge).toBeInTheDocument();
 });
 
 test('selected keys are removed from the list', async () => {
-  getComponent({ selectedKeys: [items[1].key, items[2].key] });
+  getComponent({ selectedKeys: [items[1].key, items[2].key] as Key[] });
 
   const input = screen.getByRole('combobox');
   await userEvent.click(input);
 
-  const listbox = screen.queryByRole('listbox');
+  const listbox = screen.queryByRole('listbox') as HTMLElement;
 
   await userEvent.type(listbox, '{arrowdown}', { skipClick: true });
   const options = within(listbox).getAllByRole('option');
   expect(options.length).toBe(1);
 
-  expect(within(options[0]).getByText(items[0].key)).toBeInTheDocument();
+  expect(within(options[0]).getByText(items[0].key as string)).toBeInTheDocument();
 });
 
 
 test('read only keys', () => {
-  getComponent({ readOnlyKeys: [items[1].key, items[2].key] });
+  getComponent({ readOnlyKeys: [items[1].key, items[2].key] as string[] });
 
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
 
-  const firstBadge = screen.getByText(items[1].name);
+  const firstBadge = screen.getByText(items[1].name!);
   const { nextSibling: deleteButton1 } = firstBadge;
   expect(firstBadge).toBeInTheDocument();
   expect(deleteButton1).not.toBeInTheDocument();
 
-  const secondBadge = screen.getByText(items[2].name);
+  const secondBadge = screen.getByText(items[2].name!);
   expect(secondBadge).toBeInTheDocument();
-  const { nextSibling: deleteButton2 } = firstBadge;
+  const { nextSibling: deleteButton2 } = firstBadge as HTMLElement & { nextSibling: Element };
   expect(deleteButton2).not.toBeInTheDocument();
 });
 
@@ -702,7 +718,7 @@ test('read only field', () => {
 
 test('read only keys with read only field', () => {
   const isReadOnly = true;
-  getComponent({ isReadOnly, readOnlyKeys: [items[1].key, items[2].key] });
+  getComponent({ isReadOnly, readOnlyKeys: [items[1].key, items[2].key] as string[] });
 
   const badge = screen.queryAllByRole('presentation');
   expect(badge[0]).toHaveAttribute('label', items[1].name);
@@ -778,11 +794,11 @@ test('deleting a single badge via keyboard moves focus to the input', async () =
   const firstOption = options[0];
   await userEvent.click(firstOption);
 
-  const badge = screen.getByText(items[0].name);
+  const badge = screen.getByText(items[0].name!);
   expect(badge).toBeInTheDocument();
 
   await userEvent.tab({ shift: true });
-  const { nextSibling: deleteButton } = badge;
+  const { nextSibling: deleteButton } = badge as HTMLElement & { nextSibling: Element };
   expect(deleteButton).toHaveClass('is-focused');
 
   fireEvent.keyDown(deleteButton, { key: 'Enter' });
@@ -800,14 +816,14 @@ test('deleting the last badge via keyboard moves focus to the previous badge', a
   await userEvent.click(firstOption);
   await userEvent.click(secondOption);
 
-  const badge1 = screen.getByText(items[0].name);
-  const badge2 = screen.getByText(items[1].name);
+  const badge1 = screen.getByText(items[0].name!);
+  const badge2 = screen.getByText(items[1].name!);
   expect(badge1).toBeInTheDocument();
   expect(badge2).toBeInTheDocument();
 
   await userEvent.tab({ shift: true });
-  const { nextSibling: deleteButton1 } = badge1;
-  const { nextSibling: deleteButton2 } = badge2;
+  const { nextSibling: deleteButton1 } = badge1 as HTMLElement & { nextSibling: Element };
+  const { nextSibling: deleteButton2 } = badge2 as HTMLElement & { nextSibling: Element };
   expect(deleteButton2).toHaveClass('is-focused');
 
   fireEvent.keyDown(deleteButton2, { key: 'Enter' });
@@ -1017,7 +1033,7 @@ test('in condensed mode, tabbing outside of listbox closes listbox', async () =>
 });
 
 test('selected keys in condensed mode ', () => {
-  getComponent({ mode: 'condensed', selectedKeys: [items[1].key, items[2].key] });
+  getComponent({ mode: 'condensed', selectedKeys: [items[1].key, items[2].key] as Key[] });
 
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
@@ -1026,7 +1042,7 @@ test('selected keys in condensed mode ', () => {
 });
 
 test('default selected keys in condensed mode ', () => {
-  getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key] });
+  getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key] as Key[] });
 
   const listbox = screen.queryByRole('listbox');
   expect(listbox).not.toBeInTheDocument();
@@ -1036,7 +1052,7 @@ test('default selected keys in condensed mode ', () => {
 
 test('when filtered to one item in condensed mode, it still shows the correct amount of selected items ', async () => {
   const onInputChange = jest.fn();
-  getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key], onInputChange });
+  getComponent({ mode: 'condensed', defaultSelectedKeys: [items[1].key, items[2].key] as Key[], onInputChange });
 
   const input = screen.getByRole('combobox');
   const value = 'Aardvark';
@@ -1069,7 +1085,7 @@ test('onInputChange is called in condensed mode ', async () => {
   expect(onInputChange).toHaveBeenCalledWith(value);
 });
 
-test('opens listbox on focus and fires "onFocus', async () => {
+test('opens listbox on focus and fires "onFocus"', async () => {
   const onFocus = jest.fn();
   getComponent({ mode: 'condensed', onFocus });
   const input = screen.getByRole('combobox');
@@ -1079,7 +1095,7 @@ test('opens listbox on focus and fires "onFocus', async () => {
   expect(screen.getByRole('listbox')).toBeInTheDocument();
   const options = screen.getAllByRole('option');
   expect(options.length).toBe(items.length);
-  expect(options[0]).toHaveTextContent(items[0].name);
+  expect(options[0]).toHaveTextContent(items[0].name!);
   expect(onFocus).toBeCalled();
 });
 
@@ -1200,11 +1216,11 @@ test('should render the separators', async () => {
   expect(screen.queryAllByRole('option')).toHaveLength(5);
 
   groups.forEach((group, index) => {
-    expect(() => within(group).getByText(withSection[index].name));
-    const itemOpt = withSection[index].options;
+    expect(() => within(group).getByText(withSection[index].name!));
+    const itemOpt = (withSection[index] as { options?: MultivaluesFieldItem[] }).options;
     if (Array.isArray(itemOpt)) {
       itemOpt.forEach(opt => (
-        expect(() => within(group).getByText(opt.name))
+        expect(() => within(group).getByText(opt.name!))
       ));
     }
   });
@@ -1272,7 +1288,7 @@ test('hovering delete button does not show tooltip for long label badge', () => 
 
 // Needs to be added to each components test file
 universalComponentTests({
-  renderComponent: props => (
+  renderComponent: (props: Partial<MultivaluesFieldProps>) => (
     <OverlayProvider>
       <MultivaluesField {...defaultProps} {...props}>
         {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
@@ -1282,7 +1298,7 @@ universalComponentTests({
 });
 
 universalFieldComponentTests({
-  renderComponent: props => (
+  renderComponent: (props: Partial<MultivaluesFieldProps>) => (
     <OverlayProvider>
       <MultivaluesField {...defaultProps} {...props}>
         {item => <Item key={item.key} data-id={item.name}>{item.name}</Item>}
@@ -1311,7 +1327,7 @@ test('in condensed mode, arrow icon SVG has an empty title element so no tooltip
   // the browser-native tooltip that would otherwise appear on hover.
   const arrowIconSvg = document.querySelector('button[tabindex="-1"] svg[aria-hidden="true"]');
   expect(arrowIconSvg).toBeInTheDocument();
-  const titleElement = arrowIconSvg.querySelector('title');
+  const titleElement = arrowIconSvg!.querySelector('title');
   expect(titleElement).toBeInTheDocument();
   expect(titleElement).toHaveTextContent('');
 });
@@ -1325,8 +1341,8 @@ test('MultivaluesField and DatePicker popovers open correctly when inside a Moda
 
   const ModalApp = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedKeys, setSelectedKeys] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
+    const [selectedDate, setSelectedDate] = useState<DateValue | null>(null);
 
     return (
       <>
@@ -1340,9 +1356,17 @@ test('MultivaluesField and DatePicker popovers open correctly when inside a Moda
               onSelectionChange={keys => setSelectedKeys(Array.from(keys).map(k => k.toString()))}
               mode="non-restrictive"
             >
-              {item => <Item key={item.key} data-id={item.name} aria-label={item.name}>{item.name}</Item>}
+              {item => (
+                <Item key={item.key} data-id={item.name} aria-label={item.name}>
+                  {item.name}
+                </Item>
+              )}
             </MultivaluesField>
-            <DatePicker label="Select a date" value={selectedDate} onChange={setSelectedDate} />
+            <DatePicker
+              label="Select a date"
+              value={selectedDate as DateValue | undefined}
+              onChange={setSelectedDate}
+            />
           </Modal>
         )}
       </>
@@ -1360,19 +1384,23 @@ test('MultivaluesField and DatePicker popovers open correctly when inside a Moda
 
   // MultivaluesField: focus opens the listbox
   const combobox = screen.getByRole('combobox');
-  await act(async () => { combobox.focus(); });
-  await act(async () => {});
+  await act(async () => {
+    combobox.focus();
+  });
+  await act(async () => {
+    // flush effects
+  });
 
   const listbox = screen.queryByRole('listbox');
   expect(listbox).toBeInTheDocument();
 
-  /* eslint-disable testing-library/no-node-access */
+
   let node = listbox;
   while (node && node !== document.body) {
     expect(node).not.toHaveAttribute('aria-hidden', 'true');
     node = node.parentElement;
   }
-  /* eslint-enable testing-library/no-node-access */
+
 
   // Click an option — verify it is selectable (option disappears and a badge appears)
   await userEvent.click(screen.getByRole('option', { name: 'Aardvark' }));
@@ -1383,22 +1411,24 @@ test('MultivaluesField and DatePicker popovers open correctly when inside a Moda
 
   // DatePicker: click the calendar button to open the popover
   await userEvent.click(screen.getByRole('button', { name: /calendar/i }));
-  await act(async () => {});
+  await act(async () => {
+    // flush effects
+  });
 
   const datepickerPopover = screen.queryByTestId('popover-container');
   expect(datepickerPopover).toBeInTheDocument();
 
-  /* eslint-disable testing-library/no-node-access */
+
   node = datepickerPopover;
   while (node && node !== document.body) {
     expect(node).not.toHaveAttribute('aria-hidden', 'true');
     node = node.parentElement;
   }
-  /* eslint-enable testing-library/no-node-access */
+
 
   // Click a calendar date — verify the date field updates
   const dateButtons = screen.getAllByRole('button');
   const firstAvailableDate = dateButtons.find(btn => btn.getAttribute('aria-label')?.match(/\w+day,/));
-  await userEvent.click(firstAvailableDate);
+  await userEvent.click(firstAvailableDate as HTMLElement);
   expect(screen.queryByTestId('date-field')).not.toHaveValue('');
 });
