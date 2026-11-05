@@ -23,7 +23,8 @@ export interface CopyTextProps extends HoverProps, TestingAttributes {
     tooltipText?: string;
     tooltipProps?: TooltipTriggerProps;
     wrapperProps?: TooltipWrapperProps;
-    iconButtonProps?: Omit<IconButtonProps, 'onPress'>
+    iconButtonProps?: Omit<IconButtonProps, 'onPress'>,
+    iconProps?: IconProps,
 }
 
 export interface CopyButtonProps extends IconButtonProps {

@@ -4,15 +4,21 @@ import Clear from '@pingux/mdi-react/CloseIcon';
 import { useHover } from '@react-aria/interactions';
 
 import { Badge, Box, Icon, IconButton } from '../..';
+import { BadgeLabelTooltipProps } from '../../types/MultivaluesField';
 import TooltipTrigger, { Tooltip } from '../TooltipTrigger';
 
 const BADGE_TOOLTIP_CHAR_THRESHOLD = 25;
 
-const BadgeLabelTooltip = ({ item, index, deleteItem, closeBadgeRefs }) => {
-  const isLong = item.name.length > BADGE_TOOLTIP_CHAR_THRESHOLD;
+const BadgeLabelTooltip = ({
+  item,
+  index,
+  deleteItem,
+  closeBadgeRefs,
+}: BadgeLabelTooltipProps) => {
+  const isLong = (item.name || '').length > BADGE_TOOLTIP_CHAR_THRESHOLD;
   const { hoverProps, isHovered } = useHover({});
   const textProps = mergeProps(item.badgeProps?.textProps || {}, hoverProps);
-  const badgeRef = useRef();
+  const badgeRef = useRef<HTMLDivElement>(null);
 
   return (
     <Box as="li">
@@ -28,14 +34,14 @@ const BadgeLabelTooltip = ({ item, index, deleteItem, closeBadgeRefs }) => {
           role="presentation"
           variant="selectedItemBadge"
           label={item.name}
-          slots={item.slots}
+          slots={item.slots as { leftIcon?: React.ReactNode }}
           {...item.badgeProps}
-          textProps={textProps}
+          textProps={textProps as React.ComponentProps<typeof Badge>['textProps']}
         >
           <IconButton
             aria-label={`delete ${item.name}`}
             data-item={item.name}
-            onPress={e => deleteItem(item.key, e)}
+            onPress={e => item.key !== undefined && deleteItem(item.key, e)}
             ref={el => closeBadgeRefs.current[index] = el} // eslint-disable-line
             variant="badge.deleteButton"
             aria-describedby="selectedKeysState"

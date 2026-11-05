@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PlusCircleMultipleOutlineIcon from '@pingux/mdi-react/PlusCircleMultipleOutlineIcon';
 import { useFilter } from '@react-aria/i18n';
+import type { Key, Node } from '@react-types/shared';
+import { Meta } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import { getAllUsers } from '../../api/users';
@@ -13,51 +15,172 @@ import {
   Section,
 } from '../../index';
 import { LIMIT } from '../../mocks/constants';
+import { MultivaluesFieldItem, MultivaluesFieldProps } from '../../types/MultivaluesField';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
+import statuses from '../../utils/devUtils/constants/statuses';
 import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { inputFieldAttributeBaseArgTypes } from '../../utils/docUtils/fieldAttributes';
 import { statusArgTypes } from '../../utils/docUtils/statusProp';
 
 import MultivaluesFieldReadme from './MultivaluesField.mdx';
 
-
 export default {
   title: 'Form/MultivaluesField',
   component: MultivaluesField,
   argTypes: {
-    direction: {},
-    hasAutoFocus: {},
-    hasNoStatusIndicator: {},
-    isDisabled: {},
-    isNotFlippable: {},
-    isReadOnly: {},
-    isRequired: {},
-    label: {},
-    mode: {},
-    placeholder: {},
-    defaultSelectedKeys: {
-      control: false,
+    label: {
+      control: {
+        type: 'text',
+      },
     },
-    disabledKeys: {
-      control: false,
-    },
-    items: {
-      control: false,
-    },
-    selectedKeys: {
-      control: false,
+    placeholder: {
+      control: {
+        type: 'text',
+      },
     },
     helperText: {
       control: {
         type: 'text',
       },
     },
-    hasNoSelectAll: {
+    mode: {
       control: {
-        tyle: 'boolean',
+        type: 'select',
+        options: ['restrictive', 'non-restrictive', 'condensed'],
+      },
+      table: {
+        type: { summary: "'restrictive' | 'non-restrictive' | 'condensed'" },
+        defaultValue: { summary: "'restrictive'" },
       },
     },
+    direction: {
+      // addon-docs reads options from the argType top level, not control.options
+      options: ['top', 'right', 'bottom', 'left'],
+      control: {
+        type: 'radio',
+        options: ['top', 'right', 'bottom', 'left'],
+      },
+      table: {
+        type: { summary: "'top' | 'right' | 'bottom' | 'left'" },
+        defaultValue: { summary: "'bottom'" },
+      },
+    },
+    hasAutoFocus: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hasNoStatusIndicator: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    isDisabled: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    isReadOnly: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    isRequired: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    isNotFlippable: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hasNoSelectAll: {
+      description: 'Whether the condensed mode select-all checkbox is hidden.',
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    scrollBoxProps: {
+      // JSDoc on this prop is @ignore-suppressed, so docgen emits no description.
+      description: 'Props object that is spread directly into the ScrollBox element.',
+      control: {
+        type: 'object',
+      },
+      table: {
+        type: { summary: 'object' },
+        defaultValue: { summary: '{ maxHeight: 300 }' },
+      },
+    },
+    inputProps: {
+      control: {
+        type: 'object',
+      },
+    },
+    containerProps: {
+      control: {
+        type: 'object',
+      },
+    },
+    defaultSelectedKeys: {
+      control: false,
+    },
+    selectedKeys: {
+      control: false,
+    },
+    disabledKeys: {
+      control: false,
+    },
+    // Declared only in DefaultMultivaluesFieldProps, which the dispatcher type
+    // does not expose, so docgen cannot resolve a description for these.
+    readOnlyKeys: {
+      description: 'The item keys that are readonly. These items cannot be changed or selected.',
+      control: false,
+      table: {
+        type: { summary: 'string[]' },
+      },
+    },
+    items: {
+      control: false,
+    },
+    onSelectionChange: {
+      control: false,
+    },
+    onInputChange: {
+      control: false,
+    },
+    onOpenChange: {
+      control: false,
+    },
     ...statusArgTypes,
+    // addon-docs reads options from the argType top level; docgen cannot resolve the
+    // imported `Status` alias, so hoist the option list here for the docs radio control.
+    status: {
+      ...statusArgTypes.status,
+      options: Object.values(statuses),
+    },
     ...ariaAttributeBaseArgTypes,
     ...inputFieldAttributeBaseArgTypes,
   },
@@ -87,9 +210,9 @@ export default {
       },
     },
   },
-};
+} satisfies Meta<typeof MultivaluesField>;
 
-const items = [
+const items: MultivaluesFieldItem[] = [
   { id: 1, name: 'Aardvark', key: 'Aardvark' },
   { id: 2, name: 'Kangaroo', key: 'Kangaroo' },
   { id: 3, name: 'Snake', key: 'Snake' },
@@ -99,7 +222,7 @@ const items = [
   { id: 7, name: 'Shark', key: 'Shark' },
 ];
 
-const checkboxItems = [
+const checkboxItems: MultivaluesFieldItem[] = [
   { id: 1, name: 'Option 1', key: 'Option 1' },
   { id: 2, name: 'Option 2', key: 'Option 2' },
   { id: 3, name: 'Option 3', key: 'Option 3' },
@@ -109,7 +232,7 @@ const checkboxItems = [
   { id: 7, name: 'Option 7', key: 'Option 7' },
 ];
 
-const withSection = [
+const withSection: MultivaluesFieldItem[] = [
   {
     name: 'Animals',
     key: 'Animals',
@@ -133,7 +256,7 @@ const withSection = [
 
 ];
 
-const itemsWithSlots = [
+const itemsWithSlots: MultivaluesFieldItem[] = [
   {
     id: 1,
     name: 'Aardvark',
@@ -160,14 +283,16 @@ const itemsWithSlots = [
   },
 ];
 
-const longLabelItems = [
+const longLabelItems: MultivaluesFieldItem[] = [
   { id: 1, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,', key: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' },
   { id: 2, name: 'Quisque vitae lacinia diam, nec ullamcorper neque.', key: 'Quisque vitae lacinia diam, nec ullamcorper neque.' },
   { id: 3, name: 'In egestas dui vel dolor tincidunt, sit amet ullamcorper', key: 'In egestas dui vel dolor tincidunt, sit amet ullamcorper' },
   { id: 4, name: 'Short name', key: 'Short name' },
 ];
 
-const setOverlayStyle = (direction, isOpen, mr, ml, mt) => {
+const setOverlayStyle = (
+  direction: string | undefined, isOpen: boolean, mr: string, ml: string, mt: string,
+) => {
   return {
     marginRight: direction === 'right' && isOpen ? mr : 0,
     marginLeft: direction === 'left' && isOpen ? ml : 0,
@@ -175,7 +300,7 @@ const setOverlayStyle = (direction, isOpen, mr, ml, mt) => {
   };
 };
 
-export const Default = args => {
+export const Default = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -200,7 +325,7 @@ export const Default = args => {
 };
 
 export const DefaultOpen = () => {
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -222,7 +347,7 @@ export const DefaultOpen = () => {
   );
 };
 
-export const Uncontrolled = args => {
+export const Uncontrolled = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -251,8 +376,8 @@ export const Uncontrolled = args => {
   );
 };
 
-export const Controlled = args => {
-  const [selectedKeys, setSelectedKeys] = useState(['Aardvark', 'Snake']);
+export const Controlled = (args: Partial<MultivaluesFieldProps>) => {
+  const [selectedKeys, setSelectedKeys] = useState<Iterable<Key>>(['Aardvark', 'Snake']);
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -283,7 +408,7 @@ export const Controlled = args => {
   );
 };
 
-export const Error = args => {
+export const Error = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
   const onOpenChange = () => {
@@ -312,7 +437,7 @@ export const Error = args => {
   );
 };
 
-export const ReadOnlyField = args => {
+export const ReadOnlyField = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
   const onOpenChange = () => {
@@ -334,7 +459,7 @@ export const ReadOnlyField = args => {
   );
 };
 
-export const ReadOnlyValues = args => {
+export const ReadOnlyValues = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -363,7 +488,7 @@ export const ReadOnlyValues = args => {
   );
 };
 
-export const DisabledKeys = args => {
+export const DisabledKeys = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -392,7 +517,7 @@ export const DisabledKeys = args => {
   );
 };
 
-export const CustomValues = args => {
+export const CustomValues = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -420,7 +545,7 @@ CustomValues.args = {
   mode: 'non-restrictive',
 };
 
-export const IconSlotsInBadge = args => {
+export const IconSlotsInBadge = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -444,7 +569,7 @@ export const IconSlotsInBadge = args => {
   );
 };
 
-export const CustomSize = args => {
+export const CustomSize = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -473,7 +598,7 @@ export const CustomSize = args => {
 };
 
 
-export const Condensed = args => {
+export const Condensed = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -504,11 +629,11 @@ export const Condensed = args => {
   );
 };
 
-export const CondensedAsyncLoading = args => {
+export const CondensedAsyncLoading = (args: Partial<MultivaluesFieldProps>) => {
   const { direction } = args;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [listItems, setListItems] = useState([]);
+  const [listItems, setListItems] = useState<MultivaluesFieldItem[]>([]);
   const [loadingState, setLoadingState] = useState(loadingStates.LOADING);
   const [dataSize, setDataSize] = useState(0);
   const [limit, setLimit] = useState(LIMIT);
@@ -546,10 +671,10 @@ export const CondensedAsyncLoading = args => {
 
   const { contains } = useFilter({ sensitivity: 'base' });
 
-  const filter = nodes => {
+  const filter = (nodes: Iterable<Node<object>>): Iterable<Node<object>> => {
     const nodeArr = Array.from(nodes);
     if (!filterString) return nodeArr;
-    return nodeArr.filter(item => contains(item.props.name, filterString));
+    return nodeArr.filter(item => contains((item.props as { name?: string }).name ?? '', filterString));
   };
 
   return (
@@ -567,18 +692,30 @@ export const CondensedAsyncLoading = args => {
         filter={filter}
         onInputChange={setFilterString}
       >
-        {item => (
-          <Item key={item.id} data-id={item.id} aria-label={item.username} name={`${item.name.given} ${item.name.family}`}>
-            {`${item.name.given} ${item.name.family}`}
-          </Item>
-        )}
+        {item => {
+          const givenName = (item.name as { given?: string; family?: string })?.given ?? '';
+          const familyName = (item.name as { given?: string; family?: string })?.family ?? '';
+          // `name` is passed through to the Item (as in the original JSX story) but is not
+          // part of react-stately's ItemProps, so it is spread via a cast to keep typecheck clean.
+          const nameProp = { name: `${givenName} ${familyName}` } as Record<string, unknown>;
+          return (
+            <Item
+              key={item.id}
+              data-id={item.id}
+              aria-label={(item.name as { username?: string })?.username ?? ''}
+              {...nameProp}
+            >
+              {`${givenName} ${familyName}`}
+            </Item>
+          );
+        }}
       </MultivaluesField>
     </OverlayProvider>
 
   );
 };
 
-export const CondensedWithSection = args => {
+export const CondensedWithSection = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
   const { direction } = args;
 
@@ -603,9 +740,9 @@ export const CondensedWithSection = args => {
   );
 };
 
-export const CondensedWithCustomText = args => {
+export const CondensedWithCustomText = (args: Partial<MultivaluesFieldProps>) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState<Set<Key>>(new Set());
   const { direction } = args;
 
   const onOpenChange = () => {
@@ -624,7 +761,7 @@ export const CondensedWithCustomText = args => {
         onOpenChange={onOpenChange}
         placeholder="Select your animal"
         selectedOptionText={`${selectedKeys.size} Selected Animals`}
-        onSelectionChange={setSelectedKeys}
+        onSelectionChange={keys => setSelectedKeys(new Set(keys))}
         selectedKeys={selectedKeys}
       >
         {section => (

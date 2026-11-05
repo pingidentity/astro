@@ -12,12 +12,13 @@ import {
   FocusScope,
   mergeProps,
 } from 'react-aria';
+import type { OverlayTriggerState } from 'react-stately';
 import { useFilter } from '@react-aria/i18n';
 import { useFocusWithin } from '@react-aria/interactions';
 import { useLayoutEffect, useResizeObserver } from '@react-aria/utils';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 import { useListState } from '@react-stately/list';
-import PropTypes from 'prop-types';
+import type { Key, Node } from '@react-types/shared';
 
 import {
   Box,
@@ -30,22 +31,24 @@ import {
 } from '../..';
 import { MultivaluesContext } from '../../context/MultivaluesContext';
 import { useGetTheme, useInputLoader, usePropWarning } from '../../hooks';
+import {
+  CondensedMultivaluesFieldProps,
+  MultivaluesFieldItem,
+} from '../../types/MultivaluesField';
+import type { Placement } from '../../types/shared/style';
 import loadingStates from '../../utils/devUtils/constants/loadingStates';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-import { isIterableProp } from '../../utils/devUtils/props/isIterable';
-import { ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
-import { inputFieldAttributesBasePropTypes } from '../../utils/docUtils/fieldAttributes';
-import {
-  statusDefaultProp,
-  statusPropTypes,
-} from '../../utils/docUtils/statusProp';
+import statuses from '../../utils/devUtils/constants/statuses';
 import ListBox from '../ListBox';
 import Popover from '../Popover/Popover';
 
-const CondensedMultivaluesField = forwardRef((props, ref) => {
+const CondensedMultivaluesField = forwardRef<HTMLDivElement, CondensedMultivaluesFieldProps>((
+  props,
+  ref,
+) => {
   const {
     defaultSelectedKeys,
-    direction,
+    direction = 'bottom',
     disabledKeys = [],
     containerProps,
     filter,
@@ -57,7 +60,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     isDisabled,
     isFilteringDisabled,
     isNotFlippable,
-    isReadOnly,
+    isReadOnly = false,
     isRequired,
     items,
     label,
@@ -75,8 +78,8 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     placeholder,
     selectedKeys,
     selectedOptionText: selectedOptionTextProp,
-    scrollBoxProps,
-    status,
+    scrollBoxProps = { maxHeight: 300 },
+    status = statuses.DEFAULT,
     ...others
   } = props;
 
@@ -87,9 +90,9 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const [hasFocusWithin, setFocusWithin] = useState(false);
   const [activeDescendant, setActiveDescendant] = useState('');
 
-  const inputWrapperRef = useRef();
-  const inputRef = useRef();
-  const buttonRef = useRef();
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const {
     icons,
@@ -102,18 +105,18 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const { isLoading } = useInputLoader({
     loadingState,
     inputValue: filterString,
-  });
+  } as { loadingState: string; inputValue: string });
 
-  const toggleItems = keys => {
+  const toggleItems = (keys: Iterable<Key>) => {
     if (onSelectionChange) onSelectionChange(keys);
   };
 
   const { contains } = useFilter({ sensitivity: 'base' });
 
-  const filterNodesWithChildren = iterableNode => {
+  const filterNodesWithChildren = (iterableNode: Iterable<Node<MultivaluesFieldItem>>) => {
     const nodeArr = Array.from(iterableNode);
     // filters child items if they have sections
-    const filteredSections = nodeArr.map(function f(nodeItem) {
+    const filteredSections = nodeArr.map(function f(nodeItem: Node<MultivaluesFieldItem>) {
       if (nodeItem?.type === 'item') {
         return contains(nodeItem?.value?.name || '', filterString) && nodeItem;
       }
@@ -132,12 +135,17 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     return filteredSections.filter(item => item);
   };
 
-  const state = useListState({
-    ...props,
+  const state = useListState<MultivaluesFieldItem>({
+    ...(props as object),
     items,
     onSelectionChange: toggleItems,
     selectionMode: 'multiple',
-    ...(!isFilteringDisabled && { filter: filter || filterNodesWithChildren }),
+    ...(!isFilteringDisabled && {
+      filter: (filter
+        || filterNodesWithChildren) as (
+          nodes: Iterable<Node<MultivaluesFieldItem>>,
+        ) => Iterable<Node<MultivaluesFieldItem>>,
+    }),
   });
 
   const { selectionManager } = state;
@@ -149,14 +157,14 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   };
 
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => inputWrapperRef.current);
+  useImperativeHandle(ref, () => inputWrapperRef.current as HTMLDivElement);
   /* istanbul ignore next */
-  useImperativeHandle(ref, () => inputRef.current);
-  const listBoxRef = useRef();
-  const popoverRef = useRef();
+  useImperativeHandle(ref, () => inputRef.current as HTMLDivElement);
+  const listBoxRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
 
   // Measure the width of the input to inform the width of the menu (below).
-  const [menuWidth, setMenuWidth] = useState(null);
+  const [menuWidth, setMenuWidth] = useState<string | null>(null);
 
   const onResize = useCallback(() => {
     /* istanbul ignore next */
@@ -180,7 +188,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const popoverState = useMemo(
     () => ({ isOpen: !state.collection.size ? false : isOpen, close }),
     [state.collection.size, isOpen, close],
-  );
+  ) as unknown as OverlayTriggerState;
 
   useEffect(() => {
     if (defaultSelectedKeys) selectionManager.setSelectedKeys(defaultSelectedKeys);
@@ -196,7 +204,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   }, [isOpen]);
 
   /* istanbul ignore next */
-  const keyDown = e => {
+  const keyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
       case 'Enter': {
         e.preventDefault();
@@ -209,13 +217,13 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
         break;
       }
       case 'ArrowDown': {
-        const nextKey = state.collection.getKeyAfter(selectionManager.focusedKey)
+        const nextKey = state.collection.getKeyAfter(selectionManager.focusedKey as Key)
           || state.collection.getFirstKey();
         if (nextKey) selectionManager.setFocusedKey(nextKey);
         break;
       }
       case 'ArrowUp': {
-        const prevKey = state.collection.getKeyBefore(selectionManager.focusedKey)
+        const prevKey = state.collection.getKeyBefore(selectionManager.focusedKey as Key)
           || state.collection.getLastKey();
         if (prevKey) selectionManager.setFocusedKey(prevKey);
         break;
@@ -231,7 +239,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     if (onKeyDown) onKeyDown(e.nativeEvent);
   };
 
-  const handleBlur = e => {
+  const handleBlur = (e: React.FocusEvent) => {
     const relatedTarget = e.relatedTarget || document.activeElement;
 
     if (
@@ -247,7 +255,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const [selectionState, setSelectionState] = useState('Select All');
 
-  const arrayItems = Array.from(items);
+  const arrayItems = items || [];
 
   const itemCount = arrayItems.reduce(
     (count, obj) => count + (obj.children ? obj.children.length : 1),
@@ -256,14 +264,20 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
 
   const selectedKeysSize = selectionManager.selectedKeys.size;
 
+  // `selectionManager.state` is private in the react-stately typings but is
+  // read throughout this component; the access is kept via a cast.
+  const selectionManagerState = (selectionManager as unknown as {
+    state: { selectedKeys: Set<Key> };
+  }).state;
+
   const selectedOptionText = selectedOptionTextProp
     || `${
       itemCount === selectedKeysSize
         ? 'All'
-        : selectionManager.state.selectedKeys?.size
+        : selectionManagerState.selectedKeys?.size
     } Selected`;
 
-  const checkboxSelected = selectionManager.state.selectedKeys?.size !== 0 && (
+  const checkboxSelected = selectionManagerState.selectedKeys?.size !== 0 && (
     <Text color="text.secondary">{selectedOptionText}</Text>
   );
 
@@ -277,7 +291,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     if (selectedKeysSize < itemCount) {
       const allItemNames = arrayItems.flatMap(obj => (
         obj.children ? obj.children.map(child => child.key) : obj.key
-      ));
+      )).filter((key): key is Key => key !== undefined);
       selectionManager.setSelectedKeys(allItemNames);
       setSelectionState('Deselect All');
     } else if (selectionState === 'Deselect All') {
@@ -340,7 +354,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     );
   };
 
-  const placeholderText = selectionManager.state.selectedKeys?.size === 0
+  const placeholderText = selectionManagerState.selectedKeys?.size === 0
     ? placeholder || 'Select'
     : '';
 
@@ -359,7 +373,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     isDisabled,
     isReadOnly,
     isRequired,
-    label,
+    label: label as string | undefined,
     placeholder: placeholderText,
     wrapperProps: {
       ref: inputWrapperRef,
@@ -375,7 +389,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
   const handleButtonPress = () => {
     if (!isOpen) {
       setIsOpen(true);
-      inputRef.current.focus();
+      inputRef.current?.focus();
     } else {
       setIsOpen(false);
     }
@@ -411,7 +425,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     <MultivaluesContext.Provider value={setActiveDescendant}>
       <Box {...mergeProps(containerProps, focusWithinProps)}>
         <TextField
-          onBlur={e => {
+          onBlur={((e: React.FocusEvent) => {
             const blurIntoPopover = popoverRef.current?.contains(
               e.relatedTarget,
             );
@@ -421,18 +435,17 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
             setIsOpen(false);
             setFilterString('');
             if (onBlur) onBlur(e.nativeEvent);
-          }}
+          }) as unknown as () => void}
           onChange={e => {
             if (!isOpen) setIsOpen(true);
             setFilterString(e.target.value);
             if (onInputChange) onInputChange(e.target.value);
           }}
-          onFocus={e => {
+          onFocus={((e: React.FocusEvent) => {
             setIsOpen(true);
             if (onFocus) onFocus(e.nativeEvent);
-          }}
-          onKeyDown={keyDown}
-          onKeyUp={e => onKeyUp && onKeyUp(e.nativeEvent)}
+          }) as unknown as () => void}
+          {...({ onKeyDown: keyDown, onKeyUp: e => onKeyUp && onKeyUp(e.nativeEvent) } as object)}
           aria-describedby={
             selectionManager.selectedKeys.size > 0
               ? 'selectedKeysState'
@@ -448,7 +461,7 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
             ),
           }}
           value={filterString}
-          helperText={helperText}
+          {...({ helperText } as object)}
           aria-invalid={status === 'error' && true}
           {...getPendoID('MultivaluesField')}
           {...others}
@@ -460,11 +473,13 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
           popoverRef={popoverRef}
           triggerRef={inputWrapperRef}
           state={popoverState}
-          placement={`${direction} end`}
+          placement={`${direction} end` as Placement}
           shouldFlip={!isNotFlippable}
           scrollRef={listBoxRef}
-          sx={menuWidthSx}
-          onBlur={e => handleBlur(e)}
+          {...({
+            sx: menuWidthSx,
+            onBlur: e => handleBlur(e as unknown as React.FocusEvent),
+          } as object)}
         >
           {listbox}
         </Popover>
@@ -473,119 +488,5 @@ const CondensedMultivaluesField = forwardRef((props, ref) => {
     </MultivaluesContext.Provider>
   );
 });
-
-CondensedMultivaluesField.propTypes = {
-  /** The initial selected keys in the collection (uncontrolled). */
-  defaultSelectedKeys: isIterableProp,
-  /** Where the menu opens relative to its trigger. */
-  direction: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-  /**
-   * The item keys that are disabled. These items cannot be selected.
-   */
-  disabledKeys: isIterableProp,
-  /** Whether the element should receive focus on render. */
-  hasAutoFocus: PropTypes.bool,
-  /** Whether the field has the select all button. */
-  hasNoSelectAll: PropTypes.bool,
-  /** Whether the field has a status indicator. */
-  hasNoStatusIndicator: PropTypes.bool,
-  /** Text rendered below the input. */
-  helperText: PropTypes.node,
-  /**
-   * Props that get passed as-is to the underlying TextField element
-   */
-  inputProps: PropTypes.shape({}),
-  /** Whether the input is disabled. */
-  isDisabled: PropTypes.bool,
-  /**
-   * Whether the menu is prevented from flipping directions when insufficient space is
-   * available for the given `direction` placement.
-   */
-  isNotFlippable: PropTypes.bool,
-  /** Whether the input can be selected but not changed by the user. */
-  isReadOnly: PropTypes.bool,
-  /** Whether user input is required on the input before form submission. */
-  isRequired: PropTypes.bool,
-  /** The list of items.
-   *
-   * **Note:** Every item needs to have key and name properties.
-   *
-   * `Array<{key: string, name: string}>`
-   */
-  items: isIterableProp,
-  /** The rendered label for the field. */
-  label: PropTypes.string,
-  /** Whether the component allows to create new values or only choose from the selection list */
-  mode: PropTypes.oneOf(['restrictive', 'non-restrictive', 'condensed']),
-  /**
-   * Handler that is called when the element loses focus.
-   *
-   * `(e: FocusEvent) => void`
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Handler that is called when the element receives focus.
-   *
-   * `(e: FocusEvent) => void`
-   */
-  onFocus: PropTypes.func,
-  /**
-   * Handler that is called when the input value changes.
-   *
-   * `(value: string) => void`
-   */
-  onInputChange: PropTypes.func,
-  /**
-   * Handler that is called when a key is pressed.
-   *
-   * `(e: KeyboardEvent) => void`
-   */
-  onKeyDown: PropTypes.func,
-  /**
-   * Handler that is called when a key is released.
-   *
-   * `(e: KeyboardEvent) => void`
-   */
-  onKeyUp: PropTypes.func,
-  /**
-   * Method that is called when the open state of the menu changes.
-   *
-   * `(isOpen: boolean) => void`
-   */
-  onOpenChange: PropTypes.func,
-  /**
-   * Handler that is called when the selection changes.
-   *
-   * `(keys: Iterable<Key>) => any`
-   */
-  onSelectionChange: PropTypes.func,
-  /** Temporary text that occupies the text input when it is empty. */
-  placeholder: PropTypes.string,
-  /**
-   * The item keys that are readonly. These items cannot be changed or selected.
-   */
-  readOnlyKeys: PropTypes.arrayOf(PropTypes.string),
-  /** The currently selected keys in the collection (controlled). */
-  selectedKeys: isIterableProp,
-  // /** Props object that is spread directly into the ScrollBox element. */
-  /** @ignore */
-  scrollBoxProps: PropTypes.shape({
-    maxHeight: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.number,
-    ]),
-  }),
-  ...statusPropTypes,
-  ...ariaAttributesBasePropTypes,
-  ...inputFieldAttributesBasePropTypes,
-};
-
-CondensedMultivaluesField.defaultProps = {
-  direction: 'bottom',
-  isReadOnly: false,
-  scrollBoxProps: { maxHeight: 300 },
-  ...statusDefaultProp,
-};
 
 export default CondensedMultivaluesField;

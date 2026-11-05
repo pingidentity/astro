@@ -9,7 +9,6 @@ import {
   NextGenTheme,
   OnyxTheme,
 } from '../..';
-import { copyButton } from '../../styles/themes/next-gen/codeView/codeView';
 import { act, fireEvent, render, screen, waitFor } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
@@ -235,11 +234,6 @@ test.each(['default', 'light'])('honors hasNoCopyButton in the Onyx header for t
   expect(screen.queryByRole('button', { name: 'copy to clipboard' })).not.toBeInTheDocument();
 });
 
-test('uses the intended Onyx color tokens for CodeView copy-button variants', () => {
-  expect(copyButton.default.path.fill).toBe('white');
-  expect(copyButton.light.path.fill).toBe('black');
-});
-
 test.each([
   ['NEXT_GEN', NextGenTheme, 'default', '#ffffff'],
   ['NEXT_GEN', NextGenTheme, 'light', '#000'],
@@ -248,8 +242,10 @@ test.each([
 ])('renders the intended copy-icon path for %s %s CodeView', (_themeName, theme, variant, fill) => {
   getOnyxStyledComponent(theme, variant);
 
-  expect(screen.getByRole('button', { name: 'copy to clipboard' }))
-    .toHaveStyleRule('fill', fill, { target: 'path' });
+  const copyButton = screen.getByRole('button', { name: 'copy to clipboard' });
+  const icon = copyButton.querySelector('svg');
+
+  expect(icon).toHaveStyleRule('fill', fill, { target: 'path' });
 });
 
 test('if textToCopy is provided it\'s copied to clipboard instead of children text data', async () => {

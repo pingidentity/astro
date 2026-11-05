@@ -1,3 +1,37 @@
+## 2.243.0-alpha.0 (2026-11-04)
+
+### 🚀 Features
+
+- **astro:** [UXE-8949] convert MultivaluesField to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
+## 2.242.1-alpha.0 (2026-11-03)
+
+### 🩹 Fixes
+
+- update package.lock file
+- **astro:** [UXE-8991] conditionally render RadioGroupField label only when provided
+- **astro:** [uxe-9185] make CopyButton visible on Onyx theme when no variant is passed
+
+### ❤️  Thank You
+
+- Eshant Monga
+- Jeremy Bissonnette
+- Ridhisha Dangol
+
+## 2.242.0-alpha.0 (2026-10-26)
+
+### 🚀 Features
+
+- **astro:** align ListViewItem and PanelHeader icon/avatar/color API under Onyx theme
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.241.0 (2026-10-22)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
