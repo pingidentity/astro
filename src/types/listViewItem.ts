@@ -1,6 +1,7 @@
 import type { ComponentType, ReactNode } from 'react';
 
 import { TestingAttributes } from './shared/test';
+import { AvatarProps } from './avatar';
 import { BoxProps } from './box';
 import { ButtonProps } from './button';
 import { IconProps } from './icon';
@@ -20,6 +21,8 @@ export interface ListViewItemData {
     };
     text?: string;
     subtext?: string;
+    /** Seeds the avatar color when `colorId` is not provided (Onyx theme). */
+    avatarDefaultText?: string;
 }
 
 export interface ListViewItemSlots {
@@ -51,6 +54,13 @@ export interface ListViewItemProps extends BoxProps, HoverProps, TestingAttribut
     linkProps?: ListViewItemLinkProps;
     /** Deterministically derives the avatar color when no explicit color is set. */
     colorId?: string;
+    /** Props forwarded to the underlying avatar element (Onyx theme);
+    * `children` is managed by the component. */
+    avatarProps?: Omit<AvatarProps, 'children'>;
+    /** Initials rendered inside the avatar in place of the icon (Onyx theme). */
+    avatarInitials?: string;
+    /** Renders the icon avatar round instead of square (Onyx theme). */
+    isIconRound?: boolean;
     /** Shows a separator border under the item. */
     hasSeparator?: boolean;
     children?: ReactNode;
