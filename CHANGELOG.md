@@ -1,3 +1,13 @@
+## 2.244.0-alpha.0 (2026-11-12)
+
+### 🚀 Features
+
+- **astro:** [UXE-8948] convert ListViewItem to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.243.0 (2026-11-05)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.
