@@ -1,3 +1,13 @@
+## 2.244.1-alpha.0 (2026-11-12)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9236] use search_off icon for no-results EmptyState story
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.244.0-alpha.0 (2026-11-12)
 
 ### 🚀 Features
