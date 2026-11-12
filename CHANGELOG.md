@@ -1,3 +1,13 @@
+## 2.245.0-alpha.0 (2026-11-12)
+
+### 🚀 Features
+
+- [UXE-9224] Listviewitem panelheader avatar api
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
 ## 2.244.1-alpha.0 (2026-11-12)
 
 ### 🩹 Fixes
