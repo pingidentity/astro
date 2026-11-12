@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { Icon, IconButton, Menu, PopoverMenu } from '../../..';
 import { useGetTheme } from '../../../hooks';
-import { menuPropTypes } from '../../Menu/menuAttributes';
+import { ListViewItemMenuProps } from '../../../types/listViewItem';
 
 /**
  * ListViewItemEditButton is one of several styled control components that can be used as a child
@@ -12,7 +12,11 @@ import { menuPropTypes } from '../../Menu/menuAttributes';
  * specs easy. Most props available to the Menu component are available to ListItemMenu.
 */
 
-const ListViewItemMenu = forwardRef(({ children, iconButtonProps, ...others }, ref) => {
+const ListViewItemMenu = forwardRef<HTMLButtonElement, ListViewItemMenuProps>(({
+  children,
+  iconButtonProps,
+  ...others
+}, ref) => {
   const { icons } = useGetTheme();
   const { listViewMenu } = icons;
 
@@ -31,8 +35,6 @@ const ListViewItemMenu = forwardRef(({ children, iconButtonProps, ...others }, r
     </PopoverMenu>
   );
 });
-
-ListViewItemMenu.propTypes = menuPropTypes;
 
 ListViewItemMenu.displayName = 'ListViewItemMenu';
 

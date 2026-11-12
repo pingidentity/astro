@@ -3,14 +3,13 @@ import { useHover } from '@react-aria/interactions';
 
 import { Box, Icon, IconWrapper, Image, Text } from '../..';
 import { useGetTheme, useStatusClasses } from '../../hooks';
+import { ListViewItemProps } from '../../types/listViewItem';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
-
-import { listViewItemPropTypes } from './listViewItemAttributes';
 
 export const LIST_ITEM_ICON = '-list-item-icon';
 const displayName = 'ListViewItem';
 
-const ListViewItem = forwardRef(({
+const ListViewItem = forwardRef<HTMLDivElement, ListViewItemProps>(({
   children,
   className,
   data,
@@ -132,8 +131,6 @@ const ListViewItem = forwardRef(({
     </Box>
   );
 });
-
-ListViewItem.propTypes = listViewItemPropTypes;
 
 ListViewItem.displayName = displayName;
 

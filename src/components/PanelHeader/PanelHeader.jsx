@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { useGetTheme } from '../../hooks';
 import { Avatar, Box, CopyText, Icon, IconWrapper, Image, Text } from '../../index';
-import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
 
@@ -156,13 +155,29 @@ const PanelHeader = forwardRef(({
 });
 
 PanelHeader.propTypes = {
-  ...SharedItemPropTypes,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   colorId: PropTypes.string,
-  isCopyable: PropTypes.bool,
+  data: PropTypes.shape({
+    icon: PropTypes.elementType,
+    image: PropTypes.shape({
+      src: PropTypes.string,
+      alt: PropTypes.string,
+      'aria-label': PropTypes.string,
+    }),
+    subtext: PropTypes.string,
+    text: PropTypes.string,
+    avatarDefaultText: PropTypes.string,
+  }),
+  avatarProps: PropTypes.object,
+  headerProps: PropTypes.object,
+  headerWrapperProps: PropTypes.object,
   iconProps: PropTypes.object,
+  isCopyable: PropTypes.bool,
   slots: PropTypes.shape({
+    leftOfData: PropTypes.node,
     rightOfData: PropTypes.node,
   }),
+  subtextProps: PropTypes.object,
 };
 
 export default PanelHeader;

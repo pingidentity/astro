@@ -1,6 +1,7 @@
 import React from 'react';
 import useResizeObserver from 'use-resize-observer';
 
+import { ListViewItemChartProps } from '../../../../types';
 import { render, screen } from '../../../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../../../utils/testUtils/universalComponentTest';
 import Box from '../../../Box/Box';
@@ -10,8 +11,8 @@ import ListViewItemChart from './ListViewItemChart';
 
 jest.mock('use-resize-observer');
 
-const Chart = props => {
-  const ref = React.useRef();
+const Chart = (props: Partial<ListViewItemChartProps>) => {
+  const ref = React.useRef<HTMLDivElement>(null);
   return (
     <Box ref={ref}>
       <ListViewItemChart
@@ -31,7 +32,7 @@ const Chart = props => {
   );
 };
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: Partial<ListViewItemChartProps> = {}) => render((
   <Chart {...props} />
 ));
 
@@ -51,7 +52,7 @@ beforeEach(() => {
     right: 800,
     x: 0,
     y: 0,
-    toJSON: () => {},
+    toJSON: () => undefined,
   }));
 
 
@@ -69,7 +70,11 @@ afterEach(() => {
 });
 
 // Needs to be added to each components test file
-universalComponentTests({ renderComponent: props => <ListViewItemChart {...props} /> });
+universalComponentTests({
+  renderComponent: (props: Partial<ListViewItemChartProps>) => (
+    <ListViewItemChart {...props} />
+  ),
+});
 
 test('renders ListViewItemChart component', () => {
   getComponent();
