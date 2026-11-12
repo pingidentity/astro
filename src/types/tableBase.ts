@@ -7,6 +7,7 @@ import type { ColumnSize, TableProps } from '@react-types/table';
 
 import { TestingAttributes } from './shared/test';
 import { BoxProps } from './box';
+import { IconProps } from './icon';
 import { DOMAttributes, loadingState } from './shared';
 
 export type ResizeHandler = (widths: Map<Key, ColumnSize>) => void;
@@ -101,6 +102,7 @@ export interface TableCaptionProps {
 
 export interface TableBaseEmptyStateProps extends BoxProps {
   defaultIcon?: React.ElementType;
+  iconProps?: IconProps;
   headerLabel?: string;
   descriptionLabel?: string;
   addButtonLabel?: string;

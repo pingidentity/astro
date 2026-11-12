@@ -65,7 +65,7 @@ export const Customization: StoryFn<EmptyStateProps> = () => (
       heading="No results found"
       description="Try a different query."
       iconProps={{
-        icon: 'person_add',
+        icon: 'search_off',
       }}
     />
     <EmptyState
@@ -74,7 +74,7 @@ export const Customization: StoryFn<EmptyStateProps> = () => (
       buttonLabel="New User"
       onButtonPress={() => jest.fn()()}
       iconProps={{
-        icon: 'search_off',
+        icon: 'person_add',
       }}
     />
   </Box>

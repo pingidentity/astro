@@ -39,10 +39,12 @@ export const Customization: StoryFn<TableBaseEmptyStateProps> = () => (
       headerLabel="No users found"
       descriptionLabel="Add your first user to get started."
       addButtonLabel="New User"
+      iconProps={{ icon: 'person_add' }}
     />
     <TableBaseEmptyState
       headerLabel="No results"
       descriptionLabel="Try adjusting your search or filters."
+      iconProps={{ icon: 'search_off' }}
     />
     <TableBaseEmptyState
       headerLabel="Nothing here yet"
