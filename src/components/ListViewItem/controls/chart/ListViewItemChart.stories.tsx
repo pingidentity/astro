@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../../../.storybook/storybookDocsLayout';
 import { Box, ListViewItemChart } from '../../../../index';
+import { ListViewItemChartProps } from '../../../../types';
 
 import { chartData } from './chartData';
 import ListViewItemChartReadMe from './ListViewItemChart.mdx';
@@ -21,10 +23,10 @@ export default {
     },
   },
   argTypes: listViewItemChartArgTypes,
-};
+} satisfies Meta<typeof ListViewItemChart>;
 
-export const Default = () => {
-  const ref = useRef();
+export const Default: StoryFn<ListViewItemChartProps> = () => {
+  const ref = useRef<HTMLDivElement>(null);
   return (
     <Box ref={ref}>
       <ListViewItemChart

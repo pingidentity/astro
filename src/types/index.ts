@@ -47,6 +47,7 @@ export * from './link';
 export * from './linkSelectField';
 export * from './listBox';
 export * from './listItem';
+export * from './listViewItem';
 export * from './loader';
 export * from './menu';
 export * from './menuItem';

@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
-
-import { ariaAttributeBaseArgTypes, ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { booleanArg, stringOrStringArray } from '../../utils/docUtils/docArgTypes';
-import { onHoverArgTypes, onHoverPropTypes } from '../../utils/docUtils/hoverProps';
+import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 const descriptions = {
   data: 'Object with User/Group data.',
@@ -56,32 +54,4 @@ export const listViewItemArgTypes = {
   ...SharedItemArgTypes,
   ...onHoverArgTypes,
   ...ariaAttributeBaseArgTypes,
-};
-
-export const SharedItemPropTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  colorId: PropTypes.string,
-  data: PropTypes.shape({
-    icon: PropTypes.elementType,
-    image: PropTypes.shape({
-      src: PropTypes.string,
-      alt: PropTypes.string,
-      'aria-label': PropTypes.string,
-    }),
-    subtext: PropTypes.string,
-    text: PropTypes.string,
-  }),
-};
-
-export const listViewItemPropTypes = {
-  isSelected: PropTypes.bool,
-  linkProps: PropTypes.object,
-  onMetaClick: PropTypes.func,
-  slots: PropTypes.shape({
-    leftOfData: PropTypes.node,
-    rightOfData: PropTypes.node,
-  }),
-  ...SharedItemPropTypes,
-  ...onHoverPropTypes,
-  ...ariaAttributesBasePropTypes,
 };

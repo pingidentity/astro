@@ -7,10 +7,20 @@ import useResizeObserver from 'use-resize-observer';
 import { useGetTheme } from '../../../../hooks';
 import { Box, Button, Text, Tooltip, TooltipTrigger } from '../../../../index';
 import { neutral } from '../../../../styles/colors';
+import { ListViewItemChartProps } from '../../../../types/listViewItem';
 
-import { listViewItemChartPropTypes } from './ListViewItemChartAttributes';
+// `variant` keys into the theme's style objects but is not part of recharts'
+// prop types; these aliases keep the extra prop typecheckable without
+// changing what is passed through at runtime.
+const TypedResponsiveContainer = ResponsiveContainer as React.ComponentType<
+  React.ComponentProps<typeof ResponsiveContainer> & { variant?: string }
+>;
 
-const ListViewItemChart = forwardRef((props, ref) => {
+const TypedLineChart = LineChart as React.ComponentType<
+  React.ComponentProps<typeof LineChart> & { variant?: string }
+>;
+
+const ListViewItemChart = forwardRef<HTMLDivElement, ListViewItemChartProps>((props, ref) => {
   const {
     buttonProps,
     chartData,
@@ -28,8 +38,14 @@ const ListViewItemChart = forwardRef((props, ref) => {
   } = props;
   const { width } = useResizeObserver({ ref: containerRef });
   const { visuallyHiddenProps } = useVisuallyHidden();
-  const isTablet = useMemo(() => width <= tabletBreakPoint, [tabletBreakPoint, width]);
-  const isMobile = useMemo(() => width <= mobileBreakPoint, [mobileBreakPoint, width]);
+  // Before the observer's first measurement, width is undefined; the old JS
+  // compared `undefined <= n` (false), so treat unmeasured as infinitely wide.
+  const isTablet = useMemo(
+    () => (width ?? Number.POSITIVE_INFINITY) <= tabletBreakPoint, [tabletBreakPoint, width],
+  );
+  const isMobile = useMemo(
+    () => (width ?? Number.POSITIVE_INFINITY) <= mobileBreakPoint, [mobileBreakPoint, width],
+  );
 
   const hideIfTablet = useCallback(() => isTablet && visuallyHiddenProps, [
     isTablet, visuallyHiddenProps,
@@ -42,8 +58,10 @@ const ListViewItemChart = forwardRef((props, ref) => {
   useEffect(() => {
     async function setAriaLabel() {
       if (containerRef && containerRef.current) {
-        const [rechartsWrapper] = await containerRef.current.getElementsByClassName('recharts-wrapper');
-        rechartsWrapper?.setAttribute('aria-label', ariaLabel);
+        const [rechartsWrapper] = Array.from(containerRef.current.getElementsByClassName('recharts-wrapper'));
+        if (rechartsWrapper && ariaLabel) {
+          rechartsWrapper.setAttribute('aria-label', ariaLabel);
+        }
       }
     }
     setAriaLabel();
@@ -82,8 +100,8 @@ const ListViewItemChart = forwardRef((props, ref) => {
           <Box variant="lisViewItemChart.divider" />
           <Box ml="md">
             <Box variant="lisViewItemChart.chartContainer" id={ariaLabel}>
-              <ResponsiveContainer variant="lisViewItemChart.responsiveContainer">
-                <LineChart
+              <TypedResponsiveContainer variant="lisViewItemChart.responsiveContainer">
+                <TypedLineChart
                   data={chartData}
                   variant="lisViewItemChart.chart"
                 >
@@ -93,8 +111,8 @@ const ListViewItemChart = forwardRef((props, ref) => {
                     dot={false}
                     stroke={isOnyxDark ? astroTokens.color.gray[100] : neutral[20]}
                   />
-                </LineChart>
-              </ResponsiveContainer>
+                </TypedLineChart>
+              </TypedResponsiveContainer>
             </Box>
             <Text variant="variants.lisViewItemChart.chartLabel">
               {chartLabel}
@@ -113,8 +131,6 @@ const ListViewItemChart = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-ListViewItemChart.propTypes = listViewItemChartPropTypes;
 
 ListViewItemChart.displayName = 'ListViewItemChart';
 

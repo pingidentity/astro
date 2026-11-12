@@ -9,13 +9,14 @@ import {
   OnyxDarkTheme,
   OnyxTheme,
 } from '../..';
+import { ListViewItemProps } from '../../types';
 import { pingImg } from '../../utils/devUtils/constants/images';
 import { render, screen } from '../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../utils/testUtils/universalComponentTest';
 
 import { LIST_ITEM_ICON } from './ListViewItem';
 
-const defaultProps = {
+const defaultProps: ListViewItemProps = {
   data: {
     text: 'testText',
     subtext: 'testSubtext',
@@ -28,11 +29,11 @@ const defaultProps = {
   },
 };
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: Partial<ListViewItemProps> = {}) => render((
   <ListViewItem {...defaultProps} {...props} />
 ));
 
-const getComponentOnyx = (theme = OnyxTheme, props = {}) => render((
+const getComponentOnyx = (theme = OnyxTheme, props: Partial<ListViewItemProps> = {}) => render((
   <AstroProvider themeOverrides={[theme]}>
     <ListViewItem {...defaultProps} {...props} />
   </AstroProvider>
@@ -46,7 +47,9 @@ jest.mock('../../hooks/useFallbackImage', () => props => {
 
 // Needs to be added to each components test file
 universalComponentTests({
-  renderComponent: props => <ListViewItem {...defaultProps} {...props} />,
+  renderComponent: (props: Partial<ListViewItemProps>) => (
+    <ListViewItem {...defaultProps} {...props} />
+  ),
 });
 
 const TEST_TEXT = 'test text';

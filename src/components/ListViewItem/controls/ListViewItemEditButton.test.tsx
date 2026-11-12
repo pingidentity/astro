@@ -2,15 +2,20 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { ListViewItemEditButton } from '../../..';
+import { ListViewItemEditButtonProps } from '../../../types';
 import { render, screen } from '../../../utils/testUtils/testWrapper';
 import { universalComponentTests } from '../../../utils/testUtils/universalComponentTest';
 
-const getComponent = (props = {}) => render((
+const getComponent = (props: Partial<ListViewItemEditButtonProps> = {}) => render((
   <ListViewItemEditButton {...props} />
 ));
 
 // Needs to be added to each components test file
-universalComponentTests({ renderComponent: props => <ListViewItemEditButton {...props} /> });
+universalComponentTests({
+  renderComponent: (props: Partial<ListViewItemEditButtonProps>) => (
+    <ListViewItemEditButton {...props} />
+  ),
+});
 
 test('ListViewItemEditButton responds to IconButton props', async () => {
   const onPress = jest.fn();
