@@ -85,6 +85,47 @@ Default.parameters = {
   },
 };
 
+export const IsRound = () => (
+  <Wrapper>
+    <ListViewItem
+      data={{
+        icon: AccountIcon,
+        text: 'Fons Vernall',
+      }}
+      isIconRound
+      colorId="11111111111"
+    />
+  </Wrapper>
+);
+
+IsRound.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.default,
+  },
+};
+
+export const WithAvatarInitials = () => (
+  <Wrapper>
+    <ListViewItem
+      data={{
+        icon: AccountIcon,
+        text: 'Fons Vernall',
+      }}
+      isIconRound
+      avatarInitials="FV"
+      colorId="11111111111"
+    />
+  </Wrapper>
+);
+
+WithAvatarInitials.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.default,
+  },
+};
+
 export const WithSubtext: StoryFn<ListViewItemProps> = () => (
   <Wrapper>
     <ListViewItem
@@ -93,10 +134,7 @@ export const WithSubtext: StoryFn<ListViewItemProps> = () => (
         subtext: 'rad_developer@pingidentity.com',
         text: 'Fons Vernall',
       }}
-      iconWrapperProps={{
-        size: 'sm',
-        color: 'blue',
-      }}
+      colorId="11111111111"
     />
   </Wrapper>
 );
@@ -138,10 +176,7 @@ export const WithControls: StoryFn<ListViewItemProps> = () => (
         icon: AccountIcon,
         text: 'Fons Vernall',
       }}
-      iconWrapperProps={{
-        size: 'sm',
-        color: 'blue',
-      }}
+      colorId="11111111111"
     >
       <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
@@ -178,10 +213,7 @@ export const WithRightOfDataSlot: StoryFn<ListViewItemProps> = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'blue',
-        }}
+        colorId="11111111111"
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>
@@ -216,10 +248,7 @@ export const WithLeftOfDataSlot: StoryFn<ListViewItemProps> = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'orange',
-        }}
+        colorId="11111111111"
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
@@ -252,10 +281,7 @@ export const WithCharts: StoryFn<ListViewItemProps> = () => {
           subtext: 'kangaroo@example.com',
           icon: ClockOutlineIcon,
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'green',
-        }}
+        colorId="11111111111"
       >
         <ListViewItemChart
           containerRef={containerRef}
@@ -307,10 +333,7 @@ export const WithExtraLongText: StoryFn<ListViewItemProps> = () => {
           text: longText,
           subtext: longText,
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'blue',
-        }}
+        colorId="11111111111"
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>
