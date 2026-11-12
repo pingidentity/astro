@@ -11,6 +11,7 @@ const TableBaseEmptyState = forwardRef<HTMLDivElement, TableBaseEmptyStateProps>
     descriptionLabel = 'Take action by doing x, y, z',
     addButtonLabel,
     onAddButtonPress,
+    iconProps,
     ...others
   } = props;
 
@@ -30,6 +31,7 @@ const TableBaseEmptyState = forwardRef<HTMLDivElement, TableBaseEmptyStateProps>
         size={60}
         title={{ name: 'Empty state icon' }}
         sx={{ opacity: 0.2 }}
+        {...iconProps}
       />
       <Text variant="H4" as="h4" textAlign="center">
         {headerLabel}
