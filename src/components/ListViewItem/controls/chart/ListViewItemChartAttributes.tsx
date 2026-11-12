@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import { docArgTypes } from '../../../../utils/docUtils/docArgTypes';
 import { buttonArgTypes } from '../../../Button/buttonAttributes';
 
@@ -74,17 +72,4 @@ export const listViewItemChartArgTypes = {
     type: { summary: docArgTypes.string },
     control: 'text',
   },
-};
-
-export const listViewItemChartPropTypes = {
-  chartData: PropTypes.arrayOf(PropTypes.shape({})),
-  chartLabel: PropTypes.string,
-  chartDataKey: PropTypes.string,
-  contentCount: PropTypes.string,
-  contentCountLabel: PropTypes.string,
-  mobileBreakPoint: PropTypes.number,
-  tabletBreakPoint: PropTypes.number,
-  title: PropTypes.string,
-  tooltipText: PropTypes.string,
-  trend: PropTypes.string,
 };

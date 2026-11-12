@@ -45,7 +45,7 @@ const getColor = index => {
 };
 
 export const ListViewNextGen = () => {
-  const chartContainerRef = useRef();
+  const chartContainerRef = useRef<HTMLDivElement>(null);
 
   const Controls = () => (
     <>
@@ -131,6 +131,7 @@ export const ListViewNextGen = () => {
                   color: 'text.secondary',
                 }}
                 iconWrapperProps={{
+                  size: 'sm',
                   color: 'cyan',
                 }}
               >

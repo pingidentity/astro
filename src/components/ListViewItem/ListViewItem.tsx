@@ -1,32 +1,42 @@
 import React, { forwardRef } from 'react';
 import { useHover } from '@react-aria/interactions';
 
-import { Box, Icon, IconWrapper, Image, Text } from '../..';
-import { useGetTheme, useStatusClasses } from '../../hooks';
+import { Box, Icon, Image, Text } from '../..';
+import { useGetTheme, usePropWarning, useStatusClasses } from '../../hooks';
+import { ListViewItemProps } from '../../types/listViewItem';
 import { getPendoID } from '../../utils/devUtils/constants/pendoID';
 
-import { listViewItemPropTypes } from './listViewItemAttributes';
+import ItemAvatar from './ItemAvatar';
 
 export const LIST_ITEM_ICON = '-list-item-icon';
+
 const displayName = 'ListViewItem';
 
-const ListViewItem = forwardRef(({
-  children,
-  className,
-  data,
-  iconProps,
-  iconWrapperProps,
-  isHovered,
-  isSelected,
-  linkProps,
-  onHoverChange,
-  onHoverEnd,
-  onHoverStart,
-  slots,
-  colorId,
-  ...others
-}, ref) => {
-  const { icon, image, subtext, text } = data;
+const ListViewItem = forwardRef<HTMLDivElement, ListViewItemProps>((props, ref) => {
+  const {
+    children,
+    className,
+    data,
+    iconProps,
+    // Deprecated: kept so it never leaks onto the DOM; color/colorId/iconProps
+    // are still honored below. Warns in development.
+    iconWrapperProps,
+    isHovered,
+    isSelected,
+    linkProps,
+    onHoverChange,
+    onHoverEnd,
+    onHoverStart,
+    slots,
+    colorId,
+    avatarProps,
+    avatarInitials,
+    isIconRound,
+    ...others
+  } = props;
+  const { icon, image, subtext, text, avatarDefaultText } = data;
+
+  usePropWarning(props, 'iconWrapperProps', 'colorId');
 
   const shouldUseDefaultHover = isHovered === undefined;
 
@@ -52,14 +62,15 @@ const ListViewItem = forwardRef(({
 
   const renderIcon = icon && (
     isOnyx ? (
-      <IconWrapper
+      <ItemAvatar
         icon={icon}
-        size="sm"
         title={{ name: `${text}${LIST_ITEM_ICON}` }}
-        isCircle
-        colorId={colorId || others.id}
-        {...iconWrapperProps}
-        iconProps={{ size: 'sm', ...iconProps, ...iconWrapperProps?.iconProps }}
+        colorId={iconWrapperProps?.color || iconWrapperProps?.colorId || colorId}
+        avatarDefaultText={avatarDefaultText}
+        avatarInitials={avatarInitials}
+        isIconRound={isIconRound}
+        avatarProps={avatarProps}
+        iconProps={{ ...iconProps, ...iconWrapperProps?.iconProps }}
       />
     ) : (
       <Box width="25px" variant="listViewItem.iconContainer">
@@ -95,9 +106,21 @@ const ListViewItem = forwardRef(({
     )
   );
 
+  const renderNoIconAvatar = isOnyx && !icon && !image
+    && (avatarInitials || avatarDefaultText) && (
+      <ItemAvatar
+        title={{ name: `${text}${LIST_ITEM_ICON}` }}
+        colorId={colorId}
+        avatarDefaultText={avatarDefaultText}
+        avatarInitials={avatarInitials}
+        isIconRound={isIconRound}
+        avatarProps={avatarProps}
+      />
+  );
+
   const renderData = (
     <Box isRow alignItems="center">
-      { slots?.leftOfData || renderIcon || renderImage }
+      { slots?.leftOfData || renderIcon || renderImage || renderNoIconAvatar }
       <Box variant={getWrapperVariant()}>
         {text && (
           <Text variant="listViewItemText">
@@ -132,8 +155,6 @@ const ListViewItem = forwardRef(({
     </Box>
   );
 });
-
-ListViewItem.propTypes = listViewItemPropTypes;
 
 ListViewItem.displayName = displayName;
 

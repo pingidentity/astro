@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import CreateIcon from '@pingux/mdi-react/CreateIcon';
 
 import { Box, Icon, IconButton } from '../../..';
-import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
+import { ListViewItemEditButtonProps } from '../../../types/listViewItem';
 
 /**
  * ListViewItemEditButton is one of several styled control components that can be used as a child
@@ -12,7 +12,10 @@ import { iconButtonPropTypes } from '../../IconButton/iconButtonAttributes';
  * to ListItemEditButton.
 */
 
-const ListViewItemEditButton = forwardRef((props, ref) => {
+const ListViewItemEditButton = forwardRef<
+  HTMLDivElement,
+  ListViewItemEditButtonProps
+>((props, ref) => {
   return (
     <Box ref={ref} ml="sm">
       <IconButton {...props}>
@@ -24,9 +27,6 @@ const ListViewItemEditButton = forwardRef((props, ref) => {
     </Box>
   );
 });
-
-ListViewItemEditButton.propTypes = iconButtonPropTypes;
-
 
 ListViewItemEditButton.displayName = 'ListViewItemEditButton';
 

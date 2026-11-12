@@ -1,6 +1,8 @@
 import React from 'react';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import { ListViewItemEditButton } from '../../..';
+import { ListViewItemEditButtonProps } from '../../../types';
 import { iconButtonArgs, iconButtonArgTypes } from '../../IconButton/iconButtonAttributes';
 
 delete iconButtonArgTypes.size;
@@ -18,8 +20,8 @@ export default {
   },
   argTypes: iconButtonArgTypes,
   args: iconButtonArgs,
-};
+} satisfies Meta<typeof ListViewItemEditButton>;
 
-export const Default = args => (
+export const Default: StoryFn<ListViewItemEditButtonProps> = args => (
   <ListViewItemEditButton aria-label="edit-icon" {...args} />
 );

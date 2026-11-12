@@ -1,3 +1,33 @@
+## 2.245.0-alpha.0 (2026-11-12)
+
+### 🚀 Features
+
+- [UXE-9224] Listviewitem panelheader avatar api
+
+### ❤️  Thank You
+
+- Jeremy Bissonnette
+
+## 2.244.1-alpha.0 (2026-11-12)
+
+### 🩹 Fixes
+
+- **astro:** [UXE-9236] use search_off icon for no-results EmptyState story
+
+### ❤️  Thank You
+
+- Eshant Monga
+
+## 2.244.0-alpha.0 (2026-11-12)
+
+### 🚀 Features
+
+- **astro:** [UXE-8948] convert ListViewItem to TypeScript
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.243.0 (2026-11-05)
 
 This was a version bump only for astro to align it with other projects, there were no code changes.

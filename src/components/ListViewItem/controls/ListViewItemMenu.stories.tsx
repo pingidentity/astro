@@ -1,5 +1,6 @@
 import React from 'react';
 import { Item } from 'react-stately';
+import { Meta } from '@storybook/react-vite';
 
 import { ListViewItemMenu } from '../../..';
 import { menuArgTypes } from '../../Menu/menuAttributes';
@@ -20,7 +21,7 @@ export default {
       description: 'object that gets spread into the IconButton component',
     },
   },
-};
+} satisfies Meta<typeof ListViewItemMenu>;
 
 export const Default = () => (
   <ListViewItemMenu iconButtonProps={{ 'data-id': 'list-item-menu' }}>

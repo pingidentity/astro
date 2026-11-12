@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 
 import { useGetTheme } from '../../hooks';
 import { Avatar, Box, CopyText, Icon, IconWrapper, Image, Text } from '../../index';
-import { SharedItemPropTypes } from '../ListViewItem/listViewItemAttributes';
+import ItemAvatar from '../ListViewItem/ItemAvatar';
 
 export const PANEL_HEADER_ICON = '-panel-header-icon';
 
 const PanelHeader = forwardRef(({
   avatarProps,
+  avatarInitials,
+  isIconRound,
   children,
   className,
   colorId,
@@ -42,26 +44,30 @@ const PanelHeader = forwardRef(({
 
   const renderOnyxIcon = icon && (
     <Box mr="md">
-      <IconWrapper
+      <ItemAvatar
         icon={icon}
-        size="sm"
         title={{ name: `${text}${PANEL_HEADER_ICON}` }}
-        isCircle
-        colorId={colorId || avatarDefaultText}
-        {...avatarProps}
-        iconProps={{ size: 'sm', ...iconProps }}
+        colorId={colorId}
+        avatarDefaultText={avatarDefaultText}
+        avatarInitials={avatarInitials}
+        isIconRound={isIconRound}
+        avatarProps={avatarProps}
+        iconProps={iconProps}
       />
     </Box>
   );
 
   const renderAvatar = (
-    <Avatar
-      size="sm"
-      colorId={colorId}
-      defaultText={avatarDefaultText}
-      mr="md"
-      {...avatarProps}
-    />
+    <Box mr="md">
+      <ItemAvatar
+        title={{ name: `${text}${PANEL_HEADER_ICON}` }}
+        colorId={colorId}
+        avatarDefaultText={avatarDefaultText}
+        avatarInitials={avatarInitials}
+        isIconRound={isIconRound}
+        avatarProps={avatarProps}
+      />
+    </Box>
   );
 
   const renderOnyxImage = !icon && image?.src && (
@@ -156,13 +162,29 @@ const PanelHeader = forwardRef(({
 });
 
 PanelHeader.propTypes = {
-  ...SharedItemPropTypes,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   colorId: PropTypes.string,
-  isCopyable: PropTypes.bool,
+  data: PropTypes.shape({
+    icon: PropTypes.elementType,
+    image: PropTypes.shape({
+      src: PropTypes.string,
+      alt: PropTypes.string,
+      'aria-label': PropTypes.string,
+    }),
+    subtext: PropTypes.string,
+    text: PropTypes.string,
+    avatarDefaultText: PropTypes.string,
+  }),
+  avatarProps: PropTypes.object,
+  headerProps: PropTypes.object,
+  headerWrapperProps: PropTypes.object,
   iconProps: PropTypes.object,
+  isCopyable: PropTypes.bool,
   slots: PropTypes.shape({
+    leftOfData: PropTypes.node,
     rightOfData: PropTypes.node,
   }),
+  subtextProps: PropTypes.object,
 };
 
 export default PanelHeader;

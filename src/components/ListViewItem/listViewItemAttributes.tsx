@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
-
-import { ariaAttributeBaseArgTypes, ariaAttributesBasePropTypes } from '../../utils/docUtils/ariaAttributes';
+import { ariaAttributeBaseArgTypes } from '../../utils/docUtils/ariaAttributes';
 import { booleanArg, stringOrStringArray } from '../../utils/docUtils/docArgTypes';
-import { onHoverArgTypes, onHoverPropTypes } from '../../utils/docUtils/hoverProps';
+import { onHoverArgTypes } from '../../utils/docUtils/hoverProps';
 
 const descriptions = {
   data: 'Object with User/Group data.',
@@ -11,7 +9,11 @@ const descriptions = {
   isPanelHeader: 'A boolean that will adapt the styling of ListIteme to be used as the PanelHeader',
   slots: 'Provides a way to insert markup in specified places.',
   linkProps: 'When present, provides meta click functionality',
-  colorId: 'Identifier used to deterministically derive the avatar color when no explicit color is set.',
+  colorId: 'When the value exactly matches a two-tone color name (for example cyan or lightBlue), the avatar renders with that color. Any other value falls back to deterministic color interpolation seeded by the value.',
+  isIconRound: 'Renders the icon avatar round instead of square. Defaults to false.',
+  avatarInitials: 'Initials rendered inside the avatar in place of the icon.',
+  avatarProps: 'Props forwarded to the underlying avatar element. children is managed by the component.',
+  avatarDefaultText: 'Text used to seed avatar color interpolation when colorId is not provided.',
 };
 
 export const SharedItemArgTypes = {
@@ -21,9 +23,25 @@ export const SharedItemArgTypes = {
       type: 'text',
     },
   },
+  isIconRound: {
+    ...booleanArg,
+    description: descriptions.isIconRound,
+  },
+  avatarInitials: {
+    description: descriptions.avatarInitials,
+    control: {
+      type: 'text',
+    },
+  },
+  avatarProps: {
+    description: descriptions.avatarProps,
+    control: {
+      type: 'object',
+    },
+  },
   data: {
     description: descriptions.data,
-    type: { summary: '{ icon, image, text, subtext }' },
+    type: { summary: '{ icon, image, text, subtext, avatarDefaultText }' },
     control: {
       type: 'none',
     },
@@ -56,32 +74,4 @@ export const listViewItemArgTypes = {
   ...SharedItemArgTypes,
   ...onHoverArgTypes,
   ...ariaAttributeBaseArgTypes,
-};
-
-export const SharedItemPropTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  colorId: PropTypes.string,
-  data: PropTypes.shape({
-    icon: PropTypes.elementType,
-    image: PropTypes.shape({
-      src: PropTypes.string,
-      alt: PropTypes.string,
-      'aria-label': PropTypes.string,
-    }),
-    subtext: PropTypes.string,
-    text: PropTypes.string,
-  }),
-};
-
-export const listViewItemPropTypes = {
-  isSelected: PropTypes.bool,
-  linkProps: PropTypes.object,
-  onMetaClick: PropTypes.func,
-  slots: PropTypes.shape({
-    leftOfData: PropTypes.node,
-    rightOfData: PropTypes.node,
-  }),
-  ...SharedItemPropTypes,
-  ...onHoverPropTypes,
-  ...ariaAttributesBasePropTypes,
 };

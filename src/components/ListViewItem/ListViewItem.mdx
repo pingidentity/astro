@@ -20,13 +20,32 @@ There are a few commonly used components we've created which have the correct st
 * `ListViewItemMenu` - Use in place of Menu. This control is used to offer a popup menu of several actions which are less important / less commonly used.
 
 #### Icons and Images
-Add an icon by passing an mdi or svg icon to the `data.icon` prop. Default size is 25px.
+Add an icon by passing an mdi or svg icon to the `data.icon` prop. Under the Onyx theme, the icon renders inside a square Avatar (an 18px icon in a 34px avatar). Under the legacy Astro theme, the icon renders on its own at 25px.
 
-Add an image by passing an object with a `src` key to the `data.image` prop. `alt` and `aria-label` keys are supported but not required. Default size is 35px.
+Add an image by passing an object with a `src` key to the `data.image` prop. `alt` and `aria-label` keys are supported but not required. Under the legacy Astro theme the default size is 35px; under the Onyx theme the image renders in the theme's avatar size.
 
 If both an icon and an image are provided the icon will be rendered.
 
 For other Icon or Image sizes use slots with `rightOfData`.
+
+#### Avatar Colors and Avatars (Onyx theme)
+Under the Onyx theme, the icon avatar's color is resolved from the `colorId` prop:
+
+- If `colorId` exactly matches a two-tone color name (`orange`, `cyan`, `green`, `purple`, `pink`, `red`, `yellow`, `teal`, `blue`, `indigo`, `lightBlue`, `lightPink`, `lightGreen`, `lightYellow`, `lightIndigo`), the avatar renders directly in that color. Substring matches do not apply: `user-cyan` is treated as an arbitrary id.
+- Any other `colorId` value is used as the seed for deterministic color interpolation.
+- When `colorId` is not provided, `data.avatarDefaultText` seeds the interpolation.
+- When neither `colorId` nor `data.avatarDefaultText` is provided, `avatarInitials` seeds the interpolation deterministically from its value.
+- When none of these is provided, the avatar renders its default color (green).
+
+The color seed used for interpolation no longer falls back to the component's `id`.
+
+The icon avatar renders square by default. Pass `isIconRound` to render it round instead.
+
+Pass `avatarInitials` to render initials inside the avatar instead of the icon. Initials also render when no icon is provided, alongside `data.avatarDefaultText` (used as the color seed). When no icon, no image, no `avatarInitials`, and no `data.avatarDefaultText` are provided, no avatar renders.
+
+Use `avatarProps` to pass props through to the underlying Avatar (for example `color` to force a specific color, or `sx` for one-off styling). `children` is managed by the component and should not be passed through `avatarProps`.
+
+`iconWrapperProps` is deprecated under the Onyx theme: it no longer affects rendering because the icon is rendered through an Avatar instead of an IconWrapper. Use `colorId` and `avatarProps` instead.
 
 #### Slots
 The slots prop has been provided for added flexibility. Use the `rightOfData` slot to add icons, badges or other elements to the right of the data

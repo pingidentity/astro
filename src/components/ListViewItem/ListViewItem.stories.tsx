@@ -3,6 +3,7 @@ import { Item } from 'react-stately';
 import AccountIcon from '@pingux/mdi-react/AccountIcon';
 import AccountOutlineIcon from '@pingux/mdi-react/AccountOutlineIcon';
 import ClockOutlineIcon from '@pingux/mdi-react/ClockOutlineIcon';
+import { Meta, StoryFn } from '@storybook/react-vite';
 
 import DocsLayout from '../../../.storybook/storybookDocsLayout';
 import {
@@ -19,6 +20,7 @@ import {
   Text,
 } from '../..';
 import { useGetTheme } from '../../hooks';
+import { ListViewItemProps } from '../../types';
 import { FIGMA_LINKS } from '../../utils/designUtils/figmaLinks';
 import { userImage } from '../../utils/devUtils/constants/images';
 
@@ -43,9 +45,9 @@ export default {
     },
   },
   argTypes: listViewItemArgTypes,
-};
+} satisfies Meta<typeof ListViewItem>;
 
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const { themeState: { isOnyx } } = useGetTheme();
   return (
     <Box
@@ -64,7 +66,7 @@ const Wrapper = ({ children }) => {
   );
 };
 
-export const Default = () => (
+export const Default: StoryFn<ListViewItemProps> = () => (
   <Wrapper>
     <ListViewItem
       data={{
@@ -83,7 +85,48 @@ Default.parameters = {
   },
 };
 
-export const WithSubtext = () => (
+export const IsRound = () => (
+  <Wrapper>
+    <ListViewItem
+      data={{
+        icon: AccountIcon,
+        text: 'Fons Vernall',
+      }}
+      isIconRound
+      colorId="11111111111"
+    />
+  </Wrapper>
+);
+
+IsRound.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.default,
+  },
+};
+
+export const WithAvatarInitials = () => (
+  <Wrapper>
+    <ListViewItem
+      data={{
+        icon: AccountIcon,
+        text: 'Fons Vernall',
+      }}
+      isIconRound
+      avatarInitials="FV"
+      colorId="11111111111"
+    />
+  </Wrapper>
+);
+
+WithAvatarInitials.parameters = {
+  design: {
+    type: 'figma',
+    url: FIGMA_LINKS.listViewItem.default,
+  },
+};
+
+export const WithSubtext: StoryFn<ListViewItemProps> = () => (
   <Wrapper>
     <ListViewItem
       data={{
@@ -91,10 +134,7 @@ export const WithSubtext = () => (
         subtext: 'rad_developer@pingidentity.com',
         text: 'Fons Vernall',
       }}
-      iconWrapperProps={{
-        size: 'sm',
-        color: 'blue',
-      }}
+      colorId="11111111111"
     />
   </Wrapper>
 );
@@ -106,7 +146,7 @@ WithSubtext.parameters = {
   },
 };
 
-export const WithImage = () => (
+export const WithImage: StoryFn<ListViewItemProps> = () => (
   <Wrapper>
     <ListViewItem
       data={{
@@ -129,17 +169,14 @@ WithImage.parameters = {
   },
 };
 
-export const WithControls = () => (
+export const WithControls: StoryFn<ListViewItemProps> = () => (
   <Wrapper>
     <ListViewItem
       data={{
         icon: AccountIcon,
         text: 'Fons Vernall',
       }}
-      iconWrapperProps={{
-        size: 'sm',
-        color: 'blue',
-      }}
+      colorId="11111111111"
     >
       <ListViewItemSwitchField aria-label="active user" />
       <ListViewItemMenu>
@@ -158,7 +195,7 @@ WithControls.parameters = {
   },
 };
 
-export const WithRightOfDataSlot = () => {
+export const WithRightOfDataSlot: StoryFn<ListViewItemProps> = () => {
   const { badgeStyles: { blueBg, greyBg, blueText, greyText } } = useGetTheme();
 
   const renderRightOfData = (
@@ -176,10 +213,7 @@ export const WithRightOfDataSlot = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'blue',
-        }}
+        colorId="11111111111"
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>
@@ -199,7 +233,7 @@ WithRightOfDataSlot.parameters = {
   },
 };
 
-export const WithLeftOfDataSlot = () => {
+export const WithLeftOfDataSlot: StoryFn<ListViewItemProps> = () => {
   const renderLeftOfData = (
     <Box pr="md" pl="lg" minWidth={35}>
       <Text pr={3} variant="H3" fontSize="md" fontWeight="3">Ping</Text>
@@ -214,10 +248,7 @@ export const WithLeftOfDataSlot = () => {
           text: 'Fons Vernall',
           subtext: 'verylongemailaddress@email.com',
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'orange',
-        }}
+        colorId="11111111111"
         // Note that when the leftOfData slot is used, it overrides the provided icon and
         // removes all margins and padding on the left of data
         slots={{ leftOfData: renderLeftOfData }}
@@ -239,8 +270,8 @@ WithLeftOfDataSlot.parameters = {
   },
 };
 
-export const WithCharts = () => {
-  const containerRef = useRef();
+export const WithCharts: StoryFn<ListViewItemProps> = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   return (
     <Wrapper>
       <ListViewItem
@@ -250,10 +281,7 @@ export const WithCharts = () => {
           subtext: 'kangaroo@example.com',
           icon: ClockOutlineIcon,
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'green',
-        }}
+        colorId="11111111111"
       >
         <ListViewItemChart
           containerRef={containerRef}
@@ -285,7 +313,7 @@ WithCharts.parameters = {
   },
 };
 
-export const WithExtraLongText = () => {
+export const WithExtraLongText: StoryFn<ListViewItemProps> = () => {
   const { badgeStyles: { blueBg, greyBg, blueText, greyText } } = useGetTheme();
 
   const renderRightOfData = (
@@ -305,10 +333,7 @@ export const WithExtraLongText = () => {
           text: longText,
           subtext: longText,
         }}
-        iconWrapperProps={{
-          size: 'sm',
-          color: 'blue',
-        }}
+        colorId="11111111111"
         slots={{ rightOfData: renderRightOfData }}
       >
         <ListViewItemMenu>
@@ -328,7 +353,7 @@ WithExtraLongText.parameters = {
   },
 };
 
-export const WithExpandableItem = () => (
+export const WithExpandableItem: StoryFn<ListViewItemProps> = () => (
   <ListView
     items={[{
       key: 'Fons Vernall',
