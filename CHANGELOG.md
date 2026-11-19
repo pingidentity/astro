@@ -1,3 +1,13 @@
+## 2.246.0-alpha.0 (2026-11-19)
+
+### 🚀 Features
+
+- **astro:** [UXE-9170] add Onyx themed DatePicker to Storybook
+
+### ❤️  Thank You
+
+- Eshant Monga
+
 ## 2.245.1-alpha.0 (2026-11-19)
 
 ### 🩹 Fixes
