@@ -1,6 +1,5 @@
 import React, { forwardRef, ReactNode, useEffect } from 'react';
 import { FocusScope, mergeProps } from 'react-aria';
-import { astroTokens, astroTokensDark } from '@pingux/onyx-tokens';
 
 import { Box, Icon, IconButton, PopoverContainer } from '../..';
 import { useGetTheme, useHelpHintPopover, useLocalOrForwardRef, useStatusClasses } from '../../hooks';
@@ -26,7 +25,7 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
     ...others
   } = props;
 
-  const { icons, themeState: { isOnyxDark } } = useGetTheme();
+  const { icons } = useGetTheme();
 
   const triggerRef = useLocalOrForwardRef<HTMLButtonElement>(ref);
 
@@ -75,13 +74,6 @@ const HelpHint = forwardRef<HTMLButtonElement, HelpHintProps>((props, ref) => {
         aria-label="label help hint"
         data-testid="help-hint__button"
         variant="hintButton"
-        sx={{
-          '&.is-hovered, &.is-focused': {
-            backgroundColor: isOnyxDark
-              ? astroTokensDark.color.common.light
-              : astroTokens.color.common.light,
-          },
-        }}
         {...mergeProps(triggerProps, iconButtonProps || {})}
       >
         <Icon icon={icons.helpHint} size="xs" />
